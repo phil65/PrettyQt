@@ -1446,6 +1446,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter" class="md-nav__link">
+    subsequencecompleter
+  </a>
+  
+    <nav class="md-nav" aria-label="subsequencecompleter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter" class="md-nav__link">
+    SubsequenceCompleter
+  </a>
+  
+    <nav class="md-nav" aria-label="SubsequenceCompleter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter.setModel" class="md-nav__link">
+    setModel()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter.splitPath" class="md-nav__link">
+    splitPath()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.timeline" class="md-nav__link">
     timeline
   </a>
@@ -2926,6 +2966,46 @@
   <a href="#prettyqt.custom_widgets.standardiconswidget.StandardIconsWidget" class="md-nav__link">
     StandardIconsWidget
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter" class="md-nav__link">
+    subsequencecompleter
+  </a>
+  
+    <nav class="md-nav" aria-label="subsequencecompleter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter" class="md-nav__link">
+    SubsequenceCompleter
+  </a>
+  
+    <nav class="md-nav" aria-label="SubsequenceCompleter">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter.setModel" class="md-nav__link">
+    setModel()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter.splitPath" class="md-nav__link">
+    splitPath()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -8099,6 +8179,148 @@ StandardIconsWidget            (<a title="prettyqt.widgets.widget.Widget" href="
 
   </div>
 
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="prettyqt.custom_widgets.subsequencecompleter" class="doc doc-heading">
+        <code>subsequencecompleter</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter" class="doc doc-heading">
+        <code>
+SubsequenceCompleter            (<a title="prettyqt.widgets.completer.Completer" href="widgets.html#prettyqt.widgets.completer.Completer">Completer</a>)
+        </code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+      <p>QCompleter specialised for subsequence matching.</p>
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter.setModel" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">setModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>setModel(self, QAbstractItemModel)</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_widgets/subsequencecompleter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">source_model</span> <span class="o">=</span> <span class="n">model</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">proxy_model</span> <span class="o">=</span> <span class="n">custom_models</span><span class="o">.</span><span class="n">SubsequenceSortFilterProxyModel</span><span class="p">(</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_case_sensitive</span><span class="p">(),</span> <span class="n">parent</span><span class="o">=</span><span class="bp">self</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">proxy_model</span><span class="o">.</span><span class="n">set_sort_role</span><span class="p">(</span><span class="s2">&quot;user&quot;</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">proxy_model</span><span class="o">.</span><span class="n">set_prefix</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">local_completion_prefix</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">proxy_model</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">source_model</span><span class="p">)</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proxy_model</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">proxy_model</span><span class="o">.</span><span class="n">invalidate</span><span class="p">()</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">proxy_model</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_force_next_update</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_widgets.subsequencecompleter.SubsequenceCompleter.splitPath" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">splitPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>splitPath(self, str) -&gt; List[str]</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_widgets/subsequencecompleter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">splitPath</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">local_completion_prefix</span> <span class="o">=</span> <span class="n">path</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">update_model</span><span class="p">()</span>
+    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
 
 
 

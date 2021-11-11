@@ -1498,6 +1498,20 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.completer.Completer.is_case_sensitive" class="md-nav__link">
+    is_case_sensitive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.completer.Completer.set_case_sensitive" class="md-nav__link">
+    set_case_sensitive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.completer.Completer.set_completion_mode" class="md-nav__link">
     set_completion_mode()
   </a>
@@ -5587,6 +5601,20 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.completer.Completer.get_sort_mode" class="md-nav__link">
     get_sort_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.completer.Completer.is_case_sensitive" class="md-nav__link">
+    is_case_sensitive()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.completer.Completer.set_case_sensitive" class="md-nav__link">
+    set_case_sensitive()
   </a>
   
 </li>
@@ -13975,6 +14003,108 @@ Completer            (<span title="PyQt5.QtWidgets.QCompleter">QCompleter</span>
 <span class="sd">        sort mode</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">SORT_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">modelSorting</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.completer.Completer.is_case_sensitive" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">is_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return case sensitivity.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>bool</code></td>
+      <td><p>case sensitivity</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/completer.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">is_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Return case sensitivity.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        case sensitivity</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">bool</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">caseSensitivity</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.completer.Completer.set_case_sensitive" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Set case sensitivity.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>state</code></td>
+        <td><code>bool</code></td>
+        <td><p>case sensitive</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/completer.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Set case sensitivity.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        state: case sensitive</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">sensitivity</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CaseSensitivity</span><span class="o">.</span><span class="n">CaseSensitive</span>
+        <span class="k">if</span> <span class="n">state</span>
+        <span class="k">else</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CaseSensitivity</span><span class="o">.</span><span class="n">CaseInsensitive</span>
+    <span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setCaseSensitivity</span><span class="p">(</span><span class="n">sensitivity</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
