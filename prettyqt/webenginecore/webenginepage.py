@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import logging
 import os
 from typing import Callable, Literal
+import webbrowser
 
 from prettyqt import core, gui, webenginecore
 from prettyqt.qt import QtCore, QtWebEngineCore
@@ -12,6 +14,9 @@ QtWebEngineCore.QWebEnginePage.__bases__ = (core.Object,)
 
 
 mod = QtWebEngineCore.QWebEnginePage
+
+logger = logging.getLogger(__name__)
+
 
 FEATURE = bidict(
     notifications=mod.Feature.Notifications,
@@ -373,6 +378,12 @@ class WebEnginePage(QtWebEngineCore.QWebEnginePage):
     def get_context_menu_data(self) -> webenginecore.WebEngineContextMenuRequest:
         return webenginecore.WebEngineContextMenuRequest(self.contextMenuData())
 
+    def open_in_browser(self):
+        try:
+            webbrowser.open(self.getUrl().toString())
+        except ValueError as e:
+            logger.exception(e)
+
     # def choose_files(
     #     self,
     #     mode: FileSelectionModeStr,
@@ -382,6 +393,33 @@ class WebEnginePage(QtWebEngineCore.QWebEnginePage):
     #     if mode not in FILE_SELECTION_MODE:
     #         raise InvalidParamError(mode, FILE_SELECTION_MODE)
     #     return self.chooseFiles(FILE_SELECTION_MODE[mode], old_files, mimetypes)
+
+    def mousedown(self, selector: str, btn: int = 0):
+        """Simulate a mousedown event on the targeted element.
+
+        :param selector: A CSS3 selector to targeted element.
+        :param btn: The number of mouse button.
+            0 - left button,
+            1 - middle button,
+            2 - right button
+        """
+        return self.runJavaScript(
+            f"""
+            (function () {{
+                var element = document.querySelector({selector!r});
+                var evt = document.createEvent("MouseEvents");
+                evt.initMouseEvent("mousedown", true, true, window,
+                                   1, 1, 1, 1, 1, false, false, false, false,
+                                   {btn!r}, element);
+                return element.dispatchEvent(evt);
+            }})();
+        """
+        )
+
+    def set_input_value(self, selector: str, value):
+        """Set the value of the input matched by given selector."""
+        script = f'document.querySelector({selector!r}).setAttribute("value", "{value}")'
+        self.runJavaScript(script)
 
 
 if __name__ == "__main__":
