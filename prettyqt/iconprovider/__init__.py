@@ -69,13 +69,6 @@ class IconFont:
         return font
 
 
-class FontAwesome4(IconFont):
-    prefix = "fa"
-    font_path = "fontawesome4.7-webfont.ttf"
-    charmap_path = "fontawesome4.7-webfont-charmap.json"
-    md5 = "b06871f281fee6b241d60582ae9369b9"
-
-
 class FontAwesome5(IconFont):
     prefix = "fa5"
     font_path = "fontawesome5-regular-webfont.ttf"
@@ -151,7 +144,6 @@ def _instance() -> IconicFont:
     """
     if _resource["iconic"] is None or not _resource["iconic"].has_valid_font_ids():
         iconic = IconicFont(
-            FontAwesome4(),
             FontAwesome5(),
             FontAwesome5Brands(),
             FontAwesome5Solid(),
