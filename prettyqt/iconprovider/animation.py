@@ -25,7 +25,7 @@ class Spin:
         self.info[self.parent_widget] = timer, angle, step
         self.parent_widget.update()
 
-    def setup(self, icon_painter, painter: gui.Painter, rect: QtCore.QRect):
+    def setup(self, painter: gui.Painter, rect: QtCore.QRect):
 
         if self.parent_widget not in self.info:
             timer = core.Timer(self.parent_widget)

@@ -10,14 +10,13 @@ ZERO_COORD = core.Point(0, 0)
 class CharIconEngine(gui.IconEngine):
     """Specialization of QtGui.QIconEngine used to draw font-based icons."""
 
-    def __init__(self, iconic: QtCore.QObject, painter, options):
+    def __init__(self, iconic, options):
         super().__init__()
         self.iconic = iconic
-        self.painter = painter
         self.options = options
 
     def paint(self, painter: QtGui.QPainter, rect: QtCore.QRect, mode, state):
-        self.painter.paint(self.iconic, painter, rect, mode, state, self.options)
+        self.iconic.paint(painter, rect, mode, state, self.options)
 
     def pixmap(self, size, mode, state) -> QtGui.QPixmap:
         pm = QtGui.QPixmap(size)

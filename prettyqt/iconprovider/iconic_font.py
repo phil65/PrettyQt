@@ -13,7 +13,7 @@ from __future__ import annotations
 # Standard library imports
 from typing import Any
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, gui
 from prettyqt.iconprovider import chariconengine
 from prettyqt.qt import QtCore, QtGui
 
@@ -96,12 +96,32 @@ def set_global_defaults(**kwargs):
         _default_options[kw] = kwargs[kw]
 
 
-class CharIconPainter:
-    """Char icon painter."""
+class FontError(Exception):
+    """Exception for font errors."""
+
+
+class IconicFont:
+    """Main class for managing iconic fonts."""
+
+    def __init__(self, *args):
+        """Initialize IconicFont.
+
+        Parameters
+        ----------
+        ``*args``: tuples
+            Each positional argument is a tuple of 3 or 4 values:
+            - The prefix string to be used when accessing a given font set,
+            - The ttf font filename,
+            - The json charmap filename,
+            - Optionally, the directory containing these files. When not
+              provided, the files will be looked for in ``./fonts/``.
+        """
+        super().__init__()
+        self.icon_cache = {}
+        self.fonts = {font.prefix: font for font in args}
 
     def paint(
         self,
-        iconic: IconicFont,
         painter: gui.Painter,
         rect: QtCore.QRect,
         mode: QtGui.QIcon.Mode,
@@ -122,8 +142,8 @@ class CharIconPainter:
             draw_size = round(0.875 * rect.height() * opt["scale_factor"])
             # Animation setup hook
             if (animation := opt.get("animation")) is not None:
-                animation.setup(self, painter, rect)
-            font = iconic.fonts[opt["prefix"]].get_font(draw_size)
+                animation.setup(painter, rect)
+            font = self.fonts[opt["prefix"]].get_font(draw_size)
             painter.setFont(font)
             if "offset" in opt:
                 rect.translate(
@@ -148,32 +168,6 @@ class CharIconPainter:
             painter.drawText(rect, int(constants.ALIGN_CENTER), opt[char])  # type: ignore
             painter.restore()
 
-
-class FontError(Exception):
-    """Exception for font errors."""
-
-
-class IconicFont(core.Object):
-    """Main class for managing iconic fonts."""
-
-    def __init__(self, *args):
-        """Initialize IconicFont.
-
-        Parameters
-        ----------
-        ``*args``: tuples
-            Each positional argument is a tuple of 3 or 4 values:
-            - The prefix string to be used when accessing a given font set,
-            - The ttf font filename,
-            - The json charmap filename,
-            - Optionally, the directory containing these files. When not
-              provided, the files will be looked for in ``./fonts/``.
-        """
-        super().__init__()
-        self.painter = CharIconPainter()
-        self.icon_cache = {}
-        self.fonts = {font.prefix: font for font in args}
-
     def has_valid_font_ids(self) -> bool:
         """Validate instance's font ids are loaded to QFontDatabase.
 
@@ -192,7 +186,7 @@ class IconicFont(core.Object):
         if len(opts) != len(names):
             raise TypeError(f'"options" must be a list of size {len(names)}')
         parsed_options = [self._parse_options(o, kwargs, n) for o, n in zip(opts, names)]
-        engine = chariconengine.CharIconEngine(self, self.painter, parsed_options)
+        engine = chariconengine.CharIconEngine(self, parsed_options)
         icon = QtGui.QIcon(engine)
         self.icon_cache[cache_key] = icon
         return icon
