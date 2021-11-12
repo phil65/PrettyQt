@@ -151,6 +151,8 @@ name = "cz_conventional_commits"
 version = "0.186.0"
 tag_format = "v$version"
 update_changelog_on_bump = true
+changelog_start_rev = "v0.100.0"
+changelog_file = "docs/changelog.md"
 version_files = [
     "prettyqt/__init__.py:__version__",
     "setup.py:version",
