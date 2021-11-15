@@ -47,6 +47,17 @@ class Icon(QtGui.QIcon):
         return cls(bitmap)
 
     @classmethod
+    def from_char(cls, char: str, background="black", color="white"):
+        """Create a QIcon with a given character."""
+        icon = cls()
+        for size in (16, 32, 64):
+            px = gui.Pixmap.create_char(
+                char, background=background, color=color, size=size
+            )
+            icon.addPixmap(px)
+        return icon
+
+    @classmethod
     def from_image(cls, image: QtGui.QImage):
         return cls(gui.Pixmap.fromImage(image))
 
@@ -112,5 +123,11 @@ class Icon(QtGui.QIcon):
 
 
 if __name__ == "__main__":
-    app = gui.app()
-    icon = Icon.for_color("green")
+    from prettyqt import widgets
+
+    app = widgets.app()
+    icon = Icon.from_char("A")
+    window = widgets.MainWindow()
+    window.set_icon(icon)
+    window.show()
+    app.main_loop()
