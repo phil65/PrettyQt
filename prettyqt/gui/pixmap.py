@@ -97,6 +97,36 @@ class Pixmap(QtGui.QPixmap):
             p.fillRect(n, n, 2 * n, 2 * n, bg1)
         return pat
 
+    @classmethod
+    def create_char(
+        cls,
+        char: str,
+        size: int,
+        background: types.ColorType = "black",
+        color: types.ColorType = "white",
+    ):
+        pixmap = cls(size, size)
+        pixmap.fill(QtCore.Qt.transparent)
+        with gui.Painter(pixmap) as painter:
+            painter.setRenderHints(
+                painter.Antialiasing
+                | painter.TextAntialiasing
+                | painter.SmoothPixmapTransform
+            )
+            bg_color = colors.get_color(background)
+            painter.setPen(bg_color)
+            painter.setBrush(bg_color)
+            margin = 1 + size // 16
+            text_margin = size // 20
+            rect = QtCore.QRectF(margin, margin, size - 2 * margin, size - 2 * margin)
+            painter.drawRoundedRect(rect, 30.0, 30.0, QtCore.Qt.RelativeSize)
+            painter.setPen(colors.get_color(color))
+            font = painter.font()  # type: QtGui.QFont
+            font.setPixelSize(size - 2 * margin - 2 * text_margin)
+            painter.setFont(font)
+            painter.drawText(rect, QtCore.Qt.AlignCenter, char)
+        return pixmap
+
 
 if __name__ == "__main__":
     from prettyqt import gui
