@@ -6,15 +6,16 @@ from prettyqt import widgets
 class ProgressBarDelegate(widgets.StyledItemDelegate):
     def paint(self, painter, option, index):
         progress = index.data()
-        progressBar_option = widgets.StyleOptionProgressBar()
-        progressBar_option.rect = option.rect
-        progressBar_option.minimum = 0
-        progressBar_option.maximum = 100
-        progressBar_option.progress = progress
-        progressBar_option.text = f"{progress}%"
-        progressBar_option.textVisible = True
+        opt = widgets.StyleOptionProgressBar()
+        opt.rect = option.rect
+        opt.minimum = 0
+        opt.maximum = 100
+        opt.progress = progress
+        opt.text = f"{progress}%"
+        opt.textVisible = True
+        opt.state |= widgets.Style.StateFlag.State_Horizontal
         widgets.Application.style().drawControl(
-            widgets.Style.ControlElement.CE_ProgressBar, progressBar_option, painter
+            widgets.Style.ControlElement.CE_ProgressBar, opt, painter
         )
 
 
