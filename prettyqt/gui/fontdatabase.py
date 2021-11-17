@@ -97,6 +97,8 @@ WritingSystemStr = Literal[
 
 
 class FontDatabase(QtGui.QFontDatabase):
+    font_paths: dict[str, int] = dict()
+
     @classmethod
     def add_fonts_from_folder(cls, path: str | os.PathLike):
         path = pathlib.Path(path)
@@ -114,15 +116,19 @@ class FontDatabase(QtGui.QFontDatabase):
                 f"Font {path!r} appears to be empty. "
                 "If you are on Windows 10, please read "
                 "https://support.microsoft.com/"
-                "en-us/kb/3053676 "
-                "to know how to prevent Windows from blocking "
-                "the fonts that come with QtAwesome."
+                "en-us/kb/3053676"
             )
         if ttf_hash is not None:
             content = path.read_bytes()
             if hashlib.md5(content).hexdigest() != ttf_hash:
                 raise OSError(f"Font is corrupt at: {path!r}")
+        cls.font_paths[str(path)] = font_id
         return font_id
+
+    @classmethod
+    def remove_font(cls, font: os.PathLike | str | int):
+        font_id = font if isinstance(font, int) else cls.font_paths[str(font)]
+        cls.removeApplicationFont(font_id)
 
     @classmethod
     def get_system_font(cls, font_type: SystemFontStr):
