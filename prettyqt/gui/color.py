@@ -24,7 +24,7 @@ NAME_FORMAT = bidict(
 )
 
 NameFormatStr = Literal["hex_rgb", "hex_argb"]
-NameStr = Literal["hex_rgb", "hex_argb", "svg_rgb", "svg_argb" "qcss_rgb", "qcss_argb"]
+NameStr = Literal["hex_rgb", "hex_argb", "svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"]
 
 
 class Color(QtGui.QColor):
