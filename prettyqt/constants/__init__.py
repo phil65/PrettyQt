@@ -256,11 +256,41 @@ MatchFlagStr = Literal[
     "recursive",
 ]
 
-ImageConversionFlagStr = Literal["auto", "color_only", "mono_only"]
+ImageConversionFlagStr = Literal[
+    "auto",
+    "color_only",
+    "mono_only",
+    # "diffuse_dither",
+    "ordered_dither",
+    "threshold_dither",
+    # "threshold_alpha_dither",
+    "ordered_alpha_dither",
+    "diffuse_alpha_filter",
+    "prefer_dither",
+    "avoid_dither",
+    # "auto_dither",
+    "no_opaque_detection",
+    "no_format_conversion",
+]
 IMAGE_CONVERSION_FLAGS: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] = bidict(
+    # Color/Mono preference (ignored for QBitmap):
     auto=Qt.ImageConversionFlag.AutoColor,
     color_only=Qt.ImageConversionFlag.ColorOnly,
     mono_only=Qt.ImageConversionFlag.MonoOnly,
+    # Dithering mode preference:
+    # diffuse_dither=Qt.ImageConversionFlag.DiffuseDither,
+    ordered_dither=Qt.ImageConversionFlag.OrderedDither,
+    threshold_dither=Qt.ImageConversionFlag.ThresholdDither,
+    # Dithering mode preference for 1-bit alpha masks:
+    # threshold_alpha_dither=Qt.ImageConversionFlag.ThresholdAlphaDither,
+    ordered_alpha_dither=Qt.ImageConversionFlag.OrderedAlphaDither,
+    diffuse_alpha_filter=Qt.ImageConversionFlag.DiffuseAlphaDither,
+    # Color matching versus dithering preference:
+    prefer_dither=Qt.ImageConversionFlag.PreferDither,
+    avoid_dither=Qt.ImageConversionFlag.AvoidDither,
+    # auto_dither=Qt.ImageConversionFlag.AutoDither,
+    no_opaque_detection=Qt.ImageConversionFlag.NoOpaqueDetection,
+    no_format_conversion=Qt.ImageConversionFlag.NoFormatConversion,
 )
 
 FilterModeStr = Literal["starts_with", "contains", "ends_with"]
