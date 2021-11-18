@@ -1,3 +1,20 @@
+## v0.187.0 (2021-11-18)
+
+### Feat
+
+- **Pixmap**: add get_image_data_url method
+- **FramelessWindow**: make AeroSnap work
+- **custom_widgets**: add JoystickButton class
+- Add SvgBufferIconEngine class
+- **FontDatabase**: keep track of font paths
+- **Style**: add draw_control method
+- **Icon**: add from_char method
+- **Pixmap**: add create_char method
+
+### Fix
+
+- fix ProgressBarDelegate orientation for Qt6
+
 ## v0.186.0 (2021-11-11)
 
 ### Feat
