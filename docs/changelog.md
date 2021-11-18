@@ -1,3 +1,9 @@
+## v0.187.2 (2021-11-18)
+
+### Fix
+
+- fix import for non-windows
+
 ## v0.187.1 (2021-11-18)
 
 ### Fix
