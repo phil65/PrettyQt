@@ -1,3 +1,9 @@
+## v0.187.1 (2021-11-18)
+
+### Fix
+
+- add FramelessWindow to __init__.py
+
 ## v0.187.0 (2021-11-18)
 
 ### Feat
