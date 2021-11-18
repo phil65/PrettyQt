@@ -1,6 +1,31 @@
 from __future__ import annotations
 
+import ctypes
+from ctypes.wintypes import LONG
 from typing import Literal
+
+import win32api
+from win32con import (
+    GWL_STYLE,
+    HTBOTTOM,
+    HTBOTTOMLEFT,
+    HTBOTTOMRIGHT,
+    HTCAPTION,
+    HTLEFT,
+    HTRIGHT,
+    HTTOP,
+    HTTOPLEFT,
+    HTTOPRIGHT,
+    WM_NCCALCSIZE,
+    WM_NCHITTEST,
+    WS_CAPTION,
+    WS_MAXIMIZEBOX,
+    WS_MINIMIZEBOX,
+    WS_POPUP,
+    WS_SYSMENU,
+    WS_THICKFRAME,
+)
+import win32gui
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -31,7 +56,7 @@ class CustomTitleBar(widgets.Frame):
         self.minimize_button = TitleBarIcon("🗕")
         self.maximize_button = TitleBarIcon("🗖")
         self.exit_button = TitleBarIcon("✕")
-
+        self.setObjectName("ControlWidget")
         self.minimize_button.clicked.connect(
             lambda: window_widget.setWindowState(QtCore.Qt.WindowMinimized)
         )
@@ -64,7 +89,7 @@ class CustomTitleBar(widgets.Frame):
 
 
 class FramelessWindow(widgets.Widget):
-    gripSize = 6
+    BORDER_WIDTH = 5
 
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
@@ -105,8 +130,92 @@ class FramelessWindow(widgets.Widget):
         self.grip_layout.setSpacing(0)
         self.setLayout(self.grip_layout)
 
+        self.hwnd = self.winId().__int__()
+        window_style = win32gui.GetWindowLong(self.hwnd, GWL_STYLE)
+        win32gui.SetWindowLong(
+            self.hwnd,
+            GWL_STYLE,
+            window_style
+            | WS_POPUP
+            | WS_THICKFRAME
+            | WS_CAPTION
+            | WS_SYSMENU
+            | WS_MAXIMIZEBOX
+            | WS_MINIMIZEBOX,
+        )
+
     def __getattr__(self, attr: str):
         return getattr(self.main_widget, attr)
+
+    def changeEvent(self, event):
+        if event.type() == event.WindowStateChange:
+            if self.windowState() & QtCore.Qt.WindowMaximized:
+                margin = abs(self.mapToGlobal(self.rect().topLeft()).y())
+                self.setContentsMargins(margin, margin, margin, margin)
+            else:
+                self.setContentsMargins(0, 0, 0, 0)
+
+        return super().changeEvent(event)
+
+    def nativeEvent(self, event, message):
+        return_value, result = super().nativeEvent(event, message)
+
+        # if you use Windows OS
+        if event == b"windows_generic_MSG":
+            msg = ctypes.wintypes.MSG.from_address(message.__int__())
+            # Get the coordinates when the mouse moves.
+            x = win32api.LOWORD(LONG(msg.lParam).value)  # type: ignore
+            # converted an unsigned int to int (for dual monitor issue)
+            if x & 32768:
+                x = x | -65536
+            y = win32api.HIWORD(LONG(msg.lParam).value)  # type: ignore
+            if y & 32768:
+                y = y | -65536
+
+            x -= self.frameGeometry().x()
+            y -= self.frameGeometry().y()
+
+            # Determine whether there are other widgets at the mouse position.
+            if self.childAt(x, y) is not None and self.childAt(
+                x, y
+            ) is not self.findChild(widgets.Widget, "ControlWidget"):
+                # passing
+                if (
+                    self.width() - self.BORDER_WIDTH > x > self.BORDER_WIDTH
+                    and y < self.height() - self.BORDER_WIDTH
+                ):
+                    return return_value, result
+
+            if msg.message == WM_NCCALCSIZE:
+                # Remove system title
+                return True, 0
+
+            if msg.message == WM_NCHITTEST:
+                w, h = self.width(), self.height()
+                lx = x < self.BORDER_WIDTH
+                rx = x > w - self.BORDER_WIDTH
+                ty = y < self.BORDER_WIDTH
+                by = y > h - self.BORDER_WIDTH
+                if lx and ty:
+                    return True, HTTOPLEFT
+                if rx and by:
+                    return True, HTBOTTOMRIGHT
+                if rx and ty:
+                    return True, HTTOPRIGHT
+                if lx and by:
+                    return True, HTBOTTOMLEFT
+                if ty:
+                    return True, HTTOP
+                if by:
+                    return True, HTBOTTOM
+                if lx:
+                    return True, HTLEFT
+                if rx:
+                    return True, HTRIGHT
+                # Title
+                return True, HTCAPTION
+
+        return return_value, result
 
 
 class EdgeGrip(widgets.Widget):
