@@ -1,3 +1,5 @@
+# parts taken from https://github.com/mustafaahci/FramelessWindow
+
 from __future__ import annotations
 
 import ctypes
@@ -32,9 +34,6 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 SideStr = Literal["left", "top", "right", "bottom"]
-
-
-# Aero snap still doesn't work https://bugreports.qt.io/browse/QTBUG-84466
 
 
 class TitleBarIcon(widgets.PushButton):
@@ -143,6 +142,12 @@ class FramelessWindow(widgets.Widget):
             | WS_MAXIMIZEBOX
             | WS_MINIMIZEBOX,
         )
+
+        # if QtWin.isCompositionEnabled():
+        #     # Aero Shadow
+        #     QtWin.extendFrameIntoClientArea(self, -1, -1, -1, -1)
+        # else:
+        #     QtWin.resetExtendedFrame(self)
 
     def __getattr__(self, attr: str):
         return getattr(self.main_widget, attr)
