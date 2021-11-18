@@ -70,4 +70,4 @@ changelog: ## create changelog
 
 bump: ## version bump
 	poetry run cz bump --no-verify
-	cp CHANGELOG.md docs/changelog.md
+# 	cp CHANGELOG.md docs/changelog.md
