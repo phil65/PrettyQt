@@ -782,6 +782,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.gui.icon" class="md-nav__link">
+    icon
+  </a>
+  
+    <nav class="md-nav" aria-label="icon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.icon.Icon" class="md-nav__link">
+    Icon
+  </a>
+  
+    <nav class="md-nav" aria-label="Icon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.icon.Icon.from_char" class="md-nav__link">
+    from_char()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.gui.imageiohandler" class="md-nav__link">
     imageiohandler
   </a>
@@ -1418,6 +1451,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.pixmap.Pixmap.create_checkerboard_pattern" class="md-nav__link">
     create_checkerboard_pattern()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.pixmap.Pixmap.get_image_data_url" class="md-nav__link">
+    get_image_data_url()
   </a>
   
 </li>
@@ -3038,6 +3078,39 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.gui.icon" class="md-nav__link">
+    icon
+  </a>
+  
+    <nav class="md-nav" aria-label="icon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.icon.Icon" class="md-nav__link">
+    Icon
+  </a>
+  
+    <nav class="md-nav" aria-label="Icon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.icon.Icon.from_char" class="md-nav__link">
+    from_char()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.gui.imageiohandler" class="md-nav__link">
     imageiohandler
   </a>
@@ -3674,6 +3747,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.gui.pixmap.Pixmap.create_checkerboard_pattern" class="md-nav__link">
     create_checkerboard_pattern()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.pixmap.Pixmap.get_image_data_url" class="md-nav__link">
+    get_image_data_url()
   </a>
   
 </li>
@@ -7172,6 +7252,131 @@ GuiApplication            (<span title="PyQt5.QtGui.QGuiApplication">QGuiApplica
 
 
 
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="prettyqt.gui.icon" class="doc doc-heading">
+        <code>icon</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="prettyqt.gui.icon.Icon" class="doc doc-heading">
+        <code>
+Icon            (<span title="PyQt5.QtGui.QIcon">QIcon</span>)
+        </code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.gui.icon.Icon.from_char" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">from_char</span><span class="p">(</span><span class="n">char</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">background</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="s1">&#39;white&#39;</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Create a QIcon with a given character.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/gui/icon.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">from_char</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">char</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;white&quot;</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Create a QIcon with a given character.&quot;&quot;&quot;</span>
+    <span class="n">icon</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">size</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">):</span>
+        <span class="n">px</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pixmap</span><span class="o">.</span><span class="n">create_char</span><span class="p">(</span>
+            <span class="n">char</span><span class="p">,</span> <span class="n">background</span><span class="o">=</span><span class="n">background</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">size</span>
+        <span class="p">)</span>
+        <span class="n">icon</span><span class="o">.</span><span class="n">addPixmap</span><span class="p">(</span><span class="n">px</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">icon</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
 
 
 
@@ -10667,6 +10872,7 @@ Pixmap            (<span title="PyQt5.QtGui.QPixmap">QPixmap</span>)
 
 
 
+
   <div class="doc doc-object doc-method">
 
 
@@ -10710,6 +10916,58 @@ Pixmap            (<span title="PyQt5.QtGui.QPixmap">QPixmap</span>)
 
 
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.gui.pixmap.Pixmap.get_image_data_url" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Render the contents of the pixmap as a data URL (RFC-2397).</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>datauri </code></td>
+      <td><p>str</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/gui/pixmap.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Render the contents of the pixmap as a data URL (RFC-2397).</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        datauri : str</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Buffer</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="n">device</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Buffer</span><span class="o">.</span><span class="n">ReadWrite</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">device</span><span class="p">,</span> <span class="sa">b</span><span class="s2">&quot;png&quot;</span><span class="p">)</span>
+    <span class="n">device</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="s2">&quot;data:image/png;base64,&quot;</span> <span class="o">+</span> <span class="n">payload</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 

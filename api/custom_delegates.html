@@ -2213,15 +2213,16 @@ ProgressBarDelegate            (<span title="prettyqt.widgets.styleditemdelegate
           <summary>Source code in <code>prettyqt/custom_delegates/progressbardelegate.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="n">progress</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-    <span class="n">progressBar_option</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionProgressBar</span><span class="p">()</span>
-    <span class="n">progressBar_option</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span>
-    <span class="n">progressBar_option</span><span class="o">.</span><span class="n">minimum</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">progressBar_option</span><span class="o">.</span><span class="n">maximum</span> <span class="o">=</span> <span class="mi">100</span>
-    <span class="n">progressBar_option</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span>
-    <span class="n">progressBar_option</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">progress</span><span class="si">}</span><span class="s2">%&quot;</span>
-    <span class="n">progressBar_option</span><span class="o">.</span><span class="n">textVisible</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">opt</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionProgressBar</span><span class="p">()</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">minimum</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">maximum</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">progress</span><span class="si">}</span><span class="s2">%&quot;</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">textVisible</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">opt</span><span class="o">.</span><span class="n">state</span> <span class="o">|=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Horizontal</span>
     <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawControl</span><span class="p">(</span>
-        <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">ControlElement</span><span class="o">.</span><span class="n">CE_ProgressBar</span><span class="p">,</span> <span class="n">progressBar_option</span><span class="p">,</span> <span class="n">painter</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">ControlElement</span><span class="o">.</span><span class="n">CE_ProgressBar</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">painter</span>
     <span class="p">)</span>
 </code></pre></div>
         </details>
