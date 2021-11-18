@@ -213,8 +213,7 @@ class Application(QtWidgets.QApplication):
         return constants.NAVIGATION_MODES.inverse[self.navigationMode()]
 
 
-Application.setStyle(widgets.Style())
-
+# Application.setStyle(widgets.Style())
 
 if __name__ == "__main__":
     app = Application([])
