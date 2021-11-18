@@ -4,30 +4,35 @@ from __future__ import annotations
 
 import ctypes
 from ctypes.wintypes import LONG
+import sys
 from typing import Literal
 
-import win32api
-from win32con import (
-    GWL_STYLE,
-    HTBOTTOM,
-    HTBOTTOMLEFT,
-    HTBOTTOMRIGHT,
-    HTCAPTION,
-    HTLEFT,
-    HTRIGHT,
-    HTTOP,
-    HTTOPLEFT,
-    HTTOPRIGHT,
-    WM_NCCALCSIZE,
-    WM_NCHITTEST,
-    WS_CAPTION,
-    WS_MAXIMIZEBOX,
-    WS_MINIMIZEBOX,
-    WS_POPUP,
-    WS_SYSMENU,
-    WS_THICKFRAME,
-)
-import win32gui
+
+try:
+    import win32api
+    from win32con import (
+        GWL_STYLE,
+        HTBOTTOM,
+        HTBOTTOMLEFT,
+        HTBOTTOMRIGHT,
+        HTCAPTION,
+        HTLEFT,
+        HTRIGHT,
+        HTTOP,
+        HTTOPLEFT,
+        HTTOPRIGHT,
+        WM_NCCALCSIZE,
+        WM_NCHITTEST,
+        WS_CAPTION,
+        WS_MAXIMIZEBOX,
+        WS_MINIMIZEBOX,
+        WS_POPUP,
+        WS_SYSMENU,
+        WS_THICKFRAME,
+    )
+    import win32gui
+except ImportError:
+    pass
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
@@ -129,30 +134,33 @@ class FramelessWindow(widgets.Widget):
         self.grip_layout.setSpacing(0)
         self.setLayout(self.grip_layout)
 
-        self.hwnd = self.winId().__int__()
-        window_style = win32gui.GetWindowLong(self.hwnd, GWL_STYLE)
-        win32gui.SetWindowLong(
-            self.hwnd,
-            GWL_STYLE,
-            window_style
-            | WS_POPUP
-            | WS_THICKFRAME
-            | WS_CAPTION
-            | WS_SYSMENU
-            | WS_MAXIMIZEBOX
-            | WS_MINIMIZEBOX,
-        )
+        if sys.platform == "win32":
 
-        # if QtWin.isCompositionEnabled():
-        #     # Aero Shadow
-        #     QtWin.extendFrameIntoClientArea(self, -1, -1, -1, -1)
-        # else:
-        #     QtWin.resetExtendedFrame(self)
+            self.hwnd = self.winId().__int__()
+            window_style = win32gui.GetWindowLong(self.hwnd, GWL_STYLE)
+            win32gui.SetWindowLong(
+                self.hwnd,
+                GWL_STYLE,
+                window_style
+                | WS_POPUP
+                | WS_THICKFRAME
+                | WS_CAPTION
+                | WS_SYSMENU
+                | WS_MAXIMIZEBOX
+                | WS_MINIMIZEBOX,
+            )
+
+            # if QtWin.isCompositionEnabled():
+            #     # Aero Shadow
+            #     QtWin.extendFrameIntoClientArea(self, -1, -1, -1, -1)
+            # else:
+            #     QtWin.resetExtendedFrame(self)
 
     def __getattr__(self, attr: str):
         return getattr(self.main_widget, attr)
 
     def changeEvent(self, event):
+        # not sure if this should be done on non-windows
         if event.type() == event.WindowStateChange:
             if self.windowState() & QtCore.Qt.WindowMaximized:
                 margin = abs(self.mapToGlobal(self.rect().topLeft()).y())
@@ -164,7 +172,8 @@ class FramelessWindow(widgets.Widget):
 
     def nativeEvent(self, event, message):
         return_value, result = super().nativeEvent(event, message)
-
+        if sys.platform != "win32":
+            return return_value, result
         # if you use Windows OS
         if event == b"windows_generic_MSG":
             msg = ctypes.wintypes.MSG.from_address(message.__int__())
