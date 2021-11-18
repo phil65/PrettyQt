@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import base64
 import os
 import pathlib
 
@@ -65,6 +66,20 @@ class Pixmap(QtGui.QPixmap):
         pixmap = self.transformed(gui.Transform().rotate(rotation))
         new_w, new_h = pixmap.width(), pixmap.height()
         return pixmap.copy((new_w - w) // 2, (new_h - h) // 2, w, h)
+
+    def get_image_data_url(self):
+        """Render the contents of the pixmap as a data URL (RFC-2397).
+
+        Returns:
+            datauri : str
+        """
+        device = core.Buffer()
+        assert device.open(core.Buffer.ReadWrite)
+        self.save(device, b"png")
+        device.close()
+        data = bytes(device.data())
+        payload = base64.b64encode(data).decode("ascii")
+        return "data:image/png;base64," + payload
 
     @classmethod
     def create_dot(cls, color: types.ColorType = "black", size: int = 16) -> Pixmap:
