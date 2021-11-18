@@ -69,5 +69,5 @@ changelog: ## create changelog
 	mv CHANGELOG.md docs/changelog.md
 
 bump: ## version bump
-	poetry run cz bump
+	poetry run cz bump --no-verify
 	cp CHANGELOG.md docs/changelog.md
