@@ -37,3 +37,6 @@ class SpacerItem(QtWidgets.QSpacerItem):
         h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
         v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]
         self.changeSize(w, h, h_pol, v_pol)
+
+    def get_size_policy(self) -> widgets.SizePolicy:
+        return widgets.SizePolicy.clone(self.sizePolicy())
