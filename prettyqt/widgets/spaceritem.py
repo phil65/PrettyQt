@@ -12,8 +12,10 @@ class SpacerItem(QtWidgets.QSpacerItem):
         self,
         w: int,
         h: int,
-        h_policy: QtWidgets.QSizePolicy.Policy | widgets.sizepolicy.SizePolicyStr,
-        v_policy: QtWidgets.QSizePolicy.Policy | widgets.sizepolicy.SizePolicyStr,
+        h_policy: QtWidgets.QSizePolicy.Policy
+        | widgets.sizepolicy.SizePolicyStr = "minimum",
+        v_policy: QtWidgets.QSizePolicy.Policy
+        | widgets.sizepolicy.SizePolicyStr = "minimum",
     ):
         if isinstance(h_policy, QtWidgets.QSizePolicy.Policy):
             h_pol = h_policy
