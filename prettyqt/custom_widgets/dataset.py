@@ -451,7 +451,7 @@ class DataSet(metaclass=DataSetMeta):
         self.dialog_icon = icon
 
     def create_dialog(self):
-        dialog = widgets.BaseDialog()
+        dialog = widgets.Dialog()
         dialog.set_modality("application")
         dialog.setMinimumWidth(400)
         dialog.set_title(self.dialog_title)

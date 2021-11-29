@@ -15,7 +15,7 @@ OPTIONS = dict(
 
 OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
 
-QtWidgets.QColorDialog.__bases__ = (widgets.BaseDialog,)
+QtWidgets.QColorDialog.__bases__ = (widgets.Dialog,)
 
 
 class ColorDialog(QtWidgets.QColorDialog):

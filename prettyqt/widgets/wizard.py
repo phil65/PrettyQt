@@ -100,7 +100,7 @@ TEXT_FORMATS = bidict(
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
     TEXT_FORMATS["markdown"] = QtCore.Qt.TextFormat.MarkdownText
 
-QtWidgets.QWizard.__bases__ = (widgets.BaseDialog,)
+QtWidgets.QWizard.__bases__ = (widgets.Dialog,)
 
 
 class Wizard(QtWidgets.QWizard):

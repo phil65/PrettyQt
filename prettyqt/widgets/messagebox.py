@@ -99,7 +99,7 @@ if core.VersionNumber.get_qt_version() >= (5, 14, 0):
 
 TextFormatStr = Literal["rich", "plain", "auto"]
 
-QtWidgets.QMessageBox.__bases__ = (widgets.BaseDialog,)
+QtWidgets.QMessageBox.__bases__ = (widgets.Dialog,)
 
 
 class MessageBox(QtWidgets.QMessageBox):

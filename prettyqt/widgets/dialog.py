@@ -2,12 +2,29 @@ from __future__ import annotations
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.utils import types
 
 
 QtWidgets.QDialog.__bases__ = (widgets.Widget,)
 
 
-class BaseDialog(QtWidgets.QDialog):
+class Dialog(QtWidgets.QDialog):
+    def __init__(
+        self,
+        title: str = "",
+        icon: types.IconType = None,
+        parent: QtWidgets.QWidget | None = None,
+        delete_on_close: bool = False,
+        layout: None | str | QtWidgets.QLayout = None,
+    ):
+        super().__init__(parent=parent)
+        self.set_title(title)
+        self.set_icon(icon)
+        if delete_on_close:
+            self.delete_on_close()
+        if layout is not None:
+            self.set_layout(layout)
+
     def __getitem__(self, index: str) -> QtWidgets.QWidget:
         result = self.find_child(QtWidgets.QWidget, index)
         if result is None:
@@ -61,29 +78,6 @@ class BaseDialog(QtWidgets.QDialog):
 
     def main_loop(self) -> int:
         return self.exec_()
-
-
-class Dialog(BaseDialog):
-
-    DEFAULT_SIZE = None
-
-    def __init__(
-        self,
-        title: str = "",
-        icon=None,
-        parent: QtWidgets.QWidget | None = None,
-        delete_on_close: bool = True,
-        layout: None | str | QtWidgets.QLayout = None,
-    ):
-        super().__init__(parent=parent)
-        if self.DEFAULT_SIZE:
-            self.resize(*self.DEFAULT_SIZE)
-        self.set_title(title)
-        self.set_icon(icon)
-        if delete_on_close:
-            self.delete_on_close()
-        if layout is not None:
-            self.set_layout(layout)
 
 
 if __name__ == "__main__":

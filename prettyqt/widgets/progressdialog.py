@@ -4,7 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QProgressDialog.__bases__ = (widgets.BaseDialog,)
+QtWidgets.QProgressDialog.__bases__ = (widgets.Dialog,)
 
 
 class ProgressDialog(QtWidgets.QProgressDialog):

@@ -4,7 +4,7 @@ from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QFontDialog.__bases__ = (widgets.BaseDialog,)
+QtWidgets.QFontDialog.__bases__ = (widgets.Dialog,)
 
 
 class FontDialog(QtWidgets.QFontDialog):

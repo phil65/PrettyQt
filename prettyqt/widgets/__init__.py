@@ -93,7 +93,7 @@ from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
 from .pushbutton import PushButton
 from .dialogbuttonbox import DialogButtonBox
-from .dialog import BaseDialog, Dialog
+from .dialog import Dialog
 from .messagebox import MessageBox
 from .errormessage import ErrorMessage
 
@@ -267,7 +267,6 @@ __all__ = [
     "SizePolicy",
     "StylePainter",
     "StyleFactory",
-    "BaseDialog",
     "Dialog",
     "MessageBox",
     "ErrorMessage",

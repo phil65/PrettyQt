@@ -4,7 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QErrorMessage.__bases__ = (widgets.BaseDialog,)
+QtWidgets.QErrorMessage.__bases__ = (widgets.Dialog,)
 
 
 class ErrorMessage(QtWidgets.QErrorMessage):
