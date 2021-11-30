@@ -162,6 +162,13 @@ class ListWidget(QtWidgets.QListWidget):
             raise InvalidParamError(mode, widgets.abstractitemview.SCROLL_HINT)
         self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT[mode])
 
+    def find_items(
+        self, text: str, column: int = 0, mode: constants.MatchFlagStr = "exact"
+    ) -> list[QtGui.QStandardItem]:
+        if mode not in constants.MATCH_FLAGS:
+            raise InvalidParamError(mode, constants.MATCH_FLAGS)
+        return self.findItems(text, constants.MATCH_FLAGS[mode], column)  # type: ignore
+
 
 if __name__ == "__main__":
     app = widgets.app()
