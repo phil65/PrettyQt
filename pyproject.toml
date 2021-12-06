@@ -60,7 +60,7 @@ pytest-xvfb = {version = "^2.0.0", markers = "sys_platform == 'linux'"}
 codecov = "^2.1.7"
 coverage = "^6.0"
 mkdocs = "^1.1.2"
-mkdocs-material = "^7.0.0"
+mkdocs-material = "^8.0.0"
 mkdocstrings = "^0"
 pymdown-extensions = "^9.0"
 black = "^21.4b1"
