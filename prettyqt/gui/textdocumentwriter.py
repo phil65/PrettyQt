@@ -1,18 +1,22 @@
 from __future__ import annotations
 
 import os
+from typing import Literal
 
 from prettyqt.qt import QtCore, QtGui
+
+
+FormatStr = Literal["plaintext", "HTML", "markdown", "ODF"]
 
 
 class TextDocumentWriter(QtGui.QTextDocumentWriter):
     def __repr__(self):
         return f"{type(self).__name__}({self.device()!r}, {self.format()!r})"
 
-    def get_format(self) -> str:
-        return bytes(self.format()).decode()
+    def get_format(self) -> FormatStr:
+        return bytes(self.format()).decode()  # type: ignore
 
-    def set_format(self, fmt: str | bytes | QtCore.QByteArray):
+    def set_format(self, fmt: FormatStr | bytes | QtCore.QByteArray):
         new = fmt.encode() if isinstance(fmt, str) else fmt
         self.setFormat(new)
 
@@ -26,6 +30,6 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
 
 
 if __name__ == "__main__":
-    doc = TextDocumentWriter("a.text", b"UTF-8")
+    doc = TextDocumentWriter("a.text", b"plaintext")
     doc.set_format("UTF-8")
     print(doc.get_format())
