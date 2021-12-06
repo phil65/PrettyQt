@@ -303,6 +303,18 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         """
         return STYLE.inverse[self.style()]
 
+    def set_family(self, family: str, fallback: str | None = None):
+        """Set the font family.
+
+        Args:
+            family: font family
+            fallback: fallback font family
+        """
+        self.setFamily(family)
+        font_info = gui.FontInfo(self)
+        if fallback is not None and font_info.family() != family:
+            self.setFamily(fallback)
+
 
 if __name__ == "__main__":
     font = Font("Consolas")
