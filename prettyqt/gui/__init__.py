@@ -71,6 +71,7 @@ from .textline import TextLine
 from .textoption import TextOption
 from .textblock import TextBlock
 from .textdocument import TextDocument
+from .textdocumentfragment import TextDocumentFragment
 from .statictext import StaticText
 from .intvalidator import IntValidator
 from .doublevalidator import DoubleValidator
@@ -195,6 +196,7 @@ __all__ = [
     "TextBlock",
     "TextBlockGroup",
     "TextDocument",
+    "TextDocumentFragment",
     "StaticText",
     "RegularExpressionValidator",
     "IntValidator",
