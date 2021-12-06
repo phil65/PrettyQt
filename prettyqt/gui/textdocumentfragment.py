@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+import os
+
 from prettyqt import gui
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 
 
 class TextDocumentFragment(QtGui.QTextDocumentFragment):
@@ -17,6 +19,16 @@ class TextDocumentFragment(QtGui.QTextDocumentFragment):
     @classmethod
     def from_plain_text(cls, text: str) -> TextDocumentFragment:
         return cls(cls.fromPlainText(text))
+
+    def write_to_file(
+        self,
+        path: os.PathLike | str,
+        fmt: gui.textdocumentwriter.FormatStr | bytes | QtCore.QByteArray = "plaintext",
+    ):
+        writer = gui.TextDocumentWriter()
+        writer.set_format(fmt)
+        writer.set_file_name(path)
+        return writer.write(self)
 
 
 if __name__ == "__main__":

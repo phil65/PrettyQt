@@ -9,7 +9,7 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -198,10 +198,19 @@ class TextDocument(QtGui.QTextDocument):
         assert 1 <= line_no <= lines
         return self.findBlockByLineNumber(line_no - 1).position()
 
+    def write_to_file(
+        self,
+        path: os.PathLike | str,
+        fmt: gui.textdocumentwriter.FormatStr | bytes | QtCore.QByteArray = "plaintext",
+    ):
+        writer = gui.TextDocumentWriter()
+        writer.set_format(fmt)
+        writer.set_file_name(path)
+        return writer.write(self)
+
 
 if __name__ == "__main__":
     doc = TextDocument("This is a test\nHello")
     doc.set_default_text_option(QtGui.QTextOption())
-    print(doc.get_default_text_option())
-    for i in doc:
-        print(i)
+    a = doc.write_to_file("test.a", "plaintext")
+    print(a)
