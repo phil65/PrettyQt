@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 from typing import Any, Iterator
 
 from prettyqt import core
@@ -48,6 +49,14 @@ class MimeData(QtCore.QMimeData):
 
     def values(self) -> Iterator[Any]:
         return (self.get_data(key) for key in self.formats())
+
+    def set_svg_data(self, string: str):
+        data = string.encode()
+        self.setData("image/svg+xml", data)
+
+    def set_path_data(self, paths: list[os.PathLike]):
+        urls = [core.Url.from_local_file(p) for p in paths]
+        self.setUrls(urls)
 
 
 if __name__ == "__main__":
