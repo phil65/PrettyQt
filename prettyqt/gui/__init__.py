@@ -70,6 +70,7 @@ from .textlayout import TextLayout
 from .textline import TextLine
 from .textoption import TextOption
 from .textblock import TextBlock
+from .textdocumentwriter import TextDocumentWriter
 from .textdocument import TextDocument
 from .textdocumentfragment import TextDocumentFragment
 from .statictext import StaticText
@@ -195,6 +196,7 @@ __all__ = [
     "TextOption",
     "TextBlock",
     "TextBlockGroup",
+    "TextDocumentWriter",
     "TextDocument",
     "TextDocumentFragment",
     "StaticText",
