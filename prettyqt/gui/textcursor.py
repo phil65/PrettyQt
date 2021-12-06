@@ -3,6 +3,7 @@ from __future__ import annotations
 import contextlib
 from typing import Literal
 
+from prettyqt import gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
@@ -117,6 +118,9 @@ class TextCursor(QtGui.QTextCursor):
         :return: tuple(line, column)
         """
         return (self.blockNumber(), self.columnNumber())
+
+    def get_selection(self) -> gui.TextDocumentFragment:
+        return gui.TextDocumentFragment(self.selection())
 
     def select_text(
         self,
