@@ -16,6 +16,7 @@ from .iconlabel import IconLabel
 from .iconwidget import IconWidget
 from .flowlayout import FlowLayout
 from .borderlayout import BorderLayout
+from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
@@ -47,6 +48,7 @@ __all__ = [
     "BoolDictToolButton",
     "OptionalWidget",
     "CollapsibleFrame",
+    "CompletionWidget",
     "ExpandableLine",
     "SingleLineTextEdit",
     "RegexInput",
