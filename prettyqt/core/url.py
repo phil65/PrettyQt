@@ -119,6 +119,11 @@ class Url(QtCore.QUrl):
             working_dir = ""
         return cls(cls.fromUserInput(url, working_dir))
 
+    @classmethod
+    def from_local_file(cls, path: os.PathLike) -> Url:
+        url = cls.fromLocalFile(os.fspath(path))
+        return cls(url)
+
 
 if __name__ == "__main__":
     url = Url()
