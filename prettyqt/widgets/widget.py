@@ -468,9 +468,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         if spacing is not None:
             self.box.setSpacing(spacing)
 
-    def center(self) -> None:
+    def center(self, screen: int = 0) -> None:
         qr = self.frameGeometry()
-        cp = gui.GuiApplication.screens()[0].geometry().center()
+        cp = gui.GuiApplication.screens()[screen].geometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
