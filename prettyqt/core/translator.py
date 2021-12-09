@@ -41,6 +41,16 @@ class Translator(QtCore.QTranslator):
         translator.load_file(file)
         return translator
 
+    @classmethod
+    def for_system_language(cls) -> Translator:
+        translator = cls()
+        if not translator.load(
+            "qt_" + core.Locale.system().name(),
+            str(core.LibraryInfo.get_location("translations")),
+        ):
+            raise OSError("Could not get translator for system language")
+        return translator
+
 
 if __name__ == "__main__":
     print(Translator.get_available_languages())
