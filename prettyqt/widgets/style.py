@@ -449,6 +449,65 @@ SimpleControlStr = Literal[
     "panel_menu",
 ]
 
+st = mod.StateFlag
+
+
+State = bidict(
+    none=st.State_None,
+    active=st.State_Active,
+    auto_raise=st.State_AutoRaise,
+    children=st.State_Children,
+    down_arrow=st.State_DownArrow,
+    editing=st.State_Editing,
+    enabled=st.State_Enabled,
+    has_edit_focus=st.State_HasEditFocus,
+    has_focus=st.State_HasFocus,
+    horizontal=st.State_Horizontal,
+    keyboard_focus_change=st.State_KeyboardFocusChange,
+    mouse_over=st.State_MouseOver,
+    no_change=st.State_NoChange,
+    off=st.State_Off,
+    on=st.State_On,
+    raised=st.State_Raised,
+    read_only=st.State_ReadOnly,
+    selected=st.State_Selected,
+    item=st.State_Item,
+    open=st.State_Open,
+    sibling=st.State_Sibling,
+    sunken=st.State_Sunken,
+    up_arrow=st.State_UpArrow,
+    mini=st.State_Mini,
+    small=st.State_Small,
+)
+
+StateStr = Literal[
+    "none",
+    "active",
+    "auto_raise",
+    "children",
+    "down_arrow",
+    "editing",
+    "enabled",
+    "has_edit_focus",
+    "has_focus",
+    "horizontal",
+    "keyboard_focus_change",
+    "mouse_over",
+    "no_change",
+    "off",
+    "on",
+    "raised",
+    "read_only",
+    "selected",
+    "item",
+    "open",
+    "sibling",
+    "sunken",
+    "up_arrow",
+    "mini",
+    "small",
+]
+
 
 class Style(QtWidgets.QStyle):
     def draw_primitive(
