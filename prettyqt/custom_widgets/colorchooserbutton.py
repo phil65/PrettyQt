@@ -23,6 +23,7 @@ class ColorChooserButton(widgets.Widget):
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
         layout.add(self.button)
+        self._current_color: gui.Color = gui.Color("white")
         if color is not None:
             self.set_current_color(color)
 
