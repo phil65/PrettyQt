@@ -1,3 +1,23 @@
+## v0.188.0 (2021-12-14)
+
+### Feat
+
+- add JsonModel class
+- **Translator**: add for_system_language method
+- **StyleOptionToolBox**: add get/set_selected_position methods
+- **Widget**: add screen param to center method
+- **Url**: add from_local_file method
+- **custom_widgets**: add CompletionWidget class
+- **TextDocument/TextDocumentFragment**: add write_to_file method
+- **Font**: add set_family method
+- **gui**: add TextDocumentWriter class
+- **TextCursor**: add get_selection method
+- **Mimedata**: add set_svg_data / set_path_data
+- **gui**: add TextDocumentFragment class
+- **ListWidet**: add find_items method
+- **SpacerItem**: add get_size_policy method
+- **custom_validators**: add IntegerValidator class
+
 ## v0.187.2 (2021-11-18)
 
 ### Fix
