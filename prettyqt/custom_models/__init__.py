@@ -9,6 +9,10 @@ from .transposeproxymodel import TransposeProxyModel
 from .importlibdistributionmodel import ImportlibDistributionModel
 from .regexmatchesmodel import RegexMatchesModel
 from .columnitemmodel import ColumnItemModel, ColumnItem
+from .listmixin import ListMixin
+from .modelmixin import ModelMixin
+from .nesteditem import NestedItem
+from .nestedmodel import NestedModel
 from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 
 __all__ = [
@@ -17,6 +21,10 @@ __all__ = [
     "ImportlibDistributionModel",
     "RegexMatchesModel",
     "ColumnItemModel",
+    "ListMixin",
+    "ModelMixin",
     "ColumnItem",
+    "NestedModel",
+    "NestedItem",
     "SubsequenceSortFilterProxyModel",
 ]
