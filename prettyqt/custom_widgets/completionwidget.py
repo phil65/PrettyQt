@@ -119,7 +119,7 @@ class CompletionWidget(widgets.ListWidget):
         screen_rect = QtWidgets.QApplication.desktop().availableGeometry(self)
         if screen_rect.size().height() + screen_rect.y() - point.y() - height < 0:
             point = self._text_edit.mapToGlobal(self._text_edit.cursorRect().topRight())
-            point.setY(point.y() - height)
+            point.setY(int(point.y() - height))
         w = (
             self.sizeHintForColumn(0)
             + self.verticalScrollBar().sizeHint().width()
@@ -144,7 +144,7 @@ class CompletionWidget(widgets.ListWidget):
         factor = 1.05 if os.name == "nt" else 0.98
         delta = int((point_size * 1.20) ** factor)
         y = delta - (point_size // 2)
-        point.setY(point.y() + y)
+        point.setY(int(point.y() + y))
         point = self._text_edit.mapToGlobal(point)
         return point
 
