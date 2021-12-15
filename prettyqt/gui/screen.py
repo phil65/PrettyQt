@@ -63,8 +63,17 @@ class Screen:
         )
 
     def grab_window(
-        self, window: int = 0, x: int = 0, y: int = 0, width: int = -1, height: int = -1
+        self,
+        window: int = 0,
+        x: int = 0,
+        y: int = 0,
+        width: int | None = None,
+        height: int | None = None,
     ) -> gui.Pixmap:
+        if width is None:
+            width = -1
+        if height is None:
+            height = -1
         px = self.grabWindow(window, x, y, width, height)
         return gui.Pixmap(px)
 
