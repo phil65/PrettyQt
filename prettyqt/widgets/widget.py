@@ -553,10 +553,16 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             return None
         return pathlib.Path(path)
 
+    def get_screen(self) -> gui.Screen | None:
+        window = self.window().windowHandle()
+        if window is None:
+            return None
+        return gui.Screen(window.screen())
+
 
 if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
-    print(type(widget.windowFilePath()))
     widget.show()
+    print(type(widget.get_screen()))
     app.main_loop()

@@ -75,6 +75,9 @@ class Window(QtGui.QWindow):
             raise InvalidParamError(edge, constants.EDGES)
         return self.startSystemResize(constants.EDGES[edge])
 
+    def get_screen(self) -> gui.Screen:
+        return gui.Screen(self.screen())
+
 
 if __name__ == "__main__":
     wnd = Window()
