@@ -83,7 +83,18 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             return None
         return gui.Icon(icon)
 
+    def set_data(self, role: str, data):
+        role_id = constants.ITEM_DATA_ROLE[role]
+        self.setData(role_id, data)
+
 
 if __name__ == "__main__":
-    item = ListWidgetItem()
-    item.setData(1000, "test")
+    from prettyqt import widgets
+
+    app = widgets.app()
+    widget = widgets.ListWidget()
+    item = ListWidgetItem("AB")
+    item.set_data("display", "test")
+    widget.add(item)
+    widget.show()
+    app.main_loop()
