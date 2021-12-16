@@ -10,7 +10,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
@@ -168,7 +168,7 @@ class TextDocument(QtGui.QTextDocument):
         return constants.CURSOR_MOVE_STYLE.inverse[self.defaultCursorMoveStyle()]
 
     def add_resource(
-        self, resource_type: ResourceTypeStr, name: str | os.PathLike, resource
+        self, resource_type: ResourceTypeStr, name: types.PathType, resource
     ):
         if resource_type not in RESOURCE_TYPES:
             raise InvalidParamError(resource_type, RESOURCE_TYPES)
@@ -182,7 +182,7 @@ class TextDocument(QtGui.QTextDocument):
         self.set_default_stylesheet(ss)
 
     def set_default_stylesheet(
-        self, ss: None | str | qstylizer.style.StyleSheet | os.PathLike
+        self, ss: None | str | qstylizer.style.StyleSheet | types.PathType
     ):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
@@ -200,7 +200,7 @@ class TextDocument(QtGui.QTextDocument):
 
     def write_to_file(
         self,
-        path: os.PathLike | str,
+        path: types.PathType,
         fmt: gui.textdocumentwriter.FormatStr | bytes | QtCore.QByteArray = "plaintext",
     ):
         writer = gui.TextDocumentWriter()

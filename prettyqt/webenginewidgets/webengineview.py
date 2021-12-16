@@ -5,7 +5,8 @@ from typing import Callable
 import webbrowser
 
 from prettyqt import core, webenginecore, widgets
-from prettyqt.qt import QtCore, QtWebEngineWidgets
+from prettyqt.qt import QtWebEngineWidgets
+from prettyqt.utils import types
 
 
 QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)
@@ -16,7 +17,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
         super().__init__(*args, **kwargs)
         self.setPage(webenginecore.WebEnginePage(self))
 
-    def set_url(self, url: QtCore.QUrl | str | os.PathLike):
+    def set_url(self, url: types.UrlType | types.PathType):
         """Set the url of the WebEngineView.
 
         Clears the view and loads the URL.
@@ -33,7 +34,7 @@ class WebEngineView(QtWebEngineWidgets.QWebEngineView):
     def get_url(self) -> core.Url:
         return core.Url(self.url())
 
-    def load_url(self, url: QtCore.QUrl | str | os.PathLike):
+    def load_url(self, url: types.UrlType | types.PathType):
         """Load the URL.
 
         Loads the specified url and displays it.

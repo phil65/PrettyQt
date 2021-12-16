@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 class VersionNumber(QtCore.QVersionNumber):
@@ -38,22 +39,22 @@ class VersionNumber(QtCore.QVersionNumber):
     def __hash__(self):
         return hash((self.major(), self.minor(), self.micro()))
 
-    def __gt__(self, other):
+    def __gt__(self, other: types.SemanticVersionType):
         if isinstance(other, (str, tuple)):
             other = VersionNumber(other)
         return super().__gt__(other)
 
-    def __ge__(self, other):
+    def __ge__(self, other: types.SemanticVersionType):
         if isinstance(other, (str, tuple)):
             other = VersionNumber(other)
         return super().__ge__(other)
 
-    def __lt__(self, other):
+    def __lt__(self, other: types.SemanticVersionType):
         if isinstance(other, (str, tuple)):
             other = VersionNumber(other)
         return super().__lt__(other)
 
-    def __le__(self, other):
+    def __le__(self, other: types.SemanticVersionType):
         if isinstance(other, (str, tuple)):
             other = VersionNumber(other)
         return super().__le__(other)

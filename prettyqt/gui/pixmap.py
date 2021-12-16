@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import base64
-import os
 import pathlib
 
 from prettyqt import core, gui
@@ -39,7 +38,7 @@ class Pixmap(QtGui.QPixmap):
         return self.cacheKey()
 
     @classmethod
-    def from_file(cls, path: os.PathLike | str) -> Pixmap:
+    def from_file(cls, path: types.PathType) -> Pixmap:
         path = pathlib.Path(path)
         with path.open(mode="rb") as f:
             data = f.read()

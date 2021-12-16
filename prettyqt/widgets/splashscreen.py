@@ -11,7 +11,7 @@ QtWidgets.QSplashScreen.__bases__ = (widgets.Widget,)
 
 
 class SplashScreen(QtWidgets.QSplashScreen):
-    def __init__(self, path: os.PathLike | str | QtGui.QPixmap, width: int | None = None):
+    def __init__(self, path: types.PathType | QtGui.QPixmap, width: int | None = None):
         pix = gui.Pixmap(os.fspath(path)) if not isinstance(path, QtGui.QPixmap) else path
         if width:
             pix = pix.scaledToWidth(width)

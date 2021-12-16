@@ -6,8 +6,8 @@ from typing import Callable, Literal
 import webbrowser
 
 from prettyqt import core, gui, webenginecore
-from prettyqt.qt import QtCore, QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.qt import QtWebEngineCore
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 QtWebEngineCore.QWebEnginePage.__bases__ = (core.Object,)
@@ -221,7 +221,7 @@ class WebEnginePage(QtWebEngineCore.QWebEnginePage):
             return None
         return gui.Icon(icon)
 
-    def set_url(self, url: str | os.PathLike):
+    def set_url(self, url: types.PathType):
         """Set the url of the WebEnginePage.
 
         Clears the Page and loads the URL.
@@ -250,7 +250,7 @@ class WebEnginePage(QtWebEngineCore.QWebEnginePage):
     def get_contents_size(self) -> core.SizeF:
         return core.SizeF(self.contentsSize())
 
-    def load_url(self, url: QtCore.QUrl | str | os.PathLike):
+    def load_url(self, url: types.UrlType | types.PathType):
         """Load the URL.
 
         Loads the specified url and displays it.
@@ -345,7 +345,7 @@ class WebEnginePage(QtWebEngineCore.QWebEnginePage):
 
     def set_feature_permission(
         self,
-        url: QtCore.QUrl | str,
+        url: types.UrlType,
         feature: FeatureStr,
         policy: PermissionPolicyStr,
     ):

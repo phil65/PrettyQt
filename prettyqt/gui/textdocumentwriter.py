@@ -4,6 +4,7 @@ import os
 from typing import Literal
 
 from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import types
 
 
 FormatStr = Literal["plaintext", "HTML", "markdown", "ODF"]
@@ -20,7 +21,7 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
         new = fmt.encode() if isinstance(fmt, str) else fmt
         self.setFormat(new)
 
-    def set_file_name(self, name: os.PathLike | str):
+    def set_file_name(self, name: types.PathType):
         path = name if isinstance(name, str) else os.fspath(name)
         self.setFileName(path)
 

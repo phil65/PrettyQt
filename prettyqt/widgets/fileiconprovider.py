@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, types
 
 
 mod = QtWidgets.QFileIconProvider
@@ -32,7 +32,7 @@ OptionStr = Literal["dont_use_custom_dir_icons"]
 
 
 class FileIconProvider(QtWidgets.QFileIconProvider):
-    def get_icon(self, typ: IconTypeStr | QtCore.QFileInfo | os.PathLike) -> gui.Icon:
+    def get_icon(self, typ: IconTypeStr | QtCore.QFileInfo | types.PathType) -> gui.Icon:
         if isinstance(typ, (os.PathLike, QtCore.QFileInfo)):
             param = core.FileInfo(typ)
         else:

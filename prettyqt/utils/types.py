@@ -1,14 +1,18 @@
 from __future__ import annotations
 
+import os
 import pathlib
-from typing import TYPE_CHECKING, Any, Dict, List, Protocol, Union
+from typing import TYPE_CHECKING, Any, Dict, List, Protocol, Tuple, Union
 
 
 if TYPE_CHECKING:
     from prettyqt.qt import QtCore, QtGui, QtWebEngineCore, QtWidgets
 
     JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
+    PathType = Union[str, os.PathLike]
+    UrlType = Union[str, QtCore.QUrl]
 
+    SemanticVersionType = Union[str, QtCore.QVersionNumber, Tuple[int, int, int]]
     IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
 
     ColorType = Union[str, int, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None]
@@ -73,6 +77,15 @@ if TYPE_CHECKING:
         """An object with an isValid() method (e.g. QUrl)."""
 
         def isValid(self) -> bool:
+            ...
+
+    class SupportsValue(Protocol):
+        """An object with an isValid() method (e.g. QUrl)."""
+
+        def set_value(self, value):
+            ...
+
+        def get_value(self, value):
             ...
 
     QtSerializableType = Union[

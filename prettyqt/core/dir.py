@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict, helpers, types
 
 
 FILTERS = bidict(
@@ -91,7 +91,7 @@ class Dir(QtCore.QDir):
     def __reduce__(self):
         return type(self), (self.absolutePath(),)
 
-    def __truediv__(self, other: os.PathLike) -> pathlib.Path:
+    def __truediv__(self, other: types.PathType) -> pathlib.Path:
         return self.to_path() / os.fspath(other)
 
     def __fspath__(self) -> str:
@@ -153,9 +153,9 @@ class Dir(QtCore.QDir):
         return [core.FileInfo(i) for i in cls.drives()]
 
     @classmethod
-    def add_search_path(cls, prefix: str, path: str | os.PathLike):
+    def add_search_path(cls, prefix: str, path: types.PathType):
         cls.addSearchPath(prefix, os.fspath(path))
 
     @classmethod
-    def set_search_paths(cls, prefix: str, paths: list[str | os.PathLike]):
+    def set_search_paths(cls, prefix: str, paths: list[types.PathType]):
         cls.setSearchPaths(prefix, [os.fspath(p) for p in paths])

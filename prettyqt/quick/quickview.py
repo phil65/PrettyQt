@@ -5,8 +5,8 @@ import pathlib
 from typing import Literal
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtQuick
-from prettyqt.utils import bidict
+from prettyqt.qt import QtQuick
+from prettyqt.utils import bidict, types
 
 
 RESIZE_MODES = bidict(
@@ -29,7 +29,7 @@ QtQuick.QQuickView.__bases__ = (gui.Window,)
 
 
 class QuickView(QtQuick.QQuickView):
-    def set_source(self, source: str | os.PathLike | QtCore.QUrl):
+    def set_source(self, source: types.UrlType | types.PathType):
         if isinstance(source, os.PathLike):
             source = os.fspath(source)
         if isinstance(source, str):

@@ -6,7 +6,7 @@ from typing import Iterator, Sequence
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 if core.VersionNumber.get_qt_version() >= (5, 14, 0):
@@ -60,7 +60,7 @@ class FileSystemModel(QtWidgets.QFileSystemModel):
     def use_custom_icons(self, use: bool):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
-    def set_root_path(self, path: str | os.PathLike) -> QtCore.QModelIndex:
+    def set_root_path(self, path: types.PathType) -> QtCore.QModelIndex:
         path = os.fspath(path)
         if path in ["/", "root"]:
             path = core.Dir.rootPath()

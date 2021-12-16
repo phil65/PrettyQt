@@ -5,7 +5,7 @@ import pathlib
 from typing import Any, Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, types
 
 
 COMPONENT_FORMATTING_OPTIONS = bidict(
@@ -73,7 +73,7 @@ FormattingOptionStr = Literal[
 
 
 class Url(QtCore.QUrl):
-    def __init__(self, path: QtCore.QUrl | str | os.PathLike | None = None):
+    def __init__(self, path: types.UrlType | types.PathType | None = None):
         if path is None:
             super().__init__()
         else:
@@ -120,7 +120,7 @@ class Url(QtCore.QUrl):
         return cls(cls.fromUserInput(url, working_dir))
 
     @classmethod
-    def from_local_file(cls, path: os.PathLike) -> Url:
+    def from_local_file(cls, path: types.PathType) -> Url:
         url = cls.fromLocalFile(os.fspath(path))
         return cls(url)
 

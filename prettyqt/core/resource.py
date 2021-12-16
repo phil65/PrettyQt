@@ -6,7 +6,7 @@ from typing import Iterator, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, types
 
 
 COMPRESSION = bidict(
@@ -49,12 +49,12 @@ class Resource(QtCore.QResource):
     def get_last_modified(self) -> core.DateTime:
         return core.DateTime(self.lastModified())
 
-    def set_file_name(self, path: str | os.PathLike):
+    def set_file_name(self, path: types.PathType):
         self.setFileName(os.fspath(path))
 
     def get_file_name(self) -> pathlib.Path:
         return pathlib.Path(self.fileName())
 
     @classmethod
-    def register_resource(cls, path: str | os.PathLike, root: str = ""):
+    def register_resource(cls, path: types.PathType, root: str = ""):
         cls.registerResource(os.fspath(path), root)

@@ -5,6 +5,7 @@ from typing import Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtQml
+from prettyqt.utils import types
 
 
 QtQml.QQmlApplicationEngine.__bases__ = (QtQml.QQmlEngine,)
@@ -17,7 +18,7 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
     def load_data(
         self,
         data: QtCore.QByteArray | bytes | str,
-        url: QtCore.QUrl | str | None = None,
+        url: types.UrlType | None = None,
     ):
         if isinstance(data, str):
             data = data.encode()
@@ -29,7 +30,7 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
             url = core.Url()
         self.loadData(data, url)
 
-    def load_file(self, file: str | os.PathLike | QtCore.QUrl):
+    def load_file(self, file: types.UrlType | types.PathType):
         if isinstance(file, os.PathLike):
             file = os.fspath(file)
         self.load(file)

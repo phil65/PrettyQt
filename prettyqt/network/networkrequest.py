@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 Req = QtNetwork.QNetworkRequest
@@ -132,7 +132,7 @@ CacheLoadControlStr = Literal[
 
 
 class NetworkRequest(QtNetwork.QNetworkRequest):
-    def __init__(self, obj: QtCore.QUrl | str | QtNetwork.QNetworkRequest | None = None):
+    def __init__(self, obj: types.UrlType | QtNetwork.QNetworkRequest | None = None):
         if isinstance(obj, QtNetwork.QNetworkRequest):
             super().__init__(obj)
         else:

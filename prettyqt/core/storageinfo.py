@@ -4,12 +4,13 @@ import os
 import pathlib
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 class StorageInfo(QtCore.QStorageInfo):
     def __init__(
         self,
-        path: QtCore.QStorageInfo | QtCore.QDir | str | os.PathLike | None = None,
+        path: QtCore.QStorageInfo | QtCore.QDir | types.PathType | None = None,
     ):
         if path is None:
             super().__init__()

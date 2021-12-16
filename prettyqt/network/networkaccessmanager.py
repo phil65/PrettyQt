@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, network
-from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.qt import QtNetwork
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 OPERATION = bidict(
@@ -37,7 +37,7 @@ class NetworkAccessManager(QtNetwork.QNetworkAccessManager):
     #     if allow_redirects:
     #         pass
 
-    def get(self, request: str | QtCore.QUrl | QtNetwork.QNetworkRequest):
+    def get(self, request: types.UrlType | QtNetwork.QNetworkRequest):
         if isinstance(request, str):
             request = core.Url(request)
         request = network.NetworkRequest(request)

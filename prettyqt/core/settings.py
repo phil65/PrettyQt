@@ -9,7 +9,7 @@ from deprecated import deprecated
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 logger = logging.getLogger(__name__)
@@ -127,7 +127,7 @@ class Settings(QtCore.QSettings):
         return SCOPE.inverse[self.scope()]
 
     @classmethod
-    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: str | os.PathLike):
+    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: types.PathType):
         """Set the path to the settings file.
 
         Args:
@@ -155,13 +155,15 @@ class Settings(QtCore.QSettings):
         self.endGroup()
 
     @contextlib.contextmanager
-    def write_array(self, prefix: str, size: int = -1):
+    def write_array(self, prefix: str, size: int | None = None):
         """Context manager for writing arrays.
 
         Args:
             prefix: prefix for settings array
             size: size of settings array
         """
+        if size is None:
+            size = -1
         self.beginWriteArray(prefix, size)
         yield None
         self.endArray()
@@ -215,7 +217,7 @@ class Settings(QtCore.QSettings):
         cls,
         *exts: str,
         app_name: str | None = None,
-        app_path: None | str | os.PathLike = None,
+        app_path: None | types.PathType = None,
     ):
         logger.debug(f"assigning extensions {exts} to {app_name}")
         s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.Format.NativeFormat)
@@ -234,7 +236,7 @@ class Settings(QtCore.QSettings):
 def register_extensions(
     *exts: str,
     app_name: str | None = None,
-    app_path: None | str | os.PathLike = None,
+    app_path: None | types.PathType = None,
 ):
     core.Settings.register_extensions(*exts, app_name=app_name, app_path=app_path)
 

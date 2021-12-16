@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core, qml
 from prettyqt.qt import QtCore, QtQml
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 OBJECT_OWNERSHIP = bidict(
@@ -41,10 +41,10 @@ class QmlEngine(QtQml.QQmlEngine):
         """
         return OBJECT_OWNERSHIP.inverse[self.objectOwnership(obj)]
 
-    def add_import_path(self, path: str | os.PathLike):
+    def add_import_path(self, path: types.PathType):
         self.addImportPath(os.fspath(path))
 
-    def add_plugin_path(self, path: str | os.PathLike):
+    def add_plugin_path(self, path: types.PathType):
         self.addPluginPath(os.fspath(path))
 
     def get_plugin_paths(self) -> list[pathlib.Path]:
@@ -61,5 +61,5 @@ class QmlEngine(QtQml.QQmlEngine):
     def get_base_url(self) -> core.Url:
         return core.Url(self.baseUrl())
 
-    def set_offline_storage_path(self, path: str | os.PathLike):
+    def set_offline_storage_path(self, path: types.PathType):
         self.setOfflineStoragePath(os.fspath(path))

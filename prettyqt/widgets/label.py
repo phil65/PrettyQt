@@ -232,7 +232,7 @@ class Label(QtWidgets.QLabel):
                 ss.color.setValue(color.name())
         return self
 
-    def set_image(self, path: os.PathLike | str, width: int = 300) -> Label:
+    def set_image(self, path: types.PathType, width: int = 300) -> Label:
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
@@ -244,7 +244,7 @@ class Label(QtWidgets.QLabel):
 
     @classmethod
     def image_from_path(
-        cls, path: os.PathLike | str, parent: QtWidgets.QWidget | None = None
+        cls, path: types.PathType, parent: QtWidgets.QWidget | None = None
     ) -> Label:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

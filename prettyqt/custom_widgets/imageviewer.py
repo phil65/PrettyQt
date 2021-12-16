@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import os
-
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import types
 
 
 class ImageViewer(widgets.Widget):
     def __init__(
         self,
         title: str = "",
-        path: os.PathLike | str | None = None,
+        path: types.PathType | None = None,
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)

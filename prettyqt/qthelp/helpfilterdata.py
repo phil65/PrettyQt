@@ -3,11 +3,12 @@ from __future__ import annotations
 from typing import Sequence
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtHelp
+from prettyqt.qt import QtHelp
+from prettyqt.utils import types
 
 
 class HelpFilterData(QtHelp.QHelpFilterData):
-    def set_versions(self, versions: Sequence[QtCore.QVersionNumber | str]):
+    def set_versions(self, versions: Sequence[types.SemanticVersionType]):
         versions = [core.VersionNumber(i) for i in versions]
         self.setVersions(versions)
 

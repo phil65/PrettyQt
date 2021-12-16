@@ -5,6 +5,7 @@ import pathlib
 
 from prettyqt import core
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 QtCore.QFileSystemWatcher.__bases__ = (core.Object,)
@@ -24,8 +25,8 @@ class FileSystemWatcher(QtCore.QFileSystemWatcher):
     def get_paths(self) -> list[pathlib.Path]:
         return self.get_directories() + self.get_files()
 
-    def add_path(self, path: str | os.PathLike) -> bool:
+    def add_path(self, path: types.PathType) -> bool:
         return self.addPath(os.fspath(path))
 
-    def add_paths(self, paths: list[str | os.PathLike]):
+    def add_paths(self, paths: list[types.PathType]):
         self.addPaths([os.fspath(p) for p in paths])

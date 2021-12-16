@@ -176,7 +176,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_tooltip(
         self,
-        tooltip: str | os.PathLike,
+        tooltip: str | types.PathType,
         size: tuple[int, int] | QtCore.QSize | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
@@ -192,10 +192,14 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def set_font(
         self,
         font_name: str | None = None,
-        font_size: int = -1,
-        weight: int = -1,
+        font_size: int | None = None,
+        weight: int | None = None,
         italic: bool = False,
     ) -> gui.Font:
+        if font_size is None:
+            font_size = -1
+        if weight is None:
+            weight = -1
         if font_name is None:
             font_name = self.font().family()
         font = gui.Font(font_name, font_size, weight, italic)
@@ -346,7 +350,9 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         yield ss
         self.set_stylesheet(ss)
 
-    def set_stylesheet(self, ss: None | str | qstylizer.style.StyleSheet | os.PathLike):
+    def set_stylesheet(
+        self, ss: None | str | qstylizer.style.StyleSheet | types.PathType
+    ):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
         elif ss is None:
@@ -544,7 +550,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
             area = gui.Region(area, gui.region.REGION_TYPE[typ])
         self.setMask(area)
 
-    def set_window_file_path(self, path: str | os.PathLike):
+    def set_window_file_path(self, path: types.PathType):
         self.setWindowFilePath(os.fspath(path))
 
     def get_window_file_path(self) -> pathlib.Path | None:

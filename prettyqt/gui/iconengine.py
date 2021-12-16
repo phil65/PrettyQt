@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 ICON_ENGINE_HOOK = bidict(
@@ -38,7 +38,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def add_file(
         self,
-        path: str | os.PathLike,
+        path: types.PathType,
         size: QtCore.QSize | tuple[int, int] | int,
         mode: gui.icon.ModeStr,
         state: gui.icon.StateStr,

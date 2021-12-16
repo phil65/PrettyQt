@@ -95,7 +95,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
 
     def set_tooltip(
         self,
-        tooltip: str | os.PathLike,
+        tooltip: str | types.PathType,
         size: tuple[int, int] | QtCore.QSize | None = None,
     ):
         if isinstance(tooltip, os.PathLike):

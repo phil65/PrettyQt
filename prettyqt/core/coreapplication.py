@@ -9,7 +9,7 @@ from typing import Callable
 import prettyqt
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, types
 
 
 logger = logging.getLogger(__name__)
@@ -36,7 +36,7 @@ class CoreApplication(QtCore.QCoreApplication):
         return pathlib.Path(cls.applicationDirPath())
 
     @classmethod
-    def add_library_path(cls, path: os.PathLike | str):
+    def add_library_path(cls, path: types.PathType):
         cls.addLibraryPath(os.fspath(path))
 
     @classmethod
@@ -59,7 +59,7 @@ class CoreApplication(QtCore.QCoreApplication):
     def set_metadata(
         self,
         app_name: str | None = None,
-        app_version: None | str | QtCore.QVersionNumber | tuple[int, int, int] = None,
+        app_version: None | types.SemanticVersionType = None,
         org_name: str | None = None,
         org_domain: str | None = None,
     ):
@@ -81,7 +81,7 @@ class CoreApplication(QtCore.QCoreApplication):
         #     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     @classmethod
-    def load_language_file(cls, file: pathlib.Path | str) -> core.Translator:
+    def load_language_file(cls, file: types.PathType) -> core.Translator:
         translator = core.Translator()
         translator.load_file(file)
         cls.installTranslator(translator)

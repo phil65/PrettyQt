@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-import os
 import pathlib
 
 from prettyqt import core, paths
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 QtCore.QTranslator.__bases__ = (core.Object,)
@@ -20,7 +20,7 @@ class Translator(QtCore.QTranslator):
             return None
         return pathlib.Path(path)
 
-    def load_file(self, path: str | os.PathLike):
+    def load_file(self, path: types.PathType):
         path = pathlib.Path(path)
         if not self.load(path.name, str(path.parent)):
             raise OSError(f"Invalid language file {path}")

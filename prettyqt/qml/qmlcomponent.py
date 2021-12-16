@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtQml
-from prettyqt.utils import bidict
+from prettyqt.qt import QtQml
+from prettyqt.utils import bidict, types
 
 
 COMPILATION_MODES = bidict(
@@ -27,7 +27,7 @@ class QmlComponent(QtQml.QQmlComponent):
     def get_url(self) -> core.Url:
         return core.Url(self.url())
 
-    def load_url(self, url: QtCore.QUrl | str, mode: str):
+    def load_url(self, url: types.UrlType, mode: str):
         if isinstance(url, str):
             url = core.Url.from_user_input(url)
         self.loadUrl(url, COMPILATION_MODES[mode])

@@ -11,7 +11,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, types
 
 
 logger = logging.getLogger(__name__)
@@ -119,7 +119,9 @@ class Application(QtWidgets.QApplication):
         yield ss
         self.set_stylesheet(ss)
 
-    def set_stylesheet(self, ss: None | str | qstylizer.style.StyleSheet | os.PathLike):
+    def set_stylesheet(
+        self, ss: None | str | qstylizer.style.StyleSheet | types.PathType
+    ):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
         elif ss is None:

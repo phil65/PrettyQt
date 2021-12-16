@@ -4,6 +4,7 @@ import os
 import pathlib
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 class TemporaryDir(QtCore.QTemporaryDir):
@@ -22,7 +23,7 @@ class TemporaryDir(QtCore.QTemporaryDir):
     def __fspath__(self) -> str:
         return self.path()
 
-    def __truediv__(self, other: os.PathLike) -> pathlib.Path:
+    def __truediv__(self, other: types.PathType) -> pathlib.Path:
         current = pathlib.Path(self.path())
         return current / os.fspath(other)
         # new = current / other
