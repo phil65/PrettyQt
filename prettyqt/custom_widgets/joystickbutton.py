@@ -3,13 +3,13 @@ from __future__ import annotations
 from math import hypot
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtGui, QtWidgets
 
 
 class JoystickButton(widgets.PushButton):
     state_changed = core.Signal(object)
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self.radius = 200
         self.setCheckable(True)
@@ -57,7 +57,7 @@ class JoystickButton(widgets.PushButton):
 
         w2 = self.width() / 2
         h2 = self.height() / 2
-        self.spotPos = core.Point(int(w2 * (1 + xy[0])), int(h2 * (1 - xy[1])))
+        self.spot_pos = core.Point(int(w2 * (1 + xy[0])), int(h2 * (1 - xy[1])))
         self.update()
         if self.state == xy:
             return
@@ -68,7 +68,7 @@ class JoystickButton(widgets.PushButton):
         super().paintEvent(ev)
         p = QtGui.QPainter(self)
         p.setBrush(QtGui.QBrush(QtGui.QColor(0, 0, 0)))
-        p.drawEllipse(self.spotPos.x() - 3, self.spotPos.y() - 3, 6, 6)
+        p.drawEllipse(self.spot_pos.x() - 3, self.spot_pos.y() - 3, 6, 6)
 
     def resizeEvent(self, ev):
         self.set_state(*self.state)

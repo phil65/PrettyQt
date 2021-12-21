@@ -39,7 +39,7 @@ class IconEngine(QtGui.QIconEngine):
     def add_file(
         self,
         path: types.PathType,
-        size: QtCore.QSize | tuple[int, int] | int,
+        size: types.SizeType | int,
         mode: gui.icon.ModeStr,
         state: gui.icon.StateStr,
     ):
@@ -67,7 +67,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def get_actual_size(
         self,
-        size: QtCore.QSize | tuple[int, int] | int,
+        size: types.SizeType | int,
         mode: gui.icon.ModeStr = "normal",
         state: gui.icon.StateStr = "off",
     ) -> core.Size:
@@ -97,7 +97,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def get_pixmap(
         self,
-        size: QtCore.QSize | tuple[int, int] | int,
+        size: types.SizeType | int,
         mode: gui.icon.ModeStr = "normal",
         state: gui.icon.StateStr = "off",
         scale: float | None = None,

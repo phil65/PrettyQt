@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 SELECTION_MODE = bidict(
@@ -52,16 +52,22 @@ class CalendarWidget(QtWidgets.QCalendarWidget):
     def get_value(self) -> datetime.date:
         return self.get_date()
 
-    def set_value(self, value: QtCore.QDate | datetime.date):
+    def set_value(self, value: types.DateType):
+        if isinstance(value, str):
+            value = QtCore.QDate.fromString(value)
         self.setSelectedDate(value)  # type: ignore
 
     def set_range(
         self,
-        min_val: QtCore.QDate | datetime.date,
-        max_val: QtCore.QDate | datetime.date,
+        lower: types.DateType,
+        upper: types.DateType,
     ):
-        self.setMinimumDate(min_val)  # type: ignore
-        self.setMaximumDate(max_val)  # type: ignore
+        if isinstance(lower, str):
+            lower = QtCore.QDate.fromString(lower)
+        if isinstance(upper, str):
+            upper = QtCore.QDate.fromString(upper)
+        self.setMinimumDate(lower)  # type: ignore
+        self.setMaximumDate(upper)  # type: ignore
 
     def set_selection_mode(self, mode: SelectionModeStr | None):
         """Set selection mode for given calendar widget.

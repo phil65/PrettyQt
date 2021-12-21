@@ -4,6 +4,7 @@ from typing import overload
 
 from prettyqt import core
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 QtCore.QAnimationGroup.__bases__ = (core.AbstractAnimation,)
@@ -49,7 +50,7 @@ class AnimationGroup(QtCore.QAnimationGroup):
         return self
 
     def add_property_animation(
-        self, obj: QtCore.QObject, attribute: str | bytes | QtCore.QByteArray
+        self, obj: QtCore.QObject, attribute: types.ByteArrayType
     ) -> core.PropertyAnimation:
         if isinstance(attribute, str):
             attribute = attribute.encode()

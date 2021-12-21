@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import types
 
 
 QtGui.QAbstractTextDocumentLayout.__bases__ = (core.Object,)
@@ -20,9 +21,7 @@ class AbstractTextDocumentLayout(QtGui.QAbstractTextDocumentLayout):
     def get_frame_bounding_rect(self, frame: QtGui.QTextBlock) -> core.RectF:
         return core.RectF(self.frameBoundingRect(frame))
 
-    def hit_test(
-        self, point: core.PointF | tuple[float, float], fuzzy: bool = False
-    ) -> int | None:
+    def hit_test(self, point: types.PointFType, fuzzy: bool = False) -> int | None:
         if isinstance(point, tuple):
             point = core.PointF(*point)
         accuracy = (

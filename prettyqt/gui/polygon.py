@@ -5,6 +5,7 @@ from typing import Iterator
 
 from prettyqt import core
 from prettyqt.qt import API, QtCore, QtGui
+from prettyqt.utils import types
 
 
 class Polygon(QtGui.QPolygon):
@@ -21,7 +22,9 @@ class Polygon(QtGui.QPolygon):
     def __bool__(self):
         return not self.isEmpty()
 
-    def __contains__(self, point: QtCore.QPoint) -> bool:
+    def __contains__(self, point: types.PointType) -> bool:
+        if isinstance(point, tuple):
+            point = core.Point(point)
         return self.containsPoint(point, QtCore.Qt.FillRule.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.Point:
@@ -29,7 +32,7 @@ class Polygon(QtGui.QPolygon):
             raise KeyError(index)
         return self.get_point(index)
 
-    def __setitem__(self, index: int, value: QtCore.QPoint | tuple[int, int]):
+    def __setitem__(self, index: int, value: types.PointType):
         if isinstance(value, tuple):
             p = core.Point(*value)
         else:
@@ -72,7 +75,7 @@ class Polygon(QtGui.QPolygon):
     def get_points(self) -> list[core.Point]:
         return [self.get_point(i) for i in range(self.size())]
 
-    def add_points(self, *points: tuple[float, float] | core.Point):
+    def add_points(self, *points: types.PointType):
         for p in points:
             if isinstance(p, tuple):
                 p = core.Point(*p)

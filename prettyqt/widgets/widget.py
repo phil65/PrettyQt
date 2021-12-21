@@ -177,7 +177,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     def set_tooltip(
         self,
         tooltip: str | types.PathType,
-        size: tuple[int, int] | QtCore.QSize | None = None,
+        size: types.SizeType | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -538,7 +538,7 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
     def set_mask(
         self,
-        area: tuple[int, int, int, int] | QtCore.QRect | QtGui.QRegion | None,
+        area: types.RectType | QtGui.QRegion | None,
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
         if area is None:

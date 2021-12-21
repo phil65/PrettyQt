@@ -5,7 +5,7 @@ from typing import Any, Generator, Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict, helpers, types
 
 
 logger = logging.getLogger(__name__)
@@ -338,7 +338,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         p.highlight_inactive()
         self.setPalette(p)
 
-    def set_icon_size(self, size: int | QtCore.QSize | tuple[int, int]):
+    def set_icon_size(self, size: int | types.SizeType):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         elif isinstance(size, int):

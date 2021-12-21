@@ -106,14 +106,14 @@ class Painter(QtGui.QPainter):
 
     def fill_rect(
         self,
-        rect: QtCore.QRectF | QtCore.QRect,
+        rect: types.RectType | types.RectFType,
         color: types.ColorType,
         pattern: constants.PatternStr = "solid",
     ):
         if pattern not in constants.PATTERN:
             raise InvalidParamError(pattern, constants.PATTERN)
         if isinstance(rect, tuple):
-            rect = core.Rect(*rect)
+            rect = core.RectF(*rect)
         color = colors.get_color(color)
         if pattern != "solid":
             color = gui.Brush(color, constants.PATTERN[pattern])

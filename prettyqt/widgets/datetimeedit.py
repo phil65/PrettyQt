@@ -4,8 +4,8 @@ import datetime
 from typing import Literal
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 SECTIONS = bidict(
@@ -85,9 +85,13 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
 
     def set_range(
         self,
-        lower: QtCore.QDateTime | datetime.datetime,
-        upper: QtCore.QDateTime | datetime.datetime,
+        lower: types.DateTimeType,
+        upper: types.DateTimeType,
     ):
+        if isinstance(lower, str):
+            lower = datetime.datetime.strptime(lower)
+        if isinstance(upper, str):
+            upper = datetime.datetime.strptime(upper)
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateTimeRange(lower, upper)  # type: ignore
 

@@ -34,7 +34,7 @@ class IconWidget(widgets.Label):
         self._icon = iconprovider.get_icon(_icon)
         self.setPixmap(self._icon.pixmap(self._size))
 
-    def set_icon_size(self, size: int | QtCore.QSize | tuple[int, int]):
+    def set_icon_size(self, size: int | types.SizeType):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         elif isinstance(size, int):

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import os
 import pathlib
 from typing import TYPE_CHECKING, Any, Dict, List, Protocol, Tuple, Union
@@ -11,9 +12,20 @@ if TYPE_CHECKING:
     JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
     PathType = Union[str, os.PathLike]
     UrlType = Union[str, QtCore.QUrl]
-
+    PointType = Union[Tuple[int, int], QtCore.QPoint]
+    PointFType = Union[Tuple[float, float], QtCore.QPointF]
+    SizeType = Union[Tuple[int, int], QtCore.QSize]
+    SizeFType = Union[Tuple[float, float], QtCore.QSizeF]
+    MarginsType = Union[Tuple[int, int, int, int], QtCore.QMargins]
+    MarginsFType = Union[Tuple[float, float, float, float], QtCore.QMarginsF]
+    RectType = Union[Tuple[int, int, int, int], QtCore.QRect]
+    RectFType = Union[Tuple[float, float, float, float], QtCore.QRectF]
     SemanticVersionType = Union[str, QtCore.QVersionNumber, Tuple[int, int, int]]
     IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
+    ByteArrayType = Union[str, bytes, QtCore.QByteArray]
+    TimeType = Union[QtCore.QTime | datetime.time | str]
+    DateTime = Union[QtCore.QDate | datetime.date | str]
+    DateTimeType = Union[QtCore.QDateTime | datetime.datetime | str]
 
     ColorType = Union[str, int, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None]
     ColorAndBrushType = Union[ColorType, QtGui.QBrush]

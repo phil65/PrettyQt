@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 FILE_ERROR = bidict(
@@ -79,16 +79,19 @@ class FileDevice(QtCore.QFileDevice):
         return self.fileName()
 
     def set_file_time(
-        self, file_time: QtCore.QDateTime | datetime.datetime, typ: FileTimeStr
+        self, file_time: types.DateTimeType, typ: FileTimeStr
     ) -> bool:
         """Set file time.
 
         Args:
-            typ: file time to use
+            file_time: file time to set
+            typ: file time type
 
         Raises:
             InvalidParamError: file time does not exist
         """
+        if isinstance(file_time, str):
+            file_time = datetime.datetime.strptime(file_time)
         if typ not in FILE_TIME:
             raise InvalidParamError(typ, FILE_TIME)
         return self.setFileTime(file_time, FILE_TIME[typ])  # type: ignore

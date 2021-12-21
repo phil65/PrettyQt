@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from prettyqt import constants, custom_models, widgets
+from prettyqt.qt import QtCore
 
 
 class JsonTreeItem(custom_models.NestedItem):
@@ -62,7 +63,7 @@ class JsonModel(custom_models.NestedModel):
 
     HEADER = ["Key", "Value", "Type"]
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent=parent)
         self.root = JsonTreeItem()  # type: ignore
         self.items = self.root.children

@@ -17,7 +17,7 @@ class MimeData(QtCore.QMimeData):
     def __getitem__(self, index: str) -> str:
         return self.get_data(index)
 
-    def __setitem__(self, index: str, value: QtCore.QByteArray | bytes | str):
+    def __setitem__(self, index: str, value: types.ByteArrayType):
         if isinstance(value, str):
             value = value.encode()
         if not isinstance(value, QtCore.QByteArray):

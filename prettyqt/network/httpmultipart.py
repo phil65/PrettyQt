@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 CONTENT_TYPES = bidict(
@@ -37,7 +37,7 @@ class HttpMultiPart(QtNetwork.QHttpMultiPart):
             raise InvalidParamError(typ, CONTENT_TYPES)
         self.setContentType(CONTENT_TYPES[typ])
 
-    def set_boundary(self, boundary: str | bytes | QtCore.QByteArray):
+    def set_boundary(self, boundary: types.ByteArrayType):
         if isinstance(boundary, str):
             boundary = boundary.encode()
         if isinstance(boundary, bytes):

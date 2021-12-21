@@ -89,7 +89,7 @@ class AbstractButton(QtWidgets.QAbstractButton):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
+    def set_icon_size(self, size: int | types.SizeType):
         """Set size of the icon."""
         if isinstance(size, int):
             size = core.Size(size, size)

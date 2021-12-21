@@ -102,7 +102,7 @@ class TabWidget(QtWidgets.QTabWidget):
         """
         self.tabBar().setVisible(self.count() > 1)
 
-    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
+    def set_icon_size(self, size: int | types.SizeType):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)
@@ -182,7 +182,7 @@ class TabWidget(QtWidgets.QTabWidget):
         self.setTabsClosable(closable)
 
     @core.Slot(int, QtCore.QPoint)
-    def detach_tab(self, index: int, point: QtCore.QPoint | tuple[int, int]):
+    def detach_tab(self, index: int, point: types.PointType):
         """Detach tab by removing its contents and placing them in a DetachedTab window.
 
         Args:

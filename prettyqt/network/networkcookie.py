@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, types
 
 
 RAW_FORMS = bidict(
@@ -20,7 +20,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         form = RAW_FORMS["full"] if full else RAW_FORMS["name_and_value_only"]
         self.toRawForm(form)
 
-    def set_name(self, name: str | bytes | QtCore.QByteArray):
+    def set_name(self, name: types.ByteArrayType):
         if isinstance(name, str):
             name = name.encode()
         if isinstance(name, bytes):
@@ -30,7 +30,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
     def get_name(self) -> str:
         return bytes(self.name()).decode()
 
-    def set_value(self, value: str | bytes | QtCore.QByteArray):
+    def set_value(self, value: types.ByteArrayType):
         if isinstance(value, str):
             value = value.encode()
         if isinstance(value, bytes):
@@ -40,9 +40,11 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
     def get_value(self) -> str:
         return bytes(self.value()).decode()
 
-    def set_expiration_date(self, date: QtCore.QDateTime | datetime.datetime | None):
+    def set_expiration_date(self, date: types.DateTimeType | None):
         if date is None:
             date = QtCore.QDateTime()
+        elif isinstance(date, str):
+            date = datetime.datetime.strptime(date)
         self.setExpirationDate(date)  # type: ignore
 
 

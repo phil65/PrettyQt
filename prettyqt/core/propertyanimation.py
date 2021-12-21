@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 QtCore.QPropertyAnimation.__bases__ = (core.VariantAnimation,)
@@ -12,7 +13,7 @@ class PropertyAnimation(QtCore.QPropertyAnimation):
         self.setTargetObject(obj)
         self.set_property_name(attribute)
 
-    def set_property_name(self, name: str | bytes | QtCore.QByteArray):
+    def set_property_name(self, name: types.ByteArrayType):
         if isinstance(name, str):
             name = name.encode()
         if isinstance(name, bytes):

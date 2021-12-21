@@ -3,9 +3,10 @@ from __future__ import annotations
 import math
 
 from prettyqt import constants, core, custom_models
+from prettyqt.qt import QtCore
 
 
-def size_to_string(size):
+def size_to_string(size: int) -> str:
     if size <= 0:
         return "0 b"
     decimals = 2
@@ -64,7 +65,7 @@ class StorageInfoModel(core.AbstractTableModel):
         ColumnIsValid: "Valid",
     }
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
         self.volumes = core.StorageInfo.get_mounted_volumes()
 

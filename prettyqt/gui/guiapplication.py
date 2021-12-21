@@ -112,7 +112,7 @@ class GuiApplication(QtGui.QGuiApplication):
     def get_primary_screen(self) -> gui.Screen:
         return gui.Screen(self.primaryScreen())
 
-    def get_screen_at(self, point: tuple[int, int] | QtCore.QPoint) -> gui.Screen:
+    def get_screen_at(self, point: types.PointType) -> gui.Screen:
         if isinstance(point, tuple):
             point = QtCore.QPoint(*point)
         return gui.Screen(self.screenAt(point))

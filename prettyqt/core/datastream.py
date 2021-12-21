@@ -103,9 +103,9 @@ class DataStream(QtCore.QDataStream):
         return ba
 
     @classmethod
-    def write_bytearray(
-        cls, ba: QtCore.QByteArray | bytes, write_to: types.QtSerializableType
-    ):
+    def write_bytearray(cls, ba: types.ByteArrayType, write_to: types.QtSerializableType):
+        if isinstance(ba, str):
+            ba = ba.encode()
         if not isinstance(ba, QtCore.QByteArray):
             ba = QtCore.QByteArray(ba)
         stream = cls(ba, core.iodevice.OPEN_MODES["read_only"])

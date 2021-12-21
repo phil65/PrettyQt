@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import types
 
 
 class BounceAnimation(core.SequentialAnimationGroup):
@@ -18,13 +19,13 @@ class BounceAnimation(core.SequentialAnimationGroup):
         self.addAnimation(self.anim2)
         self.set_duration(duration)
 
-    def set_start_value(self, point: core.Point | tuple[int, int]):
+    def set_start_value(self, point: types.PointType):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.anim1.setStartValue(point)
         self.anim2.setEndValue(point)
 
-    def set_end_value(self, point: core.Point | tuple[int, int]):
+    def set_end_value(self, point: types.PointType):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.anim2.setStartValue(point)

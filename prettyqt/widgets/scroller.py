@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 INPUT = bidict(
@@ -63,8 +63,10 @@ class Scroller:
         return core.PointF(self.finalPosition())
 
     def handle_input(
-        self, input_type: InputStr, position: QtCore.QPointF, timestamp: int = 0
+        self, input_type: InputStr, position: types.PointFType, timestamp: int = 0
     ) -> bool:
+        if isinstance(position, tuple):
+            position = core.PointF(*position)
         if input_type not in INPUT:
             raise InvalidParamError(input_type, INPUT)
         return self.handleInput(INPUT[input_type], position, timestamp)

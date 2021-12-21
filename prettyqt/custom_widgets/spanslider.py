@@ -288,8 +288,11 @@ class SpanSlider(widgets.Slider):
                 main = self._main_control == "upper"
                 self.trigger_action("move", main)
 
-    def pick(self, p: QtCore.QPoint) -> int:
-        return p.x() if self.is_horizontal() else p.y()
+    def pick(self, p: types.PointType) -> int:
+        if isinstance(p, tuple):
+            return p[0] if self.is_horizontal() else p[1]
+        else:
+            return p.x() if self.is_horizontal() else p.y()
 
     def trigger_action(self, action: ActionStr, main: bool):
         value = 0.0

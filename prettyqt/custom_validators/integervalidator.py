@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import gui
+from prettyqt.qt import QtCore
 
 
 class IntegerValidator(gui.Validator):
-    def __init__(self, parent=None) -> None:
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
         self.range: tuple[int | None, int | None] = (None, None)
 

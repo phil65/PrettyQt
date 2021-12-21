@@ -6,7 +6,7 @@ from deprecated import deprecated
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 REMOVE_BEHAVIOUR = bidict(
@@ -97,7 +97,7 @@ class TabBar(QtWidgets.QTabBar):
         pos = QtGui.QCursor.pos()
         self.on_detach.emit(tab, pos)
 
-    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
+    def set_icon_size(self, size: int | types.SizeType):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)

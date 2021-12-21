@@ -4,6 +4,7 @@ import datetime
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.utils import types
 
 
 QtWidgets.QTimeEdit.__bases__ = (widgets.DateTimeEdit,)
@@ -27,18 +28,20 @@ class TimeEdit(QtWidgets.QTimeEdit):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def set_range(
-        self,
-        lower: QtCore.QTime | datetime.time,
-        upper: QtCore.QTime | datetime.time,
-    ):
-        self.setToolTip(f"{lower} <= x <= {upper}")
+    def set_range(self, lower: types.TimeType, upper: types.TimeType):
+        if isinstance(lower, str):
+            lower = core.Time.fromString(lower)
+        if isinstance(upper, str):
+            upper = core.Time.fromString(upper)
+        self.setToolTip(f"{lower.toString()} <= x <= {upper.toString()}")
         self.setTimeRange(lower, upper)  # type: ignore
 
     def get_value(self) -> datetime.time:
         return self.get_time()
 
-    def set_value(self, value: datetime.time | QtCore.QTime):
+    def set_value(self, value: types.TimeType):
+        if isinstance(value, str):
+            value = core.Time.fromString(value)
         return self.setTime(value)  # type: ignore
 
 

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, types
 
 
 QtWidgets.QGraphicsWidget.__bases__ = (widgets.GraphicsObject, widgets.GraphicsLayoutItem)
@@ -61,7 +61,7 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
         return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
 
     def window_frame_section_at(
-        self, point: QtCore.QPoint | tuple[int, int]
+        self, point: types.PointType
     ) -> constants.WindowFrameSectionStr:
         """Return the window frame section at given position.
 

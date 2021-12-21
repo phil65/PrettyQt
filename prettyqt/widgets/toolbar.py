@@ -107,7 +107,7 @@ class ToolBar(QtWidgets.QToolBar):
         spacer.set_size_policy("expanding", "expanding")
         return self.addWidget(spacer)
 
-    def set_icon_size(self, size: int | tuple[int, int] | QtCore.QSize):
+    def set_icon_size(self, size: int | types.SizeType):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)

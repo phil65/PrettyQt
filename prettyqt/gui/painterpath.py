@@ -4,7 +4,7 @@ from typing import Iterator, Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 ELEMENT_TYPES = bidict(
@@ -41,9 +41,11 @@ class PainterPath(QtGui.QPainterPath):
     def __contains__(self, item: QtCore.QPointF | QtCore.QRectF | QtGui.QPainterPath):
         return self.contains(item)
 
-    def add_rect(self, rect: QtCore.QRectF | QtCore.QRect):
+    def add_rect(self, rect: types.RectType | types.RectFType):
         if isinstance(rect, QtCore.QRect):
             rect = QtCore.QRectF(rect)
+        elif isinstance(rect, tuple):
+            rect = QtCore.QRectF(*rect)
         self.addRect(rect)
 
     def set_fill_rule(self, rule: constants.FillRuleStr):

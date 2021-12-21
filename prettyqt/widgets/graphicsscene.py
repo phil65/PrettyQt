@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 SCENE_LAYER = bidict(
@@ -131,18 +131,16 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def add_rect(
         self,
-        rect: QtCore.QRectF | QtCore.QRect | tuple[float, float, float, float],
+        rect: types.RectType | types.RectFType,
         pen: QtGui.QPen | None = None,
         brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsRectItem:
         if isinstance(rect, QtCore.QRect):
-            rect_ = core.RectF(rect)
+            rect = core.RectF(rect)
         elif isinstance(rect, tuple):
-            rect_ = core.RectF(*rect)
-        else:
-            rect_ = rect
+            rect = core.RectF(*rect)
         g_item = widgets.GraphicsRectItem()
-        g_item.setRect(rect_)
+        g_item.setRect(rect)
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:
@@ -168,18 +166,16 @@ class GraphicsScene(QtWidgets.QGraphicsScene):
 
     def add_ellipse(
         self,
-        ellipse: QtCore.QRectF | QtCore.QRect | tuple[float, float, float, float],
+        ellipse: types.RectType | types.RectFType,
         pen: QtGui.QPen | None = None,
         brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsEllipseItem:
         if isinstance(ellipse, QtCore.QRect):
-            ell = core.RectF(ellipse)
+            ellipse = core.RectF(ellipse)
         elif isinstance(ellipse, tuple):
-            ell = core.RectF(*ellipse)
-        else:
-            ell = ellipse
+            ellipse = core.RectF(*ellipse)
         g_item = widgets.GraphicsEllipseItem()
-        g_item.setRect(ell)
+        g_item.setRect(ellipse)
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:

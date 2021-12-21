@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 IMAGE_READER_ERROR = bidict(
@@ -59,7 +59,7 @@ class ImageReader(QtGui.QImageReader):
     def get_supported_subtypes(self) -> list[str]:
         return [bytes(i).decode() for i in self.supportedSubTypes()]
 
-    def set_format(self, fmt: str | bytes | QtCore.QByteArray):
+    def set_format(self, fmt: types.ByteArrayType):
         if isinstance(fmt, str):
             fmt = fmt.encode()
         if isinstance(fmt, bytes):
@@ -103,9 +103,7 @@ class ImageReader(QtGui.QImageReader):
         return [bytes(i).decode() for i in ImageReader.supportedMimeTypes()]
 
     @staticmethod
-    def get_image_formats_for_mime_type(
-        typ: str | bytes | QtCore.QByteArray,
-    ) -> list[str]:
+    def get_image_formats_for_mime_type(typ: types.ByteArrayType) -> list[str]:
         if isinstance(typ, str):
             typ = typ.encode()
         if isinstance(typ, bytes):

@@ -17,7 +17,7 @@ class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
 
     def load_data(
         self,
-        data: QtCore.QByteArray | bytes | str,
+        data: types.ByteArrayType,
         url: types.UrlType | None = None,
     ):
         if isinstance(data, str):
