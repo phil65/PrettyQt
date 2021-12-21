@@ -116,7 +116,7 @@ class CompletionWidget(widgets.ListWidget):
             self.addItem(list_item)
 
         height = self.sizeHint().height()
-        screen_rect = QtWidgets.QApplication.desktop().availableGeometry(self)
+        screen_rect = self.get_screen().availableGeometry()
         if screen_rect.size().height() + screen_rect.y() - point.y() - height < 0:
             point = self._text_edit.mapToGlobal(self._text_edit.cursorRect().topRight())
             point.setY(int(point.y() - height))
@@ -158,7 +158,7 @@ class CompletionWidget(widgets.ListWidget):
         """Return a cursor with text between the start  and currentposition selected."""
         cursor = self._text_edit.get_text_cursor()
         if cursor.position() >= self._start_position:
-            cursor.setPosition(self._start_position, QtGui.QTextCursor.KeepAnchor)
+            cursor.setPosition(self._start_position, gui.TextCursor.MoveMode.KeepAnchor)
         return cursor
 
     def _update_current(self):
