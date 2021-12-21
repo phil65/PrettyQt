@@ -34,7 +34,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def get_type(self) -> TypeStr:
         return TYPES.inverse[self.type()]
 
-    def add_destination(self, destination: str | os.PathLike) -> None:
+    def add_destination(self, destination: types.PathType) -> None:
         self.addDestination(os.fspath(destination))
 
     def set_title(self, title: str) -> None:
@@ -43,7 +43,7 @@ class WinJumpListCategory(QtWinExtras.QWinJumpListCategory):
     def add_link(
         self,
         title: str,
-        exe_path: str | os.PathLike,
+        exe_path: types.PathType,
         arguments: list | None = None,
         icon: types.IconType = None,
     ) -> None:

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 from prettyqt import core, location
-from prettyqt.qt import QtCore, QtLocation
+from prettyqt.qt import QtLocation
+from prettyqt.utils import types
 
 
 class PlaceSupplier(QtLocation.QPlaceSupplier):
@@ -14,7 +15,7 @@ class PlaceSupplier(QtLocation.QPlaceSupplier):
             return None
         return location.PlaceIcon(icon)
 
-    def set_url(self, url: str | QtCore.QUrl):
+    def set_url(self, url: types.UrlType):
         url = core.Url(url)
         self.setUrl(url)
 
