@@ -110,6 +110,12 @@ class ProgressBar(QtWidgets.QProgressBar):
     def set_range(self, start: int, end: int):
         self.setRange(start, end)
 
+    def set_value(self, value: int):
+        self.setValue(value)
+
+    def get_value(self) -> int:
+        return self.value()
+
 
 if __name__ == "__main__":
     app = widgets.app()
