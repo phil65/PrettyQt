@@ -58,6 +58,7 @@ class ComboBox(QtWidgets.QComboBox):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self.index_changed)
+        self.setCompleter(widgets.Completer(self))
 
     def serialize_fields(self):
         items = [
@@ -209,6 +210,10 @@ class ComboBox(QtWidgets.QComboBox):
 
     def text(self) -> str:
         return self.currentText()
+
+    def hide_completer(self):
+        """Hides the completion widget."""
+        self.setCompleter(widgets.Completer([], self))
 
 
 if __name__ == "__main__":

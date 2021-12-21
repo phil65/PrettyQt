@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+import ctypes
 from typing import Iterator
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import API, QtCore, QtGui
 
 
 class Polygon(QtGui.QPolygon):
@@ -76,6 +77,22 @@ class Polygon(QtGui.QPolygon):
             if isinstance(p, tuple):
                 p = core.Point(*p)
             self.append(p)
+
+    def get_data_buffer(self):
+        if API == "PySide6":
+            import shiboken6
+
+            address = shiboken6.getCppPointer(self.data())
+            buffer = (ctypes.c_long * 2 * self.size()).from_address(address)
+        elif API == "PySide2":
+            import shiboken2
+
+            address = shiboken2.getCppPointer(self.data())
+            buffer = (ctypes.c_long * 2 * self.size()).from_address(address)
+        else:
+            buffer = self.data()
+            buffer.setsize(8 * self.size())
+        return buffer
 
     @classmethod
     def from_xy(cls, xdata, ydata) -> Polygon:

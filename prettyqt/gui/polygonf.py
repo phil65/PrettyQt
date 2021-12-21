@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import ctypes
 import math
 from typing import Iterator
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import API, QtCore, QtGui
 
 
 class PolygonF(QtGui.QPolygonF):
@@ -104,6 +105,22 @@ class PolygonF(QtGui.QPolygonF):
         poly = gui.PolygonF()
         poly.add_points(*points)
         return poly
+
+    def get_data_buffer(self):
+        if API == "PySide6":
+            import shiboken6
+
+            address = shiboken6.getCppPointer(self.data())
+            buffer = (ctypes.c_double * 2 * self.size()).from_address(address)
+        elif API == "PySide2":
+            import shiboken2
+
+            address = shiboken2.getCppPointer(self.data())
+            buffer = (ctypes.c_double * 2 * self.size()).from_address(address)
+        else:
+            buffer = self.data()
+            buffer.setsize(16 * self.size())
+        return buffer
 
     @classmethod
     def from_xy(cls, xdata, ydata):
