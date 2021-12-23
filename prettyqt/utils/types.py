@@ -24,7 +24,7 @@ if TYPE_CHECKING:
     IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
     ByteArrayType = Union[str, bytes, QtCore.QByteArray]
     TimeType = Union[QtCore.QTime | datetime.time | str]
-    DateTime = Union[QtCore.QDate | datetime.date | str]
+    DateType = Union[QtCore.QDate | datetime.date | str]
     DateTimeType = Union[QtCore.QDateTime | datetime.datetime | str]
 
     ColorType = Union[str, int, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None]
