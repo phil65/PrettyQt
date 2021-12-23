@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import types
 
 
 class SizeF(QtCore.QSizeF):
@@ -13,8 +14,20 @@ class SizeF(QtCore.QSizeF):
     def __reduce__(self):
         return type(self), (self.width(), self.height())
 
-    def expanded_to(self, size: QtCore.QSizeF) -> SizeF:
+    def expanded_to(self, size: types.SizeFType) -> SizeF:
+        if isinstance(size, tuple):
+            size = QtCore.QSizeF(*size)
         return SizeF(self.expandedTo(size))
+
+    def shrunk_by(self, margins: types.MarginsFType) -> SizeF:
+        if isinstance(margins, tuple):
+            margins = QtCore.QMarginsF(*margins)
+        return SizeF(self.marginsAdded(margins))
+
+    def grown_by(self, margins: types.MarginsFType) -> SizeF:
+        if isinstance(margins, tuple):
+            margins = QtCore.QMarginsF(*margins)
+        return SizeF(self.marginsRemoved(margins))
 
 
 if __name__ == "__main__":
