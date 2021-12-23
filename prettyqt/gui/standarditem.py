@@ -125,7 +125,7 @@ class StandardItem(QtGui.QStandardItem):
     def set_tooltip(
         self,
         tooltip: str | types.PathType,
-        size: tuple[int, int] | QtCore.QSize | None = None,
+        size: types.SizeType | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -136,6 +136,11 @@ class StandardItem(QtGui.QStandardItem):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         self.setToolTip(tooltip)
+
+    def set_size_hint(self, hint: types.SizeType):
+        if isinstance(hint, tuple):
+            hint = QtCore.QSize(*hint)
+        self.setSizeHint(hint)
 
     def add_item(
         self,
@@ -154,7 +159,7 @@ class StandardItem(QtGui.QStandardItem):
         # text_alignment: Optional[str] = None,
         checkstate: constants.StateStr | None = None,
         flags: QtCore.Qt.ItemFlags | None = None,
-        size_hint: QtCore.QSize | None = None,
+        size_hint: types.SizeType | None = None,
         is_user_type: bool = False,
     ) -> StandardItem:
         item = StandardItem(name)
@@ -185,7 +190,7 @@ class StandardItem(QtGui.QStandardItem):
         if whats_this:
             item.setWhatsThis(whats_this)
         if size_hint is not None:
-            item.setSizeHint(size_hint)
+            item.set_size_hint(size_hint)
         if checkstate is not None:
             item.set_checkstate(checkstate)
         self.appendRow([item])

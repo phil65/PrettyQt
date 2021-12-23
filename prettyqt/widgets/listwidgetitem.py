@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, types
 
 
@@ -86,6 +86,11 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
     def set_data(self, role: str, data):
         role_id = constants.ITEM_DATA_ROLE[role]
         self.setData(role_id, data)
+
+    def set_size_hint(self, hint: types.SizeType):
+        if isinstance(hint, tuple):
+            hint = QtCore.QSize(*hint)
+        self.setSizeHint(hint)
 
 
 if __name__ == "__main__":

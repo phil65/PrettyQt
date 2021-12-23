@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Iterator, Literal
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
@@ -67,6 +67,11 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def __add__(self, other: QtWidgets.QTreeWidgetItem) -> TreeWidgetItem:
         self.addChild(other)
         return self
+
+    def set_size_hint(self, hint: types.SizeType, column: int = 0):
+        if isinstance(hint, tuple):
+            hint = QtCore.QSize(*hint)
+        self.setSizeHint(column, hint)
 
     def sort_children(self, column: int, descending: bool = False):
         order = constants.DESCENDING if descending else constants.ASCENDING
