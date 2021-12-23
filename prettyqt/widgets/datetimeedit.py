@@ -3,6 +3,8 @@ from __future__ import annotations
 import datetime
 from typing import Literal
 
+import dateutil.parser
+
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
@@ -89,9 +91,9 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
         upper: types.DateTimeType,
     ):
         if isinstance(lower, str):
-            lower = datetime.datetime.strptime(lower)
+            lower = dateutil.parser.parse(lower)
         if isinstance(upper, str):
-            upper = datetime.datetime.strptime(upper)
+            upper = dateutil.parser.parse(upper)
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateTimeRange(lower, upper)  # type: ignore
 

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import datetime
 
+import dateutil.parser
+
 from prettyqt.qt import QtCore, QtNetwork
 from prettyqt.utils import bidict, types
 
@@ -44,7 +46,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         if date is None:
             date = QtCore.QDateTime()
         elif isinstance(date, str):
-            date = datetime.datetime.strptime(date)
+            date = dateutil.parser.parse(date)
         self.setExpirationDate(date)  # type: ignore
 
 

@@ -3,6 +3,8 @@ from __future__ import annotations
 import datetime
 from typing import Literal
 
+import dateutil.parser
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, types
@@ -78,9 +80,7 @@ class FileDevice(QtCore.QFileDevice):
     def __str__(self):
         return self.fileName()
 
-    def set_file_time(
-        self, file_time: types.DateTimeType, typ: FileTimeStr
-    ) -> bool:
+    def set_file_time(self, file_time: types.DateTimeType, typ: FileTimeStr) -> bool:
         """Set file time.
 
         Args:
@@ -91,7 +91,7 @@ class FileDevice(QtCore.QFileDevice):
             InvalidParamError: file time does not exist
         """
         if isinstance(file_time, str):
-            file_time = datetime.datetime.strptime(file_time)
+            file_time = dateutil.parser.parse(file_time)
         if typ not in FILE_TIME:
             raise InvalidParamError(typ, FILE_TIME)
         return self.setFileTime(file_time, FILE_TIME[typ])  # type: ignore
