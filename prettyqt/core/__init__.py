@@ -137,7 +137,7 @@ from .stringlistmodel import StringListModel
 from .sortfilterproxymodel import SortFilterProxyModel
 from .abstracttablemodel import AbstractTableModel
 from .standardpaths import StandardPaths
-
+from .xmlstreamreader import XmlStreamReader
 from .commandlineoption import CommandLineOption
 from .commandlineparser import CommandLineParser
 from .collatorsortkey import CollatorSortKey
@@ -283,6 +283,7 @@ __all__ = [
     "TransposeProxyModel",
     "AbstractTableModel",
     "StandardPaths",
+    "XmlStreamReader",
     "AbstractState",
     "FinalState",
     "HistoryState",
