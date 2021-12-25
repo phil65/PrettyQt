@@ -23,9 +23,9 @@ if TYPE_CHECKING:
     SemanticVersionType = Union[str, QtCore.QVersionNumber, Tuple[int, int, int]]
     IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
     ByteArrayType = Union[str, bytes, QtCore.QByteArray]
-    TimeType = Union[QtCore.QTime | datetime.time | str]
-    DateType = Union[QtCore.QDate | datetime.date | str]
-    DateTimeType = Union[QtCore.QDateTime | datetime.datetime | str]
+    TimeType = Union[QtCore.QTime, datetime.time, str]
+    DateType = Union[QtCore.QDate, datetime.date, str]
+    DateTimeType = Union[QtCore.QDateTime, datetime.datetime, str]
 
     ColorType = Union[str, int, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None]
     ColorAndBrushType = Union[ColorType, QtGui.QBrush]
