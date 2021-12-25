@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
 
 

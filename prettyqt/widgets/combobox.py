@@ -213,7 +213,8 @@ class ComboBox(QtWidgets.QComboBox):
 
     def hide_completer(self):
         """Hides the completion widget."""
-        self.setCompleter(widgets.Completer([], self))
+        completer = widgets.Completer(self)
+        self.setCompleter(completer)
 
 
 if __name__ == "__main__":

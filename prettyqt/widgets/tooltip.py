@@ -15,7 +15,7 @@ class ToolTip(QtWidgets.QToolTip):
         if position is None:
             position = QtGui.QCursor.pos()
         elif isinstance(position, tuple):
-            position = QtCore.Point(*position)
+            position = QtCore.QPoint(*position)
         cls.showText(position, f'<div style="max-width: {linebreak_px}px">{text}</div>')
 
 

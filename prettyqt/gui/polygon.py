@@ -24,7 +24,7 @@ class Polygon(QtGui.QPolygon):
 
     def __contains__(self, point: types.PointType) -> bool:
         if isinstance(point, tuple):
-            point = core.Point(point)
+            point = core.Point(*point)
         return self.containsPoint(point, QtCore.Qt.FillRule.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.Point:

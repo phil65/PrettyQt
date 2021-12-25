@@ -73,7 +73,7 @@ class Pixmap(QtGui.QPixmap):
             datauri : str
         """
         device = core.Buffer()
-        assert device.open(core.Buffer.ReadWrite)
+        assert device.open_file("read_write")
         self.save(device, b"png")
         device.close()
         data = bytes(device.data())

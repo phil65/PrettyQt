@@ -91,7 +91,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
         # text_alignment: Optional[str] = None,
         checkstate: constants.StateStr | None = None,
         flags: QtCore.Qt.ItemFlags | None = None,
-        size_hint: QtCore.QSize | None = None,
+        size_hint: types.SizeType | None = None,
         is_user_type: bool = False,
     ) -> gui.StandardItem:
         item = gui.StandardItem(name)
@@ -122,7 +122,7 @@ class StandardItemModel(QtGui.QStandardItemModel):
         if whats_this:
             item.setWhatsThis(whats_this)
         if size_hint is not None:
-            item.setSizeHint(size_hint)
+            item.set_size_hint(size_hint)
         if checkstate is not None:
             item.set_checkstate(checkstate)
         self.appendRow([item])
