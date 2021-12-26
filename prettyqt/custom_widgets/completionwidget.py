@@ -24,7 +24,7 @@ class CompletionWidget(widgets.ListWidget):
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_StaticContents)
         original_policy = self._text_edit.focusPolicy()
 
-        self.setFocusPolicy(QtCore.Qt.FocusPolicy.NoFocus)
+        self.set_focus_policy("none")
         self._text_edit.setFocusPolicy(original_policy)
 
         # Ensure that the text edit keeps focus when widget is displayed.
@@ -120,11 +120,8 @@ class CompletionWidget(widgets.ListWidget):
         if screen_rect.size().height() + screen_rect.y() - point.y() - height < 0:
             point = self._text_edit.mapToGlobal(self._text_edit.cursorRect().topRight())
             point.setY(int(point.y() - height))
-        w = (
-            self.sizeHintForColumn(0)
-            + self.verticalScrollBar().sizeHint().width()
-            + 2 * self.frameWidth()
-        )
+        scrollbar_width = self.verticalScrollBar().sizeHint().width()
+        w = self.sizeHintForColumn(0) + scrollbar_width + 2 * self.frameWidth()
         self.setGeometry(point.x(), point.y(), w, height)
 
         # Move cursor to start of the prefix to replace it
@@ -171,9 +168,8 @@ class CompletionWidget(widgets.ListWidget):
         # Update current item
         prefix = self._current_text_cursor().selection().toPlainText()
         if prefix:
-            items = self.findItems(
-                prefix, (QtCore.Qt.MatchStartsWith | QtCore.Qt.MatchCaseSensitive)
-            )
+            flags = QtCore.Qt.MatchStartsWith | QtCore.Qt.MatchCaseSensitive
+            items = self.findItems(prefix, flags)
             if items:
                 self.setCurrentItem(items[0])
             else:
