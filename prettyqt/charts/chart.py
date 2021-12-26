@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import charts, constants, core, widgets
-from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.qt import QtCharts, QtCore
+from prettyqt.utils import InvalidParamError, bidict, types
 
 
 THEMES = bidict(
@@ -101,6 +101,11 @@ class Chart(QtCharts.QChart):
 
     def set_theme(self, theme_name: ThemeStr):
         self.setTheme(THEMES[theme_name])
+
+    def set_margins(self, margins: types.MarginsType):
+        if isinstance(margins, tuple):
+            margins = QtCore.QMargins(*margins)
+        self.setMargins(margins)
 
     def set_animation_options(self, option: AnimationOptionStr):
         self.setAnimationOptions(ANIMATION_OPTIONS[option])
