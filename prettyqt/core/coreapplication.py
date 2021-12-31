@@ -51,7 +51,8 @@ class CoreApplication(QtCore.QCoreApplication):
     @classmethod
     def disable_window_help_button(cls, state: bool = True):
         try:
-            attr = QtCore.Qt.ApplicationAttribute.AA_DisableWindowContextHelpButton
+            aa = QtCore.Qt.ApplicationAttribute
+            attr = aa.AA_DisableWindowContextHelpButton  # type: ignore
             cls.setAttribute(attr, state)
         except AttributeError:  # attribute not available in Qt6
             pass

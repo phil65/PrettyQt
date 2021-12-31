@@ -12,7 +12,9 @@ class NestedModel(  # type: ignore
 ):
 
     DEFAULT_FLAGS = (
-        constants.DRAG_ENABLED | constants.IS_ENABLED | constants.IS_SELECTABLE
+        constants.DRAG_ENABLED  # type: ignore
+        | constants.IS_ENABLED
+        | constants.IS_SELECTABLE
     )
 
     def __init__(self, *args, **kwargs):

@@ -31,4 +31,4 @@ class PluginLoader(QtCore.QPluginLoader):
         for k, v in kwargs.items():
             if v is True:
                 flag |= core.library.LOAD_HINTS[k]  # type: ignore
-        self.setLoadHints(flag)
+        self.setLoadHints(flag)  # type: ignore

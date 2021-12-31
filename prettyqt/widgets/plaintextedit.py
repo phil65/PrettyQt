@@ -160,10 +160,11 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
         """Set show white spaces flag."""
         doc = self.document()
         options = doc.defaultTextOption()
+        flag = QtGui.QTextOption.Flag.ShowTabsAndSpaces
         if show:
-            options.setFlags(options.flags() | QtGui.QTextOption.Flag.ShowTabsAndSpaces)
+            options.setFlags(options.flags() | flag)  # type: ignore
         else:
-            options.setFlags(options.flags() & ~QtGui.QTextOption.Flag.ShowTabsAndSpaces)
+            options.setFlags(options.flags() & ~flag)  # type: ignore
         doc.setDefaultTextOption(options)
 
     def highlight_current_line(self, color: types.ColorType = None):

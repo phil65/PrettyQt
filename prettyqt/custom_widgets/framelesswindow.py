@@ -61,8 +61,9 @@ class CustomTitleBar(widgets.Frame):
         self.maximize_button = TitleBarIcon("🗖")
         self.exit_button = TitleBarIcon("✕")
         self.setObjectName("ControlWidget")
+        state = QtCore.Qt.WindowState.WindowMinimized
         self.minimize_button.clicked.connect(
-            lambda: window_widget.setWindowState(QtCore.Qt.WindowMinimized)
+            lambda: window_widget.setWindowState(state)  # type: ignore
         )
         self.maximize_button.clicked.connect(
             lambda: (
@@ -99,7 +100,10 @@ class FramelessWindow(widgets.Widget):
         super().__init__(parent)
 
         # Remove window title bar and frame
-        self.setWindowFlags(QtCore.Qt.Window | QtCore.Qt.FramelessWindowHint)
+        self.setWindowFlags(
+            QtCore.Qt.WindowFlag.Window  # type: ignore
+            | QtCore.Qt.WindowFlag.FramelessWindowHint
+        )
 
         self.title_bar = CustomTitleBar(self)
         self.main_widget = widgets.MainWindow()
@@ -115,21 +119,14 @@ class FramelessWindow(widgets.Widget):
         self.grip_layout = widgets.GridLayout()
 
         self.grip_layout.addLayout(self.main_layout, 1, 1)
-        self.grip_layout.addWidget(EdgeGrip(QtCore.Qt.TopEdge), 0, 1)
-        self.grip_layout.addWidget(EdgeGrip(QtCore.Qt.RightEdge), 1, 2)
-        self.grip_layout.addWidget(EdgeGrip(QtCore.Qt.BottomEdge), 2, 1)
-        self.grip_layout.addWidget(EdgeGrip(QtCore.Qt.LeftEdge), 1, 0)
-        self.grip_layout.addWidget(EdgeGrip(QtCore.Qt.TopEdge | QtCore.Qt.LeftEdge), 0, 0)
-        self.grip_layout.addWidget(
-            EdgeGrip(QtCore.Qt.TopEdge | QtCore.Qt.RightEdge), 0, 2
-        )
-        self.grip_layout.addWidget(
-            EdgeGrip(QtCore.Qt.BottomEdge | QtCore.Qt.LeftEdge), 2, 0
-        )
-        self.grip_layout.addWidget(
-            EdgeGrip(QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge), 2, 2
-        )
-
+        self.grip_layout.addWidget(EdgeGrip("top"), 0, 1)
+        self.grip_layout.addWidget(EdgeGrip("right"), 1, 2)
+        self.grip_layout.addWidget(EdgeGrip("bottom"), 2, 1)
+        self.grip_layout.addWidget(EdgeGrip("left"), 1, 0)
+        self.grip_layout.addWidget(EdgeGrip("top_left"), 0, 0)
+        self.grip_layout.addWidget(EdgeGrip("top_right"), 0, 2)
+        self.grip_layout.addWidget(EdgeGrip("bottom_left"), 2, 0)
+        self.grip_layout.addWidget(EdgeGrip("bottom_right"), 2, 2)
         self.grip_layout.setContentsMargins(0, 0, 0, 0)
         self.grip_layout.setSpacing(0)
         self.setLayout(self.grip_layout)
@@ -162,7 +159,7 @@ class FramelessWindow(widgets.Widget):
     def changeEvent(self, event):
         # not sure if this should be done on non-windows
         if event.type() == event.WindowStateChange:
-            if self.windowState() & QtCore.Qt.WindowMaximized:
+            if self.windowState() & QtCore.Qt.WindowState.WindowMaximized:  # type: ignore
                 margin = abs(self.mapToGlobal(self.rect().topLeft()).y())
                 self.setContentsMargins(margin, margin, margin, margin)
             else:
@@ -233,31 +230,31 @@ class FramelessWindow(widgets.Widget):
 
 
 class EdgeGrip(widgets.Widget):
-    def __init__(self, edges: QtCore.Qt.Edges | QtCore.Qt.Edge, grip_size=6, parent=None):
+    def __init__(self, edges: str, grip_size=6, parent=None):
         super().__init__(parent)
         self.edges = edges
         self.grip_size = grip_size
         # Sides
-        if edges == QtCore.Qt.TopEdge:
+        if edges == "top":
             self.setCursor(QtCore.Qt.SizeVerCursor)
             self.setFixedHeight(self.grip_size)
-        elif edges == QtCore.Qt.RightEdge:
+        elif edges == "right":
             self.setCursor(QtCore.Qt.SizeHorCursor)
             self.setFixedWidth(self.grip_size)
-        elif edges == QtCore.Qt.BottomEdge:
+        elif edges == "bottom":
             self.setCursor(QtCore.Qt.SizeVerCursor)
             self.setFixedHeight(self.grip_size)
-        elif edges == QtCore.Qt.LeftEdge:
+        elif edges == "left":
             self.setCursor(QtCore.Qt.SizeHorCursor)
             self.setFixedWidth(self.grip_size)
         # Corners
-        elif edges == QtCore.Qt.TopEdge | QtCore.Qt.LeftEdge:
+        elif edges == "top_left":
             self.setCursor(QtCore.Qt.SizeFDiagCursor)
-        elif edges == QtCore.Qt.TopEdge | QtCore.Qt.RightEdge:
+        elif edges == "top_right":
             self.setCursor(QtCore.Qt.SizeBDiagCursor)
-        elif edges == QtCore.Qt.BottomEdge | QtCore.Qt.LeftEdge:
+        elif edges == "bottom_left":
             self.setCursor(QtCore.Qt.SizeBDiagCursor)
-        elif edges == QtCore.Qt.BottomEdge | QtCore.Qt.RightEdge:
+        elif edges == "bottom_right":
             self.setCursor(QtCore.Qt.SizeFDiagCursor)
 
     def mousePressEvent(self, event):

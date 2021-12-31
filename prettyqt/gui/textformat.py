@@ -96,7 +96,7 @@ class TextFormat(QtGui.QTextFormat):
             prop = QtGui.QTextFormat.FullWidthSelection
         else:
             prop = QtGui.QTextFormat.Property.FullWidthSelection  # type: ignore
-        self.setProperty(prop, value)
+        self.setProperty(prop, value)  # type: ignore
 
 
 if __name__ == "__main__":

@@ -48,7 +48,7 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
                     prefix = self.prefix.lower()
                 rank = completion.index(prefix)
                 idx = self.sourceModel().index(row, 0)
-                self.sourceModel().setData(idx, rank, USER_ROLE)
+                self.sourceModel().setData(idx, rank, USER_ROLE)  # type: ignore
                 return prefix in completion
             except ValueError:
                 return False
@@ -71,6 +71,6 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
                 if re.match(pattern_case, completion):
                     # favorise completions where case is matched
                     rank -= 10
-                self.sourceModel().setData(idx, rank, USER_ROLE)
+                self.sourceModel().setData(idx, rank, USER_ROLE)  # type: ignore
                 return True
         return len(self.prefix) == 0

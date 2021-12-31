@@ -6,13 +6,13 @@ from prettyqt import constants
 class ModelMixin:
 
     DATA_ROLE = constants.USER_ROLE
-    DTYPE_ROLE = constants.USER_ROLE + 1
-    NAME_ROLE = constants.USER_ROLE + 2
-    SORT_ROLE = constants.USER_ROLE + 3
+    DTYPE_ROLE = constants.USER_ROLE + 1  # type: ignore
+    NAME_ROLE = constants.USER_ROLE + 2  # type: ignore
+    SORT_ROLE = constants.USER_ROLE + 3  # type: ignore
     MAX_ROWS = 1_000_000
     HEADER = ["Name"]
     DEFAULT_FLAGS = (
-        constants.DRAG_ENABLED
+        constants.DRAG_ENABLED  # type: ignore
         | constants.IS_ENABLED
         | constants.IS_SELECTABLE
         | constants.NO_CHILDREN

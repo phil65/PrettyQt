@@ -19,7 +19,7 @@ class CompletionWidget(widgets.ListWidget):
 
         # We need Popup style to ensure correct mouse interaction
         # (dialog would dissappear on mouse click with ToolTip style)
-        self.setWindowFlags(QtCore.Qt.WindowType.Popup)
+        self.setWindowFlags(QtCore.Qt.WindowType.Popup)  # type: ignore
 
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_StaticContents)
         original_policy = self._text_edit.focusPolicy()
@@ -102,7 +102,7 @@ class CompletionWidget(widgets.ListWidget):
                 path_items.append(item.replace('"', ""))
             else:
                 list_item = widgets.ListWidgetItem()
-                list_item.setData(QtCore.Qt.ItemDataRole.UserRole, item)
+                list_item.setData(QtCore.Qt.ItemDataRole.UserRole, item)  # type: ignore
                 # Need to split to only show last element of a dot completion
                 list_item.setText(item.split(".")[-1])
                 self.addItem(list_item)
@@ -110,7 +110,7 @@ class CompletionWidget(widgets.ListWidget):
         common_prefix = os.path.dirname(os.path.commonprefix(path_items))
         for path_item in path_items:
             list_item = widgets.ListWidgetItem()
-            list_item.setData(QtCore.Qt.ItemDataRole.UserRole, path_item)
+            list_item.setData(QtCore.Qt.ItemDataRole.UserRole, path_item)  # type: ignore
             text = path_item.split(common_prefix)[-1] if common_prefix else path_item
             list_item.setText(text)
             self.addItem(list_item)
@@ -147,7 +147,7 @@ class CompletionWidget(widgets.ListWidget):
 
     def _complete_current(self):
         """Perform the completion with the currently selected item."""
-        text = self.currentItem().data(QtCore.Qt.ItemDataRole.UserRole)
+        text = self.currentItem().data(QtCore.Qt.ItemDataRole.UserRole)  # type: ignore
         self._current_text_cursor().insertText(text)
         self.hide()
 
@@ -168,7 +168,10 @@ class CompletionWidget(widgets.ListWidget):
         # Update current item
         prefix = self._current_text_cursor().selection().toPlainText()
         if prefix:
-            flags = QtCore.Qt.MatchStartsWith | QtCore.Qt.MatchCaseSensitive
+            flags = (
+                QtCore.Qt.MatchFlag.MatchStartsWith  # type: ignore
+                | QtCore.Qt.MatchFlag.MatchCaseSensitive
+            )
             items = self.findItems(prefix, flags)
             if items:
                 self.setCurrentItem(items[0])

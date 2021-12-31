@@ -109,13 +109,14 @@ class PolygonF(QtGui.QPolygonF):
         poly.add_points(*points)
         return poly
 
-    def get_data_buffer(self):
-        if API == "PySide6":
+    def get_data_buffer(self, size: int):
+        self.resize(size)
+        if API == "pyside6":
             import shiboken6
 
             address = shiboken6.getCppPointer(self.data())
-            buffer = (ctypes.c_double * 2 * self.size()).from_address(address)
-        elif API == "PySide2":
+            buffer = (ctypes.c_double * 2 * self.size()).from_address(address[0])
+        elif API == "pyside2":
             import shiboken2
 
             address = shiboken2.getCppPointer(self.data())
@@ -126,17 +127,15 @@ class PolygonF(QtGui.QPolygonF):
         return buffer
 
     @classmethod
-    def from_xy(cls, xdata, ydata):
+    def from_xy(cls, xdata, ydata) -> PolygonF:
         import numpy as np
 
         size = len(xdata)
-        polyline = cls(size)
-        pointer = polyline.data()
-        dtype, tinfo = np.float, np.finfo  # integers: = np.int, np.iinfo
-        pointer.setsize(2 * polyline.size() * tinfo(dtype).dtype.itemsize)
-        memory = np.frombuffer(pointer, dtype)
-        memory[: (size - 1) * 2 + 1 : 2] = xdata
-        memory[1 : (size - 1) * 2 + 2 : 2] = ydata
+        polyline = cls()
+        buffer = polyline.get_data_buffer(size)
+        memory = np.frombuffer(buffer, np.float64)
+        memory[: (size - 1) * 2 + 1 : 2] = np.array(xdata, dtype=np.float64, copy=False)
+        memory[1 : (size - 1) * 2 + 2 : 2] = np.array(ydata, dtype=np.float64, copy=False)
         return polyline
 
 

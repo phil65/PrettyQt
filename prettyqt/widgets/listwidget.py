@@ -145,7 +145,7 @@ class ListWidget(QtWidgets.QListWidget):
         self.addItem(item)
 
     def get_value(self) -> list[Any]:
-        return [i.data(constants.USER_ROLE) for i in self.selectedItems()]
+        return [i.data(constants.USER_ROLE) for i in self.selectedItems()]  # type: ignore
 
     def set_value(self, value):
         for i in self.get_children():
