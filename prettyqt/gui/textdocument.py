@@ -208,6 +208,16 @@ class TextDocument(QtGui.QTextDocument):
         writer.set_file_name(path)
         return writer.write(self)
 
+    def show_whitespace_and_tabs(self, show: bool):
+        """Set show white spaces flag."""
+        options = self.get_default_text_option()
+        flag = QtGui.QTextOption.Flag.ShowTabsAndSpaces
+        if show:
+            options.setFlags(options.flags() | flag)  # type: ignore
+        else:
+            options.setFlags(options.flags() & ~flag)  # type: ignore
+        self.setDefaultTextOption(options)
+
 
 if __name__ == "__main__":
     doc = TextDocument("This is a test\nHello")
