@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/webenginecore.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1464,6 +1464,43 @@ WebEngineDownloadRequest        </code>
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginecore/webenginedownloadrequest.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineDownloadRequest</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineDownloadRequest</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_interrupt_reason</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DownloadInterruptReasonStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DOWNLOAD_INTERRUPT_REASONS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">interruptReason</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DownloadStateStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">DOWNLOAD_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">SavePageFormatStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the save page format.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            fmt: save page format for the layout</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: save page format does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">fmt</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SAVE_PAGE_FORMAT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">SAVE_PAGE_FORMAT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setSavePageFormat</span><span class="p">(</span><span class="n">SAVE_PAGE_FORMAT</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SavePageFormatStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current save page format.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Save page format</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SAVE_PAGE_FORMAT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">savePageFormat</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1663,6 +1700,51 @@ WebEngineHttpRequest            (<span title="PyQt5.QtWebEngineCore.QWebEngineHt
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginecore/webenginehttprequest.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineHttpRequest</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineHttpRequest</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">encode</span><span class="p">()),</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span>
+
+    <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">()}</span>
+
+    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_post_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">postData</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">MethodStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set method this WebEngine request is using.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            method: method</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: method does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">METHODS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">METHODS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMethod</span><span class="p">(</span><span class="n">METHODS</span><span class="p">[</span><span class="n">method</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the method this WebEngine request is using.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            method</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">METHODS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">method</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1879,6 +1961,231 @@ WebEnginePage            (<span title="PyQt5.QtWebEngineWidgets.QWebEnginePage">
 
       <p>A web engine page holds the HTML document contents, link history + actions.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEnginePage</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A web engine page holds the HTML document contents, link history + actions.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">audio_muted</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">isAudioMuted</span><span class="p">(),</span>
+            <span class="n">background_color</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">backgroundColor</span><span class="p">(),</span>
+            <span class="c1"># has_selection=self.hasSelection(),</span>
+            <span class="n">lifecycle_state</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_lifecycle_state</span><span class="p">(),</span>
+            <span class="c1"># scroll_position=self.scrollPosition(),</span>
+            <span class="n">url</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">()),</span>
+            <span class="n">visible</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">isVisible</span><span class="p">(),</span>
+            <span class="n">history</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">()),</span>
+            <span class="n">zoom_factor</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">zoomFactor</span><span class="p">(),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
+
+<span class="sd">        Clears the Page and loads the URL.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url: URL to set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="o">.</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_icon_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iconUrl</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_requested_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">requestedUrl</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_scroll_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">PointF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">PointF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scrollPosition</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_contents_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">SizeF</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">SizeF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contentsSize</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load the URL.</span>
+
+<span class="sd">        Loads the specified url and displays it.</span>
+
+<span class="sd">        Note: The Page remains the same until enough data has arrived</span>
+<span class="sd">        to display the new URL.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url: URL to load</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="o">.</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the zoom factor for the Page.</span>
+
+<span class="sd">        Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            zoom: Zoom factor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setZoomFactor</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">find_text</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
+
+<span class="sd">        Finds the specified string, subString, in the page, using the given options.</span>
+<span class="sd">        The findTextFinished() signal is emitted when a string search is completed.</span>
+
+<span class="sd">        To clear the search highlight, just pass an empty string.</span>
+
+<span class="sd">        The resultCallback must take a boolean parameter.</span>
+<span class="sd">        It will be called with a value of true if the subString was found;</span>
+<span class="sd">        otherwise the callback value will be false.</span>
+
+<span class="sd">        Warning: It is guaranteed that the callback is always called,</span>
+<span class="sd">        but it might be done during page destruction. When WebEnginePage is deleted,</span>
+<span class="sd">        the callback is triggered with an invalid value and it is not safe to use</span>
+<span class="sd">        the corresponding QWebEnginePage or QWebEnginePage instance inside it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            string: string to search for</span>
+<span class="sd">            backward: search backwards</span>
+<span class="sd">            case_sensitive: case-sensitive search</span>
+<span class="sd">            callback: result callback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">callback</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">do_nothing</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="k">pass</span>
+
+            <span class="n">callback</span> <span class="o">=</span> <span class="n">do_nothing</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="o">.</span><span class="n">FindFlag</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">case_sensitive</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FindFlag</span><span class="o">.</span><span class="n">FindCaseSensitively</span>
+        <span class="k">if</span> <span class="n">backward</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="bp">self</span><span class="o">.</span><span class="n">FindFlag</span><span class="o">.</span><span class="n">FindBackward</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">findText</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">LifecycleStateStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set lifecycle state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            state: lifecycle state</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: lifecycle state does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">state</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">LIFECYCLE_STATE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="n">LIFECYCLE_STATE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLifecycleState</span><span class="p">(</span><span class="n">LIFECYCLE_STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifecycleStateStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the current lifecycle state.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            lifecycle state</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">LIFECYCLE_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">lifecycleState</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">trigger_action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="p">:</span> <span class="n">WebActionStr</span><span class="p">,</span> <span class="n">checked</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">triggerAction</span><span class="p">(</span><span class="n">WEB_ACTION</span><span class="p">[</span><span class="n">action</span><span class="p">],</span> <span class="n">checked</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_feature_permission</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span><span class="p">,</span>
+        <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureStr</span><span class="p">,</span>
+        <span class="n">policy</span><span class="p">:</span> <span class="n">PermissionPolicyStr</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFeaturePermission</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">FEATURE</span><span class="p">[</span><span class="n">feature</span><span class="p">],</span> <span class="n">PERMISSION_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_history</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineHistory</span><span class="p">:</span>
+        <span class="n">hist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">history</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineHistory</span><span class="p">(</span><span class="n">hist</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineSettings</span><span class="p">:</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineSettings</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_setting</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">setting_name</span><span class="p">:</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">webenginesettings</span><span class="o">.</span><span class="n">WebAttributeStr</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()[</span><span class="n">setting_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">get_setting</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">setting_name</span><span class="p">:</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">webenginesettings</span><span class="o">.</span><span class="n">WebAttributeStr</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()[</span><span class="n">setting_name</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_scripts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineScriptCollection</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineScriptCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scripts</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_context_menu_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineContextMenuRequest</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineContextMenuRequest</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contextMenuData</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">open_in_browser</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">getUrl</span><span class="p">()</span><span class="o">.</span><span class="n">toString</span><span class="p">())</span>
+        <span class="k">except</span> <span class="ne">ValueError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">exception</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+    <span class="c1"># def choose_files(</span>
+    <span class="c1">#     self,</span>
+    <span class="c1">#     mode: FileSelectionModeStr,</span>
+    <span class="c1">#     old_files: List[str],</span>
+    <span class="c1">#     mimetypes: List[str],</span>
+    <span class="c1"># ) -&gt; List[str]:</span>
+    <span class="c1">#     if mode not in FILE_SELECTION_MODE:</span>
+    <span class="c1">#         raise InvalidParamError(mode, FILE_SELECTION_MODE)</span>
+    <span class="c1">#     return self.chooseFiles(FILE_SELECTION_MODE[mode], old_files, mimetypes)</span>
+
+    <span class="k">def</span> <span class="nf">mousedown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">btn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Simulate a mousedown event on the targeted element.</span>
+
+<span class="sd">        :param selector: A CSS3 selector to targeted element.</span>
+<span class="sd">        :param btn: The number of mouse button.</span>
+<span class="sd">            0 - left button,</span>
+<span class="sd">            1 - middle button,</span>
+<span class="sd">            2 - right button</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">runJavaScript</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">            (function () </span><span class="se">{{</span><span class="s2"></span>
+<span class="s2">                var element = document.querySelector(</span><span class="si">{</span><span class="n">selector</span><span class="si">!r}</span><span class="s2">);</span>
+<span class="s2">                var evt = document.createEvent(&quot;MouseEvents&quot;);</span>
+<span class="s2">                evt.initMouseEvent(&quot;mousedown&quot;, true, true, window,</span>
+<span class="s2">                                   1, 1, 1, 1, 1, false, false, false, false,</span>
+<span class="s2">                                   </span><span class="si">{</span><span class="n">btn</span><span class="si">!r}</span><span class="s2">, element);</span>
+<span class="s2">                return element.dispatchEvent(evt);</span>
+<span class="s2">            </span><span class="se">}}</span><span class="s2">)();</span>
+<span class="s2">        &quot;&quot;&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_input_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the value of the input matched by given selector.&quot;&quot;&quot;</span>
+        <span class="n">script</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;document.querySelector(</span><span class="si">{</span><span class="n">selector</span><span class="si">!r}</span><span class="s1">).setAttribute(&quot;value&quot;, &quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;)&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">runJavaScript</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2066,7 +2373,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 
 
 <h4 id="prettyqt.webenginecore.webenginepage.WebEnginePage.load_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2091,7 +2398,7 @@ to display the new URL.</p>
   <tbody>
       <tr>
         <td><code>url</code></td>
-        <td><code>QtCore.QUrl | str | os.PathLike</code></td>
+        <td><code>types.UrlType | types.PathType</code></td>
         <td><p>URL to load</p></td>
         <td><em>required</em></td>
       </tr>
@@ -2099,7 +2406,7 @@ to display the new URL.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
@@ -2280,7 +2587,7 @@ to display the new URL.</p>
 
 
 <h4 id="prettyqt.webenginecore.webenginepage.WebEnginePage.set_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2303,7 +2610,7 @@ to display the new URL.</p>
   <tbody>
       <tr>
         <td><code>url</code></td>
-        <td><code>str | os.PathLike</code></td>
+        <td><code>types.PathType</code></td>
         <td><p>URL to set</p></td>
         <td><em>required</em></td>
       </tr>
@@ -2311,7 +2618,7 @@ to display the new URL.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
 
 <span class="sd">    Clears the Page and loads the URL.</span>
@@ -2453,6 +2760,55 @@ WebEngineProfile            (<span title="PyQt5.QtWebEngineWidgets.QWebEnginePro
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineProfile</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineProfile</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            policy: persistent cookie policy</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: Policy does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PERSISTENT_COOKIE_POLICY</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">PERSISTENT_COOKIE_POLICY</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPersistentCookiesPolicy</span><span class="p">(</span><span class="n">PERSISTENT_COOKIE_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current persistent cookie policy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Persistent cookie policy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PERSISTENT_COOKIE_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">persistentCookiesPolicy</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">HttpCacheTypeStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the http cache type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            typ: http cache type</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: Cache type does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">HTTP_CACHE_TYPE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">HTTP_CACHE_TYPE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setHttpCacheType</span><span class="p">(</span><span class="n">HTTP_CACHE_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HttpCacheTypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current http cache type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Http cache type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">HTTP_CACHE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">httpCacheType</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_scripts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineScriptCollection</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineScriptCollection</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scripts</span><span class="p">())</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2765,6 +3121,31 @@ WebEngineScript            (<span title="PyQt5.QtWebEngineWidgets.QWebEngineScri
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginecore/webenginescript.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineScript</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineScript</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">InjectionPointStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set injection point.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            point: injection point to use</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: injection point does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">point</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INJECTION_POINT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="n">INJECTION_POINT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setInjectionPoint</span><span class="p">(</span><span class="n">INJECTION_POINT</span><span class="p">[</span><span class="n">point</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InjectionPointStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return injection point.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            injection point</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">INJECTION_POINT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">injectionPoint</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2967,6 +3348,96 @@ WebEngineSettings        </code>
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineSettings</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineSettings</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">WebAttributeStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">WEB_ATTRIBUTES</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">WebAttributeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">testAttribute</span><span class="p">(</span><span class="n">WEB_ATTRIBUTES</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">WebAttributeStr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">resetAttribute</span><span class="p">(</span><span class="n">WEB_ATTRIBUTES</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the unknown url scheme policy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            policy: unknown url scheme policy</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: Policy does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">UNKNOWN_URL_SCHEME_POLICY</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">UNKNOWN_URL_SCHEME_POLICY</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setUnknownUrlSchemePolicy</span><span class="p">(</span><span class="n">UNKNOWN_URL_SCHEME_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current unknown url scheme policy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Unknown url scheme policy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">UNKNOWN_URL_SCHEME_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">unknownUrlSchemePolicy</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the actual font family to family for the specified generic family, which.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            which: family to set</span>
+<span class="sd">            family: generic family</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: Font family does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">which</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FONT_FAMILY</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">which</span><span class="p">,</span> <span class="n">FONT_FAMILY</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontFamily</span><span class="p">(</span><span class="n">FONT_FAMILY</span><span class="p">[</span><span class="n">which</span><span class="p">],</span> <span class="n">family</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the actual font family for the specified generic font family.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            family: generic font family</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Font family</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">fontFamily</span><span class="p">(</span><span class="n">FONT_FAMILY</span><span class="p">[</span><span class="n">family</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">set_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the font size for type to size in pixels.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            typ: font size type</span>
+<span class="sd">            size: size in pixels</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: Font size does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FONT_SIZE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FONT_SIZE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontSize</span><span class="p">(</span><span class="n">FONT_SIZE</span><span class="p">[</span><span class="n">typ</span><span class="p">],</span> <span class="n">size</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the default font size for type in pixels.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            typ: font size type</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Font size</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">fontSize</span><span class="p">(</span><span class="n">FONT_SIZE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3457,6 +3928,42 @@ WebEngineUrlScheme            (<span title="PyQt5.QtWebEngineCore.QWebEngineUrlS
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginecore/webengineurlscheme.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineUrlScheme</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineUrlScheme</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_scheme_by_name</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">WebEngineUrlScheme</span><span class="p">:</span>
+        <span class="n">scheme</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">schemeByName</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">scheme</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span>
+
+    <span class="k">def</span> <span class="nf">set_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">syntax</span><span class="p">:</span> <span class="n">SyntaxStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set syntax.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            syntax: syntax to use</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: syntax does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">syntax</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SYNTAX</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">syntax</span><span class="p">,</span> <span class="n">SYNTAX</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSyntax</span><span class="p">(</span><span class="n">SYNTAX</span><span class="p">[</span><span class="n">syntax</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SyntaxStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return syntax.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            syntax</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SYNTAX</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">syntax</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3692,10 +4199,10 @@ WebEngineUrlScheme            (<span title="PyQt5.QtWebEngineCore.QWebEngineUrlS
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/network.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1343,6 +1343,96 @@ AbstractSocket            (<span title="PyQt5.QtNetwork.QAbstractSocket">QAbstra
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/abstractsocket.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractSocket</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QAbstractSocket</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+
+    <span class="k">def</span> <span class="nf">bind_to</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">,</span>
+        <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">bind_mode</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QAbstractSocket</span><span class="o">.</span><span class="n">BindMode</span> <span class="o">|</span> <span class="n">BindModeStr</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;default_for_platform&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">address</span> <span class="o">=</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">bind_mode</span> <span class="ow">in</span> <span class="n">BIND_MODE</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">BIND_MODE</span><span class="p">[</span><span class="n">bind_mode</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">bind_mode</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">connect_to_host</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">hostname</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">open_mode</span><span class="p">:</span> <span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QIODevice</span><span class="o">.</span><span class="n">OpenMode</span> <span class="o">|</span> <span class="n">core</span><span class="o">.</span><span class="n">iodevice</span><span class="o">.</span><span class="n">OpenModeStr</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;read_write&quot;</span><span class="p">,</span>
+        <span class="n">protocol</span><span class="p">:</span> <span class="p">(</span>
+            <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QAbstractSocket</span><span class="o">.</span><span class="n">NetworkLayerProtocol</span> <span class="o">|</span> <span class="n">NetworkLayerProtocolStr</span>
+        <span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;any_ip&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">open_mode</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QIODevice</span><span class="o">.</span><span class="n">OpenMode</span><span class="p">):</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">open_mode</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">iodevice</span><span class="o">.</span><span class="n">OPEN_MODES</span><span class="p">[</span><span class="n">open_mode</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QAbstractSocket</span><span class="o">.</span><span class="n">NetworkLayerProtocol</span><span class="p">):</span>
+            <span class="n">prot</span> <span class="o">=</span> <span class="n">protocol</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prot</span> <span class="o">=</span> <span class="n">NETWORK_LAYER_PROTOCOL</span><span class="p">[</span><span class="n">protocol</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">connectToHost</span><span class="p">(</span><span class="n">hostname</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">prot</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SocketErrorStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SOCKET_ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PauseModeStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set pause mode.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mode: pause mode</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: pause mode does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAUSE_MODES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">PAUSE_MODES</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPauseMode</span><span class="p">(</span><span class="n">PAUSE_MODES</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PauseModeStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">PAUSE_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pauseMode</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_proxy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkProxy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proxy</span><span class="p">())</span>
+
+    <span class="c1"># def set_socket_option(self, name: str, value):</span>
+    <span class="c1">#     if name not in SOCKET_OPTION:</span>
+    <span class="c1">#         raise InvalidParamError(name, SOCKET_OPTION)</span>
+    <span class="c1">#     self.setSocketOption(SOCKET_OPTION[name], value)</span>
+
+    <span class="c1"># def get_socket_option(self, name: str):</span>
+    <span class="c1">#     return self.socketOption(SOCKET_OPTION[name])</span>
+
+    <span class="c1"># def set_type_of_service(self, typ: str):</span>
+    <span class="c1">#     if typ not in TYPE_OF_SERVICE:</span>
+    <span class="c1">#         raise InvalidParamError(typ, TYPE_OF_SERVICE)</span>
+    <span class="c1">#     self.set_socket_option(&quot;type_of_service&quot;, TYPE_OF_SERVICE[typ])</span>
+
+    <span class="c1"># def get_type_of_service(self):</span>
+    <span class="c1">#     opt = self.get_socket_option(&quot;type_of_service&quot;)</span>
+    <span class="c1">#     return TYPE_OF_SERVICE.inverse[opt]</span>
+
+    <span class="k">def</span> <span class="nf">get_socket_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SocketTypeStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SOCKET_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">socketType</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SocketStateStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SOCKET_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_local_address</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">localAddress</span><span class="p">())</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1500,6 +1590,37 @@ HttpMultiPart            (<span title="PyQt5.QtNetwork.QHttpMultiPart">QHttpMult
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/httpmultipart.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">HttpMultiPart</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHttpMultiPart</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHttpPart</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ContentTypeStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set content type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            typ: content type</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: content type does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CONTENT_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">CONTENT_TYPES</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="n">CONTENT_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">set_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundary</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">boundary</span> <span class="o">=</span> <span class="n">boundary</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+            <span class="n">boundary</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">boundary</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setBoundary</span><span class="p">(</span><span class="n">boundary</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boundary</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1653,6 +1774,64 @@ NetworkAccessManager            (<span title="PyQt5.QtNetwork.QNetworkAccessMana
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkAccessManager</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkAccessManager</span><span class="p">):</span>
+    <span class="c1"># def request(</span>
+    <span class="c1">#     self,</span>
+    <span class="c1">#     method,</span>
+    <span class="c1">#     url,</span>
+    <span class="c1">#     headers=None,</span>
+    <span class="c1">#     cookies=None,</span>
+    <span class="c1">#     files=None,</span>
+    <span class="c1">#     auth=None,</span>
+    <span class="c1">#     timeout=None,</span>
+    <span class="c1">#     allow_redirects=True,</span>
+    <span class="c1"># ):</span>
+    <span class="c1">#     req = network.NetworkRequest()</span>
+    <span class="c1">#     if allow_redirects:</span>
+    <span class="c1">#         pass</span>
+
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">request</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="n">request</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
+
+    <span class="c1"># def post(self, url, data=None, json=None):</span>
+    <span class="c1">#     pass</span>
+
+    <span class="c1"># def put(self, url, data=None, json=None):</span>
+    <span class="c1">#     pass</span>
+
+    <span class="c1"># def patch(self, url, data=None):</span>
+    <span class="c1">#     pass</span>
+
+    <span class="c1"># def delete(self, url):</span>
+    <span class="c1">#     pass</span>
+
+    <span class="k">def</span> <span class="nf">set_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set redirect policy.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            policy: redirect policy</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: redirect policy does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">policy</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">policy</span><span class="p">,</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setRedirectPolicy</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the current redirect policy.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            redirect policy</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">REDIRECT_POLICIES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">redirectPolicy</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1671,7 +1850,7 @@ NetworkAccessManager            (<span title="PyQt5.QtNetwork.QNetworkAccessMana
 
 
 <h4 id="prettyqt.network.networkaccessmanager.NetworkAccessManager.get" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1682,7 +1861,7 @@ NetworkAccessManager            (<span title="PyQt5.QtNetwork.QNetworkAccessMana
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="n">request</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -1875,6 +2054,49 @@ NetworkAddressEntry            (<span title="PyQt5.QtNetwork.QNetworkAddressEntr
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/networkaddressentry.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkAddressEntry</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkAddressEntry</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return whether this address is eligible for publication in the DNS.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            DNS eligibility</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">DNS_ELIGIBILITY_STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dnsEligibility</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the DNS eligibility flag for this address to status.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            status: DNS eligibility status</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: dns eligibility status does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">status</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">DNS_ELIGIBILITY_STATUS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">DNS_ELIGIBILITY_STATUS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDnsEligibility</span><span class="p">(</span><span class="n">DNS_ELIGIBILITY_STATUS</span><span class="p">[</span><span class="n">status</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ip</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">set_ip</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ip</span><span class="p">:</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setIp</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="n">ip</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_netmask</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netmask</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">set_netmask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">netmask</span><span class="p">:</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setNetmask</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="n">netmask</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_preferred_lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">DeadlineTimer</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">DeadlineTimer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">preferredLifetime</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_validity_lifetime</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">DeadlineTimer</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">DeadlineTimer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">validityLifetime</span><span class="p">())</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2079,6 +2301,39 @@ NetworkInterface            (<span title="PyQt5.QtNetwork.QNetworkInterface">QNe
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/networkinterface.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkInterface</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkInterface</span><span class="p">):</span>
+    <span class="c1"># def __bool__(self):</span>
+    <span class="c1">#     return self.isValid()</span>
+
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InterfaceTypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the interface type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            interface type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">INTERFACE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_address_entries</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">network</span><span class="o">.</span><span class="n">NetworkAddressEntry</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">network</span><span class="o">.</span><span class="n">NetworkAddressEntry</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">addressEntries</span><span class="p">()]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_addresses</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">NetworkInterface</span><span class="o">.</span><span class="n">allAddresses</span><span class="p">()]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_all_interfaces</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">network</span><span class="o">.</span><span class="n">NetworkInterface</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">NetworkInterface</span><span class="o">.</span><span class="n">allInterfaces</span><span class="p">()]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_interface_from_name</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NetworkInterface</span><span class="p">:</span>
+        <span class="n">interface</span> <span class="o">=</span> <span class="n">NetworkInterface</span><span class="o">.</span><span class="n">interfaceFromName</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="c1"># if not interface:</span>
+        <span class="c1">#     return None</span>
+        <span class="k">return</span> <span class="n">NetworkInterface</span><span class="p">(</span><span class="n">interface</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2208,6 +2463,63 @@ NetworkProxy            (<span title="PyQt5.QtNetwork.QNetworkProxy">QNetworkPro
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkProxy</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkProxy</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">CapabilityStr</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">CAPABILITIES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">capabilities</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">capability</span><span class="p">:</span> <span class="n">CapabilityStr</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">capability</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">CAPABILITIES</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">CAPABILITIES</span><span class="p">)</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">merge_flags</span><span class="p">(</span><span class="n">capability</span><span class="p">,</span> <span class="n">CAPABILITIES</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCapabilities</span><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KnownHeaderStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KNOWN_HEADER</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KNOWN_HEADER</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KNOWN_HEADER</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KnownHeaderStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KNOWN_HEADER</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KNOWN_HEADER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">KNOWN_HEADER</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeaderList</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setRawHeader</span><span class="p">(</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">encode</span><span class="p">()),</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ProxyTypeStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set proxy type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            typ: proxy type</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: proxy type does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PROXY_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">PROXY_TYPES</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">PROXY_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProxyTypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the proxy type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PROXY_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2416,6 +2728,71 @@ NetworkRequest            (<span title="PyQt5.QtNetwork.QNetworkRequest">QNetwor
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkRequest</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_url</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">set_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">KnownHeaderStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">KNOWN_HEADER</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">KNOWN_HEADER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setHeader</span><span class="p">(</span><span class="n">KNOWN_HEADER</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_header</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">KnownHeaderStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">KNOWN_HEADER</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">KNOWN_HEADER</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">KNOWN_HEADER</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">set_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">headers</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setRawHeader</span><span class="p">(</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">k</span><span class="o">.</span><span class="n">encode</span><span class="p">()),</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+            <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeaderList</span><span class="p">()</span>
+        <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">):</span>
+        <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set priority.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            priority: priority</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: priority does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">priority</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PRIORITY</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">priority</span><span class="p">,</span> <span class="n">PRIORITY</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPriority</span><span class="p">(</span><span class="n">PRIORITY</span><span class="p">[</span><span class="n">priority</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get the current priority.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            priority</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PRIORITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">priority</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2615,6 +2992,26 @@ TcpServer            (<span title="PyQt5.QtNetwork.QTcpServer">QTcpServer</span>
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/network/tcpserver.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TcpServer</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QTcpServer</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">address</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">port</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_server_address</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">HostAddress</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">serverAddress</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_proxy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkProxy</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkProxy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">proxy</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_server_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">abstractsocket</span><span class="o">.</span><span class="n">SocketErrorStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">network</span><span class="o">.</span><span class="n">abstractsocket</span><span class="o">.</span><span class="n">SOCKET_ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">serverError</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2765,10 +3162,10 @@ TcpServer            (<span title="PyQt5.QtNetwork.QTcpServer">QTcpServer</span>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

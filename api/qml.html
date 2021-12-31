@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/qml.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -877,6 +877,66 @@ JSValue            (<span title="PyQt5.QtQml.QJSValue">QJSValue</span>)
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/qml/jsvalue.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JSValue</span><span class="p">(</span><span class="n">QtQml</span><span class="o">.</span><span class="n">QJSValue</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s2">&quot;length&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deleteProperty</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">iterator</span> <span class="o">=</span> <span class="n">qml</span><span class="o">.</span><span class="n">JSValueIterator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">iterator</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasProperty</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">call</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">error_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">errorType</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">ERROR_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">error_type</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Convert any python object into a QJSValue (must happen in GUI thread).&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">array</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">array</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;unknown type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1016,6 +1076,54 @@ QmlEngine            (<span title="PyQt5.QtQml.QQmlEngine">QQmlEngine</span>)
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QmlEngine</span><span class="p">(</span><span class="n">QtQml</span><span class="o">.</span><span class="n">QQmlEngine</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the object ownership.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            mode: object ownership to use</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: invalid object ownership</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setObjectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return object ownership.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            object ownership</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OBJECT_OWNERSHIP</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">objectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">add_import_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addImportPath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">add_plugin_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addPluginPath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">get_plugin_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">pluginPathList</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_import_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">importPathList</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_base_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setBaseUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_base_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">baseUrl</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">set_offline_storage_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setOfflineStoragePath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1256,10 +1364,10 @@ QmlEngine            (<span title="PyQt5.QtQml.QQmlEngine">QQmlEngine</span>)
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/syntaxhighlighters.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1315,6 +1315,41 @@ HighlightRule        </code>
 
       <p>HighlightRule(regex: 'str | list[str]' = '', color: 'str' = 'black', italic: 'bool' = False, bold: 'bool' = False, minimal: 'bool' = False, font_size: 'float | None' = None, nth: 'int' = 0, fmt: 'gui.TextCharFormat' = TextCharFormat(2))</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/highlightrule.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span>
+<span class="k">class</span> <span class="nc">HighlightRule</span><span class="p">:</span>
+    <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">color</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span>
+    <span class="n">italic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">bold</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">minimal</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">font_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">nth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">compiled</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">fmt</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">regex</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">compiled</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">regex</span><span class="p">)</span>
+            <span class="c1"># cls.compiled.setMinimal(True)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">compiled</span> <span class="o">=</span> <span class="p">[</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">r</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="bp">cls</span><span class="o">.</span><span class="n">regex</span><span class="p">]</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">fmt</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">get_format</span><span class="p">()</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">get_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">:</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">()</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">setFontItalic</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">italic</span><span class="p">)</span>
+        <span class="n">fmt</span><span class="o">.</span><span class="n">set_foreground_color</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">font_size</span><span class="p">:</span>
+            <span class="n">fmt</span><span class="o">.</span><span class="n">setFontPointSize</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">font_size</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">cls</span><span class="o">.</span><span class="n">bold</span><span class="p">:</span>
+            <span class="n">fmt</span><span class="o">.</span><span class="n">set_font_weight</span><span class="p">(</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">fmt</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1447,6 +1482,21 @@ JsonHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.SyntaxHighl
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/jsonhighlighter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JsonHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Highlight a block of code using the rules outlined in the Constructor.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">BRACKETS</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">SYMBOL_FORMAT</span><span class="p">)</span>
+
+        <span class="n">text</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">&quot;&#39;</span><span class="p">,</span> <span class="s2">&quot;  &quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">REGEXP1</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">NAME_FORMAT</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">REGEXP2</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">VALUE_FORMAT</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1569,6 +1619,50 @@ MarkdownHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.SyntaxH
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/markdownhighlighter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MarkdownHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+
+    <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_match_multiline</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">*</span><span class="n">TRI_SINGLE</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_match_multiline</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">delimiter</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpression</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span>
+    <span class="p">):</span>
+        <span class="c1"># If inside triple-single quotes, start at 0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">previousBlockState</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">add</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Otherwise, look for the delimiter on this line</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">():</span>
+                <span class="k">return</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+            <span class="n">add</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
+
+        <span class="c1"># As long as there&#39;s a delimiter match on this line...</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Look for the ending delimiter</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+            <span class="c1"># Ending delimiter on this line?</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="o">&gt;=</span> <span class="n">add</span><span class="p">:</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="n">end</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># No; multi-line string</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">length</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
+            <span class="c1"># Look for the next match</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1677,6 +1771,134 @@ PygmentsHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.SyntaxH
 
       <p>Syntax highlighter that uses Pygments for parsing.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PygmentsHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Syntax highlighter that uses Pygments for parsing.&quot;&quot;&quot;</span>
+
+    <span class="c1"># ---------------------------------------------------------------------------</span>
+    <span class="c1">#  &quot;QSyntaxHighlighter&quot; interface</span>
+    <span class="c1"># ---------------------------------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span><span class="p">,</span> <span class="n">lexer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_document</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_formatter</span> <span class="o">=</span> <span class="n">HtmlFormatter</span><span class="p">(</span><span class="n">nowrap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">lexer</span> <span class="o">==</span> <span class="s2">&quot;regex&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span> <span class="o">=</span> <span class="n">load_lexer_from_file</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">RE_LEXER_PATH</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span> <span class="o">=</span> <span class="n">get_lexer_by_name</span><span class="p">(</span><span class="n">lexer</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(lexer=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Highlight a block of text.&quot;&quot;&quot;</span>
+        <span class="n">prev_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span><span class="o">.</span><span class="n">previous</span><span class="p">()</span><span class="o">.</span><span class="n">userData</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">prev_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">_saved_state_stack</span> <span class="o">=</span> <span class="n">prev_data</span><span class="o">.</span><span class="n">syntax_stack</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="p">,</span> <span class="s2">&quot;_saved_state_stack&quot;</span><span class="p">):</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">_saved_state_stack</span>
+
+        <span class="c1"># Lex the text using Pygments</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">text</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">get_tokens</span><span class="p">(</span><span class="n">string</span><span class="p">):</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="n">qstring_length</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_format</span><span class="p">(</span><span class="n">token</span><span class="p">))</span>
+            <span class="n">index</span> <span class="o">+=</span> <span class="n">length</span>
+
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="p">,</span> <span class="s2">&quot;_saved_state_stack&quot;</span><span class="p">):</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextBlockUserData</span><span class="p">(</span><span class="n">syntax_stack</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">_saved_state_stack</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span><span class="o">.</span><span class="n">setUserData</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="c1"># Clean up for the next go-round.</span>
+            <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">_saved_state_stack</span>
+
+    <span class="c1"># ---------------------------------------------------------------------------</span>
+    <span class="c1"># &quot;PygmentsHighlighter&quot; interface</span>
+    <span class="c1"># ---------------------------------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Style</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">style</span> <span class="o">=</span> <span class="n">get_style_by_name</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">style</span> <span class="o">=</span> <span class="n">get_style_by_name</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
+
+<span class="sd">        The classes in the stylesheet should correspond to those generated by:</span>
+
+<span class="sd">            pygmentize -S &lt;style&gt; -f html</span>
+
+<span class="sd">        Note that &quot;set_style&quot; and &quot;set_style_sheet&quot; completely override each</span>
+<span class="sd">        other, i.e. they cannot be used in conjunction.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="o">.</span><span class="n">setDefaultStyleSheet</span><span class="p">(</span><span class="n">stylesheet</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
+
+    <span class="c1"># ---------------------------------------------------------------------------</span>
+    <span class="c1"># Protected interface</span>
+    <span class="c1"># ---------------------------------------------------------------------------</span>
+
+    <span class="k">def</span> <span class="nf">_clear_caches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Clear caches for brushes and formats.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_get_format</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Returns a QTextCharFormat for token or None.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_format_from_document</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_format_from_style</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_get_format_from_document</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token from document.&quot;&quot;&quot;</span>
+        <span class="n">code</span><span class="p">,</span> <span class="n">html</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_formatter</span><span class="o">.</span><span class="n">_format_lines</span><span class="p">([(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;dummy&quot;</span><span class="p">)]))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="o">.</span><span class="n">setHtml</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="p">)</span><span class="o">.</span><span class="n">charFormat</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_get_format_from_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">Style</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token by reading a Pygments style.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">token_style</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">style_for_token</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">token_style</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">set_foreground_color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;bgcolor&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;bold&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">set_font_weight</span><span class="p">(</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;italic&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">setFontItalic</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;underline&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">set_underline_style</span><span class="p">(</span><span class="s2">&quot;single&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;sans&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">set_font_style_hint</span><span class="p">(</span><span class="s2">&quot;sans_serif&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;roman&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">set_font_style_hint</span><span class="p">(</span><span class="s2">&quot;serif&quot;</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="s2">&quot;mono&quot;</span><span class="p">:</span>
+                    <span class="n">result</span><span class="o">.</span><span class="n">set_font_style_hint</span><span class="p">(</span><span class="s2">&quot;typewriter&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_get_brush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return a brush for the color.&quot;&quot;&quot;</span>
+        <span class="n">qcolor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">color</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">qcolor</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1979,6 +2201,71 @@ PythonHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.SyntaxHig
 
       <p>Syntax highlighter for the Python language.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PythonHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Syntax highlighter for the Python language.&quot;&quot;&quot;</span>
+
+    <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Apply syntax highlighting to the given block of text.&quot;&quot;&quot;</span>
+        <span class="c1"># Do other syntax formatting</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="c1"># Do multi-line strings</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">match_multiline</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">*</span><span class="n">TRI_SINGLE</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">match_multiline</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="o">*</span><span class="n">TRI_DOUBLE</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">match_multiline</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">delimiter</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpression</span><span class="p">,</span>
+        <span class="n">in_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Do highlighting of multi-line strings.</span>
+
+<span class="sd">        ``delimiter`` should be a</span>
+<span class="sd">        ``core.RegExp`` for triple-single-quotes or triple-double-quotes, and</span>
+<span class="sd">        ``in_state`` should be a unique integer to represent the corresponding</span>
+<span class="sd">        state changes when inside those strings. Returns True if we&#39;re still</span>
+<span class="sd">        inside a multi-line string when this function is finished.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># If inside triple-single quotes, start at 0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">previousBlockState</span><span class="p">()</span> <span class="o">==</span> <span class="n">in_state</span><span class="p">:</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">add</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="c1"># Otherwise, look for the delimiter on this line</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">match</span><span class="o">.</span><span class="n">hasMatch</span><span class="p">():</span>
+                <span class="k">return</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+            <span class="n">add</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
+
+        <span class="c1"># As long as there&#39;s a delimiter match on this line...</span>
+        <span class="k">while</span> <span class="n">start</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># Look for the ending delimiter</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span><span class="p">)</span>
+            <span class="n">end</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+            <span class="c1"># Ending delimiter on this line?</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="o">&gt;=</span> <span class="n">add</span><span class="p">:</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="c1"># No; multi-line string</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="n">in_state</span><span class="p">)</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">start</span> <span class="o">+</span> <span class="n">add</span>
+            <span class="c1"># Apply formatting</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">style</span><span class="p">)</span>
+            <span class="c1"># Look for the next match</span>
+            <span class="n">start</span> <span class="o">=</span> <span class="n">delimiter</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start</span> <span class="o">+</span> <span class="n">length</span><span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+
+        <span class="c1"># Return True if still inside a multi-line string, False otherwise</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlockState</span><span class="p">()</span> <span class="o">==</span> <span class="n">in_state</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2168,6 +2455,54 @@ RegexMatchHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.Synta
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/regexmatchhighlighter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RegexMatchHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spans</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">set_spans</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spans</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spans</span> <span class="o">=</span> <span class="n">spans</span>
+        <span class="c1"># print(self.spans)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">rehighlight</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_colorize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line_pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">match_len</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">match_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">fmt</span> <span class="o">=</span> <span class="n">FORMAT_1</span> <span class="k">if</span> <span class="n">match_num</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">FORMAT_2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">line_pos</span><span class="p">,</span> <span class="n">match_len</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span>
+        <span class="c1"># line_no = block.blockNumber()</span>
+        <span class="c1"># if line_no == 0:</span>
+        <span class="c1">#     self.setCurrentBlockState(-1)</span>
+        <span class="n">start_char</span> <span class="o">=</span> <span class="n">block</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
+        <span class="n">end_char</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">+</span> <span class="n">block</span><span class="o">.</span><span class="n">length</span><span class="p">()</span>
+        <span class="c1"># print(f&quot;\nline {line_no} ({start_char} - {end_char})&quot;)</span>
+        <span class="c1"># print(f&quot;prev block state: {self.previousBlockState()}&quot;)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">spans</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spans</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">end</span> <span class="o">&lt;</span> <span class="n">start_char</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">end_char</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">starts_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
+            <span class="n">ends_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
+            <span class="k">if</span> <span class="n">starts_in_line</span> <span class="ow">and</span> <span class="n">ends_in_line</span><span class="p">:</span>
+                <span class="c1"># print(f&quot;in line: {line_pos} - {line_pos + match_len}&quot;)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">ends_in_line</span><span class="p">:</span>
+                <span class="c1"># if self.previousBlockState() == 1:</span>
+                <span class="c1"># print(f&quot;ends: {end}&quot;)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+                <span class="c1"># self.setCurrentBlockState(-1)</span>
+            <span class="k">elif</span> <span class="n">starts_in_line</span><span class="p">:</span>
+                <span class="c1"># print(f&quot;starts: {line_pos}&quot;)</span>
+                <span class="c1"># self.setCurrentBlockState(1)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2310,6 +2645,35 @@ XmlHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.SyntaxHighli
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/xmlhighlighter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">XmlHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+
+    <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="c1"># HANDLE QUOTATION MARKS NOW.. WE WANT TO START WITH &quot; AND END WITH &quot;..</span>
+        <span class="c1"># A THIRD &quot; SHOULD NOT CAUSE THE WORDS INBETWEEN SECOND AND THIRD</span>
+        <span class="c1"># TO BE COLORED</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">previousBlockState</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">start_index</span> <span class="o">=</span> <span class="n">VALUE_START_EXPRESSION</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">start_index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">VALUE_END_EXPRESSION</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">start_index</span><span class="p">)</span>
+            <span class="n">end_index</span> <span class="o">=</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">end_index</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">comment_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">start_index</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">comment_len</span> <span class="o">=</span> <span class="n">end_index</span> <span class="o">-</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">match</span><span class="o">.</span><span class="n">capturedLength</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">start_index</span><span class="p">,</span> <span class="n">comment_len</span><span class="p">,</span> <span class="n">VALUE_FORMAT</span><span class="p">)</span>
+            <span class="n">start_index</span> <span class="o">=</span> <span class="n">VALUE_START_EXPRESSION</span><span class="o">.</span><span class="n">match</span><span class="p">(</span>
+                <span class="n">text</span><span class="p">,</span> <span class="n">start_index</span> <span class="o">+</span> <span class="n">comment_len</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2446,6 +2810,22 @@ YamlHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.SyntaxHighl
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/syntaxhighlighters/yamlhighlighter.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">YamlHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+    <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">start_index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">previousBlockState</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">start_index</span> <span class="o">=</span> <span class="n">COMMENT_START</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">capturedStart</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">start_index</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">comment_len</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span> <span class="o">-</span> <span class="n">start_index</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">start_index</span><span class="p">,</span> <span class="n">comment_len</span><span class="p">,</span> <span class="n">COMMENT_FORMAT</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2595,10 +2975,10 @@ YamlHighlighter            (<a title="prettyqt.gui.syntaxhighlighter.SyntaxHighl
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

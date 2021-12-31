@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/scintilla.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -802,6 +802,119 @@ SciScintilla            (<span title="PyQt5.Qsci.QsciScintilla">QsciScintilla</s
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/scintilla/sciscintilla.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SciScintilla</span><span class="p">(</span><span class="n">Qsci</span><span class="o">.</span><span class="n">QsciScintilla</span><span class="p">):</span>
+    <span class="n">supported_langs</span> <span class="o">=</span> <span class="n">LEXER</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="c1"># Set the default font</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="s2">&quot;Consolas&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMarginsFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+
+        <span class="c1"># Margin 0 is used for line numbers</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMarginWidth</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">font</span><span class="o">.</span><span class="n">metrics</span><span class="o">.</span><span class="n">horizontalAdvance</span><span class="p">(</span><span class="s2">&quot;00000&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="mi">6</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMarginLineNumbers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_margins_background_color</span><span class="p">(</span><span class="s2">&quot;lightgrey&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Clickable margin 1 for showing markers</span>
+        <span class="c1"># self.setMarginSensitivity(1, True)</span>
+        <span class="c1"># self.marginClicked.connect(self.on_margin_clicked)</span>
+        <span class="c1"># self.define_marker(&quot;right_arrow&quot;, ARROW_MARKER_NUM)</span>
+        <span class="c1"># self.set_marker_background_color(&quot;red&quot;, ARROW_MARKER_NUM)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_brace_matching</span><span class="p">(</span><span class="s2">&quot;sloppy&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">highlight_current_line</span><span class="p">()</span>
+
+        <span class="c1"># Don&#39;t want to see the horizontal scrollbar at all</span>
+        <span class="c1"># Use raw message to Scintilla here (all messages are documented</span>
+        <span class="c1"># here: http://www.scintilla.org/ScintillaDoc.html)</span>
+        <span class="c1"># self.SendScintilla(Qsci.QsciScintilla.SCI_SETHSCROLLBAR, 0)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SendScintilla</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SCI_SETSCROLLWIDTHTRACKING</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">SendScintilla</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">SCI_SETSCROLLWIDTH</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">set_marker_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">marker_num</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMarkerBackgroundColor</span><span class="p">(</span><span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">),</span> <span class="n">marker_num</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_margins_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMarginsBackgroundColor</span><span class="p">(</span><span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">highlight_current_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;highlight&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCaretLineVisible</span><span class="p">(</span><span class="n">color</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCaretLineBackgroundColor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_brace_matching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">match_type</span><span class="p">:</span> <span class="n">MatchTypeStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">match_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">match_type</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+        <span class="k">if</span> <span class="n">match_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MATCH_TYPE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="n">MATCH_TYPE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setBraceMatching</span><span class="p">(</span><span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">define_marker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marker</span><span class="p">:</span> <span class="n">MarkerStr</span><span class="p">,</span> <span class="n">num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">marker</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">MARKER</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">marker</span><span class="p">,</span> <span class="n">MARKER</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">markerDefine</span><span class="p">(</span><span class="n">MARKER</span><span class="p">[</span><span class="n">marker</span><span class="p">],</span> <span class="n">num</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_syntaxhighlighter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">language</span><span class="p">:</span> <span class="n">LexerStr</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">language</span> <span class="o">=</span> <span class="n">language</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="o">.</span><span class="n">mono</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span> <span class="o">=</span> <span class="n">LEXER</span><span class="p">[</span><span class="n">language</span><span class="p">]()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">setDefaultFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setLexer</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">scroll_to_bottom</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ensureLineVisible</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lines</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">append_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">newline</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="si">{</span><span class="n">text</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">newline</span> <span class="k">else</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_font</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">font</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMarginsFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="n">lexer</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span>
+        <span class="k">if</span> <span class="n">lexer</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">lexer</span><span class="o">.</span><span class="n">setDefaultFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+            <span class="n">lexer</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setLexer</span><span class="p">(</span><span class="n">lexer</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_read_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setReadOnly</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">on_margin_clicked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nmargin</span><span class="p">,</span> <span class="n">nline</span><span class="p">,</span> <span class="n">modifiers</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_marker</span><span class="p">(</span><span class="n">nline</span><span class="p">,</span> <span class="n">ARROW_MARKER_NUM</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">toggle_marker</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nline</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">marker_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="c1"># Toggle marker for the line the margin was clicked on</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">markersAtLine</span><span class="p">(</span><span class="n">nline</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">markerDelete</span><span class="p">(</span><span class="n">nline</span><span class="p">,</span> <span class="n">marker_num</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">markerAdd</span><span class="p">(</span><span class="n">nline</span><span class="p">,</span> <span class="n">marker_num</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_wrap_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">WrapModeStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WRAP_MODE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">WRAP_MODE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setWrapMode</span><span class="p">(</span><span class="n">WRAP_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -960,10 +1073,10 @@ SciScintilla            (<span title="PyQt5.Qsci.QsciScintilla">QsciScintilla</s
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

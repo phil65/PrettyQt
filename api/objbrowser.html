@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/objbrowser.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1367,6 +1367,321 @@ ObjectBrowser            (<a title="prettyqt.widgets.mainwindow.MainWindow" href
 
       <p>Object browser main application window.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowser</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">MainWindow</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Object browser main application window.&quot;&quot;&quot;</span>
+
+    <span class="n">_app</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reference to the global application.</span>
+    <span class="n">_browsers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ObjectBrowser</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Keep lists of browser windows.</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;Object browser&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_add_instance</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="s2">&quot;mdi.language-python&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span> <span class="o">=</span> <span class="n">DEFAULT_ATTR_COLS</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attr_details</span> <span class="o">=</span> <span class="n">DEFAULT_ATTR_DETAILS</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Reading model settings for window: </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">core</span><span class="o">.</span><span class="n">Settings</span><span class="p">(</span><span class="n">settings_id</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_settings_group_name</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">))</span> <span class="k">as</span> <span class="n">settings</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;auto_refresh&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;refresh_rate&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+            <span class="n">show_callable_attrs</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;show_callable_attrs&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+            <span class="n">show_special_attrs</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;show_special_attrs&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span> <span class="o">=</span> <span class="n">objectbrowsertreemodel</span><span class="o">.</span><span class="n">ObjectBrowserTreeModel</span><span class="p">(</span>
+            <span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">attr_cols</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span> <span class="o">=</span> <span class="n">objectbrowsertreemodel</span><span class="o">.</span><span class="n">ObjectBrowserTreeProxyModel</span><span class="p">(</span>
+            <span class="n">show_callable_attrs</span><span class="o">=</span><span class="n">show_callable_attrs</span><span class="p">,</span>
+            <span class="n">show_special_attrs</span><span class="o">=</span><span class="n">show_special_attrs</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="p">)</span>
+        <span class="c1"># self._proxy_tree_model.setSortRole(RegistryTableModel.SORT_ROLE)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">setDynamicSortFilter</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># self._proxy_tree_model.setSortCaseSensitivity(Qt.CaseInsensitive)</span>
+
+        <span class="c1"># Views</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_setup_actions</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Splitter</span><span class="p">(</span>
+            <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span> <span class="n">orientation</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">VERTICAL</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setCentralWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="p">)</span>
+
+        <span class="c1"># Tree widget</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">TreeView</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">setRootIsDecorated</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">setAlternatingRowColors</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">set_selection_behaviour</span><span class="p">(</span><span class="s2">&quot;rows&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">setUniformRowHeights</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">setAnimated</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Stretch last column?</span>
+        <span class="c1"># It doesn&#39;t play nice when columns are hidden and then shown again.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">h_header</span><span class="o">.</span><span class="n">set_id</span><span class="p">(</span><span class="s2">&quot;table_header&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">h_header</span><span class="o">.</span><span class="n">setSectionsMovable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">h_header</span><span class="o">.</span><span class="n">setStretchLastSection</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="p">)</span>
+
+        <span class="c1"># Bottom pane</span>
+        <span class="n">bottom_pane_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">()</span>
+        <span class="n">bottom_pane_widget</span><span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">spacing</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">bottom_pane_widget</span><span class="p">)</span>
+
+        <span class="n">group_box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GroupBox</span><span class="p">(</span><span class="s2">&quot;Details&quot;</span><span class="p">)</span>
+        <span class="n">bottom_pane_widget</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">group_box</span><span class="p">)</span>
+
+        <span class="n">group_box</span><span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+        <span class="c1"># Radio buttons</span>
+        <span class="n">radio_widget</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">()</span>
+        <span class="n">radio_widget</span><span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="s2">&quot;vertical&quot;</span><span class="p">,</span> <span class="n">margin</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_group</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ButtonGroup</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">button_id</span><span class="p">,</span> <span class="n">attr_detail</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_attr_details</span><span class="p">):</span>
+            <span class="n">radio_button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButton</span><span class="p">(</span><span class="n">attr_detail</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+            <span class="n">radio_widget</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">radio_button</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">addButton</span><span class="p">(</span><span class="n">radio_button</span><span class="p">,</span> <span class="n">button_id</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">buttonClicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_change_details_field</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">radio_widget</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">group_box</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">radio_widget</span><span class="p">)</span>
+
+        <span class="c1"># Editor widget</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="s2">&quot;Courier&quot;</span><span class="p">)</span>
+        <span class="n">font</span><span class="o">.</span><span class="n">setFixedPitch</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># font.setPointSize(14)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">editor</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PlainTextEdit</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">setReadOnly</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="n">group_box</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="p">)</span>
+
+        <span class="c1"># Splitter parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="o">.</span><span class="n">setCollapsible</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="o">.</span><span class="n">setCollapsible</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="o">.</span><span class="n">setSizes</span><span class="p">([</span><span class="mi">400</span><span class="p">,</span> <span class="mi">200</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="o">.</span><span class="n">setStretchFactor</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">central_splitter</span><span class="o">.</span><span class="n">setStretchFactor</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+        <span class="n">selection_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+        <span class="n">selection_model</span><span class="o">.</span><span class="n">currentChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_details</span><span class="p">)</span>
+        <span class="n">menubar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">menuBar</span><span class="p">()</span>
+        <span class="n">file_menu</span> <span class="o">=</span> <span class="n">menubar</span><span class="o">.</span><span class="n">add_menu</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">)</span>
+        <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;C&amp;lose&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">,</span> <span class="s2">&quot;Ctrl+W&quot;</span><span class="p">)</span>
+        <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">app</span><span class="p">()</span><span class="o">.</span><span class="n">closeAllWindows</span><span class="p">(),</span> <span class="s2">&quot;Ctrl+Q&quot;</span><span class="p">)</span>
+
+        <span class="n">view_menu</span> <span class="o">=</span> <span class="n">menubar</span><span class="o">.</span><span class="n">add_menu</span><span class="p">(</span><span class="s2">&quot;&amp;View&quot;</span><span class="p">)</span>
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;&amp;Refresh&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">,</span> <span class="s2">&quot;Ctrl+R&quot;</span><span class="p">)</span>
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="p">)</span>
+
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_cols_submenu</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="s2">&quot;Table columns&quot;</span><span class="p">)</span>
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">add_menu</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">show_cols_submenu</span><span class="p">)</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">h_header</span><span class="o">.</span><span class="n">get_header_actions</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">show_cols_submenu</span><span class="o">.</span><span class="n">add_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span><span class="p">)</span>
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span><span class="p">)</span>
+
+        <span class="k">assert</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Timer</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">setInterval</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
+
+        <span class="c1"># Update views with model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">show_special_attrs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="n">show_callable_attrs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span><span class="p">)</span>
+
+        <span class="c1"># Select first row so that a hidden root node will not be selected.</span>
+        <span class="n">first_row_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">first_item_index</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="n">first_row_index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">first_row_index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_add_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Adds the browser window to the list of browser references.</span>
+
+<span class="sd">        If a None is present in the list it is inserted at that position, otherwise</span>
+<span class="sd">        it is appended to the list. The index number is returned.</span>
+
+<span class="sd">        This mechanism is used so that repeatedly creating and closing windows does not</span>
+<span class="sd">        increase the instance number, which is used in writing the persistent settings.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span>
+
+        <span class="k">return</span> <span class="n">idx</span>
+
+    <span class="k">def</span> <span class="nf">_setup_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create the main window actions.&quot;&quot;&quot;</span>
+        <span class="c1"># Show/hide callable objects</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Show callable attributes&quot;</span><span class="p">,</span>
+            <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">checkable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">shortcut</span><span class="o">=</span><span class="n">gui</span><span class="o">.</span><span class="n">KeySequence</span><span class="p">(</span><span class="s2">&quot;Alt+C&quot;</span><span class="p">),</span>
+            <span class="n">statustip</span><span class="o">=</span><span class="s2">&quot;Shows/hides callable attributes (functions, methods, etc.)&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_callables</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Show/hide special attributes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Show __special__ attributes&quot;</span><span class="p">,</span>
+            <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">checkable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">shortcut</span><span class="o">=</span><span class="n">gui</span><span class="o">.</span><span class="n">KeySequence</span><span class="p">(</span><span class="s2">&quot;Alt+S&quot;</span><span class="p">),</span>
+            <span class="n">statustip</span><span class="o">=</span><span class="s2">&quot;Shows or hides __special__ attributes&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_special_attrs</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Toggle auto-refresh on/off</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Auto-refresh&quot;</span><span class="p">,</span>
+            <span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">,</span>
+            <span class="n">checkable</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">statustip</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Auto refresh every </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span><span class="si">}</span><span class="s2"> seconds&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh</span><span class="p">)</span>
+
+        <span class="c1"># Add another refresh action with a different shortcut. An action must be added to</span>
+        <span class="c1"># a visible widget for it to receive events. It is added to the main windows to</span>
+        <span class="c1"># prevent it from being displayed again in the menu</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_action_f5</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&amp;Refresh2&quot;</span><span class="p">,</span> <span class="n">shortcut</span><span class="o">=</span><span class="s2">&quot;F5&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_action_f5</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh_action_f5</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_settings_group_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">postfix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Construct a group name for the persistent settings.</span>
+
+<span class="sd">        Because the columns in the main table are extendible, we must store the settings</span>
+<span class="sd">        in a different group if a different combination of columns is used. Therefore the</span>
+<span class="sd">        settings group name contains a hash that is calculated from the used column names.</span>
+<span class="sd">        Furthermore the window number is included in the settings group name. Finally a</span>
+<span class="sd">        postfix string is appended.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">column_names</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="n">col</span><span class="o">.</span><span class="n">name</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">])</span>
+        <span class="n">columns_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">column_names</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">columns_hash</span><span class="si">}</span><span class="s2">_win</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">postfix</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span> <span class="nf">_write_model_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write the model settings to the persistent store.&quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Writing model settings for window: </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">auto_refresh</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span><span class="p">,</span>
+            <span class="n">refresh_rate</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span><span class="p">,</span>
+            <span class="n">show_callable_attrs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">get_show_callables</span><span class="p">(),</span>
+            <span class="n">show_special_attrs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">get_show_special_attrs</span><span class="p">(),</span>
+        <span class="p">)</span>
+        <span class="n">settings_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings_group_name</span><span class="p">(</span><span class="s2">&quot;model&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;New settings: </span><span class="si">{</span><span class="n">new</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">with</span> <span class="n">core</span><span class="o">.</span><span class="n">Settings</span><span class="p">(</span><span class="n">settings_id</span><span class="o">=</span><span class="n">settings_id</span><span class="p">)</span> <span class="k">as</span> <span class="n">settings</span><span class="p">:</span>
+            <span class="n">settings</span><span class="o">.</span><span class="n">set_values</span><span class="p">(</span><span class="n">new</span><span class="p">)</span>
+
+    <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">_update_details</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">current_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">,</span> <span class="n">_previous_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Show the object details in the editor given an index.&quot;&quot;&quot;</span>
+        <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">current_index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_details_for_item</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_change_details_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_button_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Change the field that is displayed in the details pane.&quot;&quot;&quot;</span>
+        <span class="c1"># logger.debug(&quot;_change_details_field: {}&quot;.format(_button_id))</span>
+        <span class="n">current_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
+        <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">current_index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_update_details_for_item</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_update_details_for_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Show the object details in the editor given an tree_item.&quot;&quot;&quot;</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">edit_stylesheet</span><span class="p">()</span> <span class="k">as</span> <span class="n">ss</span><span class="p">:</span>
+            <span class="n">ss</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># obj = tree_item.obj</span>
+            <span class="n">button_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span>
+            <span class="k">assert</span> <span class="n">button_id</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;No radio button selected. Please report this bug.&quot;</span>
+            <span class="n">attr_details</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_details</span><span class="p">[</span><span class="n">button_id</span><span class="p">]</span>
+            <span class="n">data</span> <span class="o">=</span> <span class="n">attr_details</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">set_word_wrap_mode</span><span class="p">(</span><span class="n">attr_details</span><span class="o">.</span><span class="n">line_wrap</span><span class="p">)</span>
+
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">edit_stylesheet</span><span class="p">()</span> <span class="k">as</span> <span class="n">ss</span><span class="p">:</span>
+                <span class="n">ss</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+            <span class="n">stack_trace</span> <span class="o">=</span> <span class="n">traceback</span><span class="o">.</span><span class="n">format_exc</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ex</span><span class="si">}</span><span class="se">\n\n</span><span class="si">{</span><span class="n">stack_trace</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">set_wrap_mode</span><span class="p">(</span><span class="s2">&quot;boundary_or_anywhere&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">toggle_auto_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checked</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Toggle auto-refresh on/off.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">checked</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Auto-refresh on. Rate </span><span class="si">%g</span><span class="s2"> seconds&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Auto-refresh off&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span> <span class="o">=</span> <span class="n">checked</span>
+
+    <span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Called when the window is closed.&quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;closeEvent&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_write_model_settings</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_callables</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_special_attribute_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">set_show_special_attrs</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="o">.</span><span class="n">toggled</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">refresh_action_f5</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">buttonClicked</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_change_details_field</span><span class="p">)</span>
+        <span class="n">selection_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
+        <span class="n">selection_model</span><span class="o">.</span><span class="n">currentChanged</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_details</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+        <span class="sd">&quot;&quot;&quot;Set the reference in the browser list to None.&quot;&quot;&quot;</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Closed window </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">browse</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create and run object browser.</span>
+
+<span class="sd">        For this, the following three steps are done:</span>
+<span class="sd">        1) Create QApplication object if it doesn&#39;t yet exist</span>
+<span class="sd">        2) Create and show an ObjectBrowser window</span>
+<span class="sd">        3) Start the Qt event loop.</span>
+
+<span class="sd">        The *args and **kwargs will be passed to the ObjectBrowser constructor.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">app</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">app</span><span class="p">()</span>  <span class="c1"># keeping reference to prevent garbage collection.</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">setOrganizationName</span><span class="p">(</span><span class="s2">&quot;phil65&quot;</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">setApplicationName</span><span class="p">(</span><span class="s2">&quot;PrettyQt&quot;</span><span class="p">)</span>
+        <span class="n">object_browser</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">object_browser</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">object_browser</span><span class="o">.</span><span class="n">raise_</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">app</span><span class="o">.</span><span class="n">main_loop</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1582,6 +1897,44 @@ ObjectBrowserTreeItem            (<span title="prettyqt.utils.treeitem.TreeItem"
 
       <p>Tree node class that can be used to build trees of objects.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeItem</span><span class="p">(</span><span class="n">treeitem</span><span class="o">.</span><span class="n">TreeItem</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Tree node class that can be used to build trees of objects.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">obj</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">,</span>
+        <span class="n">obj_path</span><span class="p">,</span>
+        <span class="n">is_attribute</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">ObjectBrowserTreeItem</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+        <span class="c1"># self.parent_item = parent</span>
+        <span class="c1"># self.obj = obj</span>
+        <span class="c1"># self.child_items: List[ObjectBrowserTreeItem] = []</span>
+        <span class="c1"># self.has_children = True</span>
+        <span class="c1"># self.children_fetched = False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_name</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">obj_path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_attribute</span> <span class="o">=</span> <span class="n">is_attribute</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_special_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return true if the item represents a dunder attribute.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_attribute</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)</span>
+            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_callable_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return true if the items is an attribute and it is callable.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_attribute</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1669,6 +2022,346 @@ ObjectBrowserTreeModel            (<a title="prettyqt.custom_models.columnitemmo
 
       <p>Model that provides an interface to an objectree that is build of tree items.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeModel</span><span class="p">(</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItemModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Model that provides an interface to an objectree that is build of tree items.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+        <span class="n">obj_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">attr_cols</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            obj (Any): Object to inspect</span>
+<span class="sd">            obj_name (str, optional): Name of the object</span>
+<span class="sd">            attr_cols (None, optional): List of Column items</span>
+<span class="sd">            parent (None, optional): Description</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">attr_cols</span><span class="o">=</span><span class="n">attr_cols</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+        <span class="c1"># The root_item is always invisible. If the obj_name is the empty string, the</span>
+        <span class="c1"># inspectedItem will be the invisible root_item. If the obj_name is given,</span>
+        <span class="c1"># an invisible root item will be added and the inspectedItem will be its</span>
+        <span class="c1"># only child. In that case the inspected item will be visible.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span> <span class="o">=</span> <span class="n">obj_name</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span> <span class="o">=</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">(</span>
+                <span class="kc">None</span><span class="p">,</span> <span class="s2">&quot;&lt;invisible_root&gt;&quot;</span><span class="p">,</span> <span class="s2">&quot;&lt;invisible_root&gt;&quot;</span><span class="p">,</span> <span class="kc">None</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span><span class="o">.</span><span class="n">children_fetched</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span> <span class="o">=</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">(</span>
+                <span class="n">obj</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">,</span> <span class="n">is_attribute</span><span class="o">=</span><span class="kc">None</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span><span class="o">.</span><span class="n">append_child</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1"># The root itself will be invisible</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span> <span class="o">=</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">(</span>
+                <span class="n">obj</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">,</span> <span class="n">is_attribute</span><span class="o">=</span><span class="kc">None</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span>
+
+            <span class="c1"># Fetch all items of the root so we can select the first row in the ctor.</span>
+            <span class="n">root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">fetchMore</span><span class="p">(</span><span class="n">root_index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_CHILDREN</span>
+        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;parent is None&quot;</span><span class="p">)</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;hasIndex is False: (</span><span class="si">%s</span><span class="s2">, </span><span class="si">%s</span><span class="s2">) </span><span class="si">%r</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent_item</span><span class="p">)</span>
+            <span class="c1"># logger.warn(&quot;Parent index model: {!r} != {!r}&quot;.format(parent.model(), self))</span>
+
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="n">child_item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+        <span class="c1"># logger.debug(&quot;  {}&quot;.format(child_item.obj_path))</span>
+        <span class="k">if</span> <span class="n">child_item</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">child_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;no child_item&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>  <span class="c1"># type:ignore</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="n">child_item</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
+        <span class="n">parent_item</span> <span class="o">=</span> <span class="n">child_item</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+
+        <span class="k">if</span> <span class="n">parent_item</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">parent_item</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">parent_item</span><span class="o">.</span><span class="n">row</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parent_item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
+
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="c1"># This is taken from the PyQt simpletreemodel example.</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">child_count</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">hasChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">has_children</span>
+
+    <span class="k">def</span> <span class="nf">canFetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">children_fetched</span>
+            <span class="c1"># logger.debug(&quot;canFetchMore: {} = {}&quot;.format(parent, result))</span>
+            <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="nf">fetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Fetches the children given the model index of a parent node.</span>
+
+<span class="sd">        Adds the children to the parent.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">children_fetched</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">tree_items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_object_children</span><span class="p">(</span><span class="n">parent_item</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">obj_path</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_rows</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tree_items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">tree_item</span> <span class="ow">in</span> <span class="n">tree_items</span><span class="p">:</span>
+                <span class="n">parent_item</span><span class="o">.</span><span class="n">append_child</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="n">parent_item</span><span class="o">.</span><span class="n">children_fetched</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">inspected_node_is_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return True if the inspected node is visible.</span>
+
+<span class="sd">        In that case an invisible root node has been added.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">root_item</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The root ObjectBrowserTreeItem.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span>
+
+    <span class="k">def</span> <span class="nf">root_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>  <span class="c1"># TODO: needed?</span>
+        <span class="sd">&quot;&quot;&quot;The index that returns the root element (same as an invalid index).&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">inspected_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;The model index that point to the inspectedItem.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="nf">_fetch_object_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">obj_path</span><span class="p">):</span>  <span class="c1"># -&gt; List[ObjectBrowserTreeItem]:</span>
+        <span class="sd">&quot;&quot;&quot;Fetches the children of a Python object.</span>
+
+<span class="sd">        Returns: list of ObjectBrowserTreeItems</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">obj_children</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">path_strings</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">frozenset</span><span class="p">)):</span>
+            <span class="n">obj_children</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">))]</span>
+            <span class="n">path_strings</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj_path</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span> <span class="k">if</span> <span class="n">obj_path</span> <span class="k">else</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">obj_children</span>
+            <span class="p">]</span>
+        <span class="c1"># elif isinstance(obj, (set, frozenset)):</span>
+        <span class="c1">#     obj_children = [(&quot;pop()&quot;, elem) for elem in obj]</span>
+        <span class="c1">#     path_strings = [</span>
+        <span class="c1">#         &quot;{0}.pop()&quot;.format(obj_path) if obj_path else item[0]</span>
+        <span class="c1">#         for item in obj_children</span>
+        <span class="c1">#     ]</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)):</span>  <span class="c1"># dicts etc.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">obj_children</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                <span class="c1"># Can happen if the items method expects an argument, for instance the</span>
+                <span class="c1"># types.DictType.items method expects a dictionary.</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No items expanded. Objects items() call failed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+                <span class="n">obj_children</span> <span class="o">=</span> <span class="p">[]</span>
+
+            <span class="c1"># Sort keys, except when the object is an OrderedDict.</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">):</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">obj_children</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Unable to sort dictionary keys: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+
+            <span class="n">path_strings</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj_path</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">!r}</span><span class="s2">]&quot;</span> <span class="k">if</span> <span class="n">obj_path</span> <span class="k">else</span> <span class="n">item</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">obj_children</span>
+            <span class="p">]</span>
+
+        <span class="n">is_attr_list</span> <span class="o">=</span> <span class="p">[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_children</span><span class="p">)</span>
+
+        <span class="c1"># Object attributes</span>
+        <span class="k">for</span> <span class="n">attr_name</span><span class="p">,</span> <span class="n">attr_value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">inspect</span><span class="o">.</span><span class="n">getmembers</span><span class="p">(</span><span class="n">obj</span><span class="p">)):</span>
+            <span class="n">obj_children</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">attr_name</span><span class="p">,</span> <span class="n">attr_value</span><span class="p">))</span>
+            <span class="n">path_strings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj_path</span><span class="si">}</span><span class="s2">.</span><span class="si">{</span><span class="n">attr_name</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="n">obj_path</span> <span class="k">else</span> <span class="n">attr_name</span><span class="p">)</span>
+            <span class="n">is_attr_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">tree_items</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">item</span><span class="p">,</span> <span class="n">path_str</span><span class="p">,</span> <span class="n">is_attr</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">obj_children</span><span class="p">,</span> <span class="n">path_strings</span><span class="p">,</span> <span class="n">is_attr_list</span><span class="p">):</span>
+            <span class="n">name</span><span class="p">,</span> <span class="n">child_obj</span> <span class="o">=</span> <span class="n">item</span>
+            <span class="n">tree_items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ObjectBrowserTreeItem</span><span class="p">(</span><span class="n">child_obj</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">path_str</span><span class="p">,</span> <span class="n">is_attr</span><span class="p">))</span>
+
+        <span class="k">return</span> <span class="n">tree_items</span>
+
+    <span class="k">def</span> <span class="nf">_aux_refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Auxiliary function for refresh_tree that recursively refreshes the tree nodes.</span>
+
+<span class="sd">        If the underlying Python object has been changed, we don&#39;t want to delete the old</span>
+<span class="sd">        tree model and create a new one from scratch because this loses all information</span>
+<span class="sd">        about which nodes are fetched and expanded. Instead the old tree model is updated.</span>
+<span class="sd">        Using the difflib from the standard library it is determined for a parent node</span>
+<span class="sd">        which child nodes should be added or removed. This is done based on the node names</span>
+<span class="sd">        only, not on the node contents (the underlying Python objects). Testing the</span>
+<span class="sd">        underlying nodes for equality is potentially slow. It is faster to let the</span>
+<span class="sd">        refreshNode function emit the dataChanged signal for all cells.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">tree_index</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;_aux_refresh_tree(</span><span class="si">%s</span><span class="s2">): </span><span class="si">%s%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">tree_index</span><span class="p">,</span>
+            <span class="n">tree_item</span><span class="o">.</span><span class="n">obj_path</span><span class="p">,</span>
+            <span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">children_fetched</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">children_fetched</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">old_items</span> <span class="o">=</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">child_items</span>
+        <span class="n">new_items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_object_children</span><span class="p">(</span><span class="n">tree_item</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">obj_path</span><span class="p">)</span>
+
+        <span class="n">old_item_names</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="o">.</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">is_attribute</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">old_items</span><span class="p">]</span>
+        <span class="n">new_item_names</span> <span class="o">=</span> <span class="p">[(</span><span class="n">item</span><span class="o">.</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">is_attribute</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">new_items</span><span class="p">]</span>
+        <span class="n">seqMatcher</span> <span class="o">=</span> <span class="n">SequenceMatcher</span><span class="p">(</span>
+            <span class="n">isjunk</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="n">old_item_names</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="n">new_item_names</span><span class="p">,</span> <span class="n">autojunk</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">)</span>
+        <span class="n">opcodes</span> <span class="o">=</span> <span class="n">seqMatcher</span><span class="o">.</span><span class="n">get_opcodes</span><span class="p">()</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;(reversed) opcodes: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">opcodes</span><span class="p">)))</span>
+
+        <span class="k">for</span> <span class="n">tag</span><span class="p">,</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">j1</span><span class="p">,</span> <span class="n">j2</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">opcodes</span><span class="p">):</span>
+
+            <span class="k">if</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">tag</span> <span class="o">!=</span> <span class="s2">&quot;equal&quot;</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+                    <span class="s2">&quot;  </span><span class="si">{:7s}</span><span class="s2">, a[</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">] (</span><span class="si">{}</span><span class="s2">), b[</span><span class="si">{}</span><span class="s2">:</span><span class="si">{}</span><span class="s2">] (</span><span class="si">{}</span><span class="s2">)&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span>
+                        <span class="n">tag</span><span class="p">,</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">old_item_names</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span><span class="p">],</span> <span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">,</span> <span class="n">new_item_names</span><span class="p">[</span><span class="n">j1</span><span class="p">:</span><span class="n">j2</span><span class="p">]</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;equal&quot;</span><span class="p">:</span>
+                <span class="c1"># Only when node names are equal is _aux_refresh_tree called recursively.</span>
+                <span class="k">assert</span> <span class="p">(</span>
+                    <span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span>
+                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;equal sanity check failed </span><span class="si">{</span><span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="k">for</span> <span class="n">old_row</span><span class="p">,</span> <span class="n">new_row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)):</span>
+                    <span class="n">old_items</span><span class="p">[</span><span class="n">old_row</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">new_items</span><span class="p">[</span><span class="n">new_row</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span>
+                    <span class="n">child_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">old_row</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">tree_index</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_aux_refresh_tree</span><span class="p">(</span><span class="n">child_index</span><span class="p">)</span>
+
+            <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;replace&quot;</span><span class="p">:</span>
+                <span class="c1"># Explicitly remove the old item and insert the new. The old item may have</span>
+                <span class="c1"># child nodes which indices must be removed by Qt, otherwise it crashes.</span>
+                <span class="k">assert</span> <span class="p">(</span>
+                    <span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span>
+                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;replace sanity check failed </span><span class="si">{</span><span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
+
+                <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>  <span class="c1"># row number of first that will be removed</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># row number of last element after insertion</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_rows</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">):</span>
+                    <span class="k">del</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">child_items</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span><span class="p">]</span>
+
+                <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>  <span class="c1"># row number of first element after insertion</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># row number of last element after insertion</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">):</span>
+                    <span class="n">tree_item</span><span class="o">.</span><span class="n">insert_children</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">new_items</span><span class="p">[</span><span class="n">j1</span><span class="p">:</span><span class="n">j2</span><span class="p">])</span>
+
+            <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;delete&quot;</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">j1</span> <span class="o">==</span> <span class="n">j2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;delete sanity check failed. </span><span class="si">{</span><span class="n">j1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>  <span class="c1"># row number of first that will be removed</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># row number of last element after insertion</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_rows</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">):</span>
+                    <span class="k">del</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">child_items</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span><span class="p">]</span>
+
+            <span class="k">elif</span> <span class="n">tag</span> <span class="o">==</span> <span class="s2">&quot;insert&quot;</span><span class="p">:</span>
+                <span class="k">assert</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;insert sanity check failed. </span><span class="si">{</span><span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">i2</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>
+                <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span> <span class="o">-</span> <span class="mi">1</span>
+                <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">):</span>
+                    <span class="n">tree_item</span><span class="o">.</span><span class="n">insert_children</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">new_items</span><span class="p">[</span><span class="n">j1</span><span class="p">:</span><span class="n">j2</span><span class="p">])</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid tag: </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Refreshes the tree model from the underlying root object.&quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;refresh_tree: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="p">)</span>
+
+        <span class="n">root_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">())</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  root_item:      </span><span class="si">%s</span><span class="s2"> (idx=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">root_item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">())</span>
+        <span class="n">inspected_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">())</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
+            <span class="s2">&quot;  inspected_item: </span><span class="si">%s</span><span class="s2"> (idx=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">inspected_item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">()</span>
+        <span class="p">)</span>
+
+        <span class="k">assert</span> <span class="p">(</span>
+            <span class="n">root_item</span> <span class="ow">is</span> <span class="n">inspected_item</span>
+        <span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">,</span> <span class="s2">&quot;sanity check&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_aux_refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">())</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
+            <span class="s2">&quot;After _aux_refresh_tree, root_obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
+            <span class="n">helpers</span><span class="o">.</span><span class="n">cut_off_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="o">.</span><span class="n">pretty_print</span><span class="p">()</span>
+
+        <span class="c1"># Emit the dataChanged signal for all cells. This is faster than checking which</span>
+        <span class="c1"># nodes have changed, which may be slow for some underlying Python objects.</span>
+        <span class="n">bottom_row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">right_column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="n">top_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bottom_row</span><span class="p">,</span> <span class="n">right_column</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bottom_right: (</span><span class="si">{</span><span class="n">bottom_row</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">right_column</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2225,6 +2918,76 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
 
       <p>Proxy model that overrides the sorting and can filter out items.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeProxyModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Proxy model that overrides the sorting and can filter out items.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">show_callable_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Constructor.</span>
+
+<span class="sd">        :param show_callable_attrs: if True the callables objects,</span>
+<span class="sd">            i.e. objects (such as function) that  a __call__ method,</span>
+<span class="sd">            will be displayed (in brown). If False they are hidden.</span>
+<span class="sd">        :param show_special_attrs: if True the objects special attributes,</span>
+<span class="sd">            i.e. methods with a name that starts and ends with two underscores,</span>
+<span class="sd">            will be displayed (in italics). If False they are hidden.</span>
+<span class="sd">        :param parent: the parent widget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="o">=</span> <span class="n">show_callable_attrs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="o">=</span> <span class="n">show_special_attrs</span>
+
+    <span class="k">def</span> <span class="nf">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">:</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToSource</span><span class="p">(</span><span class="n">proxy_index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">first_item_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the first child of the root item.&quot;&quot;&quot;</span>
+        <span class="c1"># We cannot just call the same function of the source model because the first node</span>
+        <span class="c1"># there may be hidden.</span>
+        <span class="n">source_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
+        <span class="n">proxy_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">source_root_index</span><span class="p">)</span>
+        <span class="n">first_item_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proxy_root_index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">first_item_index</span>
+
+    <span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">source_parent_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return true if the item should be included in the model.&quot;&quot;&quot;</span>
+        <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">source_parent_index</span><span class="p">)</span>
+        <span class="n">tree_item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">source_row</span><span class="p">)</span>
+
+        <span class="n">accept</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">is_special_attribute</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">is_callable_attribute</span>
+        <span class="p">)</span>
+
+        <span class="c1"># logger.debug(&quot;filterAcceptsRow = {}: {}&quot;.format(accept, tree_item))</span>
+        <span class="k">return</span> <span class="n">accept</span>
+
+    <span class="k">def</span> <span class="nf">get_show_callables</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span>
+
+    <span class="k">def</span> <span class="nf">set_show_callables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Show/hide show_callables which have a __call__ attribute.&quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_callables: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="o">=</span> <span class="n">show_callables</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_show_special_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span>
+
+    <span class="k">def</span> <span class="nf">set_show_special_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Show/hide special attributes which begin with an underscore.&quot;&quot;&quot;</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_special_attrs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="o">=</span> <span class="n">show_special_attrs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2522,10 +3285,10 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

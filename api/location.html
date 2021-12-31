@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/location.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1502,6 +1502,57 @@ GeoManeuver            (<span title="PyQt5.QtLocation.QGeoManeuver">QGeoManeuver
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/geomaneuver.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoManeuver</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QGeoManeuver</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">instructionText</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">):</span>
+        <span class="n">attrs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extendedAttributes</span><span class="p">()</span>
+        <span class="n">attrs</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">val</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setExtendedAttributes</span><span class="p">(</span><span class="n">attrs</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extendedAttributes</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">index</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">attr</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Key </span><span class="si">{</span><span class="n">index</span><span class="si">!r}</span><span class="s2"> does not exist.&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">attr</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoCoordinate</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoCoordinate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">position</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_waypoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoCoordinate</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">wp</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">waypoint</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">wp</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoCoordinate</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">InstructionDirectionStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the direction.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            direction: Direction</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: direction does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">direction</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">direction</span><span class="p">,</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setDirection</span><span class="p">(</span><span class="n">INSTRUCTION_DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InstructionDirectionStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current direction.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Direction</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">INSTRUCTION_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1713,6 +1764,79 @@ GeoRouteRequest            (<span title="PyQt5.QtLocation.QGeoRouteRequest">QGeo
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/georouterequest.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoRouteRequest</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QGeoRouteRequest</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_waypoints</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">positioning</span><span class="o">.</span><span class="n">GeoCoordinate</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">positioning</span><span class="o">.</span><span class="n">GeoCoordinate</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="k">for</span> <span class="n">wp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">waypoints</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_exclude_areas</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">positioning</span><span class="o">.</span><span class="n">GeoRectangle</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">positioning</span><span class="o">.</span><span class="n">GeoRectangle</span><span class="p">(</span><span class="n">wp</span><span class="p">)</span> <span class="k">for</span> <span class="n">wp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">excludeAreas</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_departure_time</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">DateTime</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">DateTime</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">departureTime</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">set_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureTypeStr</span><span class="p">,</span> <span class="n">weight</span><span class="p">:</span> <span class="n">FeatureWeightStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the feature weight.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            feature: Feature type</span>
+<span class="sd">            weight: Feature weight</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: feature weight / type does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">weight</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FEATURE_WEIGHTS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">weight</span><span class="p">,</span> <span class="n">FEATURE_WEIGHTS</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">feature</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FEATURE_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">FEATURE_TYPES</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFeatureWeight</span><span class="p">(</span><span class="n">FEATURE_TYPES</span><span class="p">[</span><span class="n">feature</span><span class="p">],</span> <span class="n">FEATURE_WEIGHTS</span><span class="p">[</span><span class="n">weight</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_feature_weight</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureTypeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FeatureWeightStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current feature weight.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Feature weight</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">feature</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FEATURE_TYPES</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">feature</span><span class="p">,</span> <span class="n">FEATURE_TYPES</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">FEATURE_WEIGHTS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">featureWeight</span><span class="p">(</span><span class="n">FEATURE_TYPES</span><span class="p">[</span><span class="n">feature</span><span class="p">])]</span>
+
+    <span class="k">def</span> <span class="nf">set_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">optimization</span><span class="p">:</span> <span class="n">RouteOptimizationStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the route optimization.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            optimization: Route optimization</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: route optimization does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">optimization</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">optimization</span><span class="p">,</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setRouteOptimization</span><span class="p">(</span><span class="n">ROUTE_OPTIMIZATION</span><span class="p">[</span><span class="n">optimization</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_route_optimization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RouteOptimizationStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current route optimization.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Route optimization</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ROUTE_OPTIMIZATION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">routeOptimization</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_travel_modes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">TravelModeStr</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">TRAVEL_MODE</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">travelModes</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_travel_modes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">mode</span><span class="p">:</span> <span class="n">TravelModeStr</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">mode</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">TRAVEL_MODE</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">TRAVEL_MODE</span><span class="p">)</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">merge_flags</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">TRAVEL_MODE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setTravelModes</span><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_feature_types</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">FeatureTypeStr</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">FEATURE_TYPES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">featureTypes</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="n">t</span><span class="p">]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2040,6 +2164,64 @@ Place            (<span title="PyQt5.QtLocation.QPlace">QPlace</span>)
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/place.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Place</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlace</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">val</span><span class="p">:</span> <span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceAttribute</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceAttribute</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setExtendedAttribute</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceAttribute</span><span class="p">:</span>
+        <span class="n">attr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">extendedAttribute</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceAttribute</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">location</span><span class="o">.</span><span class="n">PlaceCategory</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">location</span><span class="o">.</span><span class="n">PlaceCategory</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_contact_details</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">contact_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">location</span><span class="o">.</span><span class="n">PlaceContactDetail</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">location</span><span class="o">.</span><span class="n">PlaceContactDetail</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">contactDetails</span><span class="p">(</span><span class="n">contact_type</span><span class="p">)]</span>
+
+    <span class="k">def</span> <span class="nf">set_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceContent</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setContent</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_content</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceContent</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceIcon</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_location</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoLocation</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoLocation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">location</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_primary_website</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">primaryWebsite</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_ratings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceRatings</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceRatings</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ratings</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_supplier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceSupplier</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceSupplier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supplier</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return visibility.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Visibility</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2174,6 +2356,30 @@ PlaceCategory            (<span title="PyQt5.QtLocation.QPlaceCategory">QPlaceCa
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/placecategory.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PlaceCategory</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceCategory</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceIcon</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_visibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the visibility of the place.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Visibility</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibility</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2301,6 +2507,24 @@ PlaceContent            (<span title="PyQt5.QtLocation.QPlaceContent">QPlaceCont
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/placecontent.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PlaceContent</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceContent</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the visibility of the place.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Place type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_user</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceUser</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceUser</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">user</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">get_supplier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceSupplier</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceSupplier</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">supplier</span><span class="p">())</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2425,6 +2649,31 @@ PlaceContentRequest            (<span title="PyQt5.QtLocation.QPlaceContentReque
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/placecontentrequest.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PlaceContentRequest</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceContentRequest</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TypeStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the content type.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            typ: Relevance type</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: content type does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current content type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Relevance type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">placecontent</span><span class="o">.</span><span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">contentType</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2621,6 +2870,27 @@ PlaceIdReply            (<span title="PyQt5.QtLocation.QPlaceIdReply">QPlaceIdRe
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/placeidreply.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PlaceIdReply</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceIdReply</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">operationType</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">clone_from</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceIdReply</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PlaceIdReply</span><span class="p">:</span>
+        <span class="n">reply</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">operationType</span><span class="p">(),</span> <span class="n">obj</span><span class="o">.</span><span class="n">parent</span><span class="p">())</span>
+        <span class="n">reply</span><span class="o">.</span><span class="n">setId</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">id</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">reply</span>
+
+    <span class="k">def</span> <span class="nf">get_operation_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OperationTypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Get current operation_type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            current operation_type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">OPERATION_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">operationType</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2754,6 +3024,26 @@ PlaceReply            (<span title="PyQt5.QtLocation.QPlaceReply">QPlaceReply</s
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/placereply.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PlaceReply</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceReply</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return error type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Error type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2926,6 +3216,55 @@ PlaceSearchRequest            (<span title="PyQt5.QtLocation.QPlaceSearchRequest
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/placesearchrequest.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PlaceSearchRequest</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceSearchRequest</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_visibility_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">VisibilityStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return the scope of the visibility.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Visibility scope</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">VISIBILITY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">visibilityScope</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_categories</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">location</span><span class="o">.</span><span class="n">PlaceCategory</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">location</span><span class="o">.</span><span class="n">PlaceCategory</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_search_area</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoShape</span><span class="p">:</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">searchArea</span><span class="p">()</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoCircle</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoCircle</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoPath</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoPath</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoPolygon</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoPolygon</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoRectangle</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoRectangle</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">positioning</span><span class="o">.</span><span class="n">GeoShape</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">RelevanceHintStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the relevance hint.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            hint: Relevance hint</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: relevance hint does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">hint</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RELEVANCE_HINT</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="n">RELEVANCE_HINT</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setRelevanceHint</span><span class="p">(</span><span class="n">RELEVANCE_HINT</span><span class="p">[</span><span class="n">hint</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_relevance_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RelevanceHintStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return current relevance hint.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Relevance hint</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">RELEVANCE_HINT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">relevanceHint</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3167,6 +3506,24 @@ PlaceSearchResult            (<span title="PyQt5.QtLocation.QPlaceSearchResult">
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/location/placesearchresult.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PlaceSearchResult</span><span class="p">(</span><span class="n">QtLocation</span><span class="o">.</span><span class="n">QPlaceSearchResult</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceIcon</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">location</span><span class="o">.</span><span class="n">PlaceIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return result type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            Result type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3332,10 +3689,10 @@ PlaceSearchResult            (<span title="PyQt5.QtLocation.QPlaceSearchResult">
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

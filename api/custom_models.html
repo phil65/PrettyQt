@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/custom_models.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1894,6 +1894,108 @@ ColumnItem        </code>
 
       <p>Determines how an object attribute is shown.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="k">class</span> <span class="nc">ColumnItem</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Determines how an object attribute is shown.&quot;&quot;&quot;</span>
+
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">label</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">checkstate</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">doc</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&lt;no help available&gt;&quot;</span>
+    <span class="n">col_visible</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">SMALL_COL_WIDTH</span>
+    <span class="n">alignment</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">line_wrap</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textoption</span><span class="o">.</span><span class="n">WordWrapModeStr</span> <span class="o">=</span> <span class="s2">&quot;none&quot;</span>
+    <span class="n">foreground_color</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">background_color</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">decoration</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">font</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">selectable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">editable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">checkable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">tristate</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="k">def</span> <span class="nf">get_flag</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_FLAGS</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectable</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">enabled</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">editable</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_EDITABLE</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkable</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_CHECKABLE</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tristate</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_USER_TRISTATE</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="n">flag</span>
+
+    <span class="k">def</span> <span class="nf">get_label</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">label</span>
+
+    <span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkstate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checkstate</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkstate</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkstate</span>
+
+    <span class="k">def</span> <span class="nf">get_font</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span>
+
+    <span class="k">def</span> <span class="nf">get_foreground_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span>
+
+    <span class="k">def</span> <span class="nf">get_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span>
+
+    <span class="k">def</span> <span class="nf">get_decoration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decoration</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoration</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoration</span>
+
+    <span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGN_LEFT</span>  <span class="c1"># type: ignore</span>
+        <span class="k">elif</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">alignment</span>
+
+    <span class="k">def</span> <span class="nf">get_width</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="s2">&quot;small&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">SMALL_COL_WIDTH</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">==</span> <span class="s2">&quot;medium&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">MEDIUM_COL_WIDTH</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1967,6 +2069,62 @@ ColumnItemModel            (<a title="prettyqt.core.abstractitemmodel.AbstractIt
 
       <p>Model that provides an interface to an objectree that is build of TreeItems.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ColumnItemModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">AbstractItemModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Model that provides an interface to an objectree that is build of TreeItems.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">attr_cols</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ColumnItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span> <span class="o">=</span> <span class="n">attr_cols</span> <span class="k">if</span> <span class="n">attr_cols</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the number of columns in the tree.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the tree item at the given index and role.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">col</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
+        <span class="n">tree_item</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span><span class="p">]:</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DECORATION_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_decoration</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">CHECKSTATE_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_checkstate</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENT_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_alignment</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOREGROUND_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_foreground_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">BACKGROUND_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_background_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">FONT_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_font</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_CHILDREN</span>
+        <span class="n">col</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_flag</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span> <span class="ow">and</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">section</span><span class="p">]</span><span class="o">.</span><span class="n">name</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2177,6 +2335,72 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/importlibdistributionmodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ImportlibDistributionModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">AbstractTableModel</span><span class="p">):</span>
+
+    <span class="n">HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Version&quot;</span><span class="p">,</span> <span class="s2">&quot;Summary&quot;</span><span class="p">,</span> <span class="s2">&quot;Homepage&quot;</span><span class="p">,</span> <span class="s2">&quot;Author&quot;</span><span class="p">,</span> <span class="s2">&quot;License&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">distributions</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">metadata</span><span class="o">.</span><span class="n">Distribution</span><span class="p">],</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span> <span class="o">=</span> <span class="n">distributions</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+                <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+                <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">version</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+                <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Summary&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+                <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Home-Page&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+                <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;Author&quot;</span><span class="p">]</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">5</span><span class="p">:</span>
+                <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+                <span class="k">return</span> <span class="n">dist</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s2">&quot;License&quot;</span><span class="p">]</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">:</span>
+            <span class="n">dist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+            <span class="k">return</span> <span class="n">dist</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_system</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ImportlibDistributionModel</span><span class="p">:</span>
+        <span class="n">distributions</span> <span class="o">=</span> <span class="n">list_system_modules</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">distributions</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">from_package</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">package_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ImportlibDistributionModel</span><span class="p">:</span>
+        <span class="n">distributions</span> <span class="o">=</span> <span class="n">list_package_requirements</span><span class="p">(</span><span class="n">package_name</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">distributions</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2197,7 +2421,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.columnCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f333c55daf0</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f37f02bc120</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2302,7 +2526,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f333c55e0a0</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f37f022bd80</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2388,6 +2612,66 @@ JsonModel            (<a title="prettyqt.custom_models.nestedmodel.NestedModel" 
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/jsonmodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JsonModel</span><span class="p">(</span><span class="n">custom_models</span><span class="o">.</span><span class="n">NestedModel</span><span class="p">):</span>
+
+    <span class="n">HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">JsonTreeItem</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">children</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">as_json</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load from dictionary.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            document (dict): JSON-compatible dictionary</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span>
+            <span class="n">document</span><span class="p">,</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)</span>
+        <span class="p">),</span> <span class="s2">&quot;`document` must be of dict, list or tuple, &quot;</span> <span class="s2">&quot;not </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="nb">type</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">reset_model</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">JsonTreeItem</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="nb">type</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">children</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">item</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">key</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">type</span> <span class="ow">in</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">value</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">type</span><span class="o">.</span><span class="vm">__name__</span>
+
+    <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">item</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_row</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2599,6 +2883,91 @@ ListMixin        </code>
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/listmixin.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ListMixin</span><span class="p">:</span>
+    <span class="n">remove_rows</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">SORT_METHODS</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span>
+    <span class="n">change_layout</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">insert_rows</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">removeRow</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="c1"># setData: Callable</span>
+    <span class="n">update_row</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">MIME_TYPE</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">DATA_ROLE</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">DATA_ROLE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_row</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="nf">removeRows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="n">end_row</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_rows</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">end_row</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">end_row</span><span class="p">,</span> <span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Required override for AbstractitemModels.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data_by_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">dropMimeData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mime_data</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent_index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mime_data</span><span class="o">.</span><span class="n">hasFormat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MIME_TYPE</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># Since we only drop in between items, parent_index must be invalid,</span>
+        <span class="c1"># and we use the row arg to know where the drop took place.</span>
+        <span class="k">if</span> <span class="n">parent_index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">mime_data</span><span class="o">.</span><span class="n">get_json_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MIME_TYPE</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">row</span> <span class="k">if</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="ow">and</span> <span class="n">row</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="n">rem_offset</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">]</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_layout</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">new</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">rem_offset</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncol</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sort table by given column number.&quot;&quot;&quot;</span>
+        <span class="n">is_asc</span> <span class="o">=</span> <span class="n">order</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASCENDING</span>
+        <span class="n">sorter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SORT_METHODS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ncol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sorter</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_layout</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">sorter</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">is_asc</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Append provided item to the list.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_items</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="nf">add_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">position</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Append a list of items to the list.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">position</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">position</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="c1"># self.items.extend(items)</span>
+        <span class="k">return</span> <span class="n">items</span>
+
+    <span class="k">def</span> <span class="nf">remove_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offsets</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">offsets</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">removeRow</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2800,6 +3169,86 @@ ModelMixin        </code>
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/modelmixin.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ModelMixin</span><span class="p">:</span>
+
+    <span class="n">DATA_ROLE</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span>
+    <span class="n">DTYPE_ROLE</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># type: ignore</span>
+    <span class="n">NAME_ROLE</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span> <span class="o">+</span> <span class="mi">2</span>  <span class="c1"># type: ignore</span>
+    <span class="n">SORT_ROLE</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span> <span class="o">+</span> <span class="mi">3</span>  <span class="c1"># type: ignore</span>
+    <span class="n">MAX_ROWS</span> <span class="o">=</span> <span class="mi">1_000_000</span>
+    <span class="n">HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">]</span>
+    <span class="n">DEFAULT_FLAGS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">DRAG_ENABLED</span>  <span class="c1"># type: ignore</span>
+        <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span>
+        <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span>
+        <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_CHILDREN</span>
+    <span class="p">)</span>
+    <span class="n">LABELS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">CHECKSTATE</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">TOOLTIPS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">DECORATIONS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">SET_DATA</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+    <span class="n">content_type</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">data_by_index</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">update_row</span><span class="p">:</span> <span class="n">Callable</span>
+
+    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">[</span><span class="n">offset</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Required override for AbstractitemModels.</span>
+
+<span class="sd">        returns corresponding flags for cell of supplied index</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">DROP_ENABLED</span>
+        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SET_DATA</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_FLAGS</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_EDITABLE</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_FLAGS</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_by_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DECORATION_ROLE</span><span class="p">:</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">DECORATIONS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">fn</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span><span class="p">]:</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LABELS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">fn</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLTIP_ROLE</span><span class="p">:</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">TOOLTIPS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">fn</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">CHECKSTATE_ROLE</span><span class="p">:</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CHECKSTATE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">fn</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">DATA_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">item</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_by_index</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SET_DATA</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">fn</span><span class="p">:</span>
+                <span class="n">fn</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">update_row</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+                <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2926,6 +3375,85 @@ NestedItem        </code>
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/nesteditem.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NestedItem</span><span class="p">:</span>
+
+    <span class="n">item_name</span> <span class="o">=</span> <span class="s2">&quot;not_defined&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">NestedItem</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">dynamic_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NestedItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_name</span> <span class="o">=</span> <span class="n">dynamic_name</span> <span class="k">if</span> <span class="n">dynamic_name</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
+        <span class="c1"># self.timestamp = kwargs.pop(&quot;timestamp&quot;, time.time())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NestedItem</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">children</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add_children</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">children</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">child</span> <span class="ow">in</span> <span class="n">children</span><span class="p">:</span>
+            <span class="n">child</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">children</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">append_child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">child</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NestedItem</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">row</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return row number.</span>
+
+<span class="sd">        returns row position of item inside parent´s children</span>
+<span class="sd">        returns 0 if no parent available</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            row number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">children</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="k">else</span> <span class="mi">0</span>
+
+    <span class="k">def</span> <span class="nf">iter_tree</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">yield_self</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">recursive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+        <span class="n">level</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">assign_names</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Yield children from bottom to top, yield self at end.</span>
+
+<span class="sd">        assigns dynamic vars count, level and dynamic name</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_name</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">level</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">with_suffix</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">name</span>
+            <span class="k">if</span> <span class="n">recursive</span><span class="p">:</span>
+                <span class="k">yield from</span> <span class="n">c</span><span class="o">.</span><span class="n">iter_tree</span><span class="p">(</span>
+                    <span class="n">with_suffix</span><span class="p">,</span> <span class="n">yield_self</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">level</span><span class="p">,</span> <span class="n">count</span><span class="o">=</span><span class="n">count</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="n">assign_names</span><span class="p">:</span>
+                <span class="n">c</span><span class="o">.</span><span class="n">dynamic_name</span><span class="p">,</span> <span class="n">c</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">with_suffix</span><span class="p">,</span> <span class="n">count</span>
+            <span class="k">yield</span> <span class="n">c</span>
+            <span class="n">level</span> <span class="o">-=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">yield_self</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">assign_names</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">name</span><span class="p">,</span> <span class="mi">0</span>
+            <span class="k">yield</span> <span class="bp">self</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3114,6 +3642,80 @@ NestedModel            (<a title="prettyqt.custom_models.listmixin.ListMixin" hr
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/nestedmodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NestedModel</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+    <span class="n">custom_models</span><span class="o">.</span><span class="n">ListMixin</span><span class="p">,</span> <span class="n">custom_models</span><span class="o">.</span><span class="n">ModelMixin</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">AbstractItemModel</span>
+<span class="p">):</span>
+
+    <span class="n">DEFAULT_FLAGS</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="n">constants</span><span class="o">.</span><span class="n">DRAG_ENABLED</span>  <span class="c1"># type: ignore</span>
+        <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span>
+        <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span>
+    <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">Root</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">children</span>
+
+    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_FLAGS</span>
+        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">SET_DATA</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_FLAGS</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_EDITABLE</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_FLAGS</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
+
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">parent</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span><span class="o">.</span><span class="n">children</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="n">parent_item</span> <span class="o">=</span> <span class="n">parent</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">parent_item</span><span class="p">:</span>
+            <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">children</span><span class="p">[</span><span class="n">row</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="n">item</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">item</span><span class="o">.</span><span class="n">parent</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">row</span><span class="p">(),</span> <span class="mi">0</span><span class="p">,</span> <span class="n">item</span><span class="o">.</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data_by_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Serialise model as JSON-compliant dictionary.</span>
+
+<span class="sd">        Arguments:</span>
+<span class="sd">            root (JsonTreeItem, optional): Serialise from here</span>
+<span class="sd">                defaults to the the top-level item</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            model as dict</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">root</span> <span class="o">=</span> <span class="n">root</span> <span class="k">if</span> <span class="n">root</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">root</span>
+        <span class="k">return</span> <span class="n">root</span><span class="o">.</span><span class="n">as_json</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3166,7 +3768,7 @@ NestedModel            (<a title="prettyqt.custom_models.listmixin.ListMixin" hr
 
 
 <h4 id="prettyqt.custom_models.nestedmodel.NestedModel.index" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f333c532b90</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f37f0270890</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -3309,7 +3911,7 @@ parent(self) -&gt; QObject</p>
 
 
 <h4 id="prettyqt.custom_models.nestedmodel.NestedModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f333c532f10</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PyQt5</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x7f37f0270c10</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -3398,6 +4000,47 @@ RegexMatchesModel            (<span title="prettyqt.core.abstracttablemodel.Abst
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RegexMatchesModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">AbstractTableModel</span><span class="p">):</span>
+
+    <span class="n">HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="s2">&quot;End&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="s2">&quot;Groups&quot;</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matches</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="o">=</span> <span class="n">matches</span> <span class="k">if</span> <span class="n">matches</span> <span class="k">else</span> <span class="nb">list</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">orientation</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">[</span><span class="n">section</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">matches</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">]:</span>
+            <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">repr</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+            <span class="k">elif</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">groups</span><span class="p">()))</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="ow">in</span> <span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">]:</span>
+            <span class="k">return</span> <span class="n">item</span><span class="o">.</span><span class="n">span</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Required override for AbstractitemModels.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matches</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3607,6 +4250,87 @@ StorageInfoModel            (<span title="prettyqt.core.abstracttablemodel.Abstr
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/storageinfomodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StorageInfoModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">AbstractTableModel</span><span class="p">):</span>
+    <span class="p">(</span>
+        <span class="n">ColumnRootPath</span><span class="p">,</span>
+        <span class="n">ColumnName</span><span class="p">,</span>
+        <span class="n">ColumnDevice</span><span class="p">,</span>
+        <span class="n">ColumnFileSystemName</span><span class="p">,</span>
+        <span class="n">ColumnTotal</span><span class="p">,</span>
+        <span class="n">ColumnFree</span><span class="p">,</span>
+        <span class="n">ColumnAvailable</span><span class="p">,</span>
+        <span class="n">ColumnIsReady</span><span class="p">,</span>
+        <span class="n">ColumnIsReadOnly</span><span class="p">,</span>
+        <span class="n">ColumnIsValid</span><span class="p">,</span>
+        <span class="n">ColumnCount</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+
+    <span class="n">columnFuncMap</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">ColumnRootPath</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">volume</span><span class="o">.</span><span class="n">get_root_path</span><span class="p">()),</span>
+        <span class="n">ColumnName</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">volume</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span>
+        <span class="n">ColumnDevice</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">volume</span><span class="o">.</span><span class="n">get_device</span><span class="p">(),</span>
+        <span class="n">ColumnFileSystemName</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">volume</span><span class="o">.</span><span class="n">get_file_system_type</span><span class="p">(),</span>
+        <span class="n">ColumnTotal</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">size_to_string</span><span class="p">(</span><span class="n">volume</span><span class="o">.</span><span class="n">bytesTotal</span><span class="p">()),</span>
+        <span class="n">ColumnFree</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">size_to_string</span><span class="p">(</span><span class="n">volume</span><span class="o">.</span><span class="n">bytesFree</span><span class="p">()),</span>
+        <span class="n">ColumnAvailable</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">size_to_string</span><span class="p">(</span><span class="n">volume</span><span class="o">.</span><span class="n">bytesAvailable</span><span class="p">()),</span>
+        <span class="n">ColumnIsReady</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">volume</span><span class="o">.</span><span class="n">isReady</span><span class="p">(),</span>
+        <span class="n">ColumnIsReadOnly</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">volume</span><span class="o">.</span><span class="n">isReadOnly</span><span class="p">(),</span>
+        <span class="n">ColumnIsValid</span><span class="p">:</span> <span class="k">lambda</span> <span class="n">volume</span><span class="p">:</span> <span class="n">volume</span><span class="o">.</span><span class="n">isValid</span><span class="p">(),</span>
+    <span class="p">}</span>
+
+    <span class="n">columnNameMap</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">ColumnRootPath</span><span class="p">:</span> <span class="s2">&quot;Root path&quot;</span><span class="p">,</span>
+        <span class="n">ColumnName</span><span class="p">:</span> <span class="s2">&quot;Volume Name&quot;</span><span class="p">,</span>
+        <span class="n">ColumnDevice</span><span class="p">:</span> <span class="s2">&quot;Device&quot;</span><span class="p">,</span>
+        <span class="n">ColumnFileSystemName</span><span class="p">:</span> <span class="s2">&quot;File system&quot;</span><span class="p">,</span>
+        <span class="n">ColumnTotal</span><span class="p">:</span> <span class="s2">&quot;Total&quot;</span><span class="p">,</span>
+        <span class="n">ColumnFree</span><span class="p">:</span> <span class="s2">&quot;Free&quot;</span><span class="p">,</span>
+        <span class="n">ColumnAvailable</span><span class="p">:</span> <span class="s2">&quot;Available&quot;</span><span class="p">,</span>
+        <span class="n">ColumnIsReady</span><span class="p">:</span> <span class="s2">&quot;Ready&quot;</span><span class="p">,</span>
+        <span class="n">ColumnIsReadOnly</span><span class="p">:</span> <span class="s2">&quot;Read-only&quot;</span><span class="p">,</span>
+        <span class="n">ColumnIsValid</span><span class="p">:</span> <span class="s2">&quot;Valid&quot;</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">StorageInfo</span><span class="o">.</span><span class="n">get_mounted_volumes</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">ColumnCount</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+            <span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+            <span class="n">func</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnFuncMap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">func</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">volume</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLTIP_ROLE</span><span class="p">:</span>
+            <span class="n">volume</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+            <span class="n">tooltip</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">column</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ColumnCount</span><span class="p">):</span>
+                <span class="n">label</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnNameMap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">column</span><span class="p">)</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnFuncMap</span><span class="p">[</span><span class="n">column</span><span class="p">](</span><span class="n">volume</span><span class="p">)</span>
+                <span class="n">tooltip</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">label</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">orientation</span> <span class="o">!=</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">!=</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnNameMap</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3825,6 +4549,73 @@ SubsequenceSortFilterProxyModel            (<span title="prettyqt.core.sortfilte
 
       <p>Performs subsequence matching/sorting.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/subsequencesortfilterproxymodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SubsequenceSortFilterProxyModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Performs subsequence matching/sorting.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">case_sensitivity</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">case_sensitivity</span> <span class="o">=</span> <span class="n">case_sensitivity</span>
+
+    <span class="k">def</span> <span class="nf">set_prefix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_patterns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">filter_patterns_case_sensitive</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sort_patterns</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">IGNORECASE</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">case_sensitivity</span> <span class="ow">is</span> <span class="kc">False</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)):</span>
+            <span class="n">ptrn</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;.*</span><span class="si">{</span><span class="n">prefix</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">.*</span><span class="si">{</span><span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">filter_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">ptrn</span><span class="p">,</span> <span class="n">flags</span><span class="p">))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">filter_patterns_case_sensitive</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">ptrn</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+                <span class="n">ptrn</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prefix</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">.*</span><span class="si">{</span><span class="n">prefix</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sort_patterns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">ptrn</span><span class="p">,</span> <span class="n">flags</span><span class="p">))</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">continue</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="o">=</span> <span class="n">prefix</span>
+
+    <span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+        <span class="n">completion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">completion</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">completion</span><span class="p">)</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">case_sensitivity</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
+                    <span class="n">completion</span> <span class="o">=</span> <span class="n">completion</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                    <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+                <span class="n">rank</span> <span class="o">=</span> <span class="n">completion</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
+                <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">USER_ROLE</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+                <span class="k">return</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">completion</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">patterns</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span>
+            <span class="nb">zip</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">filter_patterns</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">filter_patterns_case_sensitive</span><span class="p">,</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sort_patterns</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">):</span>
+            <span class="n">pattern</span><span class="p">,</span> <span class="n">pattern_case</span><span class="p">,</span> <span class="n">sort_pattern</span> <span class="o">=</span> <span class="n">patterns</span>
+            <span class="n">match</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">completion</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">match</span><span class="p">:</span>
+                <span class="c1"># compute rank, the lowest rank the closer it is from the</span>
+                <span class="c1"># completion</span>
+                <span class="n">start</span> <span class="o">=</span> <span class="n">MAX_SIZE</span>
+                <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">sort_pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">completion</span><span class="p">):</span>
+                    <span class="n">start</span><span class="p">,</span> <span class="n">end</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()</span>
+                <span class="n">rank</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">10</span>
+                <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern_case</span><span class="p">,</span> <span class="n">completion</span><span class="p">):</span>
+                    <span class="c1"># favorise completions where case is matched</span>
+                    <span class="n">rank</span> <span class="o">-=</span> <span class="mi">10</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">USER_ROLE</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+                <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3869,7 +4660,7 @@ SubsequenceSortFilterProxyModel            (<span title="prettyqt.core.sortfilte
                 <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
             <span class="n">rank</span> <span class="o">=</span> <span class="n">completion</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">prefix</span><span class="p">)</span>
             <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">USER_ROLE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">USER_ROLE</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
             <span class="k">return</span> <span class="n">prefix</span> <span class="ow">in</span> <span class="n">completion</span>
         <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span>
@@ -3892,7 +4683,7 @@ SubsequenceSortFilterProxyModel            (<span title="prettyqt.core.sortfilte
             <span class="k">if</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="n">pattern_case</span><span class="p">,</span> <span class="n">completion</span><span class="p">):</span>
                 <span class="c1"># favorise completions where case is matched</span>
                 <span class="n">rank</span> <span class="o">-=</span> <span class="mi">10</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">USER_ROLE</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">rank</span><span class="p">,</span> <span class="n">USER_ROLE</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
             <span class="k">return</span> <span class="kc">True</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 </code></pre></div>
@@ -3966,6 +4757,51 @@ TransposeProxyModel            (<span title="prettyqt.core.abstractproxymodel.Ab
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/transposeproxymodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TransposeProxyModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">AbstractProxyModel</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span> <span class="o">=</span> <span class="n">source_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">source_model</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_model</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span> <span class="o">=</span> <span class="n">source_model</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="n">source_model</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">mapFromSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">source_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">source_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">mapToSource</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">proxy_index</span><span class="o">.</span><span class="n">column</span><span class="p">(),</span> <span class="n">proxy_index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">columnCount</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemDataRole</span><span class="o">.</span><span class="n">DisplayRole</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">index</span><span class="p">),</span> <span class="n">role</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_source_model</span><span class="o">.</span><span class="n">headerData</span><span class="p">(</span><span class="n">section</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -4326,10 +5162,10 @@ parent(self) -&gt; QObject</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

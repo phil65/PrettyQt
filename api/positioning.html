@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/positioning.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1055,6 +1055,24 @@ GeoAreaMonitorSource            (<span title="PyQt5.QtPositioning.QGeoAreaMonito
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/positioning/geoareamonitorsource.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoAreaMonitorSource</span><span class="p">(</span><span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoAreaMonitorSource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceName</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AreaMonitorFeatureStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return error type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            error type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ERRORS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1189,6 +1207,70 @@ GeoPositionInfoSource            (<span title="PyQt5.QtPositioning.QGeoPositionI
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoPositionInfoSource</span><span class="p">(</span><span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoPositionInfoSource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">minimum_update_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minimumUpdateInterval</span><span class="p">(),</span>
+            <span class="n">source_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">sourceName</span><span class="p">(),</span>
+            <span class="n">update_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">updateInterval</span><span class="p">(),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceName</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return error type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            error type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ERRORS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">methods</span><span class="p">:</span> <span class="n">PositioningMethodStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set preferred positioning methods.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            methods: positioning methods to use</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: invalid positioning methods</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">methods</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">item</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">POSITIONING_METHODS</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">POSITIONING_METHODS</span><span class="p">)</span>
+        <span class="n">flags</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">merge_flags</span><span class="p">(</span><span class="n">methods</span><span class="p">,</span> <span class="n">POSITIONING_METHODS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPreferredPositioningMethods</span><span class="p">(</span><span class="n">flags</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return list of preferred positioning methods.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list of preferred positioning methods</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">k</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">POSITIONING_METHODS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">preferredPositioningMethods</span><span class="p">()</span>
+        <span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_supported_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]:</span>
+        <span class="sd">&quot;&quot;&quot;Return list of supported positioning methods.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            list of supported positioning methods</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="n">k</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">POSITIONING_METHODS</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">supportedPositioningMethods</span><span class="p">()</span>
+        <span class="p">]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1490,6 +1572,46 @@ GeoSatelliteInfo            (<span title="PyQt5.QtPositioning.QGeoSatelliteInfo"
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/positioning/geosatelliteinfo.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoSatelliteInfo</span><span class="p">(</span><span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoSatelliteInfo</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">AttributeStr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="n">ATTRIBUTE</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">AttributeStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setAttribute</span><span class="p">(</span><span class="n">ATTRIBUTE</span><span class="p">[</span><span class="n">index</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">AttributeStr</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">removeAttribute</span><span class="p">(</span><span class="n">ATTRIBUTE</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">AttributeStr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasAttribute</span><span class="p">(</span><span class="n">ATTRIBUTE</span><span class="p">[</span><span class="n">value</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="fm">__int__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">satelliteIdentifier</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">set_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="n">SatelliteSystemStr</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set satellite system.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            system: satellite system to use</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: invalid system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">system</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SATELLITE_SYSTEMS</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">system</span><span class="p">,</span> <span class="n">SATELLITE_SYSTEMS</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setSatelliteSystem</span><span class="p">(</span><span class="n">SATELLITE_SYSTEMS</span><span class="p">[</span><span class="n">system</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SatelliteSystemStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return satellite system.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            satellite system</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SATELLITE_SYSTEMS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">satelliteSystem</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1688,6 +1810,30 @@ GeoSatelliteInfoSource            (<span title="PyQt5.QtPositioning.QGeoSatellit
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/positioning/geosatelliteinfosource.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoSatelliteInfoSource</span><span class="p">(</span><span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoSatelliteInfoSource</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
+            <span class="n">minimum_update_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minimumUpdateInterval</span><span class="p">(),</span>
+            <span class="n">update_interval</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">updateInterval</span><span class="p">(),</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceName</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+
+    <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Return error type.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            error type</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1854,10 +2000,10 @@ GeoSatelliteInfoSource            (<span title="PyQt5.QtPositioning.QGeoSatellit
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

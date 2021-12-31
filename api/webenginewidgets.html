@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/webenginewidgets.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -837,6 +837,130 @@ WebEngineView            (<span title="PyQt5.QtWebEngineWidgets.QWebEngineView">
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineView</span><span class="p">(</span><span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEngineView</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEnginePage</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
+
+    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the url of the WebEngineView.</span>
+
+<span class="sd">        Clears the view and loads the URL.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url: URL to set</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="o">.</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">url</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Load the URL.</span>
+
+<span class="sd">        Loads the specified url and displays it.</span>
+
+<span class="sd">        Note: The view remains the same until enough data has arrived</span>
+<span class="sd">        to display the new URL.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            url: URL to load</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="o">.</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">url</span><span class="p">))</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the zoom factor for the view.</span>
+
+<span class="sd">        Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            zoom: Zoom factor</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setZoomFactor</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">find_text</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
+
+<span class="sd">        Finds the specified string, subString, in the page, using the given options.</span>
+<span class="sd">        The findTextFinished() signal is emitted when a string search is completed.</span>
+
+<span class="sd">        To clear the search highlight, just pass an empty string.</span>
+
+<span class="sd">        The resultCallback must take a boolean parameter.</span>
+<span class="sd">        It will be called with a value of true if the subString was found;</span>
+<span class="sd">        otherwise the callback value will be false.</span>
+
+<span class="sd">        Warning: It is guaranteed that the callback is always called,</span>
+<span class="sd">        but it might be done during page destruction. When WebEnginePage is deleted,</span>
+<span class="sd">        the callback is triggered with an invalid value and it is not safe to use</span>
+<span class="sd">        the corresponding QWebEnginePage or QWebEngineView instance inside it.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            string: string to search for</span>
+<span class="sd">            backward: search backwards</span>
+<span class="sd">            case_sensitive: case-sensitive search</span>
+<span class="sd">            callback: result callback</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">callback</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+
+            <span class="k">def</span> <span class="nf">do_nothing</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+                <span class="k">pass</span>
+
+            <span class="n">callback</span> <span class="o">=</span> <span class="n">do_nothing</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEnginePage</span><span class="o">.</span><span class="n">FindFlag</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">case_sensitive</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEnginePage</span><span class="o">.</span><span class="n">FindFlag</span><span class="o">.</span><span class="n">FindCaseSensitively</span>
+        <span class="k">if</span> <span class="n">backward</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">|=</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEnginePage</span><span class="o">.</span><span class="n">FindFlag</span><span class="o">.</span><span class="n">FindBackward</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">findText</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineSettings</span><span class="p">:</span>
+        <span class="n">settings</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">settings</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineSettings</span><span class="p">(</span><span class="n">settings</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_setting</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">setting_name</span><span class="p">:</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">webenginesettings</span><span class="o">.</span><span class="n">WebAttributeStr</span><span class="p">,</span>
+        <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()[</span><span class="n">setting_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">get_setting</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">setting_name</span><span class="p">:</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">webenginesettings</span><span class="o">.</span><span class="n">WebAttributeStr</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_settings</span><span class="p">()[</span><span class="n">setting_name</span><span class="p">]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">register_as_browser</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">tabwidget</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">TabWidget</span><span class="p">):</span>
+        <span class="k">class</span> <span class="nc">BuiltInBrowser</span><span class="p">(</span><span class="n">webbrowser</span><span class="o">.</span><span class="n">BaseBrowser</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">new</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">autoraise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+                <span class="c1"># logger.info(f&quot;opening {url} with builtin browser..&quot;)</span>
+                <span class="n">webview</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
+                <span class="n">webview</span><span class="o">.</span><span class="n">load_url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">new</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">webview</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">tabwidget</span><span class="o">.</span><span class="n">add_tab</span><span class="p">(</span><span class="n">webview</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">url</span><span class="p">),</span> <span class="n">show</span><span class="o">=</span><span class="n">autoraise</span><span class="p">)</span>
+
+        <span class="n">webbrowser</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;BuiltInBrowser&quot;</span><span class="p">,</span> <span class="n">BuiltInBrowser</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -971,7 +1095,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 
 
 <h4 id="prettyqt.webenginewidgets.webengineview.WebEngineView.load_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -996,7 +1120,7 @@ to display the new URL.</p>
   <tbody>
       <tr>
         <td><code>url</code></td>
-        <td><code>QtCore.QUrl | str | os.PathLike</code></td>
+        <td><code>types.UrlType | types.PathType</code></td>
         <td><p>URL to load</p></td>
         <td><em>required</em></td>
       </tr>
@@ -1004,7 +1128,7 @@ to display the new URL.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
@@ -1035,7 +1159,7 @@ to display the new URL.</p>
 
 
 <h4 id="prettyqt.webenginewidgets.webengineview.WebEngineView.set_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1058,7 +1182,7 @@ to display the new URL.</p>
   <tbody>
       <tr>
         <td><code>url</code></td>
-        <td><code>QtCore.QUrl | str | os.PathLike</code></td>
+        <td><code>types.UrlType | types.PathType</code></td>
         <td><p>URL to set</p></td>
         <td><em>required</em></td>
       </tr>
@@ -1066,7 +1190,7 @@ to display the new URL.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set the url of the WebEngineView.</span>
 
 <span class="sd">    Clears the view and loads the URL.</span>
@@ -1242,10 +1366,10 @@ to display the new URL.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>

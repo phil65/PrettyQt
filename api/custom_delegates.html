@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/custom_delegates.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.23b6d78a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1573,6 +1573,36 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ButtonDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">ItemDelegate</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemDataRole</span><span class="o">.</span><span class="n">UserRole</span>
+    <span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fn_role</span> <span class="o">=</span> <span class="n">role</span>
+
+    <span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">:</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="n">btn_callback</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn_role</span><span class="p">)</span>
+        <span class="n">btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">btn_callback</span><span class="p">:</span>
+            <span class="n">btn</span><span class="o">.</span><span class="n">set_disabled</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">btn</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">btn_callback</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">btn</span>
+
+    <span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">currentIndexChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commitData</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">())</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1737,6 +1767,40 @@ CheckBoxDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDele
 
       <p>Delegate that places a CheckBox in every cell.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">CheckBoxDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">ItemDelegate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Delegate that places a CheckBox in every cell.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">selected</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override.</span>
+
+<span class="sd">        instanciate the editor widget and initialize it</span>
+<span class="sd">        also connect currentIndexChanged signal.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cb</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">CheckBox</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="n">cb</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">cb</span>
+
+    <span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cb</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override.</span>
+
+<span class="sd">        set correct initial value for editor widget</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">current_selection</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="k">with</span> <span class="n">cb</span><span class="o">.</span><span class="n">block_signals</span><span class="p">():</span>
+            <span class="n">cb</span><span class="o">.</span><span class="n">setCurrentText</span><span class="p">(</span><span class="n">current_selection</span><span class="p">)</span>
+
+    <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
+    <span class="k">def</span> <span class="nf">currentIndexChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commitData</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">())</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1883,6 +1947,66 @@ IconDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Styled
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/icondelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">IconDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">StyledItemDelegate</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">option</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QStyleOptionViewItem</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Override to paint an icon based on given Pixmap / Color / Icon.</span>
+
+<span class="sd">        Pixmap / Color / Icon must be set to &#39;QtCore.Qt.ItemDataRole.UserRole + 1000&#39;</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            painter (QtGui.QPainter): painter to paint the icon</span>
+<span class="sd">            option (QtWidgets.QStyleOptionViewItem): state of the item to be displayed</span>
+<span class="sd">            index (QtCore.QModelIndex): index which gets decorated</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">DecorationRole2</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">margin</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="o">.</span><span class="n">Mode</span><span class="o">.</span><span class="n">Normal</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Enabled</span><span class="p">):</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="o">.</span><span class="n">Mode</span><span class="o">.</span><span class="n">Disabled</span>
+        <span class="k">elif</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Selected</span><span class="p">:</span>
+            <span class="n">mode</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="o">.</span><span class="n">Mode</span><span class="o">.</span><span class="n">Selected</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">):</span>
+            <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">option</span><span class="o">.</span><span class="n">decorationSize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">value</span><span class="o">.</span><span class="n">devicePixelRatio</span><span class="p">())</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">):</span>
+            <span class="n">pixmap</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">decorationSize</span><span class="p">)</span>
+            <span class="n">pixmap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QImage</span><span class="p">):</span>
+            <span class="n">icon</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="o">.</span><span class="n">fromImage</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+            <span class="n">option</span><span class="o">.</span><span class="n">decorationSize</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="n">value</span><span class="o">.</span><span class="n">devicePixelRatio</span><span class="p">())</span>
+
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">):</span>
+            <span class="n">is_on</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Open</span>
+            <span class="n">state</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">On</span> <span class="k">if</span> <span class="n">is_on</span> <span class="k">else</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Off</span>
+            <span class="n">actual_size</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">icon</span><span class="o">.</span><span class="n">actualSize</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">decorationSize</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+            <span class="n">option</span><span class="o">.</span><span class="n">decorationSize</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">decorationSize</span> <span class="o">&amp;</span> <span class="n">actual_size</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(),</span> <span class="n">option</span><span class="o">.</span><span class="n">decorationSize</span><span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">moveCenter</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">center</span><span class="p">())</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">setRight</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">right</span><span class="p">()</span> <span class="o">-</span> <span class="n">margin</span><span class="p">)</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">On</span>
+            <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Open</span>
+            <span class="k">else</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Off</span>
+        <span class="p">)</span>
+        <span class="n">alignment</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGN_RIGHT</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGN_V_CENTER</span>  <span class="c1"># type: ignore</span>
+        <span class="n">icon</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">alignment</span><span class="p">,</span> <span class="n">mode</span><span class="p">,</span> <span class="n">state</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2069,6 +2193,20 @@ NoFocusDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Sty
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/nofocusdelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NoFocusDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">StyledItemDelegate</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">option</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QStyleOptionViewItem</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_HasFocus</span><span class="p">:</span>
+            <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">^</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_HasFocus</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2177,6 +2315,24 @@ ProgressBarDelegate            (<span title="prettyqt.widgets.styleditemdelegate
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/progressbardelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ProgressBarDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">StyledItemDelegate</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">progress</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="n">opt</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOptionProgressBar</span><span class="p">()</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">rect</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">minimum</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">maximum</span> <span class="o">=</span> <span class="mi">100</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">progress</span> <span class="o">=</span> <span class="n">progress</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">progress</span><span class="si">}</span><span class="s2">%&quot;</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">textVisible</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">opt</span><span class="o">.</span><span class="n">state</span> <span class="o">|=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Horizontal</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawControl</span><span class="p">(</span>
+            <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">ControlElement</span><span class="o">.</span><span class="n">CE_ProgressBar</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">painter</span>
+        <span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2289,6 +2445,101 @@ RadioDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Style
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RadioDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">StyledItemDelegate</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="n">items</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span>
+        <span class="n">option</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QStyleOptionViewItem</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">:</span>
+        <span class="n">editor</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">setAutoFillBackground</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1"># create a button group to keep track of the checked radio</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">button_group</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ButtonGroup</span><span class="p">()</span>
+        <span class="c1"># adding the widget as an argument to the layout constructor automatically</span>
+        <span class="c1"># applies it to the widget</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">BoxLayout</span><span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">editor</span><span class="p">)</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
+            <span class="n">rb</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">RadioButton</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+            <span class="n">layout</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">rb</span><span class="p">)</span>
+            <span class="c1"># prevent the radio to get focus from keyboard or mouse</span>
+            <span class="n">rb</span><span class="o">.</span><span class="n">set_focus_policy</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">)</span>
+            <span class="n">rb</span><span class="o">.</span><span class="n">installEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">editor</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">addButton</span><span class="p">(</span><span class="n">rb</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+        <span class="c1"># add a stretch to always align contents to the left</span>
+        <span class="n">layout</span><span class="o">.</span><span class="n">addStretch</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+
+        <span class="c1"># set a property that will be used for the mask</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;offMask&quot;</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">editor</span><span class="o">.</span><span class="n">rect</span><span class="p">()))</span>  <span class="c1"># type: ignore</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">installEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">editor</span>
+
+    <span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">core</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QRadioButton</span><span class="p">):</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">source</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">hasFocus</span><span class="p">():</span>
+                    <span class="c1"># the parent has no focus, set it and ignore the click</span>
+                    <span class="n">source</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+                    <span class="k">return</span> <span class="kc">True</span>
+            <span class="k">elif</span> <span class="ow">not</span> <span class="n">source</span><span class="o">.</span><span class="n">hasFocus</span><span class="p">():</span>
+                <span class="c1"># the container has been clicked, check</span>
+                <span class="n">source</span><span class="o">.</span><span class="n">setFocus</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">core</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">FocusIn</span><span class="p">:</span>
+            <span class="c1"># event received as a consequence of setFocus</span>
+            <span class="c1"># clear the mask to show it completely</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">clearMask</span><span class="p">()</span>
+        <span class="k">elif</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">core</span><span class="o">.</span><span class="n">Event</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">FocusOut</span><span class="p">:</span>
+            <span class="c1"># another widget has requested focus, set the mask</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">source</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="sa">b</span><span class="s2">&quot;offMask&quot;</span><span class="p">))</span>
+            <span class="c1"># update the table viewport to get rid of possible</span>
+            <span class="c1"># grid lines left after masking</span>
+            <span class="n">source</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">eventFilter</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">updateEditorGeometry</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">editor</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span>
+        <span class="n">option</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QStyleOptionViewItem</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
+        <span class="n">min_width</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">minimumSizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">min_width</span><span class="p">:</span>
+            <span class="n">rect</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">min_width</span><span class="p">)</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+        <span class="c1"># create a new mask based on the option rectangle, then apply it</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;offMask&quot;</span><span class="p">,</span> <span class="n">mask</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">):</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
+            <span class="n">editor</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">value</span><span class="p">))</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">editor</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span>
+        <span class="n">model</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">,</span>
+        <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">button</span> <span class="o">=</span> <span class="n">editor</span><span class="o">.</span><span class="n">button_group</span><span class="o">.</span><span class="n">checkedId</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">button</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span>
+                <span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">button</span><span class="p">],</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span>  <span class="c1"># type: ignore</span>
+            <span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">choices</span><span class="p">[</span><span class="n">button</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2566,6 +2817,52 @@ RenderLinkDelegate            (<span title="prettyqt.widgets.styleditemdelegate.
     <div class="doc doc-contents ">
 
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/renderlinkdelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RenderLinkDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">StyledItemDelegate</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="p">:</span>
+            <span class="k">return</span>
+
+        <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+
+        <span class="c1"># I only wanted it for mouse over, but you&#39;ll probably want to remove</span>
+        <span class="c1"># this condition</span>
+        <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="ow">and</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_MouseOver</span><span class="p">:</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">option</span><span class="o">.</span><span class="n">font</span>
+            <span class="n">font</span><span class="o">.</span><span class="n">setUnderline</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">link</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">())</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span>
+            <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span>
+            <span class="n">constants</span><span class="o">.</span><span class="n">ALIGN_LEFT</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGN_V_CENTER</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+        <span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">editorEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">FONT_ROLE</span><span class="p">)</span>
+        <span class="c1"># alignment = index.data(constants.ALIGNMENT_ROLE)</span>
+        <span class="k">if</span> <span class="n">font</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">GuiApplication</span><span class="o">.</span><span class="n">get_font</span><span class="p">()</span>
+        <span class="n">fm</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">FontMetricsF</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+        <span class="n">rect</span> <span class="o">=</span> <span class="n">fm</span><span class="o">.</span><span class="n">get_bounding_rect</span><span class="p">(</span>
+            <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">),</span>
+            <span class="n">constants</span><span class="o">.</span><span class="n">ALIGN_LEFT</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGN_V_CENTER</span><span class="p">,</span>  <span class="c1"># type: ignore</span>
+            <span class="n">text</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span>
+            <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">LeftButton</span>
+            <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">localPos</span><span class="p">()</span> <span class="ow">in</span> <span class="n">rect</span>
+        <span class="p">):</span>
+            <span class="n">text</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
+            <span class="n">gui</span><span class="o">.</span><span class="n">DesktopServices</span><span class="o">.</span><span class="n">open_url</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2733,6 +3030,65 @@ StarDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Styled
 
       <p>A delegate class that allows us to render our star ratings.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StarDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">StyledItemDelegate</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;A delegate class that allows us to render our star ratings.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">star_rating</span> <span class="o">=</span> <span class="n">StarRating</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+
+        <span class="c1"># If the row is currently selected, we need to make sure we</span>
+        <span class="c1"># paint the background accordingly.</span>
+        <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Selected</span><span class="p">:</span>
+            <span class="c1"># The original C++ example used option.palette.foreground() to</span>
+            <span class="c1"># get the brush for painting, but there are a couple of</span>
+            <span class="c1"># problems with that:</span>
+            <span class="c1">#   - foreground() is obsolete now, use windowText() instead</span>
+            <span class="c1">#   - more importantly, windowText() just returns a brush</span>
+            <span class="c1">#     containing a flat color, where sometimes the style</span>
+            <span class="c1">#     would have a nice subtle gradient or something.</span>
+            <span class="c1"># Here we just use the brush of the painter object that&#39;s</span>
+            <span class="c1"># passed in to us, which keeps the row highlighting nice</span>
+            <span class="c1"># and consistent.</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">painter</span><span class="o">.</span><span class="n">brush</span><span class="p">())</span>
+
+        <span class="c1"># Now that we&#39;ve painted the background, call star_rating.paint()</span>
+        <span class="c1"># to paint the stars.</span>
+        <span class="n">star_rating</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the size needed to display the item in a QSize object.&quot;&quot;&quot;</span>
+        <span class="n">star_rating</span> <span class="o">=</span> <span class="n">StarRating</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">star_rating</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span>
+
+    <span class="c1"># The next 4 methods handle the custom editing that we need to do.</span>
+    <span class="c1"># If this were just a display delegate, paint() and sizeHint() would</span>
+    <span class="c1"># be all we needed.</span>
+
+    <span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create and return the StarEditor object we&#39;ll use to edit the StarRating.&quot;&quot;&quot;</span>
+        <span class="n">editor</span> <span class="o">=</span> <span class="n">StarEditor</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">editing_finished</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commitAndCloseEditor</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">editor</span>
+
+    <span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set the data to be displayed and edited by our custom editor.&quot;&quot;&quot;</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">set_star_rating</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Get the data from our custom editor and stuffs it into the model.&quot;&quot;&quot;</span>
+        <span class="n">model</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">editor</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">star_count</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">commitAndCloseEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">editor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">()</span>
+
+        <span class="c1"># The commitData signal must be emitted when we&#39;ve finished editing</span>
+        <span class="c1"># and need to write our changed back to the model.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">commitData</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">editor</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closeEditor</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">editor</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">NoHint</span><span class="p">)</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2930,6 +3286,54 @@ StarEditor            (<a title="prettyqt.widgets.widget.Widget" href="widgets.h
 
       <p>The custom editor for editing StarRatings.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StarEditor</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;The custom editor for editing StarRatings.&quot;&quot;&quot;</span>
+
+    <span class="c1"># A signal to tell the delegate when we&#39;ve finished editing.</span>
+    <span class="n">editing_finished</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Initialize the editor object, making sure we can watch mouse events.&quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMouseTracking</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setAutoFillBackground</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span> <span class="o">=</span> <span class="n">StarRating</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Tell the caller how big we are.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Paint the editor, offloading the work to the StarRating class.&quot;&quot;&quot;</span>
+        <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">(),</span> <span class="n">is_editable</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Update stars on mouse move.&quot;&quot;&quot;</span>
+        <span class="n">star</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_at_position</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">x</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="n">star</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">star_count</span> <span class="o">=</span> <span class="n">star</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Once star rating was clicked, tell the delegate we&#39;re done editing.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">editing_finished</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">star_at_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;Calculate which star the user&#39;s mouse cursor is currently hovering over.&quot;&quot;&quot;</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">x</span> <span class="o">//</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">//</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">max_stars</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="mi">0</span> <span class="o">&lt;</span> <span class="n">val</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">max_stars</span><span class="p">:</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="n">val</span>
+
+    <span class="k">def</span> <span class="nf">set_star_rating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rating</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">star_rating</span><span class="o">.</span><span class="n">star_count</span> <span class="o">=</span> <span class="n">rating</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3148,6 +3552,44 @@ StarRating        </code>
 
       <p>Handle the actual painting of the stars themselves.</p>
 
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StarRating</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Handle the actual painting of the stars themselves.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">star_count</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">max_stars</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">star_count</span> <span class="o">=</span> <span class="n">star_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">max_stars</span> <span class="o">=</span> <span class="n">max_stars</span>
+
+    <span class="k">def</span> <span class="nf">sizeHint</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">PAINTING_SCALE_FACTOR</span> <span class="o">*</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_stars</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">paint</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">painter</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainter</span><span class="p">,</span>
+        <span class="n">rect</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">,</span>
+        <span class="n">palette</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="p">,</span>
+        <span class="n">is_editable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Paint the stars (and/or diamonds if we&#39;re in editing mode).&quot;&quot;&quot;</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="n">painter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">PenStyle</span><span class="o">.</span><span class="n">NoPen</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">()</span> <span class="k">if</span> <span class="n">is_editable</span> <span class="k">else</span> <span class="n">palette</span><span class="o">.</span><span class="n">windowText</span><span class="p">())</span>
+        <span class="n">y_offset</span> <span class="o">=</span> <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">PAINTING_SCALE_FACTOR</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">y_offset</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">scale</span><span class="p">(</span><span class="n">PAINTING_SCALE_FACTOR</span><span class="p">,</span> <span class="n">PAINTING_SCALE_FACTOR</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">max_stars</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">star_count</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">STAR_POLYGON</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">FillRule</span><span class="o">.</span><span class="n">WindingFill</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">is_editable</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">DIAMOND_POLYGON</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">FillRule</span><span class="o">.</span><span class="n">WindingFill</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">restore</span><span class="p">()</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -3313,10 +3755,10 @@ StarRating        </code>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.c7dec7e7.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
     
     
-      <script src="../assets/javascripts/bundle.da79ceb7.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
       
     
   </body>
