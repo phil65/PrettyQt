@@ -50,7 +50,7 @@ def clamp(v: float, lower: float, upper: float) -> float:
 
 
 class SpanSlider(widgets.Slider):
-    value_changed = core.Signal(float, float)
+    value_changed = core.Signal(object)
     lower_pos_changed = core.Signal(float)
     upper_pos_changed = core.Signal(float)
     slider_pressed = core.Signal(object)
@@ -205,7 +205,7 @@ class SpanSlider(widgets.Slider):
         self.set_span(self.lower_val, upper)
 
     def on_value_change(self):
-        self.value_changed.emit(self.lower_val, self.upper_val)
+        self.value_changed.emit((self.lower_val, self.upper_val))
 
     def get_value(self) -> tuple[float, float]:
         return (self.lower_val, self.upper_val)

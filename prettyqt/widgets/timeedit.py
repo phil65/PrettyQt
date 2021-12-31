@@ -31,8 +31,12 @@ class TimeEdit(QtWidgets.QTimeEdit):
     def set_range(self, lower: types.TimeType, upper: types.TimeType):
         if isinstance(lower, str):
             lower = core.Time.fromString(lower)
+        else:
+            lower = core.Time(lower)
         if isinstance(upper, str):
             upper = core.Time.fromString(upper)
+        else:
+            upper = core.Time(upper)
         self.setToolTip(f"{lower.toString()} <= x <= {upper.toString()}")
         self.setTimeRange(lower, upper)  # type: ignore
 
