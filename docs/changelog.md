@@ -1,3 +1,23 @@
+## v0.189.0 (2021-12-31)
+
+### Feat
+
+- **XmlStreamReader**: add get_token_type / read_next methods
+- **Rect**: add margins_added / margins_removed methods
+- **TextDocument**: add show_whitespaces_and_tabs method
+- **Chart**: add set_margins method
+- **core**: add XmlStreamReader class
+- **Size/SizeF**: add shrunk_by / grown_by methods
+- **StandardItem/ListWidgetItem/TreeWidgetItem**: add set_size_hint method
+- **Polygon/PolygonF**: add get_data_buffer method
+- **ListWidgetItem**: add set_data method
+- **Window/Widget**: add get_screen method
+
+### Fix
+
+- typo for DateType
+- **CompletionWidget**: correctly cast to int for SetY
+
 ## v0.188.0 (2021-12-14)
 
 ### Feat
