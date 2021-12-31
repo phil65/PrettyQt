@@ -22,6 +22,34 @@ FileErrorStr = Literal[
     "unexpected_element",
 ]
 
+TOKEN_TYPE = bidict(
+    none=QtCore.QXmlStreamReader.TokenType.NoToken,
+    invalid=QtCore.QXmlStreamReader.TokenType.Invalid,
+    start_document=QtCore.QXmlStreamReader.TokenType.StartDocument,
+    end_document=QtCore.QXmlStreamReader.TokenType.EndDocument,
+    start_element=QtCore.QXmlStreamReader.TokenType.StartElement,
+    end_element=QtCore.QXmlStreamReader.TokenType.EndElement,
+    characters=QtCore.QXmlStreamReader.TokenType.Characters,
+    comment=QtCore.QXmlStreamReader.TokenType.Comment,
+    dtd=QtCore.QXmlStreamReader.TokenType.DTD,
+    entity_reference=QtCore.QXmlStreamReader.TokenType.EntityReference,
+    processing_instruction=QtCore.QXmlStreamReader.TokenType.ProcessingInstruction,
+)
+
+TokenTypeStr = Literal[
+    "none",
+    "invalid",
+    "start_document",
+    "end_document",
+    "start_element",
+    "end_element",
+    "characters",
+    "comment",
+    "dtd",
+    "entity_reference",
+    "processing_instruction",
+]
+
 
 class XmlStreamReader(QtCore.QXmlStreamReader):
     def __iter__(self):
@@ -42,6 +70,22 @@ class XmlStreamReader(QtCore.QXmlStreamReader):
             file error status
         """
         return ERROR.inverse[self.error()]
+
+    def get_token_type(self) -> TokenTypeStr:
+        """Get the current token type.
+
+        Returns:
+            token type
+        """
+        return TOKEN_TYPE.inverse[self.tokenType()]
+
+    def read_next(self) -> TokenTypeStr:
+        """Read the next token and returns its type.
+
+        Returns:
+            token type
+        """
+        return TOKEN_TYPE.inverse[self.readNext()]
 
 
 if __name__ == "__main__":
