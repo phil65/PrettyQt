@@ -27,7 +27,15 @@ if TYPE_CHECKING:
     DateType = Union[QtCore.QDate, datetime.date, str]
     DateTimeType = Union[QtCore.QDateTime, datetime.datetime, str]
 
-    ColorType = Union[str, int, QtCore.Qt.GlobalColor, QtGui.QColor, tuple, None]
+    ColorType = Union[
+        str,
+        int,
+        QtCore.Qt.GlobalColor,
+        QtGui.QColor,
+        Tuple[int, int, int],
+        Tuple[int, int, int, int],
+        None,
+    ]
     ColorAndBrushType = Union[ColorType, QtGui.QBrush]
 
     VariantType = Union[
@@ -86,13 +94,13 @@ if TYPE_CHECKING:
     Variant = Union[VariantType, List[VariantType], Dict[str, VariantType]]
 
     class Validatable(Protocol):
-        """An object with an isValid() method (e.g. QUrl)."""
+        """An object with an isValid method (e.g. QUrl)."""
 
         def isValid(self) -> bool:
             ...
 
     class SupportsValue(Protocol):
-        """An object with an isValid() method (e.g. QUrl)."""
+        """An object with a set_value and get_value method."""
 
         def set_value(self, value):
             ...
