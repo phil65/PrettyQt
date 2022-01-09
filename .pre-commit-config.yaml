@@ -49,13 +49,13 @@ repos:
   - id: pydocstyle
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v2.30.1
+  rev: v2.31.0
   hooks:
   - id: pyupgrade
     args: [--py38-plus]
 
 -   repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.9.3
+    rev: v5.10.1
     hooks:
     - id: isort
       args: [--filter-files]
