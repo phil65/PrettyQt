@@ -23,6 +23,7 @@ nav:
         - qthelp: api/qthelp.md
         - quick: api/quick.md
         - scintilla: api/scintilla.md
+        - scxml: api/scxml.md
         - svg: api/svg.md
         - syntaxhighlighters: api/syntaxhighlighters.md
         - texttospeech: api/texttospeech.md
