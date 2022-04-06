@@ -1,3 +1,9 @@
+## v0.190.2 (2022-04-07)
+
+### Fix
+
+- scxml not available for PyQt5
+
 ## v0.190.1 (2022-04-06)
 
 ### Fix
