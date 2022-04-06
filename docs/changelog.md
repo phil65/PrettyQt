@@ -1,3 +1,10 @@
+## v0.190.0 (2022-04-06)
+
+### Feat
+
+- **Application**: add sleep method
+- add scxml module
+
 ## v0.189.0 (2021-12-31)
 
 ### Feat
