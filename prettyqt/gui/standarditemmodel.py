@@ -142,10 +142,10 @@ if __name__ == "__main__":
     model += gui.StandardItem("Item")
     for item in model:
         pass
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(model, jar)
-    with open("data.pkl", "rb") as jar:
-        model = pickle.load(jar)
+    with open("data.pkl", "wb") as writer:
+        pickle.dump(model, writer)
+    with open("data.pkl", "rb") as reader:
+        model = pickle.load(reader)
     model += gui.StandardItem("Item2")
     w.show()
     app.main_loop()

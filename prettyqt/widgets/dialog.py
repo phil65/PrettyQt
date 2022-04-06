@@ -85,8 +85,8 @@ if __name__ == "__main__":
     w = Dialog()
     import pickle
 
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(w, jar)
-    with open("data.pkl", "rb") as jar:
-        w = pickle.load(jar)
+    with open("data.pkl", "wb") as writer:
+        pickle.dump(w, writer)
+    with open("data.pkl", "rb") as reader:
+        w = pickle.load(reader)
     w.show_blocking()

@@ -4,6 +4,7 @@ import contextlib
 import logging
 import os
 import pathlib
+import timeit
 from typing import Iterator, Mapping, MutableMapping
 
 import qstylizer.parser
@@ -213,6 +214,19 @@ class Application(QtWidgets.QApplication):
             navigation mode
         """
         return constants.NAVIGATION_MODES.inverse[self.navigationMode()]
+
+    @classmethod
+    def sleep(cls, secs: float):
+        """Pause application (non-blocking).
+
+        Args:
+            secs: seconds to sleep
+        """
+        start = timeit.default_timer()
+        while True:
+            cls.processEvents()
+            if timeit.default_timer() - start > secs:
+                return
 
 
 # Application.setStyle(widgets.Style())
