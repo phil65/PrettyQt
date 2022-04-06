@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/widgets.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.3">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.8">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.edf004c2.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.644de097.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -30,8 +30,9 @@
     
       
         
+        
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -1228,6 +1229,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.application.Application.set_navigation_mode" class="md-nav__link">
     set_navigation_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.application.Application.sleep" class="md-nav__link">
+    sleep()
   </a>
   
 </li>
@@ -5346,6 +5354,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.application.Application.sleep" class="md-nav__link">
+    sleep()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8734,6 +8749,7 @@
             <article class="md-content__inner md-typeset">
               
                 
+
 
 <h1 id="widgets-module">widgets module</h1>
 
@@ -13686,6 +13702,19 @@ Application            (<span title="PyQt5.QtWidgets.QApplication">QApplication<
 <span class="sd">            navigation mode</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NAVIGATION_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">navigationMode</span><span class="p">()]</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">secs</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Pause application (non-blocking).</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            secs: seconds to sleep</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="bp">cls</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">secs</span><span class="p">:</span>
+                <span class="k">return</span>
 </code></pre></div>
         </details>
 
@@ -13952,6 +13981,64 @@ Application            (<span title="PyQt5.QtWidgets.QApplication">QApplication<
   </div>
 
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.application.Application.sleep" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">sleep</span><span class="p">(</span><span class="n">secs</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Pause application (non-blocking).</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>secs</code></td>
+        <td><code>float</code></td>
+        <td><p>seconds to sleep</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/application.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
+<span class="k">def</span> <span class="nf">sleep</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">secs</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Pause application (non-blocking).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        secs: seconds to sleep</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">processEvents</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">timeit</span><span class="o">.</span><span class="n">default_timer</span><span class="p">()</span> <span class="o">-</span> <span class="n">start</span> <span class="o">&gt;</span> <span class="n">secs</span><span class="p">:</span>
+            <span class="k">return</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
@@ -14795,7 +14882,7 @@ CheckBox            (<span title="PyQt5.QtWidgets.QCheckBox">QCheckBox</span>)
 
 <h3 id="prettyqt.widgets.colordialog.CPAlphaShowLabel" class="doc doc-heading">
         <code>
-CPAlphaShowLabel            (<a title="prettyqt.widgets.label.Label" href="#prettyqt.widgets.label.Label">Label</a>)
+CPAlphaShowLabel            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.label.Label" href="#prettyqt.widgets.label.Label">Label</a>)
         </code>
 
 
@@ -34518,7 +34605,7 @@ TableWidgetItem            (<span title="PyQt5.QtWidgets.QTableWidgetItem">QTabl
 
 <h3 id="prettyqt.widgets.tabwidget.DetachedTab" class="doc doc-heading">
         <code>
-DetachedTab            (<a title="prettyqt.widgets.mainwindow.MainWindow" href="#prettyqt.widgets.mainwindow.MainWindow">MainWindow</a>)
+DetachedTab            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.mainwindow.MainWindow" href="#prettyqt.widgets.mainwindow.MainWindow">MainWindow</a>)
         </code>
 
 
@@ -40384,10 +40471,10 @@ WizardPage            (<span title="PyQt5.QtWidgets.QWizardPage">QWizardPage</sp
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js"}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5e67fbfe.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.e1a181d9.min.js"></script>
+      <script src="../assets/javascripts/bundle.c44cc438.min.js"></script>
       
     
   </body>
