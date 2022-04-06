@@ -44,6 +44,7 @@ pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
 pygments = "^2.6.1"
 qstylizer = "^0.2"
 deprecated = "^1.2.10"
+dateparser = "^1.1.1"  # added bc of regex error, may be removed in future
 
 [tool.poetry.dev-dependencies]
 pytest = "^7.0.0"
