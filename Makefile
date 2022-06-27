@@ -34,9 +34,6 @@ help:
 clean: ## remove all build, test, coverage and Python artifacts
 	git clean -dfX
 
-lint: ## check style with flake8
-	flake8 prettyqt
-
 test_pyqt5: ## run tests with PyQt5
 	export QT_API=pyqt5; poetry run pytest # --mypy
 
