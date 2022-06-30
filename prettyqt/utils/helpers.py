@@ -14,7 +14,7 @@ REGEX = re.compile(
 )
 
 
-def dump_json(data):
+def dump_json(data: str):
     try:
         import orjson
 
