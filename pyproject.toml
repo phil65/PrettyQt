@@ -26,48 +26,46 @@ bidict = "^0"
 docutils = {version = "^0.18", optional=true}
 orjson = {version = "^3", python = "<3.10", optional=true}
 
-regex = "^2022"
+regex = "2022.3.2"
 
-PyQt5 = {version = "^5.15.0", optional=true}
-PyQtWebEngine = {version = "^5.15.0", optional=true}
-PyQtChart = {version = "^5.15.0", optional=true, markers = "python_version != '3.10' or sys_platform != 'win32'"}
-QScintilla = {version = "^2.11.5", optional=true}
+PyQt5 = {version = "^5.15", optional=true}
+PyQtWebEngine = {version = "^5.15", optional=true}
+PyQtChart = {version = "^5.15", optional=true, markers = "python_version != '3.10' or sys_platform != 'win32'"}
+QScintilla = {version = "^2.11", optional=true}
 
-PyQt6 = {version = "^6.2.0", optional=true}
-PyQt6-Charts = {version = "^6.2.0", optional=true}
-PyQt6-WebEngine = {version = "^6.2.0", optional=true}
-PyQt6-QScintilla = {version = "^2.0.0", optional=true}
-pyside2 = {version = "^5.15.0", python = "<3.10", optional=true}
-pyside6 = {version = "^6.0.0", python = "<3.11", optional=true}
+PyQt6 = {version = "^6.2", optional=true}
+PyQt6-Charts = {version = "^6.2", optional=true}
+PyQt6-WebEngine = {version = "^6.2", optional=true}
+PyQt6-QScintilla = {version = "^2.0", optional=true}
+pyside2 = {version = "^5.15", python = "<3.10", optional=true}
+pyside6 = {version = "^6.2", python = "<3.11", optional=true}
 darkdetect = {version = "^0", markers = "sys_platform == 'darwin'"}
 pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
-pygments = "^2.6.1"
+pygments = "^2.6"
 qstylizer = "^0.2"
-deprecated = "^1.2.10"
-dateparser = "^1.1.1"  # added bc of regex error, may be removed in future
+deprecated = "^1.2"
+types-Deprecated = "^1.2"
 
 [tool.poetry.dev-dependencies]
-pytest = "^7.0.0"
-pip = "^21.1"
-flake8 = "^4.0"
-flake8-comprehensions = "^3.1.0"
-pytest-cov = "^3.0.0"
+pytest = "^7"
+pip = "^22"
+pytest-cov = "^3"
 mypy = "^0"
-types-Deprecated = "^1.2.1"
-types-docutils = "^0.18"
-types-orjson = "^3.6.0"
-pylint = "^2.5.3"
-pytest-xvfb = {version = "^2.0.0", markers = "sys_platform == 'linux'"}
-codecov = "^2.1.7"
-coverage = "^6.0"
-mkdocs = "^1.1.2"
-mkdocs-material = "^8.0.0"
+types-Deprecated = "^1.2"
+types-docutils = "^0"
+types-orjson = "^3.6"
+pylint = "^2.5"
+pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
+codecov = "^2.1"
+coverage = "^6"
+mkdocs = "^1.1"
+mkdocs-material = "^8"
 mkdocstrings = {version = "^0", extras = ["python-legacy"]}
 
-pymdown-extensions = "^9.0"
+pymdown-extensions = "^9"
 black = "^22"
 devtools = "^0"
-commitizen = "^2.20.0"
+commitizen = "^2.20"
 
 [tool.poetry.extras]
 pyqt5 = ["PyQt5", "PyQtWebEngine", "PyQtChart", "QScintilla"]
