@@ -77,7 +77,7 @@ class Strong(Rule):
 
 
 class Code(Rule):
-    regex = [r"`[^`]*`", r"^((?:(?:[ ]{4}|\t).*(\R|$))+)"]
+    regex = [r"`[^`]*`", r"^((?:(?:[ ]{4}|\t).*(\\R|$))+)"]
     color = "grey"
 
 
