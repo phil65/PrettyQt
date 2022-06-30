@@ -32,7 +32,6 @@ nav:
         - webenginewidgets: api/webenginewidgets.md
         - widgets: api/widgets.md
         # - winextras: api/winextras.md
-    - Contributing: contributing.md
     - Changelog: changelog.md
 
 theme:
