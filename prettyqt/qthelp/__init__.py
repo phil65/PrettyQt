@@ -5,11 +5,9 @@ contains QtHelp-based classes
 
 from .helpindexmodel import HelpIndexModel
 from .helpcontentitem import HelpContentItem
-from .helplink import HelpLink
 from .helpsearchresult import HelpSearchResult
 from .helpcontentmodel import HelpContentModel
 from .helpcontentwidget import HelpContentWidget
-from .helpfilterdata import HelpFilterData
 from .helpindexwidget import HelpIndexWidget
 from .helpsearchresultwidget import HelpSearchResultWidget
 from .helpsearchquerywidget import HelpSearchQueryWidget
@@ -18,6 +16,10 @@ from .helpengine import HelpEngine
 from .helpsearchengine import HelpSearchEngine
 
 from prettyqt import core
+
+if core.VersionNumber.get_qt_version() <= (6, 0, 0):
+    from .helplink import HelpLink
+    from .helpfilterdata import HelpFilterData
 
 if core.VersionNumber.get_qt_version() >= (5, 13, 0):
     from .helpfilterengine import HelpFilterEngine
