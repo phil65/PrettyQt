@@ -32,8 +32,10 @@ def test_application(qapp):
     # assert qapp.get_navigation_mode("keypad_directional")
     for widget in qapp:
         pass
-    qapp.store_widget_states()
-    qapp.restore_widget_states()
+    qapp.setApplicationName("testus")
+    settings = core.Settings("test", "test2")
+    qapp.store_widget_states(settings)
+    qapp.restore_widget_states(settings)
     event = QtGui.QKeyEvent(
         QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Down, QtCore.Qt.KeyboardModifier(0)
     )
