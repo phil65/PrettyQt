@@ -52,7 +52,7 @@ class RegularExpression(QtCore.QRegularExpression):
         return f"{type(self).__name__}({self.pattern()!r})"
 
     def __reduce__(self):
-        return type(self), (self.pattern(), int(self.flags))
+        return type(self), (self.pattern(), self.flags)
 
     def globalMatch(self, *args, **kwargs) -> core.RegularExpressionMatchIterator:
         it = super().globalMatch(*args, **kwargs)
@@ -120,9 +120,9 @@ class RegularExpression(QtCore.QRegularExpression):
         for m in matches:
             to_replace = repl if isinstance(repl, str) else repl(m)
             for j in range(self.groups):
-                to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
+                to_replace = to_replace.replace(rf"\g<{j}>", m.group(j))
             for k in self.groupindex.keys():
-                to_replace = to_replace.replace(fr"\g<{k}>", m.group(k))
+                to_replace = to_replace.replace(rf"\g<{k}>", m.group(k))
             result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 

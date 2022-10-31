@@ -57,5 +57,5 @@ PYSIDE6 = API == "pyside6"
 
 
 flag_to_int: Callable = (
-    operator.attrgetter("value") if API == "pyqt6" else int  # type: ignore
+    operator.attrgetter("value") if API.endswith("6") else int  # type: ignore
 )
