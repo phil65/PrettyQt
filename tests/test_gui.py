@@ -654,7 +654,7 @@ def test_polygonf():
     assert sub == xor
     polygon = poly.to_polygon()
     assert type(polygon) == gui.Polygon
-    poly.add_points((0, 1), core.Point(2, 2))
+    poly.add_points((0, 1), core.PointF(2, 2))
     bytes(poly)
 
 

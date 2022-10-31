@@ -219,7 +219,7 @@ def test_labeledslider(qtbot, qttester):
     slider.show()
     qtbot.add_widget(slider)
     qttester.send_mousepress(slider.sl, QtCore.Qt.MouseButton.LeftButton)
-    qttester.send_mousemove(slider.sl, core.Point(20, 20))
+    qttester.send_mousemove(slider.sl, core.PointF(20, 20))
     slider.repaint()
     slider.hide()
 
@@ -322,8 +322,8 @@ def test_spanslider(qtbot, qttester):
     slider._pixel_pos_to_value(100)
     slider._move_pressed_handle()
     qttester.send_mousepress(slider, QtCore.Qt.MouseButton.LeftButton)
-    qttester.send_mousemove(slider, core.Point(20, 20))
-    qttester.send_mousemove(slider, core.Point(0, 0), delay=10)
+    qttester.send_mousemove(slider, core.PointF(20, 20))
+    qttester.send_mousemove(slider, core.PointF(0, 0), delay=10)
     assert slider.get_movement_mode() == "no_crossing"
     slider.set_movement_mode("no_overlap")
     slider.close()
