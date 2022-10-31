@@ -36,7 +36,7 @@ class XYSeries(QtCharts.QXYSeries):
         if prettyqt.qt.API == "pyqt6":
             points = [self.at(i) for i in range(self.count())]
         else:
-            points = self.pointsVector()
+            points = self.points()
         return dict(points=points)
 
     def get_pen(self) -> gui.Pen:

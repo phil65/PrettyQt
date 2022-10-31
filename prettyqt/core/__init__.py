@@ -23,13 +23,13 @@ from prettyqt.qt.QtCore import (  # type: ignore
     QChildEvent as ChildEvent,
     QTimerEvent as TimerEvent,
     QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent,
-    QtCriticalMsg as CriticalMsg,
-    QtDebugMsg as DebugMsg,
-    QtFatalMsg as FatalMsg,
-    QtInfoMsg as InfoMsg,
-    QtMsgType as MsgType,
-    QtSystemMsg as SystemMsg,
-    QtWarningMsg as WarningMsg,
+    # QtCriticalMsg as CriticalMsg,
+    # QtDebugMsg as DebugMsg,
+    # QtFatalMsg as FatalMsg,
+    # QtInfoMsg as InfoMsg,
+    # QtMsgType as MsgType,
+    # QtSystemMsg as SystemMsg,
+    # QtWarningMsg as WarningMsg,
 )
 from .timezone import TimeZone
 from .date import Date
