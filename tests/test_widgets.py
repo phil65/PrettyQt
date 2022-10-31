@@ -1581,7 +1581,6 @@ def test_widgetaction(qtbot):
     widgetaction.set_disabled()
     widgetaction.set_icon("mdi.timer")
     widgetaction.set_shortcut("Ctrl+A")
-    return True
 
 
 def test_wizard(qtbot):
