@@ -32,7 +32,7 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install poetry
-        poetry install -E pyqt6
+        poetry install -E pyside6
     - name: Test with pytest
       run: |
         poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
@@ -78,7 +78,7 @@ jobs:
       # if: runner.os == 'Linux'
       run: |
         pip install poetry
-        poetry install -E pyqt6
+        poetry install -E pyside6
         poetry run mkdocs build
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v3
