@@ -80,6 +80,7 @@ testpaths = [
     "tests",
 ]
 junit_family = "xunit2"
+qt_qapp_name = "prettyqt-test"
 qt_api = "pyqt5"
 qt_log_level_fail = "CRITICAL"
 log_cli = true
