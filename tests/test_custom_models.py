@@ -14,16 +14,16 @@ def test_transposeproxymodel():
     model.rowCount()
 
 
-def test_regexmatchesmodel(qttester):
+def test_regexmatchesmodel(qtmodeltester):
     # comp = re.compile("[0-9]")
     # text = "aa356aa356"
     matches = []  # list(comp.finditer(text))
     model = custom_models.RegexMatchesModel(matches)
-    qttester.test_model(model, force_py=True)
+    qtmodeltester.check(model, force_py=True)
 
 
-def test_importlibdistributionmodel(qttester):
+def test_importlibdistributionmodel(qtmodeltester):
     model = custom_models.ImportlibDistributionModel([])
-    qttester.test_model(model, force_py=True)
+    qtmodeltester.check(model, force_py=True)
     custom_models.ImportlibDistributionModel.from_package("prettyqt")
     custom_models.ImportlibDistributionModel.from_system()
