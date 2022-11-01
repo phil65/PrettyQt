@@ -17,21 +17,15 @@ from .helpsearchengine import HelpSearchEngine
 
 from prettyqt import core
 
-if core.VersionNumber.get_qt_version() <= (6, 0, 0):
-    from .helplink import HelpLink
-    from .helpfilterdata import HelpFilterData
-
 if core.VersionNumber.get_qt_version() >= (5, 13, 0):
     from .helpfilterengine import HelpFilterEngine
 
 __all__ = [
     "HelpIndexModel",
     "HelpContentItem",
-    "HelpLink",
     "HelpSearchResult",
     "HelpContentModel",
     "HelpContentWidget",
-    "HelpFilterData",
     "HelpIndexWidget",
     "HelpSearchEngine",
     "HelpSearchResultWidget",
