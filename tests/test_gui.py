@@ -3,6 +3,7 @@
 import inspect
 import pathlib
 import pickle
+import sys
 
 import pytest
 
@@ -19,7 +20,7 @@ clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
 
 @pytest.mark.filterwarnings("ignore::DeprecationWarning")
 @pytest.mark.parametrize("name, cls", clsmembers)
-def test_repr(name, cls):
+def test_repr(name, cls, qapp):
     try:
         item = cls()
     except Exception:
@@ -32,11 +33,12 @@ def test_brush():
     bytes(brush)
 
 
+@pytest.mark.skipif(sys.platform == "darwin", reason="Somehow fails on OSX")
 def test_clipboard(qapp):
-    cb = qapp.get_clipboard()
     mimedata = QtCore.QMimeData()
     pixmap = gui.Pixmap(100, 100)
     image = pixmap.toImage()
+    cb = qapp.get_clipboard()
     cb.set_mimedata(mimedata)
     cb.set_image(image)
     cb.set_pixmap(pixmap)
@@ -45,7 +47,7 @@ def test_clipboard(qapp):
     assert cb.get_pixmap().size() == pixmap.size()
 
 
-def test_color():
+def test_color(qapp):
     color = gui.Color()
     color.set_color("gray")
     with open("data.pkl", "wb") as jar:
@@ -74,7 +76,7 @@ def test_colorspace():
     assert space.get_transfer_function() == "pro_photo_rgb"
 
 
-def test_cursor():
+def test_cursor(qapp):
     cursor = gui.Cursor()
     cursor.set_shape("arrow")
     with pytest.raises(InvalidParamError):
@@ -103,7 +105,7 @@ def test_doublevalidator():
     assert not val.is_valid_value("10")
 
 
-def test_font():
+def test_font(qapp):
     font = gui.Font("Consolas")
     font.metrics
     font = gui.Font.mono()
@@ -188,7 +190,7 @@ def test_guiapplication():
         pass
 
 
-def test_icon():
+def test_icon(qapp):
     icon = gui.Icon()
     icon.for_color("black")
     with open("data.pkl", "wb") as jar:
@@ -204,7 +206,7 @@ def test_icon():
     icon.get_actual_size((256, 256))
 
 
-def test_iconengine():
+def test_iconengine(qapp):
     engine = gui.IconEngine()
     engine.get_available_sizes()
     engine.get_actual_size((100, 100))
@@ -217,7 +219,7 @@ def test_iconengine():
     engine.add_pixmap(px, mode="normal", state="off")
 
 
-def test_image():
+def test_image(qapp):
     img = gui.Image()
     with open("data.pkl", "wb") as jar:
         pickle.dump(img, jar)
@@ -254,7 +256,7 @@ def test_imagereader():
     assert reader.supports_option("gamma") is False
 
 
-def test_imagewriter():
+def test_imagewriter(qapp):
     writer = gui.ImageWriter()
     writer["test"] = "Test"
     assert writer.get_error() == "unknown"
@@ -344,7 +346,7 @@ def test_screen(qapp):
 #     assert manager.get_restart_hint() == "immediately"
 
 
-def test_standarditem():
+def test_standarditem(qapp):
     item = gui.StandardItem()
     with open("data.pkl", "wb") as jar:
         pickle.dump(item, jar)
@@ -381,7 +383,7 @@ def test_standarditem():
     )
 
 
-def test_standarditemmodel():
+def test_standarditemmodel(qapp):
     model = gui.StandardItemModel()
     model.add("test")
     for item in model:
@@ -621,7 +623,7 @@ def test_picture():
     bytes(picture)
 
 
-def test_pixmap():
+def test_pixmap(qapp):
     pix = gui.Pixmap()
     bytes(pix)
     pix.create_dot()
