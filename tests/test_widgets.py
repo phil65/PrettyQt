@@ -72,52 +72,52 @@ def test_action(qtbot):
     action.set_menu(widgets.Menu())
 
 
-# def test_actiongroup(qtbot):
-#     group = widgets.ActionGroup(None)
-#     if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-#         group.set_exclusion_policy(None)
-#         group.set_exclusion_policy("exclusive")
-#         with pytest.raises(InvalidParamError):
-#             group.set_exclusion_policy("test")
-#         assert group.get_exclusion_policy() == "exclusive"
-#     act = widgets.Action()
-#     group.addAction(act)
-#     assert group[0] == act
-#     assert act in group
-#     assert len(group) == 1
+def test_actiongroup(qtbot):
+    group = widgets.ActionGroup(None)
+    if core.VersionNumber.get_qt_version() >= (5, 14, 0):
+        group.set_exclusion_policy(None)
+        group.set_exclusion_policy("exclusive")
+        with pytest.raises(InvalidParamError):
+            group.set_exclusion_policy("test")
+        assert group.get_exclusion_policy() == "exclusive"
+    act = widgets.Action()
+    group.addAction(act)
+    assert group[0] == act
+    assert act in group
+    assert len(group) == 1
 
 
-# def test_boxlayout(qtbot):
-#     layout = widgets.BoxLayout("horizontal", margin=0)
-#     widget = widgets.RadioButton("test")
-#     layout += widget
-#     layout2 = widgets.BoxLayout("horizontal")
-#     layout += layout2
-#     assert layout[1] == layout2
-#     layout.set_size_mode("maximum")
-#     assert layout.get_size_mode() == "maximum"
-#     layout.set_alignment("left")
-#     layout.set_alignment("left", widget)
-#     with pytest.raises(InvalidParamError):
-#         layout.set_alignment("test")
-#     # assert layout.get_alignment() == "left"
-#     with pytest.raises(InvalidParamError):
-#         layout.set_size_mode("bla")
-#     layout.set_margin(0)
-#     assert len(layout) == 2
-#     layout.add_stretch(1)
-#     layout.add_spacing(1)
-#     layout.set_direction("bottom_to_top")
-#     with pytest.raises(InvalidParamError):
-#         layout.set_direction("test")
-#     assert layout.get_direction() == "bottom_to_top"
+def test_boxlayout(qtbot):
+    layout = widgets.BoxLayout("horizontal", margin=0)
+    widget = widgets.RadioButton("test")
+    layout += widget
+    layout2 = widgets.BoxLayout("horizontal")
+    layout += layout2
+    assert layout[1] == layout2
+    layout.set_size_mode("maximum")
+    assert layout.get_size_mode() == "maximum"
+    layout.set_alignment("left")
+    layout.set_alignment("left", widget)
+    with pytest.raises(InvalidParamError):
+        layout.set_alignment("test")
+    # assert layout.get_alignment() == "left"
+    with pytest.raises(InvalidParamError):
+        layout.set_size_mode("bla")
+    layout.set_margin(0)
+    assert len(layout) == 2
+    layout.add_stretch(1)
+    layout.add_spacing(1)
+    layout.set_direction("bottom_to_top")
+    with pytest.raises(InvalidParamError):
+        layout.set_direction("test")
+    assert layout.get_direction() == "bottom_to_top"
 
 
-# def test_buttongroup(qtbot):
-#     widget = widgets.ButtonGroup()
-#     btn = widgets.RadioButton("test")
-#     widget.addButton(btn, id=2)
-#     assert widget[2] == btn
+def test_buttongroup(qtbot):
+    widget = widgets.ButtonGroup()
+    btn = widgets.RadioButton("test")
+    widget.addButton(btn, id=2)
+    assert widget[2] == btn
 
 
 # def test_calendarwiget(qtbot):
@@ -627,58 +627,58 @@ def test_headerview(qtbot):
 #     # assert label.get_text_interaction() == "by_mouse"
 
 
-# def test_layoutitem(qtbot):
-#     item = widgets.LayoutItem()
-#     assert item.get_item() is None
-#     item.set_alignment("right")
-#     assert item.get_alignment() == "right"
+def test_layoutitem(qtbot):
+    item = widgets.LayoutItem()
+    assert item.get_item() is None
+    item.set_alignment("right")
+    assert item.get_alignment() == "right"
 
 
-# def test_lcdnumber(qtbot):
-#     lcd = widgets.LCDNumber()
-#     lcd.set_value(500)
-#     assert lcd.get_value() == 500
-#     lcd.set_segment_style("filled")
-#     with pytest.raises(InvalidParamError):
-#         lcd.set_segment_style("test")
-#     assert lcd.get_segment_style() == "filled"
-#     lcd.set_mode("octal")
-#     with pytest.raises(InvalidParamError):
-#         lcd.set_mode("test")
-#     assert lcd.get_mode() == "octal"
+def test_lcdnumber(qtbot):
+    lcd = widgets.LCDNumber()
+    lcd.set_value(500)
+    assert lcd.get_value() == 500
+    lcd.set_segment_style("filled")
+    with pytest.raises(InvalidParamError):
+        lcd.set_segment_style("test")
+    assert lcd.get_segment_style() == "filled"
+    lcd.set_mode("octal")
+    with pytest.raises(InvalidParamError):
+        lcd.set_mode("test")
+    assert lcd.get_mode() == "octal"
 
 
-# def test_lineedit(qtbot):
-#     widget = widgets.LineEdit("test_lineedit")
-#     widget.set_regex_validator("[0-9]")
-#     widget.set_font("Consolas")
-#     widget.set_text("0")
-#     widget.append_text("a")
-#     widget.set_echo_mode("password")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_echo_mode("test")
-#     assert widget.get_echo_mode() == "password"
-#     widget.set_cursor_move_style("visual")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_cursor_move_style("test")
-#     assert widget.get_cursor_move_style() == "visual"
-#     widget.set_input_mask("X")
-#     widget.set_range(0, 10)
-#     widget.set_value("5")
-#     widget += "append"
+def test_lineedit(qtbot):
+    widget = widgets.LineEdit("test_lineedit")
+    widget.set_regex_validator("[0-9]")
+    widget.set_font("Consolas")
+    widget.set_text("0")
+    widget.append_text("a")
+    widget.set_echo_mode("password")
+    with pytest.raises(InvalidParamError):
+        widget.set_echo_mode("test")
+    assert widget.get_echo_mode() == "password"
+    widget.set_cursor_move_style("visual")
+    with pytest.raises(InvalidParamError):
+        widget.set_cursor_move_style("test")
+    assert widget.get_cursor_move_style() == "visual"
+    widget.set_input_mask("X")
+    widget.set_range(0, 10)
+    widget.set_value("5")
+    widget += "append"
 
 
-# def test_listview(qtbot):
-#     widget = widgets.ListView()
-#     widget.set_selection_mode(None)
-#     widget.set_selection_mode("single")
-#     widget.toggle_select_all()
-#     widget.set_selection_mode("multi")
-#     assert widget.get_selection_mode() == "multi"
-#     widget.set_view_mode("icon")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_view_mode("test")
-#     assert widget.get_view_mode() == "icon"
+def test_listview(qtbot):
+    widget = widgets.ListView()
+    widget.set_selection_mode(None)
+    widget.set_selection_mode("single")
+    widget.toggle_select_all()
+    widget.set_selection_mode("multi")
+    assert widget.get_selection_mode() == "multi"
+    widget.set_view_mode("icon")
+    with pytest.raises(InvalidParamError):
+        widget.set_view_mode("test")
+    assert widget.get_view_mode() == "icon"
 
 
 # def test_listwidget(qtbot):
@@ -841,64 +841,64 @@ def test_listwidgetitem(qtbot):
 #     widget.get_standard_buttons()
 
 
-# def test_pangesture():
-#     gesture = widgets.PanGesture()
-#     gesture.get_delta()
-#     gesture.get_last_offset()
-#     gesture.get_offset()
+def test_pangesture():
+    gesture = widgets.PanGesture()
+    gesture.get_delta()
+    gesture.get_last_offset()
+    gesture.get_offset()
 
 
-# def test_plaintextdocumentlayout():
-#     doc = gui.TextDocument()
-#     layout = widgets.PlainTextDocumentLayout(doc)
-#     repr(layout)
-#     assert len(layout) == 1
-#     layout.get_block_bounding_rect(gui.TextBlock())
-#     layout.get_frame_bounding_rect(gui.TextFrame(doc))
+def test_plaintextdocumentlayout():
+    doc = gui.TextDocument()
+    layout = widgets.PlainTextDocumentLayout(doc)
+    repr(layout)
+    assert len(layout) == 1
+    layout.get_block_bounding_rect(gui.TextBlock())
+    layout.get_frame_bounding_rect(gui.TextFrame(doc))
 
 
-# def test_plaintextedit(qtbot):
-#     widget = widgets.PlainTextEdit("This is a test")
-#     with widget.create_cursor() as c:
-#         c.select_text(2, 4)
-#     with widget.current_cursor() as c:
-#         c.select_text(2, 4)
-#     widget.select_text(2, 4)
-#     widget.set_text("hallo")
-#     widget.set_disabled()
-#     widget.allow_wheel_zoom()
-#     widget.set_enabled()
-#     widget.set_font("Consolas")
-#     widget.append_text(" test")
-#     widget.append_text("test", newline=False)
-#     assert widget.text() == "hallo\n testtest"
-#     widget.highlight_current_line()
-#     widget.set_read_only()
-#     widget.scroll_to_top()
-#     widget.scroll_to_bottom()
-#     widget.set_value("test")
-#     widget.set_word_wrap_mode("anywhere")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_word_wrap_mode("test")
-#     assert widget.get_word_wrap_mode() == "anywhere"
-#     widget.set_line_wrap_mode("widget_width")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_line_wrap_mode("test")
-#     assert widget.get_line_wrap_mode() == "widget_width"
-#     assert widget.get_value() == "test"
-#     widget += "append"
-#     widget.set_regex_validator("[0-9]")
+def test_plaintextedit(qtbot):
+    widget = widgets.PlainTextEdit("This is a test")
+    with widget.create_cursor() as c:
+        c.select_text(2, 4)
+    with widget.current_cursor() as c:
+        c.select_text(2, 4)
+    widget.select_text(2, 4)
+    widget.set_text("hallo")
+    widget.set_disabled()
+    widget.allow_wheel_zoom()
+    widget.set_enabled()
+    widget.set_font("Consolas")
+    widget.append_text(" test")
+    widget.append_text("test", newline=False)
+    assert widget.text() == "hallo\n testtest"
+    widget.highlight_current_line()
+    widget.set_read_only()
+    widget.scroll_to_top()
+    widget.scroll_to_bottom()
+    widget.set_value("test")
+    widget.set_word_wrap_mode("anywhere")
+    with pytest.raises(InvalidParamError):
+        widget.set_word_wrap_mode("test")
+    assert widget.get_word_wrap_mode() == "anywhere"
+    widget.set_line_wrap_mode("widget_width")
+    with pytest.raises(InvalidParamError):
+        widget.set_line_wrap_mode("test")
+    assert widget.get_line_wrap_mode() == "widget_width"
+    assert widget.get_value() == "test"
+    widget += "append"
+    widget.set_regex_validator("[0-9]")
 
 
-# def test_pinchgesture():
-#     gesture = widgets.PinchGesture()
-#     gesture.get_start_center_point()
-#     gesture.get_center_point()
-#     gesture.get_last_center_point()
-#     gesture.set_change_flags(center_point=True)
-#     assert gesture.get_change_flags() == ["center_point"]
-#     gesture.set_total_change_flags(center_point=True)
-#     assert gesture.get_total_change_flags() == ["center_point"]
+def test_pinchgesture():
+    gesture = widgets.PinchGesture()
+    gesture.get_start_center_point()
+    gesture.get_center_point()
+    gesture.get_last_center_point()
+    gesture.set_change_flags(center_point=True)
+    assert gesture.get_change_flags() == ["center_point"]
+    gesture.set_total_change_flags(center_point=True)
+    assert gesture.get_total_change_flags() == ["center_point"]
 
 
 # def test_progressbar(qtbot):
@@ -921,66 +921,66 @@ def test_listwidgetitem(qtbot):
 #     widgets.ProgressDialog()
 
 
-# def test_pushbutton(qtbot):
-#     widget = widgets.PushButton("test_pushbutton", callback=print)
-#     widget.set_text("test_pushbutton")
-#     widget.set_disabled()
-#     widget.set_enabled()
-#     assert widget.get_value() is False
-#     widget.set_icon("mdi.timer")
-#     widget.get_icon()
-#     widget.set_style_icon("titlebar_close_button")
-#     widget.set_icon_size(10)
-#     assert widget.get_icon_size() == core.Size(10, 10)
-#     widget.is_on = False
-#     assert widget.is_on is False
-#     widget.set_value(True)
+def test_pushbutton(qtbot):
+    widget = widgets.PushButton("test_pushbutton", callback=print)
+    widget.set_text("test_pushbutton")
+    widget.set_disabled()
+    widget.set_enabled()
+    assert widget.get_value() is False
+    widget.set_icon("mdi.timer")
+    widget.get_icon()
+    widget.set_style_icon("titlebar_close_button")
+    widget.set_icon_size(10)
+    assert widget.get_icon_size() == core.Size(10, 10)
+    widget.is_on = False
+    assert widget.is_on is False
+    widget.set_value(True)
 
 
-# def test_radiobutton(qtbot):
-#     widget = widgets.RadioButton("test_radiobutton")
-#     widget.set_icon("mdi.timer")
-#     widget.set_enabled()
-#     widget.set_disabled()
-#     assert bool(widget) is False
-#     widget.set_value(True)
-#     assert widget.get_value() is True
-#     # widget.is_on = False
-#     # assert widget.is_on is False
+def test_radiobutton(qtbot):
+    widget = widgets.RadioButton("test_radiobutton")
+    widget.set_icon("mdi.timer")
+    widget.set_enabled()
+    widget.set_disabled()
+    assert bool(widget) is False
+    widget.set_value(True)
+    assert widget.get_value() is True
+    # widget.is_on = False
+    # assert widget.is_on is False
 
 
-# def test_rubberband():
-#     band = widgets.RubberBand("line")
-#     assert band.get_shape() == "line"
+def test_rubberband():
+    band = widgets.RubberBand("line")
+    assert band.get_shape() == "line"
 
 
-# def test_scrollarea(qtbot):
-#     widget = widgets.ScrollArea()
-#     widget.set_widget(widgets.Widget())
+def test_scrollarea(qtbot):
+    widget = widgets.ScrollArea()
+    widget.set_widget(widgets.Widget())
 
 
-# def test_scrollerproperties():
-#     properties = widgets.ScrollerProperties()
-#     properties["snap_time"] = 100
-#     with pytest.raises(InvalidParamError):
-#         properties.set_scroll_metric("test", 100)
-#     assert properties["snap_time"] == 100
-#     with pytest.raises(InvalidParamError):
-#         properties.get_scroll_metric("test")
+def test_scrollerproperties():
+    properties = widgets.ScrollerProperties()
+    properties["snap_time"] = 100
+    with pytest.raises(InvalidParamError):
+        properties.set_scroll_metric("test", 100)
+    assert properties["snap_time"] == 100
+    with pytest.raises(InvalidParamError):
+        properties.get_scroll_metric("test")
 
 
-# def test_scroller():
-#     w = widgets.PlainTextEdit()
-#     scroller = widgets.Scroller.get_scroller(w)
-#     assert scroller.get_state() == "inactive"
-#     scroller.get_velocity()
-#     scroller.get_pixel_per_meter()
-#     scroller.get_final_position()
-#     scroller.handle_input("move", core.PointF())
-#     with pytest.raises(InvalidParamError):
-#         scroller.handle_input("test", core.PointF())
-#     scroller.get_scroller_properties()
-#     assert widgets.Scroller.grab_gesture(w) == "tap"
+def test_scroller():
+    w = widgets.PlainTextEdit()
+    scroller = widgets.Scroller.get_scroller(w)
+    assert scroller.get_state() == "inactive"
+    scroller.get_velocity()
+    scroller.get_pixel_per_meter()
+    scroller.get_final_position()
+    scroller.handle_input("move", core.PointF())
+    with pytest.raises(InvalidParamError):
+        scroller.handle_input("test", core.PointF())
+    scroller.get_scroller_properties()
+    assert widgets.Scroller.grab_gesture(w) == "tap"
 
 
 # def test_shortcut():
@@ -1086,37 +1086,37 @@ def test_listwidgetitem(qtbot):
 #     scr.set_text("test")
 
 
-# def test_splitter(qtbot):
-#     widget = widgets.Splitter("vertical")
-#     test = widgets.Label("test_splitter")
-#     test2 = widgets.Label("test_splitter")
-#     widget.add_widget(test)
-#     widget += test2
-#     assert len(widget) == 2
-#     assert widget[0] == test
-#     for item in widget:
-#         pass
-#     widget.set_size_policy("expanding", "expanding")
-#     widget.set_orientation("horizontal")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_orientation("test")
-#     widget.add_layout(widgets.BoxLayout("horizontal"))
-#     widgets.Splitter.from_widgets(widgets.Widget())
-#     test3 = widgets.Label("test_splitter")
-#     widget[0] = test3
+def test_splitter(qtbot):
+    widget = widgets.Splitter("vertical")
+    test = widgets.Label("test_splitter")
+    test2 = widgets.Label("test_splitter")
+    widget.add_widget(test)
+    widget += test2
+    assert len(widget) == 2
+    assert widget[0] == test
+    for item in widget:
+        pass
+    widget.set_size_policy("expanding", "expanding")
+    widget.set_orientation("horizontal")
+    with pytest.raises(InvalidParamError):
+        widget.set_orientation("test")
+    widget.add_layout(widgets.BoxLayout("horizontal"))
+    widgets.Splitter.from_widgets(widgets.Widget())
+    test3 = widgets.Label("test_splitter")
+    widget[0] = test3
 
 
-# def test_styleoptionslider(qtbot):
-#     slider = widgets.StyleOptionSlider()
-#     slider.is_vertical()
-#     slider.set_horizontal()
-#     slider.set_vertical()
+def test_styleoptionslider(qtbot):
+    slider = widgets.StyleOptionSlider()
+    slider.is_vertical()
+    slider.set_horizontal()
+    slider.set_vertical()
 
 
-# def test_swipegesture():
-#     gesture = widgets.SwipeGesture()
-#     assert gesture.get_horizontal_direction() == "right"
-#     assert gesture.get_vertical_direction() == "none"
+def test_swipegesture():
+    gesture = widgets.SwipeGesture()
+    assert gesture.get_horizontal_direction() == "right"
+    assert gesture.get_vertical_direction() == "none"
 
 
 # def test_systemtrayicon(qtbot):
