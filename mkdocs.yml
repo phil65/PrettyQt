@@ -13,7 +13,7 @@ nav:
         - custom_validators: api/custom_validators.md
         - custom_widgets: api/custom_widgets.md
         - gui: api/gui.md
-        - location: api/location.md
+        # - location: api/location.md
         # - multimedia: api/multimedia.md
         # - multimediawidgets: api/multimediawidgets.md
         - network: api/network.md
@@ -26,7 +26,7 @@ nav:
         # - scxml: api/scxml.md
         - svg: api/svg.md
         - syntaxhighlighters: api/syntaxhighlighters.md
-        - texttospeech: api/texttospeech.md
+        # - texttospeech: api/texttospeech.md
         # - utils: api/utils.md
         - webenginecore: api/webenginecore.md
         - webenginewidgets: api/webenginewidgets.md
