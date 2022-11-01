@@ -120,29 +120,29 @@ def test_buttongroup(qtbot):
     assert widget[2] == btn
 
 
-# def test_calendarwiget(qtbot):
-#     widget = widgets.CalendarWidget()
-#     assert widget.get_date() == widget.get_value()
-#     widget.set_range(datetime.date(2000, 1, 1), datetime.date(2020, 1, 1))
-#     widget.set_value(datetime.date(2000, 10, 10))
-#     widget.set_selection_mode(None)
-#     widget.set_selection_mode("single")
-#     assert widget.get_selection_mode() == "single"
-#     with pytest.raises(InvalidParamError):
-#         widget.set_selection_mode("test")
+def test_calendarwiget(qtbot):
+    widget = widgets.CalendarWidget()
+    assert widget.get_date() == widget.get_value()
+    widget.set_range(datetime.date(2000, 1, 1), datetime.date(2020, 1, 1))
+    widget.set_value(datetime.date(2000, 10, 10))
+    widget.set_selection_mode(None)
+    widget.set_selection_mode("single")
+    assert widget.get_selection_mode() == "single"
+    with pytest.raises(InvalidParamError):
+        widget.set_selection_mode("test")
 
 
-# def test_checkbox(qtbot):
-#     widget = widgets.CheckBox()
-#     widget.set_disabled()
-#     widget.set_enabled()
-#     assert bool(widget) is False
-#     widget.set_value(True)
-#     assert widget.get_value() is True
-#     with pytest.raises(InvalidParamError):
-#         widget.set_checkstate("test")
-#     widget.is_on = False
-#     assert widget.is_on is False
+def test_checkbox(qtbot):
+    widget = widgets.CheckBox()
+    widget.set_disabled()
+    widget.set_enabled()
+    assert bool(widget) is False
+    widget.set_value(True)
+    assert widget.get_value() is True
+    with pytest.raises(InvalidParamError):
+        widget.set_checkstate("test")
+    widget.is_on = False
+    assert widget.is_on is False
 
 
 # def test_colordialog(qtbot):
@@ -276,33 +276,33 @@ def test_datetimeedit(qtbot):
 #     w.raise_dock()
 
 
-# def test_doublespinbox(qtbot):
-#     widget = widgets.DoubleSpinBox(default_value=5)
-#     widget.set_disabled()
-#     widget.set_enabled()
+def test_doublespinbox(qtbot):
+    widget = widgets.DoubleSpinBox(default_value=5)
+    widget.set_disabled()
+    widget.set_enabled()
 
 
-# def test_filedialog(qtbot):
-#     dlg = widgets.FileDialog(path_id="test", extension_filter=dict(test=["*.test"]))
-#     dlg.set_label_text("accept", "test_filedialog")
-#     dlg.set_accept_mode("open")
-#     with pytest.raises(InvalidParamError):
-#         dlg.set_accept_mode("bla")
-#     dlg.set_view_mode("detail")
-#     with pytest.raises(InvalidParamError):
-#         dlg.set_view_mode("bla")
-#     dlg.set_label_text("filetype", "test")
-#     with pytest.raises(InvalidParamError):
-#         dlg.set_label_text("bla", "test")
-#     dlg.set_accept_mode("save")
-#     dlg.set_extension_filter(dict(a=[".csv"]))
-#     dlg.set_filter("all_dirs")
-#     with pytest.raises(InvalidParamError):
-#         dlg.set_filter("test")
-#     dlg.selected_file()
-#     dlg.selected_files()
-#     path = dlg.get_directory()
-#     dlg.set_directory(path)
+def test_filedialog(qtbot):
+    dlg = widgets.FileDialog(path_id="test", extension_filter=dict(test=["*.test"]))
+    dlg.set_label_text("accept", "test_filedialog")
+    dlg.set_accept_mode("open")
+    with pytest.raises(InvalidParamError):
+        dlg.set_accept_mode("bla")
+    dlg.set_view_mode("detail")
+    with pytest.raises(InvalidParamError):
+        dlg.set_view_mode("bla")
+    dlg.set_label_text("filetype", "test")
+    with pytest.raises(InvalidParamError):
+        dlg.set_label_text("bla", "test")
+    dlg.set_accept_mode("save")
+    dlg.set_extension_filter(dict(a=[".csv"]))
+    dlg.set_filter("all_dirs")
+    with pytest.raises(InvalidParamError):
+        dlg.set_filter("test")
+    dlg.selected_file()
+    dlg.selected_files()
+    path = dlg.get_directory()
+    dlg.set_directory(path)
 
 
 def test_filesystemmodel(qttester):
@@ -592,39 +592,39 @@ def test_headerview(qtbot):
 #     assert dlg.get_text_echo_mode() == "no_echo"
 
 
-# def test_keysequenceedit(qtbot):
-#     seq = gui.KeySequence("Ctrl+A")
-#     edit = widgets.KeySequenceEdit(seq)
-#     edit.set_value("Ctrl+A")
-#     assert edit.get_value() == "Ctrl+A"
-#     assert edit.is_valid()
+def test_keysequenceedit(qtbot):
+    seq = gui.KeySequence("Ctrl+A")
+    edit = widgets.KeySequenceEdit(seq)
+    edit.set_value("Ctrl+A")
+    assert edit.get_value() == "Ctrl+A"
+    assert edit.is_valid()
 
 
-# def test_label(qtbot):
-#     label = widgets.Label()
-#     label.set_image("")
-#     label.set_text("test_label")
-#     label.set_bold()
-#     label.set_italic()
-#     label.set_indent(4)
-#     label.set_weight("extra_light")
-#     label.set_point_size(14)
-#     label.set_color("red")
-#     label.set_color(None)
-#     with pytest.raises(InvalidParamError):
-#         label.set_weight("test")
-#     with pytest.raises(InvalidParamError):
-#         label.set_text_format("test")
-#     label.set_alignment(horizontal="left", vertical="top")
-#     label.set_alignment(vertical="bottom")
-#     label.set_alignment()
-#     label.set_text_interaction("by_mouse")
-#     expected = ["by_mouse", "like_text_editor", "like_text_browser"]
-#     assert label.get_text_interaction() == expected
-#     label.allow_links()
-#     with pytest.raises(InvalidParamError):
-#         label.set_text_interaction("test")
-#     # assert label.get_text_interaction() == "by_mouse"
+def test_label(qtbot):
+    label = widgets.Label()
+    label.set_image("")
+    label.set_text("test_label")
+    label.set_bold()
+    label.set_italic()
+    label.set_indent(4)
+    label.set_weight("extra_light")
+    label.set_point_size(14)
+    label.set_color("red")
+    label.set_color(None)
+    with pytest.raises(InvalidParamError):
+        label.set_weight("test")
+    with pytest.raises(InvalidParamError):
+        label.set_text_format("test")
+    label.set_alignment(horizontal="left", vertical="top")
+    label.set_alignment(vertical="bottom")
+    label.set_alignment()
+    label.set_text_interaction("by_mouse")
+    expected = ["by_mouse", "like_text_editor", "like_text_browser"]
+    assert label.get_text_interaction() == expected
+    label.allow_links()
+    with pytest.raises(InvalidParamError):
+        label.set_text_interaction("test")
+    # assert label.get_text_interaction() == "by_mouse"
 
 
 def test_layoutitem(qtbot):
@@ -983,38 +983,38 @@ def test_scroller():
     assert widgets.Scroller.grab_gesture(w) == "tap"
 
 
-# def test_shortcut():
-#     w = widgets.Widget()
-#     seq = gui.KeySequence("Ctrl+C")
-#     shortcut = widgets.Shortcut(seq, w)
-#     assert str(shortcut) == "Ctrl+C"
-#     shortcut.set_context("application")
-#     with pytest.raises(InvalidParamError):
-#         shortcut.set_context("test")
-#     assert shortcut.get_context() == "application"
-#     assert shortcut.get_key() == seq
+def test_shortcut():
+    w = widgets.Widget()
+    seq = gui.KeySequence("Ctrl+C")
+    shortcut = widgets.Shortcut(seq, w)
+    assert str(shortcut) == "Ctrl+C"
+    shortcut.set_context("application")
+    with pytest.raises(InvalidParamError):
+        shortcut.set_context("test")
+    assert shortcut.get_context() == "application"
+    assert shortcut.get_key() == seq
 
 
-# def test_sizepolicy(qtbot):
-#     pol = widgets.SizePolicy()
-#     pol.set_control_type("toolbutton")
-#     assert pol.get_control_type() == "toolbutton"
+def test_sizepolicy(qtbot):
+    pol = widgets.SizePolicy()
+    pol.set_control_type("toolbutton")
+    assert pol.get_control_type() == "toolbutton"
 
 
-# def test_slider(qtbot):
-#     widget = widgets.Slider()
-#     widget.set_horizontal()
-#     assert widget.is_horizontal()
-#     widget.set_vertical()
-#     assert widget.is_vertical()
-#     with pytest.raises(InvalidParamError):
-#         widget.set_tick_position("test")
-#     widget.set_tick_position("below")
-#     assert widget.get_tick_position() == "below"
-#     widget.set_orientation("horizontal")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_orientation("test")
-#     assert widget.get_orientation() == "horizontal"
+def test_slider(qtbot):
+    widget = widgets.Slider()
+    widget.set_horizontal()
+    assert widget.is_horizontal()
+    widget.set_vertical()
+    assert widget.is_vertical()
+    with pytest.raises(InvalidParamError):
+        widget.set_tick_position("test")
+    widget.set_tick_position("below")
+    assert widget.get_tick_position() == "below"
+    widget.set_orientation("horizontal")
+    with pytest.raises(InvalidParamError):
+        widget.set_orientation("test")
+    assert widget.get_orientation() == "horizontal"
 
 
 # def test_statusbar(qtbot):
@@ -1057,25 +1057,25 @@ def test_scroller():
 #         pass
 
 
-# def test_spaceritem(qtbot):
-#     item = widgets.SpacerItem(0, 0, "expanding", "expanding")
-#     item.change_size(0, 0)
+def test_spaceritem(qtbot):
+    item = widgets.SpacerItem(0, 0, "expanding", "expanding")
+    item.change_size(0, 0)
 
 
-# def test_spinbox(qtbot):
-#     widget = widgets.SpinBox(default_value=5)
-#     widget.set_disabled()
-#     widget.set_enabled()
-#     widget.set_value(10)
-#     widget.set_special_value("test_spinbox")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_button_symbols("test")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_correction_mode("test")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_step_type("test")
-#     assert widget.is_valid()
-#     assert widget.get_value() == 10
+def test_spinbox(qtbot):
+    widget = widgets.SpinBox(default_value=5)
+    widget.set_disabled()
+    widget.set_enabled()
+    widget.set_value(10)
+    widget.set_special_value("test_spinbox")
+    with pytest.raises(InvalidParamError):
+        widget.set_button_symbols("test")
+    with pytest.raises(InvalidParamError):
+        widget.set_correction_mode("test")
+    with pytest.raises(InvalidParamError):
+        widget.set_step_type("test")
+    assert widget.is_valid()
+    assert widget.get_value() == 10
 
 
 # def test_splashscreen(qtbot):
@@ -1421,48 +1421,48 @@ def test_timeedit(qtbot):
 #     widget.sort()
 
 
-# def test_treewidgetitem(qtbot):
-#     item = widgets.TreeWidgetItem()
-#     item.set_icon("mdi.timer")
-#     item.set_checkstate("unchecked")
-#     with pytest.raises(InvalidParamError):
-#         item.set_checkstate("test")
-#     assert item.get_checkstate() == "unchecked"
-#     item.get_background()
-#     item.get_foreground()
-#     item.get_font()
-#     item.get_icon()
-#     item.set_child_indicator_policy("dont_show")
-#     with pytest.raises(InvalidParamError):
-#         item.set_child_indicator_policy("test")
-#     assert item.get_child_indicator_policy() == "dont_show"
-#     bytes(item)
-#     child = widgets.TreeWidgetItem()
-#     item += child
-#     for child in item:
-#         pass
-#     assert len(item) == 1
-#     assert item[0] == child
-#     item.sort_children(0)
-#     del item[0]
+def test_treewidgetitem(qtbot):
+    item = widgets.TreeWidgetItem()
+    item.set_icon("mdi.timer")
+    item.set_checkstate("unchecked")
+    with pytest.raises(InvalidParamError):
+        item.set_checkstate("test")
+    assert item.get_checkstate() == "unchecked"
+    item.get_background()
+    item.get_foreground()
+    item.get_font()
+    item.get_icon()
+    item.set_child_indicator_policy("dont_show")
+    with pytest.raises(InvalidParamError):
+        item.set_child_indicator_policy("test")
+    assert item.get_child_indicator_policy() == "dont_show"
+    bytes(item)
+    child = widgets.TreeWidgetItem()
+    item += child
+    for child in item:
+        pass
+    assert len(item) == 1
+    assert item[0] == child
+    item.sort_children(0)
+    del item[0]
 
 
-# def test_treewidgetitemiterator(qtbot):
-#     item = widgets.TreeWidget()
-#     widgets.TreeWidgetItemIterator(
-#         item,
-#         flags=None,
-#         hidden=True,
-#         selected=True,
-#         selectable=True,
-#         draggable=True,
-#         droppable=True,
-#         has_children=True,
-#         checked=True,
-#         enabled=True,
-#         editable=True,
-#         user_flag=True,
-#     )
+def test_treewidgetitemiterator(qtbot):
+    item = widgets.TreeWidget()
+    widgets.TreeWidgetItemIterator(
+        item,
+        flags=None,
+        hidden=True,
+        selected=True,
+        selectable=True,
+        draggable=True,
+        droppable=True,
+        has_children=True,
+        checked=True,
+        enabled=True,
+        editable=True,
+        user_flag=True,
+    )
 
 
 def test_undocommand():
