@@ -115,6 +115,7 @@ def test_boxlayout(qtbot):
 
 def test_buttongroup(qtbot):
     widget = widgets.ButtonGroup()
+    qtbot.addWidget(widget)
     btn = widgets.RadioButton("test")
     widget.addButton(btn, id=2)
     assert widget[2] == btn
@@ -122,6 +123,7 @@ def test_buttongroup(qtbot):
 
 def test_calendarwiget(qtbot):
     widget = widgets.CalendarWidget()
+    qtbot.addWidget(widget)
     assert widget.get_date() == widget.get_value()
     widget.set_range(datetime.date(2000, 1, 1), datetime.date(2020, 1, 1))
     widget.set_value(datetime.date(2000, 10, 10))
@@ -134,6 +136,7 @@ def test_calendarwiget(qtbot):
 
 def test_checkbox(qtbot):
     widget = widgets.CheckBox()
+    qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
     assert bool(widget) is False
@@ -179,6 +182,7 @@ def test_checkbox(qtbot):
 
 def test_commandlinkbutton(qtbot):
     widget = widgets.CommandLinkButton("Test")
+    qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
     widget.set_icon("mdi.timer")
@@ -205,6 +209,7 @@ def test_completer(qtbot):
 
 def test_dateedit(qtbot):
     widget = widgets.DateEdit()
+    qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
     dt = datetime.date(2000, 11, 11)
@@ -214,6 +219,7 @@ def test_dateedit(qtbot):
 
 def test_datetimeedit(qtbot):
     widget = widgets.DateTimeEdit()
+    qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
     dt = datetime.datetime(2000, 11, 11)
@@ -564,6 +570,7 @@ def test_gridlayout(qtbot):
 
 def test_groupbox(qtbot):
     widget = widgets.GroupBox()
+    qtbot.addWidget(widget)
     widget.set_title("test_groupbox")
     ly = widgets.BoxLayout("horizontal")
     widget.set_layout(ly)
@@ -577,9 +584,11 @@ def test_headerview(qtbot):
         pass
 
     table = widgets.TableView()
+    qtbot.addWidget(table)
     model = widgets.FileSystemModel()
     table.set_model(model)
     header = widgets.HeaderView("horizontal", parent=table)
+    qtbot.addWidget(header)
     table.setHorizontalHeader(header)
     header.set_resize_mode("interactive")
     header.set_resize_mode("interactive", col=0)
@@ -624,6 +633,7 @@ def test_keysequenceedit(qtbot):
 
 def test_label(qtbot):
     label = widgets.Label()
+    qtbot.addWidget(label)
     label.set_image("")
     label.set_text("test_label")
     label.set_bold()
@@ -658,6 +668,7 @@ def test_layoutitem(qtbot):
 
 def test_lcdnumber(qtbot):
     lcd = widgets.LCDNumber()
+    qtbot.addWidget(lcd)
     lcd.set_value(500)
     assert lcd.get_value() == 500
     lcd.set_segment_style("filled")
@@ -672,6 +683,7 @@ def test_lcdnumber(qtbot):
 
 def test_lineedit(qtbot):
     widget = widgets.LineEdit("test_lineedit")
+    qtbot.addWidget(widget)
     widget.set_regex_validator("[0-9]")
     widget.set_font("Consolas")
     widget.set_text("0")
@@ -692,6 +704,7 @@ def test_lineedit(qtbot):
 
 def test_listview(qtbot):
     widget = widgets.ListView()
+    qtbot.addWidget(widget)
     widget.set_selection_mode(None)
     widget.set_selection_mode("single")
     widget.toggle_select_all()
@@ -883,6 +896,7 @@ def test_plaintextdocumentlayout():
 
 def test_plaintextedit(qtbot):
     widget = widgets.PlainTextEdit("This is a test")
+    qtbot.addWidget(widget)
     with widget.create_cursor() as c:
         c.select_text(2, 4)
     with widget.current_cursor() as c:
@@ -947,6 +961,7 @@ def test_pinchgesture():
 
 def test_pushbutton(qtbot):
     widget = widgets.PushButton("test_pushbutton", callback=print)
+    qtbot.addWidget(widget)
     widget.set_text("test_pushbutton")
     widget.set_disabled()
     widget.set_enabled()
@@ -963,6 +978,7 @@ def test_pushbutton(qtbot):
 
 def test_radiobutton(qtbot):
     widget = widgets.RadioButton("test_radiobutton")
+    qtbot.addWidget(widget)
     widget.set_icon("mdi.timer")
     widget.set_enabled()
     widget.set_disabled()
@@ -973,13 +989,15 @@ def test_radiobutton(qtbot):
     # assert widget.is_on is False
 
 
-def test_rubberband():
+def test_rubberband(qtbot):
     band = widgets.RubberBand("line")
+    qtbot.addWidget(band)
     assert band.get_shape() == "line"
 
 
 def test_scrollarea(qtbot):
     widget = widgets.ScrollArea()
+    qtbot.addWidget(widget)
     widget.set_widget(widgets.Widget())
 
 
@@ -993,8 +1011,9 @@ def test_scrollerproperties():
         properties.get_scroll_metric("test")
 
 
-def test_scroller():
+def test_scroller(qtbot):
     w = widgets.PlainTextEdit()
+    qtbot.addWidget(w)
     scroller = widgets.Scroller.get_scroller(w)
     assert scroller.get_state() == "inactive"
     scroller.get_velocity()
@@ -1007,8 +1026,9 @@ def test_scroller():
     assert widgets.Scroller.grab_gesture(w) == "tap"
 
 
-def test_shortcut():
+def test_shortcut(qtbot):
     w = widgets.Widget()
+    qtbot.addWidget(w)
     seq = gui.KeySequence("Ctrl+C")
     shortcut = widgets.Shortcut(seq, w)
     assert str(shortcut) == "Ctrl+C"
@@ -1027,6 +1047,7 @@ def test_sizepolicy(qtbot):
 
 def test_slider(qtbot):
     widget = widgets.Slider()
+    qtbot.addWidget(widget)
     widget.set_horizontal()
     assert widget.is_horizontal()
     widget.set_vertical()
@@ -1088,6 +1109,7 @@ def test_spaceritem(qtbot):
 
 def test_spinbox(qtbot):
     widget = widgets.SpinBox(default_value=5)
+    qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
     widget.set_value(10)
@@ -1112,8 +1134,11 @@ def test_spinbox(qtbot):
 
 def test_splitter(qtbot):
     widget = widgets.Splitter("vertical")
+    qtbot.addWidget(widget)
     test = widgets.Label("test_splitter")
+    qtbot.addWidget(widget)
     test2 = widgets.Label("test_splitter")
+    qtbot.addWidget(widget)
     widget.add_widget(test)
     widget += test2
     assert len(widget) == 2
@@ -1201,6 +1226,7 @@ def test_textbrowser(qtbot):
 
 def test_textedit(qtbot):
     widget = widgets.TextEdit()
+    qtbot.addWidget(widget)
     widget.set_text("test")
     widget.append_text(" this")
     assert widget.text() == "test\n this"
@@ -1219,6 +1245,7 @@ def test_textedit(qtbot):
 
 def test_timeedit(qtbot):
     widget = widgets.TimeEdit()
+    qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
     widget.set_range(datetime.time(1, 1, 1), datetime.time(3, 3, 3))
@@ -1515,6 +1542,7 @@ def test_undogroup():
 
 def test_undoview(qtbot):
     view = widgets.UndoView()
+    qtbot.addWidget(view)
     stack = widgets.UndoStack()
     cmd = stack.add_command("test", redo=lambda: print("a"), undo=lambda: print("b"))
     view.set_clean_icon("mdi.folder")
@@ -1611,6 +1639,7 @@ def test_undoview(qtbot):
 
 def test_wizard(qtbot):
     w = widgets.Wizard()
+    qtbot.addWidget(w)
     w.add_widget_as_page(widgets.Widget())
     pix = gui.Pixmap(100, 100)
     w.set_pixmap("background", pix)
@@ -1650,6 +1679,7 @@ def test_wizard(qtbot):
 
 def test_wizardpage(qtbot):
     page = widgets.WizardPage()
+    qtbot.addWidget(page)
     pix = gui.Pixmap(100, 100)
     page.set_pixmap("background", pix)
     with pytest.raises(InvalidParamError):
