@@ -1,3 +1,12 @@
+## v0.190.4 (2022-11-03)
+
+### Fix
+
+- qt compat
+- some compat fixes
+- qt6 flag compat
+- qt6 compat
+
 ## v0.190.3 (2022-06-30)
 
 ### Fix
