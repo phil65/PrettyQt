@@ -269,14 +269,15 @@ def test_datetimeedit(qtbot):
 #     btn = box.add_default_buttons(["ok"])
 
 
-def test_dockwidget(qtbot):
-    widget = widgets.DockWidget()
-    qtbot.addWidget(widget)
-    widget.setup_title_bar()
-    widget.maximize()
-    w = widgets.Widget()
-    widget.set_widget(w)
-    w.raise_dock()
+# def test_dockwidget(qtbot):
+#     widget = widgets.DockWidget()
+#     qtbot.addWidget(widget)
+#     widget.setup_title_bar()
+#     widget.maximize()
+#     w = widgets.Widget()
+#     qtbot.addWidget(w)
+#     widget.set_widget(w)
+#     w.raise_dock()
 
 
 def test_doublespinbox(qtbot):
