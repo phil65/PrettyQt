@@ -115,7 +115,6 @@ def test_boxlayout(qtbot):
 
 def test_buttongroup(qtbot):
     widget = widgets.ButtonGroup()
-    qtbot.addWidget(widget)
     btn = widgets.RadioButton("test")
     widget.addButton(btn, id=2)
     assert widget[2] == btn
@@ -803,6 +802,7 @@ def test_listwidgetitem(qtbot):
 
 # def test_mdiarea(qtbot):
 #     area = widgets.MdiArea()
+#     qtbot.addWidget(area)
 #     area.set_window_order("activation_history")
 #     with pytest.raises(InvalidParamError):
 #         area.set_window_order("test")
@@ -816,39 +816,41 @@ def test_listwidgetitem(qtbot):
 #         area.set_tab_position("test")
 #     assert area.get_tab_position() == "north"
 #     area.set_background("black")
-#     area.add(widgets.Widget())
-#     area += widgets.Widget()
+#     widget_1 = widgets.Widget()
+#     area.add(widget_1)
+#     widget_2 = widgets.Widget()
+#     area += widget_2
 #     sub = widgets.MdiSubWindow()
 #     area.add(sub)
 
 
-# def test_menu(qtbot):
-#     menu = widgets.Menu("1", icon="mdi.timer")
-#     menu.add(widgets.Action(text="TestAction"))
-#     act = widgets.Action(text="TestAction")
-#     act.set_id("test")
-#     menu += act
-#     assert menu["test"] == act
-#     with pytest.raises(KeyError):
-#         menu["bla"]
+def test_menu(qtbot):
+    menu = widgets.Menu("1", icon="mdi.timer")
+    menu.add(widgets.Action(text="TestAction"))
+    act = widgets.Action(text="TestAction")
+    act.set_id("test")
+    menu += act
+    assert menu["test"] == act
+    with pytest.raises(KeyError):
+        menu["bla"]
 
-#     def test():
-#         pass
+    def test():
+        pass
 
-#     menu.add_action(
-#         "test_menu",
-#         test,
-#         icon="mdi.timer",
-#         shortcut="Ctrl+A",
-#         checkable=True,
-#         status_tip="test",
-#     )
-#     assert len(menu) == 3
-#     for item in menu:
-#         pass
-#     menu.add_menu(widgets.Menu())
-#     menu.add_separator("test_menu")
-#     menu.add_separator()
+    menu.add_action(
+        "test_menu",
+        test,
+        icon="mdi.timer",
+        shortcut="Ctrl+A",
+        checkable=True,
+        status_tip="test",
+    )
+    assert len(menu) == 3
+    for item in menu:
+        pass
+    menu.add_menu(widgets.Menu())
+    menu.add_separator("test_menu")
+    menu.add_separator()
 
 
 def test_menubar(qtbot):
