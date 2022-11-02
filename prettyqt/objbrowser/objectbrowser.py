@@ -125,11 +125,24 @@ class ObjectBrowser(widgets.MainWindow):
         selection_model.currentChanged.connect(self._update_details)
         menubar = self.menuBar()
         file_menu = menubar.add_menu("&File")
-        file_menu.addAction("C&lose", self.close, "Ctrl+W")
-        file_menu.addAction("E&xit", lambda: widgets.app().closeAllWindows(), "Ctrl+Q")
+        close_action = widgets.Action(
+            text="C&lose", callback=self.close, shortcut="Ctrl+W"
+        )
+        file_menu.addAction(close_action)
+        exit_action = widgets.Action(
+            text="E&xit",
+            callback=lambda: widgets.app().closeAllWindows(),
+            shortcut="Ctrl+Q",
+        )
+        file_menu.addAction(exit_action)
 
         view_menu = menubar.add_menu("&View")
-        view_menu.addAction("&Refresh", self._tree_model.refresh_tree, "Ctrl+R")
+        refresh_action = widgets.Action(
+            text="&Refresh",
+            callback=self._tree_model.refresh_tree,
+            shortcut="Ctrl+R",
+        )
+        view_menu.addAction(refresh_action)
         view_menu.addAction(self.toggle_auto_refresh_action)
 
         view_menu.addSeparator()
