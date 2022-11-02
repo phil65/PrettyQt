@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/custom_delegates.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
     
     
       
@@ -19,13 +19,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
+
     
     
     
@@ -40,10 +41,11 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -120,7 +122,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -816,20 +818,6 @@
   
   
     <li class="md-nav__item">
-      <a href="location.html" class="md-nav__link">
-        location
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="network.html" class="md-nav__link">
         network
       </a>
@@ -914,20 +902,6 @@
   
   
     <li class="md-nav__item">
-      <a href="scintilla.html" class="md-nav__link">
-        scintilla
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="svg.html" class="md-nav__link">
         svg
       </a>
@@ -944,20 +918,6 @@
     <li class="md-nav__item">
       <a href="syntaxhighlighters.html" class="md-nav__link">
         syntaxhighlighters
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="texttospeech.html" class="md-nav__link">
-        texttospeech
       </a>
     </li>
   
@@ -1491,10 +1451,11 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
 
 
 <h1 id="custom_delegates-module">custom_delegates module</h1>
@@ -1617,7 +1578,7 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
     <div class="doc doc-contents ">
 
-      <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
+      <p>createEditor(self, parent: PySide6.QtWidgets.QWidget, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; PySide6.QtWidgets.QWidget</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
@@ -1651,7 +1612,7 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
     <div class="doc doc-contents ">
 
-      <p>setEditorData(self, QWidget, QModelIndex)</p>
+      <p>setEditorData(self, editor: PySide6.QtWidgets.QWidget, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
@@ -1677,7 +1638,7 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
     <div class="doc doc-contents ">
 
-      <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
+      <p>setModelData(self, editor: PySide6.QtWidgets.QWidget, model: PySide6.QtCore.QAbstractItemModel, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
@@ -1753,7 +1714,6 @@ CheckBoxDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDele
 
     <div class="doc doc-contents ">
 
-      <p>Delegate that places a CheckBox in every cell.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/checkboxdelegate.py</code></summary>
@@ -2220,7 +2180,7 @@ NoFocusDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Sty
 
     <div class="doc doc-contents ">
 
-      <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
+      <p>paint(self, painter: PySide6.QtGui.QPainter, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/nofocusdelegate.py</code></summary>
@@ -2346,7 +2306,7 @@ ProgressBarDelegate            (<span title="prettyqt.widgets.styleditemdelegate
 
     <div class="doc doc-contents ">
 
-      <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
+      <p>paint(self, painter: PySide6.QtGui.QPainter, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/progressbardelegate.py</code></summary>
@@ -2554,7 +2514,7 @@ RadioDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Style
 
     <div class="doc doc-contents ">
 
-      <p>createEditor(self, QWidget, QStyleOptionViewItem, QModelIndex) -&gt; QWidget</p>
+      <p>createEditor(self, parent: PySide6.QtWidgets.QWidget, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; PySide6.QtWidgets.QWidget</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
@@ -2607,7 +2567,7 @@ RadioDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Style
 
     <div class="doc doc-contents ">
 
-      <p>eventFilter(self, QObject, QEvent) -&gt; bool</p>
+      <p>eventFilter(self, object: PySide6.QtCore.QObject, event: PySide6.QtCore.QEvent) -&gt; bool</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
@@ -2652,7 +2612,7 @@ RadioDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Style
 
     <div class="doc doc-contents ">
 
-      <p>setEditorData(self, QWidget, QModelIndex)</p>
+      <p>setEditorData(self, editor: PySide6.QtWidgets.QWidget, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
@@ -2680,7 +2640,7 @@ RadioDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Style
 
     <div class="doc doc-contents ">
 
-      <p>setModelData(self, QWidget, QAbstractItemModel, QModelIndex)</p>
+      <p>setModelData(self, editor: PySide6.QtWidgets.QWidget, model: PySide6.QtCore.QAbstractItemModel, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
@@ -2716,7 +2676,7 @@ RadioDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Style
 
     <div class="doc doc-contents ">
 
-      <p>updateEditorGeometry(self, QWidget, QStyleOptionViewItem, QModelIndex)</p>
+      <p>updateEditorGeometry(self, editor: PySide6.QtWidgets.QWidget, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/radiodelegate.py</code></summary>
@@ -2876,7 +2836,7 @@ RenderLinkDelegate            (<span title="prettyqt.widgets.styleditemdelegate.
 
     <div class="doc doc-contents ">
 
-      <p>editorEvent(self, QEvent, QAbstractItemModel, QStyleOptionViewItem, QModelIndex) -&gt; bool</p>
+      <p>editorEvent(self, event: PySide6.QtCore.QEvent, model: PySide6.QtCore.QAbstractItemModel, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; bool</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/renderlinkdelegate.py</code></summary>
@@ -2921,7 +2881,7 @@ RenderLinkDelegate            (<span title="prettyqt.widgets.styleditemdelegate.
 
     <div class="doc doc-contents ">
 
-      <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
+      <p>paint(self, painter: PySide6.QtGui.QPainter, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/renderlinkdelegate.py</code></summary>
@@ -3016,7 +2976,6 @@ StarDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Styled
 
     <div class="doc doc-contents ">
 
-      <p>A delegate class that allows us to render our star ratings.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
@@ -3132,7 +3091,7 @@ StarDelegate            (<span title="prettyqt.widgets.styleditemdelegate.Styled
 
     <div class="doc doc-contents ">
 
-      <p>paint(self, QPainter, QStyleOptionViewItem, QModelIndex)</p>
+      <p>paint(self, painter: PySide6.QtGui.QPainter, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
@@ -3272,7 +3231,6 @@ StarEditor            (<a class="autorefs autorefs-internal" title="prettyqt.wid
 
     <div class="doc doc-contents ">
 
-      <p>The custom editor for editing StarRatings.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/stardelegate.py</code></summary>
@@ -3670,10 +3628,15 @@ StarRating        </code>
 
   </div>
 
-              
-            </article>
-            
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
@@ -3744,10 +3707,11 @@ StarRating        </code>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
       
     
   </body>

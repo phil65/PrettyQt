@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/objbrowser.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
     
     
       
@@ -19,13 +19,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
+
     
     
     
@@ -40,10 +41,11 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -120,7 +122,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -340,20 +342,6 @@
     <li class="md-nav__item">
       <a href="gui.html" class="md-nav__link">
         gui
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="location.html" class="md-nav__link">
-        location
       </a>
     </li>
   
@@ -750,20 +738,6 @@
   
   
     <li class="md-nav__item">
-      <a href="scintilla.html" class="md-nav__link">
-        scintilla
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="svg.html" class="md-nav__link">
         svg
       </a>
@@ -780,20 +754,6 @@
     <li class="md-nav__item">
       <a href="syntaxhighlighters.html" class="md-nav__link">
         syntaxhighlighters
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="texttospeech.html" class="md-nav__link">
-        texttospeech
       </a>
     </li>
   
@@ -1163,10 +1123,11 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
 
 
 <h1 id="objbrowser-module">objbrowser module</h1>
@@ -1353,7 +1314,6 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
 
     <div class="doc doc-contents ">
 
-      <p>Object browser main application window.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
@@ -1461,11 +1421,24 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="n">selection_model</span><span class="o">.</span><span class="n">currentChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_details</span><span class="p">)</span>
         <span class="n">menubar</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">menuBar</span><span class="p">()</span>
         <span class="n">file_menu</span> <span class="o">=</span> <span class="n">menubar</span><span class="o">.</span><span class="n">add_menu</span><span class="p">(</span><span class="s2">&quot;&amp;File&quot;</span><span class="p">)</span>
-        <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;C&amp;lose&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">,</span> <span class="s2">&quot;Ctrl+W&quot;</span><span class="p">)</span>
-        <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">app</span><span class="p">()</span><span class="o">.</span><span class="n">closeAllWindows</span><span class="p">(),</span> <span class="s2">&quot;Ctrl+Q&quot;</span><span class="p">)</span>
+        <span class="n">close_action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;C&amp;lose&quot;</span><span class="p">,</span> <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">,</span> <span class="n">shortcut</span><span class="o">=</span><span class="s2">&quot;Ctrl+W&quot;</span>
+        <span class="p">)</span>
+        <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">close_action</span><span class="p">)</span>
+        <span class="n">exit_action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;E&amp;xit&quot;</span><span class="p">,</span>
+            <span class="n">callback</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">app</span><span class="p">()</span><span class="o">.</span><span class="n">closeAllWindows</span><span class="p">(),</span>
+            <span class="n">shortcut</span><span class="o">=</span><span class="s2">&quot;Ctrl+Q&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">file_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">exit_action</span><span class="p">)</span>
 
         <span class="n">view_menu</span> <span class="o">=</span> <span class="n">menubar</span><span class="o">.</span><span class="n">add_menu</span><span class="p">(</span><span class="s2">&quot;&amp;View&quot;</span><span class="p">)</span>
-        <span class="n">view_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="s2">&quot;&amp;Refresh&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">,</span> <span class="s2">&quot;Ctrl+R&quot;</span><span class="p">)</span>
+        <span class="n">refresh_action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span>
+            <span class="n">text</span><span class="o">=</span><span class="s2">&quot;&amp;Refresh&quot;</span><span class="p">,</span>
+            <span class="n">callback</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">refresh_tree</span><span class="p">,</span>
+            <span class="n">shortcut</span><span class="o">=</span><span class="s2">&quot;Ctrl+R&quot;</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">view_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">refresh_action</span><span class="p">)</span>
         <span class="n">view_menu</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">toggle_auto_refresh_action</span><span class="p">)</span>
 
         <span class="n">view_menu</span><span class="o">.</span><span class="n">addSeparator</span><span class="p">()</span>
@@ -2008,7 +1981,6 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <div class="doc doc-contents ">
 
-      <p>Model that provides an interface to an objectree that is build of tree items.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -2527,7 +2499,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <div class="doc doc-contents ">
 
-      <p>canFetchMore(self, QModelIndex) -&gt; bool</p>
+      <p>canFetchMore(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; bool</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -2603,7 +2575,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <div class="doc doc-contents ">
 
-      <p>flags(self, QModelIndex) -&gt; Qt.ItemFlags</p>
+      <p>flags(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; PySide6.QtCore.Qt.ItemFlag</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -2631,7 +2603,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <div class="doc doc-contents ">
 
-      <p>hasChildren(self, parent: QModelIndex = QModelIndex()) -&gt; bool</p>
+      <p>hasChildren(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; bool</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -2661,7 +2633,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <div class="doc doc-contents ">
 
-      <p>index(self, int, int, parent: QModelIndex = QModelIndex()) -&gt; QModelIndex</p>
+      <p>index(self, row: int, column: int, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; PySide6.QtCore.QModelIndex</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -2738,8 +2710,8 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <div class="doc doc-contents ">
 
-      <p>parent(self, QModelIndex) -&gt; QModelIndex
-parent(self) -&gt; QObject</p>
+      <p>parent(self) -&gt; PySide6.QtCore.QObject
+parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; PySide6.QtCore.QModelIndex</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -2858,7 +2830,7 @@ parent(self) -&gt; QObject</p>
 
     <div class="doc doc-contents ">
 
-      <p>rowCount(self, parent: QModelIndex = QModelIndex()) -&gt; int</p>
+      <p>rowCount(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; int</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -2904,7 +2876,6 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
 
     <div class="doc doc-contents ">
 
-      <p>Proxy model that overrides the sorting and can filter out items.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
@@ -3200,10 +3171,15 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
 
   </div>
 
-              
-            </article>
-            
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
@@ -3274,10 +3250,11 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
       
     
   </body>

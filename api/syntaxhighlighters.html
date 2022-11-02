@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/syntaxhighlighters.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
     
     
       
@@ -19,13 +19,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1d29e8d0.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
+
     
     
     
@@ -40,10 +41,11 @@
     
       <link rel="stylesheet" href="../assets/_mkdocstrings.css">
     
-    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
+    
     
     
   </head>
@@ -120,7 +122,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -352,20 +354,6 @@
   
   
     <li class="md-nav__item">
-      <a href="location.html" class="md-nav__link">
-        location
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
       <a href="network.html" class="md-nav__link">
         network
       </a>
@@ -438,20 +426,6 @@
     <li class="md-nav__item">
       <a href="quick.html" class="md-nav__link">
         quick
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="scintilla.html" class="md-nav__link">
-        scintilla
       </a>
     </li>
   
@@ -814,20 +788,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="texttospeech.html" class="md-nav__link">
-        texttospeech
-      </a>
     </li>
   
 
@@ -1229,10 +1189,11 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
 
 
 <h1 id="syntaxhighlighters-module">syntaxhighlighters module</h1>
@@ -1757,7 +1718,6 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
 
     <div class="doc doc-contents ">
 
-      <p>Syntax highlighter that uses Pygments for parsing.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
@@ -1837,7 +1797,7 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_format</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
 
-    <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>
     <span class="k">def</span> <span class="nf">_get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Returns a QTextCharFormat for token or None.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1880,7 +1840,7 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
                     <span class="n">result</span><span class="o">.</span><span class="n">set_font_style_hint</span><span class="p">(</span><span class="s2">&quot;typewriter&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 
-    <span class="nd">@functools</span><span class="o">.</span><span class="n">lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>
     <span class="k">def</span> <span class="nf">_get_brush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Return a brush for the color.&quot;&quot;&quot;</span>
         <span class="n">qcolor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">color</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -2187,7 +2147,6 @@ PythonHighlighter            (<a class="autorefs autorefs-internal" title="prett
 
     <div class="doc doc-contents ">
 
-      <p>Syntax highlighter for the Python language.</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
@@ -2890,10 +2849,15 @@ YamlHighlighter            (<a class="autorefs autorefs-internal" title="prettyq
 
   </div>
 
-              
-            </article>
-            
-          </div>
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
@@ -2937,14 +2901,14 @@ YamlHighlighter            (<a class="autorefs autorefs-internal" title="prettyq
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">Previous</span>svg</span>
             </div>
-          </a><!-- Link to next page --><a href="texttospeech.html"
-              title="texttospeech"
+          </a><!-- Link to next page --><a href="webenginecore.html"
+              title="webenginecore"
               class="md-flex md-footer-nav__link md-footer-nav__link--next"
               rel="next">
             <div class="md-flex__cell md-flex__cell--stretch
                   md-footer-nav__title">
               <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">Next</span>texttospeech</span>
+                <span class="md-footer-nav__direction">Next</span>webenginecore</span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-forward
@@ -2964,10 +2928,11 @@ YamlHighlighter            (<a class="autorefs autorefs-internal" title="prettyq
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
       
     
   </body>

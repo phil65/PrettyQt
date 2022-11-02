@@ -1,0 +1,4 @@
+scintilla module
+==========
+
+::: prettyqt.scintilla
