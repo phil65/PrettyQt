@@ -279,6 +279,7 @@ def test_dialogbuttonbox(qtbot):
     btn = box.add_default_buttons(["ok"])
 
 
+@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_dockwidget(qtbot):
     widget = widgets.DockWidget()
     qtbot.addWidget(widget)

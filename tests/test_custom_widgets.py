@@ -12,6 +12,7 @@ from prettyqt.qt import QtCore, QtGui
 def test_booldicttoolbutton(qtbot):
     dct = dict(a="test", b="test2")
     w = custom_widgets.BoolDictToolButton("Title", None, dct)
+    qtbot.addWidget(w)
     w["a"] = True
     assert w["a"] is True
     assert w.as_dict() == dict(a=True, b=False)
@@ -19,7 +20,9 @@ def test_booldicttoolbutton(qtbot):
 
 def test_collapsibleframe(qtbot):
     frame = custom_widgets.CollapsibleFrame()
+    qtbot.addWidget(frame)
     widget = widgets.Widget()
+    qtbot.addWidget(widget)
     frame.add_widget(widget)
     frame.set_title("CollapsibleFrame")
     frame.expand()
@@ -30,14 +33,18 @@ def test_collapsibleframe(qtbot):
 
 def test_expandableline(qtbot):
     layout = widgets.BoxLayout("vertical")
-    layout.addWidget(widgets.TextBrowser())
+    textbrowser = widgets.TextBrowser()
+    qtbot.addWidget(textbrowser)
+    layout.addWidget(textbrowser)
     widget = custom_widgets.ExpandableLine("Test")
+    qtbot.addWidget(widget)
     widget.set_layout(layout)
     widget.show()
 
 
 def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
+    qtbot.addWidget(btn)
     btn.set_current_color("green")
     with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
@@ -51,6 +58,7 @@ def test_colorchooserbutton(qtbot):
 
 def test_regexeditor(qtbot):
     widget = custom_widgets.regexeditor.RegexEditorWidget()
+    qtbot.addWidget(widget)
     widget.regex = "[0-9]"
     assert widget.regex == "[0-9]"
     widget.string = "test123"
@@ -83,6 +91,7 @@ def test_dataset(qtbot):
 
 def test_flagselectionwidget(qtbot):
     widget = custom_widgets.FlagSelectionWidget()
+    qtbot.addWidget(widget)
     items = {0: "MultiLine", 2: "Ignore case"}
     widget.add_items(items)
     assert widget.get_value() == 0
@@ -90,13 +99,16 @@ def test_flagselectionwidget(qtbot):
 
 def test_stringornumberwidget(qtbot):
     widget = custom_widgets.StringOrNumberWidget()
+    qtbot.addWidget(widget)
     widget.get_value()
     widget.on_value_change()
 
 
 def test_optionalwidget(qtbot):
     w = widgets.RadioButton()
+    qtbot.addWidget(w)
     container = custom_widgets.OptionalWidget(w, "Test")
+    qtbot.addWidget(container)
     container.get_value()
     container.enabled = False
     assert container.enabled is False
@@ -104,9 +116,13 @@ def test_optionalwidget(qtbot):
 
 def test_sidebarwidget(qtbot):
     ex = custom_widgets.SidebarWidget(show_settings=True)
+    qtbot.addWidget(ex)
     page_1 = widgets.PlainTextEdit()
     page_2 = widgets.ColorDialog()
     page_3 = widgets.FileDialog()
+    qtbot.addWidget(page_1)
+    qtbot.addWidget(page_2)
+    qtbot.addWidget(page_3)
     ex.add_tab(page_1, "Text", "mdi.timer")
     ex.add_tab(page_2, "Color", "mdi.format-color-fill", area="bottom")
     ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
@@ -116,11 +132,13 @@ def test_sidebarwidget(qtbot):
 
 def test_singlelinetextedit(qtbot):
     w = custom_widgets.SingleLineTextEdit()
+    qtbot.addWidget(w)
     w.set_text("test")
 
 
 def test_timeline(qtbot):
     tl = custom_widgets.Timeline(60, 60)
+    qtbot.addWidget(tl)
     tl.show()
     sample = custom_widgets.VideoSample(20)
     tl += sample
@@ -134,6 +152,7 @@ def test_timeline(qtbot):
 
 def test_mappedcheckbox(qtbot):
     widget = custom_widgets.MappedCheckBox(true_value=0, false_value=1)
+    qtbot.addWidget(widget)
     widget.set_value(0)
     assert widget.get_value() == 0
     widget.setChecked(False)
@@ -142,6 +161,7 @@ def test_mappedcheckbox(qtbot):
 
 def test_filechooserbutton(qtbot):
     btn = custom_widgets.FileChooserButton()
+    qtbot.addWidget(btn)
     with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
@@ -152,6 +172,7 @@ def test_filechooserbutton(qtbot):
 
 def test_fontchooserbutton(qtbot):
     btn = custom_widgets.FontChooserButton()
+    qtbot.addWidget(btn)
     with open("data.pkl", "wb") as jar:
         pickle.dump(btn, jar)
     with open("data.pkl", "rb") as jar:
@@ -162,6 +183,7 @@ def test_fontchooserbutton(qtbot):
 
 def test_iconlabel(qtbot):
     w = custom_widgets.IconLabel()
+    qtbot.addWidget(w)
     w.set_text("test")
     assert w.text() == "test"
     repr(w)
@@ -169,6 +191,7 @@ def test_iconlabel(qtbot):
 
 def test_inputandslider(qtbot):
     w = custom_widgets.InputAndSlider()
+    qtbot.addWidget(w)
     w.set_range(0, 10)
     w.set_value(5)
     assert w.get_value() == 5
@@ -178,6 +201,7 @@ def test_inputandslider(qtbot):
 
 def test_codeeditor(qtbot):
     editor = custom_widgets.CodeEditor()
+    qtbot.addWidget(editor)
     assert editor.text() == ""
     editor.line_area_width()
     editor.set_syntaxhighlighter("python")
@@ -187,13 +211,16 @@ def test_codeeditor(qtbot):
 
 
 def test_imageviewer(qtbot):
-    custom_widgets.ImageViewer()
+    widget = custom_widgets.ImageViewer()
+    qtbot.addWidget(widget)
 
 
 def test_flowlayout(qtbot):
     widget = widgets.Widget()
+    qtbot.addWidget(widget)
     layout = custom_widgets.FlowLayout(margin=1)
     btn = widgets.PushButton("Short")
+    qtbot.addWidget(btn)
     layout += btn
     layout += widgets.PushButton("Longer")
     layout += widgets.PushButton("Different text")
@@ -215,7 +242,9 @@ def test_flowlayout(qtbot):
 
 def test_labeledslider(qtbot, qttester):
     slider = custom_widgets.LabeledSlider(["test1", "test2"], "vertical")
-    slider = custom_widgets.LabeledSlider(["test1", "test2"])
+    slider_2 = custom_widgets.LabeledSlider(["test1", "test2"])
+    qtbot.addWidget(slider)
+    qtbot.addWidget(slider_2)
     slider.show()
     qtbot.add_widget(slider)
     qttester.send_mousepress(slider.sl, QtCore.Qt.MouseButton.LeftButton)
@@ -226,6 +255,7 @@ def test_labeledslider(qtbot, qttester):
 
 def test_logtextedit(qtbot):
     textedit = custom_widgets.LogTextEdit()
+    qtbot.addWidget(textedit)
     textedit.show()
     logger = logging.getLogger()
     fmt = logging.Formatter(
@@ -249,11 +279,13 @@ def test_markdownwidget(qtbot):
 
 def test_popupinfo(qtbot):
     popup = custom_widgets.PopupInfo()
+    qtbot.addWidget(popup)
     popup.show_popup("test")
 
 
 def test_roundprogressbar(qtbot):
     bar = custom_widgets.RoundProgressBar()
+    qtbot.addWidget(bar)
     bar.show()
     assert bar.minimum() == 0
     assert bar.maximum() == 100
@@ -271,6 +303,7 @@ def test_roundprogressbar(qtbot):
 
 def test_selectionwidget(qtbot):
     widget = custom_widgets.SelectionWidget()
+    qtbot.addWidget(widget)
 
     class Test:
         pass
@@ -331,7 +364,9 @@ def test_spanslider(qtbot, qttester):
 
 def test_waitingspinner(qtbot):
     test_widget = widgets.Widget()
+    qtbot.addWidget(test_widget)
     spinner = custom_widgets.WaitingSpinner(parent=test_widget)
+    qtbot.addWidget(spinner)
     spinner.repaint()
     spinner.set_line_num(2)
     assert spinner.line_num() == 2
