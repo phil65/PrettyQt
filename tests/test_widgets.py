@@ -243,30 +243,30 @@ def test_datetimeedit(qtbot):
 #     dlg.add_buttonbox()
 
 
-def test_dial(qtbot):
-    widget = widgets.Dial()
-    qtbot.add_widget(widget)
+# def test_dial(qtbot):
+#     widget = widgets.Dial()
+#     qtbot.add_widget(widget)
 
 
-def test_dialogbuttonbox(qtbot):
-    box = widgets.DialogButtonBox()
-    qtbot.addWidget(box)
-    box.set_horizontal()
-    box.set_vertical()
-    btn = box.add_default_button("apply")
-    with pytest.raises(InvalidParamError):
-        btn = box.add_default_button("test")
-    box.set_orientation("horizontal")
-    with pytest.raises(InvalidParamError):
-        box.set_orientation("test")
-    assert box.get_orientation() == "horizontal"
-    box.add_button("test_dialogbuttonbox", callback=print)
-    assert len(box) == 2
-    assert btn == box["apply"]
-    assert "apply" in box
-    for item in box:
-        pass
-    btn = box.add_default_buttons(["ok"])
+# def test_dialogbuttonbox(qtbot):
+#     box = widgets.DialogButtonBox()
+#     qtbot.addWidget(box)
+#     box.set_horizontal()
+#     box.set_vertical()
+#     btn = box.add_default_button("apply")
+#     with pytest.raises(InvalidParamError):
+#         btn = box.add_default_button("test")
+#     box.set_orientation("horizontal")
+#     with pytest.raises(InvalidParamError):
+#         box.set_orientation("test")
+#     assert box.get_orientation() == "horizontal"
+#     box.add_button("test_dialogbuttonbox", callback=print)
+#     assert len(box) == 2
+#     assert btn == box["apply"]
+#     assert "apply" in box
+#     for item in box:
+#         pass
+#     btn = box.add_default_buttons(["ok"])
 
 
 def test_dockwidget(qtbot):
@@ -281,12 +281,14 @@ def test_dockwidget(qtbot):
 
 def test_doublespinbox(qtbot):
     widget = widgets.DoubleSpinBox(default_value=5)
+    qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
 
 
 def test_filedialog(qtbot):
     dlg = widgets.FileDialog(path_id="test", extension_filter=dict(test=["*.test"]))
+    qtbot.addWidget(dlg)
     dlg.set_label_text("accept", "test_filedialog")
     dlg.set_accept_mode("open")
     with pytest.raises(InvalidParamError):
@@ -329,6 +331,7 @@ def test_filesystemmodel(qttester):
 
 def test_fontcombobox(qtbot):
     widget = widgets.FontComboBox()
+    qtbot.addWidget(widget)
     font = widget.get_current_font()
     assert font == widget.get_value()
     widget.set_font_filters("scalable")
@@ -339,6 +342,7 @@ def test_fontcombobox(qtbot):
 
 def test_fontdialog(qtbot):
     dlg = widgets.FontDialog()
+    qtbot.addWidget(dlg)
     dlg.get_current_font()
 
 
