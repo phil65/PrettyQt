@@ -29,7 +29,7 @@ class NestedModel(  # type: ignore
             return self.DEFAULT_FLAGS | constants.IS_EDITABLE
         return self.DEFAULT_FLAGS
 
-    def rowCount(self, parent=core.ModelIndex()):
+    def rowCount(self, parent=core.ModelIndex()) -> int:
 
         if parent.column() > 0:
             return 0
@@ -37,7 +37,7 @@ class NestedModel(  # type: ignore
             return len(self.items)
         return len(parent.internalPointer().children)
 
-    def index(self, row, column, parent=core.ModelIndex()):
+    def index(self, row, column, parent):
 
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()
@@ -65,7 +65,7 @@ class NestedModel(  # type: ignore
     def data_by_index(self, index):
         return index.internalPointer()
 
-    def json(self, root=None):
+    def json(self, root=None) -> dict:
         """Serialise model as JSON-compliant dictionary.
 
         Arguments:
