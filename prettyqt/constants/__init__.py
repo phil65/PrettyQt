@@ -636,13 +636,13 @@ GESTURE_TYPE: bidict[GestureTypeStr, Qt.GestureType] = bidict(
 
 GestureStateStr = Literal["none", "started", "updated", "finished", "canceled"]
 GESTURE_STATE: bidict[GestureStateStr, Qt.GestureState] = bidict(
+    none=Qt.GestureState(0),  # GestureNone not available in PyQt6
     started=Qt.GestureState.GestureStarted,
     updated=Qt.GestureState.GestureUpdated,
     finished=Qt.GestureState.GestureFinished,
     canceled=Qt.GestureState.GestureCanceled,
 )
-if prettyqt.qt.API != "pyqt6":
-    GESTURE_STATE["none"] = Qt.GestureState(0)  # type: ignore
+
 
 ScrollBarPolicyStr = Literal["always_on", "always_off", "as_needed"]
 SCROLLBAR_POLICY: bidict[ScrollBarPolicyStr, Qt.ScrollBarPolicy] = bidict(

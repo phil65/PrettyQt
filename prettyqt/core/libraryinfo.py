@@ -3,7 +3,7 @@ from __future__ import annotations
 import pathlib
 from typing import Literal
 
-from prettyqt import core
+from prettyqt import core, qt
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -53,7 +53,10 @@ class LibraryInfo(QtCore.QLibraryInfo):
     def get_location(cls, location: LocationStr) -> pathlib.Path:
         if location not in LOCATION:
             raise InvalidParamError(location, LOCATION)
-        path = cls.path(LOCATION[location])
+        if qt.API.endswith("6"):
+            path = cls.path(LOCATION[location])
+        else:
+            path = cls.location(LOCATION[location])
         return pathlib.Path(path)
 
     @classmethod

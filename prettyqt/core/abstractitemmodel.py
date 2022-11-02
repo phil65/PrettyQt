@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import contextlib
 
-from prettyqt import core
+from prettyqt import core, qt
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -51,6 +51,8 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
         if parent_is_invalid:
             flag |= CHECK_INDEX_OPTIONS["parent_is_invalid"]  # type: ignore
         check_flag = QtCore.QAbstractItemModel.CheckIndexOption(0) | flag  # type: ignore
+        if qt.API.endswith("5"):
+            check_flag = QtCore.QAbstractItemModel.CheckIndexOptions(check_flag)
         return self.checkIndex(index, check_flag)  # type: ignore
 
     @contextlib.contextmanager

@@ -4,7 +4,7 @@
 
 import pytest
 
-import prettyqt
+# import prettyqt
 from prettyqt import core
 
 
@@ -14,10 +14,10 @@ qthelp = pytest.importorskip("prettyqt.qthelp")
 # from prettyqt.utils import InvalidParamError
 
 
-@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
-def test_helplink():
-    link = qthelp.HelpLink()
-    link.get_url()
+# @pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
+# def test_helplink():
+#     link = qthelp.HelpLink()
+#     link.get_url()
 
 
 # def test_helpcontentitem():
@@ -26,12 +26,12 @@ def test_helplink():
 #     assert len(item) == 0
 
 
-@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
-def test_helpfilterdata():
-    data = qthelp.HelpFilterData()
-    versions = [core.VersionNumber(1, 0, 0)]
-    data.set_versions(versions)
-    assert data.get_versions() == versions
+# @pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
+# def test_helpfilterdata():
+#     data = qthelp.HelpFilterData()
+#     versions = [core.VersionNumber(1, 0, 0)]
+#     data.set_versions(versions)
+#     assert data.get_versions() == versions
 
 
 # def test_helpsearchresultwidget():

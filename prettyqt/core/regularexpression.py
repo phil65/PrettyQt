@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Callable, Literal
 
-from prettyqt import core
+from prettyqt import core, qt
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -53,7 +53,7 @@ class RegularExpression(QtCore.QRegularExpression):
         return f"{type(self).__name__}({self.pattern()!r})"
 
     def __reduce__(self):
-        return type(self), (self.pattern(), self.flags)
+        return type(self), (self.pattern(), qt.flag_to_int(self.flags))
 
     def globalMatch(self, *args, **kwargs) -> core.RegularExpressionMatchIterator:
         it = super().globalMatch(*args, **kwargs)

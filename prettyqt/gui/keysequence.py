@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import constants
+from prettyqt import constants, qt
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, mappers
 
@@ -124,7 +124,7 @@ class KeySequence(QtGui.QKeySequence):
     def to_shortcut_str(cls, key, mod: int = 0) -> str:
         for k, v in constants.MODIFIER_TO_KEY.items():
             if mod & k:  # type: ignore
-                key += v.value
+                key += qt.flag_to_int(v)
         return str(cls(key))
 
 
