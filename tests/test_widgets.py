@@ -513,11 +513,11 @@ def test_graphicsblureffect():
 #         scene.set_item_index_method("test")
 
 
-# def test_graphicsrotation():
-#     rotation = widgets.GraphicsRotation()
-#     rotation.set_axis("z")
-#     with pytest.raises(InvalidParamError):
-#         rotation.set_axis("test")
+def test_graphicsrotation():
+    rotation = widgets.GraphicsRotation()
+    rotation.set_axis("z")
+    with pytest.raises(InvalidParamError):
+        rotation.set_axis("test")
 
 
 # def test_graphicsview(qtbot):
@@ -1629,14 +1629,14 @@ def test_undoview(qtbot):
 #     assert widget.get_window_state() == "fullscreen"
 
 
-# def test_widgetaction(qtbot):
-#     action = widgets.Action()
-#     widgetaction = widgets.WidgetAction(parent=action)
-#     widgetaction.set_tooltip("test")
-#     widgetaction.set_enabled()
-#     widgetaction.set_disabled()
-#     widgetaction.set_icon("mdi.timer")
-#     widgetaction.set_shortcut("Ctrl+A")
+def test_widgetaction(qtbot):
+    action = widgets.Action()
+    widgetaction = widgets.WidgetAction(parent=action)
+    widgetaction.set_tooltip("test")
+    widgetaction.set_enabled()
+    widgetaction.set_disabled()
+    widgetaction.set_icon("mdi.timer")
+    widgetaction.set_shortcut("Ctrl+A")
 
 
 def test_wizard(qtbot):
