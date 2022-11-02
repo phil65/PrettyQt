@@ -248,25 +248,25 @@ def test_datetimeedit(qtbot):
 #     qtbot.add_widget(widget)
 
 
-# def test_dialogbuttonbox(qtbot):
-#     box = widgets.DialogButtonBox()
-#     qtbot.addWidget(box)
-#     box.set_horizontal()
-#     box.set_vertical()
-#     btn = box.add_default_button("apply")
-#     with pytest.raises(InvalidParamError):
-#         btn = box.add_default_button("test")
-#     box.set_orientation("horizontal")
-#     with pytest.raises(InvalidParamError):
-#         box.set_orientation("test")
-#     assert box.get_orientation() == "horizontal"
-#     box.add_button("test_dialogbuttonbox", callback=print)
-#     assert len(box) == 2
-#     assert btn == box["apply"]
-#     assert "apply" in box
-#     for item in box:
-#         pass
-#     btn = box.add_default_buttons(["ok"])
+def test_dialogbuttonbox(qtbot):
+    box = widgets.DialogButtonBox()
+    qtbot.addWidget(box)
+    box.set_horizontal()
+    box.set_vertical()
+    btn = box.add_default_button("apply")
+    with pytest.raises(InvalidParamError):
+        btn = box.add_default_button("test")
+    box.set_orientation("horizontal")
+    with pytest.raises(InvalidParamError):
+        box.set_orientation("test")
+    assert box.get_orientation() == "horizontal"
+    box.add_button("test_dialogbuttonbox", callback=print)
+    assert len(box) == 2
+    assert btn == box["apply"]
+    assert "apply" in box
+    for item in box:
+        pass
+    btn = box.add_default_buttons(["ok"])
 
 
 # def test_dockwidget(qtbot):
@@ -397,21 +397,21 @@ def test_fontdialog(qtbot):
 #         frame.set_frame_shape("test")
 
 
-# def test_gesture():
-#     gesture = widgets.Gesture()
-#     assert gesture.get_state() == "none"
-#     assert gesture.get_gesture_type() == "custom"
-#     gesture.get_hot_spot()
-#     gesture.set_gesture_cancel_policy("all_in_context")
-#     with pytest.raises(InvalidParamError):
-#         gesture.set_gesture_cancel_policy("test")
-#     assert gesture.get_gesture_cancel_policy() == "all_in_context"
+def test_gesture():
+    gesture = widgets.Gesture()
+    assert gesture.get_state() == "none"
+    assert gesture.get_gesture_type() == "custom"
+    gesture.get_hot_spot()
+    gesture.set_gesture_cancel_policy("all_in_context")
+    with pytest.raises(InvalidParamError):
+        gesture.set_gesture_cancel_policy("test")
+    assert gesture.get_gesture_cancel_policy() == "all_in_context"
 
 
-# def test_graphicsblureffect():
-#     effect = widgets.GraphicsBlurEffect()
-#     effect.set_blur_hints("animation")
-#     assert effect.get_blur_hints() == ["animation"]
+def test_graphicsblureffect():
+    effect = widgets.GraphicsBlurEffect()
+    effect.set_blur_hints("animation")
+    assert effect.get_blur_hints() == ["animation"]
 
 
 # def test_graphicsitem(qtbot):
