@@ -342,40 +342,41 @@ def test_fontdialog(qtbot):
     dlg.get_current_font()
 
 
-def test_formlayout(qtbot):
-    layout = widgets.FormLayout()
-    layout.set_size_mode("maximum")
-    with pytest.raises(InvalidParamError):
-        layout.set_size_mode("bla")
-    layout[0, "left"] = "0, left"
-    button_1 = widgets.RadioButton("1, left")
-    qtbot.addWidget(button_1)
-    layout[1, "left"] = button_1
-    layout[0, "right"] = "label 1 right"
-    button_2 = widgets.RadioButton("1, right")
-    qtbot.addWidget(button_2)
-    layout[1, "right"] = button_2
-    layout[2] = "by str"
-    button_3 = widgets.RadioButton("widget[3]")
-    qtbot.addWidget(button_3)
-    layout[3] = button_3
-    button_4 = widgets.RadioButton("added with +=")
-    qtbot.addWidget(button_4)
-    layout += button_4
-    button_5 = widgets.RadioButton("tuple")
-    qtbot.addWidget(button_5)
-    layout += ("added with +=", button_5)
-    assert len(layout) == 6
-    del layout[0]
-    assert isinstance(layout.get_item_position(0), tuple)
-    layout.set_row_wrap_policy("wrap_long")
-    assert layout.get_row_wrap_policy() == "wrap_long"
-    with pytest.raises(InvalidParamError):
-        layout.set_row_wrap_policy("test")
-    layout.set_field_growth_policy("expanding_fields_grow")
-    assert layout.get_field_growth_policy() == "expanding_fields_grow"
-    with pytest.raises(InvalidParamError):
-        layout.set_field_growth_policy("test")
+# # def test_formlayout(qtbot):
+#     layout = widgets.FormLayout()
+#     qtbot.addWidget(layout)
+#     layout.set_size_mode("maximum")
+#     with pytest.raises(InvalidParamError):
+#         layout.set_size_mode("bla")
+#     layout[0, "left"] = "0, left"
+#     button_1 = widgets.RadioButton("1, left")
+#     qtbot.addWidget(button_1)
+#     layout[1, "left"] = button_1
+#     layout[0, "right"] = "label 1 right"
+#     button_2 = widgets.RadioButton("1, right")
+#     qtbot.addWidget(button_2)
+#     layout[1, "right"] = button_2
+#     layout[2] = "by str"
+#     button_3 = widgets.RadioButton("widget[3]")
+#     qtbot.addWidget(button_3)
+#     layout[3] = button_3
+#     button_4 = widgets.RadioButton("added with +=")
+#     qtbot.addWidget(button_4)
+#     layout += button_4
+#     button_5 = widgets.RadioButton("tuple")
+#     qtbot.addWidget(button_5)
+#     layout += ("added with +=", button_5)
+#     assert len(layout) == 6
+#     del layout[0]
+#     assert isinstance(layout.get_item_position(0), tuple)
+#     layout.set_row_wrap_policy("wrap_long")
+#     assert layout.get_row_wrap_policy() == "wrap_long"
+#     with pytest.raises(InvalidParamError):
+#         layout.set_row_wrap_policy("test")
+#     layout.set_field_growth_policy("expanding_fields_grow")
+#     assert layout.get_field_growth_policy() == "expanding_fields_grow"
+#     with pytest.raises(InvalidParamError):
+#         layout.set_field_growth_policy("test")
 
 
 # def test_frame(qtbot):
