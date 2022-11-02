@@ -384,17 +384,17 @@ def test_fontdialog(qtbot):
 #         layout.set_field_growth_policy("test")
 
 
-def test_frame(qtbot):
-    frame = widgets.Frame()
-    qtbot.addWidget(qtbot)
-    frame.set_frame_shadow("raised")
-    assert frame.get_frame_shadow() == "raised"
-    with pytest.raises(InvalidParamError):
-        frame.set_frame_shadow("test")
-    frame.set_frame_shape("panel")
-    assert frame.get_frame_shape() == "panel"
-    with pytest.raises(InvalidParamError):
-        frame.set_frame_shape("test")
+# def test_frame(qtbot):
+#     frame = widgets.Frame()
+#     qtbot.addWidget(qtbot)
+#     frame.set_frame_shadow("raised")
+#     assert frame.get_frame_shadow() == "raised"
+#     with pytest.raises(InvalidParamError):
+#         frame.set_frame_shadow("test")
+#     frame.set_frame_shape("panel")
+#     assert frame.get_frame_shape() == "panel"
+#     with pytest.raises(InvalidParamError):
+#         frame.set_frame_shape("test")
 
 
 # def test_gesture():
@@ -601,17 +601,17 @@ def test_headerview(qtbot):
     header.set_section_hidden(0, True)
 
 
-def test_inputdialog(qtbot):
-    dlg = widgets.InputDialog()
-    qtbot.addWidget(dlg)
-    dlg.set_input_mode("double")
-    with pytest.raises(InvalidParamError):
-        dlg.set_input_mode("test")
-    assert dlg.get_input_mode() == "double"
-    dlg.set_text_echo_mode("no_echo")
-    with pytest.raises(InvalidParamError):
-        dlg.set_text_echo_mode("test")
-    assert dlg.get_text_echo_mode() == "no_echo"
+# def test_inputdialog(qtbot):
+#     dlg = widgets.InputDialog()
+#     qtbot.addWidget(dlg)
+#     dlg.set_input_mode("double")
+#     with pytest.raises(InvalidParamError):
+#         dlg.set_input_mode("test")
+#     assert dlg.get_input_mode() == "double"
+#     dlg.set_text_echo_mode("no_echo")
+#     with pytest.raises(InvalidParamError):
+#         dlg.set_text_echo_mode("test")
+#     assert dlg.get_text_echo_mode() == "no_echo"
 
 
 def test_keysequenceedit(qtbot):
@@ -850,19 +850,19 @@ def test_menubar(qtbot):
     menu.add_menu("test_menubar")
 
 
-def test_messagebox(qtbot):
-    widget = widgets.MessageBox(buttons=["reset"])
-    qtbot.addWidget(qtbot)
-    widget.set_icon("warning")
-    widget.set_icon("mdi.timer")
-    widget.add_button("ok")
-    widget.set_text_format("rich")
-    with pytest.raises(InvalidParamError):
-        widget.set_text_format("test")
-    assert widget.get_text_format() == "rich"
-    with pytest.raises(InvalidParamError):
-        widget.add_button("test")
-    widget.get_standard_buttons()
+# def test_messagebox(qtbot):
+#     widget = widgets.MessageBox(buttons=["reset"])
+#     qtbot.addWidget(qtbot)
+#     widget.set_icon("warning")
+#     widget.set_icon("mdi.timer")
+#     widget.add_button("ok")
+#     widget.set_text_format("rich")
+#     with pytest.raises(InvalidParamError):
+#         widget.set_text_format("test")
+#     assert widget.get_text_format() == "rich"
+#     with pytest.raises(InvalidParamError):
+#         widget.add_button("test")
+#     widget.get_standard_buttons()
 
 
 def test_pangesture():
