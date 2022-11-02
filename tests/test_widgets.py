@@ -384,16 +384,17 @@ def test_fontdialog(qtbot):
 #         layout.set_field_growth_policy("test")
 
 
-# def test_frame(qtbot):
-#     frame = widgets.Frame()
-#     frame.set_frame_shadow("raised")
-#     assert frame.get_frame_shadow() == "raised"
-#     with pytest.raises(InvalidParamError):
-#         frame.set_frame_shadow("test")
-#     frame.set_frame_shape("panel")
-#     assert frame.get_frame_shape() == "panel"
-#     with pytest.raises(InvalidParamError):
-#         frame.set_frame_shape("test")
+def test_frame(qtbot):
+    frame = widgets.Frame()
+    qtbot.addWidget(qtbot)
+    frame.set_frame_shadow("raised")
+    assert frame.get_frame_shadow() == "raised"
+    with pytest.raises(InvalidParamError):
+        frame.set_frame_shadow("test")
+    frame.set_frame_shape("panel")
+    assert frame.get_frame_shape() == "panel"
+    with pytest.raises(InvalidParamError):
+        frame.set_frame_shape("test")
 
 
 # def test_gesture():
@@ -514,32 +515,33 @@ def test_fontdialog(qtbot):
 #         rotation.set_axis("test")
 
 
-# def test_graphicsview(qtbot):
-#     view = widgets.GraphicsView()
-#     view.set_transformation_anchor("view_center")
-#     assert view.get_transformation_anchor() == "view_center"
-#     with pytest.raises(InvalidParamError):
-#         view.set_transformation_anchor("test")
-#     view.set_resize_anchor("view_center")
-#     assert view.get_resize_anchor() == "view_center"
-#     with pytest.raises(InvalidParamError):
-#         view.set_resize_anchor("test")
-#     view.set_viewport_update_mode("minimal")
-#     assert view.get_viewport_update_mode() == "minimal"
-#     with pytest.raises(InvalidParamError):
-#         view.set_viewport_update_mode("test")
-#     view.set_drag_mode("scroll_hand")
-#     assert view.get_drag_mode() == "scroll_hand"
-#     with pytest.raises(InvalidParamError):
-#         view.set_drag_mode("test")
-#     view.set_rubberband_selection_mode("intersects_shape")
-#     assert view.get_rubberband_selection_mode() == "intersects_shape"
-#     with pytest.raises(InvalidParamError):
-#         view.set_rubberband_selection_mode("test")
-#     view.set_cache_mode("background")
-#     assert view.get_cache_mode() == "background"
-#     with pytest.raises(InvalidParamError):
-#         view.set_cache_mode("test")
+def test_graphicsview(qtbot):
+    view = widgets.GraphicsView()
+    qtbot.addWidget(view)
+    view.set_transformation_anchor("view_center")
+    assert view.get_transformation_anchor() == "view_center"
+    with pytest.raises(InvalidParamError):
+        view.set_transformation_anchor("test")
+    view.set_resize_anchor("view_center")
+    assert view.get_resize_anchor() == "view_center"
+    with pytest.raises(InvalidParamError):
+        view.set_resize_anchor("test")
+    view.set_viewport_update_mode("minimal")
+    assert view.get_viewport_update_mode() == "minimal"
+    with pytest.raises(InvalidParamError):
+        view.set_viewport_update_mode("test")
+    view.set_drag_mode("scroll_hand")
+    assert view.get_drag_mode() == "scroll_hand"
+    with pytest.raises(InvalidParamError):
+        view.set_drag_mode("test")
+    view.set_rubberband_selection_mode("intersects_shape")
+    assert view.get_rubberband_selection_mode() == "intersects_shape"
+    with pytest.raises(InvalidParamError):
+        view.set_rubberband_selection_mode("test")
+    view.set_cache_mode("background")
+    assert view.get_cache_mode() == "background"
+    with pytest.raises(InvalidParamError):
+        view.set_cache_mode("test")
 
 
 def test_gridlayout(qtbot):
@@ -599,16 +601,17 @@ def test_headerview(qtbot):
     header.set_section_hidden(0, True)
 
 
-# def test_inputdialog(qapp):
-#     dlg = widgets.InputDialog()
-#     dlg.set_input_mode("double")
-#     with pytest.raises(InvalidParamError):
-#         dlg.set_input_mode("test")
-#     assert dlg.get_input_mode() == "double"
-#     dlg.set_text_echo_mode("no_echo")
-#     with pytest.raises(InvalidParamError):
-#         dlg.set_text_echo_mode("test")
-#     assert dlg.get_text_echo_mode() == "no_echo"
+def test_inputdialog(qtbot):
+    dlg = widgets.InputDialog()
+    qtbot.addWidget(dlg)
+    dlg.set_input_mode("double")
+    with pytest.raises(InvalidParamError):
+        dlg.set_input_mode("test")
+    assert dlg.get_input_mode() == "double"
+    dlg.set_text_echo_mode("no_echo")
+    with pytest.raises(InvalidParamError):
+        dlg.set_text_echo_mode("test")
+    assert dlg.get_text_echo_mode() == "no_echo"
 
 
 def test_keysequenceedit(qtbot):
@@ -835,29 +838,31 @@ def test_listwidgetitem(qtbot):
 #     menu.add_separator()
 
 
-# def test_menubar(qtbot):
-#     menu = widgets.MenuBar()
-#     menu += widgets.Action(text="TestAction")
-#     menu += widgets.Menu("TestMenu")
-#     menu.add_action(widgets.Action(text="TestAction 2"))
-#     menu.add_menu(widgets.Menu("TestMenu 2"))
-#     menu.add_separator()
-#     menu.add_action("test_menubar")
-#     menu.add_menu("test_menubar")
+def test_menubar(qtbot):
+    menu = widgets.MenuBar()
+    qtbot.addWidget(menu)
+    menu += widgets.Action(text="TestAction")
+    menu += widgets.Menu("TestMenu")
+    menu.add_action(widgets.Action(text="TestAction 2"))
+    menu.add_menu(widgets.Menu("TestMenu 2"))
+    menu.add_separator()
+    menu.add_action("test_menubar")
+    menu.add_menu("test_menubar")
 
 
-# def test_messagebox(qtbot):
-#     widget = widgets.MessageBox(buttons=["reset"])
-#     widget.set_icon("warning")
-#     widget.set_icon("mdi.timer")
-#     widget.add_button("ok")
-#     widget.set_text_format("rich")
-#     with pytest.raises(InvalidParamError):
-#         widget.set_text_format("test")
-#     assert widget.get_text_format() == "rich"
-#     with pytest.raises(InvalidParamError):
-#         widget.add_button("test")
-#     widget.get_standard_buttons()
+def test_messagebox(qtbot):
+    widget = widgets.MessageBox(buttons=["reset"])
+    qtbot.addWidget(qtbot)
+    widget.set_icon("warning")
+    widget.set_icon("mdi.timer")
+    widget.add_button("ok")
+    widget.set_text_format("rich")
+    with pytest.raises(InvalidParamError):
+        widget.set_text_format("test")
+    assert widget.get_text_format() == "rich"
+    with pytest.raises(InvalidParamError):
+        widget.add_button("test")
+    widget.get_standard_buttons()
 
 
 def test_pangesture():
