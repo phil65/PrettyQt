@@ -3,8 +3,9 @@
 
 from __future__ import annotations
 
+from collections.abc import Sequence
 import logging
-from typing import Generic, Sequence, TypeVar
+from typing import Generic, TypeVar
 
 from prettyqt.utils import helpers
 

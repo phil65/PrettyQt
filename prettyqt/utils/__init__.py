@@ -1,6 +1,6 @@
 """Module containing helper functions."""
 
-from typing import Iterable
+from collections.abc import Iterable
 import logging
 
 import bidict as bdct

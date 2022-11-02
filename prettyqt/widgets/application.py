@@ -1,11 +1,11 @@
 from __future__ import annotations
 
+from collections.abc import Iterator, Mapping, MutableMapping
 import contextlib
 import logging
 import os
 import pathlib
 import timeit
-from typing import Iterator, Mapping, MutableMapping
 
 import qstylizer.parser
 import qstylizer.style

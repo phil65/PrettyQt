@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import Sequence
+from collections.abc import Sequence
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtWidgets

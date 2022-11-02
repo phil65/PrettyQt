@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
+from re import Match, Pattern
 import sre_constants
-from typing import Match, Pattern
 
 import regex as re
 

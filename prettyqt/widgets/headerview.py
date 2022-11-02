@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import functools
 import hashlib
-from typing import Iterable, Literal
+from typing import Literal
 
 from deprecated import deprecated
 

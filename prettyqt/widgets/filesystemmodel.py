@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Iterator, Sequence
 import os
 import pathlib
-from typing import Iterator, Sequence
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets

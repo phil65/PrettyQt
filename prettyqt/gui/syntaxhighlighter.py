@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Iterator, Pattern
+from collections.abc import Iterator
+from re import Pattern
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui

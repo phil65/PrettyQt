@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 import contextlib
 import os
 import pathlib
-from typing import Iterator, Literal
+from typing import Literal
 
 import qstylizer.parser
 import qstylizer.style

@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Iterator, Mapping
 import contextlib
 import logging
 import os
-from typing import Any, Iterator, Literal, Mapping
+from typing import Any, Literal
 
 from deprecated import deprecated
 

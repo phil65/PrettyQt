@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 import ctypes
 import math
-from typing import Iterator
 
 from prettyqt import core, gui
 from prettyqt.qt import API, QtCore, QtGui

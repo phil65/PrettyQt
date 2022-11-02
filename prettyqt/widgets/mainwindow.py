@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import logging
-from typing import Sequence
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets

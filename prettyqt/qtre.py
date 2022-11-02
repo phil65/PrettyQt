@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 import re
-from typing import Any, Callable, Iterator
+from typing import Any, Callable
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -145,9 +146,9 @@ class Pattern(core.RegularExpression):
         for m in matches:
             to_replace = repl if isinstance(repl, str) else repl(m)
             for j in range(self.groups):
-                to_replace = to_replace.replace(fr"\g<{j}>", m.group(j))
+                to_replace = to_replace.replace(rf"\g<{j}>", m.group(j))
             for k, v in self.groupindex.items():
-                to_replace = to_replace.replace(fr"\g<{k}>", m.group(v))
+                to_replace = to_replace.replace(rf"\g<{k}>", m.group(v))
             result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))
 

@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 from importlib import metadata
 import pkgutil
-from typing import Sequence
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore

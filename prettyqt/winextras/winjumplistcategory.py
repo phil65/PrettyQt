@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 import os
-from typing import Iterator, Literal
+from typing import Literal
 
 from prettyqt import iconprovider
 from prettyqt.qt import QtWinExtras

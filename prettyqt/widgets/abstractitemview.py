@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Generator
 import logging
-from typing import Any, Generator, Literal
+from typing import Any, Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets

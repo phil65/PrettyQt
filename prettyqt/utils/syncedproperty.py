@@ -1,4 +1,4 @@
-from typing import Optional, Type
+from typing import Optional
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -35,7 +35,7 @@ class PropertyImpl(core.Property):
     """Actual property implementation using a signal to notify any change."""
 
     def __init__(
-        self, initial_value, name: str = "", type_: Optional[Type] = None, notify=None
+        self, initial_value, name: str = "", type_: Optional[type] = None, notify=None
     ):
         super().__init__(type_, self.getter, self.setter, notify=notify)
         self.initial_value = initial_value

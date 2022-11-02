@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from datetime import timedelta
 import functools
 import operator
 import re
 import sys
-from typing import Any, Mapping
+from typing import Any
 
 
 REGEX = re.compile(

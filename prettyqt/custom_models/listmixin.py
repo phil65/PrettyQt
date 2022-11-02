@@ -1,11 +1,12 @@
-from typing import Any, Callable, Dict, Iterable, Optional
+from collections.abc import Iterable
+from typing import Any, Callable, Optional
 
 from prettyqt import constants
 
 
 class ListMixin:
     remove_rows: Callable
-    SORT_METHODS: Dict[int, Callable]
+    SORT_METHODS: dict[int, Callable]
     change_layout: Callable
     insert_rows: Callable
     removeRow: Callable

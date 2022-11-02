@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 import contextlib
-from typing import Iterator, Literal
+from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui

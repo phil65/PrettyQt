@@ -3,24 +3,24 @@ from __future__ import annotations
 import datetime
 import os
 import pathlib
-from typing import TYPE_CHECKING, Any, Dict, List, Protocol, Tuple, Union
+from typing import TYPE_CHECKING, Any, Protocol, Union
 
 
 if TYPE_CHECKING:
     from prettyqt.qt import QtCore, QtGui, QtWebEngineCore, QtWidgets
 
-    JSONType = Union[str, int, float, bool, None, Dict[str, Any], List[Any]]
+    JSONType = Union[str, int, float, bool, None, dict[str, Any], list[Any]]
     PathType = Union[str, os.PathLike]
     UrlType = Union[str, QtCore.QUrl]
-    PointType = Union[Tuple[int, int], QtCore.QPoint]
-    PointFType = Union[Tuple[float, float], QtCore.QPointF]
-    SizeType = Union[Tuple[int, int], QtCore.QSize]
-    SizeFType = Union[Tuple[float, float], QtCore.QSizeF]
-    MarginsType = Union[Tuple[int, int, int, int], QtCore.QMargins]
-    MarginsFType = Union[Tuple[float, float, float, float], QtCore.QMarginsF]
-    RectType = Union[Tuple[int, int, int, int], QtCore.QRect]
-    RectFType = Union[Tuple[float, float, float, float], QtCore.QRectF]
-    SemanticVersionType = Union[str, QtCore.QVersionNumber, Tuple[int, int, int]]
+    PointType = Union[tuple[int, int], QtCore.QPoint]
+    PointFType = Union[tuple[float, float], QtCore.QPointF]
+    SizeType = Union[tuple[int, int], QtCore.QSize]
+    SizeFType = Union[tuple[float, float], QtCore.QSizeF]
+    MarginsType = Union[tuple[int, int, int, int], QtCore.QMargins]
+    MarginsFType = Union[tuple[float, float, float, float], QtCore.QMarginsF]
+    RectType = Union[tuple[int, int, int, int], QtCore.QRect]
+    RectFType = Union[tuple[float, float, float, float], QtCore.QRectF]
+    SemanticVersionType = Union[str, QtCore.QVersionNumber, tuple[int, int, int]]
     IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
     ByteArrayType = Union[str, bytes, QtCore.QByteArray]
     TimeType = Union[QtCore.QTime, datetime.time, str]
@@ -32,8 +32,8 @@ if TYPE_CHECKING:
         int,
         QtCore.Qt.GlobalColor,
         QtGui.QColor,
-        Tuple[int, int, int],
-        Tuple[int, int, int, int],
+        tuple[int, int, int],
+        tuple[int, int, int, int],
         None,
     ]
     ColorAndBrushType = Union[ColorType, QtGui.QBrush]
@@ -91,7 +91,7 @@ if TYPE_CHECKING:
         bytes,
     ]
 
-    Variant = Union[VariantType, List[VariantType], Dict[str, VariantType]]
+    Variant = Union[VariantType, list[VariantType], dict[str, VariantType]]
 
     class Validatable(Protocol):
         """An object with an isValid method (e.g. QUrl)."""

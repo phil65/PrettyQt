@@ -170,7 +170,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self._get_brush.cache_clear()
         self._get_format.cache_clear()
 
-    @functools.lru_cache(maxsize=None)
+    @functools.cache
     def _get_format(self, token: str) -> QtGui.QTextCharFormat:
         """Returns a QTextCharFormat for token or None."""
         if self._style is None:
@@ -213,7 +213,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
                     result.set_font_style_hint("typewriter")
         return result
 
-    @functools.lru_cache(maxsize=None)
+    @functools.cache
     def _get_brush(self, color: str) -> gui.Brush:
         """Return a brush for the color."""
         qcolor = gui.Color(f"#{color[:6]}")

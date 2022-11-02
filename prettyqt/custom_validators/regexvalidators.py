@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from typing import Pattern, Union
+from re import Pattern
+from typing import Union
 
 import regex as re
 
