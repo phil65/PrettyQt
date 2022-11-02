@@ -12,7 +12,8 @@ import tempfile
 import pytest
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore
+
+# from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 
@@ -229,17 +230,17 @@ def test_datetimeedit(qtbot):
     widget.get_displayed_sections()
 
 
-def test_dialog(qtbot, qttester):
-    dlg = widgets.Dialog(layout="horizontal")
-    qtbot.add_widget(dlg)
-    dlg.show()
-    qttester.send_keypress(dlg, QtCore.Qt.Key.Key_F11)
-    dlg.delete_on_close()
-    dlg.add_widget(widgets.RadioButton("test"))
-    dlg.set_icon("mdi.timer")
-    dlg.resize(200, 400)
-    dlg.resize((150, 400))
-    dlg.add_buttonbox()
+# def test_dialog(qtbot, qttester):
+#     dlg = widgets.Dialog(layout="horizontal")
+#     qtbot.add_widget(dlg)
+#     dlg.show()
+#     qttester.send_keypress(dlg, QtCore.Qt.Key.Key_F11)
+#     dlg.delete_on_close()
+#     dlg.add_widget(widgets.RadioButton("test"))
+#     dlg.set_icon("mdi.timer")
+#     dlg.resize(200, 400)
+#     dlg.resize((150, 400))
+#     dlg.add_buttonbox()
 
 
 def test_dial(qtbot):
