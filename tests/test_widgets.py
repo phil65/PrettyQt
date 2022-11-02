@@ -12,8 +12,7 @@ import tempfile
 import pytest
 
 from prettyqt import constants, core, gui, widgets
-
-# from prettyqt.qt import QtCore
+from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 
@@ -230,50 +229,53 @@ def test_datetimeedit(qtbot):
     widget.get_displayed_sections()
 
 
-# def test_dialog(qtbot, qttester):
-#     dlg = widgets.Dialog(layout="horizontal")
-#     qtbot.add_widget(dlg)
-#     dlg.show()
-#     qttester.send_keypress(dlg, QtCore.Qt.Key.Key_F11)
-#     dlg.delete_on_close()
-#     dlg.add_widget(widgets.RadioButton("test"))
-#     dlg.set_icon("mdi.timer")
-#     dlg.resize(200, 400)
-#     dlg.resize((150, 400))
-#     dlg.add_buttonbox()
+def test_dialog(qtbot, qttester):
+    dlg = widgets.Dialog(layout="horizontal")
+    qtbot.add_widget(dlg)
+    dlg.show()
+    qttester.send_keypress(dlg, QtCore.Qt.Key.Key_F11)
+    dlg.delete_on_close()
+    dlg.add_widget(widgets.RadioButton("test"))
+    dlg.set_icon("mdi.timer")
+    dlg.resize(200, 400)
+    dlg.resize((150, 400))
+    dlg.add_buttonbox()
 
 
-# def test_dial(qtbot):
-#     widgets.Dial()
+def test_dial(qtbot):
+    widget = widgets.Dial()
+    qtbot.add_widget(widget)
 
 
-# def test_dialogbuttonbox(qtbot):
-#     box = widgets.DialogButtonBox()
-#     box.set_horizontal()
-#     box.set_vertical()
-#     btn = box.add_default_button("apply")
-#     with pytest.raises(InvalidParamError):
-#         btn = box.add_default_button("test")
-#     box.set_orientation("horizontal")
-#     with pytest.raises(InvalidParamError):
-#         box.set_orientation("test")
-#     assert box.get_orientation() == "horizontal"
-#     box.add_button("test_dialogbuttonbox", callback=print)
-#     assert len(box) == 2
-#     assert btn == box["apply"]
-#     assert "apply" in box
-#     for item in box:
-#         pass
-#     btn = box.add_default_buttons(["ok"])
+def test_dialogbuttonbox(qtbot):
+    box = widgets.DialogButtonBox()
+    qtbot.addWidget(box)
+    box.set_horizontal()
+    box.set_vertical()
+    btn = box.add_default_button("apply")
+    with pytest.raises(InvalidParamError):
+        btn = box.add_default_button("test")
+    box.set_orientation("horizontal")
+    with pytest.raises(InvalidParamError):
+        box.set_orientation("test")
+    assert box.get_orientation() == "horizontal"
+    box.add_button("test_dialogbuttonbox", callback=print)
+    assert len(box) == 2
+    assert btn == box["apply"]
+    assert "apply" in box
+    for item in box:
+        pass
+    btn = box.add_default_buttons(["ok"])
 
 
-# def test_dockwidget(qtbot):
-#     widget = widgets.DockWidget()
-#     widget.setup_title_bar()
-#     widget.maximize()
-#     w = widgets.Widget()
-#     widget.set_widget(w)
-#     w.raise_dock()
+def test_dockwidget(qtbot):
+    widget = widgets.DockWidget()
+    qtbot.addWidget(widget)
+    widget.setup_title_bar()
+    widget.maximize()
+    w = widgets.Widget()
+    widget.set_widget(w)
+    w.raise_dock()
 
 
 def test_doublespinbox(qtbot):
@@ -339,30 +341,40 @@ def test_fontdialog(qtbot):
     dlg.get_current_font()
 
 
-# def test_formlayout(qtbot):
-#     layout = widgets.FormLayout()
-#     layout.set_size_mode("maximum")
-#     with pytest.raises(InvalidParamError):
-#         layout.set_size_mode("bla")
-#     layout[0, "left"] = "0, left"
-#     layout[1, "left"] = widgets.RadioButton("1, left")
-#     layout[0, "right"] = "label 1 right"
-#     layout[1, "right"] = widgets.RadioButton("1, right")
-#     layout[2] = "by str"
-#     layout[3] = widgets.RadioButton("widget[3]")
-#     layout += widgets.RadioButton("added with +=")
-#     layout += ("added with +=", widgets.RadioButton("tuple"))
-#     assert len(layout) == 6
-#     del layout[0]
-#     assert isinstance(layout.get_item_position(0), tuple)
-#     layout.set_row_wrap_policy("wrap_long")
-#     assert layout.get_row_wrap_policy() == "wrap_long"
-#     with pytest.raises(InvalidParamError):
-#         layout.set_row_wrap_policy("test")
-#     layout.set_field_growth_policy("expanding_fields_grow")
-#     assert layout.get_field_growth_policy() == "expanding_fields_grow"
-#     with pytest.raises(InvalidParamError):
-#         layout.set_field_growth_policy("test")
+def test_formlayout(qtbot):
+    layout = widgets.FormLayout()
+    layout.set_size_mode("maximum")
+    with pytest.raises(InvalidParamError):
+        layout.set_size_mode("bla")
+    layout[0, "left"] = "0, left"
+    button_1 = widgets.RadioButton("1, left")
+    qtbot.addWidget(button_1)
+    layout[1, "left"] = button_1
+    layout[0, "right"] = "label 1 right"
+    button_2 = widgets.RadioButton("1, right")
+    qtbot.addWidget(button_2)
+    layout[1, "right"] = button_2
+    layout[2] = "by str"
+    button_3 = widgets.RadioButton("widget[3]")
+    qtbot.addWidget(button_3)
+    layout[3] = button_3
+    button_4 = widgets.RadioButton("added with +=")
+    qtbot.addWidget(button_4)
+    layout += button_4
+    button_5 = widgets.RadioButton("tuple")
+    qtbot.addWidget(button_5)
+    layout += ("added with +=", button_5)
+    assert len(layout) == 6
+    del layout[0]
+    assert isinstance(layout.get_item_position(0), tuple)
+    layout.set_row_wrap_policy("wrap_long")
+    assert layout.get_row_wrap_policy() == "wrap_long"
+    with pytest.raises(InvalidParamError):
+        layout.set_row_wrap_policy("test")
+    layout.set_field_growth_policy("expanding_fields_grow")
+    assert layout.get_field_growth_policy() == "expanding_fields_grow"
+    with pytest.raises(InvalidParamError):
+        layout.set_field_growth_policy("test")
 
 
 # def test_frame(qtbot):
