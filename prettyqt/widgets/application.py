@@ -73,7 +73,7 @@ class Application(QtWidgets.QApplication):
                 w = self.find_child(v, name=name)
                 if w is not None:
                     if isinstance(state, str):
-                        state = bytes(state)
+                        state = state.encode()
                     w.restoreState(state)
 
     def about_popup(self, title: str = "About"):

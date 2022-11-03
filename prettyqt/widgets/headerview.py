@@ -76,7 +76,7 @@ class HeaderView(QtWidgets.QHeaderView):
         state = settings.get(key, None)
         if state is not None:
             if isinstance(state, str):
-                state = bytes(state)
+                state = state.encode()
             self.restoreState(state)
             return True
         return False
