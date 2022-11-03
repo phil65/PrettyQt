@@ -1,3 +1,9 @@
+## v0.190.6 (2022-11-03)
+
+### Fix
+
+- proper fix for restoreState
+
 ## v0.190.5 (2022-11-03)
 
 ### Fix
