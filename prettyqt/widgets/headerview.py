@@ -75,6 +75,8 @@ class HeaderView(QtWidgets.QHeaderView):
         key = self.generate_header_id() if key is None else key
         state = settings.get(key, None)
         if state is not None:
+            if isinstance(state, str):
+                state = bytes(state)
             self.restoreState(state)
             return True
         return False

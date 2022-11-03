@@ -72,6 +72,8 @@ class Application(QtWidgets.QApplication):
             for name, state in items.items():
                 w = self.find_child(v, name=name)
                 if w is not None:
+                    if isinstance(state, str):
+                        state = bytes(state)
                     w.restoreState(state)
 
     def about_popup(self, title: str = "About"):

@@ -116,6 +116,8 @@ class MainWindow(QtWidgets.QMainWindow):
             try:
                 logger.debug(f"Loading window state for {self.windowTitle()!r}...")
                 self.restoreGeometry(geom)
+                if isinstance(state, str):
+                    state = bytes(state)
                 self.restoreState(state)
                 restored = True
             except TypeError:
