@@ -1,3 +1,9 @@
+## v0.190.5 (2022-11-03)
+
+### Fix
+
+- allow str for restoreState
+
 ## v0.190.4 (2022-11-03)
 
 ### Fix
