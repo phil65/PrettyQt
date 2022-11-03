@@ -13387,6 +13387,8 @@ Application            (<span title="PySide6.QtWidgets.QApplication">QApplicatio
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">state</span> <span class="ow">in</span> <span class="n">items</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="n">w</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_child</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">w</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                        <span class="n">state</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
                     <span class="n">w</span><span class="o">.</span><span class="n">restoreState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">about_popup</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;About&quot;</span><span class="p">):</span>
@@ -22607,6 +22609,8 @@ HeaderView            (<span title="PySide6.QtWidgets.QHeaderView">QHeaderView</
         <span class="n">key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">generate_header_id</span><span class="p">()</span> <span class="k">if</span> <span class="n">key</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">key</span>
         <span class="n">state</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">state</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">state</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">restoreState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -26890,6 +26894,8 @@ MainWindow            (<span title="PySide6.QtWidgets.QMainWindow">QMainWindow</
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Loading window state for </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">windowTitle</span><span class="p">()</span><span class="si">!r}</span><span class="s2">...&quot;</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">restoreGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">state</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                    <span class="n">state</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">restoreState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
                 <span class="n">restored</span> <span class="o">=</span> <span class="kc">True</span>
             <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
