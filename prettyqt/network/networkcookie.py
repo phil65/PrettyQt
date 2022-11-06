@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-import datetime
-
 import dateutil.parser
 
 from prettyqt.qt import QtCore, QtNetwork

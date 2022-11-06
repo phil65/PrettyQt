@@ -2,7 +2,7 @@
 
 Based on: PySide examples/itemviews/simpletreemodel
 See: https://github.com/PySide/Examples/blob/master/examples/itemviews/simpletreemodel
-     /simpletreemodel.py
+/simpletreemodel.py
 """
 
 from __future__ import annotations

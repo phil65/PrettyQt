@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, types
 
 

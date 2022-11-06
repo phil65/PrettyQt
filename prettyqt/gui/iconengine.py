@@ -4,7 +4,7 @@ import os
 from typing import Literal
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
