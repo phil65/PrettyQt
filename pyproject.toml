@@ -130,6 +130,38 @@ author = "Philipp Temminghoff"
 author-email = "philipptemminghoff@googlemail.com"
 home-page = "https://github.com/phil65/prettyqt"
 
+[tool.ruff]
+line-length = 90
+select = ["E", "F"]
+# Never enforce `E501`.
+ignore = ["C408"]
+extend-select = ["D"]
+extend-ignore = [
+    "D100",
+    "D101",
+    "D102",
+    "D103",
+    "D105",
+    "D107",
+    "D203",
+    "D204",
+    "D213",
+    "D215",
+    "D400",
+    "D404",
+    "D406",
+    "D407",
+    "D408",
+    "D409",
+    "D413",
+]
+extend-exclude = [
+    "prettyqt/qt/",
+    ]
+
+[tool.ruff.flake8-quotes]
+docstring-quotes = "double"
+
 [tool.black]
 line-length = 90
 target-version = ['py37']
