@@ -1,3 +1,9 @@
+## v0.190.7 (2022-11-08)
+
+### Fix
+
+- **Combobox**: set Completer only when calling set_editable to avoid error message
+
 ## v0.190.6 (2022-11-03)
 
 ### Fix
