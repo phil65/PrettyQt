@@ -134,7 +134,7 @@ class ComboBox(QtWidgets.QComboBox):
 
     def set_editable(self, editable: bool):
         self.setEditable(editable)
-        if self.completer() is None:
+        if self.completer() is None and editable:
             self.setCompleter(widgets.Completer(self))
 
     def set_insert_policy(self, policy: InsertPolicyStr):
