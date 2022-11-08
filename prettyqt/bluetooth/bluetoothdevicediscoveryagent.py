@@ -1,9 +1,8 @@
 from __future__ import annotations
 
-import logging
 from typing import Literal
 
-from prettyqt import core, qt
+from prettyqt import core
 from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
@@ -82,9 +81,6 @@ class BluetoothDeviceDiscoveryAgent(QtBluetooth.QBluetoothDeviceDiscoveryAgent):
         return ERROR.inverse[self.error()]
 
     def get_supported_discovery_methods(self) -> list[DiscoveryMethodStr]:
-        if qt.API == "pyside6":
-            logging.exception("not available in PySide6")
-            return []
         return [
             k
             for k, v in DISCOVERY_METHODS.items()
