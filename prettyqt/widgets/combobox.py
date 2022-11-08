@@ -59,7 +59,6 @@ class ComboBox(QtWidgets.QComboBox):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self.index_changed)
-        self.setCompleter(widgets.Completer(self))
 
     def serialize_fields(self):
         items = [
@@ -133,6 +132,11 @@ class ComboBox(QtWidgets.QComboBox):
         if icon.isNull():
             return None
         return gui.Icon(icon)
+
+    def set_editable(self, editable: bool):
+        self.setEditable(editable)
+        if self.completer() is None:
+            self.setCompleter(widgets.Completer(self))
 
     def set_insert_policy(self, policy: InsertPolicyStr):
         """Set insert policy.
