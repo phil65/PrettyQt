@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 from typing import Literal
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, helpers, types
 
@@ -34,10 +34,9 @@ TEXT_FORMAT = bidict(
     rich=QtCore.Qt.TextFormat.RichText,
     plain=QtCore.Qt.TextFormat.PlainText,
     auto=QtCore.Qt.TextFormat.AutoText,
+    markdown=QtCore.Qt.TextFormat.MarkdownText,
 )
 
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMAT["markdown"] = QtCore.Qt.TextFormat.MarkdownText
 
 TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 

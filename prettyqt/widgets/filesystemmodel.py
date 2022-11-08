@@ -9,12 +9,11 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    OPTIONS = bidict(
-        dont_watch_changes=QtWidgets.QFileSystemModel.Option.DontWatchForChanges,
-        dont_resolve_symlinks=QtWidgets.QFileSystemModel.Option.DontResolveSymlinks,
-        no_custom_icons=QtWidgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
-    )
+OPTIONS = bidict(
+    dont_watch_changes=QtWidgets.QFileSystemModel.Option.DontWatchForChanges,
+    dont_resolve_symlinks=QtWidgets.QFileSystemModel.Option.DontResolveSymlinks,
+    no_custom_icons=QtWidgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
+)
 
 QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
 

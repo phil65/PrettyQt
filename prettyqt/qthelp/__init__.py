@@ -14,11 +14,7 @@ from .helpsearchquerywidget import HelpSearchQueryWidget
 from .helpenginecore import HelpEngineCore
 from .helpengine import HelpEngine
 from .helpsearchengine import HelpSearchEngine
-
-from prettyqt import core
-
-if core.VersionNumber.get_qt_version() >= (5, 13, 0):
-    from .helpfilterengine import HelpFilterEngine
+from .helpfilterengine import HelpFilterEngine
 
 __all__ = [
     "HelpIndexModel",

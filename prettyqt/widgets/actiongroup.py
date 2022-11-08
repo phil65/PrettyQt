@@ -7,12 +7,11 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    POLICIES = bidict(
-        none=QtWidgets.QActionGroup.ExclusionPolicy.None_,
-        exclusive=QtWidgets.QActionGroup.ExclusionPolicy.Exclusive,
-        exclusive_optional=QtWidgets.QActionGroup.ExclusionPolicy.ExclusiveOptional,
-    )
+POLICIES = bidict(
+    none=QtWidgets.QActionGroup.ExclusionPolicy.None_,
+    exclusive=QtWidgets.QActionGroup.ExclusionPolicy.Exclusive,
+    exclusive_optional=QtWidgets.QActionGroup.ExclusionPolicy.ExclusiveOptional,
+)
 
 ExclusionPolicyStr = Literal["none", "exclusive", "exclusive_optional"]
 

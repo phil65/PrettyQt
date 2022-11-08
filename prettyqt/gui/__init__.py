@@ -128,10 +128,7 @@ from .textframe import TextFrame
 from .abstracttextdocumentlayout import AbstractTextDocumentLayout
 from .syntaxhighlighter import SyntaxHighlighter
 
-from prettyqt import core
-
-if core.VersionNumber.get_qt_version() >= (5, 13, 0):
-    from .colorspace import ColorSpace
+from .colorspace import ColorSpace
 
 
 def app(args: list[str] | None = None) -> GuiApplication:

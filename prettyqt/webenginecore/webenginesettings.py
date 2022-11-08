@@ -3,7 +3,6 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
 from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -77,10 +76,9 @@ WEB_ATTRIBUTES = bidict(
     javascript_can_paste=attr.JavascriptCanPaste,
     web_rtc_public_interfaces_only=attr.WebRTCPublicInterfacesOnly,
     dns_prefetch_enabled=attr.DnsPrefetchEnabled,
+    pdf_viewer_enabled=mod.WebAttribute.PdfViewerEnabled,
 )
 
-if core.VersionNumber.get_qt_version() >= (5, 13, 0):
-    WEB_ATTRIBUTES["pdf_viewer_enabled"] = mod.WebAttribute.PdfViewerEnabled
 
 WebAttributeStr = Literal[
     "auto_load_images",

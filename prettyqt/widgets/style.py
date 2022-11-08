@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
 from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -82,6 +81,13 @@ STANDARD_PIXMAP = dict(
     media_volume_muted=mod.StandardPixmap.SP_MediaVolumeMuted,
     lineedit_clear=mod.StandardPixmap.SP_LineEditClearButton,
     custom_base=mod.StandardPixmap.SP_CustomBase,
+    dialog_yes_to_all=mod.StandardPixmap.SP_DialogYesToAllButton,
+    dialog_no_to_all=mod.StandardPixmap.SP_DialogNoToAllButton,
+    dialog_save_all=mod.StandardPixmap.SP_DialogSaveAllButton,
+    dialog_abort=mod.StandardPixmap.SP_DialogAbortButton,
+    dialog_retry=mod.StandardPixmap.SP_DialogRetryButton,
+    dialog_ignore=mod.StandardPixmap.SP_DialogIgnoreButton,
+    restore_defaults=mod.StandardPixmap.SP_RestoreDefaultsButton,
 )
 
 StandardPixmapStr = Literal[
@@ -157,16 +163,14 @@ StandardPixmapStr = Literal[
     "media_volume_muted",
     "lineedit_clear",
     "custom_base",
+    "dialog_yes_to_all",
+    "dialog_no_to_all",
+    "dialog_save_all",
+    "dialog_abort",
+    "dialog_retry",
+    "dialog_ignore",
+    "restore_defaults",
 ]
-
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    STANDARD_PIXMAP["dialog_yes_to_all"] = mod.StandardPixmap.SP_DialogYesToAllButton
-    STANDARD_PIXMAP["dialog_no_to_all"] = mod.StandardPixmap.SP_DialogNoToAllButton
-    STANDARD_PIXMAP["dialog_save_all"] = mod.StandardPixmap.SP_DialogSaveAllButton
-    STANDARD_PIXMAP["dialog_abort"] = mod.StandardPixmap.SP_DialogAbortButton
-    STANDARD_PIXMAP["dialog_retry"] = mod.StandardPixmap.SP_DialogRetryButton
-    STANDARD_PIXMAP["dialog_ignore"] = mod.StandardPixmap.SP_DialogIgnoreButton
-    STANDARD_PIXMAP["restore_defaults"] = mod.StandardPixmap.SP_RestoreDefaultsButton
 
 COMPLEX_CONTROL = bidict(
     spinbox=mod.ComplexControl.CC_SpinBox,

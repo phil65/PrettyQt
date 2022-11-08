@@ -77,10 +77,9 @@ class ComboBox(QtWidgets.QComboBox):
             size_adjust_policy=self.get_size_adjust_policy(),
             duplicates_enabled=self.duplicatesEnabled(),
             min_contents_length=self.minimumContentsLength(),
+            placeholder_text=self.placeholderText(),
             items=items,
         )
-        if core.VersionNumber.get_qt_version() >= (5, 15, 0):
-            dct["placeholder_text"] = self.placeholderText()
         return dct
 
     def __setstate__(self, state):

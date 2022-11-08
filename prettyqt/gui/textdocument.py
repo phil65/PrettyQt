@@ -14,12 +14,11 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    MARKDOWN_FEATURES = bidict(
-        no_html=QtGui.QTextDocument.MarkdownFeature.MarkdownNoHTML,
-        commonmark=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectCommonMark,
-        github=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectGitHub,
-    )
+MARKDOWN_FEATURES = bidict(
+    no_html=QtGui.QTextDocument.MarkdownFeature.MarkdownNoHTML,
+    commonmark=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectCommonMark,
+    github=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectGitHub,
+)
 
 MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
 

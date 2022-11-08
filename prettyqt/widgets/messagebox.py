@@ -4,7 +4,7 @@ import sys
 import traceback
 from typing import Literal
 
-from prettyqt import core, gui, iconprovider, widgets
+from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, types
 
@@ -93,11 +93,10 @@ TEXT_FORMAT = bidict(
     rich=QtCore.Qt.TextFormat.RichText,
     plain=QtCore.Qt.TextFormat.PlainText,
     auto=QtCore.Qt.TextFormat.AutoText,
+    markdown=QtCore.Qt.TextFormat.MarkdownText,
 )
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMAT["markdown"] = QtCore.Qt.TextFormat.MarkdownText
 
-TextFormatStr = Literal["rich", "plain", "auto"]
+TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 QtWidgets.QMessageBox.__bases__ = (widgets.Dialog,)
 

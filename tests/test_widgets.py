@@ -74,12 +74,11 @@ def test_action(qtbot):
 
 def test_actiongroup(qtbot):
     group = widgets.ActionGroup(None)
-    if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-        group.set_exclusion_policy(None)
-        group.set_exclusion_policy("exclusive")
-        with pytest.raises(InvalidParamError):
-            group.set_exclusion_policy("test")
-        assert group.get_exclusion_policy() == "exclusive"
+    group.set_exclusion_policy(None)
+    group.set_exclusion_policy("exclusive")
+    with pytest.raises(InvalidParamError):
+        group.set_exclusion_policy("test")
+    assert group.get_exclusion_policy() == "exclusive"
     act = widgets.Action()
     group.addAction(act)
     assert group[0] == act
@@ -329,9 +328,8 @@ def test_filesystemmodel(qttester):
     model.get_paths([idx])
     model.data(idx, model.DATA_ROLE)
     model.yield_child_indexes(idx)
-    if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-        model.watch_for_changes(False)
-        model.use_custom_icons(False)
+    model.watch_for_changes(False)
+    model.use_custom_icons(False)
     model.resolve_sym_links(False)
     model.set_name_filters(["test"], hide=True)
     model.set_filter("drives")
@@ -1253,9 +1251,8 @@ def test_textbrowser(qtbot):
     tmp.close()
     path = pathlib.Path(tempfile.gettempdir()) / tmp.name
     widget = widgets.TextBrowser()
-    if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-        widget.set_markdown("test")
-        widget.set_markdown_file(str(path))
+    widget.set_markdown("test")
+    widget.set_markdown_file(str(path))
     # widget.set_rst("test")
     # widget.set_rst_file(str(path))
     os.unlink(str(path))

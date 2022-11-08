@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Literal
 
-from prettyqt import core, gui, widgets
+from prettyqt import gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -96,10 +96,11 @@ TEXT_FORMATS = bidict(
     rich=QtCore.Qt.TextFormat.RichText,
     plain=QtCore.Qt.TextFormat.PlainText,
     auto=QtCore.Qt.TextFormat.AutoText,
+    markdown=QtCore.Qt.TextFormat.MarkdownText,
 )
 
-if core.VersionNumber.get_qt_version() >= (5, 14, 0):
-    TEXT_FORMATS["markdown"] = QtCore.Qt.TextFormat.MarkdownText
+TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
+
 
 QtWidgets.QWizard.__bases__ = (widgets.Dialog,)
 
@@ -141,7 +142,7 @@ class Wizard(QtWidgets.QWizard):
         layout += widget
         page.set_layout(layout)
 
-    def set_title_format(self, fmt: str):
+    def set_title_format(self, fmt: TextFormatStr):
         """Set the title format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
@@ -156,7 +157,7 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(fmt, TEXT_FORMATS)
         self.setTitleFormat(TEXT_FORMATS[fmt])
 
-    def get_title_format(self) -> str:
+    def get_title_format(self) -> TextFormatStr:
         """Return current title format.
 
         Possible values: "rich", "plain", "auto", "markdown"
@@ -166,7 +167,7 @@ class Wizard(QtWidgets.QWizard):
         """
         return TEXT_FORMATS.inverse[self.titleFormat()]
 
-    def set_subtitle_format(self, fmt: str):
+    def set_subtitle_format(self, fmt: TextFormatStr):
         """Set the subtitle format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
@@ -181,7 +182,7 @@ class Wizard(QtWidgets.QWizard):
             raise InvalidParamError(fmt, TEXT_FORMATS)
         self.setSubTitleFormat(TEXT_FORMATS[fmt])
 
-    def get_subtitle_format(self) -> str:
+    def get_subtitle_format(self) -> TextFormatStr:
         """Return current subtitle format.
 
         Possible values: "rich", "plain", "auto", "markdown"
@@ -191,7 +192,7 @@ class Wizard(QtWidgets.QWizard):
         """
         return TEXT_FORMATS.inverse[self.subTitleFormat()]
 
-    def get_button(self, button_type: str) -> QtWidgets.QAbstractButton:
+    def get_button(self, button_type: WizardButtonStr) -> QtWidgets.QAbstractButton:
         if button_type not in WIZARD_BUTTON:
             raise InvalidParamError(button_type, WIZARD_BUTTON)
         return self.button(WIZARD_BUTTON[button_type])
