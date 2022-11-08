@@ -13076,6 +13076,7 @@ Action            (<span title="prettyqt.utils.prettyprinter.PrettyPrinter">Pret
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -14880,7 +14881,6 @@ ComboBox            (<span title="PySide6.QtWidgets.QComboBox">QComboBox</span>)
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">currentIndexChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">index_changed</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setCompleter</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Completer</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">items</span> <span class="o">=</span> <span class="p">[</span>
@@ -14899,10 +14899,9 @@ ComboBox            (<span title="PySide6.QtWidgets.QComboBox">QComboBox</span>)
             <span class="n">size_adjust_policy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_size_adjust_policy</span><span class="p">(),</span>
             <span class="n">duplicates_enabled</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">duplicatesEnabled</span><span class="p">(),</span>
             <span class="n">min_contents_length</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minimumContentsLength</span><span class="p">(),</span>
+            <span class="n">placeholder_text</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">placeholderText</span><span class="p">(),</span>
             <span class="n">items</span><span class="o">=</span><span class="n">items</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="n">core</span><span class="o">.</span><span class="n">VersionNumber</span><span class="o">.</span><span class="n">get_qt_version</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;placeholder_text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">placeholderText</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">dct</span>
 
     <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
@@ -14954,6 +14953,11 @@ ComboBox            (<span title="PySide6.QtWidgets.QComboBox">QComboBox</span>)
         <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_editable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editable</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setEditable</span><span class="p">(</span><span class="n">editable</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">completer</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setCompleter</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Completer</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">set_insert_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">InsertPolicyStr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set insert policy.</span>
@@ -15178,6 +15182,7 @@ ComboBox            (<span title="PySide6.QtWidgets.QComboBox">QComboBox</span>)
     </div>
 
   </div>
+
 
 
 
@@ -18028,6 +18033,7 @@ FileDialog            (<span title="PySide6.QtWidgets.QFileDialog">QFileDialog</
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -38661,6 +38667,7 @@ resize(self, w: int, h: int) -&gt; None</p>
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -38716,7 +38723,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
         <span class="n">layout</span> <span class="o">+=</span> <span class="n">widget</span>
         <span class="n">page</span><span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">TextFormatStr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the title format.</span>
 
 <span class="sd">        Allowed values are &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
@@ -38731,7 +38738,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">TEXT_FORMATS</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setTitleFormat</span><span class="p">(</span><span class="n">TEXT_FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">get_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextFormatStr</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Return current title format.</span>
 
 <span class="sd">        Possible values: &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
@@ -38741,7 +38748,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">TEXT_FORMATS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">titleFormat</span><span class="p">()]</span>
 
-    <span class="k">def</span> <span class="nf">set_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">TextFormatStr</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Set the subtitle format.</span>
 
 <span class="sd">        Allowed values are &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
@@ -38756,7 +38763,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="n">TEXT_FORMATS</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSubTitleFormat</span><span class="p">(</span><span class="n">TEXT_FORMATS</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">get_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextFormatStr</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;Return current subtitle format.</span>
 
 <span class="sd">        Possible values: &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
@@ -38766,7 +38773,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">TEXT_FORMATS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">subTitleFormat</span><span class="p">()]</span>
 
-    <span class="k">def</span> <span class="nf">get_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractButton</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_button</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">button_type</span><span class="p">:</span> <span class="n">WizardButtonStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractButton</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">button_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">WIZARD_BUTTON</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">button_type</span><span class="p">,</span> <span class="n">WIZARD_BUTTON</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">(</span><span class="n">WIZARD_BUTTON</span><span class="p">[</span><span class="n">button_type</span><span class="p">])</span>
@@ -39026,7 +39033,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 
 
 <h4 id="prettyqt.widgets.wizard.Wizard.get_subtitle_format" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+<code class="codehilite language-python"><span class="n">get_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextFormatStr</span></code>
 
 
 </h4>
@@ -39046,14 +39053,14 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
   </thead>
   <tbody>
     <tr>
-      <td><code>str</code></td>
+      <td><code>TextFormatStr</code></td>
       <td><p>subtitle format</p></td>
     </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextFormatStr</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Return current subtitle format.</span>
 
 <span class="sd">    Possible values: &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
@@ -39075,7 +39082,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 
 
 <h4 id="prettyqt.widgets.wizard.Wizard.get_title_format" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+<code class="codehilite language-python"><span class="n">get_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextFormatStr</span></code>
 
 
 </h4>
@@ -39095,14 +39102,14 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
   </thead>
   <tbody>
     <tr>
-      <td><code>str</code></td>
+      <td><code>TextFormatStr</code></td>
       <td><p>title format</p></td>
     </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextFormatStr</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Return current title format.</span>
 
 <span class="sd">    Possible values: &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
@@ -39309,7 +39316,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 
 
 <h4 id="prettyqt.widgets.wizard.Wizard.set_subtitle_format" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">TextFormatStr</span><span class="p">)</span></code>
 
 
 </h4>
@@ -39332,7 +39339,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
   <tbody>
       <tr>
         <td><code>fmt</code></td>
-        <td><code>str</code></td>
+        <td><code>TextFormatStr</code></td>
         <td><p>subtitle format to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -39355,7 +39362,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_subtitle_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">TextFormatStr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set the subtitle format.</span>
 
 <span class="sd">    Allowed values are &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
@@ -39382,7 +39389,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 
 
 <h4 id="prettyqt.widgets.wizard.Wizard.set_title_format" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">TextFormatStr</span><span class="p">)</span></code>
 
 
 </h4>
@@ -39405,7 +39412,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
   <tbody>
       <tr>
         <td><code>fmt</code></td>
-        <td><code>str</code></td>
+        <td><code>TextFormatStr</code></td>
         <td><p>title format to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -39428,7 +39435,7 @@ Wizard            (<span title="PySide6.QtWidgets.QWizard">QWizard</span>)
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/wizard.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_title_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">TextFormatStr</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Set the title format.</span>
 
 <span class="sd">    Allowed values are &quot;rich&quot;, &quot;plain&quot;, &quot;auto&quot;, &quot;markdown&quot;</span>
