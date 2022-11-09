@@ -1,3 +1,9 @@
+## v0.190.8 (2022-11-09)
+
+### Fix
+
+- better check for combobox set_editable method
+
 ## v0.190.7 (2022-11-08)
 
 ### Fix
