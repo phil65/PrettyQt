@@ -14956,7 +14956,7 @@ ComboBox            (<span title="PySide6.QtWidgets.QComboBox">QComboBox</span>)
 
     <span class="k">def</span> <span class="nf">set_editable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editable</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setEditable</span><span class="p">(</span><span class="n">editable</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">completer</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">completer</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">editable</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setCompleter</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Completer</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">set_insert_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">InsertPolicyStr</span><span class="p">):</span>

@@ -16042,10 +16042,7 @@ TextFormat            (<span title="PySide6.QtGui.QTextFormat">QTextFormat</span
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">layoutDirection</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">select_full_width</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">prettyqt</span><span class="o">.</span><span class="n">qt</span><span class="o">.</span><span class="n">API</span> <span class="o">!=</span> <span class="s2">&quot;pyqt6&quot;</span><span class="p">:</span>
-            <span class="n">prop</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextFormat</span><span class="o">.</span><span class="n">FullWidthSelection</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">prop</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextFormat</span><span class="o">.</span><span class="n">Property</span><span class="o">.</span><span class="n">FullWidthSelection</span>  <span class="c1"># type: ignore</span>
+        <span class="n">prop</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextFormat</span><span class="o">.</span><span class="n">Property</span><span class="o">.</span><span class="n">FullWidthSelection</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 </code></pre></div>
         </details>
