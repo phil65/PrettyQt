@@ -36,7 +36,7 @@ class CategoryAxis(QtCharts.QCategoryAxis):
         return self
 
     def __len__(self):
-        # needed for PySide2
+        # needed for PySide6
         return self.count()
 
     def set_labels_position(self, position: LabelsPositionStr):

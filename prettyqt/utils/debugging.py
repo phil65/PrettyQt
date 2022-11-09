@@ -64,11 +64,7 @@ def count_objects():
 
 
 def is_deleted(obj) -> bool:
-    if qt.API == "pyside2":
-        import shiboken2
-
-        return not shiboken2.isValid(obj)
-    elif qt.API == "pyside6":
+    if qt.API == "pyside6":
         import shiboken6
 
         return not shiboken6.isValid(obj)

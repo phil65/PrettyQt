@@ -508,8 +508,7 @@ def test_propertyanimation():
     assert animation[0] == 1
     with pytest.raises(InvalidParamError):
         animation.start_animation("test")
-    # TODO: this one breaks PySide2 test
-    # animation.start_animation("keep")
+    animation.start_animation("keep")
 
     def test(val):
         return val

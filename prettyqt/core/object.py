@@ -90,14 +90,7 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        if prettyqt.qt.API != "pyside2":
-            return self.findChildren(typ, name=name, options=flag)  # type: ignore
-        else:
-            if name is None:
-                items = self.findChildren(typ)
-            else:
-                items = self.findChildren(typ, name)
-            return [i for i in items if recursive or i.parent() == self]
+        return self.findChildren(typ, name=name, options=flag)  # type: ignore
 
     def find_child(
         self,
@@ -109,14 +102,7 @@ class Object(QtCore.QObject):
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        if prettyqt.qt.API != "pyside2":
-            return self.findChild(typ, name, flag)  # type: ignore
-        else:
-            if name is None:
-                item = self.findChild(typ)
-            else:
-                item = self.findChild(typ, name)
-            return item if recursive or item.parent() == self else None  # type: ignore
+        return self.findChild(typ, name, flag)  # type: ignore
 
     def find_parent(
         self, typ: type[QtCore.QObject], name: str | None = None

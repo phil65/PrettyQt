@@ -6,7 +6,7 @@ from __future__ import annotations
 # import sys
 from typing import TYPE_CHECKING
 
-from prettyqt.qt import PYQT5, PYQT6, PYSIDE2, PYSIDE6
+from prettyqt.qt import PYQT5, PYQT6, PYSIDE6
 
 if TYPE_CHECKING:
     import datetime
@@ -134,15 +134,6 @@ elif PYQT6:
             for name, val in vars(ns).items():
                 if not name.startswith("_"):
                     setattr(cls, name, val)
-elif PYSIDE2:
-    from PySide2.QtCore import *
-    from PySide2.QtCore import __version__  # type: ignore
-    from PySide2 import __version__ as BINDING_VERSION
-
-    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation  # type: ignore
-    QRegularExpression.MatchOption.AnchorAtOffsetMatchOption = (  # type: ignore
-        QRegularExpression.MatchOption.AnchoredMatchOption
-    )
 elif PYSIDE6:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore

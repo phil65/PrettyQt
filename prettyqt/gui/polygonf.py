@@ -116,11 +116,6 @@ class PolygonF(QtGui.QPolygonF):
 
             address = shiboken6.getCppPointer(self.data())
             buffer = (ctypes.c_double * 2 * self.size()).from_address(address[0])
-        elif API == "pyside2":
-            import shiboken2
-
-            address = shiboken2.getCppPointer(self.data())
-            buffer = (ctypes.c_double * 2 * self.size()).from_address(address)
         else:
             buffer = self.data()
             buffer.setsize(16 * self.size())

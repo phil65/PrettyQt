@@ -112,7 +112,6 @@ REDIRECT_POLICIES = bidict(
 
 RedirectPolicyStr = Literal["manual", "no_less_safe", "same_origin", "user_verified"]
 
-# if core.VersionNumber.get_qt_version() >= (6, 2, 0):
 CACHE_LOAD_CONTROL = bidict(
     always_network=Req.CacheLoadControl.AlwaysNetwork,
     prefer_network=Req.CacheLoadControl.PreferNetwork,

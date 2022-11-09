@@ -1,6 +1,6 @@
 """Provides QtTest classes and functions."""
 
-from prettyqt.qt import PYQT5, PYSIDE2, PYSIDE6, PythonQtError
+from prettyqt.qt import PYQT5, PYSIDE6, PythonQtError
 
 
 if PYQT5:
@@ -13,12 +13,6 @@ if PYQT5:
     RCC_CMD = "pyrcc5 -no-compress"
     LUPDATE_CMD = "pylupdate5 -verbose"
     UIC_CMD = "pyuic5 --debug"
-elif PYSIDE2:
-    from PySide2.QtUiTools import QUiLoader, loadUiType
-
-    RCC_CMD = "pyside2-rcc --no-compress --verbose"
-    LUPDATE_CMD = "pyside2-lupdate -verbose"
-    UIC_CMD = "pyside2-uic"
 elif PYSIDE6:
     from PySide6.QtUiTools import QUiLoader, loadUiType  # type: ignore
 

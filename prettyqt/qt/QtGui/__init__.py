@@ -1,6 +1,6 @@
 """Provides QtGui classes and functions."""
 
-from prettyqt.qt import PYQT5, PYQT6, PYSIDE2, PYSIDE6, PythonQtError
+from prettyqt.qt import PYQT5, PYQT6, PYSIDE6, PythonQtError
 
 
 if PYQT5:
@@ -22,8 +22,6 @@ elif PYQT6:
         return _pos.toPoint()
 
     QMouseEvent.pos = pos  # type: ignore
-elif PYSIDE2:
-    from PySide2.QtGui import *
 elif PYSIDE6:
     from PySide6.QtGui import *  # type: ignore
 else:

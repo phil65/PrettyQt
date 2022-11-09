@@ -37,7 +37,7 @@ class Polygon(QtGui.QPolygon):
             p = core.Point(*value)
         else:
             p = value
-        # PySide2 workaround: setPoint does not exist
+        # PySide6 workaround: setPoint does not exist
         self.remove(index)
         self.insert(index, p)
 
@@ -69,7 +69,7 @@ class Polygon(QtGui.QPolygon):
         return bytes(ba)
 
     def get_point(self, index: int) -> core.Point:
-        # PySide2 doesnt have self.point method
+        # PySide6 doesnt have self.point method
         return core.Point(self.value(index))
 
     def get_points(self) -> list[core.Point]:
@@ -88,11 +88,6 @@ class Polygon(QtGui.QPolygon):
 
             address = shiboken6.getCppPointer(self.data())
             buffer = (ctypes.c_long * 2 * self.size()).from_address(address[0])
-        elif API == "pyside2":
-            import shiboken2
-
-            address = shiboken2.getCppPointer(self.data())
-            buffer = (ctypes.c_long * 2 * self.size()).from_address(address)
         else:
             buffer = self.data()
             buffer.setsize(8 * self.size())

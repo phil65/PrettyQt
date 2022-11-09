@@ -1,24 +1,11 @@
 """Provides QtWebEngineCore classes and functions."""
 
-from prettyqt.qt import PYQT5, PYQT6, PYSIDE2, PYSIDE6, PythonQtError
+from prettyqt.qt import PYQT5, PYQT6, PYSIDE6, PythonQtError
 
 
 if PYQT5:
     from PyQt5.QtWebEngineCore import *
     from PyQt5.QtWebEngineWidgets import (
-        QWebEngineHistory,
-        QWebEngineHistoryItem,
-        QWebEngineScript,
-        QWebEngineScriptCollection,
-        QWebEngineProfile,
-        QWebEngineSettings,
-        QWebEnginePage,
-        QWebEngineDownloadItem as QWebEngineDownloadRequest,
-        QWebEngineContextMenuData as QWebEngineContextMenuRequest,
-    )
-elif PYSIDE2:
-    from PySide2.QtWebEngineCore import *
-    from PySide2.QtWebEngineWidgets import (
         QWebEngineHistory,
         QWebEngineHistoryItem,
         QWebEngineScript,

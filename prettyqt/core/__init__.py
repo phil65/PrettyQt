@@ -7,8 +7,6 @@ Contains QtCore-based classes
 
 from __future__ import annotations
 
-import prettyqt.qt
-
 from prettyqt.qt.QtCore import (  # type: ignore
     Slot,
     Signal,
@@ -146,14 +144,11 @@ from .collator import Collator
 from .jsonvalue import JsonValue
 from .jsondocument import JsonDocument
 
-# not available in PySide2
-if prettyqt.qt.API.startswith("pyqt"):
-    from .library import Library  # type: ignore
-    from .pluginloader import PluginLoader  # type: ignore
+from .library import Library  # type: ignore
+from .pluginloader import PluginLoader  # type: ignore
 
-if VersionNumber.get_qt_version() >= (5, 13, 0):
-    from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
-    from .transposeproxymodel import TransposeProxyModel
+from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
+from .transposeproxymodel import TransposeProxyModel
 
 # if VersionNumber.get_qt_version() < (6, 0, 0):
 #     from .abstracttransition import AbstractTransition

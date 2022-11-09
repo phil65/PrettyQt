@@ -13,7 +13,7 @@ class VersionNumber(QtCore.QVersionNumber):
                 args = tuple(int(i) for i in args[0].split("."))
             elif isinstance(args[0], tuple):
                 args = args[0]
-            # PySide2 Workaround:
+            # PySide6 Workaround:
             elif isinstance(args[0], QtCore.QVersionNumber):
                 args = (
                     args[0].majorVersion(),
