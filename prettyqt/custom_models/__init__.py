@@ -3,8 +3,8 @@
 Contains custom models
 """
 
+from .basemodelmixin import BaseModelMixin
 from .selectionmixin import SelectionMixin
-
 from .transposeproxymodel import TransposeProxyModel
 from .importlibdistributionmodel import ImportlibDistributionModel
 from .regexmatchesmodel import RegexMatchesModel
@@ -16,6 +16,7 @@ from .nestedmodel import NestedModel
 from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 
 __all__ = [
+    "BaseModelMixin",
     "SelectionMixin",
     "TransposeProxyModel",
     "ImportlibDistributionModel",
