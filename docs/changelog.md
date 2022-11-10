@@ -1,3 +1,9 @@
+## v0.191.0 (2022-11-10)
+
+### Feat
+
+- **custom_models**: add BaseModelMixin class
+
 ## v0.190.8 (2022-11-09)
 
 ### Fix
