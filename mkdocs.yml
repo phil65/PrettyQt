@@ -43,11 +43,10 @@ plugins:
         default_handler: python
         handlers:
           python:
-            rendering:
+            options:
               show_source: true
               show_signature_annotations: true
               # show_if_no_docstring: true
-            selection:
               inherited_members: false
     # - mkapi
 markdown_extensions:
