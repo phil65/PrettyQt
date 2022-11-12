@@ -1,3 +1,5 @@
+from typing import Callable
+
 from prettyqt import constants
 
 
@@ -21,6 +23,7 @@ class BaseModelMixin:
     DECORATIONS: dict = dict()
     SET_DATA: dict = dict()
     content_type = ""
+    data_by_index: Callable
 
     def headerData(self, offset: int, orientation, role):
         if role == constants.DISPLAY_ROLE:
