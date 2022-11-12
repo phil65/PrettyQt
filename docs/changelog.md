@@ -1,3 +1,9 @@
+## v0.193.0 (2022-11-12)
+
+### Feat
+
+- **custom_models**: add BaseNestedModel class
+
 ## v0.192.1 (2022-11-12)
 
 ### Fix
