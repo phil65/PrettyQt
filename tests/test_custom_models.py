@@ -2,7 +2,7 @@
 
 # import regex as re
 
-from prettyqt import core, custom_models, widgets
+from prettyqt import custom_models, widgets
 
 
 def test_transposeproxymodel():
@@ -29,14 +29,14 @@ def test_importlibdistributionmodel(qtmodeltester):
     custom_models.ImportlibDistributionModel.from_system()
 
 
-def test_basemodelmixin(qtmodeltester):
-    class TestModel(custom_models.BaseModelMixin, core.AbstractTableModel):
-        def rowCount(self, index=None):
-            return 1
+# def test_basemodelmixin(qtmodeltester):
+#     class TestModel(custom_models.BaseModelMixin, core.AbstractTableModel):
+#         def rowCount(self, index=None):
+#             return 1
 
-        def columnCount(self, index=None):
-            return 1
+#         def columnCount(self, index=None):
+#             return 1
 
 
-    model = TestModel()
-    qtmodeltester.check(model, force_py=True)
+#     model = TestModel()
+#     qtmodeltester.check(model, force_py=True)
