@@ -3,6 +3,7 @@
 Contains custom models
 """
 
+from .baselistmixin import BaseListMixin
 from .basemodelmixin import BaseModelMixin
 from .selectionmixin import SelectionMixin
 from .transposeproxymodel import TransposeProxyModel
@@ -16,6 +17,7 @@ from .nestedmodel import NestedModel
 from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 
 __all__ = [
+    "BaseListMixin",
     "BaseModelMixin",
     "SelectionMixin",
     "TransposeProxyModel",
