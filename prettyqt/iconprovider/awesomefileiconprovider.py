@@ -55,8 +55,7 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
         :param fallback: fallback icon path (qrc or file system)
         :returns: QIcon or None if the file mimetype icon could not be found.
         """
-        mime = mimetypes.guess_type(path)[0]
-        if mime:
+        if mime := mimetypes.guess_type(path)[0]:
             icon = mime.replace("/", "-")
             # if system.WINDOWS:
             #     return icons.file()

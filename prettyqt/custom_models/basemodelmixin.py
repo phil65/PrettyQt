@@ -49,20 +49,16 @@ class BaseModelMixin:
             return None
         item = self.data_by_index(index)
         if role == constants.DECORATION_ROLE:
-            fn = self.DECORATIONS.get(index.column())
-            if fn:
+            if fn := self.DECORATIONS.get(index.column()):
                 return fn(item)
         elif role in [constants.DISPLAY_ROLE, constants.EDIT_ROLE]:
-            fn = self.LABELS.get(index.column())
-            if fn:
+            if fn := self.LABELS.get(index.column()):
                 return fn(item)
         elif role == constants.TOOLTIP_ROLE:
-            fn = self.TOOLTIPS.get(index.column())
-            if fn:
+            if fn := self.TOOLTIPS.get(index.column()):
                 return fn(item)
         elif role == constants.CHECKSTATE_ROLE:
-            fn = self.CHECKSTATE.get(index.column())
-            if fn:
+            if fn := self.CHECKSTATE.get(index.column()):
                 return fn(item)
         elif role == self.DATA_ROLE:
             return item
@@ -73,8 +69,7 @@ class BaseModelMixin:
             if not value:
                 return False
             item = self.data_by_index(index)
-            fn = self.SET_DATA.get(index.column())
-            if fn:
+            if fn := self.SET_DATA.get(index.column()):
                 fn(item, value)
                 self.update_row(index.row())
                 return True

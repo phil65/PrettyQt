@@ -61,8 +61,7 @@ class ListMixin:
     def sort(self, ncol: int, order):
         """Sort table by given column number."""
         is_asc = order == constants.ASCENDING
-        sorter = self.SORT_METHODS.get(ncol)
-        if sorter:
+        if sorter := self.SORT_METHODS.get(ncol):
             with self.change_layout():
                 self.items.sort(key=sorter, reverse=is_asc)
 

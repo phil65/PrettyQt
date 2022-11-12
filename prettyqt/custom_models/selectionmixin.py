@@ -46,6 +46,5 @@ class SelectionMixin:
 
     def _get_selection_id(self, index: QtCore.QModelIndex):
         item = index.data(self.DATA_ROLE)
-        id_fn = self.CHECKSTATE.get(index.column())
-        if id_fn:
+        if id_fn := self.CHECKSTATE.get(index.column()):
             return id_fn(item)
