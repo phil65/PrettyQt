@@ -1,3 +1,9 @@
+## v0.192.1 (2022-11-12)
+
+### Fix
+
+- disable BaseModelMixin test for now
+
 ## v0.192.0 (2022-11-12)
 
 ### Feat
