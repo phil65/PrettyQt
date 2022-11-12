@@ -36,11 +36,10 @@ class StringOrNumberWidget(widgets.GroupBox):
         self.value_changed.emit(value)
 
     def get_value(self) -> float | str:
-        if self.rb_spinbox.isChecked():
-            val = self.spinbox.get_value()
-            return int(val) if val.is_integer() else val
-        else:
+        if not self.rb_spinbox.isChecked():
             return self.lineedit.get_value()
+        val = self.spinbox.get_value()
+        return int(val) if val.is_integer() else val
 
     def set_value(self, value: float | str):
         if isinstance(value, str):

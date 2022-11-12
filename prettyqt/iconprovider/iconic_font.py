@@ -104,18 +104,6 @@ class IconicFont:
     """Main class for managing iconic fonts."""
 
     def __init__(self, *args):
-        """Initialize IconicFont.
-
-        Parameters
-        ----------
-        ``*args``: tuples
-            Each positional argument is a tuple of 3 or 4 values:
-            - The prefix string to be used when accessing a given font set,
-            - The ttf font filename,
-            - The json charmap filename,
-            - Optionally, the directory containing these files. When not
-              provided, the files will be looked for in ``./fonts/``.
-        """
         super().__init__()
         self.icon_cache = {}
         self.fonts = {font.prefix: font for font in args}
@@ -169,7 +157,7 @@ class IconicFont:
             painter.restore()
 
     def has_valid_font_ids(self) -> bool:
-        """Validate instance's font ids are loaded to QFontDatabase.
+        """Validates instance's font ids are loaded to QFontDatabase.
 
         It is possible that QFontDatabase was reset or QApplication was recreated
         in both cases it is possible that font is not available.
@@ -178,7 +166,7 @@ class IconicFont:
         return all(font.is_valid() for font in self.fonts.values())
 
     def icon(self, *names, **kwargs) -> QtGui.QIcon:
-        """Return a QtGui.QIcon object corresponding to the provided icon name."""
+        """Returns a QtGui.QIcon object corresponding to the provided icon name."""
         cache_key = f"{names}{kwargs}"
         if cache_key in self.icon_cache:
             return self.icon_cache[cache_key]
@@ -194,9 +182,7 @@ class IconicFont:
     def _parse_options(
         self, specific_options: dict, general_options: dict, name: str
     ) -> dict[str, Any]:
-        options = dict(_default_options, **general_options)
-        options.update(specific_options)
-
+        options = dict(_default_options, **general_options) | specific_options
         # Handle icons for modes (Active, Disabled, Selected, Normal)
         # and states (On, Off)
         char = options.get("char", name)
@@ -237,8 +223,8 @@ class IconicFont:
             if n not in self.fonts[prefix].charmap:
                 raise Exception(f"Invalid icon name {n!r} in font {prefix!r}")
             chars.append(self.fonts[prefix].charmap[n])
-        options.update(dict(zip(*(ICON_KW, chars))))
-        options.update({"prefix": prefix})
+        options |= dict(zip(*(ICON_KW, chars)))
+        options["prefix"] = prefix
 
         # Handle colors for modes (Active, Disabled, Selected, Normal)
         # and states (On, Off)

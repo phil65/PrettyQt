@@ -34,7 +34,7 @@ class Highlighter:
         self.formatter = formatter
         self.format = gui.TextCharFormat(self.color, self.bold, self.italic)
         text = re.escape(self.placeholder)
-        pat = fr"{text[:-1]}([ +-]?\#?\#?\d*,?(?:\.\d+)?[bcdeEfFgGnosxX%]?)"
+        pat = rf"{text[:-1]}([ +-]?\#?\#?\d*,?(?:\.\d+)?[bcdeEfFgGnosxX%]?)"
         self.pattern = re.compile(pat)
         if self.formatter._fmt is None:
             raise TypeError("Formatter does not contain format string")
@@ -139,7 +139,7 @@ class ThreadName(Highlighter):
 
     def format_string(self, record: logging.LogRecord) -> str:
         name = record.threadName
-        return name if name else ""
+        return name or ""
 
 
 class ProcessName(Highlighter):
@@ -148,7 +148,7 @@ class ProcessName(Highlighter):
 
     def format_string(self, record: logging.LogRecord) -> str:
         name = record.processName
-        return name if name else ""
+        return name or ""
 
 
 class RelativeCreated(Highlighter):

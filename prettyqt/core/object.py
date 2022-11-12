@@ -7,7 +7,6 @@ import itertools
 from typing import Any, DefaultDict, TypeVar
 
 from prettyqt import constants, core
-import prettyqt.qt
 from prettyqt.qt import QtCore
 from prettyqt.utils import helpers
 
@@ -38,7 +37,7 @@ class Object(QtCore.QObject):
         for klass in reversed(inspect.getmro(type(self))):
             if "serialize_fields" in klass.__dict__:
                 data = klass.serialize_fields(self)  # type: ignore
-                dct.update(data)
+                dct |= data
         return dct
 
     @contextlib.contextmanager

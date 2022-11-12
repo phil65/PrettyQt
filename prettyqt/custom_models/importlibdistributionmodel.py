@@ -41,10 +41,10 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         self.distributions = distributions
 
     def rowCount(self, parent=core.ModelIndex()):
-        return len(self.distributions) if not parent.isValid() else 0
+        return 0 if parent.isValid() else len(self.distributions)
 
     def columnCount(self, parent=core.ModelIndex()):
-        return len(self.HEADER) if not parent.isValid() else 0
+        return 0 if parent.isValid() else len(self.HEADER)
 
     def headerData(self, offset: int, orientation, role):  # type: ignore
         if role == constants.DISPLAY_ROLE:

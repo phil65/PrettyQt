@@ -73,9 +73,7 @@ class StorageInfoModel(core.AbstractTableModel):
         return self.ColumnCount
 
     def rowCount(self, parent):
-        if parent.isValid():
-            return 0
-        return len(self.volumes)
+        return 0 if parent.isValid() else len(self.volumes)
 
     def data(self, index, role):
         if not index.isValid():

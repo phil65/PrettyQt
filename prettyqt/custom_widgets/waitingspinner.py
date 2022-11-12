@@ -233,7 +233,7 @@ class WaitingSpinner(BaseWaitingSpinner):
         super().__init__(parent=parent, modality=modality)
         self._center_on_parent = center_on_parent
         self._disable_parent = disable_parent
-        self.additional_disabled = additional_disabled if additional_disabled else []
+        self.additional_disabled = additional_disabled or []
 
     def paintEvent(self, event):
         self._update_position()

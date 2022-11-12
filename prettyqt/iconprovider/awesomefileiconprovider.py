@@ -63,9 +63,7 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
                 icon = gui.Icon.fromTheme(icon)
                 if not icon.isNull():
                     return icon
-        if fallback:
-            return gui.Icon(fallback)
-        return gui.Icon.fromTheme("text-x-generic")
+        return gui.Icon(fallback) if fallback else gui.Icon.fromTheme("text-x-generic")
 
 
 if __name__ == "__main__":

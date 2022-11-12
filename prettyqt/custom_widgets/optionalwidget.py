@@ -29,9 +29,7 @@ class OptionalWidget(widgets.GroupBox):
         self.setChecked(state)
 
     def get_value(self):
-        if self.isChecked():
-            return self.widget.get_value()
-        return None
+        return self.widget.get_value() if self.isChecked() else None
 
 
 if __name__ == "__main__":
