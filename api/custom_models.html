@@ -339,6 +339,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin" class="md-nav__link">
+    baselistmixin
+  </a>
+  
+    <nav class="md-nav" aria-label="baselistmixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin" class="md-nav__link">
+    BaseListMixin
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseListMixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.add" class="md-nav__link">
+    add()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.add_items" class="md-nav__link">
+    add_items()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.rowCount" class="md-nav__link">
+    rowCount()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.sort" class="md-nav__link">
+    sort()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.custom_models.basemodelmixin" class="md-nav__link">
     basemodelmixin
   </a>
@@ -1211,6 +1265,60 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin" class="md-nav__link">
+    baselistmixin
+  </a>
+  
+    <nav class="md-nav" aria-label="baselistmixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin" class="md-nav__link">
+    BaseListMixin
+  </a>
+  
+    <nav class="md-nav" aria-label="BaseListMixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.add" class="md-nav__link">
+    add()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.add_items" class="md-nav__link">
+    add_items()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.rowCount" class="md-nav__link">
+    rowCount()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_models.baselistmixin.BaseListMixin.sort" class="md-nav__link">
+    sort()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.custom_models.basemodelmixin" class="md-nav__link">
     basemodelmixin
   </a>
@@ -1867,6 +1975,294 @@
 
 
 
+<h2 id="prettyqt.custom_models.baselistmixin" class="doc doc-heading">
+        <code>baselistmixin</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="prettyqt.custom_models.baselistmixin.BaseListMixin" class="doc doc-heading">
+        <code>
+BaseListMixin        </code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/baselistmixin.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseListMixin</span><span class="p">:</span>
+    <span class="n">remove_rows</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">SORT_METHODS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span>
+    <span class="n">change_layout</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">insert_rows</span><span class="p">:</span> <span class="n">Callable</span>
+    <span class="n">removeRow</span><span class="p">:</span> <span class="n">Callable</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">DATA_ROLE</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span> <span class="o">=</span> <span class="n">value</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_row</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">())</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">removeRows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+        <span class="n">end_row</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_rows</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">end_row</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">end_row</span><span class="p">,</span> <span class="n">row</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns number of rows.</span>
+
+<span class="sd">        required override for AbstractitemModels</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">data_by_index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">dropMimeData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mime_data</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent_index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mime_data</span><span class="o">.</span><span class="n">hasFormat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MIME_TYPE</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="c1"># Since we only drop in between items, parent_index must be invalid,</span>
+        <span class="c1"># and we use the row arg to know where the drop took place.</span>
+        <span class="k">if</span> <span class="n">parent_index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="n">indexes</span> <span class="o">=</span> <span class="n">mime_data</span><span class="o">.</span><span class="n">get_json_data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">MIME_TYPE</span><span class="p">)</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="n">row</span> <span class="k">if</span> <span class="n">row</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="ow">and</span> <span class="n">row</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="n">rem_offset</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">i</span> <span class="o">&lt;=</span> <span class="n">pos</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">)</span>
+        <span class="n">new</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">indexes</span><span class="p">]</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_layout</span><span class="p">():</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">indexes</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">new</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">pos</span> <span class="o">-</span> <span class="n">rem_offset</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncol</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Sorts table by given column number.&quot;&quot;&quot;</span>
+        <span class="n">is_asc</span> <span class="o">=</span> <span class="n">order</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASCENDING</span>
+        <span class="n">sorter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SORT_METHODS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ncol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sorter</span><span class="p">:</span>
+            <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_layout</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">sorter</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">is_asc</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Appends provided item to the list.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_items</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">item</span>
+
+    <span class="k">def</span> <span class="nf">add_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Appends a list of items to the list.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">position</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">position</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+        <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">position</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="c1"># self.items.extend(items)</span>
+        <span class="k">return</span> <span class="n">items</span>
+
+    <span class="k">def</span> <span class="nf">remove_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offsets</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">offset</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">offsets</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">removeRow</span><span class="p">(</span><span class="n">offset</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_models.baselistmixin.BaseListMixin.add" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Appends provided item to the list.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/baselistmixin.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Appends provided item to the list.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">add_items</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">item</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_models.baselistmixin.BaseListMixin.add_items" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">add_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Appends a list of items to the list.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/baselistmixin.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Appends a list of items to the list.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">position</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">position</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+    <span class="n">items</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">items</span><span class="p">)</span>
+    <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">items</span><span class="p">)):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="n">position</span><span class="p">,</span> <span class="n">items</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c1"># self.items.extend(items)</span>
+    <span class="k">return</span> <span class="n">items</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_models.baselistmixin.BaseListMixin.rowCount" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Returns number of rows.</p>
+<p>required override for AbstractitemModels</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/baselistmixin.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Returns number of rows.</span>
+
+<span class="sd">    required override for AbstractitemModels</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_models.baselistmixin.BaseListMixin.sort" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncol</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Sorts table by given column number.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_models/baselistmixin.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncol</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Sorts table by given column number.&quot;&quot;&quot;</span>
+    <span class="n">is_asc</span> <span class="o">=</span> <span class="n">order</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASCENDING</span>
+    <span class="n">sorter</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SORT_METHODS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">ncol</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sorter</span><span class="p">:</span>
+        <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">change_layout</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">sorter</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="n">is_asc</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
 <h2 id="prettyqt.custom_models.basemodelmixin" class="doc doc-heading">
         <code>basemodelmixin</code>
 
@@ -1924,6 +2320,7 @@ BaseModelMixin        </code>
     <span class="n">DECORATIONS</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">SET_DATA</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
     <span class="n">content_type</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+    <span class="n">data_by_index</span><span class="p">:</span> <span class="n">Callable</span>
 
     <span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
@@ -2639,7 +3036,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.columnCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fc3d54ff800</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7f073733af80</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2744,7 +3141,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fc3d557fe00</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7f073733bfc0</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -4129,7 +4526,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
 
 
 <h4 id="prettyqt.custom_models.nestedmodel.NestedModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fc3d54983c0</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7f0737060640</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
 
 
 </h4>
