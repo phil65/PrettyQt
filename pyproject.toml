@@ -132,7 +132,7 @@ home-page = "https://github.com/phil65/prettyqt"
 
 [tool.ruff]
 line-length = 90
-select = ["E", "F"]
+select = ["C", "E", "F", "W"]
 # Never enforce `E501`.
 ignore = ["C408"]
 extend-select = ["D"]
@@ -154,6 +154,10 @@ extend-ignore = [
     "D408",
     "D409",
     "D413",
+]
+exclude = [
+    'docs',
+    '.eggs/*.py',
 ]
 extend-exclude = [
     "prettyqt/qt/",
