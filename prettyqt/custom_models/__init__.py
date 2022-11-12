@@ -5,6 +5,7 @@ Contains custom models
 
 from .baselistmixin import BaseListMixin
 from .basemodelmixin import BaseModelMixin
+from .basenestedmodel import BaseNestedModel
 from .selectionmixin import SelectionMixin
 from .transposeproxymodel import TransposeProxyModel
 from .importlibdistributionmodel import ImportlibDistributionModel
@@ -19,6 +20,7 @@ from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 __all__ = [
     "BaseListMixin",
     "BaseModelMixin",
+    "BaseNestedModel",
     "SelectionMixin",
     "TransposeProxyModel",
     "ImportlibDistributionModel",
