@@ -1,3 +1,9 @@
+## v0.192.0 (2022-11-12)
+
+### Feat
+
+- **custom_models**: add BaseListMixin class
+
 ## v0.191.0 (2022-11-10)
 
 ### Feat
