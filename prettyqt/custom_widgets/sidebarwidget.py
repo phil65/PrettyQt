@@ -75,25 +75,22 @@ class SidebarWidget(widgets.MainWindow):
         # button.clicked.connect(lambda: self.area.box.setCurrentWidget(item))
         # self.sidebar.addWidget(button)
         # self.sidebar.add_separator()
-        if area == "top":
-            act = widgets.Action(
-                text=title,
-                icon=icon,
-                shortcut=shortcut,
-                parent=self.sidebar,
-                checkable=True,
-                callback=lambda: self.set_tab(item),
-            )
-            self.sidebar.insertAction(self.spacer_action, act)
-        else:
-            act = self.sidebar.add_action(
-                label=title,
-                icon=icon,
-                callback=lambda: self.set_tab(item),
-                checkable=True,
-            )
-        button = self.sidebar.widgetForAction(act)
+        act = widgets.Action(
+            text=title,
+            icon=icon,
+            shortcut=shortcut,
+            parent=self.sidebar,
+            checkable=True,
+            callback=lambda: self.set_tab(item),
+        )
+        button = widgets.ToolButton(self.sidebar)
+        button.setDefaultAction(act)
         button.setFixedWidth(self.BUTTON_WIDTH)
+        button.set_style("text_below_icon")
+        if area == "top":
+            self.sidebar.insertWidget(self.spacer_action, button)
+        else:
+            self.sidebar.addWidget(button)
         if len(self.area.box) == 1:
             button.setChecked(True)
         self.button_map[item] = button
@@ -155,10 +152,6 @@ class SidebarWidget(widgets.MainWindow):
         shortcut: str | None = None,
         area: AreaStr = "top",
     ):
-        # act = self.sidebar.add_action(label=title,
-        #                                      icon=icon,
-        #                                      callback=callback,
-        #                                      checkable=checkable)
         act = widgets.Action(
             text=title,
             icon=icon,
@@ -166,12 +159,14 @@ class SidebarWidget(widgets.MainWindow):
             checkable=checkable,
             callback=callback,
         )
-        if area == "top":
-            self.sidebar.insertAction(self.spacer_action, act)
-        if area == "bottom":
-            self.sidebar.addAction(act)
-        button = self.sidebar.widgetForAction(act)
+        button = widgets.ToolButton(self.sidebar)
+        button.setDefaultAction(act)
         button.setFixedWidth(self.BUTTON_WIDTH)
+        button.set_style("text_below_icon")
+        if area == "top":
+            self.sidebar.insertWidget(self.spacer_action, button)
+        else:
+            self.sidebar.addWidget(button)
         return act
 
 
