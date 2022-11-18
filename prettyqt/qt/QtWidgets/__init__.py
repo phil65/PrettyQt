@@ -23,6 +23,7 @@ elif PYQT6:
     QPlainTextEdit.setTabStopWidth = QPlainTextEdit.setTabStopDistance
     QPlainTextEdit.tabStopWidth = QPlainTextEdit.tabStopDistance
     QMenu.exec_ = QMenu.exec  # type: ignore
+    QDialog.exec_ = QDialog.exec  # type: ignore
 elif PYSIDE6:
     from PySide6.QtWidgets import *  # type: ignore
     from PySide6.QtOpenGLWidgets import QOpenGLWidget  # type: ignore
