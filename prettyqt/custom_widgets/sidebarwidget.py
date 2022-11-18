@@ -67,14 +67,6 @@ class SidebarWidget(widgets.MainWindow):
         area: AreaStr = "top",
     ):
         self.area.box.add(item)
-        # button = widgets.ToolButton()
-        # button.set_text(title)
-        # button.set_icon_size(40)
-        # button.setFixedSize(80, 80)
-        # button.set_icon(icon)
-        # button.clicked.connect(lambda: self.area.box.setCurrentWidget(item))
-        # self.sidebar.addWidget(button)
-        # self.sidebar.add_separator()
         act = widgets.Action(
             text=title,
             icon=icon,
@@ -113,15 +105,17 @@ class SidebarWidget(widgets.MainWindow):
         self.button_map[widget].set_icon(icon)
 
     def _get_widget(self, item: str | int | widgets.Widget):
+        """Returns widget page specified by name, offset or content."""
         if isinstance(item, int):
             return self.area.box[item]
-        if isinstance(item, str):
+        elif isinstance(item, str):
             item = self.area.find_child(QtWidgets.QWidget, name=item, recursive=False)
             if item not in self.area.box:
                 raise ValueError("Layout does not contain the chosen widget")
         return item
 
     def _get_current_widget(self) -> QtWidgets.QWidget:
+        """Returns the currently selected widget page."""
         for k, v in self.button_map.items():
             if v.isChecked():
                 return k
