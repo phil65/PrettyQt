@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
-QtWidgets.QWidgetAction.__bases__ = (widgets.Action,)
-
-
-class WidgetAction(QtWidgets.QWidgetAction):
+class WidgetActionMixin:
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
         self._menu = None  # bc of PySide inheritance also defined here
@@ -16,6 +13,10 @@ class WidgetAction(QtWidgets.QWidgetAction):
     #     self.set_icon(icon)
     #     self.set_shortcut(shortcut)
     #     self.set_tooltip(tooltip)
+
+
+class WidgetAction(WidgetActionMixin, QtWidgets.QWidgetAction, widgets.Action):
+    pass
 
 
 if __name__ == "__main__":

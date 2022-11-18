@@ -29,10 +29,8 @@ SliderActionStr = Literal[
     "move",
 ]
 
-QtWidgets.QAbstractSlider.__bases__ = (widgets.Widget,)
 
-
-class AbstractSlider(QtWidgets.QAbstractSlider):
+class AbstractSliderMixin:
 
     value_changed = core.Signal(int)
 
@@ -167,6 +165,10 @@ class AbstractSlider(QtWidgets.QAbstractSlider):
             self.rangeChanged.connect(self.on_scrollbar_range_changed)
         else:
             self.rangeChanged.disconnect(self.on_scrollbar_range_changed)
+
+
+class AbstractSlider(AbstractSliderMixin, QtWidgets.QAbstractSlider, widgets.Widget):
+    pass
 
 
 if __name__ == "__main__":

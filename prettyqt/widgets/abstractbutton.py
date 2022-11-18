@@ -5,10 +5,7 @@ from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, types
 
 
-QtWidgets.QAbstractButton.__bases__ = (widgets.Widget,)
-
-
-class AbstractButton(QtWidgets.QAbstractButton):
+class AbstractButtonMixin:
     def serialize_fields(self):
         return dict(
             text=self.text(),
@@ -113,6 +110,10 @@ class AbstractButton(QtWidgets.QAbstractButton):
     @is_on.setter
     def is_on(self, state: bool):
         self.setChecked(state)
+
+
+class AbstractButton(AbstractButtonMixin, QtWidgets.QAbstractButton, widgets.Widget):
+    pass
 
 
 if __name__ == "__main__":

@@ -49,10 +49,7 @@ class NoData:
     pass
 
 
-QtWidgets.QComboBox.__bases__ = (widgets.Widget,)
-
-
-class ComboBox(QtWidgets.QComboBox):
+class ComboBoxMixin:
 
     value_changed = core.Signal(object)
 
@@ -219,6 +216,10 @@ class ComboBox(QtWidgets.QComboBox):
         """Hides the completion widget."""
         completer = widgets.Completer(self)
         self.setCompleter(completer)
+
+
+class ComboBox(ComboBoxMixin, QtWidgets.QComboBox, widgets.Widget):
+    pass
 
 
 if __name__ == "__main__":

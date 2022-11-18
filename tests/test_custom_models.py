@@ -2,16 +2,7 @@
 
 # import regex as re
 
-from prettyqt import custom_models, widgets
-
-
-def test_transposeproxymodel():
-    source = widgets.FileSystemModel()
-    model = custom_models.TransposeProxyModel(source)
-    idx = model.index(0, 0)
-    model.data(idx)
-    model.columnCount()
-    model.rowCount()
+from prettyqt import custom_models
 
 
 def test_regexmatchesmodel(qtmodeltester):

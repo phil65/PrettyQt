@@ -5,10 +5,7 @@ from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QWizardPage.__bases__ = (widgets.Widget,)
-
-
-class WizardPage(QtWidgets.QWizardPage):
+class WizardPageMixin:
     def serialize_fields(self):
         return dict(title=self.title(), sub_title=self.subTitle())
 
@@ -53,3 +50,7 @@ class WizardPage(QtWidgets.QWizardPage):
         if button_type not in widgets.wizard.WIZARD_BUTTON:
             raise InvalidParamError(button_type, widgets.wizard.WIZARD_BUTTON)
         return self.buttonText(widgets.wizard.WIZARD_BUTTON[button_type])
+
+
+class WizardPage(WizardPageMixin, QtWidgets.QWizardPage, widgets.Widget):
+    pass

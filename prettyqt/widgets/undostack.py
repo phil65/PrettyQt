@@ -7,10 +7,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QUndoStack.__bases__ = (core.Object,)
-
-
-class UndoStack(QtWidgets.QUndoStack):
+class UndoStackMixin:
     def __len__(self) -> int:
         return self.count()
 
@@ -39,3 +36,7 @@ class UndoStack(QtWidgets.QUndoStack):
         cmd = MyCommand(title)
         self.push(cmd)
         return cmd
+
+
+class UndoStack(UndoStackMixin, QtWidgets.QUndoStack, core.Object):
+    pass

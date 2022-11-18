@@ -86,7 +86,7 @@ class IconBrowser(widgets.MainWindow):
         """Update filter string in the proxy model with current lineedit text."""
         re_string = ""
         if (group := self._combobox.currentText()) != ALL_COLLECTIONS:
-            re_string += fr"^{group}\."
+            re_string += rf"^{group}\."
         if search_term := self._lineedit.text():
             re_string += f".*{search_term}.*$"
 

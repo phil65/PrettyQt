@@ -6,6 +6,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import types
 
+
 QtWidgets.QDateEdit.__bases__ = (widgets.DateTimeEdit,)
 
 

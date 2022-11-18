@@ -4,10 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QDoubleSpinBox.__bases__ = (widgets.AbstractSpinBox,)
-
-
-class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
+class DoubleSpinBoxMixin:
 
     value_changed = core.Signal(float)
 
@@ -54,6 +51,12 @@ class DoubleSpinBox(QtWidgets.QDoubleSpinBox):
         if end is None:
             end = float("inf")
         self.setRange(start, end)
+
+
+class DoubleSpinBox(
+    DoubleSpinBoxMixin, QtWidgets.QDoubleSpinBox, widgets.AbstractSpinBox
+):
+    pass
 
 
 if __name__ == "__main__":
