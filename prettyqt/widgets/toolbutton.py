@@ -16,7 +16,10 @@ POPUP_MODE = bidict(
 PopupModeStr = Literal["delayed", "menu_button", "instant"]
 
 
-class ToolButtonMixin:
+QtWidgets.QToolButton.__bases__ = (widgets.AbstractButton,)
+
+
+class ToolButton(QtWidgets.QToolButton):
     def __getitem__(self, item: str) -> QtWidgets.QAction:
         menu = self.menu()
         return menu[item]
@@ -99,10 +102,6 @@ class ToolButtonMixin:
             toolbutton style
         """
         return constants.TOOLBUTTON_STYLE.inverse[self.toolButtonStyle()]
-
-
-class ToolButton(ToolButtonMixin, QtWidgets.QToolButton, widgets.AbstractButton):
-    pass
 
 
 if __name__ == "__main__":

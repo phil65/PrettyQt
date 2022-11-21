@@ -6,7 +6,10 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-class PushButtonMixin:
+QtWidgets.QPushButton.__bases__ = (widgets.AbstractButton,)
+
+
+class PushButton(QtWidgets.QPushButton):
 
     value_changed = core.Signal(bool)
 
@@ -22,10 +25,6 @@ class PushButtonMixin:
         if callback:
             self.clicked.connect(callback)
         self.toggled.connect(self.value_changed)
-
-
-class PushButton(PushButtonMixin, QtWidgets.QPushButton, widgets.AbstractButton):
-    pass
 
 
 if __name__ == "__main__":

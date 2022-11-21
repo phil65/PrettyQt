@@ -8,7 +8,10 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
 
-class DockWidgetMixin:
+QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)
+
+
+class DockWidget(QtWidgets.QDockWidget):
     """Customized DockWidget class.
 
     Contains a custom TitleBar with maximize button
@@ -66,10 +69,6 @@ class DockWidgetMixin:
             self.showMaximized()
         else:
             self.showMinimized()
-
-
-class DockWidget(DockWidgetMixin, QtWidgets.QDockWidget, widgets.Widget):
-    pass
 
 
 if __name__ == "__main__":

@@ -4,11 +4,10 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-class WidgetItemMixin:
-    pass
+QtWidgets.QWidgetItem.__bases__ = (widgets.LayoutItem,)
 
 
-class WidgetItem(WidgetItemMixin, QtWidgets.QWidgetItem, widgets.LayoutItem):
+class WidgetItem(QtWidgets.QWidgetItem):
     pass
 
 

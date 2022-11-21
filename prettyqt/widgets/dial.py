@@ -4,7 +4,10 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-class DialMixin:
+QtWidgets.QDial.__bases__ = (widgets.AbstractSlider,)
+
+
+class Dial(QtWidgets.QDial):
 
     value_changed = core.Signal(int)
 
@@ -28,10 +31,6 @@ class DialMixin:
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
-
-
-class Dial(DialMixin, QtWidgets.QDial, widgets.AbstractSlider):
-    pass
 
 
 if __name__ == "__main__":

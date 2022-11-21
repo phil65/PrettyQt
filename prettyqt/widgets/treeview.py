@@ -4,7 +4,10 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
 
-class TreeViewMixin:
+QtWidgets.QTreeView.__bases__ = (widgets.AbstractItemView,)
+
+
+class TreeView(QtWidgets.QTreeView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         class_name = type(self).__name__
@@ -65,10 +68,6 @@ class TreeViewMixin:
         column = -1 if column is None else column
         order = constants.ASCENDING if ascending else constants.DESCENDING
         self.sortByColumn(column, order)
-
-
-class TreeView(TreeViewMixin, QtWidgets.QTreeView, widgets.AbstractItemView):
-    pass
 
 
 if __name__ == "__main__":

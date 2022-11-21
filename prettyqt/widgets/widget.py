@@ -16,10 +16,13 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, colors, helpers, prettyprinter, types
 
 
+QtWidgets.QWidget.__bases__ = (core.Object, QtGui.QPaintDevice)
+
+
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
 
-class WidgetMixin(prettyprinter.PrettyPrinter):
+class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     box: QtWidgets.QLayout
 
     def __repr__(self) -> str:
@@ -562,10 +565,6 @@ class WidgetMixin(prettyprinter.PrettyPrinter):
         if window is None:
             return None
         return gui.Screen(window.screen())
-
-
-class Widget(WidgetMixin, QtWidgets.QWidget, core.Object):
-    pass
 
 
 if __name__ == "__main__":

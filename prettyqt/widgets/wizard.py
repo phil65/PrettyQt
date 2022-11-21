@@ -102,7 +102,10 @@ TEXT_FORMATS = bidict(
 TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
-class WizardMixin:
+QtWidgets.QWizard.__bases__ = (widgets.Dialog,)
+
+
+class Wizard(QtWidgets.QWizard):
     def __getitem__(self, key: int) -> QtWidgets.QWizardPage:
         p = self.page(key)
         if p is None:
@@ -281,10 +284,6 @@ class WizardMixin:
         if option not in WIZARD_OPTIONS:
             raise InvalidParamError(option, WIZARD_OPTIONS)
         return self.testOption(WIZARD_OPTIONS[option])
-
-
-class Wizard(WizardMixin, QtWidgets.QWizard, widgets.Dialog):
-    pass
 
 
 if __name__ == "__main__":
