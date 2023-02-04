@@ -30,7 +30,7 @@ class RegexEditorWidget(widgets.Widget):
         self.left_layout = widgets.BoxLayout("vertical")
         self.right_layout = widgets.BoxLayout("vertical")
         self.prog: Pattern | None = None
-        self.matches: list[Match] = list()
+        self.matches: list[Match] = []
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
         self.layout_toprow = widgets.BoxLayout("horizontal")
@@ -90,7 +90,7 @@ class RegexEditorWidget(widgets.Widget):
 
     def _update_view(self) -> None:
         self.prog = None
-        self.matches = list()
+        self.matches = []
         with self.textedit_teststring.block_signals():
             if not self.pattern:
                 self._highlighter.set_spans(None)

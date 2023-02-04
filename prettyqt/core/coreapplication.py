@@ -18,7 +18,7 @@ QtCore.QCoreApplication.__bases__ = (core.Object,)
 
 
 class CoreApplication(QtCore.QCoreApplication):
-    translators: dict[str, core.Translator] = dict()
+    translators: dict[str, core.Translator] = {}
 
     @classmethod
     def call_on_exit(cls, func: Callable):

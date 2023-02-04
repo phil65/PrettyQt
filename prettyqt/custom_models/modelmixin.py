@@ -17,11 +17,11 @@ class ModelMixin:
         | constants.IS_SELECTABLE
         | constants.NO_CHILDREN
     )
-    LABELS: dict = dict()
-    CHECKSTATE: dict = dict()
-    TOOLTIPS: dict = dict()
-    DECORATIONS: dict = dict()
-    SET_DATA: dict = dict()
+    LABELS: dict = {}
+    CHECKSTATE: dict = {}
+    TOOLTIPS: dict = {}
+    DECORATIONS: dict = {}
+    SET_DATA: dict = {}
     content_type = ""
     data_by_index: Callable
     update_row: Callable

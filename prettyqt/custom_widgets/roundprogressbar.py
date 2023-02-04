@@ -41,7 +41,7 @@ class RoundProgressBar(widgets.Widget):
         self.number_format = "%p%"
         self.decimals = 1
         self._update_flags: ValueTypeStr = "percent"
-        self.gradient_data: list[QtGui.QColor] = list()
+        self.gradient_data: list[QtGui.QColor] = []
 
     def minimum(self):
         return self._min_value

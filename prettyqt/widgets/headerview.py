@@ -113,7 +113,7 @@ class HeaderView(QtWidgets.QHeaderView):
         menu.exec_(self.mapToGlobal(event.position()))
 
     def get_header_actions(self) -> list[widgets.Action]:
-        actions = list()
+        actions = []
         labels = self.get_section_labels()[1:]
         for i, header_label in enumerate(labels, start=1):
             val = not self.isSectionHidden(i)

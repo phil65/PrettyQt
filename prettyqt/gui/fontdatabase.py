@@ -96,7 +96,7 @@ WritingSystemStr = Literal[
 
 
 class FontDatabase(QtGui.QFontDatabase):
-    font_paths: dict[str, int] = dict()
+    font_paths: dict[str, int] = {}
 
     @classmethod
     def add_fonts_from_folder(cls, path: types.PathType):

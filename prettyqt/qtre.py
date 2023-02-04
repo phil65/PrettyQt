@@ -161,7 +161,7 @@ class Pattern(core.RegularExpression):
         return match if match.hasMatch() else None
 
     def split(self, string: str, maxsplit: int = 0):
-        result = list()
+        result = []
         matches = self.global_match(string)
         matches = list(matches)
         prev_match = None

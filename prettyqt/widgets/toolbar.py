@@ -14,7 +14,7 @@ class ToolBar(QtWidgets.QToolBar):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_icon_size(24)
-        self.menu_buttons = list()
+        self.menu_buttons = []
 
     def __setstate__(self, state: dict[str, Any]) -> None:
         super().__setstate__(state)

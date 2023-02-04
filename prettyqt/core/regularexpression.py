@@ -137,7 +137,7 @@ class RegularExpression(QtCore.QRegularExpression):
 
     def split(self, string: str, maxsplit: int = 0):
         raise NotImplementedError()
-        # result = list()
+        # result = []
         # matches = self.global_match(string)
         # matches = list(matches)
         # if 0 < maxsplit <= len(matches):

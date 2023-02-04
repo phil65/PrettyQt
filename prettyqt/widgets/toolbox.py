@@ -24,7 +24,7 @@ class ToolBox(QtWidgets.QToolBox):
         self.removeItem(index)
 
     def serialize_fields(self):
-        children = list()
+        children = []
         for i, widget in enumerate(self.get_children()):
             dct = dict(
                 widget=widget,

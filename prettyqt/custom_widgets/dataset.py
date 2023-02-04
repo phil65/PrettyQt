@@ -20,8 +20,8 @@ class DataItem:
         disabled_on=None,
     ):
         self.set_value(value)
-        self.enabled_on = [enabled_on] if enabled_on else list()
-        self.disabled_on = [disabled_on] if disabled_on else list()
+        self.enabled_on = [enabled_on] if enabled_on else []
+        self.disabled_on = [disabled_on] if disabled_on else []
         self.name = None
         self.label = label
         self.optional = optional

@@ -18,7 +18,7 @@ class NestedItem:
         self.dynamic_name = dynamic_name if dynamic_name else self.item_name
         self.count = count
         # self.timestamp = kwargs.pop("timestamp", time.time())
-        self.children: list[NestedItem] = list()
+        self.children: list[NestedItem] = []
         if children:
             self.add_children(children)
 
