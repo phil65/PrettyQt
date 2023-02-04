@@ -37,8 +37,7 @@ PyQt6-Charts = {version = "^6.2", optional=true}
 PyQt6-WebEngine = {version = "^6.2", optional=true}
 PyQt6-QScintilla = {version = "^2.0", optional=true}
 # PyQtAds = {version = "^3.8", optional=true}
-pyside6 = {version = "^6.2", python = "<3.12", optional=true}
-PySide6-QtAds = {version = "^3.8", python = "<3.12", optional=true}
+pyside6 = {version = "^6.4", python = "<3.12", optional=true}
 darkdetect = {version = "^0", markers = "sys_platform == 'darwin'"}
 pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
 pygments = "^2.6"
@@ -48,7 +47,7 @@ types-Deprecated = "^1.2"
 
 [tool.poetry.dev-dependencies]
 pytest = "^7"
-pip = "^22"
+pip = "^23"
 pytest-cov = "^4"
 pytest-qt = {version = "^4.1"}
 mypy = "^0"
@@ -58,13 +57,13 @@ types-orjson = "^3.6"
 pylint = "^2.5"
 pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
 codecov = "^2.1"
-coverage = "^6"
-mkdocs = "^1.1"
-mkdocs-material = "^8"
+coverage = "^7"
+mkdocs = "^1"
+mkdocs-material = "^9"
 mkdocstrings = {version = "^0", extras = ["python-legacy"]}
 
 pymdown-extensions = "^9"
-black = "^22"
+black = "^23"
 devtools = "^0"
 commitizen = "^2.20"
 
