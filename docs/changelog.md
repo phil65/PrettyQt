@@ -1,3 +1,10 @@
+## v0.193.2 (2023-02-04)
+
+### Fix
+
+- correctly init dataclass for py3.11
+- proper QDialog exec fix
+
 ## v0.193.1 (2022-11-18)
 
 ### Fix
