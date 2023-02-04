@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import regex as re
 
@@ -20,7 +20,7 @@ class HighlightRule:
     font_size: float | None = None
     nth: int = 0
     compiled = None
-    fmt: gui.TextCharFormat = gui.TextCharFormat()
+    fmt: gui.TextCharFormat = field(default_factory=gui.TextCharFormat)
 
     def __init_subclass__(cls):
         super().__init_subclass__()
