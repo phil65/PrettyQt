@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/charts.html">
       
+      
+        <link rel="prev" href="bluetooth.html">
+      
+      
+        <link rel="next" href="constants.html">
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
-        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -56,7 +61,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -134,7 +139,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -205,17 +210,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_2">
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -245,7 +251,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -1378,6 +1384,7 @@
                   
 
 
+
 <h1 id="charts-module">charts module</h1>
 
 
@@ -1446,7 +1453,7 @@ AbstractAxis            (<span title="PySide6.QtCharts.QAbstractAxis">QAbstractA
           <summary>Source code in <code>prettyqt/charts/abstractaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractAxis</span><span class="p">(</span><span class="n">QtCharts</span><span class="o">.</span><span class="n">QAbstractAxis</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current alignment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current alignment.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            alignment</span>
@@ -1457,7 +1464,7 @@ AbstractAxis            (<span title="PySide6.QtCharts.QAbstractAxis">QAbstractA
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">alignment</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current orientation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current orientation.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            orientation</span>
@@ -1558,7 +1565,7 @@ AbstractAxis            (<span title="PySide6.QtCharts.QAbstractAxis">QAbstractA
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current alignment.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current alignment.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        alignment</span>
@@ -1616,7 +1623,7 @@ AbstractAxis            (<span title="PySide6.QtCharts.QAbstractAxis">QAbstractA
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_orientation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current orientation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current orientation.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        orientation</span>
@@ -1715,7 +1722,7 @@ AbstractBarSeries            (<span title="PySide6.QtCharts.QAbstractBarSeries">
         <span class="k">return</span> <span class="n">barsets</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
 
     <span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelsPositionStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the labels position.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the labels position.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            position: labels position</span>
@@ -1728,7 +1735,7 @@ AbstractBarSeries            (<span title="PySide6.QtCharts.QAbstractBarSeries">
         <span class="bp">self</span><span class="o">.</span><span class="n">setLabelsPosition</span><span class="p">(</span><span class="n">LABELS_POSITIONS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelsPositionStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current labels position.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current labels position.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            labels position</span>
@@ -1783,7 +1790,7 @@ AbstractBarSeries            (<span title="PySide6.QtCharts.QAbstractBarSeries">
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractbarseries.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelsPositionStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current labels position.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current labels position.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        labels position</span>
@@ -1848,7 +1855,7 @@ AbstractBarSeries            (<span title="PySide6.QtCharts.QAbstractBarSeries">
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/abstractbarseries.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelsPositionStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the labels position.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the labels position.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: labels position</span>
@@ -1961,7 +1968,7 @@ CategoryAxis            (<span title="PySide6.QtCharts.QCategoryAxis">QCategoryA
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelsPositionStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the labels position.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the labels position.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            position: labels position</span>
@@ -1974,7 +1981,7 @@ CategoryAxis            (<span title="PySide6.QtCharts.QCategoryAxis">QCategoryA
         <span class="bp">self</span><span class="o">.</span><span class="n">setLabelsPosition</span><span class="p">(</span><span class="n">LABELS_POSITIONS</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelsPositionStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current labels position.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current labels position.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            labels position</span>
@@ -2033,7 +2040,7 @@ CategoryAxis            (<span title="PySide6.QtCharts.QCategoryAxis">QCategoryA
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/categoryaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelsPositionStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current labels position.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current labels position.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        labels position</span>
@@ -2098,7 +2105,7 @@ CategoryAxis            (<span title="PySide6.QtCharts.QCategoryAxis">QCategoryA
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/categoryaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_labels_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelsPositionStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the labels position.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the labels position.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: labels position</span>
@@ -2214,7 +2221,7 @@ Chart            (<span title="PySide6.QtCharts.QChart">QChart</span>)
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">update_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set new min/max values based on axis.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set new min/max values based on axis.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">max_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisY</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">min_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
@@ -2246,12 +2253,12 @@ Chart            (<span title="PySide6.QtCharts.QChart">QChart</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">setAnimationOptions</span><span class="p">(</span><span class="n">ANIMATION_OPTIONS</span><span class="p">[</span><span class="n">option</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">apply_nice_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Adjust both axis to display nice round numbers.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adjust both axis to display nice round numbers.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">applyNiceNumbers</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">axisY</span><span class="p">()</span><span class="o">.</span><span class="n">applyNiceNumbers</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">zoom_by_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Zoom in/out by factor (1.0 = no change).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Zoom in/out by factor (1.0 = no change).</span>
 
 <span class="sd">        Make sure that we dont zoom out too far</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2320,7 +2327,7 @@ Chart            (<span title="PySide6.QtCharts.QChart">QChart</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chart.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">apply_nice_numbers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Adjust both axis to display nice round numbers.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adjust both axis to display nice round numbers.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">applyNiceNumbers</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">axisY</span><span class="p">()</span><span class="o">.</span><span class="n">applyNiceNumbers</span><span class="p">()</span>
 </code></pre></div>
@@ -2363,7 +2370,7 @@ Chart            (<span title="PySide6.QtCharts.QChart">QChart</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chart.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_boundaries</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set new min/max values based on axis.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set new min/max values based on axis.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">max_y</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisY</span><span class="p">()</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">min_x</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">axisX</span><span class="p">()</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
@@ -2394,7 +2401,7 @@ Chart            (<span title="PySide6.QtCharts.QChart">QChart</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chart.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">zoom_by_factor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Zoom in/out by factor (1.0 = no change).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Zoom in/out by factor (1.0 = no change).</span>
 
 <span class="sd">    Make sure that we dont zoom out too far</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2496,7 +2503,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <span class="c1"># self.setDragMode(self.RubberBandDrag)</span>
 
     <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QKeyEvent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handle keypress events to allow navigation via keyboard.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle keypress events to allow navigation via keyboard.&quot;&quot;&quot;</span>
         <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoomReset</span><span class="p">()</span>
@@ -2520,12 +2527,12 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">wheelEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QWheelEvent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handle wheel event for zooming.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle wheel event for zooming.&quot;&quot;&quot;</span>
         <span class="n">fct</span> <span class="o">=</span> <span class="n">ZOOM_IN_FACTOR</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">angleDelta</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ZOOM_OUT_FACTOR</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoom_by_factor</span><span class="p">(</span><span class="n">fct</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
             <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">restoreOverrideCursor</span><span class="p">()</span>
             <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
@@ -2533,7 +2540,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseReleaseEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
             <span class="n">cursor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CursorShape</span><span class="o">.</span><span class="n">SizeAllCursor</span><span class="p">)</span>
             <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">setOverrideCursor</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
@@ -2543,7 +2550,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mousePressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
         <span class="c1"># pan the chart with a middle mouse drag</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">buttons</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span><span class="p">:</span>
@@ -2560,7 +2567,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
 
     <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">save_as_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Let user choose folder and save chart as an image file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Let user choose folder and save chart as an image file.&quot;&quot;&quot;</span>
         <span class="n">dlg</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="s2">&quot;Save image&quot;</span><span class="p">)</span>
         <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Bmp files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.bmp&quot;</span><span class="p">],</span> <span class="s2">&quot;Jpeg files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.jpg&quot;</span><span class="p">],</span> <span class="s2">&quot;Png files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.png&quot;</span><span class="p">]}</span>
         <span class="n">dlg</span><span class="o">.</span><span class="n">set_extension_filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
@@ -2583,7 +2590,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <span class="k">return</span> <span class="n">image</span>
 
     <span class="k">def</span> <span class="nf">set_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">RubberBandStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the rubber band type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the rubber band type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            typ: rubber band type</span>
@@ -2596,7 +2603,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <span class="bp">self</span><span class="o">.</span><span class="n">setRubberBand</span><span class="p">(</span><span class="n">RUBBER_BAND</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RubberBandStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current rubber band type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current rubber band type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Rubber band type</span>
@@ -2662,7 +2669,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RubberBandStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current rubber band type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current rubber band type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Rubber band type</span>
@@ -2693,7 +2700,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QKeyEvent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle keypress events to allow navigation via keyboard.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle keypress events to allow navigation via keyboard.&quot;&quot;&quot;</span>
     <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoomReset</span><span class="p">()</span>
@@ -2740,7 +2747,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
     <span class="c1"># pan the chart with a middle mouse drag</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">buttons</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span><span class="p">:</span>
@@ -2779,7 +2786,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CursorShape</span><span class="o">.</span><span class="n">SizeAllCursor</span><span class="p">)</span>
         <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">setOverrideCursor</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
@@ -2812,7 +2819,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
         <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">restoreOverrideCursor</span><span class="p">()</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
@@ -2844,7 +2851,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">save_as_image</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Let user choose folder and save chart as an image file.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Let user choose folder and save chart as an image file.&quot;&quot;&quot;</span>
     <span class="n">dlg</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;save&quot;</span><span class="p">,</span> <span class="n">caption</span><span class="o">=</span><span class="s2">&quot;Save image&quot;</span><span class="p">)</span>
     <span class="n">filters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;Bmp files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.bmp&quot;</span><span class="p">],</span> <span class="s2">&quot;Jpeg files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.jpg&quot;</span><span class="p">],</span> <span class="s2">&quot;Png files&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;.png&quot;</span><span class="p">]}</span>
     <span class="n">dlg</span><span class="o">.</span><span class="n">set_extension_filter</span><span class="p">(</span><span class="n">filters</span><span class="p">)</span>
@@ -2914,7 +2921,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">RubberBandStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the rubber band type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the rubber band type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: rubber band type</span>
@@ -2950,7 +2957,7 @@ ChartView            (<span title="PySide6.QtCharts.QChartView">QChartView</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">wheelEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QWheelEvent</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle wheel event for zooming.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle wheel event for zooming.&quot;&quot;&quot;</span>
     <span class="n">fct</span> <span class="o">=</span> <span class="n">ZOOM_IN_FACTOR</span> <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">angleDelta</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">ZOOM_OUT_FACTOR</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoom_by_factor</span><span class="p">(</span><span class="n">fct</span><span class="p">)</span>
 </code></pre></div>
@@ -3051,7 +3058,7 @@ Legend        </code>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the alignment of the legend.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the alignment of the legend.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            alignment: alignment for the legend</span>
@@ -3064,7 +3071,7 @@ Legend        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current alignment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current alignment.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            alignment</span>
@@ -3072,7 +3079,7 @@ Legend        </code>
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">SIDES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">alignment</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">MarkerShapeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the marker shape.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the marker shape.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            shape: marker shape</span>
@@ -3085,7 +3092,7 @@ Legend        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">setMarkerShape</span><span class="p">(</span><span class="n">MARKER_SHAPES</span><span class="p">[</span><span class="n">shape</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MarkerShapeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current marker shape.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current marker shape.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Marker shape</span>
@@ -3152,7 +3159,7 @@ Legend        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current alignment.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current alignment.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        alignment</span>
@@ -3202,7 +3209,7 @@ Legend        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MarkerShapeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current marker shape.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current marker shape.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Marker shape</span>
@@ -3268,7 +3275,7 @@ Legend        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">SideStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the alignment of the legend.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the alignment of the legend.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        alignment: alignment for the legend</span>
@@ -3338,7 +3345,7 @@ Legend        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/legend.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_marker_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">MarkerShapeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the marker shape.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the marker shape.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        shape: marker shape</span>
@@ -3431,7 +3438,7 @@ PieSlice            (<span title="PySide6.QtCharts.QPieSlice">QPieSlice</span>)
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">label</span><span class="p">()</span><span class="si">!r}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="nf">set_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelPositionStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the label position.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the label position.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            position: label position</span>
@@ -3444,7 +3451,7 @@ PieSlice            (<span title="PySide6.QtCharts.QPieSlice">QPieSlice</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">setLabelPosition</span><span class="p">(</span><span class="n">LABEL_POSITION</span><span class="p">[</span><span class="n">position</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelPositionStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current label position.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current label position.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            label position</span>
@@ -3525,7 +3532,7 @@ PieSlice            (<span title="PySide6.QtCharts.QPieSlice">QPieSlice</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/pieslice.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LabelPositionStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current label position.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current label position.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        label position</span>
@@ -3591,7 +3598,7 @@ PieSlice            (<span title="PySide6.QtCharts.QPieSlice">QPieSlice</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/pieslice.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_label_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">LabelPositionStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the label position.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the label position.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        position: label position</span>
@@ -3681,7 +3688,7 @@ ValueAxis            (<span title="PySide6.QtCharts.QValueAxis">QValueAxis</span
           <summary>Source code in <code>prettyqt/charts/valueaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ValueAxis</span><span class="p">(</span><span class="n">QtCharts</span><span class="o">.</span><span class="n">QValueAxis</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick_type</span><span class="p">:</span> <span class="n">TickTypeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the tick type of the legend.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the tick type of the legend.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            tick_type: tick type for the legend</span>
@@ -3694,7 +3701,7 @@ ValueAxis            (<span title="PySide6.QtCharts.QValueAxis">QValueAxis</span
         <span class="bp">self</span><span class="o">.</span><span class="n">setTickType</span><span class="p">(</span><span class="n">TICK_TYPES</span><span class="p">[</span><span class="n">tick_type</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TickTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current tick type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current tick type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            tick_type</span>
@@ -3747,7 +3754,7 @@ ValueAxis            (<span title="PySide6.QtCharts.QValueAxis">QValueAxis</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/valueaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TickTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current tick type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current tick type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        tick_type</span>
@@ -3812,7 +3819,7 @@ ValueAxis            (<span title="PySide6.QtCharts.QValueAxis">QValueAxis</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/charts/valueaxis.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_tick_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tick_type</span><span class="p">:</span> <span class="n">TickTypeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the tick type of the legend.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the tick type of the legend.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        tick_type: tick type for the legend</span>
@@ -3941,10 +3948,10 @@ ValueAxis            (<span title="PySide6.QtCharts.QValueAxis">QValueAxis</span
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/custom_widgets.html">
       
+      
+        <link rel="prev" href="custom_validators.html">
+      
+      
+        <link rel="next" href="gui.html">
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
-        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -56,7 +61,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -134,7 +139,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -205,17 +210,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_2">
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -329,7 +335,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -880,26 +886,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.framelesswindow.TitleBarIcon" class="md-nav__link">
-    TitleBarIcon
-  </a>
-  
-    <nav class="md-nav" aria-label="TitleBarIcon">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.framelesswindow.TitleBarIcon.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -1033,13 +1019,6 @@
   
     <nav class="md-nav" aria-label="JoystickButton">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.joystickbutton.JoystickButton.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.joystickbutton.JoystickButton.mouseMoveEvent" class="md-nav__link">
@@ -2493,26 +2472,6 @@
   
 </li>
         
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.framelesswindow.TitleBarIcon" class="md-nav__link">
-    TitleBarIcon
-  </a>
-  
-    <nav class="md-nav" aria-label="TitleBarIcon">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.framelesswindow.TitleBarIcon.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
       </ul>
     </nav>
   
@@ -2646,13 +2605,6 @@
   
     <nav class="md-nav" aria-label="JoystickButton">
       <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.custom_widgets.joystickbutton.JoystickButton.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
         
           <li class="md-nav__item">
   <a href="#prettyqt.custom_widgets.joystickbutton.JoystickButton.mouseMoveEvent" class="md-nav__link">
@@ -3376,6 +3328,7 @@
                   
 
 
+
 <h1 id="custom_widgets-module">custom_widgets module</h1>
 
 
@@ -3445,7 +3398,7 @@ BorderLayout            (<a class="autorefs autorefs-internal" title="prettyqt.w
           <summary>Source code in <code>prettyqt/custom_widgets/borderlayout.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">BorderLayout</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">):</span>
     <span class="k">class</span> <span class="nc">Position</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Item position.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Item position.&quot;&quot;&quot;</span>
 
         <span class="n">West</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">North</span> <span class="o">=</span> <span class="mi">1</span>
@@ -3656,7 +3609,7 @@ Position            (<span title="enum.IntEnum">IntEnum</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/borderlayout.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Position</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Item position.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Item position.&quot;&quot;&quot;</span>
 
     <span class="n">West</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">North</span> <span class="o">=</span> <span class="mi">1</span>
@@ -4298,7 +4251,7 @@ CodeEditor            (<a class="autorefs autorefs-internal" title="prettyqt.wid
 
 <h3 id="prettyqt.custom_widgets.codeeditor.LineNumberArea" class="doc doc-heading">
         <code>
-LineNumberArea            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+LineNumberArea            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -4483,7 +4436,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <span class="bp">self</span><span class="o">.</span><span class="n">itemActivated</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_complete_current</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Handle mouse input and to auto-hide when losing focus.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle mouse input and to auto-hide when losing focus.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
                 <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
@@ -4520,7 +4473,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
     <span class="c1"># &#39;QWidget&#39; interface</span>
 
     <span class="k">def</span> <span class="nf">hideEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Disconnect signal handlers and event filter.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Disconnect signal handlers and event filter.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">hideEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">cursorPositionChanged</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_current</span><span class="p">)</span>
@@ -4529,7 +4482,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <span class="bp">self</span><span class="o">.</span><span class="n">removeEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">showEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Connect signal handlers and event filter.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Connect signal handlers and event filter.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">showEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">cursorPositionChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_current</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">installEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -4537,7 +4490,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
     <span class="c1"># &#39;CompletionWidget&#39; interface</span>
 
     <span class="k">def</span> <span class="nf">show_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">prefix_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Show the widget with &#39;items&#39; at the position specified by &#39;cursor&#39;.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show the widget with &#39;items&#39; at the position specified by &#39;cursor&#39;.&quot;&quot;&quot;</span>
         <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_left_position</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="n">path_items</span> <span class="o">=</span> <span class="p">[]</span>
@@ -4582,7 +4535,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
     <span class="c1"># Protected interface</span>
 
     <span class="k">def</span> <span class="nf">_get_top_left_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCursor</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get top left position for this widget.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get top left position for this widget.&quot;&quot;&quot;</span>
         <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">cursorRect</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
         <span class="n">point_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">font</span><span class="p">()</span><span class="o">.</span><span class="n">pointSize</span><span class="p">()</span>
         <span class="n">factor</span> <span class="o">=</span> <span class="mf">1.05</span> <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="s2">&quot;nt&quot;</span> <span class="k">else</span> <span class="mf">0.98</span>
@@ -4593,20 +4546,20 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <span class="k">return</span> <span class="n">point</span>
 
     <span class="k">def</span> <span class="nf">_complete_current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Perform the completion with the currently selected item.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Perform the completion with the currently selected item.&quot;&quot;&quot;</span>
         <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentItem</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemDataRole</span><span class="o">.</span><span class="n">UserRole</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_text_cursor</span><span class="p">()</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_current_text_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return a cursor with text between the start  and currentposition selected.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a cursor with text between the start  and currentposition selected.&quot;&quot;&quot;</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">get_text_cursor</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_position</span><span class="p">:</span>
             <span class="n">cursor</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_start_position</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="o">.</span><span class="n">MoveMode</span><span class="o">.</span><span class="n">KeepAnchor</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cursor</span>
 
     <span class="k">def</span> <span class="nf">_update_current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Update the current item based on the current text and the widget position.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the current item based on the current text and the widget position.&quot;&quot;&quot;</span>
         <span class="c1"># Update widget position</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">get_text_cursor</span><span class="p">()</span>
         <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_left_position</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
@@ -4663,7 +4616,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/completionwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Handle mouse input and to auto-hide when losing focus.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle mouse input and to auto-hide when losing focus.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
             <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
@@ -4699,7 +4652,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/completionwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hideEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Disconnect signal handlers and event filter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Disconnect signal handlers and event filter.&quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">hideEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">cursorPositionChanged</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_current</span><span class="p">)</span>
@@ -4776,7 +4729,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/completionwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">showEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Connect signal handlers and event filter.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Connect signal handlers and event filter.&quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">showEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">cursorPositionChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_current</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">installEventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -4805,7 +4758,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/completionwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">show_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cursor</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">prefix_length</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Show the widget with &#39;items&#39; at the position specified by &#39;cursor&#39;.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show the widget with &#39;items&#39; at the position specified by &#39;cursor&#39;.&quot;&quot;&quot;</span>
     <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_left_position</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="n">path_items</span> <span class="o">=</span> <span class="p">[]</span>
@@ -4932,8 +4885,8 @@ DataItem        </code>
         <span class="n">disabled_on</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">enabled_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">enabled_on</span><span class="p">]</span> <span class="k">if</span> <span class="n">enabled_on</span> <span class="k">else</span> <span class="nb">list</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">disabled_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">disabled_on</span><span class="p">]</span> <span class="k">if</span> <span class="n">disabled_on</span> <span class="k">else</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">enabled_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">enabled_on</span><span class="p">]</span> <span class="k">if</span> <span class="n">enabled_on</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">disabled_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">disabled_on</span><span class="p">]</span> <span class="k">if</span> <span class="n">disabled_on</span> <span class="k">else</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">label</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">optional</span> <span class="o">=</span> <span class="n">optional</span>
@@ -4946,7 +4899,7 @@ DataItem        </code>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span>
 
     <span class="k">def</span> <span class="nf">set_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set data item&#39;s position on a GUI layout.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set data item&#39;s position on a GUI layout.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">label_col</span> <span class="o">=</span> <span class="n">col</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">colspan</span> <span class="o">=</span> <span class="n">colspan</span>
         <span class="k">return</span> <span class="bp">self</span>
@@ -5005,7 +4958,7 @@ DataItem        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_pos</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">colspan</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set data item&#39;s position on a GUI layout.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set data item&#39;s position on a GUI layout.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">label_col</span> <span class="o">=</span> <span class="n">col</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">colspan</span> <span class="o">=</span> <span class="n">colspan</span>
     <span class="k">return</span> <span class="bp">self</span>
@@ -5374,7 +5327,7 @@ ElidedLabel            (<a class="autorefs autorefs-internal" title="prettyqt.wi
 
 <h3 id="prettyqt.custom_widgets.filechooserbutton.FileChooserButton" class="doc doc-heading">
         <code>
-FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+FileChooserButton            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -5398,7 +5351,7 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
         <span class="n">root</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Initialize FileChooserButton.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize FileChooserButton.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            extensions: dict allowed extensions</span>
@@ -5558,7 +5511,7 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
     <span class="n">root</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Initialize FileChooserButton.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Initialize FileChooserButton.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        extensions: dict allowed extensions</span>
@@ -6203,7 +6156,7 @@ CustomTitleBar            (<a class="autorefs autorefs-internal" title="prettyqt
 
 <h3 id="prettyqt.custom_widgets.framelesswindow.EdgeGrip" class="doc doc-heading">
         <code>
-EdgeGrip            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+EdgeGrip            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -6305,7 +6258,7 @@ EdgeGrip            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
 
 <h3 id="prettyqt.custom_widgets.framelesswindow.FramelessWindow" class="doc doc-heading">
         <code>
-FramelessWindow            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+FramelessWindow            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -6597,95 +6550,6 @@ FramelessWindow            (<span title="prettyqt.widgets.widget.Widget">Widget<
 
 
 
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="prettyqt.custom_widgets.framelesswindow.TitleBarIcon" class="doc doc-heading">
-        <code>
-TitleBarIcon            (<span title="prettyqt.widgets.pushbutton.PushButton">PushButton</span>)
-        </code>
-
-
-
-</h3>
-
-    <div class="doc doc-contents ">
-
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/framelesswindow.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TitleBarIcon</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
-            <span class="s2">&quot;margin: 0;&quot;</span> <span class="s2">&quot;padding: 0px;&quot;</span> <span class="s2">&quot;font-size: 16px;&quot;</span> <span class="s2">&quot;width: 44px;&quot;</span> <span class="s2">&quot;height: 30px;&quot;</span>
-        <span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.custom_widgets.framelesswindow.TitleBarIcon.__init__" class="doc doc-heading">
-<code class="codehilite language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p><strong>init</strong>(self, icon: Union[PySide6.QtGui.QIcon, PySide6.QtGui.QPixmap], text: str, parent: Optional[PySide6.QtWidgets.QWidget] = None) -&gt; None
-<strong>init</strong>(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -&gt; None
-<strong>init</strong>(self, text: str, parent: Optional[PySide6.QtWidgets.QWidget] = None) -&gt; None</p>
-<p>Initialize self.  See help(type(self)) for accurate signature.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/framelesswindow.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span>
-        <span class="s2">&quot;margin: 0;&quot;</span> <span class="s2">&quot;padding: 0px;&quot;</span> <span class="s2">&quot;font-size: 16px;&quot;</span> <span class="s2">&quot;width: 44px;&quot;</span> <span class="s2">&quot;height: 30px;&quot;</span>
-    <span class="p">)</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
 
 
 
@@ -6745,7 +6609,7 @@ IconListView            (<a class="autorefs autorefs-internal" title="prettyqt.w
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/iconbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">IconListView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">ListView</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A QListView that scales its grid size to always show same amount of items.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A QListView that scales its grid size to always show same amount of items.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -6753,7 +6617,7 @@ IconListView            (<a class="autorefs autorefs-internal" title="prettyqt.w
         <span class="bp">self</span><span class="o">.</span><span class="n">VIEW_COLUMNS</span> <span class="o">=</span> <span class="mi">5</span>
 
     <span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Re-calculate the grid size to provide scaling icons.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Re-calculate the grid size to provide scaling icons.&quot;&quot;&quot;</span>
         <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewport</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">30</span>
         <span class="c1"># The minus 30 above ensures we don&#39;t end up with an item width that</span>
         <span class="c1"># can&#39;t be drawn the expected number of times across the view without</span>
@@ -6797,7 +6661,7 @@ IconListView            (<a class="autorefs autorefs-internal" title="prettyqt.w
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/iconbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Re-calculate the grid size to provide scaling icons.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Re-calculate the grid size to provide scaling icons.&quot;&quot;&quot;</span>
     <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">viewport</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="mi">30</span>
     <span class="c1"># The minus 30 above ensures we don&#39;t end up with an item width that</span>
     <span class="c1"># can&#39;t be drawn the expected number of times across the view without</span>
@@ -6995,7 +6859,7 @@ IconWidget            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/iconwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">IconWidget</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;IconWidget gives the ability to display an icon as a widget.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;IconWidget gives the ability to display an icon as a widget.</span>
 
 <span class="sd">    if supports the same arguments as icon()</span>
 <span class="sd">    for example</span>
@@ -7013,7 +6877,7 @@ IconWidget            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="bp">self</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="n">iconprovider</span><span class="o">.</span><span class="n">_icon</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set a new icon().</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a new icon().</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -7073,7 +6937,7 @@ IconWidget            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/iconwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set a new icon().</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set a new icon().</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -7270,43 +7134,6 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
 
 
 
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.custom_widgets.joystickbutton.JoystickButton.__init__" class="doc doc-heading">
-<code class="codehilite language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p><strong>init</strong>(self, icon: Union[PySide6.QtGui.QIcon, PySide6.QtGui.QPixmap], text: str, parent: Optional[PySide6.QtWidgets.QWidget] = None) -&gt; None
-<strong>init</strong>(self, parent: Optional[PySide6.QtWidgets.QWidget] = None) -&gt; None
-<strong>init</strong>(self, text: str, parent: Optional[PySide6.QtWidgets.QWidget] = None) -&gt; None</p>
-<p>Initialize self.  See help(type(self)) for accurate signature.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_widgets/joystickbutton.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">200</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
 
 
 
@@ -7529,7 +7356,7 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
 
 <h3 id="prettyqt.custom_widgets.labeledslider.LabeledSlider" class="doc doc-heading">
         <code>
-LabeledSlider            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -7811,7 +7638,7 @@ MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyq
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MenuRecentFiles</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Menu that manage the list of recent files.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Menu that manage the list of recent files.</span>
 
 <span class="sd">    To use the menu, simply connect to the open_requested signal.</span>
 
@@ -7830,7 +7657,7 @@ MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyq
         <span class="n">icon_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">clear_icon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Init.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Init.</span>
 
 <span class="sd">        :param parent: parent object</span>
 <span class="sd">        :param icon_provider: Object that provides icon based on the file path.</span>
@@ -7852,7 +7679,7 @@ MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyq
         <span class="bp">self</span><span class="o">.</span><span class="n">update_actions</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">update_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Updates the list of actions.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Updates the list of actions.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">recent_files_actions</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">get_recent_files</span><span class="p">():</span>
@@ -7872,13 +7699,13 @@ MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyq
         <span class="bp">self</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">action_clear</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">clear_recent_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clear recent files and menu.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear recent files and menu.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update_actions</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">clear_requested</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_on_action_triggered</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Emits open_requested when a recent file action has been triggered.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Emits open_requested when a recent file action has been triggered.&quot;&quot;&quot;</span>
         <span class="n">action</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">()</span>
         <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">action</span><span class="p">,</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">)</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">action</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
@@ -7934,7 +7761,7 @@ MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyq
     <span class="n">icon_provider</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">clear_icon</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Init.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Init.</span>
 
 <span class="sd">    :param parent: parent object</span>
 <span class="sd">    :param icon_provider: Object that provides icon based on the file path.</span>
@@ -7979,7 +7806,7 @@ MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyq
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">clear_recent_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Clear recent files and menu.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Clear recent files and menu.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">update_actions</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">clear_requested</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
@@ -8008,7 +7835,7 @@ MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyq
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">update_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Updates the list of actions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Updates the list of actions.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">recent_files_actions</span><span class="p">[:]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">manager</span><span class="o">.</span><span class="n">get_recent_files</span><span class="p">():</span>
@@ -8063,7 +7890,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RecentFilesManager</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Object</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Manages a list of recent files. The list of files is stored in QSettings.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Manages a list of recent files. The list of files is stored in QSettings.&quot;&quot;&quot;</span>
 
     <span class="c1">#: Maximum number of files kept in the list.</span>
     <span class="n">max_recent_files</span> <span class="o">=</span> <span class="mi">15</span>
@@ -8077,12 +7904,12 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
             <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span> <span class="o">=</span> <span class="n">qsettings</span>
 
     <span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clears recent files in QSettings.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clears recent files in QSettings.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">,</span> <span class="p">[])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Remove a file path from the list of recent files.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Remove a file path from the list of recent files.</span>
 
 <span class="sd">        :param filename: Path of the file to remove</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -8092,7 +7919,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <span class="bp">self</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Reads value from QSettings.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reads value from QSettings.</span>
 
 <span class="sd">        :param key: value key</span>
 <span class="sd">        :param default: default value.</span>
@@ -8126,7 +7953,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <span class="k">return</span> <span class="n">unique</span><span class="p">([</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">pth</span><span class="p">)</span> <span class="k">for</span> <span class="n">pth</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the recent files value in QSettings.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the recent files value in QSettings.</span>
 
 <span class="sd">        :param key: value key</span>
 <span class="sd">        :param value: new value</span>
@@ -8137,7 +7964,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;recent_files/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_recent_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Gets the list of recent files.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the list of recent files.</span>
 
 <span class="sd">        Files that do not exists anymore are automatically filtered</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -8157,7 +7984,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <span class="k">return</span> <span class="n">ret_val</span>
 
     <span class="k">def</span> <span class="nf">open_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Adds a file to the list (and move it to top if the file already exists).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a file to the list (and move it to top if the file already exists).</span>
 
 <span class="sd">        :param file: file path to add the list of recent files.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -8173,7 +8000,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <span class="bp">self</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">last_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Returns the path to the last opened file.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the path to the last opened file.&quot;&quot;&quot;</span>
         <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_recent_files</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -8214,7 +8041,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">clear</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Clears recent files in QSettings.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Clears recent files in QSettings.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="s2">&quot;list&quot;</span><span class="p">,</span> <span class="p">[])</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">updated</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 </code></pre></div>
@@ -8243,7 +8070,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_recent_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Gets the list of recent files.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Gets the list of recent files.</span>
 
 <span class="sd">    Files that do not exists anymore are automatically filtered</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -8289,7 +8116,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Reads value from QSettings.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads value from QSettings.</span>
 
 <span class="sd">    :param key: value key</span>
 <span class="sd">    :param default: default value.</span>
@@ -8346,7 +8173,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">last_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Returns the path to the last opened file.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Returns the path to the last opened file.&quot;&quot;&quot;</span>
     <span class="n">files</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_recent_files</span><span class="p">()</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -8378,7 +8205,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">open_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Adds a file to the list (and move it to top if the file already exists).</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a file to the list (and move it to top if the file already exists).</span>
 
 <span class="sd">    :param file: file path to add the list of recent files.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -8418,7 +8245,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Remove a file path from the list of recent files.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Remove a file path from the list of recent files.</span>
 
 <span class="sd">    :param filename: Path of the file to remove</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -8453,7 +8280,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/menurecentfiles.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the recent files value in QSettings.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the recent files value in QSettings.</span>
 
 <span class="sd">    :param key: value key</span>
 <span class="sd">    :param value: new value</span>
@@ -8544,7 +8371,7 @@ MessageLabel            (<a class="autorefs autorefs-internal" title="prettyqt.w
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MessageLabel</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Label</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Subclass of QLabel, which reimplements the resizeEvent() function.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Subclass of QLabel, which reimplements the resizeEvent() function.</span>
 
 <span class="sd">    This is necessary because otherwise the notifications take up too much vertical</span>
 <span class="sd">    space when texts they display become longer. This is because normally the height</span>
@@ -8627,7 +8454,7 @@ MessageLabel            (<a class="autorefs autorefs-internal" title="prettyqt.w
 
 <h3 id="prettyqt.custom_widgets.notification.Notification" class="doc doc-heading">
         <code>
-Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+Notification            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -8640,7 +8467,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Notification</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Class representing a single notification.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class representing a single notification.&quot;&quot;&quot;</span>
 
     <span class="n">close_clicked</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
 
@@ -8715,18 +8542,18 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <span class="bp">self</span><span class="o">.</span><span class="n">fade_in_anim</span><span class="o">.</span><span class="n">set_range</span><span class="p">(</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Display the notification.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Display the notification.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">message_display</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Close the notification.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Close the notification.&quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">fade_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fade in the notification.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fade in the notification.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            duration : int</span>
@@ -8748,7 +8575,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <span class="bp">self</span><span class="o">.</span><span class="n">is_fading_in</span> <span class="o">=</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="nf">fade_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">finished_callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fade out the notification.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fade out the notification.</span>
 
 <span class="sd">        Parameters</span>
 <span class="sd">        ----------</span>
@@ -8775,7 +8602,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <span class="bp">self</span><span class="o">.</span><span class="n">fade_out_anim</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pe</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Redefinition of paintEvent, do not call directly.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Redefinition of paintEvent, do not call directly.</span>
 
 <span class="sd">        Makes class Notification available in style sheets. Interal Qt function.</span>
 <span class="sd">        Should not be called directly.</span>
@@ -8786,22 +8613,22 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;The currently set message to display.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The currently set message to display.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_message</span>
 
     <span class="nd">@message</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the message to display.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the message to display.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_message</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CategoryStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;The currently set category of this notification.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The currently set category of this notification.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_category</span>
 
     <span class="nd">@category</span><span class="o">.</span><span class="n">setter</span>
     <span class="k">def</span> <span class="nf">category</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">CategoryStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the category of this notification.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the category of this notification.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            value : {&#39;primary&#39;,&#39;success&#39;,&#39;info&#39;,&#39;warning&#39;,&#39;danger&#39;}</span>
@@ -8818,7 +8645,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <span class="bp">self</span><span class="o">.</span><span class="n">_category</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="k">def</span> <span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;When the notification is set to auto-hide, mouseover closes it.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;When the notification is set to auto-hide, mouseover closes it.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autohide</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">close_clicked</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 </code></pre></div>
@@ -8901,7 +8728,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Close the notification.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Close the notification.&quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
 </code></pre></div>
@@ -8929,7 +8756,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Display the notification.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Display the notification.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">message_display</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">message</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">()</span>
@@ -8958,7 +8785,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">enterEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;When the notification is set to auto-hide, mouseover closes it.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;When the notification is set to auto-hide, mouseover closes it.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">autohide</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close_clicked</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
 </code></pre></div>
@@ -9021,7 +8848,7 @@ The desired duration of the animation</p></td>
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fade_in</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Fade in the notification.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fade in the notification.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        duration : int</span>
@@ -9071,7 +8898,7 @@ duration : int
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fade_out</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">finished_callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Fade out the notification.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fade out the notification.</span>
 
 <span class="sd">    Parameters</span>
 <span class="sd">    ----------</span>
@@ -9124,7 +8951,7 @@ Should not be called directly.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pe</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Redefinition of paintEvent, do not call directly.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Redefinition of paintEvent, do not call directly.</span>
 
 <span class="sd">    Makes class Notification available in style sheets. Interal Qt function.</span>
 <span class="sd">    Should not be called directly.</span>
@@ -9156,7 +8983,7 @@ Should not be called directly.</p>
 
 <h3 id="prettyqt.custom_widgets.notification.NotificationArea" class="doc doc-heading">
         <code>
-NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+NotificationArea            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -9169,7 +8996,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NotificationArea</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Notification area to show notifications in.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Notification area to show notifications in.</span>
 
 <span class="sd">    Will be projected on top of another QWidget which should be passed as an argument</span>
 <span class="sd">    to this class.</span>
@@ -9182,7 +9009,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
         <span class="n">use_queue</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">max_messages</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructor.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            target_widget : QtWidgets.QWidget</span>
@@ -9237,7 +9064,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
         <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">__delete_notification</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notification</span><span class="p">:</span> <span class="n">Notification</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Close and destroy the supplied notification.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Close and destroy the supplied notification.&quot;&quot;&quot;</span>
         <span class="n">notification</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span><span class="o">.</span><span class="n">removeWidget</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
 
@@ -9255,7 +9082,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
 
     <span class="c1"># Public functions</span>
     <span class="k">def</span> <span class="nf">set_entry_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">FadeInValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">250</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to appear.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to appear.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            effect : {&#39;fade_in&#39;, None}</span>
@@ -9280,7 +9107,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
         <span class="bp">self</span><span class="o">.</span><span class="n">entry_effect_duration</span> <span class="o">=</span> <span class="n">duration</span>
 
     <span class="k">def</span> <span class="nf">set_exit_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">FadeOutValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to disappear.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to disappear.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            effect : {&#39;fade_out&#39;, None}</span>
@@ -9314,7 +9141,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
         <span class="n">autohide</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">buttontext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Display a notification.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Display a notification.</span>
 
 <span class="sd">        If a queue is used, then the notification will only be shown directly</span>
 <span class="sd">        if the number of notifications shown is smaller than max_messages.</span>
@@ -9379,7 +9206,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
 
     <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notification</span><span class="p">:</span> <span class="n">Notification</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Removes a notification.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Removes a notification.</span>
 
 <span class="sd">        Arguments:</span>
 <span class="sd">            notification : Notification (default: None)</span>
@@ -9412,14 +9239,14 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
 
     <span class="c1"># Internal Qt functions</span>
     <span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Internal QT function (do not call directly).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Internal QT function (do not call directly).&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">target_resize_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
         <span class="n">newsize</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="n">newsize</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pe</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Redefinition of paintEvent.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Redefinition of paintEvent.</span>
 
 <span class="sd">        Makes class NotificationArea available in style sheets.</span>
 <span class="sd">        Internal QT function (do not call directly).</span>
@@ -9529,7 +9356,7 @@ The number of messages to display at the same time.</p></td>
     <span class="n">use_queue</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">max_messages</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Constructor.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Constructor.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        target_widget : QtWidgets.QWidget</span>
@@ -9677,7 +9504,7 @@ will be shown.</p></td>
     <span class="n">autohide</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">buttontext</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Display a notification.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Display a notification.</span>
 
 <span class="sd">    If a queue is used, then the notification will only be shown directly</span>
 <span class="sd">    if the number of notifications shown is smaller than max_messages.</span>
@@ -9735,7 +9562,7 @@ Internal QT function (do not call directly).</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pe</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Redefinition of paintEvent.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Redefinition of paintEvent.</span>
 
 <span class="sd">    Makes class NotificationArea available in style sheets.</span>
 <span class="sd">    Internal QT function (do not call directly).</span>
@@ -9806,7 +9633,7 @@ object is retrieved by using self.sender()</p></td>
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
 <span class="k">def</span> <span class="nf">remove</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notification</span><span class="p">:</span> <span class="n">Notification</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Removes a notification.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes a notification.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        notification : Notification (default: None)</span>
@@ -9861,7 +9688,7 @@ object is retrieved by using self.sender()</p></td>
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Internal QT function (do not call directly).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Internal QT function (do not call directly).&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">target_resize_event</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
     <span class="n">newsize</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">size</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="n">newsize</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
@@ -9939,7 +9766,7 @@ The duration of the effect in milliseconds</p></td>
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_entry_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">FadeInValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">250</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to appear.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to appear.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        effect : {&#39;fade_in&#39;, None}</span>
@@ -10035,7 +9862,7 @@ The duration of the effect in milliseconds</p></td>
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_exit_effect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">effect</span><span class="p">:</span> <span class="n">FadeOutValue</span><span class="p">,</span> <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to disappear.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the effect with which the notifications are to disappear.</span>
 
 <span class="sd">    Arguments:</span>
 <span class="sd">        effect : {&#39;fade_out&#39;, None}</span>
@@ -10132,7 +9959,7 @@ PopupInfo            (<a class="autorefs autorefs-internal" title="prettyqt.widg
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/popupinfo.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PopupInfo</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Dialog</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Dialog overlay to show some info to user.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Dialog overlay to show some info to user.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
@@ -10426,7 +10253,7 @@ PopupInfo            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 
 <h3 id="prettyqt.custom_widgets.roundprogressbar.RoundProgressBar" class="doc doc-heading">
         <code>
-RoundProgressBar            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+RoundProgressBar            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -10459,7 +10286,7 @@ RoundProgressBar            (<span title="prettyqt.widgets.widget.Widget">Widget
         <span class="bp">self</span><span class="o">.</span><span class="n">number_format</span> <span class="o">=</span> <span class="s2">&quot;%p%&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">decimals</span> <span class="o">=</span> <span class="mi">1</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_flags</span><span class="p">:</span> <span class="n">ValueTypeStr</span> <span class="o">=</span> <span class="s2">&quot;percent&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gradient_data</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">minimum</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span>
@@ -10997,7 +10824,7 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span>
 
     <span class="k">def</span> <span class="nf">set_movement_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">MovementModeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set movement mode.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set movement mode.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            mode: movement mode for the main window</span>
@@ -11536,7 +11363,7 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/spanslider.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_movement_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">MovementModeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set movement mode.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set movement mode.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: movement mode for the main window</span>
@@ -11709,7 +11536,7 @@ SubsequenceCompleter            (<a class="autorefs autorefs-internal" title="pr
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/subsequencecompleter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SubsequenceCompleter</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Completer</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;QCompleter specialised for subsequence matching.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;QCompleter specialised for subsequence matching.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
@@ -11884,7 +11711,7 @@ SubsequenceCompleter            (<a class="autorefs autorefs-internal" title="pr
 
 <h3 id="prettyqt.custom_widgets.timeline.Timeline" class="doc doc-heading">
         <code>
-Timeline            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+Timeline            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -12451,7 +12278,7 @@ SOFTWARE.</p>
 
 <h3 id="prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner" class="doc doc-heading">
         <code>
-BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
+BaseWaitingSpinner            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
         </code>
 
 
@@ -12967,10 +12794,10 @@ WaitingSpinner            (<a class="autorefs autorefs-internal" title="prettyqt
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

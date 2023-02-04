@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/objbrowser.html">
       
+      
+        <link rel="prev" href="network.html">
+      
+      
+        <link rel="next" href="positioning.html">
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
-        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -56,7 +61,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -134,7 +139,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -205,17 +210,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_2">
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -371,7 +377,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -1130,6 +1136,7 @@
                   
 
 
+
 <h1 id="objbrowser-module">objbrowser module</h1>
 
 
@@ -1233,7 +1240,7 @@
     <span class="n">obj_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
     <span class="n">log_exceptions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Create a function that returns an empty string in case of an exception.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a function that returns an empty string in case of an exception.</span>
 
 <span class="sd">    :param fnobj_fn: function that will be wrapped</span>
 <span class="sd">    :type obj_fn: object to basestring function</span>
@@ -1242,7 +1249,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">data_fn</span><span class="p">(</span><span class="n">tree_item</span><span class="p">:</span> <span class="n">treeitem</span><span class="o">.</span><span class="n">TreeItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Call the obj_fn(tree_item.obj).</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Call the obj_fn(tree_item.obj).</span>
 
 <span class="sd">        Returns empty string in case of an error</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1318,7 +1325,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowser</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">MainWindow</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Object browser main application window.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Object browser main application window.&quot;&quot;&quot;</span>
 
     <span class="n">_app</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># Reference to the global application.</span>
     <span class="n">_browsers</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">ObjectBrowser</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Keep lists of browser windows.</span>
@@ -1467,7 +1474,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
             <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">first_row_index</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_add_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Adds the browser window to the list of browser references.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds the browser window to the list of browser references.</span>
 
 <span class="sd">        If a None is present in the list it is inserted at that position, otherwise</span>
 <span class="sd">        it is appended to the list. The index number is returned.</span>
@@ -1486,7 +1493,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="k">return</span> <span class="n">idx</span>
 
     <span class="k">def</span> <span class="nf">_setup_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create the main window actions.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create the main window actions.&quot;&quot;&quot;</span>
         <span class="c1"># Show/hide callable objects</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">toggle_callable_action</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">(</span>
             <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Show callable attributes&quot;</span><span class="p">,</span>
@@ -1528,7 +1535,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="bp">self</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">refresh_action_f5</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_settings_group_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">postfix</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Construct a group name for the persistent settings.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct a group name for the persistent settings.</span>
 
 <span class="sd">        Because the columns in the main table are extendible, we must store the settings</span>
 <span class="sd">        in a different group if a different combination of columns is used. Therefore the</span>
@@ -1541,7 +1548,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">columns_hash</span><span class="si">}</span><span class="s2">_win</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">postfix</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="k">def</span> <span class="nf">_write_model_settings</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Write the model settings to the persistent store.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write the model settings to the persistent store.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Writing model settings for window: </span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="p">)</span>
         <span class="n">new</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">auto_refresh</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span><span class="p">,</span>
@@ -1558,19 +1565,19 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
     <span class="k">def</span> <span class="nf">_update_details</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">current_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">,</span> <span class="n">_previous_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Show the object details in the editor given an index.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show the object details in the editor given an index.&quot;&quot;&quot;</span>
         <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">current_index</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_details_for_item</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_change_details_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_button_id</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Change the field that is displayed in the details pane.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Change the field that is displayed in the details pane.&quot;&quot;&quot;</span>
         <span class="c1"># logger.debug(&quot;_change_details_field: {}&quot;.format(_button_id))</span>
         <span class="n">current_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
         <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">current_index</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_update_details_for_item</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_update_details_for_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Show the object details in the editor given an tree_item.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show the object details in the editor given an tree_item.&quot;&quot;&quot;</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">edit_stylesheet</span><span class="p">()</span> <span class="k">as</span> <span class="n">ss</span><span class="p">:</span>
             <span class="n">ss</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
@@ -1590,7 +1597,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
             <span class="bp">self</span><span class="o">.</span><span class="n">editor</span><span class="o">.</span><span class="n">set_wrap_mode</span><span class="p">(</span><span class="s2">&quot;boundary_or_anywhere&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">toggle_auto_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checked</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Toggle auto-refresh on/off.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Toggle auto-refresh on/off.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">checked</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Auto-refresh on. Rate </span><span class="si">%g</span><span class="s2"> seconds&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -1600,7 +1607,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="bp">self</span><span class="o">.</span><span class="n">_auto_refresh</span> <span class="o">=</span> <span class="n">checked</span>
 
     <span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Called when the window is closed.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when the window is closed.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;closeEvent&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_write_model_settings</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
@@ -1618,14 +1625,14 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="n">selection_model</span><span class="o">.</span><span class="n">currentChanged</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_details</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-        <span class="sd">&quot;&quot;&quot;Set the reference in the browser list to None.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the reference in the browser list to None.&quot;&quot;&quot;</span>
         <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Closed window </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">browse</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Create and run object browser.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create and run object browser.</span>
 
 <span class="sd">        For this, the following three steps are done:</span>
 <span class="sd">        1) Create QApplication object if it doesn&#39;t yet exist</span>
@@ -1683,7 +1690,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">browse</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create and run object browser.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and run object browser.</span>
 
 <span class="sd">    For this, the following three steps are done:</span>
 <span class="sd">    1) Create QApplication object if it doesn&#39;t yet exist</span>
@@ -1724,7 +1731,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Called when the window is closed.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Called when the window is closed.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;closeEvent&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_write_model_settings</span><span class="p">()</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
@@ -1742,7 +1749,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
     <span class="n">selection_model</span><span class="o">.</span><span class="n">currentChanged</span><span class="o">.</span><span class="n">disconnect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_update_details</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
-    <span class="sd">&quot;&quot;&quot;Set the reference in the browser list to None.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the reference in the browser list to None.&quot;&quot;&quot;</span>
     <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_browsers</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;Closed window </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_instance_nr</span><span class="p">)</span>
@@ -1771,7 +1778,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">toggle_auto_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checked</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Toggle auto-refresh on/off.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Toggle auto-refresh on/off.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">checked</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Auto-refresh on. Rate </span><span class="si">%g</span><span class="s2"> seconds&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_rate</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_refresh_timer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
@@ -1859,7 +1866,7 @@ ObjectBrowserTreeItem            (<span title="prettyqt.utils.treeitem.TreeItem"
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeItem</span><span class="p">(</span><span class="n">treeitem</span><span class="o">.</span><span class="n">TreeItem</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Tree node class that can be used to build trees of objects.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tree node class that can be used to build trees of objects.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1881,7 +1888,7 @@ ObjectBrowserTreeItem            (<span title="prettyqt.utils.treeitem.TreeItem"
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_special_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return true if the item represents a dunder attribute.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return true if the item represents a dunder attribute.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">is_attribute</span>
             <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">obj_name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;__&quot;</span><span class="p">)</span>
@@ -1890,7 +1897,7 @@ ObjectBrowserTreeItem            (<span title="prettyqt.utils.treeitem.TreeItem"
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_callable_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return true if the items is an attribute and it is callable.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return true if the items is an attribute and it is callable.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_attribute</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1983,7 +1990,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeModel</span><span class="p">(</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItemModel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Model that provides an interface to an objectree that is build of tree items.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Model that provides an interface to an objectree that is build of tree items.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1992,7 +1999,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <span class="n">attr_cols</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructor.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            obj (Any): Object to inspect</span>
@@ -2094,7 +2101,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
             <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="nf">fetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Fetches the children given the model index of a parent node.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetches the children given the model index of a parent node.</span>
 
 <span class="sd">        Adds the children to the parent.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2115,7 +2122,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">inspected_node_is_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return True if the inspected node is visible.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the inspected node is visible.</span>
 
 <span class="sd">        In that case an invisible root node has been added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2123,15 +2130,15 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">root_item</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;The root ObjectBrowserTreeItem.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The root ObjectBrowserTreeItem.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span>
 
     <span class="k">def</span> <span class="nf">root_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>  <span class="c1"># TODO: needed?</span>
-        <span class="sd">&quot;&quot;&quot;The index that returns the root element (same as an invalid index).&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The index that returns the root element (same as an invalid index).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">inspected_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;The model index that point to the inspectedItem.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;The model index that point to the inspectedItem.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2144,7 +2151,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
             <span class="k">return</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">_fetch_object_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">obj_path</span><span class="p">):</span>  <span class="c1"># -&gt; List[ObjectBrowserTreeItem]:</span>
-        <span class="sd">&quot;&quot;&quot;Fetches the children of a Python object.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetches the children of a Python object.</span>
 
 <span class="sd">        Returns: list of ObjectBrowserTreeItems</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2199,7 +2206,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <span class="k">return</span> <span class="n">tree_items</span>
 
     <span class="k">def</span> <span class="nf">_aux_refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Auxiliary function for refresh_tree that recursively refreshes the tree nodes.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Auxiliary function for refresh_tree that recursively refreshes the tree nodes.</span>
 
 <span class="sd">        If the underlying Python object has been changed, we don&#39;t want to delete the old</span>
 <span class="sd">        tree model and create a new one from scratch because this loses all information</span>
@@ -2246,7 +2253,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
                 <span class="c1"># Only when node names are equal is _aux_refresh_tree called recursively.</span>
                 <span class="k">assert</span> <span class="p">(</span>
                     <span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span>
-                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;equal sanity check failed </span><span class="si">{</span><span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;equal sanity check failed </span><span class="si">{</span><span class="n">i2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
                 <span class="k">for</span> <span class="n">old_row</span><span class="p">,</span> <span class="n">new_row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)):</span>
                     <span class="n">old_items</span><span class="p">[</span><span class="n">old_row</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">new_items</span><span class="p">[</span><span class="n">new_row</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span>
                     <span class="n">child_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">old_row</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">tree_index</span><span class="p">)</span>
@@ -2257,7 +2264,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
                 <span class="c1"># child nodes which indices must be removed by Qt, otherwise it crashes.</span>
                 <span class="k">assert</span> <span class="p">(</span>
                     <span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span>
-                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;replace sanity check failed </span><span class="si">{</span><span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;replace sanity check failed </span><span class="si">{</span><span class="n">i2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
 
                 <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>  <span class="c1"># row number of first that will be removed</span>
                 <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># row number of last element after insertion</span>
@@ -2286,7 +2293,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid tag: </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Refreshes the tree model from the underlying root object.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Refreshes the tree model from the underlying root object.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;refresh_tree: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="p">)</span>
 
@@ -2443,7 +2450,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
     <span class="n">attr_cols</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Constructor.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Constructor.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        obj (Any): Object to inspect</span>
@@ -2535,7 +2542,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Fetches the children given the model index of a parent node.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetches the children given the model index of a parent node.</span>
 
 <span class="sd">    Adds the children to the parent.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2683,7 +2690,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">inspected_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;The model index that point to the inspectedItem.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The model index that point to the inspectedItem.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
@@ -2749,7 +2756,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Refreshes the tree model from the underlying root object.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Refreshes the tree model from the underlying root object.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;refresh_tree: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="p">)</span>
 
@@ -2806,7 +2813,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">root_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>  <span class="c1"># TODO: needed?</span>
-    <span class="sd">&quot;&quot;&quot;The index that returns the root element (same as an invalid index).&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;The index that returns the root element (same as an invalid index).&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 </code></pre></div>
         </details>
@@ -2878,7 +2885,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeProxyModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Proxy model that overrides the sorting and can filter out items.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Proxy model that overrides the sorting and can filter out items.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -2886,7 +2893,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
         <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Constructor.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Constructor.</span>
 
 <span class="sd">        :param show_callable_attrs: if True the callables objects,</span>
 <span class="sd">            i.e. objects (such as function) that  a __call__ method,</span>
@@ -2906,7 +2913,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">first_item_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the first child of the root item.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the first child of the root item.&quot;&quot;&quot;</span>
         <span class="c1"># We cannot just call the same function of the source model because the first node</span>
         <span class="c1"># there may be hidden.</span>
         <span class="n">source_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
@@ -2915,7 +2922,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <span class="k">return</span> <span class="n">first_item_index</span>
 
     <span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">source_parent_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Return true if the item should be included in the model.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return true if the item should be included in the model.&quot;&quot;&quot;</span>
         <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">source_parent_index</span><span class="p">)</span>
         <span class="n">tree_item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">source_row</span><span class="p">)</span>
 
@@ -2930,7 +2937,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span>
 
     <span class="k">def</span> <span class="nf">set_show_callables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Show/hide show_callables which have a __call__ attribute.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show/hide show_callables which have a __call__ attribute.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_callables: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="o">=</span> <span class="n">show_callables</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
@@ -2939,7 +2946,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span>
 
     <span class="k">def</span> <span class="nf">set_show_special_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Show/hide special attributes which begin with an underscore.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show/hide special attributes which begin with an underscore.&quot;&quot;&quot;</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_special_attrs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="o">=</span> <span class="n">show_special_attrs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
@@ -2990,7 +2997,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
     <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Constructor.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Constructor.</span>
 
 <span class="sd">    :param show_callable_attrs: if True the callables objects,</span>
 <span class="sd">        i.e. objects (such as function) that  a __call__ method,</span>
@@ -3029,7 +3036,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">source_parent_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Return true if the item should be included in the model.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return true if the item should be included in the model.&quot;&quot;&quot;</span>
     <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">source_parent_index</span><span class="p">)</span>
     <span class="n">tree_item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">source_row</span><span class="p">)</span>
 
@@ -3064,7 +3071,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">first_item_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return the first child of the root item.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the first child of the root item.&quot;&quot;&quot;</span>
     <span class="c1"># We cannot just call the same function of the source model because the first node</span>
     <span class="c1"># there may be hidden.</span>
     <span class="n">source_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
@@ -3098,7 +3105,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_show_callables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Show/hide show_callables which have a __call__ attribute.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show/hide show_callables which have a __call__ attribute.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_callables: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_show_callables</span> <span class="o">=</span> <span class="n">show_callables</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
@@ -3127,7 +3134,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <details class="quote">
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_show_special_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Show/hide special attributes which begin with an underscore.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show/hide special attributes which begin with an underscore.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_special_attrs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_show_special_attrs</span> <span class="o">=</span> <span class="n">show_special_attrs</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">invalidateFilter</span><span class="p">()</span>
@@ -3249,10 +3256,10 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/syntaxhighlighters.html">
       
+      
+        <link rel="prev" href="svg.html">
+      
+      
+        <link rel="next" href="webenginecore.html">
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
-        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -56,7 +61,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -134,7 +139,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -205,17 +210,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_2">
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -455,7 +461,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -1196,6 +1202,7 @@
                   
 
 
+
 <h1 id="syntaxhighlighters-module">syntaxhighlighters module</h1>
 
 
@@ -1262,7 +1269,7 @@ HighlightRule        </code>
 
     <div class="doc doc-contents ">
 
-      <p>HighlightRule(regex: 'str | list[str]' = '', color: 'str' = 'black', italic: 'bool' = False, bold: 'bool' = False, minimal: 'bool' = False, font_size: 'float | None' = None, nth: 'int' = 0, fmt: 'gui.TextCharFormat' = TextCharFormat(2))</p>
+      <p>HighlightRule(regex: 'str | list[str]' = '', color: 'str' = 'black', italic: 'bool' = False, bold: 'bool' = False, minimal: 'bool' = False, font_size: 'float | None' = None, nth: 'int' = 0, fmt: 'gui.TextCharFormat' = <factory>)</p>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/highlightrule.py</code></summary>
@@ -1276,7 +1283,7 @@ HighlightRule        </code>
     <span class="n">font_size</span><span class="p">:</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">nth</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">compiled</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">fmt</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">()</span>
+    <span class="n">fmt</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">()</span>
@@ -1435,7 +1442,7 @@ JsonHighlighter            (<a class="autorefs autorefs-internal" title="prettyq
           <summary>Source code in <code>prettyqt/syntaxhighlighters/jsonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JsonHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Highlight a block of code using the rules outlined in the Constructor.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Highlight a block of code using the rules outlined in the Constructor.&quot;&quot;&quot;</span>
         <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">BRACKETS</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">SYMBOL_FORMAT</span><span class="p">)</span>
 
@@ -1476,7 +1483,7 @@ JsonHighlighter            (<a class="autorefs autorefs-internal" title="prettyq
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/jsonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Highlight a block of code using the rules outlined in the Constructor.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Highlight a block of code using the rules outlined in the Constructor.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">BRACKETS</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFormat</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">m</span><span class="o">.</span><span class="n">span</span><span class="p">()[</span><span class="mi">0</span><span class="p">],</span> <span class="n">SYMBOL_FORMAT</span><span class="p">)</span>
 
@@ -1722,7 +1729,7 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PygmentsHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Syntax highlighter that uses Pygments for parsing.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Syntax highlighter that uses Pygments for parsing.&quot;&quot;&quot;</span>
 
     <span class="c1"># ---------------------------------------------------------------------------</span>
     <span class="c1">#  &quot;QSyntaxHighlighter&quot; interface</span>
@@ -1742,7 +1749,7 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(lexer=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">!r}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Highlight a block of text.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Highlight a block of text.&quot;&quot;&quot;</span>
         <span class="n">prev_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span><span class="o">.</span><span class="n">previous</span><span class="p">()</span><span class="o">.</span><span class="n">userData</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">prev_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">_saved_state_stack</span> <span class="o">=</span> <span class="n">prev_data</span><span class="o">.</span><span class="n">syntax_stack</span>
@@ -1775,7 +1782,7 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
         <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
 
 <span class="sd">        The classes in the stylesheet should correspond to those generated by:</span>
 
@@ -1793,13 +1800,13 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
     <span class="c1"># ---------------------------------------------------------------------------</span>
 
     <span class="k">def</span> <span class="nf">_clear_caches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Clear caches for brushes and formats.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear caches for brushes and formats.&quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_format</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
 
     <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>
     <span class="k">def</span> <span class="nf">_get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Returns a QTextCharFormat for token or None.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a QTextCharFormat for token or None.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_format_from_document</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1808,13 +1815,13 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
     <span class="k">def</span> <span class="nf">_get_format_from_document</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token from document.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token from document.&quot;&quot;&quot;</span>
         <span class="n">code</span><span class="p">,</span> <span class="n">html</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_formatter</span><span class="o">.</span><span class="n">_format_lines</span><span class="p">([(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;dummy&quot;</span><span class="p">)]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="o">.</span><span class="n">setHtml</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="p">)</span><span class="o">.</span><span class="n">charFormat</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_get_format_from_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">Style</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token by reading a Pygments style.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token by reading a Pygments style.&quot;&quot;&quot;</span>
         <span class="n">result</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">()</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">token_style</span> <span class="o">=</span> <span class="n">style</span><span class="o">.</span><span class="n">style_for_token</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
@@ -1842,7 +1849,7 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
 
     <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>
     <span class="k">def</span> <span class="nf">_get_brush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return a brush for the color.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a brush for the color.&quot;&quot;&quot;</span>
         <span class="n">qcolor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">color</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">qcolor</span><span class="p">)</span>
 </code></pre></div>
@@ -1879,7 +1886,7 @@ PygmentsHighlighter            (<a class="autorefs autorefs-internal" title="pre
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Highlight a block of text.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Highlight a block of text.&quot;&quot;&quot;</span>
     <span class="n">prev_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span><span class="o">.</span><span class="n">previous</span><span class="p">()</span><span class="o">.</span><span class="n">userData</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">prev_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">_saved_state_stack</span> <span class="o">=</span> <span class="n">prev_data</span><span class="o">.</span><span class="n">syntax_stack</span>
@@ -1930,7 +1937,7 @@ other, i.e. they cannot be used in conjunction.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
 
 <span class="sd">    The classes in the stylesheet should correspond to those generated by:</span>
 
@@ -1983,7 +1990,7 @@ below), and use it to continue processing the current line.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_tokens_unprocessed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stack</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">,)):</span>
-    <span class="sd">&quot;&quot;&quot;Split ``text`` into (tokentype, text) pairs.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Split ``text`` into (tokentype, text) pairs.</span>
 
 <span class="sd">    Monkeypatched to store the final stack on the object itself.</span>
 
@@ -2068,7 +2075,7 @@ below), and use it to continue processing the current line.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">qstring_length</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Tries to compute what the length of an utf16-encoded QString would be.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Tries to compute what the length of an utf16-encoded QString would be.&quot;&quot;&quot;</span>
     <span class="n">utf16_text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf16&quot;</span><span class="p">)</span>
     <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">utf16_text</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
     <span class="c1"># Remove Byte order mark.</span>
@@ -2151,12 +2158,12 @@ PythonHighlighter            (<a class="autorefs autorefs-internal" title="prett
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PythonHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Syntax highlighter for the Python language.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Syntax highlighter for the Python language.&quot;&quot;&quot;</span>
 
     <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Apply syntax highlighting to the given block of text.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Apply syntax highlighting to the given block of text.&quot;&quot;&quot;</span>
         <span class="c1"># Do other syntax formatting</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -2171,7 +2178,7 @@ PythonHighlighter            (<a class="autorefs autorefs-internal" title="prett
         <span class="n">in_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Do highlighting of multi-line strings.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Do highlighting of multi-line strings.</span>
 
 <span class="sd">        ``delimiter`` should be a</span>
 <span class="sd">        ``core.RegExp`` for triple-single-quotes or triple-double-quotes, and</span>
@@ -2244,7 +2251,7 @@ PythonHighlighter            (<a class="autorefs autorefs-internal" title="prett
         <details class="quote">
           <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Apply syntax highlighting to the given block of text.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply syntax highlighting to the given block of text.&quot;&quot;&quot;</span>
     <span class="c1"># Do other syntax formatting</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -2287,7 +2294,7 @@ inside a multi-line string when this function is finished.</p>
     <span class="n">in_state</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
     <span class="n">style</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCharFormat</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Do highlighting of multi-line strings.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Do highlighting of multi-line strings.</span>
 
 <span class="sd">    ``delimiter`` should be a</span>
 <span class="sd">    ``core.RegExp`` for triple-single-quotes or triple-double-quotes, and</span>
@@ -2929,10 +2936,10 @@ YamlHighlighter            (<a class="autorefs autorefs-internal" title="prettyq
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

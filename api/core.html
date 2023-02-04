@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/core.html">
       
+      
+        <link rel="prev" href="constants.html">
+      
+      
+        <link rel="next" href="custom_delegates.html">
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
-        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -56,7 +61,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -134,7 +139,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -205,17 +210,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_2">
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -273,7 +279,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -2492,6 +2498,7 @@
                   
 
 
+
 <h1 id="core-module">core module</h1>
 
 
@@ -2591,7 +2598,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">DirectionStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set animation direction.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set animation direction.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            direction: animation direction</span>
@@ -2604,7 +2611,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <span class="bp">self</span><span class="o">.</span><span class="n">setDirection</span><span class="p">(</span><span class="n">DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectionStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get the current animation direction.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current animation direction.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            animation direction</span>
@@ -2612,7 +2619,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <span class="k">return</span> <span class="n">DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get the current animation state.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current animation state.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            animation state</span>
@@ -2620,7 +2627,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <span class="k">return</span> <span class="n">STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span> <span class="o">=</span> <span class="s2">&quot;keep&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Start the animation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start the animation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            policy: animation policy</span>
@@ -2633,7 +2640,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <span class="bp">self</span><span class="o">.</span><span class="n">start</span><span class="p">(</span><span class="n">DELETION_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">restart_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span> <span class="o">=</span> <span class="s2">&quot;keep&quot;</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Restart the animation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Restart the animation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            policy: animation policy</span>
@@ -2693,7 +2700,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectionStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get the current animation direction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current animation direction.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        animation direction</span>
@@ -2739,7 +2746,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get the current animation state.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current animation state.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        animation state</span>
@@ -2804,7 +2811,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">restart_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span> <span class="o">=</span> <span class="s2">&quot;keep&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Restart the animation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Restart the animation.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: animation policy</span>
@@ -2874,7 +2881,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">DirectionStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set animation direction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set animation direction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        direction: animation direction</span>
@@ -2944,7 +2951,7 @@ AbstractAnimation            (<span title="PySide6.QtCore.QAbstractAnimation">QA
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractanimation.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">start_animation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">DeletionPolicyStr</span> <span class="o">=</span> <span class="s2">&quot;keep&quot;</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Start the animation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Start the animation.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: animation policy</span>
@@ -3035,7 +3042,7 @@ AbstractItemModel            (<span title="PySide6.QtCore.QAbstractItemModel">QA
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span><span class="si">}</span><span class="s2"> rows&quot;</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return amount of rows.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return amount of rows.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
 
     <span class="c1"># causes issues with PySide2</span>
@@ -3063,7 +3070,7 @@ AbstractItemModel            (<span title="PySide6.QtCore.QAbstractItemModel">QA
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">change_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Context manager to change the layout.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Context manager to change the layout.</span>
 
 <span class="sd">        wraps calls with correct signals</span>
 <span class="sd">        emitted at beginning: layoutAboutToBeChanged</span>
@@ -3076,7 +3083,7 @@ AbstractItemModel            (<span title="PySide6.QtCore.QAbstractItemModel">QA
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">reset_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Context manager to reset the model.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Context manager to reset the model.</span>
 
 <span class="sd">        wraps calls with correct signals</span>
 <span class="sd">        emitted at beginning: beginResetModel</span>
@@ -3197,7 +3204,7 @@ AbstractItemModel            (<span title="PySide6.QtCore.QAbstractItemModel">QA
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return amount of rows.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return amount of rows.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
 </code></pre></div>
         </details>
@@ -3230,7 +3237,7 @@ emitted at end: layoutChanged</p>
           <summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">change_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Context manager to change the layout.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager to change the layout.</span>
 
 <span class="sd">    wraps calls with correct signals</span>
 <span class="sd">    emitted at beginning: layoutAboutToBeChanged</span>
@@ -3276,7 +3283,7 @@ emitted at end: endResetModel</p>
           <summary>Source code in <code>prettyqt/core/abstractitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">reset_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Context manager to reset the model.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager to reset the model.</span>
 
 <span class="sd">    wraps calls with correct signals</span>
 <span class="sd">    emitted at beginning: beginResetModel</span>
@@ -3376,7 +3383,7 @@ Collator            (<span title="PySide6.QtCore.QCollator">QCollator</span>)
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">Locale</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">locale</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">set_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set case sensitivity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set case sensitivity.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            state: case sensitive</span>
@@ -3390,7 +3397,7 @@ Collator            (<span title="PySide6.QtCore.QCollator">QCollator</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">setCaseSensitivity</span><span class="p">(</span><span class="n">sensitivity</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">is_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return case sensitivity.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return case sensitivity.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            case sensitivity</span>
@@ -3449,7 +3456,7 @@ Collator            (<span title="PySide6.QtCore.QCollator">QCollator</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/collator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">is_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return case sensitivity.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return case sensitivity.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        case sensitivity</span>
@@ -3499,7 +3506,7 @@ Collator            (<span title="PySide6.QtCore.QCollator">QCollator</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/collator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_case_sensitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set case sensitivity.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set case sensitivity.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        state: case sensitive</span>
@@ -3593,7 +3600,7 @@ CommandLineParser            (<span title="PySide6.QtCore.QCommandLineParser">QC
           <summary>Source code in <code>prettyqt/core/commandlineparser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">CommandLineParser</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QCommandLineParser</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_single_dash_word_option_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SingleDashWordStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the single dash word option mode.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the single dash word option mode.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            mode: single dash word option mode</span>
@@ -3606,7 +3613,7 @@ CommandLineParser            (<span title="PySide6.QtCore.QCommandLineParser">QC
         <span class="bp">self</span><span class="o">.</span><span class="n">setSingleDashWordOptionMode</span><span class="p">(</span><span class="n">SINGLE_DASH_WORD</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">set_options_after_positional_arguments_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SingleDashWordStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the options after positional arguments mode.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the options after positional arguments mode.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            mode: options after positional arguments mode</span>
@@ -3701,7 +3708,7 @@ CommandLineParser            (<span title="PySide6.QtCore.QCommandLineParser">QC
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/commandlineparser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_options_after_positional_arguments_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SingleDashWordStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the options after positional arguments mode.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the options after positional arguments mode.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: options after positional arguments mode</span>
@@ -3771,7 +3778,7 @@ CommandLineParser            (<span title="PySide6.QtCore.QCommandLineParser">QC
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/commandlineparser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_single_dash_word_option_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">SingleDashWordStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the single dash word option mode.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the single dash word option mode.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: single dash word option mode</span>
@@ -3865,7 +3872,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">DataStream</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QDataStream</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="n">ByteOrderStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set byte order.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set byte order.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            order: byte order to use</span>
@@ -3878,7 +3885,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <span class="bp">self</span><span class="o">.</span><span class="n">setByteOrder</span><span class="p">(</span><span class="n">BYTE_ORDER</span><span class="p">[</span><span class="n">order</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ByteOrderStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return byte order.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return byte order.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            byte order</span>
@@ -3886,7 +3893,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <span class="k">return</span> <span class="n">BYTE_ORDER</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">byteOrder</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">StatusStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set status.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set status.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            status: status to use</span>
@@ -3899,7 +3906,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <span class="bp">self</span><span class="o">.</span><span class="n">setStatus</span><span class="p">(</span><span class="n">STATUS</span><span class="p">[</span><span class="n">status</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return status.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return status.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            status</span>
@@ -3907,7 +3914,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">FloatingPointPrecisionStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set floating point precision.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set floating point precision.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            precision: floating point precision</span>
@@ -3920,7 +3927,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <span class="bp">self</span><span class="o">.</span><span class="n">setFloatingPointPrecision</span><span class="p">(</span><span class="n">FLOATING_POINT_PRECISION</span><span class="p">[</span><span class="n">precision</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatingPointPrecisionStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return floating point precision.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return floating point precision.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            floating point precision</span>
@@ -3996,7 +4003,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ByteOrderStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return byte order.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return byte order.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        byte order</span>
@@ -4042,7 +4049,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FloatingPointPrecisionStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return floating point precision.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return floating point precision.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        floating point precision</span>
@@ -4088,7 +4095,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return status.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return status.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        status</span>
@@ -4153,7 +4160,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_byte_order</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">:</span> <span class="n">ByteOrderStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set byte order.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set byte order.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        order: byte order to use</span>
@@ -4223,7 +4230,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_floating_point_precision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">precision</span><span class="p">:</span> <span class="n">FloatingPointPrecisionStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set floating point precision.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set floating point precision.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        precision: floating point precision</span>
@@ -4293,7 +4300,7 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/datastream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">StatusStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set status.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set status.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        status: status to use</span>
@@ -4380,7 +4387,7 @@ DeadlineTimer            (<span title="PySide6.QtCore.QDeadlineTimer">QDeadlineT
           <summary>Source code in <code>prettyqt/core/deadlinetimer.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">DeadlineTimer</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QDeadlineTimer</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the timer type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the timer type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            typ: timer type</span>
@@ -4393,7 +4400,7 @@ DeadlineTimer            (<span title="PySide6.QtCore.QDeadlineTimer">QDeadlineT
         <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current timer type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current timer type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            timer type</span>
@@ -4446,7 +4453,7 @@ DeadlineTimer            (<span title="PySide6.QtCore.QDeadlineTimer">QDeadlineT
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/deadlinetimer.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current timer type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current timer type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        timer type</span>
@@ -4511,7 +4518,7 @@ DeadlineTimer            (<span title="PySide6.QtCore.QDeadlineTimer">QDeadlineT
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/deadlinetimer.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the timer type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the timer type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: timer type</span>
@@ -4621,7 +4628,7 @@ EasingCurve            (<span title="PySide6.QtCore.QEasingCurve">QEasingCurve</
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">customType</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TypeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set easing curve type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set easing curve type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            typ: easing curve type</span>
@@ -4634,7 +4641,7 @@ EasingCurve            (<span title="PySide6.QtCore.QEasingCurve">QEasingCurve</
         <span class="bp">self</span><span class="o">.</span><span class="n">setType</span><span class="p">(</span><span class="n">TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get the current easing curve type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current easing curve type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            easing curve type</span>
@@ -4691,7 +4698,7 @@ EasingCurve            (<span title="PySide6.QtCore.QEasingCurve">QEasingCurve</
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get the current easing curve type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current easing curve type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        easing curve type</span>
@@ -4757,7 +4764,7 @@ EasingCurve            (<span title="PySide6.QtCore.QEasingCurve">QEasingCurve</
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/easingcurve.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">TypeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set easing curve type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set easing curve type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: easing curve type</span>
@@ -4847,7 +4854,7 @@ ElapsedTimer            (<span title="PySide6.QtCore.QElapsedTimer">QElapsedTime
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">get_clock_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClockTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current clock type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current clock type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            clock type</span>
@@ -4901,7 +4908,7 @@ ElapsedTimer            (<span title="PySide6.QtCore.QElapsedTimer">QElapsedTime
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/elapsedtimer.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_clock_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClockTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current clock type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current clock type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        clock type</span>
@@ -4995,7 +5002,7 @@ FileDevice            (<span title="PySide6.QtCore.QFileDevice">QFileDevice</spa
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileName</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Set file time.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set file time.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            file_time: file time to set</span>
@@ -5011,7 +5018,7 @@ FileDevice            (<span title="PySide6.QtCore.QFileDevice">QFileDevice</spa
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setFileTime</span><span class="p">(</span><span class="n">file_time</span><span class="p">,</span> <span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">get_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current file time.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current file time.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            file time</span>
@@ -5024,7 +5031,7 @@ FileDevice            (<span title="PySide6.QtCore.QFileDevice">QFileDevice</spa
         <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="n">toPython</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileErrorStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return file error status.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return file error status.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            file error status</span>
@@ -5079,7 +5086,7 @@ FileDevice            (<span title="PySide6.QtCore.QFileDevice">QFileDevice</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/filedevice.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileErrorStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return file error status.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return file error status.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        file error status</span>
@@ -5125,7 +5132,7 @@ FileDevice            (<span title="PySide6.QtCore.QFileDevice">QFileDevice</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/filedevice.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current file time.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current file time.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        file time</span>
@@ -5201,7 +5208,7 @@ FileDevice            (<span title="PySide6.QtCore.QFileDevice">QFileDevice</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/filedevice.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Set file time.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set file time.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        file_time: file time to set</span>
@@ -5371,7 +5378,7 @@ OperatingSystemVersion            (<span title="PySide6.QtCore.QOperatingSystemV
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OsTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get current os type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current os type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            current os type</span>
@@ -5469,7 +5476,7 @@ OperatingSystemVersion            (<span title="PySide6.QtCore.QOperatingSystemV
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/operatingsystemversion.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">OsTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get current os type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get current os type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current os type</span>
@@ -5568,7 +5575,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Process</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QProcess</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_read_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">ProcessChannelStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the input channel channel.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the input channel channel.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            channel: channel to set</span>
@@ -5587,7 +5594,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">closeReadChannel</span><span class="p">(</span><span class="n">PROCESS_CHANNELS</span><span class="p">[</span><span class="n">channel</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">set_input_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">InputChannelModeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the input channel mode.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the input channel mode.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            mode: mode to set</span>
@@ -5603,7 +5610,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
         <span class="k">return</span> <span class="n">INPUT_CHANNEL_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">inputChannelMode</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_process_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ProcessChannelModeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the process channel mode.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the process channel mode.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            mode: mode to set</span>
@@ -5619,7 +5626,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
         <span class="k">return</span> <span class="n">PROCESS_CHANNEL_MODES</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">processChannelMode</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">ProcessStateStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the process state.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the process state.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            state: state to set</span>
@@ -5723,7 +5730,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_input_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">InputChannelModeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the input channel mode.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the input channel mode.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: mode to set</span>
@@ -5793,7 +5800,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_process_channel_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ProcessChannelModeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the process channel mode.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the process channel mode.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mode: mode to set</span>
@@ -5863,7 +5870,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_read_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">channel</span><span class="p">:</span> <span class="n">ProcessChannelStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the input channel channel.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the input channel channel.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        channel: channel to set</span>
@@ -5933,7 +5940,7 @@ Process            (<span title="PySide6.QtCore.QProcess">QProcess</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/process.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">ProcessStateStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the process state.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the process state.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        state: state to set</span>
@@ -6128,7 +6135,7 @@ RegularExpression            (<span title="PySide6.QtCore.QRegularExpression">QR
 
     <span class="k">def</span> <span class="nf">split</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">maxsplit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">()</span>
-        <span class="c1"># result = list()</span>
+        <span class="c1"># result = []</span>
         <span class="c1"># matches = self.global_match(string)</span>
         <span class="c1"># matches = list(matches)</span>
         <span class="c1"># if 0 &lt; maxsplit &lt;= len(matches):</span>
@@ -6413,7 +6420,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">set_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the default format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the default format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            fmt: the default format to use</span>
@@ -6427,7 +6434,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FormatStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return default settings format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return default settings format.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            default settings format</span>
@@ -6435,7 +6442,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
         <span class="k">return</span> <span class="n">FORMAT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">cls</span><span class="o">.</span><span class="n">defaultFormat</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">get_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScopeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return scope.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return scope.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            scope</span>
@@ -6444,7 +6451,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the path to the settings file.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the path to the settings file.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            fmt: the default format to use</span>
@@ -6461,7 +6468,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">edit_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Context manager for setting groups.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Context manager for setting groups.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            prefix: setting prefix for group</span>
@@ -6472,7 +6479,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">write_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Context manager for writing arrays.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Context manager for writing arrays.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            prefix: prefix for settings array</span>
@@ -6486,7 +6493,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">read_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Context manager for reading arrays.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Context manager for reading arrays.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            prefix: prefix for settings array</span>
@@ -6610,7 +6617,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">edit_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Context manager for setting groups.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager for setting groups.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        prefix: setting prefix for group</span>
@@ -6663,7 +6670,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">get_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FormatStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return default settings format.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return default settings format.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        default settings format</span>
@@ -6709,7 +6716,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScopeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return scope.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return scope.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        scope</span>
@@ -6765,7 +6772,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">read_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Context manager for reading arrays.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager for reading arrays.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        prefix: prefix for settings array</span>
@@ -6837,7 +6844,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">set_default_format</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the default format.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the default format.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fmt: the default format to use</span>
@@ -6917,7 +6924,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the path to the settings file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the path to the settings file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fmt: the default format to use</span>
@@ -6987,7 +6994,7 @@ Settings            (<span title="PySide6.QtCore.QSettings">QSettings</span>)
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
 <span class="k">def</span> <span class="nf">write_array</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prefix</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Context manager for writing arrays.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Context manager for writing arrays.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        prefix: prefix for settings array</span>
@@ -7083,7 +7090,7 @@ SocketNotifier            (<span title="PySide6.QtCore.QSocketNotifier">QSocketN
     <span class="c1">#     return f&quot;{type(self).__name__}({self.socket()}, {self.type()})&quot;</span>
 
     <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return socket event type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return socket event type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            socket event type</span>
@@ -7136,7 +7143,7 @@ SocketNotifier            (<span title="PySide6.QtCore.QSocketNotifier">QSocketN
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/socketnotifier.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return socket event type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return socket event type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        socket event type</span>
@@ -7231,7 +7238,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TextStream</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QTextStream</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">FieldAlignmentStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the field alignment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the field alignment.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            alignment: field alignment</span>
@@ -7244,7 +7251,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <span class="bp">self</span><span class="o">.</span><span class="n">setFieldAlignment</span><span class="p">(</span><span class="n">FIELD_ALIGNMENT</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldAlignmentStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get current field alignment.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current field alignment.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            current field alignment</span>
@@ -7252,7 +7259,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <span class="k">return</span> <span class="n">FIELD_ALIGNMENT</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fieldAlignment</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">StatusStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the status.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the status.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            status: status</span>
@@ -7265,7 +7272,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <span class="bp">self</span><span class="o">.</span><span class="n">setStatus</span><span class="p">(</span><span class="n">STATUS</span><span class="p">[</span><span class="n">status</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get current status.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current status.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            current status</span>
@@ -7273,7 +7280,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notation</span><span class="p">:</span> <span class="n">RealNumberNotationStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the real number notation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the real number notation.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            notation: real number notation</span>
@@ -7286,7 +7293,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <span class="bp">self</span><span class="o">.</span><span class="n">setRealNumberNotation</span><span class="p">(</span><span class="n">REAL_NUMBER_NOTATION</span><span class="p">[</span><span class="n">notation</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealNumberNotationStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get current real number notation.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current real number notation.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            current real number notation</span>
@@ -7351,7 +7358,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FieldAlignmentStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get current field alignment.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get current field alignment.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current field alignment</span>
@@ -7397,7 +7404,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RealNumberNotationStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get current real number notation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get current real number notation.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current real number notation</span>
@@ -7443,7 +7450,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get current status.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get current status.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        current status</span>
@@ -7510,7 +7517,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_field_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">FieldAlignmentStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the field alignment.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the field alignment.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        alignment: field alignment</span>
@@ -7580,7 +7587,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_real_number_notation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">notation</span><span class="p">:</span> <span class="n">RealNumberNotationStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the real number notation.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the real number notation.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        notation: real number notation</span>
@@ -7650,7 +7657,7 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/textstream.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_status</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">StatusStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the status.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the status.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        status: status</span>
@@ -7751,7 +7758,7 @@ TimeLine            (<span title="PySide6.QtCore.QTimeLine">QTimeLine</span>)
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">DirectionStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the direction.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the direction.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            direction: direction</span>
@@ -7764,7 +7771,7 @@ TimeLine            (<span title="PySide6.QtCore.QTimeLine">QTimeLine</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">setDirection</span><span class="p">(</span><span class="n">DIRECTION</span><span class="p">[</span><span class="n">direction</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectionStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current direction.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current direction.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            direction</span>
@@ -7772,7 +7779,7 @@ TimeLine            (<span title="PySide6.QtCore.QTimeLine">QTimeLine</span>)
         <span class="k">return</span> <span class="n">DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">direction</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current state.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current state.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            state</span>
@@ -7844,7 +7851,7 @@ TimeLine            (<span title="PySide6.QtCore.QTimeLine">QTimeLine</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/timeline.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DirectionStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current direction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current direction.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        direction</span>
@@ -7891,7 +7898,7 @@ TimeLine            (<span title="PySide6.QtCore.QTimeLine">QTimeLine</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/timeline.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StateStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current state.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current state.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        state</span>
@@ -7957,7 +7964,7 @@ TimeLine            (<span title="PySide6.QtCore.QTimeLine">QTimeLine</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/timeline.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">DirectionStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the direction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the direction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        direction: direction</span>
@@ -8057,7 +8064,7 @@ Timer            (<span title="PySide6.QtCore.QTimer">QTimer</span>)
         <span class="k">return</span> <span class="n">timer</span>
 
     <span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the timer type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the timer type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            typ: timer type</span>
@@ -8070,7 +8077,7 @@ Timer            (<span title="PySide6.QtCore.QTimer">QTimer</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">setTimerType</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">TIMER_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current timer type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current timer type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            timer type</span>
@@ -8140,7 +8147,7 @@ Timer            (<span title="PySide6.QtCore.QTimer">QTimer</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current timer type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current timer type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        timer type</span>
@@ -8208,7 +8215,7 @@ Timer            (<span title="PySide6.QtCore.QTimer">QTimer</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/timer.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">TimerTypeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the timer type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the timer type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: timer type</span>
@@ -8333,7 +8340,7 @@ Url            (<span title="PySide6.QtCore.QUrl">QUrl</span>)
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toString</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">to_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get pathlib object from the URL.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get pathlib object from the URL.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Path</span>
@@ -8408,7 +8415,7 @@ Url            (<span title="PySide6.QtCore.QUrl">QUrl</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/url.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">to_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get pathlib object from the URL.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get pathlib object from the URL.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Path</span>
@@ -8552,15 +8559,15 @@ VersionNumber            (<span title="PySide6.QtCore.QVersionNumber">QVersionNu
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">sys</span><span class="o">.</span><span class="n">version_info</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;An integer representing the major version.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;An integer representing the major version.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">majorVersion</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;An integer representing the minor version.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;An integer representing the minor version.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minorVersion</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">micro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;An integer representing the micro version.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;An integer representing the micro version.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">microVersion</span><span class="p">()</span>
 </code></pre></div>
         </details>
@@ -8606,7 +8613,7 @@ VersionNumber            (<span title="PySide6.QtCore.QVersionNumber">QVersionNu
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">major</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;An integer representing the major version.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An integer representing the major version.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">majorVersion</span><span class="p">()</span>
 </code></pre></div>
         </details>
@@ -8633,7 +8640,7 @@ VersionNumber            (<span title="PySide6.QtCore.QVersionNumber">QVersionNu
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">micro</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;An integer representing the micro version.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An integer representing the micro version.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">microVersion</span><span class="p">()</span>
 </code></pre></div>
         </details>
@@ -8660,7 +8667,7 @@ VersionNumber            (<span title="PySide6.QtCore.QVersionNumber">QVersionNu
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/versionnumber.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">minor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;An integer representing the minor version.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;An integer representing the minor version.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">minorVersion</span><span class="p">()</span>
 </code></pre></div>
         </details>
@@ -8751,7 +8758,7 @@ XmlStreamReader            (<span title="PySide6.QtCore.QXmlStreamReader">QXmlSt
         <span class="k">raise</span> <span class="ne">StopIteration</span>
 
     <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileErrorStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return file error status.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return file error status.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            file error status</span>
@@ -8759,7 +8766,7 @@ XmlStreamReader            (<span title="PySide6.QtCore.QXmlStreamReader">QXmlSt
         <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">get_token_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get the current token type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current token type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            token type</span>
@@ -8767,7 +8774,7 @@ XmlStreamReader            (<span title="PySide6.QtCore.QXmlStreamReader">QXmlSt
         <span class="k">return</span> <span class="n">TOKEN_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tokenType</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">read_next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Read the next token and returns its type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Read the next token and returns its type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            token type</span>
@@ -8822,7 +8829,7 @@ XmlStreamReader            (<span title="PySide6.QtCore.QXmlStreamReader">QXmlSt
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/xmlstreamreader.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileErrorStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return file error status.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return file error status.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        file error status</span>
@@ -8868,7 +8875,7 @@ XmlStreamReader            (<span title="PySide6.QtCore.QXmlStreamReader">QXmlSt
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/xmlstreamreader.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_token_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get the current token type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current token type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        token type</span>
@@ -8914,7 +8921,7 @@ XmlStreamReader            (<span title="PySide6.QtCore.QXmlStreamReader">QXmlSt
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/xmlstreamreader.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">read_next</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Read the next token and returns its type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read the next token and returns its type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        token type</span>
@@ -9037,10 +9044,10 @@ XmlStreamReader            (<span title="PySide6.QtCore.QXmlStreamReader">QXmlSt
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>

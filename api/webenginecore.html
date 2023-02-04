@@ -10,8 +10,14 @@
       
         <link rel="canonical" href="https://phil65.github.io/PrettyQt/api/webenginecore.html">
       
+      
+        <link rel="prev" href="syntaxhighlighters.html">
+      
+      
+        <link rel="next" href="webenginewidgets.html">
+      
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.4">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.11">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.80dcb947.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
-        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
       
       
 
@@ -56,7 +61,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -134,7 +139,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -205,17 +210,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_2">
+        <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_2">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -469,7 +475,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -1340,6 +1346,7 @@
                   
 
 
+
 <h1 id="webenginecore-module">webenginecore module</h1>
 
 
@@ -1429,7 +1436,7 @@ WebEngineDownloadRequest        </code>
         <span class="k">return</span> <span class="n">DOWNLOAD_STATE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">state</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">SavePageFormatStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the save page format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the save page format.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            fmt: save page format for the layout</span>
@@ -1442,7 +1449,7 @@ WebEngineDownloadRequest        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setSavePageFormat</span><span class="p">(</span><span class="n">SAVE_PAGE_FORMAT</span><span class="p">[</span><span class="n">fmt</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SavePageFormatStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current save page format.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current save page format.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Save page format</span>
@@ -1498,7 +1505,7 @@ WebEngineDownloadRequest        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginedownloadrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SavePageFormatStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current save page format.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current save page format.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Save page format</span>
@@ -1564,7 +1571,7 @@ WebEngineDownloadRequest        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginedownloadrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">SavePageFormatStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the save page format.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the save page format.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fmt: save page format for the layout</span>
@@ -1673,7 +1680,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">postData</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">MethodStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set method this WebEngine request is using.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set method this WebEngine request is using.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            method: method</span>
@@ -1686,7 +1693,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
         <span class="bp">self</span><span class="o">.</span><span class="n">setMethod</span><span class="p">(</span><span class="n">METHODS</span><span class="p">[</span><span class="n">method</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get the method this WebEngine request is using.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the method this WebEngine request is using.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            method</span>
@@ -1741,7 +1748,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginehttprequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get the method this WebEngine request is using.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the method this WebEngine request is using.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        method</span>
@@ -1809,7 +1816,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginehttprequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">MethodStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set method this WebEngine request is using.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set method this WebEngine request is using.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        method: method</span>
@@ -1912,7 +1919,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEnginePage</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;A web engine page holds the HTML document contents, link history + actions.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A web engine page holds the HTML document contents, link history + actions.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
@@ -1934,7 +1941,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
 
 <span class="sd">        Clears the Page and loads the URL.</span>
 
@@ -1963,7 +1970,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">SizeF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contentsSize</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Load the URL.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
 <span class="sd">        Loads the specified url and displays it.</span>
 
@@ -1980,7 +1987,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the zoom factor for the Page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the zoom factor for the Page.</span>
 
 <span class="sd">        Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</span>
 
@@ -1996,7 +2003,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
 
 <span class="sd">        Finds the specified string, subString, in the page, using the given options.</span>
 <span class="sd">        The findTextFinished() signal is emitted when a string search is completed.</span>
@@ -2032,7 +2039,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <span class="bp">self</span><span class="o">.</span><span class="n">findText</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">LifecycleStateStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set lifecycle state.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set lifecycle state.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            state: lifecycle state</span>
@@ -2045,7 +2052,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <span class="bp">self</span><span class="o">.</span><span class="n">setLifecycleState</span><span class="p">(</span><span class="n">LIFECYCLE_STATE</span><span class="p">[</span><span class="n">state</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifecycleStateStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Get the current lifecycle state.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current lifecycle state.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            lifecycle state</span>
@@ -2107,7 +2114,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
     <span class="c1">#     return self.chooseFiles(FILE_SELECTION_MODE[mode], old_files, mimetypes)</span>
 
     <span class="k">def</span> <span class="nf">mousedown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">btn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Simulate a mousedown event on the targeted element.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Simulate a mousedown event on the targeted element.</span>
 
 <span class="sd">        :param selector: A CSS3 selector to targeted element.</span>
 <span class="sd">        :param btn: The number of mouse button.</span>
@@ -2117,7 +2124,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">runJavaScript</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">            (function () </span><span class="se">{{</span><span class="s2"></span>
+<span class="s2">            (function () </span><span class="se">{{</span>
 <span class="s2">                var element = document.querySelector(</span><span class="si">{</span><span class="n">selector</span><span class="si">!r}</span><span class="s2">);</span>
 <span class="s2">                var evt = document.createEvent(&quot;MouseEvents&quot;);</span>
 <span class="s2">                evt.initMouseEvent(&quot;mousedown&quot;, true, true, window,</span>
@@ -2129,7 +2136,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_input_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the value of the input matched by given selector.&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the value of the input matched by given selector.&quot;&quot;&quot;</span>
         <span class="n">script</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;document.querySelector(</span><span class="si">{</span><span class="n">selector</span><span class="si">!r}</span><span class="s1">).setAttribute(&quot;value&quot;, &quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;)&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runJavaScript</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
 </code></pre></div>
@@ -2217,7 +2224,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
     <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
 
 <span class="sd">    Finds the specified string, subString, in the page, using the given options.</span>
 <span class="sd">    The findTextFinished() signal is emitted when a string search is completed.</span>
@@ -2296,7 +2303,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifecycleStateStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Get the current lifecycle state.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current lifecycle state.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        lifecycle state</span>
@@ -2355,7 +2362,7 @@ to display the new URL.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Load the URL.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
 
@@ -2400,7 +2407,7 @@ to display the new URL.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mousedown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">btn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Simulate a mousedown event on the targeted element.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate a mousedown event on the targeted element.</span>
 
 <span class="sd">    :param selector: A CSS3 selector to targeted element.</span>
 <span class="sd">    :param btn: The number of mouse button.</span>
@@ -2410,7 +2417,7 @@ to display the new URL.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">runJavaScript</span><span class="p">(</span>
         <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">        (function () </span><span class="se">{{</span><span class="s2"></span>
+<span class="s2">        (function () </span><span class="se">{{</span>
 <span class="s2">            var element = document.querySelector(</span><span class="si">{</span><span class="n">selector</span><span class="si">!r}</span><span class="s2">);</span>
 <span class="s2">            var evt = document.createEvent(&quot;MouseEvents&quot;);</span>
 <span class="s2">            evt.initMouseEvent(&quot;mousedown&quot;, true, true, window,</span>
@@ -2448,7 +2455,7 @@ to display the new URL.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_input_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the value of the input matched by given selector.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the value of the input matched by given selector.&quot;&quot;&quot;</span>
     <span class="n">script</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;document.querySelector(</span><span class="si">{</span><span class="n">selector</span><span class="si">!r}</span><span class="s1">).setAttribute(&quot;value&quot;, &quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;)&#39;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">runJavaScript</span><span class="p">(</span><span class="n">script</span><span class="p">)</span>
 </code></pre></div>
@@ -2510,7 +2517,7 @@ to display the new URL.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">LifecycleStateStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set lifecycle state.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set lifecycle state.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        state: lifecycle state</span>
@@ -2567,7 +2574,7 @@ to display the new URL.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
 
 <span class="sd">    Clears the Page and loads the URL.</span>
 
@@ -2624,7 +2631,7 @@ to display the new URL.</p>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the zoom factor for the Page.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the zoom factor for the Page.</span>
 
 <span class="sd">    Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</span>
 
@@ -2712,7 +2719,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
           <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineProfile</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineProfile</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            policy: persistent cookie policy</span>
@@ -2725,7 +2732,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
         <span class="bp">self</span><span class="o">.</span><span class="n">setPersistentCookiesPolicy</span><span class="p">(</span><span class="n">PERSISTENT_COOKIE_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current persistent cookie policy.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current persistent cookie policy.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Persistent cookie policy</span>
@@ -2733,7 +2740,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
         <span class="k">return</span> <span class="n">PERSISTENT_COOKIE_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">persistentCookiesPolicy</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">HttpCacheTypeStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the http cache type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the http cache type.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            typ: http cache type</span>
@@ -2746,7 +2753,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
         <span class="bp">self</span><span class="o">.</span><span class="n">setHttpCacheType</span><span class="p">(</span><span class="n">HTTP_CACHE_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HttpCacheTypeStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current http cache type.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current http cache type.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Http cache type</span>
@@ -2802,7 +2809,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HttpCacheTypeStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current http cache type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current http cache type.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Http cache type</span>
@@ -2848,7 +2855,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current persistent cookie policy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current persistent cookie policy.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Persistent cookie policy</span>
@@ -2914,7 +2921,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">HttpCacheTypeStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the http cache type.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the http cache type.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: http cache type</span>
@@ -2984,7 +2991,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: persistent cookie policy</span>
@@ -3073,7 +3080,7 @@ WebEngineScript            (<span title="PySide6.QtWebEngineCore.QWebEngineScrip
           <summary>Source code in <code>prettyqt/webenginecore/webenginescript.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineScript</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineScript</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">InjectionPointStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set injection point.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set injection point.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            point: injection point to use</span>
@@ -3086,7 +3093,7 @@ WebEngineScript            (<span title="PySide6.QtWebEngineCore.QWebEngineScrip
         <span class="bp">self</span><span class="o">.</span><span class="n">setInjectionPoint</span><span class="p">(</span><span class="n">INJECTION_POINT</span><span class="p">[</span><span class="n">point</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InjectionPointStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return injection point.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return injection point.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            injection point</span>
@@ -3139,7 +3146,7 @@ WebEngineScript            (<span title="PySide6.QtWebEngineCore.QWebEngineScrip
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginescript.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InjectionPointStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return injection point.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return injection point.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        injection point</span>
@@ -3204,7 +3211,7 @@ WebEngineScript            (<span title="PySide6.QtWebEngineCore.QWebEngineScrip
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginescript.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">InjectionPointStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set injection point.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set injection point.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        point: injection point to use</span>
@@ -3315,7 +3322,7 @@ WebEngineSettings        </code>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">resetAttribute</span><span class="p">(</span><span class="n">WEB_ATTRIBUTES</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the unknown url scheme policy.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the unknown url scheme policy.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            policy: unknown url scheme policy</span>
@@ -3328,7 +3335,7 @@ WebEngineSettings        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setUnknownUrlSchemePolicy</span><span class="p">(</span><span class="n">UNKNOWN_URL_SCHEME_POLICY</span><span class="p">[</span><span class="n">policy</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return current unknown url scheme policy.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current unknown url scheme policy.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            Unknown url scheme policy</span>
@@ -3336,7 +3343,7 @@ WebEngineSettings        </code>
         <span class="k">return</span> <span class="n">UNKNOWN_URL_SCHEME_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">unknownUrlSchemePolicy</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the actual font family to family for the specified generic family, which.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the actual font family to family for the specified generic family, which.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            which: family to set</span>
@@ -3350,7 +3357,7 @@ WebEngineSettings        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontFamily</span><span class="p">(</span><span class="n">FONT_FAMILY</span><span class="p">[</span><span class="n">which</span><span class="p">],</span> <span class="n">family</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the actual font family for the specified generic font family.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the actual font family for the specified generic font family.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            family: generic font family</span>
@@ -3361,7 +3368,7 @@ WebEngineSettings        </code>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">fontFamily</span><span class="p">(</span><span class="n">FONT_FAMILY</span><span class="p">[</span><span class="n">family</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">set_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set the font size for type to size in pixels.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the font size for type to size in pixels.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            typ: font size type</span>
@@ -3375,7 +3382,7 @@ WebEngineSettings        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">setFontSize</span><span class="p">(</span><span class="n">FONT_SIZE</span><span class="p">[</span><span class="n">typ</span><span class="p">],</span> <span class="n">size</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return the default font size for type in pixels.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the default font size for type in pixels.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            typ: font size type</span>
@@ -3455,7 +3462,7 @@ WebEngineSettings        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return the actual font family for the specified generic font family.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the actual font family for the specified generic font family.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        family: generic font family</span>
@@ -3523,7 +3530,7 @@ WebEngineSettings        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return the default font size for type in pixels.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the default font size for type in pixels.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: font size type</span>
@@ -3572,7 +3579,7 @@ WebEngineSettings        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return current unknown url scheme policy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current unknown url scheme policy.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Unknown url scheme policy</span>
@@ -3643,7 +3650,7 @@ WebEngineSettings        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the actual font family to family for the specified generic family, which.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the actual font family to family for the specified generic family, which.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        which: family to set</span>
@@ -3720,7 +3727,7 @@ WebEngineSettings        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the font size for type to size in pixels.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the font size for type to size in pixels.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        typ: font size type</span>
@@ -3791,7 +3798,7 @@ WebEngineSettings        </code>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set the unknown url scheme policy.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the unknown url scheme policy.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        policy: unknown url scheme policy</span>
@@ -3891,7 +3898,7 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
         <span class="bp">self</span><span class="o">.</span><span class="n">setName</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">name</span><span class="o">.</span><span class="n">encode</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">set_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">syntax</span><span class="p">:</span> <span class="n">SyntaxStr</span><span class="p">):</span>
-        <span class="sd">&quot;&quot;&quot;Set syntax.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set syntax.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            syntax: syntax to use</span>
@@ -3904,7 +3911,7 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
         <span class="bp">self</span><span class="o">.</span><span class="n">setSyntax</span><span class="p">(</span><span class="n">SYNTAX</span><span class="p">[</span><span class="n">syntax</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">get_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SyntaxStr</span><span class="p">:</span>
-        <span class="sd">&quot;&quot;&quot;Return syntax.</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return syntax.</span>
 
 <span class="sd">        Returns:</span>
 <span class="sd">            syntax</span>
@@ -3959,7 +3966,7 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webengineurlscheme.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SyntaxStr</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Return syntax.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return syntax.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        syntax</span>
@@ -4025,7 +4032,7 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webengineurlscheme.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">syntax</span><span class="p">:</span> <span class="n">SyntaxStr</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Set syntax.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set syntax.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        syntax: syntax to use</span>
@@ -4154,10 +4161,10 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.5bf1dace.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.078830c0.min.js"></script>
+      <script src="../assets/javascripts/bundle.6df46069.min.js"></script>
       
     
   </body>
