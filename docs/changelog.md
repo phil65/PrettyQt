@@ -1,3 +1,9 @@
+## v0.193.3 (2023-04-04)
+
+### Fix
+
+- get rid of sre_constants warnings
+
 ## v0.193.2 (2023-02-04)
 
 ### Fix
