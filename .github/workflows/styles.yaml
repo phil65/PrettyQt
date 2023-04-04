@@ -22,7 +22,7 @@ jobs:
           - name: MacOS
             extension: "*.dylib"
             runs-on: macos-latest
-        python: ["3.9", "3.10"]
+        python: ["3.10", "3.11"]
         qt: [5.15.2]
 
     steps:

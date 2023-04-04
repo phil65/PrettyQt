@@ -9,7 +9,7 @@ jobs:
       fail-fast: false
       matrix:
         platform: [ubuntu-20.04, macos-10.15, windows-latest]
-        python-version: ["3.9", "3.10"]
+        python-version: ["3.10", "3.11"]
     runs-on: ${{ matrix.platform }}
     env:
       DISPLAY: ':99.0'
@@ -65,7 +65,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.9'
+        python-version: '3.10'
     - name: Build and publish
       uses: d1618033/gh-action-python-publish-using-poetry@master
       with:
