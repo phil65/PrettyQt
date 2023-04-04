@@ -1,8 +1,8 @@
 default_language_version:
-    python: python3.9
+    python: python3.10
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: v4.3.0
+  rev: v4.4.0
   hooks:
     # - id: trailing-whitespace
     - id: check-ast
@@ -17,13 +17,13 @@ repos:
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v2.37.0
+  rev: v2.42.1
   hooks:
     - id: commitizen
       stages: [commit-msg]
       additional_dependencies: [typing-extensions]
 - repo: https://github.com/ambv/black
-  rev: 22.10.0
+  rev: 23.3.0
   hooks:
     - id: black
 
@@ -35,8 +35,8 @@ repos:
 #       additional_dependencies: [pyside6, types-Deprecated, types-docutils, types-orjson, types-toml,  types-typed-ast, types-requests, types-python-dateutil]
 #       exclude: '(sciscintilla)\.py'
 
-- repo: https://gitlab.com/pycqa/flake8
-  rev: 3.9.2
+- repo: https://github.com/pycqa/flake8
+  rev: 6.0.0
   hooks:
     - id: flake8
       exclude: prettyqt/qt/
@@ -44,17 +44,17 @@ repos:
       args : ["--ignore=C408,E203,W503"]
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.112
+  rev: v0.0.260
   hooks:
     - id: ruff
 
 - repo: https://github.com/pycqa/pydocstyle
-  rev: 6.1.1
+  rev: 6.3.0
   hooks:
   - id: pydocstyle
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.2.2
+  rev: v3.3.1
   hooks:
   - id: pyupgrade
     args: [--py39-plus]
