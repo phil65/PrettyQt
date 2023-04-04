@@ -1,6 +1,10 @@
 from __future__ import annotations
 
-import sre_constants
+
+try:  # pragma: no cover
+    import re._constants as sre_constants
+except ImportError:  # Python < 3.11
+    import sre_constants  # type: ignore
 
 import regex as re
 
