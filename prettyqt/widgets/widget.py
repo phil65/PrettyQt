@@ -148,14 +148,6 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         self.setMaximumHeight(height)
 
     @property
-    def title(self) -> str:
-        return self.windowTitle()
-
-    @title.setter
-    def title(self, name: str):
-        self.setWindowTitle(name)
-
-    @property
     def enabled(self) -> bool:
         return self.isEnabled()
 
