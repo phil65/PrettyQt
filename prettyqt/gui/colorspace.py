@@ -81,6 +81,7 @@ class ColorSpace(QtGui.QColorSpace):
 
         Args:
             fn: transfer function to use
+            gamma: gamma value
 
         Raises:
             InvalidParamError: transfer function do not exist

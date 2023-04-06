@@ -241,28 +241,22 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
         customize: bool | None = None,
         window_title: bool | None = None,
     ) -> None:
-        if minimize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.WindowMinimizeButtonHint, minimize)
-        if maximize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.WindowMaximizeButtonHint, maximize)
-        if close is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.WindowCloseButtonHint, close)
-        if stay_on_top is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.WindowStaysOnTopHint, stay_on_top)
-        if frameless is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.FramelessWindowHint, frameless)
-        if window is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.Window, window)
-        if dialog is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.Dialog, dialog)
-        if tooltip is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.ToolTip, tooltip)
-        if tool is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.Tool, tool)
-        if customize is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.CustomizeWindowHint, customize)
-        if window_title is not None:
-            self.setWindowFlag(QtCore.Qt.WindowType.WindowTitleHint, window_title)
+        flags = {
+            minimize: QtCore.Qt.WindowType.WindowMinimizeButtonHint,
+            maximize: QtCore.Qt.WindowType.WindowMaximizeButtonHint,
+            close: QtCore.Qt.WindowType.WindowCloseButtonHint,
+            stay_on_top: QtCore.Qt.WindowType.WindowStaysOnTopHint,
+            frameless: QtCore.Qt.WindowType.FramelessWindowHint,
+            window: QtCore.Qt.WindowType.Window,
+            dialog: QtCore.Qt.WindowType.Dialog,
+            tooltip: QtCore.Qt.WindowType.ToolTip,
+            tool: QtCore.Qt.WindowType.Tool,
+            customize: QtCore.Qt.WindowType.CustomizeWindowHint,
+            window_title: QtCore.Qt.WindowType.WindowTitleHint,
+        }
+        for k, v in flags.items():
+            if k is not None:
+                self.setWindowFlag(v, k)
 
     def set_attribute(
         self, attribute: constants.WidgetAttributeStr, state: bool = True
@@ -443,24 +437,25 @@ class Widget(prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     ):
         if layout is None:
             return
-        if layout == "horizontal":
-            self.box = widgets.BoxLayout("horizontal")
-        elif layout == "vertical":
-            self.box = widgets.BoxLayout("vertical")
-        elif layout == "grid":
-            self.box = widgets.GridLayout()
-        elif layout == "form":
-            self.box = widgets.FormLayout()
-        elif layout == "stacked":
-            self.box = widgets.StackedLayout()
-        elif layout == "flow":
-            from prettyqt import custom_widgets
-
-            self.box = custom_widgets.FlowLayout()
-        elif isinstance(layout, QtWidgets.QLayout):
-            self.box = layout
-        else:
-            raise ValueError("Invalid Layout")
+        match layout:
+            case "horizontal":
+                self.box = widgets.BoxLayout("horizontal")
+            case "vertical":
+                self.box = widgets.BoxLayout("vertical")
+            case "grid":
+                self.box = widgets.GridLayout()
+            case "form":
+                self.box = widgets.FormLayout()
+            case "stacked":
+                self.box = widgets.StackedLayout()
+            case "flow":
+                from prettyqt import custom_widgets
+                self.box = custom_widgets.FlowLayout()
+            case _:
+                if isinstance(layout, QtWidgets.QLayout):
+                    self.box = layout
+                else:
+                    raise ValueError("Invalid Layout")
         self.setLayout(self.box)
         if margin is not None:
             self.box.set_margin(margin)

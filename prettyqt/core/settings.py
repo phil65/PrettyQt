@@ -75,7 +75,7 @@ class Settings(QtCore.QSettings):
         return settings
 
     def as_dict(self) -> dict[str, Any]:
-        return {k: v for k, v in self.items()}
+        return dict(self.items())
 
     def set_value(self, key: str, value):
         if not self.applicationName():
@@ -134,6 +134,7 @@ class Settings(QtCore.QSettings):
         Args:
             fmt: the default format to use
             scope: the scope to use
+            path: the path to set
 
         Raises:
             InvalidParamError: invalid format or scope
