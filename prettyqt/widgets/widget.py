@@ -144,14 +144,6 @@ class WidgetMixin(core.ObjectMixin):
             height = 16777215  # QtWidgets.QWIDGETSIZE_MAX
         self.setMaximumHeight(height)
 
-    @property
-    def enabled(self) -> bool:
-        return self.isEnabled()
-
-    @enabled.setter
-    def enabled(self, state: bool):
-        self.setEnabled(state)
-
     def set_enabled(self, enabled: bool = True) -> None:
         self.setEnabled(enabled)
 
