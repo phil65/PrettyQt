@@ -784,7 +784,7 @@
 
 <h3 id="prettyqt.webenginewidgets.webengineview.WebEngineView" class="doc doc-heading">
         <code>
-WebEngineView            (<span title="PySide6.QtWebEngineWidgets.QWebEngineView">QWebEngineView</span>)
+WebEngineView            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.WidgetMixin" href="widgets.html#prettyqt.widgets.widget.WidgetMixin">WidgetMixin</a>, <span title="PySide6.QtWebEngineWidgets.QWebEngineView">QWebEngineView</span>)
         </code>
 
 
@@ -796,7 +796,7 @@ WebEngineView            (<span title="PySide6.QtWebEngineWidgets.QWebEngineView
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginewidgets/webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineView</span><span class="p">(</span><span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEngineView</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">WidgetMixin</span><span class="p">,</span> <span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEngineView</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEnginePage</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>

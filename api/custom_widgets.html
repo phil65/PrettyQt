@@ -3385,7 +3385,7 @@
 
 <h3 id="prettyqt.custom_widgets.borderlayout.BorderLayout" class="doc doc-heading">
         <code>
-BorderLayout            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.layout.Layout" href="widgets.html#prettyqt.widgets.layout.Layout">Layout</a>)
+BorderLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</span>)
         </code>
 
 
@@ -4114,7 +4114,7 @@ ItemWrapper        </code>
 
 <h3 id="prettyqt.custom_widgets.codeeditor.CodeEditor" class="doc doc-heading">
         <code>
-CodeEditor            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.plaintextedit.PlainTextEdit" href="widgets.html#prettyqt.widgets.plaintextedit.PlainTextEdit">PlainTextEdit</a>)
+CodeEditor            (<span title="prettyqt.widgets.plaintextedit.PlainTextEdit">PlainTextEdit</span>)
         </code>
 
 
@@ -4252,7 +4252,7 @@ CodeEditor            (<a class="autorefs autorefs-internal" title="prettyqt.wid
 
 <h3 id="prettyqt.custom_widgets.codeeditor.LineNumberArea" class="doc doc-heading">
         <code>
-LineNumberArea            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+LineNumberArea            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -5132,7 +5132,7 @@ DataSetMeta            (<span title="type">type</span>)
 
 <h3 id="prettyqt.custom_widgets.elidedlabel.ElidedLabel" class="doc doc-heading">
         <code>
-ElidedLabel            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.frame.Frame" href="widgets.html#prettyqt.widgets.frame.Frame">Frame</a>)
+ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
         </code>
 
 
@@ -5328,7 +5328,7 @@ ElidedLabel            (<a class="autorefs autorefs-internal" title="prettyqt.wi
 
 <h3 id="prettyqt.custom_widgets.filechooserbutton.FileChooserButton" class="doc doc-heading">
         <code>
-FileChooserButton            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -5341,7 +5341,6 @@ FileChooserButton            (<a class="autorefs autorefs-internal" title="prett
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/filechooserbutton.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">FileChooserButton</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">):</span>
-
     <span class="n">value_changed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -5612,7 +5611,7 @@ FileChooserButton            (<a class="autorefs autorefs-internal" title="prett
 
 <h3 id="prettyqt.custom_widgets.flowlayout.FlowLayout" class="doc doc-heading">
         <code>
-FlowLayout            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.layout.Layout" href="widgets.html#prettyqt.widgets.layout.Layout">Layout</a>)
+FlowLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</span>)
         </code>
 
 
@@ -6048,7 +6047,7 @@ FlowLayout            (<a class="autorefs autorefs-internal" title="prettyqt.wid
 
 <h3 id="prettyqt.custom_widgets.framelesswindow.CustomTitleBar" class="doc doc-heading">
         <code>
-CustomTitleBar            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.frame.Frame" href="widgets.html#prettyqt.widgets.frame.Frame">Frame</a>)
+CustomTitleBar            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
         </code>
 
 
@@ -6157,7 +6156,7 @@ CustomTitleBar            (<a class="autorefs autorefs-internal" title="prettyqt
 
 <h3 id="prettyqt.custom_widgets.framelesswindow.EdgeGrip" class="doc doc-heading">
         <code>
-EdgeGrip            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+EdgeGrip            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -6175,27 +6174,28 @@ EdgeGrip            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="n">edges</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span> <span class="o">=</span> <span class="n">grip_size</span>
         <span class="c1"># Sides</span>
-        <span class="k">if</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;top&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeVerCursor</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeHorCursor</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;bottom&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeVerCursor</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeHorCursor</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
-        <span class="c1"># Corners</span>
-        <span class="k">elif</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;top_left&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeFDiagCursor</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;top_right&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeBDiagCursor</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;bottom_left&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeBDiagCursor</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">edges</span> <span class="o">==</span> <span class="s2">&quot;bottom_right&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeFDiagCursor</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">edges</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;top&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeVerCursor</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;right&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeHorCursor</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;bottom&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeVerCursor</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;left&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeHorCursor</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_size</span><span class="p">)</span>
+            <span class="c1"># Corners</span>
+            <span class="k">case</span> <span class="s2">&quot;top_left&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeFDiagCursor</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;top_right&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeBDiagCursor</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;bottom_left&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeBDiagCursor</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;bottom_right&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setCursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeFDiagCursor</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">LeftButton</span><span class="p">:</span>
@@ -6259,7 +6259,7 @@ EdgeGrip            (<a class="autorefs autorefs-internal" title="prettyqt.widge
 
 <h3 id="prettyqt.custom_widgets.framelesswindow.FramelessWindow" class="doc doc-heading">
         <code>
-FramelessWindow            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+FramelessWindow            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -6310,7 +6310,6 @@ FramelessWindow            (<a class="autorefs autorefs-internal" title="prettyq
         <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">grip_layout</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">platform</span> <span class="o">==</span> <span class="s2">&quot;win32&quot;</span><span class="p">:</span>
-
             <span class="bp">self</span><span class="o">.</span><span class="n">hwnd</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">winId</span><span class="p">()</span><span class="o">.</span><span class="fm">__int__</span><span class="p">()</span>
             <span class="n">window_style</span> <span class="o">=</span> <span class="n">win32gui</span><span class="o">.</span><span class="n">GetWindowLong</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hwnd</span><span class="p">,</span> <span class="n">GWL_STYLE</span><span class="p">)</span>
             <span class="n">win32gui</span><span class="o">.</span><span class="n">SetWindowLong</span><span class="p">(</span>
@@ -6597,7 +6596,7 @@ FramelessWindow            (<a class="autorefs autorefs-internal" title="prettyq
 
 <h3 id="prettyqt.custom_widgets.iconbrowser.IconListView" class="doc doc-heading">
         <code>
-IconListView            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.listview.ListView" href="widgets.html#prettyqt.widgets.listview.ListView">ListView</a>)
+IconListView            (<span title="prettyqt.widgets.listview.ListView">ListView</span>)
         </code>
 
 
@@ -7357,7 +7356,7 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
 
 <h3 id="prettyqt.custom_widgets.labeledslider.LabeledSlider" class="doc doc-heading">
         <code>
-LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+LabeledSlider            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -7370,7 +7369,6 @@ LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/labeledslider.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">LabeledSlider</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">):</span>
-
     <span class="n">value_changed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -7409,7 +7407,6 @@ LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
         <span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">style</span><span class="p">()</span>
@@ -7426,7 +7423,6 @@ LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.
 
         <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">v_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">:</span>
-
             <span class="c1"># get the size of the label</span>
             <span class="n">rect</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">get_text_rect</span><span class="p">(</span><span class="n">v_str</span><span class="p">)</span>
 
@@ -7506,7 +7502,6 @@ LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/labeledslider.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">):</span>
-
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
 
     <span class="n">style</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sl</span><span class="o">.</span><span class="n">style</span><span class="p">()</span>
@@ -7523,7 +7518,6 @@ LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.
 
     <span class="n">painter</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">v_str</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">levels</span><span class="p">:</span>
-
         <span class="c1"># get the size of the label</span>
         <span class="n">rect</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">get_text_rect</span><span class="p">(</span><span class="n">v_str</span><span class="p">)</span>
 
@@ -7626,7 +7620,7 @@ LabeledSlider            (<a class="autorefs autorefs-internal" title="prettyqt.
 
 <h3 id="prettyqt.custom_widgets.menurecentfiles.MenuRecentFiles" class="doc doc-heading">
         <code>
-MenuRecentFiles            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.menu.Menu" href="widgets.html#prettyqt.widgets.menu.Menu">Menu</a>)
+MenuRecentFiles            (<span title="prettyqt.widgets.menu.Menu">Menu</span>)
         </code>
 
 
@@ -8455,7 +8449,7 @@ MessageLabel            (<a class="autorefs autorefs-internal" title="prettyqt.w
 
 <h3 id="prettyqt.custom_widgets.notification.Notification" class="doc doc-heading">
         <code>
-Notification            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -8984,7 +8978,7 @@ Should not be called directly.</p>
 
 <h3 id="prettyqt.custom_widgets.notification.NotificationArea" class="doc doc-heading">
         <code>
-NotificationArea            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -9947,7 +9941,7 @@ The duration of the effect in milliseconds</p></td>
 
 <h3 id="prettyqt.custom_widgets.popupinfo.PopupInfo" class="doc doc-heading">
         <code>
-PopupInfo            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.dialog.Dialog" href="widgets.html#prettyqt.widgets.dialog.Dialog">Dialog</a>)
+PopupInfo            (<span title="prettyqt.widgets.dialog.Dialog">Dialog</span>)
         </code>
 
 
@@ -10254,7 +10248,7 @@ PopupInfo            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 
 <h3 id="prettyqt.custom_widgets.roundprogressbar.RoundProgressBar" class="doc doc-heading">
         <code>
-RoundProgressBar            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+RoundProgressBar            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -11712,7 +11706,7 @@ SubsequenceCompleter            (<a class="autorefs autorefs-internal" title="pr
 
 <h3 id="prettyqt.custom_widgets.timeline.Timeline" class="doc doc-heading">
         <code>
-Timeline            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+Timeline            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 
@@ -11725,7 +11719,6 @@ Timeline            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/timeline.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Timeline</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">):</span>
-
     <span class="n">position_changed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
     <span class="n">selection_changed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">VideoSample</span><span class="p">)</span>
 
@@ -12279,7 +12272,7 @@ SOFTWARE.</p>
 
 <h3 id="prettyqt.custom_widgets.waitingspinner.BaseWaitingSpinner" class="doc doc-heading">
         <code>
-BaseWaitingSpinner            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.Widget" href="widgets.html#prettyqt.widgets.widget.Widget">Widget</a>)
+BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
         </code>
 
 

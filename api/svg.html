@@ -757,7 +757,7 @@
 
 <h3 id="prettyqt.svg.svgrenderer.SvgRenderer" class="doc doc-heading">
         <code>
-SvgRenderer            (<span title="PySide6.QtSvg.QSvgRenderer">QSvgRenderer</span>)
+SvgRenderer            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="PySide6.QtSvg.QSvgRenderer">QSvgRenderer</span>)
         </code>
 
 
@@ -769,7 +769,7 @@ SvgRenderer            (<span title="PySide6.QtSvg.QSvgRenderer">QSvgRenderer</s
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/svg/svgrenderer.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SvgRenderer</span><span class="p">(</span><span class="n">QtSvg</span><span class="o">.</span><span class="n">QSvgRenderer</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SvgRenderer</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtSvg</span><span class="o">.</span><span class="n">QSvgRenderer</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">load_file</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>

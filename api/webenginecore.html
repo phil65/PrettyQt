@@ -1907,7 +1907,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
 
 <h3 id="prettyqt.webenginecore.webenginepage.WebEnginePage" class="doc doc-heading">
         <code>
-WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">QWebEnginePage</span>)
+WebEnginePage            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="PySide6.QtWebEngineCore.QWebEnginePage">QWebEnginePage</span>)
         </code>
 
 
@@ -1919,7 +1919,7 @@ WebEnginePage            (<span title="PySide6.QtWebEngineCore.QWebEnginePage">Q
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEnginePage</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEnginePage</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A web engine page holds the HTML document contents, link history + actions.&quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -2706,7 +2706,7 @@ to display the new URL.</p>
 
 <h3 id="prettyqt.webenginecore.webengineprofile.WebEngineProfile" class="doc doc-heading">
         <code>
-WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProfile">QWebEngineProfile</span>)
+WebEngineProfile            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="PySide6.QtWebEngineCore.QWebEngineProfile">QWebEngineProfile</span>)
         </code>
 
 
@@ -2718,7 +2718,7 @@ WebEngineProfile            (<span title="PySide6.QtWebEngineCore.QWebEngineProf
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineProfile</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineProfile</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineProfile</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineProfile</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
 

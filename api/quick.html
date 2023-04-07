@@ -481,22 +481,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.quick.quickitem.QuickItem" class="md-nav__link">
-    QuickItem
+  <a href="#prettyqt.quick.quickitem.QuickItemMixin" class="md-nav__link">
+    QuickItemMixin
   </a>
   
-    <nav class="md-nav" aria-label="QuickItem">
+    <nav class="md-nav" aria-label="QuickItemMixin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.quick.quickitem.QuickItem.get_transform_origin" class="md-nav__link">
+  <a href="#prettyqt.quick.quickitem.QuickItemMixin.get_transform_origin" class="md-nav__link">
     get_transform_origin()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.quick.quickitem.QuickItem.set_transform_origin" class="md-nav__link">
+  <a href="#prettyqt.quick.quickitem.QuickItemMixin.set_transform_origin" class="md-nav__link">
     set_transform_origin()
   </a>
   
@@ -734,22 +734,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.quick.quickitem.QuickItem" class="md-nav__link">
-    QuickItem
+  <a href="#prettyqt.quick.quickitem.QuickItemMixin" class="md-nav__link">
+    QuickItemMixin
   </a>
   
-    <nav class="md-nav" aria-label="QuickItem">
+    <nav class="md-nav" aria-label="QuickItemMixin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.quick.quickitem.QuickItem.get_transform_origin" class="md-nav__link">
+  <a href="#prettyqt.quick.quickitem.QuickItemMixin.get_transform_origin" class="md-nav__link">
     get_transform_origin()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.quick.quickitem.QuickItem.set_transform_origin" class="md-nav__link">
+  <a href="#prettyqt.quick.quickitem.QuickItemMixin.set_transform_origin" class="md-nav__link">
     set_transform_origin()
   </a>
   
@@ -918,13 +918,14 @@
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
 
-<h3 id="prettyqt.quick.quickitem.QuickItem" class="doc doc-heading">
+<h3 id="prettyqt.quick.quickitem.QuickItemMixin" class="doc doc-heading">
         <code>
-QuickItem            (<span title="PySide6.QtQuick.QQuickItem">QQuickItem</span>)
+QuickItemMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="prettyqt.qml.qmlparserstatus.QmlParserStatusMixin">QmlParserStatusMixin</span>)
         </code>
 
 
@@ -936,7 +937,7 @@ QuickItem            (<span title="PySide6.QtQuick.QQuickItem">QQuickItem</span>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/quick/quickitem.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickItem</span><span class="p">(</span><span class="n">QtQuick</span><span class="o">.</span><span class="n">QQuickItem</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickItemMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">qml</span><span class="o">.</span><span class="n">QmlParserStatusMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_children_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">childrenRect</span><span class="p">())</span>
 
@@ -990,7 +991,7 @@ QuickItem            (<span title="PySide6.QtQuick.QQuickItem">QQuickItem</span>
 
 
 
-<h4 id="prettyqt.quick.quickitem.QuickItem.get_transform_origin" class="doc doc-heading">
+<h4 id="prettyqt.quick.quickitem.QuickItemMixin.get_transform_origin" class="doc doc-heading">
 <code class="codehilite language-python"><span class="n">get_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TransformOriginStr</span></code>
 
 
@@ -1036,7 +1037,7 @@ QuickItem            (<span title="PySide6.QtQuick.QQuickItem">QQuickItem</span>
 
 
 
-<h4 id="prettyqt.quick.quickitem.QuickItem.set_transform_origin" class="doc doc-heading">
+<h4 id="prettyqt.quick.quickitem.QuickItemMixin.set_transform_origin" class="doc doc-heading">
 <code class="codehilite language-python"><span class="n">set_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">TransformOriginStr</span><span class="p">)</span></code>
 
 
@@ -1163,7 +1164,7 @@ QuickItem            (<span title="PySide6.QtQuick.QQuickItem">QQuickItem</span>
 
 <h3 id="prettyqt.quick.quickpainteditem.QuickPaintedItem" class="doc doc-heading">
         <code>
-QuickPaintedItem            (<span title="PySide6.QtQuick.QQuickPaintedItem">QQuickPaintedItem</span>)
+QuickPaintedItem            (<a class="autorefs autorefs-internal" title="prettyqt.quick.quickitem.QuickItemMixin" href="#prettyqt.quick.quickitem.QuickItemMixin">QuickItemMixin</a>, <span title="PySide6.QtQuick.QQuickPaintedItem">QQuickPaintedItem</span>)
         </code>
 
 
@@ -1175,7 +1176,7 @@ QuickPaintedItem            (<span title="PySide6.QtQuick.QQuickPaintedItem">QQu
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickPaintedItem</span><span class="p">(</span><span class="n">QtQuick</span><span class="o">.</span><span class="n">QQuickPaintedItem</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickPaintedItem</span><span class="p">(</span><span class="n">quick</span><span class="o">.</span><span class="n">QuickItemMixin</span><span class="p">,</span> <span class="n">QtQuick</span><span class="o">.</span><span class="n">QQuickPaintedItem</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_fill_color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fillColor</span><span class="p">())</span>
 
@@ -1396,7 +1397,7 @@ QuickPaintedItem            (<span title="PySide6.QtQuick.QQuickPaintedItem">QQu
 
 <h3 id="prettyqt.quick.quickwindow.QuickWindow" class="doc doc-heading">
         <code>
-QuickWindow            (<span title="PySide6.QtQuick.QQuickWindow">QQuickWindow</span>)
+QuickWindow            (<a class="autorefs autorefs-internal" title="prettyqt.gui.window.WindowMixin" href="gui.html#prettyqt.gui.window.WindowMixin">WindowMixin</a>, <span title="PySide6.QtQuick.QQuickWindow">QQuickWindow</span>)
         </code>
 
 
@@ -1408,7 +1409,7 @@ QuickWindow            (<span title="PySide6.QtQuick.QQuickWindow">QQuickWindow<
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/quick/quickwindow.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickWindow</span><span class="p">(</span><span class="n">QtQuick</span><span class="o">.</span><span class="n">QQuickWindow</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickWindow</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">WindowMixin</span><span class="p">,</span> <span class="n">QtQuick</span><span class="o">.</span><span class="n">QQuickWindow</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">create_texture_from_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QImage</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">flag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CreateTextureOption</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>

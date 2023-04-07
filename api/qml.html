@@ -486,22 +486,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngine" class="md-nav__link">
-    QmlEngine
+  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin" class="md-nav__link">
+    QmlEngineMixin
   </a>
   
-    <nav class="md-nav" aria-label="QmlEngine">
+    <nav class="md-nav" aria-label="QmlEngineMixin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngine.get_object_ownership" class="md-nav__link">
+  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin.get_object_ownership" class="md-nav__link">
     get_object_ownership()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngine.set_object_ownership" class="md-nav__link">
+  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin.set_object_ownership" class="md-nav__link">
     set_object_ownership()
   </a>
   
@@ -720,22 +720,22 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngine" class="md-nav__link">
-    QmlEngine
+  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin" class="md-nav__link">
+    QmlEngineMixin
   </a>
   
-    <nav class="md-nav" aria-label="QmlEngine">
+    <nav class="md-nav" aria-label="QmlEngineMixin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngine.get_object_ownership" class="md-nav__link">
+  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin.get_object_ownership" class="md-nav__link">
     get_object_ownership()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngine.set_object_ownership" class="md-nav__link">
+  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin.set_object_ownership" class="md-nav__link">
     set_object_ownership()
   </a>
   
@@ -1017,13 +1017,14 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
 
-<h3 id="prettyqt.qml.qmlengine.QmlEngine" class="doc doc-heading">
+<h3 id="prettyqt.qml.qmlengine.QmlEngineMixin" class="doc doc-heading">
         <code>
-QmlEngine            (<span title="PySide6.QtQml.QQmlEngine">QQmlEngine</span>)
+QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSEngineMixin</span>)
         </code>
 
 
@@ -1035,11 +1036,12 @@ QmlEngine            (<span title="PySide6.QtQml.QQmlEngine">QQmlEngine</span>)
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QmlEngine</span><span class="p">(</span><span class="n">QtQml</span><span class="o">.</span><span class="n">QQmlEngine</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QmlEngineMixin</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">JSEngineMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the object ownership.</span>
 
 <span class="sd">        Args:</span>
+<span class="sd">            obj: object to set ownership for</span>
 <span class="sd">            mode: object ownership to use</span>
 
 <span class="sd">        Raises:</span>
@@ -1102,7 +1104,7 @@ QmlEngine            (<span title="PySide6.QtQml.QQmlEngine">QQmlEngine</span>)
 
 
 
-<h4 id="prettyqt.qml.qmlengine.QmlEngine.get_object_ownership" class="doc doc-heading">
+<h4 id="prettyqt.qml.qmlengine.QmlEngineMixin.get_object_ownership" class="doc doc-heading">
 <code class="codehilite language-python"><span class="n">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span></code>
 
 
@@ -1150,7 +1152,7 @@ QmlEngine            (<span title="PySide6.QtQml.QQmlEngine">QQmlEngine</span>)
 
 
 
-<h4 id="prettyqt.qml.qmlengine.QmlEngine.set_object_ownership" class="doc doc-heading">
+<h4 id="prettyqt.qml.qmlengine.QmlEngineMixin.set_object_ownership" class="doc doc-heading">
 <code class="codehilite language-python"><span class="n">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">)</span></code>
 
 
@@ -1171,6 +1173,12 @@ QmlEngine            (<span title="PySide6.QtQml.QQmlEngine">QQmlEngine</span>)
     </tr>
   </thead>
   <tbody>
+      <tr>
+        <td><code>obj</code></td>
+        <td><code>QtCore.QObject</code></td>
+        <td><p>object to set ownership for</p></td>
+        <td><em>required</em></td>
+      </tr>
       <tr>
         <td><code>mode</code></td>
         <td><code>ObjectOwnershipStr</code></td>
@@ -1200,6 +1208,7 @@ QmlEngine            (<span title="PySide6.QtQml.QQmlEngine">QQmlEngine</span>)
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the object ownership.</span>
 
 <span class="sd">    Args:</span>
+<span class="sd">        obj: object to set ownership for</span>
 <span class="sd">        mode: object ownership to use</span>
 
 <span class="sd">    Raises:</span>

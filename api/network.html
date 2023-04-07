@@ -411,15 +411,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.network.abstractsocket.AbstractSocket" class="md-nav__link">
-    AbstractSocket
+  <a href="#prettyqt.network.abstractsocket.AbstractSocketMixin" class="md-nav__link">
+    AbstractSocketMixin
   </a>
   
-    <nav class="md-nav" aria-label="AbstractSocket">
+    <nav class="md-nav" aria-label="AbstractSocketMixin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.network.abstractsocket.AbstractSocket.set_pause_mode" class="md-nav__link">
+  <a href="#prettyqt.network.abstractsocket.AbstractSocketMixin.set_pause_mode" class="md-nav__link">
     set_pause_mode()
   </a>
   
@@ -913,15 +913,15 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.network.abstractsocket.AbstractSocket" class="md-nav__link">
-    AbstractSocket
+  <a href="#prettyqt.network.abstractsocket.AbstractSocketMixin" class="md-nav__link">
+    AbstractSocketMixin
   </a>
   
-    <nav class="md-nav" aria-label="AbstractSocket">
+    <nav class="md-nav" aria-label="AbstractSocketMixin">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.network.abstractsocket.AbstractSocket.set_pause_mode" class="md-nav__link">
+  <a href="#prettyqt.network.abstractsocket.AbstractSocketMixin.set_pause_mode" class="md-nav__link">
     set_pause_mode()
   </a>
   
@@ -1284,13 +1284,14 @@
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
 
-<h3 id="prettyqt.network.abstractsocket.AbstractSocket" class="doc doc-heading">
+<h3 id="prettyqt.network.abstractsocket.AbstractSocketMixin" class="doc doc-heading">
         <code>
-AbstractSocket            (<span title="PySide6.QtNetwork.QAbstractSocket">QAbstractSocket</span>)
+AbstractSocketMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">IODeviceMixin</span>)
         </code>
 
 
@@ -1302,7 +1303,7 @@ AbstractSocket            (<span title="PySide6.QtNetwork.QAbstractSocket">QAbst
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/network/abstractsocket.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractSocket</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QAbstractSocket</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractSocketMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">IODeviceMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
 
@@ -1416,7 +1417,7 @@ AbstractSocket            (<span title="PySide6.QtNetwork.QAbstractSocket">QAbst
 
 
 
-<h4 id="prettyqt.network.abstractsocket.AbstractSocket.set_pause_mode" class="doc doc-heading">
+<h4 id="prettyqt.network.abstractsocket.AbstractSocketMixin.set_pause_mode" class="doc doc-heading">
 <code class="codehilite language-python"><span class="n">set_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PauseModeStr</span><span class="p">)</span></code>
 
 
@@ -1537,7 +1538,7 @@ AbstractSocket            (<span title="PySide6.QtNetwork.QAbstractSocket">QAbst
 
 <h3 id="prettyqt.network.httpmultipart.HttpMultiPart" class="doc doc-heading">
         <code>
-HttpMultiPart            (<span title="PySide6.QtNetwork.QHttpMultiPart">QHttpMultiPart</span>)
+HttpMultiPart            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="PySide6.QtNetwork.QHttpMultiPart">QHttpMultiPart</span>)
         </code>
 
 
@@ -1549,7 +1550,7 @@ HttpMultiPart            (<span title="PySide6.QtNetwork.QHttpMultiPart">QHttpMu
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/network/httpmultipart.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">HttpMultiPart</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHttpMultiPart</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">HttpMultiPart</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHttpMultiPart</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHttpPart</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
@@ -1721,7 +1722,7 @@ HttpMultiPart            (<span title="PySide6.QtNetwork.QHttpMultiPart">QHttpMu
 
 <h3 id="prettyqt.network.networkaccessmanager.NetworkAccessManager" class="doc doc-heading">
         <code>
-NetworkAccessManager            (<span title="PySide6.QtNetwork.QNetworkAccessManager">QNetworkAccessManager</span>)
+NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="PySide6.QtNetwork.QNetworkAccessManager">QNetworkAccessManager</span>)
         </code>
 
 
@@ -1733,7 +1734,7 @@ NetworkAccessManager            (<span title="PySide6.QtNetwork.QNetworkAccessMa
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkAccessManager</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkAccessManager</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkAccessManager</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkAccessManager</span><span class="p">):</span>
     <span class="c1"># def request(</span>
     <span class="c1">#     self,</span>
     <span class="c1">#     method,</span>
@@ -2939,7 +2940,7 @@ NetworkRequest            (<span title="PySide6.QtNetwork.QNetworkRequest">QNetw
 
 <h3 id="prettyqt.network.tcpserver.TcpServer" class="doc doc-heading">
         <code>
-TcpServer            (<span title="PySide6.QtNetwork.QTcpServer">QTcpServer</span>)
+TcpServer            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="PySide6.QtNetwork.QTcpServer">QTcpServer</span>)
         </code>
 
 
@@ -2951,7 +2952,7 @@ TcpServer            (<span title="PySide6.QtNetwork.QTcpServer">QTcpServer</spa
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/network/tcpserver.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TcpServer</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QTcpServer</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TcpServer</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QTcpServer</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
