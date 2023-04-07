@@ -12,9 +12,11 @@ from .placesupplier import PlaceSupplier
 from .placecategory import PlaceCategory
 from .placeuser import PlaceUser
 from .placecontent import PlaceContent
-from .placeimage import PlaceImage
-from .placereview import PlaceReview
-from .placeeditorial import PlaceEditorial
+
+# from .placeimage import PlaceImage
+# from .placereview import PlaceReview
+# from .placeeditorial import PlaceEditorial
+
 from .geocodingmanager import GeoCodingManager
 from .georoutingmanager import GeoRoutingManager
 from .geomaneuver import GeoManeuver

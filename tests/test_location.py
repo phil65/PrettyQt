@@ -147,18 +147,18 @@ def test_placeuser():
     assert str(user) == ""
 
 
-def test_placeimage():
-    image = location.PlaceImage()
-    image.get_supplier()
-    assert str(image) == ""
-    image.set_url("http://")
-    assert image.get_url() == core.Url("http://")
+# def test_placeimage():
+#     image = location.PlaceImage()
+#     image.get_supplier()
+#     assert str(image) == ""
+#     image.set_url("http://")
+#     assert image.get_url() == core.Url("http://")
 
 
-def test_placereview():
-    review = location.PlaceReview()
-    review.get_datetime()
-    str(review)
+# def test_placereview():
+#     review = location.PlaceReview()
+#     review.get_datetime()
+#     str(review)
 
 
 def test_placereply():
@@ -231,9 +231,9 @@ def test_placeresult():
     result.get_place()
 
 
-def test_placeeditorial():
-    editorial = location.PlaceEditorial()
-    str(editorial)
+# def test_placeeditorial():
+#     editorial = location.PlaceEditorial()
+#     str(editorial)
 
 
 def test_placesupplier():
