@@ -141,21 +141,24 @@ class Color(QtGui.QColor):
         return self.lightness() < 128
 
     def get_name(self, name_format: NameStr = "hex_argb") -> str:
-        if name_format == "svg_rgb":
-            if not self.isValid():
-                return 'fill=""'
-            return f'fill="rgb({self.red()}, {self.green()}, {self.blue()})"'
-        elif name_format == "svg_argb":
-            if not self.isValid():
-                return 'fill=""'
-            fill_str = f"rgb({self.red()}, {self.green()}, {self.blue()})"
-            return f'fill="{fill_str}" fill-opacity="{self.alpha()}"'
-        elif name_format == "qcss_argb":
-            return f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
-        elif name_format == "qcss_rgb":
-            return f"rgb({self.red()}, {self.green()}, {self.blue()})"
-        else:
-            return self.name(NAME_FORMAT[name_format])
+        match name_format:
+            case "svg_rgb":
+                if not self.isValid():
+                    return 'fill=""'
+                return f'fill="rgb({self.red()}, {self.green()}, {self.blue()})"'
+            case "svg_argb":
+                if not self.isValid():
+                    return 'fill=""'
+                fill_str = f"rgb({self.red()}, {self.green()}, {self.blue()})"
+                return f'fill="{fill_str}" fill-opacity="{self.alpha()}"'
+            case "qcss_argb":
+                return (
+                    f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
+                )
+            case "qcss_rgb":
+                return f"rgb({self.red()}, {self.green()}, {self.blue()})"
+            case _:
+                return self.name(NAME_FORMAT[name_format])
 
     @deprecated(reason="This method is deprecated, use Color.get_name instead.")
     def to_qsscolor(self) -> str:

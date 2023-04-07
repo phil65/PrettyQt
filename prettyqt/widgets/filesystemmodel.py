@@ -59,14 +59,15 @@ class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
 
     def set_root_path(self, path: types.PathType) -> QtCore.QModelIndex:
         path = os.fspath(path)
-        if path in ["/", "root"]:
-            path = core.Dir.rootPath()
-        elif path == "home":
-            path = core.Dir.homePath()
-        elif path == "temp":
-            path = core.Dir.tempPath()
-        elif path == "current":
-            path = core.Dir.currentPath()
+        match path:
+            case "/" | "root":
+                path = core.Dir.rootPath()
+            case "home":
+                path = core.Dir.homePath()
+            case "temp":
+                path = core.Dir.tempPath()
+            case "current":
+                path = core.Dir.currentPath()
         return self.setRootPath(path)
 
     def set_name_filters(self, filters, hide: bool = False):

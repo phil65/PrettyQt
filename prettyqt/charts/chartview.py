@@ -34,25 +34,26 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         """Handle keypress events to allow navigation via keyboard."""
         key = event.key()
-        if key == QtCore.Qt.Key.Key_Escape:
-            self.chart().zoomReset()
-        elif key == QtCore.Qt.Key.Key_Plus:
-            self.chart().zoom_by_factor(ZOOM_IN_FACTOR)
-        elif key == QtCore.Qt.Key.Key_Minus:
-            self.chart().zoom_by_factor(ZOOM_OUT_FACTOR)
-        elif key == QtCore.Qt.Key.Key_Left:
-            self.chart().scroll(-SCROLL_STEP_SIZE, 0)
-        elif key == QtCore.Qt.Key.Key_Right:
-            self.chart().scroll(SCROLL_STEP_SIZE, 0)
-        elif key == QtCore.Qt.Key.Key_Up:
-            self.chart().scroll(0, SCROLL_STEP_SIZE)
-        elif key == QtCore.Qt.Key.Key_Down:
-            self.chart().scroll(0, -SCROLL_STEP_SIZE)
-        elif key == QtCore.Qt.Key.Key_0:
-            self.chart().apply_nice_numbers()
-        else:
-            super().keyPressEvent(event)
-            return
+        match key:
+            case QtCore.Qt.Key.Key_Escape:
+                self.chart().zoomReset()
+            case QtCore.Qt.Key.Key_Plus:
+                self.chart().zoom_by_factor(ZOOM_IN_FACTOR)
+            case QtCore.Qt.Key.Key_Minus:
+                self.chart().zoom_by_factor(ZOOM_OUT_FACTOR)
+            case QtCore.Qt.Key.Key_Left:
+                self.chart().scroll(-SCROLL_STEP_SIZE, 0)
+            case QtCore.Qt.Key.Key_Right:
+                self.chart().scroll(SCROLL_STEP_SIZE, 0)
+            case QtCore.Qt.Key.Key_Up:
+                self.chart().scroll(0, SCROLL_STEP_SIZE)
+            case QtCore.Qt.Key.Key_Down:
+                self.chart().scroll(0, -SCROLL_STEP_SIZE)
+            case QtCore.Qt.Key.Key_0:
+                self.chart().apply_nice_numbers()
+            case _:
+                super().keyPressEvent(event)
+                return
         event.accept()
 
     def wheelEvent(self, event: QtGui.QWheelEvent):

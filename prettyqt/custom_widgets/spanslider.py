@@ -305,23 +305,24 @@ class SpanSlider(widgets.Slider):
         alt_control = not main and self._main_control == "lower"
         is_upper_handle = main_control or alt_control
         val = self.upper_val if is_upper_handle else self.lower_val
-        if action == "single_step_add":
-            up = is_upper_handle
-            value = clamp(val + self.singleStep(), my_min, my_max)
-        elif action == "single_step_sub":
-            up = is_upper_handle
-            value = clamp(val - self.singleStep(), my_min, my_max)
-        elif action == "to_minimum":
-            up = is_upper_handle
-            value = my_min
-        elif action == "to_maximum":
-            up = is_upper_handle
-            value = my_max
-        elif action == "move":
-            up = is_upper_handle
-            no = True
-        elif action == "none":
-            no = True
+        match action:
+            case "single_step_add":
+                up = is_upper_handle
+                value = clamp(val + self.singleStep(), my_min, my_max)
+            case "single_step_sub":
+                up = is_upper_handle
+                value = clamp(val - self.singleStep(), my_min, my_max)
+            case "to_minimum":
+                up = is_upper_handle
+                value = my_min
+            case "to_maximum":
+                up = is_upper_handle
+                value = my_max
+            case "move":
+                up = is_upper_handle
+                no = True
+            case "none":
+                no = True
 
         if not no and not up:
             if self.movement == "no_crossing":

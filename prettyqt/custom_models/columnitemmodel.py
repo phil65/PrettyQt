@@ -137,23 +137,24 @@ class ColumnItemModel(core.AbstractItemModel):
         col = index.column()
         tree_item = index.internalPointer()
 
-        if role in [constants.DISPLAY_ROLE, constants.EDIT_ROLE]:
-            val = self._attr_cols[col].get_label(tree_item)
-            return val.replace("\n", " ")
-        elif role == constants.DECORATION_ROLE:
-            return self._attr_cols[col].get_decoration(tree_item)
-        elif role == constants.CHECKSTATE_ROLE:
-            return self._attr_cols[col].get_checkstate(tree_item)
-        elif role == constants.ALIGNMENT_ROLE:
-            return self._attr_cols[col].get_alignment(tree_item)
-        elif role == constants.FOREGROUND_ROLE:
-            return self._attr_cols[col].get_foreground_color(tree_item)
-        elif role == constants.BACKGROUND_ROLE:
-            return self._attr_cols[col].get_background_color(tree_item)
-        elif role == constants.FONT_ROLE:
-            return self._attr_cols[col].get_font(tree_item)
-        else:
-            return None
+        match role:
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
+                val = self._attr_cols[col].get_label(tree_item)
+                return val.replace("\n", " ")
+            case constants.DECORATION_ROLE:
+                return self._attr_cols[col].get_decoration(tree_item)
+            case constants.CHECKSTATE_ROLE:
+                return self._attr_cols[col].get_checkstate(tree_item)
+            case constants.ALIGNMENT_ROLE:
+                return self._attr_cols[col].get_alignment(tree_item)
+            case constants.FOREGROUND_ROLE:
+                return self._attr_cols[col].get_foreground_color(tree_item)
+            case constants.BACKGROUND_ROLE:
+                return self._attr_cols[col].get_background_color(tree_item)
+            case constants.FONT_ROLE:
+                return self._attr_cols[col].get_font(tree_item)
+            case _:
+                return None
 
     def flags(self, index):
         if not index.isValid():

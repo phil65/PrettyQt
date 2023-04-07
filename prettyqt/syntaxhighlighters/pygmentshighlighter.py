@@ -195,22 +195,23 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
             return result
         for key, value in token_style.items():
             if value:
-                if key == "color":
-                    result.set_foreground_color(self._get_brush(value))
-                elif key == "bgcolor":
-                    result.set_background_color(self._get_brush(value))
-                elif key == "bold":
-                    result.set_font_weight("bold")
-                elif key == "italic":
-                    result.setFontItalic(True)
-                elif key == "underline":
-                    result.set_underline_style("single")
-                elif key == "sans":
-                    result.set_font_style_hint("sans_serif")
-                elif key == "roman":
-                    result.set_font_style_hint("serif")
-                elif key == "mono":
-                    result.set_font_style_hint("typewriter")
+                match key:
+                    case "color":
+                        result.set_foreground_color(self._get_brush(value))
+                    case "bgcolor":
+                        result.set_background_color(self._get_brush(value))
+                    case "bold":
+                        result.set_font_weight("bold")
+                    case "italic":
+                        result.setFontItalic(True)
+                    case "underline":
+                        result.set_underline_style("single")
+                    case "sans":
+                        result.set_font_style_hint("sans_serif")
+                    case "roman":
+                        result.set_font_style_hint("serif")
+                    case "mono":
+                        result.set_font_style_hint("typewriter")
         return result
 
     @functools.cache

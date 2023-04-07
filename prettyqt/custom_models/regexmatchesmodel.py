@@ -26,14 +26,15 @@ class RegexMatchesModel(core.AbstractTableModel):
             return None
         item = self.matches[index.row()]
         if role in [constants.DISPLAY_ROLE]:
-            if index.column() == 0:
-                return str(item.span()[0])
-            if index.column() == 1:
-                return str(item.span()[1])
-            elif index.column() == 2:
-                return repr(item.group())
-            elif index.column() == 3:
-                return str(len(item.groups()))
+            match index.column():
+                case 0:
+                    return str(item.span()[0])
+                case 1:
+                    return str(item.span()[1])
+                case 2:
+                    return repr(item.group())
+                case 3:
+                    return str(len(item.groups()))
         if role in [constants.USER_ROLE]:
             return item.span()
 

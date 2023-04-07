@@ -54,24 +54,25 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         if not index.isValid():
             return None
         if role == constants.DISPLAY_ROLE:
-            if index.column() == 0:
-                dist = self.distributions[index.row()]
-                return dist.metadata["Name"]
-            elif index.column() == 1:
-                dist = self.distributions[index.row()]
-                return dist.version
-            elif index.column() == 2:
-                dist = self.distributions[index.row()]
-                return dist.metadata["Summary"]
-            elif index.column() == 3:
-                dist = self.distributions[index.row()]
-                return dist.metadata["Home-Page"]
-            elif index.column() == 4:
-                dist = self.distributions[index.row()]
-                return dist.metadata["Author"]
-            elif index.column() == 5:
-                dist = self.distributions[index.row()]
-                return dist.metadata["License"]
+            match index.column():
+                case 0:
+                    dist = self.distributions[index.row()]
+                    return dist.metadata["Name"]
+                case 1:
+                    dist = self.distributions[index.row()]
+                    return dist.version
+                case 2:
+                    dist = self.distributions[index.row()]
+                    return dist.metadata["Summary"]
+                case 3:
+                    dist = self.distributions[index.row()]
+                    return dist.metadata["Home-Page"]
+                case 4:
+                    dist = self.distributions[index.row()]
+                    return dist.metadata["Author"]
+                case 5:
+                    dist = self.distributions[index.row()]
+                    return dist.metadata["License"]
         elif role == constants.USER_ROLE:
             dist = self.distributions[index.row()]
             return dist

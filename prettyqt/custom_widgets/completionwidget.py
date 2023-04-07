@@ -50,25 +50,24 @@ class CompletionWidget(widgets.ListWidget):
 
     def keyPressEvent(self, event):
         key = event.key()
-        if key in (
-            QtCore.Qt.Key.Key_Return,
-            QtCore.Qt.Key.Key_Enter,
-            QtCore.Qt.Key.Key_Tab,
-        ):
-            self._complete_current()
-        elif key == QtCore.Qt.Key.Key_Escape:
-            self.hide()
-        elif key in (
-            QtCore.Qt.Key.Key_Up,
-            QtCore.Qt.Key.Key_Down,
-            QtCore.Qt.Key.Key_PageUp,
-            QtCore.Qt.Key.Key_PageDown,
-            QtCore.Qt.Key.Key_Home,
-            QtCore.Qt.Key.Key_End,
-        ):
-            return super().keyPressEvent(event)
-        else:
-            QtWidgets.QApplication.sendEvent(self._text_edit, event)
+        match key:
+            case (
+                QtCore.Qt.Key.Key_Return | QtCore.Qt.Key.Key_Enter | QtCore.Qt.Key.Key_Tab
+            ):
+                self._complete_current()
+            case QtCore.Qt.Key.Key_Escape:
+                self.hide()
+            case (
+                QtCore.Qt.Key.Key_Up
+                | QtCore.Qt.Key.Key_Down
+                | QtCore.Qt.Key.Key_PageUp
+                | QtCore.Qt.Key.Key_PageDown
+                | QtCore.Qt.Key.Key_Home
+                | QtCore.Qt.Key.Key_End
+            ):
+                return super().keyPressEvent(event)
+            case _:
+                QtWidgets.QApplication.sendEvent(self._text_edit, event)
 
     # 'QWidget' interface
 

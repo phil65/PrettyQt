@@ -72,14 +72,15 @@ class SelectionWidget(widgets.GroupBox):
         default: None | float | str = None,
         regex: str | None = None,
     ):
-        if typ == "string":
-            self.widget_custom = widgets.LineEdit()
-        elif typ == "int":
-            self.widget_custom = widgets.SpinBox()
-        elif typ == "float":
-            self.widget_custom = widgets.DoubleSpinBox()
-        else:
-            raise ValueError(typ)
+        match typ:
+            case "string":
+                self.widget_custom = widgets.LineEdit()
+            case "int":
+                self.widget_custom = widgets.SpinBox()
+            case "float":
+                self.widget_custom = widgets.DoubleSpinBox()
+            case _:
+                raise ValueError(typ)
         # TODO: Enable this or add BAR radio and option.
         self.widget_custom.set_disabled()  # type: ignore
         if default is not None:

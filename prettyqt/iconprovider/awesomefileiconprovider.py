@@ -26,20 +26,21 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
                 return self.folder_icon
             elif icon.isFile():
                 return self.file_icon
-        elif icon == widgets.FileIconProvider.IconType.Folder:
-            return self.folder_icon
-        # elif icon == widgets.FileIconProvider.IconType.File:
-        #     return self.file_icon
-        elif icon == widgets.FileIconProvider.IconType.Computer:
-            return self.computer_icon
-        elif icon == widgets.FileIconProvider.IconType.Desktop:
-            return self.desktop_icon
-        elif icon == widgets.FileIconProvider.IconType.Trashcan:
-            return self.trashcan_icon
-        elif icon == widgets.FileIconProvider.IconType.Network:
-            return self.network_icon
-        elif icon == widgets.FileIconProvider.IconType.Drive:
-            return self.drive_icon
+        match icon:
+            case widgets.FileIconProvider.IconType.Folder:
+                return self.folder_icon
+            # case widgets.FileIconProvider.IconType.File:
+            #     return self.file_icon
+            case widgets.FileIconProvider.IconType.Computer:
+                return self.computer_icon
+            case widgets.FileIconProvider.IconType.Desktop:
+                return self.desktop_icon
+            case widgets.FileIconProvider.IconType.Trashcan:
+                return self.trashcan_icon
+            case widgets.FileIconProvider.IconType.Network:
+                return self.network_icon
+            case widgets.FileIconProvider.IconType.Drive:
+                return self.drive_icon
         return self.file_icon
 
     @staticmethod
