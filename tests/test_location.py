@@ -52,10 +52,6 @@ def test_georoute():
     route.get_path()
 
 
-def test_georouteleg():
-    location.GeoRouteLeg()
-
-
 @pytest.mark.skipif(prettyqt.qt.API == "pyqt5", reason="Only supported in PyQt")
 def test_georouterequest():
     request = location.GeoRouteRequest()
