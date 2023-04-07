@@ -1,3 +1,15 @@
+## v1.0.0 (2023-04-07)
+
+### Feat
+
+- MultimediaWidgets for Qt6
+- get rid of mro fuckery
+- re-add location module
+
+### Fix
+
+- remove title property for widgets
+
 ## v0.193.3 (2023-04-04)
 
 ### Fix
