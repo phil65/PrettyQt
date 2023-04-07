@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable
+from collections.abc import Callable
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore

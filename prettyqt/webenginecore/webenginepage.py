@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import logging
 import os
-from typing import Callable, Literal
+from typing import Literal
 import webbrowser
 
 from prettyqt import core, gui, webenginecore

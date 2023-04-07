@@ -4,9 +4,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 import inspect
 import logging
-from typing import Callable, get_type_hints
+from typing import get_type_hints
 
 from prettyqt import core
 

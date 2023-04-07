@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import contextlib
-from typing import Callable
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets

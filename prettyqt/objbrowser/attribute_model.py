@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
+from collections.abc import Callable
 import inspect
 import logging
 import pprint
-from typing import Callable
 
 from prettyqt import constants, custom_models, gui
 from prettyqt.qt import QtGui

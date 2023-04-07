@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import os
-from typing import Callable
 import webbrowser
 
 from prettyqt import core, webenginecore, widgets

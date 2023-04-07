@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import logging
 import re
-from typing import Callable
 
 from prettyqt import gui
 

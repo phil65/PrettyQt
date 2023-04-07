@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import logging
 import os
 import pathlib
 import sys
-from typing import Callable
 
 import prettyqt
 from prettyqt import constants, core

@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Mapping
+from collections.abc import Callable, Iterable, Mapping
 import functools
 import pathlib
-from typing import Any, Callable
+from typing import Any
 
 from prettyqt import custom_validators, custom_widgets, gui, widgets
 from prettyqt.utils import types

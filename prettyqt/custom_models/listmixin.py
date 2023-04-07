@@ -1,5 +1,5 @@
-from collections.abc import Iterable
-from typing import Any, Callable, Optional
+from collections.abc import Callable, Iterable
+from typing import Any
 
 from prettyqt import constants
 
@@ -65,12 +65,12 @@ class ListMixin:
             with self.change_layout():
                 self.items.sort(key=sorter, reverse=is_asc)
 
-    def add(self, item: Any, position: Optional[int] = None):
+    def add(self, item: Any, position: int | None = None):
         """Append provided item to the list."""
         self.add_items(items=[item], position=position)
         return item
 
-    def add_items(self, items: Iterable[Any], position: Optional[int] = None):
+    def add_items(self, items: Iterable[Any], position: int | None = None):
         """Append a list of items to the list."""
         if position is None:
             position = len(self.items)

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import os
-from typing import Callable, Literal
+from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui, QtWidgets

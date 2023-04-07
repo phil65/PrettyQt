@@ -11,5 +11,6 @@ class CommonStyleMixin(widgets.StyleMixin):
 class CommonStyle(CommonStyleMixin, QtWidgets.QCommonStyle):
     pass
 
+
 if __name__ == "__main__":
     style = CommonStyle()

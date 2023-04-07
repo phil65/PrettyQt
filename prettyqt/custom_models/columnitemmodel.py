@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 import logging
-from typing import Callable
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui

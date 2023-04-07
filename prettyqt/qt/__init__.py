@@ -1,6 +1,8 @@
 """Provides Qt init stuff."""
 
-from typing import Callable, Literal
+from typing import Literal
+
+from collections.abc import Callable
 import operator
 import os
 import importlib

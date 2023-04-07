@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Any, Callable
+from collections.abc import Callable, Iterator
+from typing import Any
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets

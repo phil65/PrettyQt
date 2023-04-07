@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 import contextlib
 import os
 import pathlib
 import sys
-from typing import Any, Callable, Literal
+from typing import Any, Literal
 
 from deprecated import deprecated
 import qstylizer.parser

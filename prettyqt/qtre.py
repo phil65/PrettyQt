@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Callable, Iterator
 import re
-from typing import Any, Callable
+from typing import Any
 
 from prettyqt import core
 from prettyqt.qt import QtCore
