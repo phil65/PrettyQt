@@ -60,7 +60,6 @@ class JsonTreeItem(custom_models.NestedItem):
 
 
 class JsonModel(custom_models.NestedModel):
-
     HEADER = ["Key", "Value", "Type"]
 
     def __init__(self, parent: QtCore.QObject | None = None):

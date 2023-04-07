@@ -5,7 +5,6 @@ from prettyqt.qt import QtCore
 
 
 class RegexMatchesModel(core.AbstractTableModel):
-
     HEADER = ["Start", "End", "Value", "Groups"]
 
     def __init__(self, matches: list | None = None, parent: QtCore.QObject | None = None):
@@ -39,7 +38,7 @@ class RegexMatchesModel(core.AbstractTableModel):
             return item.span()
 
     def rowCount(self, parent=None):
-        """Required override for AbstractitemModels."""
+        """Override for AbstractitemModel base method."""
         return len(self.matches)
 
 

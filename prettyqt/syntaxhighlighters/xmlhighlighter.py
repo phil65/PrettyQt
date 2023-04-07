@@ -47,7 +47,6 @@ VALUE_END_EXPRESSION = core.RegularExpression(r"\"(?=[\s></])")
 
 
 class XmlHighlighter(gui.SyntaxHighlighter):
-
     RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text: str):

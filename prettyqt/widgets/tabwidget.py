@@ -33,7 +33,6 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         closable: bool = False,
         detachable: bool = False,
     ) -> None:
-
         # Basic initalization
         super().__init__(parent)
         self.tabCloseRequested.connect(self.remove_tab)
@@ -83,7 +82,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         self.setMovable(state.get("movable", False))
         self.set_tab_shape(state.get("tab_shape", "rounded"))
         self.setIconSize(state["icon_size"])
-        for (widget, name, icon, tooltip, whatsthis) in state["widgets"]:
+        for widget, name, icon, tooltip, whatsthis in state["widgets"]:
             i = self.add_tab(widget, name, icon)
             self.setTabToolTip(i, tooltip)
             self.setTabWhatsThis(i, whatsthis)

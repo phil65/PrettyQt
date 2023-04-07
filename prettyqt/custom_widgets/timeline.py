@@ -27,7 +27,6 @@ class VideoSample:
 
 
 class Timeline(widgets.Widget):
-
     position_changed = core.Signal(int)
     selection_changed = core.Signal(VideoSample)
 

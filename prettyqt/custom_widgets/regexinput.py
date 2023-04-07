@@ -18,7 +18,6 @@ MAP = dict(
 
 
 class RegexInput(widgets.Widget):
-
     value_changed = core.Signal(object)
 
     def __init__(

@@ -447,6 +447,7 @@ class WidgetMixin(core.ObjectMixin):
                 self.box = widgets.StackedLayout()
             case "flow":
                 from prettyqt import custom_widgets
+
                 self.box = custom_widgets.FlowLayout()
             case _:
                 if isinstance(layout, QtWidgets.QLayout):

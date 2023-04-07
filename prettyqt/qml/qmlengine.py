@@ -22,6 +22,7 @@ class QmlEngineMixin(qml.JSEngineMixin):
         """Set the object ownership.
 
         Args:
+            obj: object to set ownership for
             mode: object ownership to use
 
         Raises:

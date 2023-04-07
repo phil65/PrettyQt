@@ -6,7 +6,6 @@ from prettyqt.utils import colors, types
 
 
 class ColorChooserButton(widgets.Widget):
-
     value_changed = core.Signal(gui.Color)
 
     def __init__(

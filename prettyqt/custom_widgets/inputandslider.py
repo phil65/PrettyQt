@@ -5,7 +5,6 @@ from prettyqt.qt import QtWidgets
 
 
 class InputAndSlider(widgets.Widget):
-
     value_changed = core.Signal(int)
 
     def __init__(

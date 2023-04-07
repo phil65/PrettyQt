@@ -6,11 +6,9 @@ from prettyqt import core, network, widgets
 
 
 class SingleApplication(widgets.Application):
-
     messageReceived = core.Signal(str)
 
     def __init__(self, app_id: str):
-
         super().__init__(sys.argv)
         self.app_id = app_id
         self._activate_on_message = True

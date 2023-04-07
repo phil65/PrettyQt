@@ -49,7 +49,6 @@ TYPE_CHECK: dict[Callable, str] = {
 
 
 def get_type(tree_item: treeitem.TreeItem) -> str:
-
     for k, v in TYPE_CHECK.items():
         if k(tree_item.obj):
             return v

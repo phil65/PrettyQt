@@ -7,7 +7,6 @@ from prettyqt.qt import QtCore
 
 
 class SelectionMixin:
-
     CHECKSTATE: dict[int, Callable] = {}  # column: identifier
     dataChanged: QtCore.Signal
     DATA_ROLE: int

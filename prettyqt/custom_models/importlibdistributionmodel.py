@@ -29,7 +29,6 @@ def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
 
 
 class ImportlibDistributionModel(core.AbstractTableModel):
-
     HEADER = ["Name", "Version", "Summary", "Homepage", "Author", "License"]
 
     def __init__(

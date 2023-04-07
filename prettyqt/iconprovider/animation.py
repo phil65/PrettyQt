@@ -26,7 +26,6 @@ class Spin:
         self.parent_widget.update()
 
     def setup(self, painter: gui.Painter, rect: QtCore.QRect):
-
         if self.parent_widget not in self.info:
             timer = core.Timer(self.parent_widget)
             timer.timeout.connect(self._update)

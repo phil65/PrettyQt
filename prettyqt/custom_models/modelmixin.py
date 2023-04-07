@@ -4,7 +4,6 @@ from prettyqt import constants
 
 
 class ModelMixin:
-
     DATA_ROLE = constants.USER_ROLE
     DTYPE_ROLE = constants.USER_ROLE + 1  # type: ignore
     NAME_ROLE = constants.USER_ROLE + 2  # type: ignore
@@ -35,7 +34,7 @@ class ModelMixin:
         return len(self.HEADER)
 
     def flags(self, index):
-        """Required override for AbstractitemModels.
+        """Override for AbstractitemModel base method.
 
         returns corresponding flags for cell of supplied index
         """
@@ -49,21 +48,23 @@ class ModelMixin:
         if not index.isValid():
             return None
         item = self.data_by_index(index)
-        if role == constants.DECORATION_ROLE:
-            if fn := self.DECORATIONS.get(index.column()):
-                return fn(item)
-        elif role in [constants.DISPLAY_ROLE, constants.EDIT_ROLE]:
-            if fn := self.LABELS.get(index.column()):
-                return fn(item)
-        elif role == constants.TOOLTIP_ROLE:
-            if fn := self.TOOLTIPS.get(index.column()):
-                return fn(item)
-        elif role == constants.CHECKSTATE_ROLE:
-            if fn := self.CHECKSTATE.get(index.column()):
-                return fn(item)
-        elif role == self.DATA_ROLE:
-            return item
-        return None
+        match role:
+            case constants.DECORATION_ROLE:
+                if fn := self.DECORATIONS.get(index.column()):
+                    return fn(item)
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
+                if fn := self.LABELS.get(index.column()):
+                    return fn(item)
+            case constants.TOOLTIP_ROLE:
+                if fn := self.TOOLTIPS.get(index.column()):
+                    return fn(item)
+            case constants.CHECKSTATE_ROLE:
+                if fn := self.CHECKSTATE.get(index.column()):
+                    return fn(item)
+            case self.DATA_ROLE:
+                return item
+            case _:
+                return None
 
     def setData(self, index, value, role):
         if role == constants.EDIT_ROLE:

@@ -10,7 +10,6 @@ class Root:
 class NestedModel(  # type: ignore
     custom_models.ListMixin, custom_models.ModelMixin, core.AbstractItemModel
 ):
-
     DEFAULT_FLAGS = (
         constants.DRAG_ENABLED  # type: ignore
         | constants.IS_ENABLED
@@ -30,7 +29,6 @@ class NestedModel(  # type: ignore
         return self.DEFAULT_FLAGS
 
     def rowCount(self, parent=core.ModelIndex()) -> int:
-
         if parent.column() > 0:
             return 0
         if not parent.isValid():
@@ -38,7 +36,6 @@ class NestedModel(  # type: ignore
         return len(parent.internalPointer().children)
 
     def index(self, row, column, parent):
-
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()
 
@@ -49,7 +46,6 @@ class NestedModel(  # type: ignore
         return self.createIndex(row, column, parent_item.children[row])
 
     def parent(self, index):
-
         if not index.isValid():
             return core.ModelIndex()
 

@@ -9,7 +9,6 @@ from prettyqt.utils import types
 
 
 class FileChooserButton(widgets.Widget):
-
     value_changed = core.Signal(pathlib.Path)
 
     def __init__(

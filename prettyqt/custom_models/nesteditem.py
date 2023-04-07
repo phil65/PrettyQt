@@ -4,7 +4,6 @@ from collections.abc import Iterable
 
 
 class NestedItem:
-
     item_name = "not_defined"
 
     def __init__(

@@ -132,7 +132,6 @@ class FramelessWindow(widgets.Widget):
         self.setLayout(self.grip_layout)
 
         if sys.platform == "win32":
-
             self.hwnd = self.winId().__int__()
             window_style = win32gui.GetWindowLong(self.hwnd, GWL_STYLE)
             win32gui.SetWindowLong(
@@ -235,27 +234,28 @@ class EdgeGrip(widgets.Widget):
         self.edges = edges
         self.grip_size = grip_size
         # Sides
-        if edges == "top":
-            self.setCursor(QtCore.Qt.SizeVerCursor)
-            self.setFixedHeight(self.grip_size)
-        elif edges == "right":
-            self.setCursor(QtCore.Qt.SizeHorCursor)
-            self.setFixedWidth(self.grip_size)
-        elif edges == "bottom":
-            self.setCursor(QtCore.Qt.SizeVerCursor)
-            self.setFixedHeight(self.grip_size)
-        elif edges == "left":
-            self.setCursor(QtCore.Qt.SizeHorCursor)
-            self.setFixedWidth(self.grip_size)
-        # Corners
-        elif edges == "top_left":
-            self.setCursor(QtCore.Qt.SizeFDiagCursor)
-        elif edges == "top_right":
-            self.setCursor(QtCore.Qt.SizeBDiagCursor)
-        elif edges == "bottom_left":
-            self.setCursor(QtCore.Qt.SizeBDiagCursor)
-        elif edges == "bottom_right":
-            self.setCursor(QtCore.Qt.SizeFDiagCursor)
+        match edges:
+            case "top":
+                self.setCursor(QtCore.Qt.SizeVerCursor)
+                self.setFixedHeight(self.grip_size)
+            case "right":
+                self.setCursor(QtCore.Qt.SizeHorCursor)
+                self.setFixedWidth(self.grip_size)
+            case "bottom":
+                self.setCursor(QtCore.Qt.SizeVerCursor)
+                self.setFixedHeight(self.grip_size)
+            case "left":
+                self.setCursor(QtCore.Qt.SizeHorCursor)
+                self.setFixedWidth(self.grip_size)
+            # Corners
+            case "top_left":
+                self.setCursor(QtCore.Qt.SizeFDiagCursor)
+            case "top_right":
+                self.setCursor(QtCore.Qt.SizeBDiagCursor)
+            case "bottom_left":
+                self.setCursor(QtCore.Qt.SizeBDiagCursor)
+            case "bottom_right":
+                self.setCursor(QtCore.Qt.SizeFDiagCursor)
 
     def mousePressEvent(self, event):
         if event.button() == QtCore.Qt.LeftButton:

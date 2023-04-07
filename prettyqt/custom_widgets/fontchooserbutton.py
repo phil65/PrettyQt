@@ -5,7 +5,6 @@ from prettyqt.qt import QtGui, QtWidgets
 
 
 class FontChooserButton(widgets.Widget):
-
     value_changed = core.Signal(gui.Font)
 
     def __init__(

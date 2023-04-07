@@ -85,7 +85,6 @@ TRI_SINGLE = (core.RegularExpression("```"), Code.get_format())
 
 
 class MarkdownHighlighter(gui.SyntaxHighlighter):
-
     RULES = Rule.__subclasses__()
 
     def highlightBlock(self, text: str):

@@ -12,7 +12,6 @@ class CheckBoxDelegate(widgets.ItemDelegate):
     """Delegate that places a CheckBox in every cell."""
 
     def __init__(self, *args, **kwargs):
-
         super().__init__(*args, **kwargs)
         self.selected = []
 

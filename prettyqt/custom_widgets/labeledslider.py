@@ -9,7 +9,6 @@ from prettyqt.qt import QtWidgets
 
 
 class LabeledSlider(widgets.Widget):
-
     value_changed = core.Signal(int)
 
     def __init__(
@@ -48,7 +47,6 @@ class LabeledSlider(widgets.Widget):
         self.box.add(self.sl)
 
     def paintEvent(self, e):
-
         super().paintEvent(e)
 
         style = self.sl.style()
@@ -65,7 +63,6 @@ class LabeledSlider(widgets.Widget):
 
         painter = gui.Painter(self)
         for v, v_str in self.levels:
-
             # get the size of the label
             rect = painter.get_text_rect(v_str)
 

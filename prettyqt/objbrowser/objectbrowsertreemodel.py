@@ -73,14 +73,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         attr_cols: list[custom_models.ColumnItem] | None = None,
         parent: QtCore.QObject | None = None,
     ):
-        """Constructor.
-
-        Args:
-            obj (Any): Object to inspect
-            obj_name (str, optional): Name of the object
-            attr_cols (None, optional): List of Column items
-            parent (None, optional): Description
-        """
         super().__init__(attr_cols=attr_cols, parent=parent)
         # The root_item is always invisible. If the obj_name is the empty string, the
         # inspectedItem will be the invisible root_item. If the obj_name is given,
@@ -116,7 +108,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
-
         if parent is None:
             logger.debug("parent is None")
             parent = core.ModelIndex()
@@ -175,7 +166,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             return result
 
     def fetchMore(self, parent: core.ModelIndex | None = None):
-        """Fetches the children given the model index of a parent node.
+        """Fetch the children given the model index of a parent node.
 
         Adds the children to the parent.
         """
@@ -204,15 +195,15 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
     @property
     def root_item(self) -> ObjectBrowserTreeItem:
-        """The root ObjectBrowserTreeItem."""
+        """Return the root ObjectBrowserTreeItem."""
         return self._root_item
 
     def root_index(self) -> core.ModelIndex:  # TODO: needed?
-        """The index that returns the root element (same as an invalid index)."""
+        """Return the index that returns the root element (same as an invalid index)."""
         return core.ModelIndex()
 
     def inspected_index(self) -> core.ModelIndex:
-        """The model index that point to the inspectedItem."""
+        """Return the model index that point to the inspectedItem."""
         if self.inspected_node_is_visible:
             return self.createIndex(0, 0, self.inspected_item)
         else:
@@ -225,7 +216,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             return index.internalPointer()  # type: ignore
 
     def _fetch_object_children(self, obj, obj_path):  # -> List[ObjectBrowserTreeItem]:
-        """Fetches the children of a Python object.
+        """Fetch the children of a Python object.
 
         Returns: list of ObjectBrowserTreeItems
         """
@@ -280,7 +271,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         return tree_items
 
     def _aux_refresh_tree(self, tree_index: core.ModelIndex):
-        """Auxiliary function for refresh_tree that recursively refreshes the tree nodes.
+        """Refresh the tree nodes recursively, auxiliary.
 
         If the underlying Python object has been changed, we don't want to delete the old
         tree model and create a new one from scratch because this loses all information
@@ -315,7 +306,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         logger.debug("(reversed) opcodes: %s", list(reversed(opcodes)))
 
         for tag, i1, i2, j1, j2 in reversed(opcodes):
-
             if 1 or tag != "equal":
                 logger.debug(
                     "  {:7s}, a[{}:{}] ({}), b[{}:{}] ({})".format(
@@ -367,7 +357,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                 raise ValueError(f"Invalid tag: {tag}")
 
     def refresh_tree(self):
-        """Refreshes the tree model from the underlying root object."""
+        """Refresh the tree model from the underlying root object."""
         logger.info("")
         logger.info("refresh_tree: %s", self.root_item)
 
@@ -410,16 +400,6 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
         show_special_attrs: bool = True,
         parent=None,
     ):
-        """Constructor.
-
-        :param show_callable_attrs: if True the callables objects,
-            i.e. objects (such as function) that  a __call__ method,
-            will be displayed (in brown). If False they are hidden.
-        :param show_special_attrs: if True the objects special attributes,
-            i.e. methods with a name that starts and ends with two underscores,
-            will be displayed (in italics). If False they are hidden.
-        :param parent: the parent widget
-        """
         super().__init__(parent)
 
         self._show_callables = show_callable_attrs

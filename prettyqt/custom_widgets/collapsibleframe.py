@@ -5,7 +5,6 @@ from prettyqt.qt import QtWidgets
 
 
 class CollapsibleFrame(widgets.Frame):
-
     expanded = core.Signal()
     collapsed = core.Signal()
 

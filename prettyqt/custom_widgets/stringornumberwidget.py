@@ -5,7 +5,6 @@ from prettyqt.qt import QtWidgets
 
 
 class StringOrNumberWidget(widgets.GroupBox):
-
     value_changed = core.Signal(object)
 
     def __init__(self, title: str = "", parent: QtWidgets.QWidget | None = None):
