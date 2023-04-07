@@ -4,10 +4,9 @@ from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsDropShadowEffect.__bases__ = (widgets.GraphicsEffect,)
-
-
-class GraphicsDropShadowEffect(QtWidgets.QGraphicsDropShadowEffect):
+class GraphicsDropShadowEffect(
+    widgets.GraphicsEffectMixin, QtWidgets.QGraphicsDropShadowEffect
+):
     def serialize_fields(self):
         offset = self.offset()
         return dict(

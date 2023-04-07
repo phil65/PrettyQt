@@ -6,10 +6,7 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QStyleOptionSlider.__bases__ = (widgets.StyleOptionComplex,)
-
-
-class StyleOptionSlider(QtWidgets.QStyleOptionSlider):
+class StyleOptionSlider(widgets.StyleOptionComplexMixin, QtWidgets.QStyleOptionSlider):
     def is_horizontal(self) -> bool:
         """Check if silder is horizontal.
 

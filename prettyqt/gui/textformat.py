@@ -38,7 +38,7 @@ PAGE_BREAK_FLAG = mappers.FlagMap(
 PageBreakFlagStr = Literal["auto", "always_before", "always_after"]
 
 
-class TextFormat(QtGui.QTextFormat):
+class TextFormatMixin:
     def __getitem__(self, key: int):
         return self.property(key)
 
@@ -93,6 +93,10 @@ class TextFormat(QtGui.QTextFormat):
     def select_full_width(self, value: bool = True):
         prop = QtGui.QTextFormat.Property.FullWidthSelection
         self.setProperty(prop, value)  # type: ignore
+
+
+class TextFormat(TextFormatMixin, QtGui.QTextFormat):
+    pass
 
 
 if __name__ == "__main__":

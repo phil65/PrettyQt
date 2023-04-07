@@ -4,8 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QStyleOptionSizeGrip.__bases__ = (widgets.StyleOptionComplex,)
-
-
-class StyleOptionSizeGrip(QtWidgets.QStyleOptionSizeGrip):
+class StyleOptionSizeGrip(
+    widgets.StyleOptionComplexMixin, QtWidgets.QStyleOptionSizeGrip
+):
     pass

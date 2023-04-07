@@ -23,10 +23,8 @@ RENDER_TARGET = bidict(
 
 RenderTargetStr = Literal["image", "framebuffer_object" "inverted_y_framebuffer_object"]
 
-QtQuick.QQuickPaintedItem.__bases__ = (quick.QuickItem,)
 
-
-class QuickPaintedItem(QtQuick.QQuickPaintedItem):
+class QuickPaintedItem(quick.QuickItemMixin, QtQuick.QQuickPaintedItem):
     def get_fill_color(self) -> gui.Color:
         return gui.Color(self.fillColor())
 

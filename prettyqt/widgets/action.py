@@ -36,10 +36,8 @@ RoleStr = Literal[
     "quit",
 ]
 
-QtWidgets.QAction.__bases__ = (core.Object,)
 
-
-class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
+class ActionMixin(core.ObjectMixin):
     def __init__(
         self,
         parent: QtCore.QObject | None = None,
@@ -264,6 +262,10 @@ class Action(prettyprinter.PrettyPrinter, QtWidgets.QAction):
 
     def show_shortcut_in_contextmenu(self, state: bool = True):
         self.setShortcutVisibleInContextMenu(state)
+
+
+class Action(ActionMixin, prettyprinter.PrettyPrinter, QtWidgets.QAction):
+    pass
 
 
 if __name__ == "__main__":

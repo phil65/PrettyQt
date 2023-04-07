@@ -28,8 +28,6 @@ SORT_INDICATOR = bidict(
 )
 
 
-QtWidgets.QStyleOptionHeader.__bases__ = (widgets.StyleOption,)
 
-
-class StyleOptionHeader(QtWidgets.QStyleOptionHeader):
+class StyleOptionHeader(widgets.StyleOptionMixin, QtWidgets.QStyleOptionHeader):
     pass

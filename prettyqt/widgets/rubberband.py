@@ -14,10 +14,7 @@ SHAPE = bidict(
 ShapeStr = Literal["line", "rectangle"]
 
 
-QtWidgets.QRubberBand.__bases__ = (widgets.Widget,)
-
-
-class RubberBand(QtWidgets.QRubberBand):
+class RubberBandMixin(widgets.WidgetMixin):
     def __init__(
         self,
         shape: ShapeStr | QtWidgets.QRubberBand.Shape,
@@ -28,3 +25,7 @@ class RubberBand(QtWidgets.QRubberBand):
 
     def get_shape(self) -> ShapeStr:
         return SHAPE.inverse[self.shape()]
+
+
+class RubberBand(RubberBandMixin, QtWidgets.QRubberBand):
+    pass

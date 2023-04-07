@@ -4,10 +4,7 @@ from prettyqt import charts
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QBarCategoryAxis.__bases__ = (charts.AbstractAxis,)
-
-
-class BarCategoryAxis(QtCharts.QBarCategoryAxis):
+class BarCategoryAxis(charts.AbstractAxisMixin, QtCharts.QBarCategoryAxis):
     def __delitem__(self, index: str):
         self.remove(index)
 

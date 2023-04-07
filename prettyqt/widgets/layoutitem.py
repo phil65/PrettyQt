@@ -5,7 +5,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-class LayoutItem(QtWidgets.QLayoutItem):
+class LayoutItemMixin:
     # def __bool__(self):
     #     return not self.isEmpty()
 
@@ -40,3 +40,7 @@ class LayoutItem(QtWidgets.QLayoutItem):
         if content := self.spacerItem():
             return content
         return None
+
+
+class LayoutItem(LayoutItemMixin, QtWidgets.QLayoutItem):
+    pass

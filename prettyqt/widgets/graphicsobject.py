@@ -4,10 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsObject.__bases__ = (core.Object, widgets.GraphicsItem)
-
-
-class GraphicsObject(QtWidgets.QGraphicsObject):
+class GraphicsObjectMixin(core.ObjectMixin, widgets.GraphicsItemMixin):
     def serialize_fields(self):
         return dict(
             enabled=self.isEnabled(),
@@ -20,3 +17,7 @@ class GraphicsObject(QtWidgets.QGraphicsObject):
             visible=self.isVisible(),
             graphics_effect=self.graphicsEffect(),
         )
+
+
+class GraphicsObject(GraphicsObjectMixin, QtWidgets.QGraphicsObject):
+    pass

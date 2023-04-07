@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QLinearGradient.__bases__ = (gui.Gradient,)
-
-
-class LinearGradient(QtGui.QLinearGradient):
+class LinearGradient(gui.GradientMixin, QtGui.QLinearGradient):
     def __repr__(self):
         return f"{type(self).__name__}({self.get_start()}, {self.get_final_stop()})"
 

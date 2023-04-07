@@ -4,10 +4,7 @@ from prettyqt import positioning
 from prettyqt.qt import QtPositioning
 
 
-QtPositioning.QGeoPolygon.__bases__ = (positioning.GeoShape,)
-
-
-class GeoPolygon(QtPositioning.QGeoPolygon):
+class GeoPolygon(positioning.GeoShapeMixin, QtPositioning.QGeoPolygon):
     def __len__(self):
         return self.size()
 

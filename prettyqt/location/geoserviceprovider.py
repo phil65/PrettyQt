@@ -124,10 +124,8 @@ RoutingFeatureStr = Literal[
     "exclude_areas",
 ]
 
-QtLocation.QGeoServiceProvider.__bases__ = (core.Object,)
 
-
-class GeoServiceProvider(QtLocation.QGeoServiceProvider):
+class GeoServiceProvider(core.ObjectMixin, QtLocation.QGeoServiceProvider):
     def get_error(self) -> ErrorStr:
         return ERROR.inverse[self.error()]
 

@@ -4,8 +4,9 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QFile.__bases__ = (core.FileDevice,)
+class FileMixin(core.FileDeviceMixin):
+    pass
 
 
-class File(QtCore.QFile):
+class File(FileMixin, QtCore.QFile):
     pass

@@ -16,7 +16,7 @@ T = TypeVar("T", bound=QtCore.QObject)
 counter_dict: DefaultDict = defaultdict(itertools.count)
 
 
-class Object(QtCore.QObject):
+class ObjectMixin:
     def __repr__(self):
         return f"{type(self).__name__}()"
 
@@ -120,3 +120,7 @@ class Object(QtCore.QObject):
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
         return self.startTimer(interval, constants.TIMER_TYPE[timer_type])
+
+
+class Object(ObjectMixin, QtCore.QObject):
+    pass

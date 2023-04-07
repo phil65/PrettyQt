@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QSpacerItem.__bases__ = (widgets.LayoutItem,)
-
-
-class SpacerItem(QtWidgets.QSpacerItem):
+class SpacerItem(widgets.LayoutItemMixin, QtWidgets.QSpacerItem):
     def __init__(
         self,
         w: int,

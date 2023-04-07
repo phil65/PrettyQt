@@ -31,10 +31,8 @@ TAB_POSITION = bidict(
 
 TabPositionStr = Literal["north", "south", "west", "east"]
 
-QtWidgets.QMdiArea.__bases__ = (widgets.AbstractScrollArea,)
 
-
-class MdiArea(QtWidgets.QMdiArea):
+class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
     def __add__(self, other: QtWidgets.QWidget):
         self.add(other)
         return self

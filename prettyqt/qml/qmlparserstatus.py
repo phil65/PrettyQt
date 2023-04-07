@@ -3,5 +3,9 @@ from __future__ import annotations
 from prettyqt.qt import QtQml
 
 
-class QmlParserStatus(QtQml.QQmlParserStatus):
+class QmlParserStatusMixin:
+    pass
+
+
+class QmlParserStatus(QmlParserStatusMixin, QtQml.QQmlParserStatus):
     pass

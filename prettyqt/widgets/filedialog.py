@@ -42,10 +42,7 @@ VIEW_MODE = bidict(
 ViewModeStr = Literal["detail", "list"]
 
 
-QtWidgets.QFileDialog.__bases__ = (widgets.Dialog,)
-
-
-class FileDialog(QtWidgets.QFileDialog):
+class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
     """Simple dialog used to display some widget."""
 
     def __init__(

@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtGui
 
 
-QtGui.QValidator.__bases__ = (core.Object,)
-
-
-class Validator(QtGui.QValidator):
+class ValidatorMixin(core.ObjectMixin):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
@@ -23,6 +20,10 @@ class Validator(QtGui.QValidator):
     def is_valid_value(self, value: str, pos: int = 0) -> bool:
         val = self.validate(value, pos)
         return val[0] == self.State.Acceptable  # type: ignore
+
+
+class Validator(ValidatorMixin, QtGui.QValidator):
+    pass
 
 
 if __name__ == "__main__":

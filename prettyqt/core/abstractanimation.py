@@ -29,10 +29,8 @@ STATE = bidict(
 
 StateStr = Literal["stopped", "paused", "running"]
 
-QtCore.QAbstractAnimation.__bases__ = (core.Object,)
 
-
-class AbstractAnimation(QtCore.QAbstractAnimation):
+class AbstractAnimationMixin(core.ObjectMixin):
     def __len__(self):
         return self.duration()
 
@@ -109,6 +107,10 @@ class AbstractAnimation(QtCore.QAbstractAnimation):
         """
         self.stop()
         self.start_animation(policy)
+
+
+class AbstractAnimation(AbstractAnimationMixin, QtCore.QAbstractAnimation):
+    pass
 
 
 if __name__ == "__main__":

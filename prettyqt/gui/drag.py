@@ -5,10 +5,7 @@ from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError
 
 
-QtGui.QDrag.__bases__ = (core.Object,)
-
-
-class Drag(QtGui.QDrag):
+class Drag(core.ObjectMixin, QtGui.QDrag):
     def get_pixmap(self) -> gui.Pixmap:
         return gui.Pixmap(self.pixmap())
 

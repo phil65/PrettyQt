@@ -15,10 +15,8 @@ LABELS_POSITIONS = bidict(
 
 LabelsPositionStr = Literal["center", "on_value"]
 
-QtCharts.QCategoryAxis.__bases__ = (charts.ValueAxis,)
 
-
-class CategoryAxis(QtCharts.QCategoryAxis):
+class CategoryAxis(charts.ValueAxisMixin, QtCharts.QCategoryAxis):
     def __delitem__(self, index: str):
         self.remove(index)
 

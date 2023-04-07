@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, types
 
 
-QtGui.QStandardItemModel.__bases__ = (core.AbstractItemModel,)
-
-
-class StandardItemModel(QtGui.QStandardItemModel):
+class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
     def __getitem__(
         self, index: int | tuple[int, int] | QtCore.QModelIndex
     ) -> QtGui.QStandardItem:

@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtSvg
 
 
-QtSvg.QSvgGenerator.__bases__ = (gui.PaintDevice,)
-
-
-class SvgGenerator(QtSvg.QSvgGenerator):
+class SvgGenerator(gui.PaintDeviceMixin, QtSvg.QSvgGenerator):
     def get_viewbox(self) -> core.Rect:
         return core.Rect(self.viewBox())
 

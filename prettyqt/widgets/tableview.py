@@ -5,10 +5,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QTableView.__bases__ = (widgets.AbstractItemView,)
-
-
-class TableView(QtWidgets.QTableView):
+class TableViewMixin(widgets.AbstractItemViewMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         class_name = type(self).__name__
@@ -89,6 +86,10 @@ class TableView(QtWidgets.QTableView):
             grid style
         """
         return constants.PEN_STYLE.inverse[self.gridStyle()]
+
+
+class TableView(TableViewMixin, QtWidgets.QTableView):
+    pass
 
 
 if __name__ == "__main__":

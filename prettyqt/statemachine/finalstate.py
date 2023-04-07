@@ -4,8 +4,5 @@ from prettyqt import statemachine
 from prettyqt.qt import QtStateMachine
 
 
-QtStateMachine.QFinalState.__bases__ = (statemachine.AbstractState,)
-
-
-class FinalState(QtStateMachine.QFinalState):
+class FinalState(statemachine.AbstractStateMixin, QtStateMachine.QFinalState):
     pass

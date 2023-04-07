@@ -18,10 +18,8 @@ OperationTypeStr = Literal[
     "save_place", "remove_place", "save_category", "remove_category"
 ]
 
-QtLocation.QPlaceIdReply.__bases__ = (location.PlaceReply,)
 
-
-class PlaceIdReply(QtLocation.QPlaceIdReply):
+class PlaceIdReply(location.PlaceReplyMixin, QtLocation.QPlaceIdReply):
     def __repr__(self):
         return f"{type(self).__name__}({self.operationType()})"
 

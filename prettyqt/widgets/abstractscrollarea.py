@@ -18,10 +18,7 @@ SIZE_POLICY = bidict(
 SizePolicyStr = Literal["content", "first_show", "ignored"]
 
 
-QtWidgets.QAbstractScrollArea.__bases__ = (widgets.Frame,)
-
-
-class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
+class AbstractScrollAreaMixin(widgets.FrameMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setHorizontalScrollBar(widgets.ScrollBar(parent=self))
@@ -157,6 +154,10 @@ class AbstractScrollArea(QtWidgets.QAbstractScrollArea):
     def scroll_to_bottom(self):
         """Scroll to the bottom of the scroll area."""
         self.verticalScrollBar().scroll_to_max()
+
+
+class AbstractScrollArea(AbstractScrollAreaMixin, QtWidgets.QAbstractScrollArea):
+    pass
 
 
 if __name__ == "__main__":

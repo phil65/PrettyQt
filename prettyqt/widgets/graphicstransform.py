@@ -4,10 +4,11 @@ from prettyqt import core
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsTransform.__bases__ = (core.Object,)
+class GraphicsTransformMixin(core.ObjectMixin):
+    pass
 
 
-class GraphicsTransform(QtWidgets.QGraphicsTransform):
+class GraphicsTransform(GraphicsTransformMixin, QtWidgets.QGraphicsTransform):
     pass
 
 

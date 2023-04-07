@@ -4,10 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsLineItem.__bases__ = (widgets.GraphicsItem,)
-
-
-class GraphicsLineItem(QtWidgets.QGraphicsLineItem):
+class GraphicsLineItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsLineItem):
     def __repr__(self):
         return f"{type(self).__name__}({repr(self.get_line())})"
 

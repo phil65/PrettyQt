@@ -35,10 +35,8 @@ FieldGrowthPolicyStr = Literal[
     "fields_stay_at_size", "expanding_fields_grow", "all_non_fixed_fields_grow"
 ]
 
-QtWidgets.QFormLayout.__bases__ = (widgets.Layout,)
 
-
-class FormLayout(QtWidgets.QFormLayout):
+class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_size_mode("maximum")

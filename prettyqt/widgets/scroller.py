@@ -35,10 +35,8 @@ STATE = bidict(
 
 StateStr = Literal["inactive", "pressed", "dragging", "scrolling"]
 
-QtWidgets.QScroller.__bases__ = (core.Object,)
 
-
-class Scroller:
+class Scroller(core.ObjectMixin):
     def __init__(self, item: QtWidgets.QScroller):
         self.item = item
 

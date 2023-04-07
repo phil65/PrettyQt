@@ -4,10 +4,7 @@ from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
 
-QtCore.QSortFilterProxyModel.__bases__ = (core.AbstractProxyModel,)
-
-
-class SortFilterProxyModel(QtCore.QSortFilterProxyModel):
+class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
     def serialize_fields(self):
         return dict(
             dynamic_sort_filter=self.dynamicSortFilter(),

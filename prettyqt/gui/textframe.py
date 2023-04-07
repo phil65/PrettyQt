@@ -4,10 +4,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QTextFrame.__bases__ = (gui.TextObject,)
-
-
-class TextFrame(QtGui.QTextFrame):
+class TextFrame(gui.TextObjectMixin, QtGui.QTextFrame):
     def __repr__(self):
         return f"{type(self).__name__}()"
 

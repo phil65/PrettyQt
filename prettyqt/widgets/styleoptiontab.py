@@ -30,8 +30,5 @@ TAB_POSITION = bidict(
 )
 
 
-QtWidgets.QStyleOptionTab.__bases__ = (widgets.StyleOption,)
-
-
-class StyleOptionTab(QtWidgets.QStyleOptionTab):
+class StyleOptionTab(widgets.StyleOptionMixin, QtWidgets.QStyleOptionTab):
     pass

@@ -4,8 +4,5 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QStyleOptionFrame.__bases__ = (widgets.StyleOption,)
-
-
-class StyleOptionFrame(QtWidgets.QStyleOptionFrame):
+class StyleOptionFrame(widgets.StyleOptionMixin, QtWidgets.QStyleOptionFrame):
     pass

@@ -8,11 +8,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QTextBrowser.__bases__ = (widgets.TextEdit,)
-
-
-class TextBrowser(QtWidgets.QTextBrowser):
-
+class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
     value_changed = core.Signal(str)
 
     def __init__(self, *args, **kwargs):

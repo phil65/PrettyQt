@@ -6,10 +6,7 @@ from prettyqt import location
 from prettyqt.qt import QtLocation
 
 
-QtLocation.QPlaceMatchReply.__bases__ = (location.PlaceReply,)
-
-
-class PlaceMatchReply(QtLocation.QPlaceMatchReply):
+class PlaceMatchReply(location.PlaceReplyMixin, QtLocation.QPlaceMatchReply):
     def __iter__(self) -> Iterator[location.Place]:
         return iter(self.get_places())
 

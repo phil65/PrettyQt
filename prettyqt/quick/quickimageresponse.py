@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtQuick
 
 
-QtQuick.QQuickImageResponse.__bases__ = (core.Object,)
-
-
-class QuickImageResponse(QtQuick.QQuickImageResponse):
+class QuickImageResponse(core.ObjectMixin, QtQuick.QQuickImageResponse):
     pass
 
 

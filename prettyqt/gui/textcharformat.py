@@ -56,10 +56,8 @@ VerticalAlignmentStr = Literal[
     "baseline",
 ]
 
-QtGui.QTextCharFormat.__bases__ = (gui.TextFormat,)
 
-
-class TextCharFormat(QtGui.QTextCharFormat):
+class TextCharFormatMixin(gui.TextFormatMixin):
     def __init__(
         self,
         text_color: types.ColorType | QtGui.QBrush = None,
@@ -161,3 +159,11 @@ class TextCharFormat(QtGui.QTextCharFormat):
 
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())
+
+
+class TextCharFormat(TextCharFormatMixin, QtGui.QTextCharFormat):
+    pass
+
+
+if __name__ == "__main__":
+    w = TextCharFormat()

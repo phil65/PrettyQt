@@ -25,10 +25,8 @@ STATUS = bidict(
 
 StatusStr = Literal["null", "ready", "loading", "error"]
 
-QtQuick.QQuickView.__bases__ = (gui.Window,)
 
-
-class QuickView(QtQuick.QQuickView):
+class QuickView(gui.WindowMixin, QtQuick.QQuickView):
     def set_source(self, source: types.UrlType | types.PathType):
         if isinstance(source, os.PathLike):
             source = os.fspath(source)

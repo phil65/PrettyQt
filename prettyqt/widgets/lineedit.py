@@ -23,10 +23,8 @@ ACTION_POSITION = bidict(
 
 ActionPositionStr = Literal["leading", "trailing"]
 
-QtWidgets.QLineEdit.__bases__ = (widgets.Widget,)
 
-
-class LineEdit(QtWidgets.QLineEdit):
+class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     focusLost = core.Signal()
     enterPressed = core.Signal()
     editComplete = core.Signal(str)

@@ -13,7 +13,7 @@ SHAPE_TYPES = bidict(
 )
 
 
-class GeoShape(QtPositioning.QGeoShape):
+class GeoShapeMixin:
     def __contains__(self, other: QtPositioning.QGeoCoordinate):
         return self.contains(other)
 
@@ -22,3 +22,7 @@ class GeoShape(QtPositioning.QGeoShape):
 
     def get_type(self) -> str:
         return SHAPE_TYPES.inverse[self.type()]
+
+
+class GeoShape(GeoShapeMixin, QtPositioning.QGeoShape):
+    pass

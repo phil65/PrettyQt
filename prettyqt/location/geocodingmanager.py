@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtLocation
 
 
-QtLocation.QGeoCodingManager.__bases__ = (core.Object,)
-
-
-class GeoCodingManager:
+class GeoCodingManager(core.ObjectMixin):
     def __init__(self, item: QtLocation.QGeoCodingManager):
         self.item = item
 

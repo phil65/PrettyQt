@@ -19,10 +19,8 @@ ValuePositionStr = Literal[
     "lower_extreme", "lower_quartile", "median", "upper_quartile", "upper_extreme"
 ]
 
-QtCharts.QBoxSet.__bases__ = (core.Object,)
 
-
-class BoxSet(QtCharts.QBoxSet):
+class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
     def __repr__(self):
         return (
             f"{type(self).__name__}({self['lower_extreme']}, {self['lower_quartile']},"

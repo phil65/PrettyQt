@@ -4,9 +4,6 @@ from prettyqt import core, location, positioning
 from prettyqt.qt import QtLocation, QtPositioning
 
 
-QtLocation.QPlaceManager.__bases__ = (core.Object,)
-
-
 class PlaceManager(core.Object):
     on_finished = core.Signal(location.PlaceSearchReply)
 

@@ -27,10 +27,8 @@ PERSISTENT_COOKIE_POLICY = bidict(
 
 PersistentCookiePolicyStr = Literal["none", "allow", "force"]
 
-QtWebEngineCore.QWebEngineProfile.__bases__ = (core.Object,)
 
-
-class WebEngineProfile(QtWebEngineCore.QWebEngineProfile):
+class WebEngineProfile(core.ObjectMixin, QtWebEngineCore.QWebEngineProfile):
     def set_persistent_cookie_policy(self, policy: PersistentCookiePolicyStr):
         """Set the persistent cookie policy.
 

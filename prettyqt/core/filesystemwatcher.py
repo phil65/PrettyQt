@@ -8,10 +8,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import types
 
 
-QtCore.QFileSystemWatcher.__bases__ = (core.Object,)
-
-
-class FileSystemWatcher(QtCore.QFileSystemWatcher):
+class FileSystemWatcher(core.ObjectMixin, QtCore.QFileSystemWatcher):
     def __repr__(self):
         paths = [str(p) for p in self.get_paths()]
         return f"{type(self).__name__}({paths})"

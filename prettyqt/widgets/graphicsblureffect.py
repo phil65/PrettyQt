@@ -16,10 +16,7 @@ BLUR_HINTS = bidict(
 BlurHintStr = Literal["performance", "quality", "animation"]
 
 
-QtWidgets.QGraphicsBlurEffect.__bases__ = (widgets.GraphicsEffect,)
-
-
-class GraphicsBlurEffect(QtWidgets.QGraphicsBlurEffect):
+class GraphicsBlurEffect(widgets.GraphicsEffectMixin, QtWidgets.QGraphicsBlurEffect):
     def serialize_fields(self):
         return dict(blur_radius=self.blurRadius(), blur_hints=self.get_blur_hints())
 

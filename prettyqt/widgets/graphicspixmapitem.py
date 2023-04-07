@@ -15,10 +15,8 @@ SHAPE_MODE = bidict(
 
 ShapeModeStr = Literal["mask", "bounding_rect", "heuristic_mask"]
 
-QtWidgets.QGraphicsPixmapItem.__bases__ = (widgets.GraphicsItem,)
 
-
-class GraphicsPixmapItem(QtWidgets.QGraphicsPixmapItem):
+class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapItem):
     def serialize_fields(self):
         return dict(
             offset=self.offset(),

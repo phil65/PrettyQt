@@ -19,5 +19,9 @@ IMAGE_TYPE = bidict(
 )
 
 
-class QmlImageProviderBase(QtQml.QQmlImageProviderBase):
+class QmlImageProviderBaseMixin:
+    pass
+
+
+class QmlImageProviderBase(QmlImageProviderBaseMixin, QtQml.QQmlImageProviderBase):
     pass

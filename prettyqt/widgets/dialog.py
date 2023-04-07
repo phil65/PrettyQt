@@ -5,10 +5,7 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QDialog.__bases__ = (widgets.Widget,)
-
-
-class Dialog(QtWidgets.QDialog):
+class DialogMixin(widgets.WidgetMixin):
     def __init__(
         self,
         title: str = "",
@@ -81,6 +78,10 @@ class Dialog(QtWidgets.QDialog):
             return self.exec()
         else:
             return self.exec_()
+
+
+class Dialog(DialogMixin, QtWidgets.QDialog):
+    pass
 
 
 if __name__ == "__main__":

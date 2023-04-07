@@ -15,10 +15,7 @@ TEXT_DIRECTIONS = bidict(
 TextDirectionStr = Literal["top_to_bottom", "bottom_to_top"]
 
 
-QtWidgets.QProgressBar.__bases__ = (widgets.Widget,)
-
-
-class ProgressBar(QtWidgets.QProgressBar):
+class ProgressBar(widgets.WidgetMixin, QtWidgets.QProgressBar):
     """Progress dialog.
 
     wrapper for QtWidgets.QProgressBar

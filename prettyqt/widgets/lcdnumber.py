@@ -24,10 +24,8 @@ SEGMENT_STYLE = bidict(
 
 SegmentStyleStr = Literal["outline", "filled", "flat"]
 
-QtWidgets.QLCDNumber.__bases__ = (widgets.Frame,)
 
-
-class LCDNumber(QtWidgets.QLCDNumber):
+class LCDNumber(widgets.FrameMixin, QtWidgets.QLCDNumber):
     def serialize_fields(self):
         return dict(
             mode=self.get_mode(),

@@ -4,8 +4,5 @@ from prettyqt import charts
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QPercentBarSeries.__bases__ = (charts.AbstractBarSeries,)
-
-
-class PercentBarSeries(QtCharts.QPercentBarSeries):
+class PercentBarSeries(charts.AbstractBarSeriesMixin, QtCharts.QPercentBarSeries):
     pass

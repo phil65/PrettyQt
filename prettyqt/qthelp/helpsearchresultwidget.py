@@ -5,10 +5,7 @@ from prettyqt.qt import QtHelp
 from prettyqt.utils import types
 
 
-QtHelp.QHelpSearchResultWidget.__bases__ = (widgets.Widget,)
-
-
-class HelpSearchResultWidget(QtHelp.QHelpSearchResultWidget):
+class HelpSearchResultWidget(widgets.WidgetMixin, QtHelp.QHelpSearchResultWidget):
     def get_link_at(self, point: types.PointType) -> core.Url:
         if isinstance(point, tuple):
             point = core.Point(*point)

@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QConicalGradient.__bases__ = (gui.Gradient,)
-
-
-class ConicalGradient(QtGui.QConicalGradient):
+class ConicalGradient(gui.GradientMixin, QtGui.QConicalGradient):
     def __repr__(self):
         return f"{type(self).__name__}({self.get_center()}, {self.angle()})"
 

@@ -4,10 +4,7 @@ from prettyqt import location
 from prettyqt.qt import QtLocation
 
 
-QtLocation.QPlaceDetailsReply.__bases__ = (location.PlaceReply,)
-
-
-class PlaceDetailsReply(QtLocation.QPlaceDetailsReply):
+class PlaceDetailsReply(location.PlaceReplyMixin, QtLocation.QPlaceDetailsReply):
     @classmethod
     def clone_from(cls, obj: QtLocation.QPlaceDetailsReply) -> PlaceDetailsReply:
         reply = cls(obj.parent())

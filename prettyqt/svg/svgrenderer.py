@@ -7,10 +7,7 @@ from prettyqt.qt import QtSvg
 from prettyqt.utils import InvalidParamError, types
 
 
-QtSvg.QSvgRenderer.__bases__ = (core.Object,)
-
-
-class SvgRenderer(QtSvg.QSvgRenderer):
+class SvgRenderer(core.ObjectMixin, QtSvg.QSvgRenderer):
     def load_file(self, path: types.PathType):
         result = self.load(os.fspath(path))
         if not result:

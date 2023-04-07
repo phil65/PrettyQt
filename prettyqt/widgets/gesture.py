@@ -14,10 +14,8 @@ GESTURE_CANCEL_POLICY = bidict(
 
 GestureCancelPolicyStr = Literal["none", "all_in_context"]
 
-QtWidgets.QGesture.__bases__ = (core.Object,)
 
-
-class Gesture(QtWidgets.QGesture):
+class GestureMixin(core.ObjectMixin):
     def get_state(self) -> constants.GestureStateStr:
         """Return current state.
 
@@ -57,6 +55,10 @@ class Gesture(QtWidgets.QGesture):
             gesture cancel policy
         """
         return GESTURE_CANCEL_POLICY.inverse[self.gestureCancelPolicy()]
+
+
+class Gesture(GestureMixin, QtWidgets.QGesture):
+    pass
 
 
 if __name__ == "__main__":

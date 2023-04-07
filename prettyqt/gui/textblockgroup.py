@@ -6,10 +6,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QTextBlockGroup.__bases__ = (gui.TextObject,)
-
-
-class TextBlockGroup(QtGui.QTextBlockGroup):
+class TextBlockGroup(gui.TextObjectMixin, QtGui.QTextBlockGroup):
     def __repr__(self):
         return f"{type(self).__name__}()"
 

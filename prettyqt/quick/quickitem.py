@@ -75,10 +75,8 @@ TransformOriginStr = Literal[
     "bottom_right",
 ]
 
-QtQuick.QQuickItem.__bases__ = (core.Object, qml.QmlParserStatus)
 
-
-class QuickItem(QtQuick.QQuickItem):
+class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
     def get_children_rect(self) -> core.RectF:
         return core.RectF(self.childrenRect())
 
@@ -110,6 +108,10 @@ class QuickItem(QtQuick.QQuickItem):
             transform origin
         """
         return TRANSFORM_ORIGIN.inverse[self.transformOrigin()]
+
+
+class QuickItem(QuickItemMixin, QtQuick.QQuickItem):
+    pass
 
 
 if __name__ == "__main__":

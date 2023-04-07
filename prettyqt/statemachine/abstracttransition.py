@@ -14,10 +14,8 @@ TRANSITION_TYPE = bidict(
 
 TransitionTypeStr = Literal["exclusive", "parallel"]
 
-QtStateMachine.QAbstractTransition.__bases__ = (core.Object,)
 
-
-class AbstractTransition(QtStateMachine.QAbstractTransition):
+class AbstractTransitionMixin(core.ObjectMixin):
     def set_transition_type(self, typ: TransitionTypeStr):
         """Set transition type.
 
@@ -38,3 +36,7 @@ class AbstractTransition(QtStateMachine.QAbstractTransition):
             transition type
         """
         return TRANSITION_TYPE.inverse[self.transitionType()]
+
+
+class AbstractTransition(AbstractTransitionMixin, QtStateMachine.QAbstractTransition):
+    pass

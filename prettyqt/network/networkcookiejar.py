@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore, QtNetwork
 from prettyqt.utils import types
 
 
-QtNetwork.QNetworkCookieJar.__bases__ = (core.Object,)
-
-
-class NetworkCookieJar(QtNetwork.QNetworkCookieJar):
+class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):
     def __add__(self, other: QtNetwork.QNetworkCookie):
         self.insertCookie(other)
         return self

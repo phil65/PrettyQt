@@ -4,10 +4,7 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGroupBox.__bases__ = (widgets.Widget,)
-
-
-class GroupBox(QtWidgets.QGroupBox):
+class GroupBox(widgets.WidgetMixin, QtWidgets.QGroupBox):
     """GroupBox widget.
 
     A group box provides a frame, a title on top, a keyboard shortcut,

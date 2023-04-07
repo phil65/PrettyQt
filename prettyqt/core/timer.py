@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, helpers
 
 
-QtCore.QTimer.__bases__ = (core.Object,)
-
-
-class Timer(QtCore.QTimer):
+class Timer(core.ObjectMixin, QtCore.QTimer):
     def serialize_fields(self):
         return dict(
             interval=self.interval(),

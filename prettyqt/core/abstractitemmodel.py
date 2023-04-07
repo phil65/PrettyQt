@@ -21,10 +21,7 @@ LAYOUT_CHANGE_HINT = bidict(
 )
 
 
-QtCore.QAbstractItemModel.__bases__ = (core.Object,)
-
-
-class AbstractItemModel(QtCore.QAbstractItemModel):
+class AbstractItemModelMixin(core.ObjectMixin):
     def __repr__(self):
         return f"{type(self).__name__}: {self.rowCount()} rows"
 
@@ -156,3 +153,7 @@ class AbstractItemModel(QtCore.QAbstractItemModel):
     def force_layoutchange(self):
         self.layoutAboutToBeChanged.emit()
         self.layoutChanged.emit()
+
+
+class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
+    pass

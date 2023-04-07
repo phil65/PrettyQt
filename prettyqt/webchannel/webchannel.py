@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtWebChannel
 
 
-QtWebChannel.QWebChannel.__bases__ = (core.Object,)
-
-
-class WebChannel(QtWebChannel.QWebChannel):
+class WebChannel(core.ObjectMixin, QtWebChannel.QWebChannel):
     pass
 
 

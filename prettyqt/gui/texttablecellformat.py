@@ -5,10 +5,7 @@ from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError
 
 
-QtGui.QTextTableCellFormat.__bases__ = (gui.TextCharFormat,)
-
-
-class TextTableCellFormat(QtGui.QTextTableCellFormat):
+class TextTableCellFormat(gui.TextCharFormatMixin, QtGui.QTextTableCellFormat):
     def get_bottom_border_brush(self) -> gui.Brush:
         return gui.Brush(self.bottomBorderBrush())
 

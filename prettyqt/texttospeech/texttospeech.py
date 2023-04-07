@@ -19,10 +19,8 @@ STATE = bidict(
 
 StateStr = Literal["ready", "speaking", "paused", "backend_error"]
 
-QtTextToSpeech.QTextToSpeech.__bases__ = (core.Object,)
 
-
-class TextToSpeech(QtTextToSpeech.QTextToSpeech):
+class TextToSpeech(core.ObjectMixin, QtTextToSpeech.QTextToSpeech):
     def get_state(self) -> StateStr:
         return STATE.inverse[self.state()]
 

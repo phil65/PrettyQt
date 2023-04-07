@@ -52,10 +52,7 @@ VIEWPORT_UPDATE_MODE = bidict(
 ViewportUpdateModeStr = Literal["full", "minimal", "smart", "bounding_rect", "none"]
 
 
-mod.__bases__ = (widgets.AbstractScrollArea,)
-
-
-class GraphicsView(QtWidgets.QGraphicsView):
+class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
     def serialize_fields(self):
         return dict(
             scene=self.scene(),
@@ -236,6 +233,10 @@ class GraphicsView(QtWidgets.QGraphicsView):
 
     def get_optimization_flags(self) -> list[OptimizationFlagStr]:
         return [k for k, v in OPTIMIZATION_FLAGS.items() if v & self.optimizationFlags()]
+
+
+class GraphicsView(GraphicsViewMixin, QtWidgets.QGraphicsView):
+    pass
 
 
 if __name__ == "__main__":

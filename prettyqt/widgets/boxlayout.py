@@ -17,10 +17,7 @@ DIRECTION = bidict(
 DirectionStr = Literal["left_to_right", "right_to_left", "top_to_bottom", "bottom_to_top"]
 
 
-QtWidgets.QBoxLayout.__bases__ = (widgets.Layout,)
-
-
-class BoxLayout(QtWidgets.QBoxLayout):
+class BoxLayoutMixin(widgets.LayoutMixin):
     def __init__(
         self,
         orientation: Literal["horizontal", "vertical"] = "horizontal",
@@ -85,6 +82,10 @@ class BoxLayout(QtWidgets.QBoxLayout):
             direction
         """
         return DIRECTION.inverse[self.direction()]
+
+
+class BoxLayout(BoxLayoutMixin, QtWidgets.QBoxLayout):
+    pass
 
 
 if __name__ == "__main__":

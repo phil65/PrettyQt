@@ -19,11 +19,7 @@ LINE_WRAP_MODE = bidict(
 LineWrapModeStr = Literal["none", "widget_width"]
 
 
-QtWidgets.QPlainTextEdit.__bases__ = (widgets.AbstractScrollArea,)
-
-
-class PlainTextEdit(QtWidgets.QPlainTextEdit):
-
+class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     value_changed = core.Signal()
 
     def __init__(
@@ -265,6 +261,10 @@ class PlainTextEdit(QtWidgets.QPlainTextEdit):
 
     def get_value(self) -> str:
         return self.text()
+
+
+class PlainTextEdit(PlainTextEditMixin, QtWidgets.QPlainTextEdit):
+    pass
 
 
 if __name__ == "__main__":

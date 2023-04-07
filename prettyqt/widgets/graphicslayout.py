@@ -6,10 +6,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsLayout.__bases__ = (widgets.GraphicsLayoutItem,)
-
-
-class GraphicsLayout(QtWidgets.QGraphicsLayout):
+class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         layoutitem = self.itemAt(index)
         return layoutitem.graphicsItem()
@@ -36,6 +33,10 @@ class GraphicsLayout(QtWidgets.QGraphicsLayout):
 
     def set_margin(self, margin: int):
         self.setContentsMargins(margin, margin, margin, margin)
+
+
+class GraphicsLayout(GraphicsLayoutMixin, QtWidgets.QGraphicsLayout):
+    pass
 
 
 if __name__ == "__main__":

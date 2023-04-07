@@ -44,10 +44,10 @@ ErrorStr = Literal[
 
 # InquiryTypeStr = Literal["unlimited", "limited"]
 
-QtBluetooth.QBluetoothDeviceDiscoveryAgent.__bases__ = (core.Object,)
 
-
-class BluetoothDeviceDiscoveryAgent(QtBluetooth.QBluetoothDeviceDiscoveryAgent):
+class BluetoothDeviceDiscoveryAgent(
+    core.ObjectMixin, QtBluetooth.QBluetoothDeviceDiscoveryAgent
+):
     # def set_inquiry_type(self, typ: InquiryTypeStr):
     #     """Set inquiry type.
 

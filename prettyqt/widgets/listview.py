@@ -43,10 +43,7 @@ RESIZE_MODE = bidict(
 ResizeModeStr = Literal["fixed", "adjust"]
 
 
-QtWidgets.QListView.__bases__ = (widgets.AbstractItemView,)
-
-
-class ListView(QtWidgets.QListView):
+class ListViewMixin(widgets.AbstractItemViewMixin):
     def serialize_fields(self):
         return dict(
             view_mode=self.get_view_mode(),
@@ -194,6 +191,10 @@ class ListView(QtWidgets.QListView):
 
     def get_grid_size(self) -> core.Size:
         return core.Size(self.gridSize())
+
+
+class ListView(ListViewMixin, QtWidgets.QListView):
+    pass
 
 
 if __name__ == "__main__":

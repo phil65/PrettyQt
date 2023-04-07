@@ -4,10 +4,7 @@ from prettyqt import positioning
 from prettyqt.qt import QtPositioning
 
 
-QtPositioning.QGeoPath.__bases__ = (positioning.GeoShape,)
-
-
-class GeoPath(QtPositioning.QGeoPath):
+class GeoPath(positioning.GeoShapeMixin, QtPositioning.QGeoPath):
     def __len__(self):
         return self.size()
 

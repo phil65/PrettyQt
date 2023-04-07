@@ -4,10 +4,7 @@ from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QFontDialog.__bases__ = (widgets.Dialog,)
-
-
-class FontDialog(QtWidgets.QFontDialog):
+class FontDialog(widgets.DialogMixin, QtWidgets.QFontDialog):
     def get_current_font(self) -> gui.Font:
         return gui.Font(self.currentFont())
 

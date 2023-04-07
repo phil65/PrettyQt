@@ -44,10 +44,7 @@ BorderStyleStr = Literal[
 ]
 
 
-QtGui.QTextFrameFormat.__bases__ = (gui.TextFormat,)
-
-
-class TextFrameFormat(QtGui.QTextFrameFormat):
+class TextFrameFormat(gui.TextFormatMixin, QtGui.QTextFrameFormat):
     def get_height(self) -> gui.TextLength:
         length = self.height()
         return gui.TextLength(length.type(), length.rawValue())

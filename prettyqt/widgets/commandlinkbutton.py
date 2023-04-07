@@ -4,11 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QCommandLinkButton.__bases__ = (widgets.PushButton,)
-
-
-class CommandLinkButton(QtWidgets.QCommandLinkButton):
-
+class CommandLinkButton(widgets.PushButtonMixin, QtWidgets.QCommandLinkButton):
     value_changed = core.Signal(bool)
 
 

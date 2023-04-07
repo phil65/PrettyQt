@@ -37,7 +37,7 @@ MetricStr = Literal[
 ]
 
 
-class PaintDevice(QtGui.QPaintDevice):
+class PaintDeviceMixin:
     def get_metric(self, metric: MetricStr) -> int:
         """Return metric information.
 
@@ -50,6 +50,10 @@ class PaintDevice(QtGui.QPaintDevice):
         if metric not in METRICS:
             raise InvalidParamError(metric, METRICS)
         return self.metric(METRICS[metric])
+
+
+class PaintDevice(PaintDeviceMixin, QtGui.QPaintDevice):
+    pass
 
 
 if __name__ == "__main__":

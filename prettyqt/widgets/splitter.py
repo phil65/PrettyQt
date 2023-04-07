@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QSplitter.__bases__ = (widgets.Frame,)
-
-
-class Splitter(QtWidgets.QSplitter):
+class SplitterMixin(widgets.FrameMixin):
     def __init__(
         self,
         orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",
@@ -117,6 +114,10 @@ class Splitter(QtWidgets.QSplitter):
             orientation
         """
         return constants.ORIENTATION.inverse[self.orientation()]
+
+
+class Splitter(SplitterMixin, QtWidgets.QSplitter):
+    pass
 
 
 if __name__ == "__main__":

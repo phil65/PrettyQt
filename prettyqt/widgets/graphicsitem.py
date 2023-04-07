@@ -24,7 +24,7 @@ CACHE_MODE = bidict(
 CacheModeStr = Literal["none", "item_coordinate", "device_coordinate"]
 
 
-class GraphicsItem(QtWidgets.QGraphicsItem):
+class GraphicsItemMixin:
     def __repr__(self):
         return f"{type(self).__name__}()"
 
@@ -132,6 +132,10 @@ class GraphicsItem(QtWidgets.QGraphicsItem):
             self.setScale(scale)
         else:
             self.setTransform(gui.Transform.fromScale(scale[0], scale[1]), True)
+
+
+class GraphicsItem(GraphicsItemMixin, QtWidgets.QGraphicsItem):
+    pass
 
 
 if __name__ == "__main__":

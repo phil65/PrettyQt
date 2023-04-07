@@ -4,10 +4,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QRasterWindow.__bases__ = (gui.PaintDeviceWindow,)
-
-
-class RasterWindow(QtGui.QRasterWindow):
+class RasterWindow(gui.PaintDeviceWindowMixin, QtGui.QRasterWindow):
     pass
 
 

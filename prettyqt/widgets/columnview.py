@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QColumnView.__bases__ = (widgets.AbstractItemView,)
-
-
-class ColumnView(QtWidgets.QColumnView):
+class ColumnView(widgets.AbstractItemViewMixin, QtWidgets.QColumnView):
     pass
 
 

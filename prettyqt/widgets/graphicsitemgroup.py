@@ -4,8 +4,5 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsItemGroup.__bases__ = (widgets.GraphicsItem,)
-
-
-class GraphicsItemGroup(QtWidgets.QGraphicsItemGroup):
+class GraphicsItemGroup(widgets.GraphicsItemMixin, QtWidgets.QGraphicsItemGroup):
     pass

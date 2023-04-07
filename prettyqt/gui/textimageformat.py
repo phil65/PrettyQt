@@ -4,10 +4,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QTextImageFormat.__bases__ = (gui.TextCharFormat,)
-
-
-class TextImageFormat(QtGui.QTextImageFormat):
+class TextImageFormat(gui.TextCharFormatMixin, QtGui.QTextImageFormat):
     def __bool__(self):
         return self.isValid()
 

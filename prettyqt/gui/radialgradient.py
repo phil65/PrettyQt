@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QRadialGradient.__bases__ = (gui.Gradient,)
-
-
-class RadialGradient(QtGui.QRadialGradient):
+class RadialGradient(gui.GradientMixin, QtGui.QRadialGradient):
     def __repr__(self):
         return (
             f"{type(self).__name__}({self.get_center()}, {self.centerRadius()}, "

@@ -21,11 +21,8 @@ MODES = bidict(
 
 ModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
 
-QtWidgets.QHeaderView.__bases__ = (widgets.AbstractItemView,)
 
-
-class HeaderView(QtWidgets.QHeaderView):
-
+class HeaderViewMixin(widgets.AbstractItemViewMixin):
     section_vis_changed = core.Signal(int, bool)
     section_resized_by_user = core.Signal(int, int, int)
 
@@ -140,6 +137,10 @@ class HeaderView(QtWidgets.QHeaderView):
 
     def stretch_last_section(self, stretch: bool = True):
         self.setStretchLastSection(stretch)
+
+
+class HeaderView(HeaderViewMixin, QtWidgets.QHeaderView):
+    pass
 
 
 if __name__ == "__main__":

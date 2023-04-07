@@ -11,7 +11,7 @@ from .helpcontentwidget import HelpContentWidget
 from .helpindexwidget import HelpIndexWidget
 from .helpsearchresultwidget import HelpSearchResultWidget
 from .helpsearchquerywidget import HelpSearchQueryWidget
-from .helpenginecore import HelpEngineCore
+from .helpenginecore import HelpEngineCore, HelpEngineCoreMixin
 from .helpengine import HelpEngine
 from .helpsearchengine import HelpSearchEngine
 from .helpfilterengine import HelpFilterEngine
@@ -28,5 +28,6 @@ __all__ = [
     "HelpSearchQueryWidget",
     "HelpFilterEngine",
     "HelpEngineCore",
+    "HelpEngineCoreMixin",
     "HelpEngine",
 ]

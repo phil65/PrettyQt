@@ -15,10 +15,8 @@ OPTIONS = bidict(
     no_custom_icons=QtWidgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
 )
 
-QtWidgets.QFileSystemModel.__bases__ = (core.AbstractItemModel,)
 
-
-class FileSystemModel(QtWidgets.QFileSystemModel):
+class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
     """Class to populate a filesystem treeview."""
 
     DATA_ROLE = constants.USER_ROLE + 33  # type: ignore

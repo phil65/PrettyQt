@@ -4,10 +4,7 @@ from prettyqt import core, location
 from prettyqt.qt import QtLocation
 
 
-QtLocation.QGeoRoutingManager.__bases__ = (core.Object,)
-
-
-class GeoRoutingManager:
+class GeoRoutingManager(core.ObjectMixin):
     def __init__(self, item: QtLocation.QGeoRoutingManager):
         self.item = item
 

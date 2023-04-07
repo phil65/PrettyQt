@@ -4,10 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QTapAndHoldGesture.__bases__ = (widgets.Gesture,)
-
-
-class TapAndHoldGesture(QtWidgets.QTapAndHoldGesture):
+class TapAndHoldGesture(widgets.GestureMixin, QtWidgets.QTapAndHoldGesture):
     def get_position(self) -> core.PointF:
         return core.PointF(self.position())
 

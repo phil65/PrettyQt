@@ -64,10 +64,8 @@ DRAG_DROP_MODE = bidict(
 
 DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]
 
-QtWidgets.QAbstractItemView.__bases__ = (widgets.AbstractScrollArea,)
 
-
-class AbstractItemView(QtWidgets.QAbstractItemView):
+class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def __len__(self) -> int:
         if self.model() is not None:
             return self.model().rowCount()
@@ -345,3 +343,7 @@ class AbstractItemView(QtWidgets.QAbstractItemView):
         elif isinstance(size, int):
             size = QtCore.QSize(size, size)
         self.setIconSize(size)
+
+
+class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
+    pass

@@ -52,10 +52,7 @@ LocalSocketStateStr = Literal[
 ]
 
 
-QtNetwork.QLocalSocket.__bases__ = (core.IODevice,)
-
-
-class LocalSocket(QtNetwork.QLocalSocket):
+class LocalSocket(core.IODeviceMixin, QtNetwork.QLocalSocket):
     def __bool__(self):
         return self.isValid()
 

@@ -8,10 +8,7 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QDockWidget.__bases__ = (widgets.Widget,)
-
-
-class DockWidget(QtWidgets.QDockWidget):
+class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
     """Customized DockWidget class.
 
     Contains a custom TitleBar with maximize button

@@ -8,10 +8,7 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, types
 
 
-QtGui.QPixmap.__bases__ = (gui.PaintDevice,)
-
-
-class Pixmap(QtGui.QPixmap):
+class PixmapMixin(gui.PaintDeviceMixin):
     def __bool__(self):
         return not self.isNull()
 
@@ -140,6 +137,10 @@ class Pixmap(QtGui.QPixmap):
             painter.setFont(font)
             painter.drawText(rect, QtCore.Qt.AlignCenter, char)
         return pixmap
+
+
+class Pixmap(PixmapMixin, QtGui.QPixmap):
+    pass
 
 
 if __name__ == "__main__":

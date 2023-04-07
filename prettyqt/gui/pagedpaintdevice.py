@@ -4,10 +4,11 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QPagedPaintDevice.__bases__ = (gui.PaintDevice,)
+class PagedPaintDeviceMixin(gui.PaintDeviceMixin):
+    pass
 
 
-class PagedPaintDevice(QtGui.QPagedPaintDevice):
+class PagedPaintDevice(PagedPaintDeviceMixin, QtGui.QPagedPaintDevice):
     pass
 
 

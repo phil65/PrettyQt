@@ -4,10 +4,7 @@ from prettyqt import constants, core, gui
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QAbstractAxis.__bases__ = (core.Object,)
-
-
-class AbstractAxis(QtCharts.QAbstractAxis):
+class AbstractAxisMixin(core.ObjectMixin):
     def get_alignment(self) -> constants.SideStr | None:
         """Return current alignment.
 
@@ -74,3 +71,7 @@ class AbstractAxis(QtCharts.QAbstractAxis):
 
     def get_minor_grid_line_color(self) -> gui.Color:
         return gui.Color(self.minorGridLineColor())
+
+
+class AbstractAxis(AbstractAxisMixin, QtCharts.QAbstractAxis):
+    pass

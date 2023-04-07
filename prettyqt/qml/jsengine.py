@@ -12,10 +12,8 @@ EXTENSIONS = bidict(
     all=QtQml.QJSEngine.Extension.AllExtensions,
 )
 
-QtQml.QJSEngine.__bases__ = (core.Object,)
 
-
-class JSEngine(QtQml.QJSEngine):
+class JSEngineMixin(core.ObjectMixin):
     def serialize_fields(self):
         return dict(ui_language=self.uiLanguage())
 
@@ -30,6 +28,10 @@ class JSEngine(QtQml.QJSEngine):
     def eval(self, program: str):
         result = self.evaluate(program)
         return qml.JSValue(result)  # type: ignore
+
+
+class JSEngine(JSEngineMixin, QtQml.QJSEngine):
+    pass
 
 
 if __name__ == "__main__":

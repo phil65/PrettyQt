@@ -8,10 +8,7 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, colors, types
 
 
-QtGui.QGuiApplication.__bases__ = (core.CoreApplication,)
-
-
-class GuiApplication(QtGui.QGuiApplication):
+class GuiApplicationMixin(core.CoreApplicationMixin):
     def serialize_fields(self):
         return dict(icon=self.get_icon())
 
@@ -163,3 +160,7 @@ class GuiApplication(QtGui.QGuiApplication):
     @classmethod
     def get_palette(cls) -> gui.Palette:
         return gui.Palette(cls.palette())
+
+
+class GuiApplication(GuiApplicationMixin, QtGui.QGuiApplication):
+    pass

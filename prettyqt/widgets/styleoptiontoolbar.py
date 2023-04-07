@@ -10,8 +10,6 @@ TOOLBAR_FEATURE = bidict(
     movable=QtWidgets.QStyleOptionToolBar.ToolBarFeature.Movable,
 )
 
-QtWidgets.QStyleOptionToolBar.__bases__ = (widgets.StyleOption,)
 
-
-class StyleOptionToolBar(QtWidgets.QStyleOptionToolBar):
+class StyleOptionToolBar(widgets.StyleOptionMixin, QtWidgets.QStyleOptionToolBar):
     pass

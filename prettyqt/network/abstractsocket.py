@@ -169,10 +169,8 @@ TypeOfServiceStr = Literal[
     "routine",
 ]
 
-QtNetwork.QAbstractSocket.__bases__ = (core.IODevice,)
 
-
-class AbstractSocket(QtNetwork.QAbstractSocket):
+class AbstractSocketMixin(core.IODeviceMixin):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
@@ -258,3 +256,7 @@ class AbstractSocket(QtNetwork.QAbstractSocket):
 
     def get_local_address(self) -> network.HostAddress:
         return network.HostAddress(self.localAddress())
+
+
+class AbstractSocket(AbstractSocketMixin, QtNetwork.QAbstractSocket):
+    pass

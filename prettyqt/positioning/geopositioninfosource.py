@@ -27,10 +27,8 @@ ERRORS = bidict(
 
 ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
-QtPositioning.QGeoPositionInfoSource.__bases__ = (core.Object,)
 
-
-class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
+class GeoPositionInfoSourceMixin(core.ObjectMixin):
     def serialize_fields(self):
         return dict(
             minimum_update_interval=self.minimumUpdateInterval(),
@@ -90,3 +88,9 @@ class GeoPositionInfoSource(QtPositioning.QGeoPositionInfoSource):
             for k, v in POSITIONING_METHODS.items()
             if v & self.supportedPositioningMethods()
         ]
+
+
+class GeoPositionInfoSource(
+    GeoPositionInfoSourceMixin, QtPositioning.QGeoPositionInfoSource
+):
+    pass

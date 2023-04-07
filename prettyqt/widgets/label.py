@@ -41,10 +41,7 @@ TEXT_FORMAT = bidict(
 TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
-QtWidgets.QLabel.__bases__ = (widgets.Frame,)
-
-
-class Label(QtWidgets.QLabel):
+class Label(widgets.FrameMixin, QtWidgets.QLabel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.openExternalLinks()

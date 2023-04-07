@@ -16,10 +16,8 @@ OBJECT_OWNERSHIP = bidict(
 
 ObjectOwnershipStr = Literal["cpp", "javascript"]
 
-QtQml.QQmlEngine.__bases__ = (qml.JSEngine,)
 
-
-class QmlEngine(QtQml.QQmlEngine):
+class QmlEngineMixin(qml.JSEngineMixin):
     def set_object_ownership(self, obj: QtCore.QObject, mode: ObjectOwnershipStr):
         """Set the object ownership.
 
@@ -63,3 +61,7 @@ class QmlEngine(QtQml.QQmlEngine):
 
     def set_offline_storage_path(self, path: types.PathType):
         self.setOfflineStoragePath(os.fspath(path))
+
+
+class QmlEngine(QmlEngineMixin, QtQml.QQmlEngine):
+    pass

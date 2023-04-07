@@ -21,10 +21,9 @@ ERRORS = bidict(
 )
 
 
-QtBluetooth.QBluetoothServiceDiscoveryAgent.__bases__ = (core.Object,)
-
-
-class BluetoothServiceDiscoveryAgent(QtBluetooth.QBluetoothServiceDiscoveryAgent):
+class BluetoothServiceDiscoveryAgent(
+    core.ObjectMixin, QtBluetooth.QBluetoothServiceDiscoveryAgent
+):
     def start_discovery(self, full: bool = False):
         if full:
             flag = QtBluetooth.QBluetoothServiceDiscoveryAgent.FullDiscovery

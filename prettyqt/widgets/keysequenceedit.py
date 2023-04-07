@@ -4,11 +4,7 @@ from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
 
 
-QtWidgets.QKeySequenceEdit.__bases__ = (widgets.Widget,)
-
-
-class KeySequenceEdit(QtWidgets.QKeySequenceEdit):
-
+class KeySequenceEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
     value_changed = core.Signal(QtGui.QKeySequence)
 
     def __init__(self, *args, **kwargs):

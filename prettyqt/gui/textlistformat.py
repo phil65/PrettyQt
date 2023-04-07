@@ -29,10 +29,8 @@ StyleStr = Literal[
     "upper_roman",
 ]
 
-QtGui.QTextListFormat.__bases__ = (gui.TextFormat,)
 
-
-class TextListFormat(QtGui.QTextListFormat):
+class TextListFormat(gui.TextFormatMixin, QtGui.QTextListFormat):
     def set_style(self, style: StyleStr):
         """Set the style.
 

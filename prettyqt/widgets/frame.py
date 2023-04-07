@@ -30,10 +30,7 @@ FrameShapeStr = Literal[
 ]
 
 
-QtWidgets.QFrame.__bases__ = (widgets.Widget,)
-
-
-class Frame(QtWidgets.QFrame):
+class FrameMixin(widgets.WidgetMixin):
     def serialize_fields(self):
         return dict(
             frame_shadow=self.get_frame_shadow(),
@@ -92,3 +89,7 @@ class Frame(QtWidgets.QFrame):
             frame shape
         """
         return FRAME_SHAPE.inverse[self.frameShape()]
+
+
+class Frame(FrameMixin, QtWidgets.QFrame):
+    pass

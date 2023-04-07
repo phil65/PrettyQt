@@ -4,10 +4,7 @@ from prettyqt import positioning
 from prettyqt.qt import QtPositioning
 
 
-QtPositioning.QGeoCircle.__bases__ = (positioning.GeoShape,)
-
-
-class GeoCircle(QtPositioning.QGeoCircle):
+class GeoCircle(positioning.GeoShapeMixin, QtPositioning.QGeoCircle):
     def __init__(
         self,
         center_or_other: None

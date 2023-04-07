@@ -15,10 +15,7 @@ LoadHintStr = Literal[
 ]
 
 
-QtCore.QPluginLoader.__bases__ = (core.Object,)
-
-
-class PluginLoader(QtCore.QPluginLoader):
+class PluginLoader(core.ObjectMixin, QtCore.QPluginLoader):
     def get_load_hints(self) -> list[LoadHintStr]:
         return [
             k

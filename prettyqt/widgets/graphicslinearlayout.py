@@ -4,10 +4,7 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
-QtWidgets.QGraphicsLinearLayout.__bases__ = (widgets.GraphicsLayout,)
-
-
-class GraphicsLinearLayout(QtWidgets.QGraphicsLinearLayout):
+class GraphicsLinearLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsLinearLayout):
     def __init__(
         self,
         orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",

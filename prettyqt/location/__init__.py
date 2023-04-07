@@ -11,7 +11,7 @@ from .placeicon import PlaceIcon
 from .placesupplier import PlaceSupplier
 from .placecategory import PlaceCategory
 from .placeuser import PlaceUser
-from .placecontent import PlaceContent
+from .placecontent import PlaceContent, PlaceContentMixin
 
 # from .placeimage import PlaceImage
 # from .placereview import PlaceReview
@@ -21,15 +21,15 @@ from .geocodingmanager import GeoCodingManager
 from .georoutingmanager import GeoRoutingManager
 from .geomaneuver import GeoManeuver
 from .georoutesegment import GeoRouteSegment
-from .georoute import GeoRoute
+from .georoute import GeoRoute, GeoRouteMixin
 from .placesearchrequest import PlaceSearchRequest
 from .placecontentrequest import PlaceContentRequest
 from .place import Place
 from .placematchrequest import PlaceMatchRequest
-from .placesearchresult import PlaceSearchResult
+from .placesearchresult import PlaceSearchResult, PlaceSearchResultMixin
 from .placeresult import PlaceResult
 from .placeproposedsearchresult import PlaceProposedSearchResult
-from .placereply import PlaceReply
+from .placereply import PlaceReply, PlaceReplyMixin
 from .placesearchreply import PlaceSearchReply
 from .placecontentreply import PlaceContentReply
 from .placedetailsreply import PlaceDetailsReply
@@ -56,6 +56,7 @@ __all__ = [
     "PlaceManager",
     "PlaceIcon",
     "PlaceContent",
+    "PlaceContentMixin",
     "PlaceImage",
     "PlaceReview",
     "PlaceEditorial",
@@ -63,6 +64,7 @@ __all__ = [
     "GeoRoutingManager",
     "GeoManeuver",
     "GeoRoute",
+    "GeoRouteMixin",
     "GeoRouteLeg",
     "GeoRouteRequest",
     "GeoRouteSegment",
@@ -71,12 +73,14 @@ __all__ = [
     "PlaceMatchRequest",
     "GeoServiceProvider",
     "PlaceReply",
+    "PlaceReplyMixin",
     "PlaceSearchReply",
     "PlaceContentReply",
     "PlaceDetailsReply",
     "PlaceMatchReply",
     "PlaceIdReply",
     "PlaceSearchResult",
+    "PlaceSearchResultMixin",
     "PlaceResult",
     "PlaceProposedSearchResult",
 ]

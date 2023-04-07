@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QProgressDialog.__bases__ = (widgets.Dialog,)
-
-
-class ProgressDialog(QtWidgets.QProgressDialog):
+class ProgressDialog(widgets.DialogMixin, QtWidgets.QProgressDialog):
     """Progress dialog.
 
     Wrapper for QtWidgets.QProgressDialog

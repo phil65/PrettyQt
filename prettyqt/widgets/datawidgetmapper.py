@@ -14,10 +14,8 @@ SUBMIT_POLICY = bidict(
 
 SubmitPolicyStr = Literal["auto", "manual"]
 
-QtWidgets.QDataWidgetMapper.__bases__ = (core.Object,)
 
-
-class DataWidgetMapper(QtWidgets.QDataWidgetMapper):
+class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
     def serialize_fields(self):
         return dict(
             current_index=self.currentIndex(),

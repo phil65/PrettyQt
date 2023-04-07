@@ -4,10 +4,9 @@ from prettyqt import gui
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QPlainTextDocumentLayout.__bases__ = (gui.AbstractTextDocumentLayout,)
-
-
-class PlainTextDocumentLayout(QtWidgets.QPlainTextDocumentLayout):
+class PlainTextDocumentLayout(
+    gui.AbstractTextDocumentLayoutMixin, QtWidgets.QPlainTextDocumentLayout
+):
     def serialize_fields(self):
         return dict(cursor_width=self.cursorWidth())
 

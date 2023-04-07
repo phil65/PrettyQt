@@ -16,10 +16,7 @@ MODES = bidict(
 ModeStr = Literal["clipboard", "selection", "find_buffer"]
 
 
-QtGui.QClipboard.__bases__ = (core.Object,)
-
-
-class Clipboard:
+class Clipboard(core.ObjectMixin):
     def __init__(self, item: QtGui.QClipboard):
         self.item = item
 

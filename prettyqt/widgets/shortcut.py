@@ -5,10 +5,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QShortcut.__bases__ = (core.Object,)
-
-
-class Shortcut(QtWidgets.QShortcut):
+class Shortcut(core.ObjectMixin, QtWidgets.QShortcut):
     def __str__(self):
         return self.key().toString()
 

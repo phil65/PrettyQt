@@ -15,10 +15,8 @@ CHANGE_FLAGS = bidict(
 
 ChangeFlagStr = Literal["scale_factor", "rotation_angle", "center_point"]
 
-QtWidgets.QPinchGesture.__bases__ = (widgets.Gesture,)
 
-
-class PinchGesture(QtWidgets.QPinchGesture):
+class PinchGesture(widgets.GestureMixin, QtWidgets.QPinchGesture):
     def get_start_center_point(self) -> core.PointF:
         return core.PointF(self.startCenterPoint())
 

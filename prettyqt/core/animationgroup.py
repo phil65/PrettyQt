@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import types
 
 
-QtCore.QAnimationGroup.__bases__ = (core.AbstractAnimation,)
-
-
-class AnimationGroup(QtCore.QAnimationGroup):
+class AnimationGroupMixin(core.AbstractAnimationMixin):
     @overload
     def __getitem__(self, index: int) -> QtCore.QAbstractAnimation:
         ...
@@ -59,6 +56,10 @@ class AnimationGroup(QtCore.QAnimationGroup):
         anim = core.PropertyAnimation(obj, attribute)
         self.addAnimation(anim)
         return anim
+
+
+class AnimationGroup(AnimationGroupMixin, QtCore.QAnimationGroup):
+    pass
 
 
 if __name__ == "__main__":

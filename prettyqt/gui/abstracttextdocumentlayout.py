@@ -5,10 +5,7 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import types
 
 
-QtGui.QAbstractTextDocumentLayout.__bases__ = (core.Object,)
-
-
-class AbstractTextDocumentLayout(QtGui.QAbstractTextDocumentLayout):
+class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
@@ -33,6 +30,12 @@ class AbstractTextDocumentLayout(QtGui.QAbstractTextDocumentLayout):
         if result == -1:
             return None
         return result
+
+
+class AbstractTextDocumentLayout(
+    AbstractTextDocumentLayoutMixin, QtGui.QAbstractTextDocumentLayout
+):
+    pass
 
 
 if __name__ == "__main__":

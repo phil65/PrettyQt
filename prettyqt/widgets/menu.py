@@ -8,10 +8,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QMenu.__bases__ = (widgets.Widget,)
-
-
-class Menu(QtWidgets.QMenu):
+class MenuMixin(widgets.WidgetMixin):
     def __init__(
         self,
         title: str = "",
@@ -138,6 +135,10 @@ class Menu(QtWidgets.QMenu):
         action = menu.menuAction()
         self.addAction(action)
         return action
+
+
+class Menu(MenuMixin, QtWidgets.QMenu):
+    pass
 
 
 if __name__ == "__main__":

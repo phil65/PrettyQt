@@ -14,10 +14,8 @@ from prettyqt.utils import InvalidParamError, types
 
 logger = logging.getLogger(__name__)
 
-QtCore.QCoreApplication.__bases__ = (core.Object,)
 
-
-class CoreApplication(QtCore.QCoreApplication):
+class CoreApplicationMixin(core.ObjectMixin):
     translators: dict[str, core.Translator] = {}
 
     @classmethod
@@ -116,3 +114,7 @@ class CoreApplication(QtCore.QCoreApplication):
     @staticmethod
     def restart():
         os.execl(sys.executable, sys.executable, *sys.argv)
+
+
+class CoreApplication(CoreApplicationMixin, QtCore.QCoreApplication):
+    pass

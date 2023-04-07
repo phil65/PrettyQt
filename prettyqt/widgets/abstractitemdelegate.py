@@ -4,8 +4,9 @@ from prettyqt import core
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QAbstractItemDelegate.__bases__ = (core.Object,)
+class AbstractItemDelegateMixin(core.ObjectMixin):
+    pass
 
 
-class AbstractItemDelegate(QtWidgets.QAbstractItemDelegate):
+class AbstractItemDelegate(AbstractItemDelegateMixin, QtWidgets.QAbstractItemDelegate):
     pass

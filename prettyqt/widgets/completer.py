@@ -24,10 +24,7 @@ SORT_MODE = bidict(
 SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]
 
 
-QtWidgets.QCompleter.__bases__ = (core.Object,)
-
-
-class Completer(QtWidgets.QCompleter):
+class Completer(core.ObjectMixin, QtWidgets.QCompleter):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
 

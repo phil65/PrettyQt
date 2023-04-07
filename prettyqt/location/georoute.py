@@ -5,7 +5,7 @@ from prettyqt.qt import QtLocation
 from prettyqt.utils import types
 
 
-class GeoRoute(QtLocation.QGeoRoute):
+class GeoRouteMixin:
     def __setitem__(self, index: str, val: types.Variant):
         attrs = self.extendedAttributes()
         attrs[index] = val
@@ -28,3 +28,7 @@ class GeoRoute(QtLocation.QGeoRoute):
 
     def get_path(self) -> list[positioning.GeoCoordinate]:
         return [positioning.GeoCoordinate(i) for i in self.path()]
+
+
+class GeoRoute(GeoRouteMixin, QtLocation.QGeoRoute):
+    pass

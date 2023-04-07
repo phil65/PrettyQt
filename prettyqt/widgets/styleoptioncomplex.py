@@ -4,8 +4,9 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QStyleOptionComplex.__bases__ = (widgets.StyleOption,)
+class StyleOptionComplexMixin(widgets.StyleOptionMixin):
+    pass
 
 
-class StyleOptionComplex(QtWidgets.QStyleOptionComplex):
+class StyleOptionComplex(StyleOptionComplexMixin, QtWidgets.QStyleOptionComplex):
     pass

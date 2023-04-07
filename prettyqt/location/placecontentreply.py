@@ -4,10 +4,7 @@ from prettyqt import location
 from prettyqt.qt import QtLocation
 
 
-QtLocation.QPlaceContentReply.__bases__ = (location.PlaceReply,)
-
-
-class PlaceContentReply(QtLocation.QPlaceContentReply):
+class PlaceContentReply(location.PlaceReplyMixin, QtLocation.QPlaceContentReply):
     def __len__(self):
         return self.totalCount()
 

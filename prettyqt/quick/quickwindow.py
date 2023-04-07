@@ -50,10 +50,7 @@ TEXT_RENDER_TYPE = bidict(
 TextRenderTypeStr = Literal["qt_text", "native_text"]
 
 
-QtQuick.QQuickWindow.__bases__ = (gui.Window,)
-
-
-class QuickWindow(QtQuick.QQuickWindow):
+class QuickWindow(gui.WindowMixin, QtQuick.QQuickWindow):
     def create_texture_from_image(self, image: QtGui.QImage, **kwargs):
         flag = self.CreateTextureOption(0)
         for key, val in kwargs.items():

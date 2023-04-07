@@ -5,11 +5,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QCheckBox.__bases__ = (widgets.AbstractButton,)
-
-
-class CheckBox(QtWidgets.QCheckBox):
-
+class CheckBox(widgets.AbstractButtonMixin, QtWidgets.QCheckBox):
     value_changed = core.Signal(int)
 
     def __init__(

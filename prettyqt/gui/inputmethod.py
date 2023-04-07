@@ -10,10 +10,8 @@ ACTION = bidict(
     context_menu=QtGui.QInputMethod.Action.ContextMenu,
 )
 
-QtGui.QInputMethod.__bases__ = (core.Object,)
 
-
-class InputMethod:
+class InputMethod(core.ObjectMixin):
     def __init__(self, item: QtGui.QInputMethod):
         self.item = item
 

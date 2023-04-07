@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QAbstractSeries.__bases__ = (core.Object,)
-
-
-class AbstractSeries(QtCharts.QAbstractSeries):
+class AbstractSeriesMixin(core.ObjectMixin):
     """QAbstractSeries with some custom properties."""
 
     def __init__(self, *args, **kwargs):
@@ -21,3 +18,7 @@ class AbstractSeries(QtCharts.QAbstractSeries):
         self._group = value
 
     group = core.Property(str, get_group, set_group)
+
+
+class AbstractSeries(AbstractSeriesMixin, QtCharts.QAbstractSeries):
+    pass

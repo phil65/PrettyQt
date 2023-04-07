@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtQuick
 
 
-QtQuick.QQuickItemGrabResult.__bases__ = (core.Object,)
-
-
-class QuickItemGrabResult:
+class QuickItemGrabResult(core.ObjectMixin):
     def __init__(self, item: QtQuick.QQuickItemGrabResult):
         self.item = item
 

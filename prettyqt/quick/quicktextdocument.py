@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtQuick
 
 
-QtQuick.QQuickTextDocument.__bases__ = (core.Object,)
-
-
-class QuickTextDocument(QtQuick.QQuickTextDocument):
+class QuickTextDocument(core.ObjectMixin, QtQuick.QQuickTextDocument):
     pass
 
 

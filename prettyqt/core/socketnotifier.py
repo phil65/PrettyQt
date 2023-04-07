@@ -15,10 +15,8 @@ TYPE = bidict(
 
 TypeStr = Literal["read", "write", "exception"]
 
-QtCore.QSocketNotifier.__bases__ = (core.Object,)
 
-
-class SocketNotifier(QtCore.QSocketNotifier):
+class SocketNotifier(core.ObjectMixin, QtCore.QSocketNotifier):
     # def __repr__(self):
     #     return f"{type(self).__name__}({self.socket()}, {self.type()})"
 

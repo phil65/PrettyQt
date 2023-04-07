@@ -4,10 +4,7 @@ from prettyqt import core, qthelp
 from prettyqt.qt import QtHelp
 
 
-QtHelp.QHelpSearchEngine.__bases__ = (core.Object,)
-
-
-class HelpSearchEngine(QtHelp.QHelpSearchEngine):
+class HelpSearchEngine(core.ObjectMixin, QtHelp.QHelpSearchEngine):
     def search_results(self, start: int, end: int) -> list[qthelp.HelpSearchResult]:
         return [qthelp.HelpSearchResult(i) for i in self.searchResults(start, end)]
 

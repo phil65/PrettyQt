@@ -4,10 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QPanGesture.__bases__ = (widgets.Gesture,)
-
-
-class PanGesture(QtWidgets.QPanGesture):
+class PanGesture(widgets.GestureMixin, QtWidgets.QPanGesture):
     def get_delta(self) -> core.PointF:
         return core.PointF(self.delta())
 

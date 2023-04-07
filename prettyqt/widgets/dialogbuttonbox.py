@@ -76,11 +76,8 @@ RoleStr = Literal[
     "reset",
 ]
 
-QtWidgets.QDialogButtonBox.__bases__ = (widgets.Widget,)
 
-
-class DialogButtonBox(QtWidgets.QDialogButtonBox):
-
+class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
     button_clicked = core.Signal(str)
 
     def __init__(self, *args, **kwargs):

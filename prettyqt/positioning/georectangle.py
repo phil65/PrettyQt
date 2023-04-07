@@ -4,10 +4,7 @@ from prettyqt import positioning
 from prettyqt.qt import QtPositioning
 
 
-QtPositioning.QGeoRectangle.__bases__ = (positioning.GeoShape,)
-
-
-class GeoRectangle(QtPositioning.QGeoRectangle):
+class GeoRectangle(positioning.GeoShapeMixin, QtPositioning.QGeoRectangle):
     def __repr__(self):
         return (
             f"{type(self).__name__}({self.get_top_left()!r}, {self.get_bottom_right()!r})"

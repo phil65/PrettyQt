@@ -49,10 +49,7 @@ CHART_TYPES = bidict(
 ChartTypeStr = Literal["undefined", "cartesian", "polar"]
 
 
-QtCharts.QChart.__bases__ = (widgets.GraphicsWidget,)
-
-
-class Chart(QtCharts.QChart):
+class ChartMixin(widgets.GraphicsWidgetMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.max_x = 0
@@ -152,6 +149,10 @@ class Chart(QtCharts.QChart):
 
     def get_animation_easing_curve(self) -> core.EasingCurve:
         return core.EasingCurve(self.animationEasingCurve())
+
+
+class Chart(ChartMixin, QtCharts.QChart):
+    pass
 
 
 if __name__ == "__main__":

@@ -27,10 +27,7 @@ TAB_POSITION = bidict(
 TabPositionStr = Literal["beginning", "middle", "end" "only_one_tab"]
 
 
-QtWidgets.QStyleOptionToolBox.__bases__ = (widgets.StyleOption,)
-
-
-class StyleOptionToolBox(QtWidgets.QStyleOptionToolBox):
+class StyleOptionToolBox(widgets.StyleOptionMixin, QtWidgets.QStyleOptionToolBox):
     def set_selected_position(self, position: SelectedPositionStr):
         self.selectedPosition = SELECTED_POSITION[position]
 

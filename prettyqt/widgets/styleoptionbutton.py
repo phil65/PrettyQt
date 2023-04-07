@@ -15,8 +15,5 @@ BUTTON_FEATURES = bidict(
 )
 
 
-QtWidgets.QStyleOptionButton.__bases__ = (widgets.StyleOption,)
-
-
-class StyleOptionButton(QtWidgets.QStyleOptionButton):
+class StyleOptionButton(widgets.StyleOptionMixin, QtWidgets.QStyleOptionButton):
     pass

@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QImage.__bases__ = (gui.PaintDevice,)
-
-
-class Image(QtGui.QImage):
+class Image(gui.PaintDeviceMixin, QtGui.QImage):
     def __getstate__(self):
         return bytes(self)
 

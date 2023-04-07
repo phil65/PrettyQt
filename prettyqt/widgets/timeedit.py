@@ -7,11 +7,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QTimeEdit.__bases__ = (widgets.DateTimeEdit,)
-
-
-class TimeEdit(QtWidgets.QTimeEdit):
-
+class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
     value_changed = core.Signal(datetime.datetime)
 
     def serialize_fields(self):

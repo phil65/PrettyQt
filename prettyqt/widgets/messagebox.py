@@ -98,10 +98,8 @@ TEXT_FORMAT = bidict(
 
 TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
-QtWidgets.QMessageBox.__bases__ = (widgets.Dialog,)
 
-
-class MessageBox(QtWidgets.QMessageBox):
+class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     def __init__(
         self,
         icon: types.IconType | IconStr = None,

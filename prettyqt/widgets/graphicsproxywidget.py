@@ -4,9 +4,5 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsProxyWidget.__bases__ = (widgets.GraphicsWidget,)
-
-
-class GraphicsProxyWidget(QtWidgets.QGraphicsProxyWidget):
-
+class GraphicsProxyWidget(widgets.GraphicsWidgetMixin, QtWidgets.QGraphicsProxyWidget):
     pass

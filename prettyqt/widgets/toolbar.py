@@ -7,10 +7,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, helpers, types
 
 
-QtWidgets.QToolBar.__bases__ = (widgets.Widget,)
-
-
-class ToolBar(QtWidgets.QToolBar):
+class ToolBarMixin(widgets.WidgetMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_icon_size(24)
@@ -148,6 +145,10 @@ class ToolBar(QtWidgets.QToolBar):
             for k, v in constants.TOOLBAR_AREA.items()
             if v & self.allowedAreas()  # type: ignore
         ]
+
+
+class ToolBar(ToolBarMixin, QtWidgets.QToolBar):
+    pass
 
 
 if __name__ == "__main__":

@@ -7,12 +7,10 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, types
 
 
-QtWidgets.QGraphicsWidget.__bases__ = (widgets.GraphicsObject, widgets.GraphicsLayoutItem)
-
 LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
 
 
-class GraphicsWidget(QtWidgets.QGraphicsWidget):
+class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutItemMixin):
     def serialize_fields(self):
         return dict(
             autofill_background=self.autoFillBackground(),
@@ -77,6 +75,10 @@ class GraphicsWidget(QtWidgets.QGraphicsWidget):
 
     def get_palette(self) -> gui.Palette:
         return gui.Palette(self.palette())
+
+
+class GraphicsWidget(GraphicsWidgetMixin, QtWidgets.QGraphicsWidget):
+    pass
 
 
 if __name__ == "__main__":

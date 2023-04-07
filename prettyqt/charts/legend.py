@@ -16,10 +16,8 @@ MARKER_SHAPES = bidict(
 
 MarkerShapeStr = Literal["default", "rectangle", "circle", "from_series"]
 
-QtCharts.QLegend.__bases__ = (widgets.GraphicsWidget,)
 
-
-class Legend:
+class Legend(widgets.GraphicsWidgetMixin):
     def __init__(self, item: QtCharts.QLegend):
         self.item = item
 

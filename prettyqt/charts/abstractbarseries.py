@@ -16,10 +16,8 @@ LABELS_POSITIONS = bidict(
 
 LabelsPositionStr = Literal["center", "inside_end", "inside_base", "outside_end"]
 
-QtCharts.QAbstractBarSeries.__bases__ = (charts.AbstractSeries,)
 
-
-class AbstractBarSeries(QtCharts.QAbstractBarSeries):
+class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
     def __delitem__(self, index: int):
         barsets = self.barSets()
         self.remove(barsets[index])
@@ -48,3 +46,7 @@ class AbstractBarSeries(QtCharts.QAbstractBarSeries):
             labels position
         """
         return LABELS_POSITIONS.inverse[self.labelsPosition()]
+
+
+class AbstractBarSeries(AbstractBarSeriesMixin, QtCharts.QAbstractBarSeries):
+    pass

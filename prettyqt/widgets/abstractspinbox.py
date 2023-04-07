@@ -30,10 +30,7 @@ STEP_TYPES = bidict(
 StepTypeStr = Literal["default", "adaptive"]
 
 
-QtWidgets.QAbstractSpinBox.__bases__ = (widgets.Widget,)
-
-
-class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
+class AbstractSpinBoxMixin(widgets.WidgetMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setLineEdit(widgets.LineEdit())
@@ -127,6 +124,10 @@ class AbstractSpinBox(QtWidgets.QAbstractSpinBox):
 
     def set_value(self, value: int):
         self.setValue(value)
+
+
+class AbstractSpinBox(AbstractSpinBoxMixin, QtWidgets.QAbstractSpinBox):
+    pass
 
 
 if __name__ == "__main__":

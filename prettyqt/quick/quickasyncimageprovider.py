@@ -4,8 +4,7 @@ from prettyqt import quick
 from prettyqt.qt import QtQuick
 
 
-QtQuick.QQuickAsyncImageProvider.__bases__ = (quick.QuickImageProvider,)
-
-
-class QuickAsyncImageProvider(QtQuick.QQuickAsyncImageProvider):
+class QuickAsyncImageProvider(
+    quick.QuickImageProviderMixin, QtQuick.QQuickAsyncImageProvider
+):
     pass

@@ -4,8 +4,5 @@ from prettyqt import charts
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QLogValueAxis.__bases__ = (charts.AbstractAxis,)
-
-
-class LogValueAxis(QtCharts.QLogValueAxis):
+class LogValueAxis(charts.AbstractAxisMixin, QtCharts.QLogValueAxis):
     pass

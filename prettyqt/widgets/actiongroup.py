@@ -16,10 +16,7 @@ POLICIES = bidict(
 ExclusionPolicyStr = Literal["none", "exclusive", "exclusive_optional"]
 
 
-QtWidgets.QActionGroup.__bases__ = (core.Object,)
-
-
-class ActionGroup(QtWidgets.QActionGroup):
+class ActionGroup(core.ObjectMixin, QtWidgets.QActionGroup):
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
 

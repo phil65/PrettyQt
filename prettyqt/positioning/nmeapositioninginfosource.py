@@ -12,10 +12,10 @@ UPDATE_MODES = bidict(
     simulation=QtPositioning.QNmeaPositionInfoSource.UpdateMode.SimulationMode,
 )
 
-QtPositioning.QNmeaPositionInfoSource.__bases__ = (positioning.GeoPositionInfoSource,)
 
-
-class NmeaPositionInfoSource(QtPositioning.QNmeaPositionInfoSource):
+class NmeaPositionInfoSource(
+    positioning.GeoPositionInfoSourceMixin, QtPositioning.QNmeaPositionInfoSource
+):
     def __init__(
         self,
         update_mode: QtPositioning.QNmeaPositionInfoSource.UpdateMode | str,

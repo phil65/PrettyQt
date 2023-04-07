@@ -23,8 +23,5 @@ MENU_ITEM_TYPE = bidict(
 )
 
 
-QtWidgets.QStyleOptionMenuItem.__bases__ = (widgets.StyleOption,)
-
-
-class StyleOptionMenuItem(QtWidgets.QStyleOptionMenuItem):
+class StyleOptionMenuItem(widgets.StyleOptionMixin, QtWidgets.QStyleOptionMenuItem):
     pass

@@ -15,10 +15,7 @@ TICK_TYPES = bidict(
 TickTypeStr = Literal["dynamic", "fixed"]
 
 
-QtCharts.QValueAxis.__bases__ = (charts.AbstractAxis,)
-
-
-class ValueAxis(QtCharts.QValueAxis):
+class ValueAxisMixin(charts.AbstractAxisMixin):
     def set_tick_type(self, tick_type: TickTypeStr):
         """Set the tick type of the legend.
 
@@ -39,3 +36,7 @@ class ValueAxis(QtCharts.QValueAxis):
             tick_type
         """
         return TICK_TYPES.inverse[self.tickType()]
+
+
+class ValueAxis(ValueAxisMixin, QtCharts.QValueAxis):
+    pass

@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QSizeGrip.__bases__ = (widgets.Widget,)
-
-
-class SizeGrip(QtWidgets.QSizeGrip):
+class SizeGrip(widgets.WidgetMixin, QtWidgets.QSizeGrip):
     pass
 
 

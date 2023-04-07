@@ -5,10 +5,7 @@ from prettyqt.qt import QtCore, QtHelp
 from prettyqt.utils import types
 
 
-QtHelp.QHelpEngineCore.__bases__ = (core.Object,)
-
-
-class HelpEngineCore(QtHelp.QHelpEngineCore):
+class HelpEngineCoreMixin(core.ObjectMixin):
     def get_file_data(self, url: QtCore.QUrl) -> bytes:
         return bytes(self.fileData(url))
 
@@ -28,6 +25,10 @@ class HelpEngineCore(QtHelp.QHelpEngineCore):
         if not isinstance(url, QtCore.QUrl):
             url = QtCore.QUrl(url)
         return core.Url(self.findFile(url))
+
+
+class HelpEngineCore(HelpEngineCoreMixin, QtHelp.QHelpEngineCore):
+    pass
 
 
 if __name__ == "__main__":

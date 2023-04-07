@@ -18,37 +18,40 @@ from prettyqt.qt.QtWidgets import (
     QGestureEvent as GestureEvent,
 )
 
-from .style import Style
-from .commonstyle import CommonStyle
+from .style import Style, StyleMixin
+from .commonstyle import CommonStyle, CommonStyleMixin
 from .proxystyle import ProxyStyle
 from .application import Application
 from .sizepolicy import SizePolicy
-from .widget import Widget
-from .frame import Frame
+from .widget import Widget, WidgetMixin
+from .frame import Frame, FrameMixin
 from .focusframe import FocusFrame
-from .abstractslider import AbstractSlider
-from .abstractscrollarea import AbstractScrollArea
-from .abstractbutton import AbstractButton
-from .abstractspinbox import AbstractSpinBox
-from .abstractitemview import AbstractItemView
+from .abstractslider import AbstractSlider, AbstractSliderMixin
+from .abstractscrollarea import AbstractScrollArea, AbstractScrollAreaMixin
+from .abstractbutton import AbstractButton, AbstractButtonMixin
+from .abstractspinbox import AbstractSpinBox, AbstractSpinBoxMixin
+from .abstractitemview import AbstractItemView, AbstractItemViewMixin
 from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .rubberband import RubberBand
-from .graphicstransform import GraphicsTransform
+from .graphicstransform import GraphicsTransform, GraphicsTransformMixin
 from .graphicsrotation import GraphicsRotation
 from .graphicsscale import GraphicsScale
-from .graphicsitem import GraphicsItem
+from .graphicsitem import GraphicsItem, GraphicsItemMixin
 from .graphicsitemgroup import GraphicsItemGroup
-from .abstractgraphicsshapeitem import AbstractGraphicsShapeItem
+from .abstractgraphicsshapeitem import (
+    AbstractGraphicsShapeItem,
+    AbstractGraphicsShapeItemMixin,
+)
 from .graphicspixmapitem import GraphicsPixmapItem
-from .graphicsobject import GraphicsObject
+from .graphicsobject import GraphicsObject, GraphicsObjectMixin
 from .graphicstextitem import GraphicsTextItem
-from .graphicslayoutitem import GraphicsLayoutItem
-from .graphicslayout import GraphicsLayout
+from .graphicslayoutitem import GraphicsLayoutItem, GraphicsLayoutItemMixin
+from .graphicslayout import GraphicsLayout, GraphicsLayoutMixin
 from .graphicsgridlayout import GraphicsGridLayout
 from .graphicslinearlayout import GraphicsLinearLayout
 from .graphicsanchorlayout import GraphicsAnchorLayout
-from .graphicswidget import GraphicsWidget
+from .graphicswidget import GraphicsWidget, GraphicsWidgetMixin
 from .graphicsproxywidget import GraphicsProxyWidget
 from .graphicslineitem import GraphicsLineItem
 from .graphicsrectitem import GraphicsRectItem
@@ -56,16 +59,16 @@ from .graphicssimpletextitem import GraphicsSimpleTextItem
 from .graphicspolygonitem import GraphicsPolygonItem
 from .graphicsellipseitem import GraphicsEllipseItem
 from .graphicspathitem import GraphicsPathItem
-from .graphicseffect import GraphicsEffect
+from .graphicseffect import GraphicsEffect, GraphicsEffectMixin
 from .graphicsblureffect import GraphicsBlurEffect
 from .graphicscolorizeeffect import GraphicsColorizeEffect
 from .graphicsdropshadoweffect import GraphicsDropShadowEffect
 from .graphicsopacityeffect import GraphicsOpacityEffect
 from .graphicsscene import GraphicsScene
-from .graphicsview import GraphicsView
-from .styleoption import StyleOption
+from .graphicsview import GraphicsView, GraphicsViewMixin
+from .styleoption import StyleOption, StyleOptionMixin
 from .styleoptionbutton import StyleOptionButton
-from .styleoptioncomplex import StyleOptionComplex
+from .styleoptioncomplex import StyleOptionComplex, StyleOptionComplexMixin
 from .styleoptiondockwidget import StyleOptionDockWidget
 from .styleoptionfocusrect import StyleOptionFocusRect
 from .styleoptionframe import StyleOptionFrame
@@ -91,9 +94,9 @@ from .styleoptiontoolbutton import StyleOptionToolButton
 
 from .stylepainter import StylePainter
 from .stylefactory import StyleFactory
-from .pushbutton import PushButton
+from .pushbutton import PushButton, PushButtonMixin
 from .dialogbuttonbox import DialogButtonBox
-from .dialog import Dialog
+from .dialog import Dialog, DialogMixin
 from .messagebox import MessageBox
 from .errormessage import ErrorMessage
 
@@ -105,7 +108,7 @@ from .dial import Dial
 
 from .dockwidget import DockWidget
 
-from .action import Action
+from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
 from .shortcut import Shortcut
 from .undocommand import UndoCommand
@@ -130,15 +133,15 @@ from .headerview import HeaderView
 from .label import Label
 from .commandlinkbutton import CommandLinkButton
 from .radiobutton import RadioButton
-from .combobox import ComboBox
+from .combobox import ComboBox, ComboBoxMixin
 from .fontcombobox import FontComboBox
 from .spinbox import SpinBox
 from .doublespinbox import DoubleSpinBox
 from .checkbox import CheckBox
 from .lineedit import LineEdit
 from .keysequenceedit import KeySequenceEdit
-from .textedit import TextEdit
-from .datetimeedit import DateTimeEdit
+from .textedit import TextEdit, TextEditMixin
+from .datetimeedit import DateTimeEdit, DateTimeEditMixin
 from .dateedit import DateEdit
 from .timeedit import TimeEdit
 from .calendarwidget import CalendarWidget
@@ -148,25 +151,25 @@ from .completer import Completer
 from .progressbar import ProgressBar
 from .lcdnumber import LCDNumber
 from .columnview import ColumnView
-from .listview import ListView
+from .listview import ListView, ListViewMixin
 from .listwidget import ListWidget
-from .treeview import TreeView
+from .treeview import TreeView, TreeViewMixin
 from .tablewidgetselectionrange import TableWidgetSelectionRange
 from .treewidget import TreeWidget
 from .treewidgetitemiterator import TreeWidgetItemIterator
-from .tableview import TableView
+from .tableview import TableView, TableViewMixin
 from .tablewidgetitem import TableWidgetItem
 from .tablewidget import TableWidget
 from .scrollerproperties import ScrollerProperties
 from .scroller import Scroller
-from .abstractitemdelegate import AbstractItemDelegate
+from .abstractitemdelegate import AbstractItemDelegate, AbstractItemDelegateMixin
 from .itemdelegate import ItemDelegate
 from .styleditemdelegate import StyledItemDelegate
 from .systemtrayicon import SystemTrayIcon
 
-from .layoutitem import LayoutItem
+from .layoutitem import LayoutItem, LayoutItemMixin
 from .widgetitem import WidgetItem
-from .layout import Layout
+from .layout import Layout, LayoutMixin
 from .spaceritem import SpacerItem
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
@@ -195,7 +198,7 @@ from .sizegrip import SizeGrip
 
 from .plaintextdocumentlayout import PlainTextDocumentLayout
 
-from .gesture import Gesture
+from .gesture import Gesture, GestureMixin
 from .tapgesture import TapGesture
 from .tapandholdgesture import TapAndHoldGesture
 from .pangesture import PanGesture
@@ -218,31 +221,44 @@ __all__ = [
     "app",
     "Application",
     "AbstractSlider",
+    "AbstractSliderMixin",
     "AbstractButton",
+    "AbstractButtonMixin",
     "AbstractSpinBox",
+    "AbstractSpinBoxMixin",
     "AbstractScrollArea",
+    "AbstractScrollAreaMixin",
     "AbstractItemView",
+    "AbstractItemViewMixin",
     "MdiSubWindow",
     "MdiArea",
     "ScrollBar",
     "ScrollArea",
     "Widget",
+    "WidgetMixin",
     "RubberBand",
     "GraphicsTransform",
+    "GraphicsTransformMixin",
     "GraphicsRotation",
     "GraphicsScale",
     "GraphicsItem",
+    "GraphicsItemMixin",
     "GraphicsItemGroup",
     "AbstractGraphicsShapeItem",
+    "AbstractGraphicsShapeItemMixin",
     "GraphicsPixmapItem",
     "GraphicsObject",
+    "GraphicsObjectMixin",
     "GraphicsTextItem",
     "GraphicsLayoutItem",
+    "GraphicsLayoutItemMixin",
     "GraphicsLayout",
+    "GraphicsLayoutMixin",
     "GraphicsGridLayout",
     "GraphicsAnchorLayout",
     "GraphicsLinearLayout",
     "GraphicsWidget",
+    "GraphicsWidgetMixin",
     "GraphicsProxyWidget",
     "GraphicsLineItem",
     "GraphicsRectItem",
@@ -252,29 +268,38 @@ __all__ = [
     "GraphicsPathItem",
     "GraphicsWidget",
     "GraphicsEffect",
+    "GraphicsEffectMixin",
     "GraphicsBlurEffect",
     "GraphicsDropShadowEffect",
     "GraphicsColorizeEffect",
     "GraphicsOpacityEffect",
     "GraphicsScene",
     "GraphicsView",
+    "GraphicsViewMixin",
     "Style",
+    "StyleMixin",
     "CommonStyle",
+    "CommonStyleMixin",
     "ProxyStyle",
     "StyleOption",
+    "StyleOptionMixin",
     "StyleOptionComplex",
+    "StyleOptionComplexMixin",
     "SpacerItem",
     "SizePolicy",
     "StylePainter",
     "StyleFactory",
     "Dialog",
+    "DialogMixin",
     "MessageBox",
     "ErrorMessage",
     "FileIconProvider",
     "FileSystemModel",
     "LayoutItem",
+    "LayoutItemMixin",
     "WidgetItem",
     "Layout",
+    "LayoutMixin",
     "FormLayout",
     "BoxLayout",
     "StackedLayout",
@@ -305,11 +330,13 @@ __all__ = [
     "StyleOptionToolButton",
     "StyleOptionFrame",
     "Frame",
+    "FrameMixin",
     "FocusFrame",
     "ListWidgetItem",
     "TreeWidgetItem",
     "TreeWidgetItemIterator",
     "Action",
+    "ActionMixin",
     "ActionGroup",
     "WidgetAction",
     "ToolButton",
@@ -324,9 +351,11 @@ __all__ = [
     "DockWidget",
     "Label",
     "PushButton",
+    "PushButtonMixin",
     "CommandLinkButton",
     "RadioButton",
     "ComboBox",
+    "ComboBoxMixin",
     "FontComboBox",
     "SpinBox",
     "DoubleSpinBox",
@@ -334,9 +363,11 @@ __all__ = [
     "LineEdit",
     "KeySequenceEdit",
     "TextEdit",
+    "TextEditMixin",
     "DateEdit",
     "TimeEdit",
     "DateTimeEdit",
+    "DateTimeEditMixin",
     "CalendarWidget",
     "PlainTextEdit",
     "TextBrowser",
@@ -345,13 +376,16 @@ __all__ = [
     "LCDNumber",
     "ColumnView",
     "ListView",
+    "ListViewMixin",
     "ListWidget",
     "TreeView",
+    "TreeViewMixin",
     "TreeWidget",
     "TableWidgetSelectionRange",
     "ScrollerProperties",
     "Scroller",
     "TableView",
+    "TableViewMixin",
     "TableWidgetItem",
     "TableWidget",
     "SplashScreen",
@@ -372,6 +406,7 @@ __all__ = [
     "Shortcut",
     "WhatsThis",
     "AbstractItemDelegate",
+    "AbstractItemDelegateMixin",
     "ItemDelegate",
     "StyledItemDelegate",
     "SystemTrayIcon",
@@ -395,6 +430,7 @@ __all__ = [
     "GestureEvent",
     "PlainTextDocumentLayout",
     "Gesture",
+    "GestureMixin",
     "TapGesture",
     "TapAndHoldGesture",
     "PanGesture",

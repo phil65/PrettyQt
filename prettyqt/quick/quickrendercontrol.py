@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtQuick
 
 
-QtQuick.QQuickRenderControl.__bases__ = (core.Object,)
-
-
-class QuickRenderControl(QtQuick.QQuickRenderControl):
+class QuickRenderControl(core.ObjectMixin, QtQuick.QQuickRenderControl):
     pass
 
 

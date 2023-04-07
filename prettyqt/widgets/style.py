@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
+from prettyqt import core
 from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -513,7 +514,7 @@ StateStr = Literal[
 ]
 
 
-class Style(QtWidgets.QStyle):
+class StyleMixin(core.ObjectMixin):
     def draw_primitive(
         self,
         element: SimpleControlStr,
@@ -535,3 +536,7 @@ class Style(QtWidgets.QStyle):
         if control not in CONTROL_ELEMENT:
             raise InvalidParamError(control, CONTROL_ELEMENT)
         self.drawPrimitive(CONTROL_ELEMENT[control], option, painter, widget)
+
+
+class Style(StyleMixin, QtWidgets.QStyle):
+    pass

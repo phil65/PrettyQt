@@ -20,10 +20,8 @@ EdgeStr = Literal[
     "left", "horizontal_center", "right", "top", "vertical_center", "bottom"
 ]
 
-QtWidgets.QGraphicsAnchorLayout.__bases__ = (widgets.GraphicsLayout,)
 
-
-class GraphicsAnchorLayout(QtWidgets.QGraphicsAnchorLayout):
+class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAnchorLayout):
     def add_anchor(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,

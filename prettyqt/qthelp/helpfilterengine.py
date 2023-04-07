@@ -4,9 +4,6 @@ from prettyqt import core
 from prettyqt.qt import QtHelp
 
 
-QtHelp.QHelpFilterEngine.__bases__ = (core.Object,)
-
-
-class HelpFilterEngine(QtHelp.QHelpFilterEngine):
+class HelpFilterEngine(core.ObjectMixin, QtHelp.QHelpFilterEngine):
     def get_available_versions(self) -> list[core.VersionNumber]:
         return [core.VersionNumber(i) for i in self.availableVersions()]

@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QRegularExpressionValidator.__bases__ = (gui.Validator,)
-
-
-class RegularExpressionValidator(QtGui.QRegularExpressionValidator):
+class RegularExpressionValidator(gui.ValidatorMixin, QtGui.QRegularExpressionValidator):
     def __repr__(self):
         return f"{type(self).__name__}(RegularExpression({self.get_regex()!r}))"
 

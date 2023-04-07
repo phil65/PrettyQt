@@ -3,15 +3,12 @@ from __future__ import annotations
 from collections.abc import Iterator
 import os
 
-from prettyqt import core
+from prettyqt import core, qml
 from prettyqt.qt import QtCore, QtQml
 from prettyqt.utils import types
 
 
-QtQml.QQmlApplicationEngine.__bases__ = (QtQml.QQmlEngine,)
-
-
-class QmlApplicationEngine(QtQml.QQmlApplicationEngine):
+class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
     def __iter__(self) -> Iterator[QtCore.QObject]:
         return iter(self.rootObjects())
 

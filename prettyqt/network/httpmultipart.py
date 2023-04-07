@@ -16,10 +16,8 @@ CONTENT_TYPES = bidict(
 
 ContentTypeStr = Literal["mixed", "related", "form", "alternative"]
 
-QtNetwork.QHttpMultiPart.__bases__ = (core.Object,)
 
-
-class HttpMultiPart(QtNetwork.QHttpMultiPart):
+class HttpMultiPart(core.ObjectMixin, QtNetwork.QHttpMultiPart):
     def __add__(self, other: QtNetwork.QHttpPart):
         self.append(other)
         return self

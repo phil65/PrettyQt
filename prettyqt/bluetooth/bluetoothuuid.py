@@ -292,10 +292,8 @@ SERVICE_CLASS_UUID = bidict(
     continuous_glucose_monitoring=su.ContinuousGlucoseMonitoring,
 )
 
-QtBluetooth.QBluetoothUuid.__bases__ = (core.Uuid,)
 
-
-class BluetoothUuid(QtBluetooth.QBluetoothUuid):
+class BluetoothUuid(core.UuidMixin, QtBluetooth.QBluetoothUuid):
     pass
 
 

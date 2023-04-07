@@ -16,10 +16,8 @@ ERROR = bidict(
 
 ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
-QtPositioning.QGeoSatelliteInfoSource.__bases__ = (core.Object,)
 
-
-class GeoSatelliteInfoSource(QtPositioning.QGeoSatelliteInfoSource):
+class GeoSatelliteInfoSource(core.ObjectMixin, QtPositioning.QGeoSatelliteInfoSource):
     def serialize_fields(self):
         return dict(
             minimum_update_interval=self.minimumUpdateInterval(),

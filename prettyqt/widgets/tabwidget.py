@@ -23,10 +23,8 @@ TAB_POSITION = bidict(
 
 TabPositionStr = Literal["north", "south", "west", "east"]
 
-QtWidgets.QTabWidget.__bases__ = (widgets.Widget,)
 
-
-class TabWidget(QtWidgets.QTabWidget):
+class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     """Widget for managing the tabs section."""
 
     def __init__(

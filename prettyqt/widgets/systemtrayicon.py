@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import gui, iconprovider
+from prettyqt import core, gui, iconprovider
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, types
 
@@ -21,7 +21,7 @@ MESSAGE_ICONS = bidict(
 )
 
 
-class SystemTrayIcon(QtWidgets.QSystemTrayIcon):
+class SystemTrayIcon(core.ObjectMixin, QtWidgets.QSystemTrayIcon):
     def set_icon(self, icon: types.IconType):
         """Set the system tray icon.
 

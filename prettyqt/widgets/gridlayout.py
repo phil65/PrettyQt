@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QGridLayout.__bases__ = (widgets.Layout,)
-
-
-class GridLayout(QtWidgets.QGridLayout):
+class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
     def __getitem__(
         self, idx: tuple[int, int] | int | str
     ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:

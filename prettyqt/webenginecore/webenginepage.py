@@ -10,9 +10,6 @@ from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict, types
 
 
-QtWebEngineCore.QWebEnginePage.__bases__ = (core.Object,)
-
-
 mod = QtWebEngineCore.QWebEnginePage
 
 logger = logging.getLogger(__name__)
@@ -199,7 +196,7 @@ WEB_WINDOW_TYPES = bidict(
 )
 
 
-class WebEnginePage(QtWebEngineCore.QWebEnginePage):
+class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
     """A web engine page holds the HTML document contents, link history + actions."""
 
     def serialize_fields(self):

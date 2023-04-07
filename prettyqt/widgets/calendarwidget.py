@@ -32,10 +32,7 @@ HORIZONTAL_HEADER_FORMAT = bidict(
 HorizontalHeaderFormatStr = Literal["single_letter", "short", "long", "none"]
 
 
-QtWidgets.QCalendarWidget.__bases__ = (widgets.Widget,)
-
-
-class CalendarWidget(QtWidgets.QCalendarWidget):
+class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
     def serialize_fields(self):
         return dict(date=self.get_date())
 

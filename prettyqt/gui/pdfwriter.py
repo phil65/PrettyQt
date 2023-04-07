@@ -5,10 +5,7 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, types
 
 
-QtGui.QPdfWriter.__bases__ = (core.Object, gui.PagedPaintDevice)
-
-
-class PdfWriter(QtGui.QPdfWriter):
+class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, QtGui.QPdfWriter):
     def set_desktop_resolution(self):
         primary = gui.app().primaryScreen()
         dpi = primary.logicalDotsPerInch()

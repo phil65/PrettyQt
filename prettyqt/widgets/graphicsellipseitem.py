@@ -4,10 +4,9 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsEllipseItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)
-
-
-class GraphicsEllipseItem(QtWidgets.QGraphicsEllipseItem):
+class GraphicsEllipseItem(
+    widgets.AbstractGraphicsShapeItemMixin, QtWidgets.QGraphicsEllipseItem
+):
     def __repr__(self):
         return f"{type(self).__name__}({repr(self.get_rect())})"
 

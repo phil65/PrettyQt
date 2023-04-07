@@ -6,10 +6,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QStackedWidget.__bases__ = (widgets.Frame,)
-
-
-class StackedWidget(QtWidgets.QStackedWidget):
+class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
     def __setstate__(self, state):
         for item in state["items"]:
             self.add(item)

@@ -7,9 +7,6 @@ from prettyqt.qt import QtPositioning
 from prettyqt.utils import bidict
 
 
-QtPositioning.QGeoAreaMonitorSource.__bases__ = (core.Object,)
-
-
 mod = QtPositioning.QGeoAreaMonitorSource
 
 ERRORS = bidict(
@@ -29,7 +26,7 @@ AREA_MONITOR_FEATURES = bidict(
 AreaMonitorFeatureStr = Literal["persistent_area", "any_area"]
 
 
-class GeoAreaMonitorSource(QtPositioning.QGeoAreaMonitorSource):
+class GeoAreaMonitorSource(core.ObjectMixin, QtPositioning.QGeoAreaMonitorSource):
     def __str__(self):
         return self.sourceName()
 

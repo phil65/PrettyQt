@@ -1,16 +1,16 @@
 from __future__ import annotations
 
-from prettyqt import multimedia, widgets
+from prettyqt import widgets
 from prettyqt.qt import QtCore, QtMultimediaWidgets
 
 
-QtMultimediaWidgets.QVideoWidget.__bases__ = (
-    widgets.Widget,
-    multimedia.MediaBindableInterface,
-)
+# QtMultimediaWidgets.QVideoWidget.__bases__ = (
+#     widgets.Widget,
+#     multimedia.MediaBindableInterface,
+# )
 
 
-class VideoWidget(QtMultimediaWidgets.QVideoWidget):
+class VideoWidget(widgets.WidgetMixin, QtMultimediaWidgets.QVideoWidget):
     def __init__(self, *args, **kwargs):
         self.doubleclick_for_fullscreen = False
         super().__init__(*args, **kwargs)

@@ -14,10 +14,8 @@ HISTORY_TYPE = bidict(
 
 HistoryTypeStr = Literal["shallow", "deep"]
 
-QtStateMachine.QHistoryState.__bases__ = (statemachine.AbstractState,)
 
-
-class HistoryState(QtStateMachine.QHistoryState):
+class HistoryState(statemachine.AbstractStateMixin, QtStateMachine.QHistoryState):
     def set_history_type(self, typ: HistoryTypeStr):
         """Set history type to use.
 

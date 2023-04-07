@@ -4,10 +4,7 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QTableWidget.__bases__ = (widgets.TableView,)
-
-
-class TableWidget(QtWidgets.QTableWidget):
+class TableWidgetMixin(widgets.TableViewMixin):
     def __getitem__(self, index: tuple[int, int]) -> QtWidgets.QTableWidgetItem:
         item = self.item(*index)
         if item is None:
@@ -23,6 +20,10 @@ class TableWidget(QtWidgets.QTableWidget):
     def sort(self, column: int = 0, reverse: bool = False):
         order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
+
+
+class TableWidget(TableWidgetMixin, QtWidgets.QTableWidget):
+    pass
 
 
 if __name__ == "__main__":

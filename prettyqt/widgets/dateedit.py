@@ -7,11 +7,7 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QDateEdit.__bases__ = (widgets.DateTimeEdit,)
-
-
-class DateEdit(QtWidgets.QDateEdit):
-
+class DateEdit(widgets.DateTimeEditMixin, QtWidgets.QDateEdit):
     value_changed = core.Signal(datetime.datetime)
 
     def __setstate__(self, state):

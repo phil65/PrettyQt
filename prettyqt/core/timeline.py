@@ -22,10 +22,8 @@ STATE = bidict(
 
 StateStr = Literal["not_running", "paused", "running"]
 
-QtCore.QTimeLine.__bases__ = (core.Object,)
 
-
-class TimeLine(QtCore.QTimeLine):
+class TimeLine(core.ObjectMixin, QtCore.QTimeLine):
     def serialize_fields(self):
         return dict(
             current_time=self.currentTime(),

@@ -5,10 +5,7 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QSplitterHandle.__bases__ = (widgets.Widget,)
-
-
-class SplitterHandle(QtWidgets.QSplitterHandle):
+class SplitterHandle(widgets.WidgetMixin, QtWidgets.QSplitterHandle):
     def __init__(
         self,
         orientation: constants.OrientationStr | QtCore.Qt.Orientation,

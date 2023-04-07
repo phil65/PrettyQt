@@ -4,10 +4,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QBitmap.__bases__ = (gui.Pixmap,)
-
-
-class Bitmap(QtGui.QBitmap):
+class Bitmap(gui.PixmapMixin, QtGui.QBitmap):
     pass
 
 

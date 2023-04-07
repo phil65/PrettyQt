@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QFocusFrame.__bases__ = (widgets.Widget,)
-
-
-class FocusFrame(QtWidgets.QFocusFrame):
+class FocusFrame(widgets.WidgetMixin, QtWidgets.QFocusFrame):
     pass
 
 

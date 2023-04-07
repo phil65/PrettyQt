@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import types
 
 
-QtCore.QFileSelector.__bases__ = (core.Object,)
-
-
-class FileSelector(QtCore.QFileSelector):
+class FileSelector(core.ObjectMixin, QtCore.QFileSelector):
     def serialize_fields(self):
         return dict(extra_selectors=self.extraSelectors())
 

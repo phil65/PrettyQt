@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QScrollArea.__bases__ = (widgets.AbstractScrollArea,)
-
-
-class ScrollArea(QtWidgets.QScrollArea):
+class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
     def serialize_fields(self):
         return dict(widget=self.widget(), resizable=self.widgetResizable())
 

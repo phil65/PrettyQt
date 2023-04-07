@@ -17,10 +17,8 @@ STATUS = bidict(
     error=QtQml.QQmlComponent.Status.Error,
 )
 
-QtQml.QQmlComponent.__bases__ = (core.Object,)
 
-
-class QmlComponent(QtQml.QQmlComponent):
+class QmlComponent(core.ObjectMixin, QtQml.QQmlComponent):
     def get_status(self) -> str:
         return STATUS.inverse[self.status()]
 

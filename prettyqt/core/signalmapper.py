@@ -4,10 +4,7 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QSignalMapper.__bases__ = (core.Object,)
-
-
-class SignalMapper(QtCore.QSignalMapper):
+class SignalMapper(core.ObjectMixin, QtCore.QSignalMapper):
     def __getitem__(self, index: int | str | QtCore.QObject) -> QtCore.QObject:
         return self.mapping(index)
 

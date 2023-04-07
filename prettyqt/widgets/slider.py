@@ -18,11 +18,7 @@ TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "ri
 TickPositionStr = Literal["none", "both_sides", "above", "below"]
 
 
-QtWidgets.QSlider.__bases__ = (widgets.AbstractSlider,)
-
-
-class Slider(QtWidgets.QSlider):
-
+class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
     value_changed = core.Signal(int)
 
     def __init__(

@@ -4,10 +4,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QDoubleValidator.__bases__ = (gui.Validator,)
-
-
-class DoubleValidator(QtGui.QDoubleValidator):
+class DoubleValidator(gui.ValidatorMixin, QtGui.QDoubleValidator):
     def __repr__(self):
         return f"{type(self).__name__}({self.bottom()}, {self.top()}, {self.decimals()})"
 

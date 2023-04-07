@@ -7,10 +7,7 @@ from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QSplashScreen.__bases__ = (widgets.Widget,)
-
-
-class SplashScreen(QtWidgets.QSplashScreen):
+class SplashScreenMixin(widgets.WidgetMixin):
     def __init__(self, path: types.PathType | QtGui.QPixmap, width: int | None = None):
         pix = gui.Pixmap(os.fspath(path)) if not isinstance(path, QtGui.QPixmap) else path
         if width:
@@ -38,3 +35,7 @@ class SplashScreen(QtWidgets.QSplashScreen):
             color=gui.Color(color),
             alignment=constants.H_ALIGNMENT[h_align] | constants.V_ALIGNMENT[v_align],
         )
+
+
+class SplashScreen(SplashScreenMixin, QtWidgets.QSplashScreen):
+    pass

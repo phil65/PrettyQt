@@ -18,10 +18,8 @@ SWIPE_DIRECTION = bidict(
 HorizontalDirectionStr = Literal["none", "left", "right"]
 VerticalDirectionStr = Literal["none", "up", "down"]
 
-QtWidgets.QSwipeGesture.__bases__ = (widgets.Gesture,)
 
-
-class SwipeGesture(QtWidgets.QSwipeGesture):
+class SwipeGestureMixin(widgets.GestureMixin):
     def get_horizontal_direction(self) -> HorizontalDirectionStr:
         """Return horizontal direction of the gesture.
 
@@ -37,6 +35,10 @@ class SwipeGesture(QtWidgets.QSwipeGesture):
             vertical direction
         """
         return SWIPE_DIRECTION.inverse[self.verticalDirection()]
+
+
+class SwipeGesture(SwipeGestureMixin, QtWidgets.QSwipeGesture):
+    pass
 
 
 if __name__ == "__main__":

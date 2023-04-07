@@ -7,10 +7,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QToolBox.__bases__ = (widgets.Frame,)
-
-
-class ToolBox(QtWidgets.QToolBox):
+class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
     def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)

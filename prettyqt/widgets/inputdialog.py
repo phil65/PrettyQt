@@ -27,10 +27,8 @@ INPUT_MODE = bidict(
 
 InputModeStr = Literal["text", "int", "double"]
 
-QtWidgets.QInputDialog.__bases__ = (widgets.Dialog,)
 
-
-class InputDialog(QtWidgets.QInputDialog):
+class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
     @classmethod
     def get_int(
         cls,

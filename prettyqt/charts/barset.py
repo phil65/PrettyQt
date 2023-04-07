@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QBarSet.__bases__ = (core.Object,)
-
-
-class BarSet(QtCharts.QBarSet):
+class BarSet(core.ObjectMixin, QtCharts.QBarSet):
     def __delitem__(self, index: int):
         if not (0 <= index < self.count()):
             raise KeyError(index)

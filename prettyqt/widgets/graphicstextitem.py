@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsTextItem.__bases__ = (widgets.GraphicsObject,)
-
-
-class GraphicsTextItem(QtWidgets.QGraphicsTextItem):
+class GraphicsTextItem(widgets.GraphicsObjectMixin, QtWidgets.QGraphicsTextItem):
     def __repr__(self):
         return f"{type(self).__name__}({self.toPlainText()!r})"
 

@@ -10,10 +10,8 @@ from prettyqt.utils import InvalidParamError
 
 logger = logging.getLogger(__name__)
 
-QtWidgets.QMainWindow.__bases__ = (widgets.Widget,)
 
-
-class MainWindow(QtWidgets.QMainWindow):
+class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     """Class for our mainWindow.
 
     Includes all docks, a centralwidget and a toolbar

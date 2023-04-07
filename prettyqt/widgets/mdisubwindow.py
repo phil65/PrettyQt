@@ -5,16 +5,13 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-QtWidgets.QMdiSubWindow.__bases__ = (widgets.Widget,)
-
-
 SUB_WINDOW_OPTION = bidict(
     rubber_band_resize=QtWidgets.QMdiSubWindow.SubWindowOption.RubberBandResize,
     rubber_band_move=QtWidgets.QMdiSubWindow.SubWindowOption.RubberBandMove,
 )
 
 
-class MdiSubWindow(QtWidgets.QMdiSubWindow):
+class MdiSubWindow(widgets.WidgetMixin, QtWidgets.QMdiSubWindow):
     def serialize_fields(self):
         return dict(
             keyboard_single_step=self.keyboardSingleStep(),

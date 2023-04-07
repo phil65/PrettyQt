@@ -4,10 +4,11 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
-QtGui.QPaintDeviceWindow.__bases__ = (gui.Window, gui.PaintDevice)
+class PaintDeviceWindowMixin(gui.WindowMixin, gui.PaintDeviceMixin):
+    pass
 
 
-class PaintDeviceWindow(QtGui.QPaintDeviceWindow):
+class PaintDeviceWindow(PaintDeviceWindowMixin, QtGui.QPaintDeviceWindow):
     pass
 
 

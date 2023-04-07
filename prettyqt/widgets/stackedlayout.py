@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QStackedLayout.__bases__ = (widgets.Layout,)
-
-
-class StackedLayout(QtWidgets.QStackedLayout):
+class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):
     def serialize_fields(self):
         return dict(items=self.get_children())
 

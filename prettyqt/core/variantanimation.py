@@ -8,10 +8,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import types
 
 
-QtCore.QVariantAnimation.__bases__ = (core.AbstractAnimation,)
-
-
-class VariantAnimation(QtCore.QVariantAnimation):
+class VariantAnimationMixin(core.AbstractAnimationMixin):
     def __getitem__(self, value: float) -> types.Variant:
         return self.keyValueAt(value)
 
@@ -49,3 +46,7 @@ class VariantAnimation(QtCore.QVariantAnimation):
     def set_range(self, start, end):
         self.setStartValue(start)
         self.setEndValue(end)
+
+
+class VariantAnimation(VariantAnimationMixin, QtCore.QVariantAnimation):
+    pass

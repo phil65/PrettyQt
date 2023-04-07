@@ -4,10 +4,9 @@ from prettyqt import core
 from prettyqt.qt import QtWebEngineCore
 
 
-QtWebEngineCore.QWebEngineUrlSchemeHandler.__bases__ = (core.Object,)
-
-
-class WebEngineUrlSchemeHandler(QtWebEngineCore.QWebEngineUrlSchemeHandler):
+class WebEngineUrlSchemeHandler(
+    core.ObjectMixin, QtWebEngineCore.QWebEngineUrlSchemeHandler
+):
     pass
 
 

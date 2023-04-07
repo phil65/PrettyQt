@@ -17,10 +17,7 @@ RESTART_HINT = bidict(
 RestartHintStr = Literal["if_running", "anyway", "immediately", "never"]
 
 
-QtGui.QSessionManager.__bases__ = (core.Object,)
-
-
-class SessionManager:
+class SessionManager(core.ObjectMixin):
     def __init__(self, item: QtGui.QSessionManager):
         self.item = item
 

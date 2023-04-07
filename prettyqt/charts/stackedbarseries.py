@@ -4,8 +4,5 @@ from prettyqt import charts
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QStackedBarSeries.__bases__ = (charts.AbstractBarSeries,)
-
-
-class StackedBarSeries(QtCharts.QStackedBarSeries):
+class StackedBarSeries(charts.AbstractBarSeriesMixin, QtCharts.QStackedBarSeries):
     pass

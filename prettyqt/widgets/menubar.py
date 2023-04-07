@@ -6,10 +6,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QMenuBar.__bases__ = (widgets.Widget,)
-
-
-class MenuBar(QtWidgets.QMenuBar):
+class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     def __add__(self, other: QtWidgets.QAction | QtWidgets.QMenu):
         self.add(other)
         return self

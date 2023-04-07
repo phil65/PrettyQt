@@ -26,10 +26,7 @@ VisibilityStr = Literal[
 ]
 
 
-QtGui.QWindow.__bases__ = (core.Object, gui.Surface)
-
-
-class Window(QtGui.QWindow):
+class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
@@ -77,6 +74,10 @@ class Window(QtGui.QWindow):
 
     def get_screen(self) -> gui.Screen:
         return gui.Screen(self.screen())
+
+
+class Window(WindowMixin, QtGui.QWindow):
+    pass
 
 
 if __name__ == "__main__":

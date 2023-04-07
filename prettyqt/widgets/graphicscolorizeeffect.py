@@ -4,10 +4,9 @@ from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsColorizeEffect.__bases__ = (widgets.GraphicsEffect,)
-
-
-class GraphicsColorizeEffect(QtWidgets.QGraphicsColorizeEffect):
+class GraphicsColorizeEffect(
+    widgets.GraphicsEffectMixin, QtWidgets.QGraphicsColorizeEffect
+):
     def serialize_fields(self):
         return dict(strength=self.strength(), color=gui.Color(self.color()))
 

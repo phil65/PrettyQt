@@ -23,10 +23,8 @@ ITEM_INDEX_METHOD = bidict(
 
 ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
-QtWidgets.QGraphicsScene.__bases__ = (core.Object,)
 
-
-class GraphicsScene(QtWidgets.QGraphicsScene):
+class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     def serialize_fields(self):
         return dict(
             items=self.items(),

@@ -4,8 +4,5 @@ from prettyqt import charts
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QScatterSeries.__bases__ = (charts.XYSeries,)
-
-
-class ScatterSeries(QtCharts.QScatterSeries):
+class ScatterSeries(charts.XYSeriesMixin, QtCharts.QScatterSeries):
     pass

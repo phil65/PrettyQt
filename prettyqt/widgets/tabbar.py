@@ -46,10 +46,8 @@ POSITIONS = bidict(
 
 PositionStr = Literal["left", "right"]
 
-QtWidgets.QTabBar.__bases__ = (widgets.Widget,)
 
-
-class TabBar(QtWidgets.QTabBar):
+class TabBarMixin(widgets.WidgetMixin):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
 
     def __init__(self, parent: QtWidgets.QWidget | None = None) -> None:
@@ -160,3 +158,7 @@ class TabBar(QtWidgets.QTabBar):
             elide mode
         """
         return constants.ELIDE_MODE.inverse[self.elideMode()]
+
+
+class TabBar(TabBarMixin, QtWidgets.QTabBar):
+    pass

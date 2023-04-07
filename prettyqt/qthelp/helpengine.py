@@ -4,10 +4,7 @@ from prettyqt import qthelp
 from prettyqt.qt import QtHelp
 
 
-QtHelp.QHelpEngine.__bases__ = (qthelp.HelpEngineCore,)
-
-
-class HelpEngine(QtHelp.QHelpEngine):
+class HelpEngine(qthelp.HelpEngineCoreMixin, QtHelp.QHelpEngine):
     pass
 
 

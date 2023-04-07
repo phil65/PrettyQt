@@ -170,10 +170,8 @@ WRAP_MODE = bidict(
 
 WrapModeStr = Literal["none", "word", "anywhere", "whitespace"]
 
-Qsci.QsciScintilla.__bases__[0].__bases__ = (widgets.AbstractScrollArea,)
 
-
-class SciScintilla(Qsci.QsciScintilla):
+class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
     supported_langs = LEXER.keys()
 
     def __init__(self, *args, **kwargs):

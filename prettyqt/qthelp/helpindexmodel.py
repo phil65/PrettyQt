@@ -4,8 +4,5 @@ from prettyqt import core
 from prettyqt.qt import QtHelp
 
 
-QtHelp.QHelpIndexModel.__bases__ = (core.StringListModel,)
-
-
-class HelpIndexModel(QtHelp.QHelpIndexModel):
+class HelpIndexModel(core.StringListModelMixin, QtHelp.QHelpIndexModel):
     pass

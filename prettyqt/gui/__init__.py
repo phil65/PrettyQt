@@ -48,12 +48,12 @@ from .textobjectinterface import TextObjectInterface
 from .drag import Drag
 from .screen import Screen
 from .keysequence import KeySequence
-from .surface import Surface
-from .window import Window
+from .surface import Surface, SurfaceMixin
+from .window import Window, WindowMixin
 from .icon import Icon
-from .paintdevice import PaintDevice
-from .paintdevicewindow import PaintDeviceWindow
-from .pixmap import Pixmap
+from .paintdevice import PaintDevice, PaintDeviceMixin
+from .paintdevicewindow import PaintDeviceWindow, PaintDeviceWindowMixin
+from .pixmap import Pixmap, PixmapMixin
 from .iconengine import IconEngine
 from .pixmapcache import PixmapCache
 from .bitmap import Bitmap
@@ -63,7 +63,7 @@ from .rasterwindow import RasterWindow
 from .clipboard import Clipboard
 from .inputmethod import InputMethod
 from .sessionmanager import SessionManager
-from .validator import Validator
+from .validator import Validator, ValidatorMixin
 
 from .regularexpressionvalidator import RegularExpressionValidator
 from .textlayout import TextLayout
@@ -79,7 +79,7 @@ from .doublevalidator import DoubleValidator
 from .color import Color
 from .brush import Brush
 from .textblockuserdata import TextBlockUserData
-from .gradient import Gradient
+from .gradient import Gradient, GradientMixin
 from .lineargradient import LinearGradient
 from .radialgradient import RadialGradient
 from .conicalgradient import ConicalGradient
@@ -93,14 +93,14 @@ from .fontdatabase import FontDatabase
 from .region import Region
 from .movie import Movie
 from .transform import Transform
-from .pagedpaintdevice import PagedPaintDevice
+from .pagedpaintdevice import PagedPaintDevice, PagedPaintDeviceMixin
 from .pen import Pen
 from .picture import Picture
-from .painter import Painter
+from .painter import Painter, PainterMixin
 from .painterpath import PainterPath
 from .painterpathstroker import PainterPathStroker
 from .palette import Palette
-from .guiapplication import GuiApplication
+from .guiapplication import GuiApplication, GuiApplicationMixin
 from .cursor import Cursor
 from .polygon import Polygon
 from .polygonf import PolygonF
@@ -115,17 +115,20 @@ from .vector4d import Vector4D
 from .imageiohandler import ImageIOHandler
 from .imagereader import ImageReader
 from .imagewriter import ImageWriter
-from .textformat import TextFormat
+from .textformat import TextFormat, TextFormatMixin
 from .textlength import TextLength
 from .textframeformat import TextFrameFormat
-from .textcharformat import TextCharFormat
+from .textcharformat import TextCharFormat, TextCharFormatMixin
 from .textimageformat import TextImageFormat
 from .textlistformat import TextListFormat
 from .texttablecellformat import TextTableCellFormat
-from .textobject import TextObject
+from .textobject import TextObject, TextObjectMixin
 from .textblockgroup import TextBlockGroup
 from .textframe import TextFrame
-from .abstracttextdocumentlayout import AbstractTextDocumentLayout
+from .abstracttextdocumentlayout import (
+    AbstractTextDocumentLayout,
+    AbstractTextDocumentLayoutMixin,
+)
 from .syntaxhighlighter import SyntaxHighlighter
 
 from .colorspace import ColorSpace
@@ -180,6 +183,7 @@ __all__ = [
     "Drag",
     "Screen",
     "Gradient",
+    "GradientMixin",
     "LinearGradient",
     "RadialGradient",
     "ConicalGradient",
@@ -187,7 +191,9 @@ __all__ = [
     "PageLayout",
     "Clipboard",
     "GuiApplication",
+    "GuiApplicationMixin",
     "Validator",
+    "ValidatorMixin",
     "TextLayout",
     "TextLine",
     "TextOption",
@@ -211,17 +217,21 @@ __all__ = [
     "Region",
     "Movie",
     "PaintDevice",
+    "PaintDeviceMixin",
     "Transform",
     "PagedPaintDevice",
+    "PagedPaintDeviceMixin",
     "Icon",
     "Image",
     "Pen",
     "Picture",
     "Pixmap",
+    "PixmapMixin",
     "IconEngine",
     "PixmapCache",
     "Bitmap",
     "Painter",
+    "PainterMixin",
     "PainterPath",
     "PainterPathStroker",
     "Palette",
@@ -231,6 +241,7 @@ __all__ = [
     "StandardItem",
     "StandardItemModel",
     "TextCharFormat",
+    "TextCharFormatMixin",
     "TextImageFormat",
     "TextListFormat",
     "TextTableCellFormat",
@@ -239,22 +250,28 @@ __all__ = [
     "PdfWriter",
     "KeySequence",
     "Surface",
+    "SurfaceMixin",
     "Window",
+    "WindowMixin",
     "DesktopServices",
     "Matrix4x4",
     "Vector3D",
     "Vector4D",
     "PaintDeviceWindow",
+    "PaintDeviceWindowMixin",
     "RasterWindow",
     "ImageIOHandler",
     "ImageReader",
     "ImageWriter",
     "TextObject",
+    "TextObjectMixin",
     "TextLength",
     "TextFormat",
+    "TextFormatMixin",
     "TextFrameFormat",
     "TextFrame",
     "AbstractTextDocumentLayout",
+    "AbstractTextDocumentLayoutMixin",
     "InputMethod",
     "ColorSpace",
 ]

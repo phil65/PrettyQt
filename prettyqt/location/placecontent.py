@@ -18,7 +18,7 @@ TYPE = bidict(
 TypeStr = Literal["none", "image", "review", "editorial", "custom"]
 
 
-class PlaceContent(QtLocation.QPlaceContent):
+class PlaceContentMixin:
     def get_type(self) -> TypeStr:
         """Return the visibility of the place.
 
@@ -32,6 +32,10 @@ class PlaceContent(QtLocation.QPlaceContent):
 
     def get_supplier(self) -> location.PlaceSupplier:
         return location.PlaceSupplier(self.supplier())
+
+
+class PlaceContent(PlaceContentMixin, QtLocation.QPlaceContent):
+    pass
 
 
 if __name__ == "__main__":

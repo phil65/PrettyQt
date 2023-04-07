@@ -4,8 +4,5 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QThreadPool.__bases__ = (core.Object,)
-
-
-class ThreadPool(QtCore.QThreadPool):
+class ThreadPool(core.ObjectMixin, QtCore.QThreadPool):
     pass

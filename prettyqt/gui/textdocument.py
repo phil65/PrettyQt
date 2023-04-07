@@ -49,10 +49,8 @@ FIND_FLAGS = bidict(
 
 FindFlagStr = Literal["backward", "case_sensitive", "whole_words"]
 
-QtGui.QTextDocument.__bases__ = (core.Object,)
 
-
-class TextDocument(QtGui.QTextDocument):
+class TextDocumentMixin(core.ObjectMixin):
     def __getitem__(self, index: int) -> gui.TextBlock:
         return gui.TextBlock(self.findBlockByNumber(index))
 
@@ -217,6 +215,10 @@ class TextDocument(QtGui.QTextDocument):
         else:
             options.setFlags(options.flags() & ~flag)  # type: ignore
         self.setDefaultTextOption(options)
+
+
+class TextDocument(TextDocumentMixin, QtGui.QTextDocument):
+    pass
 
 
 if __name__ == "__main__":

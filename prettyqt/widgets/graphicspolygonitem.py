@@ -5,10 +5,9 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QGraphicsPolygonItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)
-
-
-class GraphicsPolygonItem(QtWidgets.QGraphicsPolygonItem):
+class GraphicsPolygonItem(
+    widgets.AbstractGraphicsShapeItemMixin, QtWidgets.QGraphicsPolygonItem
+):
     def serialize_fields(self):
         return dict(polygon=self.get_polygon(), fill_rule=self.get_fill_rule())
 

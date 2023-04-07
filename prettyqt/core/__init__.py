@@ -41,7 +41,7 @@ from .metaproperty import MetaProperty
 from .metaobject import MetaObject
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
-from .uuid import Uuid
+from .uuid import Uuid, UuidMixin
 from .signalblocker import SignalBlocker
 from .abstractnativeeventfilter import AbstractNativeEventFilter
 
@@ -56,7 +56,7 @@ from .randomgenerator import RandomGenerator
 from .deadlinetimer import DeadlineTimer
 from .elapsedtimer import ElapsedTimer
 from .basictimer import BasicTimer
-from .object import Object
+from .object import Object, ObjectMixin
 from .socketnotifier import SocketNotifier
 from .signalmapper import SignalMapper
 from .timeline import TimeLine
@@ -66,11 +66,11 @@ from .locale import Locale
 from .abstracteventdispatcher import AbstractEventDispatcher
 from .textstream import TextStream
 from .eventloop import EventLoop
-from .abstractanimation import AbstractAnimation
-from .variantanimation import VariantAnimation
+from .abstractanimation import AbstractAnimation, AbstractAnimationMixin
+from .variantanimation import VariantAnimation, VariantAnimationMixin
 from .propertyanimation import PropertyAnimation
 from .pauseanimation import PauseAnimation
-from .animationgroup import AnimationGroup
+from .animationgroup import AnimationGroup, AnimationGroupMixin
 from .parallelanimationgroup import ParallelAnimationGroup
 from .sequentialanimationgroup import SequentialAnimationGroup
 from .versionnumber import VersionNumber
@@ -82,12 +82,12 @@ from .bytearraymatcher import ByteArrayMatcher
 from .url import Url
 from .urlquery import UrlQuery
 from .translator import Translator
-from .coreapplication import CoreApplication
+from .coreapplication import CoreApplication, CoreApplicationMixin
 from .filesystemwatcher import FileSystemWatcher
 from .fileselector import FileSelector
-from .iodevice import IODevice
-from .filedevice import FileDevice
-from .file import File
+from .iodevice import IODevice, IODeviceMixin
+from .filedevice import FileDevice, FileDeviceMixin
+from .file import File, FileMixin
 from .savefile import SaveFile
 from .lockfile import LockFile
 from .buffer import Buffer
@@ -127,13 +127,13 @@ from .itemselectionmodel import ItemSelectionModel
 from .itemselection import ItemSelection
 from .itemselectionrange import ItemSelectionRange
 from .diriterator import DirIterator
-from .abstractitemmodel import AbstractItemModel
-from .abstractproxymodel import AbstractProxyModel
+from .abstractitemmodel import AbstractItemModel, AbstractItemModelMixin
+from .abstractproxymodel import AbstractProxyModel, AbstractProxyModelMixin
 from .identityproxymodel import IdentityProxyModel
-from .abstractlistmodel import AbstractListModel
-from .stringlistmodel import StringListModel
+from .abstractlistmodel import AbstractListModel, AbstractListModelMixin
+from .stringlistmodel import StringListModel, StringListModelMixin
 from .sortfilterproxymodel import SortFilterProxyModel
-from .abstracttablemodel import AbstractTableModel
+from .abstracttablemodel import AbstractTableModel, AbstractTableModelMixin
 from .standardpaths import StandardPaths
 from .xmlstreamreader import XmlStreamReader
 from .commandlineoption import CommandLineOption
@@ -179,8 +179,10 @@ __all__ = [
     "MetaProperty",
     "MetaObject",
     "Object",
+    "ObjectMixin",
     "CryptographicHash",
     "Uuid",
+    "UuidMixin",
     "SignalBlocker",
     "AbstractNativeEventFilter",
     "SignalMapper",
@@ -208,11 +210,15 @@ __all__ = [
     "PluginLoader",
     "UrlQuery",
     "CoreApplication",
+    "CoreApplicationMixin",
     "FileSystemWatcher",
     "FileSelector",
     "IODevice",
+    "IODeviceMixin",
     "FileDevice",
+    "FileDeviceMixin",
     "File",
+    "FileMixin",
     "SaveFile",
     "LockFile",
     "TemporaryFile",
@@ -237,10 +243,13 @@ __all__ = [
     "RandomGenerator",
     # "RandomGenerator64",
     "AbstractAnimation",
+    "AbstractAnimationMixin",
     "AnimationGroup",
+    "AnimationGroupMixin",
     "ParallelAnimationGroup",
     "SequentialAnimationGroup",
     "VariantAnimation",
+    "VariantAnimationMixin",
     "PropertyAnimation",
     "PauseAnimation",
     "TextBoundaryFinder",
@@ -269,14 +278,19 @@ __all__ = [
     "ThreadPool",
     "Signal",
     "AbstractItemModel",
+    "AbstractItemModelMixin",
     "AbstractProxyModel",
+    "AbstractProxyModelMixin",
     "IdentityProxyModel",
     "AbstractListModel",
+    "AbstractListModelMixin",
     "StringListModel",
+    "StringListModelMixin",
     "SortFilterProxyModel",
     "ConcatenateTablesProxyModel",
     "TransposeProxyModel",
     "AbstractTableModel",
+    "AbstractTableModelMixin",
     "StandardPaths",
     "XmlStreamReader",
     "AbstractState",

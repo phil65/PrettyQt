@@ -4,10 +4,9 @@ from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsOpacityEffect.__bases__ = (widgets.GraphicsEffect,)
-
-
-class GraphicsOpacityEffect(QtWidgets.QGraphicsOpacityEffect):
+class GraphicsOpacityEffect(
+    widgets.GraphicsEffectMixin, QtWidgets.QGraphicsOpacityEffect
+):
     def serialize_fields(self):
         return dict(opacity=self.opacity(), opacity_mask=self.get_opacity_mask())
 

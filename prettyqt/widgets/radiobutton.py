@@ -4,11 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QRadioButton.__bases__ = (widgets.AbstractButton,)
-
-
-class RadioButton(QtWidgets.QRadioButton):
-
+class RadioButton(widgets.AbstractButtonMixin, QtWidgets.QRadioButton):
     value_changed = core.Signal(bool)
 
     def __init__(self, *args, **kwargs):

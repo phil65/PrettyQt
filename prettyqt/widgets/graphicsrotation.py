@@ -5,10 +5,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QGraphicsRotation.__bases__ = (widgets.GraphicsTransform,)
-
-
-class GraphicsRotation(QtWidgets.QGraphicsRotation):
+class GraphicsRotation(widgets.GraphicsTransformMixin, QtWidgets.QGraphicsRotation):
     def set_axis(self, axis: constants.AxisStr):
         if axis not in constants.AXIS:
             raise InvalidParamError(axis, constants.AXIS)

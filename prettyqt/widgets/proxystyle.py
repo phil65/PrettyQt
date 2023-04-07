@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QProxyStyle.__bases__ = (widgets.CommonStyle,)
-
-
-class ProxyStyle(QtWidgets.QProxyStyle):
+class ProxyStyle(widgets.CommonStyleMixin, QtWidgets.QProxyStyle):
     pass
 
 

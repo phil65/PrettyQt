@@ -12,10 +12,8 @@ PROCESS_EVENT_FLAGS = bidict(
     wait_for_more=QtCore.QEventLoop.ProcessEventsFlag.WaitForMoreEvents,
 )
 
-QtCore.QEventLoop.__bases__ = (core.Object,)
 
-
-class EventLoop(QtCore.QEventLoop):
+class EventLoop(core.ObjectMixin, QtCore.QEventLoop):
     def __init__(self, parent: QtCore.QObject | None = None) -> None:
         super().__init__(parent)
         self._executing = False

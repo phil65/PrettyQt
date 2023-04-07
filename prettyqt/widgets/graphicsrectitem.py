@@ -4,10 +4,9 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsRectItem.__bases__ = (widgets.AbstractGraphicsShapeItem,)
-
-
-class GraphicsRectItem(QtWidgets.QGraphicsRectItem):
+class GraphicsRectItem(
+    widgets.AbstractGraphicsShapeItemMixin, QtWidgets.QGraphicsRectItem
+):
     def __repr__(self):
         return f"{type(self).__name__}({repr(self.get_rect())})"
 

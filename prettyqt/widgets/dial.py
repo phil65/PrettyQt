@@ -4,11 +4,7 @@ from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QDial.__bases__ = (widgets.AbstractSlider,)
-
-
-class Dial(QtWidgets.QDial):
-
+class Dial(widgets.AbstractSliderMixin, QtWidgets.QDial):
     value_changed = core.Signal(int)
 
     def __init__(self, parent: QtWidgets.QWidget | None = None):

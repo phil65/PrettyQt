@@ -6,10 +6,7 @@ from prettyqt import charts
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QDateTimeAxis.__bases__ = (charts.AbstractAxis,)
-
-
-class DateTimeAxis(QtCharts.QDateTimeAxis):
+class DateTimeAxis(charts.AbstractAxisMixin, QtCharts.QDateTimeAxis):
     def get_min(self) -> datetime.datetime:
         return self.min().toPython()  # type: ignore
 

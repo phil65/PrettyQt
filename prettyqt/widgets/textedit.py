@@ -30,11 +30,7 @@ LineWrapModeStr = Literal[
 ]
 
 
-QtWidgets.QTextEdit.__bases__ = (widgets.AbstractScrollArea,)
-
-
-class TextEdit(QtWidgets.QTextEdit):
-
+class TextEditMixin(widgets.AbstractScrollAreaMixin):
     value_changed = core.Signal(str)
 
     def __init__(self, *args, **kwargs) -> None:
@@ -177,6 +173,10 @@ class TextEdit(QtWidgets.QTextEdit):
             Word wrap mode
         """
         return gui.textoption.WORD_WRAP_MODE.inverse[self.wordWrapMode()]
+
+
+class TextEdit(TextEditMixin, QtWidgets.QTextEdit):
+    pass
 
 
 if __name__ == "__main__":

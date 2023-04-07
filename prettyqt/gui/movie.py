@@ -22,10 +22,7 @@ MOVIE_STATE = bidict(
 MovieStateStr = Literal["not_running", "paused", "running"]
 
 
-QtGui.QMovie.__bases__ = (core.Object,)
-
-
-class Movie(QtGui.QMovie):
+class Movie(core.ObjectMixin, QtGui.QMovie):
     def __repr__(self):
         return f"{type(self).__name__}({self.fileName()!r}, {self.get_format()!r})"
 

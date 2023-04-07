@@ -4,10 +4,7 @@ from prettyqt import charts, core
 from prettyqt.qt import QtCharts, QtCore
 
 
-QtCharts.QLineSeries.__bases__ = (charts.XYSeries,)
-
-
-class LineSeries(QtCharts.QLineSeries):
+class LineSeries(charts.XYSeriesMixin, QtCharts.QLineSeries):
     """QLineSeries with some custom properties."""
 
     def __init__(self, *args, **kwargs):

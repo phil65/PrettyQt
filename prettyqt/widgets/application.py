@@ -25,10 +25,7 @@ SAVE_STATES = dict(
 )
 
 
-QtWidgets.QApplication.__bases__ = (gui.GuiApplication,)
-
-
-class Application(QtWidgets.QApplication):
+class ApplicationMixin(gui.GuiApplicationMixin):
     def __class_getitem__(cls, name: str) -> QtWidgets.QWidget:
         widget = cls.get_widget(name)
         if widget is None:
@@ -229,6 +226,12 @@ class Application(QtWidgets.QApplication):
             cls.processEvents()
             if timeit.default_timer() - start > secs:
                 return
+
+
+class Application(ApplicationMixin, QtWidgets.QApplication):
+    pass
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__()
 
 
 # Application.setStyle(widgets.Style())

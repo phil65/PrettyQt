@@ -5,10 +5,7 @@ from prettyqt import charts, gui
 from prettyqt.qt import QtCharts, QtCore
 
 
-QtCharts.QXYSeries.__bases__ = (charts.AbstractSeries,)
-
-
-class XYSeries(QtCharts.QXYSeries):
+class XYSeriesMixin(charts.AbstractSeriesMixin):
     """QXYSeries with some custom properties."""
 
     def __init__(self, *args, **kwargs):
@@ -44,3 +41,7 @@ class XYSeries(QtCharts.QXYSeries):
 
     def get_brush(self) -> gui.Brush:
         return gui.Brush(self.brush())
+
+
+class XYSeries(XYSeriesMixin, QtCharts.QXYSeries):
+    pass

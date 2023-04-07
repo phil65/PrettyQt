@@ -4,11 +4,12 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QStringListModel.__bases__ = (core.AbstractListModel,)
-
-
-class StringListModel(QtCore.QStringListModel):
+class StringListModelMixin(core.AbstractListModelMixin):
     def serialize_fields(self):
         return dict(
             string_list=self.stringList(),
         )
+
+
+class StringListModel(StringListModelMixin, QtCore.QStringListModel):
+    pass

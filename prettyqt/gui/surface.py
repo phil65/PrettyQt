@@ -25,7 +25,7 @@ SURFACE_TYPES = bidict(
 SurfaceTypeStr = Literal["raster", "open_gl", "raster_gl", "open_vg", "vulkan", "metal"]
 
 
-class Surface(QtGui.QSurface):
+class SurfaceMixin:
     def __repr__(self):
         return f"{type(self).__name__}()"
 
@@ -44,3 +44,7 @@ class Surface(QtGui.QSurface):
             surface type
         """
         return SURFACE_TYPES.inverse[self.surfaceType()]
+
+
+class Surface(SurfaceMixin, QtGui.QSurface):
+    pass

@@ -26,10 +26,8 @@ LoadHintStr = Literal[
     "deep_bind",
 ]
 
-QtCore.QLibrary.__bases__ = (core.Object,)
 
-
-class Library(QtCore.QLibrary):
+class Library(core.ObjectMixin, QtCore.QLibrary):
     def __bool__(self):
         return self.isLoaded()
 

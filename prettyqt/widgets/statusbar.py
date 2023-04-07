@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QStatusBar.__bases__ = (widgets.Widget,)
-
-
-class StatusBar(QtWidgets.QStatusBar):
+class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.progress_bar = widgets.ProgressBar()

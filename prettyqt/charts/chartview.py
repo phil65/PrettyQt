@@ -22,7 +22,7 @@ ZOOM_OUT_FACTOR = 1.0 / ZOOM_IN_FACTOR
 SCROLL_STEP_SIZE = 10
 
 
-class ChartView(QtCharts.QChartView):
+class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         chart = charts.Chart()

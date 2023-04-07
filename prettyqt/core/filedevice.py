@@ -70,10 +70,8 @@ PERMISSIONS = bidict(
     exe_other=QtCore.QFileDevice.Permission.ExeOther,
 )
 
-QtCore.QFileDevice.__bases__ = (core.IODevice,)
 
-
-class FileDevice(QtCore.QFileDevice):
+class FileDeviceMixin(core.IODeviceMixin):
     def __repr__(self):
         return f"{type(self).__name__}({self.fileName()!r})"
 
@@ -116,3 +114,7 @@ class FileDevice(QtCore.QFileDevice):
             file error status
         """
         return FILE_ERROR.inverse[self.error()]
+
+
+class FileDevice(FileDeviceMixin, QtCore.QFileDevice):
+    pass

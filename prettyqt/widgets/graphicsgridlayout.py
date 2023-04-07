@@ -7,10 +7,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtWidgets.QGraphicsGridLayout.__bases__ = (widgets.GraphicsLayout,)
-
-
-class GraphicsGridLayout(QtWidgets.QGraphicsGridLayout):
+class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLayout):
     def __getitem__(
         self, idx: tuple[int, int] | int
     ) -> QtWidgets.QGraphicsLayoutItem | None:

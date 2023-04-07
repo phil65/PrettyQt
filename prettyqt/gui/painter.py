@@ -52,7 +52,7 @@ RenderHintStr = Literal[
 ]
 
 
-class Painter(QtGui.QPainter):
+class PainterMixin:
     def __enter__(self):
         return self
 
@@ -233,6 +233,10 @@ class Painter(QtGui.QPainter):
         self.translate(x, y)
         yield self
         self.translate(-x, -y)
+
+
+class Painter(PainterMixin, QtGui.QPainter):
+    pass
 
 
 if __name__ == "__main__":

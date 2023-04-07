@@ -4,8 +4,9 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QAbstractListModel.__bases__ = (core.AbstractItemModel,)
+class AbstractListModelMixin(core.AbstractItemModelMixin):
+    pass
 
 
-class AbstractListModel(QtCore.QAbstractListModel):
+class AbstractListModel(AbstractListModelMixin, QtCore.QAbstractListModel):
     pass

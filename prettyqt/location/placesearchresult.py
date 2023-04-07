@@ -16,7 +16,7 @@ TYPE = bidict(
 TypeStr = Literal["unknown", "place", "proposed_search"]
 
 
-class PlaceSearchResult(QtLocation.QPlaceSearchResult):
+class PlaceSearchResultMixin:
     def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
         if icon.isEmpty():
@@ -30,3 +30,7 @@ class PlaceSearchResult(QtLocation.QPlaceSearchResult):
             Result type
         """
         return TYPE.inverse[self.type()]
+
+
+class PlaceSearchResult(PlaceSearchResultMixin, QtLocation.QPlaceSearchResult):
+    pass

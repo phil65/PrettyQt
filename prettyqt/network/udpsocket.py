@@ -4,10 +4,7 @@ from prettyqt import network
 from prettyqt.qt import QtNetwork
 
 
-QtNetwork.QUdpSocket.__bases__ = (network.AbstractSocket,)
-
-
-class UdpSocket(QtNetwork.QUdpSocket):
+class UdpSocket(network.AbstractSocketMixin, QtNetwork.QUdpSocket):
     def get_multicast_interface(self) -> network.NetworkInterface:
         return network.NetworkInterface(self.multicastInterface())
 

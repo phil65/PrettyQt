@@ -4,8 +4,5 @@ from prettyqt import core
 from prettyqt.qt import QtScxml
 
 
-QtScxml.QScxmlStateMachine.__bases__ = (core.Object,)
-
-
-class ScxmlStateMachine(QtScxml.QScxmlStateMachine):
+class ScxmlStateMachine(core.ObjectMixin, QtScxml.QScxmlStateMachine):
     pass

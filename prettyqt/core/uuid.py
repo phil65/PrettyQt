@@ -37,7 +37,7 @@ VERSION = bidict(
 VersionStr = Literal["unknown", "time", "embedded_posix", "name", "random", "sha1"]
 
 
-class Uuid(QtCore.QUuid):
+class UuidMixin:
     def __repr__(self):
         return f"{type(self).__name__}({self.toString()!r})"
 
@@ -60,6 +60,10 @@ class Uuid(QtCore.QUuid):
     def create_uuid(cls) -> Uuid:
         # workaround for PySide2, not able to clone in ctor
         return cls(cls.createUuid().toString())
+
+
+class Uuid(UuidMixin, QtCore.QUuid):
+    pass
 
 
 if __name__ == "__main__":

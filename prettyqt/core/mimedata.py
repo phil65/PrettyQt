@@ -8,10 +8,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import helpers, types
 
 
-QtCore.QMimeData.__bases__ = (core.Object,)
-
-
-class MimeData(QtCore.QMimeData):
+class MimeData(core.ObjectMixin, QtCore.QMimeData):
     def __len__(self):
         return len(self.formats())
 

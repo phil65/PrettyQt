@@ -17,10 +17,8 @@ SOCKET_OPTION = bidict(
 
 SocketOptionStr = Literal["none", "user", "group", "other", "world"]
 
-QtNetwork.QLocalServer.__bases__ = (core.Object,)
 
-
-class LocalServer(QtNetwork.QLocalServer):
+class LocalServer(core.ObjectMixin, QtNetwork.QLocalServer):
     def get_server_error(self) -> network.abstractsocket.SocketErrorStr:
         return network.abstractsocket.SOCKET_ERROR.inverse[self.serverError()]
 

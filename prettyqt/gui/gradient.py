@@ -82,7 +82,7 @@ PRESET = bidict(
 )
 
 
-class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
+class GradientMixin:
     def __setitem__(self, key: float, value):
         self.setColorAt(key, value)
 
@@ -148,6 +148,10 @@ class Gradient(prettyprinter.PrettyPrinter, QtGui.QGradient):
 
     def get_stops(self) -> list[tuple[float, gui.Color]]:
         return [(i, gui.Color(j)) for (i, j) in self.stops()]
+
+
+class Gradient(GradientMixin, prettyprinter.PrettyPrinter, QtGui.QGradient):
+    pass
 
 
 if __name__ == "__main__":

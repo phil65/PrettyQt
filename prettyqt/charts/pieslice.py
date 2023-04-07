@@ -18,10 +18,8 @@ LabelPositionStr = Literal[
     "outside", "inside_horizontal", "inside_tangential", "inside_normal"
 ]
 
-QtCharts.QPieSlice.__bases__ = (core.Object,)
 
-
-class PieSlice(QtCharts.QPieSlice):
+class PieSlice(core.ObjectMixin, QtCharts.QPieSlice):
     def __repr__(self):
         return f"{type(self).__name__}({self.label()!r}, {self.value()})"
 

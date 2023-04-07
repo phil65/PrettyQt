@@ -4,10 +4,7 @@ from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 
-QtWidgets.QGraphicsScale.__bases__ = (widgets.GraphicsTransform,)
-
-
-class GraphicsScale(QtWidgets.QGraphicsScale):
+class GraphicsScale(widgets.GraphicsTransformMixin, QtWidgets.QGraphicsScale):
     pass
 
 

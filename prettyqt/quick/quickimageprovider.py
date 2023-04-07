@@ -4,8 +4,9 @@ from prettyqt import qml
 from prettyqt.qt import QtQuick
 
 
-QtQuick.QQuickImageProvider.__bases__ = (qml.QmlImageProviderBase,)
+class QuickImageProviderMixin(qml.QmlImageProviderBaseMixin):
+    pass
 
 
-class QuickImageProvider(QtQuick.QQuickImageProvider):
+class QuickImageProvider(QuickImageProviderMixin, QtQuick.QQuickImageProvider):
     pass

@@ -5,10 +5,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import types
 
 
-QtWidgets.QUndoView.__bases__ = (widgets.ListView,)
-
-
-class UndoView(QtWidgets.QUndoView):
+class UndoView(widgets.ListViewMixin, QtWidgets.QUndoView):
     def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
         return self.stack().command(index)
 

@@ -4,8 +4,5 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QItemSelectionModel.__bases__ = (core.Object,)
-
-
-class ItemSelectionModel(QtCore.QItemSelectionModel):
+class ItemSelectionModel(core.ObjectMixin, QtCore.QItemSelectionModel):
     pass

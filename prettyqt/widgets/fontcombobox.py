@@ -18,11 +18,7 @@ FONT_FILTERS = bidict(
 FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "proportional"]
 
 
-QtWidgets.QFontComboBox.__bases__ = (widgets.ComboBox,)
-
-
-class FontComboBox(QtWidgets.QFontComboBox):
-
+class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
     value_changed = core.Signal(object)
 
     def __init__(self, *args, **kwargs):

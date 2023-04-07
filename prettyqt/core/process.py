@@ -63,10 +63,7 @@ PROCESS_STATES = bidict(
 ProcessStateStr = Literal["not_running", "starting", "running"]
 
 
-QtCore.QProcess.__bases__ = (core.IODevice,)
-
-
-class Process(QtCore.QProcess):
+class Process(core.IODeviceMixin, QtCore.QProcess):
     def set_read_channel(self, channel: ProcessChannelStr):
         """Set the input channel channel.
 

@@ -4,8 +4,9 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QAbstractProxyModel.__bases__ = (core.AbstractItemModel,)
+class AbstractProxyModelMixin(core.AbstractItemModelMixin):
+    pass
 
 
-class AbstractProxyModel(QtCore.QAbstractProxyModel):
+class AbstractProxyModel(AbstractProxyModelMixin, QtCore.QAbstractProxyModel):
     pass

@@ -53,10 +53,8 @@ TypeStr = Literal[
     "match",
 ]
 
-QtLocation.QPlaceReply.__bases__ = (core.Object,)
 
-
-class PlaceReply(QtLocation.QPlaceReply):
+class PlaceReplyMixin(core.ObjectMixin):
     def get_error(self) -> ErrorStr:
         """Return error type.
 
@@ -72,6 +70,10 @@ class PlaceReply(QtLocation.QPlaceReply):
             Type
         """
         return TYPE.inverse[self.type()]
+
+
+class PlaceReply(PlaceReplyMixin, QtLocation.QPlaceReply):
+    pass
 
 
 if __name__ == "__main__":

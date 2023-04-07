@@ -8,15 +8,11 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, types
 
 
-QtWidgets.QListWidget.__bases__ = (widgets.ListView,)
-
-
 class NoData:
     pass
 
 
-class ListWidget(QtWidgets.QListWidget):
-
+class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     value_changed = core.Signal(object)
 
     def __init__(

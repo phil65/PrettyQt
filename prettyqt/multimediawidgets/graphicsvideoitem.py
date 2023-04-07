@@ -1,17 +1,19 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, multimedia, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtMultimediaWidgets
 from prettyqt.utils import InvalidParamError
 
 
-QtMultimediaWidgets.QGraphicsVideoItem.__bases__ = (
-    widgets.GraphicsObject,
-    multimedia.MediaBindableInterface,
-)
+# QtMultimediaWidgets.QGraphicsVideoItem.__bases__ = (
+#     widgets.GraphicsObject,
+#     multimedia.MediaBindableInterface,
+# )
 
 
-class GraphicsVideoItem(QtMultimediaWidgets.QGraphicsVideoItem):
+class GraphicsVideoItem(
+    widgets.GraphicsObjectMixin, QtMultimediaWidgets.QGraphicsVideoItem
+):
     def get_offset(self) -> core.PointF:
         return core.PointF(self.offset())
 

@@ -5,10 +5,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import types
 
 
-QtCore.QPropertyAnimation.__bases__ = (core.VariantAnimation,)
-
-
-class PropertyAnimation(QtCore.QPropertyAnimation):
+class PropertyAnimation(core.VariantAnimationMixin, QtCore.QPropertyAnimation):
     def apply_to(self, obj: QtCore.QObject, attribute: str):
         self.setTargetObject(obj)
         self.set_property_name(attribute)

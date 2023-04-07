@@ -35,11 +35,7 @@ SectionsStr = Literal[
 ]
 
 
-QtWidgets.QDateTimeEdit.__bases__ = (widgets.AbstractSpinBox,)
-
-
-class DateTimeEdit(QtWidgets.QDateTimeEdit):
-
+class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     value_changed = core.Signal(datetime.datetime)
 
     def __init__(self, *args, **kwargs):
@@ -132,6 +128,10 @@ class DateTimeEdit(QtWidgets.QDateTimeEdit):
 
     def get_time(self) -> datetime.time:
         return self.time().toPython()  # type: ignore
+
+
+class DateTimeEdit(DateTimeEditMixin, QtWidgets.QDateTimeEdit):
+    pass
 
 
 if __name__ == "__main__":

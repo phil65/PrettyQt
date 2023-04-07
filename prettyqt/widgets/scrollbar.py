@@ -4,11 +4,7 @@ from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
-QtWidgets.QScrollBar.__bases__ = (widgets.AbstractSlider,)
-
-
-class ScrollBar(QtWidgets.QScrollBar):
-
+class ScrollBarMixin(widgets.AbstractSliderMixin):
     value_changed = core.Signal(int)
 
     def __init__(
@@ -22,3 +18,7 @@ class ScrollBar(QtWidgets.QScrollBar):
             ori = constants.ORIENTATION[orientation]
         super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
+
+
+class ScrollBar(ScrollBarMixin, QtWidgets.QScrollBar):
+    pass

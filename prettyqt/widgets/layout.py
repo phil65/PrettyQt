@@ -21,10 +21,7 @@ SizeConstraintStr = Literal[
 ]
 
 
-QtWidgets.QLayout.__bases__ = (core.Object, widgets.LayoutItem)
-
-
-class Layout(QtWidgets.QLayout):
+class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def __getitem__(
         self, index: str | int
     ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:
@@ -123,3 +120,7 @@ class Layout(QtWidgets.QLayout):
                 self.addWidget(w)
             else:
                 raise TypeError("add_item only supports widgets and layouts")
+
+
+class Layout(LayoutMixin, QtWidgets.QLayout):
+    pass

@@ -4,8 +4,5 @@ from prettyqt import core
 from prettyqt.qt import QtHelp
 
 
-QtHelp.QHelpContentModel.__bases__ = (core.AbstractItemModel,)
-
-
-class HelpContentModel(QtHelp.QHelpContentModel):
+class HelpContentModel(core.AbstractItemModelMixin, QtHelp.QHelpContentModel):
     pass

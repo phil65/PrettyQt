@@ -4,10 +4,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtCharts
 
 
-QtCharts.QCandlestickSet.__bases__ = (core.Object,)
-
-
-class CandlestickSet(QtCharts.QCandlestickSet):
+class CandlestickSet(core.ObjectMixin, QtCharts.QCandlestickSet):
     def __repr__(self):
         return (
             f"{type(self).__name__}({self.open()}, {self.high()}, {self.low()}, "

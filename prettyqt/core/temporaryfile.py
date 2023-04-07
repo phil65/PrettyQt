@@ -4,8 +4,5 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 
 
-QtCore.QTemporaryFile.__bases__ = (core.File,)
-
-
-class TemporaryFile(QtCore.QTemporaryFile):
+class TemporaryFile(core.FileMixin, QtCore.QTemporaryFile):
     pass

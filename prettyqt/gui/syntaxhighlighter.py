@@ -7,11 +7,7 @@ from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
 
 
-QtGui.QSyntaxHighlighter.__bases__ = (core.Object,)
-
-
-class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
-
+class SyntaxHighlighterMixin(core.ObjectMixin):
     RULES: list = []
 
     def __init__(self, parent: QtCore.QObject | None = None):
@@ -39,3 +35,7 @@ class SyntaxHighlighter(QtGui.QSyntaxHighlighter):
             for match in expression.finditer(text):
                 span = match.span(nth)
                 self.setFormat(span[0], span[1] - span[0], fmt)
+
+
+class SyntaxHighlighter(SyntaxHighlighterMixin, QtGui.QSyntaxHighlighter):
+    pass

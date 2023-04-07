@@ -29,8 +29,6 @@ VIEW_ITEM_POSITION = bidict(
     only_one=QtWidgets.QStyleOptionViewItem.ViewItemPosition.OnlyOne,
 )
 
-QtWidgets.QStyleOptionViewItem.__bases__ = (widgets.StyleOption,)
 
-
-class StyleOptionViewItem(QtWidgets.QStyleOptionViewItem):
+class StyleOptionViewItem(widgets.StyleOptionMixin, QtWidgets.QStyleOptionViewItem):
     pass

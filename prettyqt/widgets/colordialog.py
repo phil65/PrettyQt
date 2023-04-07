@@ -15,10 +15,8 @@ OPTIONS = dict(
 
 OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
 
-QtWidgets.QColorDialog.__bases__ = (widgets.Dialog,)
 
-
-class ColorDialog(QtWidgets.QColorDialog):
+class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
     def serialize_fields(self):
         return dict(color=self.current_color())
 

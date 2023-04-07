@@ -7,10 +7,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import types
 
 
-QtCore.QTranslator.__bases__ = (core.Object,)
-
-
-class Translator(QtCore.QTranslator):
+class TranslatorMixin(core.ObjectMixin):
     def __bool__(self):
         return not self.isEmpty()
 
@@ -50,6 +47,10 @@ class Translator(QtCore.QTranslator):
         ):
             raise OSError("Could not get translator for system language")
         return translator
+
+
+class Translator(TranslatorMixin, QtCore.QTranslator):
+    pass
 
 
 if __name__ == "__main__":

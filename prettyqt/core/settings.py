@@ -27,10 +27,8 @@ SCOPE = bidict(
 
 ScopeStr = Literal["user", "system"]
 
-QtCore.QSettings.__bases__ = (core.Object,)
 
-
-class Settings(QtCore.QSettings):
+class Settings(core.ObjectMixin, QtCore.QSettings):
     def __init__(self, *args, settings_id: str | None = None):
         super().__init__(*args)
         self.settings_id = settings_id

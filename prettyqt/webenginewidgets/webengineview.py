@@ -9,10 +9,7 @@ from prettyqt.qt import QtWebEngineWidgets
 from prettyqt.utils import types
 
 
-QtWebEngineWidgets.QWebEngineView.__bases__ = (widgets.Widget,)
-
-
-class WebEngineView(QtWebEngineWidgets.QWebEngineView):
+class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setPage(webenginecore.WebEnginePage(self))

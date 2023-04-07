@@ -4,10 +4,7 @@ from prettyqt import core, network
 from prettyqt.qt import QtNetwork
 
 
-QtNetwork.QTcpServer.__bases__ = (core.Object,)
-
-
-class TcpServer(QtNetwork.QTcpServer):
+class TcpServer(core.ObjectMixin, QtNetwork.QTcpServer):
     def listen(  # type: ignore
         self, address: str | QtNetwork.QHostAddress, port: int = 0
     ) -> bool:

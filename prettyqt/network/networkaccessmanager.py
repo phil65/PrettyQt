@@ -18,10 +18,8 @@ OPERATION = bidict(
 
 OperationStr = Literal["head", "get", "put", "post", "delete", "custom"]
 
-QtNetwork.QNetworkAccessManager.__bases__ = (core.Object,)
 
-
-class NetworkAccessManager(QtNetwork.QNetworkAccessManager):
+class NetworkAccessManager(core.ObjectMixin, QtNetwork.QNetworkAccessManager):
     # def request(
     #     self,
     #     method,
