@@ -92,7 +92,7 @@ def test_webenginesettings(qapp):
 def test_webenginehistory():
     page = webenginecore.WebEnginePage()
     history = page.get_history()
-    assert len(history) == 0
+    assert len(history) < 2  # 0 returns 1 for PySide6 6.5, 0 for PyQt6 6.4
     for item in history:
         pass
     history.get_items()

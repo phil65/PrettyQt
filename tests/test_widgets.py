@@ -19,7 +19,7 @@ from prettyqt.utils import InvalidParamError
 
 clsmembers = inspect.getmembers(widgets, inspect.isclass)
 clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
-clsmembers = [tpl for tpl in clsmembers if core.Object in tpl[1].mro()]
+clsmembers = [tpl for tpl in clsmembers if QtCore.QObject in tpl[1].mro()]
 
 # logger = logging.getLogger(__name__)
 
@@ -1650,8 +1650,8 @@ def test_widget(qtbot):
     widget.set_disabled()
     widget.set_min_size(1, 1)
     widget.set_max_size(2, 2)
-    widget.title = "test"
-    assert widget.title == "test"
+    widget.set_title("test")
+    assert widget.get_title() == "test"
     with widget.updates_off():
         widget.set_title("test2")
     widget.enabled = True

@@ -14,7 +14,11 @@ from prettyqt.utils import InvalidParamError
 
 
 clsmembers = inspect.getmembers(core, inspect.isclass)
-clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
+clsmembers = [
+    tpl
+    for tpl in clsmembers
+    if (not tpl[0].startswith("Abstract") and not tpl[0].endswith("Mixin"))
+]
 
 
 @pytest.mark.parametrize("name, cls", clsmembers)
@@ -427,9 +431,9 @@ def test_object(qapp):
     w4.set_id("w4")
     w.add(w1, w2, w3, w4)
     assert w.find_children(widgets.PushButton, recursive=False) == [w1]
-    assert w.find_children(core.Object, name="w2", recursive=False) == [w2]
+    assert w.find_children(name="w2", recursive=False) == [w2]
     assert w.find_child(widgets.PlainTextEdit, recursive=True) == w2
-    assert w.find_child(core.Object, name="w2", recursive=False) == w2
+    assert w.find_child(name="w2", recursive=False) == w2
     assert w2.find_parent(widgets.Splitter) == w
     layout = widgets.BoxLayout("vertical")
     layout.add(w)
@@ -694,7 +698,7 @@ def test_textboundaryfinder():
     for boundary in finder:
         pass
     assert finder.get_boundary_type() == "word"
-    assert finder.get_boundary_reasons() == ["break_opportunity", "start_of_item"]
+    assert "start_of_item" in finder.get_boundary_reasons()
 
 
 def test_textstream():

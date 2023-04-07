@@ -13,7 +13,11 @@ from prettyqt.utils import InvalidParamError
 
 
 clsmembers = inspect.getmembers(gui, inspect.isclass)
-clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
+clsmembers = [
+    tpl
+    for tpl in clsmembers
+    if (not tpl[0].startswith("Abstract") and not tpl[0].endswith("Mixin"))
+]
 
 # logger = logging.getLogger(__name__)
 
