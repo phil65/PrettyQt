@@ -26,7 +26,7 @@ bidict = "^0"
 docutils = {version = "^0.19", optional=true}
 orjson = {version = "^3", python = "<3.12", optional=true}
 
-regex = "^2022"
+regex = "^2023"
 
 PyQtWebEngine = {version = "^5.15", optional=true}
 PyQtChart = {version = "^5.15", optional=true, markers = "python_version != '3.10' or sys_platform != 'win32'"}
