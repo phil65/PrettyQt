@@ -40,26 +40,29 @@ class Transform(QtGui.QTransform):
 
     def __getitem__(self, value: tuple[int, int]) -> float:
         if value[0] == 0:
-            if value[1] == 0:
-                return self.m11()
-            elif value[1] == 1:
-                return self.m12()
-            elif value[1] == 2:
-                return self.m13()
+            match value[1]:
+                case 0:
+                    return self.m11()
+                case 1:
+                    return self.m12()
+                case 2:
+                    return self.m13()
         elif value[0] == 1:
-            if value[1] == 0:
-                return self.m21()
-            elif value[1] == 1:
-                return self.m22()
-            elif value[1] == 2:
-                return self.m23()
+            match value[1]:
+                case 0:
+                    return self.m21()
+                case 1:
+                    return self.m22()
+                case 2:
+                    return self.m23()
         elif value[0] == 2:
-            if value[1] == 0:
-                return self.m31()
-            elif value[1] == 1:
-                return self.m32()
-            elif value[1] == 2:
-                return self.m33()
+            match value[1]:
+                case 0:
+                    return self.m31()
+                case 1:
+                    return self.m32()
+                case 2:
+                    return self.m33()
         raise ValueError(f"Wrong value {value}")
 
     def __bytes__(self):
