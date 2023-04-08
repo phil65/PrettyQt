@@ -39,6 +39,17 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
             self.InvertMode.InvertRgba if invert_alpha else self.InvertMode.InvertRgb
         )
 
+    def as_bytes(self) -> bytes | None:
+        bits = self.bits()
+        if bits is None:
+            return None
+        if API == "pyqt5":
+            return bits.asstring(self.byteCount())
+        elif API == "pyqt6":
+            return bits.asstring(self.sizeInBytes())
+        elif API == "pyside6":
+            return bits.tobytes()
+
 
 if __name__ == "__main__":
     image = Image()
