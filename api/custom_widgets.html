@@ -17,7 +17,7 @@
         <link rel="next" href="gui.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -3463,72 +3463,70 @@ BorderLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</sp
 
         <span class="k">for</span> <span class="n">wrapper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
             <span class="n">item</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span>
-            <span class="n">position</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span>
+            <span class="k">match</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span><span class="p">:</span>
+                <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">:</span>
+                    <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                        <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">north_height</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+                    <span class="p">)</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">:</span>
-                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">north_height</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
-                <span class="p">)</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                    <span class="n">north_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
 
-                <span class="n">north_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+                <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">:</span>
+                    <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
+                        <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
+                    <span class="p">)</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-            <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">:</span>
-                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
-                    <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
-                <span class="p">)</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                    <span class="n">south_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+                    <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                        <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
+                        <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">south_height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
+                    <span class="p">)</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-                <span class="n">south_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
-                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
-                    <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">south_height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
-                <span class="p">)</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
-
-            <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">:</span>
-                <span class="n">center</span> <span class="o">=</span> <span class="n">wrapper</span>
+                <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">:</span>
+                    <span class="n">center</span> <span class="o">=</span> <span class="n">wrapper</span>
 
         <span class="n">center_height</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">north_height</span> <span class="o">-</span> <span class="n">south_height</span>
 
         <span class="k">for</span> <span class="n">wrapper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
             <span class="n">item</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span>
-            <span class="n">position</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span>
+            <span class="k">match</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span><span class="p">:</span>
+                <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">:</span>
+                    <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                        <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">west_width</span><span class="p">,</span>
+                        <span class="n">north_height</span><span class="p">,</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                        <span class="n">center_height</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">:</span>
-                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">west_width</span><span class="p">,</span>
-                    <span class="n">north_height</span><span class="p">,</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                    <span class="n">center_height</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                    <span class="n">west_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
 
-                <span class="n">west_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+                <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">:</span>
+                    <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                        <span class="n">center_height</span><span class="p">,</span>
+                    <span class="p">)</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-            <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">:</span>
-                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                    <span class="n">center_height</span><span class="p">,</span>
-                <span class="p">)</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                    <span class="n">east_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
 
-                <span class="n">east_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
-
-                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">east_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
-                    <span class="n">north_height</span><span class="p">,</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
-                <span class="p">)</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                    <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                        <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">east_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
+                        <span class="n">north_height</span><span class="p">,</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                        <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
+                    <span class="p">)</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">center</span><span class="p">:</span>
             <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
@@ -3868,72 +3866,70 @@ Position            (<span title="enum.IntEnum">IntEnum</span>)
 
     <span class="k">for</span> <span class="n">wrapper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
         <span class="n">item</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span>
-        <span class="n">position</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span>
+        <span class="k">match</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">:</span>
+                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">north_height</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
+                <span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">:</span>
-            <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="n">north_height</span><span class="p">,</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
-            <span class="p">)</span>
-            <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                <span class="n">north_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
 
-            <span class="n">north_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+            <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">:</span>
+                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
+                    <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
+                <span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">:</span>
-            <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
-                <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
-            <span class="p">)</span>
-            <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                <span class="n">south_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
+                    <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">south_height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
+                <span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-            <span class="n">south_height</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
-            <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
-                <span class="n">rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">south_height</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
-            <span class="p">)</span>
-            <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
-
-        <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">:</span>
-            <span class="n">center</span> <span class="o">=</span> <span class="n">wrapper</span>
+            <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">:</span>
+                <span class="n">center</span> <span class="o">=</span> <span class="n">wrapper</span>
 
     <span class="n">center_height</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">north_height</span> <span class="o">-</span> <span class="n">south_height</span>
 
     <span class="k">for</span> <span class="n">wrapper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
         <span class="n">item</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span>
-        <span class="n">position</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span>
+        <span class="k">match</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">:</span>
+                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">west_width</span><span class="p">,</span>
+                    <span class="n">north_height</span><span class="p">,</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                    <span class="n">center_height</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">:</span>
-            <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">west_width</span><span class="p">,</span>
-                <span class="n">north_height</span><span class="p">,</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                <span class="n">center_height</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                <span class="n">west_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
 
-            <span class="n">west_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
+            <span class="k">case</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">:</span>
+                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                    <span class="n">center_height</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
-        <span class="k">elif</span> <span class="n">position</span> <span class="o">==</span> <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">:</span>
-            <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">(),</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                <span class="n">center_height</span><span class="p">,</span>
-            <span class="p">)</span>
-            <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                <span class="n">east_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
 
-            <span class="n">east_width</span> <span class="o">+=</span> <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">()</span>
-
-            <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
-                <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">east_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
-                <span class="n">north_height</span><span class="p">,</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
-                <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
-            <span class="p">)</span>
-            <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
+                <span class="n">geom</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
+                    <span class="n">rect</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">+</span> <span class="n">rect</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">east_width</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">spacing</span><span class="p">(),</span>
+                    <span class="n">north_height</span><span class="p">,</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span>
+                    <span class="n">item</span><span class="o">.</span><span class="n">geometry</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">(),</span>
+                <span class="p">)</span>
+                <span class="n">item</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">geom</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">center</span><span class="p">:</span>
         <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span>
@@ -4451,25 +4447,24 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
 
     <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">,</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span><span class="p">,</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Tab</span><span class="p">,</span>
-        <span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_complete_current</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Up</span><span class="p">,</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Down</span><span class="p">,</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageUp</span><span class="p">,</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageDown</span><span class="p">,</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Home</span><span class="p">,</span>
-            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_End</span><span class="p">,</span>
-        <span class="p">):</span>
-            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">sendEvent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">key</span><span class="p">:</span>
+            <span class="k">case</span> <span class="p">(</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Tab</span>
+            <span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_complete_current</span><span class="p">()</span>
+            <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+            <span class="k">case</span> <span class="p">(</span>
+                <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Up</span>
+                <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Down</span>
+                <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageUp</span>
+                <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageDown</span>
+                <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Home</span>
+                <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_End</span>
+            <span class="p">):</span>
+                <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">sendEvent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
 
     <span class="c1"># &#39;QWidget&#39; interface</span>
 
@@ -4686,25 +4681,24 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
           <summary>Source code in <code>prettyqt/custom_widgets/completionwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">,</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span><span class="p">,</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Tab</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_complete_current</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">key</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="n">key</span> <span class="ow">in</span> <span class="p">(</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Up</span><span class="p">,</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Down</span><span class="p">,</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageUp</span><span class="p">,</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageDown</span><span class="p">,</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Home</span><span class="p">,</span>
-        <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_End</span><span class="p">,</span>
-    <span class="p">):</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">sendEvent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+    <span class="k">match</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">case</span> <span class="p">(</span>
+            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Tab</span>
+        <span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_complete_current</span><span class="p">()</span>
+        <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="k">case</span> <span class="p">(</span>
+            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Up</span>
+            <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Down</span>
+            <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageUp</span>
+            <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_PageDown</span>
+            <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Home</span>
+            <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_End</span>
+        <span class="p">):</span>
+            <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">sendEvent</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -10377,23 +10371,24 @@ RoundProgressBar            (<span title="prettyqt.widgets.widget.Widget">Widget
             <span class="bp">self</span><span class="o">.</span><span class="n">_draw_text</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">inner_rect</span><span class="p">,</span> <span class="n">inner_radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_draw_base</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">==</span> <span class="s2">&quot;donut&quot;</span><span class="p">:</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">shadow</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">())</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">==</span> <span class="s2">&quot;line&quot;</span><span class="p">:</span>
-            <span class="n">base_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">base_color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">BrushStyle</span><span class="o">.</span><span class="n">NoBrush</span><span class="p">)</span>
-            <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="n">adjusted</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="o">-</span><span class="n">width</span><span class="p">,</span> <span class="o">-</span><span class="n">width</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">adjusted</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;pie&quot;</span><span class="p">,</span> <span class="s2">&quot;expand&quot;</span><span class="p">):</span>
-            <span class="n">base_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">base_color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">())</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+        <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;donut&quot;</span><span class="p">:</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">shadow</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">())</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;line&quot;</span><span class="p">:</span>
+                <span class="n">base_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">base_color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">BrushStyle</span><span class="o">.</span><span class="n">NoBrush</span><span class="p">)</span>
+                <span class="n">width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">adjusted</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">width</span><span class="p">,</span> <span class="n">width</span><span class="p">,</span> <span class="o">-</span><span class="n">width</span><span class="p">,</span> <span class="o">-</span><span class="n">width</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">adjusted</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;pie&quot;</span> <span class="o">|</span> <span class="s2">&quot;expand&quot;</span><span class="p">:</span>
+                <span class="n">base_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">base_color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">base</span><span class="p">())</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_draw_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">,</span> <span class="n">rect</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span><span class="p">:</span>
@@ -10401,38 +10396,40 @@ RoundProgressBar            (<span title="prettyqt.widgets.widget.Widget">Widget
         <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">current_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span>
         <span class="n">value_range</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span>
         <span class="n">delta</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value_range</span> <span class="o">/</span> <span class="n">diff</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">==</span> <span class="s2">&quot;expand&quot;</span><span class="p">:</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">shadow</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_pen_width</span><span class="p">)</span>
-            <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">center</span><span class="p">(),</span> <span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="o">==</span> <span class="s2">&quot;line&quot;</span><span class="p">:</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">highlight</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_pen_width</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">BrushStyle</span><span class="o">.</span><span class="n">NoBrush</span><span class="p">)</span>
-            <span class="n">pen_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span> <span class="o">/</span> <span class="mi">2</span>
-            <span class="n">adjusted</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">pen_width</span><span class="p">,</span> <span class="n">pen_width</span><span class="p">,</span> <span class="o">-</span><span class="n">pen_width</span><span class="p">,</span> <span class="o">-</span><span class="n">pen_width</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span><span class="p">:</span>
-                <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">adjusted</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">arc_length</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="n">delta</span>
-                <span class="n">painter</span><span class="o">.</span><span class="n">drawArc</span><span class="p">(</span><span class="n">adjusted</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">null_pos</span> <span class="o">*</span> <span class="mi">16</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="n">arc_length</span> <span class="o">*</span> <span class="mi">16</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;donut&quot;</span><span class="p">,</span> <span class="s2">&quot;pie&quot;</span><span class="p">]:</span>
-            <span class="n">data_path</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">PainterPath</span><span class="p">()</span>
-            <span class="n">data_path</span><span class="o">.</span><span class="n">set_fill_rule</span><span class="p">(</span><span class="s2">&quot;winding&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span><span class="p">:</span>
-                <span class="n">data_path</span><span class="o">.</span><span class="n">addEllipse</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">arc_length</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="n">delta</span>
-                <span class="n">center_point</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
-                <span class="n">data_path</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">center_point</span><span class="p">)</span>
-                <span class="n">data_path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">null_pos</span><span class="p">,</span> <span class="o">-</span><span class="n">arc_length</span><span class="p">)</span>
-                <span class="n">data_path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">center_point</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
-            <span class="n">shadow_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">shadow</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">shadow_color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_pen_width</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
+        <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;expand&quot;</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">shadow</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_pen_width</span><span class="p">)</span>
+                <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span> <span class="o">/</span> <span class="n">delta</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">rect</span><span class="o">.</span><span class="n">center</span><span class="p">(),</span> <span class="n">radius</span><span class="p">,</span> <span class="n">radius</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;line&quot;</span><span class="p">:</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">highlight</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_pen_width</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">BrushStyle</span><span class="o">.</span><span class="n">NoBrush</span><span class="p">)</span>
+                <span class="n">pen_width</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">outline_pen_width</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">adjusted</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="n">pen_width</span><span class="p">,</span> <span class="n">pen_width</span><span class="p">,</span> <span class="o">-</span><span class="n">pen_width</span><span class="p">,</span> <span class="o">-</span><span class="n">pen_width</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span><span class="p">:</span>
+                    <span class="n">painter</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="n">adjusted</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">arc_length</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="n">delta</span>
+                    <span class="n">arc_length</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="o">-</span><span class="n">arc_length</span> <span class="o">*</span> <span class="mi">16</span><span class="p">)</span>
+                    <span class="n">painter</span><span class="o">.</span><span class="n">drawArc</span><span class="p">(</span><span class="n">adjusted</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">null_pos</span> <span class="o">*</span> <span class="mi">16</span><span class="p">),</span> <span class="n">arc_length</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;donut&quot;</span> <span class="o">|</span> <span class="s2">&quot;pie&quot;</span><span class="p">:</span>
+                <span class="n">data_path</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">PainterPath</span><span class="p">()</span>
+                <span class="n">data_path</span><span class="o">.</span><span class="n">set_fill_rule</span><span class="p">(</span><span class="s2">&quot;winding&quot;</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">value</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span><span class="p">:</span>
+                    <span class="n">data_path</span><span class="o">.</span><span class="n">addEllipse</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">arc_length</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">/</span> <span class="n">delta</span>
+                    <span class="n">center_point</span> <span class="o">=</span> <span class="n">rect</span><span class="o">.</span><span class="n">center</span><span class="p">()</span>
+                    <span class="n">data_path</span><span class="o">.</span><span class="n">moveTo</span><span class="p">(</span><span class="n">center_point</span><span class="p">)</span>
+                    <span class="n">data_path</span><span class="o">.</span><span class="n">arcTo</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">null_pos</span><span class="p">,</span> <span class="o">-</span><span class="n">arc_length</span><span class="p">)</span>
+                    <span class="n">data_path</span><span class="o">.</span><span class="n">lineTo</span><span class="p">(</span><span class="n">center_point</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
+                <span class="n">shadow_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">()</span><span class="o">.</span><span class="n">shadow</span><span class="p">()</span><span class="o">.</span><span class="n">color</span><span class="p">()</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">shadow_color</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data_pen_width</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawPath</span><span class="p">(</span><span class="n">data_path</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_calculate_inner_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outer_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bar_style</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;line&quot;</span><span class="p">,</span> <span class="s2">&quot;expand&quot;</span><span class="p">):</span>
@@ -10471,18 +10468,20 @@ RoundProgressBar            (<span title="prettyqt.widgets.widget.Widget">Widget
 
     <span class="k">def</span> <span class="nf">_value_to_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">text_to_draw</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">number_format</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_flags</span> <span class="o">==</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decimals</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">text_to_draw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;%v&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_flags</span> <span class="o">==</span> <span class="s2">&quot;percent&quot;</span><span class="p">:</span>
-            <span class="n">pct</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pct</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decimals</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">text_to_draw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;%p&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_flags</span> <span class="o">==</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decimals</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">text_to_draw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;%m&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="ne">ValueError</span><span class="p">()</span>
+        <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">_update_flags</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;value&quot;</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decimals</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">text_to_draw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;%v&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+            <span class="k">case</span> <span class="s2">&quot;percent&quot;</span><span class="p">:</span>
+                <span class="n">diff</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span>
+                <span class="n">pct</span> <span class="o">=</span> <span class="p">(</span><span class="n">value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span><span class="p">)</span> <span class="o">/</span> <span class="n">diff</span> <span class="o">*</span> <span class="mi">100</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">pct</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decimals</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">text_to_draw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;%p&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+            <span class="k">case</span> <span class="s2">&quot;max&quot;</span><span class="p">:</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_max_value</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">_min_value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">decimals</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">text_to_draw</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;%m&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">val</span><span class="p">))</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">return</span> <span class="ne">ValueError</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">_value_format_changed</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">VALUE_MAP</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -10708,7 +10707,7 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixel_pos_to_value</span><span class="p">(</span><span class="n">pixel_pos</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()):</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()</span><span class="o">.</span><span class="n">toPoint</span><span class="p">()):</span>
                 <span class="n">new_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span>
 
         <span class="c1"># pick the preferred handle on the first movement</span>
@@ -10720,28 +10719,25 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_first_movement</span> <span class="o">=</span> <span class="kc">False</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+        <span class="k">match</span> <span class="n">HANDLE_STYLE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span><span class="p">:</span>
+            <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
                 <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+            <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
                 <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">new_pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+            <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">new_pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># movement &quot;none&quot;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+            <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
                 <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_value</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+            <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
                 <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">new_pos</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+            <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">new_pos</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>  <span class="c1"># movement &quot;none&quot;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
@@ -10906,46 +10902,49 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="n">alt_control</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">main</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_control</span> <span class="o">==</span> <span class="s2">&quot;lower&quot;</span>
         <span class="n">is_upper_handle</span> <span class="o">=</span> <span class="n">main_control</span> <span class="ow">or</span> <span class="n">alt_control</span>
         <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="k">if</span> <span class="n">is_upper_handle</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span>
-        <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;single_step_add&quot;</span><span class="p">:</span>
-            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;single_step_sub&quot;</span><span class="p">:</span>
-            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;to_minimum&quot;</span><span class="p">:</span>
-            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">my_min</span>
-        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;to_maximum&quot;</span><span class="p">:</span>
-            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">my_max</span>
-        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;move&quot;</span><span class="p">:</span>
-            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-            <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
-            <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">match</span> <span class="n">action</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;single_step_add&quot;</span><span class="p">:</span>
+                <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;single_step_sub&quot;</span><span class="p">:</span>
+                <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;to_minimum&quot;</span><span class="p">:</span>
+                <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">my_min</span>
+            <span class="k">case</span> <span class="s2">&quot;to_maximum&quot;</span><span class="p">:</span>
+                <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="n">my_max</span>
+            <span class="k">case</span> <span class="s2">&quot;move&quot;</span><span class="p">:</span>
+                <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+                <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">case</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+                <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">no</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">up</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span><span class="p">:</span>
+                <span class="k">case</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">)</span>
+                <span class="k">case</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">case</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">case</span> <span class="s2">&quot;free&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">no</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
-                <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+            <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span><span class="p">:</span>
+                <span class="k">case</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">)</span>
+                <span class="k">case</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+                    <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">case</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">case</span> <span class="s2">&quot;free&quot;</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">_block_tracking</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lower_pos</span><span class="p">)</span>
@@ -11040,7 +11039,9 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
     <span class="p">):</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_style_option</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
         <span class="n">old_control</span> <span class="o">=</span> <span class="n">control</span>
-        <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">hitTestComplexControl</span><span class="p">(</span><span class="n">SLIDER_STYLE</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="n">control</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">hitTestComplexControl</span><span class="p">(</span>
+            <span class="n">SLIDER_STYLE</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">pos</span><span class="o">.</span><span class="n">toPoint</span><span class="p">(),</span> <span class="bp">self</span>
+        <span class="p">)</span>
         <span class="n">sr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">subControlRect</span><span class="p">(</span><span class="n">SLIDER_STYLE</span><span class="p">,</span> <span class="n">opt</span><span class="p">,</span> <span class="n">HANDLE_STYLE</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">control</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">value</span>
@@ -11127,7 +11128,7 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
     <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_pixel_pos_to_value</span><span class="p">(</span><span class="n">pixel_pos</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">r</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">adjusted</span><span class="p">(</span><span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="o">-</span><span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">m</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">r</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()</span><span class="o">.</span><span class="n">toPoint</span><span class="p">()):</span>
             <span class="n">new_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span>
 
     <span class="c1"># pick the preferred handle on the first movement</span>
@@ -11139,28 +11140,25 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_first_movement</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+    <span class="k">match</span> <span class="n">HANDLE_STYLE</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span><span class="p">:</span>
+        <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
             <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+        <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
             <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">new_pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+        <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">new_pos</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># movement &quot;none&quot;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+        <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
             <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_value</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+        <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
             <span class="n">new_pos</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">new_pos</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_value</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">new_pos</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
+        <span class="k">case</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span><span class="p">,</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">new_pos</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>  <span class="c1"># movement &quot;none&quot;</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">new_pos</span><span class="p">)</span>
     <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 </code></pre></div>
         </details>
@@ -11409,46 +11407,49 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
     <span class="n">alt_control</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">main</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_control</span> <span class="o">==</span> <span class="s2">&quot;lower&quot;</span>
     <span class="n">is_upper_handle</span> <span class="o">=</span> <span class="n">main_control</span> <span class="ow">or</span> <span class="n">alt_control</span>
     <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="k">if</span> <span class="n">is_upper_handle</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span>
-    <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;single_step_add&quot;</span><span class="p">:</span>
-        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;single_step_sub&quot;</span><span class="p">:</span>
-        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;to_minimum&quot;</span><span class="p">:</span>
-        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">my_min</span>
-    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;to_maximum&quot;</span><span class="p">:</span>
-        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">my_max</span>
-    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;move&quot;</span><span class="p">:</span>
-        <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
-        <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="k">elif</span> <span class="n">action</span> <span class="o">==</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
-        <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">match</span> <span class="n">action</span><span class="p">:</span>
+        <span class="k">case</span> <span class="s2">&quot;single_step_add&quot;</span><span class="p">:</span>
+            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
+        <span class="k">case</span> <span class="s2">&quot;single_step_sub&quot;</span><span class="p">:</span>
+            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">clamp</span><span class="p">(</span><span class="n">val</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">(),</span> <span class="n">my_min</span><span class="p">,</span> <span class="n">my_max</span><span class="p">)</span>
+        <span class="k">case</span> <span class="s2">&quot;to_minimum&quot;</span><span class="p">:</span>
+            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">my_min</span>
+        <span class="k">case</span> <span class="s2">&quot;to_maximum&quot;</span><span class="p">:</span>
+            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">my_max</span>
+        <span class="k">case</span> <span class="s2">&quot;move&quot;</span><span class="p">:</span>
+            <span class="n">up</span> <span class="o">=</span> <span class="n">is_upper_handle</span>
+            <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">case</span> <span class="s2">&quot;none&quot;</span><span class="p">:</span>
+            <span class="n">no</span> <span class="o">=</span> <span class="kc">True</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">no</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">up</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_val</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;free&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
     <span class="k">elif</span> <span class="ow">not</span> <span class="n">no</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">match</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;no_crossing&quot;</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;no_overlap&quot;</span><span class="p">:</span>
+                <span class="n">value</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">movement</span> <span class="o">==</span> <span class="s2">&quot;free&quot;</span> <span class="ow">and</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;free&quot;</span> <span class="k">if</span> <span class="n">value</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_val</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_swap_controls</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;free&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_upper_pos</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">_block_tracking</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">set_lower_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">lower_pos</span><span class="p">)</span>
@@ -12791,7 +12792,7 @@ WaitingSpinner            (<a class="autorefs autorefs-internal" title="prettyqt
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>

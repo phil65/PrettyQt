@@ -17,7 +17,7 @@
         <link rel="next" href="qthelp.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -873,25 +873,26 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert any python object into a QJSValue (must happen in GUI thread).&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
-            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">array</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-            <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">())</span>
-            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-            <span class="k">return</span> <span class="n">array</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;unknown type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+        <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+            <span class="k">case</span> <span class="nb">list</span><span class="p">()</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">():</span>
+                <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+                <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+                <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+                    <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">array</span>
+            <span class="k">case</span> <span class="nb">dict</span><span class="p">():</span>
+                <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">())</span>
+                <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+                <span class="k">return</span> <span class="n">array</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;unknown type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+                    <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
 </code></pre></div>
         </details>
 
@@ -937,25 +938,26 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert any python object into a QJSValue (must happen in GUI thread).&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-        <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-            <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">array</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
-        <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">())</span>
-        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">array</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
-        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;unknown type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+    <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
+        <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
+        <span class="k">case</span> <span class="nb">list</span><span class="p">()</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">():</span>
+            <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">array</span>
+        <span class="k">case</span> <span class="nb">dict</span><span class="p">():</span>
+            <span class="n">array</span> <span class="o">=</span> <span class="n">JSValue</span><span class="p">(</span><span class="n">jsengine</span><span class="o">.</span><span class="n">newArray</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">array</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="bp">cls</span><span class="o">.</span><span class="n">from_object</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">))</span>
+            <span class="k">return</span> <span class="n">array</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;unknown type: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">))</span>
+                <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
 </code></pre></div>
         </details>
     </div>
@@ -1340,7 +1342,7 @@ QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSE
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>

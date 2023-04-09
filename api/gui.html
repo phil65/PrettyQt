@@ -17,7 +17,7 @@
         <link rel="next" href="network.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -4604,23 +4604,24 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
         <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPEC</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">colorspace</span><span class="p">,</span> <span class="n">SPEC</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">&quot;rgb&quot;</span><span class="p">:</span>
-            <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
-                <span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
-            <span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">setRgb</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">&quot;hsv&quot;</span><span class="p">:</span>
-            <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
-                <span class="n">start</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
-            <span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">setHsv</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">&quot;hsl&quot;</span><span class="p">:</span>
-            <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
-                <span class="n">start</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
-            <span class="p">)</span>
-            <span class="n">out</span><span class="o">.</span><span class="n">setHsl</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid colorspace!&quot;</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">colorspace</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;rgb&quot;</span><span class="p">:</span>
+                <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+                    <span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+                <span class="p">)</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">setRgb</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;hsv&quot;</span><span class="p">:</span>
+                <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+                    <span class="n">start</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+                <span class="p">)</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">setHsv</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;hsl&quot;</span><span class="p">:</span>
+                <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+                    <span class="n">start</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+                <span class="p">)</span>
+                <span class="n">out</span><span class="o">.</span><span class="n">setHsl</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid colorspace!&quot;</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">convertTo</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">spec</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">out</span>
 
@@ -4629,21 +4630,24 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lightness</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">128</span>
 
     <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_format</span><span class="p">:</span> <span class="n">NameStr</span> <span class="o">=</span> <span class="s2">&quot;hex_argb&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">name_format</span> <span class="o">==</span> <span class="s2">&quot;svg_rgb&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-                <span class="k">return</span> <span class="s1">&#39;fill=&quot;&quot;&#39;</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;fill=&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s1">)&quot;&#39;</span>
-        <span class="k">elif</span> <span class="n">name_format</span> <span class="o">==</span> <span class="s2">&quot;svg_argb&quot;</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-                <span class="k">return</span> <span class="s1">&#39;fill=&quot;&quot;&#39;</span>
-            <span class="n">fill_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;fill=&quot;</span><span class="si">{</span><span class="n">fill_str</span><span class="si">}</span><span class="s1">&quot; fill-opacity=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
-        <span class="k">elif</span> <span class="n">name_format</span> <span class="o">==</span> <span class="s2">&quot;qcss_argb&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;rgba(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
-        <span class="k">elif</span> <span class="n">name_format</span> <span class="o">==</span> <span class="s2">&quot;qcss_rgb&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">NAME_FORMAT</span><span class="p">[</span><span class="n">name_format</span><span class="p">])</span>
+        <span class="k">match</span> <span class="n">name_format</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;svg_rgb&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+                    <span class="k">return</span> <span class="s1">&#39;fill=&quot;&quot;&#39;</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;fill=&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s1">)&quot;&#39;</span>
+            <span class="k">case</span> <span class="s2">&quot;svg_argb&quot;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+                    <span class="k">return</span> <span class="s1">&#39;fill=&quot;&quot;&#39;</span>
+                <span class="n">fill_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;fill=&quot;</span><span class="si">{</span><span class="n">fill_str</span><span class="si">}</span><span class="s1">&quot; fill-opacity=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
+            <span class="k">case</span> <span class="s2">&quot;qcss_argb&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;rgba(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+                <span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;qcss_rgb&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="n">NAME_FORMAT</span><span class="p">[</span><span class="n">name_format</span><span class="p">])</span>
 
     <span class="nd">@deprecated</span><span class="p">(</span><span class="n">reason</span><span class="o">=</span><span class="s2">&quot;This method is deprecated, use Color.get_name instead.&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">to_qsscolor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -4894,23 +4898,24 @@ otherwise is is lighter.
     <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPEC</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">colorspace</span><span class="p">,</span> <span class="n">SPEC</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">&quot;rgb&quot;</span><span class="p">:</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
-            <span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
-        <span class="p">)</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">setRgb</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">&quot;hsv&quot;</span><span class="p">:</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
-            <span class="n">start</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
-        <span class="p">)</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">setHsv</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">colorspace</span> <span class="o">==</span> <span class="s2">&quot;hsl&quot;</span><span class="p">:</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
-            <span class="n">start</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
-        <span class="p">)</span>
-        <span class="n">out</span><span class="o">.</span><span class="n">setHsl</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid colorspace!&quot;</span><span class="p">)</span>
+    <span class="k">match</span> <span class="n">colorspace</span><span class="p">:</span>
+        <span class="k">case</span> <span class="s2">&quot;rgb&quot;</span><span class="p">:</span>
+            <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+                <span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+            <span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">setRgb</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+        <span class="k">case</span> <span class="s2">&quot;hsv&quot;</span><span class="p">:</span>
+            <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+                <span class="n">start</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsv</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+            <span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">setHsv</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+        <span class="k">case</span> <span class="s2">&quot;hsl&quot;</span><span class="p">:</span>
+            <span class="n">components</span> <span class="o">=</span> <span class="n">helpers</span><span class="o">.</span><span class="n">get_color_percentage</span><span class="p">(</span>
+                <span class="n">start</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">end</span><span class="o">.</span><span class="n">getHsl</span><span class="p">(),</span> <span class="n">percent</span>  <span class="c1"># type: ignore</span>
+            <span class="p">)</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">setHsl</span><span class="p">(</span><span class="o">*</span><span class="n">components</span><span class="p">)</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid colorspace!&quot;</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">convertTo</span><span class="p">(</span><span class="n">start</span><span class="o">.</span><span class="n">spec</span><span class="p">())</span>
     <span class="k">return</span> <span class="n">out</span>
 </code></pre></div>
@@ -17828,6 +17833,9 @@ TextTableCellFormat            (<a class="autorefs autorefs-internal" title="pre
 
 
 
+
+
+
   <div class="doc doc-object doc-module">
 
 
@@ -18368,7 +18376,7 @@ WindowMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>

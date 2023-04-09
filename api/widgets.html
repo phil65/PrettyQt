@@ -17,7 +17,7 @@
         <link rel="next" href="../changelog.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.5">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.6">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.7a7fce14.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.a0c5b2b5.min.css">
@@ -17764,14 +17764,15 @@ FileSystemModel            (<a class="autorefs autorefs-internal" title="prettyq
 
     <span class="k">def</span> <span class="nf">set_root_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">path</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;/&quot;</span><span class="p">,</span> <span class="s2">&quot;root&quot;</span><span class="p">]:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">rootPath</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;home&quot;</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">homePath</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">tempPath</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">path</span> <span class="o">==</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span>
-            <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">currentPath</span><span class="p">()</span>
+        <span class="k">match</span> <span class="n">path</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;/&quot;</span> <span class="o">|</span> <span class="s2">&quot;root&quot;</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">rootPath</span><span class="p">()</span>
+            <span class="k">case</span> <span class="s2">&quot;home&quot;</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">homePath</span><span class="p">()</span>
+            <span class="k">case</span> <span class="s2">&quot;temp&quot;</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">tempPath</span><span class="p">()</span>
+            <span class="k">case</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">currentPath</span><span class="p">()</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_name_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">hide</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -20241,25 +20242,26 @@ GraphicsScene            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foregroundBrush</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsItem</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsItem</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">item</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_pixmap</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainterPath</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPolygonF</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_polygon</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_rect</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QLine</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_line</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsItem</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">item</span>
+            <span class="k">case</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_pixmap</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainterPath</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_path</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPolygonF</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_polygon</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_rect</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QLine</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_line</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">case</span> <span class="nb">str</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_text</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">add_widget</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">add_pixmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsPixmapItem</span><span class="p">:</span>
         <span class="n">g_item</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsPixmapItem</span><span class="p">()</span>
@@ -21624,18 +21626,19 @@ GraphicsWidgetMixin            (<span title="prettyqt.widgets.graphicsobject.Gra
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_layout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">layout</span><span class="p">:</span> <span class="n">LayoutStr</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLayout</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLayout</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">layout</span>
-        <span class="k">elif</span> <span class="n">layout</span> <span class="o">==</span> <span class="s2">&quot;grid&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsGridLayout</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">layout</span> <span class="o">==</span> <span class="s2">&quot;anchor&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsAnchorLayout</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">layout</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">,</span> <span class="s2">&quot;vertical&quot;</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsLinearLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Layout&quot;</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">layout</span><span class="p">:</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="k">case</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QGraphicsLayout</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">layout</span>
+            <span class="k">case</span> <span class="s2">&quot;grid&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsGridLayout</span><span class="p">()</span>
+            <span class="k">case</span> <span class="s2">&quot;anchor&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsAnchorLayout</span><span class="p">()</span>
+            <span class="k">case</span> <span class="s2">&quot;horizontal&quot;</span> <span class="o">|</span> <span class="s2">&quot;vertical&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsLinearLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Layout&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_focus_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">FocusPolicyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -21992,12 +21995,13 @@ GridLayout            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="n">rowspan</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
         <span class="n">colspan</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">rowstart</span><span class="p">,</span> <span class="n">colstart</span><span class="p">,</span> <span class="n">rowspan</span><span class="p">,</span> <span class="n">colspan</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">):</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">rowstart</span><span class="p">,</span> <span class="n">colstart</span><span class="p">,</span> <span class="n">rowspan</span><span class="p">,</span> <span class="n">colspan</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">rowstart</span><span class="p">,</span> <span class="n">colstart</span><span class="p">,</span> <span class="n">rowspan</span><span class="p">,</span> <span class="n">colspan</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">item</span><span class="p">:</span>
+            <span class="k">case</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">rowstart</span><span class="p">,</span> <span class="n">colstart</span><span class="p">,</span> <span class="n">rowspan</span><span class="p">,</span> <span class="n">colspan</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addLayout</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">rowstart</span><span class="p">,</span> <span class="n">colstart</span><span class="p">,</span> <span class="n">rowspan</span><span class="p">,</span> <span class="n">colspan</span><span class="p">)</span>
+            <span class="k">case</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">item</span><span class="p">,</span> <span class="n">rowstart</span><span class="p">,</span> <span class="n">colstart</span><span class="p">,</span> <span class="n">rowspan</span><span class="p">,</span> <span class="n">colspan</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">append</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">):</span>
         <span class="bp">self</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">(),</span> <span class="mi">0</span> <span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">item</span>
@@ -22953,14 +22957,15 @@ Label            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.
         <span class="n">vertical</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">VerticalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the alignment of the label&#39;s contents.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span>
+        <span class="k">match</span> <span class="n">horizontal</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="bp">self</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
@@ -23242,14 +23247,15 @@ Label            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.
     <span class="n">vertical</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">VerticalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the alignment of the label&#39;s contents.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span>
+    <span class="k">match</span> <span class="n">horizontal</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span>
+        <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span>
+        <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
     <span class="k">return</span> <span class="bp">self</span>
 </code></pre></div>
@@ -33259,14 +33265,15 @@ TableWidgetItem            (<span title="PySide6.QtWidgets.QTableWidgetItem">QTa
 <span class="sd">        Raises:</span>
 <span class="sd">            InvalidParamError: invalid text alignment</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-        <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span>
+        <span class="k">match</span> <span class="n">horizontal</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_background</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>
@@ -33557,14 +33564,15 @@ TableWidgetItem            (<span title="PySide6.QtWidgets.QTableWidgetItem">QTa
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid text alignment</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-    <span class="k">elif</span> <span class="n">vertical</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">horizontal</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span>
+    <span class="k">match</span> <span class="n">horizontal</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span>
+        <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -36734,9 +36742,6 @@ TreeWidgetItem            (<span title="PySide6.QtWidgets.QTreeWidgetItem">QTree
 
 
 
-
-
-
   <div class="doc doc-object doc-module">
 
 
@@ -36780,7 +36785,7 @@ UndoView            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/undoview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">UndoView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">ListViewMixin</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QUndoView</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QUndoCommand</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QUndoCommand</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
@@ -36792,8 +36797,8 @@ UndoView            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <span class="n">icon</span> <span class="o">=</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setCleanIcon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QUndoGroup</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QUndoStack</span><span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QUndoGroup</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QUndoGroup</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QUndoStack</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QUndoGroup</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setGroup</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setStack</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -39440,7 +39445,7 @@ WizardPageMixin            (<a class="autorefs autorefs-internal" title="prettyq
     <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.407015b8.min.js"></script>
+      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
       
     
   </body>
