@@ -1,3 +1,9 @@
+## v1.1.0 (2023-04-10)
+
+### Feat
+
+- **Image**: add as_bytes method
+
 ## v1.0.0 (2023-04-07)
 
 ### Feat
