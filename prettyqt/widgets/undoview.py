@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-from prettyqt import iconprovider, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt import gui, iconprovider, widgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import types
 
 
 class UndoView(widgets.ListViewMixin, QtWidgets.QUndoView):
-    def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
+    def __getitem__(self, index: int) -> QtGui.QUndoCommand:
         return self.stack().command(index)
 
     def set_clean_icon(self, icon: types.IconType):
@@ -18,8 +18,8 @@ class UndoView(widgets.ListViewMixin, QtWidgets.QUndoView):
         icon = iconprovider.get_icon(icon)
         self.setCleanIcon(icon)
 
-    def set_value(self, value: QtWidgets.QUndoGroup | QtWidgets.QUndoStack):
-        if isinstance(value, QtWidgets.QUndoGroup):
+    def set_value(self, value: QtGui.QUndoGroup | QtGui.QUndoStack):
+        if isinstance(value, QtGui.QUndoGroup):
             self.setGroup(value)
         else:
             self.setStack(value)
@@ -28,7 +28,7 @@ class UndoView(widgets.ListViewMixin, QtWidgets.QUndoView):
 if __name__ == "__main__":
     app = widgets.app()
     view = UndoView()
-    stack = widgets.UndoStack()
+    stack = gui.UndoStack()
     stack.add_command("test", redo=lambda: print("redo"), undo=lambda: print("undo"))
     view.setStack(stack)
     view.show()

@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui
 
 
-class UndoCommand(QtWidgets.QUndoCommand):
+class UndoCommand(QtGui.QUndoCommand):
     def __len__(self) -> int:
         return self.childCount()
 
-    def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
+    def __getitem__(self, index: int) -> QtGui.QUndoCommand:
         child = self.child(index)
         if child is None:
             raise KeyError(index)

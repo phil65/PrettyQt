@@ -5,6 +5,7 @@ from prettyqt.qt import PYQT5, PYQT6, PYSIDE6, PythonQtError
 
 if PYQT5:
     from PyQt5.QtGui import *
+    from PyQt5.QtWidgets import QUndoStack, QUndoGroup, QUndoCommand
 elif PYQT6:
     from PyQt6.QtGui import *
 

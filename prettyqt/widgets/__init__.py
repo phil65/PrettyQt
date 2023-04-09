@@ -111,9 +111,6 @@ from .dockwidget import DockWidget
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
 from .shortcut import Shortcut
-from .undocommand import UndoCommand
-from .undostack import UndoStack
-from .undogroup import UndoGroup
 from .widgetaction import WidgetAction
 from .menu import Menu
 from .mainwindow import MainWindow
@@ -410,9 +407,6 @@ __all__ = [
     "ItemDelegate",
     "StyledItemDelegate",
     "SystemTrayIcon",
-    "UndoCommand",
-    "UndoStack",
-    "UndoGroup",
     "UndoView",
     "DataWidgetMapper",
     "SizeGrip",

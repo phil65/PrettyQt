@@ -3,15 +3,15 @@ from __future__ import annotations
 from collections.abc import Callable
 import contextlib
 
-from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt import core, gui
+from prettyqt.qt import QtGui
 
 
 class UndoStackMixin(core.ObjectMixin):
     def __len__(self) -> int:
         return self.count()
 
-    def __getitem__(self, index: int) -> QtWidgets.QUndoCommand:
+    def __getitem__(self, index: int) -> QtGui.QUndoCommand:
         cmd = self.command(index)
         if cmd is None:
             return KeyError(index)
@@ -25,8 +25,8 @@ class UndoStackMixin(core.ObjectMixin):
 
     def add_command(
         self, title: str, redo: Callable, undo: Callable
-    ) -> widgets.UndoCommand:
-        class MyCommand(widgets.UndoCommand):
+    ) -> gui.UndoCommand:
+        class MyCommand(gui.UndoCommand):
             def redo(self):
                 return redo()
 
@@ -38,5 +38,5 @@ class UndoStackMixin(core.ObjectMixin):
         return cmd
 
 
-class UndoStack(UndoStackMixin, QtWidgets.QUndoStack):
+class UndoStack(UndoStackMixin, QtGui.QUndoStack):
     pass

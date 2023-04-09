@@ -848,6 +848,30 @@ def test_textframe():
     frame.get_last_cursor_position()
 
 
+def test_undocommand():
+    cmd = gui.UndoCommand()
+    cmd2 = gui.UndoCommand(cmd)
+    assert cmd[0] == cmd2
+    assert len(cmd) == 1
+
+
+def test_undogroup():
+    group = gui.UndoGroup()
+    stack = gui.UndoStack()
+    group.addStack(stack)
+    assert len(group) == 1
+    assert group[0] == stack
+
+
+def test_undostack():
+    stack = gui.UndoStack()
+    cmd = stack.add_command("test", redo=lambda: print("a"), undo=lambda: print("b"))
+    assert stack[0] == cmd
+    assert len(stack) == 1
+    with stack.create_macro("test"):
+        pass
+
+
 def test_window():
     wnd = gui.Window()
     assert wnd.get_surface_class() == "window"

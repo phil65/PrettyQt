@@ -130,7 +130,9 @@ from .abstracttextdocumentlayout import (
     AbstractTextDocumentLayoutMixin,
 )
 from .syntaxhighlighter import SyntaxHighlighter
-
+from .undocommand import UndoCommand
+from .undostack import UndoStack
+from .undogroup import UndoGroup
 from .colorspace import ColorSpace
 
 
@@ -247,6 +249,9 @@ __all__ = [
     "TextTableCellFormat",
     "TextCursor",
     "SyntaxHighlighter",
+    "UndoCommand",
+    "UndoStack",
+    "UndoGroup",
     "PdfWriter",
     "KeySequence",
     "Surface",
