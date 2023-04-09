@@ -96,14 +96,15 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         vertical: constants.VerticalAlignmentStr | None = None,
     ):
         """Set the alignment of the label's contents."""
-        if horizontal is None and vertical is not None:
-            flag = constants.V_ALIGNMENT[vertical]
-        elif vertical is None and horizontal is not None:
-            flag = constants.H_ALIGNMENT[horizontal]
-        elif vertical is not None and horizontal is not None:
-            flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
-        else:
-            return
+        match horizontal, vertical:
+            case None, None:
+                return self
+            case None, _:
+                flag = constants.V_ALIGNMENT[vertical]
+            case _, None:
+                flag = constants.H_ALIGNMENT[horizontal]
+            case _, _:
+                flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
         self.setAlignment(flag)
         return self
 

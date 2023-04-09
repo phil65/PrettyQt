@@ -52,5 +52,7 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
 
 
 if __name__ == "__main__":
-    image = Image()
-    bytes(image)
+    app = gui.app()
+    image = gui.Pixmap(100, 100).toImage()
+    image = Image(image)
+    print(len(bytes(image)))
