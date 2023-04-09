@@ -1,3 +1,9 @@
+## v1.1.1 (2023-04-10)
+
+### Fix
+
+- Qt6 fixes for Dialog classes
+
 ## v1.1.0 (2023-04-10)
 
 ### Feat
