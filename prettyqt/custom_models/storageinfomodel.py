@@ -78,20 +78,21 @@ class StorageInfoModel(core.AbstractTableModel):
     def data(self, index, role):
         if not index.isValid():
             return None
-        if role == constants.DISPLAY_ROLE:
-            volume = self.volumes[index.row()]
-            func = self.columnFuncMap.get(index.column())
-            if func is not None:
-                return func(volume)
+        match role:
+            case constants.DISPLAY_ROLE:
+                volume = self.volumes[index.row()]
+                func = self.columnFuncMap.get(index.column())
+                if func is not None:
+                    return func(volume)
 
-        elif role == constants.TOOLTIP_ROLE:
-            volume = self.volumes[index.row()]
-            tooltip = []
-            for column in range(self.ColumnCount):
-                label = self.columnNameMap.get(column)
-                value = self.columnFuncMap[column](volume)
-                tooltip.append(f"{label}: {value}")
-            return "\n".join(tooltip)
+            case constants.TOOLTIP_ROLE:
+                volume = self.volumes[index.row()]
+                tooltip = []
+                for column in range(self.ColumnCount):
+                    label = self.columnNameMap.get(column)
+                    value = self.columnFuncMap[column](volume)
+                    tooltip.append(f"{label}: {value}")
+                return "\n".join(tooltip)
 
     def headerData(self, section, orientation, role):
         if orientation != constants.HORIZONTAL:

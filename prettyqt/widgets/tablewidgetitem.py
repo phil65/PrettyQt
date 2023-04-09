@@ -68,14 +68,15 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         Raises:
             InvalidParamError: invalid text alignment
         """
-        if horizontal is None and vertical is not None:
-            flag = constants.V_ALIGNMENT[vertical]
-        elif vertical is None and horizontal is not None:
-            flag = constants.H_ALIGNMENT[horizontal]
-        elif vertical is not None and horizontal is not None:
-            flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
-        else:
-            return
+        match horizontal, vertical:
+            case None, None:
+                return
+            case None, _:
+                flag = constants.V_ALIGNMENT[vertical]
+            case _, None:
+                flag = constants.H_ALIGNMENT[horizontal]
+            case _, _:
+                flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
         self.setTextAlignment(flag)
 
     def get_background(self) -> gui.Brush:

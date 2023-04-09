@@ -137,23 +137,24 @@ class RoundProgressBar(widgets.Widget):
             self._draw_text(painter, inner_rect, inner_radius, self.current_value)
 
     def _draw_base(self, painter: gui.Painter, rect: core.RectF):
-        if self.bar_style == "donut":
-            color = self.palette().shadow().color()
-            painter.set_pen(color=color, width=self.outline_pen_width)
-            painter.setBrush(self.palette().base())
-            painter.drawEllipse(rect)
-        elif self.bar_style == "line":
-            base_color = self.palette().base().color()
-            painter.set_pen(color=base_color, width=self.outline_pen_width)
-            painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
-            width = self.outline_pen_width / 2
-            adjusted = rect.adjusted(width, width, -width, -width)
-            painter.drawEllipse(adjusted)
-        elif self.bar_style in ("pie", "expand"):
-            base_color = self.palette().base().color()
-            painter.set_pen(color=base_color, width=self.outline_pen_width)
-            painter.setBrush(self.palette().base())
-            painter.drawEllipse(rect)
+        match self.bar_style:
+            case "donut":
+                color = self.palette().shadow().color()
+                painter.set_pen(color=color, width=self.outline_pen_width)
+                painter.setBrush(self.palette().base())
+                painter.drawEllipse(rect)
+            case "line":
+                base_color = self.palette().base().color()
+                painter.set_pen(color=base_color, width=self.outline_pen_width)
+                painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
+                width = self.outline_pen_width / 2
+                adjusted = rect.adjusted(width, width, -width, -width)
+                painter.drawEllipse(adjusted)
+            case "pie" | "expand":
+                base_color = self.palette().base().color()
+                painter.set_pen(color=base_color, width=self.outline_pen_width)
+                painter.setBrush(self.palette().base())
+                painter.drawEllipse(rect)
 
     def _draw_value(self, painter: gui.Painter, rect: core.RectF, value: float):
         if value == self._min_value:
@@ -161,38 +162,40 @@ class RoundProgressBar(widgets.Widget):
         diff = self.current_value - self._min_value
         value_range = self._max_value - self._min_value
         delta = max(value_range / diff, 0)
-        if self.bar_style == "expand":
-            painter.setBrush(self.palette().highlight())
-            color = self.palette().shadow().color()
-            painter.set_pen(color=color, width=self.data_pen_width)
-            radius = (rect.height() / 2) / delta
-            painter.drawEllipse(rect.center(), radius, radius)
-        elif self.bar_style == "line":
-            color = self.palette().highlight().color()
-            painter.set_pen(color=color, width=self.data_pen_width)
-            painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
-            pen_width = self.outline_pen_width / 2
-            adjusted = rect.adjusted(pen_width, pen_width, -pen_width, -pen_width)
-            if value == self._max_value:
-                painter.drawEllipse(adjusted)
-            else:
-                arc_length = 360 / delta
-                painter.drawArc(adjusted, int(self.null_pos * 16), int(-arc_length * 16))
-        elif self.bar_style in ["donut", "pie"]:
-            data_path = gui.PainterPath()
-            data_path.set_fill_rule("winding")
-            if value == self._max_value:
-                data_path.addEllipse(rect)
-            else:
-                arc_length = 360 / delta
-                center_point = rect.center()
-                data_path.moveTo(center_point)
-                data_path.arcTo(rect, self.null_pos, -arc_length)
-                data_path.lineTo(center_point)
-            painter.setBrush(self.palette().highlight())
-            shadow_color = self.palette().shadow().color()
-            painter.set_pen(color=shadow_color, width=self.data_pen_width)
-            painter.drawPath(data_path)
+        match self.bar_style:
+            case "expand":
+                painter.setBrush(self.palette().highlight())
+                color = self.palette().shadow().color()
+                painter.set_pen(color=color, width=self.data_pen_width)
+                radius = (rect.height() / 2) / delta
+                painter.drawEllipse(rect.center(), radius, radius)
+            case "line":
+                color = self.palette().highlight().color()
+                painter.set_pen(color=color, width=self.data_pen_width)
+                painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
+                pen_width = self.outline_pen_width / 2
+                adjusted = rect.adjusted(pen_width, pen_width, -pen_width, -pen_width)
+                if value == self._max_value:
+                    painter.drawEllipse(adjusted)
+                else:
+                    arc_length = 360 / delta
+                    arc_length = int(-arc_length * 16)
+                    painter.drawArc(adjusted, int(self.null_pos * 16), arc_length)
+            case "donut" | "pie":
+                data_path = gui.PainterPath()
+                data_path.set_fill_rule("winding")
+                if value == self._max_value:
+                    data_path.addEllipse(rect)
+                else:
+                    arc_length = 360 / delta
+                    center_point = rect.center()
+                    data_path.moveTo(center_point)
+                    data_path.arcTo(rect, self.null_pos, -arc_length)
+                    data_path.lineTo(center_point)
+                painter.setBrush(self.palette().highlight())
+                shadow_color = self.palette().shadow().color()
+                painter.set_pen(color=shadow_color, width=self.data_pen_width)
+                painter.drawPath(data_path)
 
     def _calculate_inner_rect(self, outer_radius: float) -> tuple[core.RectF, float]:
         if self.bar_style in ("line", "expand"):
@@ -231,18 +234,20 @@ class RoundProgressBar(widgets.Widget):
 
     def _value_to_text(self, value: float) -> str:
         text_to_draw = self.number_format
-        if self._update_flags == "value":
-            val = round(value, self.decimals)
-            return text_to_draw.replace(r"%v", str(val))
-        elif self._update_flags == "percent":
-            pct = (value - self._min_value) / (self._max_value - self._min_value) * 100
-            val = round(pct, self.decimals)
-            return text_to_draw.replace(r"%p", str(val))
-        elif self._update_flags == "max":
-            val = round(self._max_value - self._min_value + 1, self.decimals)
-            return text_to_draw.replace(r"%m", str(val))
-        else:
-            return ValueError()
+        match self._update_flags:
+            case "value":
+                val = round(value, self.decimals)
+                return text_to_draw.replace(r"%v", str(val))
+            case "percent":
+                diff = self._max_value - self._min_value
+                pct = (value - self._min_value) / diff * 100
+                val = round(pct, self.decimals)
+                return text_to_draw.replace(r"%p", str(val))
+            case "max":
+                val = round(self._max_value - self._min_value + 1, self.decimals)
+                return text_to_draw.replace(r"%m", str(val))
+            case _:
+                return ValueError()
 
     def _value_format_changed(self):
         for k, v in VALUE_MAP.items():

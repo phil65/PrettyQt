@@ -69,25 +69,26 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         return gui.Brush(self.foregroundBrush())
 
     def add(self, item) -> QtWidgets.QGraphicsItem:
-        if isinstance(item, QtWidgets.QGraphicsItem):
-            self.addItem(item)
-            return item
-        elif isinstance(item, QtGui.QPixmap):
-            return self.add_pixmap(item)
-        elif isinstance(item, QtGui.QPainterPath):
-            return self.add_path(item)
-        elif isinstance(item, QtGui.QPolygonF):
-            return self.add_polygon(item)
-        elif isinstance(item, QtCore.QRectF):
-            return self.add_rect(item)
-        elif isinstance(item, QtCore.QLine):
-            return self.add_line(item)
-        elif isinstance(item, str):
-            return self.add_text(item)
-        elif isinstance(item, QtWidgets.QWidget):
-            return self.add_widget(item)
-        else:
-            raise TypeError(item)
+        match item:
+            case QtWidgets.QGraphicsItem():
+                self.addItem(item)
+                return item
+            case QtGui.QPixmap():
+                return self.add_pixmap(item)
+            case QtGui.QPainterPath():
+                return self.add_path(item)
+            case QtGui.QPolygonF():
+                return self.add_polygon(item)
+            case QtCore.QRectF():
+                return self.add_rect(item)
+            case QtCore.QLine():
+                return self.add_line(item)
+            case str():
+                return self.add_text(item)
+            case QtWidgets.QWidget():
+                return self.add_widget(item)
+            case _:
+                raise TypeError(item)
 
     def add_pixmap(self, pixmap: QtGui.QPixmap) -> widgets.GraphicsPixmapItem:
         g_item = widgets.GraphicsPixmapItem()

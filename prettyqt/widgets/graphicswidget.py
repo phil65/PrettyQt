@@ -23,18 +23,19 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
         )
 
     def set_layout(self, layout: LayoutStr | QtWidgets.QGraphicsLayout | None):
-        if layout is None:
-            return
-        if isinstance(layout, QtWidgets.QGraphicsLayout):
-            self.box = layout
-        elif layout == "grid":
-            self.box = widgets.GraphicsGridLayout()
-        elif layout == "anchor":
-            self.box = widgets.GraphicsAnchorLayout()
-        elif layout in ("horizontal", "vertical"):
-            self.box = widgets.GraphicsLinearLayout(layout)
-        else:
-            raise ValueError("Invalid Layout")
+        match layout:
+            case None:
+                return
+            case QtWidgets.QGraphicsLayout():
+                self.box = layout
+            case "grid":
+                self.box = widgets.GraphicsGridLayout()
+            case "anchor":
+                self.box = widgets.GraphicsAnchorLayout()
+            case "horizontal" | "vertical":
+                self.box = widgets.GraphicsLinearLayout(layout)
+            case _:
+                raise ValueError("Invalid Layout")
         self.setLayout(self.box)
 
     def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:

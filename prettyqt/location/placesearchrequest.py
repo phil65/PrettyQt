@@ -30,16 +30,17 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
 
     def get_search_area(self) -> positioning.GeoShape:
         area = self.searchArea()
-        if isinstance(area, QtPositioning.QGeoCircle):
-            return positioning.GeoCircle(area)
-        elif isinstance(area, QtPositioning.QGeoPath):
-            return positioning.GeoPath(area)
-        elif isinstance(area, QtPositioning.QGeoPolygon):
-            return positioning.GeoPolygon(area)
-        elif isinstance(area, QtPositioning.QGeoRectangle):
-            return positioning.GeoRectangle(area)
-        else:
-            return positioning.GeoShape(area)
+        match area:
+            case QtPositioning.QGeoCircle():
+                return positioning.GeoCircle(area)
+            case QtPositioning.QGeoPath():
+                return positioning.GeoPath(area)
+            case QtPositioning.QGeoPolygon():
+                return positioning.GeoPolygon(area)
+            case QtPositioning.QGeoRectangle():
+                return positioning.GeoRectangle(area)
+            case _:
+                return positioning.GeoShape(area)
 
     def set_relevance_hint(self, hint: RelevanceHintStr):
         """Set the relevance hint.

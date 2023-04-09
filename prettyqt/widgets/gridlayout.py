@@ -74,12 +74,13 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
         rowspan: int = 1,
         colspan: int = 1,
     ):
-        if isinstance(item, QtWidgets.QWidget):
-            self.addWidget(item, rowstart, colstart, rowspan, colspan)
-        elif isinstance(item, QtWidgets.QLayout):
-            self.addLayout(item, rowstart, colstart, rowspan, colspan)
-        else:
-            self.addItem(item, rowstart, colstart, rowspan, colspan)
+        match item:
+            case QtWidgets.QWidget():
+                self.addWidget(item, rowstart, colstart, rowspan, colspan)
+            case QtWidgets.QLayout():
+                self.addLayout(item, rowstart, colstart, rowspan, colspan)
+            case QtWidgets.QLayoutItem():
+                self.addItem(item, rowstart, colstart, rowspan, colspan)
 
     def append(self, item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item

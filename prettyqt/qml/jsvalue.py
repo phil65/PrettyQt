@@ -56,25 +56,26 @@ class JSValue(QtQml.QJSValue):
     @classmethod
     def from_object(cls, obj, jsengine) -> JSValue:
         """Convert any python object into a QJSValue (must happen in GUI thread)."""
-        if obj is None:
-            return cls()
-        elif isinstance(obj, list) or isinstance(obj, tuple):
-            length = len(obj)
-            array = JSValue(jsengine.newArray(length))
-            for i, v in enumerate(obj):
-                array.setProperty(i, cls.from_object(v, jsengine))
-            return array
-        elif isinstance(obj, dict):
-            array = JSValue(jsengine.newArray())
-            for k, v in obj.items():
-                array.setProperty(k, cls.from_object(v, jsengine))
-            return array
-        else:
-            try:
-                return cls(obj)
-            except TypeError:
-                logger.debug("unknown type: " + str(obj))
+        match obj:
+            case None:
                 return cls()
+            case list() | tuple():
+                length = len(obj)
+                array = JSValue(jsengine.newArray(length))
+                for i, v in enumerate(obj):
+                    array.setProperty(i, cls.from_object(v, jsengine))
+                return array
+            case dict():
+                array = JSValue(jsengine.newArray())
+                for k, v in obj.items():
+                    array.setProperty(k, cls.from_object(v, jsengine))
+                return array
+            case _:
+                try:
+                    return cls(obj)
+                except TypeError:
+                    logger.debug("unknown type: " + str(obj))
+                    return cls()
 
 
 if __name__ == "__main__":

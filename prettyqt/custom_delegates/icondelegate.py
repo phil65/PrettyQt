@@ -34,25 +34,25 @@ class IconDelegate(widgets.StyledItemDelegate):
             mode = gui.Icon.Mode.Disabled
         elif option.state & widgets.Style.StateFlag.State_Selected:
             mode = gui.Icon.Mode.Selected
+        match value:
+            case QtGui.QPixmap():
+                icon = QtGui.QIcon(value)
+                option.decorationSize = int(value.size() / value.devicePixelRatio())
 
-        if isinstance(value, QtGui.QPixmap):
-            icon = QtGui.QIcon(value)
-            option.decorationSize = int(value.size() / value.devicePixelRatio())
+            case QtGui.QColor():
+                pixmap = QtGui.QPixmap(option.decorationSize)
+                pixmap.fill(value)
+                icon = QtGui.QIcon(pixmap)
 
-        elif isinstance(value, QtGui.QColor):
-            pixmap = QtGui.QPixmap(option.decorationSize)
-            pixmap.fill(value)
-            icon = QtGui.QIcon(pixmap)
+            case QtGui.QImage():
+                icon = QtGui.QIcon(QtGui.QPixmap.fromImage(value))
+                option.decorationSize = int(value.size() / value.devicePixelRatio())
 
-        elif isinstance(value, QtGui.QImage):
-            icon = QtGui.QIcon(QtGui.QPixmap.fromImage(value))
-            option.decorationSize = int(value.size() / value.devicePixelRatio())
-
-        elif isinstance(value, QtGui.QIcon):
-            is_on = option.state & widgets.Style.StateFlag.State_Open
-            state = gui.Icon.State.On if is_on else gui.Icon.State.Off
-            actual_size = option.icon.actualSize(option.decorationSize, mode, state)
-            option.decorationSize = option.decorationSize & actual_size
+            case QtGui.QIcon():
+                is_on = option.state & widgets.Style.StateFlag.State_Open
+                state = gui.Icon.State.On if is_on else gui.Icon.State.Off
+                actual_size = option.icon.actualSize(option.decorationSize, mode, state)
+                option.decorationSize = option.decorationSize & actual_size
         r = core.Rect(core.Point(), option.decorationSize)
         r.moveCenter(option.rect.center())
         r.setRight(option.rect.right() - margin)

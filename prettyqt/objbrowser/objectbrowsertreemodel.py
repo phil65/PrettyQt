@@ -312,49 +312,49 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                         tag, i1, i2, old_item_names[i1:i2], j1, j2, new_item_names[j1:j2]
                     )
                 )
+            match tag:
+                case "equal":
+                    # Only when node names are equal is aux_refresh_tree called recursively.
+                    assert (
+                        i2 - i1 == j2 - j1
+                    ), f"equal sanity check failed {i2 - i1} != {j2 - j1}"
+                    for old_row, new_row in zip(range(i1, i2), range(j1, j2)):
+                        old_items[old_row].obj = new_items[new_row].obj
+                        child_index = self.index(old_row, 0, parent=tree_index)
+                        self._aux_refresh_tree(child_index)
 
-            if tag == "equal":
-                # Only when node names are equal is _aux_refresh_tree called recursively.
-                assert (
-                    i2 - i1 == j2 - j1
-                ), f"equal sanity check failed {i2 - i1} != {j2 - j1}"
-                for old_row, new_row in zip(range(i1, i2), range(j1, j2)):
-                    old_items[old_row].obj = new_items[new_row].obj
-                    child_index = self.index(old_row, 0, parent=tree_index)
-                    self._aux_refresh_tree(child_index)
+                case "replace":
+                    # Explicitly remove the old item and insert the new. The old item may have
+                    # child nodes which indices must be removed by Qt, otherwise it crashes.
+                    assert (
+                        i2 - i1 == j2 - j1
+                    ), f"replace sanity check failed {i2 - i1} != {j2 - j1}"
 
-            elif tag == "replace":
-                # Explicitly remove the old item and insert the new. The old item may have
-                # child nodes which indices must be removed by Qt, otherwise it crashes.
-                assert (
-                    i2 - i1 == j2 - j1
-                ), f"replace sanity check failed {i2 - i1} != {j2 - j1}"
+                    first = i1  # row number of first that will be removed
+                    last = i1 + i2 - 1  # row number of last element after insertion
+                    with self.remove_rows(first, last, tree_index):
+                        del tree_item.child_items[i1:i2]
 
-                first = i1  # row number of first that will be removed
-                last = i1 + i2 - 1  # row number of last element after insertion
-                with self.remove_rows(first, last, tree_index):
-                    del tree_item.child_items[i1:i2]
+                    first = i1  # row number of first element after insertion
+                    last = i1 + j2 - j1 - 1  # row number of last element after insertion
+                    with self.insert_rows(first, last, tree_index):
+                        tree_item.insert_children(i1, new_items[j1:j2])
 
-                first = i1  # row number of first element after insertion
-                last = i1 + j2 - j1 - 1  # row number of last element after insertion
-                with self.insert_rows(first, last, tree_index):
-                    tree_item.insert_children(i1, new_items[j1:j2])
+                case "delete":
+                    assert j1 == j2, f"delete sanity check failed. {j1} != {j2}"
+                    first = i1  # row number of first that will be removed
+                    last = i1 + i2 - 1  # row number of last element after insertion
+                    with self.remove_rows(first, last, tree_index):
+                        del tree_item.child_items[i1:i2]
 
-            elif tag == "delete":
-                assert j1 == j2, f"delete sanity check failed. {j1} != {j2}"
-                first = i1  # row number of first that will be removed
-                last = i1 + i2 - 1  # row number of last element after insertion
-                with self.remove_rows(first, last, tree_index):
-                    del tree_item.child_items[i1:i2]
-
-            elif tag == "insert":
-                assert i1 == i2, f"insert sanity check failed. {i1} != {i2}"
-                first = i1
-                last = i1 + j2 - j1 - 1
-                with self.insert_rows(first, last, tree_index):
-                    tree_item.insert_children(i1, new_items[j1:j2])
-            else:
-                raise ValueError(f"Invalid tag: {tag}")
+                case "insert":
+                    assert i1 == i2, f"insert sanity check failed. {i1} != {i2}"
+                    first = i1
+                    last = i1 + j2 - j1 - 1
+                    with self.insert_rows(first, last, tree_index):
+                        tree_item.insert_children(i1, new_items[j1:j2])
+                case _:
+                    raise ValueError(f"Invalid tag: {tag}")
 
     def refresh_tree(self):
         """Refresh the tree model from the underlying root object."""

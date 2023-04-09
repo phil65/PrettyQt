@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
+from prettyqt.qt import API, QtGui
 
 
 class Image(gui.PaintDeviceMixin, QtGui.QImage):
@@ -43,12 +43,13 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
         bits = self.bits()
         if bits is None:
             return None
-        if API == "pyqt5":
-            return bits.asstring(self.byteCount())
-        elif API == "pyqt6":
-            return bits.asstring(self.sizeInBytes())
-        elif API == "pyside6":
-            return bits.tobytes()
+        match API:
+            case "pyqt5":
+                return bits.asstring(self.byteCount())
+            case "pyqt6":
+                return bits.asstring(self.sizeInBytes())
+            case "pyside6":
+                return bits.tobytes()
 
 
 if __name__ == "__main__":

@@ -80,72 +80,70 @@ class BorderLayout(widgets.Layout):
 
         for wrapper in self.items:
             item = wrapper.item
-            position = wrapper.position
+            match wrapper.position:
+                case BorderLayout.Position.North:
+                    geom = core.Rect(
+                        rect.x(), north_height, rect.width(), item.sizeHint().height()
+                    )
+                    item.setGeometry(geom)
 
-            if position == BorderLayout.Position.North:
-                geom = core.Rect(
-                    rect.x(), north_height, rect.width(), item.sizeHint().height()
-                )
-                item.setGeometry(geom)
+                    north_height += item.geometry().height() + self.spacing()
 
-                north_height += item.geometry().height() + self.spacing()
+                case BorderLayout.Position.South:
+                    geom = core.Rect(
+                        item.geometry().x(),
+                        item.geometry().y(),
+                        rect.width(),
+                        item.sizeHint().height(),
+                    )
+                    item.setGeometry(geom)
 
-            elif position == BorderLayout.Position.South:
-                geom = core.Rect(
-                    item.geometry().x(),
-                    item.geometry().y(),
-                    rect.width(),
-                    item.sizeHint().height(),
-                )
-                item.setGeometry(geom)
+                    south_height += item.geometry().height() + self.spacing()
+                    geom = core.Rect(
+                        rect.x(),
+                        rect.y() + rect.height() - south_height + self.spacing(),
+                        item.geometry().width(),
+                        item.geometry().height(),
+                    )
+                    item.setGeometry(geom)
 
-                south_height += item.geometry().height() + self.spacing()
-                geom = core.Rect(
-                    rect.x(),
-                    rect.y() + rect.height() - south_height + self.spacing(),
-                    item.geometry().width(),
-                    item.geometry().height(),
-                )
-                item.setGeometry(geom)
-
-            elif position == BorderLayout.Position.Center:
-                center = wrapper
+                case BorderLayout.Position.Center:
+                    center = wrapper
 
         center_height = rect.height() - north_height - south_height
 
         for wrapper in self.items:
             item = wrapper.item
-            position = wrapper.position
+            match wrapper.position:
+                case BorderLayout.Position.West:
+                    geom = core.Rect(
+                        rect.x() + west_width,
+                        north_height,
+                        item.sizeHint().width(),
+                        center_height,
+                    )
+                    item.setGeometry(geom)
 
-            if position == BorderLayout.Position.West:
-                geom = core.Rect(
-                    rect.x() + west_width,
-                    north_height,
-                    item.sizeHint().width(),
-                    center_height,
-                )
-                item.setGeometry(geom)
+                    west_width += item.geometry().width() + self.spacing()
 
-                west_width += item.geometry().width() + self.spacing()
+                case BorderLayout.Position.East:
+                    geom = core.Rect(
+                        item.geometry().x(),
+                        item.geometry().y(),
+                        item.sizeHint().width(),
+                        center_height,
+                    )
+                    item.setGeometry(geom)
 
-            elif position == BorderLayout.Position.East:
-                geom = core.Rect(
-                    item.geometry().x(),
-                    item.geometry().y(),
-                    item.sizeHint().width(),
-                    center_height,
-                )
-                item.setGeometry(geom)
+                    east_width += item.geometry().width() + self.spacing()
 
-                east_width += item.geometry().width() + self.spacing()
-
-                geom = core.Rect(
-                    rect.x() + rect.width() - east_width + self.spacing(),
-                    north_height,
-                    item.geometry().width(),
-                    item.geometry().height(),
-                )
-                item.setGeometry(geom)
+                    geom = core.Rect(
+                        rect.x() + rect.width() - east_width + self.spacing(),
+                        north_height,
+                        item.geometry().width(),
+                        item.geometry().height(),
+                    )
+                    item.setGeometry(geom)
 
         if center:
             rect = core.Rect(

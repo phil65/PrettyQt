@@ -107,7 +107,7 @@ class SpanSlider(widgets.Slider):
         new_pos = float(self._pixel_pos_to_value(pixel_pos))
         if m >= 0:
             r = self.rect().adjusted(-m, -m, m, m)
-            if not r.contains(event.position()):
+            if not r.contains(event.position().toPoint()):
                 new_pos = self.position
 
         # pick the preferred handle on the first movement
@@ -119,28 +119,25 @@ class SpanSlider(widgets.Slider):
             else:
                 self._first_movement = False
 
-        if self.lower_pressed == HANDLE_STYLE:
-            if self.movement == "no_crossing":
+        match HANDLE_STYLE, self.movement:
+            case self.lower_pressed, "no_crossing":
                 new_pos = min(new_pos, self.upper_val)
-            elif self.movement == "no_overlap":
+                self.set_lower_pos(new_pos)
+            case self.lower_pressed, "no_overlap":
                 new_pos = min(new_pos, self.upper_val - 1)
-
-            if self.movement == "free" and new_pos > self.upper_val:
+                self.set_lower_pos(new_pos)
+            case self.lower_pressed, "free" if new_pos > self.upper_val:
                 self._swap_controls()
                 self.set_upper_pos(new_pos)
-            else:  # movement "none"
-                self.set_lower_pos(new_pos)
-        elif self.upper_pressed == HANDLE_STYLE:
-            if self.movement == "no_crossing":
+            case self.upper_pressed, "no_crossing":
                 new_pos = max(new_pos, self.lower_value)
-            elif self.movement == "no_overlap":
+                self.set_upper_pos(new_pos)
+            case self.upper_pressed, "no_overlap":
                 new_pos = max(new_pos, self.lower_value + 1)
-
-            if self.movement == "free" and new_pos < self.lower_val:
+                self.set_upper_pos(new_pos)
+            case self.upper_pressed, "free" if new_pos < self.lower_val:
                 self._swap_controls()
                 self.set_lower_pos(new_pos)
-            else:  # movement "none"
-                self.set_upper_pos(new_pos)
         event.accept()
 
     def mouseReleaseEvent(self, event):
@@ -325,27 +322,29 @@ class SpanSlider(widgets.Slider):
                 no = True
 
         if not no and not up:
-            if self.movement == "no_crossing":
-                value = min(value, self.upper_val)
-            elif self.movement == "no_overlap":
-                value = min(value, self.upper_val - 1)
+            match self.movement:
+                case "no_crossing":
+                    value = min(value, self.upper_val)
+                case "no_overlap":
+                    value = min(value, self.upper_val - 1)
 
-            if self.movement == "free" and value > self.upper_val:
-                self._swap_controls()
-                self.set_upper_pos(value)
-            else:
-                self.set_lower_pos(value)
+                case "free" if value > self.upper_val:
+                    self._swap_controls()
+                    self.set_upper_pos(value)
+                case "free":
+                    self.set_lower_pos(value)
         elif not no:
-            if self.movement == "no_crossing":
-                value = max(value, self.lower_val)
-            elif self.movement == "no_overlap":
-                value = max(value, self.lower_val + 1)
+            match self.movement:
+                case "no_crossing":
+                    value = max(value, self.lower_val)
+                case "no_overlap":
+                    value = max(value, self.lower_val + 1)
 
-            if self.movement == "free" and value < self.lower_val:
-                self._swap_controls()
-                self.set_lower_pos(value)
-            else:
-                self.set_upper_pos(value)
+                case "free" if value < self.lower_val:
+                    self._swap_controls()
+                    self.set_lower_pos(value)
+                case "free":
+                    self.set_upper_pos(value)
 
         self._block_tracking = False
         self.set_lower_value(self.lower_pos)
@@ -440,7 +439,9 @@ class SpanSlider(widgets.Slider):
     ):
         opt = self.get_style_option(handle)
         old_control = control
-        control = self.style().hitTestComplexControl(SLIDER_STYLE, opt, pos, self)
+        control = self.style().hitTestComplexControl(
+            SLIDER_STYLE, opt, pos.toPoint(), self
+        )
         sr = self.style().subControlRect(SLIDER_STYLE, opt, HANDLE_STYLE, self)
         if control == HANDLE_STYLE:
             self.position = value
@@ -499,6 +500,7 @@ if __name__ == "__main__":
     app = widgets.app()
     layout = widgets.BoxLayout("horizontal")
     slider = SpanSliderWidget()
+    # slider.set_movement_mode("free")
     slider.set_span(30, 70)
     slider.setRange(0, 100)
     slider.value_changed.connect(print)

@@ -55,24 +55,24 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
                 else:
                     yield from action(self, m)
             pos = m.end()
-            if new_state is None:
-                break
-            # state transition
-            if isinstance(new_state, tuple):
-                for state in new_state:
-                    if state == "#pop":
-                        statestack.pop()
-                    elif state == "#push":
-                        statestack.append(statestack[-1])
-                    else:
-                        statestack.append(state)
-            elif isinstance(new_state, int):
-                # pop
-                del statestack[new_state:]
-            elif new_state == "#push":
-                statestack.append(statestack[-1])
-            else:
-                assert False, f"wrong state def: {new_state!r}"
+            match new_state:
+                case None:
+                    break
+                case tuple():
+                    for state in new_state:
+                        match state:
+                            case "#pop":
+                                statestack.pop()
+                            case "#push":
+                                statestack.append(statestack[-1])
+                            case _:
+                                statestack.append(state)
+                case int():
+                    del statestack[new_state:]
+                case "#push":
+                    statestack.append(statestack[-1])
+                case _:
+                    assert False, f"wrong state def: {new_state!r}"
             statetokens = tokendefs[statestack[-1]]
             break
         else:

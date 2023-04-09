@@ -13,18 +13,19 @@ class GeoAreaMonitorInfo(QtPositioning.QGeoAreaMonitorInfo):
 
     def get_area(self) -> positioning.GeoShape:
         area = self.area()
-        if isinstance(area, QtPositioning.QGeoCircle):
-            return positioning.GeoCircle(area)
-        elif isinstance(area, QtPositioning.QGeoRectangle):
-            return positioning.GeoRectangle(area)
-        elif isinstance(area, QtPositioning.QGeoPath):
-            return positioning.GeoPath(area)
-        elif isinstance(area, QtPositioning.QGeoPolygon):
-            return positioning.GeoPolygon(area)
-        elif isinstance(area, QtPositioning.QGeoShape):
-            return positioning.GeoShape(area)
-        else:
-            raise RuntimeError()
+        match area:
+            case QtPositioning.QGeoCircle():
+                return positioning.GeoCircle(area)
+            case QtPositioning.QGeoRectangle():
+                return positioning.GeoRectangle(area)
+            case QtPositioning.QGeoPath():
+                return positioning.GeoPath(area)
+            case QtPositioning.QGeoPolygon():
+                return positioning.GeoPolygon(area)
+            case QtPositioning.QGeoShape():
+                return positioning.GeoShape(area)
+            case _:
+                raise RuntimeError()
 
     def get_expiration(self) -> core.DateTime:
         return core.DateTime(self.expiration())
