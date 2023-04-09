@@ -50,7 +50,7 @@ pytest = "^7"
 pip = "^23"
 pytest-cov = "^4"
 pytest-qt = {version = "^4.1"}
-mypy = "^0"
+mypy = "^1"
 types-Deprecated = "^1.2"
 types-docutils = "^0"
 types-orjson = "^3.6"
