@@ -71,7 +71,7 @@ class DialogMixin(widgets.WidgetMixin):
         return bool(self.main_loop())
 
     def is_accepted(self) -> bool:
-        return self.result() == QtWidgets.QDialog.Accepted
+        return self.result() == QtWidgets.QDialog.DialogCode.Accepted
 
     def main_loop(self) -> int:
         if qt.API.startswith("pyqt"):

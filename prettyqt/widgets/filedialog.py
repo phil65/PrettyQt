@@ -187,7 +187,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
 
     def choose(self) -> list[pathlib.Path] | None:
         result = self.main_loop()
-        if result != self.Accepted:
+        if result != self.DialogCode.Accepted:
             return None
         paths = self.selected_files()
         folder_path = paths[0].parent
