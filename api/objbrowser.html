@@ -1871,7 +1871,7 @@ ObjectBrowserTreeItem            (<span title="prettyqt.utils.treeitem.TreeItem"
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">is_callable_attribute</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return true if the items is an attribute and it is callable.&quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_attribute</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_attribute</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">obj</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -2133,7 +2133,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <span class="c1">#         &quot;{0}.pop()&quot;.format(obj_path) if obj_path else item[0]</span>
         <span class="c1">#         for item in obj_children</span>
         <span class="c1">#     ]</span>
-        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)):</span>  <span class="c1"># dicts etc.</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)):</span>  <span class="c1"># dicts etc.</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">obj_children</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
