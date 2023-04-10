@@ -21,7 +21,9 @@ class FontMetrics(QtGui.QFontMetrics):
 
 
 if __name__ == "__main__":
-    app = QtGui.QGuiApplication([])
-    font = QtGui.QFont()
+    from prettyqt import gui
+
+    app = gui.app()
+    font = gui.Font()
     metrics = FontMetrics(font)
     print(metrics.get_bounding_rect("test"))

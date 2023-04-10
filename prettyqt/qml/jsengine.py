@@ -35,7 +35,7 @@ class JSEngine(JSEngineMixin, QtQml.QJSEngine):
 
 
 if __name__ == "__main__":
-    app = core.CoreApplication([])
+    app = core.app()
     engine = JSEngine()
     fun = engine.eval("(function(a, b) { return a + b; })")
     result = fun(1, 2)

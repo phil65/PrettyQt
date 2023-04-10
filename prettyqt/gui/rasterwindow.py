@@ -9,4 +9,4 @@ class RasterWindow(gui.PaintDeviceWindowMixin, QtGui.QRasterWindow):
 
 
 if __name__ == "__main__":
-    app = gui.GuiApplication([])
+    app = gui.app()

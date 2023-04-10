@@ -104,7 +104,7 @@ class QuickWindow(gui.WindowMixin, QtQuick.QQuickWindow):
 
 
 if __name__ == "__main__":
-    app = gui.GuiApplication([])
+    app = gui.app()
     wnd = QuickWindow()
     img = QtGui.QImage()
     texture = wnd.create_texture_from_image(img)

@@ -46,7 +46,7 @@ class RegexMatchesModel(core.AbstractTableModel):
 if __name__ == "__main__":
     import re
 
-    app = widgets.Application([])
+    app = widgets.app()
     view = widgets.TableView()
     teststring = "fjdjkslfj355fjdkj 55 55454"
     regex = r"(?:[0-9])*.([0-9])"
