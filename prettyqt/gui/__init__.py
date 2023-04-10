@@ -45,6 +45,7 @@ from prettyqt.qt.QtGui import (
 # not available in PySide2
 # from prettyqt.qt.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
 
+from .stylehints import StyleHints
 from .textobjectinterface import TextObjectInterface
 from .drag import Drag
 from .screen import Screen
@@ -146,6 +147,7 @@ def app(args: list[str] | None = None) -> GuiApplication:
 
 __all__ = [
     "app",
+    "StyleHints",
     "KeyEvent",
     "MouseEvent",
     "WheelEvent",

@@ -301,6 +301,23 @@ FILTER_MODES = mappers.FlagMap(
     ends_with=Qt.MatchFlag.MatchEndsWith,
 )
 
+if prettyqt.qt.API != "pyqt5":
+    ColorSchemeStr = Literal["unknown", "light", "dark"]
+    COLOR_SCHEME: bidict[ColorSchemeStr, Qt.ColorScheme] = bidict(
+        unknown=Qt.ColorScheme.Unknown,
+        light=Qt.ColorScheme.Light,
+        dark=Qt.ColorScheme.Dark,
+    )
+
+TabFocusBehaviorStr = Literal["none", "text_controls", "list_controls", "all_controls"]
+TAB_FOCUS_BEHAVIOR: bidict[TabFocusBehaviorStr, Qt.TabFocusBehavior] = bidict(
+    none=Qt.TabFocusBehavior.NoTabFocus,
+    text_controls=Qt.TabFocusBehavior.TabFocusTextControls,
+    list_controls=Qt.TabFocusBehavior.TabFocusListControls,
+    all_controls=Qt.TabFocusBehavior.TabFocusAllControls,
+)
+
+
 DropActionStr = Literal["copy", "move", "link", "action_mask", "ignore", "target_move"]
 DROP_ACTION: bidict[DropActionStr, Qt.DropAction] = bidict(
     copy=Qt.DropAction.CopyAction,
