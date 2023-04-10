@@ -63,7 +63,7 @@ from .signalmapper import SignalMapper
 from .timeline import TimeLine
 from .margins import Margins
 from .marginsf import MarginsF
-from .locale import Locale
+from ._locale import Locale
 from .abstracteventdispatcher import AbstractEventDispatcher
 from .textstream import TextStream
 from .eventloop import EventLoop
