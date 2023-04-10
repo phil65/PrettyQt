@@ -104,13 +104,13 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             self.setItemDelegateForColumn(column, delegate)
             if persistent:
                 model = self.model()
-                for i in range(0, model.rowCount()):
+                for i in range(model.rowCount()):
                     self.openPersistentEditor(model.index(i, column))
         elif row is not None:
             self.setItemDelegateForRow(row, delegate)
             if persistent:
                 model = self.model()
-                for i in range(0, model.columnCount()):
+                for i in range(model.columnCount()):
                     self.openPersistentEditor(model.index(row, i))
         else:
             self.setItemDelegate(delegate)
@@ -150,20 +150,20 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return self.selectionModel().currentIndex().column()
 
     def selected_indexes(self) -> list[QtCore.QModelIndex]:
-        """Returns list of selected indexes in first row."""
+        """Return list of selected indexes in first row."""
         indexes = (x for x in self.selectedIndexes() if x.column() == 0)  # type: ignore
         return sorted(indexes, key=lambda x: x.row())  # type: ignore
 
     def selected_names(self) -> Generator[Any, None, None]:
-        """Returns generator yielding item names."""
+        """Return generator yielding item names."""
         return (x.data(constants.NAME_ROLE) for x in self.selected_indexes())
 
     def selected_rows(self) -> Generator[int, None, None]:
-        """Returns generator yielding row nums."""
+        """Return generator yielding row nums."""
         return (x.row() for x in self.selected_indexes())
 
     def selected_data(self) -> Generator[Any, None, None]:
-        """Returns generator yielding selected userData."""
+        """Return generator yielding selected userData."""
         return (
             x.data(constants.USER_ROLE) for x in self.selected_indexes()  # type: ignore
         )
