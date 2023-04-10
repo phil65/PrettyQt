@@ -1,3 +1,9 @@
+## v1.1.2 (2023-04-10)
+
+### Fix
+
+- always pass sys.argv to QCoreApplication etc
+
 ## v1.1.1 (2023-04-10)
 
 ### Fix
