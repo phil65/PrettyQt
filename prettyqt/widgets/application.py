@@ -237,6 +237,8 @@ class Application(ApplicationMixin, QtWidgets.QApplication):
 # Application.setStyle(widgets.Style())
 
 if __name__ == "__main__":
-    app = Application([])
+    import sys
+
+    app = Application(sys.argv)
     app.set_theme("dark")
     app.load_language("de")

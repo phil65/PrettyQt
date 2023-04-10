@@ -1,6 +1,8 @@
 """Tests for `datacook` package."""
 from __future__ import annotations
 
+import sys
+
 import pytest
 
 from prettyqt import gui, widgets
@@ -25,6 +27,11 @@ def tablewidget():
 @pytest.fixture(scope="session")
 def qapp_cls():
     return widgets.Application
+
+
+@pytest.fixture(scope="session")
+def qapp_args():
+    return sys.argv
 
 
 class QtTester:

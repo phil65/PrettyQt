@@ -5,6 +5,8 @@ contains QtWidgets-based classes
 
 from __future__ import annotations
 
+import sys
+
 from prettyqt.qt.QtWidgets import (
     QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
     QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent,
@@ -211,7 +213,7 @@ def app(args: list[str] | None = None) -> Application:
     if instance is not None:
         return instance
     Application.disable_window_help_button()
-    return Application([] if args is None else args)
+    return Application(sys.argv if args is None else args)
 
 
 __all__ = [

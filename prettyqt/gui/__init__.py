@@ -3,6 +3,7 @@
 Contains QtGui-based classes
 """
 from __future__ import annotations
+import sys
 
 from prettyqt.qt.QtGui import (
     QKeyEvent as KeyEvent,
@@ -140,7 +141,7 @@ def app(args: list[str] | None = None) -> GuiApplication:
     instance = GuiApplication.instance()
     if instance is not None:
         return instance
-    return GuiApplication([] if args is None else args)
+    return GuiApplication(sys.argv if args is None else args)
 
 
 __all__ = [

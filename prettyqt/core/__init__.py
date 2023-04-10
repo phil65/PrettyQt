@@ -6,6 +6,7 @@ Contains QtCore-based classes
 # from prettyqt.qt.QtCore import Signal
 
 from __future__ import annotations
+import sys
 
 from prettyqt.qt.QtCore import (  # type: ignore
     Slot,
@@ -165,7 +166,7 @@ def app(args: list[str] | None = None) -> CoreApplication:
     instance = CoreApplication.instance()
     if instance is not None:
         return instance
-    return CoreApplication([] if args is None else args)
+    return CoreApplication(sys.argv if args is None else args)
 
 
 __all__ = [
