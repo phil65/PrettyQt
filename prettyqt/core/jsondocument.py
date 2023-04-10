@@ -34,7 +34,7 @@ class JsonDocument(QtCore.QJsonDocument):
         return bytes(self.toJson(flag)).decode()
 
     @classmethod
-    def from_variant(cls, obj):
+    def from_variant(cls, obj) -> JsonDocument:
         doc = cls.fromVariant(obj)
         new = cls()
         if doc.isArray():

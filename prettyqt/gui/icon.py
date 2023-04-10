@@ -47,7 +47,7 @@ class Icon(QtGui.QIcon):
         return cls(bitmap)
 
     @classmethod
-    def from_char(cls, char: str, background="black", color="white"):
+    def from_char(cls, char: str, background="black", color="white") -> Icon:
         """Create a QIcon with a given character."""
         icon = cls()
         for size in (16, 32, 64):
@@ -58,7 +58,7 @@ class Icon(QtGui.QIcon):
         return icon
 
     @classmethod
-    def from_image(cls, image: QtGui.QImage):
+    def from_image(cls, image: QtGui.QImage) -> Icon:
         return cls(gui.Pixmap.fromImage(image))
 
     def get_available_sizes(

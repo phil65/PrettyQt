@@ -88,7 +88,7 @@ class SplitterMixin(widgets.FrameMixin):
         *widgets: QtWidgets.QWidget,
         horizontal: bool = False,
         parent: QtWidgets.QWidget | None = None,
-    ):
+    ) -> Splitter:
         splitter = cls("horizontal" if horizontal else "vertical", parent=parent)
         for widget in widgets:
             splitter += widget
