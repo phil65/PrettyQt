@@ -1,3 +1,11 @@
+## v1.3.0 (2023-04-11)
+
+### Feat
+
+- add some set_origin methods
+- add some set_transform methods
+- **Brush**: add set_style method
+
 ## v1.2.0 (2023-04-11)
 
 ### Feat
