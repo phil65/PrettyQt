@@ -199,6 +199,11 @@ class PainterMixin:
         """
         return COMPOSITION_MODE.inverse[self.compositionMode()]
 
+    def set_transform(self, transform: types.TransformType, combine: bool = False):
+        if isinstance(transform, tuple):
+            transform = gui.Transform(*transform)
+        self.setTransform(transform, combine)
+
     def get_font_metrics(self) -> gui.FontMetrics:
         return gui.FontMetrics(self.fontMetrics())
 

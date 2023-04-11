@@ -26,7 +26,11 @@ if TYPE_CHECKING:
     TimeType = Union[QtCore.QTime, datetime.time, str]
     DateType = Union[QtCore.QDate, datetime.date, str]
     DateTimeType = Union[QtCore.QDateTime, datetime.datetime, str]
-
+    TransformType = Union[
+        QtGui.QTransform,
+        tuple[float, float, float, float, float, float, float, float, float],
+        tuple[float, float, float, float, float, float],
+    ]
     ColorType = Union[
         str,
         int,

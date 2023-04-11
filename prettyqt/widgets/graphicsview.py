@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
+from prettyqt.utils import InvalidParamError, bidict, helpers, mappers, types
 
 
 mod = QtWidgets.QGraphicsView
@@ -118,6 +118,11 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
             viewport anchor
         """
         return VIEWPORT_ANCHOR.inverse[self.transformationAnchor()]
+
+    def set_transform(self, transform: types.TransformType, combine: bool = False):
+        if isinstance(transform, tuple):
+            transform = gui.Transform(*transform)
+        self.setTransform(transform, combine)
 
     def set_resize_anchor(self, mode: ViewportAnchorStr):
         """Set how the view should position the scene during resizes.
