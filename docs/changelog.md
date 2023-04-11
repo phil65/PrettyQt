@@ -1,3 +1,18 @@
+## v1.2.0 (2023-04-11)
+
+### Feat
+
+- re-enable texttospeech module
+- **gui**: add AbstractFileIconProvider class
+- **core**: add MetaType class
+- **gui**: add StyleHints class
+
+### Fix
+
+- correct filtering for Dir.get_entry_info_list
+- **Dir**: explicitely use kwargs for entryList/entryInfoList calls
+- prevent namespace collisions with builtin locale package
+
 ## v1.1.2 (2023-04-10)
 
 ### Fix
