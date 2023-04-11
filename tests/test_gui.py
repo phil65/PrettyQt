@@ -185,8 +185,6 @@ def test_gradient():
     with pytest.raises(InvalidParamError):
         grad.set_spread("test")
     assert grad.get_type() == "none"
-    if core.VersionNumber.get_qt_version() < (6, 0, 0):
-        assert len(grad.get_stops()) == 2
 
 
 def test_guiapplication():

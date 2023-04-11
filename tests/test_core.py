@@ -283,7 +283,6 @@ def test_jsonvalue():
     assert str(val) == "b"
 
 
-@pytest.mark.skipif(prettyqt.qt.API.startswith("pyside"), reason="Only supported in QtPy")
 def test_library():
     lib = core.Library()
     assert bool(lib) is False
@@ -451,7 +450,6 @@ def test_persistentmodelindex():
     assert index[constants.USER_ROLE] is None
 
 
-@pytest.mark.skipif(prettyqt.qt.API.startswith("pyside"), reason="Only supported in PyQt")
 def test_pluginloader():
     lib = core.PluginLoader()
     lib.set_load_hints(deep_bind=True)

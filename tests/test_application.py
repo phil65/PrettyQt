@@ -72,7 +72,6 @@ def test_coreapplication(qapp):
     qapp.get_application_dir_path()
     qapp.add_library_path("")
     qapp.get_library_paths()
-    qapp.use_hdpi_bitmaps()
     qapp.disable_window_help_button()
     qapp.set_metadata(
         app_name="test", app_version="1.0.0", org_name="test", org_domain="test"

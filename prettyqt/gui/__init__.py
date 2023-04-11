@@ -42,8 +42,6 @@ from prettyqt.qt.QtGui import (
     QScrollPrepareEvent as ScrollPrepareEvent,
 )
 
-# not available in PySide2
-# from prettyqt.qt.QtGui import QPlatformSurfaceEvent as PlatformSurfaceEvent
 
 from .stylehints import StyleHints
 from .textobjectinterface import TextObjectInterface

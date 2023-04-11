@@ -6,7 +6,6 @@ import os
 import pathlib
 import sys
 
-import prettyqt
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, types
@@ -40,11 +39,6 @@ class CoreApplicationMixin(core.ObjectMixin):
     @classmethod
     def get_library_paths(cls) -> list[pathlib.Path]:
         return [pathlib.Path(i) for i in cls.libraryPaths()]
-
-    @classmethod
-    def use_hdpi_bitmaps(cls, state: bool = True):
-        if not prettyqt.qt.API.endswith("6"):
-            cls.setAttribute(QtCore.Qt.ApplicationAttribute.AA_UseHighDpiPixmaps, state)
 
     @classmethod
     def disable_window_help_button(cls, state: bool = True):

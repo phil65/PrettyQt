@@ -90,8 +90,6 @@ class ActionMixin(core.ObjectMixin):
             status_tip=self.statusTip(),
             whats_this=self.whatsThis(),
         )
-        if core.VersionNumber.get_qt_version() < (6, 0, 0):
-            dct["menu"] = self.menu()
         return dct
 
     def __setstate__(self, state):
@@ -114,8 +112,6 @@ class ActionMixin(core.ObjectMixin):
         self.setShortcutVisibleInContextMenu(state["shortcut_visible_in_context_menu"])
         self.set_menu_role(state["menu_role"])
         self.setWhatsThis(state["whats_this"])
-        # if core.VersionNumber.get_qt_version() < (6, 0, 0):
-        #     self.setMenu(state["menu"])
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
