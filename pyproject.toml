@@ -130,6 +130,7 @@ select = ["C", "E", "F", "W"]
 ignore = ["C408"]
 extend-select = ["D"]
 extend-ignore = [
+    "C901",
     "D100",
     "D101",
     "D102",
@@ -141,6 +142,7 @@ extend-ignore = [
     "D213",
     "D215",
     "D400",
+    "D401",
     "D404",
     "D406",
     "D407",
