@@ -4,49 +4,59 @@
 
 import pytest
 
-# import prettyqt
-from prettyqt import core
-
-
-qthelp = pytest.importorskip("prettyqt.qthelp")
+import prettyqt
+from prettyqt import core, qthelp
+from prettyqt.qt import QtHelp
 
 
 # from prettyqt.utils import InvalidParamError
 
 
-# @pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
-# def test_helplink():
-#     link = qthelp.HelpLink()
-#     link.get_url()
+@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
+def test_helplink():
+    link = qthelp.HelpLink()
+    link.get_url()
 
 
-# def test_helpcontentitem():
-#     item = qthelp.HelpContentItem()
-#     item.get_url()
-#     assert len(item) == 0
+def test_helpcontentitem():
+    engine = qthelp.HelpEngine("")
+    model = engine.get_content_model()
+    repr(model)
+    # item = model.get_content_item_at(QtCore.QModelIndex())
+    # item.get_url()
+    # assert len(item) == 0
 
 
-# @pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
-# def test_helpfilterdata():
-#     data = qthelp.HelpFilterData()
-#     versions = [core.VersionNumber(1, 0, 0)]
-#     data.set_versions(versions)
-#     assert data.get_versions() == versions
+def test_helpcontentmodel():
+    engine = qthelp.HelpEngine("")
+    model = engine.get_content_model()
+    repr(model)
+    # model.get_content_item_at(QtCore.QModelIndex())
 
 
-# def test_helpsearchresultwidget():
-#     widget = qthelp.HelpSearchResultWidget()
-#     widget.get_link_at(core.Point(1, 1))
+def test_helpfilterdata():
+    data = qthelp.HelpFilterData(QtHelp.QHelpFilterData())
+    versions = [core.VersionNumber(1, 0, 0)]
+    data.set_versions(versions)
+    assert data.get_versions() == versions
 
 
-# def test_helpsearchquerywidget():
-#     widget = qthelp.HelpSearchQueryWidget()
-#     widget.get_link_at(core.Point(1, 1))
+def test_helpsearchresultwidget():
+    core_engine = qthelp.HelpEngineCore("test")
+    engine = qthelp.HelpSearchEngine(core_engine)
+    widget = engine.get_result_widget()
+    widget.get_link_at(core.Point(1, 1))
 
 
-# def test_helpfilterengine():
-#     engine = qthelp.HelpFilterEngine()
-#     engine.get_available_versions()
+def test_helpsearchquerywidget():
+    widget = qthelp.HelpSearchQueryWidget()
+    repr(widget)
+
+
+def test_helpfilterengine():
+    core_engine = qthelp.HelpEngineCore("test")
+    engine = core_engine.get_filter_engine()
+    engine.get_available_versions()
 
 
 def test_helpengine():

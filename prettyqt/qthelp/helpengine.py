@@ -5,7 +5,8 @@ from prettyqt.qt import QtHelp
 
 
 class HelpEngine(qthelp.HelpEngineCoreMixin, QtHelp.QHelpEngine):
-    pass
+    def get_content_model(self) -> qthelp.HelpContentModel:
+        return qthelp.HelpContentModel(self.contentModel())
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core
+from prettyqt import core, qthelp
 from prettyqt.qt import QtCore, QtHelp
 from prettyqt.utils import types
 
@@ -25,6 +25,9 @@ class HelpEngineCoreMixin(core.ObjectMixin):
         if not isinstance(url, QtCore.QUrl):
             url = QtCore.QUrl(url)
         return core.Url(self.findFile(url))
+
+    def get_filter_engine(self) -> qthelp.HelpFilterEngine:
+        return qthelp.HelpFilterEngine(self.filterEngine())
 
 
 class HelpEngineCore(HelpEngineCoreMixin, QtHelp.QHelpEngineCore):

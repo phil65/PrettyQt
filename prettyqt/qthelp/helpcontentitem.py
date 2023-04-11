@@ -4,7 +4,13 @@ from prettyqt import core
 from prettyqt.qt import QtHelp
 
 
-class HelpContentItem(QtHelp.QHelpContentItem):
+class HelpContentItem:
+    def __init__(self, item: QtHelp.QHelpContentItem):
+        self.item = item
+
+    def __getattr__(self, val):
+        return getattr(self.item, val)
+
     def __len__(self):
         return self.childCount()
 

@@ -4,6 +4,7 @@ contains QtHelp-based classes
 """
 
 from .helpindexmodel import HelpIndexModel
+from .helpfilterdata import HelpFilterData
 from .helpcontentitem import HelpContentItem
 from .helpsearchresult import HelpSearchResult
 from .helpcontentmodel import HelpContentModel
@@ -18,6 +19,7 @@ from .helpfilterengine import HelpFilterEngine
 
 __all__ = [
     "HelpIndexModel",
+    "HelpFilterData",
     "HelpContentItem",
     "HelpSearchResult",
     "HelpContentModel",
