@@ -8,11 +8,6 @@ from prettyqt.utils import mappers
 
 Qt = QtCore.Qt
 
-if prettyqt.qt.API != "pyqt6":
-    ImageConversionFlag = Qt.ImageConversionFlags
-else:
-    ImageConversionFlag = Qt.ImageConversionFlag  # type: ignore
-
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
 SORT_ROLE = Qt.ItemDataRole.UserRole + 1  # type: ignore
