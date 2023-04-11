@@ -92,21 +92,15 @@ class JsonModel(custom_models.NestedModel):
             return None
 
         item = index.internalPointer()
-        match role:
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
-                match index.column():
-                    case 0:
-                        return repr(item.key)
-                    case 1:
-                        if item.type in (dict, list, tuple):
-                            return ""
-                        else:
-                            if role == constants.DISPLAY_ROLE:
-                                return repr(item.value)
-                            else:
-                                return item.value
-                    case 2:
-                        return item.type.__name__
+        match role, index.column():
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 0:
+                return repr(item.key)
+            case constants.DISPLAY_ROLE, 1:
+                return "" if item.type in (dict, list, tuple) else repr(item.value)
+            case constants.EDIT_ROLE, 1:
+                return "" if item.type in (dict, list, tuple) else item.value
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 2:
+                return item.type.__name__
 
     def setData(self, index, value, role):
         if role == constants.EDIT_ROLE:

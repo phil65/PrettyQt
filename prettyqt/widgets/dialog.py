@@ -47,12 +47,15 @@ class DialogMixin(widgets.WidgetMixin):
         return type(self), (), self.__getstate__()
 
     def keyPressEvent(self, e):
-        if e.key() == QtCore.Qt.Key.Key_Escape:
-            self.close()
-        elif e.key() == QtCore.Qt.Key.Key_F11:
-            self.showNormal() if self.isMaximized() else self.showMaximized()
-        else:
-            super().keyPressEvent(e)
+        match e.key():
+            case QtCore.Qt.Key.Key_Escape:
+                self.close()
+            case QtCore.Qt.Key.Key_F11 if self.isMaximized():
+                self.showNormal()
+            case QtCore.Qt.Key.Key_F11:
+                self.showMaximized()
+            case _:
+                super().keyPressEvent(e)
 
     def delete_on_close(self):
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose)

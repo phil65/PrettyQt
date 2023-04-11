@@ -25,18 +25,17 @@ class RegexMatchesModel(core.AbstractTableModel):
         if not index.isValid():
             return None
         item = self.matches[index.row()]
-        if role in [constants.DISPLAY_ROLE]:
-            match index.column():
-                case 0:
-                    return str(item.span()[0])
-                case 1:
-                    return str(item.span()[1])
-                case 2:
-                    return repr(item.group())
-                case 3:
-                    return str(len(item.groups()))
-        if role in [constants.USER_ROLE]:
-            return item.span()
+        match role, index.column():
+            case constants.DISPLAY_ROLE, 0:
+                return str(item.span()[0])
+            case constants.DISPLAY_ROLE, 1:
+                return str(item.span()[1])
+            case constants.DISPLAY_ROLE, 2:
+                return repr(item.group())
+            case constants.DISPLAY_ROLE, 3:
+                return str(len(item.groups()))
+            case constants.USER_ROLE, _:
+                return item.span()
 
     def rowCount(self, parent=None):
         """Override for AbstractitemModel base method."""

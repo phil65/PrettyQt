@@ -39,30 +39,25 @@ class Transform(QtGui.QTransform):
         core.DataStream.write_bytearray(ba, self)
 
     def __getitem__(self, value: tuple[int, int]) -> float:
-        if value[0] == 0:
-            match value[1]:
-                case 0:
-                    return self.m11()
-                case 1:
-                    return self.m12()
-                case 2:
-                    return self.m13()
-        elif value[0] == 1:
-            match value[1]:
-                case 0:
-                    return self.m21()
-                case 1:
-                    return self.m22()
-                case 2:
-                    return self.m23()
-        elif value[0] == 2:
-            match value[1]:
-                case 0:
-                    return self.m31()
-                case 1:
-                    return self.m32()
-                case 2:
-                    return self.m33()
+        match value[0], value[1]:
+            case 0, 0:
+                return self.m11()
+            case 0, 1:
+                return self.m12()
+            case 0, 2:
+                return self.m13()
+            case 1, 0:
+                return self.m21()
+            case 1, 1:
+                return self.m22()
+            case 1, 2:
+                return self.m23()
+            case 2, 0:
+                return self.m31()
+            case 2, 1:
+                return self.m32()
+            case 2, 2:
+                return self.m33()
         raise ValueError(f"Wrong value {value}")
 
     def __bytes__(self):

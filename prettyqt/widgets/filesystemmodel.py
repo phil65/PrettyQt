@@ -58,7 +58,6 @@ class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
     def set_root_path(self, path: types.PathType) -> QtCore.QModelIndex:
-        path = os.fspath(path)
         match path:
             case "/" | "root":
                 path = core.Dir.rootPath()
@@ -68,6 +67,8 @@ class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
                 path = core.Dir.tempPath()
             case "current":
                 path = core.Dir.currentPath()
+            case _:
+                path = os.fspath(path)
         return self.setRootPath(path)
 
     def set_name_filters(self, filters, hide: bool = False):

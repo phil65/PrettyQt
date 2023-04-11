@@ -92,8 +92,9 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         return super().focusOutEvent(event)
 
     def keyPressEvent(self, event):
-        if event.key() in [QtCore.Qt.Key.Key_Enter, QtCore.Qt.Key.Key_Return]:
-            self.enterPressed.emit()
+        match event.key():
+            case QtCore.Qt.Key.Key_Enter | QtCore.Qt.Key.Key_Return:
+                self.enterPressed.emit()
         return super().keyPressEvent(event)
 
     def _on_edit_complete(self):

@@ -54,22 +54,20 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         if not index.isValid():
             return None
         dist = self.distributions[index.row()]
-        match role:
-            case constants.DISPLAY_ROLE:
-                match index.column():
-                    case 0:
-                        return dist.metadata["Name"]
-                    case 1:
-                        return dist.version
-                    case 2:
-                        return dist.metadata["Summary"]
-                    case 3:
-                        return dist.metadata["Home-Page"]
-                    case 4:
-                        return dist.metadata["Author"]
-                    case 5:
-                        return dist.metadata["License"]
-            case constants.USER_ROLE:
+        match role, index.column():
+            case constants.DISPLAY_ROLE, 0:
+                return dist.metadata["Name"]
+            case constants.DISPLAY_ROLE, 1:
+                return dist.version
+            case constants.DISPLAY_ROLE, 2:
+                return dist.metadata["Summary"]
+            case constants.DISPLAY_ROLE, 3:
+                return dist.metadata["Home-Page"]
+            case constants.DISPLAY_ROLE, 4:
+                return dist.metadata["Author"]
+            case constants.DISPLAY_ROLE, 5:
+                return dist.metadata["License"]
+            case constants.USER_ROLE, _:
                 return dist
 
     @classmethod
