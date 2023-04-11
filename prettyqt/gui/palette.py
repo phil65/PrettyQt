@@ -116,18 +116,19 @@ class Palette(QtGui.QPalette):
     def get_brush(self, role: RoleStr, group: GroupStr = "active") -> gui.Brush:
         return gui.Brush(self.brush(GROUP[group], ROLE[role]))
 
-    def set_color_group(self, group: GroupStr, *args, **kwargs):
+    def set_color_group(self, group: GroupStr, **kwargs):
         """Set the color group.
 
         Args:
             group: color group to use
+            kwargs: keyword arguments passed to setColorGroup
 
         Raises:
             InvalidParamError: invalid color group
         """
         if group not in GROUP:
             raise InvalidParamError(group, GROUP)
-        self.setColorGroup(GROUP[group], *args, **kwargs)
+        self.setColorGroup(GROUP[group], **kwargs)
 
     def get_color_group(self) -> GroupStr:
         """Return color group.
