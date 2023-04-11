@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
+from prettyqt.utils import InvalidParamError
 
 
 class Brush(QtGui.QBrush):
@@ -32,6 +33,11 @@ class Brush(QtGui.QBrush):
 
     def get_style(self) -> constants.BrushStyleStr:
         return constants.BRUSH_STYLE.inverse[self.style()]
+
+    def set_style(self, style: constants.BrushStyleStr):
+        if style not in constants.BRUSH_STYLE:
+            raise InvalidParamError(style, constants.BRUSH_STYLE)
+        self.setStyle(constants.BRUSH_STYLE[style])
 
 
 if __name__ == "__main__":

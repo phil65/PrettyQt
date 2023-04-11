@@ -35,6 +35,10 @@ def test_repr(name, cls, qapp):
 def test_brush():
     brush = gui.Brush()
     bytes(brush)
+    brush.set_style("cross")
+    with pytest.raises(InvalidParamError):
+        brush.set_style("test")
+    assert brush.get_style() == "cross"
 
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Somehow fails on OSX")
