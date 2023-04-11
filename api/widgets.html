@@ -11062,6 +11062,8 @@ AbstractSliderMixin            (<a class="autorefs autorefs-internal" title="pre
 
 <span class="sd">        Args:</span>
 <span class="sd">            action: repeat action</span>
+<span class="sd">            threshold: initial delay in ms</span>
+<span class="sd">            repeat_time: repeat time in ms</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            InvalidParamError: invalid repeat action</span>
@@ -11519,6 +11521,18 @@ AbstractSliderMixin            (<a class="autorefs autorefs-internal" title="pre
         <td><p>repeat action</p></td>
         <td><em>required</em></td>
       </tr>
+      <tr>
+        <td><code>threshold</code></td>
+        <td><code>int</code></td>
+        <td><p>initial delay in ms</p></td>
+        <td><code>500</code></td>
+      </tr>
+      <tr>
+        <td><code>repeat_time</code></td>
+        <td><code>int</code></td>
+        <td><p>repeat time in ms</p></td>
+        <td><code>50</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Exceptions:</strong></p>
@@ -11545,6 +11559,8 @@ AbstractSliderMixin            (<a class="autorefs autorefs-internal" title="pre
 
 <span class="sd">    Args:</span>
 <span class="sd">        action: repeat action</span>
+<span class="sd">        threshold: initial delay in ms</span>
+<span class="sd">        repeat_time: repeat time in ms</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid repeat action</span>
@@ -12275,8 +12291,6 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
             <span class="n">status_tip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">statusTip</span><span class="p">(),</span>
             <span class="n">whats_this</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">whatsThis</span><span class="p">(),</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="n">core</span><span class="o">.</span><span class="n">VersionNumber</span><span class="o">.</span><span class="n">get_qt_version</span><span class="p">()</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">):</span>
-            <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;menu&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">menu</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">dct</span>
 
     <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
@@ -12299,8 +12313,6 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="bp">self</span><span class="o">.</span><span class="n">setShortcutVisibleInContextMenu</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;shortcut_visible_in_context_menu&quot;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_menu_role</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;menu_role&quot;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setWhatsThis</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;whats_this&quot;</span><span class="p">])</span>
-        <span class="c1"># if core.VersionNumber.get_qt_version() &lt; (6, 0, 0):</span>
-        <span class="c1">#     self.setMenu(state[&quot;menu&quot;])</span>
 
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
@@ -19488,6 +19500,11 @@ GraphicsItemMixin        </code>
             <span class="bp">self</span><span class="o">.</span><span class="n">setScale</span><span class="p">(</span><span class="n">scale</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="o">.</span><span class="n">fromScale</span><span class="p">(</span><span class="n">scale</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scale</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">transform</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="o">*</span><span class="n">transform</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">combine</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -19741,6 +19758,7 @@ GraphicsItemMixin        </code>
     </div>
 
   </div>
+
 
 
 
@@ -20714,6 +20732,11 @@ GraphicsViewMixin            (<a class="autorefs autorefs-internal" title="prett
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">VIEWPORT_ANCHOR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformationAnchor</span><span class="p">()]</span>
 
+    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">transform</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="o">*</span><span class="n">transform</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">combine</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">set_resize_anchor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ViewportAnchorStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set how the view should position the scene during resizes.</span>
 
@@ -21404,6 +21427,7 @@ GraphicsViewMixin            (<a class="autorefs autorefs-internal" title="prett
     </div>
 
   </div>
+
 
 
 
@@ -27060,13 +27084,13 @@ MdiArea            (<a class="autorefs autorefs-internal" title="prettyqt.widget
     <span class="k">def</span> <span class="nf">set_background</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">brush_or_color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span>
-        <span class="n">pattern</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PatternStr</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
+        <span class="n">pattern</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">BrushStyleStr</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">brush_or_color</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
             <span class="n">brush</span> <span class="o">=</span> <span class="n">brush_or_color</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">brush_or_color</span><span class="p">)</span>
-            <span class="n">brush</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">PATTERN</span><span class="p">[</span><span class="n">pattern</span><span class="p">])</span>
+            <span class="n">brush</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">BRUSH_STYLE</span><span class="p">[</span><span class="n">pattern</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setBackground</span><span class="p">(</span><span class="n">brush</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_background</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>

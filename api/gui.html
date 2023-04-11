@@ -9895,7 +9895,7 @@ PageSize            (<span title="PySide6.QtGui.QPageSize">QPageSize</span>)
 <span class="sd">            unit</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">units</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitionUnits</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">qt</span><span class="o">.</span><span class="n">flag_to_int</span><span class="p">(</span><span class="n">units</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid page size&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">UNITS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">units</span><span class="p">]</span>
 
@@ -9961,7 +9961,7 @@ PageSize            (<span title="PySide6.QtGui.QPageSize">QPageSize</span>)
 <span class="sd">        unit</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">units</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">definitionUnits</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">qt</span><span class="o">.</span><span class="n">flag_to_int</span><span class="p">(</span><span class="n">units</span><span class="p">)</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">units</span><span class="o">.</span><span class="n">value</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid page size&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">UNITS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">units</span><span class="p">]</span>
 </code></pre></div>
@@ -10308,15 +10308,15 @@ PainterMixin        </code>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">rect</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
         <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span>
-        <span class="n">pattern</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PatternStr</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
+        <span class="n">pattern</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">BrushStyleStr</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="k">if</span> <span class="n">pattern</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">PATTERN</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">PATTERN</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">pattern</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">BRUSH_STYLE</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">BRUSH_STYLE</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="o">*</span><span class="n">rect</span><span class="p">)</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pattern</span> <span class="o">!=</span> <span class="s2">&quot;solid&quot;</span><span class="p">:</span>
-            <span class="n">color</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">PATTERN</span><span class="p">[</span><span class="n">pattern</span><span class="p">])</span>
+            <span class="n">color</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">BRUSH_STYLE</span><span class="p">[</span><span class="n">pattern</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_pen</span><span class="p">(</span>
@@ -10397,6 +10397,11 @@ PainterMixin        </code>
 <span class="sd">            composition mode</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">COMPOSITION_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">compositionMode</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">transform</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="o">*</span><span class="n">transform</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">combine</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_font_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">FontMetrics</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">FontMetrics</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fontMetrics</span><span class="p">())</span>
@@ -10715,6 +10720,7 @@ PainterMixin        </code>
     </div>
 
   </div>
+
 
 
 
@@ -11455,18 +11461,19 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
     <span class="k">def</span> <span class="nf">get_brush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">brush</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="n">ROLE</span><span class="p">[</span><span class="n">role</span><span class="p">]))</span>
 
-    <span class="k">def</span> <span class="nf">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the color group.</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            group: color group to use</span>
+<span class="sd">            kwargs: keyword arguments passed to setColorGroup</span>
 
 <span class="sd">        Raises:</span>
 <span class="sd">            InvalidParamError: invalid color group</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GROUP</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">GROUP</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setColorGroup</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setColorGroup</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GroupStr</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return color group.</span>
@@ -11590,7 +11597,7 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
 
 
 <h4 id="prettyqt.gui.palette.Palette.set_color_group" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
 
 </h4>
@@ -11616,6 +11623,12 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
         <td><p>color group to use</p></td>
         <td><em>required</em></td>
       </tr>
+      <tr>
+        <td><code>kwargs</code></td>
+        <td></td>
+        <td><p>keyword arguments passed to setColorGroup</p></td>
+        <td><code>{}</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Exceptions:</strong></p>
@@ -11635,18 +11648,19 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/palette.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_color_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the color group.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        group: color group to use</span>
+<span class="sd">        kwargs: keyword arguments passed to setColorGroup</span>
 
 <span class="sd">    Raises:</span>
 <span class="sd">        InvalidParamError: invalid color group</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">group</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">GROUP</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">group</span><span class="p">,</span> <span class="n">GROUP</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">setColorGroup</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setColorGroup</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -12837,12 +12851,13 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="o">*</span><span class="n">index</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">index</span><span class="p">:</span>
+            <span class="k">case</span> <span class="nb">int</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">case</span> <span class="nb">tuple</span><span class="p">():</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="o">*</span><span class="n">index</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
