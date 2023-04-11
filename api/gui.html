@@ -1596,6 +1596,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints" class="md-nav__link">
+    stylehints
+  </a>
+  
+    <nav class="md-nav" aria-label="stylehints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints.StyleHintsMixin" class="md-nav__link">
+    StyleHintsMixin
+  </a>
+  
+    <nav class="md-nav" aria-label="StyleHintsMixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints.StyleHintsMixin.get_color_scheme" class="md-nav__link">
+    get_color_scheme()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints.StyleHintsMixin.get_tab_focus_behavior" class="md-nav__link">
+    get_tab_focus_behavior()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.gui.surface" class="md-nav__link">
     surface
   </a>
@@ -3722,6 +3762,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints" class="md-nav__link">
+    stylehints
+  </a>
+  
+    <nav class="md-nav" aria-label="stylehints">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints.StyleHintsMixin" class="md-nav__link">
+    StyleHintsMixin
+  </a>
+  
+    <nav class="md-nav" aria-label="StyleHintsMixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints.StyleHintsMixin.get_color_scheme" class="md-nav__link">
+    get_color_scheme()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.stylehints.StyleHintsMixin.get_tab_focus_behavior" class="md-nav__link">
+    get_tab_focus_behavior()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.gui.surface" class="md-nav__link">
     surface
   </a>
@@ -4452,6 +4532,7 @@
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -13530,6 +13611,195 @@ StaticText            (<span title="PySide6.QtGui.QStaticText">QStaticText</span
     </div>
 
   </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="prettyqt.gui.stylehints" class="doc doc-heading">
+        <code>stylehints</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="prettyqt.gui.stylehints.StyleHintsMixin" class="doc doc-heading">
+        <code>
+StyleHintsMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>)
+        </code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/gui/stylehints.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StyleHintsMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_color_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ColorSchemeStr</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current color scheme of the system.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            color scheme</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">COLOR_SCHEME</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">colorScheme</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">get_tab_focus_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TabFocusBehaviorStr</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current focus behavior on press of the tab key.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            focus behavior</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">TAB_FOCUS_BEHAVIOR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tabFocusBehavior</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.gui.stylehints.StyleHintsMixin.get_color_scheme" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_color_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ColorSchemeStr</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return current color scheme of the system.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>constants.ColorSchemeStr</code></td>
+      <td><p>color scheme</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/gui/stylehints.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_color_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">ColorSchemeStr</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current color scheme of the system.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        color scheme</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">COLOR_SCHEME</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">colorScheme</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.gui.stylehints.StyleHintsMixin.get_tab_focus_behavior" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_tab_focus_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TabFocusBehaviorStr</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return current focus behavior on press of the tab key.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>constants.TabFocusBehaviorStr</code></td>
+      <td><p>focus behavior</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/gui/stylehints.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_tab_focus_behavior</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">TabFocusBehaviorStr</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current focus behavior on press of the tab key.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        focus behavior</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">TAB_FOCUS_BEHAVIOR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">tabFocusBehavior</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
 
 
 
