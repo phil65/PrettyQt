@@ -23,9 +23,7 @@ class UndoStackMixin(core.ObjectMixin):
         yield None
         self.endMacro()
 
-    def add_command(
-        self, title: str, redo: Callable, undo: Callable
-    ) -> gui.UndoCommand:
+    def add_command(self, title: str, redo: Callable, undo: Callable) -> gui.UndoCommand:
         class MyCommand(gui.UndoCommand):
             def redo(self):
                 return redo()

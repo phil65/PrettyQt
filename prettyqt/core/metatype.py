@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core, qt
+from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -112,19 +112,13 @@ TYPE_FLAG = bidict(
     # needs_copy_construction=QtCore.QMetaType.TypeFlag.NeedsCopyConstruction,
     # needs_move_construction=QtCore.QMetaType.TypeFlag.NeedsMoveConstruction,
     needs_destruction=QtCore.QMetaType.TypeFlag.NeedsDestruction,
-    # relocatable_type=QtCore.QMetaType.TypeFlag.RelocatableType,
+    relocatable_type=QtCore.QMetaType.TypeFlag.RelocatableType,
     is_enumeration=QtCore.QMetaType.TypeFlag.IsEnumeration,
-    # is_unsigned_enumeration=QtCore.QMetaType.TypeFlag.IsUnsignedEnumeration,
+    is_unsigned_enumeration=QtCore.QMetaType.TypeFlag.IsUnsignedEnumeration,
     pinter_to_qobject=QtCore.QMetaType.TypeFlag.PointerToQObject,
-    # is_pointer=QtCore.QMetaType.TypeFlag.IsPointer,
-    # is_const=QtCore.QMetaType.TypeFlag.IsConst,
+    is_pointer=QtCore.QMetaType.TypeFlag.IsPointer,
+    is_const=QtCore.QMetaType.TypeFlag.IsConst,
 )
-
-if qt.API.endswith("6"):
-    TYPE_FLAG["relocatable_type"] = QtCore.QMetaType.TypeFlag.RelocatableType
-    TYPE_FLAG["is_unsigned_enumeration"] = QtCore.QMetaType.TypeFlag.IsUnsignedEnumeration
-    TYPE_FLAG["is_pointer"] = QtCore.QMetaType.TypeFlag.IsPointer
-    TYPE_FLAG["is_const"] = QtCore.QMetaType.TypeFlag.IsConst
 
 
 class MetaType(QtCore.QMetaType):

@@ -132,5 +132,6 @@ class MetaObject:
 
 if __name__ == "__main__":
     from prettyqt import gui
+
     metaobj = gui.StyleHints.get_metaobject()
     print(metaobj.get_meta_type())
