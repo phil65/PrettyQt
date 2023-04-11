@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import qt, widgets
+from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import types
 
@@ -74,10 +74,7 @@ class DialogMixin(widgets.WidgetMixin):
         return self.result() == QtWidgets.QDialog.DialogCode.Accepted
 
     def main_loop(self) -> int:
-        if qt.API.startswith("pyqt"):
-            return self.exec()
-        else:
-            return self.exec_()
+        return self.exec_()
 
 
 class Dialog(DialogMixin, QtWidgets.QDialog):

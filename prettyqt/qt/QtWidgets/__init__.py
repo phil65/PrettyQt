@@ -20,7 +20,9 @@ if PYQT6:
     QTextEdit.tabStopWidth = QTextEdit.tabStopDistance
     QPlainTextEdit.setTabStopWidth = QPlainTextEdit.setTabStopDistance
     QPlainTextEdit.tabStopWidth = QPlainTextEdit.tabStopDistance
-    QMenu.exec_ = QMenu.exec  # type: ignore
+    QPlainTextEdit.print_ = lambda self, *args, **kwargs: self.print(*args, **kwargs)
+    QDialog.exec_ = lambda self, *args, **kwargs: self.exec(*args, **kwargs)
+    QMenu.exec_ = lambda self, *args, **kwargs: self.exec(*args, **kwargs)
 elif PYSIDE6:
     from PySide6.QtWidgets import *  # type: ignore
     from PySide6.QtOpenGLWidgets import QOpenGLWidget  # type: ignore
