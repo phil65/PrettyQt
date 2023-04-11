@@ -122,7 +122,8 @@ class Dir(QtCore.QDir):
         return [
             core.FileInfo(i)
             for i in self.entryInfoList(
-                sort=SORT_FLAG[sort_mode], filters=FILTERS[filters]
+                sort=SORT_FLAG[sort_mode],
+                filters=self.Filter.AllEntries | FILTERS[filters],
             )
         ]
 
