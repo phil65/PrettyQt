@@ -2,8 +2,6 @@
 
 from typing import Literal
 
-from collections.abc import Callable
-import operator
 import os
 import importlib
 
@@ -51,8 +49,3 @@ API = qt_api
 
 PYQT6 = API == "pyqt6"
 PYSIDE6 = API == "pyside6"
-
-
-flag_to_int: Callable = (
-    operator.attrgetter("value") if API.endswith("6") else int  # type: ignore
-)

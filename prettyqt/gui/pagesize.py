@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import qt
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
@@ -167,7 +166,7 @@ class PageSize(QtGui.QPageSize):
             unit
         """
         units = self.definitionUnits()
-        if qt.flag_to_int(units) == -1:
+        if units.value == -1:
             raise ValueError("Invalid page size")
         return UNITS.inverse[units]
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core, qt
+from prettyqt import core
 from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
@@ -84,7 +84,7 @@ class BluetoothDeviceDiscoveryAgent(
         return [
             k
             for k, v in DISCOVERY_METHODS.items()
-            if v & qt.flag_to_int(self.supportedDiscoveryMethods())
+            if v & self.supportedDiscoveryMethods().value
         ]
 
 
