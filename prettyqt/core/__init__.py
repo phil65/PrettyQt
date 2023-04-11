@@ -39,6 +39,7 @@ from .mutex import Mutex
 from .metaenum import MetaEnum
 from .metamethod import MetaMethod
 from .metaproperty import MetaProperty
+from .metatype import MetaType
 from .metaobject import MetaObject
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
@@ -178,6 +179,7 @@ __all__ = [
     "MetaEnum",
     "MetaMethod",
     "MetaProperty",
+    "MetaType",
     "MetaObject",
     "Object",
     "ObjectMixin",

@@ -63,6 +63,9 @@ class MetaObject:
     def __init__(self, metaobject: QtCore.QMetaObject):
         self.item = metaobject
 
+    def __getattr__(self, val):
+        return getattr(self.item, val)
+
     def get_method(self, index: int | str) -> core.MetaMethod:
         if isinstance(index, int):
             return self.get_methods()[index]
@@ -123,7 +126,11 @@ class MetaObject:
             if i.get_method_type() == "signal"
         ]
 
+    def get_meta_type(self) -> core.MetaType:
+        return core.MetaType(self.metaType())
+
 
 if __name__ == "__main__":
-    metaobj = core.Object.get_metaobject()
-    print(metaobj.get_signals())
+    from prettyqt import gui
+    metaobj = gui.StyleHints.get_metaobject()
+    print(metaobj.get_meta_type())
