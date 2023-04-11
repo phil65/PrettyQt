@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.utils import InvalidParamError, types
 
 
 class GraphicsRotation(widgets.GraphicsTransformMixin, QtWidgets.QGraphicsRotation):
@@ -11,6 +11,13 @@ class GraphicsRotation(widgets.GraphicsTransformMixin, QtWidgets.QGraphicsRotati
             raise InvalidParamError(axis, constants.AXIS)
         self.setAxis(constants.AXIS[axis])
 
+    def set_origin(self, origin: types.VectorType):
+        if not isinstance(origin, QtGui.QVector3D):
+            origin = QtGui.QVector3D(*origin)
+        self.setOrigin(origin)
+
 
 if __name__ == "__main__":
-    transform = GraphicsRotation()
+    rotation = GraphicsRotation()
+    rotation.set_origin((1, 1, 1))
+    print(rotation.origin())

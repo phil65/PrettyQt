@@ -31,6 +31,14 @@ if TYPE_CHECKING:
         tuple[float, float, float, float, float, float, float, float, float],
         tuple[float, float, float, float, float, float],
     ]
+    VectorType = Union[
+        QtGui.QVector3D,
+        QtGui.QVector2D,
+        QtGui.QVector4D,
+        QtCore.QPoint,
+        QtCore.QPointF,
+        tuple[float, float, float],
+    ]
     ColorType = Union[
         str,
         int,
