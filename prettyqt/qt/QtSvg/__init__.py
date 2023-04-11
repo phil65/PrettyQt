@@ -1,11 +1,9 @@
 """Provides QtSvg classes and functions."""
 
-from prettyqt.qt import PYQT5, PYQT6, PYSIDE6, PythonQtError
+from prettyqt.qt import PYQT6, PYSIDE6, PythonQtError
 
 
-if PYQT5:
-    from PyQt5.QtSvg import *
-elif PYQT6:
+if PYQT6:
     from PyQt6.QtSvg import *
 elif PYSIDE6:
     from PySide6.QtSvg import *

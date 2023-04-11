@@ -3,7 +3,6 @@
 import pytest
 
 from prettyqt import core
-import prettyqt.qt
 from prettyqt.utils import InvalidParamError
 
 
@@ -52,7 +51,7 @@ def test_georoute():
     route.get_path()
 
 
-@pytest.mark.skipif(prettyqt.qt.API == "pyqt5", reason="Only supported in PyQt")
+# @pytest.mark.skipif(prettyqt.qt.API == "pyqt5", reason="Only supported in PyQt")
 def test_georouterequest():
     request = location.GeoRouteRequest()
     request.get_waypoints()
@@ -109,8 +108,8 @@ def test_placecategory():
     cat.get_icon()
     assert bool(cat) is False
     assert str(cat) == ""
-    if prettyqt.qt.API == "pyqt5":
-        assert cat.get_visibility() == "unspecified"
+    # if prettyqt.qt.API == "pyqt5":
+    #     assert cat.get_visibility() == "unspecified"
 
 
 def test_placecontactdetail():
@@ -260,14 +259,14 @@ def test_place():
     place.get_primary_website()
     place.get_ratings()
     place.get_supplier()
-    if prettyqt.qt.API == "pyqt5":
-        assert place.get_visibility() == "unspecified"
+    # if prettyqt.qt.API == "pyqt5":
+    #     assert place.get_visibility() == "unspecified"
 
 
 def test_placesearchrequest():
     request = location.PlaceSearchRequest()
-    if prettyqt.qt.API == "pyqt5":
-        request.get_visibility_scope()
+    # if prettyqt.qt.API == "pyqt5":
+    #     request.get_visibility_scope()
     request.get_categories()
     request.get_search_area()
     request.set_relevance_hint("distance")

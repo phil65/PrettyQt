@@ -68,13 +68,7 @@ def is_deleted(obj) -> bool:
         import shiboken6
 
         return not shiboken6.isValid(obj)
-    elif qt.API == "pyqt5":
-        try:
-            from PyQt5 import sip
-        except ImportError:
-            import sip  # type: ignore[import, no-redef]
-        return sip.isdeleted(obj)
-    else:
+    elif qt.API == "pyqt6":
         try:
             from PyQt6 import sip
         except ImportError:

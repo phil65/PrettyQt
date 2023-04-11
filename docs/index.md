@@ -9,7 +9,7 @@
 
 ## What is it?
 
-**PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt5 / PyQt6 / PySide6.
+**PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt6 / PySide6.
 
 ## Main Features
 Here are just a few of the things that PrettyQt does well:

@@ -23,7 +23,7 @@ jobs:
             extension: "*.dylib"
             runs-on: macos-latest
         python: ["3.10", "3.11"]
-        qt: [5.15.2]
+        qt: [6.4.2]
 
     steps:
       - name: Checkout
@@ -37,12 +37,12 @@ jobs:
         with:
           python-version: ${{ matrix.python }}
           architecture: x64
-      - name: install pyqt5
-        run: pip install pyqt5==${{ matrix.qt }}
+      - name: install pyqt6
+        run: pip install pyqt6==${{ matrix.qt }}
       - name: before
         uses: GabrielBB/xvfb-action@v1.2
         with:
-          run: python -c "from PyQt5 import QtWidgets; app = QtWidgets.QApplication([]); print(QtWidgets.QStyleFactory.keys())"
+          run: python -c "from PyQt6 import QtWidgets; app = QtWidgets.QApplication([]); print(QtWidgets.QStyleFactory.keys())"
       - name: Install Qt
         uses: jurplel/install-qt-action@v3
         with:

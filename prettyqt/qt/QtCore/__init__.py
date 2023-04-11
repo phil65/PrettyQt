@@ -6,7 +6,7 @@ from __future__ import annotations
 # import sys
 from typing import TYPE_CHECKING
 
-from prettyqt.qt import PYQT5, PYQT6, PYSIDE6
+from prettyqt.qt import PYQT6, PYSIDE6
 
 if TYPE_CHECKING:
     import datetime
@@ -26,55 +26,7 @@ def to_time(self) -> datetime.time:
     return self.toPyTime()
 
 
-if PYQT5:
-    from PyQt5.QtCore import (
-        QT_VERSION_STR,
-        QT_VERSION_STR as __version__,
-        QDateTime,
-        QDate,
-        QTime,
-        pyqtBoundSignal,
-        pyqtBoundSignal as SignalInstance,
-        pyqtProperty,
-        pyqtProperty as Property,
-        pyqtSignal,
-        pyqtSignal as Signal,
-        pyqtSlot,
-        pyqtSlot as Slot,
-        Q_ENUM,
-        Q_ENUM as QEnum,
-        Q_ARG,
-        Q_ARG as QGenericArgument,
-        Q_FLAG,
-        Q_FLAG as QFlag,
-        Q_CLASSINFO,
-        Q_CLASSINFO as QClassInfo,
-        PYQT_VERSION_STR as BINDING_VERSION,
-    )
-
-    # For issue #153
-    from PyQt5.QtCore import *
-
-    QDateTime.toPython = to_datetime
-    QDate.toPython = to_date
-    QTime.toPython = to_time
-    QLibraryInfo.LibraryPath = QLibraryInfo.LibraryLocation  # type: ignore
-    QRegularExpression.MatchOption.AnchorAtOffsetMatchOption = (  # type: ignore
-        QRegularExpression.MatchOption.AnchoredMatchOption
-    )
-    # Those are imported from `import *`
-    del (
-        pyqtSignal,
-        pyqtBoundSignal,
-        pyqtSlot,
-        pyqtProperty,
-        QT_VERSION_STR,
-        Q_FLAG,
-        Q_ENUM,
-        Q_ARG,
-        Q_CLASSINFO,
-    )
-elif PYQT6:
+if PYQT6:
     from PyQt6.QtCore import (
         QT_VERSION_STR,
         QT_VERSION_STR as __version__,

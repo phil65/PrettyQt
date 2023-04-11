@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "PrettyQt"
 version = "1.1.2"
-description = "A pythonic layer on top of PyQt5 / PyQt6 / PySide6"
+description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = 'docs/index.md'
 repository = "https://github.com/phil65/prettyqt"
 homepage = "https://github.com/phil65/prettyqt"
@@ -27,10 +27,6 @@ docutils = {version = "^0.19", optional=true}
 orjson = {version = "^3", python = "<3.12", optional=true}
 
 regex = "^2023"
-
-PyQtWebEngine = {version = "^5.15", optional=true}
-PyQtChart = {version = "^5.15", optional=true, markers = "python_version != '3.10' or sys_platform != 'win32'"}
-QScintilla = {version = "^2.11", optional=true}
 
 PyQt6 = {version = "^6.5", optional=true}
 PyQt6-Charts = {version = "^6.5", optional=true}
@@ -68,7 +64,6 @@ devtools = "^0"
 commitizen = "^2.20"
 
 [tool.poetry.extras]
-pyqt5 = ["PyQt5", "PyQtWebEngine", "PyQtChart", "QScintilla"]
 pyside6 = ["pyside6", "PySide6-QtAds"]
 pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla", "PyQtAds"]
 addons = ["docutils", "orjson"]

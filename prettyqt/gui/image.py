@@ -44,8 +44,6 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
         if bits is None:
             return None
         match API:
-            case "pyqt5":
-                return bits.asstring(self.byteCount())
             case "pyqt6":
                 return bits.asstring(self.sizeInBytes())
             case "pyside6":

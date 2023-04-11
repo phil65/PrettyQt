@@ -3,7 +3,6 @@ from typing import Literal
 
 from bidict import bidict
 from prettyqt.qt import QtCore
-import prettyqt.qt
 from prettyqt.utils import mappers
 
 Qt = QtCore.Qt
@@ -296,13 +295,12 @@ FILTER_MODES = mappers.FlagMap(
     ends_with=Qt.MatchFlag.MatchEndsWith,
 )
 
-if prettyqt.qt.API != "pyqt5":
-    ColorSchemeStr = Literal["unknown", "light", "dark"]
-    COLOR_SCHEME: bidict[ColorSchemeStr, Qt.ColorScheme] = bidict(
-        unknown=Qt.ColorScheme.Unknown,
-        light=Qt.ColorScheme.Light,
-        dark=Qt.ColorScheme.Dark,
-    )
+ColorSchemeStr = Literal["unknown", "light", "dark"]
+COLOR_SCHEME: bidict[ColorSchemeStr, Qt.ColorScheme] = bidict(
+    unknown=Qt.ColorScheme.Unknown,
+    light=Qt.ColorScheme.Light,
+    dark=Qt.ColorScheme.Dark,
+)
 
 TabFocusBehaviorStr = Literal["none", "text_controls", "list_controls", "all_controls"]
 TAB_FOCUS_BEHAVIOR: bidict[TabFocusBehaviorStr, Qt.TabFocusBehavior] = bidict(

@@ -12,7 +12,7 @@ class PythonQtError(ImportError):
     pass
 
 
-def set_env_vars(qt_binding: Literal["PyQt5", "PyQt6", "PySide6"]):
+def set_env_vars(qt_binding: Literal["PyQt6", "PySide6"]):
     ENV_VARS = ["QT_API", "USE_QT_API", "PYTEST_QT_API", "PYQTGRAPH_QT_LIB"]
     for var in ENV_VARS:
         os.environ[var] = qt_binding
@@ -22,7 +22,6 @@ def set_env_vars(qt_binding: Literal["PyQt5", "PyQt6", "PySide6"]):
 packages = {
     "pyside6": "PySide6",
     "pyqt6": "PyQt6",
-    "pyqt5": "PyQt5",
 }
 
 qt_api = os.getenv("QT_API")
@@ -49,9 +48,7 @@ if not qt_api:
 # os.environ.setdefault("QT_API", "pyqt6")
 
 API = qt_api
-QT_VERSION = 6 if API.endswith("6") else 5
 
-PYQT5 = API == "pyqt5"
 PYQT6 = API == "pyqt6"
 PYSIDE6 = API == "pyside6"
 

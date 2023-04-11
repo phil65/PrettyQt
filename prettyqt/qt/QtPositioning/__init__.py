@@ -1,11 +1,9 @@
 """Provides QtPositioning classes and functions."""
 
-from prettyqt.qt import PYQT5, PYQT6, PYSIDE6, PythonQtError
+from prettyqt.qt import PYQT6, PYSIDE6, PythonQtError
 
 
-if PYQT5:
-    from PyQt5.QtPositioning import *
-elif PYSIDE6:
+if PYSIDE6:
     from PySide6.QtPositioning import *
 elif PYQT6:
     from PyQt6.QtPositioning import *
