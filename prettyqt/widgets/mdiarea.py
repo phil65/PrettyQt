@@ -120,13 +120,13 @@ class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
     def set_background(
         self,
         brush_or_color: types.ColorAndBrushType,
-        pattern: constants.PatternStr = "solid",
+        pattern: constants.BrushStyleStr = "solid",
     ):
         if isinstance(brush_or_color, QtGui.QBrush):
             brush = brush_or_color
         else:
             color = colors.get_color(brush_or_color)
-            brush = gui.Brush(color, constants.PATTERN[pattern])
+            brush = gui.Brush(color, constants.BRUSH_STYLE[pattern])
         self.setBackground(brush)
 
     def get_background(self) -> gui.Brush:

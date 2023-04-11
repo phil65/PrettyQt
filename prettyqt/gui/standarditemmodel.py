@@ -11,21 +11,23 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
     def __getitem__(
         self, index: int | tuple[int, int] | QtCore.QModelIndex
     ) -> QtGui.QStandardItem:
-        if isinstance(index, int):
-            item = self.item(index)
-        elif isinstance(index, tuple):
-            item = self.item(*index)
-        else:
-            item = self.itemFromIndex(index)
+        match index:
+            case int():
+                item = self.item(index)
+            case tuple():
+                item = self.item(*index)
+            case _:
+                item = self.itemFromIndex(index)
         if item is None:
             raise KeyError(index)
         return item
 
     def __delitem__(self, index: int | tuple[int, int]):
-        if isinstance(index, int):
-            item = self.takeRow(index)
-        elif isinstance(index, tuple):
-            item = self.takeItem(*index)
+        match index:
+            case int():
+                item = self.takeRow(index)
+            case tuple():
+                item = self.takeItem(*index)
         if item is None:
             raise KeyError(index)
         return item

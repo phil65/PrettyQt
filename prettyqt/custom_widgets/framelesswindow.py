@@ -200,30 +200,31 @@ class FramelessWindow(widgets.Widget):
                 # Remove system title
                 return True, 0
 
-            if msg.message == WM_NCHITTEST:
+            elif msg.message == WM_NCHITTEST:
                 w, h = self.width(), self.height()
                 lx = x < self.BORDER_WIDTH
                 rx = x > w - self.BORDER_WIDTH
                 ty = y < self.BORDER_WIDTH
                 by = y > h - self.BORDER_WIDTH
-                if lx and ty:
-                    return True, HTTOPLEFT
-                if rx and by:
-                    return True, HTBOTTOMRIGHT
-                if rx and ty:
-                    return True, HTTOPRIGHT
-                if lx and by:
-                    return True, HTBOTTOMLEFT
-                if ty:
-                    return True, HTTOP
-                if by:
-                    return True, HTBOTTOM
-                if lx:
-                    return True, HTLEFT
-                if rx:
-                    return True, HTRIGHT
-                # Title
-                return True, HTCAPTION
+                match lx, ty, rx, by:
+                    case True, True, _, _:
+                        return True, HTTOPLEFT
+                    case _, _, True, True:
+                        return True, HTBOTTOMRIGHT
+                    case _, True, True, _:
+                        return True, HTTOPRIGHT
+                    case True, _, _, True:
+                        return True, HTBOTTOMLEFT
+                    case _, True, _, _:
+                        return True, HTTOP
+                    case _, _, _, True:
+                        return True, HTBOTTOM
+                    case True, _, _, _:
+                        return True, HTLEFT
+                    case _, _, True, _:
+                        return True, HTRIGHT
+                    case _, _, _, _:
+                        return True, HTCAPTION
 
         return return_value, result
 

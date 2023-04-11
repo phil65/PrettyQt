@@ -37,12 +37,13 @@ class StandardItem(QtGui.QStandardItem):
     def __getitem__(
         self, index: int | tuple[int, int] | QtCore.QModelIndex
     ) -> QtGui.QStandardItem:
-        if isinstance(index, int):
-            return self.child(index)
-        elif isinstance(index, tuple):
-            return self.child(*index)
-        else:
-            raise KeyError(index)
+        match index:
+            case int():
+                return self.child(index)
+            case tuple():
+                return self.child(*index)
+            case _:
+                raise KeyError(index)
 
     def __delitem__(self, index: int | tuple[int, int]):
         if isinstance(index, int):

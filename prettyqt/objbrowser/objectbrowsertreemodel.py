@@ -33,9 +33,9 @@ class ObjectBrowserTreeItem(treeitem.TreeItem):
     def __init__(
         self,
         obj,
-        name,
+        name: str,
         obj_path,
-        is_attribute,
+        is_attribute: bool,
         parent: ObjectBrowserTreeItem | None = None,
     ):
         super().__init__(obj, parent=parent)
@@ -44,7 +44,7 @@ class ObjectBrowserTreeItem(treeitem.TreeItem):
         # self.child_items: List[ObjectBrowserTreeItem] = []
         # self.has_children = True
         # self.children_fetched = False
-        self.obj_name = str(name)
+        self.obj_name = name
         self.obj_path = str(obj_path)
         self.is_attribute = is_attribute
 
@@ -82,17 +82,20 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
         if self._inspected_node_is_visible:
             self._root_item = ObjectBrowserTreeItem(
-                None, "<invisible_root>", "<invisible_root>", None
+                obj=None,
+                name="<invisible_root>",
+                obj_path="<invisible_root>",
+                is_attribute=None,
             )
             self._root_item.children_fetched = True
             self.inspected_item = ObjectBrowserTreeItem(
-                obj, obj_name, obj_name, is_attribute=None
+                obj=obj, name=obj_name, obj_path=obj_name, is_attribute=None
             )
             self._root_item.append_child(self.inspected_item)
         else:
             # The root itself will be invisible
             self._root_item = ObjectBrowserTreeItem(
-                obj, obj_name, obj_name, is_attribute=None
+                obj=obj, name=obj_name, obj_path=obj_name, is_attribute=None
             )
             self.inspected_item = self._root_item
 
@@ -265,8 +268,11 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
         tree_items = []
         for item, path_str, is_attr in zip(obj_children, path_strings, is_attr_list):
-            name, child_obj = item
-            tree_items.append(ObjectBrowserTreeItem(child_obj, name, path_str, is_attr))
+            attr_name, attr_value = item
+            tree_item = ObjectBrowserTreeItem(
+                obj=attr_value, name=attr_name, obj_path=path_str, is_attribute=is_attr
+            )
+            tree_items.append(tree_item)
 
         return tree_items
 
@@ -298,23 +304,22 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
         old_item_names = [(item.obj_name, item.is_attribute) for item in old_items]
         new_item_names = [(item.obj_name, item.is_attribute) for item in new_items]
-        seqMatcher = SequenceMatcher(
+        seq_matcher = SequenceMatcher(
             isjunk=None, a=old_item_names, b=new_item_names, autojunk=False
         )
-        opcodes = seqMatcher.get_opcodes()
+        opcodes = seq_matcher.get_opcodes()
 
         logger.debug("(reversed) opcodes: %s", list(reversed(opcodes)))
 
         for tag, i1, i2, j1, j2 in reversed(opcodes):
-            if 1 or tag != "equal":
-                logger.debug(
-                    "  {:7s}, a[{}:{}] ({}), b[{}:{}] ({})".format(
-                        tag, i1, i2, old_item_names[i1:i2], j1, j2, new_item_names[j1:j2]
-                    )
-                )
+            # logger.debug(
+            #     "  {:7s}, a[{}:{}] ({}), b[{}:{}] ({})".format(
+            #         tag, i1, i2, old_item_names[i1:i2], j1, j2, new_item_names[j1:j2]
+            #     )
+            # )
             match tag:
                 case "equal":
-                    # Only when node names are equal is aux_refresh_tree called recursively.
+                    # when node names are equal is aux_refresh_tree called recursively.
                     assert (
                         i2 - i1 == j2 - j1
                     ), f"equal sanity check failed {i2 - i1} != {j2 - j1}"
@@ -324,8 +329,8 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                         self._aux_refresh_tree(child_index)
 
                 case "replace":
-                    # Explicitly remove the old item and insert the new. The old item may have
-                    # child nodes which indices must be removed by Qt, otherwise it crashes.
+                    # Remove the old item and insert the new. The old item may have child
+                    # nodes which indices must be removed by Qt, otherwise it crashes.
                     assert (
                         i2 - i1 == j2 - j1
                     ), f"replace sanity check failed {i2 - i1} != {j2 - j1}"
@@ -447,3 +452,21 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
         logger.debug("set_show_special_attrs: %s", show_special_attrs)
         self._show_special_attrs = show_special_attrs
         self.invalidateFilter()
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+    from prettyqt.objbrowser.attribute_model import DEFAULT_ATTR_COLS
+
+    app = widgets.app()
+    obj = dict(a=2, b="test")
+    model = ObjectBrowserTreeModel(obj, "test", attr_cols=DEFAULT_ATTR_COLS)
+    obj_tree = widgets.TreeView()
+    obj_tree.setRootIsDecorated(True)
+    obj_tree.setAlternatingRowColors(True)
+    obj_tree.set_model(model)
+    obj_tree.set_selection_behaviour("rows")
+    obj_tree.setUniformRowHeights(True)
+    obj_tree.setAnimated(True)
+    obj_tree.show()
+    app.main_loop()

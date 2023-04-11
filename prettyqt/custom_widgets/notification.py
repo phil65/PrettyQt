@@ -423,6 +423,8 @@ class NotificationArea(widgets.Widget):
             timeout : int, optional
                 The duration for which the notification should be shown. If None then
                 the notification will be shown indefinitely
+            autohide: bool, optional
+                Whether to automatically hide the notification on mouseover
             buttontext : str, optional
                 The text to display on the closing button. If not provided a cross
                 will be shown.

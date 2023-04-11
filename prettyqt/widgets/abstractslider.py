@@ -126,6 +126,8 @@ class AbstractSliderMixin(widgets.WidgetMixin):
 
         Args:
             action: repeat action
+            threshold: initial delay in ms
+            repeat_time: repeat time in ms
 
         Raises:
             InvalidParamError: invalid repeat action

@@ -30,8 +30,8 @@ class Brush(QtGui.QBrush):
     def get_color(self) -> gui.Color:
         return gui.Color(self.color())
 
-    def get_style(self) -> constants.PatternStr:
-        return constants.PATTERN.inverse[self.style()]
+    def get_style(self) -> constants.BrushStyleStr:
+        return constants.BRUSH_STYLE.inverse[self.style()]
 
 
 if __name__ == "__main__":

@@ -562,7 +562,7 @@ JOIN_STYLE: bidict[JoinStyleStr, Qt.PenJoinStyle] = bidict(
     svg_miter=Qt.PenJoinStyle.SvgMiterJoin,
 )
 
-PatternStr = Literal[
+BrushStyleStr = Literal[
     "none",
     "solid",
     "dense_1",
@@ -584,7 +584,7 @@ PatternStr = Literal[
     "texture",
 ]
 
-PATTERN: bidict[PatternStr, Qt.BrushStyle] = bidict(
+BRUSH_STYLE: bidict[BrushStyleStr, Qt.BrushStyle] = bidict(
     none=Qt.BrushStyle.NoBrush,
     solid=Qt.BrushStyle.SolidPattern,
     dense_1=Qt.BrushStyle.Dense1Pattern,

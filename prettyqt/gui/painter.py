@@ -109,15 +109,15 @@ class PainterMixin:
         self,
         rect: types.RectType | types.RectFType,
         color: types.ColorType,
-        pattern: constants.PatternStr = "solid",
+        pattern: constants.BrushStyleStr = "solid",
     ):
-        if pattern not in constants.PATTERN:
-            raise InvalidParamError(pattern, constants.PATTERN)
+        if pattern not in constants.BRUSH_STYLE:
+            raise InvalidParamError(pattern, constants.BRUSH_STYLE)
         if isinstance(rect, tuple):
             rect = core.RectF(*rect)
         color = colors.get_color(color)
         if pattern != "solid":
-            color = gui.Brush(color, constants.PATTERN[pattern])
+            color = gui.Brush(color, constants.BRUSH_STYLE[pattern])
         self.fillRect(rect, color)
 
     def set_pen(
