@@ -121,7 +121,9 @@ class Dir(QtCore.QDir):
     ) -> list[core.FileInfo]:
         return [
             core.FileInfo(i)
-            for i in self.entryInfoList(SORT_FLAG[sort_mode], FILTERS[filters])
+            for i in self.entryInfoList(
+                sort=SORT_FLAG[sort_mode], filters=FILTERS[filters]
+            )
         ]
 
     def get_entry_list(
@@ -129,7 +131,7 @@ class Dir(QtCore.QDir):
     ) -> list[pathlib.Path]:
         return [
             pathlib.Path(i)
-            for i in self.entryList(SORT_FLAG[sort_mode], FILTERS[filters])
+            for i in self.entryList(sort=SORT_FLAG[sort_mode], filters=FILTERS[filters])
         ]
 
     @classmethod
