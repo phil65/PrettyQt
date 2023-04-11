@@ -131,6 +131,10 @@ from .abstracttextdocumentlayout import (
     AbstractTextDocumentLayout,
     AbstractTextDocumentLayoutMixin,
 )
+from .abstractfileiconprovider import (
+    AbstractFileIconProvider,
+    AbstractFileIconProviderMixin,
+)
 from .syntaxhighlighter import SyntaxHighlighter
 from .undocommand import UndoCommand
 from .undostack import UndoStack
@@ -278,6 +282,8 @@ __all__ = [
     "TextFormatMixin",
     "TextFrameFormat",
     "TextFrame",
+    "AbstractFileIconProvider",
+    "AbstractFileIconProviderMixin",
     "AbstractTextDocumentLayout",
     "AbstractTextDocumentLayoutMixin",
     "InputMethod",
