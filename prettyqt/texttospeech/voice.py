@@ -10,19 +10,19 @@ from prettyqt.utils import bidict
 logger = logging.getLogger()
 
 AGE = bidict(
-    child=QtTextToSpeech.QVoice.Child,
-    teenager=QtTextToSpeech.QVoice.Teenager,
-    adult=QtTextToSpeech.QVoice.Adult,
-    senior=QtTextToSpeech.QVoice.Senior,
-    other=QtTextToSpeech.QVoice.Other,
+    child=QtTextToSpeech.QVoice.Age.Child,
+    teenager=QtTextToSpeech.QVoice.Age.Teenager,
+    adult=QtTextToSpeech.QVoice.Age.Adult,
+    senior=QtTextToSpeech.QVoice.Age.Senior,
+    other=QtTextToSpeech.QVoice.Age.Other,
 )
 
 AgeStr = Literal["child", "teenager", "adult", "senior", "other"]
 
 GENDER = bidict(
-    male=QtTextToSpeech.QVoice.Male,
-    female=QtTextToSpeech.QVoice.Female,
-    unknown=QtTextToSpeech.QVoice.Unknown,
+    male=QtTextToSpeech.QVoice.Gender.Male,
+    female=QtTextToSpeech.QVoice.Gender.Female,
+    unknown=QtTextToSpeech.QVoice.Gender.Unknown,
 )
 
 GenderStr = Literal["male", "female", "unknown"]
