@@ -283,6 +283,11 @@ def test_jsonvalue():
     assert str(val) == "b"
 
 
+def test_keycombination():
+    comb = core.KeyCombination("a")
+    assert comb.get_key() == "a"
+
+
 def test_library():
     lib = core.Library()
     assert bool(lib) is False

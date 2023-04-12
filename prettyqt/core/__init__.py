@@ -123,6 +123,7 @@ from .threadpool import ThreadPool
 from .dir import Dir
 from .temporaryfile import TemporaryFile
 from .temporarydir import TemporaryDir
+from .keycombination import KeyCombination
 
 # from .event import Event
 from .itemselectionmodel import ItemSelectionModel
@@ -257,6 +258,7 @@ __all__ = [
     "MimeDatabase",
     "Dir",
     "TemporaryDir",
+    "KeyCombination",
     "DirIterator",
     "ItemSelectionModel",
     "ItemSelection",
