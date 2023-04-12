@@ -144,6 +144,27 @@ class Color(QtGui.QColor):
     def get_spec(self) -> SpecStr:
         return SPEC.inv[self.spec()]
 
+    def convert_to(self, spec: SpecStr) -> Color:
+        # return Color(self.convertTo(SPEC[spec]))
+        color = Color()
+        match spec:
+            case "rgb":
+                rgb = self.getRgb()
+                color.setRgb(*rgb)
+            case "hsv":
+                hsv = self.getHsv()
+                color.setHsv(*hsv)
+            case "cmyk":
+                cmyk = self.getCmyk()
+                color.setCmyk(*cmyk)
+            case "hsl":
+                hsl = self.getHsl()
+                color.setHsl(*hsl)
+            case "extended_rgb":
+                ergb = self.getRgbF()
+                color.setRgbF(*ergb)
+        return color
+
     def get_name(self, name_format: NameStr = "hex_argb") -> str:
         match name_format:
             case "svg_rgb" | "svg_argb" if not self.isValid():
@@ -196,3 +217,10 @@ class Color(QtGui.QColor):
                 return cls.drift_color(cls("#101010"), factor + 20)
             else:
                 return base_color.lighter(factor + 10)
+
+
+if __name__ == "__main__":
+    color = Color()
+    color = color.convert_to("hsv")
+    print(color.get_spec())
+    print(color.as_qt())

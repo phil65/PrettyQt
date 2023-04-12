@@ -64,6 +64,11 @@ def test_color(qapp):
     with open("data.pkl", "rb") as jar:
         color = pickle.load(jar)
     assert str(color) == "#808080"
+    color.convert_to("rgb")
+    color.convert_to("hsv")
+    color.convert_to("cmyk")
+    color.convert_to("hsl")
+    color.convert_to("extended_rgb")
     # color.as_qt()
 
 
