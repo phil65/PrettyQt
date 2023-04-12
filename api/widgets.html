@@ -17775,7 +17775,6 @@ FileSystemModel            (<a class="autorefs autorefs-internal" title="prettyq
         <span class="bp">self</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">OPTIONS</span><span class="p">[</span><span class="s2">&quot;no_custom_icons&quot;</span><span class="p">],</span> <span class="ow">not</span> <span class="n">use</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_root_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">match</span> <span class="n">path</span><span class="p">:</span>
             <span class="k">case</span> <span class="s2">&quot;/&quot;</span> <span class="o">|</span> <span class="s2">&quot;root&quot;</span><span class="p">:</span>
                 <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">rootPath</span><span class="p">()</span>
@@ -17785,6 +17784,8 @@ FileSystemModel            (<a class="autorefs autorefs-internal" title="prettyq
                 <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">tempPath</span><span class="p">()</span>
             <span class="k">case</span> <span class="s2">&quot;current&quot;</span><span class="p">:</span>
                 <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">currentPath</span><span class="p">()</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+                <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">setRootPath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_name_filters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filters</span><span class="p">,</span> <span class="n">hide</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -24709,8 +24710,9 @@ LineEdit            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">focusOutEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">enterPressed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+        <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
+            <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">enterPressed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_on_edit_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -25000,8 +25002,9 @@ LineEdit            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/lineedit.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">]:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">enterPressed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
+    <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
+        <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">enterPressed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </code></pre></div>
         </details>

@@ -4710,15 +4710,37 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Check whether a color is &#39;dark&#39;.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lightness</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">128</span>
 
+    <span class="k">def</span> <span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SpecStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">SPEC</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">convert_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">SpecStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
+        <span class="c1"># return Color(self.convertTo(SPEC[spec]))</span>
+        <span class="n">color</span> <span class="o">=</span> <span class="n">Color</span><span class="p">()</span>
+        <span class="k">match</span> <span class="n">spec</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;rgb&quot;</span><span class="p">:</span>
+                <span class="n">rgb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRgb</span><span class="p">()</span>
+                <span class="n">color</span><span class="o">.</span><span class="n">setRgb</span><span class="p">(</span><span class="o">*</span><span class="n">rgb</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;hsv&quot;</span><span class="p">:</span>
+                <span class="n">hsv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHsv</span><span class="p">()</span>
+                <span class="n">color</span><span class="o">.</span><span class="n">setHsv</span><span class="p">(</span><span class="o">*</span><span class="n">hsv</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;cmyk&quot;</span><span class="p">:</span>
+                <span class="n">cmyk</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getCmyk</span><span class="p">()</span>
+                <span class="n">color</span><span class="o">.</span><span class="n">setCmyk</span><span class="p">(</span><span class="o">*</span><span class="n">cmyk</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;hsl&quot;</span><span class="p">:</span>
+                <span class="n">hsl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getHsl</span><span class="p">()</span>
+                <span class="n">color</span><span class="o">.</span><span class="n">setHsl</span><span class="p">(</span><span class="o">*</span><span class="n">hsl</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;extended_rgb&quot;</span><span class="p">:</span>
+                <span class="n">ergb</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getRgbF</span><span class="p">()</span>
+                <span class="n">color</span><span class="o">.</span><span class="n">setRgbF</span><span class="p">(</span><span class="o">*</span><span class="n">ergb</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">color</span>
+
     <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name_format</span><span class="p">:</span> <span class="n">NameStr</span> <span class="o">=</span> <span class="s2">&quot;hex_argb&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">match</span> <span class="n">name_format</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;svg_rgb&quot;</span> <span class="o">|</span> <span class="s2">&quot;svg_argb&quot;</span> <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
+                <span class="k">return</span> <span class="s1">&#39;fill=&quot;&quot;&#39;</span>
             <span class="k">case</span> <span class="s2">&quot;svg_rgb&quot;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-                    <span class="k">return</span> <span class="s1">&#39;fill=&quot;&quot;&#39;</span>
                 <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;fill=&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s1">)&quot;&#39;</span>
             <span class="k">case</span> <span class="s2">&quot;svg_argb&quot;</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-                    <span class="k">return</span> <span class="s1">&#39;fill=&quot;&quot;&#39;</span>
                 <span class="n">fill_str</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;rgb(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
                 <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;fill=&quot;</span><span class="si">{</span><span class="n">fill_str</span><span class="si">}</span><span class="s1">&quot; fill-opacity=&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s1">&quot;&#39;</span>
             <span class="k">case</span> <span class="s2">&quot;qcss_argb&quot;</span><span class="p">:</span>
@@ -4736,7 +4758,7 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;rgba(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="nf">as_qt</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">convertTo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">inverted</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">invert_alpha</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Color</span><span class="p">(</span>
@@ -4770,6 +4792,7 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -4873,6 +4896,7 @@ otherwise is is lighter.
     </div>
 
   </div>
+
 
 
 
