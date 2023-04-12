@@ -1,3 +1,9 @@
+## v1.4.2 (2023-04-12)
+
+### Fix
+
+- only run tests on linux for now
+
 ## v1.4.1 (2023-04-12)
 
 ### Fix
