@@ -266,14 +266,10 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             path_strings.append(f"{obj_path}.{attr_name}" if obj_path else attr_name)
             is_attr_list.append(True)
 
-        tree_items = []
-        for item, path_str, is_attr in zip(obj_children, path_strings, is_attr_list):
-            attr_name, attr_value = item
-            tree_item = ObjectBrowserTreeItem(
-                obj=attr_value, name=attr_name, obj_path=path_str, is_attribute=is_attr
-            )
-            tree_items.append(tree_item)
-
+        tree_items = [
+            ObjectBrowserTreeItem(obj=val, name=name, obj_path=p, is_attribute=is_attr)
+            for (name, val), p, is_attr in zip(obj_children, path_strings, is_attr_list)
+        ]
         return tree_items
 
     def _aux_refresh_tree(self, tree_index: core.ModelIndex):
