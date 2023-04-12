@@ -141,6 +141,9 @@ class Color(QtGui.QColor):
         """Check whether a color is 'dark'."""
         return self.lightness() < 128
 
+    def get_spec(self) -> SpecStr:
+        return SPEC.inv[self.spec()]
+
     def get_name(self, name_format: NameStr = "hex_argb") -> str:
         match name_format:
             case "svg_rgb":

@@ -57,6 +57,7 @@ def test_clipboard(qapp):
 
 def test_color(qapp):
     color = gui.Color()
+    assert color.get_spec() == "invalid"
     color.set_color("gray")
     with open("data.pkl", "wb") as jar:
         pickle.dump(color, jar)
