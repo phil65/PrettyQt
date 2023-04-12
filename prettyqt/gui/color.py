@@ -167,7 +167,7 @@ class Color(QtGui.QColor):
         return f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
 
     def as_qt(self) -> QtGui.QColor:
-        return QtGui.QColor(self)
+        return self.convertTo(self.spec())
 
     def inverted(self, invert_alpha: bool = False) -> Color:
         return Color(
