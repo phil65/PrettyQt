@@ -1,3 +1,9 @@
+## v1.4.1 (2023-04-12)
+
+### Fix
+
+- remove codecov from deps
+
 ## v1.4.0 (2023-04-12)
 
 ### Feat
