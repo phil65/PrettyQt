@@ -23,6 +23,11 @@ jobs:
     - name: Linux opengl
       if: runner.os == 'Linux'
       run: sudo apt-get install -y libopengl0 libegl1-mesa libxcb-xinput0
+    # - name: Install opengl32sw
+    #   if: runner.os == 'Windows'
+    #   run: |
+    #       pip install aqtinstall
+    #       python -m aqt install-qt windows desktop 6.5.0 win64_msvc2019_64
     # - name: Run services
     #   if: runner.os == 'Linux'
     #   run: |
@@ -35,7 +40,8 @@ jobs:
         pip install poetry
         poetry install -E pyside6
     - name: Test with pytest
-      uses: GabrielBB/xvfb-action@v1
+      uses: coactions/setup-xvfb@v1
+      if: runner.os == 'Linux'
       timeout-minutes: 5
       with:
         run: |
