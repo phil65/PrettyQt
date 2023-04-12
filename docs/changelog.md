@@ -1,3 +1,16 @@
+## v1.4.0 (2023-04-12)
+
+### Feat
+
+- **Color**: add convert_to method
+- **Color**: add get_spec method
+- **core**: add KeyCombination class
+- re-add qthelp module
+
+### Fix
+
+- fixed Color.as_qt error with Qt6.5
+
 ## v1.3.0 (2023-04-11)
 
 ### Feat
