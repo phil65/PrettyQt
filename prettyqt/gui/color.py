@@ -146,13 +146,11 @@ class Color(QtGui.QColor):
 
     def get_name(self, name_format: NameStr = "hex_argb") -> str:
         match name_format:
+            case "svg_rgb" | "svg_argb" if not self.isValid():
+                return 'fill=""'
             case "svg_rgb":
-                if not self.isValid():
-                    return 'fill=""'
                 return f'fill="rgb({self.red()}, {self.green()}, {self.blue()})"'
             case "svg_argb":
-                if not self.isValid():
-                    return 'fill=""'
                 fill_str = f"rgb({self.red()}, {self.green()}, {self.blue()})"
                 return f'fill="{fill_str}" fill-opacity="{self.alpha()}"'
             case "qcss_argb":
