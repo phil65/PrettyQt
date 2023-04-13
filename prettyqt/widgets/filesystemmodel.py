@@ -43,10 +43,9 @@ class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
     ) -> Iterator[QtCore.QModelIndex]:
         if not self.hasChildren(index):
             return
-        path = self.filePath(index)
-        flags = self.filter() | QtCore.QDir.NoDotAndDotDot
-        for it in core.DirIterator(path, flags):
-            yield self.index(it)
+        path = self.get_file_path(index)
+        for it in path.iterdir():
+            yield self.index(str(path / it))
 
     def resolve_sym_links(self, resolve: bool):
         self.setResolveSymlinks(resolve)
