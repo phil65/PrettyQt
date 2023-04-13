@@ -1964,8 +1964,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.textdocument.TextDocumentMixin.get_meta_information" class="md-nav__link">
+    get_meta_information()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.textdocument.TextDocumentMixin.set_default_cursor_move_style" class="md-nav__link">
     set_default_cursor_move_style()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.textdocument.TextDocumentMixin.set_meta_information" class="md-nav__link">
+    set_meta_information()
   </a>
   
 </li>
@@ -4130,8 +4144,22 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.textdocument.TextDocumentMixin.get_meta_information" class="md-nav__link">
+    get_meta_information()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.textdocument.TextDocumentMixin.set_default_cursor_move_style" class="md-nav__link">
     set_default_cursor_move_style()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.gui.textdocument.TextDocumentMixin.set_meta_information" class="md-nav__link">
+    set_meta_information()
   </a>
   
 </li>
@@ -4711,7 +4739,7 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">lightness</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">128</span>
 
     <span class="k">def</span> <span class="nf">get_spec</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SpecStr</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">SPEC</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">SPEC</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">spec</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">convert_to</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">spec</span><span class="p">:</span> <span class="n">SpecStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Color</span><span class="p">:</span>
         <span class="c1"># return Color(self.convertTo(SPEC[spec]))</span>
@@ -14255,7 +14283,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
         <span class="k">return</span> <span class="n">TextBlock</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">get_text_direction</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">LayoutDirectionStr</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inv</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">textDirection</span><span class="p">()]</span>
+        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">LAYOUT_DIRECTION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">textDirection</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">set_user_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextBlockUserData</span><span class="p">):</span>
@@ -15814,6 +15842,8 @@ the line number (0 based) and the column number (0 based).
 
 
 
+
+
   <div class="doc doc-object doc-class">
 
 
@@ -15946,6 +15976,33 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
 <span class="sd">            cursor move style</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_MOVE_STYLE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">defaultCursorMoveStyle</span><span class="p">()]</span>
+
+    <span class="k">def</span> <span class="nf">set_meta_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">MetaInformationStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set meta information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            info: meta information type</span>
+<span class="sd">            value: value to set</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: meta information type does not exist</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">info</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">META_INFORMATION</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">META_INFORMATION</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setMetaInformation</span><span class="p">(</span><span class="n">META_INFORMATION</span><span class="p">[</span><span class="n">info</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_meta_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">MetaInformationStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return specififed meta information.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            info: meta information type</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            meta information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">info</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">META_INFORMATION</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">META_INFORMATION</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metaInformation</span><span class="p">(</span><span class="n">META_INFORMATION</span><span class="p">[</span><span class="n">info</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">add_resource</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">resource_type</span><span class="p">:</span> <span class="n">ResourceTypeStr</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span> <span class="n">resource</span>
@@ -16143,6 +16200,76 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
 
 
 
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.gui.textdocument.TextDocumentMixin.get_meta_information" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_meta_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">MetaInformationStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return specififed meta information.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>info</code></td>
+        <td><code>MetaInformationStr</code></td>
+        <td><p>meta information type</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>str</code></td>
+      <td><p>meta information</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_meta_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">MetaInformationStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return specififed meta information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        info: meta information type</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        meta information</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">info</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">META_INFORMATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">META_INFORMATION</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metaInformation</span><span class="p">(</span><span class="n">META_INFORMATION</span><span class="p">[</span><span class="n">info</span><span class="p">])</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
 
   <div class="doc doc-object doc-method">
 
@@ -16214,6 +16341,83 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
 
 
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.gui.textdocument.TextDocumentMixin.set_meta_information" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_meta_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">MetaInformationStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Set meta information.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>info</code></td>
+        <td><code>MetaInformationStr</code></td>
+        <td><p>meta information type</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>value</code></td>
+        <td><code>str</code></td>
+        <td><p>value to set</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>InvalidParamError</code></td>
+        <td><p>meta information type does not exist</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/gui/textdocument.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_meta_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">info</span><span class="p">:</span> <span class="n">MetaInformationStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set meta information.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        info: meta information type</span>
+<span class="sd">        value: value to set</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: meta information type does not exist</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">info</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">META_INFORMATION</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">info</span><span class="p">,</span> <span class="n">META_INFORMATION</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setMetaInformation</span><span class="p">(</span><span class="n">META_INFORMATION</span><span class="p">[</span><span class="n">info</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 

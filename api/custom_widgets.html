@@ -4446,8 +4446,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">eventFilter</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
-        <span class="k">match</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
             <span class="k">case</span> <span class="p">(</span>
                 <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Tab</span>
             <span class="p">):</span>
@@ -4680,8 +4679,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/completionwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
-    <span class="k">match</span> <span class="n">key</span><span class="p">:</span>
+    <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
         <span class="k">case</span> <span class="p">(</span>
             <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Tab</span>
         <span class="p">):</span>

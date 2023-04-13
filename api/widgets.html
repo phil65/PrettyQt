@@ -2845,6 +2845,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.listwidgetitem.ListWidgetItem.set_text_alignment" class="md-nav__link">
+    set_text_alignment()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -6819,6 +6826,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.listwidgetitem.ListWidgetItem.set_icon" class="md-nav__link">
     set_icon()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.listwidgetitem.ListWidgetItem.set_text_alignment" class="md-nav__link">
+    set_text_alignment()
   </a>
   
 </li>
@@ -17760,10 +17774,9 @@ FileSystemModel            (<a class="autorefs autorefs-internal" title="prettyq
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">]:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasChildren</span><span class="p">(</span><span class="n">index</span><span class="p">):</span>
             <span class="k">return</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filePath</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-        <span class="n">flags</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QDir</span><span class="o">.</span><span class="n">NoDotAndDotDot</span>
-        <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">core</span><span class="o">.</span><span class="n">DirIterator</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
-            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">it</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_file_path</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">path</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+            <span class="k">yield</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span> <span class="o">/</span> <span class="n">it</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">resolve_sym_links</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">resolve</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setResolveSymlinks</span><span class="p">(</span><span class="n">resolve</span><span class="p">)</span>
@@ -18273,7 +18286,7 @@ FormLayout            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">items</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">)):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="o">*</span><span class="n">i</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_row_wrap_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">RowWrapPolicyStr</span><span class="p">):</span>
@@ -26184,6 +26197,31 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">hint</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="o">*</span><span class="n">hint</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSizeHint</span><span class="p">(</span><span class="n">hint</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">set_text_alignment</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">horizontal</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HorizontalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">vertical</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">VerticalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set text alignment of the checkbox.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            horizontal: horizontal text alignment to use</span>
+<span class="sd">            vertical: vertical text alignment to use</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            InvalidParamError: invalid text alignment</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">match</span> <span class="n">horizontal</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+                <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -26377,6 +26415,94 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
 
   </div>
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.listwidgetitem.ListWidgetItem.set_text_alignment" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_text_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">horizontal</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HorizontalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">VerticalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Set text alignment of the checkbox.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>horizontal</code></td>
+        <td><code>constants.HorizontalAlignmentStr | None</code></td>
+        <td><p>horizontal text alignment to use</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>vertical</code></td>
+        <td><code>constants.VerticalAlignmentStr | None</code></td>
+        <td><p>vertical text alignment to use</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Exceptions:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>InvalidParamError</code></td>
+        <td><p>invalid text alignment</p></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/listwidgetitem.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_text_alignment</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">horizontal</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">HorizontalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">vertical</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">VerticalAlignmentStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Set text alignment of the checkbox.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        horizontal: horizontal text alignment to use</span>
+<span class="sd">        vertical: vertical text alignment to use</span>
+
+<span class="sd">    Raises:</span>
+<span class="sd">        InvalidParamError: invalid text alignment</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">match</span> <span class="n">horizontal</span><span class="p">,</span> <span class="n">vertical</span><span class="p">:</span>
+        <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">case</span> <span class="kc">None</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">:</span>
+            <span class="n">flag</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">V_ALIGNMENT</span><span class="p">[</span><span class="n">vertical</span><span class="p">]</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">H_ALIGNMENT</span><span class="p">[</span><span class="n">horizontal</span><span class="p">]</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setTextAlignment</span><span class="p">(</span><span class="n">flag</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
