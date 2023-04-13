@@ -49,6 +49,14 @@ FIND_FLAGS = bidict(
 
 FindFlagStr = Literal["backward", "case_sensitive", "whole_words"]
 
+META_INFORMATION = bidict(
+    document_title=QtGui.QTextDocument.MetaInformation.DocumentTitle,
+    document_url=QtGui.QTextDocument.MetaInformation.DocumentUrl,
+    css_media=QtGui.QTextDocument.MetaInformation.CssMedia,
+)
+
+MetaInformationStr = Literal["document_title", "document_url", "css_media"]
+
 
 class TextDocumentMixin(core.ObjectMixin):
     def __getitem__(self, index: int) -> gui.TextBlock:
@@ -164,6 +172,33 @@ class TextDocumentMixin(core.ObjectMixin):
             cursor move style
         """
         return constants.CURSOR_MOVE_STYLE.inverse[self.defaultCursorMoveStyle()]
+
+    def set_meta_information(self, info: MetaInformationStr, value: str):
+        """Set meta information.
+
+        Args:
+            info: meta information type
+            value: value to set
+
+        Raises:
+            InvalidParamError: meta information type does not exist
+        """
+        if info not in META_INFORMATION:
+            raise InvalidParamError(info, META_INFORMATION)
+        self.setMetaInformation(META_INFORMATION[info], value)
+
+    def get_meta_information(self, info: MetaInformationStr) -> str:
+        """Return specififed meta information.
+
+        Args:
+            info: meta information type
+
+        Returns:
+            meta information
+        """
+        if info not in META_INFORMATION:
+            raise InvalidParamError(info, META_INFORMATION)
+        return self.metaInformation(META_INFORMATION[info])
 
     def add_resource(
         self, resource_type: ResourceTypeStr, name: types.PathType, resource

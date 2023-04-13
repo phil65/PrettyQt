@@ -493,6 +493,12 @@ def test_textdocument():
     assert doc.get_default_cursor_move_style() == "logical"
     with pytest.raises(InvalidParamError):
         doc.set_default_cursor_move_style("test")
+    doc.set_meta_information("document_title", "test")
+    assert doc.get_meta_information("document_title") == "test"
+    with pytest.raises(InvalidParamError):
+        doc.set_meta_information("test", "test")
+    with pytest.raises(InvalidParamError):
+        doc.get_meta_information("test")
 
 
 def test_paintdevice():
