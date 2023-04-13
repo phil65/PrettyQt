@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -59,6 +59,9 @@ class TimeZone(QtCore.QTimeZone):
         if locale is None:
             locale = core.Locale()
         return self.displayName(datetime, NAME_TYPE[name_type], locale)
+
+    def get_time_spec(self) -> constants.TimeSpecStr:
+        return constants.TIME_SPEC.inv[self.timeSpec()]
 
     # def get_value(self) -> datetime.datetime:
     #     try:
