@@ -1,3 +1,16 @@
+## v1.5.0 (2023-04-13)
+
+### Feat
+
+- **TimeZone**: add get_time_spec method
+- **TextDocument**: add get/set_meta_information methods
+- **ListWidgetItem**: add set_text_alignment method
+- **DirIterator**: add get_file_path / get_file_info methods
+
+### Fix
+
+- **FileSystemModel**: fix yield_child_indexes method
+
 ## v1.4.2 (2023-04-12)
 
 ### Fix
