@@ -92,6 +92,31 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             hint = QtCore.QSize(*hint)
         self.setSizeHint(hint)
 
+    def set_text_alignment(
+        self,
+        horizontal: constants.HorizontalAlignmentStr | None = None,
+        vertical: constants.VerticalAlignmentStr | None = None,
+    ):
+        """Set text alignment of the checkbox.
+
+        Args:
+            horizontal: horizontal text alignment to use
+            vertical: vertical text alignment to use
+
+        Raises:
+            InvalidParamError: invalid text alignment
+        """
+        match horizontal, vertical:
+            case None, None:
+                return
+            case None, _:
+                flag = constants.V_ALIGNMENT[vertical]
+            case _, None:
+                flag = constants.H_ALIGNMENT[horizontal]
+            case _, _:
+                flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
+        self.setTextAlignment(flag)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
