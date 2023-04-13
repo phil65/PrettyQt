@@ -47,7 +47,6 @@ class TextBlock(QtGui.QTextBlock):
     def get_user_data(self):
         user_data = self.userData()
         if isinstance(user_data, UserData):
-            print(user_data.data)
             return user_data.data
         return user_data
 
