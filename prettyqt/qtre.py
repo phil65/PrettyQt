@@ -45,11 +45,13 @@ class Match(core.RegularExpressionMatch):
         return self.captured(item)
 
     def group(self, *groups: str | int) -> tuple | str:
-        if len(groups) > 1:
-            return tuple(self.captured(i) for i in groups)
-        if len(groups) == 0:
-            return self.captured(0)
-        return self.captured(groups[0])
+        match len(groups):
+            case 0:
+                return self.captured(0)
+            case 1:
+                return self.captured(groups[0])
+            case _:
+                return tuple(self.captured(i) for i in groups)
 
     def groups(self, default=None) -> tuple:
         if self.lastindex is None:

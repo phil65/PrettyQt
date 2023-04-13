@@ -108,7 +108,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         for i in items:
             if isinstance(i, (QtWidgets.QWidget, QtWidgets.QLayout)):
                 self.addRow(i)
-            if isinstance(i, tuple):
+            elif isinstance(i, tuple):
                 self.addRow(*i)
 
     def set_row_wrap_policy(self, policy: RowWrapPolicyStr):

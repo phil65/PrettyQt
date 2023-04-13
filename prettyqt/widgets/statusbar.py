@@ -10,14 +10,15 @@ class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
         self.progress_bar = widgets.ProgressBar()
 
     def __add__(self, other: QtWidgets.QAction | QtWidgets.QWidget) -> StatusBar:
-        if isinstance(other, QtWidgets.QAction):
-            self.addAction(other)
-            return self
-        elif isinstance(other, QtWidgets.QWidget):
-            self.addWidget(other)
-            return self
-        else:
-            raise TypeError(other)
+        match other:
+            case QtWidgets.QAction():
+                self.addAction(other)
+                return self
+            case QtWidgets.QWidget():
+                self.addWidget(other)
+                return self
+            case _:
+                raise TypeError(other)
 
     def setup_default_bar(self) -> None:
         # This is simply to show the bar

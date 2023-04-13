@@ -49,8 +49,7 @@ class CompletionWidget(widgets.ListWidget):
         return super().eventFilter(obj, event)
 
     def keyPressEvent(self, event):
-        key = event.key()
-        match key:
+        match event.key():
             case (
                 QtCore.Qt.Key.Key_Return | QtCore.Qt.Key.Key_Enter | QtCore.Qt.Key.Key_Tab
             ):

@@ -81,15 +81,16 @@ class RegexInput(widgets.Widget):
             self.tb_flags[identifier] = bool(value & flag)
 
     def set_value(self, value: str | Pattern | None):
-        if value is None:
-            self.pattern = ""
-            self.compile_flags = 0
-        elif isinstance(value, str):
-            self.pattern = value
-            self.compile_flags = 0
-        else:
-            self.pattern = value.pattern
-            self.compile_flags = value.flags
+        match value:
+            case None:
+                self.pattern = ""
+                self.compile_flags = 0
+            case str():
+                self.pattern = value
+                self.compile_flags = 0
+            case _:
+                self.pattern = value.pattern
+                self.compile_flags = value.flags
 
     def get_value(self) -> Pattern:
         return re.compile(self.pattern, self.compile_flags)

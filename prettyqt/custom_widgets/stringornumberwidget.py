@@ -41,14 +41,15 @@ class StringOrNumberWidget(widgets.GroupBox):
         return int(val) if val.is_integer() else val
 
     def set_value(self, value: float | str):
-        if isinstance(value, str):
-            self.rb_lineedit.setChecked(True)
-            self.lineedit.set_value(value)
-        elif isinstance(value, (int, float)):
-            self.rb_spinbox.setChecked(True)
-            self.spinbox.set_value(value)
-        else:
-            raise TypeError(f"Invalid Type for set_value: {type(value)}")
+        match value:
+            case str():
+                self.rb_lineedit.setChecked(True)
+                self.lineedit.set_value(value)
+            case int() | float():
+                self.rb_spinbox.setChecked(True)
+                self.spinbox.set_value(value)
+            case _:
+                raise TypeError(f"Invalid Type for set_value: {type(value)}")
 
 
 if __name__ == "__main__":
