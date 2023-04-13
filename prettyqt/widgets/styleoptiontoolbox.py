@@ -32,7 +32,7 @@ class StyleOptionToolBox(widgets.StyleOptionMixin, QtWidgets.QStyleOptionToolBox
         self.selectedPosition = SELECTED_POSITION[position]
 
     def get_selected_position(self) -> SelectedPositionStr:
-        return SELECTED_POSITION.inv[self.selectedPosition]
+        return SELECTED_POSITION.inverse[self.selectedPosition]
 
 
 if __name__ == "__main__":

@@ -12,7 +12,7 @@ class KeyCombination(QtCore.QKeyCombination):
             super().__init__(*args, **kwargs)
 
     def get_key(self) -> constants.KeyStr:
-        return constants.KEY.inv[self.key()]
+        return constants.KEY.inverse[self.key()]
 
     def get_modifiers(self) -> list[constants.KeyboardmodifierStr]:
         return [

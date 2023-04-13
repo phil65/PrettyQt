@@ -142,7 +142,7 @@ class Color(QtGui.QColor):
         return self.lightness() < 128
 
     def get_spec(self) -> SpecStr:
-        return SPEC.inv[self.spec()]
+        return SPEC.inverse[self.spec()]
 
     def convert_to(self, spec: SpecStr) -> Color:
         # return Color(self.convertTo(SPEC[spec]))

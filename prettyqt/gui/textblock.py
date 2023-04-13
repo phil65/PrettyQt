@@ -35,7 +35,7 @@ class TextBlock(QtGui.QTextBlock):
         return TextBlock(self.next())
 
     def get_text_direction(self) -> constants.LayoutDirectionStr:
-        return constants.LAYOUT_DIRECTION.inv[self.textDirection()]
+        return constants.LAYOUT_DIRECTION.inverse[self.textDirection()]
 
     def set_user_data(self, data):
         if isinstance(data, QtGui.QTextBlockUserData):
