@@ -85,8 +85,8 @@ class CustomTitleBar(widgets.Frame):
             self.box.addWidget(widget)
 
         self.setStyleSheet("width: 100%;" "padding: 0;" "margin: 0;")
-        self.setContentsMargins(0, 0, 0, 0)
-        self.box.setContentsMargins(0, 0, 0, 0)
+        self.set_margin(0)
+        self.box.set_margin(0)
         self.box.setSpacing(0)
 
     def mousePressEvent(self, a0: QtGui.QMouseEvent) -> None:
@@ -101,8 +101,8 @@ class FramelessWindow(widgets.Widget):
 
         # Remove window title bar and frame
         self.setWindowFlags(
-            QtCore.Qt.WindowFlag.Window  # type: ignore
-            | QtCore.Qt.WindowFlag.FramelessWindowHint
+            QtCore.Qt.WindowType.Window  # type: ignore
+            | QtCore.Qt.WindowType.FramelessWindowHint
         )
 
         self.title_bar = CustomTitleBar(self)
@@ -113,7 +113,7 @@ class FramelessWindow(widgets.Widget):
         self.main_layout.addWidget(self.title_bar)
         self.main_layout.addWidget(self.main_widget)
 
-        self.main_layout.setContentsMargins(0, 0, 0, 0)
+        self.main_layout.set_margin(0)
         self.main_layout.setSpacing(0)
 
         self.grip_layout = widgets.GridLayout()
@@ -127,7 +127,7 @@ class FramelessWindow(widgets.Widget):
         self.grip_layout.addWidget(EdgeGrip("top_right"), 0, 2)
         self.grip_layout.addWidget(EdgeGrip("bottom_left"), 2, 0)
         self.grip_layout.addWidget(EdgeGrip("bottom_right"), 2, 2)
-        self.grip_layout.setContentsMargins(0, 0, 0, 0)
+        self.grip_layout.set_margin(0)
         self.grip_layout.setSpacing(0)
         self.setLayout(self.grip_layout)
 
@@ -157,12 +157,12 @@ class FramelessWindow(widgets.Widget):
 
     def changeEvent(self, event):
         # not sure if this should be done on non-windows
-        if event.type() == event.WindowStateChange:
+        if event.type() == event.Type.WindowStateChange:
             if self.windowState() & QtCore.Qt.WindowState.WindowMaximized:  # type: ignore
                 margin = abs(self.mapToGlobal(self.rect().topLeft()).y())
-                self.setContentsMargins(margin, margin, margin, margin)
+                self.set_margin(margin)
             else:
-                self.setContentsMargins(0, 0, 0, 0)
+                self.set_margin(0)
 
         return super().changeEvent(event)
 
@@ -237,29 +237,29 @@ class EdgeGrip(widgets.Widget):
         # Sides
         match edges:
             case "top":
-                self.setCursor(QtCore.Qt.SizeVerCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeVerCursor)
                 self.setFixedHeight(self.grip_size)
             case "right":
-                self.setCursor(QtCore.Qt.SizeHorCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeHorCursor)
                 self.setFixedWidth(self.grip_size)
             case "bottom":
-                self.setCursor(QtCore.Qt.SizeVerCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeVerCursor)
                 self.setFixedHeight(self.grip_size)
             case "left":
-                self.setCursor(QtCore.Qt.SizeHorCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeHorCursor)
                 self.setFixedWidth(self.grip_size)
             # Corners
             case "top_left":
-                self.setCursor(QtCore.Qt.SizeFDiagCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeFDiagCursor)
             case "top_right":
-                self.setCursor(QtCore.Qt.SizeBDiagCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeBDiagCursor)
             case "bottom_left":
-                self.setCursor(QtCore.Qt.SizeBDiagCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeBDiagCursor)
             case "bottom_right":
-                self.setCursor(QtCore.Qt.SizeFDiagCursor)
+                self.setCursor(QtCore.Qt.CursorShape.SizeFDiagCursor)
 
     def mousePressEvent(self, event):
-        if event.button() == QtCore.Qt.LeftButton:
+        if event.button() == QtCore.Qt.MouseButton.LeftButton:
             self.parent().windowHandle().startSystemResize(self.edges)
 
 
