@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 from typing import Literal
 
 from prettyqt import constants, core, widgets
@@ -44,7 +45,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout | None]:
         return iter(self[i] for i in range(self.count()))
 
     def __contains__(self, item: QtWidgets.QWidget | QtWidgets.QLayoutItem):
@@ -91,7 +92,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         self,
         alignment: constants.AlignmentStr,
         item: QtWidgets.QWidget | QtWidgets.QLayout | None = None,
-    ):
+    ) -> bool:
         """Set the alignment for widget / layout to alignment.
 
         Returns true if w is found in this layout (not including child layouts).

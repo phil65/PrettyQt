@@ -25,7 +25,7 @@ class JSEngineMixin(core.ObjectMixin):
     def new_array(self, length: int = 0) -> qml.JSValue:
         return qml.JSValue(self.newArray(length))
 
-    def eval(self, program: str):
+    def eval(self, program: str) -> qml.JSValue:
         result = self.evaluate(program)
         return qml.JSValue(result)  # type: ignore
 

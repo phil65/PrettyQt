@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
@@ -47,7 +47,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout]:
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __add__(

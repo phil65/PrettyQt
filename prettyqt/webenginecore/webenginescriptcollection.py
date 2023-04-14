@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
+
 from prettyqt.qt import QtWebEngineCore
 
 
@@ -16,7 +18,7 @@ class WebEngineScriptCollection:
     def __len__(self):
         return self.item.count()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWebEngineCore.QWebEngineScript]:
         return iter(self.item.toList())
 
     def __contains__(self, other: QtWebEngineCore.QWebEngineScript):

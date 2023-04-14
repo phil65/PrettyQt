@@ -30,7 +30,7 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
         for k, v in other.items():
             self.insert(k, v)
 
-    def items(self):
+    def items(self) -> list[tuple[str, str]]:
         return list(self)
 
     @classmethod
@@ -47,4 +47,4 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
 
 if __name__ == "__main__":
     env = ProcessEnvironment.get_system_environment()
-    print(dict(env))
+    print(env.items())

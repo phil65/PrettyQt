@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 from typing import Literal
 
 from prettyqt import widgets
@@ -56,7 +57,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
     def __delitem__(self, index: int):
         self.removeRow(index)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout]:
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __len__(self) -> int:

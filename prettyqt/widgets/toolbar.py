@@ -45,7 +45,7 @@ class ToolBarMixin(widgets.WidgetMixin):
         return btn
 
     def add_separator(
-        self, text: str | None = None, before: QtWidgets.QAction = None
+        self, text: str | None = None, before: QtWidgets.QAction | None = None
     ) -> QtWidgets.QAction:
         """Adds a separator showing an optional label.
 

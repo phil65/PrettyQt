@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Literal
 
 from prettyqt import qml
 from prettyqt.qt import QtQml
@@ -8,6 +9,8 @@ from prettyqt.utils import bidict
 
 
 logger = logging.getLogger()
+
+ErrorTypeStr = Literal["generic", "range", "reference", "syntax", "type", "uri"]
 
 ERROR_TYPES = bidict(
     generic=QtQml.QJSValue.ErrorType.GenericError,
@@ -49,12 +52,12 @@ class JSValue(QtQml.QJSValue):
     def get_value(self):
         return self.toVariant()
 
-    def get_error_type(self) -> str | None:
+    def get_error_type(self) -> ErrorTypeStr | None:
         error_type = self.errorType()
         return ERROR_TYPES.inverse.get(error_type)
 
     @classmethod
-    def from_object(cls, obj, jsengine) -> JSValue:
+    def from_object(cls, obj, jsengine: QtQml.QJSEngine) -> JSValue:
         """Convert any python object into a QJSValue (must happen in GUI thread)."""
         match obj:
             case None:

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
 
 
 class NestedItem:
@@ -21,15 +21,15 @@ class NestedItem:
         if children:
             self.add_children(children)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[NestedItem]:
         return iter(self.children)
 
-    def add_children(self, children: Iterable):
+    def add_children(self, children: Iterable[NestedItem]):
         for child in children:
             child.parent = self
         self.children.extend(children)
 
-    def append_child(self, item):
+    def append_child(self, item: NestedItem):
         self.children.append(item)
 
     def child(self, row: int) -> NestedItem:

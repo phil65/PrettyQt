@@ -20,7 +20,7 @@ class UrlQuery(QtCore.QUrlQuery):
             self.addQueryItem(k, str(v))
         return self
 
-    def serialize_fields(self):
+    def serialize_fields(self) -> dict[str, Any]:
         return dict(path=self.toString())
 
     def serialize(self) -> dict[str, Any]:
