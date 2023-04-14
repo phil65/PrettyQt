@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import InvalidParamError, bidict
 
 
 STRING_FORMATS = bidict(
@@ -60,6 +60,21 @@ class UuidMixin:
     def create_uuid(cls) -> Uuid:
         # workaround for PySide2, not able to clone in ctor
         return cls(cls.createUuid().toString())
+
+    def to_string(self, fmt: StringFormatStr = "with_braces") -> str:
+        """Return string representation of the Uuid.
+
+        Allowed values are "with_braces", "without_braces", "id_128"
+
+        Args:
+            fmt: Uuid format to use
+
+        Raises:
+            InvalidParamError: Uuid format does not exist
+        """
+        if fmt not in STRING_FORMATS:
+            raise InvalidParamError(fmt, STRING_FORMATS)
+        return self.toString(STRING_FORMATS[fmt])
 
 
 class Uuid(UuidMixin, QtCore.QUuid):
