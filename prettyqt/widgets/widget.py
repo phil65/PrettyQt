@@ -553,6 +553,19 @@ class WidgetMixin(core.ObjectMixin):
             return None
         return gui.Screen(window.screen())
 
+    def delete_children(self):
+        """Delete all children of the specified QObject."""
+        if hasattr(self, "clear"):
+            return self.clear()
+        layout = self.layout()
+        while layout.count():
+            item = layout.takeAt(0)
+            widget = item.widget()
+            if widget:
+                widget.deleteLater()
+            else:
+                self.delete_children(item.layout())
+
 
 class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     pass
