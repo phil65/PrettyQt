@@ -1,3 +1,18 @@
+## v1.6.0 (2023-04-16)
+
+### Feat
+
+- **Widget**: add delete_children method
+- **Url**: add is_special_url and _has_explicit_scheme methods
+- **Application**: add set_style method
+- **Scrollbar**: add scroll_to_next/previous_row methods
+- **Uuid**: add to_string method
+
+### Fix
+
+- **Application**: correct icon colors for new Qt built in dark mode (when using Fusion theme)
+- **ChartView**: correct cursor shape for dragging movements
+
 ## v1.5.0 (2023-04-13)
 
 ### Feat
