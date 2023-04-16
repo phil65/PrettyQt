@@ -19,6 +19,13 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
         super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
 
+    def scroll_to_next_row(self):
+        """Scroll to the next row."""
+        self.setValue(self.value() + self.singleStep())
+
+    def scroll_to_previous_row(self):
+        """Scroll to the previous row."""
+        self.setValue(self.value() - self.singleStep())
 
 class ScrollBar(ScrollBarMixin, QtWidgets.QScrollBar):
     pass
