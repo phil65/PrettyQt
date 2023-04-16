@@ -6,6 +6,7 @@ import logging
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -114,7 +115,7 @@ class ColumnItem:
         raise ValueError(self.width)
 
 
-class ColumnItemModel(core.AbstractItemModel):
+class ColumnItemModelMixin:
     """Model that provides an interface to an objectree that is build of TreeItems."""
 
     def __init__(
@@ -129,13 +130,19 @@ class ColumnItemModel(core.AbstractItemModel):
         """Return the number of columns in the tree."""
         return len(self._attr_cols)
 
+    def tree_item(self, index: core.ModelIndex) -> treeitem.TreeItem:
+        if not index.isValid():
+            return None
+        else:
+            return index.internalPointer()  # type: ignore
+
     def data(self, index, role):
         """Return the tree item at the given index and role."""
         if not index.isValid():
             return None
 
         col = index.column()
-        tree_item = index.internalPointer()
+        tree_item = self.tree_item(index)
 
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
@@ -167,6 +174,14 @@ class ColumnItemModel(core.AbstractItemModel):
             return self._attr_cols[section].name
         else:
             return None
+
+
+class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
+    pass
+
+
+class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
+    pass
 
 
 if __name__ == "__main__":

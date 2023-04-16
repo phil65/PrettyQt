@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import math
 
-from prettyqt import constants, core, custom_models
+from prettyqt import core, custom_models
 from prettyqt.qt import QtCore
 
 
@@ -24,151 +24,99 @@ def size_to_string(size: int) -> str:
     return "%0.*f %s" % (decimals, normsize, unit)
 
 
-class StorageInfoModel(core.AbstractTableModel):
-    (
-        ColumnRootPath,
-        ColumnName,
-        ColumnDevice,
-        ColumnFileSystemName,
-        ColumnTotal,
-        ColumnFree,
-        ColumnAvailable,
-        ColumnIsReady,
-        ColumnIsReadOnly,
-        ColumnIsValid,
-        ColumnCount,
-    ) = range(11)
-
-    columnFuncMap = {
-        ColumnRootPath: lambda volume: str(volume.get_root_path()),
-        ColumnName: lambda volume: volume.name(),
-        ColumnDevice: lambda volume: volume.get_device(),
-        ColumnFileSystemName: lambda volume: volume.get_file_system_type(),
-        ColumnTotal: lambda volume: size_to_string(volume.bytesTotal()),
-        ColumnFree: lambda volume: size_to_string(volume.bytesFree()),
-        ColumnAvailable: lambda volume: size_to_string(volume.bytesAvailable()),
-        ColumnIsReady: lambda volume: volume.isReady(),
-        ColumnIsReadOnly: lambda volume: volume.isReadOnly(),
-        ColumnIsValid: lambda volume: volume.isValid(),
-    }
-
-    columnNameMap = {
-        ColumnRootPath: "Root path",
-        ColumnName: "Volume Name",
-        ColumnDevice: "Device",
-        ColumnFileSystemName: "File system",
-        ColumnTotal: "Total",
-        ColumnFree: "Free",
-        ColumnAvailable: "Available",
-        ColumnIsReady: "Ready",
-        ColumnIsReadOnly: "Read-only",
-        ColumnIsValid: "Valid",
-    }
-
-    def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)
-        self.volumes = core.StorageInfo.get_mounted_volumes()
-
-    def columnCount(self, parent=None):
-        return self.ColumnCount
-
-    def rowCount(self, parent):
-        return 0 if parent.isValid() else len(self.volumes)
-
-    def data(self, index, role):
-        if not index.isValid():
-            return None
-        match role:
-            case constants.DISPLAY_ROLE:
-                volume = self.volumes[index.row()]
-                func = self.columnFuncMap.get(index.column())
-                if func is not None:
-                    return func(volume)
-
-            case constants.TOOLTIP_ROLE:
-                volume = self.volumes[index.row()]
-                tooltip = []
-                for column in range(self.ColumnCount):
-                    label = self.columnNameMap.get(column)
-                    value = self.columnFuncMap[column](volume)
-                    tooltip.append(f"{label}: {value}")
-                return "\n".join(tooltip)
-
-    def headerData(self, section, orientation, role):
-        if orientation != constants.HORIZONTAL:
-            return None
-        if role != constants.DISPLAY_ROLE:
-            return None
-        return self.columnNameMap.get(section)
-
-
-column_root_path = custom_models.ColumnItem(
+COL_ROOT_PATH = custom_models.ColumnItem(
     name="Root path",
     doc="Root path",
     label=lambda volume: str(volume.get_root_path()),
 )
 
-column_volume_name = custom_models.ColumnItem(
+COL_VOLUME_NAME = custom_models.ColumnItem(
     name="Volume name",
     doc="Volume name",
     label=lambda volume: volume.name(),
 )
 
-column_volume_name = custom_models.ColumnItem(
-    name="Volume name",
-    doc="Volume name",
-    label=lambda volume: volume.name(),
-)
-
-column_volume_name = custom_models.ColumnItem(
-    name="Volume name",
-    doc="Volume name",
-    label=lambda volume: volume.name(),
-)
-
-column_device = custom_models.ColumnItem(
+COL_DEVICE = custom_models.ColumnItem(
     name="Device",
     doc="Device",
     label=lambda volume: volume.get_device(),
 )
 
-column_file_system_name = custom_models.ColumnItem(
+COL_FILE_SYSTEM = custom_models.ColumnItem(
     name="File system",
     doc="File system",
     label=lambda volume: volume.get_file_system_type(),
 )
 
-column_total = custom_models.ColumnItem(
+COL_TOTAL = custom_models.ColumnItem(
     name="Total",
     doc="Total",
     label=lambda volume: size_to_string(volume.bytesTotal()),
 )
 
-column_free = custom_models.ColumnItem(
+COL_FREE = custom_models.ColumnItem(
     name="Free",
     doc="Free",
     label=lambda volume: size_to_string(volume.bytesFree()),
 )
 
-column_available = custom_models.ColumnItem(
+COL_AVAILABLE = custom_models.ColumnItem(
     name="Available",
     doc="Available",
     label=lambda volume: size_to_string(volume.bytesAvailable()),
 )
 
-column_ready = custom_models.ColumnItem(
+COL_READY = custom_models.ColumnItem(
     name="Available",
     doc="Available",
     label=None,
     checkstate=lambda volume: volume.isReady(),
 )
 
-column_readonly = custom_models.ColumnItem(
+COL_READ_ONLY = custom_models.ColumnItem(
     name="Read-only",
     doc="Read-only",
     label=None,
     checkstate=lambda volume: volume.isReadOnly(),
 )
+
+COL_VALID = custom_models.ColumnItem(
+    name="Valid",
+    doc="Valid",
+    label=None,
+    checkstate=lambda volume: volume.isValid(),
+)
+
+COLUMNS = [
+    COL_ROOT_PATH,
+    COL_VOLUME_NAME,
+    COL_DEVICE,
+    COL_FILE_SYSTEM,
+    COL_TOTAL,
+    COL_FREE,
+    COL_AVAILABLE,
+    COL_READY,
+    COL_READ_ONLY,
+    COL_VALID,
+]
+
+
+class StorageInfoModel(custom_models.ColumnTableModel):
+    def __init__(
+        self,
+        parent: QtCore.QObject | None = None,
+    ):
+        super().__init__(COLUMNS, parent)
+        self.volumes = core.StorageInfo.get_mounted_volumes()
+
+    def rowCount(self, parent=None):
+        if parent is None:
+            return 0
+        return len(self.volumes)
+
+    def tree_item(self, index: core.ModelIndex) -> core.StorageInfo:
+        return self.volumes[index.row()]
+
 
 if __name__ == "__main__":
     import sys

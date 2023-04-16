@@ -6,7 +6,7 @@ Contains custom models
 from .selectionmixin import SelectionMixin
 from .importlibdistributionmodel import ImportlibDistributionModel
 from .regexmatchesmodel import RegexMatchesModel
-from .columnitemmodel import ColumnItemModel, ColumnItem
+from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
 from .listmixin import ListMixin
 from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
@@ -18,6 +18,7 @@ __all__ = [
     "ImportlibDistributionModel",
     "RegexMatchesModel",
     "ColumnItemModel",
+    "ColumnTableModel",
     "ListMixin",
     "ModelMixin",
     "ColumnItem",

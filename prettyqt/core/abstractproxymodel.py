@@ -5,7 +5,13 @@ from prettyqt.qt import QtCore
 
 
 class AbstractProxyModelMixin(core.AbstractItemModelMixin):
-    pass
+    def first_item_index(self) -> core.ModelIndex:
+        """Return the first child of the root item."""
+        # We cannot just call the same function of the source model because the first node
+        # there may be hidden.
+        proxy_root_index = self.mapFromSource(core.ModelIndex())
+        first_item_index = self.index(0, 0, proxy_root_index)
+        return first_item_index
 
 
 class AbstractProxyModel(AbstractProxyModelMixin, QtCore.QAbstractProxyModel):

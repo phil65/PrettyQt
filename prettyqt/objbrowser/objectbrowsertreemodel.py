@@ -13,7 +13,7 @@ import inspect
 import logging
 from typing import Any
 
-from prettyqt import constants, core, custom_models
+from prettyqt import core, custom_models
 from prettyqt.qt import QtCore
 from prettyqt.utils import helpers, treeitem
 
@@ -102,11 +102,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             # Fetch all items of the root so we can select the first row in the ctor.
             root_index = self.index(0, 0)
             self.fetchMore(root_index)
-
-    def flags(self, index: core.ModelIndex):
-        if not index.isValid():
-            return constants.NO_CHILDREN
-        return constants.IS_ENABLED | constants.IS_SELECTABLE  # type: ignore
 
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
@@ -409,15 +404,6 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
     def tree_item(self, proxy_index: core.ModelIndex) -> ObjectBrowserTreeItem:
         index = self.mapToSource(proxy_index)
         return self.sourceModel().tree_item(index)
-
-    def first_item_index(self) -> core.ModelIndex:
-        """Return the first child of the root item."""
-        # We cannot just call the same function of the source model because the first node
-        # there may be hidden.
-        source_root_index = self.sourceModel().root_index()
-        proxy_root_index = self.mapFromSource(source_root_index)
-        first_item_index = self.index(0, 0, proxy_root_index)
-        return first_item_index
 
     def filterAcceptsRow(self, source_row: int, source_parent_index: core.ModelIndex):
         """Return true if the item should be included in the model."""
