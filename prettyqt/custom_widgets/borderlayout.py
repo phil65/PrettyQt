@@ -24,7 +24,7 @@ class BorderLayout(widgets.Layout):
         East = 3
         Center = 4
 
-    QtCore.QEnum(Position)
+    core.Enum(Position)
 
     def __init__(
         self,
