@@ -91,8 +91,6 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
             self.last_mouse_pos = event.position()
             event.accept()
 
-            widgets.Application.restoreOverrideCursor()
-
         super().mouseMoveEvent(event)
 
     @core.Slot()
