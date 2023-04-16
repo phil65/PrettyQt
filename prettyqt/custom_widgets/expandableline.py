@@ -64,7 +64,7 @@ class ExpandableLine(widgets.Widget):
 
     def set_layout(
         self,
-        layout: str | QtWidgets.QLayout | None,
+        layout: widgets.widget.LayoutStr | QtWidgets.QLayout | None,
         margin: int | None = None,
         spacing: int | None = None,
     ) -> None:
