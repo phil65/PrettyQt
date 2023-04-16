@@ -124,6 +124,21 @@ class Url(QtCore.QUrl):
         url = cls.fromLocalFile(os.fspath(path))
         return cls(url)
 
+    def _has_explicit_scheme(self) -> bool:
+        """Check if a url has an explicit scheme given."""
+        return bool(
+            self.isValid()
+            and self.scheme()
+            and (self.host() or self.path())
+            and not self.path().startswith(":")
+        )
+
+    def is_special_url(self) -> bool:
+        """Return True if url is an about:... or other special URL."""
+        if not self.isValid():
+            return False
+        return self.scheme() in ("about", "file")
+
 
 if __name__ == "__main__":
     url = Url()
