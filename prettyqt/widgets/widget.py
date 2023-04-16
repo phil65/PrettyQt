@@ -314,6 +314,23 @@ class WidgetMixin(core.ObjectMixin):
             ss.backgroundColor.setValue(col_str)
 
     @contextlib.contextmanager
+    def grab_mouse_events(
+        self, cursor_shape: constants.CursorShapeStr | None = None
+    ) -> Iterator[None]:
+        if cursor_shape is not None:
+            self.grabMouse(constants.CURSOR_SHAPE[cursor_shape])
+        else:
+            self.grabMouse()
+        yield None
+        self.releaseMouse()
+
+    @contextlib.contextmanager
+    def grab_keyboard_events(self) -> Iterator[None]:
+        self.grabKeyboard()
+        yield None
+        self.releaseKeyboard()
+
+    @contextlib.contextmanager
     def updates_off(self) -> Iterator[None]:
         updates = self.updatesEnabled()
         self.setUpdatesEnabled(False)
