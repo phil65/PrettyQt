@@ -60,10 +60,9 @@ class PixmapMixin(gui.PaintDeviceMixin):
     def rotated(self, rotation: int) -> Pixmap:
         w, h = self.width(), self.height()
         pixmap = self.transformed(gui.Transform().rotate(rotation))
-        new_w, new_h = pixmap.width(), pixmap.height()
-        return pixmap.copy((new_w - w) // 2, (new_h - h) // 2, w, h)
+        return pixmap.copy((pixmap.width() - w) // 2, (pixmap.height() - h) // 2, w, h)
 
-    def get_image_data_url(self):
+    def get_image_data_url(self) -> str:
         """Render the contents of the pixmap as a data URL (RFC-2397).
 
         Returns:
@@ -117,25 +116,24 @@ class PixmapMixin(gui.PaintDeviceMixin):
         color: types.ColorType = "white",
     ):
         pixmap = cls(size, size)
-        pixmap.fill(QtCore.Qt.transparent)
+        pixmap.fill(QtCore.Qt.GlobalColor.transparent)
         with gui.Painter(pixmap) as painter:
             painter.setRenderHints(
-                painter.Antialiasing
-                | painter.TextAntialiasing
-                | painter.SmoothPixmapTransform
+                painter.RenderHint.Antialiasing
+                | painter.RenderHint.TextAntialiasing
+                | painter.RenderHint.SmoothPixmapTransform
             )
-            bg_color = colors.get_color(background)
-            painter.setPen(bg_color)
-            painter.setBrush(bg_color)
+            painter.set_pen(background)
+            painter.set_brush(background)
             margin = 1 + size // 16
             text_margin = size // 20
-            rect = QtCore.QRectF(margin, margin, size - 2 * margin, size - 2 * margin)
-            painter.drawRoundedRect(rect, 30.0, 30.0, QtCore.Qt.RelativeSize)
-            painter.setPen(colors.get_color(color))
-            font = painter.font()  # type: QtGui.QFont
-            font.setPixelSize(size - 2 * margin - 2 * text_margin)
-            painter.setFont(font)
-            painter.drawText(rect, QtCore.Qt.AlignCenter, char)
+            w = size - 2 * margin
+            rect = core.Rect(margin, margin, w, w)
+            painter.draw_rounded_rect(rect, 30, 30, relative=True)
+            painter.set_pen(color)
+            with painter.edit_font() as font:  # type: QtGui.QFont
+                font.setPixelSize(size - 2 * margin - 2 * text_margin)
+            painter.draw_text(rect, char, alignment="center")
         return pixmap
 
 
