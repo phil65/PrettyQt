@@ -83,6 +83,25 @@ class PainterMixin:
         yield pen
         self.setPen(pen)
 
+    @contextlib.contextmanager
+    def edit_font(self) -> Iterator[gui.Font]:
+        font = gui.Font(self.font())
+        yield font
+        self.setFont(font)
+
+    def draw_text(
+        self,
+        position: types.PointType | types.RectType | types.RectFType,
+        text: str,
+        alignment: constants.AlignmentStr = "center",
+    ):
+        match position:
+            case (_, _):
+                position = core.Point(*position)
+            case (_, _, _, _):
+                position = core.RectF(*position)
+        self.drawText(position, text, constants.ALIGNMENTS[alignment])
+
     def draw_image(
         self,
         target: QtCore.QPoint | QtCore.QPointF | QtCore.QRect | QtCore.QRectF,
@@ -101,6 +120,22 @@ class PainterMixin:
         if fill_rule not in constants.FILL_RULE:
             raise InvalidParamError(fill_rule, constants.FILL_RULE)
         self.drawPolygon(points, fillRule=constants.FILL_RULE[fill_rule])  # type: ignore
+
+    def draw_rounded_rect(
+        self,
+        rect: types.RectType | types.RectFType,
+        x_radius: float,
+        y_radius: float,
+        relative: bool = False,
+    ):
+        flag = (
+            QtCore.Qt.SizeMode.RelativeSize
+            if relative
+            else QtCore.Qt.SizeMode.AbsoluteSize
+        )
+        if isinstance(rect, tuple):
+            rect = QtCore.QRectF(*rect)
+        self.drawRoundedRect(rect, flag)
 
     def use_antialiasing(self):
         self.setRenderHint(self.RenderHint.Antialiasing, True)
@@ -246,3 +281,4 @@ class Painter(PainterMixin, QtGui.QPainter):
 
 if __name__ == "__main__":
     painter = Painter()
+    painter.draw_text((0, 0, 1, 1), "aaa")
