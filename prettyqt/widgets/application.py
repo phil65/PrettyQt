@@ -138,13 +138,15 @@ class ApplicationMixin(gui.GuiApplicationMixin):
 
     def set_theme(self, theme: constants.ThemeStr):
         self.set_palette(theme)
-        if theme == "default":
-            self.set_stylesheet("")
-            iconprovider.set_defaults(color="black")
-        elif theme == "dark":
-            ss = (paths.THEMES_PATH / "darktheme.qss").read_text()
-            self.set_stylesheet(ss)
-            iconprovider.set_defaults(color="lightblue")
+        match theme:
+            case "default":
+                self.set_stylesheet("")
+                color = self.get_palette().get_color("highlighted_text")
+            case "dark":
+                ss = (paths.THEMES_PATH / "darktheme.qss").read_text()
+                self.set_stylesheet(ss)
+                color = gui.Color("lightblue")
+        iconprovider.set_defaults(color=color)
 
     @classmethod
     def get_available_themes(cls) -> dict[constants.ThemeStr, str]:

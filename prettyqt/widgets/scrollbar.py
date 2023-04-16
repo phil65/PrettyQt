@@ -27,5 +27,6 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
         """Scroll to the previous row."""
         self.setValue(self.value() - self.singleStep())
 
+
 class ScrollBar(ScrollBarMixin, QtWidgets.QScrollBar):
     pass
