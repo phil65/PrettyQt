@@ -540,6 +540,15 @@ class WidgetMixin(core.ObjectMixin):
             return None
         return pathlib.Path(path)
 
+    def get_image(self) -> QtGui.QPixmap:
+        image = self.grab()
+        if gl_widget := self.find_child(QtWidgets.QOpenGLWidget):
+            d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
+            with gui.Painter(image) as painter:
+                painter.set_composition_mode("source_atop")
+                painter.drawImage(d, gl_widget.grabFramebuffer())
+        return image
+
     def get_screen(self) -> gui.Screen | None:
         window = self.window().windowHandle()
         if window is None:

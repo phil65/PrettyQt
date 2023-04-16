@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import charts, core, gui, widgets
-from prettyqt.qt import QtCharts, QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtCharts, QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -106,15 +106,6 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
         image = self.get_image()
         image.save(str(filename[0]))
         self.chart().hide_legend()
-
-    def get_image(self) -> QtGui.QPixmap:
-        image = self.grab()
-        if gl_widget := self.find_child(QtWidgets.QOpenGLWidget):
-            d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
-            with gui.Painter(image) as painter:
-                painter.set_composition_mode("source_atop")
-                painter.drawImage(d, gl_widget.grabFramebuffer())
-        return image
 
     def set_rubber_band(self, typ: RubberBandStr):
         """Set the rubber band type.
