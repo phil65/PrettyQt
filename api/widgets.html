@@ -3236,6 +3236,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar" class="md-nav__link">
+    scrollbar
+  </a>
+  
+    <nav class="md-nav" aria-label="scrollbar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar.ScrollBarMixin" class="md-nav__link">
+    ScrollBarMixin
+  </a>
+  
+    <nav class="md-nav" aria-label="ScrollBarMixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar.ScrollBarMixin.scroll_to_next_row" class="md-nav__link">
+    scroll_to_next_row()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar.ScrollBarMixin.scroll_to_previous_row" class="md-nav__link">
+    scroll_to_previous_row()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.widgets.scroller" class="md-nav__link">
     scroller
   </a>
@@ -4240,6 +4280,13 @@
   
     <nav class="md-nav" aria-label="WidgetMixin">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.WidgetMixin.delete_children" class="md-nav__link">
+    delete_children()
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.WidgetMixin.get_context_menu_policy" class="md-nav__link">
@@ -7221,6 +7268,46 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar" class="md-nav__link">
+    scrollbar
+  </a>
+  
+    <nav class="md-nav" aria-label="scrollbar">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar.ScrollBarMixin" class="md-nav__link">
+    ScrollBarMixin
+  </a>
+  
+    <nav class="md-nav" aria-label="ScrollBarMixin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar.ScrollBarMixin.scroll_to_next_row" class="md-nav__link">
+    scroll_to_next_row()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.scrollbar.ScrollBarMixin.scroll_to_previous_row" class="md-nav__link">
+    scroll_to_previous_row()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.widgets.scroller" class="md-nav__link">
     scroller
   </a>
@@ -8225,6 +8312,13 @@
   
     <nav class="md-nav" aria-label="WidgetMixin">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.widget.WidgetMixin.delete_children" class="md-nav__link">
+    delete_children()
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.widget.WidgetMixin.get_context_menu_policy" class="md-nav__link">
@@ -13326,18 +13420,25 @@ ApplicationMixin            (<a class="autorefs autorefs-internal" title="pretty
             <span class="n">ss</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ss</span><span class="p">))</span>
 
+    <span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyle</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QStyleFactory</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">style</span><span class="p">))</span>
+        <span class="n">icon_color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;highlighted_text&quot;</span><span class="p">)</span>
+        <span class="n">iconprovider</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">icon_color</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="nf">get_stylesheet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">styleSheet</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">set_theme</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">theme</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ThemeStr</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_palette</span><span class="p">(</span><span class="n">theme</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">theme</span> <span class="o">==</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-            <span class="n">iconprovider</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">theme</span> <span class="o">==</span> <span class="s2">&quot;dark&quot;</span><span class="p">:</span>
-            <span class="n">ss</span> <span class="o">=</span> <span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">THEMES_PATH</span> <span class="o">/</span> <span class="s2">&quot;darktheme.qss&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
-            <span class="n">iconprovider</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="s2">&quot;lightblue&quot;</span><span class="p">)</span>
+        <span class="k">match</span> <span class="n">theme</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;default&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;highlighted_text&quot;</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;dark&quot;</span><span class="p">:</span>
+                <span class="n">ss</span> <span class="o">=</span> <span class="p">(</span><span class="n">paths</span><span class="o">.</span><span class="n">THEMES_PATH</span> <span class="o">/</span> <span class="s2">&quot;darktheme.qss&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+                <span class="n">color</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="s2">&quot;lightblue&quot;</span><span class="p">)</span>
+        <span class="n">iconprovider</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_available_themes</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="n">constants</span><span class="o">.</span><span class="n">ThemeStr</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
@@ -13688,6 +13789,7 @@ ApplicationMixin            (<a class="autorefs autorefs-internal" title="pretty
     </div>
 
   </div>
+
 
 
 
@@ -18234,7 +18336,7 @@ FormLayout            (<a class="autorefs autorefs-internal" title="prettyqt.wid
     <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">removeRow</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">())</span> <span class="k">if</span> <span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -23672,7 +23774,7 @@ LayoutMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span> <span class="o">|</span> <span class="kc">None</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span><span class="p">):</span>
@@ -23719,7 +23821,7 @@ LayoutMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span><span class="p">,</span>
         <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the alignment for widget / layout to alignment.</span>
 
 <span class="sd">        Returns true if w is found in this layout (not including child layouts).</span>
@@ -23823,7 +23925,7 @@ LayoutMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
 
 <h4 id="prettyqt.widgets.layout.LayoutMixin.set_alignment" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_alignment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
 
 
 </h4>
@@ -23879,7 +23981,7 @@ LayoutMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span><span class="p">,</span>
     <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the alignment for widget / layout to alignment.</span>
 
 <span class="sd">    Returns true if w is found in this layout (not including child layouts).</span>
@@ -29827,6 +29929,163 @@ ProgressBar            (<a class="autorefs autorefs-internal" title="prettyqt.wi
 
 
 
+  <div class="doc doc-object doc-module">
+
+
+
+<h2 id="prettyqt.widgets.scrollbar" class="doc doc-heading">
+        <code>scrollbar</code>
+
+
+
+</h2>
+
+    <div class="doc doc-contents ">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="prettyqt.widgets.scrollbar.ScrollBarMixin" class="doc doc-heading">
+        <code>
+ScrollBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.abstractslider.AbstractSliderMixin" href="#prettyqt.widgets.abstractslider.AbstractSliderMixin">AbstractSliderMixin</a>)
+        </code>
+
+
+
+</h3>
+
+    <div class="doc doc-contents ">
+
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/scrollbar.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ScrollBarMixin</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">AbstractSliderMixin</span><span class="p">):</span>
+    <span class="n">value_changed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">orientation</span><span class="p">:</span> <span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">OrientationStr</span><span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">orientation</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="p">):</span>
+            <span class="n">ori</span> <span class="o">=</span> <span class="n">orientation</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">ori</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ORIENTATION</span><span class="p">[</span><span class="n">orientation</span><span class="p">]</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">ori</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valueChanged</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">on_value_change</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">scroll_to_next_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scroll to the next row.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">scroll_to_previous_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Scroll to the previous row.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.scrollbar.ScrollBarMixin.scroll_to_next_row" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">scroll_to_next_row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Scroll to the next row.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/scrollbar.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">scroll_to_next_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scroll to the next row.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.scrollbar.ScrollBarMixin.scroll_to_previous_row" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">scroll_to_previous_row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Scroll to the previous row.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/scrollbar.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">scroll_to_previous_row</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Scroll to the previous row.&quot;&quot;&quot;</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">singleStep</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
 
   <div class="doc doc-object doc-module">
 
@@ -35438,7 +35697,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
         <span class="k">return</span> <span class="n">btn</span>
 
     <span class="k">def</span> <span class="nf">add_separator</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">before</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">before</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Adds a separator showing an optional label.</span>
 
@@ -35566,7 +35825,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
 
 
 <h4 id="prettyqt.widgets.toolbar.ToolBarMixin.add_separator" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">before</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span></code>
+<code class="codehilite language-python"><span class="n">add_separator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">before</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span></code>
 
 
 </h4>
@@ -35594,7 +35853,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
       </tr>
       <tr>
         <td><code>before</code></td>
-        <td><code>QtWidgets.QAction</code></td>
+        <td><code>QtWidgets.QAction | None</code></td>
         <td><p>insert separator before specific action</p></td>
         <td><code>None</code></td>
       </tr>
@@ -35618,7 +35877,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbar.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add_separator</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">before</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">before</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Adds a separator showing an optional label.</span>
 
@@ -37187,7 +37446,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">windowIcon</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
             <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windowIcon</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_min_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">size</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setMinimumSize</span><span class="p">(</span><span class="o">*</span><span class="n">size</span><span class="p">)</span>
@@ -37400,11 +37659,14 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     <span class="k">def</span> <span class="nf">set_stylesheet</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">ss</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span>
     <span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
-            <span class="n">ss</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">ss</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">ss</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ss</span><span class="p">))</span>
+        <span class="k">match</span> <span class="n">ss</span><span class="p">:</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">ss</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">case</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">():</span>
+                <span class="n">ss</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
+            <span class="k">case</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span><span class="p">():</span>
+                <span class="n">ss</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_stylesheet</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
@@ -37498,10 +37760,8 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="k">if</span> <span class="n">layout</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span>
         <span class="k">match</span> <span class="n">layout</span><span class="p">:</span>
-            <span class="k">case</span> <span class="s2">&quot;horizontal&quot;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">BoxLayout</span><span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
-            <span class="k">case</span> <span class="s2">&quot;vertical&quot;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">BoxLayout</span><span class="p">(</span><span class="s2">&quot;vertical&quot;</span><span class="p">)</span>
+            <span class="k">case</span> <span class="s2">&quot;horizontal&quot;</span> <span class="o">|</span> <span class="s2">&quot;vertical&quot;</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">BoxLayout</span><span class="p">(</span><span class="n">layout</span><span class="p">)</span>
             <span class="k">case</span> <span class="s2">&quot;grid&quot;</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GridLayout</span><span class="p">()</span>
             <span class="k">case</span> <span class="s2">&quot;form&quot;</span><span class="p">:</span>
@@ -37512,11 +37772,10 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
                 <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">custom_widgets</span>
 
                 <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">custom_widgets</span><span class="o">.</span><span class="n">FlowLayout</span><span class="p">()</span>
+            <span class="k">case</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">layout</span>
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">layout</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="n">layout</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Layout&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Invalid Layout&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">margin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="n">margin</span><span class="p">)</span>
@@ -37590,13 +37849,14 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="n">area</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegion</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">typ</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">RegionTypeStr</span> <span class="o">=</span> <span class="s2">&quot;rectangle&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="k">if</span> <span class="n">area</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">clearMask</span><span class="p">()</span>
-            <span class="k">return</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">area</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">(</span><span class="o">*</span><span class="n">area</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">):</span>
-            <span class="n">area</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">REGION_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+        <span class="k">match</span> <span class="n">area</span><span class="p">:</span>
+            <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">clearMask</span><span class="p">()</span>
+                <span class="k">return</span>
+            <span class="k">case</span> <span class="nb">tuple</span><span class="p">():</span>
+                <span class="n">area</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="o">*</span><span class="n">area</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">REGION_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
+            <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">():</span>
+                <span class="n">area</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">REGION_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_window_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
@@ -37608,11 +37868,33 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">:</span>
+        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">gl_widget</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_child</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QOpenGLWidget</span><span class="p">):</span>
+            <span class="n">d</span> <span class="o">=</span> <span class="n">gl_widget</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">())</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">())</span>
+            <span class="k">with</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="k">as</span> <span class="n">painter</span><span class="p">:</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">set_composition_mode</span><span class="p">(</span><span class="s2">&quot;source_atop&quot;</span><span class="p">)</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">gl_widget</span><span class="o">.</span><span class="n">grabFramebuffer</span><span class="p">())</span>
+        <span class="k">return</span> <span class="n">image</span>
+
     <span class="k">def</span> <span class="nf">get_screen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Screen</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">window</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">window</span><span class="p">()</span><span class="o">.</span><span class="n">windowHandle</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">window</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Screen</span><span class="p">(</span><span class="n">window</span><span class="o">.</span><span class="n">screen</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">delete_children</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Delete all children of the specified QObject.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;clear&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span>
+        <span class="k">while</span> <span class="n">layout</span><span class="o">.</span><span class="n">count</span><span class="p">():</span>
+            <span class="n">item</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">takeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+            <span class="n">widget</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">widget</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">widget</span><span class="p">:</span>
+                <span class="n">widget</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">delete_children</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">layout</span><span class="p">())</span>
 </code></pre></div>
         </details>
 
@@ -37630,6 +37912,42 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
 
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.widget.WidgetMixin.delete_children" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">delete_children</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Delete all children of the specified QObject.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">delete_children</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delete all children of the specified QObject.&quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s2">&quot;clear&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">clear</span><span class="p">()</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">layout</span><span class="o">.</span><span class="n">count</span><span class="p">():</span>
+        <span class="n">item</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">takeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">widget</span> <span class="o">=</span> <span class="n">item</span><span class="o">.</span><span class="n">widget</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">widget</span><span class="p">:</span>
+            <span class="n">widget</span><span class="o">.</span><span class="n">deleteLater</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">delete_children</span><span class="p">(</span><span class="n">item</span><span class="o">.</span><span class="n">layout</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
@@ -37774,6 +38092,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     </div>
 
   </div>
+
 
 
 

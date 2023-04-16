@@ -541,6 +541,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.canFetchMore" class="md-nav__link">
     canFetchMore()
   </a>
@@ -550,13 +557,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.fetchMore" class="md-nav__link">
     fetchMore()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.flags" class="md-nav__link">
-    flags()
   </a>
   
 </li>
@@ -626,13 +626,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.filterAcceptsRow" class="md-nav__link">
     filterAcceptsRow()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.first_item_index" class="md-nav__link">
-    first_item_index()
   </a>
   
 </li>
@@ -975,6 +968,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.__init__" class="md-nav__link">
+    __init__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.canFetchMore" class="md-nav__link">
     canFetchMore()
   </a>
@@ -984,13 +984,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.fetchMore" class="md-nav__link">
     fetchMore()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.flags" class="md-nav__link">
-    flags()
   </a>
   
 </li>
@@ -1060,13 +1053,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.filterAcceptsRow" class="md-nav__link">
     filterAcceptsRow()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.first_item_index" class="md-nav__link">
-    first_item_index()
   </a>
   
 </li>
@@ -1950,7 +1936,7 @@ ObjectBrowserTreeItem            (<span title="prettyqt.utils.treeitem.TreeItem"
 
 <h3 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel" class="doc doc-heading">
         <code>
-ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="prettyqt.custom_models.columnitemmodel.ColumnItemModel" href="custom_models.html#prettyqt.custom_models.columnitemmodel.ColumnItemModel">ColumnItemModel</a>)
+ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnitemmodel.ColumnItemModel">ColumnItemModel</span>)
         </code>
 
 
@@ -2001,11 +1987,6 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
             <span class="c1"># Fetch all items of the root so we can select the first row in the ctor.</span>
             <span class="n">root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fetchMore</span><span class="p">(</span><span class="n">root_index</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-            <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_CHILDREN</span>
-        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2351,6 +2332,69 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
 
 
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.__init__" class="doc doc-heading">
+<code class="codehilite language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">obj_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">attr_cols</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+  <span class="doc doc-properties">
+      <small class="doc doc-property doc-property-special"><code>special</code></small>
+  </span>
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p><strong>init</strong>(self, parent: Optional[PySide6.QtCore.QObject] = None) -&gt; None</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+    <span class="bp">self</span><span class="p">,</span>
+    <span class="n">obj</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+    <span class="n">obj_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="n">attr_cols</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">attr_cols</span><span class="o">=</span><span class="n">attr_cols</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+    <span class="c1"># The root_item is always invisible. If the obj_name is the empty string, the</span>
+    <span class="c1"># inspectedItem will be the invisible root_item. If the obj_name is given,</span>
+    <span class="c1"># an invisible root item will be added and the inspectedItem will be its</span>
+    <span class="c1"># only child. In that case the inspected item will be visible.</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span> <span class="o">=</span> <span class="n">obj_name</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span> <span class="o">=</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">(</span>
+            <span class="n">obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+            <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&lt;invisible_root&gt;&quot;</span><span class="p">,</span>
+            <span class="n">obj_path</span><span class="o">=</span><span class="s2">&quot;&lt;invisible_root&gt;&quot;</span><span class="p">,</span>
+            <span class="n">is_attribute</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span><span class="o">.</span><span class="n">children_fetched</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span> <span class="o">=</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">(</span>
+            <span class="n">obj</span><span class="o">=</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_path</span><span class="o">=</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">is_attribute</span><span class="o">=</span><span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span><span class="o">.</span><span class="n">append_child</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># The root itself will be invisible</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span> <span class="o">=</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">(</span>
+            <span class="n">obj</span><span class="o">=</span><span class="n">obj</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">obj_path</span><span class="o">=</span><span class="n">obj_name</span><span class="p">,</span> <span class="n">is_attribute</span><span class="o">=</span><span class="kc">None</span>
+        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span>
+
+        <span class="c1"># Fetch all items of the root so we can select the first row in the ctor.</span>
+        <span class="n">root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fetchMore</span><span class="p">(</span><span class="n">root_index</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
 
   <div class="doc doc-object doc-method">
 
@@ -2420,34 +2464,6 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <span class="k">for</span> <span class="n">tree_item</span> <span class="ow">in</span> <span class="n">tree_items</span><span class="p">:</span>
             <span class="n">parent_item</span><span class="o">.</span><span class="n">append_child</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="n">parent_item</span><span class="o">.</span><span class="n">children_fetched</span> <span class="o">=</span> <span class="kc">True</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.flags" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>flags(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; PySide6.QtCore.Qt.ItemFlag</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_CHILDREN</span>
-    <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span>  <span class="c1"># type: ignore</span>
 </code></pre></div>
         </details>
     </div>
@@ -2761,15 +2777,6 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
         <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToSource</span><span class="p">(</span><span class="n">proxy_index</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">first_item_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the first child of the root item.&quot;&quot;&quot;</span>
-        <span class="c1"># We cannot just call the same function of the source model because the first node</span>
-        <span class="c1"># there may be hidden.</span>
-        <span class="n">source_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
-        <span class="n">proxy_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">source_root_index</span><span class="p">)</span>
-        <span class="n">first_item_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proxy_root_index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">first_item_index</span>
-
     <span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">source_parent_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return true if the item should be included in the model.&quot;&quot;&quot;</span>
         <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">source_parent_index</span><span class="p">)</span>
@@ -2842,38 +2849,6 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
 
     <span class="c1"># logger.debug(&quot;filterAcceptsRow = {}: {}&quot;.format(accept, tree_item))</span>
     <span class="k">return</span> <span class="n">accept</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeProxyModel.first_item_index" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">first_item_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Return the first child of the root item.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">first_item_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the first child of the root item.&quot;&quot;&quot;</span>
-    <span class="c1"># We cannot just call the same function of the source model because the first node</span>
-    <span class="c1"># there may be hidden.</span>
-    <span class="n">source_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
-    <span class="n">proxy_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">source_root_index</span><span class="p">)</span>
-    <span class="n">first_item_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proxy_root_index</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">first_item_index</span>
 </code></pre></div>
         </details>
     </div>

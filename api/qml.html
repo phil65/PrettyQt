@@ -818,6 +818,7 @@
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -866,12 +867,12 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_error_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorTypeStr</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">error_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">errorType</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">ERROR_TYPES</span><span class="o">.</span><span class="n">inverse</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">error_type</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">QtQml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert any python object into a QJSValue (must happen in GUI thread).&quot;&quot;&quot;</span>
         <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
             <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
@@ -921,7 +922,7 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
 
 
 <h4 id="prettyqt.qml.jsvalue.JSValue.from_object" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">from_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span></code>
+<code class="codehilite language-python"><span class="n">from_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">QtQml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -936,7 +937,7 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/qml/jsvalue.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">QtQml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert any python object into a QJSValue (must happen in GUI thread).&quot;&quot;&quot;</span>
     <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
         <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>

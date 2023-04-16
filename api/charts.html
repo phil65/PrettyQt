@@ -2686,8 +2686,7 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 
     <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QKeyEvent</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle keypress events to allow navigation via keyboard.&quot;&quot;&quot;</span>
-        <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
-        <span class="k">match</span> <span class="n">key</span><span class="p">:</span>
+        <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
             <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoomReset</span><span class="p">()</span>
             <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Plus</span><span class="p">:</span>
@@ -2725,8 +2724,7 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
     <span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
-            <span class="n">cursor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CursorShape</span><span class="o">.</span><span class="n">SizeAllCursor</span><span class="p">)</span>
-            <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">setOverrideCursor</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
+            <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">set_override_cursor</span><span class="p">(</span><span class="s2">&quot;size_all&quot;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
             <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
@@ -2744,8 +2742,6 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
             <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
             <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
-            <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">restoreOverrideCursor</span><span class="p">()</span>
-
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 
     <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
@@ -2761,16 +2757,6 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
         <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_image</span><span class="p">()</span>
         <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">filename</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">hide_legend</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">get_image</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">:</span>
-        <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
-        <span class="n">gl_widget</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_child</span><span class="p">(</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QOpenGLWidget</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">gl_widget</span><span class="p">:</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="n">gl_widget</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">())</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">())</span>
-            <span class="k">with</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="n">image</span><span class="p">)</span> <span class="k">as</span> <span class="n">painter</span><span class="p">:</span>
-                <span class="n">painter</span><span class="o">.</span><span class="n">set_composition_mode</span><span class="p">(</span><span class="s2">&quot;source_atop&quot;</span><span class="p">)</span>
-                <span class="n">painter</span><span class="o">.</span><span class="n">drawImage</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">gl_widget</span><span class="o">.</span><span class="n">grabFramebuffer</span><span class="p">())</span>
-        <span class="k">return</span> <span class="n">image</span>
 
     <span class="k">def</span> <span class="nf">set_rubber_band</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">RubberBandStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the rubber band type.</span>
@@ -2809,7 +2795,6 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 
 
   <div class="doc doc-children">
-
 
 
 
@@ -2884,8 +2869,7 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
           <summary>Source code in <code>prettyqt/charts/chartview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QKeyEvent</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle keypress events to allow navigation via keyboard.&quot;&quot;&quot;</span>
-    <span class="n">key</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">()</span>
-    <span class="k">match</span> <span class="n">key</span><span class="p">:</span>
+    <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
         <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Escape</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">chart</span><span class="p">()</span><span class="o">.</span><span class="n">zoomReset</span><span class="p">()</span>
         <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Plus</span><span class="p">:</span>
@@ -2942,8 +2926,6 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
         <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
-        <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">restoreOverrideCursor</span><span class="p">()</span>
-
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">mouseMoveEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -2972,8 +2954,7 @@ ChartView            (<a class="autorefs autorefs-internal" title="prettyqt.widg
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mousePressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMouseEvent</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Override to allow dragging the chart.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">button</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MouseButton</span><span class="o">.</span><span class="n">RightButton</span><span class="p">:</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Cursor</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CursorShape</span><span class="o">.</span><span class="n">SizeAllCursor</span><span class="p">)</span>
-        <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">setOverrideCursor</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">set_override_cursor</span><span class="p">(</span><span class="s2">&quot;size_all&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">last_mouse_pos</span> <span class="o">=</span> <span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
         <span class="n">event</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
