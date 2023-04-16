@@ -126,7 +126,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
     @contextlib.contextmanager
     def append_rows(self, num_rows: int, parent: QtCore.QModelIndex | None = None):
         parent = QtCore.QModelIndex() if parent is None else parent
-        self.beginInsertRows(parent, self.rowCount(), self.rowCount() + num_rows - 1)
+        row_count = self.rowCount()
+        self.beginInsertRows(parent, row_count, row_count + num_rows - 1)
         yield None
         self.endInsertRows()
 

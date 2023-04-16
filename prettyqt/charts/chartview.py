@@ -111,8 +111,7 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
 
     def get_image(self) -> QtGui.QPixmap:
         image = self.grab()
-        gl_widget = self.find_child(QtWidgets.QOpenGLWidget)
-        if gl_widget:
+        if gl_widget := self.find_child(QtWidgets.QOpenGLWidget):
             d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
             with gui.Painter(image) as painter:
                 painter.set_composition_mode("source_atop")

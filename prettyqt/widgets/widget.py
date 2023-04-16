@@ -116,7 +116,7 @@ class WidgetMixin(core.ObjectMixin):
         icon = self.windowIcon()
         if icon.isNull():
             return None
-        return gui.Icon(self.windowIcon())
+        return gui.Icon(icon)
 
     def set_min_size(self, *size) -> None:
         self.setMinimumSize(*size)
@@ -329,11 +329,14 @@ class WidgetMixin(core.ObjectMixin):
     def set_stylesheet(
         self, ss: None | str | qstylizer.style.StyleSheet | types.PathType
     ):
-        if isinstance(ss, os.PathLike):
-            ss = pathlib.Path(ss).read_text()
-        elif ss is None:
-            ss = ""
-        self.setStyleSheet(str(ss))
+        match ss:
+            case None:
+                ss = ""
+            case os.PathLike():
+                ss = pathlib.Path(ss).read_text()
+            case qstylizer.style.StyleSheet():
+                ss = str(ss)
+        self.setStyleSheet(ss)
 
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
         try:
@@ -441,11 +444,10 @@ class WidgetMixin(core.ObjectMixin):
                 from prettyqt import custom_widgets
 
                 self.box = custom_widgets.FlowLayout()
+            case QtWidgets.QLayout():
+                self.box = layout
             case _:
-                if isinstance(layout, QtWidgets.QLayout):
-                    self.box = layout
-                else:
-                    raise ValueError("Invalid Layout")
+                raise ValueError("Invalid Layout")
         self.setLayout(self.box)
         if margin is not None:
             self.box.set_margin(margin)
@@ -519,13 +521,14 @@ class WidgetMixin(core.ObjectMixin):
         area: types.RectType | QtGui.QRegion | None,
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
-        if area is None:
-            self.clearMask()
-            return
-        if isinstance(area, tuple):
-            area = QtCore.QRect(*area)
-        if isinstance(area, QtCore.QRect):
-            area = gui.Region(area, gui.region.REGION_TYPE[typ])
+        match area:
+            case None:
+                self.clearMask()
+                return
+            case tuple():
+                area = gui.Region(*area, gui.region.REGION_TYPE[typ])
+            case QtCore.QRect():
+                area = gui.Region(area, gui.region.REGION_TYPE[typ])
         self.setMask(area)
 
     def set_window_file_path(self, path: types.PathType):
