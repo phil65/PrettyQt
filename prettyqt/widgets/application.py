@@ -128,6 +128,11 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             ss = ""
         self.setStyleSheet(str(ss))
 
+    def set_style(self, style: str):
+        self.setStyle(QtWidgets.QStyleFactory.create(style))
+        icon_color = self.get_palette().get_color("highlighted_text")
+        iconprovider.set_defaults(color=icon_color)
+
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
         return qstylizer.parser.parse(self.styleSheet())
 
