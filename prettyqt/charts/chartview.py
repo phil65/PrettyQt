@@ -33,8 +33,7 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
 
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         """Handle keypress events to allow navigation via keyboard."""
-        key = event.key()
-        match key:
+        match event.key():
             case QtCore.Qt.Key.Key_Escape:
                 self.chart().zoomReset()
             case QtCore.Qt.Key.Key_Plus:
@@ -72,8 +71,7 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
     def mousePressEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
         if event.button() == QtCore.Qt.MouseButton.RightButton:
-            cursor = gui.Cursor(QtCore.Qt.CursorShape.SizeAllCursor)
-            widgets.Application.setOverrideCursor(cursor)
+            widgets.Application.set_override_cursor("size_all")
             self.last_mouse_pos = event.position()
             event.accept()
 

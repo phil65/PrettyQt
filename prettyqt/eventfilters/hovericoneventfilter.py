@@ -10,10 +10,11 @@ class HoverIconEventFilter(core.Object):
         self.hover = hover
 
     def eventFilter(self, obj, event: core.Event):
-        if event.type() == core.Event.Type.Enter:
-            obj.set_icon(self.hover)
-        elif event.type() == core.Event.Type.Leave:
-            obj.set_icon(self.normal)
+        match event.type():
+            case core.Event.Type.Enter:
+                obj.set_icon(self.hover)
+            case core.Event.Type.Leave:
+                obj.set_icon(self.normal)
         return super().eventFilter(obj, event)
 
 

@@ -430,10 +430,8 @@ class WidgetMixin(core.ObjectMixin):
         if layout is None:
             return
         match layout:
-            case "horizontal":
-                self.box = widgets.BoxLayout("horizontal")
-            case "vertical":
-                self.box = widgets.BoxLayout("vertical")
+            case "horizontal" | "vertical":
+                self.box = widgets.BoxLayout(layout)
             case "grid":
                 self.box = widgets.GridLayout()
             case "form":
