@@ -1,3 +1,14 @@
+## v1.9.0 (2023-04-17)
+
+### Feat
+
+- **custom_widgets**: add FileTree class
+- **AbstractItemModel**: add update_all method
+
+### Fix
+
+- **IconDelegate**: fix exception when QIcon is passed
+
 ## v1.8.1 (2023-04-17)
 
 ### Fix
