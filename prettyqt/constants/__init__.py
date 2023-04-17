@@ -19,6 +19,8 @@ STATUSTIP_ROLE = Qt.ItemDataRole.StatusTipRole
 DECORATION_ROLE = Qt.ItemDataRole.DecorationRole
 CHECKSTATE_ROLE = Qt.ItemDataRole.CheckStateRole
 ALIGNMENT_ROLE = Qt.ItemDataRole.TextAlignmentRole
+SIZE_HINT_ROLE = Qt.ItemDataRole.SizeHintRole
+WHATS_THIS_ROLE = Qt.ItemDataRole.WhatsThisRole
 FONT_ROLE = Qt.ItemDataRole.FontRole
 
 ALIGN_NONE = Qt.AlignmentFlag(0)
