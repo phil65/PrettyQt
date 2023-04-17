@@ -78,7 +78,7 @@ class ColumnItem:
             return ""
         elif callable(self.user_data):
             return self.user_data(tree_item, role)
-        return self.user_data[role]
+        return self.user_data[role](tree_item)
 
     def get_tooltip(self, tree_item) -> str:
         if self.tooltip is None:
