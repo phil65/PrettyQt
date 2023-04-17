@@ -172,29 +172,29 @@ class ColumnItemModelMixin:
 
         col = index.column()
         tree_item = self.tree_item(index)
-
+        col_item = self._attr_cols[col]
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
-                val = self._attr_cols[col].get_label(tree_item)
+                val = col_item.get_label(tree_item)
                 return val.replace("\n", " ")
             case constants.DECORATION_ROLE:
-                return self._attr_cols[col].get_decoration(tree_item)
+                return col_item.get_decoration(tree_item)
             case constants.CHECKSTATE_ROLE:
-                return self._attr_cols[col].get_checkstate(tree_item)
+                return col_item.get_checkstate(tree_item)
             case constants.ALIGNMENT_ROLE:
-                return self._attr_cols[col].get_alignment(tree_item)
+                return col_item.get_alignment(tree_item)
             case constants.FOREGROUND_ROLE:
-                return self._attr_cols[col].get_foreground_color(tree_item)
+                return col_item.get_foreground_color(tree_item)
             case constants.BACKGROUND_ROLE:
-                return self._attr_cols[col].get_background_color(tree_item)
+                return col_item.get_background_color(tree_item)
             case constants.FONT_ROLE:
-                return self._attr_cols[col].get_font(tree_item)
+                return col_item.get_font(tree_item)
             case constants.SORT_ROLE:
-                return self._attr_cols[col].get_sort_value(tree_item)
+                return col_item.get_sort_value(tree_item)
             case constants.TOOLTIP_ROLE:
-                return self._attr_cols[col].get_tooltip(tree_item)
+                return col_item.get_tooltip(tree_item)
             case _:
-                return self._attr_cols[col].user_data.get(role)
+                return col_item.get_user_data(tree_item, role)
 
     def flags(self, index):
         if not index.isValid():
