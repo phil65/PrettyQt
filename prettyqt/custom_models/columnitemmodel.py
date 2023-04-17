@@ -160,9 +160,6 @@ class ColumnItemModelMixin:
     def columnCount(self, _parent=None):
         return len(self._attr_cols)
 
-    def tree_item(self, index: core.ModelIndex) -> treeitem.TreeItem:
-        return index.internalPointer() if index.isValid() else None
-
     def data(self, index, role):
         """Return the tree item at the given index and role."""
         if not index.isValid():
@@ -211,7 +208,87 @@ class ColumnItemModelMixin:
 
 
 class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
-    pass
+    def __init__(self, *args, **kwargs):
+        self._root_item = core.ModelIndex()
+        super().__init__(*args, **kwargs)
+
+    def root_index(self) -> core.ModelIndex:  # TODO: needed?
+        """Return the index that returns the root element (same as an invalid index)."""
+        return core.ModelIndex()
+
+    @property
+    def root_item(self) -> treeitem.TreeItem:
+        """Return the root ObjectBrowserTreeItem."""
+        return self._root_item
+
+    def tree_item(self, index: core.ModelIndex) -> treeitem.TreeItem:
+        return index.internalPointer() if index.isValid() else self.root_item
+
+    def index(
+        self, row: int, column: int, parent: core.ModelIndex | None = None
+    ) -> core.ModelIndex:
+        if parent is None:
+            logger.debug("parent is None")
+            parent = core.ModelIndex()
+
+        parent_item = self.tree_item(parent)
+
+        if not self.hasIndex(row, column, parent):
+            return core.ModelIndex()
+
+        if child_item := parent_item.child(row):
+            return self.createIndex(row, column, child_item)
+        return core.ModelIndex()
+
+    def parent(self, index: core.ModelIndex) -> QtCore.QModelIndex:  # type:ignore
+        if not index.isValid():
+            return core.ModelIndex()
+
+        child_item = index.internalPointer()
+        parent_item = child_item.parent()  # type: ignore
+
+        if parent_item is None or parent_item == self.root_item:
+            return core.ModelIndex()
+
+        return self.createIndex(parent_item.row(), 0, parent_item)
+
+    def rowCount(self, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
+        return 0 if parent.column() > 0 else self.tree_item(parent).child_count()
+
+    def hasChildren(self, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
+        return 0 if parent.column() > 0 else self.tree_item(parent).has_children
+
+    def canFetchMore(self, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
+        if parent.column() > 0:
+            return 0
+        else:
+            return not self.tree_item(parent).children_fetched
+
+    def fetchMore(self, parent: core.ModelIndex | None = None):
+        """Fetch the children given the model index of a parent node.
+
+        Adds the children to the parent.
+        """
+        parent = core.ModelIndex() if parent is None else parent
+        if parent.column() > 0:
+            return
+
+        parent_item = self.tree_item(parent)
+        if parent_item.children_fetched:
+            return
+
+        tree_items = self._fetch_object_children(parent_item)
+
+        with self.insert_rows(0, len(tree_items) - 1, parent):
+            for tree_item in tree_items:
+                parent_item.append_child(tree_item)
+            parent_item.children_fetched = True
+
+    def _fetch_object_children(self, treeitem):
+        return []
 
 
 class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
@@ -235,7 +312,11 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    colitem = ColumnItem(name="Test", label=lambda volume: str(volume.get_root_path()))
+    colitem = ColumnItem(
+        name="Test",
+        label=lambda volume: str(volume.get_root_path()),
+        user_data={constants.USER_ROLE: lambda volume: str(volume.get_root_path())},
+    )
     items = core.StorageInfo.get_mounted_volumes()
     model = ColumnTableModel(items, [colitem])
     table = widgets.TableView()

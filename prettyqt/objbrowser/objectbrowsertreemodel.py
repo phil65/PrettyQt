@@ -15,7 +15,7 @@ from typing import Any
 
 from prettyqt import core, custom_models
 from prettyqt.qt import QtCore
-from prettyqt.utils import helpers, treeitem
+from prettyqt.utils import treeitem
 
 
 # TODO: a lot of methods (e.g. rowCount) test if parent.column() > 0. This should probably
@@ -103,73 +103,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             root_index = self.index(0, 0)
             self.fetchMore(root_index)
 
-    def index(
-        self, row: int, column: int, parent: core.ModelIndex | None = None
-    ) -> core.ModelIndex:
-        if parent is None:
-            logger.debug("parent is None")
-            parent = core.ModelIndex()
-
-        parent_item = self.tree_item(parent)
-
-        if not self.hasIndex(row, column, parent):
-            logger.debug("hasIndex is False: (%s, %s) %r", row, column, parent_item)
-            # logger.warn("Parent index model: {!r} != {!r}".format(parent.model(), self))
-
-            return core.ModelIndex()
-
-        if child_item := parent_item.child(row):
-            return self.createIndex(row, column, child_item)
-        logger.warn("no child_item")
-        return core.ModelIndex()
-
-    def parent(self, index: core.ModelIndex) -> QtCore.QModelIndex:  # type:ignore
-        if not index.isValid():
-            return core.ModelIndex()
-
-        child_item = index.internalPointer()
-        parent_item = child_item.parent()  # type: ignore
-
-        if parent_item is None or parent_item == self.root_item:
-            return core.ModelIndex()
-
-        return self.createIndex(parent_item.row(), 0, parent_item)
-
-    def rowCount(self, parent: core.ModelIndex | None = None):
-        parent = core.ModelIndex() if parent is None else parent
-        return 0 if parent.column() > 0 else self.tree_item(parent).child_count()
-
-    def hasChildren(self, parent: core.ModelIndex | None = None):
-        parent = core.ModelIndex() if parent is None else parent
-        return 0 if parent.column() > 0 else self.tree_item(parent).has_children
-
-    def canFetchMore(self, parent: core.ModelIndex | None = None):
-        parent = core.ModelIndex() if parent is None else parent
-        if parent.column() > 0:
-            return 0
-        else:
-            return not self.tree_item(parent).children_fetched
-
-    def fetchMore(self, parent: core.ModelIndex | None = None):
-        """Fetch the children given the model index of a parent node.
-
-        Adds the children to the parent.
-        """
-        parent = core.ModelIndex() if parent is None else parent
-        if parent.column() > 0:
-            return
-
-        parent_item = self.tree_item(parent)
-        if parent_item.children_fetched:
-            return
-
-        tree_items = self._fetch_object_children(parent_item.obj, parent_item.obj_path)
-
-        with self.insert_rows(0, len(tree_items) - 1, parent):
-            for tree_item in tree_items:
-                parent_item.append_child(tree_item)
-            parent_item.children_fetched = True
-
     @property
     def inspected_node_is_visible(self):
         """Return True if the inspected node is visible.
@@ -178,26 +111,17 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         """
         return self._inspected_node_is_visible
 
-    @property
-    def root_item(self) -> ObjectBrowserTreeItem:
-        """Return the root ObjectBrowserTreeItem."""
-        return self._root_item
-
-    def root_index(self) -> core.ModelIndex:  # TODO: needed?
-        """Return the index that returns the root element (same as an invalid index)."""
-        return core.ModelIndex()
-
-    def tree_item(self, index: core.ModelIndex) -> ObjectBrowserTreeItem:
-        return index.internalPointer() if index.isValid() else self.root_item
-
-    def _fetch_object_children(self, obj, obj_path):  # -> List[ObjectBrowserTreeItem]:
+    def _fetch_object_children(
+        self, treeitem: treeitem.TreeItem
+    ) -> list[ObjectBrowserTreeItem]:
         """Fetch the children of a Python object.
 
         Returns: list of ObjectBrowserTreeItems
         """
         obj_children = []
         path_strings = []
-
+        obj = treeitem.obj
+        obj_path = treeitem.obj_path
         if isinstance(obj, (list, tuple, set, frozenset)):
             obj_children = [(str(i), j) for i, j in sorted(enumerate(obj))]
             path_strings = [
@@ -260,7 +184,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         if not tree_item.children_fetched:
             return None
         old_items = tree_item.child_items
-        new_items = self._fetch_object_children(tree_item.obj, tree_item.obj_path)
+        new_items = self._fetch_object_children(tree_item)
 
         old_item_names = [(item.obj_name, item.is_attribute) for item in old_items]
         new_item_names = [(item.obj_name, item.is_attribute) for item in new_items]
