@@ -33,6 +33,7 @@ from .codeeditor import CodeEditor
 from .roundprogressbar import RoundProgressBar
 from .subsequencecompleter import SubsequenceCompleter
 from .framelesswindow import FramelessWindow
+from .filetree import FileTree
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
@@ -85,4 +86,5 @@ __all__ = [
     "StandardIconsWidget",
     "SubsequenceCompleter",
     "FramelessWindow",
+    "FileTree",
 ]
