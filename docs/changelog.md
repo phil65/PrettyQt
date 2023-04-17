@@ -1,3 +1,9 @@
+## v1.9.2 (2023-04-17)
+
+### Fix
+
+- **StorageInfoModel**: move some stuff to baseclass
+
 ## v1.9.1 (2023-04-17)
 
 ### Fix
