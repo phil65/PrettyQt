@@ -3,7 +3,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Iterator, Sequence
 import logging
 from typing import Generic, TypeVar
 
@@ -36,6 +36,9 @@ class TreeItem(Generic[T]):
             n = len(self.child_items)
             return f"<{name}(0x{id(self.obj):x}): ({n:d} children)>"
 
+    def __iter__(self) -> Iterator[T]:
+        return iter(self.child_items)
+
     def append_child(self, item: T):
         item.parent_item = self
         self.child_items.append(item)
@@ -61,3 +64,8 @@ class TreeItem(Generic[T]):
         logger.debug(indent * "    " + str(self))
         for child_item in self.child_items:
             child_item.pretty_print(indent + 1)
+
+
+if __name__ == "__main__":
+    t = TreeItem()
+    print(t)
