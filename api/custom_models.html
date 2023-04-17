@@ -1691,7 +1691,7 @@ ColumnItem        </code>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tooltip</span>
 
-    <span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_checkstate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">CheckState</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkstate</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">checkstate</span><span class="p">):</span>
@@ -1701,28 +1701,30 @@ ColumnItem        </code>
             <span class="k">return</span> <span class="n">result</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkstate</span>
 
-    <span class="k">def</span> <span class="nf">get_font</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_font</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">font</span>
 
-    <span class="k">def</span> <span class="nf">get_foreground_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_foreground_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">foreground_color</span>
 
-    <span class="k">def</span> <span class="nf">get_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span>
 
-    <span class="k">def</span> <span class="nf">get_decoration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_decoration</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">tree_item</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColor</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">decoration</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="nb">callable</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">decoration</span><span class="p">):</span>
@@ -1857,29 +1859,30 @@ ColumnItemModelMixin        </code>
 
         <span class="n">col</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
         <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-        <span class="n">col_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
         <span class="k">match</span> <span class="n">role</span><span class="p">:</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span><span class="p">:</span>
-                <span class="n">val</span> <span class="o">=</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
                 <span class="k">return</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">DECORATION_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_decoration</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_decoration</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">CHECKSTATE_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_checkstate</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_checkstate</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENT_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_alignment</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_alignment</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOREGROUND_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_foreground_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_foreground_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">BACKGROUND_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_background_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_background_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">FONT_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_font</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_font</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">SORT_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_sort_value</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_sort_value</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLTIP_ROLE</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_tooltip</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_tooltip</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_user_data</span><span class="p">(</span><span class="n">tree_item</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
+                <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">):</span>
+                    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_user_data</span><span class="p">(</span><span class="n">tree_item</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
@@ -1958,29 +1961,30 @@ ColumnItemModelMixin        </code>
 
     <span class="n">col</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
     <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-    <span class="n">col_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span>
+
     <span class="k">match</span> <span class="n">role</span><span class="p">:</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_label</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">val</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">DECORATION_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_decoration</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_decoration</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">CHECKSTATE_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_checkstate</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_checkstate</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENT_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_alignment</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_alignment</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOREGROUND_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_foreground_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_foreground_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">BACKGROUND_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_background_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_background_color</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">FONT_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_font</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_font</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">SORT_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_sort_value</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_sort_value</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">TOOLTIP_ROLE</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_tooltip</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_tooltip</span><span class="p">(</span><span class="n">tree_item</span><span class="p">)</span>
         <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">col_item</span><span class="o">.</span><span class="n">get_user_data</span><span class="p">(</span><span class="n">tree_item</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
+            <span class="k">if</span> <span class="nb">int</span><span class="p">(</span><span class="n">role</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="nb">int</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">):</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_attr_cols</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">get_user_data</span><span class="p">(</span><span class="n">tree_item</span><span class="p">,</span> <span class="n">role</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -2134,7 +2138,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.columnCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fc2c4a6b740</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7f66fbe295c0</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2233,7 +2237,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fc2c4a68740</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7f66fbd4d880</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -3080,7 +3084,7 @@ NestedItem        </code>
         <span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NestedItem</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_name</span> <span class="o">=</span> <span class="n">dynamic_name</span> <span class="k">if</span> <span class="n">dynamic_name</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dynamic_name</span> <span class="o">=</span> <span class="n">dynamic_name</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">item_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="n">count</span>
         <span class="c1"># self.timestamp = kwargs.pop(&quot;timestamp&quot;, time.time())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">children</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">NestedItem</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
@@ -3596,7 +3600,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
 
 
 <h4 id="prettyqt.custom_models.nestedmodel.NestedModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fc2c48f05c0</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7f66fbf27240</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
 
 
 </h4>
@@ -3691,7 +3695,7 @@ RegexMatchesModel            (<span title="prettyqt.core.abstracttablemodel.Abst
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">matches</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="o">=</span> <span class="n">matches</span> <span class="k">if</span> <span class="n">matches</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">matches</span> <span class="o">=</span> <span class="n">matches</span> <span class="ow">or</span> <span class="p">[]</span>
 
     <span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span>
@@ -3946,9 +3950,7 @@ StorageInfoModel            (<span title="prettyqt.custom_models.columnitemmodel
         <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">StorageInfo</span><span class="o">.</span><span class="n">get_mounted_volumes</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">0</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">)</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">StorageInfo</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span>
@@ -4018,9 +4020,7 @@ StorageInfoModel            (<span title="prettyqt.custom_models.columnitemmodel
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_models/storageinfomodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">volumes</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>

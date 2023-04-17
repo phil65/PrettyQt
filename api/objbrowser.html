@@ -576,22 +576,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_index" class="md-nav__link">
-    inspected_index()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.parent" class="md-nav__link">
     parent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.refresh_tree" class="md-nav__link">
-    refresh_tree()
   </a>
   
 </li>
@@ -1003,22 +989,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_index" class="md-nav__link">
-    inspected_index()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.parent" class="md-nav__link">
     parent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.refresh_tree" class="md-nav__link">
-    refresh_tree()
   </a>
   
 </li>
@@ -1174,7 +1146,6 @@
 
 
 
-
   <div class="doc doc-object doc-function">
 
 
@@ -1257,6 +1228,7 @@
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -2003,13 +1975,10 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
 
             <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 
-        <span class="n">child_item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-        <span class="c1"># logger.debug(&quot;  {}&quot;.format(child_item.obj_path))</span>
-        <span class="k">if</span> <span class="n">child_item</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">child_item</span> <span class="o">:=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">child_item</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;no child_item&quot;</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;no child_item&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>  <span class="c1"># type:ignore</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
@@ -2025,28 +1994,18 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
 
     <span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
-
-        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="c1"># This is taken from the PyQt simpletreemodel example.</span>
-            <span class="k">return</span> <span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">child_count</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">child_count</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">hasChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
-        <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">0</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">has_children</span>
+        <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">has_children</span>
 
     <span class="k">def</span> <span class="nf">canFetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
         <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="mi">0</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">result</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">children_fetched</span>
-            <span class="c1"># logger.debug(&quot;canFetchMore: {} = {}&quot;.format(parent, result))</span>
-            <span class="k">return</span> <span class="n">result</span>
+            <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">children_fetched</span>
 
     <span class="k">def</span> <span class="nf">fetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch the children given the model index of a parent node.</span>
@@ -2085,18 +2044,8 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the index that returns the root element (same as an invalid index).&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">inspected_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the model index that point to the inspectedItem.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
-
     <span class="k">def</span> <span class="nf">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">:</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="k">return</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span> <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span>
 
     <span class="k">def</span> <span class="nf">_fetch_object_children</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">obj_path</span><span class="p">):</span>  <span class="c1"># -&gt; List[ObjectBrowserTreeItem]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch the children of a Python object.</span>
@@ -2165,16 +2114,8 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
 <span class="sd">        refreshNode function emit the dataChanged signal for all cells.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">tree_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">tree_index</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;_aux_refresh_tree(</span><span class="si">%s</span><span class="s2">): </span><span class="si">%s%s</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">tree_index</span><span class="p">,</span>
-            <span class="n">tree_item</span><span class="o">.</span><span class="n">obj_path</span><span class="p">,</span>
-            <span class="s2">&quot;*&quot;</span> <span class="k">if</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">children_fetched</span> <span class="k">else</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="p">)</span>
-
         <span class="k">if</span> <span class="ow">not</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">children_fetched</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-
         <span class="n">old_items</span> <span class="o">=</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">child_items</span>
         <span class="n">new_items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_object_children</span><span class="p">(</span><span class="n">tree_item</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">obj_path</span><span class="p">)</span>
 
@@ -2196,9 +2137,6 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
             <span class="k">match</span> <span class="n">tag</span><span class="p">:</span>
                 <span class="k">case</span> <span class="s2">&quot;equal&quot;</span><span class="p">:</span>
                     <span class="c1"># when node names are equal is aux_refresh_tree called recursively.</span>
-                    <span class="k">assert</span> <span class="p">(</span>
-                        <span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span>
-                    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;equal sanity check failed </span><span class="si">{</span><span class="n">i2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
                     <span class="k">for</span> <span class="n">old_row</span><span class="p">,</span> <span class="n">new_row</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">j1</span><span class="p">,</span> <span class="n">j2</span><span class="p">)):</span>
                         <span class="n">old_items</span><span class="p">[</span><span class="n">old_row</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">new_items</span><span class="p">[</span><span class="n">new_row</span><span class="p">]</span><span class="o">.</span><span class="n">obj</span>
                         <span class="n">child_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">old_row</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">tree_index</span><span class="p">)</span>
@@ -2207,10 +2145,6 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
                 <span class="k">case</span> <span class="s2">&quot;replace&quot;</span><span class="p">:</span>
                     <span class="c1"># Remove the old item and insert the new. The old item may have child</span>
                     <span class="c1"># nodes which indices must be removed by Qt, otherwise it crashes.</span>
-                    <span class="k">assert</span> <span class="p">(</span>
-                        <span class="n">i2</span> <span class="o">-</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span>
-                    <span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;replace sanity check failed </span><span class="si">{</span><span class="n">i2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">j1</span><span class="si">}</span><span class="s2">&quot;</span>
-
                     <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>  <span class="c1"># row number of first that will be removed</span>
                     <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># row number of last element after insertion</span>
                     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_rows</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">):</span>
@@ -2222,14 +2156,12 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
                         <span class="n">tree_item</span><span class="o">.</span><span class="n">insert_children</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">new_items</span><span class="p">[</span><span class="n">j1</span><span class="p">:</span><span class="n">j2</span><span class="p">])</span>
 
                 <span class="k">case</span> <span class="s2">&quot;delete&quot;</span><span class="p">:</span>
-                    <span class="k">assert</span> <span class="n">j1</span> <span class="o">==</span> <span class="n">j2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;delete sanity check failed. </span><span class="si">{</span><span class="n">j1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">j2</span><span class="si">}</span><span class="s2">&quot;</span>
                     <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>  <span class="c1"># row number of first that will be removed</span>
                     <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">i2</span> <span class="o">-</span> <span class="mi">1</span>  <span class="c1"># row number of last element after insertion</span>
                     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_rows</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">):</span>
                         <span class="k">del</span> <span class="n">tree_item</span><span class="o">.</span><span class="n">child_items</span><span class="p">[</span><span class="n">i1</span><span class="p">:</span><span class="n">i2</span><span class="p">]</span>
 
                 <span class="k">case</span> <span class="s2">&quot;insert&quot;</span><span class="p">:</span>
-                    <span class="k">assert</span> <span class="n">i1</span> <span class="o">==</span> <span class="n">i2</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;insert sanity check failed. </span><span class="si">{</span><span class="n">i1</span><span class="si">}</span><span class="s2"> != </span><span class="si">{</span><span class="n">i2</span><span class="si">}</span><span class="s2">&quot;</span>
                     <span class="n">first</span> <span class="o">=</span> <span class="n">i1</span>
                     <span class="n">last</span> <span class="o">=</span> <span class="n">i1</span> <span class="o">+</span> <span class="n">j2</span> <span class="o">-</span> <span class="n">j1</span> <span class="o">-</span> <span class="mi">1</span>
                     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">insert_rows</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">tree_index</span><span class="p">):</span>
@@ -2238,38 +2170,15 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid tag: </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Refresh the tree model from the underlying root object.&quot;&quot;&quot;</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;refresh_tree: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="p">)</span>
-
-        <span class="n">root_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">())</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  root_item:      </span><span class="si">%s</span><span class="s2"> (idx=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">root_item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">())</span>
-        <span class="n">inspected_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">())</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-            <span class="s2">&quot;  inspected_item: </span><span class="si">%s</span><span class="s2"> (idx=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">inspected_item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">()</span>
-        <span class="p">)</span>
-
-        <span class="k">assert</span> <span class="p">(</span>
-            <span class="n">root_item</span> <span class="ow">is</span> <span class="n">inspected_item</span>
-        <span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">,</span> <span class="s2">&quot;sanity check&quot;</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_aux_refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">())</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-            <span class="s2">&quot;After _aux_refresh_tree, root_obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-            <span class="n">helpers</span><span class="o">.</span><span class="n">cut_off_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
-        <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="o">.</span><span class="n">pretty_print</span><span class="p">()</span>
-
+        <span class="bp">self</span><span class="o">.</span><span class="n">_aux_refresh_tree</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         <span class="c1"># Emit the dataChanged signal for all cells. This is faster than checking which</span>
         <span class="c1"># nodes have changed, which may be slow for some underlying Python objects.</span>
-        <span class="n">bottom_row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">right_column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
-        <span class="n">top_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-        <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bottom_row</span><span class="p">,</span> <span class="n">right_column</span><span class="p">)</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bottom_right: (</span><span class="si">{</span><span class="n">bottom_row</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">right_column</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update_all</span><span class="p">()</span>
 </code></pre></div>
         </details>
 
@@ -2417,9 +2326,7 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
     <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">children_fetched</span>
-        <span class="c1"># logger.debug(&quot;canFetchMore: {} = {}&quot;.format(parent, result))</span>
-        <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">children_fetched</span>
 </code></pre></div>
         </details>
     </div>
@@ -2490,10 +2397,7 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hasChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
-    <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">has_children</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">has_children</span>
 </code></pre></div>
         </details>
     </div>
@@ -2533,43 +2437,10 @@ ObjectBrowserTreeModel            (<span title="prettyqt.custom_models.columnite
 
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 
-    <span class="n">child_item</span> <span class="o">=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
-    <span class="c1"># logger.debug(&quot;  {}&quot;.format(child_item.obj_path))</span>
-    <span class="k">if</span> <span class="n">child_item</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">child_item</span> <span class="o">:=</span> <span class="n">parent_item</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">child_item</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;no child_item&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_index" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">inspected_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Return the model index that point to the inspectedItem.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">inspected_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the model index that point to the inspectedItem.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;no child_item&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
 </code></pre></div>
         </details>
     </div>
@@ -2612,62 +2483,6 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
 
   </div>
 
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.refresh_tree" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Refresh the tree model from the underlying root object.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Refresh the tree model from the underlying root object.&quot;&quot;&quot;</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;refresh_tree: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="p">)</span>
-
-    <span class="n">root_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">())</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;  root_item:      </span><span class="si">%s</span><span class="s2"> (idx=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">root_item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">())</span>
-    <span class="n">inspected_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">())</span>
-    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
-        <span class="s2">&quot;  inspected_item: </span><span class="si">%s</span><span class="s2"> (idx=</span><span class="si">%s</span><span class="s2">)&quot;</span><span class="p">,</span> <span class="n">inspected_item</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">()</span>
-    <span class="p">)</span>
-
-    <span class="k">assert</span> <span class="p">(</span>
-        <span class="n">root_item</span> <span class="ow">is</span> <span class="n">inspected_item</span>
-    <span class="p">)</span> <span class="o">!=</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">,</span> <span class="s2">&quot;sanity check&quot;</span>
-
-    <span class="bp">self</span><span class="o">.</span><span class="n">_aux_refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">inspected_index</span><span class="p">())</span>
-
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span>
-        <span class="s2">&quot;After _aux_refresh_tree, root_obj: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span>
-        <span class="n">helpers</span><span class="o">.</span><span class="n">cut_off_str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="o">.</span><span class="n">obj</span><span class="p">,</span> <span class="mi">80</span><span class="p">),</span>
-    <span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">root_item</span><span class="o">.</span><span class="n">pretty_print</span><span class="p">()</span>
-
-    <span class="c1"># Emit the dataChanged signal for all cells. This is faster than checking which</span>
-    <span class="c1"># nodes have changed, which may be slow for some underlying Python objects.</span>
-    <span class="n">bottom_row</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">right_column</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">columnCount</span><span class="p">()</span> <span class="o">-</span> <span class="mi">1</span>
-    <span class="n">top_left</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-    <span class="n">bottom_right</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">bottom_row</span><span class="p">,</span> <span class="n">right_column</span><span class="p">)</span>
-
-    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;bottom_right: (</span><span class="si">{</span><span class="n">bottom_row</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">right_column</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">dataChanged</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">top_left</span><span class="p">,</span> <span class="n">bottom_right</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
 
 
 
@@ -2716,12 +2531,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
           <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
-
-    <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># This is taken from the PyQt simpletreemodel example.</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">child_count</span><span class="p">()</span>
+    <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">child_count</span><span class="p">()</span>
 </code></pre></div>
         </details>
     </div>
