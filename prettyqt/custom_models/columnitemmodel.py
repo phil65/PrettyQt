@@ -40,6 +40,7 @@ class ColumnItem:
     editable: bool = False
     checkable: bool = False
     tristate: bool = False
+    user_data: dict | Callable | None = None
 
     def get_name(self) -> str:
         return self.name
@@ -71,6 +72,13 @@ class ColumnItem:
         elif callable(self.sort_value):
             return self.sort_value(tree_item)
         return self.sort_value
+
+    def get_user_data(self, tree_item, role):
+        if self.user_data is None:
+            return ""
+        elif callable(self.user_data):
+            return self.user_data(tree_item, role)
+        return self.user_data[role]
 
     def get_tooltip(self, tree_item) -> str:
         if self.tooltip is None:
@@ -186,7 +194,7 @@ class ColumnItemModelMixin:
             case constants.TOOLTIP_ROLE:
                 return self._attr_cols[col].get_tooltip(tree_item)
             case _:
-                return None
+                return self._attr_cols[col].user_data.get(role)
 
     def flags(self, index):
         if not index.isValid():
