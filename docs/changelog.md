@@ -1,3 +1,9 @@
+## v1.8.0 (2023-04-17)
+
+### Feat
+
+- **ColumnItemModel**: add user_data to ColumnItems
+
 ## v1.7.1 (2023-04-17)
 
 ### Fix
