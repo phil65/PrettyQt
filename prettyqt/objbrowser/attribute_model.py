@@ -171,7 +171,8 @@ ATTR_MODEL_IS_ATTRIBUTE = custom_models.ColumnItem(
     doc="""The object is an attribute of the parent (opposed to e.g. a list element).
                      Attributes are displayed in italics in the table.
                   """,
-    label=lambda x: "" if x.is_attribute is None else str(x.is_attribute),
+    label=None,
+    checkstate=lambda x: False if x.is_attribute is None else x.is_attribute,
     col_visible=False,
     width="small",
 )
