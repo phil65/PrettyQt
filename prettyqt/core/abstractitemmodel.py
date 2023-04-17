@@ -81,6 +81,11 @@ class AbstractItemModelMixin(core.ObjectMixin):
         end_index = self.index(row, self.columnCount() - 1)
         self.dataChanged.emit(start_index, end_index)
 
+    def update_all(self):
+        top_left = self.index(0, 0)
+        bottom_right = self.index(self.rowCount() - 1, self.columnCount() - 1)
+        self.dataChanged.emit(top_left, bottom_right)
+
     @contextlib.contextmanager
     def remove_rows(
         self,
