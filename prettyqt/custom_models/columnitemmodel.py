@@ -87,7 +87,7 @@ class ColumnItem:
             return self.tooltip(tree_item)
         return self.tooltip
 
-    def get_checkstate(self, tree_item):
+    def get_checkstate(self, tree_item) -> bool | QtCore.Qt.CheckState | None:
         if self.checkstate is None:
             return None
         elif callable(self.checkstate):
@@ -97,28 +97,30 @@ class ColumnItem:
             return result
         return self.checkstate
 
-    def get_font(self, tree_item):
+    def get_font(self, tree_item) -> QtGui.QFont | None:
         if self.font is None:
             return None
         elif callable(self.font):
             return self.font(tree_item)
         return self.font
 
-    def get_foreground_color(self, tree_item):
+    def get_foreground_color(self, tree_item) -> QtGui.QColor | None:
         if self.foreground_color is None:
             return None
         elif callable(self.foreground_color):
             return self.foreground_color(tree_item)
         return self.foreground_color
 
-    def get_background_color(self, tree_item):
+    def get_background_color(self, tree_item) -> QtGui.QColor | None:
         if self.background_color is None:
             return None
         elif callable(self.background_color):
             return self.background_color(tree_item)
         return self.background_color
 
-    def get_decoration(self, tree_item):
+    def get_decoration(
+        self, tree_item
+    ) -> QtGui.QColor | QtGui.QPixmap | QtGui.QIcon | None:
         if self.decoration is None:
             return None
         elif callable(self.decoration):
