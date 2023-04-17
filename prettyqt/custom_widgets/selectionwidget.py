@@ -109,8 +109,7 @@ class SelectionWidget(widgets.GroupBox):
     def update_choice(self, checked: bool):
         if not checked:
             return
-        choice = self.current_choice()
-        if choice is not None:
+        if choice := self.current_choice() is not None:
             self.value_changed.emit(choice)
 
     def set_value(self, value):

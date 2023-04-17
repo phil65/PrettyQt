@@ -67,8 +67,8 @@ DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def __len__(self) -> int:
-        if self.model() is not None:
-            return self.model().rowCount()
+        if model := self.model() is not None:
+            return model.rowCount()
         return 0
 
     def selectAll(self):
@@ -129,25 +129,21 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             ss.QHeaderView.section.backgroundColor.setValue(color)
 
     def current_index(self) -> QtCore.QModelIndex | None:
-        if self.selectionModel() is None:
-            return None
-        return self.selectionModel().currentIndex()
+        if model := self.selectionModel() is not None:
+            return model.currentIndex()
 
     def current_data(self):
-        if self.selectionModel() is None:
-            return None
-        idx = self.selectionModel().currentIndex()
-        return idx.data(constants.USER_ROLE)  # type: ignore
+        if model := self.selectionModel() is not None:
+            idx = model.currentIndex()
+            return idx.data(constants.USER_ROLE)  # type: ignore
 
     def current_row(self) -> int | None:
-        if self.selectionModel() is None:
-            return None
-        return self.selectionModel().currentIndex().row()
+        if model := self.selectionModel() is not None:
+            return model.currentIndex().row()
 
     def current_column(self) -> int | None:
-        if self.selectionModel() is None:
-            return None
-        return self.selectionModel().currentIndex().column()
+        if model := self.selectionModel() is not None:
+            return model.currentIndex().column()
 
     def selected_indexes(self) -> list[QtCore.QModelIndex]:
         """Return list of selected indexes in first row."""
@@ -297,9 +293,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         Returns:
             amount of selected rows
         """
-        if self.selectionModel() is None:
-            return 0
-        return len(self.selectionModel().selectedRows())
+        if model := self.selectionModel() is not None:
+            return len(model.selectedRows())
+        return 0
 
     def jump_to_column(self, col_num: int):
         """Make sure column at given index is visible.
@@ -309,10 +305,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         Args:
             col_num: column to scroll to
         """
-        if self.model() is None:
-            return
-        idx = self.model().index(0, col_num)
-        self.scrollTo(idx)
+        if model := self.model() is not None:
+            idx = model.index(0, col_num)
+            self.scrollTo(idx)
 
     def scroll_to_top(self):
         """Override to use abstractitemview-way of scrolling to top."""
