@@ -4,7 +4,7 @@ from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
-DecorationRole2 = QtCore.Qt.ItemDataRole.UserRole + 1000  # type: ignore
+ICON_ROLE = QtCore.Qt.ItemDataRole.UserRole + 1000  # type: ignore
 
 
 class IconDelegate(widgets.StyledItemDelegate):
@@ -24,7 +24,7 @@ class IconDelegate(widgets.StyledItemDelegate):
             index (QtCore.QModelIndex): index which gets decorated
         """
         super().paint(painter, option, index)
-        value = index.data(DecorationRole2)
+        value = index.data(ICON_ROLE)
         if not value:
             return
         margin = 10
@@ -49,10 +49,13 @@ class IconDelegate(widgets.StyledItemDelegate):
                 option.decorationSize = int(value.size() / value.devicePixelRatio())
 
             case QtGui.QIcon():
+                icon = value
                 is_on = option.state & widgets.Style.StateFlag.State_Open
                 state = gui.Icon.State.On if is_on else gui.Icon.State.Off
                 actual_size = option.icon.actualSize(option.decorationSize, mode, state)
                 option.decorationSize = option.decorationSize & actual_size
+            case _:
+                raise ValueError(value)
         r = core.Rect(core.Point(), option.decorationSize)
         r.moveCenter(option.rect.center())
         r.setRight(option.rect.right() - margin)
