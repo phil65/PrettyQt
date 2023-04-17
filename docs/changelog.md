@@ -1,3 +1,10 @@
+## v1.9.1 (2023-04-17)
+
+### Fix
+
+- **ColumnItemModel**: fix wrong value for non-listed roles in data()
+- **ObjectBrowser**: re-add DEFAULT_ATTR_DETAILS and inspected_node_is_visible
+
 ## v1.9.0 (2023-04-17)
 
 ### Feat
