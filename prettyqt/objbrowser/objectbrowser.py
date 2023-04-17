@@ -10,8 +10,29 @@ import traceback
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.objbrowser import objectbrowsertreemodel
-from prettyqt.objbrowser.attribute_model import DEFAULT_ATTR_COLS, DEFAULT_ATTR_DETAILS
+from prettyqt.objbrowser.attribute_model import (
+    ATTR_MODEL_GET_COMMENTS,
+    ATTR_MODEL_GET_DOC,
+    ATTR_MODEL_GET_FILE,
+    ATTR_MODEL_GET_SOURCE,
+    ATTR_MODEL_PATH,
+    ATTR_MODEL_PRETTY_PRINT,
+    ATTR_MODEL_REPR,
+    ATTR_MODEL_STR,
+    DEFAULT_ATTR_COLS,
+)
 
+
+DEFAULT_ATTR_DETAILS = [
+    ATTR_MODEL_PATH,
+    ATTR_MODEL_STR,
+    ATTR_MODEL_REPR,
+    ATTR_MODEL_PRETTY_PRINT,
+    ATTR_MODEL_GET_DOC,
+    ATTR_MODEL_GET_COMMENTS,
+    ATTR_MODEL_GET_FILE,
+    ATTR_MODEL_GET_SOURCE,
+]
 
 logger = logging.getLogger(__name__)
 

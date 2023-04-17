@@ -171,6 +171,14 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             parent_item.children_fetched = True
 
     @property
+    def inspected_node_is_visible(self):
+        """Return True if the inspected node is visible.
+
+        In that case an invisible root node has been added.
+        """
+        return self._inspected_node_is_visible
+
+    @property
     def root_item(self) -> ObjectBrowserTreeItem:
         """Return the root ObjectBrowserTreeItem."""
         return self._root_item
