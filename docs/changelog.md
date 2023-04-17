@@ -1,3 +1,15 @@
+## v1.10.0 (2023-04-18)
+
+### Feat
+
+- **ColumnItemModel**: methods for setting data
+- **TreeItem**: add __iter__ method
+
+### Fix
+
+- **AttributeModel**: checkstate instead of text for is_attribute
+- **UndoStack**: raise KeyError instead of returning it
+
 ## v1.9.2 (2023-04-17)
 
 ### Fix
