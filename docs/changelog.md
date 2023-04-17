@@ -1,3 +1,11 @@
+## v1.7.0 (2023-04-17)
+
+### Feat
+
+- **ColumnItemModel**: add support for sort value and tooltips
+- **Widget**: add grab_mouse_events / grab_keyboard_events context managers
+- **Painter**: add some convenience methods
+
 ## v1.6.0 (2023-04-16)
 
 ### Feat
