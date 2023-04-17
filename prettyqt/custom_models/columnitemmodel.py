@@ -155,16 +155,13 @@ class ColumnItemModelMixin:
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
-        self._attr_cols = attr_cols if attr_cols is not None else []
+        self._attr_cols = attr_cols or []
 
     def columnCount(self, _parent=None):
         return len(self._attr_cols)
 
     def tree_item(self, index: core.ModelIndex) -> treeitem.TreeItem:
-        if not index.isValid():
-            return None
-        else:
-            return index.internalPointer()  # type: ignore
+        return index.internalPointer() if index.isValid() else None
 
     def data(self, index, role):
         """Return the tree item at the given index and role."""
@@ -217,19 +214,29 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
 
 
 class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
-    pass
+    def __init__(
+        self,
+        items: list,
+        columns: list[ColumnItem],
+        parent: QtCore.QObject | None = None,
+    ):
+        super().__init__(columns, parent)
+        self.items = items
+
+    def rowCount(self, parent=None):
+        return 0 if parent is None else len(self.items)
+
+    def tree_item(self, index: core.ModelIndex) -> core.StorageInfo:
+        return self.items[index.row()]
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
-    class TestModel(ColumnItemModel):
-        def rowCount(self, parent=None):
-            return 5
-
     app = widgets.app()
-    item = ColumnItem(name="Test", label=None)
-    model = TestModel(attr_cols=[item])
+    colitem = ColumnItem(name="Test", label=lambda volume: str(volume.get_root_path()))
+    items = core.StorageInfo.get_mounted_volumes()
+    model = ColumnTableModel(items, [colitem])
     table = widgets.TableView()
     table.set_model(model)
     table.show()

@@ -99,32 +99,16 @@ COLUMNS = [
 ]
 
 
-class StorageInfoModel(custom_models.ColumnTableModel):
-    def __init__(
-        self,
-        parent: QtCore.QObject | None = None,
-    ):
-        super().__init__(COLUMNS, parent)
-        self.volumes = core.StorageInfo.get_mounted_volumes()
-
-    def rowCount(self, parent=None):
-        return 0 if parent is None else len(self.volumes)
-
-    def tree_item(self, index: core.ModelIndex) -> core.StorageInfo:
-        return self.volumes[index.row()]
-
-
 if __name__ == "__main__":
-    import sys
-
     from prettyqt import widgets
 
-    app = widgets.Application(sys.argv)
+    app = widgets.app()
     view = widgets.TreeView()
-    view.setModel(StorageInfoModel(view))
+    volumes = core.StorageInfo.get_mounted_volumes()
+    model = custom_models.ColumnTableModel(volumes, COLUMNS, parent=view)
+    view.setModel(model)
     view.resize(640, 480)
     view.set_selection_behaviour("rows")
-    for column in range(view.model().columnCount()):
-        view.resizeColumnToContents(column)
+    view.adapt_sizes()
     view.show()
     app.main_loop()
