@@ -9,7 +9,6 @@ from prettyqt.qt import QtCore
 def size_to_string(size: int) -> str:
     if size <= 0:
         return "0 b"
-    decimals = 2
     units = ["b", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
     power = int(math.log(size, 1024))
     try:
@@ -17,8 +16,7 @@ def size_to_string(size: int) -> str:
     except IndexError:
         unit = units[-1]
         power = len(units) - 1
-    if power == 0:
-        decimals = 0
+    decimals = 0 if power == 0 else 2
     normsize = size / math.pow(1024, power)
     #: this should expand to "1.23 GB"
     return "%0.*f %s" % (decimals, normsize, unit)
@@ -110,9 +108,7 @@ class StorageInfoModel(custom_models.ColumnTableModel):
         self.volumes = core.StorageInfo.get_mounted_volumes()
 
     def rowCount(self, parent=None):
-        if parent is None:
-            return 0
-        return len(self.volumes)
+        return 0 if parent is None else len(self.volumes)
 
     def tree_item(self, index: core.ModelIndex) -> core.StorageInfo:
         return self.volumes[index.row()]

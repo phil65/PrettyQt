@@ -118,13 +118,10 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
             return core.ModelIndex()
 
-        child_item = parent_item.child(row)
-        # logger.debug("  {}".format(child_item.obj_path))
-        if child_item:
+        if child_item := parent_item.child(row):
             return self.createIndex(row, column, child_item)
-        else:
-            logger.warn("no child_item")
-            return core.ModelIndex()
+        logger.warn("no child_item")
+        return core.ModelIndex()
 
     def parent(self, index: core.ModelIndex) -> QtCore.QModelIndex:  # type:ignore
         if not index.isValid():
@@ -140,28 +137,18 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
 
     def rowCount(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
-
-        if parent.column() > 0:
-            # This is taken from the PyQt simpletreemodel example.
-            return 0
-        else:
-            return self.tree_item(parent).child_count()
+        return 0 if parent.column() > 0 else self.tree_item(parent).child_count()
 
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
-        if parent.column() > 0:
-            return 0
-        else:
-            return self.tree_item(parent).has_children
+        return 0 if parent.column() > 0 else self.tree_item(parent).has_children
 
     def canFetchMore(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return 0
         else:
-            result = not self.tree_item(parent).children_fetched
-            # logger.debug("canFetchMore: {} = {}".format(parent, result))
-            return result
+            return not self.tree_item(parent).children_fetched
 
     def fetchMore(self, parent: core.ModelIndex | None = None):
         """Fetch the children given the model index of a parent node.
@@ -184,14 +171,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             parent_item.children_fetched = True
 
     @property
-    def inspected_node_is_visible(self):
-        """Return True if the inspected node is visible.
-
-        In that case an invisible root node has been added.
-        """
-        return self._inspected_node_is_visible
-
-    @property
     def root_item(self) -> ObjectBrowserTreeItem:
         """Return the root ObjectBrowserTreeItem."""
         return self._root_item
@@ -200,18 +179,8 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         """Return the index that returns the root element (same as an invalid index)."""
         return core.ModelIndex()
 
-    def inspected_index(self) -> core.ModelIndex:
-        """Return the model index that point to the inspectedItem."""
-        if self.inspected_node_is_visible:
-            return self.createIndex(0, 0, self.inspected_item)
-        else:
-            return self.root_index()
-
     def tree_item(self, index: core.ModelIndex) -> ObjectBrowserTreeItem:
-        if not index.isValid():
-            return self.root_item
-        else:
-            return index.internalPointer()  # type: ignore
+        return index.internalPointer() if index.isValid() else self.root_item
 
     def _fetch_object_children(self, obj, obj_path):  # -> List[ObjectBrowserTreeItem]:
         """Fetch the children of a Python object.
@@ -280,16 +249,8 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         refreshNode function emit the dataChanged signal for all cells.
         """
         tree_item = self.tree_item(tree_index)
-        logger.debug(
-            "_aux_refresh_tree(%s): %s%s",
-            tree_index,
-            tree_item.obj_path,
-            "*" if tree_item.children_fetched else "",
-        )
-
         if not tree_item.children_fetched:
             return None
-
         old_items = tree_item.child_items
         new_items = self._fetch_object_children(tree_item.obj, tree_item.obj_path)
 
@@ -311,9 +272,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             match tag:
                 case "equal":
                     # when node names are equal is aux_refresh_tree called recursively.
-                    assert (
-                        i2 - i1 == j2 - j1
-                    ), f"equal sanity check failed {i2 - i1} != {j2 - j1}"
                     for old_row, new_row in zip(range(i1, i2), range(j1, j2)):
                         old_items[old_row].obj = new_items[new_row].obj
                         child_index = self.index(old_row, 0, parent=tree_index)
@@ -322,10 +280,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                 case "replace":
                     # Remove the old item and insert the new. The old item may have child
                     # nodes which indices must be removed by Qt, otherwise it crashes.
-                    assert (
-                        i2 - i1 == j2 - j1
-                    ), f"replace sanity check failed {i2 - i1} != {j2 - j1}"
-
                     first = i1  # row number of first that will be removed
                     last = i1 + i2 - 1  # row number of last element after insertion
                     with self.remove_rows(first, last, tree_index):
@@ -337,14 +291,12 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                         tree_item.insert_children(i1, new_items[j1:j2])
 
                 case "delete":
-                    assert j1 == j2, f"delete sanity check failed. {j1} != {j2}"
                     first = i1  # row number of first that will be removed
                     last = i1 + i2 - 1  # row number of last element after insertion
                     with self.remove_rows(first, last, tree_index):
                         del tree_item.child_items[i1:i2]
 
                 case "insert":
-                    assert i1 == i2, f"insert sanity check failed. {i1} != {i2}"
                     first = i1
                     last = i1 + j2 - j1 - 1
                     with self.insert_rows(first, last, tree_index):
@@ -353,38 +305,15 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                     raise ValueError(f"Invalid tag: {tag}")
 
     def refresh_tree(self):
+        if self._inspected_node_is_visible:
+            index = self.createIndex(0, 0, self.inspected_item)
+        else:
+            index = self.root_index()
         """Refresh the tree model from the underlying root object."""
-        logger.info("")
-        logger.info("refresh_tree: %s", self.root_item)
-
-        root_item = self.tree_item(self.root_index())
-        logger.info("  root_item:      %s (idx=%s)", root_item, self.root_index())
-        inspected_item = self.tree_item(self.inspected_index())
-        logger.info(
-            "  inspected_item: %s (idx=%s)", inspected_item, self.inspected_index()
-        )
-
-        assert (
-            root_item is inspected_item
-        ) != self.inspected_node_is_visible, "sanity check"
-
-        self._aux_refresh_tree(self.inspected_index())
-
-        logger.debug(
-            "After _aux_refresh_tree, root_obj: %s",
-            helpers.cut_off_str(self.root_item.obj, 80),
-        )
-        self.root_item.pretty_print()
-
+        self._aux_refresh_tree(index)
         # Emit the dataChanged signal for all cells. This is faster than checking which
         # nodes have changed, which may be slow for some underlying Python objects.
-        bottom_row = self.rowCount() - 1
-        right_column = self.columnCount() - 1
-        top_left = self.index(0, 0)
-        bottom_right = self.index(bottom_row, right_column)
-
-        logger.debug(f"bottom_right: ({bottom_row}, {right_column})")
-        self.dataChanged.emit(top_left, bottom_right)
+        self.update_all()
 
 
 class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):

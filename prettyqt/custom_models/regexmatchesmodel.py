@@ -9,7 +9,7 @@ class RegexMatchesModel(core.AbstractTableModel):
 
     def __init__(self, matches: list | None = None, parent: QtCore.QObject | None = None):
         super().__init__(parent=parent)
-        self.matches = matches if matches else []
+        self.matches = matches or []
 
     def columnCount(self, parent=None):
         return len(self.HEADER)

@@ -89,7 +89,7 @@ def safe_data_fn(
 ATTR_MODEL_NAME = custom_models.ColumnItem(
     name="Name",
     doc="The name of the object.",
-    label=lambda tree_item: tree_item.obj_name if tree_item.obj_name else "<root>",
+    label=lambda tree_item: tree_item.obj_name or "<root>",
     col_visible=True,
     width="small",
     font=lambda x: SPECIAL_ATTR_FONT if x.is_special_attribute else REGULAR_FONT,
@@ -296,20 +296,3 @@ DEFAULT_ATTR_COLS = [
     ATTR_MODEL_GET_FILE,
     ATTR_MODEL_GET_SOURCE_FILE,
 ]
-
-DEFAULT_ATTR_DETAILS = [
-    ATTR_MODEL_PATH,  # to allow for copy/paste
-    ATTR_MODEL_STR,  # Too similar to unicode column
-    ATTR_MODEL_REPR,
-    ATTR_MODEL_PRETTY_PRINT,
-    ATTR_MODEL_GET_DOC,
-    ATTR_MODEL_GET_COMMENTS,
-    # ATTR_MODEL_GET_MODULE, # not used, already in table
-    ATTR_MODEL_GET_FILE,
-    # ATTR_MODEL_GET_SOURCE_FILE,  # not used, already in table
-    ATTR_MODEL_GET_SOURCE,
-]
-
-# Sanity check for duplicates
-assert len(DEFAULT_ATTR_COLS) == len(set(DEFAULT_ATTR_COLS))
-assert len(DEFAULT_ATTR_DETAILS) == len(set(DEFAULT_ATTR_DETAILS))
