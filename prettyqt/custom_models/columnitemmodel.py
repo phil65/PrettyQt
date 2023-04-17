@@ -45,7 +45,7 @@ class ColumnItem:
     def get_name(self) -> str:
         return self.name
 
-    def get_flag(self):
+    def get_flag(self, tree_item):
         flag = constants.NO_FLAGS
         if self.selectable:
             flag |= constants.IS_SELECTABLE  # type: ignore
@@ -199,7 +199,8 @@ class ColumnItemModelMixin:
         if not index.isValid():
             return constants.NO_CHILDREN
         col = index.column()
-        return self._attr_cols[col].get_flag()
+        tree_item = self.tree_item(index)
+        return self._attr_cols[col].get_flag(tree_item)
 
     def headerData(self, section, orientation, role):
         match orientation, role:
