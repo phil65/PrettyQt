@@ -6,7 +6,7 @@ import logging
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import treeitem, types
+from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -31,8 +31,8 @@ class ColumnItem:
     width: int | str = SMALL_COL_WIDTH
     alignment: Callable | int | None = None
     line_wrap: gui.textoption.WordWrapModeStr = "none"
-    foreground_color: Callable[[treeitem.TreeItem], types.ColorType] | str | None = None
-    background_color: Callable[[treeitem.TreeItem], types.ColorType] | str | None = None
+    foreground_color: Callable | str | None = None
+    background_color: Callable | str | None = None
     decoration: Callable | QtGui.QIcon | None = None
     font: Callable | QtGui.QFont | None = None
     selectable: bool = True
@@ -65,7 +65,7 @@ class ColumnItem:
             return self.label(tree_item)
         return self.label
 
-    def get_sort_value(self, tree_item) -> str:
+    def get_sort_value(self, tree_item) -> str | int:
         if self.sort_value is None:
             return self.get_label()
         elif callable(self.sort_value):
