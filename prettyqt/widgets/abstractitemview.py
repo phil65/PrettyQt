@@ -6,7 +6,7 @@ from typing import Any, Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
@@ -332,7 +332,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         p.highlight_inactive()
         self.setPalette(p)
 
-    def set_icon_size(self, size: int | types.SizeType):
+    def set_icon_size(self, size: int | datatypes.SizeType):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         elif isinstance(size, int):

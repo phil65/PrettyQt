@@ -5,7 +5,7 @@ import pathlib
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
@@ -46,7 +46,7 @@ class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
     #     event.accept()
     #     self.show_markdown_file(self.filePath)
 
-    def set_markdown_file(self, file_path: types.PathType):
+    def set_markdown_file(self, file_path: datatypes.PathType):
         file_path = pathlib.Path(file_path)
         with file_path.open() as f:
             file_content = f.read()
@@ -55,7 +55,7 @@ class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
     def set_markdown(self, source: str):
         self.setMarkdown(source)
 
-    def set_rst_file(self, file_path: types.PathType):
+    def set_rst_file(self, file_path: datatypes.PathType):
         file_path = pathlib.Path(file_path)
         with file_path.open() as f:
             file_content = f.read()
@@ -70,7 +70,7 @@ class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
     def get_search_paths(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.searchPaths()]
 
-    def set_search_paths(self, paths: list[types.PathType]):
+    def set_search_paths(self, paths: list[datatypes.PathType]):
         self.setSearchPaths([os.fspath(p) for p in paths])
 
 

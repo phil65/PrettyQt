@@ -4,7 +4,7 @@ from collections.abc import Iterator
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
@@ -56,7 +56,7 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
         self,
         widget: QtWidgets.QWidget,
         title: str | None = None,
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
     ):
         if title is None:
             title = widget.objectName()

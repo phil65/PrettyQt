@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 AreaStr = Literal["top", "bottom"]
@@ -62,7 +62,7 @@ class SidebarWidget(widgets.MainWindow):
         self,
         item: QtWidgets.QWidget,
         title: str,
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         show: bool = False,
         shortcut: str | None = None,
         area: AreaStr = "top",
@@ -92,7 +92,7 @@ class SidebarWidget(widgets.MainWindow):
             self.area.box.setCurrentWidget(item)
 
     def set_marker(
-        self, item: str | int | widgets.Widget, color: types.ColorType = "red"
+        self, item: str | int | widgets.Widget, color: datatypes.ColorType = "red"
     ):
         widget = self._get_widget(item)
         if widget == self._get_current_widget():
@@ -141,7 +141,7 @@ class SidebarWidget(widgets.MainWindow):
     def add_action(
         self,
         title: str,
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         callback: Callable = None,
         checkable: bool = False,
         shortcut: str | None = None,

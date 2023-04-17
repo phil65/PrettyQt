@@ -5,7 +5,7 @@ from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, helpers, types
+from prettyqt.utils import InvalidParamError, datatypes, helpers
 
 
 class ToolBarMixin(widgets.WidgetMixin):
@@ -34,7 +34,7 @@ class ToolBarMixin(widgets.WidgetMixin):
             self.addWidget(item)
 
     def add_menu_button(
-        self, label: str, icon: types.IconType, menu: QtWidgets.QMenu
+        self, label: str, icon: datatypes.IconType, menu: QtWidgets.QMenu
     ) -> widgets.ToolButton:
         btn = widgets.ToolButton.for_menu(menu)
         btn.setText(label)
@@ -88,7 +88,7 @@ class ToolBarMixin(widgets.WidgetMixin):
     def add_action(
         self,
         label: str,
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         callback: Callable | None = None,
         checkable: bool = False,
     ) -> QtWidgets.QAction:
@@ -105,7 +105,7 @@ class ToolBarMixin(widgets.WidgetMixin):
         spacer.set_size_policy("expanding", "expanding")
         return self.addWidget(spacer)
 
-    def set_icon_size(self, size: int | types.SizeType):
+    def set_icon_size(self, size: int | datatypes.SizeType):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)

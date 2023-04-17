@@ -5,7 +5,7 @@ import os
 
 from prettyqt import core, qml
 from prettyqt.qt import QtCore, QtQml
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
@@ -14,8 +14,8 @@ class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
 
     def load_data(
         self,
-        data: types.ByteArrayType,
-        url: types.UrlType | None = None,
+        data: datatypes.ByteArrayType,
+        url: datatypes.UrlType | None = None,
     ):
         if isinstance(data, str):
             data = data.encode()
@@ -27,7 +27,7 @@ class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
             url = core.Url()
         self.loadData(data, url)
 
-    def load_file(self, file: types.UrlType | types.PathType):
+    def load_file(self, file: datatypes.UrlType | datatypes.PathType):
         if isinstance(file, os.PathLike):
             file = os.fspath(file)
         self.load(file)

@@ -8,7 +8,7 @@ import webbrowser
 
 from prettyqt import core, gui, webenginecore
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 mod = QtWebEngineCore.QWebEnginePage
@@ -219,7 +219,7 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
             return None
         return gui.Icon(icon)
 
-    def set_url(self, url: types.PathType):
+    def set_url(self, url: datatypes.PathType):
         """Set the url of the WebEnginePage.
 
         Clears the Page and loads the URL.
@@ -248,7 +248,7 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
     def get_contents_size(self) -> core.SizeF:
         return core.SizeF(self.contentsSize())
 
-    def load_url(self, url: types.UrlType | types.PathType):
+    def load_url(self, url: datatypes.UrlType | datatypes.PathType):
         """Load the URL.
 
         Loads the specified url and displays it.
@@ -343,7 +343,7 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
 
     def set_feature_permission(
         self,
-        url: types.UrlType,
+        url: datatypes.UrlType,
         feature: FeatureStr,
         policy: PermissionPolicyStr,
     ):

@@ -5,7 +5,7 @@ import os
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, types
+from prettyqt.utils import bidict, datatypes
 
 
 LOCK_ERROR = bidict(
@@ -19,7 +19,7 @@ LockErrorStr = Literal["none", "lock_failed", "permission", "unknown"]
 
 
 class LockFile(QtCore.QLockFile):
-    def __init__(self, path: types.PathType):
+    def __init__(self, path: datatypes.PathType):
         super().__init__(os.fspath(path))
 
     def get_error(self) -> LockErrorStr:

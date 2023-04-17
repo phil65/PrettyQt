@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors, types
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
 ROLE = bidict(
@@ -77,7 +77,7 @@ class Palette(QtGui.QPalette):
     def __getitem__(self, index: RoleStr) -> gui.Color:
         return self.get_color(index)
 
-    def __setitem__(self, index: RoleStr, value: types.ColorType):
+    def __setitem__(self, index: RoleStr, value: datatypes.ColorType):
         self.set_color(index, value)
 
     def __bytes__(self):
@@ -92,7 +92,7 @@ class Palette(QtGui.QPalette):
         self.setColor(self.ColorGroup.Inactive, self.ColorRole.Highlight, color)
 
     def set_color(
-        self, role: RoleStr, color: types.ColorType, group: GroupStr = "active"
+        self, role: RoleStr, color: datatypes.ColorType, group: GroupStr = "active"
     ):
         color = colors.get_color(color)
         self.setColor(GROUP[group], ROLE[role], color)
@@ -104,7 +104,10 @@ class Palette(QtGui.QPalette):
         return gui.Color(self.color(GROUP[group], ROLE[role]))
 
     def set_brush(
-        self, role: RoleStr, brush: types.ColorAndBrushType, group: GroupStr = "active"
+        self,
+        role: RoleStr,
+        brush: datatypes.ColorAndBrushType,
+        group: GroupStr = "active",
     ):
         if not isinstance(brush, QtGui.QBrush):
             brush = gui.Brush(colors.get_color(brush))

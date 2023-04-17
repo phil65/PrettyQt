@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, types
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
 VIEW_MODE = bidict(
@@ -119,7 +119,7 @@ class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
 
     def set_background(
         self,
-        brush_or_color: types.ColorAndBrushType,
+        brush_or_color: datatypes.ColorAndBrushType,
         pattern: constants.BrushStyleStr = "solid",
     ):
         if isinstance(brush_or_color, QtGui.QBrush):

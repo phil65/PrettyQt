@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 MODE = bidict(
@@ -91,7 +91,7 @@ class Icon(QtGui.QIcon):
 
     def get_pixmap(
         self,
-        size: types.SizeType | int,
+        size: datatypes.SizeType | int,
         mode: ModeStr = "normal",
         state: StateStr = "off",
     ) -> QtGui.QPixmap:
@@ -107,7 +107,7 @@ class Icon(QtGui.QIcon):
 
     def get_actual_size(
         self,
-        size: types.SizeType | int,
+        size: datatypes.SizeType | int,
         mode: ModeStr = "normal",
         state: StateStr = "off",
     ) -> core.Size:

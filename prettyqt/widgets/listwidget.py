@@ -5,7 +5,7 @@ from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class NoData:
@@ -87,7 +87,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     def add_item(
         self,
         name: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         data: dict | None = None,
         foreground: QtGui.QBrush | None = None,
         background: QtGui.QBrush | None = None,
@@ -99,7 +99,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         # text_alignment: Optional[str] = None,
         checkstate: constants.StateStr | None = None,
         flags: QtCore.Qt.ItemFlags | None = None,
-        size_hint: types.SizeType | None = None,
+        size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,
     ) -> widgets.ListWidgetItem:
         typ = 1 if is_user_type else 0
@@ -133,7 +133,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         self.addItem(item)
         return item
 
-    def add(self, label: str, data=NoData, icon: types.IconType = None):
+    def add(self, label: str, data=NoData, icon: datatypes.IconType = None):
         if data is NoData:
             data = label
         item = widgets.ListWidgetItem(label)

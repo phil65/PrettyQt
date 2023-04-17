@@ -4,7 +4,7 @@ import datetime
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
@@ -24,7 +24,7 @@ class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def set_range(self, lower: types.TimeType, upper: types.TimeType):
+    def set_range(self, lower: datatypes.TimeType, upper: datatypes.TimeType):
         if isinstance(lower, str):
             lower = core.Time.fromString(lower)
         else:
@@ -39,7 +39,7 @@ class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
     def get_value(self) -> datetime.time:
         return self.get_time()
 
-    def set_value(self, value: types.TimeType):
+    def set_value(self, value: datatypes.TimeType):
         if isinstance(value, str):
             value = core.Time.fromString(value)
         return self.setTime(value)  # type: ignore

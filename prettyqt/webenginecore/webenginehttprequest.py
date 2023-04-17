@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 METHODS = bidict(
@@ -26,7 +26,7 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
     def get_headers(self) -> dict[str, str]:
         return {bytes(h).decode(): bytes(self.header(h)).decode() for h in self.headers()}
 
-    def set_url(self, url: types.UrlType):
+    def set_url(self, url: datatypes.UrlType):
         url = core.Url(url)
         self.setUrl(url)
 

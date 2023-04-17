@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
 
 
 FILE_MODE = bidict(
@@ -47,7 +47,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
 
     def __init__(
         self,
-        path: None | types.PathType = None,
+        path: None | datatypes.PathType = None,
         mode: AcceptModeStr = "open",
         caption: str | None = None,
         path_id: str | None = None,
@@ -220,7 +220,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         """
         return pathlib.Path(self.directory().absolutePath())
 
-    def set_directory(self, path: types.PathType):
+    def set_directory(self, path: datatypes.PathType):
         """Set start directory."""
         path = os.fspath(path)
         self.setDirectory(path)

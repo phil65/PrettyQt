@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
@@ -18,7 +18,7 @@ class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
     def get_frame_bounding_rect(self, frame: QtGui.QTextBlock) -> core.RectF:
         return core.RectF(self.frameBoundingRect(frame))
 
-    def hit_test(self, point: types.PointFType, fuzzy: bool = False) -> int | None:
+    def hit_test(self, point: datatypes.PointFType, fuzzy: bool = False) -> int | None:
         if isinstance(point, tuple):
             point = core.PointF(*point)
         accuracy = (

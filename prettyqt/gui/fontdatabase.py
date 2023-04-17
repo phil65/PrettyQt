@@ -6,7 +6,7 @@ import pathlib
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -99,7 +99,7 @@ class FontDatabase(QtGui.QFontDatabase):
     font_paths: dict[str, int] = {}
 
     @classmethod
-    def add_fonts_from_folder(cls, path: types.PathType):
+    def add_fonts_from_folder(cls, path: datatypes.PathType):
         path = pathlib.Path(path)
         for p in path.iterdir():
             if p.suffix.lower() in [".ttf", ".otf"]:
@@ -107,7 +107,7 @@ class FontDatabase(QtGui.QFontDatabase):
                 cls.addApplicationFont(str(p))
 
     @classmethod
-    def add_font(cls, path: types.PathType, ttf_hash: str | None = None) -> int:
+    def add_font(cls, path: datatypes.PathType, ttf_hash: str | None = None) -> int:
         path = pathlib.Path(path)
         font_id = cls.addApplicationFont(str(path))
         if not cls.applicationFontFamilies(font_id):
@@ -125,7 +125,7 @@ class FontDatabase(QtGui.QFontDatabase):
         return font_id
 
     @classmethod
-    def remove_font(cls, font: types.PathType | int):
+    def remove_font(cls, font: datatypes.PathType | int):
         font_id = font if isinstance(font, int) else cls.font_paths[str(font)]
         cls.removeApplicationFont(font_id)
 

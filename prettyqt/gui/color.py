@@ -5,7 +5,7 @@ from typing import Any, Literal
 from deprecated import deprecated
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, helpers, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
 
 
 SPEC = bidict(
@@ -200,7 +200,7 @@ class Color(QtGui.QColor):
         )
 
     @classmethod
-    def drift_color(cls, color: types.ColorAndBrushType, factor: int = 110):
+    def drift_color(cls, color: datatypes.ColorAndBrushType, factor: int = 110):
         """Return color that is lighter or darker than the base color.
 
         If base_color.lightness is higher than 128, the returned color is darker

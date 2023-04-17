@@ -4,7 +4,7 @@ import os
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
@@ -24,7 +24,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
             data=self.data(constants.USER_ROLE),  # type: ignore
         )
 
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
 
         Args:
@@ -96,8 +96,8 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
 
     def set_tooltip(
         self,
-        tooltip: str | types.PathType,
-        size: types.SizeType | None = None,
+        tooltip: str | datatypes.PathType,
+        size: datatypes.SizeType | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)

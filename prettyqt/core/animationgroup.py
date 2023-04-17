@@ -4,7 +4,7 @@ from typing import overload
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class AnimationGroupMixin(core.AbstractAnimationMixin):
@@ -47,7 +47,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
         return self
 
     def add_property_animation(
-        self, obj: QtCore.QObject, attribute: types.ByteArrayType
+        self, obj: QtCore.QObject, attribute: datatypes.ByteArrayType
     ) -> core.PropertyAnimation:
         if isinstance(attribute, str):
             attribute = attribute.encode()

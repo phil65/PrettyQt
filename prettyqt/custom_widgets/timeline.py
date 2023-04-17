@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors, helpers, types
+from prettyqt.utils import colors, datatypes, helpers
 
 
 TEXT_COLOR = gui.Color("lightgray")
@@ -15,7 +15,7 @@ class VideoSample:
     def __init__(
         self,
         duration: float,
-        color: types.ColorType = "yellow",
+        color: datatypes.ColorType = "yellow",
         picture: QtGui.QPixmap | None = None,
     ):
         self.duration = duration
@@ -70,7 +70,7 @@ class Timeline(widgets.Widget):
     def add_sample(
         self,
         duration: int,
-        color: types.ColorType = "yellow",
+        color: datatypes.ColorType = "yellow",
         picture: QtGui.QPixmap | None = None,
     ) -> VideoSample:
         sample = VideoSample(duration, color, picture)
@@ -212,11 +212,11 @@ class Timeline(widgets.Widget):
     def get_scale(self) -> float:
         return self.duration / self.width()
 
-    def set_background_color(self, color: types.ColorType):
+    def set_background_color(self, color: datatypes.ColorType):
         color = colors.get_color(color)
         self.background_color = color
 
-    def set_text_color(self, color: types.ColorType):
+    def set_text_color(self, color: datatypes.ColorType):
         color = colors.get_color(color)
         self.text_color = color
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, qthelp, widgets
 from prettyqt.qt import QtHelp
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class HelpSearchResultWidget(widgets.WidgetMixin):  # , QtHelp.QHelpSearchResultWidget):
@@ -12,7 +12,7 @@ class HelpSearchResultWidget(widgets.WidgetMixin):  # , QtHelp.QHelpSearchResult
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def get_link_at(self, point: types.PointType) -> core.Url:
+    def get_link_at(self, point: datatypes.PointType) -> core.Url:
         if isinstance(point, tuple):
             point = core.Point(*point)
         return core.Url(self.linkAt(point))

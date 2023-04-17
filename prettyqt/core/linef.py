@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class LineF(QtCore.QLineF):
@@ -33,7 +33,7 @@ class LineF(QtCore.QLineF):
         else:
             raise KeyError(index)
 
-    def __setitem__(self, index: Literal[0, 1], value: types.PointFType):
+    def __setitem__(self, index: Literal[0, 1], value: datatypes.PointFType):
         if index == 0:
             self.set_p1(value)
         elif index == 1:
@@ -41,13 +41,13 @@ class LineF(QtCore.QLineF):
         else:
             raise KeyError(index)
 
-    def set_p1(self, point: types.PointFType):
+    def set_p1(self, point: datatypes.PointFType):
         self.setP1(core.PointF(*point) if isinstance(point, tuple) else point)
 
     def get_p1(self) -> core.PointF:
         return core.PointF(self.p1())
 
-    def set_p2(self, point: types.PointFType):
+    def set_p2(self, point: datatypes.PointFType):
         self.setP2(core.PointF(*point) if isinstance(point, tuple) else point)
 
     def get_p2(self) -> core.PointF:

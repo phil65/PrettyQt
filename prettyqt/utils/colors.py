@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 WINDOW_ICON_COLOR = "darkcyan"
@@ -12,7 +12,7 @@ def set_window_icon_color(color: str):
     WINDOW_ICON_COLOR = color
 
 
-def get_color(color: types.ColorType) -> gui.Color:
+def get_color(color: datatypes.ColorType) -> gui.Color:
     """Get gui.Color instance for given parameter.
 
     named colors are 'aliceblue', 'antiquewhite', 'aqua', 'aquamarine',
@@ -54,7 +54,7 @@ def get_color(color: types.ColorType) -> gui.Color:
 
 
 def interpolate_text_colors(
-    bg: types.ColorType, fg: types.ColorType, n_colors: int
+    bg: datatypes.ColorType, fg: datatypes.ColorType, n_colors: int
 ) -> list[gui.Color]:
     bg = get_color(bg)
     fg = get_color(fg)

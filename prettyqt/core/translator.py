@@ -4,7 +4,7 @@ import pathlib
 
 from prettyqt import core, paths
 from prettyqt.qt import QtCore
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class TranslatorMixin(core.ObjectMixin):
@@ -17,7 +17,7 @@ class TranslatorMixin(core.ObjectMixin):
             return None
         return pathlib.Path(path)
 
-    def load_file(self, path: types.PathType):
+    def load_file(self, path: datatypes.PathType):
         path = pathlib.Path(path)
         if not self.load(path.name, str(path.parent)):
             raise OSError(f"Invalid language file {path}")

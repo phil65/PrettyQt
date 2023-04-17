@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 FLOATING_POINT_PRECISION = bidict(
@@ -96,14 +96,16 @@ class DataStream(QtCore.QDataStream):
         return FLOATING_POINT_PRECISION.inverse[self.floatingPointPrecision()]
 
     @classmethod
-    def create_bytearray(cls, data: types.QtSerializableType) -> QtCore.QByteArray:
+    def create_bytearray(cls, data: datatypes.QtSerializableType) -> QtCore.QByteArray:
         ba = QtCore.QByteArray()
         stream = cls(ba, core.iodevice.OPEN_MODES["write_only"])
         stream << data
         return ba
 
     @classmethod
-    def write_bytearray(cls, ba: types.ByteArrayType, write_to: types.QtSerializableType):
+    def write_bytearray(
+        cls, ba: datatypes.ByteArrayType, write_to: datatypes.QtSerializableType
+    ):
         if isinstance(ba, str):
             ba = ba.encode()
         if not isinstance(ba, QtCore.QByteArray):

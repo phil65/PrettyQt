@@ -5,7 +5,7 @@ import contextlib
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, colors, types
+from prettyqt.utils import InvalidParamError, colors, datatypes
 
 
 class GuiApplicationMixin(core.CoreApplicationMixin):
@@ -109,7 +109,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
     def get_primary_screen(self) -> gui.Screen:
         return gui.Screen(self.primaryScreen())
 
-    def get_screen_at(self, point: types.PointType) -> gui.Screen:
+    def get_screen_at(self, point: datatypes.PointType) -> gui.Screen:
         if isinstance(point, tuple):
             point = QtCore.QPoint(*point)
         return gui.Screen(self.screenAt(point))
@@ -132,7 +132,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
     def get_font(cls) -> gui.Font:
         return gui.Font(cls.font())
 
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the default window icon.
 
         Args:

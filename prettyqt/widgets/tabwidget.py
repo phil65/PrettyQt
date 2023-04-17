@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 TAB_SHAPES = bidict(
@@ -99,7 +99,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         """
         self.tabBar().setVisible(self.count() > 1)
 
-    def set_icon_size(self, size: int | types.SizeType):
+    def set_icon_size(self, size: int | datatypes.SizeType):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)
@@ -179,7 +179,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         self.setTabsClosable(closable)
 
     @core.Slot(int, QtCore.QPoint)
-    def detach_tab(self, index: int, point: types.PointType):
+    def detach_tab(self, index: int, point: datatypes.PointType):
         """Detach tab by removing its contents and placing them in a DetachedTab window.
 
         Args:
@@ -219,7 +219,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         self,
         item: QtWidgets.QWidget | QtWidgets.QLayout,
         label: str,
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         position: int | None = None,
         show: bool = False,
     ) -> int:
@@ -243,7 +243,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         self,
         widget: QtWidgets.QWidget | QtWidgets.QLayout,
         name: str,
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         insert_at: int | None = None,
     ):
         """Re-attach tab.
@@ -255,7 +255,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
             widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget
                 from the DetachedTab window
             name (str): the name of the detached tab
-            icon (types.IconType, optional): the window icon for the detached tab
+            icon (datatypes.IconType, optional): the window icon for the detached tab
             insert_at (Optional[int], optional): insert the re-attached tab at the
                 given index
         """

@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtQuick
-from prettyqt.utils import bidict, types
+from prettyqt.utils import bidict, datatypes
 
 
 RESIZE_MODES = bidict(
@@ -27,7 +27,7 @@ StatusStr = Literal["null", "ready", "loading", "error"]
 
 
 class QuickView(gui.WindowMixin, QtQuick.QQuickView):
-    def set_source(self, source: types.UrlType | types.PathType):
+    def set_source(self, source: datatypes.UrlType | datatypes.PathType):
         if isinstance(source, os.PathLike):
             source = os.fspath(source)
         if isinstance(source, str):

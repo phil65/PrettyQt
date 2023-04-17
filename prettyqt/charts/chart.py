@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import charts, constants, core, widgets
 from prettyqt.qt import QtCharts, QtCore
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 THEMES = bidict(
@@ -99,7 +99,7 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
     def set_theme(self, theme_name: ThemeStr):
         self.setTheme(THEMES[theme_name])
 
-    def set_margins(self, margins: types.MarginsType):
+    def set_margins(self, margins: datatypes.MarginsType):
         if isinstance(margins, tuple):
             margins = QtCore.QMargins(*margins)
         self.setMargins(margins)

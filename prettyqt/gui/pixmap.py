@@ -5,7 +5,7 @@ import pathlib
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors, types
+from prettyqt.utils import colors, datatypes
 
 
 class PixmapMixin(gui.PaintDeviceMixin):
@@ -35,7 +35,7 @@ class PixmapMixin(gui.PaintDeviceMixin):
         return self.cacheKey()
 
     @classmethod
-    def from_file(cls, path: types.PathType) -> Pixmap:
+    def from_file(cls, path: datatypes.PathType) -> Pixmap:
         path = pathlib.Path(path)
         with path.open(mode="rb") as f:
             data = f.read()
@@ -77,7 +77,7 @@ class PixmapMixin(gui.PaintDeviceMixin):
         return "data:image/png;base64," + payload
 
     @classmethod
-    def create_dot(cls, color: types.ColorType = "black", size: int = 16) -> Pixmap:
+    def create_dot(cls, color: datatypes.ColorType = "black", size: int = 16) -> Pixmap:
         col = colors.get_color(color)
         px = cls(size, size)
         px.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
@@ -92,7 +92,7 @@ class PixmapMixin(gui.PaintDeviceMixin):
 
     @classmethod
     def create_checkerboard_pattern(
-        cls, n: int, color_1: types.ColorType, color_2: types.ColorType
+        cls, n: int, color_1: datatypes.ColorType, color_2: datatypes.ColorType
     ):
         """Construct tileable checkerboard pattern for paint events."""
         # Brush will be an n×n checkerboard pattern
@@ -112,8 +112,8 @@ class PixmapMixin(gui.PaintDeviceMixin):
         cls,
         char: str,
         size: int,
-        background: types.ColorType = "black",
-        color: types.ColorType = "white",
+        background: datatypes.ColorType = "black",
+        color: datatypes.ColorType = "white",
     ):
         pixmap = cls(size, size)
         pixmap.fill(QtCore.Qt.GlobalColor.transparent)

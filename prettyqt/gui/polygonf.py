@@ -6,7 +6,7 @@ import math
 
 from prettyqt import core, gui
 from prettyqt.qt import API, QtCore, QtGui
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class PolygonF(QtGui.QPolygonF):
@@ -23,7 +23,7 @@ class PolygonF(QtGui.QPolygonF):
     def __bool__(self):
         return not self.isEmpty()
 
-    def __contains__(self, point: types.PointFType) -> bool:
+    def __contains__(self, point: datatypes.PointFType) -> bool:
         if isinstance(point, tuple):
             point = core.PointF(*point)
         return self.containsPoint(point, QtCore.Qt.FillRule.OddEvenFill)
@@ -33,7 +33,7 @@ class PolygonF(QtGui.QPolygonF):
             raise KeyError(index)
         return self.get_point(index)
 
-    # def __setitem__(self, index: int, value: types.PointType):
+    # def __setitem__(self, index: int, value: datatypes.PointType):
     #     if isinstance(value, tuple):
     #         self.setPoint(index, *value)
     #     else:
@@ -77,7 +77,7 @@ class PolygonF(QtGui.QPolygonF):
     def get_points(self) -> list[core.PointF]:
         return [self.get_point(i) for i in range(self.size())]
 
-    def add_points(self, *points: types.PointFType):
+    def add_points(self, *points: datatypes.PointFType):
         for p in points:
             if isinstance(p, tuple):
                 p = core.PointF(*p)

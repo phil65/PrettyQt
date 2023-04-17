@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class IconLabel(widgets.Widget):
@@ -10,7 +10,7 @@ class IconLabel(widgets.Widget):
         self,
         text: str | None = None,
         tooltip: str = "",
-        icon: types.IconType = "mdi.help-circle-outline",
+        icon: datatypes.IconType = "mdi.help-circle-outline",
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)

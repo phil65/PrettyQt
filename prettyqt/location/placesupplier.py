@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, location
 from prettyqt.qt import QtLocation
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class PlaceSupplier(QtLocation.QPlaceSupplier):
@@ -15,7 +15,7 @@ class PlaceSupplier(QtLocation.QPlaceSupplier):
             return None
         return location.PlaceIcon(icon)
 
-    def set_url(self, url: types.UrlType):
+    def set_url(self, url: datatypes.UrlType):
         url = core.Url(url)
         self.setUrl(url)
 

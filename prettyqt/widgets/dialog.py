@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class DialogMixin(widgets.WidgetMixin):
     def __init__(
         self,
         title: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         parent: QtWidgets.QWidget | None = None,
         delete_on_close: bool = False,
         layout: None | str | QtWidgets.QLayout = None,

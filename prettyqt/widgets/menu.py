@@ -5,14 +5,14 @@ from typing import Any
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class MenuMixin(widgets.WidgetMixin):
     def __init__(
         self,
         title: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(title, parent=parent)
@@ -49,7 +49,7 @@ class MenuMixin(widgets.WidgetMixin):
             i.setParent(self)
             self.addAction(i)
 
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the menu.
 
         Args:

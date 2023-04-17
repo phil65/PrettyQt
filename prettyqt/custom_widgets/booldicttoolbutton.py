@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class BoolDictToolButton(widgets.ToolButton):
@@ -11,7 +11,7 @@ class BoolDictToolButton(widgets.ToolButton):
     def __init__(
         self,
         title: str,
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         dct: dict[str, str] = None,
         parent: QtWidgets.QWidget | None = None,
     ):

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, qthelp
 from prettyqt.qt import QtCore, QtHelp
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class HelpEngineCoreMixin(core.ObjectMixin):
@@ -21,7 +21,7 @@ class HelpEngineCoreMixin(core.ObjectMixin):
             core.Url(i) for i in self.files(namespace_name, filter_name, extension_filter)
         ]
 
-    def find_file(self, url: types.UrlType) -> core.Url:
+    def find_file(self, url: datatypes.UrlType) -> core.Url:
         if not isinstance(url, QtCore.QUrl):
             url = QtCore.QUrl(url)
         return core.Url(self.findFile(url))

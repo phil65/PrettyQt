@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 SCENE_LAYER = bidict(
@@ -130,7 +130,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
 
     def add_rect(
         self,
-        rect: types.RectType | types.RectFType,
+        rect: datatypes.RectType | datatypes.RectFType,
         pen: QtGui.QPen | None = None,
         brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsRectItem:
@@ -165,7 +165,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
 
     def add_ellipse(
         self,
-        ellipse: types.RectType | types.RectFType,
+        ellipse: datatypes.RectType | datatypes.RectFType,
         pen: QtGui.QPen | None = None,
         brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsEllipseItem:

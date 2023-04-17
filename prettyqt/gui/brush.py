@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class Brush(QtGui.QBrush):
@@ -39,7 +39,7 @@ class Brush(QtGui.QBrush):
             raise InvalidParamError(style, constants.BRUSH_STYLE)
         self.setStyle(constants.BRUSH_STYLE[style])
 
-    def set_transform(self, transform: types.TransformType):
+    def set_transform(self, transform: datatypes.TransformType):
         if isinstance(transform, tuple):
             transform = gui.Transform(*transform)
         self.setTransform(transform)

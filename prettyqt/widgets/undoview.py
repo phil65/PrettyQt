@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class UndoView(widgets.ListViewMixin, QtWidgets.QUndoView):
     def __getitem__(self, index: int) -> QtGui.QUndoCommand:
         return self.stack().command(index)
 
-    def set_clean_icon(self, icon: types.IconType):
+    def set_clean_icon(self, icon: datatypes.IconType):
         """Set the icon for the clean button.
 
         Args:

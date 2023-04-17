@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import bidict, types
+from prettyqt.utils import bidict, datatypes
 
 
 mod = QtGui.QAbstractFileIconProvider
@@ -32,7 +32,7 @@ OptionStr = Literal["dont_use_custom_dir_icons"]
 
 
 class AbstractFileIconProviderMixin:
-    def get_type(self, file: QtCore.QFileInfo | types.PathType) -> str:
+    def get_type(self, file: QtCore.QFileInfo | datatypes.PathType) -> str:
         if isinstance(file, os.PathLike):
             file = core.FileInfo(file)
         return self.type(file)

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 CURSOR_POSITION = bidict(
@@ -35,7 +35,7 @@ class TextLine(QtGui.QTextLine):
     def get_position(self) -> core.Point:
         return core.Point(self.position())
 
-    def set_position(self, point: types.PointType):
+    def set_position(self, point: datatypes.PointType):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setPosition(point)

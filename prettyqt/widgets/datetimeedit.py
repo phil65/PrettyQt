@@ -7,7 +7,7 @@ import dateutil.parser
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 SECTIONS = bidict(
@@ -83,8 +83,8 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
 
     def set_range(
         self,
-        lower: types.DateTimeType,
-        upper: types.DateTimeType,
+        lower: datatypes.DateTimeType,
+        upper: datatypes.DateTimeType,
     ):
         if isinstance(lower, str):
             lower = dateutil.parser.parse(lower)

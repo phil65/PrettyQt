@@ -12,7 +12,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -120,7 +120,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         self.set_stylesheet(ss)
 
     def set_stylesheet(
-        self, ss: None | str | qstylizer.style.StyleSheet | types.PathType
+        self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
     ):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()

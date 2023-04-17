@@ -7,7 +7,7 @@ import dateutil.parser
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 FILE_ERROR = bidict(
@@ -78,7 +78,7 @@ class FileDeviceMixin(core.IODeviceMixin):
     def __str__(self):
         return self.fileName()
 
-    def set_file_time(self, file_time: types.DateTimeType, typ: FileTimeStr) -> bool:
+    def set_file_time(self, file_time: datatypes.DateTimeType, typ: FileTimeStr) -> bool:
         """Set file time.
 
         Args:

@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, helpers, types
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, helpers
 
 
 TEXT_INTERACTION = bidict(
@@ -220,7 +220,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.setFont(font)
         return self
 
-    def set_color(self, color: types.ColorType) -> Label:
+    def set_color(self, color: datatypes.ColorType) -> Label:
         with self.edit_stylesheet() as ss:
             if color is None:
                 ss.color.setValue("")
@@ -229,7 +229,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
                 ss.color.setValue(color.name())
         return self
 
-    def set_image(self, path: types.PathType, width: int = 300) -> Label:
+    def set_image(self, path: datatypes.PathType, width: int = 300) -> Label:
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
@@ -241,7 +241,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     @classmethod
     def image_from_path(
-        cls, path: types.PathType, parent: QtWidgets.QWidget | None = None
+        cls, path: datatypes.PathType, parent: QtWidgets.QWidget | None = None
     ) -> Label:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

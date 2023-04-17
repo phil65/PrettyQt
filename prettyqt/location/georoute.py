@@ -2,16 +2,16 @@ from __future__ import annotations
 
 from prettyqt import location, positioning
 from prettyqt.qt import QtLocation
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class GeoRouteMixin:
-    def __setitem__(self, index: str, val: types.Variant):
+    def __setitem__(self, index: str, val: datatypes.Variant):
         attrs = self.extendedAttributes()
         attrs[index] = val
         self.setExtendedAttributes(attrs)
 
-    def __getitem__(self, index: str) -> types.Variant:
+    def __getitem__(self, index: str) -> datatypes.Variant:
         attr = self.extendedAttributes()
         if index not in attr:
             raise KeyError(f"Key {index!r} does not exist.")

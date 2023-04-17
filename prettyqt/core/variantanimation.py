@@ -4,17 +4,17 @@ from collections.abc import Callable, Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class VariantAnimationMixin(core.AbstractAnimationMixin):
-    def __getitem__(self, value: float) -> types.Variant:
+    def __getitem__(self, value: float) -> datatypes.Variant:
         return self.keyValueAt(value)
 
-    def __setitem__(self, key: float, value: types.Variant):
+    def __setitem__(self, key: float, value: datatypes.Variant):
         self.setKeyValueAt(key, value)
 
-    def __iter__(self) -> Iterator[tuple[float, types.Variant]]:
+    def __iter__(self) -> Iterator[tuple[float, datatypes.Variant]]:
         return iter(self.keyValues())
 
     def serialize_fields(self):

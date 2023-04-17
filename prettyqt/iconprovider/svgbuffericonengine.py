@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, svg
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors, types
+from prettyqt.utils import colors, datatypes
 
 
 class SVGBufferIconEngine(gui.IconEngine):
@@ -17,7 +17,7 @@ class SVGBufferIconEngine(gui.IconEngine):
     see: https://doc.qt.io/qt-5/qiconengine.html
     """
 
-    def __init__(self, xml: str, color: types.ColorType = "black") -> None:
+    def __init__(self, xml: str, color: datatypes.ColorType = "black") -> None:
         self._xml = xml
         self._color = colors.get_color(color)
         super().__init__()
@@ -56,7 +56,7 @@ class SVGBufferIconEngine(gui.IconEngine):
         self.paint(QtGui.QPainter(pixmap), rect, mode, state)
         return pixmap
 
-    def change_color(self, color: types.ColorType) -> None:
+    def change_color(self, color: datatypes.ColorType) -> None:
         self._color = colors.get_color(color)
 
 

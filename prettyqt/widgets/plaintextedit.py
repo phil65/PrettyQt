@@ -8,7 +8,7 @@ from deprecated import deprecated
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, types
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
 LINE_WRAP_MODE = bidict(
@@ -164,7 +164,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
             options.setFlags(options.flags() & ~flag)  # type: ignore
         doc.setDefaultTextOption(options)
 
-    def highlight_current_line(self, color: types.ColorType = None):
+    def highlight_current_line(self, color: datatypes.ColorType = None):
         if color is None:
             color = self.get_palette().get_color("highlight")
         else:

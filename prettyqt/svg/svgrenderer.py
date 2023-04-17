@@ -4,11 +4,11 @@ import os
 
 from prettyqt import constants, core
 from prettyqt.qt import QtSvg
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class SvgRenderer(core.ObjectMixin, QtSvg.QSvgRenderer):
-    def load_file(self, path: types.PathType):
+    def load_file(self, path: datatypes.PathType):
         result = self.load(os.fspath(path))
         if not result:
             raise ValueError("invalid path")

@@ -4,13 +4,13 @@ import os
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class Image(widgets.Label):
     def __init__(
         self,
-        path: types.PathType | None = None,
+        path: datatypes.PathType | None = None,
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
@@ -20,7 +20,7 @@ class Image(widgets.Label):
     def __repr__(self):
         return f"{type(self).__name__}()"
 
-    def set_image(self, path: types.PathType, width: int = 300):
+    def set_image(self, path: datatypes.PathType, width: int = 300):
         self.setScaledContents(True)
         self.set_alignment(horizontal="center")
         self.setText(
@@ -31,7 +31,7 @@ class Image(widgets.Label):
 
     @classmethod
     def from_path(
-        cls, path: types.PathType, parent: QtWidgets.QWidget | None = None
+        cls, path: datatypes.PathType, parent: QtWidgets.QWidget | None = None
     ) -> Image:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

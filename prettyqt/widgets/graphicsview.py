@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers, mappers, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers, mappers
 
 
 mod = QtWidgets.QGraphicsView
@@ -119,7 +119,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return VIEWPORT_ANCHOR.inverse[self.transformationAnchor()]
 
-    def set_transform(self, transform: types.TransformType, combine: bool = False):
+    def set_transform(self, transform: datatypes.TransformType, combine: bool = False):
         if isinstance(transform, tuple):
             transform = gui.Transform(*transform)
         self.setTransform(transform, combine)

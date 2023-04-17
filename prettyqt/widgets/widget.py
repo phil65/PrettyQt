@@ -13,7 +13,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, colors, helpers, prettyprinter, types
+from prettyqt.utils import InvalidParamError, colors, datatypes, helpers, prettyprinter
 
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
@@ -103,7 +103,7 @@ class WidgetMixin(core.ObjectMixin):
         self.show()
         self.activateWindow()
 
-    def set_icon(self, icon: types.IconType) -> None:
+    def set_icon(self, icon: datatypes.IconType) -> None:
         """Set the window icon.
 
         Args:
@@ -158,8 +158,8 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_tooltip(
         self,
-        tooltip: str | types.PathType,
-        size: types.SizeType | None = None,
+        tooltip: str | datatypes.PathType,
+        size: datatypes.SizeType | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -308,7 +308,7 @@ class WidgetMixin(core.ObjectMixin):
     def get_palette(self) -> gui.Palette:
         return gui.Palette(self.palette())
 
-    def set_background_color(self, color: types.ColorType) -> None:
+    def set_background_color(self, color: datatypes.ColorType) -> None:
         col_str = "" if color is None else colors.get_color(color).name()
         with self.edit_stylesheet() as ss:
             ss.backgroundColor.setValue(col_str)
@@ -344,7 +344,7 @@ class WidgetMixin(core.ObjectMixin):
         self.set_stylesheet(ss)
 
     def set_stylesheet(
-        self, ss: None | str | qstylizer.style.StyleSheet | types.PathType
+        self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
     ):
         match ss:
             case None:
@@ -533,7 +533,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_mask(
         self,
-        area: types.RectType | QtGui.QRegion | None,
+        area: datatypes.RectType | QtGui.QRegion | None,
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
         match area:
@@ -546,7 +546,7 @@ class WidgetMixin(core.ObjectMixin):
                 area = gui.Region(area, gui.region.REGION_TYPE[typ])
         self.setMask(area)
 
-    def set_window_file_path(self, path: types.PathType):
+    def set_window_file_path(self, path: datatypes.PathType):
         self.setWindowFilePath(os.fspath(path))
 
     def get_window_file_path(self) -> pathlib.Path | None:

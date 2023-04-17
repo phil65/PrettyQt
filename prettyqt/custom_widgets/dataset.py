@@ -6,7 +6,7 @@ import pathlib
 from typing import Any
 
 from prettyqt import custom_validators, custom_widgets, gui, widgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class DataItem:
@@ -415,7 +415,7 @@ class StringOrNumber(DataItem):
 
 
 class Button(DataItem):
-    def __init__(self, label: str, callback: Callable, icon: types.IconType = None):
+    def __init__(self, label: str, callback: Callable, icon: datatypes.IconType = None):
         super().__init__("", value=None, include=False)
         self.button_label = label
         self.icon = icon

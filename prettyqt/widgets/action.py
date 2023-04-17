@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers, prettyprinter
 
 
 PRIORITIES = bidict(
@@ -43,7 +43,7 @@ class ActionMixin(core.ObjectMixin):
         self,
         parent: QtCore.QObject | None = None,
         text: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         shortcut: str | None = None,
         tooltip: str = "",
         checkable: bool = False,
@@ -127,8 +127,8 @@ class ActionMixin(core.ObjectMixin):
 
     def set_tooltip(
         self,
-        tooltip: str | types.PathType,
-        size: types.SizeType | None = None,
+        tooltip: str | datatypes.PathType,
+        size: datatypes.SizeType | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -149,7 +149,7 @@ class ActionMixin(core.ObjectMixin):
     def set_checkable(self, value: bool):
         self.setCheckable(value)
 
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
 
         Args:

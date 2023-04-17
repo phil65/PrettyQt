@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 ICON_ENGINE_HOOK = bidict(
@@ -38,8 +38,8 @@ class IconEngine(QtGui.QIconEngine):
 
     def add_file(
         self,
-        path: types.PathType,
-        size: types.SizeType | int,
+        path: datatypes.PathType,
+        size: datatypes.SizeType | int,
         mode: gui.icon.ModeStr,
         state: gui.icon.StateStr,
     ):
@@ -67,7 +67,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def get_actual_size(
         self,
-        size: types.SizeType | int,
+        size: datatypes.SizeType | int,
         mode: gui.icon.ModeStr = "normal",
         state: gui.icon.StateStr = "off",
     ) -> core.Size:
@@ -97,7 +97,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def get_pixmap(
         self,
-        size: types.SizeType | int,
+        size: datatypes.SizeType | int,
         mode: gui.icon.ModeStr = "normal",
         state: gui.icon.StateStr = "off",
         scale: float | None = None,

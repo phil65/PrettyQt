@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, mappers, types
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, mappers
 
 
 AUTO_FORMATTING = mappers.FlagMap(
@@ -107,7 +107,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
     def set_read_only(self, value: bool = True) -> None:
         self.setReadOnly(value)
 
-    def set_text_color(self, color: types.ColorType) -> None:
+    def set_text_color(self, color: datatypes.ColorType) -> None:
         color = colors.get_color(color)
         self.setTextColor(color)
 

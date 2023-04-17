@@ -2,14 +2,14 @@ from __future__ import annotations
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class ImageViewer(widgets.Widget):
     def __init__(
         self,
         title: str = "",
-        path: types.PathType | None = None,
+        path: datatypes.PathType | None = None,
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)

@@ -5,7 +5,7 @@ import os
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class StandardItem(QtGui.QStandardItem):
@@ -78,7 +78,7 @@ class StandardItem(QtGui.QStandardItem):
         assert type(item) == StandardItem
         return item
 
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
 
         Args:
@@ -125,8 +125,8 @@ class StandardItem(QtGui.QStandardItem):
 
     def set_tooltip(
         self,
-        tooltip: str | types.PathType,
-        size: types.SizeType | None = None,
+        tooltip: str | datatypes.PathType,
+        size: datatypes.SizeType | None = None,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -138,7 +138,7 @@ class StandardItem(QtGui.QStandardItem):
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         self.setToolTip(tooltip)
 
-    def set_size_hint(self, hint: types.SizeType):
+    def set_size_hint(self, hint: datatypes.SizeType):
         if isinstance(hint, tuple):
             hint = QtCore.QSize(*hint)
         self.setSizeHint(hint)
@@ -146,7 +146,7 @@ class StandardItem(QtGui.QStandardItem):
     def add_item(
         self,
         name: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         data: dict | None = None,
         foreground: QtGui.QBrush | None = None,
         background: QtGui.QBrush | None = None,
@@ -160,7 +160,7 @@ class StandardItem(QtGui.QStandardItem):
         # text_alignment: Optional[str] = None,
         checkstate: constants.StateStr | None = None,
         flags: QtCore.Qt.ItemFlags | None = None,
-        size_hint: types.SizeType | None = None,
+        size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,
     ) -> StandardItem:
         item = StandardItem(name)

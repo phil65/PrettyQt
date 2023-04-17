@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class SlideAnimation(core.PropertyAnimation):
@@ -14,12 +14,12 @@ class SlideAnimation(core.PropertyAnimation):
         self.set_start_value(core.Point(0, 0))
         self.setDuration(duration)
 
-    def set_start_value(self, point: types.PointType):
+    def set_start_value(self, point: datatypes.PointType):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setStartValue(point)
 
-    def set_end_value(self, point: types.PointType):
+    def set_end_value(self, point: datatypes.PointType):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setEndValue(point)

@@ -4,11 +4,13 @@ import os
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class SplashScreenMixin(widgets.WidgetMixin):
-    def __init__(self, path: types.PathType | QtGui.QPixmap, width: int | None = None):
+    def __init__(
+        self, path: datatypes.PathType | QtGui.QPixmap, width: int | None = None
+    ):
         pix = gui.Pixmap(os.fspath(path)) if not isinstance(path, QtGui.QPixmap) else path
         if width:
             pix = pix.scaledToWidth(width)
@@ -26,7 +28,7 @@ class SplashScreenMixin(widgets.WidgetMixin):
     def set_text(
         self,
         text: str,
-        color: types.ColorType = "black",
+        color: datatypes.ColorType = "black",
         h_align: constants.HorizontalAlignmentStr = "center",
         v_align: constants.VerticalAlignmentStr = "bottom",
     ):

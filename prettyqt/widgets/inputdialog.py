@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 mod = QtWidgets.QInputDialog
@@ -34,7 +34,7 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         cls,
         title: str = "",
         label: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
     ) -> int | None:
         par = widgets.Dialog()
         par.set_icon(icon)
@@ -46,7 +46,7 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         cls,
         title: str = "",
         label: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
     ) -> float | None:
         par = widgets.Dialog()
         par.set_icon(icon)
@@ -58,7 +58,7 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         cls,
         title: str = "",
         label: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         default_value: str = "",
         echo_mode: widgets.lineedit.EchoModeStr = "normal",
     ) -> str | None:
@@ -77,7 +77,7 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         items: list[str],
         title: str = "",
         label: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         editable: bool = False,
     ) -> str | None:
         par = widgets.Dialog()

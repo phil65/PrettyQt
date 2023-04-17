@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors, types
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
 mod = QtGui.QTextCharFormat
@@ -60,7 +60,7 @@ VerticalAlignmentStr = Literal[
 class TextCharFormatMixin(gui.TextFormatMixin):
     def __init__(
         self,
-        text_color: types.ColorType | QtGui.QBrush = None,
+        text_color: datatypes.ColorType | QtGui.QBrush = None,
         bold: bool = False,
         italic: bool = False,
     ):
@@ -71,12 +71,12 @@ class TextCharFormatMixin(gui.TextFormatMixin):
             self.set_font_weight("bold")
         self.setFontItalic(italic)
 
-    def set_foreground_color(self, color: types.ColorType | QtGui.QBrush):
+    def set_foreground_color(self, color: datatypes.ColorType | QtGui.QBrush):
         if not isinstance(color, QtGui.QBrush):
             color = colors.get_color(color)
         self.setForeground(color)
 
-    def set_background_color(self, color: types.ColorType | QtGui.QBrush):
+    def set_background_color(self, color: datatypes.ColorType | QtGui.QBrush):
         if not isinstance(color, QtGui.QBrush):
             color = colors.get_color(color)
         self.setBackground(color)

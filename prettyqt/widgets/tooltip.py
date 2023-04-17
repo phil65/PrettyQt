@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class ToolTip(QtWidgets.QToolTip):
     @classmethod
     def show_text(
         cls,
-        position: types.PointType | None = None,
+        position: datatypes.PointType | None = None,
         text: str = "",
         linebreak_px: int = 400,
     ):

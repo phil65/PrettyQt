@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class TextDocumentFragment(QtGui.QTextDocumentFragment):
@@ -21,7 +21,7 @@ class TextDocumentFragment(QtGui.QTextDocumentFragment):
 
     def write_to_file(
         self,
-        path: types.PathType,
+        path: datatypes.PathType,
         fmt: gui.textdocumentwriter.FormatStr | bytes | QtCore.QByteArray = "plaintext",
     ):
         writer = gui.TextDocumentWriter()

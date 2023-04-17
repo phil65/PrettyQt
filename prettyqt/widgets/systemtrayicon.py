@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import bidict, types
+from prettyqt.utils import bidict, datatypes
 
 
 ACTIVATION_REASONS = bidict(
@@ -22,7 +22,7 @@ MESSAGE_ICONS = bidict(
 
 
 class SystemTrayIcon(core.ObjectMixin, QtWidgets.QSystemTrayIcon):
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the system tray icon.
 
         Args:
@@ -35,7 +35,7 @@ class SystemTrayIcon(core.ObjectMixin, QtWidgets.QSystemTrayIcon):
         self,
         title: str,
         message: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         timeout: int = 10,
     ):
         if icon is None:

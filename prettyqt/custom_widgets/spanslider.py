@@ -8,7 +8,7 @@ from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import colors, types
+from prettyqt.utils import colors, datatypes
 
 
 # Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -267,11 +267,11 @@ class SpanSlider(widgets.Slider):
             main = self._main_control == "upper"
             self.trigger_action("move", main)
 
-    def set_left_color(self, color: types.ColorType):
+    def set_left_color(self, color: datatypes.ColorType):
         self.gradient_left = colors.get_color(color)
         self.update()
 
-    def set_right_color(self, color: types.ColorType):
+    def set_right_color(self, color: datatypes.ColorType):
         self.gradient_right = colors.get_color(color)
         self.update()
 
@@ -285,7 +285,7 @@ class SpanSlider(widgets.Slider):
                 main = self._main_control == "upper"
                 self.trigger_action("move", main)
 
-    def pick(self, p: types.PointType) -> int:
+    def pick(self, p: datatypes.PointType) -> int:
         if isinstance(p, tuple):
             return p[0] if self.is_horizontal() else p[1]
         else:

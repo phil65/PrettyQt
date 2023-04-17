@@ -5,7 +5,7 @@ from typing import Any, Literal
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 mod = QtWidgets.QComboBox
@@ -113,7 +113,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
         if default is not NoData:
             self.set_value(default)
 
-    def add(self, label: str, data=NoData, icon: types.IconType = None):
+    def add(self, label: str, data=NoData, icon: datatypes.IconType = None):
         if data is NoData:
             data = label
         if icon is not None:
@@ -175,7 +175,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
         """
         return SIZE_ADJUST_POLICY.inverse[self.sizeAdjustPolicy()]
 
-    def set_icon_size(self, size: int | types.SizeType):
+    def set_icon_size(self, size: int | datatypes.SizeType):
         """Set size of the icons."""
         if isinstance(size, int):
             size = core.Size(size, size)

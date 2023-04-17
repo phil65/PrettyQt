@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 IMAGE_WRITER_ERROR = bidict(
@@ -41,14 +41,14 @@ class ImageWriter(QtGui.QImageWriter):
     def get_supported_subtypes(self) -> list[str]:
         return [bytes(i).decode() for i in self.supportedSubTypes()]
 
-    def set_subtype(self, subtype: types.ByteArrayType):
+    def set_subtype(self, subtype: datatypes.ByteArrayType):
         if isinstance(subtype, str):
             subtype = subtype.encode()
         if isinstance(subtype, bytes):
             subtype = QtCore.QByteArray(subtype)
         self.setSubType(subtype)
 
-    def set_format(self, fmt: types.ByteArrayType):
+    def set_format(self, fmt: datatypes.ByteArrayType):
         if isinstance(fmt, str):
             fmt = fmt.encode()
         if isinstance(fmt, bytes):

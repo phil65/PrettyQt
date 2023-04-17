@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class Line(QtCore.QLine):
@@ -35,7 +35,7 @@ class Line(QtCore.QLine):
         else:
             raise KeyError(index)
 
-    def __setitem__(self, index: Literal[0, 1], value: types.PointType):
+    def __setitem__(self, index: Literal[0, 1], value: datatypes.PointType):
         if index == 0:
             self.set_p1(value)
         elif index == 1:
@@ -46,7 +46,7 @@ class Line(QtCore.QLine):
     def get_p1(self) -> core.Point:
         return core.Point(self.p1())
 
-    def set_p1(self, point: types.PointType):
+    def set_p1(self, point: datatypes.PointType):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setP1(point)
@@ -54,7 +54,7 @@ class Line(QtCore.QLine):
     def get_p2(self) -> core.Point:
         return core.Point(self.p2())
 
-    def set_p2(self, point: types.PointType):
+    def set_p2(self, point: datatypes.PointType):
         if isinstance(point, tuple):
             point = core.Point(*point)
         self.setP2(point)

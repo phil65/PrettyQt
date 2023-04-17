@@ -4,7 +4,7 @@ import datetime
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class DateEdit(widgets.DateTimeEditMixin, QtWidgets.QDateEdit):
@@ -24,12 +24,12 @@ class DateEdit(widgets.DateTimeEditMixin, QtWidgets.QDateEdit):
             range=(self.min_date(), self.max_date()),
         )
 
-    def set_value(self, value: types.DateType):
+    def set_value(self, value: datatypes.DateType):
         if isinstance(value, str):
             value = QtCore.QDate.fromString(value)
         self.setDate(value)  # type: ignore
 
-    def set_range(self, lower: types.DateType, upper: types.DateType):
+    def set_range(self, lower: datatypes.DateType, upper: datatypes.DateType):
         if isinstance(lower, str):
             lower = QtCore.QDate.fromString(lower)
         if isinstance(upper, str):

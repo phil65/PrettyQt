@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, mappers, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes, mappers
 
 
 mod = QtGui.QImageIOHandler
@@ -77,16 +77,16 @@ TransformationStr = Literal[
 
 
 class ImageIOHandler(mod):
-    def __getitem__(self, key: ImageOptionStr) -> types.Variant:
+    def __getitem__(self, key: ImageOptionStr) -> datatypes.Variant:
         return self.get_option(key)
 
-    def __setitem__(self, key: ImageOptionStr, value: types.Variant):
+    def __setitem__(self, key: ImageOptionStr, value: datatypes.Variant):
         self.set_option(key, value)
 
     def get_format(self) -> str:
         return bytes(self.format()).decode()
 
-    def set_option(self, option: ImageOptionStr, value: types.Variant):
+    def set_option(self, option: ImageOptionStr, value: datatypes.Variant):
         """Set option to given value.
 
         Args:
@@ -100,7 +100,7 @@ class ImageIOHandler(mod):
             raise InvalidParamError(option, IMAGE_OPTION)
         self.setOption(IMAGE_OPTION[option], value)
 
-    def get_option(self, option: ImageOptionStr) -> types.Variant:
+    def get_option(self, option: ImageOptionStr) -> datatypes.Variant:
         """Return the value assigned to option.
 
         Args:

@@ -14,7 +14,7 @@ from prettyqt.qt import QtGui
 # Third party imports
 from prettyqt import gui, paths
 from prettyqt.iconprovider.iconic_font import FontError, IconicFont, set_global_defaults
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 key_type = tuple[Optional[str], Optional[str], bool]
@@ -281,7 +281,7 @@ def set_defaults(**kwargs):
 
 
 def get_icon(
-    icon: types.IconType, color: str | None = None, as_qicon: bool = False
+    icon: datatypes.IconType, color: str | None = None, as_qicon: bool = False
 ) -> QtGui.QIcon:
     """Get icon with given color.
 

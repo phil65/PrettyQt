@@ -5,7 +5,7 @@ import pathlib
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class FileChooserButton(widgets.Widget):
@@ -78,7 +78,7 @@ class FileChooserButton(widgets.Widget):
         self.set_path(dialog.selected_file())
         self.value_changed.emit(self.path)
 
-    def set_path(self, path: types.PathType | None):
+    def set_path(self, path: datatypes.PathType | None):
         if path is None:
             self.path = None
             self.lineedit.set_text("")
@@ -89,7 +89,7 @@ class FileChooserButton(widgets.Widget):
     def get_value(self) -> pathlib.Path | None:
         return self.path
 
-    def set_value(self, value: types.PathType | None):
+    def set_value(self, value: datatypes.PathType | None):
         self.set_path(value)
 
 

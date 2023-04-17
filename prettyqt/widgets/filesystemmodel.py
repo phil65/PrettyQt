@@ -6,7 +6,7 @@ import pathlib
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 OPTIONS = bidict(
@@ -56,7 +56,7 @@ class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
     def use_custom_icons(self, use: bool):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
-    def set_root_path(self, path: types.PathType) -> QtCore.QModelIndex:
+    def set_root_path(self, path: datatypes.PathType) -> QtCore.QModelIndex:
         match path:
             case "/" | "root":
                 path = core.Dir.rootPath()

@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 ICONS = bidict(
@@ -102,7 +102,7 @@ TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     def __init__(
         self,
-        icon: types.IconType | IconStr = None,
+        icon: datatypes.IconType | IconStr = None,
         title: str = "",
         text: str = "",
         informative_text: str = "",
@@ -140,7 +140,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         cls,
         text: str,
         title: str = "",
-        icon: types.IconType = None,
+        icon: datatypes.IconType = None,
         detail_text: str | None = None,
     ) -> str:
         m = cls("none", title, text)
@@ -156,7 +156,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         dlg = cls(text=str(value), title=str(exctype), icon="critical", details=tb)
         dlg.show_blocking()
 
-    def set_icon(self, icon: types.IconType | IconStr):
+    def set_icon(self, icon: datatypes.IconType | IconStr):
         if icon in ICONS:
             self.setIcon(ICONS[icon])
         else:

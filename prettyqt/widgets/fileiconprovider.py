@@ -4,13 +4,15 @@ import os
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class FileIconProvider(gui.AbstractFileIconProviderMixin, QtWidgets.QFileIconProvider):
     def get_icon(
         self,
-        typ: gui.abstractfileiconprovider.IconTypeStr | QtCore.QFileInfo | types.PathType,
+        typ: gui.abstractfileiconprovider.IconTypeStr
+        | QtCore.QFileInfo
+        | datatypes.PathType,
     ) -> QtGui.QIcon:
         if isinstance(typ, (os.PathLike, QtCore.QFileInfo)):
             param = core.FileInfo(typ)

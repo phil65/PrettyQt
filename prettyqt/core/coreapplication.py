@@ -8,7 +8,7 @@ import sys
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -33,7 +33,7 @@ class CoreApplicationMixin(core.ObjectMixin):
         return pathlib.Path(cls.applicationDirPath())
 
     @classmethod
-    def add_library_path(cls, path: types.PathType):
+    def add_library_path(cls, path: datatypes.PathType):
         cls.addLibraryPath(os.fspath(path))
 
     @classmethod
@@ -52,7 +52,7 @@ class CoreApplicationMixin(core.ObjectMixin):
     def set_metadata(
         self,
         app_name: str | None = None,
-        app_version: None | types.SemanticVersionType = None,
+        app_version: None | datatypes.SemanticVersionType = None,
         org_name: str | None = None,
         org_domain: str | None = None,
     ):
@@ -74,7 +74,7 @@ class CoreApplicationMixin(core.ObjectMixin):
         #     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     @classmethod
-    def load_language_file(cls, file: types.PathType) -> core.Translator:
+    def load_language_file(cls, file: datatypes.PathType) -> core.Translator:
         translator = core.Translator()
         translator.load_file(file)
         cls.installTranslator(translator)

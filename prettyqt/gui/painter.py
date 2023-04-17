@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors, types
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
 COMPOSITION_MODE = bidict(
@@ -91,7 +91,7 @@ class PainterMixin:
 
     def draw_text(
         self,
-        position: types.PointType | types.RectType | types.RectFType,
+        position: datatypes.PointType | datatypes.RectType | datatypes.RectFType,
         text: str,
         alignment: constants.AlignmentStr = "center",
     ):
@@ -123,7 +123,7 @@ class PainterMixin:
 
     def draw_rounded_rect(
         self,
-        rect: types.RectType | types.RectFType,
+        rect: datatypes.RectType | datatypes.RectFType,
         x_radius: float,
         y_radius: float,
         relative: bool = False,
@@ -142,8 +142,8 @@ class PainterMixin:
 
     def fill_rect(
         self,
-        rect: types.RectType | types.RectFType,
-        color: types.ColorType,
+        rect: datatypes.RectType | datatypes.RectFType,
+        color: datatypes.ColorType,
         pattern: constants.BrushStyleStr = "solid",
     ):
         if pattern not in constants.BRUSH_STYLE:
@@ -159,7 +159,7 @@ class PainterMixin:
         self,
         style: constants.PenStyleStr | None = "solid",
         width: float = 1.0,
-        color: types.ColorType = "black",
+        color: datatypes.ColorType = "black",
         brush: QtGui.QBrush | None = None,
         miter_limit: float = 2.0,
         join_style: constants.JoinStyleStr = "bevel",
@@ -199,11 +199,11 @@ class PainterMixin:
         """
         return gui.Pen(self.pen())
 
-    def set_color(self, color: types.ColorType):
+    def set_color(self, color: datatypes.ColorType):
         color = colors.get_color(color)
         self.setPen(color)
 
-    def set_brush(self, brush: QtGui.QBrush | types.ColorType):
+    def set_brush(self, brush: QtGui.QBrush | datatypes.ColorType):
         if not isinstance(brush, QtGui.QBrush):
             brush = colors.get_color(brush)
         self.setBrush(brush)
@@ -234,7 +234,7 @@ class PainterMixin:
         """
         return COMPOSITION_MODE.inverse[self.compositionMode()]
 
-    def set_transform(self, transform: types.TransformType, combine: bool = False):
+    def set_transform(self, transform: datatypes.TransformType, combine: bool = False):
         if isinstance(transform, tuple):
             transform = gui.Transform(*transform)
         self.setTransform(transform, combine)

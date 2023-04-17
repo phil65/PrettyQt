@@ -2,11 +2,11 @@ from __future__ import annotations
 
 from prettyqt import network
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class HttpPart(QtNetwork.QHttpPart):
-    def set_body(self, body: types.ByteArrayType):
+    def set_body(self, body: datatypes.ByteArrayType):
         if isinstance(body, str):
             body = body.encode()
         if isinstance(body, bytes):

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
@@ -60,7 +60,7 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
         return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
 
     def window_frame_section_at(
-        self, point: types.PointType
+        self, point: datatypes.PointType
     ) -> constants.WindowFrameSectionStr:
         """Return the window frame section at given position.
 

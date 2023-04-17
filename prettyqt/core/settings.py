@@ -10,7 +10,7 @@ from deprecated import deprecated
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -126,7 +126,7 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
         return SCOPE.inverse[self.scope()]
 
     @classmethod
-    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: types.PathType):
+    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: datatypes.PathType):
         """Set the path to the settings file.
 
         Args:
@@ -217,7 +217,7 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
         cls,
         *exts: str,
         app_name: str | None = None,
-        app_path: None | types.PathType = None,
+        app_path: None | datatypes.PathType = None,
     ):
         logger.debug(f"assigning extensions {exts} to {app_name}")
         s = cls("HKEY_CURRENT_USER\\SOFTWARE\\Classes", Settings.Format.NativeFormat)
@@ -236,7 +236,7 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
 def register_extensions(
     *exts: str,
     app_name: str | None = None,
-    app_path: None | types.PathType = None,
+    app_path: None | datatypes.PathType = None,
 ):
     core.Settings.register_extensions(*exts, app_name=app_name, app_path=app_path)
 

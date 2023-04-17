@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import colors, types
+from prettyqt.utils import colors, datatypes
 
 
 OPTIONS = dict(
@@ -31,7 +31,7 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
     @classmethod
     def get_color(
         cls,
-        preset: types.ColorType = None,
+        preset: datatypes.ColorType = None,
         allow_alpha: bool = False,
         parent: QtWidgets.QWidget | None = None,
     ) -> gui.Color:

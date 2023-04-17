@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, colors, types
+from prettyqt.utils import InvalidParamError, colors, datatypes
 
 
 class Pen(QtGui.QPen):
@@ -22,7 +22,7 @@ class Pen(QtGui.QPen):
     def __repr__(self):
         return f"{type(self).__name__}({self.get_color()})"
 
-    def set_color(self, color: types.ColorType):
+    def set_color(self, color: datatypes.ColorType):
         color = colors.get_color(color)
         self.setColor(color)
 

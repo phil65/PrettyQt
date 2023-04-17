@@ -11,7 +11,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 MARKDOWN_FEATURES = bidict(
@@ -201,7 +201,7 @@ class TextDocumentMixin(core.ObjectMixin):
         return self.metaInformation(META_INFORMATION[info])
 
     def add_resource(
-        self, resource_type: ResourceTypeStr, name: types.PathType, resource
+        self, resource_type: ResourceTypeStr, name: datatypes.PathType, resource
     ):
         if resource_type not in RESOURCE_TYPES:
             raise InvalidParamError(resource_type, RESOURCE_TYPES)
@@ -215,7 +215,7 @@ class TextDocumentMixin(core.ObjectMixin):
         self.set_default_stylesheet(ss)
 
     def set_default_stylesheet(
-        self, ss: None | str | qstylizer.style.StyleSheet | types.PathType
+        self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
     ):
         if isinstance(ss, os.PathLike):
             ss = pathlib.Path(ss).read_text()
@@ -233,7 +233,7 @@ class TextDocumentMixin(core.ObjectMixin):
 
     def write_to_file(
         self,
-        path: types.PathType,
+        path: datatypes.PathType,
         fmt: gui.textdocumentwriter.FormatStr | bytes | QtCore.QByteArray = "plaintext",
     ):
         writer = gui.TextDocumentWriter()

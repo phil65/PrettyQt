@@ -2,19 +2,19 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtLocation
-from prettyqt.utils import types
+from prettyqt.utils import datatypes
 
 
 class PlaceIcon(QtLocation.QPlaceIcon):
     def __bool__(self):
         return not self.isEmpty()
 
-    def __setitem__(self, index: str, val: types.Variant):
+    def __setitem__(self, index: str, val: datatypes.Variant):
         attrs = self.parameters()
         attrs[index] = val
         self.setParameters(attrs)
 
-    def __getitem__(self, index: str) -> types.Variant:
+    def __getitem__(self, index: str) -> datatypes.Variant:
         attr = self.parameters()
         if index not in attr:
             raise KeyError(f"Key {index!r} does not exist.")

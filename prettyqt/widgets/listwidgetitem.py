@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class ListWidgetItem(QtWidgets.QListWidgetItem):
@@ -38,7 +38,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         ba = core.DataStream.create_bytearray(self)
         return bytes(ba)
 
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
 
         Args:
@@ -87,7 +87,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
         role_id = constants.ITEM_DATA_ROLE[role]
         self.setData(role_id, data)
 
-    def set_size_hint(self, hint: types.SizeType):
+    def set_size_hint(self, hint: datatypes.SizeType):
         if isinstance(hint, tuple):
             hint = QtCore.QSize(*hint)
         self.setSizeHint(hint)

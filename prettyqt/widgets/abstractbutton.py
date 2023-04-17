@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, types
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class AbstractButtonMixin(widgets.WidgetMixin):
@@ -41,7 +41,7 @@ class AbstractButtonMixin(widgets.WidgetMixin):
     def __bool__(self):
         return self.isChecked()
 
-    def set_icon(self, icon: types.IconType):
+    def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the button.
 
         Args:
@@ -86,7 +86,7 @@ class AbstractButtonMixin(widgets.WidgetMixin):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_icon_size(self, size: int | types.SizeType):
+    def set_icon_size(self, size: int | datatypes.SizeType):
         """Set size of the icon."""
         if isinstance(size, int):
             size = core.Size(size, size)

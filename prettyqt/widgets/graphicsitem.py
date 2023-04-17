@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 PANEL_MODALITY = bidict(
@@ -133,7 +133,7 @@ class GraphicsItemMixin:
         else:
             self.setTransform(gui.Transform.fromScale(scale[0], scale[1]), True)
 
-    def set_transform(self, transform: types.TransformType, combine: bool = False):
+    def set_transform(self, transform: datatypes.TransformType, combine: bool = False):
         if isinstance(transform, tuple):
             transform = gui.Transform(*transform)
         self.setTransform(transform, combine)

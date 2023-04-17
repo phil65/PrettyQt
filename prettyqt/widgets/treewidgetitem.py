@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, types
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 mod = QtWidgets.QTreeWidgetItem
@@ -69,7 +69,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         self.addChild(other)
         return self
 
-    def set_size_hint(self, hint: types.SizeType, column: int = 0):
+    def set_size_hint(self, hint: datatypes.SizeType, column: int = 0):
         if isinstance(hint, tuple):
             hint = QtCore.QSize(*hint)
         self.setSizeHint(column, hint)
@@ -78,7 +78,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
         order = constants.DESCENDING if descending else constants.ASCENDING
         self.sortChildren(column, order)
 
-    def set_icon(self, icon: types.IconType, column: int = 0):
+    def set_icon(self, icon: datatypes.IconType, column: int = 0):
         """Set the icon for the action.
 
         Args:
