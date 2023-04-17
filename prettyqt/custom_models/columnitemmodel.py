@@ -40,6 +40,8 @@ class ColumnItem:
     editable: bool = False
     checkable: bool = False
     tristate: bool = False
+    set_edit: Callable | None = None
+    set_checkstate: Callable | None = None
     user_data: dict | Callable | None = None
 
     def get_name(self) -> str:
@@ -96,6 +98,26 @@ class ColumnItem:
                 result = constants.STATE[result]
             return result
         return self.checkstate
+
+    def set_checkstate_value(
+        self, tree_item, value: bool | QtCore.Qt.CheckState | constants.StateStr | None
+    ):
+        if self.set_checkstate is None:
+            return None
+        if isinstance(value, str):
+            value = constants.STATE[value]
+        if callable(self.set_checkstate):
+            self.set_checkstate(tree_item, value)
+        else:
+            raise ValueError(self.set_checkstate)
+
+    def set_edit_value(self, tree_item, value: str):
+        if self.set_edit is None:
+            return None
+        if callable(self.set_edit):
+            self.set_edit(tree_item, value)
+        else:
+            raise ValueError(self.set_edit)
 
     def get_font(self, tree_item) -> QtGui.QFont | None:
         if self.font is None:
@@ -191,6 +213,21 @@ class ColumnItemModelMixin:
             case _:
                 if int(role) >= int(constants.USER_ROLE):
                     return self._attr_cols[col].get_user_data(tree_item, role)
+
+    def setData(self, index, value, role):
+        if not index.isValid():
+            return False
+        col = index.column()
+        tree_item = self.tree_item(index)
+        match role:
+            case constants.EDIT_ROLE:
+                self._attr_cols[col].set_edit_value(tree_item, value)
+                self.dataChanged.emit(index, index)
+                return True
+            case constants.CHECKSTATE_ROLE:
+                self._attr_cols[col].set_checkstate_value(tree_item, value)
+                self.dataChanged.emit(index, index)
+                return True
 
     def flags(self, index):
         if not index.isValid():
@@ -315,6 +352,7 @@ if __name__ == "__main__":
     colitem = ColumnItem(
         name="Test",
         label=lambda volume: str(volume.get_root_path()),
+        checkable=True,
         user_data={constants.USER_ROLE: lambda volume: str(volume.get_root_path())},
     )
     items = core.StorageInfo.get_mounted_volumes()
