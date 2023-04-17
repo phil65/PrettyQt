@@ -17,8 +17,8 @@ class RegexMatchesModel(core.AbstractTableModel):
     def headerData(  # type: ignore
         self, section: int, orientation: QtCore.Qt.Orientation, role: int
     ) -> str | None:
-        if role == constants.DISPLAY_ROLE:
-            if orientation == constants.HORIZONTAL:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[section]
 
     def data(self, index, role):

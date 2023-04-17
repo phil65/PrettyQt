@@ -26,8 +26,8 @@ class ModelMixin:
     update_row: Callable
 
     def headerData(self, offset: int, orientation, role):
-        if role == constants.DISPLAY_ROLE:
-            if orientation == constants.HORIZONTAL:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[offset]
 
     def columnCount(self, parent=None):

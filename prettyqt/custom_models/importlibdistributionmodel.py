@@ -46,8 +46,8 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         return 0 if parent.isValid() else len(self.HEADER)
 
     def headerData(self, offset: int, orientation, role):  # type: ignore
-        if role == constants.DISPLAY_ROLE:
-            if orientation == constants.HORIZONTAL:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[offset]
 
     def data(self, index, role=constants.DISPLAY_ROLE):

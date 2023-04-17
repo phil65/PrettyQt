@@ -137,18 +137,18 @@ class ColumnItem:
         return self.alignment
 
     def get_width(self) -> int:
-        if self.width == "small":
-            return SMALL_COL_WIDTH
-        elif self.width == "medium":
-            return MEDIUM_COL_WIDTH
-        elif isinstance(self.width, int):
-            return self.width
-        raise ValueError(self.width)
+        match self.width:
+            case "small":
+                return SMALL_COL_WIDTH
+            case "medium":
+                return MEDIUM_COL_WIDTH
+            case int():
+                return self.width
+            case _:
+                raise ValueError(self.width)
 
 
 class ColumnItemModelMixin:
-    """Model that provides an interface to an objectree that is build of TreeItems."""
-
     def __init__(
         self,
         attr_cols: list[ColumnItem] | None = None,
@@ -158,7 +158,6 @@ class ColumnItemModelMixin:
         self._attr_cols = attr_cols if attr_cols is not None else []
 
     def columnCount(self, _parent=None):
-        """Return the number of columns in the tree."""
         return len(self._attr_cols)
 
     def tree_item(self, index: core.ModelIndex) -> treeitem.TreeItem:
@@ -206,10 +205,11 @@ class ColumnItemModelMixin:
         return self._attr_cols[col].get_flag()
 
     def headerData(self, section, orientation, role):
-        if orientation == constants.HORIZONTAL and role == constants.DISPLAY_ROLE:
-            return self._attr_cols[section].name
-        else:
-            return None
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
+                return self._attr_cols[section].name
+            case _, _:
+                return None
 
 
 class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
