@@ -30,7 +30,7 @@ from __future__ import annotations
 import math
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import colors, types
 
 
@@ -75,13 +75,12 @@ class BaseWaitingSpinner(widgets.Widget):
         painter.translate(
             self._inner_radius + self._line_length, self._inner_radius + self._line_length
         )
-        rect = core.RectF(0, -self._line_width / 2, self._line_length, self._line_width)
         for i in range(self._line_num):
             with painter.backup_state():
                 rotate_angle = 360 * i / self._line_num
                 painter.rotate(rotate_angle)
                 painter.translate(self._inner_radius, 0)
-                distance = self.linecount_distance_from_primary(
+                distance = self._linecount_distance_from_primary(
                     i, self._current_counter, self._line_num
                 )
                 color = self._current_line_color(
@@ -92,11 +91,11 @@ class BaseWaitingSpinner(widgets.Widget):
                     self._color,
                 )
                 painter.setBrush(color)
-                painter.drawRoundedRect(
-                    rect,
+                painter.draw_rounded_rect(
+                    (0, -self._line_width / 2, self._line_length, self._line_width),
                     self._roundness,
                     self._roundness,
-                    QtCore.Qt.SizeMode.RelativeSize,
+                    relative=True,
                 )
 
     def start(self):
@@ -187,7 +186,7 @@ class BaseWaitingSpinner(widgets.Widget):
         divider = int(self._line_num * self._revolutions_per_second)
         self._timer.setInterval(1000 // divider)
 
-    def linecount_distance_from_primary(
+    def _linecount_distance_from_primary(
         self, current: int, primary: int, total_lines: int
     ) -> int:
         distance = primary - current
