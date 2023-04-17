@@ -7,7 +7,7 @@ import inspect
 import logging
 import pprint
 
-from prettyqt import constants, custom_models, gui
+from prettyqt import custom_models, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import treeitem
 
@@ -150,10 +150,9 @@ ATTR_MODEL_CLASS = custom_models.ColumnItem(
 ATTR_MODEL_LENGTH = custom_models.ColumnItem(
     name="Length",
     doc="The length of the object using the len() function",
-    # data_fn     = tio_length,
     label=safe_data_fn(len),
     col_visible=False,
-    alignment=constants.ALIGN_RIGHT,  # type: ignore
+    # alignment="right",
     width="small",
 )
 
@@ -162,7 +161,7 @@ ATTR_MODEL_ID = custom_models.ColumnItem(
     doc="The identifier of the object with calculated using the id() function",
     label=lambda tree_item: f"0x{id(tree_item.obj):X}",
     col_visible=False,
-    alignment=constants.ALIGN_RIGHT,  # type: ignore
+    # alignment="right",
     width="small",
 )
 

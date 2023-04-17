@@ -102,10 +102,8 @@ class FileDeviceMixin(core.IODeviceMixin):
         """
         if typ not in FILE_TIME:
             raise InvalidParamError(typ, FILE_TIME)
-        date = self.fileTime(FILE_TIME[typ])
-        if not date:
-            return None
-        return date.toPython()  # type: ignore
+        if date := self.fileTime(FILE_TIME[typ]):
+            return date.toPython()  # type: ignore
 
     def get_error(self) -> FileErrorStr:
         """Return file error status.
