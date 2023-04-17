@@ -67,7 +67,7 @@ DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def __len__(self) -> int:
-        if model := self.model() is not None:
+        if (model := self.model()) is not None:
             return model.rowCount()
         return 0
 
@@ -129,20 +129,20 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             ss.QHeaderView.section.backgroundColor.setValue(color)
 
     def current_index(self) -> QtCore.QModelIndex | None:
-        if model := self.selectionModel() is not None:
+        if (model := self.selectionModel()) is not None:
             return model.currentIndex()
 
     def current_data(self):
-        if model := self.selectionModel() is not None:
+        if (model := self.selectionModel()) is not None:
             idx = model.currentIndex()
             return idx.data(constants.USER_ROLE)  # type: ignore
 
     def current_row(self) -> int | None:
-        if model := self.selectionModel() is not None:
+        if (model := self.selectionModel()) is not None:
             return model.currentIndex().row()
 
     def current_column(self) -> int | None:
-        if model := self.selectionModel() is not None:
+        if (model := self.selectionModel()) is not None:
             return model.currentIndex().column()
 
     def selected_indexes(self) -> list[QtCore.QModelIndex]:
@@ -293,7 +293,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         Returns:
             amount of selected rows
         """
-        if model := self.selectionModel() is not None:
+        if (model := self.selectionModel()) is not None:
             return len(model.selectedRows())
         return 0
 
@@ -305,7 +305,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         Args:
             col_num: column to scroll to
         """
-        if model := self.model() is not None:
+        if (model := self.model()) is not None:
             idx = model.index(0, col_num)
             self.scrollTo(idx)
 

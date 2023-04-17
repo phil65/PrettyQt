@@ -141,7 +141,7 @@ from .colorspace import ColorSpace
 
 
 def app(args: list[str] | None = None) -> GuiApplication:
-    if instance := GuiApplication.instance() is not None:
+    if (instance := GuiApplication.instance()) is not None:
         return instance
     return GuiApplication(sys.argv if args is None else args)
 

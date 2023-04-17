@@ -156,7 +156,7 @@ from .transposeproxymodel import TransposeProxyModel
 
 
 def app(args: list[str] | None = None) -> CoreApplication:
-    if instance := CoreApplication.instance() is not None:
+    if (instance := CoreApplication.instance()) is not None:
         return instance
     return CoreApplication(sys.argv if args is None else args)
 
