@@ -4797,7 +4797,7 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
         <span class="p">)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">110</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">110</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return color that is lighter or darker than the base color.</span>
 
 <span class="sd">        If base_color.lightness is higher than 128, the returned color is darker</span>
@@ -4840,7 +4840,7 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
 
 
 <h4 id="prettyqt.gui.color.Color.drift_color" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">drift_color</span><span class="p">(</span><span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">110</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">drift_color</span><span class="p">(</span><span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">110</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -4860,7 +4860,7 @@ otherwise is is lighter.
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/color.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">110</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span> <span class="n">factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">110</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return color that is lighter or darker than the base color.</span>
 
 <span class="sd">    If base_color.lightness is higher than 128, the returned color is darker</span>
@@ -7340,7 +7340,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
     <span class="k">def</span> <span class="nf">get_primary_screen</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Screen</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Screen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">primaryScreen</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">get_screen_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Screen</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_screen_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Screen</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">point</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">point</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">(</span><span class="o">*</span><span class="n">point</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Screen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">screenAt</span><span class="p">(</span><span class="n">point</span><span class="p">))</span>
@@ -7363,7 +7363,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
     <span class="k">def</span> <span class="nf">get_font</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the default window icon.</span>
 
 <span class="sd">        Args:</span>
@@ -7690,7 +7690,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
 
 
 <h4 id="prettyqt.gui.guiapplication.GuiApplicationMixin.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -7712,7 +7712,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -7720,7 +7720,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/guiapplication.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the default window icon.</span>
 
 <span class="sd">    Args:</span>
@@ -7946,7 +7946,7 @@ Icon            (<span title="PySide6.QtGui.QIcon">QIcon</span>)
 
     <span class="k">def</span> <span class="nf">get_pixmap</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">size</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="n">ModeStr</span> <span class="o">=</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span> <span class="o">=</span> <span class="s2">&quot;off&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">:</span>
@@ -7962,7 +7962,7 @@ Icon            (<span title="PySide6.QtGui.QIcon">QIcon</span>)
 
     <span class="k">def</span> <span class="nf">get_actual_size</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">size</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="nb">int</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="n">ModeStr</span> <span class="o">=</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
         <span class="n">state</span><span class="p">:</span> <span class="n">StateStr</span> <span class="o">=</span> <span class="s2">&quot;off&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">:</span>
@@ -8109,16 +8109,16 @@ ImageIOHandler            (<span title="PySide6.QtGui.QImageIOHandler">QImageIOH
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ImageIOHandler</span><span class="p">(</span><span class="n">mod</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_option</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set option to given value.</span>
 
 <span class="sd">        Args:</span>
@@ -8132,7 +8132,7 @@ ImageIOHandler            (<span title="PySide6.QtGui.QImageIOHandler">QImageIOH
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">option</span><span class="p">,</span> <span class="n">IMAGE_OPTION</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">IMAGE_OPTION</span><span class="p">[</span><span class="n">option</span><span class="p">],</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the value assigned to option.</span>
 
 <span class="sd">        Args:</span>
@@ -8180,7 +8180,7 @@ ImageIOHandler            (<span title="PySide6.QtGui.QImageIOHandler">QImageIOH
 
 
 <h4 id="prettyqt.gui.imageiohandler.ImageIOHandler.get_option" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span></code>
+<code class="codehilite language-python"><span class="n">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span></code>
 
 
 </h4>
@@ -8218,14 +8218,14 @@ ImageIOHandler            (<span title="PySide6.QtGui.QImageIOHandler">QImageIOH
   </thead>
   <tbody>
     <tr>
-      <td><code>types.Variant</code></td>
+      <td><code>datatypes.Variant</code></td>
       <td><p>option</p></td>
     </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the value assigned to option.</span>
 
 <span class="sd">    Args:</span>
@@ -8250,7 +8250,7 @@ ImageIOHandler            (<span title="PySide6.QtGui.QImageIOHandler">QImageIOH
 
 
 <h4 id="prettyqt.gui.imageiohandler.ImageIOHandler.set_option" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">)</span></code>
 
 
 </h4>
@@ -8278,7 +8278,7 @@ ImageIOHandler            (<span title="PySide6.QtGui.QImageIOHandler">QImageIOH
       </tr>
       <tr>
         <td><code>value</code></td>
-        <td><code>types.Variant</code></td>
+        <td><code>datatypes.Variant</code></td>
         <td><p>value to set</p></td>
         <td><em>required</em></td>
       </tr>
@@ -8301,7 +8301,7 @@ ImageIOHandler            (<span title="PySide6.QtGui.QImageIOHandler">QImageIOH
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/imageiohandler.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">option</span><span class="p">:</span> <span class="n">ImageOptionStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">Variant</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set option to given value.</span>
 
 <span class="sd">    Args:</span>
@@ -8497,7 +8497,7 @@ ImageReader            (<span title="PySide6.QtGui.QImageReader">QImageReader</s
     <span class="k">def</span> <span class="nf">get_supported_subtypes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supportedSubTypes</span><span class="p">()]</span>
 
-    <span class="k">def</span> <span class="nf">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">fmt</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
@@ -8541,7 +8541,7 @@ ImageReader            (<span title="PySide6.QtGui.QImageReader">QImageReader</s
         <span class="k">return</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">ImageReader</span><span class="o">.</span><span class="n">supportedMimeTypes</span><span class="p">()]</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span> <span class="nf">get_image_formats_for_mime_type</span><span class="p">(</span><span class="n">typ</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">get_image_formats_for_mime_type</span><span class="p">(</span><span class="n">typ</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">typ</span> <span class="o">=</span> <span class="n">typ</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
@@ -8830,14 +8830,14 @@ ImageWriter            (<span title="PySide6.QtGui.QImageWriter">QImageWriter</s
     <span class="k">def</span> <span class="nf">get_supported_subtypes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="nb">bytes</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">supportedSubTypes</span><span class="p">()]</span>
 
-    <span class="k">def</span> <span class="nf">set_subtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtype</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_subtype</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">subtype</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subtype</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">subtype</span> <span class="o">=</span> <span class="n">subtype</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">subtype</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
             <span class="n">subtype</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">(</span><span class="n">subtype</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSubType</span><span class="p">(</span><span class="n">subtype</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">fmt</span> <span class="o">=</span> <span class="n">fmt</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fmt</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
@@ -10342,7 +10342,7 @@ PainterMixin        </code>
 
     <span class="k">def</span> <span class="nf">draw_text</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">position</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
+        <span class="n">position</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span>
     <span class="p">):</span>
@@ -10374,7 +10374,7 @@ PainterMixin        </code>
 
     <span class="k">def</span> <span class="nf">draw_rounded_rect</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">rect</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
+        <span class="n">rect</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
         <span class="n">x_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">y_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
         <span class="n">relative</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -10393,8 +10393,8 @@ PainterMixin        </code>
 
     <span class="k">def</span> <span class="nf">fill_rect</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">rect</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span>
+        <span class="n">rect</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span>
         <span class="n">pattern</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">BrushStyleStr</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="n">pattern</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">BRUSH_STYLE</span><span class="p">:</span>
@@ -10410,7 +10410,7 @@ PainterMixin        </code>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
         <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
         <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">miter_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
         <span class="n">join_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s2">&quot;bevel&quot;</span><span class="p">,</span>
@@ -10450,11 +10450,11 @@ PainterMixin        </code>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pen</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_brush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_brush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">brush</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
             <span class="n">brush</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">brush</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">brush</span><span class="p">)</span>
@@ -10485,7 +10485,7 @@ PainterMixin        </code>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">COMPOSITION_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">compositionMode</span><span class="p">()]</span>
 
-    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">transform</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="o">*</span><span class="n">transform</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">combine</span><span class="p">)</span>
@@ -10704,7 +10704,7 @@ PainterMixin        </code>
 
 
 <h4 id="prettyqt.gui.painter.PainterMixin.set_pen" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s1">&#39;solid&#39;</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">miter_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">join_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s1">&#39;bevel&#39;</span><span class="p">,</span> <span class="n">cap_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span> <span class="o">=</span> <span class="s1">&#39;square&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span></code>
+<code class="codehilite language-python"><span class="n">set_pen</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s1">&#39;solid&#39;</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">miter_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span> <span class="n">join_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s1">&#39;bevel&#39;</span><span class="p">,</span> <span class="n">cap_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CapStyleStr</span> <span class="o">=</span> <span class="s1">&#39;square&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pen</span></code>
 
 
 </h4>
@@ -10738,7 +10738,7 @@ PainterMixin        </code>
       </tr>
       <tr>
         <td><code>color</code></td>
-        <td><code>types.ColorType</code></td>
+        <td><code>datatypes.ColorType</code></td>
         <td><p>pen color</p></td>
         <td><code>&#39;black&#39;</code></td>
       </tr>
@@ -10774,7 +10774,7 @@ PainterMixin        </code>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">PenStyleStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
     <span class="n">width</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
-    <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+    <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
     <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">miter_limit</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">2.0</span><span class="p">,</span>
     <span class="n">join_style</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">JoinStyleStr</span> <span class="o">=</span> <span class="s2">&quot;bevel&quot;</span><span class="p">,</span>
@@ -10904,7 +10904,7 @@ PainterPath            (<span title="PySide6.QtGui.QPainterPath">QPainterPath</s
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPointF</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPainterPath</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rect</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectFType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span><span class="p">):</span>
             <span class="n">rect</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">(</span><span class="n">rect</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
@@ -11512,7 +11512,7 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -11527,7 +11527,7 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ColorGroup</span><span class="o">.</span><span class="n">Inactive</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ColorRole</span><span class="o">.</span><span class="n">Highlight</span><span class="p">,</span> <span class="n">color</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>
     <span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="n">ROLE</span><span class="p">[</span><span class="n">role</span><span class="p">],</span> <span class="n">color</span><span class="p">)</span>
@@ -11539,7 +11539,10 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="n">GROUP</span><span class="p">[</span><span class="n">group</span><span class="p">],</span> <span class="n">ROLE</span><span class="p">[</span><span class="n">role</span><span class="p">]))</span>
 
     <span class="k">def</span> <span class="nf">set_brush</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span> <span class="n">brush</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span> <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">role</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span>
+        <span class="n">brush</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span>
+        <span class="n">group</span><span class="p">:</span> <span class="n">GroupStr</span> <span class="o">=</span> <span class="s2">&quot;active&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">brush</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
             <span class="n">brush</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">brush</span><span class="p">))</span>
@@ -11841,7 +11844,7 @@ Pen            (<span title="PySide6.QtGui.QPen">QPen</span>)
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
 
-    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setColor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
@@ -12387,7 +12390,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cacheKey</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pixmap</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pixmap</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">path</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
@@ -12429,7 +12432,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
         <span class="k">return</span> <span class="s2">&quot;data:image/png;base64,&quot;</span> <span class="o">+</span> <span class="n">payload</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create_dot</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pixmap</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_dot</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pixmap</span><span class="p">:</span>
         <span class="n">col</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="n">px</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
         <span class="n">px</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">GlobalColor</span><span class="o">.</span><span class="n">transparent</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
@@ -12444,7 +12447,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">create_checkerboard_pattern</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color_1</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">color_2</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color_1</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">color_2</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Construct tileable checkerboard pattern for paint events.&quot;&quot;&quot;</span>
         <span class="c1"># Brush will be an n×n checkerboard pattern</span>
@@ -12464,8 +12467,8 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">char</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">background</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
+        <span class="n">background</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="n">pixmap</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
         <span class="n">pixmap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">GlobalColor</span><span class="o">.</span><span class="n">transparent</span><span class="p">)</span>
@@ -12515,7 +12518,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
 
 
 <h4 id="prettyqt.gui.pixmap.PixmapMixin.create_checkerboard_pattern" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">create_checkerboard_pattern</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color_1</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">color_2</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">create_checkerboard_pattern</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color_1</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">color_2</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -12531,7 +12534,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
           <summary>Source code in <code>prettyqt/gui/pixmap.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">create_checkerboard_pattern</span><span class="p">(</span>
-    <span class="bp">cls</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color_1</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">color_2</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span>
+    <span class="bp">cls</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">color_1</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">,</span> <span class="n">color_2</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Construct tileable checkerboard pattern for paint events.&quot;&quot;&quot;</span>
     <span class="c1"># Brush will be an n×n checkerboard pattern</span>
@@ -12980,7 +12983,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
         <span class="k">assert</span> <span class="nb">type</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="o">==</span> <span class="n">StandardItem</span>
         <span class="k">return</span> <span class="n">item</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">        Args:</span>
@@ -13027,8 +13030,8 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
 
     <span class="k">def</span> <span class="nf">set_tooltip</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
-        <span class="n">size</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tooltip</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
@@ -13040,7 +13043,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
                 <span class="n">tooltip</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;&lt;img src=</span><span class="si">{</span><span class="n">path</span><span class="si">!r}</span><span class="s1"> width=&quot;</span><span class="si">{</span><span class="n">size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot; height=&quot;</span><span class="si">{</span><span class="n">size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">&quot;&gt;&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setToolTip</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_size_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_size_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">hint</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="o">*</span><span class="n">hint</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSizeHint</span><span class="p">(</span><span class="n">hint</span><span class="p">)</span>
@@ -13048,7 +13051,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
     <span class="k">def</span> <span class="nf">add_item</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">data</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">foreground</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">background</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -13062,7 +13065,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
         <span class="c1"># text_alignment: Optional[str] = None,</span>
         <span class="n">checkstate</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">StateStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">flags</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemFlags</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">size_hint</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">size_hint</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">is_user_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StandardItem</span><span class="p">:</span>
         <span class="n">item</span> <span class="o">=</span> <span class="n">StandardItem</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
@@ -13280,7 +13283,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
 
 
 <h4 id="prettyqt.gui.standarditem.StandardItem.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -13302,7 +13305,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -13310,7 +13313,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/standarditem.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -14889,7 +14892,7 @@ TextCharFormatMixin            (<a class="autorefs autorefs-internal" title="pre
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TextCharFormatMixin</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">TextFormatMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">text_color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">text_color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">bold</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">italic</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">):</span>
@@ -14900,12 +14903,12 @@ TextCharFormatMixin            (<a class="autorefs autorefs-internal" title="pre
             <span class="bp">self</span><span class="o">.</span><span class="n">set_font_weight</span><span class="p">(</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFontItalic</span><span class="p">(</span><span class="n">italic</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_foreground_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_foreground_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
             <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setForeground</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">color</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
             <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setBackground</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
@@ -16040,7 +16043,7 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">metaInformation</span><span class="p">(</span><span class="n">META_INFORMATION</span><span class="p">[</span><span class="n">info</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">add_resource</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">resource_type</span><span class="p">:</span> <span class="n">ResourceTypeStr</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span> <span class="n">resource</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">resource_type</span><span class="p">:</span> <span class="n">ResourceTypeStr</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span> <span class="n">resource</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="n">resource_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">RESOURCE_TYPES</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">resource_type</span><span class="p">,</span> <span class="n">RESOURCE_TYPES</span><span class="p">)</span>
@@ -16054,7 +16057,7 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
         <span class="bp">self</span><span class="o">.</span><span class="n">set_default_stylesheet</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_default_stylesheet</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">ss</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ss</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
             <span class="n">ss</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
@@ -16072,7 +16075,7 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
 
     <span class="k">def</span> <span class="nf">write_to_file</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
         <span class="n">fmt</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textdocumentwriter</span><span class="o">.</span><span class="n">FormatStr</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span> <span class="o">=</span> <span class="s2">&quot;plaintext&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextDocumentWriter</span><span class="p">()</span>

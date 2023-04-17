@@ -1568,7 +1568,7 @@ HttpMultiPart            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">CONTENT_TYPES</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setContentType</span><span class="p">(</span><span class="n">CONTENT_TYPES</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
 
-    <span class="k">def</span> <span class="nf">set_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundary</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">boundary</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">boundary</span> <span class="o">=</span> <span class="n">boundary</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">boundary</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
@@ -1750,7 +1750,7 @@ NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">
     <span class="c1">#     if allow_redirects:</span>
     <span class="c1">#         pass</span>
 
-    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">request</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -1808,7 +1808,7 @@ NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">
 
 
 <h4 id="prettyqt.network.networkaccessmanager.NetworkAccessManager.get" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1819,7 +1819,7 @@ NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
     <span class="n">request</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">NetworkRequest</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -2689,7 +2689,7 @@ NetworkRequest            (<span title="PySide6.QtNetwork.QNetworkRequest">QNetw
         <details class="quote">
           <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkRequest</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>

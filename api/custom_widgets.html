@@ -5402,7 +5402,7 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
         <span class="bp">self</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">selected_file</span><span class="p">())</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">value_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -5413,7 +5413,7 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
 
-    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -6871,7 +6871,7 @@ IconWidget            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="bp">self</span><span class="o">.</span><span class="n">_size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mi">16</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="n">iconprovider</span><span class="o">.</span><span class="n">_icon</span><span class="p">(</span><span class="o">*</span><span class="n">names</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set a new icon().</span>
 
 <span class="sd">        Parameters</span>
@@ -6882,7 +6882,7 @@ IconWidget            (<a class="autorefs autorefs-internal" title="prettyqt.wid
         <span class="bp">self</span><span class="o">.</span><span class="n">_icon</span> <span class="o">=</span> <span class="n">iconprovider</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(</span><span class="n">_icon</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_icon</span><span class="o">.</span><span class="n">pixmap</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_size</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="o">*</span><span class="n">size</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -6915,7 +6915,7 @@ IconWidget            (<a class="autorefs autorefs-internal" title="prettyqt.wid
 
 
 <h4 id="prettyqt.custom_widgets.iconwidget.IconWidget.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -6931,7 +6931,7 @@ IconWidget            (<a class="autorefs autorefs-internal" title="prettyqt.wid
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/iconwidget.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set a new icon().</span>
 
 <span class="sd">    Parameters</span>
@@ -10879,11 +10879,11 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
             <span class="n">main</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_control</span> <span class="o">==</span> <span class="s2">&quot;upper&quot;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">trigger_action</span><span class="p">(</span><span class="s2">&quot;move&quot;</span><span class="p">,</span> <span class="n">main</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_left_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_left_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gradient_left</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_right_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_right_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gradient_right</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
@@ -10897,7 +10897,7 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
                 <span class="n">main</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_main_control</span> <span class="o">==</span> <span class="s2">&quot;upper&quot;</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">trigger_action</span><span class="p">(</span><span class="s2">&quot;move&quot;</span><span class="p">,</span> <span class="n">main</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">pick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">pick</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_horizontal</span><span class="p">()</span> <span class="k">else</span> <span class="n">p</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -11775,7 +11775,7 @@ Timeline            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
     <span class="k">def</span> <span class="nf">add_sample</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">duration</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
+        <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;yellow&quot;</span><span class="p">,</span>
         <span class="n">picture</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">VideoSample</span><span class="p">:</span>
         <span class="n">sample</span> <span class="o">=</span> <span class="n">VideoSample</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="n">color</span><span class="p">,</span> <span class="n">picture</span><span class="p">)</span>
@@ -11917,11 +11917,11 @@ Timeline            (<span title="prettyqt.widgets.widget.Widget">Widget</span>)
     <span class="k">def</span> <span class="nf">get_scale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">duration</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">background_color</span> <span class="o">=</span> <span class="n">color</span>
 
-    <span class="k">def</span> <span class="nf">set_text_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_text_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">text_color</span> <span class="o">=</span> <span class="n">color</span>
 
@@ -12422,7 +12422,7 @@ BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widg
     <span class="k">def</span> <span class="nf">set_roundness</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">roundness</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="nb">min</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">roundness</span><span class="p">))</span>
 
-    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_revolutions_per_second</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">_revolutions_per_second</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>

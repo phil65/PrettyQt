@@ -4207,14 +4207,16 @@ DataStream            (<span title="PySide6.QtCore.QDataStream">QDataStream</spa
         <span class="k">return</span> <span class="n">FLOATING_POINT_PRECISION</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">floatingPointPrecision</span><span class="p">()]</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">create_bytearray</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">QtSerializableType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">create_bytearray</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">QtSerializableType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">:</span>
         <span class="n">ba</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">()</span>
         <span class="n">stream</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">iodevice</span><span class="o">.</span><span class="n">OPEN_MODES</span><span class="p">[</span><span class="s2">&quot;write_only&quot;</span><span class="p">])</span>
         <span class="n">stream</span> <span class="o">&lt;&lt;</span> <span class="n">data</span>
         <span class="k">return</span> <span class="n">ba</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">write_bytearray</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">ba</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">,</span> <span class="n">write_to</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">QtSerializableType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">write_bytearray</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">ba</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ByteArrayType</span><span class="p">,</span> <span class="n">write_to</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">QtSerializableType</span>
+    <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">ba</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">encode</span><span class="p">()</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span><span class="p">):</span>
@@ -5274,7 +5276,7 @@ FileDeviceMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">I
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileName</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set file time.</span>
 
 <span class="sd">        Args:</span>
@@ -5298,10 +5300,8 @@ FileDeviceMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">I
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILE_TIME</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FILE_TIME</span><span class="p">)</span>
-        <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileTime</span><span class="p">(</span><span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">date</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="n">toPython</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="n">date</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileTime</span><span class="p">(</span><span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">]):</span>
+            <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="n">toPython</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">FileErrorStr</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return file error status.</span>
@@ -5412,10 +5412,8 @@ FileDeviceMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">I
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">typ</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">FILE_TIME</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="n">FILE_TIME</span><span class="p">)</span>
-    <span class="n">date</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileTime</span><span class="p">(</span><span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">date</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="n">toPython</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
+    <span class="k">if</span> <span class="n">date</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileTime</span><span class="p">(</span><span class="n">FILE_TIME</span><span class="p">[</span><span class="n">typ</span><span class="p">]):</span>
+        <span class="k">return</span> <span class="n">date</span><span class="o">.</span><span class="n">toPython</span><span class="p">()</span>  <span class="c1"># type: ignore</span>
 </code></pre></div>
         </details>
     </div>
@@ -5429,7 +5427,7 @@ FileDeviceMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">I
 
 
 <h4 id="prettyqt.core.filedevice.FileDeviceMixin.set_file_time" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
+<code class="codehilite language-python"><span class="n">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span></code>
 
 
 </h4>
@@ -5451,7 +5449,7 @@ FileDeviceMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">I
   <tbody>
       <tr>
         <td><code>file_time</code></td>
-        <td><code>types.DateTimeType</code></td>
+        <td><code>datatypes.DateTimeType</code></td>
         <td><p>file time to set</p></td>
         <td><em>required</em></td>
       </tr>
@@ -5480,7 +5478,7 @@ FileDeviceMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">I
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/filedevice.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_file_time</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">file_time</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">DateTimeType</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FileTimeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set file time.</span>
 
 <span class="sd">    Args:</span>
@@ -6724,7 +6722,7 @@ Settings            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
         <span class="k">return</span> <span class="n">SCOPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">scope</span><span class="p">()]</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the path to the settings file.</span>
 
 <span class="sd">        Args:</span>
@@ -6815,7 +6813,7 @@ Settings            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
         <span class="bp">cls</span><span class="p">,</span>
         <span class="o">*</span><span class="n">exts</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">app_path</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">app_path</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;assigning extensions </span><span class="si">{</span><span class="n">exts</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">app_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">s</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;HKEY_CURRENT_USER</span><span class="se">\\</span><span class="s2">SOFTWARE</span><span class="se">\\</span><span class="s2">Classes&quot;</span><span class="p">,</span> <span class="n">Settings</span><span class="o">.</span><span class="n">Format</span><span class="o">.</span><span class="n">NativeFormat</span><span class="p">)</span>
@@ -7143,7 +7141,7 @@ Settings            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
 
 
 <h4 id="prettyqt.core.settings.Settings.set_path" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_path</span><span class="p">(</span><span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_path</span><span class="p">(</span><span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
@@ -7180,7 +7178,7 @@ Settings            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
       </tr>
       <tr>
         <td><code>path</code></td>
-        <td><code>types.PathType</code></td>
+        <td><code>datatypes.PathType</code></td>
         <td><p>the path to set</p></td>
         <td><em>required</em></td>
       </tr>
@@ -7204,7 +7202,7 @@ Settings            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/settings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
-<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">FormatStr</span><span class="p">,</span> <span class="n">scope</span><span class="p">:</span> <span class="n">ScopeStr</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the path to the settings file.</span>
 
 <span class="sd">    Args:</span>
@@ -8592,7 +8590,7 @@ Url            (<span title="PySide6.QtCore.QUrl">QUrl</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/core/url.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Url</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QUrl</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
@@ -8639,7 +8637,7 @@ Url            (<span title="PySide6.QtCore.QUrl">QUrl</span>)
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">fromUserInput</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">working_dir</span><span class="p">))</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">from_local_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Url</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">from_local_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Url</span><span class="p">:</span>
         <span class="n">url</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">fromLocalFile</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
@@ -9058,22 +9056,22 @@ VersionNumber            (<span title="PySide6.QtCore.QVersionNumber">QVersionNu
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">major</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">minor</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">micro</span><span class="p">()))</span>
 
-    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">VersionNumber</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__gt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">VersionNumber</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__ge__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">VersionNumber</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__lt__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SemanticVersionType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
             <span class="n">other</span> <span class="o">=</span> <span class="n">VersionNumber</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__le__</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>

@@ -1670,7 +1670,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
     <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">{</span><span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">headers</span><span class="p">()}</span>
 
-    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span><span class="p">):</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
 
@@ -1941,7 +1941,7 @@ WebEnginePage            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
 
 <span class="sd">        Clears the Page and loads the URL.</span>
@@ -1970,7 +1970,7 @@ WebEnginePage            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
     <span class="k">def</span> <span class="nf">get_contents_size</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">SizeF</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">SizeF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">contentsSize</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
 <span class="sd">        Loads the specified url and displays it.</span>
@@ -2065,7 +2065,7 @@ WebEnginePage            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
 
     <span class="k">def</span> <span class="nf">set_feature_permission</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span><span class="p">,</span>
+        <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span><span class="p">,</span>
         <span class="n">feature</span><span class="p">:</span> <span class="n">FeatureStr</span><span class="p">,</span>
         <span class="n">policy</span><span class="p">:</span> <span class="n">PermissionPolicyStr</span><span class="p">,</span>
     <span class="p">):</span>
@@ -2329,7 +2329,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
 
 
 <h4 id="prettyqt.webenginecore.webenginepage.WebEnginePage.load_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2354,7 +2354,7 @@ to display the new URL.</p>
   <tbody>
       <tr>
         <td><code>url</code></td>
-        <td><code>types.UrlType | types.PathType</code></td>
+        <td><code>datatypes.UrlType | datatypes.PathType</code></td>
         <td><p>URL to load</p></td>
         <td><em>required</em></td>
       </tr>
@@ -2362,7 +2362,7 @@ to display the new URL.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
@@ -2543,7 +2543,7 @@ to display the new URL.</p>
 
 
 <h4 id="prettyqt.webenginecore.webenginepage.WebEnginePage.set_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -2566,7 +2566,7 @@ to display the new URL.</p>
   <tbody>
       <tr>
         <td><code>url</code></td>
-        <td><code>types.PathType</code></td>
+        <td><code>datatypes.PathType</code></td>
         <td><p>URL to set</p></td>
         <td><em>required</em></td>
       </tr>
@@ -2574,7 +2574,7 @@ to display the new URL.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
 
 <span class="sd">    Clears the Page and loads the URL.</span>

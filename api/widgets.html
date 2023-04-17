@@ -8663,7 +8663,7 @@ AbstractButtonMixin            (<a class="autorefs autorefs-internal" title="pre
     <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isChecked</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the button.</span>
 
 <span class="sd">        Args:</span>
@@ -8708,7 +8708,7 @@ AbstractButtonMixin            (<a class="autorefs autorefs-internal" title="pre
     <span class="k">def</span> <span class="nf">set_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set size of the icon.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -8761,7 +8761,7 @@ AbstractButtonMixin            (<a class="autorefs autorefs-internal" title="pre
 
 
 <h4 id="prettyqt.widgets.abstractbutton.AbstractButtonMixin.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -8783,7 +8783,7 @@ AbstractButtonMixin            (<a class="autorefs autorefs-internal" title="pre
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -8791,7 +8791,7 @@ AbstractButtonMixin            (<a class="autorefs autorefs-internal" title="pre
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractbutton.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the button.</span>
 
 <span class="sd">    Args:</span>
@@ -8812,7 +8812,7 @@ AbstractButtonMixin            (<a class="autorefs autorefs-internal" title="pre
 
 
 <h4 id="prettyqt.widgets.abstractbutton.AbstractButtonMixin.set_icon_size" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -8823,7 +8823,7 @@ AbstractButtonMixin            (<a class="autorefs autorefs-internal" title="pre
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/abstractbutton.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set size of the icon.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -8984,8 +8984,8 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
           <summary>Source code in <code>prettyqt/widgets/abstractitemview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractItemViewMixin</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">AbstractScrollAreaMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
         <span class="k">return</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">selectAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -9046,25 +9046,21 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
             <span class="n">ss</span><span class="o">.</span><span class="n">QHeaderView</span><span class="o">.</span><span class="n">section</span><span class="o">.</span><span class="n">backgroundColor</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">current_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">current_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">idx</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">idx</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">current_row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span><span class="o">.</span><span class="n">row</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span><span class="o">.</span><span class="n">row</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">current_column</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">currentIndex</span><span class="p">()</span><span class="o">.</span><span class="n">column</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">selected_indexes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return list of selected indexes in first row.&quot;&quot;&quot;</span>
@@ -9214,9 +9210,9 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 <span class="sd">        Returns:</span>
 <span class="sd">            amount of selected rows</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="mi">0</span>
-        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">selectedRows</span><span class="p">())</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">selectedRows</span><span class="p">())</span>
+        <span class="k">return</span> <span class="mi">0</span>
 
     <span class="k">def</span> <span class="nf">jump_to_column</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">col_num</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Make sure column at given index is visible.</span>
@@ -9226,10 +9222,9 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 <span class="sd">        Args:</span>
 <span class="sd">            col_num: column to scroll to</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_num</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">scrollTo</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">idx</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_num</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">scrollTo</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">scroll_to_top</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Override to use abstractitemview-way of scrolling to top.&quot;&quot;&quot;</span>
@@ -9254,7 +9249,7 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
         <span class="n">p</span><span class="o">.</span><span class="n">highlight_inactive</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPalette</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="o">*</span><span class="n">size</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
@@ -9492,10 +9487,9 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 <span class="sd">    Args:</span>
 <span class="sd">        col_num: column to scroll to</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span>
-    <span class="n">idx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_num</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">scrollTo</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">idx</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">col_num</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scrollTo</span><span class="p">(</span><span class="n">idx</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -9541,9 +9535,9 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 <span class="sd">    Returns:</span>
 <span class="sd">        amount of selected rows</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span><span class="o">.</span><span class="n">selectedRows</span><span class="p">())</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">selectedRows</span><span class="p">())</span>
+    <span class="k">return</span> <span class="mi">0</span>
 </code></pre></div>
         </details>
     </div>
@@ -12352,7 +12346,7 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">shortcut</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">checkable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -12436,8 +12430,8 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
     <span class="k">def</span> <span class="nf">set_tooltip</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
-        <span class="n">size</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tooltip</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
@@ -12458,7 +12452,7 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     <span class="k">def</span> <span class="nf">set_checkable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">        Args:</span>
@@ -12739,7 +12733,7 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
 
 <h4 id="prettyqt.widgets.action.ActionMixin.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -12761,7 +12755,7 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -12769,7 +12763,7 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/action.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -13412,7 +13406,7 @@ ApplicationMixin            (<a class="autorefs autorefs-internal" title="pretty
         <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_stylesheet</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">ss</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ss</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ss</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
             <span class="n">ss</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span><span class="o">.</span><span class="n">read_text</span><span class="p">()</span>
@@ -14213,15 +14207,15 @@ CalendarWidget            (<a class="autorefs autorefs-internal" title="prettyqt
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">datetime</span><span class="o">.</span><span class="n">date</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_date</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">DateType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QDate</span><span class="o">.</span><span class="n">fromString</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSelectedDate</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">def</span> <span class="nf">set_range</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">lower</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateType</span><span class="p">,</span>
-        <span class="n">upper</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">DateType</span><span class="p">,</span>
+        <span class="n">lower</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">DateType</span><span class="p">,</span>
+        <span class="n">upper</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">DateType</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">lower</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">lower</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QDate</span><span class="o">.</span><span class="n">fromString</span><span class="p">(</span><span class="n">lower</span><span class="p">)</span>
@@ -14920,7 +14914,7 @@ ComboBoxMixin            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="k">if</span> <span class="n">default</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">NoData</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_value</span><span class="p">(</span><span class="n">default</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">NoData</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">NoData</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="n">NoData</span><span class="p">:</span>
             <span class="n">data</span> <span class="o">=</span> <span class="n">label</span>
         <span class="k">if</span> <span class="n">icon</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -14982,7 +14976,7 @@ ComboBoxMixin            (<a class="autorefs autorefs-internal" title="prettyqt.
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">SIZE_ADJUST_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">sizeAdjustPolicy</span><span class="p">()]</span>
 
-    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -15176,7 +15170,7 @@ ComboBoxMixin            (<a class="autorefs autorefs-internal" title="prettyqt.
 
 
 <h4 id="prettyqt.widgets.combobox.ComboBoxMixin.set_icon_size" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -15187,7 +15181,7 @@ ComboBoxMixin            (<a class="autorefs autorefs-internal" title="prettyqt.
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/combobox.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -17003,7 +16997,7 @@ FileDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">path</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">path</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">mode</span><span class="p">:</span> <span class="n">AcceptModeStr</span> <span class="o">=</span> <span class="s2">&quot;open&quot;</span><span class="p">,</span>
         <span class="n">caption</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">path_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -17176,7 +17170,7 @@ FileDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">directory</span><span class="p">()</span><span class="o">.</span><span class="n">absolutePath</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set start directory.&quot;&quot;&quot;</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setDirectory</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -17523,7 +17517,7 @@ FileDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
 
 
 <h4 id="prettyqt.widgets.filedialog.FileDialog.set_directory" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -17534,7 +17528,7 @@ FileDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/filedialog.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_directory</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set start directory.&quot;&quot;&quot;</span>
     <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setDirectory</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
@@ -17889,7 +17883,7 @@ FileSystemModel            (<a class="autorefs autorefs-internal" title="prettyq
     <span class="k">def</span> <span class="nf">use_custom_icons</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">use</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setOption</span><span class="p">(</span><span class="n">OPTIONS</span><span class="p">[</span><span class="s2">&quot;no_custom_icons&quot;</span><span class="p">],</span> <span class="ow">not</span> <span class="n">use</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_root_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_root_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>
         <span class="k">match</span> <span class="n">path</span><span class="p">:</span>
             <span class="k">case</span> <span class="s2">&quot;/&quot;</span> <span class="o">|</span> <span class="s2">&quot;root&quot;</span><span class="p">:</span>
                 <span class="n">path</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Dir</span><span class="o">.</span><span class="n">rootPath</span><span class="p">()</span>
@@ -19617,7 +19611,7 @@ GraphicsItemMixin        </code>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="o">.</span><span class="n">fromScale</span><span class="p">(</span><span class="n">scale</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">scale</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">transform</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="o">*</span><span class="n">transform</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">combine</span><span class="p">)</span>
@@ -20437,7 +20431,7 @@ GraphicsScene            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
 
     <span class="k">def</span> <span class="nf">add_rect</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">rect</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
+        <span class="n">rect</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
         <span class="n">pen</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsRectItem</span><span class="p">:</span>
@@ -20472,7 +20466,7 @@ GraphicsScene            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
 
     <span class="k">def</span> <span class="nf">add_ellipse</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">ellipse</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
+        <span class="n">ellipse</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
         <span class="n">pen</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">brush</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GraphicsEllipseItem</span><span class="p">:</span>
@@ -20848,7 +20842,7 @@ GraphicsViewMixin            (<a class="autorefs autorefs-internal" title="prett
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">VIEWPORT_ANCHOR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">transformationAnchor</span><span class="p">()]</span>
 
-    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_transform</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">transform</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">TransformType</span><span class="p">,</span> <span class="n">combine</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">transform</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="p">(</span><span class="o">*</span><span class="n">transform</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setTransform</span><span class="p">(</span><span class="n">transform</span><span class="p">,</span> <span class="n">combine</span><span class="p">)</span>
@@ -21803,7 +21797,7 @@ GraphicsWidgetMixin            (<span title="prettyqt.widgets.graphicsobject.Gra
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">FOCUS_POLICY</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">focusPolicy</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">window_frame_section_at</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">WindowFrameSectionStr</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return the window frame section at given position.</span>
 
@@ -21959,7 +21953,7 @@ GraphicsWidgetMixin            (<span title="prettyqt.widgets.graphicsobject.Gra
 
 
 <h4 id="prettyqt.widgets.graphicswidget.GraphicsWidgetMixin.window_frame_section_at" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">window_frame_section_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">WindowFrameSectionStr</span></code>
+<code class="codehilite language-python"><span class="n">window_frame_section_at</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">WindowFrameSectionStr</span></code>
 
 
 </h4>
@@ -21986,7 +21980,7 @@ GraphicsWidgetMixin            (<span title="prettyqt.widgets.graphicsobject.Gra
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/graphicswidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">window_frame_section_at</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span>
+    <span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">WindowFrameSectionStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the window frame section at given position.</span>
 
@@ -22627,7 +22621,7 @@ InputDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">Dialog
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">par</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dialog</span><span class="p">()</span>
         <span class="n">par</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
@@ -22639,7 +22633,7 @@ InputDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">Dialog
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">par</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dialog</span><span class="p">()</span>
         <span class="n">par</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
@@ -22651,7 +22645,7 @@ InputDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">Dialog
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">default_value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">echo_mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">EchoModeStr</span> <span class="o">=</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -22670,7 +22664,7 @@ InputDialog            (<span title="prettyqt.widgets.dialog.DialogMixin">Dialog
         <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">editable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">par</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Dialog</span><span class="p">()</span>
@@ -23221,7 +23215,7 @@ Label            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.
         <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">edit_stylesheet</span><span class="p">()</span> <span class="k">as</span> <span class="n">ss</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">ss</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
@@ -23230,7 +23224,7 @@ Label            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.
                 <span class="n">ss</span><span class="o">.</span><span class="n">color</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">color</span><span class="o">.</span><span class="n">name</span><span class="p">())</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">set_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setScaledContents</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_alignment</span><span class="p">(</span><span class="n">horizontal</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span>
@@ -23242,7 +23236,7 @@ Label            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">image_from_path</span><span class="p">(</span>
-        <span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">cls</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Label</span><span class="p">:</span>
         <span class="n">pixmap</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pixmap</span><span class="o">.</span><span class="n">from_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="n">label</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
@@ -26246,7 +26240,7 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
         <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">        Args:</span>
@@ -26295,7 +26289,7 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
         <span class="n">role_id</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">ITEM_DATA_ROLE</span><span class="p">[</span><span class="n">role</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setData</span><span class="p">(</span><span class="n">role_id</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_size_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_size_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">hint</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="o">*</span><span class="n">hint</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSizeHint</span><span class="p">(</span><span class="n">hint</span><span class="p">)</span>
@@ -26473,7 +26467,7 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
 
 
 <h4 id="prettyqt.widgets.listwidgetitem.ListWidgetItem.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -26495,7 +26489,7 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -26503,7 +26497,7 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/listwidgetitem.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -27314,7 +27308,7 @@ MdiArea            (<a class="autorefs autorefs-internal" title="prettyqt.widget
 
     <span class="k">def</span> <span class="nf">set_background</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">brush_or_color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span>
+        <span class="n">brush_or_color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorAndBrushType</span><span class="p">,</span>
         <span class="n">pattern</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">BrushStyleStr</span> <span class="o">=</span> <span class="s2">&quot;solid&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">brush_or_color</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QBrush</span><span class="p">):</span>
@@ -27774,7 +27768,7 @@ MenuMixin            (<a class="autorefs autorefs-internal" title="prettyqt.widg
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
@@ -27811,7 +27805,7 @@ MenuMixin            (<a class="autorefs autorefs-internal" title="prettyqt.widg
             <span class="n">i</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">addAction</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the menu.</span>
 
 <span class="sd">        Args:</span>
@@ -28141,7 +28135,7 @@ MenuMixin            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 
 
 <h4 id="prettyqt.widgets.menu.MenuMixin.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -28163,7 +28157,7 @@ MenuMixin            (<a class="autorefs autorefs-internal" title="prettyqt.widg
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -28171,7 +28165,7 @@ MenuMixin            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/menu.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the menu.</span>
 
 <span class="sd">    Args:</span>
@@ -28263,7 +28257,7 @@ MessageBox            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MessageBox</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">DialogMixin</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMessageBox</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
         <span class="n">informative_text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
@@ -28301,7 +28295,7 @@ MessageBox            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
         <span class="bp">cls</span><span class="p">,</span>
         <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">detail_text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="n">m</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;none&quot;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
@@ -28317,7 +28311,7 @@ MessageBox            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
         <span class="n">dlg</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">title</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">exctype</span><span class="p">),</span> <span class="n">icon</span><span class="o">=</span><span class="s2">&quot;critical&quot;</span><span class="p">,</span> <span class="n">details</span><span class="o">=</span><span class="n">tb</span><span class="p">)</span>
         <span class="n">dlg</span><span class="o">.</span><span class="n">show_blocking</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">icon</span> <span class="ow">in</span> <span class="n">ICONS</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">ICONS</span><span class="p">[</span><span class="n">icon</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -28551,7 +28545,7 @@ MessageBox            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
 
 
 <h4 id="prettyqt.widgets.messagebox.MessageBox.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span><span class="p">)</span></code>
 
 
 </h4>
@@ -28573,7 +28567,7 @@ MessageBox            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType | IconStr</code></td>
+        <td><code>datatypes.IconType | IconStr</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -28581,7 +28575,7 @@ MessageBox            (<span title="prettyqt.widgets.dialog.DialogMixin">DialogM
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/messagebox.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">|</span> <span class="n">IconStr</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">icon</span> <span class="ow">in</span> <span class="n">ICONS</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setIcon</span><span class="p">(</span><span class="n">ICONS</span><span class="p">[</span><span class="n">icon</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
@@ -28882,7 +28876,7 @@ PlainTextEditMixin            (<a class="autorefs autorefs-internal" title="pret
             <span class="n">options</span><span class="o">.</span><span class="n">setFlags</span><span class="p">(</span><span class="n">options</span><span class="o">.</span><span class="n">flags</span><span class="p">()</span> <span class="o">&amp;</span> <span class="o">~</span><span class="n">flag</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
         <span class="n">doc</span><span class="o">.</span><span class="n">setDefaultTextOption</span><span class="p">(</span><span class="n">options</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">highlight_current_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">highlight_current_line</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;highlight&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -30160,7 +30154,7 @@ Scroller            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">PointF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">finalPosition</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">handle_input</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">input_type</span><span class="p">:</span> <span class="n">InputStr</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointFType</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">input_type</span><span class="p">:</span> <span class="n">InputStr</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointFType</span><span class="p">,</span> <span class="n">timestamp</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">position</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">PointF</span><span class="p">(</span><span class="o">*</span><span class="n">position</span><span class="p">)</span>
@@ -32718,7 +32712,7 @@ SystemTrayIcon            (<span title="prettyqt.core.object.ObjectMixin">Object
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/systemtrayicon.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SystemTrayIcon</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QSystemTrayIcon</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the system tray icon.</span>
 
 <span class="sd">        Args:</span>
@@ -32731,7 +32725,7 @@ SystemTrayIcon            (<span title="prettyqt.core.object.ObjectMixin">Object
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">title</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">message</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="n">icon</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -32761,7 +32755,7 @@ SystemTrayIcon            (<span title="prettyqt.core.object.ObjectMixin">Object
 
 
 <h4 id="prettyqt.widgets.systemtrayicon.SystemTrayIcon.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -32783,7 +32777,7 @@ SystemTrayIcon            (<span title="prettyqt.core.object.ObjectMixin">Object
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -32791,7 +32785,7 @@ SystemTrayIcon            (<span title="prettyqt.core.object.ObjectMixin">Object
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/systemtrayicon.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the system tray icon.</span>
 
 <span class="sd">    Args:</span>
@@ -32927,7 +32921,7 @@ TabBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.wi
         <span class="n">pos</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="o">.</span><span class="n">pos</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">on_detach</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">tab</span><span class="p">,</span> <span class="n">pos</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -33181,7 +33175,7 @@ TabBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.wi
 
 
 <h4 id="prettyqt.widgets.tabbar.TabBarMixin.set_icon_size" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -33192,7 +33186,7 @@ TabBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.wi
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabbar.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -33633,7 +33627,7 @@ TableWidgetItem            (<span title="PySide6.QtWidgets.QTableWidgetItem">QTa
             <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">),</span>  <span class="c1"># type: ignore</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">        Args:</span>
@@ -33705,8 +33699,8 @@ TableWidgetItem            (<span title="PySide6.QtWidgets.QTableWidgetItem">QTa
 
     <span class="k">def</span> <span class="nf">set_tooltip</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
-        <span class="n">size</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tooltip</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
@@ -33860,7 +33854,7 @@ TableWidgetItem            (<span title="PySide6.QtWidgets.QTableWidgetItem">QTa
 
 
 <h4 id="prettyqt.widgets.tablewidgetitem.TableWidgetItem.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -33882,7 +33876,7 @@ TableWidgetItem            (<span title="PySide6.QtWidgets.QTableWidgetItem">QTa
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -33890,7 +33884,7 @@ TableWidgetItem            (<span title="PySide6.QtWidgets.QTableWidgetItem">QTa
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tablewidgetitem.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -34236,7 +34230,7 @@ TabWidget            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tabBar</span><span class="p">()</span><span class="o">.</span><span class="n">setVisible</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -34316,7 +34310,7 @@ TabWidget            (<a class="autorefs autorefs-internal" title="prettyqt.widg
         <span class="bp">self</span><span class="o">.</span><span class="n">setTabsClosable</span><span class="p">(</span><span class="n">closable</span><span class="p">)</span>
 
     <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">)</span>
-    <span class="k">def</span> <span class="nf">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Detach tab by removing its contents and placing them in a DetachedTab window.</span>
 
 <span class="sd">        Args:</span>
@@ -34356,7 +34350,7 @@ TabWidget            (<a class="autorefs autorefs-internal" title="prettyqt.widg
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">item</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">,</span>
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -34380,7 +34374,7 @@ TabWidget            (<a class="autorefs autorefs-internal" title="prettyqt.widg
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">,</span>
         <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">insert_at</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Re-attach tab.</span>
@@ -34392,7 +34386,7 @@ TabWidget            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 <span class="sd">            widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget</span>
 <span class="sd">                from the DetachedTab window</span>
 <span class="sd">            name (str): the name of the detached tab</span>
-<span class="sd">            icon (types.IconType, optional): the window icon for the detached tab</span>
+<span class="sd">            icon (datatypes.IconType, optional): the window icon for the detached tab</span>
 <span class="sd">            insert_at (Optional[int], optional): insert the re-attached tab at the</span>
 <span class="sd">                given index</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -34452,7 +34446,7 @@ TabWidget            (<a class="autorefs autorefs-internal" title="prettyqt.widg
 
 
 <h4 id="prettyqt.widgets.tabwidget.TabWidget.attach_tab" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">attach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">insert_at</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">attach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">insert_at</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
 </h4>
@@ -34489,7 +34483,7 @@ from the DetachedTab window</p></td>
       </tr>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>the window icon for the detached tab</p></td>
         <td><code>None</code></td>
       </tr>
@@ -34508,7 +34502,7 @@ given index</p></td>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayout</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-    <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">insert_at</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Re-attach tab.</span>
@@ -34520,7 +34514,7 @@ given index</p></td>
 <span class="sd">        widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget</span>
 <span class="sd">            from the DetachedTab window</span>
 <span class="sd">        name (str): the name of the detached tab</span>
-<span class="sd">        icon (types.IconType, optional): the window icon for the detached tab</span>
+<span class="sd">        icon (datatypes.IconType, optional): the window icon for the detached tab</span>
 <span class="sd">        insert_at (Optional[int], optional): insert the re-attached tab at the</span>
 <span class="sd">            given index</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -34574,7 +34568,7 @@ given index</p></td>
 
 
 <h4 id="prettyqt.widgets.tabwidget.TabWidget.detach_tab" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -34626,7 +34620,7 @@ given index</p></td>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">detach_tab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PointType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Detach tab by removing its contents and placing them in a DetachedTab window.</span>
 
 <span class="sd">    Args:</span>
@@ -34800,7 +34794,7 @@ given index</p></td>
 
 
 <h4 id="prettyqt.widgets.tabwidget.TabWidget.set_icon_size" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -34811,7 +34805,7 @@ given index</p></td>
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/tabwidget.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -35150,7 +35144,7 @@ TextEditMixin            (<a class="autorefs autorefs-internal" title="prettyqt.
     <span class="k">def</span> <span class="nf">set_read_only</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setReadOnly</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_text_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_text_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setTextColor</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
 
@@ -35686,7 +35680,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
             <span class="bp">self</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">add_menu_button</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">menu</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">menu</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToolButton</span><span class="p">:</span>
         <span class="n">btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">ToolButton</span><span class="o">.</span><span class="n">for_menu</span><span class="p">(</span><span class="n">menu</span><span class="p">)</span>
         <span class="n">btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">label</span><span class="p">)</span>
@@ -35740,7 +35734,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
     <span class="k">def</span> <span class="nf">add_action</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-        <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">checkable</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">:</span>
@@ -35757,7 +35751,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
         <span class="n">spacer</span><span class="o">.</span><span class="n">set_size_policy</span><span class="p">(</span><span class="s2">&quot;expanding&quot;</span><span class="p">,</span> <span class="s2">&quot;expanding&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">spacer</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -36038,7 +36032,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
 
 
 <h4 id="prettyqt.widgets.toolbar.ToolBarMixin.set_icon_size" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -36049,7 +36043,7 @@ ToolBarMixin            (<a class="autorefs autorefs-internal" title="prettyqt.w
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/toolbar.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set size of the icons.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
@@ -36142,7 +36136,7 @@ ToolButton            (<a class="autorefs autorefs-internal" title="prettyqt.wid
     <span class="c1">#     self.setMenu(menu)</span>
 
     <span class="nd">@classmethod</span>
-    <span class="k">def</span> <span class="nf">for_menu</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">menu</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">for_menu</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">menu</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="n">btn</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
         <span class="n">btn</span><span class="o">.</span><span class="n">setMenu</span><span class="p">(</span><span class="n">menu</span><span class="p">)</span>
         <span class="c1"># btn.set_title(menu.title())</span>
@@ -36701,7 +36695,7 @@ TreeWidgetItem            (<span title="PySide6.QtWidgets.QTreeWidgetItem">QTree
         <span class="bp">self</span><span class="o">.</span><span class="n">addChild</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span>
 
-    <span class="k">def</span> <span class="nf">set_size_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_size_hint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hint</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">hint</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">hint</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QSize</span><span class="p">(</span><span class="o">*</span><span class="n">hint</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setSizeHint</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">hint</span><span class="p">)</span>
@@ -36710,7 +36704,7 @@ TreeWidgetItem            (<span title="PySide6.QtWidgets.QTreeWidgetItem">QTree
         <span class="n">order</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">DESCENDING</span> <span class="k">if</span> <span class="n">descending</span> <span class="k">else</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASCENDING</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sortChildren</span><span class="p">(</span><span class="n">column</span><span class="p">,</span> <span class="n">order</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">        Args:</span>
@@ -37076,7 +37070,7 @@ TreeWidgetItem            (<span title="PySide6.QtWidgets.QTreeWidgetItem">QTree
 
 
 <h4 id="prettyqt.widgets.treewidgetitem.TreeWidgetItem.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">)</span></code>
 
 
 </h4>
@@ -37098,7 +37092,7 @@ TreeWidgetItem            (<span title="PySide6.QtWidgets.QTreeWidgetItem">QTree
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -37112,7 +37106,7 @@ TreeWidgetItem            (<span title="PySide6.QtWidgets.QTreeWidgetItem">QTree
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/treewidgetitem.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
 
 <span class="sd">    Args:</span>
@@ -37200,7 +37194,7 @@ UndoView            (<a class="autorefs autorefs-internal" title="prettyqt.widge
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QUndoCommand</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the clean button.</span>
 
 <span class="sd">        Args:</span>
@@ -37235,7 +37229,7 @@ UndoView            (<a class="autorefs autorefs-internal" title="prettyqt.widge
 
 
 <h4 id="prettyqt.widgets.undoview.UndoView.set_clean_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span></code>
 
 
 </h4>
@@ -37257,7 +37251,7 @@ UndoView            (<a class="autorefs autorefs-internal" title="prettyqt.widge
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -37265,7 +37259,7 @@ UndoView            (<a class="autorefs autorefs-internal" title="prettyqt.widge
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/undoview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_clean_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the icon for the clean button.</span>
 
 <span class="sd">    Args:</span>
@@ -37433,7 +37427,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="bp">self</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">activateWindow</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the window icon.</span>
 
 <span class="sd">        Args:</span>
@@ -37488,8 +37482,8 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
     <span class="k">def</span> <span class="nf">set_tooltip</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
-        <span class="n">size</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tooltip</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
+        <span class="n">size</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">SizeType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">tooltip</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">):</span>
             <span class="n">path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">tooltip</span><span class="p">)</span>
@@ -37638,7 +37632,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     <span class="k">def</span> <span class="nf">get_palette</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Palette</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Palette</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">palette</span><span class="p">())</span>
 
-    <span class="k">def</span> <span class="nf">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">col_str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="k">if</span> <span class="n">color</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
         <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">edit_stylesheet</span><span class="p">()</span> <span class="k">as</span> <span class="n">ss</span><span class="p">:</span>
             <span class="n">ss</span><span class="o">.</span><span class="n">backgroundColor</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">col_str</span><span class="p">)</span>
@@ -37674,7 +37668,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="bp">self</span><span class="o">.</span><span class="n">set_stylesheet</span><span class="p">(</span><span class="n">ss</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_stylesheet</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">ss</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">ss</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">StyleSheet</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span>
     <span class="p">):</span>
         <span class="k">match</span> <span class="n">ss</span><span class="p">:</span>
             <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
@@ -37863,7 +37857,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
     <span class="k">def</span> <span class="nf">set_mask</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">area</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegion</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">area</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QRegion</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">typ</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">RegionTypeStr</span> <span class="o">=</span> <span class="s2">&quot;rectangle&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="k">match</span> <span class="n">area</span><span class="p">:</span>
@@ -37876,7 +37870,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
                 <span class="n">area</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Region</span><span class="p">(</span><span class="n">area</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">region</span><span class="o">.</span><span class="n">REGION_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setMask</span><span class="p">(</span><span class="n">area</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">set_window_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_window_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setWindowFilePath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">get_window_file_path</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -38380,7 +38374,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
 
 <h4 id="prettyqt.widgets.widget.WidgetMixin.set_icon" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span></code>
+<code class="codehilite language-python"><span class="n">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span></code>
 
 
 </h4>
@@ -38402,7 +38396,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
   <tbody>
       <tr>
         <td><code>icon</code></td>
-        <td><code>types.IconType</code></td>
+        <td><code>datatypes.IconType</code></td>
         <td><p>icon to use</p></td>
         <td><em>required</em></td>
       </tr>
@@ -38410,7 +38404,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/widget.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the window icon.</span>
 
 <span class="sd">    Args:</span>
