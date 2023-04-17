@@ -29,7 +29,7 @@ class ColumnItem:
     doc: str = "<no help available>"
     col_visible: bool = True
     width: int | str = SMALL_COL_WIDTH
-    alignment: Callable | int | None = None
+    alignment: Callable | int | constants.AlignmentStr | None = None
     line_wrap: gui.textoption.WordWrapModeStr = "none"
     foreground_color: Callable | str | None = None
     background_color: Callable | str | None = None
@@ -227,7 +227,7 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
     def rowCount(self, parent=None):
         return 0 if parent is None else len(self.items)
 
-    def tree_item(self, index: core.ModelIndex) -> core.StorageInfo:
+    def tree_item(self, index: core.ModelIndex):
         return self.items[index.row()]
 
 
