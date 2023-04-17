@@ -6,7 +6,7 @@ import logging
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import treeitem
+from prettyqt.utils import treeitem, types
 
 
 logger = logging.getLogger(__name__)
@@ -20,15 +20,19 @@ class ColumnItem:
     """Determines how an object attribute is shown."""
 
     name: str
-    label: Callable | None
-    checkstate: Callable | None = None
+    label: Callable[[treeitem.TreeItem], str] | None
+    checkstate: Callable[
+        [treeitem.TreeItem], constants.StateStr | QtCore.Qt.CheckState | bool
+    ] | None = None
+    sort_value: Callable[[treeitem.TreeItem], str | float] | None = None
+    tooltip: Callable[[treeitem.TreeItem], str] | None = None
     doc: str = "<no help available>"
     col_visible: bool = True
     width: int | str = SMALL_COL_WIDTH
     alignment: Callable | int | None = None
     line_wrap: gui.textoption.WordWrapModeStr = "none"
-    foreground_color: Callable | str | None = None
-    background_color: Callable | str | None = None
+    foreground_color: Callable[[treeitem.TreeItem], types.ColorType] | str | None = None
+    background_color: Callable[[treeitem.TreeItem], types.ColorType] | str | None = None
     decoration: Callable | QtGui.QIcon | None = None
     font: Callable | QtGui.QFont | None = None
     selectable: bool = True
@@ -54,18 +58,35 @@ class ColumnItem:
             flag |= constants.IS_USER_TRISTATE  # type: ignore
         return flag
 
-    def get_label(self, tree_item):
+    def get_label(self, tree_item) -> str:
         if self.label is None:
             return ""
         elif callable(self.label):
             return self.label(tree_item)
         return self.label
 
+    def get_sort_value(self, tree_item) -> str:
+        if self.sort_value is None:
+            return self.get_label()
+        elif callable(self.sort_value):
+            return self.sort_value(tree_item)
+        return self.sort_value
+
+    def get_tooltip(self, tree_item) -> str:
+        if self.tooltip is None:
+            return ""
+        elif callable(self.tooltip):
+            return self.tooltip(tree_item)
+        return self.tooltip
+
     def get_checkstate(self, tree_item):
         if self.checkstate is None:
             return None
         elif callable(self.checkstate):
-            return self.checkstate(tree_item)
+            result = self.checkstate(tree_item)
+            if isinstance(result, str):
+                result = constants.STATE[result]
+            return result
         return self.checkstate
 
     def get_font(self, tree_item):
@@ -160,6 +181,10 @@ class ColumnItemModelMixin:
                 return self._attr_cols[col].get_background_color(tree_item)
             case constants.FONT_ROLE:
                 return self._attr_cols[col].get_font(tree_item)
+            case constants.SORT_ROLE:
+                return self._attr_cols[col].get_sort_value(tree_item)
+            case constants.TOOLTIP_ROLE:
+                return self._attr_cols[col].get_tooltip(tree_item)
             case _:
                 return None
 
