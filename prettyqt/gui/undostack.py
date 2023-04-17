@@ -14,7 +14,7 @@ class UndoStackMixin(core.ObjectMixin):
     def __getitem__(self, index: int) -> QtGui.QUndoCommand:
         cmd = self.command(index)
         if cmd is None:
-            return KeyError(index)
+            raise KeyError(index)
         return cmd
 
     @contextlib.contextmanager
