@@ -37644,6 +37644,23 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
             <span class="n">ss</span><span class="o">.</span><span class="n">backgroundColor</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">col_str</span><span class="p">)</span>
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+    <span class="k">def</span> <span class="nf">grab_mouse_events</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">cursor_shape</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorShapeStr</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+        <span class="k">if</span> <span class="n">cursor_shape</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grabMouse</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">CURSOR_SHAPE</span><span class="p">[</span><span class="n">cursor_shape</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">grabMouse</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">releaseMouse</span><span class="p">()</span>
+
+    <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+    <span class="k">def</span> <span class="nf">grab_keyboard_events</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">grabKeyboard</span><span class="p">()</span>
+        <span class="k">yield</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">releaseKeyboard</span><span class="p">()</span>
+
+    <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">updates_off</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="kc">None</span><span class="p">]:</span>
         <span class="n">updates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">updatesEnabled</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setUpdatesEnabled</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -38196,6 +38213,8 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
     </div>
 
   </div>
+
+
 
 
 

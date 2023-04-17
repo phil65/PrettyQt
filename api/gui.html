@@ -10334,6 +10334,25 @@ PainterMixin        </code>
         <span class="k">yield</span> <span class="n">pen</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">pen</span><span class="p">)</span>
 
+    <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
+    <span class="k">def</span> <span class="nf">edit_font</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">]:</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+        <span class="k">yield</span> <span class="n">font</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">draw_text</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">position</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">PointType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">alignment</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">AlignmentStr</span> <span class="o">=</span> <span class="s2">&quot;center&quot;</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">match</span> <span class="n">position</span><span class="p">:</span>
+            <span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+                <span class="n">position</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="o">*</span><span class="n">position</span><span class="p">)</span>
+            <span class="k">case</span><span class="w"> </span><span class="p">(</span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+                <span class="n">position</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="o">*</span><span class="n">position</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">ALIGNMENTS</span><span class="p">[</span><span class="n">alignment</span><span class="p">])</span>
+
     <span class="k">def</span> <span class="nf">draw_image</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">target</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPoint</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QPointF</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRect</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">,</span>
@@ -10352,6 +10371,22 @@ PainterMixin        </code>
         <span class="k">if</span> <span class="n">fill_rule</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILL_RULE</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">fill_rule</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">FILL_RULE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">drawPolygon</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">fillRule</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">FILL_RULE</span><span class="p">[</span><span class="n">fill_rule</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">def</span> <span class="nf">draw_rounded_rect</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">rect</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">RectType</span> <span class="o">|</span> <span class="n">types</span><span class="o">.</span><span class="n">RectFType</span><span class="p">,</span>
+        <span class="n">x_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">y_radius</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+        <span class="n">relative</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">flag</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeMode</span><span class="o">.</span><span class="n">RelativeSize</span>
+            <span class="k">if</span> <span class="n">relative</span>
+            <span class="k">else</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeMode</span><span class="o">.</span><span class="n">AbsoluteSize</span>
+        <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">(</span><span class="o">*</span><span class="n">rect</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">flag</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">use_antialiasing</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setRenderHint</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">Antialiasing</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
@@ -10495,6 +10530,9 @@ PainterMixin        </code>
 
 
   <div class="doc doc-children">
+
+
+
 
 
 
@@ -12374,10 +12412,9 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
     <span class="k">def</span> <span class="nf">rotated</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">rotation</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pixmap</span><span class="p">:</span>
         <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
         <span class="n">pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transformed</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Transform</span><span class="p">()</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotation</span><span class="p">))</span>
-        <span class="n">new_w</span><span class="p">,</span> <span class="n">new_h</span> <span class="o">=</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">(),</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">copy</span><span class="p">((</span><span class="n">new_w</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">new_h</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">pixmap</span><span class="o">.</span><span class="n">copy</span><span class="p">((</span><span class="n">pixmap</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">pixmap</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="n">h</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">h</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Render the contents of the pixmap as a data URL (RFC-2397).</span>
 
 <span class="sd">        Returns:</span>
@@ -12431,25 +12468,24 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
         <span class="n">color</span><span class="p">:</span> <span class="n">types</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;white&quot;</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="n">pixmap</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span>
-        <span class="n">pixmap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">transparent</span><span class="p">)</span>
+        <span class="n">pixmap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">GlobalColor</span><span class="o">.</span><span class="n">transparent</span><span class="p">)</span>
         <span class="k">with</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="n">pixmap</span><span class="p">)</span> <span class="k">as</span> <span class="n">painter</span><span class="p">:</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">setRenderHints</span><span class="p">(</span>
-                <span class="n">painter</span><span class="o">.</span><span class="n">Antialiasing</span>
-                <span class="o">|</span> <span class="n">painter</span><span class="o">.</span><span class="n">TextAntialiasing</span>
-                <span class="o">|</span> <span class="n">painter</span><span class="o">.</span><span class="n">SmoothPixmapTransform</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">Antialiasing</span>
+                <span class="o">|</span> <span class="n">painter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">TextAntialiasing</span>
+                <span class="o">|</span> <span class="n">painter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">SmoothPixmapTransform</span>
             <span class="p">)</span>
-            <span class="n">bg_color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">bg_color</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">bg_color</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">set_brush</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
             <span class="n">margin</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">size</span> <span class="o">//</span> <span class="mi">16</span>
             <span class="n">text_margin</span> <span class="o">=</span> <span class="n">size</span> <span class="o">//</span> <span class="mi">20</span>
-            <span class="n">rect</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRectF</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span><span class="p">,</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="mf">30.0</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">RelativeSize</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setPen</span><span class="p">(</span><span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">))</span>
-            <span class="n">font</span> <span class="o">=</span> <span class="n">painter</span><span class="o">.</span><span class="n">font</span><span class="p">()</span>  <span class="c1"># type: QtGui.QFont</span>
-            <span class="n">font</span><span class="o">.</span><span class="n">setPixelSize</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">text_margin</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">setFont</span><span class="p">(</span><span class="n">font</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">AlignCenter</span><span class="p">,</span> <span class="n">char</span><span class="p">)</span>
+            <span class="n">w</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span>
+            <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">draw_rounded_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="k">with</span> <span class="n">painter</span><span class="o">.</span><span class="n">edit_font</span><span class="p">()</span> <span class="k">as</span> <span class="n">font</span><span class="p">:</span>  <span class="c1"># type: QtGui.QFont</span>
+                <span class="n">font</span><span class="o">.</span><span class="n">setPixelSize</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">text_margin</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">pixmap</span>
 </code></pre></div>
         </details>
@@ -12525,7 +12561,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
 
 
 <h4 id="prettyqt.gui.pixmap.PixmapMixin.get_image_data_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
 
 
 </h4>
@@ -12551,7 +12587,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
 </table>
         <details class="quote">
           <summary>Source code in <code>prettyqt/gui/pixmap.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_image_data_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Render the contents of the pixmap as a data URL (RFC-2397).</span>
 
 <span class="sd">    Returns:</span>

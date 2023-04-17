@@ -3407,7 +3407,7 @@ BorderLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</sp
         <span class="n">East</span> <span class="o">=</span> <span class="mi">3</span>
         <span class="n">Center</span> <span class="o">=</span> <span class="mi">4</span>
 
-    <span class="n">QtCore</span><span class="o">.</span><span class="n">QEnum</span><span class="p">(</span><span class="n">Position</span><span class="p">)</span>
+    <span class="n">core</span><span class="o">.</span><span class="n">Enum</span><span class="p">(</span><span class="n">Position</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -12337,13 +12337,12 @@ BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widg
         <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span>
         <span class="p">)</span>
-        <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">):</span>
             <span class="k">with</span> <span class="n">painter</span><span class="o">.</span><span class="n">backup_state</span><span class="p">():</span>
                 <span class="n">rotate_angle</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
                 <span class="n">painter</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotate_angle</span><span class="p">)</span>
                 <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-                <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linecount_distance_from_primary</span><span class="p">(</span>
+                <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_linecount_distance_from_primary</span><span class="p">(</span>
                     <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
                 <span class="p">)</span>
                 <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_line_color</span><span class="p">(</span>
@@ -12354,11 +12353,11 @@ BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widg
                     <span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">,</span>
                 <span class="p">)</span>
                 <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-                <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
-                    <span class="n">rect</span><span class="p">,</span>
+                <span class="n">painter</span><span class="o">.</span><span class="n">draw_rounded_rect</span><span class="p">(</span>
+                    <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span><span class="p">),</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span>
-                    <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeMode</span><span class="o">.</span><span class="n">RelativeSize</span><span class="p">,</span>
+                    <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                 <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">start</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -12449,7 +12448,7 @@ BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widg
         <span class="n">divider</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_revolutions_per_second</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_timer</span><span class="o">.</span><span class="n">setInterval</span><span class="p">(</span><span class="mi">1000</span> <span class="o">//</span> <span class="n">divider</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">linecount_distance_from_primary</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">_linecount_distance_from_primary</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">current</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">primary</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">total_lines</span><span class="p">:</span> <span class="nb">int</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="n">distance</span> <span class="o">=</span> <span class="n">primary</span> <span class="o">-</span> <span class="n">current</span>
@@ -12504,7 +12503,6 @@ BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widg
 
 
 
-
   <div class="doc doc-object doc-method">
 
 
@@ -12533,13 +12531,12 @@ BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widg
     <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span>
     <span class="p">)</span>
-    <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span><span class="p">):</span>
         <span class="k">with</span> <span class="n">painter</span><span class="o">.</span><span class="n">backup_state</span><span class="p">():</span>
             <span class="n">rotate_angle</span> <span class="o">=</span> <span class="mi">360</span> <span class="o">*</span> <span class="n">i</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">rotate</span><span class="p">(</span><span class="n">rotate_angle</span><span class="p">)</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_inner_radius</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-            <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">linecount_distance_from_primary</span><span class="p">(</span>
+            <span class="n">distance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_linecount_distance_from_primary</span><span class="p">(</span>
                 <span class="n">i</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_num</span>
             <span class="p">)</span>
             <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_line_color</span><span class="p">(</span>
@@ -12550,11 +12547,11 @@ BaseWaitingSpinner            (<span title="prettyqt.widgets.widget.Widget">Widg
                 <span class="bp">self</span><span class="o">.</span><span class="n">_color</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">setBrush</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">drawRoundedRect</span><span class="p">(</span>
-                <span class="n">rect</span><span class="p">,</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">draw_rounded_rect</span><span class="p">(</span>
+                <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_length</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_line_width</span><span class="p">),</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_roundness</span><span class="p">,</span>
-                <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">SizeMode</span><span class="o">.</span><span class="n">RelativeSize</span><span class="p">,</span>
+                <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="p">)</span>
 </code></pre></div>
         </details>
