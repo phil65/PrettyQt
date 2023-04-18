@@ -47,7 +47,7 @@ class BluetoothServiceInfo(QtBluetooth.QBluetoothServiceInfo):
         attr = ATTRIBUTE_IDS.inverse[index]
         return self.setAttribute(attr, value)
 
-    def __contains__(self, value: int) -> str:
+    def __contains__(self, value: int) -> bool:
         attr = ATTRIBUTE_IDS.inverse[value]
         return self.contains(attr)
 
