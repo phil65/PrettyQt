@@ -1,3 +1,14 @@
+## v1.11.0 (2023-04-18)
+
+### Feat
+
+- **LineEdit**: allow some special values for set_input_mask
+- **Locale**: add get_measurement_system
+
+### Fix
+
+- **ColumntItemModel**: always return correct rowCount
+
 ## v1.10.0 (2023-04-18)
 
 ### Feat
