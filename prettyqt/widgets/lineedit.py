@@ -133,6 +133,13 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         self._set_validation_color()
 
     def set_input_mask(self, mask: str):
+        match mask:
+            case "ip_address":
+                mask = "000.000.000.000;_"
+            case "mac_address":
+                mask = "HH:HH:HH:HH:HH:HH;_"
+            case "iso_date":
+                mask = "0000-00-00"
         self.setInputMask(mask)
 
     def _set_validation_color(self, state: bool = True):
