@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -604,6 +606,14 @@ LANGUAGE = bidict(
     zulu=LN.Zulu,
 )
 
+MeasurementSystemStr = Literal["metric", "imperial_us", "imperial_uk"]
+
+MEASUREMENT_SYSTEM = bidict(
+    metric=QtCore.QLocale.MeasurementSystem.MetricSystem,
+    imperial_us=QtCore.QLocale.MeasurementSystem.ImperialUSSystem,
+    imperial_uk=QtCore.QLocale.MeasurementSystem.ImperialUKSystem,
+)
+
 
 class Locale(QtCore.QLocale):
     def __repr__(self):
@@ -619,6 +629,9 @@ class Locale(QtCore.QLocale):
     @classmethod
     def get_system_language(cls) -> str:
         return cls.get_system_locale().uiLanguages()[0]
+
+    def get_measurement_system(self) -> MeasurementSystemStr:
+        return MEASUREMENT_SYSTEM.inverse[self.measurementSystem()]
 
 
 if __name__ == "__main__":
