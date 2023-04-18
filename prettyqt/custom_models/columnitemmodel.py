@@ -339,7 +339,7 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         self.items = items
 
     def rowCount(self, parent=None):
-        return 0 if parent is None else len(self.items)
+        return len(self.items)
 
     def tree_item(self, index: core.ModelIndex):
         return self.items[index.row()]
