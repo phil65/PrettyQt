@@ -7933,7 +7933,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
                 <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
             <span class="k">return</span> <span class="n">result</span>
 
-        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;recent_files/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;recent_files/</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -7951,7 +7951,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
         <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">pth</span><span class="p">)</span> <span class="k">for</span> <span class="n">pth</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;recent_files/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;recent_files/</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_recent_files</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Gets the list of recent files.</span>
@@ -8130,7 +8130,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
             <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
 
-    <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="s2">&quot;recent_files/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">value</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;recent_files/</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">default</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">val</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -8278,7 +8278,7 @@ RecentFilesManager            (<span title="prettyqt.core.object.Object">Object<
     <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">value</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">value</span> <span class="o">=</span> <span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">normpath</span><span class="p">(</span><span class="n">pth</span><span class="p">)</span> <span class="k">for</span> <span class="n">pth</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="s2">&quot;recent_files/</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_settings</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;recent_files/</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -8371,14 +8371,9 @@ MessageLabel            (<a class="autorefs autorefs-internal" title="prettyqt.w
 
     <span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">wordWrap</span><span class="p">()</span>
-            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizePolicy</span><span class="p">()</span><span class="o">.</span><span class="n">verticalPolicy</span><span class="p">()</span> <span class="o">==</span> <span class="n">widgets</span><span class="o">.</span><span class="n">SizePolicy</span><span class="o">.</span><span class="n">Minimum</span>
-        <span class="p">):</span>
-            <span class="n">new_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
-            <span class="k">if</span> <span class="n">new_height</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">return</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="n">new_height</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wordWrap</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size_policy</span><span class="p">()</span><span class="o">.</span><span class="n">get_vertical_policy</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;minimum&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">new_height</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()))</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="n">new_height</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -8412,14 +8407,9 @@ MessageLabel            (<a class="autorefs autorefs-internal" title="prettyqt.w
           <summary>Source code in <code>prettyqt/custom_widgets/notification.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-    <span class="k">if</span> <span class="p">(</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">wordWrap</span><span class="p">()</span>
-        <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizePolicy</span><span class="p">()</span><span class="o">.</span><span class="n">verticalPolicy</span><span class="p">()</span> <span class="o">==</span> <span class="n">widgets</span><span class="o">.</span><span class="n">SizePolicy</span><span class="o">.</span><span class="n">Minimum</span>
-    <span class="p">):</span>
-        <span class="n">new_height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
-        <span class="k">if</span> <span class="n">new_height</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="n">new_height</span><span class="p">)</span>
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">wordWrap</span><span class="p">()</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_size_policy</span><span class="p">()</span><span class="o">.</span><span class="n">get_vertical_policy</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;minimum&quot;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">new_height</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">heightForWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()))</span> <span class="o">&gt;=</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">setMaximumHeight</span><span class="p">(</span><span class="n">new_height</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -8494,7 +8484,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
 
         <span class="c1"># Create a button that can close notifications</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">buttontext</span><span class="p">:</span>
-            <span class="n">close_button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\u2715</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">close_button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">buttontext</span> <span class="ow">or</span> <span class="s2">&quot;</span><span class="se">\u2715</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">close_button</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">buttontext</span><span class="p">)</span>
             <span class="n">close_button</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;text-decoration: underline;&quot;</span><span class="p">)</span>
@@ -8552,7 +8542,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
 <span class="sd">        Raises:</span>
 <span class="sd">            TypeError: duration is not an integer</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;duration should be an integer&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_effect</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">fade_in_anim</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
@@ -8582,7 +8572,7 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">finished_callback</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;finished_callback should be a callable&quot;</span><span class="p">)</span>
-        <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;duration should be an integer&quot;</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_effect</span><span class="p">)</span>
@@ -8597,9 +8587,12 @@ Notification            (<span title="prettyqt.widgets.widget.Widget">Widget</sp
 <span class="sd">        Makes class Notification available in style sheets. Interal Qt function.</span>
 <span class="sd">        Should not be called directly.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">o</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOption</span><span class="o">.</span><span class="n">based_on</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">p</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span>
+            <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PrimitiveElement</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span>
+            <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOption</span><span class="o">.</span><span class="n">based_on</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+            <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+            <span class="bp">self</span><span class="p">,</span>
+        <span class="p">)</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">message</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -8847,7 +8840,7 @@ The desired duration of the animation</p></td>
 <span class="sd">    Raises:</span>
 <span class="sd">        TypeError: duration is not an integer</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;duration should be an integer&quot;</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_effect</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">fade_in_anim</span><span class="o">.</span><span class="n">setDuration</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span>
@@ -8905,7 +8898,7 @@ duration : int
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">callable</span><span class="p">(</span><span class="n">finished_callback</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;finished_callback should be a callable&quot;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">duration</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">duration</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;duration should be an integer&quot;</span><span class="p">)</span>
 
     <span class="bp">self</span><span class="o">.</span><span class="n">setGraphicsEffect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">opacity_effect</span><span class="p">)</span>
@@ -8946,9 +8939,12 @@ Should not be called directly.</p>
 <span class="sd">    Makes class Notification available in style sheets. Interal Qt function.</span>
 <span class="sd">    Should not be called directly.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">o</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOption</span><span class="o">.</span><span class="n">based_on</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="n">p</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PrimitiveElement</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span>
+        <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOption</span><span class="o">.</span><span class="n">based_on</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+        <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -9186,12 +9182,11 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
             <span class="bp">self</span><span class="o">.</span><span class="n">raise_</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">notification</span><span class="p">)</span>
         <span class="c1"># Check for entry effects</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">entry_effect</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">entry_effect</span> <span class="o">==</span> <span class="s2">&quot;fade_in&quot;</span><span class="p">:</span>
-                <span class="n">notification</span><span class="o">.</span><span class="n">fade_in</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entry_effect_duration</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">entry_effect</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">notification</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
 
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">entry_effect</span> <span class="o">==</span> <span class="s2">&quot;fade_in&quot;</span><span class="p">:</span>
+            <span class="n">notification</span><span class="o">.</span><span class="n">fade_in</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">entry_effect_duration</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">adjustSize</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">notification</span><span class="o">.</span><span class="n">timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">notification</span><span class="o">.</span><span class="n">timeout</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">core</span><span class="o">.</span><span class="n">Timer</span><span class="o">.</span><span class="n">singleShot</span><span class="p">(</span><span class="n">notification</span><span class="o">.</span><span class="n">timeout</span><span class="p">,</span> <span class="k">lambda</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">notification</span><span class="p">))</span>
@@ -9245,7 +9240,7 @@ NotificationArea            (<span title="prettyqt.widgets.widget.Widget">Widget
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">o</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOption</span><span class="o">.</span><span class="n">based_on</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">p</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PrimitiveElement</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -9570,7 +9565,7 @@ Internal QT function (do not call directly).</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">o</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StyleOption</span><span class="o">.</span><span class="n">based_on</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
     <span class="n">p</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Painter</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">style</span><span class="p">()</span><span class="o">.</span><span class="n">drawPrimitive</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">PrimitiveElement</span><span class="o">.</span><span class="n">PE_Widget</span><span class="p">,</span> <span class="n">o</span><span class="p">,</span> <span class="n">p</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>

@@ -2647,13 +2647,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.lineedit.LineEdit.focusOutEvent" class="md-nav__link">
-    focusOutEvent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.widgets.lineedit.LineEdit.font" class="md-nav__link">
     font()
   </a>
@@ -2670,13 +2663,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.lineedit.LineEdit.get_echo_mode" class="md-nav__link">
     get_echo_mode()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.widgets.lineedit.LineEdit.keyPressEvent" class="md-nav__link">
-    keyPressEvent()
   </a>
   
 </li>
@@ -6679,13 +6665,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.widgets.lineedit.LineEdit.focusOutEvent" class="md-nav__link">
-    focusOutEvent()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#prettyqt.widgets.lineedit.LineEdit.font" class="md-nav__link">
     font()
   </a>
@@ -6702,13 +6681,6 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.lineedit.LineEdit.get_echo_mode" class="md-nav__link">
     get_echo_mode()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.widgets.lineedit.LineEdit.keyPressEvent" class="md-nav__link">
-    keyPressEvent()
   </a>
   
 </li>
@@ -24752,10 +24724,6 @@ LineEdit            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <details class="quote">
           <summary>Source code in <code>prettyqt/widgets/lineedit.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">LineEdit</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">WidgetMixin</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLineEdit</span><span class="p">):</span>
-    <span class="n">focusLost</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
-    <span class="n">enterPressed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span>
-    <span class="n">editComplete</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
-
     <span class="n">value_changed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
@@ -24814,19 +24782,6 @@ LineEdit            (<a class="autorefs autorefs-internal" title="prettyqt.widge
             <span class="n">is_modified</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">isModified</span><span class="p">(),</span>
         <span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">focusOutEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">focusLost</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">focusOutEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
-            <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">enterPressed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
-        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">_on_edit_complete</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">editComplete</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
-
     <span class="k">def</span> <span class="nf">font</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Font</span><span class="p">(</span><span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
 
@@ -24860,6 +24815,13 @@ LineEdit            (<a class="autorefs autorefs-internal" title="prettyqt.widge
         <span class="bp">self</span><span class="o">.</span><span class="n">_set_validation_color</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_input_mask</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mask</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">match</span> <span class="n">mask</span><span class="p">:</span>
+            <span class="k">case</span> <span class="s2">&quot;ip_address&quot;</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="s2">&quot;000.000.000.000;_&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;mac_address&quot;</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="s2">&quot;HH:HH:HH:HH:HH:HH;_&quot;</span>
+            <span class="k">case</span> <span class="s2">&quot;iso_date&quot;</span><span class="p">:</span>
+                <span class="n">mask</span> <span class="o">=</span> <span class="s2">&quot;0000-00-00&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setInputMask</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_set_validation_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
@@ -24941,36 +24903,6 @@ LineEdit            (<a class="autorefs autorefs-internal" title="prettyqt.widge
 
 
 
-
-
-
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.widgets.lineedit.LineEdit.focusOutEvent" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">focusOutEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>focusOutEvent(self, arg__1: PySide6.QtGui.QFocusEvent) -&gt; None</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/widgets/lineedit.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">focusOutEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">focusLost</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
-    <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">focusOutEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
 
 
 
@@ -25091,35 +25023,6 @@ LineEdit            (<a class="autorefs autorefs-internal" title="prettyqt.widge
   </div>
 
 
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.widgets.lineedit.LineEdit.keyPressEvent" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
-      <p>keyPressEvent(self, arg__1: PySide6.QtGui.QKeyEvent) -&gt; None</p>
-
-        <details class="quote">
-          <summary>Source code in <code>prettyqt/widgets/lineedit.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">keyPressEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-    <span class="k">match</span> <span class="n">event</span><span class="o">.</span><span class="n">key</span><span class="p">():</span>
-        <span class="k">case</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Enter</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Key</span><span class="o">.</span><span class="n">Key_Return</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">enterPressed</span><span class="o">.</span><span class="n">emit</span><span class="p">()</span>
-    <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">keyPressEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
 
 
 
