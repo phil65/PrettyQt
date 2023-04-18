@@ -61,6 +61,7 @@ pymdown-extensions = "^9"
 black = "^23"
 devtools = "^0"
 commitizen = "^2.20"
+cz-github-convention = "^0.2"
 
 [tool.poetry.extras]
 pyside6 = ["pyside6", "PySide6-QtAds"]
