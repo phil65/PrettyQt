@@ -10,7 +10,7 @@ from prettyqt.utils import bidict
 
 mod = QtCore.QRegularExpression
 
-FLAGS = bidict(
+PATTERN_OPTIONS = bidict(
     none=mod.PatternOption.NoPatternOption,
     ignorecase=mod.PatternOption.CaseInsensitiveOption,
     dotall=mod.PatternOption.DotMatchesEverythingOption,
@@ -40,7 +40,7 @@ class RegularExpression(QtCore.QRegularExpression):
     def __init__(
         self,
         pattern: str | QtCore.QRegularExpression = "",
-        flags: QtCore.QRegularExpression.PatternOption = FLAGS["none"],
+        flags: QtCore.QRegularExpression.PatternOption = PATTERN_OPTIONS["none"],
     ):
         if isinstance(pattern, QtCore.QRegularExpression):
             super().__init__(pattern)
