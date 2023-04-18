@@ -51,10 +51,7 @@ class FontChooserButton(widgets.Widget):
             self.value_changed.emit(dlg.current_font())
 
     def set_current_font(self, font: str | QtGui.QFont):
-        if isinstance(font, str):
-            self._current_font = gui.Font(font)
-        else:
-            self._current_font = font
+        self._current_font = gui.Font(font) if isinstance(font, str) else font
         self.lineedit.setText(self._current_font.family())
 
     def set_value(self, value: str | QtGui.QFont):

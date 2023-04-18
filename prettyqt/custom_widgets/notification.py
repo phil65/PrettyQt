@@ -69,14 +69,9 @@ class MessageLabel(widgets.Label):
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
-        if (
-            self.wordWrap()
-            and self.sizePolicy().verticalPolicy() == widgets.SizePolicy.Minimum
-        ):
-            new_height = self.heightForWidth(self.width())
-            if new_height < 1:
-                return
-            self.setMaximumHeight(new_height)
+        if self.wordWrap() and self.get_size_policy().get_vertical_policy() == "minimum":
+            if (new_height := self.heightForWidth(self.width())) >= 1:
+                self.setMaximumHeight(new_height)
 
 
 class Notification(widgets.Widget):
@@ -117,7 +112,7 @@ class Notification(widgets.Widget):
 
         # Create a button that can close notifications
         if not buttontext:
-            close_button = widgets.PushButton("\u2715")
+            close_button = widgets.PushButton(buttontext or "\u2715")
         else:
             close_button = widgets.PushButton(buttontext)
             close_button.setStyleSheet("text-decoration: underline;")
@@ -175,7 +170,7 @@ class Notification(widgets.Widget):
         Raises:
             TypeError: duration is not an integer
         """
-        if type(duration) != int:
+        if not isinstance(duration, int):
             raise TypeError("duration should be an integer")
         self.setGraphicsEffect(self.opacity_effect)
         self.fade_in_anim.setDuration(duration)
@@ -205,7 +200,7 @@ class Notification(widgets.Widget):
         """
         if not callable(finished_callback):
             raise TypeError("finished_callback should be a callable")
-        if type(duration) != int:
+        if not isinstance(duration, int):
             raise TypeError("duration should be an integer")
 
         self.setGraphicsEffect(self.opacity_effect)
@@ -220,9 +215,12 @@ class Notification(widgets.Widget):
         Makes class Notification available in style sheets. Interal Qt function.
         Should not be called directly.
         """
-        o = widgets.StyleOption.based_on(self)
-        p = gui.Painter(self)
-        self.style().drawPrimitive(widgets.Style.PE_Widget, o, p, self)
+        self.style().drawPrimitive(
+            widgets.Style.PrimitiveElement.PE_Widget,
+            widgets.StyleOption.based_on(self),
+            gui.Painter(self),
+            self,
+        )
 
     @property
     def message(self) -> str:
@@ -464,12 +462,11 @@ class NotificationArea(widgets.Widget):
             self.raise_()
         self.layout().addWidget(notification)
         # Check for entry effects
-        if self.entry_effect is not None:
-            if self.entry_effect == "fade_in":
-                notification.fade_in(self.entry_effect_duration)
-        else:
+        if self.entry_effect is None:
             notification.display()
 
+        elif self.entry_effect == "fade_in":
+            notification.fade_in(self.entry_effect_duration)
         self.adjustSize()
         if notification.timeout is not None and notification.timeout > 0:
             core.Timer.singleShot(notification.timeout, lambda: self.remove(notification))
@@ -523,7 +520,7 @@ class NotificationArea(widgets.Widget):
         """
         o = widgets.StyleOption.based_on(self)
         p = gui.Painter(self)
-        self.style().drawPrimitive(widgets.Style.PE_Widget, o, p, self)
+        self.style().drawPrimitive(widgets.Style.PrimitiveElement.PE_Widget, o, p, self)
 
 
 if __name__ == "__main__":

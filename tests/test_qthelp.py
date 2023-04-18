@@ -66,8 +66,8 @@ def test_helpengine():
 
 
 def test_helpsearchengine():
-    core = qthelp.HelpEngineCore("")
-    engine = qthelp.HelpSearchEngine(core)
+    core_engine = qthelp.HelpEngineCore("")
+    engine = qthelp.HelpSearchEngine(core_engine)
     engine.search_results(0, 0)
 
 

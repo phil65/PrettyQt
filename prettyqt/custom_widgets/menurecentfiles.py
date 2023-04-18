@@ -68,7 +68,7 @@ class RecentFilesManager(core.Object):
                 result.append(item)
             return result
 
-        val = self._settings.value("recent_files/%s" % key, default)
+        val = self._settings.value(f"recent_files/{key}", default)
         if val is None:
             lst: list[str] = []
         elif isinstance(val, str):
@@ -86,7 +86,7 @@ class RecentFilesManager(core.Object):
         if value is None:
             value = []
         value = [os.path.normpath(pth) for pth in value]
-        self._settings.setValue("recent_files/%s" % key, value)
+        self._settings.setValue(f"recent_files/{key}", value)
 
     def get_recent_files(self):
         """Gets the list of recent files.
