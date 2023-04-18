@@ -70,22 +70,17 @@ class JsonModel(custom_models.NestedModel):
     def __repr__(self):
         return str(self.root.as_json())  # type: ignore
 
-    def load(self, document):
-        """Load from dictionary.
+    def load(self, document: dict | list | tuple):
+        """Load from JSON object.
 
         Arguments:
-            document (dict): JSON-compatible dictionary
+            document: JSON-compatible object
 
         """
-        assert isinstance(
-            document, (dict, list, tuple)
-        ), "`document` must be of dict, list or tuple, " "not %s" % type(document)
-
         with self.reset_model():
             self.root = JsonTreeItem.load(document)
             self.root.type = type(document)  # type: ignore
             self.items = self.root.children
-        return True
 
     def data(self, index, role):
         if not index.isValid():
