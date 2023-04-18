@@ -162,11 +162,10 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             path_strings.append(f"{obj_path}.{attr_name}" if obj_path else attr_name)
             is_attr_list.append(True)
 
-        tree_items = [
+        return [
             ObjectBrowserTreeItem(obj=val, name=name, obj_path=p, is_attribute=is_attr)
             for (name, val), p, is_attr in zip(obj_children, path_strings, is_attr_list)
         ]
-        return tree_items
 
     def _aux_refresh_tree(self, tree_index: core.ModelIndex):
         """Refresh the tree nodes recursively, auxiliary.
@@ -271,12 +270,9 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
         parent_item = self.sourceModel().tree_item(source_parent_index)
         tree_item = parent_item.child(source_row)
 
-        accept = (self._show_special_attrs or not tree_item.is_special_attribute) and (
+        return (self._show_special_attrs or not tree_item.is_special_attribute) and (
             self._show_callables or not tree_item.is_callable_attribute
         )
-
-        # logger.debug("filterAcceptsRow = {}: {}".format(accept, tree_item))
-        return accept
 
     def get_show_callables(self) -> bool:
         return self._show_callables

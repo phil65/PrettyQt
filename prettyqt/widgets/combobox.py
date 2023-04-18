@@ -61,7 +61,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
             (self.itemText(i), self.itemData(i), self.item_icon(i))
             for i in range(self.count())
         ]
-        dct = dict(
+        return dict(
             index=self.currentIndex(),
             editable=self.isEditable(),
             max_count=self.maxCount(),
@@ -76,7 +76,6 @@ class ComboBoxMixin(widgets.WidgetMixin):
             placeholder_text=self.placeholderText(),
             items=items,
         )
-        return dct
 
     def __setstate__(self, state):
         super().__setstate__(state)
@@ -124,9 +123,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
 
     def item_icon(self, index: int) -> gui.Icon | None:
         icon = self.itemIcon(index)
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_editable(self, editable: bool):
         self.setEditable(editable)

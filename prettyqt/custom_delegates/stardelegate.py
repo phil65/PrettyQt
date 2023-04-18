@@ -83,9 +83,7 @@ class StarEditor(widgets.Widget):
     def star_at_position(self, x: int) -> int:
         """Calculate which star the user's mouse cursor is currently hovering over."""
         val = x // (self.star_rating.sizeHint().width() // self.star_rating.max_stars) + 1
-        if not 0 < val <= self.star_rating.max_stars:
-            return -1
-        return val
+        return val if 0 < val <= self.star_rating.max_stars else -1
 
     def set_star_rating(self, rating: int):
         self.star_rating.star_count = rating

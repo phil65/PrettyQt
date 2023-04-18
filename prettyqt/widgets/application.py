@@ -51,13 +51,14 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         self, settings: MutableMapping | None = None, key: str = "states"
     ):
         settings = core.Settings() if settings is None else settings
-        result = {}
-        for k, v in SAVE_STATES.items():
-            result[k] = {
+        result = {
+            k: {
                 i.objectName(): i.saveState()
                 for i in self.find_children(v)
                 if i.objectName()
             }
+            for k, v in SAVE_STATES.items()
+        }
         settings[key] = result
 
     def restore_widget_states(self, settings: Mapping | None = None, key: str = "states"):
@@ -95,10 +96,14 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         if inst is None:
             return None
         widget_list = inst.topLevelWidgets()
-        for widget in widget_list:
-            if isinstance(widget, QtWidgets.QMainWindow):
-                return widget
-        return None
+        return next(
+            (
+                widget
+                for widget in widget_list
+                if isinstance(widget, QtWidgets.QMainWindow)
+            ),
+            None,
+        )
 
     @classmethod
     def get_widget(cls, name: str) -> QtWidgets.QWidget | None:

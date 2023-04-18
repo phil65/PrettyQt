@@ -15,9 +15,11 @@ class IntValidator(gui.ValidatorMixin, QtGui.QIntValidator):
         return type(self), (self.bottom(), self.top()), None
 
     def __eq__(self, other: object):
-        if not isinstance(other, type(self)):
-            return False
-        return self.bottom() == other.bottom() and self.top() == other.top()
+        return (
+            self.bottom() == other.bottom() and self.top() == other.top()
+            if isinstance(other, type(self))
+            else False
+        )
 
     def set_range(self, lower: int | None, upper: int | None):
         if lower is None:

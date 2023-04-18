@@ -38,5 +38,5 @@ class GeoCoordinate(QtPositioning.QGeoCoordinate):
 
 if __name__ == "__main__":
     coord = GeoCoordinate(11, 11)
-    print(str(coord))
+    print(coord)
     print(repr(coord))

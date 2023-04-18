@@ -98,12 +98,11 @@ class JsonModel(custom_models.NestedModel):
                 return item.type.__name__
 
     def setData(self, index, value, role):
-        if role == constants.EDIT_ROLE:
-            if index.column() == 1:
-                item = index.internalPointer()
-                item.value = str(value)
-                self.update_row(index.row())
-                return True
+        if role == constants.EDIT_ROLE and index.column() == 1:
+            item = index.internalPointer()
+            item.value = str(value)
+            self.update_row(index.row())
+            return True
         return False
 
 

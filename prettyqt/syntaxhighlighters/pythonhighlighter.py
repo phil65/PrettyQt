@@ -79,7 +79,7 @@ class Keyword(Rule):
 
 
 class Operator(Rule):
-    regex = r"%s" % "|".join(OPERATORS)
+    regex = f'{"|".join(OPERATORS)}'
     color = gui.Color(150, 150, 150)
 
 

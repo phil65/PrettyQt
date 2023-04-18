@@ -22,11 +22,10 @@ class SplitterMixin(widgets.FrameMixin):
     def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
-        else:
-            result = self.find_child(QtWidgets.QWidget, index)
-            if result is None:
-                raise KeyError("Widget not found")
-            return result
+        result = self.find_child(QtWidgets.QWidget, index)
+        if result is None:
+            raise KeyError("Widget not found")
+        return result
 
     def __setitem__(self, index: int, value: QtWidgets.QWidget):
         self.replaceWidget(index, value)

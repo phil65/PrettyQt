@@ -28,13 +28,12 @@ class SelectionMixin:
     def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return False
-        if role == constants.CHECKSTATE_ROLE:
-            if index.column() == 0:
-                name = self._get_selection_id(index)
-                selected = self.selected.get(name, False)
-                if name not in self.selected:
-                    self.selected[name] = selected
-                return selected
+        if role == constants.CHECKSTATE_ROLE and index.column() == 0:
+            name = self._get_selection_id(index)
+            selected = self.selected.get(name, False)
+            if name not in self.selected:
+                self.selected[name] = selected
+            return selected
         return super().data(index, role)  # type: ignore
 
     def flags(self, index: QtCore.QModelIndex):

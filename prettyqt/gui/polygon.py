@@ -33,10 +33,7 @@ class Polygon(QtGui.QPolygon):
         return self.get_point(index)
 
     def __setitem__(self, index: int, value: datatypes.PointType):
-        if isinstance(value, tuple):
-            p = core.Point(*value)
-        else:
-            p = value
+        p = core.Point(*value) if isinstance(value, tuple) else value
         # PySide6 workaround: setPoint does not exist
         self.remove(index)
         self.insert(index, p)

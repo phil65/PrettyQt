@@ -53,7 +53,7 @@ class IconDelegate(widgets.StyledItemDelegate):
                 is_on = option.state & widgets.Style.StateFlag.State_Open
                 state = gui.Icon.State.On if is_on else gui.Icon.State.Off
                 actual_size = option.icon.actualSize(option.decorationSize, mode, state)
-                option.decorationSize = option.decorationSize & actual_size
+                option.decorationSize &= actual_size
             case _:
                 raise ValueError(value)
         r = core.Rect(core.Point(), option.decorationSize)

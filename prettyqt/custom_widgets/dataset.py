@@ -430,7 +430,7 @@ class Button(DataItem):
 
 
 class DataSetMeta(type):
-    def __new__(mcs, name, bases, dct):
+    def __new__(cls, name, bases, dct):
         filtered = [b for b in bases if getattr(b, "__metaclass__", None) is DataSetMeta]
         items = {item._name: item for b in filtered for item in b._items}
         # items should contain DataItems of parent classes
@@ -439,7 +439,7 @@ class DataSetMeta(type):
                 value.name = attrname
                 items[attrname] = value
         dct["_items"] = items
-        return type.__new__(mcs, name, bases, dct)
+        return type.__new__(cls, name, bases, dct)
 
 
 class DataSet(metaclass=DataSetMeta):

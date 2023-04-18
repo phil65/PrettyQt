@@ -22,9 +22,7 @@ class WizardPageMixin(widgets.WidgetMixin):
         if typ not in widgets.wizard.WIZARD_PIXMAP:
             raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
         pix = gui.Pixmap(self.pixmap(widgets.wizard.WIZARD_PIXMAP[typ]))
-        if pix.isNull():
-            return None
-        return pix
+        return None if pix.isNull() else pix
 
     def set_button_text(self, button_type: widgets.wizard.WizardButtonStr, value: str):
         """Set text for given button type.

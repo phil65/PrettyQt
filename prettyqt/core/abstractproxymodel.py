@@ -10,8 +10,7 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
         # We cannot just call the same function of the source model because the first node
         # there may be hidden.
         proxy_root_index = self.mapFromSource(core.ModelIndex())
-        first_item_index = self.index(0, 0, proxy_root_index)
-        return first_item_index
+        return self.index(0, 0, proxy_root_index)
 
 
 class AbstractProxyModel(AbstractProxyModelMixin, QtCore.QAbstractProxyModel):

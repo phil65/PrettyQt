@@ -46,9 +46,7 @@ class TextBlock(QtGui.QTextBlock):
 
     def get_user_data(self):
         user_data = self.userData()
-        if isinstance(user_data, UserData):
-            return user_data.data
-        return user_data
+        return user_data.data if isinstance(user_data, UserData) else user_data
 
     @contextlib.contextmanager
     def edit_user_state(self):
@@ -62,9 +60,7 @@ class TextBlock(QtGui.QTextBlock):
         :return: The block state
         """
         state = self.userState()
-        if state == -1:
-            return state
-        return state & 0x0000FFFF
+        return state if state == -1 else state & 0x0000FFFF
 
     def set_state(self, state: int):
         """Set the user state, generally used for syntax highlighting.
@@ -97,8 +93,7 @@ class TextBlock(QtGui.QTextBlock):
         state = self.userState()
         if state == -1:
             state = 0
-        if val >= 0x3FF:
-            val = 0x3FF
+        val = min(val, 0x3FF)
         state &= 0x7C00FFFF
         state |= val << 16
         self.setUserState(state)
@@ -123,7 +118,7 @@ class TextBlock(QtGui.QTextBlock):
         if state == -1:
             state = 0
         state &= 0x7BFFFFFF
-        state |= int(val) << 26
+        state |= val << 26
         self.setUserState(state)
 
     def is_collapsed(self) -> bool:
@@ -145,7 +140,7 @@ class TextBlock(QtGui.QTextBlock):
         if state == -1:
             state = 0
         state &= 0x77FFFFFF
-        state |= int(val) << 27
+        state |= val << 27
         self.setUserState(state)
 
     def find_parent_scope(self, limit: int = 5000) -> TextBlock | None:
@@ -168,9 +163,7 @@ class TextBlock(QtGui.QTextBlock):
             ):
                 counter += 1
                 start = start.previous()
-        if counter < limit:
-            return TextBlock(start)
-        return None
+        return TextBlock(start) if counter < limit else None
 
 
 if __name__ == "__main__":

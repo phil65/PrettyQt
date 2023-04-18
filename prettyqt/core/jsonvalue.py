@@ -16,9 +16,8 @@ if __name__ == "__main__":
 
     doc = core.JsonDocument.from_variant(dict(a="b"))
     print(doc.toVariant())
-    print(str(doc))
+    print(doc)
     new = core.JsonDocument()
     new.setObject(doc.object())
-    print("test")
     val = doc["a"]
     print(type(val), val)

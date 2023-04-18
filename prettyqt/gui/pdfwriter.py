@@ -20,10 +20,9 @@ class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, QtGui.QPdfWriter):
             margins = QtCore.QMarginsF(*margins)
         if unit is None:
             return self.setPageMargins(margins)
-        else:
-            if unit not in gui.pagelayout.UNITS:
-                raise InvalidParamError(unit, gui.pagelayout.UNITS)
-            return self.setPageMargins(margins, gui.pagelayout.UNITS[unit])
+        if unit not in gui.pagelayout.UNITS:
+            raise InvalidParamError(unit, gui.pagelayout.UNITS)
+        return self.setPageMargins(margins, gui.pagelayout.UNITS[unit])
 
 
 if __name__ == "__main__":

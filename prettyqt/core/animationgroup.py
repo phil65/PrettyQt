@@ -68,4 +68,4 @@ if __name__ == "__main__":
     a2 = core.PauseAnimation()
     group += a1
     group += a2
-    sliced = group[0:2]
+    sliced = group[:2]

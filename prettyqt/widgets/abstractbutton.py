@@ -52,9 +52,7 @@ class AbstractButtonMixin(widgets.WidgetMixin):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_style_icon(self, icon: widgets.style.StandardPixmapStr, size: int = 15):
         """Set theme icon for the button.

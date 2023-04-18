@@ -70,7 +70,7 @@ class ActionMixin(core.ObjectMixin):
         return f"{cls_name}({helpers.format_kwargs(self.serialize_fields())})"
 
     def serialize_fields(self):
-        dct = dict(
+        return dict(
             auto_repeat=self.autoRepeat(),
             text=self.text(),
             enabled=self.isEnabled(),
@@ -90,7 +90,6 @@ class ActionMixin(core.ObjectMixin):
             status_tip=self.statusTip(),
             whats_this=self.whatsThis(),
         )
-        return dct
 
     def __setstate__(self, state):
         super().__setstate__(state)
@@ -160,9 +159,7 @@ class ActionMixin(core.ObjectMixin):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_shortcut(self, shortcut: None | QtGui.QKeySequence | str):
         if shortcut is None:
@@ -175,10 +172,12 @@ class ActionMixin(core.ObjectMixin):
 
     def get_shortcut(self) -> gui.KeySequence | None:
         shortcut = self.shortcut()
-        if not shortcut:
-            return None
-        return gui.KeySequence(
-            shortcut.toString(), gui.KeySequence.SequenceFormat.PortableText
+        return (
+            gui.KeySequence(
+                shortcut.toString(), gui.KeySequence.SequenceFormat.PortableText
+            )
+            if shortcut
+            else None
         )
 
     def get_font(self) -> gui.Font:

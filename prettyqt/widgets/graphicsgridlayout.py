@@ -11,10 +11,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
     def __getitem__(
         self, idx: tuple[int, int] | int
     ) -> QtWidgets.QGraphicsLayoutItem | None:
-        if isinstance(idx, tuple):
-            return self.itemAt(*idx)
-        else:
-            return self.itemAt(idx)
+        return self.itemAt(*idx) if isinstance(idx, tuple) else self.itemAt(idx)
 
     def __setitem__(
         self,
@@ -43,7 +40,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
         return type(self), (), self.__getstate__()
 
     def __setstate__(self, state):
-        for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
+        for item, pos in zip(state["widgets"], state["positions"]):
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item
 

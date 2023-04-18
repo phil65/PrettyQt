@@ -43,9 +43,9 @@ if __name__ == "__main__":
     script = webenginecore.WebEngineScript()
     script.setName("test")
     item = WebEngineScriptCollection(scripts)
-    assert bool(item) is False
+    assert not bool(item)
     item += script
     assert script in item
     assert len(item) == 1
-    assert bool(item) is True
+    assert bool(item)
     app.main_loop()

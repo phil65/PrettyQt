@@ -79,9 +79,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_data(self, role: str, data):
         role_id = constants.ITEM_DATA_ROLE[role]

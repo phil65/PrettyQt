@@ -26,10 +26,7 @@ class PixmapMixin(gui.PaintDeviceMixin):
         return bytes(ba)
 
     def __eq__(self, other):
-        if not isinstance(other, Pixmap):
-            return False
-        # return bytes(self) == bytes(other)
-        return self.toImage() == other.toImage()
+        return self.toImage() == other.toImage() if isinstance(other, Pixmap) else False
 
     def __hash__(self):
         return self.cacheKey()
@@ -74,7 +71,7 @@ class PixmapMixin(gui.PaintDeviceMixin):
         device.close()
         data = bytes(device.data())
         payload = base64.b64encode(data).decode("ascii")
-        return "data:image/png;base64," + payload
+        return f"data:image/png;base64,{payload}"
 
     @classmethod
     def create_dot(cls, color: datatypes.ColorType = "black", size: int = 16) -> Pixmap:

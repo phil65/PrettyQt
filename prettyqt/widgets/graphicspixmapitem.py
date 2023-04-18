@@ -69,6 +69,4 @@ class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapIte
 
     def get_pixmap(self) -> gui.Pixmap | None:
         pix = self.pixmap()
-        if pix.isNull():
-            return None
-        return gui.Pixmap(pix)
+        return None if pix.isNull() else gui.Pixmap(pix)

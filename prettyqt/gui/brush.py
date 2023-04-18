@@ -24,9 +24,7 @@ class Brush(QtGui.QBrush):
 
     def get_texture_image(self) -> gui.Image | None:
         img = self.textureImage()
-        if img.isNull():
-            return None
-        return gui.Image(img)
+        return None if img.isNull() else gui.Image(img)
 
     def get_color(self) -> gui.Color:
         return gui.Color(self.color())

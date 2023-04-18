@@ -49,10 +49,7 @@ TYPE_CHECK: dict[Callable, str] = {
 
 
 def get_type(tree_item: treeitem.TreeItem) -> str:
-    for k, v in TYPE_CHECK.items():
-        if k(tree_item.obj):
-            return v
-    return "Attribute"
+    return next((v for k, v in TYPE_CHECK.items() if k(tree_item.obj)), "Attribute")
 
 
 def safe_data_fn(
@@ -107,7 +104,7 @@ ATTR_MODEL_DESCRIPTION = custom_models.ColumnItem(
 ATTR_MODEL_PATH = custom_models.ColumnItem(
     name="Path",
     doc="A path to the data: e.g. var[1]['a'].item",
-    label=lambda tree_item: tree_item.obj_path if tree_item.obj_path else "<root>",
+    label=lambda tree_item: tree_item.obj_path or "<root>",
     col_visible=True,
     width="medium",
 )

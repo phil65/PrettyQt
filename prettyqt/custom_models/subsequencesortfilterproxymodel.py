@@ -24,11 +24,11 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
         self.sort_patterns = []
         flags = re.IGNORECASE if self.case_sensitivity is False else 0
         for i in reversed(range(1, len(prefix) + 1)):
-            ptrn = f".*{prefix[0:i]}.*{prefix[i:]}"
+            ptrn = f".*{prefix[:i]}.*{prefix[i:]}"
             try:
                 self.filter_patterns.append(re.compile(ptrn, flags))
                 self.filter_patterns_case_sensitive.append(re.compile(ptrn, 0))
-                ptrn = f"{prefix[0:i]}.*{prefix[i:]}"
+                ptrn = f"{prefix[:i]}.*{prefix[i:]}"
                 self.sort_patterns.append(re.compile(ptrn, flags))
             except Exception:
                 continue
@@ -60,8 +60,7 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
             )
         ):
             pattern, pattern_case, sort_pattern = patterns
-            match = re.match(pattern, completion)
-            if match:
+            if re.match(pattern, completion):
                 # compute rank, the lowest rank the closer it is from the
                 # completion
                 start = MAX_SIZE

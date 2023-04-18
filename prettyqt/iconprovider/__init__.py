@@ -29,8 +29,8 @@ def hook(obj: dict) -> dict:
     for key in obj:
         try:
             result[key] = chr(int(obj[key], 16))
-        except ValueError:
-            raise FontError(f"Failed to load character {key}:{obj[key]}")
+        except ValueError as e:
+            raise FontError(f"Failed to load character {key}:{obj[key]}") from e
     return result
 
 
@@ -295,10 +295,7 @@ def get_icon(
     if (icon, color, as_qicon) in icon_cache:
         return icon_cache[(icon, color, as_qicon)]
     if isinstance(icon, str) and icon.startswith("mdi."):
-        if color is not None:
-            new = _icon(icon, color=color)
-        else:
-            new = _icon(icon)
+        new = _icon(icon, color=color) if color is not None else _icon(icon)
     else:
         new = QtGui.QIcon(icon)  # type: ignore
     icon = new if as_qicon else gui.Icon(new)

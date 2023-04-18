@@ -57,7 +57,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
             indent=self.indent(),
             margin=self.margin(),
             text_format=self.get_text_format(),
-            pixmap=pixmap if pixmap else None,
+            pixmap=pixmap or None,
             open_external_links=self.openExternalLinks(),
             has_selected_text=self.hasSelectedText(),
             selected_text=self.selectedText(),

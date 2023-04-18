@@ -19,9 +19,7 @@ TypeStr = Literal["unknown", "place", "proposed_search"]
 class PlaceSearchResultMixin:
     def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
-        if icon.isEmpty():
-            return None
-        return location.PlaceIcon(icon)
+        return None if icon.isEmpty() else location.PlaceIcon(icon)
 
     def get_type(self) -> TypeStr:
         """Return result type.

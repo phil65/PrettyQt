@@ -37,9 +37,7 @@ class LayoutItemMixin:
             return content
         if content := self.layout():
             return content
-        if content := self.spacerItem():
-            return content
-        return None
+        return content if (content := self.spacerItem()) else None
 
 
 class LayoutItem(LayoutItemMixin, QtWidgets.QLayoutItem):

@@ -33,5 +33,5 @@ class GeoAreaMonitorInfo(QtPositioning.QGeoAreaMonitorInfo):
 
 if __name__ == "__main__":
     info = GeoAreaMonitorInfo("test")
-    print(str(info))
+    print(info)
     print(repr(info))

@@ -230,9 +230,7 @@ class WizardMixin(widgets.DialogMixin):
         if typ not in WIZARD_PIXMAP:
             raise InvalidParamError(typ, WIZARD_PIXMAP)
         pix = gui.Pixmap(self.pixmap(WIZARD_PIXMAP[typ]))
-        if pix.isNull():
-            return None
-        return pix
+        return None if pix.isNull() else pix
 
     def set_wizard_style(self, style: WizardStyleStr):
         """Set the wizard style.

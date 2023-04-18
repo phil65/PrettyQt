@@ -126,7 +126,8 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
                 if new == 1:
                     webview.show()
                 else:
-                    tabwidget.add_tab(webview, str(url), show=autoraise)
+                    tabwidget.add_tab(webview, url, show=autoraise)
+
 
         webbrowser.register("BuiltInBrowser", BuiltInBrowser)
 

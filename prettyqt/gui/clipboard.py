@@ -34,9 +34,7 @@ class Clipboard(core.ObjectMixin):
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         pix = gui.Pixmap(self.item.pixmap(MODES[mode]))
-        if pix.isNull():
-            return None
-        return pix
+        return None if pix.isNull() else pix
 
     def set_image(self, image: QtGui.QImage | None, mode: ModeStr = "clipboard"):
         if mode not in MODES:
@@ -49,9 +47,7 @@ class Clipboard(core.ObjectMixin):
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
         img = gui.Image(self.item.image(MODES[mode]))
-        if img.isNull():
-            return None
-        return img
+        return None if img.isNull() else img
 
     def set_mimedata(self, mimedata: QtCore.QMimeData, mode: ModeStr = "clipboard"):
         if mode not in MODES:

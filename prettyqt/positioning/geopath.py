@@ -31,4 +31,4 @@ class GeoPath(positioning.GeoShapeMixin, QtPositioning.QGeoPath):
 
 if __name__ == "__main__":
     path = GeoPath()
-    print(str(path))
+    print(path)

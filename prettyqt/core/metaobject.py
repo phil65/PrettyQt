@@ -69,20 +69,18 @@ class MetaObject:
     def get_method(self, index: int | str) -> core.MetaMethod:
         if isinstance(index, int):
             return self.get_methods()[index]
-        else:
-            for method in self.get_methods():
-                if method.get_name() == index:
-                    return method
-            raise KeyError(index)
+        for method in self.get_methods():
+            if method.get_name() == index:
+                return method
+        raise KeyError(index)
 
     def get_enum(self, index: int | str) -> core.MetaEnum:
         if isinstance(index, int):
             return self.get_enums()[index]
-        else:
-            for enumerator in self.get_enums():
-                if enumerator.get_name() == index:
-                    return enumerator
-            raise KeyError(index)
+        for enumerator in self.get_enums():
+            if enumerator.get_name() == index:
+                return enumerator
+        raise KeyError(index)
 
     def get_methods(
         self,

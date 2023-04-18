@@ -3,7 +3,7 @@ from prettyqt import constants, core, custom_models
 
 class Root:
     def __init__(self, name="Root", children=None):
-        self.children = children if children else []
+        self.children = children or []
         self.name = name
 
 
@@ -31,9 +31,11 @@ class NestedModel(  # type: ignore
     def rowCount(self, parent=core.ModelIndex()) -> int:
         if parent.column() > 0:
             return 0
-        if not parent.isValid():
-            return len(self.items)
-        return len(parent.internalPointer().children)
+        return (
+            len(parent.internalPointer().children)
+            if parent.isValid()
+            else len(self.items)
+        )
 
     def index(self, row, column, parent):
         if not self.hasIndex(row, column, parent):
@@ -49,14 +51,14 @@ class NestedModel(  # type: ignore
         if not index.isValid():
             return core.ModelIndex()
 
-        item = index.internalPointer()
-        if not item:
+        if item := index.internalPointer():
+            return (
+                core.ModelIndex()
+                if item.parent in [self.root, None]
+                else self.createIndex(item.parent.row(), 0, item.parent)
+            )
+        else:
             return core.ModelIndex()
-
-        if item.parent in [self.root, None]:
-            return core.ModelIndex()
-
-        return self.createIndex(item.parent.row(), 0, item.parent)
 
     def data_by_index(self, index):
         return index.internalPointer()
@@ -71,5 +73,5 @@ class NestedModel(  # type: ignore
         Returns:
             model as dict
         """
-        root = root if root else self.root
+        root = root or self.root
         return root.as_json()

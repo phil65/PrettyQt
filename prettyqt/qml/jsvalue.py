@@ -77,7 +77,7 @@ class JSValue(QtQml.QJSValue):
                 try:
                     return cls(obj)
                 except TypeError:
-                    logger.debug("unknown type: " + str(obj))
+                    logger.debug(f"unknown type: {str(obj)}")
                     return cls()
 
 

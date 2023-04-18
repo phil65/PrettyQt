@@ -114,9 +114,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.windowIcon()
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_min_size(self, *size) -> None:
         self.setMinimumSize(*size)
@@ -352,7 +350,7 @@ class WidgetMixin(core.ObjectMixin):
             case os.PathLike():
                 ss = pathlib.Path(ss).read_text()
             case qstylizer.style.StyleSheet():
-                ss = str(ss)
+                ss = ss
         self.setStyleSheet(ss)
 
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
@@ -478,10 +476,10 @@ class WidgetMixin(core.ObjectMixin):
     def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor) -> None:
         if isinstance(cursor, QtGui.QCursor):
             curs = cursor
-        else:
-            if cursor not in constants.CURSOR_SHAPE:
-                raise InvalidParamError(cursor, constants.CURSOR_SHAPE)
+        elif cursor in constants.CURSOR_SHAPE:
             curs = gui.Cursor(constants.CURSOR_SHAPE[cursor])
+        else:
+            raise InvalidParamError(cursor, constants.CURSOR_SHAPE)
         self.setCursor(curs)
 
     def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
@@ -551,9 +549,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def get_window_file_path(self) -> pathlib.Path | None:
         path = self.windowFilePath()
-        if not path:
-            return None
-        return pathlib.Path(path)
+        return pathlib.Path(path) if path else None
 
     def get_image(self) -> QtGui.QPixmap:
         image = self.grab()
@@ -566,9 +562,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def get_screen(self) -> gui.Screen | None:
         window = self.window().windowHandle()
-        if window is None:
-            return None
-        return gui.Screen(window.screen())
+        return None if window is None else gui.Screen(window.screen())
 
     def delete_children(self):
         """Delete all children of the specified QObject."""
@@ -577,8 +571,7 @@ class WidgetMixin(core.ObjectMixin):
         layout = self.layout()
         while layout.count():
             item = layout.takeAt(0)
-            widget = item.widget()
-            if widget:
+            if widget := item.widget():
                 widget.deleteLater()
             else:
                 self.delete_children(item.layout())

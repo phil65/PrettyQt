@@ -35,4 +35,4 @@ if __name__ == "__main__":
     poly += coord
     poly.addCoordinate(coord)
     print(len(poly))
-    print(str(poly))
+    print(poly)

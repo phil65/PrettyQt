@@ -78,7 +78,4 @@ class TimeLine(core.ObjectMixin, QtCore.QTimeLine):
     def get_easing(self) -> core.easingcurve.TypeStr | Callable[[float], float]:
         curve = core.EasingCurve(self.easingCurve())
         typ = curve.get_type()
-        if typ == "custom":
-            return curve.get_custom_type()
-        else:
-            return typ
+        return curve.get_custom_type() if typ == "custom" else typ

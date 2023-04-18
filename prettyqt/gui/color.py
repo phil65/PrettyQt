@@ -109,10 +109,7 @@ class Color(QtGui.QColor):
             The interpolated QColor, with the same spec as the given start color.
         """
         if colorspace is None:
-            if percent == 100:
-                return cls(*end.getRgb())
-            else:
-                return cls(*start.getRgb())
+            return cls(*end.getRgb()) if percent == 100 else cls(*start.getRgb())
         if colorspace not in SPEC:
             raise InvalidParamError(colorspace, SPEC)
         out = cls()
@@ -212,11 +209,10 @@ class Color(QtGui.QColor):
         base_color = cls(color)
         if base_color.lightness() > 128:
             return base_color.darker(factor)
+        if base_color == Color("#000000"):
+            return cls.drift_color(cls("#101010"), factor + 20)
         else:
-            if base_color == Color("#000000"):
-                return cls.drift_color(cls("#101010"), factor + 20)
-            else:
-                return base_color.lighter(factor + 10)
+            return base_color.lighter(factor + 10)
 
 
 if __name__ == "__main__":

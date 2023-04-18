@@ -168,9 +168,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
 
     def get_icon_pixmap(self) -> gui.Pixmap | None:
         pix = self.iconPixmap()
-        if pix.isNull():
-            return None
-        return gui.Pixmap(pix)
+        return None if pix.isNull() else gui.Pixmap(pix)
 
     def get_standard_buttons(self) -> list[ButtonStr]:
         return [k for k, v in BUTTONS.items() if v & self.standardButtons()]

@@ -99,9 +99,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
     def get_icon(self, column: int = 0) -> gui.Icon | None:
         icon = self.icon(column)
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_checkstate(self, state: constants.StateStr, column: int = 0):
         """Set checkstate of the checkbox.

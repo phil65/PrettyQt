@@ -11,7 +11,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
     def __init__(self, parent: QtWidgets.QWidget, items: list[str]):
         super().__init__(parent)
         self.items = items
-        self.choices: list[int | None] = [None for i in self.items]
+        self.choices: list[int | None] = [None for _ in self.items]
 
     def createEditor(
         self,

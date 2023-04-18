@@ -215,9 +215,7 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_url(self, url: datatypes.PathType):
         """Set the url of the WebEnginePage.

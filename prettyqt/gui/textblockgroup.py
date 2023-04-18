@@ -20,5 +20,3 @@ class TextBlockGroup(gui.TextObjectMixin, QtGui.QTextBlockGroup):
 if __name__ == "__main__":
     doc = gui.TextDocument()
     group = TextBlockGroup(doc)
-    for textblock in group:
-        pass

@@ -45,14 +45,10 @@ class FlowLayout(widgets.Layout):
         return len(self.items)
 
     def itemAt(self, index: int) -> QtWidgets.QLayoutItem | None:  # type: ignore
-        if 0 <= index < len(self.items):
-            return self.items[index]
-        return None
+        return self.items[index] if 0 <= index < len(self.items) else None
 
     def takeAt(self, index: int) -> QtWidgets.QLayoutItem | None:  # type: ignore
-        if 0 <= index < len(self.items):
-            return self.items.pop(index)
-        return None
+        return self.items.pop(index) if 0 <= index < len(self.items) else None
 
     # def expandingDirections(self) -> QtCore.Qt.Orientations:
     #     return QtCore.Qt.Orientations(0)

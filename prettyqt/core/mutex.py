@@ -10,6 +10,5 @@ class Mutex(QtCore.QMutex):
     def lock_mutex(self, timeout: int | None = None):
         if timeout is None:
             timeout = -1
-        result = self.tryLock(timeout)
-        yield result
+        yield self.tryLock(timeout)
         self.unlock()

@@ -414,10 +414,7 @@ class SpanSlider(widgets.Slider):
     def draw_handle(self, painter: widgets.StylePainter, handle: HandleStr):
         opt = self.get_style_option(handle)
         opt.subControls = HANDLE_STYLE
-        pressed = self.upper_pressed
-        if handle == "lower":
-            pressed = self.lower_pressed
-
+        pressed = self.lower_pressed if handle == "lower" else self.upper_pressed
         if pressed == HANDLE_STYLE:
             opt.activeSubControls = pressed
             opt.state |= widgets.Style.StateFlag.State_Sunken

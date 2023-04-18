@@ -18,9 +18,7 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
         else:
             return self.find_child(QtCore.QObject, idx)
         widget = item.widget()
-        if widget is None:
-            return item.layout()
-        return widget
+        return item.layout() if widget is None else widget
 
     def __setitem__(
         self,
@@ -43,7 +41,7 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
         return dict(widgets=widgets, positions=positions)
 
     def __setstate__(self, state):
-        for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
+        for item, pos in zip(state["widgets"], state["positions"]):
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item
 

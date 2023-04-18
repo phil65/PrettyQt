@@ -117,10 +117,10 @@ class TextStream(QtCore.QTextStream):
 
     def read_lines(self) -> Iterator[str]:
         while True:
-            msg = self.readLine()
-            if not msg:
+            if msg := self.readLine():
+                yield msg
+            else:
                 return
-            yield msg
 
 
 if __name__ == "__main__":

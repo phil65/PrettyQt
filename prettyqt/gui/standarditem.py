@@ -119,9 +119,7 @@ class StandardItem(QtGui.QStandardItem):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_tooltip(
         self,

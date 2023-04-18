@@ -67,9 +67,7 @@ DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def __len__(self) -> int:
-        if (model := self.model()) is not None:
-            return model.rowCount()
-        return 0
+        return model.rowCount() if (model := self.model()) is not None else 0
 
     def selectAll(self):
         """Override, we dont want to selectAll for too many items bc of performance."""

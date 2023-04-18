@@ -96,10 +96,10 @@ class CoreApplicationMixin(core.ObjectMixin):
     ):
         if isinstance(priority, int):
             prio = priority
-        else:
-            if priority not in constants.EVENT_PRIORITY:
-                raise InvalidParamError(priority, constants.EVENT_PRIORITY)
+        elif priority in constants.EVENT_PRIORITY:
             prio = constants.EVENT_PRIORITY[priority]
+        else:
+            raise InvalidParamError(priority, constants.EVENT_PRIORITY)
         return self.postEvent(obj, event, prio)
 
     def main_loop(self) -> int:

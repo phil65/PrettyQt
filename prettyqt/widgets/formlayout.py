@@ -80,7 +80,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         return type(self), (), self.__getstate__()
 
     def __setstate__(self, state):
-        for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
+        for item, pos in zip(state["widgets"], state["positions"]):
             self.set_widget(item, pos[0], pos[1])
 
     def set_widget(
@@ -101,9 +101,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
 
     def get_item_position(self, index: int) -> tuple[int, RoleStr] | None:
         pos = self.getItemPosition(index)  # type: ignore
-        if pos[0] == -1:  # type: ignore
-            return None
-        return pos[0], ROLE.inverse[pos[1]]  # type: ignore
+        return None if pos[0] == -1 else (pos[0], ROLE.inverse[pos[1]])
 
     def add(self, *items):
         for i in items:

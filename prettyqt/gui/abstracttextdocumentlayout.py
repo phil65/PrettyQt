@@ -27,9 +27,7 @@ class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
             else QtCore.Qt.HitTestAccuracy.ExactHit
         )
         result = self.hitTest(point, accuracy)
-        if result == -1:
-            return None
-        return result
+        return None if result == -1 else result
 
 
 class AbstractTextDocumentLayout(

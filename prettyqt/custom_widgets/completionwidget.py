@@ -37,14 +37,13 @@ class CompletionWidget(widgets.ListWidget):
 
     def eventFilter(self, obj, event):
         """Handle mouse input and to auto-hide when losing focus."""
-        if obj is self:
-            if event.type() == QtCore.QEvent.Type.MouseButtonPress:
-                pos = self.mapToGlobal(event.pos())
-                target = QtWidgets.QApplication.widgetAt(pos)
-                if target and self.isAncestorOf(target) or target is self:
-                    return False
-                else:
-                    self.cancel_completion()
+        if obj is self and event.type() == QtCore.QEvent.Type.MouseButtonPress:
+            pos = self.mapToGlobal(event.pos())
+            target = QtWidgets.QApplication.widgetAt(pos)
+            if target and self.isAncestorOf(target) or target is self:
+                return False
+            else:
+                self.cancel_completion()
 
         return super().eventFilter(obj, event)
 
@@ -163,15 +162,12 @@ class CompletionWidget(widgets.ListWidget):
         point = self._get_top_left_position(cursor)
         self.move(point)
 
-        # Update current item
-        prefix = self._current_text_cursor().selection().toPlainText()
-        if prefix:
+        if prefix := self._current_text_cursor().selection().toPlainText():
             flags = (
                 QtCore.Qt.MatchFlag.MatchStartsWith  # type: ignore
                 | QtCore.Qt.MatchFlag.MatchCaseSensitive
             )
-            items = self.findItems(prefix, flags)
-            if items:
+            if items := self.findItems(prefix, flags):
                 self.setCurrentItem(items[0])
             else:
                 self.hide()

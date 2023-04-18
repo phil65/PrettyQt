@@ -13,9 +13,7 @@ class PlaceCategory(QtLocation.QPlaceCategory):
 
     def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
-        if icon.isEmpty():
-            return None
-        return location.PlaceIcon(icon)
+        return None if icon.isEmpty() else location.PlaceIcon(icon)
 
     def get_visibility(self) -> location.VisibilityStr:
         """Return the visibility of the place.

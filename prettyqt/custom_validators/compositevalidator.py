@@ -40,9 +40,11 @@ class CompositeValidator(gui.Validator):
         return len(self.validators)
 
     def __eq__(self, other: object):
-        if not isinstance(other, type(self)):
-            return False
-        return self.validators == other.validators
+        return (
+            self.validators == other.validators
+            if isinstance(other, type(self))
+            else False
+        )
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0

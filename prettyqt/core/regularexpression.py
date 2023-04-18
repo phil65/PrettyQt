@@ -76,10 +76,7 @@ class RegularExpression(QtCore.QRegularExpression):
         match_type: MatchTypeStr | QtCore.QRegularExpression.MatchType = "normal",
         anchored: bool = False,
     ) -> core.RegularExpressionMatch:
-        if isinstance(match_type, str):
-            typ = MATCH_TYPE[match_type]
-        else:
-            typ = match_type
+        typ = MATCH_TYPE[match_type] if isinstance(match_type, str) else match_type
         if isinstance(anchored, bool):
             options = MATCH_OPTIONS["anchored"] if anchored else MATCH_OPTIONS["none"]
         else:

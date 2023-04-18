@@ -11,9 +11,7 @@ class PlaceSupplier(QtLocation.QPlaceSupplier):
 
     def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
-        if icon.isEmpty():
-            return None
-        return location.PlaceIcon(icon)
+        return None if icon.isEmpty() else location.PlaceIcon(icon)
 
     def set_url(self, url: datatypes.UrlType):
         url = core.Url(url)

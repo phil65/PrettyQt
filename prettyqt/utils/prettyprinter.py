@@ -14,7 +14,7 @@ class PrettyPrinter:
 
         Used by devtools (https://python-devtools.helpmanual.io/).
         """
-        yield type(self).__name__ + "("
+        yield f"{type(self).__name__}("
         yield 1
         for k, v in self.serialize().items():
             yield f"{k}="
@@ -25,11 +25,10 @@ class PrettyPrinter:
                     else:
                         yield f"{item!r}"
                     yield 0
+            elif hasattr(v, "__pretty__"):
+                yield from v.__pretty__(fmt, **kwargs)
             else:
-                if hasattr(v, "__pretty__"):
-                    yield from v.__pretty__(fmt, **kwargs)
-                else:
-                    yield f"{v!r}"
+                yield f"{v!r}"
             yield 0
         yield -1
         yield ")"

@@ -135,9 +135,7 @@ class Url(QtCore.QUrl):
 
     def is_special_url(self) -> bool:
         """Return True if url is an about:... or other special URL."""
-        if not self.isValid():
-            return False
-        return self.scheme() in ("about", "file")
+        return self.scheme() in ("about", "file") if self.isValid() else False
 
 
 if __name__ == "__main__":

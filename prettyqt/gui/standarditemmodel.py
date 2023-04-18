@@ -139,8 +139,6 @@ if __name__ == "__main__":
     w = widgets.ListView()
     w.set_model(model)
     model += gui.StandardItem("Item")
-    for item in model:
-        pass
     with open("data.pkl", "wb") as writer:
         pickle.dump(model, writer)
     with open("data.pkl", "rb") as reader:

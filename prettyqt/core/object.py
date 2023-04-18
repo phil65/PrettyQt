@@ -109,9 +109,8 @@ class ObjectMixin:
         node = self
         while node:
             node = node.parent()
-            if isinstance(node, typ):
-                if name is None or node.objectName() == name:
-                    return node
+            if isinstance(node, typ) and (name is None or node.objectName() == name):
+                return node
         return None
 
     def start_timer(

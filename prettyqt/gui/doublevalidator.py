@@ -12,12 +12,14 @@ class DoubleValidator(gui.ValidatorMixin, QtGui.QDoubleValidator):
         return type(self), (self.bottom(), self.top(), self.decimals()), None
 
     def __eq__(self, other: object):
-        if not isinstance(other, type(self)):
-            return False
         return (
-            self.bottom() == other.bottom()
-            and self.top() == other.top()
-            and self.decimals() == other.decimals()
+            (
+                self.bottom() == other.bottom()
+                and self.top() == other.top()
+                and self.decimals() == other.decimals()
+            )
+            if isinstance(other, type(self))
+            else False
         )
 
     def serialize_fields(self):

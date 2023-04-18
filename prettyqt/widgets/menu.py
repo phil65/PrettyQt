@@ -60,9 +60,7 @@ class MenuMixin(widgets.WidgetMixin):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def add_separator(self, text: str | None = None) -> widgets.WidgetAction:
         """Adds a separator showing an optional label.

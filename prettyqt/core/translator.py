@@ -13,9 +13,7 @@ class TranslatorMixin(core.ObjectMixin):
 
     def get_file_path(self) -> pathlib.Path | None:
         path = self.filePath()
-        if not path:
-            return None
-        return pathlib.Path(path)
+        return pathlib.Path(path) if path else None
 
     def load_file(self, path: datatypes.PathType):
         path = pathlib.Path(path)
@@ -42,7 +40,7 @@ class TranslatorMixin(core.ObjectMixin):
     def for_system_language(cls) -> Translator:
         translator = cls()
         if not translator.load(
-            "qt_" + core.Locale.system().name(),
+            f"qt_{core.Locale.system().name()}",
             str(core.LibraryInfo.get_location("translations")),
         ):
             raise OSError("Could not get translator for system language")

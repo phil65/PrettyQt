@@ -28,15 +28,10 @@ class BaseRegexValidator(gui.Validator):
         return type(self), (self.get_regex(),)
 
     def __eq__(self, other: object):
-        if not isinstance(other, type(self)):
-            return False
-        return self.regex == other.regex
+        return self.regex == other.regex if isinstance(other, type(self)) else False
 
     def set_regex(self, regex: PatternType):
-        if isinstance(regex, str):
-            self.regex = re.compile(regex)
-        else:
-            self.regex = regex
+        self.regex = re.compile(regex) if isinstance(regex, str) else regex
 
     def get_regex(self) -> str:
         if self.regex is None:
@@ -48,7 +43,7 @@ class BaseRegexValidator(gui.Validator):
     ) -> tuple[QtGui.QValidator.State, str, int]:
         if self.regex is None:
             raise TypeError("Validator not initialized")
-        if text == "":
+        if not text:
             return self.State.Intermediate, text, pos
         match = self.regex.match(text, partial=True)  # type: ignore
         if match is None:

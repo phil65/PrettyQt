@@ -18,9 +18,11 @@ class RegularExpressionValidator(gui.ValidatorMixin, QtGui.QRegularExpressionVal
         return type(self), (), self.__getstate__()
 
     def __eq__(self, other: object):
-        if not isinstance(other, type(self)):
-            return False
-        return self.regularExpression() == other.regularExpression()
+        return (
+            self.regularExpression() == other.regularExpression()
+            if isinstance(other, type(self))
+            else False
+        )
 
     def set_regex(self, regex: str | core.RegularExpression, flags=0):
         if isinstance(regex, str):

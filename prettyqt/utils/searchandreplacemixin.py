@@ -105,14 +105,14 @@ class SearchAndReplaceMixin:
             return
         temp_cursor = self.textCursor()
         found = self.find(self.search_buffer, self.search_flags)
-        if not found:
-            if not self.textCursor().atStart() or (
-                self._searching_backwards() and not self.textCursor().atEnd()
-            ):
-                self.move_cursor("end" if self._searching_backwards() else "start")
-                found = self.find(self.search_buffer, self.search_flags)
-                if not found:
-                    self.setTextCursor(temp_cursor)
+        if not found and (
+            not self.textCursor().atStart()
+            or (self._searching_backwards() and not self.textCursor().atEnd())
+        ):
+            self.move_cursor("end" if self._searching_backwards() else "start")
+            found = self.find(self.search_buffer, self.search_flags)
+            if not found:
+                self.setTextCursor(temp_cursor)
         if found:
             t = self.textCursor()
             t.insertText(replace_buffer)
@@ -137,12 +137,9 @@ class SearchAndReplaceMixin:
         temp_cursor = self.textCursor()
         times = 0
         self.move_cursor("start")
-        while True:
-            if self.find(self.search_buffer, self.search_flags):
-                self.textCursor().insertText(replace_buffer)
-                times += 1
-            else:
-                break
+        while self.find(self.search_buffer, self.search_flags):
+            self.textCursor().insertText(replace_buffer)
+            times += 1
         if times:
             logger.info(f'{times} instance{"s" if times else ""} replaced')
         else:

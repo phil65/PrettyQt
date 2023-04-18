@@ -47,12 +47,11 @@ class JsonDocument(QtCore.QJsonDocument):
 if __name__ == "__main__":
     doc = JsonDocument.from_variant(dict(a="b"))
     print(doc.toVariant())
-    print(str(doc))
+    print(doc)
     new = JsonDocument()
     new.setObject(doc.object())
-    print("test")
     print(type(new["a"]))
-    print(str(new["a"]))
+    print(new["a"])
     new["k"] = "v"
     print("new", new["k"])
     print(new.to_json())

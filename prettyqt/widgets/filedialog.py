@@ -190,9 +190,9 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         if result != self.DialogCode.Accepted:
             return None
         paths = self.selected_files()
-        folder_path = paths[0].parent
         if self.path_id:
             settings = core.Settings()
+            folder_path = paths[0].parent
             settings.setValue(self.path_id, str(folder_path))
         return paths
 

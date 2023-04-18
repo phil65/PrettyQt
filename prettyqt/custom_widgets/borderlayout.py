@@ -62,9 +62,7 @@ class BorderLayout(widgets.Layout):
         return len(self.items)
 
     def itemAt(self, index: int) -> QtWidgets.QWidgetItem | None:  # type: ignore
-        if index < len(self.items):
-            return self.items[index].item
-        return None
+        return self.items[index].item if index < len(self.items) else None
 
     def minimumSize(self):
         return self.calculate_size("minimum")

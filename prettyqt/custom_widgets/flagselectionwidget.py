@@ -54,7 +54,6 @@ class FlagSelectionWidget(widgets.GroupBox):
         self.value_changed.emit(choice)
 
     def set_value(self, value: int):
-        value = int(value)
         for btn, flag in self.buttons.items():
             btn.setChecked(bool(value & flag))
 

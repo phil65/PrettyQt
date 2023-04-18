@@ -21,5 +21,5 @@ if __name__ == "__main__":
     coord1 = positioning.GeoCoordinate(1, 1)
     coord2 = positioning.GeoCoordinate(11, 11)
     rect = GeoRectangle(coord1, coord2)
-    print(str(rect))
+    print(rect)
     print(repr(rect))

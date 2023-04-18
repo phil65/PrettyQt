@@ -52,7 +52,7 @@ def _build_arguments(
             slot_args.append(annotations[arg])
         elif arg not in annotations:
             gap = True
-        elif arg in annotations and gap:
+        else:
             raise TypeError(
                 "Type annotations must be in a continuous row - an argument "
                 f'before "{arg}" is missing'

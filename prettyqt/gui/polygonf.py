@@ -67,9 +67,11 @@ class PolygonF(QtGui.QPolygonF):
         return bytes(ba)
 
     def __eq__(self, other: object) -> bool:
-        if not isinstance(other, type(self)):
-            return False
-        return list(self) == [other.at(i) for i in range(other.size())]
+        return (
+            list(self) == [other.at(i) for i in range(other.size())]
+            if isinstance(other, type(self))
+            else False
+        )
 
     def get_point(self, index: int) -> core.PointF:
         return core.PointF(self.at(index))

@@ -61,9 +61,7 @@ class GeoManeuver(QtLocation.QGeoManeuver):
 
     def get_waypoint(self) -> positioning.GeoCoordinate | None:
         wp = self.waypoint()
-        if not wp.isValid():
-            return None
-        return positioning.GeoCoordinate(wp)
+        return positioning.GeoCoordinate(wp) if wp.isValid() else None
 
     def set_direction(self, direction: InstructionDirectionStr):
         """Set the direction.

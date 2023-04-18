@@ -11,11 +11,10 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
     def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
-        else:
-            result = self.find_child(QtWidgets.QWidget, index)
-            if result is None:
-                raise KeyError("Widget not found")
-            return result
+        result = self.find_child(QtWidgets.QWidget, index)
+        if result is None:
+            raise KeyError("Widget not found")
+        return result
 
     def __delitem__(self, index: int):
         self.removeItem(index)
@@ -68,9 +67,7 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
 
     def item_icon(self, index: int) -> gui.Icon | None:
         icon = self.itemIcon(index)
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
 
 if __name__ == "__main__":

@@ -20,7 +20,7 @@ class GraphicsLinearLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsLinea
         return dict(items=self.get_children())
 
     def __setstate__(self, state):
-        for i, (item, pos) in enumerate(zip(state["widgets"], state["positions"])):
+        for item, pos in zip(state["widgets"], state["positions"]):
             x, y = pos
             self[x, y] = item
 

@@ -21,7 +21,7 @@ def dump_json(data: str):
 
         OPTS = orjson.OPT_NAIVE_UTC | orjson.OPT_SERIALIZE_NUMPY
         return orjson.dumps(data, option=OPTS)
-    except (ImportError, ModuleNotFoundError):
+    except ImportError:
         import json
 
         return json.dumps(data).encode()
@@ -32,7 +32,7 @@ def load_json(data):
         import orjson
 
         return orjson.loads(data)
-    except (ImportError, ModuleNotFoundError):
+    except ImportError:
         import json
 
         return json.loads(data)
@@ -75,9 +75,7 @@ def cut_off_str(obj, max_len: int) -> str:
     characters, the last three will be replaced with elipsis.
     """
     s = repr(obj)
-    if len(s) > max_len - 3:
-        return s[: max_len - 3] + "..."
-    return s
+    return f"{s[:max_len - 3]}..." if len(s) > max_len - 3 else s
 
 
 def get_color_percentage(

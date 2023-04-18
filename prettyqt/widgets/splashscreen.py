@@ -11,7 +11,7 @@ class SplashScreenMixin(widgets.WidgetMixin):
     def __init__(
         self, path: datatypes.PathType | QtGui.QPixmap, width: int | None = None
     ):
-        pix = gui.Pixmap(os.fspath(path)) if not isinstance(path, QtGui.QPixmap) else path
+        pix = path if isinstance(path, QtGui.QPixmap) else gui.Pixmap(os.fspath(path))
         if width:
             pix = pix.scaledToWidth(width)
         super().__init__(pix)

@@ -45,13 +45,8 @@ class JoystickButton(widgets.PushButton):
         d = hypot(xy[0], xy[1])  # length
         nxy = [0, 0]
         for i in [0, 1]:
-            if xy[i] == 0:
-                nxy[i] = 0
-            else:
-                nxy[i] = xy[i] / d
-
-        if d > self.radius:
-            d = self.radius
+            nxy[i] = 0 if xy[i] == 0 else xy[i] / d
+        d = min(d, self.radius)
         d = (d / self.radius) ** 2
         xy = [nxy[0] * d, nxy[1] * d]
 

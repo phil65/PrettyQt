@@ -53,11 +53,10 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def __getitem__(self, index: int) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
-        else:
-            result = self.findChild(QtWidgets.QWidget, index)
-            if result is None:
-                raise KeyError("Widget not found")
-            return result
+        result = self.findChild(QtWidgets.QWidget, index)
+        if result is None:
+            raise KeyError("Widget not found")
+        return result
 
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
@@ -166,9 +165,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
 
     def tab_icon(self, i: int) -> gui.Icon | None:
         icon = self.tabIcon(i)
-        if icon.isNull():
-            return None
-        return gui.Icon(icon)
+        return None if icon.isNull() else gui.Icon(icon)
 
     def set_detachable(self):
         self.tab_bar.on_detach.connect(self.detach_tab)

@@ -238,7 +238,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
             self._set_validation_color()
 
     def _set_validation_color(self, state: bool = True):
-        color = "orange" if not self.is_valid() else None
+        color = None if self.is_valid() else "orange"
         self.set_background_color(color)
 
     def set_validator(self, validator: QtGui.QValidator | None):

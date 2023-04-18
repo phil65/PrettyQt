@@ -28,10 +28,7 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
         minor: int | None = None,
         micro: int | None = None,
     ):
-        if isinstance(typ, str):
-            os_type = OS_TYPE[typ]
-        else:
-            os_type = typ
+        os_type = OS_TYPE[typ] if isinstance(typ, str) else typ
         if minor is None:
             minor = -1
         if micro is None:
@@ -56,11 +53,13 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
         )
 
     def __eq__(self, other):
-        if not isinstance(other, OperatingSystemVersion):
-            return False
         return (
-            self.get_type() == other.get_type()
-            and self.get_versionnumber() == other.get_versionnumber()
+            (
+                self.get_type() == other.get_type()
+                and self.get_versionnumber() == other.get_versionnumber()
+            )
+            if isinstance(other, OperatingSystemVersion)
+            else False
         )
 
     def __hash__(self):

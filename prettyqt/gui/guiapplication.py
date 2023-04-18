@@ -143,9 +143,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
 
     def get_icon(self) -> gui.Icon | None:
         icon = self.windowIcon()
-        if icon.isNull():
-            return None
-        return gui.Icon(self.windowIcon())
+        return None if icon.isNull() else gui.Icon(self.windowIcon())
 
     @classmethod
     def set_palette(cls, palette: constants.ThemeStr | QtGui.QPalette):

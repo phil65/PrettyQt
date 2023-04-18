@@ -184,10 +184,7 @@ class AbstractSocketMixin(core.IODeviceMixin):
     ) -> bool:
         if isinstance(address, str):
             address = QtNetwork.QHostAddress(address)
-        if bind_mode in BIND_MODE:
-            mode = BIND_MODE[bind_mode]
-        else:
-            mode = bind_mode
+        mode = BIND_MODE[bind_mode] if bind_mode in BIND_MODE else bind_mode
         return self.bind(address, port, mode)
 
     def connect_to_host(

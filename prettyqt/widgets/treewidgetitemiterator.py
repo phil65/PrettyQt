@@ -91,7 +91,7 @@ class TreeWidgetItemIterator(QtWidgets.QTreeWidgetItemIterator):
                 flags |= mod.IteratorFlag.Editable  # type: ignore
             elif editable is False:
                 flags |= mod.IteratorFlag.NotEditable  # type: ignore
-            if user_flag is True:
+            if user_flag:
                 flags |= mod.IteratorFlag.UserFlag  # type: ignore
             super().__init__(other, flags)  # type: ignore
 

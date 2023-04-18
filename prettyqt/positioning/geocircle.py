@@ -32,5 +32,5 @@ class GeoCircle(positioning.GeoShapeMixin, QtPositioning.QGeoCircle):
 if __name__ == "__main__":
     coord = (1, 1)
     circle = GeoCircle(coord)
-    print(str(circle))
+    print(circle)
     print(repr(circle))

@@ -11,13 +11,15 @@ class TableWidgetSelectionRange(QtWidgets.QTableWidgetSelectionRange):
         )
 
     def __eq__(self, other: object):
-        if not isinstance(other, TableWidgetSelectionRange):
-            return False
         return (
-            self.topRow() == other.topRow()
-            and self.bottomRow() == other.bottomRow()
-            and self.leftColumn() == other.leftColumn()
-            and self.rightColumn() == other.rightColumn()
+            (
+                self.topRow() == other.topRow()
+                and self.bottomRow() == other.bottomRow()
+                and self.leftColumn() == other.leftColumn()
+                and self.rightColumn() == other.rightColumn()
+            )
+            if isinstance(other, TableWidgetSelectionRange)
+            else False
         )
 
     def __or__(
@@ -33,18 +35,18 @@ class TableWidgetSelectionRange(QtWidgets.QTableWidgetSelectionRange):
     def __and__(
         self, other: QtWidgets.QTableWidgetSelectionRange
     ) -> TableWidgetSelectionRange:
-        if not (
-            other.topRow() <= self.bottomRow()
-            or other.bottomRow() >= self.topRow()
-            or other.leftColumn() <= self.rightColumn()
-            or other.rightColumn() >= self.leftColumn()
-        ):
-            return TableWidgetSelectionRange()
-        return TableWidgetSelectionRange(
-            max(self.topRow(), other.topRow()),
-            max(self.leftColumn(), other.leftColumn()),
-            min(self.bottomRow(), other.bottomRow()),
-            min(self.rightColumn(), other.rightColumn()),
+        return (
+            TableWidgetSelectionRange()
+            if other.topRow() > self.bottomRow()
+            and other.bottomRow() < self.topRow()
+            and other.leftColumn() > self.rightColumn()
+            and other.rightColumn() < self.leftColumn()
+            else TableWidgetSelectionRange(
+                max(self.topRow(), other.topRow()),
+                max(self.leftColumn(), other.leftColumn()),
+                min(self.bottomRow(), other.bottomRow()),
+                min(self.rightColumn(), other.rightColumn()),
+            )
         )
 
 

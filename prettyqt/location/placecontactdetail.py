@@ -13,8 +13,8 @@ class PlaceContactDetail(QtLocation.QPlaceContactDetail):
             super().__init__(other_or_label)
         else:
             super().__init__()
-            self.setLabel(other_or_label if other_or_label else "")
-            self.setValue(value if value else "")
+            self.setLabel(other_or_label or "")
+            self.setValue(value or "")
 
     def __repr__(self):
         return f"{type(self).__name__}({self.label()!r}, {self.value()!r})"

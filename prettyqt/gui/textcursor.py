@@ -175,4 +175,4 @@ if __name__ == "__main__":
     widget.show()
     app.main_loop()
     cursor = widget.get_text_cursor()
-    print(str(cursor))
+    print(cursor)

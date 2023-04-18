@@ -171,12 +171,11 @@ class Pattern(core.RegularExpression):
         if matches[0].start() == 0:
             result.append("")
         else:
-            result.append(string[0 : matches[0].start()])
+            result.append(string[: matches[0].start()])
         for m in matches[:num_split]:
             if prev_match is not None:
                 result.append(string[prev_match.end() : m.start()])
-            for g in m.groups():
-                result.append(g)
+            result.extend(iter(m.groups()))
             prev_match = m
         if matches[num_split - 1].end() == len(string):
             result.append("")

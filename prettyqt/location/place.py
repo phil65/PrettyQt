@@ -36,9 +36,7 @@ class Place(QtLocation.QPlace):
 
     def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()
-        if icon.isEmpty():
-            return None
-        return location.PlaceIcon(icon)
+        return None if icon.isEmpty() else location.PlaceIcon(icon)
 
     def get_location(self) -> positioning.GeoLocation:
         return positioning.GeoLocation(self.location())

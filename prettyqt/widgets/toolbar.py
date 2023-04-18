@@ -57,20 +57,13 @@ class ToolBarMixin(widgets.WidgetMixin):
             Separator action
         """
         if text is None:
-            if before:
-                return self.insertSeparator(before)
-            else:
-                return self.addSeparator()
-        else:
-            label = widgets.Label(text)
-            label.setMinimumWidth(self.minimumWidth())
-            with label.edit_stylesheet() as ss:
-                ss.background.setValue("lightgrey")
-            label.set_alignment(horizontal="center")
-            if before:
-                return self.insertWidget(before, label)
-            else:
-                return self.addWidget(label)
+            return self.insertSeparator(before) if before else self.addSeparator()
+        label = widgets.Label(text)
+        label.setMinimumWidth(self.minimumWidth())
+        with label.edit_stylesheet() as ss:
+            ss.background.setValue("lightgrey")
+        label.set_alignment(horizontal="center")
+        return self.insertWidget(before, label) if before else self.addWidget(label)
 
     def set_style(self, style: constants.ToolButtonStyleStr):
         self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])

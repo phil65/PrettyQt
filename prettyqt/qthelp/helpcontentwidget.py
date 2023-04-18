@@ -10,6 +10,4 @@ class HelpContentWidget(widgets.TreeViewMixin, QtHelp.QHelpContentWidget):
         if isinstance(url, str):
             url = QtCore.QUrl(url)
         idx = self.indexOf(url)
-        if not idx.isValid():
-            return None
-        return idx
+        return idx if idx.isValid() else None

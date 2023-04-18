@@ -20,10 +20,10 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         return f"{type(self).__name__}()"
 
     def __getitem__(self, item: int | str) -> str:
-        captured = self.captured(item)
-        if not captured:
+        if captured := self.captured(item):
+            return captured
+        else:
             raise KeyError(item)
-        return captured
 
     def __bool__(self):
         return self.isValid()
@@ -42,7 +42,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
 
     def groups(self, default=None) -> tuple:
         if self.lastindex is None:
-            return tuple()
+            return ()
         return tuple(
             self.group(i) if i <= self.lastindex else default
             for i in range(self.re.captureCount())
