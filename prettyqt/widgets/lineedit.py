@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -25,10 +25,6 @@ ActionPositionStr = Literal["leading", "trailing"]
 
 
 class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
-    focusLost = core.Signal()
-    enterPressed = core.Signal()
-    editComplete = core.Signal(str)
-
     value_changed = core.Signal(str)
 
     def __init__(
@@ -86,19 +82,6 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
             drag_enabled=self.dragEnabled(),
             is_modified=self.isModified(),
         )
-
-    def focusOutEvent(self, event):
-        self.focusLost.emit()
-        return super().focusOutEvent(event)
-
-    def keyPressEvent(self, event):
-        match event.key():
-            case QtCore.Qt.Key.Key_Enter | QtCore.Qt.Key.Key_Return:
-                self.enterPressed.emit()
-        return super().keyPressEvent(event)
-
-    def _on_edit_complete(self):
-        self.editComplete.emit(self.text())
 
     def font(self) -> gui.Font:
         return gui.Font(super().font())
