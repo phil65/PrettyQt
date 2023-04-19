@@ -47,20 +47,20 @@ jobs:
         run: |
           poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
     - name: Create documentation
-      if: matrix.python-version == '3.10' && runner.os == 'Linux'
+      # if: matrix.python-version == '3.10' && runner.os == 'Linux'
       run: |
         poetry run mkdocs build
-    - name: Build and publish
-      if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
-      run: |
-        poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
-        poetry publish --build
-    - name: Deploy docs
-      if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
-      uses: peaceiris/actions-gh-pages@v3
-      with:
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ./site
+    # - name: Build and publish
+    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
+    #   run: |
+    #     poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
+    #     poetry publish --build
+    # - name: Deploy docs
+    #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   with:
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: ./site
 
   deploy:
     runs-on: ubuntu-latest
