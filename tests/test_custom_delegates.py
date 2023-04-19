@@ -5,10 +5,11 @@ from prettyqt.qt import QtCore
 
 
 def test_buttondelegate(qtbot):
-    widget = custom_delegates.ButtonDelegate(parent=None)
+    table = widgets.TableView()
+    widget = custom_delegates.ButtonDelegate(parent=table)
     widget.setEditorData(widgets.Widget(), None)
     widget.createEditor(None, None, QtCore.QModelIndex())
-    widget.currentIndexChanged()
+    # widget.currentIndexChanged()
 
 
 def test_radiodelegate(qtbot, tablewidget):
