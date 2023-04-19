@@ -180,7 +180,8 @@ exclude = '''
 )/
 '''
 [tool.commitizen]
-name = "cz_conventional_commits"
+name = "cz_github_convention"
+github_repo = "phil65/PrettyQt"
 version = "1.12.0"
 tag_format = "v$version"
 update_changelog_on_bump = true
