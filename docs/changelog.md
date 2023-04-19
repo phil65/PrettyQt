@@ -1,3 +1,9 @@
+## v1.13.1 (2023-04-20)
+
+### Fix
+
+- fix tests... [58c78](https://github.com/phil65/PrettyQt/commit/58c78daf3d039bf08c04b02c1af21abead582f87)
+
 ## v1.13.0 (2023-04-20)
 
 ### Feat
