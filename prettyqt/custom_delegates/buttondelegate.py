@@ -23,15 +23,12 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         editor.setGeometry(option.rect)
 
     def createEditor(self, parent, option, index):
-        if index.data(self.method_role) is None:
+        btn_callback = index.data(self.method_role)
+        if btn_callback is None:
             return
         btn = widgets.PushButton(parent)
         btn.setText(index.data())
-        btn_callback = index.data(self.method_role)
-        if not btn_callback:
-            btn.set_disabled()
-        else:
-            btn.clicked.connect(btn_callback)
+        btn.clicked.connect(btn_callback)
         return btn
 
     def setEditorData(self, editor, index):
