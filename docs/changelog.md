@@ -1,3 +1,10 @@
+## v1.13.0 (2023-04-20)
+
+### Feat
+
+- **ButtonDelegate**: no need anymore to open persistent editors [78984](https://github.com/phil65/PrettyQt/commit/789841de7811e5d0b0df3e47a5ce14559e2a182a)
+- **AbstractTableModel**: add __getitem__ method to return indexes [0b9be](https://github.com/phil65/PrettyQt/commit/0b9be2ba8b24e51467a62d3cdccc7e7fc3ddf41f)
+
 ## v1.12.1 (2023-04-19)
 
 ### Fix
