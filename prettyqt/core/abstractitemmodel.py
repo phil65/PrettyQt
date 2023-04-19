@@ -29,10 +29,6 @@ class AbstractItemModelMixin(core.ObjectMixin):
         """Return amount of rows."""
         return self.rowCount()
 
-    # causes issues with PySide2
-    # def __getitem__(self, index: Tuple[int, int]) -> QtCore.QModelIndex:
-    #     return self.index(*index)
-
     def check_index(
         self,
         index: QtCore.QModelIndex,
