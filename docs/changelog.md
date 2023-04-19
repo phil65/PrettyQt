@@ -1,3 +1,9 @@
+## v1.12.1 (2023-04-19)
+
+### Fix
+
+- **Widget**: missing string cast for set_stylesheet [e536b](https://github.com/phil65/PrettyQt/commit/e536beec652473b8c8f6d546a1781f1bc0b293a1)
+
 ## v1.12.0 (2023-04-19)
 
 ### Feat
