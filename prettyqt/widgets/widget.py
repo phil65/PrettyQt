@@ -350,7 +350,7 @@ class WidgetMixin(core.ObjectMixin):
             case os.PathLike():
                 ss = pathlib.Path(ss).read_text()
             case qstylizer.style.StyleSheet():
-                ss = ss
+                ss = str(ss)
         self.setStyleSheet(ss)
 
     def get_stylesheet(self) -> qstylizer.style.StyleSheet:
