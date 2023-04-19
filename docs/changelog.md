@@ -1,3 +1,9 @@
+## v1.12.0 (2023-04-19)
+
+### Feat
+
+- **ColumnItemModel**: inherit some stuff from ListMixin
+
 ## v1.11.0 (2023-04-18)
 
 ### Feat
