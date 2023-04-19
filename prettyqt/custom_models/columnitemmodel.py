@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 from dataclasses import dataclass
 import logging
+from typing import Any
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
@@ -43,6 +44,9 @@ class ColumnItem:
     set_edit: Callable | None = None
     set_checkstate: Callable | None = None
     user_data: dict | Callable | None = None
+
+    # def __post_init__(self):
+    #     super().__init__()
 
     def get_name(self) -> str:
         return self.name
@@ -333,10 +337,12 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         self,
         items: list,
         columns: list[ColumnItem],
+        mime_type: str | None = None,
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(columns, parent)
         self.items = items
+        self.mime_type = mime_type
 
     def rowCount(self, parent=None):
         return len(self.items)
@@ -344,12 +350,71 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
     def tree_item(self, index: core.ModelIndex):
         return self.items[index.row()]
 
+    def setData(self, index, value, role):
+        if role == constants.USER_ROLE:
+            self.items[index.row()] = value
+            self.update_row(index.row())
+            return True
+        return super().setData(index, value, role)  # type: ignore
+
+    def removeRows(self, row: int, count: int, parent):
+        end_row = row + count - 1
+        with self.remove_rows(row, end_row, parent):
+            for i in range(end_row, row - 1, -1):
+                self.items.pop(i)
+        return True
+
+    def dropMimeData(self, mime_data, action, row, column, parent_index):
+        if not mime_data.hasFormat(self.mime_type):
+            return False
+        # Since we only drop in between items, parent_index must be invalid,
+        # and we use the row arg to know where the drop took place.
+        if parent_index.isValid():
+            return False
+        indexes = mime_data.get_json_data(self.mime_type)
+        pos = row if row < len(self.items) and row != -1 else len(self.items)
+        rem_offset = sum(i <= pos for i in indexes)
+        new = [self.items[i] for i in indexes]
+        with self.change_layout():
+            for i in sorted(indexes, reverse=True):
+                self.items.pop(i)
+            for item in reversed(new):
+                self.items.insert(pos - rem_offset, item)
+        return False
+
+    def sort(self, ncol: int, order):
+        """Sort table by given column number."""
+        is_asc = order == constants.ASCENDING
+        if sorter := self._attr_cols[ncol].label:
+            with self.change_layout():
+                self.items.sort(key=sorter, reverse=is_asc)
+
+    def add(self, item: Any, position: int | None = None):
+        """Append provided item to the list."""
+        self.add_items(items=[item], position=position)
+        return item
+
+    def add_items(self, items: Iterable[Any], position: int | None = None):
+        """Append a list of items to the list."""
+        if position is None:
+            position = len(self.items)
+        items = list(items)
+        with self.insert_rows(position, position + len(items) - 1):
+            for i in range(len(items)):
+                self.items.insert(i + position, items[i])
+            # self.items.extend(items)
+        return items
+
+    def remove_items(self, offsets: Iterable[int]):
+        for offset in sorted(offsets, reverse=True):
+            self.removeRow(offset)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    test = dict()
+    test = {}
     colitem = ColumnItem(
         name="Test",
         label=lambda volume: str(volume.get_root_path()),
@@ -361,6 +426,7 @@ if __name__ == "__main__":
     items = core.StorageInfo.get_mounted_volumes()
     model = ColumnTableModel(items, [colitem])
     table = widgets.TableView()
+    table.setSortingEnabled(True)
     table.set_model(model)
     table.show()
     app.main_loop()
