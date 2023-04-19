@@ -3194,10 +3194,6 @@ AbstractItemModelMixin            (<span title="prettyqt.core.object.ObjectMixin
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return amount of rows.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
 
-    <span class="c1"># causes issues with PySide2</span>
-    <span class="c1"># def __getitem__(self, index: Tuple[int, int]) -&gt; QtCore.QModelIndex:</span>
-    <span class="c1">#     return self.index(*index)</span>
-
     <span class="k">def</span> <span class="nf">check_index</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span>

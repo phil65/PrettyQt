@@ -356,6 +356,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.paint" class="md-nav__link">
+    paint()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
@@ -365,6 +372,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setModelData" class="md-nav__link">
     setModelData()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.updateEditorGeometry" class="md-nav__link">
+    updateEditorGeometry()
   </a>
   
 </li>
@@ -1052,6 +1066,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.paint" class="md-nav__link">
+    paint()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setEditorData" class="md-nav__link">
     setEditorData()
   </a>
@@ -1061,6 +1082,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.setModelData" class="md-nav__link">
     setModelData()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.custom_delegates.buttondelegate.ButtonDelegate.updateEditorGeometry" class="md-nav__link">
+    updateEditorGeometry()
   </a>
   
 </li>
@@ -1520,7 +1548,7 @@
 
 <h3 id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate" class="doc doc-heading">
         <code>
-ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelegate">ItemDelegate</span>)
+ButtonDelegate            (<span title="prettyqt.widgets.styleditemdelegate.StyledItemDelegate">StyledItemDelegate</span>)
         </code>
 
 
@@ -1532,17 +1560,30 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ButtonDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">ItemDelegate</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ButtonDelegate</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">StyledItemDelegate</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemDataRole</span><span class="o">.</span><span class="n">UserRole</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractItemView</span><span class="p">,</span>
+        <span class="n">role</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">ItemDataRole</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">fn_role</span> <span class="o">=</span> <span class="n">role</span>
+        <span class="n">parent</span><span class="o">.</span><span class="n">setMouseTracking</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">method_role</span> <span class="o">=</span> <span class="n">role</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_one_cell_edit_mode</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_edited_index</span> <span class="o">=</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">()</span>
+        <span class="n">parent</span><span class="o">.</span><span class="n">entered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cellEntered</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">:</span>
-        <span class="n">label</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-        <span class="n">btn_callback</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn_role</span><span class="p">)</span>
-        <span class="n">btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">updateEditorGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="n">editor</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method_role</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+        <span class="n">btn_callback</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method_role</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">btn_callback</span><span class="p">:</span>
             <span class="n">btn</span><span class="o">.</span><span class="n">set_disabled</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1551,13 +1592,50 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
     <span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">pass</span>
+        <span class="c1"># editor.setProperty(&quot;test&quot;, &quot;aa&quot;)</span>
+        <span class="c1"># editor.setText(index.data())</span>
 
     <span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
         <span class="k">pass</span>
+        <span class="c1"># model.setData(index, editor.property(&quot;test&quot;))</span>
 
-    <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
-    <span class="k">def</span> <span class="nf">currentIndexChanged</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">commitData</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sender</span><span class="p">())</span>
+    <span class="k">def</span> <span class="nf">cellEntered</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">closePersistentEditor</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">current_edited_index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span><span class="o">.</span><span class="n">openPersistentEditor</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_one_cell_edit_mode</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current_edited_index</span> <span class="o">=</span> <span class="n">index</span>
+
+    <span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method_role</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_MouseOver</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Selected</span><span class="p">:</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
+        <span class="n">pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">)</span>
+        <span class="c1"># return super().paint(painter, option, index)</span>
+
+    <span class="c1"># mouseOver = option.state in [73985, 73729, 8192]</span>
+    <span class="c1"># if option.state &amp; widgets.Style.StateFlag.State_MouseOver:</span>
+    <span class="c1">#     painter.fillRect(option.rect, gui.Brush(gui.Color(&quot;yellow&quot;)))</span>
+
+    <span class="c1"># def editorEvent(self, event, model, option, index):</span>
+    <span class="c1">#     if event.type() == QtCore.QEvent.Type.MouseButtonRelease:</span>
+    <span class="c1">#         logger.info(&quot;Clicked on Item&quot;, index.row())</span>
+    <span class="c1">#         return True</span>
+    <span class="c1">#     elif event.type() == QtCore.QEvent.Type.MouseButtonDblClick:</span>
+    <span class="c1">#         logger.info(&quot;Double-Clicked on Item&quot;, index.row())</span>
+    <span class="c1">#         return True</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         return super().editorEvent(event, model, option, index)</span>
+
+    <span class="c1"># @core.Slot()</span>
+    <span class="c1"># def currentIndexChanged(self):</span>
+    <span class="c1">#     self.commitData.emit(self.sender())</span>
 </code></pre></div>
         </details>
 
@@ -1574,12 +1652,13 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
 
 
+
   <div class="doc doc-object doc-method">
 
 
 
 <h4 id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate.createEditor" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span></code>
+<code class="codehilite language-python"><span class="n">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span></code>
 
 
 </h4>
@@ -1590,10 +1669,12 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">:</span>
-    <span class="n">label</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-    <span class="n">btn_callback</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fn_role</span><span class="p">)</span>
-    <span class="n">btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">parent</span><span class="p">)</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">createEditor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method_role</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">btn</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">PushButton</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+    <span class="n">btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+    <span class="n">btn_callback</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method_role</span><span class="p">)</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">btn_callback</span><span class="p">:</span>
         <span class="n">btn</span><span class="o">.</span><span class="n">set_disabled</span><span class="p">()</span>
     <span class="k">else</span><span class="p">:</span>
@@ -1605,6 +1686,42 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
 
   </div>
 
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate.paint" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>paint(self, painter: PySide6.QtGui.QPainter, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">paint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">method_role</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paint</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">setText</span><span class="p">(</span><span class="n">index</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_MouseOver</span><span class="p">:</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">option</span><span class="o">.</span><span class="n">state</span> <span class="o">&amp;</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Selected</span><span class="p">:</span>
+        <span class="n">painter</span><span class="o">.</span><span class="n">fillRect</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">option</span><span class="o">.</span><span class="n">palette</span><span class="o">.</span><span class="n">highlight</span><span class="p">())</span>
+    <span class="n">pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">btn</span><span class="o">.</span><span class="n">grab</span><span class="p">()</span>
+    <span class="n">painter</span><span class="o">.</span><span class="n">drawPixmap</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">,</span> <span class="n">pixmap</span><span class="p">)</span>
+    <span class="c1"># return super().paint(painter, option, index)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
@@ -1626,6 +1743,8 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
           <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setEditorData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
+    <span class="c1"># editor.setProperty(&quot;test&quot;, &quot;aa&quot;)</span>
+    <span class="c1"># editor.setText(index.data())</span>
 </code></pre></div>
         </details>
     </div>
@@ -1652,6 +1771,33 @@ ButtonDelegate            (<span title="prettyqt.widgets.itemdelegate.ItemDelega
           <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setModelData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">pass</span>
+    <span class="c1"># model.setData(index, editor.property(&quot;test&quot;))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.custom_delegates.buttondelegate.ButtonDelegate.updateEditorGeometry" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">updateEditorGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">)</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>updateEditorGeometry(self, editor: PySide6.QtWidgets.QWidget, option: PySide6.QtWidgets.QStyleOptionViewItem, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; None</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt/custom_delegates/buttondelegate.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">updateEditorGeometry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">editor</span><span class="p">,</span> <span class="n">option</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+    <span class="n">editor</span><span class="o">.</span><span class="n">setGeometry</span><span class="p">(</span><span class="n">option</span><span class="o">.</span><span class="n">rect</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
