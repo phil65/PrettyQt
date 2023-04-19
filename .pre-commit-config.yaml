@@ -1,6 +1,14 @@
 default_language_version:
     python: python3.10
 repos:
+- repo: local
+  hooks:
+    - id: pytest-check
+      name: pytest-check
+      entry: poetry run pytest
+      language: system
+      pass_filenames: false
+      always_run: true
 - repo: https://github.com/pre-commit/pre-commit-hooks
   rev: v4.4.0
   hooks:
@@ -59,9 +67,9 @@ repos:
   - id: pyupgrade
     args: [--py310-plus]
 
--   repo: https://github.com/pre-commit/mirrors-isort
-    rev: v5.10.1
-    hooks:
-    - id: isort
-      args: [--filter-files]
-      additional_dependencies: ["toml"]
+- repo: https://github.com/pre-commit/mirrors-isort
+  rev: v5.10.1
+  hooks:
+  - id: isort
+    args: [--filter-files]
+    additional_dependencies: ["toml"]
