@@ -3445,9 +3445,7 @@ BorderLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</sp
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">itemAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidgetItem</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-        <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">item</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">item</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">minimumSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">calculate_size</span><span class="p">(</span><span class="s2">&quot;minimum&quot;</span><span class="p">)</span>
@@ -3802,9 +3800,7 @@ Position            (<span title="enum.IntEnum">IntEnum</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/borderlayout.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">itemAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidgetItem</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-    <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">item</span>
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span><span class="o">.</span><span class="n">item</span> <span class="k">if</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
     </div>
@@ -4434,14 +4430,13 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
 
     <span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Handle mouse input and to auto-hide when losing focus.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
-                <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
-                <span class="n">target</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">widgetAt</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">target</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAncestorOf</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">or</span> <span class="n">target</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
-                    <span class="k">return</span> <span class="kc">False</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">cancel_completion</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">self</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">widgetAt</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">target</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAncestorOf</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">or</span> <span class="n">target</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
+                <span class="k">return</span> <span class="kc">False</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cancel_completion</span><span class="p">()</span>
 
         <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">eventFilter</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
 
@@ -4560,15 +4555,12 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_left_position</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
 
-        <span class="c1"># Update current item</span>
-        <span class="n">prefix</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_text_cursor</span><span class="p">()</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">prefix</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">prefix</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_current_text_cursor</span><span class="p">()</span><span class="o">.</span><span class="n">selection</span><span class="p">()</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">():</span>
             <span class="n">flags</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MatchFlag</span><span class="o">.</span><span class="n">MatchStartsWith</span>  <span class="c1"># type: ignore</span>
                 <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">MatchFlag</span><span class="o">.</span><span class="n">MatchCaseSensitive</span>
             <span class="p">)</span>
-            <span class="n">items</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findItems</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">flags</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">items</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">items</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">findItems</span><span class="p">(</span><span class="n">prefix</span><span class="p">,</span> <span class="n">flags</span><span class="p">):</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentItem</span><span class="p">(</span><span class="n">items</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
@@ -4612,14 +4604,13 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
           <summary>Source code in <code>prettyqt/custom_widgets/completionwidget.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">eventFilter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Handle mouse input and to auto-hide when losing focus.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
-            <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
-            <span class="n">target</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">widgetAt</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">target</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAncestorOf</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">or</span> <span class="n">target</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
-                <span class="k">return</span> <span class="kc">False</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">cancel_completion</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">obj</span> <span class="ow">is</span> <span class="bp">self</span> <span class="ow">and</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QEvent</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">MouseButtonPress</span><span class="p">:</span>
+        <span class="n">pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">())</span>
+        <span class="n">target</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QApplication</span><span class="o">.</span><span class="n">widgetAt</span><span class="p">(</span><span class="n">pos</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">target</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">isAncestorOf</span><span class="p">(</span><span class="n">target</span><span class="p">)</span> <span class="ow">or</span> <span class="n">target</span> <span class="ow">is</span> <span class="bp">self</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cancel_completion</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">eventFilter</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
 </code></pre></div>
@@ -4995,7 +4986,7 @@ DataSetMeta            (<span title="type">type</span>)
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">DataSetMeta</span><span class="p">(</span><span class="nb">type</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
         <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bases</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">&quot;__metaclass__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">DataSetMeta</span><span class="p">]</span>
         <span class="n">items</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span> <span class="n">item</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">filtered</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">_items</span><span class="p">}</span>
         <span class="c1"># items should contain DataItems of parent classes</span>
@@ -5004,7 +4995,7 @@ DataSetMeta            (<span title="type">type</span>)
                 <span class="n">value</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">attrname</span>
                 <span class="n">items</span><span class="p">[</span><span class="n">attrname</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
         <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_items&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -5025,7 +5016,7 @@ DataSetMeta            (<span title="type">type</span>)
 
 
 <h4 id="prettyqt.custom_widgets.dataset.DataSetMeta.__new__" class="doc doc-heading">
-<code class="codehilite language-python"><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -5040,7 +5031,7 @@ DataSetMeta            (<span title="type">type</span>)
 
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/dataset.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">):</span>
     <span class="n">filtered</span> <span class="o">=</span> <span class="p">[</span><span class="n">b</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">bases</span> <span class="k">if</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="s2">&quot;__metaclass__&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">is</span> <span class="n">DataSetMeta</span><span class="p">]</span>
     <span class="n">items</span> <span class="o">=</span> <span class="p">{</span><span class="n">item</span><span class="o">.</span><span class="n">_name</span><span class="p">:</span> <span class="n">item</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">filtered</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">b</span><span class="o">.</span><span class="n">_items</span><span class="p">}</span>
     <span class="c1"># items should contain DataItems of parent classes</span>
@@ -5049,7 +5040,7 @@ DataSetMeta            (<span title="type">type</span>)
             <span class="n">value</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">attrname</span>
             <span class="n">items</span><span class="p">[</span><span class="n">attrname</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
     <span class="n">dct</span><span class="p">[</span><span class="s2">&quot;_items&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">items</span>
-    <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="n">mcs</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">type</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">bases</span><span class="p">,</span> <span class="n">dct</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -5657,14 +5648,10 @@ FlowLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</span
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">itemAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="k">def</span> <span class="nf">takeAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 
     <span class="c1"># def expandingDirections(self) -&gt; QtCore.Qt.Orientations:</span>
     <span class="c1">#     return QtCore.Qt.Orientations(0)</span>
@@ -5860,9 +5847,7 @@ FlowLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">itemAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
     </div>
@@ -5975,9 +5960,7 @@ FlowLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</span
         <details class="quote">
           <summary>Source code in <code>prettyqt/custom_widgets/flowlayout.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">takeAt</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QLayoutItem</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
-    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span> <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
     </div>
@@ -7087,13 +7070,8 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
         <span class="n">d</span> <span class="o">=</span> <span class="n">hypot</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># length</span>
         <span class="n">nxy</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
-            <span class="k">if</span> <span class="n">xy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-                <span class="n">nxy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">nxy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">xy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">d</span>
-
-        <span class="k">if</span> <span class="n">d</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">:</span>
-            <span class="n">d</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
+            <span class="n">nxy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">xy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">xy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">d</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
         <span class="n">xy</span> <span class="o">=</span> <span class="p">[</span><span class="n">nxy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">nxy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">]</span>
 
@@ -11021,10 +10999,7 @@ SpanSlider            (<a class="autorefs autorefs-internal" title="prettyqt.wid
     <span class="k">def</span> <span class="nf">draw_handle</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">painter</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">StylePainter</span><span class="p">,</span> <span class="n">handle</span><span class="p">:</span> <span class="n">HandleStr</span><span class="p">):</span>
         <span class="n">opt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_style_option</span><span class="p">(</span><span class="n">handle</span><span class="p">)</span>
         <span class="n">opt</span><span class="o">.</span><span class="n">subControls</span> <span class="o">=</span> <span class="n">HANDLE_STYLE</span>
-        <span class="n">pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span>
-        <span class="k">if</span> <span class="n">handle</span> <span class="o">==</span> <span class="s2">&quot;lower&quot;</span><span class="p">:</span>
-            <span class="n">pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span>
-
+        <span class="n">pressed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lower_pressed</span> <span class="k">if</span> <span class="n">handle</span> <span class="o">==</span> <span class="s2">&quot;lower&quot;</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">upper_pressed</span>
         <span class="k">if</span> <span class="n">pressed</span> <span class="o">==</span> <span class="n">HANDLE_STYLE</span><span class="p">:</span>
             <span class="n">opt</span><span class="o">.</span><span class="n">activeSubControls</span> <span class="o">=</span> <span class="n">pressed</span>
             <span class="n">opt</span><span class="o">.</span><span class="n">state</span> <span class="o">|=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Style</span><span class="o">.</span><span class="n">StateFlag</span><span class="o">.</span><span class="n">State_Sunken</span>

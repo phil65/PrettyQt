@@ -1317,10 +1317,7 @@ AbstractSocketMixin            (<span title="prettyqt.core.iodevice.IODeviceMixi
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">address</span> <span class="o">=</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">(</span><span class="n">address</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">bind_mode</span> <span class="ow">in</span> <span class="n">BIND_MODE</span><span class="p">:</span>
-            <span class="n">mode</span> <span class="o">=</span> <span class="n">BIND_MODE</span><span class="p">[</span><span class="n">bind_mode</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">mode</span> <span class="o">=</span> <span class="n">bind_mode</span>
+        <span class="n">mode</span> <span class="o">=</span> <span class="n">BIND_MODE</span><span class="p">[</span><span class="n">bind_mode</span><span class="p">]</span> <span class="k">if</span> <span class="n">bind_mode</span> <span class="ow">in</span> <span class="n">BIND_MODE</span> <span class="k">else</span> <span class="n">bind_mode</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">address</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">mode</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">connect_to_host</span><span class="p">(</span>

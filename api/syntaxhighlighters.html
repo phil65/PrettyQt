@@ -2444,7 +2444,12 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
                 <span class="k">break</span>
             <span class="n">starts_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
             <span class="n">ends_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
-            <span class="k">if</span> <span class="n">starts_in_line</span> <span class="ow">and</span> <span class="n">ends_in_line</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="n">starts_in_line</span>
+                <span class="ow">and</span> <span class="n">ends_in_line</span>
+                <span class="ow">or</span> <span class="ow">not</span> <span class="n">ends_in_line</span>
+                <span class="ow">and</span> <span class="n">starts_in_line</span>
+            <span class="p">):</span>
                 <span class="c1"># print(f&quot;in line: {line_pos} - {line_pos + match_len}&quot;)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">ends_in_line</span><span class="p">:</span>
@@ -2452,10 +2457,6 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
                 <span class="c1"># print(f&quot;ends: {end}&quot;)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
                 <span class="c1"># self.setCurrentBlockState(-1)</span>
-            <span class="k">elif</span> <span class="n">starts_in_line</span><span class="p">:</span>
-                <span class="c1"># print(f&quot;starts: {line_pos}&quot;)</span>
-                <span class="c1"># self.setCurrentBlockState(1)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -2506,7 +2507,12 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
             <span class="k">break</span>
         <span class="n">starts_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
         <span class="n">ends_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
-        <span class="k">if</span> <span class="n">starts_in_line</span> <span class="ow">and</span> <span class="n">ends_in_line</span><span class="p">:</span>
+        <span class="k">if</span> <span class="p">(</span>
+            <span class="n">starts_in_line</span>
+            <span class="ow">and</span> <span class="n">ends_in_line</span>
+            <span class="ow">or</span> <span class="ow">not</span> <span class="n">ends_in_line</span>
+            <span class="ow">and</span> <span class="n">starts_in_line</span>
+        <span class="p">):</span>
             <span class="c1"># print(f&quot;in line: {line_pos} - {line_pos + match_len}&quot;)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ends_in_line</span><span class="p">:</span>
@@ -2514,10 +2520,6 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
             <span class="c1"># print(f&quot;ends: {end}&quot;)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
             <span class="c1"># self.setCurrentBlockState(-1)</span>
-        <span class="k">elif</span> <span class="n">starts_in_line</span><span class="p">:</span>
-            <span class="c1"># print(f&quot;starts: {line_pos}&quot;)</span>
-            <span class="c1"># self.setCurrentBlockState(1)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>

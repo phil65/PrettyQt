@@ -3529,8 +3529,7 @@ AbstractProxyModelMixin            (<a class="autorefs autorefs-internal" title=
         <span class="c1"># We cannot just call the same function of the source model because the first node</span>
         <span class="c1"># there may be hidden.</span>
         <span class="n">proxy_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">())</span>
-        <span class="n">first_item_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proxy_root_index</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">first_item_index</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proxy_root_index</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -3567,8 +3566,7 @@ AbstractProxyModelMixin            (<a class="autorefs autorefs-internal" title=
     <span class="c1"># We cannot just call the same function of the source model because the first node</span>
     <span class="c1"># there may be hidden.</span>
     <span class="n">proxy_root_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mapFromSource</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">())</span>
-    <span class="n">first_item_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proxy_root_index</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">first_item_index</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">proxy_root_index</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -5604,10 +5602,7 @@ OperatingSystemVersion            (<span title="PySide6.QtCore.QOperatingSystemV
         <span class="n">minor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">micro</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">os_type</span> <span class="o">=</span> <span class="n">OS_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">os_type</span> <span class="o">=</span> <span class="n">typ</span>
+        <span class="n">os_type</span> <span class="o">=</span> <span class="n">OS_TYPE</span><span class="p">[</span><span class="n">typ</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">typ</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">typ</span>
         <span class="k">if</span> <span class="n">minor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">minor</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">if</span> <span class="n">micro</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -5632,11 +5627,13 @@ OperatingSystemVersion            (<span title="PySide6.QtCore.QOperatingSystemV
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">OperatingSystemVersion</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
         <span class="k">return</span> <span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span>
-            <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_versionnumber</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">get_versionnumber</span><span class="p">()</span>
+            <span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_versionnumber</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">get_versionnumber</span><span class="p">()</span>
+            <span class="p">)</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">OperatingSystemVersion</span><span class="p">)</span>
+            <span class="k">else</span> <span class="kc">False</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -6346,10 +6343,7 @@ RegularExpression            (<span title="PySide6.QtCore.QRegularExpression">QR
         <span class="n">match_type</span><span class="p">:</span> <span class="n">MatchTypeStr</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegularExpression</span><span class="o">.</span><span class="n">MatchType</span> <span class="o">=</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
         <span class="n">anchored</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatch</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">typ</span> <span class="o">=</span> <span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">typ</span> <span class="o">=</span> <span class="n">match_type</span>
+        <span class="n">typ</span> <span class="o">=</span> <span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">match_type</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">anchored</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="n">options</span> <span class="o">=</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">&quot;anchored&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">anchored</span> <span class="k">else</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">]</span>
         <span class="k">else</span><span class="p">:</span>
@@ -6526,10 +6520,7 @@ match(self, subjectView: str, offset: int = 0, matchType: PySide6.QtCore.QRegula
     <span class="n">match_type</span><span class="p">:</span> <span class="n">MatchTypeStr</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QRegularExpression</span><span class="o">.</span><span class="n">MatchType</span> <span class="o">=</span> <span class="s2">&quot;normal&quot;</span><span class="p">,</span>
     <span class="n">anchored</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RegularExpressionMatch</span><span class="p">:</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">typ</span> <span class="o">=</span> <span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">typ</span> <span class="o">=</span> <span class="n">match_type</span>
+    <span class="n">typ</span> <span class="o">=</span> <span class="n">MATCH_TYPE</span><span class="p">[</span><span class="n">match_type</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_type</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="k">else</span> <span class="n">match_type</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">anchored</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
         <span class="n">options</span> <span class="o">=</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">&quot;anchored&quot;</span><span class="p">]</span> <span class="k">if</span> <span class="n">anchored</span> <span class="k">else</span> <span class="n">MATCH_OPTIONS</span><span class="p">[</span><span class="s2">&quot;none&quot;</span><span class="p">]</span>
     <span class="k">else</span><span class="p">:</span>
@@ -7587,10 +7578,10 @@ TextStream            (<span title="PySide6.QtCore.QTextStream">QTextStream</spa
 
     <span class="k">def</span> <span class="nf">read_lines</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readLine</span><span class="p">()</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">msg</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">msg</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">readLine</span><span class="p">():</span>
+                <span class="k">yield</span> <span class="n">msg</span>
+            <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span>
-            <span class="k">yield</span> <span class="n">msg</span>
 </code></pre></div>
         </details>
 
@@ -8080,10 +8071,7 @@ TimeLine            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
     <span class="k">def</span> <span class="nf">get_easing</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">easingcurve</span><span class="o">.</span><span class="n">TypeStr</span> <span class="o">|</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">float</span><span class="p">],</span> <span class="nb">float</span><span class="p">]:</span>
         <span class="n">curve</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">EasingCurve</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">easingCurve</span><span class="p">())</span>
         <span class="n">typ</span> <span class="o">=</span> <span class="n">curve</span><span class="o">.</span><span class="n">get_type</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s2">&quot;custom&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">curve</span><span class="o">.</span><span class="n">get_custom_type</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">typ</span>
+        <span class="k">return</span> <span class="n">curve</span><span class="o">.</span><span class="n">get_custom_type</span><span class="p">()</span> <span class="k">if</span> <span class="n">typ</span> <span class="o">==</span> <span class="s2">&quot;custom&quot;</span> <span class="k">else</span> <span class="n">typ</span>
 </code></pre></div>
         </details>
 
@@ -8652,9 +8640,7 @@ Url            (<span title="PySide6.QtCore.QUrl">QUrl</span>)
 
     <span class="k">def</span> <span class="nf">is_special_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if url is an about:... or other special URL.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-            <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;about&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;about&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="k">else</span> <span class="kc">False</span>
 </code></pre></div>
         </details>
 
@@ -8694,9 +8680,7 @@ Url            (<span title="PySide6.QtCore.QUrl">QUrl</span>)
           <summary>Source code in <code>prettyqt/core/url.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">is_special_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return True if url is an about:... or other special URL.&quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;about&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">()</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;about&quot;</span><span class="p">,</span> <span class="s2">&quot;file&quot;</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="k">else</span> <span class="kc">False</span>
 </code></pre></div>
         </details>
     </div>

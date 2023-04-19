@@ -4706,10 +4706,7 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
 <span class="sd">            The interpolated QColor, with the same spec as the given start color.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">percent</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span> <span class="k">if</span> <span class="n">percent</span> <span class="o">==</span> <span class="mi">100</span> <span class="k">else</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
         <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPEC</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">colorspace</span><span class="p">,</span> <span class="n">SPEC</span><span class="p">)</span>
         <span class="n">out</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
@@ -4809,11 +4806,10 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
         <span class="n">base_color</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">base_color</span><span class="o">.</span><span class="n">lightness</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">128</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">base_color</span><span class="o">.</span><span class="n">darker</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">base_color</span> <span class="o">==</span> <span class="n">Color</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">):</span>
+            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;#101010&quot;</span><span class="p">),</span> <span class="n">factor</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">base_color</span> <span class="o">==</span> <span class="n">Color</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">):</span>
-                <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;#101010&quot;</span><span class="p">),</span> <span class="n">factor</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">return</span> <span class="n">base_color</span><span class="o">.</span><span class="n">lighter</span><span class="p">(</span><span class="n">factor</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">base_color</span><span class="o">.</span><span class="n">lighter</span><span class="p">(</span><span class="n">factor</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -4872,11 +4868,10 @@ otherwise is is lighter.
     <span class="n">base_color</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">base_color</span><span class="o">.</span><span class="n">lightness</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">128</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">base_color</span><span class="o">.</span><span class="n">darker</span><span class="p">(</span><span class="n">factor</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">base_color</span> <span class="o">==</span> <span class="n">Color</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;#101010&quot;</span><span class="p">),</span> <span class="n">factor</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">base_color</span> <span class="o">==</span> <span class="n">Color</span><span class="p">(</span><span class="s2">&quot;#000000&quot;</span><span class="p">):</span>
-            <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">drift_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">(</span><span class="s2">&quot;#101010&quot;</span><span class="p">),</span> <span class="n">factor</span> <span class="o">+</span> <span class="mi">20</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">base_color</span><span class="o">.</span><span class="n">lighter</span><span class="p">(</span><span class="n">factor</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">base_color</span><span class="o">.</span><span class="n">lighter</span><span class="p">(</span><span class="n">factor</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -5024,10 +5019,7 @@ otherwise is is lighter.
 <span class="sd">        The interpolated QColor, with the same spec as the given start color.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">percent</span> <span class="o">==</span> <span class="mi">100</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">end</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span> <span class="k">if</span> <span class="n">percent</span> <span class="o">==</span> <span class="mi">100</span> <span class="k">else</span> <span class="bp">cls</span><span class="p">(</span><span class="o">*</span><span class="n">start</span><span class="o">.</span><span class="n">getRgb</span><span class="p">())</span>
     <span class="k">if</span> <span class="n">colorspace</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SPEC</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">colorspace</span><span class="p">,</span> <span class="n">SPEC</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">()</span>
@@ -7374,9 +7366,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
 
     <span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">windowIcon</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windowIcon</span><span class="p">())</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">()</span> <span class="k">else</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">windowIcon</span><span class="p">())</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">set_palette</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">palette</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">ThemeStr</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="p">):</span>
@@ -12381,10 +12371,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Pixmap</span><span class="p">):</span>
-            <span class="k">return</span> <span class="kc">False</span>
-        <span class="c1"># return bytes(self) == bytes(other)</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toImage</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">toImage</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toImage</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">toImage</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Pixmap</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
 
     <span class="k">def</span> <span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cacheKey</span><span class="p">()</span>
@@ -12429,7 +12416,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
         <span class="n">device</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
         <span class="n">payload</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="s2">&quot;data:image/png;base64,&quot;</span> <span class="o">+</span> <span class="n">payload</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;data:image/png;base64,</span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&quot;</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">create_dot</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span> <span class="o">=</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Pixmap</span><span class="p">:</span>
@@ -12602,7 +12589,7 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
     <span class="n">device</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
     <span class="n">data</span> <span class="o">=</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">device</span><span class="o">.</span><span class="n">data</span><span class="p">())</span>
     <span class="n">payload</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">data</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;ascii&quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="s2">&quot;data:image/png;base64,&quot;</span> <span class="o">+</span> <span class="n">payload</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;data:image/png;base64,</span><span class="si">{</span><span class="n">payload</span><span class="si">}</span><span class="s2">&quot;</span>
 </code></pre></div>
         </details>
     </div>
@@ -13024,9 +13011,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
 
     <span class="k">def</span> <span class="nf">get_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">icon</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">icon</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">():</span>
-            <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span> <span class="k">if</span> <span class="n">icon</span><span class="o">.</span><span class="n">isNull</span><span class="p">()</span> <span class="k">else</span> <span class="n">gui</span><span class="o">.</span><span class="n">Icon</span><span class="p">(</span><span class="n">icon</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_tooltip</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -14333,9 +14318,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
 
     <span class="k">def</span> <span class="nf">get_user_data</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">user_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">userData</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_data</span><span class="p">,</span> <span class="n">UserData</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">user_data</span><span class="o">.</span><span class="n">data</span>
-        <span class="k">return</span> <span class="n">user_data</span>
+        <span class="k">return</span> <span class="n">user_data</span><span class="o">.</span><span class="n">data</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">user_data</span><span class="p">,</span> <span class="n">UserData</span><span class="p">)</span> <span class="k">else</span> <span class="n">user_data</span>
 
     <span class="nd">@contextlib</span><span class="o">.</span><span class="n">contextmanager</span>
     <span class="k">def</span> <span class="nf">edit_user_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -14349,9 +14332,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
 <span class="sd">        :return: The block state</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">userState</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">state</span>
-        <span class="k">return</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mh">0x0000FFFF</span>
+        <span class="k">return</span> <span class="n">state</span> <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mh">0x0000FFFF</span>
 
     <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the user state, generally used for syntax highlighting.</span>
@@ -14384,8 +14365,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
         <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">userState</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="mh">0x3FF</span><span class="p">:</span>
-            <span class="n">val</span> <span class="o">=</span> <span class="mh">0x3FF</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mh">0x3FF</span><span class="p">)</span>
         <span class="n">state</span> <span class="o">&amp;=</span> <span class="mh">0x7C00FFFF</span>
         <span class="n">state</span> <span class="o">|=</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setUserState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -14410,7 +14390,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
         <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">state</span> <span class="o">&amp;=</span> <span class="mh">0x7BFFFFFF</span>
-        <span class="n">state</span> <span class="o">|=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">26</span>
+        <span class="n">state</span> <span class="o">|=</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">26</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setUserState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">is_collapsed</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -14432,7 +14412,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
         <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
             <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">state</span> <span class="o">&amp;=</span> <span class="mh">0x77FFFFFF</span>
-        <span class="n">state</span> <span class="o">|=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">27</span>
+        <span class="n">state</span> <span class="o">|=</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">27</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setUserState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">find_parent_scope</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TextBlock</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -14455,9 +14435,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
             <span class="p">):</span>
                 <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">start</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">previous</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="n">limit</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">TextBlock</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="n">TextBlock</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="k">if</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="n">limit</span> <span class="k">else</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
 
@@ -14514,9 +14492,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
         <span class="p">):</span>
             <span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">start</span> <span class="o">=</span> <span class="n">start</span><span class="o">.</span><span class="n">previous</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="n">limit</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">TextBlock</span><span class="p">(</span><span class="n">start</span><span class="p">)</span>
-    <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">TextBlock</span><span class="p">(</span><span class="n">start</span><span class="p">)</span> <span class="k">if</span> <span class="n">counter</span> <span class="o">&lt;</span> <span class="n">limit</span> <span class="k">else</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
     </div>
@@ -14584,9 +14560,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
 <span class="sd">    :return: The block state</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">userState</span><span class="p">()</span>
-    <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">state</span>
-    <span class="k">return</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mh">0x0000FFFF</span>
+    <span class="k">return</span> <span class="n">state</span> <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span> <span class="k">else</span> <span class="n">state</span> <span class="o">&amp;</span> <span class="mh">0x0000FFFF</span>
 </code></pre></div>
         </details>
     </div>
@@ -14693,7 +14667,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
     <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">state</span> <span class="o">&amp;=</span> <span class="mh">0x77FFFFFF</span>
-    <span class="n">state</span> <span class="o">|=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">27</span>
+    <span class="n">state</span> <span class="o">|=</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">27</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setUserState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -14728,8 +14702,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
     <span class="n">state</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">userState</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="k">if</span> <span class="n">val</span> <span class="o">&gt;=</span> <span class="mh">0x3FF</span><span class="p">:</span>
-        <span class="n">val</span> <span class="o">=</span> <span class="mh">0x3FF</span>
+    <span class="n">val</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">val</span><span class="p">,</span> <span class="mh">0x3FF</span><span class="p">)</span>
     <span class="n">state</span> <span class="o">&amp;=</span> <span class="mh">0x7C00FFFF</span>
     <span class="n">state</span> <span class="o">|=</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">16</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setUserState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -14767,7 +14740,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
     <span class="k">if</span> <span class="n">state</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="n">state</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="n">state</span> <span class="o">&amp;=</span> <span class="mh">0x7BFFFFFF</span>
-    <span class="n">state</span> <span class="o">|=</span> <span class="nb">int</span><span class="p">(</span><span class="n">val</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="mi">26</span>
+    <span class="n">state</span> <span class="o">|=</span> <span class="n">val</span> <span class="o">&lt;&lt;</span> <span class="mi">26</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setUserState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
 </code></pre></div>
         </details>
