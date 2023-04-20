@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from prettyqt import core
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -26,8 +26,8 @@ class SlideAnimation(core.PropertyAnimation):
             point = core.Point(*point)
         self.setEndValue(point)
 
-    def apply_to(self, obj: QtCore.QObject | Callable):
-        if isinstance(obj, QtCore.QObject):
+    def apply_to(self, obj: QtWidgets.QWidget | Callable):
+        if isinstance(obj, QtWidgets.QWidget):
             obj = obj.pos
         super().apply_to(obj)
 

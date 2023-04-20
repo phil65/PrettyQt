@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from prettyqt import core
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtWidgets
 
 
 class FadeInAnimation(core.PropertyAnimation):
@@ -16,8 +16,8 @@ class FadeInAnimation(core.PropertyAnimation):
         self.setEndValue(1.0)
         self.setDuration(duration)
 
-    def apply_to(self, obj: QtCore.QObject | Callable):
-        if isinstance(obj, QtCore.QObject):
+    def apply_to(self, obj: QtWidgets.QWidget | Callable):
+        if isinstance(obj, QtWidgets.QWidget):
             obj = obj.windowOpacity
         super().apply_to(obj)
 

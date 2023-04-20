@@ -12,7 +12,7 @@ class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):
         self.insertCookie(other)
         return self
 
-    def __getitem__(self, url: str) -> list[QtNetwork.QNetworkCookie]:
+    def __getitem__(self, url: datatypes.UrlType) -> list[QtNetwork.QNetworkCookie]:
         url = core.Url(url)
         return self.cookiesForUrl(url)
 
@@ -26,3 +26,7 @@ class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):
         self, cookies: list[QtNetwork.QNetworkCookie], url: datatypes.UrlType
     ) -> bool:
         return self.setCookiesFromUrl(cookies, QtCore.QUrl(url))
+
+
+if __name__ == "__main__":
+    jar = NetworkCookieJar()

@@ -8,16 +8,16 @@ from prettyqt.utils import bidict
 
 
 ERROR = bidict(
-    none=QtLocation.QPlaceReply.NoError,
-    place_does_not_exist=QtLocation.QPlaceReply.PlaceDoesNotExistError,
-    category_does_not_exist=QtLocation.QPlaceReply.CategoryDoesNotExistError,
-    communication=QtLocation.QPlaceReply.CommunicationError,
-    parse=QtLocation.QPlaceReply.ParseError,
-    permissions=QtLocation.QPlaceReply.PermissionsError,
-    unsupported=QtLocation.QPlaceReply.UnsupportedError,
-    bad_argument=QtLocation.QPlaceReply.BadArgumentError,
-    cancel=QtLocation.QPlaceReply.CancelError,
-    unknown=QtLocation.QPlaceReply.UnknownError,
+    none=QtLocation.QPlaceReply.Error.NoError,
+    place_does_not_exist=QtLocation.QPlaceReply.Error.PlaceDoesNotExistError,
+    category_does_not_exist=QtLocation.QPlaceReply.Error.CategoryDoesNotExistError,
+    communication=QtLocation.QPlaceReply.Error.CommunicationError,
+    parse=QtLocation.QPlaceReply.Error.ParseError,
+    permissions=QtLocation.QPlaceReply.Error.PermissionsError,
+    unsupported=QtLocation.QPlaceReply.Error.UnsupportedError,
+    bad_argument=QtLocation.QPlaceReply.Error.BadArgumentError,
+    cancel=QtLocation.QPlaceReply.Error.CancelError,
+    unknown=QtLocation.QPlaceReply.Error.UnknownError,
 )
 
 ErrorStr = Literal[
@@ -34,13 +34,13 @@ ErrorStr = Literal[
 ]
 
 TYPE = bidict(
-    generic=QtLocation.QPlaceReply.Reply,
-    details=QtLocation.QPlaceReply.DetailsReply,
-    search=QtLocation.QPlaceReply.SearchReply,
-    search_suggestion=QtLocation.QPlaceReply.SearchSuggestionReply,
-    content=QtLocation.QPlaceReply.ContentReply,
-    id=QtLocation.QPlaceReply.IdReply,
-    match=QtLocation.QPlaceReply.MatchReply,
+    generic=QtLocation.QPlaceReply.Type.Reply,
+    details=QtLocation.QPlaceReply.Type.DetailsReply,
+    search=QtLocation.QPlaceReply.Type.SearchReply,
+    search_suggestion=QtLocation.QPlaceReply.Type.SearchSuggestionReply,
+    content=QtLocation.QPlaceReply.Type.ContentReply,
+    id=QtLocation.QPlaceReply.Type.IdReply,
+    match=QtLocation.QPlaceReply.Type.MatchReply,
 )
 
 TypeStr = Literal[

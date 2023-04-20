@@ -104,8 +104,8 @@ class ObjectMixin:
         return self.findChild(typ, name, flag)  # type: ignore
 
     def find_parent(
-        self, typ: type[QtCore.QObject], name: str | None = None
-    ) -> QtCore.QObject | None:
+        self, typ: type[T] = QtCore.QObject, name: str | None = None
+    ) -> T | None:
         node = self
         while node:
             node = node.parent()

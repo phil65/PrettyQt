@@ -42,7 +42,7 @@ class SearchAndReplaceMixin:
         def generate_flags(flagstr: str) -> None:
             # self.search_flags is automatically generated and does not
             # need to be initialized in __init__()
-            self.search_flags = gui.TextDocument.FindFlags()
+            self.search_flags = gui.TextDocument.FindFlag(0)
             if "b" in flagstr:
                 self.search_flags |= gui.TextDocument.FindBackward
             if "i" not in flagstr:
@@ -80,8 +80,7 @@ class SearchAndReplaceMixin:
             logger.error("No previous searches")
             return
         temp_cursor = self.textCursor()
-        found = self.find(self.search_buffer, self.search_flags)
-        if not found:
+        if not (found := self.find(self.search_buffer, self.search_flags)):
             if not self.textCursor().atStart() or (
                 self._searching_backwards() and not self.textCursor().atEnd()
             ):

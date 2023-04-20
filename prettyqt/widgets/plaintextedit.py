@@ -252,7 +252,8 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     def is_valid(self) -> bool:
         if self.validator is None:
             return True
-        return self.validator.is_valid_value(self.text())
+        val = self.validator.validate(self.text(), 0)
+        return val[0] == self.validator.State.Acceptable
 
     def set_value(self, value: str):
         self.setPlainText(value)

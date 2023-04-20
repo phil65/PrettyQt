@@ -150,7 +150,7 @@ class CompletionWidget(widgets.ListWidget):
 
     def _current_text_cursor(self) -> gui.TextCursor:
         """Return a cursor with text between the start  and currentposition selected."""
-        cursor = self._text_edit.get_text_cursor()
+        cursor = self._text_edit.textCursor()
         if cursor.position() >= self._start_position:
             cursor.setPosition(self._start_position, gui.TextCursor.MoveMode.KeepAnchor)
         return cursor
@@ -158,7 +158,7 @@ class CompletionWidget(widgets.ListWidget):
     def _update_current(self):
         """Update the current item based on the current text and the widget position."""
         # Update widget position
-        cursor = self._text_edit.get_text_cursor()
+        cursor = self._text_edit.textCursor()
         point = self._get_top_left_position(cursor)
         self.move(point)
 
@@ -183,5 +183,5 @@ if __name__ == "__main__":
     textedit = widgets.TextEdit()
     completion_widget = CompletionWidget(textedit)
     textedit.show()
-    completion_widget.show_items(textedit.get_text_cursor(), ["a", "b"])
+    completion_widget.show_items(textedit.textCursor(), ["a", "b"])
     app.main_loop()

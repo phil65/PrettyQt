@@ -196,7 +196,7 @@ class AbstractSocketMixin(core.IODeviceMixin):
             QtNetwork.QAbstractSocket.NetworkLayerProtocol | NetworkLayerProtocolStr
         ) = "any_ip",
     ):
-        if isinstance(open_mode, QtCore.QIODevice.OpenMode):
+        if isinstance(open_mode, QtCore.QIODeviceBase.OpenMode):
             mode = open_mode
         else:
             mode = core.iodevice.OPEN_MODES[open_mode]
