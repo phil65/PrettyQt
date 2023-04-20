@@ -1,5 +1,6 @@
 default_language_version:
     python: python3.10
+default_stages: [commit]
 repos:
 - repo: local
   hooks:
@@ -7,6 +8,8 @@ repos:
       name: pytest-check
       entry: poetry run pytest
       language: system
+      stages: [push]
+      types: [python]
       pass_filenames: false
       always_run: true
 - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -52,7 +55,7 @@ repos:
       args : ["--ignore=C408,E203,W503"]
 
 - repo: https://github.com/charliermarsh/ruff-pre-commit
-  rev: v0.0.261
+  rev: v0.0.262
   hooks:
     - id: ruff
 
