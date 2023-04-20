@@ -160,7 +160,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
 
     def get_headers(self) -> dict[str, str]:
         return {
-            bytes(h).decode(): bytes(self.rawHeader(h)).decode()
+            h.data().decode(): self.rawHeader(h).data().decode()
             for h in self.rawHeaderList()
         }
 

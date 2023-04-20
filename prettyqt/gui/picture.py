@@ -16,4 +16,4 @@ class Picture(gui.PaintDeviceMixin, QtGui.QPicture):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()

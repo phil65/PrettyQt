@@ -34,7 +34,7 @@ class IconEngine(QtGui.QIconEngine):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def add_file(
         self,

@@ -51,13 +51,13 @@ class ImageReader(QtGui.QImageReader):
         return core.Size(self.scaledSize())
 
     def get_format(self) -> str:
-        return bytes(self.format()).decode()
+        return self.format().data().decode()
 
     def get_subtype(self) -> str:
-        return bytes(self.subType()).decode()
+        return self.subType().data().decode()
 
     def get_supported_subtypes(self) -> list[str]:
-        return [bytes(i).decode() for i in self.supportedSubTypes()]
+        return [i.data().decode() for i in self.supportedSubTypes()]
 
     def set_format(self, fmt: datatypes.ByteArrayType):
         if isinstance(fmt, str):
@@ -92,15 +92,15 @@ class ImageReader(QtGui.QImageReader):
 
     @staticmethod
     def get_image_format(obj: str | QtCore.QIODevice) -> str:
-        return bytes(ImageReader.imageFormat(obj)).decode()
+        return ImageReader.imageFormat(obj).data().decode()
 
     @staticmethod
     def get_supported_image_formats() -> list[str]:
-        return [bytes(i).decode() for i in ImageReader.supportedImageFormats()]
+        return [i.data().decode() for i in ImageReader.supportedImageFormats()]
 
     @staticmethod
     def get_supported_mime_types() -> list[str]:
-        return [bytes(i).decode() for i in ImageReader.supportedMimeTypes()]
+        return [i.data().decode() for i in ImageReader.supportedMimeTypes()]
 
     @staticmethod
     def get_image_formats_for_mime_type(typ: datatypes.ByteArrayType) -> list[str]:
@@ -108,7 +108,7 @@ class ImageReader(QtGui.QImageReader):
             typ = typ.encode()
         if isinstance(typ, bytes):
             typ = QtCore.QByteArray(typ)
-        return [bytes(i).decode() for i in ImageReader.imageFormatsForMimeType(typ)]
+        return [i.data().decode() for i in ImageReader.imageFormatsForMimeType(typ)]
 
 
 if __name__ == "__main__":

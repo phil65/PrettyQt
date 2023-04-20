@@ -42,7 +42,7 @@ class TimeZone(QtCore.QTimeZone):
         return type(self), (self.get_id(),)
 
     def get_id(self) -> str:
-        return bytes(self.id()).decode()
+        return self.id().data().decode()
 
     def get_display_name(
         self,

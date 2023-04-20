@@ -48,7 +48,7 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def __iter__(self) -> Iterator[QtWidgets.QTreeWidgetItem]:
         return iter(self.child(i) for i in range(self.childCount()))

@@ -22,7 +22,7 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     @classmethod
     def from_ndarray(cls, arr) -> Image:

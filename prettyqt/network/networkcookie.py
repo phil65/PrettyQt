@@ -28,7 +28,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         self.setName(name)
 
     def get_name(self) -> str:
-        return bytes(self.name()).decode()
+        return self.name().data().decode()
 
     def set_value(self, value: datatypes.ByteArrayType):
         if isinstance(value, str):
@@ -38,7 +38,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         self.setValue(value)
 
     def get_value(self) -> str:
-        return bytes(self.value()).decode()
+        return self.value().data().decode()
 
     def set_expiration_date(self, date: datatypes.DateTimeType | None):
         if date is None:

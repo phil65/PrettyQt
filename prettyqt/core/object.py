@@ -127,7 +127,7 @@ class ObjectMixin:
 
     def get_dynamic_properties(self) -> dict[str, Any]:
         return {
-            bytes(i).decode(): self.property(bytes(i).decode())
+            i.data().decode(): self.property(i.data().decode())
             for i in self.dynamicPropertyNames()
         }
 

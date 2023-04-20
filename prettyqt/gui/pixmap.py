@@ -23,7 +23,7 @@ class PixmapMixin(gui.PaintDeviceMixin):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def __eq__(self, other):
         return self.toImage() == other.toImage() if isinstance(other, Pixmap) else False

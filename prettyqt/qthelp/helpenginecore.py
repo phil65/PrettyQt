@@ -7,7 +7,7 @@ from prettyqt.utils import datatypes
 
 class HelpEngineCoreMixin(core.ObjectMixin):
     def get_file_data(self, url: QtCore.QUrl) -> bytes:
-        return bytes(self.fileData(url))
+        return self.fileData(url).data()
 
     def get_files(
         self,

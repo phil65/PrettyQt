@@ -20,7 +20,7 @@ class PropertyAnimation(core.VariantAnimationMixin, QtCore.QPropertyAnimation):
         self.setPropertyName(name)
 
     def get_property_name(self) -> str:
-        return bytes(self.propertyName()).decode()
+        return self.propertyName().data().decode()
 
 
 if __name__ == "__main__":

@@ -32,7 +32,7 @@ class StandardItem(QtGui.QStandardItem):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def __getitem__(
         self, index: int | tuple[int, int] | QtCore.QModelIndex

@@ -31,7 +31,7 @@ FLAGS = bidict(
 
 class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
     def get_name(self) -> str:
-        return bytes(self.name()).decode()
+        return self.name().data().decode()
 
     @classmethod
     def get_scheme_by_name(cls, name: str) -> WebEngineUrlScheme:

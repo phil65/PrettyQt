@@ -24,7 +24,7 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
             self.setHeader(QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode()))
 
     def get_headers(self) -> dict[str, str]:
-        return {bytes(h).decode(): bytes(self.header(h)).decode() for h in self.headers()}
+        return {h.data().decode(): self.header(h).data().decode() for h in self.headers()}
 
     def set_url(self, url: datatypes.UrlType):
         url = core.Url(url)
@@ -34,7 +34,7 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
         return core.Url(self.url())
 
     def get_post_data(self) -> str:
-        return bytes(self.postData()).decode()
+        return self.postData().data().decode()
 
     def set_method(self, method: MethodStr):
         """Set method this WebEngine request is using.

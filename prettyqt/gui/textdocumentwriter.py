@@ -15,7 +15,7 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
         return f"{type(self).__name__}({self.device()!r}, {self.format()!r})"
 
     def get_format(self) -> FormatStr:
-        return bytes(self.format()).decode()  # type: ignore
+        return self.format().data().decode()  # type: ignore
 
     def set_format(self, fmt: FormatStr | bytes | QtCore.QByteArray):
         new = fmt.encode() if isinstance(fmt, str) else fmt
@@ -27,7 +27,7 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
 
     @classmethod
     def get_supported_document_formats(cls) -> list[str]:
-        return [bytes(i).decode() for i in cls.supportedDocumentFormats()]
+        return [i.data().decode() for i in cls.supportedDocumentFormats()]
 
 
 if __name__ == "__main__":

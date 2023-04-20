@@ -20,7 +20,7 @@ class Brush(QtGui.QBrush):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def get_texture_image(self) -> gui.Image | None:
         img = self.textureImage()

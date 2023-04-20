@@ -36,7 +36,7 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.

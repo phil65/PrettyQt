@@ -82,7 +82,7 @@ class Palette(QtGui.QPalette):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def __repr__(self):
         return f"{type(self).__name__}({self['button']}, {self['window']})"

@@ -63,7 +63,7 @@ class Polygon(QtGui.QPolygon):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def get_point(self, index: int) -> core.Point:
         # PySide6 doesnt have self.point method

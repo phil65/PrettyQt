@@ -44,14 +44,15 @@ class MetaMethod:
         return METHOD_TYPE.inverse[self.item.methodType()]
 
     def get_method_signature(self) -> str:
-        return bytes(self.item.methodSignature()).decode()
+        return self.item.methodSignature().data().decode()
 
     def get_name(self) -> str:
-        return bytes(self.item.name()).decode()
+        return self.item.name().data().decode()
 
 
 if __name__ == "__main__":
     from prettyqt import core
 
     metaobj = core.Object.get_metaobject()
-    method = metaobj.get_method("to_json")
+    method = metaobj.get_method("objectNameChanged")
+    print(method.get_name())

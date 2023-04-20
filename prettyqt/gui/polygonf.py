@@ -64,7 +64,7 @@ class PolygonF(QtGui.QPolygonF):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def __eq__(self, other: object) -> bool:
         return (

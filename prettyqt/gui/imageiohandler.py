@@ -84,7 +84,7 @@ class ImageIOHandler(mod):
         self.set_option(key, value)
 
     def get_format(self) -> str:
-        return bytes(self.format()).decode()
+        return self.format().data().decode()
 
     def set_option(self, option: ImageOptionStr, value: datatypes.Variant):
         """Set option to given value.

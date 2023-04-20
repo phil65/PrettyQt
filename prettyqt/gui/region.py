@@ -30,7 +30,7 @@ class Region(QtGui.QRegion):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def get_bounding_rect(self) -> core.Rect:
         return core.Rect(self.boundingRect())

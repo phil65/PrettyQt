@@ -17,7 +17,7 @@ class Cursor(QtGui.QCursor):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def serialize_fields(self) -> dict[str, Any]:
         return dict(shape=self.get_shape())

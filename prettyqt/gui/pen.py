@@ -14,7 +14,7 @@ class Pen(QtGui.QPen):
 
     def __bytes__(self):
         ba = core.DataStream.create_bytearray(self)
-        return bytes(ba)
+        return ba.data()
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()

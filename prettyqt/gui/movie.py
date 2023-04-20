@@ -63,12 +63,12 @@ class Movie(core.ObjectMixin, QtGui.QMovie):
         """
         return MOVIE_STATE.inverse[self.state()]
 
-    def get_format(self) -> bytes:
-        return bytes(self.format())
+    def get_format(self) -> str:
+        return self.format().data().decode()
 
     @classmethod
     def get_supported_formats(cls) -> list[str]:
-        return [bytes(i).decode() for i in cls.supportedFormats()]
+        return [i.data().decode() for i in cls.supportedFormats()]
 
 
 if __name__ == "__main__":
@@ -76,4 +76,4 @@ if __name__ == "__main__":
 
     app = gui.app()
     movie = Movie()
-    print(repr(movie))
+    print(repr(movie.get_format()))
