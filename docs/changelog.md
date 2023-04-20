@@ -1,3 +1,9 @@
+## v1.14.1 (2023-04-20)
+
+### Fix
+
+- release pipeline fix [bcfd8](https://github.com/phil65/PrettyQt/commit/bcfd8737e6cff2016def568c57953598eec0e8d6)
+
 ## v1.14.0 (2023-04-20)
 
 ### Feat
