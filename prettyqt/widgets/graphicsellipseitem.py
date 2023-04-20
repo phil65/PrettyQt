@@ -17,5 +17,10 @@ class GraphicsEllipseItem(
             start_angle=self.startAngle(),
         )
 
-    def get_rect(self) -> core.Rect:
-        return core.Rect(self.rect())
+    def get_rect(self) -> core.RectF:
+        return core.RectF(self.rect())
+
+
+if __name__ == "__main__":
+    item = GraphicsEllipseItem()
+    item.get_rect()
