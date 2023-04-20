@@ -87,7 +87,7 @@ class MetaObject:
         include_super: bool = True,
         type_filter: core.metamethod.MethodTypeStr | None = None,
     ) -> list[core.MetaMethod]:
-        start = 0 if include_super else self.item.methodOffset()
+        start = 0 if include_super else self.item.methodOffset() - 1
         methods = [
             core.MetaMethod(self.item.method(i))
             for i in range(start, self.item.methodCount())
@@ -98,7 +98,7 @@ class MetaObject:
             return [i for i in methods if i.get_method_type() == type_filter]
 
     def get_enums(self, include_super: bool = True) -> list[core.MetaEnum]:
-        start = 0 if include_super else self.item.enumeratorOffset()
+        start = 0 if include_super else self.item.enumeratorOffset() - 1
         return [
             core.MetaEnum(self.item.enumerator(i))
             for i in range(start, self.item.enumeratorCount())
@@ -111,7 +111,7 @@ class MetaObject:
         ]
 
     def get_properties(self, include_super: bool = True) -> list[core.MetaProperty]:
-        start = 0 if include_super else self.item.propertyOffset()
+        start = 0 if include_super else self.item.propertyOffset() - 1
         return [
             core.MetaProperty(self.item.property(i))
             for i in range(start, self.item.propertyCount())
