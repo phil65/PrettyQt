@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class TableWidgetMixin(widgets.TableViewMixin):
@@ -20,6 +20,11 @@ class TableWidgetMixin(widgets.TableViewMixin):
     def sort(self, column: int = 0, reverse: bool = False):
         order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
+
+    def openPersistentEditor(self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem):
+        if isinstance(index, QtCore.QModelIndex):
+            index = self.itemFromIndex(index)
+        super().openPersistentEditor(index)
 
 
 class TableWidget(TableWidgetMixin, QtWidgets.QTableWidget):
