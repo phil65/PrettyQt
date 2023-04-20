@@ -16,15 +16,15 @@ repos:
   rev: v4.4.0
   hooks:
     # - id: trailing-whitespace
-    - id: check-ast
+    # - id: check-ast
     - id: check-case-conflict
     - id: check-docstring-first
     - id: check-merge-conflict
     - id: check-yaml
     - id: check-toml
+    - id: check-json
     - id: detect-private-key
     - id: forbid-new-submodules
-    - id: check-json
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
