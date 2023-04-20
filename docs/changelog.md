@@ -1,3 +1,10 @@
+## v1.15.1 (2023-04-20)
+
+### Fix
+
+- **IconBrowser**: correctly build charmap dict [49e18](https://github.com/phil65/PrettyQt/commit/49e183410c79dcfcf65d667d284fbb2532065947)
+- **GraphicsEllipseItem**: fix get_rect type issue (got broken with qt6) [69653](https://github.com/phil65/PrettyQt/commit/6965326cbfc22078dfeb2e0586a45c01ea0a957a)
+
 ## v1.15.0 (2023-04-20)
 
 ### Feat
