@@ -4,8 +4,7 @@ import datetime
 import inspect
 import os
 import pathlib
-
-# import pickle
+import pickle
 import sys
 
 # import logging
@@ -25,16 +24,16 @@ clsmembers = [tpl for tpl in clsmembers if QtCore.QObject in tpl[1].mro()]
 # logger = logging.getLogger(__name__)
 
 
-# @pytest.mark.parametrize("name, cls", clsmembers)
-# def test_pickle(name, cls):
-#     try:
-#         widget = cls()
-#     except Exception:
-#         return None
-#     with open("data.pkl", "wb") as jar:
-#         pickle.dump(widget, jar)
-#     with open("data.pkl", "rb") as jar:
-#         widget = pickle.load(jar)
+@pytest.mark.parametrize("name, cls", clsmembers)
+def test_pickle(name, cls):
+    try:
+        widget = cls()
+    except Exception:
+        return None
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(widget, jar)
+    with open("data.pkl", "rb") as jar:
+        widget = pickle.load(jar)
 
 
 @pytest.mark.parametrize("name, cls", clsmembers)

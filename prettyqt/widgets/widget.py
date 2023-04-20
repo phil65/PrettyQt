@@ -60,7 +60,7 @@ class WidgetMixin(core.ObjectMixin):
             layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
             size_policy=self.get_size_policy(),
             is_maximized=self.isMaximized(),
-            actions=self.actions(),
+            # actions=self.actions(),
             accessible_name=self.accessibleName(),
             tool_tip=self.toolTip(),
             tooltip_duration=self.toolTipDuration(),
