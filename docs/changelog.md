@@ -1,3 +1,9 @@
+## v1.14.2 (2023-04-20)
+
+### Fix
+
+- another release fix [bdc10](https://github.com/phil65/PrettyQt/commit/bdc1085d98a6e03956dff0679674c704bc716151)
+
 ## v1.14.1 (2023-04-20)
 
 ### Fix
