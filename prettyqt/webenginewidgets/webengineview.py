@@ -130,6 +130,12 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
 
         webbrowser.register("BuiltInBrowser", BuiltInBrowser)
 
+    def last_context_menu_request(
+        self,
+    ) -> webenginecore.WebEngineContextMenuRequest | None:
+        req = self.lastContextMenuRequest()
+        return webenginecore.WebEngineContextMenuRequest(req) if req else None
+
 
 if __name__ == "__main__":
     from prettyqt import widgets

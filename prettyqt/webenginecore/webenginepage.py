@@ -371,9 +371,6 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
     def get_scripts(self) -> webenginecore.WebEngineScriptCollection:
         return webenginecore.WebEngineScriptCollection(self.scripts())
 
-    def get_context_menu_data(self) -> webenginecore.WebEngineContextMenuRequest:
-        return webenginecore.WebEngineContextMenuRequest(self.contextMenuData())
-
     def open_in_browser(self):
         try:
             webbrowser.open(self.getUrl().toString())
