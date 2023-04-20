@@ -230,7 +230,7 @@ if __name__ == "__main__":
         @staticmethod
         def create_label(text: str):
             label = widgets.Label(text)
-            label.setFrameStyle(widgets.Frame.Box | widgets.Frame.Raised)
+            label.setFrameStyle(widgets.Frame.Shape.Box | widgets.Frame.Shadow.Raised)
             return label
 
     app = widgets.app()

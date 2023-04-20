@@ -11,8 +11,8 @@ class BoolDictToolButton(widgets.ToolButton):
     def __init__(
         self,
         title: str,
-        icon: datatypes.IconType = None,
-        dct: dict[str, str] = None,
+        icon: datatypes.IconType | None = None,
+        dct: dict[str, str] | None = None,
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)

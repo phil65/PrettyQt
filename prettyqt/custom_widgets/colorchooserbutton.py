@@ -9,7 +9,9 @@ class ColorChooserButton(widgets.Widget):
     value_changed = core.Signal(gui.Color)
 
     def __init__(
-        self, color: datatypes.ColorType = None, parent: QtWidgets.QWidget | None = None
+        self,
+        color: datatypes.ColorType | None = None,
+        parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
         layout = widgets.BoxLayout("horizontal", self)

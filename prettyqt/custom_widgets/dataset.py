@@ -294,7 +294,7 @@ class Enum(DataItem):
         self,
         label: str,
         choices: Iterable | Mapping,
-        value: Any = None,
+        value: Any | None = None,
         radio: bool = False,
         **kwargs,
     ):
@@ -412,7 +412,9 @@ class StringOrNumber(DataItem):
 
 
 class Button(DataItem):
-    def __init__(self, label: str, callback: Callable, icon: datatypes.IconType = None):
+    def __init__(
+        self, label: str, callback: Callable, icon: datatypes.IconType | None = None
+    ):
         super().__init__("", value=None, include=False)
         self.button_label = label
         self.icon = icon
