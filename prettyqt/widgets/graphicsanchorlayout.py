@@ -1,46 +1,38 @@
 from __future__ import annotations
 
-from typing import Literal
-
 from prettyqt import constants, widgets
-from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
-
-
-EDGE = bidict(
-    left=QtCore.Qt.AnchorPoint.AnchorLeft,
-    horizontal_center=QtCore.Qt.AnchorPoint.AnchorHorizontalCenter,
-    right=QtCore.Qt.AnchorPoint.AnchorRight,
-    top=QtCore.Qt.AnchorPoint.AnchorTop,
-    vertical_center=QtCore.Qt.AnchorPoint.AnchorVerticalCenter,
-    bottom=QtCore.Qt.AnchorPoint.AnchorBottom,
-)
-
-EdgeStr = Literal[
-    "left", "horizontal_center", "right", "top", "vertical_center", "bottom"
-]
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import InvalidParamError
 
 
 class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAnchorLayout):
     def add_anchor(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
-        first_edge: EdgeStr,
+        first_edge: constants.AnchorPointStr,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        second_edge: EdgeStr,
+        second_edge: constants.AnchorPointStr,
     ) -> QtWidgets.QGraphicsAnchor:
         return self.addAnchor(
-            first_item, EDGE[first_edge], second_item, EDGE[second_edge]
+            first_item,
+            constants.ANCHOR_POINT[first_edge],
+            second_item,
+            constants.ANCHOR_POINT[second_edge],
         )
 
     def get_anchor(
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
-        first_edge: EdgeStr,
+        first_edge: constants.AnchorPointStr,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        second_edge: EdgeStr,
+        second_edge: constants.AnchorPointStr,
     ) -> QtWidgets.QGraphicsAnchor:
-        return self.anchor(first_item, EDGE[first_edge], second_item, EDGE[second_edge])
+        return self.anchor(
+            first_item,
+            constants.ANCHOR_POINT[first_edge],
+            second_item,
+            constants.ANCHOR_POINT[second_edge],
+        )
 
     def add_anchors(
         self,

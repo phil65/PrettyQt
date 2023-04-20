@@ -673,6 +673,19 @@ CONTEXT_POLICY: bidict[ContextPolicyStr, Qt.ContextMenuPolicy] = bidict(
     # showhide_menu="showhide_menu",
 )
 
+AnchorPointStr = Literal[
+    "left", "horizontal_center", "right", "top", "vertical_center", "bottom"
+]
+ANCHOR_POINT = bidict[AnchorPointStr, Qt.AnchorPoint](
+    left=QtCore.Qt.AnchorPoint.AnchorLeft,
+    horizontal_center=QtCore.Qt.AnchorPoint.AnchorHorizontalCenter,
+    right=QtCore.Qt.AnchorPoint.AnchorRight,
+    top=QtCore.Qt.AnchorPoint.AnchorTop,
+    vertical_center=QtCore.Qt.AnchorPoint.AnchorVerticalCenter,
+    bottom=QtCore.Qt.AnchorPoint.AnchorBottom,
+)
+
+
 ModalityStr = Literal["window", "application", "none"]
 MODALITY: bidict[ModalityStr, Qt.WindowModality] = bidict(
     window=Qt.WindowModality.WindowModal,
