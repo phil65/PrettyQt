@@ -134,9 +134,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self.setPlainText(text)
 
     def set_syntaxhighlighter(self, syntax: str, style: str | None = None):
-        self._hl = syntaxhighlighters.PygmentsHighlighter(self.document(), syntax)
-        if style is not None:
-            self._hl.set_style(style)
+        self._hl = syntaxhighlighters.PygmentsHighlighter(self.document(), syntax, style)
 
     def text(self) -> str:
         return self.toPlainText()
