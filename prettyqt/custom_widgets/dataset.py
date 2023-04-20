@@ -111,13 +111,10 @@ class Int(DataItem):
     def _create_widget(self) -> custom_widgets.InputAndSlider | widgets.SpinBox:
         min_val = self.range[0]
         max_val = self.range[1]
-        if min_val is not None and max_val is not None:
-            widget = custom_widgets.InputAndSlider()
-            widget.set_range(min_val, max_val)
-        else:
-            widget = widgets.SpinBox()
-            widget.set_range(min_val, max_val)
-            widget.setSuffix(self.unit)
+        use_spinbox = min_val is None or max_val is None
+        widget = widgets.SpinBox() if use_spinbox else custom_widgets.InputAndSlider()
+        widget.setSuffix(self.unit)
+        widget.set_range(min_val, max_val)
         widget.set_step_size(self.step)
         if self.value is not None:
             widget.set_value(self.value)
@@ -532,6 +529,8 @@ if __name__ == "__main__":
     app = widgets.app()
 
     class Test(DataSet):
+        int1 = Int(label="Int", unit="ts")
+        int2 = Int(label="Int", min_val=0, max_val=100, unit="ts")
         boolitem = Bool(label="Bool")
         string1 = String(label="String Regex 0-9")
         string2 = String(label="String Notempty")
