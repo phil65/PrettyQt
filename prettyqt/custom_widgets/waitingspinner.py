@@ -126,31 +126,31 @@ class BaseWaitingSpinner(widgets.Widget):
         self._inner_radius = radius
         self._update_size()
 
-    def color(self) -> gui.Color:
+    def get_color(self) -> gui.Color:
         return self._color
 
-    def roundness(self) -> float:
+    def get_roundness(self) -> float:
         return self._roundness
 
-    def minimum_trail_opacity(self) -> float:
+    def get_minimum_trail_opacity(self) -> float:
         return self._minimum_trail_opacity
 
-    def trail_fade_percentage(self) -> float:
+    def get_trail_fade_percentage(self) -> float:
         return self._trail_fade_percentage
 
-    def revolutions_per_second(self) -> float:
+    def get_revolutions_per_second(self) -> float:
         return self._revolutions_per_second
 
-    def line_num(self) -> int:
+    def get_line_num(self) -> int:
         return self._line_num
 
-    def line_length(self) -> int:
+    def get_line_length(self) -> int:
         return self._line_length
 
-    def line_width(self) -> int:
+    def get_line_width(self) -> int:
         return self._line_width
 
-    def inner_radius(self) -> int:
+    def get_inner_radius(self) -> int:
         return self._inner_radius
 
     def is_spinning(self) -> bool:
@@ -218,6 +218,21 @@ class BaseWaitingSpinner(widgets.Widget):
             result_alpha = min(1.0, max(0.0, result_alpha))
             color.setAlphaF(result_alpha)
         return color
+
+    color = core.Property(gui.Color, get_color, set_color)
+    roundness = core.Property(float, get_roundness, set_roundness)
+    line_num = core.Property(int, get_line_num, set_line_num)
+    line_length = core.Property(int, get_line_length, set_line_length)
+    line_width = core.Property(int, get_line_width, set_line_width)
+    minimum_trail_opacity = core.Property(
+        float, get_minimum_trail_opacity, set_minimum_trail_opacity
+    )
+    revolutions_per_second = core.Property(
+        float, get_revolutions_per_second, set_revolutions_per_second
+    )
+    trail_fade_percentage = core.Property(
+        float, get_trail_fade_percentage, set_trail_fade_percentage
+    )
 
 
 class WaitingSpinner(BaseWaitingSpinner):

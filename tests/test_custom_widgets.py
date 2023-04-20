@@ -369,13 +369,13 @@ def test_waitingspinner(qtbot):
     qtbot.addWidget(spinner)
     spinner.repaint()
     spinner.set_line_num(2)
-    assert spinner.line_num() == 2
+    assert spinner.get_line_num() == 2
     spinner.set_line_length(2)
-    assert spinner.line_length() == 2
+    assert spinner.get_line_length() == 2
     spinner.set_line_width(2)
-    assert spinner.line_width() == 2
+    assert spinner.get_line_width() == 2
     spinner.set_inner_radius(2)
-    assert spinner.inner_radius() == 2
+    assert spinner.get_inner_radius() == 2
     spinner.set_color("black")
     spinner.set_revolutions_per_second(2)
     spinner.set_trail_fade_percentage(2)
