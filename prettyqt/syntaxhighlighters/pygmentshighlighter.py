@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import functools
 import logging
+from typing import Literal
 
 from pygments.formatters.html import HtmlFormatter
 from pygments.lexer import Error, RegexLexer, Text, _TokenType
@@ -14,6 +15,58 @@ from prettyqt.qt import QtGui
 
 
 logger = logging.getLogger(__name__)
+
+
+StyleStr = Literal[
+    "default",
+    "emacs",
+    "friendly",
+    "friendly_grayscale",
+    "colorful",
+    "autumn",
+    "murphy",
+    "manni",
+    "material",
+    "monokai",
+    "perldoc",
+    "pastie",
+    "borland",
+    "trac",
+    "native",
+    "fruity",
+    "bw",
+    "vim",
+    "vs",
+    "tango",
+    "rrt",
+    "xcode",
+    "igor",
+    "paraiso-light",
+    "paraiso-dark",
+    "lovelace",
+    "algol",
+    "algol_nu",
+    "arduino",
+    "rainbow_dash",
+    "abap",
+    "solarized-dark",
+    "solarized-light",
+    "sas",
+    "staroffice",
+    "stata",
+    "stata-light",
+    "stata-dark",
+    "inkpot",
+    "zenburn",
+    "gruvbox-dark",
+    "gruvbox-light",
+    "dracula",
+    "one-dark",
+    "lilypond",
+    "nord",
+    "nord-darker",
+    "github-dark",
+]
 
 
 def qstring_length(text: str) -> int:
@@ -139,7 +192,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     # "PygmentsHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def set_style(self, style: None | str | Style):
+    def set_style(self, style: None | StyleStr | Style):
         if style is None:
             style = get_style_by_name("default")
         elif isinstance(style, str):
@@ -225,7 +278,9 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
+    app.set_style("Fusion")
     editor = widgets.PlainTextEdit()
     highlighter = PygmentsHighlighter(editor.document(), lexer="python")
+    highlighter.set_style("monokai")
     editor.show()
     app.main_loop()
