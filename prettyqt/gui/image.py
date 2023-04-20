@@ -34,6 +34,28 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
         arr = arr.astype(np.uint8)
         return cls(arr.data, width, height, channel * width, cls.Format.Format_RGB888)
 
+    @classmethod
+    def from_pil(cls, image):
+        # from https://github.com/python-pillow/Pillow/blob/main/src/PIL/ImageQt.py
+        from PIL import ImageQt
+
+        data = ImageQt._toqclass_helper(image)
+        img = cls(data["data"], data["size"][0], data["size"][1], data["format"])
+        if data["colortable"]:
+            img.setColorTable(data["colortable"])
+        img.__data = data["data"]
+        return img
+
+    def to_pil(self) -> Image:
+        import io
+
+        from PIL import Image as PILImage
+
+        buffer = core.Buffer()
+        buffer.open(core.Buffer.OpenModeFlag.ReadWrite)
+        self.save(buffer, "PNG")
+        return PILImage.open(io.BytesIO(buffer.data()))
+
     def invert_pixels(self, invert_alpha: bool = False):
         self.invertPixels(
             self.InvertMode.InvertRgba if invert_alpha else self.InvertMode.InvertRgb
