@@ -141,12 +141,12 @@ class Notification(widgets.Widget):
 
         # Fade in animation
         self.fade_in_anim = core.PropertyAnimation()
-        self.fade_in_anim.apply_to(self.opacity_effect, "opacity")
+        self.fade_in_anim.apply_to(self.opacity_effect.opacity)
         self.fade_in_anim.set_range(0.0, 1.0)
 
         # Fade out animation
         self.fade_out_anim = core.PropertyAnimation()
-        self.fade_out_anim.apply_to(self.opacity_effect, "opacity")
+        self.fade_out_anim.apply_to(self.opacity_effect.opacity)
         self.fade_in_anim.set_range(1.0, 0.0)
 
     def display(self):

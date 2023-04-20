@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Callable
+
 from prettyqt import core
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
@@ -14,7 +16,7 @@ class BounceAnimation(core.SequentialAnimationGroup):
         self.anim2 = core.PropertyAnimation()
         self.set_easing(easing)
         self.set_start_value((0, 0))
-        # self.set_end_value(core.Point(0, 100))
+        self.set_end_value(core.Point(0, 100))
         self.addAnimation(self.anim1)
         self.addAnimation(self.anim2)
         self.set_duration(duration)
@@ -39,9 +41,11 @@ class BounceAnimation(core.SequentialAnimationGroup):
         self.anim1.set_easing(easing)
         self.anim2.set_easing(easing)
 
-    def apply_to(self, obj: QtWidgets.QWidget):
-        self.anim1.apply_to(obj, "pos")
-        self.anim2.apply_to(obj, "pos")
+    def apply_to(self, obj: QtWidgets.QWidget | Callable):
+        if isinstance(obj, QtWidgets.QWidget):
+            obj = obj.pos
+        self.anim1.apply_to(obj)
+        self.anim2.apply_to(obj)
 
 
 if __name__ == "__main__":
@@ -49,3 +53,8 @@ if __name__ == "__main__":
 
     app = widgets.app()
     val = BounceAnimation()
+    w = widgets.RadioButton()
+    val.apply_to(w)
+    val.start()
+    w.show()
+    app.main_loop()

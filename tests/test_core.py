@@ -508,7 +508,7 @@ def test_propertyanimation():
     assert animation.get_state() == "stopped"
     animation.setDuration(100)
     assert len(animation) == 100
-    animation.apply_to(button, "geometry")
+    animation.apply_to(button.geometry)
     assert animation.get_property_name() == "geometry"
     animation.setEndValue(core.Rect(20, 50, 70, 89))
     animation[0] = 1

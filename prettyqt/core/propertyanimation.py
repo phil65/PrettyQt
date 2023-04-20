@@ -1,14 +1,16 @@
 from __future__ import annotations
 
+from collections.abc import Callable
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
 
 
 class PropertyAnimation(core.VariantAnimationMixin, QtCore.QPropertyAnimation):
-    def apply_to(self, obj: QtCore.QObject, attribute: str):
-        self.setTargetObject(obj)
-        self.set_property_name(attribute)
+    def apply_to(self, method: Callable):
+        self.setTargetObject(method.__self__)
+        self.set_property_name(method.__name__)
 
     def set_property_name(self, name: datatypes.ByteArrayType):
         if isinstance(name, str):
