@@ -22,11 +22,7 @@ class IconBrowser(widgets.MainWindow):
         super().__init__()
         self.setMinimumSize(400, 300)
         self.set_title("Icon Browser")
-        from prettyqt import iconprovider
-
-        iconprovider._instance()
-        font_maps = iconprovider._instance().charmap
-
+        font_maps = {k: v.charmap for k, v in iconprovider._instance().fonts.items()}
         icon_names = [
             f"{font_collection}.{icon_name}"
             for font_collection, font_data in font_maps.items()
@@ -48,7 +44,7 @@ class IconBrowser(widgets.MainWindow):
         self._listview.setUniformItemSizes(True)
         self._listview.set_view_mode("icon")
         self._listview.set_model(self._proxy_model)
-        self._listview.set_contextmenu_policy("custom")
+        self._listview.set_context_menu_policy("custom")
         self._listview.doubleClicked.connect(self._copy_icon_text)
 
         self._lineedit = widgets.LineEdit(parent=self)
