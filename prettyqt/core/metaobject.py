@@ -125,7 +125,7 @@ class MetaObject:
         ]
 
     def get_meta_type(self) -> core.MetaType:
-        return core.MetaType(self.metaType())
+        return core.MetaType(self.metaType().id())
 
 
 if __name__ == "__main__":

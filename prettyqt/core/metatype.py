@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -122,23 +121,16 @@ TYPE_FLAG = bidict(
 
 
 class MetaType(QtCore.QMetaType):
-    def __init__(self, metatype: QtCore.QMetaType):
-        self.item = metatype
-
-    def __getattr__(self, val):
-        return getattr(self.item, val)
-
     def __bool__(self):
-        return self.item.isValid()
+        return self.isValid()
 
     def __repr__(self):
         return f"{type(self).__name__}({self.get_name()!r})"
 
-    def get_name(self) -> str:
-        return self.item.name()  # type: ignore
+    def get_name(self) -> str | None:
+        return self.name()  # type: ignore
 
 
 if __name__ == "__main__":
-    metaobj = core.Object.get_metaobject()
-    metatype = metaobj.get_meta_type()
-    print(metatype.get_name())
+    metatype = MetaType(2)
+    print(metatype.name())
