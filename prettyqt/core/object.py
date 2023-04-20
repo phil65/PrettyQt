@@ -120,6 +120,19 @@ class ObjectMixin:
             interval = helpers.parse_time(interval)
         return self.startTimer(interval, constants.TIMER_TYPE[timer_type])
 
+    def get_dynamic_properties(self) -> dict[str, Any]:
+        return {
+            bytes(i).decode(): self.property(bytes(i).decode())
+            for i in self.dynamicPropertyNames()
+        }
+
 
 class Object(ObjectMixin, QtCore.QObject):
     pass
+
+
+if __name__ == "__main__":
+    obj = core.Object()
+    obj.setProperty("a", "test")
+    obj.setProperty("b", core.Rect(10, 10, 20, 20))
+    print(obj.get_dynamic_properties())
