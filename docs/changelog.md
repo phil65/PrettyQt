@@ -1,3 +1,15 @@
+## v1.14.0 (2023-04-20)
+
+### Feat
+
+- **WaitingSpinner**: register some attributes as Qt Properties [d3b25](https://github.com/phil65/PrettyQt/commit/d3b2542d2011a23f5c2cf76683c88449a0da5e35)
+- **TableWidget**: also support indexes for openPersistentEditor [d450d](https://github.com/phil65/PrettyQt/commit/d450d40d9713d0771861ec03f6bf1f130d56bdc2)
+
+### Fix
+
+- **RadioDelegate**: property doesnt accept bytes (anymore) [25a96](https://github.com/phil65/PrettyQt/commit/25a962c6cab32bf65234d3689dd417bb00333968)
+- **Painter**: fix draw_rounded_rect method [bb883](https://github.com/phil65/PrettyQt/commit/bb88306049a42fc999dc050953569e7d7f7ec5df)
+
 ## v1.13.1 (2023-04-20)
 
 ### Fix
