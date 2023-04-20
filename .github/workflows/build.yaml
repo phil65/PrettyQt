@@ -73,10 +73,9 @@ jobs:
       with:
         python-version: '3.10'
     - name: Build and publish
-      uses: d1618033/gh-action-python-publish-using-poetry@master
-      with:
-        pypi_username: __token__
-        pypi_password: ${{ secrets.PYPI_SECRET }}
+      run: |
+        poetry config pypi-token.pypi ${{ secrets.PYPI_SECRET }}
+        poetry publish --build
     # - name: Deploy docs
     #   # if: github.event_name == 'push'
     #   uses: mhausenblas/mkdocs-deploy-gh-pages@master
