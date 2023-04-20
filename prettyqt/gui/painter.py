@@ -135,7 +135,7 @@ class PainterMixin:
         )
         if isinstance(rect, tuple):
             rect = QtCore.QRectF(*rect)
-        self.drawRoundedRect(rect, flag)
+        self.drawRoundedRect(rect, x_radius, y_radius, flag)
 
     def use_antialiasing(self):
         self.setRenderHint(self.RenderHint.Antialiasing, True)
