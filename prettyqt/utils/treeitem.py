@@ -67,5 +67,5 @@ class TreeItem(Generic[T]):
 
 
 if __name__ == "__main__":
-    t = TreeItem()
+    t = TreeItem(None)
     print(t)

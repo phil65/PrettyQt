@@ -131,8 +131,7 @@ class Color(QtGui.QColor):
                 out.setHsl(*components)
             case _:
                 raise ValueError("Invalid colorspace!")
-        out = out.convertTo(start.spec())
-        return out
+        return out.convertTo(start.spec())
 
     def is_dark(self) -> bool:
         """Check whether a color is 'dark'."""

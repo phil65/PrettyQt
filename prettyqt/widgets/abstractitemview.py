@@ -93,7 +93,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_delegate(
         self,
-        delegate: QtWidgets.QItemDelegate,
+        delegate: QtWidgets.QAbstractItemDelegate,
         column: int | None = None,
         row: int | None = None,
         persistent: bool = False,

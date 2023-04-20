@@ -143,7 +143,7 @@ class StarDelegate(widgets.StyledItemDelegate):
         # The commitData signal must be emitted when we've finished editing
         # and need to write our changed back to the model.
         self.commitData.emit(editor)
-        self.closeEditor.emit(editor, self.NoHint)
+        self.closeEditor.emit(editor, self.EndEditHint.NoHint)
 
 
 if __name__ == "__main__":
