@@ -26,6 +26,9 @@ class InputAndSlider(widgets.Widget):
         self.slider.valueChanged.connect(self.spinbox.set_value)
         self.spinbox.valueChanged.connect(self.value_changed)
 
+    def __getattr__(self, val):
+        return getattr(self.spinbox, val)
+
     def serialize_fields(self):
         return dict(path=self.path)
 
