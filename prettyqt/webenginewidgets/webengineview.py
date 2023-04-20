@@ -63,7 +63,7 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
         string: str,
         backward: bool = False,
         case_sensitive: bool = False,
-        callback: Callable[[bool], None] = None,
+        callback: Callable[[bool], None] | None = None,
     ):
         """Find text in the current page.
 
@@ -127,7 +127,6 @@ class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
                     webview.show()
                 else:
                     tabwidget.add_tab(webview, url, show=autoraise)
-
 
         webbrowser.register("BuiltInBrowser", BuiltInBrowser)
 

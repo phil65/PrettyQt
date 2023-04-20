@@ -145,4 +145,4 @@ if __name__ == "__main__":
     action = widgets.Action(text="test")
     menu.addAction(action)
     menu.show()
-    menu.exec_(core.Point(200, 200))
+    menu.exec(core.Point(200, 200))

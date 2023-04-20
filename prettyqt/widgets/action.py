@@ -187,7 +187,7 @@ class ActionMixin(core.ObjectMixin):
         try:
             self.setMenu(menu)
         except AttributeError:
-            self.triggered.connect(menu.exec_)
+            self.triggered.connect(menu.exec)
             self._menu = menu
 
     def menu(self):

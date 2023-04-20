@@ -15,7 +15,7 @@ class GraphicsLineItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsLineItem):
         super().__setstate__(state)
         self.setLine(state["line"])
 
-    def get_line(self) -> core.Line:
+    def get_line(self) -> core.LineF:
         return core.LineF(self.line())
 
 

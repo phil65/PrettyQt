@@ -89,31 +89,31 @@ class WebEngineContextMenuRequest(QtWebEngineCore.QWebEngineContextMenuRequest):
         return [k for k, v in EDIT_FLAGS.items() if v & self.editFlags()]
 
     def can_undo(self) -> bool:
-        return mod.CanUndo & self.editFlags()
+        return mod.EditFlag.CanUndo & self.editFlags()
 
     def can_redo(self) -> bool:
-        return mod.CanRedo & self.editFlags()
+        return mod.EditFlag.CanRedo & self.editFlags()
 
     def can_cut(self) -> bool:
-        return mod.CanCut & self.editFlags()
+        return mod.EditFlag.CanCut & self.editFlags()
 
     def can_copy(self) -> bool:
-        return mod.CanCopy & self.editFlags()
+        return mod.EditFlag.CanCopy & self.editFlags()
 
     def can_paste(self) -> bool:
-        return mod.CanPaste & self.editFlags()
+        return mod.EditFlag.CanPaste & self.editFlags()
 
     def can_delete(self) -> bool:
-        return mod.CanDelete & self.editFlags()
+        return mod.EditFlag.CanDelete & self.editFlags()
 
     def can_select_all(self) -> bool:
-        return mod.CanSelectAll & self.editFlags()
+        return mod.EditFlag.CanSelectAll & self.editFlags()
 
     def can_translate(self) -> bool:
-        return mod.CanTranslate & self.editFlags()
+        return mod.EditFlag.CanTranslate & self.editFlags()
 
     def can_edit_richly(self) -> bool:
-        return mod.CanEditRichly & self.editFlags()
+        return mod.EditFlag.CanEditRichly & self.editFlags()
 
 
 if __name__ == "__main__":

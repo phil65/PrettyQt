@@ -2,11 +2,8 @@
 
 import pytest
 
-from prettyqt import core
+from prettyqt import core, webenginecore
 from prettyqt.utils import InvalidParamError
-
-
-webenginecore = pytest.importorskip("prettyqt.webenginecore")
 
 
 def test_webengineurlscheme():
@@ -59,11 +56,11 @@ def test_webenginescriptcollection():
     script = webenginecore.WebEngineScript()
     script.setName("test")
     item = page.get_scripts()
-    assert bool(item) is False
+    assert not bool(item)
     item += script
     assert script in item
     assert len(item) == 1
-    assert bool(item) is True
+    assert bool(item)
     for scr in item:
         pass
     assert item["test"] == script

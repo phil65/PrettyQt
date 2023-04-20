@@ -23,7 +23,7 @@ class QuickRefWidget(widgets.Widget):
         self.textedit_quickref.setHtml(text)
 
     def _show_context_menu(self, pos):
-        self.context_menu.exec_(self.textedit_quickref.mapToGlobal(pos))
+        self.context_menu.exec(self.textedit_quickref.mapToGlobal(pos))
 
 
 if __name__ == "__main__":

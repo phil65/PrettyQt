@@ -12,14 +12,12 @@ class RadialGradient(gui.GradientMixin, QtGui.QRadialGradient):
         )
 
     def serialize_fields(self):
-        center = self.center()
-        focal_point = self.focalPoint()
         return dict(
             center_radius=self.centerRadius(),
             radius=self.radius(),
             focal_radius=self.focalRadius(),
-            center=(center[0], center[1]),
-            focal_point=(focal_point[0], focal_point[1]),
+            center=self.center(),
+            focal_point=self.focalPoint(),
         )
 
     def get_center(self) -> core.PointF:
@@ -27,3 +25,8 @@ class RadialGradient(gui.GradientMixin, QtGui.QRadialGradient):
 
     def get_focal_point(self) -> core.PointF:
         return core.PointF(self.focalPoint())
+
+
+if __name__ == "__main__":
+    grad = RadialGradient()
+    print(grad.serialize_fields())

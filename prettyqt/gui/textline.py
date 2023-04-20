@@ -32,8 +32,8 @@ class TextLine(QtGui.QTextLine):
     def __len__(self):
         return self.textLength()
 
-    def get_position(self) -> core.Point:
-        return core.Point(self.position())
+    def get_position(self) -> core.PointF:
+        return core.PointF(self.position())
 
     def set_position(self, point: datatypes.PointType):
         if isinstance(point, tuple):
@@ -55,4 +55,5 @@ class TextLine(QtGui.QTextLine):
 
 if __name__ == "__main__":
     fmt = TextLine()
+    print(fmt.get_position())
     print(bool(fmt))

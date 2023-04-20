@@ -103,7 +103,7 @@ class CoreApplicationMixin(core.ObjectMixin):
         return self.postEvent(obj, event, prio)
 
     def main_loop(self) -> int:
-        return self.exec_()
+        return self.exec()
 
     @staticmethod
     def restart():

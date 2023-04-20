@@ -88,7 +88,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             buttons=["ok"],
         )
         popup.set_icon("mdi.information-outline")
-        popup.exec_()
+        popup.exec()
 
     @classmethod
     def get_mainwindow(cls) -> QtWidgets.QMainWindow | None:

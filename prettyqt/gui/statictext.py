@@ -29,8 +29,8 @@ class StaticText(QtGui.QStaticText):
     def __str__(self):
         return self.text()
 
-    def get_size(self) -> core.Size:
-        return core.Size(self.size())
+    def get_size(self) -> core.SizeF:
+        return core.SizeF(self.size())
 
     def set_text_format(self, text_format: str):
         """Set the text format.
@@ -80,4 +80,8 @@ class StaticText(QtGui.QStaticText):
 
 
 if __name__ == "__main__":
+    from prettyqt import gui
+
+    app = gui.app()
     text = StaticText()
+    text.get_size()

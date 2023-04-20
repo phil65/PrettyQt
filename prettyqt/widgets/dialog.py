@@ -77,7 +77,7 @@ class DialogMixin(widgets.WidgetMixin):
         return self.result() == QtWidgets.QDialog.DialogCode.Accepted
 
     def main_loop(self) -> int:
-        return self.exec_()
+        return self.exec()
 
 
 class Dialog(DialogMixin, QtWidgets.QDialog):

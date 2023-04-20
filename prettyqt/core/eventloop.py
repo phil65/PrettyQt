@@ -34,6 +34,6 @@ class EventLoop(core.ObjectMixin, QtCore.QEventLoop):
             flag |= 2
         if wait_for_more:
             flag |= 4
-        status = self.exec_(flag)
+        status = self.exec(flag)
         self._executing = False
         return status
