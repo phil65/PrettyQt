@@ -120,6 +120,11 @@ class ObjectMixin:
             interval = helpers.parse_time(interval)
         return self.startTimer(interval, constants.TIMER_TYPE[timer_type])
 
+    def get_properties(self, include_super: bool = True) -> dict[str, Any]:
+        metaobj = self.get_metaobject()
+        props = metaobj.get_properties(include_super=include_super)
+        return {i.name(): i.read(self) for i in props}
+
     def get_dynamic_properties(self) -> dict[str, Any]:
         return {
             bytes(i).decode(): self.property(bytes(i).decode())
