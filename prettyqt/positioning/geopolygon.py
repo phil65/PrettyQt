@@ -25,8 +25,11 @@ class GeoPolygon(positioning.GeoShapeMixin, QtPositioning.QGeoPolygon):
         self.addCoordinate(other)
         return self
 
-    def get_path(self) -> list[positioning.GeoCoordinate]:
-        return [positioning.GeoCoordinate(p) for p in self.path()]
+    def get_hole_path(self, index: int) -> list[positioning.GeoCoordinate]:
+        return [positioning.GeoCoordinate(p) for p in self.holePath(index)]
+
+    def get_perimeter(self) -> list[positioning.GeoCoordinate]:
+        return [positioning.GeoCoordinate(p) for p in self.perimeter()]
 
 
 if __name__ == "__main__":
@@ -34,5 +37,6 @@ if __name__ == "__main__":
     coord = positioning.GeoCoordinate(11, 11)
     poly += coord
     poly.addCoordinate(coord)
+    poly.get_hole_path(1)
     print(len(poly))
     print(poly)
