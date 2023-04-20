@@ -1,5 +1,6 @@
 """Tests for `prettyqt` package."""
 
+import importlib.util
 import inspect
 import pathlib
 import pickle
@@ -238,6 +239,14 @@ def test_image(qapp):
     with open("data.pkl", "rb") as jar:
         img = pickle.load(jar)
     bytes(img)
+
+
+@pytest.mark.skipif(importlib.util.find_spec("PIL") is None, reason="PIL not installed")
+def test_image_pil(qapp):
+    image = gui.Pixmap(100, 100).to_image()
+    pil_image = image.to_pil()
+    new_image = gui.Image.from_pil(pil_image)
+    assert image == new_image
 
 
 def test_imageiohandler():
