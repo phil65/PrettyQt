@@ -60,7 +60,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
                 source.clearMask()
             case core.Event.Type.FocusOut:
                 # another widget has requested focus, set the mask
-                source.setMask(source.property(b"offMask"))
+                source.setMask(source.property("offMask"))
                 # update the table viewport to get rid of possible
                 # grid lines left after masking
                 source.parent().update()
