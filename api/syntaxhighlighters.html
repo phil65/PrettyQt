@@ -1273,7 +1273,7 @@ HighlightRule        </code>
       <p>HighlightRule(regex: 'str | list[str]' = '', color: 'str' = 'black', italic: 'bool' = False, bold: 'bool' = False, minimal: 'bool' = False, font_size: 'float | None' = None, nth: 'int' = 0, fmt: 'gui.TextCharFormat' = <factory>)</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/highlightrule.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\highlightrule.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span>
 <span class="k">class</span> <span class="nc">HighlightRule</span><span class="p">:</span>
     <span class="n">regex</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -1352,7 +1352,7 @@ HighlightRule        </code>
 overridden to extend subclasses.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/highlightrule.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\highlightrule.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">__init_subclass__</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__init_subclass__</span><span class="p">()</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">regex</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -1440,7 +1440,7 @@ JsonHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.SyntaxHi
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/jsonhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\jsonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JsonHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Highlight a block of code using the rules outlined in the Constructor.&quot;&quot;&quot;</span>
@@ -1482,7 +1482,7 @@ JsonHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.SyntaxHi
       <p>Highlight a block of code using the rules outlined in the Constructor.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/jsonhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\jsonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Highlight a block of code using the rules outlined in the Constructor.&quot;&quot;&quot;</span>
     <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">BRACKETS</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
@@ -1577,7 +1577,7 @@ MarkdownHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/markdownhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\markdownhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">MarkdownHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
     <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
 
@@ -1648,7 +1648,7 @@ MarkdownHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
       <p>Apply syntax highlighting to the given block of text.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/markdownhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\markdownhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -1710,6 +1710,7 @@ MarkdownHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
 
 
 
+
   <div class="doc doc-object doc-class">
 
 
@@ -1727,7 +1728,7 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PygmentsHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Syntax highlighter that uses Pygments for parsing.&quot;&quot;&quot;</span>
 
@@ -1773,7 +1774,7 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
     <span class="c1"># &quot;PygmentsHighlighter&quot; interface</span>
     <span class="c1"># ---------------------------------------------------------------------------</span>
 
-    <span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">Style</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">Style</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">style</span> <span class="o">=</span> <span class="n">get_style_by_name</span><span class="p">(</span><span class="s2">&quot;default&quot;</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
@@ -1885,7 +1886,7 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
       <p>Highlight a block of text.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Highlight a block of text.&quot;&quot;&quot;</span>
     <span class="n">prev_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span><span class="o">.</span><span class="n">previous</span><span class="p">()</span><span class="o">.</span><span class="n">userData</span><span class="p">()</span>
@@ -1936,7 +1937,7 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
 other, i.e. they cannot be used in conjunction.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
 
@@ -1989,7 +1990,7 @@ the state from the previous line (this is done in PygmentsHighlighter,
 below), and use it to continue processing the current line.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_tokens_unprocessed</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">stack</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;root&quot;</span><span class="p">,)):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Split ``text`` into (tokentype, text) pairs.</span>
 
@@ -2074,7 +2075,7 @@ below), and use it to continue processing the current line.</p>
       <p>Tries to compute what the length of an utf16-encoded QString would be.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pygmentshighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pygmentshighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">qstring_length</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Tries to compute what the length of an utf16-encoded QString would be.&quot;&quot;&quot;</span>
     <span class="n">utf16_text</span> <span class="o">=</span> <span class="n">text</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf16&quot;</span><span class="p">)</span>
@@ -2157,7 +2158,7 @@ PythonHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Syntax
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pythonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PythonHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Syntax highlighter for the Python language.&quot;&quot;&quot;</span>
 
@@ -2250,7 +2251,7 @@ PythonHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Syntax
       <p>Apply syntax highlighting to the given block of text.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pythonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Apply syntax highlighting to the given block of text.&quot;&quot;&quot;</span>
     <span class="c1"># Do other syntax formatting</span>
@@ -2287,7 +2288,7 @@ state changes when inside those strings. Returns True if we're still
 inside a multi-line string when this function is finished.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/pythonhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\pythonhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">match_multiline</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -2411,7 +2412,7 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/regexmatchhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\regexmatchhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RegexMatchHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">document</span><span class="p">)</span>
@@ -2488,7 +2489,7 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
       <p>Apply syntax highlighting to the given block of text.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/regexmatchhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\regexmatchhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="n">block</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">currentBlock</span><span class="p">()</span>
     <span class="c1"># line_no = block.blockNumber()</span>
@@ -2603,7 +2604,7 @@ XmlHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.SyntaxHig
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/xmlhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\xmlhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">XmlHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
     <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
 
@@ -2659,7 +2660,7 @@ XmlHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.SyntaxHig
       <p>Apply syntax highlighting to the given block of text.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/xmlhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\xmlhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="c1"># HANDLE QUOTATION MARKS NOW.. WE WANT TO START WITH &quot; AND END WITH &quot;..</span>
@@ -2767,7 +2768,7 @@ YamlHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.SyntaxHi
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/yamlhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\yamlhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">YamlHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
     <span class="n">RULES</span> <span class="o">=</span> <span class="n">Rule</span><span class="o">.</span><span class="n">__subclasses__</span><span class="p">()</span>
 
@@ -2811,7 +2812,7 @@ YamlHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.SyntaxHi
       <p>Apply syntax highlighting to the given block of text.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/syntaxhighlighters/yamlhighlighter.py</code></summary>
+          <summary>Source code in <code>prettyqt\syntaxhighlighters\yamlhighlighter.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">highlightBlock</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setCurrentBlockState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>

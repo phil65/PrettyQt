@@ -936,7 +936,7 @@ QuickItemMixin            (<span title="prettyqt.core.object.ObjectMixin">Object
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickitem.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickitem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickItemMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">qml</span><span class="o">.</span><span class="n">QmlParserStatusMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_children_rect</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">RectF</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">childrenRect</span><span class="p">())</span>
@@ -1017,7 +1017,7 @@ QuickItemMixin            (<span title="prettyqt.core.object.ObjectMixin">Object
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickitem.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickitem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TransformOriginStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the render type of text-like elements in Qt Quick.</span>
 
@@ -1083,7 +1083,7 @@ QuickItemMixin            (<span title="prettyqt.core.object.ObjectMixin">Object
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickitem.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickitem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_transform_origin</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">origin</span><span class="p">:</span> <span class="n">TransformOriginStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the origin point around which scale and rotation transform.</span>
 
@@ -1175,7 +1175,7 @@ QuickPaintedItem            (<a class="autorefs autorefs-internal" title="pretty
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickpainteditem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickPaintedItem</span><span class="p">(</span><span class="n">quick</span><span class="o">.</span><span class="n">QuickItemMixin</span><span class="p">,</span> <span class="n">QtQuick</span><span class="o">.</span><span class="n">QQuickPaintedItem</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_fill_color</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fillColor</span><span class="p">())</span>
@@ -1249,7 +1249,7 @@ QuickPaintedItem            (<a class="autorefs autorefs-internal" title="pretty
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickpainteditem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">RenderTargetStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the render target.</span>
 
@@ -1315,7 +1315,7 @@ QuickPaintedItem            (<a class="autorefs autorefs-internal" title="pretty
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickpainteditem.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickpainteditem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_render_target</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">:</span> <span class="n">RenderTargetStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the render target.</span>
 
@@ -1408,7 +1408,7 @@ QuickWindow            (<a class="autorefs autorefs-internal" title="prettyqt.gu
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickwindow.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickwindow.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QuickWindow</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">WindowMixin</span><span class="p">,</span> <span class="n">QtQuick</span><span class="o">.</span><span class="n">QQuickWindow</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">create_texture_from_image</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">image</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QImage</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="n">flag</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CreateTextureOption</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -1511,7 +1511,7 @@ QuickWindow            (<a class="autorefs autorefs-internal" title="prettyqt.gu
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickwindow.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickwindow.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@staticmethod</span>
 <span class="k">def</span> <span class="nf">get_text_render_type</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">TextRenderTypeStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the render type of text-like elements in Qt Quick.</span>
@@ -1584,7 +1584,7 @@ the render type of existing elements will not be modified.</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/quick/quickwindow.py</code></summary>
+          <summary>Source code in <code>prettyqt\quick\quickwindow.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@staticmethod</span>
 <span class="k">def</span> <span class="nf">set_text_render_type</span><span class="p">(</span><span class="n">typ</span><span class="p">:</span> <span class="n">TextRenderTypeStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the default render type of text-like elements in Qt Quick.</span>

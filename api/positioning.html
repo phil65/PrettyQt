@@ -1013,7 +1013,7 @@ GeoAreaMonitorSource            (<span title="prettyqt.core.object.ObjectMixin">
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geoareamonitorsource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geoareamonitorsource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoAreaMonitorSource</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoAreaMonitorSource</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceName</span><span class="p">()</span>
@@ -1075,7 +1075,7 @@ GeoAreaMonitorSource            (<span title="prettyqt.core.object.ObjectMixin">
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geoareamonitorsource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geoareamonitorsource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AreaMonitorFeatureStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return error type.</span>
 
@@ -1166,7 +1166,7 @@ GeoPositionInfoSourceMixin            (<span title="prettyqt.core.object.ObjectM
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geopositioninfosource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoPositionInfoSourceMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
@@ -1274,7 +1274,7 @@ GeoPositionInfoSourceMixin            (<span title="prettyqt.core.object.ObjectM
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geopositioninfosource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return error type.</span>
 
@@ -1320,7 +1320,7 @@ GeoPositionInfoSourceMixin            (<span title="prettyqt.core.object.ObjectM
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geopositioninfosource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return list of preferred positioning methods.</span>
 
@@ -1370,7 +1370,7 @@ GeoPositionInfoSourceMixin            (<span title="prettyqt.core.object.ObjectM
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geopositioninfosource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_supported_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">PositioningMethodStr</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return list of supported positioning methods.</span>
 
@@ -1440,7 +1440,7 @@ GeoPositionInfoSourceMixin            (<span title="prettyqt.core.object.ObjectM
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geopositioninfosource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geopositioninfosource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_preferred_positioning_methods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">methods</span><span class="p">:</span> <span class="n">PositioningMethodStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set preferred positioning methods.</span>
 
@@ -1531,7 +1531,7 @@ GeoSatelliteInfo            (<span title="PySide6.QtPositioning.QGeoSatelliteInf
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geosatelliteinfo.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geosatelliteinfo.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoSatelliteInfo</span><span class="p">(</span><span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoSatelliteInfo</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">AttributeStr</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">attribute</span><span class="p">(</span><span class="n">ATTRIBUTE</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
@@ -1618,7 +1618,7 @@ GeoSatelliteInfo            (<span title="PySide6.QtPositioning.QGeoSatelliteInf
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geosatelliteinfo.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geosatelliteinfo.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SatelliteSystemStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return satellite system.</span>
 
@@ -1683,7 +1683,7 @@ GeoSatelliteInfo            (<span title="PySide6.QtPositioning.QGeoSatelliteInf
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geosatelliteinfo.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geosatelliteinfo.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_satellite_system</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">system</span><span class="p">:</span> <span class="n">SatelliteSystemStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set satellite system.</span>
 
@@ -1769,7 +1769,7 @@ GeoSatelliteInfoSource            (<span title="prettyqt.core.object.ObjectMixin
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geosatelliteinfosource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geosatelliteinfosource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">GeoSatelliteInfoSource</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtPositioning</span><span class="o">.</span><span class="n">QGeoSatelliteInfoSource</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
@@ -1837,7 +1837,7 @@ GeoSatelliteInfoSource            (<span title="prettyqt.core.object.ObjectMixin
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/positioning/geosatelliteinfosource.py</code></summary>
+          <summary>Source code in <code>prettyqt\positioning\geosatelliteinfosource.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return error type.</span>
 

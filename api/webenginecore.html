@@ -1422,7 +1422,7 @@ WebEngineDownloadRequest        </code>
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginedownloadrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginedownloadrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineDownloadRequest</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineDownloadRequest</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">item</span>
@@ -1504,7 +1504,7 @@ WebEngineDownloadRequest        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginedownloadrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginedownloadrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SavePageFormatStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current save page format.</span>
 
@@ -1570,7 +1570,7 @@ WebEngineDownloadRequest        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginedownloadrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginedownloadrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_save_page_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">SavePageFormatStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the save page format.</span>
 
@@ -1658,7 +1658,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginehttprequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginehttprequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineHttpRequest</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineHttpRequest</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_url</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
@@ -1747,7 +1747,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginehttprequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginehttprequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MethodStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the method this WebEngine request is using.</span>
 
@@ -1815,7 +1815,7 @@ WebEngineHttpRequest            (<span title="PySide6.QtWebEngineCore.QWebEngine
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginehttprequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginehttprequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_method</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">method</span><span class="p">:</span> <span class="n">MethodStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set method this WebEngine request is using.</span>
 
@@ -1918,7 +1918,7 @@ WebEnginePage            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEnginePage</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEnginePage</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A web engine page holds the HTML document contents, link history + actions.&quot;&quot;&quot;</span>
 
@@ -2215,7 +2215,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">find_text</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
@@ -2300,7 +2300,7 @@ the corresponding QWebEnginePage or QWebEnginePage instance inside it.</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">LifecycleStateStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current lifecycle state.</span>
 
@@ -2359,7 +2359,7 @@ to display the new URL.</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
@@ -2404,7 +2404,7 @@ to display the new URL.</p>
     2 - right button</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mousedown</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">btn</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Simulate a mousedown event on the targeted element.</span>
 
@@ -2452,7 +2452,7 @@ to display the new URL.</p>
       <p>Set the value of the input matched by given selector.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_input_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">selector</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the value of the input matched by given selector.&quot;&quot;&quot;</span>
     <span class="n">script</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;document.querySelector(</span><span class="si">{</span><span class="n">selector</span><span class="si">!r}</span><span class="s1">).setAttribute(&quot;value&quot;, &quot;</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s1">&quot;)&#39;</span>
@@ -2514,7 +2514,7 @@ to display the new URL.</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_lifecycle_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="n">LifecycleStateStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set lifecycle state.</span>
 
@@ -2571,7 +2571,7 @@ to display the new URL.</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the url of the WebEnginePage.</span>
 
@@ -2628,7 +2628,7 @@ to display the new URL.</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginepage.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginepage.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the zoom factor for the Page.</span>
 
@@ -2715,7 +2715,7 @@ WebEngineProfile            (<span title="prettyqt.core.object.ObjectMixin">Obje
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineProfile</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineProfile</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
@@ -2806,7 +2806,7 @@ WebEngineProfile            (<span title="prettyqt.core.object.ObjectMixin">Obje
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HttpCacheTypeStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current http cache type.</span>
 
@@ -2852,7 +2852,7 @@ WebEngineProfile            (<span title="prettyqt.core.object.ObjectMixin">Obje
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current persistent cookie policy.</span>
 
@@ -2918,7 +2918,7 @@ WebEngineProfile            (<span title="prettyqt.core.object.ObjectMixin">Obje
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_http_cache_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">HttpCacheTypeStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the http cache type.</span>
 
@@ -2988,7 +2988,7 @@ WebEngineProfile            (<span title="prettyqt.core.object.ObjectMixin">Obje
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineprofile.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineprofile.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_persistent_cookie_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">PersistentCookiePolicyStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the persistent cookie policy.</span>
 
@@ -3076,7 +3076,7 @@ WebEngineScript            (<span title="PySide6.QtWebEngineCore.QWebEngineScrip
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginescript.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginescript.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineScript</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineScript</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">InjectionPointStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set injection point.</span>
@@ -3143,7 +3143,7 @@ WebEngineScript            (<span title="PySide6.QtWebEngineCore.QWebEngineScrip
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginescript.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginescript.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InjectionPointStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return injection point.</span>
 
@@ -3208,7 +3208,7 @@ WebEngineScript            (<span title="PySide6.QtWebEngineCore.QWebEngineScrip
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginescript.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginescript.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_injection_point</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">point</span><span class="p">:</span> <span class="n">InjectionPointStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set injection point.</span>
 
@@ -3303,7 +3303,7 @@ WebEngineSettings        </code>
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineSettings</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineSettings</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">item</span> <span class="o">=</span> <span class="n">item</span>
@@ -3459,7 +3459,7 @@ WebEngineSettings        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the actual font family for the specified generic font family.</span>
 
@@ -3527,7 +3527,7 @@ WebEngineSettings        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the default font size for type in pixels.</span>
 
@@ -3576,7 +3576,7 @@ WebEngineSettings        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current unknown url scheme policy.</span>
 
@@ -3647,7 +3647,7 @@ WebEngineSettings        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_font_family</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">which</span><span class="p">:</span> <span class="n">FontFamilyStr</span><span class="p">,</span> <span class="n">family</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the actual font family to family for the specified generic family, which.</span>
 
@@ -3724,7 +3724,7 @@ WebEngineSettings        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_font_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">FontSizeStr</span><span class="p">,</span> <span class="n">size</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the font size for type to size in pixels.</span>
 
@@ -3795,7 +3795,7 @@ WebEngineSettings        </code>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webenginesettings.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webenginesettings.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the unknown url scheme policy.</span>
 
@@ -3883,7 +3883,7 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineurlscheme.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineurlscheme.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineUrlScheme</span><span class="p">(</span><span class="n">QtWebEngineCore</span><span class="o">.</span><span class="n">QWebEngineUrlScheme</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
@@ -3963,7 +3963,7 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineurlscheme.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineurlscheme.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SyntaxStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return syntax.</span>
 
@@ -4029,7 +4029,7 @@ WebEngineUrlScheme            (<span title="PySide6.QtWebEngineCore.QWebEngineUr
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/webenginecore/webengineurlscheme.py</code></summary>
+          <summary>Source code in <code>prettyqt\webenginecore\webengineurlscheme.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_syntax</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">syntax</span><span class="p">:</span> <span class="n">SyntaxStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set syntax.</span>
 

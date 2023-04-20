@@ -1148,7 +1148,7 @@ CompositeValidator            (<span title="prettyqt.gui.validator.Validator">Va
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/compositevalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\compositevalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">CompositeValidator</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Validator</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -1239,7 +1239,7 @@ CompositeValidator            (<span title="prettyqt.gui.validator.Validator">Va
       <p>validate(self, arg__1: str, arg__2: int) -&gt; object</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/compositevalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\compositevalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="o">.</span><span class="n">State</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
@@ -1321,7 +1321,7 @@ IntegerValidator            (<span title="prettyqt.gui.validator.Validator">Vali
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/integervalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\integervalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">IntegerValidator</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Validator</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
@@ -1371,7 +1371,7 @@ IntegerValidator            (<span title="prettyqt.gui.validator.Validator">Vali
       <p>validate(self, arg__1: str, arg__2: int) -&gt; object</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/integervalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\integervalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">text</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Intermediate</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
@@ -1452,7 +1452,7 @@ NotEmptyValidator            (<span title="prettyqt.gui.validator.Validator">Val
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/notemptyvalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\notemptyvalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NotEmptyValidator</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Validator</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">NotEmptyValidator</span><span class="p">)</span>
@@ -1496,7 +1496,7 @@ NotEmptyValidator            (<span title="prettyqt.gui.validator.Validator">Val
       <p>validate(self, arg__1: str, arg__2: int) -&gt; object</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/notemptyvalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\notemptyvalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="o">.</span><span class="n">State</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
@@ -1576,7 +1576,7 @@ NotZeroValidator            (<span title="prettyqt.gui.validator.Validator">Vali
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/notzerovalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\notzerovalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NotZeroValidator</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Validator</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1618,7 +1618,7 @@ NotZeroValidator            (<span title="prettyqt.gui.validator.Validator">Vali
       <p>validate(self, arg__1: str, arg__2: int) -&gt; object</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/notzerovalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\notzerovalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="o">.</span><span class="n">State</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
@@ -1696,7 +1696,7 @@ PathValidator            (<span title="prettyqt.gui.validator.Validator">Validat
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/pathvalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\pathvalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PathValidator</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Validator</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">object</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">PathValidator</span><span class="p">)</span>
@@ -1736,7 +1736,7 @@ PathValidator            (<span title="prettyqt.gui.validator.Validator">Validat
       <p>validate(self, arg__1: str, arg__2: int) -&gt; object</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/pathvalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\pathvalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">text</span><span class="p">)</span><span class="o">.</span><span class="n">exists</span><span class="p">():</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Acceptable</span><span class="p">,</span> <span class="n">text</span><span class="p">,</span> <span class="n">pos</span>
@@ -1812,7 +1812,7 @@ RegexPatternValidator            (<span title="prettyqt.gui.validator.Validator"
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/regexpatternvalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\regexpatternvalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RegexPatternValidator</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Validator</span><span class="p">):</span>
     <span class="n">error_occured</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
     <span class="n">pattern_updated</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="nb">object</span><span class="p">)</span>
@@ -1877,7 +1877,7 @@ RegexPatternValidator            (<span title="prettyqt.gui.validator.Validator"
       <p>validate(self, arg__1: str, arg__2: int) -&gt; object</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/regexpatternvalidator.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\regexpatternvalidator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="o">.</span><span class="n">State</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
@@ -1970,7 +1970,7 @@ BaseRegexValidator            (<span title="prettyqt.gui.validator.Validator">Va
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/regexvalidators.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\regexvalidators.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">BaseRegexValidator</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Validator</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">regex</span><span class="p">:</span> <span class="n">PatternType</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2047,7 +2047,7 @@ BaseRegexValidator            (<span title="prettyqt.gui.validator.Validator">Va
       <p>validate(self, arg__1: str, arg__2: int) -&gt; object</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_validators/regexvalidators.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_validators\regexvalidators.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">validate</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">pos</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QValidator</span><span class="o">.</span><span class="n">State</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>

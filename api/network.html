@@ -1302,7 +1302,7 @@ AbstractSocketMixin            (<span title="prettyqt.core.iodevice.IODeviceMixi
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/abstractsocket.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\abstractsocket.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractSocketMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">IODeviceMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
@@ -1459,7 +1459,7 @@ AbstractSocketMixin            (<span title="prettyqt.core.iodevice.IODeviceMixi
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/abstractsocket.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\abstractsocket.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_pause_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PauseModeStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set pause mode.</span>
 
@@ -1546,7 +1546,7 @@ HttpMultiPart            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/httpmultipart.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\httpmultipart.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">HttpMultiPart</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHttpMultiPart</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHttpPart</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -1641,7 +1641,7 @@ HttpMultiPart            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/httpmultipart.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\httpmultipart.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_content_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ContentTypeStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set content type.</span>
 
@@ -1730,7 +1730,7 @@ NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkaccessmanager.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkAccessManager</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkAccessManager</span><span class="p">):</span>
     <span class="c1"># def request(</span>
     <span class="c1">#     self,</span>
@@ -1815,7 +1815,7 @@ NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">
       <p>get(self, request: PySide6.QtNetwork.QNetworkRequest) -&gt; PySide6.QtNetwork.QNetworkReply</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkaccessmanager.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">request</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>
@@ -1859,7 +1859,7 @@ NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkaccessmanager.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current redirect policy.</span>
 
@@ -1924,7 +1924,7 @@ NetworkAccessManager            (<span title="prettyqt.core.object.ObjectMixin">
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkaccessmanager.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkaccessmanager.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_redirect_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">network</span><span class="o">.</span><span class="n">networkrequest</span><span class="o">.</span><span class="n">RedirectPolicyStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set redirect policy.</span>
 
@@ -2010,7 +2010,7 @@ NetworkAddressEntry            (<span title="PySide6.QtNetwork.QNetworkAddressEn
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkaddressentry.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkaddressentry.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkAddressEntry</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkAddressEntry</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return whether this address is eligible for publication in the DNS.</span>
@@ -2095,7 +2095,7 @@ NetworkAddressEntry            (<span title="PySide6.QtNetwork.QNetworkAddressEn
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkaddressentry.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkaddressentry.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return whether this address is eligible for publication in the DNS.</span>
 
@@ -2164,7 +2164,7 @@ NetworkAddressEntry            (<span title="PySide6.QtNetwork.QNetworkAddressEn
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkaddressentry.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkaddressentry.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_dns_eligibility</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="n">DnsEligibilityStatusStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the DNS eligibility flag for this address to status.</span>
 
@@ -2257,7 +2257,7 @@ NetworkInterface            (<span title="PySide6.QtNetwork.QNetworkInterface">Q
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkinterface.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkinterface.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkInterface</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkInterface</span><span class="p">):</span>
     <span class="c1"># def __bool__(self):</span>
     <span class="c1">#     return self.isValid()</span>
@@ -2336,7 +2336,7 @@ NetworkInterface            (<span title="PySide6.QtNetwork.QNetworkInterface">Q
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkinterface.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkinterface.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">InterfaceTypeStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the interface type.</span>
 
@@ -2419,7 +2419,7 @@ NetworkProxy            (<span title="PySide6.QtNetwork.QNetworkProxy">QNetworkP
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkproxy.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkProxy</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkProxy</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_capabilities</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">CapabilityStr</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">CAPABILITIES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&amp;</span> <span class="bp">self</span><span class="o">.</span><span class="n">capabilities</span><span class="p">()]</span>
@@ -2521,7 +2521,7 @@ NetworkProxy            (<span title="PySide6.QtNetwork.QNetworkProxy">QNetworkP
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkproxy.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProxyTypeStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the proxy type.</span>
 
@@ -2589,7 +2589,7 @@ NetworkProxy            (<span title="PySide6.QtNetwork.QNetworkProxy">QNetworkP
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkproxy.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkproxy.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">typ</span><span class="p">:</span> <span class="n">ProxyTypeStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set proxy type.</span>
 
@@ -2684,7 +2684,7 @@ NetworkRequest            (<span title="PySide6.QtNetwork.QNetworkRequest">QNetw
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NetworkRequest</span><span class="p">(</span><span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QNetworkRequest</span><span class="p">):</span>
@@ -2795,7 +2795,7 @@ NetworkRequest            (<span title="PySide6.QtNetwork.QNetworkRequest">QNetw
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PriorityStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the current priority.</span>
 
@@ -2863,7 +2863,7 @@ NetworkRequest            (<span title="PySide6.QtNetwork.QNetworkRequest">QNetw
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/networkrequest.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\networkrequest.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_priority</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="n">PriorityStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set priority.</span>
 
@@ -2948,7 +2948,7 @@ TcpServer            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/tcpserver.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\tcpserver.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TcpServer</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QTcpServer</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">listen</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
@@ -2998,7 +2998,7 @@ TcpServer            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin
       <p>listen(self, address: Union[PySide6.QtNetwork.QHostAddress, PySide6.QtNetwork.QHostAddress.SpecialAddress] = Instance(QHostAddress.Any), port: int = 0) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/network/tcpserver.py</code></summary>
+          <summary>Source code in <code>prettyqt\network\tcpserver.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">listen</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">address</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QHostAddress</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>

@@ -1039,7 +1039,7 @@
 :rtype: custom_models.treeitem.TreeItem to string function</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/attribute_model.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\attribute_model.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">safe_data_fn</span><span class="p">(</span>
     <span class="n">obj_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
     <span class="n">log_exceptions</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1128,7 +1128,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowser</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">MainWindow</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Object browser main application window.&quot;&quot;&quot;</span>
 
@@ -1492,7 +1492,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
 <p>The <em>args and </em>*kwargs will be passed to the ObjectBrowser constructor.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">browse</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and run object browser.</span>
@@ -1534,7 +1534,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
       <p>Called when the window is closed.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">closeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Called when the window is closed.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;closeEvent&quot;</span><span class="p">)</span>
@@ -1581,7 +1581,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
       <p>Toggle auto-refresh on/off.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowser.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowser.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">toggle_auto_refresh</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">checked</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Toggle auto-refresh on/off.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">checked</span><span class="p">:</span>
@@ -1669,7 +1669,7 @@ ObjectBrowserTreeItem            (<span title="prettyqt.utils.treeitem.TreeItem"
       <p>Tree node class that can be used to build trees of objects.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeItem</span><span class="p">(</span><span class="n">treeitem</span><span class="o">.</span><span class="n">TreeItem</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Tree node class that can be used to build trees of objects.&quot;&quot;&quot;</span>
 
@@ -1793,7 +1793,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeModel</span><span class="p">(</span><span class="n">custom_models</span><span class="o">.</span><span class="n">ColumnItemModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Model that provides an interface to an objectree that is build of tree items.&quot;&quot;&quot;</span>
 
@@ -2044,7 +2044,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ObjectBrowserTreeProxyModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Proxy model that overrides the sorting and can filter out items.&quot;&quot;&quot;</span>
 
@@ -2120,7 +2120,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
       <p>Return true if the item should be included in the model.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">source_row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">source_parent_index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return true if the item should be included in the model.&quot;&quot;&quot;</span>
     <span class="n">parent_item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">source_parent_index</span><span class="p">)</span>
@@ -2154,7 +2154,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
       <p>Show/hide show_callables which have a <strong>call</strong> attribute.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_show_callables</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Show/hide show_callables which have a __call__ attribute.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_callables: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_callables</span><span class="p">)</span>
@@ -2183,7 +2183,7 @@ ObjectBrowserTreeProxyModel            (<span title="prettyqt.core.sortfilterpro
       <p>Show/hide special attributes which begin with an underscore.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/objbrowser/objectbrowsertreemodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\objbrowser\objectbrowsertreemodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_show_special_attrs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Show/hide special attributes which begin with an underscore.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;set_show_special_attrs: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">show_special_attrs</span><span class="p">)</span>

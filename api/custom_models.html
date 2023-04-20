@@ -1814,7 +1814,7 @@ ColumnItem        </code>
       <p>Determines how an object attribute is shown.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">ColumnItem</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Determines how an object attribute is shown.&quot;&quot;&quot;</span>
@@ -2056,7 +2056,7 @@ ColumnItemModel            (<a class="autorefs autorefs-internal" title="prettyq
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ColumnItemModel</span><span class="p">(</span><span class="n">ColumnItemModelMixin</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">AbstractItemModel</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
@@ -2196,7 +2196,7 @@ ColumnItemModel            (<a class="autorefs autorefs-internal" title="prettyq
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
@@ -2223,7 +2223,7 @@ ColumnItemModel            (<a class="autorefs autorefs-internal" title="prettyq
       <p>canFetchMore(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">canFetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
     <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -2254,7 +2254,7 @@ ColumnItemModel            (<a class="autorefs autorefs-internal" title="prettyq
 <p>Adds the children to the parent.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">fetchMore</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Fetch the children given the model index of a parent node.</span>
 
@@ -2297,7 +2297,7 @@ ColumnItemModel            (<a class="autorefs autorefs-internal" title="prettyq
       <p>hasChildren(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">hasChildren</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
     <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">has_children</span>
@@ -2324,7 +2324,7 @@ ColumnItemModel            (<a class="autorefs autorefs-internal" title="prettyq
       <p>index(self, row: int, column: int, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; PySide6.QtCore.QModelIndex</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">index</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>
@@ -2364,7 +2364,7 @@ ColumnItemModel            (<a class="autorefs autorefs-internal" title="prettyq
 parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; PySide6.QtCore.QModelIndex</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">:</span>  <span class="c1"># type:ignore</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
@@ -2399,7 +2399,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
       <p>Return the index that returns the root element (same as an invalid index).</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">root_index</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">:</span>  <span class="c1"># TODO: needed?</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the index that returns the root element (same as an invalid index).&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
@@ -2426,7 +2426,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
       <p>rowCount(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; int</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="n">parent</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span> <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="n">parent</span>
     <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">tree_item</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span><span class="o">.</span><span class="n">child_count</span><span class="p">()</span>
@@ -2465,7 +2465,7 @@ ColumnItemModelMixin        </code>
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ColumnItemModelMixin</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -2570,7 +2570,7 @@ ColumnItemModelMixin        </code>
       <p>Return the tree item at the given index and role.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the tree item at the given index and role.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
@@ -2640,7 +2640,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ColumnTableModel</span><span class="p">(</span><span class="n">ColumnItemModelMixin</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">AbstractTableModel</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
@@ -2751,7 +2751,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
 <p>Initialize self.  See help(type(self)) for accurate signature.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">items</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
@@ -2785,7 +2785,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
       <p>Append provided item to the list.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Append provided item to the list.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_items</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
@@ -2813,7 +2813,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
       <p>Append a list of items to the list.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Append a list of items to the list.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">position</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2847,7 +2847,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
       <p>dropMimeData(self, data: PySide6.QtCore.QMimeData, action: PySide6.QtCore.Qt.DropAction, row: int, column: int, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">dropMimeData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mime_data</span><span class="p">,</span> <span class="n">action</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent_index</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">mime_data</span><span class="o">.</span><span class="n">hasFormat</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mime_type</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -2888,7 +2888,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
       <p>removeRows(self, row: int, count: int, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">removeRows</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
     <span class="n">end_row</span> <span class="o">=</span> <span class="n">row</span> <span class="o">+</span> <span class="n">count</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="k">with</span> <span class="bp">self</span><span class="o">.</span><span class="n">remove_rows</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">end_row</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
@@ -2919,7 +2919,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
       <p>rowCount(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; int</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
 </code></pre></div>
@@ -2945,7 +2945,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
       <p>setData(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex], value: Any, role: int = Instance(Qt.EditRole)) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">[</span><span class="n">index</span><span class="o">.</span><span class="n">row</span><span class="p">()]</span> <span class="o">=</span> <span class="n">value</span>
@@ -2975,7 +2975,7 @@ ColumnTableModel            (<a class="autorefs autorefs-internal" title="pretty
       <p>Sort table by given column number.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/columnitemmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\columnitemmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncol</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sort table by given column number.&quot;&quot;&quot;</span>
     <span class="n">is_asc</span> <span class="o">=</span> <span class="n">order</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASCENDING</span>
@@ -3054,7 +3054,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/importlibdistributionmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\importlibdistributionmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ImportlibDistributionModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">AbstractTableModel</span><span class="p">):</span>
     <span class="n">HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Name&quot;</span><span class="p">,</span> <span class="s2">&quot;Version&quot;</span><span class="p">,</span> <span class="s2">&quot;Summary&quot;</span><span class="p">,</span> <span class="s2">&quot;Homepage&quot;</span><span class="p">,</span> <span class="s2">&quot;Author&quot;</span><span class="p">,</span> <span class="s2">&quot;License&quot;</span><span class="p">]</span>
 
@@ -3132,7 +3132,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.columnCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fd704f12cc0</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x0000022E26443580</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -3142,7 +3142,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
       <p>columnCount(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; int</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/importlibdistributionmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\importlibdistributionmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
     <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span>
 </code></pre></div>
@@ -3168,7 +3168,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
       <p>data(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex], role: int = Instance(Qt.DisplayRole)) -&gt; Any</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/importlibdistributionmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\importlibdistributionmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -3213,7 +3213,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
       <p>headerData(self, section: int, orientation: PySide6.QtCore.Qt.Orientation, role: int = Instance(Qt.DisplayRole)) -&gt; Any</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/importlibdistributionmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\importlibdistributionmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">offset</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
     <span class="k">match</span> <span class="n">orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span>
         <span class="k">case</span> <span class="n">constants</span><span class="o">.</span><span class="n">HORIZONTAL</span><span class="p">,</span> <span class="n">constants</span><span class="o">.</span><span class="n">DISPLAY_ROLE</span><span class="p">:</span>
@@ -3231,7 +3231,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
 
 
 <h4 id="prettyqt.custom_models.importlibdistributionmodel.ImportlibDistributionModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fd704f12fc0</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x0000022E26294F00</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 </h4>
@@ -3241,7 +3241,7 @@ ImportlibDistributionModel            (<span title="prettyqt.core.abstracttablem
       <p>rowCount(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; int</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/importlibdistributionmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\importlibdistributionmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()):</span>
     <span class="k">return</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span> <span class="k">else</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">distributions</span><span class="p">)</span>
 </code></pre></div>
@@ -3318,7 +3318,7 @@ JsonModel            (<a class="autorefs autorefs-internal" title="prettyqt.cust
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/jsonmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\jsonmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JsonModel</span><span class="p">(</span><span class="n">custom_models</span><span class="o">.</span><span class="n">NestedModel</span><span class="p">):</span>
     <span class="n">HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Key&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="s2">&quot;Type&quot;</span><span class="p">]</span>
 
@@ -3397,7 +3397,7 @@ JsonModel            (<a class="autorefs autorefs-internal" title="prettyqt.cust
       <p>data(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex], role: int = Instance(Qt.DisplayRole)) -&gt; Any</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/jsonmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\jsonmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -3454,7 +3454,7 @@ JsonModel            (<a class="autorefs autorefs-internal" title="prettyqt.cust
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/jsonmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\jsonmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">|</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load from JSON object.</span>
 
@@ -3489,7 +3489,7 @@ JsonModel            (<a class="autorefs autorefs-internal" title="prettyqt.cust
       <p>setData(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex], value: Any, role: int = Instance(Qt.EditRole)) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/jsonmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\jsonmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">setData</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">if</span> <span class="n">role</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">EDIT_ROLE</span> <span class="ow">and</span> <span class="n">index</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
         <span class="n">item</span> <span class="o">=</span> <span class="n">index</span><span class="o">.</span><span class="n">internalPointer</span><span class="p">()</span>
@@ -3568,7 +3568,7 @@ ListMixin        </code>
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/listmixin.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\listmixin.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ListMixin</span><span class="p">:</span>
     <span class="n">remove_rows</span><span class="p">:</span> <span class="n">Callable</span>
     <span class="n">SORT_METHODS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">Callable</span><span class="p">]</span>
@@ -3681,7 +3681,7 @@ ListMixin        </code>
       <p>Append provided item to the list.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/listmixin.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\listmixin.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Append provided item to the list.&quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">add_items</span><span class="p">(</span><span class="n">items</span><span class="o">=</span><span class="p">[</span><span class="n">item</span><span class="p">],</span> <span class="n">position</span><span class="o">=</span><span class="n">position</span><span class="p">)</span>
@@ -3709,7 +3709,7 @@ ListMixin        </code>
       <p>Append a list of items to the list.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/listmixin.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\listmixin.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">add_items</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">items</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Append a list of items to the list.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">position</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -3747,7 +3747,7 @@ ListMixin        </code>
       <p>Required override for AbstractitemModels.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/listmixin.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\listmixin.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Required override for AbstractitemModels.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">)</span>
@@ -3775,7 +3775,7 @@ ListMixin        </code>
       <p>Sort table by given column number.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/listmixin.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\listmixin.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">sort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ncol</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">order</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Sort table by given column number.&quot;&quot;&quot;</span>
     <span class="n">is_asc</span> <span class="o">=</span> <span class="n">order</span> <span class="o">==</span> <span class="n">constants</span><span class="o">.</span><span class="n">ASCENDING</span>
@@ -3852,7 +3852,7 @@ ModelMixin        </code>
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/modelmixin.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\modelmixin.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ModelMixin</span><span class="p">:</span>
     <span class="n">DATA_ROLE</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span>
     <span class="n">DTYPE_ROLE</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">USER_ROLE</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># type: ignore</span>
@@ -3971,7 +3971,7 @@ ModelMixin        </code>
 <p>returns corresponding flags for cell of supplied index</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/modelmixin.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\modelmixin.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Override for AbstractitemModel base method.</span>
 
@@ -4054,7 +4054,7 @@ NestedItem        </code>
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nesteditem.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nesteditem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NestedItem</span><span class="p">:</span>
     <span class="n">item_name</span> <span class="o">=</span> <span class="s2">&quot;not_defined&quot;</span>
 
@@ -4166,7 +4166,7 @@ NestedItem        </code>
 <p>assigns dynamic vars count, level and dynamic name</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nesteditem.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nesteditem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">iter_tree</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -4238,7 +4238,7 @@ returns 0 if no parent available</p>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nesteditem.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nesteditem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">row</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return row number.</span>
 
@@ -4320,7 +4320,7 @@ NestedModel            (<a class="autorefs autorefs-internal" title="prettyqt.cu
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nestedmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nestedmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">NestedModel</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="n">custom_models</span><span class="o">.</span><span class="n">ListMixin</span><span class="p">,</span> <span class="n">custom_models</span><span class="o">.</span><span class="n">ModelMixin</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">AbstractItemModel</span>
 <span class="p">):</span>
@@ -4423,7 +4423,7 @@ NestedModel            (<a class="autorefs autorefs-internal" title="prettyqt.cu
 <p>returns corresponding flags for cell of supplied index</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nestedmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nestedmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">flags</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_FLAGS</span>
@@ -4453,7 +4453,7 @@ NestedModel            (<a class="autorefs autorefs-internal" title="prettyqt.cu
       <p>index(self, row: int, column: int, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; PySide6.QtCore.QModelIndex</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nestedmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nestedmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">hasIndex</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">column</span><span class="p">,</span> <span class="n">parent</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
@@ -4521,7 +4521,7 @@ defaults to the the top-level item</p></td>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nestedmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nestedmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">json</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Serialise model as JSON-compliant dictionary.</span>
 
@@ -4558,7 +4558,7 @@ defaults to the the top-level item</p></td>
 parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; PySide6.QtCore.QModelIndex</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nestedmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nestedmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">parent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">()</span>
@@ -4584,7 +4584,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
 
 
 <h4 id="prettyqt.custom_models.nestedmodel.NestedModel.rowCount" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x7fd705046840</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
+<code class="codehilite language-python"><span class="n">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span> <span class="o">=</span> <span class="o">&lt;</span><span class="n">PySide6</span><span class="o">.</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mh">0x0</span><span class="p">,</span><span class="n">QObject</span><span class="p">(</span><span class="mh">0x0</span><span class="p">))</span> <span class="n">at</span> <span class="mh">0x0000022E26320A80</span><span class="o">&gt;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
 
 
 </h4>
@@ -4594,7 +4594,7 @@ parent(self, child: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistent
       <p>Required override for AbstractitemModels.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/nestedmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\nestedmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="n">core</span><span class="o">.</span><span class="n">ModelIndex</span><span class="p">())</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">if</span> <span class="n">parent</span><span class="o">.</span><span class="n">column</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span>
@@ -4675,7 +4675,7 @@ RegexMatchesModel            (<span title="prettyqt.core.abstracttablemodel.Abst
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\regexmatchesmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">RegexMatchesModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">AbstractTableModel</span><span class="p">):</span>
     <span class="n">HEADER</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="s2">&quot;End&quot;</span><span class="p">,</span> <span class="s2">&quot;Value&quot;</span><span class="p">,</span> <span class="s2">&quot;Groups&quot;</span><span class="p">]</span>
 
@@ -4744,7 +4744,7 @@ RegexMatchesModel            (<span title="prettyqt.core.abstracttablemodel.Abst
       <p>columnCount(self, parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex] = Invalid(PySide6.QtCore.QModelIndex)) -&gt; int</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\regexmatchesmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">columnCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">HEADER</span><span class="p">)</span>
 </code></pre></div>
@@ -4770,7 +4770,7 @@ RegexMatchesModel            (<span title="prettyqt.core.abstracttablemodel.Abst
       <p>data(self, index: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex], role: int = Instance(Qt.DisplayRole)) -&gt; Any</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\regexmatchesmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">role</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">index</span><span class="o">.</span><span class="n">isValid</span><span class="p">():</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -4809,7 +4809,7 @@ RegexMatchesModel            (<span title="prettyqt.core.abstracttablemodel.Abst
       <p>headerData(self, section: int, orientation: PySide6.QtCore.Qt.Orientation, role: int = Instance(Qt.DisplayRole)) -&gt; Any</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\regexmatchesmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">headerData</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
     <span class="bp">self</span><span class="p">,</span> <span class="n">section</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">orientation</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">Orientation</span><span class="p">,</span> <span class="n">role</span><span class="p">:</span> <span class="nb">int</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -4839,7 +4839,7 @@ RegexMatchesModel            (<span title="prettyqt.core.abstracttablemodel.Abst
       <p>Override for AbstractitemModel base method.</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/regexmatchesmodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\regexmatchesmodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">rowCount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Override for AbstractitemModel base method.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">matches</span><span class="p">)</span>
@@ -4918,7 +4918,7 @@ SubsequenceSortFilterProxyModel            (<span title="prettyqt.core.sortfilte
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/subsequencesortfilterproxymodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\subsequencesortfilterproxymodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SubsequenceSortFilterProxyModel</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Performs subsequence matching/sorting.&quot;&quot;&quot;</span>
 
@@ -5012,7 +5012,7 @@ SubsequenceSortFilterProxyModel            (<span title="prettyqt.core.sortfilte
       <p>filterAcceptsRow(self, source_row: int, source_parent: Union[PySide6.QtCore.QModelIndex, PySide6.QtCore.QPersistentModelIndex]) -&gt; bool</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/custom_models/subsequencesortfilterproxymodel.py</code></summary>
+          <summary>Source code in <code>prettyqt\custom_models\subsequencesortfilterproxymodel.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">filterAcceptsRow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
     <span class="n">completion</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sourceModel</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="k">if</span> <span class="n">completion</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">prefix</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>

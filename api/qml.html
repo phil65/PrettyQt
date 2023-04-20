@@ -836,7 +836,7 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/jsvalue.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\jsvalue.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JSValue</span><span class="p">(</span><span class="n">QtQml</span><span class="o">.</span><span class="n">QJSValue</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
@@ -935,7 +935,7 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
       <p>Convert any python object into a QJSValue (must happen in GUI thread).</p>
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/jsvalue.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\jsvalue.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">QtQml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert any python object into a QJSValue (must happen in GUI thread).&quot;&quot;&quot;</span>
@@ -1038,7 +1038,7 @@ QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSE
 
 
         <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QmlEngineMixin</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">JSEngineMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the object ownership.</span>
@@ -1133,7 +1133,7 @@ QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSE
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return object ownership.</span>
 
@@ -1206,7 +1206,7 @@ QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSE
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>prettyqt/qml/qmlengine.py</code></summary>
+          <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the object ownership.</span>
 
