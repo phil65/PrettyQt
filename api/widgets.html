@@ -8980,7 +8980,7 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 
     <span class="k">def</span> <span class="nf">set_delegate</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
-        <span class="n">delegate</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QItemDelegate</span><span class="p">,</span>
+        <span class="n">delegate</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAbstractItemDelegate</span><span class="p">,</span>
         <span class="n">column</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">row</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">persistent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -16070,7 +16070,7 @@ DataWidgetMapper            (<span title="prettyqt.core.object.ObjectMixin">Obje
             <span class="bp">self</span><span class="o">.</span><span class="n">addMapping</span><span class="p">(</span><span class="n">widget</span><span class="p">,</span> <span class="n">section</span><span class="p">,</span> <span class="n">ba</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_mapped_property_name</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">widget</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mappedPropertyName</span><span class="p">(</span><span class="n">widget</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">mappedPropertyName</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
 </code></pre></div>
         </details>
 
@@ -26130,7 +26130,7 @@ ListWidgetItem            (<span title="PySide6.QtWidgets.QListWidgetItem">QList
 
     <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_icon</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">icon</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">IconType</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the icon for the action.</span>
@@ -28850,7 +28850,8 @@ PlainTextEditMixin            (<a class="autorefs autorefs-internal" title="pret
     <span class="k">def</span> <span class="nf">is_valid</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">is_valid_value</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">(),</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">validator</span><span class="o">.</span><span class="n">State</span><span class="o">.</span><span class="n">Acceptable</span>
 
     <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPlainText</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
@@ -36538,7 +36539,7 @@ TreeWidgetItem            (<span title="PySide6.QtWidgets.QTreeWidgetItem">QTree
 
     <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Iterator</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QTreeWidgetItem</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">childCount</span><span class="p">()))</span>
@@ -37246,7 +37247,7 @@ WidgetMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
             <span class="n">layout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">layout</span><span class="p">(),</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">)</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
             <span class="n">size_policy</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_size_policy</span><span class="p">(),</span>
             <span class="n">is_maximized</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">(),</span>
-            <span class="n">actions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">(),</span>
+            <span class="c1"># actions=self.actions(),</span>
             <span class="n">accessible_name</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">accessibleName</span><span class="p">(),</span>
             <span class="n">tool_tip</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">toolTip</span><span class="p">(),</span>
             <span class="n">tooltip_duration</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">toolTipDuration</span><span class="p">(),</span>

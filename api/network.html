@@ -1329,7 +1329,7 @@ AbstractSocketMixin            (<span title="prettyqt.core.iodevice.IODeviceMixi
             <span class="n">QtNetwork</span><span class="o">.</span><span class="n">QAbstractSocket</span><span class="o">.</span><span class="n">NetworkLayerProtocol</span> <span class="o">|</span> <span class="n">NetworkLayerProtocolStr</span>
         <span class="p">)</span> <span class="o">=</span> <span class="s2">&quot;any_ip&quot;</span><span class="p">,</span>
     <span class="p">):</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">open_mode</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QIODevice</span><span class="o">.</span><span class="n">OpenMode</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">open_mode</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QIODeviceBase</span><span class="o">.</span><span class="n">OpenMode</span><span class="p">):</span>
             <span class="n">mode</span> <span class="o">=</span> <span class="n">open_mode</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">mode</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">iodevice</span><span class="o">.</span><span class="n">OPEN_MODES</span><span class="p">[</span><span class="n">open_mode</span><span class="p">]</span>
@@ -1573,7 +1573,7 @@ HttpMultiPart            (<span title="prettyqt.core.object.ObjectMixin">ObjectM
         <span class="bp">self</span><span class="o">.</span><span class="n">setBoundary</span><span class="p">(</span><span class="n">boundary</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_boundary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">boundary</span><span class="p">())</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">boundary</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
 </code></pre></div>
         </details>
 
@@ -2443,7 +2443,7 @@ NetworkProxy            (<span title="PySide6.QtNetwork.QNetworkProxy">QNetworkP
 
     <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="n">h</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeaderList</span><span class="p">()</span>
         <span class="p">}</span>
 
@@ -2715,7 +2715,7 @@ NetworkRequest            (<span title="PySide6.QtNetwork.QNetworkRequest">QNetw
 
     <span class="k">def</span> <span class="nf">get_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
         <span class="k">return</span> <span class="p">{</span>
-            <span class="nb">bytes</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="n">h</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+            <span class="n">h</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">():</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeader</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawHeaderList</span><span class="p">()</span>
         <span class="p">}</span>
 

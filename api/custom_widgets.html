@@ -4543,7 +4543,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
 
     <span class="k">def</span> <span class="nf">_current_text_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a cursor with text between the start  and currentposition selected.&quot;&quot;&quot;</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">get_text_cursor</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">textCursor</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_position</span><span class="p">:</span>
             <span class="n">cursor</span><span class="o">.</span><span class="n">setPosition</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_start_position</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="o">.</span><span class="n">MoveMode</span><span class="o">.</span><span class="n">KeepAnchor</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">cursor</span>
@@ -4551,7 +4551,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
     <span class="k">def</span> <span class="nf">_update_current</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the current item based on the current text and the widget position.&quot;&quot;&quot;</span>
         <span class="c1"># Update widget position</span>
-        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">get_text_cursor</span><span class="p">()</span>
+        <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">textCursor</span><span class="p">()</span>
         <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_top_left_position</span><span class="p">(</span><span class="n">cursor</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="n">point</span><span class="p">)</span>
 
