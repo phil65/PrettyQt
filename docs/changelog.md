@@ -1,3 +1,16 @@
+## v1.15.0 (2023-04-20)
+
+### Feat
+
+- **Object**: add get_properties method [2fafb](https://github.com/phil65/PrettyQt/commit/2fafb5515fb1155409b503f5a400ff7a0f908773)
+- **Image**: add from/to_pil methods [eb342](https://github.com/phil65/PrettyQt/commit/eb342e965c4bc5b7929b5d0baa6b0e7910516fba)
+- **Object**: add get_dynamic_properties method [7c82b](https://github.com/phil65/PrettyQt/commit/7c82ba9191bb45197b2abae12fe717a3f401e01e)
+- **PropertyAnimation**: allow passing the qt property method directly for apply_to [1ca12](https://github.com/phil65/PrettyQt/commit/1ca12880e3883d45704a22873db6c864befecaf4)
+
+### Fix
+
+- **MetaObject**: offsets were off by 1 [cecd7](https://github.com/phil65/PrettyQt/commit/cecd70330ca0a6ee78d064056e0bb525fd3fb250)
+
 ## v1.14.3 (2023-04-20)
 
 ### Fix
