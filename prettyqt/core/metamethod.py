@@ -25,8 +25,11 @@ MethodTypeStr = Literal["method", "signal", "slot", "constructor"]
 
 
 class MetaMethod:
-    def __init__(self, metaobject: QtCore.QMetaMethod):
-        self.item = metaobject
+    def __init__(self, metamethod: QtCore.QMetaMethod):
+        self.item = metamethod
+
+    def __getattr__(self, val):
+        return getattr(self.item, val)
 
     def __bool__(self):
         return self.item.isValid()

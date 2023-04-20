@@ -4,8 +4,11 @@ from prettyqt.qt import QtCore
 
 
 class MetaEnum:
-    def __init__(self, metaobject: QtCore.QMetaEnum):
-        self.item = metaobject
+    def __init__(self, metaenum: QtCore.QMetaEnum):
+        self.item = metaenum
+
+    def __getattr__(self, val):
+        return getattr(self.item, val)
 
     def __bool__(self):
         return self.item.isValid()

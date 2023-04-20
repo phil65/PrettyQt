@@ -13,6 +13,9 @@ class MetaProperty:
     def __repr__(self):
         return f"{type(self).__name__}({self.get_name()!r})"
 
+    def __getattr__(self, val):
+        return getattr(self.item, val)
+
     def get_name(self) -> str:
         return self.item.name()  # type: ignore
 

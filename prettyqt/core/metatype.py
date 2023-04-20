@@ -125,6 +125,9 @@ class MetaType(QtCore.QMetaType):
     def __init__(self, metatype: QtCore.QMetaType):
         self.item = metatype
 
+    def __getattr__(self, val):
+        return getattr(self.item, val)
+
     def __bool__(self):
         return self.item.isValid()
 
