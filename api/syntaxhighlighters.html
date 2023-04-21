@@ -1764,7 +1764,12 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
     <span class="c1">#  &quot;QSyntaxHighlighter&quot; interface</span>
     <span class="c1"># ---------------------------------------------------------------------------</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span><span class="p">,</span> <span class="n">lexer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;default&quot;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">parent</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span><span class="p">,</span>
+        <span class="n">lexer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">Style</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_document</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_formatter</span> <span class="o">=</span> <span class="n">HtmlFormatter</span><span class="p">(</span><span class="n">nowrap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>

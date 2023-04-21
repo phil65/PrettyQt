@@ -4534,7 +4534,10 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
             <span class="bp">self</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">list_item</span><span class="p">)</span>
 
         <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
-        <span class="n">screen_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_screen</span><span class="p">()</span><span class="o">.</span><span class="n">availableGeometry</span><span class="p">()</span>
+        <span class="n">screen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_screen</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">screen</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="n">screen_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">availableGeometry</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">screen_rect</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="n">screen_rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">point</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">height</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">cursorRect</span><span class="p">()</span><span class="o">.</span><span class="n">topRight</span><span class="p">())</span>
             <span class="n">point</span><span class="o">.</span><span class="n">setY</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">height</span><span class="p">))</span>
@@ -4569,7 +4572,7 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <span class="bp">self</span><span class="o">.</span><span class="n">_current_text_cursor</span><span class="p">()</span><span class="o">.</span><span class="n">insertText</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">hide</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_current_text_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">_current_text_cursor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCursor</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a cursor with text between the start  and currentposition selected.&quot;&quot;&quot;</span>
         <span class="n">cursor</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">textCursor</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">cursor</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_start_position</span><span class="p">:</span>
@@ -4796,7 +4799,10 @@ CompletionWidget            (<span title="prettyqt.widgets.listwidget.ListWidget
         <span class="bp">self</span><span class="o">.</span><span class="n">addItem</span><span class="p">(</span><span class="n">list_item</span><span class="p">)</span>
 
     <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span>
-    <span class="n">screen_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_screen</span><span class="p">()</span><span class="o">.</span><span class="n">availableGeometry</span><span class="p">()</span>
+    <span class="n">screen</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_screen</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">screen</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="n">screen_rect</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">availableGeometry</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">screen_rect</span><span class="o">.</span><span class="n">size</span><span class="p">()</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="n">screen_rect</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">point</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">height</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">point</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text_edit</span><span class="o">.</span><span class="n">cursorRect</span><span class="p">()</span><span class="o">.</span><span class="n">topRight</span><span class="p">())</span>
         <span class="n">point</span><span class="o">.</span><span class="n">setY</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">point</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="n">height</span><span class="p">))</span>
@@ -5165,15 +5171,20 @@ ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
     <span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">elided</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text</span> <span class="o">=</span> <span class="n">text</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_size_policy</span><span class="p">(</span><span class="s2">&quot;expanding&quot;</span><span class="p">,</span> <span class="s2">&quot;preferred&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
 
     <span class="k">def</span> <span class="nf">set_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="n">text</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_text</span> <span class="o">=</span> <span class="n">text</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">get_text</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text</span>
+
+    <span class="n">text</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Property</span><span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">get_text</span><span class="p">,</span> <span class="n">set_text</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">event</span><span class="p">)</span>
@@ -5182,7 +5193,7 @@ ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
         <span class="n">did_elide</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="n">line_spacing</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">lineSpacing</span><span class="p">()</span>
         <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">layout</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">painter</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+        <span class="n">layout</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">,</span> <span class="n">painter</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
         <span class="k">with</span> <span class="n">layout</span><span class="o">.</span><span class="n">process_layout</span><span class="p">():</span>
             <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">createLine</span><span class="p">()</span>
@@ -5197,7 +5208,7 @@ ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
                     <span class="n">line</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
                     <span class="n">y</span> <span class="o">=</span> <span class="n">next_line_y</span>
                 <span class="k">else</span><span class="p">:</span>
-                    <span class="n">last_line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">textStart</span><span class="p">()</span> <span class="p">:]</span>
+                    <span class="n">last_line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">textStart</span><span class="p">()</span> <span class="p">:]</span>
                     <span class="n">elided_line</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">elided_text</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
                     <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">(),</span> <span class="n">elided_line</span><span class="p">)</span>
                     <span class="n">line</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">createLine</span><span class="p">()</span>
@@ -5218,6 +5229,8 @@ ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
 
 
   <div class="doc doc-children">
+
+
 
 
 
@@ -5253,7 +5266,7 @@ ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
     <span class="n">did_elide</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">line_spacing</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">lineSpacing</span><span class="p">()</span>
     <span class="n">y</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">layout</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">,</span> <span class="n">painter</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
+    <span class="n">layout</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextLayout</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">,</span> <span class="n">painter</span><span class="o">.</span><span class="n">font</span><span class="p">())</span>
     <span class="k">with</span> <span class="n">layout</span><span class="o">.</span><span class="n">process_layout</span><span class="p">():</span>
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="n">line</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">createLine</span><span class="p">()</span>
@@ -5268,7 +5281,7 @@ ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
                 <span class="n">line</span><span class="o">.</span><span class="n">draw</span><span class="p">(</span><span class="n">painter</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
                 <span class="n">y</span> <span class="o">=</span> <span class="n">next_line_y</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">last_line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">content</span><span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">textStart</span><span class="p">()</span> <span class="p">:]</span>
+                <span class="n">last_line</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_text</span><span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">textStart</span><span class="p">()</span> <span class="p">:]</span>
                 <span class="n">elided_line</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">elided_text</span><span class="p">(</span><span class="n">last_line</span><span class="p">,</span> <span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
                 <span class="n">painter</span><span class="o">.</span><span class="n">drawText</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">y</span> <span class="o">+</span> <span class="n">metrics</span><span class="o">.</span><span class="n">ascent</span><span class="p">(),</span> <span class="n">elided_line</span><span class="p">)</span>
                 <span class="n">line</span> <span class="o">=</span> <span class="n">layout</span><span class="o">.</span><span class="n">createLine</span><span class="p">()</span>
@@ -7066,8 +7079,8 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="mi">200</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setCheckable</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFixedWidth</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setFixedHeight</span><span class="p">(</span><span class="mi">50</span><span class="p">)</span>
 
@@ -7078,11 +7091,11 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
 
     <span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
         <span class="n">dif</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">press_pos</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">dif</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="o">-</span><span class="n">dif</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">((</span><span class="n">dif</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="o">-</span><span class="n">dif</span><span class="o">.</span><span class="n">y</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">wheelEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
         <span class="n">ev</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
@@ -7090,27 +7103,26 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
     <span class="k">def</span> <span class="nf">doubleClickEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
         <span class="n">ev</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span>
+    <span class="k">def</span> <span class="nf">get_state</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span>
 
-    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
-        <span class="n">xy</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">hypot</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># length</span>
-        <span class="n">nxy</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]:</span>
-            <span class="n">nxy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span> <span class="k">if</span> <span class="n">xy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">xy</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="n">d</span>
+    <span class="k">def</span> <span class="nf">set_state</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+        <span class="n">d</span> <span class="o">=</span> <span class="n">hypot</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># length</span>
+        <span class="n">nxy</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">i</span> <span class="o">/</span> <span class="n">d</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">state</span><span class="p">]</span>
         <span class="n">d</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span>
         <span class="n">d</span> <span class="o">=</span> <span class="p">(</span><span class="n">d</span> <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
-        <span class="n">xy</span> <span class="o">=</span> <span class="p">[</span><span class="n">nxy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">nxy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">]</span>
+        <span class="n">state</span> <span class="o">=</span> <span class="p">(</span><span class="n">nxy</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">,</span> <span class="n">nxy</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">d</span><span class="p">)</span>
 
         <span class="n">w2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
         <span class="n">h2</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">spot_pos</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">w2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">xy</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="nb">int</span><span class="p">(</span><span class="n">h2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">xy</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">spot_pos</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Point</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">w2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">state</span><span class="p">[</span><span class="mi">0</span><span class="p">])),</span> <span class="nb">int</span><span class="p">(</span><span class="n">h2</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">state</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">==</span> <span class="n">xy</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">==</span> <span class="n">state</span><span class="p">:</span>
             <span class="k">return</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state</span> <span class="o">=</span> <span class="n">xy</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">state_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_state</span> <span class="o">=</span> <span class="n">state</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
+
+    <span class="n">state</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Property</span><span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="n">get_state</span><span class="p">,</span> <span class="n">set_state</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">paintEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">paintEvent</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span>
@@ -7119,7 +7131,7 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
         <span class="n">p</span><span class="o">.</span><span class="n">drawEllipse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">spot_pos</span><span class="o">.</span><span class="n">x</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">spot_pos</span><span class="o">.</span><span class="n">y</span><span class="p">()</span> <span class="o">-</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -7127,6 +7139,7 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -7158,7 +7171,7 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
           <summary>Source code in <code>prettyqt\custom_widgets\joystickbutton.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mouseMoveEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
     <span class="n">dif</span> <span class="o">=</span> <span class="n">ev</span><span class="o">.</span><span class="n">position</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">press_pos</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="n">dif</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="o">-</span><span class="n">dif</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">((</span><span class="n">dif</span><span class="o">.</span><span class="n">x</span><span class="p">(),</span> <span class="o">-</span><span class="n">dif</span><span class="o">.</span><span class="n">y</span><span class="p">()))</span>
 </code></pre></div>
         </details>
     </div>
@@ -7213,7 +7226,7 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
           <summary>Source code in <code>prettyqt\custom_widgets\joystickbutton.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">mouseReleaseEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setChecked</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
 </code></pre></div>
         </details>
     </div>
@@ -7268,7 +7281,7 @@ JoystickButton            (<span title="prettyqt.widgets.pushbutton.PushButton">
         <details class="quote">
           <summary>Source code in <code>prettyqt\custom_widgets\joystickbutton.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">resizeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ev</span><span class="p">):</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="p">)</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">set_state</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_state</span><span class="p">)</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">resizeEvent</span><span class="p">(</span><span class="n">ev</span><span class="p">)</span>
 </code></pre></div>
         </details>
