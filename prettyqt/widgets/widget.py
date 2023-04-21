@@ -576,6 +576,9 @@ class WidgetMixin(core.ObjectMixin):
             else:
                 self.delete_children(item.layout())
 
+    def get_cursor(self) -> gui.Cursor:
+        return gui.Cursor(self.cursor())
+
 
 class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     pass
