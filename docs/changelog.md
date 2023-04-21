@@ -1,3 +1,16 @@
+## v1.18.0 (2023-04-21)
+
+### Feat
+
+- **ScrollerMetrics**: add get_scroll_metrics method + bit dict interface [838d6](https://github.com/phil65/PrettyQt/commit/838d650bb10de97ed32b4084d1e5a1d005b2c664)
+- **WebEngineSettings**: more dict interface [903d7](https://github.com/phil65/PrettyQt/commit/903d78632c98b3b7812cfd82aacc0b86ab6fd5a9)
+- **GuiApplication**: add set_badge_number method [57e9b](https://github.com/phil65/PrettyQt/commit/57e9b9e41687c969890c79d54f3bd7e59dd7c204)
+
+### Fix
+
+- make sure to correctly set parent for actions added to menus [8ea43](https://github.com/phil65/PrettyQt/commit/8ea4384d81e27a610604d441f14b765b5f333f80)
+- **HeaderView**: context menu fix [c71c2](https://github.com/phil65/PrettyQt/commit/c71c2d744d842e39c011b88d203ff1b74c332ab5)
+
 ## v1.17.0 (2023-04-21)
 
 ### Feat
