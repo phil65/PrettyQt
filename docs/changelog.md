@@ -1,3 +1,14 @@
+## v1.16.0 (2023-04-21)
+
+### Feat
+
+- **AbstractItemView**: add get_horizontal/vertical/scroll_mode methods [bf664](https://github.com/phil65/PrettyQt/commit/bf664c4e9a4fcbe8830102f3272f19f620cc0d13)
+- **AbstractItemView**: added model_changed signal [79b24](https://github.com/phil65/PrettyQt/commit/79b24d8ace40f8d473f04a5db674a8ceb62f7efc)
+- **Scroller**: add grabbed_gesture method [c3041](https://github.com/phil65/PrettyQt/commit/c3041897be61300fd598ab2b0cb88ecd0395b5bd)
+- add pdf and pdfwidgets modules [de15b](https://github.com/phil65/PrettyQt/commit/de15b89a950d5510b15606269683e32bbc4bd8ea)
+- **MetaProperty**: add get_meta_type method [9242c](https://github.com/phil65/PrettyQt/commit/9242c01cc13f616fed257dda14f41eba4e214eb8)
+- **GeoPolygon**: add get_hole_path / get_perimeter methods [8910a](https://github.com/phil65/PrettyQt/commit/8910a22fb995f1a931faae8b3971d65ec9fb49e7)
+
 ## v1.15.1 (2023-04-20)
 
 ### Fix
