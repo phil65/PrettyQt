@@ -89,6 +89,10 @@ class Scroller(core.ObjectMixin):
             gesture -= 256
         return constants.GESTURE_TYPE.inverse[gesture]
 
+    @staticmethod
+    def grabbed_gesture(target: QtCore.QObject) -> constants.GestureTypeStr:
+        return constants.GESTURE_TYPE.inverse[QtWidgets.QScroller.grabbedGesture(target)]
+
 
 if __name__ == "__main__":
     app = widgets.app()
