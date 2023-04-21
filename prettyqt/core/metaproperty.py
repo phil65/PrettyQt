@@ -19,6 +19,9 @@ class MetaProperty:
     def get_name(self) -> str:
         return self.item.name()  # type: ignore
 
+    def get_meta_type(self) -> core.MetaType:
+        return core.MetaType(self.metaType().id())
+
 
 if __name__ == "__main__":
     from prettyqt import core
