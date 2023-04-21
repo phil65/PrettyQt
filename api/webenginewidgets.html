@@ -390,6 +390,34 @@
   
   
     <li class="md-nav__item">
+      <a href="pdf.html" class="md-nav__link">
+        pdf
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pdfwidgets.html" class="md-nav__link">
+        pdfwidgets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="positioning.html" class="md-nav__link">
         positioning
       </a>
@@ -850,7 +878,7 @@ WebEngineView            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
 
@@ -915,8 +943,13 @@ WebEngineView            (<a class="autorefs autorefs-internal" title="prettyqt.
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">tabwidget</span><span class="o">.</span><span class="n">add_tab</span><span class="p">(</span><span class="n">webview</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">show</span><span class="o">=</span><span class="n">autoraise</span><span class="p">)</span>
 
-
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="s2">&quot;BuiltInBrowser&quot;</span><span class="p">,</span> <span class="n">BuiltInBrowser</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">last_context_menu_request</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineContextMenuRequest</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lastContextMenuRequest</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineContextMenuRequest</span><span class="p">(</span><span class="n">req</span><span class="p">)</span> <span class="k">if</span> <span class="n">req</span> <span class="k">else</span> <span class="kc">None</span>
 </code></pre></div>
         </details>
 
@@ -938,7 +971,7 @@ WebEngineView            (<a class="autorefs autorefs-internal" title="prettyqt.
 
 
 <h4 id="prettyqt.webenginewidgets.webengineview.WebEngineView.find_text" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">find_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+<code class="codehilite language-python"><span class="n">find_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 
 </h4>
@@ -988,7 +1021,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
       </tr>
       <tr>
         <td><code>callback</code></td>
-        <td><code>Callable[[bool], None]</code></td>
+        <td><code>Callable[[bool], None] | None</code></td>
         <td><p>result callback</p></td>
         <td><code>None</code></td>
       </tr>
@@ -1001,7 +1034,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Find text in the current page.</span>
 
@@ -1042,6 +1075,7 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
     </div>
 
   </div>
+
 
 
 

@@ -390,6 +390,34 @@
   
   
     <li class="md-nav__item">
+      <a href="pdf.html" class="md-nav__link">
+        pdf
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="pdfwidgets.html" class="md-nav__link">
+        pdfwidgets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="positioning.html" class="md-nav__link">
         positioning
       </a>
@@ -613,6 +641,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_horizontal_scroll_mode" class="md-nav__link">
+    get_horizontal_scroll_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_selection_behaviour" class="md-nav__link">
     get_selection_behaviour()
   </a>
@@ -622,6 +657,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_selection_mode" class="md-nav__link">
     get_selection_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_vertical_scroll_mode" class="md-nav__link">
+    get_vertical_scroll_mode()
   </a>
   
 </li>
@@ -4631,6 +4673,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_horizontal_scroll_mode" class="md-nav__link">
+    get_horizontal_scroll_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_selection_behaviour" class="md-nav__link">
     get_selection_behaviour()
   </a>
@@ -4640,6 +4689,13 @@
           <li class="md-nav__item">
   <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_selection_mode" class="md-nav__link">
     get_selection_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_vertical_scroll_mode" class="md-nav__link">
+    get_vertical_scroll_mode()
   </a>
   
 </li>
@@ -8953,6 +9009,8 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
         <details class="quote">
           <summary>Source code in <code>prettyqt\widgets\abstractitemview.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">AbstractItemViewMixin</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">AbstractScrollAreaMixin</span><span class="p">):</span>
+    <span class="n">model_changed</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">(</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">)</span>
+
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span> <span class="k">if</span> <span class="p">(</span><span class="n">model</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">())</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="mi">0</span>
 
@@ -8971,6 +9029,7 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
         <span class="n">old_sel_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">old_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">model_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
         <span class="c1"># if old_model:</span>
         <span class="c1">#     old_model.deleteLater()</span>
         <span class="c1">#     del old_model</span>
@@ -8990,7 +9049,8 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
             <span class="k">if</span> <span class="n">persistent</span><span class="p">:</span>
                 <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()):</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">openPersistentEditor</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">column</span><span class="p">))</span>
+                    <span class="n">index</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">column</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">openPersistentEditor</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">row</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setItemDelegateForRow</span><span class="p">(</span><span class="n">row</span><span class="p">,</span> <span class="n">delegate</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">persistent</span><span class="p">:</span>
@@ -9159,6 +9219,14 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLL_MODE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setHorizontalScrollMode</span><span class="p">(</span><span class="n">SCROLL_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
 
+    <span class="k">def</span> <span class="nf">get_horizontal_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScrollModeStr</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current horizontal scroll mode.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            horizontal scroll mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SCROLL_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">horizontalScrollMode</span><span class="p">()]</span>
+
     <span class="k">def</span> <span class="nf">set_vertical_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ScrollModeStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the vertical scroll mode.</span>
 
@@ -9171,6 +9239,14 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
         <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLL_MODE</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">SCROLL_MODE</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setVerticalScrollMode</span><span class="p">(</span><span class="n">SCROLL_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_vertical_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScrollModeStr</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current vertical scroll mode.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            vertical scroll mode</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SCROLL_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">verticalScrollMode</span><span class="p">()]</span>
 
     <span class="k">def</span> <span class="nf">num_selected</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return amount of selected rows.</span>
@@ -9243,6 +9319,7 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 
 
 
+
   <div class="doc doc-object doc-method">
 
 
@@ -9287,6 +9364,52 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 
   </div>
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_horizontal_scroll_mode" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_horizontal_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScrollModeStr</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return current horizontal scroll mode.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ScrollModeStr</code></td>
+      <td><p>horizontal scroll mode</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt\widgets\abstractitemview.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_horizontal_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScrollModeStr</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current horizontal scroll mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        horizontal scroll mode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">SCROLL_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">horizontalScrollMode</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
@@ -9374,6 +9497,52 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
 <span class="sd">        selection mode</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">SELECTION_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">selectionMode</span><span class="p">()]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.widgets.abstractitemview.AbstractItemViewMixin.get_vertical_scroll_mode" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_vertical_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScrollModeStr</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return current vertical scroll mode.</p>
+
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>ScrollModeStr</code></td>
+      <td><p>vertical scroll mode</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>prettyqt\widgets\abstractitemview.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_vertical_scroll_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ScrollModeStr</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current vertical scroll mode.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        vertical scroll mode</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">SCROLL_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">verticalScrollMode</span><span class="p">()]</span>
 </code></pre></div>
         </details>
     </div>
@@ -9878,6 +10047,7 @@ AbstractItemViewMixin            (<a class="autorefs autorefs-internal" title="p
     <span class="n">old_sel_model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">selectionModel</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">old_model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">model</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setModel</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
     <span class="c1"># if old_model:</span>
     <span class="c1">#     old_model.deleteLater()</span>
     <span class="c1">#     del old_model</span>
@@ -11867,7 +12037,7 @@ AbstractSpinBoxMixin            (<a class="autorefs autorefs-internal" title="pr
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setValue</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -12458,7 +12628,7 @@ ActionMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
         <span class="k">try</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">setMenu</span><span class="p">(</span><span class="n">menu</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">triggered</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">menu</span><span class="o">.</span><span class="n">exec</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_menu</span> <span class="o">=</span> <span class="n">menu</span>
 
     <span class="k">def</span> <span class="nf">menu</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -13341,7 +13511,7 @@ ApplicationMixin            (<a class="autorefs autorefs-internal" title="pretty
             <span class="n">buttons</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ok&quot;</span><span class="p">],</span>
         <span class="p">)</span>
         <span class="n">popup</span><span class="o">.</span><span class="n">set_icon</span><span class="p">(</span><span class="s2">&quot;mdi.information-outline&quot;</span><span class="p">)</span>
-        <span class="n">popup</span><span class="o">.</span><span class="n">exec_</span><span class="p">()</span>
+        <span class="n">popup</span><span class="o">.</span><span class="n">exec</span><span class="p">()</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_mainwindow</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMainWindow</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
@@ -22416,7 +22586,7 @@ HeaderViewMixin            (<a class="autorefs autorefs-internal" title="prettyq
         <span class="n">menu</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header_actions</span><span class="p">()</span>
         <span class="n">menu</span><span class="o">.</span><span class="n">add_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="n">menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()))</span>
+        <span class="n">menu</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">get_header_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">]:</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
@@ -22485,7 +22655,7 @@ HeaderViewMixin            (<a class="autorefs autorefs-internal" title="prettyq
     <span class="n">menu</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
     <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header_actions</span><span class="p">()</span>
     <span class="n">menu</span><span class="o">.</span><span class="n">add_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-    <span class="n">menu</span><span class="o">.</span><span class="n">exec_</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()))</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()))</span>
 </code></pre></div>
         </details>
     </div>
@@ -30057,7 +30227,7 @@ Scroller            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
     <span class="nd">@staticmethod</span>
     <span class="k">def</span> <span class="nf">grab_gesture</span><span class="p">(</span>
         <span class="n">target</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">gesture_type</span><span class="p">:</span> <span class="n">ScrollGestureTypeStr</span> <span class="o">=</span> <span class="s2">&quot;touch&quot;</span>
-    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">GestureTypeStr</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">gesture_type</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLLER_GESTURE_TYPE</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">gesture_type</span><span class="p">,</span> <span class="n">SCROLLER_GESTURE_TYPE</span><span class="p">)</span>
         <span class="n">gesture</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QScroller</span><span class="o">.</span><span class="n">grabGesture</span><span class="p">(</span>
@@ -30066,6 +30236,10 @@ Scroller            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
         <span class="k">if</span> <span class="n">gesture</span> <span class="o">&gt;=</span> <span class="mi">256</span><span class="p">:</span>
             <span class="n">gesture</span> <span class="o">-=</span> <span class="mi">256</span>
         <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">GESTURE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">gesture</span><span class="p">]</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">grabbed_gesture</span><span class="p">(</span><span class="n">target</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">constants</span><span class="o">.</span><span class="n">GestureTypeStr</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">constants</span><span class="o">.</span><span class="n">GESTURE_TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QScroller</span><span class="o">.</span><span class="n">grabbedGesture</span><span class="p">(</span><span class="n">target</span><span class="p">)]</span>
 </code></pre></div>
         </details>
 
@@ -30130,6 +30304,7 @@ Scroller            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin<
     </div>
 
   </div>
+
 
 
 
