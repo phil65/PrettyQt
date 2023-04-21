@@ -39,7 +39,7 @@ def test_helpfilterdata():
 
 
 def test_helpsearchresultwidget():
-    core_engine = qthelp.HelpEngineCore("test")
+    core_engine = qthelp.HelpEngineCore("")
     engine = qthelp.HelpSearchEngine(core_engine)
     widget = engine.get_result_widget()
     widget.get_link_at(core.Point(1, 1))
@@ -51,7 +51,7 @@ def test_helpsearchquerywidget():
 
 
 def test_helpfilterengine():
-    core_engine = qthelp.HelpEngineCore("test")
+    core_engine = qthelp.HelpEngineCore("")
     engine = core_engine.get_filter_engine()
     engine.get_available_versions()
 
