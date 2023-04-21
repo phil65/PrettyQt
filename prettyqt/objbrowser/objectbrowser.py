@@ -147,13 +147,14 @@ class ObjectBrowser(widgets.MainWindow):
         menubar = self.menuBar()
         file_menu = menubar.add_menu("&File")
         close_action = widgets.Action(
-            text="C&lose", callback=self.close, shortcut="Ctrl+W"
+            text="C&lose", callback=self.close, shortcut="Ctrl+W", parent=file_menu
         )
         file_menu.addAction(close_action)
         exit_action = widgets.Action(
             text="E&xit",
             callback=lambda: widgets.app().closeAllWindows(),
             shortcut="Ctrl+Q",
+            parent=file_menu,
         )
         file_menu.addAction(exit_action)
 

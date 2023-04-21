@@ -127,6 +127,8 @@ class MenuMixin(widgets.WidgetMixin):
         return action
 
     def add_actions(self, actions: list[QtWidgets.QAction]):
+        for i in actions:
+            i.setParent(self)
         self.addActions(actions)
 
     def add_menu(self, menu: QtWidgets.QMenu) -> QtWidgets.QAction:
