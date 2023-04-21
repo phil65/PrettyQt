@@ -13,8 +13,8 @@ class JoystickButton(widgets.PushButton):
         super().__init__(parent)
         self.radius = 200
         self.setCheckable(True)
-        self.state = [0, 0]
-        self.set_state(0, 0)
+        self._state = (0.0, 0.0)
+        self.set_state((0, 0))
         self.setFixedWidth(50)
         self.setFixedHeight(50)
 
@@ -25,11 +25,11 @@ class JoystickButton(widgets.PushButton):
 
     def mouseMoveEvent(self, ev):
         dif = ev.position() - self.press_pos
-        self.set_state(dif.x(), -dif.y())
+        self.set_state((dif.x(), -dif.y()))
 
     def mouseReleaseEvent(self, ev):
         self.setChecked(False)
-        self.set_state(0, 0)
+        self.set_state((0, 0))
 
     def wheelEvent(self, ev):
         ev.accept()
@@ -37,27 +37,26 @@ class JoystickButton(widgets.PushButton):
     def doubleClickEvent(self, ev):
         ev.accept()
 
-    def get_state(self):
-        return self.state
+    def get_state(self) -> tuple[float, float]:
+        return self._state
 
-    def set_state(self, x, y):
-        xy = [x, y]
-        d = hypot(xy[0], xy[1])  # length
-        nxy = [0, 0]
-        for i in [0, 1]:
-            nxy[i] = 0 if xy[i] == 0 else xy[i] / d
+    def set_state(self, state: tuple[float, float]):
+        d = hypot(state[0], state[1])  # length
+        nxy = [0 if i == 0 else i / d for i in state]
         d = min(d, self.radius)
         d = (d / self.radius) ** 2
-        xy = [nxy[0] * d, nxy[1] * d]
+        state = (nxy[0] * d, nxy[1] * d)
 
         w2 = self.width() / 2
         h2 = self.height() / 2
-        self.spot_pos = core.Point(int(w2 * (1 + xy[0])), int(h2 * (1 - xy[1])))
+        self.spot_pos = core.Point(int(w2 * (1 + state[0])), int(h2 * (1 - state[1])))
         self.update()
-        if self.state == xy:
+        if self._state == state:
             return
-        self.state = xy
-        self.state_changed.emit(self.state)
+        self._state = state
+        self.state_changed.emit(self._state)
+
+    state = core.Property(tuple, get_state, set_state)
 
     def paintEvent(self, ev):
         super().paintEvent(ev)
@@ -66,7 +65,7 @@ class JoystickButton(widgets.PushButton):
         p.drawEllipse(self.spot_pos.x() - 3, self.spot_pos.y() - 3, 6, 6)
 
     def resizeEvent(self, ev):
-        self.set_state(*self.state)
+        self.set_state(self._state)
         super().resizeEvent(ev)
 
 
