@@ -51,7 +51,7 @@ MANEUVER_DETAIL = bidict(
 ManeuverDetailStr = Literal["none", "basic"]
 
 ROUTE_OPTIMIZATION = mappers.FlagMap(
-    QtLocation.QGeoRouteRequest.RouteOptimization.RouteOptimizations,
+    QtLocation.QGeoRouteRequest.RouteOptimization,
     shortest=QtLocation.QGeoRouteRequest.RouteOptimization.ShortestRoute,
     fastest=QtLocation.QGeoRouteRequest.RouteOptimization.FastestRoute,
     most_economic=QtLocation.QGeoRouteRequest.RouteOptimization.MostEconomicRoute,

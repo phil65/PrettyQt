@@ -154,7 +154,12 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     #  "QSyntaxHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def __init__(self, parent: QtGui.QTextDocument, lexer: str, style: str = "default"):
+    def __init__(
+        self,
+        parent: QtGui.QTextDocument,
+        lexer: str,
+        style: None | StyleStr | Style = None,
+    ):
         super().__init__(parent)
         self._document = self.document()
         self._formatter = HtmlFormatter(nowrap=True)

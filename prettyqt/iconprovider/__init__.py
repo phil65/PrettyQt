@@ -8,7 +8,7 @@ from dataclasses import dataclass
 import json
 import os
 import pathlib
-from typing import Optional
+from typing import Optional, Literal, overload
 
 from prettyqt.qt import QtGui
 
@@ -80,10 +80,7 @@ def _instance() -> IconicFont:
     Functions ``icon``, ``load_font``, ``charmap``, ``font`` and
     ``set_defaults`` all rebind to methods of the singleton instance of IconicFont.
     """
-    if (
-        _resource["iconic"] is not None
-        and _resource["iconic"].has_valid_font_ids()
-    ):
+    if _resource["iconic"] is not None and _resource["iconic"].has_valid_font_ids():
         return _resource["iconic"]
     FontAwesome5 = IconFont(
         prefix="fa5",
@@ -282,6 +279,20 @@ def set_defaults(**kwargs):
 
     """
     return set_global_defaults(**kwargs)
+
+
+@overload
+def get_icon(
+    icon: datatypes.IconType, color: str | None = None, as_qicon: Literal[False] = False
+) -> gui.Icon:
+    ...
+
+
+@overload
+def get_icon(
+    icon: datatypes.IconType, color: str | None = None, as_qicon: Literal[True] = False
+) -> QtGui.QIcon:
+    ...
 
 
 def get_icon(

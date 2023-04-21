@@ -44,15 +44,15 @@ class SearchAndReplaceMixin:
             # need to be initialized in __init__()
             self.search_flags = gui.TextDocument.FindFlag(0)
             if "b" in flagstr:
-                self.search_flags |= gui.TextDocument.FindBackward
+                self.search_flags |= gui.TextDocument.FindFlag.FindBackward
             if "i" not in flagstr:
-                self.search_flags |= gui.TextDocument.FindCaseSensitively
+                self.search_flags |= gui.TextDocument.FindFlag.FindCaseSensitively
             if "w" in flagstr:
-                self.search_flags |= gui.TextDocument.FindWholeWords
+                self.search_flags |= gui.TextDocument.FindFlag.FindWholeWords
 
         if search_match := SEARCH_REGEX.match(arg):
             self.search_buffer = search_match[0]
-            self.search_flags = gui.TextDocument.FindCaseSensitively
+            self.search_flags = gui.TextDocument.FindFlag.FindCaseSensitively
             self.search_next()
         elif search_flags_match := SEARCH_FLAGS_REGEX.match(arg):
             self.search_buffer, flags = search_flags_match[0].rsplit("/", 1)
@@ -69,7 +69,7 @@ class SearchAndReplaceMixin:
             logger.error("Malformed search/replace expression")
 
     def _searching_backwards(self) -> bool:
-        return bool(gui.TextDocument.FindBackward & self.search_flags)
+        return bool(gui.TextDocument.FindFlag.FindBackward & self.search_flags)
 
     def search_next(self) -> None:
         """Go to the next string found.

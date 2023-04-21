@@ -8,8 +8,8 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 TRANSITION_TYPE = bidict(
-    exclusive=QtStateMachine.QAbstractTransition.ExternalTransition,
-    parallel=QtStateMachine.QAbstractTransition.InternalTransition,
+    exclusive=QtStateMachine.QAbstractTransition.TransitionType.ExternalTransition,
+    parallel=QtStateMachine.QAbstractTransition.TransitionType.InternalTransition,
 )
 
 TransitionTypeStr = Literal["exclusive", "parallel"]
