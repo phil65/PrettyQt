@@ -1,3 +1,15 @@
+## v1.17.0 (2023-04-21)
+
+### Feat
+
+- **Image**: add to_ndarray method [ea556](https://github.com/phil65/PrettyQt/commit/ea556d1c6acc980930b5f6c17ae818451f9f9fd7)
+- **Widget**: add get_cursor method [4dc77](https://github.com/phil65/PrettyQt/commit/4dc77ed75cf4fb61726a02d6d18563aa6dad890c)
+- **Image**: add convert_to_format method [f36f1](https://github.com/phil65/PrettyQt/commit/f36f1355c73eed635f13cd833595b99527019909)
+
+### Fix
+
+- **ImportlibDistributionModel**: avoid duplicates in requirements [d27d2](https://github.com/phil65/PrettyQt/commit/d27d2642d4b320eaa9dccddd091eb4f3ff36f6c0)
+
 ## v1.16.0 (2023-04-21)
 
 ### Feat
