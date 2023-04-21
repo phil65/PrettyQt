@@ -37,9 +37,9 @@ class ExpandableLine(widgets.Widget):
         # self.content_area.setMinimumHeight(0)
 
         self.toggle_anim = core.ParallelAnimationGroup()
-        self.toggle_anim.add_property_animation(self, "minimumHeight")
-        self.toggle_anim.add_property_animation(self, "maximumHeight")
-        self.toggle_anim.add_property_animation(self.content_area, "maximumHeight")
+        self.toggle_anim.add_property_animation(self.minimumHeight)
+        self.toggle_anim.add_property_animation(self.maximumHeight)
+        self.toggle_anim.add_property_animation(self.content_area.maximumHeight)
         base_layout = widgets.GridLayout()
         base_layout.setVerticalSpacing(0)
         base_layout.set_margin(0)

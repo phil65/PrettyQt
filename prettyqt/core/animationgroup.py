@@ -1,10 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import overload
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
 
 
 class AnimationGroupMixin(core.AbstractAnimationMixin):
@@ -46,14 +46,9 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
         self.addAnimation(other)
         return self
 
-    def add_property_animation(
-        self, obj: QtCore.QObject, attribute: datatypes.ByteArrayType
-    ) -> core.PropertyAnimation:
-        if isinstance(attribute, str):
-            attribute = attribute.encode()
-        if isinstance(attribute, bytes):
-            attribute = QtCore.QByteArray(attribute)
-        anim = core.PropertyAnimation(obj, attribute)
+    def add_property_animation(self, obj: Callable) -> core.PropertyAnimation:
+        anim = core.PropertyAnimation()
+        anim.apply_to(obj)
         self.addAnimation(anim)
         return anim
 
