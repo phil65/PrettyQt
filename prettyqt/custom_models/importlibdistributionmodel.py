@@ -23,7 +23,7 @@ def list_system_modules() -> list[metadata.Distribution]:
 
 def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     dist = metadata.distribution(package_name)
-    modules = (i.split(" ")[0] for i in dist.requires) if dist.requires else []
+    modules = {i.split(" ")[0] for i in dist.requires} if dist.requires else set()
     distributions = (load_dist_info(i) for i in modules)
     return [i for i in distributions if i is not None]
 
