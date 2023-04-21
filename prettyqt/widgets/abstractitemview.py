@@ -276,6 +276,14 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             raise InvalidParamError(mode, SCROLL_MODE)
         self.setHorizontalScrollMode(SCROLL_MODE[mode])
 
+    def get_horizontal_scroll_mode(self) -> ScrollModeStr:
+        """Return current horizontal scroll mode.
+
+        Returns:
+            horizontal scroll mode
+        """
+        return SCROLL_MODE.inverse[self.horizontalScrollMode()]
+
     def set_vertical_scroll_mode(self, mode: ScrollModeStr):
         """Set the vertical scroll mode.
 
@@ -288,6 +296,14 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         if mode not in SCROLL_MODE:
             raise InvalidParamError(mode, SCROLL_MODE)
         self.setVerticalScrollMode(SCROLL_MODE[mode])
+
+    def get_vertical_scroll_mode(self) -> ScrollModeStr:
+        """Return current vertical scroll mode.
+
+        Returns:
+            vertical scroll mode
+        """
+        return SCROLL_MODE.inverse[self.verticalScrollMode()]
 
     def num_selected(self) -> int:
         """Return amount of selected rows.
