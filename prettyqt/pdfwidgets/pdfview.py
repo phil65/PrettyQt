@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import os
 from typing import Literal
 
 from prettyqt import core, pdf, widgets
 from prettyqt.qt import QtPdfWidgets, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 PAGE_MODE = bidict(
@@ -37,6 +38,11 @@ class PdfView(widgets.AbstractScrollAreaMixin, QtPdfWidgets.QPdfView):
 
     def get_document_margins(self) -> core.Margins:
         return core.Margins(self.documentMargins())
+
+    def set_file(self, path: datatypes.PathType):
+        doc = pdf.PdfDocument(self)
+        doc.load(os.fspath(path))
+        self.setDocument(doc)
 
     def set_page_mode(self, mode: PageModeStr):
         """Set the page mode.
