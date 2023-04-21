@@ -79,7 +79,7 @@ class Scroller(core.ObjectMixin):
     @staticmethod
     def grab_gesture(
         target: QtCore.QObject, gesture_type: ScrollGestureTypeStr = "touch"
-    ) -> str:
+    ) -> constants.GestureTypeStr:
         if gesture_type not in SCROLLER_GESTURE_TYPE:
             raise InvalidParamError(gesture_type, SCROLLER_GESTURE_TYPE)
         gesture = QtWidgets.QScroller.grabGesture(
