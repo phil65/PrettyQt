@@ -3,6 +3,7 @@
 contains QtHelp-based classes
 """
 
+from .helplink import HelpLink
 from .helpindexmodel import HelpIndexModel
 from .helpfilterdata import HelpFilterData
 from .helpcontentitem import HelpContentItem
@@ -18,6 +19,7 @@ from .helpsearchengine import HelpSearchEngine
 from .helpfilterengine import HelpFilterEngine
 
 __all__ = [
+    "HelpLink",
     "HelpIndexModel",
     "HelpFilterData",
     "HelpContentItem",

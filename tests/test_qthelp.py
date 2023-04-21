@@ -2,9 +2,6 @@
 
 # import pytest
 
-import pytest
-
-import prettyqt
 from prettyqt import core, qthelp
 from prettyqt.qt import QtHelp
 
@@ -12,9 +9,9 @@ from prettyqt.qt import QtHelp
 # from prettyqt.utils import InvalidParamError
 
 
-@pytest.mark.skipif(prettyqt.qt.API.endswith("6"), reason="Only supported in Qt5")
 def test_helplink():
-    link = qthelp.HelpLink()
+    qtlink = QtHelp.QHelpLink()
+    link = qthelp.HelpLink(qtlink)
     link.get_url()
 
 
