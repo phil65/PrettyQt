@@ -205,7 +205,11 @@ class Notification(widgets.Widget):
 
         self.setGraphicsEffect(self.opacity_effect)
         self.fade_out_anim.setDuration(duration)
-        self.fade_out_anim.finished.connect(lambda: finished_callback(self))
+
+        def fn():
+            finished_callback(self)
+
+        self.fade_out_anim.finished.connect(fn)
         self.is_being_removed = True
         self.fade_out_anim.start()
 
