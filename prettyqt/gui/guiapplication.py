@@ -159,6 +159,9 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
     def get_palette(cls) -> gui.Palette:
         return gui.Palette(cls.palette())
 
+    def set_badge_number(self, number: int | None):
+        self.setBadgeNumber(number or 0)
+
 
 class GuiApplication(GuiApplicationMixin, QtGui.QGuiApplication):
     pass
