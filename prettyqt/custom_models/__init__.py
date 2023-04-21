@@ -4,9 +4,9 @@ Contains custom models
 """
 
 from .selectionmixin import SelectionMixin
-from .importlibdistributionmodel import ImportlibDistributionModel
 from .regexmatchesmodel import RegexMatchesModel
 from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
+from .importlibdistributionmodel import ImportlibDistributionModel
 from .listmixin import ListMixin
 from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
