@@ -4,7 +4,7 @@ from collections.abc import Generator
 import logging
 from typing import Any, Literal
 
-from prettyqt import constants, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
 
@@ -66,6 +66,8 @@ DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]
 
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
+    model_changed = core.Signal(QtCore.QAbstractItemModel)
+
     def __len__(self) -> int:
         return model.rowCount() if (model := self.model()) is not None else 0
 
@@ -84,6 +86,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
             self.setModel(model)  # type: ignore
+            self.model_changed.emit(model)
         # if old_model:
         #     old_model.deleteLater()
         #     del old_model
@@ -103,7 +106,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             if persistent:
                 model = self.model()
                 for i in range(model.rowCount()):
-                    self.openPersistentEditor(model.index(i, column))
+                    index = model.index(i, column)
+                    self.openPersistentEditor(index)
         elif row is not None:
             self.setItemDelegateForRow(row, delegate)
             if persistent:
