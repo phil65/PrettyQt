@@ -130,6 +130,12 @@ class WebEngineSettings:
     def __delitem__(self, index: WebAttributeStr):
         return self.item.resetAttribute(WEB_ATTRIBUTES[index])
 
+    def __iter__(self):
+        return iter(self.keys())
+
+    def keys(self):
+        return WEB_ATTRIBUTES.keys()
+
     def set_unknown_url_scheme_policy(self, policy: UnknownUrlSchemePolicyStr):
         """Set the unknown url scheme policy.
 
