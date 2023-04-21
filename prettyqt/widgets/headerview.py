@@ -108,7 +108,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         menu = widgets.Menu(parent=self)
         actions = self.get_header_actions()
         menu.add_actions(actions)
-        menu.exec(self.mapToGlobal(event.position()))
+        menu.exec(self.mapToGlobal(event.pos()))
 
     def get_header_actions(self) -> list[widgets.Action]:
         actions = []
