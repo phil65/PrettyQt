@@ -1,10 +1,22 @@
 from __future__ import annotations
 
+from typing import overload
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 
 
 class AbstractTableModelMixin(core.AbstractItemModelMixin):
+    @overload
+    def __getitem__(self, index: tuple[int, int]) -> QtCore.QModelIndex:
+        ...
+
+    @overload
+    def __getitem__(
+        self, index: tuple[slice, int] | tuple[int, slice]
+    ) -> list[QtCore.QModelIndex]:
+        ...
+
     def __getitem__(
         self, index: tuple[int | slice, int | slice]
     ) -> QtCore.QModelIndex | list[QtCore.QModelIndex]:
