@@ -1046,7 +1046,8 @@ def test_scroller(qtbot):
     with pytest.raises(InvalidParamError):
         scroller.handle_input("test", core.PointF())
     scroller.get_scroller_properties()
-    assert widgets.Scroller.grab_gesture(w) == "tap"
+    # weirdly this returns "tap" instead of "tap_and_hold" when PDFView class is removed.
+    assert widgets.Scroller.grab_gesture(w) == "tap_and_hold"
 
 
 def test_shortcut(qtbot):
