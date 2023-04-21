@@ -1,0 +1,4 @@
+pdf module
+==========
+
+::: prettyqt.pdf
