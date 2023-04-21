@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import API, QtGui
-from prettyqt.utils import bidict
+from prettyqt.utils import InvalidParamError, bidict
 
 
 FORMAT = bidict(
@@ -146,6 +146,11 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
             if invert_alpha
             else QtGui.QImage.InvertMode.InvertRgb
         )
+
+    def convert_to_format(self, fmt: FormatStr):
+        if fmt not in FORMAT:
+            raise InvalidParamError(fmt, FORMAT)
+        self.convertToFormat(FORMAT[fmt])
 
     def as_bytes(self) -> bytes | None:
         bits = self.bits()
