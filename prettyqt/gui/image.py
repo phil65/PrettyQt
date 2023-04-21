@@ -118,6 +118,19 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
             arr.data, width, height, channel * width, QtGui.QImage.Format.Format_RGB888
         )
 
+    def to_ndarray(self, fmt: FormatStr = "rgb888", channels: int = 3):
+        import numpy as np
+
+        qimage = self.convert_to_format(fmt)
+        channels = channels
+
+        width = qimage.width()
+        height = qimage.height()
+
+        ptr = qimage.constBits()
+        array = np.array(ptr).reshape(height, width, channels)  # Copies the data
+        return array
+
     @classmethod
     def from_pil(cls, image):
         # from https://github.com/python-pillow/Pillow/blob/main/src/PIL/ImageQt.py
