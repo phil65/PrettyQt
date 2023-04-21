@@ -14,15 +14,20 @@ class ElidedLabel(widgets.Frame):
     ):
         super().__init__(parent=parent)
         self.elided = False
-        self.content = text
+        self._text = text
         self.set_size_policy("expanding", "preferred")
 
     def __repr__(self):
         return f"{type(self).__name__}({self.text()!r})"
 
     def set_text(self, text: str):
-        self.content = text
+        self._text = text
         self.update()
+
+    def get_text(self) -> str:
+        return self._text
+
+    text = core.Property(str, get_text, set_text)
 
     def paintEvent(self, event):
         super().paintEvent(event)
@@ -31,7 +36,7 @@ class ElidedLabel(widgets.Frame):
         did_elide = False
         line_spacing = metrics.lineSpacing()
         y = 0
-        layout = gui.TextLayout(self.content, painter.font())
+        layout = gui.TextLayout(self._text, painter.font())
         with layout.process_layout():
             while True:
                 line = layout.createLine()
@@ -46,7 +51,7 @@ class ElidedLabel(widgets.Frame):
                     line.draw(painter, core.Point(0, y))
                     y = next_line_y
                 else:
-                    last_line = self.content[line.textStart() :]
+                    last_line = self._text[line.textStart() :]
                     elided_line = metrics.elided_text(last_line, "right", self.width())
                     painter.drawText(0, y + metrics.ascent(), elided_line)
                     line = layout.createLine()

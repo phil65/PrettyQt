@@ -78,6 +78,16 @@ class ExpandableLine(widgets.Widget):
         content_anim = self.toggle_anim[-1]
         content_anim.set_range(1, content_height)
 
+    def set_animation_duration(self, duration: int):
+        self._animation_duration = duration
+
+    def get_animation_duration(self) -> int:
+        return self._animation_duration
+
+    animation_duration = core.Property(
+        int, get_animation_duration, set_animation_duration
+    )
+
 
 if __name__ == "__main__":
     app = widgets.app()
