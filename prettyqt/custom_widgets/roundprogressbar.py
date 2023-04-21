@@ -223,7 +223,7 @@ class RoundProgressBar(widgets.Widget):
         font = self.get_font()
         font.setPixelSize(10)
         metrics = gui.FontMetricsF(font)
-        max_width = metrics.width(self._value_to_text(self._max_value))
+        max_width = metrics.horizontalAdvance(self._value_to_text(self._max_value))
         delta = inner_radius / max_width
         font_size = int(font.pixelSize() * delta * 0.75)
         font.setPixelSize(max(font_size, 1))

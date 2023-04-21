@@ -103,7 +103,7 @@ class SidebarWidget(widgets.MainWindow):
             dot = gui.Pixmap.create_dot(color)
             painter.drawPixmap(0, 0, dot)
         icon = gui.Icon(px)
-        self.button_map[widget].set_icon(icon)
+        self.button_map[widget].setIcon(icon)
 
     def _get_widget(self, item: str | int | widgets.Widget):
         """Returns widget page specified by name, offset or content."""

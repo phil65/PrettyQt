@@ -58,4 +58,3 @@ if __name__ == "__main__":
     widget.value_changed.connect(print)
     widget.show()
     app.main_loop()
-    print(widget.enabled)

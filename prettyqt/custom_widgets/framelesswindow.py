@@ -75,7 +75,7 @@ class CustomTitleBar(widgets.Frame):
         self.exit_button.clicked.connect(window_widget.close)
 
         self.set_layout("horizontal")
-        spacer_item = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Expanding)
+        spacer_item = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Policy.Expanding)
         self.box.addSpacerItem(spacer_item)
         for widget in [
             self.minimize_button,

@@ -432,7 +432,7 @@ class SpanSlider(widgets.Slider):
         return option
 
     def _handle_mouse_press(
-        self, pos: QtCore.QPoint, control, value: float, handle: HandleStr
+        self, pos: QtCore.QPointF, control, value: float, handle: HandleStr
     ):
         opt = self.get_style_option(handle)
         old_control = control
