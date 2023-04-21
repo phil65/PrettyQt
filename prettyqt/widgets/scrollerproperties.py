@@ -81,6 +81,12 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
     def __setitem__(self, metric: ScrollmetricStr, value: Any):
         self.set_scroll_metric(metric, value)
 
+    def keys(self):
+        return SCROLL_METRIC.keys()
+
+    def __iter__(self):
+        return iter(SCROLL_METRIC.keys())
+
     def set_scroll_metric(self, metric: ScrollmetricStr, value: Any):
         """Set scroll metric.
 
@@ -111,3 +117,12 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
         if metric not in SCROLL_METRIC:
             raise InvalidParamError(metric, SCROLL_METRIC)
         return self.scrollMetric(SCROLL_METRIC[metric])
+
+    def get_scroll_metrics(self) -> dict:
+        return {i: self.get_scroll_metric(i) for i in SCROLL_METRIC.keys()}
+
+
+if __name__ == "__main__":
+    props = ScrollerProperties()
+    print(dict(props))
+    # print(props.get_scroll_metrics())
