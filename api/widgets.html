@@ -22587,7 +22587,7 @@ HeaderViewMixin            (<a class="autorefs autorefs-internal" title="prettyq
         <span class="n">menu</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header_actions</span><span class="p">()</span>
         <span class="n">menu</span><span class="o">.</span><span class="n">add_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-        <span class="n">menu</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()))</span>
+        <span class="n">menu</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()))</span>
 
     <span class="k">def</span> <span class="nf">get_header_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">widgets</span><span class="o">.</span><span class="n">Action</span><span class="p">]:</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
@@ -22656,7 +22656,7 @@ HeaderViewMixin            (<a class="autorefs autorefs-internal" title="prettyq
     <span class="n">menu</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">Menu</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
     <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_header_actions</span><span class="p">()</span>
     <span class="n">menu</span><span class="o">.</span><span class="n">add_actions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
-    <span class="n">menu</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">position</span><span class="p">()))</span>
+    <span class="n">menu</span><span class="o">.</span><span class="n">exec</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="n">event</span><span class="o">.</span><span class="n">pos</span><span class="p">()))</span>
 </code></pre></div>
         </details>
     </div>
@@ -27944,6 +27944,8 @@ MenuMixin            (<a class="autorefs autorefs-internal" title="prettyqt.widg
         <span class="k">return</span> <span class="n">action</span>
 
     <span class="k">def</span> <span class="nf">add_actions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">]):</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">i</span><span class="o">.</span><span class="n">setParent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">addActions</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">add_menu</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">menu</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QMenu</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QAction</span><span class="p">:</span>
@@ -30390,6 +30392,12 @@ ScrollerProperties            (<span title="PySide6.QtWidgets.QScrollerPropertie
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="n">ScrollmetricStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_scroll_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
+    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">SCROLL_METRIC</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="n">SCROLL_METRIC</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
     <span class="k">def</span> <span class="nf">set_scroll_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="n">ScrollmetricStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set scroll metric.</span>
 
@@ -30420,12 +30428,16 @@ ScrollerProperties            (<span title="PySide6.QtWidgets.QScrollerPropertie
         <span class="k">if</span> <span class="n">metric</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">SCROLL_METRIC</span><span class="p">:</span>
             <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">SCROLL_METRIC</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">scrollMetric</span><span class="p">(</span><span class="n">SCROLL_METRIC</span><span class="p">[</span><span class="n">metric</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">get_scroll_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_scroll_metric</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">SCROLL_METRIC</span><span class="o">.</span><span class="n">keys</span><span class="p">()}</span>
 </code></pre></div>
         </details>
 
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -30522,6 +30534,8 @@ ScrollerProperties            (<span title="PySide6.QtWidgets.QScrollerPropertie
     </div>
 
   </div>
+
+
 
 
 

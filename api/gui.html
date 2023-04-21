@@ -7407,6 +7407,9 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">get_palette</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Palette</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Palette</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">palette</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">set_badge_number</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">number</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setBadgeNumber</span><span class="p">(</span><span class="n">number</span> <span class="ow">or</span> <span class="mi">0</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -7611,6 +7614,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
     </div>
 
   </div>
+
 
 
 

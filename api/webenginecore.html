@@ -3344,6 +3344,12 @@ WebEngineSettings        </code>
     <span class="k">def</span> <span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">WebAttributeStr</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">resetAttribute</span><span class="p">(</span><span class="n">WEB_ATTRIBUTES</span><span class="p">[</span><span class="n">index</span><span class="p">])</span>
 
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+
+    <span class="k">def</span> <span class="nf">keys</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">WEB_ATTRIBUTES</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+
     <span class="k">def</span> <span class="nf">set_unknown_url_scheme_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">policy</span><span class="p">:</span> <span class="n">UnknownUrlSchemePolicyStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the unknown url scheme policy.</span>
 
@@ -3420,6 +3426,7 @@ WebEngineSettings        </code>
 
 
   <div class="doc doc-children">
+
 
 
 
@@ -3613,6 +3620,7 @@ WebEngineSettings        </code>
     </div>
 
   </div>
+
 
 
 
