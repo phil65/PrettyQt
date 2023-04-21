@@ -1,7 +1,89 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import core, gui
 from prettyqt.qt import API, QtGui
+from prettyqt.utils import bidict
+
+
+FORMAT = bidict(
+    invalid=QtGui.QImage.Format.Format_Invalid,
+    mono=QtGui.QImage.Format.Format_Mono,
+    monolsb=QtGui.QImage.Format.Format_MonoLSB,
+    indexed8=QtGui.QImage.Format.Format_Indexed8,
+    rgb32=QtGui.QImage.Format.Format_RGB32,
+    argb32=QtGui.QImage.Format.Format_ARGB32,
+    argb32_premultiplied=QtGui.QImage.Format.Format_ARGB32_Premultiplied,
+    rgb16=QtGui.QImage.Format.Format_RGB16,
+    argb8565_premultiplied=QtGui.QImage.Format.Format_ARGB8565_Premultiplied,
+    rgb666=QtGui.QImage.Format.Format_RGB666,
+    argb6666_premultiplied=QtGui.QImage.Format.Format_ARGB6666_Premultiplied,
+    rgb555=QtGui.QImage.Format.Format_RGB555,
+    argb8555_premultiplied=QtGui.QImage.Format.Format_ARGB8555_Premultiplied,
+    rgb888=QtGui.QImage.Format.Format_RGB888,
+    rgb444=QtGui.QImage.Format.Format_RGB444,
+    argb4444_premultiplied=QtGui.QImage.Format.Format_ARGB4444_Premultiplied,
+    rgbx8888=QtGui.QImage.Format.Format_RGBX8888,
+    rgba8888=QtGui.QImage.Format.Format_RGBA8888,
+    rgba8888_premultiplied=QtGui.QImage.Format.Format_RGBA8888_Premultiplied,
+    bgr30=QtGui.QImage.Format.Format_BGR30,
+    a2bgr30_premultiplied=QtGui.QImage.Format.Format_A2BGR30_Premultiplied,
+    rgb30=QtGui.QImage.Format.Format_RGB30,
+    a2rgb30_premultiplied=QtGui.QImage.Format.Format_A2RGB30_Premultiplied,
+    alpha8=QtGui.QImage.Format.Format_Alpha8,
+    grayscale8=QtGui.QImage.Format.Format_Grayscale8,
+    grayscale16=QtGui.QImage.Format.Format_Grayscale16,
+    rgbx64=QtGui.QImage.Format.Format_RGBX64,
+    rgba64=QtGui.QImage.Format.Format_RGBA64,
+    rgba64_premultiplied=QtGui.QImage.Format.Format_RGBA64_Premultiplied,
+    bgr888=QtGui.QImage.Format.Format_BGR888,
+    rgbx16fpx4=QtGui.QImage.Format.Format_RGBX16FPx4,
+    rgba16fpx4=QtGui.QImage.Format.Format_RGBA16FPx4,
+    rgba16fpx4_premultiplied=QtGui.QImage.Format.Format_RGBA16FPx4_Premultiplied,
+    rgbx32fpx4=QtGui.QImage.Format.Format_RGBX32FPx4,
+    rgba32fpx4=QtGui.QImage.Format.Format_RGBA32FPx4,
+    rgba32fpx4_premultiplied=QtGui.QImage.Format.Format_RGBA32FPx4_Premultiplied,
+)
+
+FormatStr = Literal[
+    "invalid",
+    "mono",
+    "monolsb",
+    "indexed8",
+    "rgb32",
+    "argb32",
+    "argb32_premultiplied",
+    "rgb16",
+    "argb8565_premultiplied",
+    "rgb666",
+    "argb6666_premultiplied",
+    "rgb555",
+    "argb8555_premultiplied",
+    "rgb888",
+    "rgb444",
+    "argb4444_premultiplied",
+    "rgbx8888",
+    "rgba8888",
+    "rgba8888_premultiplied",
+    "bgr30",
+    "a2bgr30_premultiplied",
+    "rgb30",
+    "a2rgb30_premultiplied",
+    "alpha8",
+    "grayscale8",
+    "grayscale16",
+    "rgbx64",
+    "rgba64",
+    "rgba64_premultiplied",
+    "bgr888",
+    "rgbx16fpx4",
+    "rgba16fpx4",
+    "rgba16fpx4_premultiplied",
+    "rgbx32fpx4",
+    "rgba32fpx4",
+    "rgba32fpx4_premultiplied",
+]
 
 
 class Image(gui.PaintDeviceMixin, QtGui.QImage):
@@ -32,7 +114,9 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
         if arr.dtype in {np.float32, np.float64}:
             arr = (255 * arr).round()
         arr = arr.astype(np.uint8)
-        return cls(arr.data, width, height, channel * width, cls.Format.Format_RGB888)
+        return cls(
+            arr.data, width, height, channel * width, QtGui.QImage.Format.Format_RGB888
+        )
 
     @classmethod
     def from_pil(cls, image):
@@ -58,7 +142,9 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
 
     def invert_pixels(self, invert_alpha: bool = False):
         self.invertPixels(
-            self.InvertMode.InvertRgba if invert_alpha else self.InvertMode.InvertRgb
+            QtGui.QImage.InvertMode.InvertRgba
+            if invert_alpha
+            else QtGui.QImage.InvertMode.InvertRgb
         )
 
     def as_bytes(self) -> bytes | None:

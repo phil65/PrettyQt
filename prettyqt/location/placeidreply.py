@@ -8,10 +8,10 @@ from prettyqt.utils import bidict
 
 
 OPERATION_TYPES = bidict(
-    save_place=QtLocation.QPlaceIdReply.SavePlace,
-    remove_place=QtLocation.QPlaceIdReply.RemovePlace,
-    save_category=QtLocation.QPlaceIdReply.SaveCategory,
-    remove_category=QtLocation.QPlaceIdReply.RemoveCategory,
+    save_place=QtLocation.QPlaceIdReply.OperationType.SavePlace,
+    remove_place=QtLocation.QPlaceIdReply.OperationType.RemovePlace,
+    save_category=QtLocation.QPlaceIdReply.OperationType.SaveCategory,
+    remove_category=QtLocation.QPlaceIdReply.OperationType.RemoveCategory,
 )
 
 OperationTypeStr = Literal[
@@ -39,4 +39,4 @@ class PlaceIdReply(location.PlaceReplyMixin, QtLocation.QPlaceIdReply):
 
 
 if __name__ == "__main__":
-    reply = PlaceIdReply(QtLocation.QPlaceIdReply.SavePlace)
+    reply = PlaceIdReply(QtLocation.QPlaceIdReply.OperationType.SavePlace)

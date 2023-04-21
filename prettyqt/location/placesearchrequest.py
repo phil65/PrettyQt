@@ -8,9 +8,9 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 RELEVANCE_HINT = bidict(
-    unspecified=QtLocation.QPlaceSearchRequest.UnspecifiedHint,
-    distance=QtLocation.QPlaceSearchRequest.DistanceHint,
-    lexical_place_name=QtLocation.QPlaceSearchRequest.LexicalPlaceNameHint,
+    unspecified=QtLocation.QPlaceSearchRequest.RelevanceHint.UnspecifiedHint,
+    distance=QtLocation.QPlaceSearchRequest.RelevanceHint.DistanceHint,
+    lexical_place_name=QtLocation.QPlaceSearchRequest.RelevanceHint.LexicalPlaceNameHint,
 )
 
 RelevanceHintStr = Literal["unspecified", "distance", "lexical_place_name"]
@@ -66,5 +66,4 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
 
 if __name__ == "__main__":
     request = PlaceSearchRequest()
-    request.setVisibilityScope("tse")
     print(dir(request))

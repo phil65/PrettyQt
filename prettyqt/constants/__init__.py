@@ -9,8 +9,8 @@ Qt = QtCore.Qt
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
-SORT_ROLE = Qt.ItemDataRole.UserRole + 1  # type: ignore
-NAME_ROLE = Qt.ItemDataRole.UserRole + 2  # type: ignore
+SORT_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 1)  # type: ignore
+NAME_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 2)  # type: ignore
 EDIT_ROLE = Qt.ItemDataRole.EditRole
 BACKGROUND_ROLE = Qt.ItemDataRole.BackgroundRole
 FOREGROUND_ROLE = Qt.ItemDataRole.ForegroundRole
@@ -76,21 +76,6 @@ KEY_DELETE = Qt.Key.Key_Delete
 
 ThemeStr = Literal["default", "dark"]
 
-ITEM_DATA_ROLE = bidict(
-    display=DISPLAY_ROLE,
-    user=USER_ROLE,
-    sort=SORT_ROLE,
-    edit=EDIT_ROLE,
-    tooltip=TOOLTIP_ROLE,
-    statustip=STATUSTIP_ROLE,
-    decoration=DECORATION_ROLE,
-    checkstate=CHECKSTATE_ROLE,
-    alignment=ALIGNMENT_ROLE,
-    font=FONT_ROLE,
-    foreground=FOREGROUND_ROLE,
-    background=BACKGROUND_ROLE,
-)
-
 ItemDataRoleStr = Literal[
     "display",
     "user",
@@ -105,6 +90,21 @@ ItemDataRoleStr = Literal[
     "foreground",
     "background",
 ]
+
+ITEM_DATA_ROLE: bidict[ItemDataRoleStr, QtCore.Qt.ItemDataRole | int] = bidict(
+    display=DISPLAY_ROLE,
+    user=USER_ROLE,
+    sort=SORT_ROLE,
+    edit=EDIT_ROLE,
+    tooltip=TOOLTIP_ROLE,
+    statustip=STATUSTIP_ROLE,
+    decoration=DECORATION_ROLE,
+    checkstate=CHECKSTATE_ROLE,
+    alignment=ALIGNMENT_ROLE,
+    font=FONT_ROLE,
+    foreground=FOREGROUND_ROLE,
+    background=BACKGROUND_ROLE,
+)
 
 ALIGNMENTS = mappers.FlagMap(
     Qt.AlignmentFlag,

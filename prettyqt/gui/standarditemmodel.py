@@ -89,7 +89,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
         checkstate: constants.StateStr | None = None,
-        flags: QtCore.Qt.ItemFlags | None = None,
+        flags: QtCore.Qt.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,
     ) -> gui.StandardItem:

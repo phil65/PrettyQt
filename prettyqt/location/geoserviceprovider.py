@@ -10,12 +10,12 @@ from prettyqt.utils import bidict
 QGeoServiceProvider = QtLocation.QGeoServiceProvider
 
 ERROR = bidict(
-    none=QGeoServiceProvider.NoError,
-    not_supported=QGeoServiceProvider.NotSupportedError,
-    unknown_parameter=QGeoServiceProvider.UnknownParameterError,
-    missing_required_parameter=QGeoServiceProvider.MissingRequiredParameterError,
-    connection=QGeoServiceProvider.ConnectionError,
-    failed_to_load=QGeoServiceProvider.LoaderError,
+    none=QGeoServiceProvider.Error.NoError,
+    not_supported=QGeoServiceProvider.Error.NotSupportedError,
+    unknown_parameter=QGeoServiceProvider.Error.UnknownParameterError,
+    missing_required_parameter=QGeoServiceProvider.Error.MissingRequiredParameterError,
+    connection=QGeoServiceProvider.Error.ConnectionError,
+    failed_to_load=QGeoServiceProvider.Error.LoaderError,
 )
 
 ErrorStr = Literal[
@@ -28,12 +28,12 @@ ErrorStr = Literal[
 ]
 
 GEOCODING_FEATURES = bidict(
-    none=QtLocation.QGeoServiceProvider.NoGeocodingFeatures,
-    online=QtLocation.QGeoServiceProvider.OnlineGeocodingFeature,
-    offline=QtLocation.QGeoServiceProvider.OfflineGeocodingFeature,
-    reverse=QtLocation.QGeoServiceProvider.ReverseGeocodingFeature,
-    localized=QtLocation.QGeoServiceProvider.LocalizedGeocodingFeature,
-    # any=QtLocation.QGeoServiceProvider.AnyGeocodingFeatures,
+    none=QGeoServiceProvider.GeocodingFeature.NoGeocodingFeatures,
+    online=QGeoServiceProvider.GeocodingFeature.OnlineGeocodingFeature,
+    offline=QGeoServiceProvider.GeocodingFeature.OfflineGeocodingFeature,
+    reverse=QGeoServiceProvider.GeocodingFeature.ReverseGeocodingFeature,
+    localized=QGeoServiceProvider.GeocodingFeature.LocalizedGeocodingFeature,
+    # any=QGeoServiceProvider.GeocodingFeature.AnyGeocodingFeatures,
 )
 
 GeocodingFeatureStr = Literal[
@@ -45,11 +45,11 @@ GeocodingFeatureStr = Literal[
 ]
 
 MAPPING_FEATURES = bidict(
-    none=QtLocation.QGeoServiceProvider.NoMappingFeatures,
-    online=QtLocation.QGeoServiceProvider.OnlineMappingFeature,
-    offline=QtLocation.QGeoServiceProvider.OfflineMappingFeature,
-    localized=QtLocation.QGeoServiceProvider.LocalizedMappingFeature,
-    # any=QtLocation.QGeoServiceProvider.AnyMappingFeatures,
+    none=QGeoServiceProvider.MappingFeature.NoMappingFeatures,
+    online=QGeoServiceProvider.MappingFeature.OnlineMappingFeature,
+    offline=QGeoServiceProvider.MappingFeature.OfflineMappingFeature,
+    localized=QGeoServiceProvider.MappingFeature.LocalizedMappingFeature,
+    # any=QGeoServiceProvider.MappingFeature.AnyMappingFeatures,
 )
 
 MappingFeatureStr = Literal[
@@ -60,10 +60,10 @@ MappingFeatureStr = Literal[
 ]
 
 NAVIGATION_FEATURES = bidict(
-    none=QtLocation.QGeoServiceProvider.NoNavigationFeatures,
-    online=QtLocation.QGeoServiceProvider.OnlineNavigationFeature,
-    offline=QtLocation.QGeoServiceProvider.OfflineNavigationFeature,
-    # any=QtLocation.QGeoServiceProvider.AnyNavigationFeatures,
+    none=QGeoServiceProvider.NavigationFeature.NoNavigationFeatures,
+    online=QGeoServiceProvider.NavigationFeature.OnlineNavigationFeature,
+    offline=QGeoServiceProvider.NavigationFeature.OfflineNavigationFeature,
+    # any=QGeoServiceProvider.NavigationFeature.AnyNavigationFeatures,
 )
 
 NavigationFeatureStr = Literal[
@@ -73,19 +73,19 @@ NavigationFeatureStr = Literal[
 ]
 
 PLACES_FEATURES = bidict(
-    none=QtLocation.QGeoServiceProvider.NoPlacesFeatures,
-    online_places=QtLocation.QGeoServiceProvider.OnlinePlacesFeature,
-    offline_places=QtLocation.QGeoServiceProvider.OfflinePlacesFeature,
-    save_place=QtLocation.QGeoServiceProvider.SavePlaceFeature,
-    remove_place=QtLocation.QGeoServiceProvider.RemovePlaceFeature,
-    save_category=QtLocation.QGeoServiceProvider.SaveCategoryFeature,
-    remove_category=QtLocation.QGeoServiceProvider.RemoveCategoryFeature,
-    place_recommendations=QtLocation.QGeoServiceProvider.PlaceRecommendationsFeature,
-    search_suggestions=QtLocation.QGeoServiceProvider.SearchSuggestionsFeature,
-    localized_places=QtLocation.QGeoServiceProvider.LocalizedPlacesFeature,
-    notifications=QtLocation.QGeoServiceProvider.NotificationsFeature,
-    place_matching=QtLocation.QGeoServiceProvider.PlaceMatchingFeature,
-    # any=QtLocation.QGeoServiceProvider.AnyPlacesFeatures,
+    none=QGeoServiceProvider.PlacesFeature.NoPlacesFeatures,
+    online_places=QGeoServiceProvider.PlacesFeature.OnlinePlacesFeature,
+    offline_places=QGeoServiceProvider.PlacesFeature.OfflinePlacesFeature,
+    save_place=QGeoServiceProvider.PlacesFeature.SavePlaceFeature,
+    remove_place=QGeoServiceProvider.PlacesFeature.RemovePlaceFeature,
+    save_category=QGeoServiceProvider.PlacesFeature.SaveCategoryFeature,
+    remove_category=QGeoServiceProvider.PlacesFeature.RemoveCategoryFeature,
+    place_recommendations=QGeoServiceProvider.PlacesFeature.PlaceRecommendationsFeature,
+    search_suggestions=QGeoServiceProvider.PlacesFeature.SearchSuggestionsFeature,
+    localized_places=QGeoServiceProvider.PlacesFeature.LocalizedPlacesFeature,
+    notifications=QGeoServiceProvider.PlacesFeature.NotificationsFeature,
+    place_matching=QGeoServiceProvider.PlacesFeature.PlaceMatchingFeature,
+    # any=QGeoServiceProvider.PlacesFeature.AnyPlacesFeatures,
 )
 
 PlaceFeatureStr = Literal[
@@ -104,14 +104,14 @@ PlaceFeatureStr = Literal[
 ]
 
 ROUTING_FEATURES = bidict(
-    none=QtLocation.QGeoServiceProvider.NoRoutingFeatures,
-    online=QtLocation.QGeoServiceProvider.OnlineRoutingFeature,
-    offline=QtLocation.QGeoServiceProvider.OfflineRoutingFeature,
-    localized=QtLocation.QGeoServiceProvider.LocalizedRoutingFeature,
-    route_updates=QtLocation.QGeoServiceProvider.RouteUpdatesFeature,
-    alternative_routes=QtLocation.QGeoServiceProvider.AlternativeRoutesFeature,
-    exclude_areas=QtLocation.QGeoServiceProvider.ExcludeAreasRoutingFeature,
-    # any=QtLocation.QGeoServiceProvider.AnyRoutingFeatures,
+    none=QGeoServiceProvider.RoutingFeature.NoRoutingFeatures,
+    online=QGeoServiceProvider.RoutingFeature.OnlineRoutingFeature,
+    offline=QGeoServiceProvider.RoutingFeature.OfflineRoutingFeature,
+    localized=QGeoServiceProvider.RoutingFeature.LocalizedRoutingFeature,
+    route_updates=QGeoServiceProvider.RoutingFeature.RouteUpdatesFeature,
+    alternative_routes=QGeoServiceProvider.RoutingFeature.AlternativeRoutesFeature,
+    exclude_areas=QGeoServiceProvider.RoutingFeature.ExcludeAreasRoutingFeature,
+    # any=QtLocation.QGeoServiceProvider.RoutingFeature.AnyRoutingFeatures,
 )
 
 RoutingFeatureStr = Literal[

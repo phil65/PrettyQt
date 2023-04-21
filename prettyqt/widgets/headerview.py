@@ -40,11 +40,12 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self.setSectionsClickable(True)
         self.sectionResized.connect(self.sectionResizeEvent)
         self._handle_section_is_pressed = False
-        self._widget_name = parent.get_id() if parent is not None else ""
+        self._widget_name = parent.objectName() if parent is not None else ""
 
     def mousePressEvent(self, e):
         super().mousePressEvent(e)
-        self._handle_section_is_pressed = self.cursor().shape() == QtCore.Qt.SplitHCursor
+        shape = self.get_cursor().get_shape()
+        self._handle_section_is_pressed = shape == "split_horizontal"
 
     def mouseReleaseEvent(self, e):
         super().mouseReleaseEvent(e)

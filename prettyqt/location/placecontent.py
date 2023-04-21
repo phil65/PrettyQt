@@ -8,11 +8,11 @@ from prettyqt.utils import bidict
 
 
 TYPE = bidict(
-    none=QtLocation.QPlaceContent.NoType,
-    image=QtLocation.QPlaceContent.ImageType,
-    review=QtLocation.QPlaceContent.ReviewType,
-    editorial=QtLocation.QPlaceContent.EditorialType,
-    custom=QtLocation.QPlaceContent.CustomType,
+    none=QtLocation.QPlaceContent.Type.NoType,
+    image=QtLocation.QPlaceContent.Type.ImageType,
+    review=QtLocation.QPlaceContent.Type.ReviewType,
+    editorial=QtLocation.QPlaceContent.Type.EditorialType,
+    custom=QtLocation.QPlaceContent.Type.CustomType,
 )
 
 TypeStr = Literal["none", "image", "review", "editorial", "custom"]

@@ -34,13 +34,13 @@ class AbstractAnimationMixin(core.ObjectMixin):
     def __len__(self):
         return self.duration()
 
-    def __and__(self, other: AbstractAnimation) -> core.SequentialAnimationGroup:
+    def __and__(self, other: QtCore.QAbstractAnimation) -> core.SequentialAnimationGroup:
         group = core.SequentialAnimationGroup()
         group.addAnimation(self)
         group.addAnimation(other)
         return group
 
-    def __or__(self, other: AbstractAnimation) -> core.ParallelAnimationGroup:
+    def __or__(self, other: QtCore.QAbstractAnimation) -> core.ParallelAnimationGroup:
         group = core.ParallelAnimationGroup()
         group.addAnimation(self)
         group.addAnimation(other)

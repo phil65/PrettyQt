@@ -26,4 +26,3 @@ class PlaceContactDetail(QtLocation.QPlaceContactDetail):
 if __name__ == "__main__":
     detail = PlaceContactDetail("a", "b")
     print(repr(detail))
-    print(detail.Email)

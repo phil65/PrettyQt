@@ -8,9 +8,9 @@ from prettyqt.utils import bidict
 
 
 TYPE = bidict(
-    unknown=QtLocation.QPlaceSearchResult.UnknownSearchResult,
-    place=QtLocation.QPlaceSearchResult.PlaceResult,
-    proposed_search=QtLocation.QPlaceSearchResult.ProposedSearchResult,
+    unknown=QtLocation.QPlaceSearchResult.SearchResultType.UnknownSearchResult,
+    place=QtLocation.QPlaceSearchResult.SearchResultType.PlaceResult,
+    proposed_search=QtLocation.QPlaceSearchResult.SearchResultType.ProposedSearchResult,
 )
 
 TypeStr = Literal["unknown", "place", "proposed_search"]

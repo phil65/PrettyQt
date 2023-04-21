@@ -46,7 +46,7 @@ class BoolDictToolButton(widgets.ToolButton):
         self.value_changed.emit(self.as_dict())
 
     def as_dict(self) -> dict[str, bool]:
-        return {act.get_id(): act.isChecked() for act in self.button_menu}
+        return {act.objectName(): act.isChecked() for act in self.button_menu}
 
 
 if __name__ == "__main__":

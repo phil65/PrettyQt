@@ -8,16 +8,16 @@ from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
 
 
 FEATURE_TYPES = bidict(
-    none=QtLocation.QGeoRouteRequest.NoFeature,
-    toll=QtLocation.QGeoRouteRequest.TollFeature,
-    highway=QtLocation.QGeoRouteRequest.HighwayFeature,
-    public_transit=QtLocation.QGeoRouteRequest.PublicTransitFeature,
-    ferry=QtLocation.QGeoRouteRequest.FerryFeature,
-    tunnel=QtLocation.QGeoRouteRequest.TunnelFeature,
-    dirt_road=QtLocation.QGeoRouteRequest.DirtRoadFeature,
-    parks=QtLocation.QGeoRouteRequest.ParksFeature,
-    motor_pool_lane=QtLocation.QGeoRouteRequest.MotorPoolLaneFeature,
-    traffic=QtLocation.QGeoRouteRequest.TrafficFeature,
+    none=QtLocation.QGeoRouteRequest.FeatureType.NoFeature,
+    toll=QtLocation.QGeoRouteRequest.FeatureType.TollFeature,
+    highway=QtLocation.QGeoRouteRequest.FeatureType.HighwayFeature,
+    public_transit=QtLocation.QGeoRouteRequest.FeatureType.PublicTransitFeature,
+    ferry=QtLocation.QGeoRouteRequest.FeatureType.FerryFeature,
+    tunnel=QtLocation.QGeoRouteRequest.FeatureType.TunnelFeature,
+    dirt_road=QtLocation.QGeoRouteRequest.FeatureType.DirtRoadFeature,
+    parks=QtLocation.QGeoRouteRequest.FeatureType.ParksFeature,
+    motor_pool_lane=QtLocation.QGeoRouteRequest.FeatureType.MotorPoolLaneFeature,
+    traffic=QtLocation.QGeoRouteRequest.FeatureType.TrafficFeature,
 )
 
 FeatureTypeStr = Literal[
@@ -34,45 +34,45 @@ FeatureTypeStr = Literal[
 ]
 
 FEATURE_WEIGHTS = bidict(
-    neutral=QtLocation.QGeoRouteRequest.NeutralFeatureWeight,
-    prefer=QtLocation.QGeoRouteRequest.PreferFeatureWeight,
-    require=QtLocation.QGeoRouteRequest.RequireFeatureWeight,
-    avoid=QtLocation.QGeoRouteRequest.AvoidFeatureWeight,
-    disallow=QtLocation.QGeoRouteRequest.DisallowFeatureWeight,
+    neutral=QtLocation.QGeoRouteRequest.FeatureWeight.NeutralFeatureWeight,
+    prefer=QtLocation.QGeoRouteRequest.FeatureWeight.PreferFeatureWeight,
+    require=QtLocation.QGeoRouteRequest.FeatureWeight.RequireFeatureWeight,
+    avoid=QtLocation.QGeoRouteRequest.FeatureWeight.AvoidFeatureWeight,
+    disallow=QtLocation.QGeoRouteRequest.FeatureWeight.DisallowFeatureWeight,
 )
 
 FeatureWeightStr = Literal["neutral", "prefer", "require", "avoid", "disallow"]
 
 MANEUVER_DETAIL = bidict(
-    none=QtLocation.QGeoRouteRequest.NoManeuvers,
-    basic=QtLocation.QGeoRouteRequest.BasicManeuvers,
+    none=QtLocation.QGeoRouteRequest.ManeuverDetail.NoManeuvers,
+    basic=QtLocation.QGeoRouteRequest.ManeuverDetail.BasicManeuvers,
 )
 
 ManeuverDetailStr = Literal["none", "basic"]
 
 ROUTE_OPTIMIZATION = mappers.FlagMap(
-    QtLocation.QGeoRouteRequest.RouteOptimizations,
-    shortest=QtLocation.QGeoRouteRequest.ShortestRoute,
-    fastest=QtLocation.QGeoRouteRequest.FastestRoute,
-    most_economic=QtLocation.QGeoRouteRequest.MostEconomicRoute,
-    most_scenic=QtLocation.QGeoRouteRequest.MostScenicRoute,
+    QtLocation.QGeoRouteRequest.RouteOptimization.RouteOptimizations,
+    shortest=QtLocation.QGeoRouteRequest.RouteOptimization.ShortestRoute,
+    fastest=QtLocation.QGeoRouteRequest.RouteOptimization.FastestRoute,
+    most_economic=QtLocation.QGeoRouteRequest.RouteOptimization.MostEconomicRoute,
+    most_scenic=QtLocation.QGeoRouteRequest.RouteOptimization.MostScenicRoute,
 )
 
 RouteOptimizationStr = Literal["shortest", "fastest", "most_economic", "most_scenic"]
 
 SEGMENT_DETAIL = bidict(
-    none=QtLocation.QGeoRouteRequest.NoSegmentData,
-    basic=QtLocation.QGeoRouteRequest.BasicSegmentData,
+    none=QtLocation.QGeoRouteRequest.SegmentDetail.NoSegmentData,
+    basic=QtLocation.QGeoRouteRequest.SegmentDetail.BasicSegmentData,
 )
 
 SegmentDetailStr = Literal["none", "basic"]
 
 TRAVEL_MODE = bidict(
-    car=QtLocation.QGeoRouteRequest.CarTravel,
-    pedestrian=QtLocation.QGeoRouteRequest.PedestrianTravel,
-    bicycle=QtLocation.QGeoRouteRequest.BicycleTravel,
-    public_transit=QtLocation.QGeoRouteRequest.PublicTransitTravel,
-    truck=QtLocation.QGeoRouteRequest.TruckTravel,
+    car=QtLocation.QGeoRouteRequest.TravelMode.CarTravel,
+    pedestrian=QtLocation.QGeoRouteRequest.TravelMode.PedestrianTravel,
+    bicycle=QtLocation.QGeoRouteRequest.TravelMode.BicycleTravel,
+    public_transit=QtLocation.QGeoRouteRequest.TravelMode.PublicTransitTravel,
+    truck=QtLocation.QGeoRouteRequest.TravelMode.TruckTravel,
 )
 
 TravelModeStr = Literal["car", "pedestrian", "bicycle", "public_transit", "truck"]

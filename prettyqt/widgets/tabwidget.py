@@ -190,9 +190,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         if isinstance(point, tuple):
             point = QtCore.QPoint(*point)
         name = self.tabText(index)
-        icon = self.tab_icon(index)
-        if icon is None:
-            icon = self.window().windowIcon()
+        icon = self.tab_icon(index) or self.window().windowIcon()
         widget = self.widget(index)
 
         try:

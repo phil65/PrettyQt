@@ -8,18 +8,18 @@ from prettyqt.utils import InvalidParamError, bidict
 
 
 INSTRUCTION_DIRECTION = bidict(
-    none=QtLocation.QGeoManeuver.NoDirection,
-    forward=QtLocation.QGeoManeuver.DirectionForward,
-    bear_right=QtLocation.QGeoManeuver.DirectionBearRight,
-    light_right=QtLocation.QGeoManeuver.DirectionLightRight,
-    right=QtLocation.QGeoManeuver.DirectionRight,
-    hard_right=QtLocation.QGeoManeuver.DirectionHardRight,
-    u_turn_right=QtLocation.QGeoManeuver.DirectionUTurnRight,
-    u_turn_left=QtLocation.QGeoManeuver.DirectionUTurnLeft,
-    hard_left=QtLocation.QGeoManeuver.DirectionHardLeft,
-    left=QtLocation.QGeoManeuver.DirectionLeft,
-    light_left=QtLocation.QGeoManeuver.DirectionLightLeft,
-    bear_left=QtLocation.QGeoManeuver.DirectionBearLeft,
+    none=QtLocation.QGeoManeuver.InstructionDirection.NoDirection,
+    forward=QtLocation.QGeoManeuver.InstructionDirection.DirectionForward,
+    bear_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionBearRight,
+    light_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionLightRight,
+    right=QtLocation.QGeoManeuver.InstructionDirection.DirectionRight,
+    hard_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionHardRight,
+    u_turn_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionUTurnRight,
+    u_turn_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionUTurnLeft,
+    hard_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionHardLeft,
+    left=QtLocation.QGeoManeuver.InstructionDirection.DirectionLeft,
+    light_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionLightLeft,
+    bear_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionBearLeft,
 )
 
 InstructionDirectionStr = Literal[
