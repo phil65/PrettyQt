@@ -4,7 +4,7 @@ from collections.abc import Sequence
 from importlib import metadata
 import pkgutil
 
-from prettyqt import constants, core
+from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtCore
 
 
@@ -26,6 +26,45 @@ def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     modules = {i.split(" ")[0] for i in dist.requires} if dist.requires else set()
     distributions = (load_dist_info(i) for i in modules)
     return [i for i in distributions if i is not None]
+
+
+COL_NAME = custom_models.ColumnItem(
+    name="Name",
+    doc="Package name",
+    label=lambda x: x.obj.metadata["Name"],
+)
+
+COL_VERSION = custom_models.ColumnItem(
+    name="Version",
+    doc="Version number.",
+    label=lambda x: x.obj.version,
+)
+
+COL_SUMMARY = custom_models.ColumnItem(
+    name="Summary",
+    doc="Module description.",
+    label=lambda x: x.obj.metadata["Summary"],
+)
+
+COL_HOMEPAGE = custom_models.ColumnItem(
+    name="Homepage",
+    doc="Homepage URL.",
+    label=lambda x: x.obj.metadata["Home-Page"],
+)
+
+COL_AUTHOR = custom_models.ColumnItem(
+    name="Author",
+    doc="Author name.",
+    label=lambda x: x.obj.metadata["Author"],
+)
+
+COL_LICENSE = custom_models.ColumnItem(
+    name="License",
+    doc="License type.",
+    label=lambda x: x.obj.metadata["License"],
+)
+
+COLUMNS = [COL_NAME, COL_VERSION, COL_SUMMARY, COL_HOMEPAGE, COL_AUTHOR, COL_LICENSE]
 
 
 class ImportlibDistributionModel(core.AbstractTableModel):
