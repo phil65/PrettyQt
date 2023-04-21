@@ -9,10 +9,10 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-# IGNORECASE = QtCore.QRegularExpression.CaseInsensitiveOption
-# MULTILINE = QtCore.QRegularExpression.MultilineOption
-# DOTALL = QtCore.QRegularExpression.DotMatchesEverythingOption
-# VERBOSE = QtCore.QRegularExpression.ExtendedPatternSyntaxOption
+# IGNORECASE = QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption
+# MULTILINE = QtCore.QRegularExpression.PatternOption.MultilineOption
+# DOTALL = QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption
+# VERBOSE = QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption
 
 DONT_ESCAPE = {"!", '"', "%", "'", ",", "/", ":", ";", "<", "=", ">", "@", "`"}
 
@@ -23,10 +23,10 @@ VERBOSE = re.VERBOSE
 
 MAP = bidict(
     {
-        re.IGNORECASE: QtCore.QRegularExpression.CaseInsensitiveOption,
-        re.MULTILINE: QtCore.QRegularExpression.MultilineOption,
-        re.DOTALL: QtCore.QRegularExpression.DotMatchesEverythingOption,
-        re.VERBOSE: QtCore.QRegularExpression.ExtendedPatternSyntaxOption,
+        re.IGNORECASE: QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
+        re.MULTILINE: QtCore.QRegularExpression.PatternOption.MultilineOption,
+        re.DOTALL: QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption,
+        re.VERBOSE: QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
     }
 )
 
@@ -102,7 +102,7 @@ class Match(core.RegularExpressionMatch):
 
 class Pattern(core.RegularExpression):
     def __init__(self, pattern: str = "", flags: int = 0):
-        flag = QtCore.QRegularExpression.NoPatternOption
+        flag = QtCore.QRegularExpression.PatternOption.NoPatternOption
         for k, v in MAP.items():
             if k & flags:
                 flag |= v

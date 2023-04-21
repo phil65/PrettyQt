@@ -179,7 +179,7 @@ class AbstractSocketMixin(core.IODeviceMixin):
         address: str | QtNetwork.QHostAddress,
         port: int = 0,
         bind_mode: (
-            QtNetwork.QAbstractSocket.BindMode | BindModeStr
+            QtNetwork.QAbstractSocket.BindFlag | BindModeStr
         ) = "default_for_platform",
     ) -> bool:
         if isinstance(address, str):
