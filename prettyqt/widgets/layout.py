@@ -111,16 +111,17 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         else:
             return self.setAlignment(constants.ALIGNMENTS[alignment])
 
-    def add(self, *item: QtWidgets.QWidget | QtWidgets.QLayout):
-        for i in item:
-            if isinstance(i, QtWidgets.QWidget):
-                self.addWidget(i)
-            elif isinstance(i, QtWidgets.QLayout):
-                w = widgets.Widget()
-                w.set_layout(i)
-                self.addWidget(w)
-            else:
-                raise TypeError("add_item only supports widgets and layouts")
+    def add(self, *items: QtWidgets.QWidget | QtWidgets.QLayout):
+        for i in items:
+            match i:
+                case QtWidgets.QWidget():
+                    self.addWidget(i)
+                case QtWidgets.QLayout():
+                    w = widgets.Widget()
+                    w.set_layout(i)
+                    self.addWidget(w)
+                case _:
+                    raise TypeError("add_item only supports widgets and layouts")
 
 
 class Layout(LayoutMixin, QtWidgets.QLayout):

@@ -99,7 +99,7 @@ class Image(gui.PaintDeviceMixin, QtGui.QImage):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __getitem__(self, index: tuple[int, int]):
+    def __getitem__(self, index: tuple[int, int]) -> int:
         return self.pixel(index[0], index[1])
 
     def __bytes__(self):

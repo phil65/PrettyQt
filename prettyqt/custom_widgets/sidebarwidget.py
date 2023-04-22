@@ -12,7 +12,6 @@ AreaStr = Literal["top", "bottom"]
 
 
 class SidebarWidget(widgets.MainWindow):
-    BUTTON_WIDTH = 100
     SETTINGS_BUTTON_HEIGHT = 28
 
     def __init__(
@@ -22,22 +21,26 @@ class SidebarWidget(widgets.MainWindow):
         main_layout: widgets.widget.LayoutStr | QtWidgets.QLayout = "vertical",
     ):
         super().__init__(parent=parent)
+        self._button_width = 100
+        self._style: constants.ToolButtonStyleStr = "text_below_icon"
         self.button_map: dict[QtWidgets.QWidget, QtWidgets.QToolButton] = {}
         self.icon_map: dict[QtWidgets.QWidget, gui.Icon] = {}
         self.sidebar = widgets.ToolBar()
         self.sidebar.set_id("SidebarWidget")
         self.sidebar.set_title("Sidebar")
-        self.sidebar.set_style("text_below_icon")
+        self.sidebar.set_style(self._style)
         self.sidebar.set_context_menu_policy("prevent")
         self.sidebar.setFloatable(False)
         self.sidebar.set_allowed_areas("all")
         self.settings_menu = widgets.Menu()
-        self.sidebar.set_icon_size(60)
+        self.sidebar.set_icon_size(int(self._button_width * 0.7))
         if show_settings:
             self.settings_btn = self.sidebar.add_menu_button(
                 "", icon="mdi.wrench", menu=self.settings_menu
             )
-            self.settings_btn.setFixedSize(self.BUTTON_WIDTH, self.SETTINGS_BUTTON_HEIGHT)
+            self.settings_btn.setFixedSize(
+                self._button_width, self.SETTINGS_BUTTON_HEIGHT
+            )
             self.settings_btn.set_style("icon")
             self.sidebar.orientationChanged.connect(self._on_orientation_change)
             self.sidebar.add_separator()
@@ -56,7 +59,9 @@ class SidebarWidget(widgets.MainWindow):
         if orientation == constants.HORIZONTAL:
             self.settings_btn.setFixedSize(34, 34)
         else:
-            self.settings_btn.setFixedSize(self.BUTTON_WIDTH, self.SETTINGS_BUTTON_HEIGHT)
+            self.settings_btn.setFixedSize(
+                self._button_width, self.SETTINGS_BUTTON_HEIGHT
+            )
 
     def add_tab(
         self,
@@ -78,8 +83,8 @@ class SidebarWidget(widgets.MainWindow):
         )
         button = widgets.ToolButton(self.sidebar)
         button.setDefaultAction(act)
-        button.setFixedWidth(self.BUTTON_WIDTH)
-        button.set_style("text_below_icon")
+        button.setFixedWidth(self._button_width)
+        button.set_style(self._style)
         if area == "top":
             self.sidebar.insertWidget(self.spacer_action, button)
         else:
@@ -156,8 +161,8 @@ class SidebarWidget(widgets.MainWindow):
         )
         button = widgets.ToolButton(self.sidebar)
         button.setDefaultAction(act)
-        button.setFixedWidth(self.BUTTON_WIDTH)
-        button.set_style("text_below_icon")
+        button.setFixedWidth(self._button_width)
+        button.set_style(self._style)
         if area == "top":
             self.sidebar.insertWidget(self.spacer_action, button)
         else:
