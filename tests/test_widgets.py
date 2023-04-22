@@ -93,7 +93,7 @@ def test_boxlayout(qtbot):
     layout2 = widgets.BoxLayout("horizontal")
     layout += layout2
     assert layout[1] == layout2
-    layout.set_size_mode("maximum")
+    layout.set_size_constraint("maximum")
     assert layout.get_size_mode() == "maximum"
     layout.set_alignment("left")
     layout.set_alignment("left", widget)
@@ -101,7 +101,7 @@ def test_boxlayout(qtbot):
         layout.set_alignment("test")
     # assert layout.get_alignment() == "left"
     with pytest.raises(InvalidParamError):
-        layout.set_size_mode("bla")
+        layout.set_size_constraint("bla")
     layout.set_margin(0)
     assert len(layout) == 2
     layout.add_stretch(1)
@@ -358,9 +358,9 @@ def test_fontdialog(qtbot):
 
 def test_formlayout(qtbot):
     layout = widgets.FormLayout()
-    layout.set_size_mode("maximum")
+    layout.set_size_constraint("maximum")
     with pytest.raises(InvalidParamError):
-        layout.set_size_mode("bla")
+        layout.set_size_constraint("bla")
     layout[0, "left"] = "0, left"
     button_1 = widgets.RadioButton("1, left")
     qtbot.addWidget(button_1)
@@ -566,7 +566,7 @@ def test_gridlayout(qtbot):
     layout[5, 5] = layout2
     assert layout[0, 0] == widget
     assert layout[5, 5] == layout2
-    layout.set_size_mode("maximum")
+    layout.set_size_constraint("maximum")
     layout.set_alignment("left")
     assert len(layout) == len(list(layout)) == 2
     layout += widgets.RadioButton()
@@ -1112,7 +1112,7 @@ def test_stackedlayout(qtbot):
     layout += widget
     assert widget in layout
     layout.set_current_widget(widget)
-    layout.set_size_mode("maximum")
+    layout.set_size_constraint("maximum")
     layout.set_margin(0)
     assert len(layout) == 1
     for item in layout:

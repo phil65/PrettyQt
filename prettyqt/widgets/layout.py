@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Literal
 
+from deprecated import deprecated
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
@@ -67,7 +68,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def set_spacing(self, pixels: int):
         self.setSpacing(pixels)
 
+    @deprecated(reason="Use set_size_constraint instead")
     def set_size_mode(self, mode: SizeConstraintStr):
+        self.set_size_constraint(mode)
+
+    def set_size_constraint(self, mode: SizeConstraintStr):
         """Set the size mode of the layout.
 
         Args:
@@ -80,7 +85,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             raise InvalidParamError(mode, SIZE_CONSTRAINT)
         self.setSizeConstraint(SIZE_CONSTRAINT[mode])
 
+    @deprecated(reason="Use set_size_constraint instead")
     def get_size_mode(self) -> SizeConstraintStr:
+        return self.get_size_constraint()
+
+    def get_size_constraint(self) -> SizeConstraintStr:
         """Return current size mode.
 
         Returns:
