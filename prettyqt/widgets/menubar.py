@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from typing import overload
+from typing import Literal, overload
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
@@ -57,6 +57,31 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
                 self.addAction(action)
             else:
                 self.addAction(i)
+
+    def set_corner_widget(
+        self,
+        widget: QtWidgets.QWidget,
+        corner: Literal["top_right", "top_left"] = "top_right",
+    ):
+        match corner:
+            case "top_left":
+                self.setCornerWidget(widget, QtCore.Qt.Corner.TopLeftCorner)
+            case "top_right":
+                self.setCornerWidget(widget, QtCore.Qt.Corner.TopRightCorner)
+            case _:
+                raise ValueError(corner)
+
+    def get_corner_widget(
+        self,
+        corner: Literal["top_right", "top_left"] = "top_right",
+    ) -> QtWidgets.QWidget:
+        match corner:
+            case "top_left":
+                return self.cornerWidget(QtCore.Qt.Corner.TopLeftCorner)
+            case "top_right":
+                return self.cornerWidget(QtCore.Qt.Corner.TopRightCorner)
+            case _:
+                raise ValueError(corner)
 
 
 if __name__ == "__main__":
