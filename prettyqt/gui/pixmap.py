@@ -3,7 +3,7 @@ from __future__ import annotations
 import base64
 import pathlib
 
-from prettyqt import core, gui
+from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes
 
@@ -42,8 +42,20 @@ class PixmapMixin(gui.PaintDeviceMixin):
         return pixmap
 
     @classmethod
-    def from_image(cls, img: QtGui.QImage, flags) -> Pixmap:
-        return cls(cls.fromImage(img, flags))
+    def from_image(
+        cls,
+        img: QtGui.QImage,
+        color_preference: constants.ColorPreferenceStr = "auto",
+        dithering: constants.DitherPreferenceStr = "diffuse",
+        alpha_dithering: constants.AlphaDitherPreferenceStr = "threshold",
+        mode_preference: constants.ModePreferenceStr = "auto",
+    ) -> Pixmap:
+        flag = QtCore.Qt.ImageConversionFlag(0)
+        flag |= constants.COLOR_PREFERENCE.inverse[color_preference]
+        flag |= constants.DITHER_PREFERENCE.inverse[dithering]
+        flag |= constants.ALPHA_DITHER_PREFERENCE.inverse[alpha_dithering]
+        flag |= constants.MODE_PREFERENCE.inverse[mode_preference]
+        return cls(cls.fromImage(img, flag))
 
     def get_size(self) -> core.Size:
         return core.Size(self.size())
