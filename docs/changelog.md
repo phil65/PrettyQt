@@ -1,3 +1,15 @@
+## v1.20.0 (2023-04-22)
+
+### Feat
+
+- add some methods for Thread/ThreadPool [81795](https://github.com/phil65/PrettyQt/commit/8179503530cd6290546b28edee6045b46d2d3237)
+- **Pixmap**: get rid of flags param for from_image [8fbbf](https://github.com/phil65/PrettyQt/commit/8fbbfb35f6af5b37554f5a8944efa061dd8f9c1f)
+- **bluetooth**: add BluetoothDeviceInfo class [80482](https://github.com/phil65/PrettyQt/commit/80482f0e31e72bc04e65813e61a670bf488b7221)
+
+### Fix
+
+- **BluetoothDeviceDiscoveryAgent**: correctly set flags for start_discovery [4f53b](https://github.com/phil65/PrettyQt/commit/4f53be680fcdaa2deec2cee1b941fb79ee7876a0)
+
 ## v1.19.0 (2023-04-22)
 
 ### Feat
