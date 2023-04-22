@@ -69,6 +69,12 @@ class MetaObject:
     def get_super_class(self) -> MetaObject | None:
         return MetaObject(klass) if (klass := self.superClass()) is not None else None
 
+    def get_class_info(self, include_super: bool = True) -> dict[str, str]:
+        start = 0 if include_super else self.item.classInfoOffset() - 1
+        count = self.item.classInfoCount()
+        classinfos = [self.item.classInfo(i) for i in range(start, count)]
+        return {i.name(): i.value() for i in classinfos}
+
     def get_method(self, index: int | str) -> core.MetaMethod:
         if isinstance(index, int):
             return self.get_methods()[index]
