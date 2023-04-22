@@ -94,7 +94,7 @@ def test_boxlayout(qtbot):
     layout += layout2
     assert layout[1] == layout2
     layout.set_size_constraint("maximum")
-    assert layout.get_size_mode() == "maximum"
+    assert layout.get_size_constraint() == "maximum"
     layout.set_alignment("left")
     layout.set_alignment("left", widget)
     with pytest.raises(InvalidParamError):
