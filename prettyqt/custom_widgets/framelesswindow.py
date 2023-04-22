@@ -65,25 +65,14 @@ class CustomTitleBar(widgets.Frame):
         self.minimize_button.clicked.connect(
             lambda: window_widget.setWindowState(state)  # type: ignore
         )
-        self.maximize_button.clicked.connect(
-            lambda: (
-                window_widget.showNormal()
-                if window_widget.isMaximized()
-                else window_widget.showMaximized()
-            )
-        )
+        self.maximize_button.clicked.connect(window_widget.toggle_maximized)
         self.exit_button.clicked.connect(window_widget.close)
 
         self.set_layout("horizontal")
         spacer_item = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Policy.Expanding)
         self.box.addSpacerItem(spacer_item)
-        for widget in [
-            self.minimize_button,
-            self.maximize_button,
-            self.exit_button,
-        ]:
+        for widget in [self.minimize_button, self.maximize_button, self.exit_button]:
             self.box.addWidget(widget)
-
         self.setStyleSheet("width: 100%;" "padding: 0;" "margin: 0;")
         self.set_margin(0)
         self.box.set_margin(0)
@@ -146,12 +135,6 @@ class FramelessWindow(widgets.Widget):
                 | WS_MINIMIZEBOX,
             )
 
-            # if QtWin.isCompositionEnabled():
-            #     # Aero Shadow
-            #     QtWin.extendFrameIntoClientArea(self, -1, -1, -1, -1)
-            # else:
-            #     QtWin.resetExtendedFrame(self)
-
     def __getattr__(self, attr: str):
         return getattr(self.main_widget, attr)
 
@@ -186,10 +169,8 @@ class FramelessWindow(widgets.Widget):
             y -= self.frameGeometry().y()
 
             # Determine whether there are other widgets at the mouse position.
-            if self.childAt(x, y) is not None and self.childAt(
-                x, y
-            ) is not self.findChild(widgets.Widget, "ControlWidget"):
-                # passing
+            child = self.childAt(x, y)
+            if child is not None and child is not self.find_child(name="ControlWidget"):
                 if (
                     self.width() - self.BORDER_WIDTH > x > self.BORDER_WIDTH
                     and y < self.height() - self.BORDER_WIDTH
