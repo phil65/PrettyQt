@@ -3,6 +3,7 @@ from __future__ import annotations
 import os
 from typing import Literal
 
+from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import datatypes
 
@@ -28,6 +29,19 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
     @classmethod
     def get_supported_document_formats(cls) -> list[str]:
         return [i.data().decode() for i in cls.supportedDocumentFormats()]
+
+    @classmethod
+    def serialize_document(
+        cls,
+        document: QtGui.QTextDocument,
+        fmt: FormatStr | bytes | QtCore.QByteArray = "ODF",
+    ) -> bytes:
+        buffer = core.Buffer()
+        writer = cls()
+        writer.setDevice(buffer)
+        writer.set_format(fmt)  # ODF Format
+        writer.write(document)
+        return buffer.data().decode()
 
 
 if __name__ == "__main__":
