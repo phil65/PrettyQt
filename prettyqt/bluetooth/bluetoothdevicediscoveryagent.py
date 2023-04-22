@@ -8,9 +8,9 @@ from prettyqt.utils import bidict
 
 
 DISCOVERY_METHODS = bidict(
-    none=0,  # QtBluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod
-    classic=1,  # QtBluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod,
-    low_energy=2,  # QtBluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod,
+    none=QtBluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod,
+    classic=QtBluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod,
+    low_energy=QtBluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod,
 )
 
 DiscoveryMethodStr = Literal["none", "classic", "low_energy"]
@@ -69,12 +69,12 @@ class BluetoothDeviceDiscoveryAgent(
     #     """
     #     return INQUIRY_TYPES.inverse[self.inquiryType()]
 
-    def start_discovery(self, classic: bool = False, low_energy: bool = False):
-        flag = 0
+    def start_discovery(self, classic: bool = True, low_energy: bool = True):
+        flag = QtBluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod
         if classic:
-            flag &= 1
+            flag |= QtBluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod
         if low_energy:
-            flag &= 2
+            flag |= QtBluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod
         self.start(flag)
 
     def get_error(self) -> ErrorStr:
@@ -84,10 +84,19 @@ class BluetoothDeviceDiscoveryAgent(
         return [
             k
             for k, v in DISCOVERY_METHODS.items()
-            if v & self.supportedDiscoveryMethods().value
+            if v & self.supportedDiscoveryMethods()
         ]
 
 
 if __name__ == "__main__":
-    agent = BluetoothDeviceDiscoveryAgent()
-    print(agent.get_supported_discovery_methods())
+    import logging
+    from prettyqt import core
+    import sys
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    app = core.app()
+    agent = BluetoothDeviceDiscoveryAgent(app)
+    agent.setLowEnergyDiscoveryTimeout(500)
+    agent.deviceDiscovered.connect(lambda device: logging.info(device))
+    agent.finished.connect(app.quit)
+    agent.start_discovery()
+    app.main_loop()
