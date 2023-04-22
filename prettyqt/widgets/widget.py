@@ -94,6 +94,13 @@ class WidgetMixin(core.ObjectMixin):
         else:
             self.showFullScreen()
 
+    def toggle_maximized(self):
+        """Toggle between maximized and regular size."""
+        if self.isMaximized():
+            self.showNormal()
+        else:
+            self.showMaximized()
+
     def raise_to_top(self):
         if sys.platform.startswith("win"):
             import win32con
