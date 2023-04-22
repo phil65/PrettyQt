@@ -144,7 +144,7 @@ from .datetimeedit import DateTimeEdit, DateTimeEditMixin
 from .dateedit import DateEdit
 from .timeedit import TimeEdit
 from .calendarwidget import CalendarWidget
-from .plaintextedit import PlainTextEdit
+from .plaintextedit import PlainTextEdit, PlainTextEditMixin
 from .textbrowser import TextBrowser
 from .completer import Completer
 from .progressbar import ProgressBar
@@ -368,6 +368,7 @@ __all__ = [
     "DateTimeEditMixin",
     "CalendarWidget",
     "PlainTextEdit",
+    "PlainTextEditMixin",
     "TextBrowser",
     "Completer",
     "ProgressBar",
