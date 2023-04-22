@@ -66,6 +66,9 @@ class MetaObject:
     def __getattr__(self, val):
         return getattr(self.item, val)
 
+    def get_super_class(self) -> MetaObject | None:
+        return MetaObject(klass) if (klass := self.superClass()) is not None else None
+
     def get_method(self, index: int | str) -> core.MetaMethod:
         if isinstance(index, int):
             return self.get_methods()[index]
