@@ -1,3 +1,10 @@
+## v1.19.0 (2023-04-22)
+
+### Feat
+
+- **MenuBar**: add get/set_corner_widget methods [a9fc0](https://github.com/phil65/PrettyQt/commit/a9fc04fca144beb7de5937a201422213e4fb53f8)
+- **PdfView**: add set_file method [c5b79](https://github.com/phil65/PrettyQt/commit/c5b79c0791dcaf1114f436675cda9a6118b514e6)
+
 ## v1.18.0 (2023-04-21)
 
 ### Feat
