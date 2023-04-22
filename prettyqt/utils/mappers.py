@@ -32,3 +32,7 @@ class FlagMap:
     def get_list(self, flag) -> list[Any]:
         flag = int(flag)
         return [k for k, v in self.bidict.items() if v & flag]
+
+    def get_dict(self, flag) -> dict[str, Any]:
+        flag = int(flag)
+        return {k: v & flag for k, v in self.bidict.items()}
