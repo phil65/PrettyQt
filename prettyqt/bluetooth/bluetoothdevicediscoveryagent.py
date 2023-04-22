@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
+from prettyqt import bluetooth, core
 from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
@@ -48,6 +48,16 @@ ErrorStr = Literal[
 class BluetoothDeviceDiscoveryAgent(
     core.ObjectMixin, QtBluetooth.QBluetoothDeviceDiscoveryAgent
 ):
+    device_discovered = core.Signal(bluetooth.BluetoothDeviceInfo)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.deviceDiscovered.connect(self._on_device_discovered)
+
+    def _on_device_discovered(self, info):
+        info = bluetooth.BluetoothDeviceInfo(info)
+        self.device_discovered.emit(info)
+
     # def set_inquiry_type(self, typ: InquiryTypeStr):
     #     """Set inquiry type.
 
@@ -90,13 +100,15 @@ class BluetoothDeviceDiscoveryAgent(
 
 if __name__ == "__main__":
     import logging
-    from prettyqt import core
     import sys
+
+    from prettyqt import core
+
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = core.app()
     agent = BluetoothDeviceDiscoveryAgent(app)
     agent.setLowEnergyDiscoveryTimeout(500)
-    agent.deviceDiscovered.connect(lambda device: logging.info(device))
+    # agent.device_discovered.connect(lambda device: logging.info(type(device)))
     agent.finished.connect(app.quit)
     agent.start_discovery()
     app.main_loop()

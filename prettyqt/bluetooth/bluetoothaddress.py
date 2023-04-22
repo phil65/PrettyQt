@@ -7,6 +7,9 @@ class BluetoothAddress(QtBluetooth.QBluetoothAddress):
     def __repr__(self):
         return f"{type(self).__name__}({self.toString()!r})"
 
+    def __str__(self):
+        return self.toString()
+
     def __bool__(self):
         return not self.isNull()
 
