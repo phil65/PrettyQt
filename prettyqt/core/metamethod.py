@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
+from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -49,10 +50,15 @@ class MetaMethod:
     def get_name(self) -> str:
         return self.item.name().data().decode()
 
+    def get_parameters(self) -> list[core.MetaType]:
+        count = self.parameterCount()
+        return [core.MetaType(self.parameterMetaType(i).id()) for i in range(count)]
+
+    def get_return_type(self) -> core.MetaType:
+        return core.MetaType(self.returnMetaType().id())
+
 
 if __name__ == "__main__":
-    from prettyqt import core
-
     metaobj = core.Object.get_metaobject()
     method = metaobj.get_method("objectNameChanged")
-    print(method.get_name())
+    print(method.get_parameters())
