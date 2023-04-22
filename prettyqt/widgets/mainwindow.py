@@ -181,13 +181,6 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     def get_toolbars(self) -> list[QtWidgets.QToolBar]:
         return self.find_children(QtWidgets.QToolBar, recursive=False)
 
-    def toggle_fullscreen(self):
-        """Toggle between fullscreen and regular size."""
-        if self.isFullScreen():
-            self.showNormal()
-        else:
-            self.showFullScreen()
-
 
 if __name__ == "__main__":
     app = widgets.app()

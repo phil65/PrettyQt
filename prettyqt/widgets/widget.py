@@ -87,6 +87,13 @@ class WidgetMixin(core.ObjectMixin):
         else:
             super().resize(*size)
 
+    def toggle_fullscreen(self):
+        """Toggle between fullscreen and regular size."""
+        if self.isFullScreen():
+            self.showNormal()
+        else:
+            self.showFullScreen()
+
     def raise_to_top(self):
         if sys.platform.startswith("win"):
             import win32con
