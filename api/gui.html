@@ -1985,6 +1985,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.textdocument.TextDocumentMixin.find_line_position" class="md-nav__link">
+    find_line_position()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.textdocument.TextDocumentMixin.get_default_cursor_move_style" class="md-nav__link">
     get_default_cursor_move_style()
   </a>
@@ -4193,6 +4200,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.gui.textdocument.TextDocumentMixin.find_line_position" class="md-nav__link">
+    find_line_position()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.gui.textdocument.TextDocumentMixin.get_default_cursor_move_style" class="md-nav__link">
     get_default_cursor_move_style()
   </a>
@@ -4695,10 +4709,7 @@ Color            (<span title="PySide6.QtGui.QColor">QColor</span>)
             <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">()</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
-        <span class="p">)</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">red</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">green</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">blue</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">alpha</span><span class="p">()</span> <span class="o">==</span> <span class="mi">255</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NameFormat</span><span class="o">.</span><span class="n">HexArgb</span><span class="p">)</span>
@@ -5874,9 +5885,8 @@ Font            (<span title="prettyqt.utils.prettyprinter.PrettyPrinter">Pretty
           <summary>Source code in <code>prettyqt\gui\font.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Font</span><span class="p">(</span><span class="n">prettyprinter</span><span class="o">.</span><span class="n">PrettyPrinter</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QFont</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">()</span><span class="si">!r}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">pointSize</span><span class="p">()</span><span class="si">}</span><span class="s2">, &quot;</span>
-            <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">italic</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">family</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSize</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">weight</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">italic</span><span class="p">()</span>
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -6861,15 +6871,12 @@ GradientMixin        </code>
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setColorAt</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
             <span class="n">coordinate_mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_coordinate_mode</span><span class="p">(),</span>
             <span class="n">spread</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_spread</span><span class="p">(),</span>
             <span class="n">stops</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_stops</span><span class="p">(),</span>
         <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">serialize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">serialize_fields</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="nf">set_coordinate_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">CoordinateModeStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the coordinate mode.</span>
@@ -7075,7 +7082,6 @@ GradientMixin        </code>
     </div>
 
   </div>
-
 
 
 
@@ -7926,7 +7932,7 @@ Icon            (<span title="PySide6.QtGui.QIcon">QIcon</span>)
           <summary>Source code in <code>prettyqt\gui\icon.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Icon</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isNull</span><span class="p">()</span>
@@ -9171,7 +9177,7 @@ Movie            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</sp
           <summary>Source code in <code>prettyqt\gui\movie.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Movie</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QMovie</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">fileName</span><span class="p">()</span><span class="si">!r}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_format</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fileName</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_format</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
@@ -9470,7 +9476,7 @@ PageLayout            (<span title="PySide6.QtGui.QPageLayout">QPageLayout</span
           <summary>Source code in <code>prettyqt\gui\pagelayout.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PageLayout</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPageLayout</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
@@ -9983,7 +9989,7 @@ PageSize            (<span title="PySide6.QtGui.QPageSize">QPageSize</span>)
           <summary>Source code in <code>prettyqt\gui\pagesize.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PageSize</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPageSize</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_id</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">(),)</span>
@@ -11568,7 +11574,7 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
         <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;button&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="p">[</span><span class="s1">&#39;window&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;window&quot;</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">highlight_inactive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ColorGroup</span><span class="o">.</span><span class="n">Active</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">ColorRole</span><span class="o">.</span><span class="n">Highlight</span><span class="p">)</span>
@@ -11890,7 +11896,7 @@ Pen            (<span title="PySide6.QtGui.QPen">QPen</span>)
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">set_color</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="n">color</span> <span class="o">=</span> <span class="n">colors</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
@@ -12972,7 +12978,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
           <summary>Source code in <code>prettyqt\gui\standarditem.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StandardItem</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">get_icon</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span>
@@ -13456,7 +13462,7 @@ StaticText            (<span title="PySide6.QtGui.QStaticText">QStaticText</span
           <summary>Source code in <code>prettyqt\gui\statictext.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StaticText</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QStaticText</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span>
@@ -14024,7 +14030,7 @@ SurfaceMixin        </code>
           <summary>Source code in <code>prettyqt\gui\surface.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">SurfaceMixin</span><span class="p">:</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">get_surface_class</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SurfaceClassStr</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Get the current surface class.</span>
@@ -14359,7 +14365,7 @@ TextBlock            (<span title="PySide6.QtGui.QTextBlock">QTextBlock</span>)
           <summary>Source code in <code>prettyqt\gui\textblock.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TextBlock</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QTextBlock</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">contains</span><span class="p">(</span><span class="n">position</span><span class="p">)</span>
@@ -15956,7 +15962,7 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
         <span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toPlainText</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">get_first_block</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextBlock</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextBlock</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">firstBlock</span><span class="p">())</span>
@@ -16112,6 +16118,7 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
         <span class="k">return</span> <span class="n">qstylizer</span><span class="o">.</span><span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">defaultStyleSheet</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">find_line_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return index of the TextBlock corresponding to given line number.&quot;&quot;&quot;</span>
         <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blockCount</span><span class="p">()</span>
         <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">line_no</span> <span class="o">&lt;=</span> <span class="n">lines</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">findBlockByLineNumber</span><span class="p">(</span><span class="n">line_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
@@ -16120,11 +16127,16 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">,</span>
         <span class="n">fmt</span><span class="p">:</span> <span class="n">gui</span><span class="o">.</span><span class="n">textdocumentwriter</span><span class="o">.</span><span class="n">FormatStr</span> <span class="o">|</span> <span class="nb">bytes</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QByteArray</span> <span class="o">=</span> <span class="s2">&quot;plaintext&quot;</span><span class="p">,</span>
-    <span class="p">):</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
         <span class="n">writer</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextDocumentWriter</span><span class="p">()</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">set_format</span><span class="p">(</span><span class="n">fmt</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">set_file_name</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_bytes</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;plaintext&quot;</span><span class="p">,</span> <span class="s2">&quot;HTML&quot;</span><span class="p">,</span> <span class="s2">&quot;markdown&quot;</span><span class="p">,</span> <span class="s2">&quot;ODF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ODF&quot;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bytes</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextDocumentWriter</span><span class="o">.</span><span class="n">serialize_document</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fmt</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">show_whitespace_and_tabs</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">show</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set show white spaces flag.&quot;&quot;&quot;</span>
@@ -16225,6 +16237,35 @@ TextDocumentMixin            (<span title="prettyqt.core.object.ObjectMixin">Obj
 
 
 
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="prettyqt.gui.textdocument.TextDocumentMixin.find_line_position" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">find_line_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span></code>
+
+
+</h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Return index of the TextBlock corresponding to given line number.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt\gui\textdocument.py</code></summary>
+          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">find_line_position</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">line_no</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return index of the TextBlock corresponding to given line number.&quot;&quot;&quot;</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">blockCount</span><span class="p">()</span>
+    <span class="k">assert</span> <span class="mi">1</span> <span class="o">&lt;=</span> <span class="n">line_no</span> <span class="o">&lt;=</span> <span class="n">lines</span>
+    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">findBlockByLineNumber</span><span class="p">(</span><span class="n">line_no</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">position</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
 
 
 
@@ -16623,7 +16664,7 @@ TextFormatMixin        </code>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">get_background</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">background</span><span class="p">())</span>
@@ -17385,7 +17426,7 @@ TextLength            (<span title="PySide6.QtGui.QTextLength">QTextLength</span
           <summary>Source code in <code>prettyqt\gui\textlength.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">TextLength</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QTextLength</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">()</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">rawValue</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">type</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">rawValue</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">get_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TypeStr</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return type of this length object.</span>
@@ -18475,7 +18516,7 @@ ValidatorMixin            (<span title="prettyqt.core.object.ObjectMixin">Object
           <summary>Source code in <code>prettyqt\gui\validator.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ValidatorMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="n">Validator</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">custom_validators</span>
@@ -18609,7 +18650,7 @@ WindowMixin            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
           <summary>Source code in <code>prettyqt\gui\window.py</code></summary>
           <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WindowMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">SurfaceMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">()&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
     <span class="c1"># def serialize_fields(self):</span>
     <span class="c1">#     return dict(</span>

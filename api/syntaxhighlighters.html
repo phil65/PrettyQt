@@ -1808,7 +1808,7 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
             <span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span> <span class="o">=</span> <span class="n">get_lexer_by_name</span><span class="p">(</span><span class="n">lexer</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(lexer=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lexer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_lexer</span><span class="o">.</span><span class="n">aliases</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
     <span class="k">def</span> <span class="nf">highlightBlock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Highlight a block of text.&quot;&quot;&quot;</span>
@@ -1863,7 +1863,7 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
 
     <span class="k">def</span> <span class="nf">_clear_caches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear caches for brushes and formats.&quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+        <span class="n">_get_brush</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_get_format</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
 
     <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>
@@ -1893,9 +1893,9 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
             <span class="k">if</span> <span class="n">value</span><span class="p">:</span>
                 <span class="k">match</span> <span class="n">key</span><span class="p">:</span>
                     <span class="k">case</span> <span class="s2">&quot;color&quot;</span><span class="p">:</span>
-                        <span class="n">result</span><span class="o">.</span><span class="n">set_foreground_color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                        <span class="n">result</span><span class="o">.</span><span class="n">set_foreground_color</span><span class="p">(</span><span class="n">_get_brush</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
                     <span class="k">case</span> <span class="s2">&quot;bgcolor&quot;</span><span class="p">:</span>
-                        <span class="n">result</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_get_brush</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
+                        <span class="n">result</span><span class="o">.</span><span class="n">set_background_color</span><span class="p">(</span><span class="n">_get_brush</span><span class="p">(</span><span class="n">value</span><span class="p">))</span>
                     <span class="k">case</span> <span class="s2">&quot;bold&quot;</span><span class="p">:</span>
                         <span class="n">result</span><span class="o">.</span><span class="n">set_font_weight</span><span class="p">(</span><span class="s2">&quot;bold&quot;</span><span class="p">)</span>
                     <span class="k">case</span> <span class="s2">&quot;italic&quot;</span><span class="p">:</span>
@@ -1909,12 +1909,6 @@ PygmentsHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Synt
                     <span class="k">case</span> <span class="s2">&quot;mono&quot;</span><span class="p">:</span>
                         <span class="n">result</span><span class="o">.</span><span class="n">set_font_style_hint</span><span class="p">(</span><span class="s2">&quot;typewriter&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">result</span>
-
-    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>
-    <span class="k">def</span> <span class="nf">_get_brush</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a brush for the color.&quot;&quot;&quot;</span>
-        <span class="n">qcolor</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;#</span><span class="si">{</span><span class="n">color</span><span class="p">[:</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">Brush</span><span class="p">(</span><span class="n">qcolor</span><span class="p">)</span>
 </code></pre></div>
         </details>
 
@@ -2097,7 +2091,7 @@ below), and use it to continue processing the current line.</p>
                 <span class="k">case</span> <span class="s2">&quot;#push&quot;</span><span class="p">:</span>
                     <span class="n">statestack</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">statestack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
                 <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-                    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;wrong state def: </span><span class="si">{</span><span class="n">new_state</span><span class="si">!r}</span><span class="s2">&quot;</span>
+                    <span class="k">raise</span> <span class="ne">AssertionError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;wrong state def: </span><span class="si">{</span><span class="n">new_state</span><span class="si">!r}</span><span class="s2">&quot;</span><span class="p">)</span>
             <span class="n">statetokens</span> <span class="o">=</span> <span class="n">tokendefs</span><span class="p">[</span><span class="n">statestack</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
             <span class="k">break</span>
         <span class="k">else</span><span class="p">:</span>
@@ -2506,12 +2500,7 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
                 <span class="k">break</span>
             <span class="n">starts_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
             <span class="n">ends_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
-            <span class="k">if</span> <span class="p">(</span>
-                <span class="n">starts_in_line</span>
-                <span class="ow">and</span> <span class="n">ends_in_line</span>
-                <span class="ow">or</span> <span class="ow">not</span> <span class="n">ends_in_line</span>
-                <span class="ow">and</span> <span class="n">starts_in_line</span>
-            <span class="p">):</span>
+            <span class="k">if</span> <span class="n">starts_in_line</span> <span class="ow">and</span> <span class="n">ends_in_line</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ends_in_line</span> <span class="ow">and</span> <span class="n">starts_in_line</span><span class="p">:</span>
                 <span class="c1"># print(f&quot;in line: {line_pos} - {line_pos + match_len}&quot;)</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">ends_in_line</span><span class="p">:</span>
@@ -2569,12 +2558,7 @@ RegexMatchHighlighter            (<span title="prettyqt.gui.syntaxhighlighter.Sy
             <span class="k">break</span>
         <span class="n">starts_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">start</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
         <span class="n">ends_in_line</span> <span class="o">=</span> <span class="n">start_char</span> <span class="o">&lt;=</span> <span class="n">end</span> <span class="o">&lt;=</span> <span class="n">end_char</span>
-        <span class="k">if</span> <span class="p">(</span>
-            <span class="n">starts_in_line</span>
-            <span class="ow">and</span> <span class="n">ends_in_line</span>
-            <span class="ow">or</span> <span class="ow">not</span> <span class="n">ends_in_line</span>
-            <span class="ow">and</span> <span class="n">starts_in_line</span>
-        <span class="p">):</span>
+        <span class="k">if</span> <span class="n">starts_in_line</span> <span class="ow">and</span> <span class="n">ends_in_line</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">ends_in_line</span> <span class="ow">and</span> <span class="n">starts_in_line</span><span class="p">:</span>
             <span class="c1"># print(f&quot;in line: {line_pos} - {line_pos + match_len}&quot;)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_colorize</span><span class="p">(</span><span class="n">start</span> <span class="o">-</span> <span class="n">start_char</span><span class="p">,</span> <span class="n">end</span> <span class="o">-</span> <span class="n">start</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">ends_in_line</span><span class="p">:</span>

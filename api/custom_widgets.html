@@ -5203,7 +5203,7 @@ ElidedLabel            (<span title="prettyqt.widgets.frame.Frame">Frame</span>)
         <span class="bp">self</span><span class="o">.</span><span class="n">set_size_policy</span><span class="p">(</span><span class="s2">&quot;expanding&quot;</span><span class="p">,</span> <span class="s2">&quot;preferred&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">()</span><span class="si">!r}</span><span class="s2">)&quot;</span>
+        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="nf">set_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_text</span> <span class="o">=</span> <span class="n">text</span>
@@ -5415,8 +5415,8 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
 <span class="sd">            parent: parent widget</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="n">extensions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extensions</span> <span class="o">=</span> <span class="n">extensions</span> <span class="ow">or</span> <span class="p">[]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">AcceptModeStr</span> <span class="o">=</span> <span class="n">mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">file_mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">FileModeStr</span> <span class="o">=</span> <span class="n">file_mode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
@@ -5436,16 +5436,6 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
         <span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="o">.</span><span class="n">setDefaultAction</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
         <span class="n">layout</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">button</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">,</span> <span class="n">extensions</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">extensions</span><span class="p">,</span> <span class="n">enabled</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">isEnabled</span><span class="p">())</span>
-
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="n">state</span><span class="p">[</span><span class="s2">&quot;path&quot;</span><span class="p">])</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">set_enabled</span><span class="p">(</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;enabled&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">))</span>
-
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extensions</span><span class="p">,),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
-
     <span class="nd">@core</span><span class="o">.</span><span class="n">Slot</span><span class="p">()</span>
     <span class="k">def</span> <span class="nf">open_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">dialog</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">FileDialog</span><span class="p">(</span>
@@ -5455,26 +5445,35 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
             <span class="n">path</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span>
             <span class="n">file_mode</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">file_mode</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">extensions</span><span class="p">:</span>
-            <span class="n">dialog</span><span class="o">.</span><span class="n">set_extension_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">extensions</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extensions</span><span class="p">:</span>
+            <span class="n">dialog</span><span class="o">.</span><span class="n">set_extension_filter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_extensions</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">dialog</span><span class="o">.</span><span class="n">choose</span><span class="p">():</span>
             <span class="k">return</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="n">dialog</span><span class="o">.</span><span class="n">selected_file</span><span class="p">())</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">value_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value_changed</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">set_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">lineedit</span><span class="o">.</span><span class="n">set_text</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">get_value</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">path</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_path</span>
 
     <span class="k">def</span> <span class="nf">set_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span> <span class="o">|</span> <span class="kc">None</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_path</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_extensions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extensions</span>
+
+    <span class="k">def</span> <span class="nf">set_extensions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">extensions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extensions</span> <span class="o">=</span> <span class="n">extensions</span>
+
+    <span class="c1"># path = core.Property(object, get_value, set_value)</span>
+    <span class="c1"># extensions = core.Property(object, get_extensions, set_extensions)</span>
 </code></pre></div>
         </details>
 
@@ -5575,8 +5574,8 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
 <span class="sd">        parent: parent widget</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">extensions</span> <span class="o">=</span> <span class="n">extensions</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_path</span><span class="p">:</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">_extensions</span> <span class="o">=</span> <span class="n">extensions</span> <span class="ow">or</span> <span class="p">[]</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">AcceptModeStr</span> <span class="o">=</span> <span class="n">mode</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">file_mode</span><span class="p">:</span> <span class="n">widgets</span><span class="o">.</span><span class="n">filedialog</span><span class="o">.</span><span class="n">FileModeStr</span> <span class="o">=</span> <span class="n">file_mode</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
@@ -5600,7 +5599,6 @@ FileChooserButton            (<span title="prettyqt.widgets.widget.Widget">Widge
     </div>
 
   </div>
-
 
 
 
@@ -5701,9 +5699,9 @@ FlowLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</span
     <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;items&quot;</span><span class="p">]:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">item</span><span class="p">)</span>
+    <span class="c1"># def __setstate__(self, state):</span>
+    <span class="c1">#     for item in state[&quot;items&quot;]:</span>
+    <span class="c1">#         self.add(item)</span>
 
     <span class="k">def</span> <span class="fm">__del__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">item</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">takeAt</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -5779,7 +5777,6 @@ FlowLayout            (<span title="prettyqt.widgets.layout.Layout">Layout</span
 
 
   <div class="doc doc-children">
-
 
 
 
@@ -6117,26 +6114,15 @@ CustomTitleBar            (<span title="prettyqt.widgets.frame.Frame">Frame</spa
         <span class="bp">self</span><span class="o">.</span><span class="n">minimize_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
             <span class="k">lambda</span><span class="p">:</span> <span class="n">window_widget</span><span class="o">.</span><span class="n">setWindowState</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
         <span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">maximize_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span>
-            <span class="k">lambda</span><span class="p">:</span> <span class="p">(</span>
-                <span class="n">window_widget</span><span class="o">.</span><span class="n">showNormal</span><span class="p">()</span>
-                <span class="k">if</span> <span class="n">window_widget</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">()</span>
-                <span class="k">else</span> <span class="n">window_widget</span><span class="o">.</span><span class="n">showMaximized</span><span class="p">()</span>
-            <span class="p">)</span>
-        <span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">maximize_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">window_widget</span><span class="o">.</span><span class="n">toggle_maximized</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">exit_button</span><span class="o">.</span><span class="n">clicked</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">window_widget</span><span class="o">.</span><span class="n">close</span><span class="p">)</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">set_layout</span><span class="p">(</span><span class="s2">&quot;horizontal&quot;</span><span class="p">)</span>
         <span class="n">spacer_item</span> <span class="o">=</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QSpacerItem</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QSizePolicy</span><span class="o">.</span><span class="n">Policy</span><span class="o">.</span><span class="n">Expanding</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">addSpacerItem</span><span class="p">(</span><span class="n">spacer_item</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="p">[</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">minimize_button</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">maximize_button</span><span class="p">,</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">exit_button</span><span class="p">,</span>
-        <span class="p">]:</span>
+        <span class="k">for</span> <span class="n">widget</span> <span class="ow">in</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">minimize_button</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">maximize_button</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">exit_button</span><span class="p">]:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">addWidget</span><span class="p">(</span><span class="n">widget</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;width: 100%;&quot;</span> <span class="s2">&quot;padding: 0;&quot;</span> <span class="s2">&quot;margin: 0;&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">setStyleSheet</span><span class="p">(</span><span class="s2">&quot;width: 100%; padding: 0; margin: 0;&quot;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">box</span><span class="o">.</span><span class="n">setSpacing</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
@@ -6369,19 +6355,13 @@ FramelessWindow            (<span title="prettyqt.widgets.widget.Widget">Widget<
                 <span class="o">|</span> <span class="n">WS_MINIMIZEBOX</span><span class="p">,</span>
             <span class="p">)</span>
 
-            <span class="c1"># if QtWin.isCompositionEnabled():</span>
-            <span class="c1">#     # Aero Shadow</span>
-            <span class="c1">#     QtWin.extendFrameIntoClientArea(self, -1, -1, -1, -1)</span>
-            <span class="c1"># else:</span>
-            <span class="c1">#     QtWin.resetExtendedFrame(self)</span>
-
     <span class="k">def</span> <span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="k">return</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">main_widget</span><span class="p">,</span> <span class="n">attr</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">changeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
         <span class="c1"># not sure if this should be done on non-windows</span>
         <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">WindowStateChange</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">windowState</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindowState</span><span class="o">.</span><span class="n">WindowMaximized</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">():</span>  <span class="c1"># type: ignore</span>
                 <span class="n">margin</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">topLeft</span><span class="p">())</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="n">margin</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -6409,10 +6389,8 @@ FramelessWindow            (<span title="prettyqt.widgets.widget.Widget">Widget<
             <span class="n">y</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frameGeometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span>
 
             <span class="c1"># Determine whether there are other widgets at the mouse position.</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">childAt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">childAt</span><span class="p">(</span>
-                <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-            <span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">,</span> <span class="s2">&quot;ControlWidget&quot;</span><span class="p">):</span>
-                <span class="c1"># passing</span>
+            <span class="n">child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">childAt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ControlWidget&quot;</span><span class="p">):</span>
                 <span class="k">if</span> <span class="p">(</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">BORDER_WIDTH</span> <span class="o">&gt;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">BORDER_WIDTH</span>
                     <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">BORDER_WIDTH</span>
@@ -6487,7 +6465,7 @@ FramelessWindow            (<span title="prettyqt.widgets.widget.Widget">Widget<
           <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">changeEvent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
     <span class="c1"># not sure if this should be done on non-windows</span>
     <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">type</span><span class="p">()</span> <span class="o">==</span> <span class="n">event</span><span class="o">.</span><span class="n">Type</span><span class="o">.</span><span class="n">WindowStateChange</span><span class="p">:</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">windowState</span><span class="p">()</span> <span class="o">&amp;</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">Qt</span><span class="o">.</span><span class="n">WindowState</span><span class="o">.</span><span class="n">WindowMaximized</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">isMaximized</span><span class="p">():</span>  <span class="c1"># type: ignore</span>
             <span class="n">margin</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mapToGlobal</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">rect</span><span class="p">()</span><span class="o">.</span><span class="n">topLeft</span><span class="p">())</span><span class="o">.</span><span class="n">y</span><span class="p">())</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">set_margin</span><span class="p">(</span><span class="n">margin</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -6538,10 +6516,8 @@ FramelessWindow            (<span title="prettyqt.widgets.widget.Widget">Widget<
         <span class="n">y</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">frameGeometry</span><span class="p">()</span><span class="o">.</span><span class="n">y</span><span class="p">()</span>
 
         <span class="c1"># Determine whether there are other widgets at the mouse position.</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">childAt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">childAt</span><span class="p">(</span>
-            <span class="n">x</span><span class="p">,</span> <span class="n">y</span>
-        <span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">findChild</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Widget</span><span class="p">,</span> <span class="s2">&quot;ControlWidget&quot;</span><span class="p">):</span>
-            <span class="c1"># passing</span>
+        <span class="n">child</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">childAt</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">child</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">find_child</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;ControlWidget&quot;</span><span class="p">):</span>
             <span class="k">if</span> <span class="p">(</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">BORDER_WIDTH</span> <span class="o">&gt;</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">BORDER_WIDTH</span>
                 <span class="ow">and</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">BORDER_WIDTH</span>
