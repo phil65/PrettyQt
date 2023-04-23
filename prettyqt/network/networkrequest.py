@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import Literal, TypedDict
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
@@ -38,6 +38,34 @@ ATTRIBUTE = bidict(
     user=Req.Attribute.User,
     user_max=Req.Attribute.UserMax,
 )
+
+
+class TypedAttribute(TypedDict):
+    http_status_code: int
+    http_reason_phrase: bytes
+    redirection_target: QtCore.QUrl
+    connection_encrypted: bool
+    cache_load_control: int
+    cache_save_control: bool
+    source_is_from_cache: bool
+    do_not_buffer_upload_data: bool
+    http_pipelining_allowed: bool
+    http_pipelining_was_used: bool
+    custom_verb: bytes
+    cookie_load_control: int
+    cookie_save_control: int
+    authentication_reuse: int
+    background_request: bool
+    http2_allowed: bool
+    http2_was_used: bool
+    emit_all_upload_progress_signals: bool
+    original_content_length: int
+    redirect_policy: int
+    http2_direct: bool
+    auto_delete_reply_on_finish: bool
+    user: datatypes.VariantType
+    user_max: datatypes.VariantType
+
 
 AttributeStr = Literal[
     "http_status_code",
