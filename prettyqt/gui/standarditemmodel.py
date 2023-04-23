@@ -133,7 +133,7 @@ if __name__ == "__main__":
 
     from prettyqt import widgets
 
-    model = gui.StandardItemModel()
+    model = StandardItemModel()
     model.add("test")
     app = widgets.app()
     w = widgets.ListView()

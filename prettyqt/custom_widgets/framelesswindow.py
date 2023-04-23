@@ -141,7 +141,7 @@ class FramelessWindow(widgets.Widget):
     def changeEvent(self, event):
         # not sure if this should be done on non-windows
         if event.type() == event.Type.WindowStateChange:
-            if self.windowState() & QtCore.Qt.WindowState.WindowMaximized:  # type: ignore
+            if self.isMaximized():  # type: ignore
                 margin = abs(self.mapToGlobal(self.rect().topLeft()).y())
                 self.set_margin(margin)
             else:

@@ -114,10 +114,6 @@ def test_lineseries(qtbot):
     line[1] = QtCore.QPointF(0, 0)
     line.get_brush()
     line.get_pen()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(line, jar)
-    with open("data.pkl", "rb") as jar:
-        line = pickle.load(jar)
     del line[1]
 
 

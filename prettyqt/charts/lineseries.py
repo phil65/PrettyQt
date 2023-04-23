@@ -23,4 +23,3 @@ class LineSeries(charts.XYSeriesMixin, QtCharts.QLineSeries):
 if __name__ == "__main__":
     line = LineSeries()
     line += QtCore.QPointF(1, 1)
-    line.serialize_fields()

@@ -227,6 +227,7 @@ class TextDocumentMixin(core.ObjectMixin):
         return qstylizer.parser.parse(self.defaultStyleSheet())
 
     def find_line_position(self, line_no: int) -> int:
+        """Return index of the TextBlock corresponding to given line number."""
         lines = self.blockCount()
         assert 1 <= line_no <= lines
         return self.findBlockByLineNumber(line_no - 1).position()
@@ -235,7 +236,7 @@ class TextDocumentMixin(core.ObjectMixin):
         self,
         path: datatypes.PathType,
         fmt: gui.textdocumentwriter.FormatStr | bytes | QtCore.QByteArray = "plaintext",
-    ):
+    ) -> bool:
         writer = gui.TextDocumentWriter()
         writer.set_format(fmt)
         writer.set_file_name(path)

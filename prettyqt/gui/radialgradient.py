@@ -29,4 +29,3 @@ class RadialGradient(gui.GradientMixin, QtGui.QRadialGradient):
 
 if __name__ == "__main__":
     grad = RadialGradient()
-    print(grad.serialize_fields())

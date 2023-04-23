@@ -67,7 +67,7 @@ class ActionMixin(core.ObjectMixin):
 
     def __repr__(self) -> str:
         cls_name = type(self).__name__
-        return f"{cls_name}({helpers.format_kwargs(self.serialize_fields())})"
+        return f"{cls_name}({self.text()!r})"
 
     def serialize_fields(self):
         return dict(

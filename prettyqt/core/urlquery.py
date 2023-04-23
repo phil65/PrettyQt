@@ -38,3 +38,7 @@ class UrlQuery(QtCore.QUrlQuery):
     # def add_query_items(self, **items: str):
     #     for k, v in items.items():
     #         self.addQueryitem(k, v)
+
+
+if __name__ == "__main__":
+    query = UrlQuery()

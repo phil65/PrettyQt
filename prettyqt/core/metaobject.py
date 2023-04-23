@@ -77,7 +77,7 @@ class MetaObject:
 
     def get_method(self, index: int | str) -> core.MetaMethod:
         if isinstance(index, int):
-            return self.get_methods()[index]
+            return core.MetaMethod(self.item.method(index))
         for method in self.get_methods():
             if method.get_name() == index:
                 return method
@@ -85,10 +85,26 @@ class MetaObject:
 
     def get_enum(self, index: int | str) -> core.MetaEnum:
         if isinstance(index, int):
-            return self.get_enums()[index]
+            return core.MetaEnum(self.item.enumerator(index))
         for enumerator in self.get_enums():
             if enumerator.get_name() == index:
                 return enumerator
+        raise KeyError(index)
+
+    def get_property(self, index: int | str) -> core.MetaProperty:
+        if isinstance(index, int):
+            return core.MetaProperty(self.item.property(index))
+        for prop in self.get_properties():
+            if prop.get_name() == index:
+                return prop
+        raise KeyError(index)
+
+    def get_constructor(self, index: int | str) -> core.MetaProperty:
+        if isinstance(index, int):
+            return core.MetaMethod(self.item.constructor(index))
+        for prop in self.get_constructors():
+            if prop.get_name() == index:
+                return prop
         raise KeyError(index)
 
     def get_methods(
@@ -97,10 +113,7 @@ class MetaObject:
         type_filter: core.metamethod.MethodTypeStr | None = None,
     ) -> list[core.MetaMethod]:
         start = 0 if include_super else self.item.methodOffset() - 1
-        methods = [
-            core.MetaMethod(self.item.method(i))
-            for i in range(start, self.item.methodCount())
-        ]
+        methods = [self.get_method(i) for i in range(start, self.item.methodCount())]
         if type_filter is None:
             return methods
         else:
@@ -108,23 +121,16 @@ class MetaObject:
 
     def get_enums(self, include_super: bool = True) -> list[core.MetaEnum]:
         start = 0 if include_super else self.item.enumeratorOffset() - 1
-        return [
-            core.MetaEnum(self.item.enumerator(i))
-            for i in range(start, self.item.enumeratorCount())
-        ]
+        return [self.get_enum(i) for i in range(start, self.item.enumeratorCount())]
 
     def get_constructors(self) -> list[core.MetaMethod]:
-        return [
-            core.MetaMethod(self.item.constructor(i))
-            for i in range(self.item.constructorCount())
-        ]
+        count = self.item.constructorCount()
+        return [core.MetaMethod(self.item.constructor(i)) for i in range(count)]
 
     def get_properties(self, include_super: bool = True) -> list[core.MetaProperty]:
         start = 0 if include_super else self.item.propertyOffset() - 1
-        return [
-            core.MetaProperty(self.item.property(i))
-            for i in range(start, self.item.propertyCount())
-        ]
+        count = self.item.propertyCount()
+        return [core.MetaProperty(self.item.property(i)) for i in range(start, count)]
 
     def get_signals(self, include_super: bool = True) -> list[core.MetaMethod]:
         return [
