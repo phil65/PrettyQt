@@ -110,11 +110,6 @@ class TextStream(QtCore.QTextStream):
         """
         return REAL_NUMBER_NOTATION.inverse[self.realNumberNotation()]
 
-    def set_codec(self, codec: bytes | str):
-        if isinstance(codec, str):
-            codec = codec.encode()
-        self.setCodec(codec)
-
     def read_lines(self) -> Iterator[str]:
         while True:
             if msg := self.readLine():

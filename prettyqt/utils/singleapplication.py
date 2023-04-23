@@ -6,7 +6,7 @@ from prettyqt import core, network, widgets
 
 
 class SingleApplication(widgets.Application):
-    messageReceived = core.Signal(str)
+    message_received = core.Signal(str)
 
     def __init__(self, app_id: str):
         super().__init__(sys.argv)
@@ -28,7 +28,7 @@ class SingleApplication(widgets.Application):
         else:
             self._out_socket = out_socket
             self._out_stream = core.TextStream(self._out_socket)
-            self._out_stream.set_codec("UTF-8")
+            # self._out_stream.set_codec("UTF-8")
 
     def is_running(self) -> bool:
         return self._is_running
@@ -53,7 +53,7 @@ class SingleApplication(widgets.Application):
         if self._in_socket is None:
             return
         self._in_stream = core.TextStream(self._in_socket)
-        self._in_stream.set_codec("UTF-8")
+        # self._in_stream.set_codec("UTF-8")
         self._in_socket.readyRead.connect(self._on_ready_read)
         if self._activate_on_message:
             self.activate_window()
@@ -62,7 +62,7 @@ class SingleApplication(widgets.Application):
         if self._in_stream is None:
             raise RuntimeError()
         for msg in self._in_stream.read_lines():
-            self.messageReceived.emit(msg)
+            self.message_received.emit(msg)
 
 
 if __name__ == "__main__":
