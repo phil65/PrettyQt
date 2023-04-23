@@ -1,3 +1,25 @@
+## v1.21.0 (2023-04-23)
+
+### Feat
+
+- **NetworkRequest**: support some attributes from newer qt versions
+- **NetworkRequest**: add set_attribute(s) method
+- **Object**: add set_properties method
+- **MimeData**: add for_file method
+- **TextDocument**: add get_bytes method
+- **MetaMethod**: add get_parameters/get_return_types methods
+- **MetaObject**: add get_class_info method
+- **MetaObject**: add get_super_class method
+- **UrlQuery**: add __getitem__ and __setitem__ methods
+- **TextDocumentWriter**: add serialize_document method
+- **Widget**: add toggle_maximized method
+
+### Fix
+
+- correct isinstance check for to_json
+- **TextDocumentWriter**: fix serialization
+- **SingleApplication**: TextStream.setCodec gone in qt6
+
 ## v1.20.0 (2023-04-22)
 
 ### Feat

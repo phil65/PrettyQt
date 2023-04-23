@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "PrettyQt"
-version = "1.20.0"
+version = "1.21.0"
 description = "A pythonic layer on top of PyQt6 / PySide6"
 readme = 'docs/index.md'
 repository = "https://github.com/phil65/prettyqt"
@@ -184,7 +184,7 @@ exclude = '''
 [tool.commitizen]
 name = "cz_conventional_commits"
 github_repo = "phil65/PrettyQt"
-version = "1.20.0"
+version = "1.21.0"
 tag_format = "v$version"
 update_changelog_on_bump = true
 changelog_start_rev = "v0.100.0"
