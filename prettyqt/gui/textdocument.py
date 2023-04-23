@@ -11,7 +11,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 MARKDOWN_FEATURES = bidict(
@@ -71,7 +71,7 @@ class TextDocumentMixin(core.ObjectMixin):
         )
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.toPlainText()!r})"
+        return get_repr(self, self.toPlainText())
 
     def get_first_block(self) -> gui.TextBlock:
         return gui.TextBlock(self.firstBlock())
