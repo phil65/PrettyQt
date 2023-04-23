@@ -1471,9 +1471,9 @@ def test_treeview(qtbot):
     model = widgets.FileSystemModel()
     widget.set_model(model)
     widget.selectAll()
-    widget.h_header
+    assert widget.h_header
     # widget.h_scrollbar
-    widget.v_scrollbar
+    assert widget.v_scrollbar
     widget.set_size_adjust_policy("content")
     with pytest.raises(InvalidParamError):
         widget.set_size_adjust_policy("test")
@@ -1538,7 +1538,7 @@ def test_treewidgetitem(qtbot):
     bytes(item)
     child = widgets.TreeWidgetItem()
     item += child
-    for child in item:
+    for _child in item:
         pass
     assert len(item) == 1
     assert item[0] == child

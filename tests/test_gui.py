@@ -122,7 +122,7 @@ def test_doublevalidator():
 
 def test_font(qapp):
     font = gui.Font("Consolas")
-    font.metrics
+    assert font.metrics
     font = gui.Font.mono()
     with pytest.raises(InvalidParamError):
         font.set_style_hint("test")
@@ -537,7 +537,7 @@ def test_painter():
                 painter.fill_rect(core.Rect(), "testus")
             painter.set_color("black")
             painter.set_composition_mode("source_atop")
-            painter.get_composition_mode() == "source_atop"
+            assert painter.get_composition_mode() == "source_atop"
             with pytest.raises(InvalidParamError):
                 painter.set_composition_mode("test")
             painter.set_clip_path(gui.PainterPath(), "replace")

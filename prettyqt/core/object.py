@@ -5,7 +5,7 @@ import contextlib
 
 # import inspect
 import itertools
-from typing import Any, DefaultDict, TypeVar
+from typing import Any, TypeVar
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -14,7 +14,7 @@ from prettyqt.utils import datatypes, helpers
 
 T = TypeVar("T", bound=QtCore.QObject)
 
-counter_dict: DefaultDict = defaultdict(itertools.count)
+counter_dict: defaultdict = defaultdict(itertools.count)
 
 
 class ObjectMixin:

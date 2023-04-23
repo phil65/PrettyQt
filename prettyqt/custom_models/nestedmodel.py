@@ -28,12 +28,12 @@ class NestedModel(  # type: ignore
             return self.DEFAULT_FLAGS | constants.IS_EDITABLE
         return self.DEFAULT_FLAGS
 
-    def rowCount(self, parent=core.ModelIndex()) -> int:
+    def rowCount(self, parent=None) -> int:
         if parent.column() > 0:
             return 0
         return (
             len(parent.internalPointer().children)
-            if parent.isValid()
+            if parent is not None
             else len(self.items)
         )
 
