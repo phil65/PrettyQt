@@ -242,6 +242,11 @@ class TextDocumentMixin(core.ObjectMixin):
         writer.set_file_name(path)
         return writer.write(self)
 
+    def get_bytes(
+        self, fmt: Literal["plaintext", "HTML", "markdown", "ODF"] = "ODF"
+    ) -> bytes:
+        return gui.TextDocumentWriter.serialize_document(self, fmt)
+
     def show_whitespace_and_tabs(self, show: bool):
         """Set show white spaces flag."""
         options = self.get_default_text_option()
@@ -260,5 +265,5 @@ class TextDocument(TextDocumentMixin, QtGui.QTextDocument):
 if __name__ == "__main__":
     doc = TextDocument("This is a test\nHello")
     doc.set_default_text_option(QtGui.QTextOption())
-    a = doc.write_to_file("test.a", "plaintext")
+    a = doc.get_bytes()
     print(a)
