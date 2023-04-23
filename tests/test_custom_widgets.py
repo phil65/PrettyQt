@@ -230,7 +230,7 @@ def test_flowlayout(qtbot):
     layout.sizeHint()
     widget.set_layout(layout)
     assert layout[0] == btn
-    for i in layout:
+    for _i in layout:
         pass
     assert len(layout) == 5
     layout.get_children()
@@ -319,7 +319,7 @@ def test_selectionwidget(qtbot):
     assert widget.get_value() == "tab"
     radiobuttons[3].click()
     assert widget.current_choice() == test
-    for i in widget:
+    for _i in widget:
         pass
     widget.select_radio_by_data(";")
     choice = widget.current_choice()

@@ -66,7 +66,7 @@ def test_compositevalidator():
     assert not composite.is_valid_value("")
     assert not composite.is_valid_value("0")
     val1 + val2
-    for child in composite:
+    for _child in composite:
         pass
     assert val1 in composite
     assert val1 == composite[0]

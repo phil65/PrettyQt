@@ -206,7 +206,7 @@ def test_dir():
 
 
 def test_diriterator():
-    for i in core.DirIterator(str(pathlib.Path.cwd())):
+    for _i in core.DirIterator(str(pathlib.Path.cwd())):
         pass
 
 
@@ -255,7 +255,7 @@ def test_itemselection():
     selection = core.ItemSelection(core.ModelIndex(), core.ModelIndex())
     index = core.ModelIndex()
     assert index not in selection
-    for idx in selection:
+    for _idx in selection:
         pass
 
 
@@ -266,7 +266,7 @@ def test_itemselectionrange():
     assert core.ModelIndex() in selection_range
     assert bool(selection_range) is False
     assert len(selection_range) == 0
-    for i in selection_range:
+    for _i in selection_range:
         pass
 
 
@@ -313,7 +313,7 @@ def test_line():
     line2 = core.Line(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
-    for p in line:
+    for _p in line:
         pass
 
 
@@ -332,7 +332,7 @@ def test_linef():
     line2 = core.LineF(1, 0, 0, 0)
     assert line2 == reversed(line)
     assert abs(line) == 1
-    for p in line:
+    for _p in line:
         pass
 
 
@@ -347,7 +347,7 @@ def test_margins():
     margin = core.Margins(0, 0, 0, 0)
     assert repr(margin) == "Margins(0, 0, 0, 0)"
     assert bool(margin) is False
-    for length in margin:
+    for _length in margin:
         pass
 
 
@@ -355,7 +355,7 @@ def test_marginsf():
     margin = core.MarginsF(0, 0, 0, 0)
     assert repr(margin) == "MarginsF(0.0, 0.0, 0.0, 0.0)"
     assert bool(margin) is False
-    for length in margin:
+    for _length in margin:
         pass
 
 
@@ -543,7 +543,7 @@ def test_regularexpressionmatch():
 
 def test_regularexpressionmatchiterator():
     it = core.RegularExpressionMatchIterator()
-    for i in it:
+    for _i in it:
         pass
 
 
@@ -555,7 +555,7 @@ def test_regularexpression():
         regex = pickle.load(jar)
     match = regex.match("123")
     assert match.span() == (0, 1)
-    for match in regex.finditer("123"):
+    for _match in regex.finditer("123"):
         pass
     matches = regex.findall("123")
     assert len(matches) == 3
@@ -565,7 +565,7 @@ def test_resource():
     resource = core.Resource()
     bytes(resource)
     assert bool(resource) is True
-    for file in resource:
+    for _file in resource:
         pass
     assert resource.get_compression_algorithm() == "none"
     resource.get_absolute_file_path()
@@ -603,7 +603,7 @@ def test_settings(qapp):
     assert settings.get("test3") == "abc"
     del settings["test3"]
     path = pathlib.Path.cwd()
-    for i in settings:
+    for _i in settings:
         pass
     settings["test"] = True
     assert settings["test"] is True
@@ -698,7 +698,7 @@ def test_temporaryfile():
 
 def test_textboundaryfinder():
     finder = core.TextBoundaryFinder("This is a test", boundary_type="word")
-    for boundary in finder:
+    for _boundary in finder:
         pass
     assert finder.get_boundary_type() == "word"
     assert "start_of_item" in finder.get_boundary_reasons()

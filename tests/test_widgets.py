@@ -273,7 +273,7 @@ def test_dialogbuttonbox(qtbot):
     assert len(box) == 2
     assert btn == box["apply"]
     assert "apply" in box
-    for item in box:
+    for _item in box:
         pass
     btn = box.add_default_buttons(["ok"])
 
@@ -739,7 +739,7 @@ def test_listwidget(qtbot):
     widget.add_items(["a", "b"])
     widget.set_value("b")
     widget.sort()
-    for item in widget:
+    for _item in widget:
         pass
     item = widgets.ListWidgetItem()
     widget += item
@@ -866,7 +866,7 @@ def test_menu(qtbot):
         status_tip="test",
     )
     assert len(menu) == 3
-    for item in menu:
+    for _item in menu:
         pass
     menu.add_menu(widgets.Menu())
     menu.add_separator("test_menu")
@@ -1115,7 +1115,7 @@ def test_stackedlayout(qtbot):
     layout.set_size_constraint("maximum")
     layout.set_margin(0)
     assert len(layout) == 1
-    for item in layout:
+    for _item in layout:
         pass
 
 
@@ -1127,7 +1127,7 @@ def test_stackedwidget(qtbot):
     assert w in widget
     widget.set_current_widget(w)
     assert len(widget) == 1
-    for item in widget:
+    for _item in widget:
         pass
 
 
@@ -1174,7 +1174,7 @@ def test_splitter(qtbot):
     widget += test2
     assert len(widget) == 2
     assert widget[0] == test
-    for item in widget:
+    for _item in widget:
         pass
     widget.set_size_policy("expanding", "expanding")
     widget.set_orientation("horizontal")
@@ -1458,7 +1458,7 @@ def test_toolbox(qtbot):
     widget.add_widget(w, "title", "mdi.timer")
     widget.add_widget(w2)
     assert widget["test_name"] == w2
-    for w in widget:
+    for _w in widget:
         pass
     assert widget[1] == w2
     del widget[1]

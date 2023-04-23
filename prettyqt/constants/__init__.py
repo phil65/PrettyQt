@@ -596,7 +596,7 @@ CAP_STYLE: bidict[CapStyleStr, Qt.PenCapStyle] = bidict(
     round=Qt.PenCapStyle.RoundCap,
 )
 
-JoinStyleStr = Literal["miter", "bevel", "round" "svg_miter"]
+JoinStyleStr = Literal["miter", "bevel", "round", "svg_miter"]
 JOIN_STYLE: bidict[JoinStyleStr, Qt.PenJoinStyle] = bidict(
     miter=Qt.PenJoinStyle.MiterJoin,
     bevel=Qt.PenJoinStyle.BevelJoin,

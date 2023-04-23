@@ -79,7 +79,7 @@ class FloatListValidator(BaseRegexValidator):
             self.set_regex(r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)*$")
         else:
             self.set_regex(
-                r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)" r"(\s*,\s*-?\d+(\.\d+)?)*$"
+                r"^(\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)(\s*,\s*-?\d+(\.\d+)?)*$"
             )
 
     def __reduce__(self):

@@ -38,7 +38,7 @@ def test_qmlengine():
 def test_qmlapplicationengine(qtlog):
     with qtlog.disabled():
         engine = qml.QmlApplicationEngine()
-        for item in engine:
+        for _item in engine:
             pass
         path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
         engine.load_data(path.read_text())
@@ -64,7 +64,7 @@ def test_jsvalue():
     assert "test2" in val
     assert len(val) == 2
     del val["test2"]
-    for n, v in val:
+    for _n, _v in val:
         pass
     val = qml.JSValue.from_object(None, engine)
     val = qml.JSValue.from_object(1, engine)

@@ -58,7 +58,7 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
         ),
     ):
         if isinstance(other, (tuple, list)):
-            for i, control in enumerate(other):
+            for i, _control in enumerate(other):
                 self[self.rowCount(), i] = other  # type: ignore
         else:
             self[self.rowCount(), 0 : self.columnCount() - 1] = other

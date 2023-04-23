@@ -119,9 +119,7 @@ class SearchAndReplaceMixin:
             t.setPosition(t.position() - length)
             t.setPosition(t.position() + length, gui.TextCursor.MoveMode.KeepAnchor)
             self.setTextCursor(t)
-            logger.info(
-                f"Replaced on line {t.blockNumber()}, " f"pos {t.positionInBlock()}"
-            )
+            logger.info(f"Replaced on line {t.blockNumber()}, pos {t.positionInBlock()}")
         else:
             logger.error("Text not found")
 

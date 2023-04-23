@@ -24,7 +24,7 @@ TAB_POSITION = bidict(
     only_one_tab=mod.TabPosition.OnlyOneTab,
 )
 
-TabPositionStr = Literal["beginning", "middle", "end" "only_one_tab"]
+TabPositionStr = Literal["beginning", "middle", "end", "only_one_tab"]
 
 
 class StyleOptionToolBox(widgets.StyleOptionMixin, QtWidgets.QStyleOptionToolBox):

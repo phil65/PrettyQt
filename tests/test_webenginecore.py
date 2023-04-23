@@ -61,7 +61,7 @@ def test_webenginescriptcollection():
     assert script in item
     assert len(item) == 1
     assert bool(item)
-    for scr in item:
+    for _scr in item:
         pass
     assert item["test"] == script
 
@@ -90,7 +90,7 @@ def test_webenginehistory():
     page = webenginecore.WebEnginePage()
     history = page.get_history()
     assert len(history) < 2  # 0 returns 1 for PySide6 6.5, 0 for PyQt6 6.4
-    for item in history:
+    for _item in history:
         pass
     history.get_items()
 

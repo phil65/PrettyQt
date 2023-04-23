@@ -124,7 +124,7 @@ def test_networkcookie():
 def test_networkcookiejar():
     jar = network.NetworkCookieJar()
     assert jar["test"] == []
-    for i in jar:
+    for _i in jar:
         pass
     repr(jar)
     jar += network.NetworkCookie()

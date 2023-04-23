@@ -21,7 +21,7 @@ RENDER_TARGET = bidict(
     inverted_y_framebuffer_object=mod.RenderTarget.InvertedYFramebufferObject,
 )
 
-RenderTargetStr = Literal["image", "framebuffer_object" "inverted_y_framebuffer_object"]
+RenderTargetStr = Literal["image", "framebuffer_object", "inverted_y_framebuffer_object"]
 
 
 class QuickPaintedItem(quick.QuickItemMixin, QtQuick.QQuickPaintedItem):

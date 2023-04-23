@@ -163,7 +163,7 @@ def test_placereply():
 
 def test_placesearchreply():
     reply = location.PlaceSearchReply()
-    for result in reply:
+    for _result in reply:
         pass
     assert len(reply) == 0
     assert len(reply.get_results()) == 0
@@ -203,7 +203,7 @@ def test_placeidreply():
 
 def test_placematchreply():
     reply = location.PlaceMatchReply()
-    for result in reply:
+    for _result in reply:
         pass
     assert len(reply) == 0
     assert len(reply.get_places()) == 0

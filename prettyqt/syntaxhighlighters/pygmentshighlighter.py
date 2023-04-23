@@ -70,6 +70,13 @@ StyleStr = Literal[
 ]
 
 
+@functools.cache
+def _get_brush(color: str) -> gui.Brush:
+    """Return a brush for the color."""
+    qcolor = gui.Color(f"#{color[:6]}")
+    return gui.Brush(qcolor)
+
+
 def qstring_length(text: str) -> int:
     """Tries to compute what the length of an utf16-encoded QString would be."""
     utf16_text = text.encode("utf16")
@@ -126,7 +133,7 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
                 case "#push":
                     statestack.append(statestack[-1])
                 case _:
-                    assert False, f"wrong state def: {new_state!r}"
+                    raise AssertionError(f"wrong state def: {new_state!r}")
             statetokens = tokendefs[statestack[-1]]
             break
         else:
@@ -226,7 +233,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
 
     def _clear_caches(self):
         """Clear caches for brushes and formats."""
-        self._get_brush.cache_clear()
+        _get_brush.cache_clear()
         self._get_format.cache_clear()
 
     @functools.cache
@@ -256,9 +263,9 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
             if value:
                 match key:
                     case "color":
-                        result.set_foreground_color(self._get_brush(value))
+                        result.set_foreground_color(_get_brush(value))
                     case "bgcolor":
-                        result.set_background_color(self._get_brush(value))
+                        result.set_background_color(_get_brush(value))
                     case "bold":
                         result.set_font_weight("bold")
                     case "italic":
@@ -272,12 +279,6 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
                     case "mono":
                         result.set_font_style_hint("typewriter")
         return result
-
-    @functools.cache
-    def _get_brush(self, color: str) -> gui.Brush:
-        """Return a brush for the color."""
-        qcolor = gui.Color(f"#{color[:6]}")
-        return gui.Brush(qcolor)
 
 
 if __name__ == "__main__":

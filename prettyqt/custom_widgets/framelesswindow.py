@@ -46,7 +46,7 @@ class TitleBarIcon(widgets.PushButton):
         super().__init__(text, parent)
 
         self.setStyleSheet(
-            "margin: 0;" "padding: 0px;" "font-size: 16px;" "width: 44px;" "height: 30px;"
+            "margin: 0; padding: 0px; font-size: 16px; width: 44px; height: 30px;"
         )
 
         self.set_margin(0)
@@ -73,7 +73,7 @@ class CustomTitleBar(widgets.Frame):
         self.box.addSpacerItem(spacer_item)
         for widget in [self.minimize_button, self.maximize_button, self.exit_button]:
             self.box.addWidget(widget)
-        self.setStyleSheet("width: 100%;" "padding: 0;" "margin: 0;")
+        self.setStyleSheet("width: 100%; padding: 0; margin: 0;")
         self.set_margin(0)
         self.box.set_margin(0)
         self.box.setSpacing(0)

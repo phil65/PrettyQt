@@ -30,7 +30,7 @@ def test_application(qapp):
     # with pytest.raises(InvalidParamError):
     #     qapp.set_navigation_mode("test")
     # assert qapp.get_navigation_mode("keypad_directional")
-    for widget in qapp:
+    for _widget in qapp:
         pass
     qapp.setApplicationName("testus")
     settings = core.Settings("test", "test2")

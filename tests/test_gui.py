@@ -407,7 +407,7 @@ def test_standarditem(qapp):
 def test_standarditemmodel(qapp):
     model = gui.StandardItemModel()
     model.add("test")
-    for item in model:
+    for _item in model:
         pass
     with open("data.pkl", "wb") as jar:
         pickle.dump(model, jar)
@@ -471,7 +471,7 @@ def test_textblockgroup():
     doc = gui.TextDocument()
     group = gui.TextBlockGroup(doc)
     repr(group)
-    for textblock in group:
+    for _textblock in group:
         pass
 
 
