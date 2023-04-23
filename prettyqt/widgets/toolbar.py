@@ -14,15 +14,15 @@ class ToolBarMixin(widgets.WidgetMixin):
         self.set_icon_size(24)
         self.menu_buttons = []
 
-    def __setstate__(self, state: dict[str, Any]) -> None:
-        super().__setstate__(state)
-        self.addActions(state["actions"])
+    # def __setstate__(self, state: dict[str, Any]) -> None:
+    #     super().__setstate__(state)
+    #     self.addActions(state["actions"])
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
-    def serialize_fields(self):
-        return dict(actions=self.actions(), allowed_areas=self.get_allowed_areas())
+    # def serialize_fields(self):
+    #     return dict(actions=self.actions(), allowed_areas=self.get_allowed_areas())
 
     def __repr__(self):
         return f"{type(self).__name__}({self.windowTitle()!r})"

@@ -44,41 +44,6 @@ ResizeModeStr = Literal["fixed", "adjust"]
 
 
 class ListViewMixin(widgets.AbstractItemViewMixin):
-    def serialize_fields(self):
-        return dict(
-            view_mode=self.get_view_mode(),
-            resize_mode=self.get_resize_mode(),
-            layout_mode=self.get_layout_mode(),
-            movement=self.get_movement(),
-            batch_size=self.batchSize(),
-            flow=self.get_flow(),
-            grid_size=self.get_grid_size(),
-            is_wrapping=self.isWrapping(),
-            # item_alignment=self.itemAlignment(),
-            model_column=self.modelColumn(),
-            selection_rect_visible=self.isSelectionRectVisible(),
-            spacing=self.spacing(),
-            uniform_item_sizes=self.uniformItemSizes(),
-            word_wrap=self.wordWrap(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_view_mode(state["view_mode"])
-        self.set_resize_mode(state["resize_mode"])
-        self.set_layout_mode(state["layout_mode"])
-        self.set_movement(state["movement"])
-        self.setBatchSize(state["batch_size"])
-        self.set_flow(state["flow"])
-        self.set_grid_size(state["grid_size"])
-        self.setWrapping(state["is_wrapping"])
-        # self.setItemAlignment(state["flow"])
-        self.setModelColumn(state["model_column"])
-        self.setSelectionRectVisible(state["selection_rect_visible"])
-        self.setSpacing(state["spacing"])
-        self.setUniformItemSizes(state["uniform_item_sizes"])
-        self.setWordWrap(state["word_wrap"])
-
     def set_view_mode(self, mode: ViewModeStr):
         """Set view mode.
 

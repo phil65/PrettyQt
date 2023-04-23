@@ -23,63 +23,7 @@ class WidgetMixin(core.ObjectMixin):
     box: QtWidgets.QLayout
 
     def __repr__(self) -> str:
-        cls_name = type(self).__name__
-        params = helpers.format_kwargs(self.serialize_fields())
-        return f"{cls_name}({params})"
-
-    def __setstate__(self, state: dict[str, Any]) -> None:
-        if self.layout() is None:
-            self.set_layout(state["layout"])
-        self.setSizePolicy(state["size_policy"])
-        self.setAccessibleName(state["accessible_name"])
-        self.setToolTip(state.get("tool_tip", ""))
-        self.setToolTipDuration(state.get("tooltip_duration", ""))
-        self.setWindowTitle(state.get("window_title", ""))
-        self.setWindowFilePath(state.get("window_file_path", ""))
-        self.setEnabled(state.get("enabled", True))
-        self.setVisible(state.get("visible", True))
-        self.setTabletTracking(state.get("tablet_tracking", True))
-        self.setWindowModified(state.get("window_modified", False))
-        self.setWindowOpacity(state.get("window_opacity", 1.0))
-        self.set_icon(state.get("icon"))
-        self.set_modality(state.get("modality", ""))
-        self.setWhatsThis(state.get("whats_this", ""))
-        self.set_context_menu_policy(state.get("contextmenu_policy", ""))
-        self.set_focus_policy(state.get("focus_policy", ""))
-        self.setStatusTip(state.get("status_tip", ""))
-        self.setStyleSheet(state.get("stylesheet", ""))
-        self.setFont(state.get("font", ""))
-        if state["is_maximized"]:
-            self.showMaximized()
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def serialize_fields(self) -> dict[str, Any]:
-        return dict(
-            layout=self.layout() if isinstance(self.layout(), widgets.Layout) else None,
-            size_policy=self.get_size_policy(),
-            is_maximized=self.isMaximized(),
-            # actions=self.actions(),
-            accessible_name=self.accessibleName(),
-            tool_tip=self.toolTip(),
-            tooltip_duration=self.toolTipDuration(),
-            window_title=self.windowTitle(),
-            window_file_path=self.windowFilePath(),
-            enabled=self.isEnabled(),
-            tablet_tracking=self.hasTabletTracking(),
-            window_modified=self.isWindowModified(),
-            window_opacity=self.windowOpacity(),
-            visible=self.isVisible(),
-            stylesheet=self.styleSheet(),
-            icon=self.get_icon(),
-            modality=self.get_modality(),
-            whats_this=self.whatsThis(),
-            contextmenu_policy=self.get_context_menu_policy(),
-            focus_policy=self.get_focus_policy(),
-            status_tip=self.statusTip(),
-            font=self.get_font(),
-        )
+        return f"{type(self).__name__}()"
 
     def resize(self, *size) -> None:
         if isinstance(size[0], tuple):

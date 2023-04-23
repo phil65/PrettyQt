@@ -56,41 +56,41 @@ class ComboBoxMixin(widgets.WidgetMixin):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self.index_changed)
 
-    def serialize_fields(self):
-        items = [
-            (self.itemText(i), self.itemData(i), self.item_icon(i))
-            for i in range(self.count())
-        ]
-        return dict(
-            index=self.currentIndex(),
-            editable=self.isEditable(),
-            max_count=self.maxCount(),
-            has_frame=self.hasFrame(),
-            icon_size=self.iconSize(),
-            insert_policy=self.insertPolicy(),
-            model_column=self.modelColumn(),
-            max_visible_items=self.maxVisibleItems(),
-            size_adjust_policy=self.get_size_adjust_policy(),
-            duplicates_enabled=self.duplicatesEnabled(),
-            min_contents_length=self.minimumContentsLength(),
-            placeholder_text=self.placeholderText(),
-            items=items,
-        )
+    # def serialize_fields(self):
+    #     items = [
+    #         (self.itemText(i), self.itemData(i), self.item_icon(i))
+    #         for i in range(self.count())
+    #     ]
+    #     return dict(
+    #         index=self.currentIndex(),
+    #         editable=self.isEditable(),
+    #         max_count=self.maxCount(),
+    #         has_frame=self.hasFrame(),
+    #         icon_size=self.iconSize(),
+    #         insert_policy=self.insertPolicy(),
+    #         model_column=self.modelColumn(),
+    #         max_visible_items=self.maxVisibleItems(),
+    #         size_adjust_policy=self.get_size_adjust_policy(),
+    #         duplicates_enabled=self.duplicatesEnabled(),
+    #         min_contents_length=self.minimumContentsLength(),
+    #         placeholder_text=self.placeholderText(),
+    #         items=items,
+    #     )
 
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        for label, data, icon in state["items"]:
-            self.add(label, data, icon=icon)
-        self.setCurrentIndex(state["index"])
-        self.setEditable(state["editable"])
-        self.setMaxCount(state["max_count"])
-        self.setMaxVisibleItems(state["max_visible_items"])
-        self.setMinimumContentsLength(state["min_contents_length"])
-        self.setDuplicatesEnabled(state["duplicates_enabled"])
-        self.setFrame(state["has_frame"])
+    # def __setstate__(self, state):
+    #     super().__setstate__(state)
+    #     for label, data, icon in state["items"]:
+    #         self.add(label, data, icon=icon)
+    #     self.setCurrentIndex(state["index"])
+    #     self.setEditable(state["editable"])
+    #     self.setMaxCount(state["max_count"])
+    #     self.setMaxVisibleItems(state["max_visible_items"])
+    #     self.setMinimumContentsLength(state["min_contents_length"])
+    #     self.setDuplicatesEnabled(state["duplicates_enabled"])
+    #     self.setFrame(state["has_frame"])
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
     def __len__(self) -> int:
         return self.count()

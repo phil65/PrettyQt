@@ -36,30 +36,6 @@ class AbstractSliderMixin(widgets.WidgetMixin):
     def on_value_change(self):
         self.value_changed.emit(self.value())
 
-    def serialize_fields(self):
-        return dict(
-            range=(self.minimum(), self.maximum()),
-            value=self.value(),
-            has_tracking=self.hasTracking(),
-            inverted_controls=self.invertedControls(),
-            inverted_appearance=self.invertedAppearance(),
-            single_step=self.singleStep(),
-            page_step=self.pageStep(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_range(*state["range"])
-        self.set_value(state["value"])
-        self.setSingleStep(state["single_step"])
-        self.setPageStep(state["page_step"])
-        self.setTracking(state["has_tracking"])
-        self.setInvertedControls(state["inverted_controls"])
-        self.setInvertedAppearance(state["inverted_appearance"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def is_horizontal(self) -> bool:
         """Check if silder is horizontal.
 

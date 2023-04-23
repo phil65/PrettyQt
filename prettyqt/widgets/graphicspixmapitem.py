@@ -17,14 +17,6 @@ ShapeModeStr = Literal["mask", "bounding_rect", "heuristic_mask"]
 
 
 class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapItem):
-    def serialize_fields(self):
-        return dict(
-            offset=self.offset(),
-            pixmap=self.get_pixmap(),
-            shape_mode=self.get_shape_mode(),
-            transformation_mode=self.get_transformation_mode(),
-        )
-
     def set_transformation_mode(self, mode: constants.TransformationModeStr):
         """Set transformation mode.
 

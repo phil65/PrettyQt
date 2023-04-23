@@ -37,27 +37,6 @@ class GraphicsItemMixin:
     def __setitem__(self, key: int, value):
         self.setData(key, value)
 
-    def serialize_fields(self):
-        return dict(
-            cache_mode=self.get_cache_mode(),
-            accept_drops=self.acceptDrops(),
-            accept_hover_events=self.acceptHoverEvents(),
-            accept_touch_events=self.acceptTouchEvents(),
-            bounding_region_granularity=self.boundingRegionGranularity(),
-            enabled=self.isEnabled(),
-            filters_child_events=self.filtersChildEvents(),
-            opacity=self.opacity(),
-            panel_modality=self.get_panel_modality(),
-            pos=self.pos(),
-            rotation=self.rotation(),
-            scale=self.scale(),
-            selected=self.isSelected(),
-            tool_tip=self.toolTip(),
-            transform_origin_point=self.transformOriginPoint(),
-            visible=self.isVisible(),
-            z_value=self.zValue(),
-        )
-
     def set_focus(self, reason: constants.FocusReasonStr = "other"):
         if reason not in constants.FOCUS_REASONS:
             raise InvalidParamError(reason, constants.FOCUS_REASONS)

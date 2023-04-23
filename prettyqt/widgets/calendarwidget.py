@@ -33,16 +33,6 @@ HorizontalHeaderFormatStr = Literal["single_letter", "short", "long", "none"]
 
 
 class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
-    def serialize_fields(self):
-        return dict(date=self.get_date())
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setSelectedDate(state["date"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def get_date(self) -> datetime.date:
         return self.selectedDate().toPython()  # type: ignore
 

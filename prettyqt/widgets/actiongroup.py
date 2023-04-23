@@ -26,19 +26,6 @@ class ActionGroup(core.ObjectMixin, QtWidgets.QActionGroup):
     def __getitem__(self, item: int) -> QtWidgets.QAction:
         return self.actions()[item]
 
-    def serialize_fields(self):
-        return dict(
-            exclusion_policy=self.get_exclusion_policy(),
-            visible=self.isVisible(),
-            enabled=self.isEnabled(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setEnabled(state.get("enabled", ""))
-        self.setVisible(state.get("visible", ""))
-        self.set_exclusion_policy(state.get("exclusion_policy", ""))
-
     def set_exclusion_policy(self, policy: ExclusionPolicyStr | None):
         """Set exclusion policy to use.
 

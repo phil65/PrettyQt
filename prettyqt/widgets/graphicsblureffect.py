@@ -17,14 +17,6 @@ BlurHintStr = Literal["performance", "quality", "animation"]
 
 
 class GraphicsBlurEffect(widgets.GraphicsEffectMixin, QtWidgets.QGraphicsBlurEffect):
-    def serialize_fields(self):
-        return dict(blur_radius=self.blurRadius(), blur_hints=self.get_blur_hints())
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setBlurRadius(state["blur_radius"])
-        self.set_blur_hints(*state["blur_hints"])
-
     def set_blur_hints(self, *hints: BlurHintStr):
         for item in hints:
             if item not in BLUR_HINTS:

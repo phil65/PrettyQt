@@ -68,20 +68,20 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         self.add(other)
         return self
 
-    def serialize_fields(self):
-        widget_list = []
-        positions = []
-        for i, item in enumerate(list(self)):
-            widget_list.append(item)
-            positions.append(self.get_item_position(i))
-        return dict(widgets=widget_list, positions=positions)
+    # def serialize_fields(self):
+    #     widget_list = []
+    #     positions = []
+    #     for i, item in enumerate(list(self)):
+    #         widget_list.append(item)
+    #         positions.append(self.get_item_position(i))
+    #     return dict(widgets=widget_list, positions=positions)
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
-    def __setstate__(self, state):
-        for item, pos in zip(state["widgets"], state["positions"]):
-            self.set_widget(item, pos[0], pos[1])
+    # def __setstate__(self, state):
+    #     for item, pos in zip(state["widgets"], state["positions"]):
+    #         self.set_widget(item, pos[0], pos[1])
 
     def set_widget(
         self, widget: str | QtWidgets.QWidget, row: int, role: RoleStr = "both"

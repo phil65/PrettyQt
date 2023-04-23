@@ -39,24 +39,6 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self.setDocument(doc)
         self.set_text(text)
 
-    def serialize_fields(self):
-        return dict(
-            text=self.text(),
-            read_only=self.isReadOnly(),
-            line_wrap_mode=self.get_line_wrap_mode(),
-            word_wrap_mode=self.get_word_wrap_mode(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_text(state["text"])
-        self.setReadOnly(state["read_only"])
-        self.set_line_wrap_mode(state["line_wrap_mode"])
-        self.set_word_wrap_mode(state["word_wrap_mode"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def __add__(self, other: str):
         self.append_text(other)
         return self

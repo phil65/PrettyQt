@@ -36,16 +36,6 @@ class DialogMixin(widgets.WidgetMixin):
             size=(self.size().width(), self.size().height()),
         )
 
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        if state["layout"]:
-            self.set_layout(state["layout"])
-        self.resize(*state["size"])
-        self.setSizeGripEnabled(state["size_grip_enabled"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def keyPressEvent(self, e):
         match e.key():
             case QtCore.Qt.Key.Key_Escape:

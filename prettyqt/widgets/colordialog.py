@@ -17,17 +17,6 @@ OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
 
 
 class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
-    def serialize_fields(self):
-        return dict(color=self.current_color())
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        if state["color"]:
-            self.setCurrentColor(state["color"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     @classmethod
     def get_color(
         cls,

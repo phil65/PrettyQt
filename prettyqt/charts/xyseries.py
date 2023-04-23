@@ -19,11 +19,11 @@ class XYSeriesMixin(charts.AbstractSeriesMixin):
     def __delitem__(self, index: int):
         self.remove(index)
 
-    def __setstate__(self, state):
-        self.append(state["points"])
+    # def __setstate__(self, state):
+    #     self.append(state["points"])
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
     def __add__(self, other: QtCore.QPointF) -> XYSeries:
         self.append(other)

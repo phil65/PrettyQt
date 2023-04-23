@@ -69,52 +69,6 @@ class ActionMixin(core.ObjectMixin):
         cls_name = type(self).__name__
         return f"{cls_name}({self.text()!r})"
 
-    def serialize_fields(self):
-        return dict(
-            auto_repeat=self.autoRepeat(),
-            text=self.text(),
-            enabled=self.isEnabled(),
-            visible=self.isVisible(),
-            font=self.get_font(),
-            shortcut=self.get_shortcut(),
-            tool_tip=self.toolTip(),
-            checkable=self.isCheckable(),
-            checked=self.isChecked(),
-            icon=self.get_icon(),
-            icon_text=self.iconText(),
-            priority=self.get_priority(),
-            icon_visible_in_menu=self.isIconVisibleInMenu(),
-            shortcut_visible_in_context_menu=self.isShortcutVisibleInContextMenu(),
-            menu_role=self.get_menu_role(),
-            shortcut_context=self.get_shortcut_context(),
-            status_tip=self.statusTip(),
-            whats_this=self.whatsThis(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_text(state.get("text", ""))
-        self.set_enabled(state.get("enabled", True))
-        self.set_shortcut(state["shortcut"])
-        self.set_tooltip(state.get("tool_tip", ""))
-        self.set_statustip(state.get("status_tip", ""))
-        self.set_checked(state.get("checked", False))
-        self.set_priority(state["priority"])
-        self.set_shortcut_context(state["shortcut_context"])
-        self.set_checkable(state["checkable"])
-        self.setAutoRepeat(state["auto_repeat"])
-        self.setVisible(state["visible"])
-        self.setFont(state["font"])
-        # self.setIcon(state["icon"])
-        self.setIconText(state["icon_text"])
-        self.setIconVisibleInMenu(state["icon_visible_in_menu"])
-        self.setShortcutVisibleInContextMenu(state["shortcut_visible_in_context_menu"])
-        self.set_menu_role(state["menu_role"])
-        self.setWhatsThis(state["whats_this"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def set_text(self, text: str):
         self.setText(text)
 

@@ -24,19 +24,6 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         self.setHorizontalScrollBar(widgets.ScrollBar(parent=self))
         self.setVerticalScrollBar(widgets.ScrollBar(parent=self))
 
-    def serialize_fields(self):
-        return dict(
-            size_adjust_policy=self.get_size_adjust_policy(),
-            horizontal_scrollbar_policy=self.get_horizontal_scrollbar_policy(),
-            vertical_scrollbar_policy=self.get_vertical_scrollbar_policy(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_size_adjust_policy(state["size_adjust_policy"])
-        self.set_horizontal_scrollbar_policy(state["horizontal_scrollbar_policy"])
-        self.set_vertical_scrollbar_policy(state["vertical_scrollbar_policy"])
-
     @property
     def h_scrollbar(self):
         return self.horizontalScrollBar()

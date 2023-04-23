@@ -15,23 +15,6 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         self.setAlternatingRowColors(True)
         self.setWordWrap(False)
 
-    def serialize_fields(self):
-        return dict(
-            corner_button_enabled=self.isCornerButtonEnabled(),
-            grid_style=self.get_grid_style(),
-            show_grid=self.showGrid(),
-            sorting_enabled=self.isSortingEnabled(),
-            word_wrap=self.wordWrap(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setCornerButtonEnabled(state["corner_button_enabled"])
-        self.set_grid_style(state["grid_style"])
-        self.setShowGrid(state["show_grid"])
-        self.setSortingEnabled(state["sorting_enabled"])
-        self.setWordWrap(state["word_wrap"])
-
     @property
     def h_header(self):
         return self.horizontalHeader()

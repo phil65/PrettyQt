@@ -13,12 +13,12 @@ class UndoCommand(QtGui.QUndoCommand):
             raise KeyError(index)
         return child
 
-    def serialize_fields(self):
-        return dict(children=[self.child(i) for i in range(self.childCount())])
+    # def serialize_fields(self):
+    #     return dict(children=[self.child(i) for i in range(self.childCount())])
 
-    def __setstate__(self, state):
-        for c in state["children"]:
-            c.setParent(self)
+    # def __setstate__(self, state):
+    #     for c in state["children"]:
+    #         c.setParent(self)
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()

@@ -36,17 +36,6 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin):
         self.setLineEdit(widgets.LineEdit())
         self.setGroupSeparatorShown(True)
 
-    def serialize_fields(self):
-        return dict(
-            button_symbols=self.get_button_symbols(),
-            correction_mode=self.get_correction_mode(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_correction_mode(state["correction_mode"])
-        self.set_button_symbols(state["button_symbols"])
-
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
 

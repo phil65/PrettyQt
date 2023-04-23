@@ -41,47 +41,9 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     def __repr__(self):
         return f"{type(self).__name__}: {self.text()!r}"
 
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_text(state["text"])
-        self.setValidator(state["validator"])
-        self.setInputMask(state["input_mask"])
-        self.setMaxLength(state["max_length"])
-        self.setPlaceholderText(state["placeholder_text"])
-        self.setReadOnly(state["read_only"])
-        self.setFrame(state["has_frame"])
-        self.setClearButtonEnabled(state["clear_button_enabled"])
-        # self.setAlignment(state["alignment"])
-        self.set_cursor_move_style(state["cursor_move_style"])
-        self.set_echo_mode(state["echo_mode"])
-        self.setCursorPosition(state["cursor_position"])
-        self.setDragEnabled(state["drag_enabled"])
-        self.setModified(state["is_modified"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def __add__(self, other: str):
         self.append_text(other)
         return self
-
-    def serialize_fields(self):
-        return dict(
-            text=self.text(),
-            # alignment=self.alignment(),
-            validator=self.validator(),
-            max_length=self.maxLength(),
-            read_only=self.isReadOnly(),
-            input_mask=self.inputMask(),
-            has_frame=self.hasFrame(),
-            placeholder_text=self.placeholderText(),
-            clear_button_enabled=self.isClearButtonEnabled(),
-            cursor_move_style=self.get_cursor_move_style(),
-            echo_mode=self.get_echo_mode(),
-            cursor_position=self.cursorPosition(),
-            drag_enabled=self.dragEnabled(),
-            is_modified=self.isModified(),
-        )
 
     def font(self) -> gui.Font:
         return gui.Font(super().font())

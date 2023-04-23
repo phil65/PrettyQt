@@ -37,44 +37,6 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         super().__init__(*args, **kwargs)
         self.textChanged.connect(self.on_value_change)
 
-    def serialize_fields(self):
-        return dict(
-            text=self.text(),
-            accept_rich_text=self.acceptRichText(),
-            auto_formatting=self.get_auto_formatting(),
-            cursor_width=self.cursorWidth(),
-            document_title=self.documentTitle(),
-            line_wrap_column_or_width=self.lineWrapColumnOrWidth(),
-            line_wrap_mode=self.get_line_wrap_mode(),
-            word_wrap_mode=self.get_word_wrap_mode(),
-            overwrite_mode=self.overwriteMode(),
-            placeholder_text=self.placeholderText(),
-            read_only=self.isReadOnly(),
-            tab_changes_focus=self.tabChangesFocus(),
-            tab_stop_distance=self.tabStopDistance(),
-            undo_redo_enabled=self.isUndoRedoEnabled(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_text(state["text"])
-        self.setAcceptRichText(state["accept_rich_text"])
-        self.set_auto_formatting(state["auto_formatting"])
-        self.setCursorWidth(state["cursor_width"])
-        self.setDocumentTitle(state["document_title"])
-        self.setLineWrapColumnOrWidth(state["line_wrap_column_or_width"])
-        self.set_line_wrap_mode(state["line_wrap_mode"])
-        self.set_word_wrap_mode(state["word_wrap_mode"])
-        self.setOverwriteMode(state["overwrite_mode"])
-        self.setPlaceholderText(state["placeholder_text"])
-        self.setReadOnly(state["read_only"])
-        self.setTabChangesFocus(state["tab_changes_focus"])
-        self.setTabStopDistance(state["tab_stop_distance"])
-        self.setUndoRedoEnabled(state["undo_redo_enabled"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def __add__(self, other: str) -> TextEdit:
         self.append_text(other)
         return self

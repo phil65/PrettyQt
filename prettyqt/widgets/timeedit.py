@@ -10,20 +10,6 @@ from prettyqt.utils import datatypes
 class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
     value_changed = core.Signal(datetime.datetime)
 
-    def serialize_fields(self):
-        return dict(
-            time=self.get_time(),
-            range=(self.min_time(), self.max_time()),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setTime(state["time"])
-        self.set_range(*state["range"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def set_range(self, lower: datatypes.TimeType, upper: datatypes.TimeType):
         if isinstance(lower, str):
             lower = core.Time.fromString(lower)

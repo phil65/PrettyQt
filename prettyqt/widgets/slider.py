@@ -33,20 +33,6 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
         super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
 
-    def serialize_fields(self):
-        return dict(
-            tick_position=self.get_tick_position(),
-            tick_interval=self.tickInterval(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_tick_position(state["tick_position"])
-        self.setTickInterval(state["tick_interval"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def set_tick_position(self, position: TickPositionAllStr):
         """Set the tick position for the slider.
 

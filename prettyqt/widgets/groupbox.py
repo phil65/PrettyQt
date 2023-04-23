@@ -24,29 +24,6 @@ class GroupBox(widgets.WidgetMixin, QtWidgets.QGroupBox):
     def __repr__(self):
         return f"{type(self).__name__}({self.title()!r})"
 
-    def serialize_fields(self):
-        return dict(
-            checkable=self.isCheckable(),
-            checked=self.isChecked(),
-            layout=self.layout(),
-            flat=self.isFlat(),
-            # alignment=self.alignment(),
-            title=self.title(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setTitle(state["title"])
-        self.set_layout(state["layout"])
-        self.setCheckable(state["checkable"])
-        self.setChecked(state.get("checked", False))
-        self.setFlat(state["flat"])
-        self.setToolTip(state.get("tool_tip", ""))
-        # self.setAlignment(state["alignment"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def set_title(self, title: str):
         self.setTitle(title)
 

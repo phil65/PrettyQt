@@ -25,19 +25,6 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self.index_changed)
 
-    def serialize_fields(self):
-        return dict(
-            current_font=self.get_current_font(),
-            font_filters=self.get_font_filters(),
-        )
-
-    def __setstate__(self, state):
-        self.set_font_filters(*state.get("font_filters", []))
-        self.setCurrentFont(state["current_font"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def set_font_filters(self, *filters: FontFilterStr):
         """Set font filters.
 

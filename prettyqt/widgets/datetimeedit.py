@@ -43,27 +43,9 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         self.setCalendarPopup(True)
         self.dateTimeChanged.connect(self.datetime_changed)
 
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setDateTime(state["datetime"])
-        self.set_range(*state["range"])
-        self.setCalendarPopup(state["calendar_popup"])
-        self.setDisplayFormat(state["display_format"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def datetime_changed(self, date):
         dt = self.get_datetime()
         self.value_changed.emit(dt)
-
-    def serialize_fields(self):
-        return dict(
-            calendar_popup=self.calendarPopup(),
-            datetime=self.get_datetime(),
-            range=(self.min_datetime(), self.max_datetime()),
-            display_format=self.displayFormat(),
-        )
 
     def get_section_text(self, section: SectionsStr) -> str:
         if section not in SECTIONS:

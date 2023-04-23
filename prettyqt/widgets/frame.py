@@ -31,19 +31,6 @@ FrameShapeStr = Literal[
 
 
 class FrameMixin(widgets.WidgetMixin):
-    def serialize_fields(self):
-        return dict(
-            frame_shadow=self.get_frame_shadow(),
-            frame_shape=self.get_frame_shape(),
-            frame_rect=self.frameRect(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_frame_shadow(state["frame_shadow"])
-        self.set_frame_shape(state["frame_shape"])
-        self.setFrameRect(state["frame_rect"])
-
     def set_frame_shadow(self, style: ShadowStr):
         """Set frame shadow.
 

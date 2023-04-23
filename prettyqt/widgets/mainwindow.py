@@ -33,22 +33,6 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
             raise KeyError("Widget not found")
         return result
 
-    def serialize_fields(self):
-        return dict(
-            central_widget=self.centralWidget(),
-            is_maximized=self.isMaximized(),
-        )
-
-    def __setstate__(self, state):
-        if state["central_widget"]:
-            self.setCentralWidget(state["central_widget"])
-        if state["is_maximized"]:
-            self.showMaximized()
-        self.box = self.layout()
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def set_widget(self, widget: QtWidgets.QWidget | None):
         if widget is None:
             self.takeCentralWidget()

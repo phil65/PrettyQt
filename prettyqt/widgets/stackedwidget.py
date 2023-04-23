@@ -7,12 +7,12 @@ from prettyqt.qt import QtWidgets
 
 
 class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
-    def __setstate__(self, state):
-        for item in state["items"]:
-            self.add(item)
+    # def __setstate__(self, state):
+    #     for item in state["items"]:
+    #         self.add(item)
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
     def __add__(self, other: QtWidgets.QWidget) -> StackedWidget:
         self.addWidget(other)

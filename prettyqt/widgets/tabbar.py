@@ -65,29 +65,6 @@ class TabBarMixin(widgets.WidgetMixin):
     ):
         self.set_tab(index[0], index[1], value)
 
-    def serialize_fields(self):
-        return dict(
-            movable=self.isMovable(),
-            document_mode=self.documentMode(),
-            current_index=self.currentIndex(),
-            # shape=self.shape(),
-            draw_base=self.drawBase(),
-            elide_mode=self.get_elide_mode(),
-            icon_size=core.Size(self.iconSize()),
-        )
-
-    def __setstate__(self, state):
-        self.setDocumentMode(state.get("document_mode", False))
-        self.setMovable(state.get("movable", False))
-        # self.setShape(state.get("shape", "rounded"))
-        self.setIconSize(state["icon_size"])
-        self.setDrawBase(state.get("draw_base"))
-        self.set_elide_mode(state.get("elide_mode"))
-        self.setCurrentIndex(state.get("index", 0))
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     #  Send the on_detach when a tab is double clicked
     def mouseDoubleClickEvent(self, event):
         event.accept()

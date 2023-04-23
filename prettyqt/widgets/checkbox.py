@@ -18,20 +18,6 @@ class CheckBox(widgets.AbstractButtonMixin, QtWidgets.QCheckBox):
         self.stateChanged.connect(self.value_changed)
         self.setChecked(checked)
 
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setTristate(state.get("is_tristate", False))
-        self.set_checkstate(state["checkstate"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def serialize_fields(self):
-        return dict(
-            checkstate=self.get_checkstate(),
-            is_tristate=self.isTristate(),
-        )
-
     def set_checkstate(self, state: constants.StateStr):
         """Set checkstate of the checkbox.
 

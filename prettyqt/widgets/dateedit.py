@@ -10,20 +10,6 @@ from prettyqt.utils import datatypes
 class DateEdit(widgets.DateTimeEditMixin, QtWidgets.QDateEdit):
     value_changed = core.Signal(datetime.datetime)
 
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setDate(state["date"])
-        self.set_range(*state["range"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def serialize_fields(self):
-        return dict(
-            date=self.get_date(),
-            range=(self.min_date(), self.max_date()),
-        )
-
     def set_value(self, value: datatypes.DateType):
         if isinstance(value, str):
             value = QtCore.QDate.fromString(value)

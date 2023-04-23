@@ -68,31 +68,6 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         self.set_file_mode(file_mode)
         self.set_accept_mode(mode)
 
-    def serialize_fields(self):
-        return dict(
-            file_mode=self.get_file_mode(),
-            accept_mode=self.get_accept_mode(),
-            filter=self.get_filter(),
-            view_mode=self.get_view_mode(),
-            name_filter=self.selectedNameFilter(),
-            default_suffix=self.defaultSuffix(),
-            name_filters=self.nameFilters(),
-            supported_schemes=self.supportedSchemes(),
-        )
-
-    def __setstate__(self, state):
-        self.set_file_mode(state["file_mode"])
-        self.set_accept_mode(state["accept_mode"])
-        self.set_view_mode(state["view_mode"])
-        self.set_filter(*state["filter"])
-        self.setNameFilters(state["name_filters"])
-        self.setNameFilter(state["name_filter"])
-        self.setDefaultSuffix(state["default_suffix"])
-        self.setSupportedSchemes(state["supported_schemes"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def set_accept_mode(self, mode: AcceptModeStr):
         """Set accept mode.
 

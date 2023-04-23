@@ -49,38 +49,6 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     def __repr__(self):
         return f"{type(self).__name__}({self.text()!r})"
 
-    def serialize_fields(self):
-        pixmap = gui.Pixmap(self.pixmap())
-        return dict(
-            text=self.text(),
-            scaled_contents=self.hasScaledContents(),
-            indent=self.indent(),
-            margin=self.margin(),
-            text_format=self.get_text_format(),
-            pixmap=pixmap or None,
-            open_external_links=self.openExternalLinks(),
-            has_selected_text=self.hasSelectedText(),
-            selected_text=self.selectedText(),
-            alignment=(self.get_horizontal_alignment(), self.get_vertical_alignment()),
-            word_wrap=self.wordWrap(),
-            text_interaction_flags=self.get_text_interaction(),
-        )
-
-    def __setstate__(self, state):
-        self.setText(state.get("text", ""))
-        self.setIndent(state.get("indent", -1))
-        self.setMargin(state.get("margin", 0))
-        self.setWordWrap(state.get("word_wrap", 0))
-        self.set_text_format(state.get("text_format", 0))
-        # self.setPixmap(state.get("pixmap"))
-        self.setOpenExternalLinks(state.get("open_external_links", False))
-        self.set_alignment(*state.get("alignment"))
-        self.setScaledContents(state["scaled_contents"])
-        self.setWordWrap(state["word_wrap"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")
         self.setTextFormat(QtCore.Qt.TextFormat.RichText)

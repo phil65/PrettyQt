@@ -32,21 +32,21 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
         colstart = col.start if isinstance(col, slice) else col
         self.add(value, rowstart, colstart, rowspan, colspan)
 
-    def serialize_fields(self):
-        widgets = []
-        positions = []
-        for i, item in enumerate(list(self)):
-            widgets.append(item)
-            positions.append(self.getItemPosition(i))
-        return dict(widgets=widgets, positions=positions)
+    # def serialize_fields(self):
+    #     widgets = []
+    #     positions = []
+    #     for i, item in enumerate(list(self)):
+    #         widgets.append(item)
+    #         positions.append(self.getItemPosition(i))
+    #     return dict(widgets=widgets, positions=positions)
 
-    def __setstate__(self, state):
-        for item, pos in zip(state["widgets"], state["positions"]):
-            x, y, w, h = pos
-            self[x : x + w - 1, y : y + h - 1] = item
+    # def __setstate__(self, state):
+    #     for item, pos in zip(state["widgets"], state["positions"]):
+    #         x, y, w, h = pos
+    #         self[x : x + w - 1, y : y + h - 1] = item
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout]:
         return iter(item for i in range(self.count()) if (item := self[i]) is not None)

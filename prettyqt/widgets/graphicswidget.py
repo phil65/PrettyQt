@@ -11,17 +11,6 @@ LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
 
 
 class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutItemMixin):
-    def serialize_fields(self):
-        return dict(
-            autofill_background=self.autoFillBackground(),
-            font=self.get_font(),
-            window_title=self.windowTitle(),
-            preferred_size=self.preferredSize(),
-            maximum_size=self.maximumSize(),
-            palette=self.get_palette(),
-            focus_policy=self.get_focus_policy(),
-        )
-
     def set_layout(self, layout: LayoutStr | QtWidgets.QGraphicsLayout | None):
         match layout:
             case None:

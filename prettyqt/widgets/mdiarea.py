@@ -37,23 +37,6 @@ class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
         self.add(other)
         return self
 
-    def serialize_fields(self):
-        return dict(
-            view_mode=self.get_view_mode(),
-            window_order=self.get_window_order(),
-            tab_position=self.get_tab_position(),
-            background=self.get_background(),
-            document_mode=self.documentMode(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.set_view_mode(state["view_mode"])
-        self.set_window_order(state["window_order"])
-        self.set_tab_position(state["tab_position"])
-        self.set_background(state["background"])
-        self.setDocumentMode(state["document_mode"])
-
     def set_view_mode(self, mode: ViewModeStr):
         """Set view mode for the MDI area.
 
@@ -149,6 +132,7 @@ if __name__ == "__main__":
     le = widgets.LineEdit("test")
     le2 = widgets.LineEdit("test")
     widget.add(le)
+    print(widget.get_properties())
     widget.add(le2)
     widget.show()
     app.main_loop()

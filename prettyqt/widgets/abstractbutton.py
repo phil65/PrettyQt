@@ -6,38 +6,6 @@ from prettyqt.utils import InvalidParamError, datatypes
 
 
 class AbstractButtonMixin(widgets.WidgetMixin):
-    def serialize_fields(self):
-        return dict(
-            text=self.text(),
-            icon=self.get_icon(),
-            checkable=self.isCheckable(),
-            checked=self.isChecked(),
-            auto_exclusive=self.autoExclusive(),
-            auto_repeat=self.autoRepeat(),
-            auto_repeat_delay=self.autoRepeatDelay(),
-            auto_repeat_interval=self.autoRepeatInterval(),
-            is_down=self.isDown(),
-            icon_size=self.get_icon_size(),
-            shortcut=self.get_shortcut(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setText(state["text"])
-        self.set_icon(state["icon"])
-        self.setChecked(state.get("checked", False))
-        self.setCheckable(state["checkable"])
-        self.setAutoExclusive(state["auto_exclusive"])
-        self.setAutoRepeat(state["auto_repeat"])
-        self.setAutoRepeatDelay(state["auto_repeat_delay"])
-        self.setAutoRepeatInterval(state["auto_repeat_interval"])
-        self.setDown(state["is_down"])
-        self.set_icon_size(state["icon_size"])
-        self.setShortcut(state["shortcut"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def __bool__(self):
         return self.isChecked()
 

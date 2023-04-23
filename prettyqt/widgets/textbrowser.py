@@ -15,22 +15,6 @@ class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
         super().__init__(*args, **kwargs)
         self.setOpenExternalLinks(True)
 
-    def serialize_fields(self):
-        return dict(
-            open_external_links=self.openExternalLinks(),
-            open_links=self.openLinks(),
-            search_paths=self.get_search_paths(),
-        )
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setOpenExternalLinks(state["open_external_links"])
-        self.setOpenLinks(state["open_links"])
-        self.set_search_paths(state["search_paths"])
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     # def dragEnterEvent(self, event):
     #     u = event.mimeData().urls()
     #     for url in u:
