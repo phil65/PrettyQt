@@ -5,15 +5,15 @@ from prettyqt.qt import QtWidgets
 
 
 class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):
-    def serialize_fields(self):
-        return dict(items=self.get_children())
+    # def serialize_fields(self):
+    #     return dict(items=self.get_children())
 
-    def __setstate__(self, state):
-        for item in state["items"]:
-            self.add(item)
+    # def __setstate__(self, state):
+    #     for item in state["items"]:
+    #         self.add(item)
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
     def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
         self.add(other)

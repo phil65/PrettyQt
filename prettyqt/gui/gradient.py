@@ -86,15 +86,12 @@ class GradientMixin:
     def __setitem__(self, key: float, value):
         self.setColorAt(key, value)
 
-    def serialize_fields(self):
+    def serialize(self) -> dict[str, Any]:
         return dict(
             coordinate_mode=self.get_coordinate_mode(),
             spread=self.get_spread(),
             stops=self.get_stops(),
         )
-
-    def serialize(self) -> dict[str, Any]:
-        return self.serialize_fields()
 
     def set_coordinate_mode(self, mode: CoordinateModeStr):
         """Set the coordinate mode.

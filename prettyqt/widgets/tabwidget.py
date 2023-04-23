@@ -61,34 +61,34 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
 
-    def serialize_fields(self):
-        return dict(
-            tabbar=self.tabBar(),
-            widgets=self.get_children(),
-            movable=self.isMovable(),
-            document_mode=self.documentMode(),
-            current_index=self.currentIndex(),
-            tab_shape=self.get_tab_shape(),
-            # elide_mode=self.get_elide_mode(),
-            icon_size=self.iconSize(),
-            tab_position=self.get_tab_position(),
-        )
+    # def serialize_fields(self):
+    #     return dict(
+    #         tabbar=self.tabBar(),
+    #         widgets=self.get_children(),
+    #         movable=self.isMovable(),
+    #         document_mode=self.documentMode(),
+    #         current_index=self.currentIndex(),
+    #         tab_shape=self.get_tab_shape(),
+    #         # elide_mode=self.get_elide_mode(),
+    #         icon_size=self.iconSize(),
+    #         tab_position=self.get_tab_position(),
+    #     )
 
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        self.setTabBar(state["tabbar"])
-        self.setDocumentMode(state.get("document_mode", False))
-        self.setMovable(state.get("movable", False))
-        self.set_tab_shape(state.get("tab_shape", "rounded"))
-        self.setIconSize(state["icon_size"])
-        for widget, name, icon, tooltip, whatsthis in state["widgets"]:
-            i = self.add_tab(widget, name, icon)
-            self.setTabToolTip(i, tooltip)
-            self.setTabWhatsThis(i, whatsthis)
-        self.setCurrentIndex(state.get("index", 0))
+    # def __setstate__(self, state):
+    #     super().__setstate__(state)
+    #     self.setTabBar(state["tabbar"])
+    #     self.setDocumentMode(state.get("document_mode", False))
+    #     self.setMovable(state.get("movable", False))
+    #     self.set_tab_shape(state.get("tab_shape", "rounded"))
+    #     self.setIconSize(state["icon_size"])
+    #     for widget, name, icon, tooltip, whatsthis in state["widgets"]:
+    #         i = self.add_tab(widget, name, icon)
+    #         self.setTabToolTip(i, tooltip)
+    #         self.setTabWhatsThis(i, whatsthis)
+    #     self.setCurrentIndex(state.get("index", 0))
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
+    # def __reduce__(self):
+    #     return type(self), (), self.__getstate__()
 
     def update_tab_bar_visibility(self):
         """Update visibility of the tabBar depending of the number of tabs.
