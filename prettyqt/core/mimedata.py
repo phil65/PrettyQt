@@ -55,6 +55,16 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
         urls = [core.Url.from_local_file(p) for p in paths]
         self.setUrls(urls)
 
+    @classmethod
+    def for_file(
+        cls,
+        path: datatypes.PathType | QtCore.QFileInfo,
+        match_mode: core.mimedatabase.MatchModeStr = "default",
+    ) -> MimeData:
+        db = core.MimeDatabase()
+        mime_type = db.get_mime_type_for_file(path, match_mode)
+        return cls(mime_type)
+
 
 if __name__ == "__main__":
     mime_data = MimeData()
