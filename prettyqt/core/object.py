@@ -2,13 +2,14 @@ from __future__ import annotations
 
 from collections import defaultdict
 import contextlib
-import inspect
+
+# import inspect
 import itertools
 from typing import Any, DefaultDict, TypeVar
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import helpers
+from prettyqt.utils import datatypes, helpers
 
 
 T = TypeVar("T", bound=QtCore.QObject)
@@ -21,10 +22,10 @@ class ObjectMixin:
         return f"{type(self).__name__}()"
 
     def __setstate__(self, state):
-        self.set_id(state["object_name"])
+        self.set_properties(state)
 
     def __getstate__(self):
-        return self.serialize()
+        return self.get_properties()
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
@@ -33,12 +34,13 @@ class ObjectMixin:
         return dict(object_name=self.objectName())
 
     def serialize(self) -> dict[str, Any]:
-        dct = {}
-        for klass in reversed(inspect.getmro(type(self))):
-            if "serialize_fields" in klass.__dict__:
-                data = klass.serialize_fields(self)  # type: ignore
-                dct |= data
-        return dct
+        return self.get_properties()
+        # dct = {}
+        # for klass in reversed(inspect.getmro(type(self))):
+        #     if "serialize_fields" in klass.__dict__:
+        #         data = klass.serialize_fields(self)  # type: ignore
+        #         dct |= data
+        # return dct
 
     @contextlib.contextmanager
     def block_signals(self):
@@ -120,10 +122,16 @@ class ObjectMixin:
             interval = helpers.parse_time(interval)
         return self.startTimer(interval, constants.TIMER_TYPE[timer_type])
 
-    def get_properties(self, include_super: bool = True) -> dict[str, Any]:
+    def get_properties(
+        self, include_super: bool = True, cast: bool = True
+    ) -> dict[str, Any]:
         metaobj = self.get_metaobject()
         props = metaobj.get_properties(include_super=include_super)
-        return {i.name(): i.read(self) for i in props}
+        return {
+            i.name(): datatypes.make_serializable(i.read(self))
+            for i in props
+            if i.get_name() not in ["children", "frameShadow", "state"]
+        }
 
     def set_properties(self, props: dict[str, Any], include_super: bool = True):
         metaobj = self.get_metaobject()
@@ -145,7 +153,22 @@ class Object(ObjectMixin, QtCore.QObject):
 
 
 if __name__ == "__main__":
+    import logging
+    import pickle
+    import sys
+
+    from prettyqt import widgets
+
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    app = widgets.app()
     obj = core.Object()
-    obj.setProperty("a", "test")
-    obj.setProperty("b", core.Rect(10, 10, 20, 20))
-    print(obj.get_dynamic_properties())
+    obj.set_id("test")
+    meta = obj.get_metaobject()
+    prop = meta.get_property(0)
+    print(prop.read(obj))
+    print(obj.get_properties())
+    with open("data.pkl", "wb") as jar:
+        pickle.dump(obj, jar)
+    with open("data.pkl", "rb") as jar:
+        obj = pickle.load(jar)
+    assert obj.get_id() == "test"
