@@ -191,3 +191,10 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
             priority
         """
         return PRIORITY.inverse[self.priority()]
+
+    def set_attribute(self, attribute: AttributeStr, value: datatypes.VariantType):
+        self.setAttribute(ATTRIBUTE[attribute], value)
+
+    def set_attributes(self, **kwargs):
+        for k, v in kwargs.items():
+            self.set_attribute(k, v)
