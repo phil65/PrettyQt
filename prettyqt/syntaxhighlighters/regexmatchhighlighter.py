@@ -41,12 +41,7 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
                 break
             starts_in_line = start_char <= start <= end_char
             ends_in_line = start_char <= end <= end_char
-            if (
-                starts_in_line
-                and ends_in_line
-                or not ends_in_line
-                and starts_in_line
-            ):
+            if starts_in_line and ends_in_line or not ends_in_line and starts_in_line:
                 # print(f"in line: {line_pos} - {line_pos + match_len}")
                 self._colorize(start - start_char, end - start, i)
             elif ends_in_line:

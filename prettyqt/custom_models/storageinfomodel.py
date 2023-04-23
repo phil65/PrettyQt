@@ -3,7 +3,6 @@ from __future__ import annotations
 import math
 
 from prettyqt import core, custom_models
-from prettyqt.qt import QtCore
 
 
 def size_to_string(size: int) -> str:

@@ -1,7 +1,5 @@
 """Tests for `prettyqt` package."""
 
-import pickle
-
 import pytest
 
 from prettyqt.qt import QtCore

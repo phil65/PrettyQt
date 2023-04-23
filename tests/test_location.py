@@ -45,7 +45,7 @@ def test_georoute():
     route = location.GeoRoute()
     route["test"] = "a"
     assert route["test"] == "a"
-    abs(route) == 0
+    assert abs(route) == 0
     route.get_bounds()
     route.get_first_route_segment()
     route.get_path()
