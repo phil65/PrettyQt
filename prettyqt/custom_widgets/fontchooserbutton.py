@@ -14,7 +14,7 @@ class FontChooserButton(widgets.Widget):
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
-        self._current_font = font
+        self._current_font = font or QtGui.QFont()
         layout = widgets.BoxLayout("horizontal", self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
@@ -28,18 +28,6 @@ class FontChooserButton(widgets.Widget):
 
     def __repr__(self):
         return get_repr(self, self.current_font)
-
-    def serialize_fields(self):
-        return dict(current_font=self._current_font)
-
-    def __setstate__(self, state):
-        super().__setstate__(state)
-        if state["current_font"]:
-            self.set_value(state["current_font"])
-        self.set_enabled(state.get("enabled", True))
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
 
     @core.Slot()
     def choose_font(self):
@@ -60,6 +48,8 @@ class FontChooserButton(widgets.Widget):
 
     def get_value(self):
         return self._current_font
+
+    current_font = core.Property(QtGui.QFont, get_value, set_value)
 
 
 if __name__ == "__main__":

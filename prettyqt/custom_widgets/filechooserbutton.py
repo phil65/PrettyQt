@@ -31,8 +31,8 @@ class FileChooserButton(widgets.Widget):
             parent: parent widget
         """
         super().__init__(parent)
-        self.path: pathlib.Path | None = None
-        self.extensions = extensions
+        self._path: pathlib.Path | None = None
+        self._extensions = extensions or []
         self.mode: widgets.filedialog.AcceptModeStr = mode
         self.file_mode: widgets.filedialog.FileModeStr = file_mode
         self.root = root
@@ -52,16 +52,6 @@ class FileChooserButton(widgets.Widget):
         self.button.setDefaultAction(action)
         layout.add(self.button)
 
-    def serialize_fields(self):
-        return dict(path=self.path, extensions=self.extensions, enabled=self.isEnabled())
-
-    def __setstate__(self, state):
-        self.set_path(state["path"])
-        self.set_enabled(state.get("enabled", True))
-
-    def __reduce__(self):
-        return type(self), (self.extensions,), self.__getstate__()
-
     @core.Slot()
     def open_file(self):
         dialog = widgets.FileDialog(
@@ -71,26 +61,35 @@ class FileChooserButton(widgets.Widget):
             path=self.root,
             file_mode=self.file_mode,
         )
-        if self.extensions:
-            dialog.set_extension_filter(self.extensions)
+        if self._extensions:
+            dialog.set_extension_filter(self._extensions)
         if not dialog.choose():
             return
         self.set_path(dialog.selected_file())
-        self.value_changed.emit(self.path)
+        self.value_changed.emit(self._path)
 
     def set_path(self, path: datatypes.PathType | None):
         if path is None:
-            self.path = None
+            self._path = None
             self.lineedit.set_text("")
         else:
-            self.path = pathlib.Path(path)
+            self._path = pathlib.Path(path)
             self.lineedit.set_text(os.fspath(path))
 
     def get_value(self) -> pathlib.Path | None:
-        return self.path
+        return self._path
 
     def set_value(self, value: datatypes.PathType | None):
         self.set_path(value)
+
+    def get_extensions(self) -> list[str]:
+        return self._extensions
+
+    def set_extensions(self, extensions: list[str]):
+        self._extensions = extensions
+
+    # path = core.Property(object, get_value, set_value)
+    # extensions = core.Property(object, get_extensions, set_extensions)
 
 
 if __name__ == "__main__":

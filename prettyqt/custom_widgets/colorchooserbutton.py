@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import colors, datatypes, get_repr
 
 
@@ -31,17 +31,6 @@ class ColorChooserButton(widgets.Widget):
     def __repr__(self):
         return get_repr(self, self._current_color)
 
-    def serialize_fields(self):
-        return dict(current_color=self._current_color, enabled=self.isEnabled())
-
-    def __setstate__(self, state):
-        if state["current_color"]:
-            self.set_current_color(state["current_color"])
-        self.setEnabled(state.get("enabled", True))
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     @core.Slot()
     def choose_color(self):
         dlg = widgets.ColorDialog()
@@ -67,6 +56,8 @@ class ColorChooserButton(widgets.Widget):
 
     def set_value(self, value: datatypes.ColorType):
         self.set_current_color(value)
+
+    current_color = core.Property(QtGui.QColor, get_value, set_value)
 
 
 if __name__ == "__main__":
