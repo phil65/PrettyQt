@@ -41,7 +41,7 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
         writer.setDevice(buffer)
         writer.set_format(fmt)  # ODF Format
         writer.write(document)
-        return buffer.data().decode()
+        return buffer.data().data()
 
 
 if __name__ == "__main__":
