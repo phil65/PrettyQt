@@ -61,8 +61,8 @@ mkdocstrings = {version = "^0", extras = ["python-legacy"]}
 pymdown-extensions = "^9"
 black = "^23"
 devtools = "^0"
-commitizen = "^2.20"
-cz-github-convention = "^0.2"
+commitizen = "^3"
+# cz-github-convention = "^0.2"
 
 [tool.poetry.extras]
 pyside6 = ["pyside6", "PySide6-QtAds"]
@@ -182,7 +182,7 @@ exclude = '''
 )/
 '''
 [tool.commitizen]
-name = "cz_github_convention"
+name = "cz_conventional_commits"
 github_repo = "phil65/PrettyQt"
 version = "1.20.0"
 tag_format = "v$version"

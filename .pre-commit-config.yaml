@@ -28,11 +28,11 @@ repos:
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: v2.42.1
+  rev: 3.0.1
   hooks:
     - id: commitizen
       stages: [commit-msg]
-      additional_dependencies: [typing-extensions, cz-github-convention]
+      additional_dependencies: [typing-extensions] # cz-github-convention]
 - repo: https://github.com/ambv/black
   rev: 23.3.0
   hooks:
