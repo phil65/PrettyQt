@@ -4,6 +4,7 @@ import os
 import pathlib
 from typing import Any, Literal
 
+from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes
 
@@ -92,6 +93,19 @@ class Url(QtCore.QUrl):
 
     def __str__(self):
         return self.toString()
+
+    def __getstate__(self):
+        return bytes(self)
+
+    def __setstate__(self, ba):
+        core.DataStream.write_bytearray(ba, self)
+
+    def __reduce__(self):
+        return type(self), (), self.__getstate__()
+
+    def __bytes__(self):
+        ba = core.DataStream.create_bytearray(self)
+        return ba.data()
 
     def serialize_fields(self):
         return dict(path=self.toString())
