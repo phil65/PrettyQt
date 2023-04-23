@@ -49,7 +49,7 @@ class ObjectMixin:
     def to_json(self):
         dct = self.__getstate__()
         for k, v in dct.items():
-            if isinstance(v, QtCore.QObject):
+            if isinstance(v, ObjectMixin):
                 dct[k] = v.to_json()
         return dct
 
