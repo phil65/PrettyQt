@@ -8,7 +8,7 @@ from dataclasses import dataclass
 import json
 import os
 import pathlib
-from typing import Optional, Literal, overload
+from typing import Literal, overload
 
 from prettyqt.qt import QtGui
 
@@ -18,7 +18,7 @@ from prettyqt.iconprovider.iconic_font import FontError, IconicFont, set_global_
 from prettyqt.utils import datatypes
 
 
-key_type = tuple[Optional[str], Optional[str], bool]
+key_type = tuple[str | None, str | None, bool]
 icon_cache: dict[key_type, QtGui.QIcon] = {}
 # Linux packagers, please set this to True if you want to make qtawesome
 # use system fonts

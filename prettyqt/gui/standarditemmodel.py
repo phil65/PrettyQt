@@ -46,7 +46,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         return type(self), (), self.__getstate__()
 
     def __add__(self, other: str | QtGui.QStandardItem) -> StandardItemModel:
-        if isinstance(other, (QtGui.QStandardItem, str)):
+        if isinstance(other, QtGui.QStandardItem | str):
             self.add(other)
             return self
         raise TypeError("wrong type for addition")

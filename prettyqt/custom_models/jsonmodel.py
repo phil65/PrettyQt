@@ -37,7 +37,7 @@ class JsonTreeItem(custom_models.NestedItem):
                 child.type = type(value)
                 root_item.append_child(child)
 
-        elif isinstance(value, (list, tuple)):
+        elif isinstance(value, list | tuple):
             for index, val in enumerate(value):
                 child = cls.load(val, root_item)
                 child.key = str(index)

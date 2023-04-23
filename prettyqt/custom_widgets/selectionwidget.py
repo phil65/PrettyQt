@@ -36,7 +36,7 @@ class SelectionWidget(widgets.GroupBox):
                 self.add(v, k)
         else:
             for i in items:
-                if isinstance(i, (tuple, list)):
+                if isinstance(i, tuple | list):
                     self.add(*i)
                 else:
                     self.add(i)

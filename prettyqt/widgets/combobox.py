@@ -105,7 +105,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
                 self.addItem(v, userData=k)
         else:
             for i in items:
-                if isinstance(i, (tuple, list)):
+                if isinstance(i, tuple | list):
                     self.add(*i)
                 else:
                     self.addItem(i, i)

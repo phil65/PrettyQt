@@ -21,7 +21,7 @@ class FlowLayout(widgets.Layout):
         return dict(items=self.get_children())
 
     def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout) -> FlowLayout:
-        if not isinstance(other, (QtWidgets.QWidget, QtWidgets.QLayout)):
+        if not isinstance(other, QtWidgets.QWidget | QtWidgets.QLayout):
             raise TypeError()
         self.add(other)
         return self

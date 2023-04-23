@@ -105,7 +105,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
 
     def add(self, *items):
         for i in items:
-            if isinstance(i, (QtWidgets.QWidget, QtWidgets.QLayout)):
+            if isinstance(i, QtWidgets.QWidget | QtWidgets.QLayout):
                 self.addRow(i)
             elif isinstance(i, tuple):
                 self.addRow(*i)

@@ -48,7 +48,7 @@ def get_color(color: datatypes.ColorType) -> gui.Color:
     Returns:
         gui.Color: color instance
     """
-    if isinstance(color, (tuple, list)):
+    if isinstance(color, tuple | list):
         return gui.Color(*color)
     return gui.Color(color)
 

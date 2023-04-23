@@ -14,7 +14,7 @@ class FileIconProvider(gui.AbstractFileIconProviderMixin, QtWidgets.QFileIconPro
         | QtCore.QFileInfo
         | datatypes.PathType,
     ) -> QtGui.QIcon:
-        if isinstance(typ, (os.PathLike, QtCore.QFileInfo)):
+        if isinstance(typ, os.PathLike | QtCore.QFileInfo):
             param = core.FileInfo(typ)
         else:
             param = gui.abstractfileiconprovider.ICON_TYPE[typ]

@@ -58,7 +58,7 @@ class StandardItem(QtGui.QStandardItem):
         return iter(self.get_children())
 
     def __add__(self, other: str | QtGui.QStandardItem) -> StandardItem:
-        if isinstance(other, (QtGui.QStandardItem, str)):
+        if isinstance(other, QtGui.QStandardItem | str):
             self.add(other)
             return self
         raise TypeError("wrong type for addition")
