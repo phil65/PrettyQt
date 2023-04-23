@@ -6,6 +6,50 @@ import pathlib
 from typing import TYPE_CHECKING, Any, Protocol, Union
 
 
+def make_serializable(obj):
+    #  possible to avoid importing by checking the metaobject instead of isinstance?
+    from prettyqt import core, gui, widgets
+    from prettyqt.qt import QtCore, QtGui, QtWidgets
+
+    match obj:
+        case QtCore.QMargins():
+            return core.Margins(obj)
+        case QtCore.QLocale():
+            return core.Locale(obj)
+        case QtCore.QKeyCombination():
+            return core.KeyCombination(obj)
+        case QtCore.QUrl():
+            return core.Url(obj)
+        case QtGui.QPalette():
+            return gui.Palette(obj)
+        case QtGui.QFont():
+            return gui.Font(obj)
+        case QtGui.QCursor():
+            return gui.Cursor(obj)
+        case QtGui.QBrush():
+            return gui.Brush(obj)
+        case QtGui.QPixmap():
+            return gui.Pixmap(obj)
+        case QtGui.QRegion():
+            return gui.Region(obj)
+        case QtGui.QKeySequence():
+            return gui.KeySequence(obj)
+        case QtGui.QIcon():
+            return gui.Icon(obj)
+        case QtGui.QVector3D():
+            # PyQt doesnt allow Vector3D in ctor
+            return gui.Vector3D(obj.x(), obj.y(), obj.z())
+        case QtWidgets.QSizePolicy():
+            return widgets.SizePolicy.clone(obj)
+        case list():
+            return [make_serializable(i) for i in obj]
+        case QtGui.QTextDocument():
+            # TODO: cant serialize this yet
+            return None
+        case _:
+            return obj
+
+
 if TYPE_CHECKING:
     from prettyqt.qt import QtCore, QtGui, QtWebEngineCore, QtWidgets
 
