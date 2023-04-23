@@ -29,9 +29,9 @@ class FlowLayout(widgets.Layout):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __setstate__(self, state):
-        for item in state["items"]:
-            self.add(item)
+    # def __setstate__(self, state):
+    #     for item in state["items"]:
+    #         self.add(item)
 
     def __del__(self):
         item = self.takeAt(0)
