@@ -6,7 +6,7 @@ from typing import Any, Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 COMPONENT_FORMATTING_OPTIONS = bidict(
@@ -89,7 +89,7 @@ class Url(QtCore.QUrl):
     #     return self.absolutePath()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.toString()!r})"
+        return get_repr(self, self.toString())
 
     def __str__(self):
         return self.toString()

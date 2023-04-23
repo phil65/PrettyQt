@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 mod = QtPositioning.QGeoCoordinate
@@ -27,7 +27,7 @@ class GeoCoordinate(QtPositioning.QGeoCoordinate):
         return self.toString()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.latitude()}, {self.longitude()})"
+        return get_repr(self, self.latitude(), self.longitude())
 
     def __bool__(self):
         return self.isValid()

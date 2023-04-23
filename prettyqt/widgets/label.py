@@ -5,7 +5,14 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, helpers
+from prettyqt.utils import (
+    InvalidParamError,
+    bidict,
+    colors,
+    datatypes,
+    get_repr,
+    helpers,
+)
 
 
 TEXT_INTERACTION = bidict(
@@ -47,7 +54,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.openExternalLinks()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.text()!r})"
+        return get_repr(self, self.text())
 
     def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")

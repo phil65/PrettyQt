@@ -4,6 +4,7 @@ from collections.abc import Iterator
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import get_repr
 
 
 class CompositeValidator(gui.Validator):
@@ -16,7 +17,7 @@ class CompositeValidator(gui.Validator):
         self.validators = validators if validators is not None else []
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.validators})"
+        return get_repr(self, self.validators)
 
     def __getitem__(self, index: int) -> gui.Validator:
         return self.validators[index]

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 ECHO_MODE = bidict(
@@ -39,7 +39,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         self.set_read_only(read_only)
 
     def __repr__(self):
-        return f"{type(self).__name__}: {self.text()!r}"
+        return get_repr(self, self.text())
 
     def __add__(self, other: str):
         self.append_text(other)

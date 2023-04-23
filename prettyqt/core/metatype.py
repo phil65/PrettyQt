@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 TYPE = bidict(
@@ -125,7 +125,7 @@ class MetaType(QtCore.QMetaType):
         return self.isValid()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_name()!r})"
+        return get_repr(self, self.get_name())
 
     def get_name(self) -> str | None:
         return self.name()  # type: ignore

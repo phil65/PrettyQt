@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.utils import get_repr
 
 
 class KeySequenceEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
@@ -12,7 +13,7 @@ class KeySequenceEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
         self.keySequenceChanged.connect(self.value_changed)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_value()!r})"
+        return get_repr(self, self.get_value())
 
     def set_value(self, value: str):
         seq = gui.KeySequence.fromString(value)

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCharts
+from prettyqt.utils import get_repr
 
 
 class BarSet(core.ObjectMixin, QtCharts.QBarSet):
@@ -21,7 +22,7 @@ class BarSet(core.ObjectMixin, QtCharts.QBarSet):
         self.replace(index, value)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.label()!r})"
+        return get_repr(self, self.label())
 
     def get_pen(self) -> gui.Pen:
         return gui.Pen(self.pen())

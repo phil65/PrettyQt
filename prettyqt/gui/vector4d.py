@@ -5,10 +5,6 @@ from prettyqt.qt import QtGui
 
 
 class Vector4D(QtGui.QVector4D):
-    # def __repr__(self):
-    #     return f"{type(self).__name__}()"
-    pass
-
     def __bool__(self):
         return not self.isNull()
 

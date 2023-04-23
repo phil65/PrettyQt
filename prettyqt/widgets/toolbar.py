@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, helpers
+from prettyqt.utils import InvalidParamError, datatypes, get_repr, helpers
+
+
+# from typing import Any
 
 
 class ToolBarMixin(widgets.WidgetMixin):
@@ -25,7 +27,7 @@ class ToolBarMixin(widgets.WidgetMixin):
     #     return dict(actions=self.actions(), allowed_areas=self.get_allowed_areas())
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.windowTitle()!r})"
+        return get_repr(self, self.windowTitle())
 
     def add(self, item: QtWidgets.QAction | QtWidgets.QWidget):
         if isinstance(item, QtWidgets.QAction):

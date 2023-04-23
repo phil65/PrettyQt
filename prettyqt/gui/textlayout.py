@@ -4,11 +4,12 @@ import contextlib
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 class TextLayout(QtGui.QTextLayout):
     def __repr__(self):
-        return f"{type(self).__name__}({self.text()!r})"
+        return get_repr(self, self.text())
 
     @contextlib.contextmanager
     def process_layout(self):

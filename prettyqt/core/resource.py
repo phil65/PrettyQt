@@ -7,7 +7,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 COMPRESSION = bidict(
@@ -21,10 +21,7 @@ CompressionStr = Literal["none", "zlib", "zstd"]
 
 class Resource(QtCore.QResource):
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.absoluteFilePath()!r}, "
-            f"{self.get_locale()!r})"
-        )
+        return get_repr(self, self.absoluteFilePath(), self.get_locale())
 
     def __reduce__(self):
         return type(self), (self.absoluteFilePath(), self.get_locale())

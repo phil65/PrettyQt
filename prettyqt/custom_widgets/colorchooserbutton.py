@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors, datatypes, get_repr
 
 
 class ColorChooserButton(widgets.Widget):
@@ -29,7 +29,7 @@ class ColorChooserButton(widgets.Widget):
             self.set_current_color(color)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self._current_color})"
+        return get_repr(self, self._current_color)
 
     def serialize_fields(self):
         return dict(current_color=self._current_color, enabled=self.isEnabled())

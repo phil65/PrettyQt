@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 ANCESTER_MODES = bidict(
@@ -28,7 +28,7 @@ VisibilityStr = Literal[
 
 class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     # def serialize_fields(self):
     #     return dict(

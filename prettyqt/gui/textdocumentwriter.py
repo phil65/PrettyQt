@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 FormatStr = Literal["plaintext", "HTML", "markdown", "ODF"]
@@ -13,7 +13,7 @@ FormatStr = Literal["plaintext", "HTML", "markdown", "ODF"]
 
 class TextDocumentWriter(QtGui.QTextDocumentWriter):
     def __repr__(self):
-        return f"{type(self).__name__}({self.device()!r}, {self.format()!r})"
+        return get_repr(self, self.device(), self.format())
 
     def get_format(self) -> FormatStr:
         return self.format().data().decode()  # type: ignore

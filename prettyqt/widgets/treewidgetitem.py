@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 mod = QtWidgets.QTreeWidgetItem
@@ -21,7 +21,7 @@ ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless
 
 class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def serialize_fields(self):
         data = [

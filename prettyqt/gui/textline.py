@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 CURSOR_POSITION = bidict(
@@ -27,7 +27,7 @@ class TextLine(QtGui.QTextLine):
         return self.isValid()
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __len__(self):
         return self.textLength()

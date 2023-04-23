@@ -2,13 +2,12 @@ from __future__ import annotations
 
 from prettyqt import positioning
 from prettyqt.qt import QtPositioning
+from prettyqt.utils import get_repr
 
 
 class GeoRectangle(positioning.GeoShapeMixin, QtPositioning.QGeoRectangle):
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.get_top_left()!r}, {self.get_bottom_right()!r})"
-        )
+        return get_repr(self, self.get_top_left(), self.get_bottom_right())
 
     def get_top_left(self) -> positioning.GeoCoordinate:
         return positioning.GeoCoordinate(self.topLeft())

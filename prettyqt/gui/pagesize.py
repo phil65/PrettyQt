@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 PAGE_SIZE_ID = bidict(
@@ -154,7 +154,7 @@ UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
 
 class PageSize(QtGui.QPageSize):
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_id()!r})"
+        return get_repr(self, self.get_id())
 
     def __reduce__(self):
         return type(self), (self.id(),)

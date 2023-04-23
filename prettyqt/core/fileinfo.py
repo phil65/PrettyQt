@@ -6,6 +6,7 @@ from typing import Any
 
 from prettyqt import core
 from prettyqt.qt import QtCore
+from prettyqt.utils import get_repr
 
 
 class FileInfo(QtCore.QFileInfo):
@@ -16,7 +17,7 @@ class FileInfo(QtCore.QFileInfo):
             super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.absoluteFilePath()!r})"
+        return get_repr(self, self.absoluteFilePath())
 
     def __str__(self):
         return self.absoluteFilePath()

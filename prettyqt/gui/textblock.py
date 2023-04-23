@@ -4,6 +4,7 @@ import contextlib
 
 from prettyqt import constants
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 class UserData(QtGui.QTextBlockUserData):
@@ -12,12 +13,12 @@ class UserData(QtGui.QTextBlockUserData):
         self.data = data
 
     def __repr__(self):
-        return f"{type(self).__name__}({repr(self.data)})"
+        return get_repr(self, self.data)
 
 
 class TextBlock(QtGui.QTextBlock):
     def __repr__(self):
-        return f"{type(self).__name__}({self.text()!r})"
+        return get_repr(self, self.text())
 
     def __contains__(self, position: int):
         return self.contains(position)

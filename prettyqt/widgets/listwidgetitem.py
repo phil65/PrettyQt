@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import InvalidParamError, datatypes, get_repr
 
 
 class ListWidgetItem(QtWidgets.QListWidgetItem):
     def __repr__(self):
-        return f"{type(self).__name__}({self.icon()}, {self.text()!r})"
+        return get_repr(self, self.icon(), self.text())
 
     def __setitem__(self, index: int, value):
         self.setData(index, value)

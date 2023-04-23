@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import get_repr
 
 
 class JsonValue(QtCore.QJsonValue):
@@ -8,7 +9,7 @@ class JsonValue(QtCore.QJsonValue):
         return str(self.toVariant())
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.toVariant()!r})"
+        return get_repr(self, self.toVariant())
 
 
 if __name__ == "__main__":

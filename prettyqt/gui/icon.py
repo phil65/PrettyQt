@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 MODE = bidict(
@@ -23,7 +23,7 @@ StateStr = Literal["off", "on"]
 
 class Icon(QtGui.QIcon):
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __bool__(self):
         return not self.isNull()

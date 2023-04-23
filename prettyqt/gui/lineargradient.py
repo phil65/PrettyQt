@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 class LinearGradient(gui.GradientMixin, QtGui.QLinearGradient):
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_start()}, {self.get_final_stop()})"
+        return get_repr(self, self.get_start(), self.get_final_stop())
 
     def serialize_fields(self):
         start = self.start()

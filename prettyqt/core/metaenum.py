@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import get_repr
 
 
 class MetaEnum:
@@ -24,7 +25,7 @@ class MetaEnum:
         return result  # type: ignore
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_name()!r})"
+        return get_repr(self, self.get_name())
 
     def __len__(self):
         return self.item.keyCount()

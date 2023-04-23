@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class IconLabel(widgets.Widget):
@@ -34,7 +34,7 @@ class IconLabel(widgets.Widget):
         return self.label.__getattribute__(value)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.text()!r})"
+        return get_repr(self, self.text())
 
 
 if __name__ == "__main__":

@@ -5,12 +5,12 @@ import os
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import InvalidParamError, datatypes, get_repr
 
 
 class StandardItem(QtGui.QStandardItem):
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_icon()}, {self.text()!r})"
+        return get_repr(self, self.get_icon(), self.text())
 
     def serialize_fields(self):
         return dict(

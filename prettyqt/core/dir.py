@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
 
 
 FILTERS = bidict(
@@ -83,7 +83,7 @@ class Dir(QtCore.QDir):
         return getattr(self.to_path(), attr)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.absolutePath()!r})"
+        return get_repr(self, self.absolutePath())
 
     def __str__(self):
         return self.absolutePath()

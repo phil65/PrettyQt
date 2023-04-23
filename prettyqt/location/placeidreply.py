@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import location
 from prettyqt.qt import QtLocation
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 OPERATION_TYPES = bidict(
@@ -21,7 +21,7 @@ OperationTypeStr = Literal[
 
 class PlaceIdReply(location.PlaceReplyMixin, QtLocation.QPlaceIdReply):
     def __repr__(self):
-        return f"{type(self).__name__}({self.operationType()})"
+        return get_repr(self, self.operationType())
 
     @classmethod
     def clone_from(cls, obj: QtLocation.QPlaceIdReply) -> PlaceIdReply:

@@ -1,15 +1,12 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class Rect(QtCore.QRect):
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.x()}, {self.y()}, "
-            f"{self.width()}, {self.height()})"
-        )
+        return get_repr(self, self.x(), self.y(), self.width(), self.height())
 
     def __reduce__(self):
         return type(self), (self.x(), self.y(), self.width(), self.height())

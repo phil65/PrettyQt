@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import positioning
 from prettyqt.qt import QtCore, QtPositioning
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 QNmeaPositionInfoSource = QtPositioning.QNmeaPositionInfoSource
@@ -28,7 +28,7 @@ class NmeaPositionInfoSource(
         super().__init__(mode, parent)
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def get_update_mode(self) -> str:
         return UPDATE_MODES.inverse[self.updateMode()]

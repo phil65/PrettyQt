@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 class IntValidator(gui.ValidatorMixin, QtGui.QIntValidator):
     def __repr__(self):
-        return f"{type(self).__name__}({self.bottom()}, {self.top()})"
+        return get_repr(self, self.bottom(), self.top())
 
     def __getstate__(self):
         return dict(bottom=self.bottom(), top=self.top())

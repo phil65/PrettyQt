@@ -7,7 +7,7 @@ import dateutil.parser
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 FILE_ERROR = bidict(
@@ -73,7 +73,7 @@ PERMISSIONS = bidict(
 
 class FileDeviceMixin(core.IODeviceMixin):
     def __repr__(self):
-        return f"{type(self).__name__}({self.fileName()!r})"
+        return get_repr(self, self.fileName())
 
     def __str__(self):
         return self.fileName()

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import bluetooth, core
 from prettyqt.qt import QtBluetooth
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 mod = QtBluetooth.QBluetoothDeviceInfo
@@ -292,7 +292,7 @@ ServiceClassStr = Literal[
 
 class BluetoothDeviceInfo(QtBluetooth.QBluetoothDeviceInfo):
     def __repr__(self):
-        return f"{type(self).__name__}('{self.get_address()}', {self.name()!r})"
+        return get_repr(self, self.get_address(), self.name())
 
     def __bool__(self):
         return self.isValid()

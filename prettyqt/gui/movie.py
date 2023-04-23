@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 CACHE_MODE = bidict(
@@ -24,7 +24,7 @@ MovieStateStr = Literal["not_running", "paused", "running"]
 
 class Movie(core.ObjectMixin, QtGui.QMovie):
     def __repr__(self):
-        return f"{type(self).__name__}({self.fileName()!r}, {self.get_format()!r})"
+        return get_repr(self, self.fileName(), self.get_format())
 
     def serialize_fields(self):
         return dict(

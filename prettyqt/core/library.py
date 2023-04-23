@@ -7,7 +7,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 LOAD_HINTS = bidict(
@@ -32,7 +32,7 @@ class Library(core.ObjectMixin, QtCore.QLibrary):
         return self.isLoaded()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.fileName()!r})"
+        return get_repr(self, self.fileName())
 
     def get_load_hints(self) -> list[LoadHintStr]:
         return [k for k, v in LOAD_HINTS.items() if v & self.loadHints()]

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict, mappers
+from prettyqt.utils import bidict, get_repr, mappers
 
 
 SEQUENCE_MATCHES = bidict(
@@ -107,7 +107,7 @@ class KeySequence(QtGui.QKeySequence):
         return self.toString()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.toString()!r})"
+        return get_repr(self, self.toString())
 
     def __bool__(self):
         return not self.isEmpty()

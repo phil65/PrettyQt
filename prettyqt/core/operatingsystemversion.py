@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 OS_TYPE = bidict(
@@ -36,9 +36,12 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
         super().__init__(os_type, major, minor, micro)
 
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.get_type()!r}, {self.majorVersion()}, "
-            f"{self.minorVersion()}, {self.microVersion()})"
+        return get_repr(
+            self,
+            self.get_type(),
+            self.majorVersion(),
+            self.minorVersion(),
+            self.microVersion(),
         )
 
     def __reduce__(self):

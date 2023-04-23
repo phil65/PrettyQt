@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 class TextBlockUserData(QtGui.QTextBlockUserData):
@@ -12,6 +13,5 @@ class TextBlockUserData(QtGui.QTextBlockUserData):
         super().__init__()
 
     def __repr__(self):
-        attrs = [i for i in dir(self) if not i.startswith("__")]
-        kwds = ", ".join(f"{attr}={getattr(self, attr)!r}" for attr in attrs)
-        return f"{type(self).__name__}({kwds})"
+        kwargs = {i: getattr(self, i) for i in dir(self) if not i.startswith("__")}
+        return get_repr(self, **kwargs)

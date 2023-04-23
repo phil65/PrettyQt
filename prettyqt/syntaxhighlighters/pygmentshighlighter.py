@@ -12,6 +12,7 @@ from pygments.styles import get_style_by_name
 
 from prettyqt import gui, paths
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 logger = logging.getLogger(__name__)
@@ -170,7 +171,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
             self._lexer = get_lexer_by_name(lexer)
 
     def __repr__(self):
-        return f"{type(self).__name__}(lexer={self._lexer.aliases[0]!r})"
+        return get_repr(self, lexer=self._lexer.aliases[0])
 
     def highlightBlock(self, string):
         """Highlight a block of text."""

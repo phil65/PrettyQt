@@ -7,6 +7,7 @@ import regex as re
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import get_repr
 
 
 PatternType = Union[str, Pattern]  # todo: move this to types?
@@ -22,7 +23,7 @@ class BaseRegexValidator(gui.Validator):
             self.set_regex(regex)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_regex()!r})"
+        return get_repr(self, self.get_regex())
 
     def __reduce__(self):
         return type(self), (self.get_regex(),)
@@ -67,7 +68,7 @@ class IntListValidator(BaseRegexValidator):
         return type(self), (self.allow_single,)
 
     def __repr__(self):
-        return f"{type(self).__name__}(allow_single={self.allow_single})"
+        return get_repr(self, allow_single=self.allow_single)
 
 
 class FloatListValidator(BaseRegexValidator):
@@ -85,7 +86,7 @@ class FloatListValidator(BaseRegexValidator):
         return type(self), (self.allow_single,)
 
     def __repr__(self):
-        return f"{type(self).__name__}(allow_single={self.allow_single})"
+        return get_repr(self, allow_single=self.allow_single)
 
 
 if __name__ == "__main__":

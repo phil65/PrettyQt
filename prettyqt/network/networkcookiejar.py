@@ -4,7 +4,7 @@ from collections.abc import Iterator
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):
@@ -17,7 +17,7 @@ class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):
         return self.cookiesForUrl(url)
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __iter__(self) -> Iterator[QtNetwork.QNetworkCookie]:
         return iter(self.allCookies())

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 BOUNDARY_REASONS = bidict(
@@ -57,7 +57,7 @@ class TextBoundaryFinder(QtCore.QTextBoundaryFinder):
             super().__init__(typ, string_or_other)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.string()!r})"
+        return get_repr(self, self.string())
 
     def __reduce__(self):
         return type(self), (self.string(), self.type())

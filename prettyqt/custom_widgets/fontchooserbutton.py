@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.utils import get_repr
 
 
 class FontChooserButton(widgets.Widget):
@@ -26,7 +27,7 @@ class FontChooserButton(widgets.Widget):
         layout.add(self.button)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self._current_font})"
+        return get_repr(self, self.current_font)
 
     def serialize_fields(self):
         return dict(current_font=self._current_font)

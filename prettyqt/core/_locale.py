@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 Loc = QtCore.QLocale
@@ -617,7 +617,7 @@ MEASUREMENT_SYSTEM = bidict(
 
 class Locale(QtCore.QLocale):
     def __repr__(self):
-        return f"{type(self).__name__}({self.bcp47Name()!r})"
+        return get_repr(self, self.bcp47Name())
 
     def __reduce__(self):
         return type(self), (self.bcp47Name(),)

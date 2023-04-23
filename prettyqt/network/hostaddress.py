@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import network
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import bidict, mappers
+from prettyqt.utils import bidict, get_repr, mappers
 
 
 mod = QtNetwork.QHostAddress
@@ -38,7 +38,7 @@ NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
 
 class HostAddress(QtNetwork.QHostAddress):
     def __repr__(self):
-        return f"{type(self).__name__}({self.toString()!r})"
+        return get_repr(self, self.toString())
 
     def __str__(self):
         return self.toString()

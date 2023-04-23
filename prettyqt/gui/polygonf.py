@@ -11,8 +11,7 @@ from prettyqt.utils import datatypes
 
 class PolygonF(QtGui.QPolygonF):
     def __repr__(self):
-        points_str = ", ".join([repr(i) for i in self])
-        return f"{type(self).__name__}({points_str})"
+        return f"{type(self).__name__}(<{len(self)} points>)"
 
     def __iter__(self) -> Iterator[core.PointF]:
         return iter(self.get_point(i) for i in range(self.size()))

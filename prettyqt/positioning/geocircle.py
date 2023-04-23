@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import positioning
 from prettyqt.qt import QtPositioning
+from prettyqt.utils import get_repr
 
 
 class GeoCircle(positioning.GeoShapeMixin, QtPositioning.QGeoCircle):
@@ -23,7 +24,7 @@ class GeoCircle(positioning.GeoShapeMixin, QtPositioning.QGeoCircle):
             super().__init__(center_or_other, radius)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_center()!r}, {self.radius()})"
+        return get_repr(self, self.get_center(), self.radius())
 
     def get_center(self) -> positioning.GeoCoordinate:
         return positioning.GeoCoordinate(self.center())

@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import TYPE_CHECKING, Any
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import get_repr
 
 
 if TYPE_CHECKING:
@@ -17,7 +18,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         self.endpos = None
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __getitem__(self, item: int | str) -> str:
         if captured := self.captured(item):

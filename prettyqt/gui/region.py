@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 REGION_TYPE = bidict(
@@ -17,7 +17,7 @@ RegionTypeStr = Literal["rectangle", "ellipse"]
 
 class Region(QtGui.QRegion):
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_bounding_rect()}, {self.get_shape()!r})"
+        return get_repr(self, self.get_bounding_rect(), self.get_shape())
 
     def __getstate__(self):
         return bytes(self)

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import get_repr
 
 
 class MetaProperty:
@@ -11,7 +12,7 @@ class MetaProperty:
         return self.item.isValid()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_name()!r})"
+        return get_repr(self, self.get_name())
 
     def __getattr__(self, val):
         return getattr(self.item, val)

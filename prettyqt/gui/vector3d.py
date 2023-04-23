@@ -5,10 +5,6 @@ from prettyqt.qt import QtGui
 
 
 class Vector3D(QtGui.QVector3D):
-    # def __repr__(self):
-    #     return f"{type(self).__name__}()"
-    pass
-
     def __bool__(self):
         return not self.isNull()
 

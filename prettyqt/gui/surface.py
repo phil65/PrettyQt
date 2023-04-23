@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 SURFACE_CLASS = bidict(
@@ -27,7 +27,7 @@ SurfaceTypeStr = Literal["raster", "open_gl", "raster_gl", "open_vg", "vulkan", 
 
 class SurfaceMixin:
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def get_surface_class(self) -> SurfaceClassStr:
         """Get the current surface class.

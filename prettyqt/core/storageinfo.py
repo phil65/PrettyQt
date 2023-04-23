@@ -4,7 +4,7 @@ import os
 import pathlib
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class StorageInfo(QtCore.QStorageInfo):
@@ -23,7 +23,7 @@ class StorageInfo(QtCore.QStorageInfo):
         return self.isValid()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.rootPath()!r})"
+        return get_repr(self, self.rootPath())
 
     def get_device(self) -> str:
         return self.device().data().decode()

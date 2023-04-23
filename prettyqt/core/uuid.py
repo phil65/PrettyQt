@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 STRING_FORMATS = bidict(
@@ -39,7 +39,7 @@ VersionStr = Literal["unknown", "time", "embedded_posix", "name", "random", "sha
 
 class UuidMixin:
     def __repr__(self):
-        return f"{type(self).__name__}({self.toString()!r})"
+        return get_repr(self, self.toString())
 
     def __str__(self):
         return self.toString()

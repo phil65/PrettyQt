@@ -3,7 +3,7 @@ from __future__ import annotations
 import dateutil.parser
 
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 RAW_FORMS = bidict(
@@ -14,7 +14,7 @@ RAW_FORMS = bidict(
 
 class NetworkCookie(QtNetwork.QNetworkCookie):
     def __repr__(self):
-        return f"{type(self).__name__}({self.name()}, {self.value()})"
+        return get_repr(self, self.name(), self.value())
 
     def to_raw_form(self, full: bool = True):
         form = RAW_FORMS["full"] if full else RAW_FORMS["name_and_value_only"]

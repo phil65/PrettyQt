@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class SizeF(QtCore.QSizeF):
     def __repr__(self):
-        return f"{type(self).__name__}({self.width()}, {self.height()})"
+        return get_repr(self, self.width(), self.height())
 
     def __getitem__(self, index) -> float:
         return (self.width(), self.height())[index]

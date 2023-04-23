@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import InvalidParamError, datatypes, get_repr
 
 
 class Brush(QtGui.QBrush):
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_color()!r}, {self.get_style()!r})"
+        return get_repr(self, self.get_color(), self.get_style())
 
     def __getstate__(self):
         return bytes(self)

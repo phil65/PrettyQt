@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 mod = QtCore.QRegularExpression
@@ -50,7 +50,7 @@ class RegularExpression(QtCore.QRegularExpression):
             super().__init__(pattern, flags)  # type: ignore
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.pattern()!r})"
+        return get_repr(self, self.pattern())
 
     def __reduce__(self):
         return type(self), (self.pattern(), self.flags)

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 PANEL_MODALITY = bidict(
@@ -26,7 +26,7 @@ CacheModeStr = Literal["none", "item_coordinate", "device_coordinate"]
 
 class GraphicsItemMixin:
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __contains__(self, value: QtCore.QPointF) -> bool:
         return self.contains(value)

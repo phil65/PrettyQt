@@ -1,13 +1,13 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import get_repr
 
 
 class TableWidgetSelectionRange(QtWidgets.QTableWidgetSelectionRange):
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.topRow()}, {self.leftColumn()}, "
-            f"{self.bottomRow()}, {self.rightColumn()})"
+        return get_repr(
+            self, self.topRow(), self.leftColumn(), self.bottomRow(), self.rightColumn()
         )
 
     def __eq__(self, other: object):

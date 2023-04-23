@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict, get_repr, helpers
 
 
 QGeoPositionInfoSource = QtPositioning.QGeoPositionInfoSource
@@ -40,7 +40,7 @@ class GeoPositionInfoSourceMixin(core.ObjectMixin):
         return self.sourceName()
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def get_error(self) -> ErrorStr:
         """Return error type.

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 NAME_TYPE = bidict(
@@ -33,7 +33,7 @@ class TimeZone(QtCore.QTimeZone):
             super().__init__(*args)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_id()!r})"
+        return get_repr(self, self.get_id())
 
     def __str__(self):
         return self.get_id()

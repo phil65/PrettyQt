@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 mod = QtPositioning.QGeoAreaMonitorSource
@@ -31,7 +31,7 @@ class GeoAreaMonitorSource(core.ObjectMixin, QtPositioning.QGeoAreaMonitorSource
         return self.sourceName()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.name()!r})"
+        return get_repr(self, self.name())
 
     def get_error(self) -> AreaMonitorFeatureStr:
         """Return error type.

@@ -5,7 +5,7 @@ from typing import Any, Literal
 from deprecated import deprecated
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
 
 
 SPEC = bidict(
@@ -42,10 +42,7 @@ class Color(QtGui.QColor):
             super().__init__(*args)
 
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.red()}, {self.green()}, "
-            f"{self.blue()}, {self.alpha()})"
-        )
+        return get_repr(self, self.red(), self.green(), self.blue(), self.alpha())
 
     def __str__(self):
         return self.name() if self.alpha() == 255 else self.name(self.NameFormat.HexArgb)

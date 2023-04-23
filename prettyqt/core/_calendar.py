@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 SYSTEM = bidict(
@@ -20,7 +20,7 @@ class Calendar(QtCore.QCalendar):
         super().__init__(typ)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.name()!r})"
+        return get_repr(self, self.name())
 
     def __reduce__(self):
         return type(self), (self.name(),)

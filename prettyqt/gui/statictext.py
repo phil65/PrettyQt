@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 PERFORMANCE_HINT = bidict(
@@ -24,7 +24,7 @@ TEXT_FORMAT = bidict(
 
 class StaticText(QtGui.QStaticText):
     def __repr__(self):
-        return f"{type(self).__name__}({self.text()!r})"
+        return get_repr(self, self.text())
 
     def __str__(self):
         return self.text()

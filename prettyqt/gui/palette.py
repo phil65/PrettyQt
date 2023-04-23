@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, get_repr
 
 
 ROLE = bidict(
@@ -85,7 +85,7 @@ class Palette(QtGui.QPalette):
         return ba.data()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self['button']}, {self['window']})"
+        return get_repr(self, self.get_color("button"), self.get_color("window"))
 
     def highlight_inactive(self):
         color = self.color(self.ColorGroup.Active, self.ColorRole.Highlight)

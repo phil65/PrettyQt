@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers, prettyprinter
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, prettyprinter
 
 
 PRIORITIES = bidict(
@@ -66,8 +66,7 @@ class ActionMixin(core.ObjectMixin):
             self.triggered.connect(callback)
 
     def __repr__(self) -> str:
-        cls_name = type(self).__name__
-        return f"{cls_name}({self.text()!r})"
+        return get_repr(self, self.text())
 
     def set_text(self, text: str):
         self.setText(text)

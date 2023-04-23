@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 Req = QtNetwork.QNetworkRequest
@@ -140,7 +140,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
                 self.set_url(obj)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_url()})"
+        return get_repr(self, self.get_url())
 
     def set_header(self, name: KnownHeaderStr, value: str):
         if name not in KNOWN_HEADER:

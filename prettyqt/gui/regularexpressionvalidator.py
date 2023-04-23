@@ -2,11 +2,12 @@ from __future__ import annotations
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 class RegularExpressionValidator(gui.ValidatorMixin, QtGui.QRegularExpressionValidator):
     def __repr__(self):
-        return f"{type(self).__name__}(RegularExpression({self.get_regex()!r}))"
+        return get_repr(self, self.regularExpression())
 
     def __getstate__(self):
         return dict(pattern=core.RegularExpression(self.regularExpression()))

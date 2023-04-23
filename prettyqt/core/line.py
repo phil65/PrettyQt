@@ -6,12 +6,12 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class Line(QtCore.QLine):
     def __repr__(self):
-        return f"{type(self).__name__}({repr(self.get_p1())}, {repr(self.get_p2())})"
+        return get_repr(self, self.get_p1(), self.get_p2())
 
     def __reduce__(self):
         return type(self), (self.get_p1(), self.get_p1())

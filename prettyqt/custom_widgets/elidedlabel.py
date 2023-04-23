@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import get_repr
 
 
 class ElidedLabel(widgets.Frame):
@@ -18,7 +19,7 @@ class ElidedLabel(widgets.Frame):
         self.set_size_policy("expanding", "preferred")
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.text()!r})"
+        return get_repr(self, self.text())
 
     def set_text(self, text: str):
         self._text = text

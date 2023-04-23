@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 LABEL_POSITION = bidict(
@@ -21,7 +21,7 @@ LabelPositionStr = Literal[
 
 class PieSlice(core.ObjectMixin, QtCharts.QPieSlice):
     def __repr__(self):
-        return f"{type(self).__name__}({self.label()!r}, {self.value()})"
+        return get_repr(self, self.label(), self.value())
 
     def set_label_position(self, position: LabelPositionStr):
         """Set the label position.

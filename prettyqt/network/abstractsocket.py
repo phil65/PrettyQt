@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict, mappers
+from prettyqt.utils import InvalidParamError, bidict, get_repr, mappers
 
 
 mod = QtNetwork.QAbstractSocket
@@ -172,7 +172,7 @@ TypeOfServiceStr = Literal[
 
 class AbstractSocketMixin(core.IODeviceMixin):
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def bind_to(
         self,

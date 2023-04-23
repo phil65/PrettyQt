@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import qml
 from prettyqt.qt import QtQml
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 logger = logging.getLogger()
@@ -24,7 +24,7 @@ ERROR_TYPES = bidict(
 
 class JSValue(QtQml.QJSValue):
     def __repr__(self):
-        return f"{type(self).__name__}({self.toVariant()})"
+        return get_repr(self, self.toVariant())
 
     def __len__(self):
         return self.property("length").toVariant()

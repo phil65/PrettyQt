@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 TYPES = bidict(
@@ -17,7 +17,7 @@ TypeStr = Literal["variable", "fixed", "percentage"]
 
 class TextLength(QtGui.QTextLength):
     def __repr__(self):
-        return f"{type(self).__name__}({self.type()}, {self.rawValue()})"
+        return get_repr(self, self.type(), self.rawValue())
 
     def get_type(self) -> TypeStr:
         """Return type of this length object.

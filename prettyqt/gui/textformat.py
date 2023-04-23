@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, mappers
+from prettyqt.utils import InvalidParamError, bidict, get_repr, mappers
 
 
 FORMAT_TYPE = bidict(
@@ -52,7 +52,7 @@ class TextFormatMixin:
         return self.isValid()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.type()})"
+        return get_repr(self, self.type())
 
     def get_background(self) -> gui.Brush:
         return gui.Brush(self.background())

@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 ICON_ENGINE_HOOK = bidict(
@@ -20,7 +20,7 @@ IconEngineHookStr = Literal["available_sizes", "icon_name", "is_null", "scaled_p
 
 class IconEngine(QtGui.QIconEngine):
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __bool__(self):
         return not self.isNull()

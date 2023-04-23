@@ -4,7 +4,7 @@ from collections.abc import Callable
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 TYPE = bidict(
@@ -115,7 +115,7 @@ class EasingCurve(QtCore.QEasingCurve):
         return self.valueForProgress(value)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_type()!r})"
+        return get_repr(self, self.get_type())
 
     def set_custom_type(self, method: CurveMethod):
         self.setCustomType(method)

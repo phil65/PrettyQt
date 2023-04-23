@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 ERROR = bidict(
@@ -28,7 +28,7 @@ class GeoSatelliteInfoSource(core.ObjectMixin, QtPositioning.QGeoSatelliteInfoSo
         return self.sourceName()
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def get_error(self) -> ErrorStr:
         """Return error type.

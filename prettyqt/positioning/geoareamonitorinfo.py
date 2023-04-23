@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, positioning
 from prettyqt.qt import QtPositioning
+from prettyqt.utils import get_repr
 
 
 class GeoAreaMonitorInfo(QtPositioning.QGeoAreaMonitorInfo):
@@ -9,7 +10,7 @@ class GeoAreaMonitorInfo(QtPositioning.QGeoAreaMonitorInfo):
         return self.name()
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.name()!r})"
+        return get_repr(self, self.name())
 
     def get_area(self) -> positioning.GeoShape:
         area = self.area()

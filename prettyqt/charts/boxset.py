@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCharts
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 VALUE_POSITION = bidict(
@@ -22,10 +22,14 @@ ValuePositionStr = Literal[
 
 class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self['lower_extreme']}, {self['lower_quartile']},"
-            f" {self['median']}, {self['upper_quartile']}, {self['upper_extreme']}, "
-            f"{self.label()!r})"
+        return get_repr(
+            self,
+            self["lower_extreme"],
+            self["lower_quartile"],
+            self["median"],
+            self["upper_quartile"],
+            self["upper_extreme"],
+            self.label(),
         )
 
     def __getitem__(self, index: int | ValuePositionStr) -> float:

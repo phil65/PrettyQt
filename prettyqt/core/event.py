@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 mod = QtCore.QEvent
@@ -161,4 +161,4 @@ TYPE = bidict(
 
 class Event(QtCore.QEvent):
     def __repr__(self):
-        return f"{type(self).__name__}({self.type()})"
+        return get_repr(self, self.type())

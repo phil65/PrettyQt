@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class TextDocumentFragment(QtGui.QTextDocumentFragment):
     def __repr__(self):
-        return f"{type(self).__name__}({gui.TextDocument(self.toPlainText())})"
+        return get_repr(self, gui.TextDocument(self.toPlainText()))
 
     def __str__(self):
         return self.toPlainText()

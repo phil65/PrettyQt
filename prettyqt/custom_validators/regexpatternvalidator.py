@@ -10,6 +10,7 @@ import regex as re
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
+from prettyqt.utils import get_repr
 
 
 class RegexPatternValidator(gui.Validator):
@@ -17,7 +18,7 @@ class RegexPatternValidator(gui.Validator):
     pattern_updated = core.Signal(object)
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __eq__(self, other: object):
         return isinstance(other, type(self))

@@ -3,14 +3,12 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import get_repr
 
 
 class Margins(QtCore.QMargins):
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.left()}, {self.top()}, "
-            f"{self.right()}, {self.bottom()})"
-        )
+        return get_repr(self, self.left(), self.top(), self.right(), self.bottom())
 
     def __reduce__(self):
         return type(self), (self.left(), self.top(), self.right(), self.bottom())

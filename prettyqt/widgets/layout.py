@@ -4,9 +4,10 @@ from collections.abc import Iterator
 from typing import Literal
 
 from deprecated import deprecated
+
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 SIZE_CONSTRAINT = bidict(
@@ -44,7 +45,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         return self.count()
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout | None]:
         return iter(self[i] for i in range(self.count()))

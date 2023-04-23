@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, positioning
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 ATTRIBUTE = bidict(
@@ -28,7 +28,7 @@ AttributeStr = Literal[
 
 class GeoPositionInfo(QtPositioning.QGeoPositionInfo):
     def __repr__(self):
-        return f"{type(self).__name__}({self.get_coordinate()}, {self.get_timestamp()})"
+        return get_repr(self, self.get_coordinate(), self.get_timestamp())
 
     def __contains__(self, index: AttributeStr):
         return self.hasAttribute(ATTRIBUTE[index])

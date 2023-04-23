@@ -5,13 +5,12 @@ import pathlib
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class FileSystemWatcher(core.ObjectMixin, QtCore.QFileSystemWatcher):
     def __repr__(self):
-        paths = [str(p) for p in self.get_paths()]
-        return f"{type(self).__name__}({paths})"
+        return get_repr(self, self.directories() + self.files())
 
     def get_directories(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.directories()]

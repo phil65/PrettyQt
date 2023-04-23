@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def __len__(self):
         return self.pageCount()

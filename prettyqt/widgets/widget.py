@@ -5,7 +5,7 @@ import contextlib
 import os
 import pathlib
 import sys
-from typing import Any, Literal
+from typing import Literal
 
 from deprecated import deprecated
 import qstylizer.parser
@@ -13,7 +13,14 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, colors, datatypes, helpers, prettyprinter
+from prettyqt.utils import (
+    InvalidParamError,
+    colors,
+    datatypes,
+    get_repr,
+    helpers,
+    prettyprinter,
+)
 
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
@@ -23,7 +30,7 @@ class WidgetMixin(core.ObjectMixin):
     box: QtWidgets.QLayout
 
     def __repr__(self) -> str:
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def resize(self, *size) -> None:
         if isinstance(size[0], tuple):

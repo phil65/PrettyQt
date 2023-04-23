@@ -4,7 +4,7 @@ import os
 import pathlib
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class TemporaryDir(QtCore.QTemporaryDir):
@@ -12,7 +12,7 @@ class TemporaryDir(QtCore.QTemporaryDir):
         return getattr(self.to_path(), attr)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.path()!r})"
+        return get_repr(self, self.path())
 
     def __str__(self):
         return self.path()

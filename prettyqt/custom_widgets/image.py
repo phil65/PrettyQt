@@ -4,7 +4,7 @@ import os
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class Image(widgets.Label):
@@ -18,7 +18,7 @@ class Image(widgets.Label):
             self.set_image(path)
 
     def __repr__(self):
-        return f"{type(self).__name__}()"
+        return get_repr(self)
 
     def set_image(self, path: datatypes.PathType, width: int = 300):
         self.setScaledContents(True)

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, get_repr
 
 
 TRANSFORMATION_TYPE = bidict(
@@ -26,10 +26,17 @@ class Transform(QtGui.QTransform):
         return bytes(self)
 
     def __repr__(self):
-        return (
-            f"{type(self).__name__}({self.m11()}, {self.m12()}, {self.m13()}, "
-            f"{self.m21()}, {self.m22()}, {self.m23()}, {self.m31()}, {self.m32()}, "
-            f"{self.m33()})"
+        return get_repr(
+            self,
+            self.m11(),
+            self.m12(),
+            self.m13(),
+            self.m21(),
+            self.m22(),
+            self.m23(),
+            self.m31(),
+            self.m32(),
+            self.m33(),
         )
 
     def __reduce__(self):

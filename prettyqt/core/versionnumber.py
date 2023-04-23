@@ -3,7 +3,7 @@ from __future__ import annotations
 import sys
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, get_repr
 
 
 class VersionNumber(QtCore.QVersionNumber):
@@ -23,7 +23,7 @@ class VersionNumber(QtCore.QVersionNumber):
         super().__init__(*args, **kwargs)
 
     def __repr__(self):
-        return f"{type(self).__name__}({self.major()}, {self.minor()}, {self.micro()})"
+        return get_repr(self, self.major(), self.minor(), self.micro())
 
     def __reduce__(self):
         return type(self), (self.major(), self.minor(), self.micro())
