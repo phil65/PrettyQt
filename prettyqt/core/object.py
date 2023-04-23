@@ -125,6 +125,14 @@ class ObjectMixin:
         props = metaobj.get_properties(include_super=include_super)
         return {i.name(): i.read(self) for i in props}
 
+    def set_properties(self, props: dict[str, Any], include_super: bool = True):
+        metaobj = self.get_metaobject()
+        metaprops = metaobj.get_properties(include_super=include_super)
+        for metaprop in metaprops:
+            if (name := metaprop.name()) in props:
+                value = props[name]
+                metaprop.write(self, value)
+
     def get_dynamic_properties(self) -> dict[str, Any]:
         return {
             i.data().decode(): self.property(i.data().decode())
