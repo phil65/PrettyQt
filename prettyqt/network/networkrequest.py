@@ -8,7 +8,7 @@ from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 Req = QtNetwork.QNetworkRequest
-
+CE = Req.Attribute.ConnectionCacheExpiryTimeoutSecondsAttribute
 ATTRIBUTE = bidict(
     http_status_code=Req.Attribute.HttpStatusCodeAttribute,
     http_reason_phrase=Req.Attribute.HttpReasonPhraseAttribute,
@@ -32,6 +32,9 @@ ATTRIBUTE = bidict(
     redirect_policy=Req.Attribute.RedirectPolicyAttribute,
     http2_direct=Req.Attribute.Http2DirectAttribute,
     auto_delete_reply_on_finish=Req.Attribute.AutoDeleteReplyOnFinishAttribute,
+    connection_cache_expiry_timeout_seconds=CE,
+    http2_cleartext_allowed=Req.Attribute.Http2CleartextAllowedAttribute,
+    use_credentials=Req.Attribute.UseCredentialsAttribute,
     user=Req.Attribute.User,
     user_max=Req.Attribute.UserMax,
 )
@@ -59,6 +62,9 @@ AttributeStr = Literal[
     "redirect_policy",
     "http2_direct",
     "auto_delete_reply_on_finish",
+    "connection_cache_expiry_timeout_seconds",
+    "http2_cleartext_allowed",
+    "use_credentials",
     "user",
     "user_max",
 ]
