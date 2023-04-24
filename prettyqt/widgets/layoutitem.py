@@ -42,12 +42,17 @@ class LayoutItemMixin:
     def get_control_types(self) -> list[widgets.sizepolicy.ControlTypeStr]:
         return widgets.sizepolicy.CONTROL_TYPE.get_list(self.controlTypes())
 
+    def get_expanding_directions(self) -> list[constants.OrientationStr]:
+        return constants.ORIENTATION.get_list(self.expandingDirections())
+
 
 class LayoutItem(LayoutItemMixin, QtWidgets.QLayoutItem):
     pass
 
 
 if __name__ == "__main__":
-    item = LayoutItem("left")
+    from prettyqt.qt import QtCore
+
+    item = LayoutItem(QtCore.Qt.AlignmentFlag.AlignLeft)
     types = item.get_control_types()
     print(types)
