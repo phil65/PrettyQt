@@ -136,7 +136,7 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         return ROUTE_OPTIMIZATION.inverse[self.routeOptimization()]
 
     def get_travel_modes(self) -> list[TravelModeStr]:
-        return [k for k, v in TRAVEL_MODE.items() if v & self.travelModes()]
+        return TRAVEL_MODE.get_list(self.travelModes())
 
     def set_travel_modes(self, *mode: TravelModeStr):
         for item in mode:

@@ -71,11 +71,7 @@ class GeoPositionInfoSourceMixin(core.ObjectMixin):
         Returns:
             list of preferred positioning methods
         """
-        return [
-            k
-            for k, v in POSITIONING_METHODS.items()
-            if v & self.preferredPositioningMethods()
-        ]
+        return POSITIONING_METHODS.get_list(self.preferredPositioningMethods())
 
     def get_supported_positioning_methods(self) -> list[PositioningMethodStr]:
         """Return list of supported positioning methods.
@@ -83,11 +79,7 @@ class GeoPositionInfoSourceMixin(core.ObjectMixin):
         Returns:
             list of supported positioning methods
         """
-        return [
-            k
-            for k, v in POSITIONING_METHODS.items()
-            if v & self.supportedPositioningMethods()
-        ]
+        return POSITIONING_METHODS.get_list(self.supportedPositioningMethods())
 
 
 class GeoPositionInfoSource(

@@ -16,9 +16,7 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
         return constants.KEY.inverse[self.key()]
 
     def get_modifiers(self) -> list[constants.KeyboardmodifierStr]:
-        return [
-            k for k, v in constants.KEYBOARD_MODIFIERS.items() if v & self.modifiers()
-        ]
+        return constants.KEYBOARD_MODIFIERS.get_list(self.modifiers())
 
 
 if __name__ == "__main__":

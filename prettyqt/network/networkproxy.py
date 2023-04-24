@@ -48,7 +48,7 @@ ProxyTypeStr = Literal[
 
 class NetworkProxy(QtNetwork.QNetworkProxy):
     def get_capabilities(self) -> list[CapabilityStr]:
-        return [k for k, v in CAPABILITIES.items() if v & self.capabilities()]
+        return CAPABILITIES.get_list(self.capabilities())
 
     def set_capabilities(self, *capability: CapabilityStr):
         for item in capability:

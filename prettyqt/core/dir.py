@@ -114,7 +114,7 @@ class Dir(QtCore.QDir):
         self.setFilter(flags)
 
     def get_filter(self) -> list[FilterStr]:
-        return [k for k, v in FILTERS.items() if v & self.filter()]
+        return FILTERS.get_list(self.filter())
 
     def get_entry_info_list(
         self, sort_mode: SortFlagStr = "no_sort", filters: FilterStr = "none"

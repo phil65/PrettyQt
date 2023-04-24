@@ -35,7 +35,7 @@ class Library(core.ObjectMixin, QtCore.QLibrary):
         return get_repr(self, self.fileName())
 
     def get_load_hints(self) -> list[LoadHintStr]:
-        return [k for k, v in LOAD_HINTS.items() if v & self.loadHints()]
+        return LOAD_HINTS.get_list(self.loadHints())
 
     def set_load_hints(self, **kwargs):
         flag = QtCore.QLibrary.LoadHint(0)

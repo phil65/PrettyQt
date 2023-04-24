@@ -136,11 +136,7 @@ class ToolBarMixin(widgets.WidgetMixin):
         self.setAllowedAreas(flag)
 
     def get_allowed_areas(self) -> list[constants.ToolbarAreaStr]:
-        return [
-            k
-            for k, v in constants.TOOLBAR_AREA.items()
-            if v & self.allowedAreas()  # type: ignore
-        ]
+        return constants.TOOLBAR_AREA.get_list(self.allowedAreas())
 
 
 class ToolBar(ToolBarMixin, QtWidgets.QToolBar):

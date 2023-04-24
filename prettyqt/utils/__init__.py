@@ -17,6 +17,13 @@ class bidict(bdct.bidict):
         else:
             super().__init__(kwargs)
 
+    def get_list(self, flag: int) -> list[Any]:
+        return [k for k, v in self.items() if v & flag]
+
+    def get_dict(self, flag: int) -> dict[str, Any]:
+        flag = int(flag)
+        return {k: v & flag for k, v in self.items()}
+
 
 class InvalidParamError(ValueError):
     """Exception raised for invalid params in method calls.

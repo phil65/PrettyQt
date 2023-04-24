@@ -28,4 +28,4 @@ class GraphicsBlurEffect(widgets.GraphicsEffectMixin, QtWidgets.QGraphicsBlurEff
         self.setBlurHints(flags)
 
     def get_blur_hints(self) -> list[BlurHintStr]:
-        return [k for k, v in BLUR_HINTS.items() if v & self.blurHints()]
+        return BLUR_HINTS.get_list(self.blurHints())

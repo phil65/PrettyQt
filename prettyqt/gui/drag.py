@@ -19,9 +19,7 @@ class Drag(core.ObjectMixin, QtGui.QDrag):
         return gui.Pixmap(px)
 
     def get_supported_actions(self) -> list[constants.DropActionStr]:
-        return [
-            k for k, v in constants.DROP_ACTION.items() if v & self.supportedActions()
-        ]
+        return constants.DROP_ACTION.get_list(self.supportedActions())
 
 
 if __name__ == "__main__":

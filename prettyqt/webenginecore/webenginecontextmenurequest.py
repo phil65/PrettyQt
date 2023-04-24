@@ -83,10 +83,10 @@ class WebEngineContextMenuRequest(QtWebEngineCore.QWebEngineContextMenuRequest):
         return MEDIA_TYPES.inverse[self.mediaType()]
 
     def get_media_flags(self) -> list[MediaFlagStr]:
-        return [k for k, v in MEDIA_FLAGS.items() if v & self.mediaFlags()]
+        return MEDIA_FLAGS.get_list(self.mediaFlags())
 
     def get_edit_flags(self) -> list[MediaFlagStr]:
-        return [k for k, v in EDIT_FLAGS.items() if v & self.editFlags()]
+        return EDIT_FLAGS.get_list(self.editFlags())
 
     def can_undo(self) -> bool:
         return mod.EditFlag.CanUndo & self.editFlags()

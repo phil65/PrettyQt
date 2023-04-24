@@ -1,9 +1,8 @@
 """Constants module."""
 from typing import Literal
 
-from bidict import bidict
 from prettyqt.qt import QtCore
-from prettyqt.utils import mappers
+from prettyqt.utils import bidict, mappers
 
 Qt = QtCore.Qt
 

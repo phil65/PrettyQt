@@ -48,7 +48,7 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
         Returns:
             font filter list
         """
-        return [k for k, v in FONT_FILTERS.items() if v & self.fontFilters()]
+        return FONT_FILTERS.get_list(self.fontFilters())
 
     def set_value(self, value: QtGui.QFont):
         self.setCurrentFont(value)

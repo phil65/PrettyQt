@@ -61,7 +61,7 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         self.setCurrentSection(SECTIONS[section])
 
     def get_displayed_sections(self) -> list[SectionsStr]:
-        return [k for k, v in SECTIONS.items() if v & self.displayedSections()]
+        return SECTIONS.get_list(self.displayedSections())
 
     def set_range(
         self,

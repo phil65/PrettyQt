@@ -348,7 +348,7 @@ class BluetoothDeviceInfo(QtBluetooth.QBluetoothDeviceInfo):
                 raise ValueError(major)
 
     def get_service_classes(self) -> list[ServiceClassStr]:
-        return [k for k, v in SERVICE_CLASS.items() if v & self.serviceClasses()]
+        return SERVICE_CLASS.get_list(self.serviceClasses())
 
 
 if __name__ == "__main__":

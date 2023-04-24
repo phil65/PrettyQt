@@ -30,7 +30,7 @@ class LocalServer(core.ObjectMixin, QtNetwork.QLocalServer):
         self.setSocketOptions(flags)
 
     def get_socket_options(self) -> list[SocketOptionStr]:
-        return [k for k, v in SOCKET_OPTION.items() if v & self.socketOptions()]
+        return SOCKET_OPTION.get_list(self.socketOptions())
 
 
 if __name__ == "__main__":

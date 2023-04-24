@@ -171,7 +171,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         return None if pix.isNull() else gui.Pixmap(pix)
 
     def get_standard_buttons(self) -> list[ButtonStr]:
-        return [k for k, v in BUTTONS.items() if v & self.standardButtons()]
+        return BUTTONS.get_list(self.standardButtons())
 
     def add_button(self, button: ButtonStr) -> QtWidgets.QPushButton:
         """Add a default button.

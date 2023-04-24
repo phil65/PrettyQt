@@ -237,7 +237,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         self.setOptimizationFlags(flags)
 
     def get_optimization_flags(self) -> list[OptimizationFlagStr]:
-        return [k for k, v in OPTIMIZATION_FLAGS.items() if v & self.optimizationFlags()]
+        return OPTIMIZATION_FLAGS.get_list(self.optimizationFlags())
 
 
 class GraphicsView(GraphicsViewMixin, QtWidgets.QGraphicsView):

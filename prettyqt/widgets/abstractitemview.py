@@ -182,7 +182,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setEditTriggers(flags)
 
     def get_edit_triggers(self) -> list[EditTriggerStr]:
-        return [k for k, v in EDIT_TRIGGERS.items() if v & self.editTriggers()]
+        return EDIT_TRIGGERS.get_list(self.editTriggers())
 
     def set_selection_behaviour(self, behaviour: SelectionBehaviourStr):
         """Set selection behaviour for given item view.

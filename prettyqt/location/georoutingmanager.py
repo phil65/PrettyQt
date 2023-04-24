@@ -17,29 +17,23 @@ class GeoRoutingManager(core.ObjectMixin):
     def get_supported_feature_types(
         self,
     ) -> list[location.georouterequest.FeatureTypeStr]:
-        return [
-            k
-            for k, v in location.georouterequest.FEATURE_TYPES.items()
-            if v & self.item.supportedFeatureTypes()
-        ]
+        return location.georouterequest.FEATURE_TYPES.get_list(
+            self.item.supportedFeatureTypes()
+        )
 
     def get_supported_feature_weights(
         self,
     ) -> list[location.georouterequest.FeatureWeightStr]:
-        return [
-            k
-            for k, v in location.georouterequest.FEATURE_WEIGHTS.items()
-            if v & self.item.supportedFeatureWeights()
-        ]
+        return location.georouterequest.FEATURE_WEIGHTS.get_list(
+            self.item.supportedFeatureWeights()
+        )
 
     def get_supported_maneuver_details(
         self,
     ) -> list[location.georouterequest.ManeuverDetailStr]:
-        return [
-            k
-            for k, v in location.georouterequest.MANEUVER_DETAIL.items()
-            if v & self.item.supportedManeuverDetails()
-        ]
+        return location.georouterequest.MANEUVER_DETAIL.get_list(
+            self.item.supportedManeuverDetails()
+        )
 
     def get_supported_route_optimizations(
         self,
@@ -51,15 +45,11 @@ class GeoRoutingManager(core.ObjectMixin):
     def get_supported_segment_details(
         self,
     ) -> list[location.georouterequest.SegmentDetailStr]:
-        return [
-            k
-            for k, v in location.georouterequest.SEGMENT_DETAIL.items()
-            if v & self.item.supportedSegmentDetails()
-        ]
+        return location.georouterequest.SEGMENT_DETAIL.get_list(
+            self.item.supportedSegmentDetails()
+        )
 
     def get_supported_travel_modes(self) -> list[location.georouterequest.TravelModeStr]:
-        return [
-            k
-            for k, v in location.georouterequest.TRAVEL_MODE.items()
-            if v & self.item.supportedTravelModes()
-        ]
+        return location.georouterequest.TRAVEL_MODE.get_list(
+            self.item.supportedTravelModes()
+        )

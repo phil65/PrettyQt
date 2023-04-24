@@ -154,7 +154,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         Returns:
             list of text interaction modes
         """
-        return [k for k, v in TEXT_INTERACTION.items() if v & self.textInteractionFlags()]
+        return TEXT_INTERACTION.get_list(self.textInteractionFlags())
 
     def set_text(self, text: str) -> Label:
         """Set the label's text."""

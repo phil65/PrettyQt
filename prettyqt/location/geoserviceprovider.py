@@ -133,33 +133,31 @@ class GeoServiceProvider(core.ObjectMixin, QtLocation.QGeoServiceProvider):
         return ERROR.inverse[self.geocodingError()]
 
     def get_geocoding_features(self) -> list[GeocodingFeatureStr]:
-        return [k for k, v in GEOCODING_FEATURES.items() if v & self.geocodingFeatures()]
+        return GEOCODING_FEATURES.get_list(self.geocodingFeatures())
 
     def get_mapping_error(self) -> ErrorStr:
         return ERROR.inverse[self.mappingError()]
 
     def get_mapping_features(self) -> list[MappingFeatureStr]:
-        return [k for k, v in MAPPING_FEATURES.items() if v & self.mappingFeatures()]
+        return MAPPING_FEATURES.get_list(self.mappingFeatures())
 
     def get_navigation_error(self) -> ErrorStr:
         return ERROR.inverse[self.navigationError()]
 
     def get_navigation_features(self) -> list[NavigationFeatureStr]:
-        return [
-            k for k, v in NAVIGATION_FEATURES.items() if v & self.navigationFeatures()
-        ]
+        return NAVIGATION_FEATURES.get_list(self.navigationFeatures())
 
     def get_places_error(self) -> ErrorStr:
         return ERROR.inverse[self.placesError()]
 
     def get_places_features(self) -> list[PlaceFeatureStr]:
-        return [k for k, v in PLACES_FEATURES.items() if v & self.placesFeatures()]
+        return PLACES_FEATURES.get_list(self.placesFeatures())
 
     def get_routing_error(self) -> ErrorStr:
         return ERROR.inverse[self.routingError()]
 
     def get_routing_features(self) -> list[RoutingFeatureStr]:
-        return [k for k, v in ROUTING_FEATURES.items() if v & self.routingFeatures()]
+        return ROUTING_FEATURES.get_list(self.routingFeatures())
 
     def get_geocoding_manager(self) -> location.GeoCodingManager:
         return location.GeoCodingManager(self.geocodingManager())

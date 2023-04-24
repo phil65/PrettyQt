@@ -27,7 +27,7 @@ class PinchGesture(widgets.GestureMixin, QtWidgets.QPinchGesture):
         return core.PointF(self.lastCenterPoint())
 
     def get_change_flags(self) -> list[ChangeFlagStr]:
-        return [k for k, v in CHANGE_FLAGS.items() if v & self.changeFlags()]
+        return CHANGE_FLAGS.get_list(self.changeFlags())
 
     def set_change_flags(self, **kwargs):
         val = QtWidgets.QPinchGesture.ChangeFlag(0)
@@ -38,7 +38,7 @@ class PinchGesture(widgets.GestureMixin, QtWidgets.QPinchGesture):
         self.setChangeFlags(flag)  # type: ignore
 
     def get_total_change_flags(self) -> list[ChangeFlagStr]:
-        return [k for k, v in CHANGE_FLAGS.items() if v & self.totalChangeFlags()]
+        return CHANGE_FLAGS.get_list(self.totalChangeFlags())
 
     def set_total_change_flags(self, **kwargs):
         val = QtWidgets.QPinchGesture.ChangeFlag(0)

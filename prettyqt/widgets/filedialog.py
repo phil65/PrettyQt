@@ -208,7 +208,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         self.setFilter(flags)
 
     def get_filter(self) -> list[core.dir.FilterStr]:
-        return [k for k, v in core.dir.FILTERS.items() if v & self.filter()]
+        return core.dir.FILTERS.get_list(self.filter())
 
 
 if __name__ == "__main__":

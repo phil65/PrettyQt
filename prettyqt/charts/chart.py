@@ -145,7 +145,7 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         return THEMES.inverse[self.theme()]
 
     def get_animation_options(self) -> list[AnimationOptionStr]:
-        return [k for k, v in ANIMATION_OPTIONS.items() if v & self.animationOptions()]
+        return ANIMATION_OPTIONS.get_list(self.animationOptions())
 
     def get_animation_easing_curve(self) -> core.EasingCurve:
         return core.EasingCurve(self.animationEasingCurve())

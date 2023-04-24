@@ -91,11 +91,7 @@ class BluetoothDeviceDiscoveryAgent(
         return ERROR.inverse[self.error()]
 
     def get_supported_discovery_methods(self) -> list[DiscoveryMethodStr]:
-        return [
-            k
-            for k, v in DISCOVERY_METHODS.items()
-            if v & self.supportedDiscoveryMethods()
-        ]
+        return DISCOVERY_METHODS.get_list(self.supportedDiscoveryMethods())
 
 
 if __name__ == "__main__":
