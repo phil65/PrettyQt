@@ -77,6 +77,35 @@ def _get_brush(color: str) -> gui.Brush:
     return gui.Brush(qcolor)
 
 
+def _get_format_from_style(token: str, style: Style) -> gui.TextCharFormat:
+    """Return a QTextCharFormat for token by reading a Pygments style."""
+    result = gui.TextCharFormat()
+    try:
+        token_style = style.style_for_token(token)
+    except KeyError:
+        return result
+    for key, value in token_style.items():
+        if value:
+            match key:
+                case "color":
+                    result.set_foreground_color(_get_brush(value))
+                case "bgcolor":
+                    result.set_background_color(_get_brush(value))
+                case "bold":
+                    result.set_font_weight("bold")
+                case "italic":
+                    result.setFontItalic(True)
+                case "underline":
+                    result.set_underline_style("single")
+                case "sans":
+                    result.set_font_style_hint("sans_serif")
+                case "roman":
+                    result.set_font_style_hint("serif")
+                case "mono":
+                    result.set_font_style_hint("typewriter")
+    return result
+
+
 def qstring_length(text: str) -> int:
     """Tries to compute what the length of an utf16-encoded QString would be."""
     utf16_text = text.encode("utf16")
@@ -236,49 +265,21 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         _get_brush.cache_clear()
         self._get_format.cache_clear()
 
-    @functools.cache
+    @functools.cache  # noqa: B019
     def _get_format(self, token: str) -> QtGui.QTextCharFormat:
         """Returns a QTextCharFormat for token or None."""
         if self._style is None:
             return self._get_format_from_document(token, self._document)
         else:
-            return self._get_format_from_style(token, self._style)
+            return _get_format_from_style(token, self._style)
 
     def _get_format_from_document(
         self, token: str, document: QtGui.QTextDocument
     ) -> QtGui.QTextCharFormat:
         """Return a QTextCharFormat for token from document."""
         code, html = next(self._formatter._format_lines([(token, "dummy")]))
-        self._document.setHtml(html)
-        return gui.TextCursor(self._document).charFormat()
-
-    def _get_format_from_style(self, token: str, style: Style) -> gui.TextCharFormat:
-        """Return a QTextCharFormat for token by reading a Pygments style."""
-        result = gui.TextCharFormat()
-        try:
-            token_style = style.style_for_token(token)
-        except KeyError:
-            return result
-        for key, value in token_style.items():
-            if value:
-                match key:
-                    case "color":
-                        result.set_foreground_color(_get_brush(value))
-                    case "bgcolor":
-                        result.set_background_color(_get_brush(value))
-                    case "bold":
-                        result.set_font_weight("bold")
-                    case "italic":
-                        result.setFontItalic(True)
-                    case "underline":
-                        result.set_underline_style("single")
-                    case "sans":
-                        result.set_font_style_hint("sans_serif")
-                    case "roman":
-                        result.set_font_style_hint("serif")
-                    case "mono":
-                        result.set_font_style_hint("typewriter")
-        return result
+        document.setHtml(html)
+        return gui.TextCursor(document).charFormat()
 
 
 if __name__ == "__main__":

@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
@@ -98,7 +97,7 @@ class DataStream(QtCore.QDataStream):
     @classmethod
     def create_bytearray(cls, data: datatypes.QtSerializableType) -> QtCore.QByteArray:
         ba = QtCore.QByteArray()
-        stream = cls(ba, core.iodevice.OPEN_MODES["write_only"])
+        stream = cls(ba, QtCore.QIODeviceBase.OpenModeFlag.WriteOnly)
         stream << data
         return ba
 
@@ -110,10 +109,12 @@ class DataStream(QtCore.QDataStream):
             ba = ba.encode()
         if not isinstance(ba, QtCore.QByteArray):
             ba = QtCore.QByteArray(ba)
-        stream = cls(ba, core.iodevice.OPEN_MODES["read_only"])
+        stream = cls(ba, QtCore.QIODeviceBase.OpenModeFlag.ReadOnly)
         stream >> write_to
 
     @classmethod
-    def copy_data(cls, source, dest):
+    def copy_data(
+        cls, source: datatypes.QtSerializableType, dest: datatypes.QtSerializableType
+    ):
         ba = cls.create_bytearray(source)
         cls.write_bytearray(ba, dest)
