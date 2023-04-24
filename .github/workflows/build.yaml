@@ -46,6 +46,11 @@ jobs:
       with:
         run: |
           poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
+    - name: Upload coverage to Codecov
+      if: runner.os == 'Linux'
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Create documentation
       # if: matrix.python-version == '3.10' && runner.os == 'Linux'
       run: |
@@ -90,10 +95,6 @@ jobs:
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #     # CUSTOM_DOMAIN: optionaldomain.com
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v3
       with:
