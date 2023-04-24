@@ -38,14 +38,22 @@ jobs:
       run: |
         pip install --upgrade pip
         pip install poetry
-        poetry install -E pyside6
-    - name: Test with pytest
+    - name: Test with pytest (PySide6)
       uses: coactions/setup-xvfb@v1
       if: runner.os == 'Linux'
       timeout-minutes: 5
       with:
         run: |
+          poetry install -E pyside6
           poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
+    - name: Test with pytest  (PyQt6)
+      uses: coactions/setup-xvfb@v1
+      timeout-minutes: 5
+      with:
+        run: |
+          poetry install -E pyqt6
+          poetry run pytest
+
     - name: Upload coverage to Codecov
       if: runner.os == 'Linux' && matrix.python-version == '3.10'
       uses: codecov/codecov-action@v3
