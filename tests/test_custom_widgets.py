@@ -226,7 +226,7 @@ def test_flowlayout(qtbot):
     layout += widgets.PushButton("Different text")
     layout += widgets.PushButton("More text")
     layout += widgets.PushButton("Even longer button text")
-    layout.do_layout(core.Rect(), False)
+    layout._do_layout(core.Rect(), False)
     layout.sizeHint()
     widget.set_layout(layout)
     assert layout[0] == btn
