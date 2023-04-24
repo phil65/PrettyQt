@@ -8,7 +8,7 @@ class CollapsibleFrame(widgets.Frame):
     expanded = core.Signal()
     collapsed = core.Signal()
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, text: str = "", parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self.set_frame_shape("styled_panel")
         self.set_frame_shadow("plain")
@@ -22,7 +22,7 @@ class CollapsibleFrame(widgets.Frame):
         self._button.set_arrow_type("right")
         self._button.set_style("text_beside_icon")
         self._button.setAutoRaise(False)
-        self._button.set_text("CollapsibleFrame")
+        self._button.set_text(text)
         self.set_size_policy("minimum_expanding", "fixed")
         self._layout.addWidget(self._button, 0)
         self._button.setVisible(True)
