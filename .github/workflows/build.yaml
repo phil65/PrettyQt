@@ -90,6 +90,10 @@ jobs:
     #   env:
     #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     #     # CUSTOM_DOMAIN: optionaldomain.com
+    - name: Upload coverage to Codecov
+      uses: codecov/codecov-action@v3
+      with:
+        token: ${{ secrets.CODECOV_TOKEN }}
     - name: Deploy docs
       uses: peaceiris/actions-gh-pages@v3
       with:
