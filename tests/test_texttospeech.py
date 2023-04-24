@@ -14,7 +14,7 @@ texttospeech = pytest.importorskip("prettyqt.texttospeech")
 def test_texttospeech(qtlog):
     with qtlog.disabled():
         tts = texttospeech.TextToSpeech()
-    assert tts.get_state() in ["ready", "backend_error"]
+    assert tts.get_state() in ["ready", "error"]
     tts.get_locale()
     tts.get_available_locales()
     tts.get_voice()
