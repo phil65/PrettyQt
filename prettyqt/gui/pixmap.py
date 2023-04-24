@@ -119,14 +119,14 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
                 | painter.RenderHint.TextAntialiasing
                 | painter.RenderHint.SmoothPixmapTransform
             )
-            painter.set_pen(background)
+            painter.set_pen(color=background)
             painter.set_brush(background)
             margin = 1 + size // 16
             text_margin = size // 20
             w = size - 2 * margin
             rect = core.Rect(margin, margin, w, w)
             painter.draw_rounded_rect(rect, 30, 30, relative=True)
-            painter.set_pen(color)
+            painter.set_pen(color=color)
             with painter.edit_font() as font:  # type: QtGui.QFont
                 font.setPixelSize(size - 2 * margin - 2 * text_margin)
             painter.draw_text(rect, char, alignment="center")
@@ -141,5 +141,5 @@ if __name__ == "__main__":
     from prettyqt import gui
 
     app = gui.app()
-    p = Pixmap.create_checkerboard_pattern(100, "black", "white")
+    p = Pixmap.create_char("A", 20)
     print(bytes(p))
