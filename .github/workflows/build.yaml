@@ -23,14 +23,10 @@ jobs:
     - name: Linux opengl
       if: runner.os == 'Linux'
       run: sudo apt-get install -y libopengl0 libegl1-mesa libxcb-xinput0
-    # - name: Install opengl32sw
-    #   if: runner.os == 'Windows'
-    #   run: |
-    #       pip install aqtinstall
-    #       python -m aqt install-qt windows desktop 6.5.0 win64_msvc2019_64
-    # - name: Run services
+    # - name: start TextToSpeech service
     #   if: runner.os == 'Linux'
     #   run: |
+    #     sudo apt-get install speech-dispatcher espeak
     #     speech-dispatcher -d
     # - name: Python Poetry Action
     #   uses: abatilo/actions-poetry@v2.1.0

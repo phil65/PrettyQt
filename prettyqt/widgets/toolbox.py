@@ -49,7 +49,7 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
         return self.indexOf(item) >= 0
 
     def get_children(self) -> list[QtWidgets.QWidget]:
-        return [self[i] for i in range(self.count())]
+        return [self.widget(i) for i in range(self.count())]
 
     def add_widget(
         self,
