@@ -6,10 +6,10 @@ import math
 
 from prettyqt import core, gui
 from prettyqt.qt import API, QtCore, QtGui
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, serializemixin
 
 
-class PolygonF(QtGui.QPolygonF):
+class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
     def __repr__(self):
         return f"{type(self).__name__}(<{len(self)} points>)"
 
@@ -51,19 +51,6 @@ class PolygonF(QtGui.QPolygonF):
 
     def __or__(self, other: QtGui.QPolygonF) -> PolygonF:  # |
         return PolygonF(self.united(other))
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def __eq__(self, other: object) -> bool:
         return (

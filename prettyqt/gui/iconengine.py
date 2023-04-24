@@ -5,7 +5,13 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import (
+    InvalidParamError,
+    bidict,
+    datatypes,
+    get_repr,
+    serializemixin,
+)
 
 
 ICON_ENGINE_HOOK = bidict(
@@ -18,23 +24,12 @@ ICON_ENGINE_HOOK = bidict(
 IconEngineHookStr = Literal["available_sizes", "icon_name", "is_null", "scaled_pixmap"]
 
 
-class IconEngine(QtGui.QIconEngine):
+class IconEngine(serializemixin.SerializeMixin, QtGui.QIconEngine):
     def __repr__(self):
         return get_repr(self)
 
     def __bool__(self):
         return not self.isNull()
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        super().__init__()
-        core.DataStream.write_bytearray(ba, self)
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def add_file(
         self,

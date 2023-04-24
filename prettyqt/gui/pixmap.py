@@ -5,25 +5,12 @@ import pathlib
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import colors, datatypes, serializemixin
 
 
-class PixmapMixin(gui.PaintDeviceMixin):
+class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
     def __bool__(self):
         return not self.isNull()
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def __eq__(self, other):
         return self.toImage() == other.toImage() if isinstance(other, Pixmap) else False

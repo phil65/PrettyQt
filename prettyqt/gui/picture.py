@@ -1,19 +1,9 @@
 from __future__ import annotations
 
-from prettyqt import core, gui
+from prettyqt import gui
 from prettyqt.qt import QtGui
+from prettyqt.utils import serializemixin
 
 
-class Picture(gui.PaintDeviceMixin, QtGui.QPicture):
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
+class Picture(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QPicture):
+    pass

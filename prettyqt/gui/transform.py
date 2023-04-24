@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict, get_repr
+from prettyqt.utils import bidict, get_repr, serializemixin
 
 
 TRANSFORMATION_TYPE = bidict(
@@ -21,10 +20,7 @@ TransformationTypeStr = Literal[
 ]
 
 
-class Transform(QtGui.QTransform):
-    def __getstate__(self):
-        return bytes(self)
-
+class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
     def __repr__(self):
         return get_repr(
             self,
@@ -38,12 +34,6 @@ class Transform(QtGui.QTransform):
             self.m32(),
             self.m33(),
         )
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
 
     def __getitem__(self, value: tuple[int, int]) -> float:
         match value[0], value[1]:
@@ -66,10 +56,6 @@ class Transform(QtGui.QTransform):
             case 2, 2:
                 return self.m33()
         raise ValueError(f"Wrong value {value}")
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     @classmethod
     def clone_from(cls, transform: QtGui.QTransform) -> Transform:

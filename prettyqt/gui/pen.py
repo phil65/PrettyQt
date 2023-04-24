@@ -1,24 +1,17 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, colors, datatypes, get_repr
+from prettyqt.utils import (
+    InvalidParamError,
+    colors,
+    datatypes,
+    get_repr,
+    serializemixin,
+)
 
 
-class Pen(QtGui.QPen):
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
+class Pen(serializemixin.SerializeMixin, QtGui.QPen):
     def __repr__(self):
         return get_repr(self, self.get_color())
 

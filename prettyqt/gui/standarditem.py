@@ -5,10 +5,10 @@ import os
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, datatypes, get_repr
+from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixin
 
 
-class StandardItem(QtGui.QStandardItem):
+class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
     def __repr__(self):
         return get_repr(self, self.get_icon(), self.text())
 
@@ -20,19 +20,6 @@ class StandardItem(QtGui.QStandardItem):
             icon=self.get_icon(),
             data=self.data(),
         )
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def __getitem__(
         self, index: int | tuple[int, int] | QtCore.QModelIndex

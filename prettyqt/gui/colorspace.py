@@ -2,9 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, serializemixin
 
 
 NAMED_COLOR_SPACE = bidict(
@@ -40,18 +39,7 @@ TRANSFER_FUNCTION = bidict(
 TransformFunctionStr = Literal["custom", "linear", "gamma", "srgb", "pro_photo_rgb"]
 
 
-class ColorSpace(QtGui.QColorSpace):
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        super().__init__()
-        core.DataStream.write_bytearray(ba, self)
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
-
+class ColorSpace(serializemixin.SerializeMixin, QtGui.QColorSpace):
     def __bool__(self):
         return self.isValid()
 

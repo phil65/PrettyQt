@@ -1,27 +1,11 @@
 from __future__ import annotations
 
-from typing import Any
-
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, serializemixin
 
 
-class Cursor(QtGui.QCursor):
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        super().__init__()
-        core.DataStream.write_bytearray(ba, self)
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
-
-    def serialize_fields(self) -> dict[str, Any]:
-        return dict(shape=self.get_shape())
-
+class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
     def set_shape(self, shape: constants.CursorShapeStr):
         """Set cursor shape.
 

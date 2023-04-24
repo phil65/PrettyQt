@@ -2,9 +2,16 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core, gui
+from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, get_repr
+from prettyqt.utils import (
+    InvalidParamError,
+    bidict,
+    colors,
+    datatypes,
+    get_repr,
+    serializemixin,
+)
 
 
 ROLE = bidict(
@@ -64,25 +71,12 @@ GROUP = bidict(
 GroupStr = Literal["disabled", "active", "inactive"]
 
 
-class Palette(QtGui.QPalette):
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
+class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
     def __getitem__(self, index: RoleStr) -> gui.Color:
         return self.get_color(index)
 
     def __setitem__(self, index: RoleStr, value: datatypes.ColorType):
         self.set_color(index, value)
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def __repr__(self):
         return get_repr(self, self.get_color("button"), self.get_color("window"))

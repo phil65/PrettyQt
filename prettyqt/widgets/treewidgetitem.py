@@ -3,9 +3,15 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Literal
 
-from prettyqt import constants, core, gui, iconprovider
+from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import (
+    InvalidParamError,
+    bidict,
+    datatypes,
+    get_repr,
+    serializemixin,
+)
 
 
 mod = QtWidgets.QTreeWidgetItem
@@ -19,7 +25,7 @@ CHILD_INDICATOR_POLICY = bidict(
 ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless"]
 
 
-class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
+class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def __repr__(self):
         return get_repr(self)
 
@@ -36,19 +42,6 @@ class TreeWidgetItem(QtWidgets.QTreeWidgetItem):
             icon=[self.get_icon(i) for i in range(self.columnCount())],
             data=data,
         )
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def __iter__(self) -> Iterator[QtWidgets.QTreeWidgetItem]:
         return iter(self.child(i) for i in range(self.childCount()))

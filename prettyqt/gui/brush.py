@@ -1,26 +1,13 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, datatypes, get_repr
+from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixin
 
 
-class Brush(QtGui.QBrush):
+class Brush(serializemixin.SerializeMixin, QtGui.QBrush):
     def __repr__(self):
         return get_repr(self, self.get_color(), self.get_style())
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def get_texture_image(self) -> gui.Image | None:
         img = self.textureImage()

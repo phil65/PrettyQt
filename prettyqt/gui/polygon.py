@@ -5,10 +5,10 @@ import ctypes
 
 from prettyqt import core
 from prettyqt.qt import API, QtCore, QtGui
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, serializemixin
 
 
-class Polygon(QtGui.QPolygon):
+class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
     def __repr__(self):
         return f"{type(self).__name__}(<{len(self)} points>)"
 
@@ -50,19 +50,6 @@ class Polygon(QtGui.QPolygon):
 
     def __or__(self, other: QtGui.QPolygon) -> Polygon:  # |
         return Polygon(self.united(other))
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def get_point(self, index: int) -> core.Point:
         # PySide6 doesnt have self.point method

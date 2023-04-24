@@ -1,11 +1,11 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui, iconprovider
+from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, get_repr
+from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixin
 
 
-class ListWidgetItem(QtWidgets.QListWidgetItem):
+class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
     def __repr__(self):
         return get_repr(self, self.icon(), self.text())
 
@@ -24,19 +24,6 @@ class ListWidgetItem(QtWidgets.QListWidgetItem):
             icon=self.get_icon(),
             data=self.data(constants.USER_ROLE),  # type: ignore
         )
-
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.

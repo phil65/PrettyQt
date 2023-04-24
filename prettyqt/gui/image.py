@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import API, QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, serializemixin
 
 
 FORMAT = bidict(
@@ -86,25 +86,12 @@ FormatStr = Literal[
 ]
 
 
-class Image(gui.PaintDeviceMixin, QtGui.QImage):
-    def __getstate__(self):
-        return bytes(self)
-
-    def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
-
+class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
     def __setitem__(self, index: tuple[int, int], value):
         self.setPixel(index[0], index[1], value)
 
-    def __reduce__(self):
-        return type(self), (), self.__getstate__()
-
     def __getitem__(self, index: tuple[int, int]) -> int:
         return self.pixel(index[0], index[1])
-
-    def __bytes__(self):
-        ba = core.DataStream.create_bytearray(self)
-        return ba.data()
 
     @classmethod
     def from_ndarray(cls, arr) -> Image:
