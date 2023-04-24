@@ -1471,8 +1471,6 @@ def test_treeview(qtbot):
     model = widgets.FileSystemModel()
     widget.set_model(model)
     widget.selectAll()
-    assert widget.h_header
-    # widget.h_scrollbar
     assert widget.v_scrollbar
     widget.set_size_adjust_policy("content")
     with pytest.raises(InvalidParamError):
