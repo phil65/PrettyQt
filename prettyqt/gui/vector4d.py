@@ -11,6 +11,9 @@ class Vector4D(QtGui.QVector4D):
     def __abs__(self) -> float:
         return self.length()
 
+    def __reduce__(self):
+        return type(self), (self.x(), self.y(), self.z(), self.w())
+
     def to_point(self) -> core.Point:
         return core.Point(self.toPoint())
 

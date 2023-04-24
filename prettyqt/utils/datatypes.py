@@ -20,6 +20,8 @@ def make_serializable(obj):
             return core.KeyCombination(obj)
         case QtCore.QUrl():
             return core.Url(obj)
+        case QtCore.QEasingCurve():
+            return core.EasingCurve(obj)
         case QtGui.QPalette():
             return gui.Palette(obj)
         case QtGui.QFont():
@@ -39,6 +41,9 @@ def make_serializable(obj):
         case QtGui.QVector3D():
             # PyQt doesnt allow Vector3D in ctor
             return gui.Vector3D(obj.x(), obj.y(), obj.z())
+        case QtGui.QVector4D():
+            # PyQt doesnt allow Vector4D in ctor
+            return gui.Vector4D(obj.x(), obj.y(), obj.z(), obj.w())
         case QtWidgets.QSizePolicy():
             return widgets.SizePolicy.clone(obj)
         case list():

@@ -2,15 +2,17 @@ from __future__ import annotations
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import serializemixin
 
 
-class Vector3D(serializemixin.SerializeMixin, QtGui.QVector3D):
+class Vector3D(QtGui.QVector3D):
     def __bool__(self):
         return not self.isNull()
 
     def __abs__(self) -> float:
         return self.length()
+
+    def __reduce__(self):
+        return type(self), (self.x(), self.y(), self.z())
 
     def to_point(self) -> core.Point:
         return core.Point(self.toPoint())

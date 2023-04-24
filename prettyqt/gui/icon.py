@@ -4,7 +4,13 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import (
+    InvalidParamError,
+    bidict,
+    datatypes,
+    get_repr,
+    serializemixin,
+)
 
 
 MODE = bidict(
@@ -21,7 +27,7 @@ STATE = bidict(off=QtGui.QIcon.State.Off, on=QtGui.QIcon.State.On)
 StateStr = Literal["off", "on"]
 
 
-class Icon(QtGui.QIcon):
+class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
     def __repr__(self):
         return get_repr(self)
 
@@ -30,12 +36,12 @@ class Icon(QtGui.QIcon):
 
     def __getstate__(self):
         pixmap = self.pixmap(256, 256)
-        return bytes(core.DataStream.create_bytearray(pixmap))
+        return bytes(gui.Pixmap(pixmap))
 
     def __setstate__(self, ba):
-        px = QtGui.QPixmap()
-        core.DataStream.write_bytearray(ba, px)
-        super().__init__(px)
+        px = gui.Pixmap()
+        px.__setstate__(ba)
+        self.add_pixmap(px)
 
     @classmethod
     def for_color(cls, color_str: str) -> Icon:

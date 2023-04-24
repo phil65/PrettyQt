@@ -4,7 +4,7 @@ from collections.abc import Callable
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import InvalidParamError, bidict, get_repr, serializemixin
 
 
 TYPE = bidict(
@@ -103,7 +103,7 @@ TypeStr = Literal[
 CurveMethod = Callable[[float], float]
 
 
-class EasingCurve(QtCore.QEasingCurve):
+class EasingCurve(serializemixin.SerializeMixin, QtCore.QEasingCurve):
     def __init__(self, other_or_type: TypeStr | int | QtCore.QEasingCurve = "linear"):
         if isinstance(other_or_type, str) and other_or_type in TYPE:
             typ = TYPE[other_or_type]

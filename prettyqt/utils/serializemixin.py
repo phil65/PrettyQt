@@ -1,16 +1,37 @@
-from prettyqt import core
+from __future__ import annotations
+
+from prettyqt.qt import QtCore
+from prettyqt.utils import datatypes
 
 
 class SerializeMixin:
     def __getstate__(self):
-        ba = core.DataStream.create_bytearray(self)
+        ba = self.create_bytearray()
         return ba.data()
 
     def __setstate__(self, ba):
-        core.DataStream.write_bytearray(ba, self)
+        self.write_bytearray(ba)
 
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
     def __bytes__(self):
         return self.__getstate__()
+
+    def create_bytearray(self) -> QtCore.QByteArray:
+        ba = QtCore.QByteArray()
+        stream = QtCore.QDataStream(ba, QtCore.QIODeviceBase.OpenModeFlag.WriteOnly)
+        stream << self
+        return ba
+
+    def write_bytearray(self, ba: datatypes.ByteArrayType):
+        if isinstance(ba, str):
+            ba = ba.encode()
+        if not isinstance(ba, QtCore.QByteArray):
+            ba = QtCore.QByteArray(ba)
+        stream = QtCore.QDataStream(ba, QtCore.QIODeviceBase.OpenModeFlag.ReadOnly)
+        stream >> self
+
+    def copy_data_to(self, dest: datatypes.QtSerializableType):
+        ba = self.create_bytearray()
+        dest.write_bytearray(ba)
