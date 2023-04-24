@@ -1,3 +1,15 @@
+## v1.22.0 (2023-04-25)
+
+### Feat
+
+- **LayoutItem**: add get_expanding_directions method
+- **LayoutItem**: add get_control_types method
+- **GraphicsLayoutItem**: add get/set_size_policy and __bool__ methods
+
+### Fix
+
+- **Pixmap**: fix create_char method
+
 ## v1.21.0 (2023-04-23)
 
 ### Feat
