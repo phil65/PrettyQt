@@ -1,13 +1,13 @@
 from __future__ import annotations
 
-from prettyqt import constants
+from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
 
 class LayoutItemMixin:
-    # def __bool__(self):
-    #     return not self.isEmpty()
+    def __bool__(self):
+        return not self.isEmpty()
 
     def set_alignment(self, alignment: constants.AlignmentStr):
         """Set the alignment of the layout.
@@ -39,6 +39,15 @@ class LayoutItemMixin:
             return content
         return content if (content := self.spacerItem()) else None
 
+    def get_control_types(self) -> list[widgets.sizepolicy.ControlTypeStr]:
+        return widgets.sizepolicy.CONTROL_TYPE.get_list(self.controlTypes())
+
 
 class LayoutItem(LayoutItemMixin, QtWidgets.QLayoutItem):
     pass
+
+
+if __name__ == "__main__":
+    item = LayoutItem("left")
+    types = item.get_control_types()
+    print(types)
