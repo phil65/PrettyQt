@@ -9,4 +9,6 @@ class WidgetItem(widgets.LayoutItemMixin, QtWidgets.QWidgetItem):
 
 
 if __name__ == "__main__":
+    app = widgets.app()
     item = WidgetItem(QtWidgets.QWidget())
+    print(item.get_expanding_directions())
