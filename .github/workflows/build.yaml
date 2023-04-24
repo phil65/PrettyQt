@@ -47,7 +47,7 @@ jobs:
         run: |
           poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
     - name: Upload coverage to Codecov
-      if: runner.os == 'Linux'
+      if: runner.os == 'Linux' && matrix.python-version == '3.10'
       uses: codecov/codecov-action@v3
       with:
         token: ${{ secrets.CODECOV_TOKEN }}
