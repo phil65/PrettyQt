@@ -1,3 +1,9 @@
+## v1.22.1 (2023-04-25)
+
+### Fix
+
+- **NestedModel**: rowCount fix
+
 ## v1.22.0 (2023-04-25)
 
 ### Feat
