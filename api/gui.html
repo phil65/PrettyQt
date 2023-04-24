@@ -17,7 +17,7 @@
         <link rel="next" href="network.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.7">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
     
     
       
@@ -117,29 +117,31 @@
       </div>
     </div>
     
-      <form class="md-header__option" data-md-component="palette">
-        
+      
+        <form class="md-header__option" data-md-component="palette">
           
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+            
+              <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
           
+            
+            
+            
+            <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+            
+              <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
+              </label>
+            
           
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
-          
-            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
-            </label>
-          
-        
-          
-          
-          
-          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
-          
-            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12c0-2.42-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12 20 8.69Z"/></svg>
-            </label>
-          
-        
-      </form>
+        </form>
+      
     
     
     
@@ -5233,7 +5235,7 @@ otherwise is is lighter.
 
 <h3 id="prettyqt.gui.colorspace.ColorSpace" class="doc doc-heading">
         <code>
-ColorSpace            (<span title="PySide6.QtGui.QColorSpace">QColorSpace</span>)
+ColorSpace            (<span title="prettyqt.utils.serializemixin.SerializeMixin">SerializeMixin</span>, <span title="PySide6.QtGui.QColorSpace">QColorSpace</span>)
         </code>
 
 
@@ -5245,18 +5247,7 @@ ColorSpace            (<span title="PySide6.QtGui.QColorSpace">QColorSpace</span
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\gui\colorspace.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ColorSpace</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QColorSpace</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ba</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">write_bytearray</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">ColorSpace</span><span class="p">(</span><span class="n">serializemixin</span><span class="o">.</span><span class="n">SerializeMixin</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QColorSpace</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">isValid</span><span class="p">()</span>
 
@@ -5308,9 +5299,6 @@ ColorSpace            (<span title="PySide6.QtGui.QColorSpace">QColorSpace</span
 
 
   <div class="doc doc-children">
-
-
-
 
 
 
@@ -5613,7 +5601,7 @@ ColorSpace            (<span title="PySide6.QtGui.QColorSpace">QColorSpace</span
 
 <h3 id="prettyqt.gui.cursor.Cursor" class="doc doc-heading">
         <code>
-Cursor            (<span title="PySide6.QtGui.QCursor">QCursor</span>)
+Cursor            (<span title="prettyqt.utils.serializemixin.SerializeMixin">SerializeMixin</span>, <span title="PySide6.QtGui.QCursor">QCursor</span>)
         </code>
 
 
@@ -5625,21 +5613,7 @@ Cursor            (<span title="PySide6.QtGui.QCursor">QCursor</span>)
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\gui\cursor.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ba</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">write_bytearray</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">serialize_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
-        <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_shape</span><span class="p">())</span>
-
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Cursor</span><span class="p">(</span><span class="n">serializemixin</span><span class="o">.</span><span class="n">SerializeMixin</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QCursor</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_shape</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shape</span><span class="p">:</span> <span class="n">constants</span><span class="o">.</span><span class="n">CursorShapeStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set cursor shape.</span>
 
@@ -5670,9 +5644,6 @@ Cursor            (<span title="PySide6.QtGui.QCursor">QCursor</span>)
 
 
   <div class="doc doc-children">
-
-
-
 
 
 
@@ -5726,7 +5697,6 @@ Cursor            (<span title="PySide6.QtGui.QCursor">QCursor</span>)
     </div>
 
   </div>
-
 
 
 
@@ -7918,7 +7888,7 @@ GuiApplicationMixin            (<span title="prettyqt.core.coreapplication.CoreA
 
 <h3 id="prettyqt.gui.icon.Icon" class="doc doc-heading">
         <code>
-Icon            (<span title="PySide6.QtGui.QIcon">QIcon</span>)
+Icon            (<span title="prettyqt.utils.serializemixin.SerializeMixin">SerializeMixin</span>, <span title="PySide6.QtGui.QIcon">QIcon</span>)
         </code>
 
 
@@ -7930,7 +7900,7 @@ Icon            (<span title="PySide6.QtGui.QIcon">QIcon</span>)
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\gui\icon.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Icon</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Icon</span><span class="p">(</span><span class="n">serializemixin</span><span class="o">.</span><span class="n">SerializeMixin</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QIcon</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
 
@@ -7939,12 +7909,12 @@ Icon            (<span title="PySide6.QtGui.QIcon">QIcon</span>)
 
     <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">pixmap</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pixmap</span><span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">256</span><span class="p">)</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="n">pixmap</span><span class="p">))</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">Pixmap</span><span class="p">(</span><span class="n">pixmap</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ba</span><span class="p">):</span>
-        <span class="n">px</span> <span class="o">=</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPixmap</span><span class="p">()</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">write_bytearray</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="n">px</span><span class="p">)</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">px</span><span class="p">)</span>
+        <span class="n">px</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">Pixmap</span><span class="p">()</span>
+        <span class="n">px</span><span class="o">.</span><span class="n">__setstate__</span><span class="p">(</span><span class="n">ba</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_pixmap</span><span class="p">(</span><span class="n">px</span><span class="p">)</span>
 
     <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">for_color</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">color_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Icon</span><span class="p">:</span>
@@ -11541,7 +11511,7 @@ PainterPathStroker            (<span title="PySide6.QtGui.QPainterPathStroker">Q
 
 <h3 id="prettyqt.gui.palette.Palette" class="doc doc-heading">
         <code>
-Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
+Palette            (<span title="prettyqt.utils.serializemixin.SerializeMixin">SerializeMixin</span>, <span title="PySide6.QtGui.QPalette">QPalette</span>)
         </code>
 
 
@@ -11553,25 +11523,12 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\gui\palette.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Palette</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ba</span><span class="p">):</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">write_bytearray</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
-
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Palette</span><span class="p">(</span><span class="n">serializemixin</span><span class="o">.</span><span class="n">SerializeMixin</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPalette</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">gui</span><span class="o">.</span><span class="n">Color</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">RoleStr</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">ColorType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">set_color</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;button&quot;</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">(</span><span class="s2">&quot;window&quot;</span><span class="p">))</span>
@@ -11668,10 +11625,6 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
 
 
   <div class="doc doc-children">
-
-
-
-
 
 
 
@@ -11869,7 +11822,7 @@ Palette            (<span title="PySide6.QtGui.QPalette">QPalette</span>)
 
 <h3 id="prettyqt.gui.pen.Pen" class="doc doc-heading">
         <code>
-Pen            (<span title="PySide6.QtGui.QPen">QPen</span>)
+Pen            (<span title="prettyqt.utils.serializemixin.SerializeMixin">SerializeMixin</span>, <span title="PySide6.QtGui.QPen">QPen</span>)
         </code>
 
 
@@ -11881,20 +11834,7 @@ Pen            (<span title="PySide6.QtGui.QPen">QPen</span>)
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\gui\pen.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Pen</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">):</span>
-    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ba</span><span class="p">):</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">write_bytearray</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
-
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">Pen</span><span class="p">(</span><span class="n">serializemixin</span><span class="o">.</span><span class="n">SerializeMixin</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QPen</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_color</span><span class="p">())</span>
 
@@ -11981,10 +11921,6 @@ Pen            (<span title="PySide6.QtGui.QPen">QPen</span>)
 
 
   <div class="doc doc-children">
-
-
-
-
 
 
 
@@ -12405,7 +12341,7 @@ Pen            (<span title="PySide6.QtGui.QPen">QPen</span>)
 
 <h3 id="prettyqt.gui.pixmap.PixmapMixin" class="doc doc-heading">
         <code>
-PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gui.paintdevice.PaintDeviceMixin" href="#prettyqt.gui.paintdevice.PaintDeviceMixin">PaintDeviceMixin</a>)
+PixmapMixin            (<span title="prettyqt.utils.serializemixin.SerializeMixin">SerializeMixin</span>, <a class="autorefs autorefs-internal" title="prettyqt.gui.paintdevice.PaintDeviceMixin" href="#prettyqt.gui.paintdevice.PaintDeviceMixin">PaintDeviceMixin</a>)
         </code>
 
 
@@ -12417,22 +12353,9 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\gui\pixmap.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PixmapMixin</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">PaintDeviceMixin</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PixmapMixin</span><span class="p">(</span><span class="n">serializemixin</span><span class="o">.</span><span class="n">SerializeMixin</span><span class="p">,</span> <span class="n">gui</span><span class="o">.</span><span class="n">PaintDeviceMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__bool__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">isNull</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ba</span><span class="p">):</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">write_bytearray</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">toImage</span><span class="p">()</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">toImage</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">Pixmap</span><span class="p">)</span> <span class="k">else</span> <span class="kc">False</span>
@@ -12541,14 +12464,14 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
                 <span class="o">|</span> <span class="n">painter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">TextAntialiasing</span>
                 <span class="o">|</span> <span class="n">painter</span><span class="o">.</span><span class="n">RenderHint</span><span class="o">.</span><span class="n">SmoothPixmapTransform</span>
             <span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">background</span><span class="p">)</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">set_brush</span><span class="p">(</span><span class="n">background</span><span class="p">)</span>
             <span class="n">margin</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">size</span> <span class="o">//</span> <span class="mi">16</span>
             <span class="n">text_margin</span> <span class="o">=</span> <span class="n">size</span> <span class="o">//</span> <span class="mi">20</span>
             <span class="n">w</span> <span class="o">=</span> <span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span>
             <span class="n">rect</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Rect</span><span class="p">(</span><span class="n">margin</span><span class="p">,</span> <span class="n">margin</span><span class="p">,</span> <span class="n">w</span><span class="p">,</span> <span class="n">w</span><span class="p">)</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">draw_rounded_rect</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">relative</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="p">)</span>
+            <span class="n">painter</span><span class="o">.</span><span class="n">set_pen</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">)</span>
             <span class="k">with</span> <span class="n">painter</span><span class="o">.</span><span class="n">edit_font</span><span class="p">()</span> <span class="k">as</span> <span class="n">font</span><span class="p">:</span>  <span class="c1"># type: QtGui.QFont</span>
                 <span class="n">font</span><span class="o">.</span><span class="n">setPixelSize</span><span class="p">(</span><span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">margin</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">text_margin</span><span class="p">)</span>
             <span class="n">painter</span><span class="o">.</span><span class="n">draw_text</span><span class="p">(</span><span class="n">rect</span><span class="p">,</span> <span class="n">char</span><span class="p">,</span> <span class="n">alignment</span><span class="o">=</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
@@ -12559,10 +12482,6 @@ PixmapMixin            (<a class="autorefs autorefs-internal" title="prettyqt.gu
 
 
   <div class="doc doc-children">
-
-
-
-
 
 
 
@@ -12964,7 +12883,7 @@ SessionManager            (<span title="prettyqt.core.object.ObjectMixin">Object
 
 <h3 id="prettyqt.gui.standarditem.StandardItem" class="doc doc-heading">
         <code>
-StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem</span>)
+StandardItem            (<span title="prettyqt.utils.serializemixin.SerializeMixin">SerializeMixin</span>, <span title="PySide6.QtGui.QStandardItem">QStandardItem</span>)
         </code>
 
 
@@ -12976,7 +12895,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\gui\standarditem.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StandardItem</span><span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span><span class="p">):</span>
+          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">StandardItem</span><span class="p">(</span><span class="n">serializemixin</span><span class="o">.</span><span class="n">SerializeMixin</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">text</span><span class="p">())</span>
 
@@ -12988,19 +12907,6 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
             <span class="n">icon</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">get_icon</span><span class="p">(),</span>
             <span class="n">data</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">(),</span>
         <span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__getstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ba</span><span class="p">):</span>
-        <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">write_bytearray</span><span class="p">(</span><span class="n">ba</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">ba</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">DataStream</span><span class="o">.</span><span class="n">create_bytearray</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">ba</span><span class="o">.</span><span class="n">data</span><span class="p">()</span>
 
     <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">|</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span>
@@ -13026,7 +12932,7 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
         <span class="k">return</span> <span class="nb">iter</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">get_children</span><span class="p">())</span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StandardItem</span><span class="p">:</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="p">(</span><span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QStandardItem</span> <span class="o">|</span> <span class="nb">str</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
             <span class="k">return</span> <span class="bp">self</span>
         <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;wrong type for addition&quot;</span><span class="p">)</span>
@@ -13168,10 +13074,6 @@ StandardItem            (<span title="PySide6.QtGui.QStandardItem">QStandardItem
 
 
   <div class="doc doc-children">
-
-
-
-
 
 
 
