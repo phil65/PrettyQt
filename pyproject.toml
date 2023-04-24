@@ -126,9 +126,10 @@ home-page = "https://github.com/phil65/prettyqt"
 
 [tool.ruff]
 line-length = 90
-select = ["C", "E", "F", "W"]
+# ["A", "ANN", "ARG", "B", "BLE", "C", "COM", "D", "DTZ", "E", "EM", "ERA", "EXE", "F", "FBT", "G", "I", "ICN", "INP", "ISC", "N", "PD", "PGH", "PIE", "PL", "PT", "PTH", "Q", "RET", "RUF", "S", "SIM", "T", "TCH", "TID", "TRY", "UP", "W", "YTT"]
+select = ["B", "C", "E", "F", "W", "ICN", "ISC", "UP"] # "I"
 # Never enforce `E501`.
-ignore = ["C408"]
+ignore = ["C408", "B905"]
 extend-select = ["D"]
 extend-ignore = [
     "C901",
