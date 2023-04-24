@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Literal, TypedDict
+from typing import Any, Literal, TypedDict
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
@@ -63,8 +63,8 @@ class TypedAttribute(TypedDict):
     redirect_policy: int
     http2_direct: bool
     auto_delete_reply_on_finish: bool
-    user: datatypes.VariantType
-    user_max: datatypes.VariantType
+    user: Any
+    user_max: Any
 
 
 AttributeStr = Literal[
@@ -226,7 +226,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
         """
         return PRIORITY.inverse[self.priority()]
 
-    def set_attribute(self, attribute: AttributeStr, value: datatypes.VariantType):
+    def set_attribute(self, attribute: AttributeStr, value: datatypes.Variant):
         self.setAttribute(ATTRIBUTE[attribute], value)
 
     def set_attributes(self, **kwargs):
