@@ -42,6 +42,7 @@ from .metamethod import MetaMethod
 from .metaproperty import MetaProperty
 from .metatype import MetaType
 from .metaobject import MetaObject
+from .modelroledata import ModelRoleData
 from .persistentmodelindex import PersistentModelIndex
 from .cryptographichash import CryptographicHash
 from .uuid import Uuid, UuidMixin
@@ -197,6 +198,7 @@ __all__ = [
     "VersionNumber",
     "OperatingSystemVersion",
     "LibraryInfo",
+    "ModelRoleData",
     "PersistentModelIndex",
     "ByteArray",
     "ByteArrayMatcher",
