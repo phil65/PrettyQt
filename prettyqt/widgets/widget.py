@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+import functools
 import os
 import pathlib
 import sys
@@ -28,6 +29,7 @@ if TYPE_CHECKING:
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
+QWIDGETSIZE_MAX = 16777215   # QtWidgets.QWIDGETSIZE_MAX
 
 class WidgetMixin(core.ObjectMixin):
     box: QtWidgets.QLayout
@@ -84,11 +86,39 @@ class WidgetMixin(core.ObjectMixin):
         icon = self.windowIcon()
         return None if icon.isNull() else gui.Icon(icon)
 
-    def set_min_size(self, *size) -> None:
-        self.setMinimumSize(*size)
+    @functools.singledispatchmethod
+    def set_min_size(self, size: QtCore.QSize | tuple[int | None, int | None]) -> None:
+        if isinstance(size, tuple):
+            x = 0 if size[0] is None else size[0]
+            y = 0 if size[1] is None else size[1]
+            self.setMinimumSize(x, y)
+        else:
+            self.setMinimumSize(size)
 
-    def set_max_size(self, *size) -> None:
-        self.setMaximumSize(*size)
+    @set_min_size.register
+    def _(self, x: int, y: int | None):
+        self.set_min_size((x, y))
+
+    @set_min_size.register  # these can be merged when min py version is 3.11
+    def _(self, x: None, y: int | None):
+        self.set_min_size((x, y))
+
+    @functools.singledispatchmethod
+    def set_max_size(self, size: QtCore.QSize | tuple[int | None, int | None]) -> None:
+        if isinstance(size, tuple):
+            x = QWIDGETSIZE_MAX if size[0] is None else size[0]
+            y = QWIDGETSIZE_MAX if size[1] is None else size[1]
+            self.setMaximumSize(x, y)
+        else:
+            self.setMaximumSize(size)
+
+    @set_max_size.register
+    def _(self, x: int, y: int | None):
+        self.set_max_size((x, y))
+
+    @set_max_size.register  # these can be merged when min py version is 3.11
+    def _(self, x: None, y: int | None):
+        self.set_max_size((x, y))
 
     def set_min_width(self, width: int | None) -> None:
         if width is None:
@@ -97,7 +127,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_max_width(self, width: int | None) -> None:
         if width is None:
-            width = 16777215  # QtWidgets.QWIDGETSIZE_MAX
+            width = QWIDGETSIZE_MAX
         self.setMaximumWidth(width)
 
     def set_min_height(self, height: int | None) -> None:
@@ -107,7 +137,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_max_height(self, height: int | None) -> None:
         if height is None:
-            height = 16777215  # QtWidgets.QWIDGETSIZE_MAX
+            height = QWIDGETSIZE_MAX
         self.setMaximumHeight(height)
 
     def set_enabled(self, enabled: bool = True) -> None:
@@ -556,5 +586,7 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
     widget.show()
+    widget.set_min_size((400, 400))
+    widget.set_max_size(None, 600)
     print(type(widget.get_screen()))
     app.main_loop()
