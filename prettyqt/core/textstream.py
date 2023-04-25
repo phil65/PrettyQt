@@ -4,7 +4,7 @@ from collections.abc import Iterator
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FIELD_ALIGNMENT = bidict(
@@ -116,6 +116,16 @@ class TextStream(QtCore.QTextStream):
                 yield msg
             else:
                 return
+
+    def get_number_flags(self) -> list[NumberFlagStr]:
+        return NUMBER_FLAGS.get_list(self.numberFlags())
+
+    def set_number_flags(self, *flags: NumberFlagStr):
+        for item in flags:
+            if item not in NUMBER_FLAGS:
+                raise InvalidParamError(item, NUMBER_FLAGS)
+        flags = helpers.merge_flags(flags, NUMBER_FLAGS)
+        self.setNumberFlags(flags)
 
 
 if __name__ == "__main__":
