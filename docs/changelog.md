@@ -1,3 +1,14 @@
+## v1.23.0 (2023-04-25)
+
+### Feat
+
+- **core**: Add ModelRoleData class
+- add ImportlibTreeModel
+
+### Fix
+
+- correctly behaving listmixin
+
 ## v1.22.2 (2023-04-25)
 
 ### Fix
