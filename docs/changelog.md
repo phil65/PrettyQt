@@ -1,3 +1,11 @@
+## v1.24.0 (2023-04-26)
+
+### Feat
+
+- **Layout**: add add_widget method
+- **Widget**: allow None values for set_min/max_size
+- **TextStream**: add get/set_number_flags methods
+
 ## v1.23.0 (2023-04-25)
 
 ### Feat
