@@ -36,6 +36,7 @@ jobs:
         pip install poetry
         poetry install
     - name: Test with pytest  (PyQt6)
+      # combine test coverage with --cov-append?
       uses: coactions/setup-xvfb@v1
       timeout-minutes: 5
       with:
