@@ -29,6 +29,28 @@ class AbstractItemModelMixin(core.ObjectMixin):
         """Return amount of rows."""
         return self.rowCount()
 
+    @classmethod
+    def ci(
+        cls,
+        index_is_valid: bool = False,
+        do_not_use_parent: bool = False,
+        parent_is_invalid: bool = False,
+    ):
+        def inner(method):
+            def wrapper(
+                ref: AbstractItemModelMixin, index: QtCore.QModelIndex, *args, **kwargs
+            ):
+                if ref.check_index(
+                    index, index_is_valid, do_not_use_parent, parent_is_invalid
+                ):
+                    return method(ref, index, *args, **kwargs)
+                else:
+                    raise TypeError("Invalid index")
+
+            return wrapper
+
+        return inner
+
     def check_index(
         self,
         index: QtCore.QModelIndex,
