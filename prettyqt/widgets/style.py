@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt import constants, core, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -536,6 +536,24 @@ class StyleMixin(core.ObjectMixin):
         if control not in CONTROL_ELEMENT:
             raise InvalidParamError(control, CONTROL_ELEMENT)
         self.drawPrimitive(CONTROL_ELEMENT[control], option, painter, widget)
+
+    def get_layout_spacing(
+        self,
+        control_1: widgets.sizepolicy.ControlTypeStr,
+        control_2: widgets.sizepolicy.ControlTypeStr,
+        orientation: constants.OrientationStr,
+        option_or_widget: QtCore.QWidgets.QStyleOption | QtWidgets.QWidget | None = None,
+    ):
+        c1 = widgets.sizepolicy.CONTROL_TYPE[control_1]
+        c2 = widgets.sizepolicy.CONTROL_TYPE[control_2]
+        o = constants.ORIENTATION[orientation]
+        match option_or_widget:
+            case QtWidgets.QWidget():
+                return self.layoutSpacing(c1, c2, o, None, option_or_widget)
+            case QtWidgets.QStyleOption() | None:
+                return self.layoutSpacing(c1, c2, o, option_or_widget)
+            case _:
+                raise ValueError(option_or_widget)
 
 
 class Style(StyleMixin, QtWidgets.QStyle):
