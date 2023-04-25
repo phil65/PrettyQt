@@ -56,7 +56,7 @@ pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
 coverage = "^7"
 mkdocs = "^1"
 mkdocs-material = "^9"
-mkdocstrings = {version = "^0", extras = ["python-legacy"]}
+mkdocstrings = {version = "^0", extras = ["python"]}
 
 pymdown-extensions = "^9"
 black = "^23"
