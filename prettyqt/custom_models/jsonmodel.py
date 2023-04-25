@@ -29,24 +29,25 @@ class JsonTreeItem(custom_models.NestedItem):
     @classmethod
     def load(cls, value, parent=None, sort: bool = False):
         root_item = cls(key="root", parent=parent)
-        if isinstance(value, dict):
-            items = sorted(value.items()) if sort else value.items()
-            for key, value in items:
-                child = cls.load(value, root_item)
-                child.key = key
-                child.type = type(value)
-                root_item.append_child(child)
+        match value:
+            case dict():
+                items = sorted(value.items()) if sort else value.items()
+                for key, value in items:
+                    child = cls.load(value, root_item)
+                    child.key = key
+                    child.type = type(value)
+                    root_item.append_child(child)
 
-        elif isinstance(value, list | tuple):
-            for index, val in enumerate(value):
-                child = cls.load(val, root_item)
-                child.key = str(index)
-                child.type = type(val)
-                root_item.append_child(child)
+            case list() | tuple():
+                for index, val in enumerate(value):
+                    child = cls.load(val, root_item)
+                    child.key = index
+                    child.type = type(val)
+                    root_item.append_child(child)
 
-        else:
-            root_item.value = value
-            root_item.type = type(value)
+            case _:
+                root_item.value = value
+                root_item.type = type(value)
 
         return root_item
 
@@ -109,6 +110,7 @@ class JsonModel(custom_models.NestedModel):
 if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TreeView()
+    view.setRootIsDecorated(True)
     model = JsonModel()
 
     view.set_model(model)
