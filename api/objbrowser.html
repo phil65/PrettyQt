@@ -557,8 +557,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_node_is_visible" class="md-nav__link">
-    inspected_node_is_visible
+  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.show_root" class="md-nav__link">
+    show_root
   </a>
   
 </li>
@@ -935,8 +935,8 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_node_is_visible" class="md-nav__link">
-    inspected_node_is_visible
+  <a href="#prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.show_root" class="md-nav__link">
+    show_root
   </a>
   
 </li>
@@ -1334,7 +1334,7 @@ ObjectBrowser            (<a class="autorefs autorefs-internal" title="prettyqt.
         <span class="c1"># Select first row so that a hidden root node will not be selected.</span>
         <span class="n">first_row_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_proxy_tree_model</span><span class="o">.</span><span class="n">first_item_index</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">setCurrentIndex</span><span class="p">(</span><span class="n">first_row_index</span><span class="p">)</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">inspected_node_is_visible</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_tree_model</span><span class="o">.</span><span class="n">show_root</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">obj_tree</span><span class="o">.</span><span class="n">expand</span><span class="p">(</span><span class="n">first_row_index</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">_add_instance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -1868,9 +1868,9 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <span class="c1"># inspectedItem will be the invisible root_item. If the obj_name is given,</span>
         <span class="c1"># an invisible root item will be added and the inspectedItem will be its</span>
         <span class="c1"># only child. In that case the inspected item will be visible.</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span> <span class="o">=</span> <span class="n">obj_name</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_show_root</span> <span class="o">=</span> <span class="n">obj_name</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span>
 
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_root</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_root_item</span> <span class="o">=</span> <span class="n">ObjectBrowserTreeItem</span><span class="p">(</span>
                 <span class="n">obj</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">name</span><span class="o">=</span><span class="s2">&quot;&lt;invisible_root&gt;&quot;</span><span class="p">,</span>
@@ -1894,12 +1894,12 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
             <span class="bp">self</span><span class="o">.</span><span class="n">fetchMore</span><span class="p">(</span><span class="n">root_index</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">inspected_node_is_visible</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">show_root</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return True if the inspected node is visible.</span>
 
 <span class="sd">        In that case an invisible root node has been added.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_root</span>
 
     <span class="k">def</span> <span class="nf">_fetch_object_children</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span> <span class="n">treeitem</span><span class="p">:</span> <span class="n">treeitem</span><span class="o">.</span><span class="n">TreeItem</span>
@@ -1912,7 +1912,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <span class="n">path_strings</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">obj</span> <span class="o">=</span> <span class="n">treeitem</span><span class="o">.</span><span class="n">obj</span>
         <span class="n">obj_path</span> <span class="o">=</span> <span class="n">treeitem</span><span class="o">.</span><span class="n">obj_path</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">,</span> <span class="nb">set</span><span class="p">,</span> <span class="nb">frozenset</span><span class="p">)):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span> <span class="o">|</span> <span class="nb">set</span> <span class="o">|</span> <span class="nb">frozenset</span><span class="p">):</span>
             <span class="n">obj_children</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">j</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">obj</span><span class="p">))]</span>
             <span class="n">path_strings</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj_path</span><span class="si">}</span><span class="s2">[</span><span class="si">{</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">]&quot;</span> <span class="k">if</span> <span class="n">obj_path</span> <span class="k">else</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">obj_children</span>
@@ -1923,13 +1923,13 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
         <span class="c1">#         &quot;{0}.pop()&quot;.format(obj_path) if obj_path else item[0]</span>
         <span class="c1">#         for item in obj_children</span>
         <span class="c1">#     ]</span>
-        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)):</span>  <span class="c1"># dicts etc.</span>
+        <span class="k">elif</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="s2">&quot;items&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">callable</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">):</span>  <span class="c1"># dicts etc.</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">obj_children</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
             <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
                 <span class="c1"># Can happen if the items method expects an argument, for instance the</span>
                 <span class="c1"># types.DictType.items method expects a dictionary.</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No items expanded. Objects items() call failed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No items expanded. Objects items() call failed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">ex</span><span class="p">)</span>
                 <span class="n">obj_children</span> <span class="o">=</span> <span class="p">[]</span>
 
             <span class="c1"># Sort keys, except when the object is an OrderedDict.</span>
@@ -2026,7 +2026,7 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid tag: </span><span class="si">{</span><span class="n">tag</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">refresh_tree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_inspected_node_is_visible</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_show_root</span><span class="p">:</span>
             <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">createIndex</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">inspected_item</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">root_index</span><span class="p">()</span>
@@ -2051,8 +2051,8 @@ ObjectBrowserTreeModel            (<a class="autorefs autorefs-internal" title="
 
 
 
-<h4 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.inspected_node_is_visible" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">inspected_node_is_visible</span></code>
+<h4 id="prettyqt.objbrowser.objectbrowsertreemodel.ObjectBrowserTreeModel.show_root" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">show_root</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-property"><code>property</code></small>

@@ -3252,6 +3252,28 @@ AbstractItemModelMixin            (<span title="prettyqt.core.object.ObjectMixin
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return amount of rows.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">rowCount</span><span class="p">()</span>
 
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">ci</span><span class="p">(</span>
+        <span class="bp">cls</span><span class="p">,</span>
+        <span class="n">index_is_valid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">do_not_use_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">parent_is_invalid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">method</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span>
+                <span class="n">ref</span><span class="p">:</span> <span class="n">AbstractItemModelMixin</span><span class="p">,</span> <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+            <span class="p">):</span>
+                <span class="k">if</span> <span class="n">ref</span><span class="o">.</span><span class="n">check_index</span><span class="p">(</span>
+                    <span class="n">index</span><span class="p">,</span> <span class="n">index_is_valid</span><span class="p">,</span> <span class="n">do_not_use_parent</span><span class="p">,</span> <span class="n">parent_is_invalid</span>
+                <span class="p">):</span>
+                    <span class="k">return</span> <span class="n">method</span><span class="p">(</span><span class="n">ref</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Invalid index&quot;</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">wrapper</span>
+
+        <span class="k">return</span> <span class="n">inner</span>
+
     <span class="k">def</span> <span class="nf">check_index</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">index</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QModelIndex</span><span class="p">,</span>
@@ -3459,6 +3481,7 @@ emitted at end: layoutChanged</p>
     </div>
 
   </div>
+
 
 
 
@@ -5574,6 +5597,7 @@ FileDeviceMixin            (<span title="prettyqt.core.iodevice.IODeviceMixin">I
     </div>
 
   </div>
+
 
 
 
