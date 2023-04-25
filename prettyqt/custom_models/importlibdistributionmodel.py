@@ -6,6 +6,7 @@ import pkgutil
 
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtCore
+from prettyqt.utils import treeitem
 
 
 def load_dist_info(name: str) -> metadata.Distribution | None:
@@ -67,6 +68,71 @@ COL_LICENSE = custom_models.ColumnItem(
 COLUMNS = [COL_NAME, COL_VERSION, COL_SUMMARY, COL_HOMEPAGE, COL_AUTHOR, COL_LICENSE]
 
 
+class ImportlibTreeModel(custom_models.ColumnItemModel):
+    """Model that provides an interface to an objectree that is build of tree items."""
+
+    def __init__(
+        self,
+        obj: metadata.Distribution,
+        show_root: bool = False,
+        parent: QtCore.QObject | None = None,
+    ):
+        super().__init__(attr_cols=COLUMNS, parent=parent)
+        self._show_root = show_root
+
+        if self._show_root:
+            self._root_item = treeitem.TreeItem(obj=None)
+            self._root_item.children_fetched = True
+            self.inspected_item = treeitem.TreeItem(obj=obj)
+            self._root_item.append_child(self.inspected_item)
+        else:
+            # The root itself will be invisible
+            self._root_item = treeitem.TreeItem(obj=obj)
+            self.inspected_item = self._root_item
+
+            # Fetch all items of the root so we can select the first row in the ctor.
+            root_index = self.index(0, 0)
+            self.fetchMore(root_index)
+
+    @classmethod
+    def from_system(cls, parent: QtCore.QObject | None = None) -> ImportlibTreeModel:
+        distributions = list_system_modules()
+        return cls(distributions, parent)
+
+    @classmethod
+    def from_package(
+        cls, package_name: str, parent: QtCore.QObject | None = None
+    ) -> ImportlibTreeModel:
+        distributions = list_package_requirements(package_name)
+        return cls(distributions, parent)
+
+    def hasChildren(self, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
+        if parent.column() > 0:
+            return False
+        if self.show_root and self.tree_item(parent) == self._root_item:
+            return True
+        return bool(self.tree_item(parent).obj.requires)
+
+    @property
+    def show_root(self):
+        """Return True if the inspected node is visible.
+
+        In that case an invisible root node has been added.
+        """
+        return self._show_root
+
+    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+        """Fetch the children of a Python object.
+
+        Returns: list of treeitem.TreeItems
+        """
+        return [
+            treeitem.TreeItem(obj=dist, parent=item)
+            for dist in list_package_requirements(item.obj.metadata["Name"])
+        ]
+
+
 class ImportlibDistributionModel(core.AbstractTableModel):
     HEADER = ["Name", "Version", "Summary", "Homepage", "Author", "License"]
 
@@ -90,8 +156,6 @@ class ImportlibDistributionModel(core.AbstractTableModel):
                 return self.HEADER[offset]
 
     def data(self, index, role=constants.DISPLAY_ROLE):
-        if not index.isValid():
-            return None
         dist = self.distributions[index.row()]
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
@@ -124,13 +188,27 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         return cls(distributions, parent)
 
 
+# if __name__ == "__main__":
+#     from prettyqt import widgets
+
+#     app = widgets.app()
+#     modules = list_system_modules()
+#     tableview = widgets.TableView()
+#     model = ImportlibDistributionModel.from_package("prettyqt")
+#     tableview.set_model(model)
+#     tableview.show()
+#     app.main_loop()
+
+
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    modules = list_system_modules()
-    tableview = widgets.TableView()
-    model = ImportlibDistributionModel.from_package("prettyqt")
-    tableview.set_model(model)
-    tableview.show()
+    dist = metadata.distribution("prettyqt")
+    model = ImportlibTreeModel(dist, show_root=False)
+    table = widgets.TreeView()
+    table.setRootIsDecorated(True)
+    # table.setSortingEnabled(True)
+    table.set_model(model)
+    table.show()
     app.main_loop()
