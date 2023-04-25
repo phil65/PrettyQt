@@ -21,7 +21,8 @@ class NestedModel(  # type: ignore
         self.root = Root()
         self.items = self.root.children
 
-    def flags(self, index):
+    def flags(self, index=None):
+        index = index or core.ModelIndex()
         if not index.isValid():
             return constants.NO_FLAGS
         if index.column() in self.SET_DATA:
@@ -38,7 +39,8 @@ class NestedModel(  # type: ignore
             else len(self.items)
         )
 
-    def index(self, row, column, parent):
+    def index(self, row, column, parent=None):
+        parent = parent or core.ModelIndex()
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()
 
@@ -48,7 +50,8 @@ class NestedModel(  # type: ignore
 
         return self.createIndex(row, column, parent_item.children[row])
 
-    def parent(self, index):
+    def parent(self, index=None):
+        index = index or core.ModelIndex()
         if not index.isValid():
             return core.ModelIndex()
 
