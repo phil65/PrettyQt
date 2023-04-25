@@ -39,7 +39,10 @@ class RegexMatchesModel(core.AbstractTableModel):
 
     def rowCount(self, parent=None):
         """Override for AbstractitemModel base method."""
-        return len(self.matches)
+        parent = parent or core.ModelIndex()
+        if parent.column() > 0:
+            return 0
+        return len(self.matches) if not parent.isValid() else 0
 
 
 if __name__ == "__main__":
