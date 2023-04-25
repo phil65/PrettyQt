@@ -1,3 +1,10 @@
+## v1.22.2 (2023-04-25)
+
+### Fix
+
+- **NestedModel**: add default value for index kwargs
+- correctly behaving RegexMatchesModel
+
 ## v1.22.1 (2023-04-25)
 
 ### Fix
