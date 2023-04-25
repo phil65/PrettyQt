@@ -1,7 +1,7 @@
 from collections.abc import Callable, Iterable
 from typing import Any
 
-from prettyqt import constants
+from prettyqt import constants, core
 
 
 class ListMixin:
@@ -35,6 +35,9 @@ class ListMixin:
 
     def rowCount(self, parent=None):
         """Required override for AbstractitemModels."""
+        parent = parent or core.ModelIndex()
+        if parent.column() > 0 or parent.isValid():
+            return 0
         return len(self.items)
 
     def data_by_index(self, index):
