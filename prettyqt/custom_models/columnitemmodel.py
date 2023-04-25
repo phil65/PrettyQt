@@ -183,9 +183,6 @@ class ColumnItemModelMixin:
         super().__init__(parent)
         self._attr_cols = attr_cols or []
 
-    def columnCount(self, _parent=None):
-        return len(self._attr_cols)
-
     def data(self, index, role):
         """Return the tree item at the given index and role."""
         if not index.isValid():
@@ -296,6 +293,9 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
         parent = core.ModelIndex() if parent is None else parent
         return 0 if parent.column() > 0 else self.tree_item(parent).child_count()
 
+    def columnCount(self, parent=None):
+        return len(self._attr_cols)
+
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
         return 0 if parent.column() > 0 else self.tree_item(parent).has_children
@@ -344,7 +344,16 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         self.mime_type = mime_type
 
     def rowCount(self, parent=None):
+        parent = parent or core.ModelIndex()
+        if parent.isValid():
+            return 0
         return len(self.items)
+
+    def columnCount(self, parent=None):
+        parent = parent or core.ModelIndex()
+        if parent.isValid():
+            return 0
+        return len(self._attr_cols)
 
     def tree_item(self, index: core.ModelIndex):
         return self.items[index.row()]
