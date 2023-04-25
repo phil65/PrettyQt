@@ -1,10 +1,14 @@
 from __future__ import annotations
 
 import os
+from typing import TYPE_CHECKING
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 class FileSelector(core.ObjectMixin, QtCore.QFileSelector):

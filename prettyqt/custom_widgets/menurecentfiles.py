@@ -4,6 +4,7 @@ Application's QSettings are used to store the list of recent files.
 """
 from __future__ import annotations
 
+import contextlib
 import os
 import sys
 
@@ -114,10 +115,9 @@ class RecentFilesManager(core.Object):
         :param file: file path to add the list of recent files.
         """
         files = self.get_recent_files()
-        try:
+        with contextlib.suppress(ValueError):
             files.remove(file)
-        except ValueError:
-            pass
+
         files.insert(0, file)
         # discard old files
         del files[self.max_recent_files :]

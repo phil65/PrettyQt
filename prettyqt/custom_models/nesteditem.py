@@ -47,7 +47,7 @@ class NestedItem(Generic[T]):
     def row(self) -> int:
         """Return row number.
 
-        returns row position of item inside parent´s children
+        returns row position of item inside parent`s children
         returns 0 if no parent available
 
         Returns:

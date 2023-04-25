@@ -19,8 +19,8 @@ def dump_json(data: str):
     try:
         import orjson
 
-        OPTS = orjson.OPT_NAIVE_UTC | orjson.OPT_SERIALIZE_NUMPY
-        return orjson.dumps(data, option=OPTS)
+        opts = orjson.OPT_NAIVE_UTC | orjson.OPT_SERIALIZE_NUMPY
+        return orjson.dumps(data, option=opts)
     except ImportError:
         import json
 

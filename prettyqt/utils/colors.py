@@ -1,7 +1,12 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import gui
-from prettyqt.utils import datatypes
+
+
+if TYPE_CHECKING:
+    from prettyqt.utils import datatypes
 
 
 WINDOW_ICON_COLOR = "darkcyan"
@@ -59,13 +64,13 @@ def interpolate_text_colors(
     bg = get_color(bg)
     fg = get_color(fg)
     pal = []
-    M = 35
-    HUE_BASE = 90 if bg.hue() == -1 else bg.hue()
+    m = 35
+    hue_base = 90 if bg.hue() == -1 else bg.hue()
     for i in range(n_colors):
-        h = HUE_BASE + (360.0 / n_colors * i) % 360
+        h = hue_base + (360.0 / n_colors * i) % 360
         s = 240.0
         v = max(bg.value(), fg.value()) * 0.85
-        if (bg.hue() - M < h < bg.hue() + M) or (fg.hue() - M < h < fg.hue() + M):
+        if (bg.hue() - m < h < bg.hue() + m) or (fg.hue() - m < h < fg.hue() + m):
             h = ((bg.hue() + fg.hue()) / (i + 1)) % 360
             s = ((bg.saturation() + fg.saturation() + 2 * i) / 2) % 256
             v = ((bg.value() + fg.value() + 2 * i) / 2) % 256

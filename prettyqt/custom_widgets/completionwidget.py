@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import os
 
 from prettyqt import gui, widgets
@@ -72,10 +73,9 @@ class CompletionWidget(widgets.ListWidget):
     def hideEvent(self, event):
         """Disconnect signal handlers and event filter."""
         super().hideEvent(event)
-        try:
+        with contextlib.suppress(TypeError):
             self._text_edit.cursorPositionChanged.disconnect(self._update_current)
-        except TypeError:
-            pass
+
         self.removeEventFilter(self)
 
     def showEvent(self, event):

@@ -280,10 +280,9 @@ class SpanSlider(widgets.Slider):
             if self.lower_pos != self.lower_val:
                 main = self._main_control == "lower"
                 self.trigger_action("move", main)
-        elif self.last_pressed == "upper":
-            if self.upper_pos != self.upper_val:
-                main = self._main_control == "upper"
-                self.trigger_action("move", main)
+        elif self.last_pressed == "upper" and self.upper_pos != self.upper_val:
+            main = self._main_control == "upper"
+            self.trigger_action("move", main)
 
     def pick(self, p: datatypes.PointType) -> int:
         if isinstance(p, tuple):

@@ -91,7 +91,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         cls, n: int, color_1: datatypes.ColorType, color_2: datatypes.ColorType
     ):
         """Construct tileable checkerboard pattern for paint events."""
-        # Brush will be an n×n checkerboard pattern
+        # Brush will be an nxn checkerboard pattern
         pat = gui.Pixmap(2 * n, 2 * n)
         bg0 = colors.get_color(color_1)
         bg1 = colors.get_color(color_2)

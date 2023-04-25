@@ -119,7 +119,7 @@ class RegularExpression(QtCore.QRegularExpression):
             to_replace = repl if isinstance(repl, str) else repl(m)
             for j in range(self.groups):
                 to_replace = to_replace.replace(rf"\g<{j}>", m.group(j))
-            for k in self.groupindex.keys():
+            for k in self.groupindex:
                 to_replace = to_replace.replace(rf"\g<{k}>", m.group(k))
             result = result[: m.start()] + to_replace + result[m.end() :]
         return (result, min(len(matches), count))

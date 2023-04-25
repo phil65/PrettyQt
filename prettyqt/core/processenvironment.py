@@ -24,7 +24,7 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
         return self.insert(index, value)
 
     def __iter__(self) -> Iterator[tuple[str, str]]:
-        return iter((k, self.value(k)) for k in self.keys())
+        return iter((k, self.value(k)) for k in self)
 
     def update(self, other: Mapping[str, str]):
         for k, v in other.items():

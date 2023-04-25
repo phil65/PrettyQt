@@ -71,7 +71,7 @@ class CPAlphaShowLabel(widgets.Label):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         # Length in pixels of a side of the checkerboard squares
-        # (Pattern is made up of 2×2 squares, total size 2n × 2n)
+        # (Pattern is made up of 2x2 squares, total size 2n x 2n)
         self.checkerboard_size = 8
         # Start out transparent by default
         self.color = self.parent().currentColor()

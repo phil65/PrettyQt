@@ -54,7 +54,7 @@ class IconBrowser(widgets.MainWindow):
         self._combobox = widgets.ComboBox(parent=self)
         self._combobox.setMinimumWidth(75)
         self._combobox.currentIndexChanged.connect(self._trigger_instant_update)
-        self._combobox.addItems([ALL_COLLECTIONS] + sorted(font_maps.keys()))
+        self._combobox.addItems([ALL_COLLECTIONS, *sorted(font_maps.keys())])
 
         lyt = widgets.BoxLayout("horizontal")
         lyt.set_margin(0)

@@ -81,7 +81,7 @@ def test_dataset(qtbot):
         stringornumber = fo.StringOrNumber(label="Test")
         buttonitem = fo.Button(label="Button", callback=print)
         intlist = fo.IntList(label="Button", value=[1, 2, 3])
-        intlist = fo.FloatList(label="Button", value=[1.1, 2, 3])
+        floatlist = fo.FloatList(label="Button", value=[1.1, 2, 3])
         code = fo.Code(label="Test", value="class Test")
 
     settings = Test(icon="mdi.timer")

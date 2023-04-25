@@ -212,6 +212,7 @@ def app(args: list[str] | None = None) -> Application:
     if (instance := Application.instance()) is not None:
         return instance
     Application.disable_window_help_button()
+    #  + ["--ignore-gpu-blacklist", "--enable-gpu-rasterization"]
     return Application(sys.argv if args is None else args)
 
 

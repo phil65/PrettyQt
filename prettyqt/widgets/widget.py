@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator
 import contextlib
 import os
 import pathlib
 import sys
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from deprecated import deprecated
 import qstylizer.parser
@@ -21,6 +20,10 @@ from prettyqt.utils import (
     helpers,
     prettyprinter,
 )
+
+
+if TYPE_CHECKING:
+    from collections.abc import Callable, Iterator
 
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]

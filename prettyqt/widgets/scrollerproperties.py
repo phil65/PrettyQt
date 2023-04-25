@@ -119,7 +119,7 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
         return self.scrollMetric(SCROLL_METRIC[metric])
 
     def get_scroll_metrics(self) -> dict:
-        return {i: self.get_scroll_metric(i) for i in SCROLL_METRIC.keys()}
+        return {i: self.get_scroll_metric(i) for i in SCROLL_METRIC}
 
 
 if __name__ == "__main__":

@@ -21,12 +21,12 @@ class SyntaxHighlighterMixin(core.ObjectMixin):
 
     @classmethod
     def yield_rules(cls) -> Iterator[tuple[Pattern, int, gui.TextCharFormat]]:
-        for Rule in cls.RULES:
-            if isinstance(Rule.compiled, list):
-                for i in Rule.compiled:
-                    yield (i, Rule.nth, Rule.fmt)
+        for rule in cls.RULES:
+            if isinstance(rule.compiled, list):
+                for i in rule.compiled:
+                    yield (i, rule.nth, rule.fmt)
             else:
-                yield (Rule.compiled, Rule.nth, Rule.fmt)
+                yield (rule.compiled, rule.nth, rule.fmt)
 
     def highlightBlock(self, text: str):
         """Apply syntax highlighting to the given block of text."""

@@ -4,11 +4,8 @@ import functools
 import logging
 from typing import Literal
 
-from pygments.formatters.html import HtmlFormatter
-from pygments.lexer import Error, RegexLexer, Text, _TokenType
-from pygments.lexers import get_lexer_by_name, load_lexer_from_file
-from pygments.style import Style
-from pygments.styles import get_style_by_name
+from pygments import lexer, lexers, styles
+from pygments.formatters import html
 
 from prettyqt import gui, paths
 from prettyqt.qt import QtGui
@@ -77,7 +74,7 @@ def _get_brush(color: str) -> gui.Brush:
     return gui.Brush(qcolor)
 
 
-def _get_format_from_style(token: str, style: Style) -> gui.TextCharFormat:
+def _get_format_from_style(token: str, style: styles.Style) -> gui.TextCharFormat:
     """Return a QTextCharFormat for token by reading a Pygments style."""
     result = gui.TextCharFormat()
     try:
@@ -140,7 +137,7 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
             if not m:
                 continue
             if action is not None:
-                if isinstance(action, _TokenType):
+                if isinstance(action, lexer._TokenType):
                     yield pos, action, m.group()
                 else:
                     yield from action(self, m)
@@ -171,9 +168,9 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
                     # at EOL, reset state to "root"
                     statestack = ["root"]
                     statetokens = tokendefs["root"]
-                    yield pos + 1, Text, "\n"
+                    yield pos + 1, lexer.Text, "\n"
                 else:
-                    yield pos, Error, text[pos]
+                    yield pos, lexer.Error, text[pos]
                 pos += 1
             except IndexError:
                 break
@@ -181,7 +178,7 @@ def get_tokens_unprocessed(self, text: str, stack=("root",)):
 
 
 # Monkeypatch!
-RegexLexer.get_tokens_unprocessed = get_tokens_unprocessed
+lexer.RegexLexer.get_tokens_unprocessed = get_tokens_unprocessed
 
 
 class PygmentsHighlighter(gui.SyntaxHighlighter):
@@ -195,16 +192,16 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self,
         parent: QtGui.QTextDocument,
         lexer: str,
-        style: None | StyleStr | Style = None,
+        style: None | StyleStr | styles.Style = None,
     ):
         super().__init__(parent)
         self._document = self.document()
-        self._formatter = HtmlFormatter(nowrap=True)
+        self._formatter = html.HtmlFormatter(nowrap=True)
         self.set_style(style)
         if lexer == "regex":
-            self._lexer = load_lexer_from_file(str(paths.RE_LEXER_PATH))
+            self._lexer = lexers.load_lexer_from_file(str(paths.RE_LEXER_PATH))
         else:
-            self._lexer = get_lexer_by_name(lexer)
+            self._lexer = lexers.get_lexer_by_name(lexer)
 
     def __repr__(self):
         return get_repr(self, lexer=self._lexer.aliases[0])
@@ -234,11 +231,11 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     # "PygmentsHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def set_style(self, style: None | StyleStr | Style):
+    def set_style(self, style: None | StyleStr | styles.Style):
         if style is None:
-            style = get_style_by_name("default")
+            style = styles.get_style_by_name("default")
         elif isinstance(style, str):
-            style = get_style_by_name(style)
+            style = styles.get_style_by_name(style)
         self._style = style
         self._clear_caches()
 

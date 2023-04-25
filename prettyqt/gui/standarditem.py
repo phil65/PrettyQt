@@ -33,10 +33,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
                 raise KeyError(index)
 
     def __delitem__(self, index: int | tuple[int, int]):
-        if isinstance(index, int):
-            item = self.takeRow(index)
-        else:
-            item = self.takeChild(*index)
+        item = self.takeRow(index) if isinstance(index, int) else self.takeChild(*index)
         if item is None:
             raise KeyError(index)
         return item

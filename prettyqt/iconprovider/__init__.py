@@ -54,7 +54,7 @@ class IconFont:
             self.charmap = json.load(codes, object_hook=hook)
 
     def __dir__(self):
-        icons = [i.replace("-", "_") for i in self.charmap.keys()]
+        icons = [i.replace("-", "_") for i in self.charmap]
         return list(super().__dir__()) + icons
 
     def __getattr__(self, name: str):
@@ -82,14 +82,14 @@ def _instance() -> IconicFont:
     """
     if _resource["iconic"] is not None and _resource["iconic"].has_valid_font_ids():
         return _resource["iconic"]
-    FontAwesome5 = IconFont(
+    font_awesome_5 = IconFont(
         prefix="fa5",
         font_path="fontawesome5-regular-webfont.ttf",
         charmap_path="fontawesome5-regular-webfont-charmap.json",
         md5="808833867034fb67a4a86dd2155e195d",
     )
 
-    FontAwesome5Solid = IconFont(
+    font_awesome_5_solid = IconFont(
         prefix="fa5s",
         font_path="fontawesome5-solid-webfont.ttf",
         charmap_path="fontawesome5-solid-webfont-charmap.json",
@@ -97,64 +97,64 @@ def _instance() -> IconicFont:
         stylename="Solid",
     )
 
-    FontAwesome5Brands = IconFont(
+    font_awesome_5_brands = IconFont(
         prefix="fa5b",
         font_path="fontawesome5-brands-webfont.ttf",
         charmap_path="fontawesome5-brands-webfont-charmap.json",
         md5="085b1dd8427dbeff10bd55410915a3f6",
     )
 
-    ElusiveIcons = IconFont(
+    elusive_icons = IconFont(
         prefix="ei",
         font_path="elusiveicons-webfont.ttf",
         charmap_path="elusiveicons-webfont-charmap.json",
         md5="207966b04c032d5b873fd595a211582e",
     )
 
-    MaterialDesign5Icons = IconFont(
+    material_design_5_icons = IconFont(
         prefix="mdi",
         font_path="materialdesignicons5-webfont.ttf",
         charmap_path="materialdesignicons5-webfont-charmap.json",
         md5="b7d40e7ef80c1d4af6d94902af66e524",
     )
 
-    MaterialDesign6Icons = IconFont(
+    material_design_6_icons = IconFont(
         prefix="mdi6",
         font_path="materialdesignicons6-webfont.ttf",
         charmap_path="materialdesignicons6-webfont-charmap.json",
         md5="9a2f455e7cbce011368aee95d292613b",
     )
 
-    PhosphorIcons = IconFont(
+    phosphor_icons = IconFont(
         prefix="ph",
         font_path="phosphor.ttf",
         charmap_path="phosphor-charmap.json",
         md5="5b8dc57388b2d86243566b996cc3a789",
     )
 
-    RemixIcons = IconFont(
+    remix_icons = IconFont(
         prefix="ri",
         font_path="remixicon.ttf",
         charmap_path="remixicon-charmap.json",
         md5="888e61f04316f10bddfff7bee10c6dd0",
     )
 
-    CodiconIcons = IconFont(
+    codicon_icons = IconFont(
         prefix="msc",
         font_path="codicon.ttf",
         charmap_path="codicon-charmap.json",
         md5="ca2f9e22cee3a59156b3eded74d87784",
     )
     iconic = IconicFont(
-        FontAwesome5,
-        FontAwesome5Brands,
-        FontAwesome5Solid,
-        ElusiveIcons,
-        MaterialDesign5Icons,
-        MaterialDesign6Icons,
-        PhosphorIcons,
-        RemixIcons,
-        CodiconIcons,
+        font_awesome_5,
+        font_awesome_5_brands,
+        font_awesome_5_solid,
+        elusive_icons,
+        material_design_5_icons,
+        material_design_6_icons,
+        phosphor_icons,
+        remix_icons,
+        codicon_icons,
     )
     _resource["iconic"] = iconic
     return iconic

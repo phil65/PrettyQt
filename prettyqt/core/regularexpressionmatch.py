@@ -1,13 +1,10 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any
+from typing import Any
 
+from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
-
-
-if TYPE_CHECKING:
-    from prettyqt import core
 
 
 class RegularExpressionMatch(QtCore.QRegularExpressionMatch):

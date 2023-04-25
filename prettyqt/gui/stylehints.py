@@ -23,7 +23,7 @@ class StyleHintsMixin(core.ObjectMixin):
 
 
 class StyleHintsType(type):
-    def __getattr__(self, key):
+    def __getattr__(cls, key):
         return getattr(QtGui.QStyleHints, key)
 
 

@@ -92,7 +92,7 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
         self.setColor(GROUP[group], ROLE[role], color)
 
     def get_colors(self, group: GroupStr = "active") -> dict[str, gui.Color]:
-        return {k: self.get_color(k, group) for k in ROLE.keys()}
+        return {k: self.get_color(k, group) for k in ROLE}
 
     def get_color(self, role: RoleStr, group: GroupStr = "active") -> gui.Color:
         return gui.Color(self.color(GROUP[group], ROLE[role]))
@@ -108,12 +108,12 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
         self.setBrush(GROUP[group], ROLE[role], brush)
 
     def get_brushes(self, group: GroupStr = "active") -> dict[str, gui.Brush]:
-        return {k: self.get_brush(k, group) for k in ROLE.keys()}
+        return {k: self.get_brush(k, group) for k in ROLE}
 
     def get_brush(self, role: RoleStr, group: GroupStr = "active") -> gui.Brush:
         return gui.Brush(self.brush(GROUP[group], ROLE[role]))
 
-    def set_color_group(self, group: GroupStr, **kwargs):
+    def set_color_group(self, group: GroupStr, **kwargs: QtGui.QBrush):
         """Set the color group.
 
         Args:

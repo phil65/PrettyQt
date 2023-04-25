@@ -183,8 +183,6 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
             index (int): index location of the tab to be detached
             point (QtCore.QPoint): screen pos for creating the new DetachedTab window
 
-        Returns:
-            None: Description
         """
         # Get the tab content
         if isinstance(point, tuple):

@@ -9,6 +9,9 @@ from prettyqt.qt import QtWebEngineWidgets
 from prettyqt.utils import datatypes
 
 
+# os.environ["QTWEBENGINE_CHROMIUM_FLAGS"] = "--enable-logging --log-level=3"
+
+
 class WebEngineView(widgets.WidgetMixin, QtWebEngineWidgets.QWebEngineView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

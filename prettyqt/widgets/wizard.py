@@ -1,11 +1,14 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-from typing import Literal
+from typing import TYPE_CHECKING, Literal
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
+
+
+if TYPE_CHECKING:
+    from collections.abc import Iterator
 
 
 mod = QtWidgets.QWizard

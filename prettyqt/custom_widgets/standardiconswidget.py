@@ -12,7 +12,7 @@ class StandardIconsWidget(widgets.Widget):
         layout = widgets.BoxLayout("horizontal")
         row_nb = 14
         cindex = 0
-        for k in widgets.style.STANDARD_PIXMAP.keys():
+        for k in widgets.style.STANDARD_PIXMAP:
             if cindex == 0:
                 col_layout = widgets.BoxLayout("vertical")
             icon_layout = widgets.BoxLayout("horizontal")
