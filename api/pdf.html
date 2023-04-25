@@ -461,15 +461,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.pdf.pdfdocument" class="md-nav__link">
-    pdfdocument
-  </a>
-  
-    <nav class="md-nav" aria-label="pdfdocument">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.pdf.pdfdocument.PdfDocument" class="md-nav__link">
+  <a href="#prettyqt.pdf.PdfDocument" class="md-nav__link">
     PdfDocument
   </a>
   
@@ -487,11 +479,6 @@
   <a href="#prettyqt.pdf.pdfdocument.PdfDocument.get_status" class="md-nav__link">
     get_status()
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -704,15 +691,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.pdf.pdfdocument" class="md-nav__link">
-    pdfdocument
-  </a>
-  
-    <nav class="md-nav" aria-label="pdfdocument">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.pdf.pdfdocument.PdfDocument" class="md-nav__link">
+  <a href="#prettyqt.pdf.PdfDocument" class="md-nav__link">
     PdfDocument
   </a>
   
@@ -730,11 +709,6 @@
   <a href="#prettyqt.pdf.pdfdocument.PdfDocument.get_status" class="md-nav__link">
     get_status()
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -761,14 +735,15 @@
 <h1 id="pdf-module">pdf module</h1>
 
 
-  <div class="doc doc-object doc-module">
+<div class="doc doc-object doc-module">
+
 
 <a id="prettyqt.pdf"></a>
-    <div class="doc doc-contents first">
-
+  <div class="doc doc-contents first">
+  
       <p>Pdf module.</p>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -779,56 +754,41 @@
 
 
 
+<div class="doc doc-object doc-class">
 
 
 
-  <div class="doc doc-object doc-module">
-
-
-
-<h2 id="prettyqt.pdf.pdfdocument" class="doc doc-heading">
-        <code>pdfdocument</code>
-
+<h2 id="prettyqt.pdf.PdfDocument" class="doc doc-heading">
+        <code>PdfDocument</code>
 
 
 </h2>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="prettyqt.core" href="core.html#prettyqt.core">core</a>.<span title="prettyqt.core.ObjectMixin">ObjectMixin</span></code>, <code><span title="prettyqt.qt.QtPdf">QtPdf</span>.<span title="prettyqt.qt.QtPdf.QPdfDocument">QPdfDocument</span></code></p>
 
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="prettyqt.pdf.pdfdocument.PdfDocument" class="doc doc-heading">
-        <code>
-PdfDocument            (<span title="prettyqt.core.object.ObjectMixin">ObjectMixin</span>, <span title="PySide6.QtPdf.QPdfDocument">QPdfDocument</span>)
-        </code>
-
-
-
-</h3>
-
-    <div class="doc doc-contents ">
 
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\pdf\pdfdocument.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PdfDocument</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtPdf</span><span class="o">.</span><span class="n">QPdfDocument</span><span class="p">):</span>
+          <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PdfDocument</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">,</span> <span class="n">QtPdf</span><span class="o">.</span><span class="n">QPdfDocument</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Return current error.</span>
 
@@ -844,10 +804,10 @@ PdfDocument            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 <span class="sd">            zoom mode</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
-</code></pre></div>
+</code></pre></div></td></tr></table></div>
         </details>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -859,126 +819,128 @@ PdfDocument            (<span title="prettyqt.core.object.ObjectMixin">ObjectMix
 
 
 
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
-<h4 id="prettyqt.pdf.pdfdocument.PdfDocument.get_error" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span></code>
+<h3 id="prettyqt.pdf.pdfdocument.PdfDocument.get_error" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_error</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span></code>
+
+</h3>
 
 
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Return current error.</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>ErrorStr</code></td>
-      <td><p>page mode</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\pdf\pdfdocument.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.pdf.pdfdocument.ErrorStr">ErrorStr</span></code>
+          </td>
+          <td><p>page mode</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\pdf\pdfdocument.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_error</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ErrorStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current error.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        page mode</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">ERROR</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">error</span><span class="p">()]</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
-  <div class="doc doc-object doc-method">
+
+<h3 id="prettyqt.pdf.pdfdocument.PdfDocument.get_status" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_status</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span></code>
+
+</h3>
 
 
-
-<h4 id="prettyqt.pdf.pdfdocument.PdfDocument.get_status" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Return current status.</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>StatusStr</code></td>
-      <td><p>zoom mode</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\pdf\pdfdocument.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.pdf.pdfdocument.StatusStr">StatusStr</span></code>
+          </td>
+          <td><p>zoom mode</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\pdf\pdfdocument.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">StatusStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current status.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        zoom mode</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">STATUS</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="p">()]</span>
-</code></pre></div>
-        </details>
-    </div>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
 
   </div>
 
-
-
-
-
   </div>
 
-    </div>
-
-  </div>
-
-
-
+</div>
 
 
 
 
   </div>
 
-    </div>
-
   </div>
 
-
-
-
-  </div>
-
-    </div>
-
-  </div>
+</div>
 
 
 

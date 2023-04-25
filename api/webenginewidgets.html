@@ -587,15 +587,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.webenginewidgets.webengineview" class="md-nav__link">
-    webengineview
-  </a>
-  
-    <nav class="md-nav" aria-label="webengineview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.webenginewidgets.webengineview.WebEngineView" class="md-nav__link">
+  <a href="#prettyqt.webenginewidgets.WebEngineView" class="md-nav__link">
     WebEngineView
   </a>
   
@@ -627,11 +619,6 @@
   <a href="#prettyqt.webenginewidgets.webengineview.WebEngineView.set_zoom" class="md-nav__link">
     set_zoom()
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -718,15 +705,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.webenginewidgets.webengineview" class="md-nav__link">
-    webengineview
-  </a>
-  
-    <nav class="md-nav" aria-label="webengineview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.webenginewidgets.webengineview.WebEngineView" class="md-nav__link">
+  <a href="#prettyqt.webenginewidgets.WebEngineView" class="md-nav__link">
     WebEngineView
   </a>
   
@@ -765,11 +744,6 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
     </ul>
   
@@ -789,15 +763,16 @@
 <h1 id="webenginewidgets-module">webenginewidgets module</h1>
 
 
-  <div class="doc doc-object doc-module">
+<div class="doc doc-object doc-module">
+
 
 <a id="prettyqt.webenginewidgets"></a>
-    <div class="doc doc-contents first">
-
+  <div class="doc doc-contents first">
+  
       <p>Webenginewidgets module.</p>
 <p>contains QtWebEngineWidgets-based classes</p>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -808,53 +783,151 @@
 
 
 
+<div class="doc doc-object doc-class">
 
 
 
-
-  <div class="doc doc-object doc-module">
-
-
-
-<h2 id="prettyqt.webenginewidgets.webengineview" class="doc doc-heading">
-        <code>webengineview</code>
-
+<h2 id="prettyqt.webenginewidgets.WebEngineView" class="doc doc-heading">
+        <code>WebEngineView</code>
 
 
 </h2>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="prettyqt.widgets" href="widgets.html#prettyqt.widgets">widgets</a>.<a class="autorefs autorefs-internal" title="prettyqt.widgets.WidgetMixin" href="widgets.html#prettyqt.widgets.WidgetMixin">WidgetMixin</a></code>, <code><span title="prettyqt.qt.QtWebEngineWidgets">QtWebEngineWidgets</span>.<span title="prettyqt.qt.QtWebEngineWidgets.QWebEngineView">QWebEngineView</span></code></p>
 
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="prettyqt.webenginewidgets.webengineview.WebEngineView" class="doc doc-heading">
-        <code>
-WebEngineView            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.widget.WidgetMixin" href="widgets.html#prettyqt.widgets.widget.WidgetMixin">WidgetMixin</a>, <span title="PySide6.QtWebEngineWidgets.QWebEngineView">QWebEngineView</span>)
-        </code>
-
-
-
-</h3>
-
-    <div class="doc doc-contents ">
 
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">WidgetMixin</span><span class="p">,</span> <span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEngineView</span><span class="p">):</span>
+          <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 15</span>
+<span class="normal"> 16</span>
+<span class="normal"> 17</span>
+<span class="normal"> 18</span>
+<span class="normal"> 19</span>
+<span class="normal"> 20</span>
+<span class="normal"> 21</span>
+<span class="normal"> 22</span>
+<span class="normal"> 23</span>
+<span class="normal"> 24</span>
+<span class="normal"> 25</span>
+<span class="normal"> 26</span>
+<span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">WebEngineView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">WidgetMixin</span><span class="p">,</span> <span class="n">QtWebEngineWidgets</span><span class="o">.</span><span class="n">QWebEngineView</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setPage</span><span class="p">(</span><span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEnginePage</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
@@ -980,10 +1053,10 @@ WebEngineView            (<a class="autorefs autorefs-internal" title="prettyqt.
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineContextMenuRequest</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">req</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">lastContextMenuRequest</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEngineContextMenuRequest</span><span class="p">(</span><span class="n">req</span><span class="p">)</span> <span class="k">if</span> <span class="n">req</span> <span class="k">else</span> <span class="kc">None</span>
-</code></pre></div>
+</code></pre></div></td></tr></table></div>
         </details>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -995,19 +1068,18 @@ WebEngineView            (<a class="autorefs autorefs-internal" title="prettyqt.
 
 
 
-
-  <div class="doc doc-object doc-method">
-
+<div class="doc doc-object doc-function">
 
 
-<h4 id="prettyqt.webenginewidgets.webengineview.WebEngineView.find_text" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">find_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+<h3 id="prettyqt.webenginewidgets.webengineview.WebEngineView.find_text" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">find_text</span><span class="p">(</span><span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">case_sensitive</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">callback</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">bool</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+
+</h3>
 
 
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Find text in the current page.</p>
 <p>Finds the specified string, subString, in the page, using the given options.
 The findTextFinished() signal is emitted when a string search is completed.</p>
@@ -1020,46 +1092,103 @@ but it might be done during page destruction. When WebEnginePage is deleted,
 the callback is triggered with an invalid value and it is not safe to use
 the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>string</code></td>
-        <td><code>str</code></td>
-        <td><p>string to search for</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
-      <tr>
-        <td><code>backward</code></td>
-        <td><code>bool</code></td>
-        <td><p>search backwards</p></td>
-        <td><code>False</code></td>
-      </tr>
-      <tr>
-        <td><code>case_sensitive</code></td>
-        <td><code>bool</code></td>
-        <td><p>case-sensitive search</p></td>
-        <td><code>False</code></td>
-      </tr>
-      <tr>
-        <td><code>callback</code></td>
-        <td><code>Callable[[bool], None] | None</code></td>
-        <td><p>result callback</p></td>
-        <td><code>None</code></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">find_text</span><span class="p">(</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>string</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>string to search for</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>backward</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>search backwards</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>case_sensitive</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>case-sensitive search</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>callback</code></td>
+          <td>
+                <code><span title="collections.abc.Callable">Callable</span>[[bool], None] | None</code>
+          </td>
+          <td><p>result callback</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">find_text</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">string</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">backward</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1100,57 +1229,71 @@ the corresponding QWebEnginePage or QWebEngineView instance inside it.</p>
     <span class="k">if</span> <span class="n">backward</span><span class="p">:</span>
         <span class="n">flag</span> <span class="o">|=</span> <span class="n">webenginecore</span><span class="o">.</span><span class="n">WebEnginePage</span><span class="o">.</span><span class="n">FindFlag</span><span class="o">.</span><span class="n">FindBackward</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">findText</span><span class="p">(</span><span class="n">string</span><span class="p">,</span> <span class="n">flag</span><span class="p">,</span> <span class="n">callback</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
 
+<h3 id="prettyqt.webenginewidgets.webengineview.WebEngineView.load_url" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
+
+</h3>
 
 
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.webenginewidgets.webengineview.WebEngineView.load_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Load the URL.</p>
 <p>Loads the specified url and displays it.</p>
 <p>Note: The view remains the same until enough data has arrived
 to display the new URL.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>url</code></td>
-        <td><code>datatypes.UrlType | datatypes.PathType</code></td>
-        <td><p>URL to load</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>url</code></td>
+          <td>
+                <code><span title="prettyqt.utils.datatypes">datatypes</span>.<span title="prettyqt.utils.datatypes.UrlType">UrlType</span> | <span title="prettyqt.utils.datatypes">datatypes</span>.<span title="prettyqt.utils.datatypes.PathType">PathType</span></code>
+          </td>
+          <td><p>URL to load</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">load_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Load the URL.</span>
 
 <span class="sd">    Loads the specified url and displays it.</span>
@@ -1166,53 +1309,66 @@ to display the new URL.</p>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
 
+<h3 id="prettyqt.webenginewidgets.webengineview.WebEngineView.set_url" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
 
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.webenginewidgets.webengineview.WebEngineView.set_url" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">)</span></code>
+</h3>
 
 
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Set the url of the WebEngineView.</p>
 <p>Clears the view and loads the URL.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>url</code></td>
-        <td><code>datatypes.UrlType | datatypes.PathType</code></td>
-        <td><p>URL to set</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>url</code></td>
+          <td>
+                <code><span title="prettyqt.utils.datatypes">datatypes</span>.<span title="prettyqt.utils.datatypes.UrlType">UrlType</span> | <span title="prettyqt.utils.datatypes">datatypes</span>.<span title="prettyqt.utils.datatypes.PathType">PathType</span></code>
+          </td>
+          <td><p>URL to set</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_url</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">url</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">UrlType</span> <span class="o">|</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the url of the WebEngineView.</span>
 
 <span class="sd">    Clears the view and loads the URL.</span>
@@ -1225,51 +1381,62 @@ to display the new URL.</p>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">url</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Url</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setUrl</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
-  <div class="doc doc-object doc-method">
+
+<h3 id="prettyqt.webenginewidgets.webengineview.WebEngineView.set_zoom" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_zoom</span><span class="p">(</span><span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span></code>
+
+</h3>
 
 
-
-<h4 id="prettyqt.webenginewidgets.webengineview.WebEngineView.set_zoom" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Set the zoom factor for the view.</p>
 <p>Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>zoom</code></td>
-        <td><code>float</code></td>
-        <td><p>Zoom factor</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>zoom</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>Zoom factor</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\webenginewidgets\webengineview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">zoom</span><span class="p">:</span> <span class="nb">float</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the zoom factor for the view.</span>
 
 <span class="sd">    Valid values are within the range from 0.25 to 5.0. The default factor is 1.0.</span>
@@ -1278,42 +1445,28 @@ to display the new URL.</p>
 <span class="sd">        zoom: Zoom factor</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setZoomFactor</span><span class="p">(</span><span class="n">zoom</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
 
   </div>
 
-
-
-
-
   </div>
 
-    </div>
-
-  </div>
-
-
-
+</div>
 
 
 
 
   </div>
 
-    </div>
-
   </div>
 
-
-
-
-  </div>
-
-    </div>
-
-  </div>
+</div>
 
 
 

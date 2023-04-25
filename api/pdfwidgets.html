@@ -475,15 +475,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.pdfwidgets.pdfview" class="md-nav__link">
-    pdfview
-  </a>
-  
-    <nav class="md-nav" aria-label="pdfview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.pdfwidgets.pdfview.PdfView" class="md-nav__link">
+  <a href="#prettyqt.pdfwidgets.PdfView" class="md-nav__link">
     PdfView
   </a>
   
@@ -515,11 +507,6 @@
   <a href="#prettyqt.pdfwidgets.pdfview.PdfView.set_zoom_mode" class="md-nav__link">
     set_zoom_mode()
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -718,15 +705,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.pdfwidgets.pdfview" class="md-nav__link">
-    pdfview
-  </a>
-  
-    <nav class="md-nav" aria-label="pdfview">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.pdfwidgets.pdfview.PdfView" class="md-nav__link">
+  <a href="#prettyqt.pdfwidgets.PdfView" class="md-nav__link">
     PdfView
   </a>
   
@@ -765,11 +744,6 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
     </ul>
   
@@ -789,14 +763,15 @@
 <h1 id="pdfwidgets-module">pdfwidgets module</h1>
 
 
-  <div class="doc doc-object doc-module">
+<div class="doc doc-object doc-module">
+
 
 <a id="prettyqt.pdfwidgets"></a>
-    <div class="doc doc-contents first">
-
+  <div class="doc doc-contents first">
+  
       <p>Pdfwidgets module.</p>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -807,56 +782,79 @@
 
 
 
+<div class="doc doc-object doc-class">
 
 
 
-  <div class="doc doc-object doc-module">
-
-
-
-<h2 id="prettyqt.pdfwidgets.pdfview" class="doc doc-heading">
-        <code>pdfview</code>
-
+<h2 id="prettyqt.pdfwidgets.PdfView" class="doc doc-heading">
+        <code>PdfView</code>
 
 
 </h2>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="prettyqt.widgets" href="widgets.html#prettyqt.widgets">widgets</a>.<a class="autorefs autorefs-internal" title="prettyqt.widgets.AbstractScrollAreaMixin" href="widgets.html#prettyqt.widgets.AbstractScrollAreaMixin">AbstractScrollAreaMixin</a></code>, <code><span title="prettyqt.qt.QtPdfWidgets">QtPdfWidgets</span>.<span title="prettyqt.qt.QtPdfWidgets.QPdfView">QPdfView</span></code></p>
 
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="prettyqt.pdfwidgets.pdfview.PdfView" class="doc doc-heading">
-        <code>
-PdfView            (<a class="autorefs autorefs-internal" title="prettyqt.widgets.abstractscrollarea.AbstractScrollAreaMixin" href="widgets.html#prettyqt.widgets.abstractscrollarea.AbstractScrollAreaMixin">AbstractScrollAreaMixin</a>, <span title="PySide6.QtPdfWidgets.QPdfView">QPdfView</span>)
-        </code>
-
-
-
-</h3>
-
-    <div class="doc doc-contents ">
 
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">PdfView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">AbstractScrollAreaMixin</span><span class="p">,</span> <span class="n">QtPdfWidgets</span><span class="o">.</span><span class="n">QPdfView</span><span class="p">):</span>
+          <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">PdfView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">AbstractScrollAreaMixin</span><span class="p">,</span> <span class="n">QtPdfWidgets</span><span class="o">.</span><span class="n">QPdfView</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setDocument</span><span class="p">(</span><span class="n">pdf</span><span class="o">.</span><span class="n">PdfDocument</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
@@ -910,10 +908,10 @@ PdfView            (<a class="autorefs autorefs-internal" title="prettyqt.widget
 <span class="sd">            zoom mode</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="n">ZOOM_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">zoomMode</span><span class="p">()]</span>
-</code></pre></div>
+</code></pre></div></td></tr></table></div>
         </details>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -925,152 +923,182 @@ PdfView            (<a class="autorefs autorefs-internal" title="prettyqt.widget
 
 
 
-
-
-  <div class="doc doc-object doc-method">
+<div class="doc doc-object doc-function">
 
 
 
-<h4 id="prettyqt.pdfwidgets.pdfview.PdfView.get_page_mode" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_page_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PageModeStr</span></code>
+<h3 id="prettyqt.pdfwidgets.pdfview.PdfView.get_page_mode" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_page_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">PageModeStr</span></code>
+
+</h3>
 
 
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Return current page mode.</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>PageModeStr</code></td>
-      <td><p>page mode</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_page_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PageModeStr</span><span class="p">:</span>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.pdfwidgets.pdfview.PageModeStr">PageModeStr</span></code>
+          </td>
+          <td><p>page mode</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_page_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PageModeStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current page mode.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        page mode</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">PAGE_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">pageMode</span><span class="p">()]</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
-  <div class="doc doc-object doc-method">
+
+<h3 id="prettyqt.pdfwidgets.pdfview.PdfView.get_zoom_mode" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_zoom_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ZoomModeStr</span></code>
+
+</h3>
 
 
-
-<h4 id="prettyqt.pdfwidgets.pdfview.PdfView.get_zoom_mode" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_zoom_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZoomModeStr</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Return current zoom mode.</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>ZoomModeStr</code></td>
-      <td><p>zoom mode</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_zoom_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZoomModeStr</span><span class="p">:</span>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.pdfwidgets.pdfview.ZoomModeStr">ZoomModeStr</span></code>
+          </td>
+          <td><p>zoom mode</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_zoom_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ZoomModeStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return current zoom mode.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        zoom mode</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">ZOOM_MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">zoomMode</span><span class="p">()]</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
 
-  <div class="doc doc-object doc-method">
+<h3 id="prettyqt.pdfwidgets.pdfview.PdfView.set_page_mode" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_page_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">PageModeStr</span><span class="p">)</span></code>
+
+</h3>
 
 
-
-<h4 id="prettyqt.pdfwidgets.pdfview.PdfView.set_page_mode" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_page_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PageModeStr</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Set the page mode.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>mode</code></td>
-        <td><code>PageModeStr</code></td>
-        <td><p>page mode</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
-  </tbody>
-</table>
-<p><strong>Exceptions:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mode</code></td>
+          <td>
+                <code><span title="prettyqt.pdfwidgets.pdfview.PageModeStr">PageModeStr</span></code>
+          </td>
+          <td><p>page mode</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Raises:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>InvalidParamError</code></td>
-        <td><p>page mode does not exist</p></td>
+        <th>Type</th>
+        <th>Description</th>
       </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_page_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PageModeStr</span><span class="p">):</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.utils.InvalidParamError">InvalidParamError</span></code>
+          </td>
+          <td><p>page mode does not exist</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_page_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">PageModeStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the page mode.</span>
 
 <span class="sd">    Args:</span>
@@ -1082,65 +1110,82 @@ PdfView            (<a class="autorefs autorefs-internal" title="prettyqt.widget
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">PAGE_MODE</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">PAGE_MODE</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setPageMode</span><span class="p">(</span><span class="n">PAGE_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
-  <div class="doc doc-object doc-method">
+
+<h3 id="prettyqt.pdfwidgets.pdfview.PdfView.set_zoom_mode" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_zoom_mode</span><span class="p">(</span><span class="n">mode</span><span class="p">:</span> <span class="n">ZoomModeStr</span><span class="p">)</span></code>
+
+</h3>
 
 
-
-<h4 id="prettyqt.pdfwidgets.pdfview.PdfView.set_zoom_mode" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_zoom_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ZoomModeStr</span><span class="p">)</span></code>
-
-
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Set the zoom mode.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>mode</code></td>
-        <td><code>ZoomModeStr</code></td>
-        <td><p>zoom mode</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
-  </tbody>
-</table>
-<p><strong>Exceptions:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mode</code></td>
+          <td>
+                <code><span title="prettyqt.pdfwidgets.pdfview.ZoomModeStr">ZoomModeStr</span></code>
+          </td>
+          <td><p>zoom mode</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Raises:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>InvalidParamError</code></td>
-        <td><p>zoom mode does not exist</p></td>
+        <th>Type</th>
+        <th>Description</th>
       </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ZoomModeStr</span><span class="p">):</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.utils.InvalidParamError">InvalidParamError</span></code>
+          </td>
+          <td><p>zoom mode does not exist</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_zoom_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ZoomModeStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the zoom mode.</span>
 
 <span class="sd">    Args:</span>
@@ -1152,42 +1197,28 @@ PdfView            (<a class="autorefs autorefs-internal" title="prettyqt.widget
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ZOOM_MODE</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">ZOOM_MODE</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setZoomMode</span><span class="p">(</span><span class="n">ZOOM_MODE</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
-</code></pre></div>
-        </details>
-    </div>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
 
   </div>
 
-
-
-
-
   </div>
 
-    </div>
-
-  </div>
-
-
-
+</div>
 
 
 
 
   </div>
 
-    </div>
-
   </div>
 
-
-
-
-  </div>
-
-    </div>
-
-  </div>
+</div>
 
 
 

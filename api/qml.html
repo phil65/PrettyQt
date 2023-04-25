@@ -503,15 +503,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.qml.jsvalue" class="md-nav__link">
-    jsvalue
-  </a>
-  
-    <nav class="md-nav" aria-label="jsvalue">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.qml.jsvalue.JSValue" class="md-nav__link">
+  <a href="#prettyqt.qml.JSValue" class="md-nav__link">
     JSValue
   </a>
   
@@ -529,22 +521,9 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine" class="md-nav__link">
-    qmlengine
-  </a>
-  
-    <nav class="md-nav" aria-label="qmlengine">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin" class="md-nav__link">
+  <a href="#prettyqt.qml.QmlEngineMixin" class="md-nav__link">
     QmlEngineMixin
   </a>
   
@@ -562,11 +541,6 @@
   <a href="#prettyqt.qml.qmlengine.QmlEngineMixin.set_object_ownership" class="md-nav__link">
     set_object_ownership()
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -737,15 +711,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.qml.jsvalue" class="md-nav__link">
-    jsvalue
-  </a>
-  
-    <nav class="md-nav" aria-label="jsvalue">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.qml.jsvalue.JSValue" class="md-nav__link">
+  <a href="#prettyqt.qml.JSValue" class="md-nav__link">
     JSValue
   </a>
   
@@ -763,22 +729,9 @@
     </nav>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
       
         <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine" class="md-nav__link">
-    qmlengine
-  </a>
-  
-    <nav class="md-nav" aria-label="qmlengine">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prettyqt.qml.qmlengine.QmlEngineMixin" class="md-nav__link">
+  <a href="#prettyqt.qml.QmlEngineMixin" class="md-nav__link">
     QmlEngineMixin
   </a>
   
@@ -796,11 +749,6 @@
   <a href="#prettyqt.qml.qmlengine.QmlEngineMixin.set_object_ownership" class="md-nav__link">
     set_object_ownership()
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -827,15 +775,16 @@
 <h1 id="qml-module">qml module</h1>
 
 
-  <div class="doc doc-object doc-module">
+<div class="doc doc-object doc-module">
+
 
 <a id="prettyqt.qml"></a>
-    <div class="doc doc-contents first">
-
+  <div class="doc doc-contents first">
+  
       <p>Qml module.</p>
 <p>Contains QtQml-based classes</p>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -846,56 +795,82 @@
 
 
 
+<div class="doc doc-object doc-class">
 
 
 
-
-  <div class="doc doc-object doc-module">
-
-
-
-<h2 id="prettyqt.qml.jsvalue" class="doc doc-heading">
-        <code>jsvalue</code>
-
+<h2 id="prettyqt.qml.JSValue" class="doc doc-heading">
+        <code>JSValue</code>
 
 
 </h2>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><span title="prettyqt.qt.QtQml">QtQml</span>.<span title="prettyqt.qt.QtQml.QJSValue">QJSValue</span></code></p>
 
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="prettyqt.qml.jsvalue.JSValue" class="doc doc-heading">
-        <code>
-JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
-        </code>
-
-
-
-</h3>
-
-    <div class="doc doc-contents ">
 
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\qml\jsvalue.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">JSValue</span><span class="p">(</span><span class="n">QtQml</span><span class="o">.</span><span class="n">QJSValue</span><span class="p">):</span>
+          <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">JSValue</span><span class="p">(</span><span class="n">QtQml</span><span class="o">.</span><span class="n">QJSValue</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toVariant</span><span class="p">())</span>
 
@@ -952,10 +927,10 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
                 <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
                     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown type: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                     <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
-</code></pre></div>
+</code></pre></div></td></tr></table></div>
         </details>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -967,34 +942,49 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
 
 
 
+<div class="doc doc-object doc-function">
 
 
 
-
-
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.qml.jsvalue.JSValue.from_object" class="doc doc-heading">
+<h3 id="prettyqt.qml.jsvalue.JSValue.from_object" class="doc doc-heading">
 <code class="codehilite language-python"><span class="n">from_object</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">QtQml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-classmethod"><code>classmethod</code></small>
+  
+  <span class="doc doc-labels">
+      <small class="doc doc-label doc-label-classmethod"><code>classmethod</code></small>
   </span>
 
-</h4>
+</h3>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+  
       <p>Convert any python object into a QJSValue (must happen in GUI thread).</p>
 
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\qml\jsvalue.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="nd">@classmethod</span>
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\qml\jsvalue.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@classmethod</span>
 <span class="k">def</span> <span class="nf">from_object</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">jsengine</span><span class="p">:</span> <span class="n">QtQml</span><span class="o">.</span><span class="n">QJSEngine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">JSValue</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert any python object into a QJSValue (must happen in GUI thread).&quot;&quot;&quot;</span>
     <span class="k">match</span> <span class="n">obj</span><span class="p">:</span>
@@ -1017,87 +1007,84 @@ JSValue            (<span title="PySide6.QtQml.QJSValue">QJSValue</span>)
             <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
                 <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;unknown type: </span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
                 <span class="k">return</span> <span class="bp">cls</span><span class="p">()</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
-
-
-
+</div>
 
 
 
   </div>
 
-    </div>
-
   </div>
 
+</div>
+
+<div class="doc doc-object doc-class">
 
 
 
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-
-
-
-  <div class="doc doc-object doc-module">
-
-
-
-<h2 id="prettyqt.qml.qmlengine" class="doc doc-heading">
-        <code>qmlengine</code>
-
+<h2 id="prettyqt.qml.QmlEngineMixin" class="doc doc-heading">
+        <code>QmlEngineMixin</code>
 
 
 </h2>
 
-    <div class="doc doc-contents ">
 
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><a class="autorefs autorefs-internal" title="prettyqt.qml" href="#prettyqt.qml">qml</a>.<span title="prettyqt.qml.JSEngineMixin">JSEngineMixin</span></code></p>
 
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h3 id="prettyqt.qml.qmlengine.QmlEngineMixin" class="doc doc-heading">
-        <code>
-QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSEngineMixin</span>)
-        </code>
-
-
-
-</h3>
-
-    <div class="doc doc-contents ">
 
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">class</span> <span class="nc">QmlEngineMixin</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">JSEngineMixin</span><span class="p">):</span>
+          <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">QmlEngineMixin</span><span class="p">(</span><span class="n">qml</span><span class="o">.</span><span class="n">JSEngineMixin</span><span class="p">):</span>
     <span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Set the object ownership.</span>
 
@@ -1142,10 +1129,10 @@ QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSE
 
     <span class="k">def</span> <span class="nf">set_offline_storage_path</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">datatypes</span><span class="o">.</span><span class="n">PathType</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">setOfflineStoragePath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">fspath</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-</code></pre></div>
+</code></pre></div></td></tr></table></div>
         </details>
 
-
+  
 
   <div class="doc doc-children">
 
@@ -1157,115 +1144,140 @@ QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSE
 
 
 
+<div class="doc doc-object doc-function">
 
 
 
+<h3 id="prettyqt.qml.qmlengine.QmlEngineMixin.get_object_ownership" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">get_object_ownership</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span></code>
 
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.qml.qmlengine.QmlEngineMixin.get_object_ownership" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span></code>
+</h3>
 
 
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Return object ownership.</p>
 
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>ObjectOwnershipStr</code></td>
-      <td><p>object ownership</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span><span class="p">:</span>
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.qml.qmlengine.ObjectOwnershipStr">ObjectOwnershipStr</span></code>
+          </td>
+          <td><p>object ownership</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObjectOwnershipStr</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Return object ownership.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        object ownership</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">OBJECT_OWNERSHIP</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">objectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">)]</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
+</div>
+
+<div class="doc doc-object doc-function">
 
 
 
+<h3 id="prettyqt.qml.qmlengine.QmlEngineMixin.set_object_ownership" class="doc doc-heading">
+<code class="codehilite language-python"><span class="n">set_object_ownership</span><span class="p">(</span><span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">)</span></code>
 
-  <div class="doc doc-object doc-method">
-
-
-
-<h4 id="prettyqt.qml.qmlengine.QmlEngineMixin.set_object_ownership" class="doc doc-heading">
-<code class="codehilite language-python"><span class="n">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">)</span></code>
+</h3>
 
 
-</h4>
-
-    <div class="doc doc-contents ">
-
+  <div class="doc doc-contents ">
+  
       <p>Set the object ownership.</p>
 
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>obj</code></td>
-        <td><code>QtCore.QObject</code></td>
-        <td><p>object to set ownership for</p></td>
-        <td><em>required</em></td>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
       </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>obj</code></td>
+          <td>
+                <code><span title="prettyqt.qt.QtCore">QtCore</span>.<span title="prettyqt.qt.QtCore.QObject">QObject</span></code>
+          </td>
+          <td><p>object to set ownership for</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mode</code></td>
+          <td>
+                <code><span title="prettyqt.qml.qmlengine.ObjectOwnershipStr">ObjectOwnershipStr</span></code>
+          </td>
+          <td><p>object ownership to use</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Raises:</strong></p>
+  <table>
+    <thead>
       <tr>
-        <td><code>mode</code></td>
-        <td><code>ObjectOwnershipStr</code></td>
-        <td><p>object ownership to use</p></td>
-        <td><em>required</em></td>
+        <th>Type</th>
+        <th>Description</th>
       </tr>
-  </tbody>
-</table>
-<p><strong>Exceptions:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>InvalidParamError</code></td>
-        <td><p>invalid object ownership</p></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
-          <div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="prettyqt.utils.InvalidParamError">InvalidParamError</span></code>
+          </td>
+          <td><p>invalid object ownership</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\qml\qmlengine.py</code></summary>
+        <div class="codehilite"><table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">set_object_ownership</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">:</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QObject</span><span class="p">,</span> <span class="n">mode</span><span class="p">:</span> <span class="n">ObjectOwnershipStr</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Set the object ownership.</span>
 
 <span class="sd">    Args:</span>
@@ -1278,45 +1290,28 @@ QmlEngineMixin            (<span title="prettyqt.qml.jsengine.JSEngineMixin">JSE
     <span class="k">if</span> <span class="n">mode</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">:</span>
         <span class="k">raise</span> <span class="n">InvalidParamError</span><span class="p">(</span><span class="n">mode</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">setObjectOwnership</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">OBJECT_OWNERSHIP</span><span class="p">[</span><span class="n">mode</span><span class="p">])</span>
-</code></pre></div>
-        </details>
-    </div>
-
+</code></pre></div></td></tr></table></div>
+      </details>
   </div>
 
-
-
+</div>
 
 
 
   </div>
 
-    </div>
-
   </div>
 
-
-
+</div>
 
 
 
 
   </div>
 
-    </div>
-
   </div>
 
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
+</div>
 
 
 
