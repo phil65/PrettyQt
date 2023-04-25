@@ -189,7 +189,7 @@ class ObjectBrowser(widgets.MainWindow):
         # Select first row so that a hidden root node will not be selected.
         first_row_index = self._proxy_tree_model.first_item_index()
         self.obj_tree.setCurrentIndex(first_row_index)
-        if self._tree_model.inspected_node_is_visible:
+        if self._tree_model.show_root:
             self.obj_tree.expand(first_row_index)
 
     def _add_instance(self) -> int:

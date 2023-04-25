@@ -78,9 +78,9 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         # inspectedItem will be the invisible root_item. If the obj_name is given,
         # an invisible root item will be added and the inspectedItem will be its
         # only child. In that case the inspected item will be visible.
-        self._inspected_node_is_visible = obj_name != ""
+        self._show_root = obj_name != ""
 
-        if self._inspected_node_is_visible:
+        if self._show_root:
             self._root_item = ObjectBrowserTreeItem(
                 obj=None,
                 name="<invisible_root>",
@@ -104,12 +104,12 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             self.fetchMore(root_index)
 
     @property
-    def inspected_node_is_visible(self):
+    def show_root(self):
         """Return True if the inspected node is visible.
 
         In that case an invisible root node has been added.
         """
-        return self._inspected_node_is_visible
+        return self._show_root
 
     def _fetch_object_children(
         self, treeitem: treeitem.TreeItem
@@ -236,7 +236,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
                     raise ValueError(f"Invalid tag: {tag}")
 
     def refresh_tree(self):
-        if self._inspected_node_is_visible:
+        if self._show_root:
             index = self.createIndex(0, 0, self.inspected_item)
         else:
             index = self.root_index()
