@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants
 from prettyqt.qt import QtGui
-from prettyqt.utils import bidict, get_repr, mappers
+from prettyqt.utils import bidict, get_repr
 
 
 SEQUENCE_MATCHES = bidict(
@@ -20,8 +20,7 @@ SEQUENCE_FORMATS = bidict(
     portable=QtGui.QKeySequence.SequenceFormat.PortableText,
 )
 
-STANDARD_KEYS = mappers.FlagMap(
-    QtGui.QKeySequence.StandardKey,
+STANDARD_KEYS = bidict(
     add_tab=QtGui.QKeySequence.StandardKey.AddTab,
     back=QtGui.QKeySequence.StandardKey.Back,
     backspace=QtGui.QKeySequence.StandardKey.Backspace,

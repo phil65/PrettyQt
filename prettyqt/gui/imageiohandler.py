@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, mappers
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 mod = QtGui.QImageIOHandler
@@ -52,8 +52,7 @@ ImageOptionStr = Literal[
     "image_transformation",
 ]
 
-TRANSFORMATION = mappers.FlagMap(
-    mod.Transformation,
+TRANSFORMATION = bidict(
     none=mod.Transformation.TransformationNone,
     mirror=mod.Transformation.TransformationMirror,
     flip=mod.Transformation.TransformationFlip,

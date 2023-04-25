@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict, get_repr, mappers
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 mod = QtNetwork.QAbstractSocket
@@ -32,8 +32,7 @@ NETWORK_LAYER_PROTOCOL = bidict(
 
 NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
 
-PAUSE_MODES = mappers.FlagMap(
-    mod.PauseMode,
+PAUSE_MODES = bidict(
     never=mod.PauseMode.PauseNever,
     on_ssl_errors=mod.PauseMode.PauseOnSslErrors,
 )

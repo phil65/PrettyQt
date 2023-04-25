@@ -5,13 +5,12 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, mappers
+from prettyqt.utils import InvalidParamError, bidict
 
 
 mod = QtCore.QIODeviceBase  # type: ignore
 
-OPEN_MODES = mappers.FlagMap(
-    mod.OpenModeFlag,
+OPEN_MODES = bidict(
     not_open=mod.OpenModeFlag.NotOpen,
     read_only=mod.OpenModeFlag.ReadOnly,
     write_only=mod.OpenModeFlag.WriteOnly,

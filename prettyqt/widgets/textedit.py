@@ -6,11 +6,10 @@ from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, mappers
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
-AUTO_FORMATTING = mappers.FlagMap(
-    QtWidgets.QTextEdit.AutoFormattingFlag,
+AUTO_FORMATTING = bidict(
     none=QtWidgets.QTextEdit.AutoFormattingFlag.AutoNone,
     bullet_list=QtWidgets.QTextEdit.AutoFormattingFlag.AutoBulletList,
     all=QtWidgets.QTextEdit.AutoFormattingFlag.AutoAll,

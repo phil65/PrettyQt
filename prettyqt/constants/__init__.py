@@ -2,7 +2,7 @@
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, mappers
+from prettyqt.utils import bidict
 
 Qt = QtCore.Qt
 
@@ -105,9 +105,8 @@ ITEM_DATA_ROLE: bidict[ItemDataRoleStr, QtCore.Qt.ItemDataRole | int] = bidict(
     background=BACKGROUND_ROLE,
 )
 
-ALIGNMENTS = mappers.FlagMap(
-    Qt.AlignmentFlag,
-    # none=int(Qt.Alignment(0)),
+ALIGNMENTS = bidict(
+    none=Qt.AlignmentFlag(0),
     left=ALIGN_LEFT,
     right=ALIGN_RIGHT,
     top=ALIGN_TOP,
@@ -130,8 +129,7 @@ AlignmentStr = Literal[
     "bottom_right",
 ]
 
-SIDES = mappers.FlagMap(
-    Qt.AlignmentFlag,
+SIDES = bidict(
     left=Qt.AlignmentFlag.AlignLeft,
     right=Qt.AlignmentFlag.AlignRight,
     top=Qt.AlignmentFlag.AlignTop,
@@ -140,8 +138,7 @@ SIDES = mappers.FlagMap(
 
 SideStr = Literal["left", "right", "top", "bottom"]
 
-EDGES = mappers.FlagMap(
-    Qt.Edge,
+EDGES = bidict(
     top=Qt.Edge.TopEdge,
     left=Qt.Edge.LeftEdge,
     right=Qt.Edge.RightEdge,
@@ -163,8 +160,7 @@ EdgeStr = Literal[
     "bottom_right",
 ]
 
-H_ALIGNMENT = mappers.FlagMap(
-    Qt.AlignmentFlag,
+H_ALIGNMENT = bidict(
     left=Qt.AlignmentFlag.AlignLeft,
     right=Qt.AlignmentFlag.AlignRight,
     center=Qt.AlignmentFlag.AlignHCenter,
@@ -178,8 +174,7 @@ HorizontalAlignmentStr = Literal[
     "justify",
 ]
 
-V_ALIGNMENT = mappers.FlagMap(
-    Qt.AlignmentFlag,
+V_ALIGNMENT = bidict(
     top=Qt.AlignmentFlag.AlignTop,
     bottom=Qt.AlignmentFlag.AlignBottom,
     center=Qt.AlignmentFlag.AlignVCenter,
@@ -329,8 +324,7 @@ MODE_PREFERENCE: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] = bidict
 )
 
 FilterModeStr = Literal["starts_with", "contains", "ends_with"]
-FILTER_MODES = mappers.FlagMap(
-    Qt.MatchFlag,
+FILTER_MODES = bidict(
     starts_with=Qt.MatchFlag.MatchStartsWith,
     contains=Qt.MatchFlag.MatchContains,
     ends_with=Qt.MatchFlag.MatchEndsWith,
@@ -755,8 +749,7 @@ WINDOW_FLAGS: bidict[WindowFlagStr, Qt.WindowType] = bidict(
 )
 
 WindowStateStr = Literal["none", "minimized", "maximized", "fullscreen", "active"]
-WINDOW_STATES = mappers.FlagMap(
-    Qt.WindowState,
+WINDOW_STATES = bidict(
     none=Qt.WindowState.WindowNoState,
     minimized=Qt.WindowState.WindowMinimized,
     maximized=Qt.WindowState.WindowMaximized,

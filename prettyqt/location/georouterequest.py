@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, positioning
 from prettyqt.qt import QtLocation
-from prettyqt.utils import InvalidParamError, bidict, helpers, mappers
+from prettyqt.utils import InvalidParamError, bidict, helpers
 
 
 FEATURE_TYPES = bidict(
@@ -50,8 +50,7 @@ MANEUVER_DETAIL = bidict(
 
 ManeuverDetailStr = Literal["none", "basic"]
 
-ROUTE_OPTIMIZATION = mappers.FlagMap(
-    QtLocation.QGeoRouteRequest.RouteOptimization,
+ROUTE_OPTIMIZATION = bidict(
     shortest=QtLocation.QGeoRouteRequest.RouteOptimization.ShortestRoute,
     fastest=QtLocation.QGeoRouteRequest.RouteOptimization.FastestRoute,
     most_economic=QtLocation.QGeoRouteRequest.RouteOptimization.MostEconomicRoute,

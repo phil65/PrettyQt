@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import network
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import bidict, get_repr, mappers
+from prettyqt.utils import bidict, get_repr
 
 
 mod = QtNetwork.QHostAddress
@@ -18,8 +18,7 @@ CONVERSION_MODE = bidict(
     tolerant=mod.ConversionModeFlag.TolerantConversion,
 )
 
-SPECIAL_ADDRESS = mappers.FlagMap(
-    mod.SpecialAddress,
+SPECIAL_ADDRESS = bidict(
     null=mod.SpecialAddress.Null,
     localhost=mod.SpecialAddress.LocalHost,
     localhost_ipv6=mod.SpecialAddress.LocalHostIPv6,

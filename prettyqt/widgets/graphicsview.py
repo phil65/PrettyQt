@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers, mappers
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
 
 
 mod = QtWidgets.QGraphicsView
@@ -17,8 +17,7 @@ DRAG_MODE = bidict(
 
 DragModeStr = Literal["none", "scroll_hand", "rubber_band"]
 
-CACHE_MODES = mappers.FlagMap(
-    mod.CacheModeFlag,
+CACHE_MODES = bidict(
     none=mod.CacheModeFlag.CacheNone,
     background=mod.CacheModeFlag.CacheBackground,
 )

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr, mappers
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 FORMAT_TYPE = bidict(
@@ -28,8 +28,7 @@ OBJECT_TYPE = bidict(
 
 ObjectTypeStr = Literal["none", "image", "table", "table_cell", "user"]
 
-PAGE_BREAK_FLAG = mappers.FlagMap(
-    QtGui.QTextFormat.PageBreakFlag,
+PAGE_BREAK_FLAG = bidict(
     auto=QtGui.QTextFormat.PageBreakFlag.PageBreak_Auto,
     always_before=QtGui.QTextFormat.PageBreakFlag.PageBreak_AlwaysBefore,
     always_after=QtGui.QTextFormat.PageBreakFlag.PageBreak_AlwaysAfter,
