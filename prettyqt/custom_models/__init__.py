@@ -11,6 +11,7 @@ from .listmixin import ListMixin
 from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
+from .jsonmodel import JsonModel
 from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 
 __all__ = [
@@ -24,5 +25,6 @@ __all__ = [
     "ColumnItem",
     "NestedModel",
     "NestedItem",
+    "JsonModel",
     "SubsequenceSortFilterProxyModel",
 ]

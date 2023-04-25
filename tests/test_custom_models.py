@@ -22,6 +22,21 @@ def test_importlibdistributionmodel(qtmodeltester):
     custom_models.ImportlibDistributionModel.from_system()
 
 
+def test_jsonmodel(qtmodeltester):
+    dct = {
+        "lastName": "Smith",
+        "age": 25,
+        "address": {"streetAddress": "21 2nd Street", "postalCode": "10021"},
+        "phoneNumber": [
+            {"type": "home", "number": "212 555-1234"},
+            {"type": "fax", "number": ("646 555-4567")},
+        ],
+    }
+    model = custom_models.JsonModel()
+    model.load(dct)
+    qtmodeltester.check(model, force_py=True)
+
+
 # def test_basemodelmixin(qtmodeltester):
 #     class TestModel(custom_models.BaseModelMixin, core.AbstractTableModel):
 #         def rowCount(self, index=None):
