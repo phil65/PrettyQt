@@ -280,7 +280,7 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
             return self.createIndex(row, column, child_item)
         return core.ModelIndex()
 
-    def parent(self, index: core.ModelIndex) -> QtCore.QModelIndex:  # type:ignore
+    def parent(self, index: core.ModelIndex) -> core.ModelIndex:  # type:ignore
         if not index.isValid():
             return core.ModelIndex()
 
@@ -327,8 +327,8 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
                 parent_item.append_child(tree_item)
             parent_item.children_fetched = True
 
-    def _fetch_object_children(self, treeitem):
-        return []
+    def _fetch_object_children(self, treeitem) -> list:
+        return NotImplemented
 
 
 class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):

@@ -122,7 +122,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         path_strings = []
         obj = treeitem.obj
         obj_path = treeitem.obj_path
-        if isinstance(obj, (list, tuple, set, frozenset)):
+        if isinstance(obj, list | tuple | set | frozenset):
             obj_children = [(str(i), j) for i, j in sorted(enumerate(obj))]
             path_strings = [
                 f"{obj_path}[{i[0]}]" if obj_path else i[0] for i in obj_children
@@ -133,13 +133,13 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         #         "{0}.pop()".format(obj_path) if obj_path else item[0]
         #         for item in obj_children
         #     ]
-        elif hasattr(obj, "items") and callable(getattr(obj, "items")):  # dicts etc.
+        elif hasattr(obj, "items") and callable(obj.items):  # dicts etc.
             try:
                 obj_children = list(obj.items())
             except Exception as ex:
                 # Can happen if the items method expects an argument, for instance the
                 # types.DictType.items method expects a dictionary.
-                logger.warn("No items expanded. Objects items() call failed: %s", ex)
+                logger.warning("No items expanded. Objects items() call failed: %s", ex)
                 obj_children = []
 
             # Sort keys, except when the object is an OrderedDict.
