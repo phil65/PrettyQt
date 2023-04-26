@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import datetime
 import enum
+import itertools
 import os
 import pathlib
 from typing import TypedDict
@@ -15,9 +16,34 @@ class FolderInfo(TypedDict):
     name: str
     size: int
     type: str
+    created: float
+    islink: bool  # symbolic link
+    mode: int  # Inode protection mode.
+    uid: int  # user id of owner
+    gid: int  # group id of owner
+    mtime: float
+    ino: int  # Inode number.
+    nlink: int  # Number of links to the inode.
 
 
 _icon_provider = widgets.FileIconProvider()
+
+
+VALUE_LETTERS = [(4, "r"), (2, "w"), (1, "x")]
+
+
+def octal_to_string(octal: int) -> str:
+    result = ""
+    # Iterate over each of the digits in octal
+    for digit, (value, letter) in itertools.product(
+        [int(n) for n in str(octal)], VALUE_LETTERS
+    ):
+        if digit >= value:
+            result += letter
+            digit -= value
+        else:
+            result += "-"
+    return result
 
 
 def get_filename(path):
@@ -73,6 +99,11 @@ ATTR_MODEL_MODIFIED = custom_models.ColumnItem(
     else "",
 )
 
+ATTR_MODEL_PERMISSIONS = custom_models.ColumnItem(
+    name="Permissions",
+    doc="File permissions.",
+    label=lambda x: oct(int(x.obj["mode"]))[-4:] if x.obj.get("mode") else "",
+)
 
 ATTR_MODEL_IS_LINK = custom_models.ColumnItem(
     name="Link",
@@ -89,6 +120,7 @@ COLUMNS = [
     ATTR_MODEL_MODIFIED,
     ATTR_MODEL_SIZE,
     ATTR_MODEL_CREATED,
+    ATTR_MODEL_PERMISSIONS,
     ATTR_MODEL_IS_LINK,
 ]
 
@@ -179,6 +211,16 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
     def size(self, index) -> int:
         tree_item = index.internalPointer()
         return 0 if tree_item is None else tree_item.obj["size"]
+
+    def permissions(self, index):
+        tree_item = index.internalPointer()
+        if tree_item is None:
+            return ""
+        val = oct(int(tree_item.obj["mode"]))[-4:]
+        flag = QtCore.QFileDevice.Permission(0)
+        for i in core.filedevice.PERMISSIONS.get_list(int(val, 8)):
+            flag |= core.filedevice.PERMISSIONS[i]
+        return flag
 
     def remove(self, index) -> bool:
         tree_item = index.internalPointer()
@@ -364,6 +406,15 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
             5: QtCore.QByteArray(b"whatsThis"),
         }
 
+    def setReadOnly(self, val: bool):
+        return NotImplemented
+
+    def isReadOnly(self) -> bool:
+        return NotImplemented
+
+    def setOption(self, opt, val):
+        return NotImplemented
+
 
 if __name__ == "__main__":
     import logging
@@ -393,6 +444,7 @@ if __name__ == "__main__":
     idx = model.index(
         "C:\\Users\\phili\\AppData\\Local\\Programs\\Python\\Python310\\Lib"
     )
+    print(model.permissions(idx))
     print(idx.isValid())
     print(idx.parent().parent().data(constants.DISPLAY_ROLE))
     tree.setUniformRowHeights(True)
