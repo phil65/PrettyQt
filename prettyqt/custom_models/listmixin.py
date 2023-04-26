@@ -36,9 +36,7 @@ class ListMixin:
     def rowCount(self, parent=None):
         """Required override for AbstractitemModels."""
         parent = parent or core.ModelIndex()
-        if parent.column() > 0 or parent.isValid():
-            return 0
-        return len(self.items)
+        return 0 if parent.column() > 0 or parent.isValid() else len(self.items)
 
     def data_by_index(self, index):
         return self.items[index.row()]

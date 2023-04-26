@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import datetime
 import enum
 import itertools
@@ -288,8 +289,8 @@ class FSSpecTreeModel(
         flags = super().flags(index)
         return flags | constants.DROP_ENABLED | constants.DRAG_ENABLED
 
-    def dragEnterEvent(self, event):
-        event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
+    # def dragEnterEvent(self, event):
+    #     event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
 
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
@@ -299,6 +300,34 @@ class FSSpecTreeModel(
             return True
         return self.tree_item(parent).obj["type"] == "directory"
 
+    def removeRows(self, row: int, count: int, parent):
+        print(row, count, parent.data())
+        # end_row = row + count - 1
+        # with self.remove_rows(row, end_row, parent):
+        #     for i in range(end_row, row - 1, -1):
+        #         self.items.pop(i)
+        return True
+
+    def remove_items(self, offsets: Iterable[int]):
+        for offset in sorted(offsets, reverse=True):
+            self.removeRow(offset)
+
+    def add_items(
+        self,
+        items: Iterable,
+        position: int | None = None,
+        parent: QtCore.QModelIndex | None = None,
+    ):
+        if position is None:
+            position = len(self.items)
+        items = list(items)
+        # with self.insert_rows(position, position + len(items) - 1, parent):
+        #     for i in range(len(items)):
+        #         self.items.insert(i + position, items[i])
+        #         pass
+        #     self.items.extend(items)
+        return items
+
     def canDropMimeData(
         self,
         mime_data: QtCore.QMimeData,
@@ -307,11 +336,7 @@ class FSSpecTreeModel(
         column: int,
         parent_index: QtCore.QModelIndex,
     ):
-        if not mime_data.hasFormat("text/uri-list"):
-            return False
-        if column > 0:
-            return False
-        return True
+        return column == 0 and mime_data.hasFormat("text/uri-list")
 
     def dropMimeData(
         self,
@@ -321,35 +346,31 @@ class FSSpecTreeModel(
         column: int,
         parent_index: QtCore.QModelIndex,
     ):
-        # if not mime_data.hasFormat("text/uri-list"):
-        #     return False
-        print(mime_data.urls(), action, row, column)
+        if not self.canDropMimeData(mime_data, action, row, column, parent_index):
+            return False
+        print(mime_data.urls(), action, row, column, parent_index.data())
+        urls = [core.Url(i) for i in mime_data.urls()]
+        if not urls:
+            return False
+        if action == QtCore.Qt.DropAction.MoveAction:
+            with self.change_layout():
+                for i in sorted(urls, reverse=True):
+                    # self.fs.mv(i, )
+                    print("move", i, "to", parent_index.data(self.Roles.FilePathRole))
+        elif action == QtCore.Qt.DropAction.CopyAction:
+            pass
+        elif action == QtCore.Qt.DropAction.LinkAction:
+            pass
 
-        # if action == Qt.IgnoreAction:
-        #     return True  # What is that?
-
-        # if action == Qt.MoveAction:
-        #     # Strangely, on some cases, we get a call to dropMimeData though
-        #     # self.canDropMimeData returned False.
-        #     # See https://github.com/olivierkes/manuskript/issues/169 to reproduce.
-        #     # So we double check for safety.
-        #     if not self.canDropMimeData(data, action, row, column, parent):
-        #         return False
-
-        # items = mime_data.urls()
-
-        # if not items:
-        #     return False
-
-        # if column > 0:
-        #     column = 0
-
-        # if row != -1:
-        #     begin_row = row
-        # elif parent.isValid():
-        #     begin_row = self.rowCount(parent) + 1
-        # else:
-        #     begin_row = self.rowCount() + 1
+        column = min(column, 0)
+        if row != -1:
+            begin_row = row
+        elif parent_index.isValid():
+            begin_row = self.rowCount(parent_index) + 1
+        else:
+            begin_row = self.rowCount() + 1
+        print(begin_row)
+        return True
 
         # if action == Qt.CopyAction:
         #     # Behavior if parent is a text item
@@ -457,16 +478,16 @@ if __name__ == "__main__":
     import sys
 
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    from fsspec.implementations import local
+    import fsspec
 
     from prettyqt import widgets
 
     app = widgets.app()
 
-    fs = local.LocalFileSystem()
-    root = {"name": "C:/", "size": 0, "type": "directory"}
-    # fs = github.GithubFileSystem(org="phil65", repo="prettyqt", path="/")
-    # root = {'name': 'prettyqt', 'size': 0, 'type': 'directory'}
+    fs = fsspec.filesystem("github", org="phil65", repo="prettyqt", path="/")
+    print(fs.to_json())
+    # root = {"name": "C:/", "size": 0, "type": "directory"}
+    root = {"name": "prettyqt", "size": 0, "type": "directory"}
     # print(root)
     model = FSSpecTreeModel(fs, root, False)
     print(model.mimeTypes())
