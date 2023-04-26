@@ -121,7 +121,7 @@ class FramelessWindow(widgets.Widget):
         self.setLayout(self.grip_layout)
 
         if sys.platform == "win32":
-            self.hwnd = self.winId().__int__()
+            self.hwnd = int(self.winId())
             window_style = win32gui.GetWindowLong(self.hwnd, GWL_STYLE)
             win32gui.SetWindowLong(
                 self.hwnd,
@@ -155,7 +155,7 @@ class FramelessWindow(widgets.Widget):
             return return_value, result
         # if you use Windows OS
         if event == b"windows_generic_MSG":
-            msg = ctypes.wintypes.MSG.from_address(message.__int__())
+            msg = ctypes.wintypes.MSG.from_address(int(message))
             # Get the coordinates when the mouse moves.
             x = win32api.LOWORD(LONG(msg.lParam).value)  # type: ignore
             # converted an unsigned int to int (for dual monitor issue)

@@ -38,10 +38,9 @@ class ToolBarMixin(widgets.WidgetMixin):
     def add_menu_button(
         self, label: str, icon: datatypes.IconType, menu: QtWidgets.QMenu
     ) -> widgets.ToolButton:
-        btn = widgets.ToolButton.for_menu(menu)
+        btn = widgets.ToolButton.for_menu(menu, icon=icon)
         btn.setText(label)
         btn.setToolButtonStyle(self.toolButtonStyle())
-        btn.set_icon(icon)
         self.menu_buttons.append(btn)
         self.addWidget(btn)
         return btn

@@ -107,10 +107,10 @@ ITEM_DATA_ROLE: bidict[ItemDataRoleStr, QtCore.Qt.ItemDataRole | int] = bidict(
 
 ALIGNMENTS = bidict(
     none=Qt.AlignmentFlag(0),
-    left=ALIGN_LEFT | ALIGN_V_CENTER,
-    right=ALIGN_RIGHT | ALIGN_V_CENTER,
-    top=ALIGN_H_CENTER | ALIGN_TOP,
-    bottom=ALIGN_H_CENTER | ALIGN_BOTTOM,
+    left=ALIGN_CENTER_LEFT,
+    right=ALIGN_CENTER_RIGHT,
+    top=ALIGN_TOP_CENTER,
+    bottom=ALIGN_BOTTOM_CENTER,
     top_left=ALIGN_TOP_LEFT,
     top_right=ALIGN_TOP_RIGHT,
     bottom_left=ALIGN_BOTTOM_LEFT,
