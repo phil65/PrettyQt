@@ -162,6 +162,9 @@ class FSSpecTreeModel(
         self._show_root = show_root
         self.fs = fs
         self.root_marker = fs.root_marker
+        self.set_root_item(obj)
+
+    def set_root_item(self, obj):
         if self._show_root:
             self._root_item = treeitem.TreeItem(obj=None)
             self._root_item.children_fetched = True
@@ -221,6 +224,14 @@ class FSSpecTreeModel(
         tree_item = index.internalPointer()
         return 0 if tree_item is None else tree_item.obj["size"]
 
+    def lastModified(self, index) -> int:
+        tree_item = index.internalPointer()
+        return (
+            ""
+            if tree_item is None
+            else str(datetime.datetime.fromtimestamp(tree_item.obj["mtime"]))
+        )
+
     def permissions(self, index):
         tree_item = index.internalPointer()
         if tree_item is None:
@@ -245,7 +256,8 @@ class FSSpecTreeModel(
 
     def setRootPath(self, path: os.PathLike) -> core.ModelIndex:
         path = os.fspath(path)
-        self._root_item = {"name": path, "size": 0, "type": "directory"}
+        self.set_root_item({"name": path, "size": 0, "type": "directory"})
+
         self.rootPathChanged.emit(path)
 
     def rootDirectory(self) -> core.Dir:
@@ -424,13 +436,16 @@ class FSSpecTreeModel(
     def setOption(self, opt, val):
         return NotImplemented
 
-    def option(self, opt):
+    def options(self):
+        return NotImplemented
+
+    def testOption(self, opt):
         return NotImplemented
 
     def resolveSymlinks(self, val):
         return NotImplemented
 
-    def setResolveSymlinks(self):
+    def setResolveSymlinks(self, val):
         return NotImplemented
 
     def setNameFilterDisables(self, value):
@@ -468,7 +483,6 @@ if __name__ == "__main__":
     # fs = github.GithubFileSystem(org="phil65", repo="prettyqt", path="/")
     # root = {'name': 'prettyqt', 'size': 0, 'type': 'directory'}
     # print(root)
-
     model = FSSpecTreeModel(fs, root, False)
     print(model.mimeTypes())
     tree = widgets.TreeView()

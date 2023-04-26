@@ -2,9 +2,11 @@
 
 from importlib import metadata
 
+import pytest
 import regex as re
 
 from prettyqt import custom_models
+from prettyqt.utils import InvalidParamError
 
 
 def test_regexmatchesmodel(qtmodeltester):
@@ -36,15 +38,22 @@ def test_jsonmodel(qtmodeltester):
     model.load(dct)
     qtmodeltester.check(model, force_py=True)
 
+def test_fsspecmodel(qtbot, qtmodeltester):
+    from fsspec.implementations import local
+    fs = local.LocalFileSystem()
+    root = {"name": "/", "size": 0, "type": "directory"}
+    model = custom_models.FSSpecTreeModel(fs, root, False)
 
-# def test_basemodelmixin(qtmodeltester):
-#     class TestModel(custom_models.BaseModelMixin, core.AbstractTableModel):
-#         def rowCount(self, index=None):
-#             return 1
-
-#         def columnCount(self, index=None):
-#             return 1
-
-
-#     model = TestModel()
-#     qtmodeltester.check(model, force_py=True)
+    model.set_root_path("/")
+    idx = model.index(0, 0)
+    model.get_paths([idx])
+    model.data(idx, model.Roles.FilePathRole)
+    model.yield_child_indexes(idx)
+    model.watch_for_changes(False)
+    model.use_custom_icons(False)
+    model.resolve_sym_links(False)
+    model.set_name_filters(["test"], hide=True)
+    model.set_filter("drives")
+    with pytest.raises(InvalidParamError):
+        model.set_filter("test")
+    # qtmodeltester.check(model, force_py=True)
