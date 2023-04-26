@@ -15,6 +15,7 @@ class ItemWrapper:
 
 
 class BorderLayout(widgets.Layout):
+    @core.Enum
     class Position(enum.IntEnum):
         """Item position."""
 
@@ -23,8 +24,6 @@ class BorderLayout(widgets.Layout):
         South = 2
         East = 3
         Center = 4
-
-    core.Enum(Position)
 
     def __init__(
         self,
