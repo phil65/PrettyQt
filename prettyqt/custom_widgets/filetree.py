@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+import pathlib
+
 from prettyqt import widgets
 
 
@@ -9,7 +13,6 @@ class FileTree(widgets.TreeView):
         self.setup_dragdrop_move()
 
         model = widgets.FileSystemModel()
-        model.use_custom_icons(False)
         model.resolve_sym_links(False)
         model.set_root_path("C:/")
         if filters:
@@ -20,35 +23,36 @@ class FileTree(widgets.TreeView):
     def get_expanded_state(self) -> list[str]:
         self.expanded_ids = []
         for i in range(self.model().rowCount()):
-            self.save_expanded_on_level(self.model().index(i, 0))
+            self._save_expanded_on_level(self.model().index(i, 0))
         return self.expanded_ids
 
     def set_expanded_state(self, state):
         self.expanded_ids = state
         with self.updates_off():
             for i in range(self.model().rowCount()):
-                self.restore_expanded_on_level(self.model().index(i, 0))
+                self._restore_expanded_on_level(self.model().index(i, 0))
 
-    def save_expanded_on_level(self, index):
+    def _save_expanded_on_level(self, index):
         if not self.isExpanded(index):
             return None
         if index.isValid():
-            path = str(self.model().get_file_path(index))
+            path = self.model().data(index, self.model().FilePathRole)
             self.expanded_ids.append(path)
         for i in range(self.model().rowCount(index)):
             val = self.model().index(i, 0, index)
-            self.save_expanded_on_level(val)
+            self._save_expanded_on_level(val)
 
-    def restore_expanded_on_level(self, index):
-        path = self.model().get_file_path(index)
-        if str(path) not in self.expanded_ids:
+    def _restore_expanded_on_level(self, index):
+        path = self.model().data(index, self.model().FilePathRole)
+        if path not in self.expanded_ids:
             return None
         self.setExpanded(index, True)
         if not self.model().hasChildren(index):
             return None
+        path = pathlib.Path(path)
         for it in path.iterdir():
             child_index = self.model().index(str(path / it))
-            self.restore_expanded_on_level(child_index)
+            self._restore_expanded_on_level(child_index)
 
 
 if __name__ == "__main__":
