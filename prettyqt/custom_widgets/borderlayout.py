@@ -47,8 +47,9 @@ class BorderLayout(widgets.Layout):
     def addWidget(
         self,
         widget: QtWidgets.QWidget,
-        position: Position = Position.West,
+        position: Position | None = None,
     ):
+        position = BorderLayout.Position.West if position is None else position
         self.add_widgetitem(widgets.WidgetItem(widget), position)
 
     def expandingDirections(self) -> QtCore.Qt.Orientation:
