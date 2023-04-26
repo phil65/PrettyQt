@@ -25,6 +25,7 @@ class FileSystemModelMixin(core.AbstractItemModelMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setReadOnly(False)
+        self.use_custom_icons(False)
 
     def data(self, index, role=QtCore.Qt.ItemDataRole.DisplayRole):
         if role == self.DATA_ROLE:
