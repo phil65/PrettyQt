@@ -264,16 +264,13 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
-        if parent is None:
-            logger.debug("parent is None")
-            parent = core.ModelIndex()
-
+        parent = parent or core.ModelIndex()
         parent_item = self.tree_item(parent)
 
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()
 
-        if child_item := parent_item.child(row):
+        if child_item := parent_item.child(row):  # isnt this always true?
             return self.createIndex(row, column, child_item)
         return core.ModelIndex()
 
@@ -281,7 +278,7 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
         if not index.isValid():
             return core.ModelIndex()
 
-        child_item = index.internalPointer()
+        child_item = self.tree_item(index)
         parent_item = child_item.parent()  # type: ignore
 
         if parent_item is None or parent_item == self.root_item:
@@ -345,15 +342,11 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
 
     def rowCount(self, parent=None):
         parent = parent or core.ModelIndex()
-        if parent.isValid():
-            return 0
-        return len(self.items)
+        return 0 if parent.isValid() else len(self.items)
 
     def columnCount(self, parent=None):
         parent = parent or core.ModelIndex()
-        if parent.isValid():
-            return 0
-        return len(self._attr_cols)
+        return 0 if parent.isValid() else len(self._attr_cols)
 
     def tree_item(self, index: core.ModelIndex):
         return self.items[index.row()]
