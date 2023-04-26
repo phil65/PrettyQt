@@ -125,7 +125,9 @@ COLUMNS = [
 ]
 
 
-class FSSpecTreeModel(custom_models.ColumnItemModel):
+class FSSpecTreeModel(
+    widgets.filesystemmodel.FileSystemModelMixin, custom_models.ColumnItemModel
+):
     """Model that provides an interface to an objectree that is build of tree items."""
 
     directoryLoaded = core.Signal(str)
@@ -422,6 +424,33 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
     def setOption(self, opt, val):
         return NotImplemented
 
+    def option(self, opt):
+        return NotImplemented
+
+    def resolveSymlinks(self, val):
+        return NotImplemented
+
+    def setResolveSymlinks(self):
+        return NotImplemented
+
+    def setNameFilterDisables(self, value):
+        return NotImplemented
+
+    def nameFilterDisables(self):
+        return NotImplemented
+
+    def setNameFilters(self, filters):
+        return NotImplemented
+
+    def nameFilters(self):
+        return NotImplemented
+
+    def setFilter(self, filter):
+        return NotImplemented
+
+    def filter(self):
+        return NotImplemented
+
 
 if __name__ == "__main__":
     import logging
@@ -451,7 +480,7 @@ if __name__ == "__main__":
     idx = model.index(
         "C:\\Users\\phili\\AppData\\Local\\Programs\\Python\\Python310\\Lib"
     )
-    print(model.permissions(idx))
+    print(model.get_permissions(idx))
     print(idx.isValid())
     print(idx.parent().parent().data(constants.DISPLAY_ROLE))
     tree.setUniformRowHeights(True)
