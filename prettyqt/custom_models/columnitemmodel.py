@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterable
 from dataclasses import dataclass
+import datetime
 import logging
 from typing import Any
 
@@ -193,7 +194,10 @@ class ColumnItemModelMixin:
         col_item = self._attr_cols[col]
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
-                return col_item.get_label(tree_item)
+                label = col_item.get_label(tree_item)
+                if isinstance(label, datetime.datetime):
+                    label = str(label)
+                return label
             case constants.DECORATION_ROLE:
                 return col_item.get_decoration(tree_item)
             case constants.CHECKSTATE_ROLE:

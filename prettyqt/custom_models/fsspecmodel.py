@@ -87,7 +87,7 @@ ATTR_MODEL_TYPE = custom_models.ColumnItem(
 ATTR_MODEL_CREATED = custom_models.ColumnItem(
     name="Created",
     doc="Date created.",
-    label=lambda x: str(datetime.datetime.fromtimestamp(x.obj["created"]))
+    label=lambda x: datetime.datetime.fromtimestamp(x.obj["created"])
     if x.obj.get("created")
     else "",
 )
@@ -95,7 +95,7 @@ ATTR_MODEL_CREATED = custom_models.ColumnItem(
 ATTR_MODEL_MODIFIED = custom_models.ColumnItem(
     name="Modified",
     doc="Date modified.",
-    label=lambda x: str(datetime.datetime.fromtimestamp(x.obj["mtime"]))
+    label=lambda x: datetime.datetime.fromtimestamp(x.obj["mtime"])
     if x.obj.get("mtime")
     else "",
 )
