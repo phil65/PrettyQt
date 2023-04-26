@@ -59,6 +59,9 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
         urls = [core.Url(p) for p in paths]
         self.setUrls(urls)
 
+    def get_urls(self) -> list[core.Url]:
+        return [core.Url(url) for url in self.urls()]
+
     @classmethod
     def for_file(
         cls,
