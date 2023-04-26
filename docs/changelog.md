@@ -1,3 +1,17 @@
+## v1.26.0 (2023-04-26)
+
+### Feat
+
+- **MimeData**: add get_urls method
+- **MimeData**: add set_urls method
+- **pdf**: add PdfBookmarkModel class
+- **AbstractItemModel**: add get_role_names method
+
+### Fix
+
+- change SORT_ROLE and NAME_ROLE values to not conflict with FileSystemModel enums
+- **MimeData**: __getitem__ and __setitem__ seem to cause issues?
+
 ## v1.25.0 (2023-04-26)
 
 ### Feat
