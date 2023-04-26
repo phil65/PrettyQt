@@ -326,7 +326,7 @@ def test_filesystemmodel(qttester):
     model.set_root_path("/")
     idx = model.index(0, 0)
     model.get_paths([idx])
-    model.data(idx, model.DATA_ROLE)
+    model.data(idx, model.Roles.FilePathRole)
     model.yield_child_indexes(idx)
     model.watch_for_changes(False)
     model.use_custom_icons(False)

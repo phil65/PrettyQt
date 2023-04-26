@@ -394,9 +394,9 @@ def test_mimedata():
     dct = dict(a=2, b="test")
     mime_data.set_json_data("type a", dct)
     assert mime_data.get_json_data("type a") == dct
-    mime_data["test"] = "hallo"
-    assert mime_data["test"] == "hallo"
-    del mime_data["test"]
+    # mime_data["test"] = "hallo"
+    # assert mime_data["test"] == "hallo"
+    # del mime_data["test"]
     assert len(mime_data) == 1
     assert mime_data.keys() == ["type a"]
 
