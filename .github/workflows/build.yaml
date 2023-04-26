@@ -41,7 +41,7 @@ jobs:
       timeout-minutes: 5
       with:
         run: |
-          poetry install -E pyqt6
+          poetry install -E pyqt6 -E addons
           poetry run pytest
     - name: Test with pytest (PySide6)
       uses: coactions/setup-xvfb@v1
@@ -49,7 +49,7 @@ jobs:
       timeout-minutes: 5
       with:
         run: |
-          poetry install -E pyside6
+          poetry install -E pyside6 -E addons
           poetry run pytest --doctest-modules --junitxml=junit/test-results.xml --cov=prettyqt --cov-report=xml --cov-report=html
 
     - name: Upload coverage to Codecov
