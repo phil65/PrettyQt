@@ -1,3 +1,10 @@
+## v1.25.0 (2023-04-26)
+
+### Feat
+
+- **custom_models**: add fsspec model
+- **FileSystemModel**: add get_permissions method
+
 ## v1.24.0 (2023-04-26)
 
 ### Feat
