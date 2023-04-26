@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import enum
 import os
 import pathlib
@@ -29,14 +30,17 @@ ATTR_MODEL_NAME = custom_models.ColumnItem(
     label=lambda x: get_filename(x.obj["name"]),
     set_edit=lambda x, value: x.set_name(value),
     decoration=lambda x: _icon_provider.get_icon(core.FileInfo(x.obj["name"])),
-    user_data={constants.USER_ROLE: lambda volume: str(volume.get_root_path())},
+    user_data={
+        constants.USER_ROLE + 1: lambda x: x.obj["name"],
+        constants.USER_ROLE + 2: lambda x: get_filename(x.obj["name"]),
+    },
 )
 
 
 ATTR_MODEL_PATH = custom_models.ColumnItem(
     name="Path",
     doc="A path",
-    label=lambda x: x.obj["name"] if x.obj["name"] else "",
+    label=lambda x: x.obj["name"] or "",
 )
 
 ATTR_MODEL_SIZE = custom_models.ColumnItem(
@@ -50,20 +54,31 @@ ATTR_MODEL_SIZE = custom_models.ColumnItem(
 ATTR_MODEL_TYPE = custom_models.ColumnItem(
     name="Type",
     doc="Item type.",
-    label=lambda x: x.obj["type"] if x.obj["type"] else "",
+    label=lambda x: x.obj["type"] or "",
 )
 
 ATTR_MODEL_CREATED = custom_models.ColumnItem(
     name="Created",
     doc="Date created.",
-    label=lambda x: x.obj["created"] if x.obj.get("created") else "",
+    label=lambda x: str(datetime.datetime.fromtimestamp(x.obj["created"]))
+    if x.obj.get("created")
+    else "",
 )
+
+ATTR_MODEL_MODIFIED = custom_models.ColumnItem(
+    name="Modified",
+    doc="Date modified.",
+    label=lambda x: str(datetime.datetime.fromtimestamp(x.obj["mtime"]))
+    if x.obj.get("mtime")
+    else "",
+)
+
 
 ATTR_MODEL_IS_LINK = custom_models.ColumnItem(
     name="Link",
     label="",
     doc="Date created.",
-    checkstate=lambda x: x.obj["islink"] if x.obj.get("islink") else False,
+    checkstate=lambda x: x.obj.get("islink") or False,
 )
 
 
@@ -71,6 +86,7 @@ COLUMNS = [
     ATTR_MODEL_NAME,
     ATTR_MODEL_PATH,
     ATTR_MODEL_TYPE,
+    ATTR_MODEL_MODIFIED,
     ATTR_MODEL_SIZE,
     ATTR_MODEL_CREATED,
     ATTR_MODEL_IS_LINK,
@@ -210,7 +226,6 @@ if __name__ == "__main__":
 
     fs = local.LocalFileSystem()
     root = {"name": "C:/", "size": 0, "type": "directory"}
-    print(fs.ls("C:/", detail=True))
     # fs = github.GithubFileSystem(org="phil65", repo="prettyqt", path="/")
     # root = {'name': 'prettyqt', 'size': 0, 'type': 'directory'}
     # print(root)
