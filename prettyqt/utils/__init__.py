@@ -1,6 +1,7 @@
 """Module containing helper functions."""
 
 from collections.abc import Iterable
+import enum
 import logging
 from typing import Any
 
@@ -18,10 +19,13 @@ class bidict(bdct.bidict):
             super().__init__(kwargs)
 
     def get_list(self, flag: int) -> list[Any]:
-        return [k for k, v in self.items() if v & flag]
+        if isinstance(flag, enum.Enum):
+            flag = flag.value
+        return [k for k, v in self.items() if v.value & flag]
 
     def get_dict(self, flag: int) -> dict[str, Any]:
-        flag = int(flag)
+        if isinstance(flag, enum.Enum):
+            flag = flag.value
         return {k: v & flag for k, v in self.items()}
 
 
