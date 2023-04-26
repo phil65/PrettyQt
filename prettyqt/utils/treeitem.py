@@ -7,7 +7,7 @@ from collections.abc import Iterator, Sequence
 import logging
 from typing import Generic, TypeVar
 
-from prettyqt.utils import helpers
+from prettyqt.utils import get_repr
 
 
 logger = logging.getLogger(__name__)
@@ -28,13 +28,7 @@ class TreeItem(Generic[T]):
         self.children_fetched = False
 
     def __repr__(self):
-        name = type(self).__name__
-        if len(self.child_items) == 0:
-            string = helpers.cut_off_str(self.obj, MAX_OBJ_STR_LEN)
-            return f"<{name}(0x{id(self.obj):x}): = {string}>"
-        else:
-            n = len(self.child_items)
-            return f"<{name}(0x{id(self.obj):x}): ({n:d} children)>"
+        return get_repr(self, self.obj)
 
     def __iter__(self) -> Iterator[T]:
         return iter(self.child_items)
