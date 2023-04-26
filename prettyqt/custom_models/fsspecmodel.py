@@ -120,6 +120,7 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
         super().__init__(attr_cols=COLUMNS, parent=parent)
         self._show_root = show_root
         self.fs = fs
+        self.root_marker = fs.root_marker
         if self._show_root:
             self._root_item = treeitem.TreeItem(obj=None)
             self._root_item.children_fetched = True
@@ -223,7 +224,7 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
 
     def mimeData(self, indexes):
         mime_data = core.MimeData()
-        paths = [idx.data(self.Roles.FilePathRole) for idx in indexes]
+        paths = [i for idx in indexes if (i := idx.data(self.Roles.FilePathRole))]
         urls = [core.Url(i) for i in paths]
         mime_data.setUrls(urls)
         return mime_data
@@ -242,11 +243,113 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
     def dragEnterEvent(self, event):
         event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
 
-    def dropMimeData(self, mime_data, action, row, column, parent_index):
+    def hasChildren(self, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
+        if parent.column() > 0:
+            return False
+        if self._show_root and self.tree_item(parent) == self._root_item:
+            return True
+        return self.tree_item(parent).obj["type"] == "directory"
+
+    def canDropMimeData(
+        self,
+        mime_data: QtCore.QMimeData,
+        action: QtCore.Qt.DropAction,
+        row: int,
+        column: int,
+        parent_index: QtCore.QModelIndex,
+    ):
         if not mime_data.hasFormat("text/uri-list"):
             return False
-        print(mime_data.urls())
+        if column > 0:
+            return False
         return True
+
+    def dropMimeData(
+        self,
+        mime_data: QtCore.QMimeData,
+        action: QtCore.Qt.DropAction,
+        row: int,
+        column: int,
+        parent_index: QtCore.QModelIndex,
+    ):
+        # if not mime_data.hasFormat("text/uri-list"):
+        #     return False
+        print(mime_data.urls(), action, row, column)
+
+        # if action == Qt.IgnoreAction:
+        #     return True  # What is that?
+
+        # if action == Qt.MoveAction:
+        #     # Strangely, on some cases, we get a call to dropMimeData though
+        #     # self.canDropMimeData returned False.
+        #     # See https://github.com/olivierkes/manuskript/issues/169 to reproduce.
+        #     # So we double check for safety.
+        #     if not self.canDropMimeData(data, action, row, column, parent):
+        #         return False
+
+        # items = mime_data.urls()
+
+        # if not items:
+        #     return False
+
+        # if column > 0:
+        #     column = 0
+
+        # if row != -1:
+        #     begin_row = row
+        # elif parent.isValid():
+        #     begin_row = self.rowCount(parent) + 1
+        # else:
+        #     begin_row = self.rowCount() + 1
+
+        # if action == Qt.CopyAction:
+        #     # Behavior if parent is a text item
+        #     # For example, we select a text and do: CTRL+C CTRL+V
+        #     if parent.isValid() and not parent.internalPointer().isFolder():
+        #         # We insert copy in parent folder, just below
+        #         begin_row = parent.row() + 1
+        #         parent = parent.parent()
+
+        #     if parent.isValid() and parent.internalPointer().isFolder():
+        #         pass
+        # if not items:
+        #     return False
+
+        # if action == Qt.CopyAction:
+        #     pass
+
+        # r = self.insertItems(items, begin_row, parent)
+        # return r
+
+        # return True
+
+    # @functools.singledispatchmethod
+    def index(
+        self,
+        path_or_row: str | int,
+        column: int = 0,
+        index: QtCore.QModelIndex | None = None,
+    ) -> core.ModelIndex:
+        if isinstance(path_or_row, int):
+            return super().index(path_or_row, column, index)
+        return self._iter_path(path_or_row, column, index)
+
+    def _iter_path(self, target: os.PathLike, column: int = 0, parent=None):
+        parent = parent or core.ModelIndex()
+        target = pathlib.Path(target)
+        row_count = self.rowCount(parent)
+        for i in range(row_count):
+            index = self.index(i, column, parent)
+            path = self.filePath(index)
+            path = pathlib.Path(path)
+            if target == path:
+                return index
+            elif target.is_relative_to(path):
+                if self.canFetchMore(index):
+                    self.fetchMore(index)
+                return self._iter_path(target, column, index)
+        return core.ModelIndex()
 
     def roleNames(self) -> dict[int, QtCore.QByteArray]:
         return {
@@ -287,6 +390,11 @@ if __name__ == "__main__":
     tree.setAlternatingRowColors(True)
     tree.set_model(model)
     tree.set_selection_behaviour("rows")
+    idx = model.index(
+        "C:\\Users\\phili\\AppData\\Local\\Programs\\Python\\Python310\\Lib"
+    )
+    print(idx.isValid())
+    print(idx.parent().parent().data(constants.DISPLAY_ROLE))
     tree.setUniformRowHeights(True)
     tree.setAnimated(True)
     tree.show()
