@@ -1,3 +1,9 @@
+## v1.28.1 (2023-04-26)
+
+### Fix
+
+- weird PySide6 issue with Enum val as default kwarg (PyQt works fine..)
+
 ## v1.28.0 (2023-04-26)
 
 ### Feat
