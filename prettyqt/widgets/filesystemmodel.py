@@ -81,7 +81,7 @@ class FileSystemModelMixin(core.AbstractItemModelMixin):
         self.setFilter(core.dir.FILTERS[filter_mode])
 
     def get_paths(self, indexes: Sequence[QtCore.QModelIndex]) -> list[pathlib.Path]:
-        paths = [i.data(self.DATA_ROLE) for i in indexes]
+        paths = [i.data(self.Roles.FilePathRole) for i in indexes]
         if not paths:
             return []
         if paths[0] == "":
