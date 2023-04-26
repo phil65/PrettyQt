@@ -118,7 +118,6 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(attr_cols=COLUMNS, parent=parent)
-        self.rowsAboutToBeInserted.connect(self.fileIcon)
         self._show_root = show_root
         self.fs = fs
         if self._show_root:
@@ -158,17 +157,17 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
         tree_item = index.internalPointer()
         return None if tree_item is None else core.FileInfo(tree_item.obj["name"])
 
-    def fileName(self, index):
+    def fileName(self, index) -> str:
         tree_item = index.internalPointer()
-        return None if tree_item is None else pathlib.Path(tree_item.obj["name"]).name
+        return "" if tree_item is None else pathlib.Path(tree_item.obj["name"]).name
 
-    def filePath(self, index):
+    def filePath(self, index) -> str:
         tree_item = index.internalPointer()
-        return None if tree_item is None else tree_item.obj["name"]
+        return "" if tree_item is None else tree_item.obj["name"]
 
     def isDir(self, index):
         tree_item = index.internalPointer()
-        return None if tree_item is None else tree_item.obj["type"] == "directory"
+        return False if tree_item is None else tree_item.obj["type"] == "directory"
 
     def mkdir(self, index, name: str):
         tree_item = index.internalPointer()
@@ -176,9 +175,9 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
         new_folder = pathlib.Path(path) / name
         self.fs.mkdir(str(new_folder))
 
-    def size(self, index):
+    def size(self, index) -> int:
         tree_item = index.internalPointer()
-        return None if tree_item is None else tree_item.obj["size"]
+        return 0 if tree_item is None else tree_item.obj["size"]
 
     def remove(self, index) -> bool:
         tree_item = index.internalPointer()
@@ -208,9 +207,59 @@ class FSSpecTreeModel(custom_models.ColumnItemModel):
         path = tree_item.obj["name"]
         old_name = pathlib.Path(path).name
         parent_folder = pathlib.Path(path).parent
-        target = parent_folder / value
+        target = str(parent_folder / value)
         self.fs.mv(path, target)
-        self.fileRenamed.emit(parent_folder, old_name, value)
+        exists = self.fs.exists(target)
+        if exists:
+            self.fileRenamed.emit(parent_folder, old_name, value)
+        return exists
+
+    def type(self, index) -> str:
+        tree_item = index.internalPointer()
+        return tree_item.obj["type"]
+
+    def mimeTypes(self):
+        return ["text/uri-list"]
+
+    def mimeData(self, indexes):
+        mime_data = core.MimeData()
+        paths = [idx.data(self.Roles.FilePathRole) for idx in indexes]
+        urls = [core.Url(i) for i in paths]
+        mime_data.setUrls(urls)
+        return mime_data
+
+    def supportedDropActions(self):
+        return (
+            QtCore.Qt.DropAction.MoveAction
+            | QtCore.Qt.DropAction.CopyAction
+            | QtCore.Qt.DropAction.LinkAction
+        )
+
+    def flags(self, index):
+        flags = super().flags(index)
+        return flags | constants.DROP_ENABLED | constants.DRAG_ENABLED
+
+    def dragEnterEvent(self, event):
+        event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
+
+    def dropMimeData(self, mime_data, action, row, column, parent_index):
+        if not mime_data.hasFormat("text/uri-list"):
+            return False
+        print(mime_data.urls())
+        return True
+
+    def roleNames(self) -> dict[int, QtCore.QByteArray]:
+        return {
+            259: QtCore.QByteArray(b"filePermissions"),
+            1: QtCore.QByteArray(b"fileIcon"),
+            4: QtCore.QByteArray(b"statusTip"),
+            3: QtCore.QByteArray(b"toolTip"),
+            2: QtCore.QByteArray(b"edit"),
+            257: QtCore.QByteArray(b"filePath"),
+            0: QtCore.QByteArray(b"display"),
+            258: QtCore.QByteArray(b"fileName"),
+            5: QtCore.QByteArray(b"whatsThis"),
+        }
 
 
 if __name__ == "__main__":
@@ -231,8 +280,10 @@ if __name__ == "__main__":
     # print(root)
 
     model = FSSpecTreeModel(fs, root, False)
+    print(model.mimeTypes())
     tree = widgets.TreeView()
     tree.setRootIsDecorated(True)
+    tree.setup_dragdrop_move()
     tree.setAlternatingRowColors(True)
     tree.set_model(model)
     tree.set_selection_behaviour("rows")
