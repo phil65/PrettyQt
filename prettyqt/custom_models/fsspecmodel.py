@@ -217,12 +217,12 @@ class FSSpecTreeModel(
             else str(datetime.datetime.fromtimestamp(tree_item.obj["mtime"]))
         )
 
-    def permissions(self, index):
+    def permissions(self, index) -> QtCore.QFileDevice.Permission:
         tree_item = index.internalPointer()
-        if tree_item is None:
-            return ""
-        val = oct(int(tree_item.obj["mode"]))[-4:]
         flag = QtCore.QFileDevice.Permission(0)
+        if tree_item is None:
+            return flag
+        val = oct(int(tree_item.obj["mode"]))[-4:]
         for i in core.filedevice.PERMISSIONS.get_list(int(val, 8)):
             flag |= core.filedevice.PERMISSIONS[i]
         return flag
