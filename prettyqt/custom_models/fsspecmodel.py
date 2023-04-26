@@ -164,21 +164,6 @@ class FSSpecTreeModel(
         self.root_marker = fs.root_marker
         self.set_root_item(obj)
 
-    def set_root_item(self, obj):
-        if self._show_root:
-            self._root_item = treeitem.TreeItem(obj=None)
-            self._root_item.children_fetched = True
-            self.inspected_item = treeitem.TreeItem(obj=obj)
-            self._root_item.append_child(self.inspected_item)
-        else:
-            # The root itself will be invisible
-            self._root_item = treeitem.TreeItem(obj=obj)
-            self.inspected_item = self._root_item
-
-            # Fetch all items of the root so we can select the first row in the ctor.
-            root_index = self.index(0, 0)
-            self.fetchMore(root_index)
-
     def _fetch_object_children(self, obj: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         """Fetch the children of a Python object.
 

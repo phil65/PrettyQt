@@ -79,20 +79,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
     ):
         super().__init__(attr_cols=COLUMNS, parent=parent)
         self._show_root = show_root
-
-        if self._show_root:
-            self._root_item = treeitem.TreeItem(obj=None)
-            self._root_item.children_fetched = True
-            self.inspected_item = treeitem.TreeItem(obj=obj)
-            self._root_item.append_child(self.inspected_item)
-        else:
-            # The root itself will be invisible
-            self._root_item = treeitem.TreeItem(obj=obj)
-            self.inspected_item = self._root_item
-
-            # Fetch all items of the root so we can select the first row in the ctor.
-            root_index = self.index(0, 0)
-            self.fetchMore(root_index)
+        self.set_root_item(obj)
 
     @classmethod
     def from_system(cls, parent: QtCore.QObject | None = None) -> ImportlibTreeModel:
