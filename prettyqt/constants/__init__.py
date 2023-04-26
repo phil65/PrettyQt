@@ -8,8 +8,8 @@ Qt = QtCore.Qt
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
-SORT_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 1)  # type: ignore
-NAME_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 2)  # type: ignore
+SORT_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 100)  # type: ignore
+NAME_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 101)  # type: ignore
 EDIT_ROLE = Qt.ItemDataRole.EditRole
 BACKGROUND_ROLE = Qt.ItemDataRole.BackgroundRole
 FOREGROUND_ROLE = Qt.ItemDataRole.ForegroundRole
