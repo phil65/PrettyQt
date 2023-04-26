@@ -70,6 +70,21 @@ PERMISSIONS = bidict(
     exe_other=QtCore.QFileDevice.Permission.ExeOther,
 )
 
+PermissionStr = Literal[
+    "read_owner",
+    "write_owner",
+    "exe_owner",
+    "read_user",
+    "write_user",
+    "exe_user",
+    "read_group",
+    "write_group",
+    "exe_group",
+    "read_other",
+    "write_other",
+    "exe_other",
+]
+
 
 class FileDeviceMixin(core.IODeviceMixin):
     def __repr__(self):

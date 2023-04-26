@@ -92,6 +92,11 @@ class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
             ]
         return paths
 
+    def get_permissions(
+        self, index: core.ModelIndex
+    ) -> list[core.filedevice.PermissionStr]:
+        return core.filedevice.PERMISSIONS.get_list(self.permissions())
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
