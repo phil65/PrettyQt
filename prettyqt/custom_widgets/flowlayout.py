@@ -50,8 +50,8 @@ class FlowLayout(widgets.Layout):
     def takeAt(self, index: int) -> QtWidgets.QLayoutItem | None:  # type: ignore
         return self._items.pop(index) if 0 <= index < len(self._items) else None
 
-    # def expandingDirections(self) -> QtCore.Qt.Orientations:
-    #     return QtCore.Qt.Orientations(0)
+    def expandingDirections(self) -> QtCore.Qt.Orientation:
+        return QtCore.Qt.Orientation(0)
 
     def hasHeightForWidth(self) -> bool:
         return True
