@@ -1,3 +1,13 @@
+## v1.27.0 (2023-04-26)
+
+### Feat
+
+- filesystemmodel mixin for FsSpecModel
+
+### Fix
+
+- **FsSpecModel**: always return correct type for permissions()
+
 ## v1.26.0 (2023-04-26)
 
 ### Feat
