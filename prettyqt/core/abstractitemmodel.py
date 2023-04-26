@@ -176,6 +176,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.layoutAboutToBeChanged.emit()
         self.layoutChanged.emit()
 
+    def get_role_names(self) -> dict[int, str]:
+        return {i: v.data().decode() for i, v in self.roleNames().items()}
+
 
 class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
     pass
