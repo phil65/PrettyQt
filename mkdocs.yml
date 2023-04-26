@@ -65,6 +65,7 @@ plugins:
         handlers:
           python:
             options:
+              # https://mkdocstrings.github.io/python/usage/
               show_source: true
               show_signature_annotations: true
               show_if_no_docstring: true

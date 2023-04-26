@@ -16,7 +16,7 @@ OPTIONS = bidict(
 )
 
 
-class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
+class FileSystemModelMixin(core.AbstractItemModelMixin):
     """Class to populate a filesystem treeview."""
 
     DATA_ROLE = constants.USER_ROLE + 33  # type: ignore
@@ -96,6 +96,10 @@ class FileSystemModel(core.AbstractItemModelMixin, QtWidgets.QFileSystemModel):
         self, index: core.ModelIndex
     ) -> list[core.filedevice.PermissionStr]:
         return core.filedevice.PERMISSIONS.get_list(self.permissions())
+
+
+class FileSystemModel(FileSystemModelMixin, QtWidgets.QFileSystemModel):
+    pass
 
 
 if __name__ == "__main__":
