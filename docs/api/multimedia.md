@@ -1,0 +1,4 @@
+multimedia module
+=================
+
+::: prettyqt.multimedia
