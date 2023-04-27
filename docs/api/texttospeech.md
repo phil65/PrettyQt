@@ -1,0 +1,4 @@
+texttospeech module
+===================
+
+::: prettyqt.texttospeech
