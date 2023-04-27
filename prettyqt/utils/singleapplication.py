@@ -1,16 +1,15 @@
 from __future__ import annotations
 
-import sys
-
-from prettyqt import core, network, widgets
+from prettyqt import core, network
 
 
-class SingleApplication(widgets.Application):
+class SingleApplicationMixin:
     message_received = core.Signal(str)
 
-    def __init__(self, app_id: str):
-        super().__init__(sys.argv)
-        self.app_id = app_id
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # generate a (hopefully) unique name
+        self.app_id = type(self).__name__ + self.applicationName()
         self._activate_on_message = True
 
         # Is there another instance running?
@@ -33,13 +32,16 @@ class SingleApplication(widgets.Application):
     def is_running(self) -> bool:
         return self._is_running
 
-    def activate_window(self):
-        window = self.get_mainwindow()
-        if window is None:
-            return
-        window.raise_to_top()
+    def _activate_window(self):
+        # bit dumb inheritance check to avoid importing QtWidgets so that this mixin
+        # can also get used with QGuiApplication and QCoreApplication
+        if hasattr(self, "get_mainwindow"):
+            window = self.get_mainwindow()
+            if window is None:
+                return
+            window.raise_to_top()
 
-    def send_message(self, msg: str) -> bool:
+    def _send_message(self, msg: str) -> bool:
         if self._out_stream is None or self._out_socket is None:
             return False
         self._out_stream << msg << "\n"
@@ -56,7 +58,7 @@ class SingleApplication(widgets.Application):
         # self._in_stream.set_codec("UTF-8")
         self._in_socket.readyRead.connect(self._on_ready_read)
         if self._activate_on_message:
-            self.activate_window()
+            self._activate_window()
 
     def _on_ready_read(self):
         if self._in_stream is None:
@@ -66,6 +68,7 @@ class SingleApplication(widgets.Application):
 
 
 if __name__ == "__main__":
-    app1 = SingleApplication("test")
+    App = type("SingleApp", (SingleApplicationMixin, core.CoreApplication), {})
+    app1 = App()
     print(app1.is_running())
-    app1.exec()
+    # app1.exec()
