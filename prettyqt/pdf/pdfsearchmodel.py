@@ -9,23 +9,23 @@ from prettyqt.utils import bidict, datatypes
 
 
 ROLE = bidict(
-    title=QtPdf.QPdfBookmarkModel.Role.Title,
-    level=QtPdf.QPdfBookmarkModel.Role.Level,
-    page=QtPdf.QPdfBookmarkModel.Role.Page,
-    location=QtPdf.QPdfBookmarkModel.Role.Location,
-    zoom=QtPdf.QPdfBookmarkModel.Role.Zoom,
+    page=QtPdf.QPdfSearchModel.Role.Page,
+    index_on_page=QtPdf.QPdfSearchModel.Role.IndexOnPage,
+    location=QtPdf.QPdfSearchModel.Role.Location,
+    context_Before=QtPdf.QPdfSearchModel.Role.ContextBefore,
+    context_after=QtPdf.QPdfSearchModel.Role.ContextAfter,
 )
 
 RoleStr = Literal[
-    "title",
-    "level",
     "page",
+    "index_on_page",
     "location",
-    "zoom",
+    "context_Before",
+    "context_after",
 ]
 
 
-class PdfBookmarkModel(core.AbstractItemModelMixin, QtPdf.QPdfBookmarkModel):
+class PdfSearchModel(core.AbstractItemModelMixin, QtPdf.QPdfSearchModel):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self.setDocument(pdf.PdfDocument(self))
@@ -40,7 +40,7 @@ class PdfBookmarkModel(core.AbstractItemModelMixin, QtPdf.QPdfBookmarkModel):
 
 if __name__ == "__main__":
     app = widgets.app()
-    model = PdfBookmarkModel()
+    model = PdfSearchModel()
     widget = widgets.TableView()
     widget.set_model(model)
     widget.show()

@@ -2,6 +2,7 @@
 
 from .pdfdocument import PdfDocument
 from .pdfbookmarkmodel import PdfBookmarkModel
+from .pdfsearchmodel import PdfSearchModel
 
 
-__all__ = ["PdfDocument", "PdfBookmarkModel"]
+__all__ = ["PdfDocument", "PdfBookmarkModel", "PdfSearchModel"]
