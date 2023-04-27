@@ -168,10 +168,9 @@ class ObjectBrowser(widgets.MainWindow):
         view_menu.addAction(self.toggle_auto_refresh_action)
 
         view_menu.addSeparator()
-        self.show_cols_submenu = widgets.Menu("Table columns")
+        self.show_cols_submenu = self.obj_tree.h_header.createPopupMenu()
+        self.show_cols_submenu.setTitle("Table columns")
         view_menu.add_menu(self.show_cols_submenu)
-        actions = self.obj_tree.h_header.get_header_actions()
-        self.show_cols_submenu.add_actions(actions)
         view_menu.addSeparator()
         view_menu.addAction(self.toggle_callable_action)
         view_menu.addAction(self.toggle_special_attribute_action)

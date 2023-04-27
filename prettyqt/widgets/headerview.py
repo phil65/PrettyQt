@@ -103,12 +103,15 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
 
     def contextMenuEvent(self, event):
         """Context menu for our files tree."""
-        menu = widgets.Menu(parent=self)
-        actions = self.get_header_actions()
-        menu.add_actions(actions)
+        menu = self.createPopupMenu()
         menu.exec(self.mapToGlobal(event.pos()))
 
     def get_header_actions(self) -> list[widgets.Action]:
+        menu = self.createPopupMenu()
+        return menu.actions()
+
+    def createPopupMenu(self) -> widgets.Menu:
+        menu = widgets.Menu(parent=self)
         actions = []
         labels = self.get_section_labels()[1:]
         for i, header_label in enumerate(labels, start=1):
@@ -117,7 +120,8 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             fn = functools.partial(self.set_section_hidden, i=i, hide=val)
             action.triggered.connect(fn)
             actions.append(action)
-        return actions
+        menu.add_actions(actions)
+        return menu
 
     def set_section_hidden(self, i: int, hide: bool):
         self.section_vis_changed.emit(i, hide)
