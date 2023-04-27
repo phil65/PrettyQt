@@ -29,7 +29,8 @@ if TYPE_CHECKING:
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
-QWIDGETSIZE_MAX = 16777215   # QtWidgets.QWIDGETSIZE_MAX
+QWIDGETSIZE_MAX = 16777215  # QtWidgets.QWIDGETSIZE_MAX
+
 
 class WidgetMixin(core.ObjectMixin):
     box: QtWidgets.QLayout
@@ -42,6 +43,14 @@ class WidgetMixin(core.ObjectMixin):
             super().resize(*size[0])
         else:
             super().resize(*size)
+
+    def insertAction(
+        self, position_or_action: int | QtWidgets.QAction, action: QtWidgets.QAction
+    ):
+    """Extend insertAction to also allow int index."""
+        if isinstance(position_or_action, int):
+            position_or_action = self.actions()[position_or_action]
+        super().insertAction(position_or_action, action)
 
     def toggle_fullscreen(self):
         """Toggle between fullscreen and regular size."""
