@@ -46,7 +46,7 @@ class ObjectBrowser(widgets.MainWindow):
     """Object browser main application window."""
 
     _app = None  # Reference to the global application.
-    _browsers: list[ObjectBrowser | None] = []  # Keep lists of browser windows.
+    _browsers: list[ObjectBrowser] = []  # Keep lists of browser windows.
 
     def __init__(self, obj, name: str = ""):
         super().__init__()
@@ -76,8 +76,44 @@ class ObjectBrowser(widgets.MainWindow):
         self._proxy_tree_model.setDynamicSortFilter(True)
         # self._proxy_tree_model.setSortCaseSensitivity(Qt.CaseInsensitive)
 
-        # Views
-        self._setup_actions()
+        self.toggle_callable_action = widgets.Action(
+            text="Show callable attributes",
+            parent=self,
+            checkable=True,
+            shortcut=gui.KeySequence("Alt+C"),
+            statustip="Shows/hides callable attributes (functions, methods, etc.)",
+        )
+        self.toggle_callable_action.toggled.connect(
+            self._proxy_tree_model.set_show_callables
+        )
+
+        # Show/hide special attributes
+        self.toggle_special_attribute_action = widgets.Action(
+            text="Show __special__ attributes",
+            parent=self,
+            checkable=True,
+            shortcut=gui.KeySequence("Alt+S"),
+            statustip="Shows or hides __special__ attributes",
+        )
+        self.toggle_special_attribute_action.toggled.connect(
+            self._proxy_tree_model.set_show_special_attrs
+        )
+
+        # Toggle auto-refresh on/off
+        self.toggle_auto_refresh_action = widgets.Action(
+            text="Auto-refresh",
+            parent=self,
+            checkable=True,
+            statustip=f"Auto refresh every {self._refresh_rate} seconds",
+        )
+        self.toggle_auto_refresh_action.toggled.connect(self.toggle_auto_refresh)
+
+        # Add another refresh action with a different shortcut. An action must be added to
+        # a visible widget for it to receive events. It is added to the main windows to
+        # prevent it from being displayed again in the menu
+        self.refresh_action_f5 = widgets.Action(self, text="&Refresh2", shortcut="F5")
+        self.refresh_action_f5.triggered.connect(self._tree_model.refresh_tree)
+        self.addAction(self.refresh_action_f5)
         self.central_splitter = widgets.Splitter(
             parent=self, orientation=constants.VERTICAL
         )
@@ -210,48 +246,6 @@ class ObjectBrowser(widgets.MainWindow):
 
         return idx
 
-    def _setup_actions(self):
-        """Create the main window actions."""
-        # Show/hide callable objects
-        self.toggle_callable_action = widgets.Action(
-            text="Show callable attributes",
-            parent=self,
-            checkable=True,
-            shortcut=gui.KeySequence("Alt+C"),
-            statustip="Shows/hides callable attributes (functions, methods, etc.)",
-        )
-        self.toggle_callable_action.toggled.connect(
-            self._proxy_tree_model.set_show_callables
-        )
-
-        # Show/hide special attributes
-        self.toggle_special_attribute_action = widgets.Action(
-            text="Show __special__ attributes",
-            parent=self,
-            checkable=True,
-            shortcut=gui.KeySequence("Alt+S"),
-            statustip="Shows or hides __special__ attributes",
-        )
-        self.toggle_special_attribute_action.toggled.connect(
-            self._proxy_tree_model.set_show_special_attrs
-        )
-
-        # Toggle auto-refresh on/off
-        self.toggle_auto_refresh_action = widgets.Action(
-            text="Auto-refresh",
-            parent=self,
-            checkable=True,
-            statustip=f"Auto refresh every {self._refresh_rate} seconds",
-        )
-        self.toggle_auto_refresh_action.toggled.connect(self.toggle_auto_refresh)
-
-        # Add another refresh action with a different shortcut. An action must be added to
-        # a visible widget for it to receive events. It is added to the main windows to
-        # prevent it from being displayed again in the menu
-        self.refresh_action_f5 = widgets.Action(self, text="&Refresh2", shortcut="F5")
-        self.refresh_action_f5.triggered.connect(self._tree_model.refresh_tree)
-        self.addAction(self.refresh_action_f5)
-
     def _settings_group_name(self, postfix: str) -> str:
         """Construct a group name for the persistent settings.
 
@@ -262,7 +256,7 @@ class ObjectBrowser(widgets.MainWindow):
         postfix string is appended.
         """
         column_names = ",".join([col.name for col in self._attr_cols])
-        columns_hash = hashlib.md5(column_names.encode("utf-8")).hexdigest()
+        columns_hash = hashlib.md5(column_names.encode()).hexdigest()
         return f"{columns_hash}_win{self._instance_nr}_{postfix}"
 
     def _write_model_settings(self):
@@ -345,7 +339,7 @@ class ObjectBrowser(widgets.MainWindow):
         event.accept()
         """Set the reference in the browser list to None."""
         idx = self._browsers.index(self)
-        self._browsers[idx] = None
+        self._browsers.pop(idx)
         logger.debug("Closed window %s", self._instance_nr)
 
     @classmethod
