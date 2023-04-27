@@ -3647,6 +3647,20 @@
   
   
     <li class="md-nav__item">
+      <a href="multimedia.html" class="md-nav__link">
+        multimedia
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="network.html" class="md-nav__link">
         network
       </a>
@@ -3775,6 +3789,20 @@
     <li class="md-nav__item">
       <a href="syntaxhighlighters.html" class="md-nav__link">
         syntaxhighlighters
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="texttospeech.html" class="md-nav__link">
+        texttospeech
       </a>
     </li>
   
@@ -7662,8 +7690,7 @@
 <span class="normal"><a href="#__codelineno-0-188">188</a></span>
 <span class="normal"><a href="#__codelineno-0-189">189</a></span>
 <span class="normal"><a href="#__codelineno-0-190">190</a></span>
-<span class="normal"><a href="#__codelineno-0-191">191</a></span>
-<span class="normal"><a href="#__codelineno-0-192">192</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="k">class</span> <span class="nc">BorderLayout</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-191">191</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17"></a><span class="k">class</span> <span class="nc">BorderLayout</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">Layout</span><span class="p">):</span>
 </span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18"></a>    <span class="nd">@core</span><span class="o">.</span><span class="n">Enum</span>
 </span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a>    <span class="k">class</span> <span class="nc">Position</span><span class="p">(</span><span class="n">enum</span><span class="o">.</span><span class="n">IntEnum</span><span class="p">):</span>
 </span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Item position.&quot;&quot;&quot;</span>
@@ -7818,27 +7845,26 @@
 </span><span id="__span-0-169"><a id="__codelineno-0-169" name="__codelineno-0-169"></a>        <span class="n">total_size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">()</span>
 </span><span id="__span-0-170"><a id="__codelineno-0-170" name="__codelineno-0-170"></a>
 </span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a>        <span class="k">for</span> <span class="n">wrapper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
-</span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>            <span class="n">position</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span>
-</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>            <span class="k">if</span> <span class="n">size_type</span> <span class="o">==</span> <span class="s2">&quot;minimum&quot;</span><span class="p">:</span>
-</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>                <span class="n">item_size</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">minimumSize</span><span class="p">()</span>
-</span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>            <span class="k">else</span><span class="p">:</span>  <span class="c1"># size_type == &quot;size_hint&quot;</span>
-</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>                <span class="n">item_size</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span>
-</span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>
-</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>            <span class="k">if</span> <span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">,</span>
-</span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">,</span>
-</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
-</span><span id="__span-0-182"><a id="__codelineno-0-182" name="__codelineno-0-182"></a>            <span class="p">):</span>
-</span><span id="__span-0-183"><a id="__codelineno-0-183" name="__codelineno-0-183"></a>                <span class="n">total_size</span><span class="o">.</span><span class="n">setHeight</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
-</span><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a>
-</span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a>            <span class="k">if</span> <span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">,</span>
-</span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">,</span>
-</span><span id="__span-0-188"><a id="__codelineno-0-188" name="__codelineno-0-188"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
-</span><span id="__span-0-189"><a id="__codelineno-0-189" name="__codelineno-0-189"></a>            <span class="p">):</span>
-</span><span id="__span-0-190"><a id="__codelineno-0-190" name="__codelineno-0-190"></a>                <span class="n">total_size</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
-</span><span id="__span-0-191"><a id="__codelineno-0-191" name="__codelineno-0-191"></a>
-</span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a>        <span class="k">return</span> <span class="n">total_size</span>
+</span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>            <span class="n">item_size</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>                <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">minimumSize</span><span class="p">()</span>
+</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>                <span class="k">if</span> <span class="n">size_type</span> <span class="o">==</span> <span class="s2">&quot;minimum&quot;</span>
+</span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>                <span class="k">else</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span>
+</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>            <span class="p">)</span>
+</span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>            <span class="k">if</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">,</span>
+</span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">,</span>
+</span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
+</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>            <span class="p">):</span>
+</span><span id="__span-0-182"><a id="__codelineno-0-182" name="__codelineno-0-182"></a>                <span class="n">total_size</span><span class="o">.</span><span class="n">setHeight</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+</span><span id="__span-0-183"><a id="__codelineno-0-183" name="__codelineno-0-183"></a>
+</span><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a>            <span class="k">if</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">,</span>
+</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">,</span>
+</span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>                <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
+</span><span id="__span-0-188"><a id="__codelineno-0-188" name="__codelineno-0-188"></a>            <span class="p">):</span>
+</span><span id="__span-0-189"><a id="__codelineno-0-189" name="__codelineno-0-189"></a>                <span class="n">total_size</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
+</span><span id="__span-0-190"><a id="__codelineno-0-190" name="__codelineno-0-190"></a>
+</span><span id="__span-0-191"><a id="__codelineno-0-191" name="__codelineno-0-191"></a>        <span class="k">return</span> <span class="n">total_size</span>
 </span></code></pre></div></td></tr></table></div>
         </details>
 
@@ -8211,32 +8237,30 @@
 <span class="normal"><a href="#__codelineno-0-188">188</a></span>
 <span class="normal"><a href="#__codelineno-0-189">189</a></span>
 <span class="normal"><a href="#__codelineno-0-190">190</a></span>
-<span class="normal"><a href="#__codelineno-0-191">191</a></span>
-<span class="normal"><a href="#__codelineno-0-192">192</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-168"><a id="__codelineno-0-168" name="__codelineno-0-168"></a><span class="k">def</span> <span class="nf">calculate_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;minimum&quot;</span><span class="p">,</span> <span class="s2">&quot;size_hint&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">:</span>
+<span class="normal"><a href="#__codelineno-0-191">191</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-168"><a id="__codelineno-0-168" name="__codelineno-0-168"></a><span class="k">def</span> <span class="nf">calculate_size</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;minimum&quot;</span><span class="p">,</span> <span class="s2">&quot;size_hint&quot;</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">:</span>
 </span><span id="__span-0-169"><a id="__codelineno-0-169" name="__codelineno-0-169"></a>    <span class="n">total_size</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Size</span><span class="p">()</span>
 </span><span id="__span-0-170"><a id="__codelineno-0-170" name="__codelineno-0-170"></a>
 </span><span id="__span-0-171"><a id="__codelineno-0-171" name="__codelineno-0-171"></a>    <span class="k">for</span> <span class="n">wrapper</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
-</span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>        <span class="n">position</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span>
-</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>        <span class="k">if</span> <span class="n">size_type</span> <span class="o">==</span> <span class="s2">&quot;minimum&quot;</span><span class="p">:</span>
-</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>            <span class="n">item_size</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">minimumSize</span><span class="p">()</span>
-</span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>        <span class="k">else</span><span class="p">:</span>  <span class="c1"># size_type == &quot;size_hint&quot;</span>
-</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>            <span class="n">item_size</span> <span class="o">=</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span>
-</span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>
-</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>        <span class="k">if</span> <span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">,</span>
-</span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">,</span>
-</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
-</span><span id="__span-0-182"><a id="__codelineno-0-182" name="__codelineno-0-182"></a>        <span class="p">):</span>
-</span><span id="__span-0-183"><a id="__codelineno-0-183" name="__codelineno-0-183"></a>            <span class="n">total_size</span><span class="o">.</span><span class="n">setHeight</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
-</span><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a>
-</span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a>        <span class="k">if</span> <span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
-</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">,</span>
-</span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">,</span>
-</span><span id="__span-0-188"><a id="__codelineno-0-188" name="__codelineno-0-188"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
-</span><span id="__span-0-189"><a id="__codelineno-0-189" name="__codelineno-0-189"></a>        <span class="p">):</span>
-</span><span id="__span-0-190"><a id="__codelineno-0-190" name="__codelineno-0-190"></a>            <span class="n">total_size</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
-</span><span id="__span-0-191"><a id="__codelineno-0-191" name="__codelineno-0-191"></a>
-</span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a>    <span class="k">return</span> <span class="n">total_size</span>
+</span><span id="__span-0-172"><a id="__codelineno-0-172" name="__codelineno-0-172"></a>        <span class="n">item_size</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="__span-0-173"><a id="__codelineno-0-173" name="__codelineno-0-173"></a>            <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">minimumSize</span><span class="p">()</span>
+</span><span id="__span-0-174"><a id="__codelineno-0-174" name="__codelineno-0-174"></a>            <span class="k">if</span> <span class="n">size_type</span> <span class="o">==</span> <span class="s2">&quot;minimum&quot;</span>
+</span><span id="__span-0-175"><a id="__codelineno-0-175" name="__codelineno-0-175"></a>            <span class="k">else</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">item</span><span class="o">.</span><span class="n">sizeHint</span><span class="p">()</span>
+</span><span id="__span-0-176"><a id="__codelineno-0-176" name="__codelineno-0-176"></a>        <span class="p">)</span>
+</span><span id="__span-0-177"><a id="__codelineno-0-177" name="__codelineno-0-177"></a>        <span class="k">if</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="__span-0-178"><a id="__codelineno-0-178" name="__codelineno-0-178"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">North</span><span class="p">,</span>
+</span><span id="__span-0-179"><a id="__codelineno-0-179" name="__codelineno-0-179"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">South</span><span class="p">,</span>
+</span><span id="__span-0-180"><a id="__codelineno-0-180" name="__codelineno-0-180"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
+</span><span id="__span-0-181"><a id="__codelineno-0-181" name="__codelineno-0-181"></a>        <span class="p">):</span>
+</span><span id="__span-0-182"><a id="__codelineno-0-182" name="__codelineno-0-182"></a>            <span class="n">total_size</span><span class="o">.</span><span class="n">setHeight</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">height</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">height</span><span class="p">())</span>
+</span><span id="__span-0-183"><a id="__codelineno-0-183" name="__codelineno-0-183"></a>
+</span><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a>        <span class="k">if</span> <span class="n">wrapper</span><span class="o">.</span><span class="n">position</span> <span class="ow">in</span> <span class="p">(</span>
+</span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">West</span><span class="p">,</span>
+</span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">East</span><span class="p">,</span>
+</span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>            <span class="n">BorderLayout</span><span class="o">.</span><span class="n">Position</span><span class="o">.</span><span class="n">Center</span><span class="p">,</span>
+</span><span id="__span-0-188"><a id="__codelineno-0-188" name="__codelineno-0-188"></a>        <span class="p">):</span>
+</span><span id="__span-0-189"><a id="__codelineno-0-189" name="__codelineno-0-189"></a>            <span class="n">total_size</span><span class="o">.</span><span class="n">setWidth</span><span class="p">(</span><span class="n">total_size</span><span class="o">.</span><span class="n">width</span><span class="p">()</span> <span class="o">+</span> <span class="n">item_size</span><span class="o">.</span><span class="n">width</span><span class="p">())</span>
+</span><span id="__span-0-190"><a id="__codelineno-0-190" name="__codelineno-0-190"></a>
+</span><span id="__span-0-191"><a id="__codelineno-0-191" name="__codelineno-0-191"></a>    <span class="k">return</span> <span class="n">total_size</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -17826,8 +17850,8 @@ music_icon = qta.IconWidget('fa5s.music',
 <code class="highlight language-python"><span class="n">enabled</span><span class="p">:</span> <span class="nb">bool</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-property"><code>property</code></small>
       <small class="doc doc-label doc-label-writable"><code>writable</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
   </span>
 
 </h3>
@@ -18944,8 +18968,8 @@ music_icon = qta.IconWidget('fa5s.music',
 <code class="highlight language-python"><span class="n">compile_flags</span><span class="p">:</span> <span class="nb">int</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-property"><code>property</code></small>
       <small class="doc doc-label doc-label-writable"><code>writable</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
   </span>
 
 </h3>
@@ -19002,8 +19026,8 @@ music_icon = qta.IconWidget('fa5s.music',
 <code class="highlight language-python"><span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-property"><code>property</code></small>
       <small class="doc doc-label doc-label-writable"><code>writable</code></small>
+      <small class="doc doc-label doc-label-property"><code>property</code></small>
   </span>
 
 </h3>
