@@ -61,6 +61,15 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
         qcsl.hide()
         widget.show()
 
+    def use_alpha_channel(self, value: bool = True):
+        self.setOption(self.ColorDialogOption.ShowAlphaChannel, value)
+
+    def hide_buttons(self, value: bool = True):
+        self.setOption(self.ColorDialogOption.NoButtons, value)
+
+    def use_native_dialog(self, value: bool = True):
+        self.setOption(self.ColorDialogOption.DontUseNativeDialog, not value)
+
 
 class CPAlphaShowLabel(widgets.Label):
     """Label which displays the currently-active color using checkerboard alpha.
