@@ -8,7 +8,7 @@ import os
 import pathlib
 from typing import TypedDict
 
-from prettyqt import constants, core, custom_models, widgets
+from prettyqt import constants, core, custom_models, gui, widgets
 from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
 
@@ -134,7 +134,7 @@ COLUMNS = [
 
 
 class FSSpecTreeModel(
-    widgets.filesystemmodel.FileSystemModelMixin, custom_models.ColumnItemModel
+    gui.filesystemmodel.FileSystemModelMixin, custom_models.ColumnItemModel
 ):
     """Model that provides an interface to an objectree that is build of tree items."""
 

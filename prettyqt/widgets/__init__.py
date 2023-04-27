@@ -103,7 +103,6 @@ from .messagebox import MessageBox
 from .errormessage import ErrorMessage
 
 from .fileiconprovider import FileIconProvider
-from .filesystemmodel import FileSystemModel
 
 from .slider import Slider
 from .dial import Dial
@@ -293,7 +292,6 @@ __all__ = [
     "MessageBox",
     "ErrorMessage",
     "FileIconProvider",
-    "FileSystemModel",
     "LayoutItem",
     "LayoutItemMixin",
     "WidgetItem",

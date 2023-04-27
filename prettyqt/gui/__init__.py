@@ -138,6 +138,7 @@ from .undocommand import UndoCommand
 from .undostack import UndoStack
 from .undogroup import UndoGroup
 from .colorspace import ColorSpace
+from .filesystemmodel import FileSystemModel
 
 
 def app(args: list[str] | None = None) -> GuiApplication:
@@ -285,4 +286,5 @@ __all__ = [
     "AbstractTextDocumentLayoutMixin",
     "InputMethod",
     "ColorSpace",
+    "FileSystemModel",
 ]

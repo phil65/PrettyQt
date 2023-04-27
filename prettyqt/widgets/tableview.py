@@ -76,8 +76,10 @@ class TableView(TableViewMixin, QtWidgets.QTableView):
 
 
 if __name__ == "__main__":
+    from prettyqt import gui
+
     app = widgets.app()
     widget = TableView()
-    widget.set_model(widgets.FileSystemModel())
+    widget.set_model(gui.FileSystemModel())
     widget.show()
     app.main_loop()
