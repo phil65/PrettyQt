@@ -55,7 +55,6 @@ def sizeof_fmt(num, suffix="B"):
     return f"{num:.1f}Yi{suffix}"
 
 
-
 def get_filename(path):
     return pathlib.Path(path).name if path else ""
 
@@ -82,9 +81,7 @@ ATTR_MODEL_PATH = custom_models.ColumnItem(
 ATTR_MODEL_SIZE = custom_models.ColumnItem(
     name="Size",
     doc="Item size.",
-    label=lambda x: sizeof_fmt(x.obj["size"])
-    if x.obj["size"] > 0
-    else "",
+    label=lambda x: sizeof_fmt(x.obj["size"]) if x.obj["size"] > 0 else "",
     sort_value=lambda x: x.obj["size"],
 )
 
@@ -187,6 +184,11 @@ class FSSpecTreeModel(
         # not sure if this should be emitted later?
         self.directoryLoaded.emit(obj.obj["name"])
         return items
+
+    def get_protocol_path(self, index: QtCore.QModelIndex) -> str:
+        protocol = self.fs.protocol
+        path = index.data(self.Roles.FilePathRole)
+        return f"{protocol}://{path}"
 
     def fileIcon(self, index):
         tree_item = index.internalPointer()
