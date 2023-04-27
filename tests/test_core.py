@@ -7,7 +7,7 @@ import tempfile
 
 import pytest
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, gui, widgets
 import prettyqt.qt
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
@@ -251,6 +251,21 @@ def test_fileinfo():
     info.get_last_read()
 
 
+def test_filesystemwatcher():
+    watcher = core.FileSystemWatcher()
+    watcher.add_path(core.Dir.tempPath())
+    watcher.add_paths([])
+    watcher.get_directories()
+    watcher.get_files()
+    watcher.get_paths()
+
+
+def test_fileselector():
+    selector = core.FileSelector()
+    selector.select_path("")
+    selector.select_url("")
+
+
 def test_itemselection():
     selection = core.ItemSelection(core.ModelIndex(), core.ModelIndex())
     index = core.ModelIndex()
@@ -384,6 +399,20 @@ def test_metaobject():
     metaobj = core.AbstractItemModel.get_metaobject()
     metaobj.get_enums()
     metaobj.get_constructors()
+    metaobj.get_super_class()
+    metaobj.get_class_info()
+    with pytest.raises(KeyError):
+        metaobj.get_method("test")
+    with pytest.raises(KeyError):
+        metaobj.get_enum("test")
+    with pytest.raises(KeyError):
+        metaobj.get_property("test")
+    with pytest.raises(KeyError):
+        metaobj.get_constructor("test")
+    metaobj.get_methods()
+    metaobj.get_methods(type_filter="slot")
+    metaobj.get_signals()
+    metaobj.get_meta_type()
 
 
 def test_mimedata():
@@ -445,6 +474,8 @@ def test_object(qapp):
 
 def test_operatingsystemversion():
     version = core.OperatingSystemVersion("android", 11, 0, 0)
+    version2 = core.OperatingSystemVersion("android", 11, 0, 0)
+    assert version == version2
     assert version.get_versionnumber() == core.VersionNumber(11, 0, 0)
     assert version.get_type() == "android"
 
@@ -662,7 +693,19 @@ def test_standardpaths():
 
 
 def test_sortfilterproxymodel():
-    core.SortFilterProxyModel()
+    source_model = gui.StandardItemModel()
+    model = core.SortFilterProxyModel()
+    model.setSourceModel(source_model)
+    model.set_sort_case_sensitive(True)
+    assert model.is_sort_case_sensitive()
+    model.set_sort_case_sensitive(False)
+
+    model.set_filter_case_sensitive(True)
+    assert model.is_filter_case_sensitive()
+    model.set_filter_case_sensitive(False)
+
+    model.get_filter_regular_expression()
+    model.set_sort_role("display")
 
 
 def storageinfo():
