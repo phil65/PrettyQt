@@ -109,8 +109,6 @@ from .dial import Dial
 
 from .dockwidget import DockWidget
 
-from .action import Action, ActionMixin
-from .actiongroup import ActionGroup
 from .widgetaction import WidgetAction
 from .menu import Menu
 from .mainwindow import MainWindow
@@ -331,9 +329,6 @@ __all__ = [
     "ListWidgetItem",
     "TreeWidgetItem",
     "TreeWidgetItemIterator",
-    "Action",
-    "ActionMixin",
-    "ActionGroup",
     "WidgetAction",
     "ToolButton",
     "ToolTip",

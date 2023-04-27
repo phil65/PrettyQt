@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import pathlib
 
-from prettyqt import core, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
@@ -41,7 +41,7 @@ class FileChooserButton(widgets.Widget):
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()
         layout.add(self.lineedit)
-        action = widgets.Action()
+        action = gui.Action()
         if self.file_mode == "directory":
             action.set_icon("mdi.folder-outline")
         else:

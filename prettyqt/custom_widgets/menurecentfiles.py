@@ -8,7 +8,7 @@ import contextlib
 import os
 import sys
 
-from prettyqt import core, iconprovider, widgets
+from prettyqt import core, gui, iconprovider, widgets
 
 
 def _(text):
@@ -179,7 +179,7 @@ class MenuRecentFiles(widgets.Menu):
         self.clear()
         self.recent_files_actions[:] = []
         for file in self.manager.get_recent_files():
-            action = widgets.Action(self)
+            action = gui.Action(self)
             action.setText(os.path.split(file)[1])
             action.setToolTip(file)
             action.setStatusTip(file)
@@ -189,7 +189,7 @@ class MenuRecentFiles(widgets.Menu):
             self.addAction(action)
             self.recent_files_actions.append(action)
         self.addSeparator()
-        action_clear = widgets.Action(parent=self, text="Clear list")
+        action_clear = gui.Action(parent=self, text="Clear list")
         action_clear.triggered.connect(self.clear_recent_files)
         action_clear.setIcon(iconprovider.get_icon("fa.times-circle"))
         self.addAction(action_clear)
@@ -203,7 +203,7 @@ class MenuRecentFiles(widgets.Menu):
     def _on_action_triggered(self):
         """Emits open_requested when a recent file action has been triggered."""
         action = self.sender()
-        assert isinstance(action, widgets.Action)
+        assert isinstance(action, gui.Action)
         path = action.data()
         self.open_requested.emit(path)
         self.update_actions()

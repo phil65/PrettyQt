@@ -4,7 +4,7 @@ from collections.abc import Callable, Iterator
 from typing import Any
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -19,17 +19,17 @@ class MenuMixin(widgets.WidgetMixin):
         self.set_icon(icon)
         self.setToolTipsVisible(True)
 
-    def __iter__(self) -> Iterator[QtWidgets.QAction]:
+    def __iter__(self) -> Iterator[QtGui.QAction]:
         return iter(self.actions())
 
     def __len__(self) -> int:
         return len(self.actions())
 
-    def __add__(self, other: QtWidgets.QAction):
+    def __add__(self, other: QtGui.QAction):
         self.add(other)
         return self
 
-    def __getitem__(self, item: str) -> QtWidgets.QAction:
+    def __getitem__(self, item: str) -> QtGui.QAction:
         for action in self.actions():
             if action.objectName() == item:
                 return action
@@ -44,7 +44,7 @@ class MenuMixin(widgets.WidgetMixin):
             icon=self.get_icon(),
         )
 
-    def add(self, *item: QtWidgets.QAction):
+    def add(self, *item: QtGui.QAction):
         for i in item:
             i.setParent(self)
             self.addAction(i)
@@ -87,14 +87,14 @@ class MenuMixin(widgets.WidgetMixin):
 
     def add_action(
         self,
-        label: str | widgets.Action,
+        label: str | gui.Action,
         callback: Callable = None,
         icon: Any | None = None,
         checkable: bool = False,
         checked: bool = False,
         shortcut: str | None = None,
         status_tip: str | None = None,
-    ) -> widgets.Action:
+    ) -> gui.Action:
         """Add an action to the menu.
 
         Args:
@@ -110,7 +110,7 @@ class MenuMixin(widgets.WidgetMixin):
             Action added to menu
         """
         if isinstance(label, str):
-            action = widgets.Action(text=label, parent=self)
+            action = gui.Action(text=label, parent=self)
             if callback:
                 action.triggered.connect(callback)
             action.set_icon(icon)
@@ -126,12 +126,12 @@ class MenuMixin(widgets.WidgetMixin):
         self.addAction(action)
         return action
 
-    def add_actions(self, actions: list[QtWidgets.QAction]):
+    def add_actions(self, actions: list[QtGui.QAction]):
         for i in actions:
             i.setParent(self)
         self.addActions(actions)
 
-    def add_menu(self, menu: QtWidgets.QMenu) -> QtWidgets.QAction:
+    def add_menu(self, menu: QtWidgets.QMenu) -> QtGui.QAction:
         action = menu.menuAction()
         self.addAction(action)
         return action
@@ -144,7 +144,7 @@ class Menu(MenuMixin, QtWidgets.QMenu):
 if __name__ == "__main__":
     app = widgets.app()
     menu = Menu("1")
-    action = widgets.Action(text="test")
+    action = gui.Action(text="test")
     menu.addAction(action)
     menu.show()
     menu.exec(core.Point(200, 200))

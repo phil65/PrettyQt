@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
@@ -133,9 +133,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         """
         return constants.CURSOR_MOVE_STYLE.inverse[self.cursorMoveStyle()]
 
-    def add_action(
-        self, action: QtWidgets.QAction, position: ActionPositionStr = "trailing"
-    ):
+    def add_action(self, action: QtGui.QAction, position: ActionPositionStr = "trailing"):
         self.addAction(action, ACTION_POSITION[position])
 
     def set_value(self, value: str):
@@ -151,7 +149,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
 if __name__ == "__main__":
     app = widgets.app()
     widget = LineEdit()
-    action = widgets.Action(text="hallo", icon="mdi.folder")
+    action = gui.Action(text="hallo", icon="mdi.folder")
     widget.add_action(action)
     widget.setPlaceholderText("test")
     widget.setClearButtonEnabled(True)

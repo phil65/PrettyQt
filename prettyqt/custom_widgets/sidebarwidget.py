@@ -73,7 +73,7 @@ class SidebarWidget(widgets.MainWindow):
         area: AreaStr = "top",
     ):
         self.area.box.add(item)
-        act = widgets.Action(
+        act = gui.Action(
             text=title,
             icon=icon,
             shortcut=shortcut,
@@ -152,7 +152,7 @@ class SidebarWidget(widgets.MainWindow):
         shortcut: str | None = None,
         area: AreaStr = "top",
     ):
-        act = widgets.Action(
+        act = gui.Action(
             text=title,
             icon=icon,
             shortcut=shortcut,

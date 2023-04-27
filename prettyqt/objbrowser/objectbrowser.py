@@ -76,7 +76,7 @@ class ObjectBrowser(widgets.MainWindow):
         self._proxy_tree_model.setDynamicSortFilter(True)
         # self._proxy_tree_model.setSortCaseSensitivity(Qt.CaseInsensitive)
 
-        self.toggle_callable_action = widgets.Action(
+        self.toggle_callable_action = gui.Action(
             text="Show callable attributes",
             parent=self,
             checkable=True,
@@ -88,7 +88,7 @@ class ObjectBrowser(widgets.MainWindow):
         )
 
         # Show/hide special attributes
-        self.toggle_special_attribute_action = widgets.Action(
+        self.toggle_special_attribute_action = gui.Action(
             text="Show __special__ attributes",
             parent=self,
             checkable=True,
@@ -100,7 +100,7 @@ class ObjectBrowser(widgets.MainWindow):
         )
 
         # Toggle auto-refresh on/off
-        self.toggle_auto_refresh_action = widgets.Action(
+        self.toggle_auto_refresh_action = gui.Action(
             text="Auto-refresh",
             parent=self,
             checkable=True,
@@ -111,7 +111,7 @@ class ObjectBrowser(widgets.MainWindow):
         # Add another refresh action with a different shortcut. An action must be added to
         # a visible widget for it to receive events. It is added to the main windows to
         # prevent it from being displayed again in the menu
-        self.refresh_action_f5 = widgets.Action(self, text="&Refresh2", shortcut="F5")
+        self.refresh_action_f5 = gui.Action(self, text="&Refresh2", shortcut="F5")
         self.refresh_action_f5.triggered.connect(self._tree_model.refresh_tree)
         self.addAction(self.refresh_action_f5)
         self.central_splitter = widgets.Splitter(
@@ -182,11 +182,11 @@ class ObjectBrowser(widgets.MainWindow):
         selection_model.currentChanged.connect(self._update_details)
         menubar = self.menuBar()
         file_menu = menubar.add_menu("&File")
-        close_action = widgets.Action(
+        close_action = gui.Action(
             text="C&lose", callback=self.close, shortcut="Ctrl+W", parent=file_menu
         )
         file_menu.addAction(close_action)
-        exit_action = widgets.Action(
+        exit_action = gui.Action(
             text="E&xit",
             callback=lambda: widgets.app().closeAllWindows(),
             shortcut="Ctrl+Q",
@@ -195,7 +195,7 @@ class ObjectBrowser(widgets.MainWindow):
         file_menu.addAction(exit_action)
 
         view_menu = menubar.add_menu("&View")
-        refresh_action = widgets.Action(
+        refresh_action = gui.Action(
             text="&Refresh",
             callback=self._tree_model.refresh_tree,
             shortcut="Ctrl+R",

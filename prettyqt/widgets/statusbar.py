@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 
 
 class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
@@ -9,9 +9,9 @@ class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
         super().__init__(*args, **kwargs)
         self.progress_bar = widgets.ProgressBar()
 
-    def __add__(self, other: QtWidgets.QAction | QtWidgets.QWidget) -> StatusBar:
+    def __add__(self, other: QtGui.QAction | QtWidgets.QWidget) -> StatusBar:
         match other:
-            case QtWidgets.QAction():
+            case QtGui.QAction():
                 self.addAction(other)
                 return self
             case QtWidgets.QWidget():
@@ -28,7 +28,7 @@ class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
         self.progress_bar.setTextVisible(False)
         self.addPermanentWidget(self.progress_bar)
 
-    def add_action(self, action: QtWidgets.QAction) -> None:
+    def add_action(self, action: QtGui.QAction) -> None:
         self.addAction(action)
 
     def add_widget(self, widget: QtWidgets.QWidget, permanent: bool = False) -> None:

@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 import logging
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
 
@@ -43,7 +43,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         # qactions = self.createPopupMenu()
         menu = widgets.Menu(parent=self)
         for i, item in enumerate(self.get_docks()):
-            action = widgets.Action(text=item.windowTitle(), parent=self)
+            action = gui.Action(text=item.windowTitle(), parent=self)
             action.set_checkable(True)
             action.set_checked(item.isVisible())
             action.set_shortcut(f"Ctrl+Shift+{i}")
@@ -52,7 +52,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
             menu.add(action)
         menu.add_separator()
         for tb in self.get_toolbars():
-            action = widgets.Action(text=tb.windowTitle(), parent=self)
+            action = gui.Action(text=tb.windowTitle(), parent=self)
             action.set_checkable(True)
             action.toggled.connect(tb.setVisible)
             action.set_checked(tb.isVisible())

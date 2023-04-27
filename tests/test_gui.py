@@ -33,6 +33,46 @@ def test_repr(name, cls, qapp):
     repr(item)
 
 
+def test_action(qtbot):
+    action = gui.Action()
+    action.set_tooltip("test")
+    action.set_enabled()
+    action.set_disabled()
+    action.set_icon(None)
+    action.set_icon("mdi.timer")
+    action.set_shortcut("Ctrl+A")
+    assert action.shortcut().toString() == "Ctrl+A"
+    assert action.toolTip() == "test"
+    action.set_priority("low")
+    with pytest.raises(InvalidParamError):
+        action.set_priority("test")
+    assert action.get_priority() == "low"
+    action.set_menu_role("preferences")
+    with pytest.raises(InvalidParamError):
+        action.set_menu_role("test")
+    assert action.get_menu_role() == "preferences"
+    action.set_shortcut_context("widget_with_children")
+    with pytest.raises(InvalidParamError):
+        action.set_shortcut_context("test")
+    assert action.get_shortcut_context() == "widget_with_children"
+    action.show_shortcut_in_contextmenu()
+    action.set_menu(widgets.Menu())
+
+
+def test_actiongroup(qtbot):
+    group = gui.ActionGroup(None)
+    group.set_exclusion_policy(None)
+    group.set_exclusion_policy("exclusive")
+    with pytest.raises(InvalidParamError):
+        group.set_exclusion_policy("test")
+    assert group.get_exclusion_policy() == "exclusive"
+    act = gui.Action()
+    group.addAction(act)
+    assert group[0] == act
+    assert act in group
+    assert len(group) == 1
+
+
 def test_brush():
     brush = gui.Brush()
     bytes(brush)

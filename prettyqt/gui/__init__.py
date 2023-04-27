@@ -139,6 +139,8 @@ from .undocommand import UndoCommand
 from .undostack import UndoStack
 from .undogroup import UndoGroup
 from .colorspace import ColorSpace
+from .action import Action, ActionMixin
+from .actiongroup import ActionGroup
 from .filesystemmodel import FileSystemModel
 
 
@@ -261,6 +263,9 @@ __all__ = [
     "UndoGroup",
     "PdfWriter",
     "KeySequence",
+    "Action",
+    "ActionMixin",
+    "ActionGroup",
     "Surface",
     "SurfaceMixin",
     "Window",

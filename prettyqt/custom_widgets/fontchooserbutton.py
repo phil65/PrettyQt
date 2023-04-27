@@ -20,7 +20,7 @@ class FontChooserButton(widgets.Widget):
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()
         layout.add(self.lineedit)
-        action = widgets.Action()
+        action = gui.Action()
         action.triggered.connect(self.choose_font)
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)

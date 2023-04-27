@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
@@ -17,7 +17,7 @@ PopupModeStr = Literal["delayed", "menu_button", "instant"]
 
 
 class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
-    def __getitem__(self, item: str) -> QtWidgets.QAction:
+    def __getitem__(self, item: str) -> QtGui.QAction:
         menu = self.menu()
         return menu[item]
 

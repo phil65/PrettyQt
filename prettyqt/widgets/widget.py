@@ -45,7 +45,7 @@ class WidgetMixin(core.ObjectMixin):
             super().resize(*size)
 
     def insertAction(
-        self, position_or_action: int | QtWidgets.QAction, action: QtWidgets.QAction
+        self, position_or_action: int | QtGui.QAction, action: QtGui.QAction
     ):
         """Extend insertAction to also allow int index."""
         if isinstance(position_or_action, int):

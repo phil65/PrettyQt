@@ -46,46 +46,6 @@ def test_repr(name, cls):
         repr(widget)
 
 
-def test_action(qtbot):
-    action = widgets.Action()
-    action.set_tooltip("test")
-    action.set_enabled()
-    action.set_disabled()
-    action.set_icon(None)
-    action.set_icon("mdi.timer")
-    action.set_shortcut("Ctrl+A")
-    assert action.shortcut().toString() == "Ctrl+A"
-    assert action.toolTip() == "test"
-    action.set_priority("low")
-    with pytest.raises(InvalidParamError):
-        action.set_priority("test")
-    assert action.get_priority() == "low"
-    action.set_menu_role("preferences")
-    with pytest.raises(InvalidParamError):
-        action.set_menu_role("test")
-    assert action.get_menu_role() == "preferences"
-    action.set_shortcut_context("widget_with_children")
-    with pytest.raises(InvalidParamError):
-        action.set_shortcut_context("test")
-    assert action.get_shortcut_context() == "widget_with_children"
-    action.show_shortcut_in_contextmenu()
-    action.set_menu(widgets.Menu())
-
-
-def test_actiongroup(qtbot):
-    group = widgets.ActionGroup(None)
-    group.set_exclusion_policy(None)
-    group.set_exclusion_policy("exclusive")
-    with pytest.raises(InvalidParamError):
-        group.set_exclusion_policy("test")
-    assert group.get_exclusion_policy() == "exclusive"
-    act = widgets.Action()
-    group.addAction(act)
-    assert group[0] == act
-    assert act in group
-    assert len(group) == 1
-
-
 def test_boxlayout(qtbot):
     layout = widgets.BoxLayout("horizontal", margin=0)
     widget = widgets.RadioButton("test")
@@ -828,8 +788,8 @@ def test_mdiarea(qtbot):
 
 def test_menu(qtbot):
     menu = widgets.Menu("1", icon="mdi.timer")
-    menu.add(widgets.Action(text="TestAction"))
-    act = widgets.Action(text="TestAction")
+    menu.add(gui.Action(text="TestAction"))
+    act = gui.Action(text="TestAction")
     act.set_id("test")
     menu += act
     assert menu["test"] == act
@@ -858,9 +818,9 @@ def test_menu(qtbot):
 def test_menubar(qtbot):
     menu = widgets.MenuBar()
     qtbot.addWidget(menu)
-    menu += widgets.Action(text="TestAction")
+    menu += gui.Action(text="TestAction")
     menu += widgets.Menu("TestMenu")
-    menu.add_action(widgets.Action(text="TestAction 2"))
+    menu.add_action(gui.Action(text="TestAction 2"))
     menu.add_menu(widgets.Menu("TestMenu 2"))
     menu.add_separator()
     menu.add_action("test_menubar")
@@ -1065,8 +1025,8 @@ def test_statusbar(qtbot):
     status_bar.addWidget(label)
     status_bar.setup_default_bar()
     status_bar.show_message("test_statusbar")
-    status_bar.add_action(widgets.Action())
-    status_bar += widgets.Action()
+    status_bar.add_action(gui.Action())
+    status_bar += gui.Action()
     widget.setStatusBar(status_bar)
     status_bar.add_widget(widgets.Widget())
     status_bar += widgets.Widget()
@@ -1292,7 +1252,7 @@ def test_toolbutton(qtbot):
     widget.set_enabled()
     widget.set_shortcut("Ctrl+A")
     widget.set_icon_size(20)
-    action = widgets.Action()
+    action = gui.Action()
     widget.set_default_action(action)
     with pytest.raises(InvalidParamError):
         widget.set_popup_mode("test")
@@ -1305,7 +1265,7 @@ def test_toolbutton(qtbot):
     widget.set_style("text_below_icon")
     assert widget.get_arrow_type() == "left"
     menu = widgets.Menu()
-    act = widgets.Action()
+    act = gui.Action()
     act.set_id("test")
     menu.add(act)
     widget.setMenu(menu)
@@ -1626,7 +1586,7 @@ def test_widget(qtbot):
 
 
 def test_widgetaction(qtbot):
-    action = widgets.Action()
+    action = gui.Action()
     widgetaction = widgets.WidgetAction(parent=action)
     widgetaction.set_tooltip("test")
     widgetaction.set_enabled()

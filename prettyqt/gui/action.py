@@ -5,26 +5,26 @@ import os
 from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, prettyprinter
 
 
 PRIORITIES = bidict(
-    low=QtWidgets.QAction.Priority.LowPriority,
-    normal=QtWidgets.QAction.Priority.NormalPriority,
-    high=QtWidgets.QAction.Priority.HighPriority,
+    low=QtGui.QAction.Priority.LowPriority,
+    normal=QtGui.QAction.Priority.NormalPriority,
+    high=QtGui.QAction.Priority.HighPriority,
 )
 
 PriorityStr = Literal["low", "normal", "high"]
 
 ROLES = bidict(
-    none=QtWidgets.QAction.MenuRole.NoRole,
-    text_heuristic=QtWidgets.QAction.MenuRole.TextHeuristicRole,
-    application_specific=QtWidgets.QAction.MenuRole.ApplicationSpecificRole,
-    about_qt=QtWidgets.QAction.MenuRole.AboutQtRole,
-    about=QtWidgets.QAction.MenuRole.AboutRole,
-    preferences=QtWidgets.QAction.MenuRole.PreferencesRole,
-    quit=QtWidgets.QAction.MenuRole.QuitRole,
+    none=QtGui.QAction.MenuRole.NoRole,
+    text_heuristic=QtGui.QAction.MenuRole.TextHeuristicRole,
+    application_specific=QtGui.QAction.MenuRole.ApplicationSpecificRole,
+    about_qt=QtGui.QAction.MenuRole.AboutQtRole,
+    about=QtGui.QAction.MenuRole.AboutRole,
+    preferences=QtGui.QAction.MenuRole.PreferencesRole,
+    quit=QtGui.QAction.MenuRole.QuitRole,
 )
 
 RoleStr = Literal[
@@ -213,7 +213,7 @@ class ActionMixin(core.ObjectMixin):
         self.setShortcutVisibleInContextMenu(state)
 
 
-class Action(ActionMixin, prettyprinter.PrettyPrinter, QtWidgets.QAction):
+class Action(ActionMixin, prettyprinter.PrettyPrinter, QtGui.QAction):
     pass
 
 

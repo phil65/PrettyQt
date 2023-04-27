@@ -3,27 +3,27 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict
 
 
 POLICIES = bidict(
-    none=QtWidgets.QActionGroup.ExclusionPolicy.None_,
-    exclusive=QtWidgets.QActionGroup.ExclusionPolicy.Exclusive,
-    exclusive_optional=QtWidgets.QActionGroup.ExclusionPolicy.ExclusiveOptional,
+    none=QtGui.QActionGroup.ExclusionPolicy.None_,
+    exclusive=QtGui.QActionGroup.ExclusionPolicy.Exclusive,
+    exclusive_optional=QtGui.QActionGroup.ExclusionPolicy.ExclusiveOptional,
 )
 
 ExclusionPolicyStr = Literal["none", "exclusive", "exclusive_optional"]
 
 
-class ActionGroup(core.ObjectMixin, QtWidgets.QActionGroup):
+class ActionGroup(core.ObjectMixin, QtGui.QActionGroup):
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
 
     def __len__(self) -> int:
         return len(self.actions())
 
-    def __getitem__(self, item: int) -> QtWidgets.QAction:
+    def __getitem__(self, item: int) -> QtGui.QAction:
         return self.actions()[item]
 
     def set_exclusion_policy(self, policy: ExclusionPolicyStr | None):
@@ -51,11 +51,11 @@ class ActionGroup(core.ObjectMixin, QtWidgets.QActionGroup):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui
 
-    app = widgets.app()
+    app = gui.app()
     action = ActionGroup()
-    act = widgets.Action()
+    act = gui.Action()
     action.addAction(act)
     print(act in action)
     app.main_loop()

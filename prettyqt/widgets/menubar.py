@@ -2,12 +2,12 @@ from __future__ import annotations
 
 from typing import Literal, overload
 
-from prettyqt import widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
-    def __add__(self, other: QtWidgets.QAction | QtWidgets.QMenu):
+    def __add__(self, other: QtGui.QAction | QtWidgets.QMenu):
         self.add(other)
         return self
 
@@ -17,9 +17,9 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
             native_menu_bar=self.isNativeMenuBar(),
         )
 
-    def add_action(self, action: QtWidgets.QAction | str) -> QtWidgets.QAction:
+    def add_action(self, action: QtGui.QAction | str) -> QtGui.QAction:
         if isinstance(action, str):
-            action = widgets.Action(parent=self, text=action)
+            action = gui.Action(parent=self, text=action)
         self.addAction(action)
         return action
 
@@ -28,11 +28,11 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
         ...
 
     @overload
-    def add_menu(self, menu_or_str: QtWidgets.QMenu) -> widgets.Action:
+    def add_menu(self, menu_or_str: QtWidgets.QMenu) -> gui.Action:
         ...
 
     def add_menu(self, menu_or_str):
-        action = widgets.Action(parent=self)
+        action = gui.Action(parent=self)
         if isinstance(menu_or_str, str):
             menu = widgets.Menu(menu_or_str)
             action.set_text(menu_or_str)
@@ -48,10 +48,10 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     def add_separator(self):
         self.addSeparator()
 
-    def add(self, *items: QtWidgets.QMenu | QtWidgets.QAction):
+    def add(self, *items: QtWidgets.QMenu | QtGui.QAction):
         for i in items:
             if isinstance(i, QtWidgets.QMenu):
-                action = widgets.Action(parent=self)
+                action = gui.Action(parent=self)
                 action.set_text(i.title())
                 action.set_menu(i)
                 self.addAction(action)

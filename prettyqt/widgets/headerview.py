@@ -5,7 +5,7 @@ import functools
 import hashlib
 from typing import Literal
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -106,7 +106,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         menu = self.createPopupMenu()
         menu.exec(self.mapToGlobal(event.pos()))
 
-    def get_header_actions(self) -> list[widgets.Action]:
+    def get_header_actions(self) -> list[gui.Action]:
         menu = self.createPopupMenu()
         return menu.actions()
 
@@ -116,7 +116,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         labels = self.get_section_labels()[1:]
         for i, header_label in enumerate(labels, start=1):
             val = not self.isSectionHidden(i)
-            action = widgets.Action(text=header_label, checkable=True, checked=val)
+            action = gui.Action(text=header_label, checkable=True, checked=val)
             fn = functools.partial(self.set_section_hidden, i=i, hide=val)
             action.triggered.connect(fn)
             actions.append(action)

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import widgets
+from prettyqt import gui, widgets
 
 
 class MarkdownWindow(widgets.MainWindow):
@@ -19,7 +19,7 @@ class MarkdownWindow(widgets.MainWindow):
     # html_data = frame.toHtml()
 
     def create_menu(self):
-        act_exit = widgets.Action(
+        act_exit = gui.Action(
             text="&Exit",
             icon="mdi.exit-to-app",
             parent=self,
@@ -27,7 +27,7 @@ class MarkdownWindow(widgets.MainWindow):
             statustip="Exit application",
             callback=self.close,
         )
-        act_open = widgets.Action(
+        act_open = gui.Action(
             text="&Open",
             icon="mdi.open-in-app",
             parent=self,

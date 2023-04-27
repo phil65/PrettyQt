@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from prettyqt import widgets
+from prettyqt import gui
 from prettyqt.qt import QtCore, QtWidgets
 
 
-class WidgetAction(widgets.ActionMixin, QtWidgets.QWidgetAction):
+class WidgetAction(gui.ActionMixin, QtWidgets.QWidgetAction):
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)  # type: ignore
         self._menu = None  # bc of PySide inheritance also defined here

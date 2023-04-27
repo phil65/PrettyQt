@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, datatypes, get_repr, helpers
 
 
@@ -29,8 +29,8 @@ class ToolBarMixin(widgets.WidgetMixin):
     def __repr__(self):
         return get_repr(self, self.windowTitle())
 
-    def add(self, item: QtWidgets.QAction | QtWidgets.QWidget):
-        if isinstance(item, QtWidgets.QAction):
+    def add(self, item: QtGui.QAction | QtWidgets.QWidget):
+        if isinstance(item, QtGui.QAction):
             self.addAction(item)
         else:
             self.addWidget(item)
@@ -46,8 +46,8 @@ class ToolBarMixin(widgets.WidgetMixin):
         return btn
 
     def add_separator(
-        self, text: str | None = None, before: QtWidgets.QAction | None = None
-    ) -> QtWidgets.QAction:
+        self, text: str | None = None, before: QtGui.QAction | None = None
+    ) -> QtGui.QAction:
         """Adds a separator showing an optional label.
 
         Args:
@@ -85,7 +85,7 @@ class ToolBarMixin(widgets.WidgetMixin):
         icon: datatypes.IconType = None,
         callback: Callable | None = None,
         checkable: bool = False,
-    ) -> QtWidgets.QAction:
+    ) -> QtGui.QAction:
         icon = iconprovider.get_icon(icon)
         action = self.addAction(icon, label)
         if callback is not None:
@@ -94,7 +94,7 @@ class ToolBarMixin(widgets.WidgetMixin):
             action.setCheckable(True)
         return action
 
-    def add_spacer(self) -> QtWidgets.QAction:
+    def add_spacer(self) -> QtGui.QAction:
         spacer = widgets.Widget()
         spacer.set_size_policy("expanding", "expanding")
         return self.addWidget(spacer)

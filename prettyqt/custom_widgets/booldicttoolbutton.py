@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
@@ -38,7 +38,7 @@ class BoolDictToolButton(widgets.ToolButton):
     def set_dict(self, dct: dict[str, str]):
         self.button_menu.clear()
         for k, v in dct.items():
-            action = widgets.Action()
+            action = gui.Action()
             action.set_text(v)
             action.setCheckable(True)
             action.set_id(k)
