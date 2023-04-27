@@ -1,4 +1,4 @@
 bluetooth module
-=================
+================
 
 ::: prettyqt.bluetooth

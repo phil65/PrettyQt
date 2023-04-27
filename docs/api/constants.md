@@ -1,4 +1,4 @@
 constants module
-==========
+================
 
 ::: prettyqt.constants
