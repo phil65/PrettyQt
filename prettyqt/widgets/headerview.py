@@ -5,8 +5,6 @@ import functools
 import hashlib
 from typing import Literal
 
-from deprecated import deprecated
-
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
@@ -82,9 +80,9 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
     def resize_sections(self, mode: ModeStr):
         self.resizeSections(MODES[mode])
 
-    @deprecated(reason="This method is deprecated, use set_resize_mode instead.")
-    def resize_mode(self, mode: ModeStr, col: int | None = None):
-        self.set_resize_mode(mode, col)
+    def get_resize_mode(self, col: int) -> ModeStr:
+        val = self.sectionResizeMode(col)
+        return MODES.inverse[val]
 
     def set_resize_mode(self, mode: ModeStr, col: int | None = None):
         if mode not in MODES:
