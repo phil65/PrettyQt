@@ -1,3 +1,20 @@
+## v1.29.0 (2023-04-27)
+
+### Feat
+
+- **CameraDevice**: add get_video_formats method
+- re-introduce multimedia module
+- **FsSpecModel**: add get_protocol_path method
+- **Widget**: allow int index for insertAction
+- **HeaderView**: add get_default_alignment and get_orientation methods
+- **HeaderView**: add get_resize_mode method
+- **ColorDialog**: some new methods
+- **pdf**: add PdfSearchModel class
+
+### Fix
+
+- **Widget**: support several QOpenGlWidgets for get_image
+
 ## v1.28.1 (2023-04-26)
 
 ### Fix
