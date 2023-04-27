@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from prettyqt import constants, custom_models, widgets
+from prettyqt import constants, custom_models
 from prettyqt.qt import QtCore
 
 
@@ -108,6 +108,8 @@ class JsonModel(custom_models.NestedModel):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
     app = widgets.app()
     view = widgets.TreeView()
     view.setRootIsDecorated(True)

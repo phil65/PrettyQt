@@ -4,7 +4,7 @@ from collections.abc import Callable
 import logging
 import re
 
-from prettyqt import gui
+from prettyqt.qt import QtGui
 
 
 logger = logging.getLogger(__name__)
@@ -42,17 +42,17 @@ class SearchAndReplaceMixin:
         def generate_flags(flagstr: str) -> None:
             # self.search_flags is automatically generated and does not
             # need to be initialized in __init__()
-            self.search_flags = gui.TextDocument.FindFlag(0)
+            self.search_flags = QtGui.QTextDocument.FindFlag(0)
             if "b" in flagstr:
-                self.search_flags |= gui.TextDocument.FindFlag.FindBackward
+                self.search_flags |= QtGui.QTextDocument.FindFlag.FindBackward
             if "i" not in flagstr:
-                self.search_flags |= gui.TextDocument.FindFlag.FindCaseSensitively
+                self.search_flags |= QtGui.QTextDocument.FindFlag.FindCaseSensitively
             if "w" in flagstr:
-                self.search_flags |= gui.TextDocument.FindFlag.FindWholeWords
+                self.search_flags |= QtGui.QTextDocument.FindFlag.FindWholeWords
 
         if search_match := SEARCH_REGEX.match(arg):
             self.search_buffer = search_match[0]
-            self.search_flags = gui.TextDocument.FindFlag.FindCaseSensitively
+            self.search_flags = QtGui.QTextDocument.FindFlag.FindCaseSensitively
             self.search_next()
         elif search_flags_match := SEARCH_FLAGS_REGEX.match(arg):
             self.search_buffer, flags = search_flags_match[0].rsplit("/", 1)
@@ -69,7 +69,7 @@ class SearchAndReplaceMixin:
             logger.error("Malformed search/replace expression")
 
     def _searching_backwards(self) -> bool:
-        return bool(gui.TextDocument.FindFlag.FindBackward & self.search_flags)
+        return bool(QtGui.QTextDocument.FindFlag.FindBackward & self.search_flags)
 
     def search_next(self) -> None:
         """Go to the next string found.
@@ -117,7 +117,7 @@ class SearchAndReplaceMixin:
             t.insertText(replace_buffer)
             length = len(replace_buffer)
             t.setPosition(t.position() - length)
-            t.setPosition(t.position() + length, gui.TextCursor.MoveMode.KeepAnchor)
+            t.setPosition(t.position() + length, QtGui.QTextCursor.MoveMode.KeepAnchor)
             self.setTextCursor(t)
             logger.info(f"Replaced on line {t.blockNumber()}, pos {t.positionInBlock()}")
         else:

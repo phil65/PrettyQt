@@ -5,14 +5,14 @@ import os
 import pathlib
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 OPTIONS = bidict(
-    dont_watch_changes=QtWidgets.QFileSystemModel.Option.DontWatchForChanges,
-    dont_resolve_symlinks=QtWidgets.QFileSystemModel.Option.DontResolveSymlinks,
-    no_custom_icons=QtWidgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
+    dont_watch_changes=QtGui.QFileSystemModel.Option.DontWatchForChanges,
+    dont_resolve_symlinks=QtGui.QFileSystemModel.Option.DontResolveSymlinks,
+    no_custom_icons=QtGui.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
 )
 
 
@@ -100,7 +100,7 @@ class FileSystemModelMixin:
 
 
 class FileSystemModel(
-    FileSystemModelMixin, core.AbstractItemModelMixin, QtWidgets.QFileSystemModel
+    FileSystemModelMixin, core.AbstractItemModelMixin, QtGui.QFileSystemModel
 ):
     pass
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
 
@@ -47,6 +47,8 @@ class RegexMatchesModel(core.AbstractTableModel):
 
 if __name__ == "__main__":
     import re
+
+    from prettyqt import widgets
 
     app = widgets.app()
     view = widgets.TableView()
