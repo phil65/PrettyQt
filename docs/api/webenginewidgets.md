@@ -1,4 +1,4 @@
 webenginewidgets module
-==============
+=======================
 
 ::: prettyqt.webenginewidgets

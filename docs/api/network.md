@@ -1,4 +1,4 @@
 network module
-=================
+==============
 
 ::: prettyqt.network

@@ -1,4 +1,4 @@
 positioning module
-=================
+==================
 
 ::: prettyqt.positioning
