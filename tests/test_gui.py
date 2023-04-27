@@ -377,6 +377,19 @@ def test_screen(qapp):
     screen.get_virtual_siblings()
 
 
+def test_shortcut(qtbot):
+    w = widgets.Widget()
+    qtbot.addWidget(w)
+    seq = gui.KeySequence("Ctrl+C")
+    shortcut = gui.Shortcut(seq, w)
+    assert str(shortcut) == "Ctrl+C"
+    shortcut.set_context("application")
+    with pytest.raises(InvalidParamError):
+        shortcut.set_context("test")
+    assert shortcut.get_context() == "application"
+    assert shortcut.get_key() == seq
+
+
 # def test_sessionmanager():
 #     manager = gui.SessionManager()
 #     with pytest.raises(InvalidParamError):

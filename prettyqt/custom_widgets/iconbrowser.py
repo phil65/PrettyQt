@@ -74,7 +74,7 @@ class IconBrowser(widgets.MainWindow):
         frame = widgets.Frame(self)
         frame.set_layout(lyt)
         self.setCentralWidget(frame)
-        widgets.Shortcut(gui.KeySequence("return"), self, self._copy_icon_text)
+        gui.Shortcut(gui.KeySequence("return"), self, self._copy_icon_text)
         self._lineedit.setFocus()
         self.center()
 

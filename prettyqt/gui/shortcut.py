@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError
 
 
-class Shortcut(core.ObjectMixin, QtWidgets.QShortcut):
+class Shortcut(core.ObjectMixin, QtGui.QShortcut):
     def __str__(self):
         return self.key().toString()
 

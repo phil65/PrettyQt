@@ -111,7 +111,6 @@ from .dockwidget import DockWidget
 
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
-from .shortcut import Shortcut
 from .widgetaction import WidgetAction
 from .menu import Menu
 from .mainwindow import MainWindow
@@ -401,7 +400,6 @@ __all__ = [
     "WizardPage",
     "StackedWidget",
     "MainWindow",
-    "Shortcut",
     "WhatsThis",
     "AbstractItemDelegate",
     "AbstractItemDelegateMixin",

@@ -1032,19 +1032,6 @@ def test_scroller(qtbot):
     assert widgets.Scroller.grab_gesture(w) == "tap_and_hold"
 
 
-def test_shortcut(qtbot):
-    w = widgets.Widget()
-    qtbot.addWidget(w)
-    seq = gui.KeySequence("Ctrl+C")
-    shortcut = widgets.Shortcut(seq, w)
-    assert str(shortcut) == "Ctrl+C"
-    shortcut.set_context("application")
-    with pytest.raises(InvalidParamError):
-        shortcut.set_context("test")
-    assert shortcut.get_context() == "application"
-    assert shortcut.get_key() == seq
-
-
 def test_sizepolicy(qtbot):
     pol = widgets.SizePolicy()
     pol.set_control_type("toolbutton")

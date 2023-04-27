@@ -44,6 +44,7 @@ from prettyqt.qt.QtGui import (
 
 
 from .stylehints import StyleHints
+from .shortcut import Shortcut
 from .textobjectinterface import TextObjectInterface
 from .drag import Drag
 from .screen import Screen
@@ -201,6 +202,7 @@ __all__ = [
     "GuiApplicationMixin",
     "Validator",
     "ValidatorMixin",
+    "Shortcut",
     "TextLayout",
     "TextLine",
     "TextOption",
