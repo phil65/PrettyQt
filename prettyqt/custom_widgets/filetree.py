@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pathlib
 
-from prettyqt import gui, widgets
+from prettyqt import widgets
 
 
 class FileTree(widgets.TreeView):
@@ -12,7 +12,7 @@ class FileTree(widgets.TreeView):
         self.h_header.set_resize_mode("resize_to_contents")
         self.setup_dragdrop_move()
 
-        model = gui.FileSystemModel()
+        model = widgets.FileSystemModel()
         model.resolve_sym_links(False)
         model.set_root_path("C:/")
         if filters:

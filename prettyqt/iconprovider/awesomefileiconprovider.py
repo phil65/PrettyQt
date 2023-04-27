@@ -68,9 +68,11 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
     app = widgets.app()
     app.load_language("de")
-    model = gui.FileSystemModel()
+    model = widgets.FileSystemModel()
     model.set_root_path("root")
     prov = AwesomeFileIconProvider()
     model.setIconProvider(prov)

@@ -141,7 +141,6 @@ from .undogroup import UndoGroup
 from .colorspace import ColorSpace
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
-from .filesystemmodel import FileSystemModel
 
 
 def app(args: list[str] | None = None) -> GuiApplication:
@@ -293,5 +292,4 @@ __all__ = [
     "AbstractTextDocumentLayoutMixin",
     "InputMethod",
     "ColorSpace",
-    "FileSystemModel",
 ]

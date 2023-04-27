@@ -160,24 +160,6 @@ def test_doublevalidator():
     assert not val.is_valid_value("10")
 
 
-def test_filesystemmodel(qttester):
-    model = gui.FileSystemModel()
-    model.set_root_path("/")
-    idx = model.index(0, 0)
-    model.get_paths([idx])
-    model.data(idx, model.Roles.FilePathRole)
-    model.yield_child_indexes(idx)
-    model.watch_for_changes(False)
-    model.use_custom_icons(False)
-    model.resolve_sym_links(False)
-    model.set_name_filters(["test"], hide=True)
-    model.set_filter("drives")
-    with pytest.raises(InvalidParamError):
-        model.set_filter("test")
-    # modeltest.ModelTest(model)
-    # qttester.test_model(model, force_py=True)
-
-
 def test_font(qapp):
     font = gui.Font("Consolas")
     assert font.metrics
