@@ -58,10 +58,12 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
     def __eq__(self, other):
         return (
             (
-                self.get_type() == other.get_type()
-                and self.get_versionnumber() == other.get_versionnumber()
+                self.type() == other.type()
+                and self.majorVersion() == other.majorVersion()
+                and self.minorVersion() == other.minorVersion()
+                and self.microVersion() == other.microVersion()
             )
-            if isinstance(other, OperatingSystemVersion)
+            if isinstance(other, QtCore.QOperatingSystemVersion)
             else False
         )
 
