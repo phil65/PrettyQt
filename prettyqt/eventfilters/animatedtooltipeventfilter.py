@@ -1,10 +1,16 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core, custom_animations, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore
 
 
-class AnimatedToolTipEventFilter(QtWidgets.QAbstractButton):
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
+
+
+class AnimatedToolTipEventFilter(QtCore.QObject):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tool_tip = widgets.Label()
@@ -21,7 +27,7 @@ class AnimatedToolTipEventFilter(QtWidgets.QAbstractButton):
         self.fade_anim.apply_to(self.tool_tip)
         self.animation = self.slide_anim | self.fade_anim
 
-    def eventFilter(self, obj: QtWidgets.QAbstractButton, event: QtCore.QEvent):
+    def eventFilter(self, obj: QtWidgets.QWidget, event: QtCore.QEvent):
         match event.type():
             case QtCore.QEvent.Type.Enter:
                 # self.tool_tip.adjustSize()

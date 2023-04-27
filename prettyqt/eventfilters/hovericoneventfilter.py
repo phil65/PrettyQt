@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, widgets
+from prettyqt import core
 
 
 class HoverIconEventFilter(core.Object):
@@ -10,6 +10,8 @@ class HoverIconEventFilter(core.Object):
         self.hover = hover
 
     def eventFilter(self, obj, event: core.Event):
+        # if obj is not self.parent():
+        #     return super().eventFilter(obj, event)
         match event.type():
             case core.Event.Type.Enter:
                 obj.set_icon(self.hover)
@@ -19,9 +21,11 @@ class HoverIconEventFilter(core.Object):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
     app = widgets.app()
     widget = widgets.PushButton()
-    test = HoverIconEventFilter("mdi.timer", "mdi.folder")
+    test = HoverIconEventFilter("mdi.timer", "mdi.folder", widget)
     widget.installEventFilter(test)
     widget.show()
     app.main_loop()

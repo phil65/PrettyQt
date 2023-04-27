@@ -3,8 +3,8 @@ from __future__ import annotations
 import os
 from typing import Literal
 
-from prettyqt import core, pdf, widgets
-from prettyqt.qt import QtPdf, QtWidgets
+from prettyqt import core, pdf
+from prettyqt.qt import QtCore, QtPdf
 from prettyqt.utils import bidict, datatypes
 
 
@@ -26,7 +26,7 @@ RoleStr = Literal[
 
 
 class PdfBookmarkModel(core.AbstractItemModelMixin, QtPdf.QPdfBookmarkModel):
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
         self.setDocument(pdf.PdfDocument(self))
 
@@ -39,6 +39,8 @@ class PdfBookmarkModel(core.AbstractItemModelMixin, QtPdf.QPdfBookmarkModel):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
     app = widgets.app()
     model = PdfBookmarkModel()
     widget = widgets.TableView()

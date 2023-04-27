@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+from typing import TYPE_CHECKING
+
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore
+
+
+if TYPE_CHECKING:
+    from prettyqt.qt import QtWidgets
 
 
 class Spin:
