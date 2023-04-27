@@ -43,6 +43,14 @@ class NCCALCSIZE_PARAMS(Structure):
 LPNCCALCSIZE_PARAMS = POINTER(NCCALCSIZE_PARAMS)
 
 
+def raise_to_top(h_wnd: SupportsInt):
+    h_wnd = int(h_wnd)
+    # set to always-on-top and disable it again. that way windows stays in front
+    flag = win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_SHOWWINDOW
+    win32gui.SetWindowPos(h_wnd, win32con.HWND_TOPMOST, 0, 0, 0, 0, flag)
+    win32gui.SetWindowPos(h_wnd, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, flag)
+
+
 def add_shadow_effect(h_wnd: SupportsInt):
     h_wnd = int(h_wnd)
     margins = MARGINS(-1, -1, -1, -1)
