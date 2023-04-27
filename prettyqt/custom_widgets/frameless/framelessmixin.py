@@ -139,7 +139,7 @@ class TitleBar(widgets.Frame):
         self.window().close()
 
     def on_maximize_button_clicked(self):
-        if self.topLevelWidget().isMaximized():
+        if self.window().isMaximized():
             self.window().showNormal()
             self.set_maximize_button_icon("maximize")
         else:
