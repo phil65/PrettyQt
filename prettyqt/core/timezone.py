@@ -61,7 +61,7 @@ class TimeZone(QtCore.QTimeZone):
         return self.displayName(datetime, NAME_TYPE[name_type], locale)
 
     def get_time_spec(self) -> constants.TimeSpecStr:
-        return constants.TIME_SPEC.inv[self.timeSpec()]
+        return constants.TIME_SPEC.inverse[self.timeSpec()]
 
     # def get_value(self) -> datetime.datetime:
     #     try:

@@ -169,20 +169,19 @@ class BorderLayout(widgets.Layout):
         total_size = core.Size()
 
         for wrapper in self.items:
-            position = wrapper.position
-            if size_type == "minimum":
-                item_size = wrapper.item.minimumSize()
-            else:  # size_type == "size_hint"
-                item_size = wrapper.item.sizeHint()
-
-            if position in (
+            item_size = (
+                wrapper.item.minimumSize()
+                if size_type == "minimum"
+                else wrapper.item.sizeHint()
+            )
+            if wrapper.position in (
                 BorderLayout.Position.North,
                 BorderLayout.Position.South,
                 BorderLayout.Position.Center,
             ):
                 total_size.setHeight(total_size.height() + item_size.height())
 
-            if position in (
+            if wrapper.position in (
                 BorderLayout.Position.West,
                 BorderLayout.Position.East,
                 BorderLayout.Position.Center,
