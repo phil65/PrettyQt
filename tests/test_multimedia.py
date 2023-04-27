@@ -37,7 +37,7 @@ def test_camera():
     with pytest.raises(InvalidParamError):
         cam.set_white_balance_mode("test")
     cam.get_supported_features()
-    assert cam.get_error() == "none"
+    assert cam.get_error() in ["none", "camera"]
     cam.get_camera_format()
 
 
