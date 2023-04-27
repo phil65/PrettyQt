@@ -13,7 +13,7 @@ nav:
         - custom_validators: api/custom_validators.md
         - custom_widgets: api/custom_widgets.md
         - gui: api/gui.md
-        # - location: api/location.md
+        - location: api/location.md
         - multimedia: api/multimedia.md
         - multimediawidgets: api/multimediawidgets.md
         - network: api/network.md
