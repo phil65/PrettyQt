@@ -586,6 +586,11 @@ class WidgetMixin(core.ObjectMixin):
     def get_cursor(self) -> gui.Cursor:
         return gui.Cursor(self.cursor())
 
+    def set_style(self, style: str | QtWidgets.QStyle):
+        if isinstance(style, str):
+            style = QtWidgets.QStyleFactory.create(style)
+        self.setStyle(style)
+
 
 class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     pass
