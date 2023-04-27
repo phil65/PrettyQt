@@ -47,7 +47,7 @@ class WidgetMixin(core.ObjectMixin):
     def insertAction(
         self, position_or_action: int | QtWidgets.QAction, action: QtWidgets.QAction
     ):
-    """Extend insertAction to also allow int index."""
+        """Extend insertAction to also allow int index."""
         if isinstance(position_or_action, int):
             position_or_action = self.actions()[position_or_action]
         super().insertAction(position_or_action, action)
@@ -560,10 +560,10 @@ class WidgetMixin(core.ObjectMixin):
 
     def get_image(self) -> QtGui.QPixmap:
         image = self.grab()
-        if gl_widget := self.find_child(QtWidgets.QOpenGLWidget):
-            d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
-            with gui.Painter(image) as painter:
-                painter.set_composition_mode("source_atop")
+        with gui.Painter(image) as painter:
+            painter.set_composition_mode("source_atop")
+            for gl_widget in self.find_children(QtWidgets.QOpenGLWidget):
+                d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
                 painter.drawImage(d, gl_widget.grabFramebuffer())
         return image
 
