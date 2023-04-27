@@ -137,6 +137,17 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
     def stretch_last_section(self, stretch: bool = True):
         self.setStretchLastSection(stretch)
 
+    def get_default_alignment(self) -> constants.AlignmentStr:
+        return constants.ALIGNMENTS.inverse[self.defaultAlignment()]
+
+    def get_orientation(self) -> constants.OrientationStr:
+        """Return current orientation.
+
+        Returns:
+            orientation
+        """
+        return constants.ORIENTATION.inverse[self.orientation()]
+
 
 class HeaderView(HeaderViewMixin, QtWidgets.QHeaderView):
     pass
