@@ -22,7 +22,7 @@ jobs:
     - uses: tlambert03/setup-qt-libs@v1
     - name: Linux opengl
       if: runner.os == 'Linux'
-      run: sudo apt-get install -y libopengl0 libegl1-mesa libxcb-xinput0
+      run: sudo apt-get install -y libopengl0 libegl1-mesa libxcb-xinput0 libpulse0
     # - name: start TextToSpeech service
     #   if: runner.os == 'Linux'
     #   run: |
