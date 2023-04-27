@@ -44,6 +44,7 @@ def test_camera():
 def test_cameradevice():
     cam = multimedia.CameraDevice()
     assert cam.get_position() == "unspecified"
+    cam.get_video_formats()
 
 
 def test_cameraformat():
