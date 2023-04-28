@@ -65,8 +65,21 @@ class SplitterMixin(widgets.FrameMixin):
     def get_children(self) -> list[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
 
-    def add_widget(self, widget: QtWidgets.QWidget):
-        self.addWidget(widget)
+    def add_widget(
+        self,
+        widget: QtWidgets.QWidget,
+        stretch: int | None = None,
+        collapsible: bool = True,
+        position: int | None = None,
+    ):
+        if position is None:
+            self.addWidget(widget)
+        else:
+            self.insertWidget(position, widget)
+        index = self.indexOf(widget)
+        if stretch is not None:
+            self.setStretchFactor(index, stretch)
+        self.setCollapsible(index, collapsible)
 
     def add_layout(self, layout: QtWidgets.QLayout) -> widgets.Widget:
         widget = widgets.Widget()
