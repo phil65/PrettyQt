@@ -7,6 +7,7 @@ from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .collapsibleframe import CollapsibleFrame
 from .expandableline import ExpandableLine
+from .keycombinationedit import KeyCombinationEdit
 from .singlelinetextedit import SingleLineTextEdit
 from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
@@ -53,6 +54,7 @@ __all__ = [
     "CollapsibleFrame",
     "CompletionWidget",
     "ExpandableLine",
+    "KeyCombinationEdit",
     "SingleLineTextEdit",
     "RegexInput",
     "MappedCheckBox",
