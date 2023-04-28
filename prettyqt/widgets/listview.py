@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 VIEW_MODE = bidict(
@@ -149,7 +149,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return FLOW.inverse[self.flow()]
 
-    def set_grid_size(self, size: QtCore.QSize | tuple[int, int]):
+    def set_grid_size(self, size: datatypes.SizeType):
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
         self.setGridSize(size)
