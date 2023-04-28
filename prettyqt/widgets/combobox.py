@@ -58,7 +58,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
 
     # def serialize_fields(self):
     #     items = [
-    #         (self.itemText(i), self.itemData(i), self.item_icon(i))
+    #         (self.itemText(i), self.itemData(i), self.get_item_icon(i))
     #         for i in range(self.count())
     #     ]
     #     return dict(
@@ -121,7 +121,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
         else:
             self.addItem(label, userData=data)
 
-    def item_icon(self, index: int) -> gui.Icon | None:
+    def get_item_icon(self, index: int) -> gui.Icon | None:
         icon = self.itemIcon(index)
         return None if icon.isNull() else gui.Icon(icon)
 
