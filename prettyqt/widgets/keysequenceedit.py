@@ -10,14 +10,19 @@ class KeySequenceEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.keySequenceChanged.connect(self.value_changed)
+        self.keySequenceChanged.connect(self._on_value_change)
+        self.setClearButtonEnabled(True)
 
     def __repr__(self):
         return get_repr(self, self.get_value())
 
-    def set_value(self, value: str):
-        seq = gui.KeySequence.fromString(value)
-        self.setKeySequence(seq)
+    def _on_value_change(self, val):
+        self.value_changed.emit(val)
+
+    def set_value(self, value: str | QtGui.QKeySequence):
+        if isinstance(value, str):
+            value = gui.KeySequence.fromString(value)
+        self.setKeySequence(value)
 
     def get_value(self) -> str:
         return self.keySequence().toString()
