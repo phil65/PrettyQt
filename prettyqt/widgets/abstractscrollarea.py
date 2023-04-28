@@ -165,6 +165,6 @@ class AbstractScrollArea(AbstractScrollAreaMixin, QtWidgets.QAbstractScrollArea)
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = AbstractScrollArea()
+    widget = widgets.PlainTextEdit()
     widget.show()
     app.main_loop()

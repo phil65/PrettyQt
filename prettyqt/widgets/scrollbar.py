@@ -98,3 +98,11 @@ class SmoothScrollBar(ScrollBar):
             self.widget.v_scrollbar.scroll_by_value(-event.angleDelta().y())
             return True
         return False
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    widget = widgets.PlainTextEdit()
+    widget.set_scrollbar_smooth(True)
+    widget.show()
+    app.main_loop()
