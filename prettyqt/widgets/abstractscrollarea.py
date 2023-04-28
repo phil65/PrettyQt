@@ -69,6 +69,14 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         """
         return SIZE_POLICY.inverse[self.sizeAdjustPolicy()]
 
+    def set_scrollbar_smooth(self, value: bool = True):
+        if value:
+            self.h_scrollbar = widgets.SmoothScrollBar("horizontal", parent=self)
+            self.v_scrollbar = widgets.SmoothScrollBar("vertical", parent=self)
+        else:
+            self.h_scrollbar = widgets.ScrollBar(parent=self)
+            self.v_scrollbar = widgets.ScrollBar(parent=self)
+
     def set_scrollbar_policy(self, mode: constants.ScrollBarPolicyStr):
         """Set the policy for both scrollbars.
 
