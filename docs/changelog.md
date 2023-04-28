@@ -1,3 +1,17 @@
+## v1.30.0 (2023-04-28)
+
+### Feat
+
+- **AbstractScrollArea**: add set_scrollbar_smooth method
+- add SmoothScrollBar class
+- **AbstractScrollArea**: add scroll_by_pixels method
+- **Cursor**: add fake_mouse_move classmethod
+- **Widget**: add set_style method
+
+### Fix
+
+- **PlainTextEdit**: correctly propagate wheelEvent
+
 ## v1.29.0 (2023-04-27)
 
 ### Feat
