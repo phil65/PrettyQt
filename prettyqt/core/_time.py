@@ -14,6 +14,16 @@ class Time(QtCore.QTime):
     def __reduce__(self):
         return type(self), (self.hour(), self.minute(), self.second(), self.msec())
 
+    def add_msecs(self, msecs: int) -> Time:
+        return Time(self.addMSecs(msecs))
+
+    def add_secs(self, secs: int) -> Time:
+        return Time(self.addSecs(secs))
+
+    @classmethod
+    def get_current_time(cls) -> Time:
+        return Time(cls.currentTime())
+
 
 if __name__ == "__main__":
     time = Time(22, 1)
