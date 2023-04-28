@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import io
 from typing import Literal
 
 from prettyqt import core, gui
@@ -131,8 +132,6 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
         return img
 
     def to_pil(self) -> Image:
-        import io
-
         from PIL import Image as PILImage
 
         buffer = core.Buffer()

@@ -59,6 +59,7 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
         """Handle wheel event for zooming."""
         fct = ZOOM_IN_FACTOR if event.angleDelta().y() > 0 else ZOOM_OUT_FACTOR
         self.chart().zoom_by_factor(fct)
+        event.accept()
 
     def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""

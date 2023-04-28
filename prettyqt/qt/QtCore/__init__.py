@@ -2,14 +2,9 @@
 
 from __future__ import annotations
 
-
-# import sys
-from typing import TYPE_CHECKING
+import datetime
 
 from prettyqt.qt import PYQT6, PYSIDE6
-
-if TYPE_CHECKING:
-    import datetime
 
 # sys.setrecursionlimit(2000)
 
