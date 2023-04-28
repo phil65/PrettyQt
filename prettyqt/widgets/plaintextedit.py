@@ -73,7 +73,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     def get_current_line(self) -> int:
         return self.textCursor().blockNumber()
 
-    def get_selected_rows(self) -> tuple[int, int]:
+    def get_selected_block_span(self) -> tuple[int, int]:
         start = self.textCursor().selectionStart()
         end = self.textCursor().selectionEnd()
         start_block_id = self.document().findBlock(start).blockNumber()
