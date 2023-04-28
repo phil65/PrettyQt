@@ -1,6 +1,7 @@
 """Module containing custom widget classes."""
 
 from .image import Image
+from .clocklabel import ClockLabel
 from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
@@ -45,6 +46,7 @@ from prettyqt.custom_delegates.radiodelegate import RadioDelegate
 
 __all__ = [
     "Image",
+    "ClockLabel",
     "ListInput",
     "BoolDictToolButton",
     "OptionalWidget",
