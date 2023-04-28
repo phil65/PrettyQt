@@ -98,20 +98,22 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
     def from_ndarray(cls, arr) -> Image:
         import numpy as np
 
-        height, width, channel = arr.shape
+        height, width, bytes_per_component = arr.shape
         if arr.dtype in {np.float32, np.float64}:
             arr = (255 * arr).round()
         arr = arr.astype(np.uint8)
         return cls(
-            arr.data, width, height, channel * width, QtGui.QImage.Format.Format_RGB888
+            arr.data,
+            width,
+            height,
+            bytes_per_component * width,
+            QtGui.QImage.Format.Format_RGB888,
         )
 
     def to_ndarray(self, fmt: FormatStr = "rgb888", channels: int = 3):
         import numpy as np
 
         qimage = self.convert_to_format(fmt)
-        channels = channels
-
         width = qimage.width()
         height = qimage.height()
 
