@@ -71,14 +71,18 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
         colstart: int,
         rowspan: int = 1,
         colspan: int = 1,
+        alignment: constants.AlignmentStr | None = None,
     ):
+        alignment = (
+            constants.ALIGN_NONE if alignment is None else constants.ALIGNMENTS[alignment]
+        )
         match item:
             case QtWidgets.QWidget():
-                self.addWidget(item, rowstart, colstart, rowspan, colspan)
+                self.addWidget(item, rowstart, colstart, rowspan, colspan, alignment)
             case QtWidgets.QLayout():
-                self.addLayout(item, rowstart, colstart, rowspan, colspan)
+                self.addLayout(item, rowstart, colstart, rowspan, colspan, alignment)
             case QtWidgets.QLayoutItem():
-                self.addItem(item, rowstart, colstart, rowspan, colspan)
+                self.addItem(item, rowstart, colstart, rowspan, colspan, alignment)
 
     def append(self, item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
