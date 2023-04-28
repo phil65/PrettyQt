@@ -88,29 +88,31 @@ class Timeline(widgets.Widget):
             qp.setFont(self.text_font)
             qp.use_antialiasing()
             w = 0
-            while (w := w + 100) <= self.width():
+            width = self.width()
+            while (w := w + 100) <= width:
                 time_string = helpers.format_seconds(w * scale)
                 rect = core.Rect(w - 50, 0, 100, 100)
                 qp.drawText(rect, constants.ALIGN_H_CENTER, time_string)
             # Draw down line
             qp.set_pen(color=PEN_COLOR, width=5)
-            qp.drawLine(0, 40, self.width(), 40)
+            qp.drawLine(0, 40, width, 40)
 
             # Draw dash lines
             point = 0
             qp.set_pen(color=self.text_color)
-            qp.drawLine(0, 40, self.width(), 40)
-            while point <= self.width():
+            qp.drawLine(0, 40, width, 40)
+            while point <= width:
                 y2 = 30 if point % 30 != 0 else 20
                 qp.drawLine(3 * point, 40, 3 * point, y2)
                 point += 10
 
             if self._position is not None and self._is_in:
-                qp.drawLine(self._position.x(), 0, self._position.x(), 40)
+                x_pos = int(self._position.x())
+                qp.drawLine(x_pos, 0, x_pos, 40)
 
             poly = gui.Polygon()
             if self._position is not None:
-                val = self.pointer_time_pos / self.get_scale()
+                val = int(self.pointer_time_pos / self.get_scale())
                 line = core.Line(val, 40, val, self.height())
                 poly.add_points((val - 10, 20), (val + 10, 20), (val, 40))
             else:
