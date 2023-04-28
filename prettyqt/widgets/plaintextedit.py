@@ -46,7 +46,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     def wheelEvent(self, event):
         """Handle wheel event for zooming."""
         if not self._allow_wheel_zoom:
-            super().wheelEvent(event)
+            return super().wheelEvent(event)
         if event.modifiers() & constants.CTRL_MOD:
             self.zoomIn() if event.angleDelta().y() > 0 else self.zoomOut()
             event.accept()
