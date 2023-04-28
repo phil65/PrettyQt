@@ -3,8 +3,8 @@ from __future__ import annotations
 import os
 from typing import Literal
 
-from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import (
     InvalidParamError,
     bidict,
@@ -49,9 +49,22 @@ TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
 class Label(widgets.FrameMixin, QtWidgets.QLabel):
-    def __init__(self, *args, **kwargs):
+    clicked = core.Signal()
+
+    def __init__(self, *args, propagate_event: bool = True, **kwargs):
         super().__init__(*args, **kwargs)
         self.openExternalLinks()
+        self._propagate_event = propagate_event
+
+    def mousePressEvent(self, e):
+        if self._propagate_event:
+            super().mousePressEvent(e)
+
+    def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
+        if self._propagate_event:
+            super().mouseReleaseEvent(event)
+        if event.button() == QtCore.Qt.LeftButton:
+            self.clicked.emit()
 
     def __repr__(self):
         return get_repr(self, self.text())
