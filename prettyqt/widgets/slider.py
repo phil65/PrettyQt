@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -20,6 +20,7 @@ TickPositionStr = Literal["none", "both_sides", "above", "below"]
 
 class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
     value_changed = core.Signal(int)
+    clicked = core.Signal(int)
 
     def __init__(
         self,
@@ -32,6 +33,17 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
             ori = constants.ORIENTATION[orientation]
         super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
+        # self.setStyle(HollowHandleStyle())
+
+    def mousePressEvent(self, e: QtGui.QMouseEvent):
+        self.clicked.emit(self.value())
+        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+            value = e.pos().x() / self.width() * self.maximum()
+        else:
+            value = (self.height() - e.pos().y()) / self.height() * self.maximum()
+
+        self.setValue(int(value))
+        super().mousePressEvent(e)
 
     def set_tick_position(self, position: TickPositionAllStr):
         """Set the tick position for the slider.
