@@ -121,8 +121,8 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         else:
             return self.setAlignment(constants.ALIGNMENTS[alignment])
 
-    def add_widget(self, widget: QtWidgets.QWidget):
-        self.addWidget(widget)
+    def add_widget(self, widget: QtWidgets.QWidget, *args, **kwargs):
+        self.addWidget(widget, *args, **kwargs)
 
     def add(self, *items: QtWidgets.QWidget | QtWidgets.QLayout):
         for i in items:
