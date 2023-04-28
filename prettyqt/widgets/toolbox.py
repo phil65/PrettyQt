@@ -24,7 +24,7 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
     #     for i, widget in enumerate(self.get_children()):
     #         dct = dict(
     #             widget=widget,
-    #             icon=self.item_icon(i),
+    #             icon=self.get_item_icon(i),
     #             text=self.itemText(i),
     #             enabled=self.isItemEnabled(i),
     #             tool_tip=self.itemToolTip(i),
@@ -56,16 +56,18 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
         widget: QtWidgets.QWidget,
         title: str | None = None,
         icon: datatypes.IconType = None,
+        tooltip: str = "",
+        enabled: bool = True,
     ):
-        if title is None:
-            title = widget.objectName()
-        if icon:
-            icon = iconprovider.get_icon(icon)
-            self.addItem(widget, icon, title)
-        else:
-            self.addItem(widget, title)
+        title = widget.objectName() if title is None else title
+        icon = iconprovider.get_icon(icon) if icon else gui.Icon()
+        self.addItem(widget, icon, title)
+        index = self.indexOf(widget)
+        if tooltip:
+            self.setItemToolTip(index, tooltip)
+        self.setItemEnabled(index, enabled)
 
-    def item_icon(self, index: int) -> gui.Icon | None:
+    def get_item_icon(self, index: int) -> gui.Icon | None:
         icon = self.itemIcon(index)
         return None if icon.isNull() else gui.Icon(icon)
 
