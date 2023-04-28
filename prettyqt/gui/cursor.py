@@ -1,11 +1,17 @@
 from __future__ import annotations
 
-from prettyqt import constants, core
+from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, serializemixin
 
 
 class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
+    @classmethod
+    def fake_mouse_move(cls):
+        cls.setPos(cls.pos() + core.Point(0, 1))
+        gui.Application.processEvents()
+        cls.setPos(cls.pos() - core.Point(0, 1))
+
     def set_shape(self, shape: constants.CursorShapeStr):
         """Set cursor shape.
 
