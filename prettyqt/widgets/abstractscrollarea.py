@@ -40,6 +40,14 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
     def v_scrollbar(self, scrollbar):
         self.setVerticalScrollBar(scrollbar)
 
+    def scroll_by_pixels(self, x: int = 0, y: int = 0):
+        new_x = self.h_scrollbar.value() + x
+        x_val = max(min(new_x, self.h_scrollbar.maximum()), self.h_scrollbar.minimum())
+        new_y = self.h_scrollbar.value() + y
+        y_val = max(min(new_y, self.v_scrollbar.maximum()), self.v_scrollbar.minimum())
+        self.h_scrollbar.setValue(x_val)
+        self.v_scrollbar.setValue(y_val)
+
     def set_size_adjust_policy(self, policy: SizePolicyStr):
         """Set size adjust policy.
 
