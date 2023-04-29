@@ -148,24 +148,21 @@ class StarDelegate(widgets.StyledItemDelegate):
 
 if __name__ == "__main__":
     """Run the application."""
-    from prettyqt import widgets
+    from prettyqt import constants
 
     app = widgets.app()
-
-    # Create and populate the tableWidget
     table_widget = widgets.TableWidget(1, 2)
     table_widget.set_delegate(StarDelegate(), column=1)
     table_widget.setEditTriggers(
-        widgets.AbstractItemView.EditTrigger.DoubleClicked  # type: ignore
-        | widgets.AbstractItemView.EditTrigger.SelectedClicked
+        table_widget.EditTrigger.DoubleClicked  # type: ignore
+        | table_widget.EditTrigger.SelectedClicked
     )
     table_widget.set_selection_behaviour("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Rating"])
 
     item_1 = widgets.TableWidgetItem("Test1")
-    # item_1.setData(0, 3)
     item_2 = widgets.TableWidgetItem()
-    item_2.setData(0, 3)
+    item_2.setData(constants.DISPLAY_ROLE, 3)
     table_widget[0, 0] = item_1
     table_widget[0, 1] = item_2
 
