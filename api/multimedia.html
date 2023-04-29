@@ -454,6 +454,47 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.AudioDevice" class="md-nav__link">
+    AudioDevice
+  </a>
+  
+    <nav class="md-nav" aria-label="AudioDevice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_channel_config" class="md-nav__link">
+    get_channel_config()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_id" class="md-nav__link">
+    get_id()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_mode" class="md-nav__link">
+    get_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_supported_sample_formats" class="md-nav__link">
+    get_supported_sample_formats()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#prettyqt.multimedia.AudioFormat" class="md-nav__link">
     AudioFormat
   </a>
@@ -827,6 +868,20 @@
   
   
     <li class="md-nav__item">
+      <a href="quickwidgets.html" class="md-nav__link">
+        quickwidgets
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="svg.html" class="md-nav__link">
         svg
       </a>
@@ -963,6 +1018,47 @@
   <a href="#prettyqt.multimedia.__all__" class="md-nav__link">
     __all__
   </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.AudioDevice" class="md-nav__link">
+    AudioDevice
+  </a>
+  
+    <nav class="md-nav" aria-label="AudioDevice">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_channel_config" class="md-nav__link">
+    get_channel_config()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_id" class="md-nav__link">
+    get_id()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_mode" class="md-nav__link">
+    get_mode()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#prettyqt.multimedia.audiodevice.AudioDevice.get_supported_sample_formats" class="md-nav__link">
+    get_supported_sample_formats()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1241,7 +1337,7 @@
 
 
 <h2 id="prettyqt.multimedia.__all__" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AudioFormat&#39;</span><span class="p">,</span> <span class="s1">&#39;Camera&#39;</span><span class="p">,</span> <span class="s1">&#39;CameraDevice&#39;</span><span class="p">,</span> <span class="s1">&#39;CameraFormat&#39;</span><span class="p">,</span> <span class="s1">&#39;MediaPlayer&#39;</span><span class="p">]</span></code>
+<code class="highlight language-python"><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;AudioFormat&#39;</span><span class="p">,</span> <span class="s1">&#39;AudioDevice&#39;</span><span class="p">,</span> <span class="s1">&#39;Camera&#39;</span><span class="p">,</span> <span class="s1">&#39;CameraDevice&#39;</span><span class="p">,</span> <span class="s1">&#39;CameraFormat&#39;</span><span class="p">,</span> <span class="s1">&#39;MediaPlayer&#39;</span><span class="p">]</span></code>
   
   <span class="doc doc-labels">
       <small class="doc doc-label doc-label-module-attribute"><code>module-attribute</code></small>
@@ -1255,6 +1351,187 @@
 
 </div>
 
+
+<div class="doc doc-object doc-class">
+
+
+
+<h2 id="prettyqt.multimedia.AudioDevice" class="doc doc-heading">
+        <code>AudioDevice</code>
+
+
+</h2>
+
+
+  <div class="doc doc-contents ">
+      <p class="doc doc-class-bases">
+        Bases: <code><span title="prettyqt.qt.QtMultimedia">QtMultimedia</span>.<span title="prettyqt.qt.QtMultimedia.QAudioDevice">QAudioDevice</span></code></p>
+
+
+
+        <details class="quote">
+          <summary>Source code in <code>prettyqt\multimedia\audiodevice.py</code></summary>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-19">19</a></span>
+<span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span>
+<span class="normal"><a href="#__codelineno-0-22">22</a></span>
+<span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span>
+<span class="normal"><a href="#__codelineno-0-29">29</a></span>
+<span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span>
+<span class="normal"><a href="#__codelineno-0-34">34</a></span>
+<span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19"></a><span class="k">class</span> <span class="nc">AudioDevice</span><span class="p">(</span><span class="n">QtMultimedia</span><span class="o">.</span><span class="n">QAudioDevice</span><span class="p">):</span>
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a>    <span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeStr</span><span class="p">:</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>        <span class="k">return</span> <span class="n">MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">()]</span>
+</span><span id="__span-0-22"><a id="__codelineno-0-22" name="__codelineno-0-22"></a>
+</span><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a>    <span class="k">def</span> <span class="nf">get_supported_sample_formats</span><span class="p">(</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>        <span class="bp">self</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">SampleFormatStr</span><span class="p">]:</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a>        <span class="k">return</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">SAMPLE_FORMAT</span><span class="o">.</span><span class="n">get_list</span><span class="p">(</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">supportedSampleFormats</span><span class="p">()</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>        <span class="p">)</span>
+</span><span id="__span-0-29"><a id="__codelineno-0-29" name="__codelineno-0-29"></a>
+</span><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a>    <span class="k">def</span> <span class="nf">get_channel_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">ChannelConfigStr</span><span class="p">:</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>        <span class="k">return</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">ChannelConfigStr</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">channelConfiguration</span><span class="p">()</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>        <span class="p">]</span>
+</span><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+        </details>
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prettyqt.multimedia.audiodevice.AudioDevice.get_channel_config" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_channel_config</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">ChannelConfigStr</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\multimedia\audiodevice.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-30">30</a></span>
+<span class="normal"><a href="#__codelineno-0-31">31</a></span>
+<span class="normal"><a href="#__codelineno-0-32">32</a></span>
+<span class="normal"><a href="#__codelineno-0-33">33</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-30"><a id="__codelineno-0-30" name="__codelineno-0-30"></a><span class="k">def</span> <span class="nf">get_channel_config</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">ChannelConfigStr</span><span class="p">:</span>
+</span><span id="__span-0-31"><a id="__codelineno-0-31" name="__codelineno-0-31"></a>    <span class="k">return</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">ChannelConfigStr</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span>
+</span><span id="__span-0-32"><a id="__codelineno-0-32" name="__codelineno-0-32"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">channelConfiguration</span><span class="p">()</span>
+</span><span id="__span-0-33"><a id="__codelineno-0-33" name="__codelineno-0-33"></a>    <span class="p">]</span>
+</span></code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prettyqt.multimedia.audiodevice.AudioDevice.get_id" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_id</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\multimedia\audiodevice.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-35">35</a></span>
+<span class="normal"><a href="#__codelineno-0-36">36</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span> <span class="nf">get_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prettyqt.multimedia.audiodevice.AudioDevice.get_mode" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_mode</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ModeStr</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\multimedia\audiodevice.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-20">20</a></span>
+<span class="normal"><a href="#__codelineno-0-21">21</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20"></a><span class="k">def</span> <span class="nf">get_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ModeStr</span><span class="p">:</span>
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21"></a>    <span class="k">return</span> <span class="n">MODE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">mode</span><span class="p">()]</span>
+</span></code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prettyqt.multimedia.audiodevice.AudioDevice.get_supported_sample_formats" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_supported_sample_formats</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">SampleFormatStr</span><span class="p">]</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\multimedia\audiodevice.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-23">23</a></span>
+<span class="normal"><a href="#__codelineno-0-24">24</a></span>
+<span class="normal"><a href="#__codelineno-0-25">25</a></span>
+<span class="normal"><a href="#__codelineno-0-26">26</a></span>
+<span class="normal"><a href="#__codelineno-0-27">27</a></span>
+<span class="normal"><a href="#__codelineno-0-28">28</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-23"><a id="__codelineno-0-23" name="__codelineno-0-23"></a><span class="k">def</span> <span class="nf">get_supported_sample_formats</span><span class="p">(</span>
+</span><span id="__span-0-24"><a id="__codelineno-0-24" name="__codelineno-0-24"></a>    <span class="bp">self</span><span class="p">,</span>
+</span><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">SampleFormatStr</span><span class="p">]:</span>
+</span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="k">return</span> <span class="n">multimedia</span><span class="o">.</span><span class="n">audioformat</span><span class="o">.</span><span class="n">SAMPLE_FORMAT</span><span class="o">.</span><span class="n">get_list</span><span class="p">(</span>
+</span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">supportedSampleFormats</span><span class="p">()</span>
+</span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
 
 <div class="doc doc-object doc-class">
 
