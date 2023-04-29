@@ -22,7 +22,7 @@ class ColumnItem:
     """Determines how an object attribute is shown."""
 
     name: str
-    label: Callable[[treeitem.TreeItem], str] | None
+    label: Callable[[treeitem.TreeItem], str] | None = None
     checkstate: Callable[
         [treeitem.TreeItem], constants.StateStr | QtCore.Qt.CheckState | bool
     ] | None = None
