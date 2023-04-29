@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, gui, qml
-from prettyqt.qt import QtQuick
+from prettyqt.qt import QtCore, QtQuick
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -77,6 +77,12 @@ TransformOriginStr = Literal[
 
 
 class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
+    def __getitem__(self, index: tuple[int, int]) -> QtQuick.QQuickItem:
+        return self.childAt(*index)
+
+    def __contains__(self, item: QtCore.QPointF):
+        return self.contains(item)
+
     def get_children_rect(self) -> core.RectF:
         return core.RectF(self.childrenRect())
 
