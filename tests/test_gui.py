@@ -678,6 +678,10 @@ def test_pdfwriter():
     writer = gui.PdfWriter("test")
     writer.set_desktop_resolution()
     writer.set_page_margins((0, 0, 0, 0), unit="pica")
+    writer.set_pdf_version("v1_6")
+    assert writer.get_pdf_version() == "v1_6"
+    with pytest.raises(InvalidParamError):
+        writer.set_pdf_version("test")
 
 
 def test_pen():
