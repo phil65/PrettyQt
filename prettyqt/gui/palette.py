@@ -168,6 +168,10 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
         pal.set_color("highlighted_text", "grey", group="disabled")
         return pal
 
+    def is_dark(self):
+        col = self.color(self.ColorRole.Window)
+        return max(col.getRgb()[:3]) < 115
+
 
 if __name__ == "__main__":
     pal = Palette()
