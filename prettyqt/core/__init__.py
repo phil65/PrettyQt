@@ -62,6 +62,7 @@ from .elapsedtimer import ElapsedTimer
 from .basictimer import BasicTimer
 from .object import Object, ObjectMixin
 from .socketnotifier import SocketNotifier
+from .sharedmemory import SharedMemory
 from .signalmapper import SignalMapper
 from .timeline import TimeLine
 from .margins import Margins
@@ -315,4 +316,5 @@ __all__ = [
     "WarningMsg",
     "Semaphore",
     "Mutex",
+    "SharedMemory",
 ]
