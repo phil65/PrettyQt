@@ -62,6 +62,9 @@ class SplitterMixin(widgets.FrameMixin):
         self.add(other)
         return self
 
+    def createHandle(self) -> widgets.SplitterHandle:
+        return widgets.SplitterHandle(self.orientation(), self)
+
     def get_children(self) -> list[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
 
