@@ -1,3 +1,26 @@
+## v1.32.0 (2023-04-30)
+
+### Feat
+
+- **custom_widgets**: add RegexLineEdit class
+- **PlainTextEdit**: emit text with value_changed signal
+- **gui**: add TextTable, TextTableCell and TextTableFormat classes
+- **ItemEditorFactor**: add create_extended method
+- **QuickItem**: add __getitem__ and __contains__ methods
+- **custom_widgets**: add ColorComboBox
+- **ColorDialog**: add get/set_custom_colors methods
+- **printsupport**: add Printer class
+- **GuiApplication**: add palette_changed signal
+- add QtPrintSupport to qt module
+- **Splitter**: override createHandle so that our own subclass is used.
+- **SplitterHandle**: add clicked signal
+- **Palette**: add is_dark method
+- add quickwidgets module
+
+### Fix
+
+- **FontChooserButton**: add missing button icon
+
 ## v1.31.0 (2023-04-29)
 
 ### Feat
