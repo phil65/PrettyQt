@@ -20,7 +20,7 @@ LineWrapModeStr = Literal["none", "widget_width"]
 
 
 class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
-    value_changed = core.Signal()
+    value_changed = core.Signal(str)
 
     def __init__(
         self,
@@ -214,7 +214,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         return LINE_WRAP_MODE.inverse[self.lineWrapMode()]
 
     def _on_value_change(self):
-        self.value_changed.emit()
+        self.value_changed.emit(self.text())
         if self.validator is not None:
             self._set_validation_color()
 
