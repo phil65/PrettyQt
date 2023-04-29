@@ -118,3 +118,13 @@ def is_dark_mode() -> bool:
         return darkdetect.isDark()
     else:
         return False
+    #  QtDbus not available in PySide6 (yet)
+    # bus = QtDbus.QDBusConnection.sessionBus()
+    # m = QDBusMessage.createMethodCall(
+    #     'org.freedesktop.portal.Desktop', '/org/freedesktop/portal/desktop',
+    #     'org.freedesktop.portal.Settings', 'Read'
+    # )
+    # m.setArguments(['org.freedesktop.appearance', 'color-scheme'])
+    # reply = bus.call(m, timeout=1000)
+    # a = reply.arguments()
+    # return len(a) and isinstance(a[0], int) and a[0] == 1
