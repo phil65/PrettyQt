@@ -20,6 +20,7 @@ from .flowlayout import FlowLayout
 from .borderlayout import BorderLayout
 from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
+from .colorcombobox import ColorComboBox
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
 from .fontchooserbutton import FontChooserButton
@@ -66,6 +67,7 @@ __all__ = [
     "FlowLayout",
     "BorderLayout",
     "SidebarWidget",
+    "ColorComboBox",
     "ColorChooserButton",
     "FileChooserButton",
     "FontChooserButton",
