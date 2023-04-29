@@ -73,6 +73,12 @@ class PainterPath(QtGui.QPainterPath):
     def get_bounding_rect(self) -> core.RectF:
         return core.RectF(self.boundingRect())
 
+    def get_simplified(self) -> PainterPath:
+        return PainterPath(self.simplified())
+
+    def to_reversed(self) -> PainterPath:
+        return PainterPath(self.toReversed())
+
 
 if __name__ == "__main__":
     p = PainterPath(QtCore.QPoint(1, 1))
