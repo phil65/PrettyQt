@@ -9,6 +9,7 @@ from .collapsibleframe import CollapsibleFrame
 from .expandableline import ExpandableLine
 from .keycombinationedit import KeyCombinationEdit
 from .singlelinetextedit import SingleLineTextEdit
+from .regexlineedit import RegexLineEdit
 from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
 from .logtextedit import LogTextEdit
@@ -57,6 +58,7 @@ __all__ = [
     "ExpandableLine",
     "KeyCombinationEdit",
     "SingleLineTextEdit",
+    "RegexLineEdit",
     "RegexInput",
     "MappedCheckBox",
     "LogTextEdit",

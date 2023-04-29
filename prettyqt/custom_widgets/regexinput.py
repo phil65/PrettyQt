@@ -4,7 +4,7 @@ from re import Pattern
 
 import regex as re
 
-from prettyqt import core, custom_validators, custom_widgets, widgets
+from prettyqt import core, custom_widgets, widgets
 from prettyqt.qt import QtWidgets
 
 
@@ -28,24 +28,22 @@ class RegexInput(widgets.Widget):
     ):
         super().__init__(parent=parent)
         self.set_layout("grid")
-        self.lineedit = custom_widgets.SingleLineTextEdit()
-        self.lineedit.set_syntaxhighlighter("regex")
-        self.tb_flags = custom_widgets.BoolDictToolButton(
-            "Flags", icon="mdi.flag-variant-outline"
-        )
         self.label_error = widgets.Label()
         error_color = self.get_palette().get_color("highlight")
         self.label_error.set_color(error_color)
+
+        self.lineedit = custom_widgets.RegexLineEdit()
+        self.lineedit.val.error_occured.connect(self.label_error.set_text)
+        self.lineedit.val.pattern_updated.connect(self.value_changed)
+        self.tb_flags = custom_widgets.BoolDictToolButton(
+            "Flags", icon="mdi.flag-variant-outline"
+        )
         self.box[0, 0:1] = self.lineedit
         if show_flags:
             self.box[0, 2] = self.tb_flags
         if show_error:
             self.box[1, 0:2] = self.label_error
-        val = custom_validators.RegexPatternValidator()
-        val.error_occured.connect(self.label_error.set_text)
-        val.pattern_updated.connect(self.value_changed)
         self.tb_flags.value_changed.connect(self._on_value_change)
-        self.lineedit.set_validator(val)
         dct = dict(
             multiline="MultiLine",
             ignorecase="Ignore case",
