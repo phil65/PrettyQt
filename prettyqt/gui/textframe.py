@@ -5,7 +5,7 @@ from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
-class TextFrame(gui.TextObjectMixin, QtGui.QTextFrame):
+class TextFrameMixin(gui.TextObjectMixin):
     def __repr__(self):
         return get_repr(self)
 
@@ -14,6 +14,10 @@ class TextFrame(gui.TextObjectMixin, QtGui.QTextFrame):
 
     def get_last_cursor_position(self) -> gui.TextCursor:
         return gui.TextCursor(self.lastCursorPosition())
+
+
+class TextFrame(TextFrameMixin, QtGui.QTextFrame):
+    pass
 
 
 if __name__ == "__main__":

@@ -44,7 +44,7 @@ BorderStyleStr = Literal[
 ]
 
 
-class TextFrameFormat(gui.TextFormatMixin, QtGui.QTextFrameFormat):
+class TextFrameFormatMixin(gui.TextFormatMixin):
     def get_height(self) -> gui.TextLength:
         length = self.height()
         return gui.TextLength(length.type(), length.rawValue())
@@ -118,3 +118,7 @@ class TextFrameFormat(gui.TextFormatMixin, QtGui.QTextFrameFormat):
             position
         """
         return POSITIONS.inverse[self.position()]
+
+
+class TextFrameFormat(TextFrameFormatMixin, QtGui.QTextFrameFormat):
+    pass
