@@ -70,6 +70,17 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
     def use_native_dialog(self, value: bool = True):
         self.setOption(self.ColorDialogOption.DontUseNativeDialog, not value)
 
+    @classmethod
+    def get_custom_colors(cls) -> list[gui.Color]:
+        return [gui.Color(cls.customColor(i)) for i in range(cls.customCount())]
+
+    @classmethod
+    def set_custom_colors(cls, colors_: list[datatypes.ColorType]):
+        num = min(len(colors_), cls.customCount())
+        for i in range(num):
+            color = colors.get_color(colors_[i])
+            cls.setCustomColor(i, color)
+
 
 class CPAlphaShowLabel(widgets.Label):
     """Label which displays the currently-active color using checkerboard alpha.
