@@ -20,7 +20,7 @@ class FontChooserButton(widgets.Widget):
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()
         layout.add(self.lineedit)
-        action = gui.Action()
+        action = gui.Action(icon="mdi.format-font")
         action.triggered.connect(self.choose_font)
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
@@ -49,7 +49,7 @@ class FontChooserButton(widgets.Widget):
     def get_value(self):
         return self._current_font
 
-    current_font = core.Property(QtGui.QFont, get_value, set_value)
+    current_font = core.Property(QtGui.QFont, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":
