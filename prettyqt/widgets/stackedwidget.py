@@ -21,6 +21,11 @@ class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
     def __getitem__(self, index: int) -> QtWidgets.QWidget:
         return self.widget(index)
 
+    def __delitem__(self, item: int | QtWidgets.QWidget):
+        if isinstance(item, int):
+            item = self.widget(item)
+        self.removeWidget(item)
+
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.widget(i) for i in range(self.count()))
 

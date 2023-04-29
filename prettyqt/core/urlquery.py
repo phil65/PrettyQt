@@ -21,6 +21,9 @@ class UrlQuery(QtCore.QUrlQuery):
             self.addQueryItem(k, str(v))
         return self
 
+    def __delitem__(self, item: str):
+        self.removeQueryItem(item)
+
     def __setitem__(self, key, value):
         items = dict(self.queryItems())
         items[key] = value

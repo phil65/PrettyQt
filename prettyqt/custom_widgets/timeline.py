@@ -63,6 +63,9 @@ class Timeline(widgets.Widget):
     def __setitem__(self, index: int, value: VideoSample):
         self.video_samples[index] = value
 
+    def __delitem__(self, index: int):
+        del self.video_samples[index]
+
     def __add__(self, other: VideoSample) -> Timeline:
         self.add(other)
         return self
