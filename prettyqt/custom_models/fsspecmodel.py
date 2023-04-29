@@ -253,9 +253,10 @@ class FSSpecTreeModel(
         self.fs.rmdir(path)
         return self.fs.exists(path)
 
-    def setRootPath(self, path: os.PathLike) -> core.ModelIndex:
-        path = os.fspath(path)
-        self.set_root_item({"name": path, "size": 0, "type": "directory"})
+    def setRootPath(self, path: os.PathLike | None) -> core.ModelIndex:
+        path = os.fspath(path) if path else self.fs.root_marker
+        item = self.fs.info(path)
+        self.set_root_item(item)
 
         self.rootPathChanged.emit(path)
 
