@@ -70,7 +70,7 @@ class StarEditor(widgets.Widget):
 
     def mouseMoveEvent(self, event):
         """Update stars on mouse move."""
-        star = self.star_at_position(event.x())
+        star = self.star_at_position(event.position().x())
 
         if star != -1:
             self.star_rating.star_count = star
