@@ -826,7 +826,7 @@ def test_textcharformat():
 
 def test_textimageformat():
     fmt = gui.TextImageFormat()
-    assert bool(fmt) is True
+    assert bool(fmt)
 
 
 def test_textlistformat():
@@ -835,6 +835,28 @@ def test_textlistformat():
     with pytest.raises(InvalidParamError):
         fmt.set_style("test")
     assert fmt.get_style() == "upper_roman"
+
+
+def test_texttable():
+    doc = gui.TextDocument()
+    table = gui.TextTable(doc)
+    with pytest.raises(IndexError):
+        table[0, 0]
+    with pytest.raises(IndexError):
+        table[0]
+
+
+def test_texttablecell():
+    cell = gui.TextTableCell()
+    assert cell
+    # cell.get_format()
+
+
+def test_texttableformat():
+    fmt = gui.TextTableFormat()
+    fmt.set_alignment("left")
+    assert fmt.get_alignment() == "left"
+    fmt.get_column_width_constraints()
 
 
 def test_texttablecellformat():

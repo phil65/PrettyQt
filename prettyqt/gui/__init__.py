@@ -127,6 +127,9 @@ from .texttablecellformat import TextTableCellFormat
 from .textobject import TextObject, TextObjectMixin
 from .textblockgroup import TextBlockGroup
 from .textframe import TextFrame
+from .texttablecell import TextTableCell
+from .texttableformat import TextTableFormat
+from .texttable import TextTable
 from .abstracttextdocumentlayout import (
     AbstractTextDocumentLayout,
     AbstractTextDocumentLayoutMixin,
@@ -256,7 +259,10 @@ __all__ = [
     "TextCharFormatMixin",
     "TextImageFormat",
     "TextListFormat",
+    "TextTableCell",
+    "TextTableFormat",
     "TextTableCellFormat",
+    "TextTable",
     "TextCursor",
     "SyntaxHighlighter",
     "UndoCommand",
