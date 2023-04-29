@@ -63,8 +63,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def get_children(self) -> list[QtWidgets.QWidget | QtWidgets.QLayout]:
         return list(self)
 
-    def set_margin(self, margin: int):
-        self.setContentsMargins(margin, margin, margin, margin)
+    def set_margin(self, margin: int | None):
+        if margin is None:
+            self.unsetContentsMargins()
+        else:
+            self.setContentsMargins(margin, margin, margin, margin)
 
     def set_spacing(self, pixels: int):
         self.setSpacing(pixels)
