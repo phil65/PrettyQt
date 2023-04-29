@@ -177,9 +177,10 @@ class FSSpecTreeModel(
 
         Returns: list of TreeItems
         """
+        glob = f"{obj.obj['name']}/*/" if obj.obj["name"] else "*"
         items = [
             treeitem.TreeItem(obj=i, parent=obj)
-            for i in self.fs.glob(f"{obj.obj['name']}/*/", detail=True).values()
+            for i in self.fs.glob(glob, detail=True).values()
         ]
         # not sure if this should be emitted later?
         self.directoryLoaded.emit(obj.obj["name"])
