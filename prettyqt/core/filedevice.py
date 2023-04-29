@@ -93,6 +93,9 @@ class FileDeviceMixin(core.IODeviceMixin):
     def __str__(self):
         return self.fileName()
 
+    def get_permissions(self) -> list[PermissionStr]:
+        return PERMISSIONS.get_list(self.permissions())
+
     def set_file_time(self, file_time: datatypes.DateTimeType, typ: FileTimeStr) -> bool:
         """Set file time.
 
