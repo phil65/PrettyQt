@@ -17,7 +17,6 @@ TYPES = {
     list: QtCore.QMetaType.Type.QVariantList,
     QtGui.QPolygon: QtCore.QMetaType.Type.QPolygon,
     QtGui.QPolygonF: QtCore.QMetaType.Type.QPolygonF,
-    QtGui.QColor: QtCore.QMetaType.Type.QColor,
     QtGui.QColorSpace: QtCore.QMetaType.Type.QColorSpace,
     QtCore.QSizeF: QtCore.QMetaType.Type.QSizeF,
     QtCore.QRectF: QtCore.QMetaType.Type.QRectF,
@@ -55,6 +54,8 @@ TYPES = {
     QtCore.QModelIndex: QtCore.QMetaType.Type.QModelIndex,
     QtCore.QPersistentModelIndex: QtCore.QMetaType.Type.QPersistentModelIndex,
     QtCore.QUuid: QtCore.QMetaType.Type.QUuid,
+    QtGui.QTransform: QtCore.QMetaType.Type.QTransform,
+    QtCore.QByteArray: QtCore.QMetaType.Type.QByteArray,
 }
 
 
@@ -97,7 +98,29 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
             typ = editor_cls.staticMetaObject.userProperty().userType()
         elif isinstance(typ, type):
             typ = TYPES[typ].value
+        # print(f"register {editor_cls} for {typ}")
         self.registerEditor(typ, creator)
+
+    @classmethod
+    def create_extended(cls) -> ItemEditorFactory:
+        factory = cls()
+        factory.register_editor(widgets.CheckBox, bool, "")
+        factory.register_editor(widgets.SpinBox, int, "value")
+        factory.register_editor(widgets.LineEdit, str, "text")
+        factory.register_editor(widgets.DoubleSpinBox, float, "value")
+        factory.register_editor(widgets.DateEdit, QtCore.QDate, "date")
+        factory.register_editor(widgets.TimeEdit, QtCore.QTime, "time")
+        factory.register_editor(widgets.DateTimeEdit, QtCore.QDateTime, "dateTime")
+        factory.register_editor(
+            widgets.KeySequenceEdit, QtGui.QKeySequence, "keySequence"
+        )
+        factory.register_editor(
+            custom_widgets.ColorComboBox, QtGui.QColor, "current_color"
+        )
+        factory.register_editor(widgets.FontComboBox, QtGui.QFont, "currentFont")
+        factory.register_editor(widgets.LineEdit, QtCore.QUrl, "text")
+        factory.register_editor(widgets.LineEdit, QtCore.QRegularExpression, "text")
+        return factory
 
 
 # factory = ItemEditorFactory()
@@ -108,7 +131,7 @@ if __name__ == "__main__":
     from prettyqt import constants, custom_widgets
 
     app = widgets.app()
-    table_widget = widgets.TableWidget(1, 2)
+    table_widget = widgets.TableWidget(15, 2)
     # table_widget.set_delegate(StarDelegate(), column=1)
     table_widget.setEditTriggers(
         table_widget.EditTrigger.DoubleClicked  # type: ignore
@@ -116,14 +139,30 @@ if __name__ == "__main__":
     )
     table_widget.set_selection_behaviour("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Rating"])
-    factory = ItemEditorFactory()
-    factory.register_editor(custom_widgets.ColorChooserButton, QtGui.QColor, "color")
+    factory = ItemEditorFactory.create_extended()
+    # factory = ItemEditorFactory()
+    # factory.register_editor(custom_widgets.ColorChooserButton, QtGui.QColor, "color")
     factory.setDefaultFactory(factory)
-    item_1 = widgets.TableWidgetItem("Test1")
-    item_2 = widgets.TableWidgetItem()
-    item_2.setData(constants.DISPLAY_ROLE, QtGui.QColor(30, 30, 30))
-    table_widget[0, 0] = item_1
-    table_widget[0, 1] = item_2
+    types = dict(
+        color=QtGui.QColor(30, 30, 30),
+        time=QtCore.QTime(1, 1, 1),
+        date=QtCore.QDate(1, 1, 1),
+        datetime=QtCore.QDateTime(1, 1, 1, 1, 1, 1),
+        font=QtGui.QFont(),
+        str="fdsf",
+        int=8,
+        float=8.2,
+        url=QtCore.QUrl("http://www.google.de"),
+        regex=QtCore.QRegularExpression("[a-z]"),
+        bool=True,
+        keysequence=QtGui.QKeySequence("Ctrl+A"),
+    )
+    for i, (k, v) in enumerate(types.items()):
+        item_1 = widgets.TableWidgetItem(k)
+        item_2 = widgets.TableWidgetItem()
+        item_2.setData(constants.DISPLAY_ROLE, v)
+        table_widget[i, 0] = item_1
+        table_widget[i, 1] = item_2
 
     table_widget.resizeColumnsToContents()
     table_widget.resize(500, 300)
