@@ -44,6 +44,7 @@ from prettyqt.qt.QtGui import (
 
 
 from .stylehints import StyleHints
+from .pageranges import PageRanges
 from .shortcut import Shortcut
 from .textobjectinterface import TextObjectInterface
 from .drag import Drag
@@ -152,6 +153,7 @@ def app(args: list[str] | None = None) -> GuiApplication:
 __all__ = [
     "app",
     "StyleHints",
+    "PageRanges",
     "KeyEvent",
     "MouseEvent",
     "WheelEvent",
