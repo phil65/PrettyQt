@@ -1,3 +1,36 @@
+## v1.31.0 (2023-04-29)
+
+### Feat
+
+- **FsSpecModel**: allow None for setRootPath
+- **core**: add SharedMemory class
+- **multimedia**: add AudioDevice class
+- add __delitem__ for UrlQuery, Timeline and StackedWidget
+- **QuickRenderControl**: add edit_frame context manager
+- **PdfWriter**: add get/set_version methods
+- **PagedPaintDevice**: add get_page_ranges and get_page_layout methods
+- **Date**: add replace method
+- **FileDevice**: add get_permissions method
+- **gui**: add PageRanges class
+- **PainterPath**: add get_simplified and to_reversed methods
+- **Layout**: allow None for set_margin
+- **GridLayout**: add alignment kwarg to add method
+- add KeyCombinationEdit class
+- **KeySequenceEdit**: allow QKeySequence for set_value
+- **ToolBox**: add some kwargs to add_widget
+- **Splitter**: some kwargs for add_widget method
+- **Slider**: better mouseclick behaviour
+- **Date**: add add_days, add_months, add_years and get_current_date methods
+- **Time**: add add_msecs, add_secs and get_current_time methods
+- **Label**: add clicked signal
+
+### Fix
+
+- **FsSpecModel**: fix root glob call
+- **StarDelegate**: qt6 fix
+- **Timeline**: Qt6 fixes
+- **PlainTextEdit**: wheelEvent fix
+
 ## v1.30.0 (2023-04-28)
 
 ### Feat
