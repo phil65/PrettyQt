@@ -33,6 +33,15 @@ class Date(QtCore.QDate):
     def get_current_date(cls) -> Date:
         return Date(cls.currentDate())
 
+    def replace(
+        self, year: int | None = None, month: int | None = None, day: int | None = None
+    ):
+        self.setDate(
+            year if year is not None else self.year(),
+            month if month is not None else self.month(),
+            day if day is not None else self.day(),
+        )
+
 
 if __name__ == "__main__":
     dt = Date(2000, 11, 11)
