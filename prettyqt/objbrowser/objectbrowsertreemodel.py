@@ -71,15 +71,16 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         obj: Any,
         obj_name: str = "",
         attr_cols: list[custom_models.ColumnItem] | None = None,
+        show_root: bool = False,
         parent: QtCore.QObject | None = None,
     ):
-        super().__init__(attr_cols=attr_cols, parent=parent)
+        super().__init__(obj=None, columns=attr_cols, parent=parent)
         # The root_item is always invisible. If the obj_name is the empty string, the
         # inspectedItem will be the invisible root_item. If the obj_name is given,
         # an invisible root item will be added and the inspectedItem will be its
         # only child. In that case the inspected item will be visible.
-        self._show_root = obj_name != ""
-
+        self._show_root = show_root
+        obj_name = obj.__class__.__name__
         if self._show_root:
             self._root_item = ObjectBrowserTreeItem(
                 obj=None,
@@ -299,7 +300,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     obj = dict(a=2, b="test")
-    model = ObjectBrowserTreeModel(obj, "test", attr_cols=DEFAULT_ATTR_COLS)
+    model = ObjectBrowserTreeModel(obj, "", attr_cols=DEFAULT_ATTR_COLS)
     obj_tree = widgets.TreeView()
     obj_tree.setRootIsDecorated(True)
     obj_tree.setAlternatingRowColors(True)

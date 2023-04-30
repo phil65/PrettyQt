@@ -176,14 +176,6 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
-    def __init__(
-        self,
-        attr_cols: list[ColumnItem] | None = None,
-        parent: QtCore.QObject | None = None,
-    ):
-        super().__init__(parent)
-        self._attr_cols = attr_cols or []
-
     def data(self, index, role):
         """Return the tree item at the given index and role."""
         if not index.isValid():
@@ -249,10 +241,20 @@ class ColumnItemModelMixin:
 
 
 class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
-    def __init__(self, *args, **kwargs):
-        self._root_item = core.ModelIndex()
-        self._show_root = True
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        obj,
+        columns: list[ColumnItem],
+        mime_type: str | None = None,
+        show_root: bool = True,
+        parent: QtCore.QObject | None = None,
+    ):
+        super().__init__(parent)
+        self._root_item = treeitem.TreeItem(obj=obj)
+        self._show_root = show_root
+        self.mime_type = mime_type
+        self._attr_cols = columns or []
+        self.set_root_item(obj)
 
     def root_index(self) -> core.ModelIndex:  # TODO: needed?
         """Return the index that returns the root element (same as an invalid index)."""
@@ -264,6 +266,8 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
             self._root_item.children_fetched = True
             self.inspected_item = treeitem.TreeItem(obj=obj)
             self._root_item.append_child(self.inspected_item)
+            # root_index = self.index(0, 0)
+            # self.fetchMore(self.index(0, 0, root_index))
         else:
             # The root itself will be invisible
             self._root_item = treeitem.TreeItem(obj=obj)
@@ -356,9 +360,10 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         mime_type: str | None = None,
         parent: QtCore.QObject | None = None,
     ):
-        super().__init__(columns, parent)
+        super().__init__(parent)
         self.items = items
         self.mime_type = mime_type
+        self._attr_cols = columns or []
 
     def rowCount(self, parent=None):
         parent = parent or core.ModelIndex()

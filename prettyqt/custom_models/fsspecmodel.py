@@ -115,7 +115,6 @@ ATTR_MODEL_PERMISSIONS = custom_models.ColumnItem(
 
 ATTR_MODEL_IS_LINK = custom_models.ColumnItem(
     name="Link",
-    label="",
     doc="Date created.",
     checkstate=lambda x: x.obj.get("islink") or False,
 )
@@ -166,11 +165,11 @@ class FSSpecTreeModel(
         show_root: bool = False,
         parent: QtCore.QObject | None = None,
     ):
-        super().__init__(attr_cols=COLUMNS, parent=parent)
-        self._show_root = show_root
         self.fs = fs
         self.root_marker = fs.root_marker
-        self.set_root_item(obj)
+        self.protocol = fs.protocol
+        self.sep = fs.sep
+        super().__init__(obj, columns=COLUMNS, parent=parent, show_root=show_root)
 
     def _fetch_object_children(self, obj: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         """Fetch the children of a Python object.
@@ -498,11 +497,9 @@ if __name__ == "__main__":
 
     app = widgets.app()
 
-    fs = fsspec.filesystem("github", org="phil65", repo="prettyqt", path="/")
-    print(fs.to_json())
-    # root = {"name": "C:/", "size": 0, "type": "directory"}
-    root = {"name": "prettyqt", "size": 0, "type": "directory"}
-    # print(root)
+    fs = fsspec.filesystem("file", org="phil65", repo="prettyqt", path="/")
+    root = fs.info("")
+    print(root, fs.ls("", detail=True))
     model = FSSpecTreeModel(fs, root, False)
     print(model.mimeTypes())
     tree = widgets.TreeView()
@@ -511,12 +508,6 @@ if __name__ == "__main__":
     tree.setAlternatingRowColors(True)
     tree.set_model(model)
     tree.set_selection_behaviour("rows")
-    idx = model.index(
-        "C:\\Users\\phili\\AppData\\Local\\Programs\\Python\\Python310\\Lib"
-    )
-    print(model.get_permissions(idx))
-    print(idx.isValid())
-    print(idx.parent().parent().data(constants.DISPLAY_ROLE))
     tree.setUniformRowHeights(True)
     tree.setAnimated(True)
     tree.show()

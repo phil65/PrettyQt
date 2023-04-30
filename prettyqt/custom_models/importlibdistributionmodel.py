@@ -77,9 +77,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         show_root: bool = False,
         parent: QtCore.QObject | None = None,
     ):
-        super().__init__(attr_cols=COLUMNS, parent=parent)
-        self._show_root = show_root
-        self.set_root_item(obj)
+        super().__init__(obj=obj, columns=COLUMNS, parent=parent, show_root=show_root)
 
     @classmethod
     def from_system(cls, parent: QtCore.QObject | None = None) -> ImportlibTreeModel:
