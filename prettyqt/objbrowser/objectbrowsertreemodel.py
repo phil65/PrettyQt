@@ -57,11 +57,6 @@ class ObjectBrowserTreeItem(treeitem.TreeItem):
             and self.obj_name.endswith("__")
         )
 
-    @property
-    def is_callable_attribute(self) -> bool:
-        """Return true if the items is an attribute and it is callable."""
-        return self.is_attribute and callable(self.obj)
-
 
 class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
     """Model that provides an interface to an objectree that is build of tree items."""
@@ -270,9 +265,9 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
         """Return true if the item should be included in the model."""
         parent_item = self.sourceModel().tree_item(source_parent_index)
         tree_item = parent_item.child(source_row)
-
+        is_callable_attr = tree_item.is_attribute and callable(tree_item.obj)
         return (self._show_special_attrs or not tree_item.is_special_attribute) and (
-            self._show_callables or not tree_item.is_callable_attribute
+            self._show_callables or not is_callable_attr
         )
 
     def get_show_callables(self) -> bool:
@@ -280,7 +275,6 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
 
     def set_show_callables(self, show_callables: bool):
         """Show/hide show_callables which have a __call__ attribute."""
-        logger.debug("set_show_callables: %s", show_callables)
         self._show_callables = show_callables
         self.invalidateFilter()
 
@@ -289,7 +283,6 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
 
     def set_show_special_attrs(self, show_special_attrs: bool):
         """Show/hide special attributes which begin with an underscore."""
-        logger.debug("set_show_special_attrs: %s", show_special_attrs)
         self._show_special_attrs = show_special_attrs
         self.invalidateFilter()
 
