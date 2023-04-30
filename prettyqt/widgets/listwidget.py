@@ -170,6 +170,8 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = ListWidget()
+    for i in range(100):
+        widget.add_item(str(i))
     widget.add("test", icon="mdi.timer")
     widget.add("test", icon="mdi.timer")
     widget.show()

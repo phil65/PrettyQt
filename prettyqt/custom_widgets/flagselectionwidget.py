@@ -62,7 +62,7 @@ class FlagSelectionWidget(widgets.GroupBox):
 
 
 if __name__ == "__main__":
-    import re
+    import regex as re
 
     app = widgets.app()
     widget = FlagSelectionWidget()
