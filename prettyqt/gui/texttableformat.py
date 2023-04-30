@@ -10,10 +10,10 @@ class TextTableFormat(gui.textframeformat.TextFrameFormatMixin, QtGui.QTextTable
         return self.isValid()
 
     def set_alignment(self, alignment: constants.AlignmentStr):
-        """Set the alignment of the layout.
+        """Set the alignment of the format.
 
         Args:
-            alignment: alignment for the layout
+            alignment: alignment for the format
 
         Raises:
             InvalidParamError: alignment does not exist

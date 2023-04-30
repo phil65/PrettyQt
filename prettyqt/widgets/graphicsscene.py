@@ -25,34 +25,6 @@ ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
 
 class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
-    def serialize_fields(self):
-        return dict(
-            items=self.items(),
-            background_brush=self.get_background_brush(),
-            foreground_brush=self.get_foreground_brush(),
-            item_index_method=self.get_item_index_method(),
-            minimum_render_size=self.minimumRenderSize(),
-            palette=self.get_palette(),
-            bsp_tree_depth=self.bspTreeDepth(),
-            focus_on_touch=self.focusOnTouch(),
-            sticky_focus=self.stickyFocus(),
-            scene_rect=core.RectF(self.sceneRect()),
-            font=self.get_font(),
-        )
-
-    def __setitem__(self, state):
-        # self.setItem
-        self.setBackgroundBrush(state["background_brush"])
-        self.setForegroundBrush(state["foreground_brush"])
-        self.set_item_index_method(state["item_index_method"])
-        self.setMinimumRenderSize(state["minimum_render_size"])
-        self.setPalette(state["palette"])
-        self.setBspTreeDepth(state["bsp_tree_depth"])
-        self.setFocusOnTouchRelease(state["focus_on_touch"])
-        self.setStickyFocus(state["focus_on_touch"])
-        self.setSceneRect(state["scene_rect"])
-        self.setFont(state["font"])
-
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 

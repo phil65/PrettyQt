@@ -14,6 +14,7 @@ class RegexLineEdit(custom_widgets.SingleLineTextEdit):
         super().__init__(parent=parent)
         self.set_syntaxhighlighter("regex")
         self.val = custom_validators.RegexPatternValidator()
+        self.set_margin(0)
         self.set_validator(self.val)
 
     @property
