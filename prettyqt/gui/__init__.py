@@ -120,6 +120,7 @@ from .imagewriter import ImageWriter
 from .textformat import TextFormat, TextFormatMixin
 from .textlength import TextLength
 from .textframeformat import TextFrameFormat
+from .textblockformat import TextBlockFormat
 from .textcharformat import TextCharFormat, TextCharFormatMixin
 from .textimageformat import TextImageFormat
 from .textlistformat import TextListFormat
@@ -293,6 +294,7 @@ __all__ = [
     "TextFormat",
     "TextFormatMixin",
     "TextFrameFormat",
+    "TextBlockFormat",
     "TextFrame",
     "AbstractFileIconProvider",
     "AbstractFileIconProviderMixin",

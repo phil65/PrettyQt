@@ -520,6 +520,18 @@ def test_textblock():
     assert 1 not in block
 
 
+def test_textblockformat():
+    block = gui.TextBlockFormat()
+    block.set_alignment("left")
+    with pytest.raises(InvalidParamError):
+        block.set_alignment("test")
+    assert block.get_alignment() == "left"
+    block.set_marker("unchecked")
+    with pytest.raises(InvalidParamError):
+        block.set_marker("test")
+    assert block.get_marker() == "unchecked"
+
+
 def test_textblockgroup():
     doc = gui.TextDocument()
     group = gui.TextBlockGroup(doc)
@@ -855,6 +867,8 @@ def test_texttablecell():
 def test_texttableformat():
     fmt = gui.TextTableFormat()
     fmt.set_alignment("left")
+    with pytest.raises(InvalidParamError):
+        fmt.set_alignment("test")
     assert fmt.get_alignment() == "left"
     fmt.get_column_width_constraints()
 
