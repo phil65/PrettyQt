@@ -72,6 +72,22 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
         mime_type = db.get_mime_type_for_file(path, match_mode)
         return cls(mime_type)
 
+    def to_dict(self) -> dict[str, bytes]:
+        return {i: self.data(i).data() for i in self.formats()}
+
+    @classmethod
+    def clone(cls, other: QtCore.QMimeData) -> MimeData:
+        mime = cls()
+        for fmt in other.formats():
+            mime.setData(fmt, other.data(fmt))
+        return mime
+
 
 if __name__ == "__main__":
-    mime_data = MimeData()
+    from prettyqt import gui
+
+    app = gui.app()
+    c = app.get_clipboard()
+    mime_data = c.mimeData()
+    mime_data = MimeData.clone(mime_data)
+    print(mime_data.to_dict())
