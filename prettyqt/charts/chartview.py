@@ -25,8 +25,8 @@ SCROLL_STEP_SIZE = 10
 class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        chart = charts.Chart()
-        self.setChart(chart)
+        if not args or not isinstance(args[0], QtCharts.QChart):
+            self.setChart(charts.Chart())
         self.setRenderHint(gui.Painter.RenderHint.Antialiasing)
         self.set_rubber_band("rectangle")
         # self.setDragMode(self.RubberBandDrag)

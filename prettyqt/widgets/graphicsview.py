@@ -52,34 +52,10 @@ ViewportUpdateModeStr = Literal["full", "minimal", "smart", "bounding_rect", "no
 
 
 class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
-    def serialize_fields(self):
-        return dict(
-            scene=self.scene(),
-            background_brush=self.get_background_brush(),
-            foreground_brush=self.get_foreground_brush(),
-            transformation_anchor=self.get_transformation_anchor(),
-            resize_anchor=self.get_resize_anchor(),
-            viewport_update_mode=self.get_viewport_update_mode(),
-            drag_mode=self.get_drag_mode(),
-            rubberband_selection_mode=self.get_rubberband_selection_mode(),
-            scene_rect=core.RectF(self.sceneRect()),
-            cache_mode=self.get_cache_mode(),
-            is_interactive=self.isInteractive(),
-        )
-
-    def __setitem__(self, state):
-        super().__setstate__(state)
-        self.setScene(state["scene"])
-        self.setBackgroundBrush(state["background_brush"])
-        self.setForegroundBrush(state["foreground_brush"])
-        self.set_transformation_anchor(state["transformation_anchor"])
-        self.set_resize_anchor(state["resicze_anchor"])
-        self.set_viewport_update_mode(state["viewport_update_mode"])
-        self.set_drag_mode(state["drag_mode"])
-        self.set_rubberband_selection_mode(state["rubberband_selection_mode"])
-        self.setSceneRect(state["scene_rect"])
-        self.set_cache_mode(state["cache_mode"])
-        self.setInteractive(state["is_interactive"])
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not args or not isinstance(args[0], QtWidgets.QGraphicsScene):
+            self.setScene(widgets.GraphicsScene())
 
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
