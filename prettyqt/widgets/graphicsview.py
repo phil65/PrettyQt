@@ -60,6 +60,12 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 
+    def add_item(self, *args):
+        return self.scene().addItem(*args)
+
+    def remove_item(self, *args):
+        return self.scene().removeItem(*args)
+
     def get_background_brush(self) -> gui.Brush:
         return gui.Brush(self.backgroundBrush())
 
