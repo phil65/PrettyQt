@@ -21,10 +21,26 @@ class TableWidgetMixin(widgets.TableViewMixin):
         order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
 
-    def openPersistentEditor(self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem):
+    def openPersistentEditor(
+        self, index: QtCore.QModelIndex | QtWidgets.QTableWidgetItem
+    ):
         if isinstance(index, QtCore.QModelIndex):
             index = self.itemFromIndex(index)
         super().openPersistentEditor(index)
+
+    def closePersistentEditor(
+        self, index: QtCore.QModelIndex | QtWidgets.QTableWidgetItem
+    ):
+        if isinstance(index, QtCore.QModelIndex):
+            index = self.itemFromIndex(index)
+        super().closePersistentEditor(index)
+
+    def isPersistentEditorOpen(
+        self, index: QtCore.QModelIndex | QtWidgets.QTableWidgetItem
+    ) -> bool:
+        if isinstance(index, QtCore.QModelIndex):
+            index = self.itemFromIndex(index)
+        return super().isPersistentEditorOpen(index)
 
 
 class TableWidget(TableWidgetMixin, QtWidgets.QTableWidget):
