@@ -66,6 +66,20 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
     def remove_item(self, *args):
         return self.scene().removeItem(*args)
 
+    def get_view_rect(self):
+        """Return the boundaries of the view in scene coordinates."""
+        r = QtCore.QRectF(self.rect())
+        return self.viewportTransform().inverted()[0].mapRect(r)
+
+    def get_pixel_size(self):
+        """Return vector with length and width of one view pixel in scene coordinates."""
+        p0 = core.PointF(0, 0)
+        p1 = core.PointF(1, 1)
+        tr = self.transform().inverted()[0]
+        p01 = tr.map(p0)
+        p11 = tr.map(p1)
+        return core.PointF(p11 - p01)
+
     def get_background_brush(self) -> gui.Brush:
         return gui.Brush(self.backgroundBrush())
 
