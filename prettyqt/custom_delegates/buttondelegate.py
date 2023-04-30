@@ -17,7 +17,14 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         self.btn.hide()
         self.is_one_cell_edit_mode = False
         self.current_edited_index = QtCore.QModelIndex()
-        parent.entered.connect(self.cellEntered)
+        parent.entered.connect(self.cell_entered)
+
+    #     parent.viewport().installEventFilter(self)
+
+    # def eventFilter(self, source, event):
+    #     if event.type() == event.Type.MouseMove:
+    #         return True
+    #     return super().eventFilter(source, event)
 
     def updateEditorGeometry(self, editor, option, index):
         editor.setGeometry(option.rect)
@@ -40,9 +47,14 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         pass
         # model.setData(index, editor.property("test"))
 
-    def cellEntered(self, index):
-        self.parent().closePersistentEditor(self.current_edited_index)
-        self.parent().openPersistentEditor(index)
+    def cell_entered(self, index):
+        # index = self.parent().indexFromItem(item)
+        if self.parent().isPersistentEditorOpen(index):
+            self.parent().closePersistentEditor(self.current_edited_index)
+        if self.parent().itemDelegateForIndex(index) is self:
+            # if index.data(self.method_role) is not None:
+            self.parent().openPersistentEditor(index)
+            self.parent().setCurrentIndex(index)
         self.is_one_cell_edit_mode = True
         self.current_edited_index = index
 
@@ -77,3 +89,35 @@ class ButtonDelegate(widgets.StyledItemDelegate):
     # @core.Slot()
     # def currentIndexChanged(self):
     #     self.commitData.emit(self.sender())
+
+
+if __name__ == "__main__":
+    """Run the application."""
+    from prettyqt import constants
+
+    app = widgets.app()
+    table_widget = widgets.TableWidget(15, 4)
+    # table_widget.set_delegate(StarDelegate(), column=1)
+    table_widget.setEditTriggers(
+        table_widget.EditTrigger.DoubleClicked  # type: ignore
+        | table_widget.EditTrigger.SelectedClicked
+    )
+    table_widget.set_selection_behaviour("rows")
+    # table_widget.set_selection_mode(None)
+    table_widget.setHorizontalHeaderLabels(["Title", "Rating"])
+    for i in range(10):
+        item_1 = widgets.TableWidgetItem(str(i))
+        item_2 = widgets.TableWidgetItem()
+        item_2.setData(constants.DISPLAY_ROLE, str(i))
+        item_2.setData(constants.USER_ROLE, lambda: print("test"))
+        table_widget[i, 0] = item_1
+        table_widget[i, 1] = item_2
+
+    delegate = ButtonDelegate(parent=table_widget)
+    table_widget.set_delegate(delegate, column=1)
+
+    table_widget.resizeColumnsToContents()
+    table_widget.resize(500, 300)
+    table_widget.show()
+
+    app.main_loop()
