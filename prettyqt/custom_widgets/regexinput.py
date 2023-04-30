@@ -2,6 +2,12 @@ from __future__ import annotations
 
 from re import Pattern
 
+
+try:  # pragma: no cover
+    import re._constants as sre_constants
+except ImportError:  # Python < 3.11
+    import sre_constants  # type: ignore
+
 import regex as re
 
 from prettyqt import core, custom_widgets, widgets
@@ -27,7 +33,8 @@ class RegexInput(widgets.Widget):
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
-        self.set_layout("grid")
+        self.set_layout("grid", margin=0)
+        self.set_margin(0)
         self.label_error = widgets.Label()
         error_color = self.get_palette().get_color("highlight")
         self.label_error.set_color(error_color)
@@ -54,8 +61,12 @@ class RegexInput(widgets.Widget):
         self.tb_flags.set_dict(dct)
 
     def _on_value_change(self):
-        val = self.get_value()
-        self.value_changed.emit(val)
+        try:
+            val = self.get_value()
+        except (sre_constants.error, re._regex_core.error):
+            return
+        else:
+            self.value_changed.emit(val)
 
     @property
     def pattern(self) -> str:
