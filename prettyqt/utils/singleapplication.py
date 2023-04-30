@@ -72,3 +72,70 @@ if __name__ == "__main__":
     app1 = App()
     print(app1.is_running())
     # app1.exec()
+
+# Alternative:
+# logger = logging.getLogger(__name__)
+
+
+# class SingleApplicationMixin:
+#     message_received = core.Signal(str)
+
+#     def __init__(self, *args, **kwargs):
+#         super().__init__(*args, **kwargs)
+#         # generate a (hopefully) unique name
+#         self.key = type(self).__name__ + self.applicationName()
+#         self.timeout = 1000
+#         self.server = network.LocalServer(self)
+
+#         # cleanup (only needed for unix)
+#         core.SharedMemory(self.key).attach()
+#         self.memory = core.SharedMemory(self)
+#         self.memory.setKey(self.key)
+
+#         if self.memory.attach():
+#             self.is_running = True
+#             self.send_message(sys.argv[1] if len(sys.argv) > 1 else "show")
+#             logger.info("Another instance is already running.")
+#             sys.exit(1)
+
+#         self.is_running = False
+#         if not self.memory.create(1):
+#             logger.error(self.memory.errorString())
+#             raise RuntimeError(self.memory.errorString())
+
+#         self.server.newConnection.connect(self._on_new_connection)
+#         self.server.listen(self.key)
+
+#     def _on_new_connection(self):
+#         socket = self.server.nextPendingConnection()
+#         if socket.waitForReadyRead(self.timeout):
+#             data = socket.readAll().data().decode()
+#             self.message_received.emit(data)
+#             socket.disconnectFromServer()
+
+#     def send_message(self, message: str):
+#         if not self.is_running:
+#             return
+
+#         # connect to another application
+#         socket = network.LocalSocket(self)
+#         socket.connectToServer(self.key, socket.OpenModeFlag.WriteOnly)
+#         if not socket.waitForConnected(self.timeout):
+#             logger.error(socket.errorString())
+#             return
+
+#         # send message
+#         socket.write(message.encode())
+#         if not socket.waitForBytesWritten(self.timeout):
+#             logger.error(socket.errorString())
+#             return
+
+#         socket.disconnectFromServer()
+
+
+# if __name__ == "__main__":
+#     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+#     App = type("SingleApp", (SingleApplicationMixin, core.CoreApplication), {})
+#     app1 = App(sys.argv)
+#     print(app1.is_running)
+#     app1.exec()

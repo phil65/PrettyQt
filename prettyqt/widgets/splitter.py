@@ -30,24 +30,17 @@ class SplitterMixin(widgets.FrameMixin):
     def __setitem__(self, index: int, value: QtWidgets.QWidget):
         self.replaceWidget(index, value)
 
-    # def serialize_fields(self):
-    #     return dict(
-    #         items=self.get_children(),
-    #         orientation=self.get_orientation(),
-    #         handle_width=self.handleWidth(),
-    #         children_collapsible=self.childrenCollapsible(),
-    #         opaque_resize=self.opaqueResize(),
-    #     )
+    # def saveState(self):
+    #     sizes = self.sizes()
+    #     if all(x == 0 for x in sizes):
+    #         sizes = [10] * len(sizes)
+    #     return {'sizes': sizes}
 
-    # def __setstate__(self, state):
-    #     for item in state["items"]:
-    #         self.addWidget(item)
-    #     self.setHandleWidth(state["handle_width"])
-    #     self.setChildrenCollapsible(state["children_collapsible"])
-    #     self.setOpaqueResize(state["opaque_resize"])
-
-    # def __reduce__(self):
-    #     return type(self), (self.orientation(),), self.__getstate__()
+    # def restoreState(self, state):
+    #     sizes = state['sizes']
+    #     self.setSizes(sizes)
+    #     for i in range(len(sizes)):
+    #         self.setStretchFactor(i, sizes[i])
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.get_children())
