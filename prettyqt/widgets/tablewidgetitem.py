@@ -24,6 +24,13 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
             data=self.data(constants.USER_ROLE),  # type: ignore
         )
 
+    def set_editable(self, editable: bool):
+        """Set whether this item is user-editable."""
+        if editable:
+            self.setFlags(self.flags() | QtCore.Qt.ItemFlag.ItemIsEditable)
+        else:
+            self.setFlags(self.flags() & ~QtCore.Qt.ItemFlag.ItemIsEditable)
+
     def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
 
