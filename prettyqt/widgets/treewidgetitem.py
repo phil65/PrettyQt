@@ -62,6 +62,21 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         self.addChild(other)
         return self
 
+    def setChecked(self, column: int, checked: bool):
+        self.setCheckState(
+            column,
+            QtCore.Qt.CheckState.Checked if checked else QtCore.Qt.CheckState.Unchecked,
+        )
+
+    def isChecked(self, col: int) -> bool:
+        return self.checkState(col) == QtCore.Qt.CheckState.Checked
+
+    def get_children(self) -> list[QtWidgets.QTreeWidgetItem]:
+        return [self.child(i) for i in range(self.childCount())]
+
+    def get_top_level_items(self) -> list[QtWidgets.QTreeWidgetItem]:
+        return [self.topLevelItem(i) for i in range(self.topLevelItemCount())]
+
     def set_size_hint(self, hint: datatypes.SizeType, column: int = 0):
         if isinstance(hint, tuple):
             hint = QtCore.QSize(*hint)
