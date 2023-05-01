@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
@@ -26,6 +26,7 @@ ActionPositionStr = Literal["leading", "trailing"]
 
 class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     value_changed = core.Signal(str)
+    tab_pressed = core.Signal()
 
     def __init__(
         self,
@@ -47,6 +48,11 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
 
     def font(self) -> gui.Font:
         return gui.Font(super().font())
+
+    def keyPressEvent(self, event):
+        super().keyPressEvent(event)
+        if event.key() == QtCore.Qt.Key.Key_Tab:
+            self.tab_pressed.emit()
 
     def append_text(self, text: str):
         self.set_text(self.text() + text)
