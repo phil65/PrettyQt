@@ -77,6 +77,18 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def get_top_level_items(self) -> list[QtWidgets.QTreeWidgetItem]:
         return [self.topLevelItem(i) for i in range(self.topLevelItemCount())]
 
+    def collapse(self, recursive: bool = False):
+        if recursive:
+            for i in range(self.childCount()):
+                self.child(i).collapse(True)
+        self.setExpanded(False)
+
+    def expand(self, recursive: bool = False):
+        self.setExpanded(True)
+        if recursive:
+            for i in range(self.childCount()):
+                self.child(i).expand(True)
+
     def set_size_hint(self, hint: datatypes.SizeType, column: int = 0):
         if isinstance(hint, tuple):
             hint = QtCore.QSize(*hint)
@@ -155,8 +167,10 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         """
         return CHILD_INDICATOR_POLICY.inverse[self.childIndicatorPolicy()]
 
+    def get_text_alignment(self, column: int) -> constants.AlignmentStr:
+        return constants.ALIGNMENTS.inverse[self.textAlignment(column)]
+
 
 if __name__ == "__main__":
     item = TreeWidgetItem()
-    item[0]
-    item.setData(0, 1000, "test")
+    print(item.get_text_alignment(0))
