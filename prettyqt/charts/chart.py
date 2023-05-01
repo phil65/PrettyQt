@@ -57,30 +57,23 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         self.min_x = 0
         self.min_y = 0
 
-    def serialize_fields(self):
-        return dict(
-            animation_duration=self.animationDuration(),
-            animation_easing_curve=self.get_animation_easing_curve(),
-            animation_options=self.get_animation_options(),
-            background_roundness=self.backgroundRoundness(),
-            background_visible=self.isBackgroundVisible(),
-            chart_type=self.get_chart_type(),
-            drop_shadow_enabled=self.isDropShadowEnabled(),
-            locale=self.get_locale(),
-            localize_numbers=self.localizeNumbers(),
-            margins=self.get_margins(),
-            plot_area=self.get_plot_area(),
-            plot_area_background_visible=self.isPlotAreaBackgroundVisible(),
-            theme=self.get_theme(),
-            title=self.title(),
-        )
+    def get_axes(
+        self,
+        orientation: constants.OrientationStr | None = None,
+        series: QtCharts.QAbstractBarSeries | None = None,
+    ) -> list[QtCharts.QAbstractAxis]:
+        if orientation is None:
+            orientation = constants.HORIZONTAL | constants.VERTICAL
+        return self.axes(constants.ORIENTATION[orientation], series)
 
     def update_boundaries(self):
         """Set new min/max values based on axis."""
-        self.max_x = self.axisX().max()
-        self.max_y = self.axisY().max()
-        self.min_x = self.axisX().min()
-        self.min_y = self.axisY().min()
+        if axis_x := self.get_axes("horizontal"):
+            self.max_x = axis_x[0].max()
+            self.min_x = axis_x[0].min()
+        if axis_y := self.get_axes("vertical"):
+            self.max_y = axis_y[0].max()
+            self.min_y = axis_y[0].min()
 
     def hide_legend(self):
         self.legend().hide()
@@ -109,8 +102,8 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
 
     def apply_nice_numbers(self):
         """Adjust both axis to display nice round numbers."""
-        self.axisX().applyNiceNumbers()
-        self.axisY().applyNiceNumbers()
+        for axis in self.get_axes():
+            axis.applyNiceNumbers()
 
     def zoom_by_factor(self, factor: float):
         """Zoom in/out by factor (1.0 = no change).
@@ -118,16 +111,18 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         Make sure that we dont zoom out too far
         """
         self.zoom(factor)
-        if self.axisX().min() < self.min_x:
-            self.axisX().setMin(self.min_x)
-        if self.axisX().max() > self.max_x:
-            self.axisX().setMax(self.max_x)
-        if self.axisY().max() > self.max_y:
-            self.axisY().setMax(self.max_y)
+        if axis_x := self.get_axes("horizontal"):
+            if axis_x[0].min() < self.min_x:
+                axis_x[0].setMin(self.min_x)
+            if axis_x[0].max() > self.max_x:
+                axis_x[0].setMax(self.max_x)
+        if axis_y := self.get_axes("vertical"):
+            if axis_y[0].max() > self.max_y:
+                axis_y[0].setMax(self.max_y)
 
-        # always bottom-align when zooming for now. should perhaps become optional.
-        # if self.axisY().min() < self.min_y:
-        self.axisY().setMin(max(0, self.min_y))
+            # always bottom-align when zooming for now. should perhaps become optional.
+            # if axis_y[0].min() < self.min_y:
+            axis_y[0].setMin(max(0, self.min_y))
 
     def get_chart_type(self) -> ChartTypeStr:
         return CHART_TYPES.inverse[self.chartType()]
@@ -156,6 +151,7 @@ class Chart(ChartMixin, QtCharts.QChart):
 
 
 if __name__ == "__main__":
+    app = widgets.app()
     chart = Chart()
     legend = chart.get_legend()
     legend.set_alignment("bottom")
