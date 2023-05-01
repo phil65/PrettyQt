@@ -90,6 +90,7 @@ class ActionMixin(core.ObjectMixin):
                 if isinstance(size, QtCore.QSize):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
+        tooltip = tooltip.replace("\n", "<br/>")
         self.setToolTip(tooltip)
 
     def set_statustip(self, text: str):
