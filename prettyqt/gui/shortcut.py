@@ -48,3 +48,6 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
         return gui.KeySequence(
             self.key().toString(), gui.KeySequence.SequenceFormat.PortableText
         )
+
+    def get_keys(self) -> list[gui.KeySequence]:
+        return [gui.KeySequence(i) for i in self.keys()]
