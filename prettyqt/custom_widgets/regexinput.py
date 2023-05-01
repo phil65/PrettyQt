@@ -107,6 +107,8 @@ class RegexInput(widgets.Widget):
     def is_valid(self) -> bool:
         return self.lineedit.is_valid()
 
+    value = core.Property(Pattern, get_value, set_value, user=True)
+
 
 if __name__ == "__main__":
     app = widgets.app()
