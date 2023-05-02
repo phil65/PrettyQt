@@ -355,9 +355,15 @@ def test_intvalidator():
 
 def test_keysequence():
     assert (
-        gui.KeySequence.to_shortcut_str(0x41, QtCore.Qt.KeyboardModifier.ShiftModifier)
+        gui.KeySequence.to_shortcut_str(
+            QtCore.Qt.Key.Key_A, QtCore.Qt.KeyboardModifier.ShiftModifier
+        )
         == "Shift+A"
     )
+    comb = core.KeyCombination(
+        QtCore.Qt.KeyboardModifier.ShiftModifier, QtCore.Qt.Key.Key_A
+    )
+    assert gui.KeySequence.to_shortcut_str(comb) == "Shift+A"
     seq = gui.KeySequence("Ctrl+C")
     assert seq.get_matches("Ctrl+C") == "exact"
     with open("data.pkl", "wb") as jar:

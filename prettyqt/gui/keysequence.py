@@ -1,9 +1,9 @@
 from __future__ import annotations
 
+import functools
 from typing import Literal
 
-from prettyqt import constants
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, get_repr
 
 
@@ -119,12 +119,15 @@ class KeySequence(QtGui.QKeySequence):
             seq = KeySequence(seq)
         return SEQUENCE_MATCHES.inverse[self.matches(seq)]
 
+    @functools.singledispatchmethod
     @classmethod
-    def to_shortcut_str(cls, key, mod: int = 0) -> str:
-        for k, v in constants.MODIFIER_TO_KEY.items():
-            if mod & k:  # type: ignore
-                key += v.value
-        return str(cls(key))
+    def to_shortcut_str(cls, key: QtCore.Qt.Key, mod: int = 0) -> str:
+        return cls(mod | key).toString()
+
+    @to_shortcut_str.register
+    @classmethod
+    def _(cls, key: QtCore.QKeyCombination):
+        return cls(key).toString()
 
 
 if __name__ == "__main__":
