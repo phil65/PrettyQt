@@ -190,6 +190,14 @@ class FSSpecTreeModel(
         path = index.data(self.Roles.FilePathRole)
         return f"{protocol}://{path}"
 
+    def get_file_content(self, index_or_path: str | QtCore.QModelIndex):
+        if isinstance(index_or_path, str):
+            index_or_path = self.index(index_or_path)
+        protocol_path = self.get_protocol_path(index_or_path)
+        # info = self.fs.info(protocol_path)
+        with self.fs.open(protocol_path) as file:
+            return file.read()
+
     def fileIcon(self, index):
         tree_item = index.internalPointer()
         if tree_item is None:
