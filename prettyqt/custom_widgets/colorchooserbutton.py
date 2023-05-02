@@ -57,7 +57,7 @@ class ColorChooserButton(widgets.Widget):
     def set_value(self, value: datatypes.ColorType):
         self.set_current_color(value)
 
-    current_color = core.Property(QtGui.QColor, get_value, set_value)
+    current_color = core.Property(QtGui.QColor, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":
