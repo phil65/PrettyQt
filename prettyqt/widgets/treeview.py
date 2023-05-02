@@ -21,21 +21,6 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
         self.h_header = widgets.HeaderView("horizontal", parent=self)
         self.set_selection_mode("extended")
 
-    def serialize_fields(self):
-        return dict(
-            all_columns_show_focus=self.allColumnsShowFocus(),
-            animated=self.isAnimated(),
-            auto_expand_delay=self.autoExpandDelay(),
-            expands_on_double_click=self.expandsOnDoubleClick(),
-            header_hidden=self.isHeaderHidden(),
-            indentation=self.indentation(),
-            items_expandable=self.itemsExpandable(),
-            root_is_decorated=self.rootIsDecorated(),
-            sorting_enabled=self.isSortingEnabled(),
-            uniform_row_heights=self.uniformRowHeights(),
-            word_wrap=self.wordWrap(),
-        )
-
     @property
     def h_header(self):
         return self.header()

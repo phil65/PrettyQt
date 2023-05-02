@@ -26,12 +26,12 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
     def icon(
         self, icon: QtWidgets.QFileIconProvider.IconType | QtCore.QFileInfo
     ) -> gui.Icon:
-        if isinstance(icon, QtCore.QFileInfo):
-            if icon.isDir():
-                return self.folder_icon
-            elif icon.isFile():
-                return self.file_icon
         match icon:
+            case QtCore.QFileInfo():
+                if icon.isDir():
+                    return self.folder_icon
+                elif icon.isFile():
+                    return self.file_icon
             case widgets.FileIconProvider.IconType.Folder:
                 return self.folder_icon
             # case widgets.FileIconProvider.IconType.File:
@@ -46,7 +46,8 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
                 return self.network_icon
             case widgets.FileIconProvider.IconType.Drive:
                 return self.drive_icon
-        return self.file_icon
+            case _:
+                return self.file_icon
 
     @staticmethod
     def mimetype_icon(path, fallback=None):
