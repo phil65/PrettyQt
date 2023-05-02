@@ -63,8 +63,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
                 raise TypeError(item)
 
     def add_pixmap(self, pixmap: QtGui.QPixmap) -> widgets.GraphicsPixmapItem:
-        g_item = widgets.GraphicsPixmapItem()
-        g_item.setPixmap(pixmap)
+        g_item = widgets.GraphicsPixmapItem(pixmap)
         self.addItem(g_item)
         return g_item
 
@@ -76,8 +75,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     ) -> widgets.GraphicsPolygonItem:
         if isinstance(polygon, QtGui.QPolygon):
             polygon = gui.PolygonF(polygon)
-        g_item = widgets.GraphicsPolygonItem()
-        g_item.setPolygon(polygon)
+        g_item = widgets.GraphicsPolygonItem(polygon)
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:
@@ -91,8 +89,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         pen: QtGui.QPen | None = None,
         brush: QtGui.QBrush | None = None,
     ) -> widgets.GraphicsPathItem:
-        g_item = widgets.GraphicsPathItem()
-        g_item.setPath(path)
+        g_item = widgets.GraphicsPathItem(path)
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:
@@ -110,8 +107,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
             rect = core.RectF(rect)
         elif isinstance(rect, tuple):
             rect = core.RectF(*rect)
-        g_item = widgets.GraphicsRectItem()
-        g_item.setRect(rect)
+        g_item = widgets.GraphicsRectItem(rect)
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:
@@ -128,8 +124,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
             line = core.LineF(line)
         elif isinstance(line, tuple):
             line = core.LineF(*line)
-        g_item = widgets.GraphicsLineItem()
-        g_item.setLine(line)
+        g_item = widgets.GraphicsLineItem(line)
         if pen is not None:
             g_item.setPen(pen)
         self.addItem(g_item)
@@ -145,8 +140,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
             ellipse = core.RectF(ellipse)
         elif isinstance(ellipse, tuple):
             ellipse = core.RectF(*ellipse)
-        g_item = widgets.GraphicsEllipseItem()
-        g_item.setRect(ellipse)
+        g_item = widgets.GraphicsEllipseItem(ellipse)
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:
@@ -157,8 +151,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     def add_text(
         self, text: str, font: QtGui.QFont | None = None
     ) -> widgets.GraphicsTextItem:
-        g_item = widgets.GraphicsTextItem()
-        g_item.setPlainText(text)
+        g_item = widgets.GraphicsTextItem(text)
         if font is not None:
             g_item.setFont(font)
         self.addItem(g_item)
@@ -167,8 +160,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     def add_simple_text(
         self, text: str, font: QtGui.QFont | None = None
     ) -> widgets.GraphicsSimpleTextItem:
-        g_item = widgets.GraphicsSimpleTextItem()
-        g_item.setText(text)
+        g_item = widgets.GraphicsSimpleTextItem(text)
         if font is not None:
             g_item.setFont(font)
         self.addItem(g_item)
