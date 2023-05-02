@@ -21,6 +21,7 @@ from .flowlayout import FlowLayout
 from .borderlayout import BorderLayout
 from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
+from .enumcombobox import EnumComboBox
 from .colorcombobox import ColorComboBox
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
@@ -69,6 +70,7 @@ __all__ = [
     "FlowLayout",
     "BorderLayout",
     "SidebarWidget",
+    "EnumComboBox",
     "ColorComboBox",
     "ColorChooserButton",
     "FileChooserButton",
