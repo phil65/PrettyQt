@@ -3,6 +3,8 @@ from __future__ import annotations
 import base64
 import pathlib
 
+from typing_extensions import Self
+
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes, serializemixin
@@ -19,7 +21,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         return self.cacheKey()
 
     @classmethod
-    def from_file(cls, path: datatypes.PathType) -> Pixmap:
+    def from_file(cls, path: datatypes.PathType) -> Self:
         path = pathlib.Path(path)
         with path.open(mode="rb") as f:
             data = f.read()
@@ -36,7 +38,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         dithering: constants.DitherPreferenceStr = "diffuse",
         alpha_dithering: constants.AlphaDitherPreferenceStr = "threshold",
         mode_preference: constants.ModePreferenceStr = "auto",
-    ) -> Pixmap:
+    ) -> Self:
         flag = QtCore.Qt.ImageConversionFlag(0)
         flag |= constants.COLOR_PREFERENCE.inverse[color_preference]
         flag |= constants.DITHER_PREFERENCE.inverse[dithering]
@@ -73,7 +75,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         return f"data:image/png;base64,{payload}"
 
     @classmethod
-    def create_dot(cls, color: datatypes.ColorType = "black", size: int = 16) -> Pixmap:
+    def create_dot(cls, color: datatypes.ColorType = "black", size: int = 16) -> Self:
         col = colors.get_color(color)
         px = cls(size, size)
         px.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
@@ -89,10 +91,10 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
     @classmethod
     def create_checkerboard_pattern(
         cls, n: int, color_1: datatypes.ColorType, color_2: datatypes.ColorType
-    ):
+    ) -> Self:
         """Construct tileable checkerboard pattern for paint events."""
         # Brush will be an nxn checkerboard pattern
-        pat = gui.Pixmap(2 * n, 2 * n)
+        pat = cls(2 * n, 2 * n)
         bg0 = colors.get_color(color_1)
         bg1 = colors.get_color(color_2)
         with gui.Painter(pat) as p:
@@ -110,7 +112,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         size: int,
         background: datatypes.ColorType = "black",
         color: datatypes.ColorType = "white",
-    ):
+    ) -> Self:
         pixmap = cls(size, size)
         pixmap.fill(QtCore.Qt.GlobalColor.transparent)
         with gui.Painter(pixmap) as painter:

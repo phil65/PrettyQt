@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt import location
 from prettyqt.qt import QtLocation
 
@@ -9,7 +11,7 @@ class PlaceContentReply(location.PlaceReplyMixin, QtLocation.QPlaceContentReply)
         return self.totalCount()
 
     @classmethod
-    def clone_from(cls, obj: QtLocation.QPlaceContentReply) -> PlaceContentReply:
+    def clone_from(cls, obj: QtLocation.QPlaceContentReply) -> Self:
         reply = cls(obj.parent())
         reply.setContent(obj.content())
         reply.setTotalCount(obj.totalCount())

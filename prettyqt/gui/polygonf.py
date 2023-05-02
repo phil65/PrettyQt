@@ -4,6 +4,8 @@ from collections.abc import Iterator
 import ctypes
 import math
 
+from typing_extensions import Self
+
 from prettyqt import core, gui
 from prettyqt.qt import API, QtCore, QtGui
 from prettyqt.utils import datatypes, serializemixin
@@ -38,19 +40,19 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
     #     else:
     #         self.setPoint(index, value)
 
-    def __sub__(self, other: QtGui.QPolygonF) -> PolygonF:
-        return PolygonF(self.subtracted(other))
+    def __sub__(self, other: QtGui.QPolygonF) -> Self:
+        return type(self)(self.subtracted(other))
 
-    def __and__(self, other: QtGui.QPolygonF) -> PolygonF:  # &
-        return PolygonF(self.intersected(other))
+    def __and__(self, other: QtGui.QPolygonF) -> Self:  # &
+        return type(self)(self.intersected(other))
 
-    def __xor__(self, other: QtGui.QPolygonF) -> PolygonF:  # ^
+    def __xor__(self, other: QtGui.QPolygonF) -> Self:  # ^
         union = self | other
         intersect = self & other
         return union - intersect
 
-    def __or__(self, other: QtGui.QPolygonF) -> PolygonF:  # |
-        return PolygonF(self.united(other))
+    def __or__(self, other: QtGui.QPolygonF) -> Self:  # |
+        return type(self)(self.united(other))
 
     def __eq__(self, other: object) -> bool:
         return (
@@ -75,7 +77,7 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
         return gui.Polygon(self.toPolygon())
 
     @classmethod
-    def create_star(cls):
+    def create_star(cls) -> Self:
         poly = cls()
         poly.append(core.PointF(1.0, 0.5))
         for i in range(1, 5):
@@ -85,7 +87,7 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
         return poly
 
     @classmethod
-    def create_diamond(cls):
+    def create_diamond(cls) -> Self:
         points = [
             core.PointF(0.4, 0.5),
             core.PointF(0.5, 0.4),
@@ -110,7 +112,7 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
         return buffer
 
     @classmethod
-    def from_xy(cls, xdata, ydata) -> PolygonF:
+    def from_xy(cls, xdata, ydata) -> Self:
         import numpy as np
 
         size = len(xdata)

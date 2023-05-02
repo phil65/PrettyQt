@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
@@ -623,7 +625,7 @@ class Locale(QtCore.QLocale):
         return type(self), (self.bcp47Name(),)
 
     @classmethod
-    def get_system_locale(cls) -> Locale:
+    def get_system_locale(cls) -> Self:
         return cls(cls.system())
 
     @classmethod

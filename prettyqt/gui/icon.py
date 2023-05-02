@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import (
@@ -44,7 +46,7 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
         self.add_pixmap(px)
 
     @classmethod
-    def for_color(cls, color_str: str) -> Icon:
+    def for_color(cls, color_str: str) -> Self:
         color = gui.Color.from_text(color_str)
         if not color.isValid():
             raise TypeError()
@@ -53,7 +55,7 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
         return cls(bitmap)
 
     @classmethod
-    def from_char(cls, char: str, background="black", color="white") -> Icon:
+    def from_char(cls, char: str, background="black", color="white") -> Self:
         """Create a QIcon with a given character."""
         icon = cls()
         for size in (16, 32, 64):
@@ -64,7 +66,7 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
         return icon
 
     @classmethod
-    def from_image(cls, image: QtGui.QImage) -> Icon:
+    def from_image(cls, image: QtGui.QImage) -> Self:
         return cls(gui.Pixmap.fromImage(image))
 
     def get_available_sizes(

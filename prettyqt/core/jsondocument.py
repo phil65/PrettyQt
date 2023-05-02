@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
@@ -35,7 +37,7 @@ class JsonDocument(QtCore.QJsonDocument):
         return self.toJson(flag).data().decode()
 
     @classmethod
-    def from_variant(cls, obj) -> JsonDocument:
+    def from_variant(cls, obj) -> Self:
         doc = cls.fromVariant(obj)
         new = cls()
         if doc.isArray():

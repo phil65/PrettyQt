@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import constants, widgets
 from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
@@ -26,7 +28,7 @@ class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
     #     self.setMenu(menu)
 
     @classmethod
-    def for_menu(cls, menu: QtWidgets.QMenu, icon: datatypes.IconType = None):
+    def for_menu(cls, menu: QtWidgets.QMenu, icon: datatypes.IconType = None) -> Self:
         btn = cls()
         btn.setMenu(menu)
         # btn.set_title(menu.title())

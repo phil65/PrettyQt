@@ -5,7 +5,8 @@ from __future__ import annotations
 
 from collections.abc import Iterator, Sequence
 import logging
-from typing import Generic, TypeVar
+
+from typing_extensions import Self
 
 from prettyqt.utils import get_repr
 
@@ -14,41 +15,39 @@ logger = logging.getLogger(__name__)
 
 MAX_OBJ_STR_LEN = 50
 
-T = TypeVar("T", bound="TreeItem")  # Declare type variable
 
-
-class TreeItem(Generic[T]):
+class TreeItem:
     """Tree node class that can be used to build trees of objects."""
 
-    def __init__(self, obj, parent: T | None = None):
+    def __init__(self, obj, parent: Self | None = None):
         self.parent_item = parent
         self.obj = obj
-        self.child_items: list[T] = []
+        self.child_items: list[Self] = []
         self.has_children = True
         self.children_fetched = False
 
     def __repr__(self):
         return get_repr(self, self.obj)
 
-    def __iter__(self) -> Iterator[T]:
+    def __iter__(self) -> Iterator[Self]:
         return iter(self.child_items)
 
-    def append_child(self, item: T):
+    def append_child(self, item: Self):
         item.parent_item = self
         self.child_items.append(item)
 
-    def insert_children(self, idx: int, items: Sequence[T]):
+    def insert_children(self, idx: int, items: Sequence[Self]):
         self.child_items[idx:idx] = items
         for item in items:
             item.parent_item = self
 
-    def child(self, row: int) -> T:
+    def child(self, row: int) -> Self:
         return self.child_items[row]
 
     def child_count(self) -> int:
         return len(self.child_items)
 
-    def parent(self) -> T | None:
+    def parent(self) -> Self | None:
         return self.parent_item
 
     def row(self) -> int:

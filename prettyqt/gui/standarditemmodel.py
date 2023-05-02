@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
+from typing_extensions import Self
+
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, datatypes
@@ -52,7 +54,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         raise TypeError("wrong type for addition")
 
     @classmethod
-    def create_single_item_model(cls, *args, **kwargs):
+    def create_single_item_model(cls, *args, **kwargs) -> Self:
         mdl = cls(1, 1)
         mdl.add_item(*args, **kwargs)
         return mdl

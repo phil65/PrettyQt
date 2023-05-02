@@ -3,6 +3,8 @@ from __future__ import annotations
 from collections.abc import Callable, Iterator, Sequence
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
@@ -97,7 +99,7 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
         return self.button(BUTTONS[index]) is not None
 
     @classmethod
-    def create(cls, **kwargs):
+    def create(cls, **kwargs) -> Self:
         box = cls()
         for k, v in kwargs.items():
             box.add_default_button(k, callback=v)  # type: ignore

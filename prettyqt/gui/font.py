@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
+from typing_extensions import Self
+
 from prettyqt import gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, get_repr, prettyprinter
@@ -179,7 +181,7 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         self.setPointSize(size)
 
     @classmethod
-    def mono(cls, size=8):
+    def mono(cls, size=8) -> Self:
         return cls("Consolas", size)
         # font.setStyleHint()
 

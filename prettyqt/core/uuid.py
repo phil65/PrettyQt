@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, get_repr
 
@@ -57,7 +59,7 @@ class UuidMixin:
         return VERSION.inverse[self.version()]
 
     @classmethod
-    def create_uuid(cls) -> Uuid:
+    def create_uuid(cls) -> Self:
         # workaround for PySide2, not able to clone in ctor
         return cls(cls.createUuid().toString())
 

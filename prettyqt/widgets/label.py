@@ -3,6 +3,8 @@ from __future__ import annotations
 import os
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import (
@@ -230,7 +232,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     @classmethod
     def image_from_path(
         cls, path: datatypes.PathType, parent: QtWidgets.QWidget | None = None
-    ) -> Label:
+    ) -> Self:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)
         label.setPixmap(pixmap)

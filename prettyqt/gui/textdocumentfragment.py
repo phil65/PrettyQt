@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import datatypes, get_repr
@@ -16,7 +18,7 @@ class TextDocumentFragment(QtGui.QTextDocumentFragment):
         return not self.isEmpty()
 
     @classmethod
-    def from_plain_text(cls, text: str) -> TextDocumentFragment:
+    def from_plain_text(cls, text: str) -> Self:
         return cls(cls.fromPlainText(text))
 
     def write_to_file(

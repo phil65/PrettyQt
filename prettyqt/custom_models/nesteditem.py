@@ -1,47 +1,45 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Iterator, Sequence
-from typing import Generic, TypeVar
+
+from typing_extensions import Self
 
 
-T = TypeVar("T", bound="NestedItem")  # Declare type variable
-
-
-class NestedItem(Generic[T]):
+class NestedItem:
     item_name = "not_defined"
 
     def __init__(
         self,
-        parent: T | None = None,
+        parent: Self | None = None,
         dynamic_name: str | None = None,
         count: int | None = None,
-        children: list[T] | None = None,
+        children: list[Self] | None = None,
     ):
         self.parent = parent
         self.dynamic_name = dynamic_name or self.item_name
         self.count = count
         # self.timestamp = kwargs.pop("timestamp", time.time())
-        self.children: list[T] = []
+        self.children: list[Self] = []
         if children:
             self.add_children(children)
 
-    def __iter__(self) -> Iterator[NestedItem]:
+    def __iter__(self) -> Iterator[Self]:
         return iter(self.children)
 
-    def add_children(self, children: Iterable[T]):
+    def add_children(self, children: Iterable[Self]):
         for child in children:
             child.parent = self
         self.children.extend(children)
 
-    def append_child(self, item: T):
+    def append_child(self, item: Self):
         self.children.append(item)
 
-    def insert_children(self, idx: int, items: Sequence[T]):
+    def insert_children(self, idx: int, items: Sequence[Self]):
         self.children[idx:idx] = items
         for item in items:
             item.parent_item = self
 
-    def child(self, row: int) -> T:
+    def child(self, row: int) -> Self:
         return self.children[row]
 
     def row(self) -> int:

@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import pathlib
 
+from typing_extensions import Self
+
 from prettyqt import core, paths
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
@@ -28,7 +30,7 @@ class TranslatorMixin(core.ObjectMixin):
         }
 
     @classmethod
-    def for_language(cls, language: str) -> Translator:
+    def for_language(cls, language: str) -> Self:
         # if language not in cls.get_available_languages():
         #     raise ValueError("Language does not exist")
         file = paths.LOCALIZATION_PATH / f"language_{language}.qm"
@@ -37,7 +39,7 @@ class TranslatorMixin(core.ObjectMixin):
         return translator
 
     @classmethod
-    def for_system_language(cls) -> Translator:
+    def for_system_language(cls) -> Self:
         translator = cls()
         if not translator.load(
             f"qt_{core.Locale.system().name()}",

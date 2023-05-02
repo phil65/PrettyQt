@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr, serializemixin
 
@@ -58,7 +60,7 @@ class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
         raise ValueError(f"Wrong value {value}")
 
     @classmethod
-    def clone_from(cls, transform: QtGui.QTransform) -> Transform:
+    def clone_from(cls, transform: QtGui.QTransform) -> Self:
         return cls(
             transform.m11(),
             transform.m12(),

@@ -3,6 +3,8 @@ from __future__ import annotations
 import logging
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import qml
 from prettyqt.qt import QtQml
 from prettyqt.utils import bidict, get_repr
@@ -57,7 +59,7 @@ class JSValue(QtQml.QJSValue):
         return ERROR_TYPES.inverse.get(error_type)
 
     @classmethod
-    def from_object(cls, obj, jsengine: QtQml.QJSEngine) -> JSValue:
+    def from_object(cls, obj, jsengine: QtQml.QJSEngine) -> Self:
         """Convert any python object into a QJSValue (must happen in GUI thread)."""
         match obj:
             case None:

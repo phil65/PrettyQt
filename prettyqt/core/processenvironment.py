@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Iterator, Mapping
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 
 
@@ -34,11 +36,11 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
         return list(self)
 
     @classmethod
-    def get_system_environment(cls) -> ProcessEnvironment:
+    def get_system_environment(cls) -> Self:
         return cls(cls.systemEnvironment())
 
     @classmethod
-    def from_dict(cls, dictionary: Mapping[str, str]) -> ProcessEnvironment:
+    def from_dict(cls, dictionary: Mapping[str, str]) -> Self:
         env = cls()
         for k, v in dictionary.items():
             env.insert(k, v)

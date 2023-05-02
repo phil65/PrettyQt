@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
+from typing_extensions import Self
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, helpers
@@ -16,7 +18,7 @@ class Timer(core.ObjectMixin, QtCore.QTimer):
         )
 
     @classmethod
-    def single_shot(cls, callback: Callable) -> Timer:
+    def single_shot(cls, callback: Callable) -> Self:
         timer = cls()
         timer.timeout.connect(callback)
         timer.setSingleShot(True)

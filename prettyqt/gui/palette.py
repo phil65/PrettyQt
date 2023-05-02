@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import (
@@ -135,8 +137,8 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
         """
         return GROUP.inverse[self.colorGroup()]
 
-    def inverted(self) -> Palette:
-        pal = Palette()
+    def inverted(self) -> Self:
+        pal = type(self)()
         for group in GROUP:
             for role in ROLE:
                 color = self.get_color(role, group)
@@ -144,7 +146,7 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
         return pal
 
     @classmethod
-    def create_dark_palette(cls) -> Palette:
+    def create_dark_palette(cls) -> Self:
         pal = cls()
         pal.set_color("window", gui.Color(53, 53, 53))
         pal.set_color("window_text", "white")
@@ -168,7 +170,7 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
         pal.set_color("highlighted_text", "grey", group="disabled")
         return pal
 
-    def is_dark(self):
+    def is_dark(self) -> bool:
         col = self.color(self.ColorRole.Window)
         return max(col.getRgb()[:3]) < 115
 

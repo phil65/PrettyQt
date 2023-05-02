@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
+from typing_extensions import Self
+
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError
@@ -96,7 +98,7 @@ class SplitterMixin(widgets.FrameMixin):
         *widgets: QtWidgets.QWidget,
         horizontal: bool = False,
         parent: QtWidgets.QWidget | None = None,
-    ) -> Splitter:
+    ) -> Self:
         splitter = cls("horizontal" if horizontal else "vertical", parent=parent)
         for widget in widgets:
             splitter += widget

@@ -3,6 +3,7 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from deprecated import deprecated
+from typing_extensions import Self
 
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
@@ -77,11 +78,11 @@ class Color(QtGui.QColor):
         return color
 
     @classmethod
-    def from_cmyk(cls, c: float, m: float, y: float, k: float, a: float = 1.0) -> Color:
+    def from_cmyk(cls, c: float, m: float, y: float, k: float, a: float = 1.0) -> Self:
         return cls(cls.fromCmykF(c, m, y, k, a))
 
     @classmethod
-    def from_hsv(cls, h: float, s: float, v: float, a: float = 1.0) -> Color:
+    def from_hsv(cls, h: float, s: float, v: float, a: float = 1.0) -> Self:
         return cls(cls.fromHsvF(h, s, v, a))
 
     @classmethod
@@ -91,7 +92,7 @@ class Color(QtGui.QColor):
         end: QtGui.QColor,
         percent: int,
         colorspace: SpecStr | None = "rgb",
-    ) -> Color:
+    ) -> Self:
         """Get an interpolated color value.
 
         Args:
@@ -128,7 +129,7 @@ class Color(QtGui.QColor):
                 out.setHsl(*components)
             case _:
                 raise ValueError("Invalid colorspace!")
-        return out.convertTo(start.spec())
+        return cls(out.convertTo(start.spec()))
 
     def is_dark(self) -> bool:
         """Check whether a color is 'dark'."""
@@ -213,6 +214,7 @@ class Color(QtGui.QColor):
 
 if __name__ == "__main__":
     color = Color()
-    color = color.convert_to("hsv")
+    color = Color.interpolate_color(Color(), Color(), 20)
+    print(type(color))
     print(color.get_spec())
     print(color.as_qt())

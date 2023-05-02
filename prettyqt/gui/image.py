@@ -3,6 +3,8 @@ from __future__ import annotations
 import io
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import core, gui
 from prettyqt.qt import API, QtGui
 from prettyqt.utils import InvalidParamError, bidict, serializemixin
@@ -95,7 +97,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
         return self.pixel(index[0], index[1])
 
     @classmethod
-    def from_ndarray(cls, arr) -> Image:
+    def from_ndarray(cls, arr) -> Self:
         import numpy as np
 
         height, width, bytes_per_component = arr.shape
@@ -122,7 +124,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
         return array
 
     @classmethod
-    def from_pil(cls, image):
+    def from_pil(cls, image) -> Self:
         # from https://github.com/python-pillow/Pillow/blob/main/src/PIL/ImageQt.py
         from PIL import ImageQt
 

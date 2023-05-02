@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
@@ -102,7 +104,7 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         self.registerEditor(typ, creator)
 
     @classmethod
-    def create_extended(cls) -> ItemEditorFactory:
+    def create_extended(cls) -> Self:
         factory = cls()
         factory.register_editor(widgets.CheckBox, bool, "")
         factory.register_editor(widgets.SpinBox, int, "value")

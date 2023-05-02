@@ -3,6 +3,8 @@ from __future__ import annotations
 from collections.abc import Iterator
 import ctypes
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import API, QtCore, QtGui
 from prettyqt.utils import datatypes, serializemixin
@@ -77,7 +79,7 @@ class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
         return buffer
 
     @classmethod
-    def from_xy(cls, xdata, ydata) -> Polygon:
+    def from_xy(cls, xdata, ydata) -> Self:
         import numpy as np
 
         size = len(xdata)

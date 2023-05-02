@@ -4,6 +4,8 @@ import os
 import pathlib
 from typing import Any, Literal
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, get_repr, serializemixin
 
@@ -114,13 +116,13 @@ class Url(serializemixin.SerializeMixin, QtCore.QUrl):
         return self.isLocalFile()
 
     @classmethod
-    def from_user_input(cls, url: str, working_dir: str | None = None) -> Url:
+    def from_user_input(cls, url: str, working_dir: str | None = None) -> Self:
         if working_dir is None:
             working_dir = ""
         return cls(cls.fromUserInput(url, working_dir))
 
     @classmethod
-    def from_local_file(cls, path: datatypes.PathType) -> Url:
+    def from_local_file(cls, path: datatypes.PathType) -> Self:
         url = cls.fromLocalFile(os.fspath(path))
         return cls(url)
 

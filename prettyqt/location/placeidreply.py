@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import location
 from prettyqt.qt import QtLocation
 from prettyqt.utils import bidict, get_repr
@@ -24,7 +26,7 @@ class PlaceIdReply(location.PlaceReplyMixin, QtLocation.QPlaceIdReply):
         return get_repr(self, self.operationType())
 
     @classmethod
-    def clone_from(cls, obj: QtLocation.QPlaceIdReply) -> PlaceIdReply:
+    def clone_from(cls, obj: QtLocation.QPlaceIdReply) -> Self:
         reply = cls(obj.operationType(), obj.parent())
         reply.setId(obj.id())
         return reply

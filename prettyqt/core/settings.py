@@ -7,6 +7,7 @@ import os
 from typing import Any, Literal
 
 from deprecated import deprecated
+from typing_extensions import Self
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -66,7 +67,7 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
         return len(self.allKeys())
 
     @classmethod
-    def build_from_dict(cls, dct: dict[str, Any]):
+    def build_from_dict(cls, dct: dict[str, Any]) -> Self:
         settings = cls()
         for k, v in dct.items():
             settings.set_value(k, v)

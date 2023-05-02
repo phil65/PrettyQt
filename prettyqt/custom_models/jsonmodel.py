@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any
 
+from typing_extensions import Self
+
 from prettyqt import constants, custom_models
 from prettyqt.qt import QtCore
 
@@ -17,7 +19,7 @@ class JsonTreeItem(custom_models.NestedItem):
         self.type = None
 
     @classmethod
-    def from_json(cls, node_dict: dict[str, Any]) -> JsonTreeItem:
+    def from_json(cls, node_dict: dict[str, Any]) -> Self:
         return cls(
             count=node_dict.get("id"),
             dynamic_name=node_dict.get("dynamic_name"),
@@ -27,7 +29,7 @@ class JsonTreeItem(custom_models.NestedItem):
         )
 
     @classmethod
-    def load(cls, value, parent=None, sort: bool = False):
+    def load(cls, value, parent=None, sort: bool = False) -> Self:
         root_item = cls(key="root", parent=parent)
         match value:
             case dict():

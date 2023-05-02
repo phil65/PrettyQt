@@ -4,6 +4,8 @@ import os
 import pathlib
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
@@ -136,11 +138,11 @@ class Dir(QtCore.QDir):
         ]
 
     @classmethod
-    def get_current(cls) -> Dir:
+    def get_current(cls) -> Self:
         return cls(cls.current())
 
     @classmethod
-    def get_home(cls) -> Dir:
+    def get_home(cls) -> Self:
         return cls(cls.home())
 
     @classmethod

@@ -3,6 +3,8 @@ from __future__ import annotations
 import os
 import pathlib
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
@@ -38,9 +40,9 @@ class StorageInfo(QtCore.QStorageInfo):
         return pathlib.Path(self.rootPath())
 
     @classmethod
-    def get_root(cls) -> StorageInfo:
+    def get_root(cls) -> Self:
         return cls(cls.root())
 
     @classmethod
-    def get_mounted_volumes(cls) -> list[StorageInfo]:
+    def get_mounted_volumes(cls) -> list[Self]:
         return [cls(i) for i in cls.mountedVolumes()]

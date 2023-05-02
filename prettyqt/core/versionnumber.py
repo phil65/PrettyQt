@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import sys
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
@@ -60,11 +62,11 @@ class VersionNumber(QtCore.QVersionNumber):
         return super().__le__(other)
 
     @classmethod
-    def get_qt_version(cls) -> VersionNumber:
+    def get_qt_version(cls) -> Self:
         return cls(*[int(i) for i in QtCore.__version__.split(".")])
 
     @classmethod
-    def get_python_version(cls) -> VersionNumber:
+    def get_python_version(cls) -> Self:
         return cls(*sys.version_info[:3])
 
     def major(self) -> int:

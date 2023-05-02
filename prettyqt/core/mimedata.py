@@ -3,6 +3,8 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Any
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
@@ -76,7 +78,7 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
         return {i: self.data(i).data() for i in self.formats()}
 
     @classmethod
-    def clone(cls, other: QtCore.QMimeData) -> MimeData:
+    def clone(cls, other: QtCore.QMimeData) -> Self:
         mime = cls()
         for fmt in other.formats():
             mime.setData(fmt, other.data(fmt))

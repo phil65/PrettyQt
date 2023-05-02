@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 
 
@@ -14,24 +16,24 @@ class Date(QtCore.QDate):
     def __reduce__(self):
         return type(self), (self.year(), self.month(), self.day())
 
-    def add_days(self, days: int) -> Date:
-        return Date(self.addDays(days))
+    def add_days(self, days: int) -> Self:
+        return type(self)(self.addDays(days))
 
-    def add_months(self, months: int, calendar: QtCore.QCalendar | None = None) -> Date:
+    def add_months(self, months: int, calendar: QtCore.QCalendar | None = None) -> Self:
         if calendar:
-            return Date(self.addMonths(months, calendar))
+            return type(self)(self.addMonths(months, calendar))
         else:
-            return Date(self.addMonths(months))
+            return type(self)(self.addMonths(months))
 
-    def add_years(self, years: int, calendar: QtCore.QCalendar | None = None) -> Date:
+    def add_years(self, years: int, calendar: QtCore.QCalendar | None = None) -> Self:
         if calendar:
-            return Date(self.addYears(years, calendar))
+            return type(self)(self.addYears(years, calendar))
         else:
-            return Date(self.addYears(years))
+            return type(self)(self.addYears(years))
 
     @classmethod
-    def get_current_date(cls) -> Date:
-        return Date(cls.currentDate())
+    def get_current_date(cls) -> Self:
+        return cls(cls.currentDate())
 
     def replace(
         self, year: int | None = None, month: int | None = None, day: int | None = None

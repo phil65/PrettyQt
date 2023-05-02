@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
+from typing_extensions import Self
+
 from prettyqt import location
 from prettyqt.qt import QtLocation
 
@@ -17,7 +19,7 @@ class PlaceSearchReply(location.PlaceReplyMixin, QtLocation.QPlaceSearchReply):
         return len(self.get_results())
 
     @classmethod
-    def clone_from(cls, obj: QtLocation.QPlaceSearchReply) -> PlaceSearchReply:
+    def clone_from(cls, obj: QtLocation.QPlaceSearchReply) -> Self:
         reply = cls(obj.parent())
         reply.setResults([location.PlaceSearchResult(i) for i in obj.results()])
         request = location.PlaceSearchRequest(obj.nextPageRequest())

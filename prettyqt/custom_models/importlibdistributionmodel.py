@@ -4,6 +4,8 @@ from collections.abc import Sequence
 from importlib import metadata
 import pkgutil
 
+from typing_extensions import Self
+
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
@@ -80,14 +82,14 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         super().__init__(obj=obj, columns=COLUMNS, parent=parent, show_root=show_root)
 
     @classmethod
-    def from_system(cls, parent: QtCore.QObject | None = None) -> ImportlibTreeModel:
+    def from_system(cls, parent: QtCore.QObject | None = None) -> Self:
         distributions = list_system_modules()
         return cls(distributions, parent)
 
     @classmethod
     def from_package(
         cls, package_name: str, parent: QtCore.QObject | None = None
-    ) -> ImportlibTreeModel:
+    ) -> Self:
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)
 
@@ -159,16 +161,14 @@ class ImportlibDistributionModel(core.AbstractTableModel):
                 return dist
 
     @classmethod
-    def from_system(
-        cls, parent: QtCore.QObject | None = None
-    ) -> ImportlibDistributionModel:
+    def from_system(cls, parent: QtCore.QObject | None = None) -> Self:
         distributions = list_system_modules()
         return cls(distributions, parent)
 
     @classmethod
     def from_package(
         cls, package_name: str, parent: QtCore.QObject | None = None
-    ) -> ImportlibDistributionModel:
+    ) -> Self:
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)
 

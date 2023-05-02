@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore, QtWebEngineCore
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -34,7 +36,7 @@ class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
         return self.name().data().decode()
 
     @classmethod
-    def get_scheme_by_name(cls, name: str) -> WebEngineUrlScheme:
+    def get_scheme_by_name(cls, name: str) -> Self:
         scheme = cls.schemeByName(QtCore.QByteArray(name.encode()))
         return cls(scheme)
 

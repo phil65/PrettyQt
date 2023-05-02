@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, helpers, prettyprinter
 
@@ -98,7 +100,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         return self.__getstate__()
 
     @classmethod
-    def clone(cls, qpol: QtWidgets.QSizePolicy) -> SizePolicy:
+    def clone(cls, qpol: QtWidgets.QSizePolicy) -> Self:
         pol = cls(qpol.horizontalPolicy(), qpol.verticalPolicy(), qpol.controlType())
         pol.setHeightForWidth(qpol.hasHeightForWidth())
         pol.setWidthForHeight(qpol.hasWidthForHeight())

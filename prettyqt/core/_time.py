@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 
 
@@ -14,17 +16,18 @@ class Time(QtCore.QTime):
     def __reduce__(self):
         return type(self), (self.hour(), self.minute(), self.second(), self.msec())
 
-    def add_msecs(self, msecs: int) -> Time:
-        return Time(self.addMSecs(msecs))
+    def add_msecs(self, msecs: int) -> Self:
+        return type(self)(self.addMSecs(msecs))
 
-    def add_secs(self, secs: int) -> Time:
-        return Time(self.addSecs(secs))
+    def add_secs(self, secs: int) -> Self:
+        return type(self)(self.addSecs(secs))
 
     @classmethod
-    def get_current_time(cls) -> Time:
-        return Time(cls.currentTime())
+    def get_current_time(cls) -> Self:
+        return cls(cls.currentTime())
 
 
 if __name__ == "__main__":
     time = Time(22, 1)
+    print(time.add_secs(2))
     print(repr(time))

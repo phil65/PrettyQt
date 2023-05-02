@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
@@ -73,7 +75,7 @@ class Scroller(core.ObjectMixin):
         return widgets.ScrollerProperties(self.scrollerProperties())
 
     @classmethod
-    def get_scroller(cls, obj: QtCore.QObject):
+    def get_scroller(cls, obj: QtCore.QObject) -> Self:
         return cls(QtWidgets.QScroller.scroller(obj))
 
     @staticmethod
