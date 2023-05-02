@@ -42,7 +42,12 @@ qstylizer = "^0.2"
 deprecated = "^1.2"
 typing-extensions = "^4.5.0"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.extras]
+pyside6 = ["pyside6", "PySide6-QtAds"]
+pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla", "PyQtAds"]
+addons = ["docutils", "orjson", "fsspec"]
+
+[tool.poetry.group.dev.dependencies]
 pytest = "^7"
 pip = "^23"
 pyreadline3 = "^3"
@@ -64,12 +69,6 @@ pymdown-extensions = "^9"
 black = "^23"
 devtools = "^0"
 commitizen = "^3"
-# cz-github-convention = "^0.2"
-
-[tool.poetry.extras]
-pyside6 = ["pyside6", "PySide6-QtAds"]
-pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla", "PyQtAds"]
-addons = ["docutils", "orjson", "fsspec"]
 
 [tool.pytest.ini_options]
 minversion = "6.0"
