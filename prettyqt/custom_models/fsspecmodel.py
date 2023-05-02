@@ -13,6 +13,14 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
 
 
+class FsSpecCompleter(widgets.Completer):
+    def pathFromIndex(self, index):
+        return index.data(self.model().Roles.FilePathRole)
+
+    def splitPath(self, path: str):
+        return path.split(self.model().fs.sep)
+
+
 class FolderInfo(TypedDict):
     name: str
     size: int
