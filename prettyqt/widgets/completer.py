@@ -28,6 +28,21 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
 
+    def get_completions(self):
+        completions = []
+        # count = self.completionCount()
+        # for i in range(count):
+        #     self.setCurrentRow(i)
+        #     completions.append(self.currentCompletion())
+        # according to docs, completionCount should be avoided. Not sure if thats true.
+        i = 0
+        while True:
+            if not self.setCurrentRow(i):
+                break
+            completions.append(self.currentCompletion())
+            i += 1
+        return completions
+
     def set_sort_mode(self, mode: SortModeStr | None):
         """Set sort mode to use.
 
@@ -121,4 +136,11 @@ if __name__ == "__main__":
 
     app = widgets.app()
     completer = Completer()
-    app.main_loop()
+    model = widgets.FileSystemModel()
+    model.set_root_path("")
+    app.sleep(10)
+    completer.setModel(model)
+    # completer.setCompletionPrefix("C:/")
+    print(completer.completionCount())
+    print("dfs", completer.get_completions())
+    # app.main_loop()
