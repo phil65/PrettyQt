@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import enum
 import pathlib
 
 import regex as re
 
-from prettyqt import constants, widgets
+from prettyqt import constants, custom_widgets, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -32,6 +33,10 @@ class VariantDelegate(widgets.ItemDelegate):
         match original_value:
             case bool():
                 return widgets.CheckBox(parent=parent)
+            case enum.Enum():
+                return custom_widgets.EnumComboBox(
+                    parent=parent, enum_class=original_value.__class__
+                )
             case int():
                 return widgets.SpinBox(parent=parent)
             case float():
@@ -122,9 +127,6 @@ class VariantDelegate(widgets.ItemDelegate):
 
 
 if __name__ == "__main__":
-    """Run the application."""
-    from prettyqt import constants, custom_widgets
-
     app = widgets.app()
     table_widget = widgets.TableWidget(15, 2)
     # table_widget.set_delegate(StarDelegate(), column=1)
@@ -147,6 +149,7 @@ if __name__ == "__main__":
         url=QtCore.QUrl("http://www.google.de"),
         # regex=QtCore.QRegularExpression("[a-z]"),
         regex=re.compile("[a-z]"),
+        enum=QtCore.Qt.ItemDataRole.UserRole,
         bool=True,
         keysequence=QtGui.QKeySequence("Ctrl+A"),
     )
