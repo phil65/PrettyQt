@@ -60,6 +60,17 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     def set_text(self, text: str):
         self.setText(text)
 
+    def set_completer(self, completer: QtWidgets.QCompleter | Literal["files"]):
+        match completer:
+            case QtWidgets.QCompleter():
+                self.setCompleter(completer)
+            case "files":
+                model = widgets.FileSystemModel()
+                model.set_root_path("")
+                completer = widgets.Completer(self)
+                completer.setModel(model)
+                self.setCompleter(completer)
+
     def set_read_only(self, value: bool = True):
         """Set text to read-only.
 
@@ -156,9 +167,10 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = LineEdit()
     action = gui.Action(text="hallo", icon="mdi.folder")
-    widget.add_action(action)
+    # widget.add_action(action)
     widget.setPlaceholderText("test")
     widget.setClearButtonEnabled(True)
+    widget.set_completer("files")
     # widget.set_regex_validator("[0-9]+")
     widget.setFont(gui.Font("Consolas"))
     widget.show()
