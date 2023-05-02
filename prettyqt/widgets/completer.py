@@ -43,6 +43,10 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
             i += 1
         return completions
 
+    def set_strings(self, strings: list[str]):
+        model = core.StringListModel(strings)
+        self.setModel(model)
+
     def set_sort_mode(self, mode: SortModeStr | None):
         """Set sort mode to use.
 
