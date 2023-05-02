@@ -38,6 +38,9 @@ class WidgetMixin(core.ObjectMixin):
     def __repr__(self) -> str:
         return get_repr(self)
 
+    def get_win_id(self) -> int:
+        return int(self.winId())
+
     def resize(self, *size) -> None:
         if isinstance(size[0], tuple):
             super().resize(*size[0])
