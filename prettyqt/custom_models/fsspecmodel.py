@@ -425,7 +425,9 @@ class FSSpecTreeModel(
             return super().index(path_or_row, column, index)
         return self._iter_path(path_or_row, column, index)
 
-    def _iter_path(self, target: os.PathLike, column: int = 0, parent=None):
+    def _iter_path(
+        self, target: os.PathLike, column: int = 0, parent: core.ModelIndex | None = None
+    ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         target = pathlib.Path(target)
         row_count = self.rowCount(parent)
