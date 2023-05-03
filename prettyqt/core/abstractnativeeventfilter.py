@@ -4,4 +4,6 @@ from prettyqt.qt import QtCore
 
 
 class AbstractNativeEventFilter(QtCore.QAbstractNativeEventFilter):
-    pass
+    def install(self):
+        # theres also QCoreApplication::installNativeEventFilter. Not sure abt difference
+        QtCore.QAbstractEventDispatcher.instance().installNativeEventFilter(self)
