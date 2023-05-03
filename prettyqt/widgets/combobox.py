@@ -96,7 +96,8 @@ class ComboBoxMixin(widgets.WidgetMixin):
         return self.count()
 
     def index_changed(self, index: int):
-        data = self.itemData(index)
+        # data = self.itemData(index)
+        data = self.get_value()
         self.value_changed.emit(data)
 
     def add_items(self, items: Iterable | Mapping, default=NoData):
