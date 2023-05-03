@@ -268,8 +268,17 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
             tab.close()
 
     @core.Slot(int)
-    def remove_tab(self, index: int):
-        widget = self.widget(index)
+    def remove_tab(self, index_or_widget: int | QtWidgets.QWidget):
+        index = (
+            self.indexOf(index_or_widget)
+            if isinstance(index_or_widget, QtWidgets.QWidget)
+            else index_or_widget
+        )
+        widget = (
+            self.widget(index_or_widget)
+            if isinstance(index_or_widget, int)
+            else index_or_widget
+        )
         self.removeTab(index)
         if widget is not None:
             widget.deleteLater()
