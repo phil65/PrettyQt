@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import enum
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
 SCENE_LAYER = bidict(
@@ -25,6 +26,27 @@ ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
 
 class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
+    @core.Enum
+    class GridType(enum.IntEnum):
+        """Grid type for background."""
+
+        NoGrid = 0
+        DotGrid = 1
+        LineGrid = 2
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self._grid_mode = self.GridType.LineGrid
+        self._grid_size = 50
+        self._pen_width = 0.65
+        self._grid_color = self.get_palette().get_color("text")
+        self._bg_color = self.get_palette().get_color("window")
+        # self.setBackgroundBrush(self._bg_color)
+
+    def __repr__(self):
+        cls_name = str(self.__class__.__name__)
+        return f'<{cls_name}("{self.viewer()}") object at {hex(id(self))}>'
+
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 
@@ -189,6 +211,144 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
             group.addToGroup(item)
         return group
 
+    def _draw_grid(
+        self,
+        painter: QtGui.QPainter,
+        rect: QtCore.QRectF,
+        pen: QtGui.QPen,
+        grid_size: int,
+    ):
+        left = int(rect.left())
+        right = int(rect.right())
+        top = int(rect.top())
+        bottom = int(rect.bottom())
+
+        first_left = left - (left % grid_size)
+        first_top = top - (top % grid_size)
+
+        lines = [
+            QtCore.QLineF(x, top, x, bottom) for x in range(first_left, right, grid_size)
+        ]
+        lines.extend(
+            [
+                QtCore.QLineF(left, y, right, y)
+                for y in range(first_top, bottom, grid_size)
+            ]
+        )
+
+        painter.setPen(pen)
+        painter.drawLines(lines)
+
+    def _draw_dots(
+        self,
+        painter: QtGui.QPainter,
+        rect: QtCore.QRectF,
+        pen: QtGui.QPen,
+        grid_size: int,
+    ):
+        if (zoom := self._get_viewer_zoom()) < 0:
+            grid_size *= int(abs(zoom) / 0.3 + 1)
+
+        left = int(rect.left())
+        right = int(rect.right())
+        top = int(rect.top())
+        bottom = int(rect.bottom())
+
+        first_left = left - (left % grid_size)
+        first_top = top - (top % grid_size)
+
+        pen.setWidth(grid_size / 10)
+        painter.setPen(pen)
+
+        [
+            painter.drawPoint(int(x), int(y))
+            for x in range(first_left, right, grid_size)
+            for y in range(first_top, bottom, grid_size)
+        ]
+
+    def drawBackground(self, painter: QtGui.QPainter, rect: QtCore.QRect):
+        super().drawBackground(painter, rect)
+
+        painter.save()
+        painter.setRenderHint(QtGui.QPainter.RenderHint.Antialiasing, False)
+        painter.setBrush(self.backgroundBrush())
+
+        if self._grid_mode == self.GridType.DotGrid:
+            pen = QtGui.QPen(self.grid_color, self._pen_width)
+            self._draw_dots(painter, rect, pen, self._grid_size)
+
+        elif self._grid_mode == self.GridType.LineGrid:
+            zoom = self._get_viewer_zoom()
+            if zoom > -0.5:
+                pen = QtGui.QPen(self.grid_color, self._pen_width)
+                self._draw_grid(painter, rect, pen, self._grid_size)
+            color = self._bg_color.darker(150)
+            if zoom < -0.0:
+                color = color.darker(100 - int(zoom * 110))
+            pen = QtGui.QPen(color, self._pen_width)
+            self._draw_grid(painter, rect, pen, self._grid_size * 8)
+
+        painter.restore()
+
+    def _get_viewer_zoom(self):
+        transform = self.viewer().transform()
+        cur_scale = (transform.m11(), transform.m22())
+        return float(f"{cur_scale[0] - 1.0:0.2f}")
+
+    def mousePressEvent(self, event):
+        selected = self.viewer().selectedItems()
+        if viewer := self.viewer():
+            viewer.sceneMousePressEvent(event)
+        super().mousePressEvent(event)
+        keep_selection = any(
+            [
+                event.button() == QtCore.Qt.MiddleButton,
+                event.button() == QtCore.Qt.RightButton,
+                event.modifiers() == QtCore.Qt.AltModifier,
+            ]
+        )
+        if keep_selection:
+            for node in selected:
+                node.setSelected(True)
+
+    def mouseMoveEvent(self, event):
+        if viewer := self.viewer():
+            viewer.sceneMouseMoveEvent(event)
+        super().mouseMoveEvent(event)
+
+    def mouseReleaseEvent(self, event):
+        if viewer := self.viewer():
+            viewer.sceneMouseReleaseEvent(event)
+        super().mouseReleaseEvent(event)
+
+    def viewer(self):
+        return self.views()[0] if self.views() else None
+
+    def get_grid_mode(self) -> GridType:
+        return self._grid_mode
+
+    def set_grid_mode(self, mode: GridType | None = None):
+        # alternative?
+        # brush = gui.Brush()
+        # brush.set_style("cross")
+        # scene.setBackgroundBrush(brush)
+        if mode is None:
+            mode = self.GridType.NoGrid
+        self._grid_mode = mode
+
+    def get_grid_color(self) -> gui.Color:
+        return self._grid_color
+
+    def set_grid_color(self, color: datatypes.ColorType):
+        self._grid_color = colors.get_color(color)
+
+    def get_background_color(self) -> gui.Color:
+        return self._bg_color
+
+    def set_background_color(self, color: datatypes.ColorType):
+        self._bg_color = colors.get_color(color)
+        self.setBackgroundBrush(self._bg_color)
+
     def set_item_index_method(self, method: ItemIndexMethodStr):
         """Set item index method.
 
@@ -209,6 +369,10 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
             item index method
         """
         return ITEM_INDEX_METHOD.inverse[self.itemIndexMethod()]
+
+    bg_color = core.Property(QtGui.QColor, get_background_color, set_background_color)
+    grid_color = core.Property(QtGui.QColor, get_grid_color, set_grid_color)
+    grid_mode = core.Property(int, get_grid_mode, set_grid_mode)
 
 
 if __name__ == "__main__":
