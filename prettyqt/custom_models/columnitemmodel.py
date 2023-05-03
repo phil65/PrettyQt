@@ -261,21 +261,22 @@ class ColumnItemModel(ColumnItemModelMixin, core.AbstractItemModel):
         return core.ModelIndex()
 
     def set_root_item(self, obj):
-        if self._show_root:
-            self._root_item = treeitem.TreeItem(obj=None)
-            self._root_item.children_fetched = True
-            self.inspected_item = treeitem.TreeItem(obj=obj)
-            self._root_item.append_child(self.inspected_item)
-            # root_index = self.index(0, 0)
-            # self.fetchMore(self.index(0, 0, root_index))
-        else:
-            # The root itself will be invisible
-            self._root_item = treeitem.TreeItem(obj=obj)
-            self.inspected_item = self._root_item
+        with self.reset_model():
+            if self._show_root:
+                self._root_item = treeitem.TreeItem(obj=None)
+                self._root_item.children_fetched = True
+                self.inspected_item = treeitem.TreeItem(obj=obj)
+                self._root_item.append_child(self.inspected_item)
+                # root_index = self.index(0, 0)
+                # self.fetchMore(self.index(0, 0, root_index))
+            else:
+                # The root itself will be invisible
+                self._root_item = treeitem.TreeItem(obj=obj)
+                self.inspected_item = self._root_item
 
-            # Fetch all items of the root so we can select the first row in the ctor.
-            root_index = self.index(0, 0)
-            self.fetchMore(root_index)
+                # Fetch all items of the root so we can select the first row in the ctor.
+                root_index = self.index(0, 0)
+                self.fetchMore(root_index)
 
     @property
     def root_item(self) -> treeitem.TreeItem:
