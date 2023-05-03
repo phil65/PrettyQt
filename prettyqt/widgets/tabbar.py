@@ -68,7 +68,7 @@ class TabBarMixin(widgets.WidgetMixin):
     #  Send the on_detach when a tab is double clicked
     def mouseDoubleClickEvent(self, event):
         event.accept()
-        tab = self.tabAt(event.position())
+        tab = self.tabAt(event.position().toPoint())
         pos = QtGui.QCursor.pos()
         self.on_detach.emit(tab, pos)
 
