@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import io
+import mimetypes
+import os
 from typing import Literal
 
 from typing_extensions import Self
@@ -134,6 +136,30 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
             img.setColorTable(data["colortable"])
         img.__data = data["data"]
         return img
+
+    @classmethod
+    def for_mimetype(cls, path: os.PathLike) -> Self | None:
+        """Try to create an icon from theme using the file mimetype.
+
+        E.g.::
+
+            return self.mimetype_icon(
+                path, fallback=':/icons/text-x-python.png')
+
+        :param path: file path for which the icon must be created
+        :param fallback: fallback icon path (qrc or file system)
+        :returns: QIcon or None if the file mimetype icon could not be found.
+        """
+        path = os.fspath(path)
+        if mime := mimetypes.guess_type(path)[0]:
+            icon = mime.replace("/", "-")
+            # if system.WINDOWS:
+            #     return icons.file()
+            if cls.hasThemeIcon(icon):
+                icon = cls(cls.fromTheme(icon))
+                if not icon.isNull():
+                    return icon
+        return None  #  gui.Icon.fromTheme("text-x-generic")
 
     def to_pil(self) -> Image:
         from PIL import Image as PILImage
