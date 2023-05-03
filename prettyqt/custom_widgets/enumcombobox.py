@@ -119,7 +119,7 @@ class EnumComboBox(widgets.ComboBox):
     def setInsertPolicy(self, policy):
         raise RuntimeError("EnumComboBox does not allow to insert item")
 
-    enum_value = core.Property(int, get_value, set_value, user=True)
+    enum_value = core.Property(enum.Enum, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":
