@@ -27,15 +27,10 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
         self, icon: QtWidgets.QFileIconProvider.IconType | QtCore.QFileInfo
     ) -> gui.Icon:
         match icon:
-            case QtCore.QFileInfo():
-                if icon.isDir():
-                    return self.folder_icon
-                elif icon.isFile():
-                    return self.file_icon
             case widgets.FileIconProvider.IconType.Folder:
                 return self.folder_icon
-            # case widgets.FileIconProvider.IconType.File:
-            #     return self.file_icon
+            case widgets.FileIconProvider.IconType.File:
+                return self.file_icon
             case widgets.FileIconProvider.IconType.Computer:
                 return self.computer_icon
             case widgets.FileIconProvider.IconType.Desktop:
@@ -46,6 +41,13 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
                 return self.network_icon
             case widgets.FileIconProvider.IconType.Drive:
                 return self.drive_icon
+            case QtCore.QFileInfo():
+                if icon.isDir():
+                    return self.folder_icon
+                elif icon.isFile():
+                    return self.file_icon
+                else:
+                    return self.file_icon
             case _:
                 return self.file_icon
 
@@ -74,7 +76,7 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import custom_widgets, widgets
 
     app = widgets.app()
     app.load_language("de")
@@ -82,7 +84,7 @@ if __name__ == "__main__":
     model.set_root_path("root")
     prov = AwesomeFileIconProvider()
     model.setIconProvider(prov)
-    tree = widgets.TreeView()
+    tree = custom_widgets.FileTree()
     tree.set_model(model)
     tree.show()
     app.main_loop()
