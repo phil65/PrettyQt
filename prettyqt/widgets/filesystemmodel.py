@@ -59,7 +59,7 @@ class FileSystemModelMixin:
 
     def set_root_path(self, path: datatypes.PathType) -> QtCore.QModelIndex:
         match path:
-            case "/" | "root":
+            case "root":
                 path = core.Dir.rootPath()
             case "home":
                 path = core.Dir.homePath()
