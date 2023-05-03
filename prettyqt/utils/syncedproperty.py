@@ -1,5 +1,7 @@
 # credits to
 # https://stackoverflow.com/questions/48425316/how-to-create-pyqt-properties-dynamically
+from __future__ import annotations
+
 import functools
 
 from prettyqt.qt import QtCore
