@@ -31,11 +31,7 @@ class RegexPatternValidator(gui.Validator):
         #     return (self.Intermediate, text, pos)
         try:
             compiled = re.compile(text)
-        except sre_constants.error as e:
-            self.error_occured.emit(str(e))
-            self.pattern_updated.emit(None)
-            return self.State.Intermediate, text, pos
-        except re._regex_core.error as e:
+        except (re._regex_core.error, sre_constants.error) as e:
             self.error_occured.emit(str(e))
             self.pattern_updated.emit(None)
             return self.State.Intermediate, text, pos
