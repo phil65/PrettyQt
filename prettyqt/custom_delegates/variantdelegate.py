@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import datetime
 import enum
 import pathlib
 
@@ -9,7 +10,7 @@ from prettyqt import constants, custom_widgets, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
-class VariantDelegate(widgets.ItemDelegate):
+class VariantDelegate(widgets.StyledItemDelegate):
     def __init__(
         self,
         data_role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
@@ -42,8 +43,7 @@ class VariantDelegate(widgets.ItemDelegate):
             case float():
                 return widgets.DoubleSpinBox(parent=parent)
             case QtCore.QRegularExpression() | re.Pattern():
-                editor = custom_widgets.RegexInput(show_error=False, parent=parent)
-                return editor
+                return custom_widgets.RegexInput(show_error=False, parent=parent)
             case QtGui.QColor():
                 return custom_widgets.ColorComboBox(parent=parent)
             case QtCore.QTime():
@@ -118,12 +118,27 @@ class VariantDelegate(widgets.ItemDelegate):
                 return ",".join(map(repr, val))
             case re.Pattern():
                 return val.pattern
+            case datetime.date():
+                return val.isoformat()
+            case datetime.datetime():
+                return val.isoformat(sep=" ")
             case QtCore.QRegularExpression():
                 return val.pattern()
+            # case np.integer():
+            #     return super().displayText(int(val), locale)
+            # case np.floating():
+            #     return super().displayText(float(val), locale)
+            # case np.str_():
+            #     return str(val)
+            # case np.datetime64():
+            #     return self.displayText(val.astype(datetime), locale)
             case None:
-                return "<Invalid>"
+                return "<None>"
             case _:
                 return f"<{val}>"
+
+    def displayText(self, value, locale: QtCore.QLocale) -> str:
+        return self.display_text(value)
 
 
 if __name__ == "__main__":
