@@ -99,14 +99,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             root_index = self.index(0, 0)
             self.fetchMore(root_index)
 
-    @property
-    def show_root(self):
-        """Return True if the inspected node is visible.
-
-        In that case an invisible root node has been added.
-        """
-        return self._show_root
-
     def _fetch_object_children(
         self, treeitem: treeitem.TreeItem
     ) -> list[ObjectBrowserTreeItem]:

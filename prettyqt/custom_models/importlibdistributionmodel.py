@@ -101,14 +101,6 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
             return True
         return bool(self.tree_item(parent).obj.requires)
 
-    @property
-    def show_root(self):
-        """Return True if the inspected node is visible.
-
-        In that case an invisible root node has been added.
-        """
-        return self._show_root
-
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         """Fetch the children of a Python object.
 

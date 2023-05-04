@@ -147,7 +147,7 @@ ATTR_MODEL_SHA = FsSpecColumnItem(
     identifier="sha",
     name="SHA",
     doc="SHA",
-    label=lambda x: x.obj["sha"] or "",
+    label=lambda x: x.obj.get("sha") or "",
 )
 
 COLUMNS = [
@@ -205,7 +205,7 @@ class FSSpecTreeModel(
     def set_protocol(self, protocol: str, **kwargs):
         self.fs = fsspec.filesystem(protocol, **kwargs)
 
-    def _get_columns_for_protocol(self, protocol):
+    def _get_columns_for_protocol(self, protocol: str):
         match self.fs.protocol:
             case "github":
                 return [
@@ -553,11 +553,8 @@ if __name__ == "__main__":
 
     app = widgets.app()
 
-    fs = fsspec.filesystem("file", org="phil65", repo="prettyqt", path="/")
-    root = fs.info("")
-    print(root, fs.ls("", detail=True))
-    model = FSSpecTreeModel(fs, root, False)
-    print(model.mimeTypes())
+    model = FSSpecTreeModel("file", org="phil65", repo="prettyqt", path="/")
+    # model.set_root_path("/")
     tree = widgets.TreeView()
     tree.setRootIsDecorated(True)
     tree.setup_dragdrop_move()

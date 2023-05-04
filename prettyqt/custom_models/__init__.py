@@ -4,6 +4,7 @@ Contains custom models
 """
 
 from .selectionmixin import SelectionMixin
+from .treemodel import TreeModel
 from .regexmatchesmodel import RegexMatchesModel
 from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
 from .importlibdistributionmodel import ImportlibDistributionModel
@@ -17,6 +18,7 @@ from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 
 __all__ = [
     "SelectionMixin",
+    "TreeModel",
     "ImportlibDistributionModel",
     "RegexMatchesModel",
     "ColumnItemModel",
