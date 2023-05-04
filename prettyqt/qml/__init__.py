@@ -8,6 +8,7 @@ from prettyqt.qt.QtQml import (
     qmlClearTypeRegistrations as clear_type_registrations,
 )
 from .qmlparserstatus import QmlParserStatus, QmlParserStatusMixin
+from .qmlpropertymap import QmlPropertyMap
 from .jsvalue import JSValue
 from .jsvalueiterator import JSValueIterator
 from .jsengine import JSEngine, JSEngineMixin
@@ -21,6 +22,7 @@ __all__ = [
     "clear_type_registrations",
     "QmlParserStatus",
     "QmlParserStatusMixin",
+    "QmlPropertyMap",
     "JSValue",
     "JSValueIterator",
     "QmlEngine",
