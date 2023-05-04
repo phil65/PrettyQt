@@ -4,7 +4,7 @@ from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
-ICON_ROLE = QtCore.Qt.ItemDataRole.UserRole + 1000  # type: ignore
+ICON_ROLE = QtCore.Qt.ItemDataRole.UserRole + 1000
 
 
 class IconDelegate(widgets.StyledItemDelegate):
@@ -64,5 +64,5 @@ class IconDelegate(widgets.StyledItemDelegate):
             if option.state & widgets.Style.StateFlag.State_Open
             else gui.Icon.State.Off
         )
-        alignment = constants.ALIGN_RIGHT | constants.ALIGN_V_CENTER  # type: ignore
+        alignment = constants.ALIGN_RIGHT | constants.ALIGN_V_CENTER
         icon.paint(painter, r, alignment, mode, state)

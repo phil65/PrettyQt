@@ -85,7 +85,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         old_model = self.model()
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
-            self.setModel(model)  # type: ignore
+            self.setModel(model)
             self.model_changed.emit(model)
         # if old_model:
         #     old_model.deleteLater()
@@ -137,7 +137,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def current_data(self):
         if (model := self.selectionModel()) is not None:
             idx = model.currentIndex()
-            return idx.data(constants.USER_ROLE)  # type: ignore
+            return idx.data(constants.USER_ROLE)
 
     def current_row(self) -> int | None:
         if (model := self.selectionModel()) is not None:
@@ -149,8 +149,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def selected_indexes(self) -> list[QtCore.QModelIndex]:
         """Return list of selected indexes in first row."""
-        indexes = (x for x in self.selectedIndexes() if x.column() == 0)  # type: ignore
-        return sorted(indexes, key=lambda x: x.row())  # type: ignore
+        indexes = (x for x in self.selectedIndexes() if x.column() == 0)
+        return sorted(indexes, key=lambda x: x.row())
 
     def selected_names(self) -> Generator[Any, None, None]:
         """Return generator yielding item names."""
@@ -162,9 +162,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def selected_data(self) -> Generator[Any, None, None]:
         """Return generator yielding selected userData."""
-        return (
-            x.data(constants.USER_ROLE) for x in self.selected_indexes()  # type: ignore
-        )
+        return (x.data(constants.USER_ROLE) for x in self.selected_indexes())
 
     def setup_dragdrop_move(self):
         self.setDragEnabled(True)

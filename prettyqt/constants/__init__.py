@@ -8,8 +8,8 @@ Qt = QtCore.Qt
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
-SORT_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 100)  # type: ignore
-NAME_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 101)  # type: ignore
+SORT_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 100)
+NAME_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 101)
 EDIT_ROLE = Qt.ItemDataRole.EditRole
 BACKGROUND_ROLE = Qt.ItemDataRole.BackgroundRole
 FOREGROUND_ROLE = Qt.ItemDataRole.ForegroundRole
@@ -35,14 +35,14 @@ ALIGN_BASELINE = Qt.AlignmentFlag.AlignBaseline
 
 Flag = Qt.AlignmentFlag
 ALIGN_CENTER = Flag.AlignCenter
-ALIGN_CENTER_LEFT = Flag.AlignVCenter | Flag.AlignLeft  # type: ignore
-ALIGN_CENTER_RIGHT = Flag.AlignVCenter | Flag.AlignRight  # type: ignore
-ALIGN_TOP_LEFT = Flag.AlignTop | Flag.AlignLeft  # type: ignore
-ALIGN_TOP_RIGHT = Flag.AlignTop | Flag.AlignRight  # type: ignore
-ALIGN_TOP_CENTER = Flag.AlignTop | Flag.AlignHCenter  # type: ignore
-ALIGN_BOTTOM_LEFT = Flag.AlignBottom | Flag.AlignLeft  # type: ignore
-ALIGN_BOTTOM_RIGHT = Flag.AlignBottom | Flag.AlignRight  # type: ignore
-ALIGN_BOTTOM_CENTER = Flag.AlignBottom | Flag.AlignHCenter  # type: ignore
+ALIGN_CENTER_LEFT = Flag.AlignVCenter | Flag.AlignLeft
+ALIGN_CENTER_RIGHT = Flag.AlignVCenter | Flag.AlignRight
+ALIGN_TOP_LEFT = Flag.AlignTop | Flag.AlignLeft
+ALIGN_TOP_RIGHT = Flag.AlignTop | Flag.AlignRight
+ALIGN_TOP_CENTER = Flag.AlignTop | Flag.AlignHCenter
+ALIGN_BOTTOM_LEFT = Flag.AlignBottom | Flag.AlignLeft
+ALIGN_BOTTOM_RIGHT = Flag.AlignBottom | Flag.AlignRight
+ALIGN_BOTTOM_CENTER = Flag.AlignBottom | Flag.AlignHCenter
 
 ORIENTATION_NONE = Qt.Orientation(0)
 HORIZONTAL = Qt.Orientation.Horizontal
@@ -143,10 +143,10 @@ EDGES = bidict(
     left=Qt.Edge.LeftEdge,
     right=Qt.Edge.RightEdge,
     bottom=Qt.Edge.BottomEdge,
-    top_left=Qt.Edge.TopEdge | Qt.Edge.LeftEdge,  # type: ignore
-    top_right=Qt.Edge.TopEdge | Qt.Edge.RightEdge,  # type: ignore
-    bottom_left=Qt.Edge.BottomEdge | Qt.Edge.LeftEdge,  # type: ignore
-    bottom_right=Qt.Edge.BottomEdge | Qt.Edge.RightEdge,  # type: ignore
+    top_left=Qt.Edge.TopEdge | Qt.Edge.LeftEdge,
+    top_right=Qt.Edge.TopEdge | Qt.Edge.RightEdge,
+    bottom_left=Qt.Edge.BottomEdge | Qt.Edge.LeftEdge,
+    bottom_right=Qt.Edge.BottomEdge | Qt.Edge.RightEdge,
 )
 
 EdgeStr = Literal[

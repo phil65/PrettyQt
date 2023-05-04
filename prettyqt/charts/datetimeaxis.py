@@ -8,7 +8,7 @@ from prettyqt.qt import QtCharts
 
 class DateTimeAxis(charts.AbstractAxisMixin, QtCharts.QDateTimeAxis):
     def get_min(self) -> datetime.datetime:
-        return self.min().toPython()  # type: ignore
+        return self.min().toPython()
 
     def get_max(self) -> datetime.datetime:
-        return self.max().toPython()  # type: ignore
+        return self.max().toPython()

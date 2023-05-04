@@ -128,7 +128,7 @@ class MetaType(QtCore.QMetaType):
         return get_repr(self, self.get_name())
 
     def get_name(self) -> str | None:
-        return self.name()  # type: ignore
+        return self.name()
 
 
 if __name__ == "__main__":

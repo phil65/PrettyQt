@@ -34,7 +34,7 @@ HorizontalHeaderFormatStr = Literal["single_letter", "short", "long", "none"]
 
 class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
     def get_date(self) -> datetime.date:
-        return self.selectedDate().toPython()  # type: ignore
+        return self.selectedDate().toPython()
 
     def get_value(self) -> datetime.date:
         return self.get_date()
@@ -42,7 +42,7 @@ class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
     def set_value(self, value: datatypes.DateType):
         if isinstance(value, str):
             value = QtCore.QDate.fromString(value)
-        self.setSelectedDate(value)  # type: ignore
+        self.setSelectedDate(value)
 
     def set_range(
         self,
@@ -53,8 +53,8 @@ class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
             lower = QtCore.QDate.fromString(lower)
         if isinstance(upper, str):
             upper = QtCore.QDate.fromString(upper)
-        self.setMinimumDate(lower)  # type: ignore
-        self.setMaximumDate(upper)  # type: ignore
+        self.setMinimumDate(lower)
+        self.setMaximumDate(upper)
 
     def set_selection_mode(self, mode: SelectionModeStr | None):
         """Set selection mode for given calendar widget.
