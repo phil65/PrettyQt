@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import sys
 
-from prettyqt import constants, core, gui, iconprovider, widgets
+from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtGui, QtWidgets
 
 
@@ -74,7 +74,7 @@ class IconBrowser(widgets.MainWindow):
         frame = widgets.Frame(self)
         frame.set_layout(lyt)
         self.setCentralWidget(frame)
-        gui.Shortcut(gui.KeySequence("return"), self, self._copy_icon_text)
+        self.add_shortcut("return", self._copy_icon_text)
         self._lineedit.setFocus()
         self.center()
 

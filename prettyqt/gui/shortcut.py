@@ -18,7 +18,7 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
             whats_this=self.whatsThis(),
         )
 
-    def set_context(self, context: constants.ContextStr):
+    def set_context(self, context: constants.ShortcutContextStr):
         """Set shortcut context.
 
         Args:
@@ -27,17 +27,17 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
         Raises:
             InvalidParamError: shortcut context does not exist
         """
-        if context not in constants.CONTEXT:
-            raise InvalidParamError(context, constants.CONTEXT)
-        self.setContext(constants.CONTEXT[context])
+        if context not in constants.SHORTCUT_CONTEXT:
+            raise InvalidParamError(context, constants.SHORTCUT_CONTEXT)
+        self.setContext(constants.SHORTCUT_CONTEXT[context])
 
-    def get_context(self) -> constants.ContextStr:
+    def get_context(self) -> constants.ShortcutContextStr:
         """Return shortcut context.
 
         Returns:
             shortcut context
         """
-        return constants.CONTEXT.inverse[self.context()]
+        return constants.SHORTCUT_CONTEXT.inverse[self.context()]
 
     def get_key(self) -> gui.KeySequence:
         """Return the shortcut's key sequence.

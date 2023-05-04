@@ -667,8 +667,8 @@ CLIP_OPERATION: bidict[ClipOperationStr, Qt.ClipOperation] = bidict(
     intersect=Qt.ClipOperation.IntersectClip,
 )
 
-ContextStr = Literal["widget", "widget_with_children", "window", "application"]
-CONTEXT: bidict[ContextStr, Qt.ShortcutContext] = bidict(
+ShortcutContextStr = Literal["widget", "widget_with_children", "window", "application"]
+SHORTCUT_CONTEXT: bidict[ShortcutContextStr, Qt.ShortcutContext] = bidict(
     widget=Qt.ShortcutContext.WidgetShortcut,
     widget_with_children=Qt.ShortcutContext.WidgetWithChildrenShortcut,
     window=Qt.ShortcutContext.WindowShortcut,

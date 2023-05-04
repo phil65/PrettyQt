@@ -38,6 +38,20 @@ class WidgetMixin(core.ObjectMixin):
     def __repr__(self) -> str:
         return get_repr(self)
 
+    def add_shortcut(
+        self,
+        keysequence: str
+        | QtCore.QKeyCombination
+        | QtGui.QKeySequence
+        | QtGui.QKeySequence.StandardKey,
+        callback: Callable | None = None,
+        context: constants.ShortcutContextStr = "window",
+    ) -> gui.Shortcut:
+        if isinstance(keysequence, str):
+            keysequence = gui.KeySequence(keysequence)
+        context = constants.SHORTCUT_CONTEXT[context]
+        return gui.Shortcut(keysequence, self, callback, context=context)
+
     def get_win_id(self) -> int:
         return int(self.winId())
 
@@ -604,6 +618,7 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
     widget.show()
+    widget.add_shortcut("return", print, "application")
     widget.set_min_size((400, 400))
     widget.set_max_size(None, 600)
     print(type(widget.get_screen()))

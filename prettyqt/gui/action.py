@@ -168,7 +168,7 @@ class ActionMixin(core.ObjectMixin):
         """
         return PRIORITIES.inverse[self.priority()]
 
-    def set_shortcut_context(self, context: constants.ContextStr):
+    def set_shortcut_context(self, context: constants.ShortcutContextStr):
         """Set shortcut context.
 
         Args:
@@ -177,17 +177,17 @@ class ActionMixin(core.ObjectMixin):
         Raises:
             InvalidParamError: shortcut context does not exist
         """
-        if context not in constants.CONTEXT:
-            raise InvalidParamError(context, constants.CONTEXT)
-        self.setShortcutContext(constants.CONTEXT[context])
+        if context not in constants.SHORTCUT_CONTEXT:
+            raise InvalidParamError(context, constants.SHORTCUT_CONTEXT)
+        self.setShortcutContext(constants.SHORTCUT_CONTEXT[context])
 
-    def get_shortcut_context(self) -> constants.ContextStr:
+    def get_shortcut_context(self) -> constants.ShortcutContextStr:
         """Return shortcut context.
 
         Returns:
             shortcut context
         """
-        return constants.CONTEXT.inverse[self.shortcutContext()]
+        return constants.SHORTCUT_CONTEXT.inverse[self.shortcutContext()]
 
     def set_menu_role(self, role: RoleStr):
         """Set menu role.

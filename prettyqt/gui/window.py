@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import Literal
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
@@ -37,6 +38,20 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
     #         scaled_size=self.scaledSize(),
     #         background_color=self.backgroundColor(),
     #     )
+
+    def add_shortcut(
+        self,
+        keysequence: str
+        | QtCore.QKeyCombination
+        | QtGui.QKeySequence
+        | QtGui.QKeySequence.StandardKey,
+        callback: Callable | None = None,
+        context: constants.ShortcutContextStr = "window",
+    ) -> gui.Shortcut:
+        if isinstance(keysequence, str):
+            keysequence = gui.KeySequence(keysequence)
+        context = constants.SHORTCUT_CONTEXT[context]
+        return gui.Shortcut(keysequence, self, callback, context=context)
 
     def set_visibility(self, visibility: VisibilityStr):
         """Set window visibility.
