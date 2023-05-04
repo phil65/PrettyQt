@@ -4,6 +4,7 @@ from typing import Literal
 
 from typing_extensions import Self
 
+from prettyqt import constants
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
@@ -608,6 +609,14 @@ LANGUAGE = bidict(
     zulu=LN.Zulu,
 )
 
+FormatTypeStr = Literal["long", "short", "narrow"]
+
+FORMAT_TYPE = bidict(
+    long=QtCore.QLocale.FormatType.LongFormat,
+    short=QtCore.QLocale.FormatType.ShortFormat,
+    narrow=QtCore.QLocale.FormatType.NarrowFormat,
+)
+
 MeasurementSystemStr = Literal["metric", "imperial_us", "imperial_uk"]
 
 MEASUREMENT_SYSTEM = bidict(
@@ -668,6 +677,63 @@ class Locale(QtCore.QLocale):
         self, size: int, precision: int = 2, fmt: DataSizeFormatStr = "iec"
     ) -> str:
         return self.formattedDataSize(size, precision, DATA_SIZE_FORMAT[fmt])
+
+    def get_first_day_of_week(self) -> constants.DayOfWeekStr:
+        return constants.DAY_OF_WEEK.inverse[self.firstDayOfWeek()]
+
+    def get_text_direction(self) -> constants.LayoutDirectionStr:
+        return constants.LAYOUT_DIRECTION.inverse[self.textDirection()]
+
+    def get_weekdays(self) -> list[constants.DayOfWeekStr]:
+        return constants.DAY_OF_WEEK.get_list(self.weekdays())
+
+    def get_day_name(self, day: int, format_type: FormatTypeStr = "long") -> str:
+        return self.dayName(day, FORMAT_TYPE[format_type])
+
+    def get_month_name(self, month: int, format_type: FormatTypeStr = "long") -> str:
+        return self.monthName(month, FORMAT_TYPE[format_type])
+
+    def get_standalone_day_name(
+        self, day: int, format_type: FormatTypeStr = "long"
+    ) -> str:
+        return self.standaloneDayName(day, FORMAT_TYPE[format_type])
+
+    def get_time_format(self, format_type: FormatTypeStr = "long") -> str:
+        return self.timeFormat(FORMAT_TYPE[format_type])
+
+    def get_date_format(self, format_type: FormatTypeStr = "long") -> str:
+        return self.dateFormat(FORMAT_TYPE[format_type])
+
+    def get_datetime_format(self, format_type: FormatTypeStr = "long") -> str:
+        return self.dateTimeFormat(FORMAT_TYPE[format_type])
+
+    def to_datetime(self, text: str, format_type: FormatTypeStr | str = "long") -> str:
+        if format_type in {"long", "short", "narrow"}:
+            format_type = FORMAT_TYPE[format_type]
+        return self.toDateTime(text, format_type)
+
+    def to_date(self, text: str, format_type: FormatTypeStr | str = "long") -> str:
+        if format_type in {"long", "short", "narrow"}:
+            format_type = FORMAT_TYPE[format_type]
+        return self.toDate(text, format_type)
+
+    def to_time(self, text: str, format_type: FormatTypeStr | str = "long") -> str:
+        if format_type in {"long", "short", "narrow"}:
+            format_type = FORMAT_TYPE[format_type]
+        return self.to_time(text, format_type)
+
+    def get_standalone_month_name(
+        self, month: int, format_type: FormatTypeStr = "long"
+    ) -> str:
+        return self.standaloneMonthName(month, FORMAT_TYPE[format_type])
+
+    def quote_string(self, string: str, alternate_style: bool = False) -> str:
+        flag = (
+            self.QuotationStyle.AlternateQuotation
+            if alternate_style
+            else self.QuotationStyle.StandardQuotation
+        )
+        return self.quoteString(string, flag)
 
 
 if __name__ == "__main__":

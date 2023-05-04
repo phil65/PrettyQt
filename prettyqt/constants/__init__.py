@@ -519,6 +519,25 @@ UI_EFFECTS: bidict[UiEffectStr, Qt.UIEffect] = bidict(
     animate_toolbox=Qt.UIEffect.UI_AnimateToolBox,
 )
 
+DayOfWeekStr = Literal[
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "sunday",
+]
+DAY_OF_WEEK: bidict[DayOfWeekStr, Qt.DayOfWeek] = bidict(
+    monday=Qt.DayOfWeek.Monday,
+    tuesday=Qt.DayOfWeek.Tuesday,
+    wednesday=Qt.DayOfWeek.Wednesday,
+    thursday=Qt.DayOfWeek.Thursday,
+    friday=Qt.DayOfWeek.Friday,
+    saturday=Qt.DayOfWeek.Saturday,
+    sunday=Qt.DayOfWeek.Sunday,
+)
+
 NavigationModeStr = Literal[
     "none",
     "keypad_tab_order",
