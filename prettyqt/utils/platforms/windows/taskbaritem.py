@@ -94,13 +94,16 @@ class TaskBarItem:
         logger.info(f"Register tab {tab_win_id} in handle {self.win_id}")
         result = taskbar.RegisterTab(tab_win_id, self.win_id)
         taskbar.SetTabOrder(tab_win_id, 0)
+        # self.set_window_attribute(7, True)
         self.tabs.append(tab_win_id)
         return bool(result)
 
     def unregister_tab(self, tab_win_id: SupportsInt):
         tab_win_id = int(tab_win_id)
+        # if tab_win_id not in self.tabs:
+        #     raise ValueError(f"no handle with {tab_win_id} registered.")
         logger.info(f"Register tab {tab_win_id}")
-        result = taskbar.RegisterTab(tab_win_id)
+        result = taskbar.UnregisterTab(tab_win_id)
         self.tabs.remove(tab_win_id)
         return bool(result)
 
@@ -134,7 +137,23 @@ class TaskBarItem:
 
     def set_iconic_thumbnail(self, thumbnail: HBITMAP):  # available via QImage
         logger.info(f"Set iconic thumbnail for {self.win_id}")
-        dwmapi.DwmSetIconicThumbnail(self.win_id, thumbnail, 0)
+        # SM_CXSMICON = 49
+        # SM_CYSMICON = 50
+        # ico_x = GetSystemMetrics(SM_CXSMICON)
+        # ico_y = GetSystemMetrics(SM_CYSMICON)
+        # icon = encode_for_locale(self._icon)
+        # hicon = LoadImageA(0, icon, IMAGE_ICON, ico_x, ico_y, LR_LOADFROMFILE)
+        # dwmapi.DwmSetIconicThumbnail(self.win_id, HBITMAP(thumbnail), 0)
+
+    def set_window_attribute(self, key, value):  # available via QImage
+        logger.info(f"Set iconic thumbnail for {self.win_id}")
+        dwmapi.DwmSetWindowAttribute(
+            self.win_id,
+            key,  # DWMWA_FORCE_ICONIC_REPRESENTATION = 7
+            # DWMWA_HAS_ICONIC_BITMAP = 10
+            ctypes.byref(ctypes.c_bool(value)),
+            ctypes.sizeof(ctypes.c_bool(value)),
+        )
 
 
 if __name__ == "__main__":
