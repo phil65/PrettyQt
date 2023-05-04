@@ -6,6 +6,11 @@ from prettyqt.utils import InvalidParamError
 
 
 class Shortcut(core.ObjectMixin, QtGui.QShortcut):
+    def __init__(self, *args, **kwargs):
+        if args and isinstance(args[0], str):
+            args = (gui.KeySequence(args[0]), *args[1:])
+        super().__init__(*args, **kwargs)
+
     def __str__(self):
         return self.key().toString()
 
@@ -67,9 +72,12 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
         Returns:
             Key sequence
         """
-        return gui.KeySequence(
-            self.key().toString(), gui.KeySequence.SequenceFormat.PortableText
-        )
+        return gui.KeySequence(self.key())
 
     def get_keys(self) -> list[gui.KeySequence]:
         return [gui.KeySequence(i) for i in self.keys()]
+
+
+if __name__ == "__main__":
+    shortcut = Shortcut("enter", None)
+    shortcut.get_key()
