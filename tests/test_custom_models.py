@@ -38,13 +38,9 @@ def test_jsonmodel(qtmodeltester):
     model.load(dct)
     qtmodeltester.check(model, force_py=True)
 
-def test_fsspecmodel(qtbot, qtmodeltester):
-    from fsspec.implementations import local
-    fs = local.LocalFileSystem()
-    root = {"name": "/", "size": 0, "type": "directory"}
-    model = custom_models.FSSpecTreeModel(fs, root, False)
 
-    model.set_root_path("/")
+def test_fsspecmodel(qtbot, qtmodeltester):
+    model = custom_models.FSSpecTreeModel()
     idx = model.index(0, 0)
     model.get_paths([idx])
     model.data(idx, model.Roles.FilePathRole)

@@ -9,6 +9,8 @@ import os
 import pathlib
 from typing import TypedDict
 
+import fsspec
+
 from prettyqt import constants, core, custom_models, widgets
 from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
@@ -189,16 +191,32 @@ class FSSpecTreeModel(
 
     def __init__(
         self,
-        fs,
-        obj: FolderInfo,
+        protocol: str = "file",
+        root: os.PathLike = "",
         show_root: bool = False,
         parent: QtCore.QObject | None = None,
+        **kwargs,
     ):
-        self.fs = fs
-        self.root_marker = fs.root_marker
-        self.protocol = fs.protocol
-        self.sep = fs.sep
-        super().__init__(obj, columns=COLUMNS, parent=parent, show_root=show_root)
+        self.set_protocol(protocol, **kwargs)
+        obj = self.fs.info(root)
+        columns = self._get_columns_for_protocol(protocol)
+        super().__init__(obj, columns=columns, parent=parent, show_root=show_root)
+
+    def set_protocol(self, protocol: str, **kwargs):
+        self.fs = fsspec.filesystem(protocol, **kwargs)
+
+    def _get_columns_for_protocol(self, protocol):
+        match self.fs.protocol:
+            case "github":
+                return [
+                    col
+                    for col in COLUMNS
+                    if col.identifier in {"name", "mode", "type", "size", "sha"}
+                ]
+            case "file":
+                return [col for col in COLUMNS if col.identifier != "sha"]
+            case _:
+                return COLUMNS
 
     def _fetch_object_children(self, obj: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         """Fetch the children of a Python object.
@@ -530,7 +548,6 @@ if __name__ == "__main__":
     import sys
 
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    import fsspec
 
     from prettyqt import widgets
 
