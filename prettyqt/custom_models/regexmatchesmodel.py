@@ -42,7 +42,7 @@ class RegexMatchesModel(core.AbstractTableModel):
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
-        return len(self.matches) if not parent.isValid() else 0
+        return 0 if parent.isValid() else len(self.matches)
 
 
 if __name__ == "__main__":

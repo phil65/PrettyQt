@@ -141,22 +141,21 @@ class AccordionItem(widgets.GroupBox):
         brush = gui.Brush(
             gui.Color(255, 255, 255, 160), QtCore.Qt.BrushStyle.SolidPattern
         )
-        if not self.isCollapsed():
-            tl, tr, tp = (
-                core.Point(x + 9, y + 8),
-                core.Point(x + 19, y + 8),
-                core.Point(x + 14, y + 13),
-            )
-            points = [tl, tr, tp]
-            triangle = gui.Polygon(points)
-        else:
-            tl, tr, tp = (
+        tl, tr, tp = (
+            (
                 core.Point(x + 11, y + 6),
                 core.Point(x + 16, y + 11),
                 core.Point(x + 11, y + 16),
             )
-            points = [tl, tr, tp]
-            triangle = gui.Polygon(points)
+            if self.isCollapsed()
+            else (
+                core.Point(x + 9, y + 8),
+                core.Point(x + 19, y + 8),
+                core.Point(x + 14, y + 13),
+            )
+        )
+        points = [tl, tr, tp]
+        triangle = gui.Polygon(points)
         currentBrush = painter.brush()
         painter.setBrush(brush)
         painter.drawPolygon(triangle)
@@ -173,7 +172,6 @@ class AccordionItem(widgets.GroupBox):
             y = self.rect().y()
             w = self.rect().width() - 1
             h = self.rect().height() - 1
-            r = 8
             light_color = self.palette().color(gui.Palette.ColorRole.Light)
             shadow_color = self.palette().color(gui.Palette.ColorRole.Shadow)
             # draw a rounded style
@@ -195,6 +193,7 @@ class AccordionItem(widgets.GroupBox):
                 pen.setWidthF(0.6)
                 painter.setPen(pen)
 
+                r = 8
                 painter.drawRoundedRect(x + 1, y + 1, w - 1, h - 1, r, r)
 
                 pen.setColor(shadow_color)
@@ -489,10 +488,14 @@ class AccordionWidget(widgets.ScrollArea):
 
     def indexOf(self, widget):
         layout = self.widget().layout()
-        for index in range(layout.count()):
-            if layout.itemAt(index).widget().widget() == widget:
-                return index
-        return -1
+        return next(
+            (
+                index
+                for index in range(layout.count())
+                if layout.itemAt(index).widget().widget() == widget
+            ),
+            -1,
+        )
 
     def is_boxed_mode(self):
         return self._rollout_style == self.RolloutStyle.Boxed
