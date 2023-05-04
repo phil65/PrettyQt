@@ -27,8 +27,9 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         text: str = "",
         parent: QtWidgets.QWidget | None = None,
         read_only: bool = False,
+        **kwargs,
     ):
-        super().__init__(parent)
+        super().__init__(parent, **kwargs)
         self._allow_wheel_zoom = False
         self.validator: QtGui.QValidator | None = None
         self.textChanged.connect(self._on_value_change)
