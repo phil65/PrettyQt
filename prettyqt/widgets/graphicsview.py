@@ -57,8 +57,50 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         if not args or not isinstance(args[0], QtWidgets.QGraphicsScene):
             self.setScene(widgets.GraphicsScene())
 
+    def enable_mousewheel_zoom(self, state: bool = True):
+        if state:
+            self.viewport().installEventFilter(self)
+        else:
+            self.viewport().removeEventFilter(self)
+
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
+
+    def eventFilter(self, source, event) -> bool:
+        if source is not self.viewport() or event.type() != event.Type.Wheel:
+            return super().eventFilter(source, event)
+        # Zoom Factor
+        zoom_in_factor = 1.25
+        zoom_out_factor = 1 / zoom_in_factor
+
+        # Set Anchors
+        self.setTransformationAnchor(self.ViewportAnchor.NoAnchor)
+        self.setResizeAnchor(self.ViewportAnchor.NoAnchor)
+
+        # Save the scene pos
+        old_pos = self.mapToScene(event.position().toPoint())
+
+        # Zoom
+        zoom_factor = zoom_in_factor if event.angleDelta().y() > 0 else zoom_out_factor
+        self.scale(zoom_factor, zoom_factor)
+
+        # # Get the new position
+        new_pos = self.mapToScene(event.position().toPoint())
+
+        # Move scene to old position
+        delta = new_pos - old_pos
+        self.translate(delta.x(), delta.y())
+        return True
+
+    def get_zoom(self) -> float:
+        """Return the viewer zoom level.
+
+        Returns:
+            float: zoom level.
+        """
+        transform = self.transform()
+        cur_scale = (transform.m11(), transform.m22())
+        return float(f"{cur_scale[0] - 1.0:0.2f}")
 
     def add_item(self, *args):
         return self.scene().addItem(*args)
@@ -66,7 +108,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
     def remove_item(self, *args):
         return self.scene().removeItem(*args)
 
-    def get_view_rect(self):
+    def get_view_rect(self) -> QtCore.QRect:
         """Return the boundaries of the view in scene coordinates."""
         r = QtCore.QRectF(self.rect())
         return self.viewportTransform().inverted()[0].mapRect(r)
