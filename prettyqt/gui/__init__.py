@@ -50,6 +50,7 @@ from .textobjectinterface import TextObjectInterface
 from .drag import Drag
 from .screen import Screen
 from .keysequence import KeySequence
+from .surfaceformat import SurfaceFormat
 from .surface import Surface, SurfaceMixin
 from .window import Window, WindowMixin
 from .icon import Icon
@@ -274,6 +275,7 @@ __all__ = [
     "Action",
     "ActionMixin",
     "ActionGroup",
+    "SurfaceFormat",
     "Surface",
     "SurfaceMixin",
     "Window",
