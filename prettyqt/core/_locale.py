@@ -616,6 +616,35 @@ MEASUREMENT_SYSTEM = bidict(
     imperial_uk=QtCore.QLocale.MeasurementSystem.ImperialUKSystem,
 )
 
+DataSizeFormatStr = Literal["metric", "imperial_us", "imperial_uk"]
+
+DATA_SIZE_FORMAT = bidict(
+    iec=QtCore.QLocale.DataSizeFormat.DataSizeIecFormat,
+    traditional=QtCore.QLocale.DataSizeFormat.DataSizeTraditionalFormat,
+    si=QtCore.QLocale.DataSizeFormat.DataSizeSIFormat,
+)
+
+NumberOptionStr = Literal[
+    "default",
+    "omit_group_separator",
+    "reject_group_separator",
+    "omit_leading_zero_in_exponent",
+    "reject_leading_zero_in_exponent",
+    "include_trailing_zeroes_after_dot",
+    "reject_trailing_zeroes_after_dot",
+]
+
+NO = QtCore.QLocale.NumberOption
+NUMBER_OPTION = bidict(
+    default=NO.DefaultNumberOptions,
+    omit_group_separator=NO.OmitGroupSeparator,
+    reject_group_separator=NO.RejectGroupSeparator,
+    omit_leading_zero_in_exponent=NO.OmitLeadingZeroInExponent,
+    reject_leading_zero_in_exponent=NO.RejectLeadingZeroInExponent,
+    include_trailing_zeroes_after_dot=NO.IncludeTrailingZeroesAfterDot,
+    reject_trailing_zeroes_after_dot=NO.RejectTrailingZeroesAfterDot,
+)
+
 
 class Locale(QtCore.QLocale):
     def __repr__(self):
@@ -634,6 +663,11 @@ class Locale(QtCore.QLocale):
 
     def get_measurement_system(self) -> MeasurementSystemStr:
         return MEASUREMENT_SYSTEM.inverse[self.measurementSystem()]
+
+    def get_formatted_data_size(
+        self, size: int, precision: int = 2, fmt: DataSizeFormatStr = "iec"
+    ) -> str:
+        return self.formattedDataSize(size, precision, DATA_SIZE_FORMAT[fmt])
 
 
 if __name__ == "__main__":
