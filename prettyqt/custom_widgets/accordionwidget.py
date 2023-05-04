@@ -48,7 +48,7 @@ class AccordionItem(widgets.GroupBox):
     def get_drag_drop_rect(self) -> core.Rect:
         return core.Rect(25, 7, 10, 6)
 
-    def get_drag_drop_mode(self):
+    def get_drag_drop_mode(self) -> AccordionWidget.RolloutStyle:
         return self._drag_drop_mode
 
     def dragMoveEvent(self, event):
@@ -177,7 +177,7 @@ class AccordionItem(widgets.GroupBox):
             light_color = self.palette().color(gui.Palette.ColorRole.Light)
             shadow_color = self.palette().color(gui.Palette.ColorRole.Shadow)
             # draw a rounded style
-            if self._rollout_style == 2:
+            if self._rollout_style == AccordionWidget.RolloutStyle.Rounded:
                 # draw the text
                 painter.drawText(
                     x + 33,
@@ -203,7 +203,7 @@ class AccordionItem(widgets.GroupBox):
                 painter.drawRoundedRect(x, y, w - 1, h - 1, r, r)
 
             # draw a square style
-            if self._rollout_style == 3:
+            if self._rollout_style == AccordionWidget.RolloutStyle.Square:
                 # draw the text
                 painter.drawText(
                     x + 33, y + 3, w, 16, constants.ALIGN_TOP_LEFT, self.title()
@@ -224,7 +224,7 @@ class AccordionItem(widgets.GroupBox):
                 painter.drawRect(x, y, w - 1, h - 1)
 
             # draw a Maya style
-            if self._rollout_style == 4:
+            if self._rollout_style == AccordionWidget.RolloutStyle.Maya:
                 # draw the text
                 painter.drawText(
                     x + 33,
@@ -276,7 +276,7 @@ class AccordionItem(widgets.GroupBox):
                     painter.drawRect(body_rect_shadow)
 
             # draw a boxed style
-            elif self._rollout_style == 1:
+            elif self._rollout_style == AccordionWidget.RolloutStyle.Boxed:
                 if self.isCollapsed():
                     arect = core.Rect(x + 1, y + 9, w - 1, 4)
                     brect = core.Rect(x, y + 8, w - 1, 4)
@@ -332,9 +332,9 @@ class AccordionItem(widgets.GroupBox):
                     painter.drawLine(left, y, right, y)
 
     def setCollapsed(self, state: bool = True):
-        if self.isCollapsible():
-            self._widget.setUpdatesEnabled(False)
-
+        if not self.isCollapsible():
+            return
+        with self._widget.updates_off():
             self._collapsed = state
 
             if state:
@@ -347,7 +347,6 @@ class AccordionItem(widgets.GroupBox):
                 self.widget().setVisible(True)
 
             # self._widget.emitItemCollapsed(self)
-            self._widget.setUpdatesEnabled(True)
 
     def setCollapsible(self, state: bool = True):
         self._collapsible = state
@@ -436,37 +435,33 @@ class AccordionWidget(widgets.ScrollArea):
         collapsed: object = False,
         index: object = None,
     ) -> object:
-        self.setUpdatesEnabled(False)
-        item = self._ItemClass(title, widget)
-        item.set_rollout_style(self.get_rollout_style())
-        item.set_drag_drop_mode(self.get_drag_drop_mode())
-        layout = self.widget().layout()
-        if index is None:  # append if not specified index
-            index = layout.count() - 1
-        layout.insertWidget(index, item)
-        layout.setStretchFactor(item, 0)
+        with self.updates_off():
+            item = self._ItemClass(title, widget)
+            item.set_rollout_style(self.get_rollout_style())
+            item.set_drag_drop_mode(self.get_drag_drop_mode())
+            layout = self.widget().layout()
+            if index is None:  # append if not specified index
+                index = layout.count() - 1
+            layout.insertWidget(index, item)
+            layout.setStretchFactor(item, 0)
 
-        if collapsed:
-            item.setCollapsed(collapsed)
-
-        self.setUpdatesEnabled(True)
-        return item
+            if collapsed:
+                item.setCollapsed(collapsed)
+            return item
 
     def clear(self):
-        self.setUpdatesEnabled(False)
-        layout = self.widget().layout()
-        while layout.count() > 1:
-            item = layout.itemAt(0)
+        with self.updates_off():
+            layout = self.widget().layout()
+            while layout.count() > 1:
+                item = layout.itemAt(0)
 
-            # remove the item from the layout
-            w = item.widget()
-            layout.removeItem(item)
+                # remove the item from the layout
+                w = item.widget()
+                layout.removeItem(item)
 
-            # close the widget and delete it
-            w.close()
-            w.deleteLater()
-
-        self.setUpdatesEnabled(True)
+                # close the widget and delete it
+                w.close()
+                w.deleteLater()
 
     # def eventFilter(self, object, event) -> bool:
     #     if event.type() == QtCore.QEvent.Type.MouseButtonPress:
@@ -602,17 +597,16 @@ class AccordionWidget(widgets.ScrollArea):
             item.set_rollout_style(self._rollout_style)
 
     def takeAt(self, index):
-        self.setUpdatesEnabled(False)
-        layout = self.widget().layout()
-        widget = None
-        if 0 <= index < layout.count() - 1:
-            item = layout.itemAt(index)
-            widget = item.widget()
+        with self.updates_off():
+            layout = self.widget().layout()
+            widget = None
+            if 0 <= index < layout.count() - 1:
+                item = layout.itemAt(index)
+                widget = item.widget()
 
-            layout.removeItem(item)
-            widget.close()
-        self.setUpdatesEnabled(True)
-        return widget
+                layout.removeItem(item)
+                widget.close()
+            return widget
 
     def widgetAt(self, index):
         return item.widget() if (item := self.itemAt(index)) else None
