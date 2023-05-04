@@ -468,7 +468,7 @@ class AccordionWidget(widgets.ScrollArea):
 
         self.setUpdatesEnabled(True)
 
-    # def eventFilter(self, object, event):
+    # def eventFilter(self, object, event) -> bool:
     #     if event.type() == QtCore.QEvent.Type.MouseButtonPress:
     #         self.mousePressEvent(event)
     #         return True

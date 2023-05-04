@@ -27,7 +27,7 @@ class AnimatedToolTipEventFilter(QtCore.QObject):
         self.fade_anim.apply_to(self.tool_tip)
         self.animation = self.slide_anim | self.fade_anim
 
-    def eventFilter(self, obj: QtWidgets.QWidget, event: QtCore.QEvent):
+    def eventFilter(self, obj: QtWidgets.QWidget, event: QtCore.QEvent) -> bool:
         match event.type():
             case QtCore.QEvent.Type.Enter:
                 # self.tool_tip.adjustSize()

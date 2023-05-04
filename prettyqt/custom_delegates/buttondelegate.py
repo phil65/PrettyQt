@@ -21,7 +21,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
 
     #     parent.viewport().installEventFilter(self)
 
-    # def eventFilter(self, source, event):
+    # def eventFilter(self, source, event) -> bool:
     #     if event.type() == event.Type.MouseMove:
     #         return True
     #     return super().eventFilter(source, event)

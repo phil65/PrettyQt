@@ -155,7 +155,7 @@ class TitleBar(widgets.Frame):
         elif icon == "restore":
             self.maximize_button.set_icon("mdi.window-restore")
 
-    def eventFilter(self, obj, e):
+    def eventFilter(self, obj, e) -> bool:
         if obj is self.window() and e.type() == QtCore.QEvent.Type.WindowStateChange:
             if self.window().isMaximized():
                 self.set_maximize_button_icon("restore")

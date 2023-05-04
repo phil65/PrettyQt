@@ -10,7 +10,7 @@ class HoverIconEventFilter(core.Object):
         self.hover = hover
         self.pressed = pressed
 
-    def eventFilter(self, obj, event: core.Event):
+    def eventFilter(self, obj, event: core.Event) -> bool:
         # if obj is not self.parent():
         #     return super().eventFilter(obj, event)
         match event.type():

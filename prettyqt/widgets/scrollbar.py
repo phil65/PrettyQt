@@ -93,7 +93,7 @@ class SmoothScrollBar(ScrollBar):
     def reset_value(self, value):
         self._value = value
 
-    def eventFilter(self, source, event):
+    def eventFilter(self, source, event) -> bool:
         if event.type() == core.Event.Type.Wheel and source == self.widget.viewport():
             self.widget.v_scrollbar.scroll_by_value(-event.angleDelta().y())
             return True
