@@ -1,3 +1,12 @@
+## v1.34.0 (2023-05-04)
+
+### Feat
+
+- **qml**: add QmlPropertyMap class
+- **FsSpecModel**: filter columns depending on protocol
+- **GraphicsView**: add zooming option
+- add AccordionWidget
+
 ## v1.33.1 (2023-05-04)
 
 ### Fix
