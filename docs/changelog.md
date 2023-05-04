@@ -1,3 +1,48 @@
+## v1.33.0 (2023-05-04)
+
+### Feat
+
+- **GraphicsScene**: add grid functionality
+- add DebouncedSignal class
+- **TabWidget**: allow QWidget for remove_tab
+- **AbstractNativeEventFilter**: add install method
+- add taskbaritem module
+- **HoverIconEventFilter**: add pressed state
+- **VariantDelegate**: deal with enums
+- add EnumComboBox
+- **Completer**: add set_strings method
+- add FsSpecCompleter
+- **Widget**: add get_win_id() method
+- **TtextTableCell**: add get_first/last_cursor_position methods
+- **LineEdit**: add set_completer method
+- **Completer**: add get_completions() method
+- **FsSpecModel**: add get_file_content method
+- **KeySequence**: overload for to_shortcut_str
+- **LineEdit**: add tab_pressed signal
+- **qthelp**: add HelpFilterSettingsWidget class
+- **Shortcut**: add get_keys method
+- **TreeWidgetItem**: add collapse / expand / get_text_alignment methods
+- **TableWidget**: allow QModelIndex for closePersistentEditor / isPersistentEditorOpen
+- **TableWidgetItem**: add set_editable method
+- **TreeWidget**: add some more methods
+- **gui**: add TextBlockFormat class
+- **TreeWidgetItem**: add some methods
+- **GraphicsView**: add get_view_rect / get_pixel_size
+- **GraphicsView**: add add_item / remove_item methods
+- **GraphicsView**: set our own scene subclass by default
+- **MimeData**: add to_dict and clone methods
+- add VariantDelegate class
+
+### Fix
+
+- **TabBar**: qt6 regression (PointF instead of Point)
+- **ColumnItemModel**: reset model in set_root_item
+- **AwesomeFileIconProvider**: missed a case for icon()
+- **AudioDevice**: fix get_channel_config
+- **Charts**: dont use axisX / axisY (missing in qt6)
+- **ButtonDelegate**: only apply to correct column
+- **RegexInput**: catch exception when regex invalid
+
 ## v1.32.0 (2023-04-30)
 
 ### Feat
