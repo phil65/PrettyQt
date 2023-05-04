@@ -9,7 +9,7 @@ from prettyqt.qt import QtCore
 class DebouncedSignal:
     """Signal definition.
 
-    Instances of this class will be replaced with a fake signal class
+    Instances of this class will be replaced with a QObject holding a SignalInstance
      by the SignalMeta metaclass.
     """
 
@@ -20,12 +20,11 @@ class DebouncedSignal:
 
 class SignalMeta(type(QtCore.QObject)):
     def __new__(cls, name, bases, attrs, **kwargs):
-        to_replace = {}
-        for key in list(attrs.keys()):
-            attr = attrs[key]
-            if not isinstance(attr, DebouncedSignal):
-                continue
-            to_replace[key] = (attr.args, attr.kwargs)
+        to_replace = {
+            k: (v.args, v.kwargs)
+            for k, v in attrs.items()
+            if isinstance(v, DebouncedSignal)
+        }
         new_cls = super().__new__(cls, name, bases, attrs, **kwargs)
         user_init = new_cls.__init__
 
