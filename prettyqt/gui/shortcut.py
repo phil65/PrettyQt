@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError
 
 
@@ -38,6 +38,28 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
             shortcut context
         """
         return constants.SHORTCUT_CONTEXT.inverse[self.context()]
+
+    def set_key(
+        self,
+        key: str
+        | QtCore.QKeyCombination
+        | QtCore.QKeySequence
+        | QtGui.QKeySequence.StandardKey,
+    ):
+        keysequence = gui.KeySequence(key)
+        self.setKey(keysequence)
+
+    def set_keys(
+        self,
+        keys: list[
+            str
+            | QtCore.QKeyCombination
+            | QtCore.QKeySequence
+            | QtGui.QKeySequence.StandardKey
+        ],
+    ):
+        keysequences = [gui.KeySequence(key) for key in keys]
+        self.setKeys(keysequences)
 
     def get_key(self) -> gui.KeySequence:
         """Return the shortcut's key sequence.
