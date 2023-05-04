@@ -24,6 +24,12 @@ class ColorComboBox(widgets.ComboBox):
     def __repr__(self):
         return get_repr(self, self._current_color)
 
+    def clear(self):
+        self._current_color = gui.Color("white")
+        super().clear()
+        for i in gui.Color.colorNames():
+            self.addItem(iconprovider.for_color(i), i)
+
     def set_current_color(self, color: datatypes.ColorType):
         self._current_color = colors.get_color(color)
         for color_name in gui.Color.colorNames():
