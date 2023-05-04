@@ -17,7 +17,7 @@ SMALL_COL_WIDTH = 120
 MEDIUM_COL_WIDTH = 200
 
 
-@dataclass(frozen=True)
+@dataclass  # (frozen=True)
 class ColumnItem:
     """Determines how an object attribute is shown."""
 

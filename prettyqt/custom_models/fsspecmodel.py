@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+from dataclasses import dataclass
 import datetime
 import enum
 import itertools
@@ -67,7 +68,13 @@ def get_filename(path):
     return pathlib.Path(path).name if path else ""
 
 
-ATTR_MODEL_NAME = custom_models.ColumnItem(
+@dataclass  # (frozen=True)
+class FsSpecColumnItem(custom_models.ColumnItem):
+    identifier: str = ""
+
+
+ATTR_MODEL_NAME = FsSpecColumnItem(
+    identifier="name",
     name="Name",
     doc="The name of the object.",
     label=lambda x: get_filename(x.obj["name"]),
@@ -80,26 +87,30 @@ ATTR_MODEL_NAME = custom_models.ColumnItem(
 )
 
 
-ATTR_MODEL_PATH = custom_models.ColumnItem(
+ATTR_MODEL_PATH = FsSpecColumnItem(
+    identifier="name",
     name="Path",
     doc="A path",
     label=lambda x: x.obj["name"] or "",
 )
 
-ATTR_MODEL_SIZE = custom_models.ColumnItem(
+ATTR_MODEL_SIZE = FsSpecColumnItem(
+    identifier="size",
     name="Size",
     doc="Item size.",
     label=lambda x: sizeof_fmt(x.obj["size"]) if x.obj["size"] > 0 else "",
     sort_value=lambda x: x.obj["size"],
 )
 
-ATTR_MODEL_TYPE = custom_models.ColumnItem(
+ATTR_MODEL_TYPE = FsSpecColumnItem(
+    identifier="type",
     name="Type",
     doc="Item type.",
     label=lambda x: x.obj["type"] or "",
 )
 
-ATTR_MODEL_CREATED = custom_models.ColumnItem(
+ATTR_MODEL_CREATED = FsSpecColumnItem(
+    identifier="created",
     name="Created",
     doc="Date created.",
     label=lambda x: datetime.datetime.fromtimestamp(x.obj["created"])
@@ -107,7 +118,8 @@ ATTR_MODEL_CREATED = custom_models.ColumnItem(
     else "",
 )
 
-ATTR_MODEL_MODIFIED = custom_models.ColumnItem(
+ATTR_MODEL_MODIFIED = FsSpecColumnItem(
+    identifier="mtime",
     name="Modified",
     doc="Date modified.",
     label=lambda x: datetime.datetime.fromtimestamp(x.obj["mtime"])
@@ -115,18 +127,26 @@ ATTR_MODEL_MODIFIED = custom_models.ColumnItem(
     else "",
 )
 
-ATTR_MODEL_PERMISSIONS = custom_models.ColumnItem(
+ATTR_MODEL_PERMISSIONS = FsSpecColumnItem(
+    identifier="mode",
     name="Permissions",
     doc="File permissions.",
     label=lambda x: oct(int(x.obj["mode"]))[-4:] if x.obj.get("mode") else "",
 )
 
-ATTR_MODEL_IS_LINK = custom_models.ColumnItem(
+ATTR_MODEL_IS_LINK = FsSpecColumnItem(
+    identifier="islink",
     name="Link",
-    doc="Date created.",
+    doc="Symbolic link.",
     checkstate=lambda x: x.obj.get("islink") or False,
 )
 
+ATTR_MODEL_SHA = FsSpecColumnItem(
+    identifier="sha",
+    name="SHA",
+    doc="SHA",
+    label=lambda x: x.obj["sha"] or "",
+)
 
 COLUMNS = [
     ATTR_MODEL_NAME,
@@ -137,6 +157,7 @@ COLUMNS = [
     ATTR_MODEL_CREATED,
     ATTR_MODEL_PERMISSIONS,
     ATTR_MODEL_IS_LINK,
+    ATTR_MODEL_SHA,
 ]
 
 
