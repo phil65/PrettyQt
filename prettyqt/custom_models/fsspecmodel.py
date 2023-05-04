@@ -58,14 +58,6 @@ def octal_to_string(octal: int) -> str:
     return result
 
 
-def sizeof_fmt(num, suffix="B"):
-    for unit in ["", "Ki", "Mi", "Gi", "Ti", "Pi", "Ei", "Zi"]:
-        if abs(num) < 1024.0:
-            return f"{num:3.1f}{unit}{suffix}"
-        num /= 1024.0
-    return f"{num:.1f}Yi{suffix}"
-
-
 def get_filename(path):
     return pathlib.Path(path).name if path else ""
 
@@ -73,6 +65,9 @@ def get_filename(path):
 @dataclass  # (frozen=True)
 class FsSpecColumnItem(custom_models.ColumnItem):
     identifier: str = ""
+
+
+loc = core.Locale()
 
 
 ATTR_MODEL_NAME = FsSpecColumnItem(
@@ -100,7 +95,9 @@ ATTR_MODEL_SIZE = FsSpecColumnItem(
     identifier="size",
     name="Size",
     doc="Item size.",
-    label=lambda x: sizeof_fmt(x.obj["size"]) if x.obj["size"] > 0 else "",
+    label=lambda x: loc.get_formatted_data_size(x.obj["size"])
+    if x.obj["size"] > 0
+    else "",
     sort_value=lambda x: x.obj["size"],
 )
 
