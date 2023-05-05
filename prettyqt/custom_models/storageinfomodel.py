@@ -1,25 +1,9 @@
 from __future__ import annotations
 
-import math
-
 from prettyqt import core, custom_models
 
 
-def size_to_string(size: int) -> str:
-    if size <= 0:
-        return "0 b"
-    units = ["b", "kB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"]
-    power = int(math.log(size, 1024))
-    try:
-        unit = units[power]
-    except IndexError:
-        unit = units[-1]
-        power = len(units) - 1
-    decimals = 0 if power == 0 else 2
-    normsize = size / math.pow(1024, power)
-    #: this should expand to "1.23 GB"
-    return "%0.*f %s" % (decimals, normsize, unit)
-
+loc = core.Locale()
 
 COL_ROOT_PATH = custom_models.ColumnItem(
     name="Root path",
@@ -48,19 +32,19 @@ COL_FILE_SYSTEM = custom_models.ColumnItem(
 COL_TOTAL = custom_models.ColumnItem(
     name="Total",
     doc="Total",
-    label=lambda volume: size_to_string(volume.bytesTotal()),
+    label=lambda volume: loc.get_formatted_data_size(volume.bytesTotal()),
 )
 
 COL_FREE = custom_models.ColumnItem(
     name="Free",
     doc="Free",
-    label=lambda volume: size_to_string(volume.bytesFree()),
+    label=lambda volume: loc.get_formatted_data_size(volume.bytesFree()),
 )
 
 COL_AVAILABLE = custom_models.ColumnItem(
     name="Available",
     doc="Available",
-    label=lambda volume: size_to_string(volume.bytesAvailable()),
+    label=lambda volume: loc.get_formatted_data_size(volume.bytesAvailable()),
 )
 
 COL_READY = custom_models.ColumnItem(
