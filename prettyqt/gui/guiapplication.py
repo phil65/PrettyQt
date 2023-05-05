@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 import contextlib
+import sys
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -170,6 +171,23 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
     def set_badge_number(self, number: int | None):
         self.setBadgeNumber(number or 0)
 
+    def set_progress_value(self, value: int, total: int = 100):
+        windows = self.topLevelWindows()
+        if not windows:
+            return None
+        if sys.platform.startswith("win"):
+            from prettyqt.utils.platforms.windows import taskbaritem
+
+            window_id = windows[0].winId()
+            tb = taskbaritem.TaskBarItem(window_id)
+            tb.set_progress_value(value, total)
+
 
 class GuiApplication(GuiApplicationMixin, QtGui.QGuiApplication):
     pass
+
+
+if __name__ == "__main__":
+    app = gui.app()
+    app.set_badge_number(5)
+    app.main_loop()
