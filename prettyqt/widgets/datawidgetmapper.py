@@ -16,6 +16,16 @@ SubmitPolicyStr = Literal["auto", "manual"]
 
 
 class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
+    def __setitem__(self, key: int, value: QtWidgets.QWidget):
+        self.addMapping(value, key)
+
+    def __getitem__(self, key: int) -> QtWidgets.QWidget:
+        return self.mappedWidgetAt(key)
+
+    def __delitem__(self, key: int):
+        widget = self.mappedWidgetAt(key)
+        self.removeMapping(widget)
+
     def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the data widget mapper.
 
