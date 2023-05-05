@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
@@ -75,3 +77,6 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
         if column is None:
             column = -1
         super().sort(column, ascending)
+
+    def get_sort_order(self) -> Literal["ascending", "descending"]:
+        return "ascending" if self.sortOrder() == constants.ASCENDING else "descending"
