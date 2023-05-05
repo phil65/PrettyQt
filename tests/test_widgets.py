@@ -165,6 +165,12 @@ def test_completer(qtbot):
     with pytest.raises(InvalidParamError):
         completer.set_filter_mode("test")
     assert completer.get_filter_mode() == "contains"
+    strings = ["a", "b"]
+    completer.set_strings(strings)
+    assert completer.get_completions() == strings
+    completer.set_case_sensitive(True)
+    completer.set_case_sensitive(False)
+    assert not completer.is_case_sensitive()
 
 
 def test_dateedit(qtbot):
@@ -1024,6 +1030,10 @@ def test_slider(qtbot):
     widget.set_vertical()
     assert widget.is_vertical()
     with pytest.raises(InvalidParamError):
+        widget.set_repeat_action("test")
+    widget.set_repeat_action("page_step_add")
+    assert widget.get_repeat_action() == "page_step_add"
+    with pytest.raises(InvalidParamError):
         widget.set_tick_position("test")
     widget.set_tick_position("below")
     assert widget.get_tick_position() == "below"
@@ -1031,6 +1041,8 @@ def test_slider(qtbot):
     with pytest.raises(InvalidParamError):
         widget.set_orientation("test")
     assert widget.get_orientation() == "horizontal"
+    widget.set_auto_scroll_to_end(True)
+    widget.set_auto_scroll_to_end(False)
 
 
 def test_statusbar(qtbot):
@@ -1268,7 +1280,10 @@ def test_toolbutton(qtbot):
     qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
+    widget.set_shortcut(None)
     widget.set_shortcut("Ctrl+A")
+    assert widget.get_shortcut()
+    widget.set_icon_size((20, 10))
     widget.set_icon_size(20)
     action = gui.Action()
     widget.set_default_action(action)
