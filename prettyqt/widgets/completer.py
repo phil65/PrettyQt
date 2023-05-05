@@ -132,7 +132,7 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         Returns:
             case sensitivity
         """
-        return bool(self.caseSensitivity())
+        return self.caseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
 
 
 if __name__ == "__main__":
