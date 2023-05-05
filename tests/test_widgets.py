@@ -97,13 +97,13 @@ def test_checkbox(qtbot):
     qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
-    assert bool(widget) is False
+    assert not bool(widget)
     widget.set_value(True)
     assert widget.get_value() is True
     with pytest.raises(InvalidParamError):
         widget.set_checkstate("test")
     widget.is_on = False
-    assert widget.is_on is False
+    assert not widget.is_on
 
 
 def test_colordialog(qtbot):
@@ -1592,7 +1592,7 @@ def test_widget(qtbot):
     with widget.updates_off():
         widget.set_title("test2")
     widget.enabled = True
-    assert widget.enabled is True
+    assert widget.enabled
     widget.set_modality("window")
     with pytest.raises(InvalidParamError):
         widget.set_modality("test")

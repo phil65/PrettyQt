@@ -1,7 +1,9 @@
 """Tests for `prettyqt` package."""
 
+
 import importlib.util
 import inspect
+import itertools
 import pathlib
 import pickle
 import sys
@@ -116,7 +118,7 @@ def test_color(qapp):
 def test_colorspace():
     space = gui.ColorSpace()
     bytes(space)
-    assert bool(space) is False
+    assert not bool(space)
     with open("data.pkl", "wb") as jar:
         pickle.dump(space, jar)
     with open("data.pkl", "rb") as jar:
@@ -510,9 +512,8 @@ def test_statictext():
 
 def test_transform():
     transform = gui.Transform()
-    for i in range(3):
-        for j in range(3):
-            assert transform[i, j] in [0, 1]
+    for i, j in itertools.product(range(3), range(3)):
+        assert transform[i, j] in [0, 1]
     bytes(transform)
     repr(transform)
     assert transform.get_type() == "none"
@@ -788,7 +789,7 @@ def test_polygon():
     with open("data.pkl", "rb") as jar:
         poly = pickle.load(jar)
     poly.add_points((0, 1), core.Point(2, 2))
-    assert bool(poly) is True
+    assert bool(poly)
     assert core.Point(1, 0) in poly
     p = core.Point(5, 5)
     poly[5] = p
@@ -948,7 +949,7 @@ def test_textformat():
     fmt[1] = "test"
     assert fmt[1] == "test"
     assert 1 in fmt
-    assert bool(fmt) is False
+    assert not bool(fmt)
     repr(fmt)
     fmt.get_background()
     fmt.get_foreground()
@@ -1013,7 +1014,7 @@ def test_validator():
 def test_vector3d():
     vector = gui.Vector3D(0, 0, 1)
     assert abs(vector) == 1.0
-    assert bool(vector) is True
+    assert bool(vector)
     vector.to_point()
     vector.to_pointf()
 
@@ -1021,6 +1022,6 @@ def test_vector3d():
 def test_vector4d():
     vector = gui.Vector4D(0, 0, 0, 1)
     assert abs(vector) == 1.0
-    assert bool(vector) is True
+    assert bool(vector)
     vector.to_point()
     vector.to_pointf()
