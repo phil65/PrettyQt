@@ -10,6 +10,9 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
 
 
+DB = core.MimeDatabase()
+
+
 class MimeData(core.ObjectMixin, QtCore.QMimeData):
     def __len__(self):
         return len(self.formats())
@@ -49,9 +52,11 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
     def values(self) -> Iterator[Any]:
         return (self.get_data(key) for key in self.formats())
 
-    def set_svg_data(self, string: str):
-        data = string.encode()
-        self.setData("image/svg+xml", data)
+    def set_data_for_extension(self, extension: str, string: str):
+        if mimetype := DB.get_mime_types_for_filename(f".{extension}"):
+            self.setData(mimetype, string.encode())
+        else:
+            raise ValueError(extension)
 
     def set_path_data(self, paths: list[datatypes.PathType]):
         urls = [core.Url.from_local_file(p) for p in paths]

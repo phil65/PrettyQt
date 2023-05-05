@@ -117,8 +117,8 @@ from .regularexpressionmatch import RegularExpressionMatch
 from .regularexpressionmatchiterator import RegularExpressionMatchIterator
 from .regularexpression import RegularExpression
 from .mimetype import MimeType
-from .mimedata import MimeData
 from .mimedatabase import MimeDatabase
+from .mimedata import MimeData
 from .runnable import Runnable
 
 # from .modelindex import ModelIndex
