@@ -67,6 +67,13 @@ class TaskBarItem:
             case _:
                 raise ValueError(value)
 
+    def set_progress(self, value: int, total: int = 100):
+        if 0 < value < total:
+            self.set_progress_state("normal")
+        else:
+            self.set_progress_state("no_progress")
+            self.set_progress_value(value, total)
+
     def set_progress_value(self, value: int, total: int = 100):
         if value > 100 or value < 0 or value > total:
             raise ValueError(value)
