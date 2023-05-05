@@ -44,6 +44,24 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
             self.microVersion(),
         )
 
+    @property
+    def _type(self):
+        return self.get_type()
+
+    @property
+    def _majorVersion(self):
+        return self.majorVersion()
+
+    @property
+    def _minorVersion(self):
+        return self.minorVersion()
+
+    @property
+    def _macroVersion(self):
+        return self.macroVersion()
+
+    __match_args__ = ("_type", "_majorVersion", "_minorVersion", "_macroVersion")
+
     def __reduce__(self):
         return (
             type(self),

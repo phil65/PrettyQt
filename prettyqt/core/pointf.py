@@ -8,6 +8,16 @@ class PointF(QtCore.QPointF):
     def __repr__(self):
         return get_repr(self, self.x(), self.y())
 
+    @property
+    def _x(self):
+        return self.x()
+
+    @property
+    def _y(self):
+        return self.y()
+
+    __match_args__ = ("_x", "_y")
+
     def __getitem__(self, index) -> float:
         match index:
             case 0:

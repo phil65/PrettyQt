@@ -16,6 +16,24 @@ class Time(QtCore.QTime):
     def __reduce__(self):
         return type(self), (self.hour(), self.minute(), self.second(), self.msec())
 
+    @property
+    def _hour(self):
+        return self.hour()
+
+    @property
+    def _minute(self):
+        return self.minute()
+
+    @property
+    def _second(self):
+        return self.second()
+
+    @property
+    def _msec(self):
+        return self.msec()
+
+    __match_args__ = ("_hour", "_minute", "_second", "_msec")
+
     def add_msecs(self, msecs: int) -> Self:
         return type(self)(self.addMSecs(msecs))
 

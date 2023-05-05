@@ -8,6 +8,16 @@ class Point(QtCore.QPoint):
     def __repr__(self):
         return get_repr(self, self.x(), self.y())
 
+    @property
+    def _x(self):
+        return self.x()
+
+    @property
+    def _y(self):
+        return self.y()
+
+    __match_args__ = ("_x", "_y")
+
     def __getitem__(self, index) -> int:
         match index:
             case 0:
@@ -28,3 +38,10 @@ class Point(QtCore.QPoint):
 
     def __reduce__(self):
         return type(self), (self.x(), self.y())
+
+
+if __name__ == "__main__":
+    p = Point(0, 1)
+    match p:
+        case Point(0, 1):
+            raise Exception("yeah")

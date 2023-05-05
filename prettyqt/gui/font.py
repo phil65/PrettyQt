@@ -167,6 +167,12 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         self.setWeight(state["weight"])
         self.setItalic(state["italic"])
 
+    @property
+    def _family(self):
+        return self.family()
+
+    __match_args__ = ("_family",)
+
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 

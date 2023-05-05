@@ -13,6 +13,20 @@ class Date(QtCore.QDate):
     def __str__(self):
         return self.toString("yyyy-MM-dd")
 
+    @property
+    def _year(self):
+        return self.year()
+
+    @property
+    def _month(self):
+        return self.month()
+
+    @property
+    def _day(self):
+        return self.day()
+
+    __match_args__ = ("_year", "_month", "_day")
+
     def __reduce__(self):
         return type(self), (self.year(), self.month(), self.day())
 

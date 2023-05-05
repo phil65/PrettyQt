@@ -27,6 +27,20 @@ class VersionNumber(QtCore.QVersionNumber):
     def __repr__(self):
         return get_repr(self, self.major(), self.minor(), self.micro())
 
+    @property
+    def _majorVersion(self):
+        return self.majorVersion()
+
+    @property
+    def _minorVersion(self):
+        return self.minorVersion()
+
+    @property
+    def _macroVersion(self):
+        return self.macroVersion()
+
+    __match_args__ = ("_majorVersion", "_minorVersion", "_macroVersion")
+
     def __reduce__(self):
         return type(self), (self.major(), self.minor(), self.micro())
 

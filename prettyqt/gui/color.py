@@ -51,6 +51,24 @@ class Color(QtGui.QColor):
     def __reduce__(self):
         return type(self), (self.red(), self.green(), self.blue(), self.alpha())
 
+    @property
+    def _red(self):
+        return self.red()
+
+    @property
+    def _green(self):
+        return self.green()
+
+    @property
+    def _blue(self):
+        return self.blue()
+
+    @property
+    def _alpha(self):
+        return self.alpha()
+
+    __match_args__ = ("_red", "_green", "_blue", "_alpha")
+
     def serialize_fields(self):
         return dict(color=self.toString())
 

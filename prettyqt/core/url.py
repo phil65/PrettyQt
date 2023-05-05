@@ -86,6 +86,12 @@ class Url(serializemixin.SerializeMixin, QtCore.QUrl):
             if isinstance(path, os.PathLike):
                 self.setScheme("file")
 
+    @property
+    def _toString(self):
+        return self.toString()
+
+    __match_args__ = ("_toString",)
+
     # def __str__(self):
     #     return self.absolutePath()
 

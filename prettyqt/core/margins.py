@@ -13,6 +13,24 @@ class Margins(QtCore.QMargins):
     def __reduce__(self):
         return type(self), (self.left(), self.top(), self.right(), self.bottom())
 
+    @property
+    def _left(self):
+        return self.left()
+
+    @property
+    def _top(self):
+        return self.top()
+
+    @property
+    def _right(self):
+        return self.right()
+
+    @property
+    def _bottom(self):
+        return self.bottom()
+
+    __match_args__ = ("_left", "_top", "_right", "_bottom")
+
     def __bool__(self):
         return not self.isNull()
 

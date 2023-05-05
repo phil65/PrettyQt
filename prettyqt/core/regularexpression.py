@@ -52,6 +52,12 @@ class RegularExpression(QtCore.QRegularExpression):
     def __repr__(self):
         return get_repr(self, self.pattern())
 
+    @property
+    def _pattern(self):
+        return self.pattern()
+
+    __match_args__ = ("_pattern",)
+
     def __reduce__(self):
         return type(self), (self.pattern(), self.flags)
 

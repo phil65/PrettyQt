@@ -60,6 +60,54 @@ class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
             case _:
                 raise ValueError(f"Wrong value {value}")
 
+    @property
+    def _m11(self):
+        return self.m11()
+
+    @property
+    def _m12(self):
+        return self.m12()
+
+    @property
+    def _m13(self):
+        return self.m13()
+
+    @property
+    def _m21(self):
+        return self.m21()
+
+    @property
+    def _m22(self):
+        return self.m22()
+
+    @property
+    def _m23(self):
+        return self.m23()
+
+    @property
+    def _m31(self):
+        return self.m31()
+
+    @property
+    def _m32(self):
+        return self.m32()
+
+    @property
+    def _m33(self):
+        return self.m33()
+
+    __match_args__ = (
+        "_m11",
+        "_m12",
+        "_m13",
+        "_m21",
+        "_m22",
+        "_m23",
+        "_m31",
+        "_m32",
+        "_m33",
+    )
+
     @classmethod
     def clone_from(cls, transform: QtGui.QTransform) -> Self:
         return cls(

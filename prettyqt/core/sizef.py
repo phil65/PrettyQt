@@ -8,6 +8,16 @@ class SizeF(QtCore.QSizeF):
     def __repr__(self):
         return get_repr(self, self.width(), self.height())
 
+    @property
+    def _width(self):
+        return self.width()
+
+    @property
+    def _height(self):
+        return self.height()
+
+    __match_args__ = ("_width", "_height")
+
     def __getitem__(self, index) -> float:
         return (self.width(), self.height())[index]
 

@@ -114,6 +114,12 @@ class KeySequence(QtGui.QKeySequence):
     def __reduce__(self):
         return type(self), (self.toString(),)
 
+    @property
+    def _toString(self):
+        return self.toString()
+
+    __match_args__ = ("_toString",)
+
     def get_matches(self, seq: QtGui.QKeySequence | str) -> SequenceMatchStr:
         if isinstance(seq, str):
             seq = KeySequence(seq)
