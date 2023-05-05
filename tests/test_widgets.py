@@ -202,7 +202,7 @@ def test_datetimeedit(qtbot):
     widget.get_displayed_sections()
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_dialog(qtbot, qttester):
     dlg = widgets.Dialog(layout="horizontal")
     qtbot.add_widget(dlg)
@@ -244,7 +244,7 @@ def test_dialogbuttonbox(qtbot):
     btn = box.add_default_buttons(["ok"])
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_dockwidget(qtbot):
     widget = widgets.DockWidget()
     qtbot.addWidget(widget)
@@ -405,7 +405,7 @@ def test_graphicsitem(qtbot):
     # item.get_shape()
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_graphicsgridlayout(qtbot):
     layout = widgets.GraphicsGridLayout()
     item = widgets.GraphicsProxyWidget()
@@ -441,7 +441,7 @@ def test_graphicspixmapitem(qtbot):
     assert item.get_pixmap() is None
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_graphicsscene(qtbot):
     scene = widgets.GraphicsScene()
     icon = iconprovider.get_icon("mdi.help-circle-outline")
@@ -743,7 +743,7 @@ def test_listwidgetitem(qtbot):
     bytes(item)
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_mainwindow(qtbot):
     window = widgets.MainWindow()
     qtbot.addWidget(window)
@@ -851,7 +851,7 @@ def test_menubar(qtbot):
     menu.add_menu("test_menubar")
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_messagebox(qtbot):
     widget = widgets.MessageBox(buttons=["reset"])
     widget.set_icon("warning")
@@ -1063,7 +1063,7 @@ def test_statusbar(qtbot):
     status_bar.add_widget(widgets.Widget(), permanent=True)
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_stackedlayout(qtbot):
     layout = widgets.StackedLayout()
     widget = widgets.RadioButton("test_stackedlayout")
@@ -1112,7 +1112,7 @@ def test_spinbox(qtbot):
     assert widget.get_value() == 10
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_splashscreen(qtbot):
     pixmap = gui.Pixmap.create_dot()
     scr = widgets.SplashScreen(path=pixmap, width=100)
@@ -1166,7 +1166,7 @@ def test_systemtrayicon(qtbot):
     icon.show_message("test", "")
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_tabwidget(qtbot):
     widget = widgets.TabWidget(detachable=True)
     qtbot.addWidget(widget)
@@ -1305,7 +1305,7 @@ def test_toolbutton(qtbot):
     assert widget["test"] == act
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_tooltip(qtbot):
     widgets.ToolTip.show_text(text="test")
 
