@@ -1534,13 +1534,13 @@ def test_undoview(qtbot):
     assert view[0] == cmd
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_whatsthis(qtbot):
     with widgets.WhatsThis.enter_mode():
         pass
 
 
-@pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
+# @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_widget(qtbot):
     widget = widgets.Widget()
     qtbot.addWidget(widget)
