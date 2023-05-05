@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+import os
+import pathlib
 from typing import Literal
 
 from prettyqt import constants, core, gui
@@ -89,6 +91,45 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
 
     def get_screen(self) -> gui.Screen:
         return gui.Screen(self.screen())
+
+    def get_cursor(self) -> gui.Cursor:
+        return gui.Cursor(self.cursor())
+
+    def get_icon(self) -> gui.Icon | None:
+        icon = self.icon()
+        return None if icon.isNull() else gui.Icon(icon)
+
+    def set_modality(self, modality: constants.WindowModalityStr) -> None:
+        """Set modality for the window.
+
+        Args:
+            modality: modality for the window
+
+        Raises:
+            InvalidParamError: modality type does not exist
+        """
+        if modality not in constants.WINDOW_MODALITY:
+            raise InvalidParamError(modality, constants.WINDOW_MODALITY)
+        self.setModality(constants.WINDOW_MODALITY[modality])
+
+    def get_modality(self) -> constants.WindowModalityStr:
+        return constants.WINDOW_MODALITY.inverse[self.modality()]
+
+    def set_file_path(self, file_path: os.PathLike):
+        path = os.fspath(file_path)
+        self.setFilePath(path)
+
+    def get_file_path(self) -> pathlib.Path:
+        return pathlib.Path(self.filePath())
+
+    def get_type(self) -> constants.WindowTypeStr:
+        return constants.WINDOW_TYPE.inverse[self.type()]
+
+    def get_window_state(self) -> constants.WindowStateStr:
+        return constants.WINDOW_STATES.inverse[self.windowState()]
+
+    def get_window_states(self) -> list[constants.WindowStateStr]:
+        return constants.WINDOW_STATES.get_list(self.windowStates())
 
 
 class Window(WindowMixin, QtGui.QWindow):

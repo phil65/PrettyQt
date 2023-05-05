@@ -738,8 +738,8 @@ ANCHOR_POINT = bidict[AnchorPointStr, Qt.AnchorPoint](
 )
 
 
-ModalityStr = Literal["window", "application", "none"]
-MODALITY: bidict[ModalityStr, Qt.WindowModality] = bidict(
+WindowModalityStr = Literal["window", "application", "none"]
+WINDOW_MODALITY: bidict[WindowModalityStr, Qt.WindowModality] = bidict(
     window=Qt.WindowModality.WindowModal,
     application=Qt.WindowModality.ApplicationModal,
     none=Qt.WindowModality.NonModal,
@@ -754,11 +754,11 @@ FOCUS_POLICY: bidict[FocusPolicyStr, Qt.FocusPolicy] = bidict(
     none=Qt.FocusPolicy.NoFocus,
 )
 
-WindowFlagStr = Literal[
+WindowTypeStr = Literal[
     "frameless", "popup", "stay_on_top", "tool", "window_title", "customize_window"
 ]
 
-WINDOW_FLAGS: bidict[WindowFlagStr, Qt.WindowType] = bidict(
+WINDOW_TYPE: bidict[WindowTypeStr, Qt.WindowType] = bidict(
     frameless=Qt.WindowType.FramelessWindowHint,
     popup=Qt.WindowType.Popup,
     stay_on_top=Qt.WindowType.WindowStaysOnTopHint,

@@ -230,11 +230,11 @@ class WidgetMixin(core.ObjectMixin):
             raise InvalidParamError(role, gui.palette.ROLE)
         self.setBackgroundRole(gui.palette.ROLE[role])
 
-    def set_window_flags(self, *flags: constants.WindowFlagStr, append: bool = False):
+    def set_window_flags(self, *flags: constants.WindowTypeStr, append: bool = False):
         for flag in flags:
-            if flag not in constants.WINDOW_FLAGS:
-                raise InvalidParamError(flag, constants.WINDOW_FLAGS)
-        result = helpers.merge_flags(flags, constants.WINDOW_FLAGS)
+            if flag not in constants.WINDOW_TYPE:
+                raise InvalidParamError(flag, constants.WINDOW_TYPE)
+        result = helpers.merge_flags(flags, constants.WINDOW_TYPE)
         if append:
             result = result | self.windowFlags()
         self.setWindowFlags(result)
@@ -283,7 +283,7 @@ class WidgetMixin(core.ObjectMixin):
                 raise InvalidParamError(attr, constants.WIDGET_ATTRIBUTE)
             self.setAttribute(constants.WIDGET_ATTRIBUTE[attr], state)  # type: ignore
 
-    def set_modality(self, modality: constants.ModalityStr) -> None:
+    def set_modality(self, modality: constants.WindowModalityStr) -> None:
         """Set modality for the dialog.
 
         Args:
@@ -292,17 +292,17 @@ class WidgetMixin(core.ObjectMixin):
         Raises:
             InvalidParamError: modality type does not exist
         """
-        if modality not in constants.MODALITY:
-            raise InvalidParamError(modality, constants.MODALITY)
-        self.setWindowModality(constants.MODALITY[modality])
+        if modality not in constants.WINDOW_MODALITY:
+            raise InvalidParamError(modality, constants.WINDOW_MODALITY)
+        self.setWindowModality(constants.WINDOW_MODALITY[modality])
 
-    def get_modality(self) -> constants.ModalityStr:
+    def get_modality(self) -> constants.WindowModalityStr:
         """Get the current modality modes as a string.
 
         Returns:
             modality mode
         """
-        return constants.MODALITY.inverse[self.windowModality()]
+        return constants.WINDOW_MODALITY.inverse[self.windowModality()]
 
     def set_size_policy(
         self,
