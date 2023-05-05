@@ -2,11 +2,10 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
-from deprecated import deprecated
 from typing_extensions import Self
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
+from prettyqt.utils import InvalidParamError, bidict, get_repr, helpers
 
 
 SPEC = bidict(
@@ -82,7 +81,7 @@ class Color(QtGui.QColor):
             self.setRgb(*color)
 
     @classmethod
-    def from_text(cls, text: str) -> Color:
+    def from_text(cls, text: str) -> Self:
         """Create a QColor from specified string."""
         color = cls()
         if text.startswith("#") and len(text) == 7:
@@ -156,9 +155,9 @@ class Color(QtGui.QColor):
     def get_spec(self) -> SpecStr:
         return SPEC.inverse[self.spec()]
 
-    def convert_to(self, spec: SpecStr) -> Color:
+    def convert_to(self, spec: SpecStr) -> Self:
         # return Color(self.convertTo(SPEC[spec]))
-        color = Color()
+        color = type(self)()
         match spec:
             case "rgb":
                 rgb = self.getRgb()
@@ -195,44 +194,34 @@ class Color(QtGui.QColor):
             case _:
                 return self.name(NAME_FORMAT[name_format])
 
-    @deprecated(reason="This method is deprecated, use Color.get_name instead.")
-    def to_qsscolor(self) -> str:
-        """Convert Color to a string that can be used in a QStyleSheet."""
-        return f"rgba({self.red()}, {self.green()}, {self.blue()}, {self.alpha()})"
-
     def as_qt(self) -> QtGui.QColor:
         return self.convertTo(self.spec())
 
-    def inverted(self, invert_alpha: bool = False) -> Color:
-        return Color(
+    def inverted(self, invert_alpha: bool = False) -> Self:
+        return type(self)(
             255 - self.red(),
             255 - self.green(),
             255 - self.blue(),
             255 - self.alpha() if invert_alpha else self.alpha(),
         )
 
-    @classmethod
-    def drift_color(cls, color: datatypes.ColorAndBrushType, factor: int = 110):
-        """Return color that is lighter or darker than the base color.
-
-        If base_color.lightness is higher than 128, the returned color is darker
-        otherwise is is lighter.
-        :param base_color: The base color to drift from
-        ;:param factor: drift factor (%)
-        :return A lighter or darker color.
-        """
-        base_color = cls(color)
-        if base_color.lightness() > 128:
-            return base_color.darker(factor)
-        if base_color == Color("#000000"):
-            return cls.drift_color(cls("#101010"), factor + 20)
+    def drift(self, factor: int = 1.0) -> Self:
+        """Return color that is lighter or darker than the base color."""
+        Cls = type(self)
+        if self == Color("#000000"):
+            return Cls(Color("#050505").lighter(int(factor * 100)))
+        elif self.lightness() > 128:
+            return Cls(self.darker(int(factor * 100)))
         else:
-            return base_color.lighter(factor + 10)
+            return Cls(self.lighter(int(factor * 100)))
 
 
 if __name__ == "__main__":
-    color = Color()
-    color = Color.interpolate_color(Color(), Color(), 20)
-    print(type(color))
+    color = Color("#FFFFFF")
+    color = color.drift(1.3)
+    print(str(color))
     print(color.get_spec())
     print(color.as_qt())
+    match color:
+        case Color("#005500"):
+            raise Exception("Yeah")
