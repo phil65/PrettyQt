@@ -93,12 +93,11 @@ def is_dark_mode() -> bool:
         )
         settings = core.Settings(path, core.Settings.Format.NativeFormat)
         return settings.value("AppsUseLightTheme") == 0
-    elif sys.platform == "darwin":
+    else:
         import darkdetect
 
         return darkdetect.isDark()
-    else:
-        return False
+
     #  QtDbus not available in PySide6 (yet)
     # bus = QtDbus.QDBusConnection.sessionBus()
     # m = QDBusMessage.createMethodCall(
