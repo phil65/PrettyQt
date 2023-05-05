@@ -4,7 +4,7 @@ import os
 import pathlib
 from typing import Literal
 
-from prettyqt import core, gui
+from prettyqt import core, quick
 from prettyqt.qt import QtQuick
 from prettyqt.utils import bidict, datatypes
 
@@ -26,7 +26,7 @@ STATUS = bidict(
 StatusStr = Literal["null", "ready", "loading", "error"]
 
 
-class QuickView(gui.WindowMixin, QtQuick.QQuickView):
+class QuickView(quick.quickwindow.QuickWindowMixin, QtQuick.QQuickView):
     def set_source(self, source: datatypes.UrlType | datatypes.PathType):
         if isinstance(source, os.PathLike):
             source = os.fspath(source)

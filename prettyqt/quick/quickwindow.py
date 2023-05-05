@@ -50,7 +50,7 @@ TEXT_RENDER_TYPE = bidict(
 TextRenderTypeStr = Literal["qt_text", "native_text"]
 
 
-class QuickWindow(gui.WindowMixin, QtQuick.QQuickWindow):
+class QuickWindowMixin(gui.WindowMixin):
     def create_texture_from_image(self, image: QtGui.QImage, **kwargs):
         flag = self.CreateTextureOption(0)
         for key, val in kwargs.items():
@@ -101,6 +101,10 @@ class QuickWindow(gui.WindowMixin, QtQuick.QQuickWindow):
         if render_stage not in RENDER_STAGE:
             raise InvalidParamError(render_stage, RENDER_STAGE)
         self.scheduleRenderJob(job, RENDER_STAGE[render_stage])
+
+
+class QuickWindow(QuickWindowMixin, QtQuick.QQuickWindow):
+    pass
 
 
 if __name__ == "__main__":

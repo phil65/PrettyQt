@@ -9,10 +9,10 @@ from .quickimageresponse import QuickImageResponse
 from .quickimageprovider import QuickImageProvider, QuickImageProviderMixin
 from .quickasyncimageprovider import QuickAsyncImageProvider
 from .quickitemgrabresult import QuickItemGrabResult
-from .quickview import QuickView
 from .quickitem import QuickItem, QuickItemMixin
 from .quickpainteditem import QuickPaintedItem
 from .quickwindow import QuickWindow
+from .quickview import QuickView
 
 
 __all__ = [
