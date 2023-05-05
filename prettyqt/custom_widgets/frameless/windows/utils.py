@@ -119,7 +119,7 @@ def start_system_move(h_wnd: SupportsInt) -> None:
     win32gui.ReleaseCapture()
     win32api.SendMessage(
         int(h_wnd), win32con.WM_SYSCOMMAND, win32con.SC_MOVE | win32con.HTCAPTION, 0
-    )
+    )  # pyside6-frameless-window uses "+" instead of "|"?
 
 
 def _native_event(widget: QtWidgets.QWidget, message: SupportsInt) -> tuple[bool, int]:

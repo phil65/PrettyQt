@@ -68,7 +68,7 @@ class TaskBarItem:
                 raise ValueError(value)
 
     def set_progress_value(self, value: int, total: int = 100):
-        if value > 100 or value < 0:
+        if value > 100 or value < 0 or value > total:
             raise ValueError(value)
         result = taskbar.setProgressValue(self.win_id, value, total)
         return bool(result)
