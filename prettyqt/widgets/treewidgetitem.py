@@ -71,8 +71,22 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def isChecked(self, col: int) -> bool:
         return self.checkState(col) == QtCore.Qt.CheckState.Checked
 
-    def get_children(self) -> list[QtWidgets.QTreeWidgetItem]:
-        return [self.child(i) for i in range(self.childCount())]
+    def get_children(self, recursive: bool = False) -> list[QtWidgets.QTreeWidgetItem]:
+        """Get children of this item.
+
+        recursive option is written iteratively to also support original QTreeWidgetItems.
+        """
+        if not recursive:
+            return [self.child(i) for i in range(self.childCount())]
+        results = []
+        nodes = [self]
+        while nodes:
+            items = []
+            for node in nodes:
+                results.append(node)
+                items.extend(node.child(i) for i in range(node.childCount()))
+            nodes = items
+        return results[1:]
 
     def get_top_level_items(self) -> list[QtWidgets.QTreeWidgetItem]:
         return [self.topLevelItem(i) for i in range(self.topLevelItemCount())]
