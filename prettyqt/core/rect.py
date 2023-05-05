@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
@@ -29,15 +31,15 @@ class Rect(QtCore.QRect):
     def __reduce__(self):
         return type(self), (self.x(), self.y(), self.width(), self.height())
 
-    def margins_added(self, margins: datatypes.MarginsType) -> Rect:
+    def margins_added(self, margins: datatypes.MarginsType) -> Self:
         if isinstance(margins, tuple):
             margins = QtCore.QMargins(*margins)
-        return Rect(self.marginsAdded(margins))
+        return type(self)(self.marginsAdded(margins))
 
-    def margins_removed(self, margins: datatypes.MarginsType) -> Rect:
+    def margins_removed(self, margins: datatypes.MarginsType) -> Self:
         if isinstance(margins, tuple):
             margins = QtCore.QMargins(*margins)
-        return Rect(self.marginsRemoved(margins))
+        return type(self)(self.marginsRemoved(margins))
 
 
 if __name__ == "__main__":

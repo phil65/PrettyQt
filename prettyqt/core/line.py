@@ -4,6 +4,8 @@ from collections.abc import Iterator
 import math
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
@@ -38,8 +40,8 @@ class Line(QtCore.QLine):
         p = self.get_p2() - self.get_p1()
         return math.sqrt((p.x() * p.x()) + (p.y() * p.y()))
 
-    def __reversed__(self) -> Line:
-        return Line(self.get_p2(), self.get_p1())
+    def __reversed__(self) -> Self:
+        return type(self)(self.get_p2(), self.get_p1())
 
     def __iter__(self) -> Iterator[core.Point]:
         yield self.get_p1()

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing_extensions import Self
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
@@ -24,20 +26,20 @@ class Size(QtCore.QSize):
     def __reduce__(self):
         return type(self), (self.width(), self.height())
 
-    def expanded_to(self, size: datatypes.SizeType) -> Size:
+    def expanded_to(self, size: datatypes.SizeType) -> Self:
         if isinstance(size, tuple):
             size = QtCore.QSize(*size)
-        return Size(self.expandedTo(size))
+        return type(self)(self.expandedTo(size))
 
-    def shrunk_by(self, margins: datatypes.MarginsType) -> Size:
+    def shrunk_by(self, margins: datatypes.MarginsType) -> Self:
         if isinstance(margins, tuple):
             margins = QtCore.QMargins(*margins)
-        return Size(self.marginsAdded(margins))
+        return type(self)(self.marginsAdded(margins))
 
-    def grown_by(self, margins: datatypes.MarginsType) -> Size:
+    def grown_by(self, margins: datatypes.MarginsType) -> Self:
         if isinstance(margins, tuple):
             margins = QtCore.QMargins(*margins)
-        return Size(self.marginsRemoved(margins))
+        return type(self)(self.marginsRemoved(margins))
 
 
 if __name__ == "__main__":

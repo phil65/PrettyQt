@@ -3,6 +3,8 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
@@ -74,11 +76,11 @@ class LineF(QtCore.QLineF):
     def get_center(self) -> core.PointF:
         return core.PointF(self.center())
 
-    def get_normal_vector(self) -> LineF:
-        return LineF(self.normalVector())
+    def get_normal_vector(self) -> Self:
+        return type(self)(self.normalVector())
 
-    def get_unit_vector(self) -> LineF:
-        return LineF(self.unitVector())
+    def get_unit_vector(self) -> Self:
+        return type(self)(self.unitVector())
 
     def to_line(self) -> core.Line:
         return core.Line(self.toLine())
