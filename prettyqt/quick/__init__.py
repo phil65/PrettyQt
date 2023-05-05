@@ -13,9 +13,11 @@ from .quickitem import QuickItem, QuickItemMixin
 from .quickpainteditem import QuickPaintedItem
 from .quickwindow import QuickWindow
 from .quickview import QuickView
+from .sgnode import SGNode
 
 
 __all__ = [
+    "SGNode",
     "QuickView",
     "QuickItem",
     "QuickItemMixin",
