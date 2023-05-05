@@ -1,10 +1,10 @@
 """Tests for `prettyqt` package."""
 
-import sys
+# import sys
 
 import pytest
 
-import prettyqt.qt
+# import prettyqt.qt
 from prettyqt.utils import InvalidParamError
 
 
@@ -12,10 +12,10 @@ from prettyqt.utils import InvalidParamError
 # ImportError: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.32' not found
 
 
-@pytest.mark.skipif(
-    prettyqt.qt.API.startswith("pyside") or sys.platform == "linux",
-    reason="Only supported in PyQt",
-)
+# @pytest.mark.skipif(
+#     prettyqt.qt.API.startswith("pyside") or sys.platform == "linux",
+#     reason="Only supported in PyQt",
+# )
 def test_sciscintilla(qtbot):
     from prettyqt import gui, scintilla
 
