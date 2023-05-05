@@ -1,3 +1,24 @@
+## v1.36.0 (2023-05-05)
+
+### Feat
+
+- **MimeDatabase**: add some new methods
+- **SizePolicy**: add get_transposed method
+- enable dark mode detection on linux
+- **DataWidgetMapper**: add __setitem__, __getitem__, __delitem__
+- **GuiApplication**: add set_progress_value method
+- **quick**: add SGNode class
+- **Window**: add some more methods
+- **qml**: add QmlError / QmlExpression classes
+- **qml**: add QmlProperty class
+- **TreeWidgetItem**: add recursive option for get_children
+- **TreeWidget**: add get_items method
+
+### Fix
+
+- **Completer**: fixed is_case_sensitive method
+- correctly inherit for QuickView
+
 ## v1.35.0 (2023-05-05)
 
 ### Feat
