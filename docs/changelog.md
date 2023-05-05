@@ -1,3 +1,14 @@
+## v1.35.0 (2023-05-05)
+
+### Feat
+
+- **Shortcut**: allow str for ctor
+- **Shortcut**: add set_key(s) methods
+- add add_shortcut methods for Window and Widget classes
+- **gui**: add SurfaceFormat class
+- **Locale**: add some methods
+- **Locale**: add get_formatted_data_size
+
 ## v1.34.0 (2023-05-04)
 
 ### Feat
