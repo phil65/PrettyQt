@@ -64,3 +64,14 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
 
     def set_sort_role(self, role: constants.ItemDataRoleStr):
         self.setSortRole(constants.ITEM_DATA_ROLE[role])
+
+    def sort(
+        self,
+        column: int | None,
+        ascending: bool | QtCore.Qt.SortOrder = constants.ASCENDING,
+    ):
+        if isinstance(ascending, bool):
+            ascending = constants.ASCENDING if ascending else constants.DESCENDING
+        if column is None:
+            column = -1
+        super().sort(column, ascending)
