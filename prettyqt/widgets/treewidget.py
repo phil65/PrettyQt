@@ -12,6 +12,27 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
         order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
 
+    def get_items(self, recursive: bool = False) -> list[QtWidgets.QTreeWidgetItem]:
+        """Get TreeWidgetItems of this widget.
+
+        Arguments:
+            recursive: whether to include all items of the tree.
+
+        recursive option is written iteratively to also support original QTreeWidgetItems.
+        """
+        root = self.invisibleRootItem(())
+        if not recursive:
+            return [root.child(i) for i in range(root.childCount())]
+        results = []
+        nodes = [root]
+        while nodes:
+            items = []
+            for node in nodes:
+                results.append(node)
+                items.extend(node.child(i) for i in range(node.childCount()))
+            nodes = items
+        return results[1:]
+
     def collapse_tree(self, item):
         item.setExpanded(False)
         for i in range(item.childCount()):
