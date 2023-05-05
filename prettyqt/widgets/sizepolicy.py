@@ -171,3 +171,7 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
         if typ not in CONTROL_TYPE:
             raise InvalidParamError(typ, CONTROL_TYPE)
         self.setControlType(CONTROL_TYPE[typ])
+
+    def get_transposed(self) -> Self:
+        transposed = self.transposed()
+        return type(self).clone(transposed)
