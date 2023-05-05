@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import TYPE_CHECKING, Literal
 
-from prettyqt import gui, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -106,6 +107,14 @@ TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
 class WizardMixin(widgets.DialogMixin):
+    custom_button_1_clicked = core.Signal()
+    custom_button_2_clicked = core.Signal()
+    custom_button_3_clicked = core.Signal()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.customButtonClicked.connect(self._on_custom_button_clicked)
+
     def __getitem__(self, key: int) -> QtWidgets.QWizardPage:
         p = self.page(key)
         if p is None:
@@ -126,6 +135,15 @@ class WizardMixin(widgets.DialogMixin):
     def __add__(self, other: QtWidgets.QWizardPage) -> Wizard:
         self.addPage(other)
         return self
+
+    def _on_custom_button_clicked(self, which: int):
+        match which:
+            case 6:
+                self.custom_button_1_clicked.emit()
+            case 7:
+                self.custom_button_2_clicked.emit()
+            case 8:
+                self.custom_button_3_clicked.emit()
 
     def serialize_fields(self):
         return dict(
@@ -283,6 +301,22 @@ class WizardMixin(widgets.DialogMixin):
             raise InvalidParamError(option, WIZARD_OPTIONS)
         return self.testOption(WIZARD_OPTIONS[option])
 
+    def set_custom_button(
+        self, button: Literal[1, 2, 3], text: str | None, callback: Callable | None = None
+    ):
+        self.set_option(f"custom_button_{button}", text is not None)
+        if text is None:
+            return
+        self.setButtonText(WIZARD_BUTTON[f"custom_{button}"], text)
+        if callback:
+            match button:
+                case 1:
+                    self.custom_button_1_clicked.connect(callback)
+                case 2:
+                    self.custom_button_2_clicked.connect(callback)
+                case 3:
+                    self.custom_button_3_clicked.connect(callback)
+
 
 class Wizard(WizardMixin, QtWidgets.QWizard):
     pass
@@ -292,5 +326,8 @@ if __name__ == "__main__":
     app = widgets.app()
     dlg = Wizard()
     dlg.add_widget_as_page(widgets.RadioButton("test"))
+    dlg.set_custom_button(1, "1", lambda: print("1"))
+    dlg.set_custom_button(2, "2", lambda: print("2"))
+    dlg.set_custom_button(3, "3", lambda: print("3"))
     dlg.show()
     app.main_loop()
