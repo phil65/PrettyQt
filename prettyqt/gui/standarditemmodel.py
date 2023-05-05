@@ -64,9 +64,8 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
 
     def add(self, *item: str | QtGui.QStandardItem):
         for i in item:
-            if isinstance(i, str):
-                i = gui.StandardItem(i)
-            self.appendRow([i])
+            new_item = gui.StandardItem(i) if isinstance(i, str) else i
+            self.appendRow([new_item])
 
     def find_items(
         self, text: str, column: int = 0, mode: constants.MatchFlagStr = "exact"

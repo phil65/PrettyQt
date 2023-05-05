@@ -4,7 +4,7 @@ from collections.abc import Callable
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, get_repr, helpers
+from prettyqt.utils import InvalidParamError, datatypes, get_repr
 
 
 # from typing import Any
@@ -131,7 +131,7 @@ class ToolBarMixin(widgets.WidgetMixin):
         for area in areas:
             if area not in constants.TOOLBAR_AREA:
                 raise InvalidParamError(area, constants.TOOLBAR_AREA)
-        flag = helpers.merge_flags(areas, constants.TOOLBAR_AREA)
+        flag = constants.TOOLBAR_AREA.merge_flags(areas)
         self.setAllowedAreas(flag)
 
     def get_allowed_areas(self) -> list[constants.ToolbarAreaStr]:

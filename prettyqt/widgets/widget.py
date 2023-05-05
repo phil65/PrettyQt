@@ -13,14 +13,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import (
-    InvalidParamError,
-    colors,
-    datatypes,
-    get_repr,
-    helpers,
-    prettyprinter,
-)
+from prettyqt.utils import InvalidParamError, colors, datatypes, get_repr, prettyprinter
 
 
 if TYPE_CHECKING:
@@ -234,7 +227,7 @@ class WidgetMixin(core.ObjectMixin):
         for flag in flags:
             if flag not in constants.WINDOW_TYPE:
                 raise InvalidParamError(flag, constants.WINDOW_TYPE)
-        result = helpers.merge_flags(flags, constants.WINDOW_TYPE)
+        result = constants.WINDOW_TYPE.merge_flags(flags)
         if append:
             result = result | self.windowFlags()
         self.setWindowFlags(result)

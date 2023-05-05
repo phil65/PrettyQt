@@ -62,9 +62,8 @@ class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
 
     def add_points(self, *points: datatypes.PointType):
         for p in points:
-            if isinstance(p, tuple):
-                p = core.Point(*p)
-            self.append(p)
+            point = core.Point(*p) if isinstance(p, tuple) else p
+            self.append(point)
 
     def get_data_buffer(self, size: int):
         self.resize(size)

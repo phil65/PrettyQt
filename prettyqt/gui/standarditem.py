@@ -52,9 +52,8 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
 
     def add(self, *item: str | QtGui.QStandardItem):
         for i in item:
-            if isinstance(i, str):
-                i = gui.StandardItem(i)
-            self.appendRow([i])
+            new_item = gui.StandardItem(i) if isinstance(i, str) else i
+            self.appendRow([new_item])
 
     def clone(self):
         item = type(self)()

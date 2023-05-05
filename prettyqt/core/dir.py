@@ -8,7 +8,7 @@ from typing_extensions import Self
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 FILTERS = bidict(
@@ -112,7 +112,7 @@ class Dir(QtCore.QDir):
         for item in filters:
             if item not in FILTERS:
                 raise InvalidParamError(item, FILTERS)
-        flags = helpers.merge_flags(filters, FILTERS)
+        flags = FILTERS.merge_flags(filters)
         self.setFilter(flags)
 
     def get_filter(self) -> list[FilterStr]:

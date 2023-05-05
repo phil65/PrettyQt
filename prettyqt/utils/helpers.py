@@ -1,12 +1,8 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
 from datetime import timedelta
-import functools
-import operator
 import re
 import sys
-from typing import Any
 
 
 REGEX = re.compile(
@@ -48,24 +44,9 @@ def parse_time(time_str: str) -> int:
     return int(secs * 1000)
 
 
-def format_seconds(seconds: float) -> str:
-    m, s = divmod(int(seconds), 60)
-    h, m = divmod(m, 60)
-    return f"{h:02}:{h:02}:{h:02}"
-
-
 def string_to_num_array(array: str) -> list[float]:
     floats = [float(i) for i in array.split(",")]
     return [int(i) if i.is_integer() else i for i in floats]
-
-
-def merge_flags(flags, mapping: Mapping):
-    return functools.reduce(operator.ior, [mapping[t] for t in flags])
-
-
-def format_kwargs(kwargs: dict[str, Any]) -> str:
-    kwarg_list = [f"{k}={repr(v)}" for k, v in kwargs.items()]
-    return ", ".join(kwarg_list)
 
 
 def cut_off_str(obj, max_len: int) -> str:

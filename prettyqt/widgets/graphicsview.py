@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 mod = QtWidgets.QGraphicsView
@@ -270,7 +270,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         for item in items:
             if item not in OPTIMIZATION_FLAGS:
                 raise InvalidParamError(item, OPTIMIZATION_FLAGS)
-        flags = helpers.merge_flags(items, OPTIMIZATION_FLAGS)
+        flags = OPTIMIZATION_FLAGS.merge_flags(items)
         self.setOptimizationFlags(flags)
 
     def get_optimization_flags(self) -> list[OptimizationFlagStr]:

@@ -57,7 +57,8 @@ class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
                 return self.m32()
             case 2, 2:
                 return self.m33()
-        raise ValueError(f"Wrong value {value}")
+            case _:
+                raise ValueError(f"Wrong value {value}")
 
     @classmethod
     def clone_from(cls, transform: QtGui.QTransform) -> Self:

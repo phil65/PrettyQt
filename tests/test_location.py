@@ -33,7 +33,7 @@ def test_geomaneuver():
     maneuver = location.GeoManeuver()
     maneuver["test"] = "a"
     assert maneuver["test"] == "a"
-    assert str(maneuver) == ""
+    assert not str(maneuver)
     assert bool(maneuver) is True
     maneuver.get_position()
     assert maneuver.get_waypoint() is None
@@ -106,7 +106,7 @@ def test_placecategory():
     cat = location.PlaceCategory()
     cat.get_icon()
     assert bool(cat) is False
-    assert str(cat) == ""
+    assert not str(cat)
     # if prettyqt.qt.API == "pyqt5":
     #     assert cat.get_visibility() == "unspecified"
 
@@ -138,13 +138,13 @@ def test_placeicon():
 
 def test_placeuser():
     user = location.PlaceUser()
-    assert str(user) == ""
+    assert not str(user)
 
 
 # def test_placeimage():
 #     image = location.PlaceImage()
 #     image.get_supplier()
-#     assert str(image) == ""
+#     assert not str(image)
 #     image.set_url("http://")
 #     assert image.get_url() == core.Url("http://")
 

@@ -69,9 +69,8 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
 
     def add_points(self, *points: datatypes.PointFType):
         for p in points:
-            if isinstance(p, tuple):
-                p = core.PointF(*p)
-            self.append(p)
+            point = core.PointF(*p) if isinstance(p, tuple) else p
+            self.append(point)
 
     def to_polygon(self) -> gui.Polygon:
         return gui.Polygon(self.toPolygon())

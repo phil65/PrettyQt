@@ -70,9 +70,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             for name, state in items.items():
                 w = self.find_child(v, name=name)
                 if w is not None:
-                    if isinstance(state, str):
-                        state = state.encode()
-                    w.restoreState(state)
+                    new_state = state.encode() if isinstance(state, str) else state
+                    w.restoreState(new_state)
 
     def about_popup(self, title: str = "About"):
         text = (

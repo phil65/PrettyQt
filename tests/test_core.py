@@ -438,7 +438,7 @@ def test_mimedatabase():
 def test_mimetype():
     mime_type = core.MimeType()
     assert bool(mime_type) is False
-    assert str(mime_type) == ""
+    assert not str(mime_type)
 
 
 def test_modelindex():

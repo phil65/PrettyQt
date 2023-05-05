@@ -84,7 +84,7 @@ class FileSystemModelMixin:
         paths = [i.data(self.Roles.FilePathRole) for i in indexes]
         if not paths:
             return []
-        if paths[0] == "":
+        if not paths[0]:
             paths = [
                 folder / filename
                 for folder in paths

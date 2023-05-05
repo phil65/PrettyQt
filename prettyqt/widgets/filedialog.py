@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 FILE_MODE = bidict(
@@ -204,7 +204,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         for item in filters:
             if item not in core.dir.FILTERS:
                 raise InvalidParamError(item, core.dir.FILTERS)
-        flags = helpers.merge_flags(filters, core.dir.FILTERS)
+        flags = core.dir.FILTERS.merge_flags(filters)
         self.setFilter(flags)
 
     def get_filter(self) -> list[core.dir.FilterStr]:

@@ -6,7 +6,7 @@ from typing import Any, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -176,7 +176,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         for item in items:
             if item not in EDIT_TRIGGERS:
                 raise InvalidParamError(item, EDIT_TRIGGERS)
-        flags = helpers.merge_flags(items, EDIT_TRIGGERS)
+        flags = EDIT_TRIGGERS.merge_flags(items)
         self.setEditTriggers(flags)
 
     def get_edit_triggers(self) -> list[EditTriggerStr]:

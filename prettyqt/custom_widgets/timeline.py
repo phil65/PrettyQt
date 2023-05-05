@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors, datatypes, helpers
+from prettyqt.utils import colors, datatypes
 
 
 TEXT_COLOR = gui.Color("lightgray")
@@ -93,7 +93,8 @@ class Timeline(widgets.Widget):
             w = 0
             width = self.width()
             while (w := w + 100) <= width:
-                time_string = helpers.format_seconds(w * scale)
+                msecs = int(w * scale * 1000)
+                time_string = str(core.Time(0, 0, 0, 0).add_msecs(msecs))
                 rect = core.Rect(w - 50, 0, 100, 100)
                 qp.drawText(rect, constants.ALIGN_H_CENTER, time_string)
             # Draw down line

@@ -13,8 +13,3 @@ def test_string_to_num_array():
 
 def test_cut_off_str():
     assert helpers.cut_off_str("abcdef", max_len=5) == "'a..."
-
-
-def test_format_kwargs():
-    dct = dict(a="a", b=1)
-    assert helpers.format_kwargs(dct) == "a='a', b=1"

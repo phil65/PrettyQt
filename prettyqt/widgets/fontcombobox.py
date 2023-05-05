@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict
 
 
 FONT_FILTERS = bidict(
@@ -39,7 +39,7 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
         for item in filters:
             if item not in FONT_FILTERS:
                 raise InvalidParamError(item, FONT_FILTERS)
-        flags = helpers.merge_flags(filters, FONT_FILTERS)
+        flags = FONT_FILTERS.merge_flags(filters)
         self.setFontFilters(flags)
 
     def get_font_filters(self) -> list[FontFilterStr]:

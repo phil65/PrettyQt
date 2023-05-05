@@ -7,14 +7,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import (
-    InvalidParamError,
-    bidict,
-    colors,
-    datatypes,
-    get_repr,
-    helpers,
-)
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, get_repr
 
 
 TEXT_INTERACTION = bidict(
@@ -159,7 +152,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         for item in types:
             if item not in TEXT_INTERACTION:
                 raise InvalidParamError(item, TEXT_INTERACTION)
-        flags = helpers.merge_flags(types, TEXT_INTERACTION)
+        flags = TEXT_INTERACTION.merge_flags(types)
         self.setTextInteractionFlags(flags)
         return self
 

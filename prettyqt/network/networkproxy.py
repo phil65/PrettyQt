@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import network
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict
 
 
 CAPABILITIES = bidict(
@@ -54,7 +54,7 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
         for item in capability:
             if item not in CAPABILITIES:
                 raise InvalidParamError(item, CAPABILITIES)
-        flags = helpers.merge_flags(capability, CAPABILITIES)
+        flags = CAPABILITIES.merge_flags(capability)
         self.setCapabilities(flags)
 
     def get_header(self, name: network.networkrequest.KnownHeaderStr) -> str:

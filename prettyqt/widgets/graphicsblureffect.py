@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict
 
 
 BLUR_HINTS = bidict(
@@ -22,7 +22,7 @@ class GraphicsBlurEffect(widgets.GraphicsEffectMixin, QtWidgets.QGraphicsBlurEff
             if item not in BLUR_HINTS:
                 raise InvalidParamError(item, BLUR_HINTS)
         if hints:
-            flags = helpers.merge_flags(hints, BLUR_HINTS)
+            flags = BLUR_HINTS.merge_flags(hints)
         else:
             flags = QtWidgets.QGraphicsBlurEffect.BlurHint(0)  # type: ignore
         self.setBlurHints(flags)

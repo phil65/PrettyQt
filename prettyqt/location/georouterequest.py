@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, positioning
 from prettyqt.qt import QtLocation
-from prettyqt.utils import InvalidParamError, bidict, helpers
+from prettyqt.utils import InvalidParamError, bidict
 
 
 FEATURE_TYPES = bidict(
@@ -141,7 +141,7 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         for item in mode:
             if item not in TRAVEL_MODE:
                 raise InvalidParamError(item, TRAVEL_MODE)
-        flags = helpers.merge_flags(mode, TRAVEL_MODE)
+        flags = TRAVEL_MODE.merge_flags(mode)
         self.setTravelModes(flags)
 
     def get_feature_types(self) -> list[FeatureTypeStr]:

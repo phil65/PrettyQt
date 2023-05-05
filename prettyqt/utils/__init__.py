@@ -2,7 +2,9 @@
 
 from collections.abc import Iterable
 import enum
+import functools
 import logging
+import operator
 from typing import Any
 
 import bidict as bdct
@@ -27,6 +29,15 @@ class bidict(bdct.bidict):
         if isinstance(flag, enum.Enum):
             flag = flag.value
         return {k: v & flag for k, v in self.items()}
+
+    # def get_flag(self, **kwargs) -> dict[str, Any]:
+    #     for k, v in kwargs.items():
+    #     if isinstance(flag, enum.Enum):
+    #         flag = flag.value
+    #     return {k: v & flag for k, v in self.items()}
+
+    def merge_flags(self, flags: list[str]):
+        return functools.reduce(operator.ior, [self[t] for t in flags])
 
 
 class InvalidParamError(ValueError):
