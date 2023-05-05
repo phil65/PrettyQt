@@ -29,3 +29,30 @@ class MimeDatabase(QtCore.QMimeDatabase):
             path = os.fspath(path)
         mime_type = self.mimeTypeForFile(path, MATCH_MODE[match_mode])
         return core.MimeType(mime_type)
+
+    def get_mime_type_for_data(
+        self, data: datatypes.ByteArrayType | QtCore.QIODevice
+    ) -> core.MimeType:
+        return core.MimeType(self.mimeTypeForData(data))
+
+    def get_mime_type_for_filename_and_data(
+        self, filename: os.PathLike, data: datatypes.ByteArrayType | QtCore.QIODevice
+    ) -> core.MimeType:
+        path = os.fspath(filename)
+        return core.MimeType(self.mimeTypeForFileNameAndData(path, data))
+
+    def get_mime_type_for_name(self, name: str) -> core.MimeType:
+        return core.MimeType(self.mimeTypeForName(name))
+
+    def get_mime_type_for_url(self, url: QtCore.QUrl | str) -> core.MimeType:
+        url = QtCore.QUrl(url) if isinstance(url, str) else url
+        return core.MimeType(self.mimeTypeForUrl(url))
+
+    def get_mime_types_for_filename(self, filename: os.PathLike) -> list[core.MimeType]:
+        path = os.fspath(filename)
+        return [core.MimeType(i) for i in self.mimeTypesForFileName(path)]
+
+
+if __name__ == "__main__":
+    db = MimeDatabase()
+    print(db.get_mime_type_for_file("C:/test.log"))
