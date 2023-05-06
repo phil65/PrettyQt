@@ -32,12 +32,13 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         self.setVerticalHeader(header)
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
-        if not do_sort:
-            backup = self.model().sort
-            self.model().sort = lambda x, y: None
+        model = self.model()
+        if not do_sort and model is not None:
+            backup = model.sort
+            model.sort = lambda x, y: None
         self.setSortingEnabled(enabled)
-        if not do_sort:
-            self.model().sort = backup
+        if not do_sort and model is not None:
+            model.sort = backup
 
     def setup_list_style(self):
         self.set_selection_behaviour("rows")
