@@ -12,7 +12,7 @@ class VersionNumber(QtCore.QVersionNumber):
     def __init__(self, *args, **kwargs):
         if len(args) == 1:
             if isinstance(args[0], str):
-                args = tuple(int(i) for i in args[0].split("."))
+                args = [int(i) for i in args[0].split(".")][:3]
             elif isinstance(args[0], tuple):
                 args = args[0]
             # PySide6 Workaround:
@@ -74,6 +74,10 @@ class VersionNumber(QtCore.QVersionNumber):
         if isinstance(other, str | tuple):
             other = VersionNumber(other)
         return super().__le__(other)
+
+    @classmethod
+    def from_string(cls, version_string: str) -> Self:
+        return cls(cls.fromString(version_string))
 
     @classmethod
     def get_qt_version(cls) -> Self:
