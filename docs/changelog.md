@@ -1,3 +1,15 @@
+## v1.37.0 (2023-05-06)
+
+### Feat
+
+- **HeaderView**: some kwargs for set_resize_mode, add set_sections_movable method
+- **TreeView/TableView**: add set_sorting_enabled method
+- add HierarchicalHeaderView class
+- **SortFilterProxyModel**: add get_sort_order method
+- **Wizard**: add set_custom_button method
+- make some basic types pattern matching compatible
+- **SortFilterProxyModel**: more pythonic sort() kwargs
+
 ## v1.36.0 (2023-05-05)
 
 ### Feat
