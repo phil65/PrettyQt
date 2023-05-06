@@ -167,9 +167,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
             left: int,
             hv: QtWidgets.QHeaderView,
         ) -> int:
-            leafs_list = self.leafs(searched_index)
-            if leafs_list:
-                n = leafs_list.index(leaf_index) if leaf_index in leafs_list else - 1
+            if leafs_list := self.leafs(searched_index):
+                n = leafs_list.index(leaf_index) if leaf_index in leafs_list else -1
                 first_leaf_section_index = section_index - n
                 for i in range(n - 1, -1, -1):
                     left -= hv.sectionSize(first_leaf_section_index + i)
@@ -195,7 +194,9 @@ class HierarchicalHeaderView(widgets.HeaderView):
             left = self.get_current_cell_left(
                 cell_index, leaf_index, logical_leaf_index, section_rect.left(), hv
             )
-            width = self.get_current_cell_width(cell_index, leaf_index, logical_leaf_index, hv)
+            width = self.get_current_cell_width(
+                cell_index, leaf_index, logical_leaf_index, hv
+            )
             r = QtCore.QRect(left, top, width, height)
             uniopt.text = cell_index.data(constants.DISPLAY_ROLE)
             painter.save()
@@ -273,7 +274,9 @@ class HierarchicalHeaderView(widgets.HeaderView):
             top = self.get_current_cell_left(
                 cell_index, leaf_index, logical_leaf_index, section_rect.top(), hv
             )
-            height = self.get_current_cell_width(cell_index, leaf_index, logical_leaf_index, hv)
+            height = self.get_current_cell_width(
+                cell_index, leaf_index, logical_leaf_index, hv
+            )
             r = QtCore.QRect(left, top, width, height)
             uniopt.text = cell_index.data(constants.DISPLAY_ROLE)
             painter.save()
@@ -337,10 +340,11 @@ class HierarchicalHeaderView(widgets.HeaderView):
             parent.setHorizontalHeader(self)
         else:
             parent.setVerticalHeader(self)
-        self.sectionMoved.connect(self.on_sectionMoved)
+        self.sectionMoved.connect(self._on_section_moved)
 
-    def on_sectionMoved(self, logical_index, old_visual_index, new_visual_index):
-        view, model = self.parent(), self.parent().model()
+    def _on_section_moved(self, logical_index, old_visual_index, new_visual_index):
+        view, model = self.parent()
+        model = view.model()
         if not hasattr(model, "reorder"):
             return  # reorder underlying data of models with /reorder/ def only
         if getattr(self, "manual_move", False):
@@ -386,10 +390,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
         opt = QtWidgets.QStyleOptionHeader()
         self.initStyleOption(opt)
         if self.isSortIndicatorShown() and self.sortIndicatorSection() == logical_index:
-            opt.sortIndicator = (
-                SortIndicator.SortUp,
-                SortIndicator.SortDown,
-            )[self.sortIndicatorOrder() == constants.ASCENDING]
+            asc = self.sortIndicatorOrder() == constants.ASCENDING
+            opt.sortIndicator = SortIndicator.SortDown if asc else SortIndicator.SortUp
         if self.window().isActiveWindow():
             opt.state = opt.state | StateFlag.State_Active
         opt.textAlignment = QtCore.Qt.AlignmentFlag.AlignCenter
@@ -515,22 +517,22 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 leaf_index,
             )
 
-    def on_sectionResized(self, logicalIndex: int):
-        if self.isSectionHidden(logicalIndex):
+    def on_sectionResized(self, logical_index: int):
+        if self.isSectionHidden(logical_index):
             return
-        leaf_index = core.ModelIndex(self._pd.leaf_index(logicalIndex))
+        leaf_index = core.ModelIndex(self._pd.leaf_index(logical_index))
         if leaf_index.isValid():
             leafs_list = self._pd.leafs(self._pd.find_root_index(leaf_index))
             start = leafs_list.index(leaf_index) if leaf_index in leafs_list else -1
             for _ in range(start, 0, -1):
-                logicalIndex -= 1
+                logical_index -= 1
                 w = self.viewport().width()
                 h = self.viewport().height()
-                pos = self.sectionViewportPosition(logicalIndex)
+                pos = self.sectionViewportPosition(logical_index)
                 r = QtCore.QRect(pos, 0, w - pos, h)
                 if self.orientation() == constants.HORIZONTAL:
                     if self.isRightToLeft():
-                        r.setRect(0, 0, pos + self.sectionSize(logicalIndex), h)
+                        r.setRect(0, 0, pos + self.sectionSize(logical_index), h)
                 else:
                     r.setRect(0, pos, w, h - pos)
                 self.viewport().update(r.normalized())
