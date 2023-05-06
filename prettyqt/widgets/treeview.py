@@ -32,6 +32,14 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
     def expand_all(self):
         self.expandAll()
 
+    def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
+        if not do_sort:
+            backup = self.model().sort
+            self.model().sort = lambda x, y: None
+        self.setSortingEnabled(enabled)
+        if not do_sort:
+            self.model().sort = backup
+
     def set_indentation(self, indentation: int):
         self.setIndentation(indentation)
 

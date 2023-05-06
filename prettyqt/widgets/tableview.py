@@ -31,6 +31,14 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
     def v_header(self, header):
         self.setVerticalHeader(header)
 
+    def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
+        if not do_sort:
+            backup = self.model().sort
+            self.model().sort = lambda x, y: None
+        self.setSortingEnabled(enabled)
+        if not do_sort:
+            self.model().sort = backup
+
     def setup_list_style(self):
         self.set_selection_behaviour("rows")
         self.h_header.setStretchLastSection(True)
