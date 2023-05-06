@@ -197,6 +197,10 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         super().__init__(parent)
         self._document = self.document()
         self._formatter = html.HtmlFormatter(nowrap=True)
+        if style is None:
+            gui.GuiApplication.styleHints().colorSchemeChanged.connect(
+                self.adjust_style_to_palette
+            )
         self.set_style(style)
         if lexer == "regex":
             self._lexer = lexers.load_lexer_from_file(str(paths.RE_LEXER_PATH))
@@ -208,8 +212,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
 
     def highlightBlock(self, string):
         """Highlight a block of text."""
-        prev_data = self.currentBlock().previous().userData()
-        if prev_data is not None:
+        if (prev_data := self.currentBlock().previous().userData()) is not None:
             self._lexer._saved_state_stack = prev_data.syntax_stack
         elif hasattr(self._lexer, "_saved_state_stack"):
             del self._lexer._saved_state_stack
@@ -233,11 +236,17 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
 
     def set_style(self, style: None | StyleStr | styles.Style):
         if style is None:
-            style = styles.get_style_by_name("default")
+            self.adjust_style_to_palette()
+            return
         elif isinstance(style, str):
             style = styles.get_style_by_name(style)
         self._style = style
         self._clear_caches()
+
+    def adjust_style_to_palette(self):
+        pal = gui.GuiApplication.get_palette()
+        style = "monokai" if pal.is_dark() else "default"
+        self.set_style(style)
 
     def set_style_sheet(self, stylesheet: str):
         """Sets a CSS stylesheet.
@@ -286,6 +295,6 @@ if __name__ == "__main__":
     app.set_style("Fusion")
     editor = widgets.PlainTextEdit()
     highlighter = PygmentsHighlighter(editor.document(), lexer="python")
-    highlighter.set_style("monokai")
+    # highlighter.set_style("monokai")
     editor.show()
     app.main_loop()

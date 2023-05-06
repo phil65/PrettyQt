@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import charts, constants, core, widgets
+from prettyqt import charts, constants, core, gui, widgets
 from prettyqt.qt import QtCharts, QtCore
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
@@ -56,6 +56,15 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         self.max_y = 0
         self.min_x = 0
         self.min_y = 0
+        self.adjust_style_to_palette()
+        gui.GuiApplication.styleHints().colorSchemeChanged.connect(
+            self.adjust_style_to_palette
+        )
+
+    def adjust_style_to_palette(self):
+        pal = gui.GuiApplication.get_palette()
+        style = "Dark" if pal.is_dark() else "Light"
+        self.set_style(style)
 
     def get_axes(
         self,
