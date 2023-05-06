@@ -343,7 +343,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         self.sectionMoved.connect(self._on_section_moved)
 
     def _on_section_moved(self, logical_index, old_visual_index, new_visual_index):
-        view, model = self.parent()
+        view = self.parent()
         model = view.model()
         if not hasattr(model, "reorder"):
             return  # reorder underlying data of models with /reorder/ def only
