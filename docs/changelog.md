@@ -1,3 +1,9 @@
+## v1.37.1 (2023-05-06)
+
+### Fix
+
+- check for None-model in set_sorting_enabled
+
 ## v1.37.0 (2023-05-06)
 
 ### Feat
