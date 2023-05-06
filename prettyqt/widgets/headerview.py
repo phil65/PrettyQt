@@ -38,7 +38,12 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self.setSectionsClickable(True)
         self.sectionResized.connect(self.sectionResizeEvent)
         self._handle_section_is_pressed = False
+        self.setResizeContentsPrecision(100)
         self._widget_name = parent.objectName() if parent is not None else ""
+
+    def set_sections_movable(self, value: bool, include_first: bool = False):
+        self.setSectionsMovable(value)
+        self.setFirstSectionMovable(include_first)
 
     def mousePressEvent(self, e):
         super().mousePressEvent(e)
@@ -52,6 +57,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
     def sectionResizeEvent(self, logical_index, old_size, new_size):
         if self._handle_section_is_pressed:
             self.section_resized_by_user.emit(logical_index, old_size, new_size)
+        # do we need to call super() otherwise?
 
     def generate_header_id(self):
         # return f"{self._widget_name}.state"
@@ -84,13 +90,35 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         val = self.sectionResizeMode(col)
         return MODES.inverse[val]
 
-    def set_resize_mode(self, mode: ModeStr, col: int | None = None):
+    def set_resize_mode(
+        self,
+        mode: ModeStr,
+        col: int | None = None,
+        precision: int | None = None,
+        cascading: bool | None = None,
+        stretch_last_section: bool | None = None,
+        default_section_size: int | None = None,
+        maximum_section_size: int | None = None,
+        minimum_section_size: int | None = None,
+    ):
+        if col is not None:
+            self.setSectionResizeMode(col, MODES[mode])
+            return
+        if stretch_last_section is not None:
+            self.stretchLastSection(stretch_last_section)
+        if minimum_section_size is not None:
+            self.setMinimumSectionSize(minimum_section_size)
+        if default_section_size is not None:
+            self.setDefaultSectionSize(default_section_size)
+        if maximum_section_size is not None:
+            self.setMaximumSectionSize(maximum_section_size)
+        if precision is not None:
+            self.setResizeContentsPrecision(precision)
+        if cascading is not None:
+            self.setCascadingSectionResizes(cascading)
         if mode not in MODES:
             raise InvalidParamError(mode, MODES)
-        if col is None:
-            self.setSectionResizeMode(MODES[mode])
-        else:
-            self.setSectionResizeMode(col, MODES[mode])
+        self.setSectionResizeMode(MODES[mode])
 
     def get_section_labels(self) -> list[str]:
         model = self.model()
