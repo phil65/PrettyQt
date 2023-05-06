@@ -83,8 +83,12 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
     def __repr__(self):
         return get_repr(self, self.get_color("button"), self.get_color("window"))
 
-    def highlight_inactive(self):
-        color = self.color(self.ColorGroup.Active, self.ColorRole.Highlight)
+    def highlight_inactive(self, enable: bool = True):
+        if enable:
+            color = self.color(self.ColorGroup.Active, self.ColorRole.Highlight)
+        else:
+            pal = gui.Palette()
+            color = pal.color(self.ColorGroup.Inactive, self.ColorRole.Highlight)
         self.setColor(self.ColorGroup.Inactive, self.ColorRole.Highlight, color)
 
     def set_color(

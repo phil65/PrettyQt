@@ -4,7 +4,7 @@ from collections.abc import Generator
 import logging
 from typing import Any, Literal
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
@@ -344,7 +344,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def highlight_when_inactive(self):
         """Highlight items when widget does not have focus."""
-        p = gui.Palette()
+        p = self.get_palette()
         p.highlight_inactive()
         self.setPalette(p)
 
