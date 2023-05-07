@@ -64,7 +64,7 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
     def adjust_style_to_palette(self):
         pal = gui.GuiApplication.get_palette()
         style = "Dark" if pal.is_dark() else "Light"
-        self.set_style(style)
+        self.set_theme(style)
 
     def get_axes(
         self,
