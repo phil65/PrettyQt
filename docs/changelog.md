@@ -1,3 +1,18 @@
+## v1.38.0 (2023-05-07)
+
+### Feat
+
+- **TreeWidget**: add find_items method
+- recursive and case_sensitive kwarg for ListWidget/StandardItemModel.find_items
+- **HeaderView**: add set_sort_indicator method
+- **VersionNumber**: add from_string method
+- auto adjust Chart and PygmentsHighlighter colors to Palette
+- **Palette**: allow disabling highlight_inactive
+
+### Fix
+
+- **HierarchicalHeaderView**: oops
+
 ## v1.37.1 (2023-05-06)
 
 ### Fix
