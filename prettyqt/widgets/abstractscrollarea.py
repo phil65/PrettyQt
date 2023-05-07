@@ -158,6 +158,9 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         """Scroll to the bottom of the scroll area."""
         self.verticalScrollBar().scroll_to_max()
 
+    def set_viewport_margins(self, margins: int):
+        self.setViewportMargins(margins, margins, margins, margins)
+
 
 class AbstractScrollArea(AbstractScrollAreaMixin, QtWidgets.QAbstractScrollArea):
     pass
