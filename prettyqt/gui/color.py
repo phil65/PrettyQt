@@ -32,7 +32,8 @@ class Color(QtGui.QColor):
         # PySide2 workaround
         if len(args) == 1:
             if isinstance(args[0], QtGui.QColor):
-                super().__init__(args[0].name())
+                super().__init__()
+                self.setRgba(args[0].rgba())
             elif isinstance(args[0], str):
                 super().__init__()
                 self.set_color(args[0])
