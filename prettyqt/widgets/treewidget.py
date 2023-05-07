@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import InvalidParamError
 
 
 class TreeWidgetMixin(widgets.TreeViewMixin):
@@ -11,6 +12,23 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
     def sort(self, column: int = 0, reverse: bool = False):
         order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
+
+    def find_items(
+        self,
+        text: str,
+        column: int = 0,
+        mode: constants.MatchFlagStr = "exact",
+        recursive: bool = False,
+        case_sensitive: bool = False,
+    ) -> list[QtWidgets.QTreeWidgetItem]:
+        if mode not in constants.MATCH_FLAGS:
+            raise InvalidParamError(mode, constants.MATCH_FLAGS)
+        flag = constants.MATCH_FLAGS[mode]
+        if recursive:
+            flag |= QtCore.Qt.MatchFlag.MatchRecursive
+        if case_sensitive:
+            flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
+        return self.findItems(text, flag, column)  # type: ignore
 
     def get_items(self, recursive: bool = False) -> list[QtWidgets.QTreeWidgetItem]:
         """Get TreeWidgetItems of this widget.
