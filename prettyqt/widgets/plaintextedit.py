@@ -7,7 +7,7 @@ from typing import Literal
 from deprecated import deprecated
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
 
 
@@ -31,7 +31,10 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     ):
         super().__init__(parent, **kwargs)
         self._allow_wheel_zoom = False
+        self._current_block = None
+        self.cursorPositionChanged.connect(self._update_on_block_change)
         self.validator: QtGui.QValidator | None = None
+        self._current_line_color = None
         self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
         doc = gui.TextDocument(self)
@@ -53,6 +56,12 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
             event.accept()
         else:
             super().wheelEvent(event)
+
+    def set_current_line_color(self, color: datatypes.ColorType):
+        self._current_line_color = colors.get_color(color) if color else None
+
+    def get_current_line_color(self) -> gui.Color:
+        return self._current_line_color
 
     def allow_wheel_zoom(self, do_zoom: bool = True):
         self._allow_wheel_zoom = do_zoom
@@ -145,6 +154,24 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         else:
             options.setFlags(options.flags() & ~flag)  # type: ignore
         doc.setDefaultTextOption(options)
+
+    def paintEvent(self, event: QtGui.QPaintEvent):
+        if self._current_line_color:
+            with gui.Painter(self.viewport()) as painter:
+                cursor_rect = self.cursorRect()
+                r = QtCore.QRect(0, cursor_rect.top(), self.width(), cursor_rect.height())
+                painter.set_pen(None)
+                painter.setBrush(gui.Color(self._current_line_color))
+                painter.drawRect(r)
+        super().paintEvent(event)
+
+    def _update_on_block_change(self):
+        tc = self.textCursor()
+        b = tc.blockNumber()
+        if b == self._current_block:
+            return
+        self._current_block = b
+        self.viewport().update()
 
     def highlight_current_line(self, color: datatypes.ColorType = None):
         if color is None:
@@ -245,6 +272,10 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     def get_value(self) -> str:
         return self.text()
 
+    current_line_color = core.Property(
+        object, get_current_line_color, set_current_line_color
+    )
+
 
 class PlainTextEdit(PlainTextEditMixin, QtWidgets.QPlainTextEdit):
     pass
@@ -257,8 +288,9 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = PlainTextEdit("This is a test")
     widget.show_whitespace_and_tabs(True)
-    widget.set_validator(val)
-    with widget.current_cursor() as c:
-        c.select_text(2, 4)
+    # widget.set_validator(val)
+    # with widget.current_cursor() as c:
+    #     c.select_text(2, 4)
+    widget.set_current_line_color(gui.Color(128, 128, 128, 30))
     widget.show()
     app.main_loop()
