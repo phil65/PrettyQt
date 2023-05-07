@@ -210,11 +210,8 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
         self.setMarginsBackgroundColor(colors.get_color(color))
 
     def highlight_current_line(self, color: datatypes.ColorType = None):
-        if color is None:
-            color = self.get_palette().get_color("highlight")
-        else:
-            color = colors.get_color(color)
         self.setCaretLineVisible(color is not None)
+        color = colors.get_color(color)
         self.setCaretLineBackgroundColor(color)
 
     def set_brace_matching(self, match_type: MatchTypeStr | None):
