@@ -32,7 +32,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         super().__init__(parent, **kwargs)
         self._allow_wheel_zoom = False
         self._current_block = None
-        self.cursorPositionChanged.connect(self._update_on_block_change)
+        self._hl = None
         self.validator: QtGui.QValidator | None = None
         self._current_line_color = None
         self.textChanged.connect(self._on_value_change)
@@ -58,6 +58,10 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
             super().wheelEvent(event)
 
     def set_current_line_color(self, color: datatypes.ColorType):
+        if self._current_line_color is None:
+            self.cursorPositionChanged.connect(self._update_on_block_change)
+        if color is None:
+            self.cursorPositionChanged.disconnect(self._update_on_block_change)
         self._current_line_color = colors.get_color(color) if color else None
 
     def get_current_line_color(self) -> gui.Color:
