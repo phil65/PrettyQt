@@ -71,7 +71,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                         return res
             return core.ModelIndex()
 
-        def search_leafs(self, index: core.ModelIndex) -> list:
+        def search_leafs(self, index: core.ModelIndex) -> list[core.ModelIndex]:
             res = []
             if index.isValid():
                 model = index.model()
@@ -83,7 +83,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                     res.append(index)
             return res
 
-        def leafs(self, index: core.ModelIndex) -> list:
+        def leafs(self, index: core.ModelIndex) -> list[core.ModelIndex]:
             leafs = []
             if index.isValid():
                 model = index.model()
@@ -130,7 +130,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 QtCore.QSize(),
                 hv,
             )
-            empty_text_size = QtCore.QSize(fm.size(0, ""))
+            empty_text_size = fm.size(0, "")
             return res.expandedTo(size + decoration_size - empty_text_size)
 
         def get_current_cell_width(
@@ -179,9 +179,11 @@ class HierarchicalHeaderView(widgets.HeaderView):
             uniopt = QtWidgets.QStyleOptionHeader(style_options)
             self.set_foreground_brush(uniopt, cell_index)
             self.set_background_brush(uniopt, cell_index)
-            height = self.get_cell_size(cell_index, hv, uniopt).height()
-            if cell_index == leaf_index:
-                height = section_rect.height() - top
+            height = (
+                section_rect.height() - top
+                if cell_index == leaf_index
+                else self.get_cell_size(cell_index, hv, uniopt).height()
+            )
             left = self.get_current_cell_left(
                 cell_index, leaf_index, logical_leaf_index, section_rect.left(), hv
             )
@@ -219,7 +221,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
             old_bo = painter.brushOrigin()
             top = section_rect.y()
             indexes = self.get_parent_indexes(leaf_index)
-            for i in range(len(indexes)):
+            for i, idx in enumerate(indexes):
                 real_style_options = QtWidgets.QStyleOptionHeader(style_options)
                 if i < len(indexes) - 1 and (
                     real_style_options.state & StateFlag.State_Sunken
@@ -235,7 +237,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 top = self.paint_horizontal_cell(
                     painter,
                     hv,
-                    indexes[i],
+                    idx,
                     leaf_index,
                     logical_leaf_index,
                     real_style_options,
@@ -258,9 +260,11 @@ class HierarchicalHeaderView(widgets.HeaderView):
             uniopt = QtWidgets.QStyleOptionHeader(style_options)
             self.set_foreground_brush(uniopt, cell_index)
             self.set_background_brush(uniopt, cell_index)
-            width = self.get_cell_size(cell_index, hv, uniopt).width()
-            if cell_index == leaf_index:
-                width = section_rect.width() - left
+            width = (
+                section_rect.width() - left
+                if cell_index == leaf_index
+                else self.get_cell_size(cell_index, hv, uniopt).width()
+            )
             top = self.get_current_cell_left(
                 cell_index, leaf_index, logical_leaf_index, section_rect.top(), hv
             )
@@ -297,7 +301,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
             old_bo = painter.brushOrigin()
             left = section_rect.x()
             indexes = self.get_parent_indexes(leaf_index)
-            for i in range(len(indexes)):
+            for i, idx in enumerate(indexes):
                 real_style_options = QtWidgets.QStyleOptionHeader(style_options)
                 if i < len(indexes) - 1 and (
                     real_style_options.state & StateFlag.State_Sunken
@@ -309,7 +313,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 left = self.paint_vertical_cell(
                     painter,
                     hv,
-                    indexes[i],
+                    idx,
                     leaf_index,
                     logical_leaf_index,
                     real_style_options,
@@ -426,13 +430,13 @@ class HierarchicalHeaderView(widgets.HeaderView):
     def sectionSizeFromContents(self, logical_index: int) -> QtCore.QSize:
         if not self._pd.header_model:
             return super().sectionSizeFromContents(logical_index)
-        cur_leaf_index = core.ModelIndex(self._pd.leaf_index(logical_index))
+        cur_leaf_index = self._pd.leaf_index(logical_index)
         if not cur_leaf_index.isValid():
             return super().sectionSizeFromContents(logical_index)
         styleOption = QtWidgets.QStyleOptionHeader(
             self.get_style_option_for_cell(logical_index)
         )
-        s = QtCore.QSize(self._pd.get_cell_size(cur_leaf_index, self, styleOption))
+        s = self._pd.get_cell_size(cur_leaf_index, self, styleOption)
         cur_leaf_index = cur_leaf_index.parent()
         while cur_leaf_index.isValid():
             cell_size = self._pd.get_cell_size(cur_leaf_index, self, styleOption)
@@ -449,7 +453,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         if not rect.isValid():
             super().paintSection(painter, rect, logical_index)
             return
-        leaf_index = core.ModelIndex(self._pd.leaf_index(logical_index))
+        leaf_index = self._pd.leaf_index(logical_index)
         if not leaf_index.isValid():
             super().paintSection(painter, rect, logical_index)
             return
@@ -476,17 +480,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
     def on_section_resized(self, logical_index: int):
         if self.isSectionHidden(logical_index):
             return
-        leaf_index = core.ModelIndex(self._pd.leaf_index(logical_index))
+        leaf_index = self._pd.leaf_index(logical_index)
         if leaf_index.isValid():
             leafs_list = self._pd.leafs(self._pd.find_root_index(leaf_index))
             start = leafs_list.index(leaf_index) if leaf_index in leafs_list else -1
+            is_horizontal = self.orientation() == constants.HORIZONTAL
             for _ in range(start, 0, -1):
                 logical_index -= 1
                 w = self.viewport().width()
                 h = self.viewport().height()
                 pos = self.sectionViewportPosition(logical_index)
                 r = QtCore.QRect(pos, 0, w - pos, h)
-                if self.orientation() == constants.HORIZONTAL:
+                if is_horizontal:
                     if self.isRightToLeft():
                         r.setRect(0, 0, pos + self.sectionSize(logical_index), h)
                 else:

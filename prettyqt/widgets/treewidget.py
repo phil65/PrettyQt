@@ -51,11 +51,6 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
             nodes = items
         return results[1:]
 
-    def collapse_tree(self, item):
-        item.setExpanded(False)
-        for i in range(item.childCount()):
-            self.collapse_tree(item.child(i))
-
     def removeTopLevelItem(self, item):
         for i in range(self.topLevelItemCount()):
             if self.topLevelItem(i) is item:
