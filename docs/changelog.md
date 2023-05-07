@@ -1,3 +1,9 @@
+## v1.38.1 (2023-05-07)
+
+### Fix
+
+- **Chart**: used wrong call for setting style
+
 ## v1.38.0 (2023-05-07)
 
 ### Feat
