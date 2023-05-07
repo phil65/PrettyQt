@@ -48,7 +48,7 @@ ErrorStr = Literal[
 class BluetoothDeviceDiscoveryAgent(
     core.ObjectMixin, QtBluetooth.QBluetoothDeviceDiscoveryAgent
 ):
-    device_discovered = core.Signal(bluetooth.BluetoothDeviceInfo)
+    device_discovered = core.Signal(object)  # bluetooth.BluetoothDeviceInfo casts signal.
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -104,7 +104,7 @@ if __name__ == "__main__":
     app = core.app()
     agent = BluetoothDeviceDiscoveryAgent(app)
     agent.setLowEnergyDiscoveryTimeout(500)
-    # agent.device_discovered.connect(lambda device: logging.info(type(device)))
+    agent.device_discovered.connect(lambda x: logging.info(x))
     agent.finished.connect(app.quit)
     agent.start_discovery()
     app.main_loop()
