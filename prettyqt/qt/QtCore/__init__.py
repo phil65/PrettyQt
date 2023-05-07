@@ -40,7 +40,7 @@ if PYQT6:
         pyqtEnum as QEnum,
         pyqtEnum as QFlag,
         pyqtClassInfo,
-        pyqtClassInfo as QClassInfo,
+        pyqtClassInfo as ClassInfo,
         Q_ARG,
         Q_ARG as QGenericArgument,
         PYQT_VERSION_STR as BINDING_VERSION,
