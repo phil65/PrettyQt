@@ -5,7 +5,8 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 SortIndicator = QtWidgets.QStyleOptionHeader.SortIndicator
 StateFlag = QtWidgets.QStyle.StateFlag
 CE = QtWidgets.QStyle.ControlElement
-
+SelectedPosition = QtWidgets.QStyleOptionHeader.SelectedPosition
+SectionPosition = QtWidgets.QStyleOptionHeader.SectionPosition
 
 HORIZONTAL_HEADER_DATA_ROLE = QtCore.Qt.UserRole + 150
 VERTICAL_HEADER_DATA_ROLE = QtCore.Qt.UserRole + 151
@@ -24,12 +25,9 @@ class HierarchicalHeaderView(widgets.HeaderView):
         header_model = None
 
         def init_from_new_model(self, orientation: int, model: QtCore.QAbstractItemModel):
-            self.header_model = model.data(
-                core.ModelIndex(),
-                HORIZONTAL_HEADER_DATA_ROLE
-                if orientation == constants.HORIZONTAL
-                else VERTICAL_HEADER_DATA_ROLE,
-            )
+            is_hor = orientation == constants.HORIZONTAL
+            role = HORIZONTAL_HEADER_DATA_ROLE if is_hor else VERTICAL_HEADER_DATA_ROLE
+            self.header_model = model.data(core.ModelIndex(), role)
 
         def find_root_index(self, index: core.ModelIndex) -> core.ModelIndex:
             while index.parent().isValid():
@@ -46,19 +44,20 @@ class HierarchicalHeaderView(widgets.HeaderView):
         def find_leaf(
             self, index: core.ModelIndex, section_index: int, current_leaf_index: int
         ) -> core.ModelIndex:
-            if index.isValid():
-                model = index.model()
-                if child_count := model.columnCount(index):
-                    for i in range(child_count):
-                        res, current_leaf_index = self.find_leaf(
-                            model.index(0, i, index), section_index, current_leaf_index
-                        )
-                        if res.isValid():
-                            return res, current_leaf_index
-                else:
-                    current_leaf_index += 1
-                    if current_leaf_index == section_index:
-                        return index, current_leaf_index
+            if not index.isValid():
+                return core.ModelIndex(), current_leaf_index
+            model = index.model()
+            if child_count := model.columnCount(index):
+                for i in range(child_count):
+                    res, current_leaf_index = self.find_leaf(
+                        model.index(0, i, index), section_index, current_leaf_index
+                    )
+                    if res.isValid():
+                        return res, current_leaf_index
+            else:
+                current_leaf_index += 1
+                if current_leaf_index == section_index:
+                    return index, current_leaf_index
             return core.ModelIndex(), current_leaf_index
 
         def leaf_index(self, section_index: int) -> core.ModelIndex:
@@ -98,9 +97,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
             self, opt: QtWidgets.QStyleOptionHeader, index: core.ModelIndex
         ):
             if foreground_brush := index.data(constants.FOREGROUND_ROLE):
-                opt.palette.setBrush(
-                    QtGui.QPalette.ColorRole.ButtonText, QtGui.QBrush(foreground_brush)
-                )
+                brush = QtGui.QBrush(foreground_brush)
+                opt.palette.setBrush(QtGui.QPalette.ColorRole.ButtonText, brush)
 
         def set_background_brush(
             self, opt: QtWidgets.QStyleOptionHeader, index: core.ModelIndex
@@ -122,25 +120,21 @@ class HierarchicalHeaderView(widgets.HeaderView):
             res = QtCore.QSize()
             if variant := leaf_index.data(constants.SIZE_HINT_ROLE):
                 res = variant
-            fnt = QtGui.QFont(hv.font())
-            if var := leaf_index.data(constants.FONT_ROLE):
-                fnt = var
+            fnt = var if (var := leaf_index.data(constants.FONT_ROLE)) else hv.font()
             fnt.setBold(True)
             fm = QtGui.QFontMetrics(fnt)
             text_size = fm.size(0, leaf_index.data(constants.DISPLAY_ROLE))
-            size = QtCore.QSize(text_size + QtCore.QSize(4, 0))
+            size = text_size + QtCore.QSize(4, 0)
             if leaf_index.data(constants.USER_ROLE):
                 size.transpose()
-            decoration_size = QtCore.QSize(
-                hv.style().sizeFromContents(
-                    QtWidgets.QStyle.ContentsType.CT_HeaderSection,
-                    style_options,
-                    QtCore.QSize(),
-                    hv,
-                )
+            decoration_size = hv.style().sizeFromContents(
+                QtWidgets.QStyle.ContentsType.CT_HeaderSection,
+                style_options,
+                QtCore.QSize(),
+                hv,
             )
-            emptyTextSize = QtCore.QSize(fm.size(0, ""))
-            return res.expandedTo(size + decoration_size - emptyTextSize)
+            empty_text_size = QtCore.QSize(fm.size(0, ""))
+            return res.expandedTo(size + decoration_size - empty_text_size)
 
         def get_current_cell_width(
             self,
@@ -225,7 +219,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
             leaf_index: core.ModelIndex,
         ):
             #            print(logical_leaf_index)
-            oldBO = painter.brushOrigin()
+            old_bo = painter.brushOrigin()
             top = section_rect.y()
             indexes = self.get_parent_indexes(leaf_index)
             for i in range(len(indexes)):
@@ -235,9 +229,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
                     or real_style_options.state & StateFlag.State_On
                 ):
                     t = StateFlag.State_Sunken | StateFlag.State_On
-                    real_style_options.state = (
-                        real_style_options.state & ~t
-                    )  # FIXME: parent items are not highlighted
+                    real_style_options.state = real_style_options.state & ~t
+                    # FIXME: parent items are not highlighted
                 if i < len(indexes) - 1:  # Use sortIndicator for inner level only
                     real_style_options.sortIndicator = SortIndicator.None_
                 #                if i==0:
@@ -252,7 +245,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                     section_rect,
                     top,
                 )
-            painter.setBrushOrigin(oldBO)
+            painter.setBrushOrigin(old_bo)
 
         def paint_vertical_cell(
             self,
@@ -304,7 +297,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
             style_options: QtWidgets.QStyleOptionHeader,
             leaf_index: core.ModelIndex,
         ):
-            oldBO = painter.brushOrigin()
+            old_bo = painter.brushOrigin()
             left = section_rect.x()
             indexes = self.get_parent_indexes(leaf_index)
             for i in range(len(indexes)):
@@ -327,12 +320,12 @@ class HierarchicalHeaderView(widgets.HeaderView):
                     section_rect,
                     left,
                 )
-            painter.setBrushOrigin(oldBO)
+            painter.setBrushOrigin(old_bo)
 
     def __init__(self, orientation: QtCore.Qt.Orientation, parent: QtWidgets.QWidget):
         super().__init__(orientation, parent)
         self._pd = self.PrivateData()
-        self.sectionResized.connect(self.on_sectionResized)
+        self.sectionResized.connect(self.on_section_resized)
         self.setHighlightSections(True)
         self.setSectionsClickable(True)
         self.show()  # force to be visible
@@ -352,37 +345,32 @@ class HierarchicalHeaderView(widgets.HeaderView):
             return
         self.manual_move = True
         self.moveSection(new_visual_index, old_visual_index)  # cancel move
-        if model.reorder(old_visual_index, new_visual_index, self.orientation()):
-            rng = sorted((old_visual_index, new_visual_index))
+        if not model.reorder(old_visual_index, new_visual_index, self.orientation()):
+            return
+        rng = sorted((old_visual_index, new_visual_index))
 
-            if self.orientation() == constants.HORIZONTAL:
-                options = [(view.columnWidth(i), i) for i in range(rng[0], rng[1] + 1)]
-                for i, col in enumerate(range(rng[0], rng[1] + 1)):
-                    view.setColumnWidth(col, options[i][0])
-                view.selectColumn(new_visual_index)
-            else:
-                options = [(view.rowHeight(i), i) for i in range(rng[0], rng[1] + 1)]
-                for i, col in enumerate(range(rng[0], rng[1] + 1)):
-                    view.setRowHeight(col, options[i][0])
-                view.selectRow(new_visual_index)
+        if self.orientation() == constants.HORIZONTAL:
+            options = [(view.columnWidth(i), i) for i in range(rng[0], rng[1] + 1)]
+            for i, col in enumerate(range(rng[0], rng[1] + 1)):
+                view.setColumnWidth(col, options[i][0])
+            view.selectColumn(new_visual_index)
+        else:
+            options = [(view.rowHeight(i), i) for i in range(rng[0], rng[1] + 1)]
+            for i, col in enumerate(range(rng[0], rng[1] + 1)):
+                view.setRowHeight(col, options[i][0])
+            view.selectRow(new_visual_index)
 
-            # FIXME: don't select if sorting is enable?
-            if self.isSortIndicatorShown():
-                sortIndIndex = next(
-                    (
-                        i
-                        for i, o in enumerate(options)
-                        if o[1] == self.sortIndicatorSection()
-                    ),
-                    None,
-                )
-                if (
-                    sortIndIndex is not None
-                ):  # sort indicator is among sections being reordered
-                    self.setSortIndicator(
-                        sortIndIndex + rng[0], self.sortIndicatorOrder()
-                    )  # FIXME: does unnecessary sorting
-            model.layoutChanged.emit()  # update view
+        # FIXME: don't select if sorting is enable?
+        if self.isSortIndicatorShown():
+            sort_ind_index = next(
+                (i for i, o in enumerate(options) if o[1] == self.sortIndicatorSection()),
+                None,
+            )
+            # sort indicator is among sections being reordered
+            if sort_ind_index is not None:
+                # FIXME: does unnecessary sorting
+                self.setSortIndicator(sort_ind_index + rng[0], self.sortIndicatorOrder())
+        model.layoutChanged.emit()  # update view
 
     def get_style_option_for_cell(
         self, logical_index: int
@@ -399,68 +387,44 @@ class HierarchicalHeaderView(widgets.HeaderView):
         opt.section = logical_index
         visual = self.visualIndex(logical_index)
         if self.count() == 1:
-            opt.position = QtWidgets.QStyleOptionHeader.SectionPosition.OnlyOneSection
+            opt.position = SectionPosition.OnlyOneSection
+        elif visual == 0:
+            opt.position = SectionPosition.Beginning
         else:
-            if visual == 0:
-                opt.position = QtWidgets.QStyleOptionHeader.SectionPosition.Beginning
-            else:
-                opt.position = (
-                    QtWidgets.QStyleOptionHeader.SectionPosition.End
-                    if visual == self.count() - 1
-                    else QtWidgets.QStyleOptionHeader.SectionPosition.Middle
-                )
-        if self.sectionsClickable():
-            #            if logical_indexex == d.hover:
-            #            ...
-            if self.highlightSections() and self.selectionModel():
-                if self.orientation() == constants.HORIZONTAL:
-                    if self.selectionModel().columnIntersectsSelection(
-                        logical_index, self.rootIndex()
-                    ):
-                        opt.state = opt.state | StateFlag.State_On
-                    if self.selectionModel().isColumnSelected(
-                        logical_index, self.rootIndex()
-                    ):
-                        opt.state = opt.state | StateFlag.State_Sunken
-                else:
-                    if self.selectionModel().rowIntersectsSelection(
-                        logical_index, self.rootIndex()
-                    ):
-                        opt.state = opt.state | StateFlag.State_On
-                    if self.selectionModel().isRowSelected(
-                        logical_index, self.rootIndex()
-                    ):
-                        opt.state = opt.state | StateFlag.State_Sunken
-        if self.selectionModel():
+            is_end = visual == self.count() - 1
+            opt.position = SectionPosition.End if is_end else SectionPosition.Middle
+        sel_model = self.selectionModel()
+        if not sel_model:
+            return opt
+        root_idx = self.rootIndex()
+        if self.sectionsClickable() and self.highlightSections():
             if self.orientation() == constants.HORIZONTAL:
-                previous_selected = self.selectionModel().isColumnSelected(
-                    self.logicalIndex(visual - 1), self.rootIndex()
-                )
-                next_selected = self.selectionModel().isColumnSelected(
-                    self.logicalIndex(visual + 1), self.rootIndex()
-                )
+                if sel_model.columnIntersectsSelection(logical_index, root_idx):
+                    opt.state = opt.state | StateFlag.State_On
+                if sel_model.isColumnSelected(logical_index, root_idx):
+                    opt.state = opt.state | StateFlag.State_Sunken
             else:
-                previous_selected = self.selectionModel().isRowSelected(
-                    self.logicalIndex(visual - 1), self.rootIndex()
-                )
-                next_selected = self.selectionModel().isRowSelected(
-                    self.logicalIndex(visual + 1), self.rootIndex()
-                )
+                if sel_model.rowIntersectsSelection(logical_index, root_idx):
+                    opt.state = opt.state | StateFlag.State_On
+                if sel_model.isRowSelected(logical_index, root_idx):
+                    opt.state = opt.state | StateFlag.State_Sunken
+        prev_idx = self.logicalIndex(visual - 1)
+        next_idx = self.logicalIndex(visual + 1)
+        if self.orientation() == constants.HORIZONTAL:
+            prev_selected = sel_model.isColumnSelected(prev_idx, root_idx)
+            next_selected = sel_model.isColumnSelected(next_idx, root_idx)
+        else:
+            prev_selected = sel_model.isRowSelected(prev_idx, root_idx)
+            next_selected = sel_model.isRowSelected(next_idx, root_idx)
 
-            if previous_selected and next_selected:
-                opt.selectedPosition = (
-                    QtWidgets.QStyleOptionHeader.SelectedPosition.NextAndPreviousAreSelected
-                )
-            elif previous_selected:
-                opt.selectedPosition = (
-                    QtWidgets.QStyleOptionHeader.SelectedPosition.PreviousIsSelected
-                )
-            else:
-                opt.selectedPosition = (
-                    QtWidgets.QStyleOptionHeader.SelectedPosition.NextIsSelected
-                    if next_selected
-                    else QtWidgets.QStyleOptionHeader.SelectedPosition.NotAdjacent
-                )
+        if prev_selected and next_selected:
+            opt.selectedPosition = SelectedPosition.NextAndPreviousAreSelected
+        elif prev_selected:
+            opt.selectedPosition = SelectedPosition.PreviousIsSelected
+        elif next_selected:
+            opt.selectedPosition = SelectedPosition.NextIsSelected
+        else:
+            opt.selectedPosition = SelectedPosition.NotAdjacent
         return opt
 
     def sectionSizeFromContents(self, logical_index: int) -> QtCore.QSize:
@@ -475,16 +439,11 @@ class HierarchicalHeaderView(widgets.HeaderView):
         s = QtCore.QSize(self._pd.get_cell_size(cur_leaf_index, self, styleOption))
         cur_leaf_index = cur_leaf_index.parent()
         while cur_leaf_index.isValid():
+            cell_size = self._pd.get_cell_size(cur_leaf_index, self, styleOption)
             if self.orientation() == constants.HORIZONTAL:
-                s.setHeight(
-                    s.height()
-                    + self._pd.get_cell_size(cur_leaf_index, self, styleOption).height()
-                )
+                s.setHeight(s.height() + cell_size.height())
             else:
-                s.setWidth(
-                    s.width()
-                    + self._pd.get_cell_size(cur_leaf_index, self, styleOption).width()
-                )
+                s.setWidth(s.width() + cell_size.width())
             cur_leaf_index = cur_leaf_index.parent()
         return s
 
@@ -498,13 +457,14 @@ class HierarchicalHeaderView(widgets.HeaderView):
         if not leaf_index.isValid():
             super().paintSection(painter, rect, logical_index)
             return
+        style_option = self.get_style_option_for_cell(logical_index)
         if self.orientation() == constants.HORIZONTAL:
             self._pd.paint_horizontal_section(
                 painter,
                 rect,
                 logical_index,
                 self,
-                self.get_style_option_for_cell(logical_index),
+                style_option,
                 leaf_index,
             )
         else:
@@ -513,11 +473,11 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 rect,
                 logical_index,
                 self,
-                self.get_style_option_for_cell(logical_index),
+                style_option,
                 leaf_index,
             )
 
-    def on_sectionResized(self, logical_index: int):
+    def on_section_resized(self, logical_index: int):
         if self.isSectionHidden(logical_index):
             return
         leaf_index = core.ModelIndex(self._pd.leaf_index(logical_index))
@@ -545,8 +505,6 @@ class HierarchicalHeaderView(widgets.HeaderView):
     def layoutChanged(self):
         if model := self.model():
             self._pd.init_from_new_model(self.orientation(), model)
-            if self.orientation() == constants.HORIZONTAL:
-                count = model.columnCount()
-            else:
-                count = model.rowCount()
+            is_horizontal = self.orientation() == constants.HORIZONTAL
+            count = model.columnCount() if is_horizontal else model.rowCount()
             self.initializeSections(0, count - 1)
