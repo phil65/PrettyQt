@@ -41,6 +41,11 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self.setResizeContentsPrecision(100)
         self._widget_name = parent.objectName() if parent is not None else ""
 
+    def set_sort_indicator(self, logical_index: int | None, ascending: bool = True):
+        idx = -1 if logical_index is None else logical_index
+        sort_order = constants.ASCENDING if ascending else constants.DESCENDING
+        self.setSortIndicator(idx, sort_order)
+
     def set_sections_movable(self, value: bool, include_first: bool = False):
         self.setSectionsMovable(value)
         self.setFirstSectionMovable(include_first)
