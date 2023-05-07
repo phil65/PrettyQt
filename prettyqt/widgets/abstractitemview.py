@@ -337,7 +337,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         idx = self.model().createIndex(self.model().rowCount() - 1, 0)
         self.setCurrentIndex(idx)
 
-    def scroll_to(self, index, mode: ScrollHintStr = "ensure_visible"):
+    def scroll_to(
+        self, index: QtCore.QModelIndex, mode: ScrollHintStr = "ensure_visible"
+    ):
         if mode not in SCROLL_HINT:
             raise InvalidParamError(mode, SCROLL_HINT)
         self.scrollTo(index, SCROLL_HINT[mode])
