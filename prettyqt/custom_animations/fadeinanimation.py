@@ -3,14 +3,17 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from prettyqt import core
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class FadeInAnimation(core.PropertyAnimation):
     def __init__(
-        self, duration: int = 1000, easing: core.easingcurve.TypeStr = "in_out_sine"
+        self,
+        duration: int = 1000,
+        easing: core.easingcurve.TypeStr = "in_out_sine",
+        parent: QtCore.QObject | None = None,
     ):
-        super().__init__()
+        super().__init__(parent)
         self.set_easing(easing)
         self.setStartValue(0.0)
         self.setEndValue(1.0)
