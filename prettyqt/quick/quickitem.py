@@ -115,6 +115,16 @@ class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
         """
         return TRANSFORM_ORIGIN.inverse[self.transformOrigin()]
 
+    def set_size(self, size: QtCore.QSize | QtCore.QSizeF | tuple[float, float]):
+        match size:
+            case tuple():
+                new_size = QtCore.QSizeF(*size)
+            case QtCore.QSize():
+                new_size = size.toSizeF()
+            case QtCore.QSizeF():
+                new_size = size
+        self.setSize(new_size)
+
 
 class QuickItem(QuickItemMixin, QtQuick.QQuickItem):
     pass
