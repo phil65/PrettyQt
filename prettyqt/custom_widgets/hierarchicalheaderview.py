@@ -73,8 +73,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
         def search_leafs(self, index: core.ModelIndex) -> list:
             res = []
-            model = index.model()
             if index.isValid():
+                model = index.model()
                 if child_count := index.model().columnCount(index):
                     for i in range(child_count):
                         leaf = model.index(0, i, index)
@@ -85,8 +85,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
         def leafs(self, index: core.ModelIndex) -> list:
             leafs = []
-            model = index.model()
             if index.isValid():
+                model = index.model()
                 child_count = index.model().columnCount(index)
                 for i in range(child_count):
                     leaf = model.index(0, i, index)
@@ -104,12 +104,9 @@ class HierarchicalHeaderView(widgets.HeaderView):
             self, opt: QtWidgets.QStyleOptionHeader, index: core.ModelIndex
         ):
             if background_brush := index.data(constants.BACKGROUND_ROLE):
-                opt.palette.setBrush(
-                    QtGui.QPalette.ColorRole.Button, QtGui.QBrush(background_brush)
-                )
-                opt.palette.setBrush(
-                    QtGui.QPalette.ColorRole.Window, QtGui.QBrush(background_brush)
-                )
+                brush = QtGui.QBrush(background_brush)
+                opt.palette.setBrush(QtGui.QPalette.ColorRole.Button, brush)
+                opt.palette.setBrush(QtGui.QPalette.ColorRole.Window, brush)
 
         def get_cell_size(
             self,
@@ -307,9 +304,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
                     or real_style_options.state & StateFlag.State_On
                 ):
                     t = StateFlag.State_Sunken | StateFlag.State_On
-                    real_style_options.state = (
-                        real_style_options.state & ~t
-                    )  # FIXME: parent items are not highlighted
+                    real_style_options.state = real_style_options.state & ~t
+                    # FIXME: parent items are not highlighted
                 left = self.paint_vertical_cell(
                     painter,
                     hv,
