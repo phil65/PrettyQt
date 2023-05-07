@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import constants, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -69,10 +69,25 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         """
         return SIZE_POLICY.inverse[self.sizeAdjustPolicy()]
 
-    def set_scrollbar_smooth(self, value: bool = True):
+    def set_scrollbar_smooth(
+        self,
+        value: bool = True,
+        animation_duration: int = 500,
+        easing: core.easingcurve.TypeStr = "out_cubic",
+    ):
         if value:
-            self.h_scrollbar = widgets.SmoothScrollBar("horizontal", parent=self)
-            self.v_scrollbar = widgets.SmoothScrollBar("vertical", parent=self)
+            self.h_scrollbar = widgets.SmoothScrollBar(
+                "horizontal",
+                parent=self,
+                animation_duration=animation_duration,
+                easing=easing,
+            )
+            self.v_scrollbar = widgets.SmoothScrollBar(
+                "vertical",
+                parent=self,
+                animation_duration=animation_duration,
+                easing=easing,
+            )
         else:
             self.h_scrollbar = widgets.ScrollBar(parent=self)
             self.v_scrollbar = widgets.ScrollBar(parent=self)

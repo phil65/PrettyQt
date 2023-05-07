@@ -10,10 +10,9 @@ class CodeEditor(widgets.PlainTextEdit):
         self.line_area = LineNumberArea(self)
         self.blockCountChanged.connect(self.update_line_area_width)
         self.updateRequest.connect(self.update_line_area)
-        self.cursorPositionChanged.connect(self.highlight_current_line)
         self.set_font("Consolas")
         self.update_line_area_width(0)
-        self.highlight_current_line()
+        self.set_current_line_color(gui.Color(128, 128, 128, 20))
         self.set_syntaxhighlighter(language)
 
     def resizeEvent(self, event):

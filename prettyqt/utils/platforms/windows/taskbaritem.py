@@ -99,9 +99,11 @@ class TaskBarItem:
     def register_tab(self, tab_win_id: SupportsInt):
         tab_win_id = int(tab_win_id)
         logger.info(f"Register tab {tab_win_id} in handle {self.win_id}")
+        set_window_attribute(tab_win_id, 7, True)
+        set_window_attribute(tab_win_id, 10, True)
         result = taskbar.RegisterTab(tab_win_id, self.win_id)
         taskbar.SetTabOrder(tab_win_id, 0)
-        # self.set_window_attribute(7, True)
+        taskbar.SetTabActive(tab_win_id, 0)
         self.tabs.append(tab_win_id)
         return bool(result)
 
@@ -152,15 +154,16 @@ class TaskBarItem:
         # hicon = LoadImageA(0, icon, IMAGE_ICON, ico_x, ico_y, LR_LOADFROMFILE)
         # dwmapi.DwmSetIconicThumbnail(self.win_id, HBITMAP(thumbnail), 0)
 
-    def set_window_attribute(self, key, value):  # available via QImage
-        logger.info(f"Set iconic thumbnail for {self.win_id}")
-        dwmapi.DwmSetWindowAttribute(
-            self.win_id,
-            key,  # DWMWA_FORCE_ICONIC_REPRESENTATION = 7
-            # DWMWA_HAS_ICONIC_BITMAP = 10
-            ctypes.byref(ctypes.c_bool(value)),
-            ctypes.sizeof(ctypes.c_bool(value)),
-        )
+
+def set_window_attribute(win_id, key, value):  # available via QImage
+    logger.info(f"Set iconic thumbnail for {win_id}")
+    dwmapi.DwmSetWindowAttribute(
+        win_id,
+        key,  # DWMWA_FORCE_ICONIC_REPRESENTATION = 7
+        # DWMWA_HAS_ICONIC_BITMAP = 10
+        ctypes.byref(ctypes.c_bool(value)),
+        ctypes.sizeof(ctypes.c_bool(value)),
+    )
 
 
 if __name__ == "__main__":
