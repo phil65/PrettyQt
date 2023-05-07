@@ -42,6 +42,13 @@ class TableWidgetMixin(widgets.TableViewMixin):
             index = self.itemFromIndex(index)
         return super().isPersistentEditorOpen(index)
 
+    def scroll_to_item(
+        self,
+        item: QtWidgets.QTableWidgetItem,
+        scroll_hint: widgets.abstractitemview.ScrollHintStr = "ensure_visible",
+    ):
+        self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT[scroll_hint])
+
 
 class TableWidget(TableWidgetMixin, QtWidgets.QTableWidget):
     pass

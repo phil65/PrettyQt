@@ -51,6 +51,13 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
             nodes = items
         return results[1:]
 
+    def scroll_to_item(
+        self,
+        item: QtWidgets.QTreeWidgetItem,
+        scroll_hint: widgets.abstractitemview.ScrollHintStr = "ensure_visible",
+    ):
+        self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT[scroll_hint])
+
     def removeTopLevelItem(self, item):
         for i in range(self.topLevelItemCount()):
             if self.topLevelItem(i) is item:
