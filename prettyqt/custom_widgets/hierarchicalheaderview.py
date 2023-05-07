@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 

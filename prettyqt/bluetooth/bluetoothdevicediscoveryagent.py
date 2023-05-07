@@ -8,23 +8,23 @@ from prettyqt.utils import bidict
 
 
 DISCOVERY_METHODS = bidict(
-    none=QtBluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod,
-    classic=QtBluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod,
-    low_energy=QtBluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod,
+    none=QtBluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.NoMethod,
+    classic=QtBluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.ClassicMethod,
+    low_energy=QtBluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.LowEnergyMethod,
 )
 
 DiscoveryMethodStr = Literal["none", "classic", "low_energy"]
 
-module = QtBluetooth.QBluetoothDeviceDiscoveryAgent
+Error = QtBluetooth.QBluetoothDeviceDiscoveryAgent.Error
 
 ERROR = bidict(
-    none=module.NoError,
-    powered_off=module.PoweredOffError,
-    input_output=module.InputOutputError,
-    invalid_bluetooth_adapter=module.InvalidBluetoothAdapterError,
-    unsupported_platform=module.UnsupportedPlatformError,
-    unsupported_discovery=module.UnsupportedDiscoveryMethod,
-    unknown=module.UnknownError,
+    none=Error.NoError,
+    powered_off=Error.PoweredOffError,
+    input_output=Error.InputOutputError,
+    invalid_bluetooth_adapter=Error.InvalidBluetoothAdapterError,
+    unsupported_platform=Error.UnsupportedPlatformError,
+    unsupported_discovery=Error.UnsupportedDiscoveryMethod,
+    unknown=Error.UnknownError,
 )
 
 ErrorStr = Literal[
