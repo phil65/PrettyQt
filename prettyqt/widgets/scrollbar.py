@@ -19,6 +19,16 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
         super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
 
+    def scroll_by_value(self, value: int):
+        """Scroll by given distance."""
+        value = min(max(self.minimum(), self.value() + value), self.maximum())
+        self.setValue(value)
+
+    def scroll_to(self, value: int):
+        """Scroll to given position."""
+        value = min(max(self.minimum(), value), self.maximum())
+        self.setValue(value)
+
     def scroll_to_next_row(self):
         """Scroll to the next row."""
         self.setValue(self.value() + self.singleStep())
