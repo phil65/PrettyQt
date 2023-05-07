@@ -160,11 +160,21 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT[mode])
 
     def find_items(
-        self, text: str, column: int = 0, mode: constants.MatchFlagStr = "exact"
-    ) -> list[QtGui.QStandardItem]:
+        self,
+        text: str,
+        column: int = 0,
+        mode: constants.MatchFlagStr = "exact",
+        recursive: bool = False,
+        case_sensitive: bool = False,
+    ) -> list[QtWidgets.QListWidgetItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
-        return self.findItems(text, constants.MATCH_FLAGS[mode], column)  # type: ignore
+        flag = constants.MATCH_FLAGS[mode]
+        if recursive:
+            flag |= QtCore.Qt.MatchFlag.MatchRecursive
+        if case_sensitive:
+            flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
+        return self.findItems(text, flag, column)  # type: ignore
 
 
 if __name__ == "__main__":

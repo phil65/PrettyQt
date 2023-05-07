@@ -68,11 +68,21 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
             self.appendRow([new_item])
 
     def find_items(
-        self, text: str, column: int = 0, mode: constants.MatchFlagStr = "exact"
+        self,
+        text: str,
+        column: int = 0,
+        mode: constants.MatchFlagStr = "exact",
+        recursive: bool = False,
+        case_sensitive: bool = False,
     ) -> list[QtGui.QStandardItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
-        return self.findItems(text, constants.MATCH_FLAGS[mode], column)  # type: ignore
+        flag = constants.MATCH_FLAGS[mode]
+        if recursive:
+            flag |= QtCore.Qt.MatchFlag.MatchRecursive
+        if case_sensitive:
+            flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
+        return self.findItems(text, flag, column)  # type: ignore
 
     def add_item(
         self,
