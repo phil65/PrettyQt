@@ -1,37 +1,43 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
 
-md = QtBluetooth.QBluetoothServiceInfo
+AttributeId = QtBluetooth.QBluetoothServiceInfo.AttributeId
 
 ATTRIBUTE_IDS = bidict(
-    service_record_handle=md.ServiceRecordHandle,
-    service_class_ids=md.ServiceClassIds,
-    service_record_state=md.ServiceRecordState,
-    service_id=md.ServiceId,
-    protocol_descriptor_list=md.ProtocolDescriptorList,
-    browse_group_list=md.BrowseGroupList,
-    language_base_attribute_id_list=md.LanguageBaseAttributeIdList,
-    service_info_time_to_live=md.ServiceInfoTimeToLive,
-    service_availablity=md.ServiceAvailability,
-    bluetooth_profile_descriptor_list=md.BluetoothProfileDescriptorList,
-    documentation_url=md.DocumentationUrl,
-    client_executable_url=md.ClientExecutableUrl,
-    icon_url=md.IconUrl,
-    additional_protocol_descriptor_list=md.AdditionalProtocolDescriptorList,
-    primary_language_base=md.PrimaryLanguageBase,
-    # service_name=md.ServiceName,
-    service_description=md.ServiceDescription,
-    service_provider=md.ServiceProvider,
+    service_record_handle=AttributeId.ServiceRecordHandle,
+    service_class_ids=AttributeId.ServiceClassIds,
+    service_record_state=AttributeId.ServiceRecordState,
+    service_id=AttributeId.ServiceId,
+    protocol_descriptor_list=AttributeId.ProtocolDescriptorList,
+    browse_group_list=AttributeId.BrowseGroupList,
+    language_base_attribute_id_list=AttributeId.LanguageBaseAttributeIdList,
+    service_info_time_to_live=AttributeId.ServiceInfoTimeToLive,
+    service_availablity=AttributeId.ServiceAvailability,
+    bluetooth_profile_descriptor_list=AttributeId.BluetoothProfileDescriptorList,
+    documentation_url=AttributeId.DocumentationUrl,
+    client_executable_url=AttributeId.ClientExecutableUrl,
+    icon_url=AttributeId.IconUrl,
+    additional_protocol_descriptor_list=AttributeId.AdditionalProtocolDescriptorList,
+    primary_language_base=AttributeId.PrimaryLanguageBase,
+    # service_name=AttributeId.ServiceName,
+    service_description=AttributeId.ServiceDescription,
+    service_provider=AttributeId.ServiceProvider,
 )
 
-PROTOCOLS = bidict(
-    unknown=md.UnknownProtocol,
-    l2_cap=md.L2capProtocol,
-    rfcomm=md.RfcommProtocol,
+Protocol = QtBluetooth.QBluetoothServiceInfo.Protocol
+
+PROTOCOL = bidict(
+    unknown=Protocol.UnknownProtocol,
+    l2_cap=Protocol.L2capProtocol,
+    rfcomm=Protocol.RfcommProtocol,
 )
+
+ProtocolStr = Literal["unknown", "l2_cap", "rfcomm"]
 
 
 class BluetoothServiceInfo(QtBluetooth.QBluetoothServiceInfo):
