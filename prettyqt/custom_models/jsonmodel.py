@@ -1,135 +1,103 @@
 from __future__ import annotations
 
+from collections.abc import Iterable, Mapping
+from dataclasses import dataclass
 from typing import Any
 
-from typing_extensions import Self
-
-from prettyqt import constants, custom_models
+from prettyqt import core, custom_models
 from prettyqt.qt import QtCore
+from prettyqt.utils import treeitem
 
 
-class JsonTreeItem(custom_models.NestedItem):
-    def __repr__(self):
-        return str(self.as_json())
+COL_NAME = custom_models.ColumnItem(
+    name="Name",
+    doc="Name.",
+    label=lambda x: x.obj.key,
+)
 
-    def __init__(self, key="", value="", **kwargs):
-        super().__init__(**kwargs)
-        self.key = key
-        self.value = value
-        self.type = None
+COL_VALUE = custom_models.ColumnItem(
+    name="Value",
+    doc="Value.",
+    label=lambda x: repr(x.obj.value),
+)
 
-    @classmethod
-    def from_json(cls, node_dict: dict[str, Any]) -> Self:
-        return cls(
-            count=node_dict.get("id"),
-            dynamic_name=node_dict.get("dynamic_name"),
-            key=node_dict.get("key"),
-            value=node_dict.get("value"),
-            children=[cls.from_json(c) for c in node_dict.get("children", [])],
+COL_TYPE = custom_models.ColumnItem(
+    name="Type",
+    doc="Type.",
+    label=lambda x: repr(x.obj.typ),
+)
+
+
+@dataclass
+class JsonItem:
+    key: str | int
+    value: Any
+    typ: type | None = None
+
+
+class JsonModel(custom_models.ColumnItemModel):
+    """Model that provides an interface to an objectree that is build of tree items."""
+
+    def __init__(
+        self,
+        obj: Any,
+        show_root: bool = True,
+        parent: QtCore.QObject | None = None,
+    ):
+        super().__init__(
+            obj=JsonItem(key="", value=obj, typ=type(obj)),
+            columns=[COL_NAME, COL_VALUE, COL_TYPE],
+            parent=parent,
+            show_root=show_root,
         )
 
-    @classmethod
-    def load(cls, value, parent=None, sort: bool = False) -> Self:
-        root_item = cls(key="root", parent=parent)
-        match value:
-            case dict():
-                items = sorted(value.items()) if sort else value.items()
-                for key, value in items:
-                    child = cls.load(value, root_item)
-                    child.key = key
-                    child.type = type(value)
-                    root_item.append_child(child)
-
-            case list() | tuple():
-                for index, val in enumerate(value):
-                    child = cls.load(val, root_item)
-                    child.key = index
-                    child.type = type(val)
-                    root_item.append_child(child)
-
-            case _:
-                root_item.value = value
-                root_item.type = type(value)
-
-        return root_item
-
-    def as_json(self):
-        if self.type is dict:
-            return {ch.key: ch.as_json() for ch in self}
-        elif self.type in (list, tuple):
-            return [ch.as_json() for ch in self]
-        else:
-            return self.value
-
-
-class JsonModel(custom_models.NestedModel):
-    HEADER = ["Key", "Value", "Type"]
-
-    def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent=parent)
-        self.root = JsonTreeItem()  # type: ignore
-        self.items = self.root.children
-
-    def __repr__(self):
-        return str(self.root.as_json())  # type: ignore
-
-    def load(self, document: dict | list | tuple):
-        """Load from JSON object.
-
-        Arguments:
-            document: JSON-compatible object
-
-        """
-        with self.reset_model():
-            self.root = JsonTreeItem.load(document)
-            self.root.type = type(document)  # type: ignore
-            self.items = self.root.children
-
-    def data(self, index, role):
-        if not index.isValid():
-            return None
-
-        item = index.internalPointer()
-        match role, index.column():
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 0:
-                return repr(item.key)
-            case constants.DISPLAY_ROLE, 1:
-                return "" if item.type in (dict, list, tuple) else repr(item.value)
-            case constants.EDIT_ROLE, 1:
-                return "" if item.type in (dict, list, tuple) else item.value
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 2:
-                return item.type.__name__
-
-    def setData(self, index, value, role):
-        if role == constants.EDIT_ROLE and index.column() == 1:
-            item = index.internalPointer()
-            item.value = str(value)
-            self.update_row(index.row())
+    def hasChildren(self, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
+        if parent.column() > 0:
+            return False
+        if self.show_root and self.tree_item(parent) == self._root_item:
             return True
-        return False
+        return isinstance(self.tree_item(parent).obj.value, dict | list | set)
+
+    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+        """Fetch the children of a Python object.
+
+        Returns: list of treeitem.TreeItems
+        """
+        # items = []
+        match item.obj.value:
+            case Mapping():
+                return [
+                    treeitem.TreeItem(obj=JsonItem(key=k, value=v, typ=type(v)))
+                    for k, v in item.obj.value.items()
+                ]
+
+            case Iterable() if not isinstance(item.obj.value, str):
+                return [
+                    treeitem.TreeItem(obj=JsonItem(key=k, value=v, typ=type(v)))
+                    for k, v in enumerate(item.obj.value)
+                ]
+            case _:
+                return [
+                    treeitem.TreeItem(
+                        obj=JsonItem(
+                            key="key",
+                            value=repr(item.obj.value),
+                            typ=type(item.obj.value),
+                        )
+                    )
+                ]
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    view = widgets.TreeView()
-    view.setRootIsDecorated(True)
-    model = JsonModel()
-
-    view.set_model(model)
-
-    dct = {
-        "lastName": "Smith",
-        "age": 25,
-        "address": {"streetAddress": "21 2nd Street", "postalCode": "10021"},
-        "phoneNumber": [
-            {"type": "home", "number": "212 555-1234"},
-            {"type": "fax", "number": ("646 555-4567")},
-        ],
-    }
-
-    model.load(dct)
-    view.show()
-    view.resize(500, 300)
+    dist = [dict(a=2, b={"a": 4, "b": [1, 2, 3], "jkjkjk": "tekjk"}), 6, "jkjk"]
+    model = JsonModel(dist)
+    table = widgets.TreeView()
+    table.setRootIsDecorated(True)
+    # table.setSortingEnabled(True)
+    table.set_model(model)
+    table.show()
     app.main_loop()
