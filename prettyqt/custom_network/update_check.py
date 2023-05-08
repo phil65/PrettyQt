@@ -84,7 +84,7 @@ class UpdateChecker(core.Object):
 
         self.message_box.set_default_button("ok")
         if self.changelog_url:
-            self.message_box.add_button(
+            self.message_box.add_custom_button(
                 "Show changelog",
                 "accept",
                 callback=lambda: webbrowser.open(self.changelog_url),

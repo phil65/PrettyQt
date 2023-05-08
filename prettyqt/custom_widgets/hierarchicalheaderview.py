@@ -324,14 +324,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 )
             painter.setBrushOrigin(old_bo)
 
-    def __init__(self, orientation: QtCore.Qt.Orientation, parent: QtWidgets.QWidget):
+    def __init__(
+        self,
+        orientation: QtCore.Qt.Orientation | constants.OrientationStr,
+        parent: QtWidgets.QWidget,
+    ):
         super().__init__(orientation, parent)
         self._pd = self.PrivateData()
         self.sectionResized.connect(self.on_section_resized)
         self.setHighlightSections(True)
         self.setSectionsClickable(True)
         self.show()  # force to be visible
-        if orientation == constants.HORIZONTAL:
+        if orientation in {constants.HORIZONTAL, "horizontal"}:
             parent.setHorizontalHeader(self)
         else:
             parent.setVerticalHeader(self)

@@ -209,9 +209,15 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
     def set_margins_background_color(self, color: datatypes.ColorType):
         self.setMarginsBackgroundColor(colors.get_color(color))
 
-    def highlight_current_line(self, color: datatypes.ColorType = None):
-        self.setCaretLineVisible(color is not None)
-        color = colors.get_color(color)
+    def highlight_current_line(
+        self, value: bool = True, color: datatypes.ColorType = None
+    ):
+        self.setCaretLineVisible(value)
+        if color is None:
+            color = self.get_palette().get_color("highlight")
+            color.setAlpha(50)
+        else:
+            color = colors.get_color(color)
         self.setCaretLineBackgroundColor(color)
 
     def set_brace_matching(self, match_type: MatchTypeStr | None):

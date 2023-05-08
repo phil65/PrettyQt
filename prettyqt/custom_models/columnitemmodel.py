@@ -227,7 +227,7 @@ class ColumnItemModelMixin:
 
     def flags(self, index):
         if not index.isValid():
-            return constants.NO_CHILDREN
+            return super().flags(index)  # TODO: whats best here?
         col = index.column()
         tree_item = self.tree_item(index)
         return self._attr_cols[col].get_flag(tree_item)

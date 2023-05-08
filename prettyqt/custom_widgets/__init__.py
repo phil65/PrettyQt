@@ -2,11 +2,13 @@
 
 from .image import Image
 from .clocklabel import ClockLabel
+from .elidedlabel import ElidedLabel
 from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .collapsibleframe import CollapsibleFrame
 from .expandableline import ExpandableLine
+from .hierarchicalheaderview import HierarchicalHeaderView
 from .keycombinationedit import KeyCombinationEdit
 from .singlelinetextedit import SingleLineTextEdit
 from .regexlineedit import RegexLineEdit
@@ -16,6 +18,7 @@ from .logtextedit import LogTextEdit
 from .flagselectionwidget import FlagSelectionWidget
 from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
+from .iconbrowser import IconBrowser
 from .iconwidget import IconWidget
 from .flowlayout import FlowLayout
 from .borderlayout import BorderLayout
@@ -51,12 +54,14 @@ from prettyqt.custom_delegates.radiodelegate import RadioDelegate
 __all__ = [
     "Image",
     "ClockLabel",
+    "ElidedLabel",
     "ListInput",
     "BoolDictToolButton",
     "OptionalWidget",
     "CollapsibleFrame",
     "CompletionWidget",
     "ExpandableLine",
+    "HierarchicalHeaderView",
     "KeyCombinationEdit",
     "SingleLineTextEdit",
     "RegexLineEdit",
@@ -66,6 +71,7 @@ __all__ = [
     "FlagSelectionWidget",
     "StringOrNumberWidget",
     "IconLabel",
+    "IconBrowser",
     "IconWidget",
     "FlowLayout",
     "BorderLayout",

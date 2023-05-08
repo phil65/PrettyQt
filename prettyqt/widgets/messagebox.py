@@ -5,8 +5,6 @@ import sys
 import traceback
 from typing import Literal
 
-import multimethod
-
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
@@ -182,7 +180,6 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     def get_standard_buttons(self) -> list[StandardButtonStr]:
         return STANDARD_BUTTON.get_list(self.standardButtons())
 
-    @multimethod.multimethod
     def add_button(self, button: StandardButtonStr) -> QtWidgets.QPushButton:
         """Add a default button.
 
@@ -199,8 +196,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
             raise InvalidParamError(button, STANDARD_BUTTON)
         return self.addButton(STANDARD_BUTTON[button])
 
-    @add_button.register(str, str)
-    def add_button(
+    def add_custom_button(
         self, button: str, role: ButtonRoleStr, callback: Callable | None = None
     ) -> QtWidgets.QPushButton:
         btn = self.addButton(button, BUTTON_ROLE[role])

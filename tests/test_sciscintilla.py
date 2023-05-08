@@ -16,7 +16,7 @@ def test_sciscintilla(qtbot):
         widget.define_marker("test", 0)
     widget.set_marker_background_color("red", 0)
     widget.set_margins_background_color("green")
-    widget.highlight_current_line("blue")
+    widget.highlight_current_line(color="blue")
     widget.set_brace_matching("sloppy")
     with pytest.raises(InvalidParamError):
         widget.set_brace_matching("test")

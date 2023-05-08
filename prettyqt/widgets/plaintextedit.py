@@ -34,7 +34,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self._current_block = None
         self._hl = None
         self.validator: QtGui.QValidator | None = None
-        self._current_line_color = None
+        self._current_line_color = gui.Color(0, 0, 0, 0)
         self.textChanged.connect(self._on_value_change)
         self.set_read_only(read_only)
         doc = gui.TextDocument(self)
@@ -284,7 +284,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         return self.text()
 
     current_line_color = core.Property(
-        object, get_current_line_color, set_current_line_color
+        QtGui.QColor, get_current_line_color, set_current_line_color
     )
 
 

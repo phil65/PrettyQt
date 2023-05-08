@@ -34,8 +34,7 @@ def test_jsonmodel(qtmodeltester):
             {"type": "fax", "number": ("646 555-4567")},
         ],
     }
-    model = custom_models.JsonModel()
-    model.load(dct)
+    model = custom_models.JsonModel(dct)
     qtmodeltester.check(model, force_py=True)
 
 
