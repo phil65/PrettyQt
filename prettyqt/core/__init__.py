@@ -6,7 +6,9 @@ Contains QtCore-based classes
 # from prettyqt.qt.QtCore import Signal
 
 from __future__ import annotations
+import contextlib
 import sys
+from prettyqt.qt import QtCore
 
 from prettyqt.qt.QtCore import (  # type: ignore
     Slot,
@@ -23,11 +25,13 @@ from prettyqt.qt.QtCore import (  # type: ignore
     QEnum as Enum,
     QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent,
     ClassInfo,
+    Q_ARG,
+    Q_RETURN_ARG,
+    QtMsgType as MsgType,
     # QtCriticalMsg as CriticalMsg,
     # QtDebugMsg as DebugMsg,
     # QtFatalMsg as FatalMsg,
     # QtInfoMsg as InfoMsg,
-    # QtMsgType as MsgType,
     # QtSystemMsg as SystemMsg,
     # QtWarningMsg as WarningMsg,
 )
@@ -159,6 +163,13 @@ from .concatenatetablesproxymodel import ConcatenateTablesProxyModel
 from .transposeproxymodel import TransposeProxyModel
 
 
+@contextlib.contextmanager
+def update_property_group():
+    QtCore.Qt.beginPropertyUpdateGroup()
+    yield None
+    QtCore.Qt.endPropertyUpdateGroup()
+
+
 def app(args: list[str] | None = None) -> CoreApplication:
     if (instance := CoreApplication.instance()) is not None:
         return instance
@@ -172,6 +183,8 @@ __all__ = [
     "TimerEvent",
     "Enum",
     "ClassInfo",
+    "Q_ARG",
+    "Q_RETURN_ARG",
     "DynamicPropertyChangeEvent",
     "MetaEnum",
     "LoggingCategory",

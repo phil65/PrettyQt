@@ -41,8 +41,6 @@ if PYQT6:
         pyqtEnum as QFlag,
         pyqtClassInfo,
         pyqtClassInfo as ClassInfo,
-        Q_ARG,
-        Q_ARG as QGenericArgument,
         PYQT_VERSION_STR as BINDING_VERSION,
         QtMsgType,
     )
@@ -70,7 +68,6 @@ if PYQT6:
         pyqtProperty,
         QT_VERSION_STR,
         pyqtEnum,
-        Q_ARG,
         pyqtClassInfo,
     )
     for cls in (QEvent, Qt):
