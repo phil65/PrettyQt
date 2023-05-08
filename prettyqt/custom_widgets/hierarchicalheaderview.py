@@ -515,3 +515,152 @@ class HierarchicalHeaderView(widgets.HeaderView):
             is_horizontal = self.orientation() == constants.HORIZONTAL
             count = model.columnCount() if is_horizontal else model.rowCount()
             self.initializeSections(0, count - 1)
+
+
+class DataFrameModel(QtCore.QAbstractTableModel):
+    # na_values:least|greatest - for sorting
+    options = {
+        "na_values": "least",
+        "tooltip_min_len": 21,
+    }
+
+    def __init__(self, dataframe=None):
+        super().__init__()
+        self.set_dataframe(dataframe if dataframe is not None else pd.DataFrame())
+
+    def set_dataframe(self, dataframe):
+        self.df = dataframe.copy()
+        self.layoutChanged.emit()
+
+    def rowCount(self, parent=None):
+        return len(self.df)
+
+    def columnCount(self, parent=None):
+        return len(self.df.columns)
+
+    def read_level(self, y: int = 0, xs: int = 0, xe=None, orient=None):
+        c = self.df.columns if orient == HORIZONTAL_HEADER_DATA_ROLE else self.df.index
+        if not hasattr(c, "levels"):  # not MultiIndex
+            return [gui.StandardItem(str(i)) for i in c]
+        sibl = []
+        section_start, v, xe = xs, None, xe or len(c)
+        for i in range(xs, xe):
+            label = c.codes[y][i]
+            if label != v:
+                if y + 1 < len(c.levels) and i > xs:
+                    children = self.read_level(y + 1, section_start, i, orient=orient)
+                    sibl[-1].appendRow(children)
+                item = gui.StandardItem(str(c.levels[y][label]))
+                sibl.append(item)
+                section_start = i
+                v = label
+        if y + 1 < len(c.levels):
+            children = self.read_level(y + 1, section_start, orient=orient)
+            sibl[-1].appendRow(children)
+        return sibl
+
+    def data(self, index, role):
+        row, col = index.row(), index.column()
+        if role in (constants.DISPLAY_ROLE, constants.TOOLTIP_ROLE):
+            ret = self.df.iat[row, col]
+            if ret is not None:  # convert to str except for None, NaN, NaT
+                if isinstance(ret, float):
+                    ret = f"{ret:n}"
+                elif isinstance(ret, datetime.date):
+                    # FIXME: show microseconds optionally
+                    ret = ret.strftime(("%x", "%c")[isinstance(ret, datetime.datetime)])
+                else:
+                    ret = str(ret)
+                if (
+                    role == constants.TOOLTIP_ROLE
+                    and len(ret) < self.options["tooltip_min_len"]
+                ):
+                    ret = ""
+                return ret
+        elif role in (HORIZONTAL_HEADER_DATA_ROLE, VERTICAL_HEADER_DATA_ROLE):
+            hm = gui.StandardItemModel()
+            hm.appendRow(self.read_level(orient=role))
+            return hm
+
+    def reorder(self, old_index, new_index, orientation):
+        """Reorder columns / rows."""
+        horizontal = orientation == constants.HORIZONTAL
+        cols = list(self.df.columns if horizontal else self.df.index)
+        cols.insert(new_index, cols.pop(old_index))
+        self.df = self.df[cols] if horizontal else self.df.T[cols].T
+        return True
+
+    #    def filter(self, filt=None):
+    #        self.df = self.df_full if filt is None else self.df[filt]
+    #        self.layoutChanged.emit()
+
+    def headerData(self, section, orientation, role):
+        if role != constants.DISPLAY_ROLE:
+            return
+        if orientation == constants.HORIZONTAL:
+            idx = self.df.columns
+            return "\n".join(str(i) for i in idx) if type(idx) is tuple else str(idx)
+        else:
+            idx = self.df.index
+            return " | ".join(str(i) for i in idx) if type(idx) is tuple else str(idx)
+        # return label if type(label) is tuple else label
+
+    def sort(self, column, order):
+        print("sort", column, order)
+        if len(self.df):
+            asc = order == constants.ASCENDING
+            na_pos = "first" if (self.options["na_values"] == "least") == asc else "last"
+            col = self.df.columns[column]
+            self.df.sort_values(col, ascending=asc, inplace=True, na_position=na_pos)
+            self.layoutChanged.emit()
+
+
+if __name__ == "__main__":
+    import locale
+    import sys
+
+    import numpy as np
+    import pandas as pd
+
+    from prettyqt import gui
+
+    locale.setlocale(locale.LC_ALL, "")  # system locale settings
+    app = QtWidgets.QApplication(sys.argv)
+    form = QtWidgets.QWidget()
+    # form.setAttribute(Qt.WA_DeleteOnClose)  # http://stackoverflow.com/a/27178019/1119602
+    form.setMinimumSize(700, 260)
+    view = widgets.TableView()
+    widgets.BoxLayout("vertical", form).addWidget(view)
+    form.show()
+
+    # Prepare data
+    tuples = [
+        ("bar", "one", "q"),
+        ("bar", "two", "q"),
+        ("baz", "one", "q"),
+        ("baz", "two", "q"),
+        ("foo", "one", "q"),
+        ("foo", "two", "q"),
+        ("qux", "one", "q"),
+        ("qux", "two", "q"),
+    ]
+    index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
+    df = pd.DataFrame(np.random.randn(6, 6), index=index[:6], columns=index[:6])
+    print("DataFrame:\n%s" % df)
+
+    # Prepare view
+    #    oldh, oldv = view.horizontalHeader(), view.verticalHeader()
+    #    oldh.setParent(form), oldv.setParent(form) #Save old headers for some reason
+    HierarchicalHeaderView(constants.HORIZONTAL, view)
+    HierarchicalHeaderView(constants.VERTICAL, view)
+    view.h_header.setSectionsMovable(True)  # reorder DataFrame columns manually
+    # Set data
+    model = DataFrameModel(df)
+    view.setModel(model)
+    idx = model.index(0, 0)
+    idx.multiData(33)
+    view.set_sorting_enabled(True, False)
+    view.resizeColumnsToContents()
+    view.resizeRowsToContents()
+    # Set sorting enabled (after setting model)
+    sys.exit(app.exec())
