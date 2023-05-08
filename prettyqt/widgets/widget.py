@@ -76,6 +76,21 @@ class WidgetMixin(core.ObjectMixin):
         else:
             self.showMaximized()
 
+    def play_animation(self, animation_type: str, **kwargs):
+        from prettyqt import custom_animations
+
+        match animation_type:
+            case "fade_in":
+                anim = custom_animations.FadeInAnimation(**kwargs, parent=self)
+                anim.apply_to(self)
+            case "bounce":
+                anim = custom_animations.BounceAnimation(**kwargs, parent=self)
+                anim.apply_to(self)
+            case "slide":
+                anim = custom_animations.SlideAnimation(**kwargs, parent=self)
+                anim.apply_to(self)
+        anim.start()
+
     def raise_to_top(self):
         if sys.platform.startswith("win"):
             import win32con
@@ -610,9 +625,13 @@ class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
+    widget.play_animation("slide", start_value=(0, 100))
+    # val = custom_animations.FadeInAnimation()
+    # val.apply_to(widget)
+    # val.start()
     widget.show()
-    widget.add_shortcut("return", print, "application")
-    widget.set_min_size((400, 400))
-    widget.set_max_size(None, 600)
-    print(type(widget.get_screen()))
+    # widget.add_shortcut("return", print, "application")
+    # widget.set_min_size((400, 400))
+    # widget.set_max_size(None, 600)
+    # print(type(widget.get_screen()))
     app.main_loop()
