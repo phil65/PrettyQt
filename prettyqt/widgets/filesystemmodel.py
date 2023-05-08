@@ -28,7 +28,7 @@ class FileSystemModelMixin:
         self.use_custom_icons(False)
 
     def data(self, index, role=QtCore.Qt.ItemDataRole.DisplayRole):
-        if role == self.DATA_ROLE:
+        if role == constants.USER_ROLE:
             path = index.data(self.Roles.FilePathRole)
             return pathlib.Path(path)
         return super().data(index, role)

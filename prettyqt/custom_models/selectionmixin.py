@@ -9,7 +9,6 @@ from prettyqt.qt import QtCore
 class SelectionMixin:
     CHECKSTATE: dict[int, Callable] = {}  # column: identifier
     dataChanged: QtCore.Signal
-    DATA_ROLE: int
 
     def __init__(self):
         super().__init__()
@@ -43,6 +42,6 @@ class SelectionMixin:
         return flags
 
     def _get_selection_id(self, index: QtCore.QModelIndex):
-        item = index.data(self.DATA_ROLE)
+        item = index.data(constants.USER_ROLE)
         if id_fn := self.CHECKSTATE.get(index.column()):
             return id_fn(item)

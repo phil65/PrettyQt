@@ -5,22 +5,15 @@ from prettyqt import constants, core
 
 
 class ListMixin:
-    remove_rows: Callable
     SORT_METHODS: dict[int, Callable]
-    change_layout: Callable
-    insert_rows: Callable
-    removeRow: Callable
-    # setData: Callable
-    update_row: Callable
-    MIME_TYPE: str
-    DATA_ROLE = constants.USER_ROLE
+    MIME_TYPE: str = ""
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)  # type: ignore
         self.items = []
 
     def setData(self, index, value, role):
-        if role == self.DATA_ROLE:
+        if role == constants.USER_ROLE:
             self.items[index.row()] = value
             self.update_row(index.row())
             return True
@@ -85,3 +78,19 @@ class ListMixin:
     def remove_items(self, offsets: Iterable[int]):
         for offset in sorted(offsets, reverse=True):
             self.removeRow(offset)
+
+    def supportedDropActions(self):
+        return constants.MOVE_ACTION
+
+    def mimeTypes(self):
+        return [self.MIME_TYPE]
+
+    def mimeData(self, indexes):
+        """AbstractItemModel override, defines the data used for drag and drop.
+
+        atm this just returns the positions (not sure if this is perfect)
+        """
+        mime_data = core.MimeData()
+        data = [i.row() for i in indexes if i.column() == 0]
+        mime_data.set_json_data(self.MIME_TYPE, data)
+        return mime_data

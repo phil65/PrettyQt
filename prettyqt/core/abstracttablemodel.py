@@ -2,11 +2,18 @@ from __future__ import annotations
 
 from typing import overload
 
-from prettyqt import core
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
 
 class AbstractTableModelMixin(core.AbstractItemModelMixin):
+    DEFAULT_FLAGS = (
+        constants.DRAG_ENABLED
+        | constants.IS_ENABLED
+        | constants.IS_SELECTABLE
+        | constants.NO_CHILDREN
+    )
+
     @overload
     def __getitem__(self, index: tuple[int, int]) -> QtCore.QModelIndex:
         ...

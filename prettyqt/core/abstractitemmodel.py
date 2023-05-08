@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import contextlib
 
-from prettyqt import core
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
@@ -22,6 +22,10 @@ LAYOUT_CHANGE_HINT = bidict(
 
 
 class AbstractItemModelMixin(core.ObjectMixin):
+    DEFAULT_FLAGS = (
+        constants.DRAG_ENABLED | constants.IS_ENABLED | constants.IS_SELECTABLE
+    )
+
     def __repr__(self):
         return f"{type(self).__name__}: {self.rowCount()} rows"
 

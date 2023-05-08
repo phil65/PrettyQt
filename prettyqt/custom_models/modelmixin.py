@@ -1,31 +1,17 @@
 from __future__ import annotations
 
-from collections.abc import Callable
-
 from prettyqt import constants
 
 
 class ModelMixin:
-    DATA_ROLE = constants.USER_ROLE
     DTYPE_ROLE = constants.USER_ROLE + 1  # type: ignore
-    NAME_ROLE = constants.USER_ROLE + 2  # type: ignore
-    SORT_ROLE = constants.USER_ROLE + 3  # type: ignore
-    MAX_ROWS = 1_000_000
     HEADER = ["Name"]
-    DEFAULT_FLAGS = (
-        constants.DRAG_ENABLED  # type: ignore
-        | constants.IS_ENABLED
-        | constants.IS_SELECTABLE
-        | constants.NO_CHILDREN
-    )
     LABELS: dict = {}
     CHECKSTATE: dict = {}
     TOOLTIPS: dict = {}
     DECORATIONS: dict = {}
     SET_DATA: dict = {}
     content_type = ""
-    data_by_index: Callable
-    update_row: Callable
 
     def headerData(self, offset: int, orientation, role):
         match orientation, role:
@@ -63,7 +49,7 @@ class ModelMixin:
             case constants.CHECKSTATE_ROLE:
                 if fn := self.CHECKSTATE.get(index.column()):
                     return fn(item)
-            case self.DATA_ROLE:
+            case constants.USER_ROLE:
                 return item
             case _:
                 return None

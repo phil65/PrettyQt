@@ -72,7 +72,7 @@ class ObjectBrowser(widgets.MainWindow):
         )
 
         self._proxy_tree_model.setSourceModel(self._tree_model)
-        # self._proxy_tree_model.setSortRole(RegistryTableModel.SORT_ROLE)
+        # self._proxy_tree_model.setSortRole(constants.SORT_ROLE)
         self._proxy_tree_model.setDynamicSortFilter(True)
         # self._proxy_tree_model.setSortCaseSensitivity(Qt.CaseInsensitive)
 
