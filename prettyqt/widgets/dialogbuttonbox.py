@@ -10,7 +10,7 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-BUTTONS = bidict(
+STANDARD_BUTTON = bidict(
     cancel=QtWidgets.QDialogButtonBox.StandardButton.Cancel,
     ok=QtWidgets.QDialogButtonBox.StandardButton.Ok,
     save=QtWidgets.QDialogButtonBox.StandardButton.Save,
@@ -31,7 +31,7 @@ BUTTONS = bidict(
     ignore=QtWidgets.QDialogButtonBox.StandardButton.Ignore,
 )
 
-ButtonStr = Literal[
+StandardButtonStr = Literal[
     "cancel",
     "ok",
     "save",
@@ -89,14 +89,14 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
     def __len__(self) -> int:
         return len(self.buttons())
 
-    def __getitem__(self, index: ButtonStr) -> QtWidgets.QPushButton:
-        return self.button(BUTTONS[index])
+    def __getitem__(self, index: StandardButtonStr) -> QtWidgets.QPushButton:
+        return self.button(STANDARD_BUTTON[index])
 
     def __iter__(self) -> Iterator[QtWidgets.QAbstractButton]:
         return iter(self.buttons())
 
-    def __contains__(self, index: ButtonStr):
-        return self.button(BUTTONS[index]) is not None
+    def __contains__(self, index: StandardButtonStr):
+        return self.button(STANDARD_BUTTON[index]) is not None
 
     @classmethod
     def create(cls, **kwargs) -> Self:
@@ -135,11 +135,11 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
         """
         return constants.ORIENTATION.inverse[self.orientation()]
 
-    def add_default_buttons(self, buttons: Sequence[ButtonStr]):
+    def add_default_buttons(self, buttons: Sequence[StandardButtonStr]):
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(
-        self, button: ButtonStr, callback: Callable | None = None
+        self, button: StandardButtonStr, callback: Callable | None = None
     ) -> QtWidgets.QPushButton:
         """Add a default button.
 
@@ -153,9 +153,9 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
         Raises:
             InvalidParamError: Button type not available
         """
-        if button not in BUTTONS:
-            raise InvalidParamError(button, BUTTONS)
-        btn = self.addButton(BUTTONS[button])
+        if button not in STANDARD_BUTTON:
+            raise InvalidParamError(button, STANDARD_BUTTON)
+        btn = self.addButton(STANDARD_BUTTON[button])
         btn.setObjectName(button)
         if callback:
             btn.clicked.connect(callback)
@@ -163,7 +163,7 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
 
     def add_button(
         self,
-        button: QtWidgets.QPushButton | ButtonStr,
+        button: QtWidgets.QPushButton | StandardButtonStr,
         role: RoleStr = "accept",
         callback: Callable | None = None,
     ) -> widgets.PushButton:

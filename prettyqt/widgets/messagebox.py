@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import sys
 import traceback
 from typing import Literal
+
+import multimethod
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -19,7 +22,7 @@ ICONS = bidict(
 
 IconStr = Literal["none", "information", "warning", "critical", "question"]
 
-BUTTONS = bidict(
+STANDARD_BUTTON = bidict(
     none=QtWidgets.QMessageBox.StandardButton.NoButton,
     cancel=QtWidgets.QMessageBox.StandardButton.Cancel,
     ok=QtWidgets.QMessageBox.StandardButton.Ok,
@@ -41,7 +44,7 @@ BUTTONS = bidict(
     ignore=QtWidgets.QMessageBox.StandardButton.Ignore,
 )
 
-ButtonStr = Literal[
+StandardButtonStr = Literal[
     "none",
     "cancel",
     "ok",
@@ -107,7 +110,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         text: str = "",
         informative_text: str = "",
         details: str = "",
-        buttons: list[ButtonStr] | None = None,
+        buttons: list[StandardButtonStr] | None = None,
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
@@ -163,17 +166,24 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
             ico = iconprovider.get_icon(icon)
             self.setIconPixmap(ico.get_pixmap(size=64))
 
-    def show_blocking(self) -> ButtonStr:
-        return BUTTONS.inverse[self.main_loop()]
+    def show_blocking(self) -> StandardButtonStr:
+        return STANDARD_BUTTON.inverse[self.main_loop()]
 
     def get_icon_pixmap(self) -> gui.Pixmap | None:
         pix = self.iconPixmap()
         return None if pix.isNull() else gui.Pixmap(pix)
 
-    def get_standard_buttons(self) -> list[ButtonStr]:
-        return BUTTONS.get_list(self.standardButtons())
+    def set_standard_buttons(self, buttons: list[StandardButtonStr]):
+        flag = self.StandardButton.NoButton
+        for val in buttons:
+            flag |= STANDARD_BUTTON[val]
+        self.setStandardButtons(flag)
 
-    def add_button(self, button: ButtonStr) -> QtWidgets.QPushButton:
+    def get_standard_buttons(self) -> list[StandardButtonStr]:
+        return STANDARD_BUTTON.get_list(self.standardButtons())
+
+    @multimethod.multimethod
+    def add_button(self, button: StandardButtonStr) -> QtWidgets.QPushButton:
         """Add a default button.
 
         Args:
@@ -185,9 +195,17 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         Raises:
             InvalidParamError: Button type not available
         """
-        if button not in BUTTONS:
-            raise InvalidParamError(button, BUTTONS)
-        return self.addButton(BUTTONS[button])
+        if button not in STANDARD_BUTTON:
+            raise InvalidParamError(button, STANDARD_BUTTON)
+        return self.addButton(STANDARD_BUTTON[button])
+
+    @add_button.register(str, str)
+    def add_button(
+        self, button: str, role: ButtonRoleStr, callback: Callable | None = None
+    ) -> QtWidgets.QPushButton:
+        btn = self.addButton(button, BUTTON_ROLE[role])
+        if callback:
+            btn.clicked.connect(callback)
 
     # @classmethod
     # def show_exception(cls, exception):
@@ -216,23 +234,24 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         """
         return TEXT_FORMAT.inverse[self.textFormat()]
 
-    def set_escape_button(self, button: ButtonStr | QtWidgets.QAbstractButton):
+    def set_escape_button(self, button: StandardButtonStr | QtWidgets.QAbstractButton):
         if isinstance(button, QtWidgets.QAbstractButton):
             self.setEscapeButton(button)
         else:
-            self.setEscapeButton(BUTTONS[button])
+            self.setEscapeButton(STANDARD_BUTTON[button])
 
-    def set_default_button(self, button: ButtonStr | QtWidgets.QPushButton):
+    def set_default_button(self, button: StandardButtonStr | QtWidgets.QPushButton):
         if isinstance(button, QtWidgets.QPushButton):
             self.setDefaultButton(button)
         else:
-            self.setDefaultButton(BUTTONS[button])
+            self.setDefaultButton(STANDARD_BUTTON[button])
 
 
 if __name__ == "__main__":
     app = widgets.app()
-    ret = MessageBox(icon="warning", title="header", text="text", details="details")
-    ret.set_icon("mdi.folder")
+    ret = MessageBox(icon="warning", title="header", text="text")
+    ret.set_standard_buttons(["ok", "cancel"])
+    ret.add_button("tt", "accept", callback=lambda: print("click"))
     ret.show()
     print(ret)
     app.main_loop()

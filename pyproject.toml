@@ -44,6 +44,7 @@ pygments = "^2.6"
 qstylizer = "^0.2"
 deprecated = "^1.2"
 typing-extensions = "^4.5.0"
+multimethod = "^1.9.1"
 
 [tool.poetry.extras]
 pyside6 = ["pyside6", "PySide6-QtAds"]
