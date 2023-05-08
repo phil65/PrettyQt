@@ -31,6 +31,13 @@ def test_collapsibleframe(qtbot):
     frame.remove_widget(widget)
 
 
+def test_elidedlabel(qtbot):
+    label = custom_widgets.ElidedLabel()
+    label.set_text("test")
+    assert label.get_text() == "test"
+    label.show()
+
+
 def test_expandableline(qtbot):
     layout = widgets.BoxLayout("vertical")
     textbrowser = widgets.TextBrowser()
@@ -95,6 +102,16 @@ def test_flagselectionwidget(qtbot):
     items = {0: "MultiLine", 2: "Ignore case"}
     widget.add_items(items)
     assert widget.get_value() == 0
+
+
+def test_hiearchicalheaderview(qtbot):
+    view = custom_widgets.HierarchicalHeaderView()
+    assert view
+
+
+def test_iconbrowser(qtbot):
+    browser = custom_widgets.IconBrowser()
+    browser.show()
 
 
 def test_stringornumberwidget(qtbot):
