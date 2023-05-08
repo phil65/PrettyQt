@@ -361,9 +361,9 @@ class FSSpecTreeModel(
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return False
-        if self._show_root and self.tree_item(parent) == self._root_item:
+        if self._show_root and self.data_by_index(parent) == self._root_item:
             return True
-        return self.tree_item(parent).obj["type"] == "directory"
+        return self.data_by_index(parent).obj["type"] == "directory"
 
     def removeRows(self, row: int, count: int, parent):
         print(row, count, parent.data())

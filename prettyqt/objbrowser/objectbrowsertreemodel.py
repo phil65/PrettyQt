@@ -167,7 +167,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         underlying nodes for equality is potentially slow. It is faster to let the
         refreshNode function emit the dataChanged signal for all cells.
         """
-        tree_item = self.tree_item(tree_index)
+        tree_item = self.data_by_index(tree_index)
         if not tree_item.children_fetched:
             return None
         old_items = tree_item.child_items
@@ -249,13 +249,13 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
         self._show_callables = show_callable_attrs
         self._show_special_attrs = show_special_attrs
 
-    def tree_item(self, proxy_index: core.ModelIndex) -> ObjectBrowserTreeItem:
+    def data_by_index(self, proxy_index: core.ModelIndex) -> ObjectBrowserTreeItem:
         index = self.mapToSource(proxy_index)
-        return self.sourceModel().tree_item(index)
+        return self.sourceModel().data_by_index(index)
 
     def filterAcceptsRow(self, source_row: int, source_parent_index: core.ModelIndex):
         """Return true if the item should be included in the model."""
-        parent_item = self.sourceModel().tree_item(source_parent_index)
+        parent_item = self.sourceModel().data_by_index(source_parent_index)
         tree_item = parent_item.child(source_row)
         is_callable_attr = tree_item.is_attribute and callable(tree_item.obj)
         return (self._show_special_attrs or not tree_item.is_special_attribute) and (

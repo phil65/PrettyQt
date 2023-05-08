@@ -182,7 +182,7 @@ class ColumnItemModelMixin:
             return None
 
         col = index.column()
-        tree_item = self.tree_item(index)
+        tree_item = self.data_by_index(index)
         col_item = self._attr_cols[col]
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
@@ -214,7 +214,7 @@ class ColumnItemModelMixin:
         if not index.isValid():
             return False
         col = index.column()
-        tree_item = self.tree_item(index)
+        tree_item = self.data_by_index(index)
         match role:
             case constants.EDIT_ROLE:
                 self._attr_cols[col].set_edit_value(tree_item, value)
@@ -229,7 +229,7 @@ class ColumnItemModelMixin:
         if not index.isValid():
             return super().flags(index)  # TODO: whats best here?
         col = index.column()
-        tree_item = self.tree_item(index)
+        tree_item = self.data_by_index(index)
         return self._attr_cols[col].get_flag(tree_item)
 
     def headerData(self, section, orientation, role):
@@ -281,7 +281,7 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         parent = parent or core.ModelIndex()
         return 0 if parent.isValid() else len(self._attr_cols)
 
-    def tree_item(self, index: core.ModelIndex):
+    def data_by_index(self, index: core.ModelIndex):
         return self.items[index.row()]
 
     def setData(self, index, value, role):

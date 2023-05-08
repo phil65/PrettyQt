@@ -51,14 +51,14 @@ class TreeModel(core.AbstractItemModel):
         """Return the root ObjectBrowserTreeItem."""
         return self._root_item
 
-    def tree_item(self, index: core.ModelIndex) -> treeitem.TreeItem:
+    def data_by_index(self, index: core.ModelIndex) -> treeitem.TreeItem:
         return index.internalPointer() if index.isValid() else self.root_item
 
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
-        parent_item = self.tree_item(parent)
+        parent_item = self.data_by_index(parent)
 
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()
@@ -71,7 +71,7 @@ class TreeModel(core.AbstractItemModel):
         if not index.isValid():
             return core.ModelIndex()
 
-        child_item = self.tree_item(index)
+        child_item = self.data_by_index(index)
         parent_item = child_item.parent()  # type: ignore
 
         if parent_item is None or parent_item == self.root_item:
@@ -81,18 +81,18 @@ class TreeModel(core.AbstractItemModel):
 
     def rowCount(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
-        return 0 if parent.column() > 0 else self.tree_item(parent).child_count()
+        return 0 if parent.column() > 0 else self.data_by_index(parent).child_count()
 
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
-        return 0 if parent.column() > 0 else self.tree_item(parent).has_children
+        return 0 if parent.column() > 0 else self.data_by_index(parent).has_children
 
     def canFetchMore(self, parent: core.ModelIndex | None = None):
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return 0
         else:
-            return not self.tree_item(parent).children_fetched
+            return not self.data_by_index(parent).children_fetched
 
     def fetchMore(self, parent: core.ModelIndex | None = None):
         """Fetch the children given the model index of a parent node.
@@ -103,7 +103,7 @@ class TreeModel(core.AbstractItemModel):
         if parent.column() > 0:
             return
 
-        parent_item = self.tree_item(parent)
+        parent_item = self.data_by_index(parent)
         if parent_item.children_fetched:
             return
 
