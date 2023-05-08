@@ -519,6 +519,49 @@ UI_EFFECTS: bidict[UiEffectStr, Qt.UIEffect] = bidict(
     animate_toolbox=Qt.UIEffect.UI_AnimateToolBox,
 )
 
+
+InputMethodQueryStr = Literal[
+    "enabled",
+    "cursor_rectangle",
+    "font",
+    "cursor_position",
+    "surrounding_text",
+    "current_selection",
+    "maximum_text_length",
+    "anchor_position",
+    "hints",
+    "preferred_language",
+    "platform_data",
+    "absolute_position",
+    "text_before_cursor",
+    "text_after_cursor",
+    "enter_key_type",
+    "anchor_rectangle",
+    "input_item_clip_rectangle",
+    "read_only",
+]
+INPUT_METHOD_QUERY: bidict[InputMethodQueryStr, Qt.InputMethodQuery] = bidict(
+    enabled=Qt.InputMethodQuery.ImEnabled,
+    cursor_rectangle=Qt.InputMethodQuery.ImCursorRectangle,
+    font=Qt.InputMethodQuery.ImFont,
+    cursor_position=Qt.InputMethodQuery.ImCursorPosition,
+    surrounding_text=Qt.InputMethodQuery.ImSurroundingText,
+    current_selection=Qt.InputMethodQuery.ImCurrentSelection,
+    maximum_text_length=Qt.InputMethodQuery.ImMaximumTextLength,
+    anchor_position=Qt.InputMethodQuery.ImAnchorPosition,
+    hints=Qt.InputMethodQuery.ImHints,
+    preferred_language=Qt.InputMethodQuery.ImPreferredLanguage,
+    platform_data=Qt.InputMethodQuery.ImPlatformData,
+    absolute_position=Qt.InputMethodQuery.ImAbsolutePosition,
+    text_before_cursor=Qt.InputMethodQuery.ImTextBeforeCursor,
+    text_after_cursor=Qt.InputMethodQuery.ImTextAfterCursor,
+    enter_key_type=Qt.InputMethodQuery.ImEnterKeyType,
+    anchor_rectangle=Qt.InputMethodQuery.ImAnchorRectangle,
+    input_item_clip_rectangle=Qt.InputMethodQuery.ImInputItemClipRectangle,
+    read_only=Qt.InputMethodQuery.ImReadOnly,
+)
+
+
 DayOfWeekStr = Literal[
     "monday",
     "tuesday",

@@ -39,6 +39,10 @@ class InputMethod(core.ObjectMixin):
     def get_input_direction(self) -> constants.LayoutDirectionStr:
         return constants.LAYOUT_DIRECTION.inverse[self.inputDirection()]
 
+    @classmethod
+    def query_focus_object(cls, query: constants.InputMethodQueryStr, argument):
+        return cls.queryFocusObject(constants.INPUT_METHOD_QUERY[query], argument)
+
 
 if __name__ == "__main__":
     from prettyqt import gui
