@@ -89,6 +89,14 @@ class WidgetMixin(core.ObjectMixin):
             case "slide":
                 anim = custom_animations.SlideAnimation(**kwargs, parent=self)
                 anim.apply_to(self)
+            case "property":
+                anim = core.PropertyAnimation(parent=self)
+                anim.setTargetObject(self)
+                anim.set_property_name(kwargs.pop("name"))
+                anim.setStartValue(kwargs.pop("start_value"))
+                anim.setEndValue(kwargs.pop("end_value"))
+                anim.setDuration(kwargs.pop("duration", 1000))
+                anim.set_easing(kwargs.pop("easing", "linear"))
         anim.start()
 
     def raise_to_top(self):
@@ -625,7 +633,14 @@ class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
-    widget.play_animation("slide", start_value=(0, 100))
+    widget.play_animation(
+        "property",
+        name="windowOpacity",
+        duration=1000,
+        start_value=0,
+        end_value=1,
+    )
+    # widget.play_animation("fade_in")
     # val = custom_animations.FadeInAnimation()
     # val.apply_to(widget)
     # val.start()
