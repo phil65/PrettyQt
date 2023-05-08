@@ -1,3 +1,28 @@
+## v1.39.0 (2023-05-08)
+
+### Feat
+
+- re-work JsonModel
+- add update_check
+- some MessageBox work
+- **SlideAnimation**: add start/end_value kwargs for ctor
+- **Widget**: add play_animation method
+- **PlainTextEdit**: extend set_syntaxhighlighter
+- add CycleWidget
+- add SelectedWordHighlighter class
+- **PlainTextEdit**: better way to color focused line
+- **bluetooth**: cover some more classes
+- **ItemSelectionModel**: add set_current_index method
+- scroll_to_item for Table/TreeWidget
+- **AbstractScrollArea**: add set_viewport_margins method
+- set_size for SvgGenerator and QuickItem
+
+### Fix
+
+- **Scintilla**: fix highlight_current_line
+- **Color**: also inherit transparency when QColor for ctor
+- typed signals seem to cast to Qt types
+
 ## v1.38.1 (2023-05-07)
 
 ### Fix
