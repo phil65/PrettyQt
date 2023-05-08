@@ -130,8 +130,15 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     def set_text(self, text: str):
         self.setPlainText(text)
 
-    def set_syntaxhighlighter(self, syntax: str, style: str | None = None):
-        self._hl = syntaxhighlighters.PygmentsHighlighter(self.document(), syntax, style)
+    def set_syntaxhighlighter(
+        self, syntax: str | QtGui.QSyntaxHighlighter, style: str | None = None
+    ):
+        if isinstance(syntax, QtGui.QSyntaxHighlighter):
+            self._hl = syntax
+        else:
+            self._hl = syntaxhighlighters.PygmentsHighlighter(
+                self.document(), syntax, style
+            )
 
     def text(self) -> str:
         return self.toPlainText()
