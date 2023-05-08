@@ -59,10 +59,10 @@ repos:
   hooks:
     - id: ruff
 
-- repo: https://github.com/pycqa/pydocstyle
-  rev: 6.3.0
-  hooks:
-  - id: pydocstyle
+# - repo: https://github.com/pycqa/pydocstyle
+#   rev: 6.3.0
+#   hooks:
+#   - id: pydocstyle
 
 - repo: https://github.com/asottile/pyupgrade
   rev: v3.3.2
