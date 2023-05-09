@@ -13,11 +13,8 @@ MAX_SIZE = sys.maxsize
 class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
     """Performs subsequence matching/sorting."""
 
-    def __init__(
-        self, case_sensitivity: bool = False, parent: QtCore.QObject | None = None
-    ):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
-        self.case_sensitivity = case_sensitivity
         self.prefix = ""
         self.filter_patterns = []
         self.filter_patterns_case_sensitive = []
@@ -28,7 +25,7 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
         self.filter_patterns = []
         self.filter_patterns_case_sensitive = []
         self.sort_patterns = []
-        flags = re.IGNORECASE if self.case_sensitivity is False else 0
+        flags = 0 if self.is_filter_case_sensitive() else re.IGNORE_CASE
         for i in reversed(range(1, len(prefix) + 1)):
             ptrn = f".*{prefix[:i]}.*{prefix[i:]}"
             try:
@@ -51,16 +48,15 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
         ):
             return False
         if len(self.prefix) == 1:
-            try:
-                prefix = self.prefix
-                if self.case_sensitivity is False:
-                    completion = completion.lower()
-                    prefix = self.prefix.lower()
-                rank = completion.index(prefix)
-                self.sourceModel().setData(idx, rank, constants.USER_ROLE)
-                return prefix in completion
-            except ValueError:
+            prefix = self.prefix
+            if not self.is_filter_case_sensitive():
+                completion = completion.lower()
+                prefix = prefix.lower()
+            if prefix not in completion:
                 return False
+            rank = completion.index(prefix)
+            self.sourceModel().setData(idx, rank, constants.USER_ROLE)
+            return prefix in completion
         for i, (pattern, pattern_case, sort_pattern) in enumerate(
             zip(
                 self.filter_patterns,
@@ -81,3 +77,36 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
                 self.sourceModel().setData(idx, rank, constants.USER_ROLE)
                 return True
         return len(self.prefix) == 0
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+    from prettyqt.custom_models import JsonModel
+
+    app = widgets.app()
+    dist = [
+        dict(
+            a=2,
+            b={
+                "a": 4,
+                "b": [1, 2, 3],
+                "jkjkjk": "tekjk",
+                "sggg": "tekjk",
+                "fdfdf": "tekjk",
+                "xxxx": "xxx",
+            },
+        ),
+        6,
+        "jkjk",
+    ]
+    source_model = JsonModel(dist)
+    model = SubsequenceSortFilterProxyModel()
+    model.setFilterKeyColumn(1)
+    model.set_prefix("x")
+    model.setSourceModel(source_model)
+    table = widgets.TreeView()
+    table.setRootIsDecorated(True)
+    # table.setSortingEnabled(True)
+    table.set_model(model)
+    table.show()
+    app.main_loop()
