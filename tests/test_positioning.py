@@ -25,7 +25,7 @@ def test_geocoordinate():
     print(str(coord))
     assert repr(coord) == "GeoCoordinate(11.0, 11.0)"
     assert coord.get_type() == "2d"
-    assert bool(coord) is True
+    assert bool(coord)
 
 
 def test_geocircle():
@@ -77,7 +77,7 @@ def test_geopositioninfo():
     assert "direction" in info
     assert info["direction"] == 10.0
     del info["direction"]
-    assert bool(info) is False
+    assert not bool(info)
     info.get_coordinate()
     info.get_timestamp()
 
