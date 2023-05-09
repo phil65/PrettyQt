@@ -1,3 +1,23 @@
+## v1.40.0 (2023-05-09)
+
+### Feat
+
+- **Painter**: add draw_star, draw_diamond methods
+- **PolygonF**: scale kwarg for create_star_diamond
+- Constraints column for ImportLib model
+- __format__ for different classes
+- **Widget**: add set_graphics_effect method
+- **core**: add LoggingCategory class
+- **network**: add NetworkReply class
+- add MaterialIconStyle class
+- **InputMethod**: add query_focus_object method
+- add GoogleCompleter
+- add HTMLItemDelegate
+
+### Fix
+
+- **NestedItem**: set parent in append_child
+
 ## v1.39.1 (2023-05-08)
 
 ### Fix

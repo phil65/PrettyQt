@@ -2,7 +2,7 @@
 
 __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
-__version__ = "1.39.1"
+__version__ = "1.40.0"
 
 
 def debug():
