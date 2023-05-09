@@ -35,7 +35,7 @@ COORDINATE_TYPE = bidict(
     }
 )
 
-CoordinateTypeStr = Literal["invalid", "two_d", "three_d"]
+CoordinateTypeStr = Literal["invalid", "2d", "3d"]
 
 
 class GeoCoordinate(QtPositioning.QGeoCoordinate):

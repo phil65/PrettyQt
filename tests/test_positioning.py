@@ -24,7 +24,7 @@ def test_geocoordinate():
     coord = positioning.GeoCoordinate(11, 11)
     print(str(coord))
     assert repr(coord) == "GeoCoordinate(11.0, 11.0)"
-    assert coord.get_type() == "two_d"
+    assert coord.get_type() == "2d"
     assert bool(coord) is True
 
 
