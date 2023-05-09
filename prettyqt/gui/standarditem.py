@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 import os
+from typing import Any
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -103,6 +104,11 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
+
+    def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        self.setData(data, role)
 
     def set_tooltip(
         self,
