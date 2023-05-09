@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 import sys
 
-from prettyqt import constants, core
+from prettyqt import core
 from prettyqt.qt import QtCore
 
 
@@ -15,26 +15,27 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
 
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
-        self.prefix = ""
+        self.search_term = ""
         self.filter_patterns = []
         self.filter_patterns_case_sensitive = []
         self.sort_patterns = []
 
-    def set_prefix(self, prefix: str):
-        self.prefix = prefix
+    def set_search_term(self, search_term: str):
+        self.search_term = search_term
         self.filter_patterns = []
         self.filter_patterns_case_sensitive = []
         self.sort_patterns = []
-        flags = 0 if self.is_filter_case_sensitive() else re.IGNORE_CASE
-        for i in reversed(range(1, len(prefix) + 1)):
-            ptrn = f".*{prefix[:i]}.*{prefix[i:]}"
+        flags = 0 if self.is_filter_case_sensitive() else re.IGNORECASE
+        for i in reversed(range(1, len(search_term) + 1)):
+            ptrn = f".*{search_term[:i]}.*{search_term[i:]}"
             try:
                 self.filter_patterns.append(re.compile(ptrn, flags))
                 self.filter_patterns_case_sensitive.append(re.compile(ptrn, 0))
-                ptrn = f"{prefix[:i]}.*{prefix[i:]}"
+                ptrn = f"{search_term[:i]}.*{search_term[i:]}"
                 self.sort_patterns.append(re.compile(ptrn, flags))
             except Exception:
                 continue
+        self.invalidateRowsFilter()
 
     def filterAcceptsRow(self, row, index):
         column = self.filterKeyColumn()
@@ -43,40 +44,36 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
         completion = self.sourceModel().data(idx, role)
         if (
             completion is None
-            or self.prefix is None
-            or len(completion) < len(self.prefix)
+            or self.search_term is None
+            or len(completion) < len(self.search_term)
         ):
             return False
-        if len(self.prefix) == 1:
-            prefix = self.prefix
+        if len(self.search_term) == 1:
+            search_term = self.search_term
             if not self.is_filter_case_sensitive():
                 completion = completion.lower()
-                prefix = prefix.lower()
-            if prefix not in completion:
-                return False
-            rank = completion.index(prefix)
-            self.sourceModel().setData(idx, rank, constants.USER_ROLE)
-            return prefix in completion
-        for i, (pattern, pattern_case, sort_pattern) in enumerate(
-            zip(
-                self.filter_patterns,
-                self.filter_patterns_case_sensitive,
-                self.sort_patterns,
-            )
+                search_term = search_term.lower()
+            # rank = completion.index(search_term)
+            # self.sourceModel().setData(idx, rank, constants.USER_ROLE)
+            return search_term in completion
+        for pattern, pattern_case, sort_pattern in zip(
+            self.filter_patterns,
+            self.filter_patterns_case_sensitive,
+            self.sort_patterns,
         ):
             if re.match(pattern, completion):
                 # compute rank, the lowest rank the closer it is from the
                 # completion
-                start = MAX_SIZE
-                for m in sort_pattern.finditer(completion):
-                    start, end = m.span()
-                rank = start + i * 10
-                if re.match(pattern_case, completion):
-                    # favorise completions where case is matched
-                    rank -= 10
-                self.sourceModel().setData(idx, rank, constants.USER_ROLE)
+                # start = MAX_SIZE
+                # for m in sort_pattern.finditer(completion):
+                #     start, end = m.span()
+                # rank = start + i * 10
+                # if re.match(pattern_case, completion):
+                #     # favorise completions where case is matched
+                #     rank -= 10
+                # self.sourceModel().setData(idx, rank, constants.USER_ROLE)
                 return True
-        return len(self.prefix) == 0
+        return len(self.search_term) == 0
 
 
 if __name__ == "__main__":
@@ -102,11 +99,17 @@ if __name__ == "__main__":
     source_model = JsonModel(dist)
     model = SubsequenceSortFilterProxyModel()
     model.setFilterKeyColumn(1)
-    model.set_prefix("x")
+    model.set_search_term("x")
     model.setSourceModel(source_model)
     table = widgets.TreeView()
     table.setRootIsDecorated(True)
+    lineedit = widgets.LineEdit()
+    lineedit.value_changed.connect(model.set_search_term)
+    widget = widgets.Widget()
+    widget.set_layout("vertical")
+    widget.box.add(lineedit)
+    widget.box.add(table)
     # table.setSortingEnabled(True)
     table.set_model(model)
-    table.show()
+    widget.show()
     app.main_loop()

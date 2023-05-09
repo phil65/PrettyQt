@@ -100,10 +100,12 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
 
     def __init__(
         self,
-        obj: metadata.Distribution,
+        obj: metadata.Distribution | str,
         show_root: bool = False,
         parent: QtCore.QObject | None = None,
     ):
+        if isinstance(obj, str):
+            obj = metadata.distribution(obj)
         super().__init__(obj=obj, columns=COLUMNS, parent=parent, show_root=show_root)
 
     @classmethod
@@ -149,10 +151,11 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         self.distributions = distributions
 
     def rowCount(self, parent=None):
-        return 0 if parent is not None else len(self.distributions)
+        parent = parent or core.ModelIndex()
+        return 0 if parent.column() > 0 or parent.isValid() else len(self.distributions)
 
     def columnCount(self, parent=None):
-        return 0 if parent is not None else len(self.HEADER)
+        return 0 if parent is None else len(self.HEADER)
 
     def headerData(self, offset: int, orientation, role):  # type: ignore
         match orientation, role:
@@ -206,10 +209,8 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    dist = metadata.distribution("prettyqt")
-    model = ImportlibTreeModel(dist, show_root=False)
-    table = widgets.TreeView()
-    table.setRootIsDecorated(True)
+    model = ImportlibDistributionModel.from_package("prettyqt")
+    table = widgets.TableView()
     # table.setSortingEnabled(True)
     table.set_model(model)
     table.show()

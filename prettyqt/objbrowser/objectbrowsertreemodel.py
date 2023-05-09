@@ -268,7 +268,7 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
     def set_show_callables(self, show_callables: bool):
         """Show/hide show_callables which have a __call__ attribute."""
         self._show_callables = show_callables
-        self.invalidateFilter()
+        self.invalidateRowsFilter()
 
     def get_show_special_attrs(self) -> bool:
         return self._show_special_attrs
@@ -276,7 +276,7 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
     def set_show_special_attrs(self, show_special_attrs: bool):
         """Show/hide special attributes which begin with an underscore."""
         self._show_special_attrs = show_special_attrs
-        self.invalidateFilter()
+        self.invalidateRowsFilter()
 
 
 if __name__ == "__main__":
