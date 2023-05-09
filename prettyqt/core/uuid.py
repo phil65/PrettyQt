@@ -52,6 +52,9 @@ class UuidMixin:
     def __reduce__(self):
         return type(self), (self.toString(),)
 
+    def __format__(self, format_spec: StringFormatStr):
+        return self.to_string(format_spec)
+
     def get_variant(self) -> VariantStr:
         return VARIANTS.inverse[self.variant()]
 

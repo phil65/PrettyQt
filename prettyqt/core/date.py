@@ -13,6 +13,9 @@ class Date(QtCore.QDate):
     def __str__(self):
         return self.toString("yyyy-MM-dd")
 
+    def __format__(self, format_spec: str):
+        return self.toString(format_spec)
+
     @property
     def _year(self):
         return self.year()

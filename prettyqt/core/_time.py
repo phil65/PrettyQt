@@ -16,6 +16,9 @@ class Time(QtCore.QTime):
     def __reduce__(self):
         return type(self), (self.hour(), self.minute(), self.second(), self.msec())
 
+    def __format__(self, format_spec: str):
+        return self.toString(format_spec)
+
     @property
     def _hour(self):
         return self.hour()

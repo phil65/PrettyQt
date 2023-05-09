@@ -15,10 +15,12 @@ SEQUENCE_MATCHES = bidict(
 
 SequenceMatchStr = Literal["none", "partial", "exact"]
 
-SEQUENCE_FORMATS = bidict(
+SEQUENCE_FORMAT = bidict(
     native=QtGui.QKeySequence.SequenceFormat.NativeText,
     portable=QtGui.QKeySequence.SequenceFormat.PortableText,
 )
+
+SequenceFormatStr = Literal["native", "Portable"]
 
 STANDARD_KEYS = bidict(
     add_tab=QtGui.QKeySequence.StandardKey.AddTab,
@@ -113,6 +115,9 @@ class KeySequence(QtGui.QKeySequence):
 
     def __reduce__(self):
         return type(self), (self.toString(),)
+
+    def __format__(self, format_spec: SequenceFormatStr):
+        return self.toString(SEQUENCE_FORMAT[format_spec])
 
     @property
     def _toString(self):

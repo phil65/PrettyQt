@@ -24,7 +24,7 @@ NAME_FORMAT = bidict(
 )
 
 NameFormatStr = Literal["hex_rgb", "hex_argb"]
-NameStr = Literal["hex_rgb", "hex_argb", "svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"]
+NameStr = NameFormatStr | Literal["svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"]
 
 
 class Color(QtGui.QColor):
@@ -50,6 +50,9 @@ class Color(QtGui.QColor):
 
     def __reduce__(self):
         return type(self), (self.red(), self.green(), self.blue(), self.alpha())
+
+    def __format__(self, format_spec: NameStr):
+        return self.get_name(format_spec)
 
     @property
     def _red(self):
@@ -222,7 +225,5 @@ if __name__ == "__main__":
     color = color.drift(1.3)
     print(str(color))
     print(color.get_spec())
+    print(f"{color}")
     print(color.as_qt())
-    match color:
-        case Color("#005500"):
-            raise Exception("Yeah")
