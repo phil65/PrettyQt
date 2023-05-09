@@ -32,6 +32,7 @@ class NestedItem:
         self.children.extend(children)
 
     def append_child(self, item: Self):
+        item.parent_item = self
         self.children.append(item)
 
     def insert_children(self, idx: int, items: Sequence[Self]):
