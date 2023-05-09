@@ -36,9 +36,7 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         #     completions.append(self.currentCompletion())
         # according to docs, completionCount should be avoided. Not sure if thats true.
         i = 0
-        while True:
-            if not self.setCurrentRow(i):
-                break
+        while self.setCurrentRow(i):
             completions.append(self.currentCompletion())
             i += 1
         return completions
