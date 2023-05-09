@@ -51,8 +51,17 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
     def get_filter_regular_expression(self) -> core.RegularExpression:
         return core.RegularExpression(self.filterRegularExpression())
 
-    def set_sort_role(self, role: constants.ItemDataRoleStr):
-        self.setSortRole(constants.ITEM_DATA_ROLE[role])
+    def set_sort_role(self, role: constants.ItemDataRoleStr | int):
+        if isinstance(role, str):
+            self.setSortRole(constants.ITEM_DATA_ROLE[role])
+        else:
+            self.setSortRole(role)
+
+    def set_filter_role(self, role: constants.ItemDataRoleStr | int):
+        if isinstance(role, str):
+            self.setFilterRole(constants.ITEM_DATA_ROLE[role])
+        else:
+            self.setFilterRole(role)
 
     def sort(
         self,
