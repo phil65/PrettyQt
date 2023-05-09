@@ -5,6 +5,7 @@ Contains QtNetWork-based classes
 
 from .networkcookie import NetworkCookie
 from .networkcookiejar import NetworkCookieJar
+from .networkreply import NetworkReply
 from .networkrequest import NetworkRequest
 from .networkproxy import NetworkProxy
 from .hostaddress import HostAddress
@@ -23,6 +24,7 @@ from .networkaccessmanager import NetworkAccessManager
 
 __all__ = [
     "NetworkProxy",
+    "NetworkReply",
     "AbstractSocket",
     "AbstractSocketMixin",
     "LocalSocket",
