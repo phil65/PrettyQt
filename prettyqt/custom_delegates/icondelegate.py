@@ -4,10 +4,15 @@ from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
-ICON_ROLE = QtCore.Qt.ItemDataRole.UserRole + 1000
-
-
 class IconDelegate(widgets.StyledItemDelegate):
+    def __init__(
+        self,
+        icon_role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
+        parent: QtWidgets.QAbstractItemView | None = None,
+    ):
+        super().__init__(parent)
+        self.icon_role = icon_role
+
     def paint(
         self,
         painter: QtGui.QPainter,
@@ -16,7 +21,7 @@ class IconDelegate(widgets.StyledItemDelegate):
     ):
         """Override to paint an icon based on given Pixmap / Color / Icon.
 
-        Pixmap / Color / Icon must be set to 'QtCore.Qt.ItemDataRole.UserRole + 1000'
+        Pixmap / Color / Icon must be set to 'icon_role'
 
         Args:
             painter (QtGui.QPainter): painter to paint the icon
@@ -24,7 +29,7 @@ class IconDelegate(widgets.StyledItemDelegate):
             index (QtCore.QModelIndex): index which gets decorated
         """
         super().paint(painter, option, index)
-        value = index.data(ICON_ROLE)
+        value = index.data(self.icon_role)
         if not value:
             return
         margin = 10
@@ -66,3 +71,20 @@ class IconDelegate(widgets.StyledItemDelegate):
         )
         alignment = constants.ALIGN_RIGHT | constants.ALIGN_V_CENTER
         icon.paint(painter, r, alignment, mode, state)
+
+
+if __name__ == "__main__":
+    from prettyqt import iconprovider
+
+    app = widgets.app()
+    model = gui.StandardItemModel()
+    model.add("test")
+    app = widgets.app()
+    w = widgets.ListView()
+    w.set_delegate(IconDelegate())
+    w.set_model(model)
+    item = gui.StandardItem("Item")
+    item.set_data("user", iconprovider.get_icon("mdi.folder"))
+    model += item
+    w.show()
+    app.main_loop()
