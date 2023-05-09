@@ -11,7 +11,6 @@ import sys
 from prettyqt.qt.QtCore import (  # type: ignore
     Slot,
     Signal,
-    Property,
     QModelIndex as ModelIndex,
     QPoint as Point,
     QPointF as PointF,
@@ -32,6 +31,7 @@ from prettyqt.qt.QtCore import (  # type: ignore
     # QtSystemMsg as SystemMsg,
     # QtWarningMsg as WarningMsg,
 )
+from .property import Property
 from .timezone import TimeZone
 from .date import Date
 from ._time import Time
