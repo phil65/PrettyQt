@@ -31,6 +31,17 @@ def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     return [i for i in distributions if i is not None]
 
 
+def find_requires(treeitem):
+    return next(
+        (
+            requirement
+            for requirement in treeitem.parent_item.obj.requires
+            if f"{treeitem.obj.metadata['name']} " in requirement
+        ),
+        "",
+    )
+
+
 COL_NAME = custom_models.ColumnItem(
     name="Name",
     doc="Package name",
@@ -41,6 +52,12 @@ COL_VERSION = custom_models.ColumnItem(
     name="Version",
     doc="Version number.",
     label=lambda x: x.obj.version,
+)
+
+COL_CONSTRAINTS = custom_models.ColumnItem(
+    name="Constraints",
+    doc="Constraints.",
+    label=lambda x: find_requires(x),
 )
 
 COL_SUMMARY = custom_models.ColumnItem(
@@ -67,7 +84,15 @@ COL_LICENSE = custom_models.ColumnItem(
     label=lambda x: x.obj.metadata["License"],
 )
 
-COLUMNS = [COL_NAME, COL_VERSION, COL_SUMMARY, COL_HOMEPAGE, COL_AUTHOR, COL_LICENSE]
+COLUMNS = [
+    COL_NAME,
+    COL_VERSION,
+    COL_CONSTRAINTS,
+    COL_SUMMARY,
+    COL_HOMEPAGE,
+    COL_AUTHOR,
+    COL_LICENSE,
+]
 
 
 class ImportlibTreeModel(custom_models.ColumnItemModel):
