@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixin
@@ -68,9 +70,10 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
 
-    def set_data(self, role: str, data):
-        role_id = constants.ITEM_DATA_ROLE[role]
-        self.setData(role_id, data)
+    def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        self.setData(data, role)
 
     def set_size_hint(self, hint: datatypes.SizeType):
         if isinstance(hint, tuple):
