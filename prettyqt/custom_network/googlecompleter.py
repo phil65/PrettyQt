@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, network, widgets
-from prettyqt.qt import QtNetwork
+from prettyqt.qt import QtCore, QtNetwork
 
 
 class BaseScrapeModel(gui.StandardItemModel):
@@ -9,13 +9,13 @@ class BaseScrapeModel(gui.StandardItemModel):
     error = core.Signal(str)
     search_url: str
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
         self._manager = network.NetworkAccessManager(self)
         self._reply = None
 
     @core.Slot(str)
-    def search(self, text):
+    def search(self, text: str):
         self.clear()
         if self._reply is not None:
             self._reply.abort()
@@ -36,14 +36,14 @@ class BaseScrapeModel(gui.StandardItemModel):
         self.finished.emit()
         # self._reply.deleteLater()
 
-    def process_reply(self, reply: str):
+    def process_reply(self, reply: str) -> list[str]:
         return NotImplemented
 
 
 class GoogleSearchModel(BaseScrapeModel):
     search_url = "https://google.com/complete/search?output=toolbar&q={text}"
 
-    def process_reply(self, reply: str):
+    def process_reply(self, reply: str) -> list[str]:
         return [
             xml.attributes().value("data")
             for xml in core.XmlStreamReader(reply)
@@ -62,7 +62,7 @@ class GoogleCompleter(widgets.Completer):
         self.setModel(GoogleSearchModel())
         self.setCompletionPrefix("")
 
-    def splitPath(self, path):
+    def splitPath(self, path: str):
         self.model().search(path)
         return super().splitPath(path)
 
