@@ -76,7 +76,34 @@ class WidgetMixin(core.ObjectMixin):
         else:
             self.showMaximized()
 
-    def play_animation(self, animation_type: str, **kwargs):
+    def set_graphics_effect(
+        self,
+        effect: QtWidgets.QGraphicsEffect
+        | Literal["drop_shadow", "blur", "opacity", "colorize"],
+        radius: int = 10,
+        opacity: int = 0.7,
+        strength: int = 0.5,
+        color: datatypes.ColorType = "blue",
+    ) -> QtWidgets.QGraphicsEffect:
+        match effect:
+            case "drop_shadow":
+                effect = widgets.GraphicsDropShadowEffect(self)
+                effect.setBlurRadius(radius)
+                effect.setColor(colors.get_color(color))
+            case "blur":
+                effect = widgets.GraphicsBlurEffect(self)
+                effect.setBlurRadius(radius)
+            case "opacity":
+                effect = widgets.GraphicsOpacityEffect(self)
+                effect.setOpacity(opacity)
+            case "colorize":
+                effect = widgets.GraphicsColorizeEffect(self)
+                effect.setColor(colors.get_color(color))
+                effect.setStrength(strength)
+        self.setGraphicsEffect(effect)
+        return effect
+
+    def play_animation(self, animation_type: str, **kwargs) -> QtCore.QPropertyAnimation:
         from prettyqt import custom_animations
 
         match animation_type:
@@ -98,6 +125,7 @@ class WidgetMixin(core.ObjectMixin):
                 anim.setDuration(kwargs.pop("duration", 1000))
                 anim.set_easing(kwargs.pop("easing", "linear"))
         anim.start()
+        return anim
 
     def raise_to_top(self):
         if sys.platform.startswith("win"):
@@ -633,17 +661,18 @@ class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
-    widget.play_animation(
-        "property",
-        name="windowOpacity",
-        duration=1000,
-        start_value=0,
-        end_value=1,
-    )
+    # widget.play_animation(
+    #     "property",
+    #     name="windowOpacity",
+    #     duration=1000,
+    #     start_value=0,
+    #     end_value=1,
+    # )
     # widget.play_animation("fade_in")
     # val = custom_animations.FadeInAnimation()
     # val.apply_to(widget)
     # val.start()
+    widget.set_graphics_effect("colorize")
     widget.show()
     # widget.add_shortcut("return", print, "application")
     # widget.set_min_size((400, 400))
