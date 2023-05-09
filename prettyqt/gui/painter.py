@@ -137,6 +137,16 @@ class PainterMixin:
             rect = QtCore.QRectF(*rect)
         self.drawRoundedRect(rect, x_radius, y_radius, flag)
 
+    def draw_star(self, size: float = 1.0, fill_rule: constants.FillRuleStr = "winding"):
+        star = gui.PolygonF.create_star(size)
+        self.drawPolygon(star, constants.FILL_RULE[fill_rule])
+
+    def draw_diamond(
+        self, size: float = 1.0, fill_rule: constants.FillRuleStr = "winding"
+    ):
+        star = gui.PolygonF.create_diamond(size)
+        self.drawPolygon(star, constants.FILL_RULE[fill_rule])
+
     def use_antialiasing(self):
         self.setRenderHint(self.RenderHint.Antialiasing, True)
 

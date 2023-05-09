@@ -99,14 +99,14 @@ from .transform import Transform
 from .pagedpaintdevice import PagedPaintDevice, PagedPaintDeviceMixin
 from .pen import Pen
 from .picture import Picture
+from .polygon import Polygon
+from .polygonf import PolygonF
 from .painter import Painter, PainterMixin
 from .painterpath import PainterPath
 from .painterpathstroker import PainterPathStroker
 from .palette import Palette
 from .guiapplication import GuiApplication, GuiApplicationMixin
 from .cursor import Cursor
-from .polygon import Polygon
-from .polygonf import PolygonF
 from .standarditem import StandardItem
 from .standarditemmodel import StandardItemModel
 from .textcursor import TextCursor
