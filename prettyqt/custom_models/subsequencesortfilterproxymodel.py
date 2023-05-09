@@ -41,11 +41,14 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
 
     def filterAcceptsRow(self, row, index):
         column = self.filterKeyColumn()
+        role = self.filterRole()
         idx = self.sourceModel().index(row, column, index)
-        completion = self.sourceModel().data(idx)
-        if completion is None or self.prefix is None:
-            return False
-        if len(completion) < len(self.prefix):
+        completion = self.sourceModel().data(idx, role)
+        if (
+            completion is None
+            or self.prefix is None
+            or len(completion) < len(self.prefix)
+        ):
             return False
         if len(self.prefix) == 1:
             try:
@@ -58,14 +61,13 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
                 return prefix in completion
             except ValueError:
                 return False
-        for i, patterns in enumerate(
+        for i, (pattern, pattern_case, sort_pattern) in enumerate(
             zip(
                 self.filter_patterns,
                 self.filter_patterns_case_sensitive,
                 self.sort_patterns,
             )
         ):
-            pattern, pattern_case, sort_pattern = patterns
             if re.match(pattern, completion):
                 # compute rank, the lowest rank the closer it is from the
                 # completion
@@ -76,6 +78,6 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
                 if re.match(pattern_case, completion):
                     # favorise completions where case is matched
                     rank -= 10
-                self.sourceModel().setData(idx, rank, constants.USER_ROLE)  # type: ignore
+                self.sourceModel().setData(idx, rank, constants.USER_ROLE)
                 return True
         return len(self.prefix) == 0
