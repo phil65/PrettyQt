@@ -76,23 +76,23 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
         return gui.Polygon(self.toPolygon())
 
     @classmethod
-    def create_star(cls) -> Self:
+    def create_star(cls, scale: int = 1) -> Self:
         poly = cls()
-        poly.append(core.PointF(1.0, 0.5))
+        poly.append(core.PointF(0.5 * scale, 0.0))
         for i in range(1, 5):
             val = 0.8 * i * math.pi
-            point = core.PointF(0.5 + 0.5 * math.cos(val), 0.5 + 0.5 * math.sin(val))
+            point = core.PointF(0.5 * scale * math.cos(val), 0.5 * scale * math.sin(val))
             poly.append(point)
         return poly
 
     @classmethod
-    def create_diamond(cls) -> Self:
+    def create_diamond(cls, scale: int = 1) -> Self:
         points = [
-            core.PointF(0.4, 0.5),
-            core.PointF(0.5, 0.4),
-            core.PointF(0.6, 0.5),
-            core.PointF(0.5, 0.6),
-            core.PointF(0.4, 0.5),
+            core.PointF(-0.1 * scale, 0.0),
+            core.PointF(0.0, -0.1 * scale),
+            core.PointF(0.1 * scale, 0.0),
+            core.PointF(0.0, 0.1 * scale),
+            core.PointF(-0.1 * scale, 0.0),
         ]
         poly = gui.PolygonF()
         poly.add_points(*points)

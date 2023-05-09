@@ -32,7 +32,7 @@ class StarRating:
         painter.setPen(QtCore.Qt.PenStyle.NoPen)
         painter.setBrush(palette.highlight() if is_editable else palette.windowText())
         y_offset = (rect.height() - PAINTING_SCALE_FACTOR) / 2
-        painter.translate(rect.x(), rect.y() + y_offset)
+        painter.translate(rect.x() + 10, rect.y() + 10 + y_offset)
         painter.scale(PAINTING_SCALE_FACTOR, PAINTING_SCALE_FACTOR)
         for i in range(self.max_stars):
             if i < self.star_count:
