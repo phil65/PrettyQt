@@ -134,6 +134,12 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         """
         return self.caseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
 
+    def set_completion_role(self, role: constants.ItemDataRoleStr | int):
+        if isinstance(role, str):
+            self.setCompletionRole(constants.ITEM_DATA_ROLE[role])
+        else:
+            self.setCompletionRole(role)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
