@@ -89,6 +89,7 @@ STANDARD_PIXMAP = dict(
     dialog_retry=mod.StandardPixmap.SP_DialogRetryButton,
     dialog_ignore=mod.StandardPixmap.SP_DialogIgnoreButton,
     restore_defaults=mod.StandardPixmap.SP_RestoreDefaultsButton,
+    tab_close=mod.StandardPixmap.SP_TabCloseButton,
 )
 
 StandardPixmapStr = Literal[
@@ -171,6 +172,7 @@ StandardPixmapStr = Literal[
     "dialog_retry",
     "dialog_ignore",
     "restore_defaults",
+    "tab_close",
 ]
 
 COMPLEX_CONTROL = bidict(
