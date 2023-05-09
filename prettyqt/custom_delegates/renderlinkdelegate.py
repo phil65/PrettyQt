@@ -20,8 +20,9 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
             painter.setFont(font)
             painter.setPen(option.palette.link().color())
         painter.drawText(
-            option.rect,
+            option.rect.toRectF(),
             constants.ALIGN_LEFT | constants.ALIGN_V_CENTER,
+            text,
         )
         painter.restore()
 
@@ -40,7 +41,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         if (
             event.type() == QtCore.QEvent.Type.MouseButtonPress
             and event.button() == QtCore.Qt.MouseButton.LeftButton
-            and event.localPos() in rect
+            and event.position() in rect
         ):
             text = index.data()
             gui.DesktopServices.open_url(text)
