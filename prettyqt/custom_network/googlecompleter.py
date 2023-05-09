@@ -4,9 +4,10 @@ from prettyqt import core, gui, network, widgets
 from prettyqt.qt import QtNetwork
 
 
-class GoogleSearchModel(gui.StandardItemModel):
+class BaseScrapeModel(gui.StandardItemModel):
     finished = core.Signal()
     error = core.Signal(str)
+    search_url: str
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -19,7 +20,7 @@ class GoogleSearchModel(gui.StandardItemModel):
         if self._reply is not None:
             self._reply.abort()
         if text:
-            r = f"https://google.com/complete/search?output=toolbar&q={text}"
+            r = self.search_url.format(text=text)
             self._reply = self._manager.get(r)
             self._reply.finished.connect(self.on_finished)
             loop = core.EventLoop()
@@ -29,16 +30,28 @@ class GoogleSearchModel(gui.StandardItemModel):
     @core.Slot()
     def on_finished(self):
         if self._reply.error() == QtNetwork.QNetworkReply.NetworkError.NoError:
-            response = self._reply.readAll()
-            for xml in core.XmlStreamReader(response.data().decode()):
-                if (
-                    xml.tokenType() == core.XmlStreamReader.TokenType.StartElement
-                    and xml.name() == "suggestion"
-                ):
-                    s = xml.attributes().value("data")
-                    self.appendRow(gui.StandardItem(s))
+            response = self._reply.readAll().data().decode()
+            for s in self.process_reply(response):
+                self.appendRow(gui.StandardItem(s))
         self.finished.emit()
         # self._reply.deleteLater()
+
+    def process_reply(self, reply: str):
+        return NotImplemented
+
+
+class GoogleSearchModel(BaseScrapeModel):
+    search_url = "https://google.com/complete/search?output=toolbar&q={text}"
+
+    def process_reply(self, reply: str):
+        return [
+            xml.attributes().value("data")
+            for xml in core.XmlStreamReader(reply)
+            if (
+                xml.tokenType() == core.XmlStreamReader.TokenType.StartElement
+                and xml.name() == "suggestion"
+            )
+        ]
 
 
 class GoogleCompleter(widgets.Completer):
