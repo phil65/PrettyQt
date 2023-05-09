@@ -86,14 +86,14 @@ def _instance() -> IconicFont:
         prefix="fa5",
         font_path="fontawesome5-regular-webfont.ttf",
         charmap_path="fontawesome5-regular-webfont-charmap.json",
-        md5="808833867034fb67a4a86dd2155e195d",
+        md5="dc47e4089f5bcb25f241bdeb2de0fb58",
     )
 
     font_awesome_5_solid = IconFont(
         prefix="fa5s",
         font_path="fontawesome5-solid-webfont.ttf",
         charmap_path="fontawesome5-solid-webfont-charmap.json",
-        md5="139654bb0acaba6b00ae30d5faf3d02f",
+        md5="5de19800fc9ae73438c2e5c61d041b48",
         stylename="Solid",
     )
 
@@ -101,7 +101,7 @@ def _instance() -> IconicFont:
         prefix="fa5b",
         font_path="fontawesome5-brands-webfont.ttf",
         charmap_path="fontawesome5-brands-webfont-charmap.json",
-        md5="085b1dd8427dbeff10bd55410915a3f6",
+        md5="513aa607d398efaccc559916c3431403",
     )
 
     elusive_icons = IconFont(
@@ -143,7 +143,7 @@ def _instance() -> IconicFont:
         prefix="msc",
         font_path="codicon.ttf",
         charmap_path="codicon-charmap.json",
-        md5="ca2f9e22cee3a59156b3eded74d87784",
+        md5="d8565ee605ac4d2fa71fe018863337ca",
     )
     iconic = IconicFont(
         font_awesome_5,
