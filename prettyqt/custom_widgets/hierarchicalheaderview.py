@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import datetime
+
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
@@ -559,7 +561,7 @@ class DataFrameModel(QtCore.QAbstractTableModel):
             sibl[-1].appendRow(children)
         return sibl
 
-    def data(self, index, role):
+    def data(self, index, role=constants.DISPLAY_ROLE):
         row, col = index.row(), index.column()
         if role in (constants.DISPLAY_ROLE, constants.TOOLTIP_ROLE):
             ret = self.df.iat[row, col]
@@ -568,7 +570,9 @@ class DataFrameModel(QtCore.QAbstractTableModel):
                     ret = f"{ret:n}"
                 elif isinstance(ret, datetime.date):
                     # FIXME: show microseconds optionally
-                    ret = ret.strftime(("%x", "%c")[isinstance(ret, datetime.datetime)])
+                    ret = ret.strftime(
+                        "%c" if isinstance(ret, datetime.datetime) else "%x"
+                    )
                 else:
                     ret = str(ret)
                 if (

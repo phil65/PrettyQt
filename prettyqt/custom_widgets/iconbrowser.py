@@ -129,7 +129,7 @@ class IconModel(core.StringListModel):
     def flags(self, index):
         return constants.IS_ENABLED | constants.IS_SELECTABLE  # type: ignore
 
-    def data(self, index, role):
+    def data(self, index, role=constants.DISPLAY_ROLE):
         if role == constants.DECORATION_ROLE:
             icon_string = self.data(index, role=constants.DISPLAY_ROLE)
             return iconprovider._icon(icon_string, color=self._icon_color)

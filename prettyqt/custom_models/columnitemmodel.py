@@ -176,7 +176,7 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
-    def data(self, index, role):
+    def data(self, index, role=constants.DISPLAY_ROLE):
         """Return the tree item at the given index and role."""
         if not index.isValid():
             return None

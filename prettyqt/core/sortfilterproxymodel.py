@@ -7,19 +7,6 @@ from prettyqt.qt import QtCore
 
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
-    def serialize_fields(self):
-        return dict(
-            dynamic_sort_filter=self.dynamicSortFilter(),
-            is_filter_case_sensitive=self.is_filter_case_sensitive(),
-            filter_key_column=self.filterKeyColumn(),
-            filter_regular_expression=self.get_filter_regular_expression(),
-            filter_role=self.filterRole(),
-            is_sort_locale_aware=self.isSortLocaleAware(),
-            recursive_filtering_enabled=self.isRecursiveFilteringEnabled(),
-            is_sort_case_sensitive=self.is_sort_case_sensitive(),
-            sort_role=self.sortRole(),
-        )
-
     # def set_filter_case_sensitivity(self, sensitivity: constants.CaseSensitivityStr):
     #     """Set the filter case sensitivity.
 
