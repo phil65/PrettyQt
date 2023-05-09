@@ -32,6 +32,7 @@ from prettyqt.qt.QtCore import (  # type: ignore
     # QtWarningMsg as WarningMsg,
 )
 from .property import Property
+from .loggingcategory import LoggingCategory
 from .timezone import TimeZone
 from .date import Date
 from ._time import Time
@@ -173,6 +174,7 @@ __all__ = [
     "ClassInfo",
     "DynamicPropertyChangeEvent",
     "MetaEnum",
+    "LoggingCategory",
     "MetaMethod",
     "MetaProperty",
     "MetaType",
