@@ -19,16 +19,12 @@ class GoogleSearchModel(gui.StandardItemModel):
         if self._reply is not None:
             self._reply.abort()
         if text:
-            r = self.create_request(text)
+            r = f"https://google.com/complete/search?output=toolbar&q={text}"
             self._reply = self._manager.get(r)
             self._reply.finished.connect(self.on_finished)
             loop = core.EventLoop()
             self.finished.connect(loop.quit)
             loop.exec()
-
-    def create_request(self, text):
-        url = f"https://google.com/complete/search?output=toolbar&q={text}"
-        return network.NetworkRequest(url)
 
     @core.Slot()
     def on_finished(self):
