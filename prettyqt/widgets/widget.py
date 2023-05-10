@@ -572,6 +572,12 @@ class WidgetMixin(core.ObjectMixin):
         """
         return constants.FOCUS_POLICY.inverse[self.focusPolicy()]
 
+    def set_focus(self, reason: constants.FocusReasonStr | None = None):
+        if reason is None:
+            self.setFocus()
+        else:
+            self.setFocus(constants.FOCUS_REASONS[reason])
+
     def set_font_size(self, size: int) -> None:
         font = self.font()
         font.setPointSize(size)
