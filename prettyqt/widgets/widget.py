@@ -536,9 +536,13 @@ class WidgetMixin(core.ObjectMixin):
         if spacing is not None:
             self.box.setSpacing(spacing)
 
-    def center(self, screen: int = 0) -> None:
+    def center(self, screen: int | None = None) -> None:
         qr = self.frameGeometry()
-        cp = gui.GuiApplication.screens()[screen].geometry().center()
+        if screen is None:  # not sure if primaryScreen is always screen 0...
+            screen = gui.GuiApplication.primaryScreen()
+        else:
+            screen = gui.GuiApplication.screens()[screen]
+        cp = screen.geometry().center()
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
