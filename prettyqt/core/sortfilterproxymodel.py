@@ -8,6 +8,12 @@ from prettyqt.qt import QtCore
 
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
+    invalidated = core.Signal()
+
+    def invalidate(self):
+        super().invalidate()
+        self.invalidated.emit()
+
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     self._filter_column = 0
