@@ -46,8 +46,9 @@ class ColumnItem:
     set_checkstate: Callable | None = None
     user_data: dict | Callable | None = None
 
-    # def __post_init__(self):
-    #     super().__init__()
+    def __post_init__(self):
+        super().__init__()
+        self.model = None
 
     def get_name(self) -> str:
         return self.name
@@ -176,6 +177,11 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
+    def set_columns(self, columns: list[ColumnItem]):
+        self._attr_cols = columns
+        for col in columns:
+            col.model = self
+
     def data(self, index, role=constants.DISPLAY_ROLE):
         """Return the tree item at the given index and role."""
         if not index.isValid():
@@ -255,7 +261,8 @@ class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
         self._root_item = treeitem.TreeItem(obj=obj)
         self._show_root = show_root
         self.mime_type = mime_type
-        self._attr_cols = columns or []
+        self._attr_cols = []
+        self.set_columns(columns)
         self.set_root_item(obj)
 
     def columnCount(self, parent=None):
@@ -273,7 +280,8 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         super().__init__(parent)
         self.items = items
         self.mime_type = mime_type
-        self._attr_cols = columns or []
+        self._attr_cols = []
+        self.set_columns(columns)
 
     def rowCount(self, parent=None):
         parent = parent or core.ModelIndex()
