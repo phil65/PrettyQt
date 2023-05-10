@@ -77,6 +77,26 @@ class AbstractButtonMixin(widgets.WidgetMixin):
     def is_on(self, state: bool):
         self.setChecked(state)
 
+    # def _color(self):
+    #     return self.palette().color(QtGui.QPalette.ColorRole.ButtonText)
+
+    # def _set_color(self, qcolor: QtGui.QColor):
+    #     palette = self.palette()
+    #     palette.setColor(QtGui.QPalette.ColorRole.ButtonText, qcolor)
+    #     self.setPalette(palette)
+
+    # color = core.Property(QtGui.QColor, _color, _set_color)
+
+    # @core.Property(QtGui.QColor)
+    # def background_color(self):
+    #     return self.palette().color(QtGui.QPalette.ColorRole.Button)
+
+    # @background_color.setter
+    # def background_color(self, qcolor: QtGui.QColor):
+    #     palette = self.palette()
+    #     palette.setColor(QtGui.QPalette.ColorRole.Button, qcolor)
+    #     self.setPalette(palette)
+
 
 class AbstractButton(AbstractButtonMixin, QtWidgets.QAbstractButton):
     pass
