@@ -75,7 +75,7 @@ class ColumnItem:
 
     def get_sort_value(self, tree_item) -> str | int:
         if self.sort_value is None:
-            return self.get_label()
+            return self.get_label(tree_item)
         elif callable(self.sort_value):
             return self.sort_value(tree_item)
         return self.sort_value
