@@ -20,7 +20,7 @@ class CompletionWidget(widgets.ListWidget):
 
         # We need Popup style to ensure correct mouse interaction
         # (dialog would dissappear on mouse click with ToolTip style)
-        self.setWindowFlags(QtCore.Qt.WindowType.Popup)  # type: ignore
+        self.setWindowFlags(QtCore.Qt.WindowType.Popup)
 
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_StaticContents)
         original_policy = self._text_edit.focusPolicy()

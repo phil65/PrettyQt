@@ -8,6 +8,29 @@ from prettyqt.qt import QtCore
 
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
+    # def __init__(self, *args, **kwargs):
+    #     super().__init__(*args, **kwargs)
+    #     self._filter_column = 0
+
+    # def setFilterKeyColumn(self, column: int | list[int] | None):
+    #     if column is None:
+    #         column = -1
+    #     self._filter_column = column
+
+    # def filterKeyColumn(self) -> int | list[int] | None:
+    #     return self._filter_column
+
+    # def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex):
+    #     column = self.filterKeyColumn()
+    #     col_count = self.sourceModel().columnCount()
+    #     indexes = [
+    #         self.sourceModel().index(source_row, i, source_index) for i in col_count
+    #     ]
+    #     labels = [self.sourceModel().data(idx) for idx in indexes]
+
+    #     if isinstance(column, int) and source_index.column() == column:
+    #         return super().filterAcceptsRow(source_row, source_index)
+
     # def set_filter_case_sensitivity(self, sensitivity: constants.CaseSensitivityStr):
     #     """Set the filter case sensitivity.
 
@@ -114,13 +137,23 @@ if __name__ == "__main__":
         "jkjk",
     ]
     source_model = JsonModel(dist)
+    from prettyqt.custom_models.importlibdistributionmodel import (
+        ImportlibDistributionModel,
+    )
+
+    source_model = ImportlibDistributionModel.from_package("prettyqt")
     model = SortFilterProxyModel()
-    model.setFilterKeyColumn(1)
-    model.setFilterString("ab")
     model.setSourceModel(source_model)
-    table = widgets.TreeView()
-    table.setRootIsDecorated(True)
-    # table.setSortingEnabled(True)
+    lineedit = widgets.LineEdit()
+    # completer = SubsequenceCompleter()
+    # completer.setModel(source_model)
+    # lineedit.set_completer(completer)
+    widget = widgets.Widget()
+    widget.set_layout("vertical")
+    widget.box.add(lineedit)
+    table = widgets.TableView()
+    table.setSortingEnabled(True)
+    widget.box.add(table)
     table.set_model(model)
-    table.show()
+    widget.show()
     app.main_loop()

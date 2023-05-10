@@ -27,6 +27,8 @@ COL_TYPE = custom_models.ColumnItem(
     label=lambda x: repr(x.obj.typ),
 )
 
+COLUMNS = [COL_NAME, COL_VALUE, COL_TYPE]
+
 
 @dataclass
 class JsonItem:
@@ -46,7 +48,7 @@ class JsonModel(custom_models.ColumnItemModel):
     ):
         super().__init__(
             obj=JsonItem(key="", value=obj, typ=type(obj)),
-            columns=[COL_NAME, COL_VALUE, COL_TYPE],
+            columns=COLUMNS,
             parent=parent,
             show_root=show_root,
         )
