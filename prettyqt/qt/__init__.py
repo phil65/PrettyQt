@@ -17,6 +17,10 @@ def set_env_vars(qt_binding: Literal["PyQt6", "PySide6"]):
 
 
 API = qtpy.API
+
+if API not in {"pyqt6", "pyside6"}:
+    raise RuntimeError("Error when detecting Qt Bindings.")
+
 API_NAME = "PyQt6" if API == "pyqt6" else "PySide6"
 set_env_vars(API_NAME)
 
