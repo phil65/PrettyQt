@@ -5,28 +5,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import fuzzy
 
 
-def bold(text: str) -> str:
-    return f"<b>{text}</b>"
-
-
-def colored(text: str, color: str) -> str:
-    return f"<font color={color!r}>{text}</font>"
-
-
-def color_text(input_text: str, text: str, color: str, case_sensitive: bool = False):
-    def converter(x):
-        return x if case_sensitive else x.lower()
-
-    output_text = ""
-    for char in text:
-        if input_text and converter(char) == converter(input_text[0]):
-            output_text += bold(colored(char, color))
-            input_text = input_text[1:]
-        else:
-            output_text += char
-    return output_text
-
-
 class FuzzyFilterModelMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -46,7 +24,7 @@ class FuzzyFilterModelMixin:
             case constants.DISPLAY_ROLE, self.filter_column:
                 label = super().data(index, role)
                 return (
-                    color_text(
+                    fuzzy.color_text(
                         self.current_marker_text,
                         label,
                         self.match_color,
