@@ -1,11 +1,30 @@
 from __future__ import annotations
 
+import enum
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import fuzzy
 
 
 class FuzzyFilterModelMixin:
+    """Mixin to give a model fuzzyfilter functionality.
+
+    this mixin replaces the text from the display role in the given filter column
+    with HTML code in order to color the letter matches. A backup from the original text
+    is made available in the backup role., which can be used by a FuzzyFilterProxyModel.
+    To display the html code properly, a HtmlIconDelegate is needed.
+    it also makes available data in the SORT_ROLE which is a score for the match.
+    this can be used by a Proxymodel in order to sort.
+    """
+
+    @core.Enum
+    class Roles(enum.IntEnum):
+        """Addional roles."""
+
+        BackupRole = constants.USER_ROLE + 65
+        SortRole = constants.SORT_ROLE
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.current_marker_text = ""
@@ -38,9 +57,9 @@ class FuzzyFilterModelMixin:
             #     label = super().data(idx, constants.DISPLAY_ROLE)
             #     result = fuzzy.fuzzy_match(self.current_marker_text, label)
             #     return str(result[1])
-            case constants.USER_ROLE, _:
+            case self.Roles.BackupRole, _:
                 return super().data(index, constants.DISPLAY_ROLE)
-            case constants.SORT_ROLE, _:
+            case self.Roles.SortRole, _:
                 idx = self.index(index.row(), self.filter_column)
                 label = super().data(idx, constants.DISPLAY_ROLE)
                 result = fuzzy.fuzzy_match(self.current_marker_text, label)
@@ -50,16 +69,24 @@ class FuzzyFilterModelMixin:
 
 
 class FuzzyFilterProxyModel(core.SortFilterProxyModel):
+    @core.Enum
+    class Roles(enum.IntEnum):
+        """Addional roles."""
+
+        BackupRole = constants.USER_ROLE + 65
+
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
         self._search_term = ""
+        self.sort(0, constants.DESCENDING)
 
     def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex):
-        column = self.filterKeyColumn()
-        idx = self.sourceModel().index(source_row, column, source_index)
-        text = self.sourceModel().data(idx, constants.USER_ROLE)
         if self._search_term == "":
             return True
+        column = self.filterKeyColumn()
+        source_model = self.sourceModel()
+        idx = source_model.index(source_row, column, source_index)
+        text = source_model.data(idx, self.Roles.BackupRole)
         return fuzzy.fuzzy_match_simple(
             self._search_term, text, case_sensitive=self.is_filter_case_sensitive()
         )
@@ -67,7 +94,6 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     def set_search_term(self, search_term: str):
         self._search_term = search_term
         self.invalidate()
-        self.sort(0, constants.DESCENDING)
 
 
 if __name__ == "__main__":
