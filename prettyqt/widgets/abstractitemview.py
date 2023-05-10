@@ -94,6 +94,88 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             old_sel_model.deleteLater()
             del old_sel_model
 
+    def set_current_index(
+        self,
+        index: QtCore.QModelIndex | None,
+        operation: Literal["select", "deselect", "toggle"] = "select",
+        clear: bool = True,
+        current: bool = False,
+        expand: Literal["rows", "columns"] | None = None,
+    ):
+        # index = self.model().index(self._selected_index)
+        if index is None:
+            self.selectionModel().setCurrentIndex(
+                index, core.ItemSelectionModel.SelectionFlag.Clear
+            )
+            return
+        match operation:
+            case "select":
+                flag = core.ItemSelectionModel.SelectionFlag.Select
+            case "deselect":
+                flag = core.ItemSelectionModel.SelectionFlag.Deselect
+            case "toggle":
+                flag = core.ItemSelectionModel.SelectionFlag.Toggle
+            case _:
+                raise ValueError(operation)
+        if clear:
+            flag |= core.ItemSelectionModel.SelectionFlag.Clear
+        if current:
+            flag |= core.ItemSelectionModel.SelectionFlag.Current
+        match expand:
+            case "rows":
+                flag |= core.ItemSelectionModel.SelectionFlag.Rows
+            case "columns":
+                flag |= core.ItemSelectionModel.SelectionFlag.Columns
+            case None:
+                pass
+            case _:
+                raise ValueError(expand)
+        self.selectionModel().setCurrentIndex(index, flag)
+
+    def select_index(
+        self,
+        index: QtCore.QModelIndex | None,
+        operation: Literal["select", "deselect", "toggle"] = "select",
+        clear: bool = True,
+        current: bool = False,
+        expand: Literal["rows", "columns"] | None = None,
+    ):
+        # index = self.model().index(self._selected_index)
+        if index is None:
+            self.selectionModel().select(
+                index, core.ItemSelectionModel.SelectionFlag.Clear
+            )
+            return
+        match operation:
+            case "select":
+                flag = core.ItemSelectionModel.SelectionFlag.Select
+            case "deselect":
+                flag = core.ItemSelectionModel.SelectionFlag.Deselect
+            case "toggle":
+                flag = core.ItemSelectionModel.SelectionFlag.Toggle
+            case _:
+                raise ValueError(operation)
+        if clear:
+            flag |= core.ItemSelectionModel.SelectionFlag.Clear
+        if current:
+            flag |= core.ItemSelectionModel.SelectionFlag.Current
+        match expand:
+            case "rows":
+                flag |= core.ItemSelectionModel.SelectionFlag.Rows
+            case "columns":
+                flag |= core.ItemSelectionModel.SelectionFlag.Columns
+            case None:
+                pass
+            case _:
+                raise ValueError(expand)
+        self.selectionModel().select(index, flag)
+
+    def move_row_selection(self, dx: int) -> None:
+        for row in self.selected_rows():
+            new_idx = self.model().index(row + dx, 0)
+            if new_idx.isValid():
+                self.select_index(new_idx, expand="rows")
+
     def set_delegate(
         self,
         delegate: QtWidgets.QAbstractItemDelegate,
@@ -335,6 +417,10 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def select_last_row(self):
         idx = self.model().createIndex(self.model().rowCount() - 1, 0)
+        self.setCurrentIndex(idx)
+
+    def select_first_row(self):
+        idx = self.model().index(0, 0)
         self.setCurrentIndex(idx)
 
     def scroll_to(
