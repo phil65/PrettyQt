@@ -4,11 +4,11 @@ Contains custom models
 """
 
 from .selectionmixin import SelectionMixin
-from .treemodel import TreeModel
-from .regexmatchesmodel import RegexMatchesModel
-from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
-from .importlibdistributionmodel import ImportlibDistributionModel
 from .listmixin import ListMixin
+from .treemodel import TreeModel
+from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
+from .regexmatchesmodel import RegexMatchesModel
+from .importlibdistributionmodel import ImportlibDistributionModel
 from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
