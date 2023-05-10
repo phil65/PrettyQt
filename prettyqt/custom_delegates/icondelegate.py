@@ -12,6 +12,7 @@ class IconDelegate(widgets.StyledItemDelegate):
     ):
         super().__init__(parent)
         self.icon_role = icon_role
+        self.margin = 10
 
     def paint(
         self,
@@ -32,7 +33,6 @@ class IconDelegate(widgets.StyledItemDelegate):
         value = index.data(self.icon_role)
         if not value:
             return
-        margin = 10
         mode = gui.Icon.Mode.Normal
 
         if not (option.state & widgets.Style.StateFlag.State_Enabled):
@@ -63,7 +63,7 @@ class IconDelegate(widgets.StyledItemDelegate):
                 raise ValueError(value)
         r = core.Rect(core.Point(), option.decorationSize)
         r.moveCenter(option.rect.center())
-        r.setRight(option.rect.right() - margin)
+        r.setRight(option.rect.right() - self.margin)
         state = (
             gui.Icon.State.On
             if option.state & widgets.Style.StateFlag.State_Open
