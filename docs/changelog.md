@@ -1,3 +1,29 @@
+## v1.41.0 (2023-05-10)
+
+### Feat
+
+- **ColumnItemModel**: add set_columns method
+- add FuzzyFilterModel
+- add commandpalette
+- **SortFilterProxyModel**: add setFixedFilterList method
+- **SortFilterProxyModel**: override lessThan to allow sorting for more types
+- **AbstractItemView**: add some methods to deal with ItemSelectionModel
+- **Widget**: add set_focus method
+- add ActionsModel class
+- **StandardItem**: add set_data method
+- **IconDelegate**: make item role configurable
+- **Completer**: added path_updated signal
+- **Completer**: add set_completion_role method
+- **SortFilterProxyModel**: add set_filter_role method
+
+### Fix
+
+- **ColumnItemModel**: fix get_sort_value
+- **ListWidgetItem**: fix set_data method
+- **IconDelegate**: qt6 porting issue
+- **HtmlItemDelegate**: qt6 porting bug
+- **RenderLinkDelegate**: Qt6 fixes
+
 ## v1.40.0 (2023-05-09)
 
 ### Feat
