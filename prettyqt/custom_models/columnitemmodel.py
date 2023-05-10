@@ -206,6 +206,8 @@ class ColumnItemModelMixin:
                 return col_item.get_sort_value(tree_item)
             case constants.TOOLTIP_ROLE:
                 return col_item.get_tooltip(tree_item)
+            case constants.USER_ROLE:
+                return tree_item
             case _:
                 if int(role) >= int(constants.USER_ROLE):
                     return col_item.get_user_data(tree_item, role)
@@ -355,7 +357,7 @@ if __name__ == "__main__":
         checkable=True,
         checkstate=lambda item: test.get("aa", True),
         set_checkstate=lambda item, value: test.__setitem__("aa", value),
-        user_data={constants.USER_ROLE: lambda volume: str(volume.get_root_path())},
+        user_data={constants.USER_ROLE + 1: lambda volume: str(volume.get_root_path())},
     )
     items = core.StorageInfo.get_mounted_volumes()
     model = ColumnTableModel(items, [colitem])
