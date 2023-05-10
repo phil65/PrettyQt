@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 from typing import Literal, overload
 
 from prettyqt import gui, widgets
@@ -31,19 +32,22 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     def add_menu(self, menu_or_str: QtWidgets.QMenu) -> gui.Action:
         ...
 
-    def add_menu(self, menu_or_str):
+    @functools.singledispatchmethod
+    def add_menu(self, title: str) -> widgets.Menu:
         action = gui.Action(parent=self)
-        if isinstance(menu_or_str, str):
-            menu = widgets.Menu(menu_or_str)
-            action.set_text(menu_or_str)
-            action.set_menu(menu)
-            self.addAction(action)
-            return menu
-        else:
-            action.set_menu(menu_or_str)
-            action.set_text(menu_or_str.title())
-            self.addAction(action)
-            return action
+        menu = widgets.Menu(title=title, parent=self)
+        action.set_text(title)
+        action.set_menu(menu)
+        self.addAction(action)
+        return menu
+
+    @add_menu.register
+    def _(self, menu: QtWidgets.QMenu) -> gui.Action:
+        action = gui.Action(parent=self)
+        action.set_menu(menu)
+        action.set_text(menu.title())
+        self.addAction(action)
+        return action
 
     def add_separator(self):
         self.addSeparator()
