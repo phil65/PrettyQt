@@ -16,8 +16,11 @@ class CommandTable(widgets.TableView):
     def __init__(self, parent: widgets.Widget | None = None) -> None:
         super().__init__(parent)
         self.set_cursor("pointing_hand")
-        columns = actionsmodel.COLUMNS
-        self._model = custom_models.FuzzyFilterModel([], columns, parent=self)
+
+        class Model(custom_models.FuzzyFilterModelMixin, custom_models.ColumnTableModel):
+            pass
+
+        self._model = Model([], actionsmodel.COLUMNS, parent=self)
         self._proxy = custom_models.FuzzyFilterProxyModel()
         self._proxy.set_filter_case_sensitive(False)
         self._proxy.set_sort_role(constants.SORT_ROLE)

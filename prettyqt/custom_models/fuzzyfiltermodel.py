@@ -1,43 +1,39 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, custom_models
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import fuzzy
 
 
-MATCH_COLOR = "blue"
-DISABLED_COLOR = "gray"
-
-
-def bold_colored(text: str, color: str) -> str:
-    return f"<b><font color={color!r}>{text}</font></b>"
+def bold(text: str) -> str:
+    return f"<b>{text}</b>"
 
 
 def colored(text: str, color: str) -> str:
     return f"<font color={color!r}>{text}</font>"
 
 
-def color_text(
-    input_text: str, text: str, case_sensitive: bool = False, color=MATCH_COLOR
-):
+def color_text(input_text: str, text: str, color: str, case_sensitive: bool = False):
     def converter(x):
         return x if case_sensitive else x.lower()
 
     output_text = ""
     for char in text:
         if input_text and converter(char) == converter(input_text[0]):
-            output_text += bold_colored(char, color)
+            output_text += bold(colored(char, color))
             input_text = input_text[1:]
         else:
             output_text += char
     return output_text
 
 
-class FuzzyFilterModel(custom_models.ColumnTableModel):
+class FuzzyFilterModelMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.current_marker_text = ""
         self.filter_column = 0
+        self.match_color = "blue"
+        self.case_sensitive = False
 
     def set_current_marker_text(self, text: str):
         with self.reset_model():
@@ -50,7 +46,12 @@ class FuzzyFilterModel(custom_models.ColumnTableModel):
             case constants.DISPLAY_ROLE, self.filter_column:
                 label = super().data(index, role)
                 return (
-                    color_text(self.current_marker_text, label)
+                    color_text(
+                        self.current_marker_text,
+                        label,
+                        self.match_color,
+                        self.case_sensitive,
+                    )
                     if self.current_marker_text
                     else label
                 )
@@ -90,7 +91,7 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import custom_delegates, widgets
     from prettyqt.custom_models import JsonModel
 
     app = widgets.app()
@@ -109,8 +110,13 @@ if __name__ == "__main__":
         6,
         "jkjk",
     ]
-    source_model = JsonModel(dist)
-    model = FuzzyFilterModel()
+
+    class Model(FuzzyFilterModelMixin, JsonModel):
+        pass
+
+    source_model = Model(dist)
+    source_model.filter_column = 1
+    model = FuzzyFilterProxyModel()
     model.setFilterKeyColumn(1)
     # model.set_search_term("tj")
     model.setSourceModel(source_model)
@@ -118,7 +124,10 @@ if __name__ == "__main__":
     widget.set_layout("vertical")
     lineedit = widgets.LineEdit()
     lineedit.value_changed.connect(model.set_search_term)
+    lineedit.value_changed.connect(source_model.set_current_marker_text)
+    delegate = custom_delegates.HtmlItemDelegate()
     table = widgets.TreeView()
+    table.setItemDelegateForColumn(1, delegate)
     table.setRootIsDecorated(True)
     # table.setSortingEnabled(True)
     table.set_model(model)
