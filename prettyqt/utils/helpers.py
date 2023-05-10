@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from datetime import timedelta
 import re
-import sys
 
 
 REGEX = re.compile(
@@ -81,30 +80,3 @@ def get_color_percentage(
     z = round(color_1[2] + (color_2[2] - color_1[2]) * percent / 100)
     a = round(color_1[3] + (color_2[3] - color_1[3]) * percent / 100)
     return (x, y, z, a)
-
-
-def is_dark_mode() -> bool:
-    if sys.platform.startswith("win"):
-        from prettyqt import core
-
-        path = (
-            "HKEY_CURRENT_USER\\SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\"
-            "Themes\\Personalize"
-        )
-        settings = core.Settings(path, core.Settings.Format.NativeFormat)
-        return settings.value("AppsUseLightTheme") == 0
-    else:
-        import darkdetect
-
-        return darkdetect.isDark()
-
-    #  QtDbus not available in PySide6 (yet)
-    # bus = QtDbus.QDBusConnection.sessionBus()
-    # m = QDBusMessage.createMethodCall(
-    #     'org.freedesktop.portal.Desktop', '/org/freedesktop/portal/desktop',
-    #     'org.freedesktop.portal.Settings', 'Read'
-    # )
-    # m.setArguments(['org.freedesktop.appearance', 'color-scheme'])
-    # reply = bus.call(m, timeout=1000)
-    # a = reply.arguments()
-    # return len(a) and isinstance(a[0], int) and a[0] == 1
