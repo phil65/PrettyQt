@@ -5,6 +5,7 @@ import logging
 from prettyqt import constants, core, custom_delegates, custom_models, gui, widgets
 from prettyqt.custom_models import actionsmodel
 from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.utils import colors
 
 
 logger = logging.getLogger(__name__)
@@ -15,7 +16,7 @@ class CommandTable(widgets.TableView):
 
     def __init__(self, parent: widgets.Widget | None = None) -> None:
         super().__init__(parent)
-        self.set_cursor("pointing_hand")
+        # self.set_cursor("pointing_hand")
 
         class Model(custom_models.FuzzyFilterModelMixin, custom_models.ColumnTableModel):
             pass
@@ -25,6 +26,7 @@ class CommandTable(widgets.TableView):
         self._proxy.set_filter_case_sensitive(False)
         self._proxy.set_sort_role(constants.SORT_ROLE)
         self._proxy.setSourceModel(self._model)
+        self._proxy.invalidated.connect(self.select_first_row)
         self.setModel(self._proxy)
         self.set_selection_mode("single")
         self.set_selection_behaviour("rows")
@@ -57,19 +59,20 @@ class PaletteLineEdit(widgets.LineEdit):
             QtCore.Qt.KeyboardModifier.NoModifier,
             QtCore.Qt.KeyboardModifier.KeypadModifier,
         ):
+            cp = self.parent()
             match e.key():
                 case QtCore.Qt.Key.Key_Escape:
-                    self.parent().hide()
+                    cp.hide()
                     return
                 case QtCore.Qt.Key.Key_Return:
-                    self.parent().hide()
-                    self.parent()._table.execute_focused()
+                    cp.hide()
+                    cp._table.execute_focused()
                     return
                 case QtCore.Qt.Key.Key_Up:
-                    self.parent()._table.move_row_selection(-1)
+                    cp._table.move_row_selection(-1)
                     return
                 case QtCore.Qt.Key.Key_Down:
-                    self.parent()._table.move_row_selection(1)
+                    cp._table.move_row_selection(1)
                     return
         return super().keyPressEvent(e)
 
@@ -96,7 +99,7 @@ class CommandPalette(widgets.Widget):
 
         # self._line.textChanged.connect(self._on_text_changed)
         # self._table.action_clicked.connect(self._on_action_clicked)
-        self._line.editingFinished.connect(self.hide)
+        # self._line.editingFinished.connect(self.hide)
 
     def populate_from_widget(self, widget):
         self.add_actions(widget.actions())
@@ -105,11 +108,11 @@ class CommandPalette(widgets.Widget):
 
     def match_color(self) -> str:
         """The color used for the matched characters."""
-        return self._table.matchColor
+        return self._table.match_color
 
     def set_match_color(self, color):
         """Set the color used for the matched characters."""
-        self._table.matchColor = QtGui.QColor(color)
+        self._table.match_color = colors.get_color(color).name()
 
     def install_to(self, parent: widgets.Widget):
         self.setParent(parent, QtCore.Qt.WindowType.SubWindow)
@@ -121,7 +124,6 @@ class CommandPalette(widgets.Widget):
 
     def add_actions(self, actions: list[QtGui.QAction]):
         self._table._model.add_items(actions)
-        self._table.select_first_row()
 
     def show(self):
         self._line.setText("")
@@ -163,6 +165,9 @@ class CommandPalette(widgets.Widget):
 
 
 if __name__ == "__main__":
+    import random
+    import string
+
     app = widgets.app()
     window = widgets.MainWindow()
     window.setCentralWidget(widgets.Label("Press Ctrl+P"))
@@ -204,5 +209,8 @@ if __name__ == "__main__":
     pal.populate_from_widget(window)
     print(window.actions())
     pal.add_actions(actions)
+    for _ in range(1000):
+        label = "".join(random.choices(string.ascii_uppercase, k=10))
+        pal.add_actions([gui.Action(text=label)])
     window.show()
     app.main_loop()
