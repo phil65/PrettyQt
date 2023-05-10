@@ -5,69 +5,9 @@ import logging
 from prettyqt import constants, core, custom_delegates, custom_models, gui, widgets
 from prettyqt.custom_models import actionsmodel
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import fuzzy
 
 
 logger = logging.getLogger(__name__)
-MATCH_COLOR = "blue"
-DISABLED_COLOR = "gray"
-
-
-class CommandPaletteModel(custom_models.ColumnTableModel):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.current_marker_text = ""
-
-    def set_current_marker_text(self, text: str):
-        with self.reset_model():
-            self.current_marker_text = text
-
-    def data(self, index, role=constants.DISPLAY_ROLE):
-        if not index.isValid():
-            return None
-        action = self.data_by_index(index)
-        match role, index.column():
-            case constants.DISPLAY_ROLE, 0:
-                label = action.text()
-                return (
-                    color_text(self.current_marker_text, label)
-                    if self.current_marker_text
-                    else label
-                )
-            # case constants.DISPLAY_ROLE, 1:
-            #     label = action.text()
-            #     result = fuzzy.fuzzy_match(self.current_marker_text, label)
-            #     return str(result[1])
-            case constants.SORT_ROLE, _:
-                label = action.text()
-                result = fuzzy.fuzzy_match(self.current_marker_text, label)
-                return result[1]
-            case _, _:
-                return super().data(index, role)
-
-
-def bold_colored(text: str, color: str) -> str:
-    return f"<b><font color={color!r}>{text}</font></b>"
-
-
-def colored(text: str, color: str) -> str:
-    return f"<font color={color!r}>{text}</font>"
-
-
-def color_text(
-    input_text: str, text: str, case_sensitive: bool = False, color=MATCH_COLOR
-):
-    def converter(x):
-        return x if case_sensitive else x.lower()
-
-    output_text = ""
-    for char in text:
-        if input_text and converter(char) == converter(input_text[0]):
-            output_text += bold_colored(char, color)
-            input_text = input_text[1:]
-        else:
-            output_text += char
-    return output_text
 
 
 class CommandTable(widgets.TableView):
@@ -77,8 +17,8 @@ class CommandTable(widgets.TableView):
         super().__init__(parent)
         self.set_cursor("pointing_hand")
         columns = actionsmodel.COLUMNS
-        self._model = CommandPaletteModel([], columns, parent=self)
-        self._proxy = custom_models.FuzzyFilterModel()
+        self._model = custom_models.FuzzyFilterModel([], columns, parent=self)
+        self._proxy = custom_models.FuzzyFilterProxyModel()
         self._proxy.set_filter_case_sensitive(False)
         self._proxy.set_sort_role(constants.SORT_ROLE)
         self._proxy.setSourceModel(self._model)

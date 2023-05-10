@@ -15,7 +15,7 @@ from .nestedmodel import NestedModel
 from .jsonmodel import JsonModel
 from .fsspecmodel import FSSpecTreeModel
 from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
-from .fuzzyfiltermodel import FuzzyFilterModel
+from .fuzzyfiltermodel import FuzzyFilterModel, FuzzyFilterProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -33,4 +33,5 @@ __all__ = [
     "FSSpecTreeModel",
     "SubsequenceSortFilterProxyModel",
     "FuzzyFilterModel",
+    "FuzzyFilterProxyModel",
 ]
