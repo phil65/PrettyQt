@@ -33,9 +33,13 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
         role = self.sortRole()
         return left.data(role) < right.data(role)
 
-    def setFilterString(self, search_str):
+    def setFilterString(self, search_str: str):
         pat = ".*?".join(map(re.escape, search_str))
         pat = f"(?=({pat}))"
+        self.setFilterRegularExpression(pat)
+
+    def setFixedFilterList(self, filter_list: list[str]):
+        pat = "|".join(filter_list)
         self.setFilterRegularExpression(pat)
 
     def set_filter_case_sensitive(self, state: bool):
