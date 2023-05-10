@@ -60,6 +60,8 @@ class FuzzyFilterModelMixin:
             #     label = super().data(idx, constants.DISPLAY_ROLE)
             #     result = fuzzy.fuzzy_match(self.current_marker_text, label)
             #     return str(result[1])
+            case constants.USER_ROLE, _:
+                return super().data(index, constants.DISPLAY_ROLE)
             case constants.SORT_ROLE, _:
                 idx = self.index(index.row(), self.filter_column)
                 label = super().data(idx, constants.DISPLAY_ROLE)
@@ -77,7 +79,7 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex):
         column = self.filterKeyColumn()
         idx = self.sourceModel().index(source_row, column, source_index)
-        text = self.sourceModel().data(idx)
+        text = self.sourceModel().data(idx, constants.USER_ROLE)
         if self._search_term == "":
             return True
         return fuzzy.fuzzy_match_simple(
