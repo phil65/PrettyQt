@@ -174,7 +174,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         for row in self.selected_rows():
             new_idx = self.model().index(row + dx, 0)
             if new_idx.isValid():
-                self.select_index(new_idx, expand="rows")
+                self.set_current_index(new_idx, current=True, expand="rows")
 
     def set_delegate(
         self,
@@ -421,7 +421,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def select_first_row(self):
         idx = self.model().index(0, 0)
-        self.setCurrentIndex(idx)
+        self.set_current_index(idx, current=True, expand="rows")
 
     def scroll_to(
         self, index: QtCore.QModelIndex, mode: ScrollHintStr = "ensure_visible"
