@@ -29,6 +29,10 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
     #     """
     #     return constants.CASE_SENSITIVITY.inverse[self.filterCaseSensitivity()]
 
+    def lessThan(self, left, right):
+        role = self.sortRole()
+        return left.data(role) < right.data(role)
+
     def setFilterString(self, search_str):
         pat = ".*?".join(map(re.escape, search_str))
         pat = f"(?=({pat}))"
