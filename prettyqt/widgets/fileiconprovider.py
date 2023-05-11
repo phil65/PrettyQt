@@ -20,6 +20,13 @@ class FileIconProvider(gui.AbstractFileIconProviderMixin, QtWidgets.QFileIconPro
             param = gui.abstractfileiconprovider.ICON_TYPE[typ]
         return self.icon(param)
 
+    def use_custom_directory_icons(self, state: bool = True):
+        opt = self.Option(0) if state else self.Option.DontUseCustomDirectoryIcons
+        self.setOptions(opt)
+
+    def uses_custom_directory_icons(self) -> bool:
+        return self.options() == self.Option(0)
+
 
 if __name__ == "__main__":
     import pathlib
