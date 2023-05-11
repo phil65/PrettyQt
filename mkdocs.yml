@@ -71,6 +71,7 @@ plugins:
               show_signature_annotations: true
               show_if_no_docstring: true
               inherited_members: false
+              signature_crossrefs: true
     # - mkapi
 markdown_extensions:
     # - smarty
