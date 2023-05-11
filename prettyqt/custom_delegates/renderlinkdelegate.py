@@ -21,7 +21,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
             painter.setPen(option.palette.link().color())
         painter.drawText(
             option.rect.toRectF(),
-            constants.ALIGN_LEFT | constants.ALIGN_V_CENTER,
+            constants.ALIGN_CENTER_LEFT,
             text,
         )
         painter.restore()
@@ -35,7 +35,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         fm = gui.FontMetricsF(font)
         rect = fm.get_bounding_rect(
             core.RectF(option.rect),
-            constants.ALIGN_LEFT | constants.ALIGN_V_CENTER,
+            constants.ALIGN_CENTER_LEFT,
             text,
         )
         if (
