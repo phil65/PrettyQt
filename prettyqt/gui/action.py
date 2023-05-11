@@ -64,9 +64,27 @@ class ActionMixin(core.ObjectMixin):
         self.set_enabled(enabled)
         if callback is not None:
             self.triggered.connect(callback)
+        self._usage_count = 0
+        self.triggered.connect(self._increase_usage_counter)
+
+    def _increase_usage_counter(self):
+        self._usage_count += 1
+
+    def get_usage_count(self) -> int:
+        return self._usage_count
 
     def __repr__(self) -> str:
         return get_repr(self, self.text())
+
+    def get_type(self) -> Literal["menu", "separator", "widget", "regular"]:
+        if self.menu() is not None:
+            return "menu"
+        elif self.isSeparator():
+            return "separator"
+        elif hasattr(self, "defaultWidget"):
+            return "widget"
+        else:
+            return "regular"
 
     def set_text(self, text: str):
         self.setText(text)
