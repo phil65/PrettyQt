@@ -92,9 +92,6 @@ class ButtonDelegate(widgets.StyledItemDelegate):
 
 
 if __name__ == "__main__":
-    """Run the application."""
-    from prettyqt import constants
-
     app = widgets.app()
     table_widget = widgets.TableWidget(15, 4)
     # table_widget.set_delegate(StarDelegate(), column=1)

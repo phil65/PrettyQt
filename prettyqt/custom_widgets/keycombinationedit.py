@@ -30,9 +30,7 @@ class KeyCombinationEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
 
     def get_value(self) -> str:
         seq = self.keySequence()
-        if len(seq) > 0:
-            return seq[0].toString()
-        return ""
+        return seq[0].toString() if len(seq) > 0 else ""
 
     def is_valid(self) -> bool:
         return True

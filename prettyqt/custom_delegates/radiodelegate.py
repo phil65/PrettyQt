@@ -43,7 +43,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.installEventFilter(self)
         return editor
 
-    def eventFilter(self, source: QtWidgets.QWidget, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
         match event.type():
             case core.Event.Type.MouseButtonPress:
                 if isinstance(source, QtWidgets.QRadioButton):

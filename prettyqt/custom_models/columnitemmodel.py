@@ -344,7 +344,7 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
             position = len(self.items)
         items = list(items)
         with self.insert_rows(position, position + len(items) - 1):
-            for i in range(len(items)):
+            for i, _ in enumerate(items):
                 self.items.insert(i + position, items[i])
             # self.items.extend(items)
         return items

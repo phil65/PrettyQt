@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import logging
 
 from prettyqt import constants, core, custom_delegates, custom_models, gui, widgets
@@ -103,8 +104,8 @@ class CommandPalette(widgets.Widget):
 
     def populate_from_widget(self, widget):
         self.add_actions(widget.actions())
-        while parent := widget.parent():
-            self.add_actions(parent.actions())
+        while widget := widget.parent():
+            self.add_actions(widget.actions())
 
     def match_color(self) -> str:
         """The color used for the matched characters."""
@@ -122,7 +123,7 @@ class CommandPalette(widgets.Widget):
     #     self.hide()
     #     return super().focusOutEvent(a0)
 
-    def add_actions(self, actions: list[QtGui.QAction]):
+    def add_actions(self, actions: Sequence[QtGui.QAction]):
         self._table._model.add_items(actions)
 
     def show(self):

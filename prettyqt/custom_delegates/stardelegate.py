@@ -4,7 +4,7 @@ from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
-PAINTING_SCALE_FACTOR = 20
+PAINTING_SCALE_FACTOR = 20.0
 DIAMOND_POLYGON = gui.PolygonF.create_diamond()
 STAR_POLYGON = gui.PolygonF.create_star()
 
@@ -147,7 +147,6 @@ class StarDelegate(widgets.StyledItemDelegate):
 
 
 if __name__ == "__main__":
-    """Run the application."""
     from prettyqt import constants
 
     app = widgets.app()

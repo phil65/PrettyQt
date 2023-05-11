@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+import contextlib
 from queue import Empty, Queue
 from typing import Literal
 
@@ -344,11 +345,9 @@ class NotificationArea(widgets.Widget):
             self.hide()
 
         if self.use_queue:
-            try:
+            with contextlib.suppress(Empty):
                 notification = self.queue.get(False)
                 self._show_notification(notification)
-            except Empty:
-                pass
 
     # Public functions
     def set_entry_effect(self, effect: FadeInValue, duration: int = 250):

@@ -35,7 +35,7 @@ class IconDelegate(widgets.StyledItemDelegate):
             return
         mode = gui.Icon.Mode.Normal
 
-        if not (option.state & widgets.Style.StateFlag.State_Enabled):
+        if not option.state & widgets.Style.StateFlag.State_Enabled:
             mode = gui.Icon.Mode.Disabled
         elif option.state & widgets.Style.StateFlag.State_Selected:
             mode = gui.Icon.Mode.Selected

@@ -50,9 +50,6 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
 
 
 if __name__ == "__main__":
-    """Run the application."""
-    from prettyqt import widgets
-
     app = widgets.app()
 
     # Create and populate the tableWidget

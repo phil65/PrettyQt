@@ -603,10 +603,10 @@ class DataFrameModel(QtCore.QAbstractTableModel):
             return
         if orientation == constants.HORIZONTAL:
             idx = self.df.columns
-            return "\n".join(str(i) for i in idx) if type(idx) is tuple else str(idx)
+            return "\n".join(str(i) for i in idx) if isinstance(idx, tuple) else str(idx)
         else:
             idx = self.df.index
-            return " | ".join(str(i) for i in idx) if type(idx) is tuple else str(idx)
+            return " | ".join(str(i) for i in idx) if isinstance(idx, tuple) else str(idx)
         # return label if type(label) is tuple else label
 
     def sort(self, column, order):
