@@ -155,9 +155,9 @@ class ColumnItem:
             return self.decoration(tree_item)
         return self.decoration
 
-    def get_alignment(self, tree_item) -> int:
+    def get_alignment(self, tree_item) -> QtCore.Qt.AlignmentFlag:
         if self.alignment is None:
-            return constants.ALIGN_LEFT  # type: ignore
+            return constants.ALIGN_CENTER_LEFT
         elif callable(self.alignment):
             return self.alignment(tree_item)
         elif isinstance(self.alignment, str):

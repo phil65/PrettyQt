@@ -198,17 +198,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
             uniopt.text = cell_index.data(constants.DISPLAY_ROLE)
             painter.save()
             uniopt.rect = r
+            style = hv.style()
             if cell_index.data(constants.USER_ROLE):
-                hv.style().drawControl(CE.CE_HeaderSection, uniopt, painter, hv)
+                style.drawControl(CE.CE_HeaderSection, uniopt, painter, hv)
                 m = QtGui.QTransform()
                 m.rotate(-90)
                 painter.setWorldTransform(m, True)
                 new_r = QtCore.QRect(0, 0, r.height(), r.width())
                 new_r.moveCenter(QtCore.QPoint(-r.center().y(), r.center().x()))
                 uniopt.rect = new_r
-                hv.style().drawControl(CE.CE_HeaderLabel, uniopt, painter, hv)
+                style.drawControl(CE.CE_HeaderLabel, uniopt, painter, hv)
             else:
-                hv.style().drawControl(CE.CE_Header, uniopt, painter, hv)
+                style.drawControl(CE.CE_Header, uniopt, painter, hv)
             painter.restore()
             return top + height
 
@@ -279,17 +280,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
             uniopt.text = cell_index.data(constants.DISPLAY_ROLE)
             painter.save()
             uniopt.rect = r
+            style = hv.style()
             if cell_index.data(constants.USER_ROLE):
-                hv.style().drawControl(CE.CE_HeaderSection, uniopt, painter, hv)
+                style.drawControl(CE.CE_HeaderSection, uniopt, painter, hv)
                 m = QtGui.QTransform()
                 m.rotate(-90)
                 painter.setWorldTransform(m, True)
                 new_r = QtCore.QRect(0, 0, r.height(), r.width())
                 new_r.moveCenter(QtCore.QPoint(-r.center().y(), r.center().x()))
                 uniopt.rect = new_r
-                hv.style().drawControl(CE.CE_HeaderLabel, uniopt, painter, hv)
+                style.drawControl(CE.CE_HeaderLabel, uniopt, painter, hv)
             else:
-                hv.style().drawControl(CE.CE_Header, uniopt, painter, hv)
+                style.drawControl(CE.CE_Header, uniopt, painter, hv)
             painter.restore()
             return left + width
 

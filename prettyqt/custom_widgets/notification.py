@@ -199,11 +199,6 @@ class Notification(widgets.Widget):
         TypeError: the wrong datatype is specified for any of the parameters.
 
         """
-        if not callable(finished_callback):
-            raise TypeError("finished_callback should be a callable")
-        if not isinstance(duration, int):
-            raise TypeError("duration should be an integer")
-
         self.setGraphicsEffect(self.opacity_effect)
         self.fade_out_anim.setDuration(duration)
 
@@ -278,7 +273,7 @@ class NotificationArea(widgets.Widget):
         target_widget: QtWidgets.QWidget,
         use_global_css: bool = False,
         use_queue: bool = True,
-        max_messages: int = 2,
+        max_messages: int = 4,
     ):
         """Constructor.
 
@@ -365,38 +360,10 @@ class NotificationArea(widgets.Widget):
             TypeError: the object passed for duration is not an int
             ValueError: duration is less than 0, or effect has an invalid value
         """
-        if effect not in ["fade_in", None]:
-            raise ValueError("Invalid entry effect")
-        if not isinstance(duration, int):
-            raise TypeError("Duration should be an int")
-        if duration < 0:
-            raise ValueError("Duration should be larger than 0")
-
         self.entry_effect = effect
         self.entry_effect_duration = duration
 
     def set_exit_effect(self, effect: FadeOutValue, duration: int = 500):
-        """Set the effect with which the notifications are to disappear.
-
-        Arguments:
-            effect : {'fade_out', None}
-                the effect which should be used (for now only 'fade_out' is available)
-                if None is passed for this argument, no effect will be used and the
-                notifcations will just appear directly.
-            duration : int (default: 1000 ms)
-                The duration of the effect in milliseconds
-
-        Raises:
-            TypeError: the object passed for duration is not an int
-            ValueError: duration is less than 0, or effect has an invalid value
-        """
-        if effect not in ["fade_out", None]:
-            raise ValueError("Invalid exit effect")
-        if not isinstance(duration, int):
-            raise TypeError("Duration should be an int")
-        if duration < 0:
-            raise ValueError("Duration should be larger than 0")
-
         self.exit_effect = effect
         self.exit_effect_duration = duration
 
@@ -522,8 +489,10 @@ class NotificationArea(widgets.Widget):
         Internal QT function (do not call directly).
         """
         o = widgets.StyleOption.based_on(self)
-        p = gui.Painter(self)
-        self.style().drawPrimitive(widgets.Style.PrimitiveElement.PE_Widget, o, p, self)
+        with gui.Painter(self) as p:
+            self.style().drawPrimitive(
+                widgets.Style.PrimitiveElement.PE_Widget, o, p, self
+            )
 
 
 if __name__ == "__main__":

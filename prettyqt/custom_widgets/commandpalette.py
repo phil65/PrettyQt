@@ -86,7 +86,10 @@ class CommandPalette(widgets.Widget):
         # self.setWindowFlags(
         #     QtCore.Qt.WindowType.WindowStaysOnTopHint
         #     | QtCore.Qt.WindowType.FramelessWindowHint
+        #     | QtCore.Qt.WindowType.WindowStaysOnTopHint
         # )
+        # self.set_focus_policy("strong")
+        self.setMinimumWidth(700)
         self._line = PaletteLineEdit()
         self._table = CommandTable()
         self._line.value_changed.connect(self._table._model.set_current_marker_text)
