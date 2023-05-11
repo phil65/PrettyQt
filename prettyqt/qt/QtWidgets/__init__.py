@@ -16,10 +16,18 @@ if PYQT6:
         QFileSystemModel,
     )
 
-    QTextEdit.setTabStopWidth = QTextEdit.setTabStopDistance
-    QTextEdit.tabStopWidth = QTextEdit.tabStopDistance
-    QPlainTextEdit.setTabStopWidth = QPlainTextEdit.setTabStopDistance
-    QPlainTextEdit.tabStopWidth = QPlainTextEdit.tabStopDistance
+    QTextEdit.setTabStopWidth = lambda self, *args, **kwargs: self.setTabStopDistance(
+        *args, **kwargs
+    )
+    QTextEdit.tabStopWidth = lambda self, *args, **kwargs: self.tabStopDistance(
+        *args, **kwargs
+    )
+    QPlainTextEdit.setTabStopWidth = (
+        lambda self, *args, **kwargs: self.setTabStopDistance(*args, **kwargs)
+    )
+    QPlainTextEdit.tabStopWidth = lambda self, *args, **kwargs: self.tabStopDistance(
+        *args, **kwargs
+    )
     QPlainTextEdit.print_ = lambda self, *args, **kwargs: self.print(*args, **kwargs)
     QDialog.exec_ = lambda self, *args, **kwargs: self.exec(*args, **kwargs)
     QMenu.exec_ = lambda self, *args, **kwargs: self.exec(*args, **kwargs)
@@ -35,9 +43,17 @@ elif PYSIDE6:
         QShortcut,
     )
 
-    QTextEdit.setTabStopWidth = QTextEdit.setTabStopDistance
-    QTextEdit.tabStopWidth = QTextEdit.tabStopDistance
-    QPlainTextEdit.setTabStopWidth = QPlainTextEdit.setTabStopDistance
-    QPlainTextEdit.tabStopWidth = QPlainTextEdit.tabStopDistance
+    QTextEdit.setTabStopWidth = lambda self, *args, **kwargs: self.setTabStopDistance(
+        *args, **kwargs
+    )
+    QTextEdit.tabStopWidth = lambda self, *args, **kwargs: self.tabStopDistance(
+        *args, **kwargs
+    )
+    QPlainTextEdit.setTabStopWidth = (
+        lambda self, *args, **kwargs: self.setTabStopDistance(*args, **kwargs)
+    )
+    QPlainTextEdit.tabStopWidth = lambda self, *args, **kwargs: self.tabStopDistance(
+        *args, **kwargs
+    )
 else:
     raise PythonQtError("No Qt bindings could be found")
