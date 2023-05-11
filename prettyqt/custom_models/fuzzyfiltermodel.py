@@ -80,7 +80,7 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         self._search_term = ""
         self.sort(0, constants.DESCENDING)
 
-    def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex):
+    def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex) -> bool:
         if self._search_term == "":
             return True
         column = self.filterKeyColumn()
