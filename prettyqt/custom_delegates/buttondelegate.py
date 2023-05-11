@@ -33,7 +33,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         btn_callback = index.data(self.method_role)
         if btn_callback is None:
             return
-        btn = widgets.PushButton(parent)
+        btn = widgets.PushButton(parent=parent)
         btn.setText(index.data())
         btn.clicked.connect(btn_callback)
         return btn
