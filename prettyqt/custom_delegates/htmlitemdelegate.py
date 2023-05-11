@@ -18,22 +18,22 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
         text_option.setWrapMode(gui.TextOption.WrapMode.NoWrap)
         text_option.setAlignment(options.displayAlignment)
         doc.setDefaultTextOption(text_option)
-
+        doc.setDefaultFont(options.font)
         doc.setHtml(options.text)
 
         options.text = ""
+
+        # draw background
         options.widget.style().drawControl(
             QtWidgets.QStyle.ControlElement.CE_ItemViewItem, options, painter
         )
 
-        icon_size = options.icon.actualSize(options.rect.size())
-        painter.translate(options.rect.left() + icon_size.width(), options.rect.top())
-        clip = QtCore.QRectF(
-            0, 0, options.rect.width() + icon_size.width(), options.rect.height()
-        )
+        icon_size = options.icon.actualSize(options.decorationSize)
+        margin = icon_size.width()
+        painter.translate(options.rect.left() + margin, options.rect.top())
+        clip = QtCore.QRectF(0, 0, options.rect.width() + margin, options.rect.height())
 
         doc.drawContents(painter, clip)
-
         painter.restore()
 
     def sizeHint(self, option, index):
@@ -45,7 +45,7 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
         text_option = gui.TextOption()
         text_option.setWrapMode(gui.TextOption.WrapMode.NoWrap)
         doc.setDefaultTextOption(text_option)
-
+        doc.setDefaultFont(options.font)
         doc.setHtml(options.text)
         doc.setTextWidth(options.rect.width())
 
@@ -63,6 +63,9 @@ if __name__ == "__main__":
     w.set_delegate(HtmlItemDelegate())
     w.set_model(model)
     item = gui.StandardItem("<b>test</b>")
+    item.setBackground(gui.Color("green"))
+    item.setIcon(iconprovider.get_icon("mdi.folder", as_qicon=True))
+    item.setFont(gui.Font("Consolas"))
     item.set_data("user", iconprovider.get_icon("mdi.folder"))
     model += item
     w.show()
