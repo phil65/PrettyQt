@@ -546,6 +546,11 @@ class WidgetMixin(core.ObjectMixin):
         qr.moveCenter(cp)
         self.move(qr.topLeft())
 
+    def center_on_parent(self):
+        r = self.parent().frameGeometry()
+        rect = core.Rect(r.x() - (self.width() / 2), r.y(), r.width(), 100)
+        self.move(rect.center())
+
     def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor) -> None:
         if isinstance(cursor, QtGui.QCursor):
             curs = cursor
