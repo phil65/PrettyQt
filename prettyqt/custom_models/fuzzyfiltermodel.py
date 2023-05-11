@@ -12,9 +12,10 @@ class FuzzyFilterModelMixin:
 
     this mixin replaces the text from the display role in the given filter column
     with HTML code in order to color the letter matches. A backup from the original text
-    is made available in the backup role., which can be used by a FuzzyFilterProxyModel.
-    To display the html code properly, a HtmlIconDelegate is needed.
-    it also makes available data in the SORT_ROLE which is a score for the match.
+    is made available in the BackupRole., which can be used by a FuzzyFilterProxyModel
+    for sorting.
+    To display the html code properly, a HtmlItemDelegate is needed.
+    it also makes available data in the SortRole which is a score for the match.
     this can be used by a Proxymodel in order to sort.
     """
 
