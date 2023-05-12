@@ -132,7 +132,7 @@ class CommandPalette(widgets.Widget):
     def show(self):
         self._line.setText("")
         self.resize(500, 300)
-        self.center()
+        self.center_on("screen")
         super().show()
         # if parent := self.parentWidget():
         #     parent_rect = parent.rect()

@@ -1597,7 +1597,7 @@ def test_widget(qtbot):
     with pytest.raises(InvalidParamError):
         widget.set_modality("test")
     assert widget.get_modality() == "window"
-    widget.center()
+    widget.center_on("screen")
     widget_2 = widgets.Widget()
     qtbot.addWidget(widget_2)
     widget_2.set_layout("horizontal", margin=2)

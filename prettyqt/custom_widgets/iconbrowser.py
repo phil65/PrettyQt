@@ -76,7 +76,7 @@ class IconBrowser(widgets.MainWindow):
         self.setCentralWidget(frame)
         self.add_shortcut("return", self._copy_icon_text)
         self._lineedit.setFocus()
-        self.center()
+        self.center_on("screen")
 
     def _update_filter(self):
         """Update filter string in the proxy model with current lineedit text."""

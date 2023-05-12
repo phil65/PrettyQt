@@ -127,6 +127,25 @@ class WidgetMixin(core.ObjectMixin):
         anim.start()
         return anim
 
+    def map_to_global(self, pos_or_rect):
+        match pos_or_rect:
+            case QtCore.QRect() | QtCore.QRectF():
+                top_left = self.mapToGlobal(pos_or_rect.topLeft())
+                bottom_right = self.mapToGlobal(pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF():
+                return super().mapToGlobal(pos_or_rect)
+            case int(), int():
+                return QtCore.QPoint(*pos_or_rect)
+            case float(), float():
+                return QtCore.QPointF(*pos_or_rect)
+            case int(), int(), int(), int():
+                return QtCore.QRect(*pos_or_rect)
+            case float(), float(), float(), float():
+                return QtCore.QRectF(*pos_or_rect)
+            case _:
+                raise ValueError(pos_or_rect)
+
     def raise_to_top(self):
         if sys.platform.startswith("win"):
             import win32con
@@ -536,20 +555,19 @@ class WidgetMixin(core.ObjectMixin):
         if spacing is not None:
             self.box.setSpacing(spacing)
 
-    def center(self, screen: int | None = None) -> None:
-        qr = self.frameGeometry()
-        if screen is None:  # not sure if primaryScreen is always screen 0...
-            screen = gui.GuiApplication.primaryScreen()
-        else:
-            screen = gui.GuiApplication.screens()[screen]
-        cp = screen.geometry().center()
-        qr.moveCenter(cp)
-        self.move(qr.topLeft())
-
-    def center_on_parent(self):
-        r = self.parent().frameGeometry()
-        rect = core.Rect(r.x() - (self.width() / 2), r.y(), r.width(), 100)
-        self.move(rect.center())
+    def center_on(self, where: Literal["parent", "window", "screen"] | QtWidgets.QWidget):
+        own_geo = self.frameGeometry()
+        match where:
+            case "parent":
+                center = self.parent().frameGeometry().center()
+            case "window":
+                center = self.window().frameGeometry().center()
+            case QtWidgets.QWidget():
+                center = where.frameGeometry().center()
+            case "screen":
+                center = gui.GuiApplication.primaryScreen().geometry().center()
+        own_geo.moveCenter(center)
+        self.move(own_geo.topLeft())
 
     def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor) -> None:
         if isinstance(cursor, QtGui.QCursor):
@@ -676,6 +694,7 @@ class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
+    widget2 = Widget()
     # widget.play_animation(
     #     "property",
     #     name="windowOpacity",
@@ -689,6 +708,9 @@ if __name__ == "__main__":
     # val.start()
     widget.set_graphics_effect("colorize")
     widget.show()
+    widget2.show()
+    app.sleep(4)
+    widget.center_on(widget2)
     # widget.add_shortcut("return", print, "application")
     # widget.set_min_size((400, 400))
     # widget.set_max_size(None, 600)
