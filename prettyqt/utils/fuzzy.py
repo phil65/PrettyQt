@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import functools
-import re
 
 
 # def fuzzy_search(search_set, text):
@@ -107,16 +105,17 @@ def fuzzy_match(
     Returns:
         2-tuple with match truthiness at idx 0 and score at idx 1
     """
-    score, p_idx, s_idx, p_len, s_len = 0, 0, 0, len(pattern), len(instring)
+    score, p_idx, s_idx, p_len = 0, 0, 0, len(pattern)
     prev_match, prev_lower = False, False
     prev_sep = True  # so that matching first letter gets sep_bonus
-    best_letter, best_lower, best_letter_idx = None, None, None
+    best_letter: str = ""
+    best_lower: str | None = None
+    best_letter_idx: int | None = None
     best_letter_score = 0
-    matched_indices = []
+    matched_indices: list[int | None] = []
 
-    while s_idx != s_len:
+    for s_idx, s_char in enumerate(instring):
         p_char = pattern[p_idx] if (p_idx != p_len) else None
-        s_char = instring[s_idx]
         p_lower = p_char.lower() if p_char else None
         s_lower, s_upper = s_char.lower(), s_char.upper()
 
@@ -129,7 +128,7 @@ def fuzzy_match(
         if advanced or p_repeat:
             score += best_letter_score
             matched_indices.append(best_letter_idx)
-            best_letter, best_lower, best_letter_idx = None, None, None
+            best_letter, best_lower, best_letter_idx = "", None, None
             best_letter_score = 0
 
         if next_match or rematch:
@@ -159,7 +158,7 @@ def fuzzy_match(
             # update best letter match (may be next or rematch)
             if new_score >= best_letter_score:
                 # apply penalty for now-skipped letter
-                if best_letter is not None:
+                if best_letter:
                     score += unmatched_penalty
                 best_letter = s_char
                 best_lower = best_letter.lower()
@@ -175,8 +174,6 @@ def fuzzy_match(
         prev_lower = s_char == s_lower and s_lower != s_upper
         prev_sep = s_char in "_ "
 
-        s_idx += 1
-
     if best_letter:
         score += best_letter_score
         matched_indices.append(best_letter_idx)
@@ -184,58 +181,66 @@ def fuzzy_match(
     return p_idx == p_len, score
 
 
-def get_best_matches_alt(
-    search_str: str,
-    collection: list[str],
-    accessor: Callable = lambda x: x,
-    sort_results: bool = True,
-) -> list[str]:
-    """Return list of suggestions for matches of search string inside collection.
+# def get_best_matches_alt(
+#     search_str: str,
+#     collection: list[str],
+#     # accessor: Callable[[str], Any] = lambda x: x,
+#     sort_results: bool = True,
+# ) -> Generator[str, None, None]:
+#     """Return list of suggestions for matches of search string inside collection.
 
-    Arguments:
-        search_str:   A partial string which is typically entered by a user.
-        collection:   A collection of strings to get filtered.
-        accessor:     If the `collection` is not an iterable of strings,
-                      then use the accessor to fetch the string that
-                      will be used for fuzzy matching.
-        sort_results: The suggestions are sorted by considering the
-                      smallest contiguous match, followed by where the
-                      match is found in the full string. If two suggestions
-                      have the same rank, they are then sorted
-                      alpha-numerically. This parameter controls the
-                      *last tie-breaker-alpha-numeric sorting*. The sorting
-                      based on match length and position will be intact.
+#     Arguments:
+#         search_str:   A partial string which is typically entered by a user.
+#         collection:   A collection of strings to get filtered.
+#         accessor:     If the `collection` is not an iterable of strings,
+#                       then use the accessor to fetch the string that
+#                       will be used for fuzzy matching.
+#         sort_results: The suggestions are sorted by considering the
+#                       smallest contiguous match, followed by where the
+#                       match is found in the full string. If two suggestions
+#                       have the same rank, they are then sorted
+#                       alpha-numerically. This parameter controls the
+#                       *last tie-breaker-alpha-numeric sorting*. The sorting
+#                       based on match length and position will be intact.
 
-    Returns:
-        suggestions (generator): A generator object that produces a list of
-            suggestions narrowed down from `collection` using the `input`.
-    """
-    suggestions = []
-    pat = ".*?".join(map(re.escape, search_str))
-    pat = f"(?=({pat}))"  # lookahead regex to manage overlapping matches
-    regex = re.compile(pat, re.IGNORECASE)
-    for item in collection:
-        if r := list(regex.finditer(accessor(item))):
-            best = min(r, key=lambda x: len(x.group(1)))  # find shortest match
-            suggestions.append((len(best.group(1)), best.start(), accessor(item), item))
+#     Returns:
+#         suggestions (generator): A generator object that produces a list of
+#             suggestions narrowed down from `collection` using the `input`.
+#     """
+#     suggestions: list[tuple[int, int, str, str]] = []
+#     pat = ".*?".join(map(re.escape, search_str))
+#     pat = f"(?=({pat}))"  # lookahead regex to manage overlapping matches
+#     regex = re.compile(pat, re.IGNORECASE)
+#     for item in collection:
+#         if r := list(regex.finditer(accessor(item))):
+#             best = min(r, key=lambda x: len(x.group(1)))  # find shortest match
+#             suggestions.append((len(best.group(1)), best.start(), accessor(item), item))
 
-    if sort_results:
-        return (z[-1] for z in sorted(suggestions))
-    else:
-        return (z[-1] for z in sorted(suggestions, key=lambda x: x[:2]))
+#     if sort_results:
+#         return (z[-1] for z in sorted(suggestions))
+#     else:
+#         return (z[-1] for z in sorted(suggestions, key=lambda x: x[:2]))
+
+
+def accessor(x: tuple[str, int]) -> int:
+    return x[1]
 
 
 def get_best_matches(search_string: str, candidates: list[str]) -> list[tuple[str, int]]:
     """Return sorted list of all matches."""
-    results = [
+    results: list[tuple[str, int]] = [
         (candidate, i[1])
         for candidate in candidates
         if (i := fuzzy_match(search_string, candidate))[0]
     ]
-    return sorted(results, key=lambda x: x[1], reverse=True)
+    return sorted(results, key=accessor, reverse=True)
 
 
 if __name__ == "__main__":
+    import time
+
     pat = "aab"
-    candidates = ["aaaaab", "aacb", "abc", "abbaab"]
-    print(get_best_matches(pat, candidates))
+    candidates = ["aaaaab", "aacb", "abc", "abbaab"] * 10000
+    a = time.time()
+    get_best_matches(pat, candidates)
+    print(time.time() - a)
