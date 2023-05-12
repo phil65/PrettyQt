@@ -47,9 +47,6 @@ from .filetree import FileTree
 from .timeline import Timeline, VideoSample
 from .standardiconswidget import StandardIconsWidget
 
-# Deprecated: should be imported from custom_delegates instead
-from prettyqt.custom_delegates.buttondelegate import ButtonDelegate
-from prettyqt.custom_delegates.radiodelegate import RadioDelegate
 
 __all__ = [
     "Image",
@@ -87,8 +84,6 @@ __all__ = [
     "WaitingSpinner",
     "RoundProgressBar",
     "PopupInfo",
-    "ButtonDelegate",
-    "RadioDelegate",
     "SelectionWidget",
     "ImageViewer",
     "MarkdownWindow",

@@ -89,8 +89,6 @@ class BoxLayout(BoxLayoutMixin, QtWidgets.QBoxLayout):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-
     app = widgets.app()
     layout = BoxLayout("vertical")
     widget = widgets.Widget()
