@@ -21,6 +21,12 @@ class SplitterMixin(widgets.FrameMixin):
             ori = constants.ORIENTATION[orientation]
         super().__init__(ori, parent)
 
+    def __enter__(self):
+        return self
+
+    def __exit__(self, *args):
+        pass
+
     def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
             return self.widget(index)
@@ -85,12 +91,16 @@ class SplitterMixin(widgets.FrameMixin):
         self.addWidget(widget)
         return widget
 
-    def add(self, *item: QtWidgets.QWidget | QtWidgets.QLayout):
+    def add(
+        self, *item: QtWidgets.QWidget | QtWidgets.QLayout, stretch: int | None = None
+    ):
         for i in item:
             if isinstance(i, QtWidgets.QWidget):
                 self.add_widget(i)
             else:
                 self.add_layout(i)
+            if stretch is not None:
+                self.setStretchFactor(self.count() - 1, stretch)
 
     @classmethod
     def from_widgets(
