@@ -105,8 +105,10 @@ class CommandPalette(widgets.Widget):
         # self._table.action_clicked.connect(self._on_action_clicked)
         # self._line.editingFinished.connect(self.hide)
 
-    def populate_from_widget(self, widget):
+    def populate_from_widget(self, widget: QtWidgets.QWidget):
         self.add_actions(widget.actions())
+        if not callable(widget.parent):
+            return
         while widget := widget.parent():
             self.add_actions(widget.actions())
 
