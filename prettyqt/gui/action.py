@@ -231,6 +231,8 @@ class ActionMixin(core.ObjectMixin):
     def show_shortcut_in_contextmenu(self, state: bool = True):
         self.setShortcutVisibleInContextMenu(state)
 
+    usage_count = core.Property(int, get_usage_count)
+
 
 class Action(ActionMixin, prettyprinter.PrettyPrinter, QtGui.QAction):
     pass
