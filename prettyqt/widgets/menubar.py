@@ -20,7 +20,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
 
     def add_action(self, action: QtGui.QAction | str) -> QtGui.QAction:
         if isinstance(action, str):
-            action = gui.Action(parent=self, text=action)
+            action = gui.Action(text=action)
         self.addAction(action)
         return action
 
@@ -34,7 +34,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
 
     @functools.singledispatchmethod
     def add_menu(self, title: str) -> widgets.Menu:
-        action = gui.Action(parent=self)
+        action = gui.Action(self)
         menu = widgets.Menu(title=title, parent=self)
         action.set_text(title)
         action.set_menu(menu)
@@ -43,7 +43,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
 
     @add_menu.register
     def _(self, menu: QtWidgets.QMenu) -> gui.Action:
-        action = gui.Action(parent=self)
+        action = gui.Action(self)
         action.set_menu(menu)
         action.set_text(menu.title())
         self.addAction(action)
@@ -55,7 +55,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     def add(self, *items: QtWidgets.QMenu | QtGui.QAction):
         for i in items:
             if isinstance(i, QtWidgets.QMenu):
-                action = gui.Action(parent=self)
+                action = gui.Action(self)
                 action.set_text(i.title())
                 action.set_menu(i)
                 self.addAction(action)

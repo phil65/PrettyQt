@@ -375,7 +375,7 @@ def test_marginsf():
 
 
 def test_metaenum():
-    metaobj = core.AbstractItemModel.get_metaobject()
+    metaobj = core.AbstractItemModel.get_static_metaobject()
     enum = metaobj.get_enum(0)
     assert enum.get_name() == "LayoutChangeHint"
     assert enum.get_scope() == "QAbstractItemModel"
@@ -387,7 +387,7 @@ def test_metaenum():
 
 
 def test_metamethod():
-    metaobj = core.AbstractItemModel.get_metaobject()
+    metaobj = core.AbstractItemModel.get_static_metaobject()
     method = metaobj.get_method(0)
     assert method.get_access() == "public"
     assert method.get_method_type() == "signal"
@@ -396,7 +396,7 @@ def test_metamethod():
 
 
 def test_metaobject():
-    metaobj = core.AbstractItemModel.get_metaobject()
+    metaobj = core.AbstractItemModel.get_static_metaobject()
     metaobj.get_enums()
     metaobj.get_constructors()
     metaobj.get_super_class()

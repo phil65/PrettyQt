@@ -41,31 +41,29 @@ RoleStr = Literal[
 class ActionMixin(core.ObjectMixin):
     def __init__(
         self,
-        parent: QtCore.QObject | None = None,
-        text: str = "",
+        *args,
+        text: str | None = None,
         icon: datatypes.IconType = None,
-        shortcut: str | None = None,
-        tooltip: str = "",
-        checkable: bool = False,
-        checked: bool = False,
-        statustip: str = "",
-        enabled: bool = True,
         callback: Callable | None = None,
+        **kwargs,
     ):
-        super().__init__(parent)
+        super().__init__(*args, **kwargs)
         self._menu = None
-        self.set_text(text)
-        self.set_icon(icon)
-        self.set_shortcut(shortcut)
-        self.set_tooltip(tooltip)
-        self.set_checkable(checkable)
-        self.set_checked(checked)
-        self.set_statustip(statustip)
-        self.set_enabled(enabled)
         if callback is not None:
             self.triggered.connect(callback)
         self._usage_count = 0
+        if text:
+            self.setText(text)
+        if icon:
+            self.set_icon(icon)
         self.triggered.connect(self._increase_usage_counter)
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "priority": PRIORITIES,
+        }
+        return maps
 
     def _increase_usage_counter(self):
         self._usage_count += 1

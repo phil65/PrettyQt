@@ -19,7 +19,7 @@ EDIT_TRIGGERS = bidict(
 
 EditTriggerStr = Literal["none", "double_click", "edit_key"]
 
-SELECTION_BEHAVIOUR = bidict(
+SELECTION_BEHAVIOR = bidict(
     rows=QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows,
     columns=QtWidgets.QAbstractItemView.SelectionBehavior.SelectColumns,
     items=QtWidgets.QAbstractItemView.SelectionBehavior.SelectItems,
@@ -70,6 +70,20 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def __len__(self) -> int:
         return model.rowCount() if (model := self.model()) is not None else 0
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "dragDropMode": DRAG_DROP_MODE,
+            "horizontalScrollMode": SCROLL_MODE,
+            "verticalScrollMode": SCROLL_MODE,
+            "selectionMode": SELECTION_MODE,
+            "selectionBehavior": SELECTION_BEHAVIOR,
+            "defaultDropAction": constants.DROP_ACTION,
+            "textElideMode": constants.ELIDE_MODE,
+            "editTriggers": EDIT_TRIGGERS,
+        }
+        return maps
 
     def selectAll(self):
         """Override, we dont want to selectAll for too many items bc of performance."""
@@ -273,9 +287,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         Raises:
             InvalidParamError: behaviour does not exist
         """
-        if behaviour not in SELECTION_BEHAVIOUR:
-            raise InvalidParamError(behaviour, SELECTION_BEHAVIOUR)
-        self.setSelectionBehavior(SELECTION_BEHAVIOUR[behaviour])
+        if behaviour not in SELECTION_BEHAVIOR:
+            raise InvalidParamError(behaviour, SELECTION_BEHAVIOR)
+        self.setSelectionBehavior(SELECTION_BEHAVIOR[behaviour])
 
     def get_selection_behaviour(self) -> SelectionBehaviourStr:
         """Return current selection behaviour.
@@ -283,7 +297,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         Returns:
             selection behaviour
         """
-        return SELECTION_BEHAVIOUR.inverse[self.selectionBehavior()]
+        return SELECTION_BEHAVIOR.inverse[self.selectionBehavior()]
 
     def set_drag_drop_mode(self, mode: DragDropModeStr):
         """Set drag-drop mode for given item view.

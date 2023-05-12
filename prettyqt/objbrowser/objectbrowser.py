@@ -81,7 +81,7 @@ class ObjectBrowser(widgets.MainWindow):
             parent=self,
             checkable=True,
             shortcut=gui.KeySequence("Alt+C"),
-            statustip="Shows/hides callable attributes (functions, methods, etc.)",
+            status_tip="Shows/hides callable attributes (functions, methods, etc.)",
         )
         self.toggle_callable_action.toggled.connect(
             self._proxy_tree_model.set_show_callables
@@ -93,7 +93,7 @@ class ObjectBrowser(widgets.MainWindow):
             parent=self,
             checkable=True,
             shortcut=gui.KeySequence("Alt+S"),
-            statustip="Shows or hides __special__ attributes",
+            status_tip="Shows or hides __special__ attributes",
         )
         self.toggle_special_attribute_action.toggled.connect(
             self._proxy_tree_model.set_show_special_attrs
@@ -104,7 +104,7 @@ class ObjectBrowser(widgets.MainWindow):
             text="Auto-refresh",
             parent=self,
             checkable=True,
-            statustip=f"Auto refresh every {self._refresh_rate} seconds",
+            status_tip=f"Auto refresh every {self._refresh_rate} seconds",
         )
         self.toggle_auto_refresh_action.toggled.connect(self.toggle_auto_refresh)
 

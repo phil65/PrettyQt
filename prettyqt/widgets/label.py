@@ -51,6 +51,11 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.openExternalLinks()
         self._propagate_event = propagate_event
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"textFormat": TEXT_FORMAT}
+        return maps
+
     def mousePressEvent(self, e):
         if self._propagate_event:
             super().mousePressEvent(e)

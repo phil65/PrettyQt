@@ -31,6 +31,11 @@ FrameShapeStr = Literal[
 
 
 class FrameMixin(widgets.WidgetMixin):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"frameShape": FRAME_SHAPE, "frameShadow": SHADOW}
+        return maps
+
     def set_frame_shadow(self, style: ShadowStr):
         """Set frame shadow.
 
@@ -80,3 +85,11 @@ class FrameMixin(widgets.WidgetMixin):
 
 class Frame(FrameMixin, QtWidgets.QFrame):
     pass
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    widget = Frame(frame_shape="panel", object_name="fff")
+    print(widget.get_properties())
+    widget.show()
+    app.main_loop()

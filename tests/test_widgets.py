@@ -1620,7 +1620,7 @@ def test_widget(qtbot):
 
 def test_widgetaction(qtbot):
     action = gui.Action()
-    widgetaction = widgets.WidgetAction(parent=action)
+    widgetaction = widgets.WidgetAction(action)
     widgetaction.set_tooltip("test")
     widgetaction.set_enabled()
     widgetaction.set_disabled()

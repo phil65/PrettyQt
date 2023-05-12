@@ -694,7 +694,7 @@ class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
-    widget2 = Widget()
+    widget2 = Widget(focus=True, status_tip="trekk", whats_this="kfjk")
     # widget.play_animation(
     #     "property",
     #     name="windowOpacity",

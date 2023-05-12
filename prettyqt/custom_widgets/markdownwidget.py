@@ -24,7 +24,7 @@ class MarkdownWindow(widgets.MainWindow):
             icon="mdi.exit-to-app",
             parent=self,
             shortcut="Ctrl+Q",
-            statustip="Exit application",
+            status_tip="Exit application",
             callback=self.close,
         )
         act_open = gui.Action(
@@ -32,7 +32,7 @@ class MarkdownWindow(widgets.MainWindow):
             icon="mdi.open-in-app",
             parent=self,
             shortcut="Ctrl+O",
-            statustip="Open Markdown file",
+            status_tip="Open Markdown file",
             callback=self.open_new_file,
         )
         menubar = self.menuBar()

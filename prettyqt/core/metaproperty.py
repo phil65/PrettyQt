@@ -27,4 +27,4 @@ class MetaProperty:
 if __name__ == "__main__":
     from prettyqt import core
 
-    metaobj = core.Object.get_metaobject()
+    metaobj = core.Object.get_static_metaobject()

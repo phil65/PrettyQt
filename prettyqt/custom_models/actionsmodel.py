@@ -60,14 +60,14 @@ if __name__ == "__main__":
         gui.Action(
             text="super duper action",
             shortcut="Ctrl+A",
-            tooltip="some Tooltip text",
+            tool_tip="some Tooltip text",
             icon="mdi.folder",
             callback=lambda: print("test"),
         ),
         gui.Action(
             text="this is an action",
             shortcut="Ctrl+B",
-            tooltip="Tooltip",
+            tool_tip="Tooltip",
             icon="mdi.folder-outline",
             checked=True,
             checkable=True,
@@ -75,10 +75,10 @@ if __name__ == "__main__":
         gui.Action(
             text="another one",
             shortcut="Ctrl+Alt+A",
-            tooltip="Some longer tooltippp",
+            tool_tip="Some longer tool_tippp",
             icon="mdi.folder",
         ),
-        gui.Action(text="a", shortcut="Ctrl+A", tooltip="Tooltip", icon="mdi.folder"),
+        gui.Action(text="a", shortcut="Ctrl+A", tool_tip="Tooltip", icon="mdi.folder"),
     ]
     model = custom_models.ColumnTableModel(actions, COLUMNS, parent=view)
     view.setModel(model)

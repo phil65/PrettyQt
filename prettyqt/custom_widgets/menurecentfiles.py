@@ -189,7 +189,7 @@ class MenuRecentFiles(widgets.Menu):
             self.addAction(action)
             self.recent_files_actions.append(action)
         self.addSeparator()
-        action_clear = gui.Action(parent=self, text="Clear list")
+        action_clear = gui.Action(text="Clear list")
         action_clear.triggered.connect(self.clear_recent_files)
         action_clear.setIcon(iconprovider.get_icon("fa.times-circle"))
         self.addAction(action_clear)
