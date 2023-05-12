@@ -169,6 +169,8 @@ from .layout import Layout, LayoutMixin
 from .spaceritem import SpacerItem
 from .formlayout import FormLayout
 from .boxlayout import BoxLayout
+from .hboxlayout import HBoxLayout
+from .vboxlayout import VBoxLayout
 from .stackedlayout import StackedLayout
 from .gridlayout import GridLayout
 from .toolbox import ToolBox
@@ -299,6 +301,8 @@ __all__ = [
     "LayoutMixin",
     "FormLayout",
     "BoxLayout",
+    "HBoxLayout",
+    "VBoxLayout",
     "StackedLayout",
     "GridLayout",
     "ToolBox",
