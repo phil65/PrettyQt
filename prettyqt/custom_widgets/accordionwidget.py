@@ -11,7 +11,7 @@ class AccordionItem(widgets.GroupBox):
         super().__init__(None)
 
         # create the layout
-        layout = widgets.BoxLayout("vertical")
+        layout = widgets.VBoxLayout()
         layout.set_margin(6)
         layout.setSpacing(0)
         layout.addWidget(widget)
@@ -415,7 +415,7 @@ class AccordionWidget(widgets.ScrollArea):
         self._ItemClass = AccordionItem
         self._items = {}
 
-        layout = widgets.BoxLayout("vertical")
+        layout = widgets.VBoxLayout()
         layout.set_margin(2)
         layout.setSpacing(2)
         layout.addStretch(1)

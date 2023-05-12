@@ -494,7 +494,7 @@ class SpanSliderWidget(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    layout = widgets.BoxLayout("horizontal")
+    layout = widgets.HBoxLayout()
     slider = SpanSliderWidget()
     # slider.set_movement_mode("free")
     slider.set_span(30, 70)

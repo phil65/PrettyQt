@@ -7,7 +7,7 @@ from deprecated import deprecated
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import InvalidParamError, bidict, get_repr, prettyprinter
 
 
 SIZE_CONSTRAINT = bidict(
@@ -24,7 +24,15 @@ SizeConstraintStr = Literal[
 ]
 
 
-class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
+class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.PrettyPrinter):
+    def __init__(self, *args, **kwargs):
+        self.next_layout = None
+        self._stack = []
+        margin = kwargs.pop("margin", None)
+        super().__init__(*args, **kwargs)
+        if margin is not None:
+            self.set_margin(margin)
+
     def __getitem__(
         self, index: str | int
     ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:
@@ -53,21 +61,108 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def __contains__(self, item: QtWidgets.QWidget | QtWidgets.QLayoutItem):
         return self.indexOf(item) >= 0
 
-    def serialize_fields(self):
-        return dict(
-            size_mode=self.get_size_mode(),
-            spacing=self.spacing(),
-            enabled=self.isEnabled(),
-        )
+    def __enter__(self):
+        if self.next_layout is not None:
+            self.next_layout.__enter__()
+            self._stack.append(self.next_layout)
+            self.next_layout = None
+        return self
+
+    def __exit__(self, *_):
+        if self._stack:
+            item = self._stack.pop()
+            item.__exit__()
+
+    def add(self, item, *args, **kwargs):
+        if isinstance(item, QtWidgets.QWidget):
+            self._layout.addWidget(item, *args, **kwargs)
+        elif isinstance(item, QtWidgets.QLayout):
+            self._layout.addLayout(item, *args, **kwargs)
+        elif isinstance(item, list):
+            for i in item:
+                self._layout.add(i, *args, **kwargs)
+
+        return item
+
+    def __iadd__(self, item, *args, **kwargs):
+        self.add(item, *args, **kwargs)
+        return self
+
+    # def __getattr__(self, name):
+    #     return getattr(self._layout, name)
+
+    # def __call__(self):
+    #     return self._layout
+
+    @property
+    def _layout(self):
+        return self._stack[-1] if self._stack else self
+
+    @classmethod
+    def create(cls, parent=None, stretch=None, margins=None, align=None, **kwargs):
+        match parent:
+            case QtWidgets.QMainWindow():
+                widget = QtWidgets.QWidget(parent=parent)
+                parent.setCentralWidget(widget)
+                new = cls(widget, **kwargs)
+            case QtWidgets.QSplitter():
+                widget = QtWidgets.QWidget(parent=parent)
+                parent.addWidget(widget)
+                new = cls(widget, **kwargs)
+            case None | QtWidgets.QWidget():
+                new = cls(parent, **kwargs)
+            case _:
+                new = cls(**kwargs)
+                if stretch:
+                    parent.addLayout(new, stretch)
+                else:
+                    parent.addLayout(new)
+
+        if margins is not None:
+            new.set_margin(margins)
+        if align is not None:
+            new.set_alignment(align)
+
+        new._stack = []
+        new.next_layout = None
+        return new
+
+    def get_sub_layout(self, layout, *args, **kwargs):
+        match layout:
+            case None:
+                return
+            case "horizontal":
+                Class = widgets.HBoxLayout
+            case "vertical":
+                Class = widgets.VBoxLayout
+            case "grid":
+                Class = widgets.GridLayout
+            case "form":
+                Class = widgets.FormLayout
+            case "stacked":
+                Class = widgets.StackedLayout
+            case "flow":
+                from prettyqt import custom_widgets
+
+                Class = custom_widgets.FlowLayout
+            case _:
+                raise ValueError("Invalid Layout")
+        self.next_layout = Class.create(self._layout, *args, **kwargs)
+        return self
 
     def get_children(self) -> list[QtWidgets.QWidget | QtWidgets.QLayout]:
         return list(self)
 
-    def set_margin(self, margin: int | None):
-        if margin is None:
-            self.unsetContentsMargins()
-        else:
-            self.setContentsMargins(margin, margin, margin, margin)
+    def set_margin(self, margin: tuple[int, int, int, int] | int | None):
+        match margin:
+            case None:
+                self.unsetContentsMargins()
+            case int():
+                self.setContentsMargins(margin, margin, margin, margin)
+            case tuple():
+                self.setContentsMargins(*margin)
+            case _:
+                raise ValueError(margin)
 
     def set_spacing(self, pixels: int):
         self.setSpacing(pixels)
@@ -127,18 +222,41 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def add_widget(self, widget: QtWidgets.QWidget, *args, **kwargs):
         self.addWidget(widget, *args, **kwargs)
 
-    def add(self, *items: QtWidgets.QWidget | QtWidgets.QLayout):
-        for i in items:
-            match i:
-                case QtWidgets.QWidget():
-                    self.addWidget(i)
-                case QtWidgets.QLayout():
-                    w = widgets.Widget()
-                    w.set_layout(i)
-                    self.addWidget(w)
-                case _:
-                    raise TypeError("add_item only supports widgets and layouts")
+    # def add(self, *items: QtWidgets.QWidget | QtWidgets.QLayout):
+    #     for i in items:
+    #         match i:
+    #             case QtWidgets.QWidget():
+    #                 self.addWidget(i)
+    #             case QtWidgets.QLayout():
+    #                 w = widgets.Widget()
+    #                 w.set_layout(i)
+    #                 self.addWidget(w)
+    #             case _:
+    #                 raise TypeError("add_item only supports widgets and layouts")
 
 
 class Layout(LayoutMixin, QtWidgets.QLayout):
     pass
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    widget = widgets.Widget()
+
+    with widgets.VBoxLayout.create(widget) as layout:
+        print("top", layout)
+        with layout.get_sub_layout("horizontal") as layout:
+            print("inner", layout)
+            test = layout.add(widgets.PlainTextEdit("upper left"))
+            layout.add(widgets.PlainTextEdit("upper right"))
+            with layout.get_sub_layout("vertical") as layout:
+                layout.add(widgets.PlainTextEdit("lower left"))
+                layout.add(widgets.PlainTextEdit("lower right"))
+        with layout.get_sub_layout("horizontal") as layout:
+            layout.add(widgets.PlainTextEdit("lower left"))
+            layout.add(widgets.PlainTextEdit("lower right"))
+    from devtools import debug
+
+    print(debug(widget))
+    widget.show()
+    app.main_loop()

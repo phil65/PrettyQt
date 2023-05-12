@@ -5,13 +5,7 @@ from prettyqt.qt import QtWidgets
 
 
 class HBoxLayout(widgets.boxlayout.BoxLayoutMixin, QtWidgets.QHBoxLayout):
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-        margin: int | None = None,
-    ):
-        QtWidgets.QHBoxLayout.__init__(self)
-        widgets.LayoutMixin.__init__(self)
+    pass
 
 
 if __name__ == "__main__":

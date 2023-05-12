@@ -32,13 +32,13 @@ class RegexEditorWidget(widgets.Widget):
         self.set_title(title)
         self.set_icon("mdi.regex")
         self.set_layout("horizontal")
-        self.left_layout = widgets.BoxLayout("vertical")
-        self.right_layout = widgets.BoxLayout("vertical")
+        self.left_layout = widgets.VBoxLayout()
+        self.right_layout = widgets.VBoxLayout()
         self.prog: Pattern | None = None
         self.matches: list[Match] = []
         self.groupbox = widgets.GroupBox(title="Regular expression")
         self.grid = widgets.GridLayout(self.groupbox)
-        self.layout_toprow = widgets.BoxLayout("horizontal")
+        self.layout_toprow = widgets.HBoxLayout()
         self.regexinput = custom_widgets.RegexInput()
         self.regexinput.set_min_size(400, 0)
         self.layout_toprow.add(self.regexinput)

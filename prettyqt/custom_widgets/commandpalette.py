@@ -71,7 +71,7 @@ class CommandPalette(widgets.Widget):
         self._line.value_changed.connect(self._table._model.set_current_marker_text)
         # self._line.value_changed.connect(self._table.select_first_row)
         self._line.value_changed.connect(self._table._proxy.set_search_term)
-        layout = widgets.BoxLayout("vertical", self)
+        layout = widgets.VBoxLayout(self)
         layout.addWidget(self._line)
         layout.addWidget(self._table)
         self.setLayout(layout)

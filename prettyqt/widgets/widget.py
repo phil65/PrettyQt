@@ -526,12 +526,14 @@ class WidgetMixin(core.ObjectMixin):
         layout: LayoutStr | QtWidgets.QLayout | None,
         margin: int | None = None,
         spacing: int | None = None,
-    ):
+    ) -> QtWidgets.QLayout:
         match layout:
             case None:
                 return
-            case "horizontal" | "vertical":
-                self.box = widgets.BoxLayout(layout)
+            case "horizontal":
+                self.box = widgets.HBoxLayout()
+            case "vertical":
+                self.box = widgets.VBoxLayout()
             case "grid":
                 self.box = widgets.GridLayout()
             case "form":
@@ -551,6 +553,7 @@ class WidgetMixin(core.ObjectMixin):
             self.box.set_margin(margin)
         if spacing is not None:
             self.box.setSpacing(spacing)
+        return self.box
 
     def center_on(self, where: Literal["parent", "window", "screen"] | QtWidgets.QWidget):
         own_geo = self.frameGeometry()

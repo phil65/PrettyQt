@@ -36,7 +36,7 @@ class FileChooserButton(widgets.Widget):
         self.mode: widgets.filedialog.AcceptModeStr = mode
         self.file_mode: widgets.filedialog.FileModeStr = file_mode
         self.root = root
-        layout = widgets.BoxLayout("horizontal", self)
+        layout = widgets.HBoxLayout(self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()

@@ -14,7 +14,7 @@ class ColorChooserButton(widgets.Widget):
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(parent)
-        layout = widgets.BoxLayout("horizontal", self)
+        layout = widgets.HBoxLayout(self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_regex_validator(r"^#(?:[0-9a-fA-F]{6})$")

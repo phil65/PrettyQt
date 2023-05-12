@@ -47,10 +47,10 @@ def test_repr(name, cls):
 
 
 def test_boxlayout(qtbot):
-    layout = widgets.BoxLayout("horizontal", margin=0)
+    layout = widgets.HBoxLayout(margin=0)
     widget = widgets.RadioButton("test")
     layout += widget
-    layout2 = widgets.BoxLayout("horizontal")
+    layout2 = widgets.HBoxLayout()
     layout += layout2
     assert layout[1] == layout2
     layout.set_size_constraint("maximum")
@@ -546,7 +546,7 @@ def test_groupbox(qtbot):
     widget = widgets.GroupBox()
     qtbot.addWidget(widget)
     widget.set_title("test_groupbox")
-    ly = widgets.BoxLayout("horizontal")
+    ly = widgets.HBoxLayout()
     widget.set_layout(ly)
     ly += widgets.RadioButton("+=")
     widget.set_alignment("left")
@@ -1139,7 +1139,7 @@ def test_splitter(qtbot):
     widget.set_orientation("horizontal")
     with pytest.raises(InvalidParamError):
         widget.set_orientation("test")
-    widget.add_layout(widgets.BoxLayout("horizontal"))
+    widget.add_layout(widgets.HBoxLayout())
     widgets.Splitter.from_widgets(widgets.Widget())
     test3 = widgets.Label("test_splitter")
     widget[0] = test3
@@ -1185,7 +1185,7 @@ def test_tabwidget(qtbot):
     with pytest.raises(InvalidParamError):
         widget.set_tab_shape("test")
     widget.remove_tab(1)
-    layout = widgets.BoxLayout("horizontal")
+    layout = widgets.HBoxLayout()
     widget.add_tab(layout, "mdi.timer")
     widget.set_icon_size(10)
     widget.set_icon_size((10, 10))
@@ -1570,7 +1570,7 @@ def test_widget(qtbot):
     assert widget.get_focus_policy() == "strong"
     with pytest.raises(InvalidParamError):
         widget.set_focus_policy("test")
-    layout = widgets.BoxLayout()
+    layout = widgets.HBoxLayout()
     widget.set_layout(layout)
     with pytest.raises(ValueError):
         widget.set_layout("test")

@@ -156,7 +156,7 @@ class WizardMixin(widgets.DialogMixin):
 
     def add_widget_as_page(self, widget: QtWidgets.QWidget) -> None:
         page = widgets.WizardPage(self)
-        layout = widgets.BoxLayout("vertical", self)
+        layout = widgets.VBoxLayout(self)
         layout += widget
         page.set_layout(layout)
 

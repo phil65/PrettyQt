@@ -17,7 +17,9 @@ class FlagSelectionWidget(widgets.GroupBox):
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(title=label, parent=parent)
-        self.box = widgets.BoxLayout(layout)
+        self.box = (
+            widgets.HBoxLayout() if layout == "horizontal" else widgets.VBoxLayout()
+        )
         self.buttons: dict[widgets.CheckBox, int] = {}
         self.set_layout(self.box)
 

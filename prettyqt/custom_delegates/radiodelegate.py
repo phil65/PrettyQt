@@ -26,7 +26,7 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.button_group = widgets.ButtonGroup()
         # adding the widget as an argument to the layout constructor automatically
         # applies it to the widget
-        layout = widgets.BoxLayout("horizontal", parent=editor)
+        layout = widgets.HBoxLayout(editor)
         layout.set_margin(0)
         for i, k in enumerate(self.items):
             rb = widgets.RadioButton(k)

@@ -15,7 +15,7 @@ class FontChooserButton(widgets.Widget):
     ):
         super().__init__(parent)
         self._current_font = font or QtGui.QFont()
-        layout = widgets.BoxLayout("horizontal", self)
+        layout = widgets.HBoxLayout(self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()

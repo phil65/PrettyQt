@@ -21,7 +21,9 @@ class SelectionWidget(widgets.GroupBox):
         parent: QtWidgets.QWidget | None = None,
     ):
         super().__init__(title=label, parent=parent)
-        self.box = widgets.BoxLayout(layout)
+        self.box = (
+            widgets.HBoxLayout() if layout == "horizontal" else widgets.VBoxLayout()
+        )
         self.widget_custom: widgets.Widget | None = None
         self.rb_other = widgets.RadioButton()
         self.buttons: dict[widgets.RadioButton, Any] = {}
@@ -92,7 +94,7 @@ class SelectionWidget(widgets.GroupBox):
         )
         if regex and typ == "string":
             self.widget_custom.set_regex_validator(regex)  # type: ignore
-        layout = widgets.BoxLayout("horizontal")
+        layout = widgets.HBoxLayout()
         layout.add(self.rb_other)
         layout.add(self.widget_custom)
         self.box.add(layout)

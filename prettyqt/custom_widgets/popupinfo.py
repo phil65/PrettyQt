@@ -12,7 +12,7 @@ class PopupInfo(widgets.Dialog):
         self.timer = core.Timer.single_shot(callback=self.close)
         self.label = widgets.Label()
         self.set_flags(stay_on_top=True, frameless=True, tool=True)
-        layout = widgets.BoxLayout("vertical")
+        layout = widgets.VBoxLayout()
         layout.set_margin(20)
         self.set_layout(layout)
         self.set_background_color("black")

@@ -14,7 +14,7 @@ class InputAndSlider(widgets.Widget):
     ):
         super().__init__(parent)
         self.path = None
-        layout = widgets.BoxLayout("horizontal", self)
+        layout = widgets.HBoxLayout(self)
         layout.set_margin(0)
         self.spinbox = widgets.SpinBox()
         layout.add(self.spinbox)

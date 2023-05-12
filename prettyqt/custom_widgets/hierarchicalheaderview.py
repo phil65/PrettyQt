@@ -636,7 +636,7 @@ if __name__ == "__main__":
     # form.setAttribute(Qt.WA_DeleteOnClose)  # http://stackoverflow.com/a/27178019/1119602
     form.setMinimumSize(700, 260)
     view = widgets.TableView()
-    widgets.BoxLayout("vertical", form).addWidget(view)
+    widgets.VBoxLayout(form).addWidget(view)
     form.show()
 
     # Prepare data

@@ -39,7 +39,7 @@ def test_elidedlabel(qtbot):
 
 
 def test_expandableline(qtbot):
-    layout = widgets.BoxLayout("vertical")
+    layout = widgets.VBoxLayout()
     textbrowser = widgets.TextBrowser()
     qtbot.addWidget(textbrowser)
     layout.addWidget(textbrowser)

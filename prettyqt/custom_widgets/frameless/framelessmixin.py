@@ -117,13 +117,13 @@ class TitleBar(widgets.Frame):
         self.minimize_button = MinimizeButton(self.button_box)
         self.close_button = CloseButton(self.button_box)
 
-        self.bbox_layout = widgets.BoxLayout("horizontal", parent=self.button_box)
+        self.bbox_layout = widgets.HBoxLayout(parent=self.button_box)
         self.bbox_layout.set_margin(0)
         self.bbox_layout.setSpacing(0)
         for btn in [self.minimize_button, self.maximize_button, self.close_button]:
             self.bbox_layout.addWidget(btn)
 
-        self.horizontal_layout = widgets.BoxLayout("horizontal", parent=self)
+        self.horizontal_layout = widgets.HBoxLayout(parent=self)
         self.horizontal_layout.set_margin(0)
         self.horizontal_layout.setSpacing(0)
         self.horizontal_spacer = widgets.SpacerItem(20, 20, "expanding", "minimum")

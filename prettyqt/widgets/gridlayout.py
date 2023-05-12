@@ -64,6 +64,10 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
             self[self.rowCount(), 0 : self.columnCount() - 1] = other
         return self
 
+    def __iadd__(self, item, *args, **kwargs):
+        self.__add__(item, *args, **kwargs)
+        return self
+
     def add(
         self,
         item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem,

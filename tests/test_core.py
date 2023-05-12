@@ -468,7 +468,7 @@ def test_object(qapp):
     assert w.find_child(widgets.PlainTextEdit, recursive=True) == w2
     assert w.find_child(name="w2", recursive=False) == w2
     assert w2.find_parent(widgets.Splitter) == w
-    layout = widgets.BoxLayout("vertical")
+    layout = widgets.VBoxLayout()
     layout.add(w)
 
 

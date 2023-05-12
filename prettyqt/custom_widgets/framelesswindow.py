@@ -98,7 +98,7 @@ class FramelessWindow(widgets.Widget):
         self.main_widget = widgets.MainWindow()
 
         # Set up layout
-        self.main_layout = widgets.BoxLayout("vertical")
+        self.main_layout = widgets.VBoxLayout()
         self.main_layout.addWidget(self.title_bar)
         self.main_layout.addWidget(self.main_widget)
 

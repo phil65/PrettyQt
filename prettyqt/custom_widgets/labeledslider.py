@@ -112,7 +112,7 @@ class LabeledSlider(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.app()
     frame = widgets.Widget()
-    ha = widgets.BoxLayout("horizontal")
+    ha = widgets.HBoxLayout()
     frame.setLayout(ha)
 
     w = LabeledSlider(labels=["test", "test2", "test3"], orientation="vertical")

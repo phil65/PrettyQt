@@ -91,7 +91,7 @@ class ExpandableLine(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    layout = widgets.BoxLayout("vertical")
+    layout = widgets.VBoxLayout()
     layout.addWidget(widgets.TextBrowser())
     widget = ExpandableLine("Test")
     widget.set_layout(layout)

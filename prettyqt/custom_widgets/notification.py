@@ -102,7 +102,7 @@ class Notification(widgets.Widget):
         self.set_layout("horizontal", margin=0)
 
         # Create a message area
-        message_area = widgets.BoxLayout("horizontal")
+        message_area = widgets.HBoxLayout()
         message_area.set_margin(0)
 
         # Create the layout
@@ -312,7 +312,7 @@ class NotificationArea(widgets.Widget):
         self.target_widget = target_widget
         self.set_margin(0)
 
-        notification_area_layout = widgets.BoxLayout("vertical")
+        notification_area_layout = widgets.VBoxLayout()
         self.setLayout(notification_area_layout)
 
         # Init effects to None

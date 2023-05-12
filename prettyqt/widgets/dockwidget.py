@@ -39,7 +39,7 @@ class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
 
     def setup_title_bar(self):
         title_bar = widgets.Widget()
-        layout = widgets.BoxLayout("horizontal")
+        layout = widgets.HBoxLayout()
         layout.set_margin(0)
         layout.set_alignment("right")
         title_bar.set_layout(layout)

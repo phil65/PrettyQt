@@ -18,20 +18,15 @@ DirectionStr = Literal["left_to_right", "right_to_left", "top_to_bottom", "botto
 
 
 class BoxLayoutMixin(widgets.LayoutMixin):
-    def __init__(
-        self,
-        orientation: Literal["horizontal", "vertical"] = "horizontal",
-        parent: QtWidgets.QWidget | None = None,
-        margin: int | None = None,
-    ):
-        o = (
-            self.Direction.TopToBottom
-            if orientation == "vertical"
-            else self.Direction.LeftToRight
-        )
-        super().__init__(o, parent)
-        if margin is not None:
-            self.set_margin(margin)
+    # def __init__(
+    #     self,
+    #     orientation: Literal["horizontal", "vertical"] = "horizontal",
+    #     parent: QtWidgets.QWidget | None = None,
+    #     margin: int | None = None,
+    # ):
+
+    #     if margin is not None:
+    #         self.set_margin(margin)
 
     # def serialize_fields(self):
     #     return dict(items=self.get_children(), direction=self.get_direction())
@@ -45,16 +40,16 @@ class BoxLayoutMixin(widgets.LayoutMixin):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
-    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
-        self.add(other)
-        return self
+    # def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
+    #     self.add(other)
+    #     return self
 
-    def add(self, *item):
-        for i in item:
-            if isinstance(i, QtWidgets.QWidget):
-                self.addWidget(i)
-            else:
-                self.addLayout(i)
+    # def add(self, *item):
+    #     for i in item:
+    #         if isinstance(i, QtWidgets.QWidget):
+    #             self.addWidget(i)
+    #         else:
+    #             self.addLayout(i)
 
     def add_stretch(self, stretch: int = 0):
         self.addStretch(stretch)

@@ -56,7 +56,7 @@ class IconBrowser(widgets.MainWindow):
         self._combobox.currentIndexChanged.connect(self._trigger_instant_update)
         self._combobox.addItems([ALL_COLLECTIONS, *sorted(font_maps.keys())])
 
-        lyt = widgets.BoxLayout("horizontal")
+        lyt = widgets.HBoxLayout()
         lyt.set_margin(0)
         lyt.add(self._combobox)
         lyt.add(self._lineedit)
@@ -67,7 +67,7 @@ class IconBrowser(widgets.MainWindow):
         self._copy_button = widgets.PushButton("Copy Name", self)
         self._copy_button.clicked.connect(self._copy_icon_text)
 
-        lyt = widgets.BoxLayout("vertical")
+        lyt = widgets.VBoxLayout()
         lyt.add(search_bar_frame)
         lyt.add(self._listview)
         lyt.add(self._copy_button)

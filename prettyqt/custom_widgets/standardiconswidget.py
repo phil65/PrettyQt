@@ -9,13 +9,13 @@ class StandardIconsWidget(widgets.Widget):
 
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
-        layout = widgets.BoxLayout("horizontal")
+        layout = widgets.HBoxLayout()
         row_nb = 14
         cindex = 0
         for k in widgets.style.STANDARD_PIXMAP:
             if cindex == 0:
-                col_layout = widgets.BoxLayout("vertical")
-            icon_layout = widgets.BoxLayout("horizontal")
+                col_layout = widgets.VBoxLayout()
+            icon_layout = widgets.HBoxLayout()
             icon = widgets.Application.get_style_icon(k)
             label = widgets.Label()
             label.setPixmap(icon.pixmap(32, 32))

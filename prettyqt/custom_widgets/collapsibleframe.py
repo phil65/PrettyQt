@@ -13,7 +13,7 @@ class CollapsibleFrame(widgets.Frame):
         self.set_frame_shape("styled_panel")
         self.set_frame_shadow("plain")
         # layout
-        self._layout = widgets.BoxLayout("vertical")
+        self._layout = widgets.VBoxLayout()
         self._layout.set_margin(0)
         self._layout.setSpacing(0)
         self.setLayout(self._layout)
@@ -30,7 +30,7 @@ class CollapsibleFrame(widgets.Frame):
         self._panel = widgets.Widget(self)
         self._layout.addWidget(self._panel)
         self._panel.setVisible(False)
-        self._panel_layout = widgets.BoxLayout("vertical")
+        self._panel_layout = widgets.VBoxLayout()
         self._panel_layout.set_margin(1)
         self._panel_layout.setSpacing(2)
         self._panel.setLayout(self._panel_layout)
