@@ -54,30 +54,6 @@ class CommandTable(widgets.TableView):
         fn.trigger()
 
 
-class PaletteLineEdit(widgets.LineEdit):
-    def keyPressEvent(self, e: core.Event):
-        if e.modifiers() in (
-            QtCore.Qt.KeyboardModifier.NoModifier,
-            QtCore.Qt.KeyboardModifier.KeypadModifier,
-        ):
-            cp = self.parent()
-            match e.key():
-                case QtCore.Qt.Key.Key_Escape:
-                    cp.hide()
-                    return
-                case QtCore.Qt.Key.Key_Return:
-                    cp.hide()
-                    cp._table.execute_focused()
-                    return
-                case QtCore.Qt.Key.Key_Up:
-                    cp._table.move_row_selection(-1)
-                    return
-                case QtCore.Qt.Key.Key_Down:
-                    cp._table.move_row_selection(1)
-                    return
-        return super().keyPressEvent(e)
-
-
 class CommandPalette(widgets.Widget):
     """A Qt command palette widget."""
 
@@ -90,7 +66,7 @@ class CommandPalette(widgets.Widget):
         # )
         # self.set_focus_policy("strong")
         self.setMinimumWidth(700)
-        self._line = PaletteLineEdit()
+        self._line = widgets.LineEdit()
         self._table = CommandTable()
         self._line.value_changed.connect(self._table._model.set_current_marker_text)
         # self._line.value_changed.connect(self._table.select_first_row)
@@ -100,10 +76,34 @@ class CommandPalette(widgets.Widget):
         layout.addWidget(self._table)
         self.setLayout(layout)
         self.add_shortcut("Ctrl+P", self.close)
+        self._line.installEventFilter(self)
 
         # self._line.textChanged.connect(self._on_text_changed)
         # self._table.action_clicked.connect(self._on_action_clicked)
         # self._line.editingFinished.connect(self.hide)
+
+    def eventFilter(self, source: QtCore.QObject, e: QtCore.QEvent) -> bool:
+        if source != self._line or e.type() != QtCore.QEvent.Type.KeyPress:
+            return super().eventFilter(source, e)
+        if e.modifiers() in (
+            QtCore.Qt.KeyboardModifier.NoModifier,
+            QtCore.Qt.KeyboardModifier.KeypadModifier,
+        ):
+            match e.key():
+                case QtCore.Qt.Key.Key_Escape:
+                    self.hide()
+                    return True
+                case QtCore.Qt.Key.Key_Return:
+                    self.hide()
+                    self._table.execute_focused()
+                    return True
+                case QtCore.Qt.Key.Key_Up:
+                    self._table.move_row_selection(-1)
+                    return True
+                case QtCore.Qt.Key.Key_Down:
+                    self._table.move_row_selection(1)
+                    return True
+        return super().eventFilter(source, e)
 
     def populate_from_widget(self, widget: QtWidgets.QWidget):
         self.add_actions(widget.actions())
