@@ -37,6 +37,8 @@ PyQt6-WebEngine = {version = "^6.5", optional=true}
 PyQt6-QScintilla = {version = "^2.0", optional=true}
 # PyQtAds = {version = "^3.8", optional=true}
 pyside6 = {version = "^6.5", python = "<3.12", optional=true}
+qtconsole = {version = "^5", optional=true}
+ipython = {version = "^8", optional=true}
 pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
 comtypes = {version = "^1.1", markers = "sys_platform == 'win32'"}
 pygments = "^2.6"
@@ -48,7 +50,7 @@ qtpy = "^2.3.1"
 [tool.poetry.extras]
 pyside6 = ["pyside6", "PySide6-QtAds"]
 pyqt6 = ["pyqt6", "PyQt6-Charts", "PyQt6-WebEngine", "PyQt6-QScintilla", "PyQtAds"]
-addons = ["docutils", "orjson", "fsspec", "pillow", "numpy"]
+addons = ["docutils", "orjson", "fsspec", "pillow", "numpy", "qtconsole", "ipython"]
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7"
