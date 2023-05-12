@@ -33,14 +33,11 @@ class WidgetMixin(core.ObjectMixin):
 
     def add_shortcut(
         self,
-        keysequence: str
-        | QtCore.QKeyCombination
-        | QtGui.QKeySequence
-        | QtGui.QKeySequence.StandardKey,
+        keysequence: datatypes.KeyCombinationType,
         callback: Callable | None = None,
         context: constants.ShortcutContextStr = "window",
     ) -> gui.Shortcut:
-        if isinstance(keysequence, str):
+        if not isinstance(keysequence, QtGui.QKeySequence):
             keysequence = gui.KeySequence(keysequence)
         context = constants.SHORTCUT_CONTEXT[context]
         return gui.Shortcut(keysequence, self, callback, context=context)
@@ -530,9 +527,9 @@ class WidgetMixin(core.ObjectMixin):
         margin: int | None = None,
         spacing: int | None = None,
     ):
-        if layout is None:
-            return
         match layout:
+            case None:
+                return
             case "horizontal" | "vertical":
                 self.box = widgets.BoxLayout(layout)
             case "grid":

@@ -97,6 +97,9 @@ if TYPE_CHECKING:
         tuple[int, int, int, int],
         None,
     ]
+    KeyCombinationType = Union[
+        str, QtCore.QKeyCombination, QtCore.QKeySequence, QtGui.QKeySequence.StandardKey
+    ]
     ColorAndBrushType = Union[ColorType, QtGui.QBrush]
 
     VariantType = Union[

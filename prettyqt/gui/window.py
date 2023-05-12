@@ -6,8 +6,8 @@ import pathlib
 from typing import Literal
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.qt import QtGui
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
 ANCESTER_MODES = bidict(
@@ -43,14 +43,11 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
 
     def add_shortcut(
         self,
-        keysequence: str
-        | QtCore.QKeyCombination
-        | QtGui.QKeySequence
-        | QtGui.QKeySequence.StandardKey,
+        keysequence: datatypes.KeyCombinationType,
         callback: Callable | None = None,
         context: constants.ShortcutContextStr = "window",
     ) -> gui.Shortcut:
-        if isinstance(keysequence, str):
+        if not isinstance(keysequence, QtGui.QKeySequence):
             keysequence = gui.KeySequence(keysequence)
         context = constants.SHORTCUT_CONTEXT[context]
         return gui.Shortcut(keysequence, self, callback, context=context)

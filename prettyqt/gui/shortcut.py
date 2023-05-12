@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError
+from prettyqt.qt import QtGui
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class Shortcut(core.ObjectMixin, QtGui.QShortcut):
@@ -46,23 +46,12 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
 
     def set_key(
         self,
-        key: str
-        | QtCore.QKeyCombination
-        | QtCore.QKeySequence
-        | QtGui.QKeySequence.StandardKey,
+        key: datatypes.KeyCombinationType,
     ):
         keysequence = gui.KeySequence(key)
         self.setKey(keysequence)
 
-    def set_keys(
-        self,
-        keys: list[
-            str
-            | QtCore.QKeyCombination
-            | QtCore.QKeySequence
-            | QtGui.QKeySequence.StandardKey
-        ],
-    ):
+    def set_keys(self, keys: list[datatypes.KeyCombinationType]):
         keysequences = [gui.KeySequence(key) for key in keys]
         self.setKeys(keysequences)
 

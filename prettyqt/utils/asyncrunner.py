@@ -31,37 +31,12 @@ Params = ParamSpec("Params")
 T = TypeVar("T")
 
 
-class Sentinel:
-    pass
-
-
-def chunked_iter(src: Iterable, size: int, fill_val=Sentinel):
-    """Generate *size*-sized chunks from *src* iterable.
-
-    Unless the
-    optional *fill* keyword argument is provided, iterables not evenly
-    divisible by *size* will have a final chunk that is smaller than
-    *size*.
-
-    >>> list(chunked_iter(range(10), 3))
-    [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9]]
-    >>> list(chunked_iter(range(10), 3, fill=None))
-    [[0, 1, 2], [3, 4, 5], [6, 7, 8], [9, None, None]]
-
-    """
+def chunked_iter(src: Iterable, size: int):
     if not src:
         return
-    do_fill = fill_val != Sentinel
     src_iter = iter(src)
-    while True:
-        cur_chunk = list(itertools.islice(src_iter, size))
-        if not cur_chunk:
-            break
-        lc = len(cur_chunk)
-        if lc < size and do_fill:
-            cur_chunk[lc:] = [fill_val] * (size - lc)
+    while cur_chunk := list(itertools.islice(src_iter, size)):
         yield cur_chunk
-    return
 
 
 class AsyncRunner:
