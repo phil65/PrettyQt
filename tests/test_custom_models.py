@@ -6,6 +6,7 @@ import pytest
 import regex as re
 
 from prettyqt import custom_models
+from prettyqt.custom_models import fsspecmodel
 from prettyqt.utils import InvalidParamError
 
 
@@ -39,7 +40,7 @@ def test_jsonmodel(qtmodeltester):
 
 
 def test_fsspecmodel(qtbot, qtmodeltester):
-    model = custom_models.FSSpecTreeModel()
+    model = fsspecmodel.FSSpecTreeModel()
     idx = model.index(0, 0)
     model.get_paths([idx])
     model.data(idx, model.Roles.FilePathRole)
