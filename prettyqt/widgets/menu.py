@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterator
-import functools
 from typing import Any
 
 from prettyqt import core, gui, iconprovider, widgets
@@ -72,7 +71,7 @@ class MenuMixin(widgets.WidgetMixin):
         Returns:
             Separator action
         """
-        separator = widgets.WidgetAction(parent=self)
+        separator = widgets.WidgetAction(self)
         if text is None:
             separator.setSeparator(True)
         else:
@@ -86,15 +85,9 @@ class MenuMixin(widgets.WidgetMixin):
         self.add(separator)
         return separator
 
-    @functools.singledispatchmethod
-    def add_action(self, item: QtGui.QAction):
-        item.setParent(self)
-        self.addAction(item)
-
-    @add_action.register
-    def _(
+    def add_action(
         self,
-        label: str,
+        label: str | gui.Action,
         callback: Callable = None,
         icon: Any | None = None,
         checkable: bool = False,
@@ -116,16 +109,20 @@ class MenuMixin(widgets.WidgetMixin):
         Returns:
             Action added to menu
         """
-        action = gui.Action(text=label, parent=self)
-        if callback:
-            action.triggered.connect(callback)
-        action.set_icon(icon)
-        action.set_shortcut(shortcut)
-        if checkable:
-            action.setCheckable(True)
-            action.setChecked(checked)
-        if status_tip is not None:
-            action.setStatusTip(status_tip)
+        if isinstance(label, str):
+            action = gui.Action(text=label, parent=self)
+            if callback:
+                action.triggered.connect(callback)
+            action.set_icon(icon)
+            action.set_shortcut(shortcut)
+            if checkable:
+                action.setCheckable(True)
+                action.setChecked(checked)
+            if status_tip is not None:
+                action.setStatusTip(status_tip)
+        else:
+            action = label
+            action.setParent(self)
         self.addAction(action)
         return action
 
