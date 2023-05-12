@@ -34,6 +34,12 @@ COL_CHECKSTATE = custom_models.ColumnItem(
     checkstate=lambda x: x.isChecked(),
 )
 
+COL_USAGE_COUNT = custom_models.ColumnItem(
+    name="Usage count",
+    doc="Usage count",
+    label=lambda x: x.usage_count if hasattr(x, "usage_count") else 0,
+)
+
 
 COLUMNS = [
     COL_NAME,
@@ -41,6 +47,7 @@ COLUMNS = [
     COL_SHORTCUT,
     COL_PRIORITY,
     COL_CHECKSTATE,
+    COL_USAGE_COUNT,
 ]
 
 
