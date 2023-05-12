@@ -160,6 +160,10 @@ class Dir(QtCore.QDir):
         return pathlib.Path(cls.homePath())
 
     @classmethod
+    def get_temp_path(cls) -> pathlib.Path:
+        return pathlib.Path(cls.tempPath())
+
+    @classmethod
     def get_drives(cls) -> list[core.FileInfo]:
         return [core.FileInfo(i) for i in cls.drives()]
 
@@ -170,3 +174,8 @@ class Dir(QtCore.QDir):
     @classmethod
     def set_search_paths(cls, prefix: str, paths: list[datatypes.PathType]):
         cls.setSearchPaths(prefix, [os.fspath(p) for p in paths])
+
+
+if __name__ == "__main__":
+    path = Dir.get_temp_path()
+    print(path)
