@@ -108,7 +108,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
     def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
         if isinstance(role, str):
             role = constants.ITEM_DATA_ROLE[role]
-        self.setData(data, role)
+        self.setData(role, data)
 
     def set_tooltip(
         self,
