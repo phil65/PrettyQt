@@ -169,7 +169,6 @@ class FSSpecTreeModel(
     fileRenamed = core.Signal(str, str, str)
     rootPathChanged = core.Signal(str)
 
-    @core.Enum
     class Roles(enum.IntEnum):
         """Role enum."""
 
@@ -178,7 +177,6 @@ class FSSpecTreeModel(
         FileNameRole = constants.USER_ROLE + 2
         FilePermissions = constants.USER_ROLE + 3
 
-    @core.Enum
     class Option(enum.IntEnum):
         """Role enum."""
 

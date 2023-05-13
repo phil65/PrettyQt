@@ -379,7 +379,6 @@ class AccordionWidget(widgets.ScrollArea):
     itemDragFailed = core.Signal(AccordionItem)
     itemsReordered = core.Signal()
 
-    @core.Enum
     class RolloutStyle(enum.IntEnum):
         """Rollout style for the widget."""
 
@@ -388,7 +387,6 @@ class AccordionWidget(widgets.ScrollArea):
         Square = 3
         Maya = 4
 
-    @core.Enum
     class DragDropMode(enum.IntEnum):
         """Drag drop mode for the widget."""
 

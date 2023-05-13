@@ -19,7 +19,6 @@ class FuzzyFilterModelMixin:
     this can be used by a Proxymodel in order to sort.
     """
 
-    @core.Enum
     class Roles(enum.IntEnum):
         """Addional roles."""
 
@@ -70,7 +69,6 @@ class FuzzyFilterModelMixin:
 
 
 class FuzzyFilterProxyModel(core.SortFilterProxyModel):
-    @core.Enum
     class Roles(enum.IntEnum):
         """Addional roles."""
 

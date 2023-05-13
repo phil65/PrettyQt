@@ -26,7 +26,6 @@ ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
 
 class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
-    @core.Enum
     class GridType(enum.IntEnum):
         """Grid type for background."""
 

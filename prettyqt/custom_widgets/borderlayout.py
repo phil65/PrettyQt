@@ -15,7 +15,6 @@ class ItemWrapper:
 
 
 class BorderLayout(widgets.Layout):
-    @core.Enum
     class Position(enum.IntEnum):
         """Item position."""
 
