@@ -213,6 +213,13 @@ ORIENTATION: bidict[OrientationStr, Qt.Orientation] = bidict(
     horizontal=Qt.Orientation.Horizontal, vertical=Qt.Orientation.Vertical
 )
 
+
+CaseSensitivityStr = Literal["case_sensitive", "case_insensitive"]
+CASE_SENSITIVITY: bidict[CaseSensitivityStr, Qt.CaseSensitivity] = bidict(
+    case_insensitive=Qt.CaseSensitivity.CaseInsensitive,
+    case_sensitive=Qt.CaseSensitivity.CaseSensitive,
+)
+
 StateStr = Literal["unchecked", "partial", "checked"]
 STATE: bidict[StateStr, Qt.CheckState] = bidict(
     unchecked=Qt.CheckState.Unchecked,

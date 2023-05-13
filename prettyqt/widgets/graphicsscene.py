@@ -49,6 +49,11 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
         return self.items()[index]
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"itemIndexMethod": ITEM_INDEX_METHOD}
+        return maps
+
     def get_palette(self) -> gui.Palette:
         return gui.Palette(self.palette())
 

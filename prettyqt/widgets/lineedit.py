@@ -46,6 +46,15 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         self.append_text(other)
         return self
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "echoMode": ECHO_MODE,
+            "cursorMoveStyle": constants.CURSOR_MOVE_STYLE,
+            "alignment": constants.ALIGNMENTS,
+        }
+        return maps
+
     def font(self) -> gui.Font:
         return gui.Font(super().font())
 

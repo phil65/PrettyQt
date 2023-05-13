@@ -3,7 +3,7 @@ from __future__ import annotations
 import datetime
 from typing import Literal
 
-from prettyqt import widgets
+from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
@@ -33,6 +33,16 @@ HorizontalHeaderFormatStr = Literal["single_letter", "short", "long", "none"]
 
 
 class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "firstDayOfWeek": constants.DAY_OF_WEEK,
+            "horizontalHeaderFormat": HORIZONTAL_HEADER_FORMAT,
+            "verticalHeaderFormat": VERTICAL_HEADER_FORMAT,
+            "selectionMode": SELECTION_MODE,
+        }
+        return maps
+
     def get_date(self) -> datetime.date:
         return self.selectedDate().toPython()
 

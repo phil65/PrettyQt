@@ -41,6 +41,11 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self.setResizeContentsPrecision(100)
         self._widget_name = parent.objectName() if parent is not None else ""
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"defaultAlignment": constants.ALIGNMENTS}
+        return maps
+
     def set_sort_indicator(self, logical_index: int | None, ascending: bool = True):
         idx = -1 if logical_index is None else logical_index
         sort_order = constants.ASCENDING if ascending else constants.DESCENDING

@@ -28,9 +28,6 @@ class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
         self.progress_bar.setTextVisible(False)
         self.addPermanentWidget(self.progress_bar)
 
-    def add_action(self, action: QtGui.QAction) -> None:
-        self.addAction(action)
-
     def add_widget(self, widget: QtWidgets.QWidget, permanent: bool = False) -> None:
         if permanent:
             self.addPermanentWidget(widget)

@@ -18,12 +18,6 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
             native_menu_bar=self.isNativeMenuBar(),
         )
 
-    def add_action(self, action: QtGui.QAction | str) -> QtGui.QAction:
-        if isinstance(action, str):
-            action = gui.Action(text=action)
-        self.addAction(action)
-        return action
-
     @overload
     def add_menu(self, menu_or_str: str) -> widgets.Menu:
         ...

@@ -56,6 +56,14 @@ class ComboBoxMixin(widgets.WidgetMixin):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self.index_changed)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "insertPolicy": INSERT_POLICY,
+            "sizeAdjustPolicy": SIZE_ADJUST_POLICY,
+        }
+        return maps
+
     # def serialize_fields(self):
     #     items = [
     #         (self.itemText(i), self.itemData(i), self.get_item_icon(i))

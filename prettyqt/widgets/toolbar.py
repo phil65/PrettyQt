@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Callable
-
-from prettyqt import constants, core, iconprovider, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, datatypes, get_repr
 
@@ -78,21 +76,6 @@ class ToolBarMixin(widgets.WidgetMixin):
             style
         """
         return constants.TOOLBUTTON_STYLE.inverse[self.toolButtonStyle()]
-
-    def add_action(
-        self,
-        label: str,
-        icon: datatypes.IconType = None,
-        callback: Callable | None = None,
-        checkable: bool = False,
-    ) -> QtGui.QAction:
-        icon = iconprovider.get_icon(icon)
-        action = self.addAction(icon, label)
-        if callback is not None:
-            action.triggered.connect(callback)
-        if checkable:
-            action.setCheckable(True)
-        return action
 
     def add_spacer(self) -> QtGui.QAction:
         spacer = widgets.Widget()

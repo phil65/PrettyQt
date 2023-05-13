@@ -5,7 +5,7 @@ from typing import Literal
 
 import dateutil.parser
 
-from prettyqt import core, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
@@ -42,6 +42,14 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         super().__init__(*args, **kwargs)
         self.setCalendarPopup(True)
         self.dateTimeChanged.connect(self.datetime_changed)
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "timeSpec": constants.TIME_SPEC,
+            "currentSection": SECTIONS,
+        }
+        return maps
 
     def datetime_changed(self, date):
         dt = self.get_datetime()

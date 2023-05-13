@@ -25,6 +25,14 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self.index_changed)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "fontFilters": FONT_FILTERS,
+            "writingSystem": gui.fontdatabase.WRITING_SYSTEM,
+        }
+        return maps
+
     def set_font_filters(self, *filters: FontFilterStr):
         """Set font filters.
 

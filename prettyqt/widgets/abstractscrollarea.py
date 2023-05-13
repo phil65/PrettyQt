@@ -9,13 +9,13 @@ from prettyqt.utils import InvalidParamError, bidict
 
 area = QtWidgets.QAbstractScrollArea
 
-SIZE_POLICY = bidict(
+SIZE_ADJUST_POLICY = bidict(
     content=area.SizeAdjustPolicy.AdjustToContents,
     first_show=area.SizeAdjustPolicy.AdjustToContentsOnFirstShow,
     ignored=area.SizeAdjustPolicy.AdjustIgnored,
 )
 
-SizePolicyStr = Literal["content", "first_show", "ignored"]
+SizeAdjustPolicyStr = Literal["content", "first_show", "ignored"]
 
 
 class AbstractScrollAreaMixin(widgets.FrameMixin):
@@ -23,6 +23,15 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         super().__init__(*args, **kwargs)
         self.setHorizontalScrollBar(widgets.ScrollBar(parent=self))
         self.setVerticalScrollBar(widgets.ScrollBar(parent=self))
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "horizontalScrollBarPolicy": constants.SCROLLBAR_POLICY,
+            "sizeAdjustPolicy": SIZE_ADJUST_POLICY,
+            "verticalScrollBarPolicy": constants.SCROLLBAR_POLICY,
+        }
+        return maps
 
     @property
     def h_scrollbar(self):
@@ -48,7 +57,7 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         self.h_scrollbar.setValue(x_val)
         self.v_scrollbar.setValue(y_val)
 
-    def set_size_adjust_policy(self, policy: SizePolicyStr):
+    def set_size_adjust_policy(self, policy: SizeAdjustPolicyStr):
         """Set size adjust policy.
 
         Args:
@@ -57,17 +66,17 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         Raises:
             InvalidParamError: invalid size adjust policy
         """
-        if policy not in SIZE_POLICY:
-            raise InvalidParamError(policy, SIZE_POLICY)
-        self.setSizeAdjustPolicy(SIZE_POLICY[policy])
+        if policy not in SIZE_ADJUST_POLICY:
+            raise InvalidParamError(policy, SIZE_ADJUST_POLICY)
+        self.setSizeAdjustPolicy(SIZE_ADJUST_POLICY[policy])
 
-    def get_size_adjust_policy(self) -> SizePolicyStr:
+    def get_size_adjust_policy(self) -> SizeAdjustPolicyStr:
         """Return size adjust policy.
 
         Returns:
             size adjust policy
         """
-        return SIZE_POLICY.inverse[self.sizeAdjustPolicy()]
+        return SIZE_ADJUST_POLICY.inverse[self.sizeAdjustPolicy()]
 
     def set_scrollbar_smooth(
         self,

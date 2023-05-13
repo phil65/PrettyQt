@@ -29,6 +29,15 @@ InputModeStr = Literal["text", "int", "double"]
 
 
 class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "textEchoMode": widgets.lineedit.ECHO_MODE,
+            "inputMode": INPUT_MODE,
+            "options": INPUT_DIALOG_OPTION,
+        }
+        return maps
+
     @classmethod
     def get_int(
         cls,

@@ -33,8 +33,8 @@ class FileChooserButton(widgets.Widget):
         super().__init__(parent)
         self._path: pathlib.Path | None = None
         self._extensions = extensions or []
-        self.mode: widgets.filedialog.AcceptModeStr = mode
-        self.file_mode: widgets.filedialog.FileModeStr = file_mode
+        self.mode = mode
+        self.file_mode = file_mode
         self.root = root
         layout = widgets.HBoxLayout(self)
         layout.set_margin(0)

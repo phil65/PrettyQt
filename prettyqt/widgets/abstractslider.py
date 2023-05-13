@@ -33,6 +33,13 @@ SliderActionStr = Literal[
 class AbstractSliderMixin(widgets.WidgetMixin):
     value_changed = core.Signal(int)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "orientation": constants.ORIENTATION,
+        }
+        return maps
+
     def on_value_change(self):
         self.value_changed.emit(self.value())
 

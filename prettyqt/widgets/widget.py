@@ -5,9 +5,8 @@ import functools
 import os
 import pathlib
 import sys
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Any, Literal
 
-from deprecated import deprecated
 import qstylizer.parser
 import qstylizer.style
 
@@ -47,6 +46,18 @@ class WidgetMixin(core.ObjectMixin):
         callback: Callable | None = None,
         context: constants.ShortcutContextStr = "window",
     ) -> gui.Shortcut:
+        """Add shortcut to widget.
+
+        Adds as shortcut for given callback and context to this widget.
+
+        Args:
+            keysequence: Key sequence
+            callback: Callback for the shortcut
+            context: context for this shortcut
+
+        Returns:
+            shortcut object
+        """
         if not isinstance(keysequence, QtGui.QKeySequence):
             keysequence = gui.KeySequence(keysequence)
         context = constants.SHORTCUT_CONTEXT[context]
@@ -68,6 +79,52 @@ class WidgetMixin(core.ObjectMixin):
         if isinstance(position_or_action, int):
             position_or_action = self.actions()[position_or_action]
         super().insertAction(position_or_action, action)
+
+    def add_action(
+        self,
+        label: str | gui.Action,
+        callback: Callable = None,
+        icon: Any | None = None,
+        checkable: bool = False,
+        checked: bool = False,
+        shortcut: str | None = None,
+        status_tip: str | None = None,
+    ) -> gui.Action:
+        """Add an action to the menu.
+
+        Args:
+            label: Label for button
+            callback: gets called when action is triggered
+            icon: icon for button
+            checkable: as checkbox button
+            checked: if checkable, turn on by default
+            shortcut: Shortcut for action
+            status_tip: Status tip to be shown in status bar
+
+        Returns:
+            Action added to menu
+        """
+        if isinstance(label, str):
+            action = gui.Action(self, text=label)
+            if callback:
+                action.triggered.connect(callback)
+            action.set_icon(icon)
+            action.set_shortcut(shortcut)
+            if checkable:
+                action.setCheckable(True)
+                action.setChecked(checked)
+            if status_tip is not None:
+                action.setStatusTip(status_tip)
+        else:
+            action = label
+            action.setParent(self)
+        self.addAction(action)
+        return action
+
+    def add_actions(self, actions: list[QtGui.QAction]):
+        for i in actions:
+            i.setParent(self)
+        self.addActions(actions)
 
     def toggle_fullscreen(self):
         """Toggle between fullscreen and regular size."""
@@ -466,16 +523,6 @@ class WidgetMixin(core.ObjectMixin):
         yield font
         self.setFont(font)
 
-    @deprecated(reason="This context manager is deprecated, use edit_font instead.")
-    @contextlib.contextmanager
-    def current_font(self) -> Iterator[gui.Font]:
-        with self.edit_font() as font:
-            yield font
-
-    @deprecated(reason="This method is deprecated, use set_context_menu_policy instead.")
-    def set_contextmenu_policy(self, policy: constants.ContextPolicyStr) -> None:
-        return self.set_context_menu_policy(policy)
-
     def set_context_menu_policy(self, policy: constants.ContextPolicyStr) -> None:
         """Set contextmenu policy for given item view.
 
@@ -488,15 +535,6 @@ class WidgetMixin(core.ObjectMixin):
         if policy not in constants.CONTEXT_POLICY:
             raise InvalidParamError(policy, constants.CONTEXT_POLICY)
         self.setContextMenuPolicy(constants.CONTEXT_POLICY[policy])
-
-    @deprecated(reason="This method is deprecated, use get_context_menu_policy instead.")
-    def get_contextmenu_policy(self) -> constants.ContextPolicyStr:
-        """Return current contextmenu policy.
-
-        Returns:
-            contextmenu policy
-        """
-        return self.get_context_menu_policy()
 
     def get_context_menu_policy(self) -> constants.ContextPolicyStr:
         """Return current contextmenu policy.
@@ -537,6 +575,18 @@ class WidgetMixin(core.ObjectMixin):
         margin: int | None = None,
         spacing: int | None = None,
     ) -> QtWidgets.QLayout:
+        """Quick way to set a layout.
+
+        Sets layout to given layout, also allows setting margin and spacing.
+
+        Args:
+            layout: Layout to set
+            margin: margin to use in pixels
+            spacing: spacing to use in pixels
+
+        Returns:
+            Layout
+        """
         match layout:
             case None:
                 return
@@ -635,10 +685,6 @@ class WidgetMixin(core.ObjectMixin):
         font.setPointSize(size)
         self.setFont(font)
 
-    @deprecated(reason="This method is deprecated, use get_font_metrics instead.")
-    def font_metrics(self) -> gui.FontMetrics:
-        return self.get_font_metrics()
-
     def get_font_metrics(self) -> gui.FontMetrics:
         return gui.FontMetrics(self.fontMetrics())
 
@@ -658,7 +704,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_mask(
         self,
-        area: datatypes.RectType | QtGui.QRegion | None,
+        area: datatypes.RectType | QtGui.QRegion | QtGui.QBitmap | None,
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
         match area:

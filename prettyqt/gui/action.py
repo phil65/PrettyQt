@@ -62,6 +62,8 @@ class ActionMixin(core.ObjectMixin):
         maps = super()._get_map()
         maps |= {
             "priority": PRIORITIES,
+            "shortcutContext": constants.SHORTCUT_CONTEXT,
+            "menuRole": ROLES,
         }
         return maps
 

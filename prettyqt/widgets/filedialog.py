@@ -68,6 +68,15 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         self.set_file_mode(file_mode)
         self.set_accept_mode(mode)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "acceptMode": ACCEPT_MODE,
+            "fileMode": FILE_MODE,
+            "viewMode": VIEW_MODE,
+        }
+        return maps
+
     def set_accept_mode(self, mode: AcceptModeStr):
         """Set accept mode.
 

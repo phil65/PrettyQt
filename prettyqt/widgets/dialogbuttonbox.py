@@ -98,6 +98,14 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
     def __contains__(self, index: StandardButtonStr):
         return self.button(STANDARD_BUTTON[index]) is not None
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "orientation": constants.ORIENTATION,
+            "standardButtons": STANDARD_BUTTON,
+        }
+        return maps
+
     @classmethod
     def create(cls, **kwargs) -> Self:
         box = cls()
@@ -193,7 +201,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     widget = DialogButtonBox()
-    buttons = list(BUTTONS.keys())
+    buttons = list(STANDARD_BUTTON.keys())
     widget.add_default_buttons(buttons)
     widget.button_clicked.connect(print)
     widget.show()

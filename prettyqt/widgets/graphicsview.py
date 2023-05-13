@@ -57,6 +57,21 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         if not args or not isinstance(args[0], QtWidgets.QGraphicsScene):
             self.setScene(widgets.GraphicsScene())
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "alignment": constants.ALIGNMENTS,
+            "resizeAnchor": VIEWPORT_ANCHOR,
+            "transformationAnchor": VIEWPORT_ANCHOR,
+            "cacheMode": CACHE_MODES,
+            "dragMode": DRAG_MODE,
+            "viewportUpdateMode": VIEWPORT_UPDATE_MODE,
+            "rubberBandSelectionMode": constants.ITEM_SELECTION_MODE,
+            "renderHints": gui.painter.RENDER_HINTS,
+            "optimizationFlags": OPTIMIZATION_FLAGS,
+        }
+        return maps
+
     def enable_mousewheel_zoom(self, state: bool = True):
         if state:
             self.viewport().installEventFilter(self)

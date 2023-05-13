@@ -30,6 +30,16 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "caseSensitivity": constants.CASE_SENSITIVITY,
+            "completionMode": COMPLETION_MODE,
+            "modelSorting": SORT_MODE,
+            "filterMode": constants.MATCH_FLAGS,
+        }
+        return maps
+
     def splitPath(self, path: str) -> list[str]:
         self.path_updated.emit(path)
         return super().splitPath(path)

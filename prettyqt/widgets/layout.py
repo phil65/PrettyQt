@@ -73,6 +73,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
             item = self._stack.pop()
             item.__exit__()
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"sizeConstraint": SIZE_CONSTRAINT}
+        return maps
+
     def add(self, item, *args, **kwargs):
         if isinstance(item, QtWidgets.QWidget):
             self._layout.addWidget(item, *args, **kwargs)

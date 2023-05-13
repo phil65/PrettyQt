@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterator
-from typing import Any
+from collections.abc import Iterator
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtGui, QtWidgets
@@ -84,52 +83,6 @@ class MenuMixin(widgets.WidgetMixin):
             separator.setEnabled(False)
         self.add(separator)
         return separator
-
-    def add_action(
-        self,
-        label: str | gui.Action,
-        callback: Callable = None,
-        icon: Any | None = None,
-        checkable: bool = False,
-        checked: bool = False,
-        shortcut: str | None = None,
-        status_tip: str | None = None,
-    ) -> gui.Action:
-        """Add an action to the menu.
-
-        Args:
-            label: Label for button
-            callback: gets called when action is triggered
-            icon: icon for button
-            checkable: as checkbox button
-            checked: if checkable, turn on by default
-            shortcut: Shortcut for action
-            status_tip: Status tip to be shown in status bar
-
-        Returns:
-            Action added to menu
-        """
-        if isinstance(label, str):
-            action = gui.Action(text=label, parent=self)
-            if callback:
-                action.triggered.connect(callback)
-            action.set_icon(icon)
-            action.set_shortcut(shortcut)
-            if checkable:
-                action.setCheckable(True)
-                action.setChecked(checked)
-            if status_tip is not None:
-                action.setStatusTip(status_tip)
-        else:
-            action = label
-            action.setParent(self)
-        self.addAction(action)
-        return action
-
-    def add_actions(self, actions: list[QtGui.QAction]):
-        for i in actions:
-            i.setParent(self)
-        self.addActions(actions)
 
     def add_menu(self, menu: QtWidgets.QMenu) -> QtGui.QAction:
         action = menu.menuAction()

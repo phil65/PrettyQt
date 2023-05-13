@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import gui, widgets
+from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -35,6 +35,15 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin):
         super().__init__(*args, **kwargs)
         self.setLineEdit(widgets.LineEdit())
         self.setGroupSeparatorShown(True)
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "alignment": constants.ALIGNMENTS,
+            "buttonSymbols": SYMBOLS,
+            "correctionMode": CORRECTION_MODES,
+        }
+        return maps
 
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()

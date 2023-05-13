@@ -15,6 +15,11 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         self.setAlternatingRowColors(True)
         self.setWordWrap(False)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"gridStyle": constants.PEN_STYLE}
+        return maps
+
     @property
     def h_header(self):
         return self.horizontalHeader()

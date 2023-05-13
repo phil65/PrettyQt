@@ -26,6 +26,11 @@ SegmentStyleStr = Literal["outline", "filled", "flat"]
 
 
 class LCDNumber(widgets.FrameMixin, QtWidgets.QLCDNumber):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"segmentStyle": SEGMENT_STYLE, "mode": MODE}
+        return maps
+
     def set_mode(self, mode: ModeStr):
         """Set the lcd mode.
 
