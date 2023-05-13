@@ -44,6 +44,17 @@ ResizeModeStr = Literal["fixed", "adjust"]
 
 
 class ListViewMixin(widgets.AbstractItemViewMixin):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "viewMode": VIEW_MODE,
+            "resizeMode": RESIZE_MODE,
+            "layoutMode": LAYOUT_MODE,
+            "movement": MOVEMENT,
+            "flow": FLOW,
+        }
+        return maps
+
     def set_view_mode(self, mode: ViewModeStr):
         """Set view mode.
 
