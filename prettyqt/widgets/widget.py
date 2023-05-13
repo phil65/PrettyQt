@@ -565,18 +565,33 @@ class WidgetMixin(core.ObjectMixin):
             self.box.setSpacing(spacing)
         return self.box
 
-    def center_on(self, where: Literal["parent", "window", "screen"] | QtWidgets.QWidget):
-        own_geo = self.frameGeometry()
+    def center_on(
+        self,
+        where: Literal["parent", "window", "screen"] | QtWidgets.QWidget,
+        scale_ratio: int | None = None,
+    ):
+        """Center widget on another widget / window / screen.
+
+        Arguments:
+            where: where to center on
+            scale_ratio: Resize to scale_ratio * target size
+        """
         match where:
             case "parent":
-                center = self.parent().frameGeometry().center()
+                geom = self.parent().frameGeometry()
             case "window":
-                center = self.window().frameGeometry().center()
+                geom = self.window().frameGeometry()
             case QtWidgets.QWidget():
-                center = where.frameGeometry().center()
+                geom = where.frameGeometry()
             case "screen":
-                center = gui.GuiApplication.primaryScreen().geometry().center()
-        own_geo.moveCenter(center)
+                geom = gui.GuiApplication.primaryScreen().geometry()
+        if scale_ratio is not None:
+            self.resize(
+                int(geom.width() * scale_ratio),
+                int(geom.height() * scale_ratio),
+            )
+        own_geo = self.frameGeometry()
+        own_geo.moveCenter(geom.center())
         self.move(own_geo.topLeft())
 
     def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor) -> None:
@@ -720,7 +735,7 @@ if __name__ == "__main__":
     widget.show()
     widget2.show()
     app.sleep(4)
-    widget.center_on(widget2)
+    widget.center_on(widget2, scale_ratio=2)
     # widget.add_shortcut("return", print, "application")
     # widget.set_min_size((400, 400))
     # widget.set_max_size(None, 600)
