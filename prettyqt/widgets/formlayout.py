@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Literal
 
-from prettyqt import widgets
+from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -68,20 +68,57 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         self.add(other)
         return self
 
-    # def serialize_fields(self):
-    #     widget_list = []
-    #     positions = []
-    #     for i, item in enumerate(list(self)):
-    #         widget_list.append(item)
-    #         positions.append(self.get_item_position(i))
-    #     return dict(widgets=widget_list, positions=positions)
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "FieldGrowthPolicy": FIELD_GROWTH_POLICY,
+            "formAlignment": constants.ALIGNMENTS,
+            "labelAlignment": constants.ALIGNMENTS,
+            "rowWrapPolicy": ROW_WRAP_POLICY,
+        }
+        return maps
 
-    # def __reduce__(self):
-    #     return type(self), (), self.__getstate__()
+    def set_form_alignment(self, alignment: constants.AlignmentStr):
+        """Set the alignment of the form.
 
-    # def __setstate__(self, state):
-    #     for item, pos in zip(state["widgets"], state["positions"]):
-    #         self.set_widget(item, pos[0], pos[1])
+        Args:
+            alignment: alignment for the form
+
+        Raises:
+            InvalidParamError: alignment does not exist
+        """
+        if alignment not in constants.ALIGNMENTS:
+            raise InvalidParamError(alignment, constants.ALIGNMENTS)
+        self.setFormAlignment(constants.ALIGNMENTS[alignment])
+
+    def get_form_alignment(self) -> constants.AlignmentStr:
+        """Return current form alignment.
+
+        Returns:
+            form alignment
+        """
+        return constants.ALIGNMENTS.inverse[self.formAlignment()]
+
+    def set_label_alignment(self, alignment: constants.AlignmentStr):
+        """Set the alignment of the label.
+
+        Args:
+            alignment: alignment for the label
+
+        Raises:
+            InvalidParamError: alignment does not exist
+        """
+        if alignment not in constants.ALIGNMENTS:
+            raise InvalidParamError(alignment, constants.ALIGNMENTS)
+        self.setFormAlignment(constants.ALIGNMENTS[alignment])
+
+    def get_label_alignment(self) -> constants.AlignmentStr:
+        """Return current label alignment.
+
+        Returns:
+            label alignment
+        """
+        return constants.ALIGNMENTS.inverse[self.labelAlignment()]
 
     def set_widget(
         self, widget: str | QtWidgets.QWidget, row: int, role: RoleStr = "both"
