@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
 
@@ -25,6 +26,4 @@ class MetaProperty:
 
 
 if __name__ == "__main__":
-    from prettyqt import core
-
     metaobj = core.Object.get_static_metaobject()

@@ -8,6 +8,11 @@ from prettyqt.utils import datatypes
 
 
 class PropertyAnimation(core.VariantAnimationMixin, QtCore.QPropertyAnimation):
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"easingCurve": core.easingcurve.TYPE}
+        return maps
+
     def apply_to(self, method: Callable):
         self.setTargetObject(method.__self__)
         self.set_property_name(method.__name__)

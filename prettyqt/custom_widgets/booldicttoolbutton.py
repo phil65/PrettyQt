@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtWidgets
-from prettyqt.utils import datatypes
 
 
 class BoolDictToolButton(widgets.ToolButton):
@@ -10,14 +8,11 @@ class BoolDictToolButton(widgets.ToolButton):
 
     def __init__(
         self,
-        title: str,
-        icon: datatypes.IconType | None = None,
+        *args,
         dct: dict[str, str] | None = None,
-        parent: QtWidgets.QWidget | None = None,
+        **kwargs,
     ):
-        super().__init__(parent=parent)
-        self.set_text(title)
-        self.set_icon(icon)
+        super().__init__(*args, **kwargs)
         self.button_menu = widgets.Menu()
         self.button_menu.triggered.connect(self._on_menu_click)
         self.setMenu(self.button_menu)
@@ -52,7 +47,7 @@ class BoolDictToolButton(widgets.ToolButton):
 if __name__ == "__main__":
     app = widgets.app()
     dct = dict(a="test", b="test2")
-    w = BoolDictToolButton("Title", None, dct)
+    w = BoolDictToolButton(text="Title", dct=dct)
     w.value_changed.connect(print)
     w.show()
     app.main_loop()

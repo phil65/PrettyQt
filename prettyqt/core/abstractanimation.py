@@ -46,13 +46,10 @@ class AbstractAnimationMixin(core.ObjectMixin):
         group.addAnimation(other)
         return group
 
-    def serialize_fields(self):
-        return dict(
-            duration=self.duration(),
-            direction=self.get_direction(),
-            loop_count=self.loopCount(),
-            current_time=self.currentTime(),
-        )
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"direction": DIRECTION, "state": STATE}
+        return maps
 
     def set_direction(self, direction: DirectionStr):
         """Set animation direction.

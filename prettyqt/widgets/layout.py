@@ -4,6 +4,7 @@ from collections.abc import Iterator
 from typing import Literal
 
 from deprecated import deprecated
+from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -104,7 +105,14 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
         return self._stack[-1] if self._stack else self
 
     @classmethod
-    def create(cls, parent=None, stretch=None, margins=None, align=None, **kwargs):
+    def create(
+        cls,
+        parent: QtWidgets.QWidget | QtWidgets.QLayout | None = None,
+        stretch=None,
+        margin: int | None = None,
+        align: constants.AlignmentStr = None,
+        **kwargs,
+    ) -> Self:
         match parent:
             case QtWidgets.QMainWindow():
                 widget = QtWidgets.QWidget(parent=parent)
@@ -123,8 +131,8 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
                 else:
                     parent.addLayout(new)
 
-        if margins is not None:
-            new.set_margin(margins)
+        if margin is not None:
+            new.set_margin(margin)
         if align is not None:
             new.set_alignment(align)
 
@@ -132,7 +140,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
         new.next_layout = None
         return new
 
-    def get_sub_layout(self, layout, *args, **kwargs):
+    def get_sub_layout(self, layout, *args, **kwargs) -> Self:
         match layout:
             case None:
                 return

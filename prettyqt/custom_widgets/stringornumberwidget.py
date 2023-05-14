@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
 class StringOrNumberWidget(widgets.GroupBox):
     value_changed = core.Signal(object)
 
-    def __init__(self, title: str = "", parent: QtWidgets.QWidget | None = None):
-        super().__init__(checkable=False, title=title)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.set_layout("vertical")
-        self.rb_lineedit = widgets.RadioButton("String")
+        self.rb_lineedit = widgets.RadioButton("String", checked=True)
         self.lineedit = widgets.LineEdit()
         self.rb_spinbox = widgets.RadioButton("Number")
         self.spinbox = widgets.DoubleSpinBox()
@@ -28,7 +27,6 @@ class StringOrNumberWidget(widgets.GroupBox):
         self.rb_lineedit.toggled.connect(self.spinbox.setDisabled)
         self.spinbox.value_changed.connect(self.on_value_change)
         self.lineedit.value_changed.connect(self.on_value_change)
-        self.rb_lineedit.setChecked(True)
 
     def on_value_change(self):
         value = self.get_value()
