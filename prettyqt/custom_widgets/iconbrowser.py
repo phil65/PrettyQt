@@ -28,9 +28,9 @@ class IconBrowser(widgets.MainWindow):
             for font_collection, font_data in font_maps.items()
             for icon_name in font_data
         ]
-        self._filter_timer = core.Timer(self)
-        self._filter_timer.setSingleShot(True)
-        self._filter_timer.setInterval(AUTO_SEARCH_TIMEOUT)
+        self._filter_timer = core.Timer(
+            self, single_shot=True, interval=AUTO_SEARCH_TIMEOUT
+        )
         self._filter_timer.timeout.connect(self._update_filter)
 
         model = IconModel(self.get_palette().get_color("text"))
@@ -40,9 +40,13 @@ class IconBrowser(widgets.MainWindow):
         self._proxy_model.setSourceModel(model)
         self._proxy_model.set_filter_case_sensitive(True)
 
-        self._listview = IconListView(self)
-        self._listview.setUniformItemSizes(True)
-        self._listview.set_view_mode("icon")
+        self._listview = IconListView(
+            self,
+            uniform_item_sizes=True,
+            view_mode="icon",
+            context_menu_policy="custom",
+        )
+
         self._listview.set_model(self._proxy_model)
         self._listview.set_context_menu_policy("custom")
         self._listview.doubleClicked.connect(self._copy_icon_text)

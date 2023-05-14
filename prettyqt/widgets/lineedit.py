@@ -28,16 +28,10 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     value_changed = core.Signal(str)
     tab_pressed = core.Signal()
 
-    def __init__(
-        self,
-        default_value: str = "",
-        read_only: bool = False,
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        super().__init__(default_value, parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.textChanged.connect(self._set_validation_color)
         self.textChanged.connect(self.value_changed)
-        self.set_read_only(read_only)
 
     def __repr__(self):
         return get_repr(self, self.text())
