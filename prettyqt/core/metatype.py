@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import enum
 from typing import Literal
 
 from prettyqt.qt import QtCore
@@ -101,20 +102,20 @@ TypeFlagStr = Literal[
     "relocatable_type",
     "is_enumeration",
     "is_unsigned_enumeration",
-    "pinter_to_qobject",
+    "pointer_to_qobject",
     "is_pointer",
     "is_const",
 ]
 
 TYPE_FLAG = bidict(
     needs_construction=QtCore.QMetaType.TypeFlag.NeedsConstruction,
-    # needs_copy_construction=QtCore.QMetaType.TypeFlag.NeedsCopyConstruction,
-    # needs_move_construction=QtCore.QMetaType.TypeFlag.NeedsMoveConstruction,
+    needs_copy_construction=QtCore.QMetaType.TypeFlag.NeedsCopyConstruction,
+    needs_move_construction=QtCore.QMetaType.TypeFlag.NeedsMoveConstruction,
     needs_destruction=QtCore.QMetaType.TypeFlag.NeedsDestruction,
     relocatable_type=QtCore.QMetaType.TypeFlag.RelocatableType,
     is_enumeration=QtCore.QMetaType.TypeFlag.IsEnumeration,
     is_unsigned_enumeration=QtCore.QMetaType.TypeFlag.IsUnsignedEnumeration,
-    pinter_to_qobject=QtCore.QMetaType.TypeFlag.PointerToQObject,
+    pointer_to_qobject=QtCore.QMetaType.TypeFlag.PointerToQObject,
     is_pointer=QtCore.QMetaType.TypeFlag.IsPointer,
     is_const=QtCore.QMetaType.TypeFlag.IsConst,
 )
@@ -130,7 +131,108 @@ class MetaType(QtCore.QMetaType):
     def get_name(self) -> str | None:
         return self.name()
 
+    def get_type_name(self) -> str:
+        return TYPE[self.id()]
+
+    def is_enumeration(self):
+        return self.flags() & QtCore.QMetaType.TypeFlag.IsEnumeration
+
+    def get_type(self) -> type:
+        meta_type = QtCore.QMetaType.Type(self.id())
+        match meta_type:
+            case QtCore.QMetaType.Type.Bool:
+                return bool
+            case QtCore.QMetaType.Type.Int | QtCore.QMetaType.Type.UInt:
+                return int
+            case QtCore.QMetaType.Type.Double | QtCore.QMetaType.Type.Float:
+                return float
+            case QtCore.QMetaType.Type.QChar | QtCore.QMetaType.Type.QString:
+                return str
+            case QtCore.QMetaType.Type.QByteArray:
+                return bytes
+            case QtCore.QMetaType.Type.QVariantList:
+                return list
+            case QtCore.QMetaType.Type.QVariantMap:
+                return dict
+            case QtCore.QMetaType.Type.QSize:
+                return QtCore.QSize
+            case QtCore.QMetaType.Type.QSizeF:
+                return QtCore.QSizeF
+            case QtCore.QMetaType.Type.QTime:
+                return QtCore.QTime
+            case QtCore.QMetaType.Type.QDate:
+                return QtCore.QDate
+            case QtCore.QMetaType.Type.QDateTime:
+                return QtCore.QDateTime
+            case QtCore.QMetaType.Type.QRect:
+                return QtCore.QRect
+            case QtCore.QMetaType.Type.QRectF:
+                return QtCore.QRectF
+            case QtCore.QMetaType.Type.QLine:
+                return QtCore.QLine
+            case QtCore.QMetaType.Type.QLineF:
+                return QtCore.QLineF
+            case QtCore.QMetaType.Type.QPoint:
+                return QtCore.QPoint
+            case QtCore.QMetaType.Type.QPointF:
+                return QtCore.QPointF
+            case QtCore.QMetaType.Type.QRegularExpression:
+                return QtCore.QRegularExpression
+            case QtCore.QMetaType.Type.QLocale:
+                return QtCore.QLocale
+            case QtCore.QMetaType.Type.QUrl:
+                return QtCore.QUrl
+            case _ if self.is_enumeration():
+                return enum.Enum
+
+        from prettyqt.qt import QtGui
+
+        match meta_type:
+            case QtCore.QMetaType.Type.QPolygon:
+                return QtGui.QPolygon
+            case QtCore.QMetaType.Type.QPolygonF:
+                return QtGui.QPolygonF
+            case QtCore.QMetaType.Type.QTextLength:
+                return QtGui.QTextLength
+            case QtCore.QMetaType.Type.QRegion:
+                return QtGui.QRegion
+            case QtCore.QMetaType.Type.QPalette:
+                return QtGui.QPalette
+            case QtCore.QMetaType.Type.QColor:
+                return QtGui.QColor
+            case QtCore.QMetaType.Type.QPen:
+                return QtGui.QPen
+            case QtCore.QMetaType.Type.QFont:
+                return QtGui.QFont
+            case QtCore.QMetaType.Type.QBrush:
+                return QtGui.QBrush
+            case QtCore.QMetaType.Type.QImage:
+                return QtGui.QImage
+            case QtCore.QMetaType.Type.QPixmap:
+                return QtGui.QPixmap
+            case QtCore.QMetaType.Type.QTransform:
+                return QtGui.QTransform
+            case QtCore.QMetaType.Type.QKeySequence:
+                return QtGui.QKeySequence
+            case QtCore.QMetaType.Type.QVector3D:
+                return QtGui.QVector3D
+            case QtCore.QMetaType.Type.QVector4D:
+                return QtGui.QVector4D
+            case QtCore.QMetaType.Type.QCursor:
+                return QtGui.QCursor
+            case QtCore.QMetaType.Type.QIcon:
+                return QtGui.QIcon
+
+        from prettyqt.qt import QtWidgets
+
+        match meta_type:
+            case QtCore.QMetaType.Type.QSizePolicy:
+                return QtWidgets.QSizePolicy
+            case _:
+                raise NotImplementedError(self.id())
+
 
 if __name__ == "__main__":
     metatype = MetaType(2)
-    print(metatype.name())
+    print(dir(metatype))
+    print(TYPE)
