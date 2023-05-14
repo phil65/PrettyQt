@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
 SHADOW = bidict(
@@ -81,6 +81,12 @@ class FrameMixin(widgets.WidgetMixin):
             frame shape
         """
         return FRAME_SHAPE.inverse[self.frameShape()]
+
+    def set_frame_rect(self, rect: datatypes.RectType | None):
+        if isinstance(rect, tuple):
+            rect = QtCore.QRect(*rect)
+        elif rect is None:
+            rect = QtCore.QRect(0, 0, 0, 0)
 
 
 class Frame(FrameMixin, QtWidgets.QFrame):
