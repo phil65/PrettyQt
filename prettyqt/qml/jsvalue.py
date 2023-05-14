@@ -12,9 +12,10 @@ from prettyqt.utils import bidict, get_repr
 
 logger = logging.getLogger()
 
-ErrorTypeStr = Literal["generic", "range", "reference", "syntax", "type", "uri"]
+ErrorTypeStr = Literal["none", "generic", "range", "reference", "syntax", "type", "uri"]
 
 ERROR_TYPES = bidict(
+    none=QtQml.QJSValue.ErrorType(0),
     generic=QtQml.QJSValue.ErrorType.GenericError,
     range=QtQml.QJSValue.ErrorType.RangeError,
     reference=QtQml.QJSValue.ErrorType.ReferenceError,
@@ -55,8 +56,10 @@ class JSValue(QtQml.QJSValue):
         return self.toVariant()
 
     def get_error_type(self) -> ErrorTypeStr | None:
-        error_type = self.errorType()
-        return ERROR_TYPES.inverse.get(error_type)
+        if (error_type := self.errorType()) == QtQml.QJSValue.ErrorType(0):
+            return None
+        else:
+            return ERROR_TYPES.inverse[error_type]
 
     @classmethod
     def from_object(cls, obj, jsengine: QtQml.QJSEngine) -> Self:
