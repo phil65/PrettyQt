@@ -44,6 +44,8 @@ def parse_time(time_str: str) -> int:
 
 
 def to_lower_camel(snake_str: str) -> str:
+    if "_" not in snake_str:
+        return snake_str
     first, *others = snake_str.split("_")
     return "".join([first.lower(), *map(str.title, others)])
 
