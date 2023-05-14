@@ -14,10 +14,11 @@ class PushButtonMixin(widgets.AbstractButtonMixin):
         label: str | None = None,
         parent: QtWidgets.QWidget | None = None,
         callback: Callable | None = None,
+        **kwargs,
     ):
         if label is None:
             label = ""
-        super().__init__(label, parent)
+        super().__init__(label, parent, **kwargs)
         if callback:
             self.clicked.connect(callback)
         self.toggled.connect(self.value_changed)
