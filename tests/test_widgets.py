@@ -1272,7 +1272,7 @@ def test_toolbar(qtbot):
     def test():
         pass
 
-    widget.add_action(label="test", icon="mdi.timer", callback=test, checkable=True)
+    widget.add_action(text="test", icon="mdi.timer", triggered=test, checkable=True)
 
 
 def test_toolbutton(qtbot):

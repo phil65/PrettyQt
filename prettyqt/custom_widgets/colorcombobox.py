@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes, get_repr
 
 
@@ -11,9 +11,9 @@ class ColorComboBox(widgets.ComboBox):
     def __init__(
         self,
         color: datatypes.ColorType | None = None,
-        parent: QtWidgets.QWidget | None = None,
+        **kwargs,
     ):
-        super().__init__(parent)
+        super().__init__(**kwargs)
         self._current_color: gui.Color = gui.Color("white")
         for i in gui.Color.colorNames():
             self.addItem(iconprovider.for_color(i), i)

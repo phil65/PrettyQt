@@ -28,7 +28,6 @@ class RegexInput(widgets.Widget):
     def __init__(self, show_flags: bool = True, show_error: bool = True, **kwargs):
         super().__init__(**kwargs)
         self.set_layout("grid", margin=0)
-        self.set_margin(0)
         self.label_error = widgets.Label()
         error_color = self.get_palette().get_color("highlight")
         self.label_error.set_color(error_color)
@@ -37,7 +36,7 @@ class RegexInput(widgets.Widget):
         self.lineedit.val.error_occured.connect(self.label_error.set_text)
         self.lineedit.val.pattern_updated.connect(self.value_changed)
         self.tb_flags = custom_widgets.BoolDictToolButton(
-            "Flags", icon="mdi.flag-variant-outline"
+            text="Flags", icon="mdi.flag-variant-outline"
         )
         self.box[0, 0:1] = self.lineedit
         if show_flags:

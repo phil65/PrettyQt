@@ -25,7 +25,7 @@ class MarkdownWindow(widgets.MainWindow):
             parent=self,
             shortcut="Ctrl+Q",
             status_tip="Exit application",
-            callback=self.close,
+            triggered=self.close,
         )
         act_open = gui.Action(
             text="&Open",
@@ -33,7 +33,7 @@ class MarkdownWindow(widgets.MainWindow):
             parent=self,
             shortcut="Ctrl+O",
             status_tip="Open Markdown file",
-            callback=self.open_new_file,
+            triggered=self.open_new_file,
         )
         menubar = self.menuBar()
         menu_file = menubar.addMenu("&File")

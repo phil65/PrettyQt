@@ -11,10 +11,10 @@ class FontChooserButton(widgets.Widget):
     def __init__(self, font: QtGui.QFont | str | None = None, **kwargs):
         super().__init__(**kwargs)
         self._current_font = None
-        self.set_current_font(font)
         layout = widgets.HBoxLayout(self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit(read_only=True)
+        self.set_current_font(font)
         layout.add(self.lineedit)
         action = gui.Action(icon="mdi.format-font", triggered=self.choose_font)
         self.button = widgets.ToolButton()

@@ -82,8 +82,8 @@ class WidgetMixin(core.ObjectMixin):
 
     def add_action(
         self,
-        label: str | gui.Action,
-        callback: Callable = None,
+        text: str | gui.Action,
+        triggered: Callable = None,
         icon: Any | None = None,
         checkable: bool = False,
         checked: bool = False,
@@ -93,10 +93,10 @@ class WidgetMixin(core.ObjectMixin):
         """Add an action to the menu.
 
         Args:
-            label: Label for button
-            callback: gets called when action is triggered
-            icon: icon for button
-            checkable: as checkbox button
+            text: Label for the action
+            triggered: gets called when action is triggered
+            icon: icon for action
+            checkable: as checkbox action
             checked: if checkable, turn on by default
             shortcut: Shortcut for action
             status_tip: Status tip to be shown in status bar
@@ -104,10 +104,10 @@ class WidgetMixin(core.ObjectMixin):
         Returns:
             Action added to menu
         """
-        if isinstance(label, str):
-            action = gui.Action(self, text=label)
-            if callback:
-                action.triggered.connect(callback)
+        if isinstance(text, str):
+            action = gui.Action(self, text=text)
+            if triggered:
+                action.triggered.connect(triggered)
             action.set_icon(icon)
             action.set_shortcut(shortcut)
             if checkable:
@@ -116,7 +116,7 @@ class WidgetMixin(core.ObjectMixin):
             if status_tip is not None:
                 action.setStatusTip(status_tip)
         else:
-            action = label
+            action = text
             action.setParent(self)
         self.addAction(action)
         return action

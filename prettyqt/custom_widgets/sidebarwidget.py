@@ -79,7 +79,7 @@ class SidebarWidget(widgets.MainWindow):
             shortcut=shortcut,
             parent=self.sidebar,
             checkable=True,
-            callback=lambda: self.set_tab(item),
+            triggered=lambda: self.set_tab(item),
         )
         button = widgets.ToolButton(self.sidebar)
         button.setDefaultAction(act)
@@ -157,7 +157,7 @@ class SidebarWidget(widgets.MainWindow):
             icon=icon,
             shortcut=shortcut,
             checkable=checkable,
-            callback=callback,
+            triggered=callback,
         )
         button = widgets.ToolButton(self.sidebar)
         button.setDefaultAction(act)

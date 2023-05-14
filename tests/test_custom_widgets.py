@@ -11,7 +11,7 @@ from prettyqt.qt import QtCore, QtGui
 
 def test_booldicttoolbutton(qtbot):
     dct = dict(a="test", b="test2")
-    w = custom_widgets.BoolDictToolButton("Title", None, dct)
+    w = custom_widgets.BoolDictToolButton(text="Title", dct=dct)
     qtbot.addWidget(w)
     w["a"] = True
     assert w["a"] is True
