@@ -1253,7 +1253,7 @@ def test_timeedit(qtbot):
 def test_toolbar(qtbot):
     widget = widgets.ToolBar()
     qtbot.addWidget(widget)
-    widget.add_menu_button("test,", "mdi.timer", menu=widgets.Menu())
+    widget.add_menu_button(label="test,", icon="mdi.timer", menu=widgets.Menu())
     widget.set_style("icon")
     widget.add_separator("Test")
     widget.add_separator()
@@ -1272,7 +1272,7 @@ def test_toolbar(qtbot):
     def test():
         pass
 
-    widget.add_action("test", "mdi.timer", test, checkable=True)
+    widget.add_action(label="test", icon="mdi.timer", callback=test, checkable=True)
 
 
 def test_toolbutton(qtbot):
