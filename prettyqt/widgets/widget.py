@@ -233,10 +233,12 @@ class WidgetMixin(core.ObjectMixin):
             icon: icon to use
         """
         icon = iconprovider.get_icon(icon, color=colors.WINDOW_ICON_COLOR)
-        self.setWindowIcon(icon)
+        super().setWindowIcon(icon)
+
+    setWindowIcon = set_icon
 
     def get_icon(self) -> gui.Icon | None:
-        icon = self.windowIcon()
+        icon = super().windowIcon()
         return None if icon.isNull() else gui.Icon(icon)
 
     @functools.singledispatchmethod
@@ -244,9 +246,11 @@ class WidgetMixin(core.ObjectMixin):
         if isinstance(size, tuple):
             x = 0 if size[0] is None else size[0]
             y = 0 if size[1] is None else size[1]
-            self.setMinimumSize(x, y)
+            super().setMinimumSize(x, y)
         else:
-            self.setMinimumSize(size)
+            super().setMinimumSize(size)
+
+    setMinimumSize = set_min_size
 
     @set_min_size.register
     def _(self, x: int, y: int | None):
@@ -261,9 +265,9 @@ class WidgetMixin(core.ObjectMixin):
         if isinstance(size, tuple):
             x = QWIDGETSIZE_MAX if size[0] is None else size[0]
             y = QWIDGETSIZE_MAX if size[1] is None else size[1]
-            self.setMaximumSize(x, y)
+            super().setMaximumSize(x, y)
         else:
-            self.setMaximumSize(size)
+            super().setMaximumSize(size)
 
     @set_max_size.register
     def _(self, x: int, y: int | None):
@@ -276,22 +280,22 @@ class WidgetMixin(core.ObjectMixin):
     def set_min_width(self, width: int | None) -> None:
         if width is None:
             width = 0
-        self.setMinimumWidth(width)
+        super().setMinimumWidth(width)
 
     def set_max_width(self, width: int | None) -> None:
         if width is None:
             width = QWIDGETSIZE_MAX
-        self.setMaximumWidth(width)
+        super().setMaximumWidth(width)
 
     def set_min_height(self, height: int | None) -> None:
         if height is None:
             height = 0
-        self.setMinimumHeight(height)
+        super().setMinimumHeight(height)
 
     def set_max_height(self, height: int | None) -> None:
         if height is None:
             height = QWIDGETSIZE_MAX
-        self.setMaximumHeight(height)
+        super().setMaximumHeight(height)
 
     def set_enabled(self, enabled: bool = True) -> None:
         self.setEnabled(enabled)
@@ -765,7 +769,9 @@ class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = Widget()
-    widget2 = Widget(focus=True, status_tip="trekk", whats_this="kfjk")
+    widget2 = Widget(
+        focus=True, status_tip="trekk", whats_this="kfjk", minimum_width=None
+    )
     # widget.play_animation(
     #     "property",
     #     name="windowOpacity",

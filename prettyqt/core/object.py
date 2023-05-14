@@ -22,15 +22,21 @@ class ObjectMixin:
 
     def __init__(self, *args, **kwargs):
         # this allows snake_case property and signal names in ctor.
+        new = {}
         if kwargs:
             mapper = self._get_map()
-            kwargs = {
-                helpers.to_lower_camel(k): mapper[camel_k][v]
-                if (camel_k := helpers.to_lower_camel(k)) in mapper and isinstance(v, str)
-                else v
-                for k, v in kwargs.items()
-            }
-        super().__init__(*args, **kwargs)
+            for k, v in kwargs.items():
+                if (camel_k := helpers.to_lower_camel(k)) in mapper and isinstance(
+                    v, str
+                ):
+                    new[camel_k] = mapper[camel_k][v]
+                elif k in {"window_icon", "icon"} and isinstance(v, str):
+                    from prettyqt import iconprovider
+
+                    new[camel_k] = iconprovider.get_icon(v)
+                else:
+                    new[camel_k] = v
+        super().__init__(*args, **new)
 
     def _get_map(self):
         """Can be implemented by subclasses to support str -> Enum conversion.

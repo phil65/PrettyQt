@@ -22,21 +22,14 @@ LineWrapModeStr = Literal["none", "widget_width"]
 class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     value_changed = core.Signal(str)
 
-    def __init__(
-        self,
-        text: str = "",
-        parent: QtWidgets.QWidget | None = None,
-        read_only: bool = False,
-        **kwargs,
-    ):
-        super().__init__(parent, **kwargs)
+    def __init__(self, text: str = "", **kwargs):
+        super().__init__(**kwargs)
         self._allow_wheel_zoom = False
         self._current_block = None
         self._hl = None
         self.validator: QtGui.QValidator | None = None
         self._current_line_color = gui.Color(0, 0, 0, 0)
         self.textChanged.connect(self._on_value_change)
-        self.set_read_only(read_only)
         doc = gui.TextDocument(self)
         layout = widgets.PlainTextDocumentLayout(doc)
         doc.setDocumentLayout(layout)

@@ -2,21 +2,17 @@ from __future__ import annotations
 
 from prettyqt import widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import datatypes
 
 
 class DialogMixin(widgets.WidgetMixin):
     def __init__(
         self,
-        title: str = "",
-        icon: datatypes.IconType = None,
-        parent: QtWidgets.QWidget | None = None,
+        *args,
         delete_on_close: bool = False,
         layout: None | str | QtWidgets.QLayout = None,
+        **kwargs,
     ):
-        super().__init__(parent=parent)
-        self.set_title(title)
-        self.set_icon(icon)
+        super().__init__(*args, **kwargs)
         if delete_on_close:
             self.delete_on_close()
         if layout is not None:

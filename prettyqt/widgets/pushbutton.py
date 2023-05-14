@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Callable
-
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
@@ -9,18 +7,8 @@ from prettyqt.qt import QtWidgets
 class PushButtonMixin(widgets.AbstractButtonMixin):
     value_changed = core.Signal(bool)
 
-    def __init__(
-        self,
-        label: str | None = None,
-        parent: QtWidgets.QWidget | None = None,
-        callback: Callable | None = None,
-        **kwargs,
-    ):
-        if label is None:
-            label = ""
-        super().__init__(label, parent, **kwargs)
-        if callback:
-            self.clicked.connect(callback)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.toggled.connect(self.value_changed)
 
 

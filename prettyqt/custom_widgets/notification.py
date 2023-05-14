@@ -215,12 +215,13 @@ class Notification(widgets.Widget):
         Makes class Notification available in style sheets. Interal Qt function.
         Should not be called directly.
         """
-        self.style().drawPrimitive(
-            widgets.Style.PrimitiveElement.PE_Widget,
-            widgets.StyleOption.based_on(self),
-            gui.Painter(self),
-            self,
-        )
+        with gui.Painter(self) as painter:
+            self.style().drawPrimitive(
+                widgets.Style.PrimitiveElement.PE_Widget,
+                widgets.StyleOption.based_on(self),
+                painter,
+                self,
+            )
 
     @property
     def message(self) -> str:

@@ -69,18 +69,18 @@ class ObjectBrowser(widgets.MainWindow):
         self._proxy_tree_model = objectbrowsertreemodel.ObjectBrowserTreeProxyModel(
             show_callable_attrs=show_callable_attrs,
             show_special_attrs=show_special_attrs,
+            dynamic_sort_filter=True,
         )
 
         self._proxy_tree_model.setSourceModel(self._tree_model)
         # self._proxy_tree_model.setSortRole(constants.SORT_ROLE)
-        self._proxy_tree_model.setDynamicSortFilter(True)
         # self._proxy_tree_model.setSortCaseSensitivity(Qt.CaseInsensitive)
 
         self.toggle_callable_action = gui.Action(
             text="Show callable attributes",
             parent=self,
             checkable=True,
-            shortcut=gui.KeySequence("Alt+C"),
+            shortcut="Alt+C",
             status_tip="Shows/hides callable attributes (functions, methods, etc.)",
         )
         self.toggle_callable_action.toggled.connect(
@@ -92,7 +92,7 @@ class ObjectBrowser(widgets.MainWindow):
             text="Show __special__ attributes",
             parent=self,
             checkable=True,
-            shortcut=gui.KeySequence("Alt+S"),
+            shortcut="Alt+S",
             status_tip="Shows or hides __special__ attributes",
         )
         self.toggle_special_attribute_action.toggled.connect(
@@ -120,13 +120,10 @@ class ObjectBrowser(widgets.MainWindow):
         self.setCentralWidget(self.central_splitter)
 
         # Tree widget
-        self.obj_tree = widgets.TreeView()
-        self.obj_tree.setRootIsDecorated(True)
-        self.obj_tree.setAlternatingRowColors(True)
+        self.obj_tree = widgets.TreeView(
+            root_is_decorated=True, selection_behavior="rows"
+        )
         self.obj_tree.set_model(self._proxy_tree_model)
-        self.obj_tree.set_selection_behaviour("rows")
-        self.obj_tree.setUniformRowHeights(True)
-        self.obj_tree.setAnimated(True)
 
         # Stretch last column?
         # It doesn't play nice when columns are hidden and then shown again.
@@ -166,9 +163,7 @@ class ObjectBrowser(widgets.MainWindow):
         font.setFixedPitch(True)
         # font.setPointSize(14)
 
-        self.editor = widgets.PlainTextEdit()
-        self.editor.setReadOnly(True)
-        self.editor.setFont(font)
+        self.editor = widgets.PlainTextEdit(read_only=True, font=font)
         group_box.box.addWidget(self.editor)
 
         # Splitter parameters
@@ -183,12 +178,12 @@ class ObjectBrowser(widgets.MainWindow):
         menubar = self.menuBar()
         file_menu = menubar.add_menu("&File")
         close_action = gui.Action(
-            text="C&lose", callback=self.close, shortcut="Ctrl+W", parent=file_menu
+            text="C&lose", triggered=self.close, shortcut="Ctrl+W", parent=file_menu
         )
         file_menu.addAction(close_action)
         exit_action = gui.Action(
             text="E&xit",
-            callback=lambda: widgets.app().closeAllWindows(),
+            triggered=lambda: widgets.app().closeAllWindows(),
             shortcut="Ctrl+Q",
             parent=file_menu,
         )
@@ -197,7 +192,7 @@ class ObjectBrowser(widgets.MainWindow):
         view_menu = menubar.add_menu("&View")
         refresh_action = gui.Action(
             text="&Refresh",
-            callback=self._tree_model.refresh_tree,
+            triggered=self._tree_model.refresh_tree,
             shortcut="Ctrl+R",
         )
         view_menu.addAction(refresh_action)
@@ -353,9 +348,7 @@ class ObjectBrowser(widgets.MainWindow):
 
         The *args and **kwargs will be passed to the ObjectBrowser constructor.
         """
-        cls.app = widgets.app()  # keeping reference to prevent garbage collection.
-        cls.app.setOrganizationName("phil65")
-        cls.app.setApplicationName("PrettyQt")
+        cls.app = widgets.app(organization_name="phil65", application_name="Prettyqt")  # keeping reference to prevent garbage collection.
         object_browser = cls(*args, **kwargs)
         object_browser.show()
         object_browser.raise_()
@@ -366,8 +359,5 @@ if __name__ == "__main__":
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     struct = dict(a={1, 2, frozenset([1, 2])})
     app = widgets.app()  # keeping reference to prevent garbage collection.
-    app.setOrganizationName("phil65")
-    app.setApplicationName("PrettyQt")
-    object_browser = ObjectBrowser(struct)
-    object_browser.show()
-    app.main_loop()
+    object_browser = ObjectBrowser.browse(struct)
+

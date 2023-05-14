@@ -74,11 +74,11 @@ class MenuMixin(widgets.WidgetMixin):
         if text is None:
             separator.setSeparator(True)
         else:
-            label = widgets.Label(text)
-            label.setMinimumWidth(self.minimumWidth())
+            label = widgets.Label(
+                text, minimum_width=self.minimumWidth(), alignment="center"
+            )
             with label.edit_stylesheet() as ss:
                 ss.background.setValue("lightgrey")
-            label.set_alignment(horizontal="center")
             separator.setDefaultWidget(label)
             separator.setEnabled(False)
         self.add(separator)
@@ -86,7 +86,7 @@ class MenuMixin(widgets.WidgetMixin):
 
     def add_menu(self, menu: QtWidgets.QMenu) -> QtGui.QAction:
         action = menu.menuAction()
-        self.addAction(action)
+        super().addAction(action)
         return action
 
 

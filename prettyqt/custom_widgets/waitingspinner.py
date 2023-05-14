@@ -64,39 +64,40 @@ class BaseWaitingSpinner(widgets.Widget):
         # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
 
     def paintEvent(self, event):
-        painter = gui.Painter(self)
-        painter.fill_rect(self.rect(), "transparent")
-        painter.use_antialiasing()
+        with gui.Painter(self) as painter:
+            painter.fill_rect(self.rect(), "transparent")
+            painter.use_antialiasing()
 
-        if self._current_counter >= self._line_num:
-            self._current_counter = 0
+            if self._current_counter >= self._line_num:
+                self._current_counter = 0
 
-        painter.set_pen(style="none")
-        painter.translate(
-            self._inner_radius + self._line_length, self._inner_radius + self._line_length
-        )
-        for i in range(self._line_num):
-            with painter.backup_state():
-                rotate_angle = 360 * i / self._line_num
-                painter.rotate(rotate_angle)
-                painter.translate(self._inner_radius, 0)
-                distance = self._linecount_distance_from_primary(
-                    i, self._current_counter, self._line_num
-                )
-                color = self._current_line_color(
-                    distance,
-                    self._line_num,
-                    self._trail_fade_percentage,
-                    self._minimum_trail_opacity,
-                    self._color,
-                )
-                painter.setBrush(color)
-                painter.draw_rounded_rect(
-                    (0, -self._line_width / 2, self._line_length, self._line_width),
-                    self._roundness,
-                    self._roundness,
-                    relative=True,
-                )
+            painter.set_pen(style="none")
+            painter.translate(
+                self._inner_radius + self._line_length,
+                self._inner_radius + self._line_length,
+            )
+            for i in range(self._line_num):
+                with painter.backup_state():
+                    rotate_angle = 360 * i / self._line_num
+                    painter.rotate(rotate_angle)
+                    painter.translate(self._inner_radius, 0)
+                    distance = self._linecount_distance_from_primary(
+                        i, self._current_counter, self._line_num
+                    )
+                    color = self._current_line_color(
+                        distance,
+                        self._line_num,
+                        self._trail_fade_percentage,
+                        self._minimum_trail_opacity,
+                        self._color,
+                    )
+                    painter.setBrush(color)
+                    painter.draw_rounded_rect(
+                        (0, -self._line_width / 2, self._line_length, self._line_width),
+                        self._roundness,
+                        self._roundness,
+                        relative=True,
+                    )
 
     def start(self):
         self.show()

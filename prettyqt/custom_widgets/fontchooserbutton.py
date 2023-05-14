@@ -1,27 +1,22 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
 class FontChooserButton(widgets.Widget):
     value_changed = core.Signal(gui.Font)
 
-    def __init__(
-        self,
-        font: QtGui.QFont | None = None,
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        super().__init__(parent)
-        self._current_font = font or QtGui.QFont()
+    def __init__(self, font: QtGui.QFont | str | None = None, **kwargs):
+        super().__init__(**kwargs)
+        self._current_font = None
+        self.set_current_font(font)
         layout = widgets.HBoxLayout(self)
         layout.set_margin(0)
-        self.lineedit = widgets.LineEdit()
-        self.lineedit.set_read_only()
+        self.lineedit = widgets.LineEdit(read_only=True)
         layout.add(self.lineedit)
-        action = gui.Action(icon="mdi.format-font")
-        action.triggered.connect(self.choose_font)
+        action = gui.Action(icon="mdi.format-font", triggered=self.choose_font)
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
         layout.add(self.button)
@@ -39,8 +34,14 @@ class FontChooserButton(widgets.Widget):
             self.set_current_font(dlg.current_font())
             self.value_changed.emit(dlg.current_font())
 
-    def set_current_font(self, font: str | QtGui.QFont):
-        self._current_font = gui.Font(font) if isinstance(font, str) else font
+    def set_current_font(self, font: str | QtGui.QFont | None):
+        match font:
+            case str():
+                self._current_font = gui.Font(font)
+            case None:
+                self._current_font = gui.Font()
+            case _:
+                self._current_font = font
         self.lineedit.setText(self._current_font.family())
 
     def set_value(self, value: str | QtGui.QFont):

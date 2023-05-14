@@ -13,15 +13,6 @@ class GroupBox(widgets.WidgetMixin, QtWidgets.QGroupBox):
     The keyboard shortcut moves keyboard focus to one of the group box's child widgets.
     """
 
-    def __init__(
-        self,
-        title: str = "",
-        checkable: bool = False,
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        super().__init__(title, parent)
-        self.setCheckable(checkable)
-
     def __repr__(self):
         return get_repr(self, self.title())
 

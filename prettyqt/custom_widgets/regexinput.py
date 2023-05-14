@@ -11,7 +11,6 @@ except ImportError:  # Python < 3.11
 import regex as re
 
 from prettyqt import core, custom_widgets, widgets
-from prettyqt.qt import QtWidgets
 
 
 MAP = dict(
@@ -26,13 +25,8 @@ MAP = dict(
 class RegexInput(widgets.Widget):
     value_changed = core.Signal(object)
 
-    def __init__(
-        self,
-        show_flags: bool = True,
-        show_error: bool = True,
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        super().__init__(parent=parent)
+    def __init__(self, show_flags: bool = True, show_error: bool = True, **kwargs):
+        super().__init__(**kwargs)
         self.set_layout("grid", margin=0)
         self.set_margin(0)
         self.label_error = widgets.Label()

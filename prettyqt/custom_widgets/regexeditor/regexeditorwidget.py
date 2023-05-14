@@ -28,41 +28,31 @@ class RegexEditorWidget(widgets.Widget):
         teststring: str = "",
         parent: QtWidgets.QWidget | None = None,
     ):
-        super().__init__(parent)
+        super().__init__(window_icon="mdi.regex", window_title=title, parent=parent)
         self.resize(1200, 800)
-        self.set_title(title)
-        self.set_icon("mdi.regex")
-        self.set_layout("horizontal")
-        left_layout = widgets.VBoxLayout()
-        right_layout = widgets.VBoxLayout()
         self.prog: Pattern | None = None
         self.matches: list[Match] = []
         groupbox = widgets.GroupBox(title="Regular expression")
         grid = widgets.GridLayout(groupbox)
         layout_toprow = widgets.HBoxLayout()
-        self.regexinput = custom_widgets.RegexInput()
-        self.regexinput.set_min_size(400, 0)
+        self.regexinput = custom_widgets.RegexInput(minimum_width=400)
         layout_toprow.add(self.regexinput)
-        grid.add(layout_toprow, 1, 0)
-        left_layout.add(groupbox)
+        grid[1, 0] = layout_toprow
         groupbox_teststring = widgets.GroupBox(title="Test strings")
         groupbox_teststring.set_layout("grid")
-        self.textedit_teststring = widgets.PlainTextEdit(teststring)
-        self.textedit_teststring.set_min_size(400, 0)
-        groupbox_teststring.box.add(self.textedit_teststring, 0, 0)
+        self.textedit_teststring = widgets.PlainTextEdit(teststring, minimum_width=400)
+        groupbox_teststring.box[0, 0] = self.textedit_teststring
         self.label_num_matches = widgets.Label("No match", alignment="center")
-        left_layout.add(groupbox_teststring)
         groupbox_sub = widgets.GroupBox(title="Substitution", checkable=True)
         layout_sub = widgets.GridLayout(groupbox_sub)
         self.lineedit_sub = widgets.LineEdit()
         self.lineedit_sub.textChanged.connect(self.update_sub_textedit)
-        self.textedit_sub = widgets.PlainTextEdit(read_only=True)
-        self.textedit_sub.set_min_size(400, 0)
+        self.textedit_sub = widgets.PlainTextEdit(read_only=True, minimum_width=400)
         layout_sub[0, 0] = self.lineedit_sub
         layout_sub[1, 0] = self.textedit_sub
-        left_layout.add(groupbox_sub)
-        self.cb_quickref = widgets.CheckBox("Show Regular Expression Quick Reference")
-        left_layout.add(self.cb_quickref)
+        self.cb_quickref = widgets.CheckBox(
+            "Show Regular Expression Quick Reference", checked=True
+        )
         self.table_matches = widgets.TableView()
         self.table_matches.setup_list_style()
         self.textedit_quickref = widgets.TextEdit(
@@ -71,11 +61,16 @@ class RegexEditorWidget(widgets.Widget):
             object_name="textedit_quickref",
             html=(pathlib.Path(__file__).parent / "ref.html").read_text(),
         )
-        self.box.add(left_layout)
-        self.box.add(right_layout)
-        self.box.add(self.textedit_quickref)
-        right_layout.add(self.label_num_matches)
-        right_layout.add(self.table_matches)
+        with widgets.HBoxLayout.create(self) as layout:
+            with layout.get_sub_layout("vertical") as layout:
+                layout.add(groupbox)
+                layout.add(groupbox_teststring)
+                layout.add(groupbox_sub)
+                layout.add(self.cb_quickref)
+            with layout.get_sub_layout("vertical") as layout:
+                layout.add(self.label_num_matches)
+                layout.add(self.table_matches)
+            layout.add(self.textedit_quickref)
         model = custom_models.RegexMatchesModel()
         self.table_matches.set_model(model)
         self.table_matches.setColumnWidth(0, 60)
@@ -85,7 +80,7 @@ class RegexEditorWidget(widgets.Widget):
         doc = self.textedit_teststring.document()
         self._highlighter = RegexMatchHighlighter(doc)
         self._highlighter.rehighlight()
-        self.cb_quickref.stateChanged.connect(self.quick_ref_requested)
+        self.cb_quickref.stateChanged.connect(self.textedit_quickref.setVisible)
         self.regexinput.value_changed.connect(self._update_view)
         self.textedit_teststring.textChanged.connect(self._update_view)
         self.regexinput.pattern = regex

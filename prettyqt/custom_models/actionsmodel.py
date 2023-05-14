@@ -62,7 +62,7 @@ if __name__ == "__main__":
             shortcut="Ctrl+A",
             tool_tip="some Tooltip text",
             icon="mdi.folder",
-            callback=lambda: print("test"),
+            triggered=lambda: print("test"),
         ),
         gui.Action(
             text="this is an action",

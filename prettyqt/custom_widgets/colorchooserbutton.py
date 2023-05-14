@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes, get_repr
 
 
@@ -10,17 +10,17 @@ class ColorChooserButton(widgets.Widget):
 
     def __init__(
         self,
+        *args,
         color: datatypes.ColorType | None = None,
-        parent: QtWidgets.QWidget | None = None,
+        **kwargs,
     ):
-        super().__init__(parent)
+        super().__init__(*args, **kwargs)
         layout = widgets.HBoxLayout(self)
         layout.set_margin(0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_regex_validator(r"^#(?:[0-9a-fA-F]{6})$")
         layout.add(self.lineedit)
-        action = gui.Action(icon="mdi.format-color-fill")
-        action.triggered.connect(self.choose_color)
+        action = gui.Action(icon="mdi.format-color-fill", triggered=self.choose_color)
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)
         layout.add(self.button)

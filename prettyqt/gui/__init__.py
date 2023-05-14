@@ -149,10 +149,10 @@ from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
 
 
-def app(args: list[str] | None = None) -> GuiApplication:
+def app(args: list[str] | None = None, **kwargs) -> GuiApplication:
     if (instance := GuiApplication.instance()) is not None:
         return instance
-    return GuiApplication(sys.argv if args is None else args)
+    return GuiApplication(sys.argv if args is None else args, **kwargs)
 
 
 __all__ = [

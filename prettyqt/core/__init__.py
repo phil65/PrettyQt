@@ -170,10 +170,10 @@ def update_property_group():
     QtCore.Qt.endPropertyUpdateGroup()
 
 
-def app(args: list[str] | None = None) -> CoreApplication:
+def app(args: list[str] | None = None, **kwargs) -> CoreApplication:
     if (instance := CoreApplication.instance()) is not None:
         return instance
-    return CoreApplication(sys.argv if args is None else args)
+    return CoreApplication(sys.argv if args is None else args, **kwargs)
 
 
 __all__ = [

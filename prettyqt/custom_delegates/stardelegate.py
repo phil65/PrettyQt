@@ -65,8 +65,8 @@ class StarEditor(widgets.Widget):
 
     def paintEvent(self, event):
         """Paint the editor, offloading the work to the StarRating class."""
-        painter = gui.Painter(self)
-        self.star_rating.paint(painter, self.rect(), self.palette(), is_editable=True)
+        with gui.Painter(self) as painter:
+            self.star_rating.paint(painter, self.rect(), self.palette(), is_editable=True)
 
     def mouseMoveEvent(self, event):
         """Update stars on mouse move."""

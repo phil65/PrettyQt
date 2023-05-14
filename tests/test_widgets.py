@@ -949,7 +949,7 @@ def test_progressbar(qtbot):
 
 
 def test_pushbutton(qtbot):
-    widget = widgets.PushButton("test_pushbutton", callback=print)
+    widget = widgets.PushButton("test_pushbutton", clicked=print)
     qtbot.addWidget(widget)
     widget.set_text("test_pushbutton")
     widget.set_disabled()

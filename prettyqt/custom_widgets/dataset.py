@@ -451,11 +451,12 @@ class DataSet(metaclass=DataSetMeta):
         self.dialog_icon = icon
 
     def create_dialog(self):
-        dialog = widgets.Dialog()
-        dialog.set_modality("application")
-        dialog.setMinimumWidth(400)
-        dialog.set_title(self.dialog_title)
-        dialog.set_icon(self.dialog_icon)
+        dialog = widgets.Dialog(
+            window_modality="application",
+            minimum_width=400,
+            window_title=self.dialog_title,
+            window_icon=self.dialog_icon,
+        )
         dialog.set_layout("grid")
         dialog.box.set_spacing(10)
         dialog.box.set_margin(20)

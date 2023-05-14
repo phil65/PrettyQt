@@ -352,13 +352,10 @@ if __name__ == "__main__":
             self._cancelled = False
 
             # Build controls.
-            self.count_spin = widgets.SpinBox()
-            self.count_spin.setValue(5)
-            self.count_spin.setMinimum(1)
+            self.count_spin = widgets.SpinBox(value=5, minimum=1)
             self.progress_label = widgets.Label("Idle, click below to start downloading")
             self.download_button = widgets.PushButton("Download")
-            self.stop_button = widgets.PushButton("Stop")
-            self.stop_button.setEnabled(False)
+            self.stop_button = widgets.PushButton("Stop", enabled=False)
 
             layout = widgets.FormLayout(self)
             layout.addRow("How many cats?", self.count_spin)

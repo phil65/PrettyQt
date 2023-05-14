@@ -7,21 +7,18 @@ from prettyqt.qt import QtCore
 
 
 class AccordionItem(widgets.GroupBox):
-    def __init__(self, title, widget):
-        super().__init__(None)
+    def __init__(self, widget, **kwargs):
+        super().__init__(accept_drops=True, context_menu_policy="custom", **kwargs)
 
         # create the layout
-        layout = widgets.VBoxLayout()
+        layout = widgets.VBoxLayout(spacing=0)
         layout.set_margin(6)
-        layout.setSpacing(0)
         layout.addWidget(widget)
 
         self._rollout_style = 2
         self._drag_drop_mode = 0
 
-        self.setAcceptDrops(True)
         self.setLayout(layout)
-        self.set_context_menu_policy("custom")
         self.customContextMenuRequested.connect(self.show_menu)
 
         # create custom properties
@@ -29,9 +26,6 @@ class AccordionItem(widgets.GroupBox):
         self._collapsed = False
         self._collapsible = True
         self._clicked = False
-
-        # set common properties
-        self.setTitle(title)
 
     def dragEnterEvent(self, event):
         if not self._drag_drop_mode:
@@ -393,13 +387,16 @@ class AccordionWidget(widgets.ScrollArea):
         NoDragDrop = 0
         InternalMove = 1
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(
+            *args,
+            auto_fill_background=False,
+            widget_resizable=True,
+            mouse_tracking=True,
+            frame_shape="no_frame",
+            **kwargs,
+        )
 
-        self.setFrameShape(widgets.ScrollArea.Shape.NoFrame)
-        self.setAutoFillBackground(False)
-        self.setWidgetResizable(True)
-        self.setMouseTracking(True)
         # self.verticalScrollBar().setMaximumWidth(10)
 
         widget = widgets.Widget(self)
@@ -433,7 +430,7 @@ class AccordionWidget(widgets.ScrollArea):
         index: object = None,
     ) -> object:
         with self.updates_off():
-            item = self._ItemClass(title, widget)
+            item = self._ItemClass(widget, title=title)
             item.set_rollout_style(self.get_rollout_style())
             item.set_drag_drop_mode(self.get_drag_drop_mode())
             layout = self.widget().layout()
@@ -619,9 +616,9 @@ class AccordionWidget(widgets.ScrollArea):
 if __name__ == "__main__":
     app = widgets.app()
     widget = AccordionWidget()
-    item = AccordionItem("hallo", widgets.LineEdit("test"))
-    widget.addItem("tsektjk", AccordionItem("hallo", widgets.LineEdit("test")))
-    widget.addItem("tsektjk", AccordionItem("hallo", widgets.LineEdit("test")))
+    item = AccordionItem(widgets.LineEdit("test"), title="hallo")
+    widget.addItem("tsektjk", AccordionItem(widgets.LineEdit("test"), title="hallo"))
+    widget.addItem("tsektjk", AccordionItem(widgets.LineEdit("test"), title="hallo"))
     widget.addItem("tsektjk", item)
     widget.addItem("tsektjk", item)
     widget.show()
