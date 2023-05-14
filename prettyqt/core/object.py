@@ -50,6 +50,7 @@ class ObjectMixin:
                 if (i := CAMEL_TO_SNAKE.sub("_", k).lower()) in kwargs
             }
         super().__init__(*args, **kwargs)
+        # convert str arguments to Enum
         to_set = {
             k: BIDICT[v] if prop_name == k and isinstance(v, str) else v
             for k, v in to_set.items()
@@ -120,8 +121,8 @@ class ObjectMixin:
     def get_static_metaobject(cls) -> core.MetaObject:
         return core.MetaObject(cls.staticMetaObject)
 
-    def get_metaobject(cls) -> core.MetaObject:
-        return core.MetaObject(cls.metaObject())
+    def get_metaobject(self) -> core.MetaObject:
+        return core.MetaObject(self.metaObject())
 
     # @property
     # def id(self) -> str:
@@ -167,10 +168,11 @@ class ObjectMixin:
 
     def start_timer(
         self, interval: int | str, timer_type: constants.TimerTypeStr = "coarse"
-    ) -> int:
+    ) -> int | None:
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
-        return self.startTimer(interval, constants.TIMER_TYPE[timer_type])
+        result = self.startTimer(interval, constants.TIMER_TYPE[timer_type])
+        return None if result == 0 else result
 
     def get_properties(
         self, include_super: bool = True, cast: bool = True
