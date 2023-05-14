@@ -5,15 +5,12 @@ import contextlib
 
 # import inspect
 import itertools
-import re
 from typing import Any, TypeVar
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
 
-
-CAMEL_TO_SNAKE = re.compile(r"(?<!^)(?=[A-Z])")
 
 T = TypeVar("T", bound=QtCore.QObject)
 
@@ -24,39 +21,16 @@ class ObjectMixin:
     Properties: dict[type, list[str]] = {}
 
     def __init__(self, *args, **kwargs):
-        # first we check whether any kwarg matches a snake-cased property name of our
-        # class by querying the metaobject. Result is cached in class
-        # Attribute "Properties".(This gets called for all (Q)Objects, so
-        # bit more complexity is probably worth it here.
-        # These get filtered out and saved in a dict, only the "rest" is passed to super.
-        # After __init__, we then set the properties.
-        # This allows to use any snake cased property names as (Q)Object Ctor kwargs.
-        # Example: my_widget = widgets.Widget(focus=True, status_tip="Status")
-        # The mechanism can be expanded by subclasses by implementing _get_map to also
-        # allow string kwargs for stuff which usually expects Enum.
-        to_set = {}
+        # this allows snake_case property and signal names in ctor.
         if kwargs:
-            metaobj = self.get_static_metaobject()
-            if type(self) not in self.__class__.Properties:
-                props = [
-                    prop.name() for prop in metaobj.get_properties(include_super=True)
-                ]
-                self.__class__.Properties[type(self)] = props
-            else:
-                props = self.__class__.Properties[type(self)]
-            to_set = {
-                k: kwargs.pop(i)
-                for k in props
-                if (i := CAMEL_TO_SNAKE.sub("_", k).lower()) in kwargs
+            mapper = self._get_map()
+            kwargs = {
+                helpers.to_lower_camel(k): mapper[camel_k][v]
+                if (camel_k := helpers.to_lower_camel(k)) in mapper and isinstance(v, str)
+                else v
+                for k, v in kwargs.items()
             }
         super().__init__(*args, **kwargs)
-        # convert str arguments to Enum
-        to_set = {
-            k: BIDICT[v] if prop_name == k and isinstance(v, str) else v
-            for k, v in to_set.items()
-            for prop_name, BIDICT in self._get_map().items()
-        }
-        self.set_properties(to_set)
 
     def _get_map(self):
         """Can be implemented by subclasses to support str -> Enum conversion.

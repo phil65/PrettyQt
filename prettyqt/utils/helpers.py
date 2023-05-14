@@ -43,6 +43,11 @@ def parse_time(time_str: str) -> int:
     return int(secs * 1000)
 
 
+def to_lower_camel(snake_str: str) -> str:
+    first, *others = snake_str.split("_")
+    return "".join([first.lower(), *map(str.title, others)])
+
+
 def string_to_num_array(array: str) -> list[float]:
     floats = [float(i) for i in array.split(",")]
     return [int(i) if i.is_integer() else i for i in floats]
