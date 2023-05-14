@@ -20,6 +20,12 @@ class bidict(bdct.bidict):
         else:
             super().__init__(kwargs)
 
+    def __getitem__(self, item):
+        try:
+            return super().__getitem__(item)
+        except KeyError as e:
+            raise InvalidParamError(item, list(self.keys())) from e
+
     def get_list(self, flag: int | enum.Enum) -> list[Any]:
         if isinstance(flag, enum.Enum):
             flag = flag.value
