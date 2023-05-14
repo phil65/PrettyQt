@@ -52,6 +52,12 @@ class ObjectMixin:
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
+    def __getattr__(self, val):
+        cameled = helpers.to_lower_camel(val)
+        if cameled in dir(self):
+            return getattr(self, cameled)
+        raise AttributeError(val)
+
     def serialize_fields(self):
         return dict(object_name=self.objectName())
 
