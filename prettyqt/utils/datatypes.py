@@ -8,8 +8,8 @@ from typing import TYPE_CHECKING, Any, Protocol, Union
 
 def make_serializable(obj):
     #  possible to avoid importing by checking the metaobject instead of isinstance?
-    from prettyqt import core, gui, widgets
-    from prettyqt.qt import QtCore, QtGui, QtWidgets
+    from prettyqt import core
+    from prettyqt.qt import QtCore
 
     match obj:
         case QtCore.QMargins():
@@ -22,6 +22,13 @@ def make_serializable(obj):
             return core.Url(obj)
         case QtCore.QEasingCurve():
             return core.EasingCurve(obj)
+        case list():
+            return [make_serializable(i) for i in obj]
+
+    from prettyqt import gui
+    from prettyqt.qt import QtGui
+
+    match obj:
         case QtGui.QPalette():
             return gui.Palette(obj)
         case QtGui.QFont():
@@ -44,13 +51,16 @@ def make_serializable(obj):
         case QtGui.QVector4D():
             # PyQt doesnt allow Vector4D in ctor
             return gui.Vector4D(obj.x(), obj.y(), obj.z(), obj.w())
-        case QtWidgets.QSizePolicy():
-            return widgets.SizePolicy.clone(obj)
-        case list():
-            return [make_serializable(i) for i in obj]
         case QtGui.QTextDocument():
             # TODO: cant serialize this yet
             return None
+
+    from prettyqt import widgets
+    from prettyqt.qt import QtWidgets
+
+    match obj:
+        case QtWidgets.QSizePolicy():
+            return widgets.SizePolicy.clone(obj)
         case _:
             return obj
 
@@ -75,6 +85,7 @@ if TYPE_CHECKING:
     TimeType = Union[QtCore.QTime, datetime.time, str]
     DateType = Union[QtCore.QDate, datetime.date, str]
     DateTimeType = Union[QtCore.QDateTime, datetime.datetime, str]
+    # ContainerType = Union[widgets.Layout, widgets.Splitter]
     TransformType = Union[
         QtGui.QTransform,
         tuple[float, float, float, float, float, float, float, float, float],
