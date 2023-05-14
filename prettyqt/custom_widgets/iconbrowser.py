@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import sys
 
-from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt import constants, core, custom_models, iconprovider, widgets
+from prettyqt.qt import QtGui
 
 
 # TODO: Set icon colour and copy code with color kwarg
@@ -36,7 +36,7 @@ class IconBrowser(widgets.MainWindow):
         model = IconModel(self.get_palette().get_color("text"))
         model.setStringList(sorted(icon_names))
 
-        self._proxy_model = core.SortFilterProxyModel()
+        self._proxy_model = custom_models.FuzzyFilterProxyModel()
         self._proxy_model.setSourceModel(model)
         self._proxy_model.set_filter_case_sensitive(True)
 
@@ -102,8 +102,8 @@ class IconBrowser(widgets.MainWindow):
 class IconListView(widgets.ListView):
     """A QListView that scales its grid size to always show same amount of items."""
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.set_vertical_scrollbar_policy("always_on")
         self.VIEW_COLUMNS = 5
 
@@ -121,7 +121,7 @@ class IconListView(widgets.ListView):
         return super().resizeEvent(event)
 
 
-class IconModel(core.StringListModel):
+class IconModel(custom_models.FuzzyFilterModelMixin, core.StringListModel):
     def __init__(self, icon_color: QtGui.QColor):
         super().__init__()
         self._icon_color = icon_color
