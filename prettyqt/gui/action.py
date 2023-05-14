@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, prettyprinter
+from prettyqt.utils import bidict, datatypes, get_repr, prettyprinter
 
 
 PRIORITIES = bidict(
@@ -58,6 +58,9 @@ class ActionMixin(core.ObjectMixin):
             self.set_icon(icon)
         self.triggered.connect(self._increase_usage_counter)
 
+    def __repr__(self) -> str:
+        return get_repr(self, self.text())
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {
@@ -73,9 +76,6 @@ class ActionMixin(core.ObjectMixin):
     def get_usage_count(self) -> int:
         return self._usage_count
 
-    def __repr__(self) -> str:
-        return get_repr(self, self.text())
-
     def get_type(self) -> Literal["menu", "separator", "widget", "regular"]:
         if self.menu() is not None:
             return "menu"
@@ -86,14 +86,11 @@ class ActionMixin(core.ObjectMixin):
         else:
             return "regular"
 
-    def set_text(self, text: str):
-        self.setText(text)
+    def set_disabled(self):
+        self.setEnabled(False)
 
     def set_enabled(self, enabled: bool = True):
         self.setEnabled(enabled)
-
-    def set_disabled(self):
-        self.setEnabled(False)
 
     def set_tooltip(
         self,
@@ -109,16 +106,9 @@ class ActionMixin(core.ObjectMixin):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         tooltip = tooltip.replace("\n", "<br/>")
-        self.setToolTip(tooltip)
+        super().setToolTip(tooltip)
 
-    def set_statustip(self, text: str):
-        self.setStatusTip(text)
-
-    def set_checked(self, value: bool):
-        self.setChecked(value)
-
-    def set_checkable(self, value: bool):
-        self.setCheckable(value)
+    setToolTip = set_tooltip
 
     def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
@@ -127,11 +117,9 @@ class ActionMixin(core.ObjectMixin):
             icon: icon to use
         """
         icon = iconprovider.get_icon(icon)
-        self.setIcon(icon)
+        super().setIcon(icon)
 
-    def get_icon(self) -> gui.Icon | None:
-        icon = self.icon()
-        return None if icon.isNull() else gui.Icon(icon)
+    setIcon = set_icon
 
     def set_shortcut(self, shortcut: None | QtGui.QKeySequence | str):
         if shortcut is None:
@@ -140,7 +128,13 @@ class ActionMixin(core.ObjectMixin):
             shortcut = gui.KeySequence(
                 shortcut, gui.KeySequence.SequenceFormat.PortableText
             )
-        self.setShortcut(shortcut)
+        super().setShortcut(shortcut)
+
+    setShortcut = set_shortcut
+
+    def get_icon(self) -> gui.Icon | None:
+        icon = self.icon()
+        return None if icon.isNull() else gui.Icon(icon)
 
     def get_shortcut(self) -> gui.KeySequence | None:
         shortcut = self.shortcut()
@@ -165,7 +159,7 @@ class ActionMixin(core.ObjectMixin):
     def menu(self):
         return self._menu
 
-    def set_priority(self, priority: PriorityStr):
+    def set_priority(self, priority: PriorityStr | QtGui.QAction.Priority):
         """Set priority of the action.
 
         Args:
@@ -174,9 +168,11 @@ class ActionMixin(core.ObjectMixin):
         Raises:
             InvalidParamError: priority does not exist
         """
-        if priority not in PRIORITIES:
-            raise InvalidParamError(priority, PRIORITIES)
-        self.setPriority(PRIORITIES[priority])
+        if isinstance(priority, str):
+            priority = PRIORITIES[priority]
+        super().setPriority(priority)
+
+    setPriority = set_priority
 
     def get_priority(self) -> PriorityStr:
         """Return current priority.
@@ -186,7 +182,9 @@ class ActionMixin(core.ObjectMixin):
         """
         return PRIORITIES.inverse[self.priority()]
 
-    def set_shortcut_context(self, context: constants.ShortcutContextStr):
+    def set_shortcut_context(
+        self, context: constants.ShortcutContextStr | QtCore.Qt.ShortcutContext
+    ):
         """Set shortcut context.
 
         Args:
@@ -195,9 +193,11 @@ class ActionMixin(core.ObjectMixin):
         Raises:
             InvalidParamError: shortcut context does not exist
         """
-        if context not in constants.SHORTCUT_CONTEXT:
-            raise InvalidParamError(context, constants.SHORTCUT_CONTEXT)
-        self.setShortcutContext(constants.SHORTCUT_CONTEXT[context])
+        if isinstance(context, str):
+            context = constants.SHORTCUT_CONTEXT[context]
+        super().setShortcutContext(context)
+
+    setShortcutContext = set_shortcut_context
 
     def get_shortcut_context(self) -> constants.ShortcutContextStr:
         """Return shortcut context.
@@ -205,7 +205,7 @@ class ActionMixin(core.ObjectMixin):
         Returns:
             shortcut context
         """
-        return constants.SHORTCUT_CONTEXT.inverse[self.shortcutContext()]
+        return constants.SHORTCUT_CONTEXT.inverse[super().shortcutContext()]
 
     def set_menu_role(self, role: RoleStr):
         """Set menu role.
@@ -216,9 +216,11 @@ class ActionMixin(core.ObjectMixin):
         Raises:
             InvalidParamError: menu role does not exist
         """
-        if role not in ROLES:
-            raise InvalidParamError(role, ROLES)
-        self.setMenuRole(ROLES[role])
+        if isinstance(role, str):
+            role = ROLES[role]
+        super().setMenuRole(role)
+
+    setMenuRole = set_menu_role
 
     def get_menu_role(self) -> RoleStr:
         """Return menu role.
@@ -226,7 +228,7 @@ class ActionMixin(core.ObjectMixin):
         Returns:
             menu role
         """
-        return ROLES.inverse[self.menuRole()]
+        return ROLES.inverse[super().menuRole()]
 
     def show_shortcut_in_contextmenu(self, state: bool = True):
         self.setShortcutVisibleInContextMenu(state)
@@ -242,4 +244,4 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    action = Action(text="This is a test")
+    action = Action(text="This is a test", shortcut=None)
