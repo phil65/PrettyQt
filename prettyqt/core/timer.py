@@ -10,12 +10,10 @@ from prettyqt.utils import InvalidParamError, helpers
 
 
 class Timer(core.ObjectMixin, QtCore.QTimer):
-    def serialize_fields(self):
-        return dict(
-            interval=self.interval(),
-            single_shot=self.isSingleShot(),
-            timer_type=self.get_type(),
-        )
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"timerType": constants.TIMER_TYPE}
+        return maps
 
     @classmethod
     def single_shot(cls, callback: Callable) -> Self:
