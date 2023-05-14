@@ -6,7 +6,6 @@ import enum
 from typing import TypeVar
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import get_repr
 
 
@@ -14,18 +13,6 @@ EnumType = TypeVar("EnumType", bound=enum.Enum)
 
 
 NONE_STRING = "----"
-
-
-def _get_name(enum_value: enum.Enum):
-    """Create human readable name if user does not implement `__str__`."""
-    if (
-        enum_value.__str__.__module__ != "enum"
-        and not enum_value.__str__.__module__.startswith("shibokensupport")
-    ):
-        # check if function was overloaded
-        return str(enum_value)
-    else:
-        return enum_value.name.replace("_", " ")
 
 
 class EnumComboBox(widgets.ComboBox):
@@ -37,30 +24,27 @@ class EnumComboBox(widgets.ComboBox):
 
     # current_enum_changed = core.Signal(object)
 
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-        enum_class: enum.EnumMeta | None = None,
-        allow_none: bool = False,
-    ):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
         self._enum_class = None
         self._allow_none = False
-        if enum_class is not None:
-            self.set_enum_class(enum_class, allow_none)
+        super().__init__(*args, **kwargs)
         # self.currentIndexChanged.connect(self._emit_signal)
 
     def __repr__(self):
         return get_repr(self, enum_class=self._enum_class, allow_none=self._allow_none)
 
-    def set_enum_class(self, enum: enum.EnumMeta | None, allow_none: bool = False):
+    def set_allow_none(self, value: bool):
+        self._allow_none = value
+
+    def is_none_allowed(self) -> bool:
+        return self._allow_none
+
+    def set_enum_class(self, enum: enum.EnumMeta | None):
         """Set enum class from which members value should be selected."""
-        self.clear()
         self._enum_class = enum
-        self._allow_none = allow_none and enum is not None
-        if allow_none:
+        if self._allow_none and enum is not None:
             super().addItem(NONE_STRING)
-        items = [_get_name(i) for i in self._enum_class.__members__.values()]
+        items = [i.name.replace("_", " ") for i in self._enum_class.__members__.values()]
         super().addItems(items)
 
     def get_enum_class(self) -> enum.EnumMeta | None:
@@ -98,7 +82,7 @@ class EnumComboBox(widgets.ComboBox):
                 "setValue(self, Enum): argument 1 has unexpected type "
                 f"{type(value).__name__!r}"
             )
-        self.setCurrentText(_get_name(value))
+        self.setCurrentText(value.name.replace("_", " "))
 
     # def _emit_signal(self):
     #     if self._enum_class is not None:
@@ -119,14 +103,16 @@ class EnumComboBox(widgets.ComboBox):
     def setInsertPolicy(self, policy):
         raise RuntimeError("EnumComboBox does not allow to insert item")
 
-    enum_value = core.Property(enum.Enum, get_value, set_value, user=True)
+    allowNone = core.Property(bool, is_none_allowed, set_allow_none, user=True)
+    enumValue = core.Property(enum.Enum, get_value, set_value, user=True)
+    enumClass = core.Property(type(enum.Enum), get_enum_class, set_enum_class, user=True)
 
 
 if __name__ == "__main__":
     from prettyqt.qt import QtCore
 
     app = widgets.app()
-    cb = EnumComboBox()
+    cb = EnumComboBox(allow_none=False, enum_class=QtCore.Qt.ItemDataRole)
     cb.set_enum_class(QtCore.Qt.ItemDataRole)
     cb.set_value(QtCore.Qt.ItemDataRole.EditRole)
     cb.show()
