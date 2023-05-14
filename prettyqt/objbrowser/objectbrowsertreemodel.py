@@ -239,12 +239,9 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
     """Proxy model that overrides the sorting and can filter out items."""
 
     def __init__(
-        self,
-        show_callable_attrs: bool = True,
-        show_special_attrs: bool = True,
-        parent=None,
+        self, show_callable_attrs: bool = True, show_special_attrs: bool = True, **kwargs
     ):
-        super().__init__(parent)
+        super().__init__(**kwargs)
 
         self._show_callables = show_callable_attrs
         self._show_special_attrs = show_special_attrs

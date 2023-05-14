@@ -7,25 +7,29 @@ from prettyqt.qt import QtWidgets
 class SpinBox(widgets.AbstractSpinBoxMixin, QtWidgets.QSpinBox):
     value_changed = core.Signal(int)
 
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-        min_value: int | None = None,
-        max_value: int | None = None,
-        default_value: int | None = None,
-    ):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.valueChanged.connect(self.value_changed)
-        self.set_range(min_value, max_value)
-        if default_value is not None:
-            self.set_value(default_value)
 
     def set_range(self, start: int | None, end: int | None):
-        if start is None:
-            start = -2147483647
-        if end is None:
-            end = 2147483647
-        self.setRange(start, end)
+        self.setMinimum(start)
+        self.setMaximum(end)
+
+    setRange = set_range
+
+    def set_minimum(self, value: int | None):
+        if value is None:
+            value = -2147483647
+        super().setMinimum(value)
+
+    setMinimum = set_minimum
+
+    def set_maximum(self, value: int | None):
+        if value is None:
+            value = 2147483647
+        super().setMaximum(value)
+
+    setMaximum = set_maximum
 
     def set_step_size(self, step_size):
         self.setSingleStep(step_size)

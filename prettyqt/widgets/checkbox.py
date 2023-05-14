@@ -8,15 +8,9 @@ from prettyqt.utils import InvalidParamError
 class CheckBox(widgets.AbstractButtonMixin, QtWidgets.QCheckBox):
     value_changed = core.Signal(int)
 
-    def __init__(
-        self,
-        label: str = "",
-        parent: QtWidgets.QWidget | None = None,
-        checked: bool = False,
-    ):
-        super().__init__(label, parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.stateChanged.connect(self.value_changed)
-        self.setChecked(checked)
 
     def set_checkstate(self, state: constants.StateStr):
         """Set checkstate of the checkbox.

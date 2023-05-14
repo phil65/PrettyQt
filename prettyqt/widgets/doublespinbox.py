@@ -7,25 +7,29 @@ from prettyqt.qt import QtWidgets
 class DoubleSpinBox(widgets.AbstractSpinBoxMixin, QtWidgets.QDoubleSpinBox):
     value_changed = core.Signal(float)
 
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-        min_value: float | None = None,
-        max_value: float | None = None,
-        default_value: float | None = None,
-    ):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.valueChanged.connect(self.value_changed)
-        self.set_range(min_value, max_value)
-        if default_value is not None:
-            self.set_value(default_value)
 
-    def set_range(self, start: float | None, end: float | None):
-        if start is None:
-            start = -float("inf")
-        if end is None:
-            end = float("inf")
-        self.setRange(start, end)
+    def set_range(self, start: int | None, end: int | None):
+        self.setMinimum(start)
+        self.setMaximum(end)
+
+    setRange = set_range
+
+    def set_minimum(self, value: int | None):
+        if value is None:
+            value = -float("inf")
+        super().setMinimum(value)
+
+    setMinimum = set_minimum
+
+    def set_maximum(self, value: int | None):
+        if value is None:
+            value = float("inf")
+        super().setMaximum(value)
+
+    setMaximum = set_maximum
 
 
 if __name__ == "__main__":

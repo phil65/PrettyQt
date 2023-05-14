@@ -68,16 +68,14 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         title: str = "",
         label: str = "",
         icon: datatypes.IconType = None,
-        default_value: str = "",
+        value: str = "",
         echo_mode: widgets.lineedit.EchoModeStr = "normal",
     ) -> str | None:
         par = widgets.Dialog()
         par.set_icon(icon)
         if echo_mode not in widgets.lineedit.ECHO_MODE:
             raise InvalidParamError(echo_mode, widgets.lineedit.ECHO_MODE)
-        v = cls.getText(
-            par, title, label, widgets.lineedit.ECHO_MODE[echo_mode], default_value
-        )
+        v = cls.getText(par, title, label, widgets.lineedit.ECHO_MODE[echo_mode], value)
         return v[0] if v[1] else None
 
     @classmethod
