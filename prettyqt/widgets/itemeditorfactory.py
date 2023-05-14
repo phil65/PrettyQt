@@ -139,7 +139,7 @@ if __name__ == "__main__":
         table_widget.EditTrigger.DoubleClicked  # type: ignore
         | table_widget.EditTrigger.SelectedClicked
     )
-    table_widget.set_selection_behaviour("rows")
+    table_widget.set_selection_behavior("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Rating"])
     factory = ItemEditorFactory.create_extended()
     # factory = ItemEditorFactory()

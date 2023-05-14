@@ -278,7 +278,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def get_edit_triggers(self) -> list[EditTriggerStr]:
         return EDIT_TRIGGERS.get_list(self.editTriggers())
 
-    def set_selection_behaviour(self, behaviour: SelectionBehaviourStr):
+    def set_selection_behavior(self, behaviour: SelectionBehaviourStr):
         """Set selection behaviour for given item view.
 
         Args:
@@ -291,7 +291,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             raise InvalidParamError(behaviour, SELECTION_BEHAVIOR)
         self.setSelectionBehavior(SELECTION_BEHAVIOR[behaviour])
 
-    def get_selection_behaviour(self) -> SelectionBehaviourStr:
+    def get_selection_behavior(self) -> SelectionBehaviourStr:
         """Return current selection behaviour.
 
         Returns:

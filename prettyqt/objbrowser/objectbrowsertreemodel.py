@@ -290,7 +290,7 @@ if __name__ == "__main__":
     obj_tree.setRootIsDecorated(True)
     obj_tree.setAlternatingRowColors(True)
     obj_tree.set_model(model)
-    obj_tree.set_selection_behaviour("rows")
+    obj_tree.set_selection_behavior("rows")
     obj_tree.setUniformRowHeights(True)
     obj_tree.setAnimated(True)
     obj_tree.show()

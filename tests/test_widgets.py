@@ -257,7 +257,7 @@ def test_dockwidget(qtbot):
 
 
 def test_doublespinbox(qtbot):
-    widget = widgets.DoubleSpinBox(default_value=5)
+    widget = widgets.DoubleSpinBox(value=5)
     qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
@@ -1096,7 +1096,7 @@ def test_spaceritem(qtbot):
 
 
 def test_spinbox(qtbot):
-    widget = widgets.SpinBox(default_value=5)
+    widget = widgets.SpinBox(value=5)
     qtbot.addWidget(widget)
     widget.set_disabled()
     widget.set_enabled()
@@ -1328,10 +1328,10 @@ def test_tableview(qtbot):
     widget.set_selection_mode("extended")
     with pytest.raises(InvalidParamError):
         widget.set_selection_mode("test")
-    widget.set_selection_behaviour("rows")
-    assert widget.get_selection_behaviour() == "rows"
+    widget.set_selection_behavior("rows")
+    assert widget.get_selection_behavior() == "rows"
     with pytest.raises(InvalidParamError):
-        widget.set_selection_behaviour("test")
+        widget.set_selection_behavior("test")
     widget.set_horizontal_scrollbar_policy("always_on")
     widget.set_vertical_scrollbar_policy("always_on")
     widget.set_horizontal_scrollbar_width(12)
@@ -1449,7 +1449,7 @@ def test_treeview(qtbot):
     widget.current_index()
     widget.set_selection_mode("extended")
     widget.set_drag_drop_mode("drop")
-    widget.set_selection_behaviour("rows")
+    widget.set_selection_behavior("rows")
     widget.set_horizontal_scrollbar_policy("always_on")
     widget.set_vertical_scrollbar_policy("always_on")
     with pytest.raises(InvalidParamError):

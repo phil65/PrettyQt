@@ -15,7 +15,7 @@ class CompletionWidget(widgets.ListWidget):
 
         self._text_edit = textedit
         self.set_edit_triggers("none")
-        self.set_selection_behaviour("rows")
+        self.set_selection_behavior("rows")
         self.set_selection_mode("single")
 
         # We need Popup style to ensure correct mouse interaction

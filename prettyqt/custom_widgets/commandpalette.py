@@ -30,7 +30,7 @@ class CommandTable(widgets.TableView):
         self._proxy.invalidated.connect(self.select_first_row)
         self.setModel(self._proxy)
         self.set_selection_mode("single")
-        self.set_selection_behaviour("rows")
+        self.set_selection_behavior("rows")
         self.setSortingEnabled(True)
         self.pressed.connect(self._on_clicked)
         self.set_delegate(custom_delegates.HtmlItemDelegate())

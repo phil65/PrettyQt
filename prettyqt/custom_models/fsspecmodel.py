@@ -555,7 +555,7 @@ if __name__ == "__main__":
     tree.setup_dragdrop_move()
     tree.setAlternatingRowColors(True)
     tree.set_model(model)
-    tree.set_selection_behaviour("rows")
+    tree.set_selection_behavior("rows")
     tree.setUniformRowHeights(True)
     tree.setAnimated(True)
     tree.show()

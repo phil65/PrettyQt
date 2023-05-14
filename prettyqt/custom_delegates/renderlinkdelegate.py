@@ -55,7 +55,7 @@ if __name__ == "__main__":
     # Create and populate the tableWidget
     table_widget = widgets.TableWidget(4, 2)
     table_widget.set_delegate(RenderLinkDelegate(), column=1)
-    table_widget.set_selection_behaviour("rows")
+    table_widget.set_selection_behavior("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Progress"])
 
     data = [

@@ -46,7 +46,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
             model.sort = backup
 
     def setup_list_style(self):
-        self.set_selection_behaviour("rows")
+        self.set_selection_behavior("rows")
         self.h_header.setStretchLastSection(True)
         self.v_header.set_resize_mode("fixed")
         self.v_header.set_default_section_size(28)

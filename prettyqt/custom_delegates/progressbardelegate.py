@@ -32,7 +32,7 @@ if __name__ == "__main__":
         widgets.AbstractItemView.EditTrigger.DoubleClicked  # type: ignore
         | widgets.AbstractItemView.EditTrigger.SelectedClicked
     )
-    table_widget.set_selection_behaviour("rows")
+    table_widget.set_selection_behavior("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Progress"])
     item_1 = widgets.TableWidgetItem("Test1")
     item_2 = widgets.TableWidgetItem()

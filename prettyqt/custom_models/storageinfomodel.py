@@ -91,7 +91,7 @@ if __name__ == "__main__":
     model = custom_models.ColumnTableModel(volumes, COLUMNS, parent=view)
     view.setModel(model)
     view.resize(640, 480)
-    view.set_selection_behaviour("rows")
+    view.set_selection_behavior("rows")
     view.adapt_sizes()
     view.show()
     app.main_loop()
