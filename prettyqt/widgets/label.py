@@ -53,7 +53,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     def _get_map(self):
         maps = super()._get_map()
-        maps |= {"textFormat": TEXT_FORMAT}
+        maps |= {"textFormat": TEXT_FORMAT, "alignment": constants.ALIGNMENTS}
         return maps
 
     def mousePressEvent(self, e):
