@@ -40,15 +40,6 @@ class CoreApplicationMixin(core.ObjectMixin):
     def get_library_paths(cls) -> list[pathlib.Path]:
         return [pathlib.Path(i) for i in cls.libraryPaths()]
 
-    @classmethod
-    def disable_window_help_button(cls, state: bool = True):
-        try:
-            aa = QtCore.Qt.ApplicationAttribute
-            attr = aa.AA_DisableWindowContextHelpButton  # type: ignore
-            cls.setAttribute(attr, state)
-        except AttributeError:  # attribute not available in Qt6
-            pass
-
     def set_metadata(
         self,
         app_name: str | None = None,
