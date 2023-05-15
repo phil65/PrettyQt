@@ -3,6 +3,7 @@ from __future__ import annotations
 import functools
 from typing import Literal
 
+from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, get_repr
 
@@ -118,6 +119,10 @@ class KeySequence(QtGui.QKeySequence):
 
     def __format__(self, format_spec: SequenceFormatStr):
         return self.toString(SEQUENCE_FORMAT[format_spec])
+
+    def __getitem__(self, item):
+        item = super().__getitem__(item)
+        return core.KeyCombination(item)
 
     @property
     def _toString(self):
