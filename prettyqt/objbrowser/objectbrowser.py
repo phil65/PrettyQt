@@ -48,7 +48,7 @@ class ObjectBrowser(widgets.MainWindow):
     _app = None  # Reference to the global application.
     _browsers: list[ObjectBrowser] = []  # Keep lists of browser windows.
 
-    def __init__(self, obj, name: str = ""):
+    def __init__(self, obj, stack=None, name: str = ""):
         super().__init__()
         self.set_title("Object browser")
         self._instance_nr = self._add_instance()
@@ -348,7 +348,9 @@ class ObjectBrowser(widgets.MainWindow):
 
         The *args and **kwargs will be passed to the ObjectBrowser constructor.
         """
-        cls.app = widgets.app(organization_name="phil65", application_name="Prettyqt")  # keeping reference to prevent garbage collection.
+        cls.app = widgets.app(
+            organization_name="phil65", application_name="Prettyqt"
+        )  # keeping reference to prevent garbage collection.
         object_browser = cls(*args, **kwargs)
         object_browser.show()
         object_browser.raise_()
@@ -360,4 +362,3 @@ if __name__ == "__main__":
     struct = dict(a={1, 2, frozenset([1, 2])})
     app = widgets.app()  # keeping reference to prevent garbage collection.
     object_browser = ObjectBrowser.browse(struct)
-
