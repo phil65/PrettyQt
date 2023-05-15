@@ -56,6 +56,16 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 return widgets.DateTimeEdit(parent=parent)
             case QtGui.QKeySequence():
                 return widgets.KeySequenceEdit(parent=parent)
+            case QtGui.QRegion():
+                return custom_widgets.RegionEdit(parent=parent)
+            case QtWidgets.QSizePolicy():
+                return custom_widgets.SizePolicyEdit(parent=parent)
+            case QtCore.QPoint():
+                return custom_widgets.PointEdit(parent=parent)
+            case QtCore.QSize():
+                return custom_widgets.SizeEdit(parent=parent)
+            case QtCore.QRect():
+                return custom_widgets.RectEdit(parent=parent)
             case pathlib.Path():
                 return custom_widgets.FileChooserButton(parent=parent)
             case str():

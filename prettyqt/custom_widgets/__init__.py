@@ -11,6 +11,10 @@ from .expandableline import ExpandableLine
 from .hierarchicalheaderview import HierarchicalHeaderView
 from .keycombinationedit import KeyCombinationEdit
 from .singlelinetextedit import SingleLineTextEdit
+from .rectedit import RectEdit, RegionEdit
+from .pointedit import PointEdit
+from .sizeedit import SizeEdit
+from .sizepolicyedit import SizePolicyEdit
 from .regexlineedit import RegexLineEdit
 from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
@@ -70,6 +74,11 @@ __all__ = [
     "IconLabel",
     "IconBrowser",
     "IconWidget",
+    "RectEdit",
+    "PointEdit",
+    "SizeEdit",
+    "RegionEdit",
+    "SizePolicyEdit",
     "FlowLayout",
     "BorderLayout",
     "SidebarWidget",

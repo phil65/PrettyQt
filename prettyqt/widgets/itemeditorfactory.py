@@ -113,6 +113,14 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         factory.register_editor(widgets.DateEdit, QtCore.QDate, "date")
         factory.register_editor(widgets.TimeEdit, QtCore.QTime, "time")
         factory.register_editor(widgets.DateTimeEdit, QtCore.QDateTime, "dateTime")
+        factory.register_editor(custom_widgets.PointEdit, QtCore.QPoint, "value")
+        factory.register_editor(custom_widgets.SizeEdit, QtCore.QSize, "value")
+        factory.register_editor(custom_widgets.RectEdit, QtCore.QRect, "value")
+        factory.register_editor(custom_widgets.RegionEdit, QtCore.QRegion, "value")
+        factory.register_editor(
+            custom_widgets.SizePolicyEdit, QtWidgets.QSizePolicy, "value"
+        )
+
         factory.register_editor(
             widgets.KeySequenceEdit, QtGui.QKeySequence, "keySequence"
         )
