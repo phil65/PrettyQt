@@ -28,13 +28,10 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     """Widget for managing the tabs section."""
 
     def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-        closable: bool = False,
-        detachable: bool = False,
+        self, closable: bool = False, detachable: bool = False, **kwargs
     ) -> None:
         # Basic initalization
-        super().__init__(parent)
+        super().__init__(**kwargs)
         self.tabCloseRequested.connect(self.remove_tab)
         self.tab_bar = widgets.TabBar(self)
 

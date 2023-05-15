@@ -1,18 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
 
 
 class TreeModel(core.AbstractItemModel):
-    def __init__(
-        self,
-        obj,
-        show_root: bool = True,
-        parent: QtCore.QObject | None = None,
-    ):
-        super().__init__(parent)
+    def __init__(self, obj, show_root: bool = True, **kwargs):
+        super().__init__(**kwargs)
         self._root_item = treeitem.TreeItem(obj=obj)
         self._show_root = show_root
         self.set_root_item(obj)

@@ -28,12 +28,13 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self,
         orientation: constants.OrientationStr | QtCore.Qt.Orientation,
         parent: QtWidgets.QWidget | None = None,
+        **kwargs,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation
         else:
             ori = constants.ORIENTATION[orientation]
-        super().__init__(ori, parent=parent)
+        super().__init__(ori, parent=parent, **kwargs)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
         self.sectionResized.connect(self.sectionResizeEvent)

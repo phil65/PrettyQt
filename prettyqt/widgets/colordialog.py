@@ -88,7 +88,7 @@ class CPAlphaShowLabel(widgets.Label):
     A replacement for QColorDialog's QColorShowLabel.
     """
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: QtWidgets.QColorDialog):
         super().__init__(parent)
         # Length in pixels of a side of the checkerboard squares
         # (Pattern is made up of 2x2 squares, total size 2n x 2n)

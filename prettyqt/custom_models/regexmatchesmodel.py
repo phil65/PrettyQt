@@ -7,8 +7,8 @@ from prettyqt.qt import QtCore
 class RegexMatchesModel(core.AbstractTableModel):
     HEADER = ["Start", "End", "Value", "Groups"]
 
-    def __init__(self, matches: list | None = None, parent: QtCore.QObject | None = None):
-        super().__init__(parent=parent)
+    def __init__(self, matches: list | None = None, **kwargs):
+        super().__init__(**kwargs)
         self.matches = matches or []
 
     def columnCount(self, parent=None):

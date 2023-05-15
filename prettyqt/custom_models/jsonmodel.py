@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from typing import Any
 
 from prettyqt import core, custom_models
-from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
 
 
@@ -44,13 +43,13 @@ class JsonModel(custom_models.ColumnItemModel):
         self,
         obj: Any,
         show_root: bool = True,
-        parent: QtCore.QObject | None = None,
+        **kwargs,
     ):
         super().__init__(
             obj=JsonItem(key="", value=obj, typ=type(obj)),
             columns=COLUMNS,
-            parent=parent,
             show_root=show_root,
+            **kwargs,
         )
 
     def hasChildren(self, parent: core.ModelIndex | None = None):

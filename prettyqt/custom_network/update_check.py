@@ -59,7 +59,6 @@ class UpdateChecker(core.Object):
 
     def __init__(
         self,
-        parent: QtCore.QObject,
         app_name: str | None = None,
         app_version: str | None = None,
         releases_url: str | None = None,
@@ -67,8 +66,9 @@ class UpdateChecker(core.Object):
         changelog_url: str | None = None,
         website_url: str | None = None,
         packaged: bool = False,
+        **kwargs,
     ) -> None:
-        super().__init__(parent)
+        super().__init__(**kwargs)
         self.packaged = packaged
         self.releases_url = releases_url
         self.pypi_url = pypi_url
@@ -148,12 +148,12 @@ class UpdateChecker(core.Object):
 if __name__ == "__main__":
     app = widgets.app()
     checker = UpdateChecker(
-        app,
         app_version="1.0.0",
         releases_url="https://github.com/phil65/prettyqt/releases",
         changelog_url="https://github.com/phil65/prettyqt/blob/main/CHANGELOG",
         pypi_url="https://pypi.org/pypi/prettyqt",
         website_url="https://github.com/phil65/prettyqt",
+        parent=app,
     )
     checker.check_for_update()
     app.main_loop()

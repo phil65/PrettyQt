@@ -27,9 +27,6 @@ SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]
 class Completer(core.ObjectMixin, QtWidgets.QCompleter):
     path_updated = core.Signal(str)
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
-        super().__init__(parent)
-
     def _get_map(self):
         maps = super()._get_map()
         maps |= {

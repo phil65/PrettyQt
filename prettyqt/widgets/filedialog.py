@@ -53,9 +53,9 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         path_id: str | None = None,
         extension_filter: dict | None = None,
         file_mode: FileModeStr = "existing_files",
-        parent: QtWidgets.QWidget | None = None,
+        **kwargs,
     ):
-        super().__init__(parent=parent)
+        super().__init__(**kwargs)
         self.set_title(caption)
         self.path_id = path_id
         if extension_filter:

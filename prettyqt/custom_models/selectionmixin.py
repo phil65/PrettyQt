@@ -10,8 +10,8 @@ class SelectionMixin:
     CHECKSTATE: dict[int, Callable] = {}  # column: identifier
     dataChanged: QtCore.Signal
 
-    def __init__(self):
-        super().__init__()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.selected = {}
 
     def setData(self, index: QtCore.QModelIndex, value, role) -> bool:

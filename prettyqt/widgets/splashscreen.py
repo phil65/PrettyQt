@@ -9,12 +9,15 @@ from prettyqt.utils import datatypes
 
 class SplashScreenMixin(widgets.WidgetMixin):
     def __init__(
-        self, path: datatypes.PathType | QtGui.QPixmap, width: int | None = None
+        self,
+        path: datatypes.PathType | QtGui.QPixmap,
+        width: int | None = None,
+        **kwargs,
     ):
         pix = path if isinstance(path, QtGui.QPixmap) else gui.Pixmap(os.fspath(path))
         if width:
             pix = pix.scaledToWidth(width)
-        super().__init__(pix)
+        super().__init__(pix, **kwargs)
         self.set_flags(stay_on_top=True, frameless=True)
         self.setEnabled(False)
 

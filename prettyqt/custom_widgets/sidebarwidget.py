@@ -16,21 +16,23 @@ class SidebarWidget(widgets.MainWindow):
 
     def __init__(
         self,
-        parent: QtWidgets.QWidget | None = None,
+        *args,
         show_settings: bool = False,
         main_layout: widgets.widget.LayoutStr | QtWidgets.QLayout = "vertical",
+        **kwargs,
     ):
-        super().__init__(parent=parent)
+        super().__init__(*args, **kwargs)
         self._button_width = 100
         self._style: constants.ToolButtonStyleStr = "text_below_icon"
         self.button_map: dict[QtWidgets.QWidget, QtWidgets.QToolButton] = {}
         self.icon_map: dict[QtWidgets.QWidget, gui.Icon] = {}
-        self.sidebar = widgets.ToolBar()
-        self.sidebar.set_id("SidebarWidget")
-        self.sidebar.set_title("Sidebar")
+        self.sidebar = widgets.ToolBar(
+            context_menu_policy="prevent",
+            floatable=True,
+            object_name="SidebarWidget",
+            window_title="Sidebar",
+        )
         self.sidebar.set_style(self._style)
-        self.sidebar.set_context_menu_policy("prevent")
-        self.sidebar.setFloatable(False)
         self.sidebar.set_allowed_areas("all")
         self.settings_menu = widgets.Menu()
         self.sidebar.set_icon_size(int(self._button_width * 0.7))
@@ -76,11 +78,12 @@ class SidebarWidget(widgets.MainWindow):
         act = gui.Action(
             text=title,
             icon=icon,
-            shortcut=shortcut,
+            shortcut=shortcut or "",
             parent=self.sidebar,
             checkable=True,
             triggered=lambda: self.set_tab(item),
         )
+        self.addAction(act)
         button = widgets.ToolButton(self.sidebar)
         button.setDefaultAction(act)
         button.setFixedWidth(self._button_width)
@@ -159,6 +162,7 @@ class SidebarWidget(widgets.MainWindow):
             checkable=checkable,
             triggered=callback,
         )
+        self.addAction(act)
         button = widgets.ToolButton(self.sidebar)
         button.setDefaultAction(act)
         button.setFixedWidth(self._button_width)
@@ -171,8 +175,12 @@ class SidebarWidget(widgets.MainWindow):
 
 
 if __name__ == "__main__":
+    from prettyqt.custom_widgets import commandpalette
+
     app = widgets.app()
+    a = commandpalette.CommandPalette()
     ex = SidebarWidget(show_settings=True)
+    ex.add_shortcut("Ctrl+P", a.show)
     page_1 = widgets.PlainTextEdit()
     page_2 = widgets.ColorDialog()
     page_3 = widgets.FileDialog()
@@ -180,5 +188,6 @@ if __name__ == "__main__":
     ex.add_tab(page_2, "Color", "mdi.format-color-fill", area="bottom")
     ex.add_tab(page_3, "Help", "mdi.help-circle-outline")
     ex.set_marker(page_3)
+    a.populate_from_widget(ex)
     ex.show()
     app.main_loop()

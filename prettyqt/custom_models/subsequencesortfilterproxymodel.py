@@ -4,7 +4,6 @@ import re
 import sys
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 
 
 MAX_SIZE = sys.maxsize
@@ -13,8 +12,8 @@ MAX_SIZE = sys.maxsize
 class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
     """Performs subsequence matching/sorting."""
 
-    def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.search_term = ""
         self.filter_patterns = []
         self.filter_patterns_case_sensitive = []

@@ -7,8 +7,8 @@ from prettyqt.qt import QtWidgets
 class Dial(widgets.AbstractSliderMixin, QtWidgets.QDial):
     value_changed = core.Signal(int)
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.valueChanged.connect(self.on_value_change)
 
 

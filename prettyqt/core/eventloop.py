@@ -14,8 +14,8 @@ PROCESS_EVENT_FLAGS = bidict(
 
 
 class EventLoop(core.ObjectMixin, QtCore.QEventLoop):
-    def __init__(self, parent: QtCore.QObject | None = None) -> None:
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
         self._executing = False
 
     def execute(

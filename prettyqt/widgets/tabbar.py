@@ -50,8 +50,8 @@ PositionStr = Literal["left", "right"]
 class TabBarMixin(widgets.WidgetMixin):
     on_detach = QtCore.Signal(int, QtCore.QPoint)
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None) -> None:
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
         self.setAcceptDrops(True)
         self.set_elide_mode("right")

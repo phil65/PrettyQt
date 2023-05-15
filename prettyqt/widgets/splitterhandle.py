@@ -12,12 +12,13 @@ class SplitterHandle(widgets.WidgetMixin, QtWidgets.QSplitterHandle):
         self,
         orientation: constants.OrientationStr | QtCore.Qt.Orientation,
         parent: QtWidgets.QSplitter,
+        **kwargs,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation
         else:
             ori = constants.ORIENTATION[orientation]
-        super().__init__(ori, parent)
+        super().__init__(ori, parent, **kwargs)
 
     def mouseDoubleClickEvent(self, ev):
         self.double_clicked.emit(self)

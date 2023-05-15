@@ -13,13 +13,13 @@ class SplitterMixin(widgets.FrameMixin):
     def __init__(
         self,
         orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",
-        parent: QtWidgets.QWidget | None = None,
+        **kwargs,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):
             ori = orientation
         else:
             ori = constants.ORIENTATION[orientation]
-        super().__init__(ori, parent)
+        super().__init__(ori, **kwargs)
 
     def __enter__(self):
         return self
