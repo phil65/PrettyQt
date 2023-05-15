@@ -14,7 +14,7 @@ from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
 from .jsonmodel import JsonModel
 from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
-from .fuzzyfiltermodel import FuzzyFilterModelMixin, FuzzyFilterProxyModel
+from .fuzzyfiltermodel import FuzzyFilterProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -30,6 +30,5 @@ __all__ = [
     "NestedItem",
     "JsonModel",
     "SubsequenceSortFilterProxyModel",
-    "FuzzyFilterModelMixin",
     "FuzzyFilterProxyModel",
 ]

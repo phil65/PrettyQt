@@ -39,6 +39,7 @@ class IconBrowser(widgets.MainWindow):
         self._proxy_model = custom_models.FuzzyFilterProxyModel()
         self._proxy_model.setSourceModel(model)
         self._proxy_model.set_filter_case_sensitive(True)
+        self._proxy_model.set_match_color(None)
 
         self._listview = IconListView(
             self,
@@ -84,13 +85,13 @@ class IconBrowser(widgets.MainWindow):
 
     def _update_filter(self):
         """Update filter string in the proxy model with current lineedit text."""
-        re_string = ""
-        if (group := self._combobox.currentText()) != ALL_COLLECTIONS:
-            re_string += rf"^{group}\."
-        if search_term := self._lineedit.text():
-            re_string += f".*{search_term}.*$"
-
-        self._proxy_model.setFilterRegularExpression(re_string)
+        # re_string = ""
+        # if (group := self._combobox.currentText()) != ALL_COLLECTIONS:
+        #     re_string += rf"^{group}\."
+        # if search_term := self._lineedit.text():
+        #     re_string += f".*{search_term}.*$"
+        pass
+        self._proxy_model.set_search_term(self._lineedit.text())
 
     def _trigger_instant_update(self):
         """Stop timer used for committing search term and update proxy model instantly."""
@@ -125,7 +126,7 @@ class IconListView(widgets.ListView):
         return super().resizeEvent(event)
 
 
-class IconModel(custom_models.FuzzyFilterModelMixin, core.StringListModel):
+class IconModel(core.StringListModel):
     def __init__(self, icon_color: QtGui.QColor):
         super().__init__()
         self._icon_color = icon_color
