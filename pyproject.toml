@@ -89,7 +89,7 @@ log_format = "%(asctime)s %(levelname)s %(message)s"
 log_date_format = "%Y-%m-%d %H:%M:%S"
 
 [tool.isort]
-line_length = 88
+line_length = 90
 ensure_newline_before_comments = true
 include_trailing_comma = true
 lines_after_imports = 2
