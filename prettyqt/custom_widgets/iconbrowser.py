@@ -8,7 +8,6 @@ from prettyqt.qt import QtGui
 
 # TODO: Set icon colour and copy code with color kwarg
 
-AUTO_SEARCH_TIMEOUT = 500
 ALL_COLLECTIONS = "All"
 
 
@@ -28,11 +27,6 @@ class IconBrowser(widgets.MainWindow):
             for font_collection, font_data in font_maps.items()
             for icon_name in font_data
         ]
-        self._filter_timer = core.Timer(
-            self, single_shot=True, interval=AUTO_SEARCH_TIMEOUT
-        )
-        self._filter_timer.timeout.connect(self._update_filter)
-
         model = IconModel(self.get_palette().get_color("text"))
         model.setStringList(sorted(icon_names))
 
@@ -53,8 +47,7 @@ class IconBrowser(widgets.MainWindow):
         self._listview.doubleClicked.connect(self._copy_icon_text)
 
         self._lineedit = widgets.LineEdit(parent=self)
-        self._lineedit.textChanged.connect(self._filter_timer.restart)
-        self._lineedit.returnPressed.connect(self._trigger_instant_update)
+        self._lineedit.textChanged.connect(self._trigger_instant_update)
 
         self._combobox = widgets.ComboBox(parent=self)
         self._combobox.setMinimumWidth(75)
@@ -83,20 +76,9 @@ class IconBrowser(widgets.MainWindow):
         self._lineedit.setFocus()
         self.center_on("screen")
 
-    def _update_filter(self):
-        """Update filter string in the proxy model with current lineedit text."""
-        # re_string = ""
-        # if (group := self._combobox.currentText()) != ALL_COLLECTIONS:
-        #     re_string += rf"^{group}\."
-        # if search_term := self._lineedit.text():
-        #     re_string += f".*{search_term}.*$"
-        pass
-        self._proxy_model.set_search_term(self._lineedit.text())
-
     def _trigger_instant_update(self):
         """Stop timer used for committing search term and update proxy model instantly."""
-        self._filter_timer.stop()
-        self._update_filter()
+        self._proxy_model.set_search_term(self._lineedit.text())
 
     def _copy_icon_text(self):
         """Copy the name of the currently selected icon to the clipboard."""
