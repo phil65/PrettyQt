@@ -4,6 +4,10 @@ __author__ = """Philipp Temminghoff"""
 __email__ = "phil65@kodi.tv"
 __version__ = "1.41.0"
 
+# import os
+
+# os.environ["PYTHONBREAKPOINT"] = "prettyqt.debug"
+
 
 def debug():
     """Print the local variables in the caller's frame."""
