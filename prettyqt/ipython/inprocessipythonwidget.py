@@ -4,9 +4,8 @@ import importlib.util
 import logging
 
 from qtconsole.inprocess import QtInProcessKernelManager
-from qtconsole.rich_jupyter_widget import RichJupyterWidget
 
-from prettyqt import core, widgets
+from prettyqt import core, ipython, widgets
 
 
 # import asyncio
@@ -14,25 +13,14 @@ from prettyqt import core, widgets
 
 logger = logging.getLogger(__name__)
 
-# disables 'Please pass -Xfrozen_modules=off' warning
-# os.environ["PYDEVD_DISABLE_FILE_VALIDATION"] = "1"
 
-
-class InProcessIPythonWidget(widgets.WidgetMixin, RichJupyterWidget):
+class InProcessIPythonWidget(ipython.BaseIPythonWidget):
     """Convenience class for a live IPython console widget."""
 
     evaluated = core.Signal(object)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-
-        self.banner = "IPython Console"
-        self.font_size = 6
-        self.gui_completion = "droplist"
-        widgets.Application.styleHints().colorSchemeChanged.connect(
-            self.adjust_style_to_palette
-        )
-        self.adjust_style_to_palette()
         self.kernel_manager = QtInProcessKernelManager()
         self.kernel_manager.start_kernel(show_banner=False)
 
@@ -48,20 +36,11 @@ class InProcessIPythonWidget(widgets.WidgetMixin, RichJupyterWidget):
         self.kernel_client = self._kernel_manager.client()
         self.kernel_client.start_channels()
 
-        def stop():
-            logger.info("shutting down IPython kernel...")
-            self.kernel_client.stop_channels()
-            self.kernel_manager.shutdown_kernel()
-            logger.info("shutdown successful.")
-
-        widgets.Application.call_on_exit(stop)
-        # self.exit_requested.connect(stop)
-
-    def adjust_style_to_palette(self):
-        """Adjust coloring of the terminal to current palette."""
-        pal = widgets.Application.get_palette()
-        style = "linux" if pal.is_dark() else "lightbg"
-        self.set_default_style(style)
+    def shutdown(self):
+        logger.info("shutting down IPython kernel...")
+        self.kernel_client.stop_channels()
+        self.kernel_manager.shutdown_kernel()
+        logger.info("shutdown successful.")
 
     def push_vars(self, var_dict):
         """Send python objects to IPYthon namespace.
@@ -82,18 +61,6 @@ class InProcessIPythonWidget(widgets.WidgetMixin, RichJupyterWidget):
             return None
         self._append_plain_text(f'\nread "{obj_name}" object to namespace\n', True)
         self.evaluated.emit(data)
-
-    def clear(self):
-        """Clear the terminal."""
-        self._control.clear()
-
-    def print_text(self, text):
-        """Print some plain text to the console."""
-        self._append_plain_text(text)
-
-    def execute_command(self, command):
-        """Execute a command in the frame of the console widget."""
-        self._execute(command, False)
 
 
 if __name__ == "__main__":
