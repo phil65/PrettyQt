@@ -3,6 +3,8 @@ from __future__ import annotations
 import functools
 from typing import Literal
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, get_repr
@@ -120,7 +122,7 @@ class KeySequence(QtGui.QKeySequence):
     def __format__(self, format_spec: SequenceFormatStr):
         return self.toString(SEQUENCE_FORMAT[format_spec])
 
-    def __getitem__(self, item):
+    def __getitem__(self, item) -> core.KeyCombination:
         item = super().__getitem__(item)
         return core.KeyCombination(item)
 
@@ -142,8 +144,12 @@ class KeySequence(QtGui.QKeySequence):
 
     @to_shortcut_str.register
     @classmethod
-    def _(cls, key: QtCore.QKeyCombination):
+    def _(cls, key: QtCore.QKeyCombination) -> str:
         return cls(key).toString()
+
+    @classmethod
+    def get_key_bindings(cls, button) -> list[Self]:
+        return [cls(i) for i in cls.keyBindings(button)]
 
 
 if __name__ == "__main__":
