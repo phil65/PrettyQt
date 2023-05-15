@@ -30,6 +30,12 @@ class KeySequenceEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
     def is_valid(self) -> bool:
         return True
 
+    def get_finishing_key_combinations(self) -> list[core.KeyCombination]:
+        return [core.KeyCombination(i) for i in self.finishingKeyCombinations()]
+
+    def get_key_combinations(self) -> list[core.KeyCombination]:
+        return [core.KeyCombination(i) for i in self.keySequence()]
+
 
 if __name__ == "__main__":
     app = widgets.app()
