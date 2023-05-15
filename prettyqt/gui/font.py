@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import sys
 from typing import Any, Literal
 
 from typing_extensions import Self
@@ -188,7 +189,14 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
 
     @classmethod
     def mono(cls, size=8) -> Self:
-        return cls("Consolas", size)
+        match sys.platform:
+            case "win32":
+                font = "Consolas"
+            case "darwin":
+                font = "Menlo"
+            case _:
+                font = "Monospace"
+        return cls(font, size)
         # font.setStyleHint()
 
     def set_style_hint(self, hint: StyleHintStr):
