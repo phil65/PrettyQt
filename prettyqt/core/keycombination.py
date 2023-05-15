@@ -97,7 +97,8 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
             # get button
             if btn in _SYMBOLS:
                 btn = _SYMBOLS[btn]
-
+            if btn.isalnum():
+                btn = btn.upper()
             qtkey = getattr(Key, f"Key_{btn}") if btn != "{}" else Keys.Any
             super().__init__(qtmod, qtkey)
         elif len(args) == 1 and isinstance(args[0], QtCore.QEvent):

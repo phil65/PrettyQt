@@ -255,9 +255,10 @@ class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
         columns: list[ColumnItem],
         mime_type: str | None = None,
         show_root: bool = True,
+        parent: QtCore.QObject | None = None,
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        super().__init__(parent, **kwargs)
         self._root_item = treeitem.TreeItem(obj=obj)
         self._show_root = show_root
         self.mime_type = mime_type
@@ -275,9 +276,10 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         items: list,
         columns: list[ColumnItem],
         mime_type: str | None = None,
+        parent: QtCore.QObject | None = None,
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        super().__init__(parent, **kwargs)
         self.items = items
         self.mime_type = mime_type
         self._attr_cols = []

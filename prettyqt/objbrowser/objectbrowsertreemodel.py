@@ -14,7 +14,6 @@ import logging
 from typing import Any
 
 from prettyqt import core, custom_models
-from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
 
 
@@ -67,9 +66,9 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         obj_name: str = "",
         attr_cols: list[custom_models.ColumnItem] | None = None,
         show_root: bool = False,
-        parent: QtCore.QObject | None = None,
+        **kwargs,
     ):
-        super().__init__(obj=None, columns=attr_cols, parent=parent)
+        super().__init__(None, columns=attr_cols, **kwargs)
         # The root_item is always invisible. If the obj_name is the empty string, the
         # inspectedItem will be the invisible root_item. If the obj_name is given,
         # an invisible root item will be added and the inspectedItem will be its

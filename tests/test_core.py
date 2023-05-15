@@ -462,7 +462,7 @@ def test_object(qapp):
     w3.set_id("w3")
     w4 = widgets.TableView()
     w4.set_id("w4")
-    w.add(w1, w2, w3, w4)
+    w.add([w1, w2, w3, w4])
     assert w.find_children(widgets.PushButton, recursive=False) == [w1]
     assert w.find_children(name="w2", recursive=False) == [w2]
     assert w.find_child(widgets.PlainTextEdit, recursive=True) == w2
