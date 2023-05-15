@@ -10,10 +10,10 @@ class RectEdit(widgets.Widget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.spinbox_x = widgets.SpinBox()
-        self.spinbox_y = widgets.SpinBox()
-        self.spinbox_width = widgets.SpinBox()
-        self.spinbox_height = widgets.SpinBox()
+        self.spinbox_x = widgets.SpinBox(maximum=999999)
+        self.spinbox_y = widgets.SpinBox(maximum=999999)
+        self.spinbox_width = widgets.SpinBox(maximum=999999)
+        self.spinbox_height = widgets.SpinBox(maximum=999999)
         with widgets.HBoxLayout.create(self) as layout:
             layout.add(widgets.Label("x"))
             layout.add(self.spinbox_x)
