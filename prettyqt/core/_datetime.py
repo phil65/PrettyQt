@@ -19,7 +19,9 @@ class DateTime(QtCore.QDateTime):
         return type(self), (self.date(), self.time(), self.get_timezone())
 
     def __format__(self, format_spec: constants.DateFormatStr):
-        return self.to_format(format_spec)
+        if format_spec in constants.DATE_FORMAT:
+            return self.to_format(format_spec)
+        return self.toString(format_spec)
 
     def get_value(self) -> datetime.datetime:
         return self.toPython()

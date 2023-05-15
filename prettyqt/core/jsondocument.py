@@ -21,8 +21,10 @@ class JsonDocument(QtCore.QJsonDocument):
     def __str__(self):
         return str(self.toVariant())
 
-    def __format__(self, fmt: JsonFormatStr):
-        return self.to_string(fmt == "indented")
+    def __format__(self, fmt):
+        if fmt in JSON_FORMAT:
+            return self.to_string(fmt == "indented")
+        return super().__format__(fmt)
 
     def __repr__(self):
         return get_repr(self, self.toVariant())

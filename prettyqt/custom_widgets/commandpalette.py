@@ -177,9 +177,7 @@ if __name__ == "__main__":
     app = widgets.app()
     window = widgets.MainWindow()
     window.setCentralWidget(widgets.Label("Press Ctrl+P"))
-    window.addAction(
-        gui.Action(text="MainWindowAction", parent=window, callback=window.close)
-    )
+    window.add_action(text="MainWindowAction", parent=window, triggered=window.close)
     pal = CommandPalette()
     window.add_shortcut("Ctrl+P", pal.show)
     actions = [
@@ -188,7 +186,7 @@ if __name__ == "__main__":
             shortcut="Ctrl+A",
             tool_tip="some Tooltip text",
             icon="mdi.folder",
-            callback=lambda: print("test"),
+            triggered=lambda: print("test"),
         ),
         gui.Action(
             text="this is an action",

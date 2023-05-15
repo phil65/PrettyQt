@@ -15,6 +15,9 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
         self.add(other)
         return self
 
+    def get_children(self) -> list[QtWidgets.QWidget]:
+        return self.widget().layout().get_children()
+
     def set_widget(self, widget: QtWidgets.QWidget):
         self.setWidget(widget)
 

@@ -13,10 +13,10 @@ class CollapsibleFrame(widgets.Frame):
         self.set_frame_shape("styled_panel")
         self.set_frame_shadow("plain")
         # layout
-        self._layout = widgets.VBoxLayout()
-        self._layout.set_margin(0)
-        self._layout.setSpacing(0)
-        self.setLayout(self._layout)
+        _layout = widgets.VBoxLayout()
+        _layout.set_margin(0)
+        _layout.setSpacing(0)
+        self.setLayout(_layout)
         # button
         self._button = widgets.ToolButton(self)
         self._button.set_arrow_type("right")
@@ -24,11 +24,11 @@ class CollapsibleFrame(widgets.Frame):
         self._button.setAutoRaise(False)
         self._button.set_text(text)
         self.set_size_policy("minimum_expanding", "fixed")
-        self._layout.addWidget(self._button, 0)
+        _layout.addWidget(self._button, 0)
         self._button.setVisible(True)
         # group box
         self._panel = widgets.Widget(self)
-        self._layout.addWidget(self._panel)
+        _layout.addWidget(self._panel)
         self._panel.setVisible(False)
         self._panel_layout = widgets.VBoxLayout()
         self._panel_layout.set_margin(1)

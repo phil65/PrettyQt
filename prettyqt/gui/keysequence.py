@@ -120,7 +120,9 @@ class KeySequence(QtGui.QKeySequence):
         return type(self), (self.toString(),)
 
     def __format__(self, format_spec: SequenceFormatStr):
-        return self.toString(SEQUENCE_FORMAT[format_spec])
+        if format_spec in SEQUENCE_FORMAT:
+            return self.toString(SEQUENCE_FORMAT[format_spec])
+        return super().__format__(format_spec)
 
     def __getitem__(self, item) -> core.KeyCombination:
         item = super().__getitem__(item)

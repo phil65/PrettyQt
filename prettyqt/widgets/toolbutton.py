@@ -27,6 +27,15 @@ class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
     #     menu.setParent(self)
     #     self.setMenu(menu)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "toolButtonStyle": constants.TOOLBUTTON_STYLE,
+            "arrowType": constants.ARROW_TYPE,
+            "popupMode": POPUP_MODE,
+        }
+        return maps
+
     @classmethod
     def for_menu(cls, menu: QtWidgets.QMenu, icon: datatypes.IconType = None) -> Self:
         btn = cls()

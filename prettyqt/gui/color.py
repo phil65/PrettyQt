@@ -52,7 +52,10 @@ class Color(QtGui.QColor):
         return type(self), (self.red(), self.green(), self.blue(), self.alpha())
 
     def __format__(self, format_spec: NameStr):
-        return self.get_name(format_spec)
+        try:
+            return self.get_name(format_spec)
+        except ValueError:
+            return super().__format__(format_spec)
 
     @property
     def _red(self):
@@ -195,8 +198,10 @@ class Color(QtGui.QColor):
                 )
             case "qcss_rgb":
                 return f"rgb({self.red()}, {self.green()}, {self.blue()})"
-            case _:
+            case _ if name_format in NAME_FORMAT:
                 return self.name(NAME_FORMAT[name_format])
+            case _:
+                raise ValueError(name_format)
 
     def as_qt(self) -> QtGui.QColor:
         return self.convertTo(self.spec())

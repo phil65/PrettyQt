@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, widgets
+from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
@@ -15,37 +15,31 @@ class ExpandableLine(widgets.Widget):
 
         self._animation_duration = animation_duration
 
-        self.expand_btn = widgets.ToolButton()
-        self.expand_btn.set_text(title)
+        self.expand_btn = widgets.ToolButton(
+            arrow_type="right",
+            tool_button_style="text_beside_icon",
+            checkable=True,
+            checked=False,
+            text=title,
+        )
         with self.expand_btn.edit_stylesheet() as ss:
             ss.QToolButton.border.setValue(None)
-        self.expand_btn.set_style("text_beside_icon")
-        self.expand_btn.set_arrow_type("right")
-        self.expand_btn.setCheckable(True)
-        self.expand_btn.setChecked(False)
-
-        header_line = widgets.Frame()
-        header_line.set_frame_shape("h_line")
-        header_line.set_frame_shadow("sunken")
+        header_line = widgets.Frame(frame_shape="h_line", frame_shadow="sunken")
         header_line.set_size_policy("expanding", "maximum")
 
-        self.content_area = widgets.ScrollArea()
+        self.content_area = widgets.ScrollArea(maximum_height=1)
         with self.expand_btn.edit_stylesheet() as ss:
             ss.QAbstractScrollArea.border.setValue(None)
         self.content_area.set_size_policy("expanding", "fixed")
-        self.content_area.setMaximumHeight(1)
         # self.content_area.setMinimumHeight(0)
 
         self.toggle_anim = core.ParallelAnimationGroup()
         self.toggle_anim.add_property_animation(self.minimumHeight)
         self.toggle_anim.add_property_animation(self.maximumHeight)
         self.toggle_anim.add_property_animation(self.content_area.maximumHeight)
-        base_layout = widgets.GridLayout()
+        base_layout = widgets.GridLayout(margin=0)
         base_layout.setVerticalSpacing(0)
-        base_layout.set_margin(0)
-        base_layout.addWidget(
-            self.expand_btn, 0, 0, 1, 1, constants.ALIGN_LEFT
-        )  # type: ignore
+        base_layout[0, 0] = self.expand_btn
         base_layout[0, 2] = header_line
         base_layout[1, 0:2] = self.content_area
         self.setLayout(base_layout)
@@ -59,7 +53,6 @@ class ExpandableLine(widgets.Widget):
 
         # === SIGNALS === #
         self.expand_btn.toggled.connect(expand_view)
-        self.toggle_anim.set_duration(0)
         self.toggle_anim.set_duration(self._animation_duration)
 
     def set_layout(

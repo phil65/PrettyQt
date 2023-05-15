@@ -24,12 +24,6 @@ class SplitterMixin(widgets.FrameMixin):
         super().__init__(ori, **kwargs)
         self.setHandleWidth(10)
 
-    # def __enter__(self):
-    #     return self
-
-    # def __exit__(self, *args):
-    #     pass
-
     def __enter__(self):
         if self._next_container is not None:
             self._next_container.__enter__()
@@ -53,18 +47,6 @@ class SplitterMixin(widgets.FrameMixin):
     def __setitem__(self, index: int, value: QtWidgets.QWidget):
         self.replaceWidget(index, value)
 
-    # def saveState(self):
-    #     sizes = self.sizes()
-    #     if all(x == 0 for x in sizes):
-    #         sizes = [10] * len(sizes)
-    #     return {'sizes': sizes}
-
-    # def restoreState(self, state):
-    #     sizes = state['sizes']
-    #     self.setSizes(sizes)
-    #     for i in range(len(sizes)):
-    #         self.setStretchFactor(i, sizes[i])
-
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.get_children())
 
@@ -77,6 +59,25 @@ class SplitterMixin(widgets.FrameMixin):
     def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
         self.add(other)
         return self
+
+    def __iadd__(self, item):
+        self.add(item)
+        return self
+
+    def createHandle(self) -> widgets.SplitterHandle:
+        return widgets.SplitterHandle(self.orientation(), self)
+
+    # def saveState(self):
+    #     sizes = self.sizes()
+    #     if all(x == 0 for x in sizes):
+    #         sizes = [10] * len(sizes)
+    #     return {'sizes': sizes}
+
+    # def restoreState(self, state):
+    #     sizes = state['sizes']
+    #     self.setSizes(sizes)
+    #     for i in range(len(sizes)):
+    #         self.setStretchFactor(i, sizes[i])
 
     @classmethod
     def create(cls, parent=None, margins=None, orientation=None, **kwargs):
@@ -143,13 +144,6 @@ class SplitterMixin(widgets.FrameMixin):
     @property
     def _layout(self):
         return self._stack[-1] if self._stack else self
-
-    def __iadd__(self, item):
-        self.add(item)
-        return self
-
-    def createHandle(self) -> widgets.SplitterHandle:
-        return widgets.SplitterHandle(self.orientation(), self)
 
     def get_children(self) -> list[QtWidgets.QWidget]:
         return [self[i] for i in range(self.count())]
