@@ -27,12 +27,9 @@ SizeConstraintStr = Literal[
 
 class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.PrettyPrinter):
     def __init__(self, *args, **kwargs):
-        self.next_layout = None
+        self._next_container = None
         self._stack = []
-        margin = kwargs.pop("margin", None)
         super().__init__(*args, **kwargs)
-        if margin is not None:
-            self.set_margin(margin)
 
     def __getitem__(
         self, index: str | int
@@ -63,16 +60,26 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
         return self.indexOf(item) >= 0
 
     def __enter__(self):
-        if self.next_layout is not None:
-            self.next_layout.__enter__()
-            self._stack.append(self.next_layout)
-            self.next_layout = None
+        if self._next_container is not None:
+            self._next_container.__enter__()
+            self._stack.append(self._next_container)
+            self._next_container = None
         return self
 
     def __exit__(self, *_):
         if self._stack:
             item = self._stack.pop()
             item.__exit__()
+
+    def __iadd__(self, item, *args, **kwargs):
+        self.add(item, *args, **kwargs)
+        return self
+
+    # def __getattr__(self, name):
+    #     return getattr(self._layout, name)
+
+    # def __call__(self):
+    #     return self._layout
 
     def _get_map(self):
         maps = super()._get_map()
@@ -89,16 +96,6 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
                 self._layout.add(i, *args, **kwargs)
 
         return item
-
-    def __iadd__(self, item, *args, **kwargs):
-        self.add(item, *args, **kwargs)
-        return self
-
-    # def __getattr__(self, name):
-    #     return getattr(self._layout, name)
-
-    # def __call__(self):
-    #     return self._layout
 
     @property
     def _layout(self):
@@ -137,7 +134,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
             new.set_alignment(align)
 
         new._stack = []
-        new.next_layout = None
+        new._next_container = None
         return new
 
     def get_sub_layout(self, layout, *args, **kwargs) -> Self:
@@ -158,9 +155,13 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
                 from prettyqt import custom_widgets
 
                 Class = custom_widgets.FlowLayout
+            case "splitter":
+                Class = widgets.Splitter
+            case "scroll":
+                Class = widgets.ScrollArea
             case _:
                 raise ValueError("Invalid Layout")
-        self.next_layout = Class.create(self._layout, *args, **kwargs)
+        self._next_container = Class.create(self._layout, *args, **kwargs)
         return self
 
     def get_children(self) -> list[QtWidgets.QWidget | QtWidgets.QLayout]:
@@ -261,10 +262,10 @@ if __name__ == "__main__":
         with layout.get_sub_layout("horizontal") as layout:
             print("inner", layout)
             test = layout.add(widgets.PlainTextEdit("upper left"))
-            layout.add(widgets.PlainTextEdit("upper right"))
+            layout.add(widgets.PlainTextEdit("upper middle"))
             with layout.get_sub_layout("vertical") as layout:
-                layout.add(widgets.PlainTextEdit("lower left"))
-                layout.add(widgets.PlainTextEdit("lower right"))
+                layout.add(widgets.PlainTextEdit("upper right"))
+                layout.add(widgets.PlainTextEdit("middle right"))
         with layout.get_sub_layout("horizontal") as layout:
             layout.add(widgets.PlainTextEdit("lower left"))
             layout.add(widgets.PlainTextEdit("lower right"))
