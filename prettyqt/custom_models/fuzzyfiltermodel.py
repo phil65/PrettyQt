@@ -11,28 +11,6 @@ from prettyqt.utils import fuzzy
 logger = logging.getLogger(__name__)
 
 
-class FuzzyFilterSortScoreModel(core.IdentityProxyModel):
-    def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)
-        self._search_term = ""
-
-    class Roles(enum.IntEnum):
-        """Addional roles."""
-
-        SortRole = constants.SORT_ROLE
-
-    def data(self, index, role=constants.DISPLAY_ROLE):
-        if not index.isValid():
-            return None
-        match role:
-            case self.Roles.SortRole:
-                label = super().data(index, constants.DISPLAY_ROLE)
-                result = fuzzy.fuzzy_match(self._search_term, label)
-                return result[1]
-            case _:
-                return super().data(index, role)
-
-
 class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     """Proxy model with fuzzyfilter functionality.
 
@@ -57,11 +35,6 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         self.setSortRole(self.Roles.SortRole)
         self.sort(0, constants.DESCENDING)
 
-    def setSourceModel(self, model):
-        self._proxy = FuzzyFilterSortScoreModel()
-        super().setSourceModel(self._proxy)
-        self._proxy.setSourceModel(model)
-
     def set_match_color(self, color):
         self.match_color = color
 
@@ -76,9 +49,21 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
             self._search_term, text, case_sensitive=self.is_filter_case_sensitive()
         )
 
+    def lessThan(self, left, right):
+        role = super().sortRole()
+        left_data = left.data(role)
+        right_data = right.data(role)
+        if left_data is None or right_data is None:
+            return True
+        if self._search_term:
+            return fuzzy.fuzzy_match(self._search_term, left_data) < fuzzy.fuzzy_match(
+                self._search_term, right_data
+            )
+        else:
+            return left_data < right_data
+
     def set_search_term(self, search_term: str):
         self._search_term = search_term
-        self._proxy._search_term = search_term
         self.invalidate()
 
     def data(self, index, role=constants.DISPLAY_ROLE):
@@ -106,6 +91,11 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
             #     return str(result[1])
             case self.Roles.BackupRole, _:
                 return super().data(index, constants.DISPLAY_ROLE)
+            case self.Roles.SortRole, _:
+                idx = self.index(index.row(), filter_column)
+                label = super().data(idx, constants.DISPLAY_ROLE)
+                result = fuzzy.fuzzy_match(self._search_term, label)
+                return result[1]
             case _, _:
                 return super().data(index, role)
 
