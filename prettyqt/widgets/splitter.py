@@ -19,13 +19,28 @@ class SplitterMixin(widgets.FrameMixin):
             ori = orientation
         else:
             ori = constants.ORIENTATION[orientation]
+        self._next_container = None
+        self._stack = []
         super().__init__(ori, **kwargs)
+        self.setHandleWidth(10)
+
+    # def __enter__(self):
+    #     return self
+
+    # def __exit__(self, *args):
+    #     pass
 
     def __enter__(self):
+        if self._next_container is not None:
+            self._next_container.__enter__()
+            self._stack.append(self._next_container)
+            self._next_container = None
         return self
 
-    def __exit__(self, *args):
-        pass
+    def __exit__(self, *_):
+        if self._stack:
+            item = self._stack.pop()
+            item.__exit__()
 
     def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
@@ -63,6 +78,76 @@ class SplitterMixin(widgets.FrameMixin):
         self.add(other)
         return self
 
+    @classmethod
+    def create(cls, parent=None, margins=None, orientation=None, **kwargs):
+        if orientation in constants.ORIENTATION:
+            orientation = constants.ORIENTATION[orientation]
+        if isinstance(parent, QtWidgets.QWidget):
+            new = cls(parent=parent, orientation=orientation, **kwargs)
+            widgets.HBoxLayout.create(parent).add(new)  # .create ?
+        elif isinstance(parent, QtWidgets.QLayout):
+            new = cls(orientation, **kwargs)
+            parent.add(new)
+
+        if margins:
+            new.setContentsMargins(*margins)
+
+        if orientation:
+            new.setOrientation(orientation)
+        new._stack = []
+        new._next_container = None
+        return new
+
+    def get_sub_layout(self, layout, *args, **kwargs):
+        match layout:
+            case None:
+                return
+            case "horizontal":
+                self._next_container = widgets.HBoxLayout.create(
+                    self._layout, *args, **kwargs
+                )
+            case "vertical":
+                self._next_container = widgets.VBoxLayout.create(
+                    self._layout, *args, **kwargs
+                )
+            case "grid":
+                self._next_container = widgets.GridLayout.create(
+                    self._layout, *args, **kwargs
+                )
+            case "form":
+                self._next_container = widgets.FormLayout.create(
+                    self._layout, *args, **kwargs
+                )
+            case "stacked":
+                self._next_container = widgets.StackedLayout.create(
+                    self._layout, *args, **kwargs
+                )
+            case "flow":
+                from prettyqt import custom_widgets
+
+                self._next_container = custom_widgets.FlowLayout.create(
+                    self._layout, *args, **kwargs
+                )
+            case "splitter":
+                self._next_container = widgets.Splitter.create(
+                    self._layout, *args, **kwargs
+                )
+            case "scroll":
+                self._next_container = widgets.ScrollArea.create(
+                    self._layout, *args, **kwargs
+                )
+            case _:
+                raise ValueError("Invalid Layout")
+        return self
+
+    @property
+    def _layout(self):
+        return self._stack[-1] if self._stack else self
+
+    def __iadd__(self, item):
+        self.add(item)
+        return self
+
     def createHandle(self) -> widgets.SplitterHandle:
         return widgets.SplitterHandle(self.orientation(), self)
 
@@ -75,7 +160,7 @@ class SplitterMixin(widgets.FrameMixin):
         stretch: int | None = None,
         collapsible: bool = True,
         position: int | None = None,
-    ):
+    ) -> QtWidgets.QWidget:
         if position is None:
             self.addWidget(widget)
         else:
@@ -84,23 +169,37 @@ class SplitterMixin(widgets.FrameMixin):
         if stretch is not None:
             self.setStretchFactor(index, stretch)
         self.setCollapsible(index, collapsible)
-
-    def add_layout(self, layout: QtWidgets.QLayout) -> widgets.Widget:
-        widget = widgets.Widget()
-        widget.set_layout(layout)
-        self.addWidget(widget)
         return widget
 
+    def add_layout(
+        self,
+        layout: QtWidgets.QLayout,
+        stretch: int | None = None,
+        collapsible: bool = True,
+        position: int | None = None,
+    ) -> widgets.Widget:
+        widget = widgets.Widget()
+        widget.set_layout(layout)
+        return self.add_widget(
+            widget, stretch=stretch, collapsible=collapsible, position=position
+        )
+
     def add(
-        self, *item: QtWidgets.QWidget | QtWidgets.QLayout, stretch: int | None = None
+        self,
+        item: QtWidgets.QWidget
+        | QtWidgets.QLayout
+        | list[QtWidgets.QWidget | QtWidgets.QLayout],
+        stretch: int | None = None,
     ):
-        for i in item:
-            if isinstance(i, QtWidgets.QWidget):
-                self.add_widget(i)
-            else:
-                self.add_layout(i)
-            if stretch is not None:
-                self.setStretchFactor(self.count() - 1, stretch)
+        match item:
+            case QtWidgets.QWidget():
+                self.add_widget(item, stretch=stretch)
+            case QtWidgets.QLayout():
+                self.add_layout(item)
+            case list():
+                for i in item:
+                    self.add(i)
+        return item
 
     @classmethod
     def from_widgets(

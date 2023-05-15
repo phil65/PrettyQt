@@ -26,10 +26,12 @@ SizeConstraintStr = Literal[
 
 
 class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.PrettyPrinter):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, margin=None, **kwargs):
         self._next_container = None
         self._stack = []
         super().__init__(*args, **kwargs)
+        if margin is not None:
+            self.set_margin(margin)
 
     def __getitem__(
         self, index: str | int
@@ -258,19 +260,15 @@ if __name__ == "__main__":
     widget = widgets.Widget()
 
     with widgets.VBoxLayout.create(widget) as layout:
-        print("top", layout)
-        with layout.get_sub_layout("horizontal") as layout:
-            print("inner", layout)
+        with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
             test = layout.add(widgets.PlainTextEdit("upper left"))
             layout.add(widgets.PlainTextEdit("upper middle"))
-            with layout.get_sub_layout("vertical") as layout:
+            with layout.get_sub_layout("splitter", orientation="vertical") as layout:
                 layout.add(widgets.PlainTextEdit("upper right"))
                 layout.add(widgets.PlainTextEdit("middle right"))
         with layout.get_sub_layout("horizontal") as layout:
             layout.add(widgets.PlainTextEdit("lower left"))
             layout.add(widgets.PlainTextEdit("lower right"))
-    from devtools import debug
 
-    print(debug(widget))
     widget.show()
     app.main_loop()
