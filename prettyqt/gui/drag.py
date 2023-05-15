@@ -28,13 +28,14 @@ class Drag(core.ObjectMixin, QtGui.QDrag):
         self,
         supported_actions: list[constants.DropActionStr] | None = None,
         default_drop_action: constants.DropActionStr | None = None,
-    ):
+    ) -> constants.DropActionStr:
         supported_actions = supported_actions or [constants.DROP_ACTION["move"]]
         flag = QtCore.Qt.DropAction(0)
         for i in supported_actions:
             flag |= constants.DROP_ACTION[i]
         default_action = constants.DROP_ACTION[default_drop_action]
-        self.exec(flag, default_action)
+        result = self.exec(flag, default_action)
+        return constants.DROP_ACTION.inverse[result]
 
 
 if __name__ == "__main__":
