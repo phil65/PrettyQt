@@ -12,6 +12,10 @@ from .hierarchicalheaderview import HierarchicalHeaderView
 from .keycombinationedit import KeyCombinationEdit
 from .singlelinetextedit import SingleLineTextEdit
 from .rectedit import RectEdit, RegionEdit
+from .paletteedit import PaletteEdit
+from .cursoredit import CursorEdit
+from .iconedit import IconEdit
+from .localeedit import LocaleEdit
 from .pointedit import PointEdit
 from .sizeedit import SizeEdit
 from .sizepolicyedit import SizePolicyEdit
@@ -75,6 +79,10 @@ __all__ = [
     "IconBrowser",
     "IconWidget",
     "RectEdit",
+    "PaletteEdit",
+    "CursorEdit",
+    "LocaleEdit",
+    "IconEdit",
     "PointEdit",
     "SizeEdit",
     "RegionEdit",
