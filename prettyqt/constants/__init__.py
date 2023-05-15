@@ -6,6 +6,11 @@ from prettyqt.utils import bidict
 
 Qt = QtCore.Qt
 
+
+def __getattr__(name: str):
+    return getattr(Qt, name)
+
+
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
 SORT_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 100)
