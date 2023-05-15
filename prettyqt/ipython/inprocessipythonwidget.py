@@ -61,6 +61,7 @@ class InProcessIPythonWidget(ipython.BaseIPythonWidget):
             return None
         self._append_plain_text(f'\nread "{obj_name}" object to namespace\n', True)
         self.evaluated.emit(data)
+        return data
 
 
 if __name__ == "__main__":
@@ -69,6 +70,7 @@ if __name__ == "__main__":
     console_widget = InProcessIPythonWidget(app)
     console_widget.print_text("hallo")
     console_widget.show()
+    console_widget.evaluated.connect(print)
     app.sleep(5)
     console_widget.clear()
     app.main_loop()

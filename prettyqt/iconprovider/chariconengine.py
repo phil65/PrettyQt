@@ -22,6 +22,6 @@ class CharIconEngine(gui.IconEngine):
         pm = QtGui.QPixmap(size)
         pm.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
         rect = core.Rect(ZERO_COORD, size)
-        painter = gui.Painter(pm)
-        self.paint(painter, rect, mode, state)
+        with gui.Painter(pm) as painter:
+            self.paint(painter, rect, mode, state)
         return pm

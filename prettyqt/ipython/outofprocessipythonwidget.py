@@ -13,6 +13,11 @@ from prettyqt import core, ipython, widgets
 
 logger = logging.getLogger(__name__)
 
+# ipython = IPython.get_ipython()
+# ipython.magic(f"gui qt{qt.QT_VERSION}")
+
+# asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
 
 def run_server(connection_file: os.PathLike):
     IPython.embed_kernel(

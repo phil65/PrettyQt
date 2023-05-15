@@ -114,11 +114,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
     ) -> Self:
         match parent:
             case QtWidgets.QMainWindow():
-                widget = QtWidgets.QWidget(parent=parent)
+                widget = widgets.Widget(parent=parent)
                 parent.setCentralWidget(widget)
                 new = cls(widget, **kwargs)
             case QtWidgets.QSplitter():
-                widget = QtWidgets.QWidget(parent=parent)
+                widget = widgets.Widget(parent=parent)
                 parent.addWidget(widget)
                 new = cls(widget, **kwargs)
             case None | QtWidgets.QWidget():
