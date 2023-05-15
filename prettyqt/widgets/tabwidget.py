@@ -58,35 +58,6 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
 
-    # def serialize_fields(self):
-    #     return dict(
-    #         tabbar=self.tabBar(),
-    #         widgets=self.get_children(),
-    #         movable=self.isMovable(),
-    #         document_mode=self.documentMode(),
-    #         current_index=self.currentIndex(),
-    #         tab_shape=self.get_tab_shape(),
-    #         # elide_mode=self.get_elide_mode(),
-    #         icon_size=self.iconSize(),
-    #         tab_position=self.get_tab_position(),
-    #     )
-
-    # def __setstate__(self, state):
-    #     super().__setstate__(state)
-    #     self.setTabBar(state["tabbar"])
-    #     self.setDocumentMode(state.get("document_mode", False))
-    #     self.setMovable(state.get("movable", False))
-    #     self.set_tab_shape(state.get("tab_shape", "rounded"))
-    #     self.setIconSize(state["icon_size"])
-    #     for widget, name, icon, tooltip, whatsthis in state["widgets"]:
-    #         i = self.add_tab(widget, name, icon)
-    #         self.setTabToolTip(i, tooltip)
-    #         self.setTabWhatsThis(i, whatsthis)
-    #     self.setCurrentIndex(state.get("index", 0))
-
-    # def __reduce__(self):
-    #     return type(self), (), self.__getstate__()
-
     def update_tab_bar_visibility(self):
         """Update visibility of the tabBar depending of the number of tabs.
 
@@ -301,8 +272,8 @@ class DetachedTab(widgets.MainWindow):
 
     on_close = core.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
 
-    def __init__(self, name: str, widget: QtWidgets.QWidget):
-        super().__init__(None)
+    def __init__(self, name: str, widget: QtWidgets.QWidget, **kwargs):
+        super().__init__(**kwargs)
 
         self.set_id(name)
         self.set_title(name)
@@ -317,12 +288,127 @@ class DetachedTab(widgets.MainWindow):
         self.on_close.emit(self.widget, self.get_id(), self.windowIcon())
 
 
-if __name__ == "__main__":
-    app = widgets.app()
-    tab_widget = TabWidget()
-    widget = widgets.Widget()
-    tab_widget.add_tab(widget, "Test")
-    widget_2 = widgets.Widget()
-    tab_widget.add_tab(widget_2, "Test 2")
-    tab_widget.show()
-    app.main_loop()
+# import sys
+# import ctypes
+# from win32con import WM_ACTIVATE, WM_CLOSE, WM_CREATE
+
+# WM_DWMSENDICONICTHUMBNAIL = 0x0323
+# WM_DWMSENDICONICLIVEPREVIEWBITMAP = 0x0326
+
+
+# class TopTabWidget(TabWidget):
+#     """Widget for managing the tabs section."""
+
+#     def __init__(
+#         self,
+#         parent: QtWidgets.QWidget | None = None,
+#         closable: bool = False,
+#         detachable: bool = False,
+#     ) -> None:
+#         # Basic initalization
+#         super().__init__(parent)
+
+#     def nativeEvent(self, event, message):
+#         return_value, result = super().nativeEvent(event, message)
+#         if sys.platform != "win32":
+#             return return_value, bool(result)
+#         # if you use Windows OS
+#         if event in [b"windows_generic_MSG", b"windows_dispatcher_MSG"]:
+#             msg = ctypes.wintypes.MSG.from_address(int(message))
+#             if True:
+#                 print(msg.message)
+#                 # if msg.message == 274:
+#                 #     raise ValueError()
+#                 if msg.message == WM_CREATE:
+#                     pass
+#                 if msg.message == WM_ACTIVATE:
+#                     print("WM_ACTIVATE", msg.hWnd)
+#                 if msg.message == WM_CLOSE:
+#                     print("WM_CLOSE", msg.hWnd)
+#                     # see https://github.com/microsoft/Windows-classic-samples/
+#                     # blob/main/Samples/Win7Samples/winui/shell/
+#                     # appshellintegration/TabThumbnails/TabWnd.cpp
+#                     # if (LOWORD(wParam) == WA_ACTIVE)
+#                     print(self.window(), self)
+#                     self.window().remove_tab(self)
+#                     taskbaritem.taskbar.UnregisterTab(int(msg.hWnd))
+#                     # item.unregister_tab()
+#                 if msg.message == WM_DWMSENDICONICTHUMBNAIL:
+#                     print("WM_DWMSENDICONICTHUMBNAIL", msg.hWnd)
+#                     pix = self.grab()
+#                     pix = pix.scaled(QtCore.Qt.AspectRatioMode.KeepAspectRatio)
+
+#                     pix.toImage().toHBITMAP()
+
+#                     # DwmSetIconicThumbnail(id, hbitmap, 0);
+#                     # DeleteObject(hbitmap);
+#                     # return true;
+
+#                 if msg.message == WM_DWMSENDICONICLIVEPREVIEWBITMAP:
+#                     print("WM_DWMSENDICONICLIVEPREVIEWBITMAP", msg.hWnd)
+#                     widget = self.window()
+#                     SIZE = 50
+#                     pix = widget.grab().scaled(
+#                         SIZE, QtCore.Qt.AspectRatioMode.KeepAspectRatio
+#                     )
+#                     pix.toImage().toHBITMAP()
+
+#                 # DwmSetIconicLivePreviewBitmap(id, hbitmap, 0);
+#                 # DeleteObject(hbitmap);
+#                 # return true;
+
+#         # case WM_CREATE:
+#         # {
+#         #     // Set DWM window attributes to indicate we'll provide the iconic bitmap,
+#         #     // and to always render the thumbnail using the iconic bitmap.
+#         #     BOOL fForceIconic = TRUE;
+#         #     BOOL fHasIconicBitmap = TRUE;
+
+#         #     DwmSetWindowAttribute(
+#         #         _hwnd,
+#         #         DWMWA_FORCE_ICONIC_REPRESENTATION,
+#         #         &fForceIconic,
+#         #         sizeof(fForceIconic));
+
+#         #     DwmSetWindowAttribute(
+#         #         _hwnd,
+#         #         DWMWA_HAS_ICONIC_BITMAP,
+#         #         &fHasIconicBitmap,
+#         #         sizeof(fHasIconicBitmap));
+
+#         #     // Tell the taskbar about this tab window
+#         #     _pMainDlg->RegisterTab(this);
+#         #     break;
+
+#         return return_value, bool(result)
+
+#     # def add_tab(self, *args, **kwargs):
+#     #     result = super().add_tab(*args, **kwargs)
+#     #     widgets.app().register_tab(args[0])
+#     #     return result
+
+
+# if __name__ == "__main__":
+#     app = widgets.app()
+#     # mainwindow = widgets.MainWindow()
+#     # mainwindow.show()
+#     tab_widget = TopTabWidget()
+#     tab_widget.show()
+#     tab_widget.set_detachable()
+#     widget = TopTabWidget()
+#     widget.show()
+#     img = widget.grab().toImage().toHBITMAP()
+#     widget_2 = TopTabWidget()
+#     print("IDs", widget.get_win_id(), widget_2.get_win_id())
+
+#     from prettyqt.utils.platforms.windows import taskbaritem
+
+#     tb = taskbaritem.TaskBarItem(tab_widget.get_win_id())
+#     tb.register_tab(widget.winId())
+#     tb.register_tab(widget_2.winId())
+#     tb2 = taskbaritem.TaskBarItem(widget.get_win_id())
+#     tb2.set_iconic_thumbnail(img)
+#     tb.set_iconic_thumbnail(img)
+#     tab_widget.add_tab(widget, "Test")
+#     tab_widget.add_tab(widget_2, "Test 2")
+#     app.main_loop()
