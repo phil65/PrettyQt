@@ -4,7 +4,7 @@ import logging
 
 from qtconsole.rich_jupyter_widget import RichJupyterWidget
 
-from prettyqt import core, widgets
+from prettyqt import core, gui, widgets
 
 
 # disables 'Please pass -Xfrozen_modules=off' warning
@@ -47,11 +47,46 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         """Stop IPython and cleanup."""
         return NotImplemented
 
+    def buffer(self) -> str:
+        """Get current code block."""
+        return self.input_buffer
+
+    def set_buffer(self, code: str) -> None:
+        """Set code string to Jupyter QtConsole buffer."""
+        self.input_buffer = ""
+        if not isinstance(code, str):
+            raise ValueError(f"Cannot set {type(code)}.")
+        cursor = self._control.textCursor()
+        lines = code.split("\n")
+        for line in lines[:-1]:
+            cursor.insertText(line + "\n")
+            self._insert_continuation_prompt(cursor)  # insert "...:"
+        cursor.insertText(lines[-1])
+        return None
+
+    def insert_text(self, text: str) -> None:
+        cursor = self._control.textCursor()
+        cursor.insertText(text)
+        return None
+
+    def set_temp_text(self, text: str) -> None:
+        cursor = self._control.textCursor()
+        cursor.removeSelectedText()
+        pos = cursor.position()
+        cursor.insertText(text)
+        cursor.setPosition(pos)
+        cursor.setPosition(pos + len(text), gui.TextCursor.MoveMode.KeepAnchor)
+        self._control.setTextCursor(cursor)
+        return None
+
+    def get_selected_text(self) -> str:
+        """Return the selected text."""
+        cursor = self._control.textCursor()
+        return cursor.selection().toPlainText()
+
     def clear(self):
         """Clear the terminal."""
         self._control.clear()
-
-        # self.kernel_manager
 
     def print_text(self, text: str, before_prompt: bool = False):
         """Print some plain text to the console."""
