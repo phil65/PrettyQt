@@ -1,7 +1,18 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import bidict
+
+
+STACKING_MODE = bidict(
+    one=QtWidgets.QStackedLayout.StackingMode.StackOne,
+    all=QtWidgets.QStackedLayout.StackingMode.StackAll,
+)
+
+StackingModeStr = Literal["one", "all"]
 
 
 class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):
@@ -14,6 +25,17 @@ class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):
 
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"stackingMode": STACKING_MODE}
+        return maps
+
+    def set_stacking_mode(self, mode: StackingModeStr):
+        self.setStackingMode(STACKING_MODE[mode])
+
+    def get_stacking_mode(self) -> StackingModeStr:
+        return STACKING_MODE.inverse[self.stackingMode()]
 
     def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
         self.add(other)
