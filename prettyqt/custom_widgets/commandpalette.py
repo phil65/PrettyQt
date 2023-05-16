@@ -1,15 +1,32 @@
 from __future__ import annotations
 
+import collections
 from collections.abc import Sequence
 import logging
 
 from prettyqt import constants, core, custom_delegates, custom_models, gui, widgets
 from prettyqt.custom_models import actionsmodel
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import colors
+from prettyqt.utils import colors, datatypes
 
 
 logger = logging.getLogger(__name__)
+
+COMMANDS = collections.defaultdict(list)
+
+
+class CommandGroup:
+    def __init__(self, group_name: str):
+        self.group_name = group_name
+
+    def register(
+        self, text: str, icon: datatypes.IconType | None = None, shortcut: str = ""
+    ):
+        def decorator(fn):
+            COMMANDS[self.group_name].append((text, icon, shortcut, fn))
+            return fn
+
+        return decorator
 
 
 class CommandTable(widgets.TableView):
@@ -67,7 +84,6 @@ class CommandPalette(widgets.Widget):
         self.setMinimumWidth(700)
         self._line = widgets.LineEdit()
         self._table = CommandTable()
-        self._line.value_changed.connect(self._table._model.set_current_marker_text)
         # self._line.value_changed.connect(self._table.select_first_row)
         self._line.value_changed.connect(self._table._proxy.set_search_term)
         layout = widgets.VBoxLayout(self)
@@ -135,38 +151,8 @@ class CommandPalette(widgets.Widget):
         self.resize(500, 300)
         self.center_on("screen")
         super().show()
-        # if parent := self.parentWidget():
-        #     parent_rect = parent.rect()
-        #     self_size = self.size()
-        #     w = min(int(parent_rect.width() * 0.8), self_size.width())
-        #     topleft = parent.rect().topLeft()
-        #     topleft.setX(int(topleft.x() + (parent_rect.width() - w) / 2))
-        #     topleft.setY(int(topleft.y() + 3))
-        #     self.move(topleft)
-        #     self.resize(w, self_size.height())
-
         self.raise_()
         self._line.setFocus()
-
-    # def show_center(self):
-    #     """Show command palette widget in the center of the screen."""
-    #     self._line.setText("")
-    #     # self._table.update_for_text("")
-    #     self.setWindowFlags(
-    #         QtCore.Qt.WindowType.Dialog | QtCore.Qt.WindowType.FramelessWindowHint
-    #     )
-    #     super().show()
-
-    #     screen_rect = gui.GuiApplication.primaryScreen().geometry()
-    #     self.resize(
-    #         int(screen_rect.width() * 0.5),
-    #         int(screen_rect.height() * 0.5),
-    #     )
-    #     point = screen_rect.center() - self.rect().center()
-    #     self.move(point)
-
-    #     self.raise_()
-    #     self._line.setFocus()
 
 
 if __name__ == "__main__":
@@ -216,4 +202,5 @@ if __name__ == "__main__":
         label = "".join(random.choices(string.ascii_uppercase, k=10))
         pal.add_actions([gui.Action(text=label)])
     window.show()
+    print(COMMANDS)
     app.main_loop()
