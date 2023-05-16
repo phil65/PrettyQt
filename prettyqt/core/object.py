@@ -5,6 +5,7 @@ import contextlib
 
 # import inspect
 import itertools
+import logging
 from typing import Any, TypeVar
 
 from prettyqt import constants, core
@@ -16,11 +17,14 @@ T = TypeVar("T", bound=QtCore.QObject)
 
 counter_dict: defaultdict = defaultdict(itertools.count)
 
+logger = logging.getLogger(__name__)
+
 
 class ObjectMixin:
     Properties: dict[type, list[str]] = {}
 
     def __init__(self, *args, **kwargs):
+        self._eventfilters = set()
         # this allows snake_case property and signal names in ctor.
         new = {}
         if kwargs:
@@ -63,6 +67,20 @@ class ObjectMixin:
         if cameled in dir(self):
             return getattr(self, cameled)
         raise AttributeError(val)
+
+    def installEventFilter(self, eventfilter: QtCore.QObject):
+        if eventfilter in self._eventfilters:
+            logger.warning("Trying to install same EventFilter multiple times.")
+            return
+        self._eventfilters.add(eventfilter)
+        super().installEventFilter(eventfilter)
+
+    def removeEventFilter(self, eventfilter: QtCore.QObject):
+        if eventfilter not in self._eventfilters:
+            logger.warning("Trying to remove non-installed EventFilter.")
+            return
+        self._eventfilters.remove(eventfilter)
+        super().removeEventFilter(eventfilter)
 
     def serialize_fields(self):
         return dict(object_name=self.objectName())
