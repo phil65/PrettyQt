@@ -50,18 +50,7 @@ def make_qtype(obj):
         case gui.Vector4D():
             # PyQt doesnt allow Vector4D in ctor
             return QtGui.QVector4D(obj.x(), obj.y(), obj.z(), obj.w())
-        case gui.TextDocument():
-            # TODO: cant serialize this yet
-            return None
-
-    from prettyqt import widgets
-    from prettyqt.qt import QtWidgets
-
-    match obj:
-        case widgets.SizePolicy():
-            return QtWidgets.QSizePolicy.clone(obj)
-        case _:
-            return obj
+    return obj
 
 
 def make_serializable(obj):
