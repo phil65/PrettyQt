@@ -24,6 +24,12 @@ class MetaProperty:
     def get_meta_type(self) -> core.MetaType:
         return core.MetaType(self.metaType().id())
 
+    def get_notify_signal(self) -> core.MetaMethod:
+        return core.MetaMethod(self.notifySignal())
+
+    def get_enumerator(self) -> core.MetaEnum:
+        return core.MetaEnum(self.enumerator())
+
 
 if __name__ == "__main__":
     metaobj = core.Object.get_static_metaobject()
