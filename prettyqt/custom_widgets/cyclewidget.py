@@ -20,9 +20,9 @@ class CycleWidget(widgets.ListWidget):
         self.item_size = item_size
         self.align = align
 
-        self.up_button = widgets.ToolButton(parent=self)
+        self.up_button = widgets.ToolButton(parent=self, clicked=self.scroll_up)
         self.up_button.set_icon("mdi.arrow-up-bold-outline")
-        self.down_button = widgets.ToolButton(parent=self)
+        self.down_button = widgets.ToolButton(parent=self, clicked=self.scroll_down)
         self.down_button.set_icon("mdi.arrow-down-bold-outline")
         self.origin_items = list(items)
 
@@ -39,9 +39,6 @@ class CycleWidget(widgets.ListWidget):
         self.set_scrollbar_policy("always_off")
         self.up_button.hide()
         self.down_button.hide()
-
-        self.up_button.clicked.connect(self.scroll_up)
-        self.down_button.clicked.connect(self.scroll_down)
         self.itemClicked.connect(self._on_item_clicked)
 
     def setItems(self, items: list):

@@ -33,10 +33,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         btn_callback = index.data(self.method_role)
         if btn_callback is None:
             return
-        btn = widgets.PushButton(parent=parent)
-        btn.setText(index.data())
-        btn.clicked.connect(btn_callback)
-        return btn
+        return widgets.PushButton(parent=parent, text=index.data(), clicked=btn_callback)
 
     def setEditorData(self, editor, index):
         pass

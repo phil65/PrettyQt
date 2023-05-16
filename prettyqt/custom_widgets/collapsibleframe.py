@@ -18,24 +18,25 @@ class CollapsibleFrame(widgets.Frame):
         _layout.setSpacing(0)
         self.setLayout(_layout)
         # button
-        self._button = widgets.ToolButton(self)
-        self._button.set_arrow_type("right")
+        self._button = widgets.ToolButton(
+            self,
+            clicked=self.on_button_click,
+            arrow_type="right",
+            auto_raise=False,
+            text=text,
+            visible=True,
+        )
         self._button.set_style("text_beside_icon")
-        self._button.setAutoRaise(False)
-        self._button.set_text(text)
         self.set_size_policy("minimum_expanding", "fixed")
         _layout.addWidget(self._button, 0)
-        self._button.setVisible(True)
         # group box
-        self._panel = widgets.Widget(self)
+        self._panel = widgets.Widget(self, visible=False)
         _layout.addWidget(self._panel)
-        self._panel.setVisible(False)
         self._panel_layout = widgets.VBoxLayout()
         self._panel_layout.set_margin(1)
         self._panel_layout.setSpacing(2)
         self._panel.setLayout(self._panel_layout)
         # connect signals
-        self._button.clicked.connect(self.on_button_click)
         # private state variables
         self._is_collapsed = True
 
