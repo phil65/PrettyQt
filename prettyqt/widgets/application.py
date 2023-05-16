@@ -73,6 +73,30 @@ class ApplicationMixin(gui.GuiApplicationMixin):
                     new_state = state.encode() if isinstance(state, str) else state
                     w.restoreState(new_state)
 
+    @classmethod
+    def widgets_at(cls, pos: datatypes.PointType) -> list[QtWidgets.QWidget]:
+        """Return ALL widgets at `pos`.
+
+        Arguments:
+            pos: Position at which to get widgets
+
+        Returns:
+            list of widgets at given position
+
+        """
+        if isinstance(pos, tuple):
+            pos = core.Point(*pos)
+        widgets = []
+        while widget_at := cls.widgetAt(pos):
+            widgets.append(widget_at)
+            # Make widget invisible to further enquiries
+            widget_at.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+        # Restore attribute
+        for widget in widgets:
+            widget.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents, False)
+
+        return widgets
+
     def about_popup(self, title: str = "About"):
         text = (
             f"{self.applicationName()}\n\n"
