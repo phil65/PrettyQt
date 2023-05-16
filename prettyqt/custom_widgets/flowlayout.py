@@ -5,16 +5,8 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class FlowLayout(widgets.Layout):
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-        margin: int | None = None,
-        spacing: int = -1,
-    ):
-        super().__init__(parent)  # type: ignore
-        if margin is not None:
-            self.set_margin(margin)
-        self.set_spacing(spacing)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._items: list[QtWidgets.QLayoutItem] = []
 
     def serialize_fields(self):
@@ -40,6 +32,11 @@ class FlowLayout(widgets.Layout):
 
     def addItem(self, item: QtWidgets.QLayoutItem):
         self._items.append(item)
+
+    def addLayout(self, layout: QtWidgets.QLayout):
+        widget = widgets.Widget()
+        widget.setLayout(layout)
+        self.addWidget(widget)
 
     def count(self) -> int:
         return len(self._items)

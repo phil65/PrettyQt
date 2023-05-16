@@ -93,6 +93,9 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
             self._layout.addWidget(item, *args, **kwargs)
         elif isinstance(item, QtWidgets.QLayout):
             self._layout.addLayout(item, *args, **kwargs)
+            # widget = Widgets.Widget()
+            # widget.set_layout(item)
+            # self._layout.addWidget(item, *args, **kwargs)
         elif isinstance(item, list):
             for i in item:
                 self._layout.add(i, *args, **kwargs)
@@ -107,15 +110,20 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
     def create(
         cls,
         parent: QtWidgets.QWidget | QtWidgets.QLayout | None = None,
-        stretch=None,
+        stretch: int | None = None,
         margin: int | None = None,
-        align: constants.AlignmentStr = None,
+        align: constants.AlignmentStr | None = None,
         **kwargs,
     ) -> Self:
+        """Create a Layout attached to given parent. Insert widget if needed."""
         match parent:
             case QtWidgets.QMainWindow():
                 widget = widgets.Widget(parent=parent)
                 parent.setCentralWidget(widget)
+                new = cls(widget, **kwargs)
+            case QtWidgets.QScrollArea():
+                widget = widgets.Widget(parent=parent)
+                parent.setWidget(widget)
                 new = cls(widget, **kwargs)
             case QtWidgets.QSplitter():
                 widget = widgets.Widget(parent=parent)
@@ -123,7 +131,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
                 new = cls(widget, **kwargs)
             case None | QtWidgets.QWidget():
                 new = cls(parent, **kwargs)
-            case _:
+            case QtWidgets.QLayout():
                 new = cls(**kwargs)
                 if stretch:
                     parent.addLayout(new, stretch)
@@ -139,10 +147,8 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
         new._next_container = None
         return new
 
-    def get_sub_layout(self, layout, *args, **kwargs) -> Self:
+    def get_sub_layout(self, layout: str, *args, **kwargs) -> Self:
         match layout:
-            case None:
-                return
             case "horizontal":
                 Class = widgets.HBoxLayout
             case "vertical":
@@ -257,18 +263,22 @@ class Layout(LayoutMixin, QtWidgets.QLayout):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = widgets.Widget()
+    widget = widgets.ScrollArea()
 
     with widgets.VBoxLayout.create(widget) as layout:
         with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
-            test = layout.add(widgets.PlainTextEdit("upper left"))
-            layout.add(widgets.PlainTextEdit("upper middle"))
+            layout += widgets.PlainTextEdit("upper left")
+            layout += widgets.PlainTextEdit("upper middle")
             with layout.get_sub_layout("splitter", orientation="vertical") as layout:
-                layout.add(widgets.PlainTextEdit("upper right"))
-                layout.add(widgets.PlainTextEdit("middle right"))
+                layout += widgets.PlainTextEdit("upper right")
+                layout += widgets.PlainTextEdit("middle right")
+                with layout.get_sub_layout("horizontal") as layout:
+                    layout += widgets.PlainTextEdit("upper right")
+                    layout += widgets.PlainTextEdit("middle right")
         with layout.get_sub_layout("horizontal") as layout:
-            layout.add(widgets.PlainTextEdit("lower left"))
-            layout.add(widgets.PlainTextEdit("lower right"))
+            layout += widgets.PlainTextEdit("lower left")
+            layout += widgets.PlainTextEdit("lower right")
+    widget.setWidgetResizable(True)
 
     widget.show()
     app.main_loop()

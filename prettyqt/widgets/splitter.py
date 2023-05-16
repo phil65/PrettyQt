@@ -6,7 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, datatypes
 
 
 class SplitterMixin(widgets.FrameMixin):
@@ -80,16 +80,22 @@ class SplitterMixin(widgets.FrameMixin):
     #         self.setStretchFactor(i, sizes[i])
 
     @classmethod
-    def create(cls, parent=None, margins=None, orientation=None, **kwargs):
+    def create(
+        cls,
+        parent: QtWidgets.QWidget | QtWidgets.QLayout,
+        margins: datatypes.MarginsType | None = None,
+        orientation: constants.OrientationStr | None = None,
+        **kwargs,
+    ):
         if orientation in constants.ORIENTATION:
             orientation = constants.ORIENTATION[orientation]
-        if isinstance(parent, QtWidgets.QWidget):
-            new = cls(parent=parent, orientation=orientation, **kwargs)
-            widgets.HBoxLayout.create(parent).add(new)  # .create ?
-        elif isinstance(parent, QtWidgets.QLayout):
-            new = cls(orientation, **kwargs)
-            parent.add(new)
-
+        match parent:
+            case QtWidgets.QWidget():
+                new = cls(parent=parent, orientation=orientation, **kwargs)
+                widgets.HBoxLayout.create(parent).add(new)  # .create ?
+            case QtWidgets.QLayout():
+                new = cls(orientation, **kwargs)
+                parent.add(new)
         if margins:
             new.setContentsMargins(*margins)
 
@@ -99,10 +105,8 @@ class SplitterMixin(widgets.FrameMixin):
         new._next_container = None
         return new
 
-    def get_sub_layout(self, layout, *args, **kwargs):
+    def get_sub_layout(self, layout: str, *args, **kwargs):
         match layout:
-            case None:
-                return
             case "horizontal":
                 self._next_container = widgets.HBoxLayout.create(
                     self._layout, *args, **kwargs
