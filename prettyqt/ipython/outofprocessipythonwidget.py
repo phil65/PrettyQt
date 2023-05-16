@@ -44,6 +44,7 @@ class OutOfProcessIPythonWidget(ipython.BaseIPythonWidget):
             widgets.app().sleep(0.1)
         else:
             raise FileNotFoundError(self.connection_file)
+        logger.info("Connection file found. Opening channels.")
         kernel_client = QtKernelClient(connection_file=os.fspath(self.connection_file))
         kernel_client.load_connection_file()  # can throw FileNotFoundError
         kernel_client.start_channels()

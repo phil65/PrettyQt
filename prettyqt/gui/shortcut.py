@@ -14,15 +14,6 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
     def __str__(self):
         return self.key().toString()
 
-    def serialize_field(self):
-        return dict(
-            auto_repeat=self.autoRepeat(),
-            context=self.get_context(),
-            enabled=self.isEnabled(),
-            key=self.get_key(),
-            whats_this=self.whatsThis(),
-        )
-
     def set_context(self, context: constants.ShortcutContextStr):
         """Set shortcut context.
 
