@@ -109,7 +109,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
             item.setIcon(icon)
         if data is not None:
             for k, v in data.items():
-                item.setData(k, v)
+                item.set_data(k, v)
         if foreground is not None:
             item.setForeground(foreground)
         if background is not None:

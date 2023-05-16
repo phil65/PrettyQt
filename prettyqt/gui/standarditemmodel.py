@@ -110,7 +110,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
             item.setIcon(icon)
         if data is not None:
             for k, v in data.items():
-                item.setData(v, k)
+                item.set_data(v, k)
         if foreground is not None:
             item.setForeground(foreground)
         if background is not None:

@@ -156,7 +156,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
             item.setIcon(icon)
         if data is not None:
             for k, v in data.items():
-                item.setData(v, k)
+                item.set_data(v, k)
         if foreground is not None:
             item.setForeground(foreground)
         if background is not None:
@@ -187,7 +187,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
 
 if __name__ == "__main__":
     item = StandardItem()
-    item.setData("test", 1000)
+    item.set_data("test", 1000)
     item2 = StandardItem()
     item.add(item2)
     print(item.child(0))
