@@ -66,6 +66,17 @@ ControlTypeStr = Literal[
 
 
 class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
+    def __init__(self, *args, **kwargs):
+        match args:
+            case (str(), str()):
+                super().__init__(SIZE_POLICY[args[0]], SIZE_POLICY[args[1]])
+            case (str(), str(), str()):
+                super().__init__(
+                    SIZE_POLICY[args[0]], SIZE_POLICY[args[1]], CONTROL_TYPE[args[2]]
+                )
+            case _:
+                super().__init__(*args, **kwargs)
+
     def __repr__(self) -> str:
         return get_repr(
             self,
@@ -175,3 +186,8 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
     def get_transposed(self) -> Self:
         transposed = self.transposed()
         return type(self).clone(transposed)
+
+
+if __name__ == "__main__":
+    pol = SizePolicy("expanding", "expanding")
+    print(pol)
