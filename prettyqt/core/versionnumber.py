@@ -10,13 +10,13 @@ from prettyqt.utils import datatypes, get_repr
 
 class VersionNumber(QtCore.QVersionNumber):
     def __init__(self, *args, **kwargs):
-        if len(args) == 1:
-            if isinstance(args[0], str):
+        match args:
+            case (str(),):
                 args = [int(i) for i in args[0].split(".")][:3]
-            elif isinstance(args[0], tuple):
+            case (tuple(),):
                 args = args[0]
             # PySide6 Workaround:
-            elif isinstance(args[0], QtCore.QVersionNumber):
+            case (QtCore.QVersionNumber(),):
                 args = (
                     args[0].majorVersion(),
                     args[0].minorVersion(),

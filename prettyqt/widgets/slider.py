@@ -142,16 +142,12 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
     value_changed = core.Signal(int)
     clicked = core.Signal(int)
 
-    def __init__(
-        self,
-        orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        if isinstance(orientation, QtCore.Qt.Orientation):
-            ori = orientation
-        else:
-            ori = constants.ORIENTATION[orientation]
-        super().__init__(ori, parent)
+    def __init__(self, *args, **kwargs):
+        match args:
+            case (str(), *rest):
+                super().__init__(constants.ORIENTATION[args[0]], *rest, **kwargs)
+            case _:
+                super().__init__(*args, **kwargs)
         self.valueChanged.connect(self.on_value_change)
         style = HollowHandleStyle(
             {

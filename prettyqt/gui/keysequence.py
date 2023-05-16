@@ -102,10 +102,11 @@ STANDARD_KEYS = bidict(
 
 class KeySequence(QtGui.QKeySequence):
     def __init__(self, *args, **kwargs):
-        if len(args) == 1 and isinstance(args[0], str) and args[0] in STANDARD_KEYS:
-            super().__init__(STANDARD_KEYS[args[0]])
-        else:
-            super().__init__(*args, **kwargs)
+        match args:
+            case (str(),) if args[0] in STANDARD_KEYS:
+                super().__init__(STANDARD_KEYS[args[0]])
+            case _:
+                super().__init__(*args, **kwargs)
 
     def __str__(self):
         return self.toString()

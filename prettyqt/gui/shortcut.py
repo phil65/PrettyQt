@@ -7,8 +7,9 @@ from prettyqt.utils import InvalidParamError, datatypes
 
 class Shortcut(core.ObjectMixin, QtGui.QShortcut):
     def __init__(self, *args, **kwargs):
-        if args and isinstance(args[0], str):
-            args = (gui.KeySequence(args[0]), *args[1:])
+        match args:
+            case (str(), *rest):
+                args = (gui.KeySequence(args[0]), *rest)
         super().__init__(*args, **kwargs)
 
     def __str__(self):

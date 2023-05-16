@@ -29,18 +29,15 @@ NameStr = NameFormatStr | Literal["svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"
 
 class Color(QtGui.QColor):
     def __init__(self, *args):
-        # PySide2 workaround
-        if len(args) == 1:
-            if isinstance(args[0], QtGui.QColor):
+        match args:
+            case (QtGui.QColor()):
                 super().__init__()
                 self.setRgba(args[0].rgba())
-            elif isinstance(args[0], str):
+            case (str(),):
                 super().__init__()
                 self.set_color(args[0])
-            else:
+            case _:
                 super().__init__(*args)
-        else:
-            super().__init__(*args)
 
     def __repr__(self):
         return get_repr(self, self.red(), self.green(), self.blue(), self.alpha())

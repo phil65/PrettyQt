@@ -80,36 +80,37 @@ class Keys:
 
 class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
     def __init__(self, *args, **kwargs):
-        if len(args) == 1 and isinstance(args[0], str):
-            if args[0] in MODIFIERS.inverse.values():
+        match args:
+            case (str(),) if args[0] in MODIFIERS.inverse.values():
                 mods = args[0].split("+")
                 qtmod = functools.reduce(or_, [MODIFIERS[m] for m in mods])
                 super().__init__(qtmod, Keys.No)
                 return
-            *mods, btn = args[0].split("+")
+            case (str(),):
+                *mods, btn = args[0].split("+")
 
-            # get modifiler
-            qtmod = (
-                functools.reduce(or_, [MODIFIERS[m] for m in mods])
-                if mods
-                else Mod.NoModifier
-            )
-            # get button
-            if btn in _SYMBOLS:
-                btn = _SYMBOLS[btn]
-            if btn.isalnum():
-                btn = btn.upper()
-            qtkey = getattr(Key, f"Key_{btn}") if btn != "{}" else Keys.Any
-            super().__init__(qtmod, qtkey)
-        elif len(args) == 1 and isinstance(args[0], QtCore.QEvent):
-            modifier = args[0].modifiers()
-            modifier ^= Mod.KeypadModifier
-            key = args[0].key()
-            if key in MODIFIER_KEYS:  # modifier only
-                key = Keys.No
-            super().__init__(key, modifier)
-        else:
-            super().__init__(*args, **kwargs)
+                # get modifiler
+                qtmod = (
+                    functools.reduce(or_, [MODIFIERS[m] for m in mods])
+                    if mods
+                    else Mod.NoModifier
+                )
+                # get button
+                if btn in _SYMBOLS:
+                    btn = _SYMBOLS[btn]
+                if btn.isalnum():
+                    btn = btn.upper()
+                qtkey = getattr(Key, f"Key_{btn}") if btn != "{}" else Keys.Any
+                super().__init__(qtmod, qtkey)
+            case (QtCore.QEvent(),):
+                modifier = args[0].modifiers()
+                modifier ^= Mod.KeypadModifier
+                key = args[0].key()
+                if key in MODIFIER_KEYS:  # modifier only
+                    key = Keys.No
+                super().__init__(key, modifier)
+            case _:
+                super().__init__(*args, **kwargs)
 
     def __eq__(self, other):
         if isinstance(other, str | Key):
