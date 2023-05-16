@@ -5,7 +5,7 @@ import logging
 
 from prettyqt import core, custom_widgets, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -23,7 +23,7 @@ class WidgetEditor(widgets.ScrollArea):
         self.set_minimum_size(800, 1000)
         self.editors = bidict()
         # self.add_widget(container)
-        metaobj = widget.get_metaobject()
+        metaobj = self._widget.get_metaobject()
         for i, prop in enumerate(metaobj.get_properties()):
             value = prop.read(widget)
             typ = prop.get_meta_type().get_type()
@@ -73,23 +73,33 @@ class WidgetEditor(widgets.ScrollArea):
         self.setWidgetResizable(True)
 
     def _on_value_change(self):
-        metaobj = self._widget.get_metaobject()
         editor = self.sender()
         prop_name = self.editors.inverse[editor]
-        prop = metaobj.get_property(prop_name)
+        prop = self._widget.get_metaobject().get_property(prop_name)
         value = editor.get_value()
+        value = datatypes.make_qtype(value)
         logger.info(f"setting {prop_name} to {value}")
         prop.write(self._widget, value)
         self._widget.updateGeometry()
+        self._widget.repaint()
+        self._widget.parentWidget().updateGeometry()
+        self._widget.parentWidget().repaint()
 
 
 if __name__ == "__main__":
     app = widgets.app()
+    app.enable_debug_mode()
     import sys
 
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-    w = widgets.PlainTextEdit()
-    w.show()
+    container = widgets.Widget()
+    container.set_layout("horizontal")
+    w = widgets.PlainTextEdit(parent=container)
+    w2 = widgets.PlainTextEdit(parent=container)
+    container.box.add(w)
+    container.box.add(w2)
+    container.show()
     editor = WidgetEditor(w)
     editor.show()
     app.main_loop()
+    print(w.get_properties())

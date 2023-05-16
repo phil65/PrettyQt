@@ -6,6 +6,64 @@ import pathlib
 from typing import TYPE_CHECKING, Any, Protocol, Union
 
 
+def make_qtype(obj):
+    from prettyqt import core
+    from prettyqt.qt import QtCore
+
+    match obj:
+        case core.Margins():
+            return QtCore.QMargins(obj)
+        case core.Locale():
+            return QtCore.QLocale(obj)
+        case core.KeyCombination():
+            return QtCore.QKeyCombination(obj)
+        case core.Url():
+            return QtCore.QUrl(obj)
+        case core.EasingCurve():
+            return QtCore.QEasingCurve(obj)
+        case list():
+            return [make_qtype(i) for i in obj]
+
+    from prettyqt import gui
+    from prettyqt.qt import QtGui
+
+    match obj:
+        case gui.Palette():
+            return QtGui.QPalette(obj)
+        case gui.Font():
+            return QtGui.QFont(obj)
+        case gui.Cursor():
+            return QtGui.QCursor(obj)
+        case gui.Brush():
+            return QtGui.QBrush(obj)
+        case gui.Pixmap():
+            return QtGui.QPixmap(obj)
+        case gui.Region():
+            return QtGui.QRegion(obj)
+        case gui.KeySequence():
+            return QtGui.QKeySequence(obj)
+        case gui.Icon():
+            return QtGui.QIcon(obj)
+        case gui.Vector3D():
+            # PyQt doesnt allow Vector3D in ctor
+            return QtGui.QVector3D(obj.x(), obj.y(), obj.z())
+        case gui.Vector4D():
+            # PyQt doesnt allow Vector4D in ctor
+            return QtGui.QVector4D(obj.x(), obj.y(), obj.z(), obj.w())
+        case gui.TextDocument():
+            # TODO: cant serialize this yet
+            return None
+
+    from prettyqt import widgets
+    from prettyqt.qt import QtWidgets
+
+    match obj:
+        case widgets.SizePolicy():
+            return QtWidgets.QSizePolicy.clone(obj)
+        case _:
+            return obj
+
+
 def make_serializable(obj):
     #  possible to avoid importing by checking the metaobject instead of isinstance?
     from prettyqt import core
