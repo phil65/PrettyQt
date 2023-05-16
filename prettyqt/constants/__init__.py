@@ -206,10 +206,10 @@ MODIFIER_TO_KEY = {
     QtCore.Qt.KeyboardModifier.MetaModifier: QtCore.Qt.Modifier.META,
 }
 
-KeyboardmodifierStr = Literal[
+KeyboardModifierStr = Literal[
     "none", "shift", "ctrl", "alt", "meta", "keypad", "group_switch"
 ]
-KEYBOARD_MODIFIERS: bidict[KeyboardmodifierStr, Qt.KeyboardModifier] = bidict(
+KEYBOARD_MODIFIERS: bidict[KeyboardModifierStr, Qt.KeyboardModifier] = bidict(
     none=Qt.KeyboardModifier.NoModifier,
     shift=Qt.KeyboardModifier.ShiftModifier,
     ctrl=Qt.KeyboardModifier.ControlModifier,

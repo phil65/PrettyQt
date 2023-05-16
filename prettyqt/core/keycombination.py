@@ -138,17 +138,9 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
         """True if function arrows are pushed."""
         return self.key() in FUNC_ARROW_KEYS
 
-    def has_ctrl(self) -> bool:
+    def has_modifier(self, modifier: constants.KeyboardModifierStr) -> bool:
         """True if Ctrl is pressed."""
-        return bool(self.keyboardModifiers() & Mod.ControlModifier)
-
-    def has_shift(self) -> bool:
-        """True if Shift is pressed."""
-        return bool(self.keyboardModifiers() & Mod.ShiftModifier)
-
-    def has_alt(self) -> bool:
-        """True if Alt is pressed."""
-        return bool(self.keyboardModifiers() & Mod.AltModifier)
+        return bool(self.keyboardModifiers() & constants.KEYBOARD_MODIFIERS[modifier])
 
     def has_key(self) -> bool:
         """True if non-modifier key is pressed."""
@@ -157,10 +149,10 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
     def get_key(self) -> constants.KeyStr:
         return constants.KEY.inverse[self.key()]
 
-    def get_modifiers(self) -> list[constants.KeyboardmodifierStr]:
+    def get_modifiers(self) -> list[constants.KeyboardModifierStr]:
         return constants.KEYBOARD_MODIFIERS.get_list(self.keyboardModifiers())
 
 
 if __name__ == "__main__":
-    seq = KeyCombination(Key(1))
+    seq = KeyCombination(Mod.ControlModifier)
     print(seq)
