@@ -1,15 +1,14 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
 class CollapsibleFrame(widgets.Frame):
     expanded = core.Signal()
     collapsed = core.Signal()
 
-    def __init__(self, text: str = "", parent: QtWidgets.QWidget | None = None):
-        super().__init__(parent)
+    def __init__(self, text: str = "", **kwargs):
+        super().__init__(**kwargs)
         self.set_frame_shape("styled_panel")
         self.set_frame_shadow("plain")
         # layout

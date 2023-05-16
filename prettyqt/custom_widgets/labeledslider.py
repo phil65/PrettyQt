@@ -22,27 +22,29 @@ class LabeledSlider(widgets.Widget):
         if not isinstance(labels, Sequence):
             raise ValueError("<labels> must be a sequence.")
         self.levels = list(enumerate(labels))
-        self.set_layout(orientation)
+        self.set_layout(orientation, margin=10)
 
         # gives some space to print labels
         self.left_margin = 10
         self.top_margin = 10
         self.right_margin = 10
         self.bottom_margin = 10
-        self.box.set_margin(10)
 
-        self.sl = widgets.Slider(orientation)
-        self.sl.value_changed.connect(self.value_changed)
-        self.sl.set_range(0, len(self.levels) - 1)
-        self.sl.set_value(0)
+        self.sl = widgets.Slider(
+            orientation,
+            tick_interval=1,
+            single_step=1,
+            minimum=0,
+            maximum=len(self.levels) - 1,
+            value=0,
+            value_changed=self.value_changed,
+        )
         if orientation == "horizontal":
             self.sl.set_tick_position("below")
             self.sl.setMinimumWidth(300)
         else:
             self.sl.set_tick_position("left")
             self.sl.setMinimumHeight(300)
-        self.sl.setTickInterval(1)
-        self.sl.setSingleStep(1)
 
         self.box.add(self.sl)
 

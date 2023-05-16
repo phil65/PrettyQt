@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore
 
 
 class CodeEditor(widgets.PlainTextEdit):
-    def __init__(self, language: str = "python", parent: QtWidgets.QWidget | None = None):
-        super().__init__(parent=parent)
+    def __init__(self, language: str = "python", **kwargs):
+        super().__init__(**kwargs)
         self.line_area = LineNumberArea(self)
         self.blockCountChanged.connect(self.update_line_area_width)
         self.updateRequest.connect(self.update_line_area)

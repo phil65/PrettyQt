@@ -79,3 +79,7 @@ class TimeLine(core.ObjectMixin, QtCore.QTimeLine):
         curve = core.EasingCurve(self.easingCurve())
         typ = curve.get_type()
         return curve.get_custom_type() if typ == "custom" else typ
+
+
+if __name__ == "__main__":
+    timeline = TimeLine(finished=print, value_changed=print)

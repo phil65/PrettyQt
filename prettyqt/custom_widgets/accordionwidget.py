@@ -11,8 +11,7 @@ class AccordionItem(widgets.GroupBox):
         super().__init__(accept_drops=True, context_menu_policy="custom", **kwargs)
 
         # create the layout
-        layout = widgets.VBoxLayout(spacing=0)
-        layout.set_margin(6)
+        layout = widgets.VBoxLayout(spacing=0, margin=6)
         layout.addWidget(widget)
 
         self._rollout_style = 2

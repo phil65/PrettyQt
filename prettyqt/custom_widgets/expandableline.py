@@ -9,9 +9,9 @@ class ExpandableLine(widgets.Widget):
         self,
         title: str = "",
         animation_duration: int = 300,
-        parent: QtWidgets.QWidget | None = None,
+        **kwargs,
     ):
-        super().__init__(parent=parent)
+        super().__init__(**kwargs)
 
         self._animation_duration = animation_duration
 
@@ -24,13 +24,16 @@ class ExpandableLine(widgets.Widget):
         )
         with self.expand_btn.edit_stylesheet() as ss:
             ss.QToolButton.border.setValue(None)
-        header_line = widgets.Frame(frame_shape="h_line", frame_shadow="sunken")
-        header_line.set_size_policy("expanding", "maximum")
-
-        self.content_area = widgets.ScrollArea(maximum_height=1)
+        header_line = widgets.Frame(
+            frame_shape="h_line",
+            frame_shadow="sunken",
+            size_policy=widgets.SizePolicy("expanding", "maximum"),
+        )
+        self.content_area = widgets.ScrollArea(
+            maximum_height=1, size_policy=widgets.SizePolicy("expanding", "fixed")
+        )
         with self.expand_btn.edit_stylesheet() as ss:
             ss.QAbstractScrollArea.border.setValue(None)
-        self.content_area.set_size_policy("expanding", "fixed")
         # self.content_area.setMinimumHeight(0)
 
         self.toggle_anim = core.ParallelAnimationGroup()

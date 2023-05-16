@@ -1,25 +1,19 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
 class InputAndSlider(widgets.Widget):
     value_changed = core.Signal(int)
 
-    def __init__(
-        self,
-        bounds: tuple[int, int] | None = None,
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        super().__init__(parent)
+    def __init__(self, bounds: tuple[int, int] | None = None, **kwargs):
+        super().__init__(**kwargs)
         self.path = None
-        layout = widgets.HBoxLayout(self)
-        layout.set_margin(0)
         self.spinbox = widgets.SpinBox()
-        layout.add(self.spinbox)
         self.slider = widgets.Slider()
-        layout.add(self.slider)
+        with widgets.HBoxLayout.create(self, margin=0) as layout:
+            layout.add(self.spinbox)
+            layout.add(self.slider)
         if bounds:
             self.set_range(*bounds)
         self.spinbox.valueChanged.connect(self.slider.set_value)

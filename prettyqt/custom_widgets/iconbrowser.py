@@ -19,7 +19,7 @@ class IconBrowser(widgets.MainWindow):
 
     def __init__(self):
         super().__init__()
-        self.setMinimumSize(400, 300)
+        self.setMinimumSize(500, 500)
         self.set_title("Icon Browser")
         font_maps = {k: v.charmap for k, v in iconprovider._instance().fonts.items()}
         icon_names = [
@@ -43,7 +43,6 @@ class IconBrowser(widgets.MainWindow):
         )
 
         self._listview.set_model(self._proxy_model)
-        self._listview.set_context_menu_policy("custom")
         self._listview.doubleClicked.connect(self._copy_icon_text)
 
         self._lineedit = widgets.LineEdit(parent=self)
@@ -54,23 +53,17 @@ class IconBrowser(widgets.MainWindow):
         self._combobox.currentIndexChanged.connect(self._trigger_instant_update)
         self._combobox.addItems([ALL_COLLECTIONS, *sorted(font_maps.keys())])
 
-        lyt = widgets.HBoxLayout()
-        lyt.set_margin(0)
-        lyt.add(self._combobox)
-        lyt.add(self._lineedit)
-
         search_bar_frame = widgets.Frame(self)
-        search_bar_frame.setLayout(lyt)
+        with widgets.HBoxLayout.create(search_bar_frame, margin=0) as layout:
+            layout.add(self._combobox)
+            layout.add(self._lineedit)
 
-        self._copy_button = widgets.PushButton("Copy Name", self)
-        self._copy_button.clicked.connect(self._copy_icon_text)
-
-        lyt = widgets.VBoxLayout()
-        lyt.add(search_bar_frame)
-        lyt.add(self._listview)
-        lyt.add(self._copy_button)
+        self._copy_button = widgets.PushButton("Copy Name", clicked=self._copy_icon_text)
         frame = widgets.Frame(self)
-        frame.set_layout(lyt)
+        with widgets.VBoxLayout.create(frame) as layout:
+            layout.add(search_bar_frame)
+            layout.add(self._listview)
+            layout.add(self._copy_button)
         self.setCentralWidget(frame)
         self.add_shortcut("return", self._copy_icon_text)
         self._lineedit.setFocus()

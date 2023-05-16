@@ -225,7 +225,7 @@ class Color(QtGui.QColor):
 if __name__ == "__main__":
     color = Color("#FFFFFF")
     color = color.drift(1.3)
-    print(str(color))
+    print(color)
     print(color.get_spec())
     print(f"{color}")
     print(color.as_qt())
