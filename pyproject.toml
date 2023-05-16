@@ -70,7 +70,7 @@ mkdocs = "^1"
 mkdocs-material = "^9"
 mkdocstrings = {version = "^0", extras = ["python"]}
 
-pymdown-extensions = "^9"
+pymdown-extensions = "^10"
 black = "^23"
 devtools = "^0"
 commitizen = "^3"
