@@ -165,6 +165,14 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         cls.setPalette(pal)
 
     @classmethod
+    def get_keyboard_modifiers(cls) -> list[constants.KeyboardModifierStr]:
+        return constants.KEYBOARD_MODIFIERS.get_list(cls.keyboardModifiers())
+
+    @classmethod
+    def query_keyboard_modifiers(cls) -> list[constants.KeyboardModifierStr]:
+        return constants.KEYBOARD_MODIFIERS.get_list(cls.queryKeyboardModifiers())
+
+    @classmethod
     def get_palette(cls) -> gui.Palette:
         return gui.Palette(cls.palette())
 
