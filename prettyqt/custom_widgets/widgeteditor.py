@@ -11,12 +11,25 @@ from prettyqt.utils import bidict, datatypes
 logger = logging.getLogger(__name__)
 
 
+class EventCatcher(core.Object):
+    changed = core.Signal(QtCore.QEvent)
+
+    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
+        if event.type() != QtCore.QEvent.Type.Paint:
+            self.changed.emit(event)
+
+        return False
+
+
 class WidgetEditor(widgets.ScrollArea):
     value_changed = core.Signal(object)
 
     def __init__(self, widget, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._widget = widget
+        self.event_catcher = EventCatcher(self._widget)
+        self.event_catcher.changed.connect(self._update_editors)
+        self._widget.installEventFilter(self.event_catcher)
         container = widgets.Widget()
         container.set_layout("form")
         self.setWidget(container)
@@ -69,6 +82,11 @@ class WidgetEditor(widgets.ScrollArea):
             self.editors[name] = widget
             container.box[i, "left"] = widgets.Label(prop.name())
             container.box[i, "right"] = widget
+            if prop.hasNotifySignal():
+                notify_signal = prop.get_notify_signal()
+                signal_name = notify_signal.get_name()
+                signal = self._widget.__getattribute__(signal_name)
+                signal.connect(self._update_editors)
             self.ensureWidgetVisible(container)
         self.setWidgetResizable(True)
 
@@ -84,6 +102,13 @@ class WidgetEditor(widgets.ScrollArea):
         self._widget.repaint()
         self._widget.parentWidget().updateGeometry()
         self._widget.parentWidget().repaint()
+
+    def _update_editors(self):
+        for prop in self._widget.get_metaobject().get_properties():
+            prop_name = prop.name()
+            editor = self.editors[prop_name]
+            value = prop.read(self._widget)
+            editor.set_value(value)
 
 
 if __name__ == "__main__":
