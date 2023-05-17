@@ -171,12 +171,22 @@ class ObjectMixin:
         return None
 
     def start_timer(
-        self, interval: int | str, timer_type: constants.TimerTypeStr = "coarse"
+        self,
+        interval: int | str,
+        timer_type: constants.TimerTypeStr = "coarse",
+        one_shot: bool = False,
     ) -> int | None:
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
-        result = self.startTimer(interval, constants.TIMER_TYPE[timer_type])
-        return None if result == 0 else result
+        if one_shot:
+            timer = core.Timer(
+                self, single_shot=True, interval=interval, timer_type=timer_type
+            )
+            timer.start()
+            return timer.timerId()
+        else:
+            result = self.startTimer(interval, constants.TIMER_TYPE[timer_type])
+            return None if result == 0 else result
 
     def get_properties(
         self, include_super: bool = True, cast: bool = True

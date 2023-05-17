@@ -784,7 +784,6 @@ def test_timer():
     def test():
         pass
 
-    core.Timer.single_shot(test)
     timer = core.Timer()
     timer.set_type("coarse")
     with pytest.raises(InvalidParamError):

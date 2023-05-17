@@ -9,7 +9,7 @@ class PopupInfo(widgets.Dialog):
 
     def __init__(self, parent: QtWidgets.QWidget | None = None, text: str | None = None):
         super().__init__(parent=parent)
-        self.timer = core.Timer.single_shot(callback=self.close)
+        self.timer = core.Timer(single_shot=True, timeout=self.close)
         self.label = widgets.Label(alignment="center")
         self.set_flags(stay_on_top=True, frameless=True, tooltip=True)
         layout = widgets.VBoxLayout(margin=20, size_constraint="minimum")

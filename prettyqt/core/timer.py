@@ -1,9 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Callable
-
-from typing_extensions import Self
-
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, helpers
@@ -14,13 +10,6 @@ class Timer(core.ObjectMixin, QtCore.QTimer):
         maps = super()._get_map()
         maps |= {"timerType": constants.TIMER_TYPE}
         return maps
-
-    @classmethod
-    def single_shot(cls, callback: Callable) -> Self:
-        timer = cls()
-        timer.timeout.connect(callback)
-        timer.setSingleShot(True)
-        return timer
 
     def set_type(self, typ: constants.TimerTypeStr):
         """Set the timer type.
@@ -62,5 +51,5 @@ class Timer(core.ObjectMixin, QtCore.QTimer):
 
 
 if __name__ == "__main__":
-    timer = Timer()
+    timer = Timer(timeout=print)
     timer.set_interval("2m")
