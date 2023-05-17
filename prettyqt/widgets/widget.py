@@ -621,18 +621,22 @@ class WidgetMixin(core.ObjectMixin):
             self.box.setSpacing(spacing)
         return self.box
 
-    def center_on(
+    def position_on(
         self,
-        where: Literal["parent", "window", "screen"] | QtWidgets.QWidget,
+        where: Literal["parent", "window", "screen", "mouse"] | QtWidgets.QWidget,
+        how: Literal["center", "top", "left", "bottom", "right"] = "center",
         scale_ratio: int | None = None,
     ):
-        """Center widget on another widget / window / screen.
+        """Position widget on another widget / window / screen.
 
         Arguments:
-            where: where to center on
+            where: where to positin on
+            how: How to align
             scale_ratio: Resize to scale_ratio * target size
         """
         match where:
+            case "mouse":
+                geom = core.Rect(gui.Cursor.pos(), gui.Cursor.pos())
             case "parent":
                 geom = self.parent().frameGeometry()
             case "window":
@@ -641,13 +645,24 @@ class WidgetMixin(core.ObjectMixin):
                 geom = where.frameGeometry()
             case "screen":
                 geom = gui.GuiApplication.primaryScreen().geometry()
-        if scale_ratio is not None:
+        if scale_ratio is not None and where != "mouse":
             self.resize(
                 int(geom.width() * scale_ratio),
                 int(geom.height() * scale_ratio),
             )
         own_geo = self.frameGeometry()
-        own_geo.moveCenter(geom.center())
+        match how:
+            case "center":
+                new = geom.center()
+            case "top":
+                new = core.Point(geom.center().x(), geom.top() + own_geo.height() // 2)
+            case "bottom":
+                new = core.Point(geom.center().x(), geom.bottom() - own_geo.height() // 2)
+            case "left":
+                new = core.Point(geom.left() + own_geo.width() // 2, geom.center().y())
+            case "right":
+                new = core.Point(geom.right() - own_geo.width() // 2, geom.center().y())
+        own_geo.moveCenter(new)
         self.move(own_geo.topLeft())
 
     def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor) -> None:
@@ -789,7 +804,7 @@ if __name__ == "__main__":
     widget.show()
     widget2.show()
     app.sleep(4)
-    widget.center_on(widget2, scale_ratio=2)
+    widget.position_on("mouse", scale_ratio=0.5, how="top")
     # widget.add_shortcut("return", print, "application")
     # widget.set_min_size((400, 400))
     # widget.set_max_size(None, 600)

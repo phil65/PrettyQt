@@ -149,7 +149,7 @@ class CommandPalette(widgets.Widget):
     def show(self):
         self._line.setText("")
         self.resize(500, 300)
-        self.center_on("screen")
+        self.position_on("screen")
         super().show()
         self.raise_()
         self._line.setFocus()

@@ -67,7 +67,7 @@ class IconBrowser(widgets.MainWindow):
         self.setCentralWidget(frame)
         self.add_shortcut("return", self._copy_icon_text)
         self._lineedit.setFocus()
-        self.center_on("screen")
+        self.position_on("screen")
 
     def _trigger_instant_update(self):
         """Stop timer used for committing search term and update proxy model instantly."""
