@@ -96,8 +96,10 @@ class WidgetEditor(widgets.ScrollArea):
         editor = self.sender()
         prop_name = self._editors.inverse[editor]
         metaobj = self._widget.metaObject()
-        prop_index = metaobj.indexOfProperty(prop_name)
-        prop = metaobj.property(prop_index)
+        for i in range(metaobj.propertyCount()):
+            prop = self._widget.metaObject().property(i)
+            if prop.name() == prop_name:
+                break
         value = editor.get_value()
         value = datatypes.make_qtype(value)
         logger.info(f"setting {prop_name} to {value}")
