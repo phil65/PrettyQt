@@ -27,6 +27,7 @@ class WidgetEditor(widgets.ScrollArea):
     def __init__(self, widget, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._widget = widget
+        self._initial_prop_values = {}
         self.event_catcher = EventCatcher(self._widget)
         self.event_catcher.changed.connect(self._update_editors)
         self._widget.installEventFilter(self.event_catcher)
@@ -34,11 +35,11 @@ class WidgetEditor(widgets.ScrollArea):
         container.set_layout("form")
         self.setWidget(container)
         self.set_minimum_size(800, 1000)
-        self.editors = bidict()
+        self._editors = bidict()
         # self.add_widget(container)
         metaobj = self._widget.get_metaobject()
         for i, prop in enumerate(metaobj.get_properties()):
-            value = prop.read(widget)
+            value = prop.read(self._widget)
             typ = prop.get_meta_type().get_type()
             name = prop.name()
             logger.info(f"setting {name} editor to {value}")
@@ -79,9 +80,10 @@ class WidgetEditor(widgets.ScrollArea):
             widget.set_value(value)
             widget.value_changed.connect(self._on_value_change)
             widget.setEnabled(prop.isWritable())
-            self.editors[name] = widget
             container.box[i, "left"] = widgets.Label(prop.name())
             container.box[i, "right"] = widget
+            self._initial_prop_values[name] = value
+            self._editors[name] = widget
             if prop.hasNotifySignal():
                 notify_signal = prop.get_notify_signal()
                 signal_name = notify_signal.get_name()
@@ -92,8 +94,12 @@ class WidgetEditor(widgets.ScrollArea):
 
     def _on_value_change(self):
         editor = self.sender()
-        prop_name = self.editors.inverse[editor]
-        prop = self._widget.get_metaobject().get_property(prop_name)
+        prop_name = self._editors.inverse[editor]
+        metaobj = self._widget.metaObject()
+        for i in range(metaobj.propertyCount()):
+            prop = self._widget.metaObject().property(i)
+            if prop.name() == prop_name:
+                break
         value = editor.get_value()
         value = datatypes.make_qtype(value)
         logger.info(f"setting {prop_name} to {value}")
@@ -104,9 +110,10 @@ class WidgetEditor(widgets.ScrollArea):
         self._widget.parentWidget().repaint()
 
     def _update_editors(self):
-        for prop in self._widget.get_metaobject().get_properties():
+        for i in range(self._widget.metaObject().propertyCount()):
+            prop = self._widget.metaObject().property(i)
             prop_name = prop.name()
-            editor = self.editors[prop_name]
+            editor = self._editors[prop_name]
             value = prop.read(self._widget)
             editor.set_value(value)
 
