@@ -1,3 +1,21 @@
+## v1.43.0 (2023-05-18)
+
+### Feat
+
+- **Widget**: x/y_offset kwargs for position_on
+- add FlashEffect
+- auto kwarg suppport for Slot decorator
+- **MetaMethod**: add get_normalized_signature method
+- **Widget**: add show_tooltip method
+- **Widget**: tool_tip kwarg for add_action
+- **ToolBar**: add get_widgets method
+- allow str in PropertyAnimation ctor
+
+### Fix
+
+- missed some testing shit
+- correctly map in map_to_global
+
 ## v1.42.0 (2023-05-17)
 
 ### Feat
