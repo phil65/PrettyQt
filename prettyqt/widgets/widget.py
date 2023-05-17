@@ -89,6 +89,7 @@ class WidgetMixin(core.ObjectMixin):
         checked: bool = False,
         shortcut: str | None = None,
         status_tip: str | None = None,
+        tool_tip: str | None = None,
         parent=None,
     ) -> gui.Action:
         """Add an action to the menu.
@@ -101,6 +102,7 @@ class WidgetMixin(core.ObjectMixin):
             checked: if checkable, turn on by default
             shortcut: Shortcut for action
             status_tip: Status tip to be shown in status bar
+            tool_tip: Widget ToolTip
             parent: parent
 
         Returns:
@@ -117,6 +119,8 @@ class WidgetMixin(core.ObjectMixin):
                 action.setChecked(checked)
             if status_tip is not None:
                 action.setStatusTip(status_tip)
+            if tool_tip is not None:
+                action.setToolTip(tool_tip)
         else:
             action = text
             action.setParent(self)
