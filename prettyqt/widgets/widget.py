@@ -247,6 +247,13 @@ class WidgetMixin(core.ObjectMixin):
         icon = super().windowIcon()
         return None if icon.isNull() else gui.Icon(icon)
 
+    def show_tooltip(self, duration: int | None = None):
+        if duration is None:
+            duration = -1  # automatic
+        widgets.ToolTip.showText(
+            self.map_to_global((0, 0)), self.toolTip(), msecShowTime=duration
+        )
+
     @functools.singledispatchmethod
     def set_min_size(self, size: QtCore.QSize | tuple[int | None, int | None]) -> None:
         if isinstance(size, tuple):
