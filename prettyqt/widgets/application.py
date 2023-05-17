@@ -5,6 +5,7 @@ import contextlib
 import logging
 import os
 import pathlib
+import sys
 import timeit
 
 import qstylizer.parser
@@ -35,17 +36,14 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.topLevelWidgets())
 
-    def serialize_fields(self):
-        return dict(
-            auto_sip_enabled=self.autoSipEnabled(),
-            cursor_flash_time=self.cursorFlashTime(),
-            double_click_interval=self.doubleClickInterval(),
-            keyboard_input_interval=self.keyboardInputInterval(),
-            start_drag_distance=self.startDragDistance(),
-            start_drag_time=self.startDragTime(),
-            style_sheet=self.styleSheet(),
-            wheel_scroll_lines=self.wheelScrollLines(),
-        )
+    @contextlib.contextmanager
+    def catch_exceptions(self):
+        from prettyqt.utils.debugging import ErrorMessageBox
+
+        self._original_excepthook = sys.excepthook
+        sys.excepthook = ErrorMessageBox._excepthook
+        yield self
+        sys.excepthook = self._original_excepthook
 
     def store_widget_states(
         self, settings: MutableMapping | None = None, key: str = "states"
@@ -272,8 +270,6 @@ class Application(ApplicationMixin, QtWidgets.QApplication):
 # Application.setStyle(widgets.Style())
 
 if __name__ == "__main__":
-    import sys
-
     app = Application(sys.argv)
     app.set_theme("dark")
     app.load_language("de")
