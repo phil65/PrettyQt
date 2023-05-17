@@ -47,6 +47,11 @@ class MetaMethod:
     def get_method_signature(self) -> str:
         return self.item.methodSignature().data().decode()
 
+    def get_normalized_method_signature(self) -> str:
+        sig = self.item.methodSignature()
+        normalized = QtCore.QMetaObject.normalizedSignature(sig.data().decode())
+        return normalized.data().decode()
+
     def get_name(self) -> str:
         return self.item.name().data().decode()
 
@@ -59,6 +64,7 @@ class MetaMethod:
 
 
 if __name__ == "__main__":
-    metaobj = core.Object.get_metaobject()
+    obj = core.Object()
+    metaobj = obj.get_metaobject()
     method = metaobj.get_method("objectNameChanged")
-    print(method.get_parameters())
+    print(method.get_normalized_method_signature())
