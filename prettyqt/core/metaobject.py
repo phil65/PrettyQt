@@ -142,6 +142,10 @@ class MetaObject:
     def get_meta_type(self) -> core.MetaType:
         return core.MetaType(self.metaType().id())
 
+    def get_user_property(self) -> core.MetaProperty | None:
+        prop = self.userProperty()
+        return core.MetaProperty(prop) if prop.isValid() else None
+
 
 if __name__ == "__main__":
     from prettyqt import gui
