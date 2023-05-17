@@ -120,6 +120,9 @@ class ToolBarMixin(widgets.WidgetMixin):
     def get_allowed_areas(self) -> list[constants.ToolbarAreaStr]:
         return constants.TOOLBAR_AREA.get_list(self.allowedAreas())
 
+    def get_widgets(self) -> list[QtWidgets.QAction]:
+        return [self.widgetForAction(i) for i in self.actions()]
+
 
 class ToolBar(ToolBarMixin, QtWidgets.QToolBar):
     pass
@@ -127,6 +130,11 @@ class ToolBar(ToolBarMixin, QtWidgets.QToolBar):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = ToolBar("test")
-    widget.show()
+    toolbar = ToolBar("test")
+    toolbar.add_action(text="test")
+    toolbar.add_action(text="test2")
+    radio = widgets.RadioButton("abc")
+    action = toolbar.addWidget(radio)
+    print(toolbar.get_widgets())
+    toolbar.show()
     app.main_loop()
