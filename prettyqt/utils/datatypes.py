@@ -113,7 +113,7 @@ def make_serializable(obj):
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore, QtGui, QtWebEngineCore, QtWidgets
+    from prettyqt.qt import QtCore, QtGui, QtWidgets
 
     JSONType = Union[str, int, float, bool, None, dict[str, Any], list[Any]]
     PathType = Union[str, os.PathLike]
@@ -156,7 +156,7 @@ if TYPE_CHECKING:
         None,
     ]
     KeyCombinationType = Union[
-        str, QtCore.QKeyCombination, QtCore.QKeySequence, QtGui.QKeySequence.StandardKey
+        str, QtCore.QKeyCombination, QtGui.QKeySequence, QtGui.QKeySequence.StandardKey
     ]
     ColorAndBrushType = Union[ColorType, QtGui.QBrush]
 
@@ -251,5 +251,5 @@ if TYPE_CHECKING:
         QtWidgets.QListWidgetItem,
         QtWidgets.QTreeWidgetItem,
         # QtGui.QColorSpace,
-        QtWebEngineCore.QWebEngineHistory,
+        # QtWebEngineCore.QWebEngineHistory,
     ]
