@@ -33,21 +33,22 @@ class CommandTable(widgets.TableView):
     action_clicked = core.Signal(int)
 
     def __init__(self, parent: widgets.Widget | None = None) -> None:
-        super().__init__(parent)
+        super().__init__(
+            parent,
+            selection_mode="single",
+            selection_behavior="rows",
+            sorting_enabled=True,
+        )
         # self.set_cursor("pointing_hand")
         self._model = custom_models.ColumnTableModel(
             [], actionsmodel.COLUMNS, parent=self
         )
-        self._proxy = custom_models.FuzzyFilterProxyModel()
+        self._proxy = custom_models.FuzzyFilterProxyModel(filter_key_column=0)
         self._proxy.set_filter_case_sensitive(False)
-        self._proxy.setFilterKeyColumn(0)
         # self._proxy.set_sort_role(constants.SORT_ROLE)
         self._proxy.setSourceModel(self._model)
         self._proxy.invalidated.connect(self.select_first_row)
         self.setModel(self._proxy)
-        self.set_selection_mode("single")
-        self.set_selection_behavior("rows")
-        self.setSortingEnabled(True)
         self.pressed.connect(self._on_clicked)
         self.set_delegate(custom_delegates.HtmlItemDelegate(), column=0)
         self._match_color = QtGui.QColor("#468cc6")

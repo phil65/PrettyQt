@@ -228,11 +228,6 @@ def test_codeeditor(qtbot):
     editor.repaint()
 
 
-def test_imageviewer(qtbot):
-    widget = custom_widgets.ImageViewer()
-    qtbot.addWidget(widget)
-
-
 def test_flowlayout(qtbot):
     widget = widgets.Widget()
     qtbot.addWidget(widget)

@@ -50,6 +50,14 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         else:
             super().wheelEvent(event)
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "lineWrapMode": LINE_WRAP_MODE,
+            "wordWrapMode": gui.textoption.WORD_WRAP_MODE,
+        }
+        return maps
+
     def set_current_line_color(self, color: datatypes.ColorType):
         if self._current_line_color is None:
             self.cursorPositionChanged.connect(self._update_on_block_change)

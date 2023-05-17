@@ -40,6 +40,15 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         self.append_text(other)
         return self
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "autoFormatting": AUTO_FORMATTING,
+            "lineWrapMode": LINE_WRAP_MODE,
+            "wordWrapMode": gui.textoption.WORD_WRAP_MODE,
+        }
+        return maps
+
     def on_value_change(self) -> None:
         self.value_changed.emit(self.text())
 

@@ -4,7 +4,6 @@ import enum
 import logging
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import fuzzy
 
 
@@ -28,8 +27,8 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         BackupRole = constants.USER_ROLE + 65
         SortRole = constants.SORT_ROLE
 
-    def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._search_term = ""
         self.match_color: str | None = "blue"
         self.setSortRole(self.Roles.SortRole)

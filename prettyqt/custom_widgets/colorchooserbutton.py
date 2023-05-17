@@ -15,8 +15,7 @@ class ColorChooserButton(widgets.Widget):
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        layout = widgets.HBoxLayout(self)
-        layout.set_margin(0)
+        layout = widgets.HBoxLayout(self, margin=0)
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_regex_validator(r"^#(?:[0-9a-fA-F]{6})$")
         layout.add(self.lineedit)

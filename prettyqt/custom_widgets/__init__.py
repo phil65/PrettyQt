@@ -42,7 +42,6 @@ from .spanslider import SpanSlider
 from .labeledslider import LabeledSlider
 from .waitingspinner import WaitingSpinner
 from .markdownwidget import MarkdownWindow
-from .imageviewer import ImageViewer
 from .popupinfo import PopupInfo
 from .selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
@@ -102,7 +101,6 @@ __all__ = [
     "RoundProgressBar",
     "PopupInfo",
     "SelectionWidget",
-    "ImageViewer",
     "MarkdownWindow",
     "CodeEditor",
     "Player",

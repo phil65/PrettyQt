@@ -8,10 +8,7 @@ class CollapsibleFrame(widgets.Frame):
     collapsed = core.Signal()
 
     def __init__(self, text: str = "", **kwargs):
-        super().__init__(**kwargs)
-        self.set_frame_shape("styled_panel")
-        self.set_frame_shadow("plain")
-        # layout
+        super().__init__(frame_shape="styled_panel", frame_shadow="plain", **kwargs)
         _layout = widgets.VBoxLayout()
         _layout.set_margin(0)
         _layout.setSpacing(0)
