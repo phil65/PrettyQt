@@ -202,13 +202,13 @@ class WidgetMixin(core.ObjectMixin):
             case QtCore.QPoint() | QtCore.QPointF():
                 return super().mapToGlobal(pos_or_rect)
             case int(), int():
-                return QtCore.QPoint(*pos_or_rect)
+                return self.mapToGlobal(QtCore.QPoint(*pos_or_rect))
             case float(), float():
-                return QtCore.QPointF(*pos_or_rect)
+                return self.mapToGlobal(QtCore.QPointF(*pos_or_rect))
             case int(), int(), int(), int():
-                return QtCore.QRect(*pos_or_rect)
+                return self.map_to_global(QtCore.QRect(*pos_or_rect))
             case float(), float(), float(), float():
-                return QtCore.QRectF(*pos_or_rect)
+                return self.map_to_global(QtCore.QRectF(*pos_or_rect))
             case _:
                 raise ValueError(pos_or_rect)
 
