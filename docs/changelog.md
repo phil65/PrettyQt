@@ -1,3 +1,59 @@
+## v1.42.0 (2023-05-17)
+
+### Feat
+
+- **coreApplication**: add in_main_thread method
+- **MetaObject**: add get_user_property method
+- **MetaType**: add get_meta_object / get_meta_object_for_type
+- add SignalList
+- **MetaProperty**: add get_notify_signal / get_enumerator
+- **Object**: keep track of eventfilters
+- **GuiApplication**: add get_keyboard_modifiers / query_keyboard_modifiers
+- **Application**: add widgets_at method
+- first quick shot for a WidgetEditor
+- allow initializing SizePolicy with strings
+- NativeEventFilter for windows global hotkeys
+- **KeySequence**: add get_key_bindings
+- **KeySequence**: cast in __getitem__
+- **KeySequenceEdit**: add get_key_combinations / get_finishing_key_combinations
+- add some more prop-edit widgets
+- **Drag**: return DropActionStr for main_loop
+- animation feature for StackedWidget
+- **Frame**: add set_frame_rect
+- **MetaType**: get_type -> get_type_name and new get_type
+- **JsonDocument**: add __format__ method
+- embed quickref in RegexEditorWidget
+- **IconBrowser**: use FuzzyFilter proxy
+- **GroupBox**: add get_alignment method
+- **FormLayout**: add get/set_label_alignment, get/set_form_alignment
+- **Widget**: scale_ratio param for center_on
+- context manager stuff for layouts
+- **widgets**: add HBoxLayout / VBoxLayout classes
+- **ActionsModel**: Usage count column
+- add AsyncRunner
+- add IPython stuff
+- some helper stuff for ThreadPool
+- **Dir**: add get_temp_path method
+- merge widget center methods + rect support for mapToGlobal (map_to_global)
+- **FileIconProvider**: custom_directory_icons methods
+- prep some QtDesigner stuff
+- **Widget**: add center_on_parent method
+- some methods for StyleOptionViewItem
+- **Action**: add usage counter and get_type
+- **SortFilterProxyModel**: add invalidated signal
+
+### Fix
+
+- proper mono font for all platforms
+- **ElidedLabel**: qt6 fix
+- set_data for StandardItem / ListWidgetItem with wrong arg order
+- **CommandPalette**: widgets from other sources can have parent as an attribute
+- **QtWidgets**: fix binding of old methods
+- **ButtonDelegate**: pass parent via kwarg
+- **HtmlItemDelegate**: properly draw with icon
+- **AbstractItemView**: fix some setfocus stuff
+- **FuzzyFilterModel**: do not check html string for filtering
+
 ## v1.41.0 (2023-05-10)
 
 ### Feat
