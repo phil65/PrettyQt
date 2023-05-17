@@ -72,9 +72,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")
         self.setTextFormat(QtCore.Qt.TextFormat.RichText)
-        self.setTextInteractionFlags(
-            QtCore.Qt.TextInteractionFlag.TextBrowserInteraction  # type: ignore
-        )
+        self.setTextInteractionFlags(QtCore.Qt.TextInteractionFlag.TextBrowserInteraction)
         self.setOpenExternalLinks(True)
         return self
 
