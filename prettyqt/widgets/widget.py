@@ -624,7 +624,17 @@ class WidgetMixin(core.ObjectMixin):
     def position_on(
         self,
         where: Literal["parent", "window", "screen", "mouse"] | QtWidgets.QWidget,
-        how: Literal["center", "top", "left", "bottom", "right"] = "center",
+        how: Literal[
+            "center",
+            "top",
+            "left",
+            "bottom",
+            "right",
+            "top_left",
+            "top_right",
+            "bottom_left",
+            "bottom_right",
+        ] = "center",
         scale_ratio: int | None = None,
     ):
         """Position widget on another widget / window / screen.
@@ -662,6 +672,26 @@ class WidgetMixin(core.ObjectMixin):
                 new = core.Point(geom.left() + own_geo.width() // 2, geom.center().y())
             case "right":
                 new = core.Point(geom.right() - own_geo.width() // 2, geom.center().y())
+            case "top_right":
+                new = core.Point(
+                    geom.right() - own_geo.width() // 2,
+                    geom.top() + own_geo.height() // 2,
+                )
+            case "top_left":
+                new = core.Point(
+                    geom.left() + own_geo.width() // 2,
+                    geom.top() + own_geo.height() // 2,
+                )
+            case "bottom_right":
+                new = core.Point(
+                    geom.right() - own_geo.width() // 2,
+                    geom.bottom() - own_geo.height() // 2,
+                )
+            case "bottom_left":
+                new = core.Point(
+                    geom.left() + own_geo.width() // 2,
+                    geom.bottom() - own_geo.height() // 2,
+                )
         own_geo.moveCenter(new)
         self.move(own_geo.topLeft())
 
