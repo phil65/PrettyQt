@@ -110,6 +110,11 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
             role = constants.ITEM_DATA_ROLE[role]
         self.setData(role, data)
 
+    def get_data(self, role: constants.ItemDataRoleStr | int):
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        return super().data(role)
+
     def set_tooltip(
         self,
         tooltip: str | datatypes.PathType,

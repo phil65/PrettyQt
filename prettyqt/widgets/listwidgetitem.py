@@ -11,11 +11,11 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
     def __repr__(self):
         return get_repr(self, self.icon(), self.text())
 
-    def __setitem__(self, index: int, value):
-        self.setData(index, value)
+    def __setitem__(self, index: int | constants.ItemDataRoleStr, value):
+        self.set_data(index, value)
 
-    def __getitem__(self, index: int):
-        return self.data(index)
+    def __getitem__(self, index: int | constants.ItemDataRoleStr):
+        return self.get_data(index)
 
     def serialize_fields(self):
         return dict(
@@ -67,18 +67,23 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
         return gui.Font(self.font())
 
     def get_icon(self) -> gui.Icon | None:
-        icon = self.icon()
+        icon = super().icon()
         return None if icon.isNull() else gui.Icon(icon)
 
     def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
         if isinstance(role, str):
             role = constants.ITEM_DATA_ROLE[role]
-        self.setData(role, data)
+        super().setData(role, data)
+
+    def get_data(self, role: constants.ItemDataRoleStr | int):
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        return super().data(role)
 
     def set_size_hint(self, hint: datatypes.SizeType):
         if isinstance(hint, tuple):
             hint = QtCore.QSize(*hint)
-        self.setSizeHint(hint)
+        super().setSizeHint(hint)
 
     def set_text_alignment(
         self,

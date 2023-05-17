@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import os
+from typing import Any
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
@@ -8,11 +9,11 @@ from prettyqt.utils import InvalidParamError, datatypes
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
-    def __setitem__(self, index: int, value):
-        self.setData(index, value)
+    def __setitem__(self, index: int | constants.ItemDataRoleStr, value):
+        self.set_data(index, value)
 
-    def __getitem__(self, index: int):
-        return self.data(index)
+    def __getitem__(self, index: int | constants.ItemDataRoleStr):
+        return self.get_data(index)
 
     def serialize_fields(self):
         return dict(
@@ -98,6 +99,16 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
+
+    def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        super().setData(role, data)
+
+    def get_data(self, role: constants.ItemDataRoleStr | int) -> Any:
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        return super().data(role)
 
     def set_tooltip(
         self,

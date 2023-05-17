@@ -1,17 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from typing import Literal
+from typing import Any, Literal
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import (
-    InvalidParamError,
-    bidict,
-    datatypes,
-    get_repr,
-    serializemixin,
-)
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, serializemixin
 
 
 mod = QtWidgets.QTreeWidgetItem
@@ -111,6 +105,16 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def sort_children(self, column: int, descending: bool = False):
         order = constants.DESCENDING if descending else constants.ASCENDING
         self.sortChildren(column, order)
+
+    def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        super().setData(role, data)
+
+    def get_data(self, role: constants.ItemDataRoleStr | int) -> Any:
+        if isinstance(role, str):
+            role = constants.ITEM_DATA_ROLE[role]
+        return super().data(role)
 
     def set_icon(self, icon: datatypes.IconType, column: int = 0):
         """Set the icon for the action.
