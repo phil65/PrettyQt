@@ -11,7 +11,6 @@ import sys
 from prettyqt.qt import QtCore
 
 from prettyqt.qt.QtCore import (  # type: ignore
-    Slot,
     Signal,
     QModelIndex as ModelIndex,
     QPoint as Point,
@@ -35,6 +34,8 @@ from prettyqt.qt.QtCore import (  # type: ignore
     # QtSystemMsg as SystemMsg,
     # QtWarningMsg as WarningMsg,
 )
+
+from .slot import Slot
 from .property import Property
 from .loggingcategory import LoggingCategory
 from .timezone import TimeZone
