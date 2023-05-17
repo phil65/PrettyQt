@@ -106,10 +106,10 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         order = constants.DESCENDING if descending else constants.ASCENDING
         self.sortChildren(column, order)
 
-    def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
+    def set_data(self, data: Any, role: constants.ItemDataRoleStr | int):
         if isinstance(role, str):
             role = constants.ITEM_DATA_ROLE[role]
-        super().setData(role, data)
+        super().setData(data, role)
 
     def get_data(self, role: constants.ItemDataRoleStr | int) -> Any:
         if isinstance(role, str):

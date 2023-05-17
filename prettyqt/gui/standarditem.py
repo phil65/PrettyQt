@@ -105,10 +105,10 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
 
-    def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
+    def set_data(self, data: Any, role: constants.ItemDataRoleStr | int):
         if isinstance(role, str):
             role = constants.ITEM_DATA_ROLE[role]
-        self.setData(role, data)
+        super().setData(data, role)
 
     def get_data(self, role: constants.ItemDataRoleStr | int):
         if isinstance(role, str):

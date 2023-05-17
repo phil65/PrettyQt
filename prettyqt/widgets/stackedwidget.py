@@ -22,9 +22,8 @@ class FaderWidget(QtWidgets.QWidget):
         self.old_pixmap.setDevicePixelRatio(pr)
         old_widget.render(self.old_pixmap)
 
-        self.timeline = core.TimeLine(
-            duration=duration, finished=self.close, value_changed=self.animate
-        )
+        self.timeline = core.TimeLine(duration=duration, finished=self.close)
+        self.timeline.value_changed.connect(self.animate)
         self.timeline.start()
 
         self.resize(new_widget.size())

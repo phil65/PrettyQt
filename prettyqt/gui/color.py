@@ -30,7 +30,7 @@ NameStr = NameFormatStr | Literal["svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"
 class Color(QtGui.QColor):
     def __init__(self, *args):
         match args:
-            case (QtGui.QColor()):
+            case (QtGui.QColor(),):
                 super().__init__()
                 self.setRgba(args[0].rgba())
             case (str(),):

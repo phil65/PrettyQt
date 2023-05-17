@@ -37,8 +37,8 @@ class LabeledSlider(widgets.Widget):
             minimum=0,
             maximum=len(self.levels) - 1,
             value=0,
-            value_changed=self.value_changed,
         )
+        self.sl.value_changed.connect(self.value_changed)
         if orientation == "horizontal":
             self.sl.set_tick_position("below")
             self.sl.setMinimumWidth(300)
