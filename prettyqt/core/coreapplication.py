@@ -40,6 +40,13 @@ class CoreApplicationMixin(core.ObjectMixin):
     def get_library_paths(cls) -> list[pathlib.Path]:
         return [pathlib.Path(i) for i in cls.libraryPaths()]
 
+    def set_application_name(self, name: str):
+        if os.name == "nt" and name and not getattr(sys, "frozen", False):
+            import ctypes
+
+            ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(name)
+        self.setApplicationName(name)
+
     def set_metadata(
         self,
         app_name: str | None = None,
@@ -59,10 +66,6 @@ class CoreApplicationMixin(core.ObjectMixin):
             self.setOrganizationName(org_name)
         if org_domain is not None:
             self.setOrganizationDomain(org_domain)
-        # if sys.platform.startswith("win"):
-        #     import ctypes
-        #     myappid = 'mycompany.myproduct.subproduct.version' # arbitrary string
-        #     ctypes.windll.shell32.SetCurrentProcessExplicitAppUserModelID(myappid)
 
     @classmethod
     def load_language_file(cls, file: datatypes.PathType) -> core.Translator:
