@@ -537,6 +537,23 @@ UI_EFFECTS: bidict[UiEffectStr, Qt.UIEffect] = bidict(
     animate_toolbox=Qt.UIEffect.UI_AnimateToolBox,
 )
 
+ConnectionTypeStr = Literal[
+    "auto",
+    "direct",
+    "queued",
+    "blocking_queued",
+    "unique",
+    "single_shot",
+]
+CONNECTION_TYPE: bidict[ConnectionTypeStr, Qt.ConnectionType] = bidict(
+    auto=Qt.ConnectionType.AutoConnection,
+    direct=Qt.ConnectionType.DirectConnection,
+    queued=Qt.ConnectionType.QueuedConnection,
+    blocking_queued=Qt.ConnectionType.BlockingQueuedConnection,
+    unique=Qt.ConnectionType.UniqueConnection,
+    single_shot=Qt.ConnectionType.SingleShotConnection,
+)
+
 
 InputMethodQueryStr = Literal[
     "enabled",

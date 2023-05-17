@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
 
@@ -159,6 +159,25 @@ class MetaObject:
     def get_user_property(self) -> core.MetaProperty | None:
         prop = self.userProperty()
         return core.MetaProperty(prop) if prop.isValid() else None
+
+    # just experimenting
+    @classmethod
+    def invoke_method(
+        cls,
+        obj: QtCore.QObject,
+        method: str,
+        *args,
+        connection_type: constants.ConnectionTypeStr = "auto",
+    ):
+        conn = constants.CONNECTION_TYPE[connection_type]
+        args = tuple(core.Q_ARG(type(arg), arg) for arg in args)
+        return cls.invokeMethod(obj, method, conn, *args)
+
+    def get_new_instance(self, *args, **kwargs):
+        args = tuple(core.Q_ARG(type(i), i) for i in args)
+        kwargs = {k: core.Q_ARG(type(v), v) for k, v in kwargs.items()}
+        # requires QtCore.QGenericArgumentHolder for PySide6
+        self.newInstance(*args, **kwargs)
 
 
 if __name__ == "__main__":
