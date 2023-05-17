@@ -93,12 +93,28 @@ class CoreApplicationMixin(core.ObjectMixin):
             raise InvalidParamError(priority, constants.EVENT_PRIORITY)
         return self.postEvent(obj, event, prio)
 
+    def in_main_thread(self):
+        """Check if we are in the thread in which QApplication object was created.
+
+        Returns:
+            True if we are in the main thread, False otherwise.
+        """
+        return self.thread() == core.Thread.currentThread()
+
     def main_loop(self) -> int:
         return self.exec()
 
     @staticmethod
     def restart():
         os.execl(sys.executable, sys.executable, *sys.argv)
+        # process = QProcess()
+        # process.setProgram(sys.executable)
+
+        # if not running_as_bundled_app():
+        #     process.setArguments(sys.argv)
+
+        # process.startDetached()
+        # self.close(quit_app=True)
 
 
 class CoreApplication(CoreApplicationMixin, QtCore.QCoreApplication):
