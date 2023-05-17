@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from typing import Literal
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 
@@ -78,29 +76,29 @@ class MetaObject:
         return {i.name(): i.value() for i in classinfos}
 
     def get_method(self, index: int | str) -> core.MetaMethod:
-        index = self.indexOfMethod(index) if isinstance(index, str) else index
-        method = core.MetaMethod(self.item.method(index))
+        int_index = self.indexOfMethod(index) if isinstance(index, str) else index
+        method = core.MetaMethod(self.item.method(int_index))
         if not method.isValid():
             raise IndexError(index)
         return method
 
     def get_enum(self, index: int | str) -> core.MetaEnum:
-        index = self.indexOfEnumerator(index) if isinstance(index, str) else index
-        meta_enum = core.MetaEnum(self.item.enumerator(index))
+        int_index = self.indexOfEnumerator(index) if isinstance(index, str) else index
+        meta_enum = core.MetaEnum(self.item.enumerator(int_index))
         if not meta_enum.isValid():
             raise IndexError(index)
         return meta_enum
 
     def get_property(self, index: int | str) -> core.MetaProperty:
-        index = self.indexOfProperty(index) if isinstance(index, str) else index
-        prop = core.MetaProperty(self.item.property(index))
+        int_index = self.indexOfProperty(index) if isinstance(index, str) else index
+        prop = core.MetaProperty(self.item.property(int_index))
         if not prop.isValid():
             raise IndexError(index)
         return prop
 
     def get_constructor(self, index: int | str) -> core.MetaProperty:
-        index = self.indexOfConstructor(index) if isinstance(index, str) else index
-        method = core.MetaMethod(self.item.constructor(index))
+        int_index = self.indexOfConstructor(index) if isinstance(index, str) else index
+        method = core.MetaMethod(self.item.constructor(int_index))
         if not method.isValid():
             raise IndexError(index)
         return method
@@ -131,24 +129,13 @@ class MetaObject:
         return [core.MetaProperty(self.item.property(i)) for i in range(start, count)]
 
     def get_signals(self, include_super: bool = True) -> list[core.MetaMethod]:
-        return self.get_methods_with_type("signal")
+        return self.get_methods(include_super=include_super, type_filter="signal")
 
     def get_slots(self, include_super: bool = True) -> list[core.MetaMethod]:
-        return self.get_methods_with_type("slot")
+        return self.get_methods(include_super=include_super, type_filter="slot")
 
     def get_plain_methods(self, include_super: bool = True) -> list[core.MetaMethod]:
-        return self.get_methods_with_type("method")
-
-    def get_methods_with_type(
-        self,
-        typ: Literal["signal", "slot", "constructor", "method"],
-        include_super: bool = True,
-    ) -> list[core.MetaMethod]:
-        return [
-            i
-            for i in self.get_methods(include_super=include_super)
-            if i.get_method_type() == typ
-        ]
+        return self.get_methods(include_super=include_super, type_filter="method")
 
     def get_meta_type(self) -> core.MetaType:
         return core.MetaType(self.metaType().id())
