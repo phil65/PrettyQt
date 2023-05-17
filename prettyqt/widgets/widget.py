@@ -647,6 +647,8 @@ class WidgetMixin(core.ObjectMixin):
             "bottom_right",
         ] = "center",
         scale_ratio: int | None = None,
+        x_offset: int = 0,
+        y_offset: int = 0,
     ):
         """Position widget on another widget / window / screen.
 
@@ -654,6 +656,8 @@ class WidgetMixin(core.ObjectMixin):
             where: where to positin on
             how: How to align
             scale_ratio: Resize to scale_ratio * target size
+            x_offset: additional x offset for final position
+            y_offset: additional y offset for final position
         """
         match where:
             case "mouse":
@@ -703,6 +707,7 @@ class WidgetMixin(core.ObjectMixin):
                     geom.left() + own_geo.width() // 2,
                     geom.bottom() - own_geo.height() // 2,
                 )
+        new = core.Point(new.x() + x_offset, new.y() + y_offset)
         own_geo.moveCenter(new)
         self.move(own_geo.topLeft())
 
