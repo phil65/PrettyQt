@@ -124,9 +124,9 @@ from .tabbar import TabBar
 from .tabwidget import TabWidget
 from .mdisubwindow import MdiSubWindow
 from .mdiarea import MdiArea
+from .label import Label
 from .toolbar import ToolBar
 from .headerview import HeaderView
-from .label import Label
 from .commandlinkbutton import CommandLinkButton
 from .radiobutton import RadioButton
 from .combobox import ComboBox, ComboBoxMixin

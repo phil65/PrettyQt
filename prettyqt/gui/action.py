@@ -9,6 +9,14 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, datatypes, get_repr, prettyprinter
 
 
+ACTION_EVENT = bidict(
+    trigger=QtGui.QAction.ActionEvent.Trigger,
+    hover=QtGui.QAction.ActionEvent.Hover,
+)
+
+ActionEventStr = Literal["trigger", "hover"]
+
+
 PRIORITIES = bidict(
     low=QtGui.QAction.Priority.LowPriority,
     normal=QtGui.QAction.Priority.NormalPriority,
