@@ -24,7 +24,7 @@ class EventCatcher(core.Object):
 class WidgetEditor(widgets.ScrollArea):
     value_changed = core.Signal(object)
 
-    def __init__(self, widget, *args, **kwargs):
+    def __init__(self, widget: QtWidgets.QWidget, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._widget = widget
         self._initial_prop_values = {}
@@ -37,8 +37,8 @@ class WidgetEditor(widgets.ScrollArea):
         self.set_minimum_size(800, 1000)
         self._editors = bidict()
         # self.add_widget(container)
-        metaobj = self._widget.get_metaobject()
-        for i, prop in enumerate(metaobj.get_properties()):
+        self._metaobj = core.MetaObject(self._widget.metaObject())
+        for i, prop in enumerate(self._metaobj.get_properties()):
             value = prop.read(self._widget)
             typ = prop.get_meta_type().get_type()
             name = prop.name()
@@ -95,11 +95,7 @@ class WidgetEditor(widgets.ScrollArea):
     def _on_value_change(self):
         editor = self.sender()
         prop_name = self._editors.inverse[editor]
-        metaobj = self._widget.metaObject()
-        for i in range(metaobj.propertyCount()):
-            prop = self._widget.metaObject().property(i)
-            if prop.name() == prop_name:
-                break
+        prop = self._metaobj.get_property(prop_name)
         value = editor.get_value()
         value = datatypes.make_qtype(value)
         logger.info(f"setting {prop_name} to {value}")
