@@ -76,36 +76,32 @@ class MetaObject:
         return {i.name(): i.value() for i in classinfos}
 
     def get_method(self, index: int | str) -> core.MetaMethod:
-        if isinstance(index, int):
-            return core.MetaMethod(self.item.method(index))
-        for method in self.get_methods():
-            if method.get_name() == index:
-                return method
-        raise KeyError(index)
+        index = self.indexOfMethod(index) if isinstance(index, str) else index
+        method = core.MetaMethod(self.item.method(index))
+        if not method.isValid():
+            raise IndexError(index)
+        return method
 
     def get_enum(self, index: int | str) -> core.MetaEnum:
-        if isinstance(index, int):
-            return core.MetaEnum(self.item.enumerator(index))
-        for enumerator in self.get_enums():
-            if enumerator.get_name() == index:
-                return enumerator
-        raise KeyError(index)
+        index = self.indexOfEnumerator(index) if isinstance(index, str) else index
+        meta_enum = core.MetaEnum(self.item.enumerator(index))
+        if not meta_enum.isValid():
+            raise IndexError(index)
+        return meta_enum
 
     def get_property(self, index: int | str) -> core.MetaProperty:
-        if isinstance(index, int):
-            return core.MetaProperty(self.item.property(index))
-        for prop in self.get_properties():
-            if prop.get_name() == index:
-                return prop
-        raise KeyError(index)
+        index = self.indexOfProperty(index) if isinstance(index, str) else index
+        prop = core.MetaProperty(self.item.property(index))
+        if not prop.isValid():
+            raise IndexError(index)
+        return prop
 
     def get_constructor(self, index: int | str) -> core.MetaProperty:
-        if isinstance(index, int):
-            return core.MetaMethod(self.item.constructor(index))
-        for prop in self.get_constructors():
-            if prop.get_name() == index:
-                return prop
-        raise KeyError(index)
+        index = self.indexOfConstructor(index) if isinstance(index, str) else index
+        method = core.MetaMethod(self.item.constructor(index))
+        if not method.isValid():
+            raise IndexError(index)
+        return method
 
     def get_methods(
         self,
