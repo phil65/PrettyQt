@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 
@@ -129,10 +131,23 @@ class MetaObject:
         return [core.MetaProperty(self.item.property(i)) for i in range(start, count)]
 
     def get_signals(self, include_super: bool = True) -> list[core.MetaMethod]:
+        return self.get_methods_with_type("signal")
+
+    def get_slots(self, include_super: bool = True) -> list[core.MetaMethod]:
+        return self.get_methods_with_type("slot")
+
+    def get_plain_methods(self, include_super: bool = True) -> list[core.MetaMethod]:
+        return self.get_methods_with_type("method")
+
+    def get_methods_with_type(
+        self,
+        typ: Literal["signal", "slot", "constructor", "method"],
+        include_super: bool = True,
+    ) -> list[core.MetaMethod]:
         return [
             i
             for i in self.get_methods(include_super=include_super)
-            if i.get_method_type() == "signal"
+            if i.get_method_type() == typ
         ]
 
     def get_meta_type(self) -> core.MetaType:
