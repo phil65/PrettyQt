@@ -149,18 +149,18 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
             case _:
                 super().__init__(*args, **kwargs)
         self.valueChanged.connect(self.on_value_change)
-        style = HollowHandleStyle(
-            {
-                "groove.height": 4,
-                "sub-page.color": QtGui.QColor(72, 210, 242),
-                "add-page.color": QtGui.QColor(255, 255, 255, 50),
-                "handle.color": QtGui.QColor(72, 210, 242),
-                "handle.ring-width": 2,
-                "handle.hollow-radius": 10,
-                "handle.margin": 0,
-            }
-        )
-        self.setStyle(style)
+        # style = HollowHandleStyle(
+        #     {
+        #         "groove.height": 4,
+        #         "sub-page.color": QtGui.QColor(72, 210, 242),
+        #         "add-page.color": QtGui.QColor(255, 255, 255, 50),
+        #         "handle.color": QtGui.QColor(72, 210, 242),
+        #         "handle.ring-width": 2,
+        #         "handle.hollow-radius": 10,
+        #         "handle.margin": 0,
+        #     }
+        # )
+        # self.setStyle(style)
 
     def mousePressEvent(self, e: QtGui.QMouseEvent):
         self.clicked.emit(self.value())
