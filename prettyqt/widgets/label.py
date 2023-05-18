@@ -5,7 +5,7 @@ from typing import Literal
 
 from typing_extensions import Self
 
-from prettyqt import constants, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, get_repr
 
@@ -44,9 +44,20 @@ TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
 class Label(widgets.FrameMixin, QtWidgets.QLabel):
+    elision_changed = core.Signal(bool)
+
     def __init__(self, *args, **kwargs):
+        self._elide_mode = QtCore.Qt.ElideNone
         super().__init__(*args, **kwargs)
         self.openExternalLinks()
+        self._is_elided = False
+
+    def set_elide_mode(self, mode: constants.ElideModeStr):
+        self._elide_mode = constants.ELIDE_MODE[mode]
+        self.update()
+
+    def get_elide_mode(self) -> constants.ElideModeStr:
+        return self._elide_mode
 
     def _get_map(self):
         maps = super()._get_map()
@@ -55,6 +66,65 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     def __repr__(self):
         return get_repr(self, self.text())
+
+    def paintEvent(self, event):
+        if self._elide_mode == QtCore.Qt.TextElideMode.ElideNone or "\n" in self.text():
+            super().paintEvent(event)
+            return
+        did_elide = False
+
+        with gui.Painter(self) as painter:
+            font_metrics = painter.fontMetrics()
+            text_width = font_metrics.horizontalAdvance(self.text())
+            # line_spacing = font_metrics.lineSpacing()
+
+            # layout phase
+            text_layout = gui.TextLayout(self.text(), painter.font())
+            # y = 0
+            with text_layout.process_layout():
+                while True:
+                    line = text_layout.createLine()
+
+                    if not line.isValid():
+                        break
+
+                    # next_line_y = y + line_spacing
+                    line.setLineWidth(self.width())
+
+                    # if self.height() >= next_line_y + line_spacing:
+                    #     line.draw(painter, core.PointF(0, y))
+                    #     y = next_line_y
+                    # else:
+                    #     last_line = self._text[line.textStart() :]
+                    #     elided_line = metrics.elided_text(
+                    #         last_line, "right", self.width()
+                    #     )
+                    #     painter.drawText(0, y + metrics.ascent(), elided_line)
+                    #     line = layout.createLine()
+                    #     did_elide = line.isValid()
+                    #     break
+
+                    if text_width >= self.width():
+                        self._elided_line = font_metrics.elidedText(
+                            self.text(), self._elide_mode, self.width()
+                        )
+                        painter.drawText(
+                            QtCore.QRect(0, 0, self.width(), self.height()),
+                            int(self.alignment()),
+                            self._elided_line,
+                        )
+                        did_elide = line.isValid()
+                        break
+                    else:
+                        painter.drawText(
+                            QtCore.QRect(0, 0, self.width(), self.height()),
+                            int(self.alignment()),
+                            self.text(),
+                        )
+
+            if did_elide != self._is_elided:
+                self._is_elided = did_elide
+                self.elision_changed.emit(did_elide)
 
     def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")
@@ -222,9 +292,13 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         label.resize(pixmap.width(), pixmap.height())
         return label
 
+    elideMode = core.Property(str, get_elide_mode, set_elide_mode)
+
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = Label("http://www.test.de")
+    widget = Label(
+        "http://www.test.de" * 5, alignment="center_right", elide_mode="middle"
+    )
     widget.show()
     app.main_loop()
