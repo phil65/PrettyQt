@@ -132,6 +132,6 @@ if __name__ == "__main__":
     container.show()
     editor = WidgetEditor(w)
     editor.show()
-    with app.catch_exceptions():
+    with app.debug_mode():
         app.main_loop()
     print(w.get_properties())

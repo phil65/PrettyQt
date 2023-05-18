@@ -37,12 +37,16 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         return iter(self.topLevelWidgets())
 
     @contextlib.contextmanager
-    def catch_exceptions(self):
+    def debug_mode(self):
+        from prettyqt.eventfilters import debugmode
         from prettyqt.utils.debugging import ErrorMessageBox
 
         self._original_excepthook = sys.excepthook
         sys.excepthook = ErrorMessageBox._excepthook
+        eventfilter = debugmode.DebugMode(self)
+        self.installEventFilter(eventfilter)
         yield self
+        self.removeEventFilter(eventfilter)
         sys.excepthook = self._original_excepthook
 
     def store_widget_states(
@@ -270,6 +274,19 @@ class Application(ApplicationMixin, QtWidgets.QApplication):
 # Application.setStyle(widgets.Style())
 
 if __name__ == "__main__":
-    app = Application(sys.argv)
-    app.set_theme("dark")
-    app.load_language("de")
+    app = widgets.app()
+
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+    container = widgets.Widget()
+    container.set_layout("horizontal")
+    w = widgets.PlainTextEdit(parent=container)
+    w2 = widgets.PlainTextEdit(parent=container)
+    container.box.add(w)
+    container.box.add(w2)
+    container.show()
+    # editor = widgeteditor.WidgetEditor(w)
+    # editor.show()
+    with app.debug_mode():
+        app.sleep(1)
+        app.main_loop()
+    print(w.get_properties())
