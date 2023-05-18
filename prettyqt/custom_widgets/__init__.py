@@ -23,6 +23,7 @@ from .regexlineedit import RegexLineEdit
 from .regexinput import RegexInput
 from .mappedcheckbox import MappedCheckBox
 from .logtextedit import LogTextEdit
+from .enumflagwidget import EnumFlagWidget
 from .flagselectionwidget import FlagSelectionWidget
 from .stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
@@ -72,6 +73,7 @@ __all__ = [
     "RegexInput",
     "MappedCheckBox",
     "LogTextEdit",
+    "EnumFlagWidget",
     "FlagSelectionWidget",
     "StringOrNumberWidget",
     "IconLabel",
