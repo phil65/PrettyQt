@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import os
 import pathlib
 
@@ -54,7 +55,7 @@ class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
     def get_search_paths(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.searchPaths()]
 
-    def set_search_paths(self, paths: list[datatypes.PathType]):
+    def set_search_paths(self, paths: Iterable[datatypes.PathType]):
         self.setSearchPaths([os.fspath(p) for p in paths])
 
 

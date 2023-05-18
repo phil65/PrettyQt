@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import os
 import pathlib
 
@@ -24,5 +25,5 @@ class FileSystemWatcher(core.ObjectMixin, QtCore.QFileSystemWatcher):
     def add_path(self, path: datatypes.PathType) -> bool:
         return self.addPath(os.fspath(path))
 
-    def add_paths(self, paths: list[datatypes.PathType]):
+    def add_paths(self, paths: Iterable[datatypes.PathType]):
         self.addPaths([os.fspath(p) for p in paths])

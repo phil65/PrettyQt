@@ -179,7 +179,7 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
-    def set_columns(self, columns: list[ColumnItem]):
+    def set_columns(self, columns: Iterable[ColumnItem]):
         self._attr_cols = columns
         for col in columns:
             col.model = self
@@ -254,7 +254,7 @@ class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
     def __init__(
         self,
         obj,
-        columns: list[ColumnItem],
+        columns: Iterable[ColumnItem],
         mime_type: str | None = None,
         show_root: bool = True,
         parent: QtCore.QObject | None = None,
@@ -276,7 +276,7 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
     def __init__(
         self,
         items: list,
-        columns: list[ColumnItem],
+        columns: Iterable[ColumnItem],
         mime_type: str | None = None,
         parent: QtCore.QObject | None = None,
         **kwargs,

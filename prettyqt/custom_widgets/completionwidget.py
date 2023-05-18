@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
 import contextlib
 import os
 
@@ -86,7 +87,7 @@ class CompletionWidget(widgets.ListWidget):
 
     # 'CompletionWidget' interface
 
-    def show_items(self, cursor, items: list[str], prefix_length: int = 0):
+    def show_items(self, cursor, items: Iterable[str], prefix_length: int = 0):
         """Show the widget with 'items' at the position specified by 'cursor'."""
         point = self._get_top_left_position(cursor)
         self.clear()

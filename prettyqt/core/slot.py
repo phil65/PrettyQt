@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import asyncio
-from collections.abc import Callable
+from collections.abc import Callable, Iterable
 import functools
 import inspect
 import itertools
@@ -41,7 +41,7 @@ def is_optional(self, typ) -> bool:
 #     return get_origin(field) is Union and type(None) in typing.get_args(field)
 
 
-def get_optional_args(annotations: list[Any]) -> list[Any]:
+def get_optional_args(annotations: Iterable[Any]) -> list[Any]:
     return [get_args(arg)[0] for arg in annotations if is_optional(arg)]
 
 

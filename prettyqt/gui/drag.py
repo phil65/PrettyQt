@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError
@@ -26,7 +28,7 @@ class Drag(core.ObjectMixin, QtGui.QDrag):
 
     def main_loop(
         self,
-        supported_actions: list[constants.DropActionStr] | None = None,
+        supported_actions: Iterable[constants.DropActionStr] | None = None,
         default_drop_action: constants.DropActionStr | None = None,
     ) -> constants.DropActionStr:
         supported_actions = supported_actions or [constants.DROP_ACTION["move"]]

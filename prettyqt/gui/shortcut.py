@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, datatypes
@@ -43,7 +45,7 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
         keysequence = gui.KeySequence(key)
         self.setKey(keysequence)
 
-    def set_keys(self, keys: list[datatypes.KeyCombinationType]):
+    def set_keys(self, keys: Iterable[datatypes.KeyCombinationType]):
         keysequences = [gui.KeySequence(key) for key in keys]
         self.setKeys(keysequences)
 

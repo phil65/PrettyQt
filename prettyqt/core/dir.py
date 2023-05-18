@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import os
 import pathlib
 from typing import Literal
@@ -172,7 +173,7 @@ class Dir(QtCore.QDir):
         cls.addSearchPath(prefix, os.fspath(path))
 
     @classmethod
-    def set_search_paths(cls, prefix: str, paths: list[datatypes.PathType]):
+    def set_search_paths(cls, prefix: str, paths: Iterable[datatypes.PathType]):
         cls.setSearchPaths(prefix, [os.fspath(p) for p in paths])
 
 

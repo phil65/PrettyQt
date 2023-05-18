@@ -3,12 +3,14 @@
 
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
 class RadioDelegate(widgets.StyledItemDelegate):
-    def __init__(self, parent: QtWidgets.QWidget, items: list[str]):
+    def __init__(self, parent: QtWidgets.QWidget, items: Iterable[str]):
         super().__init__(parent)
         self.items = items
         self.choices: list[int | None] = [None for _ in self.items]

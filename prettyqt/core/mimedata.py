@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
+from collections.abc import Iterable, Iterator
 from typing import Any
 
 from typing_extensions import Self
@@ -58,11 +58,11 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
         else:
             raise ValueError(extension)
 
-    def set_path_data(self, paths: list[datatypes.PathType]):
+    def set_path_data(self, paths: Iterable[datatypes.PathType]):
         urls = [core.Url.from_local_file(p) for p in paths]
         self.setUrls(urls)
 
-    def set_urls(self, paths: list[datatypes.PathType]):
+    def set_urls(self, paths: Iterable[datatypes.PathType]):
         urls = [core.Url(p) for p in paths]
         self.setUrls(urls)
 

@@ -13,13 +13,13 @@ class NestedItem:
         parent: Self | None = None,
         dynamic_name: str | None = None,
         count: int | None = None,
-        children: list[Self] | None = None,
+        children: Iterable[Self] | None = None,
     ):
         self.parent = parent
         self.dynamic_name = dynamic_name or self.item_name
         self.count = count
         # self.timestamp = kwargs.pop("timestamp", time.time())
-        self.children: list[Self] = []
+        self.children: Iterable[Self] = []
         if children:
             self.add_children(children)
 

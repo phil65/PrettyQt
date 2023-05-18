@@ -43,7 +43,7 @@ class bidict(bdct.bidict):
     #         flag = flag.value
     #     return {k: v & flag for k, v in self.items()}
 
-    def merge_flags(self, flags: list[str]):
+    def merge_flags(self, flags: Iterable[str]):
         return functools.reduce(operator.ior, [self[t] for t in flags])
 
 

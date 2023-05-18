@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import dataclass
 import enum
 from typing import Literal
@@ -33,7 +34,7 @@ class BorderLayout(widgets.Layout):
         super().__init__(parent)  # type: ignore
         self.set_margin(margin)
         self.setSpacing(spacing if spacing is not None else -1)
-        self.items: list[ItemWrapper] = []
+        self.items: Sequence[ItemWrapper] = []
 
     def __del__(self):
         item = self.takeAt(0)

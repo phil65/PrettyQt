@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 import re
 from typing import Literal
 
@@ -62,7 +63,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
         pat = f"(?=({pat}))"
         super().setFilterRegularExpression(pat)
 
-    def setFixedFilterList(self, filter_list: list[str]):
+    def setFixedFilterList(self, filter_list: Iterable[str]):
         pat = "|".join(filter_list)
         super().setFilterRegularExpression(pat)
 

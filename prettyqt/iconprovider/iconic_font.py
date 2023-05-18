@@ -10,6 +10,8 @@ methods returning instances of ``QIcon``.
 
 from __future__ import annotations
 
+from collections.abc import Iterable
+
 # Standard library imports
 from typing import Any
 
@@ -114,7 +116,7 @@ class IconicFont:
         rect: QtCore.QRect,
         mode: QtGui.QIcon.Mode,
         state: QtGui.QIcon.State,
-        options: list[dict[str, Any]],
+        options: Iterable[dict[str, Any]],
     ):
         color_str, char = COLOR_OPTIONS[state][mode]
         for opt in options:
