@@ -28,7 +28,7 @@ class WidgetEditor(widgets.ScrollArea):
         self._widget = widget
         self._initial_prop_values = {}
         self.event_catcher = eventfilters.EventCatcher(
-            self._widget, exclude=QtCore.QEvent.Type.Paint
+            exclude=QtCore.QEvent.Type.Paint, parent=self._widget
         )
         self.event_catcher.caught.connect(self._update_editors)
         self._widget.installEventFilter(self.event_catcher)

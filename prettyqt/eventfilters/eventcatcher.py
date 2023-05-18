@@ -15,13 +15,12 @@ class EventCatcher(core.Object):
 
     def __init__(
         self,
-        *args,
         include: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
         exclude: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
         do_filter: bool | Callable[[QtCore.QEvent], bool] = False,
         **kwargs,
     ):
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
         self.include = [include] if isinstance(include, QtCore.QEvent.Type) else include
         self.exclude = [exclude] if isinstance(exclude, QtCore.QEvent.Type) else exclude
         self.do_filter = do_filter
@@ -30,7 +29,7 @@ class EventCatcher(core.Object):
         if not self.include or event.type() in self.include:
             if not self.exclude or event.type() not in self.exclude:
                 self.caught.emit(event)
-                logger.debug(f"caught {event} from {source}")
+                logger.debug(f"{source!r}: {event.type()!r}")
                 if callable(self.do_filter):
                     return self.do_filter(event)
                 return self.do_filter

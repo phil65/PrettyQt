@@ -42,12 +42,22 @@ class DebugMode(core.Object):
                     candidates = widgets.Application.widgets_at(pos)
                     self.list.clear()
                     for candidate in candidates:
-                        self.list.add_item(
-                            f"{type(candidate).__name__}: {candidate.objectName()}",
-                            data={"user": candidate},
-                        )
+                        self.list.add_item(f"{candidate!r}", data={"user": candidate})
                     self.list.show()
                     return True
+                elif "alt" in mods:
+                    from prettyqt import ipython
+
+                    console = ipython.InProcessIPythonWidget(self)
+                    console.show()
+                    pos = source.mapToGlobal(event.pos())
+                    widgets.Application.sleep(1)
+                    console.push_vars(
+                        dict(
+                            widgets=widgets.Application.widgets_at(pos), app=widgets.app()
+                        )
+                    )
+                    console.execute("print(widgets)")
         return False
 
     def _on_clicked(self, item):
