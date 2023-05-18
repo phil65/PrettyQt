@@ -85,25 +85,23 @@ class ObjectMixin:
 
     def connect_events(
         self,
-        callback: Callable,
+        callback: Callable[[QtCore.QEvent], bool],
         include: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
         exclude: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
-        do_filter: bool = False,
     ) -> eventfilters.EventCatcher:
         """Connect widget events to a callback.
 
         if include is set, it behaves like a whitelist.
         if exclude is set, it behaves like a blacklist.
-        The QEvent is passed to the callback as an argument.
+        The QEvent is passed to the callback as an argument, and the callback
+        needs to return True or False to indicate whether the Event should be filtered.
 
         Arguments:
             callback: Callback to execute when event is triggered
             include: Events to include
             exclude: Events to exclude
-            do_filter: filters event so it doesnt get processed further.
         """
-        eventfilter = eventfilters.EventCatcher(self, include, exclude, do_filter)
-        eventfilter.caught.connect(callback)
+        eventfilter = eventfilters.EventCatcher(self, include, exclude, callback)
         self.installEventFilter(eventfilter)
         return eventfilter
 
