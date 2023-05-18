@@ -32,6 +32,9 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[section]
+            case constants.VERTICAL, constants.DISPLAY_ROLE:
+                prop = self._metaobj.get_property(section)
+                return prop.propertyIndex()
 
     def data(self, index, role=constants.DISPLAY_ROLE):
         if not index.isValid():
