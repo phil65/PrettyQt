@@ -24,7 +24,7 @@ class MetaProperty:
         return self.item.name()  # type: ignore
 
     def get_meta_type(self) -> core.MetaType:
-        return core.MetaType(self.metaType().id())
+        return core.MetaType(self.userType())  # same as self.metaType().id()
 
     def get_notify_signal(self) -> core.MetaMethod:
         return core.MetaMethod(self.notifySignal())
@@ -42,4 +42,11 @@ class MetaProperty:
 
 
 if __name__ == "__main__":
-    metaobj = core.Object.get_static_metaobject()
+    from prettyqt import widgets
+
+    app = widgets.app()
+    widget = widgets.Widget()
+    metaobj = widget.get_metaobject()
+    prop = metaobj.get_property("windowModality")
+    value = prop.read(widget)
+    print(type(value), value)
