@@ -7,12 +7,15 @@ import contextlib
 # import inspect
 import itertools
 import logging
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
-from prettyqt import constants, core, eventfilters
+from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
 
+
+if TYPE_CHECKING:
+    from prettyqt import eventfilters
 
 T = TypeVar("T", bound=QtCore.QObject)
 
@@ -101,6 +104,8 @@ class ObjectMixin:
             include: Events to include
             exclude: Events to exclude
         """
+        from prettyqt import eventfilters
+
         eventfilter = eventfilters.EventCatcher(self, include, exclude, callback)
         self.installEventFilter(eventfilter)
         return eventfilter
