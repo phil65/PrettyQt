@@ -5,8 +5,8 @@ from typing import Literal
 
 from typing_extensions import Self
 
-from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt import constants, gui, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, get_repr
 
 
@@ -44,27 +44,14 @@ TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
 class Label(widgets.FrameMixin, QtWidgets.QLabel):
-    clicked = core.Signal()
-
-    def __init__(self, *args, propagate_event: bool = True, **kwargs):
+    def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.openExternalLinks()
-        self._propagate_event = propagate_event
 
     def _get_map(self):
         maps = super()._get_map()
         maps |= {"textFormat": TEXT_FORMAT, "alignment": constants.ALIGNMENTS}
         return maps
-
-    def mousePressEvent(self, e):
-        if self._propagate_event:
-            super().mousePressEvent(e)
-
-    def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
-        if self._propagate_event:
-            super().mouseReleaseEvent(event)
-        if event.button() == QtCore.Qt.LeftButton:
-            self.clicked.emit()
 
     def __repr__(self):
         return get_repr(self, self.text())
