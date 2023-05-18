@@ -57,7 +57,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.update()
 
     def get_elide_mode(self) -> constants.ElideModeStr:
-        return self._elide_mode
+        return constants.ELIDE_MODE.inverse[self._elide_mode]
 
     def _get_map(self):
         maps = super()._get_map()
