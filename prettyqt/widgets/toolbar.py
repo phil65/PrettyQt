@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, datatypes, get_repr
 
 
@@ -12,7 +12,9 @@ class ToolBarMixin(widgets.WidgetMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_icon_size(24)
-        self.menu_buttons = []
+        self._menu_buttons = []
+        self._tooltip_labels = []
+        self._tooltip_timer = core.Timer(timeout=self.hide_tooltips)
 
     # def __setstate__(self, state: dict[str, Any]) -> None:
     #     super().__setstate__(state)
@@ -39,7 +41,7 @@ class ToolBarMixin(widgets.WidgetMixin):
         btn = widgets.ToolButton.for_menu(menu, icon=icon)
         btn.setText(label)
         btn.setToolButtonStyle(self.toolButtonStyle())
-        self.menu_buttons.append(btn)
+        self._menu_buttons.append(btn)
         self.addWidget(btn)
         return btn
 
@@ -66,7 +68,7 @@ class ToolBarMixin(widgets.WidgetMixin):
 
     def set_style(self, style: constants.ToolButtonStyleStr):
         self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])
-        for btn in self.menu_buttons:
+        for btn in self._menu_buttons:
             btn.set_style(style)
 
     def get_style(self) -> constants.ToolButtonStyleStr:
@@ -123,6 +125,30 @@ class ToolBarMixin(widgets.WidgetMixin):
     def get_widgets(self) -> list[QtWidgets.QAction]:
         return [self.widgetForAction(i) for i in self.actions()]
 
+    def show_tooltips(self, value: bool = True, duration_ms: int = 2000):
+        """Show all the tooltips."""
+        if self._tooltip_labels:
+            self._tooltip_timer.start(duration_ms)
+            return
+        for i in self.get_widgets():
+            label = widgets.Label(
+                i.toolTip(), self, QtCore.Qt.WindowType.ToolTip, alignment="center"
+            )
+            label.setStyleSheet("border: 1px solid gray;")
+            label.hide()
+            pos = i.mapToGlobal(core.Point(0, 0))
+            label.move(pos)
+            label.show()
+            self._tooltip_labels.append(label)
+        self._tooltip_timer.start(duration_ms)
+
+    def hide_tooltips(self):
+        """Hide all the tooltips."""
+        for label in self._tooltip_labels:
+            label.hide()
+            label.deleteLater()
+        self._tooltip_labels = []
+
 
 class ToolBar(ToolBarMixin, QtWidgets.QToolBar):
     pass
@@ -131,10 +157,11 @@ class ToolBar(ToolBarMixin, QtWidgets.QToolBar):
 if __name__ == "__main__":
     app = widgets.app()
     toolbar = ToolBar("test")
-    toolbar.add_action(text="test")
-    toolbar.add_action(text="test2")
+    toolbar.add_action(text="test", tool_tip="tesf dsfsdfdsfdsfsdfsdffst")
+    toolbar.add_action(text="test2", tool_tip="test2")
     radio = widgets.RadioButton("abc")
     action = toolbar.addWidget(radio)
-    print(toolbar.get_widgets())
+
     toolbar.show()
+    toolbar.show_tooltips()
     app.main_loop()
