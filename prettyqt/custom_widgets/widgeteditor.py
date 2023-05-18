@@ -3,22 +3,12 @@ from __future__ import annotations
 import enum
 import logging
 
-from prettyqt import core, custom_widgets, widgets
+from prettyqt import core, custom_widgets, eventfilters, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import bidict, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
-
-
-class EventCatcher(core.Object):
-    changed = core.Signal(QtCore.QEvent)
-
-    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
-        if event.type() != QtCore.QEvent.Type.Paint:
-            self.changed.emit(event)
-
-        return False
 
 
 class WidgetEditor(widgets.ScrollArea):
@@ -28,8 +18,10 @@ class WidgetEditor(widgets.ScrollArea):
         super().__init__(*args, **kwargs)
         self._widget = widget
         self._initial_prop_values = {}
-        self.event_catcher = EventCatcher(self._widget)
-        self.event_catcher.changed.connect(self._update_editors)
+        self.event_catcher = eventfilters.EventCatcher(
+            self._widget, exclude=QtCore.QEvent.Type.Paint
+        )
+        self.event_catcher.caught.connect(self._update_editors)
         self._widget.installEventFilter(self.event_catcher)
         container = widgets.Widget()
         container.set_layout("form")
@@ -130,5 +122,6 @@ if __name__ == "__main__":
     container.show()
     editor = WidgetEditor(w)
     editor.show()
-    app.main_loop()
+    with app.catch_exceptions():
+        app.main_loop()
     print(w.get_properties())
