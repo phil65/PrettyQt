@@ -23,8 +23,8 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
             gui_completion="droplist",  # 'plain', 'droplist', 'ncurses'
             kind="rich",  # 'plain', 'rich', only applies when no custom control set.
             paging="vsplit",  # h  'inside', 'hsplit', 'vsplit', 'custom', 'none'
-            custom_control=widgets.TextEdit,
-            custom_page_control=widgets.TextEdit,
+            # custom_control=widgets.TextEdit,
+            # custom_page_control=widgets.TextEdit,
         )
         self.banner = "IPython Console"
         self.font_size = 6
