@@ -32,6 +32,8 @@ def make_qtype(obj):
             return QtGui.QPalette(obj)
         case gui.Font():
             return QtGui.QFont(obj)
+        case gui.Color():
+            return obj.convertTo(obj.spec())
         case gui.Cursor():
             return QtGui.QCursor(obj)
         case gui.Brush():
