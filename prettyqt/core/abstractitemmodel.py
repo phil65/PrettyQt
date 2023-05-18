@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -32,6 +33,14 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def __len__(self) -> int:
         """Return amount of rows."""
         return self.rowCount()
+
+    def __add__(
+        self, other: QtCore.QAbstractItemModel
+    ) -> core.ConcatenateTablesProxyModel:
+        proxy = core.ConcatenateTablesProxyModel()
+        proxy.addSourceModel(self)
+        proxy.addSourceModel(other)
+        return proxy
 
     @classmethod
     def ci(
@@ -182,6 +191,26 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
     def get_role_names(self) -> dict[int, str]:
         return {i: v.data().decode() for i, v in self.roleNames().items()}
+
+    def transpose(self) -> core.TransposeProxyModel:
+        proxy = core.TransposeProxyModel()
+        proxy.setSourceModel(self)
+        return proxy
+
+    def get_search_proxy(
+        self, search_type: Literal["regular", "fuzzy"] = "regular", **kwargs
+    ):
+        match search_type:
+            case "regular":
+                proxy = core.SortFilterProxyModel(**kwargs)
+            case "fuzzy":
+                from prettyqt import custom_models
+
+                proxy = custom_models.FuzzyFilterProxyModel(**kwargs)
+            case _:
+                raise ValueError(search_type)
+        proxy.setSourceModel(self)
+        return proxy
 
 
 class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
