@@ -616,6 +616,31 @@ DAY_OF_WEEK: bidict[DayOfWeekStr, Qt.DayOfWeek] = bidict(
     sunday=Qt.DayOfWeek.Sunday,
 )
 
+TextFlagStr = Literal[
+    "single_line",
+    "dont_clip",
+    "expand_tabs",
+    "show_mnemonic",
+    "word_wrap",
+    "wrap_anywhere",
+    "hide_mnemonic",
+    "dont_print",
+    "include_trailing_spaces",
+    "justification_forced",
+]
+TEXT_FLAG: bidict[TextFlagStr, Qt.TextFlag] = bidict(
+    single_line=Qt.TextFlag.TextSingleLine,
+    dont_clip=Qt.TextFlag.TextDontClip,
+    expand_tabs=Qt.TextFlag.TextExpandTabs,
+    show_mnemonic=Qt.TextFlag.TextShowMnemonic,
+    word_wrap=Qt.TextFlag.TextWordWrap,
+    wrap_anywhere=Qt.TextFlag.TextWrapAnywhere,
+    hide_mnemonic=Qt.TextFlag.TextHideMnemonic,
+    dont_print=Qt.TextFlag.TextDontPrint,
+    include_trailing_spaces=Qt.TextFlag.TextIncludeTrailingSpaces,
+    justification_forced=Qt.TextFlag.TextJustificationForced,
+)
+
 NavigationModeStr = Literal[
     "none",
     "keypad_tab_order",
