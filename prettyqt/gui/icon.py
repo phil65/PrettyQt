@@ -6,13 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import (
-    InvalidParamError,
-    bidict,
-    datatypes,
-    get_repr,
-    serializemixin,
-)
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, serializemixin
 
 
 MODE = bidict(
@@ -47,9 +41,7 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
 
     @classmethod
     def for_color(cls, color_str: str) -> Self:
-        color = gui.Color.from_text(color_str)
-        if not color.isValid():
-            raise TypeError()
+        color = gui.Color(color_str)
         bitmap = gui.Pixmap(16, 16)
         bitmap.fill(color)
         return cls(bitmap)

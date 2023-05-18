@@ -27,6 +27,12 @@ NameFormatStr = Literal["hex_rgb", "hex_argb"]
 NameStr = NameFormatStr | Literal["svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"]
 
 
+def is_valid_color(text: str):
+    if text.startswith("#") and len(text) in [4, 7] and text[1:].isalnum():
+        return True
+    return text.lower() in QtGui.QColor.colorNames()
+
+
 class Color(QtGui.QColor):
     def __init__(self, *args):
         match args:
@@ -34,8 +40,9 @@ class Color(QtGui.QColor):
                 super().__init__()
                 self.setRgba(args[0].rgba())
             case (str(),):
-                super().__init__()
-                self.set_color(args[0])
+                if not is_valid_color(args[0]):
+                    raise ValueError(args[0])
+                super().__init__(args[0])
             case _:
                 super().__init__(*args)
 
@@ -80,20 +87,6 @@ class Color(QtGui.QColor):
             self.setNamedColor(color)
         else:
             self.setRgb(*color)
-
-    @classmethod
-    def from_text(cls, text: str) -> Self:
-        """Create a QColor from specified string."""
-        color = cls()
-        if text.startswith("#") and len(text) == 7:
-            correct = "#0123456789abcdef"
-            for char in text:
-                if char.lower() not in correct:
-                    return color
-        elif text not in list(cls.colorNames()):
-            return color
-        color.setNamedColor(text)
-        return color
 
     @classmethod
     def from_cmyk(cls, c: float, m: float, y: float, k: float, a: float = 1.0) -> Self:
@@ -222,7 +215,7 @@ class Color(QtGui.QColor):
 if __name__ == "__main__":
     color = Color("#FFFFFF")
     color = color.drift(1.3)
-    print(color)
+    print(color.colorNames())
     print(color.get_spec())
     print(f"{color}")
     print(color.as_qt())

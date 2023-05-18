@@ -260,7 +260,7 @@ def _icon(*names, **kwargs) -> QtGui.QIcon:
 
 def for_color(color: str | QtGui.QColor) -> gui.Icon:
     if isinstance(color, str):
-        color = gui.Color.from_text(color)
+        color = gui.Color(color)
     if color.isValid():
         bitmap = gui.Pixmap(16, 16)
         bitmap.fill(color)
