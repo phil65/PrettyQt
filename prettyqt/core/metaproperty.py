@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
@@ -29,6 +31,14 @@ class MetaProperty:
 
     def get_enumerator(self) -> core.MetaEnum:
         return core.MetaEnum(self.enumerator())
+
+    def get_enumerator_type(self) -> Literal["flag", "enum"] | None:
+        if self.isFlagType():
+            return "flag"
+        elif self.isEnumType():
+            return "enum"
+        else:
+            return None
 
 
 if __name__ == "__main__":
