@@ -54,8 +54,8 @@ class ObjectMixin:
         """
         return {}
 
-    def __repr__(self):
-        return f"{type(self).__name__}()"
+    # def __repr__(self):  # we already monkeypatch QObject
+    #     return get_repr(self, self.objectName())
 
     def __setstate__(self, state):
         self.set_properties(state)

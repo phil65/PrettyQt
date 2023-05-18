@@ -5,6 +5,7 @@ from __future__ import annotations
 import datetime
 
 from prettyqt.qt import PYQT6, PYSIDE6
+from prettyqt.utils import get_repr
 
 # sys.setrecursionlimit(2000)
 
@@ -81,3 +82,10 @@ elif PYSIDE6:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore
     from PySide6 import __version__ as BINDING_VERSION
+
+
+def __repr__(self):
+    return get_repr(self, self.objectName())
+
+
+QObject.__repr__ = __repr__
