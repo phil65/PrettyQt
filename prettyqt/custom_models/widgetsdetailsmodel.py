@@ -3,12 +3,16 @@ from __future__ import annotations
 from collections import defaultdict
 from collections.abc import Sequence
 import inspect
+import logging
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
 
 
-def find_common_ancestor(*cls_list):
+logger = logging.getLogger(__name__)
+
+
+def find_common_ancestor(cls_list):
     mros = [list(inspect.getmro(cls)) for cls in cls_list]
     track = defaultdict(int)
     while mros:
@@ -30,7 +34,8 @@ class WidgetsDetailsModel(core.AbstractTableModel):
     def __init__(self, items: Sequence[QtWidgets.QWidget], **kwargs):
         super().__init__(**kwargs)
         self.items = items
-        common_ancestor = find_common_ancestor(*[type(i) for i in self.items])
+        common_ancestor = find_common_ancestor([type(i) for i in self.items])
+        logger.debug(f"{type(self).__name__}: found common ancester {common_ancestor}")
         self._metaobj = core.MetaObject(common_ancestor.staticMetaObject)
 
     def columnCount(self, parent=None):
@@ -90,7 +95,6 @@ class WidgetsDetailsModel(core.AbstractTableModel):
 
 
 if __name__ == "__main__":
-    import logging
     import sys
 
     from prettyqt import widgets
