@@ -61,16 +61,6 @@ def string_to_num_array(array: str) -> list[float]:
     return [int(i) if i.is_integer() else i for i in floats]
 
 
-def cut_off_str(obj, max_len: int) -> str:
-    """Create a string representation of an object, no longer than max_len characters.
-
-    Uses repr(obj) to create the string representation. If this is longer than max_len -3
-    characters, the last three will be replaced with elipsis.
-    """
-    s = repr(obj)
-    return f"{s[:max_len - 3]}..." if len(s) > max_len - 3 else s
-
-
 def get_color_percentage(
     color_1: tuple[int, int, int, int], color_2: tuple[int, int, int, int], percent: float
 ) -> tuple[int, int, int, int]:
