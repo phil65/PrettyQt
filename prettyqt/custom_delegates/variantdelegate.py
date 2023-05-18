@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import datetime
 import enum
+import logging
 import pathlib
 
 import regex as re
@@ -34,10 +35,13 @@ class VariantDelegate(widgets.StyledItemDelegate):
         original_value = index.model().data(index, self.data_role)
         if not self.is_supported_type(original_value):
             return None
-
         match original_value:
             case bool():
                 widget = widgets.CheckBox(parent=parent)
+            case enum.Flag():
+                widget = custom_widgets.EnumFlagWidget(
+                    parent=parent, enum_class=original_value.__class__
+                )
             case enum.Enum():
                 widget = custom_widgets.EnumComboBox(
                     parent=parent, enum_class=original_value.__class__
@@ -46,37 +50,37 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 widget = widgets.SpinBox(parent=parent)
             case float():
                 widget = widgets.DoubleSpinBox(parent=parent)
+            case pathlib.Path():
+                widget = custom_widgets.FileChooserButton(parent=parent)
+            case str():
+                widget = widgets.LineEdit(parent=parent)
+                widget.setFrame(False)
             case QtCore.QRegularExpression() | re.Pattern():
                 widget = custom_widgets.RegexInput(show_error=False, parent=parent)
-            case QtGui.QColor():
-                widget = custom_widgets.ColorComboBox(parent=parent)
             case QtCore.QTime():
                 widget = widgets.TimeEdit(parent=parent)
-            case QtGui.QFont():
-                widget = widgets.FontComboBox(parent=parent)
             case QtCore.QDate():
                 widget = widgets.DateEdit(parent=parent)
             case QtCore.QDateTime():
                 widget = widgets.DateTimeEdit(parent=parent)
-            case QtGui.QKeySequence():
-                widget = widgets.KeySequenceEdit(parent=parent)
-            case QtGui.QRegion():
-                widget = custom_widgets.RegionEdit(parent=parent)
-            case QtWidgets.QSizePolicy():
-                widget = custom_widgets.SizePolicyEdit(parent=parent)
             case QtCore.QPoint():
                 widget = custom_widgets.PointEdit(parent=parent)
             case QtCore.QSize():
                 widget = custom_widgets.SizeEdit(parent=parent)
             case QtCore.QRect():
                 widget = custom_widgets.RectEdit(parent=parent)
+            case QtGui.QKeySequence():
+                widget = widgets.KeySequenceEdit(parent=parent)
+            case QtGui.QRegion():
+                widget = custom_widgets.RegionEdit(parent=parent)
+            case QtGui.QFont():
+                widget = widgets.FontComboBox(parent=parent)
+            case QtGui.QColor():
+                widget = custom_widgets.ColorComboBox(parent=parent)
+            case QtWidgets.QSizePolicy():
+                widget = custom_widgets.SizePolicyEdit(parent=parent)
             # case QtCore.QRectF():  # todo
             #     widget = custom_widgets.RectEdit(parent=parent)
-            case pathlib.Path():
-                widget = custom_widgets.FileChooserButton(parent=parent)
-            case str():
-                widget = widgets.LineEdit(parent=parent)
-                widget.setFrame(False)
             case _:
                 return None
         widget.setAutoFillBackground(True)
@@ -98,24 +102,27 @@ class VariantDelegate(widgets.StyledItemDelegate):
         return isinstance(
             value,
             bool
-            | float
+            | enum.Flag
+            | enum.Enum
             | int
+            | float
             | str
-            | QtGui.QColor
-            | QtGui.QFont
-            | QtGui.QKeySequence
+            | re.Pattern
+            | pathlib.Path
+            | QtCore.QRegularExpression
             | QtCore.QDate
             | QtCore.QDateTime
             | QtCore.QTime
             | QtCore.QRect
             | QtCore.QPoint
             | QtCore.QSize
+            | QtCore.QTime
             | QtGui.QPalette
             | QtGui.QIcon
-            | QtCore.QTime
-            | re.Pattern
-            | QtCore.QRegularExpression
-            | pathlib.Path,
+            | QtGui.QColor
+            | QtGui.QFont
+            | QtGui.QKeySequence
+            | QtWidgets.QSizePolicy,
         )
 
     @staticmethod
@@ -125,10 +132,21 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 return val
             case bool():
                 return "✓" if val else "☐"
+            case enum.Flag():
+                return val.name
+            case enum.Enum():
+                return val.name
             case int() | float() | QtCore.QByteArray():
                 return str(val)
             case QtGui.QColor():
                 return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
+            case QtGui.QFont():
+                return val.family()
+            case QtGui.QRegion():
+                rect = val.boundingRect()
+                return f"({rect.x()},{rect.y()},{rect.width()},{rect.height()})"
+            case QtGui.QCursor():
+                return constants.CURSOR_SHAPE.inverse[val.shape()]
             case QtCore.QDate() | QtCore.QDateTime() | QtCore.QTime():
                 return val.toString(QtCore.Qt.DateFormat.ISODate)
             case QtCore.QPoint():
@@ -137,6 +155,14 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 return f"({val.x()},{val.y()},{val.width()},{val.height()})"
             case QtCore.QSize():
                 return f"({val.width()},{val.height()})"
+            case QtCore.QLocale():
+                return val.bcp47Name()
+            case QtWidgets.QSizePolicy():
+                return (
+                    f"({widgets.sizepolicy.SIZE_POLICY.inverse[val.horizontalPolicy()]}, "
+                    f"{widgets.sizepolicy.SIZE_POLICY.inverse[val.verticalPolicy()]}, "
+                    f"{widgets.sizepolicy.CONTROL_TYPE.inverse[val.controlType()]})"
+                )
             case list():
                 return ",".join(map(repr, val))
             case re.Pattern():
@@ -165,6 +191,9 @@ class VariantDelegate(widgets.StyledItemDelegate):
 
 
 if __name__ == "__main__":
+    import sys
+
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = widgets.app()
     table_widget = widgets.TableWidget(15, 2)
     # table_widget.set_delegate(StarDelegate(), column=1)
