@@ -264,6 +264,23 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             if timeit.default_timer() - start > secs:
                 return
 
+    @classmethod
+    def process_events(
+        cls,
+        user_input: bool = True,
+        socket_notifiers: bool = True,
+        wait_for_more: bool = True,
+        msecs: int = 0,
+    ):
+        flag = core.EventLoop.ProcessEventsFlag.AllEvents
+        if not user_input:
+            flag |= core.EventLoop.ProcessEventsFlag.ExcludeUserInputEvents
+        if not socket_notifiers:
+            flag |= core.EventLoop.ProcessEventsFlag.ExcludeSocketNotifiers
+        if wait_for_more:  # doesnt seem to work? Could use this for sleep() otherwise.
+            flag |= core.EventLoop.ProcessEventsFlag.WaitForMoreEvents
+        cls.processEvents(flag, msecs)
+
 
 class Application(ApplicationMixin, QtWidgets.QApplication):
     pass
