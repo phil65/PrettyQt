@@ -12,6 +12,15 @@ logger = logging.getLogger(__name__)
 
 
 class WidgetEditor(widgets.ScrollArea):
+    """Widget which automatically generates list of property editors for a given widget.
+
+    We need to be careful here because we cannot rely on having all our mixin methods
+    if we want this to work for all widgets.
+    Would be worth investigating if we can "monkey-patch" the instances
+    with self._widget.__class__ = type(cls.__name__,(OldClass, WidgetMixin),{})
+    or self._widget.__bases__=(OldClass, WidgetMixin,)
+    """
+
     value_changed = core.Signal(object)
 
     def __init__(self, widget: QtWidgets.QWidget, *args, **kwargs):
@@ -93,6 +102,7 @@ class WidgetEditor(widgets.ScrollArea):
         value = datatypes.make_qtype(value)
         logger.info(f"setting {prop_name} to {value}")
         prop.write(self._widget, value)
+        # brute force
         self._widget.updateGeometry()
         self._widget.repaint()
         self._widget.parentWidget().updateGeometry()
