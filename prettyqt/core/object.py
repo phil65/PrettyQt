@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
+from collections.abc import Callable, Container
 import contextlib
 
 # import inspect
@@ -8,7 +9,7 @@ import itertools
 import logging
 from typing import Any, TypeVar
 
-from prettyqt import constants, core
+from prettyqt import constants, core, eventfilters
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
 
@@ -81,6 +82,30 @@ class ObjectMixin:
             return
         self._eventfilters.remove(eventfilter)
         super().removeEventFilter(eventfilter)
+
+    def connect_events(
+        self,
+        callback: Callable,
+        include: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
+        exclude: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
+        do_filter: bool = False,
+    ) -> eventfilters.EventCatcher:
+        """Connect widget events to a callback.
+
+        if include is set, it behaves like a whitelist.
+        if exclude is set, it behaves like a blacklist.
+        The QEvent is passed to the callback as an argument.
+
+        Arguments:
+            callback: Callback to execute when event is triggered
+            include: Events to include
+            exclude: Events to exclude
+            do_filter: filters event so it doesnt get processed further.
+        """
+        eventfilter = eventfilters.EventCatcher(self, include, exclude, do_filter)
+        eventfilter.caught.connect(callback)
+        self.installEventFilter(eventfilter)
+        return eventfilter
 
     def serialize_fields(self):
         return dict(object_name=self.objectName())
