@@ -86,7 +86,7 @@ class ObjectMixin:
         self._eventfilters.remove(eventfilter)
         super().removeEventFilter(eventfilter)
 
-    def process_events(
+    def add_callback_for_event(
         self,
         callback: Callable[[QtCore.QEvent], bool],
         include: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,

@@ -259,10 +259,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             secs: seconds to sleep
         """
         start = timeit.default_timer()
-        while True:
+        while timeit.default_timer() - start < secs:
             cls.processEvents()
-            if timeit.default_timer() - start > secs:
-                return
 
     @classmethod
     def process_events(
