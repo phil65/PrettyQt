@@ -55,9 +55,9 @@ class DebugMode(core.Object):
 
         logger.debug(f"clicked on {item}")
         widget = item.get_data("user")
-        editor = widgeteditor.WidgetEditor(widget, parent=self.list)
+        self.editor = widgeteditor.WidgetEditor(widget)
         self.list.hide()
-        editor.show()
+        self.editor.show()
 
     def _on_entered(self, index):
         widget = index.data(constants.USER_ROLE)

@@ -6,6 +6,7 @@ import collections
 from collections.abc import Callable, Generator
 import logging
 import re
+import sys
 
 from prettyqt import gui, qt, widgets
 from prettyqt.qt import QtCore
@@ -78,28 +79,28 @@ class ErrorMessageBox(widgets.MessageBox):
             # icon=MBox.Icon.Critical,
             title=title,
             text=str(text)[:1000],
-            buttons=["ok", "help"],
+            buttons=["ok", "help", "close"],
             parent=parent,
         )
 
         self._exc = exc
 
-        self.traceback_button = self.button(MBox.StandardButton.Help)
-        self.traceback_button.setText("Show trackback")
+        traceback_button = self.button(MBox.StandardButton.Help)
+        traceback_button.setText("Show trackback")
+        close_button = self.button(MBox.StandardButton.Cancel)
+        close_button.setText("Quit application")
 
-    def exec_(self):
-        returned = super().exec_()
-        if returned == widgets.MessageBox.StandardButton.Help:
-            self.exec_traceback()
-        return returned
-
-    def exec_traceback(self):
-        """Excecute traceback dialog."""
-        tb = self._get_traceback()
-        dlg = TracebackDialog(self)
-        dlg.setText(tb)
-        dlg.exec_()
-        return None
+    def exec(self):
+        match super().exec():
+            case widgets.MessageBox.StandardButton.Help:
+                tb = self._get_traceback()
+                dlg = TracebackDialog(self)
+                dlg.setText(tb)
+                dlg.exec()
+            case widgets.MessageBox.StandardButton.Cancel:
+                sys.exit(1)
+            case widgets.MessageBox.StandardButton.Ok:
+                return True
 
     @classmethod
     def from_exc(cls, e: Exception, parent=None):
@@ -110,7 +111,7 @@ class ErrorMessageBox(widgets.MessageBox):
     def raise_(cls, e: Exception, parent=None):
         """Raise exception in the message box."""
         # unwrap EmitLoopError
-        return cls.from_exc(e, parent=parent).exec_()
+        return cls.from_exc(e, parent=parent).exec()
 
     def _get_traceback(self):
         if self._exc is None:

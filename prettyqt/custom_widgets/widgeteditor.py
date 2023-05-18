@@ -105,8 +105,9 @@ class WidgetEditor(widgets.ScrollArea):
         # brute force
         self._widget.updateGeometry()
         self._widget.repaint()
-        self._widget.parentWidget().updateGeometry()
-        self._widget.parentWidget().repaint()
+        if (parent := self._widget.parentWidget()) is not None:
+            parent.updateGeometry()
+            parent.repaint()
 
     def _update_editors(self):
         for i in range(self._widget.metaObject().propertyCount()):
