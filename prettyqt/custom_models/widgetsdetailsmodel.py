@@ -1,16 +1,37 @@
 from __future__ import annotations
 
+from collections import defaultdict
 from collections.abc import Sequence
+import inspect
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
+
+
+def find_common_ancestor(*cls_list):
+    mros = [list(inspect.getmro(cls)) for cls in cls_list]
+    track = defaultdict(int)
+    while mros:
+        for mro in mros:
+            cur = mro.pop(0)
+            track[cur] += 1
+            if (
+                track[cur] >= len(cls_list)
+                and not cur.__name__.endswith("Mixin")
+                and cur.__name__.startswith("Q")
+            ):
+                return cur
+            if len(mro) == 0:
+                mros.remove(mro)
+    raise TypeError("Couldnt find common base class")
 
 
 class WidgetsDetailsModel(core.AbstractTableModel):
     def __init__(self, items: Sequence[QtWidgets.QWidget], **kwargs):
         super().__init__(**kwargs)
         self.items = items
-        self._metaobj = widgets.Widget.get_static_metaobject()
+        common_ancestor = find_common_ancestor(*[type(i) for i in self.items])
+        self._metaobj = core.MetaObject(common_ancestor.staticMetaObject)
 
     def columnCount(self, parent=None):
         return widgets.Widget.get_static_metaobject().propertyCount()
@@ -79,7 +100,7 @@ if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TableView()
     view.set_icon("mdi.folder")
-    items = [widgets.RadioButton(), widgets.Widget()]
+    items = [widgets.RadioButton(), widgets.RadioButton()]
     model = WidgetsDetailsModel(items).transpose()
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
