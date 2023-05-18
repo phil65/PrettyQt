@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing_extensions import Self
 
+from prettyqt import constants
 from prettyqt.qt import QtCore
 
 
@@ -51,6 +52,12 @@ class Date(QtCore.QDate):
     @classmethod
     def get_current_date(cls) -> Self:
         return cls(cls.currentDate())
+
+    @classmethod
+    def from_string(cls, text: str, date_format: constants.DateFormatStr | str) -> Self:
+        if date_format in constants.DATE_FORMAT:
+            date_format = constants.DATE_FORMAT[date_format]
+        return cls(cls.fromString(text, date_format))
 
     def replace(
         self, year: int | None = None, month: int | None = None, day: int | None = None
