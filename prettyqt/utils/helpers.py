@@ -4,10 +4,12 @@ from datetime import timedelta
 import re
 
 
-REGEX = re.compile(
+TIME_REGEX = re.compile(
     r"((?P<hours>\d+?)h)?((?P<minutes>\d+?)m)?"
     r"((?P<seconds>\d+?)s)?((?P<milliseconds>\d+?)ms)?"
 )
+
+CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 
 
 def dump_json(data: str):
@@ -34,7 +36,7 @@ def load_json(data):
 
 
 def parse_time(time_str: str) -> int:
-    parts = REGEX.match(time_str)
+    parts = TIME_REGEX.match(time_str)
     if not parts:
         raise ValueError(time_str)
     dct = parts.groupdict()
@@ -48,6 +50,10 @@ def to_lower_camel(snake_str: str) -> str:
         return snake_str
     first, *others = snake_str.split("_")
     return "".join([first.lower(), *map(str.title, others)])
+
+
+def to_snake(camel_string):
+    return CASE_PATTERN.sub("_", camel_string).lower()
 
 
 def string_to_num_array(array: str) -> list[float]:

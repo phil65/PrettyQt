@@ -5,7 +5,7 @@ import logging
 
 from prettyqt import core, custom_widgets, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import bidict, datatypes
+from prettyqt.utils import bidict, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
@@ -80,7 +80,8 @@ class WidgetEditor(widgets.ScrollArea):
             widget.set_value(value)
             widget.value_changed.connect(self._on_value_change)
             widget.setEnabled(prop.isWritable())
-            container.box[i, "left"] = widgets.Label(prop.name())
+            label = helpers.to_snake(prop.name()).replace("_", " ")
+            container.box[i, "left"] = widgets.Label(label)
             container.box[i, "right"] = widget
             self._initial_prop_values[name] = value
             self._editors[name] = widget
