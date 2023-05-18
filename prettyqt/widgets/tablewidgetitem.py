@@ -41,7 +41,7 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: constants.StateStr):
+    def set_checkstate(self, state: constants.CheckStateStr):
         """Set checkstate of the checkbox.
 
         Args:
@@ -50,17 +50,17 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in constants.STATE:
-            raise InvalidParamError(state, constants.STATE)
-        self.setCheckState(constants.STATE[state])
+        if state not in constants.CHECK_STATE:
+            raise InvalidParamError(state, constants.CHECK_STATE)
+        self.setCheckState(constants.CHECK_STATE[state])
 
-    def get_checkstate(self) -> constants.StateStr:
+    def get_checkstate(self) -> constants.CheckStateStr:
         """Return checkstate.
 
         Returns:
             checkstate
         """
-        return constants.STATE.inverse[self.checkState()]
+        return constants.CHECK_STATE.inverse[self.checkState()]
 
     def set_text_alignment(
         self,

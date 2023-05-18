@@ -1,13 +1,12 @@
 from __future__ import annotations
 
+import enum
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError
 
 
-BAR_STYLE = ["donut", "pie", "line", "expand"]
 BarStyleStr = Literal["donut", "pie", "line", "expand"]
 
 VALUE_TYPE = ["value", "percent", "max"]
@@ -21,20 +20,36 @@ VALUE_MAP: dict[str, ValueTypeStr] = {
 
 
 class RoundProgressBar(widgets.Widget):
-    # CONSTANTS
+    class Position(float, enum.Enum):
+        """Start position of progress bar in degrees."""
 
-    POSITION_LEFT = 180.0
-    POSITION_TOP = 90.0
-    POSITION_RIGHT = 0.0
-    POSITION_BOTTOM = -90.0
+        Left = 180.0
+        Top = 90.0
+        Right = 0.0
+        Bottom = -90.0
+
+    class BarStyle(enum.IntEnum):
+        """Progress bar style."""
+
+        Donut = 1
+        Pie = 2
+        Line = 3
+        Expand = 4
+
+    class ValueType(enum.IntEnum):
+        """Value type."""
+
+        value = 1
+        percent = 2
+        maximum = 3
 
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent)
         self._min_value = 0.0
         self._max_value = 100.0
         self.current_value = 0.0
-        self.null_pos = self.POSITION_TOP
-        self.bar_style: BarStyleStr = "donut"
+        self.null_pos = self.Position.Top
+        self.bar_style: RoundProgressBar.BarStyle = self.BarStyle.Donut
         self.outline_pen_width = 1.0
         self.data_pen_width = 1.0
         self._rebuild_brush = False
@@ -51,15 +66,24 @@ class RoundProgressBar(widgets.Widget):
 
     # SETTERS -------------------------------------------------------
 
-    def set_null_position(self, position: float):
+    def set_null_position(self, position: RoundProgressBar.Position):
         if position != self.null_pos:
             self.null_pos = position
             self._rebuild_brush = True
             self.update()
 
-    def set_bar_style(self, style: BarStyleStr):
-        if style not in BAR_STYLE:
-            raise InvalidParamError(style, BAR_STYLE)
+    def get_null_position(self):
+        return self.null_pos
+
+    def set_bar_style(self, style: BarStyleStr | RoundProgressBar.BarStyle):
+        if isinstance(style, str):
+            BAR_STYLE = dict(
+                donut=RoundProgressBar.BarStyle.Donut,
+                pie=RoundProgressBar.BarStyle.Pie,
+                line=RoundProgressBar.BarStyle.Line,
+                expand=RoundProgressBar.BarStyle.Expand,
+            )
+            style = BAR_STYLE[style]
         if style != self.bar_style:
             self.bar_style = style
             self._rebuild_brush = True
@@ -127,7 +151,7 @@ class RoundProgressBar(widgets.Widget):
         rect = core.RectF(1, 1, outer_radius - 2, outer_radius - 2)
         with gui.Painter(self) as painter:
             painter.use_antialiasing()
-            if self.bar_style != "line":
+            if self.bar_style != self.BarStyle.Line:
                 self._rebuild_data_brush_if_needed()
             painter.fillRect(0, 0, outer_radius, outer_radius, self.palette().window())
             self._draw_base(painter, rect)
@@ -138,19 +162,19 @@ class RoundProgressBar(widgets.Widget):
 
     def _draw_base(self, painter: gui.Painter, rect: core.RectF):
         match self.bar_style:
-            case "donut":
+            case self.BarStyle.Donut:
                 color = self.palette().shadow().color()
                 painter.set_pen(color=color, width=self.outline_pen_width)
                 painter.setBrush(self.palette().base())
                 painter.drawEllipse(rect)
-            case "line":
+            case self.BarStyle.Line:
                 base_color = self.palette().base().color()
                 painter.set_pen(color=base_color, width=self.outline_pen_width)
                 painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
                 width = self.outline_pen_width / 2
                 adjusted = rect.adjusted(width, width, -width, -width)
                 painter.drawEllipse(adjusted)
-            case "pie" | "expand":
+            case self.BarStyle.Pie | self.BarStyle.Expand:
                 base_color = self.palette().base().color()
                 painter.set_pen(color=base_color, width=self.outline_pen_width)
                 painter.setBrush(self.palette().base())
@@ -163,13 +187,13 @@ class RoundProgressBar(widgets.Widget):
         value_range = self._max_value - self._min_value
         delta = max(value_range / diff, 0)
         match self.bar_style:
-            case "expand":
+            case self.BarStyle.Expand:
                 painter.setBrush(self.palette().highlight())
                 color = self.palette().shadow().color()
                 painter.set_pen(color=color, width=self.data_pen_width)
                 radius = (rect.height() / 2) / delta
                 painter.drawEllipse(rect.center(), radius, radius)
-            case "line":
+            case self.BarStyle.Line:
                 color = self.palette().highlight().color()
                 painter.set_pen(color=color, width=self.data_pen_width)
                 painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
@@ -181,7 +205,7 @@ class RoundProgressBar(widgets.Widget):
                     arc_length = 360 / delta
                     arc_length = int(-arc_length * 16)
                     painter.drawArc(adjusted, int(self.null_pos * 16), arc_length)
-            case "donut" | "pie":
+            case self.BarStyle.Donut | self.BarStyle.Pie:
                 data_path = gui.PainterPath()
                 data_path.set_fill_rule("winding")
                 if value == self._max_value:
@@ -198,7 +222,7 @@ class RoundProgressBar(widgets.Widget):
                 painter.drawPath(data_path)
 
     def _calculate_inner_rect(self, outer_radius: float) -> tuple[core.RectF, float]:
-        if self.bar_style in ("line", "expand"):
+        if self.bar_style in (self.BarStyle.Line, self.BarStyle.Expand):
             inner_radius = outer_radius - self.outline_pen_width
         else:
             inner_radius = outer_radius * 0.75
@@ -207,7 +231,7 @@ class RoundProgressBar(widgets.Widget):
         return inner_rect, inner_radius
 
     def _draw_inner_background(self, painter: gui.Painter, inner_rect: core.RectF):
-        if self.bar_style == "donut":
+        if self.bar_style == self.BarStyle.Donut:
             painter.setBrush(self.palette().base())
             painter.drawEllipse(inner_rect)
 
@@ -271,10 +295,12 @@ class RoundProgressBar(widgets.Widget):
         with self.edit_palette() as palette:
             palette.set_brush("highlight", data_brush)
 
+    nullPosition = core.Property(enum.Enum, get_null_position, set_null_position)
+
 
 if __name__ == "__main__":
     app = widgets.app()
     pb = RoundProgressBar()
-    pb.set_bar_style("donut")
+    pb.set_bar_style("pie")
     pb.show()
     app.main_loop()

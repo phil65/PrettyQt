@@ -93,7 +93,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         val.set_range(lower, upper)
         self.set_validator(val)
 
-    def set_validator(self, validator: gui.Validator):
+    def set_validator(self, validator: QtGui.QValidator):
         self.setValidator(validator)
         self._set_validation_color()
 
@@ -108,7 +108,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         self.setInputMask(mask)
 
     def _set_validation_color(self, state: bool = True):
-        color = None if self.is_valid() else "orange"
+        color = None if self.hasAcceptableInput() else "orange"
         self.set_background_color(color)
 
     def set_echo_mode(self, mode: EchoModeStr):

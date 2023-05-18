@@ -106,14 +106,12 @@ class Notification(widgets.Widget):
         message_area.set_margin(0)
 
         # Create the layout
-        self.message_display = MessageLabel()
-        self.message_display.setObjectName("message")
+        self.message_display = MessageLabel(object_name="message", word_wrap=True)
         self.message_display.set_size_policy("minimum", "minimum")
-        self.message_display.setWordWrap(True)
 
         # Create a button that can close notifications
         if not buttontext:
-            close_button = widgets.PushButton(buttontext or "\u2715")
+            close_button = widgets.PushButton("\u2715")
         else:
             close_button = widgets.PushButton(buttontext)
             close_button.setStyleSheet("text-decoration: underline;")

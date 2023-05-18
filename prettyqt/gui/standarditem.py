@@ -71,7 +71,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: constants.StateStr):
+    def set_checkstate(self, state: constants.CheckStateStr):
         """Set checkstate of the checkbox.
 
         Args:
@@ -80,17 +80,17 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in constants.STATE:
-            raise InvalidParamError(state, constants.STATE)
-        self.setCheckState(constants.STATE[state])
+        if state not in constants.CHECK_STATE:
+            raise InvalidParamError(state, constants.CHECK_STATE)
+        self.setCheckState(constants.CHECK_STATE[state])
 
-    def get_checkstate(self) -> constants.StateStr:
+    def get_checkstate(self) -> constants.CheckStateStr:
         """Return checkstate.
 
         Returns:
             checkstate
         """
-        return constants.STATE.inverse[self.checkState()]
+        return constants.CHECK_STATE.inverse[self.checkState()]
 
     def get_background(self) -> gui.Brush:
         return gui.Brush(self.background())
@@ -150,7 +150,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         tool_tip: str | None = None,
         whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
-        checkstate: constants.StateStr | None = None,
+        checkstate: constants.CheckStateStr | None = None,
         flags: QtCore.Qt.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,

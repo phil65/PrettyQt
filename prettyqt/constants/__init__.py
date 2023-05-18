@@ -231,8 +231,8 @@ CASE_SENSITIVITY: bidict[CaseSensitivityStr, Qt.CaseSensitivity] = bidict(
     case_sensitive=Qt.CaseSensitivity.CaseSensitive,
 )
 
-StateStr = Literal["unchecked", "partial", "checked"]
-STATE: bidict[StateStr, Qt.CheckState] = bidict(
+CheckStateStr = Literal["unchecked", "partial", "checked"]
+CHECK_STATE: bidict[CheckStateStr, Qt.CheckState] = bidict(
     unchecked=Qt.CheckState.Unchecked,
     partial=Qt.CheckState.PartiallyChecked,
     checked=Qt.CheckState.Checked,

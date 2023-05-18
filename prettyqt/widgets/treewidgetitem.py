@@ -139,7 +139,7 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         icon = self.icon(column)
         return None if icon.isNull() else gui.Icon(icon)
 
-    def set_checkstate(self, state: constants.StateStr, column: int = 0):
+    def set_checkstate(self, state: constants.CheckStateStr, column: int = 0):
         """Set checkstate of the checkbox.
 
         Args:
@@ -149,11 +149,11 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         Raises:
             InvalidParamError: invalid checkstate
         """
-        if state not in constants.STATE:
-            raise InvalidParamError(state, constants.STATE)
-        self.setCheckState(column, constants.STATE[state])
+        if state not in constants.CHECK_STATE:
+            raise InvalidParamError(state, constants.CHECK_STATE)
+        self.setCheckState(column, constants.CHECK_STATE[state])
 
-    def get_checkstate(self, column: int = 0) -> constants.StateStr:
+    def get_checkstate(self, column: int = 0) -> constants.CheckStateStr:
         """Return checkstate.
 
         Args:
@@ -162,7 +162,7 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         Returns:
             checkstate
         """
-        return constants.STATE.inverse[self.checkState(column)]
+        return constants.CHECK_STATE.inverse[self.checkState(column)]
 
     def set_child_indicator_policy(self, policy: ChildIndicatorPolicyStr):
         """Set the child indicator policy.

@@ -24,7 +24,7 @@ class ColumnItem:
     name: str
     label: Callable[[treeitem.TreeItem], str] | None = None
     checkstate: Callable[
-        [treeitem.TreeItem], constants.StateStr | QtCore.Qt.CheckState | bool
+        [treeitem.TreeItem], constants.CheckStateStr | QtCore.Qt.CheckState | bool
     ] | None = None
     sort_value: Callable[[treeitem.TreeItem], str | float] | None = None
     tooltip: Callable[[treeitem.TreeItem], str] | None = None
@@ -101,17 +101,19 @@ class ColumnItem:
         elif callable(self.checkstate):
             result = self.checkstate(tree_item)
             if isinstance(result, str):
-                result = constants.STATE[result]
+                result = constants.CHECK_STATE[result]
             return result
         return self.checkstate
 
     def set_checkstate_value(
-        self, tree_item, value: bool | QtCore.Qt.CheckState | constants.StateStr | None
+        self,
+        tree_item,
+        value: bool | QtCore.Qt.CheckState | constants.CheckStateStr | None,
     ):
         if self.set_checkstate is None:
             return None
         if isinstance(value, str):
-            value = constants.STATE[value]
+            value = constants.CHECK_STATE[value]
         if callable(self.set_checkstate):
             self.set_checkstate(tree_item, value)
         else:
