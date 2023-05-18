@@ -67,30 +67,63 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     def __repr__(self):
         return get_repr(self, self.text())
 
+    # # adapted from https://forum.qt.io/topic/24530/solved-shortening-a-label/3
+    # def minimumSizeHint(self):
+    #     if self._elide_mode != QtCore.Qt.ElideNone:
+    #         # TODO: tweak sizeHint
+    #         # -> text should expand if user increases window size,
+    #         #    but don't automatically adapt window size to label width on UI update!
+    #         #    (somehow calculate minimumSizeHint + sizeHint with font metrics???)
+    #         fm = self.fontMetrics()
+    #         size = QtCore.QSize(fm.width("..."), fm.height())
+    #         return size
+    #     else:
+    #         size = self.minimumSizeHint()
+    #         return QtCore.QSize(size.width() + 13, size.height())
+
+    # # adapted from https://www.mimec.org/blog/status-bar-and-elided-label
+    # def paintEvent(self, event):
+    #     with gui.Painter(self) as painter:
+    #         self.drawFrame(painter)
+
+    #         rect = self.contentsRect()
+    #         rect.adjust(self.margin(), self.margin(), -self.margin(), -self.margin())
+
+    #         elided_text = painter.fontMetrics().elidedText(
+    #             self.text(), self._elide_mode, rect.width()
+    #         )
+
+    #         style_option = QtWidgets.QStyleOption()
+    #         style_option.initFrom(self)
+
+    #         self.style().drawItemText(
+    #             painter,
+    #             rect,
+    #             self.alignment(),
+    #             style_option.palette,
+    #             self.isEnabled(),
+    #             elided_text,
+    #             self.foregroundRole(),
+    #         )
+
     def paintEvent(self, event):
-        if self._elide_mode == QtCore.Qt.TextElideMode.ElideNone or "\n" in self.text():
+        if self._elide_mode == QtCore.Qt.TextElideMode.ElideNone:
             super().paintEvent(event)
             return
         did_elide = False
 
         with gui.Painter(self) as painter:
             font_metrics = painter.fontMetrics()
+            text_lines = self.text().split("\n")
             text_width = font_metrics.horizontalAdvance(self.text())
-            # line_spacing = font_metrics.lineSpacing()
+            line_spacing = font_metrics.lineSpacing()
 
             # layout phase
             text_layout = gui.TextLayout(self.text(), painter.font())
-            # y = 0
+            current_y = 0
             with text_layout.process_layout():
-                while True:
-                    line = text_layout.createLine()
-
-                    if not line.isValid():
-                        break
-
-                    # next_line_y = y + line_spacing
-                    line.setLineWidth(self.width())
-
+                for line in text_lines:
+                    text_width = font_metrics.horizontalAdvance(line)
                     # if self.height() >= next_line_y + line_spacing:
                     #     line.draw(painter, core.PointF(0, y))
                     #     y = next_line_y
@@ -103,24 +136,23 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
                     #     line = layout.createLine()
                     #     did_elide = line.isValid()
                     #     break
-
                     if text_width >= self.width():
-                        self._elided_line = font_metrics.elidedText(
-                            self.text(), self._elide_mode, self.width()
+                        elided_line = font_metrics.elidedText(
+                            line, self._elide_mode, self.width()
                         )
                         painter.drawText(
-                            QtCore.QRect(0, 0, self.width(), self.height()),
+                            QtCore.QRect(0, current_y, self.width(), self.height()),
                             int(self.alignment()),
-                            self._elided_line,
+                            elided_line,
                         )
-                        did_elide = line.isValid()
-                        break
+                        did_elide = True
                     else:
                         painter.drawText(
-                            QtCore.QRect(0, 0, self.width(), self.height()),
+                            QtCore.QRect(0, current_y, self.width(), self.height()),
                             int(self.alignment()),
-                            self.text(),
+                            line,
                         )
+                    current_y += line_spacing
 
             if did_elide != self._is_elided:
                 self._is_elided = did_elide
@@ -297,8 +329,6 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = Label(
-        "http://www.test.de" * 5, alignment="center_right", elide_mode="middle"
-    )
+    widget = Label("http://www.test.fsdfsdfsfdsfsfdsfde\n" * 20, elide_mode="right")
     widget.show()
     app.main_loop()
