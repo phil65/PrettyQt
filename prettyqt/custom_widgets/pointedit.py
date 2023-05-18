@@ -9,12 +9,13 @@ class PointEdit(widgets.Widget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.set_margin(0)
         self.spinbox_x = widgets.SpinBox()
         self.spinbox_y = widgets.SpinBox()
-        with widgets.HBoxLayout.create(self) as layout:
-            layout.add(widgets.Label("x"))
+        with widgets.HBoxLayout.create(self, margin=0) as layout:
+            layout.add(widgets.Label("x", alignment="center_right"))
             layout.add(self.spinbox_x)
-            layout.add(widgets.Label("y"))
+            layout.add(widgets.Label("y", alignment="center_right"))
             layout.add(self.spinbox_y)
         self.spinbox_x.value_changed.connect(self._on_value_change)
         self.spinbox_y.value_changed.connect(self._on_value_change)

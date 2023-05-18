@@ -87,7 +87,7 @@ class ErrorMessageBox(widgets.MessageBox):
 
         traceback_button = self.button(MBox.StandardButton.Help)
         traceback_button.setText("Show trackback")
-        close_button = self.button(MBox.StandardButton.Cancel)
+        close_button = self.button(MBox.StandardButton.Close)
         close_button.setText("Quit application")
 
     def exec(self):
@@ -97,7 +97,7 @@ class ErrorMessageBox(widgets.MessageBox):
                 dlg = TracebackDialog(self)
                 dlg.setText(tb)
                 dlg.exec()
-            case widgets.MessageBox.StandardButton.Cancel:
+            case widgets.MessageBox.StandardButton.Close:
                 sys.exit(1)
             case widgets.MessageBox.StandardButton.Ok:
                 return True

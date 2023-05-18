@@ -120,7 +120,6 @@ class WidgetEditor(widgets.ScrollArea):
 
 if __name__ == "__main__":
     app = widgets.app()
-    app.enable_debug_mode()
     import sys
 
     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)

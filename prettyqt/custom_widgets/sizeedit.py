@@ -9,12 +9,13 @@ class SizeEdit(widgets.Widget):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        self.set_margin(0)
         self.spinbox_width = widgets.SpinBox(maximum=999999)
         self.spinbox_height = widgets.SpinBox(maximum=999999)
-        with widgets.HBoxLayout.create(self) as layout:
-            layout.add(widgets.Label("width"))
+        with widgets.HBoxLayout.create(self, margin=0) as layout:
+            layout.add(widgets.Label("width", alignment="center_right"))
             layout.add(self.spinbox_width)
-            layout.add(widgets.Label("height"))
+            layout.add(widgets.Label("height", alignment="center_right"))
             layout.add(self.spinbox_height)
         self.spinbox_width.value_changed.connect(self._on_value_change)
         self.spinbox_height.value_changed.connect(self._on_value_change)

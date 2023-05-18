@@ -6,7 +6,7 @@ import pathlib
 
 import regex as re
 
-from prettyqt import constants, custom_widgets, widgets
+from prettyqt import constants, custom_delegates, custom_widgets, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -24,6 +24,10 @@ class VariantDelegate(widgets.StyledItemDelegate):
         if not self.is_supported_type(value):
             option = widgets.StyleOptionViewItem(option)
             option.state &= ~QtWidgets.QStyle.StateFlag.State_Enabled
+        if isinstance(value, QtGui.QIcon):
+            icon_delegate = custom_delegates.IconDelegate()
+            icon_delegate.paint(painter, option, index)
+            return
         super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
@@ -33,47 +37,50 @@ class VariantDelegate(widgets.StyledItemDelegate):
 
         match original_value:
             case bool():
-                return widgets.CheckBox(parent=parent)
+                widget = widgets.CheckBox(parent=parent)
             case enum.Enum():
-                return custom_widgets.EnumComboBox(
+                widget = custom_widgets.EnumComboBox(
                     parent=parent, enum_class=original_value.__class__
                 )
             case int():
-                return widgets.SpinBox(parent=parent)
+                widget = widgets.SpinBox(parent=parent)
             case float():
-                return widgets.DoubleSpinBox(parent=parent)
+                widget = widgets.DoubleSpinBox(parent=parent)
             case QtCore.QRegularExpression() | re.Pattern():
-                return custom_widgets.RegexInput(show_error=False, parent=parent)
+                widget = custom_widgets.RegexInput(show_error=False, parent=parent)
             case QtGui.QColor():
-                return custom_widgets.ColorComboBox(parent=parent)
+                widget = custom_widgets.ColorComboBox(parent=parent)
             case QtCore.QTime():
-                return widgets.TimeEdit(parent=parent)
+                widget = widgets.TimeEdit(parent=parent)
             case QtGui.QFont():
-                return widgets.FontComboBox(parent=parent)
+                widget = widgets.FontComboBox(parent=parent)
             case QtCore.QDate():
-                return widgets.DateEdit(parent=parent)
+                widget = widgets.DateEdit(parent=parent)
             case QtCore.QDateTime():
-                return widgets.DateTimeEdit(parent=parent)
+                widget = widgets.DateTimeEdit(parent=parent)
             case QtGui.QKeySequence():
-                return widgets.KeySequenceEdit(parent=parent)
+                widget = widgets.KeySequenceEdit(parent=parent)
             case QtGui.QRegion():
-                return custom_widgets.RegionEdit(parent=parent)
+                widget = custom_widgets.RegionEdit(parent=parent)
             case QtWidgets.QSizePolicy():
-                return custom_widgets.SizePolicyEdit(parent=parent)
+                widget = custom_widgets.SizePolicyEdit(parent=parent)
             case QtCore.QPoint():
-                return custom_widgets.PointEdit(parent=parent)
+                widget = custom_widgets.PointEdit(parent=parent)
             case QtCore.QSize():
-                return custom_widgets.SizeEdit(parent=parent)
+                widget = custom_widgets.SizeEdit(parent=parent)
             case QtCore.QRect():
-                return custom_widgets.RectEdit(parent=parent)
+                widget = custom_widgets.RectEdit(parent=parent)
+            # case QtCore.QRectF():  # todo
+            #     widget = custom_widgets.RectEdit(parent=parent)
             case pathlib.Path():
-                return custom_widgets.FileChooserButton(parent=parent)
+                widget = custom_widgets.FileChooserButton(parent=parent)
             case str():
-                editor = widgets.LineEdit(parent=parent)
-                editor.setFrame(False)
-                return editor
+                widget = widgets.LineEdit(parent=parent)
+                widget.setFrame(False)
             case _:
                 return None
+        widget.setAutoFillBackground(True)
+        return widget
 
     def setEditorData(self, editor, index):
         if not editor:
@@ -99,6 +106,12 @@ class VariantDelegate(widgets.StyledItemDelegate):
             | QtGui.QKeySequence
             | QtCore.QDate
             | QtCore.QDateTime
+            | QtCore.QTime
+            | QtCore.QRect
+            | QtCore.QPoint
+            | QtCore.QSize
+            | QtGui.QPalette
+            | QtGui.QIcon
             | QtCore.QTime
             | re.Pattern
             | QtCore.QRegularExpression
