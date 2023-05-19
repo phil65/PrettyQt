@@ -66,6 +66,8 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             case constants.USER_ROLE, _:
                 prop.write(self._widget, value)
                 self.update_row(index.row())
+                return True
+        return False
 
     def rowCount(self, parent=None):
         """Override for AbstractitemModel base method."""

@@ -74,6 +74,8 @@ class WidgetsDetailsModel(core.AbstractTableModel):
             case constants.USER_ROLE:
                 prop.write(widget, value)
                 self.update_row(index.row())
+                return True
+        return False
 
     def rowCount(self, parent=None):
         """Override for AbstractitemModel base method."""
@@ -105,7 +107,7 @@ if __name__ == "__main__":
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     items = [widgets.RadioButton(), widgets.RadioButton()]
-    model = WidgetsDetailsModel(items).transpose()
+    model = WidgetsDetailsModel(items)
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.set_selection_behavior("rows")
@@ -113,7 +115,7 @@ if __name__ == "__main__":
         view.EditTrigger.DoubleClicked | view.EditTrigger.SelectedClicked
     )
     view.set_delegate(delegate)
-    view.show()
     view.resize(500, 300)
     with app.debug_mode():
+        view.show()
         app.main_loop()

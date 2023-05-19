@@ -116,7 +116,7 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         factory.register_editor(custom_widgets.PointEdit, QtCore.QPoint, "value")
         factory.register_editor(custom_widgets.SizeEdit, QtCore.QSize, "value")
         factory.register_editor(custom_widgets.RectEdit, QtCore.QRect, "value")
-        factory.register_editor(custom_widgets.RegionEdit, QtCore.QRegion, "value")
+        factory.register_editor(custom_widgets.RegionEdit, QtGui.QRegion, "value")
         factory.register_editor(
             custom_widgets.SizePolicyEdit, QtWidgets.QSizePolicy, "value"
         )
