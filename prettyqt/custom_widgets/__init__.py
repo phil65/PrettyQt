@@ -1,6 +1,6 @@
 """Module containing custom widget classes."""
 
-from .image import Image
+from .imageviewer import ImageViewer
 from .clocklabel import ClockLabel
 from .elidedlabel import ElidedLabel
 from .listinput import ListInput
@@ -57,7 +57,7 @@ from .standardiconswidget import StandardIconsWidget
 
 
 __all__ = [
-    "Image",
+    "ImageViewer",
     "ClockLabel",
     "ElidedLabel",
     "ListInput",
