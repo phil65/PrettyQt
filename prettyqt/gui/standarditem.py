@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+import html
 import os
 from typing import Any
 
@@ -119,6 +120,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         self,
         tooltip: str | datatypes.PathType,
         size: datatypes.SizeType | None = None,
+        rich_text: bool = False,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -128,7 +130,9 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
                 if isinstance(size, QtCore.QSize):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
-        self.setToolTip(tooltip)
+        if rich_text:
+            tooltip = f"<html>{html.escape(tooltip)}</html>"
+        super().setToolTip(tooltip)
 
     def set_size_hint(self, hint: datatypes.SizeType):
         if isinstance(hint, tuple):

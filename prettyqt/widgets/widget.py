@@ -3,6 +3,7 @@ from __future__ import annotations
 import contextlib
 import functools
 import os
+import html
 import pathlib
 import sys
 from typing import TYPE_CHECKING, Any, Literal
@@ -331,6 +332,7 @@ class WidgetMixin(core.ObjectMixin):
         self,
         tooltip: str | datatypes.PathType,
         size: datatypes.SizeType | None = None,
+        rich_text: bool = False,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -341,7 +343,9 @@ class WidgetMixin(core.ObjectMixin):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         tooltip = tooltip.replace("\n", "<br/>")
-        self.setToolTip(tooltip)
+        if rich_text:
+            tooltip = f"<html>{html.escape(tooltip)}</html>"
+        super().setToolTip(tooltip)
 
     def set_font(
         self,
@@ -357,7 +361,7 @@ class WidgetMixin(core.ObjectMixin):
         if font_name is None:
             font_name = self.font().family()
         font = gui.Font(font_name, font_size, weight, italic)
-        self.setFont(font)
+        super().setFont(font)
         return font
 
     def get_font(self) -> gui.Font:

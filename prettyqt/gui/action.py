@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Callable
+import html
 import os
 from typing import Literal
 
@@ -104,6 +105,7 @@ class ActionMixin(core.ObjectMixin):
         self,
         tooltip: str | datatypes.PathType,
         size: datatypes.SizeType | None = None,
+        rich_text: bool = False,
     ):
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
@@ -114,6 +116,8 @@ class ActionMixin(core.ObjectMixin):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         tooltip = tooltip.replace("\n", "<br/>")
+        if rich_text:
+            tooltip = f"<html>{html.escape(tooltip)}</html>"
         super().setToolTip(tooltip)
 
     setToolTip = set_tooltip
