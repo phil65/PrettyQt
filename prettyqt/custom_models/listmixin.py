@@ -20,11 +20,20 @@ class ListMixin:
         return super().setData(index, value, role)  # type: ignore
 
     def removeRows(self, row: int, count: int, parent):
+        # called by default implementation of QAbstractItemModel::startDrag
         end_row = row + count - 1
         with self.remove_rows(row, end_row, parent):
             for i in range(end_row, row - 1, -1):
                 self.items.pop(i)
         return True
+
+    # def insertRows(self, row: int, count: int, parent):
+    #     # called by default implementation of QAbstractItemModel::dropMimeData
+    #     end_row = row + count - 1
+    #     with self.insert_rows(row, end_row, parent):
+    #         for i in range(end_row, row - 1, -1):
+    #             self.items.insert(i,)
+    #     return True
 
     def rowCount(self, parent=None):
         """Required override for AbstractitemModels."""
@@ -94,3 +103,75 @@ class ListMixin:
         data = [i.row() for i in indexes if i.column() == 0]
         mime_data.set_json_data(self.MIME_TYPE, data)
         return mime_data
+
+    # list interface
+
+    def pop(self, row=None):
+        if row is None:
+            row = len(self.items) - 1
+        result = self.items[row]
+        self.removeRow(row)
+        return result
+
+    def __getitem__(self, row):
+        return self.items[row]
+
+    def __setitem__(self, row, value):
+        index = self.index(row)
+        self.setData(index, value, role=constants.USER_ROLE)
+
+    def __len__(self):
+        return len(self.items)
+
+    def insert(self, row: int, value):
+        with self.insert_row(row):
+            self.items.insert(row, value)
+
+    def append(self, value):
+        row = len(self.items)
+        self.insert(row, value)
+
+    def extend(self, values):
+        pos = len(self.items)
+        with self.insert_rows(pos, pos + len(values)):
+            self.items.extend(values)
+
+    def set_list(self, values):
+        """Set the model to a new list."""
+        with self.reset_model():
+            self.items = values
+
+    def remove(self, item):
+        if item in self.items:
+            pos = self.items.index(item)
+            with self.remove_row(pos):
+                self.items.remove(item)
+
+
+if __name__ == "__main__":
+    import logging
+    import sys
+
+    from prettyqt import widgets
+    from prettyqt.utils import debugging
+
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
+    class Test(ListMixin, core.AbstractTableModel):
+        def data(self, index, role):
+            if role == constants.DISPLAY_ROLE:
+                return self.items[index.row()]
+
+        def columnCount(self, index=None):
+            return 1
+
+    model = Test()
+    model.set_list(["a", "b"])
+    app = widgets.app()
+    view = widgets.TableView()
+    debugging.stalk(model)
+    view.set_model(model)
+    view.show()
+    app.sleep(2)
+    model.pop(0)
+    app.main_loop()
