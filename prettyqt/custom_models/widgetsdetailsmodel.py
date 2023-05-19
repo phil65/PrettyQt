@@ -97,12 +97,9 @@ class WidgetsDetailsModel(core.AbstractTableModel):
 
 
 if __name__ == "__main__":
-    import sys
-
     from prettyqt import widgets
     from prettyqt.custom_delegates import variantdelegate
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = widgets.app()
     view = widgets.TableView()
     view.set_icon("mdi.folder")

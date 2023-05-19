@@ -49,12 +49,8 @@ COLUMNS = [
 
 
 if __name__ == "__main__":
-    import logging
-    import sys
-
     from prettyqt import widgets
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = widgets.app()
     view = widgets.TreeView()
     shortcuts = [

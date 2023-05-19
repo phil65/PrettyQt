@@ -304,9 +304,9 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
 
 
 if __name__ == "__main__":
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = widgets.app()
     widget = widgets.Widget()
     stalk(widget)
     widget.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

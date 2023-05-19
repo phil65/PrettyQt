@@ -100,12 +100,8 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
 
 
 if __name__ == "__main__":
-    import sys
-
     from prettyqt import custom_delegates, widgets
     from prettyqt.custom_models import JsonModel
-
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
     app = widgets.app()
     dist = [
@@ -142,4 +138,5 @@ if __name__ == "__main__":
     widget.box.add(lineedit)
     widget.box.add(table)
     widget.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

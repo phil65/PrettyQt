@@ -149,13 +149,8 @@ class ListMixin:
 
 
 if __name__ == "__main__":
-    import logging
-    import sys
-
     from prettyqt import widgets
     from prettyqt.utils import debugging
-
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
     class Test(ListMixin, core.AbstractTableModel):
         def data(self, index, role):
@@ -174,4 +169,5 @@ if __name__ == "__main__":
     view.show()
     app.sleep(2)
     model.pop(0)
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

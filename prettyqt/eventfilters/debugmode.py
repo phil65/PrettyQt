@@ -107,9 +107,6 @@ class DebugMode(core.Object):
 
 if __name__ == "__main__":
     app = widgets.app()
-    import sys
-
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     container = widgets.Widget()
     container.set_layout("horizontal")
     w = widgets.PlainTextEdit(parent=container)

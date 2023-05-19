@@ -96,15 +96,14 @@ class BluetoothDeviceDiscoveryAgent(
 
 if __name__ == "__main__":
     import logging
-    import sys
 
     from prettyqt import core
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = core.app()
     agent = BluetoothDeviceDiscoveryAgent(app)
     agent.setLowEnergyDiscoveryTimeout(500)
     agent.device_discovered.connect(lambda x: logging.info(x))
     agent.finished.connect(app.quit)
     agent.start_discovery()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

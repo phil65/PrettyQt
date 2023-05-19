@@ -539,11 +539,6 @@ class FSSpecTreeModel(
 
 
 if __name__ == "__main__":
-    import logging
-    import sys
-
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-
     from prettyqt import widgets
 
     app = widgets.app()
@@ -559,4 +554,5 @@ if __name__ == "__main__":
     tree.setUniformRowHeights(True)
     tree.setAnimated(True)
     tree.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

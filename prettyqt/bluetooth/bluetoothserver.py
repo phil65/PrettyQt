@@ -52,13 +52,9 @@ class BluetoothServer(core.ObjectMixin, QtBluetooth.QBluetoothServer):
 
 
 if __name__ == "__main__":
-    import logging
-    import sys
-
     from prettyqt import core
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = core.app()
     server = BluetoothServer("l2_cap")
-
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

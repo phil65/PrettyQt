@@ -85,13 +85,9 @@ class BluetoothSocket(core.IODeviceMixin, QtBluetooth.QBluetoothSocket):
 
 
 if __name__ == "__main__":
-    import logging
-    import sys
-
     from prettyqt import core
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = core.app()
     socket = BluetoothSocket("l2_cap")
-
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

@@ -37,11 +37,8 @@ class EventCatcher(core.Object):
 
 
 if __name__ == "__main__":
-    import sys
-
     from prettyqt import widgets
 
     app = widgets.app()
     window = widgets.MainWindow()
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     eventcatcher = EventCatcher()

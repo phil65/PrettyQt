@@ -5,7 +5,6 @@ from __future__ import annotations
 
 import hashlib
 import logging
-import sys
 import traceback
 
 from prettyqt import constants, core, gui, widgets
@@ -358,7 +357,7 @@ class ObjectBrowser(widgets.MainWindow):
 
 
 if __name__ == "__main__":
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     struct = dict(a={1, 2, frozenset([1, 2])})
     app = widgets.app()  # keeping reference to prevent garbage collection.
-    object_browser = ObjectBrowser.browse(struct)
+    with app.debug_mode():
+        object_browser = ObjectBrowser.browse(struct)

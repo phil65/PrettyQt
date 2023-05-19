@@ -134,7 +134,6 @@ if __name__ == "__main__":
 
 
 # if __name__ == "__main__":
-#     logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 #     App = type("SingleApp", (SingleApplicationMixin, core.CoreApplication), {})
 #     app1 = App(sys.argv)
 #     print(app1.is_running)

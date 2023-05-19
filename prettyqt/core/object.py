@@ -247,19 +247,11 @@ class Object(ObjectMixin, QtCore.QObject):
 
 
 if __name__ == "__main__":
-    import logging
-    import pickle
-    import sys
-
     from prettyqt import widgets
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = widgets.app()
     obj = core.Object(object_name="jkjk")
     meta = obj.get_metaobject()
     prop = meta.get_property(0)
-    print(obj.get_properties())
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(obj, jar)
-    with open("data.pkl", "rb") as jar:
-        obj = pickle.load(jar)
+    with app.debug_mode():
+        app.sleep(1)

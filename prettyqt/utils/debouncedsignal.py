@@ -97,12 +97,7 @@ def get_debounced_signal(
 
 
 if __name__ == "__main__":
-    import logging
-    import sys
-
     from prettyqt import widgets
-
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
 
     app = widgets.app()
 
@@ -132,4 +127,5 @@ if __name__ == "__main__":
     btn2.btn_clicked_delayed.connect(textedit.appendPlainText)
     widget.show()
     # a.number.signal.emit("test")
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()
