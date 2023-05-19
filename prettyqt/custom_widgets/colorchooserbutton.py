@@ -61,7 +61,7 @@ class ColorChooserButton(widgets.Widget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    btn = ColorChooserButton(gui.Color("green"))
+    btn = ColorChooserButton(color=gui.Color("green"))
     btn.show()
     btn.value_changed.connect(print)
     app.main_loop()
