@@ -22,6 +22,25 @@ LOG_MAP = {
     QtCore.QtMsgType.QtFatalMsg: 50,
 }
 
+# qFormatLogMessage(QtMsgType type, const QMessageLogContext context, const QString str)
+# qInstallMessageHandler(QtMessageHandler handler)
+# qSetMessagePattern(const QString &pattern)
+
+
+class QtLogger(logging.Handler):
+    def emit(self, record: logging.LogRecord):
+        match record.level:
+            case 10:
+                QtCore.qDebug(self.format(record))
+            case 20:
+                QtCore.qInfo(self.format(record))
+            case 30:
+                QtCore.qWarning(self.format(record))
+            case 40:
+                QtCore.qCritical(self.format(record))
+            case 50:
+                QtCore.qFatal(self.format(record))
+
 
 def qt_message_handler(mode: QtCore.QtMsgType, context, message: str):
     level = LOG_MAP.get(mode, 20)
