@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class WidgetPropertiesModel(core.AbstractTableModel):
@@ -43,10 +43,18 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
                 return prop.name()
+            case constants.FONT_ROLE, 0:
+                font = QtGui.QFont()
+                font.setBold(True)
+                return font
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 1:
                 return prop.read(self._widget)
             case constants.DISPLAY_ROLE, 2:
                 return prop.get_meta_type().name()
+            case constants.FONT_ROLE, 2:
+                font = QtGui.QFont()
+                font.setItalic(True)
+                return font
             case constants.CHECKSTATE_ROLE, 3:
                 return prop.isUser()
             case constants.CHECKSTATE_ROLE, 4:
