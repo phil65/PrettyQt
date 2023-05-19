@@ -46,6 +46,7 @@ def parse_time(time_str: str) -> int:
 
 
 def to_lower_camel(snake_str: str) -> str:
+    # do nothing if nothing to camel
     if "_" not in snake_str:
         return snake_str
     first, *others = snake_str.split("_")
@@ -53,6 +54,9 @@ def to_lower_camel(snake_str: str) -> str:
 
 
 def to_snake(camel_string):
+    #  don´t snake-case snakes.
+    if "_" in camel_string:
+        return camel_string
     return CASE_PATTERN.sub("_", camel_string).lower()
 
 
