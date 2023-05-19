@@ -12,8 +12,8 @@ CE = QtWidgets.QStyle.ControlElement
 SelectedPosition = QtWidgets.QStyleOptionHeader.SelectedPosition
 SectionPosition = QtWidgets.QStyleOptionHeader.SectionPosition
 
-HORIZONTAL_HEADER_DATA_ROLE = QtCore.Qt.UserRole + 150
-VERTICAL_HEADER_DATA_ROLE = QtCore.Qt.UserRole + 151
+HORIZONTAL_HEADER_DATA_ROLE = QtCore.Qt.ItemDataRole.UserRole + 150
+VERTICAL_HEADER_DATA_ROLE = QtCore.Qt.ItemDataRole.UserRole + 151
 
 
 class HierarchicalHeaderView(widgets.HeaderView):

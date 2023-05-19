@@ -797,10 +797,12 @@ class WidgetMixin(core.ObjectMixin):
         return pathlib.Path(path) if path else None
 
     def get_image(self) -> QtGui.QPixmap:
+        from prettyqt.qt import QtOpenGLWidgets
+
         image = self.grab()
         with gui.Painter(image) as painter:
             painter.set_composition_mode("source_atop")
-            for gl_widget in self.find_children(QtWidgets.QOpenGLWidget):
+            for gl_widget in self.find_children(QtOpenGLWidgets.QOpenGLWidget):
                 d = gl_widget.mapToGlobal(core.Point()) - self.mapToGlobal(core.Point())
                 painter.drawImage(d, gl_widget.grabFramebuffer())
         return image

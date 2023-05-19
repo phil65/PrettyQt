@@ -70,14 +70,6 @@ if PYQT6:
         pyqtEnum,
         pyqtClassInfo,
     )
-    for cls in (QEvent, Qt):
-        for attr in dir(cls):
-            if not attr[0].isupper():
-                continue
-            ns = getattr(cls, attr)
-            for name, val in vars(ns).items():
-                if not name.startswith("_"):
-                    setattr(cls, name, val)
 elif PYSIDE6:
     from PySide6.QtCore import *  # type: ignore
     from PySide6.QtCore import __version__  # type: ignore
