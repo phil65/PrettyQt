@@ -3,9 +3,9 @@ from __future__ import annotations
 import enum
 import logging
 
-from prettyqt import constants, core
+from prettyqt import constants, core, widgets
 from prettyqt.utils import fuzzy
-
+from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -99,6 +99,57 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
                 return super().data(index, role)
 
 
+class FuzzyCompleter(widgets.Completer):
+    def __init__(self, parent):
+        super().__init__(parent)
+        parent.setEditable(True)
+        parent.set_insert_policy("no_insert")
+        parent.installEventFilter(self)
+        self.set_completion_mode("popup")
+        self._local_completion_prefix = ""
+        self._source_model = None
+        self._filter_proxy = FuzzyFilterProxyModel(self)
+        self._filter_proxy.set_match_color(None)
+        self._using_original_model = False
+
+    def setModel(self, model):
+        self._source_model = model
+        self._filter_proxy = FuzzyFilterProxyModel(self)
+        self._filter_proxy.set_match_color(None)
+        self._filter_proxy.setSourceModel(self._source_model)
+        super().setModel(self._filter_proxy)
+        self._using_original_model = True
+
+    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
+        match event.type():
+            case QtCore.QEvent.Type.FocusIn:
+                source.clearEditText()
+            case QtCore.QEvent.Type.KeyPress:
+                key = event.key()
+                if key == QtCore.Qt.Key.Key_Enter:
+                    text = source.currentText()
+                    source.setCompleter(None)
+                    source.setEditText(text)
+                    source.setCompleter(source.comp)
+        return super().eventFilter(source, event)
+
+    def updateModel(self):
+        if not self._using_original_model:
+            self._filter_proxy.setSourceModel(self._source_model)
+
+        self._filter_proxy.set_search_term(self._local_completion_prefix)
+
+    def splitPath(self, path):
+        self._local_completion_prefix = path
+        self.updateModel()
+        if self._filter_proxy.rowCount() == 0:
+            self._using_original_model = False
+            self._filter_proxy.setSourceModel(core.StringListModel([path]))
+            return [path]
+
+        return []
+
+
 if __name__ == "__main__":
     from prettyqt import custom_delegates, widgets
     from prettyqt.custom_models import JsonModel
@@ -106,8 +157,8 @@ if __name__ == "__main__":
     app = widgets.app()
     dist = [
         dict(
-            a=2,
-            b={
+            assss=2,
+            bffff={
                 "a": 4,
                 "b": [1, 2, 3],
                 "jkjkjk": "tekjk",
@@ -120,11 +171,17 @@ if __name__ == "__main__":
         "jkjk",
     ]
 
-    source_model = JsonModel(dist)
+    _source_model = JsonModel(dist)
     model = FuzzyFilterProxyModel()
     model.setFilterKeyColumn(1)
+    cb = widgets.ComboBox()
+    completer = FuzzyCompleter(cb)
+    cb.setCompleter(completer)  #
+    completer.set_strings(["Lola", "Lila", "Cola", "Lothian"])
+    # cb.setModel(model)
+    # cb.comp.setModel(model)
     # model.set_search_term("tj")
-    model.setSourceModel(source_model)
+    model.setSourceModel(_source_model)
     widget = widgets.Widget()
     widget.set_layout("vertical")
     lineedit = widgets.LineEdit()
@@ -135,6 +192,7 @@ if __name__ == "__main__":
     table.setRootIsDecorated(True)
     # table.setSortingEnabled(True)
     table.set_model(model)
+    widget.box.add(cb)
     widget.box.add(lineedit)
     widget.box.add(table)
     widget.show()
