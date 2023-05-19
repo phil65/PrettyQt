@@ -55,6 +55,9 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         dt = self.get_datetime()
         self.value_changed.emit(dt)
 
+    def set_to_today(self):
+        self.setDateTime(core.DateTime.currentDateTime())
+
     def get_section_text(self, section: SectionsStr) -> str:
         if section not in SECTIONS:
             raise InvalidParamError(section, SECTIONS)
