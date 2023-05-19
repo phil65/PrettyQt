@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Mapping, MutableMapping
+from collections.abc import Callable, Iterable, Iterator, Mapping, MutableMapping
 import contextlib
 import logging
 import os
@@ -26,10 +26,29 @@ SAVE_STATES = dict(
 )
 
 
+def setup_runner():
+    import inspect
+    from prettyqt.qt.QtCore import SignalInstance
+    from prettyqt.utils import asyncrunner
+
+    old_connect = SignalInstance.connect
+    runner = asyncrunner.AsyncRunner()
+
+    def connect(self, slot):
+        if inspect.iscoroutinefunction(slot):
+            return old_connect(self, runner.to_sync(slot))
+        else:
+            return old_connect(self, slot)
+
+    SignalInstance.connect = connect
+    return runner
+
+
 class ApplicationMixin(gui.GuiApplicationMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._debug = False
+        self.runner = setup_runner()
 
     def __class_getitem__(cls, name: str) -> QtWidgets.QWidget:
         widget = cls.get_widget(name)
@@ -39,6 +58,9 @@ class ApplicationMixin(gui.GuiApplicationMixin):
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.topLevelWidgets())
+
+    def run_parallel(self, fns: Iterable[Callable]):
+        self.runner.run_parallel(fns)
 
     def is_debug(self) -> bool:
         return self._debug
