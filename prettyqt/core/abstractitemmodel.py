@@ -118,6 +118,13 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.dataChanged.emit(top_left, bottom_right)
 
     @contextlib.contextmanager
+    def remove_row(self, row: int, parent: QtCore.QModelIndex | None = None):
+        parent = QtCore.QModelIndex() if parent is None else parent
+        self.beginRemoveRows(parent, row, row)
+        yield None
+        self.endRemoveRows()
+
+    @contextlib.contextmanager
     def remove_rows(
         self,
         first: int | None = None,
@@ -144,6 +151,13 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.beginRemoveColumns(parent, first, last)
         yield None
         self.endRemoveColumns()
+
+    @contextlib.contextmanager
+    def insert_row(self, row: int, parent: QtCore.QModelIndex | None = None):
+        parent = QtCore.QModelIndex() if parent is None else parent
+        self.beginInsertRows(parent, row, row)
+        yield None
+        self.endInsertRows()
 
     @contextlib.contextmanager
     def insert_rows(
