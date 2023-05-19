@@ -332,6 +332,19 @@ class _FutureDoneSignaller(core.Object):
     future_done_signal = core.Signal(Future, object)
 
 
+# import inspect
+# from prettyqt.qt.QtCore import SignalInstance
+# old_connect = SignalInstance.connect
+# runner = AsyncRunner()
+# def connect(self, slot):
+#     if inspect.iscoroutinefunction(slot):
+#         return old_connect(self, runner.to_sync(slot))
+#     else:
+#         return old_connect(self, slot)
+
+# SignalInstance.connect = connect
+
+
 if __name__ == "__main__":
     from pathlib import Path
     from urllib.parse import urlsplit
