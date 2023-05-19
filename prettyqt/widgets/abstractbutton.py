@@ -49,8 +49,10 @@ class AbstractButtonMixin(widgets.WidgetMixin):
             self.shortcut().toString(), gui.KeySequence.SequenceFormat.PortableText
         )
 
-    def set_text(self, text: str):
-        self.setText(text)
+    def setText(self, text: str):
+        if not self.objectName() and widgets.app().is_debug():
+            self.setObjectName(text)
+        super().setText(text)
 
     def set_icon_size(self, size: int | datatypes.SizeType):
         """Set size of the icon."""

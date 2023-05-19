@@ -316,6 +316,11 @@ class WidgetMixin(core.ObjectMixin):
     def set_disabled(self) -> None:
         self.setEnabled(False)
 
+    def setWindowTitle(self, title: str):
+        if not self.objectName() and widgets.app().is_debug():
+            self.setObjectName(title)
+        super().setWindowTitle(title)
+
     def set_title(self, title: str) -> None:
         self.setWindowTitle(title)
 

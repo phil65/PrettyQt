@@ -27,6 +27,10 @@ SAVE_STATES = dict(
 
 
 class ApplicationMixin(gui.GuiApplicationMixin):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._debug = False
+
     def __class_getitem__(cls, name: str) -> QtWidgets.QWidget:
         widget = cls.get_widget(name)
         if widget is None:
@@ -36,6 +40,9 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.topLevelWidgets())
 
+    def is_debug(self) -> bool:
+        return self._debug
+
     @contextlib.contextmanager
     def debug_mode(self):
         from prettyqt.eventfilters import debugmode
@@ -44,8 +51,10 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         self._original_excepthook = sys.excepthook
         sys.excepthook = ErrorMessageBox._excepthook
         eventfilter = debugmode.DebugMode(self)
+        self._debug = True
         self.installEventFilter(eventfilter)
         yield self
+        self._debug = False
         self.removeEventFilter(eventfilter)
         sys.excepthook = self._original_excepthook
 
