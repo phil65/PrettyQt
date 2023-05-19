@@ -75,16 +75,15 @@ FormattingOptionStr = Literal[
 
 
 class Url(serializemixin.SerializeMixin, QtCore.QUrl):
-    def __init__(self, path: datatypes.UrlType | datatypes.PathType | None = None):
-        if path is None:
-            super().__init__()
-        else:
-            if isinstance(path, QtCore.QUrl):
-                super().__init__(path)
-            else:
-                super().__init__(os.fspath(path))
-            if isinstance(path, os.PathLike):
-                self.setScheme("file")
+    def __init__(self, *args, **kwargs):
+        match args:
+            case (os.PathLike(), *rest):
+                path = os.fspath(args[0])
+                if pathlib.Path(path).exists():
+                    path = self.fromLocalFile(path)
+                super().__init__(path, *rest, **kwargs)
+            case _:
+                super().__init__(*args, **kwargs)
 
     @property
     def _toString(self):

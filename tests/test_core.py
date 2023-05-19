@@ -813,6 +813,7 @@ def test_translator():
 def test_url():
     path = pathlib.Path.home()
     url = core.Url(path)
+    assert url == core.Url.from_local_file(path)
     # TODO: fails on Osx and linux
     # assert str(url) == str(url.to_path())
     assert url.is_local_file()
