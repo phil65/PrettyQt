@@ -35,6 +35,23 @@ def count_objects():
     logger.info(counter)
 
 
+def stalk(widget):
+    # to activate signal logging for all
+    widget.add_callback_for_event(lambda x: False)
+
+    def make_fn(widget, signal_prop):
+        def fn(*args, **kwargs):
+            logger.info(f"{widget!r} {signal_prop.get_name()}")
+            logger.info(f"{args} {kwargs}")
+
+        return fn
+
+    for signal_prop in widget.get_metaobject().get_signals():
+        signal = widget.__getattribute__(signal_prop.get_name())
+        fn = make_fn(widget, signal_prop)
+        signal.connect(fn)
+
+
 def is_deleted(obj) -> bool:
     match qt.API:
         case "pyside6":
@@ -268,7 +285,9 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
 
 
 if __name__ == "__main__":
+    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = widgets.app()
-    widget = ErrorMessageBox()
+    widget = widgets.Widget()
+    stalk(widget)
     widget.show()
     app.main_loop()
