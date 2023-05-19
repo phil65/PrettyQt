@@ -61,7 +61,7 @@ TYPES = {
 }
 
 
-def get_creator(editor_cls: type[QtWidgets.QWidget], property_name: str = ""):
+def get_creator_class(editor_cls: type[QtWidgets.QWidget], property_name: str = ""):
     class EditorCreator(widgets.ItemEditorCreatorBase):
         def createWidget(self, parent: QtWidgets.QWidget) -> QtWidgets.QWidget:
             return editor_cls(parent=parent)
@@ -69,10 +69,12 @@ def get_creator(editor_cls: type[QtWidgets.QWidget], property_name: str = ""):
         def valuePropertyName(self) -> QtCore.QByteArray:
             return QtCore.QByteArray(property_name.encode())
 
-    return EditorCreator()
+    return EditorCreator
 
 
 class ItemEditorFactory(QtWidgets.QItemEditorFactory):
+    creators = []
+
     @classmethod
     def register_default_editor(
         cls,
@@ -81,7 +83,8 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         property_name: str = "",
     ):
         factory = cls.defaultFactory()
-        creator = get_creator(editor_cls, property_name)
+        creator = get_creator_class(editor_cls, property_name)()
+        cls.creators.append(creator)
         if typ is None:
             typ = editor_cls.staticMetaObject.userProperty().userType()
         elif isinstance(typ, type):
@@ -95,10 +98,11 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         typ: int | None | type = None,
         property_name: str = "",
     ):
-        creator = get_creator(editor_cls, property_name)
+        creator = get_creator_class(editor_cls, property_name)()
+        self.creators.append(creator)
         if typ is None:
             typ = editor_cls.staticMetaObject.userProperty().userType()
-        elif isinstance(typ, type):
+        elif isinstance(typ, type) and typ in TYPES:
             typ = TYPES[typ].value
         # print(f"register {editor_cls} for {typ}")
         self.registerEditor(typ, creator)
@@ -116,11 +120,12 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         factory.register_editor(custom_widgets.PointEdit, QtCore.QPoint, "value")
         factory.register_editor(custom_widgets.SizeEdit, QtCore.QSize, "value")
         factory.register_editor(custom_widgets.RectEdit, QtCore.QRect, "value")
+        # factory.register_editor(custom_widgets.EnumFlagWidget, 66231, "value")
+        # factory.register_editor(custom_widgets.EnumComboBox, 20001, "value")
         factory.register_editor(custom_widgets.RegionEdit, QtGui.QRegion, "value")
         factory.register_editor(
             custom_widgets.SizePolicyEdit, QtWidgets.QSizePolicy, "value"
         )
-
         factory.register_editor(
             widgets.KeySequenceEdit, QtGui.QKeySequence, "keySequence"
         )
@@ -166,6 +171,7 @@ if __name__ == "__main__":
         regex=QtCore.QRegularExpression("[a-z]"),
         bool=True,
         keysequence=QtGui.QKeySequence("Ctrl+A"),
+        enum=widgets.AbstractItemView.EditTrigger.DoubleClicked,
     )
     for i, (k, v) in enumerate(types.items()):
         item_1 = widgets.TableWidgetItem(k)
