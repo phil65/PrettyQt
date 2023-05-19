@@ -193,25 +193,34 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def set_delegate(
         self,
         delegate: QtWidgets.QAbstractItemDelegate,
+        *,
         column: int | None = None,
         row: int | None = None,
         persistent: bool = False,
     ):
-        if column is not None:
-            self.setItemDelegateForColumn(column, delegate)
-            if persistent:
-                model = self.model()
-                for i in range(model.rowCount()):
-                    index = model.index(i, column)
-                    self.openPersistentEditor(index)
-        elif row is not None:
-            self.setItemDelegateForRow(row, delegate)
-            if persistent:
-                model = self.model()
-                for i in range(model.columnCount()):
-                    self.openPersistentEditor(model.index(row, i))
-        else:
-            self.setItemDelegate(delegate)
+        match column, row:
+            case int(), int():
+                raise ValueError("Only set column or row, not both.")
+            case int(), None:
+                self.setItemDelegateForColumn(column, delegate)
+                if persistent:
+                    model = self.model()
+                    for i in range(model.rowCount()):
+                        index = model.index(i, column)
+                        self.openPersistentEditor(index)
+            case None, int():
+                self.setItemDelegateForRow(row, delegate)
+                if persistent:
+                    model = self.model()
+                    for i in range(model.columnCount()):
+                        self.openPersistentEditor(model.index(row, i))
+            case None, None:
+                self.setItemDelegate(delegate)
+                if persistent:
+                    model = self.model()
+                    for i in range(model.rowCount()):
+                        for j in range(model.columnCount()):
+                            self.openPersistentEditor(model.index(i, j))
 
     def toggle_select_all(self):
         """Select all items from list (deselect when all selected)."""
