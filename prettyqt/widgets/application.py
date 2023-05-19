@@ -48,6 +48,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         from prettyqt.eventfilters import debugmode
         from prettyqt.utils.debugging import ErrorMessageBox, qt_message_handler
 
+        logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+
         _original_excepthook = sys.excepthook
         _original_msg_handler = QtCore.qInstallMessageHandler(qt_message_handler)
         sys.excepthook = ErrorMessageBox._excepthook
@@ -301,7 +303,6 @@ class Application(ApplicationMixin, QtWidgets.QApplication):
 if __name__ == "__main__":
     app = widgets.app()
 
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     container = widgets.Widget()
     container.set_layout("horizontal")
     w = widgets.PlainTextEdit(parent=container)
