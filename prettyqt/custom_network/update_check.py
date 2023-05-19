@@ -4,9 +4,8 @@ import logging
 import re
 import webbrowser
 
-import requests
-
 from prettyqt import core, widgets
+from prettyqt.custom_network import downloadworker
 from prettyqt.qt import QtCore
 
 
@@ -21,32 +20,6 @@ PYPI_MESSAGE = (
     "You should upgrade from command line with 'pip install prettyqt --upgrade'.\n\n"
     "Do you want to view the changelog on github?"
 )
-
-
-class WorkerSignals(core.Object):
-    """TrayMenus' communication bus."""
-
-    download_finished = QtCore.Signal(bytes, str)  # response, url
-    download_failed = QtCore.Signal(str, str)  # msg, url
-
-
-class Worker(QtCore.QRunnable):
-    def __init__(self, url: str, timeout: int = 30) -> None:
-        super().__init__()
-        self.url = url
-        self.timeout = timeout
-        self.signals = WorkerSignals()
-
-    @QtCore.Slot()
-    def run(self) -> None:
-        try:
-            req = requests.get(self.url, verify=True, timeout=self.timeout)
-        except Exception as e:
-            msg = f"Exception '{e}' during download of '{self.url}'"
-            logger.error(msg)
-            self.signals.download_failed.emit(msg, self.url)
-        else:
-            self.signals.download_finished.emit(req.content, self.url)
 
 
 class UpdateChecker(core.Object):
@@ -92,7 +65,7 @@ class UpdateChecker(core.Object):
 
     def get(self, url: str, timeout: int = 30) -> None:
         logger.debug("Downloading %s...", url)
-        worker = Worker(url=url, timeout=timeout)
+        worker = downloadworker.DownloadWorker(url=url, timeout=timeout)
         worker.signals.download_finished.connect(self.download_finished)
         worker.signals.download_failed.connect(self.download_failed)
         self.threadpool.start(worker)
