@@ -62,5 +62,6 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
 
 
 if __name__ == "__main__":
+    app = gui.app()
     shortcut = Shortcut("enter", None)
-    shortcut.get_key()
+    print(shortcut.get_properties())
