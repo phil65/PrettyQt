@@ -12,6 +12,7 @@ from prettyqt.qt import QtCore
 
 from prettyqt.qt.QtCore import (  # type: ignore
     Signal,
+    # SignalInstance,
     QModelIndex as ModelIndex,
     QPoint as Point,
     QPointF as PointF,
@@ -294,6 +295,7 @@ __all__ = [
     "ModelIndex",
     "ThreadPool",
     "Signal",
+    "SignalInstance",
     "AbstractItemModel",
     "AbstractItemModelMixin",
     "AbstractProxyModel",

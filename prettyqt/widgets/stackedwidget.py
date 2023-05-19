@@ -6,7 +6,7 @@ from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtWidgets
 
 
-class FaderWidget(QtWidgets.QWidget):
+class FaderWidget(widgets.Widget):
     pixmap_opacity = 1.0
 
     def __init__(

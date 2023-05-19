@@ -47,7 +47,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     elision_changed = core.Signal(bool)
 
     def __init__(self, *args, **kwargs):
-        self._elide_mode = QtCore.Qt.ElideNone
+        self._elide_mode = QtCore.Qt.TextElideMode.ElideNone
         super().__init__(*args, **kwargs)
         self.openExternalLinks()
         self._is_elided = False
@@ -69,7 +69,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     # # adapted from https://forum.qt.io/topic/24530/solved-shortening-a-label/3
     # def minimumSizeHint(self):
-    #     if self._elide_mode != QtCore.Qt.ElideNone:
+    #     if self._elide_mode != QtCore.Qt.TextElideMode.ElideNone:
     #         # TODO: tweak sizeHint
     #         # -> text should expand if user increases window size,
     #         #    but don't automatically adapt window size to label width on UI update!

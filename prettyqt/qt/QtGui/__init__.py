@@ -21,6 +21,10 @@ if PYQT6:
 
     QMouseEvent.pos = pos  # type: ignore
 
+    # mightBeRichText is strangely in QtGui.Qt for PySide6..
+    from PyQt6.QtCore import Qt
+
+
 elif PYSIDE6:
     from PySide6.QtGui import *  # type: ignore
 else:

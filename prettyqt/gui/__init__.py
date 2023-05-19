@@ -40,6 +40,7 @@ from prettyqt.qt.QtGui import (
     QWhatsThisClickedEvent as WhatsThisClickedEvent,
     QScrollEvent as ScrollEvent,
     QScrollPrepareEvent as ScrollPrepareEvent,
+    Qt,
 )
 
 
@@ -147,6 +148,8 @@ from .undogroup import UndoGroup
 from .colorspace import ColorSpace
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
+
+might_be_rich_text = Qt.mightBeRichText
 
 
 def app(args: list[str] | None = None, **kwargs) -> GuiApplication:

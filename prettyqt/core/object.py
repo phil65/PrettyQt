@@ -106,7 +106,7 @@ class ObjectMixin:
         """
         from prettyqt import eventfilters
 
-        eventfilter = eventfilters.EventCatcher(self, include, exclude, callback)
+        eventfilter = eventfilters.EventCatcher(include, exclude, callback, parent=self)
         self.installEventFilter(eventfilter)
         return eventfilter
 
