@@ -47,11 +47,11 @@ class FlowLayout(widgets.Layout):
         return True
 
     def heightForWidth(self, width):
-        return self.do_layout(core.Rect(0, 0, width, 0), apply_geometry=False)
+        return self._do_layout(core.Rect(0, 0, width, 0), apply_geometry=False)
 
     def setGeometry(self, rect):
         super().setGeometry(rect)
-        self.do_layout(rect, apply_geometry=True)
+        self._do_layout(rect, apply_geometry=True)
 
     def expandingDirections(self):
         return QtCore.Qt.Orientation(0)
@@ -78,7 +78,7 @@ class FlowLayout(widgets.Layout):
             return p.style().pixelMetric(which, None, p)
         return p.spacing()
 
-    def do_layout(self, rect: QtCore.QRect, apply_geometry: bool = False) -> int:
+    def _do_layout(self, rect: QtCore.QRect, apply_geometry: bool = False) -> int:
         left, top, right, bottom = self.getContentsMargins()
         erect = rect.adjusted(left, top, -right, -bottom)
         x, y = erect.x(), erect.y()
@@ -86,8 +86,7 @@ class FlowLayout(widgets.Layout):
         line_height = 0
 
         def layout_spacing(wid, horizontal: bool = True):
-            ans = self.smart_spacing(horizontal)
-            if ans != -1:
+            if (ans := self.smart_spacing(horizontal)) != -1:
                 return ans
             if wid is None:
                 return 0
