@@ -202,19 +202,27 @@ class ObjectMixin:
         self,
         interval: int | str,
         timer_type: constants.TimerTypeStr = "coarse",
-        one_shot: bool = False,
     ) -> int | None:
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
-        if one_shot:
-            timer = core.Timer(
-                self, single_shot=True, interval=interval, timer_type=timer_type
-            )
-            timer.start()
-            return timer.timerId()
-        else:
-            result = self.startTimer(interval, constants.TIMER_TYPE[timer_type])
-            return None if result == 0 else result
+        result = self.startTimer(interval, constants.TIMER_TYPE[timer_type])
+        return None if result == 0 else result
+
+    def start_callback_timer(
+        self,
+        callback: Callable,
+        interval: int | str,
+        single_shot: bool = False,
+        timer_type: constants.TimerTypeStr = "coarse",
+    ) -> int | None:
+        if isinstance(interval, str):
+            interval = helpers.parse_time(interval)
+        timer = core.Timer(
+            self, single_shot=single_shot, interval=interval, timer_type=timer_type
+        )
+        timer.timeout.connect(callback)
+        timer.start()
+        return timer
 
     def get_properties(
         self, include_super: bool = True, cast: bool = True
