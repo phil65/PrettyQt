@@ -126,10 +126,12 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         while widget_at := cls.widgetAt(pos):
             widgets.append(widget_at)
             # Make widget invisible to further enquiries
-            widget_at.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents)
+            widget_at.setAttribute(QtCore.Qt.WidgetAttribute.WA_TransparentForMouseEvents)
         # Restore attribute
         for widget in widgets:
-            widget.setAttribute(QtCore.Qt.WA_TransparentForMouseEvents, False)
+            widget.setAttribute(
+                QtCore.Qt.WidgetAttribute.WA_TransparentForMouseEvents, False
+            )
 
         return widgets
 
