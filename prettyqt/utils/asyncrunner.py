@@ -332,19 +332,6 @@ class _FutureDoneSignaller(core.Object):
     future_done_signal = core.Signal(Future, object)
 
 
-# import inspect
-# from prettyqt.qt.QtCore import SignalInstance
-# old_connect = SignalInstance.connect
-# runner = AsyncRunner()
-# def connect(self, slot):
-#     if inspect.iscoroutinefunction(slot):
-#         return old_connect(self, runner.to_sync(slot))
-#     else:
-#         return old_connect(self, slot)
-
-# SignalInstance.connect = connect
-
-
 if __name__ == "__main__":
     from pathlib import Path
     from urllib.parse import urlsplit
@@ -356,9 +343,8 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     class Window(widgets.Widget):
-        def __init__(self, directory: Path, runner: AsyncRunner) -> None:
+        def __init__(self, directory: Path) -> None:
             super().__init__()
-            self.runner = runner
 
             self.setWindowTitle("Cat Downloader")
             self.directory = directory
@@ -377,9 +363,7 @@ if __name__ == "__main__":
             layout.addRow(self.stop_button)
 
             # Connect signals.
-            self.download_button.clicked.connect(
-                self.runner.to_sync(self.on_download_button_clicked)
-            )
+            self.download_button.clicked.connect(self.on_download_button_clicked)
             self.stop_button.clicked.connect(self.on_cancel_button_clicked)
 
         async def on_download_button_clicked(self, checked: bool = False) -> None:
@@ -403,14 +387,14 @@ if __name__ == "__main__":
 
             try:
                 functions = [download_one for _ in range(self.count_spin.value())]
-                async for download_response in self.runner.run_parallel(functions):
+                async for response in widgets.app().run_parallel(functions):
                     # Save the contents of the image to a file.
-                    parts = urlsplit(download_response.url)
+                    parts = urlsplit(response.url)
                     path = (
                         self.directory
                         / f"{downloaded_count:02d}_cat{Path(parts.path).suffix}"
                     )
-                    path.write_bytes(download_response.content)
+                    path.write_bytes(response.content)
                     downloaded_count += 1
 
                     # Show progress.
@@ -434,8 +418,7 @@ if __name__ == "__main__":
         def on_cancel_button_clicked(self) -> None:
             self._cancelled = True
 
-    with AsyncRunner() as runner:
-        app = widgets.app()
-        win = Window(Path(__file__).parent, runner)
-        win.show()
-        app.exec()
+    app = widgets.app()
+    win = Window(Path(__file__).parent)
+    win.show()
+    app.exec()
