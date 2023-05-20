@@ -8,7 +8,9 @@ from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui
 
 
-def fit_image(width, height, pwidth, pheight):
+def fit_image(
+    width: float, height: float, pwidth: float, pheight: float
+) -> tuple[bool, int, int]:
     """Fit image in box of width pwidth and height pheight.
 
     Arguments:
@@ -35,7 +37,7 @@ def fit_image(width, height, pwidth, pheight):
     return scaled, int(width), int(height)
 
 
-def draw_size(p, rect, w, h):
+def draw_size(p: gui.Painter, rect: core.Rect, w: int, h: int):
     rect = rect.adjusted(0, 0, 0, -4)
     f = p.font()
     f.setBold(True)
@@ -55,25 +57,28 @@ def draw_size(p, rect, w, h):
 class ImageViewer(widgets.Widget):
     def __init__(
         self,
-        parent=None,
+        image: QtGui.QPixmap | os.PathLike | None = None,
         show_border: bool = True,
         show_size: bool = False,
         border_width: int = 1,
+        **kwargs,
     ):
-        super().__init__(parent)
+        super().__init__(**kwargs)
         self._border_width = border_width
         self._pixmap = gui.Pixmap()
+        self.set_image(image)
         self.setMinimumSize(core.Size(150, 200))
         self.draw_border = show_border
         self.show_size = show_size
 
-    def set_image(self, pixmap: QtGui.QPixmap | os.PathLike):
+    def set_image(self, pixmap: QtGui.QPixmap | os.PathLike | None):
         match pixmap:
             case QtGui.QPixmap():
                 self._pixmap = pixmap
             case os.PathLike():
                 self._pixmap = gui.Pixmap.from_file(pixmap)
-        self._pixmap = pixmap
+            case None:
+                self._pixmap = gui.Pixmap()
         self.updateGeometry()
         self.update()
 
@@ -84,7 +89,7 @@ class ImageViewer(widgets.Widget):
     def pixmap(self):
         return self._pixmap
 
-    def sizeHint(self):
+    def sizeHint(self) -> QtCore.QSize:
         if self._pixmap.isNull():
             return self.minimumSize()
         return self._pixmap.size()
@@ -108,7 +113,7 @@ class ImageViewer(widgets.Widget):
 
         x = abs(cw - w) // 2
         y = abs(ch - h) // 2
-        target = core.Rect(x, y, w, h)
+        target = core.Rect(int(x), int(y), int(w), int(h))
         with gui.Painter(self) as p:
             p.setRenderHints(
                 gui.Painter.RenderHint.Antialiasing
