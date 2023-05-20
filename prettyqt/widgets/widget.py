@@ -646,7 +646,9 @@ class WidgetMixin(core.ObjectMixin):
         where: Literal["parent", "window", "screen", "mouse"]
         | QtWidgets.QWidget
         | QtCore.QRect
-        | QtCore.QPoint,
+        | QtCore.QPoint
+        | tuple[int, int]
+        | tuple[int, int, int, int],
         how: Literal[
             "center",
             "top",
@@ -679,6 +681,12 @@ class WidgetMixin(core.ObjectMixin):
             case QtCore.QPoint():
                 geom = core.Rect(where, where)
                 do_scale = False
+            case (int(), int()):
+                p = core.Point(*where)
+                geom = core.Rect(p, p)
+                do_scale = False
+            case (int(), int(), int(), int()):
+                geom = core.Rect(*where)
             case "parent":
                 geom = self.parent().frameGeometry()
             case "window":
