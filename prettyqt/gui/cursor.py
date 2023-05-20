@@ -36,7 +36,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
         return constants.CURSOR_SHAPE.inverse[self.shape()]
 
     @classmethod
-    def get_position(cls) -> core.Point:
+    def get_pos(cls) -> core.Point:
         return core.Point(cls.pos())
 
     @classmethod

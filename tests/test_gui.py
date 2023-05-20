@@ -144,7 +144,7 @@ def test_cursor(qapp):
     with open("data.pkl", "rb") as jar:
         cursor = pickle.load(jar)
     bytes(cursor)
-    cursor.get_position()
+    cursor.get_pos()
 
 
 # def test_desktopservices():

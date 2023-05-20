@@ -419,7 +419,7 @@ class NotificationArea(widgets.Widget):
         geom.setBottom(geom.bottom() + CURSOR_MARGIN_BOTTOM)
         geom.setLeft(geom.left() - CURSOR_MARGIN_LEFT)
         geom.setRight(geom.right() + CURSOR_MARGIN_RIGHT)
-        cursor_pos = gui.Cursor.get_position()
+        cursor_pos = gui.Cursor.get_pos()
         return geom.contains(cursor_pos)
 
     def _show_notification(self, notification: Notification):
