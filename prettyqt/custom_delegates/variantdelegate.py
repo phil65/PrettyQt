@@ -2,7 +2,6 @@ from __future__ import annotations
 
 import datetime
 import enum
-import logging
 import pathlib
 
 import regex as re
@@ -147,6 +146,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 return f"({rect.x()},{rect.y()},{rect.width()},{rect.height()})"
             case QtGui.QCursor():
                 return constants.CURSOR_SHAPE.inverse[val.shape()]
+            case QtGui.QKeySequence():
+                return val.toString()
             case QtCore.QDate() | QtCore.QDateTime() | QtCore.QTime():
                 return val.toString(QtCore.Qt.DateFormat.ISODate)
             case QtCore.QPoint():
@@ -173,6 +174,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 return val.isoformat(sep=" ")
             case QtCore.QRegularExpression():
                 return val.pattern()
+            case QtCore.QUrl():
+                return val.toString()
             # case np.integer():
             #     return super().displayText(int(val), locale)
             # case np.floating():
@@ -191,15 +194,11 @@ class VariantDelegate(widgets.StyledItemDelegate):
 
 
 if __name__ == "__main__":
-    import sys
-
-    logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
     app = widgets.app()
     table_widget = widgets.TableWidget(15, 2)
     # table_widget.set_delegate(StarDelegate(), column=1)
     table_widget.setEditTriggers(
-        table_widget.EditTrigger.DoubleClicked  # type: ignore
-        | table_widget.EditTrigger.SelectedClicked
+        table_widget.EditTrigger.DoubleClicked | table_widget.EditTrigger.SelectedClicked
     )
     table_widget.set_selection_behavior("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Rating"])
@@ -234,5 +233,5 @@ if __name__ == "__main__":
     table_widget.resizeColumnsToContents()
     table_widget.resize(500, 300)
     table_widget.show()
-
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()
