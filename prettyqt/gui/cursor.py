@@ -1,7 +1,9 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, serializemixin
 
 
@@ -36,3 +38,80 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
     @classmethod
     def get_position(cls) -> core.Point:
         return core.Point(cls.pos())
+
+    @classmethod
+    def set_pos(
+        self,
+        where: Literal["screen", "current"]
+        # | QtWidgets.QWidget
+        | QtCore.QRect | QtCore.QPoint | tuple[int, int] | tuple[int, int, int, int],
+        how: Literal[
+            "center",
+            "top",
+            "left",
+            "bottom",
+            "right",
+            "top_left",
+            "top_right",
+            "bottom_left",
+            "bottom_right",
+        ] = "center",
+        x_offset: int = 0,
+        y_offset: int = 0,
+    ):
+        """Position cursor onto screen position / widget / window / screen.
+
+        Arguments:
+            where: where to positin on
+            how: How to align
+            x_offset: additional x offset for final position
+            y_offset: additional y offset for final position
+        """
+        match where:
+            case "current":
+                p = self.pos()
+                geom = core.Rect(p, p)
+            case QtCore.QPoint():
+                geom = core.Rect(where, where)
+            case (int(), int()):
+                p = core.Point(*where)
+                geom = core.Rect(p, p)
+            case (int(), int(), int(), int()):
+                geom = core.Rect(*where)
+            case QtCore.QRect():
+                geom = where
+            case "screen":
+                geom = gui.GuiApplication.primaryScreen().geometry()
+            case _:  # not wanting to import QtWidgets here... perhaps create a protocol.
+                geom = where.frameGeometry()
+        match how:
+            case "center":
+                new = geom.center()
+            case "top":
+                new = core.Point(geom.center().x(), geom.top())
+            case "bottom":
+                new = core.Point(geom.center().x(), geom.bottom())
+            case "left":
+                new = core.Point(geom.left(), geom.center().y())
+            case "right":
+                new = core.Point(geom.right(), geom.center().y())
+            case "top_right":
+                new = geom.topRight()
+            case "top_left":
+                new = geom.topLeft()
+            case "bottom_right":
+                new = geom.bottomRight()
+            case "bottom_left":
+                new = geom.bottomLeft()
+        new = core.Point(new.x() + x_offset, new.y() + y_offset)
+        self.setPos(new)
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    widget = widgets.Widget()
+    widget.show()
+    app.sleep(2)
+    Cursor.set_pos(widget, how="right")
