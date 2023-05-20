@@ -212,6 +212,29 @@ class Color(QtGui.QColor):
             return Cls(self.lighter(int(factor * 100)))
 
 
+# QtGui.QColor.__str__ = __str__
+# QtGui.QColor.__reduce__ = __reduce__
+# QtGui.QColor.__str__ = __str__
+# QtGui.QColor._red = _red
+# QtGui.QColor._green = _green
+# QtGui.QColor._blue = _blue
+# QtGui.QColor._red = _red
+# QtGui.QColor.__match_args__ = ("_red", "_green", "_blue", "_alpha")
+
+# QtGui.QColor.serialize = serialize
+# QtGui.QColor.set_color = set_color
+# QtGui.QColor.from_cmyk = from_cmyk
+# QtGui.QColor.from_hsv = from_hsv
+# QtGui.QColor.interpolate_color = interpolate_color
+# QtGui.QColor.is_dark = is_dark
+# QtGui.QColor.get_spec = get_spec
+# QtGui.QColor.convert_to = convert_to
+# QtGui.QColor.get_name = get_name
+# QtGui.QColor.inverted = inverted
+# QtGui.QColor.drift = drift
+
+# Color = QtGui.QColor
+
 if __name__ == "__main__":
     color = Color("#FFFFFF")
     color = color.drift(1.3)
