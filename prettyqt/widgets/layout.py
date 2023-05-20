@@ -24,6 +24,8 @@ SizeConstraintStr = Literal[
     "default", "fixed", "minimum", "maximum", "min_and_max", "none"
 ]
 
+LayoutTypeStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
+
 
 class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.PrettyPrinter):
     def __init__(self, *args, margin=None, **kwargs):
