@@ -643,7 +643,10 @@ class WidgetMixin(core.ObjectMixin):
 
     def position_on(
         self,
-        where: Literal["parent", "window", "screen", "mouse"] | QtWidgets.QWidget,
+        where: Literal["parent", "window", "screen", "mouse"]
+        | QtWidgets.QWidget
+        | QtCore.QRect
+        | QtCore.QPoint,
         how: Literal[
             "center",
             "top",
@@ -668,18 +671,25 @@ class WidgetMixin(core.ObjectMixin):
             x_offset: additional x offset for final position
             y_offset: additional y offset for final position
         """
+        do_scale = True
         match where:
             case "mouse":
                 geom = core.Rect(gui.Cursor.pos(), gui.Cursor.pos())
+                do_scale = False
+            case QtCore.QPoint():
+                geom = core.Rect(where, where)
+                do_scale = False
             case "parent":
                 geom = self.parent().frameGeometry()
             case "window":
                 geom = self.window().frameGeometry()
             case QtWidgets.QWidget():
                 geom = where.frameGeometry()
+            case QtCore.QRect():
+                geom = where
             case "screen":
                 geom = gui.GuiApplication.primaryScreen().geometry()
-        if scale_ratio is not None and where != "mouse":
+        if scale_ratio is not None and do_scale:
             self.resize(
                 int(geom.width() * scale_ratio),
                 int(geom.height() * scale_ratio),
