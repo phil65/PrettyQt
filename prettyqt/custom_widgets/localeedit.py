@@ -1,25 +1,53 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
+from prettyqt.qt import QtCore
+from prettyqt.utils import get_repr
 
 
-class LocaleEdit(widgets.Widget):
+class LocaleEdit(widgets.ComboBox):
     value_changed = core.Signal(core.Locale)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        locale: QtCore.QLocale | None = None,
+        **kwargs,
+    ):
+        super().__init__(**kwargs)
+        self._current_locale = core.Locale()
+        for i in core.Locale.get_all_locales():
+            self.addItem(i.bcp47Name())
+        if locale is not None:
+            self.set_current_locale(locale)
+        self.currentTextChanged.connect(self.set_current_locale)
 
-    def _on_value_change(self):
-        self._value = self.get_value()
-        self.value_changed.emit(self._value)
+    def __repr__(self):
+        return get_repr(self, self._current_locale)
 
-    def get_value(self) -> core.Locale:
-        return self._value
+    def clear(self):
+        self._current_locale = core.Locale()
+        super().clear()
+        for i in core.Locale.get_all_locales():
+            self.addItem(i.bcp47Name())
 
-    def set_value(self, value: core.Locale):
-        self._value = value
+    # def _on_value_change(self):
+    #     self._value = self.get_value()
+    #     self.value_changed.emit(self._value)
 
-    value = core.Property(core.Locale, get_value, set_value, user=True)
+    def set_current_locale(self, locale: QtCore.QLocale | str):
+        self._current_locale = core.Locale(locale)
+        self.set_current_text(self._current_locale.bcp47Name())
+
+    def is_valid(self) -> bool:
+        return self._current_locale.isValid()
+
+    def get_value(self) -> QtCore.QLocale:
+        return self._current_locale
+
+    def set_value(self, value: QtCore.QLocale | str):
+        self.set_current_locale(value)
+
+    value = core.Property(QtCore.QLocale, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":
