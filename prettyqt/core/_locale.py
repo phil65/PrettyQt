@@ -735,7 +735,16 @@ class Locale(QtCore.QLocale):
         )
         return self.quoteString(string, flag)
 
+    @classmethod
+    def get_all_locales(cls) -> list[Self]:
+        return [
+            cls(i)
+            for i in cls.matchingLocales(
+                cls.Language.AnyLanguage, cls.Script.AnyScript, cls.Country.AnyCountry
+            )
+        ]
+
 
 if __name__ == "__main__":
-    locale = Locale()
+    locale = Locale.get_all_locales()
     print(repr(locale))
