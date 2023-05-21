@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
@@ -35,7 +37,6 @@ TYPE = bidict(
     dynamic_property_change=mod.Type.DynamicPropertyChange,
     enabled_change=mod.Type.EnabledChange,
     enter=mod.Type.Enter,
-    # enter_edit_focus=mod.Type.EnterEditFocus,
     enter_whats_this_mode=mod.Type.EnterWhatsThisMode,
     expose=mod.Type.Expose,
     file_open=mod.Type.FileOpen,
@@ -79,7 +80,6 @@ TYPE = bidict(
     layout_direction_change=mod.Type.LayoutDirectionChange,
     layout_request=mod.Type.LayoutRequest,
     leave=mod.Type.Leave,
-    # leave_edit_focus=mod.Type.LeaveEditFocus,
     leave_whats_this_mode=mod.Type.LeaveWhatsThisMode,
     locale_change=mod.Type.LocaleChange,
     non_client_area_mouse_button_dbl_click=mod.Type.NonClientAreaMouseButtonDblClick,
@@ -88,7 +88,6 @@ TYPE = bidict(
     non_client_area_mouse_move=mod.Type.NonClientAreaMouseMove,
     mac_size_change=mod.Type.MacSizeChange,
     meta_call=mod.Type.MetaCall,
-    # invoke_method=mod.Type.invokeMethod,
     modified_change=mod.Type.ModifiedChange,
     mouse_button_dbl_click=mod.Type.MouseButtonDblClick,
     mouse_button_press=mod.Type.MouseButtonPress,
@@ -96,7 +95,7 @@ TYPE = bidict(
     mouse_move=mod.Type.MouseMove,
     mouse_tracking_change=mod.Type.MouseTrackingChange,
     move=mod.Type.Move,
-    # native_gesture=mod.Type.NativeGesture,
+    native_gesture=mod.Type.NativeGesture,
     orientation_change=mod.Type.OrientationChange,
     paint=mod.Type.Paint,
     palette_change=mod.Type.PaletteChange,
@@ -118,9 +117,7 @@ TYPE = bidict(
     show_to_parent=mod.Type.ShowToParent,
     sock_act=mod.Type.SockAct,
     state_machine_signal=mod.Type.StateMachineSignal,
-    # signal_event=mod.Type.SignalEvent,
     state_machine_wrapped=mod.Type.StateMachineWrapped,
-    # wrapped_event=mod.Type.WrappedEvent,
     status_tip=mod.Type.StatusTip,
     style_change=mod.Type.StyleChange,
     tablet_move=mod.Type.TabletMove,
@@ -130,7 +127,6 @@ TYPE = bidict(
     tablet_leave_proximity=mod.Type.TabletLeaveProximity,
     tablet_tracking_change=mod.Type.TabletTrackingChange,
     thread_change=mod.Type.ThreadChange,
-    # move_to_thread=mod.Type.moveToThread,
     timer=mod.Type.Timer,
     tool_bar_change=mod.Type.ToolBarChange,
     tool_tip=mod.Type.ToolTip,
@@ -157,6 +153,153 @@ TYPE = bidict(
     win_id_change=mod.Type.WinIdChange,
     z_order_change=mod.Type.ZOrderChange,
 )
+
+TypeStr = Literal[
+    "none"
+    "action_added"
+    "action_changed"
+    "action_removed"
+    "activation_change"
+    "application_activate"
+    "application_deactivate"
+    "application_font_change"
+    "application_layout_direction_change"
+    "application_palette_change"
+    "application_state_change"
+    "application_window_icon_change"
+    "child_added"
+    "child_polished"
+    "child_removed"
+    "clipboard"
+    "close"
+    "close_software_input_panel"
+    "contents_rect_change"
+    "context_menu"
+    "cursor_change"
+    "deferred_delete"
+    "drag_enter"
+    "drag_leave"
+    "drag_move"
+    "drop"
+    "dynamic_property_change"
+    "enabled_change"
+    "enter"
+    "enter_whats_this_mode"
+    "expose"
+    "file_open"
+    "focus_in"
+    "focus_out"
+    "focus_about_to_change"
+    "font_change"
+    "gesture"
+    "gesture_override"
+    "grab_keyboard"
+    "grab_mouse"
+    "graphics_scene_context_menu"
+    "graphics_scene_drag_enter"
+    "graphics_scene_drag_leave"
+    "graphics_scene_drag_move"
+    "graphics_scene_drop"
+    "graphics_scene_help"
+    "graphics_scene_hover_enter"
+    "graphics_scene_hover_leave"
+    "graphics_scene_hover_move"
+    "graphics_scene_mouse_double_click"
+    "graphics_scene_mouse_move"
+    "graphics_scene_mouse_press"
+    "graphics_scene_mouse_release"
+    "graphics_scene_move"
+    "graphics_scene_resize"
+    "graphics_scene_wheel"
+    "hide"
+    "hide_to_parent"
+    "hover_enter"
+    "hover_leave"
+    "hover_move"
+    "icon_drag"
+    "icon_text_change"
+    "input_method"
+    "input_method_query"
+    "keyboard_layout_change"
+    "key_press"
+    "key_release"
+    "language_change"
+    "layout_direction_change"
+    "layout_request"
+    "leave"
+    "leave_whats_this_mode"
+    "locale_change"
+    "non_client_area_mouse_button_dbl_click"
+    "non_client_area_mouse_button_press"
+    "non_client_area_mouse_button_release"
+    "non_client_area_mouse_move"
+    "mac_size_change"
+    "meta_call"
+    "modified_change"
+    "mouse_button_dbl_click"
+    "mouse_button_press"
+    "mouse_button_release"
+    "mouse_move"
+    "mouse_tracking_change"
+    "move"
+    "native_gesture"
+    "orientation_change"
+    "paint"
+    "palette_change"
+    "parent_about_to_change"
+    "parent_change"
+    "platform_panel"
+    "platform_surface"
+    "polish"
+    "polish_request"
+    "query_whats_this"
+    "read_only_change"
+    "request_software_input_panel"
+    "resize"
+    "scroll_prepare"
+    "scroll"
+    "shortcut"
+    "shortcut_override"
+    "show"
+    "show_to_parent"
+    "sock_act"
+    "state_machine_signal"
+    "state_machine_wrapped"
+    "status_tip"
+    "style_change"
+    "tablet_move"
+    "tablet_press"
+    "tablet_release"
+    "tablet_enter_proximity"
+    "tablet_leave_proximity"
+    "tablet_tracking_change"
+    "thread_change"
+    "timer"
+    "tool_bar_change"
+    "tool_tip"
+    "tool_tip_change"
+    "touch_begin"
+    "touch_cancel"
+    "touch_end"
+    "touch_update"
+    "ungrab_keyboard"
+    "ungrab_mouse"
+    "update_later"
+    "update_request"
+    "whats_this"
+    "whats_this_clicked"
+    "wheel"
+    "win_event_act"
+    "window_activate"
+    "window_blocked"
+    "window_deactivate"
+    "window_icon_change"
+    "window_state_change"
+    "window_title_change"
+    "window_unblocked"
+    "win_id_change"
+    "z_order_change"
+]
 
 
 class Event(QtCore.QEvent):
