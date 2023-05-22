@@ -60,7 +60,7 @@ class EnumFlagWidget(widgets.ToolButton):
         self.set_text(" | ".join(i.name for i in value))
 
     enumValue = core.Property(enum.Flag, get_value, set_value, user=True)
-    enumClass = core.Property(type(enum.Flag), get_enum_class, set_enum_class, user=True)
+    enumClass = core.Property(type(enum.Flag), get_enum_class, set_enum_class)
 
 
 if __name__ == "__main__":
