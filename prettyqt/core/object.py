@@ -9,6 +9,8 @@ import itertools
 import logging
 from typing import TYPE_CHECKING, Any, TypeVar
 
+from typing_extensions import Self
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
@@ -249,6 +251,19 @@ class ObjectMixin:
             for i in self.dynamicPropertyNames()
         }
 
+    def copy(self) -> Self:
+        metaobj = self.get_metaobject()
+        new = type(self)()
+        for prop in metaobj.get_properties():
+            if prop.isWritable():
+                val = prop.read(self)
+                prop.write(new, val)
+        for signal in metaobj.get_signals():
+            own_signal = self.__getattribute__(signal.get_name())
+            new_signal = new.__getattribute__(signal.get_name())
+            own_signal.connect(new_signal)
+        return new
+
 
 class Object(ObjectMixin, QtCore.QObject):
     pass
@@ -259,6 +274,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     obj = core.Object(object_name="jkjk")
+    obj.copy()
     meta = obj.get_metaobject()
     prop = meta.get_property(0)
     with app.debug_mode():
