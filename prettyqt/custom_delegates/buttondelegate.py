@@ -15,7 +15,6 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         self.btn = widgets.PushButton(parent=parent)
         self.method_role = role
         self.btn.hide()
-        self.is_one_cell_edit_mode = False
         self.current_edited_index = QtCore.QModelIndex()
         parent.entered.connect(self.cell_entered)
 
@@ -52,7 +51,6 @@ class ButtonDelegate(widgets.StyledItemDelegate):
             # if index.data(self.method_role) is not None:
             self.parent().openPersistentEditor(index)
             self.parent().setCurrentIndex(index)
-        self.is_one_cell_edit_mode = True
         self.current_edited_index = index
 
     def paint(self, painter, option, index):
