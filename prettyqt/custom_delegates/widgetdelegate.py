@@ -1,26 +1,24 @@
 from __future__ import annotations
 
-
-from prettyqt import constants, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
 class WidgetDelegate(widgets.StyledItemDelegate):
     def __init__(
         self,
-        data_role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
+        role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
         parent: QtWidgets.QAbstractItemView | None = None,
     ):
         super().__init__(parent)
-        self.data_role = data_role
-        self.editors = {}
+        self._widget_role = role
+        # self._editors = {}
 
     def paint(self, painter, option, index):
-        value = index.data(self.data_role)
+        value = self._editor_for_index(index)
         if not isinstance(value, QtWidgets.QWidget):
             super().paint(painter, option, index)
             return
-        value = self.editor_for_index(index)
         value.setGeometry(option.rect)
         if option.state & widgets.Style.StateFlag.State_MouseOver:
             painter.fillRect(option.rect, option.palette.highlight())
@@ -30,21 +28,24 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         painter.drawPixmap(option.rect, pixmap)
         # super().paint(painter, option, index)
 
-    def editor_for_index(self, index):
-        key = str((index.row(), index.column()))
-        editor = index.data(self.data_role)
-        while (index := index.parent()).isValid():
-            key += str((index.row(), index.column()))
-        if key not in self.editors:
-            self.editors[key] = editor
-            return editor
-        else:
-            return self.editors[key]
+    def _editor_for_index(self, index):
+        # using index.data() does not work with PyQt6, it casts widgets to QObjects
+        model = index.model()
+        editor = model.data(index, self._widget_role)
+        return editor
+        # key = str((index.row(), index.column()))
+        # while (index := index.parent()).isValid():
+        #     key += str((index.row(), index.column()))
+        # if key not in self._editors:
+        #     self._editors[key] = editor
+        #     return editor
+        # else:
+        #     return self._editors[key]
 
     def createEditor(self, parent, option, index):
-        editor = index.data(self.data_role)
+        editor = self._editor_for_index(index)
         if isinstance(editor, QtWidgets.QWidget):
-            editor = self.editor_for_index(index).copy()
+            editor = editor.copy()
             editor.setParent(parent)
             editor.setAutoFillBackground(True)
             return editor
@@ -54,14 +55,15 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         pass
 
     def setModelData(self, editor, model, index):
-        orig = self.editor_for_index(index)
-        prop = orig.get_metaobject().get_user_property()
-        value = prop.read(editor)
-        prop.write(orig, value)
+        orig = self._editor_for_index(index)
+        if isinstance(orig, QtWidgets.QWidget):
+            prop = core.MetaObject(orig.metaObject()).get_user_property()
+            value = prop.read(editor)
+            prop.write(orig, value)
 
     def sizeHint(self, option, index):
-        editor = self.editor_for_index(index)
-        if editor:
+        editor = self._editor_for_index(index)
+        if isinstance(editor, QtWidgets.QWidget):
             return editor.sizeHint()
         else:
             return super().sizeHint(option, index)
