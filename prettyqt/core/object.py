@@ -258,13 +258,17 @@ class ObjectMixin:
             if prop.isWritable():
                 val = prop.read(self)
                 prop.write(new, val)
-        for signal in metaobj.get_signals():
-            signal_name = signal.get_name()
-            # MetaObject can return non-existing signals, dont know why.
-            if hasattr(self, signal_name):
-                own_signal = self.__getattribute__(signal_name)
-                new_signal = new.__getattribute__(signal_name)
-                own_signal.connect(new_signal)
+        # MetaObject can return non-existing signals, dont know why.
+        # also filter out duplicates.
+        signal_names = {
+            s.get_name() for s in metaobj.get_signals() if hasattr(self, s.get_name())
+        }
+        for signal_name in signal_names:
+            own_signal = self.__getattribute__(signal_name)
+            new_signal = new.__getattribute__(signal_name)
+            # own_signal.connect(new_signal)
+            new_signal.connect(own_signal)
+            logger.debug(f"connected {signal_name}")
         return new
 
 
