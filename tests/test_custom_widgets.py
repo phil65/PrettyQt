@@ -272,7 +272,7 @@ def test_logtextedit(qtbot):
     textedit.show()
     logger = logging.getLogger()
     fmt = logging.Formatter(
-        "%(asctime)s  %(levelname)i  %(message)s %(filename)s "
+        "%(asctime)s  %(levelname)s %(levelno)i  %(message)s %(filename)s "
         "%(funcName)s %(module)s %(created)f %(lineno)d %(msecs)d "
         "%(process)d %(thread)d %(threadName)s %(processName)s "
         "%(relativeCreated)s %(name)s %(pathname)s"
