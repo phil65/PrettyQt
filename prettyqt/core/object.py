@@ -259,9 +259,12 @@ class ObjectMixin:
                 val = prop.read(self)
                 prop.write(new, val)
         for signal in metaobj.get_signals():
-            own_signal = self.__getattribute__(signal.get_name())
-            new_signal = new.__getattribute__(signal.get_name())
-            own_signal.connect(new_signal)
+            signal_name = signal.get_name()
+            # MetaObject can return non-existing signals, dont know why.
+            if hasattr(self, signal_name):
+                own_signal = self.__getattribute__(signal_name)
+                new_signal = new.__getattribute__(signal_name)
+                own_signal.connect(new_signal)
         return new
 
 
