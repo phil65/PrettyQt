@@ -119,7 +119,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
                 geom = where
             case "screen":
                 geom = gui.GuiApplication.primaryScreen().geometry()
-            case QtGui.QScreen:
+            case QtGui.QScreen():
                 geom = where.geometry()
             case _:  # not wanting to import QtWidgets here... perhaps create a protocol.
                 geom = where.frameGeometry()
