@@ -123,9 +123,15 @@ class MetaObject:
         self,
         include_super: bool = True,
         type_filter: core.metamethod.MethodTypeStr | None = None,
+        filter_shit: bool = True,
     ) -> list[core.MetaMethod]:
         start = 0 if include_super else self.item.methodOffset() - 1
-        methods = [self.get_method(i) for i in range(start, self.item.methodCount())]
+        methods = [
+            method
+            for i in range(start, self.item.methodCount())
+            if not (method := self.get_method(i)).get_name().startswith("_q_")
+            or not filter_shit
+        ]
         if type_filter is None:
             return methods
         else:
@@ -181,7 +187,7 @@ class MetaObject:
 
 
 if __name__ == "__main__":
-    from prettyqt import gui
+    from prettyqt import widgets
 
-    metaobj = gui.StyleHints.get_static_metaobject()
-    print(metaobj.get_meta_type())
+    metaobj = widgets.AbstractItemView.get_static_metaobject()
+    print(metaobj.get_methods())
