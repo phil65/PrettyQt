@@ -283,6 +283,8 @@ class WidgetMixin(core.ObjectMixin):
         else:
             super().setMaximumSize(size)
 
+    setMaximumSize = set_min_size
+
     @set_max_size.register
     def _(self, x: int, y: int | None):
         self.set_max_size((x, y))
@@ -296,20 +298,28 @@ class WidgetMixin(core.ObjectMixin):
             width = 0
         super().setMinimumWidth(width)
 
+    setMinimumWidth = set_min_width
+
     def set_max_width(self, width: int | None) -> None:
         if width is None:
             width = QWIDGETSIZE_MAX
         super().setMaximumWidth(width)
+
+    setMaximumWidth = set_max_width
 
     def set_min_height(self, height: int | None) -> None:
         if height is None:
             height = 0
         super().setMinimumHeight(height)
 
+    setMinimumHeight = set_min_height
+
     def set_max_height(self, height: int | None) -> None:
         if height is None:
             height = QWIDGETSIZE_MAX
         super().setMaximumHeight(height)
+
+    setMaximumHeight = set_max_height
 
     def set_enabled(self, enabled: bool = True) -> None:
         self.setEnabled(enabled)
