@@ -863,6 +863,12 @@ class WidgetMixin(core.ObjectMixin):
             style = QtWidgets.QStyleFactory.create(style)
         self.setStyle(style)
 
+    def highlight_widget(self, widget):
+        from prettyqt.custom_widgets.overlayborder import FocusWidget
+
+        widget = FocusWidget(self, widget)
+        widget.show()
+
 
 class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
     pass
@@ -870,10 +876,8 @@ class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = Widget()
-    widget2 = Widget(
-        focus=True, status_tip="trekk", whats_this="kfjk", minimum_width=None
-    )
+    widget = widgets.RadioButton("tsd")
+    widget2 = Widget(status_tip="trekk", whats_this="kfjk", minimum_width=None)
     # widget.play_animation(
     #     "property",
     #     name="windowOpacity",
@@ -888,8 +892,16 @@ if __name__ == "__main__":
     widget.set_graphics_effect("colorize")
     widget.show()
     widget2.show()
+    mainwindow = widgets.MainWindow()
+    container = widgets.Widget()
+    container.set_layout("horizontal")
+    container.box.add(widget)
+    container.box.add(widget2)
+    mainwindow.setCentralWidget(container)
+    mainwindow.show()
+    mainwindow.highlight_widget(widget)
     app.sleep(4)
-    widget.position_on("mouse", scale_ratio=0.5, how="top")
+    # widget.position_on("mouse", scale_ratio=0.5, how="top")
     # widget.add_shortcut("return", print, "application")
     # widget.set_min_size((400, 400))
     # widget.set_max_size(None, 600)
