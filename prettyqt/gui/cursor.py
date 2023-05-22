@@ -1,10 +1,13 @@
 from __future__ import annotations
 
+import logging
 from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, serializemixin
+
+logger = logging.getLogger(__name__)
 
 
 class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
@@ -13,6 +16,36 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
         cls.setPos(cls.pos() + core.Point(0, 1))
         gui.Application.processEvents()
         cls.setPos(cls.pos() - core.Point(0, 1))
+
+    @classmethod
+    def click(cls, key=QtCore.Qt.MouseButton.LeftButton):
+        from prettyqt import widgets
+
+        app = widgets.app()
+        widget = app.widgetAt(cls.pos())
+        pos = cls.pos().toPointF()
+        local = pos - widget.mapToGlobal(core.PointF(0, 0))
+        logger.info(f"sending MouseClick events to {widget} at {local}")
+        event = gui.MouseEvent(
+            QtCore.QEvent.Type.MouseButtonPress,
+            local,
+            pos,
+            key,
+            QtCore.Qt.MouseButton.NoButton,
+            QtCore.Qt.KeyboardModifier(0),
+        )
+
+        core.CoreApplication.sendEvent(widget, event)
+        event = gui.MouseEvent(
+            QtCore.QEvent.Type.MouseButtonRelease,
+            local,
+            pos,
+            key,
+            QtCore.Qt.MouseButton.NoButton,
+            QtCore.Qt.KeyboardModifier(0),
+        )
+
+        core.CoreApplication.sendEvent(widget, event)
 
     def set_shape(self, shape: constants.CursorShapeStr):
         """Set cursor shape.
