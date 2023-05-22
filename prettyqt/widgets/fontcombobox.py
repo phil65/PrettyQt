@@ -19,7 +19,7 @@ FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "propor
 
 
 class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
-    value_changed = core.Signal(object)
+    value_changed = core.Signal(gui.Font)
 
     def _get_map(self):
         maps = super()._get_map()
@@ -64,7 +64,8 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
         return gui.Font(self.currentFont())
 
     # without this, the user property would be currentText, which is not what we want.
-    value = core.Property(gui.Font, get_value, set_value, user=True)
+    # PyQt6 doesnt like gui.Font here.
+    value = core.Property(QtGui.QFont, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":
