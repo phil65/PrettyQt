@@ -1,7 +1,6 @@
 """Module containing custom widget classes."""
 
 from .imageviewer import ImageViewer
-from .clocklabel import ClockLabel
 from .elidedlabel import ElidedLabel
 from .listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
@@ -12,6 +11,7 @@ from .hierarchicalheaderview import HierarchicalHeaderView
 from .keycombinationedit import KeyCombinationEdit
 from .singlelinetextedit import SingleLineTextEdit
 from .rectedit import RectEdit, RegionEdit
+from .enumcombobox import EnumComboBox
 from .paletteedit import PaletteEdit
 from .cursoredit import CursorEdit
 from .iconedit import IconEdit
@@ -33,7 +33,6 @@ from .flowlayout import FlowLayout
 from .borderlayout import BorderLayout
 from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
-from .enumcombobox import EnumComboBox
 from .colorcombobox import ColorComboBox
 from .colorchooserbutton import ColorChooserButton
 from .filechooserbutton import FileChooserButton
@@ -58,7 +57,6 @@ from .standardiconswidget import StandardIconsWidget
 
 __all__ = [
     "ImageViewer",
-    "ClockLabel",
     "ElidedLabel",
     "ListInput",
     "BoolDictToolButton",
