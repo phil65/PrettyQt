@@ -84,7 +84,7 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         if isinstance(upper, str):
             upper = dateutil.parser.parse(upper)
         self.setToolTip(f"{lower} <= x <= {upper}")
-        self.setDateTimeRange(lower, upper)  # type: ignore
+        self.setDateTimeRange(lower, upper)
 
     def set_format(self, fmt: str):
         self.setDisplayFormat(fmt)
@@ -92,8 +92,8 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     def get_value(self) -> datetime.datetime:
         return self.get_datetime()
 
-    def set_value(self, value: datetime.datetime):
-        self.setDateTime(value)  # type: ignore
+    def set_value(self, value: datetime.datetime | core.DateTime):
+        self.setDateTime(value)
 
     def get_datetime(self) -> datetime.datetime:
         return self.dateTime().toPython()  # type: ignore

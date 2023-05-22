@@ -13,7 +13,7 @@ class DateEdit(widgets.DateTimeEditMixin, QtWidgets.QDateEdit):
     def set_value(self, value: datatypes.DateType):
         if isinstance(value, str):
             value = QtCore.QDate.fromString(value)
-        self.setDate(value)  # type: ignore
+        self.setDate(value)
 
     def set_range(self, lower: datatypes.DateType, upper: datatypes.DateType):
         if isinstance(lower, str):
@@ -21,7 +21,7 @@ class DateEdit(widgets.DateTimeEditMixin, QtWidgets.QDateEdit):
         if isinstance(upper, str):
             upper = QtCore.QDate.fromString(upper)
         self.setToolTip(f"{lower} <= x <= {upper}")
-        self.setDateRange(lower, upper)  # type: ignore
+        self.setDateRange(lower, upper)
 
     def get_value(self) -> datetime.date:
         return self.get_date()

@@ -20,7 +20,7 @@ class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
         else:
             upper = core.Time(upper)
         self.setToolTip(f"{lower.toString()} <= x <= {upper.toString()}")
-        self.setTimeRange(lower, upper)  # type: ignore
+        self.setTimeRange(lower, upper)
 
     def get_value(self) -> datetime.time:
         return self.get_time()
@@ -28,7 +28,7 @@ class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
     def set_value(self, value: datatypes.TimeType):
         if isinstance(value, str):
             value = core.Time.fromString(value)
-        return self.setTime(value)  # type: ignore
+        return self.setTime(value)
 
 
 if __name__ == "__main__":
