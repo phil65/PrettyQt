@@ -20,7 +20,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
         self.data_role = data_role
 
     def paint(self, painter, option, index):
-        value = index.model().data(index, self.data_role)
+        value = index.data(self.data_role)
         if not self.is_supported_type(value):
             option = widgets.StyleOptionViewItem(option)
             option.state &= ~QtWidgets.QStyle.StateFlag.State_Enabled
@@ -31,7 +31,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
         super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
-        original_value = index.model().data(index, self.data_role)
+        original_value = index.data(self.data_role)
         if not self.is_supported_type(original_value):
             return None
         match original_value:
@@ -88,7 +88,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
     def setEditorData(self, editor, index):
         if not editor:
             return
-        value = index.model().data(index, self.data_role)
+        value = index.data(self.data_role)
         editor.set_value(value)
 
     def setModelData(self, editor, model, index):
