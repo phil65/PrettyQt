@@ -23,6 +23,8 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
 
         app = widgets.app()
         widget = app.widgetAt(cls.pos())
+        if widget is None:
+            return
         pos = cls.pos().toPointF()
         local = pos - widget.mapToGlobal(core.PointF(0, 0))
         logger.info(f"sending MouseClick events to {widget} at {local}")
@@ -74,8 +76,8 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
 
     @classmethod
     def set_pos(
-        self,
-        where: Literal["screen", "current"]
+        cls,
+        where: Literal["screen", "current"] | QtGui.QScreen
         # | QtWidgets.QWidget
         | QtCore.QRect | QtCore.QPoint | tuple[int, int] | tuple[int, int, int, int],
         how: Literal[
@@ -91,6 +93,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
         ] = "center",
         x_offset: int = 0,
         y_offset: int = 0,
+        duration: int = 0,
     ):
         """Position cursor onto screen position / widget / window / screen.
 
@@ -99,10 +102,11 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
             how: How to align
             x_offset: additional x offset for final position
             y_offset: additional y offset for final position
+            duration: movement time
         """
         match where:
             case "current":
-                p = self.pos()
+                p = cls.pos()
                 geom = core.Rect(p, p)
             case QtCore.QPoint():
                 geom = core.Rect(where, where)
@@ -115,6 +119,8 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
                 geom = where
             case "screen":
                 geom = gui.GuiApplication.primaryScreen().geometry()
+            case QtGui.QScreen:
+                geom = where.geometry()
             case _:  # not wanting to import QtWidgets here... perhaps create a protocol.
                 geom = where.frameGeometry()
         match how:
@@ -136,15 +142,27 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
                 new = geom.bottomRight()
             case "bottom_left":
                 new = geom.bottomLeft()
-        new = core.Point(new.x() + x_offset, new.y() + y_offset)
-        self.setPos(new)
+        new_pos = core.Point(new.x() + x_offset, new.y() + y_offset)
+        if duration > 0:
+            from prettyqt.custom_animations import cursormoveanimation
+
+            cls._cursor_animation = cursormoveanimation.CursorMoveAnimation(
+                duration=duration, end_value=new_pos
+            )
+            cls._cursor_animation.start()
+        else:
+            cls.setPos(new_pos)
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    widget = widgets.Widget()
+    widget = widgets.PushButton()
     widget.show()
-    app.sleep(2)
-    Cursor.set_pos(widget, how="right")
+    with app.debug_mode():
+        app.sleep(2)
+        widget.clicked.connect(lambda: logger.info("x"))
+        Cursor.set_pos("screen", duration=1000)
+        app.sleep(2)
+        Cursor.set_pos(widget, how="right")
