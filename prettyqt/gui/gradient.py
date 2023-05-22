@@ -146,13 +146,20 @@ class GradientMixin:
     def get_stops(self) -> list[tuple[float, gui.Color]]:
         return [(i, gui.Color(j)) for (i, j) in self.stops()]
 
+    @classmethod
+    def for_palette(cls, palette: gui.Palette, group: gui.palette.GroupStr = "active"):
+        gradient = cls()
+        for i, role_name in enumerate(gui.palette.ROLE):
+            color = palette.get_color(role_name, group)
+            gradient.setColorAt(i / len(gui.palette.ROLE), color)
+        return gradient
+
 
 class Gradient(GradientMixin, prettyprinter.PrettyPrinter, QtGui.QGradient):
     pass
 
 
 if __name__ == "__main__":
-    grad = Gradient()
-    grad.setStops([(0.0, gui.Color("red")), (1.0, gui.Color("green"))])
+    grad = Gradient.for_palette(gui.Palette())
     print(grad.get_stops())
     print(repr(grad))
