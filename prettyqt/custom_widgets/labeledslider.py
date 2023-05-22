@@ -9,7 +9,7 @@ from prettyqt.qt import QtWidgets
 
 
 class LabeledSlider(widgets.Widget):
-    value_changed = core.Signal(int)
+    value_changed = core.Signal(str)
 
     def __init__(
         self,
@@ -21,7 +21,7 @@ class LabeledSlider(widgets.Widget):
 
         if not isinstance(labels, Sequence):
             raise ValueError("<labels> must be a sequence.")
-        self.levels = list(enumerate(labels))
+        self.levels = labels
         self.set_layout(orientation, margin=10)
 
         # gives some space to print labels
@@ -38,7 +38,7 @@ class LabeledSlider(widgets.Widget):
             maximum=len(self.levels) - 1,
             value=0,
         )
-        self.sl.value_changed.connect(self.value_changed)
+        self.sl.value_changed.connect(self._on_value_change)
         if orientation == "horizontal":
             self.sl.set_tick_position("below")
             self.sl.setMinimumWidth(300)
@@ -47,6 +47,9 @@ class LabeledSlider(widgets.Widget):
             self.sl.setMinimumHeight(300)
 
         self.box.add(self.sl)
+
+    def _on_value_change(self, value: int):
+        self.value_changed.emit(self.levels[value])
 
     def paintEvent(self, e):
         super().paintEvent(e)
@@ -64,7 +67,7 @@ class LabeledSlider(widgets.Widget):
         )
 
         with gui.Painter(self) as painter:
-            for v, v_str in self.levels:
+            for v, v_str in enumerate(self.levels):
                 # get the size of the label
                 rect = painter.get_text_rect(v_str)
 
@@ -124,7 +127,7 @@ if __name__ == "__main__":
     frame.setLayout(ha)
 
     w = LabeledSlider(labels=["test", "test2", "test3"], orientation="vertical")
-
+    w.value_changed.connect(print)
     ha.addWidget(w)
     frame.show()
     app.main_loop()
