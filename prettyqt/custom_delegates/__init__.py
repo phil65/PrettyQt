@@ -8,6 +8,7 @@ from .stardelegate import StarDelegate
 from .renderlinkdelegate import RenderLinkDelegate
 from .nofocusdelegate import NoFocusDelegate
 from .htmlitemdelegate import HtmlItemDelegate
+from .widgetdelegate import WidgetDelegate
 
 __all__ = [
     "ButtonDelegate",
@@ -18,4 +19,5 @@ __all__ = [
     "RenderLinkDelegate",
     "NoFocusDelegate",
     "HtmlItemDelegate",
+    "WidgetDelegate",
 ]
