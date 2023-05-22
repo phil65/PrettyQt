@@ -124,9 +124,10 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return False
-        if self.show_root and self.data_by_index(parent) == self._root_item:
+        item = self.data_by_index(parent)
+        if self.show_root and item == self._root_item:
             return True
-        return bool(self.data_by_index(parent).obj.requires)
+        return bool(item.obj.requires)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         """Fetch the children of a Python object.

@@ -31,19 +31,21 @@ class ObjectMixin:
 
     def __init__(self, *args, **kwargs):
         self._eventfilters = set()
-        # this allows snake_case property and signal names in ctor.
         new = {}
         if kwargs:
             mapper = self._get_map()
             for k, v in kwargs.items():
-                if (camel_k := helpers.to_lower_camel(k)) in mapper and isinstance(
-                    v, str
-                ):
+                # this allows snake_case naming.
+                camel_k = helpers.to_lower_camel(k)
+                # allow str values instead of enum
+                if camel_k in mapper and isinstance(v, str):
                     new[camel_k] = mapper[camel_k][v]
+                # allow str values for common icon kwargs
                 elif k in {"window_icon", "icon"} and isinstance(v, str):
                     from prettyqt import iconprovider
 
                     new[camel_k] = iconprovider.get_icon(v)
+                # regular case
                 else:
                     new[camel_k] = v
         super().__init__(*args, **new)
