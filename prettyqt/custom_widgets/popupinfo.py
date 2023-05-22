@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, widgets
+from prettyqt import core, iconprovider, widgets
 from prettyqt.qt import QtWidgets
 
 
@@ -11,12 +11,20 @@ class PopupInfo(widgets.Dialog):
         super().__init__(parent=parent)
         self.timer = core.Timer(single_shot=True, timeout=self.close)
         self.label = widgets.Label(alignment="center")
+        self.iconlabel = widgets.Label()
+        self.set_icon("mdi.information")
         self.set_flags(stay_on_top=True, frameless=True, tooltip=True)
-        layout = widgets.VBoxLayout(margin=20, size_constraint="minimum")
+        self.hide()
+        layout = widgets.HBoxLayout(margin=20, size_constraint="minimum")
         self.set_layout(layout)
         self.set_background_color("black")
         self.label.set_color("white")
+        layout.add(self.iconlabel)
         layout.add(self.label)
+
+    def set_icon(self, icon: str):
+        pixmap = iconprovider.get_icon(icon, color="white").pixmap(32)
+        self.iconlabel.setPixmap(pixmap)
 
     def show(self):
         self.adjustSize()
