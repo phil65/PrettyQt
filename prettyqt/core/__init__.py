@@ -19,7 +19,6 @@ from prettyqt.qt.QtCore import (  # type: ignore
     QRect as Rect,
     QRectF as RectF,
     qInstallMessageHandler as install_message_handler,
-    QEvent as Event,
     QChildEvent as ChildEvent,
     QTimerEvent as TimerEvent,
     QEnum as Enum,
@@ -36,6 +35,7 @@ from prettyqt.qt.QtCore import (  # type: ignore
     # QtWarningMsg as WarningMsg,
 )
 
+from .event import Event
 from .slot import Slot
 from .property import Property
 from .loggingcategory import LoggingCategory
