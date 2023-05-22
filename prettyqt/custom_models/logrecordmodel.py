@@ -113,7 +113,7 @@ class LogRecordModel(custom_models.ColumnTableModel):
     def __init__(self, logger, level=logging.DEBUG, *args, **kwargs):
         super().__init__(items=[], columns=COLUMNS)
         self.handler = signallogger.SignalLogger()
-        self.handler.log_record.connect(self.add)
+        self.handler.signals.log_record.connect(self.add)
         core.CoreApplication.call_on_exit(lambda: logger.removeHandler(self.handler))
         self.handler.setLevel(level)
         logger.addHandler(self.handler)
