@@ -6,7 +6,7 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, get_repr
 
 
@@ -45,12 +45,18 @@ TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 class Label(widgets.FrameMixin, QtWidgets.QLabel):
     elision_changed = core.Signal(bool)
+    clicked = core.Signal()
 
     def __init__(self, *args, **kwargs):
         self._elide_mode = QtCore.Qt.TextElideMode.ElideNone
         super().__init__(*args, **kwargs)
         self.openExternalLinks()
         self._is_elided = False
+
+    def mouseReleaseEvent(self, ev: QtGui.QMouseEvent):
+        if ev.button() == QtCore.Qt.MouseButton.LeftButton:
+            self.clicked.emit()
+        return super().mouseReleaseEvent(ev)
 
     def set_elide_mode(self, mode: constants.ElideModeStr):
         self._elide_mode = constants.ELIDE_MODE[mode]
