@@ -49,6 +49,7 @@ class CommandTable(widgets.TableView):
         self._proxy.setSourceModel(self._model)
         self._proxy.invalidated.connect(self.select_first_row)
         self.setModel(self._proxy)
+        self.h_header.set_resize_mode("stretch")
         self.pressed.connect(self._on_clicked)
         self.set_delegate(custom_delegates.HtmlItemDelegate(), column=0)
         self._match_color = QtGui.QColor("#468cc6")
@@ -76,12 +77,12 @@ class CommandPalette(widgets.Widget):
 
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
-        # self.setWindowFlags(
-        #     QtCore.Qt.WindowType.WindowStaysOnTopHint
-        #     | QtCore.Qt.WindowType.FramelessWindowHint
-        #     | QtCore.Qt.WindowType.WindowStaysOnTopHint
-        # )
-        # self.set_focus_policy("strong")
+        self.setWindowFlags(
+            QtCore.Qt.WindowType.WindowStaysOnTopHint
+            | QtCore.Qt.WindowType.FramelessWindowHint
+            # | QtCore.Qt.WindowType.ToolTip
+        )
+        self.set_focus_policy("strong")
         self.setMinimumWidth(700)
         self._line = widgets.LineEdit()
         self._table = CommandTable()
@@ -149,7 +150,7 @@ class CommandPalette(widgets.Widget):
 
     def show(self):
         self._line.setText("")
-        self.resize(500, 300)
+        self.resize(1000, 300)
         self.position_on("screen")
         super().show()
         self.raise_()
@@ -204,4 +205,5 @@ if __name__ == "__main__":
         pal.add_actions([gui.Action(text=label)])
     window.show()
     print(COMMANDS)
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()
