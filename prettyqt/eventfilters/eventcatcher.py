@@ -19,33 +19,41 @@ class EventCatcher(eventfilters.BaseEventFilter):
         | core.Event.TypeStr
         | Container[QtCore.QEvent.Type | core.Event.TypeStr]
         | None = None,
-        exclude: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
+        exclude: QtCore.QEvent.Type
+        | core.Event.TypeStr
+        | Container[QtCore.QEvent.Type | core.Event.TypeStr]
+        | None = None,
         do_filter: bool | Callable[[QtCore.QEvent], bool] = False,
         **kwargs,
     ):
         super().__init__(**kwargs)
         match include:
-            case list():
+            case str():
+                self.include = [core.event.TYPE[include]]
+            case Container():
                 self.include = [
                     core.event.TYPE[i] if isinstance(i, str) else i for i in include
                 ]
-            case str():
-                self.include = [core.event.TYPE[include]]
-            case QtCore.QEvent.Type:
+            case QtCore.QEvent.Type():
                 self.include = [include]
             case None:
                 self.include = None
+            case _:
+                raise ValueError(include)
         match exclude:
-            case list():
+            case str():
+                self.exclude = [core.event.TYPE[exclude]]
+
+            case Container():
                 self.exclude = [
                     core.event.TYPE[i] if isinstance(i, str) else i for i in exclude
                 ]
-            case str():
-                self.exclude = [core.event.TYPE[exclude]]
-            case QtCore.QEvent.Type:
+            case QtCore.QEvent.Type():
                 self.exclude = [exclude]
             case None:
                 self.exclude = None
+            case _:
+                raise ValueError(exclude)
         self.do_filter = do_filter
 
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
