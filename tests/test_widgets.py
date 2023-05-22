@@ -1115,11 +1115,11 @@ def test_spinbox(qtbot):
 # @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_splashscreen(qtbot):
     pixmap = gui.Pixmap.create_dot()
-    scr = widgets.SplashScreen(path=pixmap, width=100)
+    scr = widgets.SplashScreen(pixmap)
     qtbot.addWidget(scr)
     with scr:
         pass
-    scr.set_text("test")
+    scr.show_message("test")
 
 
 def test_splitter(qtbot):

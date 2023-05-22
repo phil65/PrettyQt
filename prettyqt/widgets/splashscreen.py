@@ -8,16 +8,12 @@ from prettyqt.utils import datatypes
 
 
 class SplashScreenMixin(widgets.WidgetMixin):
-    def __init__(
-        self,
-        path: datatypes.PathType | QtGui.QPixmap,
-        width: int | None = None,
-        **kwargs,
-    ):
-        pix = path if isinstance(path, QtGui.QPixmap) else gui.Pixmap(os.fspath(path))
-        if width:
-            pix = pix.scaledToWidth(width)
-        super().__init__(pix, **kwargs)
+    def __init__(self, *args, **kwargs):
+        match args:
+            case (os.PathLike(), *rest):
+                super().__init__(gui.Pixmap(os.fspath(args[0])), *rest, **kwargs)
+            case _:
+                super().__init__(*args, **kwargs)
         self.set_flags(stay_on_top=True, frameless=True)
         self.setEnabled(False)
 
@@ -28,14 +24,27 @@ class SplashScreenMixin(widgets.WidgetMixin):
     def __exit__(self, typ, value, traceback):
         self.hide()
 
-    def set_text(
+    def setPixmap(self, pixmap: os.PathLike | QtGui.QPixmap | None):
+        match pixmap:
+            case os.PathLike():
+                pixmap = gui.Pixmap(os.fspath(pixmap))
+            case None:
+                pixmap = gui.Pixmap()
+        super().setPixmap(pixmap)
+
+    def set_pixmap_width(self, width: int):
+        pixmap = self.pixmap()
+        pixmap = pixmap.scaledToWidth(width)
+        super().setPixmap(pixmap)
+
+    def show_message(
         self,
         text: str,
         color: datatypes.ColorType = "black",
         h_align: constants.HorizontalAlignmentStr = "center",
         v_align: constants.VerticalAlignmentStr = "bottom",
     ):
-        self.showMessage(
+        super().showMessage(
             text,
             color=gui.Color(color),
             alignment=constants.H_ALIGNMENT[h_align] | constants.V_ALIGNMENT[v_align],
@@ -44,3 +53,11 @@ class SplashScreenMixin(widgets.WidgetMixin):
 
 class SplashScreen(SplashScreenMixin, QtWidgets.QSplashScreen):
     pass
+
+
+if __name__ == "__main__":
+    app = widgets.app()
+    splash = SplashScreen(gui.Pixmap())
+    splash.show()
+    splash.show_message("test")
+    app.main_loop()
