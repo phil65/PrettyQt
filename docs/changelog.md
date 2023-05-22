@@ -1,3 +1,65 @@
+## v1.44.0 (2023-05-23)
+
+### Feat
+
+- **Widget**: add highlight_widget method
+- add FocusWidget
+- add MappingModel
+- **DateTime**: add from_seconds method
+- add LogRecordModel
+- **MetaMethod**: add get_parameter_types method
+- **MetaObject**: add filter_shit kwarg for get_methods
+- animation option for Cursor.set_pos
+- add CursorMoveAnimation
+- **Cursor**: add click method
+- add SliderMoveToMouseClickEventFilter
+- add test module
+- **PopupInfo**: add icon support
+- **EventCatcher**: allow str for eventtselection
+- **Object**: add copy method
+- for_palette method for Gradient
+- **RubberBand**: add track widget method
+- add WidgetDelegate
+- **Object**: add copy method
+- proper LocaleEdit
+- **Locale**: add get_all_locales method
+- add PainterPath.add
+- **Widget**: support tuples for position_on
+- **Cursor**: add set_pos method
+- **Object**: add start_callback_timer
+- add OrientedScrollArea
+- add OverlayBorder
+- add ScientificValidators
+- rich_text param for set_tooltip
+- **DateTimeEdit**: add set_to_today method
+- add FuzzyCompleter
+- List interface for ListMixin
+- **AbstractItemModel**: two more context managers
+- ShortcutsModel
+- set ObjectNames in debugmode
+- add OpenGLwidget
+- **WidgetsDetailsModel**: automatically populate table based on most common ancestor.
+- add WidgetsDetailsModel
+- **AbstractItemModel**: make proxies easily available
+- **ToolBar**: add show_tooltips method
+- first shot for a WidgetPropertiesModel
+- **Date**: add from_string method
+- add EnumFlagWidget
+- **Application**: add process_events method
+- **MetaProperty**: add get_enumerator_type
+- add debugmode eventFilter (WIP)
+- **EventCatcher**: allow callable for do_filter
+- **Object**: add connect_events method
+- EventCatcher eventfilter
+- Elision functionality for Label
+- add JsonValidator / PythonCodeValidator / ColorValidator classes
+
+### Fix
+
+- **Cursor**: correct subclass check in set_pos
+- **EnumComboBox/EnumFlagWidget**: only declare one user prop
+- correctly init Url when arg is PathLike
+
 ## v1.43.0 (2023-05-18)
 
 ### Feat
