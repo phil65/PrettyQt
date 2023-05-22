@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import datetime
 
+from typing_extensions import Self
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
@@ -22,6 +24,12 @@ class DateTime(QtCore.QDateTime):
         if format_spec in constants.DATE_FORMAT:
             return self.to_format(format_spec)
         return self.toString(format_spec)
+
+    @classmethod
+    def from_seconds(cls, seconds: float) -> Self:
+        new = cls()
+        new.setMSecsSinceEpoch(int(seconds * 1000))
+        return new
 
     def get_value(self) -> datetime.datetime:
         return self.toPython()
