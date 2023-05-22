@@ -70,12 +70,13 @@ class RecentFilesManager(core.Object):
             return result
 
         val = self._settings.value(f"recent_files/{key}", default)
-        if val is None:
-            lst: list[str] = []
-        elif isinstance(val, str):
-            lst = [val]
-        else:
-            lst = val  # type: ignore
+        match val:
+            case None:
+                lst: list[str] = []
+            case str():
+                lst = [val]
+            case _:
+                lst = val
         return unique([os.path.normpath(pth) for pth in lst])
 
     def set_value(self, key, value):

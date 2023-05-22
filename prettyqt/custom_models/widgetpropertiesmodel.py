@@ -107,9 +107,7 @@ if __name__ == "__main__":
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.set_selection_behavior("rows")
-    view.setEditTriggers(
-        view.EditTrigger.DoubleClicked | view.EditTrigger.SelectedClicked
-    )
+    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate(delegate, column=1)
     view.show()
     view.resize(500, 300)

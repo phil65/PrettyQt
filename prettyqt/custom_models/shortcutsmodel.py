@@ -77,9 +77,7 @@ if __name__ == "__main__":
     model = custom_models.ColumnTableModel(shortcuts, COLUMNS, parent=view)
     view.setModel(model)
     view.resize(640, 480)
-    view.setEditTriggers(
-        view.EditTrigger.DoubleClicked | view.EditTrigger.SelectedClicked
-    )
+    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_selection_behavior("rows")
     view.adapt_sizes()
     view.show()

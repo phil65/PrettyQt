@@ -66,8 +66,6 @@ class WidgetsDetailsModel(core.AbstractTableModel):
                 return prop.read(widget)
 
     def setData(self, index, value, role=constants.DISPLAY_ROLE):
-        if not index.isValid():
-            return None
         prop = self._metaobj.get_property(index.column())
         widget = self.items[index.row()]
         match role:
@@ -104,15 +102,12 @@ if __name__ == "__main__":
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     items = [widgets.RadioButton(), widgets.RadioButton()]
-    model = WidgetsDetailsModel(items)
+    model = WidgetsDetailsModel(items).transpose()
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
-    view.set_selection_behavior("rows")
-    view.setEditTriggers(
-        view.EditTrigger.DoubleClicked | view.EditTrigger.SelectedClicked
-    )
+    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate(delegate)
-    view.resize(500, 300)
+    view.resize(1000, 1000)
     with app.debug_mode():
         view.show()
         app.main_loop()
