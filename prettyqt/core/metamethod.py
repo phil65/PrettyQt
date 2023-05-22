@@ -48,6 +48,7 @@ class MetaMethod:
         return self.item.methodSignature().data().decode()
 
     def get_normalized_method_signature(self) -> str:
+        """Returns something like 'objectNameChanged(QString)'."""
         sig = self.item.methodSignature()
         normalized = QtCore.QMetaObject.normalizedSignature(sig.data().decode())
         return normalized.data().decode()
@@ -61,6 +62,10 @@ class MetaMethod:
 
     def get_return_type(self) -> core.MetaType:
         return core.MetaType(self.returnMetaType().id())
+
+    def get_parameter_types(self):
+        """Returns sth. like ['QString']."""
+        return [i.data().decode() for i in self.parameterTypes()]
 
 
 if __name__ == "__main__":
