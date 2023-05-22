@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from prettyqt import core
+from prettyqt import core, eventfilters
 
 
-class TextUpdateEventFilter(core.Object):
+class TextUpdateEventFilter(eventfilters.BaseEventFilter):
     def __init__(self, parent, interval: int = 1000, **kwargs):
         super().__init__(parent, **kwargs)
         parent.startTimer(interval)

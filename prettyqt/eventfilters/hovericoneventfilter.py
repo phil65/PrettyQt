@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from prettyqt import core
+from prettyqt import core, eventfilters
 
 
-class HoverIconEventFilter(core.Object):
+class HoverIconEventFilter(eventfilters.BaseEventFilter):
     def __init__(self, normal, hover, pressed=None, parent=None):
         super().__init__(parent)
         self.normal = normal

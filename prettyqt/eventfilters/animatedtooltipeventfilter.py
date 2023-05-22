@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from prettyqt import core, custom_animations, widgets
+from prettyqt import core, custom_animations, eventfilters, widgets
 from prettyqt.qt import QtCore
 
 
@@ -10,7 +10,7 @@ if TYPE_CHECKING:
     from prettyqt.qt import QtWidgets
 
 
-class AnimatedToolTipEventFilter(QtCore.QObject):
+class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tool_tip = widgets.Label()

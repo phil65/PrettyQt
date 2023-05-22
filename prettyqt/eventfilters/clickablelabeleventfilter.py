@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from prettyqt import core, gui
+from prettyqt import gui, eventfilters
 
 
-class ClickableLabelEventFilter(core.Object):
+class ClickableLabelEventFilter(eventfilters.BaseEventFilter):
     """Eventfilter which underlines text on hover."""
 
     def __init__(self, parent, **kwargs):

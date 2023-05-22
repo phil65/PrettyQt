@@ -2,14 +2,14 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, eventfilters, widgets
 from prettyqt.qt import QtCore
 
 
 logger = logging.getLogger(__name__)
 
 
-class DebugMode(core.Object):
+class DebugMode(eventfilters.BaseEventFilter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.list = widgets.ListWidget()

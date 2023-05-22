@@ -3,14 +3,14 @@ from __future__ import annotations
 from collections.abc import Callable, Container
 import logging
 
-from prettyqt import core
+from prettyqt import core, eventfilters
 from prettyqt.qt import QtCore
 
 
 logger = logging.getLogger(__name__)
 
 
-class EventCatcher(core.Object):
+class EventCatcher(eventfilters.BaseEventFilter):
     caught = core.Signal(QtCore.QEvent)
 
     def __init__(
