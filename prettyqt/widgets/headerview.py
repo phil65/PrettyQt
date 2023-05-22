@@ -94,7 +94,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             return True
         return False
 
-    def resize_sections(self, mode: ModeStr):
+    def resize_sections(self, mode: ModeStr = "resize_to_contents"):
         self.resizeSections(MODES[mode])
 
     def get_resize_mode(self, col: int) -> ModeStr:
