@@ -6,7 +6,6 @@ import logging
 import os
 from typing import Any, Literal
 
-from deprecated import deprecated
 from typing_extensions import Self
 
 from prettyqt import core
@@ -29,7 +28,8 @@ SCOPE = bidict(
 ScopeStr = Literal["user", "system"]
 
 
-class Settings(core.ObjectMixin, QtCore.QSettings):
+class Settings_(core.ObjectMixin, QtCore.QSettings):
+    # Setting class with original behavior, compatible with original QSettings
     def __init__(self, *args, settings_id: str | None = None):
         super().__init__(*args)
         self.settings_id = settings_id
@@ -67,8 +67,8 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
         return len(self.allKeys())
 
     @classmethod
-    def build_from_dict(cls, dct: dict[str, Any]) -> Self:
-        settings = cls()
+    def build_from_dict(cls, dct: dict[str, Any], **kwargs) -> Self:
+        settings = cls(**kwargs)
         for k, v in dct.items():
             settings.set_value(k, v)
         return settings
@@ -79,7 +79,7 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
     def set_value(self, key: str, value):
         if not self.applicationName():
             raise RuntimeError("no app name defined")
-        self.setValue(key, dict(value=value))
+        self.setValue(key, value)
 
     def set_values(self, dct: dict[str, Any]):
         for k, v in dct.items():
@@ -88,12 +88,7 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
     def get_value(self, key: str, default=None):
         if not self.contains(key):
             return default
-        val = self.value(key)
-        # this is for migration
-        if not isinstance(val, dict) or "value" not in val:
-            self.set_value(key, val)
-            return val
-        return val["value"]
+        return self.value(key)
 
     @classmethod
     def set_default_format(cls, fmt: FormatStr):
@@ -233,13 +228,20 @@ class Settings(core.ObjectMixin, QtCore.QSettings):
         s.setValue(f"{app_name}/shell/open/command/.", f"{app_path} %1")
 
 
-@deprecated(reason="This method is deprecated, use Settings.register_extensions instead.")
-def register_extensions(
-    *exts: str,
-    app_name: str | None = None,
-    app_path: None | datatypes.PathType = None,
-):
-    core.Settings.register_extensions(*exts, app_name=app_name, app_path=app_path)
+class Settings(Settings_):
+    # settings class which wraps everything into a dict to preserve data types.
+    def set_value(self, key: str, value):
+        super().set_value(key, dict(value=value))
+
+    def get_value(self, key: str, default=None):
+        if not self.contains(key):
+            return default
+        val = self.value(key)
+        # this is for migration
+        if not isinstance(val, dict) or "value" not in val:
+            self.set_value(key, val)
+            return val
+        return val["value"]
 
 
 if __name__ == "__main__":
