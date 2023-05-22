@@ -130,7 +130,7 @@ class MetaType(QtCore.QMetaType):
         return get_repr(self, self.get_name())
 
     def get_name(self) -> str | None:
-        return self.name()
+        return name.decode() if isinstance(name := self.name(), bytes) else name
 
     def get_type_name(self) -> str:
         return TYPE.inverse[QtCore.QMetaType.Type(self.id())]

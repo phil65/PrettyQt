@@ -50,7 +50,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 1:
                 return prop.read(self._widget)
             case constants.DISPLAY_ROLE, 2:
-                return prop.get_meta_type().name()
+                return prop.get_meta_type().get_name()
             case constants.FONT_ROLE, 2:
                 font = QtGui.QFont()
                 font.setItalic(True)
@@ -85,7 +85,8 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         return 0 if parent.isValid() else self._metaobj.propertyCount()
 
     def flags(self, index):
-        if index.column() == 1:
+        prop = self._metaobj.get_property(index.row())
+        if index.column() == 1 and prop.isWritable():
             return (
                 super().flags(index)
                 | constants.IS_EDITABLE
