@@ -55,6 +55,8 @@ class EnumFlagWidget(widgets.ToolButton):
 
     def set_value(self, value: enum.Flag) -> None:
         """Set value with Enum."""
+        if isinstance(value, int):
+            value = self._enum_class(value)
         self._set_enum_class(value.__class__)
         if not isinstance(value, self._enum_class):
             raise TypeError(

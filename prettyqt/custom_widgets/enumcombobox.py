@@ -76,15 +76,15 @@ class EnumComboBox(widgets.ComboBox):
 
     def set_value(self, value: EnumType | None) -> None:
         """Set value with Enum."""
+        if value is None:
+            if self._allow_none:
+                self.setCurrentIndex(0)
+                return
+            else:
+                raise ValueError(value)
+        if isinstance(value, int):
+            value = self._enum_class(value)
         self._set_enum_class(value.__class__)
-        if value is None and self._allow_none:
-            self.setCurrentIndex(0)
-            return
-        if not isinstance(value, self._enum_class):
-            raise TypeError(
-                "setValue(self, Enum): argument 1 has unexpected type "
-                f"{type(value).__name__!r}"
-            )
         self.setCurrentText(value.name.replace("_", " "))
 
     # def _emit_signal(self):

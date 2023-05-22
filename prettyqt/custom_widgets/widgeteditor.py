@@ -74,8 +74,12 @@ class WidgetEditor(widgets.ScrollArea):
                 widget = widgets.FontComboBox()
             elif typ == QtGui.QColor:
                 widget = custom_widgets.ColorComboBox()
+            elif typ == enum.Flag:
+                widget = custom_widgets.EnumFlagWidget()
+            elif typ == enum.Enum and prop.isFlagType():
+                widget = custom_widgets.EnumFlagWidget()
             elif typ == enum.Enum:
-                widget = custom_widgets.EnumComboBox(enum_class=type(value))
+                widget = custom_widgets.EnumComboBox()
             else:
                 raise ValueError(typ)
             widget.set_value(value)

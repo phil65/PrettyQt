@@ -39,8 +39,10 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 widget = widgets.CheckBox(parent=parent)
             case enum.Flag():
                 widget = custom_widgets.EnumFlagWidget(parent=parent)
+                widget._set_enum_class(type(original_value))
             case enum.Enum():
                 widget = custom_widgets.EnumComboBox(parent=parent)
+                widget._set_enum_class(type(original_value))
             case int():
                 widget = widgets.SpinBox(parent=parent)
             case float():
@@ -82,8 +84,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
         return widget
 
     def setEditorData(self, editor, index):
-        if not editor:
-            return
+        # if not editor:
+        #     return
         value = self._data_for_index(index, self.data_role)
         editor.set_value(value)
 
@@ -91,6 +93,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
         if (value := editor.get_value()) is not None:
             model.setData(index, value, self.data_role)
             model.setData(index, self.display_text(value), constants.DISPLAY_ROLE)
+            self.commitData.emit(editor)
+            # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
 
     @staticmethod
     def is_supported_type(value):
