@@ -70,13 +70,17 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         from prettyqt.eventfilters import debugmode
         from prettyqt.utils.debugging import ErrorMessageBox, MessageHandler
 
-        logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
+        handler = logging.StreamHandler(sys.stdout)
+        handler.setLevel(logging.DEBUG)
+        root_logger = logging.getLogger()
+        root_logger.addHandler(handler)
+        root_logger.setLevel(logging.DEBUG)
         _original_excepthook = sys.excepthook
         sys.excepthook = ErrorMessageBox._excepthook
         eventfilter = debugmode.DebugMode(self)
         self._debug = True
         self.installEventFilter(eventfilter)
-        with MessageHandler(logger):
+        with MessageHandler(root_logger):
             yield self
         self._debug = False
         self.removeEventFilter(eventfilter)
