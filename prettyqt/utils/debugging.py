@@ -3,7 +3,9 @@
 from __future__ import annotations
 
 import collections
+import contextlib
 from collections.abc import Callable, Generator
+
 import logging
 import re
 import sys
@@ -16,10 +18,12 @@ from prettyqt.utils import helpers
 logger = logging.getLogger(__name__)
 
 LOG_MAP = {
-    QtCore.QtMsgType.QtInfoMsg: 20,
-    QtCore.QtMsgType.QtWarningMsg: 30,
-    QtCore.QtMsgType.QtCriticalMsg: 40,
-    QtCore.QtMsgType.QtFatalMsg: 50,
+    QtCore.QtMsgType.QtDebugMsg: logging.DEBUG,
+    QtCore.QtMsgType.QtInfoMsg: logging.INFO,
+    QtCore.QtMsgType.QtWarningMsg: logging.WARNING,
+    QtCore.QtMsgType.QtCriticalMsg: logging.ERROR,
+    QtCore.QtMsgType.QtFatalMsg: logging.CRITICAL,
+    QtCore.QtMsgType.QtSystemMsg: logging.CRITICAL,
 }
 
 # qFormatLogMessage(QtMsgType type, const QMessageLogContext context, const QString str)
@@ -42,9 +46,43 @@ class QtLogger(logging.Handler):
                 QtCore.qFatal(self.format(record))
 
 
-def qt_message_handler(mode: QtCore.QtMsgType, context, message: str):
-    level = LOG_MAP.get(mode, 20)
-    logger.log(level, f"{message} ({context.file}:{context.line}, {context.file})")
+class MessageHandler:
+    def __init__(self, logger: logging.Logger):
+        self._logger = logger
+        self._previous_handler = None
+
+    def install(self):
+        self._previous_handler = QtCore.qInstallMessageHandler(self)
+
+    def uninstall(self):
+        if self._previous_handler is None:
+            QtCore.qInstallMessageHandler(self._previous_handler)
+
+    def __enter__(self):
+        self.install()
+        return self
+
+    def __exit__(self, *args):
+        self.uninstall()
+
+    def __call__(
+        self,
+        msgtype: QtCore.QtMsgType,
+        context: QtCore.QMessageLogContext,
+        message: str,
+    ):
+        ctx = dict.fromkeys(["category", "file", "function", "line"])
+        with contextlib.suppress(UnicodeDecodeError):
+            ctx["category"] = context.category
+        with contextlib.suppress(UnicodeDecodeError):
+            ctx["file"] = context.file
+        with contextlib.suppress(UnicodeDecodeError):
+            ctx["function"] = context.function
+        with contextlib.suppress(UnicodeDecodeError):
+            ctx["line"] = context.line
+
+        level = LOG_MAP[msgtype]
+        self._logger.log(level, message, extra=ctx)
 
 
 def count_objects():

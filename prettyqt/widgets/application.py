@@ -68,17 +68,16 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     @contextlib.contextmanager
     def debug_mode(self):
         from prettyqt.eventfilters import debugmode
-        from prettyqt.utils.debugging import ErrorMessageBox, qt_message_handler
+        from prettyqt.utils.debugging import ErrorMessageBox, MessageHandler
 
         logging.basicConfig(stream=sys.stdout, level=logging.DEBUG)
-
         _original_excepthook = sys.excepthook
-        _original_msg_handler = QtCore.qInstallMessageHandler(qt_message_handler)
         sys.excepthook = ErrorMessageBox._excepthook
         eventfilter = debugmode.DebugMode(self)
         self._debug = True
         self.installEventFilter(eventfilter)
-        yield self
+        with MessageHandler(logger):
+            yield self
         self._debug = False
         self.removeEventFilter(eventfilter)
         sys.excepthook = _original_excepthook
