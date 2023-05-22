@@ -34,15 +34,15 @@ LOG_MAP = {
 class QtLogger(logging.Handler):
     def emit(self, record: logging.LogRecord):
         match record.level:
-            case 10:
+            case logging.DEBUG:
                 QtCore.qDebug(self.format(record))
-            case 20:
+            case logging.INFO:
                 QtCore.qInfo(self.format(record))
-            case 30:
+            case logging.WARNING:
                 QtCore.qWarning(self.format(record))
-            case 40:
+            case logging.CRITICAL:
                 QtCore.qCritical(self.format(record))
-            case 50:
+            case logging.CRITICAL:
                 QtCore.qFatal(self.format(record))
 
 
