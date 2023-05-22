@@ -6,6 +6,11 @@ import contextlib
 
 
 class BaseEventFilter(core.Object):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if not self.objectName():
+            self.setObjectName(type(self).__name__)
+
     @contextlib.contextmanager
     def applied_to(self, obj):
         obj.installEventFilter(self)
