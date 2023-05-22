@@ -15,14 +15,37 @@ class EventCatcher(core.Object):
 
     def __init__(
         self,
-        include: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
+        include: QtCore.QEvent.Type
+        | core.Event.TypeStr
+        | Container[QtCore.QEvent.Type | core.Event.TypeStr]
+        | None = None,
         exclude: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
         do_filter: bool | Callable[[QtCore.QEvent], bool] = False,
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self.include = [include] if isinstance(include, QtCore.QEvent.Type) else include
-        self.exclude = [exclude] if isinstance(exclude, QtCore.QEvent.Type) else exclude
+        match include:
+            case list():
+                self.include = [
+                    core.event.TYPE[i] if isinstance(i, str) else i for i in include
+                ]
+            case str():
+                self.include = [core.event.TYPE[include]]
+            case QtCore.QEvent.Type:
+                self.include = [include]
+            case None:
+                self.include = None
+        match exclude:
+            case list():
+                self.exclude = [
+                    core.event.TYPE[i] if isinstance(i, str) else i for i in exclude
+                ]
+            case str():
+                self.exclude = [core.event.TYPE[exclude]]
+            case QtCore.QEvent.Type:
+                self.exclude = [exclude]
+            case None:
+                self.exclude = None
         self.do_filter = do_filter
 
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
