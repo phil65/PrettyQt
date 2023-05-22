@@ -20,7 +20,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
         self.data_role = data_role
 
     def paint(self, painter, option, index):
-        value = self._data_for_index(self.data_role)
+        value = self._data_for_index(index, self.data_role)
         if not self.is_supported_type(value):
             option = widgets.StyleOptionViewItem(option)
             option.state &= ~QtWidgets.QStyle.StateFlag.State_Enabled
@@ -31,20 +31,16 @@ class VariantDelegate(widgets.StyledItemDelegate):
         super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
-        original_value = self._data_for_index(self.data_role)
+        original_value = self._data_for_index(index, self.data_role)
         if not self.is_supported_type(original_value):
             return None
         match original_value:
             case bool():
                 widget = widgets.CheckBox(parent=parent)
             case enum.Flag():
-                widget = custom_widgets.EnumFlagWidget(
-                    parent=parent, enum_class=original_value.__class__
-                )
+                widget = custom_widgets.EnumFlagWidget(parent=parent)
             case enum.Enum():
-                widget = custom_widgets.EnumComboBox(
-                    parent=parent, enum_class=original_value.__class__
-                )
+                widget = custom_widgets.EnumComboBox(parent=parent)
             case int():
                 widget = widgets.SpinBox(parent=parent)
             case float():
@@ -88,7 +84,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
     def setEditorData(self, editor, index):
         if not editor:
             return
-        value = self._data_for_index(self.data_role)
+        value = self._data_for_index(index, self.data_role)
         editor.set_value(value)
 
     def setModelData(self, editor, model, index):

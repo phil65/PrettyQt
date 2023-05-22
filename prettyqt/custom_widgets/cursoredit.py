@@ -9,7 +9,7 @@ class CursorEdit(custom_widgets.EnumComboBox):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.set_enum_class(QtCore.Qt.CursorShape)
+        self._set_enum_class(QtCore.Qt.CursorShape)
         self.currentIndexChanged.connect(self._on_value_change)
 
     def _on_value_change(self):

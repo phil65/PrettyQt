@@ -23,6 +23,7 @@ class EnumComboBox(widgets.ComboBox):
     """
 
     # current_enum_changed = core.Signal(object)
+    value_changed = core.Signal(enum.Enum)
 
     def __init__(self, *args, **kwargs):
         self._enum_class = None
@@ -39,9 +40,12 @@ class EnumComboBox(widgets.ComboBox):
     def is_none_allowed(self) -> bool:
         return self._allow_none
 
-    def set_enum_class(self, enum: enum.EnumMeta | None):
+    def _set_enum_class(self, enum: enum.EnumMeta | None):
         """Set enum class from which members value should be selected."""
+        if enum == self._enum_class:
+            return None
         self._enum_class = enum
+        super().clear()
         if self._allow_none and enum is not None:
             super().addItem(NONE_STRING)
         items = [i.name.replace("_", " ") for i in self._enum_class.__members__.values()]
@@ -72,8 +76,7 @@ class EnumComboBox(widgets.ComboBox):
 
     def set_value(self, value: EnumType | None) -> None:
         """Set value with Enum."""
-        if self._enum_class is None:
-            raise RuntimeError("Uninitialized enum class. Use `set_enum_class` first.")
+        self._set_enum_class(value.__class__)
         if value is None and self._allow_none:
             self.setCurrentIndex(0)
             return
@@ -105,7 +108,7 @@ class EnumComboBox(widgets.ComboBox):
 
     allowNone = core.Property(bool, is_none_allowed, set_allow_none)
     enumValue = core.Property(enum.Enum, get_value, set_value, user=True)
-    enumClass = core.Property(type(enum.Enum), get_enum_class, set_enum_class)
+    # enumClass = core.Property(type(enum.Enum), get_enum_class, set_enum_class)
 
 
 if __name__ == "__main__":

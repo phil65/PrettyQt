@@ -21,9 +21,16 @@ class EnumFlagWidget(widgets.ToolButton):
         self.set_text(" | ".join(i.name for i in self.get_value()))
         self.value_changed.emit(self.get_value())
 
-    def set_enum_class(self, enum: enum.EnumMeta | None):
+    def clear(self):
+        self._action_map = {}
+        self.button_menu.clear()
+
+    def _set_enum_class(self, enum: enum.EnumMeta | None):
         """Set enum class from which members value should be selected."""
+        if enum == self._enum_class:
+            return None
         self._enum_class = enum
+        self.clear()
         for i in self._enum_class.__members__.values():
             action = gui.Action()
             action.set_text(i.name.replace("_", " "))
@@ -48,8 +55,7 @@ class EnumFlagWidget(widgets.ToolButton):
 
     def set_value(self, value: enum.Flag) -> None:
         """Set value with Enum."""
-        if self._enum_class is None:
-            raise RuntimeError("Uninitialized enum class. Use `set_enum_class` first.")
+        self._set_enum_class(value.__class__)
         if not isinstance(value, self._enum_class):
             raise TypeError(
                 "setValue(self, Enum): argument 1 has unexpected type "
@@ -59,8 +65,8 @@ class EnumFlagWidget(widgets.ToolButton):
             self._action_map[i].setChecked(True)
         self.set_text(" | ".join(i.name for i in value))
 
-    enumValue = core.Property(enum.Flag, get_value, set_value, user=True)
-    enumClass = core.Property(type(enum.Flag), get_enum_class, set_enum_class)
+    value = core.Property(enum.Flag, get_value, set_value, user=True)
+    # enumClass = core.Property(type(enum.Flag), get_enum_class, set_enum_class)
 
 
 if __name__ == "__main__":

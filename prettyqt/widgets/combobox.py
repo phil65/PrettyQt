@@ -54,7 +54,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.currentIndexChanged.connect(self.index_changed)
+        self.currentIndexChanged.connect(self._index_changed)
 
     def _get_map(self):
         maps = super()._get_map()
@@ -103,7 +103,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
     def __len__(self) -> int:
         return self.count()
 
-    def index_changed(self, index: int):
+    def _index_changed(self, index: int):
         # data = self.itemData(index)
         data = self.get_value()
         self.value_changed.emit(data)
