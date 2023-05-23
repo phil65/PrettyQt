@@ -74,7 +74,17 @@ DRAG_DROP_MODE = bidict(
     internal_move=QtWidgets.QAbstractItemView.DragDropMode.InternalMove,
 )
 
-DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal"]
+DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal_move"]
+
+
+DROP_INDICATOR_POSITION = bidict(
+    on_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.OnItem,
+    above_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.AboveItem,
+    below_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.BelowItem,
+    on_viewport=QtWidgets.QAbstractItemView.DropIndicatorPosition.OnViewport,
+)
+
+DropIndicatorPositionStr = Literal["on_item", "above_item", "below_item", "on_viewport"]
 
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
@@ -319,6 +329,14 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             selection behaviour
         """
         return SELECTION_BEHAVIOR.inverse[self.selectionBehavior()]
+
+    def get_drop_indicator_position(self) -> DropIndicatorPositionStr:
+        """Return position of the drop indicator in relation to the closest item.
+
+        Returns:
+            drop indicator position
+        """
+        return DROP_INDICATOR_POSITION.inverse[self.dropIndicatorPosition()]
 
     def set_drag_drop_mode(self, mode: DragDropModeStr):
         """Set drag-drop mode for given item view.
