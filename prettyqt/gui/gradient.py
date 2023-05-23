@@ -154,6 +154,16 @@ class GradientMixin:
             gradient.setColorAt(i / len(gui.palette.ROLE), color)
         return gradient
 
+    def change_brightness(self, factor: float):
+        # still need to streamline changing brightness across the framework...
+        # color.lighter returns a lighter color when arg is > 100 (same for darker)
+        factor = int(factor * 100)
+        for pos, color in grad.stops():
+            if factor > 0:
+                self.setColorAt(pos, color.lighter(factor))
+            else:
+                self.setColorAt(pos, color.darker(-factor))
+
 
 class Gradient(GradientMixin, prettyprinter.PrettyPrinter, QtGui.QGradient):
     pass
