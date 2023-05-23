@@ -8,9 +8,18 @@ class SignalMapper(core.ObjectMixin, QtCore.QSignalMapper):
     def __getitem__(self, index: int | str | QtCore.QObject) -> QtCore.QObject:
         return self.mapping(index)
 
+    def __delitem__(self, index: QtCore.QObject):
+        return self.removeMappings(index)
+
     def __setitem__(self, index: QtCore.QObject, value: int | str | QtCore.QObject):
         self.setMapping(index, value)
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    widget = widgets.Widget()
     mapper = SignalMapper()
+    mapper[widget] = 1
+    del mapper[widget]
