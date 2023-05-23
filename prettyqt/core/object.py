@@ -13,7 +13,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes, helpers
+from prettyqt.utils import datatypes, get_repr, helpers
 
 
 if TYPE_CHECKING:
@@ -58,8 +58,8 @@ class ObjectMixin:
         """
         return {}
 
-    # def __repr__(self):  # we already monkeypatch QObject
-    #     return get_repr(self, self.objectName())
+    def __repr__(self):  # we already monkeypatch QObject
+        return get_repr(self, self.objectName())
 
     def __setstate__(self, state):
         self.set_properties(state)

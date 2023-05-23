@@ -13,7 +13,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, colors, datatypes, get_repr, prettyprinter
+from prettyqt.utils import InvalidParamError, colors, datatypes, prettyprinter
 
 
 if TYPE_CHECKING:
@@ -37,9 +37,6 @@ class WidgetMixin(core.ObjectMixin):
             "windowModality": constants.WINDOW_MODALITY,
         }
         return maps
-
-    def __repr__(self) -> str:
-        return get_repr(self)
 
     def add_shortcut(
         self,
