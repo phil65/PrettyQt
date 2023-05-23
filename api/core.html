@@ -3770,6 +3770,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.core.object.ObjectMixin.__repr__" class="md-nav__link">
+    __repr__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.core.object.ObjectMixin.__setstate__" class="md-nav__link">
     __setstate__()
   </a>
@@ -10140,6 +10147,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#prettyqt.core.object.ObjectMixin.__repr__" class="md-nav__link">
+    __repr__()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#prettyqt.core.object.ObjectMixin.__setstate__" class="md-nav__link">
     __setstate__()
   </a>
@@ -13472,9 +13486,9 @@
 
         <details class="quote">
           <summary>Source code in <code>prettyqt\core\abstractitemmodel.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-230">230</a></span>
-<span class="normal"><a href="#__codelineno-0-231">231</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-230"><a id="__codelineno-0-230" name="__codelineno-0-230"></a><span class="k">class</span> <span class="nc">AbstractItemModel</span><span class="p">(</span><span class="n">AbstractItemModelMixin</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">):</span>
-</span><span id="__span-0-231"><a id="__codelineno-0-231" name="__codelineno-0-231"></a>    <span class="k">pass</span>
+          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-236">236</a></span>
+<span class="normal"><a href="#__codelineno-0-237">237</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-236"><a id="__codelineno-0-236" name="__codelineno-0-236"></a><span class="k">class</span> <span class="nc">AbstractItemModel</span><span class="p">(</span><span class="n">AbstractItemModelMixin</span><span class="p">,</span> <span class="n">QtCore</span><span class="o">.</span><span class="n">QAbstractItemModel</span><span class="p">):</span>
+</span><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a>    <span class="k">pass</span>
 </span></code></pre></div></td></tr></table></div>
         </details>
 
@@ -13703,7 +13717,13 @@
 <span class="normal"><a href="#__codelineno-0-224">224</a></span>
 <span class="normal"><a href="#__codelineno-0-225">225</a></span>
 <span class="normal"><a href="#__codelineno-0-226">226</a></span>
-<span class="normal"><a href="#__codelineno-0-227">227</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="k">class</span> <span class="nc">AbstractItemModelMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-227">227</a></span>
+<span class="normal"><a href="#__codelineno-0-228">228</a></span>
+<span class="normal"><a href="#__codelineno-0-229">229</a></span>
+<span class="normal"><a href="#__codelineno-0-230">230</a></span>
+<span class="normal"><a href="#__codelineno-0-231">231</a></span>
+<span class="normal"><a href="#__codelineno-0-232">232</a></span>
+<span class="normal"><a href="#__codelineno-0-233">233</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-25"><a id="__codelineno-0-25" name="__codelineno-0-25"></a><span class="k">class</span> <span class="nc">AbstractItemModelMixin</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">ObjectMixin</span><span class="p">):</span>
 </span><span id="__span-0-26"><a id="__codelineno-0-26" name="__codelineno-0-26"></a>    <span class="n">DEFAULT_FLAGS</span> <span class="o">=</span> <span class="p">(</span>
 </span><span id="__span-0-27"><a id="__codelineno-0-27" name="__codelineno-0-27"></a>        <span class="n">constants</span><span class="o">.</span><span class="n">DRAG_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span>
 </span><span id="__span-0-28"><a id="__codelineno-0-28" name="__codelineno-0-28"></a>    <span class="p">)</span>
@@ -13887,25 +13907,31 @@
 </span><span id="__span-0-206"><a id="__codelineno-0-206" name="__codelineno-0-206"></a>    <span class="k">def</span> <span class="nf">get_role_names</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 </span><span id="__span-0-207"><a id="__codelineno-0-207" name="__codelineno-0-207"></a>        <span class="k">return</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">v</span><span class="o">.</span><span class="n">data</span><span class="p">()</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">roleNames</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
 </span><span id="__span-0-208"><a id="__codelineno-0-208" name="__codelineno-0-208"></a>
-</span><span id="__span-0-209"><a id="__codelineno-0-209" name="__codelineno-0-209"></a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">:</span>
-</span><span id="__span-0-210"><a id="__codelineno-0-210" name="__codelineno-0-210"></a>        <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">()</span>
-</span><span id="__span-0-211"><a id="__codelineno-0-211" name="__codelineno-0-211"></a>        <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-212"><a id="__codelineno-0-212" name="__codelineno-0-212"></a>        <span class="k">return</span> <span class="n">proxy</span>
-</span><span id="__span-0-213"><a id="__codelineno-0-213" name="__codelineno-0-213"></a>
-</span><span id="__span-0-214"><a id="__codelineno-0-214" name="__codelineno-0-214"></a>    <span class="k">def</span> <span class="nf">get_search_proxy</span><span class="p">(</span>
-</span><span id="__span-0-215"><a id="__codelineno-0-215" name="__codelineno-0-215"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">search_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-</span><span id="__span-0-216"><a id="__codelineno-0-216" name="__codelineno-0-216"></a>    <span class="p">):</span>
-</span><span id="__span-0-217"><a id="__codelineno-0-217" name="__codelineno-0-217"></a>        <span class="k">match</span> <span class="n">search_type</span><span class="p">:</span>
-</span><span id="__span-0-218"><a id="__codelineno-0-218" name="__codelineno-0-218"></a>            <span class="k">case</span> <span class="s2">&quot;regular&quot;</span><span class="p">:</span>
-</span><span id="__span-0-219"><a id="__codelineno-0-219" name="__codelineno-0-219"></a>                <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-220"><a id="__codelineno-0-220" name="__codelineno-0-220"></a>            <span class="k">case</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">:</span>
-</span><span id="__span-0-221"><a id="__codelineno-0-221" name="__codelineno-0-221"></a>                <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">custom_models</span>
-</span><span id="__span-0-222"><a id="__codelineno-0-222" name="__codelineno-0-222"></a>
-</span><span id="__span-0-223"><a id="__codelineno-0-223" name="__codelineno-0-223"></a>                <span class="n">proxy</span> <span class="o">=</span> <span class="n">custom_models</span><span class="o">.</span><span class="n">FuzzyFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-224"><a id="__codelineno-0-224" name="__codelineno-0-224"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-</span><span id="__span-0-225"><a id="__codelineno-0-225" name="__codelineno-0-225"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">search_type</span><span class="p">)</span>
-</span><span id="__span-0-226"><a id="__codelineno-0-226" name="__codelineno-0-226"></a>        <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-227"><a id="__codelineno-0-227" name="__codelineno-0-227"></a>        <span class="k">return</span> <span class="n">proxy</span>
+</span><span id="__span-0-209"><a id="__codelineno-0-209" name="__codelineno-0-209"></a>    <span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span>
+</span><span id="__span-0-210"><a id="__codelineno-0-210" name="__codelineno-0-210"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-211"><a id="__codelineno-0-211" name="__codelineno-0-211"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">:</span>
+</span><span id="__span-0-212"><a id="__codelineno-0-212" name="__codelineno-0-212"></a>        <span class="c1"># PySide6 needs widget parent here</span>
+</span><span id="__span-0-213"><a id="__codelineno-0-213" name="__codelineno-0-213"></a>        <span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>
+</span><span id="__span-0-214"><a id="__codelineno-0-214" name="__codelineno-0-214"></a>        <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-215"><a id="__codelineno-0-215" name="__codelineno-0-215"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;needs parent!&quot;</span><span class="p">)</span>
+</span><span id="__span-0-216"><a id="__codelineno-0-216" name="__codelineno-0-216"></a>        <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+</span><span id="__span-0-217"><a id="__codelineno-0-217" name="__codelineno-0-217"></a>        <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-218"><a id="__codelineno-0-218" name="__codelineno-0-218"></a>        <span class="k">return</span> <span class="n">proxy</span>
+</span><span id="__span-0-219"><a id="__codelineno-0-219" name="__codelineno-0-219"></a>
+</span><span id="__span-0-220"><a id="__codelineno-0-220" name="__codelineno-0-220"></a>    <span class="k">def</span> <span class="nf">get_search_proxy</span><span class="p">(</span>
+</span><span id="__span-0-221"><a id="__codelineno-0-221" name="__codelineno-0-221"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">search_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+</span><span id="__span-0-222"><a id="__codelineno-0-222" name="__codelineno-0-222"></a>    <span class="p">):</span>
+</span><span id="__span-0-223"><a id="__codelineno-0-223" name="__codelineno-0-223"></a>        <span class="k">match</span> <span class="n">search_type</span><span class="p">:</span>
+</span><span id="__span-0-224"><a id="__codelineno-0-224" name="__codelineno-0-224"></a>            <span class="k">case</span> <span class="s2">&quot;regular&quot;</span><span class="p">:</span>
+</span><span id="__span-0-225"><a id="__codelineno-0-225" name="__codelineno-0-225"></a>                <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-226"><a id="__codelineno-0-226" name="__codelineno-0-226"></a>            <span class="k">case</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">:</span>
+</span><span id="__span-0-227"><a id="__codelineno-0-227" name="__codelineno-0-227"></a>                <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">custom_models</span>
+</span><span id="__span-0-228"><a id="__codelineno-0-228" name="__codelineno-0-228"></a>
+</span><span id="__span-0-229"><a id="__codelineno-0-229" name="__codelineno-0-229"></a>                <span class="n">proxy</span> <span class="o">=</span> <span class="n">custom_models</span><span class="o">.</span><span class="n">FuzzyFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-230"><a id="__codelineno-0-230" name="__codelineno-0-230"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+</span><span id="__span-0-231"><a id="__codelineno-0-231" name="__codelineno-0-231"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">search_type</span><span class="p">)</span>
+</span><span id="__span-0-232"><a id="__codelineno-0-232" name="__codelineno-0-232"></a>        <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-233"><a id="__codelineno-0-233" name="__codelineno-0-233"></a>        <span class="k">return</span> <span class="n">proxy</span>
 </span></code></pre></div></td></tr></table></div>
         </details>
 
@@ -13927,8 +13953,8 @@
 <code class="highlight language-python"><span class="n">DEFAULT_FLAGS</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">DRAG_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -14308,33 +14334,33 @@ emitted at end: layoutChanged</p>
 
       <details class="quote">
         <summary>Source code in <code>prettyqt\core\abstractitemmodel.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-214">214</a></span>
-<span class="normal"><a href="#__codelineno-0-215">215</a></span>
-<span class="normal"><a href="#__codelineno-0-216">216</a></span>
-<span class="normal"><a href="#__codelineno-0-217">217</a></span>
-<span class="normal"><a href="#__codelineno-0-218">218</a></span>
-<span class="normal"><a href="#__codelineno-0-219">219</a></span>
-<span class="normal"><a href="#__codelineno-0-220">220</a></span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-220">220</a></span>
 <span class="normal"><a href="#__codelineno-0-221">221</a></span>
 <span class="normal"><a href="#__codelineno-0-222">222</a></span>
 <span class="normal"><a href="#__codelineno-0-223">223</a></span>
 <span class="normal"><a href="#__codelineno-0-224">224</a></span>
 <span class="normal"><a href="#__codelineno-0-225">225</a></span>
 <span class="normal"><a href="#__codelineno-0-226">226</a></span>
-<span class="normal"><a href="#__codelineno-0-227">227</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-214"><a id="__codelineno-0-214" name="__codelineno-0-214"></a><span class="k">def</span> <span class="nf">get_search_proxy</span><span class="p">(</span>
-</span><span id="__span-0-215"><a id="__codelineno-0-215" name="__codelineno-0-215"></a>    <span class="bp">self</span><span class="p">,</span> <span class="n">search_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
-</span><span id="__span-0-216"><a id="__codelineno-0-216" name="__codelineno-0-216"></a><span class="p">):</span>
-</span><span id="__span-0-217"><a id="__codelineno-0-217" name="__codelineno-0-217"></a>    <span class="k">match</span> <span class="n">search_type</span><span class="p">:</span>
-</span><span id="__span-0-218"><a id="__codelineno-0-218" name="__codelineno-0-218"></a>        <span class="k">case</span> <span class="s2">&quot;regular&quot;</span><span class="p">:</span>
-</span><span id="__span-0-219"><a id="__codelineno-0-219" name="__codelineno-0-219"></a>            <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-220"><a id="__codelineno-0-220" name="__codelineno-0-220"></a>        <span class="k">case</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">:</span>
-</span><span id="__span-0-221"><a id="__codelineno-0-221" name="__codelineno-0-221"></a>            <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">custom_models</span>
-</span><span id="__span-0-222"><a id="__codelineno-0-222" name="__codelineno-0-222"></a>
-</span><span id="__span-0-223"><a id="__codelineno-0-223" name="__codelineno-0-223"></a>            <span class="n">proxy</span> <span class="o">=</span> <span class="n">custom_models</span><span class="o">.</span><span class="n">FuzzyFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</span><span id="__span-0-224"><a id="__codelineno-0-224" name="__codelineno-0-224"></a>        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
-</span><span id="__span-0-225"><a id="__codelineno-0-225" name="__codelineno-0-225"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">search_type</span><span class="p">)</span>
-</span><span id="__span-0-226"><a id="__codelineno-0-226" name="__codelineno-0-226"></a>    <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-227"><a id="__codelineno-0-227" name="__codelineno-0-227"></a>    <span class="k">return</span> <span class="n">proxy</span>
+<span class="normal"><a href="#__codelineno-0-227">227</a></span>
+<span class="normal"><a href="#__codelineno-0-228">228</a></span>
+<span class="normal"><a href="#__codelineno-0-229">229</a></span>
+<span class="normal"><a href="#__codelineno-0-230">230</a></span>
+<span class="normal"><a href="#__codelineno-0-231">231</a></span>
+<span class="normal"><a href="#__codelineno-0-232">232</a></span>
+<span class="normal"><a href="#__codelineno-0-233">233</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-220"><a id="__codelineno-0-220" name="__codelineno-0-220"></a><span class="k">def</span> <span class="nf">get_search_proxy</span><span class="p">(</span>
+</span><span id="__span-0-221"><a id="__codelineno-0-221" name="__codelineno-0-221"></a>    <span class="bp">self</span><span class="p">,</span> <span class="n">search_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;regular&quot;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span>
+</span><span id="__span-0-222"><a id="__codelineno-0-222" name="__codelineno-0-222"></a><span class="p">):</span>
+</span><span id="__span-0-223"><a id="__codelineno-0-223" name="__codelineno-0-223"></a>    <span class="k">match</span> <span class="n">search_type</span><span class="p">:</span>
+</span><span id="__span-0-224"><a id="__codelineno-0-224" name="__codelineno-0-224"></a>        <span class="k">case</span> <span class="s2">&quot;regular&quot;</span><span class="p">:</span>
+</span><span id="__span-0-225"><a id="__codelineno-0-225" name="__codelineno-0-225"></a>            <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">SortFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-226"><a id="__codelineno-0-226" name="__codelineno-0-226"></a>        <span class="k">case</span> <span class="s2">&quot;fuzzy&quot;</span><span class="p">:</span>
+</span><span id="__span-0-227"><a id="__codelineno-0-227" name="__codelineno-0-227"></a>            <span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">custom_models</span>
+</span><span id="__span-0-228"><a id="__codelineno-0-228" name="__codelineno-0-228"></a>
+</span><span id="__span-0-229"><a id="__codelineno-0-229" name="__codelineno-0-229"></a>            <span class="n">proxy</span> <span class="o">=</span> <span class="n">custom_models</span><span class="o">.</span><span class="n">FuzzyFilterProxyModel</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+</span><span id="__span-0-230"><a id="__codelineno-0-230" name="__codelineno-0-230"></a>        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+</span><span id="__span-0-231"><a id="__codelineno-0-231" name="__codelineno-0-231"></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">search_type</span><span class="p">)</span>
+</span><span id="__span-0-232"><a id="__codelineno-0-232" name="__codelineno-0-232"></a>    <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-233"><a id="__codelineno-0-233" name="__codelineno-0-233"></a>    <span class="k">return</span> <span class="n">proxy</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -14636,7 +14662,7 @@ emitted at end: endResetModel</p>
 
 
 <h3 id="prettyqt.core.abstractitemmodel.AbstractItemModelMixin.transpose" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">transpose</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span></code>
+<code class="highlight language-python"><span class="n">transpose</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span></code>
 
 </h3>
 
@@ -14648,10 +14674,22 @@ emitted at end: endResetModel</p>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-209">209</a></span>
 <span class="normal"><a href="#__codelineno-0-210">210</a></span>
 <span class="normal"><a href="#__codelineno-0-211">211</a></span>
-<span class="normal"><a href="#__codelineno-0-212">212</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-209"><a id="__codelineno-0-209" name="__codelineno-0-209"></a><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">:</span>
-</span><span id="__span-0-210"><a id="__codelineno-0-210" name="__codelineno-0-210"></a>    <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">()</span>
-</span><span id="__span-0-211"><a id="__codelineno-0-211" name="__codelineno-0-211"></a>    <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-</span><span id="__span-0-212"><a id="__codelineno-0-212" name="__codelineno-0-212"></a>    <span class="k">return</span> <span class="n">proxy</span>
+<span class="normal"><a href="#__codelineno-0-212">212</a></span>
+<span class="normal"><a href="#__codelineno-0-213">213</a></span>
+<span class="normal"><a href="#__codelineno-0-214">214</a></span>
+<span class="normal"><a href="#__codelineno-0-215">215</a></span>
+<span class="normal"><a href="#__codelineno-0-216">216</a></span>
+<span class="normal"><a href="#__codelineno-0-217">217</a></span>
+<span class="normal"><a href="#__codelineno-0-218">218</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-209"><a id="__codelineno-0-209" name="__codelineno-0-209"></a><span class="k">def</span> <span class="nf">transpose</span><span class="p">(</span>
+</span><span id="__span-0-210"><a id="__codelineno-0-210" name="__codelineno-0-210"></a>    <span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-211"><a id="__codelineno-0-211" name="__codelineno-0-211"></a><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">:</span>
+</span><span id="__span-0-212"><a id="__codelineno-0-212" name="__codelineno-0-212"></a>    <span class="c1"># PySide6 needs widget parent here</span>
+</span><span id="__span-0-213"><a id="__codelineno-0-213" name="__codelineno-0-213"></a>    <span class="n">parent</span> <span class="o">=</span> <span class="n">parent</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="p">()</span>
+</span><span id="__span-0-214"><a id="__codelineno-0-214" name="__codelineno-0-214"></a>    <span class="k">if</span> <span class="n">parent</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-215"><a id="__codelineno-0-215" name="__codelineno-0-215"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;needs parent!&quot;</span><span class="p">)</span>
+</span><span id="__span-0-216"><a id="__codelineno-0-216" name="__codelineno-0-216"></a>    <span class="n">proxy</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">TransposeProxyModel</span><span class="p">(</span><span class="n">parent</span><span class="o">=</span><span class="n">parent</span><span class="p">)</span>
+</span><span id="__span-0-217"><a id="__codelineno-0-217" name="__codelineno-0-217"></a>    <span class="n">proxy</span><span class="o">.</span><span class="n">setSourceModel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+</span><span id="__span-0-218"><a id="__codelineno-0-218" name="__codelineno-0-218"></a>    <span class="k">return</span> <span class="n">proxy</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -15107,8 +15145,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">DEFAULT_FLAGS</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">DRAG_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_ENABLED</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">IS_SELECTABLE</span> <span class="o">|</span> <span class="n">constants</span><span class="o">.</span><span class="n">NO_CHILDREN</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -16993,8 +17031,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">translators</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">core</span><span class="o">.</span><span class="n">Translator</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -18581,8 +18619,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_year&#39;</span><span class="p">,</span> <span class="s1">&#39;_month&#39;</span><span class="p">,</span> <span class="s1">&#39;_day&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -19907,8 +19945,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_absolutePath&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -22023,8 +22061,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_absoluteFilePath&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -24658,8 +24696,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_x1&#39;</span><span class="p">,</span> <span class="s1">&#39;_y1&#39;</span><span class="p">,</span> <span class="s1">&#39;_x2&#39;</span><span class="p">,</span> <span class="s1">&#39;_y2&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -25175,8 +25213,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_x1&#39;</span><span class="p">,</span> <span class="s1">&#39;_y1&#39;</span><span class="p">,</span> <span class="s1">&#39;_x2&#39;</span><span class="p">,</span> <span class="s1">&#39;_y2&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -26747,8 +26785,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_left&#39;</span><span class="p">,</span> <span class="s1">&#39;_top&#39;</span><span class="p">,</span> <span class="s1">&#39;_right&#39;</span><span class="p">,</span> <span class="s1">&#39;_bottom&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -26972,8 +27010,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_left&#39;</span><span class="p">,</span> <span class="s1">&#39;_top&#39;</span><span class="p">,</span> <span class="s1">&#39;_right&#39;</span><span class="p">,</span> <span class="s1">&#39;_bottom&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -29233,7 +29271,7 @@ emitted at end: endResetModel</p>
 </span><span id="__span-0-130"><a id="__codelineno-0-130" name="__codelineno-0-130"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_name</span><span class="p">())</span>
 </span><span id="__span-0-131"><a id="__codelineno-0-131" name="__codelineno-0-131"></a>
 </span><span id="__span-0-132"><a id="__codelineno-0-132" name="__codelineno-0-132"></a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-133"><a id="__codelineno-0-133" name="__codelineno-0-133"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+</span><span id="__span-0-133"><a id="__codelineno-0-133" name="__codelineno-0-133"></a>        <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">else</span> <span class="n">name</span>
 </span><span id="__span-0-134"><a id="__codelineno-0-134" name="__codelineno-0-134"></a>
 </span><span id="__span-0-135"><a id="__codelineno-0-135" name="__codelineno-0-135"></a>    <span class="k">def</span> <span class="nf">get_type_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 </span><span id="__span-0-136"><a id="__codelineno-0-136" name="__codelineno-0-136"></a>        <span class="k">return</span> <span class="n">TYPE</span><span class="o">.</span><span class="n">inverse</span><span class="p">[</span><span class="n">QtCore</span><span class="o">.</span><span class="n">QMetaType</span><span class="o">.</span><span class="n">Type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">())]</span>
@@ -29470,7 +29508,7 @@ emitted at end: endResetModel</p>
         <summary>Source code in <code>prettyqt\core\metatype.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-132">132</a></span>
 <span class="normal"><a href="#__codelineno-0-133">133</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-132"><a id="__codelineno-0-132" name="__codelineno-0-132"></a><span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-133"><a id="__codelineno-0-133" name="__codelineno-0-133"></a>    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">()</span>
+</span><span id="__span-0-133"><a id="__codelineno-0-133" name="__codelineno-0-133"></a>    <span class="k">return</span> <span class="n">name</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">name</span> <span class="o">:=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">(),</span> <span class="nb">bytes</span><span class="p">)</span> <span class="k">else</span> <span class="n">name</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -31182,8 +31220,8 @@ emitted at end: endResetModel</p>
 </span><span id="__span-0-58"><a id="__codelineno-0-58" name="__codelineno-0-58"></a><span class="sd">        &quot;&quot;&quot;</span>
 </span><span id="__span-0-59"><a id="__codelineno-0-59" name="__codelineno-0-59"></a>        <span class="k">return</span> <span class="p">{}</span>
 </span><span id="__span-0-60"><a id="__codelineno-0-60" name="__codelineno-0-60"></a>
-</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="c1"># def __repr__(self):  # we already monkeypatch QObject</span>
-</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="c1">#     return get_repr(self, self.objectName())</span>
+</span><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a>    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># we already monkeypatch QObject</span>
+</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a>        <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectName</span><span class="p">())</span>
 </span><span id="__span-0-63"><a id="__codelineno-0-63" name="__codelineno-0-63"></a>
 </span><span id="__span-0-64"><a id="__codelineno-0-64" name="__codelineno-0-64"></a>    <span class="k">def</span> <span class="nf">__setstate__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state</span><span class="p">):</span>
 </span><span id="__span-0-65"><a id="__codelineno-0-65" name="__codelineno-0-65"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">set_properties</span><span class="p">(</span><span class="n">state</span><span class="p">)</span>
@@ -31417,8 +31455,8 @@ emitted at end: endResetModel</p>
 <code class="highlight language-python"><span class="n">Properties</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">type</span><span class="p">,</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -31559,6 +31597,29 @@ emitted at end: endResetModel</p>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-70">70</a></span>
 <span class="normal"><a href="#__codelineno-0-71">71</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-70"><a id="__codelineno-0-70" name="__codelineno-0-70"></a><span class="k">def</span> <span class="nf">__reduce__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 </span><span id="__span-0-71"><a id="__codelineno-0-71" name="__codelineno-0-71"></a>    <span class="k">return</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="p">),</span> <span class="p">(),</span> <span class="bp">self</span><span class="o">.</span><span class="n">__getstate__</span><span class="p">()</span>
+</span></code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="prettyqt.core.object.ObjectMixin.__repr__" class="doc doc-heading">
+<code class="highlight language-python"><span class="fm">__repr__</span><span class="p">()</span></code>
+
+</h3>
+
+
+  <div class="doc doc-contents ">
+
+      <details class="quote">
+        <summary>Source code in <code>prettyqt\core\object.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-61">61</a></span>
+<span class="normal"><a href="#__codelineno-0-62">62</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-61"><a id="__codelineno-0-61" name="__codelineno-0-61"></a><span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># we already monkeypatch QObject</span>
+</span><span id="__span-0-62"><a id="__codelineno-0-62" name="__codelineno-0-62"></a>    <span class="k">return</span> <span class="n">get_repr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectName</span><span class="p">())</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -32603,8 +32664,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_type&#39;</span><span class="p">,</span> <span class="s1">&#39;_majorVersion&#39;</span><span class="p">,</span> <span class="s1">&#39;_minorVersion&#39;</span><span class="p">,</span> <span class="s1">&#39;_macroVersion&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -34993,8 +35054,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_pattern&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -37339,8 +37400,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_width&#39;</span><span class="p">,</span> <span class="s1">&#39;_height&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -37618,8 +37679,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_width&#39;</span><span class="p">,</span> <span class="s1">&#39;_height&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -38179,8 +38240,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">invalidated</span> <span class="o">=</span> <span class="n">core</span><span class="o">.</span><span class="n">Signal</span><span class="p">()</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -40986,8 +41047,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_hour&#39;</span><span class="p">,</span> <span class="s1">&#39;_minute&#39;</span><span class="p">,</span> <span class="s1">&#39;_second&#39;</span><span class="p">,</span> <span class="s1">&#39;_msec&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -42519,8 +42580,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_toString&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
@@ -44164,8 +44225,8 @@ needs to return True or False to indicate whether the Event should be filtered.<
 <code class="highlight language-python"><span class="n">__match_args__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;_majorVersion&#39;</span><span class="p">,</span> <span class="s1">&#39;_minorVersion&#39;</span><span class="p">,</span> <span class="s1">&#39;_macroVersion&#39;</span><span class="p">)</span></code>
   
   <span class="doc doc-labels">
-      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
       <small class="doc doc-label doc-label-instance-attribute"><code>instance-attribute</code></small>
+      <small class="doc doc-label doc-label-class-attribute"><code>class-attribute</code></small>
   </span>
 
 </h3>
