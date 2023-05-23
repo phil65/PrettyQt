@@ -1337,7 +1337,7 @@ def test_tableview(qtbot):
     widget.set_horizontal_scrollbar_width(12)
     widget.set_vertical_scrollbar_width(12)
     widget.set_edit_triggers(None)
-    widget.set_edit_triggers("edit_key")
+    widget.set_edit_triggers("edit_key_pressed")
     widget.sort_by_column(0)
     with pytest.raises(InvalidParamError):
         widget.set_edit_triggers("test")

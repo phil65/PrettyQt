@@ -13,11 +13,23 @@ logger = logging.getLogger(__name__)
 
 EDIT_TRIGGERS = bidict(
     none=QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers,
-    double_click=QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked,
-    edit_key=QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed,
+    current_changed=QtWidgets.QAbstractItemView.EditTrigger.CurrentChanged,
+    double_clicked=QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked,
+    selected_clicked=QtWidgets.QAbstractItemView.EditTrigger.SelectedClicked,
+    edit_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed,
+    any_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed,
+    all=QtWidgets.QAbstractItemView.EditTrigger.AllEditTriggers,
 )
 
-EditTriggerStr = Literal["none", "double_click", "edit_key"]
+EditTriggerStr = Literal[
+    "none",
+    "current_changed",
+    "double_clicked",
+    "selected_clicked",
+    "edit_key_pressed",
+    "any_key_pressed",
+    "all",
+]
 
 SELECTION_BEHAVIOR = bidict(
     rows=QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows,

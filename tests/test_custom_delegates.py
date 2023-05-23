@@ -12,6 +12,11 @@ def test_buttondelegate(qtbot):
     # widget.currentIndexChanged()
 
 
+def test_checkboxdelegate(qtbot):
+    table = widgets.TableView()
+    widget = custom_delegates.CheckBoxDelegate(parent=table)
+
+
 def test_radiodelegate(qtbot, tablewidget):
     delegate = custom_delegates.RadioDelegate(tablewidget, ["a", "b"])
     tablewidget.show()
@@ -43,6 +48,20 @@ def test_stardelegate(qtbot, tablewidget):
 
 def test_progressbardelegate(qtbot, tablewidget):
     delegate = custom_delegates.ProgressBarDelegate()
+    tablewidget.show()
+    tablewidget.setItemDelegateForColumn(0, delegate)
+    tablewidget.hide()
+
+
+def test_variantdelegate(qtbot, tablewidget):
+    delegate = custom_delegates.VariantDelegate(parent=tablewidget)
+    tablewidget.show()
+    tablewidget.setItemDelegateForColumn(0, delegate)
+    tablewidget.hide()
+
+
+def test_widgetdelegate(qtbot, tablewidget):
+    delegate = custom_delegates.VariantDelegate(parent=tablewidget)
     tablewidget.show()
     tablewidget.setItemDelegateForColumn(0, delegate)
     tablewidget.hide()
