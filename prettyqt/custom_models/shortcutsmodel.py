@@ -37,6 +37,11 @@ COL_AUTOREPEAT = custom_models.ColumnItem(
     checkstate=lambda item: item.autoRepeat(),
     set_checkstate=lambda item, value: item.setAutoRepeat(not item.autoRepeat()),
 )
+COL_PARENT = custom_models.ColumnItem(
+    name="Parent widget",
+    doc="Parent widget",
+    label=lambda item: item.parent().windowTitle() or item.parent().__class__.__name__,
+)
 
 
 COLUMNS = [
@@ -45,6 +50,7 @@ COLUMNS = [
     COL_SHORTCUT,
     COL_CONTEXT,
     COL_AUTOREPEAT,
+    COL_PARENT,
 ]
 
 
