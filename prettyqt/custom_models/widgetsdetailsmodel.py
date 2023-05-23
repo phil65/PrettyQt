@@ -102,7 +102,7 @@ if __name__ == "__main__":
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     items = [widgets.RadioButton(), widgets.RadioButton()]
-    model = WidgetsDetailsModel(items).transpose()
+    model = WidgetsDetailsModel(items, parent=view).transpose()
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)

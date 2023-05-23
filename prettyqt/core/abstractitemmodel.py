@@ -4,7 +4,7 @@ import contextlib
 from typing import Literal
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict
 
 
@@ -206,8 +206,14 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_role_names(self) -> dict[int, str]:
         return {i: v.data().decode() for i, v in self.roleNames().items()}
 
-    def transpose(self) -> core.TransposeProxyModel:
-        proxy = core.TransposeProxyModel()
+    def transpose(
+        self, parent: QtWidgets.QWidget | None = None
+    ) -> core.TransposeProxyModel:
+        # PySide6 needs widget parent here
+        parent = parent or self.parent()
+        if parent is None:
+            raise ValueError("needs parent!")
+        proxy = core.TransposeProxyModel(parent=parent)
         proxy.setSourceModel(self)
         return proxy
 
