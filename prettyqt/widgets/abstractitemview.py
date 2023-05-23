@@ -86,6 +86,26 @@ DROP_INDICATOR_POSITION = bidict(
 
 DropIndicatorPositionStr = Literal["on_item", "above_item", "below_item", "on_viewport"]
 
+STATE = bidict(
+    none=QtWidgets.QAbstractItemView.State.NoState,
+    dragging=QtWidgets.QAbstractItemView.State.DraggingState,
+    drag_selecting=QtWidgets.QAbstractItemView.State.DragSelectingState,
+    editing=QtWidgets.QAbstractItemView.State.EditingState,
+    expanding=QtWidgets.QAbstractItemView.State.ExpandingState,
+    collapsing=QtWidgets.QAbstractItemView.State.CollapsingState,
+    animating=QtWidgets.QAbstractItemView.State.AnimatingState,
+)
+
+StateStr = Literal[
+    "none",
+    "dragging",
+    "drag_selecting",
+    "editing",
+    "expanding",
+    "collapsing",
+    "animating",
+]
+
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     model_changed = core.Signal(QtCore.QAbstractItemModel)
@@ -365,6 +385,27 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             drag-drop mode
         """
         return DRAG_DROP_MODE.inverse[self.dragDropMode()]
+
+    def set_state(self, state: StateStr):
+        """Set state for given item view.
+
+        Args:
+            state: state to use
+
+        Raises:
+            InvalidParamError: state does not exist
+        """
+        if state not in STATE:
+            raise InvalidParamError(state, STATE)
+        self.setState(STATE[state])
+
+    def get_state(self) -> StateStr:
+        """Return current state.
+
+        Returns:
+            state
+        """
+        return STATE.inverse[self.state()]
 
     def set_selection_mode(self, mode: SelectionModeStr | None):
         """Set selection mode for given item view.
