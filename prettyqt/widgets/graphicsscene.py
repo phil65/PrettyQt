@@ -295,7 +295,10 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         painter.restore()
 
     def _get_viewer_zoom(self):
-        transform = self.viewer().transform()
+        viewer = self.viewer()
+        if viewer is None:
+            return 1.0
+        transform = viewer.transform()
         cur_scale = (transform.m11(), transform.m22())
         return float(f"{cur_scale[0] - 1.0:0.2f}")
 
