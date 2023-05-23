@@ -148,7 +148,6 @@ class ErrorMessageBox(widgets.MessageBox):
         else:
             text = str(text_or_exception)
             exc = text_or_exception
-        MBox = widgets.MessageBox
         super().__init__(
             # icon=MBox.Icon.Critical,
             title=title,
@@ -159,9 +158,9 @@ class ErrorMessageBox(widgets.MessageBox):
 
         self._exc = exc
 
-        traceback_button = self.button(MBox.StandardButton.Help)
+        traceback_button = self.button(widgets.MessageBox.StandardButton.Help)
         traceback_button.setText("Show trackback")
-        close_button = self.button(MBox.StandardButton.Close)
+        close_button = self.button(widgets.MessageBox.StandardButton.Close)
         close_button.setText("Quit application")
 
     def exec(self):
@@ -200,8 +199,8 @@ class ErrorMessageBox(widgets.MessageBox):
     @classmethod
     def _excepthook(cls, exc_type: type[Exception], exc_value: Exception, exc_traceback):
         """Exception hook used during application execution."""
-        ErrorMessageBox.raise_(exc_value, parent=None)
-        return None
+        logger.exception(exc_value)
+        return ErrorMessageBox.raise_(exc_value, parent=None)
 
 
 # Following functions are mostly copied from napari (BSD 3-Clause).
