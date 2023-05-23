@@ -174,6 +174,10 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
         self._next_container = Class.create(self._layout, *args, **kwargs)
         return self
 
+    def clear(self):
+        for i in reversed(range(self.count())):
+            self.takeAt(i)
+
     def get_children(self) -> list[QtWidgets.QWidget | QtWidgets.QLayout]:
         return list(self)
 
@@ -242,9 +246,6 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
             return self.setAlignment(item, constants.ALIGNMENTS[alignment])
         else:
             return self.setAlignment(constants.ALIGNMENTS[alignment])
-
-    def add_widget(self, widget: QtWidgets.QWidget, *args, **kwargs):
-        self.addWidget(widget, *args, **kwargs)
 
     # def add(self, *items: QtWidgets.QWidget | QtWidgets.QLayout):
     #     for i in items:
