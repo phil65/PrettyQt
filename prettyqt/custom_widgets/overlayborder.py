@@ -11,6 +11,7 @@ class BaseOverlayWidget(widgets.Widget):
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TransparentForMouseEvents)
+        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_NoSystemBackground)
         # self.set_flags(tool=True)
         self._do_resize()
         self._border_width = 4
@@ -34,6 +35,8 @@ class BaseOverlayWidget(widgets.Widget):
         match event.type():
             case QtCore.QEvent.Type.Resize:
                 self._do_resize()
+            # case QtCore.QEvent.Type.ChildAdded:
+            #     self._do_resize()
         return False
 
     def _do_resize(self):

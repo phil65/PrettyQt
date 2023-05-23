@@ -286,10 +286,6 @@ def test_logtextedit(qtbot):
     textedit.hide()
 
 
-def test_markdownwidget(qtbot):
-    custom_widgets.MarkdownWindow()
-
-
 def test_popupinfo(qtbot):
     popup = custom_widgets.PopupInfo()
     qtbot.addWidget(popup)
