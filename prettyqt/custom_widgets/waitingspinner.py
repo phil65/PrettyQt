@@ -272,7 +272,10 @@ class WaitingSpinner(BaseWaitingSpinner):
     def _update_position(self):
         parent = self.parentWidget()
         if parent and self._center_on_parent:
-            self.position_on("parent")
+            self.move(
+                parent.width() // 2 - self.width() // 2,
+                parent.height() // 2 - self.height() // 2,
+            )
 
 
 if __name__ == "__main__":
