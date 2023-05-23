@@ -108,5 +108,5 @@ class TreeModel(core.AbstractItemModel):
                 parent_item.append_child(tree_item)
             parent_item.children_fetched = True
 
-    def _fetch_object_children(self, treeitem) -> list:
+    def _fetch_object_children(self, treeitem) -> list[treeitem.TreeItem]:
         return NotImplemented
