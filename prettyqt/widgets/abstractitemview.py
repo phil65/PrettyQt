@@ -130,6 +130,13 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             old_sel_model.deleteLater()
             del old_sel_model
 
+    def get_model(self, skip_proxies: bool = False):
+        model = self.model()
+        if skip_proxies:
+            while isinstance(model, QtWidgets.QAbstractProxyModel):
+                model = model.sourceModel()
+        return model
+
     def set_current_index(
         self,
         index: QtCore.QModelIndex | None,
