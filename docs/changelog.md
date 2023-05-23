@@ -1,3 +1,14 @@
+## v1.45.0 (2023-05-23)
+
+### Feat
+
+- **ShortcutsModel**: parent widget column
+
+### Fix
+
+- **AbstractItemModel**: fix transpose for PySide6
+- **MetaType**: correctly cast in get_name
+
 ## v1.44.0 (2023-05-23)
 
 ### Feat
