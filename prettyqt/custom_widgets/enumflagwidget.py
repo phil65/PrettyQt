@@ -55,7 +55,7 @@ class EnumFlagWidget(widgets.ToolButton):
 
     def set_value(self, value: enum.Flag) -> None:
         """Set value with Enum."""
-        if isinstance(value, int):
+        if not isinstance(value, enum.Flag):
             value = self._enum_class(value)
         self._set_enum_class(value.__class__)
         if not isinstance(value, self._enum_class):
@@ -74,7 +74,7 @@ class EnumFlagWidget(widgets.ToolButton):
 if __name__ == "__main__":
     app = widgets.app()
     flag = widgets.AbstractItemView.EditTrigger
-    w = EnumFlagWidget(enum_class=widgets.AbstractItemView.EditTrigger)
+    w = EnumFlagWidget()
     w.set_value(flag.DoubleClicked)
     w.value_changed.connect(print)
     w.show()

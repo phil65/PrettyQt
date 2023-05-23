@@ -82,7 +82,7 @@ class EnumComboBox(widgets.ComboBox):
                 return
             else:
                 raise ValueError(value)
-        if isinstance(value, int):
+        if not isinstance(value, enum.Enum):
             value = self._enum_class(value)
         self._set_enum_class(value.__class__)
         self.setCurrentText(value.name.replace("_", " "))
@@ -115,8 +115,7 @@ if __name__ == "__main__":
     from prettyqt.qt import QtCore
 
     app = widgets.app()
-    cb = EnumComboBox(allow_none=False, enum_class=QtCore.Qt.ItemDataRole)
-    cb.set_enum_class(QtCore.Qt.ItemDataRole)
+    cb = EnumComboBox(allow_none=False)
     cb.set_value(QtCore.Qt.ItemDataRole.EditRole)
     cb.show()
     cb.value_changed.connect(print)
