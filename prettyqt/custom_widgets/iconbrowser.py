@@ -3,6 +3,7 @@ from __future__ import annotations
 import sys
 
 from prettyqt import constants, core, custom_models, iconprovider, widgets
+from prettyqt.eventfilters import listviewgridresizeeventfilter
 from prettyqt.qt import QtGui
 
 
@@ -35,13 +36,17 @@ class IconBrowser(widgets.MainWindow):
         self._proxy_model.set_filter_case_sensitive(True)
         self._proxy_model.set_match_color(None)
 
-        self._listview = IconListView(
+        self._listview = widgets.ListView(
             self,
             uniform_item_sizes=True,
             view_mode="icon",
             context_menu_policy="custom",
         )
-
+        eventfilter = listviewgridresizeeventfilter.ListViewGridResizeEventFilter(
+            parent=self._listview
+        )
+        self._listview.installEventFilter(eventfilter)
+        self._listview.set_vertical_scrollbar_policy("always_on")
         self._listview.set_model(self._proxy_model)
         self._listview.doubleClicked.connect(self._copy_icon_text)
 
@@ -77,28 +82,6 @@ class IconBrowser(widgets.MainWindow):
         """Copy the name of the currently selected icon to the clipboard."""
         if indexes := self._listview.selectedIndexes():
             widgets.Application.copy_to_clipboard(indexes[0].data())
-
-
-class IconListView(widgets.ListView):
-    """A QListView that scales its grid size to always show same amount of items."""
-
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.set_vertical_scrollbar_policy("always_on")
-        self.VIEW_COLUMNS = 5
-
-    def resizeEvent(self, event):
-        """Re-calculate the grid size to provide scaling icons."""
-        width = self.viewport().width() - 30
-        # The minus 30 above ensures we don't end up with an item width that
-        # can't be drawn the expected number of times across the view without
-        # being wrapped. Without this, the view can flicker during resize
-        tile_width = int(width / self.VIEW_COLUMNS)
-        icon_width = int(tile_width * 0.8)
-        self.set_grid_size((tile_width, tile_width))
-        self.set_icon_size((icon_width, icon_width))
-
-        return super().resizeEvent(event)
 
 
 class IconModel(core.StringListModel):
