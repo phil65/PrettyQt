@@ -36,10 +36,11 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         self.items = items
         common_ancestor = find_common_ancestor([type(i) for i in self.items])
         logger.debug(f"{type(self).__name__}: found common ancester {common_ancestor}")
-        self._metaobj = core.MetaObject(common_ancestor.staticMetaObject)
+        self.props = core.MetaObject(common_ancestor.staticMetaObject).get_properties()
+        self.props.sort(key=lambda x: x.get_name())
 
     def columnCount(self, parent=None):
-        return widgets.Widget.get_static_metaobject().propertyCount()
+        return len(self.props)
 
     def headerData(
         self,
@@ -52,12 +53,12 @@ class WidgetsDetailsModel(core.AbstractTableModel):
                 widget = self.items[section]
                 return repr(widget)
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
-                return self._metaobj.get_property(section).get_name()
+                return self.props[section].get_name()
 
     def data(self, index, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return None
-        prop = self._metaobj.get_property(index.column())
+        prop = self.props[index.column()]
         widget = self.items[index.row()]
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
@@ -66,12 +67,13 @@ class WidgetsDetailsModel(core.AbstractTableModel):
                 return prop.read(widget)
 
     def setData(self, index, value, role=constants.DISPLAY_ROLE):
-        prop = self._metaobj.get_property(index.column())
+        prop = self.props[index.column()]
         widget = self.items[index.row()]
         match role:
             case constants.USER_ROLE:
-                prop.write(widget, value)
-                self.update_row(index.row())
+                with self.reset_model():
+                    prop.write(widget, value)
+                # self.update_row(index.row())
                 return True
         return False
 
@@ -83,7 +85,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         return 0 if parent.isValid() else len(self.items)
 
     def flags(self, index):
-        prop = self._metaobj.get_property(index.column())
+        prop = self.props[index.column()]
         if prop.isWritable():
             return (
                 super().flags(index)
@@ -101,7 +103,7 @@ if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TableView()
     view.set_icon("mdi.folder")
-    items = [widgets.RadioButton(), widgets.RadioButton()]
+    items = [widgets.TableWidget(), widgets.TableWidget()]
     model = WidgetsDetailsModel(items, parent=view).transpose()
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
