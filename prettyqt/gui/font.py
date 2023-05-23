@@ -199,6 +199,14 @@ class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
         return cls(font, size)
         # font.setStyleHint()
 
+    def scaled(self, factor: float) -> Self:
+        scaled = type(self)(self)
+        if self.pointSizeF() != -1:
+            scaled.setPointSizeF(self.pointSizeF() * factor)
+        elif self.pixelSize() != -1:
+            scaled.setPixelSize(int(self.pixelSize() * factor))
+        return scaled
+
     def set_style_hint(self, hint: StyleHintStr):
         """Set the style hint.
 
