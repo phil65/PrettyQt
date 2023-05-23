@@ -2,12 +2,16 @@ from __future__ import annotations
 
 import datetime
 import enum
+import logging
 import pathlib
 
 import regex as re
 
 from prettyqt import constants, custom_delegates, custom_widgets, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
+
+
+logger = logging.getLogger(__name__)
 
 
 class VariantDelegate(widgets.StyledItemDelegate):
@@ -21,65 +25,71 @@ class VariantDelegate(widgets.StyledItemDelegate):
 
     def paint(self, painter, option, index):
         value = self._data_for_index(index, self.data_role)
-        if not self.is_supported_type(value):
-            option = widgets.StyleOptionViewItem(option)
-            option.state &= ~QtWidgets.QStyle.StateFlag.State_Enabled
+        # if not self.is_supported_type(value):
+        #     option = widgets.StyleOptionViewItem(option)
+        #     option.state &= ~QtWidgets.QStyle.StateFlag.State_Enabled
         if isinstance(value, QtGui.QIcon):
             icon_delegate = custom_delegates.IconDelegate()
             icon_delegate.paint(painter, option, index)
             return
-        super().paint(painter, option, index)
+        elif isinstance(value, enum.Enum):  # PySide6 needs this when using Views
+            option.text = value.name
+            option.widget.style().drawControl(
+                QtWidgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
+            )
+        else:
+            super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
         original_value = self._data_for_index(index, self.data_role)
-        if not self.is_supported_type(original_value):
-            return None
+        logger.info(f"creating editor for {original_value!r}...")
         match original_value:
             case bool():
-                widget = widgets.CheckBox(parent=parent)
+                widget = widgets.CheckBox()
             case enum.Flag():
-                widget = custom_widgets.EnumFlagWidget(parent=parent)
+                widget = custom_widgets.EnumFlagWidget()
                 widget._set_enum_class(type(original_value))
             case enum.Enum():
-                widget = custom_widgets.EnumComboBox(parent=parent)
+                widget = custom_widgets.EnumComboBox()
                 widget._set_enum_class(type(original_value))
             case int():
-                widget = widgets.SpinBox(parent=parent)
+                widget = widgets.SpinBox()
             case float():
-                widget = widgets.DoubleSpinBox(parent=parent)
+                widget = widgets.DoubleSpinBox()
             case pathlib.Path():
-                widget = custom_widgets.FileChooserButton(parent=parent)
+                widget = custom_widgets.FileChooserButton()
             case str():
-                widget = widgets.LineEdit(parent=parent)
+                widget = widgets.LineEdit()
                 widget.setFrame(False)
             case QtCore.QRegularExpression() | re.Pattern():
-                widget = custom_widgets.RegexInput(show_error=False, parent=parent)
+                widget = custom_widgets.RegexInput(show_error=False)
             case QtCore.QTime():
-                widget = widgets.TimeEdit(parent=parent)
+                widget = widgets.TimeEdit()
             case QtCore.QDate():
-                widget = widgets.DateEdit(parent=parent)
+                widget = widgets.DateEdit()
             case QtCore.QDateTime():
-                widget = widgets.DateTimeEdit(parent=parent)
+                widget = widgets.DateTimeEdit()
             case QtCore.QPoint():
-                widget = custom_widgets.PointEdit(parent=parent)
+                widget = custom_widgets.PointEdit()
             case QtCore.QSize():
-                widget = custom_widgets.SizeEdit(parent=parent)
+                widget = custom_widgets.SizeEdit()
             case QtCore.QRect():
-                widget = custom_widgets.RectEdit(parent=parent)
+                widget = custom_widgets.RectEdit()
             case QtGui.QKeySequence():
-                widget = widgets.KeySequenceEdit(parent=parent)
+                widget = widgets.KeySequenceEdit()
             case QtGui.QRegion():
-                widget = custom_widgets.RegionEdit(parent=parent)
+                widget = custom_widgets.RegionEdit()
             case QtGui.QFont():
-                widget = widgets.FontComboBox(parent=parent)
+                widget = widgets.FontComboBox()
             case QtGui.QColor():
-                widget = custom_widgets.ColorComboBox(parent=parent)
+                widget = custom_widgets.ColorComboBox()
             case QtWidgets.QSizePolicy():
-                widget = custom_widgets.SizePolicyEdit(parent=parent)
+                widget = custom_widgets.SizePolicyEdit()
             # case QtCore.QRectF():  # todo
             #     widget = custom_widgets.RectEdit(parent=parent)
             case _:
-                return None
+                raise ValueError(original_value)
+        widget.setParent(parent)
         widget.setAutoFillBackground(True)
         return widget
 
@@ -87,10 +97,12 @@ class VariantDelegate(widgets.StyledItemDelegate):
         # if not editor:
         #     return
         value = self._data_for_index(index, self.data_role)
+        logger.info(f"setting data for {editor!r} to {value!r}")
         editor.set_value(value)
 
     def setModelData(self, editor, model, index):
         if (value := editor.get_value()) is not None:
+            logger.info(f"setting data for {model!r} to {value!r}")
             model.setData(index, value, self.data_role)
             model.setData(index, self.display_text(value), constants.DISPLAY_ROLE)
             self.commitData.emit(editor)

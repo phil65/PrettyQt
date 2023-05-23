@@ -25,14 +25,16 @@ class EnumComboBox(widgets.ComboBox):
     # current_enum_changed = core.Signal(object)
     value_changed = core.Signal(enum.Enum)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, value=None, **kwargs):
         self._enum_class = None
         self._allow_none = False
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
+        if value is not None:
+            self.set_value(value)
         # self.currentIndexChanged.connect(self._emit_signal)
 
     def __repr__(self):
-        return get_repr(self, enum_class=self._enum_class, allow_none=self._allow_none)
+        return get_repr(self, self.get_value())
 
     def set_allow_none(self, value: bool):
         self._allow_none = value
