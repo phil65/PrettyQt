@@ -75,7 +75,11 @@ class WidgetMixin(core.ObjectMixin):
     ):
         """Extend insertAction to also allow int index."""
         if isinstance(position_or_action, int):
-            position_or_action = self.actions()[position_or_action]
+            actions = self.actions()
+            if len(actions) == 0 or position_or_action >= len(actions):
+                # Insert as the first action or the last action.
+                return super().addAction(action)
+            position_or_action = actions[position_or_action]
         super().insertAction(position_or_action, action)
 
     def add_action(
