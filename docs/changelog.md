@@ -1,3 +1,32 @@
+## v1.46.0 (2023-05-24)
+
+### Feat
+
+- add ActionGrid
+- **StandardItem**: add get/set_text_alignment
+- **HeaderView**: add get_section_for_label method
+- add DefaultDropdownAction
+- add PredicateFilterProxyModel
+- **MetaObject**: only_writable kwarg for get_properties
+- add ValueTransformationProxyModel
+- add SubsetFilterProxyModel
+- **AbstractItemView**: add get/set_state
+- add LineEditFilterContainer
+- add TableToListProxyModel
+- **AbstractItemModel**: add get_model method
+- add WidgetHierarchyModel
+- add MultiLineLayout
+- **AbstractItemView**: add get_drop_indicator_position
+- **Layout**: add clear method
+- **Font**: add scaled method
+- **SignalMapper**: add __delitem__ method
+- add ListViewGridResizeEventFilter
+
+### Fix
+
+- **GraphicsScene**: fix _get_viewer_zoom without viewer
+- **WaitingSpinner**: correctly position on parent
+
 ## v1.45.0 (2023-05-23)
 
 ### Feat
