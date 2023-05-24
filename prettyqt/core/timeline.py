@@ -25,15 +25,10 @@ StateStr = Literal["not_running", "paused", "running"]
 
 
 class TimeLine(core.ObjectMixin, QtCore.QTimeLine):
-    def serialize_fields(self):
-        return dict(
-            current_time=self.currentTime(),
-            direction=self.get_direction(),
-            duration=self.duration(),
-            easing_curve=self.easingCurve(),
-            loop_count=self.loopCount(),
-            update_interval=self.updateInterval(),
-        )
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"direction": DIRECTION}
+        return maps
 
     def set_direction(self, direction: DirectionStr):
         """Set the direction.
