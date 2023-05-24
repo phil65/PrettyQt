@@ -22,10 +22,39 @@ LAYOUT_CHANGE_HINT = bidict(
 )
 
 
+class Subset:
+    def __init__(self, model):
+        self.model = model
+
+    def __getitem__(self, index):
+        parent = self.model.parent()
+        if parent is None:
+            raise ValueError("needs parent!")
+
+        from prettyqt import custom_models
+
+        match index:
+            case (arg_1, arg_2):
+                proxy = custom_models.SubsetFilterProxyModel(
+                    row_filter=arg_1, column_filter=arg_2, parent=parent
+                )
+            case _:
+                proxy = custom_models.SubsetFilterProxyModel(
+                    row_filter=index, column_filter=None, parent=parent
+                )
+                # raise ValueError(index)
+        proxy.setSourceModel(self.model)
+        return proxy
+
+
 class AbstractItemModelMixin(core.ObjectMixin):
     DEFAULT_FLAGS = (
         constants.DRAG_ENABLED | constants.IS_ENABLED | constants.IS_SELECTABLE
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.subset = Subset(self)
 
     def __repr__(self):
         return f"{type(self).__name__}: {self.rowCount()} rows"
