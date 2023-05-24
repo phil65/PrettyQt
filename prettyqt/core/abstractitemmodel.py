@@ -1,7 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import contextlib
-from typing import Literal
+from typing import Any, Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
@@ -35,14 +36,10 @@ class Subset:
 
         match index:
             case (arg_1, arg_2):
-                proxy = custom_models.SubsetFilterProxyModel(
-                    row_filter=arg_1, column_filter=arg_2, parent=parent
-                )
+                kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=parent)
             case _:
-                proxy = custom_models.SubsetFilterProxyModel(
-                    row_filter=index, column_filter=None, parent=parent
-                )
-                # raise ValueError(index)
+                kwargs = dict(row_filter=index, column_filter=None, parent=parent)
+        proxy = proxy = custom_models.SubsetFilterProxyModel(**kwargs)
         proxy.setSourceModel(self.model)
         return proxy
 
@@ -243,6 +240,27 @@ class AbstractItemModelMixin(core.ObjectMixin):
         if parent is None:
             raise ValueError("needs parent!")
         proxy = core.TransposeProxyModel(parent=parent)
+        proxy.setSourceModel(self)
+        return proxy
+
+    def modify(
+        self,
+        fn: Callable[[Any], Any],
+        column: int | None = None,
+        row: int | None = None,
+        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        selector: Callable[[Any], bool] | None = None,
+        selector_role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        parent: QtWidgets.QWidget | None = None,
+    ):
+        parent = parent or self.parent()
+        if parent is None:
+            raise ValueError("needs parent!")
+
+        from prettyqt import custom_models
+
+        proxy = custom_models.ValueTransformationProxyModel(parent=parent)
+        proxy.add_transformer(fn, column, row, role, selector, selector_role)
         proxy.setSourceModel(self)
         return proxy
 

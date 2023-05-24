@@ -16,6 +16,7 @@ from .jsonmodel import JsonModel
 from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
+from .valuetransformationproxymodel import ValueTransformationProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -33,4 +34,5 @@ __all__ = [
     "SubsequenceSortFilterProxyModel",
     "FuzzyFilterProxyModel",
     "SubsetFilterProxyModel",
+    "ValueTransformationProxyModel",
 ]
