@@ -93,6 +93,27 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         """
         return constants.CHECK_STATE.inverse[self.checkState()]
 
+    def set_text_alignment(self, alignment: constants.AlignmentStr):
+        """Set the alignment of the text.
+
+        Args:
+            alignment: alignment for the format
+
+        Raises:
+            InvalidParamError: alignment does not exist
+        """
+        if alignment not in constants.ALIGNMENTS:
+            raise InvalidParamError(alignment, constants.ALIGNMENTS)
+        self.setTextAlignment(constants.ALIGNMENTS[alignment])
+
+    def get_text_alignment(self) -> constants.AlignmentStr:
+        """Return current text alignment.
+
+        Returns:
+            alignment
+        """
+        return constants.ALIGNMENTS.inverse[self.textAlignment()]
+
     def get_background(self) -> gui.Brush:
         return gui.Brush(self.background())
 
