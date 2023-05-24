@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from typing import Any
 import os
 import pathlib
 
@@ -16,7 +17,7 @@ class FileChooserButton(widgets.Widget):
         mode: widgets.filedialog.AcceptModeStr = "save",
         file_mode: widgets.filedialog.FileModeStr = "existing_files",
         root: None | str | pathlib.Path = None,
-        **kwargs,
+        **kwargs: Any,
     ):
         """Initialize FileChooserButton.
 

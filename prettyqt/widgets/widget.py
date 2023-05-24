@@ -92,7 +92,7 @@ class WidgetMixin(core.ObjectMixin):
         shortcut: str | None = None,
         status_tip: str | None = None,
         tool_tip: str | None = None,
-        parent=None,
+        parent: QtWidgets.QWidget | None = None,
     ) -> gui.Action:
         """Add an action to the menu.
 

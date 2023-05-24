@@ -96,7 +96,7 @@ class CoreApplicationMixin(core.ObjectMixin):
             raise InvalidParamError(priority, constants.EVENT_PRIORITY)
         return self.postEvent(obj, event, prio)
 
-    def in_main_thread(self):
+    def in_main_thread(self) -> bool:
         """Check if we are in the thread in which QApplication object was created.
 
         Returns:
