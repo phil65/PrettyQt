@@ -31,7 +31,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         # self.props.sort(key=lambda x: x.get_name())
 
     def columnCount(self, parent=None):
-        return len(self.props)
+        return len(self.props) + 1
 
     def headerData(
         self,
