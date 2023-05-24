@@ -79,11 +79,10 @@ class EnumComboBox(widgets.ComboBox):
     def set_value(self, value: EnumType | None) -> None:
         """Set value with Enum."""
         if value is None:
-            if self._allow_none:
-                self.setCurrentIndex(0)
-                return
-            else:
+            if not self._allow_none:
                 raise ValueError(value)
+            self.setCurrentIndex(0)
+            return
         if not isinstance(value, enum.Enum):
             value = self._enum_class(value)
         self._set_enum_class(value.__class__)

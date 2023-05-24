@@ -26,7 +26,7 @@ def fit_image(
         return False, int(width), int(height)
     scaled = height > pheight or width > pwidth
     if height > pheight:
-        corrf = pheight / float(height)
+        corrf = pheight / height
         width, height = math.floor(corrf * width), pheight
     if width > pwidth:
         corrf = pwidth / float(width)
@@ -90,9 +90,7 @@ class ImageViewer(widgets.Widget):
         return self._pixmap
 
     def sizeHint(self) -> QtCore.QSize:
-        if self._pixmap.isNull():
-            return self.minimumSize()
-        return self._pixmap.size()
+        return self.minimumSize() if self._pixmap.isNull() else self._pixmap.size()
 
     def paintEvent(self, event):
         super().paintEvent(event)

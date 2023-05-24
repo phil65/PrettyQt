@@ -100,7 +100,7 @@ class AccordionItem(widgets.GroupBox):
 
             # create the mimedata
             mime_data = core.MimeData()
-            mime_data.setText("ItemTitle::%s" % (self.title()))
+            mime_data.setText(f"ItemTitle::{self.title()}")
 
             # create the drag
             drag = gui.Drag(self)
@@ -113,7 +113,6 @@ class AccordionItem(widgets.GroupBox):
 
             event.accept()
 
-        # determine if the expand/collapse should occur
         elif (
             event.button() == QtCore.Qt.MouseButton.LeftButton
             and self.expand_collapsed_rect().contains(event.position().toPoint())
