@@ -10,6 +10,13 @@ class FocusFrame(widgets.WidgetMixin, QtWidgets.QFocusFrame):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = FocusFrame()
-    widget.show()
+    container = widgets.Splitter()
+    widget = widgets.PlainTextEdit()
+    widget2 = widgets.PlainTextEdit()
+    container.add(widget)
+    container.add(widget2)
+    errorbox = FocusFrame(container)
+    errorbox.setWidget(container)
+    errorbox.show()
+    container.show()
     app.main_loop()

@@ -53,6 +53,7 @@ class CommandTable(widgets.TableView):
         self.pressed.connect(self._on_clicked)
         self.set_delegate(custom_delegates.HtmlItemDelegate(), column=0)
         self._match_color = QtGui.QColor("#468cc6")
+        self.setShowGrid(False)
 
     @core.Property(QtGui.QColor)
     def matchColor(self) -> QtGui.QColor:
