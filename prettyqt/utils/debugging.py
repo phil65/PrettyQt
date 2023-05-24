@@ -95,13 +95,23 @@ def count_objects():
 def stalk(widget, include=None, exclude=None):
     if exclude is None:
         exclude = ["meta_call", "timer"]
+    counter = collections.defaultdict(int)
+
     # to activate signal logging for all
-    widget.add_callback_for_event(lambda x: False, include=include, exclude=exclude)
+    def increase_counter(event):
+        counter[event.type()] += 1
+        return False
+
+    widget.add_callback_for_event(increase_counter, include=include, exclude=exclude)
 
     def make_fn(widget, signal_prop):
         def fn(*args, **kwargs):
-            logger.info(f"{widget!r} {signal_prop.get_name()}")
-            logger.info(f"{args} {kwargs}")
+            try:
+                logger.info(f"{widget!r} {signal_prop.get_name()}")
+                logger.info(f"{args} {kwargs}")
+                counter[signal_prop.get_name()] += 1
+            except RuntimeError:
+                pass
 
         return fn
 
@@ -109,6 +119,7 @@ def stalk(widget, include=None, exclude=None):
         signal = widget.__getattribute__(signal_prop.get_name())
         fn = make_fn(widget, signal_prop)
         signal.connect(fn)
+    return counter
 
 
 def is_deleted(obj) -> bool:
@@ -344,8 +355,9 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = widgets.Widget()
-    stalk(widget)
+    widget = widgets.LineEdit()
+    counter = stalk(widget)
     widget.show()
     with app.debug_mode():
         app.main_loop()
+    print(counter)
