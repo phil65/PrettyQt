@@ -65,6 +65,8 @@ plugins:
         default_handler: python
         handlers:
           python:
+            import:
+              - https://docs.python.org/3/objects.inv
             options:
               # https://mkdocstrings.github.io/python/usage/
               show_source: true
