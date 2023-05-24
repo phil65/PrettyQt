@@ -31,6 +31,7 @@ class LineEditFilterContainer(widgets.Widget):
         self.box.add(parent)
 
     def _resize_lineedits(self, index, old_size, new_size):
+        # perhaps check header.sectionPosition() and sectionSize() for correct pos?
         self.searchbar[index].setFixedWidth(new_size)
 
     def setFilterCaseSensitivity(self, sensitivity):

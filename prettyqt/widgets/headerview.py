@@ -21,7 +21,7 @@ ModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
 
 
 class HeaderViewMixin(widgets.AbstractItemViewMixin):
-    section_vis_changed = core.Signal(int, bool)
+    section_visiblity_changed = core.Signal(int, bool)
     section_resized_by_user = core.Signal(int, int, int)
 
     def __init__(
@@ -37,7 +37,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         super().__init__(ori, parent=parent, **kwargs)
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
-        self.sectionResized.connect(self.sectionResizeEvent)
+        self.sectionResized.connect(self._on_section_resize)
         self._handle_section_is_pressed = False
         self.setResizeContentsPrecision(100)
         self._widget_name = parent.objectName() if parent is not None else ""
@@ -65,10 +65,9 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         super().mouseReleaseEvent(e)
         self._handle_section_is_pressed = False
 
-    def sectionResizeEvent(self, logical_index, old_size, new_size):
+    def _on_section_resize(self, logical_index, old_size, new_size):
         if self._handle_section_is_pressed:
             self.section_resized_by_user.emit(logical_index, old_size, new_size)
-        # do we need to call super() otherwise?
 
     def generate_header_id(self):
         # return f"{self._widget_name}.state"
@@ -132,16 +131,25 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self.setSectionResizeMode(MODES[mode])
 
     def get_section_labels(self) -> list[str]:
+        """Return all section labels as a list."""
         model = self.model()
+        orientation = self.orientation()
         return [
-            model.headerData(
-                i, constants.HORIZONTAL, constants.DISPLAY_ROLE  # type: ignore
-            )
+            model.headerData(i, orientation, constants.DISPLAY_ROLE)
             for i in range(self.count())
         ]
 
+    def get_section_for_label(self, label) -> int:
+        """Return index of first section with given label."""
+        model = self.model()
+        orientation = self.orientation()
+        for i in range(self.count()):
+            if model.headerData(i, orientation, constants.DISPLAY_ROLE) == label:
+                return i
+        raise ValueError(label)
+
     def contextMenuEvent(self, event):
-        """Context menu for our files tree."""
+        """Override to show a popupmenu on rightclick."""
         menu = self.createPopupMenu()
         menu.exec(self.mapToGlobal(event.pos()))
 
@@ -162,9 +170,9 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         menu.add_actions(actions)
         return menu
 
-    def set_section_hidden(self, i: int, hide: bool):
-        self.section_vis_changed.emit(i, hide)
-        self.setSectionHidden(i, hide)
+    def setSectionHidden(self, i: int, hide: bool):
+        self.section_visiblity_changed.emit(i, hide)
+        super().setSectionHidden(i, hide)
 
     def set_sizes(self, sizes: Iterable[int | None]):
         for i, size in enumerate(sizes):
