@@ -120,16 +120,18 @@ class LogRecordModel(custom_models.ColumnTableModel):
 
 
 if __name__ == "__main__":
+    from prettyqt.utils import debugging
+
     logger = logging.getLogger()
 
     app = widgets.app()
-    view = widgets.TreeView()
-    model = LogRecordModel(logger, parent=view)
-
+    widget = widgets.TableView()
+    model = LogRecordModel(logger, parent=widget)
     w = widgets.Widget()
     w.set_layout("vertical")
-    widget = widgets.TableView()
     widget.set_model(model)
+    widget.set_selection_behavior("rows")
+    debugging.stalk(widget)
 
     def raise_exc():
         try:
@@ -144,4 +146,5 @@ if __name__ == "__main__":
     w.box.add(widgets.PushButton("Critical", clicked=lambda: logger.critical("Critical")))
     w.box.add(widget)
     w.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

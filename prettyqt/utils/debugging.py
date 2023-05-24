@@ -92,9 +92,11 @@ def count_objects():
     logger.info(counter)
 
 
-def stalk(widget):
+def stalk(widget, include=None, exclude=None):
+    if exclude is None:
+        exclude = ["meta_call", "timer"]
     # to activate signal logging for all
-    widget.add_callback_for_event(lambda x: False)
+    widget.add_callback_for_event(lambda x: False, include=include, exclude=exclude)
 
     def make_fn(widget, signal_prop):
         def fn(*args, **kwargs):
