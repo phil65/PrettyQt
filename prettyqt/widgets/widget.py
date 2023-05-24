@@ -608,7 +608,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_layout(
         self,
-        layout: LayoutStr | QtWidgets.QLayout | None,
+        layout: LayoutStr | QtWidgets.QLayout,
         margin: int | None = None,
         spacing: int | None = None,
     ) -> QtWidgets.QLayout:
@@ -625,8 +625,6 @@ class WidgetMixin(core.ObjectMixin):
             Layout
         """
         match layout:
-            case None:
-                return
             case "horizontal":
                 self.box = widgets.HBoxLayout()
             case "vertical":
@@ -644,7 +642,7 @@ class WidgetMixin(core.ObjectMixin):
             case QtWidgets.QLayout():
                 self.box = layout
             case _:
-                raise ValueError("Invalid Layout")
+                raise ValueError(f"Invalid Layout {layout}")
         self.setLayout(self.box)
         if margin is not None:
             self.box.set_margin(margin)

@@ -11,10 +11,8 @@ LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
 
 
 class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutItemMixin):
-    def set_layout(self, layout: LayoutStr | QtWidgets.QGraphicsLayout | None):
+    def set_layout(self, layout: LayoutStr | QtWidgets.QGraphicsLayout):
         match layout:
-            case None:
-                return
             case QtWidgets.QGraphicsLayout():
                 self.box = layout
             case "grid":
@@ -24,7 +22,7 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
             case "horizontal" | "vertical":
                 self.box = widgets.GraphicsLinearLayout(layout)
             case _:
-                raise ValueError("Invalid Layout")
+                raise ValueError(f"Invalid Layout {layout}")
         self.setLayout(self.box)
 
     def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
