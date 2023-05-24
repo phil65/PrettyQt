@@ -12,6 +12,7 @@ class BaseOverlayWidget(widgets.Widget):
         super().__init__(parent, **kwargs)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TransparentForMouseEvents)
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_NoSystemBackground)
+        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_NoChildEventsForParent)
         # self.set_flags(tool=True)
         self._do_resize()
         self._border_width = 4
