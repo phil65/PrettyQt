@@ -65,8 +65,9 @@ class SGNode(QtQuick.QSGNode):
     def __getitem__(self, index: int) -> QtQuick.QSGNode:
         return self.childAtIndex(index)
 
-    def __delitem__(self, index: int) -> QtQuick.QSGNode:
-        item = self.childAtIndex(index)
+    def __delitem__(self, item: int | QtQuick.QSGNode):
+        if isinstance(item, int):
+            item = self.childAtIndex(item)
         self.removeChildNode(item)
 
     def get_type(self) -> NodeTypeStr:

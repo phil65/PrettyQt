@@ -18,9 +18,11 @@ LabelsPositionStr = Literal["center", "inside_end", "inside_base", "outside_end"
 
 
 class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
-    def __delitem__(self, index: int):
-        barsets = self.barSets()
-        self.remove(barsets[index])
+    def __delitem__(self, item: int | QtCharts.QBarSet):
+        if isinstance(item, int):
+            barsets = self.barSets()
+            item = barsets[item]
+        self.remove(item)
 
     def __getitem__(self, index: int) -> QtCharts.QBarSet:
         barsets = self.barSets()

@@ -47,9 +47,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
             return self.find_child(typ=QtCore.QObject, name=index)
         return widget
 
-    def __delitem__(self, index: int):
-        item = self.itemAt(index)
+    def __delitem__(self, item: int | QtWidgets.QLayoutItem):
+        if isinstance(item, int):
+            item = self.itemAt(item)
         self.removeItem(item)
+        item.deleteLater()
 
     def __len__(self) -> int:
         return self.count()
