@@ -14,6 +14,10 @@ else:
 
 from .abstractextensionfactory import AbstractExtensionFactory
 from .pydesignertaskmenuextension import PyDesignerTaskMenuExtension
+from .designercustomwidgetinterface import DesignerCustomWidgetInterface
+from .designerformeditorinterface import DesignerFormEditorInterface
+from .abstractformbuilder import AbstractFormBuilder
+from .formbuilder import FormBuilder
 
 __all__ = [
     "PyDesignerCustomWidgetPlugin",
@@ -21,4 +25,8 @@ __all__ = [
     "PyDesignerCustomWidgetCollection",
     "AbstractExtensionFactory",
     "PyDesignerTaskMenuExtension",
+    "DesignerCustomWidgetInterface",
+    "DesignerFormEditorInterface",
+    "AbstractFormBuilder",
+    "FormBuilder",
 ]
