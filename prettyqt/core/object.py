@@ -256,10 +256,9 @@ class ObjectMixin:
     def copy(self) -> Self:
         metaobj = self.get_metaobject()
         new = type(self)()
-        for prop in metaobj.get_properties():
-            if prop.isWritable():
-                val = prop.read(self)
-                prop.write(new, val)
+        for prop in metaobj.get_properties(only_writable=True):
+            val = prop.read(self)
+            prop.write(new, val)
         # MetaObject can return non-existing signals, dont know why.
         # also filter out duplicates.
         signal_names = {

@@ -145,10 +145,16 @@ class MetaObject:
         count = self.item.constructorCount()
         return [core.MetaMethod(self.item.constructor(i)) for i in range(count)]
 
-    def get_properties(self, include_super: bool = True) -> list[core.MetaProperty]:
+    def get_properties(
+        self, include_super: bool = True, only_writable: bool = False
+    ) -> list[core.MetaProperty]:
         start = 0 if include_super else self.item.propertyOffset() - 1
         count = self.item.propertyCount()
-        return [core.MetaProperty(self.item.property(i)) for i in range(start, count)]
+        return [
+            core.MetaProperty(self.item.property(i))
+            for i in range(start, count)
+            if not only_writable or self.item.property(i).isWritable()
+        ]
 
     def get_signals(self, include_super: bool = True) -> list[core.MetaMethod]:
         return self.get_methods(include_super=include_super, type_filter="signal")
