@@ -706,6 +706,8 @@ class WidgetMixin(core.ObjectMixin):
                 geom = where
             case "screen":
                 geom = gui.GuiApplication.primaryScreen().geometry()
+            case _:
+                raise ValueError(where)
         if scale_ratio is not None and do_scale:
             self.resize(
                 int(geom.width() * scale_ratio),
@@ -743,6 +745,8 @@ class WidgetMixin(core.ObjectMixin):
                     geom.left() + own_geo.width() // 2,
                     geom.bottom() - own_geo.height() // 2,
                 )
+            case _:
+                raise ValueError(how)
         new = core.Point(new.x() + x_offset, new.y() + y_offset)
         own_geo.moveCenter(new)
         self.move(own_geo.topLeft())
