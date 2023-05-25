@@ -92,7 +92,7 @@ class RegexEditorWidget(widgets.Widget):
     def on_match_list_current_change(self, index_new, index_old):
         model = self.table_matches.model()
         span = model.data(index_new, constants.USER_ROLE)  # type: ignore
-        self.textedit_teststring.select_text(*span)
+        self.textedit_teststring.selecter.select_text(*span)
 
     def _update_view(self) -> None:
         self.prog = None

@@ -38,7 +38,7 @@ class SelectedWordHighlighter(gui.SyntaxHighlighter):
             self.setFormat(m.span()[0], length, self._highlight_format)
 
     def filter_selection_for_single_word(self):
-        tc = self._widget.get_text_cursor()
+        tc = self._widget.selecter.get_text_cursor()
         current_selection = tc.selectedText()
         pat = re.compile("\\s+")
         items = pat.split(current_selection)  # SkipEmptyParts

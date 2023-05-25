@@ -885,11 +885,11 @@ def test_plaintextdocumentlayout():
 def test_plaintextedit(qtbot):
     widget = widgets.PlainTextEdit("This is a test")
     qtbot.addWidget(widget)
-    with widget.create_cursor() as c:
+    with widget.selecter.create_cursor() as c:
         c.select_text(2, 4)
-    with widget.current_cursor() as c:
+    with widget.selecter.current_cursor() as c:
         c.select_text(2, 4)
-    widget.select_text(2, 4)
+    widget.selecter.select_text(2, 4)
     widget.set_text("hallo")
     widget.set_disabled()
     widget.allow_wheel_zoom()
@@ -898,7 +898,7 @@ def test_plaintextedit(qtbot):
     widget.append_text(" test")
     widget.append_text("test", newline=False)
     assert widget.text() == "hallo\n testtest"
-    widget.highlight_current_line()
+    widget.selecter.highlight_current_line()
     widget.set_read_only()
     widget.scroll_to_top()
     widget.scroll_to_bottom()
@@ -1223,9 +1223,9 @@ def test_textedit(qtbot):
     widget.set_text("test")
     widget.append_text(" this")
     assert widget.text() == "test\n this"
-    with widget.create_cursor() as c:
+    with widget.selecter.create_cursor() as c:
         c.select_text(1, 3)
-    widget.select_text(1, 3)
+    widget.selecter.select_text(1, 3)
     widget.set_font("Consolas")
     widget.set_enabled()
     widget.set_read_only()

@@ -223,7 +223,7 @@ class LogTextEdit(widgets.PlainTextEdit):
             raise TypeError("Formatter does not contain format string")
         self.append_text(self.formatter._fmt)
         old_fmt = self.textCursor().charFormat()
-        with self.create_cursor() as c:
+        with self.selecter.create_cursor() as c:
             c.move_position("end")
             c.move_position("start_of_block")
             start_pos = c.position()

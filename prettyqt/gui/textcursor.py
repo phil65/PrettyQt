@@ -174,5 +174,5 @@ if __name__ == "__main__":
     widget = widgets.PlainTextEdit()
     widget.show()
     app.main_loop()
-    cursor = widget.get_text_cursor()
+    cursor = widget.selecter.get_text_cursor()
     print(cursor)

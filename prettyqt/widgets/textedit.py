@@ -1,12 +1,10 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
-import contextlib
 from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, texteditselecter
 
 
 AUTO_FORMATTING = bidict(
@@ -35,6 +33,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self.textChanged.connect(self.on_value_change)
+        self.selecter = texteditselecter.TextEditSelecter(self)
 
     def __add__(self, other: str) -> TextEdit:
         self.append_text(other)
@@ -52,15 +51,6 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
     def on_value_change(self) -> None:
         self.value_changed.emit(self.text())
 
-    @contextlib.contextmanager
-    def create_cursor(self) -> Iterator[gui.TextCursor]:
-        cursor = gui.TextCursor(self.document())
-        yield cursor
-        self.setTextCursor(cursor)
-
-    def get_text_cursor(self) -> gui.TextCursor:
-        return gui.TextCursor(self.textCursor())
-
     def set_text(self, text: str) -> None:
         self.setPlainText(text)
 
@@ -69,10 +59,6 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
 
     def text(self) -> str:
         return self.toPlainText()
-
-    def select_text(self, start: int, end: int) -> None:
-        with self.create_cursor() as c:
-            c.select_text(start, end)
 
     def set_read_only(self, value: bool = True) -> None:
         self.setReadOnly(value)
