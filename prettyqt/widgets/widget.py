@@ -28,6 +28,11 @@ QWIDGETSIZE_MAX = 16777215  # QtWidgets.QWIDGETSIZE_MAX
 class WidgetMixin(core.ObjectMixin):
     box: QtWidgets.QLayout
 
+    def __init__(self, *args, margin: int | None = None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if margin is not None:
+            self.set_margin(margin)
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {
