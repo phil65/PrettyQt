@@ -9,10 +9,14 @@ from collections.abc import Callable, Generator
 import logging
 import re
 import sys
+from typing import TypeVar
 
 from prettyqt import core, gui, qt, widgets
 from prettyqt.qt import QtCore
 from prettyqt.utils import helpers
+
+
+T = TypeVar("T", bound=QtCore.QObject)
 
 
 logger = logging.getLogger(__name__)
@@ -85,13 +89,6 @@ class MessageHandler:
         self._logger.log(level, message, extra=ctx)
 
 
-def count_objects():
-    win = widgets.Application.get_mainwindow()
-    objects = win.findChildren(QtCore.QObject)
-    counter = collections.Counter([type(o) for o in objects])
-    logger.info(counter)
-
-
 class Stalker(core.Object):
     event_detected = core.Signal(QtCore.QEvent)
     signal_emitted = core.Signal(core.MetaMethod, object)  # signal, args
@@ -106,15 +103,16 @@ class Stalker(core.Object):
         if exclude is None:
             exclude = ["meta_call", "timer"]
         # enable event logging by installing EventCatcher, which includes logging
-        self.obj.add_callback_for_event(
+        self.eventcatcher = self.obj.add_callback_for_event(
             self._on_event_detected, include=include, exclude=exclude
         )
+        self.handles = []
         # enable logging of signals emitted by connecting all signals to our fn
         for signal in self.obj.get_metaobject().get_signals():
             signal_instance = self.obj.__getattribute__(signal.get_name())
             fn = self._on_signal_emitted(signal)
-            signal_instance.connect(fn)
-
+            handle = signal_instance.connect(fn)
+            self.handles.append(handle)
         # enable logging of all signal (dis)connections by hooking to connectNotify
         self.old_connectNotify = self.obj.connectNotify
         self.old_disconnectNotify = self.obj.disconnectNotify
@@ -127,6 +125,9 @@ class Stalker(core.Object):
     def __exit__(self, typ, value, traceback):
         self.obj.connectNotify = self.old_connectNotify
         self.obj.disconnectNotify = self.old_disconnectNotify
+        for handle in self.handles:
+            self.obj.disconnect(handle)
+        self.obj.removeEventFilter(self.eventcatcher)
 
     def _on_signal_connected(self, signal: QtCore.QMetaMethod):
         signal = core.MetaMethod(signal)
@@ -154,6 +155,12 @@ class Stalker(core.Object):
                 pass
 
         return fn
+
+    def count_children(
+        self, type_filter: type[T] = QtCore.QObject
+    ) -> collections.Counter:
+        objects = self.findChildren(type_filter)
+        return collections.Counter([type(o) for o in objects])
 
 
 def is_deleted(obj) -> bool:
