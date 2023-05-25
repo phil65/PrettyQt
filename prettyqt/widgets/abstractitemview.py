@@ -110,6 +110,20 @@ StateStr = Literal[
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     model_changed = core.Signal(QtCore.QAbstractItemModel)
 
+    def __init__(
+        self,
+        *args,
+        horizontal_scroll_mode="pixel",
+        vertical_scroll_mode="pixel",
+        **kwargs,
+    ):
+        super().__init__(
+            *args,
+            horizontal_scroll_mode=horizontal_scroll_mode,
+            vertical_scroll_mode=vertical_scroll_mode,
+            **kwargs,
+        )
+
     def __len__(self) -> int:
         return model.rowCount() if (model := self.model()) is not None else 0
 
