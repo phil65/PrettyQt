@@ -50,7 +50,7 @@ def create_modified_inv():
             continue
 
         name, typ, prio, location, dispname = m.groups()
-        location = pyside_uri + location.rstrip("$") + name
+        location = location.rstrip("$") + name
 
         write(name, typ, prio, location, dispname)
         if name.endswith("QtCore.Signal"):

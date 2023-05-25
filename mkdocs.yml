@@ -71,6 +71,7 @@ plugins:
               # - url: https://doc.qt.io/qtforpython/objects.inv
               # - PySide6-aliases.inv
               - url: https://raw.githubusercontent.com/phil65/PrettyQt/master/docs/qt6.inv
+                base_url: https://doc.qt.io/qtforpython/
                 domains: [std, py]
               - url: https://docs.python-requests.org/en/master/objects.inv
                 domains: [std, py]
