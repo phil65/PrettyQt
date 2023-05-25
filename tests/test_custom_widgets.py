@@ -278,7 +278,7 @@ def test_logtextedit(qtbot):
         "%(relativeCreated)s %(name)s %(pathname)s"
     )
     textedit.set_formatter(fmt)
-    logger.warning("Test")
+    logger.info("Test")
     try:
         raise Exception
     except Exception as e:
