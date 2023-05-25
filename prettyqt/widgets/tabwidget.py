@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, animator, bidict, datatypes
 
 
 TAB_SHAPES = bidict(
@@ -32,6 +32,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     ) -> None:
         # Basic initalization
         super().__init__(**kwargs)
+        self.animator = animator.Animator(self)
         self.tabCloseRequested.connect(self.remove_tab)
         self.tab_bar = widgets.TabBar(self)
 
@@ -412,3 +413,21 @@ class DetachedTab(widgets.MainWindow):
 #     tab_widget.add_tab(widget, "Test")
 #     tab_widget.add_tab(widget_2, "Test 2")
 #     app.main_loop()
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    tabwidget = TabWidget()
+    widget2 = widgets.RadioButton("Test")
+    widget3 = widgets.PlainTextEdit("Test 243434")
+    tabwidget.add_tab(widget2, label="test")
+    tabwidget.add_tab(widget3, label="test")
+    tabwidget.show()
+    app.sleep(2)
+    tabwidget.animator.slide_in_next()
+    app.sleep(2)
+    tabwidget.animator.fade_in(0)
+    app.sleep(2)
+    tabwidget.animator.fade_in(1)
+    app.main_loop()
