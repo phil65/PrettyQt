@@ -125,14 +125,22 @@ class WidgetHierarchyModel(custom_models.TreeModel):
 class LayoutHierarchyModel(WidgetHierarchyModel):
     def _fetch_object_children(self, item) -> list:
         match item.obj:
+            case QtWidgets.QSplitter():
+                items = [item.obj.widget(i) for i in range(item.obj.count())]
             case QtWidgets.QWidget():
                 layout = item.obj.layout()
+                items = [layout.itemAt(i) for i in range(layout.count())]
+                items = [
+                    i.widget() if i.widget() is not None else i.layout() for i in items
+                ]
             case QtWidgets.QLayout():
                 layout = item.obj
+                items = [layout.itemAt(i) for i in range(layout.count())]
+                items = [
+                    i.widget() if i.widget() is not None else i.layout() for i in items
+                ]
             case _:
                 raise ValueError(item)
-        items = [layout.itemAt(i) for i in range(layout.count())]
-        items = [i.widget() if i.widget() is not None else i.layout() for i in items]
         return [treeitem.TreeItem(obj=i) for i in items]
 
     def hasChildren(self, parent: core.ModelIndex | None = None):
@@ -142,8 +150,12 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
         item = self.data_by_index(parent)
         if self._show_root and item == self._root_item:
             return True
-        layout = item.obj.layout()
-        return False if layout is None else layout.count() > 0
+        match item.obj:
+            case QtWidgets.QSplitter():
+                return item.obj.count() > 0
+            case _:
+                layout = item.obj.layout()
+                return False if layout is None else layout.count() > 0
 
 
 if __name__ == "__main__":
@@ -153,12 +165,22 @@ if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TreeView()
     view.setRootIsDecorated(True)
-    view.set_icon("mdi.folder")
-    parent = widgets.Widget()
-    parent.set_layout("horizontal")
-    parent.box.add(widgets.Widget())
-    item = widgets.TableWidget(parent)
-    model = LayoutHierarchyModel(parent, show_root=True, parent=view)
+    widget = widgets.Widget()
+    with widgets.VBoxLayout.create(widget) as layout:
+        with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
+            layout += widgets.PlainTextEdit("upper left")
+            layout += widgets.PlainTextEdit("upper middle")
+            with layout.get_sub_layout("splitter", orientation="vertical") as layout:
+                layout += widgets.PlainTextEdit("upper right")
+                layout += widgets.PlainTextEdit("middle right")
+                with layout.get_sub_layout("horizontal") as layout:
+                    layout += widgets.PlainTextEdit("upper right")
+                    layout += widgets.PlainTextEdit("middle right")
+        with layout.get_sub_layout("horizontal") as layout:
+            layout += widgets.PlainTextEdit("lower left")
+            layout += widgets.PlainTextEdit("lower right")
+
+    model = LayoutHierarchyModel(widget, show_root=True, parent=view)
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
