@@ -22,17 +22,16 @@ class LineEditFilterContainer(widgets.Widget):
             horizontal_scroll_bar_policy="always_off", frame_shape="no_frame"
         )
         self._topline_layout = widgets.HBoxLayout(margin=0, spacing=0)
+        self._lineedit_scrollarea.set_size_policy("expanding", "minimum")
         self._topline_layout.add(self.spacer)
         self._topline_layout.add(self._lineedit_scrollarea)
         parent.h_header.sectionResized.connect(self._resize_lineedits)
         for i in range(parent.h_header.count()):
-            lineedit = widgets.LineEdit()
-            proxy = core.SortFilterProxyModel(self)
+            lineedit = widgets.LineEdit(margin=0)
+            proxy = core.SortFilterProxyModel(self, recursive_filtering_enabled=True)
             self._proxies.append(proxy)
-            proxy.setRecursiveFilteringEnabled(True)
             proxy.setSourceModel(model)
             proxy.setFilterKeyColumn(i)
-            lineedit.set_margin(0)
             lineedit.value_changed.connect(proxy.setFilterFixedString)
             self._lineedit_layout.add(lineedit)
             model = proxy
@@ -43,7 +42,7 @@ class LineEditFilterContainer(widgets.Widget):
             self.spacer.setFixedWidth(self._parent.v_header.width())
         else:
             self.spacer.hide()
-        self._lineedit_layout.addStretch()
+        self._lineedit_layout.addStretch(1)
         parent.set_model(model)
         widget = widgets.Widget()
         widget.set_layout("horizontal", margin=0)
@@ -62,7 +61,8 @@ class LineEditFilterContainer(widgets.Widget):
 
     def _resize_lineedits(self, index, old_size, new_size):
         # perhaps check header.sectionPosition() and sectionSize() for correct pos?
-        self._lineedit_layout[index + 1].setFixedWidth(new_size)
+        logger.debug(f"resizing for index {index}")
+        self._lineedit_layout[index].setFixedWidth(new_size)
         self.spacer.setFixedWidth(self._parent.v_header.width())
         self._lineedit_scrollarea.setFixedWidth(self._parent.viewport().width())
 
@@ -78,6 +78,7 @@ if __name__ == "__main__":
     view = widgets.TableView()
 
     model = widgetpropertiesmodel.WidgetPropertiesModel(view.h_header, parent=view)
+    model = model.proxifier[:, 0:3]
     view.set_selection_behavior("rows")
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate("variant", column=1)
