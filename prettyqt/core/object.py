@@ -37,6 +37,8 @@ class ObjectMixin:
             for k, v in kwargs.items():
                 # this allows snake_case naming.
                 camel_k = helpers.to_lower_camel(k)
+                if camel_k != k and camel_k in kwargs:
+                    logger.warning(f"{k} defined twice: {v} / {kwargs[camel_k]}")
                 # allow str values instead of enum
                 if camel_k in mapper and isinstance(v, str):
                     new[camel_k] = mapper[camel_k][v]
