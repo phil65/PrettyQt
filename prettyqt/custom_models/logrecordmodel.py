@@ -131,7 +131,7 @@ if __name__ == "__main__":
     w.set_layout("vertical")
     widget.set_model(model)
     widget.set_selection_behavior("rows")
-    debugging.stalk(widget)
+    stalker = debugging.Stalker(widget)
 
     def raise_exc():
         try:

@@ -10,7 +10,7 @@ import logging
 import re
 import sys
 
-from prettyqt import gui, qt, widgets
+from prettyqt import core, gui, qt, widgets
 from prettyqt.qt import QtCore
 from prettyqt.utils import helpers
 
@@ -92,45 +92,68 @@ def count_objects():
     logger.info(counter)
 
 
-def stalk(widget, include=None, exclude=None):
-    if exclude is None:
-        exclude = ["meta_call", "timer"]
-    counter = collections.defaultdict(int)
+class Stalker(core.Object):
+    event_detected = core.Signal(QtCore.QEvent)
+    signal_emitted = core.Signal(core.MetaMethod, object)  # signal, args
+    signal_connected = core.Signal(core.MetaMethod)
+    signal_disconnected = core.Signal(core.MetaMethod)
 
-    # enable event logging by installing EventCatcher, which includes logging
-    def increase_counter(event):
-        counter[event.type()] += 1
+    def __init__(self, qobject: QtCore.QObject, include=None, exclude=None, **kwargs):
+        super().__init__(**kwargs)
+        self.obj = qobject
+        self.counter = collections.defaultdict(int)
+        self.signal_counter = collections.defaultdict(int)
+        if exclude is None:
+            exclude = ["meta_call", "timer"]
+        # enable event logging by installing EventCatcher, which includes logging
+        self.obj.add_callback_for_event(
+            self._on_event_detected, include=include, exclude=exclude
+        )
+        # enable logging of signals emitted by connecting all signals to our fn
+        for signal in self.obj.get_metaobject().get_signals():
+            signal_instance = self.obj.__getattribute__(signal.get_name())
+            fn = self._on_signal_emitted(signal)
+            signal_instance.connect(fn)
+
+        # enable logging of all signal (dis)connections by hooking to connectNotify
+        self.old_connectNotify = self.obj.connectNotify
+        self.old_disconnectNotify = self.obj.disconnectNotify
+        self.obj.connectNotify = self._on_signal_connected
+        self.obj.disconnectNotify = self._on_signal_disconnected
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, typ, value, traceback):
+        self.obj.connectNotify = self.old_connectNotify
+        self.obj.disconnectNotify = self.old_disconnectNotify
+
+    def _on_signal_connected(self, signal: QtCore.QMetaMethod):
+        signal = core.MetaMethod(signal)
+        logger.info(f"{self.obj!r}: Connected signal {signal.get_name()}")
+        self.signal_connected.emit(signal)
+
+    def _on_signal_disconnected(self, signal: QtCore.QMetaMethod):
+        signal = core.MetaMethod(signal)
+        logger.info(f"{self.obj!r}: Disconnected signal {signal.get_name()}")
+        self.signal_disconnected.emit(signal)
+
+    def _on_event_detected(self, event):
+        self.event_detected.emit(event)
+        logger.info(f"{self.obj!r}: Received event {event.type()!r}")
+        self.counter[event.type()] += 1
         return False
 
-    widget.add_callback_for_event(increase_counter, include=include, exclude=exclude)
-
-    # enable logging of signals emitted by connecting all signals to our fn
-    def make_fn(widget, signal_prop):
+    def _on_signal_emitted(self, signal: core.MetaMethod):
         def fn(*args, **kwargs):
+            self.signal_emitted.emit(signal, args)
+            self.signal_counter[signal.get_name()] += 1
             try:
-                logger.info(f"{widget!r} {signal_prop.get_name()}")
-                logger.info(f"{args} {kwargs}")
-                counter[signal_prop.get_name()] += 1
+                logger.info(f"{self.obj!r}: Emitted signal {signal.get_name()}{args}")
             except RuntimeError:
                 pass
 
         return fn
-
-    for signal_prop in widget.get_metaobject().get_signals():
-        signal = widget.__getattribute__(signal_prop.get_name())
-        fn = make_fn(widget, signal_prop)
-        signal.connect(fn)
-
-    # enable logging of all signal (dis)connections
-
-    widget.connectNotify = lambda signal: logger.info(
-        f"{widget!r}: Connected {signal.name().data().decode()}"
-    )
-    widget.disconnectNotify = lambda signal: logger.info(
-        f"{widget!r}: Disconnected {signal.name().data().decode()}"
-    )
-
-    return counter
 
 
 def is_deleted(obj) -> bool:
@@ -367,8 +390,8 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
 if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.LineEdit()
-    counter = stalk(widget)
+    stalker = Stalker(widget)
     widget.show()
     with app.debug_mode():
         app.main_loop()
-    print(counter)
+    print(stalker.counter)

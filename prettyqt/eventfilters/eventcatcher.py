@@ -60,7 +60,7 @@ class EventCatcher(eventfilters.BaseEventFilter):
         if not self.include or event.type() in self.include:
             if not self.exclude or event.type() not in self.exclude:
                 self.caught.emit(event)
-                logger.debug(f"{source!r}: {event.type()!r}")
+                # logger.debug(f"{source!r}: {event.type()!r}")
                 if callable(self.do_filter):
                     return self.do_filter(event)
                 return self.do_filter

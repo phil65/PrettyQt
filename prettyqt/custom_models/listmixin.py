@@ -164,7 +164,7 @@ if __name__ == "__main__":
     model.set_list(["a", "b"])
     app = widgets.app()
     view = widgets.TableView()
-    debugging.stalk(model)
+    stalker = debugging.Stalker(model)
     view.set_model(model)
     view.show()
     app.sleep(2)
