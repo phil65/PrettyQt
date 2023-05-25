@@ -153,7 +153,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def get_model(self, skip_proxies: bool = False):
         model = self.model()
         if skip_proxies:
-            while isinstance(model, QtWidgets.QAbstractProxyModel):
+            while isinstance(model, QtCore.QAbstractProxyModel):
                 model = model.sourceModel()
         return model
 
