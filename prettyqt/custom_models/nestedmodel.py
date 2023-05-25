@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from prettyqt import constants, core, custom_models
 
 
@@ -50,8 +52,12 @@ class NestedModel(  # type: ignore
 
         return self.createIndex(row, column, parent_item.children[row])
 
-    def parent(self, index=None):
-        index = index or core.ModelIndex()
+    def parent(self, index: core.ModelIndex | None = None) -> core.ModelIndex:
+        # hacky way to let the case without any arguments get through.
+        # not really nice, a proper dispatch library would be better.
+        # functools.singledispatchmethod doesnt work here.
+        if index is None:
+            return super().parent()
         if not index.isValid():
             return core.ModelIndex()
 

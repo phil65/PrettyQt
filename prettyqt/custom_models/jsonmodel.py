@@ -96,8 +96,10 @@ if __name__ == "__main__":
 
     app = widgets.app()
     dist = [dict(a=2, b={"a": 4, "b": [1, 2, 3], "jkjkjk": "tekjk"}), 6, "jkjk"]
-    model = JsonModel(dist)
     table = widgets.TreeView()
+    model = JsonModel(dist, parent=table)
+    model = model.proxifier.modify(lambda x: x * 2, column=0)
+    model = model.proxifier.modify(lambda x: x * 4, column=1)
     table.setRootIsDecorated(True)
     # table.setSortingEnabled(True)
     table.set_model(model)

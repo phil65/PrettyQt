@@ -88,7 +88,9 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
             else self.createIndex(row, column, object=row)
         )
 
-    def parent(self, child) -> core.ModelIndex:
+    def parent(self, child=None) -> core.ModelIndex:
+        if child is None:
+            return super().parent()
         return core.ModelIndex()
 
     def rowCount(self, parent=None) -> int:

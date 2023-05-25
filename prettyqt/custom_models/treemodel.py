@@ -5,7 +5,7 @@ from prettyqt.utils import treeitem
 
 
 class TreeModel(core.AbstractItemModel):
-    def __init__(self, obj, show_root: bool = True, **kwargs):
+    def __init__(self, obj=None, show_root: bool = True, **kwargs):
         super().__init__(**kwargs)
         self._root_item = treeitem.TreeItem(obj=obj)
         self._show_root = show_root
@@ -61,12 +61,17 @@ class TreeModel(core.AbstractItemModel):
             return self.createIndex(row, column, child_item)
         return core.ModelIndex()
 
-    def parent(self, index: core.ModelIndex) -> core.ModelIndex:  # type:ignore
+    def parent(self, index: core.ModelIndex | None = None) -> core.ModelIndex:
+        # hacky way to let the case without any arguments get through.
+        # not really nice, a proper dispatch library would be better.
+        # functools.singledispatchmethod doesnt work here.
+        if index is None:
+            return super().parent()
         if not index.isValid():
             return core.ModelIndex()
 
         child_item = self.data_by_index(index)
-        parent_item = child_item.parent()  # type: ignore
+        parent_item = child_item.parent()
 
         if parent_item is None or parent_item == self.root_item:
             return core.ModelIndex()
@@ -110,3 +115,8 @@ class TreeModel(core.AbstractItemModel):
 
     def _fetch_object_children(self, treeitem) -> list[treeitem.TreeItem]:
         return NotImplemented
+
+
+if __name__ == "__main__":
+    model = TreeModel("test")
+    model.parent()

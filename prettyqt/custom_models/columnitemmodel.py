@@ -286,14 +286,13 @@ class ColumnItemModelMixin:
 class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
     def __init__(
         self,
-        obj,
-        columns: Iterable[ColumnItem],
+        obj=None,
+        columns: Iterable[ColumnItem] = [],
         mime_type: str | None = None,
         show_root: bool = True,
-        parent: QtCore.QObject | None = None,
         **kwargs,
     ):
-        super().__init__(parent, **kwargs)
+        super().__init__(**kwargs)
         self._root_item = treeitem.TreeItem(obj=obj)
         self._show_root = show_root
         self.mime_type = mime_type
@@ -311,10 +310,9 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         items: list,
         columns: Iterable[ColumnItem],
         mime_type: str | None = None,
-        parent: QtCore.QObject | None = None,
         **kwargs,
     ):
-        super().__init__(parent, **kwargs)
+        super().__init__(**kwargs)
         self.items = items
         self.mime_type = mime_type
         self._attr_cols = []
