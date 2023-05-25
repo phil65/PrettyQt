@@ -95,9 +95,17 @@ class Stalker(core.Object):
     signal_connected = core.Signal(core.MetaMethod)
     signal_disconnected = core.Signal(core.MetaMethod)
 
-    def __init__(self, qobject: QtCore.QObject, include=None, exclude=None, **kwargs):
+    def __init__(
+        self,
+        qobject: QtCore.QObject,
+        include=None,
+        exclude=None,
+        log_level=logging.INFO,
+        **kwargs,
+    ):
         super().__init__(**kwargs)
         self.obj = qobject
+        self.log_level = log_level
         self.counter = collections.defaultdict(int)
         self.signal_counter = collections.defaultdict(int)
         if exclude is None:
@@ -123,25 +131,37 @@ class Stalker(core.Object):
         return self
 
     def __exit__(self, typ, value, traceback):
+        self.unhook()
+
+    def unhook(self):
+        """Clean up our mess."""
         self.obj.connectNotify = self.old_connectNotify
         self.obj.disconnectNotify = self.old_disconnectNotify
         for handle in self.handles:
             self.obj.disconnect(handle)
         self.obj.removeEventFilter(self.eventcatcher)
 
+    def log(self, message: str):
+        if self.log_level:
+            try:
+                logger.log(self.log_level, f"{self.obj!r}: {message}")
+            except RuntimeError:
+                logger.error("Object probably already deleted.")
+
     def _on_signal_connected(self, signal: QtCore.QMetaMethod):
         signal = core.MetaMethod(signal)
-        logger.info(f"{self.obj!r}: Connected signal {signal.get_name()}")
+        self.log(f"Connected signal {signal.get_name()}")
         self.signal_connected.emit(signal)
 
     def _on_signal_disconnected(self, signal: QtCore.QMetaMethod):
         signal = core.MetaMethod(signal)
-        logger.info(f"{self.obj!r}: Disconnected signal {signal.get_name()}")
+        self.log(f"Disconnected signal {signal.get_name()}")
         self.signal_disconnected.emit(signal)
 
-    def _on_event_detected(self, event):
+    def _on_event_detected(self, event) -> bool:
+        """Used for EventCatcher, returns false to not eat signals."""
         self.event_detected.emit(event)
-        logger.info(f"{self.obj!r}: Received event {event.type()!r}")
+        self.log(f"Received event {event.type()!r}")
         self.counter[event.type()] += 1
         return False
 
@@ -149,10 +169,7 @@ class Stalker(core.Object):
         def fn(*args, **kwargs):
             self.signal_emitted.emit(signal, args)
             self.signal_counter[signal.get_name()] += 1
-            try:
-                logger.info(f"{self.obj!r}: Emitted signal {signal.get_name()}{args}")
-            except RuntimeError:
-                pass
+            self.log(f"Emitted signal {signal.get_name()}{args}")
 
         return fn
 
@@ -397,8 +414,9 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
 if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.LineEdit()
-    stalker = Stalker(widget)
     widget.show()
     with app.debug_mode():
+        with Stalker(widget) as stalker:
+            app.sleep(3)
+            print(stalker.counter)
         app.main_loop()
-    print(stalker.counter)
