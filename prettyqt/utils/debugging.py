@@ -97,13 +97,14 @@ def stalk(widget, include=None, exclude=None):
         exclude = ["meta_call", "timer"]
     counter = collections.defaultdict(int)
 
-    # to activate signal logging for all
+    # enable event logging by installing EventCatcher, which includes logging
     def increase_counter(event):
         counter[event.type()] += 1
         return False
 
     widget.add_callback_for_event(increase_counter, include=include, exclude=exclude)
 
+    # enable logging of signals emitted by connecting all signals to our fn
     def make_fn(widget, signal_prop):
         def fn(*args, **kwargs):
             try:
@@ -119,6 +120,16 @@ def stalk(widget, include=None, exclude=None):
         signal = widget.__getattribute__(signal_prop.get_name())
         fn = make_fn(widget, signal_prop)
         signal.connect(fn)
+
+    # enable logging of all signal (dis)connections
+
+    widget.connectNotify = lambda signal: logger.info(
+        f"{widget!r}: Connected {signal.name().data().decode()}"
+    )
+    widget.disconnectNotify = lambda signal: logger.info(
+        f"{widget!r}: Disconnected {signal.name().data().decode()}"
+    )
+
     return counter
 
 
