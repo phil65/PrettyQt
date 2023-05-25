@@ -23,12 +23,12 @@ LAYOUT_CHANGE_HINT = bidict(
 )
 
 
-class Subset:
+class Proxyfier:
     def __init__(self, model):
-        self.model = model
+        self._model = model
 
     def __getitem__(self, index):
-        parent = self.model.parent()
+        parent = self._model.parent()
         if parent is None:
             raise ValueError("needs parent!")
 
@@ -40,7 +40,54 @@ class Subset:
             case _:
                 kwargs = dict(row_filter=index, column_filter=None, parent=parent)
         proxy = proxy = custom_models.SubsetFilterProxyModel(**kwargs)
-        proxy.setSourceModel(self.model)
+        proxy.setSourceModel(self._model)
+        return proxy
+
+    def transpose(
+        self, parent: QtWidgets.QWidget | None = None
+    ) -> core.TransposeProxyModel:
+        # PySide6 needs widget parent here
+        parent = parent or self._model.parent()
+        if parent is None:
+            raise ValueError("needs parent!")
+        proxy = core.TransposeProxyModel(parent=parent)
+        proxy.setSourceModel(self._model)
+        return proxy
+
+    def modify(
+        self,
+        fn: Callable[[Any], Any],
+        column: int | None = None,
+        row: int | None = None,
+        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        selector: Callable[[Any], bool] | None = None,
+        selector_role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        parent: QtWidgets.QWidget | None = None,
+    ):
+        parent = parent or self._model.parent()
+        if parent is None:
+            raise ValueError("needs parent!")
+
+        from prettyqt import custom_models
+
+        proxy = custom_models.ValueTransformationProxyModel(parent=parent)
+        proxy.add_transformer(fn, column, row, role, selector, selector_role)
+        proxy.setSourceModel(self._model)
+        return proxy
+
+    def get_search_proxy(
+        self, search_type: Literal["regular", "fuzzy"] = "regular", **kwargs
+    ):
+        match search_type:
+            case "regular":
+                proxy = core.SortFilterProxyModel(**kwargs)
+            case "fuzzy":
+                from prettyqt import custom_models
+
+                proxy = custom_models.FuzzyFilterProxyModel(**kwargs)
+            case _:
+                raise ValueError(search_type)
+        proxy.setSourceModel(self._model)
         return proxy
 
 
@@ -51,7 +98,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.subset = Subset(self)
+        self.proxifier = Proxyfier(self)
 
     def __repr__(self):
         return f"{type(self).__name__}: {self.rowCount()} rows"
@@ -231,53 +278,6 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
     def get_role_names(self) -> dict[int, str]:
         return {i: v.data().decode() for i, v in self.roleNames().items()}
-
-    def transpose(
-        self, parent: QtWidgets.QWidget | None = None
-    ) -> core.TransposeProxyModel:
-        # PySide6 needs widget parent here
-        parent = parent or self.parent()
-        if parent is None:
-            raise ValueError("needs parent!")
-        proxy = core.TransposeProxyModel(parent=parent)
-        proxy.setSourceModel(self)
-        return proxy
-
-    def modify(
-        self,
-        fn: Callable[[Any], Any],
-        column: int | None = None,
-        row: int | None = None,
-        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
-        selector: Callable[[Any], bool] | None = None,
-        selector_role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        parent = parent or self.parent()
-        if parent is None:
-            raise ValueError("needs parent!")
-
-        from prettyqt import custom_models
-
-        proxy = custom_models.ValueTransformationProxyModel(parent=parent)
-        proxy.add_transformer(fn, column, row, role, selector, selector_role)
-        proxy.setSourceModel(self)
-        return proxy
-
-    def get_search_proxy(
-        self, search_type: Literal["regular", "fuzzy"] = "regular", **kwargs
-    ):
-        match search_type:
-            case "regular":
-                proxy = core.SortFilterProxyModel(**kwargs)
-            case "fuzzy":
-                from prettyqt import custom_models
-
-                proxy = custom_models.FuzzyFilterProxyModel(**kwargs)
-            case _:
-                raise ValueError(search_type)
-        proxy.setSourceModel(self)
-        return proxy
 
 
 class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
