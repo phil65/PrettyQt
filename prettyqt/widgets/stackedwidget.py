@@ -169,7 +169,7 @@ class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
     def fade_in(self, widget: int | QtWidgets.QWidget):
         widget = self.widget(widget) if isinstance(widget, int) else widget
         self.fader_widget = FaderWidget(self.currentWidget(), widget, self.speed)
-        self.setCurrentIndex(widget)
+        self.setCurrentWidget(widget)
 
 
 if __name__ == "__main__":
@@ -178,10 +178,14 @@ if __name__ == "__main__":
     app = widgets.app()
     stackedwidget = StackedWidget()
     widget2 = widgets.RadioButton("Test")
-    widget3 = widgets.RadioButton("Test 2")
+    widget3 = widgets.PlainTextEdit("Test 243434")
     stackedwidget += widget2
     stackedwidget += widget3
     stackedwidget.show()
-    app.sleep(3)
+    app.sleep(2)
     stackedwidget.slide_in_next()
+    app.sleep(2)
+    stackedwidget.fade_in(0)
+    app.sleep(2)
+    stackedwidget.fade_in(1)
     app.main_loop()
