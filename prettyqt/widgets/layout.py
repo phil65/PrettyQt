@@ -35,17 +35,17 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.Prett
         if margin is not None:
             self.set_margin(margin)
 
-    def __getitem__(
-        self, index: str | int
-    ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:
-        if isinstance(index, int):
-            item = self.itemAt(index)
-            widget = item.widget()
-            if widget is None:
-                widget = item.layout()
-        elif isinstance(index, str):
-            return self.find_child(typ=QtCore.QObject, name=index)
-        return widget
+    def __getitem__(self, index: str | int) -> QtWidgets.QWidget | QtWidgets.QLayout:
+        match index:
+            case int():
+                item = self.itemAt(index)
+                return widget if (widget := item.widget()) is not None else item.layout()
+            case str():
+                if (item := self.find_child(typ=QtCore.QObject, name=index)) is not None:
+                    return item
+                raise IndexError(index)
+            case _:
+                raise IndexError(index)
 
     def __delitem__(self, item: int | QtWidgets.QLayoutItem):
         if isinstance(item, int):

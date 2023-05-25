@@ -150,7 +150,7 @@ class SplitterMixin(widgets.FrameMixin):
         return self._stack[-1] if self._stack else self
 
     def get_children(self) -> list[QtWidgets.QWidget]:
-        return [self[i] for i in range(self.count())]
+        return [self.widget(i) for i in range(self.count())]
 
     def add_widget(
         self,

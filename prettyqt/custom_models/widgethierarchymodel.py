@@ -130,15 +130,11 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
             case QtWidgets.QWidget():
                 layout = item.obj.layout()
                 items = [layout.itemAt(i) for i in range(layout.count())]
-                items = [
-                    i.widget() if i.widget() is not None else i.layout() for i in items
-                ]
+                items = [w if (w := i.widget()) else i.layout() for i in items]
             case QtWidgets.QLayout():
                 layout = item.obj
                 items = [layout.itemAt(i) for i in range(layout.count())]
-                items = [
-                    i.widget() if i.widget() is not None else i.layout() for i in items
-                ]
+                items = [w if (w := i.widget()) else i.layout() for i in items]
             case _:
                 raise ValueError(item)
         return [treeitem.TreeItem(obj=i) for i in items]
@@ -176,16 +172,19 @@ if __name__ == "__main__":
                 with layout.get_sub_layout("horizontal") as layout:
                     layout += widgets.PlainTextEdit("upper right")
                     layout += widgets.PlainTextEdit("middle right")
+                    button = layout.add(widgets.PushButton("test"))
         with layout.get_sub_layout("horizontal") as layout:
             layout += widgets.PlainTextEdit("lower left")
             layout += widgets.PlainTextEdit("lower right")
 
+    button.clicked.connect(lambda: widget.layout().addWidget(widgets.Label("test")))
     model = LayoutHierarchyModel(widget, show_root=True, parent=view)
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate(delegate)
     view.resize(1000, 1000)
+    view.show()
+    widget.show()
     with app.debug_mode():
-        view.show()
         app.main_loop()
