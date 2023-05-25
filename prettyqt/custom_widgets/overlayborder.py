@@ -32,12 +32,27 @@ class BaseOverlayWidget(widgets.Widget):
     def get_border_color(self) -> gui.Color:
         return self._border_color
 
+    # def event(self, event):
+    #     if event.type() != QtCore.QEvent.Type.LayoutRequest:
+    #         return super().event(event)
+    #     self._do_resize()
+    #     return True
+
+    # def showEvent(self, event):
+    #     super().showEvent(event)
+    #     # Force immediate re-layout on show
+    #     self._do_resize()
+
     def eventFilter(self, source, event):
         match event.type():
-            case QtCore.QEvent.Type.Resize:
+            case QtCore.QEvent.Type.Resize | QtCore.QEvent.Type.Move:
                 self._do_resize()
             # case QtCore.QEvent.Type.ChildAdded:
             #     self._do_resize()
+            # case QtCore.QEvent.Type.Show:
+            #     self.show()
+            # case QtCore.QEvent.Type.Hide:
+            #     self.hide()
         return False
 
     def _do_resize(self):
