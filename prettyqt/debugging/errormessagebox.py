@@ -1,212 +1,15 @@
-"""Module containing helper functions."""
-
 from __future__ import annotations
 
-import collections
-import contextlib
-from collections.abc import Callable, Generator
-
+import sys
 import logging
 import re
-import sys
-from typing import TypeVar
+import traceback
+from collections.abc import Callable, Generator
 
-from prettyqt import core, gui, qt, widgets
-from prettyqt.qt import QtCore
+from prettyqt import debugging, gui, widgets
 from prettyqt.utils import helpers
 
-
-T = TypeVar("T", bound=QtCore.QObject)
-
-
 logger = logging.getLogger(__name__)
-
-LOG_MAP = {
-    QtCore.QtMsgType.QtDebugMsg: logging.DEBUG,
-    QtCore.QtMsgType.QtInfoMsg: logging.INFO,
-    QtCore.QtMsgType.QtWarningMsg: logging.WARNING,
-    QtCore.QtMsgType.QtCriticalMsg: logging.ERROR,
-    QtCore.QtMsgType.QtFatalMsg: logging.CRITICAL,
-    QtCore.QtMsgType.QtSystemMsg: logging.CRITICAL,
-}
-
-# qFormatLogMessage(QtMsgType type, const QMessageLogContext context, const QString str)
-# qInstallMessageHandler(QtMessageHandler handler)
-# qSetMessagePattern(const QString &pattern)
-
-
-class QtLogger(logging.Handler):
-    def emit(self, record: logging.LogRecord):
-        match record.level:
-            case logging.DEBUG:
-                QtCore.qDebug(self.format(record))
-            case logging.INFO:
-                QtCore.qInfo(self.format(record))
-            case logging.WARNING:
-                QtCore.qWarning(self.format(record))
-            case logging.CRITICAL:
-                QtCore.qCritical(self.format(record))
-            case logging.CRITICAL:
-                QtCore.qFatal(self.format(record))
-
-
-class MessageHandler:
-    def __init__(self, logger: logging.Logger):
-        self._logger = logger
-        self._previous_handler = None
-
-    def install(self):
-        self._previous_handler = QtCore.qInstallMessageHandler(self)
-
-    def uninstall(self):
-        if self._previous_handler is None:
-            QtCore.qInstallMessageHandler(self._previous_handler)
-
-    def __enter__(self):
-        self.install()
-        return self
-
-    def __exit__(self, *args):
-        self.uninstall()
-
-    def __call__(
-        self,
-        msgtype: QtCore.QtMsgType,
-        context: QtCore.QMessageLogContext,
-        message: str,
-    ):
-        ctx = dict.fromkeys(["category", "file", "function", "line"])
-        with contextlib.suppress(UnicodeDecodeError):
-            ctx["category"] = context.category
-        with contextlib.suppress(UnicodeDecodeError):
-            ctx["file"] = context.file
-        with contextlib.suppress(UnicodeDecodeError):
-            ctx["function"] = context.function
-        with contextlib.suppress(UnicodeDecodeError):
-            ctx["line"] = context.line
-
-        level = LOG_MAP[msgtype]
-        self._logger.log(level, message, extra=ctx)
-
-
-class Stalker(core.Object):
-    event_detected = core.Signal(QtCore.QEvent)
-    signal_emitted = core.Signal(core.MetaMethod, object)  # signal, args
-    signal_connected = core.Signal(core.MetaMethod)
-    signal_disconnected = core.Signal(core.MetaMethod)
-
-    def __init__(
-        self,
-        qobject: QtCore.QObject,
-        include=None,
-        exclude=None,
-        log_level=logging.INFO,
-        **kwargs,
-    ):
-        super().__init__(**kwargs)
-        self.obj = qobject
-        self.log_level = log_level
-        self.counter = collections.defaultdict(int)
-        self.signal_counter = collections.defaultdict(int)
-        if exclude is None:
-            exclude = ["meta_call", "timer"]
-        # enable event logging by installing EventCatcher, which includes logging
-        self.eventcatcher = self.obj.add_callback_for_event(
-            self._on_event_detected, include=include, exclude=exclude
-        )
-        self.handles = []
-        # enable logging of signals emitted by connecting all signals to our fn
-        for signal in self.obj.get_metaobject().get_signals():
-            signal_instance = self.obj.__getattribute__(signal.get_name())
-            fn = self._on_signal_emitted(signal)
-            handle = signal_instance.connect(fn)
-            self.handles.append(handle)
-        # enable logging of all signal (dis)connections by hooking to connectNotify
-        self.old_connectNotify = self.obj.connectNotify
-        self.old_disconnectNotify = self.obj.disconnectNotify
-        self.obj.connectNotify = self._on_signal_connected
-        self.obj.disconnectNotify = self._on_signal_disconnected
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, typ, value, traceback):
-        self.unhook()
-
-    def unhook(self):
-        """Clean up our mess."""
-        self.obj.connectNotify = self.old_connectNotify
-        self.obj.disconnectNotify = self.old_disconnectNotify
-        for handle in self.handles:
-            self.obj.disconnect(handle)
-        self.obj.removeEventFilter(self.eventcatcher)
-
-    def log(self, message: str):
-        if self.log_level:
-            try:
-                logger.log(self.log_level, f"{self.obj!r}: {message}")
-            except RuntimeError:
-                logger.error("Object probably already deleted.")
-
-    def _on_signal_connected(self, signal: QtCore.QMetaMethod):
-        signal = core.MetaMethod(signal)
-        self.log(f"Connected signal {signal.get_name()}")
-        self.signal_connected.emit(signal)
-
-    def _on_signal_disconnected(self, signal: QtCore.QMetaMethod):
-        signal = core.MetaMethod(signal)
-        self.log(f"Disconnected signal {signal.get_name()}")
-        self.signal_disconnected.emit(signal)
-
-    def _on_event_detected(self, event) -> bool:
-        """Used for EventCatcher, returns false to not eat signals."""
-        self.event_detected.emit(event)
-        self.log(f"Received event {event.type()!r}")
-        self.counter[event.type()] += 1
-        return False
-
-    def _on_signal_emitted(self, signal: core.MetaMethod):
-        def fn(*args, **kwargs):
-            self.signal_emitted.emit(signal, args)
-            self.signal_counter[signal.get_name()] += 1
-            self.log(f"Emitted signal {signal.get_name()}{args}")
-
-        return fn
-
-    def count_children(
-        self, type_filter: type[T] = QtCore.QObject
-    ) -> collections.Counter:
-        objects = self.findChildren(type_filter)
-        return collections.Counter([type(o) for o in objects])
-
-
-def is_deleted(obj) -> bool:
-    match qt.API:
-        case "pyside6":
-            import shiboken6
-
-            return not shiboken6.isValid(obj)
-        case "pyqt6":
-            from PyQt6 import sip
-
-            return sip.isdeleted(obj)
-
-
-class TracebackDialog(widgets.Dialog):
-    """A dialog box that shows Python traceback."""
-
-    def __init__(self, parent):
-        super().__init__(parent, window_title="Traceback")
-        layout = widgets.VBoxLayout()
-        self.setLayout(layout)
-        self._text = widgets.TextEdit(self, read_only=True, line_wrap_mode="none")
-        self._text.setFontFamily(gui.Font.mono().family())
-        layout.addWidget(self._text)
-        self.resize(600, 400)
-
-    def setText(self, text: str):
-        """Always set text as a HTML text."""
-        self._text.setHtml(text)
 
 
 class ErrorMessageBox(widgets.MessageBox):
@@ -238,7 +41,7 @@ class ErrorMessageBox(widgets.MessageBox):
         match super().exec():
             case widgets.MessageBox.StandardButton.Help:
                 tb = self._get_traceback()
-                dlg = TracebackDialog(self)
+                dlg = debugging.TracebackDialog(self)
                 dlg.setText(tb)
                 dlg.exec()
             case widgets.MessageBox.StandardButton.Close:
@@ -259,10 +62,7 @@ class ErrorMessageBox(widgets.MessageBox):
 
     def _get_traceback(self):
         if self._exc is None:
-            import traceback
-
             tb = traceback.format_exc()
-            print(tb)
         else:
             tb = get_tb_formatter(gui.Font.mono().family())(self._exc, as_html=True)
         return tb
@@ -412,11 +212,11 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
     app = widgets.app()
-    widget = widgets.LineEdit()
-    widget.show()
+    w = widgets.Widget()
+    wnd = ErrorMessageBox("a", "b", w)
+    wnd.show()
     with app.debug_mode():
-        with Stalker(widget) as stalker:
-            app.sleep(3)
-            print(stalker.counter)
         app.main_loop()

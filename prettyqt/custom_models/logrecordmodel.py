@@ -120,7 +120,7 @@ class LogRecordModel(custom_models.ColumnTableModel):
 
 
 if __name__ == "__main__":
-    from prettyqt.utils import debugging
+    from prettyqt import debugging
 
     logger = logging.getLogger()
 

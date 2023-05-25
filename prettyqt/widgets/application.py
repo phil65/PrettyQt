@@ -68,7 +68,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     @contextlib.contextmanager
     def debug_mode(self):
         from prettyqt.eventfilters import debugmode
-        from prettyqt.utils.debugging import ErrorMessageBox, MessageHandler
+        from prettyqt.debugging import ErrorMessageBox, MessageHandler
 
         handler = logging.StreamHandler(sys.stdout)
         f_format = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
