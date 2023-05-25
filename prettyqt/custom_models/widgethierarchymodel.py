@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import enum
 import logging
 
 from prettyqt import constants, core, custom_models
@@ -53,6 +54,11 @@ class FakeLayoutProp:
 
 
 class WidgetHierarchyModel(custom_models.TreeModel):
+    class Roles(enum.IntEnum):
+        """Custom roles."""
+
+        WidgetRole = constants.USER_ROLE + 23324
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.BaseClass = QtWidgets.QWidget
@@ -86,6 +92,8 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             case constants.USER_ROLE, _:
                 prop = self.props[index.column()]
                 return prop.read(widget)
+            case self.Roles.WidgetRole, _:
+                return widget
 
     def setData(self, index, value, role=constants.DISPLAY_ROLE):
         prop = self.props[index.column()]
