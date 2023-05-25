@@ -20,7 +20,7 @@ if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
 
 
-LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
+LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow", "border"]
 
 QWIDGETSIZE_MAX = 16777215  # QtWidgets.QWIDGETSIZE_MAX
 
@@ -629,6 +629,8 @@ class WidgetMixin(core.ObjectMixin):
         Returns:
             Layout
         """
+        from prettyqt import custom_widgets
+
         match layout:
             case "horizontal":
                 self.box = widgets.HBoxLayout()
@@ -641,9 +643,9 @@ class WidgetMixin(core.ObjectMixin):
             case "stacked":
                 self.box = widgets.StackedLayout()
             case "flow":
-                from prettyqt import custom_widgets
-
                 self.box = custom_widgets.FlowLayout()
+            case "border":
+                self.box = custom_widgets.BorderLayout()
             case QtWidgets.QLayout():
                 self.box = layout
             case _:
