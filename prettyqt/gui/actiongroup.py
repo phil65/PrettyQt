@@ -7,7 +7,7 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, bidict
 
 
-POLICIES = bidict(
+EXCLUSION_POLICY = bidict(
     none=QtGui.QActionGroup.ExclusionPolicy.None_,
     exclusive=QtGui.QActionGroup.ExclusionPolicy.Exclusive,
     exclusive_optional=QtGui.QActionGroup.ExclusionPolicy.ExclusiveOptional,
@@ -17,8 +17,13 @@ ExclusionPolicyStr = Literal["none", "exclusive", "exclusive_optional"]
 
 
 class ActionGroup(core.ObjectMixin, QtGui.QActionGroup):
-    def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)  # type: ignore
+    def __init__(self, parent: QtCore.QObject | None = None, **kwargs):
+        super().__init__(parent, **kwargs)
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"exclusionPolicy": EXCLUSION_POLICY}
+        return maps
 
     def __len__(self) -> int:
         return len(self.actions())
@@ -37,9 +42,9 @@ class ActionGroup(core.ObjectMixin, QtGui.QActionGroup):
         """
         if policy is None:
             policy = "none"
-        if policy not in POLICIES:
-            raise InvalidParamError(policy, POLICIES)
-        self.setExclusionPolicy(POLICIES[policy])
+        if policy not in EXCLUSION_POLICY:
+            raise InvalidParamError(policy, EXCLUSION_POLICY)
+        self.setExclusionPolicy(EXCLUSION_POLICY[policy])
 
     def get_exclusion_policy(self) -> ExclusionPolicyStr:
         """Return current exclusion policy.
@@ -47,7 +52,7 @@ class ActionGroup(core.ObjectMixin, QtGui.QActionGroup):
         Returns:
             exclusion policy
         """
-        return POLICIES.inverse[self.exclusionPolicy()]
+        return EXCLUSION_POLICY.inverse[self.exclusionPolicy()]
 
 
 if __name__ == "__main__":
