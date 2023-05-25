@@ -288,10 +288,10 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         if (model := self.selectionModel()) is not None:
             return model.currentIndex()
 
-    def current_data(self):
+    def current_data(self, role=constants.USER_ROLE):
         if (model := self.selectionModel()) is not None:
             idx = model.currentIndex()
-            return idx.data(constants.USER_ROLE)
+            return idx.data(role)
 
     def current_row(self) -> int | None:
         if (model := self.selectionModel()) is not None:
@@ -314,9 +314,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """Return generator yielding row nums."""
         return (x.row() for x in self.selected_indexes())
 
-    def selected_data(self) -> Generator[Any, None, None]:
+    def selected_data(self, role=constants.USER_ROLE) -> Generator[Any, None, None]:
         """Return generator yielding selected userData."""
-        return (x.data(constants.USER_ROLE) for x in self.selected_indexes())
+        return (x.data(role) for x in self.selected_indexes())
 
     def setup_dragdrop_move(self):
         self.setDragEnabled(True)
