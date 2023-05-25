@@ -22,16 +22,48 @@ TO_FILTER = {
 }
 
 
+class FakeWidgetProp:
+    def isWritable(self):
+        return False
+
+    def get_name(self):
+        return "Widget class"
+
+    def read(self, widget):
+        return widget.__class__.__name__
+
+    def write(self, widget, value):
+        pass
+
+
+class FakeLayoutProp:
+    def isWritable(self):
+        return False
+
+    def get_name(self):
+        return "Layout"
+
+    def read(self, widget):
+        if widget.layout() is None:
+            return ""
+        return widget.layout().__class__.__name__
+
+    def write(self, widget, value):
+        pass
+
+
 class WidgetHierarchyModel(custom_models.TreeModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.BaseClass = QtWidgets.QWidget
         self.props = core.MetaObject(self.BaseClass.staticMetaObject).get_properties()
         self.props = [i for i in self.props if i.get_name() not in TO_FILTER]
+        self.props.insert(0, FakeWidgetProp())
+        self.props.insert(1, FakeLayoutProp())
         # self.props.sort(key=lambda x: x.get_name())
 
     def columnCount(self, parent=None):
-        return len(self.props) + 1
+        return len(self.props)
 
     def headerData(
         self,
@@ -40,29 +72,23 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         role: QtCore.Qt.ItemDataRole,
     ) -> str | None:
         match orientation, role, section:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE, 0:
-                return "Type"
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
-                return self.props[section - 1].get_name()
+                return self.props[section].get_name()
 
     def data(self, index, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return None
         widget = self.data_by_index(index).obj
         match role, index.column():
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 0:
-                return type(widget).__name__
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE, _:
-                prop = self.props[index.column() - 1]
+                prop = self.props[index.column()]
                 return prop.read(widget)
-            case constants.USER_ROLE, 0:
-                return widget
             case constants.USER_ROLE, _:
-                prop = self.props[index.column() - 1]
+                prop = self.props[index.column()]
                 return prop.read(widget)
 
     def setData(self, index, value, role=constants.DISPLAY_ROLE):
-        prop = self.props[index.column() - 1]
+        prop = self.props[index.column()]
         widget = self.data_by_index(index).obj
         match role:
             case constants.USER_ROLE:
@@ -74,10 +100,8 @@ class WidgetHierarchyModel(custom_models.TreeModel):
 
     def flags(self, index):
         match index.column():
-            case 0:
-                return super().flags(index)
             case _:
-                prop = self.props[index.column() - 1]
+                prop = self.props[index.column()]
                 if prop.isWritable():
                     return (
                         super().flags(index)
