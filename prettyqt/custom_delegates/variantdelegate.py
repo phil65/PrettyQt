@@ -239,8 +239,7 @@ if __name__ == "__main__":
         table_widget[i, 0] = item_1
         table_widget[i, 1] = item_2
 
-    delegate = VariantDelegate(parent=table_widget)
-    table_widget.set_delegate(delegate, column=1)
+    table_widget.set_delegate("variant", column=1)
 
     table_widget.resizeColumnsToContents()
     table_widget.resize(500, 300)

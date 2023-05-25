@@ -98,17 +98,15 @@ class WidgetsDetailsModel(core.AbstractTableModel):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    from prettyqt.custom_delegates import variantdelegate
 
     app = widgets.app()
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     items = [widgets.TableWidget(), widgets.TableWidget()]
     model = WidgetsDetailsModel(items, parent=view).transpose()
-    delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate(delegate)
+    view.set_delegate("variant")
     view.resize(1000, 1000)
     with app.debug_mode():
         view.show()

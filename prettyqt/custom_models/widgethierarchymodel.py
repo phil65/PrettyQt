@@ -164,7 +164,6 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    from prettyqt.custom_delegates import variantdelegate
 
     app = widgets.app()
     view = widgets.TreeView()
@@ -187,10 +186,9 @@ if __name__ == "__main__":
 
     button.clicked.connect(lambda: widget.layout().addWidget(widgets.Label("test")))
     model = LayoutHierarchyModel(widget, show_root=True, parent=view)
-    delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate(delegate)
+    view.set_delegate("variant")
     view.resize(1000, 1000)
     view.show()
     widget.show()

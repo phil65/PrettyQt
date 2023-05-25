@@ -73,16 +73,14 @@ class LineEditFilterContainer(widgets.Widget):
 
 if __name__ == "__main__":
     from prettyqt.custom_models import widgetpropertiesmodel
-    from prettyqt.custom_delegates import variantdelegate
 
     app = widgets.app()
     view = widgets.TableView()
 
     model = widgetpropertiesmodel.WidgetPropertiesModel(view.h_header, parent=view)
-    delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_selection_behavior("rows")
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate(delegate, column=1)
+    view.set_delegate("variant", column=1)
 
     view.setModel(model)
     view.resize(640, 480)

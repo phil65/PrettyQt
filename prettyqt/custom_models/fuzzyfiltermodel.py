@@ -151,7 +151,7 @@ class FuzzyCompleter(widgets.Completer):
 
 
 if __name__ == "__main__":
-    from prettyqt import custom_delegates, widgets
+    from prettyqt import widgets
     from prettyqt.custom_models import JsonModel
 
     app = widgets.app()
@@ -186,9 +186,8 @@ if __name__ == "__main__":
     widget.set_layout("vertical")
     lineedit = widgets.LineEdit()
     lineedit.value_changed.connect(model.set_search_term)
-    delegate = custom_delegates.HtmlItemDelegate()
     table = widgets.TreeView()
-    table.setItemDelegateForColumn(1, delegate)
+    table.set_delegate("html", column=1)
     table.setRootIsDecorated(True)
     # table.setSortingEnabled(True)
     table.set_model(model)

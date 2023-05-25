@@ -255,12 +255,26 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_delegate(
         self,
-        delegate: QtWidgets.QAbstractItemDelegate,
+        delegate: QtWidgets.QAbstractItemDelegate | Literal["widget", "variant", "html"],
         *,
         column: int | None = None,
         row: int | None = None,
         persistent: bool = False,
+        **kwargs,
     ):
+        from prettyqt import custom_delegates
+
+        match delegate:
+            case QtWidgets.QAbstractItemDelegate():
+                pass
+            case "variant":
+                delegate = custom_delegates.VariantDelegate(parent=self, **kwargs)
+            case "widget":
+                delegate = custom_delegates.WidgetDelegate(parent=self, **kwargs)
+            case "html":
+                delegate = custom_delegates.HtmlItemDelegate(parent=self, **kwargs)
+            case _:
+                raise ValueError(delegate)
         match column, row:
             case int(), int():
                 raise ValueError("Only set column or row, not both.")
@@ -284,6 +298,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                     for i in range(model.rowCount()):
                         for j in range(model.columnCount()):
                             self.openPersistentEditor(model.index(i, j))
+        return delegate
 
     def toggle_select_all(self):
         """Select all items from list (deselect when all selected)."""

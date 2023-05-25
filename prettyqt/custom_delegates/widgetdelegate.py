@@ -112,8 +112,7 @@ if __name__ == "__main__":
                 | constants.IS_SELECTABLE
             )
 
-    delegate = WidgetDelegate(parent=table_widget)
-    table_widget.set_delegate(delegate)
+    table_widget.set_delegate("widget")
     model = Model()
     table_widget.set_model(model)
     table_widget.set_edit_triggers("all")

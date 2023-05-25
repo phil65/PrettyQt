@@ -4,7 +4,7 @@ import collections
 from collections.abc import Sequence
 import logging
 
-from prettyqt import constants, core, custom_delegates, custom_models, gui, widgets
+from prettyqt import constants, core, custom_models, gui, widgets
 from prettyqt.custom_models import actionsmodel
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import colors, datatypes
@@ -51,7 +51,7 @@ class CommandTable(widgets.TableView):
         self.setModel(self._proxy)
         self.h_header.set_resize_mode("stretch")
         self.pressed.connect(self._on_clicked)
-        self.set_delegate(custom_delegates.HtmlItemDelegate(), column=0)
+        self.set_delegate("html", column=0)
         self._match_color = QtGui.QColor("#468cc6")
         self.setShowGrid(False)
 
