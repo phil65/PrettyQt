@@ -99,17 +99,15 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         return False
 
     def flags(self, index):
-        match index.column():
-            case _:
-                prop = self.props[index.column()]
-                if prop.isWritable():
-                    return (
-                        super().flags(index)
-                        | constants.IS_EDITABLE
-                        | constants.IS_ENABLED
-                        | constants.IS_SELECTABLE
-                    )
-                return super().flags(index)
+        prop = self.props[index.column()]
+        if prop.isWritable():
+            return (
+                super().flags(index)
+                | constants.IS_EDITABLE
+                | constants.IS_ENABLED
+                | constants.IS_SELECTABLE
+            )
+        return super().flags(index)
 
     def _fetch_object_children(self, item) -> list:
         return [treeitem.TreeItem(obj=i) for i in item.obj.findChildren(self.BaseClass)]
@@ -124,6 +122,30 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         return bool(item.obj.findChildren(self.BaseClass))
 
 
+class LayoutHierarchyModel(WidgetHierarchyModel):
+    def _fetch_object_children(self, item) -> list:
+        match item.obj:
+            case QtWidgets.QWidget():
+                layout = item.obj.layout()
+            case QtWidgets.QLayout():
+                layout = item.obj
+            case _:
+                raise ValueError(item)
+        items = [layout.itemAt(i) for i in range(layout.count())]
+        items = [i.widget() if i.widget() is not None else i.layout() for i in items]
+        return [treeitem.TreeItem(obj=i) for i in items]
+
+    def hasChildren(self, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
+        if parent.column() > 0:
+            return False
+        item = self.data_by_index(parent)
+        if self._show_root and item == self._root_item:
+            return True
+        layout = item.obj.layout()
+        return False if layout is None else layout.count() > 0
+
+
 if __name__ == "__main__":
     from prettyqt import widgets
     from prettyqt.custom_delegates import variantdelegate
@@ -133,8 +155,10 @@ if __name__ == "__main__":
     view.setRootIsDecorated(True)
     view.set_icon("mdi.folder")
     parent = widgets.Widget()
+    parent.set_layout("horizontal")
+    parent.box.add(widgets.Widget())
     item = widgets.TableWidget(parent)
-    model = WidgetHierarchyModel(parent, show_root=True, parent=view)
+    model = LayoutHierarchyModel(parent, show_root=True, parent=view)
     delegate = variantdelegate.VariantDelegate(parent=view)
     view.set_model(model)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
