@@ -1,6 +1,10 @@
 from __future__ import annotations
 
-from prettyqt import constants, widgets
+import logging
+from prettyqt import core, constants, widgets
+from prettyqt.qt import QtWidgets
+
+logger = logging.getLogger(__name__)
 
 
 class LineEditFilterContainer(widgets.Widget):
@@ -8,8 +12,18 @@ class LineEditFilterContainer(widgets.Widget):
         super().__init__(**kwargs)
         self.set_layout("vertical")
         self._proxies = []
-        self.searchbar = widgets.HBoxLayout(margin=0, spacing=1)
+        self.set_margin(0)
+        self.spacer = widgets.Widget()
+        self._lineedit_layout = widgets.HBoxLayout(margin=0, spacing=1)
+        self._lineedit_layout.add(self.spacer)
         model = parent.model()
+        self._parent = parent
+        self._lineedit_scrollarea = widgets.ScrollArea(
+            horizontal_scroll_bar_policy="always_off", frame_shape="no_frame"
+        )
+        self._topline_layout = widgets.HBoxLayout(margin=0, spacing=0)
+        self._topline_layout.add(self.spacer)
+        self._topline_layout.add(self._lineedit_scrollarea)
         parent.h_header.sectionResized.connect(self._resize_lineedits)
         for i in range(parent.h_header.count()):
             lineedit = widgets.LineEdit()
@@ -20,34 +34,56 @@ class LineEditFilterContainer(widgets.Widget):
             proxy.setFilterKeyColumn(i)
             lineedit.set_margin(0)
             lineedit.value_changed.connect(proxy.setFilterFixedString)
-            self.searchbar.add(lineedit)
+            self._lineedit_layout.add(lineedit)
             model = proxy
             lineedit.setFixedWidth(parent.h_header.sectionSize(i))
             title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
             lineedit.setPlaceholderText(f"Filter {title}...")
-        self.searchbar.addStretch()
+        if isinstance(self._parent, QtWidgets.QTableView):
+            self.spacer.setFixedWidth(self._parent.v_header.width())
+        else:
+            self.spacer.hide()
+        self._lineedit_layout.addStretch()
         parent.set_model(model)
-        self.box.add(self.searchbar)
+        widget = widgets.Widget()
+        widget.set_layout("horizontal", margin=0)
+        widget.box.add(self._lineedit_layout)
+        self._lineedit_scrollarea.set_widget(widget)
+        self._lineedit_scrollarea.setFixedHeight(30)
+        parent.h_scrollbar.valueChanged.connect(
+            self._lineedit_scrollarea.h_scrollbar.setValue
+        )
+        self._lineedit_scrollarea.h_scrollbar.setMinimum(parent.h_scrollbar.minimum())
+        self._lineedit_scrollarea.h_scrollbar.setMaximum(parent.h_scrollbar.maximum())
+        parent.set_horizontal_scroll_mode("pixel")
+
+        self.box.add(self._topline_layout)
         self.box.add(parent)
 
     def _resize_lineedits(self, index, old_size, new_size):
         # perhaps check header.sectionPosition() and sectionSize() for correct pos?
-        self.searchbar[index].setFixedWidth(new_size)
+        self._lineedit_layout[index + 1].setFixedWidth(new_size)
+        self.spacer.setFixedWidth(self._parent.v_header.width())
+        self._lineedit_scrollarea.setFixedWidth(self._parent.viewport().width())
 
-    def setFilterCaseSensitivity(self, sensitivity):
+    def set_filter_case_sensitivity(self, sensitivity):
         for proxy in self._proxies:
             proxy.setFilterCaseSensitivity(sensitivity)
 
 
 if __name__ == "__main__":
-    from prettyqt import core
+    from prettyqt.custom_models import widgetpropertiesmodel
+    from prettyqt.custom_delegates import variantdelegate
 
     app = widgets.app()
-    view = widgets.TreeView()
-    view.setRootIsDecorated(True)
-    model = widgets.FileSystemModel()
-    model.set_root_path("/")
-    model.setReadOnly(True)
+    view = widgets.TableView()
+
+    model = widgetpropertiesmodel.WidgetPropertiesModel(view.h_header, parent=view)
+    delegate = variantdelegate.VariantDelegate(parent=view)
+    view.set_selection_behavior("rows")
+    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
+    view.set_delegate(delegate, column=1)
+
     view.setModel(model)
     view.resize(640, 480)
     view.set_selection_behavior("rows")
