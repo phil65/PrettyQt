@@ -182,8 +182,7 @@ class MetaObject:
         return core.MetaType(self.metaType().id())
 
     def get_user_property(self) -> core.MetaProperty | None:
-        prop = self.userProperty()
-        return core.MetaProperty(prop) if prop.isValid() else None
+        return core.MetaProperty(p) if (p := self.userProperty()).isValid() else None
 
     # just experimenting
     @classmethod

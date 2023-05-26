@@ -26,11 +26,15 @@ class MetaProperty:
     def get_meta_type(self) -> core.MetaType:
         return core.MetaType(self.userType())  # same as self.metaType().id()
 
-    def get_notify_signal(self) -> core.MetaMethod:
-        return core.MetaMethod(self.notifySignal())
+    def get_notify_signal(self) -> core.MetaMethod | None:
+        if (signal := self.notifySignal()).isValid():
+            return core.MetaMethod(signal)
+        return None
 
-    def get_enumerator(self) -> core.MetaEnum:
-        return core.MetaEnum(self.enumerator())
+    def get_enumerator(self) -> core.MetaEnum | None:
+        if (enumerator := self.enumerator()).isValid():
+            return core.MetaEnum(enumerator)
+        return None
 
     def get_enumerator_type(self) -> Literal["flag", "enum"] | None:
         if self.isFlagType():
@@ -47,6 +51,6 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.Widget()
     metaobj = widget.get_metaobject()
-    prop = metaobj.get_property("windowModality")
+    prop = metaobj.get_property("x")
     value = prop.read(widget)
     print(type(value), value)
