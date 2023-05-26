@@ -3,6 +3,7 @@ from __future__ import annotations
 import collections
 from collections.abc import Sequence
 import logging
+import pathlib
 
 from prettyqt import constants, core, custom_models, gui, widgets
 from prettyqt.custom_models import actionsmodel
@@ -129,6 +130,14 @@ class CommandPalette(widgets.Widget):
             return
         while widget := widget.parent():
             self.add_actions(widget.actions())
+
+    @classmethod
+    def for_path(cls, path):
+        path = pathlib.Path(path)
+        palette = cls()
+        actions = [gui.Action(str(p)) for p in path.rglob("*") if p.is_file()]
+        palette.add_actions(actions)
+        return palette
 
     def match_color(self) -> str:
         """The color used for the matched characters."""
