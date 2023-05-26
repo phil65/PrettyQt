@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import logging
+from collections.abc import Callable
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 
+logger = logging.getLogger(__name__)
 
 # TYPES = {
 #     bool: 1,
@@ -200,10 +204,25 @@ class MetaObject:
         # requires QtCore.QGenericArgumentHolder for PySide6
         self.newInstance(*args, **kwargs)
 
+    def connect_signals(
+        self, qobject: QtCore.QObject, fn: Callable, only_notifiers: bool = False
+    ) -> list[QtCore.QMetaObject.Connection]:
+        handles = []
+        for signal in self.get_signals(only_notifiers=only_notifiers):
+            signal_name = signal.get_name()
+            signal_instance = qobject.__getattribute__(signal_name)
+            handle = signal_instance.connect(fn)
+            handles.append(handle)
+        logger.debug(f"connected {len(handles)} signals to {fn}.")
+        return handles
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
-    metaobj = widgets.AbstractItemView.get_static_metaobject()
-    print(metaobj.get_signals())
+    app = widgets.app()
+    rb = widgets.RadioButton()
+    metaobj = widgets.RadioButton.get_static_metaobject()
+    handles = metaobj.connect_signals(rb, print)
+    print(handles[0])
     print(metaobj.get_signals(only_notifiers=True))
