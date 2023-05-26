@@ -1,4 +1,4 @@
-# prettyqt: Pythonic layer on top of PyQt5 / PyQt6 / PySide6
+# prettyqt: Pythonic layer on top of PyQt6 / PySide6
 [![PyPI Latest Release](https://img.shields.io/pypi/v/prettyqt.svg)](https://pypi.org/project/prettyqt/)
 [![Package Status](https://img.shields.io/pypi/status/prettyqt.svg)](https://pypi.org/project/prettyqt/)
 [![License](https://img.shields.io/pypi/l/prettyqt.svg)](https://github.com/phil65/PrettyQt/blob/master/LICENSE)
@@ -11,17 +11,15 @@
 **PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt6 / PySide6.
 
 ## Main Features
-Here are just a few of the things that PrettyQt does well:
-
   - Large parts of the Qt API are available in a **PEP-8**-compliant way.
-  - Several predefined widgets, validators, models, syntax highlighters are included.
-  - A regex module based on QRegularExpression with the same API as Pythons core re module.
+  - Pre-defined widgets for common use cases
+  - Large set of validators, syntax highlighters, models
 
 
-   [widgets]: https://phil65.github.io/PrettyQt/widgets.html
-   [validators]: https://phil65.github.io/PrettyQt/validators.html
-   [syntaxhighlighters]: https://phil65.github.io/PrettyQt/syntaxhighlighters.html
-   [models]: https://phil65.github.io/PrettyQt/models.html
+   [widgets]: https://phil65.github.io/PrettyQt/api/widgets.html
+   [validators]: https://phil65.github.io/PrettyQt/api/custom_validators.html
+   [syntaxhighlighters]: https://phil65.github.io/PrettyQt/api/syntaxhighlighters.html
+   [models]: https://phil65.github.io/PrettyQt/api/custom_models.html
 
 
 ## Where to get it
@@ -36,11 +34,26 @@ package index](https://pypi.org/project/prettyqt).
 pip install prettyqt
 ```
 
-## Dependencies
+## Required dependencies
 - [bidict](https://pypi.org/project/bidict)
-- [orjson](https://pypi.org/project/orjson)
 - [regex](https://pypi.org/project/regex)
 - [docutils](https://pypi.org/project/docutils)
+- [pygments](https://pypi.org/project/pygments)
+- [qstylizer](https://pypi.org/project/qstylizer)
+- [typing_extensions](https://pypi.org/project/typing_extensions)
+
+# And one of...
+- [pyside6](https://pypi.org/project/pyside6)
+- [pyqt6](https://pypi.org/project/pyqt6)
+
+
+## Optional dependencies
+- [orjson](https://pypi.org/project/orjson)
+- [numpy](https://pypi.org/project/numpy)
+- [ipython](https://pypi.org/project/ipython)
+- [qtconsole](https://pypi.org/project/qtconsole)
+- [pillow](https://pypi.org/project/pillow)
+- [fsspec](https://pypi.org/project/fsspec)
 
 
 ## Installation from sources
