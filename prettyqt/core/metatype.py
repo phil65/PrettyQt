@@ -3,7 +3,6 @@ from __future__ import annotations
 import enum
 from typing import Literal
 
-from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
@@ -138,12 +137,12 @@ class MetaType(QtCore.QMetaType):
     def is_enumeration(self):
         return self.flags() & QtCore.QMetaType.TypeFlag.IsEnumeration
 
-    def get_meta_object(self) -> core.MetaObject:
-        return core.MetaObject(self.metaObject())
+    # def get_meta_object(self) -> core.MetaObject:  # apparently doesnt exist in bindings
+    #     return core.MetaObject(self.metaObject())
 
-    @classmethod
-    def get_meta_object_for_type(cls, typ: int) -> core.MetaObject:
-        return core.MetaObject(cls.metaObjectForType(typ))
+    # @classmethod  # and this one gives deprecated message
+    # def get_meta_object_for_type(cls, typ: int) -> core.MetaObject:
+    #     return core.MetaObject(cls.metaObjectForType(typ))
 
     def get_type(self) -> type:
         meta_type = QtCore.QMetaType.Type(self.id())
@@ -243,4 +242,5 @@ class MetaType(QtCore.QMetaType):
 if __name__ == "__main__":
     metatype = MetaType(2)
     print(metatype.get_type_name())
+    print(metatype.get_meta_object())
     print(TYPE)
