@@ -4,7 +4,13 @@ from prettyqt import core, qthelp
 from prettyqt.qt import QtHelp
 
 
-class HelpFilterEngine(core.ObjectMixin, QtHelp.QHelpFilterEngine):
+class HelpFilterEngine(core.ObjectMixin):
+    def __init__(self, item: QtHelp.QHelpFilterEngine):
+        self.item = item
+
+    def __getattr__(self, val):
+        return getattr(self.item, val)
+
     def get_available_versions(self) -> list[core.VersionNumber]:
         return [core.VersionNumber(i) for i in self.availableVersions()]
 

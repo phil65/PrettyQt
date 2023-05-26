@@ -39,9 +39,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
 
     @classmethod
     def get_clipboard(cls) -> gui.Clipboard:
-        cb = cls.clipboard()
-        cb.__class__ = gui.Clipboard
-        return cb
+        return gui.Clipboard(cls.clipboard())
 
     @classmethod
     @contextlib.contextmanager
@@ -130,9 +128,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
 
     @classmethod
     def get_input_method(cls) -> gui.InputMethod:
-        input_method = cls.inputMethod()
-        input_method.__class__ = gui.InputMethod
-        return input_method
+        return gui.InputMethod(cls.inputMethod())
 
     @classmethod
     def copy_to_clipboard(cls, text: str):

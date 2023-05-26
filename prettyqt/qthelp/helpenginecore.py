@@ -27,9 +27,7 @@ class HelpEngineCoreMixin(core.ObjectMixin):
         return core.Url(self.findFile(url))
 
     def get_filter_engine(self) -> qthelp.HelpFilterEngine:
-        engine = self.filterEngine()
-        engine.__class__ = qthelp.HelpFilterEngine
-        return engine
+        return qthelp.HelpFilterEngine(self.filterEngine())
 
 
 class HelpEngineCore(HelpEngineCoreMixin, QtHelp.QHelpEngineCore):
@@ -39,5 +37,3 @@ class HelpEngineCore(HelpEngineCoreMixin, QtHelp.QHelpEngineCore):
 if __name__ == "__main__":
     engine = HelpEngineCore("")
     engine.get_files("a", "b")
-    filter_engine = engine.get_filter_engine()
-    print(filter_engine)

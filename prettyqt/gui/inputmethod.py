@@ -11,7 +11,13 @@ ACTION = bidict(
 )
 
 
-class InputMethod(core.ObjectMixin, QtGui.QInputMethod):
+class InputMethod(core.ObjectMixin):
+    def __init__(self, item: QtGui.QInputMethod):
+        self.item = item
+
+    def __getattr__(self, val):
+        return getattr(self.item, val)
+
     def get_anchor_rectangle(self) -> core.RectF:
         return core.RectF(self.anchorRectangle())
 
@@ -43,4 +49,3 @@ if __name__ == "__main__":
 
     app = gui.app()
     method = app.get_input_method()
-    print(method)
