@@ -1,7 +1,11 @@
 from __future__ import annotations
 
-from prettyqt import constants, core
+import logging
+
+from prettyqt import constants, core, eventfilters
 from prettyqt.qt import QtCore, QtGui, QtWidgets
+
+logger = logging.getLogger(__name__)
 
 
 class WidgetPropertiesModel(core.AbstractTableModel):
@@ -13,12 +17,32 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         "Readable",
         "Writable",
         "Resettable",
+        "Bindable",
+        "Designable",
+        "Constant",
+        "Final",
+        "Required",
+        "Notifier",
+        # "Enumerator",
     ]
 
     def __init__(self, widget: QtWidgets.QWidget, **kwargs):
         super().__init__(**kwargs)
         self._widget = widget
         self._metaobj = core.MetaObject(self._widget.metaObject())
+        self.event_catcher = eventfilters.EventCatcher(
+            include=["resize", "move"], parent=self._widget
+        )
+        self.event_catcher.caught.connect(self.force_layoutchange)
+        self._widget.installEventFilter(self.event_catcher)
+        self._handles = self._metaobj.connect_signals(
+            self._widget, self.force_layoutchange, only_notifiers=True
+        )
+
+    def disconnect(self):
+        for handle in self._handles:
+            self._widget.disconnect(handle)
+        self._widget.removeEventFilter(self.event_catcher)
 
     def columnCount(self, parent=None):
         return len(self.HEADER)
@@ -41,6 +65,8 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             return None
         prop = self._metaobj.get_property(index.row())
         match role, index.column():
+            case constants.BACKGROUND_ROLE, _:
+                return QtGui.QColor("lightblue") if prop.isUser() else None
             case constants.DISPLAY_ROLE, 0:
                 return prop.name()
             case constants.FONT_ROLE, 0:
@@ -63,6 +89,22 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 return prop.isWritable()
             case constants.CHECKSTATE_ROLE, 6:
                 return prop.isResettable()
+            case constants.CHECKSTATE_ROLE, 7:
+                return prop.isBindable()
+            case constants.CHECKSTATE_ROLE, 8:
+                return prop.isDesignable()
+            case constants.CHECKSTATE_ROLE, 9:
+                return prop.isConstant()
+            case constants.CHECKSTATE_ROLE, 10:
+                return prop.isFinal()
+            case constants.CHECKSTATE_ROLE, 11:
+                return prop.isRequired()
+            case constants.DISPLAY_ROLE, 12:
+                notifier = prop.get_notify_signal()
+                return "" if notifier is None else notifier.get_name()
+            # case constants.DISPLAY_ROLE, 8:
+            #     enumerator = prop.get_enumerator()
+            #     return "" if enumerator is None else enumerator.get_name()
             case constants.USER_ROLE, _:
                 return prop.read(self._widget)
 
@@ -100,15 +142,17 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
+    lineedit = widgets.LineEdit()
     view = widgets.TableView()
     view.set_icon("mdi.folder")
-    model = WidgetPropertiesModel(view)
-    model.dataChanged.connect(view.repaint)
-    view.set_model(model)
-    view.set_selection_behavior("rows")
-    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate("variant", column=1)
-    view.show()
-    view.resize(500, 300)
     with app.debug_mode():
+        model = WidgetPropertiesModel(lineedit)
+        model.dataChanged.connect(view.repaint)
+        view.set_model(model)
+        view.set_selection_behavior("rows")
+        view.setEditTriggers(view.EditTrigger.AllEditTriggers)
+        view.set_delegate("variant", column=1)
+        view.show()
+        lineedit.show()
+        view.resize(500, 300)
         app.main_loop()
