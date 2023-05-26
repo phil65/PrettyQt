@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from deprecated import deprecated
-
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
@@ -43,19 +41,13 @@ class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
         layout.set_margin(0)
         layout.set_alignment("right")
         title_bar.set_layout(layout)
-        maximize_button = widgets.PushButton()
+        maximize_button = widgets.PushButton(clicked=self.maximize)
         layout.add(maximize_button)
         maximize_button.set_style_icon("titlebar_max_button")
-        maximize_button.clicked.connect(self.maximize)
-        close_button = widgets.PushButton()
+        close_button = widgets.PushButton(clicked=self.close)
         close_button.set_style_icon("titlebar_close_button")
         layout.add(close_button)
-        close_button.clicked.connect(self.close)
         self.setTitleBarWidget(title_bar)
-
-    @deprecated(reason="This method is deprecated, use 'maximize' instead.")
-    def maximise(self):
-        self.maximize()
 
     def maximize(self):
         if not self.isFloating():

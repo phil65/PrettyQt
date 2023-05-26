@@ -11,8 +11,7 @@ class EnumFlagWidget(widgets.ToolButton):
     def __init__(self, *args, **kwargs):
         self._enum_class = None
         self._action_map = {}
-        self.button_menu = widgets.Menu()
-        self.button_menu.triggered.connect(self._on_menu_click)
+        self.button_menu = widgets.Menu(triggered=self._on_menu_click)
         super().__init__(*args, **kwargs)
         self.setMenu(self.button_menu)
         self.set_popup_mode("instant")

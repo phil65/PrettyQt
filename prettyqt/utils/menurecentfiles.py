@@ -180,9 +180,7 @@ class MenuRecentFiles(widgets.Menu):
         self.clear()
         self.recent_files_actions[:] = []
         for file in self.manager.get_recent_files():
-            action = gui.Action(self)
-            action.setText(os.path.split(file)[1])
-            action.setToolTip(file)
+            action = gui.Action(self, text=os.path.split(file)[1], tool_tip=file)
             action.setStatusTip(file)
             action.setData(file)
             action.setIcon(self.icon_provider.icon(core.FileInfo(file)))
@@ -190,8 +188,7 @@ class MenuRecentFiles(widgets.Menu):
             self.addAction(action)
             self.recent_files_actions.append(action)
         self.addSeparator()
-        action_clear = gui.Action(text="Clear list")
-        action_clear.triggered.connect(self.clear_recent_files)
+        action_clear = gui.Action(text="Clear list", triggered=self.clear_recent_files)
         action_clear.setIcon(iconprovider.get_icon("fa.times-circle"))
         self.addAction(action_clear)
 

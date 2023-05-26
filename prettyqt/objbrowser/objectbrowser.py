@@ -110,8 +110,9 @@ class ObjectBrowser(widgets.MainWindow):
         # Add another refresh action with a different shortcut. An action must be added to
         # a visible widget for it to receive events. It is added to the main windows to
         # prevent it from being displayed again in the menu
-        self.refresh_action_f5 = gui.Action(self, text="&Refresh2", shortcut="F5")
-        self.refresh_action_f5.triggered.connect(self._tree_model.refresh_tree)
+        self.refresh_action_f5 = gui.Action(
+            self, text="&Refresh2", shortcut="F5", triggered=self._tree_model.refresh_tree
+        )
         self.addAction(self.refresh_action_f5)
         self.central_splitter = widgets.Splitter(
             parent=self, orientation=constants.VERTICAL

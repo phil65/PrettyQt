@@ -353,18 +353,18 @@ if __name__ == "__main__":
             # Build controls.
             self.count_spin = widgets.SpinBox(value=5, minimum=1)
             self.progress_label = widgets.Label("Idle, click below to start downloading")
-            self.download_button = widgets.PushButton("Download")
-            self.stop_button = widgets.PushButton("Stop", enabled=False)
+            self.download_button = widgets.PushButton(
+                "Download", clicked=self.on_download_button_clicked
+            )
+            self.stop_button = widgets.PushButton(
+                "Stop", enabled=False, clicked=self.on_cancel_button_clicked
+            )
 
             layout = widgets.FormLayout(self)
             layout.addRow("How many cats?", self.count_spin)
             layout.addRow("Status", self.progress_label)
             layout.addRow(self.download_button)
             layout.addRow(self.stop_button)
-
-            # Connect signals.
-            self.download_button.clicked.connect(self.on_download_button_clicked)
-            self.stop_button.clicked.connect(self.on_cancel_button_clicked)
 
         async def on_download_button_clicked(self, checked: bool = False) -> None:
             self.progress_label.setText("Searching...")

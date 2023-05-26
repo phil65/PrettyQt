@@ -8,15 +8,15 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class TitleBarButton(widgets.PushButton):
-    def __init__(self, parent: QtWidgets.QWidget | None = None) -> None:
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.setFixedSize(48, 32)
         self.set_icon_size((28, 28))
 
 
 class MaximizeButton(TitleBarButton):
-    def __init__(self, parent: QtWidgets.QWidget | None) -> None:
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.setStyleSheet(
             """
         QPushButton {
@@ -35,7 +35,7 @@ class MaximizeButton(TitleBarButton):
 
         self.set_icon("mdi.window-maximize")
 
-    def set_state(self, state: Literal["hover", "normal"]) -> None:
+    def set_state(self, state: Literal["hover", "normal"]):
         if state == "hover":
             self.setStyleSheet(
                 """
@@ -66,8 +66,8 @@ class MaximizeButton(TitleBarButton):
 
 
 class MinimizeButton(TitleBarButton):
-    def __init__(self, parent: QtWidgets.QWidget | None) -> None:
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.setStyleSheet(
             """
                 QPushButton {
@@ -87,8 +87,8 @@ class MinimizeButton(TitleBarButton):
 
 
 class CloseButton(TitleBarButton):
-    def __init__(self, parent: QtWidgets.QWidget | None) -> None:
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.setStyleSheet(
             """
         QPushButton {
@@ -110,28 +110,24 @@ class TitleBar(widgets.Frame):
     def __init__(self, parent: QtWidgets.QWidget | None = None) -> None:
         super().__init__(parent)
         self.setFixedHeight(32)
-
         self.button_box = widgets.Widget(self)
-
-        self.maximize_button = MaximizeButton(self.button_box)
-        self.minimize_button = MinimizeButton(self.button_box)
-        self.close_button = CloseButton(self.button_box)
-
-        self.bbox_layout = widgets.HBoxLayout(parent=self.button_box)
-        self.bbox_layout.set_margin(0)
-        self.bbox_layout.setSpacing(0)
+        self.maximize_button = MaximizeButton(
+            self.button_box, clicked=self.on_maximize_button_clicked
+        )
+        self.minimize_button = MinimizeButton(
+            self.button_box, clicked=self.on_minimize_button_clicked
+        )
+        self.close_button = CloseButton(
+            self.button_box, clicked=self.on_close_button_clicked
+        )
+        self.bbox_layout = widgets.HBoxLayout(margin=0, spacing=0)
         for btn in [self.minimize_button, self.maximize_button, self.close_button]:
             self.bbox_layout.addWidget(btn)
 
-        self.horizontal_layout = widgets.HBoxLayout(parent=self)
-        self.horizontal_layout.set_margin(0)
-        self.horizontal_layout.setSpacing(0)
+        self.horizontal_layout = widgets.HBoxLayout(margin=0, spacing=0)
         self.horizontal_spacer = widgets.SpacerItem(20, 20, "expanding", "minimum")
         self.horizontal_layout.addSpacerItem(self.horizontal_spacer)
         self.horizontal_layout.addWidget(self.button_box)
-        self.minimize_button.clicked.connect(self.on_minimize_button_clicked)
-        self.maximize_button.clicked.connect(self.on_maximize_button_clicked)
-        self.close_button.clicked.connect(self.on_close_button_clicked)
 
         self.window().installEventFilter(self)
 

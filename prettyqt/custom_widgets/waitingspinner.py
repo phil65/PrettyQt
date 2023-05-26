@@ -53,8 +53,7 @@ class BaseWaitingSpinner(widgets.Widget):
         self._line_width = 2
         self._inner_radius = 10
         self._current_counter = 0
-        self._timer = core.Timer(self)
-        self._timer.timeout.connect(self._rotate)
+        self._timer = core.Timer(self, timeout=self._rotate)
         self._update_size()
         self._update_timer()
         self.hide()

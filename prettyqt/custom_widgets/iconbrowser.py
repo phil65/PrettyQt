@@ -41,21 +41,24 @@ class IconBrowser(widgets.MainWindow):
             uniform_item_sizes=True,
             view_mode="icon",
             context_menu_policy="custom",
+            double_clicked=self._copy_icon_text,
+            vertical_scroll_bar_policy="always_on",
         )
         eventfilter = listviewgridresizeeventfilter.ListViewGridResizeEventFilter(
             parent=self._listview
         )
         self._listview.installEventFilter(eventfilter)
-        self._listview.set_vertical_scrollbar_policy("always_on")
         self._listview.set_model(self._proxy_model)
-        self._listview.doubleClicked.connect(self._copy_icon_text)
 
-        self._lineedit = widgets.LineEdit(parent=self)
-        self._lineedit.textChanged.connect(self._trigger_instant_update)
+        self._lineedit = widgets.LineEdit(
+            parent=self, text_changed=self._trigger_instant_update
+        )
 
-        self._combobox = widgets.ComboBox(parent=self)
-        self._combobox.setMinimumWidth(75)
-        self._combobox.currentIndexChanged.connect(self._trigger_instant_update)
+        self._combobox = widgets.ComboBox(
+            parent=self,
+            minimum_width=75,
+            current_index_changed=self._trigger_instant_update,
+        )
         self._combobox.addItems([ALL_COLLECTIONS, *sorted(font_maps.keys())])
 
         search_bar_frame = widgets.Frame(self)

@@ -38,8 +38,7 @@ class FlagSelectionWidget(widgets.GroupBox):
                     raise TypeError("Invalid item type")
 
     def add(self, title: str, flag: int):
-        checkbox = widgets.CheckBox(title)
-        checkbox.toggled.connect(self.update_choice)
+        checkbox = widgets.CheckBox(title, toggled=self.update_choice)
         self.buttons[checkbox] = flag
         self.box.add(checkbox)
 

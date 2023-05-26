@@ -45,14 +45,10 @@ class RegexEditorWidget(widgets.Widget):
         self.label_num_matches = widgets.Label("No match", alignment="center")
         groupbox_sub = widgets.GroupBox(title="Substitution", checkable=True)
         layout_sub = widgets.GridLayout(groupbox_sub)
-        self.lineedit_sub = widgets.LineEdit()
-        self.lineedit_sub.textChanged.connect(self.update_sub_textedit)
+        self.lineedit_sub = widgets.LineEdit(text_changed=self.update_sub_textedit)
         self.textedit_sub = widgets.PlainTextEdit(read_only=True, minimum_width=400)
         layout_sub[0, 0] = self.lineedit_sub
         layout_sub[1, 0] = self.textedit_sub
-        self.cb_quickref = widgets.CheckBox(
-            "Show Regular Expression Quick Reference", checked=True
-        )
         self.table_matches = widgets.TableView()
         self.table_matches.setup_list_style()
         self.textedit_quickref = widgets.TextEdit(
@@ -60,6 +56,11 @@ class RegexEditorWidget(widgets.Widget):
             read_only=True,
             object_name="textedit_quickref",
             html=(pathlib.Path(__file__).parent / "ref.html").read_text(),
+        )
+        self.cb_quickref = widgets.CheckBox(
+            "Show Regular Expression Quick Reference",
+            checked=True,
+            state_changed=self.textedit_quickref.setVisible,
         )
         with widgets.HBoxLayout.create(self) as layout:
             with layout.get_sub_layout("vertical") as layout:
@@ -80,7 +81,6 @@ class RegexEditorWidget(widgets.Widget):
         doc = self.textedit_teststring.document()
         self._highlighter = RegexMatchHighlighter(doc)
         self._highlighter.rehighlight()
-        self.cb_quickref.stateChanged.connect(self.textedit_quickref.setVisible)
         self.regexinput.value_changed.connect(self._update_view)
         self.textedit_teststring.textChanged.connect(self._update_view)
         self.regexinput.pattern = regex

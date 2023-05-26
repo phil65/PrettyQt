@@ -117,12 +117,16 @@ class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
 
     def add(self, *item: QtWidgets.QWidget):
         for i in item:
-            if not isinstance(i, QtWidgets.QMdiSubWindow):
-                widget = widgets.MdiSubWindow()
-                widget.setWidget(i)
-                self.addSubWindow(widget)
-            else:
-                self.addSubWindow(i)
+            self.add_subwindow(i)
+
+    def add_subwindow(self, widget: QtWidgets.QWidget) -> QtWidgets.QMdiSubWindow:
+        if not isinstance(widget, QtWidgets.QMdiSubWindow):
+            window = widgets.MdiSubWindow()
+            window.setWidget(widget)
+            self.addSubWindow(window)
+            return window
+        else:
+            return self.addSubWindow(widget)
 
 
 if __name__ == "__main__":

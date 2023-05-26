@@ -41,12 +41,11 @@ class FileChooserButton(widgets.Widget):
         self.lineedit = widgets.LineEdit()
         self.lineedit.set_read_only()
         layout.add(self.lineedit)
-        action = gui.Action()
+        action = gui.Action(triggered=self.open_file)
         if self.file_mode == "directory":
             action.set_icon("mdi.folder-outline")
         else:
             action.set_icon("mdi.file-outline")
-        action.triggered.connect(self.open_file)
 
         self.button = widgets.ToolButton()
         self.button.setDefaultAction(action)

@@ -12,11 +12,6 @@ def test_buttondelegate(qtbot):
     # widget.currentIndexChanged()
 
 
-def test_checkboxdelegate(qtbot):
-    table = widgets.TableView()
-    widget = custom_delegates.CheckBoxDelegate(parent=table)
-
-
 def test_radiodelegate(qtbot, tablewidget):
     delegate = custom_delegates.RadioDelegate(tablewidget, ["a", "b"])
     tablewidget.show()

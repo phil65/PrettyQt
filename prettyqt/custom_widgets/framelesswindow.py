@@ -42,8 +42,8 @@ SideStr = Literal["left", "top", "right", "bottom"]
 
 
 class TitleBarIcon(widgets.PushButton):
-    def __init__(self, text, parent=None):
-        super().__init__(text, parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
 
         self.setStyleSheet(
             "margin: 0; padding: 0px; font-size: 16px; width: 44px; height: 30px;"
@@ -57,17 +57,13 @@ class CustomTitleBar(widgets.Frame):
         super().__init__(window_widget)
 
         self.window_widget = window_widget
-        self.minimize_button = TitleBarIcon("🗕")
-        self.maximize_button = TitleBarIcon("🗖")
-        self.exit_button = TitleBarIcon("✕")
-        self.setObjectName("ControlWidget")
         state = QtCore.Qt.WindowState.WindowMinimized
-        self.minimize_button.clicked.connect(
-            lambda: window_widget.setWindowState(state)  # type: ignore
+        self.minimize_button = TitleBarIcon(
+            "🗕", clicked=lambda: window_widget.setWindowState(state)
         )
-        self.maximize_button.clicked.connect(window_widget.toggle_maximized)
-        self.exit_button.clicked.connect(window_widget.close)
-
+        self.maximize_button = TitleBarIcon("🗖", clicked=window_widget.toggle_maximized)
+        self.exit_button = TitleBarIcon("✕", clicked=window_widget.close)
+        self.setObjectName("ControlWidget")
         self.set_layout("horizontal")
         spacer_item = QtWidgets.QSpacerItem(0, 0, QtWidgets.QSizePolicy.Policy.Expanding)
         self.box.addSpacerItem(spacer_item)
