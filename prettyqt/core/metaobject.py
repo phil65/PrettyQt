@@ -156,8 +156,17 @@ class MetaObject:
             if not only_writable or self.item.property(i).isWritable()
         ]
 
-    def get_signals(self, include_super: bool = True) -> list[core.MetaMethod]:
-        return self.get_methods(include_super=include_super, type_filter="signal")
+    def get_signals(
+        self, include_super: bool = True, only_notifiers: bool = False
+    ) -> list[core.MetaMethod]:
+        if only_notifiers:
+            return [
+                prop.get_notify_signal()
+                for prop in self.get_properties(include_super)
+                if prop.hasNotifySignal()
+            ]
+        else:
+            return self.get_methods(include_super=include_super, type_filter="signal")
 
     def get_slots(self, include_super: bool = True) -> list[core.MetaMethod]:
         return self.get_methods(include_super=include_super, type_filter="slot")
@@ -196,4 +205,5 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     metaobj = widgets.AbstractItemView.get_static_metaobject()
-    print(metaobj.get_methods())
+    print(metaobj.get_signals())
+    print(metaobj.get_signals(only_notifiers=True))
