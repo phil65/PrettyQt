@@ -17,26 +17,7 @@ MARKER_SHAPES = bidict(
 MarkerShapeStr = Literal["default", "rectangle", "circle", "from_series"]
 
 
-class Legend(widgets.GraphicsWidgetMixin):
-    def __init__(self, item: QtCharts.QLegend):
-        self.item = item
-
-    def __getattr__(self, val):
-        return getattr(self.item, val)
-
-    def serialize_fields(self):
-        return dict(
-            alignment=self.get_alignment(),
-            background_visible=self.isBackgroundVisible(),
-            border_color=self.get_border_color(),
-            color=self.get_color(),
-            font=self.get_font(),
-            label_color=self.get_label_color(),
-            marker_shape=self.get_marker_shape(),
-            reverse_markers=self.reverseMarkers(),
-            show_tooltips=self.showToolTips(),
-        )
-
+class Legend(widgets.GraphicsWidgetMixin, QtCharts.QLegend):
     def set_alignment(self, alignment: constants.SideStr):
         """Set the alignment of the legend.
 

@@ -38,13 +38,7 @@ STATE = bidict(
 StateStr = Literal["inactive", "pressed", "dragging", "scrolling"]
 
 
-class Scroller(core.ObjectMixin):
-    def __init__(self, item: QtWidgets.QScroller):
-        self.item = item
-
-    def __getattr__(self, val):
-        return getattr(self.item, val)
-
+class Scroller(core.ObjectMixin, QtWidgets.QScroller):
     def get_state(self) -> StateStr:
         """Return current state.
 
@@ -76,7 +70,9 @@ class Scroller(core.ObjectMixin):
 
     @classmethod
     def get_scroller(cls, obj: QtCore.QObject) -> Self:
-        return cls(QtWidgets.QScroller.scroller(obj))
+        scroller = QtWidgets.QScroller.scroller(obj)
+        scroller.__class__ = cls
+        return scroller
 
     @staticmethod
     def grab_gesture(

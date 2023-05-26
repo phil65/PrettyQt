@@ -9,7 +9,9 @@ class HelpSearchEngine(core.ObjectMixin, QtHelp.QHelpSearchEngine):
         return [qthelp.HelpSearchResult(i) for i in self.searchResults(start, end)]
 
     def get_result_widget(self) -> qthelp.HelpSearchResultWidget:
-        return qthelp.HelpSearchResultWidget(self.resultWidget())
+        result_widget = self.resultWidget()
+        result_widget.__class__ = qthelp.HelpSearchResultWidget
+        return result_widget
 
 
 if __name__ == "__main__":

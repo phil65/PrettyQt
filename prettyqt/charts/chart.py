@@ -91,7 +91,9 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         self.legend().show()
 
     def get_legend(self) -> charts.Legend:
-        return charts.Legend(self.legend())
+        legend = self.legend()
+        legend.__class__ = charts.Legend
+        return legend
 
     def set_legend_alignment(self, alignment: constants.SideStr):
         if alignment not in constants.SIDES:
