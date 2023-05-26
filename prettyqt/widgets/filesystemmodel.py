@@ -4,7 +4,7 @@ from collections.abc import Iterator, Sequence
 import os
 import pathlib
 
-from prettyqt import constants, core
+from prettyqt import constants, core, qt
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
@@ -32,6 +32,12 @@ class FileSystemModelMixin:
             path = index.data(self.Roles.FilePathRole)
             return pathlib.Path(path)
         return super().data(index, role)
+
+    def parent(self, *args):
+        # workaround: PyQt6 QFileSystemModel.parent() missing
+        if not args and qt.API == "pyqt6":
+            return QtCore.QAbstractItemModel.parent(self)
+        return super().parent(*args)
 
     def get_file_info(self, index: QtCore.QModelIndex) -> core.FileInfo:
         return core.FileInfo(self.fileInfo(index))

@@ -46,6 +46,17 @@ def test_repr(name, cls):
         repr(widget)
 
 
+@pytest.mark.parametrize("name, cls", clsmembers)
+def test_parent(name, cls):
+    try:
+        widget = cls()
+    except Exception:
+        return None
+    else:
+        if isinstance(widget, QtCore.QObject):
+            widget.parent()
+
+
 def test_boxlayout(qtbot):
     layout = widgets.HBoxLayout(margin=0)
     widget = widgets.RadioButton("test")

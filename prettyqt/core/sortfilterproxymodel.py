@@ -11,9 +11,13 @@ from prettyqt.utils import InvalidParamError
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
     invalidated = core.Signal()
+    filter_mode_changed = core.Signal(str)
     ID = "sort_filter"
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._filter_mode = "wildcard"
+
     #     self._filter_column = 0
 
     # def setFilterKeyColumn(self, column: int | list[int] | None):
@@ -127,6 +131,26 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
             column = -1
         super().setFilterKeyColumn(column)
 
+    def set_search_term(self, search_term: str):
+        match self._filter_mode:
+            case "fixed_string":
+                self.setFilterFixedString(search_term)
+            case "wildcard":
+                self.setFilterWildcard(search_term)
+            case "regex":
+                self.setFilterRegularExpression(search_term)
+
+    def get_filter_mode(self):
+        return self._filter_mode
+
+    def set_filter_mode(self, mode: str):
+        self._filter_mode = mode
+        self.filter_mode_changed.emit(mode)
+
+    filter_mode = core.Property(
+        str, get_filter_mode, set_filter_mode, notify=filter_mode_changed
+    )
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
@@ -156,6 +180,8 @@ if __name__ == "__main__":
     source_model = ImportlibDistributionModel.from_package("prettyqt")
     model = SortFilterProxyModel()
     model.setSourceModel(source_model)
+    model.filter_mode_changed.connect(print)
+    model.set_filter_mode("wildcard")
     lineedit = widgets.LineEdit()
     # completer = SubsequenceCompleter()
     # completer.setModel(source_model)

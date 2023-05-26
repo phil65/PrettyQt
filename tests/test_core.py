@@ -31,6 +31,17 @@ def test_repr(name, cls):
     str(item)
 
 
+@pytest.mark.parametrize("name, cls", clsmembers)
+def test_parent(name, cls):
+    try:
+        obj = cls()
+    except Exception:
+        return None
+    else:
+        if isinstance(obj, QtCore.QObject):
+            obj.parent()
+
+
 def test_animationgroup():
     group = core.AnimationGroup()
     anim = core.PropertyAnimation()

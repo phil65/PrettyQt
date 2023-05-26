@@ -21,6 +21,8 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
 
     """
 
+    ID = "fuzzy"
+
     class Roles(enum.IntEnum):
         """Addional roles."""
 
