@@ -30,6 +30,8 @@ class ValueTransformationProxyModel(core.IdentityProxyModel):
         >>> proxy.add_transformer(lambda value: value < 1)
     """
 
+    ID = "value_transformation"
+
     def __init__(self, parent=None, **kwargs):
         super().__init__(parent, **kwargs)
         self._transformers: list[Transformer] = []

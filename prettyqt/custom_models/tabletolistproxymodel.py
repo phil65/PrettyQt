@@ -4,6 +4,8 @@ from prettyqt import core
 
 
 class TableToListProxyModel(core.IdentityProxyModel):
+    ID = "table_to_list"
+
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if self.sourceModel() is None else 1

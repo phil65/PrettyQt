@@ -15,6 +15,8 @@ def is_in_slice(a_slice: slice | range, idx: int) -> bool:
 
 
 class SubsetFilterProxyModel(core.SortFilterProxyModel):
+    ID = "subset"
+
     def __init__(
         self,
         row_filter: slice | range | int | Container[int] | None,

@@ -11,6 +11,8 @@ logger = logging.getLogger(__name__)
 class CheckBoxDelegate(widgets.StyledItemDelegate):
     """Delegate that places a CheckBox in every cell."""
 
+    ID = "checkbox"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.selected = []

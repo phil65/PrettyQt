@@ -92,6 +92,8 @@ class StarEditor(widgets.Widget):
 class StarDelegate(widgets.StyledItemDelegate):
     """A delegate class that allows us to render our star ratings."""
 
+    ID = "star"
+
     def paint(self, painter, option, index):
         star_rating = StarRating(index.data())
 

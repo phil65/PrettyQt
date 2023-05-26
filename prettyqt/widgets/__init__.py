@@ -207,6 +207,10 @@ from .itemeditorcreatorbase import ItemEditorCreatorBase
 from .itemeditorfactory import ItemEditorFactory
 
 
+# to register delegates
+from prettyqt import custom_delegates
+
+
 def app(args: list[str] | None = None, **kwargs) -> Application:
     if (instance := Application.instance()) is not None:
         return instance
@@ -215,6 +219,7 @@ def app(args: list[str] | None = None, **kwargs) -> Application:
 
 
 __all__ = [
+    "custom_delegates",
     "app",
     "Application",
     "AbstractSlider",

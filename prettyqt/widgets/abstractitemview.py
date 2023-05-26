@@ -262,17 +262,38 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         persistent: bool = False,
         **kwargs,
     ):
-        from prettyqt import custom_delegates
+        # from prettyqt import custom_delegates
 
         match delegate:
             case QtWidgets.QAbstractItemDelegate():
                 pass
-            case "variant":
-                delegate = custom_delegates.VariantDelegate(parent=self, **kwargs)
-            case "widget":
-                delegate = custom_delegates.WidgetDelegate(parent=self, **kwargs)
-            case "html":
-                delegate = custom_delegates.HtmlItemDelegate(parent=self, **kwargs)
+            # case "variant":
+            #     delegate = custom_delegates.VariantDelegate(parent=self, **kwargs)
+            # case "widget":
+            #     delegate = custom_delegates.WidgetDelegate(parent=self, **kwargs)
+            # case "html":
+            #     delegate = custom_delegates.HtmlItemDelegate(parent=self, **kwargs)
+            # case "button":
+            #     delegate = custom_delegates.ButtonDelegate(parent=self, **kwargs)
+            case str():
+
+                def get_subclasses(klass):
+                    for i in klass.__subclasses__():
+                        yield from get_subclasses(i)
+                        yield i
+
+                for Klass in get_subclasses(widgets.StyledItemDelegate):
+                    if hasattr(Klass, "ID") and Klass.ID == delegate:
+                        delegate = Klass(parent=self, **kwargs)
+                        logger.debug(f"found delegate for id {Klass.ID!r}")
+                        break
+            # case str():
+            #     if delegate in widgets.StyledItemDelegate._registry:
+            #         Klass = widgets.StyledItemDelegate._registry[delegate]
+            #         logger.debug(f"found delegate for id {delegate!r}")
+            #         delegate = Klass(parent=self, **kwargs)
+            #     else:
+            #         raise ValueError(f"no delegate with id {delegate!r} registered.")
             case _:
                 raise ValueError(delegate)
         match column, row:

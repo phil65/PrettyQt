@@ -5,4 +5,4 @@ from prettyqt.qt import QtCore
 
 
 class TransposeProxyModel(core.AbstractProxyModelMixin, QtCore.QTransposeProxyModel):
-    pass
+    ID = "transpose"

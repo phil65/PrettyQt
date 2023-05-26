@@ -7,6 +7,8 @@ from prettyqt.qt import QtCore
 
 
 class FlattenedTreeProxyModel(core.AbstractProxyModel):
+    ID = "flattened_tree"
+
     class FlatteningMode(enum.IntEnum):
         """Flattening modes."""
 

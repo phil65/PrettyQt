@@ -10,6 +10,8 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class RadioDelegate(widgets.StyledItemDelegate):
+    ID = "radio"
+
     def __init__(self, parent: QtWidgets.QWidget, items: Iterable[str]):
         super().__init__(parent)
         self.items = items

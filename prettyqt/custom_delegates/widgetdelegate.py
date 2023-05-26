@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class WidgetDelegate(widgets.StyledItemDelegate):
+    ID = "widget"
+
     def __init__(
         self,
         role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,

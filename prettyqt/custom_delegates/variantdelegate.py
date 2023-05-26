@@ -15,6 +15,8 @@ logger = logging.getLogger(__name__)
 
 
 class VariantDelegate(widgets.StyledItemDelegate):
+    ID = "variant"
+
     def __init__(
         self,
         data_role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
@@ -239,10 +241,9 @@ if __name__ == "__main__":
         table_widget[i, 0] = item_1
         table_widget[i, 1] = item_2
 
-    table_widget.set_delegate("variant", column=1)
-
     table_widget.resizeColumnsToContents()
     table_widget.resize(500, 300)
     table_widget.show()
     with app.debug_mode():
+        table_widget.set_delegate("variant", column=1)
         app.main_loop()

@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class ButtonDelegate(widgets.StyledItemDelegate):
+    ID = "button"
+
     def __init__(
         self,
         parent: QtWidgets.QAbstractItemView,
@@ -105,8 +107,7 @@ if __name__ == "__main__":
         table_widget[i, 0] = item_1
         table_widget[i, 1] = item_2
 
-    delegate = ButtonDelegate(parent=table_widget)
-    table_widget.set_delegate(delegate, column=1)
+    table_widget.set_delegate("button", column=1)
 
     table_widget.resizeColumnsToContents()
     table_widget.resize(500, 300)

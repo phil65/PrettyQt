@@ -5,6 +5,7 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class HtmlItemDelegate(widgets.StyledItemDelegate):
+    ID = "html"
     """Delegate do display HTML text.
 
     An alternative approach would be go grab a pixmal from a QLabel for painting.

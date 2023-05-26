@@ -5,4 +5,4 @@ from prettyqt.qt import QtCore
 
 
 class IdentityProxyModel(core.AbstractProxyModelMixin, QtCore.QIdentityProxyModel):
-    pass
+    ID = "identity"

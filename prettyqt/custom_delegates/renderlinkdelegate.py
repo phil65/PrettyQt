@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore
 
 
 class RenderLinkDelegate(widgets.StyledItemDelegate):
+    ID = "renderlink"
+
     def paint(self, painter, option, index):
         text = index.data()
         if not text:

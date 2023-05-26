@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class IconDelegate(widgets.StyledItemDelegate):
+    ID = "icon"
+
     def __init__(
         self,
         icon_role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,

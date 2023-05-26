@@ -7,4 +7,4 @@ from prettyqt.qt import QtCore
 class ConcatenateTablesProxyModel(
     core.AbstractItemModelMixin, QtCore.QConcatenateTablesProxyModel
 ):
-    pass
+    ID = "concatenate"

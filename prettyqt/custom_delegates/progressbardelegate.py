@@ -4,6 +4,8 @@ from prettyqt import widgets
 
 
 class ProgressBarDelegate(widgets.StyledItemDelegate):
+    ID = "progressbar"
+
     def paint(self, painter, option, index):
         progress = index.data()
         opt = widgets.StyleOptionProgressBar()

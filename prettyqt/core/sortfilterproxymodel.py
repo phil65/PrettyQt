@@ -11,7 +11,7 @@ from prettyqt.utils import InvalidParamError
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
     invalidated = core.Signal()
-
+    ID = "sort_filter"
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
     #     self._filter_column = 0

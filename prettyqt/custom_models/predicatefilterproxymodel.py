@@ -18,6 +18,8 @@ class PredicateFilterProxyModel(core.SortFilterProxyModel):
         >>> proxy.add_filter(lambda value: value < 1)
     """
 
+    ID = "predicate"
+
     def __init__(self, parent=None, **kwargs):
         super().__init__(parent, **kwargs)
         self._filters: list[Callable[[Any], bool]] = []
