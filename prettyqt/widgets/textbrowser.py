@@ -4,7 +4,7 @@ from collections.abc import Iterable
 import os
 import pathlib
 
-from prettyqt import core, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
@@ -58,9 +58,13 @@ class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
     def set_search_paths(self, paths: Iterable[datatypes.PathType]):
         self.setSearchPaths([os.fspath(p) for p in paths])
 
+    def get_source_type(self) -> gui.textdocument.ResourceTypeStr:
+        return gui.textdocument.RESOURCE_TYPES.inverse[self.sourceType()]
+
 
 if __name__ == "__main__":
     app = widgets.app()
     reader = TextBrowser()
     reader.show()
+    print(reader.get_source_type())
     app.main_loop()
