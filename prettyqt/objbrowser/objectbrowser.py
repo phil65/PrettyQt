@@ -146,13 +146,14 @@ class ObjectBrowser(widgets.MainWindow):
         radio_widget = widgets.Widget()
         radio_widget.set_layout("vertical", margin=0)
 
-        self.button_group = widgets.ButtonGroup(self)
+        self.button_group = widgets.ButtonGroup(
+            self, button_clicked=self._change_details_field
+        )
         for button_id, attr_detail in enumerate(self._attr_details):
             radio_button = widgets.RadioButton(attr_detail.name)
             radio_widget.box.addWidget(radio_button)
             self.button_group.addButton(radio_button, button_id)
 
-        self.button_group.buttonClicked.connect(self._change_details_field)
         self.button_group.button(0).setChecked(True)
 
         radio_widget.box.addStretch(1)

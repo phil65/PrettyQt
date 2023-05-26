@@ -12,10 +12,9 @@ logger = logging.getLogger(__name__)
 class DebugMode(eventfilters.BaseEventFilter):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.list = widgets.ListWidget()
-        self.list.setMouseTracking(True)
-        self.list.entered.connect(self._on_entered)
-        self.list.itemClicked.connect(self._on_clicked)
+        self.list = widgets.ListWidget(
+            entered=self._on_entered, item_clicked=self._on_clicked, mouse_tracking=True
+        )
         self.frame = widgets.Frame(frame_shape="box", frame_shadow="plain")
         # self.frame.setGeometry(0, 0, 1920, 1080)
         self.frame.setObjectName("testframe")

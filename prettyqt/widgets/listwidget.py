@@ -15,12 +15,9 @@ class NoData:
 class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     value_changed = core.Signal(object)
 
-    def __init__(
-        self, parent: QtWidgets.QWidget | None = None, selection_mode: str = "single"
-    ):
-        super().__init__(parent)
+    def __init__(self, *args, selection_mode: str = "single", **kwargs):
+        super().__init__(*args, selection_mode=selection_mode, **kwargs)
         self.itemSelectionChanged.connect(self.on_index_change)
-        self.set_selection_mode(selection_mode)
 
     def __repr__(self):
         return f"{type(self).__name__}: {self.count()} items"

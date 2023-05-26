@@ -21,6 +21,7 @@ class ExpandableLine(widgets.Widget):
             checkable=True,
             checked=False,
             text=title,
+            toggled=self.expand_view,
         )
         with self.expand_btn.edit_stylesheet() as ss:
             ss.QToolButton.border.setValue(None)
@@ -36,7 +37,7 @@ class ExpandableLine(widgets.Widget):
             ss.QAbstractScrollArea.border.setValue(None)
         # self.content_area.setMinimumHeight(0)
 
-        self.toggle_anim = core.ParallelAnimationGroup()
+        self.toggle_anim = core.ParallelAnimationGroup(duration=self._animation_duration)
         self.toggle_anim.add_property_animation(self.minimumHeight)
         self.toggle_anim.add_property_animation(self.maximumHeight)
         self.toggle_anim.add_property_animation(self.content_area.maximumHeight)
@@ -48,15 +49,12 @@ class ExpandableLine(widgets.Widget):
         self.setLayout(base_layout)
         # self.toggle_anim.setStartValue(0)
         # self.toggle_anim.setEndValue(300)
-
-        def expand_view(checked: bool):
-            self.expand_btn.set_arrow_type("down" if checked else "right")
-            self.toggle_anim.set_direction("forward" if checked else "backward")
-            self.toggle_anim.start()
-
         # === SIGNALS === #
-        self.expand_btn.toggled.connect(expand_view)
-        self.toggle_anim.set_duration(self._animation_duration)
+
+    def expand_view(self, checked: bool):
+        self.expand_btn.set_arrow_type("down" if checked else "right")
+        self.toggle_anim.set_direction("forward" if checked else "backward")
+        self.toggle_anim.start()
 
     def set_layout(
         self,
