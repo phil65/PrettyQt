@@ -53,9 +53,15 @@ def get_color(color: datatypes.ColorType) -> gui.Color:
     Returns:
         gui.Color: color instance
     """
-    if isinstance(color, tuple | list):
-        return gui.Color(*color)
-    return gui.Color(color)
+    match color:
+        case list() | tuple():
+            return gui.Color(*color)
+        case str() if color.endswith("_role"):
+            color = color.rstrip("_role")
+            palette = gui.Palette()
+            return palette.get_color(color)
+        case _:
+            return gui.Color(color)
 
 
 def interpolate_text_colors(
