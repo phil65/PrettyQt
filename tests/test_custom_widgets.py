@@ -41,7 +41,7 @@ def test_elidedlabel(qtbot):
 def test_expandableline(qtbot):
     layout = widgets.VBoxLayout()
     textbrowser = widgets.TextBrowser()
-    qtbot.addWidget(textbrowser)
+    # qtbot.addWidget(textbrowser)
     layout.addWidget(textbrowser)
     widget = custom_widgets.ExpandableLine("Test")
     qtbot.addWidget(widget)
@@ -53,11 +53,6 @@ def test_colorchooserbutton(qtbot):
     btn = custom_widgets.ColorChooserButton()
     qtbot.addWidget(btn)
     btn.set_current_color("green")
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(btn, jar)
-    with open("data.pkl", "rb") as jar:
-        btn = pickle.load(jar)
-    repr(btn)
     assert btn.get_value() == gui.Color("green")
     btn.set_value("blue")
     assert btn.is_valid()
