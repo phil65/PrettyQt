@@ -92,10 +92,10 @@ if __name__ == "__main__":
 
     class Model(core.AbstractTableModel):
         def rowCount(self, index=None):
-            return 1
+            return 5
 
         def columnCount(self, index=None):
-            return 2
+            return 5
 
         def data(self, index, role=None):
             match role, index.column():

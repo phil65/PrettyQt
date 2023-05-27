@@ -28,7 +28,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
             flag |= QtCore.Qt.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
-        return self.findItems(text, flag, column)  # type: ignore
+        return self.findItems(text, flag, column)
 
     def get_items(self, recursive: bool = False) -> list[QtWidgets.QTreeWidgetItem]:
         """Get TreeWidgetItems of this widget.

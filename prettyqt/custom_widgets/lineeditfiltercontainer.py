@@ -25,7 +25,7 @@ class LineEditFilterContainer(widgets.Widget):
         self._lineedit_scrollarea.set_size_policy("expanding", "minimum")
         self._topline_layout.add(self.spacer)
         self._topline_layout.add(self._lineedit_scrollarea)
-        parent.h_header.sectionResized.connect(self._resize_lineedits)
+        parent.h_header.sectionResized.connect(self._on_section_resize)
         for i in range(parent.h_header.count()):
             lineedit = widgets.LineEdit(margin=0)
             proxy = core.SortFilterProxyModel(self, recursive_filtering_enabled=True)
@@ -59,11 +59,14 @@ class LineEditFilterContainer(widgets.Widget):
         self.box.add(self._topline_layout)
         self.box.add(parent)
 
-    def _resize_lineedits(self, index, old_size, new_size):
+    def _on_section_resize(self, index, old_size, new_size):
         # perhaps check header.sectionPosition() and sectionSize() for correct pos?
-        logger.debug(f"resizing for index {index}")
+        # logger.debug(f"resizing for index {index}")
         self._lineedit_layout[index].setFixedWidth(new_size)
-        self.spacer.setFixedWidth(self._parent.v_header.width())
+        if isinstance(self._parent, QtWidgets.QTableView):
+            self.spacer.setFixedWidth(self._parent.v_header.width())
+        else:
+            self.spacer.hide()
         self._lineedit_scrollarea.setFixedWidth(self._parent.viewport().width())
 
     def set_filter_case_sensitivity(self, sensitivity):
