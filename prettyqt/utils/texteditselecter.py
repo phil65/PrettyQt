@@ -4,6 +4,7 @@ import contextlib
 from collections.abc import Iterator
 import logging
 import re
+from typing import Literal
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtGui
@@ -28,8 +29,13 @@ class TextEditSelecter:
         self.search_buffer: str | None = None
         self.search_flags = None
 
-    def goto_line(self, line_no: int):
+    def goto_line(self, line_no: int, end_pos: Literal["top", "bottom"] | None = None):
         doc = self._widget.document()
+        match end_pos:
+            case "top":
+                self._widget.moveCursor(gui.TextCursor.MoveOperation.End)
+            case "bottom":
+                self._widget.moveCursor(gui.TextCursor.MoveOperation.Start)
         lines = doc.blockCount()
         assert 1 <= line_no <= lines
         pos = doc.findBlockByLineNumber(line_no - 1).position()
@@ -219,9 +225,11 @@ class TextEditSelecter:
 if __name__ == "__main__":
     app = widgets.app()
 
-    test = widgets.PlainTextEdit("jfkjsaklf jksd jkj kajkj")
+    test = widgets.PlainTextEdit()
+    for i in range(200):
+        test.append_text(str(i))
     test.show()
     with app.debug_mode():
         app.sleep(2)
-        test.selecter.search_and_replace("jfkjsaklf/test/")
+        test.selecter.goto_line(50, end_pos="top")
         app.main_loop()
