@@ -615,7 +615,7 @@ class WidgetMixin(core.ObjectMixin):
         self,
         layout: LayoutStr | QtWidgets.QLayout,
         margin: int | None = None,
-        spacing: int | None = None,
+        **kwargs,
     ) -> QtWidgets.QLayout:
         """Quick way to set a layout.
 
@@ -624,7 +624,7 @@ class WidgetMixin(core.ObjectMixin):
         Args:
             layout: Layout to set
             margin: margin to use in pixels
-            spacing: spacing to use in pixels
+            kwargs: keyword arguments passed to layout
 
         Returns:
             Layout
@@ -633,19 +633,19 @@ class WidgetMixin(core.ObjectMixin):
 
         match layout:
             case "horizontal":
-                self.box = widgets.HBoxLayout()
+                self.box = widgets.HBoxLayout(**kwargs)
             case "vertical":
-                self.box = widgets.VBoxLayout()
+                self.box = widgets.VBoxLayout(**kwargs)
             case "grid":
-                self.box = widgets.GridLayout()
+                self.box = widgets.GridLayout(**kwargs)
             case "form":
-                self.box = widgets.FormLayout()
+                self.box = widgets.FormLayout(**kwargs)
             case "stacked":
-                self.box = widgets.StackedLayout()
+                self.box = widgets.StackedLayout(**kwargs)
             case "flow":
-                self.box = custom_widgets.FlowLayout()
+                self.box = custom_widgets.FlowLayout(**kwargs)
             case "border":
-                self.box = custom_widgets.BorderLayout()
+                self.box = custom_widgets.BorderLayout(**kwargs)
             case QtWidgets.QLayout():
                 self.box = layout
             case _:
@@ -653,8 +653,6 @@ class WidgetMixin(core.ObjectMixin):
         self.setLayout(self.box)
         if margin is not None:
             self.box.set_margin(margin)
-        if spacing is not None:
-            self.box.setSpacing(spacing)
         return self.box
 
     def position_on(

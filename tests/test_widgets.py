@@ -780,7 +780,7 @@ def test_mainwindow(qtbot):
     window.add_toolbar(toolbar)
     with pytest.raises(InvalidParamError):
         toolbar_2 = widgets.ToolBar()
-        window.add_toolbar(toolbar_2, position="test")
+        window.add_toolbar(toolbar_2, area="test")
     assert len(window.get_toolbars()) == 1
     assert len(window.get_docks()) == 1
     window.remove(dockwidget)

@@ -6,7 +6,7 @@ from typing import Any, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
@@ -287,17 +287,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             # case "button":
             #     delegate = custom_delegates.ButtonDelegate(parent=self, **kwargs)
             case str():
-
-                def get_subclasses(klass):
-                    for i in klass.__subclasses__():
-                        yield from get_subclasses(i)
-                        yield i
-
-                for Klass in get_subclasses(widgets.StyledItemDelegate):
-                    if hasattr(Klass, "ID") and Klass.ID == delegate:
-                        delegate = Klass(parent=self, **kwargs)
-                        logger.debug(f"found delegate for id {Klass.ID!r}")
-                        break
+                Klass = helpers.get_class_for_id(widgets.StyledItemDelegate, delegate)
+                delegate = Klass(parent=self, **kwargs)
             # case str():
             #     if delegate in widgets.StyledItemDelegate._registry:
             #         Klass = widgets.StyledItemDelegate._registry[delegate]
