@@ -150,8 +150,19 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             return
         super().selectAll()
 
-    def set_model(self, model: QtCore.QAbstractItemModel | None):
+    def set_model(self, model: QtCore.QAbstractItemModel | list | dict | None):
         """Delete old selection model explicitely, seems to help with memory usage."""
+        from prettyqt import custom_models
+
+        match model:
+            case dict():
+                model = custom_models.JsonModel(model, parent=self)
+            case list():
+                model = core.StringListModel(model)
+            case QtCore.QAbstractItemModel() | None:
+                pass
+            case _:
+                raise ValueError(model)
         old_model = self.model()
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
