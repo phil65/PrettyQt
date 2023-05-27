@@ -4,7 +4,7 @@ import sys
 
 from prettyqt import constants, core, custom_models, iconprovider, widgets
 from prettyqt.eventfilters import listviewgridresizeeventfilter
-from prettyqt.qt import QtGui
+from prettyqt.utils import colors, datatypes
 
 
 # TODO: Set icon colour and copy code with color kwarg
@@ -28,7 +28,7 @@ class IconBrowser(widgets.MainWindow):
             for font_collection, font_data in font_maps.items()
             for icon_name in font_data
         ]
-        model = IconModel(self.get_palette().get_color("text"))
+        model = IconModel(icon_color="text_role")
         model.setStringList(sorted(icon_names))
 
         self._proxy_model = custom_models.FuzzyFilterProxyModel()
@@ -88,9 +88,9 @@ class IconBrowser(widgets.MainWindow):
 
 
 class IconModel(core.StringListModel):
-    def __init__(self, icon_color: QtGui.QColor):
+    def __init__(self, icon_color: datatypes.ColorType):
         super().__init__()
-        self._icon_color = icon_color
+        self._icon_color = colors.get_color(icon_color).as_qt()
 
     def flags(self, index):
         return constants.IS_ENABLED | constants.IS_SELECTABLE  # type: ignore

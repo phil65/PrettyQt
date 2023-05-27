@@ -29,9 +29,7 @@ class RegexInput(widgets.Widget):
         super().__init__(**kwargs)
         self.set_layout("grid", margin=0)
         self.label_error = widgets.Label()
-        error_color = self.get_palette().get_color("highlight")
-        self.label_error.set_color(error_color)
-
+        self.label_error.set_color("highlight_role")
         self.lineedit = custom_widgets.RegexLineEdit()
         self.lineedit.val.error_occured.connect(self.label_error.set_text)
         self.lineedit.val.pattern_updated.connect(self.value_changed)
