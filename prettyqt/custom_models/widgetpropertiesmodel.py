@@ -33,6 +33,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         self.event_catcher = eventfilters.EventCatcher(
             include=["resize", "move"], parent=self._widget
         )
+        logger.debug(f"Connected {self._widget!r} to {self!r}")
         self.event_catcher.caught.connect(self.force_layoutchange)
         self._widget.installEventFilter(self.event_catcher)
         self._handles = self._metaobj.connect_signals(
@@ -43,6 +44,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         for handle in self._handles:
             self._widget.disconnect(handle)
         self._widget.removeEventFilter(self.event_catcher)
+        logger.debug(f"Disconnected {self._widget!r} from {self!r}")
 
     def columnCount(self, parent=None):
         return len(self.HEADER)
