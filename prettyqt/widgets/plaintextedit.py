@@ -57,13 +57,29 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
     def allow_wheel_zoom(self, do_zoom: bool = True):
         self._allow_wheel_zoom = do_zoom
 
-    def append_text(self, text: str, newline: bool = True):
+    def append_text(
+        self,
+        text: str,
+        newline: bool = True,
+        ensure_visible: Literal["always", "when_bottom", "never"] = "always",
+    ):
+        scrollbar = self.verticalScrollBar()
+        at_bottom = scrollbar.value() >= (scrollbar.maximum() - 4)
+        prev_val = scrollbar.value()
         if newline:
             self.appendPlainText(text)
         else:
             self.selecter.move_cursor("end")
             self.insertPlainText(text)
             self.selecter.move_cursor("end")
+        match ensure_visible:
+            case "always":
+                self.ensureCursorVisible()
+            case "when_bottom":
+                if at_bottom:
+                    self.ensureCursorVisible()
+            case "never":
+                scrollbar.setValue(prev_val)
 
     def set_text(self, text: str):
         self.setPlainText(text)
@@ -207,7 +223,7 @@ if __name__ == "__main__":
 
     val = custom_validators.RegexPatternValidator()
     app = widgets.app()
-    widget = PlainTextEdit("This is a test")
+    widget = PlainTextEdit()
     widget.show_whitespace_and_tabs(True)
     # widget.set_validator(val)
     # with widget.current_cursor() as c:

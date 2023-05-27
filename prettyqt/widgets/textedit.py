@@ -54,8 +54,29 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
     def set_text(self, text: str) -> None:
         self.setPlainText(text)
 
-    def append_text(self, text: str) -> None:
-        self.append(text)
+    def append_text(
+        self,
+        text: str,
+        newline: bool = True,
+        ensure_visible: Literal["always", "when_bottom", "never"] = "always",
+    ):
+        scrollbar = self.verticalScrollBar()
+        at_bottom = scrollbar.value() >= (scrollbar.maximum() - 4)
+        prev_val = scrollbar.value()
+        if newline:
+            self.append(text)
+        else:
+            self.selecter.move_cursor("end")
+            self.insertHtml(text)
+            self.selecter.move_cursor("end")
+        match ensure_visible:
+            case "always":
+                self.ensureCursorVisible()
+            case "when_bottom":
+                if at_bottom:
+                    self.ensureCursorVisible()
+            case "never":
+                scrollbar.setValue(prev_val)
 
     def text(self) -> str:
         return self.toPlainText()
