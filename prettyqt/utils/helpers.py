@@ -1,7 +1,10 @@
 from __future__ import annotations
 
 from datetime import timedelta
+import logging
 import re
+
+logger = logging.getLogger(__name__)
 
 
 TIME_REGEX = re.compile(
@@ -87,6 +90,19 @@ def get_color_percentage(
     z = round(color_1[2] + (color_2[2] - color_1[2]) * percent / 100)
     a = round(color_1[3] + (color_2[3] - color_1[3]) * percent / 100)
     return (x, y, z, a)
+
+
+def get_class_for_id(base_class: type, id_: str):
+    def get_subclasses(klass):
+        for i in klass.__subclasses__():
+            yield from get_subclasses(i)
+            yield i
+
+    for Klass in get_subclasses(base_class):
+        if hasattr(Klass, "ID") and Klass.ID == id_:
+            logger.debug(f"found delegate for id {Klass.ID!r}")
+            return Klass
+    raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 
 
 ANSI_STYLES = {
