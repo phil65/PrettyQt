@@ -29,47 +29,56 @@ class Stalker(core.Object):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self.obj = qobject
+        self._obj = qobject
+        self._meta = core.MetaObject(self._obj.metaObject())
         self.log_level = log_level
         self.counter = collections.defaultdict(int)
         self.signal_counter = collections.defaultdict(int)
-        if exclude is None:
-            exclude = ["meta_call", "timer"]
-        # enable event logging by installing EventCatcher, which includes logging
-        self.eventcatcher = self.obj.add_callback_for_event(
-            self._on_event_detected, include=include, exclude=exclude
-        )
-        self.handles = []
-        # enable logging of signals emitted by connecting all signals to our fn
-        for signal in self.obj.get_metaobject().get_signals():
-            signal_instance = self.obj.__getattribute__(signal.get_name())
-            fn = self._on_signal_emitted(signal)
-            handle = signal_instance.connect(fn)
-            self.handles.append(handle)
-        # enable logging of all signal (dis)connections by hooking to connectNotify
-        self.old_connectNotify = self.obj.connectNotify
-        self.old_disconnectNotify = self.obj.disconnectNotify
-        self.obj.connectNotify = self._on_signal_connected
-        self.obj.disconnectNotify = self._on_signal_disconnected
+        self.exclude = ["meta_call", "timer"] if exclude is None else exclude
+        self.include = include
+        self._handles = []
 
     def __enter__(self):
+        self.hook()
         return self
 
     def __exit__(self, typ, value, traceback):
         self.unhook()
 
+    def hook(self):
+        # enable event logging by installing EventCatcher, which includes logging
+        self.eventcatcher = self._obj.add_callback_for_event(
+            self._on_event_detected, include=self.include, exclude=self.exclude
+        )
+        # enable logging of signals emitted by connecting all signals to our fn
+        for signal in self._meta.get_signals(only_notifiers=True):
+            signal_instance = self._obj.__getattribute__(signal.get_name())
+            fn = self._on_signal_emitted(signal)
+            handle = signal_instance.connect(fn)
+            self._handles.append(handle)
+        # enable logging of all signal (dis)connections by hooking to connectNotify
+        self.old_connectNotify = self._obj.connectNotify
+        self.old_disconnectNotify = self._obj.disconnectNotify
+        self._obj.connectNotify = self._on_signal_connected
+        self._obj.disconnectNotify = self._on_signal_disconnected
+
     def unhook(self):
+        if self.eventcatcher is None:
+            raise RuntimeError("need to hook Stalker before unhooking")
         """Clean up our mess."""
-        self.obj.connectNotify = self.old_connectNotify
-        self.obj.disconnectNotify = self.old_disconnectNotify
-        for handle in self.handles:
-            self.obj.disconnect(handle)
-        self.obj.removeEventFilter(self.eventcatcher)
+        self._obj.connectNotify = self.old_connectNotify
+        self._obj.disconnectNotify = self.old_disconnectNotify
+        self.old_connectNotify = None
+        self.old_disconnectNotify = None
+        for handle in self._handles:
+            self._obj.disconnect(handle)
+        self._handles = None
+        self._obj.removeEventFilter(self.eventcatcher)
 
     def log(self, message: str):
         if self.log_level:
             try:
-                logger.log(self.log_level, f"{self.obj!r}: {message}")
+                logger.log(self.log_level, f"{self._obj!r}: {message}")
             except RuntimeError:
                 logger.error("Object probably already deleted.")
 
