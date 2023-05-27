@@ -2,12 +2,15 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import contextlib
+import logging
 from typing import Any, Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, helpers
 
+
+logger = logging.getLogger(__name__)
 
 CHECK_INDEX_OPTIONS = bidict(
     none=QtCore.QAbstractItemModel.CheckIndexOption.NoOption,
@@ -75,18 +78,14 @@ class Proxyfier:
         proxy.setSourceModel(self._model)
         return proxy
 
-    def get_search_proxy(
-        self, search_type: Literal["regular", "fuzzy"] = "regular", **kwargs
+    def get_proxy(
+        self, proxy: Literal["regular", "fuzzy"] = "regular", parent=None, **kwargs
     ):
-        match search_type:
-            case "regular":
-                proxy = core.SortFilterProxyModel(**kwargs)
-            case "fuzzy":
-                from prettyqt import custom_models
-
-                proxy = custom_models.FuzzyFilterProxyModel(**kwargs)
-            case _:
-                raise ValueError(search_type)
+        parent = parent or self._model.parent()
+        if parent is None:
+            raise ValueError("needs parent!")
+        Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
+        proxy = Klass(parent=parent, **kwargs)
         proxy.setSourceModel(self._model)
         return proxy
 
@@ -146,13 +145,13 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ) -> bool:
         flag = QtCore.QAbstractItemModel.CheckIndexOption.NoOption
         if index_is_valid:
-            flag |= CHECK_INDEX_OPTIONS["index_is_valid"]  # type: ignore
+            flag |= CHECK_INDEX_OPTIONS["index_is_valid"]
         if do_not_use_parent:
-            flag |= CHECK_INDEX_OPTIONS["do_not_use_parent"]  # type: ignore
+            flag |= CHECK_INDEX_OPTIONS["do_not_use_parent"]
         if parent_is_invalid:
-            flag |= CHECK_INDEX_OPTIONS["parent_is_invalid"]  # type: ignore
-        check_flag = QtCore.QAbstractItemModel.CheckIndexOption(0) | flag  # type: ignore
-        return self.checkIndex(index, check_flag)  # type: ignore
+            flag |= CHECK_INDEX_OPTIONS["parent_is_invalid"]
+        check_flag = QtCore.QAbstractItemModel.CheckIndexOption(0) | flag
+        return self.checkIndex(index, check_flag)
 
     @contextlib.contextmanager
     def change_layout(self):
