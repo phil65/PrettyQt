@@ -79,20 +79,30 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
             case QtWidgets.QWidget():
                 self.centralWidget().layout().add(widget, **kwargs)
 
+    def get_corner(self, corner: constants.CornerStr) -> constants.DockWidgetAreaStr:
+        corner = constants.CORNER[corner]
+        area = self.corner(corner)
+        return constants.DOCK_WIDGET_AREAS.inverse[area]
+
+    def set_corner(self, corner: constants.CornerStr, area: constants.DockWidgetAreaStr):
+        corner = constants.CORNER[corner]
+        area = constants.DOCK_WIDGET_AREAS[area]
+        self.setCorner(corner, area)
+
     def add_toolbar(
         self,
         toolbar: QtWidgets.QToolBar,
-        position: constants.ToolbarAreaStr | Literal["auto"] = "auto",
+        area: constants.ToolbarAreaStr | Literal["auto"] = "auto",
     ):
         """Adds a toolbar to the mainmenu at specified area.
 
         Args:
             toolbar: toolbar to use
-            position: position of the toolbar
+            area: area of the toolbar
         """
-        if position == "auto":
-            position = self._get_preferred_toolbar_position()
-        self.addToolBar(constants.TOOLBAR_AREA[position], toolbar)
+        if area == "auto":
+            area = self._get_preferred_toolbar_position()
+        self.addToolBar(constants.TOOLBAR_AREA[area], toolbar)
 
     def add_toolbar_break(self, position: constants.ToolbarAreaStr = "top"):
         """Adds a toolbar break to the given area behind the last item.
@@ -150,7 +160,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         name: str,
         title: str,
         layout: widgets.layout.LayoutTypeStr = "horizontal",
-        position: constants.DockPositionStr = "left",
+        position: constants.DockWidgetAreaStr = "left",
     ) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, object_name=name, window_title=title)
         widget = widgets.Widget()
@@ -163,7 +173,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     def add_dockwidget(
         self,
         widget: QtWidgets.QtWidgets.QWidget,
-        position: constants.DockPositionStr | Literal["auto"] = "auto",
+        position: constants.DockWidgetAreaStr | Literal["auto"] = "auto",
         **kwargs,
     ):
         if position == "auto":
@@ -171,10 +181,10 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         if not isinstance(widget, QtWidgets.QDockWidget):
             dock_widget = widgets.DockWidget(self, **kwargs)
             dock_widget.set_widget(widget)
-            self.addDockWidget(constants.DOCK_POSITION[position], dock_widget)
+            self.addDockWidget(constants.DOCK_WIDGET_AREA[position], dock_widget)
             return dock_widget
         else:
-            self.addDockWidget(constants.DOCK_POSITION[position], widget)
+            self.addDockWidget(constants.DOCK_WIDGET_AREA[position], widget)
 
     def remove(
         self,
@@ -198,9 +208,9 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         self.set_modality("application")
         self.show()
 
-    def get_dock_area(self, widget: QtWidgets.QDockWidget) -> constants.DockPositionStr:
+    def get_dock_area(self, widget: QtWidgets.QDockWidget) -> constants.DockWidgetAreaStr:
         area = self.dockWidgetArea(widget)
-        return constants.DOCK_POSITIONS.inverse[area]
+        return constants.DOCK_WIDGET_AREAS.inverse[area]
 
     def get_toolbar_area(self, widget: QtWidgets.QToolBar) -> constants.ToolbarAreaStr:
         area = self.toolBarArea(widget)
@@ -239,7 +249,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         return widgets.tabwidget.TAB_SHAPES.inverse[self.tabShape()]
 
     def get_docks(
-        self, position: constants.DockPositionStr | None = None
+        self, position: constants.DockWidgetAreaStr | None = None
     ) -> list[QtWidgets.QDockWidget]:
         docks = self.find_children(QtWidgets.QDockWidget, recursive=False)
         if position is None:
@@ -249,8 +259,8 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def _get_preferred_dock_position(
         self,
-        preference: constants.DockPositionStr = "left",
-    ) -> constants.DockPositionStr:
+        preference: constants.DockWidgetAreaStr = "left",
+    ) -> constants.DockWidgetAreaStr:
         """Get location with least amount of docks. If same score, use preference."""
         areas = [self.get_dock_area(i) for i in self.get_docks()]
         # by prepending the prio order, we can choose order because

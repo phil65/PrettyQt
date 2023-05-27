@@ -374,16 +374,16 @@ DROP_ACTION: bidict[DropActionStr, Qt.DropAction] = bidict(
     target_move=Qt.DropAction.TargetMoveAction,
 )
 
-DockPositionStr = Literal["top", "bottom", "left", "right"]
-DOCK_POSITION: bidict[DockPositionStr, Qt.DockWidgetArea] = bidict(
+DockWidgetAreaStr = Literal["top", "bottom", "left", "right"]
+DOCK_WIDGET_AREA: bidict[DockWidgetAreaStr, Qt.DockWidgetArea] = bidict(
     top=Qt.DockWidgetArea.TopDockWidgetArea,
     bottom=Qt.DockWidgetArea.BottomDockWidgetArea,
     left=Qt.DockWidgetArea.LeftDockWidgetArea,
     right=Qt.DockWidgetArea.RightDockWidgetArea,
 )
 
-DockPositionsStr = Literal["top", "bottom", "left", "right", "all", "none"]
-DOCK_POSITIONS: bidict[DockPositionsStr, Qt.DockWidgetArea] = bidict(
+DockWidgetAreasStr = Literal["top", "bottom", "left", "right", "all", "none"]
+DOCK_WIDGET_AREAS: bidict[DockWidgetAreasStr, Qt.DockWidgetArea] = bidict(
     top=Qt.DockWidgetArea.TopDockWidgetArea,
     bottom=Qt.DockWidgetArea.BottomDockWidgetArea,
     left=Qt.DockWidgetArea.LeftDockWidgetArea,
