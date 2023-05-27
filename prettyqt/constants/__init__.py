@@ -382,13 +382,14 @@ DOCK_POSITION: bidict[DockPositionStr, Qt.DockWidgetArea] = bidict(
     right=Qt.DockWidgetArea.RightDockWidgetArea,
 )
 
-DockPositionsStr = Literal["top", "bottom", "left", "right", "all"]
+DockPositionsStr = Literal["top", "bottom", "left", "right", "all", "none"]
 DOCK_POSITIONS: bidict[DockPositionsStr, Qt.DockWidgetArea] = bidict(
     top=Qt.DockWidgetArea.TopDockWidgetArea,
     bottom=Qt.DockWidgetArea.BottomDockWidgetArea,
     left=Qt.DockWidgetArea.LeftDockWidgetArea,
     right=Qt.DockWidgetArea.RightDockWidgetArea,
     all=Qt.DockWidgetArea.AllDockWidgetAreas,
+    none=Qt.DockWidgetArea(0),
 )
 
 ToolbarAreaStr = Literal["top", "bottom", "left", "right", "all", "none"]
