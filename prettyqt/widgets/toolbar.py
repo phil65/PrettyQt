@@ -29,6 +29,14 @@ class ToolBarMixin(widgets.WidgetMixin):
     def __repr__(self):
         return get_repr(self, self.windowTitle())
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "toolButtonStyle": constants.TOOLBUTTON_STYLE,
+            "allowedAreas": constants.TOOLBAR_AREA,
+        }
+        return maps
+
     def add(self, item: QtGui.QAction | QtWidgets.QWidget):
         if isinstance(item, QtGui.QAction):
             self.addAction(item)

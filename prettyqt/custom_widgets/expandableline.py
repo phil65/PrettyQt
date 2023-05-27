@@ -37,7 +37,8 @@ class ExpandableLine(widgets.Widget):
             ss.QAbstractScrollArea.border.setValue(None)
         # self.content_area.setMinimumHeight(0)
 
-        self.toggle_anim = core.ParallelAnimationGroup(duration=self._animation_duration)
+        self.toggle_anim = core.ParallelAnimationGroup()
+        self.toggle_anim.set_duration(self._animation_duration)
         self.toggle_anim.add_property_animation(self.minimumHeight)
         self.toggle_anim.add_property_animation(self.maximumHeight)
         self.toggle_anim.add_property_animation(self.content_area.maximumHeight)
