@@ -80,6 +80,7 @@ class BoxLayoutMixin(widgets.LayoutMixin):
 
 
 class BoxLayout(BoxLayoutMixin, QtWidgets.QBoxLayout):
+    ID = "box"
     pass
 
 

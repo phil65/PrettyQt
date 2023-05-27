@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class FlowLayout(widgets.Layout):
+    ID = "flow"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self._items = []

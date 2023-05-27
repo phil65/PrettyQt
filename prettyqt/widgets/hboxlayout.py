@@ -5,7 +5,7 @@ from prettyqt.qt import QtWidgets
 
 
 class HBoxLayout(widgets.boxlayout.BoxLayoutMixin, QtWidgets.QHBoxLayout):
-    pass
+    ID = "horizontal"
 
 
 if __name__ == "__main__":

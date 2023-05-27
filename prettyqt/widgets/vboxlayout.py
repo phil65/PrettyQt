@@ -5,7 +5,7 @@ from prettyqt.qt import QtWidgets
 
 
 class VBoxLayout(widgets.boxlayout.BoxLayoutMixin, QtWidgets.QVBoxLayout):
-    pass
+    ID = "vertical"
 
 
 if __name__ == "__main__":

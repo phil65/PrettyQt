@@ -8,6 +8,8 @@ from prettyqt.utils import InvalidParamError
 
 
 class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
+    ID = "grid"
+
     def __getitem__(
         self, idx: tuple[int, int] | int | str
     ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:

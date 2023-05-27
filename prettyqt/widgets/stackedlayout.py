@@ -16,6 +16,7 @@ StackingModeStr = Literal["one", "all"]
 
 
 class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):
+    ID = "stacked"
     # def serialize_fields(self):
     #     return dict(items=self.get_children())
 

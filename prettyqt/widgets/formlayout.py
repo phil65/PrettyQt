@@ -38,6 +38,8 @@ FieldGrowthPolicyStr = Literal[
 
 
 class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
+    ID = "form"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_size_constraint("maximum")
