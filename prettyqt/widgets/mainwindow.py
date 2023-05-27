@@ -35,6 +35,14 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
             raise KeyError("Widget not found")
         return result
 
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {
+            "toolButtonStyle": constants.TOOLBUTTON_STYLE,
+            "tabShape": widgets.tabwidget.TAB_SHAPES,
+        }
+        return maps
+
     def set_widget(self, widget: QtWidgets.QWidget | None) -> QtWidgets.QWidget | None:
         """Set widget and return previous one if existing."""
         previous = self.takeCentralWidget()
@@ -197,6 +205,38 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     def get_toolbar_area(self, widget: QtWidgets.QToolBar) -> constants.ToolbarAreaStr:
         area = self.toolBarArea(widget)
         return constants.TOOLBAR_AREA.inverse[area]
+
+    def set_tool_button_style(self, style: constants.ToolButtonStyleStr):
+        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])
+
+    def get_tool_button_style(self) -> constants.ToolButtonStyleStr:
+        """Return current tool button style.
+
+        Returns:
+            tool button style
+        """
+        return constants.TOOLBUTTON_STYLE.inverse[self.toolButtonStyle()]
+
+    def set_tab_shape(self, shape: widgets.tabwidget.TabShapeStr):
+        """Set tab shape for the tabwidget.
+
+        Args:
+            shape: tab shape to use
+
+        Raises:
+            InvalidParamError: tab shape does not exist
+        """
+        if shape not in widgets.tabwidget.TAB_SHAPES:
+            raise InvalidParamError(shape, widgets.tabwidget.TAB_SHAPES)
+        self.setTabShape(widgets.tabwidget.TAB_SHAPES[shape])
+
+    def get_tab_shape(self) -> widgets.tabwidget.TabShapeStr:
+        """Return tab shape.
+
+        Returns:
+            tab shape
+        """
+        return widgets.tabwidget.TAB_SHAPES.inverse[self.tabShape()]
 
     def get_docks(
         self, position: constants.DockPositionStr | None = None
