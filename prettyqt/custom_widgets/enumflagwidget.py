@@ -31,11 +31,9 @@ class EnumFlagWidget(widgets.ToolButton):
         self._enum_class = enum
         self.clear()
         for i in self._enum_class.__members__.values():
-            action = gui.Action()
-            action.set_text(i.name.replace("_", " "))
+            action = gui.Action(text=i.name.replace("_", " "), checkable=True)
             action.setData(i)
             self._action_map[i] = action
-            action.setCheckable(True)
             self.button_menu.add(action)
 
     def get_enum_class(self) -> enum.EnumMeta | None:

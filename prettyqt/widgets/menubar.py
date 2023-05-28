@@ -28,18 +28,16 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
 
     @functools.singledispatchmethod
     def add_menu(self, title: str) -> widgets.Menu:
-        action = gui.Action(self)
+        action = gui.Action(parent=self, text=title)
         menu = widgets.Menu(title=title, parent=self)
-        action.set_text(title)
         action.set_menu(menu)
         self.addAction(action)
         return menu
 
     @add_menu.register
     def _(self, menu: QtWidgets.QMenu) -> gui.Action:
-        action = gui.Action(self)
+        action = gui.Action(parent=self, text=menu.title())
         action.set_menu(menu)
-        action.set_text(menu.title())
         self.addAction(action)
         return action
 

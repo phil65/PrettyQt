@@ -80,6 +80,33 @@ KEY_DELETE = Qt.Key.Key_Delete
 
 ThemeStr = Literal["default", "dark"]
 
+
+ItemFlagStr = Literal[
+    "none",
+    "selectable",
+    "editable",
+    "drag_enabled",
+    "drop_enabled",
+    "user_checkable",
+    "enabled",
+    "auto_tristate",
+    "never_has_children",
+    "user_tristate",
+]
+
+ITEM_FLAG: bidict[ItemFlagStr, QtCore.Qt.ItemFlag | int] = bidict(
+    none=Qt.ItemFlag.NoItemFlags,
+    selectable=Qt.ItemFlag.ItemIsSelectable,
+    editable=Qt.ItemFlag.ItemIsEditable,
+    drag_enabled=Qt.ItemFlag.ItemIsDragEnabled,
+    drop_enabled=Qt.ItemFlag.ItemIsDropEnabled,
+    user_checkable=Qt.ItemFlag.ItemIsUserCheckable,
+    enabled=Qt.ItemFlag.ItemIsEnabled,
+    auto_tristate=Qt.ItemFlag.ItemIsAutoTristate,
+    never_has_children=Qt.ItemFlag.ItemNeverHasChildren,
+    user_tristate=Qt.ItemFlag.ItemIsUserTristate,
+)
+
 ItemDataRoleStr = Literal[
     "display",
     "user",

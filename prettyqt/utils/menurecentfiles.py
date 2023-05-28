@@ -180,11 +180,16 @@ class MenuRecentFiles(widgets.Menu):
         self.clear()
         self.recent_files_actions[:] = []
         for file in self.manager.get_recent_files():
-            action = gui.Action(self, text=os.path.split(file)[1], tool_tip=file)
-            action.setStatusTip(file)
+            icon = self.icon_provider.icon(core.FileInfo(file))
+            action = gui.Action(
+                parent=self,
+                text=os.path.split(file)[1],
+                tool_tip=file,
+                status_tip=file,
+                icon=icon,
+                triggered=self._on_action_triggered,
+            )
             action.setData(file)
-            action.setIcon(self.icon_provider.icon(core.FileInfo(file)))
-            action.triggered.connect(self._on_action_triggered)
             self.addAction(action)
             self.recent_files_actions.append(action)
         self.addSeparator()

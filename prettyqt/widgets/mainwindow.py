@@ -7,8 +7,33 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import bidict, InvalidParamError
 
+
+DOCK_OPTION = bidict(
+    animated_docks=QtWidgets.QMainWindow.DockOption.AnimatedDocks,
+    allow_nested_docks=QtWidgets.QMainWindow.DockOption.AllowNestedDocks,
+    allow_tabbed_docks=QtWidgets.QMainWindow.DockOption.AllowTabbedDocks,
+    force_tabbed_docks=QtWidgets.QMainWindow.DockOption.ForceTabbedDocks,
+    vertical_tabs=QtWidgets.QMainWindow.DockOption.VerticalTabs,
+    grouped_dragging=QtWidgets.QMainWindow.DockOption.GroupedDragging,
+)
+
+DockOptionStr = Literal[
+    "animated_docks",
+    "allow_nested_docks",
+    "allow_tabbed_docks",
+    "force_tabbed_docks",
+    "vertical_tabs",
+    "grouped_dragging",
+]
+
+DEFAULT_OPTS = (
+    QtWidgets.QMainWindow.DockOption.AllowTabbedDocks
+    | QtWidgets.QMainWindow.DockOption.AllowNestedDocks
+    | QtWidgets.QMainWindow.DockOption.GroupedDragging
+    | QtWidgets.QMainWindow.DockOption.AnimatedDocks
+)
 
 logger = logging.getLogger(__name__)
 
@@ -20,14 +45,8 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     """
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, dock_options=DEFAULT_OPTS, **kwargs)
         self.setMenuBar(widgets.MenuBar())
-        self.setDockOptions(
-            self.DockOption.AllowTabbedDocks  # type: ignore
-            | self.DockOption.AllowNestedDocks
-            | self.DockOption.GroupedDragging
-            | self.DockOption.AnimatedDocks
-        )
 
     def __getitem__(self, index: str) -> QtWidgets.QWidget:
         result = self.find_child(QtWidgets.QWidget, index)
@@ -54,19 +73,25 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         # qactions = self.createPopupMenu()
         menu = widgets.Menu(parent=self)
         for i, item in enumerate(self.get_docks()):
-            action = gui.Action(text=item.windowTitle(), parent=self)
-            action.set_checkable(True)
-            action.set_checked(item.isVisible())
-            action.set_shortcut(f"Ctrl+Shift+{i}")
-            action.set_shortcut_context("application")
-            action.toggled.connect(item.setVisible)
+            action = gui.Action(
+                text=item.windowTitle(),
+                parent=self,
+                checkable=True,
+                checked=item.isVisible(),
+                shortcut=f"Ctrl+Shift+{i}",
+                shortcut_context="application",
+                toggled=item.setVisible,
+            )
             menu.add(action)
         menu.add_separator()
         for tb in self.get_toolbars():
-            action = gui.Action(text=tb.windowTitle(), parent=self)
-            action.set_checkable(True)
-            action.toggled.connect(tb.setVisible)
-            action.set_checked(tb.isVisible())
+            action = gui.Action(
+                text=tb.windowTitle(),
+                parent=self,
+                checkable=True,
+                toggled=tb.setVisible,
+                checked=tb.isVisible(),
+            )
             menu.add(action)
         return menu
 

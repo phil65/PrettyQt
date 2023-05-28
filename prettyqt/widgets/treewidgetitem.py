@@ -136,8 +136,7 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         return gui.Font(self.font(column))
 
     def get_icon(self, column: int = 0) -> gui.Icon | None:
-        icon = self.icon(column)
-        return None if icon.isNull() else gui.Icon(icon)
+        return None if (icon := self.icon(column)).isNull() else gui.Icon(icon)
 
     def set_checkstate(self, state: constants.CheckStateStr, column: int = 0):
         """Set checkstate of the checkbox.

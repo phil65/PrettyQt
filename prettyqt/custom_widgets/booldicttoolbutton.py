@@ -13,8 +13,7 @@ class BoolDictToolButton(widgets.ToolButton):
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self.button_menu = widgets.Menu()
-        self.button_menu.triggered.connect(self._on_menu_click)
+        self.button_menu = widgets.Menu(triggered=self._on_menu_click)
         self.setMenu(self.button_menu)
         self.set_popup_mode("instant")
         if dct:
@@ -33,10 +32,7 @@ class BoolDictToolButton(widgets.ToolButton):
     def set_dict(self, dct: dict[str, str]):
         self.button_menu.clear()
         for k, v in dct.items():
-            action = gui.Action()
-            action.set_text(v)
-            action.setCheckable(True)
-            action.set_id(k)
+            action = gui.Action(text=v, checkable=True, object_name=k)
             self.button_menu.add(action)
         self.value_changed.emit(self.as_dict())
 

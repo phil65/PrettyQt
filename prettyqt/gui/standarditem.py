@@ -5,6 +5,8 @@ import html
 import os
 from typing import Any
 
+from typing_extensions import Self
+
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixin
@@ -13,15 +15,6 @@ from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixi
 class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
     def __repr__(self):
         return get_repr(self, self.get_icon(), self.text())
-
-    def serialize_fields(self):
-        return dict(
-            text=self.text(),
-            tool_tip=self.toolTip(),
-            status_tip=self.statusTip(),
-            icon=self.get_icon(),
-            data=self.data(),
-        )
 
     def __getitem__(
         self, index: int | tuple[int, int] | QtCore.QModelIndex
@@ -54,10 +47,10 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
 
     def add(self, *item: str | QtGui.QStandardItem):
         for i in item:
-            new_item = gui.StandardItem(i) if isinstance(i, str) else i
+            new_item = type(self)(i) if isinstance(i, str) else i
             self.appendRow([new_item])
 
-    def clone(self):
+    def clone(self) -> Self:
         item = type(self)()
         core.DataStream.copy_data(self, item)
         assert type(item) == StandardItem
@@ -179,8 +172,8 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         flags: QtCore.Qt.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,
-    ) -> StandardItem:
-        item = StandardItem(name)
+    ) -> Self:
+        item = type(self)(name)
         if icon is not None:
             icon = iconprovider.get_icon(icon)
             item.setIcon(icon)

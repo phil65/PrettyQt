@@ -163,9 +163,10 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         labels = self.get_section_labels()[1:]
         for i, header_label in enumerate(labels, start=1):
             val = not self.isSectionHidden(i)
-            action = gui.Action(text=header_label, checkable=True, checked=val)
             fn = functools.partial(self.set_section_hidden, i=i, hide=val)
-            action.triggered.connect(fn)
+            action = gui.Action(
+                text=header_label, checkable=True, checked=val, triggered=fn
+            )
             actions.append(action)
         menu.add_actions(actions)
         return menu

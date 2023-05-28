@@ -95,8 +95,8 @@ class WidgetMixin(core.ObjectMixin):
         checkable: bool = False,
         checked: bool = False,
         shortcut: str | None = None,
-        status_tip: str | None = None,
-        tool_tip: str | None = None,
+        status_tip: str = "",
+        tool_tip: str = "",
         parent: QtWidgets.QWidget | None = None,
     ) -> gui.Action:
         """Add an action to the menu.
@@ -116,18 +116,17 @@ class WidgetMixin(core.ObjectMixin):
             Action added to menu
         """
         if isinstance(text, str):
-            action = gui.Action(parent or self, text=text)
-            if triggered:
-                action.triggered.connect(triggered)
-            action.set_icon(icon)
-            action.set_shortcut(shortcut)
-            if checkable:
-                action.setCheckable(True)
-                action.setChecked(checked)
-            if status_tip is not None:
-                action.setStatusTip(status_tip)
-            if tool_tip is not None:
-                action.setToolTip(tool_tip)
+            action = gui.Action(
+                parent=parent or self,
+                text=text,
+                icon=icon,
+                shortcut=shortcut,
+                checkable=checkable,
+                checked=checked,
+                triggered=triggered,
+                status_tip=status_tip,
+                tool_tip=tool_tip,
+            )
         else:
             action = text
             action.setParent(self)
