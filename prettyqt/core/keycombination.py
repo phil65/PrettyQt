@@ -117,6 +117,11 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
             other = KeyCombination(other)
         return super().__eq__(other)
 
+    def __add__(self, other):
+        from prettyqt import gui
+
+        return gui.KeySequence(self, other)
+
     def __repr__(self):
         return get_repr(self, self.key(), self.keyboardModifiers())
 
@@ -140,7 +145,7 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
         return self.key() in FUNC_ARROW_KEYS
 
     def has_modifier(self, modifier: constants.KeyboardModifierStr) -> bool:
-        """True if Ctrl is pressed."""
+        """True if keycombo contains modifier."""
         return bool(self.keyboardModifiers() & constants.KEYBOARD_MODIFIERS[modifier])
 
     def has_key(self) -> bool:
@@ -155,5 +160,6 @@ class KeyCombination(serializemixin.SerializeMixin, QtCore.QKeyCombination):
 
 
 if __name__ == "__main__":
-    seq = KeyCombination(Mod.ControlModifier)
-    print(seq)
+    seq = KeyCombination(Key.Key_A)
+    seq + seq
+    print(seq + seq)
