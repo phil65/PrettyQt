@@ -100,7 +100,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.proxifier = Proxyfier(self)
 
     def __repr__(self):
-        return f"{type(self).__name__}: {self.rowCount()} rows"
+        return f"{type(self).__name__}: ({self.rowCount()}, {self.columnCount()})"
 
     def __len__(self) -> int:
         """Return amount of rows."""
@@ -178,6 +178,15 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.beginResetModel()
         yield None
         self.endResetModel()
+
+    def is_checkstate_column(self, column: int) -> bool:
+        to_check = min(3, self.rowCount())
+        indexes = [self.index(row, column) for row in range(to_check)]
+        checkstate_values = [
+            self.data(index, role=constants.CHECKSTATE_ROLE) for index in indexes
+        ]
+        text_values = [self.data(index, role=constants.DISPLAY_ROLE) for index in indexes]
+        return None not in checkstate_values and not any(text_values)
 
     def update_row(self, row: int):
         start_index = self.index(row, 0)
