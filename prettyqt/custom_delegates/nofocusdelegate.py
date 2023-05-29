@@ -6,6 +6,8 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 # Remove dotted border on cell focus.  https://stackoverflow.com/a/55252650/3620725
 class NoFocusDelegate(widgets.StyledItemDelegate):
+    ID = "no_focus"
+
     def paint(
         self,
         painter: QtGui.QPainter,

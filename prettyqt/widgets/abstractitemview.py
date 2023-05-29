@@ -8,6 +8,17 @@ from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
 
+DelegateStr = Literal[
+    "widget",
+    "variant",
+    "html",
+    "button",
+    "no_focus",
+    "render_link",
+    "star",
+    "radio",
+    "progress_bar",
+]
 
 logger = logging.getLogger(__name__)
 
@@ -274,7 +285,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_delegate(
         self,
-        delegate: QtWidgets.QAbstractItemDelegate | Literal["widget", "variant", "html"],
+        delegate: QtWidgets.QAbstractItemDelegate | DelegateStr,
         *,
         column: int | None = None,
         row: int | None = None,
