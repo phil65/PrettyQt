@@ -10,7 +10,8 @@ from .expandableline import ExpandableLine
 from .hierarchicalheaderview import HierarchicalHeaderView
 from .keycombinationedit import KeyCombinationEdit
 from .singlelinetextedit import SingleLineTextEdit
-from .rectedit import RectEdit, RegionEdit
+from .rectedit import RectEdit, RectFEdit
+from .regionedit import RegionEdit
 from .enumcombobox import EnumComboBox
 from .paletteedit import PaletteEdit
 from .cursoredit import CursorEdit
@@ -77,6 +78,7 @@ __all__ = [
     "IconBrowser",
     "IconWidget",
     "RectEdit",
+    "RectFEdit",
     "PaletteEdit",
     "CursorEdit",
     "LocaleEdit",
