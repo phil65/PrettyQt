@@ -139,6 +139,22 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             for i in range(self.count())
         ]
 
+    def is_in_visual_range(self, section: int) -> bool:
+        if self.orientation() == constants.VERTICAL:
+            length = self.height()
+            count = self.model().rowCount()
+        else:
+            length = self.width()
+            count = self.model().columnCount()
+        if count == 0 or section >= count:
+            return False
+        start = max(self.visualIndexAt(0), 0)
+        end = self.visualIndexAt(length)
+        if end == -1:
+            end = count - 1
+        sections = [self.logicalIndex(i) for i in range(start, end)]
+        return section in sections
+
     def get_section_for_label(self, label) -> int:
         """Return index of first section with given label."""
         model = self.model()
@@ -206,7 +222,10 @@ class HeaderView(HeaderViewMixin, QtWidgets.QHeaderView):
 
 
 if __name__ == "__main__":
+    from prettyqt import debugging
+
     app = widgets.app()
-    header = HeaderView("horizontal")
-    header.show()
+    table = debugging.example_tree()
+    header = table.h_header
+    table.show()
     app.main_loop()

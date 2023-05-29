@@ -199,6 +199,7 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
 
 if __name__ == "__main__":
     from prettyqt import widgets
+    from prettyqt.custom_widgets import filtercontainer
 
     app = widgets.app()
     view = widgets.TreeView()
@@ -218,10 +219,12 @@ if __name__ == "__main__":
         with layout.get_sub_layout("horizontal") as layout:
             layout += widgets.PlainTextEdit("lower left")
             layout += widgets.PlainTextEdit("lower right")
+            layout += view
 
     button.clicked.connect(lambda: widget.layout().addWidget(widgets.Label("test")))
     model = LayoutHierarchyModel(widget, show_root=True, parent=view)
     view.set_model(model)
+    container = filtercontainer.FilterContainer(view)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate("variant")
     view.resize(1000, 1000)

@@ -9,6 +9,7 @@ from prettyqt.custom_models import (
     widgethierarchymodel,
 )
 from prettyqt.custom_widgets import filtercontainer
+from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -30,8 +31,8 @@ class PropertyView(widgets.TableView):
         self.set_delegate("variant", column=1)
 
     def set_qobject(self, qobject):
-        if self.model() is not None:
-            self.model().disconnect()
+        if (model := self.get_model(skip_proxies=True)) is not None:
+            model.unhook()
         model = widgetpropertiesmodel.WidgetPropertiesModel(qobject, parent=self)
         model.dataChanged.connect(self.repaint)
         self.set_model(model)
@@ -40,10 +41,9 @@ class PropertyView(widgets.TableView):
 class QObjectDetailsDialog(widgets.MainWindow):
     """A dialog containing information about a QObject."""
 
-    def __init__(self, qobject, *args, **kwargs):
+    def __init__(self, qobject, *args, object_name="qobject_details_dialog", **kwargs):
         super().__init__(*args, **kwargs)
         self.qobject = qobject
-
         self.propertyview = PropertyView()
         self.propertyview.set_qobject(qobject)
         propertyviewcontainer = filtercontainer.FilterContainer(self.propertyview)
@@ -52,8 +52,8 @@ class QObjectDetailsDialog(widgets.MainWindow):
             qobject, parent=self.hierarchyview
         )
         model = model.proxifier[:, 0:3]
-        hierarchycontainer = filtercontainer.FilterContainer(self.hierarchyview)
         self.hierarchyview.set_model(model)
+        hierarchycontainer = filtercontainer.FilterContainer(self.hierarchyview)
         self.hierarchyview.expandAll()
         self.hierarchyview.selectionModel().currentChanged.connect(self._current_changed)
 
@@ -68,8 +68,19 @@ class QObjectDetailsDialog(widgets.MainWindow):
         mdi_area = widgets.MdiArea()
         mdi_area.add_subwindow(qobject)
         self.set_central_widget(mdi_area)
+        tabwidget = widgets.TabWidget()
+        tabwidget.add_tab(propertyviewcontainer, "Main")
+        if hasattr(self.qobject, "model"):
+            if (model := self.qobject.model()) is not None:
+                while isinstance(model, QtCore.QAbstractProxyModel):
+                    view = PropertyView()
+                    view.set_qobject(model)
+                    container = filtercontainer.FilterContainer(view)
+                    tabwidget.add_tab(container, "model")
+                    model = model.sourceModel()
+
         self.add_dockwidget(hierarchycontainer, window_title="Hierarchy view")
-        self.add_dockwidget(propertyviewcontainer, window_title="Property view")
+        self.add_dockwidget(tabwidget, window_title="Property view")
         self.add_dockwidget(logtable, window_title="Log")
         self.position_on("screen", scale_ratio=0.8)
 
@@ -86,6 +97,9 @@ if __name__ == "__main__":
 
     app = widgets.app()
     widget = widgets.Widget()
+    tree = widgets.TreeView()
+    tree.set_model(dict(a=2))
+    tree.model().proxifier.get_proxy("fuzzy")
     with widgets.VBoxLayout.create(widget) as layout:
         with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
             layout += widgets.PlainTextEdit("upper left")
@@ -93,6 +107,7 @@ if __name__ == "__main__":
             with layout.get_sub_layout("splitter", orientation="vertical") as layout:
                 layout += widgets.PlainTextEdit("upper right")
                 layout += widgets.PlainTextEdit("middle right")
+                layout += tree
                 with layout.get_sub_layout("horizontal") as layout:
                     layout += widgets.PlainTextEdit("upper right")
                     layout += widgets.PlainTextEdit("middle right")
