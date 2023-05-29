@@ -2,9 +2,13 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import widgets
-from prettyqt.custom_models import widgetpropertiesmodel, widgethierarchymodel
-from prettyqt.custom_widgets import lineeditfiltercontainer
+from prettyqt import debugging, widgets
+from prettyqt.custom_models import (
+    logrecordmodel,
+    widgetpropertiesmodel,
+    widgethierarchymodel,
+)
+from prettyqt.custom_widgets import filtercontainer
 
 logger = logging.getLogger(__name__)
 
@@ -42,25 +46,31 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
         self.propertyview = PropertyView()
         self.propertyview.set_qobject(qobject)
-        propertyviewcontainer = lineeditfiltercontainer.LineEditFilterContainer(
-            self.propertyview
-        )
+        propertyviewcontainer = filtercontainer.FilterContainer(self.propertyview)
         self.hierarchyview = HierarchyView()
         model = widgethierarchymodel.WidgetHierarchyModel(
             qobject, parent=self.hierarchyview
         )
         model = model.proxifier[:, 0:3]
-        hierarchycontainer = lineeditfiltercontainer.LineEditFilterContainer(
-            self.hierarchyview
-        )
+        hierarchycontainer = filtercontainer.FilterContainer(self.hierarchyview)
         self.hierarchyview.set_model(model)
         self.hierarchyview.expandAll()
         self.hierarchyview.selectionModel().currentChanged.connect(self._current_changed)
+
+        logtable = widgets.TableView()
+        model = logrecordmodel.LogRecordModel(logging.getLogger(), parent=logtable)
+        w = widgets.Widget()
+        w.set_layout("vertical")
+        logtable.set_model(model)
+        logtable.set_selection_behavior("rows")
+        self.stalker = debugging.Stalker(qobject)
+        self.stalker.hook()
         mdi_area = widgets.MdiArea()
         mdi_area.add_subwindow(qobject)
         self.set_central_widget(mdi_area)
         self.add_dockwidget(hierarchycontainer, window_title="Hierarchy view")
         self.add_dockwidget(propertyviewcontainer, window_title="Property view")
+        self.add_dockwidget(logtable, window_title="Log")
         self.position_on("screen", scale_ratio=0.8)
 
     def _current_changed(self, *args):
