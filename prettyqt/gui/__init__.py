@@ -43,6 +43,7 @@ from prettyqt.qt.QtGui import (
 )
 
 
+from .backingstore import BackingStore
 from .stylehints import StyleHints
 from .pageranges import PageRanges
 from .shortcut import Shortcut
@@ -159,6 +160,7 @@ def app(args: list[str] | None = None, **kwargs) -> GuiApplication:
 
 __all__ = [
     "app",
+    "BackingStore",
     "StyleHints",
     "PageRanges",
     "KeyEvent",
