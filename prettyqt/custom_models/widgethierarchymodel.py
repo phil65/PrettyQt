@@ -198,30 +198,14 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import debugging, widgets
     from prettyqt.custom_widgets import filtercontainer
 
     app = widgets.app()
     view = widgets.TreeView()
     view.setRootIsDecorated(True)
-    widget = widgets.Widget()
-    with widgets.VBoxLayout.create(widget) as layout:
-        with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
-            layout += widgets.PlainTextEdit("upper left")
-            layout += widgets.PlainTextEdit("upper middle")
-            with layout.get_sub_layout("splitter", orientation="vertical") as layout:
-                layout += widgets.PlainTextEdit("upper right")
-                layout += widgets.PlainTextEdit("middle right")
-                with layout.get_sub_layout("horizontal") as layout:
-                    layout += widgets.PlainTextEdit("upper right")
-                    layout += widgets.PlainTextEdit("middle right")
-                    button = layout.add(widgets.PushButton("test"))
-        with layout.get_sub_layout("horizontal") as layout:
-            layout += widgets.PlainTextEdit("lower left")
-            layout += widgets.PlainTextEdit("lower right")
-            layout += view
+    widget = debugging.example_widget()
 
-    button.clicked.connect(lambda: widget.layout().addWidget(widgets.Label("test")))
     model = LayoutHierarchyModel(widget, show_root=True, parent=view)
     view.set_model(model)
     container = filtercontainer.FilterContainer(view)

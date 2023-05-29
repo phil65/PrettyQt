@@ -154,25 +154,8 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    from prettyqt.custom_models import JsonModel
 
     app = widgets.app()
-    dist = [
-        dict(
-            a=2,
-            b={
-                "a": 4,
-                "b": [1, 2, 3],
-                "jkjkjk": "tekjk",
-                "sggg": "tekjk",
-                "fdfdf": "tekjk",
-                "xxxx": "axxxb",
-            },
-        ),
-        6,
-        "jkjk",
-    ]
-    source_model = JsonModel(dist)
     from prettyqt.custom_models.importlibdistributionmodel import (
         ImportlibDistributionModel,
     )

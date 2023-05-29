@@ -8,7 +8,12 @@ logger = logging.getLogger(__name__)
 
 
 class FilterContainer(widgets.Widget):
-    def __init__(self, parent: widgets.TableView | widgets.TreeView, **kwargs):
+    def __init__(
+        self,
+        parent: widgets.TableView | widgets.TreeView,
+        object_name="filter_container",
+        **kwargs,
+    ):
         super().__init__(**kwargs)
         self.set_layout("vertical")
         self._proxies = []
@@ -28,7 +33,7 @@ class FilterContainer(widgets.Widget):
         parent.h_header.sectionResized.connect(self._on_section_resize)
         for i in range(parent.h_header.count()):
             if model.is_checkstate_column(i):
-                widget = widgets.ComboBox(margin=0)
+                widget = widgets.ComboBox(margin=0, object_name=f"filter_combo_{i}")
                 widget.add_items(
                     {None: "Show all", True: "Show True", False: "Show False"}
                 )
@@ -40,13 +45,15 @@ class FilterContainer(widgets.Widget):
                 )
                 widget.value_changed.connect(proxy.set_filter_value)
             else:
-                widget = widgets.LineEdit(margin=0)
+                widget = widgets.LineEdit(margin=0, object_name=f"filter_combo_{i}")
                 proxy = model.proxifier.get_proxy(
                     "sort_filter", recursive_filtering_enabled=True, filter_key_column=i
                 )
                 widget.value_changed.connect(proxy.setFilterFixedString)
                 title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
                 widget.setPlaceholderText(f"Filter {title}...")
+            widget.setMinimumWidth(0)
+            widget.setMaximumWidth(99999)
             self._proxies.append(proxy)
             self._filter_layout.add(widget)
             model = proxy
@@ -75,7 +82,8 @@ class FilterContainer(widgets.Widget):
     def _on_section_resize(self, index, old_size, new_size):
         # perhaps check header.sectionPosition() and sectionSize() for correct pos?
         # logger.debug(f"resizing for index {index}")
-        self._filter_layout[index].setFixedWidth(new_size)
+        widget = self._filter_layout[index]
+        widget.setFixedWidth(new_size)
         if isinstance(self._parent, QtWidgets.QTableView):
             self.spacer.setFixedWidth(self._parent.v_header.width())
         else:

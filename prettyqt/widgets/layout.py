@@ -267,23 +267,10 @@ class Layout(LayoutMixin, QtWidgets.QLayout):
 
 
 if __name__ == "__main__":
-    app = widgets.app()
-    widget = widgets.ScrollArea()
+    from prettyqt import debugging
 
-    with widgets.VBoxLayout.create(widget) as layout:
-        with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
-            layout += widgets.PlainTextEdit("upper left")
-            layout += widgets.PlainTextEdit("upper middle")
-            with layout.get_sub_layout("splitter", orientation="vertical") as layout:
-                layout += widgets.PlainTextEdit("upper right")
-                layout += widgets.PlainTextEdit("middle right")
-                with layout.get_sub_layout("horizontal") as layout:
-                    layout += widgets.PlainTextEdit("upper right")
-                    layout += widgets.PlainTextEdit("middle right")
-        with layout.get_sub_layout("horizontal") as layout:
-            layout += widgets.PlainTextEdit("lower left")
-            layout += widgets.PlainTextEdit("lower right")
-    widget.setWidgetResizable(True)
+    app = widgets.app()
+    widget = debugging.example_widget()
 
     widget.show()
     app.main_loop()
