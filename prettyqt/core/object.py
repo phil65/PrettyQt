@@ -9,8 +9,6 @@ import itertools
 import logging
 from typing import TYPE_CHECKING, Any, TypeVar
 
-from typing_extensions import Self
-
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr, helpers
@@ -254,25 +252,6 @@ class ObjectMixin:
             (k := i.data().decode()): self.property(k)
             for i in self.dynamicPropertyNames()
         }
-
-    def copy(self) -> Self:
-        metaobj = self.get_metaobject()
-        new = type(self)()
-        for prop in metaobj.get_properties(only_writable=True):
-            val = prop.read(self)
-            prop.write(new, val)
-        # MetaObject can return non-existing signals, dont know why.
-        # also filter out duplicates.
-        signal_names = {
-            s.get_name() for s in metaobj.get_signals() if hasattr(self, s.get_name())
-        }
-        for signal_name in signal_names:
-            own_signal = self.__getattribute__(signal_name)
-            new_signal = new.__getattribute__(signal_name)
-            # own_signal.connect(new_signal)
-            new_signal.connect(own_signal)
-            logger.debug(f"connected {signal_name}")
-        return new
 
 
 class Object(ObjectMixin, QtCore.QObject):

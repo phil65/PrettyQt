@@ -51,7 +51,8 @@ class WidgetDelegate(widgets.StyledItemDelegate):
     def createEditor(self, parent, option, index):
         editor = self._editor_for_index(index)
         if isinstance(editor, QtWidgets.QWidget):
-            editor = editor.copy()
+            metaobj = core.MetaObject(editor.metaObject())
+            editor = metaobj.copy(editor)
             editor.setParent(parent)
             editor.setAutoFillBackground(True)
             return editor

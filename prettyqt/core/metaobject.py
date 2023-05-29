@@ -2,9 +2,11 @@ from __future__ import annotations
 
 import logging
 from collections.abc import Callable
+from typing import Any
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
+from prettyqt.utils import datatypes
 
 logger = logging.getLogger(__name__)
 
@@ -160,6 +162,15 @@ class MetaObject:
             if not only_writable or self.item.property(i).isWritable()
         ]
 
+    def get_property_values(
+        self, qobject: QtCore.QObject, cast_types: bool = False
+    ) -> dict[str, Any]:
+        vals = {prop.get_name(): prop.read(qobject) for prop in self.get_properties()}
+        if cast_types:
+            return {k: datatypes.make_serializable(v) for k, v in vals.items()}
+        else:
+            return vals
+
     def get_signals(
         self, include_super: bool = True, only_notifiers: bool = False
     ) -> list[core.MetaMethod]:
@@ -214,6 +225,24 @@ class MetaObject:
             handles.append(handle)
         logger.debug(f"connected {len(handles)} signals to {fn}.")
         return handles
+
+    def copy(self, widget):
+        new = type(widget)()
+        for prop in self.get_properties(only_writable=True):
+            val = prop.read(widget)
+            prop.write(new, val)
+        # MetaObject can return non-existing signals, dont know why.
+        # also filter out duplicates.
+        signal_names = {
+            s.get_name() for s in self.get_signals() if hasattr(widget, s.get_name())
+        }
+        for signal_name in signal_names:
+            own_signal = widget.__getattribute__(signal_name)
+            new_signal = new.__getattribute__(signal_name)
+            # own_signal.connect(new_signal)
+            new_signal.connect(own_signal)
+            logger.debug(f"connected {signal_name}")
+        return new
 
 
 if __name__ == "__main__":
