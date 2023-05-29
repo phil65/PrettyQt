@@ -17,6 +17,10 @@ from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuetransformationproxymodel import ValueTransformationProxyModel
+from .valuefilterproxymodel import ValueFilterProxyModel
+from .sizelimiterproxymodel import SizeLimiterProxyModel
+from .rangefilterproxymodel import RangeFilterProxyModel
+from .checkableproxymodel import CheckableProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -35,4 +39,8 @@ __all__ = [
     "FuzzyFilterProxyModel",
     "SubsetFilterProxyModel",
     "ValueTransformationProxyModel",
+    "ValueFilterProxyModel",
+    "SizeLimiterProxyModel",
+    "RangeFilterProxyModel",
+    "CheckableProxyModel",
 ]
