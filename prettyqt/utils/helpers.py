@@ -99,8 +99,8 @@ def get_class_for_id(base_class: type, id_: str):
             yield i
 
     for Klass in get_subclasses(base_class):
-        if hasattr(Klass, "ID") and Klass.ID == id_:
-            logger.debug(f"found delegate for id {Klass.ID!r}")
+        if "ID" in Klass.__dict__ and Klass.ID == id_:
+            logger.debug(f"found class for id {Klass.ID!r}")
             return Klass
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 

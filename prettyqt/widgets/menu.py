@@ -28,15 +28,6 @@ class MenuMixin(widgets.WidgetMixin):
                 return action
         raise KeyError(f"Action {item} not in menu")
 
-    def serialize_fields(self):
-        return dict(
-            separators_collapsible=self.separatorsCollapsible(),
-            tearoff_enabled=self.isTearOffEnabled(),
-            title=self.title(),
-            tool_tips_visible=self.toolTipsVisible(),
-            icon=self.get_icon(),
-        )
-
     def add(self, *item: QtGui.QAction):
         for i in item:
             i.setParent(self)

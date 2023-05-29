@@ -890,10 +890,20 @@ WindowTypeStr = Literal[
 ]
 
 WINDOW_TYPE: bidict[WindowTypeStr, Qt.WindowType] = bidict(
+    widget=Qt.WindowType.Widget,
+    window=Qt.WindowType.Window,
+    dialog=Qt.WindowType.Dialog,
+    sheet=Qt.WindowType.Sheet,
+    drawer=Qt.WindowType.Drawer,
     frameless=Qt.WindowType.FramelessWindowHint,
     popup=Qt.WindowType.Popup,
     stay_on_top=Qt.WindowType.WindowStaysOnTopHint,
     tool=Qt.WindowType.Tool,
+    tool_tip=Qt.WindowType.ToolTip,
+    splash_screen=Qt.WindowType.SplashScreen,
+    subwindow=Qt.WindowType.SubWindow,
+    foreign_window=Qt.WindowType.ForeignWindow,
+    cover_window=Qt.WindowType.CoverWindow,
     window_title=Qt.WindowType.WindowTitleHint,
     customize_window=Qt.WindowType.CustomizeWindowHint,
 )

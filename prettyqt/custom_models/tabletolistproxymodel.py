@@ -13,9 +13,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
     def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         source = self.sourceModel()
-        if source is None:
-            return 0
-        return source.rowCount() * source.columnCount()
+        return 0 if source is None else source.rowCount() * source.columnCount()
 
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None

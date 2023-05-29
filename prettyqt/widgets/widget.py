@@ -6,7 +6,7 @@ import os
 import html
 import pathlib
 import sys
-from typing import TYPE_CHECKING, Any, Literal
+from typing import TYPE_CHECKING, Literal
 
 import qstylizer.parser
 import qstylizer.style
@@ -88,45 +88,19 @@ class WidgetMixin(core.ObjectMixin):
         super().insertAction(position_or_action, action)
 
     def add_action(
-        self,
-        text: str | gui.Action,
-        triggered: Callable = None,
-        icon: Any | None = None,
-        checkable: bool = False,
-        checked: bool = False,
-        shortcut: str | None = None,
-        status_tip: str = "",
-        tool_tip: str = "",
-        parent: QtWidgets.QWidget | None = None,
+        self, text: str | gui.Action, parent: QtWidgets.QWidget | None = None, **kwargs
     ) -> gui.Action:
         """Add an action to the menu.
 
         Args:
             text: Label for the action
-            triggered: gets called when action is triggered
-            icon: icon for action
-            checkable: as checkbox action
-            checked: if checkable, turn on by default
-            shortcut: Shortcut for action
-            status_tip: Status tip to be shown in status bar
-            tool_tip: Widget ToolTip
             parent: parent
-
+            kwargs: kwargs passed to action ctor
         Returns:
             Action added to menu
         """
         if isinstance(text, str):
-            action = gui.Action(
-                parent=parent or self,
-                text=text,
-                icon=icon,
-                shortcut=shortcut,
-                checkable=checkable,
-                checked=checked,
-                triggered=triggered,
-                status_tip=status_tip,
-                tool_tip=tool_tip,
-            )
+            action = gui.Action(parent=parent or self, text=text, **kwargs)
         else:
             action = text
             action.setParent(self)

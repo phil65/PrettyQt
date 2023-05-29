@@ -12,6 +12,8 @@ MAX_SIZE = sys.maxsize
 class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
     """Performs subsequence matching/sorting."""
 
+    ID = "subsequence"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.search_term = ""
@@ -55,7 +57,7 @@ class SubsequenceSortFilterProxyModel(core.SortFilterProxyModel):
             # rank = completion.index(search_term)
             # self.sourceModel().setData(idx, rank, constants.USER_ROLE)
             return search_term in completion
-        for pattern, pattern_case, sort_pattern in zip(
+        for pattern, _pattern_case, _sort_pattern in zip(
             self.filter_patterns,
             self.filter_patterns_case_sensitive,
             self.sort_patterns,

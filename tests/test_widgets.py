@@ -836,7 +836,7 @@ def test_menu(qtbot):
 
     menu.add_action(
         "test_menu",
-        test,
+        triggered=test,
         icon="mdi.timer",
         shortcut="Ctrl+A",
         checkable=True,

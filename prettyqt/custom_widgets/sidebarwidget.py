@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 from typing import Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
@@ -146,22 +145,8 @@ class SidebarWidget(widgets.MainWindow):
         else:
             self.sidebar.add_separator(text)
 
-    def add_action(
-        self,
-        title: str,
-        icon: datatypes.IconType | None = None,
-        callback: Callable | None = None,
-        checkable: bool = False,
-        shortcut: str | None = None,
-        area: AreaStr = "top",
-    ):
-        act = gui.Action(
-            text=title,
-            icon=icon,
-            shortcut=shortcut,
-            checkable=checkable,
-            triggered=callback,
-        )
+    def add_action(self, area: AreaStr = "top", **kwargs):
+        act = gui.Action(**kwargs)
         self.addAction(act)
         button = widgets.ToolButton(self.sidebar)
         button.setDefaultAction(act)
