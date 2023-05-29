@@ -116,7 +116,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
                 return self.props[section].get_name()
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return None
         widget = self.data_by_index(index).obj
@@ -130,7 +130,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             case self.Roles.WidgetRole, _:
                 return widget
 
-    def setData(self, index, value, role=constants.DISPLAY_ROLE):
+    def setData(self, index: core.ModelIndex, value, role=constants.DISPLAY_ROLE):
         prop = self.props[index.column()]
         widget = self.data_by_index(index).obj
         match role:
@@ -141,7 +141,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
                 return True
         return False
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         prop = self.props[index.column()]
         if prop.isWritable():
             return (
@@ -152,10 +152,10 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             )
         return super().flags(index)
 
-    def _fetch_object_children(self, item) -> list:
+    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         return [treeitem.TreeItem(obj=i) for i in item.obj.findChildren(self.BaseClass)]
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
+    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return False
@@ -166,7 +166,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
 
 
 class LayoutHierarchyModel(WidgetHierarchyModel):
-    def _fetch_object_children(self, item) -> list:
+    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         match item.obj:
             case QtWidgets.QSplitter():
                 items = [item.obj.widget(i) for i in range(item.obj.count())]
@@ -182,7 +182,7 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
                 raise ValueError(item)
         return [treeitem.TreeItem(obj=i) for i in items]
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
+    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
         parent = core.ModelIndex() if parent is None else parent
         if parent.column() > 0:
             return False
@@ -206,13 +206,13 @@ if __name__ == "__main__":
     view.setRootIsDecorated(True)
     widget = debugging.example_widget()
 
-    model = LayoutHierarchyModel(widget, show_root=True, parent=view)
+    model = WidgetHierarchyModel(widget, show_root=True, parent=view)
     view.set_model(model)
     container = filtercontainer.FilterContainer(view)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate("variant")
     view.resize(1000, 1000)
-    view.show()
+    container.show()
     widget.show()
     with app.debug_mode():
         app.main_loop()
