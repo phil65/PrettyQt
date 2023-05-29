@@ -81,6 +81,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         sys.excepthook = ErrorMessageBox._excepthook
         eventfilter = debugmode.DebugMode(self)
         self._debug = True
+        self.setStyleSheet("QWidget{border: 1px solid red}")
         self.installEventFilter(eventfilter)
         with MessageHandler(root_logger):
             yield self

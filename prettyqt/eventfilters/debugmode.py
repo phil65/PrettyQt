@@ -55,6 +55,15 @@ class DebugMode(eventfilters.BaseEventFilter):
                         )
                     )
                     console.execute("print(widgets)")
+            # case QtCore.QEvent.Type.ToolTip if source.isWidgetType():
+            #     metaobj = core.MetaObject(source.metaObject())
+            #     lines = [
+            #         f"{k}: {v!r}"
+            #         for k, v in metaobj.get_property_values(source).items()
+            #         if not k == "toolTip"
+            #     ]
+            #     source.setToolTip("<br>".join(lines))
+
         return False
 
     def _on_clicked(self, item):
@@ -107,7 +116,7 @@ if __name__ == "__main__":
     container = widgets.Widget()
     container.set_layout("horizontal")
     w = widgets.PlainTextEdit(parent=container)
-    w2 = widgets.PlainTextEdit(parent=container)
+    w2 = widgets.RadioButton(parent=container)
     container.box.add(w)
     container.box.add(w2)
     container.show()
