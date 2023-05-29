@@ -221,6 +221,14 @@ class TextEditSelecter:
             logger.error("Text not found")
         self._widget.setTextCursor(temp_cursor)
 
+    def replace_block_at_cursor(self, new_text: str):
+        cursor = self._widget.textCursor()
+        cursor.select(QtGui.QTextCursor.MoveOperation.BlockUnderCursor)
+        if cursor.selectionStart() != 0:
+            new_text = "\n" + new_text
+        cursor.removeSelectedText()
+        cursor.insertText(new_text)
+
 
 if __name__ == "__main__":
     app = widgets.app()
