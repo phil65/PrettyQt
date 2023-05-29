@@ -22,7 +22,9 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         "Constant",
         "Final",
         "Required",
+        "Valid",
         "Notifier",
+        "User Type",
         # "Enumerator",
     ]
 
@@ -101,9 +103,13 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 return prop.isFinal()
             case constants.CHECKSTATE_ROLE, 11:
                 return prop.isRequired()
-            case constants.DISPLAY_ROLE, 12:
+            case constants.CHECKSTATE_ROLE, 12:
+                return prop.isValid()
+            case constants.DISPLAY_ROLE, 13:
                 notifier = prop.get_notify_signal()
                 return "" if notifier is None else notifier.get_name()
+            case constants.DISPLAY_ROLE, 14:
+                return prop.userType()
             # case constants.DISPLAY_ROLE, 8:
             #     enumerator = prop.get_enumerator()
             #     return "" if enumerator is None else enumerator.get_name()
