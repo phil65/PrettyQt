@@ -37,6 +37,39 @@ class FakeWidgetProp:
         pass
 
 
+class FakeUserPropertyNameProp:
+    def isWritable(self):
+        return False
+
+    def get_name(self):
+        return "User property name"
+
+    def read(self, widget):
+        userprop = widget.metaObject().userProperty()
+        if not userprop.isValid():
+            return ""
+        return userprop.name()
+
+    def write(self, widget, value):
+        pass
+
+
+class FakeUserPropertyValueProp:
+    def isWritable(self):
+        return True
+
+    def get_name(self):
+        return "User property value"
+
+    def read(self, widget):
+        userprop = widget.metaObject().userProperty()
+        return userprop.read(widget)
+
+    def write(self, widget, value):
+        userprop = widget.metaObject().userProperty()
+        return userprop.write(widget, value)
+
+
 class FakeLayoutProp:
     def isWritable(self):
         return False
@@ -66,6 +99,8 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         self.props = [i for i in self.props if i.get_name() not in TO_FILTER]
         self.props.insert(0, FakeWidgetProp())
         self.props.insert(1, FakeLayoutProp())
+        self.props.insert(1, FakeUserPropertyNameProp())
+        self.props.insert(1, FakeUserPropertyValueProp())
         # self.props.sort(key=lambda x: x.get_name())
 
     def columnCount(self, parent=None):
