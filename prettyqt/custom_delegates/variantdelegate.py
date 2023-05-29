@@ -19,28 +19,29 @@ class VariantDelegate(widgets.StyledItemDelegate):
 
     def __init__(
         self,
+        *args,
         data_role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
-        parent: QtWidgets.QAbstractItemView | None = None,
+        **kwargs,
     ):
-        super().__init__(parent)
+        super().__init__(*args, **kwargs)
         self.data_role = data_role
 
     def paint(self, painter, option, index):
-        value = self._data_for_index(index, self.data_role)
         # if not self.is_supported_type(value):
         #     option = widgets.StyleOptionViewItem(option)
         #     option.state &= ~QtWidgets.QStyle.StateFlag.State_Enabled
-        if isinstance(value, QtGui.QIcon):
-            icon_delegate = custom_delegates.IconDelegate()
-            icon_delegate.paint(painter, option, index)
-            return
-        elif isinstance(value, enum.Enum):  # PySide6 needs this when using Views
-            option.text = value.name
-            option.widget.style().drawControl(
-                QtWidgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
-            )
-        else:
-            super().paint(painter, option, index)
+        match value := self._data_for_index(index, self.data_role):
+            case QtGui.QIcon():
+                icon_delegate = custom_delegates.IconDelegate()
+                icon_delegate.paint(painter, option, index)
+                return
+            case enum.Enum():  # PySide6 needs this when using Views
+                option.text = value.name
+                option.widget.style().drawControl(
+                    QtWidgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
+                )
+            case _:
+                super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
         original_value = self._data_for_index(index, self.data_role)

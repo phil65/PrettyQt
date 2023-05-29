@@ -56,10 +56,11 @@ class AbstractButtonMixin(widgets.WidgetMixin):
 
     def set_icon_size(self, size: int | datatypes.SizeType):
         """Set size of the icon."""
-        if isinstance(size, int):
-            size = core.Size(size, size)
-        elif isinstance(size, tuple):
-            size = core.Size(*size)
+        match size:
+            case int():
+                size = core.Size(size, size)
+            case tuple():
+                size = core.Size(*size)
         self.setIconSize(size)
 
     def get_icon_size(self) -> core.Size:

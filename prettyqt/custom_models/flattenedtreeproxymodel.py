@@ -7,7 +7,7 @@ from prettyqt.qt import QtCore
 
 
 class FlattenedTreeProxyModel(core.AbstractProxyModel):
-    ID = "flattened_tree"
+    ID = "flatten_tree"
 
     class FlatteningMode(enum.IntEnum):
         """Flattening modes."""
@@ -107,13 +107,12 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         flags = super().flags(index)
         if self._flattening_mode == self.FlatteningMode.InternalNodesDisabled:
             source_index = self.mapToSource(index)
-            sourceModel = self.sourceModel()
+            source_model = self.sourceModel()
             if (
-                sourceModel is not None
-                and sourceModel.rowCount(source_index) > 0
+                source_model is not None
+                and source_model.rowCount(source_index) > 0
                 and flags & QtCore.Qt.ItemFlag.ItemIsEnabled
             ):
-                # Internal node, enabled in the source model, disable it
                 flags ^= QtCore.Qt.ItemFlag.ItemIsEnabled
         return flags
 
@@ -185,30 +184,9 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-    from prettyqt.custom_models import JsonModel
+    from prettyqt import debugging, widgets
 
     app = widgets.app()
-    dist = [
-        dict(
-            a=2,
-            b={
-                "a": 4,
-                "b": [1, 2, 3],
-                "jkjkjk": "tekjk",
-                "sggg": "tekjk",
-                "fdfdf": "tekjk",
-                "xxxx": "xxx",
-            },
-        ),
-        6,
-        "jkjk",
-    ]
-    source_model = JsonModel(dist)
-    model = FlattenedTreeProxyModel()
-    model.setSourceModel(source_model)
-    table = widgets.TreeView()
-    table.setRootIsDecorated(True)
-    table.set_model(model)
+    table = debugging.example_tree(flatten=True)
     table.show()
     app.main_loop()
