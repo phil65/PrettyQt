@@ -25,6 +25,23 @@ LAYOUT_CHANGE_HINT = bidict(
     horizontal_sort=QtCore.QAbstractItemModel.LayoutChangeHint.HorizontalSortHint,
 )
 
+ProxyStr = Literal[
+    "regular",
+    "fuzzy",
+    "transpose",
+    "sort_filter",
+    "identity",
+    "value_transformation",
+    "range_filter",
+    "checkable",
+    "subset",
+    "flattened_tree",
+    "table_to_list",
+    "predicate_filter",
+    "size_limiter",
+    "subsequence",
+]
+
 
 class Proxyfier:
     def __init__(self, model):
@@ -78,9 +95,7 @@ class Proxyfier:
         proxy.setSourceModel(self._model)
         return proxy
 
-    def get_proxy(
-        self, proxy: Literal["regular", "fuzzy"] = "regular", parent=None, **kwargs
-    ):
+    def get_proxy(self, proxy: ProxyStr = "regular", parent=None, **kwargs):
         parent = parent or self._model.parent()
         if parent is None:
             raise ValueError("needs parent!")
