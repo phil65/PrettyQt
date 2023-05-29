@@ -25,20 +25,19 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         self._source_offset: dict[tuple[int, ...], int] = {}
 
     def setSourceModel(self, model):
+        if (curr_model := self.sourceModel()) is not None:
+            curr_model.dataChanged.disconnect(self._source_data_changed)
+            curr_model.rowsInserted.disconnect(self._source_rows_inserted)
+            curr_model.rowsRemoved.disconnect(self._source_rows_removed)
+            curr_model.rowsMoved.disconnect(self._source_rows_moved)
         with self.reset_model():
-            if (curr_model := self.sourceModel()) is not None:
-                curr_model.dataChanged.disconnect(self._source_data_changed)
-                curr_model.rowsInserted.disconnect(self._source_rows_inserted)
-                curr_model.rowsRemoved.disconnect(self._source_rows_removed)
-                curr_model.rowsMoved.disconnect(self._source_rows_moved)
-
             super().setSourceModel(model)
             self._update_row_mapping()
 
-            model.dataChanged.connect(self._source_data_changed)
-            model.rowsInserted.connect(self._source_rows_inserted)
-            model.rowsRemoved.connect(self._source_rows_removed)
-            model.rowsMoved.connect(self._source_rows_moved)
+        model.dataChanged.connect(self._source_data_changed)
+        model.rowsInserted.connect(self._source_rows_inserted)
+        model.rowsRemoved.connect(self._source_rows_removed)
+        model.rowsMoved.connect(self._source_rows_moved)
 
     def setSourceColumn(self, column: int):
         with self.reset_model():
@@ -87,7 +86,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         return (
             core.ModelIndex()
             if parent.isValid()
-            else self.createIndex(row, column, object=row)
+            else self.createIndex(row, column, row)  # object=row)
         )
 
     def parent(self, child=None) -> core.ModelIndex:

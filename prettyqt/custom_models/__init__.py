@@ -21,6 +21,8 @@ from .valuefilterproxymodel import ValueFilterProxyModel
 from .sizelimiterproxymodel import SizeLimiterProxyModel
 from .rangefilterproxymodel import RangeFilterProxyModel
 from .checkableproxymodel import CheckableProxyModel
+from .flattenedtreeproxymodel import FlattenedTreeProxyModel
+from .appearanceproxymodel import AppearanceProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -43,4 +45,6 @@ __all__ = [
     "SizeLimiterProxyModel",
     "RangeFilterProxyModel",
     "CheckableProxyModel",
+    "FlattenedTreeProxyModel",
+    "AppearanceProxyModel",
 ]
