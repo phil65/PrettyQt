@@ -36,6 +36,11 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
     def v_header(self, header):
         self.setVerticalHeader(header)
 
+    def is_cell_visible(self, row: int, column: int) -> bool:
+        return self.h_header.is_in_visual_range(
+            column
+        ) and self.v_header.is_in_visual_range(row)
+
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
         model = self.model()
         if not do_sort and model is not None:
