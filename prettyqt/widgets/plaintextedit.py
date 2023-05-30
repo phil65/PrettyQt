@@ -186,12 +186,13 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
 
     def set_validator(
         self, validator: QtGui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
-    ):
+    ) -> QtGui.QValidator:
         if isinstance(validator, str):
             ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
         self.validator = validator
         self._set_validation_color()
+        return validator
 
     def set_regex_validator(self, regex: str, flags=0) -> gui.RegularExpressionValidator:
         validator = gui.RegularExpressionValidator(self)

@@ -117,12 +117,15 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         val.set_range(lower, upper)
         self.set_validator(val)
 
-    def set_validator(self, validator: QtGui.QValidator | ValidatorStr | None, **kwargs):
+    def set_validator(
+        self, validator: QtGui.QValidator | ValidatorStr | None, **kwargs
+    ) -> QtGui.QValidator:
         if isinstance(validator, str):
             ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
         self.setValidator(validator)
         self._set_validation_color()
+        return validator
 
     def set_input_mask(self, mask: str):
         match mask:

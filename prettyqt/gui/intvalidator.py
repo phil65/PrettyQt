@@ -4,7 +4,7 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
-MAX_VAL = 2147483647
+MAX_VAL = 1000000000  # could be 2147483647, but no point in random number
 
 
 class IntValidator(gui.ValidatorMixin, QtGui.QIntValidator):

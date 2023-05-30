@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt import constants, widgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -48,8 +48,10 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin):
     def is_valid(self) -> bool:
         return self.hasAcceptableInput()
 
-    def set_validator(self, validator: gui.Validator):
-        self.lineEdit().setValidator(validator)
+    def set_validator(
+        self, validator: QtGui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
+    ) -> QtGui.QValidator:
+        return self.lineEdit().set_validator(validator)
 
     def get_button_symbols(self) -> SymbolStr:
         """Return button symbol type.

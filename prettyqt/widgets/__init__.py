@@ -31,6 +31,7 @@ from .focusframe import FocusFrame
 from .abstractslider import AbstractSlider, AbstractSliderMixin
 from .abstractscrollarea import AbstractScrollArea, AbstractScrollAreaMixin
 from .abstractbutton import AbstractButton, AbstractButtonMixin
+from .lineedit import LineEdit
 from .abstractspinbox import AbstractSpinBox, AbstractSpinBoxMixin
 from .abstractitemview import AbstractItemView, AbstractItemViewMixin
 from .scrollbar import ScrollBar, SmoothScrollBar
@@ -134,7 +135,6 @@ from .fontcombobox import FontComboBox
 from .spinbox import SpinBox
 from .doublespinbox import DoubleSpinBox
 from .checkbox import CheckBox
-from .lineedit import LineEdit
 from .keysequenceedit import KeySequenceEdit
 from .textedit import TextEdit, TextEditMixin
 from .datetimeedit import DateTimeEdit, DateTimeEditMixin

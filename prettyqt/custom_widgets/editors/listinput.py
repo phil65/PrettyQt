@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, custom_validators, widgets
+from prettyqt import core, widgets
 from prettyqt.utils import helpers
 
 
@@ -17,12 +17,11 @@ class ListInput(widgets.LineEdit):
     ):
         super().__init__(object_name=object_name, **kwargs)
         if typ is int:
-            val = custom_validators.IntListValidator(allow_single=allow_single)
+            self.set_validator("int_list", allow_single=allow_single)
         elif typ is float:
-            val = custom_validators.FloatListValidator(allow_single=allow_single)
+            self.set_validator("float_list", allow_single=allow_single)
         else:
             raise ValueError(f"Invalid type {typ}")
-        self.set_validator(val)
         self.set_value(value)
 
     def get_value(self) -> list[float]:  # type: ignore[override]

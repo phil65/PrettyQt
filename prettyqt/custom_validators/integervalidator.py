@@ -7,9 +7,14 @@ from prettyqt.qt import QtCore
 class IntegerValidator(gui.Validator):
     ID = "integer"
 
-    def __init__(self, parent: QtCore.QObject | None = None):
+    def __init__(
+        self,
+        bottom: int | None = None,
+        top: int | None = None,
+        parent: QtCore.QObject | None = None,
+    ):
         super().__init__(parent)
-        self.range: tuple[int | None, int | None] = (None, None)
+        self.range: tuple[int | None, int | None] = (bottom, top)
 
     def set_range(self, lower: int | None, upper: int | None):
         self.range = (lower, upper)
@@ -30,7 +35,7 @@ if __name__ == "__main__":
 
     val = IntegerValidator()
     app = widgets.app()
-    widget = widgets.LineEdit("This is a test")
+    widget = widgets.LineEdit("343")
     widget.setValidator(val)
     widget.show()
     app.main_loop()
