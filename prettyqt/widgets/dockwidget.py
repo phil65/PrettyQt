@@ -4,6 +4,20 @@ from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 
 
+class CustomTitleBar(widgets.Widget):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        layout = self.set_layout("horizontal", margin=0, spacing=0)
+        layout.set_alignment("right")
+        maximize_button = widgets.PushButton(clicked=self.parent().maximize)
+        maximize_button.set_style_icon("titlebar_max_button", size=12)
+        close_button = widgets.PushButton(clicked=self.parent().close)
+        close_button.set_style_icon("titlebar_close_button", size=12)
+        layout.add(widgets.Label(self.parent().windowTitle()))
+        layout.add(maximize_button)
+        layout.add(close_button)
+
+
 class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
     def __init__(self, *args, allowed_areas="all", **kwargs):
         super().__init__(*args, allowed_areas=allowed_areas, **kwargs)
@@ -28,15 +42,7 @@ class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
         return self._area
 
     def setup_title_bar(self):
-        title_bar = widgets.Widget()
-        layout = title_bar.set_layout("horizontal", margin=0)
-        layout.set_alignment("right")
-        maximize_button = widgets.PushButton(clicked=self.maximize)
-        maximize_button.set_style_icon("titlebar_max_button", size=12)
-        close_button = widgets.PushButton(clicked=self.close)
-        close_button.set_style_icon("titlebar_close_button", size=12)
-        layout.add(maximize_button)
-        layout.add(close_button)
+        title_bar = CustomTitleBar(parent=self)
         self.setTitleBarWidget(title_bar)
 
     def maximize(self):
