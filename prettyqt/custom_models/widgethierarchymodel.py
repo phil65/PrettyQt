@@ -23,17 +23,17 @@ TO_FILTER = {
 }
 
 
-class FakeWidgetProp:
+class FakeClassNameProp:
     def isWritable(self):
         return False
 
     def get_name(self):
-        return "Widget class"
+        return "Class"
 
-    def read(self, widget):
-        return widget.__class__.__name__
+    def read(self, qobject):
+        return qobject.__class__.__name__
 
-    def write(self, widget, value):
+    def write(self, qobject, value):
         pass
 
 
@@ -44,13 +44,13 @@ class FakeUserPropertyNameProp:
     def get_name(self):
         return "User property name"
 
-    def read(self, widget):
-        userprop = widget.metaObject().userProperty()
+    def read(self, qobject):
+        userprop = qobject.metaObject().userProperty()
         if not userprop.isValid():
             return ""
         return userprop.name()
 
-    def write(self, widget, value):
+    def write(self, qobject, value):
         pass
 
 
@@ -61,13 +61,13 @@ class FakeUserPropertyValueProp:
     def get_name(self):
         return "User property value"
 
-    def read(self, widget):
-        userprop = widget.metaObject().userProperty()
-        return userprop.read(widget)
+    def read(self, qobject):
+        userprop = qobject.metaObject().userProperty()
+        return userprop.read(qobject)
 
-    def write(self, widget, value):
-        userprop = widget.metaObject().userProperty()
-        return userprop.write(widget, value)
+    def write(self, qobject, value):
+        userprop = qobject.metaObject().userProperty()
+        return userprop.write(qobject, value)
 
 
 class FakeLayoutProp:
@@ -77,12 +77,13 @@ class FakeLayoutProp:
     def get_name(self):
         return "Layout"
 
-    def read(self, widget):
-        if widget.layout() is None:
+    def read(self, qobject):
+        # check for layout attr to support QObjects
+        if not hasattr(qobject, "layout") or qobject.layout() is None:
             return ""
-        return widget.layout().__class__.__name__
+        return qobject.layout().__class__.__name__
 
-    def write(self, widget, value):
+    def write(self, qobject, value):
         pass
 
 
@@ -97,7 +98,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         self.BaseClass = QtWidgets.QWidget
         self.props = core.MetaObject(self.BaseClass.staticMetaObject).get_properties()
         self.props = [i for i in self.props if i.get_name() not in TO_FILTER]
-        self.props.insert(0, FakeWidgetProp())
+        self.props.insert(0, FakeClassNameProp())
         self.props.insert(1, FakeLayoutProp())
         self.props.insert(1, FakeUserPropertyNameProp())
         self.props.insert(1, FakeUserPropertyValueProp())
@@ -153,7 +154,12 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         return super().flags(index)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        return [treeitem.TreeItem(obj=i) for i in item.obj.findChildren(self.BaseClass)]
+        return [
+            treeitem.TreeItem(obj=i)
+            for i in item.obj.findChildren(
+                self.BaseClass, None, QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+            )
+        ]
 
     def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
         parent = core.ModelIndex() if parent is None else parent
@@ -162,7 +168,11 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         item = self.data_by_index(parent)
         if self._show_root and item == self._root_item:
             return True
-        return bool(item.obj.findChildren(self.BaseClass))
+        return bool(
+            item.obj.findChildren(
+                self.BaseClass, None, QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+            )
+        )
 
 
 class LayoutHierarchyModel(WidgetHierarchyModel):

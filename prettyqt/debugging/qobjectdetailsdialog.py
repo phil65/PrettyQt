@@ -44,10 +44,17 @@ class PropertyView(widgets.TableView):
         propertyview.set_qobject(qobject)
         propertyviewcontainer = filtercontainer.FilterContainer(propertyview)
         tabwidget.add_tab(propertyviewcontainer, "Main")
-        model = qobject.model()
-        if not hasattr(qobject, "model") or model is None:
-            return tabwidget, propertyview
-        while isinstance(model, QtCore.QAbstractProxyModel):
+
+        if hasattr(qobject, "model") and (model := qobject.model()) is not None:
+            while isinstance(model, QtCore.QAbstractProxyModel):
+                view = cls(
+                    object_name=f"property_view({type(model).__name__})",
+                    parent=tabwidget,
+                )
+                view.set_qobject(model)
+                container = filtercontainer.FilterContainer(view)
+                tabwidget.add_tab(container, type(model).__name__)
+                model = model.sourceModel()
             view = cls(
                 object_name=f"property_view({type(model).__name__})",
                 parent=tabwidget,
@@ -55,14 +62,17 @@ class PropertyView(widgets.TableView):
             view.set_qobject(model)
             container = filtercontainer.FilterContainer(view)
             tabwidget.add_tab(container, type(model).__name__)
-            model = model.sourceModel()
-        view = cls(
-            object_name=f"property_view({type(model).__name__})",
-            parent=tabwidget,
-        )
-        view.set_qobject(model)
-        container = filtercontainer.FilterContainer(view)
-        tabwidget.add_tab(container, type(model).__name__)
+        # if (
+        #     hasattr(qobject, "menuWidget")
+        #     and (menu_widget := qobject.menuWidget()) is not None
+        # ):
+        #     view = cls(
+        #         object_name=f"property_view({type(model).__name__})",
+        #         parent=tabwidget,
+        #     )
+        #     view.set_qobject(menu_widget)
+        #     container = filtercontainer.FilterContainer(view)
+        #     tabwidget.add_tab(container, type(model).__name__)
         return tabwidget, propertyview
 
 
@@ -122,10 +132,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-
     app = widgets.app()
-    widget = widgets.Widget()
     tree = widgets.TreeView()
     tree.set_model(dict(a=2))
     tree.model().proxifier.get_proxy("fuzzy")
