@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from prettyqt import constants, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
 
 logger = logging.getLogger(__name__)
@@ -93,6 +93,11 @@ class FilterContainer(widgets.Widget):
     def set_filter_case_sensitivity(self, sensitivity):
         for proxy in self._proxies:
             proxy.setFilterCaseSensitivity(sensitivity)
+
+    def set_filter_mode(self, mode: core.sortfilterproxymodel.FilterModeStr):
+        for proxy in self._proxies:
+            if isinstance(proxy, core.SortFilterProxyModel):
+                proxy.set_filter_mode(mode)
 
 
 if __name__ == "__main__":
