@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import enum
 import logging
 
 import collections
@@ -15,6 +16,16 @@ T = TypeVar("T", bound=QtCore.QObject)
 
 
 class Stalker(core.Object):
+    @core.Enum
+    class LogLevel(enum.IntEnum):
+        """Log level."""
+
+        DEBUG = logging.DEBUG
+        INFO = logging.INFO
+        WARNING = logging.WARNING
+        CRITICAL = logging.CRITICAL
+        ERROR = logging.ERROR
+
     event_detected = core.Signal(QtCore.QEvent)
     signal_emitted = core.Signal(core.MetaMethod, object)  # signal, args
     signal_connected = core.Signal(core.MetaMethod)
@@ -25,13 +36,12 @@ class Stalker(core.Object):
         qobject: QtCore.QObject,
         include=None,
         exclude=None,
-        log_level=logging.INFO,
         **kwargs,
     ):
+        self._log_level = logging.INFO
         super().__init__(**kwargs)
         self._obj = qobject
         self._meta = core.MetaObject(self._obj.metaObject())
-        self.log_level = log_level
         self.counter = collections.defaultdict(int)
         self.signal_counter = collections.defaultdict(int)
         self.exclude = ["meta_call", "timer"] if exclude is None else exclude
@@ -76,9 +86,9 @@ class Stalker(core.Object):
         self._obj.removeEventFilter(self.eventcatcher)
 
     def log(self, message: str):
-        if self.log_level:
+        if self._log_level:
             try:
-                logger.log(self.log_level, f"{self._obj!r}: {message}")
+                logger.log(self._log_level, f"{self._obj!r}: {message}")
             except RuntimeError:
                 logger.error("Object probably already deleted.")
 
@@ -107,11 +117,21 @@ class Stalker(core.Object):
 
         return fn
 
+    def set_log_level(self, level: int | LogLevel):
+        if isinstance(level, int):
+            level = self.LogLevel(level)
+        self._log_level = level
+
+    def get_log_level(self) -> LogLevel:
+        return self._log_level
+
     def count_children(
         self, type_filter: type[T] = QtCore.QObject
     ) -> collections.Counter:
         objects = self.findChildren(type_filter)
         return collections.Counter([type(o) for o in objects])
+
+    logLevel = core.Property(LogLevel, get_log_level, set_log_level)
 
 
 if __name__ == "__main__":
@@ -121,7 +141,7 @@ if __name__ == "__main__":
     widget = widgets.LineEdit()
     widget.show()
     with app.debug_mode():
-        with Stalker(widget) as stalker:
+        with Stalker(widget, log_level=logging.INFO) as stalker:
             app.sleep(3)
             print(stalker.counter)
         app.main_loop()
