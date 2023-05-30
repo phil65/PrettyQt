@@ -108,6 +108,10 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.add_dockwidget(self.console, window_title="Console")
         self.position_on("screen", scale_ratio=0.8)
 
+    def closeEvent(self, event):
+        self.stalker.unhook()
+        super().closeEvent(event)
+
     def _current_changed(self, *args):
         role = self.hierarchyview.get_model(skip_proxies=True).Roles.WidgetRole
         qobject = self.hierarchyview.current_data(role)
