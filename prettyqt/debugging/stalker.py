@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import enum
+# import enum
 import logging
 
 import collections
@@ -16,15 +16,15 @@ T = TypeVar("T", bound=QtCore.QObject)
 
 
 class Stalker(core.Object):
-    @core.Enum
-    class LogLevel(enum.IntEnum):
-        """Log level."""
+    # @core.Enum
+    # class LogLevel(enum.IntEnum):
+    #     """Log level."""
 
-        DEBUG = logging.DEBUG
-        INFO = logging.INFO
-        WARNING = logging.WARNING
-        CRITICAL = logging.CRITICAL
-        ERROR = logging.ERROR
+    #     DEBUG = logging.DEBUG
+    #     INFO = logging.INFO
+    #     WARNING = logging.WARNING
+    #     CRITICAL = logging.CRITICAL
+    #     ERROR = logging.ERROR
 
     event_detected = core.Signal(QtCore.QEvent)
     signal_emitted = core.Signal(core.MetaMethod, object)  # signal, args
@@ -117,12 +117,10 @@ class Stalker(core.Object):
 
         return fn
 
-    def set_log_level(self, level: int | LogLevel):
-        if isinstance(level, int):
-            level = self.LogLevel(level)
+    def set_log_level(self, level: int):
         self._log_level = level
 
-    def get_log_level(self) -> LogLevel:
+    def get_log_level(self) -> int:
         return self._log_level
 
     def count_children(
@@ -131,7 +129,7 @@ class Stalker(core.Object):
         objects = self.findChildren(type_filter)
         return collections.Counter([type(o) for o in objects])
 
-    logLevel = core.Property(LogLevel, get_log_level, set_log_level)
+    logLevel = core.Property(int, get_log_level, set_log_level)
 
 
 if __name__ == "__main__":

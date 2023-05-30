@@ -66,7 +66,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         return self._debug
 
     @contextlib.contextmanager
-    def debug_mode(self):
+    def debug_mode(self, log_level: int = logging.DEBUG):
         from prettyqt.eventfilters import debugmode
         from prettyqt.debugging import ErrorMessageBox, MessageHandler
 
@@ -75,10 +75,10 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             "%(filename)s:%(lineno)d - %(levelname)s - %(message)s"
         )
         handler.setFormatter(f_format)
-        handler.setLevel(logging.DEBUG)
+        handler.setLevel(log_level)
         root_logger = logging.getLogger()
         root_logger.addHandler(handler)
-        root_logger.setLevel(logging.DEBUG)
+        root_logger.setLevel(log_level)
         _original_excepthook = sys.excepthook
         sys.excepthook = ErrorMessageBox._excepthook
         eventfilter = debugmode.DebugMode(self)
