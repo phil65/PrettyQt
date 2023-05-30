@@ -3,15 +3,11 @@ from __future__ import annotations
 from re import Pattern
 
 from prettyqt import custom_validators, custom_widgets, widgets
-from prettyqt.qt import QtWidgets
 
 
 class RegexLineEdit(custom_widgets.SingleLineTextEdit):
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-    ):
-        super().__init__(parent=parent)
+    def __init__(self, *args, object_name: str = "regex_lineedit", **kwargs):
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.set_syntaxhighlighter("regex")
         self.val = custom_validators.RegexPatternValidator()
         self.set_margin(0)

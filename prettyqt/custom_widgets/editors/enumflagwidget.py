@@ -8,11 +8,11 @@ from prettyqt import core, gui, widgets
 class EnumFlagWidget(widgets.ToolButton):
     value_changed = core.Signal(enum.Flag)
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, object_name: str = "enum_flag_widget", **kwargs):
         self._enum_class = None
         self._action_map = {}
         self.button_menu = widgets.Menu(triggered=self._on_menu_click)
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.setMenu(self.button_menu)
         self.set_popup_mode("instant")
 

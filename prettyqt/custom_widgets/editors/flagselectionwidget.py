@@ -4,7 +4,6 @@ from collections.abc import Iterable, Iterator, Mapping
 from typing import Literal
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
 class FlagSelectionWidget(widgets.GroupBox):
@@ -14,9 +13,10 @@ class FlagSelectionWidget(widgets.GroupBox):
         self,
         label: str = "",
         layout: Literal["horizontal", "vertical"] = "vertical",
-        parent: QtWidgets.QWidget | None = None,
+        object_name: str = "flag_selection_widget",
+        **kwargs,
     ):
-        super().__init__(title=label, parent=parent)
+        super().__init__(title=label, object_name=object_name, **kwargs)
         self.box = (
             widgets.HBoxLayout() if layout == "horizontal" else widgets.VBoxLayout()
         )

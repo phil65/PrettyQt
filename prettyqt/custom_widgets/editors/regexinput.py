@@ -25,8 +25,14 @@ MAP = dict(
 class RegexInput(widgets.Widget):
     value_changed = core.Signal(object)
 
-    def __init__(self, show_flags: bool = True, show_error: bool = True, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(
+        self,
+        show_flags: bool = True,
+        show_error: bool = True,
+        object_name: str = "regex_input",
+        **kwargs,
+    ):
+        super().__init__(object_name=object_name, **kwargs)
         self.set_layout("grid", margin=0)
         self.label_error = widgets.Label()
         self.label_error.set_color("highlight_role")

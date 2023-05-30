@@ -66,7 +66,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         return self._debug
 
     @contextlib.contextmanager
-    def debug_mode(self, log_level: int = logging.DEBUG):
+    def debug_mode(self, log_level: int = logging.DEBUG, color_borders: bool = True):
         from prettyqt.eventfilters import debugmode
         from prettyqt.debugging import ErrorMessageBox, MessageHandler
 
@@ -83,7 +83,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         sys.excepthook = ErrorMessageBox._excepthook
         eventfilter = debugmode.DebugMode(self)
         self._debug = True
-        self.setStyleSheet("QWidget{border: 1px solid red}")
+        if color_borders:
+            self.setStyleSheet("QWidget{border: 1px solid red}")
         self.installEventFilter(eventfilter)
         with MessageHandler(root_logger):
             yield self
@@ -226,7 +227,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     def get_available_themes(cls) -> dict[constants.ThemeStr, str]:
         return dict(default="Default", dark="Dark")
 
-    def send_event(self, obj_or_str: str | QtCore.QObject, event: QtCore.QEvent):
+    def send_event(self, obj_or_str: str | QtCore.QObject, event: QtCore.QEvent) -> bool:
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
         if obj is None:
             raise ValueError(obj)

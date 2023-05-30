@@ -25,10 +25,10 @@ class EnumComboBox(widgets.ComboBox):
     # current_enum_changed = core.Signal(object)
     value_changed = core.Signal(enum.Enum)
 
-    def __init__(self, value=None, **kwargs):
+    def __init__(self, value=None, object_name: str = "enum_combobox", **kwargs):
         self._enum_class = None
         self._allow_none = False
-        super().__init__(**kwargs)
+        super().__init__(object_name=object_name, **kwargs)
         if value is not None:
             self.set_value(value)
         # self.currentIndexChanged.connect(self._emit_signal)

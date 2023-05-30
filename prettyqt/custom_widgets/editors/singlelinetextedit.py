@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
 class SingleLineTextEdit(widgets.PlainTextEdit):
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
-        super().__init__(parent=parent)
+    def __init__(self, *args, object_name: str = "singleline_textedit", **kwargs):
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.textChanged.connect(self._on_text_changed)
         font_metrics = self.get_font_metrics()
         row_height = font_metrics.lineSpacing()

@@ -4,7 +4,6 @@ from collections.abc import Iterable, Iterator, Mapping
 from typing import Any, Literal
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -18,9 +17,10 @@ class SelectionWidget(widgets.GroupBox):
         self,
         label: str = "",
         layout: constants.OrientationStr = "horizontal",
-        parent: QtWidgets.QWidget | None = None,
+        object_name: str = "selection_widget",
+        **kwargs,
     ):
-        super().__init__(title=label, parent=parent)
+        super().__init__(title=label, object_name=object_name, **kwargs)
         self.box = (
             widgets.HBoxLayout() if layout == "horizontal" else widgets.VBoxLayout()
         )

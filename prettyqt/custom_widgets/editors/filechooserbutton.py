@@ -17,6 +17,7 @@ class FileChooserButton(widgets.Widget):
         mode: widgets.filedialog.AcceptModeStr = "save",
         file_mode: widgets.filedialog.FileModeStr = "existing_files",
         root: None | str | pathlib.Path = None,
+        object_name: str = "file_chooser_button",
         **kwargs: Any,
     ):
         """Initialize FileChooserButton.
@@ -28,9 +29,10 @@ class FileChooserButton(widgets.Widget):
             file_mode: File mode ("existing_files", "existing_file", "any_file",
                                   or "directory")
             root: Root path
+            object_name: Object name
             kwargs: kwargs passed to parent
         """
-        super().__init__(**kwargs)
+        super().__init__(object_name=object_name, **kwargs)
         self._path: pathlib.Path | None = None
         self._extensions = extensions or []
         self.mode = mode

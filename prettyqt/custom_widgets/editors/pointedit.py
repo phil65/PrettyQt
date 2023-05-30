@@ -7,8 +7,8 @@ from prettyqt.utils import datatypes
 class PointEdit(widgets.Widget):
     value_changed = core.Signal(core.Point)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, object_name: str = "point_edit", **kwargs):
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.set_margin(0)
         self.spinbox_x = widgets.SpinBox(maximum=999999)
         self.spinbox_y = widgets.SpinBox(maximum=999999)

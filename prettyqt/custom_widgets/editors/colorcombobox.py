@@ -11,9 +11,10 @@ class ColorComboBox(widgets.ComboBox):
     def __init__(
         self,
         color: datatypes.ColorType | None = None,
+        object_name: str = "color_combobox",
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        super().__init__(object_name=object_name, **kwargs)
         self._current_color: gui.Color = gui.Color("white")
         for i in gui.Color.colorNames():
             self.addItem(iconprovider.for_color(i), i)

@@ -6,8 +6,13 @@ from prettyqt import core, widgets
 class InputAndSlider(widgets.Widget):
     value_changed = core.Signal(int)
 
-    def __init__(self, bounds: tuple[int, int] | None = None, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(
+        self,
+        bounds: tuple[int, int] | None = None,
+        object_name: str = "input_and_slider",
+        **kwargs,
+    ):
+        super().__init__(object_name=object_name, **kwargs)
         self.path = None
         self.spinbox = widgets.SpinBox()
         self.slider = widgets.Slider()

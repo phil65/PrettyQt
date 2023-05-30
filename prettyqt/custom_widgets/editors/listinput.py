@@ -10,9 +10,10 @@ class ListInput(widgets.LineEdit):
         value: list[float] | str = "",
         typ: type = int,
         allow_single: bool = False,
+        object_name: str = "list_input",
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        super().__init__(object_name=object_name, **kwargs)
         if typ is int:
             val = custom_validators.IntListValidator(allow_single=allow_single)
         elif typ is float:

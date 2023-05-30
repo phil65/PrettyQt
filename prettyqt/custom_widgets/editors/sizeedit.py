@@ -7,8 +7,8 @@ from prettyqt.utils import datatypes
 class SizeEdit(widgets.Widget):
     value_changed = core.Signal(core.Size)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, object_name: str = "size_edit", **kwargs):
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.set_margin(0)
         self.spinbox_width = widgets.SpinBox(maximum=999999)
         self.spinbox_height = widgets.SpinBox(maximum=999999)

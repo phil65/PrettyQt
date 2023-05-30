@@ -8,8 +8,13 @@ from prettyqt.utils import get_repr
 class FontChooserButton(widgets.Widget):
     value_changed = core.Signal(gui.Font)
 
-    def __init__(self, font: QtGui.QFont | str | None = None, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(
+        self,
+        font: QtGui.QFont | str | None = None,
+        object_name: str = "font_chooser_button",
+        **kwargs,
+    ):
+        super().__init__(object_name=object_name, **kwargs)
         self._current_font = None
         layout = widgets.HBoxLayout(self, margin=0)
         self.lineedit = widgets.LineEdit(read_only=True)

@@ -6,8 +6,8 @@ from prettyqt import core, widgets
 class StringOrNumberWidget(widgets.GroupBox):
     value_changed = core.Signal(object)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, object_name: str = "string_or_number_widget", **kwargs):
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.set_layout("vertical")
         self.rb_lineedit = widgets.RadioButton("String", checked=True)
         self.lineedit = widgets.LineEdit()

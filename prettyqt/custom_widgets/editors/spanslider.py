@@ -55,8 +55,8 @@ class SpanSlider(widgets.Slider):
     upper_pos_changed = core.Signal(float)
     slider_pressed = core.Signal(object)
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
-        super().__init__("horizontal", parent)
+    def __init__(self, *args, object_name: str = "span_slider", **kwargs):
+        super().__init__("horizontal", *args, object_name=object_name, **kwargs)
         self.rangeChanged.connect(self.update_range)
         self.sliderReleased.connect(self._move_pressed_handle)
 

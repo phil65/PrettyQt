@@ -11,9 +11,10 @@ class LocaleEdit(widgets.ComboBox):
     def __init__(
         self,
         locale: QtCore.QLocale | None = None,
+        object_name: str = "locale_edit",
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        super().__init__(object_name=object_name, **kwargs)
         self._current_locale = core.Locale()
         for i in core.Locale.get_all_locales():
             self.addItem(i.bcp47Name())

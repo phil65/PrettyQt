@@ -7,8 +7,8 @@ from prettyqt.qt import QtWidgets
 class SizePolicyEdit(widgets.Widget):
     value_changed = core.Signal(QtWidgets.QSizePolicy)
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(self, *args, object_name: str = "sizepolicy_edit", **kwargs):
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.set_margin(0)
         self.cb_horizontal = widgets.ComboBox()
         self.cb_vertical = widgets.ComboBox()
