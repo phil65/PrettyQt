@@ -96,7 +96,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         w.set_layout("vertical")
         logtable.set_model(model)
         logtable.set_selection_behavior("rows")
-        self.stalker = debugging.Stalker(qobject)
+        self.stalker = debugging.Stalker(qobject, log_level=logging.DEBUG)
         self.stalker.hook()
         mdi_area = widgets.MdiArea()
         mdi_area.add_subwindow(qobject)
@@ -104,8 +104,11 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
         self.add_dockwidget(hierarchycontainer, window_title="Hierarchy view")
         self.add_dockwidget(tabwidget, window_title="Property view")
-        self.add_dockwidget(logtable, window_title="Log")
-        self.add_dockwidget(self.console, window_title="Console")
+        self.add_dockwidget(logtable, window_title="Log", visible=False)
+        self.add_dockwidget(self.console, window_title="Console", visible=False)
+        self.menubar = self.menuBar()
+        action = widgets.mainwindow.PopupMenuAction("Docks", parent=self)
+        self.menubar.add_action(action)
         self.position_on("screen", scale_ratio=0.8)
 
     def closeEvent(self, event):
@@ -114,10 +117,8 @@ class QObjectDetailsDialog(widgets.MainWindow):
 
     def _current_changed(self, *args):
         role = self.hierarchyview.get_model(skip_proxies=True).Roles.WidgetRole
-        qobject = self.hierarchyview.current_data(role)
-        if qobject is None:
-            return
-        self.propertyview.set_qobject(qobject)
+        if (qobject := self.hierarchyview.current_data(role)) is not None:
+            self.propertyview.set_qobject(qobject)
 
 
 if __name__ == "__main__":
@@ -129,7 +130,7 @@ if __name__ == "__main__":
     tree.set_model(dict(a=2))
     tree.model().proxifier.get_proxy("fuzzy")
     widget = debugging.example_tree(flatten=True)
-    with app.debug_mode():
+    with app.debug_mode(log_level=logging.INFO):
         wnd = QObjectDetailsDialog(widget)
         wnd.show()
         app.main_loop()
