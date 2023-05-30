@@ -9,6 +9,7 @@ from prettyqt.qt import QtCore
 class FlattenedTreeProxyModel(core.AbstractProxyModel):
     ID = "flatten_tree"
 
+    @core.Enum
     class FlatteningMode(enum.IntEnum):
         """Flattening modes."""
 
@@ -90,9 +91,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         )
 
     def parent(self, child=None) -> core.ModelIndex:
-        if child is None:
-            return super().parent()
-        return core.ModelIndex()
+        return super().parent() if child is None else core.ModelIndex()
 
     def rowCount(self, parent=None) -> int:
         parent = parent or core.ModelIndex()
@@ -104,15 +103,13 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
 
     def flags(self, index):
         flags = super().flags(index)
-        if self._flattening_mode == self.FlatteningMode.InternalNodesDisabled:
-            source_index = self.mapToSource(index)
-            source_model = self.sourceModel()
-            if (
-                source_model is not None
-                and source_model.rowCount(source_index) > 0
-                and flags & QtCore.Qt.ItemFlag.ItemIsEnabled
-            ):
-                flags ^= QtCore.Qt.ItemFlag.ItemIsEnabled
+        if self._flattening_mode != self.FlatteningMode.InternalNodesDisabled:
+            return flags
+        index = self.mapToSource(index)
+        model = self.sourceModel()
+        enabled = flags & QtCore.Qt.ItemFlag.ItemIsEnabled
+        if model is not None and model.rowCount(index) > 0 and enabled:
+            flags ^= QtCore.Qt.ItemFlag.ItemIsEnabled
         return flags
 
     def _get_index_key(self, index: core.ModelIndex):
@@ -180,6 +177,12 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
     ):
         with self.reset_model():
             self._update_row_mapping()
+
+    flatteningMode = core.Property(
+        FlatteningMode,
+        get_flattening_mode,
+        set_flattening_mode,
+    )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Container
+from collections.abc import Callable, Container
 
 from prettyqt import core
 from prettyqt.utils import get_repr
@@ -19,8 +19,8 @@ class SubsetFilterProxyModel(core.SortFilterProxyModel):
 
     def __init__(
         self,
-        row_filter: slice | range | int | Container[int] | None,
-        column_filter: slice | range | int | Container[int] | None,
+        row_filter: slice | range | int | Container[int] | Callable | None,
+        column_filter: slice | range | int | Container[int] | Callable | None,
         **kwargs,
     ):
         self.row_filter = row_filter
@@ -38,6 +38,8 @@ class SubsetFilterProxyModel(core.SortFilterProxyModel):
                 return source_column == self.column_filter
             case Container():
                 return source_column in self.column_filter
+            case Callable():
+                return self.column_filter(source_column)
             case None:
                 return True
             case _:
@@ -51,6 +53,8 @@ class SubsetFilterProxyModel(core.SortFilterProxyModel):
                 return source_row == self.row_filter
             case Container():
                 return source_row in self.row_filter
+            case Callable():
+                return self.row_filter(source_row)
             case None:
                 return True
             case _:

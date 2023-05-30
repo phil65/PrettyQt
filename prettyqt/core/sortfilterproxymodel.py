@@ -10,26 +10,26 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, fuzzy
 
 
-class SearchMode(enum.IntEnum):
+class FilterMode(enum.IntEnum):
     fixed_string = 1
     fuzzy = 2
     wildcard = 4
     regex = 8
 
 
-ModeStr = Literal["fixed_string", "fuzzy", "wildcard", "regex"]
+FilterModeStr = Literal["fixed_string", "fuzzy", "wildcard", "regex"]
 
 
-SEARCH_MODE = bidict(
-    fixed_string=SearchMode.fixed_string,
-    fuzzy=SearchMode.fuzzy,
-    wildcard=SearchMode.wildcard,
-    regex=SearchMode.regex,
+FILTER_MODE = bidict(
+    fixed_string=FilterMode.fixed_string,
+    fuzzy=FilterMode.fuzzy,
+    wildcard=FilterMode.wildcard,
+    regex=FilterMode.regex,
 )
 
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
-    SearchMode = SearchMode
+    FilterMode = core.Enum(FilterMode)
     invalidated = core.Signal()
     filter_mode_changed = core.Signal(str)
     ID = "sort_filter"
@@ -181,10 +181,10 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
             case "regex":
                 self.setFilterRegularExpression(search_term)
 
-    def get_filter_mode(self):
+    def get_filter_mode(self) -> FilterModeStr:
         return self._filter_mode
 
-    def set_filter_mode(self, mode: ModeStr):
+    def set_filter_mode(self, mode: FilterModeStr):
         self._filter_mode = mode
         self.filter_mode_changed.emit(mode)
 
