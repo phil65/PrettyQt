@@ -60,16 +60,15 @@ if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TreeView()
     shortcuts = [
-        gui.Shortcut("Ctrl+A", view, lambda: print("test"), object_name="super duper"),
+        gui.Shortcut("Ctrl+A", view, print, object_name="super duper"),
         gui.Shortcut("Ctrl+B", view, print, object_name="this is an shortcut"),
         gui.Shortcut("Ctrl+C", view, print, object_name="fsfsfsdfs sfd"),
         gui.Shortcut("Ctrl+D", view, print, object_name="fsfsfsdfs sfd"),
-        gui.Shortcut(view, object_name="another one", key="Ctrl+Alt+A"),
     ]
     for i in shortcuts:
         i.setWhatsThis("abc")
     model = custom_models.ColumnTableModel(shortcuts, COLUMNS, parent=view)
-    model = model.modify(lambda x: x * 2, column=0)
+    model = model.proxifier.modify(lambda x: x * 2, column=0)
     view.setModel(model)
     view.resize(640, 480)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
