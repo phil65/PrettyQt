@@ -1,22 +1,42 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
+import enum
 import re
 from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, bidict, fuzzy
+
+
+class SearchMode(enum.IntEnum):
+    fixed_string = 1
+    fuzzy = 2
+    wildcard = 4
+    regex = 8
+
+
+ModeStr = Literal["fixed_string", "fuzzy", "wildcard", "regex"]
+
+
+SEARCH_MODE = bidict(
+    fixed_string=SearchMode.fixed_string,
+    fuzzy=SearchMode.fuzzy,
+    wildcard=SearchMode.wildcard,
+    regex=SearchMode.regex,
+)
 
 
 class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
+    SearchMode = SearchMode
     invalidated = core.Signal()
     filter_mode_changed = core.Signal(str)
     ID = "sort_filter"
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
         self._filter_mode = "wildcard"
+        super().__init__(*args, **kwargs)
 
     #     self._filter_column = 0
 
@@ -38,6 +58,20 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
 
     #     if isinstance(column, int) and source_index.column() == column:
     #         return super().filterAcceptsRow(source_row, source_index)
+
+    def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex) -> bool:
+        if self._filter_mode == "fuzzy":
+            column = self.filterKeyColumn()
+            source_model = self.sourceModel()
+            idx = source_model.index(source_row, column, source_index)
+            text = source_model.data(idx)
+            return fuzzy.fuzzy_match_simple(
+                self.filterRegularExpression().pattern(),
+                text,
+                case_sensitive=self.is_filter_case_sensitive(),
+            )
+        else:
+            return super().filterAcceptsRow(source_row, source_index)
 
     def invalidate(self):
         super().invalidate()
@@ -133,7 +167,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
 
     def set_search_term(self, search_term: str):
         match self._filter_mode:
-            case "fixed_string":
+            case "fixed_string" | "fuzzy":
                 self.setFilterFixedString(search_term)
             case "wildcard":
                 self.setFilterWildcard(search_term)
@@ -143,11 +177,11 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
     def get_filter_mode(self):
         return self._filter_mode
 
-    def set_filter_mode(self, mode: str):
+    def set_filter_mode(self, mode: ModeStr):
         self._filter_mode = mode
         self.filter_mode_changed.emit(mode)
 
-    filter_mode = core.Property(
+    filterMode = core.Property(
         str, get_filter_mode, set_filter_mode, notify=filter_mode_changed
     )
 
@@ -164,11 +198,13 @@ if __name__ == "__main__":
     model = SortFilterProxyModel()
     model.setSourceModel(source_model)
     model.filter_mode_changed.connect(print)
-    model.set_filter_mode("wildcard")
+    model.set_filter_mode("fuzzy")
     lineedit = widgets.LineEdit()
+    print(model.filterRegularExpression().pattern())
     # completer = SubsequenceCompleter()
     # completer.setModel(source_model)
     # lineedit.set_completer(completer)
+    lineedit.value_changed.connect(model.set_search_term)
     widget = widgets.Widget()
     widget.set_layout("vertical")
     widget.box.add(lineedit)

@@ -69,6 +69,8 @@ def fuzzy_match_simple(pattern: str, instring: str, case_sensitive: bool = False
         True if there is a match, False otherwise
     """
     p_idx, s_idx, p_len, s_len = 0, 0, len(pattern), len(instring)
+    if p_len == 0:
+        return True
     if not case_sensitive:
         pattern = pattern.lower()
         instring = instring.lower()

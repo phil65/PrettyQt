@@ -30,25 +30,17 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         SortRole = constants.SORT_ROLE
 
     def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, filter_mode="fuzzy", **kwargs)
         self._search_term = ""
-        self.match_color: str | None = "blue"
+        self._match_color: str | None = "blue"
         self.setSortRole(self.Roles.SortRole)
         self.sort(0, constants.DESCENDING)
 
     def set_match_color(self, color):
-        self.match_color = color
+        self._match_color = color
 
-    def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex) -> bool:
-        if self._search_term == "":
-            return True
-        column = self.filterKeyColumn()
-        source_model = self.sourceModel()
-        idx = source_model.index(source_row, column, source_index)
-        text = source_model.data(idx)
-        return fuzzy.fuzzy_match_simple(
-            self._search_term, text, case_sensitive=self.is_filter_case_sensitive()
-        )
+    def get_match_color(self):
+        return self._match_color
 
     def lessThan(self, left, right):
         role = super().sortRole()
@@ -67,6 +59,9 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         self._search_term = search_term
         self.invalidate()
 
+    def get_search_term(self):
+        return self._search_term
+
     def data(self, index, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return None
@@ -74,12 +69,11 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         match role, index.column():
             case constants.DISPLAY_ROLE, _ if index.column() == filter_column:
                 label = super().data(index, constants.DISPLAY_ROLE)
-                # logging.info(label)
                 return (
                     fuzzy.color_text(
                         self._search_term,
                         str(label),
-                        self.match_color,
+                        self._match_color,
                         self.is_filter_case_sensitive(),
                     )
                     if self._search_term and self.match_color
@@ -99,6 +93,8 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
                 return result[1]
             case _, _:
                 return super().data(index, role)
+
+    search_term = core.Property(str, get_search_term, set_search_term)
 
 
 class FuzzyCompleter(widgets.Completer):
