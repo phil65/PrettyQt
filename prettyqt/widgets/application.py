@@ -71,7 +71,9 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         from prettyqt.debugging import ErrorMessageBox, MessageHandler
 
         handler = logging.StreamHandler(sys.stdout)
-        f_format = logging.Formatter("%(name)s - %(levelname)s - %(message)s")
+        f_format = logging.Formatter(
+            "%(filename)s:%(lineno)d - %(levelname)s - %(message)s"
+        )
         handler.setFormatter(f_format)
         handler.setLevel(logging.DEBUG)
         root_logger = logging.getLogger()
