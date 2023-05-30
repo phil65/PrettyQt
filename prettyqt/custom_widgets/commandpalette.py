@@ -44,11 +44,12 @@ class CommandTable(widgets.TableView):
         self._model = custom_models.ColumnTableModel(
             [], actionsmodel.COLUMNS, parent=self
         )
-        self._proxy = custom_models.FuzzyFilterProxyModel(filter_key_column=0)
+        self._proxy = custom_models.FuzzyFilterProxyModel(
+            filter_key_column=0, invalidated=self.select_first_row
+        )
         self._proxy.set_filter_case_sensitive(False)
         # self._proxy.set_sort_role(constants.SORT_ROLE)
         self._proxy.setSourceModel(self._model)
-        self._proxy.invalidated.connect(self.select_first_row)
         self.setModel(self._proxy)
         self.h_header.set_resize_mode("stretch")
         self.pressed.connect(self._on_clicked)
@@ -131,13 +132,10 @@ class CommandPalette(widgets.Widget):
         while widget := widget.parent():
             self.add_actions(widget.actions())
 
-    @classmethod
-    def for_path(cls, path):
+    def add_path_actions(self, path):
         path = pathlib.Path(path)
-        palette = cls()
         actions = [gui.Action(str(p)) for p in path.rglob("*") if p.is_file()]
-        palette.add_actions(actions)
-        return palette
+        self.add_actions(actions)
 
     def match_color(self) -> str:
         """The color used for the matched characters."""

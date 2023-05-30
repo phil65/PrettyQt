@@ -68,7 +68,7 @@ if __name__ == "__main__":
     item.setBackground(gui.Color("green"))
     item.setIcon(iconprovider.get_icon("mdi.folder", as_qicon=True))
     item.setFont(gui.Font("Consolas"))
-    item.set_data("user", iconprovider.get_icon("mdi.folder"))
+    item.set_data(iconprovider.get_icon("mdi.folder"), "user")
     model += item
     w.show()
     app.main_loop()
