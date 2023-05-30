@@ -68,8 +68,9 @@ class MenuMixin(widgets.WidgetMixin):
         self.add(separator)
         return separator
 
-    def add_menu(self, menu: QtWidgets.QMenu) -> QtGui.QAction:
-        action = menu.menuAction()
+    def add_menu(self, menu: QtWidgets.QMenu) -> gui.Action:
+        action = gui.Action(text=menu.title(), icon=menu.icon())
+        action.setMenu(menu)
         super().addAction(action)
         return action
 
