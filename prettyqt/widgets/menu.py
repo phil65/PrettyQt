@@ -8,9 +8,8 @@ from prettyqt.utils import datatypes
 
 
 class MenuMixin(widgets.WidgetMixin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.setToolTipsVisible(True)
+    def __init__(self, *args, tool_tips_visible=True, **kwargs):
+        super().__init__(*args, tool_tips_visible=tool_tips_visible, **kwargs)
 
     def __iter__(self) -> Iterator[QtGui.QAction]:
         return iter(self.actions())

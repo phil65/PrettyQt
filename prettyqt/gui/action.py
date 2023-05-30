@@ -57,7 +57,6 @@ class ActionMixin(core.ObjectMixin):
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self._menu = None
         if callback is not None:
             self.triggered.connect(callback)
         self._usage_count = 0
@@ -162,14 +161,7 @@ class ActionMixin(core.ObjectMixin):
         return gui.Font(self.font())
 
     def set_menu(self, menu):
-        try:
-            self.setMenu(menu)
-        except AttributeError:
-            self.triggered.connect(menu.exec)
-            self._menu = menu
-
-    def menu(self):
-        return self._menu
+        self.setMenu(menu)
 
     def set_priority(self, priority: PriorityStr | QtGui.QAction.Priority):
         """Set priority of the action.
