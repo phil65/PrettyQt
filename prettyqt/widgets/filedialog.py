@@ -224,5 +224,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = FileDialog()
     widget.show()
-    print(widget.__getstate__())
     app.main_loop()

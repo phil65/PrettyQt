@@ -122,4 +122,3 @@ if __name__ == "__main__":
     widget.openPersistentEditor(item)
     widget.show()
     app.main_loop()
-    print(delegate.choices)

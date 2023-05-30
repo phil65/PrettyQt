@@ -57,6 +57,5 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = SizePolicyEdit(window_title="Test")
     widget.set_value(widgets.SizePolicy())
-    widget.value_changed.connect(print)
     widget.show()
     app.main_loop()

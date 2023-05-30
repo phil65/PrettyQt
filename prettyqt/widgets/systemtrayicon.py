@@ -53,6 +53,5 @@ if __name__ == "__main__":
     app = widgets.app()
     icon = SystemTrayIcon()
     icon.set_icon("mdi.folder")
-    print(icon.isSystemTrayAvailable())
     icon.show_message("a", "b", "information")
     app.main_loop()

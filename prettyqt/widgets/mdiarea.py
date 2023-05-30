@@ -136,7 +136,6 @@ if __name__ == "__main__":
     le = widgets.LineEdit("test")
     le2 = widgets.LineEdit("test")
     widget.add(le)
-    print(widget.get_properties())
     widget.add(le2)
     widget.show()
     app.main_loop()

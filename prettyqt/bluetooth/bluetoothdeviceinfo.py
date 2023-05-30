@@ -354,4 +354,3 @@ class BluetoothDeviceInfo(QtBluetooth.QBluetoothDeviceInfo):
 if __name__ == "__main__":
     app = core.app()
     info = BluetoothDeviceInfo()
-    print(info)

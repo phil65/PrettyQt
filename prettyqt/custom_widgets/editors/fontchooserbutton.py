@@ -62,5 +62,4 @@ if __name__ == "__main__":
     btn = FontChooserButton()
     btn.set_current_font("Consolas")
     btn.show()
-    btn.value_changed.connect(print)
     app.main_loop()

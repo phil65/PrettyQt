@@ -104,7 +104,6 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
             typ = editor_cls.staticMetaObject.userProperty().userType()
         elif isinstance(typ, type) and typ in TYPES:
             typ = TYPES[typ].value
-        # print(f"register {editor_cls} for {typ}")
         self.registerEditor(typ, creator)
 
     @classmethod

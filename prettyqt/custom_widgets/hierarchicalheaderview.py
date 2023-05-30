@@ -652,7 +652,6 @@ if __name__ == "__main__":
     ]
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
     df = pd.DataFrame(np.random.randn(6, 6), index=index[:6], columns=index[:6])
-    print("DataFrame:\n%s" % df)
 
     # Prepare view
     #    oldh, oldv = view.horizontalHeader(), view.verticalHeader()

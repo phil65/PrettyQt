@@ -63,4 +63,3 @@ class LibraryInfo(QtCore.QLibraryInfo):
 
 if __name__ == "__main__":
     path = LibraryInfo.get_location("prefix")
-    print(path)

@@ -54,4 +54,3 @@ class PainterPathStroker(QtGui.QPainterPathStroker):
 
 if __name__ == "__main__":
     p = PainterPathStroker(QtCore.QPoint(1, 1))
-    print(list(p))

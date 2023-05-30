@@ -128,5 +128,3 @@ class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
 
 if __name__ == "__main__":
     transform = Transform()
-    print(transform[0, 0])
-    print(repr(transform))

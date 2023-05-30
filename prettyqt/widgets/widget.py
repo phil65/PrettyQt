@@ -883,8 +883,6 @@ if __name__ == "__main__":
     mainwindow.highlight_widget(widget)
     app.sleep(4)
     # widget.position_on("mouse", scale_ratio=0.5, how="top")
-    # widget.add_shortcut("return", print, "application")
     # widget.set_min_size((400, 400))
     # widget.set_max_size(None, 600)
-    # print(type(widget.get_screen()))
     app.main_loop()

@@ -96,6 +96,5 @@ class Frame(FrameMixin, QtWidgets.QFrame):
 if __name__ == "__main__":
     app = widgets.app()
     widget = Frame(frame_shape="panel", object_name="fff")
-    print(widget.get_properties())
     widget.show()
     app.main_loop()

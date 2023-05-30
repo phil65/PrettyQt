@@ -747,4 +747,3 @@ class Locale(QtCore.QLocale):
 
 if __name__ == "__main__":
     locale = Locale.get_all_locales()
-    print(repr(locale))

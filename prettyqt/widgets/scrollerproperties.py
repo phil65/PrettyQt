@@ -124,5 +124,3 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
 
 if __name__ == "__main__":
     props = ScrollerProperties()
-    print(dict(props))
-    # print(props.get_scroll_metrics())

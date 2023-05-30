@@ -37,4 +37,3 @@ if __name__ == "__main__":
     widget = ListInput()
     widget.show()
     app.main_loop()
-    print(widget.get_value())

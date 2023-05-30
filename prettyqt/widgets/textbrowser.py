@@ -64,5 +64,4 @@ if __name__ == "__main__":
     app = widgets.app()
     reader = TextBrowser()
     reader.show()
-    print(reader.get_source_type())
     app.main_loop()

@@ -55,5 +55,3 @@ class TextLine(QtGui.QTextLine):
 
 if __name__ == "__main__":
     fmt = TextLine()
-    print(fmt.get_position())
-    print(bool(fmt))

@@ -14,4 +14,3 @@ class PlainTextDocumentLayout(
 if __name__ == "__main__":
     doc = gui.TextDocument()
     layout = PlainTextDocumentLayout(doc)
-    print(len(layout))

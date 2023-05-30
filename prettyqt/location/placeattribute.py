@@ -29,4 +29,3 @@ class PlaceAttribute(QtLocation.QPlaceAttribute):
 
 if __name__ == "__main__":
     attr = PlaceAttribute("test", "us")
-    print(repr(attr))

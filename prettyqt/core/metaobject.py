@@ -252,5 +252,3 @@ if __name__ == "__main__":
     rb = widgets.RadioButton()
     metaobj = widgets.RadioButton.get_static_metaobject()
     handles = metaobj.connect_signals(rb, print)
-    print(handles[0])
-    print(metaobj.get_signals(only_notifiers=True))

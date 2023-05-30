@@ -150,7 +150,6 @@ if __name__ == "__main__":
     model.set_font_default("Consolas")
     model.set_background_default("green")
     model = model.proxifier.get_proxy("sort_filter")
-    print(model.index(0, 0).data())
     index = model.index(0, 0)
     model.setData(index, QtGui.QColor("red"), constants.BACKGROUND_ROLE)
     table.set_model(model)

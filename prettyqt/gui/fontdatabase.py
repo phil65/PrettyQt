@@ -141,4 +141,3 @@ if __name__ == "__main__":
 
     app = gui.app()
     db = FontDatabase()
-    print(db.families())

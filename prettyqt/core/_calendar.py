@@ -34,4 +34,3 @@ class Calendar(QtCore.QCalendar):
 
 if __name__ == "__main__":
     cal = Calendar("gregorian")
-    print(repr(cal))

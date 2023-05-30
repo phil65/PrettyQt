@@ -13,4 +13,3 @@ class PersistentModelIndex(QtCore.QPersistentModelIndex):
 
 if __name__ == "__main__":
     index = PersistentModelIndex()
-    print(bool(index))

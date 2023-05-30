@@ -113,7 +113,4 @@ class ImageReader(QtGui.QImageReader):
 
 if __name__ == "__main__":
     writer = ImageReader()
-    print(writer.get_supported_image_formats())
-    print(writer.get_subtype())
-    print(writer.get_format())
     writer.set_subtype("A8R8G8B8")

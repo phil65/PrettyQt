@@ -38,4 +38,3 @@ if __name__ == "__main__":
     widget = OptionalWidget(img, "Test")
     widget.show()
     app.main_loop()
-    print(widget.enabled)

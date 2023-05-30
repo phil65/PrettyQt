@@ -60,6 +60,5 @@ if __name__ == "__main__":
     dock_widget = DockWidget(window_title="Test")
     dock_widget.setup_title_bar()
     win.add_dockwidget(dock_widget, "left")
-    print(dock_widget.get_current_area())
     win.show()
     app.main_loop()

@@ -26,4 +26,3 @@ if __name__ == "__main__":
     app = gui.app()
     font = gui.Font()
     metrics = FontMetrics(font)
-    print(metrics.get_bounding_rect("test"))

@@ -15,4 +15,3 @@ class GraphicsLineItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsLineItem):
 
 if __name__ == "__main__":
     item = GraphicsLineItem(core.Point(0, 0), core.Point(2, 2))
-    print(repr(item))

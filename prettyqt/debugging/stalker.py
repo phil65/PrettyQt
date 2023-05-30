@@ -141,5 +141,4 @@ if __name__ == "__main__":
     with app.debug_mode():
         with Stalker(widget, log_level=logging.INFO) as stalker:
             app.sleep(3)
-            print(stalker.counter)
         app.main_loop()

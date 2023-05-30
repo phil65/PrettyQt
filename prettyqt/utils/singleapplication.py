@@ -70,7 +70,6 @@ class SingleApplicationMixin:
 if __name__ == "__main__":
     App = type("SingleApp", (SingleApplicationMixin, core.CoreApplication), {})
     app1 = App()
-    print(app1.is_running())
     # app1.exec()
 
 # Alternative:
@@ -136,5 +135,4 @@ if __name__ == "__main__":
 # if __name__ == "__main__":
 #     App = type("SingleApp", (SingleApplicationMixin, core.CoreApplication), {})
 #     app1 = App(sys.argv)
-#     print(app1.is_running)
 #     app1.exec()

@@ -20,6 +20,4 @@ class GeoRouteSegment(QtLocation.QGeoRouteSegment):
 
 if __name__ == "__main__":
     segment = GeoRouteSegment()
-    print(bool(segment))
     segment.setDistance(1)
-    print(bool(segment))

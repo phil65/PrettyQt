@@ -89,4 +89,3 @@ class ColorSpace(serializemixin.SerializeMixin, QtGui.QColorSpace):
 
 if __name__ == "__main__":
     space = ColorSpace()
-    print(space.iccProfile())

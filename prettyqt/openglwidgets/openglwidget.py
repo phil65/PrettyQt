@@ -57,6 +57,5 @@ class OpenGLWidget(widgets.WidgetMixin, QtOpenGLWidgets.QOpenGLWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = OpenGLWidget()
-    print(widget.get_properties())
     widget.show()
     app.main_loop()

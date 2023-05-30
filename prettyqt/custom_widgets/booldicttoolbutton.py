@@ -44,6 +44,5 @@ if __name__ == "__main__":
     app = widgets.app()
     dct = dict(a="test", b="test2")
     w = BoolDictToolButton(text="Title", dct=dct)
-    w.value_changed.connect(print)
     w.show()
     app.main_loop()

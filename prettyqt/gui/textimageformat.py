@@ -11,4 +11,3 @@ class TextImageFormat(gui.TextCharFormatMixin, QtGui.QTextImageFormat):
 
 if __name__ == "__main__":
     fmt = TextImageFormat()
-    print(bool(fmt))

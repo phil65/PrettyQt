@@ -17,8 +17,6 @@ class PyDesignerTaskMenuExtension(
 if __name__ == "__main__":
     obj = core.Object()
     ext = PyDesignerTaskMenuExtension(obj)
-    print(ext.taskActions())
     new = dir(PyDesignerTaskMenuExtension(obj))
     bie = dir(core.Object())
     c = [x for x in new if x not in bie]
-    print(c)

@@ -12,4 +12,3 @@ class FormBuilder(
 
 if __name__ == "__main__":
     builder = FormBuilder()
-    print(builder.customWidgets())

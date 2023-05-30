@@ -358,6 +358,5 @@ if __name__ == "__main__":
     ]
 
     toolbox.addActions(actions)
-    toolbox.actionTriggered.connect(print)
     toolbox.show()
     app.exec()

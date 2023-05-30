@@ -12,4 +12,3 @@ class DesignerFormEditorInterface(
 
 if __name__ == "__main__":
     interface = DesignerFormEditorInterface()
-    print(interface)

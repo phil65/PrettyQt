@@ -43,4 +43,3 @@ class MarginsF(QtCore.QMarginsF):
 
 if __name__ == "__main__":
     margins = MarginsF(0, 0, 0, 0)
-    print(repr(margins))

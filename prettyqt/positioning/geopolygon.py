@@ -38,5 +38,3 @@ if __name__ == "__main__":
     poly += coord
     poly.addCoordinate(coord)
     poly.get_hole_path(1)
-    print(len(poly))
-    print(poly)

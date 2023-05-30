@@ -21,4 +21,3 @@ class QmlError(QtQml.QQmlError):
 
 if __name__ == "__main__":
     error = QmlError()
-    print(repr(error))

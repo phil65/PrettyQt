@@ -179,4 +179,3 @@ class Dir(QtCore.QDir):
 
 if __name__ == "__main__":
     path = Dir.get_temp_path()
-    print(path)

@@ -105,4 +105,3 @@ class BluetoothLocalDevice(core.ObjectMixin, QtBluetooth.QBluetoothLocalDevice):
 
 if __name__ == "__main__":
     devices = BluetoothLocalDevice.get_all_devices()
-    print(devices)

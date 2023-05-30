@@ -190,4 +190,3 @@ class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
 
 if __name__ == "__main__":
     pol = SizePolicy("expanding", "expanding")
-    print(pol)

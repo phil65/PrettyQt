@@ -54,4 +54,3 @@ if __name__ == "__main__":
     range_1 = TableWidgetSelectionRange(0, 0, 10, 10)
     range_2 = TableWidgetSelectionRange(5, 5, 15, 15)
     result = range_1 == range_2
-    print(result)

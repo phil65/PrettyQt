@@ -230,7 +230,6 @@ class ComboBox(ComboBoxMixin, QtWidgets.QComboBox):
 if __name__ == "__main__":
     app = widgets.app()
     widget = ComboBox()
-    widget.value_changed.connect(print)
     w = ComboBox()
     widget.add("test", data="aa", icon="mdi.timer")
     widget.add("test2", data="aa2", icon="mdi.timer")

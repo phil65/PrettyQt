@@ -203,6 +203,5 @@ if __name__ == "__main__":
     widget = DialogButtonBox()
     buttons = list(STANDARD_BUTTON.keys())
     widget.add_default_buttons(buttons)
-    widget.button_clicked.connect(print)
     widget.show()
     app.main_loop()

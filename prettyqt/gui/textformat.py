@@ -100,4 +100,3 @@ class TextFormat(TextFormatMixin, QtGui.QTextFormat):
 
 if __name__ == "__main__":
     fmt = TextFormat()
-    print(bool(fmt))

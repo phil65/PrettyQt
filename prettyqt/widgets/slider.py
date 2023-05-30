@@ -206,6 +206,5 @@ if __name__ == "__main__":
     app = widgets.app()
     slider = Slider()
     slider.setRange(0, 100)
-    slider.value_changed.connect(print)
     slider.show()
     app.main_loop()

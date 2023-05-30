@@ -85,5 +85,3 @@ class Line(QtCore.QLine):
 
 if __name__ == "__main__":
     line = Line(core.Point(0, 0), core.Point(0, 0))
-    print(bool(line))
-    print(reversed(line))

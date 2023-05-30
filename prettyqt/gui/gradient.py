@@ -171,5 +171,3 @@ class Gradient(GradientMixin, prettyprinter.PrettyPrinter, QtGui.QGradient):
 
 if __name__ == "__main__":
     grad = Gradient.for_palette(gui.Palette())
-    print(grad.get_stops())
-    print(repr(grad))

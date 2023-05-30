@@ -41,4 +41,3 @@ if __name__ == "__main__":
     app = gui.app()
     hints = StyleHints(app.styleHints())
     scheme = hints.get_color_scheme()
-    print(scheme)

@@ -50,5 +50,3 @@ class Time(QtCore.QTime):
 
 if __name__ == "__main__":
     time = Time(22, 1)
-    print(time.add_secs(2))
-    print(repr(time))

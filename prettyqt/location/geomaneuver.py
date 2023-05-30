@@ -87,10 +87,6 @@ class GeoManeuver(QtLocation.QGeoManeuver):
 
 if __name__ == "__main__":
     maneuver = GeoManeuver()
-    print(bool(maneuver))
     maneuver.setExtendedAttributes(dict(a="a"))
     maneuver["test"] = "test"
-    print(bool(maneuver))
     waypoint = maneuver.get_waypoint()
-    print(bool(waypoint))
-    print(maneuver.extendedAttributes())

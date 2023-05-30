@@ -41,4 +41,3 @@ class Vector4D(QtGui.QVector4D):
 
 if __name__ == "__main__":
     vector = Vector4D(0, 0, 0, 1)
-    print(abs(vector))

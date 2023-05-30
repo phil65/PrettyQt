@@ -20,4 +20,3 @@ class GraphicsRotation(widgets.GraphicsTransformMixin, QtWidgets.QGraphicsRotati
 if __name__ == "__main__":
     rotation = GraphicsRotation()
     rotation.set_origin((1, 1, 1))
-    print(rotation.origin())

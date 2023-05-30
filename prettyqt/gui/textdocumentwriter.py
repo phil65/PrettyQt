@@ -47,4 +47,3 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
 if __name__ == "__main__":
     doc = TextDocumentWriter("a.text", b"plaintext")
     doc.set_format("UTF-8")
-    print(doc.get_format())

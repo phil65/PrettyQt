@@ -71,7 +71,6 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
 if __name__ == "__main__":
     app = widgets.app()
     widget = FontComboBox()
-    widget.value_changed.connect(print)
     widget.set_value(gui.Font("Script"))
     widget.show()
     app.main_loop()

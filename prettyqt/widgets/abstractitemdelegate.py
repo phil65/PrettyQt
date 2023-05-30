@@ -40,5 +40,3 @@ if __name__ == "__main__":
 
     app = widgets.app()
     # delegate = AbstractItemDelegate.for_id("variant")
-    print(widgets.StyledItemDelegate.__subclasses__())
-    # print(delegate)

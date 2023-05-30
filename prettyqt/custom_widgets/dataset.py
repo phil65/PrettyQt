@@ -542,18 +542,14 @@ if __name__ == "__main__":
         fileitem = File(label="File", optional="Activate")
         rangeitem = Range(label="Range", max_val=10)
         folderitem = Folder(label="Folder", include=False)
-        buttonitem = Button(label="Folder", icon="mdi.folder", callback=print)
         stringornumber = StringOrNumber(label="StringOrNumber", value=2.4)
         code = Code(label="Test", value="class Test")
         regexpattern = RegexPattern("RegexPattern")
-        regex = Regex(label="Test", value="[", show_error=False)
+        # regex = Regex(label="Test", value="", show_error=False)
 
     # class Test2(Test):
     #     boolitem = None
-
-    dlg = Test(icon="mdi.timer", comment="hallo")
-    # dlg.widget.value_changed.connect(print)
-    if dlg.edit(dict(boolitem=True)):
-        from pprint import pprint
-
-        pprint(dlg.to_dict())
+    with app.debug_mode():
+        dlg = Test(icon="mdi.timer", comment="hallo")
+        if dlg.edit():
+            pass

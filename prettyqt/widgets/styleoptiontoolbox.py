@@ -37,4 +37,3 @@ class StyleOptionToolBox(widgets.StyleOptionMixin, QtWidgets.QStyleOptionToolBox
 
 if __name__ == "__main__":
     opt = StyleOptionToolBox()
-    print(opt.get_selected_position())

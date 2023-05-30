@@ -206,12 +206,10 @@ if __name__ == "__main__":
         gui.Action(text="a", shortcut="Ctrl+A", tool_tip="Tooltip", icon="mdi.folder"),
     ]
     pal.populate_from_widget(window)
-    print(window.actions())
     pal.add_actions(actions)
     for _ in range(1000):
         label = "".join(random.choices(string.ascii_uppercase, k=10))
         pal.add_actions([gui.Action(text=label)])
     window.show()
-    print(COMMANDS)
     with app.debug_mode():
         app.main_loop()

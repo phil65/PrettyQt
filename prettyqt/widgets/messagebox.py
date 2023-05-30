@@ -239,5 +239,4 @@ if __name__ == "__main__":
     ret.set_standard_buttons(["ok", "cancel"])
     ret.add_button("tt", "accept", callback=lambda: print("click"))
     ret.show()
-    print(ret)
     app.main_loop()

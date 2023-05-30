@@ -33,4 +33,3 @@ class BarSet(core.ObjectMixin, QtCharts.QBarSet):
 
 if __name__ == "__main__":
     barset = BarSet("test")
-    print(repr(barset))

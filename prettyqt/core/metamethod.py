@@ -72,4 +72,3 @@ if __name__ == "__main__":
     obj = core.Object()
     metaobj = obj.get_metaobject()
     method = metaobj.get_method("objectNameChanged")
-    print(method.get_normalized_method_signature())

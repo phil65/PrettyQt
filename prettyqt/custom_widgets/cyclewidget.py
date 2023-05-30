@@ -174,6 +174,5 @@ class CycleWidget(widgets.ListWidget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = CycleWidget(["test"] * 20, QtCore.QSize(50, 50))
-    print(widget.model())
     widget.show()
     app.main_loop()

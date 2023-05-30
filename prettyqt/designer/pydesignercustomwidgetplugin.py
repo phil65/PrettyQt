@@ -43,8 +43,6 @@ class PyDesignerCustomWidgetPlugin(
 
 if __name__ == "__main__":
     plg = PyDesignerCustomWidgetPlugin()
-    print(plg.toolTip())
     new = dir(PyDesignerCustomWidgetPlugin())
     bie = dir(core.Object())
     c = [x for x in new if x not in bie]
-    print(c)

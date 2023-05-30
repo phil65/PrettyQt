@@ -348,4 +348,3 @@ if __name__ == "__main__":
     with app.debug_mode():
         app.sleep(1)
         app.main_loop()
-    print(w.get_properties())

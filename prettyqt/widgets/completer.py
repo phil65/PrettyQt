@@ -159,7 +159,3 @@ if __name__ == "__main__":
     model.set_root_path("")
     app.sleep(10)
     completer.setModel(model)
-    # completer.setCompletionPrefix("C:/")
-    print(completer.completionCount())
-    print("dfs", completer.get_completions())
-    # app.main_loop()

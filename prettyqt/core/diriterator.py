@@ -39,4 +39,3 @@ class DirIterator(QtCore.QDirIterator):
 
 if __name__ == "__main__":
     it = core.DirIterator("C:/Intel")
-    print(list(it))

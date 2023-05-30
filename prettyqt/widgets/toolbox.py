@@ -79,6 +79,5 @@ if __name__ == "__main__":
     tb = ToolBox()
     tb.add_widget(w, "title")
     tb.add_widget(w2)
-    print(len(tb))
     tb.show()
     app.main_loop()

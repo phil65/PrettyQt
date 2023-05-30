@@ -53,4 +53,3 @@ if __name__ == "__main__":
     metaobj = widget.get_metaobject()
     prop = metaobj.get_property("x")
     value = prop.read(widget)
-    print(type(value), value)

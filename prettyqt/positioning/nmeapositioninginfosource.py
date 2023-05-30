@@ -37,5 +37,3 @@ class NmeaPositionInfoSource(
 if __name__ == "__main__":
     obj = QtCore.QObject()
     source = NmeaPositionInfoSource("real_time", obj)
-    print(source)
-    print(repr(source))

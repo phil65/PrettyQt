@@ -30,8 +30,6 @@ class RegexMatchHighlighter(gui.SyntaxHighlighter):
         #     self.setCurrentBlockState(-1)
         start_char = block.position()
         end_char = start_char + block.length()
-        # print(f"\nline {line_no} ({start_char} - {end_char})")
-        # print(f"prev block state: {self.previousBlockState()}")
         if not self.spans or not text:
             return None
         for i, (start, end) in enumerate(self.spans):

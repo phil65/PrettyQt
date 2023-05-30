@@ -174,4 +174,3 @@ if __name__ == "__main__":
     doc.set_text("a\nb\ncd")
     block = doc[0]
     block.set_user_data("testg")
-    print(block.get_user_data())

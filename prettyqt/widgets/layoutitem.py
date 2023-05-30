@@ -55,4 +55,3 @@ if __name__ == "__main__":
 
     item = LayoutItem(QtCore.Qt.AlignmentFlag.AlignLeft)
     types = item.get_control_types()
-    print(types)

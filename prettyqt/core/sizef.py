@@ -44,6 +44,3 @@ class SizeF(QtCore.QSizeF):
 
 if __name__ == "__main__":
     size = SizeF(10, 20)
-    print(tuple(size))
-    size = size.expanded_to(QtCore.QSizeF(100, 100))
-    print(type(size))

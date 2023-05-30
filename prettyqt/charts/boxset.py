@@ -53,4 +53,3 @@ class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
 
 if __name__ == "__main__":
     boxset = BoxSet()
-    print(repr(boxset))

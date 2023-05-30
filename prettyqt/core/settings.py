@@ -247,6 +247,4 @@ class Settings(Settings_):
 if __name__ == "__main__":
     settings = Settings("1", "2")
     settings["1"] = True
-    print(settings["1"])
-    print(type(settings.get("1")))
     del settings["hallo"]

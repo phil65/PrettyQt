@@ -77,8 +77,4 @@ class DateTime(QtCore.QDateTime):
 if __name__ == "__main__":
     date = DateTime(2000, 11, 11, 1, 1, 1)
     dt = DateTime(date)
-    print(dt.to_format("iso"))
-    print(dt.get_timezone())
     pdt = dt.get_value()
-    print(pdt.isoformat())
-    print(pdt.tzinfo)

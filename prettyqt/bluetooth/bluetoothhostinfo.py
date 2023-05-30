@@ -16,4 +16,3 @@ class BluetoothHostInfo(QtBluetooth.QBluetoothHostInfo):
 
 if __name__ == "__main__":
     address = BluetoothHostInfo()
-    print(address)

@@ -50,4 +50,3 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
 
 if __name__ == "__main__":
     cookie = NetworkCookie()
-    print(repr(cookie))

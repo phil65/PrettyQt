@@ -88,6 +88,3 @@ class LineF(QtCore.QLineF):
 
 if __name__ == "__main__":
     line = LineF(core.Point(0, 0), core.Point(2, 2))
-    print(repr(line))
-    for p in line:
-        print(p)

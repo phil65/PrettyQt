@@ -190,4 +190,3 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
 
 if __name__ == "__main__":
     item = TreeWidgetItem()
-    print(item.get_text_alignment(0))

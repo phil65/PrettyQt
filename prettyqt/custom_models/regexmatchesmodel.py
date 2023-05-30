@@ -65,6 +65,4 @@ if __name__ == "__main__":
     dlg.add_widget(view)
     dlg.show_blocking()
     view.resize(500, 300)
-    print(view.model())
-    print(view.model().rowCount())
     app.main_loop()

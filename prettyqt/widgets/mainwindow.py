@@ -361,6 +361,5 @@ if __name__ == "__main__":
     menu = widgets.Menu("test")
     menu.add_action(action)
     form.menuBar().add_menu(menu)
-    print(dock.get_current_area())
     form.show()
     app.main_loop()

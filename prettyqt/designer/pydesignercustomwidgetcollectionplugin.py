@@ -13,8 +13,6 @@ class PyDesignerCustomWidgetCollectionPlugin(
 
 if __name__ == "__main__":
     fact = PyDesignerCustomWidgetCollectionPlugin()
-    print(fact.customWidgets())
     new = dir(PyDesignerCustomWidgetCollectionPlugin())
     bie = dir(core.Object())
     c = [x for x in new if x not in bie]
-    print(c)

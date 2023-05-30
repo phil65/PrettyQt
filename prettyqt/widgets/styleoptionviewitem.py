@@ -64,4 +64,3 @@ class StyleOptionViewItem(widgets.StyleOptionMixin, QtWidgets.QStyleOptionViewIt
 
 if __name__ == "__main__":
     item = StyleOptionViewItem()
-    print(item.get_decoration_alignment())

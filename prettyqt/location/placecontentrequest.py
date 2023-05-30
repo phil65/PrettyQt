@@ -30,4 +30,3 @@ class PlaceContentRequest(QtLocation.QPlaceContentRequest):
 
 if __name__ == "__main__":
     request = PlaceContentRequest()
-    print(bool(request))

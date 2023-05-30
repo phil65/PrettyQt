@@ -241,6 +241,3 @@ class MetaType(QtCore.QMetaType):
 
 if __name__ == "__main__":
     metatype = MetaType(2)
-    print(metatype.get_type_name())
-    print(metatype.get_meta_object())
-    print(TYPE)

@@ -20,4 +20,3 @@ class CandlestickSet(core.ObjectMixin, QtCharts.QCandlestickSet):
 
 if __name__ == "__main__":
     candlestickset = CandlestickSet(1, 3, 0, 2)
-    print(repr(candlestickset))
