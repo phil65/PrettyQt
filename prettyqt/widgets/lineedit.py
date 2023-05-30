@@ -23,6 +23,26 @@ ACTION_POSITION = bidict(
 
 ActionPositionStr = Literal["leading", "trailing"]
 
+ValidatorStr = Literal[
+    "double",
+    "color",
+    "integer",
+    "integer_classic",
+    "path",
+    "scientific_integer",
+    "scientific_float",
+    "python_code",
+    "not_zero",
+    "not_empty",
+    "composite",
+    "json",
+    "regex",
+    "regular_expression",
+    "regex_pattern",
+    "int_list",
+    "float_list",
+]
+
 
 class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     value_changed = core.Signal(str)
@@ -30,8 +50,12 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.textChanged.connect(self._set_validation_color)
-        self.textChanged.connect(self.value_changed)
+        self.textChanged.connect(self._on_value_change)
+
+    def _on_value_change(self):
+        val = self.get_value()
+        self._set_validation_color()
+        self.value_changed.emit(val)
 
     def __repr__(self):
         return get_repr(self, self.text())

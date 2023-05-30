@@ -1,12 +1,12 @@
 from __future__ import annotations
 
-import ast
-
 from prettyqt import gui
 from prettyqt.qt import QtGui
 
 
 class ColorValidator(gui.Validator):
+    ID = "color"
+
     def __eq__(self, other: object):
         return isinstance(other, ColorValidator)
 

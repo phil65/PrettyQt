@@ -41,6 +41,8 @@ class ScientificIntegerValidator(BaseScientificValidator):
     Also supports non-fractional SI unit prefix like 'M', 'k' etc.
     """
 
+    ID = "scientific_integer"
+
     re_pattern = re.compile(
         r"(([+-]?\d+)([eE]\+?\d+)?\s?([YZEPTGMk])?\s*)", flags=re.UNICODE
     )
@@ -69,6 +71,7 @@ class ScientificFloatValidator(BaseScientificValidator):
     Also supports SI unit prefix like 'M', 'n' etc.
     """
 
+    ID = "scientific_float"
     re_pattern = re.compile(
         r"(\s*([+-]?)(\d+\.\d+|\.\d+|\d+\.?)([eE][+-]?\d+)?\s?([YZEPTGMkmµunpfazy]?)\s*)",
         flags=re.UNICODE,

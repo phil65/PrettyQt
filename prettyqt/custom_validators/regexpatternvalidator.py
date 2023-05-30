@@ -14,6 +14,7 @@ from prettyqt.utils import get_repr
 
 
 class RegexPatternValidator(gui.Validator):
+    ID = "regex_pattern"
     error_occured = core.Signal(str)
     pattern_updated = core.Signal(object)
 

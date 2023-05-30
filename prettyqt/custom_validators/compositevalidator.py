@@ -8,6 +8,8 @@ from prettyqt.utils import get_repr
 
 
 class CompositeValidator(gui.Validator):
+    ID = "composite"
+
     def __init__(
         self,
         validators: Iterable[gui.Validator] | None = None,

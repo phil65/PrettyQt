@@ -1,24 +1,22 @@
 from __future__ import annotations
 
-from re import Pattern
-from typing import Union
-
 import regex as re
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import get_repr
-
-
-PatternType = Union[str, Pattern]  # todo: move this to types?
+from prettyqt.utils import datatypes, get_repr
 
 
 class BaseRegexValidator(gui.Validator):
+    ID = "regex"
+
     def __init__(
-        self, parent: QtCore.QObject | None = None, regex: PatternType | None = None
+        self,
+        parent: QtCore.QObject | None = None,
+        regex: datatypes.PatternType | None = None,
     ):
         super().__init__(parent)
-        self.regex: Pattern | None = None
+        self.regex: re.Pattern | None = None
         if regex:
             self.set_regex(regex)
 
@@ -31,7 +29,7 @@ class BaseRegexValidator(gui.Validator):
     def __eq__(self, other: object):
         return self.regex == other.regex if isinstance(other, type(self)) else False
 
-    def set_regex(self, regex: PatternType):
+    def set_regex(self, regex: datatypes.PatternType):
         self.regex = re.compile(regex) if isinstance(regex, str) else regex
 
     def get_regex(self) -> str:
@@ -56,6 +54,8 @@ class BaseRegexValidator(gui.Validator):
 
 
 class IntListValidator(BaseRegexValidator):
+    ID = "int_list"
+
     def __init__(self, allow_single: bool = True, parent: QtCore.QObject | None = None):
         super().__init__(parent=parent)
         self.allow_single = allow_single
@@ -72,6 +72,8 @@ class IntListValidator(BaseRegexValidator):
 
 
 class FloatListValidator(BaseRegexValidator):
+    ID = "float_list"
+
     def __init__(self, allow_single: bool = True, parent: QtCore.QObject | None = None):
         super().__init__(parent=parent)
         self.allow_single = allow_single

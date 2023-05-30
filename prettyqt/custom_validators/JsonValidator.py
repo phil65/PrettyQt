@@ -7,6 +7,8 @@ from prettyqt.qt import QtGui
 
 
 class JsonValidator(gui.Validator):
+    ID = "json"
+
     def __eq__(self, other: object):
         return isinstance(other, JsonValidator)
 

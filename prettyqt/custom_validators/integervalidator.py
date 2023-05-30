@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore
 
 
 class IntegerValidator(gui.Validator):
+    ID = "integer"
+
     def __init__(self, parent: QtCore.QObject | None = None):
         super().__init__(parent)
         self.range: tuple[int | None, int | None] = (None, None)

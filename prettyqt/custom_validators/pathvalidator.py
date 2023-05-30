@@ -6,6 +6,8 @@ from prettyqt import gui
 
 
 class PathValidator(gui.Validator):
+    ID = "path"
+
     def __eq__(self, other: object):
         return isinstance(other, PathValidator)
 

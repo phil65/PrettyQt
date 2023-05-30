@@ -5,6 +5,8 @@ from prettyqt.qt import QtGui
 
 
 class NotZeroValidator(gui.Validator):
+    ID = "not_zero"
+
     def validate(
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:

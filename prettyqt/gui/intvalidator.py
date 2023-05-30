@@ -4,8 +4,12 @@ from prettyqt import gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
+MAX_VAL = 2147483647
+
 
 class IntValidator(gui.ValidatorMixin, QtGui.QIntValidator):
+    ID = "integer_classic"
+
     def __repr__(self):
         return get_repr(self, self.bottom(), self.top())
 
@@ -24,9 +28,9 @@ class IntValidator(gui.ValidatorMixin, QtGui.QIntValidator):
 
     def set_range(self, lower: int | None, upper: int | None):
         if lower is None:
-            lower = 2147483647  # number from docs
+            lower = -MAX_VAL
         if upper is None:
-            upper = 2147483647
+            upper = MAX_VAL
         self.setRange(lower, upper)
 
 

@@ -5,6 +5,8 @@ from prettyqt.qt import QtGui
 
 
 class NotEmptyValidator(gui.Validator):
+    ID = "not_empty"
+
     def __eq__(self, other: object):
         return isinstance(other, NotEmptyValidator)
 

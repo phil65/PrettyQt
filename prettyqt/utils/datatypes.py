@@ -4,6 +4,7 @@ import datetime
 import os
 import pathlib
 from typing import TYPE_CHECKING, Any, Protocol, Union
+from re import Pattern
 
 
 def make_qtype(obj):
@@ -119,6 +120,7 @@ if TYPE_CHECKING:
 
     JSONType = Union[str, int, float, bool, None, dict[str, Any], list[Any]]
     PathType = Union[str, os.PathLike]
+    PatternType = Union[str, Pattern]
     UrlType = Union[str, QtCore.QUrl]
     PointType = Union[tuple[int, int], QtCore.QPoint]
     PointFType = Union[tuple[float, float], QtCore.QPointF]

@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from prettyqt import custom_validators, widgets
+from prettyqt import core, custom_validators, widgets
 from prettyqt.utils import helpers
 
 
 class ListInput(widgets.LineEdit):
+    value_changed = core.Signal(list)
+
     def __init__(
         self,
         value: list[float] | str = "",

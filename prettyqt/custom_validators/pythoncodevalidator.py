@@ -7,6 +7,8 @@ from prettyqt.qt import QtGui
 
 
 class PythonCodeValidator(gui.Validator):
+    ID = "python_code"
+
     def __eq__(self, other: object):
         return isinstance(other, PythonCodeValidator)
 
