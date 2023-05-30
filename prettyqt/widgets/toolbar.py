@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, datatypes, get_repr
@@ -133,14 +135,30 @@ class ToolBarMixin(widgets.WidgetMixin):
     def get_widgets(self) -> list[QtWidgets.QAction]:
         return [self.widgetForAction(i) for i in self.actions()]
 
-    def show_tooltips(self, value: bool = True, duration_ms: int = 2000):
+    def show_tooltips(
+        self,
+        value: bool = True,
+        duration_ms: int = 2000,
+        content: Literal["tool_tip", "shortcut", "status_tip"] = "tool_tip",
+    ):
         """Show all the tooltips."""
         if self._tooltip_labels:
             self._tooltip_timer.start(duration_ms)
             return
-        for i in self.get_widgets():
+        for action, i in zip(self.actions(), self.get_widgets()):
+            match content:
+                case "tool_tip":
+                    val = i.toolTip()
+                case "shortcut":
+                    val = action.shortcut().toString()
+                case "status_tip":
+                    val = i.statusTip()
+                case _:
+                    raise ValueError(content)
+            if not val:
+                continue
             label = widgets.Label(
-                i.toolTip(), self, QtCore.Qt.WindowType.ToolTip, alignment="center"
+                val, self, QtCore.Qt.WindowType.ToolTip, alignment="center"
             )
             label.setStyleSheet("border: 1px solid gray;")
             label.hide()
@@ -167,9 +185,9 @@ if __name__ == "__main__":
     toolbar = ToolBar("test")
     toolbar.add_action(text="test", tool_tip="tesf dsfsdfdsfdsfsdfsdffst")
     toolbar.add_action(text="test2", tool_tip="test2")
+    toolbar.add_action(text="test2", tool_tip="test2", shortcut="Ctrl+A")
     radio = widgets.RadioButton("abc")
     action = toolbar.addWidget(radio)
-
     toolbar.show()
-    toolbar.show_tooltips()
+    toolbar.show_tooltips(content="shortcut")
     app.main_loop()
