@@ -573,7 +573,6 @@ def test_headerview(qtbot):
     model = widgets.FileSystemModel()
     table.set_model(model)
     header = widgets.HeaderView("horizontal", parent=table)
-    qtbot.addWidget(header)
     table.setHorizontalHeader(header)
     header.set_resize_mode("interactive")
     header.set_resize_mode("interactive", col=0)

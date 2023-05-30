@@ -209,6 +209,8 @@ from .itemeditorfactory import ItemEditorFactory
 
 # to register delegates
 from prettyqt import custom_delegates
+from prettyqt import custom_widgets
+from prettyqt import custom_models
 
 
 def app(args: list[str] | None = None, **kwargs) -> Application:
@@ -220,6 +222,8 @@ def app(args: list[str] | None = None, **kwargs) -> Application:
 
 __all__ = [
     "custom_delegates",
+    "custom_widgets",
+    "custom_models",
     "app",
     "Application",
     "AbstractSlider",

@@ -12,4 +12,5 @@ class StringListModelMixin(core.AbstractListModelMixin):
 
 
 class StringListModel(StringListModelMixin, QtCore.QStringListModel):
-    pass
+    def __repr__(self):
+        return f"{type(self).__name__}: ({self.rowCount()})"

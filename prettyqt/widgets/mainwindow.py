@@ -102,7 +102,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         return previous
 
     def createPopupMenu(self) -> widgets.Menu:
-        menu = widgets.Menu(parent=self, text="Window")
+        menu = widgets.Menu(parent=self, title="Window")
         for i, item in enumerate(self.get_docks()):
             action = gui.Action(
                 text=item.windowTitle(),
