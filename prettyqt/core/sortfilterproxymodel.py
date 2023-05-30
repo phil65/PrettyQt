@@ -165,9 +165,16 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
             column = -1
         super().setFilterKeyColumn(column)
 
-    def set_search_term(self, search_term: str):
+    def set_search_term(self, search_term: str | Iterable[str]):
         match self._filter_mode:
-            case "fixed_string" | "fuzzy":
+            case "fixed_string":
+                if isinstance(search_term, list):
+                    self.setFixedFilterList(search_term)
+                else:
+                    self.setFilterFixedString(search_term)
+            case "substring":
+                self.setFilterString(search_term)
+            case "fuzzy":
                 self.setFilterFixedString(search_term)
             case "wildcard":
                 self.setFilterWildcard(search_term)

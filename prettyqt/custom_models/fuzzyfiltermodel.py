@@ -3,9 +3,9 @@ from __future__ import annotations
 import enum
 import logging
 
-from prettyqt import constants, core, widgets
-from prettyqt.utils import fuzzy
-from prettyqt.qt import QtCore
+from prettyqt import constants, core, gui, widgets
+from prettyqt.utils import colors, datatypes, fuzzy
+from prettyqt.qt import QtCore, QtGui
 
 logger = logging.getLogger(__name__)
 
@@ -32,14 +32,14 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, filter_mode="fuzzy", **kwargs)
         self._search_term = ""
-        self._match_color: str | None = "blue"
+        self._match_color: str | None = gui.Color("blue")
         self.setSortRole(self.Roles.SortRole)
         self.sort(0, constants.DESCENDING)
 
-    def set_match_color(self, color):
-        self._match_color = color
+    def set_match_color(self, color: datatypes.ColorType):
+        self._match_color = colors.get_color(color)
 
-    def get_match_color(self):
+    def get_match_color(self) -> QtGui.QColor:
         return self._match_color
 
     def lessThan(self, left, right):
@@ -73,7 +73,7 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
                     fuzzy.color_text(
                         self._search_term,
                         str(label),
-                        self._match_color,
+                        self._match_color.name(),
                         self.is_filter_case_sensitive(),
                     )
                     if self._search_term and self.match_color
@@ -95,6 +95,7 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
                 return super().data(index, role)
 
     search_term = core.Property(str, get_search_term, set_search_term)
+    match_color = core.Property(QtGui.QColor, get_match_color, set_match_color)
 
 
 class FuzzyCompleter(widgets.Completer):
