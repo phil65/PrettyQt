@@ -143,6 +143,9 @@ class ActionMixin(core.ObjectMixin):
 
     setShortcut = set_shortcut
 
+    def setText(self, text: str | None):
+        super().setText(text or "")
+
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
