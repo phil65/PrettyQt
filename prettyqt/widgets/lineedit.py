@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import InvalidParamError, bidict, get_repr, helpers
 
 
 ECHO_MODE = bidict(
@@ -117,7 +117,10 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         val.set_range(lower, upper)
         self.set_validator(val)
 
-    def set_validator(self, validator: QtGui.QValidator):
+    def set_validator(self, validator: QtGui.QValidator | ValidatorStr | None, **kwargs):
+        if isinstance(validator, str):
+            ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
+            validator = ValidatorClass(**kwargs)
         self.setValidator(validator)
         self._set_validation_color()
 
@@ -197,7 +200,6 @@ if __name__ == "__main__":
     # widget.add_action(action)
     widget.setPlaceholderText("test")
     widget.setClearButtonEnabled(True)
-    widget.set_completer("files")
     # widget.set_regex_validator("[0-9]+")
     widget.setFont(gui.Font("Consolas"))
     widget.show()

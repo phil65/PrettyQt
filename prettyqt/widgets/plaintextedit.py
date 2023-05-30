@@ -4,7 +4,14 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, texteditselecter
+from prettyqt.utils import (
+    InvalidParamError,
+    bidict,
+    colors,
+    datatypes,
+    helpers,
+    texteditselecter,
+)
 
 
 LINE_WRAP_MODE = bidict(
@@ -177,7 +184,12 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         color = None if self.is_valid() else "orange"
         self.set_background_color(color)
 
-    def set_validator(self, validator: QtGui.QValidator | None):
+    def set_validator(
+        self, validator: QtGui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
+    ):
+        if isinstance(validator, str):
+            ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
+            validator = ValidatorClass(**kwargs)
         self.validator = validator
         self._set_validation_color()
 
