@@ -18,7 +18,7 @@ class PredicateFilterProxyModel(core.SortFilterProxyModel):
         >>> proxy.add_filter(lambda value: value < 1)
     """
 
-    ID = "predicate"
+    ID = "predicate_filter"
 
     def __init__(self, parent=None, **kwargs):
         super().__init__(parent, **kwargs)
