@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import widgets
+from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -26,6 +26,8 @@ SegmentStyleStr = Literal["outline", "filled", "flat"]
 
 
 class LCDNumber(widgets.FrameMixin, QtWidgets.QLCDNumber):
+    value_changed = core.Signal(float)
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {"segmentStyle": SEGMENT_STYLE, "mode": MODE}
@@ -74,6 +76,8 @@ class LCDNumber(widgets.FrameMixin, QtWidgets.QLCDNumber):
         return SEGMENT_STYLE.inverse[self.segmentStyle()]
 
     def set_value(self, value: float | str):
+        if value != self.value():
+            self.value_changed.emit(float(value))
         self.display(value)
 
     def get_value(self) -> float:

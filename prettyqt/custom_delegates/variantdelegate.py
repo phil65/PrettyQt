@@ -7,7 +7,7 @@ import pathlib
 
 import regex as re
 
-from prettyqt import constants, custom_delegates, custom_widgets, widgets
+from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -30,6 +30,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
         # if not self.is_supported_type(value):
         #     option = widgets.StyleOptionViewItem(option)
         #     option.state &= ~QtWidgets.QStyle.StateFlag.State_Enabled
+        from prettyqt import custom_delegates
+
         match value := self._data_for_index(index, self.data_role):
             case QtGui.QIcon():
                 icon_delegate = custom_delegates.IconDelegate()
@@ -44,6 +46,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
+        from prettyqt import custom_widgets
+
         original_value = self._data_for_index(index, self.data_role)
         logger.info(f"creating editor for {original_value!r}...")
         match original_value:

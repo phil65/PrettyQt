@@ -4,14 +4,12 @@ from collections.abc import Iterable
 import os
 import pathlib
 
-from prettyqt import core, gui, widgets
+from prettyqt import gui, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
 class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
-    value_changed = core.Signal(str)
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setOpenExternalLinks(True)
