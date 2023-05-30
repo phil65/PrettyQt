@@ -6,7 +6,7 @@ import logging
 import re
 from typing import Literal
 
-from prettyqt import gui, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
 
@@ -158,13 +158,12 @@ class TextEditSelecter:
             logger.error("No previous searches")
             return
         temp_cursor = self._widget.textCursor()
-        if not (found := self._widget.find(self.search_buffer, self.search_flags)):
+        if not self._widget.find(self.search_buffer, self.search_flags):
             if not self._widget.textCursor().atStart() or (
                 self._searching_backwards() and not self._widget.textCursor().atEnd()
             ):
                 self.move_cursor("end" if self._searching_backwards() else "start")
-                found = self._widget.find(self.search_buffer, self.search_flags)
-                if not found:
+                if not self._widget.find(self.search_buffer, self.search_flags):
                     self._widget.setTextCursor(temp_cursor)
                     logger.error("Text not found")
             else:
@@ -220,6 +219,19 @@ class TextEditSelecter:
         else:
             logger.error("Text not found")
         self._widget.setTextCursor(temp_cursor)
+
+    def highlight_matches(
+        self, pattern: str, highlight_color: datatypes.ColorType = "red"
+    ):
+        color = colors.get_color(highlight_color)
+        cursor = self._widget.get_text_cursor()
+        fmt = QtGui.QTextCharFormat()
+        fmt.setBackground(QtGui.QBrush(color))
+        re = core.RegularExpression(pattern)
+        for match in re.global_match(self._widget.toPlainText()):
+            cursor.set_position(match.capturedStart(), "move")
+            cursor.set_position(match.capturedEnd(), "keep")
+            cursor.mergeCharFormat(fmt)
 
     def replace_block_at_cursor(self, new_text: str):
         cursor = self._widget.textCursor()
