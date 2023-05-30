@@ -76,11 +76,6 @@ class FullScreenAction(gui.Action):
 
 
 class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
-    """Class for our mainWindow.
-
-    Includes all docks, a centralwidget and a toolbar
-    """
-
     def __init__(self, *args, **kwargs):
         super().__init__(*args, dock_options=DEFAULT_OPTS, **kwargs)
         self.setMenuBar(widgets.MenuBar())
@@ -107,7 +102,6 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         return previous
 
     def createPopupMenu(self) -> widgets.Menu:
-        # qactions = self.createPopupMenu()
         menu = widgets.Menu(parent=self, text="Window")
         for i, item in enumerate(self.get_docks()):
             action = gui.Action(

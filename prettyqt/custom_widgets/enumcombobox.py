@@ -92,21 +92,6 @@ class EnumComboBox(widgets.ComboBox):
     #     if self._enum_class is not None:
     #         self.current_enum_changed.emit(self.get_value())
 
-    def insertItems(self, *_, **__):
-        raise RuntimeError("EnumComboBox does not allow to insert items")
-
-    def insertItem(self, *_, **__):
-        raise RuntimeError("EnumComboBox does not allow to insert item")
-
-    def addItems(self, *_, **__):
-        raise RuntimeError("EnumComboBox does not allow to add items")
-
-    def addItem(self, *_, **__):
-        raise RuntimeError("EnumComboBox does not allow to add item")
-
-    def setInsertPolicy(self, policy):
-        raise RuntimeError("EnumComboBox does not allow to insert item")
-
     allowNone = core.Property(bool, is_none_allowed, set_allow_none)
     enumValue = core.Property(enum.Enum, get_value, set_value, user=True)
     # enumClass = core.Property(type(enum.Enum), get_enum_class, set_enum_class)

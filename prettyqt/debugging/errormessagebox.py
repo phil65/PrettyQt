@@ -70,6 +70,7 @@ class ErrorMessageBox(widgets.MessageBox):
     @classmethod
     def _excepthook(cls, exc_type: type[Exception], exc_value: Exception, exc_traceback):
         """Exception hook used during application execution."""
+        # tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
         logger.exception(exc_value)
         return ErrorMessageBox.raise_(exc_value, parent=None)
 
