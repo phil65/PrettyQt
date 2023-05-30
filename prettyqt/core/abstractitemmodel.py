@@ -26,7 +26,6 @@ LAYOUT_CHANGE_HINT = bidict(
 )
 
 ProxyStr = Literal[
-    "regular",
     "fuzzy",
     "transpose",
     "sort_filter",
@@ -35,11 +34,12 @@ ProxyStr = Literal[
     "range_filter",
     "checkable",
     "subset",
-    "flattened_tree",
+    "flatten_tree",
     "table_to_list",
     "predicate_filter",
     "size_limiter",
     "subsequence",
+    "appearance",
 ]
 
 
@@ -95,7 +95,9 @@ class Proxyfier:
         proxy.setSourceModel(self._model)
         return proxy
 
-    def get_proxy(self, proxy: ProxyStr = "regular", parent=None, **kwargs):
+    def get_proxy(
+        self, proxy: ProxyStr, parent: QtWidgets.QWidget | None = None, **kwargs
+    ):
         parent = parent or self._model.parent()
         if parent is None:
             raise ValueError("needs parent!")

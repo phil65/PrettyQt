@@ -42,13 +42,13 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             self._widget, self.force_layoutchange, only_notifiers=True
         )
 
-    def disconnect(self):
+    def unhook(self):
         for handle in self._handles:
             self._widget.disconnect(handle)
         self._widget.removeEventFilter(self.event_catcher)
         logger.debug(f"Disconnected {self._widget!r} from {self!r}")
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent=None) -> int:
         return len(self.HEADER)
 
     def headerData(
@@ -64,7 +64,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 prop = self._metaobj.get_property(section)
                 return prop.propertyIndex()
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return None
         prop = self._metaobj.get_property(index.row())
@@ -116,7 +116,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             case constants.USER_ROLE, _:
                 return prop.read(self._widget)
 
-    def setData(self, index, value, role=constants.DISPLAY_ROLE):
+    def setData(self, index: QtCore.QModelIndex, value, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return None
         prop = self._metaobj.get_property(index.row())
@@ -127,14 +127,14 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 return True
         return False
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: QtCore.QModelIndex | None = None) -> int:
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
         return 0 if parent.isValid() else self._metaobj.propertyCount()
 
-    def flags(self, index):
+    def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
         prop = self._metaobj.get_property(index.row())
         if index.column() == 1 and prop.isWritable():
             return (

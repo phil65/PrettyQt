@@ -80,7 +80,7 @@ class Color(QtGui.QColor):
     __match_args__ = ("_red", "_green", "_blue", "_alpha")
 
     def serialize(self) -> dict[str, Any]:
-        return dict(color=self.toString())
+        return dict(color=self.name())
 
     def set_color(self, color: str | tuple):
         if isinstance(color, str):
