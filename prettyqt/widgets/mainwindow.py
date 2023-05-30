@@ -38,6 +38,43 @@ DEFAULT_OPTS = (
 logger = logging.getLogger(__name__)
 
 
+class PopupMenuAction(gui.Action):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.triggered.connect(self._show_menu)
+        self._mainwindow = self.parent()
+
+    def _show_menu(self):
+        menu = self._mainwindow.createPopupMenu()
+        self.setMenu(menu)
+        menu.exec(gui.Cursor.pos())
+
+
+class FullScreenAction(gui.Action):
+    def __init__(
+        self,
+        parent: widgets.MainWindow,
+        text: str = "Fullscreen",
+        shortcut: str = "F11",
+    ):
+        super().__init__(
+            text=text,
+            # icon="mdi.fullscreen",
+            checkable=True,
+            shortcut=shortcut,
+            parent=parent,
+            checked=parent.isFullScreen(),
+        )
+        self.triggered.connect(parent.toggle_fullscreen)
+        parent.installEventFilter(self)
+
+    def eventFilter(self, source, event):
+        """Needed to adjust checkstate when windowstate changes programatically."""
+        if event.type() == core.Event.Type.WindowStateChange:
+            self.setChecked(source.isFullScreen())
+        return False
+
+
 class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     """Class for our mainWindow.
 
@@ -71,7 +108,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def createPopupMenu(self) -> widgets.Menu:
         # qactions = self.createPopupMenu()
-        menu = widgets.Menu(parent=self)
+        menu = widgets.Menu(parent=self, text="Window")
         for i, item in enumerate(self.get_docks()):
             action = gui.Action(
                 text=item.windowTitle(),
@@ -192,6 +229,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         widget.set_id(f"{name}.widget")
         widget.set_layout(layout, margin=0)
         dock_widget.setWidget(widget)
+        dock_widget.box = widget.layout()  # should get rid of this shit
         self.add_dockwidget(dock_widget, position)
         return dock_widget
 
@@ -325,6 +363,10 @@ if __name__ == "__main__":
     dock = form.add_dockwidget(widgets.Widget())
     dock = form.add_dockwidget(widgets.Widget())
     dock = form.add_dockwidget(widgets.Widget())
+    action = FullScreenAction(parent=form)
+    menu = widgets.Menu("test")
+    menu.add_action(action)
+    form.menuBar().add_menu(menu)
     print(dock.get_current_area())
     form.show()
     app.main_loop()
