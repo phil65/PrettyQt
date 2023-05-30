@@ -40,6 +40,7 @@ ProxyStr = Literal[
     "size_limiter",
     "subsequence",
     "appearance",
+    "column_join",
 ]
 
 
