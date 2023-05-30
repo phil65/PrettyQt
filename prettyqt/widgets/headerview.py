@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from collections.abc import Iterable
-import functools
 import hashlib
+import logging
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
@@ -18,6 +18,8 @@ MODES = bidict(
 )
 
 ModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
+
+logger = logging.getLogger(__name__)
 
 
 class HeaderViewMixin(widgets.AbstractItemViewMixin):
@@ -35,6 +37,9 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         else:
             ori = constants.ORIENTATION[orientation]
         super().__init__(ori, parent=parent, **kwargs)
+        if ori == constants.HORIZONTAL:
+            self.installEventFilter(self)
+
         self.setSectionsMovable(True)
         self.setSectionsClickable(True)
         self.sectionResized.connect(self._on_section_resize)
@@ -164,10 +169,13 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
                 return i
         raise ValueError(label)
 
-    def contextMenuEvent(self, event):
-        """Override to show a popupmenu on rightclick."""
-        menu = self.createPopupMenu()
-        menu.exec(self.mapToGlobal(event.pos()))
+    def eventFilter(self, source, event):
+        if event.type() == core.Event.Type.ContextMenu:
+            menu = self.createPopupMenu()
+            menu.exec(self.mapToGlobal(event.pos()))
+            logger.info(f"KeypressEvent {event} taken by EventFilter")
+            return True
+        return False
 
     def get_header_actions(self) -> list[gui.Action]:
         menu = self.createPopupMenu()
@@ -179,17 +187,29 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         labels = self.get_section_labels()[1:]
         for i, header_label in enumerate(labels, start=1):
             val = not self.isSectionHidden(i)
-            fn = functools.partial(self.set_section_hidden, i=i, hide=val)
             action = gui.Action(
-                text=header_label, checkable=True, checked=val, triggered=fn
+                text=str(header_label),
+                checkable=True,
+                checked=val,
+                triggered=self._on_toggle_action_triggered,
             )
+            action.setData(i)
             actions.append(action)
         menu.add_actions(actions)
         return menu
 
-    def setSectionHidden(self, i: int, hide: bool):
-        self.section_visiblity_changed.emit(i, hide)
-        super().setSectionHidden(i, hide)
+    def _on_toggle_action_triggered(self):
+        action = self.sender()
+        section = action.data()
+        self.toggle_section_visibility(section)
+
+    def toggle_section_visibility(self, logical_index: int):
+        self.setSectionHidden(logical_index, not self.isSectionHidden(logical_index))
+        logger.info(f"toggling {logical_index}")
+
+    def setSectionHidden(self, logical_index: int, hide: bool):
+        self.section_visiblity_changed.emit(logical_index, hide)
+        super().setSectionHidden(logical_index, hide)
 
     def set_sizes(self, sizes: Iterable[int | None]):
         for i, size in enumerate(sizes):
@@ -228,4 +248,5 @@ if __name__ == "__main__":
     table = debugging.example_tree()
     header = table.h_header
     table.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()
