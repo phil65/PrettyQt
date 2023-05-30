@@ -84,8 +84,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
                 val = self._alignments[(index.row(), index.column())]
                 return val or self._alignment_default
             case _:
-                val = super().data(index, role)
-                return val
+                return super().data(index, role)
 
     def set_font_default(self, font: QtGui.QFont | str):
         self._font_default = QtGui.QFont(font)
@@ -144,11 +143,13 @@ if __name__ == "__main__":
 
     app = widgets.app()
     table = widgets.TableView()
-    _source_model = core.StringListModel(["a", "b"])
+    table.setSortingEnabled(True)
+    _source_model = core.StringListModel(["a", "b", "b", "b"])
     model = AppearanceProxyModel(parent=table)
     model.setSourceModel(_source_model)
     model.set_font_default("Consolas")
     model.set_background_default("green")
+    model = model.proxifier.get_proxy("sort_filter")
     print(model.index(0, 0).data())
     index = model.index(0, 0)
     model.setData(index, QtGui.QColor("red"), constants.BACKGROUND_ROLE)

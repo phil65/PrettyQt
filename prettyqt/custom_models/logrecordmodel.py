@@ -111,7 +111,7 @@ COLUMNS = [
 
 class LogRecordModel(custom_models.ColumnTableModel):
     def __init__(self, logger, level=logging.DEBUG, *args, **kwargs):
-        super().__init__(items=[], columns=COLUMNS)
+        super().__init__(items=[], columns=COLUMNS, **kwargs)
         self.handler = signallogger.SignalLogger()
         self.handler.signals.log_record.connect(self.add)
         core.CoreApplication.call_on_exit(lambda: logger.removeHandler(self.handler))
@@ -120,13 +120,32 @@ class LogRecordModel(custom_models.ColumnTableModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging
+    from prettyqt import constants, debugging
+    from prettyqt.qt import QtGui
 
     logger = logging.getLogger()
 
     app = widgets.app()
     widget = widgets.TableView()
     model = LogRecordModel(logger, parent=widget)
+
+    def color_log(x):
+        # print("fsfksj", x)
+        match x:
+            case "DEBUG":
+                return QtGui.QColor("lightblue")
+            case "INFO":
+                return QtGui.QColor("lightgreen")
+            case "WARNING":
+                return QtGui.QColor("orange")
+            case "ERROR":
+                return QtGui.QColor("red")
+
+    model = model.proxifier.modify(
+        color_log,
+        column=1,
+        role=constants.BACKGROUND_ROLE,
+    )
     w = widgets.Widget()
     w.set_layout("vertical")
     widget.set_model(model)

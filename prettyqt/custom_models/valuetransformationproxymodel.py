@@ -68,7 +68,7 @@ class ValueTransformationProxyModel(core.IdentityProxyModel):
             ):
                 selector_val = super().data(index, t.selector_role)
                 if t.selector is None or t.selector(selector_val):
-                    val = t.fn(val)
+                    val = t.fn(selector_val)
         return val
 
 

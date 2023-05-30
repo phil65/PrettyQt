@@ -36,8 +36,8 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         self.setSortRole(self.Roles.SortRole)
         self.sort(0, constants.DESCENDING)
 
-    def set_match_color(self, color: datatypes.ColorType):
-        self._match_color = colors.get_color(color)
+    def set_match_color(self, color: datatypes.ColorType | None):
+        self._match_color = colors.get_color(color) if color else QtGui.QColor()
 
     def get_match_color(self) -> QtGui.QColor:
         return self._match_color
@@ -49,9 +49,9 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         if left_data is None or right_data is None:
             return True
         if self._search_term:
-            return fuzzy.fuzzy_match(self._search_term, left_data) < fuzzy.fuzzy_match(
-                self._search_term, right_data
-            )
+            return fuzzy.fuzzy_match(
+                self._search_term, str(left_data)
+            ) < fuzzy.fuzzy_match(self._search_term, str(right_data))
         else:
             return left_data < right_data
 
@@ -76,13 +76,15 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
                         self._match_color.name(),
                         self.is_filter_case_sensitive(),
                     )
-                    if self._search_term and self.match_color
+                    if self._search_term and self._match_color.isValid() and label
                     else label
                 )
             # case constants.DISPLAY_ROLE, 1:
             #     idx = self.index(index.row(), filter_column)
             #     label = super().data(idx, constants.DISPLAY_ROLE)
-            #     result = fuzzy.fuzzy_match(self._search_term, label)
+            #     if label is None:
+            #         return None
+            #     result = fuzzy.fuzzy_match(self._search_term, str(label))
             #     return str(result[1])
             case self.Roles.BackupRole, _:
                 return super().data(index, constants.DISPLAY_ROLE)
