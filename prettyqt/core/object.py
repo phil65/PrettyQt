@@ -25,10 +25,25 @@ logger = logging.getLogger(__name__)
 
 
 class ObjectMixin:
-    Properties: dict[type, list[str]] = {}
+    _properties: list = []
+    _signals: list = []
+
+    def __new__(cls, *args, **kwargs):
+        """Cache a list of properties and signals as class attribute."""
+        if issubclass(cls, QtCore.QObject) and not cls._properties:
+            metaobj = core.MetaObject(cls.staticMetaObject)
+            cls._properties = [i.get_name() for i in metaobj.get_properties()]
+            cls._signals = [i.get_name() for i in metaobj.get_signals()]
+            return super().__new__(cls, *args, **kwargs)
+        return super().__new__(cls)
 
     def __init__(self, *args, **kwargs):
         self._eventfilters = set()
+        # klass = type(self)
+        # if issubclass(klass, QtCore.QObject) and klass not in _properties:
+        #     metaobj = core.MetaObject(klass.staticMetaObject)
+        #     _properties[klass] = [i.get_name() for i in metaobj.get_properties()]
+        #     _signals[klass] = [i.get_name() for i in metaobj.get_signals()]
         new = {}
         if kwargs:
             mapper = self._get_map()
@@ -45,9 +60,11 @@ class ObjectMixin:
                     from prettyqt import iconprovider
 
                     new[camel_k] = iconprovider.get_icon(v)
-                # regular case
-                else:
+                # kwargs which need camel-casing
+                elif camel_k in self._properties or camel_k in self._signals:
                     new[camel_k] = v
+                else:
+                    new[k] = v
         super().__init__(*args, **new)
 
     def _get_map(self):
@@ -263,7 +280,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     obj = core.Object(object_name="jkjk")
-    obj.copy()
+    test = widgets.TableWidget()
     meta = obj.get_metaobject()
     prop = meta.get_property(0)
     with app.debug_mode():
