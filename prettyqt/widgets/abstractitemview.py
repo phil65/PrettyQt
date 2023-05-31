@@ -4,6 +4,8 @@ from collections.abc import Generator
 import logging
 from typing import Any, Literal
 
+from collections.abc import Iterator
+
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
@@ -614,6 +616,18 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         elif isinstance(size, int):
             size = QtCore.QSize(size, size)
         self.setIconSize(size)
+
+    def iter_tree(
+        self, index: core.ModelIndex | None = None
+    ) -> Iterator[core.ModelIndex]:
+        model = self.model()
+        if index is None:
+            index = model.index(0, 0)
+        if index.isValid():
+            yield index
+        for i in range(model.rowCount(index)):
+            idx = model.index(i, 0, index)
+            yield from self.iter_tree(idx)
 
 
 class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
