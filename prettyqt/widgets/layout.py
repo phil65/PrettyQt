@@ -47,10 +47,10 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             case _:
                 raise IndexError(index)
 
-    def __del__(self):
-        item = self.takeAt(0)
-        while item:
-            item = self.takeAt(0)
+    # def __del__(self):
+    #     item = self.takeAt(0)
+    #     while item:
+    #         item = self.takeAt(0)
 
     def __delitem__(self, item: int | QtWidgets.QLayoutItem):
         if isinstance(item, int):
