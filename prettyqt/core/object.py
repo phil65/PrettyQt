@@ -249,13 +249,15 @@ class ObjectMixin:
         interval: int | str,
         single_shot: bool = False,
         timer_type: constants.TimerTypeStr = "coarse",
-    ) -> int | None:
-        if isinstance(interval, str):
-            interval = helpers.parse_time(interval)
+    ) -> core.Timer:
+        interval = helpers.parse_time(interval) if isinstance(interval, str) else interval
         timer = core.Timer(
-            self, single_shot=single_shot, interval=interval, timer_type=timer_type
+            self,
+            single_shot=single_shot,
+            interval=interval,
+            timer_type=timer_type,
+            timeout=callback,
         )
-        timer.timeout.connect(callback)
         timer.start()
         return timer
 

@@ -33,8 +33,7 @@ class Spin:
 
     def setup(self, painter: gui.Painter, rect: QtCore.QRect):
         if self.parent_widget not in self.info:
-            timer = core.Timer(self.parent_widget)
-            timer.timeout.connect(self._update)
+            timer = core.Timer(self.parent_widget, timeout=self._update)
             self.info[self.parent_widget] = timer, 0, self.step
             timer.start(self.interval)
         else:

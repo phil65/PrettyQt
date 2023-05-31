@@ -70,9 +70,7 @@ def get_debounced_signal(
             self.debounce_time = debounce_time
             # self.last_emission_time = time.time()
             # self.last_emission_try = time.time()
-            self.timer = core.Timer()
-            self.timer.timeout.connect(self.timer_emit)
-            self.timer.setSingleShot(True)
+            self.timer = core.Timer(timeout=self.timer_emit, single_shot=True)
             self.repeat_same = repeat_same
 
         def emit(self, *args):
