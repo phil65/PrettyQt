@@ -56,7 +56,7 @@ class DataItem:
         return widget
 
     def _create_widget(self):
-        return None
+        return NotImplemented
 
 
 class Fixed(DataItem):

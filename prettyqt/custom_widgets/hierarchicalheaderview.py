@@ -47,7 +47,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
         def find_leaf(
             self, index: core.ModelIndex, section_index: int, current_leaf_index: int
-        ) -> core.ModelIndex:
+        ) -> tuple[core.ModelIndex, int]:
             if not index.isValid():
                 return core.ModelIndex(), current_leaf_index
             model = index.model()

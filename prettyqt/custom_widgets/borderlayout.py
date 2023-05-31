@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
 from dataclasses import dataclass
 import enum
 from typing import Literal
@@ -27,21 +26,9 @@ class BorderLayout(widgets.Layout):
         East = 3
         Center = 4
 
-    def __init__(
-        self,
-        parent: QtWidgets.QWidget | None = None,
-        margin: int = 0,
-        spacing: int | None = None,
-    ):
-        super().__init__(parent)  # type: ignore
-        self.set_margin(margin)
-        self.setSpacing(spacing if spacing is not None else -1)
-        self.items: Sequence[ItemWrapper] = []
-
-    def __del__(self):
-        item = self.takeAt(0)
-        while item:
-            item = self.takeAt(0)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.items: list[ItemWrapper] = []
 
     def addItem(self, item: QtWidgets.QWidgetItem):
         self.add_widgetitem(item, BorderLayout.Position.West)
@@ -55,7 +42,7 @@ class BorderLayout(widgets.Layout):
         self.add_widgetitem(widgets.WidgetItem(widget), position)
 
     def expandingDirections(self) -> QtCore.Qt.Orientation:
-        return constants.HORIZONTAL | constants.VERTICAL  # type: ignore
+        return constants.HORIZONTAL | constants.VERTICAL
 
     def hasHeightForWidth(self) -> bool:
         return False
@@ -63,7 +50,7 @@ class BorderLayout(widgets.Layout):
     def count(self) -> int:
         return len(self.items)
 
-    def itemAt(self, index: int) -> QtWidgets.QWidgetItem | None:  # type: ignore
+    def itemAt(self, index: int) -> QtWidgets.QWidgetItem | None:
         return self.items[index].item if index < len(self.items) else None
 
     def minimumSize(self):
@@ -157,7 +144,7 @@ class BorderLayout(widgets.Layout):
     def sizeHint(self) -> core.Size:
         return self.calculate_size("size_hint")
 
-    def takeAt(self, index: int) -> QtWidgets.QWidgetItem | None:  # type: ignore
+    def takeAt(self, index: int) -> QtWidgets.QWidgetItem | None:
         if 0 <= index < len(self.items):
             layout_struct = self.items.pop(index)
             return layout_struct.item

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 from qstylizer import parser
 
 from prettyqt import gui
@@ -15,11 +16,9 @@ class QssValidator(gui.Validator):
     def validate(
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:
-        try:
+        with contextlib.suppress(ValueError):
             if not text or parser.parse(text):
                 return self.State.Acceptable, text, pos
-        except ValueError:
-            pass
         return self.State.Intermediate, text, pos
 
 

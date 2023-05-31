@@ -46,9 +46,7 @@ class FakeUserPropertyNameProp:
 
     def read(self, qobject):
         userprop = qobject.metaObject().userProperty()
-        if not userprop.isValid():
-            return ""
-        return userprop.name()
+        return userprop.name() if userprop.isValid() else ""
 
     def write(self, qobject, value):
         pass

@@ -131,8 +131,8 @@ class WidgetMixin(core.ObjectMixin):
         effect: QtWidgets.QGraphicsEffect
         | Literal["drop_shadow", "blur", "opacity", "colorize"],
         radius: int = 10,
-        opacity: int = 0.7,
-        strength: int = 0.5,
+        opacity: float = 0.7,
+        strength: float = 0.5,
         color: datatypes.ColorType = "blue",
     ) -> QtWidgets.QGraphicsEffect:
         match effect:
@@ -833,8 +833,6 @@ class WidgetMixin(core.ObjectMixin):
             item = layout.takeAt(0)
             if widget := item.widget():
                 widget.deleteLater()
-            else:
-                self.delete_children(item.layout())
 
     def get_cursor(self) -> gui.Cursor:
         return gui.Cursor(self.cursor())

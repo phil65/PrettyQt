@@ -86,7 +86,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         object_name="qobject_details_dialog",
         **kwargs,
     ):
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, object_name=object_name, **kwargs)
         self.qobject = qobject
         self.console = ipython.InProcessIPythonWidget(self)
         tabwidget, self.propertyview = PropertyView.get_tabbed(qobject)

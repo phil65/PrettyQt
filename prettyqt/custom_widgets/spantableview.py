@@ -200,7 +200,7 @@ class SpanHeaderView(widgets.HeaderView):
         base_section_size = QtCore.QSize()
         if self.orientation() == QtCore.Qt.Orientation.Horizontal:
             base_section_size.setWidth(self.defaultSectionSize())
-            base_section_size.setHeight(SECTION_HEIGHT / 2)
+            base_section_size.setHeight(SECTION_HEIGHT // 2)
             rows = 1
             columns = sections
         else:
@@ -473,7 +473,7 @@ class SpanHeaderView(widgets.HeaderView):
 
     def getSectionRange(
         self, index: QtCore.QModelIndex, begin_section: int, end_section: int
-    ) -> int:
+    ) -> tuple[int, int]:
         col_span_idx = self.column_span_index(index)
         row_span_idx = self.row_span_index(index)
 

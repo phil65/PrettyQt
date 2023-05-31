@@ -28,25 +28,33 @@ class CrossFadeWidget(widgets.Widget):
         self.timeline.start()
         # self.show()
 
-    def set_pixmap_1(self, pixmap: QtGui.QPixmap | str | QtWidgets.QWidget):
+    def set_pixmap_1(
+        self, pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None
+    ):
         match pixmap:
             case QtGui.QPixmap():
                 self.pixmap_1 = pixmap
-            case str():
+            case os.PathLike():
                 self.pixmap_1 = gui.Pixmap(pixmap)
             case QtWidgets.QWidget():
                 self.pixmap_1 = pixmap.grab()
+            case None:
+                self.pixmap_1 = gui.Pixmap()
         self.updateGeometry()
         self.repaint()
 
-    def set_pixmap_2(self, pixmap: QtGui.QPixmap | str | QtWidgets.QWidget):
+    def set_pixmap_2(
+        self, pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None
+    ):
         match pixmap:
             case QtGui.QPixmap():
                 self.pixmap_2 = pixmap
-            case str():
+            case os.PathLike():
                 self.pixmap_2 = gui.Pixmap(pixmap)
             case QtWidgets.QWidget():
                 self.pixmap_2 = pixmap.grab()
+            case None:
+                self.pixmap_2 = gui.Pixmap()
         self.updateGeometry()
         self.repaint()
 
