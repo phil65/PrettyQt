@@ -6,7 +6,7 @@ import logging
 import collections
 from typing import TypeVar
 
-from prettyqt import core
+from prettyqt import core, gui
 from prettyqt.qt import QtCore
 
 
@@ -26,6 +26,9 @@ class Stalker(core.Object):
     #     CRITICAL = logging.CRITICAL
     #     ERROR = logging.ERROR
 
+    keypress_detected = core.Signal(str)
+    leftclick_detected = core.Signal(QtCore.QPointF)
+    rightclick_detected = core.Signal(QtCore.QPointF)
     event_detected = core.Signal(QtCore.QEvent)
     signal_emitted = core.Signal(core.MetaMethod, object)  # signal, args
     signal_connected = core.Signal(core.MetaMethod)
@@ -105,6 +108,15 @@ class Stalker(core.Object):
     def _on_event_detected(self, event) -> bool:
         """Used for EventCatcher, returns false to not eat signals."""
         self.event_detected.emit(event)
+        match event.type():
+            case core.Event.Type.KeyPress:
+                combo = gui.KeySequence(event.keyCombination()).toString()
+                self.keypress_detected.emit(combo)
+            case core.Event.Type.MouseButtonRelease:
+                if event.button() == QtCore.Qt.MouseButton.LeftButton:
+                    self.leftclick_detected.emit(event.position())
+                if event.button() == QtCore.Qt.MouseButton.RightButton:
+                    self.rightclick_detected.emit(event.position())
         self.log(f"Received event {event.type()!r}")
         self.counter[event.type()] += 1
         return False
