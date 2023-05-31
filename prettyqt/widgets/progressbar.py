@@ -16,30 +16,8 @@ TextDirectionStr = Literal["top_to_bottom", "bottom_to_top"]
 
 
 class ProgressBar(widgets.WidgetMixin, QtWidgets.QProgressBar):
-    """Progress dialog.
-
-    wrapper for QtWidgets.QProgressBar
-    """
-
-    def __init__(
-        self, text_visible: bool = True, parent: QtWidgets.QWidget | None = None
-    ):
-        super().__init__(parent=parent)
-        self.setTextVisible(text_visible)
-
-    def serialize_fields(self):
-        return dict(
-            alignment=self.get_alignment(),
-            format=self.format(),
-            # inverted_appearance=self.invertedAppearance(),
-            minimum=self.minimum(),
-            maximum=self.maximum(),
-            orientation=self.get_orientation(),
-            text=self.text(),
-            # text_direction=self.get_text_direction(),
-            text_visible=self.isTextVisible(),
-            value=self.value(),
-        )
+    def __init__(self, *args, text_visible: bool = True, **kwargs):
+        super().__init__(*args, text_visible=text_visible, **kwargs)
 
     def set_alignment(self, alignment: constants.AlignmentStr):
         """Set the alignment of the layout.
