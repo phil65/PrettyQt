@@ -26,13 +26,11 @@ cover this in test_evented_list.py)
 from __future__ import annotations
 
 from collections.abc import Iterable, MutableSequence
-from typing import Any, TypeVar, Union, cast, overload
+from typing import Any, TypeVar, cast
 
 from prettyqt import core
 
-
 _T = TypeVar("_T")
-Index = Union[int, slice]
 
 
 class Signals(core.Object):
@@ -66,27 +64,11 @@ class SignalList(MutableSequence[_T]):
         self._data.insert(index, _value)
         self.signals.inserted.emit(index, value)
 
-    @overload
-    def __getitem__(self, key: int) -> _T:
-        ...
-
-    @overload
-    def __getitem__(self, key: slice) -> SignalList[_T]:
-        ...
-
-    def __getitem__(self, key: Index) -> _T | SignalList[_T]:
+    def __getitem__(self, key: int | slice) -> _T | SignalList[_T]:
         result = self._data[key]
         return self.__newlike__(result) if isinstance(result, list) else result
 
-    @overload
-    def __setitem__(self, key: int, value: _T) -> None:
-        ...
-
-    @overload
-    def __setitem__(self, key: slice, value: Iterable[_T]) -> None:
-        ...
-
-    def __setitem__(self, key: Index, value: _T | Iterable[_T]) -> None:
+    def __setitem__(self, key: int | slice, value: _T | Iterable[_T]) -> None:
         old = self._data[key]
         if value is old:
             return
@@ -99,15 +81,15 @@ class SignalList(MutableSequence[_T]):
         self._data[key] = value
         self.signals.changed.emit(key, old, value)
 
-    def __delitem__(self, key: Index) -> None:
+    def __delitem__(self, key: int | slice) -> None:
         """Delete self[key]."""
         # delete from the end
         for parent, index in sorted(self._delitem_indices(key), reverse=True):
-            parent.events.removing.emit(index)
+            parent.signals.removing.emit(index)
             item = parent._data.pop(index)
             self.signals.removed.emit(index, item)
 
-    def _delitem_indices(self, key: Index) -> Iterable[tuple[SignalList[_T], int]]:
+    def _delitem_indices(self, key: int | slice) -> Iterable[tuple[SignalList[_T], int]]:
         # returning (self, int) allows subclasses to pass nested members
         if isinstance(key, int):
             yield (self, key if key >= 0 else key + len(self))
@@ -176,7 +158,9 @@ class SignalList(MutableSequence[_T]):
             self._data.reverse()
         self.signals.reordered.emit()
 
-    def move(self, src_index: int, dest_index: int = 0) -> bool:
+    def move(
+        self, src_index: int, dest_index: int = 0, emit_reordered: bool = True
+    ) -> bool:
         """Insert object at `src_index` before `dest_index`.
 
         Both indices refer to the list prior to any object removal
@@ -194,10 +178,11 @@ class SignalList(MutableSequence[_T]):
             dest_index -= 1
         self._data.insert(dest_index, item)
         self.signals.moved.emit(src_index, dest_index, item)
-        self.signals.reordered.emit()
+        if emit_reordered:
+            self.signals.reordered.emit()
         return True
 
-    def move_multiple(self, sources: Iterable[Index], dest_index: int = 0) -> int:
+    def move_multiple(self, sources: Iterable[int | slice], dest_index: int = 0) -> int:
         """Move a batch of `sources` indices, to a single destination.
 
         Note, if `dest_index` is higher than any of the `sources`, then
@@ -237,15 +222,14 @@ class SignalList(MutableSequence[_T]):
         # `layoutChanged` while *manually* updating model indices with
         # `changePersistentIndexList`.  That becomes much harder to do with
         # nested tree-like models.
-        with self.signals.reordered.blocked():
-            for src, dest in move_plan:
-                self.move(src, dest)
+        for src, dest in move_plan:
+            self.move(src, dest, emit_reordered=False)
 
         self.signals.reordered.emit()
         return len(move_plan)
 
     def _move_plan(
-        self, sources: Iterable[Index], dest_index: int
+        self, sources: Iterable[int | slice], dest_index: int
     ) -> Iterable[tuple[int, int]]:
         """Yield prepared indices for a multi-move.
 
@@ -304,10 +288,14 @@ class SignalList(MutableSequence[_T]):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    import logging
+    from prettyqt import debugging, widgets
 
     app = widgets.app()
     container = SignalList([0])
-    container.signals.changed.connect(print)
-    container[0] = 2
-    app.processEvents()
+    with app.debug_mode():
+        stalker = debugging.Stalker(container.signals, log_level=logging.DEBUG)
+        stalker.hook()
+        container.signals.changed.connect(print)
+        container[0] = 2
+        app.processEvents()
