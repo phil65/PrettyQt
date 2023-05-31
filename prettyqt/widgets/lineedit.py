@@ -43,6 +43,8 @@ ValidatorStr = Literal[
     "float_list",
     "qss",
     "hex",
+    "alphanumeric",
+    "text_length",
 ]
 
 
