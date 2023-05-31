@@ -1,14 +1,10 @@
 from __future__ import annotations
 
-from prettyqt import widgets
+from prettyqt import core, widgets
 from prettyqt.qt import QtGui, QtWidgets
 
 
 class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
-        self.progress_bar = widgets.ProgressBar()
-
     def __add__(self, other: QtGui.QAction | QtWidgets.QWidget) -> StatusBar:
         match other:
             case QtGui.QAction():
@@ -20,13 +16,22 @@ class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
             case _:
                 raise TypeError(other)
 
-    def setup_default_bar(self) -> None:
-        # This is simply to show the bar
-        self.progress_bar.hide()
-        self.progress_bar.setRange(0, 0)
-        self.progress_bar.setFixedSize(200, 20)
-        self.progress_bar.setTextVisible(False)
-        self.addPermanentWidget(self.progress_bar)
+    def add_threadpool_info(self, threadpool: core.ThreadPool):
+        class ThreadPoolLabel(widgets.Label):
+            def update_job_count(self, num_jobs: int):
+                text = f"Running jobs: {num_jobs}" if num_jobs > 0 else "No running jobs"
+                self.set_text(text)
+
+        status_label = ThreadPoolLabel(self)
+        threadpool.job_num_updated.connect(status_label.update_job_count)
+        status_label.update_job_count(threadpool.activeThreadCount())
+        progress_bar = widgets.ProgressBar(self, text_visible=False)
+        progress_bar.hide()
+        progress_bar.setRange(0, 0)
+        progress_bar.setFixedSize(200, 20)
+        threadpool.busy_state_changed.connect(progress_bar.setVisible)
+        self.addPermanentWidget(status_label)
+        self.addPermanentWidget(progress_bar)
 
     def add_widget(self, widget: QtWidgets.QWidget, permanent: bool = False) -> None:
         if permanent:
