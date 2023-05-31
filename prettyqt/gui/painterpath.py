@@ -38,13 +38,13 @@ class PainterPath(QtGui.QPainterPath):
         self.setElementPositionAt(index, *value)
 
     def __iadd__(self, other):
-        if isinstance(
-            other, QtCore.QPoint | QtCore.QRect | QtGui.QPainterPath | QtGui.QRegion
+        if not isinstance(
+            other,
+            QtCore.QPoint | QtCore.QRect | QtGui.QPainterPath | QtGui.QRegion,
         ):
-            self.add(other)
-            return self
-        else:
             raise ValueError(other)
+        self.add(other)
+        return self
 
     def add(
         self, other: QtCore.QPoint | QtCore.QRect | QtGui.QPainterPath | QtGui.QRegion

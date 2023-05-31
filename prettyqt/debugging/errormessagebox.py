@@ -32,9 +32,9 @@ class ErrorMessageBox(widgets.MessageBox):
 
         self._exc = exc
 
-        traceback_button = self.button(widgets.MessageBox.StandardButton.Help)
+        traceback_button = self.get_button("help")
         traceback_button.setText("Show trackback")
-        close_button = self.button(widgets.MessageBox.StandardButton.Close)
+        close_button = self.get_button("close")
         close_button.setText("Quit application")
 
     def exec(self):
@@ -61,11 +61,11 @@ class ErrorMessageBox(widgets.MessageBox):
         return cls.from_exc(e, parent=parent).exec()
 
     def _get_traceback(self):
-        if self._exc is None:
-            tb = traceback.format_exc()
-        else:
-            tb = get_tb_formatter(gui.Font.mono().family())(self._exc, as_html=True)
-        return tb
+        return (
+            traceback.format_exc()
+            if self._exc is None
+            else get_tb_formatter(gui.Font.mono().family())(self._exc, as_html=True)
+        )
 
     @classmethod
     def _excepthook(cls, exc_type: type[Exception], exc_value: Exception, exc_traceback):
@@ -121,8 +121,7 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
                 html = helpers.ansi2html(ansi_string)
                 html = html.replace("\n", "<br>")
                 html = (
-                    f"<span style='font-family: monaco,{font},"
-                    "monospace;'>" + html + "</span>"
+                    f"<span style='font-family: monaco,{font},monospace;'>{html}</span>"
                 )
                 tb_text = html
             else:
@@ -185,8 +184,7 @@ def get_tb_formatter(font: str = "Monospace") -> Callable[[Exception, bool, str]
                 html = re.sub(r"(<tr><td><small.*</tr>)", "<br>\\1<br>", html)
                 # weird 2-part syntax is a workaround for hard-to-grep text.
                 html = html.replace(
-                    "<p>A problem occurred in a Python script.  "
-                    "Here is the sequence of",
+                    "<p>A problem occurred in a Python script. Here is the sequence of",
                     "",
                 )
                 html = html.replace(
