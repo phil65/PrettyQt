@@ -5,6 +5,8 @@ import contextlib
 import logging
 from typing import Any, Literal
 
+from collections.abc import Iterator
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, helpers
@@ -304,6 +306,32 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
     def get_role_names(self) -> dict[int, str]:
         return {i: v.data().decode() for i, v in self.roleNames().items()}
+
+    def iter_tree(
+        self, root_index: core.ModelIndex | None = None
+    ) -> Iterator[core.ModelIndex]:
+        if root_index is None:
+            root_index = self.index(0, 0)
+        if root_index.isValid():
+            yield root_index
+        for i in range(self.rowCount(root_index)):
+            idx = self.index(i, 0, root_index)
+            yield from self.iter_tree(idx)
+
+    def search_tree(
+        self,
+        value: Any,
+        role=constants.DISPLAY_ROLE,
+        root_index: core.ModelIndex | None = None,
+    ) -> Any:
+        if root_index is None:
+            root_index = self.index(0, 0)
+        if self.data(root_index, role) == value:
+            return root_index
+        for i in range(self.rowCount(root_index)):
+            idx = self.index(i, 0, root_index)
+            self.search_tree(value, role, idx)
+        return None
 
 
 class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
