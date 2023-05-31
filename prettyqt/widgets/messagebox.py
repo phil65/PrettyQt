@@ -126,6 +126,11 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
             for b in buttons:
                 self.add_button(b)
 
+    def get_button(
+        self, button: QtWidgets.QMessageBox.StandardButton
+    ) -> QtWidgets.QAbstractButton:
+        return self.button(STANDARD_BUTTON[button])
+
     @classmethod
     def message(
         cls,
