@@ -22,7 +22,7 @@ class HexValidator(gui.Validator):
         except ValueError:
             return self.State.Intermediate, text, pos
         if self._maximum is not None and val > self._maximum:
-            return self.invalid_value(), text, pos
+            return self.State.Invalid, text, pos
         return self.State.Acceptable, text, pos
 
 

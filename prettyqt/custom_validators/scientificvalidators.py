@@ -53,7 +53,7 @@ class ScientificIntegerValidator(BaseScientificValidator):
             return self.State.Intermediate, string, position
 
         if not (group_dict := self.get_group_dict(string)):
-            return self.invalid_value(), "", position
+            return self.State.Invalid, "", position
         if group_dict["match"] == string:
             return self.State.Acceptable, string, position
 
@@ -61,7 +61,7 @@ class ScientificIntegerValidator(BaseScientificValidator):
         if string[position - 1] in "eE-+":
             return self.State.Intermediate, string, position
 
-        return self.invalid_value(), group_dict["match"], position
+        return self.State.Invalid, group_dict["match"], position
 
 
 class ScientificFloatValidator(BaseScientificValidator):
@@ -94,13 +94,13 @@ class ScientificFloatValidator(BaseScientificValidator):
             return (
                 (self.State.Intermediate, string, position)
                 if string[position - 1] in "eE-+." and "i" not in string.lower()
-                else (self.invalid_value(), "", position)
+                else (self.State.Invalid, "", position)
             )
         if group_dict["match"] == string:
             return self.State.Acceptable, string, position
         if string.count(".") > 1:
-            return self.invalid_value(), group_dict["match"], position
+            return self.State.Invalid, group_dict["match"], position
         position = min(position, len(string))
         if string[position - 1] in "eE-+" and "i" not in string.lower():
             return self.State.Intermediate, string, position
-        return self.invalid_value(), group_dict["match"], position
+        return self.State.Invalid, group_dict["match"], position

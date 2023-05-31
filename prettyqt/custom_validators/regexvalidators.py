@@ -46,7 +46,7 @@ class BaseRegexValidator(gui.Validator):
             return self.State.Intermediate, text, pos
         match = self.regex.match(text, partial=True)  # type: ignore
         if match is None:
-            return self.invalid_value(), text, pos
+            return self.State.Invalid, text, pos
         elif match.partial:  # type: ignore
             return self.State.Intermediate, text, pos
         else:
