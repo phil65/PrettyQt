@@ -145,7 +145,7 @@ class SidebarWidget(widgets.MainWindow):
         else:
             self.sidebar.add_separator(text)
 
-    def add_action(self, area: AreaStr = "top", *args, **kwargs):
+    def add_action(self, *args, area: AreaStr = "top", **kwargs):
         act = args[0] if args else gui.Action(**kwargs)
         self.addAction(act)
         button = widgets.ToolButton(self.sidebar)
