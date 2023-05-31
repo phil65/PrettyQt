@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr, prettyprinter
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 CAPITALIZATION = bidict(
@@ -147,7 +147,7 @@ WeightStr = Literal[
 ]
 
 
-class Font(prettyprinter.PrettyPrinter, QtGui.QFont):
+class Font(QtGui.QFont):
     def __repr__(self):
         return get_repr(
             self, self.family(), self.pointSize(), self.weight(), self.italic()

@@ -4,7 +4,7 @@ from typing import Any, Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, prettyprinter
+from prettyqt.utils import InvalidParamError, bidict
 
 
 COORDINATE_MODE = bidict(
@@ -165,7 +165,7 @@ class GradientMixin:
                 self.setColorAt(pos, color.darker(-factor))
 
 
-class Gradient(GradientMixin, prettyprinter.PrettyPrinter, QtGui.QGradient):
+class Gradient(GradientMixin, QtGui.QGradient):
     pass
 
 

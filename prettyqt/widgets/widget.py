@@ -13,7 +13,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, colors, datatypes, prettyprinter
+from prettyqt.utils import InvalidParamError, colors, datatypes
 
 
 if TYPE_CHECKING:
@@ -849,7 +849,7 @@ class WidgetMixin(core.ObjectMixin):
         widget.show()
 
 
-class Widget(WidgetMixin, prettyprinter.PrettyPrinter, QtWidgets.QWidget):
+class Widget(WidgetMixin, QtWidgets.QWidget):
     pass
 
 

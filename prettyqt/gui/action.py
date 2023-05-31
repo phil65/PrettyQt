@@ -7,7 +7,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import bidict, datatypes, get_repr, prettyprinter
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 ACTION_EVENT = bidict(
@@ -243,7 +243,7 @@ class ActionMixin(core.ObjectMixin):
     usage_count = core.Property(int, get_usage_count)
 
 
-class Action(ActionMixin, prettyprinter.PrettyPrinter, QtGui.QAction):
+class Action(ActionMixin, QtGui.QAction):
     pass
 
 

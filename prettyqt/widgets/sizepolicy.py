@@ -5,7 +5,7 @@ from typing import Any, Literal
 from typing_extensions import Self
 
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, get_repr, prettyprinter
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 SIZE_POLICY = bidict(
@@ -65,7 +65,7 @@ ControlTypeStr = Literal[
 ]
 
 
-class SizePolicy(prettyprinter.PrettyPrinter, QtWidgets.QSizePolicy):
+class SizePolicy(QtWidgets.QSizePolicy):
     def __init__(self, *args, **kwargs):
         match args:
             case (str(), str()):

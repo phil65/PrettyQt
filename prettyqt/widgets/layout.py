@@ -8,7 +8,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, get_repr, prettyprinter
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 SIZE_CONSTRAINT = bidict(
@@ -27,7 +27,7 @@ SizeConstraintStr = Literal[
 LayoutTypeStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow"]
 
 
-class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin, prettyprinter.PrettyPrinter):
+class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def __init__(self, *args, margin=None, **kwargs):
         self._next_container = None
         self._stack = []

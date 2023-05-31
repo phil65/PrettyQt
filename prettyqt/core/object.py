@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Callable, Container
+from collections.abc import Callable, Container, Generator
 import contextlib
 
 # import inspect
@@ -11,7 +11,7 @@ from typing import TYPE_CHECKING, Any, TypeVar
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes, get_repr, helpers
+from prettyqt.utils import datatypes, helpers
 
 
 if TYPE_CHECKING:
@@ -75,8 +75,22 @@ class ObjectMixin:
         """
         return {}
 
-    def __repr__(self):  # we already monkeypatch QObject
-        return get_repr(self, self.objectName())
+    def __pretty__(
+        self, fmt: Callable[[Any], Any], **kwargs: Any
+    ) -> Generator[Any, None, None]:
+        yield f"{type(self).__name__}("
+        yield 1
+        for k, v in self.get_properties(only_writable=True).items():
+            yield f"{k}={v!r}"
+            yield 0
+            for ef in self._eventfilters:
+                yield f"Eventfilter={ef.__class__.__name__}"
+                yield 0
+        yield -1
+        yield ")"
+
+    # def __repr__(self):  # we already monkeypatch QObject
+    #     return get_repr(self, self.objectName())
 
     def __setstate__(self, state):
         self.set_properties(state)
