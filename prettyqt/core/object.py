@@ -260,10 +260,12 @@ class ObjectMixin:
         return timer
 
     def get_properties(
-        self, include_super: bool = True, cast: bool = True
+        self, include_super: bool = True, cast: bool = True, only_writable: bool = False
     ) -> dict[str, Any]:
         metaobj = self.get_metaobject()
-        props = metaobj.get_properties(include_super=include_super)
+        props = metaobj.get_properties(
+            include_super=include_super, only_writable=only_writable
+        )
         return {
             i.name(): datatypes.make_serializable(i.read(self))
             for i in props
