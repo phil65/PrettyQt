@@ -91,13 +91,13 @@ class SignalList(MutableSequence[_T]):
 
     def _delitem_indices(self, key: int | slice) -> Iterable[tuple[SignalList[_T], int]]:
         # returning (self, int) allows subclasses to pass nested members
-        if isinstance(key, int):
-            yield (self, key if key >= 0 else key + len(self))
-        elif isinstance(key, slice):
-            yield from ((self, i) for i in range(*key.indices(len(self))))
-        else:
-            n = repr(type(key).__name__)
-            raise TypeError(f"SignalList indices must be integers or slices, not {n}")
+        match key:
+            case int():
+                yield (self, key if key >= 0 else key + len(self))
+            case slice():
+                yield from ((self, i) for i in range(*key.indices(len(self))))
+            case _:
+                raise TypeError(key)
 
     def _pre_insert(self, value: _T) -> _T:
         """Validate and or modify values prior to inserted."""
@@ -145,10 +145,7 @@ class SignalList(MutableSequence[_T]):
         if self._hashable:
             return id(self)
         name = self.__class__.__name__
-        raise TypeError(
-            f"unhashable type: {name!r}. "
-            f"Create with {name}(..., hashable=True) if you need hashability"
-        )
+        raise TypeError(f"unhashable type: {name!r}.")
 
     def reverse(self, *, emit_individual_events: bool = False) -> None:
         """Reverse list *IN PLACE*."""
@@ -163,8 +160,7 @@ class SignalList(MutableSequence[_T]):
     ) -> bool:
         """Insert object at `src_index` before `dest_index`.
 
-        Both indices refer to the list prior to any object removal
-        (pre-move space).
+        Both indices refer to the list prior to any object removal (pre-move space).
         """
         if dest_index < 0:
             dest_index += len(self) + 1
@@ -189,26 +185,20 @@ class SignalList(MutableSequence[_T]):
         the resulting position of the moved objects after the move operation
         is complete will be lower than `dest_index`.
 
-        Parameters
-        ----------
-        sources : Iterable[Union[int, slice]]
-            A sequence of indices
-        dest_index : int, optional
-            The destination index.  All sources will be inserted before this
-            index (in pre-move space), by default 0... which has the effect of
-            "bringing to front" everything in `sources`, or acting as a
-            "reorder" method if `sources` contains all indices.
+        Arguments:
+            sources:  A sequence of indices
+            dest_index: The destination index. All sources will be inserted before this
+                        index (in pre-move space), by default 0... which has the effect
+                        of "bringing to front" everything in `sources`, or acting as a
+                        "reorder" method if `sources` contains all indices.
 
-        Returns
-        -------
-        int
+        Returns:
             The number of successful move operations completed.
 
-        Raises
-        ------
-        TypeError
-            If the destination index is a slice, or any of the source indices
-            are not `int` or `slice`.
+        Raises:
+            TypeError
+                If the destination index is a slice, or any of the source indices
+                are not `int` or `slice`.
         """
         # calling list here makes sure that there are no index errors up front
         move_plan = list(self._move_plan(sources, dest_index))
@@ -242,26 +232,22 @@ class SignalList(MutableSequence[_T]):
 
         This is useful for a drag-drop operation with a QtModel/View.
 
-        Parameters
-        ----------
-        sources : Iterable[tuple[int, ...]]
-            An iterable of tuple[int] that should be moved to `dest_index`.
-        dest_index : Tuple[int]
-            The destination for sources.
+        Arguments:
+            sources: An iterable of tuple[int] that should be moved to `dest_index`.
+            dest_index: The destination for sources.
         """
         if isinstance(dest_index, slice):
             raise TypeError("Destination index may not be a slice")  # pragma: no cover
 
         to_move: list[int] = []
         for idx in sources:
-            if isinstance(idx, slice):
-                to_move.extend(list(range(*idx.indices(len(self)))))
-            elif isinstance(idx, int):
-                to_move.append(idx)
-            else:
-                raise TypeError(
-                    "Can only move integer or slice indices"
-                )  # pragma: no cover
+            match idx:
+                case slice():
+                    to_move.extend(list(range(*idx.indices(len(self)))))
+                case int():
+                    to_move.append(idx)
+                case _:
+                    raise TypeError(idx)
 
         to_move = list(dict.fromkeys(to_move))
 
@@ -272,17 +258,11 @@ class SignalList(MutableSequence[_T]):
         popped: list[int] = []
         for i, src in enumerate(to_move):
             if src != dest_index:
-                # we need to decrement the src_i by 1 for each time we have
-                # previously pulled items out from in front of the src_i
                 src -= sum(x <= src for x in popped)
-                # if source is past the insertion point, increment src for each
-                # previous insertion
                 if src >= dest_index:
                     src += i
                 yield src, dest_index + d_inc
-
             popped.append(src)
-            # if the item moved up, icrement the destination index
             if dest_index <= src:
                 d_inc += 1
 
