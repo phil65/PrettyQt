@@ -15,6 +15,23 @@ logger = logging.getLogger(__name__)
 T = TypeVar("T", bound=QtCore.QObject)
 
 
+class EventSignaller(core.Object):
+    signal = core.Signal(QtCore.QEvent)
+
+    def __init__(self, obj: QtCore.QObject, **kwargs):
+        super().__init__(**kwargs)
+        self._obj = obj
+
+    def __getattr__(self, name):
+        typ = getattr(QtCore.QEvent.Type, name)
+        self.ec = self._obj.add_callback_for_event(self._on_event_detected, include=typ)
+        return self.signal
+
+    def _on_event_detected(self, event: QtCore.QEvent):
+        self.signal.emit(event)
+        return False
+
+
 class Stalker(core.Object):
     # @core.Enum
     # class LogLevel(enum.IntEnum):
@@ -58,17 +75,22 @@ class Stalker(core.Object):
     def __exit__(self, typ, value, traceback):
         self.unhook()
 
+    @property
+    def eventsignals(self):
+        return EventSignaller(self._obj)
+
     def hook(self):
         # enable event logging by installing EventCatcher, which includes logging
         self.eventcatcher = self._obj.add_callback_for_event(
             self._on_event_detected, include=self.include, exclude=self.exclude
         )
         # enable logging of signals emitted by connecting all signals to our fn
-        for signal in self._meta.get_signals(only_notifiers=True):
+        for signal in self._meta.get_signals(only_notifiers=False):
             signal_instance = self._obj.__getattribute__(signal.get_name())
             fn = self._on_signal_emitted(signal)
             handle = signal_instance.connect(fn)
             self._handles.append(handle)
+        self.log(f"Stalking {len(self._handles)} signals")
         # enable logging of all signal (dis)connections by hooking to connectNotify
         self.old_connectNotify = self._obj.connectNotify
         self.old_disconnectNotify = self._obj.disconnectNotify
@@ -85,7 +107,7 @@ class Stalker(core.Object):
         self.old_disconnectNotify = None
         for handle in self._handles:
             self._obj.disconnect(handle)
-        self._handles = None
+        self._handles = []
         self._obj.removeEventFilter(self.eventcatcher)
 
     def log(self, message: str):
@@ -152,5 +174,6 @@ if __name__ == "__main__":
     widget.show()
     with app.debug_mode():
         with Stalker(widget, log_level=logging.INFO) as stalker:
-            app.sleep(3)
+            stalker.eventsignals.MouseButtonPress.connect(print)
+            app.sleep(5)
         app.main_loop()
