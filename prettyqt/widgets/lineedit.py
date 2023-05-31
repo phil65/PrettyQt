@@ -45,7 +45,17 @@ ValidatorStr = Literal[
     "hex",
     "alphanumeric",
     "text_length",
+    "website",
+    "email",
+    "not_strict",
 ]
+
+WEB_REGEX = (
+    r"https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}"
+    r"\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)"
+)
+
+MAIL_REGEX = r"[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+"
 
 
 class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
@@ -124,18 +134,33 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     def set_validator(
         self,
         validator: QtGui.QValidator | ValidatorStr | QtCore.QRegularExpression | None,
+        strict: bool = True,
         **kwargs,
     ) -> QtGui.QValidator:
         match validator:
+            case "email":
+                return self.set_validator(
+                    "regular_expression", strict=strict, regular_expression=MAIL_REGEX
+                )
+            case "website":
+                return self.set_validator(
+                    "regular_expression", strict=strict, regular_expression=WEB_REGEX
+                )
             case str():
                 ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
                 validator = ValidatorClass(**kwargs)
             case QtCore.QRegularExpression():
-                self.set_validator("regular_expression", regular_expression=validator)
+                return self.set_validator(
+                    "regular_expression", strict=strict, regular_expression=validator
+                )
             case None | QtGui.QValidator():
                 pass
             case _:
                 raise ValueError(validator)
+        if not strict:
+            from prettyqt import custom_validators
+
+            validator = custom_validators.NotStrictValidator(validator)
         self.setValidator(validator)
         self._set_validation_color()
         return validator
@@ -214,6 +239,7 @@ if __name__ == "__main__":
     widget = LineEdit()
     action = gui.Action(text="hallo", icon="mdi.folder")
     # widget.add_action(action)
+    widget.set_validator("website")
     widget.setPlaceholderText("test")
     widget.setClearButtonEnabled(True)
     # widget.set_regex_validator("[0-9]+")

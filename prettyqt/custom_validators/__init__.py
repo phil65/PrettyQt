@@ -19,6 +19,7 @@ from .pythoncodevalidator import PythonCodeValidator
 from .jsonvalidator import JsonValidator
 from .colorvalidator import ColorValidator
 from .alphanumericvalidator import AlphaNumericValidator
+from .notstrictvalidator import NotStrictValidator
 
 __all__ = [
     "PathValidator",
@@ -38,4 +39,5 @@ __all__ = [
     "JsonValidator",
     "ColorValidator",
     "AlphaNumericValidator",
+    "NotStrictValidator",
 ]
