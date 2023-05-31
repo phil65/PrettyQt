@@ -122,11 +122,20 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         self.set_validator(val)
 
     def set_validator(
-        self, validator: QtGui.QValidator | ValidatorStr | None, **kwargs
+        self,
+        validator: QtGui.QValidator | ValidatorStr | QtCore.QRegularExpression | None,
+        **kwargs,
     ) -> QtGui.QValidator:
-        if isinstance(validator, str):
-            ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
-            validator = ValidatorClass(**kwargs)
+        match validator:
+            case str():
+                ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
+                validator = ValidatorClass(**kwargs)
+            case QtCore.QRegularExpression():
+                self.set_validator("regular_expression", regular_expression=validator)
+            case None | QtGui.QValidator():
+                pass
+            case _:
+                raise ValueError(validator)
         self.setValidator(validator)
         self._set_validation_color()
         return validator
