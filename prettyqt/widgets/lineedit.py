@@ -41,6 +41,8 @@ ValidatorStr = Literal[
     "regex_pattern",
     "int_list",
     "float_list",
+    "qss",
+    "hex",
 ]
 
 

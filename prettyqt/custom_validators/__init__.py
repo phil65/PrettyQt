@@ -11,6 +11,8 @@ from .pathvalidator import PathValidator
 from .integervalidator import IntegerValidator
 from .regexvalidators import FloatListValidator, IntListValidator
 from .regexpatternvalidator import RegexPatternValidator
+from .hexvalidator import HexValidator
+from .qssvalidator import QssValidator
 
 __all__ = [
     "PathValidator",
@@ -21,4 +23,6 @@ __all__ = [
     "NotZeroValidator",
     "CompositeValidator",
     "RegexPatternValidator",
+    "HexValidator",
+    "QssValidator",
 ]
