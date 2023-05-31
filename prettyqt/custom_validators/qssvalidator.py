@@ -16,7 +16,7 @@ class QssValidator(gui.Validator):
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:
         try:
-            if parser.parse(text):
+            if not text or parser.parse(text):
                 return self.State.Acceptable, text, pos
         except ValueError:
             pass
