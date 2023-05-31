@@ -27,7 +27,7 @@ class IntegerValidator(gui.Validator):
             right = float("inf") if self.range[1] is None else self.range[1]
             if left <= int(text) <= right:
                 return self.State.Acceptable, text, len(text)
-        return self.State.Invalid, text, len(text)
+        return self.invalid_value(), text, len(text)
 
 
 if __name__ == "__main__":

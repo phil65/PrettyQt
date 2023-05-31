@@ -27,7 +27,7 @@ class TextLengthValidator(gui.Validator):
             return self.State.Acceptable, text, len(text)
         if len(text) <= right:
             return self.State.Intermediate, text, len(text)
-        return self.State.Invalid, text, len(text)
+        return self.invalid_value(), text, len(text)
 
 
 if __name__ == "__main__":

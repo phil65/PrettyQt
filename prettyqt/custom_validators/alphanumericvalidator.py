@@ -12,7 +12,7 @@ class AlphaNumericValidator(gui.Validator):
     def validate(self, text: str, pos: int = 0):
         if text.replace("_", "").isalnum():
             return self.State.Acceptable, text, pos
-        return self.State.Invalid, text, pos
+        return self.invalid_value(), text, pos
 
 
 if __name__ == "__main__":
