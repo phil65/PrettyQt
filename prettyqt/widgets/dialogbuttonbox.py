@@ -143,7 +143,9 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
         """
         return constants.ORIENTATION.inverse[self.orientation()]
 
-    def add_default_buttons(self, buttons: Sequence[StandardButtonStr]):
+    def add_default_buttons(
+        self, buttons: Sequence[StandardButtonStr]
+    ) -> list[QtWidgets.QPushButton]:
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(
