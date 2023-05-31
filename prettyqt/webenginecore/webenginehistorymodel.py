@@ -4,7 +4,7 @@ import os
 from typing import Literal
 
 from prettyqt import core, pdf
-from prettyqt.qt import QtCore, QtWebEngineCore
+from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import bidict, datatypes
 
 
@@ -26,8 +26,8 @@ RoleStr = Literal[
 class WebEngineHistoryModel(
     core.AbstractListModelMixin, QtWebEngineCore.QWebEngineHistoryModel
 ):
-    def __init__(self, parent: QtCore.QObject | None = None):
-        super().__init__(parent)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.setDocument(pdf.PdfDocument(self))
 
     def set_document(self, document: datatypes.PathType | QtWebEngineCore.QPdfDocument):
