@@ -6,8 +6,19 @@ from prettyqt.utils import InvalidParamError
 
 
 class TableViewMixin(widgets.AbstractItemViewMixin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        *args,
+        alternating_row_colors: bool = True,
+        word_wrap: bool = False,
+        **kwargs,
+    ):
+        super().__init__(
+            *args,
+            alternating_row_colors=alternating_row_colors,
+            word_wrap=word_wrap,
+            **kwargs,
+        )
         class_name = type(self).__name__
         self.set_id(class_name)
         self.setHorizontalHeader(widgets.HeaderView("horizontal", parent=self))

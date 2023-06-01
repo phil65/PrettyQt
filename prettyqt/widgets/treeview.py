@@ -5,21 +5,33 @@ from prettyqt.qt import QtWidgets
 
 
 class TreeViewMixin(widgets.AbstractItemViewMixin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
+    def __init__(
+        self,
+        *args,
+        animated: bool = True,
+        root_is_decorated: bool = True,
+        all_columns_show_focus: bool = True,
+        uniform_row_heights: bool = True,
+        alternating_row_colors: bool = True,
+        word_wrap: bool = False,
+        selection_mode: str = "extended",
+        **kwargs,
+    ):
+        super().__init__(
+            *args,
+            animated=animated,
+            root_is_decorated=root_is_decorated,
+            all_columns_show_focus=all_columns_show_focus,
+            uniform_row_heights=uniform_row_heights,
+            alternating_row_colors=alternating_row_colors,
+            word_wrap=word_wrap,
+            selection_mode=selection_mode,
+            **kwargs,
+        )
         class_name = type(self).__name__
         self.set_id(class_name)
-        # visual settings
-        self.setAnimated(True)
-        self.setRootIsDecorated(False)
-        self.setAllColumnsShowFocus(True)
-        self.setUniformRowHeights(True)
-        self.setAlternatingRowColors(True)
-        self.setWordWrap(False)
-
         # misc
         self.h_header = widgets.HeaderView("horizontal", parent=self)
-        self.set_selection_mode("extended")
 
     @property
     def h_header(self):
