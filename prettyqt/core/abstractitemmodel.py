@@ -199,14 +199,27 @@ class AbstractItemModelMixin(core.ObjectMixin):
         yield None
         self.endResetModel()
 
-    def is_checkstate_column(self, column: int) -> bool:
-        to_check = min(3, self.rowCount())
+    def get_column_type(
+        self,
+        column: int,
+        rows_to_check: int = 5,
+        role=constants.DISPLAY_ROLE,
+    ) -> type | None:
+        to_check = min(rows_to_check, self.rowCount())
+        if to_check == 0:
+            return None
         indexes = [self.index(row, column) for row in range(to_check)]
-        checkstate_values = [
-            self.data(index, role=constants.CHECKSTATE_ROLE) for index in indexes
-        ]
-        text_values = [self.data(index, role=constants.DISPLAY_ROLE) for index in indexes]
-        return None not in checkstate_values and not any(text_values)
+        values = [self.data(i, role=role) for i in indexes]
+        if all(isinstance(i, bool) for i in values):
+            return bool
+        if all(isinstance(i, str) for i in values):
+            return str
+        if all(isinstance(i, int) for i in values):
+            return int
+        if all(isinstance(i, float) for i in values):
+            return float
+        check_values = [self.data(i, role=constants.CHECKSTATE_ROLE) for i in indexes]
+        return bool if None not in check_values else None
 
     def update_row(self, row: int):
         start_index = self.index(row, 0)

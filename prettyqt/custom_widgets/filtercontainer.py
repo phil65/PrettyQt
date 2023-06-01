@@ -26,13 +26,13 @@ class FilterContainer(widgets.Widget):
         self._filter_scrollarea = widgets.ScrollArea(
             horizontal_scroll_bar_policy="always_off", frame_shape="no_frame"
         )
-        self._topline_layout = widgets.HBoxLayout(margin=0, spacing=0)
         self._filter_scrollarea.set_size_policy("expanding", "minimum")
+        self._topline_layout = widgets.HBoxLayout(margin=0, spacing=0)
         self._topline_layout.add(self.spacer)
         self._topline_layout.add(self._filter_scrollarea)
         parent.h_header.sectionResized.connect(self._on_section_resize)
         for i in range(parent.h_header.count()):
-            if model.is_checkstate_column(i):
+            if model.get_column_type(i) is bool:
                 widget = widgets.ComboBox(margin=0, object_name=f"filter_combo_{i}")
                 widget.add_items(
                     {None: "Show all", True: "Show True", False: "Show False"}
