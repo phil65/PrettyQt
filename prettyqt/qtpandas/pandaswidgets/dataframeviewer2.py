@@ -154,8 +154,8 @@ class Level4ExtModel(core.AbstractTableModel):
                 return self._font
 
 
-class ExtTableView(widgets.Widget):
-    def __init__(self, parent=None):
+class DataFrameViewer(widgets.Widget):
+    def __init__(self, df=None, parent=None):
         super().__init__(parent=parent)
         self._selection_rec = False
         self._model = None
@@ -224,13 +224,19 @@ class ExtTableView(widgets.Widget):
 
         # autosize columns on-demand
         self._autosized_cols = set()
-        self._max_autosize_ms = None
+        self._max_autosize_ms = MAX_AUTOSIZE_MS
         self.hscroll.sliderMoved.connect(self._resize_visible_columns_to_contents)
         self.table_data.installEventFilter(self)
 
         avg_width = self.fontMetrics().averageCharWidth()
         self.min_trunc = avg_width * MIN_TRUNC_CHARS
         self.max_width = avg_width * MAX_WIDTH_CHARS
+        if df is not None:
+            self.set_df(df)
+
+    def set_df(self, df):
+        model = ExtFrameModel(df)
+        self.set_model(model)
 
     def _select_columns(self, source, dest, deselect):
         if self._selection_rec:
@@ -309,18 +315,13 @@ class ExtTableView(widgets.Widget):
         self.table_level.setFixedWidth(idx_width)
         self._resize_visible_columns_to_contents()
 
-    def _reset_model(self, table, model):
-        old_sel_model = table.selectionModel()
-        table.set_model(model)
-        if old_sel_model:
-            del old_sel_model
-
     def set_auto_size_limit(self, limit_ms):
         self._max_autosize_ms = limit_ms
 
     def set_model(self, model, relayout=True):
         self._model = model
-        self._reset_model(self.table_data, Data4ExtModel(model))
+        data_model = Data4ExtModel(model)
+        self.table_data.set_model(data_model)
         sel_model = self.table_data.selectionModel()
         sel_model.selectionChanged.connect(
             lambda *_: self._select_columns(
@@ -334,9 +335,8 @@ class ExtTableView(widgets.Widget):
         )
         sel_model.currentColumnChanged.connect(self._resize_current_column_to_content)
 
-        self._reset_model(
-            self.table_level, Level4ExtModel(model, self.palette(), self.font())
-        )
+        level_model = Level4ExtModel(model, self.palette(), self.font())
+        self.table_level.set_model(level_model)
         sel_model = self.table_level.selectionModel()
         sel_model.selectionChanged.connect(
             lambda *_: self._select_columns(
@@ -349,7 +349,8 @@ class ExtTableView(widgets.Widget):
             )
         )
 
-        self._reset_model(self.table_header, Header4ExtModel(model, 0, self.palette()))
+        header_model = Header4ExtModel(model, 0, self.palette())
+        self.table_header.set_model(header_model)
         sel_model = self.table_header.selectionModel()
         sel_model.selectionChanged.connect(
             lambda *_: self._select_columns(
@@ -362,7 +363,8 @@ class ExtTableView(widgets.Widget):
             )
         )
 
-        self._reset_model(self.table_index, Header4ExtModel(model, 1, self.palette()))
+        index_model = Header4ExtModel(model, 1, self.palette())
+        self.table_index.set_model(index_model)
         sel_model = self.table_index.selectionModel()
         sel_model.selectionChanged.connect(
             lambda *_: self._select_rows(
@@ -459,11 +461,9 @@ if __name__ == "__main__":
     ]
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
     df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
-    model = ExtFrameModel(df)
-    APP = widgets.app()
-    table = ExtTableView()
-    table.set_auto_size_limit(MAX_AUTOSIZE_MS)
-    table.set_model(model, relayout=False)
+    app = widgets.app()
+    table = DataFrameViewer()
+    table.set_df(df)
     table.resizeColumnsToContents()
     table.show()
-    APP.main_loop()
+    app.main_loop()

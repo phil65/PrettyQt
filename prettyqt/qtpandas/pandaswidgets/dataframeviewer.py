@@ -128,13 +128,9 @@ class DataFrameViewer(widgets.Widget):
         self.layout_grid[1, 2] = TrackingSpacer(ref_y=self.table_index.h_header)
         self.layout_grid[0, 0] = widgets.SpacerItem(0, 0, "expanding", "expanding")
         if df is not None:
-            self.load(df)
+            self.set_df(df)
 
     def set_df(self, df, read_only: bool = False, color_values: bool = False):
-        if df is not None:
-            self.load(df)
-
-    def load(self, df):
         self.df = df
         model = pandasmodels.DataTableModel(df)
         self.table_data.set_model(model)
@@ -142,8 +138,8 @@ class DataFrameViewer(widgets.Widget):
         self.table_data.selectionModel().selectionChanged.connect(
             self._on_selection_changed
         )
-        self.table_columns.load(df)
-        self.table_index.load(df)
+        self.table_columns.set_df(df)
+        self.table_index.set_df(df)
         # Toggle level names
         if not (any(df.columns.names) or df.columns.name):
             self.table_columns.v_header.setFixedWidth(0)
@@ -180,31 +176,26 @@ class DataFrameViewer(widgets.Widget):
     # def on_column_selection_changed(self, selected, deselected):
     #     if self.table_columns.hasFocus():
     #         selected = self.table_columns.get_higher_levels()
-    #         print(selected)
     #         self.table_data.selectionModel().select(
     #             selected,
     #             SelectionFlag.Columns
     #             | SelectionFlag.ClearAndSelect,
     #         )
-    #     self.table_columns.on_selection_change(selected, deselected)
+    #     self.table_columns._on_selection_changed(selected, deselected)
 
     # def on_index_selection_changed(self, selected, deselected):
     #     if not self.table_index.hasFocus():
     #         return
     #     selected = self.table_index.get_higher_levels()
-    #     print(selected)
     #     self.table_data.selectionModel().select(
     #         selected,
     #         SelectionFlag.Rows
     #         | SelectionFlag.ClearAndSelect,
     #     )
-    #     self.table_index.on_selection_change(selected, deselected)
+    #     self.table_index._on_selection_changed(selected, deselected)
 
     def on_clicked(self, ix: QtCore.QModelIndex):
-        # When a header is clicked, sort the DataFrame by that column
-        df_sorted = self.df.sort_values(self.df.columns[ix.column()])
-
-        self.df = df_sorted
+        self.df = self.df.sort_values(self.df.columns[ix.column()])
         self.data_changed()
 
     def showEvent(self, event: QtGui.QShowEvent):
@@ -412,10 +403,10 @@ class HeaderView(widgets.TableView):
             self.h_header.setHighlightSections(False)
         df = parent.df
         if df is not None:
-            self.load(df)
+            self.set_df(df)
             self.resize(self.sizeHint())
 
-    def load(self, df):
+    def set_df(self, df):
         if self.is_horizontal():
             model = pandasmodels.HorizontalHeaderModel(df)
         else:
