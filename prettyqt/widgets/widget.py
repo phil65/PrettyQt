@@ -24,6 +24,15 @@ LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow",
 
 QWIDGETSIZE_MAX = 16777215  # QtWidgets.QWIDGETSIZE_MAX
 
+PositionPossibilityType = (
+    Literal["parent", "window", "screen", "mouse"]
+    | QtWidgets.QWidget
+    | QtCore.QRect
+    | QtCore.QPoint
+    | tuple[int, int]
+    | tuple[int, int, int, int]
+)
+
 
 class WidgetMixin(core.ObjectMixin):
     box: QtWidgets.QLayout
@@ -630,12 +639,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def position_on(
         self,
-        where: Literal["parent", "window", "screen", "mouse"]
-        | QtWidgets.QWidget
-        | QtCore.QRect
-        | QtCore.QPoint
-        | tuple[int, int]
-        | tuple[int, int, int, int],
+        where: PositionPossibilityType,
         how: Literal[
             "center",
             "top",
