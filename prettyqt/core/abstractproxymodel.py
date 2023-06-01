@@ -46,6 +46,32 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
         proxy_root_index = self.mapFromSource(core.ModelIndex())
         return self.index(0, 0, proxy_root_index)
 
+    def remove(self):
+        parent = self.parent()
+        models = parent.get_models()
+        idx = models.index(self)
+        if idx == len(models) - 1:
+            parent.set_model(models[idx - 1])
+            self.setSourceModel(None)
+        elif idx == 0 and len(models) > 0:
+            parent.set_model(models[1])
+        elif idx > 0 and len(models) > 2:
+            models[idx - 1].setSourceModel(models[idx + 1])
+            self.setSourceModel(None)
+
 
 class AbstractProxyModel(AbstractProxyModelMixin, QtCore.QAbstractProxyModel):
     pass
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    table = widgets.TableView()
+    model = widgets.FileSystemModel(parent=table)
+    model = model.proxifier.get_proxy("read_only")
+    model = model2 = model.proxifier.get_proxy("appearance")
+    model = model.proxifier.get_proxy("identity")
+    table.set_model(model)
+    model2.remove()

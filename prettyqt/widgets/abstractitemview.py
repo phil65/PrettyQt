@@ -195,12 +195,14 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                 model = model.sourceModel()
         return model
 
-    def get_proxies(self) -> list[QtCore.QAbstractProxyModel]:
+    def get_models(self, proxies_only: bool = False) -> list[QtCore.QAbstractProxyModel]:
         model = self.model()
         models = []
         while isinstance(model, QtCore.QAbstractProxyModel):
             models.append(model)
             model = model.sourceModel()
+        if (not proxies_only) and model is not None:
+            models.append(model)
         return models
 
     def set_current_index(
