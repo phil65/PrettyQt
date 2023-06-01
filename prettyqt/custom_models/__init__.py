@@ -24,6 +24,7 @@ from .checkableproxymodel import CheckableProxyModel
 from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
+from .readonlyproxymodel import ReadOnlyProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -49,4 +50,5 @@ __all__ = [
     "FlattenedTreeProxyModel",
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",
+    "ReadOnlyProxyModel",
 ]

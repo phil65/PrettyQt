@@ -43,6 +43,7 @@ ProxyStr = Literal[
     "subsequence",
     "appearance",
     "column_join",
+    "read_only",
 ]
 
 
@@ -246,7 +247,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
-        first = first if first is not None else 0
+        first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginRemoveRows(parent, first, last)
         yield None
@@ -260,7 +261,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
-        first = first if first is not None else 0
+        first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginRemoveColumns(parent, first, last)
         yield None
@@ -281,7 +282,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
-        first = first if first is not None else 0
+        first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginInsertRows(parent, first, last)
         yield None
@@ -303,7 +304,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         parent: QtCore.QModelIndex | None = None,
     ):
         parent = QtCore.QModelIndex() if parent is None else parent
-        first = first if first is not None else 0
+        first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginInsertColumns(parent, first, last)
         yield None
