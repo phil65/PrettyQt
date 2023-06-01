@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class TreeViewMixin(widgets.AbstractItemViewMixin):
@@ -43,6 +43,12 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
 
     def expand_all(self):
         self.expandAll()
+
+    def show_root(self, value: bool):
+        if value:
+            self.setRootIndex(QtCore.QModelIndex())
+        else:
+            self.setRootIndex(self.model().index(0, 0))
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
         model = self.model()
