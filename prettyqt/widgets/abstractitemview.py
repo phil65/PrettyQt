@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Generator
 import logging
+import time
 from typing import Any, Literal
 
 from collections.abc import Iterator
@@ -630,6 +631,23 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         for i in range(model.rowCount(index)):
             idx = model.index(i, 0, index)
             yield from self.iter_tree(idx)
+
+    def get_size_hint_for_column(self, col: int, limit_ms: int | None = None):
+        # TODO: use current chunk boundaries, do not start from the beginning
+        max_row = self.model().rowCount()
+        lm_start = time.perf_counter()
+        lm_row = 64 if limit_ms else max_row
+        max_width = 0
+        for row in range(max_row):
+            v = self.sizeHintForIndex(self.model().index(row, col))
+            max_width = max(max_width, v.width())
+            if row > lm_row:
+                lm_now = time.perf_counter()
+                lm_elapsed = (lm_now - lm_start) * 1000
+                if lm_elapsed >= limit_ms:
+                    break
+                lm_row = int((row / lm_elapsed) * limit_ms)
+        return max_width
 
 
 class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
