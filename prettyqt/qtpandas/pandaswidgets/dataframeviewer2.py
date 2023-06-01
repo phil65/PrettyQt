@@ -12,7 +12,9 @@ MAX_WIDTH_CHARS = 64  # Maximum size (in characters) given to columns
 SelectionFlag = core.ItemSelectionModel.SelectionFlag
 
 
-class ExtFrameModel:
+class DataFrameModel:
+    """Non-qt model, gets passed to our "real" models."""
+
     def __init__(self, data):
         super().__init__()
         self._data = data
@@ -25,20 +27,22 @@ class ExtFrameModel:
     def header_shape(self):
         return (len(self._data.columns.names), len(self._data.index.names))
 
-    def data(self, y, x):
+    def data(self, y: int, x: int):
         return self._data.iat[y, x]
 
-    def header(self, axis, x, level=0):
-        ax = self._data.columns if axis == 0 else self._data.index
+    def header(self, axis: constants.OrientationStr, x, level: int = 0):
+        ax = self._data.columns if axis == "horizontal" else self._data.index
         return ax.values[x][level] if hasattr(ax, "levels") else ax.values[x]
 
-    def name(self, axis, level):
-        ax = self._data.columns if axis == 0 else self._data.index
+    def name(self, axis: constants.OrientationStr, level):
+        ax = self._data.columns if axis == "horizontal" else self._data.index
         name = ax.names[level]
         return name if name is not None else f"L{str(level)}"
 
 
-class Data4ExtModel(core.AbstractTableModel):
+class DataFrameDataModel(core.AbstractTableModel):
+    """Model for table data."""
+
     def __init__(self, model):
         super().__init__()
         self._model = model
@@ -58,13 +62,15 @@ class Data4ExtModel(core.AbstractTableModel):
                 return "" if pd.isnull(val) else str(val)
 
 
-class Header4ExtModel(core.AbstractTableModel):
+class DataFrameHeaderModel(core.AbstractTableModel):
+    """Model for the two index tables."""
+
     def __init__(self, model, axis, palette):
         super().__init__()
         self._model = model
         self.axis = axis
         self._palette = palette
-        if self.axis == 0:
+        if self.axis == "horizontal":
             self._shape = (self._model.header_shape[0], self._model.shape[1])
         else:
             self._shape = (self._model.shape[0], self._model.header_shape[1])
@@ -82,9 +88,17 @@ class Header4ExtModel(core.AbstractTableModel):
             case constants.ALIGNMENT_ROLE, constants.VERTICAL:
                 return constants.ALIGN_RIGHT | constants.ALIGN_V_CENTER
             case constants.DISPLAY_ROLE, constants.HORIZONTAL:
-                return section if self.axis == 0 else self._model.name(1, section)
+                return (
+                    section
+                    if self.axis == "horizontal"
+                    else self._model.name("vertical", section)
+                )
             case constants.DISPLAY_ROLE, constants.VERTICAL:
-                return section if self.axis == 1 else self._model.name(0, section)
+                return (
+                    section
+                    if self.axis == "vertical"
+                    else self._model.name("horizontal", section)
+                )
 
     def data(self, index, role):
         if (
@@ -95,7 +109,7 @@ class Header4ExtModel(core.AbstractTableModel):
             return None
         row, col = (
             (index.row(), index.column())
-            if self.axis == 0
+            if self.axis == "horizontal"
             else (index.column(), index.row())
         )
         match role:
@@ -108,7 +122,9 @@ class Header4ExtModel(core.AbstractTableModel):
                 return "" if pd.isnull(val) else str(val)
 
 
-class Level4ExtModel(core.AbstractTableModel):
+class DataFrameLevelModel(core.AbstractTableModel):
+    """Top left corner."""
+
     def __init__(self, model, palette, font):
         super().__init__()
         self._model = model
@@ -143,9 +159,9 @@ class Level4ExtModel(core.AbstractTableModel):
         b = self._model.header_shape[1] - 1
         match role:
             case constants.DISPLAY_ROLE if index.row() == a:
-                return str(self._model.name(1, index.column()))
+                return str(self._model.name("vertical", index.column()))
             case constants.DISPLAY_ROLE if index.column() == b:
-                return str(self._model.name(0, index.row()))
+                return str(self._model.name("horizontal", index.row()))
             case constants.FOREGROUND_ROLE:
                 return self._foreground
             case constants.BACKGROUND_ROLE:
@@ -157,6 +173,8 @@ class Level4ExtModel(core.AbstractTableModel):
 class DataFrameViewer(widgets.Widget):
     def __init__(self, df=None, parent=None):
         super().__init__(parent=parent)
+        if df is None:
+            df = pd.DataFrame()
         self._selection_rec = False
         self._model = None
 
@@ -235,7 +253,7 @@ class DataFrameViewer(widgets.Widget):
             self.set_df(df)
 
     def set_df(self, df):
-        model = ExtFrameModel(df)
+        model = DataFrameModel(df)
         self.set_model(model)
 
     def _select_columns(self, source, dest, deselect):
@@ -320,7 +338,7 @@ class DataFrameViewer(widgets.Widget):
 
     def set_model(self, model, relayout=True):
         self._model = model
-        data_model = Data4ExtModel(model)
+        data_model = DataFrameDataModel(model)
         self.table_data.set_model(data_model)
         sel_model = self.table_data.selectionModel()
         sel_model.selectionChanged.connect(
@@ -335,7 +353,7 @@ class DataFrameViewer(widgets.Widget):
         )
         sel_model.currentColumnChanged.connect(self._resize_current_column_to_content)
 
-        level_model = Level4ExtModel(model, self.palette(), self.font())
+        level_model = DataFrameLevelModel(model, self.palette(), self.font())
         self.table_level.set_model(level_model)
         sel_model = self.table_level.selectionModel()
         sel_model.selectionChanged.connect(
@@ -349,7 +367,7 @@ class DataFrameViewer(widgets.Widget):
             )
         )
 
-        header_model = Header4ExtModel(model, 0, self.palette())
+        header_model = DataFrameHeaderModel(model, "horizontal", self.palette())
         self.table_header.set_model(header_model)
         sel_model = self.table_header.selectionModel()
         sel_model.selectionChanged.connect(
@@ -363,7 +381,7 @@ class DataFrameViewer(widgets.Widget):
             )
         )
 
-        index_model = Header4ExtModel(model, 1, self.palette())
+        index_model = DataFrameHeaderModel(model, "vertical", self.palette())
         self.table_index.set_model(index_model)
         sel_model = self.table_index.selectionModel()
         sel_model.selectionChanged.connect(

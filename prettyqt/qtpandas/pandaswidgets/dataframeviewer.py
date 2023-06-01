@@ -16,8 +16,8 @@ SelectionFlag = core.ItemSelectionModel.SelectionFlag
 
 
 class DataTableView(widgets.TableView):
-    def __init__(self, parent):
-        super().__init__(parent)
+    def __init__(self, df=None, **kwargs):
+        super().__init__(**kwargs)
 
         self.h_header.hide()
         self.v_header.hide()
@@ -26,6 +26,13 @@ class DataTableView(widgets.TableView):
         self.set_margin(0)
         self.set_delegate("no_focus")
         self.set_scrollbar_policy("always_off")
+        self.set_delegate("variant")
+        self.set_size_policy("expanding", "expanding")
+        self.set_df(df)
+
+    def set_df(self, df):
+        model = pandasmodels.DataTableModel(df)
+        self.set_model(model)
 
     def copy(self):
         indexes = self.selectionModel().selection().indexes()
@@ -69,13 +76,8 @@ class DataFrameViewer(widgets.Widget):
         self._loaded = False
         self.df = df
         # Set up DataFrame TableView and Model
-        self.table_data = DataTableView(parent=self)
-        # Create and set model
-        model = pandasmodels.DataTableModel(df)
-        self.table_data.set_model(model)
-        self.table_data.set_delegate("variant")
+        self.table_data = DataTableView(df, parent=self)
         self.set_size_policy("expanding", "expanding")
-        self.table_data.set_size_policy("expanding", "expanding")
 
         self.table_data.selectionModel().selectionChanged.connect(
             self._on_selection_changed
@@ -87,17 +89,14 @@ class DataFrameViewer(widgets.Widget):
         self.table_index = HeaderView(orientation=constants.VERTICAL, parent=self)
 
         # Set up layout
-        self.layout_grid = widgets.GridLayout()
-        self.setLayout(self.layout_grid)
+        self.layout_grid = self.set_layout("grid", margin=0, spacing=0)
         # Link scrollbars
-        # Scrolling in data table also scrolls the headers
         self.table_data.h_scrollbar.valueChanged.connect(
             self.table_columns.h_scrollbar.setValue
         )
         self.table_data.v_scrollbar.valueChanged.connect(
             self.table_index.v_scrollbar.setValue
         )
-        # Scrolling in headers also scrolls the data table
         self.table_columns.h_scrollbar.valueChanged.connect(
             self.table_data.h_scrollbar.setValue
         )
@@ -107,9 +106,6 @@ class DataFrameViewer(widgets.Widget):
 
         # Disable scrolling on the headers. Even when hidden, dragging desyncs them
         self.table_index.h_scrollbar.valueChanged.connect(lambda: None)
-
-        self.layout_grid.set_margin(0)
-        self.layout_grid.setSpacing(0)
 
         # Add items to layout
         self.layout_grid[0, 1:2] = self.table_columns
@@ -151,9 +147,9 @@ class DataFrameViewer(widgets.Widget):
         self.table_index.selectionModel().selectionChanged.connect(
             self.on_index_selection_changed
         )
-        # self._resize_columns()
-        # self.table_data.updateGeometry()
-        # self.table_columns.updateGeometry()
+        self._resize_columns()
+        self.table_data.updateGeometry()
+        self.table_columns.updateGeometry()
 
     def jump_to_column(self, col_num: int):
         """Make sure column at given index is visible.
@@ -535,8 +531,8 @@ class HeaderView(widgets.TableView):
             return False
         mouse_pos = event.pos().x() if self.is_horizontal() else event.pos().y()
         # If mouse is on an edge, start the drag resize process
-        match event.type(), self.orientation:
-            case QtCore.QEvent.Type.MouseButtonPress, _:
+        match event.type():
+            case QtCore.QEvent.Type.MouseButtonPress:
                 if self.over_header_edge(mouse_pos) is not None:
                     self._header_is_resizing = self.over_header_edge(mouse_pos)
                     self.resize_start_pos = mouse_pos
@@ -545,26 +541,26 @@ class HeaderView(widgets.TableView):
                 else:
                     self._header_is_resizing = None
             # End the drag process
-            case QtCore.QEvent.Type.MouseButtonRelease, _:
+            case QtCore.QEvent.Type.MouseButtonRelease:
                 self._header_is_resizing = None
 
-            case QtCore.QEvent.Type.MouseButtonDblClick, constants.HORIZONTAL:
+            case QtCore.QEvent.Type.MouseButtonDblClick if self.is_horizontal():
                 if (header_index := self.over_header_edge(mouse_pos)) is not None:
                     self.parent().auto_size_column(header_index)
                     return True
 
-            case QtCore.QEvent.Type.MouseButtonDblClick, constants.VERTICAL:
+            case QtCore.QEvent.Type.MouseButtonDblClick:
                 if (header_index := self.over_header_edge(mouse_pos)) is not None:
                     self.parent().auto_size_row(header_index)
                     return True
-            case QtCore.QEvent.Type.MouseMove, _:
+            case QtCore.QEvent.Type.MouseMove:
                 # If this is None, there is no drag resize happening
                 if self._header_is_resizing is not None:
                     size = self.initial_header_size + mouse_pos - self.resize_start_pos
                     if size > 10:
                         table_data = self.parent().table_data
                         self.setSectionWidth(self._header_is_resizing, size)
-                        table_data.setSectionWidth(self._header_is_resizing, size)
+                        table_data.setColumnWidth(self._header_is_resizing, size)
                         self.updateGeometry()
                         table_data.updateGeometry()
                     return True

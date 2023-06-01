@@ -131,7 +131,7 @@ class PandasColumnListModel(custom_models.ModelMixin, core.AbstractTableModel):
                 return self.data_by_index(index).name
 
     def rowCount(self, parent=None):
-        return len(self.df.columns)
+        return len(self.df.columns) if self.df is not None else 0
 
     def sort(self, ncol, order):
         is_ascending = order == constants.ASCENDING
@@ -278,7 +278,7 @@ class PandasIndexListModel(custom_models.ModelMixin, core.AbstractTableModel):
                 return self.get_index(index.row()).dtype
 
     def rowCount(self, parent=None):
-        return self.df.index.nlevels
+        return self.df.index.nlevels if self.df is not None else 0
 
     def mimeData(self, indexes):
         mime_data = core.MimeData()
