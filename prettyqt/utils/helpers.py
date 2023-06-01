@@ -105,6 +105,20 @@ def get_class_for_id(base_class: type, id_: str):
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 
 
+def move_in_list(ls: list, indexes: list, target_row: int) -> list:
+    new = [ls[i] for i in indexes]
+    in_range = target_row < len(ls) and target_row != -1
+    pos = ls.index(ls[target_row]) if in_range else len(ls)
+    rem = 0
+    for i in sorted(indexes, reverse=True):
+        ls.pop(i)
+        if i <= pos:
+            rem += 1
+    for item in reversed(new):
+        ls.insert(pos - rem, item)
+    return ls
+
+
 ANSI_STYLES = {
     1: {"font_weight": "bold"},
     2: {"font_weight": "lighter"},
