@@ -22,9 +22,8 @@ class FileSystemModelMixin:
     DATA_ROLE = constants.USER_ROLE + 33  # type: ignore
     content_type = "files"
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.setReadOnly(False)
+    def __init__(self, *args, read_only: bool = False, **kwargs):
+        super().__init__(*args, read_only=read_only, **kwargs)
         self.use_custom_icons(False)
 
     def data(self, index, role=constants.DISPLAY_ROLE):

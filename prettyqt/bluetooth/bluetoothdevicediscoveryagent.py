@@ -80,6 +80,7 @@ class BluetoothDeviceDiscoveryAgent(
     #     return INQUIRY_TYPES.inverse[self.inquiryType()]
 
     def start_discovery(self, classic: bool = True, low_energy: bool = True):
+        """Start discovery of bluetooth devices."""
         flag = QtBluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod
         if classic:
             flag |= QtBluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod
@@ -88,9 +89,11 @@ class BluetoothDeviceDiscoveryAgent(
         self.start(flag)
 
     def get_error(self) -> ErrorStr:
+        """Get error type if available."""
         return ERROR.inverse[self.error()]
 
     def get_supported_discovery_methods(self) -> list[DiscoveryMethodStr]:
+        """Return a list of supported discovery methods."""
         return DISCOVERY_METHODS.get_list(self.supportedDiscoveryMethods())
 
 

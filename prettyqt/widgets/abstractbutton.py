@@ -72,14 +72,6 @@ class AbstractButtonMixin(widgets.WidgetMixin):
     def set_value(self, value: bool):
         self.setChecked(value)
 
-    @property
-    def is_on(self) -> bool:
-        return self.isChecked()
-
-    @is_on.setter
-    def is_on(self, state: bool):
-        self.setChecked(state)
-
     # def _color(self):
     #     return self.palette().color(QtGui.QPalette.ColorRole.ButtonText)
 

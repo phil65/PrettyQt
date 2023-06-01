@@ -113,8 +113,6 @@ def test_checkbox(qtbot):
     assert widget.get_value() is True
     with pytest.raises(InvalidParamError):
         widget.set_checkstate("test")
-    widget.is_on = False
-    assert not widget.is_on
 
 
 def test_colordialog(qtbot):
@@ -970,8 +968,6 @@ def test_pushbutton(qtbot):
     widget.set_style_icon("titlebar_close_button")
     widget.set_icon_size(10)
     assert widget.get_icon_size() == core.Size(10, 10)
-    widget.is_on = False
-    assert widget.is_on is False
     widget.set_value(True)
 
 
@@ -981,11 +977,9 @@ def test_radiobutton(qtbot):
     widget.set_icon("mdi.timer")
     widget.set_enabled()
     widget.set_disabled()
-    assert bool(widget) is False
+    assert not bool(widget)
     widget.set_value(True)
     assert widget.get_value() is True
-    # widget.is_on = False
-    # assert widget.is_on is False
 
 
 def test_rubberband(qtbot):
