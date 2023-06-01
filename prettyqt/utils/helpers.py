@@ -15,6 +15,23 @@ TIME_REGEX = re.compile(
 CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 
 
+# def add_docs(klass):
+#     import pathlib
+#     from prettyqt import paths
+#     klass_name = klass.__name__
+#     qclass = klass
+#     for k in klass.mro():
+#         if k.__name__.startswith("Q"):
+#             qclass = k
+#             break
+#     module = k.__module__.split(".")[1]
+#     path = paths.DOCSTRING_PATH /  module
+#     filepath = path / f"Q{klass_name.replace('Mixin', '')}.txt"
+#     if filepath.exists():
+#         klass.__doc__ =  filepath.read_text()
+#     return klass
+
+
 def dump_json(data: str):
     try:
         import orjson
@@ -117,6 +134,12 @@ def move_in_list(ls: list, indexes: list, target_row: int) -> list:
     for item in reversed(new):
         ls.insert(pos - rem, item)
     return ls
+
+
+def format_name(name) -> str:
+    if isinstance(name, tuple | list):
+        return " | ".join(str(i) for i in name)
+    return str(name)
 
 
 ANSI_STYLES = {

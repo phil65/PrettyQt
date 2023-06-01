@@ -89,3 +89,21 @@ def set_env_vars(qt_binding: Literal["PyQt6", "PySide6"]):
 
 
 set_env_vars(API_NAME)
+
+
+# from prettyqt.qt import QtCore, QtGui, QtWidgets
+# from prettyqt import paths
+# import inspect
+# import pathlib
+
+# module_dict = dict(QtWidgets=QtWidgets, QtGui=QtGui, QtCore=QtCore)
+
+# for module_name, module in module_dict.items():
+#     clsmembers = inspect.getmembers(module, inspect.isclass)
+#     for klass_name, klass in clsmembers:
+#         path = paths.DOCSTRING_PATH /  module_name
+#         filepath = path / f"{klass_name}.txt"
+#         if filepath.exists():
+#             # print(klass_name)
+#             text = filepath.read_text()
+#             klass.__doc__ = text

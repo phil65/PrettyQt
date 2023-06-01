@@ -302,31 +302,31 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         cur_scale = (transform.m11(), transform.m22())
         return float(f"{cur_scale[0] - 1.0:0.2f}")
 
-    def mousePressEvent(self, event):
-        selected = self.viewer().selectedItems()
-        if viewer := self.viewer():
-            viewer.sceneMousePressEvent(event)
-        super().mousePressEvent(event)
-        keep_selection = any(
-            [
-                event.button() == QtCore.Qt.MiddleButton,
-                event.button() == QtCore.Qt.RightButton,
-                event.modifiers() == QtCore.Qt.AltModifier,
-            ]
-        )
-        if keep_selection:
-            for node in selected:
-                node.setSelected(True)
+    # def mousePressEvent(self, event):
+    #     selected = self.viewer().selectedItems()
+    #     if viewer := self.viewer():
+    #         viewer.sceneMousePressEvent(event)
+    #     super().mousePressEvent(event)
+    #     keep_selection = any(
+    #         [
+    #             event.button() == QtCore.Qt.MiddleButton,
+    #             event.button() == QtCore.Qt.RightButton,
+    #             event.modifiers() == QtCore.Qt.AltModifier,
+    #         ]
+    #     )
+    #     if keep_selection:
+    #         for node in selected:
+    #             node.setSelected(True)
 
-    def mouseMoveEvent(self, event):
-        if viewer := self.viewer():
-            viewer.sceneMouseMoveEvent(event)
-        super().mouseMoveEvent(event)
+    # def mouseMoveEvent(self, event):
+    #     if viewer := self.viewer():
+    #         viewer.sceneMouseMoveEvent(event)
+    #     super().mouseMoveEvent(event)
 
-    def mouseReleaseEvent(self, event):
-        if viewer := self.viewer():
-            viewer.sceneMouseReleaseEvent(event)
-        super().mouseReleaseEvent(event)
+    # def mouseReleaseEvent(self, event):
+    #     if viewer := self.viewer():
+    #         viewer.sceneMouseReleaseEvent(event)
+    #     super().mouseReleaseEvent(event)
 
     def viewer(self):
         return self.views()[0] if self.views() else None
