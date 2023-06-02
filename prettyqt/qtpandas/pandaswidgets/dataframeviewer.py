@@ -378,7 +378,6 @@ class HeaderView(widgets.TableView):
         # Settings
         self.set_size_policy("maximum", "maximum")
         self.setWordWrap(False)
-        self.setFont(gui.Font("Times", weight=gui.Font.Weight.Bold))
         self.set_horizontal_scrollbar_policy("always_off")
         self.set_scroll_mode("pixel")
         self.set_margin(0)
@@ -402,14 +401,15 @@ class HeaderView(widgets.TableView):
             self.set_df(df)
             self.resize(self.sizeHint())
 
-    def set_df(self, df):
+    def set_df(self, df, set_spans: bool = True):
         if self.is_horizontal():
             model = pandasmodels.HorizontalHeaderModel(df)
         else:
             model = pandasmodels.VerticalHeaderModel(df)
         self.set_model(model)
         # Link selection to DataTable
-        self.set_spans()
+        if set_spans:
+            self.set_spans()
         self.init_size()
         # Set initial size
         self.resize(self.sizeHint())
@@ -490,12 +490,18 @@ class HeaderView(widgets.TableView):
                     if col == len(arr) - 1:
                         match_end = col
                         span_size = match_end - match_start + 1
-                        self.setSpan(level, match_start, 1, span_size)
+                        self.set_section_span(level, match_start, span_size)
                 elif match_start is not None:
                     match_end = col - 1
                     span_size = match_end - match_start + 1
-                    self.setSpan(level, match_start, 1, span_size)
+                    self.set_section_span(level, match_start, span_size)
                     match_start = None
+
+    def set_section_span(self, row, column, count):
+        if self.is_horizontal():
+            self.setSpan(row, column, 1, count)
+        else:
+            self.setSpan(column, row, count, 1)
 
     def sectionAt(self, val: int):
         return self.columnAt(val) if self.is_horizontal() else self.rowAt(val)
@@ -529,7 +535,8 @@ class HeaderView(widgets.TableView):
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent):
         if not isinstance(event, QtGui.QMouseEvent):
             return False
-        mouse_pos = event.pos().x() if self.is_horizontal() else event.pos().y()
+        mouse_pos = event.position().x() if self.is_horizontal() else event.position().y()
+        mouse_pos = int(mouse_pos)
         # If mouse is on an edge, start the drag resize process
         match event.type():
             case QtCore.QEvent.Type.MouseButtonPress:
@@ -560,7 +567,10 @@ class HeaderView(widgets.TableView):
                     if size > 10:
                         table_data = self.parent().table_data
                         self.setSectionWidth(self._header_is_resizing, size)
-                        table_data.setColumnWidth(self._header_is_resizing, size)
+                        if self.is_horizontal():
+                            table_data.setColumnWidth(self._header_is_resizing, size)
+                        else:
+                            table_data.setRowHeight(self._header_is_resizing, size)
                         self.updateGeometry()
                         table_data.updateGeometry()
                     return True
@@ -622,17 +632,17 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     tuples = [
-        ("bar", "one", "q"),
+        ("bar", "xxg", "q"),
         ("bar", "two", "q"),
-        ("baz", "one", "q"),
+        ("baz", "xx", "q"),
         ("baz", "two", "q"),
-        ("foo", "one", "q"),
+        ("foo", "xx", "q"),
         ("foo", "two", "q"),
-        ("qux", "one", "q"),
+        ("qux", "xff", "q"),
         ("qux", "two", "q"),
     ]
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(6, 6), index=index[:6], columns=index[:6])
+    df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
     app = widgets.app()
     app.set_style("fusion")
     view2 = DataFrameViewer(df)

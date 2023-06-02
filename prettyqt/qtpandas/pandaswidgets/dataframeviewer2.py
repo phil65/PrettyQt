@@ -191,34 +191,31 @@ class DataFrameViewer(widgets.Widget):
         self.hscroll = widgets.ScrollBar("horizontal")
         self.vscroll = widgets.ScrollBar("vertical")
 
-        self.table_level = widgets.TableView()
+        self.table_level = widgets.TableView(frame_shadow="plain")
         self.table_level.set_edit_triggers("none")
         self.table_level.set_scrollbar_policy("always_off")
-        self.table_level.set_frame_shadow("plain")
         self.table_level.h_header.sectionResized.connect(self._index_resized)
         self.table_level.v_header.sectionResized.connect(self._header_resized)
         self.table_level.set_delegate("variant")
 
-        self.table_header = widgets.TableView()
+        self.table_header = widgets.TableView(frame_shadow="plain")
         self.table_header.v_header.hide()
         self.table_header.set_edit_triggers("none")
         self.table_header.set_scrollbar_policy("always_off")
         self.table_header.set_horizontal_scroll_mode("pixel")
         self.table_header.setHorizontalScrollBar(self.hscroll)
-        self.table_header.set_frame_shadow("plain")
         self.table_header.h_header.sectionResized.connect(self._column_resized)
         self.table_header.set_delegate("variant")
 
-        self.table_index = widgets.TableView()
+        self.table_index = widgets.TableView(frame_shadow="plain")
         self.table_index.h_header.hide()
         self.table_index.set_edit_triggers("none")
         self.table_index.set_scrollbar_policy("always_off")
         self.table_index.set_vertical_scroll_mode("pixel")
         self.table_index.setVerticalScrollBar(self.vscroll)
-        self.table_index.set_frame_shadow("plain")
         self.table_index.v_header.sectionResized.connect(self._row_resized)
 
-        self.table_data = widgets.TableView()
+        self.table_data = widgets.TableView(frame_shadow="plain")
         self.table_data.v_header.hide()
         self.table_data.h_header.hide()
         self.table_data.set_edit_triggers("none")
@@ -226,7 +223,6 @@ class DataFrameViewer(widgets.Widget):
         self.table_data.set_scroll_mode("pixel")
         self.table_data.setHorizontalScrollBar(self.hscroll)
         self.table_data.setVerticalScrollBar(self.vscroll)
-        self.table_data.set_frame_shadow("plain")
         self.table_data.set_delegate("variant")
         layout = self.set_layout("grid", spacing=0, margin=0)
         layout[0, 0] = self.table_level
@@ -273,7 +269,8 @@ class DataFrameViewer(widgets.Widget):
         self._selection_rec = True
         dsm = dest.selectionModel()
         dsm.clear()
-        for row in (index.row() for index in source.selectionModel().selectedIndexes()):
+        indexes = source.selectionModel().selectedIndexes()
+        for row in (index.row() for index in indexes):
             idx = dest.model().index(row, 0)
             dsm.select(idx, SelectionFlag.Select | SelectionFlag.Rows)
         deselect.selectionModel().clear()
@@ -331,7 +328,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_level.setFixedWidth(idx_width)
         self._resize_visible_columns_to_contents()
 
-    def set_model(self, model, relayout=True):
+    def set_model(self, model, relayout: bool = True):
         self._model = model
         data_model = DataFrameDataModel(model)
         self.table_data.set_model(data_model)
@@ -395,10 +392,9 @@ class DataFrameViewer(widgets.Widget):
             self._update_layout()
 
     def setCurrentIndex(self, y, x):
-        self.table_data.selectionModel().setCurrentIndex(
-            self.table_data.model().index(y, x),
-            SelectionFlag.ClearAndSelect,
-        )
+        index = self.table_data.model().index(y, x)
+        sel_model = self.table_data.selectionModel()
+        sel_model.setCurrentIndex(index, SelectionFlag.ClearAndSelect)
 
     def _resize_column_to_contents(self, header, data, col):
         hdr_width = header.get_size_hint_for_column(col)
@@ -411,20 +407,16 @@ class DataFrameViewer(widgets.Widget):
             width = min(self.max_width, hdr_width)
         header.setColumnWidth(col, width)
 
-    def _resize_columns_to_contents(self, header, data):
-        max_col = data.model().columnCount()
-        for col in range(max_col):
-            self._resize_column_to_contents(header, data, col)
-
-    def eventFilter(self, obj, event):
+    def eventFilter(self, obj, event) -> bool:
         if obj == self.table_data and event.type() == core.Event.Type.Resize:
             self._resize_visible_columns_to_contents()
         return False
 
     def _resize_visible_columns_to_contents(self):
-        col = self.table_data.columnAt(self.table_data.rect().topLeft().x())
+        rect = self.table_data.rect()
+        col = self.table_data.columnAt(rect.left())
         width = self._model.shape[1]
-        end = self.table_data.columnAt(self.table_data.rect().bottomRight().x())
+        end = self.table_data.columnAt(rect.right())
         end = width if end == -1 else end + 1
         while col < end:
             resized = False
@@ -435,7 +427,7 @@ class DataFrameViewer(widgets.Widget):
             col += 1
             if resized:
                 # as we resize columns, the boundary will change
-                end = self.table_data.columnAt(self.table_data.rect().bottomRight().x())
+                end = self.table_data.columnAt(rect.right())
                 end = width if end == -1 else end + 1
 
     def _resize_current_column_to_content(self, new_index, old_index):
@@ -446,7 +438,9 @@ class DataFrameViewer(widgets.Widget):
 
     def resizeColumnsToContents(self):
         self._autosized_cols = set()
-        self._resize_columns_to_contents(self.table_level, self.table_index)
+        to_check = min(self.table_index.model().columnCount(), 100)
+        for col in range(to_check):
+            self._resize_column_to_contents(self.table_level, self.table_index, col)
         self._update_layout()
 
 
