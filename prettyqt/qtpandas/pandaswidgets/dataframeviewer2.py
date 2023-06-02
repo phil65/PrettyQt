@@ -36,8 +36,7 @@ class DataFrameModel:
 
     def name(self, axis: constants.OrientationStr, level):
         ax = self._data.columns if axis == "horizontal" else self._data.index
-        name = ax.names[level]
-        return name if name is not None else f"L{str(level)}"
+        return name if (name := ax.names[level]) is not None else f"L{str(level)}"
 
 
 class DataFrameDataModel(core.AbstractTableModel):
@@ -59,7 +58,7 @@ class DataFrameDataModel(core.AbstractTableModel):
         match role:
             case constants.DISPLAY_ROLE:
                 val = self._model.data(index.row(), index.column())
-                return "" if pd.isnull(val) else str(val)
+                return "" if pd.isnull(val) else core.Locale().toString(val)
 
 
 class DataFrameHeaderModel(core.AbstractTableModel):
@@ -242,7 +241,6 @@ class DataFrameViewer(widgets.Widget):
 
         # autosize columns on-demand
         self._autosized_cols = set()
-        self._max_autosize_ms = MAX_AUTOSIZE_MS
         self.hscroll.sliderMoved.connect(self._resize_visible_columns_to_contents)
         self.table_data.installEventFilter(self)
 
@@ -333,9 +331,6 @@ class DataFrameViewer(widgets.Widget):
         self.table_level.setFixedWidth(idx_width)
         self._resize_visible_columns_to_contents()
 
-    def set_auto_size_limit(self, limit_ms):
-        self._max_autosize_ms = limit_ms
-
     def set_model(self, model, relayout=True):
         self._model = model
         data_model = DataFrameDataModel(model)
@@ -405,9 +400,9 @@ class DataFrameViewer(widgets.Widget):
             SelectionFlag.ClearAndSelect,
         )
 
-    def _resize_column_to_contents(self, header, data, col, limit_ms: int):
-        hdr_width = header.get_size_hint_for_column(col, limit_ms)
-        data_width = data.get_size_hint_for_column(col, limit_ms)
+    def _resize_column_to_contents(self, header, data, col):
+        hdr_width = header.get_size_hint_for_column(col)
+        data_width = data.get_size_hint_for_column(col)
         if data_width > hdr_width:
             width = min(self.max_width, data_width)
         elif hdr_width > data_width * 2:
@@ -416,11 +411,10 @@ class DataFrameViewer(widgets.Widget):
             width = min(self.max_width, hdr_width)
         header.setColumnWidth(col, width)
 
-    def _resize_columns_to_contents(self, header, data, limit_ms: int):
+    def _resize_columns_to_contents(self, header, data):
         max_col = data.model().columnCount()
-        max_col_ms = None if limit_ms is None else limit_ms / max(1, max_col)
         for col in range(max_col):
-            self._resize_column_to_contents(header, data, col, max_col_ms)
+            self._resize_column_to_contents(header, data, col)
 
     def eventFilter(self, obj, event):
         if obj == self.table_data and event.type() == core.Event.Type.Resize:
@@ -428,29 +422,21 @@ class DataFrameViewer(widgets.Widget):
         return False
 
     def _resize_visible_columns_to_contents(self):
-        start = col = self.table_data.columnAt(self.table_data.rect().topLeft().x())
+        col = self.table_data.columnAt(self.table_data.rect().topLeft().x())
         width = self._model.shape[1]
         end = self.table_data.columnAt(self.table_data.rect().bottomRight().x())
         end = width if end == -1 else end + 1
-        if self._max_autosize_ms is None:
-            max_col_ms = None
-        else:
-            max_col_ms = self._max_autosize_ms / max(1, end - start)
         while col < end:
             resized = False
             if col not in self._autosized_cols:
                 self._autosized_cols.add(col)
                 resized = True
-                self._resize_column_to_contents(
-                    self.table_header, self.table_data, col, max_col_ms
-                )
+                self._resize_column_to_contents(self.table_header, self.table_data, col)
             col += 1
             if resized:
                 # as we resize columns, the boundary will change
                 end = self.table_data.columnAt(self.table_data.rect().bottomRight().x())
                 end = width if end == -1 else end + 1
-                if max_col_ms is not None:
-                    max_col_ms = self._max_autosize_ms / max(1, end - start)
 
     def _resize_current_column_to_content(self, new_index, old_index):
         if new_index.column() not in self._autosized_cols:
@@ -460,9 +446,7 @@ class DataFrameViewer(widgets.Widget):
 
     def resizeColumnsToContents(self):
         self._autosized_cols = set()
-        self._resize_columns_to_contents(
-            self.table_level, self.table_index, self._max_autosize_ms
-        )
+        self._resize_columns_to_contents(self.table_level, self.table_index)
         self._update_layout()
 
 
