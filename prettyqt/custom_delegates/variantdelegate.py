@@ -7,7 +7,7 @@ import pathlib
 
 import regex as re
 
-from prettyqt import constants, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -50,6 +50,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
 
         original_value = self._data_for_index(index, self.data_role)
         logger.info(f"creating editor for {original_value!r}...")
+        widget = None
         match original_value:
             case bool():
                 widget = widgets.CheckBox()
@@ -92,10 +93,22 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 widget = custom_widgets.ColorComboBox()
             case QtWidgets.QSizePolicy():
                 widget = custom_widgets.SizePolicyEdit()
+            case QtCore.QUrl():
+                widget = custom_widgets.UrlLineEdit()
             # case QtCore.QRectF():  # todo
             #     widget = custom_widgets.RectEdit(parent=parent)
-            case _:
-                raise ValueError(original_value)
+        try:
+            import numpy as np
+        except ImportError:
+            pass
+        else:
+            match original_value:
+                case np.floating():
+                    widget = custom_widgets.FloatLineEdit()
+
+        if widget is None:
+            logger.warning(f"Could not find editor for {original_value!r}")
+            return None
         widget.setParent(parent)
         widget.setAutoFillBackground(True)
         return widget
@@ -114,6 +127,9 @@ class VariantDelegate(widgets.StyledItemDelegate):
             model.setData(index, self.display_text(value), constants.DISPLAY_ROLE)
             self.commitData.emit(editor)
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
+
+    def displayText(self, value, locale: QtCore.QLocale) -> str:
+        return self.display_text(value, locale)
 
     @staticmethod
     def is_supported_type(value):
@@ -143,8 +159,10 @@ class VariantDelegate(widgets.StyledItemDelegate):
             | QtWidgets.QSizePolicy,
         )
 
-    @staticmethod
-    def display_text(val):
+    @classmethod
+    def display_text(cls, val, locale=None):
+        if locale is None:
+            locale = core.Locale()
         match val:
             case str():
                 return val
@@ -155,7 +173,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
             case enum.Enum():
                 return val.name
             case int() | float() | QtCore.QByteArray():
-                return str(val)
+                return locale.toString(val)
             case QtGui.QColor():
                 return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
             case QtGui.QFont():
@@ -195,21 +213,21 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 return val.pattern()
             case QtCore.QUrl():
                 return val.toString()
-            # case np.integer():
-            #     return super().displayText(int(val), locale)
-            # case np.floating():
-            #     return super().displayText(float(val), locale)
-            # case np.str_():
-            #     return str(val)
-            # case np.datetime64():
-            #     return self.displayText(val.astype(datetime), locale)
-            case None:
-                return "<None>"
-            case _:
-                return f"<{val}>"
-
-    def displayText(self, value, locale: QtCore.QLocale) -> str:
-        return self.display_text(value)
+        try:
+            import numpy as np
+        except ImportError:
+            pass
+        else:
+            match val:
+                case np.integer():
+                    return cls.display_text(int(val), locale)
+                case np.floating():
+                    return cls.display_text(float(val), locale)
+                case np.str_():
+                    return str(val)
+                case np.datetime64():
+                    return cls.display_text(val.astype(datetime.datetime), locale)
+        return repr(val)
 
 
 if __name__ == "__main__":
