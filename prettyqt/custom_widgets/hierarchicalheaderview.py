@@ -52,7 +52,9 @@ class HierarchicalHeaderView(widgets.HeaderView):
             parent.setVerticalHeader(self)
         self.sectionMoved.connect(self._on_section_moved)
 
-    def init_from_new_model(self, orientation: int, model: QtCore.QAbstractItemModel):
+    def init_from_new_model(
+        self, orientation: QtCore.Qt.Orientation, model: QtCore.QAbstractItemModel
+    ):
         is_hor = orientation == constants.HORIZONTAL
         role = HORIZONTAL_HEADER_DATA_ROLE if is_hor else VERTICAL_HEADER_DATA_ROLE
         self.header_model = model.data(core.ModelIndex(), role)

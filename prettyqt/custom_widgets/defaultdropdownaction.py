@@ -13,8 +13,8 @@ class DefaultDropDownAction(widgets.WidgetAction):
     The default action is directly usable without using the drop down list.
     """
 
-    def __init__(self, parent=None):
-        super().__init__(parent)
+    def __init__(self, parent=None, **kwargs):
+        super().__init__(parent, **kwargs)
         button = widgets.ToolButton(parent)
         button.set_popup_mode("menu_button")
         self.setDefaultWidget(button)

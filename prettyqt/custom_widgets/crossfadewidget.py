@@ -31,32 +31,28 @@ class CrossFadeWidget(widgets.Widget):
     def set_pixmap_1(
         self, pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None
     ):
-        match pixmap:
-            case QtGui.QPixmap():
-                self.pixmap_1 = pixmap
-            case os.PathLike():
-                self.pixmap_1 = gui.Pixmap(pixmap)
-            case QtWidgets.QWidget():
-                self.pixmap_1 = pixmap.grab()
-            case None:
-                self.pixmap_1 = gui.Pixmap()
+        self.pixmap_1 = self._get_pixmap(pixmap)
         self.updateGeometry()
         self.repaint()
 
     def set_pixmap_2(
         self, pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None
     ):
-        match pixmap:
-            case QtGui.QPixmap():
-                self.pixmap_2 = pixmap
-            case os.PathLike():
-                self.pixmap_2 = gui.Pixmap(pixmap)
-            case QtWidgets.QWidget():
-                self.pixmap_2 = pixmap.grab()
-            case None:
-                self.pixmap_2 = gui.Pixmap()
+        self.pixmap_2 = self._get_pixmap(pixmap)
         self.updateGeometry()
         self.repaint()
+
+    @staticmethod
+    def _get_pixmap(pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None):
+        match pixmap:
+            case QtGui.QPixmap():
+                return pixmap
+            case os.PathLike():
+                return gui.Pixmap(pixmap)
+            case QtWidgets.QWidget():
+                return pixmap.grab()
+            case None:
+                return gui.Pixmap()
 
     def set_blend_factor(self, factor: float):
         self._blend_factor = factor
