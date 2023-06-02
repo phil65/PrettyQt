@@ -14,25 +14,48 @@ HORIZONTAL_HEADER_DATA_ROLE = QtCore.Qt.ItemDataRole.UserRole + 150
 VERTICAL_HEADER_DATA_ROLE = QtCore.Qt.ItemDataRole.UserRole + 151
 
 
-class PrivateData:
+def find_root_index(index: core.ModelIndex) -> core.ModelIndex:
+    while index.parent().isValid():
+        index = index.parent()
+    return index
+
+
+def get_parent_indexes(index: core.ModelIndex) -> list:
+    indexes = []
+    while index.isValid():
+        indexes.insert(0, index)
+        index = index.parent()
+    return indexes
+
+
+class HierarchicalHeaderView(widgets.HeaderView):
+    """Hierarchical header view.
+
+    This class is a Python port of
+    http://qt-apps.org/content/show.php/HierarchicalHeaderView?content=103154
+    """
+
     header_model = None
+
+    def __init__(
+        self,
+        orientation: QtCore.Qt.Orientation | constants.OrientationStr,
+        parent: QtWidgets.QWidget,
+    ):
+        super().__init__(orientation, parent, highlight_sections=True)
+        self.setSectionsClickable(True)
+        self.sectionResized.connect(self.on_section_resized)
+        self.show()  # force to be visible
+        if orientation in {constants.HORIZONTAL, "horizontal"}:
+            parent.setHorizontalHeader(self)
+        else:
+            parent.setVerticalHeader(self)
+        self.sectionMoved.connect(self._on_section_moved)
 
     def init_from_new_model(self, orientation: int, model: QtCore.QAbstractItemModel):
         is_hor = orientation == constants.HORIZONTAL
         role = HORIZONTAL_HEADER_DATA_ROLE if is_hor else VERTICAL_HEADER_DATA_ROLE
         self.header_model = model.data(core.ModelIndex(), role)
-
-    def find_root_index(self, index: core.ModelIndex) -> core.ModelIndex:
-        while index.parent().isValid():
-            index = index.parent()
-        return index
-
-    def get_parent_indexes(self, index: core.ModelIndex) -> list:
-        indexes = []
-        while index.isValid():
-            indexes.insert(0, index)
-            index = index.parent()
-        return indexes
 
     def find_leaf(
         self, index: core.ModelIndex, section_index: int, current_leaf_index: int
@@ -213,7 +236,7 @@ class PrivateData:
         #            print(logical_leaf_index)
         old_bo = painter.brushOrigin()
         top = section_rect.y()
-        indexes = self.get_parent_indexes(leaf_index)
+        indexes = get_parent_indexes(leaf_index)
         for i, idx in enumerate(indexes):
             real_style_options = QtWidgets.QStyleOptionHeader(style_options)
             if i < len(indexes) - 1 and (
@@ -294,7 +317,7 @@ class PrivateData:
     ):
         old_bo = painter.brushOrigin()
         left = section_rect.x()
-        indexes = self.get_parent_indexes(leaf_index)
+        indexes = get_parent_indexes(leaf_index)
         for i, idx in enumerate(indexes):
             real_style_options = QtWidgets.QStyleOptionHeader(style_options)
             if i < len(indexes) - 1 and (
@@ -315,31 +338,6 @@ class PrivateData:
                 left,
             )
         painter.setBrushOrigin(old_bo)
-
-
-class HierarchicalHeaderView(widgets.HeaderView):
-    """Hierarchical header view.
-
-    This class is a Python port of
-    http://qt-apps.org/content/show.php/HierarchicalHeaderView?content=103154
-    """
-
-    def __init__(
-        self,
-        orientation: QtCore.Qt.Orientation | constants.OrientationStr,
-        parent: QtWidgets.QWidget,
-    ):
-        super().__init__(orientation, parent)
-        self._pd = PrivateData()
-        self.sectionResized.connect(self.on_section_resized)
-        self.setHighlightSections(True)
-        self.setSectionsClickable(True)
-        self.show()  # force to be visible
-        if orientation in {constants.HORIZONTAL, "horizontal"}:
-            parent.setHorizontalHeader(self)
-        else:
-            parent.setVerticalHeader(self)
-        self.sectionMoved.connect(self._on_section_moved)
 
     def _on_section_moved(self, logical_index, old_visual_index, new_visual_index):
         view = self.parent()
@@ -434,18 +432,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
         return opt
 
     def sectionSizeFromContents(self, logical_index: int) -> QtCore.QSize:
-        if not self._pd.header_model:
+        if not self.header_model:
             return super().sectionSizeFromContents(logical_index)
-        cur_leaf_index = self._pd.leaf_index(logical_index)
+        cur_leaf_index = self.leaf_index(logical_index)
         if not cur_leaf_index.isValid():
             return super().sectionSizeFromContents(logical_index)
         styleOption = QtWidgets.QStyleOptionHeader(
             self.get_style_option_for_cell(logical_index)
         )
-        s = self._pd.get_cell_size(cur_leaf_index, self, styleOption)
+        s = self.get_cell_size(cur_leaf_index, self, styleOption)
         cur_leaf_index = cur_leaf_index.parent()
         while cur_leaf_index.isValid():
-            cell_size = self._pd.get_cell_size(cur_leaf_index, self, styleOption)
+            cell_size = self.get_cell_size(cur_leaf_index, self, styleOption)
             if self.orientation() == constants.HORIZONTAL:
                 s.setHeight(s.height() + cell_size.height())
             else:
@@ -459,13 +457,13 @@ class HierarchicalHeaderView(widgets.HeaderView):
         if not rect.isValid():
             super().paintSection(painter, rect, logical_index)
             return
-        leaf_index = self._pd.leaf_index(logical_index)
+        leaf_index = self.leaf_index(logical_index)
         if not leaf_index.isValid():
             super().paintSection(painter, rect, logical_index)
             return
         style_option = self.get_style_option_for_cell(logical_index)
         if self.orientation() == constants.HORIZONTAL:
-            self._pd.paint_horizontal_section(
+            self.paint_horizontal_section(
                 painter,
                 rect,
                 logical_index,
@@ -474,7 +472,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 leaf_index,
             )
         else:
-            self._pd.paint_vertical_section(
+            self.paint_vertical_section(
                 painter,
                 rect,
                 logical_index,
@@ -486,9 +484,9 @@ class HierarchicalHeaderView(widgets.HeaderView):
     def on_section_resized(self, logical_index: int):
         if self.isSectionHidden(logical_index):
             return
-        leaf_index = self._pd.leaf_index(logical_index)
+        leaf_index = self.leaf_index(logical_index)
         if leaf_index.isValid():
-            leafs_list = self._pd.leafs(self._pd.find_root_index(leaf_index))
+            leafs_list = self.leafs(find_root_index(leaf_index))
             start = leafs_list.index(leaf_index) if leaf_index in leafs_list else -1
             is_horizontal = self.orientation() == constants.HORIZONTAL
             for _ in range(start, 0, -1):
@@ -511,7 +509,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     def _on_layout_change(self):
         if model := self.model():
-            self._pd.init_from_new_model(self.orientation(), model)
+            self.init_from_new_model(self.orientation(), model)
             is_horizontal = self.orientation() == constants.HORIZONTAL
             count = model.columnCount() if is_horizontal else model.rowCount()
             self.initializeSections(0, count - 1)
