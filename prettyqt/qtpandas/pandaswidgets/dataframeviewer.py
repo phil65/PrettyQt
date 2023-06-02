@@ -134,6 +134,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_data.selectionModel().selectionChanged.connect(
             self._on_selection_changed
         )
+        # TODO: this gets called twice.
         self.table_columns.set_df(df)
         self.table_index.set_df(df)
         # Toggle level names
