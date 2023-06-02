@@ -124,7 +124,6 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return f"{type(self).__name__}: ({self.rowCount()}, {self.columnCount()})"
 
     def __len__(self) -> int:
-        """Return amount of rows."""
         return self.rowCount()
 
     def __add__(
@@ -206,6 +205,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         rows_to_check: int = 5,
         role=constants.DISPLAY_ROLE,
     ) -> type | None:
+        """Guess column data type by checking values of first rows with given role."""
         to_check = min(rows_to_check, self.rowCount())
         if to_check == 0:
             return None
@@ -324,6 +324,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def iter_tree(
         self, root_index: core.ModelIndex | None = None
     ) -> Iterator[core.ModelIndex]:
+        """Iter through all indexes of the model tree."""
         if root_index is None:
             root_index = self.index(0, 0)
         if root_index.isValid():
@@ -338,6 +339,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         role=constants.DISPLAY_ROLE,
         root_index: core.ModelIndex | None = None,
     ) -> Any:
+        """Search the tree for an index with a given value in given role."""
         if root_index is None:
             root_index = self.index(0, 0)
         if self.data(root_index, role) == value:
