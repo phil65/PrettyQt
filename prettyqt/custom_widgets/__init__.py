@@ -8,7 +8,7 @@ from .optionalwidget import OptionalWidget
 from .collapsibleframe import CollapsibleFrame
 from .expandableline import ExpandableLine
 from .hierarchicalheaderview import HierarchicalHeaderView
-from .editors.lineedits import IntLineEdit, FloatLineEdit
+from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit
 from .editors.keycombinationedit import KeyCombinationEdit
 from .editors.singlelinetextedit import SingleLineTextEdit
 from .editors.rectedit import RectEdit, RectFEdit, RegionEdit
@@ -58,6 +58,7 @@ from .standardiconswidget import StandardIconsWidget
 __all__ = [
     "IntLineEdit",
     "FloatLineEdit",
+    "UrlLineEdit",
     "ImageViewer",
     "ElidedLabel",
     "ListInput",
