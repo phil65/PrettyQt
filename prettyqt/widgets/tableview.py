@@ -109,6 +109,38 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         for i in range(to_check):
             self.resizeColumnToContents(i)
 
+    def auto_span(self, orientation=constants.HORIZONTAL, role=constants.DISPLAY_ROLE):
+        is_horizontal = orientation == constants.HORIZONTAL
+        model = self.model()
+        n = model.rowCount() if is_horizontal else model.columnCount()
+        m = model.columnCount() if is_horizontal else model.rowCount()
+        for level in range(n):
+            match_start = None
+            if is_horizontal:
+                arr = [self.model().index(level, i).data(role) for i in range(m)]
+            else:
+                arr = [self.model().index(i, level).data(role) for i in range(m)]
+            for col in range(1, m):
+                if arr[col] == arr[col - 1]:
+                    if match_start is None:
+                        match_start = col - 1
+                    # If this is the last cell, need to end it
+                    if col == len(arr) - 1:
+                        match_end = col
+                        span_size = match_end - match_start + 1
+                        if is_horizontal:
+                            self.setSpan(level, match_start, 1, span_size)
+                        else:
+                            self.setSpan(match_start, level, span_size, 1)
+                elif match_start is not None:
+                    match_end = col - 1
+                    span_size = match_end - match_start + 1
+                    if is_horizontal:
+                        self.setSpan(level, match_start, 1, span_size)
+                    else:
+                        self.setSpan(match_start, level, span_size, 1)
+                    match_start = None
+
 
 class TableView(TableViewMixin, QtWidgets.QTableView):
     pass
