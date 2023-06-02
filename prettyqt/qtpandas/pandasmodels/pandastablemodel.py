@@ -7,6 +7,7 @@ import numpy as np
 import pandas as pd
 
 from prettyqt import constants, core
+from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -64,7 +65,7 @@ class DataTableModel(core.AbstractTableModel):
 
     def setData(self, index, value, role=None):
         match role:
-            case constants.USER_ROLE:
+            case constants.USER_ROLE | constants.EDIT_ROLE:
                 row = index.row()
                 col = index.column()
                 try:
@@ -72,10 +73,12 @@ class DataTableModel(core.AbstractTableModel):
                 except Exception as e:
                     logger.exception(e)
                     return False
-                self.dataChanged.emit(index, index)
-                return True
+                else:
+                    self.dataChanged.emit(index, index)
+                    return True
+        return False
 
-    def sort(self, ncol: int, order):
+    def sort(self, ncol: int, order: QtCore.Qt.SortOrder):
         is_ascending = order == constants.ASCENDING
         with self.change_layout():
             self.df = self.df.sort_values(
