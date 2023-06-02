@@ -150,6 +150,8 @@ class HorizontalHeaderModel(core.AbstractTableModel):
                     return str(self.df.columns.values[col][row])
                 else:
                     return str(self.df.columns.values[col])
+            case constants.ALIGNMENT_ROLE:
+                return constants.ALIGN_CENTER
 
     def headerData(self, section: int, orientation, role=None):
         match role, orientation:
