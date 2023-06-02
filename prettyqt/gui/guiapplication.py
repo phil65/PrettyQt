@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 import contextlib
 import sys
+from typing import SupportsInt
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
@@ -47,6 +48,12 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         palette = gui.Palette(cls.palette())
         yield palette
         cls.setPalette(palette)
+
+    @classmethod
+    def find_window(cls, h_wnd: SupportsInt) -> QtGui.QWindow:
+        for window in cls.topLevelWindows():
+            if window and int(window.winId()) == int(h_wnd):
+                return window
 
     def set_layout_direction(self, direction: constants.LayoutDirectionStr):
         """Set layout direction.
