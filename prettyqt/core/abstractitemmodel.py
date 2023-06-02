@@ -44,6 +44,7 @@ ProxyStr = Literal[
     "appearance",
     "column_join",
     "read_only",
+    "highlight_current",
 ]
 
 
