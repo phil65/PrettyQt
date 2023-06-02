@@ -476,7 +476,7 @@ class HeaderView(widgets.TableView):
         n = len(index[0]) if is_multiindex else 1
         for level in range(n):
             # Find how many segments the MultiIndex has
-            arr = [index[i][level] for i in range(len(index))] if is_multiindex else index
+            arr = index.codes[level] if is_multiindex else index
             # Holds the starting index of a range of equal values.
             # None means it is not currently in a range of equal values.
             match_start = None
