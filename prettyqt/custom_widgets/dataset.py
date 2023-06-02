@@ -31,7 +31,7 @@ class DataItem:
     def __get__(self, instance, owner):
         return self.value
 
-    def set_pos(self, col=0, colspan=None):
+    def set_pos(self, col: int = 0, colspan=None):
         """Set data item's position on a GUI layout."""
         self.label_col = col
         self.colspan = colspan
@@ -44,10 +44,10 @@ class DataItem:
         # self.set_prop("display", store=prop)
         return self
 
-    def is_valid(self):
+    def is_valid(self) -> bool:
         return True
 
-    def create_widget(self):
+    def create_widget(self) -> widgets.Widget:
         widget = self._create_widget()
         if self.optional:
             return custom_widgets.OptionalWidget(widget, self.optional)

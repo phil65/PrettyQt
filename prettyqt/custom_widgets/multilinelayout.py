@@ -19,7 +19,7 @@ class MultiLineLayout(widgets.BoxLayout):
         self.add(other)
         return self
 
-    def set_direction(self, direction):
+    def set_direction(self, direction: widgets.BoxLayout.Direction):
         super().setDirection(direction)
         direction = (
             self.Direction.LeftToRight
@@ -35,7 +35,7 @@ class MultiLineLayout(widgets.BoxLayout):
     #     while item:
     #         item = self.takeAt(0)
 
-    def addWidget(self, widget):
+    def addWidget(self, widget: QtWidgets.QWidget):
         if self.cindex == 0:
             direction = (
                 self.Direction.LeftToRight

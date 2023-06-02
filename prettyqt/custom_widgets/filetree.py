@@ -31,13 +31,13 @@ class FileTree(widgets.TreeView):
             self._save_expanded_on_level(self.model().index(i, 0))
         return self.expanded_ids
 
-    def set_expanded_state(self, state):
+    def set_expanded_state(self, state: list[str]):
         self.expanded_ids = state
         with self.updates_off():
             for i in range(self.model().rowCount()):
                 self._restore_expanded_on_level(self.model().index(i, 0))
 
-    def _save_expanded_on_level(self, index):
+    def _save_expanded_on_level(self, index: core.ModelIndex):
         if not self.isExpanded(index):
             return None
         model = self.model()
@@ -48,7 +48,7 @@ class FileTree(widgets.TreeView):
             val = model.index(i, 0, index)
             self._save_expanded_on_level(val)
 
-    def _restore_expanded_on_level(self, index):
+    def _restore_expanded_on_level(self, index: core.ModelIndex):
         model = self.model()
         path = model.data(index, model.FilePathRole)
         if path not in self.expanded_ids:

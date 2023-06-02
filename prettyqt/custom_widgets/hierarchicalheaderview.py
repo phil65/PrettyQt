@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -190,7 +190,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         style_options: QtWidgets.QStyleOptionHeader,
         section_rect: QtCore.QRect,
         top: int,
-    ):
+    ) -> int:
         uniopt = QtWidgets.QStyleOptionHeader(style_options)
         self.set_foreground_brush(uniopt, cell_index)
         self.set_background_brush(uniopt, cell_index)
@@ -272,7 +272,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         style_options: QtWidgets.QStyleOptionHeader,
         section_rect: QtCore.QRect,
         left: int,
-    ):
+    ) -> int:
         uniopt = QtWidgets.QStyleOptionHeader(style_options)
         self.set_foreground_brush(uniopt, cell_index)
         self.set_background_brush(uniopt, cell_index)
@@ -339,7 +339,9 @@ class HierarchicalHeaderView(widgets.HeaderView):
             )
         painter.setBrushOrigin(old_bo)
 
-    def _on_section_moved(self, logical_index, old_visual_index, new_visual_index):
+    def _on_section_moved(
+        self, logical_index: int, old_visual_index: int, new_visual_index: int
+    ):
         view = self.parent()
         model = view.model()
         if not hasattr(model, "reorder"):
@@ -519,12 +521,12 @@ if __name__ == "__main__":
     import numpy as np
     import pandas as pd
 
-    from prettyqt import gui
-
     from prettyqt.qtpandas import pandasmodels
 
     class DataFrameModel(pandasmodels.DataTableModel):
-        def read_level(self, y: int = 0, xs: int = 0, xe=None, orient=None):
+        def read_level(
+            self, y: int = 0, xs: int = 0, xe: int | None = None, orient=None
+        ) -> list[gui.StandardItem]:
             c = (
                 self.df.columns
                 if orient == HORIZONTAL_HEADER_DATA_ROLE
@@ -556,7 +558,7 @@ if __name__ == "__main__":
                 return hm
             return super().data(index, role)
 
-        def reorder(self, old_index, new_index, orientation):
+        def reorder(self, old_index, new_index, orientation) -> bool:
             """Reorder columns / rows."""
             horizontal = orientation == constants.HORIZONTAL
             cols = list(self.df.columns if horizontal else self.df.index)

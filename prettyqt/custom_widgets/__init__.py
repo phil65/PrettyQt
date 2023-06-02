@@ -47,7 +47,6 @@ from .editors.selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
 from .roundprogressbar import RoundProgressBar
 from .subsequencecompleter import SubsequenceCompleter
-from .framelesswindow import FramelessWindow
 from .filetree import FileTree
 
 # from .stareditor import StarEditor, StarRating
@@ -106,14 +105,11 @@ __all__ = [
     "PopupInfo",
     "SelectionWidget",
     "CodeEditor",
-    "Player",
     "Timeline",
     # "StarEditor",
     # "StarRating",
     "VideoSample",
-    "RegexEditorWidget",
     "StandardIconsWidget",
     "SubsequenceCompleter",
-    "FramelessWindow",
     "FileTree",
 ]

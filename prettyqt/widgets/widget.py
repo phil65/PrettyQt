@@ -121,19 +121,23 @@ class WidgetMixin(core.ObjectMixin):
             i.setParent(self)
         self.addActions(actions)
 
-    def toggle_fullscreen(self):
+    def toggle_fullscreen(self) -> bool:
         """Toggle between fullscreen and regular size."""
         if self.isFullScreen():
             self.showNormal()
+            return False
         else:
             self.showFullScreen()
+            return True
 
-    def toggle_maximized(self):
+    def toggle_maximized(self) -> bool:
         """Toggle between maximized and regular size."""
         if self.isMaximized():
             self.showNormal()
+            return False
         else:
             self.showMaximized()
+            return True
 
     def set_graphics_effect(
         self,

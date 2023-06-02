@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import widgets
+from prettyqt.qt import QtGui
 
 
 class DefaultDropDownAction(widgets.WidgetAction):
@@ -19,7 +20,7 @@ class DefaultDropDownAction(widgets.WidgetAction):
         self.setDefaultWidget(button)
         self._button = button
 
-    def get_menu(self):
+    def get_menu(self) -> widgets.Menu:
         """Returns the menu."""
         menu = self._button.menu()
         if menu is None:
@@ -27,7 +28,7 @@ class DefaultDropDownAction(widgets.WidgetAction):
             self._button.setMenu(menu)
         return menu
 
-    def addAction(self, action):
+    def addAction(self, action: QtGui.QAction):
         """Add a new action to the list."""
         menu = self.get_menu()
         menu.addAction(action)
@@ -36,7 +37,7 @@ class DefaultDropDownAction(widgets.WidgetAction):
         if action.isCheckable():
             action.toggled.connect(self._toggled)
 
-    def _toggled(self, checked):
+    def _toggled(self, checked: bool):
         if checked:
             action = self.sender()
             self._button.setDefaultAction(action)
