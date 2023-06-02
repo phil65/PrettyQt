@@ -88,7 +88,7 @@ class DataTableModel(core.AbstractTableModel):
 
 
 class DataTableWithHeaderModel(DataTableModel):
-    def headerData(self, idx: int, orientation, role):
+    def headerData(self, idx: int, orientation, role=constants.DISPLAY_ROLE):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
                 return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM

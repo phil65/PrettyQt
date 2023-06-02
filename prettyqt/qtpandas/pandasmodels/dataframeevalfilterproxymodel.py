@@ -52,14 +52,12 @@ class DataFrameEvalFilterProxyModel(core.SortFilterProxyModel):
         return self._filter_expr
 
     def filterAcceptsRow(self, source_row: int, parent: core.ModelIndex) -> bool:
-        if self.filter_series is False and self._filter_expr:
+        if not self._filter_expr:
+            return True
+        if self.filter_series is False:
             # invalid filter expression, show nothing.
             return False
-        return (
-            self.filter_series[source_row]
-            if self._filter_expr and self.filter_series is not None
-            else True
-        )
+        return self.filter_series[source_row] if self.filter_series is not None else True
 
     filter_expression = core.Property(str, get_filter, set_filter, user=True)
 
@@ -72,7 +70,7 @@ class DataFrameSearchFilterProxyModel(DataFrameEvalFilterProxyModel):
             ncol = self.filterKeyColumn()
             col = self.sourceModel().headerData(ncol, constants.HORIZONTAL)
             # expr = f"[{self._filter_expr}] in {col}"
-            expr = f'"{self._filter_expr}" <= {col} <= "{self._filter_expr}~"'
+            expr = f"'{self._filter_expr}' <= `{col}` <= '{self._filter_expr}~'"
             self.filter_series = self.sourceModel().df.eval(expr)
         except Exception:
             self.filter_series = False
@@ -93,7 +91,7 @@ if __name__ == "__main__":
     table.set_delegate("variant")
     model = pandasmodels.DataTableWithHeaderModel(df, parent=table)
     proxy = DataFrameSearchFilterProxyModel(parent=table)
-    proxy.setFilterKeyColumn(-1)
+    proxy.setFilterKeyColumn(1)
     proxy.setSourceModel(model)
     table.set_model(proxy)
     widget = widgets.Widget()
