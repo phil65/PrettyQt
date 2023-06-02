@@ -48,18 +48,18 @@ class VariantDelegate(widgets.StyledItemDelegate):
     def createEditor(self, parent, option, index):
         from prettyqt import custom_widgets
 
-        original_value = self._data_for_index(index, self.data_role)
-        logger.info(f"creating editor for {original_value!r}...")
+        val = self._data_for_index(index, self.data_role)
+        logger.info(f"creating editor for {val!r}...")
         widget = None
-        match original_value:
+        match val:
             case bool():
                 widget = widgets.CheckBox()
             case enum.Flag():
                 widget = custom_widgets.EnumFlagWidget()
-                widget._set_enum_class(type(original_value))
+                widget._set_enum_class(type(val))
             case enum.Enum():
                 widget = custom_widgets.EnumComboBox()
-                widget._set_enum_class(type(original_value))
+                widget._set_enum_class(type(val))
             case int():
                 widget = widgets.SpinBox()
             case float():
@@ -102,12 +102,14 @@ class VariantDelegate(widgets.StyledItemDelegate):
         except ImportError:
             pass
         else:
-            match original_value:
+            match val:
                 case np.floating():
                     widget = custom_widgets.FloatLineEdit()
+                case np.integer():
+                    widget = custom_widgets.IntLineEdit()
 
         if widget is None:
-            logger.warning(f"Could not find editor for {original_value!r}")
+            logger.warning(f"Could not find editor for {val!r} ({type(val)})")
             return None
         widget.setParent(parent)
         widget.setAutoFillBackground(True)
