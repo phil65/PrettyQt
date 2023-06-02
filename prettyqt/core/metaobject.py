@@ -82,6 +82,7 @@ class MetaObject:
         return {i.name(): i.value() for i in classinfos}
 
     def get_method(self, index: int | str) -> core.MetaMethod:
+        """Get MetaMethod based on index or name."""
         if isinstance(index, int):
             method = core.MetaMethod(self.item.method(index))
             if not method.isValid():
@@ -93,6 +94,7 @@ class MetaObject:
         raise KeyError(index)
 
     def get_enum(self, index: int | str) -> core.MetaEnum:
+        """Get MetaEnum based on index or name."""
         if isinstance(index, int):
             enum = core.MetaEnum(self.item.enumerator(index))
             if not enum.isValid():
@@ -104,6 +106,7 @@ class MetaObject:
         raise KeyError(index)
 
     def get_property(self, index: int | str) -> core.MetaProperty:
+        """Get MetaProperty based on index or name."""
         if isinstance(index, int):
             prop = core.MetaProperty(self.item.property(index))
             if not prop.isValid():
@@ -115,6 +118,7 @@ class MetaObject:
         raise KeyError(index)
 
     def get_constructor(self, index: int | str) -> core.MetaProperty:
+        """Get ctor MetaMethod based on index or name."""
         if isinstance(index, int):
             method = core.MetaMethod(self.item.constructor(index))
             if not method.isValid():
@@ -131,6 +135,7 @@ class MetaObject:
         type_filter: core.metamethod.MethodTypeStr | None = None,
         filter_shit: bool = True,
     ) -> list[core.MetaMethod]:
+        """Get all MetaMethods based on given criteria."""
         start = 0 if include_super else self.item.methodOffset() - 1
         methods = [
             method
@@ -144,16 +149,19 @@ class MetaObject:
             return [i for i in methods if i.get_method_type() == type_filter]
 
     def get_enums(self, include_super: bool = True) -> list[core.MetaEnum]:
+        """Get all MetaEnums based on given criteria."""
         start = 0 if include_super else self.item.enumeratorOffset() - 1
         return [self.get_enum(i) for i in range(start, self.item.enumeratorCount())]
 
     def get_constructors(self) -> list[core.MetaMethod]:
+        """Get all ctor MetaMethods."""
         count = self.item.constructorCount()
         return [core.MetaMethod(self.item.constructor(i)) for i in range(count)]
 
     def get_properties(
         self, include_super: bool = True, only_writable: bool = False
     ) -> list[core.MetaProperty]:
+        """Get all MetaProperties based on given criteria."""
         start = 0 if include_super else self.item.propertyOffset() - 1
         count = self.item.propertyCount()
         return [
@@ -165,6 +173,7 @@ class MetaObject:
     def get_property_values(
         self, qobject: QtCore.QObject, cast_types: bool = False
     ) -> dict[str, Any]:
+        """Get a dictionary containing all MetaProperties values from given qobject."""
         vals = {prop.get_name(): prop.read(qobject) for prop in self.get_properties()}
         if cast_types:
             return {k: datatypes.make_serializable(v) for k, v in vals.items()}
@@ -174,6 +183,7 @@ class MetaObject:
     def get_signals(
         self, include_super: bool = True, only_notifiers: bool = False
     ) -> list[core.MetaMethod]:
+        """Get all signal MetaMethods based on given criteria."""
         if only_notifiers:
             return [
                 prop.get_notify_signal()
@@ -184,15 +194,19 @@ class MetaObject:
             return self.get_methods(include_super=include_super, type_filter="signal")
 
     def get_slots(self, include_super: bool = True) -> list[core.MetaMethod]:
+        """Get all slot MetaMethods based on given criteria."""
         return self.get_methods(include_super=include_super, type_filter="slot")
 
     def get_plain_methods(self, include_super: bool = True) -> list[core.MetaMethod]:
+        """Get all plain MetaMethods based on given criteria."""
         return self.get_methods(include_super=include_super, type_filter="method")
 
     def get_meta_type(self) -> core.MetaType:
+        """Get Meta type of this MetaObject."""
         return core.MetaType(self.metaType().id())
 
     def get_user_property(self) -> core.MetaProperty | None:
+        """Get MetaProperty marked as userprop."""
         return core.MetaProperty(p) if (p := self.userProperty()).isValid() else None
 
     # just experimenting
@@ -217,6 +231,7 @@ class MetaObject:
     def connect_signals(
         self, qobject: QtCore.QObject, fn: Callable, only_notifiers: bool = False
     ) -> list[QtCore.QMetaObject.Connection]:
+        """Connect all signals of a given qobject to fn."""
         handles = []
         for signal in self.get_signals(only_notifiers=only_notifiers):
             signal_name = signal.get_name()
@@ -227,7 +242,12 @@ class MetaObject:
         return handles
 
     def copy(self, widget):
-        new = type(widget)()
+        """Create a copy of given widget."""
+        try:
+            new = type(widget)()
+        except TypeError:
+            # this should should cover most cases.
+            new = type(widget)(widget.orientation())
         for prop in self.get_properties(only_writable=True):
             val = prop.read(widget)
             prop.write(new, val)
@@ -249,6 +269,10 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    rb = widgets.RadioButton()
-    metaobj = widgets.RadioButton.get_static_metaobject()
-    handles = metaobj.connect_signals(rb, print)
+    h = widgets.HeaderView("horizontal")
+    metaobj = h.get_metaobject()
+    h = metaobj.copy(h)
+    ctors = metaobj.get_constructors()
+    print(ctors)
+    for ctor in ctors:
+        print(ctor.get_method_signature())
