@@ -211,14 +211,9 @@ class WidgetMixin(core.ObjectMixin):
 
     def raise_to_top(self):
         if sys.platform.startswith("win"):
-            import win32con
-            from win32gui import SetWindowPos
+            from prettyqt.utils.platforms.windows import misc
 
-            # set to always-on-top and disable it again. that way windows stays in front
-            flag = win32con.SWP_NOMOVE | win32con.SWP_NOSIZE | win32con.SWP_SHOWWINDOW
-            win_id = self.winId()
-            SetWindowPos(win_id, win32con.HWND_TOPMOST, 0, 0, 0, 0, flag)
-            SetWindowPos(win_id, win32con.HWND_NOTOPMOST, 0, 0, 0, 0, flag)
+            misc.raise_to_top()
         # state = (self.windowState() & ~Qt.WindowMinimized) | Qt.WindowActive
         # self.setWindowState(state)
         self.raise_()

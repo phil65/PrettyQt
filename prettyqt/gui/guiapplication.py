@@ -163,12 +163,13 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
 
     @classmethod
     def set_palette(cls, palette: constants.ThemeStr | QtGui.QPalette):
-        if palette == "default":
-            pal = gui.Palette()
-        elif palette == "dark":
-            pal = gui.Palette.create_dark_palette()
-        else:
-            pal = palette
+        match palette:
+            case "default":
+                pal = gui.Palette()
+            case "dark":
+                pal = gui.Palette.create_dark_palette()
+            case _:
+                pal = palette
         cls.setPalette(pal)
 
     @classmethod
