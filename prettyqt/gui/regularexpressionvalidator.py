@@ -1,12 +1,25 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
+from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import get_repr
 
 
 class RegularExpressionValidator(gui.ValidatorMixin, QtGui.QRegularExpressionValidator):
     ID = "regular_expression"
+
+    def __init__(self, *args, **kwargs):
+        match args, kwargs:
+            case (str(), *rest), _:
+                super().__init__(QtCore.QRegularExpression(args[0]), *rest, **kwargs)
+            case _, {"regular_expression": str() as reg_str, **rest}:
+                super().__init__(
+                    *args,
+                    regular_expression=QtCore.QRegularExpression(reg_str),
+                    **rest,
+                )
+            case _, _:
+                super().__init__(*args, **kwargs)
 
     def __repr__(self):
         return get_repr(self, self.regularExpression())
@@ -42,7 +55,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     w = widgets.LineEdit()
-    val = RegularExpressionValidator()
+    val = RegularExpressionValidator("test")
     val.set_regex(r"\w\d\d")
     w.set_validator(val)
     w.show()
