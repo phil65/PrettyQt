@@ -7,7 +7,8 @@ import contextlib
 # import inspect
 import itertools
 import logging
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, get_args
+import types
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -209,7 +210,14 @@ class ObjectMixin:
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        return self.findChildren(typ, name=name, options=flag)  # type: ignore
+        if isinstance(typ, types.UnionType):
+            return [
+                i
+                for t in get_args(typ)
+                for i in self.findChildren(t, name=name, options=flag)
+            ]
+        else:
+            return self.findChildren(typ, name=name, options=flag)
 
     def find_child(
         self,

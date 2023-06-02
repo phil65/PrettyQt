@@ -3,6 +3,8 @@ from __future__ import annotations
 from datetime import timedelta
 import logging
 import re
+import types
+import typing
 
 logger = logging.getLogger(__name__)
 
@@ -115,10 +117,16 @@ def get_class_for_id(base_class: type, id_: str):
             yield from get_subclasses(i)
             yield i
 
-    for Klass in get_subclasses(base_class):
-        if "ID" in Klass.__dict__ and Klass.ID == id_:
-            logger.debug(f"found class for id {Klass.ID!r}")
-            return Klass
+    base_classes = (
+        typing.get_args(base_class)
+        if isinstance(base_class, types.UnionType)
+        else (base_class,)
+    )
+    for base_class in base_classes:
+        for Klass in get_subclasses(base_class):
+            if "ID" in Klass.__dict__ and Klass.ID == id_:
+                logger.debug(f"found class for id {Klass.ID!r}")
+                return Klass
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 
 
