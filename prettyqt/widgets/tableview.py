@@ -100,6 +100,15 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         """
         return constants.PEN_STYLE.inverse[self.gridStyle()]
 
+    def resizeColumnsToContents(self, max_columns: int | None = 500):
+        colcount = self.model().columnCount()
+        if max_columns is None or colcount > max_columns:
+            super().resizeColumnsToContents()
+            return
+        to_check = min(colcount, max_columns)
+        for i in range(to_check):
+            self.resizeColumnToContents(i)
+
 
 class TableView(TableViewMixin, QtWidgets.QTableView):
     pass
