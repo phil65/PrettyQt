@@ -11,19 +11,30 @@ LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
 
 
 class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutItemMixin):
-    def set_layout(self, layout: LayoutStr | QtWidgets.QGraphicsLayout):
+    @property
+    def box(self):
+        return self.layout()
+
+    @box.setter
+    def box(self, layout):
+        self.set_layout(layout)
+
+    def set_layout(
+        self, layout: LayoutStr | QtWidgets.QGraphicsLayout
+    ) -> QtWidgets.QGraphicsLayout:
         match layout:
             case QtWidgets.QGraphicsLayout():
-                self.box = layout
+                layout = layout
             case "grid":
-                self.box = widgets.GraphicsGridLayout()
+                layout = widgets.GraphicsGridLayout()
             case "anchor":
-                self.box = widgets.GraphicsAnchorLayout()
+                layout = widgets.GraphicsAnchorLayout()
             case "horizontal" | "vertical":
-                self.box = widgets.GraphicsLinearLayout(layout)
+                layout = widgets.GraphicsLinearLayout(layout)
             case _:
                 raise ValueError(f"Invalid Layout {layout}")
-        self.setLayout(self.box)
+        self.setLayout(layout)
+        return layout
 
     def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
         """Set the way the widget accepts keyboard focus.

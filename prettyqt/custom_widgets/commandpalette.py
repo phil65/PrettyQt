@@ -91,10 +91,9 @@ class CommandPalette(widgets.Widget):
         self._table = CommandTable()
         # self._line.value_changed.connect(self._table.select_first_row)
         self._line.value_changed.connect(self._table._proxy.set_search_term)
-        layout = widgets.VBoxLayout(self)
+        layout = self.set_layout("vertical")
         layout.addWidget(self._line)
         layout.addWidget(self._table)
-        self.setLayout(layout)
         self.add_shortcut("Ctrl+P", self.close)
         self._line.installEventFilter(self)
 

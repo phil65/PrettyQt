@@ -593,6 +593,14 @@ class WidgetMixin(core.ObjectMixin):
         self.set_context_menu_policy("custom")
         self.customContextMenuRequested.connect(method)
 
+    @property
+    def box(self):
+        return self.layout()
+
+    @box.setter
+    def box(self, layout):
+        self.set_layout(layout)
+
     def set_layout(
         self,
         layout: LayoutStr | QtWidgets.QLayout,
@@ -615,27 +623,27 @@ class WidgetMixin(core.ObjectMixin):
 
         match layout:
             case "horizontal":
-                self.box = widgets.HBoxLayout(**kwargs)
+                layout = widgets.HBoxLayout(**kwargs)
             case "vertical":
-                self.box = widgets.VBoxLayout(**kwargs)
+                layout = widgets.VBoxLayout(**kwargs)
             case "grid":
-                self.box = widgets.GridLayout(**kwargs)
+                layout = widgets.GridLayout(**kwargs)
             case "form":
-                self.box = widgets.FormLayout(**kwargs)
+                layout = widgets.FormLayout(**kwargs)
             case "stacked":
-                self.box = widgets.StackedLayout(**kwargs)
+                layout = widgets.StackedLayout(**kwargs)
             case "flow":
-                self.box = custom_widgets.FlowLayout(**kwargs)
+                layout = custom_widgets.FlowLayout(**kwargs)
             case "border":
-                self.box = custom_widgets.BorderLayout(**kwargs)
+                layout = custom_widgets.BorderLayout(**kwargs)
             case QtWidgets.QLayout():
-                self.box = layout
+                layout = layout
             case _:
                 raise ValueError(f"Invalid Layout {layout}")
-        self.setLayout(self.box)
+        self.setLayout(layout)
         if margin is not None:
-            self.box.set_margin(margin)
-        return self.box
+            layout.set_margin(margin)
+        return layout
 
     def position_on(
         self,

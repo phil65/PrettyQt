@@ -311,8 +311,7 @@ class NotificationArea(widgets.Widget):
         self.target_widget = target_widget
         self.set_margin(0)
 
-        notification_area_layout = widgets.VBoxLayout()
-        self.setLayout(notification_area_layout)
+        self.set_layout("vertical")
 
         # Init effects to None
         self.entry_effect: FadeInValue = None

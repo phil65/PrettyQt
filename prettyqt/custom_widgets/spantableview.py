@@ -688,7 +688,7 @@ if __name__ == "__main__":
 
     a = widgets.app()
     w = widgets.Widget()
-    w.setLayout(widgets.VBoxLayout())
+    w.set_layout("vertical")
     view = SpanTableView()
     w.layout().addWidget(view)
 

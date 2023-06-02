@@ -9,10 +9,7 @@ class CollapsibleFrame(widgets.Frame):
 
     def __init__(self, text: str = "", **kwargs):
         super().__init__(frame_shape="styled_panel", frame_shadow="plain", **kwargs)
-        _layout = widgets.VBoxLayout()
-        _layout.set_margin(0)
-        _layout.setSpacing(0)
-        self.setLayout(_layout)
+        _layout = self.set_layout("vertical", margin=0, spacing=0)
         # button
         self._button = widgets.ToolButton(
             self,
@@ -28,12 +25,7 @@ class CollapsibleFrame(widgets.Frame):
         # group box
         self._panel = widgets.Widget(self, visible=False)
         _layout.addWidget(self._panel)
-        self._panel_layout = widgets.VBoxLayout()
-        self._panel_layout.set_margin(1)
-        self._panel_layout.setSpacing(2)
-        self._panel.setLayout(self._panel_layout)
-        # connect signals
-        # private state variables
+        self._panel_layout = self._panel.set_layout("vertical", margin=1, spacing=2)
         self._is_collapsed = True
 
     def set_title(self, title: str):

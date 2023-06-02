@@ -21,13 +21,10 @@ class SelectionWidget(widgets.GroupBox):
         **kwargs,
     ):
         super().__init__(title=label, object_name=object_name, **kwargs)
-        self.box = (
-            widgets.HBoxLayout() if layout == "horizontal" else widgets.VBoxLayout()
-        )
+        self.set_layout(layout)
         self.widget_custom: widgets.Widget | None = None
         self.rb_other = widgets.RadioButton()
         self.buttons: dict[widgets.RadioButton, Any] = {}
-        self.set_layout(self.box)
 
     def __iter__(self) -> Iterator[tuple[widgets.RadioButton, Any]]:
         return iter(self.buttons.items())

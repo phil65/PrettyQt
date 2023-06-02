@@ -94,27 +94,21 @@ class FramelessWindow(widgets.Widget):
         self.main_widget = widgets.MainWindow()
 
         # Set up layout
-        self.main_layout = widgets.VBoxLayout()
+        self.main_layout = widgets.VBoxLayout(margin=0, spacing=0)
         self.main_layout.addWidget(self.title_bar)
         self.main_layout.addWidget(self.main_widget)
 
-        self.main_layout.set_margin(0)
-        self.main_layout.setSpacing(0)
-
-        self.grip_layout = widgets.GridLayout()
+        self.grip_layout = self.set_layout("grid", margin=0, spacing=0)
 
         self.grip_layout.addLayout(self.main_layout, 1, 1)
-        self.grip_layout.addWidget(EdgeGrip("top"), 0, 1)
-        self.grip_layout.addWidget(EdgeGrip("right"), 1, 2)
-        self.grip_layout.addWidget(EdgeGrip("bottom"), 2, 1)
-        self.grip_layout.addWidget(EdgeGrip("left"), 1, 0)
-        self.grip_layout.addWidget(EdgeGrip("top_left"), 0, 0)
-        self.grip_layout.addWidget(EdgeGrip("top_right"), 0, 2)
-        self.grip_layout.addWidget(EdgeGrip("bottom_left"), 2, 0)
-        self.grip_layout.addWidget(EdgeGrip("bottom_right"), 2, 2)
-        self.grip_layout.set_margin(0)
-        self.grip_layout.setSpacing(0)
-        self.setLayout(self.grip_layout)
+        self.grip_layout[0, 1] = EdgeGrip("top")
+        self.grip_layout[1, 2] = EdgeGrip("right")
+        self.grip_layout[2, 1] = EdgeGrip("bottom")
+        self.grip_layout[1, 0] = EdgeGrip("left")
+        self.grip_layout[0, 0] = EdgeGrip("top_left")
+        self.grip_layout[0, 2] = EdgeGrip("top_right")
+        self.grip_layout[2, 0] = EdgeGrip("bottom_left")
+        self.grip_layout[2, 2] = EdgeGrip("bottom_right")
 
         if sys.platform == "win32":
             self.hwnd = int(self.winId())

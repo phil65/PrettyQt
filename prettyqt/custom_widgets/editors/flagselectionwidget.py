@@ -17,11 +17,8 @@ class FlagSelectionWidget(widgets.GroupBox):
         **kwargs,
     ):
         super().__init__(title=label, object_name=object_name, **kwargs)
-        self.box = (
-            widgets.HBoxLayout() if layout == "horizontal" else widgets.VBoxLayout()
-        )
+        self.set_layout(layout)
         self.buttons: dict[widgets.CheckBox, int] = {}
-        self.set_layout(self.box)
 
     def __iter__(self) -> Iterator[tuple[widgets.CheckBox, int]]:
         return iter(self.buttons.items())

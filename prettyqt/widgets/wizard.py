@@ -156,9 +156,8 @@ class WizardMixin(widgets.DialogMixin):
 
     def add_widget_as_page(self, widget: QtWidgets.QWidget) -> None:
         page = widgets.WizardPage(self)
-        layout = widgets.VBoxLayout(self)
+        layout = page.set_layout("vertical")
         layout += widget
-        page.set_layout(layout)
 
     def set_title_format(self, fmt: TextFormatStr):
         """Set the title format.

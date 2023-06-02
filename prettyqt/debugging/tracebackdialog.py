@@ -8,8 +8,7 @@ class TracebackDialog(widgets.Dialog):
 
     def __init__(self, parent):
         super().__init__(parent, window_title="Traceback")
-        layout = widgets.VBoxLayout()
-        self.setLayout(layout)
+        layout = self.set_layout("vertical")
         self._text = widgets.TextEdit(self, read_only=True, line_wrap_mode="none")
         self._text.setFontFamily(gui.Font.mono().family())
         layout.addWidget(self._text)

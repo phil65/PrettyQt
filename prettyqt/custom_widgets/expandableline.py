@@ -42,12 +42,11 @@ class ExpandableLine(widgets.Widget):
         self.toggle_anim.add_property_animation(self.minimumHeight)
         self.toggle_anim.add_property_animation(self.maximumHeight)
         self.toggle_anim.add_property_animation(self.content_area.maximumHeight)
-        base_layout = widgets.GridLayout(margin=0)
+        base_layout = self.set_layout("grid", margin=0)
         base_layout.setVerticalSpacing(0)
         base_layout[0, 0] = self.expand_btn
         base_layout[0, 2] = header_line
         base_layout[1, 0:2] = self.content_area
-        self.setLayout(base_layout)
         # self.toggle_anim.setStartValue(0)
         # self.toggle_anim.setEndValue(300)
         # === SIGNALS === #

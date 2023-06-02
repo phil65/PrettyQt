@@ -16,7 +16,7 @@ class FontChooserButton(widgets.Widget):
     ):
         super().__init__(object_name=object_name, **kwargs)
         self._current_font = None
-        layout = widgets.HBoxLayout(self, margin=0)
+        layout = self.set_layout("horizontal", margin=0)
         self.lineedit = widgets.LineEdit(read_only=True)
         self.set_current_font(font)
         layout.add(self.lineedit)

@@ -11,15 +11,11 @@ class AccordionItem(widgets.GroupBox):
         super().__init__(accept_drops=True, context_menu_policy="custom", **kwargs)
 
         # create the layout
-        layout = widgets.VBoxLayout(spacing=0, margin=6)
+        layout = self.set_layout("vertical", spacing=0, margin=6)
         layout.addWidget(widget)
-
         self._rollout_style = 2
         self._drag_drop_mode = 0
-
-        self.setLayout(layout)
         self.customContextMenuRequested.connect(self.show_menu)
-
         # create custom properties
         self._widget = widget
         self._collapsed = False
@@ -407,14 +403,8 @@ class AccordionWidget(widgets.ScrollArea):
         self._scroll_init_val = 0
         self._ItemClass = AccordionItem
         self._items = {}
-
-        layout = widgets.VBoxLayout()
-        layout.set_margin(2)
-        layout.setSpacing(2)
+        layout = widget.set_layout("vertical", margin=2, spacing=2)
         layout.addStretch(1)
-
-        widget.setLayout(layout)
-
         self.setWidget(widget)
 
     def setSpacing(self, spaceInt):
