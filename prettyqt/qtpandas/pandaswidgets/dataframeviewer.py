@@ -454,17 +454,17 @@ class HeaderView(widgets.TableView):
     def init_size(self):
         padding = 20
         self.resizeColumnsToContents()
-
+        colcount = min(self.model().columnCount(), 500)
         if self.is_horizontal():
             min_size = 100
-            for col in range(self.model().columnCount()):
+            for col in range(colcount):
                 width = self.columnWidth(col)
                 new_width = max(width + padding, min_size)
                 self.setColumnWidth(col, new_width)
                 self.table.setColumnWidth(col, new_width)
         else:
             # max_size = 1000
-            for col in range(self.model().columnCount()):
+            for col in range(colcount):
                 width = self.columnWidth(col)
                 self.setColumnWidth(col, width + padding)
 
