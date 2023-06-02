@@ -241,7 +241,7 @@ class MetaObject:
         logger.debug(f"connected {len(handles)} signals to {fn}.")
         return handles
 
-    def copy(self, widget):
+    def copy(self, widget, forward_signals: bool = True):
         """Create a copy of given widget."""
         try:
             new = type(widget)()
@@ -256,12 +256,13 @@ class MetaObject:
         signal_names = {
             s.get_name() for s in self.get_signals() if hasattr(widget, s.get_name())
         }
-        for signal_name in signal_names:
-            own_signal = widget.__getattribute__(signal_name)
-            new_signal = new.__getattribute__(signal_name)
-            # own_signal.connect(new_signal)
-            new_signal.connect(own_signal)
-            logger.debug(f"connected {signal_name}")
+        if forward_signals:
+            for signal_name in signal_names:
+                own_signal = widget.__getattribute__(signal_name)
+                new_signal = new.__getattribute__(signal_name)
+                # own_signal.connect(new_signal)
+                new_signal.connect(own_signal)
+        logger.debug(f"copied {widget!r}")
         return new
 
 
