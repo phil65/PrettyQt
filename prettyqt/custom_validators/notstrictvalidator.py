@@ -7,9 +7,9 @@ from prettyqt.qt import QtGui
 class NotStrictValidator(gui.Validator):
     ID = "not_strict"
 
-    def __init__(self, validator, *args, **kwargs):
+    def __init__(self, validator: QtGui.QValidator | None = None, **kwargs):
         self._validator = validator
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
 
     def __eq__(self, other: object):
         return (
@@ -20,11 +20,8 @@ class NotStrictValidator(gui.Validator):
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:
         state, text, pos = self._validator.validate(text, pos)
-        return (
-            self.State.Intermediate if state == self.State.Invalid else state,
-            text,
-            pos,
-        )
+        is_invalid = state == self.State.Invalid
+        return self.State.Intermediate if is_invalid else state, text, pos
 
 
 if __name__ == "__main__":

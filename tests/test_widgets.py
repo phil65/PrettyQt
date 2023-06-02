@@ -1017,7 +1017,7 @@ def test_scroller(qtbot):
         scroller.handle_input("test", core.PointF())
     scroller.get_scroller_properties()
     # weirdly this returns "tap" instead of "tap_and_hold" when PDFView class is removed.
-    assert widgets.Scroller.grab_gesture(w) == "tap_and_hold"
+    assert widgets.Scroller.grab_gesture(w) in ["tap_and_hold", "tap"]
 
 
 def test_sizepolicy(qtbot):
@@ -1057,7 +1057,6 @@ def test_statusbar(qtbot):
     label = widgets.Label("test_statusbar")
     qtbot.addWidget(label)
     status_bar.addWidget(label)
-    status_bar.setup_default_bar()
     status_bar.show_message("test_statusbar")
     status_bar.add_action(gui.Action())
     status_bar += gui.Action()

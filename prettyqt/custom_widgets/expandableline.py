@@ -57,13 +57,10 @@ class ExpandableLine(widgets.Widget):
         self.toggle_anim.start()
 
     def set_layout(
-        self,
-        layout: widgets.widget.LayoutStr | QtWidgets.QLayout | None,
-        margin: int | None = None,
-        spacing: int | None = None,
-    ) -> None:
+        self, layout: widgets.widget.LayoutStr | QtWidgets.QLayout | None, **kwargs
+    ) -> QtWidgets.QLayout:
         self.content_area.destroy()
-        self.content_area.set_layout(layout, margin=margin, spacing=spacing)
+        self.content_area.set_layout(layout, **kwargs)
         collapsed_height = self.sizeHint().height() - self.content_area.maximumHeight()
         content_height = self.content_area.box.sizeHint().height() + 300
         for expand_anim in self.toggle_anim[:-1]:
@@ -71,6 +68,7 @@ class ExpandableLine(widgets.Widget):
             expand_anim.set_range(collapsed_height, collapsed_height + content_height)
         content_anim = self.toggle_anim[-1]
         content_anim.set_range(1, content_height)
+        return self.content_area.layout()
 
     def set_animation_duration(self, duration: int):
         self._animation_duration = duration

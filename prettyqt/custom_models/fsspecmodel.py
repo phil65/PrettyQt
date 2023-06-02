@@ -537,6 +537,8 @@ class FSSpecTreeModel(
     def filter(self):
         return NotImplemented
 
+    readOnly = core.Property(bool, isReadOnly, setReadOnly)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
