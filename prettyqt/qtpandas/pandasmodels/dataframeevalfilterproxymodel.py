@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import core
+from prettyqt import constants, core
 
 logger = logging.getLogger(__name__)
 
@@ -64,6 +64,21 @@ class DataFrameEvalFilterProxyModel(core.SortFilterProxyModel):
     filter_expression = core.Property(str, get_filter, set_filter, user=True)
 
 
+class DataFrameSearchFilterProxyModel(DataFrameEvalFilterProxyModel):
+    """This proxy only works for str columns."""
+
+    def _on_reset(self):
+        try:
+            ncol = self.filterKeyColumn()
+            col = self.sourceModel().headerData(ncol, constants.HORIZONTAL)
+            # expr = f"[{self._filter_expr}] in {col}"
+            expr = f'"{self._filter_expr}" <= {col} <= "{self._filter_expr}~"'
+            self.filter_series = self.sourceModel().df.eval(expr)
+        except Exception:
+            self.filter_series = False
+        self.invalidate()
+
+
 if __name__ == "__main__":
     import pandas as pd
 
@@ -72,12 +87,13 @@ if __name__ == "__main__":
 
     app = widgets.app()
 
-    df = pd.DataFrame(dict(a=[4, 2, 1], b=[1, 2, 3], c=[1, 2, 3]))
+    df = pd.DataFrame(dict(a=[40, 224, 1], b=["1abc", "2", "3"], c=[1, 2, 3]))
 
     table = widgets.TableView()
     table.set_delegate("variant")
     model = pandasmodels.DataTableWithHeaderModel(df, parent=table)
-    proxy = DataFrameEvalFilterProxyModel(parent=table)
+    proxy = DataFrameSearchFilterProxyModel(parent=table)
+    proxy.setFilterKeyColumn(-1)
     proxy.setSourceModel(model)
     table.set_model(proxy)
     widget = widgets.Widget()
