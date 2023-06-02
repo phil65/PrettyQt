@@ -477,25 +477,31 @@ class HeaderView(widgets.TableView):
         for level in range(n):
             # Find how many segments the MultiIndex has
             arr = index.codes[level] if is_multiindex else index
+            starts = np.where(arr[:-1] != arr[1:])[0] + 1
+            starts = np.insert(starts, 0, 0)
+            lengths = np.diff(starts)
+            lengths = np.append(lengths, len(arr) - starts[-1])
+            for start, length in zip(starts, lengths):
+                if length > 1:
+                    self.set_section_span(level, start, length)
             # Holds the starting index of a range of equal values.
             # None means it is not currently in a range of equal values.
-            match_start = None
-
-            for col in range(1, len(arr)):  # Iterates over cells in row
-                # Check if cell matches cell to its left
-                if arr[col] == arr[col - 1]:
-                    if match_start is None:
-                        match_start = col - 1
-                    # If this is the last cell, need to end it
-                    if col == len(arr) - 1:
-                        match_end = col
-                        span_size = match_end - match_start + 1
-                        self.set_section_span(level, match_start, span_size)
-                elif match_start is not None:
-                    match_end = col - 1
-                    span_size = match_end - match_start + 1
-                    self.set_section_span(level, match_start, span_size)
-                    match_start = None
+            # match_start = None
+            # for col in range(1, len(arr)):  # Iterates over cells in row
+            #     # Check if cell matches cell to its left
+            #     if arr[col] == arr[col - 1]:
+            #         if match_start is None:
+            #             match_start = col - 1
+            #         # If this is the last cell, need to end it
+            #         if col == len(arr) - 1:
+            #             match_end = col
+            #             span_size = match_end - match_start + 1
+            #             self.set_section_span(level, match_start, span_size)
+            #     elif match_start is not None:
+            #         match_end = col - 1
+            #         span_size = match_end - match_start + 1
+            #         self.set_section_span(level, match_start, span_size)
+            #         match_start = None
 
     def set_section_span(self, row, column, count):
         if self.is_horizontal():
@@ -640,9 +646,11 @@ if __name__ == "__main__":
         ("foo", "two", "q"),
         ("qux", "xff", "q"),
         ("qux", "two", "q"),
-    ]
+        ("qux", "two", "q"),
+        ("qux", "two", "q"),
+    ] * 1000
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
+    df = pd.DataFrame(np.random.randn(10000, 10000), index=index, columns=index)
     app = widgets.app()
     app.set_style("fusion")
     view2 = DataFrameViewer(df)
