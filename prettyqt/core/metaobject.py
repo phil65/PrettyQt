@@ -73,9 +73,15 @@ class MetaObject:
         return getattr(self.item, val)
 
     def get_super_class(self) -> MetaObject | None:
+        """Get SuperClass MetaObject."""
         return MetaObject(klass) if (klass := self.superClass()) is not None else None
 
+    def get_name(self) -> str:
+        """Get MetaObject class name."""
+        return self.className()
+
     def get_class_info(self, include_super: bool = True) -> dict[str, str]:
+        """Get MetaObject class info."""
         start = 0 if include_super else self.item.classInfoOffset() - 1
         count = self.item.classInfoCount()
         classinfos = [self.item.classInfo(i) for i in range(start, count)]
@@ -265,6 +271,18 @@ class MetaObject:
         logger.debug(f"copied {widget!r}")
         return new
 
+    def get_property_class_affiliations(self) -> dict[str, list[core.MetaProperty]]:
+        """Get a mapping of class -> property affiliations."""
+        mapper = {}
+        metaclass = self
+        while metaclass is not None:
+            mapper[metaclass.get_name()] = [
+                metaclass.get_property(i)
+                for i in range(metaclass.propertyOffset(), metaclass.propertyCount())
+            ]
+            metaclass = metaclass.get_super_class()
+        return mapper
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
@@ -272,8 +290,5 @@ if __name__ == "__main__":
     app = widgets.app()
     h = widgets.HeaderView("horizontal")
     metaobj = h.get_metaobject()
-    h = metaobj.copy(h)
-    ctors = metaobj.get_constructors()
-    print(ctors)
-    for ctor in ctors:
-        print(ctor.get_method_signature())
+    kls = metaobj.get_property_class_affiliations()
+    # print(kls)
