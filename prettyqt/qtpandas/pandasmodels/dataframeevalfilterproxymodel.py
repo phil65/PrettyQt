@@ -67,8 +67,10 @@ class DataFrameEvalFilterProxyModel(core.SortFilterProxyModel):
 class DataFrameSearchFilterProxyModel(DataFrameEvalFilterProxyModel):
     """This one only works for str columns.
 
-    Not as flexible, (always-case-sensitive, -1 for columns not working.)
+    Not as flexible, (always-case-sensitive, -1 for filterKeyColumn not working.)
     but probably faster than SortFilterProxyModel. Needs benchmarking.
+    Fastest would be to circumvent the row-based filter approach,
+    but doing it this way saves memory as we dont need a copy of the whole dataframe.
     """
 
     ID = "pandas_search_filter"
