@@ -100,6 +100,23 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         """
         return constants.PEN_STYLE.inverse[self.gridStyle()]
 
+    def get_visible_section_span(
+        self, orientation: constants.OrientationStr
+    ) -> tuple[int, int]:
+        rect = self.rect()
+        if orientation == "horizontal":
+            start = self.columnAt(rect.left())
+            count = self.model().columnCount()
+            end = self.columnAt(rect.right())
+        else:
+            start = self.rowAt(rect.top())
+            count = self.model().rowRount()
+            end = self.rowAt(rect.bottom())
+        if count == 0:
+            return (-1, -1)
+        end = count if end == -1 else end + 1
+        return (start, end)
+
     def resizeColumnsToContents(self, max_columns: int | None = 500):
         colcount = self.model().columnCount()
         if max_columns is None or colcount > max_columns:
@@ -109,11 +126,18 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         for i in range(to_check):
             self.resizeColumnToContents(i)
 
-    def auto_span(self, orientation=constants.HORIZONTAL, role=constants.DISPLAY_ROLE):
+    def auto_span(
+        self,
+        orientation=constants.HORIZONTAL,
+        role=constants.DISPLAY_ROLE,
+        max_sections: int = 5000,
+    ):
         is_horizontal = orientation == constants.HORIZONTAL
         model = self.model()
         n = model.rowCount() if is_horizontal else model.columnCount()
+        n = min(max_sections, n)
         m = model.columnCount() if is_horizontal else model.rowCount()
+        m = min(max_sections, n)
         for level in range(n):
             match_start = None
             if is_horizontal:
