@@ -247,8 +247,8 @@ class MetaObject:
         logger.debug(f"connected {len(handles)} signals to {fn}.")
         return handles
 
-    def copy(self, widget, forward_signals: bool = True):
-        """Create a copy of given widget."""
+    def copy(self, widget: QtCore.QObject, forward_signals: bool = True):
+        """Create a copy of given QObject."""
         try:
             new = type(widget)()
         except TypeError:

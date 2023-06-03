@@ -9,19 +9,19 @@ class RectF(QtCore.QRectF):
         return get_repr(self, self.x(), self.y(), self.width(), self.height())
 
     @property
-    def _x(self):
+    def _x(self) -> float:
         return self.x()
 
     @property
-    def _y(self):
+    def _y(self) -> float:
         return self.y()
 
     @property
-    def _width(self):
+    def _width(self) -> float:
         return self.width()
 
     @property
-    def _height(self):
+    def _height(self) -> float:
         return self.height()
 
     __match_args__ = ("_x", "_y", "width", "height")

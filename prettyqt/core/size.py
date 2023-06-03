@@ -11,11 +11,11 @@ class Size(QtCore.QSize):
         return get_repr(self, self.width(), self.height())
 
     @property
-    def _width(self):
+    def _width(self) -> int:
         return self.width()
 
     @property
-    def _height(self):
+    def _height(self) -> int:
         return self.height()
 
     __match_args__ = ("_width", "_height")

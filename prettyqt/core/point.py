@@ -9,11 +9,11 @@ class Point(QtCore.QPoint):
         return get_repr(self, self.x(), self.y())
 
     @property
-    def _x(self):
+    def _x(self) -> int:
         return self.x()
 
     @property
-    def _y(self):
+    def _y(self) -> int:
         return self.y()
 
     __match_args__ = ("_x", "_y")

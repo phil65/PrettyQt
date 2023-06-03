@@ -11,19 +11,19 @@ class Rect(QtCore.QRect):
         return get_repr(self, self.x(), self.y(), self.width(), self.height())
 
     @property
-    def _x(self):
+    def _x(self) -> int:
         return self.x()
 
     @property
-    def _y(self):
+    def _y(self) -> int:
         return self.y()
 
     @property
-    def _width(self):
+    def _width(self) -> int:
         return self.width()
 
     @property
-    def _height(self):
+    def _height(self) -> int:
         return self.height()
 
     __match_args__ = ("_x", "_y", "width", "height")

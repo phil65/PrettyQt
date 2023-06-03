@@ -11,11 +11,11 @@ class SizeF(QtCore.QSizeF):
         return get_repr(self, self.width(), self.height())
 
     @property
-    def _width(self):
+    def _width(self) -> float:
         return self.width()
 
     @property
-    def _height(self):
+    def _height(self) -> float:
         return self.height()
 
     __match_args__ = ("_width", "_height")

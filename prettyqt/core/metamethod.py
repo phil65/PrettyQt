@@ -63,7 +63,7 @@ class MetaMethod:
     def get_return_type(self) -> core.MetaType:
         return core.MetaType(self.returnMetaType().id())
 
-    def get_parameter_types(self):
+    def get_parameter_types(self) -> list[str]:
         """Returns sth. like ['QString']."""
         return [i.data().decode() for i in self.parameterTypes()]
 

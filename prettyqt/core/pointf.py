@@ -9,11 +9,11 @@ class PointF(QtCore.QPointF):
         return get_repr(self, self.x(), self.y())
 
     @property
-    def _x(self):
+    def _x(self) -> float:
         return self.x()
 
     @property
-    def _y(self):
+    def _y(self) -> float:
         return self.y()
 
     __match_args__ = ("_x", "_y")

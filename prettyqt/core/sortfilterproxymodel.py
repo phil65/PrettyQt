@@ -77,7 +77,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
         super().invalidate()
         self.invalidated.emit()
 
-    def lessThan(self, left, right):
+    def lessThan(self, left, right) -> bool:
         role = super().sortRole()
         left_data = left.data(role)
         right_data = right.data(role)

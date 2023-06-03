@@ -62,19 +62,19 @@ class Color(QtGui.QColor):
             return super().__format__(format_spec)
 
     @property
-    def _red(self):
+    def _red(self) -> int:
         return self.red()
 
     @property
-    def _green(self):
+    def _green(self) -> int:
         return self.green()
 
     @property
-    def _blue(self):
+    def _blue(self) -> int:
         return self.blue()
 
     @property
-    def _alpha(self):
+    def _alpha(self) -> int:
         return self.alpha()
 
     __match_args__ = ("_red", "_green", "_blue", "_alpha")

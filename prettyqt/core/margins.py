@@ -14,19 +14,19 @@ class Margins(QtCore.QMargins):
         return type(self), (self.left(), self.top(), self.right(), self.bottom())
 
     @property
-    def _left(self):
+    def _left(self) -> int:
         return self.left()
 
     @property
-    def _top(self):
+    def _top(self) -> int:
         return self.top()
 
     @property
-    def _right(self):
+    def _right(self) -> int:
         return self.right()
 
     @property
-    def _bottom(self):
+    def _bottom(self) -> int:
         return self.bottom()
 
     __match_args__ = ("_left", "_top", "_right", "_bottom")
