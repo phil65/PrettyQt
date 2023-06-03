@@ -107,6 +107,12 @@ class VariantDelegate(widgets.StyledItemDelegate):
                     widget = custom_widgets.FloatLineEdit()
                 case np.integer():
                     widget = custom_widgets.IntLineEdit()
+                case np.str_():
+                    widget = widgets.LineEdit()
+                case np.datetime64():
+                    widget = widgets.DateTimeEdit()
+                case np.bool_():
+                    widget = widgets.CheckBox()
 
         if widget is None:
             logger.warning(f"Could not find editor for {val!r} ({type(val)})")
@@ -226,7 +232,9 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 case np.floating():
                     return cls.display_text(float(val), locale)
                 case np.str_():
-                    return str(val)
+                    return val.astype(str)
+                case np.bool_():
+                    return bool(val.astype(bool))
                 case np.datetime64():
                     return cls.display_text(val.astype(datetime.datetime), locale)
         return repr(val)
