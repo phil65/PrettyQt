@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import base64
 import pathlib
 
@@ -45,6 +46,11 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         flag |= constants.ALPHA_DITHER_PREFERENCE.inverse[alpha_dithering]
         flag |= constants.MODE_PREFERENCE.inverse[mode_preference]
         return cls(cls.fromImage(img, flag))
+
+    def save_to_file(
+        self, path: os.PathLike, fmt: str = "png", quality: int | None = None
+    ) -> bool:
+        return self.save(os.fspath(path), fmt, -1 if quality is None else quality)
 
     def get_size(self) -> core.Size:
         return core.Size(self.size())
