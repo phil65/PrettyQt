@@ -23,6 +23,7 @@ class DataFrameEvalFilterProxyModel(core.SortFilterProxyModel):
         super().__init__(**kwargs)
 
     def setSourceModel(self, model):
+        """Connect/disconnect signals to invalidate this model on source model change."""
         if (curr_model := self.sourceModel()) is not None:
             curr_model.dataChanged.disconnect(self._on_reset)
             curr_model.rowsInserted.disconnect(self._on_reset)
@@ -38,6 +39,7 @@ class DataFrameEvalFilterProxyModel(core.SortFilterProxyModel):
         model.rowsMoved.connect(self._on_reset)
 
     def _on_reset(self):
+        """Here we build the filter index. On exception we set to False."""
         try:
             self.filter_series = self.sourceModel().df.eval(self._filter_expr)
         except Exception:
@@ -63,14 +65,21 @@ class DataFrameEvalFilterProxyModel(core.SortFilterProxyModel):
 
 
 class DataFrameSearchFilterProxyModel(DataFrameEvalFilterProxyModel):
-    """This proxy only works for str columns."""
+    """This one only works for str columns.
+
+    Not as flexible, (always-case-sensitive, -1 for columns not working.)
+    but probably faster than SortFilterProxyModel. Needs benchmarking.
+    """
+
+    ID = "pandas_search_filter"
 
     def _on_reset(self):
         try:
             ncol = self.filterKeyColumn()
-            col = self.sourceModel().headerData(ncol, constants.HORIZONTAL)
-            # expr = f"[{self._filter_expr}] in {col}"
-            expr = f"'{self._filter_expr}' <= `{col}` <= '{self._filter_expr}~'"
+            colname = self.sourceModel().headerData(ncol, constants.HORIZONTAL)
+            # it would also be possible to use str accessor for this expression,
+            # but that requires engine=python (and perhaps str dtype).
+            expr = f"'{self._filter_expr}' <= `{colname}` <= '{self._filter_expr}~'"
             self.filter_series = self.sourceModel().df.eval(expr)
         except Exception:
             self.filter_series = False

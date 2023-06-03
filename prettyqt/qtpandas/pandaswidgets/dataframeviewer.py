@@ -649,9 +649,9 @@ if __name__ == "__main__":
         ("qux", "two", "q"),
         ("qux", "two", "q"),
         ("qux", "two", "q"),
-    ] * 1000
+    ] * 10
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(10000, 10000), index=index, columns=index)
+    df = pd.DataFrame(np.random.randn(100, 100), index=index, columns=index)
     app = widgets.app()
     app.set_style("fusion")
     view2 = DataFrameViewer(df)
