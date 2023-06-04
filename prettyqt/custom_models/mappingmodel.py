@@ -7,8 +7,6 @@ from prettyqt.utils import treeitem
 
 
 class MappingModel(custom_models.ColumnItemModel):
-    """Model that provides an interface to an objectree that is build of tree items."""
-
     def __init__(
         self,
         obj: list[dict],

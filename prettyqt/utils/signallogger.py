@@ -21,6 +21,5 @@ class SignalLogger(logging.Handler):
 
     def emit(self, record):
         msg = self.format(record)
-        print(repr(msg), msg)
         self.signals.formatted_line.emit(msg)
         self.signals.log_record.emit(record)

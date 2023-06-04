@@ -2,8 +2,6 @@ from __future__ import annotations
 
 from typing import Literal
 
-from deprecated import deprecated
-
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
@@ -87,12 +85,6 @@ class TabBarMixin(widgets.WidgetMixin):
         self, index: int, position: PositionStr, widget: QtWidgets.QWidget | None
     ) -> None:
         self.setTabButton(index, POSITIONS[position], widget)  # type: ignore
-
-    @deprecated(
-        reason="This method is deprecated, use set_selection_behavior_on_remove instead."
-    )
-    def set_remove_behaviour(self, mode: RemoveBehaviourStr) -> None:
-        self.set_selection_behavior_on_remove(mode)
 
     def set_selection_behavior_on_remove(self, mode: RemoveBehaviourStr) -> None:
         """Set the remove hehaviour.
