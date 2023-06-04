@@ -150,7 +150,7 @@ class DataFrameLevelModel(core.AbstractTableModel):
             case constants.ALIGNMENT_ROLE, constants.VERTICAL:
                 return constants.ALIGN_RIGHT | constants.ALIGN_V_CENTER
             case constants.DISPLAY_ROLE, _:
-                return "L" + str(section)
+                return f"L{section}"
 
     def data(self, index, role):
         if not index.isValid():

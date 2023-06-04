@@ -40,7 +40,9 @@ class DataTableView(widgets.TableView):
         rows = [ix.row() for ix in indexes]
         cols = [ix.column() for ix in indexes]
 
-        df = self.model().df.iloc[min(rows) : max(rows) + 1, min(cols) : max(cols) + 1]
+        df = self.get_model(skip_proxies=True).df.iloc[
+            min(rows) : max(rows) + 1, min(cols) : max(cols) + 1
+        ]
 
         threading.Thread(
             target=df.to_clipboard, kwargs=dict(index=False, header=False)
@@ -53,7 +55,7 @@ class DataTableView(widgets.TableView):
         print(clipboard.text())
 
     def sizeHint(self):
-        if self.model().df is None:
+        if self.get_model(skip_proxies=True).df is None:
             return core.Size(0, 0)
         width = 2 * self.frameWidth()  # Account for border & padding
         # width += self.v_scrollbar.width()
@@ -108,11 +110,19 @@ class DataFrameViewer(widgets.Widget):
         self.table_index.h_scrollbar.valueChanged.connect(lambda: None)
 
         # Add items to layout
+
+        # SpacerItem |            Table_columns
+        #       table index             | TrackingSpacer
+        #       Table Index             | Table Data      | V Scrollbar
+        #            |  Tracking Spacer  |H Scrollbar
+        self.layout_grid[0, 0] = widgets.SpacerItem(0, 0, "expanding", "expanding")
         self.layout_grid[0, 1:2] = self.table_columns
         self.layout_grid[1:2, 0:1] = self.table_index
+        self.layout_grid[1, 2] = TrackingSpacer(ref_y=self.table_index.h_header)
         self.layout_grid[2, 2] = self.table_data
-        self.layout_grid[3, 2] = self.table_data.h_scrollbar
         self.layout_grid[2, 3] = self.table_data.v_scrollbar
+        self.layout_grid[3, 1] = TrackingSpacer(ref_x=self.table_columns.v_header)
+        self.layout_grid[3, 2] = self.table_data.h_scrollbar
 
         # These expand when the window is enlarged instead of having
         # the grid squares spread out
@@ -120,9 +130,6 @@ class DataFrameViewer(widgets.Widget):
         self.layout_grid.setRowStretch(4, 1)
 
         # These placeholders will ensure the size of the blank spaces beside our headers
-        self.layout_grid[3, 1] = TrackingSpacer(ref_x=self.table_columns.v_header)
-        self.layout_grid[1, 2] = TrackingSpacer(ref_y=self.table_index.h_header)
-        self.layout_grid[0, 0] = widgets.SpacerItem(0, 0, "expanding", "expanding")
         if df is not None:
             self.set_df(df)
 
@@ -437,14 +444,14 @@ class HeaderView(widgets.TableView):
     # a selected cell is selected too This should happen after every selection change
     def selectionChanged(self, selected, deselected):
         if self.is_horizontal():
-            if self.model().df.columns.nlevels == 1:
+            if self.get_model(skip_proxies=True).df.columns.nlevels == 1:
                 return
             for ix in self.selectedIndexes():
                 for row in range(ix.row()):
                     ix2 = self.model().index(row, ix.column())
                     self.setSelection(self.visualRect(ix2), SelectionFlag.Select)
         else:
-            if self.model().df.index.nlevels == 1:
+            if self.get_model(skip_proxies=True).df.index.nlevels == 1:
                 return
             for ix in self.selectedIndexes():
                 for col in range(ix.column()):
@@ -471,7 +478,7 @@ class HeaderView(widgets.TableView):
 
     # This sets spans to group together adjacent cells with the same values
     def set_spans(self):
-        df = self.model().df
+        df = self.get_model(skip_proxies=True).df
         index = df.columns if self.is_horizontal() else df.index
         is_multiindex = isinstance(index, pd.MultiIndex)
         n = len(index[0]) if is_multiindex else 1
