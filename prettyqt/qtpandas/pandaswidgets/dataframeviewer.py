@@ -6,7 +6,7 @@ import threading
 import pandas as pd
 import numpy as np
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, custom_widgets, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.qtpandas import pandasmodels
 
@@ -290,7 +290,7 @@ class DataFrameViewer(widgets.Widget):
         # Only check the first N rows for performance. If there is larger
         # content in cells below it will be cut off
         N = 75
-        rows = max(self.table_data.model().rowCount(), N)
+        rows = min(self.table_data.model().rowCount(), N)
         for i in range(rows):
             mi = self.table_data.model().index(i, column_index)
             text = self.table_data.model().data(mi)
@@ -366,14 +366,12 @@ class DataFrameViewer(widgets.Widget):
             model.update_all()
 
 
-class HeaderView(widgets.TableView):
+class HeaderView(custom_widgets.OrientedTableView):
     """Displays the DataFrame index or columns depending on orientation."""
 
     def __init__(self, parent: DataFrameViewer, orientation):
-        super().__init__(parent)
+        super().__init__(orientation, parent)
 
-        # Setup
-        self.orientation = orientation
         self.table = parent.table_data
         # These are used during column resizing
         self._header_is_resizing = None
@@ -464,7 +462,7 @@ class HeaderView(widgets.TableView):
     def init_size(self):
         padding = 20
         self.resizeColumnsToContents()
-        colcount = min(self.model().columnCount(), 500)
+        colcount = min(self.model().columnCount(), 100)
         if self.is_horizontal():
             min_size = 100
             for col in range(colcount):
@@ -512,41 +510,6 @@ class HeaderView(widgets.TableView):
             #         span_size = match_end - match_start + 1
             #         self.set_section_span(level, match_start, span_size)
             #         match_start = None
-
-    def set_section_span(self, row, column, count):
-        if self.is_horizontal():
-            self.setSpan(row, column, 1, count)
-        else:
-            self.setSpan(column, row, count, 1)
-
-    def sectionAt(self, val: int):
-        return self.columnAt(val) if self.is_horizontal() else self.rowAt(val)
-
-    def over_header_edge(self, mouse_pos: int, margin: int = 3):
-        # Return the index of the column this x position is on the right edge of
-        left = self.sectionAt(mouse_pos - margin)
-        right = self.sectionAt(mouse_pos + margin)
-        if left != right != 0:
-            # We're at the left edge of the first column
-            return left
-
-    def is_horizontal(self) -> bool:
-        return self.orientation == constants.HORIZONTAL
-
-    def sectionWidth(self, val: int):
-        return self.columnWidth(val) if self.is_horizontal() else self.rowHeight(val)
-
-    def setSectionWidth(self, val: int, val2):
-        if self.is_horizontal():
-            self.setColumnWidth(val, val2)
-        else:
-            self.setRowHeight(val, val2)
-
-    def get_split_cursor(self):
-        if self.is_horizontal():
-            return gui.Cursor(QtCore.Qt.CursorShape.SplitHCursor)
-        else:
-            return gui.Cursor(QtCore.Qt.CursorShape.SplitVCursor)
 
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent):
         if not isinstance(event, QtGui.QMouseEvent):

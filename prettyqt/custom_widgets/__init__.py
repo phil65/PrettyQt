@@ -7,6 +7,7 @@ from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .collapsibleframe import CollapsibleFrame
 from .expandableline import ExpandableLine
+from .orientedtableview import OrientedTableView
 from .hierarchicalheaderview import HierarchicalHeaderView
 from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit
 from .editors.keycombinationedit import KeyCombinationEdit
@@ -66,6 +67,7 @@ __all__ = [
     "CollapsibleFrame",
     "CompletionWidget",
     "ExpandableLine",
+    "OrientedTableView",
     "HierarchicalHeaderView",
     "KeyCombinationEdit",
     "SingleLineTextEdit",
