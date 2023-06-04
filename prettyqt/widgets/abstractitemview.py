@@ -194,7 +194,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             case _:
                 if importlib.util.find_spec("pandas") is None:
                     raise ImportError("Install pandas for DataFrame support")
-                from qtpandas import pandasmodels
+                from prettyqt.qtpandas import pandasmodels
                 import pandas as pd
 
                 if not isinstance(model, pd.DataFrame):
