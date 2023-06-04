@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from collections.abc import Generator
+import importlib.util
 import logging
-from typing import Any, Literal
+from typing import Any, Literal, overload
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -161,19 +162,45 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             return
         super().selectAll()
 
-    def set_model(self, model: QtCore.QAbstractItemModel | list | dict | None):
-        """Delete old selection model explicitely, seems to help with memory usage."""
+    @overload
+    def set_model(
+        self, model: list | dict | QtCore.QAbstractItemModel
+    ) -> QtCore.QAbstractItemModel:
+        ...
+
+    @overload
+    def set_model(self, model: None) -> None:
+        ...
+
+    def set_model(
+        self, model: QtCore.QAbstractItemModel | list | dict | None
+    ) -> QtCore.QAbstractItemModel | None:
+        """Set the model of this View.
+
+        In addition to QAbstractItemModels, you can also pass some basic datastructures.
+        An appropriate model will be chosen automatically then.
+        """
         from prettyqt import custom_models
 
         match model:
             case dict():
                 model = custom_models.JsonModel(model, parent=self)
-            case list():
+            case [dict(), *_]:
+                model = custom_models.MappingModel(model)
+            case [str(), *_]:
                 model = core.StringListModel(model)
             case QtCore.QAbstractItemModel() | None:
                 pass
             case _:
-                raise ValueError(model)
+                if importlib.util.find_spec("pandas") is None:
+                    raise ImportError("Install pandas for DataFrame support")
+                from qtpandas import pandasmodels
+                import pandas as pd
+
+                if not isinstance(model, pd.DataFrame):
+                    raise ValueError(model)
+                model = pandasmodels.DataTableWithHeaderModel(model)
+        # Delete old selection model explicitely, seems to help with memory usage.
         old_model = self.model()
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
@@ -185,6 +212,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         if old_sel_model:
             old_sel_model.deleteLater()
             del old_sel_model
+        return model
 
     def get_model(self, skip_proxies: bool = False) -> QtCore.QAbstractItemModel:
         model = self.model()
@@ -205,18 +233,25 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_current_index(
         self,
-        index: QtCore.QModelIndex | None,
+        index: QtCore.QModelIndex | tuple | None,
         operation: Literal["select", "deselect", "toggle"] = "select",
         clear: bool = True,
         current: bool = False,
         expand: Literal["rows", "columns"] | None = None,
     ):
         # index = self.model().index(self._selected_index)
-        if index is None:
-            self.selectionModel().setCurrentIndex(
-                index, core.ItemSelectionModel.SelectionFlag.Clear
-            )
-            return
+        match index:
+            case None:
+                self.selectionModel().setCurrentIndex(
+                    index, core.ItemSelectionModel.SelectionFlag.Clear
+                )
+                return
+            case tuple():
+                index = self.model().index(*index)
+            case QtCore.QModelIndex():
+                pass
+            case _:
+                raise ValueError(index)
         match operation:
             case "select":
                 flag = core.ItemSelectionModel.SelectionFlag.Select
@@ -243,18 +278,25 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def select_index(
         self,
-        index: QtCore.QModelIndex | None,
+        index: QtCore.QModelIndex | tuple | None,
         operation: Literal["select", "deselect", "toggle"] = "select",
         clear: bool = True,
         current: bool = False,
         expand: Literal["rows", "columns"] | None = None,
     ):
         # index = self.model().index(self._selected_index)
-        if index is None:
-            self.selectionModel().select(
-                index, core.ItemSelectionModel.SelectionFlag.Clear
-            )
-            return
+        match index:
+            case None:
+                self.selectionModel().setCurrentIndex(
+                    index, core.ItemSelectionModel.SelectionFlag.Clear
+                )
+                return
+            case tuple():
+                index = self.model().index(*index)
+            case QtCore.QModelIndex():
+                pass
+            case _:
+                raise ValueError(index)
         match operation:
             case "select":
                 flag = core.ItemSelectionModel.SelectionFlag.Select
