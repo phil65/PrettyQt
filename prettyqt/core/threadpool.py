@@ -44,6 +44,12 @@ class Worker(core.Runnable):
         # Add the callback to our kwargs
         # self.keyword_args["progress_callback"] = self.signals.progress
 
+    def __getattr__(self, name: str) -> core.SignalInstance:
+        attr = getattr(self.signals, name, None)
+        if isinstance(attr, core.SignalInstance):
+            return getattr(self.signals, name)
+        raise AttributeError(f"{type(self).__name__!r} has no attribute {name!r}")
+
     @core.Slot()
     def run(self):
         """Initialise the runner function with passed args, kwargs."""
