@@ -20,19 +20,19 @@ class Time(QtCore.QTime):
         return self.toString(format_spec)
 
     @property
-    def _hour(self):
+    def _hour(self) -> int:
         return self.hour()
 
     @property
-    def _minute(self):
+    def _minute(self) -> int:
         return self.minute()
 
     @property
-    def _second(self):
+    def _second(self) -> int:
         return self.second()
 
     @property
-    def _msec(self):
+    def _msec(self) -> int:
         return self.msec()
 
     __match_args__ = ("_hour", "_minute", "_second", "_msec")

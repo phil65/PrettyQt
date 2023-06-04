@@ -61,39 +61,39 @@ class Transform(serializemixin.SerializeMixin, QtGui.QTransform):
                 raise ValueError(f"Wrong value {value}")
 
     @property
-    def _m11(self):
+    def _m11(self) -> float:
         return self.m11()
 
     @property
-    def _m12(self):
+    def _m12(self) -> float:
         return self.m12()
 
     @property
-    def _m13(self):
+    def _m13(self) -> float:
         return self.m13()
 
     @property
-    def _m21(self):
+    def _m21(self) -> float:
         return self.m21()
 
     @property
-    def _m22(self):
+    def _m22(self) -> float:
         return self.m22()
 
     @property
-    def _m23(self):
+    def _m23(self) -> float:
         return self.m23()
 
     @property
-    def _m31(self):
+    def _m31(self) -> float:
         return self.m31()
 
     @property
-    def _m32(self):
+    def _m32(self) -> float:
         return self.m32()
 
     @property
-    def _m33(self):
+    def _m33(self) -> float:
         return self.m33()
 
     __match_args__ = (

@@ -107,7 +107,7 @@ class Dir(QtCore.QDir):
         return self.absolutePath()
 
     @property
-    def _absolutePath(self):
+    def _absolutePath(self) -> str:
         return self.absolutePath()
 
     __match_args__ = ("_absolutePath",)

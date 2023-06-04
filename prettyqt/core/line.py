@@ -16,19 +16,19 @@ class Line(QtCore.QLine):
         return get_repr(self, self.get_p1(), self.get_p2())
 
     @property
-    def _x1(self):
+    def _x1(self) -> int:
         return self.get_x1()
 
     @property
-    def _y1(self):
+    def _y1(self) -> int:
         return self.y1()
 
     @property
-    def _x2(self):
+    def _x2(self) -> int:
         return self.x2()
 
     @property
-    def _y2(self):
+    def _y2(self) -> int:
         return self.y2()
 
     __match_args__ = ("_x1", "_y1", "_x2", "_y2")

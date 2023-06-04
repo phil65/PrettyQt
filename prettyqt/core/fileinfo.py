@@ -20,7 +20,7 @@ class FileInfo(QtCore.QFileInfo):
         return get_repr(self, self.absoluteFilePath())
 
     @property
-    def _absoluteFilePath(self):
+    def _absoluteFilePath(self) -> str:
         return self.absoluteFilePath()
 
     __match_args__ = ("_absoluteFilePath",)

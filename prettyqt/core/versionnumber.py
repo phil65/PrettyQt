@@ -28,15 +28,15 @@ class VersionNumber(QtCore.QVersionNumber):
         return get_repr(self, self.major(), self.minor(), self.micro())
 
     @property
-    def _majorVersion(self):
+    def _majorVersion(self) -> int:
         return self.majorVersion()
 
     @property
-    def _minorVersion(self):
+    def _minorVersion(self) -> int:
         return self.minorVersion()
 
     @property
-    def _macroVersion(self):
+    def _macroVersion(self) -> int:
         return self.macroVersion()
 
     __match_args__ = ("_majorVersion", "_minorVersion", "_macroVersion")

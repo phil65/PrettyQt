@@ -21,11 +21,11 @@ class DataFrameModel:
         self._data = data
 
     @property
-    def shape(self):
+    def shape(self) -> tuple[int, int]:
         return self._data.shape
 
     @property
-    def header_shape(self):
+    def header_shape(self) -> tuple[int, int]:
         return (len(self._data.columns.names), len(self._data.index.names))
 
     def data(self, y: int, x: int):

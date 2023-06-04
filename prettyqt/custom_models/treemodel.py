@@ -16,7 +16,7 @@ class TreeModel(core.AbstractItemModel):
         return core.ModelIndex()
 
     @property
-    def show_root(self):
+    def show_root(self) -> bool:
         """Return True if the inspected node is visible.
 
         In that case an invisible root node has been added.

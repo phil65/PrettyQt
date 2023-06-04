@@ -130,7 +130,7 @@ class KeySequence(QtGui.QKeySequence):
         return core.KeyCombination(item)
 
     @property
-    def _toString(self):
+    def _toString(self) -> str:
         return self.toString()
 
     __match_args__ = ("_toString",)

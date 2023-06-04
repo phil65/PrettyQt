@@ -34,19 +34,19 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         return maps
 
     @property
-    def h_scrollbar(self):
+    def h_scrollbar(self) -> widgets.ScrollBar:
         return self.horizontalScrollBar()
 
     @h_scrollbar.setter
-    def h_scrollbar(self, scrollbar):
+    def h_scrollbar(self, scrollbar: widgets.ScrollBar):
         self.setHorizontalScrollBar(scrollbar)
 
     @property
-    def v_scrollbar(self):
+    def v_scrollbar(self) -> widgets.ScrollBar:
         return self.verticalScrollBar()
 
     @v_scrollbar.setter
-    def v_scrollbar(self, scrollbar):
+    def v_scrollbar(self, scrollbar: widgets.ScrollBar):
         self.setVerticalScrollBar(scrollbar)
 
     def scroll_by_pixels(self, x: int = 0, y: int = 0):
@@ -128,7 +128,7 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
             raise InvalidParamError(mode, constants.SCROLLBAR_POLICY)
         self.setHorizontalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
 
-    def get_horizontal_scrollbar_policy(self):
+    def get_horizontal_scrollbar_policy(self) -> constants.ScrollBarPolicyStr:
         return constants.SCROLLBAR_POLICY.inverse[self.horizontalScrollBarPolicy()]
 
     def set_vertical_scrollbar_policy(self, mode: constants.ScrollBarPolicyStr):
@@ -144,7 +144,7 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
             raise InvalidParamError(mode, constants.SCROLLBAR_POLICY)
         self.setVerticalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
 
-    def get_vertical_scrollbar_policy(self):
+    def get_vertical_scrollbar_policy(self) -> constants.ScrollBarPolicyStr:
         return constants.SCROLLBAR_POLICY.inverse[self.verticalScrollBarPolicy()]
 
     def set_scrollbar_width(self, width: int):

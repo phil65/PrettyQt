@@ -12,19 +12,19 @@ class Vector4D(QtGui.QVector4D):
         return self.length()
 
     @property
-    def _x(self):
+    def _x(self) -> float:
         return self.x()
 
     @property
-    def _y(self):
+    def _y(self) -> float:
         return self.y()
 
     @property
-    def _z(self):
+    def _z(self) -> float:
         return self.z()
 
     @property
-    def _w(self):
+    def _w(self) -> float:
         return self.w()
 
     __match_args__ = ("_x", "_y", "z", "w")

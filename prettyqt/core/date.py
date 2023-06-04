@@ -18,15 +18,15 @@ class Date(QtCore.QDate):
         return self.toString(format_spec)
 
     @property
-    def _year(self):
+    def _year(self) -> int:
         return self.year()
 
     @property
-    def _month(self):
+    def _month(self) -> int:
         return self.month()
 
     @property
-    def _day(self):
+    def _day(self) -> int:
         return self.day()
 
     __match_args__ = ("_year", "_month", "_day")

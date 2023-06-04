@@ -169,7 +169,7 @@ class Font(QtGui.QFont):
         self.setItalic(state["italic"])
 
     @property
-    def _family(self):
+    def _family(self) -> str:
         return self.family()
 
     __match_args__ = ("_family",)
@@ -181,7 +181,7 @@ class Font(QtGui.QFont):
         return self.__getstate__()
 
     @property
-    def metrics(self):
+    def metrics(self) -> gui.FontMetrics:
         return gui.FontMetrics(self)
 
     def set_size(self, size: int):
