@@ -65,6 +65,49 @@ def example_tree(flatten: bool = False):
     return table
 
 
+def example_table(flatten: bool = False):
+    from prettyqt import widgets
+    import pandas as pd
+
+    data = dict(
+        a=["abcdedf", "abcdedf", "abcdedf", "abcdedf", "abcdedf", "abcdedfaa"],
+        b=[10000000, 2, 3, 4, 5, 6],
+        c=[1, 2, 3, 4, 5, 6],
+        d=[100000000, 2, 3, 4, 5, 6],
+        e=[1000000, 2, 3, 4, 5, 6],
+        f=[1000000, 2, 3, 4, 5, 6],
+        g=[1, 2, 3, 4, 5, 6],
+        h=[1, 2, 3, 4, 5, 6],
+        i=[100000000000000, 2, 3, 4, 5, 6],
+        j=[1, 2, 3, 4, 5, 6],
+        k=[1, 2, 3, 4, 5, 6],
+        jkfsj=[10, 20, 30, 40, 50, 60],
+    )
+    data = pd.DataFrame(data)
+    table = widgets.TableView()
+    table.set_model(data)
+    return table
+
+
+def example_multiindex_df():
+    import pandas as pd
+    import numpy as np
+
+    tuples = [
+        ("bar", "one", "q"),
+        ("bar", "two", "q"),
+        ("baz", "one", "q"),
+        ("baz", "two", "q"),
+        ("foo", "one", "q"),
+        ("foo", "two", "q"),
+        ("qux", "one", "q"),
+        ("qux", "two", "q"),
+    ]
+    index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
+    df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
+    return df
+
+
 def example_widget():
     from prettyqt import widgets
 
