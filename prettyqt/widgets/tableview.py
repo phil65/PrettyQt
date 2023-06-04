@@ -141,15 +141,15 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         for level in range(n):
             match_start = None
             if is_horizontal:
-                arr = [self.model().index(level, i).data(role) for i in range(m)]
+                arr = [model.index(level, i).data(role) for i in range(m)]
             else:
-                arr = [self.model().index(i, level).data(role) for i in range(m)]
+                arr = [model.index(i, level).data(role) for i in range(m)]
             for col in range(1, m):
                 if arr[col] == arr[col - 1]:
                     if match_start is None:
                         match_start = col - 1
                     # If this is the last cell, need to end it
-                    if col == len(arr) - 1:
+                    if col == m - 1:
                         match_end = col
                         span_size = match_end - match_start + 1
                         if is_horizontal:
