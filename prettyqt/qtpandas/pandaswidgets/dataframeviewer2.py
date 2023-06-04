@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 
 from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 MAX_AUTOSIZE_MS = 150  # Milliseconds given (at most) to perform column auto-sizing
 MIN_TRUNC_CHARS = 8  # Minimum size (in characters) given to columns
@@ -64,7 +65,7 @@ class DataFrameDataModel(core.AbstractTableModel):
 class DataFrameHeaderModel(core.AbstractTableModel):
     """Model for the two index tables."""
 
-    def __init__(self, model, axis, palette):
+    def __init__(self, model, axis: constants.OrientationStr, palette: QtGui.QPalette):
         super().__init__()
         self._model = model
         self.axis = axis
@@ -74,13 +75,13 @@ class DataFrameHeaderModel(core.AbstractTableModel):
         else:
             self._shape = (self._model.shape[0], self._model.header_shape[1])
 
-    def rowCount(self, index=None):
+    def rowCount(self, index: core.ModelIndex | None = None):
         return max(1, self._shape[0])
 
     def columnCount(self, index=None):
         return max(1, self._shape[1])
 
-    def headerData(self, section, orientation, role):
+    def headerData(self, section: int, orientation, role):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
                 return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
@@ -124,7 +125,7 @@ class DataFrameHeaderModel(core.AbstractTableModel):
 class DataFrameLevelModel(core.AbstractTableModel):
     """Top left corner."""
 
-    def __init__(self, model, palette, font):
+    def __init__(self, model, palette: QtGui.QPalette, font: QtGui.QFont):
         super().__init__()
         self._model = model
         self._background = palette.dark().color()
@@ -142,7 +143,7 @@ class DataFrameLevelModel(core.AbstractTableModel):
     def columnCount(self, index=None):
         return max(1, self._model.header_shape[1])
 
-    def headerData(self, section, orientation, role):
+    def headerData(self, section: int, orientation, role):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
                 return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
@@ -157,6 +158,11 @@ class DataFrameLevelModel(core.AbstractTableModel):
         a = self._model.header_shape[0] - 1
         b = self._model.header_shape[1] - 1
         match role:
+            case constants.DISPLAY_ROLE if index.row() == a and index.column() == b:
+                return (
+                    f"{self._model.name('vertical', index.column())} \\ "
+                    f"{self._model.name('horizontal', index.column())}"
+                )
             case constants.DISPLAY_ROLE if index.row() == a:
                 return str(self._model.name("vertical", index.column()))
             case constants.DISPLAY_ROLE if index.column() == b:
@@ -170,7 +176,9 @@ class DataFrameLevelModel(core.AbstractTableModel):
 
 
 class DataFrameViewer(widgets.Widget):
-    def __init__(self, df=None, parent=None):
+    def __init__(
+        self, df: pd.DataFrame | None = None, parent: QtWidgets.QWidget | None = None
+    ):
         super().__init__(parent=parent)
         if df is None:
             df = pd.DataFrame()
@@ -191,7 +199,7 @@ class DataFrameViewer(widgets.Widget):
         self.hscroll = widgets.ScrollBar("horizontal")
         self.vscroll = widgets.ScrollBar("vertical")
 
-        self.table_level = widgets.TableView(frame_shadow="plain")
+        self.table_level = widgets.TableView(frame_shadow="plain", show_grid=False)
         self.table_level.set_edit_triggers("none")
         self.table_level.set_scrollbar_policy("always_off")
         self.table_level.h_header.sectionResized.connect(self._index_resized)
@@ -246,11 +254,16 @@ class DataFrameViewer(widgets.Widget):
         if df is not None:
             self.set_df(df)
 
-    def set_df(self, df):
+    def set_df(self, df: pd.DataFrame):
         model = DataFrameModel(df)
         self.set_model(model)
 
-    def _select_columns(self, source, dest, deselect):
+    def _select_columns(
+        self,
+        source: widgets.TableView,
+        dest: widgets.TableView,
+        deselect: widgets.TableView,
+    ):
         if self._selection_rec:
             return
         self._selection_rec = True
@@ -263,7 +276,12 @@ class DataFrameViewer(widgets.Widget):
         deselect.selectionModel().clear()
         self._selection_rec = False
 
-    def _select_rows(self, source, dest, deselect):
+    def _select_rows(
+        self,
+        source: widgets.TableView,
+        dest: widgets.TableView,
+        deselect: widgets.TableView,
+    ):
         if self._selection_rec:
             return
         self._selection_rec = True
@@ -279,19 +297,19 @@ class DataFrameViewer(widgets.Widget):
     def model(self):
         return self._model
 
-    def _column_resized(self, col, old_width, new_width):
+    def _column_resized(self, col, _, new_width):
         self.table_data.setColumnWidth(col, new_width)
         self._update_layout()
 
-    def _row_resized(self, row, old_height, new_height):
+    def _row_resized(self, row, _, new_height):
         self.table_data.setRowHeight(row, new_height)
         self._update_layout()
 
-    def _index_resized(self, col, old_width, new_width):
+    def _index_resized(self, col, _, new_width):
         self.table_index.setColumnWidth(col, new_width)
         self._update_layout()
 
-    def _header_resized(self, row, old_height, new_height):
+    def _header_resized(self, row, _, new_height):
         self.table_header.setRowHeight(row, new_height)
         self._update_layout()
 
@@ -391,12 +409,14 @@ class DataFrameViewer(widgets.Widget):
         if relayout:
             self._update_layout()
 
-    def setCurrentIndex(self, y, x):
+    def setCurrentIndex(self, y: int, x: int):
         index = self.table_data.model().index(y, x)
         sel_model = self.table_data.selectionModel()
         sel_model.setCurrentIndex(index, SelectionFlag.ClearAndSelect)
 
-    def _resize_column_to_contents(self, header, data, col):
+    def _resize_column_to_contents(
+        self, header: widgets.TableView, data: widgets.TableView, col: int
+    ):
         hdr_width = header.get_size_hint_for_column(col)
         data_width = data.get_size_hint_for_column(col)
         if data_width > hdr_width:
@@ -407,17 +427,14 @@ class DataFrameViewer(widgets.Widget):
             width = min(self.max_width, hdr_width)
         header.setColumnWidth(col, width)
 
-    def eventFilter(self, obj, event) -> bool:
+    def eventFilter(self, obj: widgets.TableView, event: QtCore.QEvent) -> bool:
         if obj == self.table_data and event.type() == core.Event.Type.Resize:
             self._resize_visible_columns_to_contents()
         return False
 
     def _resize_visible_columns_to_contents(self):
-        rect = self.table_data.rect()
-        col = self.table_data.columnAt(rect.left())
         width = self._model.shape[1]
-        end = self.table_data.columnAt(rect.right())
-        end = width if end == -1 else end + 1
+        col, end = self.table_data.get_visible_section_span("horizontal")
         while col < end:
             resized = False
             if col not in self._autosized_cols:
@@ -427,7 +444,7 @@ class DataFrameViewer(widgets.Widget):
             col += 1
             if resized:
                 # as we resize columns, the boundary will change
-                end = self.table_data.columnAt(rect.right())
+                end = self.table_data.columnAt(self.rect().right())
                 end = width if end == -1 else end + 1
 
     def _resize_current_column_to_content(self, new_index, old_index):
@@ -460,6 +477,8 @@ if __name__ == "__main__":
     app = widgets.app()
     table = DataFrameViewer()
     table.set_df(df)
+    table.table_header.auto_span()
+    table.table_index.auto_span(orientation=constants.VERTICAL)
     table.resizeColumnsToContents()
     table.show()
     app.main_loop()
