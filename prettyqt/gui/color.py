@@ -28,7 +28,7 @@ NameStr = NameFormatStr | Literal["svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"
 
 
 def is_valid_color(text: str):
-    if text.startswith("#") and len(text) in [4, 7] and text[1:].isalnum():
+    if text.startswith("#") and len(text) in {4, 7} and text[1:].isalnum():
         return True
     return text.lower() in QtGui.QColor.colorNames()
 

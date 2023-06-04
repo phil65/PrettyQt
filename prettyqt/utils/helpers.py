@@ -75,7 +75,7 @@ def to_lower_camel(snake_str: str) -> str:
     return "".join([first.lower(), *map(str.title, others)])
 
 
-def to_snake(camel_string):
+def to_snake(camel_string: str) -> str:
     #  don´t snake-case snakes.
     if "_" in camel_string:
         return camel_string
@@ -111,7 +111,7 @@ def get_color_percentage(
     return (x, y, z, a)
 
 
-def get_class_for_id(base_class: type, id_: str):
+def get_class_for_id(base_class: type, id_: str) -> type:
     def get_subclasses(klass):
         for i in klass.__subclasses__():
             yield from get_subclasses(i)

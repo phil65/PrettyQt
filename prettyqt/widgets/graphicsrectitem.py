@@ -11,7 +11,7 @@ class GraphicsRectItem(
     def __repr__(self):
         return get_repr(self, self.get_rect())
 
-    def get_rect(self):
+    def get_rect(self) -> core.RectF:
         return core.RectF(self.rect())
 
     def serialize_fields(self):

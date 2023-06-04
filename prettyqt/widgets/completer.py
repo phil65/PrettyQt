@@ -41,7 +41,7 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         self.path_updated.emit(path)
         return super().splitPath(path)
 
-    def get_completions(self):
+    def get_completions(self) -> list[str]:
         completions = []
         # count = self.completionCount()
         # for i in range(count):

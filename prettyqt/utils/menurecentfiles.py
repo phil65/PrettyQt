@@ -34,13 +34,13 @@ class RecentFilesManager(core.Object):
         self.set_value("list", [])
         self.updated.emit()
 
-    def remove(self, filename):
+    def remove(self, filename: os.PathLike):
         """Remove a file path from the list of recent files.
 
         :param filename: Path of the file to remove
         """
         files = self.get_value("list", [])
-        files.remove(filename)
+        files.remove(os.fspath(filename))
         self.set_value("list", files)
         self.updated.emit()
 
@@ -90,7 +90,7 @@ class RecentFilesManager(core.Object):
         value = [os.path.normpath(pth) for pth in value]
         self._settings.setValue(f"recent_files/{key}", value)
 
-    def get_recent_files(self):
+    def get_recent_files(self) -> list[str]:
         """Gets the list of recent files.
 
         Files that do not exists anymore are automatically filtered
@@ -150,7 +150,7 @@ class MenuRecentFiles(widgets.Menu):
         self,
         parent,
         recent_files_manager=None,
-        title="Recent files",
+        title: str = "Recent files",
         icon_provider=None,
         clear_icon=None,
     ):
