@@ -41,7 +41,8 @@ class DataFrameEvalFilterProxyModel(core.SortFilterProxyModel):
     def _on_reset(self):
         """Here we build the filter index. On exception we set to False."""
         try:
-            self.filter_series = self.sourceModel().df.eval(self._filter_expr)
+            model = self.get_source_model(skip_proxies=True)
+            self.filter_series = model.df.eval(self._filter_expr)
         except Exception:
             self.filter_series = False
         self.invalidate()
@@ -82,7 +83,7 @@ class DataFrameSearchFilterProxyModel(DataFrameEvalFilterProxyModel):
             # it would also be possible to use str accessor for this expression,
             # but that requires engine=python (and perhaps str dtype).
             expr = f"'{self._filter_expr}' <= `{colname}` <= '{self._filter_expr}~'"
-            self.filter_series = self.sourceModel().df.eval(expr)
+            self.filter_series = self.get_source_model(skip_proxies=True).df.eval(expr)
         except Exception:
             self.filter_series = False
         self.invalidate()
