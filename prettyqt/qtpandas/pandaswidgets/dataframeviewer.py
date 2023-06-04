@@ -59,13 +59,15 @@ class DataTableView(widgets.TableView):
             return core.Size(0, 0)
         width = 2 * self.frameWidth()  # Account for border & padding
         # width += self.v_scrollbar.width()
-        for i in range(self.model().columnCount()):
+        max_cols = min(100, self.model().columnCount())
+        for i in range(max_cols):
             width += self.columnWidth(i)
 
         # Height
         height = 2 * self.frameWidth()  # Account for border & padding
         # height += self.h_scrollbar.height()
-        for i in range(self.model().rowCount()):
+        max_rows = min(100, self.model().rowCount())
+        for i in range(max_rows):
             height += self.rowHeight(i)
 
         return core.Size(width, height)
@@ -607,7 +609,8 @@ class HeaderView(widgets.TableView):
             width = self.table.sizeHint().width() + self.v_header.width()
             # Height
             height = 2 * self.frameWidth()  # Account for border & padding
-            for i in range(self.model().rowCount()):
+            max_rows = min(100, self.model().rowCount())
+            for i in range(max_rows):
                 height += self.rowHeight(i)
 
         # Vertical HeaderView
@@ -616,7 +619,8 @@ class HeaderView(widgets.TableView):
             height = self.table.sizeHint().height() + self.h_header.height()
             # Width
             width = 2 * self.frameWidth()  # Account for border & padding
-            for i in range(self.model().columnCount()):
+            max_cols = min(100, self.model().columnCount())
+            for i in range(max_cols):
                 width += self.columnWidth(i)
         return core.Size(width, height)
 
