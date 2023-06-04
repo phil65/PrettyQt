@@ -17,29 +17,29 @@ logger = logging.getLogger(__name__)
 #     float: 38,
 #     QtGui.QColor: 67,
 #     QtGui.QCursor: 74,
-#     QtCore.QDate: 14,
-#     QtCore.QSize: 21,
-#     QtCore.QTime: 15,
+#     core.QDate: 14,
+#     core.QSize: 21,
+#     core.QTime: 15,
 #     list: 9,
 #     QtGui.QPolygon: 71,
 #     QtGui.QPolygonF: 86,
 #     QtGui.QColor: 67,
 #     QtGui.QColorSpace: 87,
-#     QtCore.QSizeF: 22,
-#     QtCore.QRectF: 20,
-#     QtCore.QLine: 23,
+#     core.QSizeF: 22,
+#     core.QRectF: 20,
+#     core.QLine: 23,
 #     QtGui.QTextLength: 77,
 #     dict: 8,
 #     QtGui.QIcon: 69,
 #     QtGui.QPen: 76,
-#     QtCore.QLineF: 24,
+#     core.QLineF: 24,
 #     QtGui.QTextFormat: 78,
-#     QtCore.QRect: 19,
-#     QtCore.QPoint: 25,
-#     QtCore.QUrl: 17,
-#     QtCore.QRegularExpression: 44,
-#     QtCore.QDateTime: 16,
-#     QtCore.QPointF: 26,
+#     core.QRect: 19,
+#     core.QPoint: 25,
+#     core.QUrl: 17,
+#     core.QRegularExpression: 44,
+#     core.QDateTime: 16,
+#     core.QPointF: 26,
 #     QtGui.QPalette: 68,
 #     QtGui.QFont: 64,
 #     QtGui.QBrush: 66,
@@ -48,25 +48,25 @@ logger = logging.getLogger(__name__)
 #     QtGui.QKeySequence: 75,
 #     QtWidgets.QSizePolicy: 121,
 #     QtGui.QPixmap: 65,
-#     QtCore.QLocale: 18,
+#     core.QLocale: 18,
 #     QtGui.QBitmap: 73,
 #     QtGui.QMatrix4x4: 81,
 #     QtGui.QVector2D: 82,
 #     QtGui.QVector3D: 83,
 #     QtGui.QVector4D: 84,
 #     QtGui.QQuaternion: 85,
-#     QtCore.QEasingCurve: 29,
-#     QtCore.QJsonValue: 45,
-#     QtCore.QJsonDocument: 48,
-#     QtCore.QModelIndex: 42,
-#     QtCore.QPersistentModelIndex: 50,
-#     QtCore.QUuid: 30,
+#     core.QEasingCurve: 29,
+#     core.QJsonValue: 45,
+#     core.QJsonDocument: 48,
+#     core.QModelIndex: 42,
+#     core.QPersistentModelIndex: 50,
+#     core.QUuid: 30,
 #     "user": 1024,
 # }
 
 
 class MetaObject:
-    def __init__(self, metaobject: QtCore.QMetaObject):
+    def __init__(self, metaobject: core.QMetaObject):
         self.item = metaobject
 
     def __getattr__(self, val):
@@ -177,7 +177,7 @@ class MetaObject:
         ]
 
     def get_property_values(
-        self, qobject: QtCore.QObject, cast_types: bool = False
+        self, qobject: core.QObject, cast_types: bool = False
     ) -> dict[str, Any]:
         """Get a dictionary containing all MetaProperties values from given qobject."""
         vals = {prop.get_name(): prop.read(qobject) for prop in self.get_properties()}
@@ -219,7 +219,7 @@ class MetaObject:
     @classmethod
     def invoke_method(
         cls,
-        obj: QtCore.QObject,
+        obj: core.QObject,
         method: str,
         *args,
         connection_type: constants.ConnectionTypeStr = "auto",
@@ -231,23 +231,35 @@ class MetaObject:
     def get_new_instance(self, *args, **kwargs):
         args = tuple(core.Q_ARG(type(i), i) for i in args)
         kwargs = {k: core.Q_ARG(type(v), v) for k, v in kwargs.items()}
-        # requires QtCore.QGenericArgumentHolder for PySide6
+        # requires core.QGenericArgumentHolder for PySide6
         self.newInstance(*args, **kwargs)
 
     def connect_signals(
-        self, qobject: QtCore.QObject, fn: Callable, only_notifiers: bool = False
-    ) -> list[QtCore.QMetaObject.Connection]:
-        """Connect all signals of a given qobject to fn."""
+        self,
+        source_qobject: core.QObject,
+        fn_or_qobject: Callable | QtCore.QObject,
+        only_notifiers: bool = False,
+    ) -> list[core.QMetaObject.Connection]:
+        """Connect all signals of a given qobject.
+
+        Either connect all signals to a function or connect each signal
+        to the corresponding signal of the receiver.
+        """
         handles = []
         for signal in self.get_signals(only_notifiers=only_notifiers):
             signal_name = signal.get_name()
-            signal_instance = qobject.__getattribute__(signal_name)
-            handle = signal_instance.connect(fn)
+            signal_instance = source_qobject.__getattribute__(signal_name)
+            slot = (
+                fn_or_qobject.__getattribute__(signal_name)
+                if isinstance(fn_or_qobject, QtCore.QObject)
+                else fn_or_qobject
+            )
+            handle = signal_instance.connect(slot)
             handles.append(handle)
-        logger.debug(f"connected {len(handles)} signals to {fn}.")
+        logger.debug(f"connected {len(handles)} signals to {fn_or_qobject}.")
         return handles
 
-    def copy(self, widget: QtCore.QObject, forward_signals: bool = True):
+    def copy(self, widget: core.QObject, forward_signals: bool = True):
         """Create a copy of given QObject."""
         try:
             new = type(widget)()
@@ -257,17 +269,8 @@ class MetaObject:
         for prop in self.get_properties(only_writable=True):
             val = prop.read(widget)
             prop.write(new, val)
-        # MetaObject can return non-existing signals, dont know why.
-        # also filter out duplicates.
-        signal_names = {
-            s.get_name() for s in self.get_signals() if hasattr(widget, s.get_name())
-        }
         if forward_signals:
-            for signal_name in signal_names:
-                own_signal = widget.__getattribute__(signal_name)
-                new_signal = new.__getattribute__(signal_name)
-                # own_signal.connect(new_signal)
-                new_signal.connect(own_signal)
+            self.connect_signals(new, widget)
         logger.debug(f"copied {widget!r}")
         return new
 
