@@ -11,6 +11,8 @@ if TYPE_CHECKING:
 
 
 class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
+    ID = "animated_tooltip"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.tool_tip = widgets.Label()

@@ -8,6 +8,8 @@ SC = QtWidgets.QStyle.SubControl
 
 
 class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
+    ID = "slider_move_to_mouse_click"
+
     def _move_to_mouse_position(self, scrollbar, point: QtCore.QPoint):
         opt = widgets.StyleOptionSlider()
         scrollbar.initStyleOption(opt)

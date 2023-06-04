@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 class DebugMode(eventfilters.BaseEventFilter):
+    ID = "debug_mode"
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.list = widgets.ListWidget(

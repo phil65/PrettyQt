@@ -108,12 +108,20 @@ class ObjectMixin:
             return getattr(self, cameled)
         raise AttributeError(val)
 
-    def installEventFilter(self, eventfilter: QtCore.QObject):
-        if eventfilter in self._eventfilters:
+    def installEventFilter(self, filter_: QtCore.QObject | str, **kwargs):
+        if filter_ in self._eventfilters:
             logger.warning("Trying to install same EventFilter multiple times.")
             return
-        self._eventfilters.add(eventfilter)
-        super().installEventFilter(eventfilter)
+        match filter_:
+            case QtCore.QObject():
+                pass
+            case str():
+                Klass = helpers.get_class_for_id(eventfilters.BaseEventFilter, filter_)
+                filter_ = Klass(parent=self, **kwargs)
+            case _:
+                raise ValueError(filter_)
+        self._eventfilters.add(filter_)
+        super().installEventFilter(filter_)
 
     def removeEventFilter(self, eventfilter: QtCore.QObject):
         if eventfilter not in self._eventfilters:

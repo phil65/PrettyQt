@@ -1,13 +1,17 @@
 from __future__ import annotations
 
 from prettyqt import core, eventfilters
-from prettyqt.qt import QtCore
+from prettyqt.qt import QtCore, QtWidgets
 
 
 class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
     """Eventfilter that scales grid size of ListViews."""
 
-    def __init__(self, num_columns=5, parent=None, **kwargs):
+    ID = "listview_grid_resize"
+
+    def __init__(
+        self, num_columns: int = 5, parent: QtWidgets.QListView | None = None, **kwargs
+    ):
         super().__init__(parent=parent, **kwargs)
         self._view_columns = num_columns
 

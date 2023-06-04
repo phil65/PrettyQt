@@ -11,6 +11,8 @@ logger = logging.getLogger(__name__)
 
 
 class EventCatcher(eventfilters.BaseEventFilter):
+    ID = "eventcatcher"
+
     caught = core.Signal(QtCore.QEvent)
 
     def __init__(

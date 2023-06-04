@@ -23,6 +23,8 @@ class TextUpdateEventFilter(eventfilters.BaseEventFilter):
 
 
 class TimeLabelEventFilter(TextUpdateEventFilter):
+    ID = "time_label"
+
     def __init__(self, parent, time_format: str = "hh:mm:ss", **kwargs):
         self._format = time_format
         super().__init__(parent, **kwargs)
@@ -33,6 +35,8 @@ class TimeLabelEventFilter(TextUpdateEventFilter):
 
 
 class DateLabelEventFilter(TextUpdateEventFilter):
+    ID = "date_label"
+
     def __init__(self, parent, date_format: str = "dd.MM.yyyy", **kwargs):
         self._format = date_format
         super().__init__(parent, **kwargs)
