@@ -10,22 +10,9 @@ import contextlib
 import sys
 from prettyqt.qt import QtCore
 
-from prettyqt.qt.QtCore import (  # type: ignore
-    Signal,
-    SignalInstance,
-    QModelIndex as ModelIndex,
-    QPoint as Point,
-    QPointF as PointF,
-    QRect as Rect,
-    QRectF as RectF,
+
+from prettyqt.qt.QtCore import (
     qInstallMessageHandler as install_message_handler,
-    QChildEvent as ChildEvent,
-    QTimerEvent as TimerEvent,
-    QEnum as Enum,
-    QDynamicPropertyChangeEvent as DynamicPropertyChangeEvent,
-    ClassInfo,
-    Q_ARG,
-    Q_RETURN_ARG,
     QtMsgType as MsgType,
     # QtCriticalMsg as CriticalMsg,
     # QtDebugMsg as DebugMsg,
@@ -170,6 +157,11 @@ def update_property_group():
     QtCore.Qt.beginPropertyUpdateGroup()
     yield None
     QtCore.Qt.endPropertyUpdateGroup()
+
+
+def __getattr__(name: str):
+    attr = getattr(QtCore, name, None)
+    return attr if attr is not None else getattr(QtCore, f"Q{name}")
 
 
 def app(args: list[str] | None = None, **kwargs) -> CoreApplication:

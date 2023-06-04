@@ -7,18 +7,8 @@ from __future__ import annotations
 
 import sys
 
-from prettyqt.qt.QtWidgets import (
-    QGraphicsSceneHoverEvent as GraphicsSceneHoverEvent,
-    QGraphicsSceneMouseEvent as GraphicsSceneMouseEvent,
-    QGraphicsSceneWheelEvent as GraphicsSceneWheelEvent,
-    QGraphicsSceneContextMenuEvent as GraphicsSceneContextMenuEvent,
-    QGraphicsSceneDragDropEvent as GraphicsSceneDragDropEvent,
-    QGraphicsSceneHelpEvent as GraphicsSceneHelpEvent,
-    QGraphicsSceneMoveEvent as GraphicsSceneMoveEvent,
-    QGraphicsSceneResizeEvent as GraphicsSceneResizeEvent,
-    QGraphicsSceneEvent as GraphicsSceneEvent,
-    QGestureEvent as GestureEvent,
-)
+from prettyqt.qt import QtWidgets
+
 
 from .style import Style, StyleMixin
 from .commonstyle import CommonStyle, CommonStyleMixin
@@ -211,6 +201,11 @@ from .itemeditorfactory import ItemEditorFactory
 from prettyqt import custom_delegates
 from prettyqt import custom_widgets
 from prettyqt import custom_models
+
+
+def __getattr__(name: str):
+    attr = getattr(QtWidgets, name, None)
+    return attr if attr is not None else getattr(QtWidgets, f"Q{name}")
 
 
 def app(args: list[str] | None = None, **kwargs) -> Application:

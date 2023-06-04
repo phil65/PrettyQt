@@ -5,43 +5,7 @@ Contains QtGui-based classes
 from __future__ import annotations
 import sys
 
-from prettyqt.qt.QtGui import (
-    QKeyEvent as KeyEvent,
-    QMouseEvent as MouseEvent,
-    QWheelEvent as WheelEvent,
-    QActionEvent as ActionEvent,
-    QShowEvent as ShowEvent,
-    QDropEvent as DropEvent,
-    QFocusEvent as FocusEvent,
-    QDragEnterEvent as DragEnterEvent,
-    QContextMenuEvent as ContextMenuEvent,
-    QResizeEvent as ResizeEvent,
-    QNativeGestureEvent as NativeGestureEvent,
-    QMoveEvent as MoveEvent,
-    QInputMethodEvent as InputMethodEvent,
-    QInputMethodQueryEvent as InputMethodQueryEvent,
-    QCloseEvent as CloseEvent,
-    QDragLeaveEvent as DragLeaveEvent,
-    QHelpEvent as HelpEvent,
-    QHideEvent as HideEvent,
-    QHoverEvent as HoverEvent,
-    QDragMoveEvent as DragMoveEvent,
-    QEnterEvent as EnterEvent,
-    QExposeEvent as ExposeEvent,
-    QFileOpenEvent as FileOpenEvent,
-    QIconDragEvent as IconDragEvent,
-    QInputEvent as InputEvent,
-    QPaintEvent as PaintEvent,
-    QShortcutEvent as ShortcutEvent,
-    QStatusTipEvent as StatusTipEvent,
-    QTouchEvent as TouchEvent,
-    QTabletEvent as TabletEvent,
-    QWindowStateChangeEvent as WindowStateChangeEvent,
-    QWhatsThisClickedEvent as WhatsThisClickedEvent,
-    QScrollEvent as ScrollEvent,
-    QScrollPrepareEvent as ScrollPrepareEvent,
-)
-
+from prettyqt.qt import QtGui
 
 from .backingstore import BackingStore
 from .stylehints import StyleHints
@@ -149,7 +113,11 @@ from .colorspace import ColorSpace
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
 
+
 # might_be_rich_text = Qt.mightBeRichText
+def __getattr__(name: str):
+    attr = getattr(QtGui, name, None)
+    return attr if attr is not None else getattr(QtGui, f"Q{name}")
 
 
 def app(args: list[str] | None = None, **kwargs) -> GuiApplication:
