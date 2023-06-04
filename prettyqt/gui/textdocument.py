@@ -257,6 +257,16 @@ class TextDocumentMixin(core.ObjectMixin):
             options.setFlags(options.flags() & ~flag)  # type: ignore
         self.setDefaultTextOption(options)
 
+    def get_pixel_height(self):
+        layout = self.documentLayout()
+        h = 0
+        b = self.begin()
+        while b != self.end():
+            h += layout.blockBoundingRect(b).height()
+            b = b.next()
+        h += self.documentMargin()
+        return h
+
 
 class TextDocument(TextDocumentMixin, QtGui.QTextDocument):
     pass
