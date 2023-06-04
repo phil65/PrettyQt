@@ -45,10 +45,6 @@ SizeAdjustPolicyStr = Literal[
 ]
 
 
-class NoData:
-    pass
-
-
 class ComboBoxMixin(widgets.WidgetMixin):
     value_changed = core.Signal(object)
 
@@ -108,7 +104,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def add_items(self, items: Iterable | Mapping, default=NoData):
+    def add_items(self, items: Iterable | Mapping, default=...):
         if isinstance(items, Mapping):
             for k, v in items.items():
                 self.addItem(v, userData=k)
@@ -118,11 +114,11 @@ class ComboBoxMixin(widgets.WidgetMixin):
                     self.add(*i)
                 else:
                     self.addItem(i, i)
-        if default is not NoData:
+        if default is not ...:
             self.set_value(default)
 
-    def add(self, label: str, data=NoData, icon: datatypes.IconType = None):
-        if data is NoData:
+    def add(self, label: str, data=..., icon: datatypes.IconType = None):
+        if data is ...:
             data = label
         if icon is not None:
             icon = iconprovider.get_icon(icon)

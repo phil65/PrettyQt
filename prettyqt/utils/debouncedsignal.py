@@ -66,7 +66,7 @@ def get_debounced_signal(
 
         def __init__(self, *args):
             super().__init__()
-            self.last_tried_emission = object  # just a sentinel value
+            self.last_tried_emission = ...  # just a sentinel value
             self.debounce_time = debounce_time
             # self.last_emission_time = time.time()
             # self.last_emission_try = time.time()
