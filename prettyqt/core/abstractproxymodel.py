@@ -46,6 +46,13 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
         proxy_root_index = self.mapFromSource(core.ModelIndex())
         return self.index(0, 0, proxy_root_index)
 
+    def get_source_model(self, skip_proxies: bool = True):
+        model = self.sourceModel()
+        if skip_proxies:
+            while isinstance(model, QtCore.QAbstractProxyModel):
+                model = model.sourceModel()
+        return model
+
     def remove(self):
         parent = self.parent()
         models = parent.get_models()
