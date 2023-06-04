@@ -38,7 +38,8 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
         return [
             a
             for a in self.children()
-            if hasattr(a, "metaObject") and a.metaObject().className() == "QColorShower"
+            if hasattr(a, "metaObject")
+            and a.metaObject().className() == "QtPrivate::QColorShower"
         ][0]
 
     def get_qcolorshowlabel(self) -> QtWidgets.QFrame:
@@ -47,7 +48,7 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
             b
             for b in qcs.children()
             if hasattr(b, "metaObject")
-            and b.metaObject().className() == "QColorShowLabel"
+            and b.metaObject().className() == "QtPrivate::QColorShowLabel"
         ][0]
 
     def replace_qcolorshowlabel(self, widget: QtWidgets.QWidget):
@@ -122,4 +123,5 @@ if __name__ == "__main__":
     dlg.replace_qcolorshowlabel(label)
     cs = dlg.get_qcolorshower()
     dlg.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()
