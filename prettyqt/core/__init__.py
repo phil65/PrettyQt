@@ -12,7 +12,7 @@ from prettyqt.qt import QtCore
 
 from prettyqt.qt.QtCore import (  # type: ignore
     Signal,
-    # SignalInstance,
+    SignalInstance,
     QModelIndex as ModelIndex,
     QPoint as Point,
     QPointF as PointF,

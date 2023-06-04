@@ -1,5 +1,6 @@
 """Tests for `prettyqt` package."""
 
+
 import inspect
 import pathlib
 import pickle
@@ -13,11 +14,12 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 
-clsmembers = inspect.getmembers(core, inspect.isclass)
 clsmembers = [
     tpl
-    for tpl in clsmembers
-    if (not tpl[0].startswith("Abstract") and not tpl[0].endswith("Mixin"))
+    for tpl in inspect.getmembers(core, inspect.isclass)
+    if not tpl[0].startswith("Abstract")
+    and not tpl[0].endswith("Mixin")
+    and tpl[0] != "SignalInstance"
 ]
 
 
