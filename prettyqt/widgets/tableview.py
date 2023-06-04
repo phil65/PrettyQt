@@ -1,8 +1,12 @@
 from __future__ import annotations
 
+import logging
+
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError
+
+logger = logging.getLogger(__name__)
 
 
 class TableViewMixin(widgets.AbstractItemViewMixin):
@@ -103,7 +107,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
     def get_visible_section_span(
         self, orientation: constants.OrientationStr
     ) -> tuple[int, int]:
-        rect = self.rect()
+        rect = self.viewport().rect()
         if orientation == "horizontal":
             start = self.columnAt(rect.left())
             count = self.model().columnCount()
@@ -125,6 +129,21 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         to_check = min(colcount, max_columns)
         for i in range(to_check):
             self.resizeColumnToContents(i)
+
+    def resize_visible_columns_to_contents(self):
+        if not self.isVisible():
+            logger.warning("trying resize_visible_columns_to_contents while not visible.")
+        colcount = self.model().columnCount()
+        autosized_cols = set()
+        col, end = self.get_visible_section_span("horizontal")
+        width = self.viewport().width()
+        while col <= end:
+            if col not in autosized_cols:
+                autosized_cols.add(col)
+                self.resizeColumnToContents(col)
+            col += 1
+            end = self.columnAt(width)
+            end = colcount if end == -1 else end
 
     def auto_span(
         self,
@@ -171,8 +190,12 @@ class TableView(TableViewMixin, QtWidgets.QTableView):
 
 
 if __name__ == "__main__":
+    from prettyqt import debugging
+
     app = widgets.app()
-    widget = TableView()
-    widget.set_model(widgets.FileSystemModel())
+    widget = debugging.example_table()
+    widget.set_delegate("variant")
     widget.show()
+    widget.resize(500, 500)
+    widget.resize_visible_columns_to_contents()
     app.main_loop()
