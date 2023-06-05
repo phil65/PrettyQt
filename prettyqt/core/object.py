@@ -216,6 +216,7 @@ class ObjectMixin:
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
     ) -> list[T]:
+        """Find children with given type and name."""
         if recursive:
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
@@ -235,6 +236,7 @@ class ObjectMixin:
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
     ) -> T | None:
+        """Find a child with given type and name."""
         if recursive:
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
@@ -244,6 +246,7 @@ class ObjectMixin:
     def find_parent(
         self, typ: type[T] = QtCore.QObject, name: str | None = None
     ) -> T | None:
+        """Find parent with given type or name."""
         node = self
         while node:
             node = node.parent()
@@ -256,6 +259,7 @@ class ObjectMixin:
         interval: int | str,
         timer_type: constants.TimerTypeStr = "coarse",
     ) -> int | None:
+        """Start a timer and return the timer id, to be used in timerEvent."""
         if isinstance(interval, str):
             interval = helpers.parse_time(interval)
         result = self.startTimer(interval, constants.TIMER_TYPE[timer_type])
