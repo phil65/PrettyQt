@@ -151,9 +151,10 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         role=constants.DISPLAY_ROLE,
         start: tuple[int, int] = (0, 0),
         end: tuple[int, int] | None = None,
-    ):
+    ) -> list[tuple[int, int, int, int]]:
         is_horizontal = orientation == constants.HORIZONTAL
         model = self.model()
+        spans = []
         # figure out the ranges
         if is_horizontal:
             start_level = max(0, start[0])
@@ -195,18 +196,25 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
                     if section == end_section - start_section:
                         match_end = section
                         span_size = match_end - match_start + 1
+                        begin = match_start + start_section
                         if is_horizontal:
-                            self.setSpan(level, match_start + start_section, 1, span_size)
+                            self.setSpan(level, begin, 1, span_size)
+                            spans.append(level, begin, 1, span_size)
                         else:
-                            self.setSpan(match_start + start_section, level, span_size, 1)
+                            spans.append(begin, level, span_size, 1)
+                            self.setSpan(begin, level, span_size, 1)
                 elif match_start is not None:
                     match_end = section - 1
                     span_size = match_end - match_start + 1
+                    begin = match_start + start_section
                     if is_horizontal:
-                        self.setSpan(level, match_start + start_section, 1, span_size)
+                        self.setSpan(level, begin, 1, span_size)
+                        spans.append(level, begin, 1, span_size)
                     else:
-                        self.setSpan(match_start + start_section, level, span_size, 1)
+                        self.setSpan(begin, level, span_size, 1)
+                        spans.append(begin, level, span_size, 1)
                     match_start = None
+        return spans
 
 
 class TableView(TableViewMixin, QtWidgets.QTableView):
