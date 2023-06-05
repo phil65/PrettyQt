@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from collections.abc import Iterator, MutableMapping
-from abc import ABCMeta
 import contextlib
 import logging
 import os
@@ -29,11 +28,9 @@ SCOPE = bidict(
 ScopeStr = Literal["user", "system"]
 
 
-class SuperQ(type(QtCore.QObject), ABCMeta):
-    pass
-
-
-class Settings_(MutableMapping, core.ObjectMixin, QtCore.QSettings, metaclass=SuperQ):
+class Settings_(
+    core.ObjectMixin, QtCore.QSettings, MutableMapping, metaclass=datatypes.QABCMeta
+):
     # Setting class with original behavior, compatible with original QSettings
     def __init__(self, *args, settings_id: str | None = None):
         super().__init__(*args)
