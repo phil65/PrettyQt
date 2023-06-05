@@ -14,6 +14,9 @@ from prettyqt.qt import QtCore
 from prettyqt.qt.QtCore import (
     qInstallMessageHandler as install_message_handler,
     QtMsgType as MsgType,
+    Signal,
+    Property,
+    QEnum as Enum,
     # QtCriticalMsg as CriticalMsg,
     # QtDebugMsg as DebugMsg,
     # QtFatalMsg as FatalMsg,
@@ -24,7 +27,8 @@ from prettyqt.qt.QtCore import (
 
 from .event import Event
 from .slot import Slot
-from .property import Property
+
+# from .property import Property
 from .loggingcategory import LoggingCategory
 from .timezone import TimeZone
 from .date import Date
