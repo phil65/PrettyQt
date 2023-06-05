@@ -86,6 +86,19 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         self.add(item, *args, **kwargs)
         return self
 
+    def item_at(self, pos_or_index: int | core.Point) -> widgets.QLayoutItem:
+        match pos_or_index:
+            case int():
+                return super().itemAt(pos_or_index)
+            case QtCore.QPoint():
+                for i in range(self.count()):
+                    item = self.itemAt(i)
+                    print(item.geometry())
+                    if item.geometry().contains(pos_or_index):
+                        return item
+            case _:
+                raise ValueError(pos_or_index)
+
     # def __getattr__(self, name):
     #     return getattr(self._layout, name)
 
