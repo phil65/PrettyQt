@@ -1,15 +1,21 @@
 from __future__ import annotations
 
+from abc import ABCMeta
 import datetime
 import os
 import pathlib
-from typing import TYPE_CHECKING, Any, Protocol, Union
+from typing import TYPE_CHECKING, Any, Protocol
 from re import Pattern
+
+from prettyqt.qt import QtCore
+
+
+class QABCMeta(type(QtCore.QObject), ABCMeta):
+    pass
 
 
 def make_qtype(obj):
     from prettyqt import core
-    from prettyqt.qt import QtCore
 
     match obj:
         case core.Margins():
@@ -59,7 +65,6 @@ def make_qtype(obj):
 def make_serializable(obj):
     #  possible to avoid importing by checking the metaobject instead of isinstance?
     from prettyqt import core
-    from prettyqt.qt import QtCore
 
     match obj:
         case QtCore.QMargins():
@@ -116,108 +121,109 @@ def make_serializable(obj):
 
 
 if TYPE_CHECKING:
-    from prettyqt.qt import QtCore, QtGui, QtWidgets
+    from prettyqt.qt import QtGui, QtWidgets
 
-    JSONType = Union[str, int, float, bool, None, dict[str, Any], list[Any]]
-    PathType = Union[str, os.PathLike]
-    PatternType = Union[str, Pattern]
-    UrlType = Union[str, QtCore.QUrl]
-    PointType = Union[tuple[int, int], QtCore.QPoint]
-    PointFType = Union[tuple[float, float], QtCore.QPointF]
-    SizeType = Union[tuple[int, int], QtCore.QSize]
-    SizeFType = Union[tuple[float, float], QtCore.QSizeF]
-    MarginsType = Union[tuple[int, int, int, int], QtCore.QMargins]
-    MarginsFType = Union[tuple[float, float, float, float], QtCore.QMarginsF]
-    RectType = Union[tuple[int, int, int, int], QtCore.QRect]
-    RectFType = Union[tuple[float, float, float, float], QtCore.QRectF]
-    SemanticVersionType = Union[str, QtCore.QVersionNumber, tuple[int, int, int]]
-    IconType = Union[QtGui.QIcon, str, pathlib.Path, None]
-    ByteArrayType = Union[str, bytes, QtCore.QByteArray]
-    TimeType = Union[QtCore.QTime, datetime.time, str]
-    DateType = Union[QtCore.QDate, datetime.date, str]
-    DateTimeType = Union[QtCore.QDateTime, datetime.datetime, str]
+    JSONType = str | int | float | bool | None | dict[str, Any] | list[Any]
+    PathType = str | os.PathLike
+    PatternType = str | Pattern
+    UrlType = str | QtCore.QUrl
+    PointType = tuple[int, int] | QtCore.QPoint
+    PointFType = tuple[float, float] | QtCore.QPointF
+    SizeType = tuple[int, int] | QtCore.QSize
+    SizeFType = tuple[float, float] | QtCore.QSizeF
+    MarginsType = tuple[int, int, int, int] | QtCore.QMargins
+    MarginsFType = tuple[float, float, float, float] | QtCore.QMarginsF
+    RectType = tuple[int, int, int, int] | QtCore.QRect
+    RectFType = tuple[float, float, float, float] | QtCore.QRectF
+    SemanticVersionType = str | QtCore.QVersionNumber | tuple[int, int, int]
+    IconType = QtGui.QIcon | str | pathlib.Path | None
+    ByteArrayType = str | bytes | QtCore.QByteArray
+    TimeType = QtCore.QTime | datetime.time | str
+    DateType = QtCore.QDate | datetime.date | str
+    DateTimeType = QtCore.QDateTime | datetime.datetime | str
     # ContainerType = Union[widgets.Layout, widgets.Splitter]
-    TransformType = Union[
-        QtGui.QTransform,
-        tuple[float, float, float, float, float, float, float, float, float],
-        tuple[float, float, float, float, float, float],
-    ]
-    VectorType = Union[
-        QtGui.QVector3D,
-        QtGui.QVector2D,
-        QtGui.QVector4D,
-        QtCore.QPoint,
-        QtCore.QPointF,
-        tuple[float, float, float],
-    ]
-    ColorType = Union[
-        str,
-        int,
-        QtCore.Qt.GlobalColor,
-        QtGui.QColor,
-        tuple[int, int, int],
-        tuple[int, int, int, int],
-        None,
-    ]
-    KeyCombinationType = Union[
-        str, QtCore.QKeyCombination, QtGui.QKeySequence, QtGui.QKeySequence.StandardKey
-    ]
-    ColorAndBrushType = Union[ColorType, QtGui.QBrush]
+    TransformType = (
+        QtGui.QTransform
+        | tuple[float, float, float, float, float, float, float, float, float]
+        | tuple[float, float, float, float, float, float]
+    )
+    VectorType = (
+        QtGui.QVector3D
+        | QtGui.QVector2D
+        | QtGui.QVector4D
+        | QtCore.QPoint
+        | QtCore.QPointF
+        | tuple[float, float, float]
+    )
+    ColorType = (
+        str
+        | int
+        | QtCore.Qt.GlobalColor
+        | QtGui.QColor
+        | tuple[int, int, int]
+        | tuple[int, int, int, int]
+        | None
+    )
+    KeyCombinationType = (
+        str | QtCore.QKeyCombination | QtGui.QKeySequence | QtGui.QKeySequence.StandardKey
+    )
+    ColorAndBrushType = ColorType | QtGui.QBrush
 
-    VariantType = Union[
-        QtCore.QPersistentModelIndex,
-        QtCore.QModelIndex,
-        QtCore.QJsonDocument,
-        # QtCore.QJsonArray,
-        # QtCore.QJsonObject,
-        QtCore.QJsonValue,
-        QtCore.QUrl,
-        QtCore.QUuid,
-        QtCore.QEasingCurve,
-        QtCore.QRegularExpression,
-        QtCore.QLocale,
-        QtCore.QRectF,
-        QtCore.QRect,
-        QtCore.QLineF,
-        QtCore.QLine,
-        QtCore.QPointF,
-        QtCore.QPoint,
-        QtCore.QSizeF,
-        QtCore.QSize,
-        QtCore.QDateTime,
-        QtCore.QTime,
-        QtCore.QDate,
-        QtCore.QByteArray,
-        QtGui.QColor,
-        QtGui.QImage,
-        QtGui.QBrush,
-        QtGui.QBitmap,
-        QtGui.QCursor,
-        QtGui.QFont,
-        QtGui.QKeySequence,
-        QtGui.QIcon,
-        QtGui.QTransform,
-        QtGui.QPalette,
-        QtGui.QMatrix4x4,
-        QtGui.QPen,
-        QtGui.QPixmap,
-        QtGui.QPolygon,
-        QtGui.QPolygonF,
-        QtGui.QRegion,
-        QtWidgets.QSizePolicy,
-        QtGui.QTextFormat,
-        QtGui.QTextLength,
-        QtGui.QVector2D,
-        QtGui.QVector3D,
-        QtGui.QVector4D,
-        bool,
-        str,
-        int,
-        float,
-        bytes,
-    ]
+    VariantType = (
+        QtCore.QPersistentModelIndex
+        | QtCore.QModelIndex
+        | QtCore.QJsonDocument
+        |
+        # QtCore.QJsonArray |
+        # QtCore.QJsonObject |
+        QtCore.QJsonValue
+        | QtCore.QUrl
+        | QtCore.QUuid
+        | QtCore.QEasingCurve
+        | QtCore.QRegularExpression
+        | QtCore.QLocale
+        | QtCore.QRectF
+        | QtCore.QRect
+        | QtCore.QLineF
+        | QtCore.QLine
+        | QtCore.QPointF
+        | QtCore.QPoint
+        | QtCore.QSizeF
+        | QtCore.QSize
+        | QtCore.QDateTime
+        | QtCore.QTime
+        | QtCore.QDate
+        | QtCore.QByteArray
+        | QtGui.QColor
+        | QtGui.QImage
+        | QtGui.QBrush
+        | QtGui.QBitmap
+        | QtGui.QCursor
+        | QtGui.QFont
+        | QtGui.QKeySequence
+        | QtGui.QIcon
+        | QtGui.QTransform
+        | QtGui.QPalette
+        | QtGui.QMatrix4x4
+        | QtGui.QPen
+        | QtGui.QPixmap
+        | QtGui.QPolygon
+        | QtGui.QPolygonF
+        | QtGui.QRegion
+        | QtWidgets.QSizePolicy
+        | QtGui.QTextFormat
+        | QtGui.QTextLength
+        | QtGui.QVector2D
+        | QtGui.QVector3D
+        | QtGui.QVector4D
+        | bool
+        | str
+        | int
+        | float
+        | bytes
+    )
 
-    Variant = Union[VariantType, list[VariantType], dict[str, VariantType]]
+    Variant = VariantType | list[VariantType] | dict[str, VariantType]
 
     class Validatable(Protocol):
         """An object with an isValid method (e.g. QUrl)."""
@@ -234,26 +240,26 @@ if TYPE_CHECKING:
         def get_value(self, value):
             ...
 
-    QtSerializableType = Union[
-        QtCore.QByteArray,
-        QtCore.QUrl,
-        QtGui.QBrush,
-        QtGui.QColor,
-        QtGui.QCursor,
-        QtGui.QIcon,
-        QtGui.QIconEngine,
-        QtGui.QImage,
-        QtGui.QPalette,
-        QtGui.QPen,
-        QtGui.QPicture,
-        QtGui.QPixmap,
-        QtGui.QPolygon,
-        QtGui.QPolygonF,
-        QtGui.QRegion,
-        QtGui.QStandardItem,
-        QtGui.QTransform,
-        QtWidgets.QListWidgetItem,
-        QtWidgets.QTreeWidgetItem,
-        # QtGui.QColorSpace,
-        # QtWebEngineCore.QWebEngineHistory,
-    ]
+    QtSerializableType = (
+        QtCore.QByteArray
+        | QtCore.QUrl
+        | QtGui.QBrush
+        | QtGui.QColor
+        | QtGui.QCursor
+        | QtGui.QIcon
+        | QtGui.QIconEngine
+        | QtGui.QImage
+        | QtGui.QPalette
+        | QtGui.QPen
+        | QtGui.QPicture
+        | QtGui.QPixmap
+        | QtGui.QPolygon
+        | QtGui.QPolygonF
+        | QtGui.QRegion
+        | QtGui.QStandardItem
+        | QtGui.QTransform
+        | QtWidgets.QListWidgetItem
+        | QtWidgets.QTreeWidgetItem
+    )
+    # QtGui.QColorSpace |
+    # QtWebEngineCore.QWebEngineHistory
