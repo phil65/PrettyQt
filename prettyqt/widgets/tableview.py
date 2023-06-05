@@ -114,7 +114,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
             end = self.columnAt(rect.right())
         else:
             start = self.rowAt(rect.top())
-            count = self.model().rowRount()
+            count = self.model().rowCount()
             end = self.rowAt(rect.bottom())
         if count == 0:
             return (-1, -1)
