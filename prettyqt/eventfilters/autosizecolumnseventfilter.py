@@ -14,6 +14,7 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
         self.orientation = orientation
         parent.model_changed.connect(self._on_model_change)
         self._autosized_sections = set()
+        self.last_span: tuple[int, int] | None = None
 
         if orientation == constants.VERTICAL:
             parent.h_scrollbar.valueChanged.connect(self._on_scroll)
@@ -43,7 +44,11 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
     def _on_scroll(self):
         if self.orientation == constants.VERTICAL:
             colcount = self._widget.model().columnCount()
-            col, end = self._widget.get_visible_section_span("horizontal")
+            span = self._widget.get_visible_section_span("horizontal")
+            if span == self.last_span:
+                return
+            self.last_span = span
+            col, end = span
             width = self._widget.viewport().width()
             while col <= end:
                 if col not in self._autosized_sections:
@@ -54,7 +59,11 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
                 end = colcount if end == -1 else end
         else:
             rowcount = self._widget.model().rowCount()
-            row, end = self._widget.get_visible_section_span("vertical")
+            span = self._widget.get_visible_section_span("vertical")
+            if span == self.last_span:
+                return
+            self.last_span = span
+            row, end = span
             height = self._widget.viewport().height()
             while row <= end:
                 if row not in self._autosized_sections:
