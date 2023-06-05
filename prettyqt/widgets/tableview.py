@@ -149,39 +149,63 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         self,
         orientation=constants.HORIZONTAL,
         role=constants.DISPLAY_ROLE,
-        max_sections: int = 5000,
+        start: tuple[int, int] = (0, 0),
+        end: tuple[int, int] | None = None,
     ):
         is_horizontal = orientation == constants.HORIZONTAL
         model = self.model()
-        n = model.rowCount() if is_horizontal else model.columnCount()
-        n = min(max_sections, n)
-        m = model.columnCount() if is_horizontal else model.rowCount()
-        m = min(max_sections, n)
-        for level in range(n):
+        # figure out the ranges
+        if is_horizontal:
+            start_level = max(0, start[0])
+            start_section = max(0, start[1])
+            end_level = model.rowCount()
+            end_section = model.columnCount()
+            if end:
+                end_level = min(max(0, end[0]), end_level)
+                end_section = min(max(0, end[1]), end_section)
+        else:
+            start_level = max(0, start[1])
+            start_section = max(0, start[0])
+            end_level = model.columnCount()
+            end_section = model.rowCount()
+            if end:
+                end_level = min(max(0, end[1]), end_level)
+                end_section = min(max(0, end[0]), end_section)
+
+        # adjust the spans.
+        for level in range(start_level, end_level):
             match_start = None
             if is_horizontal:
-                arr = [model.index(level, i).data(role) for i in range(m)]
+                arr = [
+                    model.index(level, i).data(role)
+                    for i in range(start_section, end_section + 1)
+                ]
+                logger.debug(f"{type(self).__name__}: spanning horizontal {arr}")
             else:
-                arr = [model.index(i, level).data(role) for i in range(m)]
-            for col in range(1, m):
-                if arr[col] == arr[col - 1]:
+                arr = [
+                    model.index(i, level).data(role)
+                    for i in range(start_section, end_section + 1)
+                ]
+                logger.debug(f"{type(self).__name__}: spanning vertical {arr}")
+            for section in range(1, len(arr)):
+                if arr[section] == arr[section - 1]:
                     if match_start is None:
-                        match_start = col - 1
+                        match_start = section - 1
                     # If this is the last cell, need to end it
-                    if col == m - 1:
-                        match_end = col
+                    if section == end_section - start_section:
+                        match_end = section
                         span_size = match_end - match_start + 1
                         if is_horizontal:
-                            self.setSpan(level, match_start, 1, span_size)
+                            self.setSpan(level, match_start + start_section, 1, span_size)
                         else:
-                            self.setSpan(match_start, level, span_size, 1)
+                            self.setSpan(match_start + start_section, level, span_size, 1)
                 elif match_start is not None:
-                    match_end = col - 1
+                    match_end = section - 1
                     span_size = match_end - match_start + 1
                     if is_horizontal:
-                        self.setSpan(level, match_start, 1, span_size)
+                        self.setSpan(level, match_start + start_section, 1, span_size)
                     else:
-                        self.setSpan(match_start, level, span_size, 1)
+                        self.setSpan(match_start + start_section, level, span_size, 1)
                     match_start = None
 
 
