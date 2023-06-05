@@ -66,7 +66,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         return self._debug
 
     @contextlib.contextmanager
-    def debug_mode(self, log_level: int = logging.DEBUG, color_borders: bool = True):
+    def debug_mode(self, log_level: int = logging.DEBUG):
         from prettyqt.eventfilters import debugmode
         from prettyqt.debugging import ErrorMessageBox, MessageHandler
 
@@ -83,8 +83,6 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         sys.excepthook = ErrorMessageBox._excepthook
         eventfilter = debugmode.DebugMode(self)
         self._debug = True
-        if color_borders:
-            self.setStyleSheet("QWidget{border: 1px solid red}")
         self.installEventFilter(eventfilter)
         with MessageHandler(root_logger):
             yield self
@@ -117,6 +115,16 @@ class ApplicationMixin(gui.GuiApplicationMixin):
                 if w is not None:
                     new_state = state.encode() if isinstance(state, str) else state
                     w.restoreState(new_state)
+
+    @classmethod
+    def widget_at(
+        cls, pos: datatypes.PointType, typ: type | None = None
+    ) -> QtWidgets.QWidget:
+        if typ is None:
+            return super().widgetAt(pos)
+        for widget in cls.widgets_at(pos):
+            if isinstance(widget, typ):
+                return widget
 
     @classmethod
     def widgets_at(cls, pos: datatypes.PointType) -> list[QtWidgets.QWidget]:

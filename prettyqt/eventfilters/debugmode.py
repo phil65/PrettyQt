@@ -33,7 +33,13 @@ class DebugMode(eventfilters.BaseEventFilter):
         # self.mask.set_background_color("green")
 
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
+        border_keys = [constants.Key.Key_Control, constants.Key.Key_Alt]
         match event.type():
+            case core.Event.Type.KeyPress if event.key() in border_keys:
+                with widgets.app().edit_stylesheet() as ss:
+                    ss.QWidget.border.setValue("1px solid red")
+            case core.Event.Type.KeyRelease if event.key() in border_keys:
+                widgets.app().setStyleSheet("")
             case core.Event.Type.MouseButtonPress:
                 mods = widgets.Application.query_keyboard_modifiers()
                 if "ctrl" in mods:
