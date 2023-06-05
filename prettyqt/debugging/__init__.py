@@ -5,10 +5,42 @@ from .tracebackdialog import TracebackDialog
 from .errormessagebox import ErrorMessageBox
 from .messagehandler import MessageHandler
 
-
+from collections.abc import Callable
+import time
+import functools
 import logging
 from prettyqt import qt
 from prettyqt.qt import QtCore
+
+
+logger = logging.getLogger(__name__)
+
+
+def timeit(func: Callable) -> Callable:
+    @functools.wraps(func)
+    def timeit_wrapper(*args, **kwargs):
+        # logger.info(f'Function {func.__name__}{args} {kwargs}')
+        start_time = time.perf_counter()
+        result = func(*args, **kwargs)
+        end_time = time.perf_counter()
+        total_time = end_time - start_time
+        logger.info(
+            f"Function {func.__name__}{args} {kwargs} Took {total_time:.4f} seconds"
+        )
+        return result
+
+    return timeit_wrapper
+
+
+def for_all_methods(decorator: Callable) -> Callable:
+    def decorate(cls):
+        for attr in cls.__dict__:  # there's propably a better way to do this
+            if callable(getattr(cls, attr)):
+                logger.info(f"decorated {attr}")
+                setattr(cls, attr, decorator(getattr(cls, attr)))
+        return cls
+
+    return decorate
 
 
 class QtLogger(logging.Handler):
@@ -102,10 +134,10 @@ def example_multiindex_df():
         ("foo", "two", "q"),
         ("qux", "one", "q"),
         ("qux", "two", "q"),
-    ]
+    ] * 10
+    dim = len(tuples)
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
-    return df
+    return pd.DataFrame(np.random.randn(dim, dim), index=index, columns=index)
 
 
 def example_widget():
