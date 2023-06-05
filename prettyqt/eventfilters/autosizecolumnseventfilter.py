@@ -1,20 +1,31 @@
 from __future__ import annotations
 
-from prettyqt import core, eventfilters, widgets
+from prettyqt import constants, core, eventfilters, widgets
 
 
 class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
     ID = "autosize_columns"
 
-    def __init__(self, parent: widgets.TableView | widgets.TreeView):
+    def __init__(
+        self, parent: widgets.TableView | widgets.TreeView, orientation=constants.VERTICAL
+    ):
         super().__init__(parent)
         self._widget = parent
-        parent.h_scrollbar.valueChanged.connect(self._on_scroll)
+        self.orientation = orientation
         parent.model_changed.connect(self._on_model_change)
-        self.autosized_cols = set()
+        self._autosized_sections = set()
+
+        if orientation == constants.VERTICAL:
+            parent.h_scrollbar.valueChanged.connect(self._on_scroll)
+        else:
+            parent.v_scrollbar.valueChanged.connect(self._on_scroll)
+        # if sel_model := parent.selectionModel():
+        #     sel_model.currentColumnChanged.connect(self._resize_current_col_to_content)
 
     def _on_model_change(self):
-        self.autosized_cols = set()
+        self._autosized_sections = set()
+        # sel_model = self._widget.selectionModel()
+        # sel_model.currentColumnChanged.connect(self._resize_current_col_to_content)
 
     def eventFilter(self, obj, event: core.Event) -> bool:
         match event.type():
@@ -23,17 +34,35 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
                 return False
         return super().eventFilter(obj, event)
 
+    # def _resize_current_col_to_content(self, new_index, old_index):
+    #     if new_index.column() not in self._autosized_sections:
+    #         # ensure the requested column is fully into view after resizing
+    #         self._widget.resize_visible_columns_to_contents()
+    #         self._widget.scrollTo(new_index)
+
     def _on_scroll(self):
-        colcount = self._widget.model().columnCount()
-        col, end = self._widget.get_visible_section_span("horizontal")
-        width = self._widget.viewport().width()
-        while col <= end:
-            if col not in self.autosized_cols:
-                self.autosized_cols.add(col)
-                self._widget.resizeColumnToContents(col)
-            col += 1
-            end = self._widget.columnAt(width)
-            end = colcount if end == -1 else end
+        if self.orientation == constants.VERTICAL:
+            colcount = self._widget.model().columnCount()
+            col, end = self._widget.get_visible_section_span("horizontal")
+            width = self._widget.viewport().width()
+            while col <= end:
+                if col not in self._autosized_sections:
+                    self._autosized_sections.add(col)
+                    self._widget.resizeColumnToContents(col)
+                col += 1
+                end = self._widget.columnAt(width)
+                end = colcount if end == -1 else end
+        else:
+            rowcount = self._widget.model().rowCount()
+            row, end = self._widget.get_visible_section_span("vertical")
+            height = self._widget.viewport().height()
+            while row <= end:
+                if row not in self._autosized_sections:
+                    self._autosized_sections.add(row)
+                    self._widget.resizeRowToContents(row)
+                row += 1
+                end = self._widget.rowAt(height)
+                end = rowcount if end == -1 else end
 
 
 if __name__ == "__main__":
