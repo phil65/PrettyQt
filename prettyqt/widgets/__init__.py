@@ -10,6 +10,11 @@ import sys
 from prettyqt.qt import QtWidgets
 
 
+def __getattr__(name: str):
+    attr = getattr(QtWidgets, name, None)
+    return attr if attr is not None else getattr(QtWidgets, f"Q{name}")
+
+
 from .style import Style, StyleMixin
 from .commonstyle import CommonStyle, CommonStyleMixin
 from .proxystyle import ProxyStyle
@@ -201,11 +206,6 @@ from .itemeditorfactory import ItemEditorFactory
 from prettyqt import custom_delegates
 from prettyqt import custom_widgets
 from prettyqt import custom_models
-
-
-def __getattr__(name: str):
-    attr = getattr(QtWidgets, name, None)
-    return attr if attr is not None else getattr(QtWidgets, f"Q{name}")
 
 
 def app(args: list[str] | None = None, **kwargs) -> Application:

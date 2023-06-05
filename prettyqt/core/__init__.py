@@ -11,6 +11,11 @@ import sys
 from prettyqt.qt import QtCore
 
 
+def __getattr__(name: str):
+    attr = getattr(QtCore, name, None)
+    return attr if attr is not None else getattr(QtCore, f"Q{name}")
+
+
 from prettyqt.qt.QtCore import (
     qInstallMessageHandler as install_message_handler,
     QtMsgType as MsgType,
@@ -161,11 +166,6 @@ def update_property_group():
     QtCore.Qt.beginPropertyUpdateGroup()
     yield None
     QtCore.Qt.endPropertyUpdateGroup()
-
-
-def __getattr__(name: str):
-    attr = getattr(QtCore, name, None)
-    return attr if attr is not None else getattr(QtCore, f"Q{name}")
 
 
 def app(args: list[str] | None = None, **kwargs) -> CoreApplication:

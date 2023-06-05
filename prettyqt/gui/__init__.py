@@ -7,6 +7,11 @@ import sys
 
 from prettyqt.qt import QtGui
 
+def __getattr__(name: str):
+    attr = getattr(QtGui, name, None)
+    return attr if attr is not None else getattr(QtGui, f"Q{name}")
+
+
 from .backingstore import BackingStore
 from .stylehints import StyleHints
 from .pageranges import PageRanges
@@ -113,12 +118,7 @@ from .colorspace import ColorSpace
 from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
 
-
 # might_be_rich_text = Qt.mightBeRichText
-def __getattr__(name: str):
-    attr = getattr(QtGui, name, None)
-    return attr if attr is not None else getattr(QtGui, f"Q{name}")
-
 
 def app(args: list[str] | None = None, **kwargs) -> GuiApplication:
     if (instance := GuiApplication.instance()) is not None:
