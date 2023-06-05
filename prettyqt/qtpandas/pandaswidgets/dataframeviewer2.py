@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import numpy as np
 import pandas as pd
 
 from prettyqt import constants, core, gui, widgets
@@ -321,7 +320,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_level.v_header.setFixedWidth(h_width)
         self.table_index.v_header.setFixedWidth(h_width)
 
-        last_row = self._model.header_shape[0] - 1
+        last_row = self.model().rowCount() - 1
         if last_row < 0:
             hdr_height = self.table_level.h_header.height()
         else:
@@ -333,7 +332,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_header.setFixedHeight(hdr_height)
         self.table_level.setFixedHeight(hdr_height)
 
-        last_col = self._model.header_shape[1] - 1
+        last_col = self.model().columnCount() - 1
         if last_col < 0:
             idx_width = self.table_level.v_header.width()
         else:
@@ -462,18 +461,9 @@ class DataFrameViewer(widgets.Widget):
 
 
 if __name__ == "__main__":
-    tuples = [
-        ("bar", "one", "q"),
-        ("bar", "two", "q"),
-        ("baz", "one", "q"),
-        ("baz", "two", "q"),
-        ("foo", "one", "q"),
-        ("foo", "two", "q"),
-        ("qux", "one", "q"),
-        ("qux", "two", "q"),
-    ]
-    index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
+    from prettyqt import debugging
+
+    df = debugging.example_multiindex_df()
     app = widgets.app()
     table = DataFrameViewer()
     table.set_df(df)
