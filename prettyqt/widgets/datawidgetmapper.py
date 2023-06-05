@@ -22,9 +22,18 @@ class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
     def __getitem__(self, key: int) -> QtWidgets.QWidget:
         return self.mappedWidgetAt(key)
 
-    def __delitem__(self, key: int):
-        widget = self.mappedWidgetAt(key)
+    def __delitem__(self, key_or_widget: int | QtWidgets.QWidget):
+        widget = (
+            self.mappedWidgetAt(key_or_widget)
+            if isinstance(key_or_widget, int)
+            else key_or_widget
+        )
         self.removeMapping(widget)
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"submitPolicy": SUBMIT_POLICY, "orientation": constants.ORIENTATION}
+        return maps
 
     def set_orientation(self, orientation: constants.OrientationStr):
         """Set the orientation of the data widget mapper.
@@ -79,3 +88,7 @@ class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
 
     def get_mapped_property_name(self, widget: QtWidgets.QWidget) -> str:
         return self.mappedPropertyName(widget).data().decode()
+
+
+if __name__ == "__main__":
+    mapper = DataWidgetMapper()
