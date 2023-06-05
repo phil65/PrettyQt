@@ -673,7 +673,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self,
         table_to_sync: widgets.QAbstractItemView,
         orientation: constants.OrientationStr,
-    ):
+    ) -> list[core.QMetaObject.Connection]:
         def _table_resized(col, _, new_size, table, orientation):
             if orientation == "horizontal":
                 table.setColumnWidth(col, new_size)
@@ -687,15 +687,16 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             _table_resized, table=table_to_sync, orientation=orientation
         )
         if orientation == "vertical":
-            self.v_scrollbar.valueChanged.connect(table_to_sync.v_scrollbar.setValue)
-            table_to_sync.v_scrollbar.valueChanged.connect(self.v_scrollbar.setValue)
-            self.v_header.sectionResized.connect(_table_2_resized)
-            table_to_sync.v_header.sectionResized.connect(_table_1_resized)
+            h1 = self.v_scrollbar.valueChanged.connect(table_to_sync.v_scrollbar.setValue)
+            h2 = table_to_sync.v_scrollbar.valueChanged.connect(self.v_scrollbar.setValue)
+            h3 = self.v_header.sectionResized.connect(_table_2_resized)
+            h4 = table_to_sync.v_header.sectionResized.connect(_table_1_resized)
         else:
-            self.h_scrollbar.valueChanged.connect(table_to_sync.h_scrollbar.setValue)
-            table_to_sync.h_scrollbar.valueChanged.connect(self.h_scrollbar.setValue)
-            self.h_header.sectionResized.connect(_table_2_resized)
-            table_to_sync.h_header.sectionResized.connect(_table_1_resized)
+            h1 = self.h_scrollbar.valueChanged.connect(table_to_sync.h_scrollbar.setValue)
+            h2 = table_to_sync.h_scrollbar.valueChanged.connect(self.h_scrollbar.setValue)
+            h3 = self.h_header.sectionResized.connect(_table_2_resized)
+            h4 = table_to_sync.h_header.sectionResized.connect(_table_1_resized)
+        return [h1, h2, h3, h4]
 
 
 class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
