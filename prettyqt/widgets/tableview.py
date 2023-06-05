@@ -199,9 +199,9 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
                         begin = match_start + start_section
                         if is_horizontal:
                             self.setSpan(level, begin, 1, span_size)
-                            spans.append(level, begin, 1, span_size)
+                            spans.append((level, begin, 1, span_size))
                         else:
-                            spans.append(begin, level, span_size, 1)
+                            spans.append((begin, level, span_size, 1))
                             self.setSpan(begin, level, span_size, 1)
                 elif match_start is not None:
                     match_end = section - 1
@@ -209,10 +209,10 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
                     begin = match_start + start_section
                     if is_horizontal:
                         self.setSpan(level, begin, 1, span_size)
-                        spans.append(level, begin, 1, span_size)
+                        spans.append((level, begin, 1, span_size))
                     else:
                         self.setSpan(begin, level, span_size, 1)
-                        spans.append(begin, level, span_size, 1)
+                        spans.append((begin, level, span_size, 1))
                     match_start = None
         return spans
 
