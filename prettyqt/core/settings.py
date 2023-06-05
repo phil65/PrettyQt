@@ -1,6 +1,7 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Mapping
+from collections.abc import Iterator, MutableMapping
+from abc import ABCMeta
 import contextlib
 import logging
 import os
@@ -28,14 +29,18 @@ SCOPE = bidict(
 ScopeStr = Literal["user", "system"]
 
 
-class Settings_(core.ObjectMixin, QtCore.QSettings):
+class SuperQ(type(QtCore.QObject), ABCMeta):
+    pass
+
+
+class Settings_(MutableMapping, core.ObjectMixin, QtCore.QSettings, metaclass=SuperQ):
     # Setting class with original behavior, compatible with original QSettings
     def __init__(self, *args, settings_id: str | None = None):
         super().__init__(*args)
         self.settings_id = settings_id
 
     def __repr__(self):
-        return f"{type(self).__name__}: {self.as_dict()}"
+        return f"{type(self).__name__}({dict(self)})"
 
     def __contains__(self, key: str) -> bool:
         return self.contains(key)
@@ -60,8 +65,8 @@ class Settings_(core.ObjectMixin, QtCore.QSettings):
             raise KeyError(key)
         return self.remove(key)
 
-    def __iter__(self) -> Iterator[tuple[str, Any]]:
-        return iter(self.items())
+    def __iter__(self) -> Iterator[str]:
+        return iter(self.allKeys())
 
     def __len__(self) -> int:
         return len(self.allKeys())
@@ -73,9 +78,6 @@ class Settings_(core.ObjectMixin, QtCore.QSettings):
             settings.set_value(k, v)
         return settings
 
-    def as_dict(self) -> dict[str, Any]:
-        return dict(self.items())
-
     def set_value(self, key: str, value):
         if not self.applicationName():
             raise RuntimeError("no app name defined")
@@ -86,9 +88,7 @@ class Settings_(core.ObjectMixin, QtCore.QSettings):
             self.set_value(k, v)
 
     def get_value(self, key: str, default=None):
-        if not self.contains(key):
-            return default
-        return self.value(key)
+        return self.value(key) if self.contains(key) else default
 
     @classmethod
     def set_default_format(cls, fmt: FormatStr):
@@ -175,38 +175,16 @@ class Settings_(core.ObjectMixin, QtCore.QSettings):
         yield None
         self.endArray()
 
-    # Dictionary interface
+    # MutableMapping overrides
 
-    def get(self, key: str, default: Any = None) -> Any:
-        return self.get_value(key, default)
+    def keys(self) -> list[str]:
+        return self.allKeys()
 
     def setdefault(self, key: str, default: Any = None) -> Any:
         if not self.contains(key):
             self.set_value(key, default)
             return default
         return self.get_value(key)
-
-    def keys(self) -> list[str]:
-        return self.allKeys()
-
-    def values(self) -> Iterator[Any]:
-        return (self.get_value(key) for key in self.allKeys())
-
-    def items(self):
-        return zip(self.keys(), self.values())
-
-    def pop(self, key: str):
-        if self.contains(key):
-            return self.get_value(key)
-        raise KeyError(key)
-
-    def popitem(self) -> tuple[str, Any]:
-        key = self.keys()[0]
-        return (key, self.get_value(key))
-
-    def update(self, other: Mapping[str, Any]):
-        for k, v in other.items():
-            self.set_value(k, v)
 
     @classmethod
     def register_extensions(
