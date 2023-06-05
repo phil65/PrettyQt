@@ -1,10 +1,11 @@
 # from prettyqt.qt import QtWebEngineCore
 from __future__ import annotations
 
+from collections.abc import MutableMapping
 from typing import Literal
 
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
 FONT_FAMILY = bidict(
@@ -114,9 +115,12 @@ WebAttributeStr = Literal[
 ]
 
 
-class WebEngineSettings:
+class WebEngineSettings(MutableMapping):
     def __init__(self, item: QtWebEngineCore.QWebEngineSettings):
         self.item = item
+
+    def __repr__(self):
+        return get_repr(self, dict(self))
 
     def __getattr__(self, val):
         return getattr(self.item, val)
@@ -125,16 +129,18 @@ class WebEngineSettings:
         self.item.setAttribute(WEB_ATTRIBUTES[index], value)
 
     def __getitem__(self, index: WebAttributeStr) -> bool:
+        if index not in WEB_ATTRIBUTES:
+            raise KeyError(index)
         return self.item.testAttribute(WEB_ATTRIBUTES[index])
 
     def __delitem__(self, index: WebAttributeStr):
         return self.item.resetAttribute(WEB_ATTRIBUTES[index])
 
     def __iter__(self):
-        return iter(self.keys())
+        return iter(WEB_ATTRIBUTES.keys())
 
-    def keys(self):
-        return WEB_ATTRIBUTES.keys()
+    def __len__(self):
+        return len(WEB_ATTRIBUTES)
 
     def set_unknown_url_scheme_policy(self, policy: UnknownUrlSchemePolicyStr):
         """Set the unknown url scheme policy.
@@ -214,4 +220,5 @@ if __name__ == "__main__":
     app = widgets.app()
     page = webenginecore.WebEnginePage()
     settings = page.get_settings()
-    app.main_loop()
+    print(settings)
+    # app.main_loop()

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import MutableMapping
+
 from prettyqt import core
 from prettyqt.qt import QtQml
 from prettyqt.utils import datatypes, get_repr
@@ -9,9 +11,14 @@ class QmlPropertyMapMixin(core.ObjectMixin):
     pass
 
 
-class QmlPropertyMap(QmlPropertyMapMixin, QtQml.QQmlPropertyMap):
+class QmlPropertyMap(
+    QmlPropertyMapMixin,
+    QtQml.QQmlPropertyMap,
+    MutableMapping,
+    metaclass=datatypes.QABCMeta,
+):
     def __repr__(self):
-        return get_repr(self, self.as_dict())
+        return get_repr(self, dict(self))
 
     def __setitem__(self, key: str, value: datatypes.Variant):
         self.insert(key, value)
@@ -29,15 +36,11 @@ class QmlPropertyMap(QmlPropertyMapMixin, QtQml.QQmlPropertyMap):
         return not self.isEmpty()
 
     def __iter__(self):
-        return iter(self.as_dict())
-
-    def items(self):
-        return self.as_dict().items()
-
-    def as_dict(self) -> dict[str, datatypes.Variant]:
-        return {i: self.value(i) for i in self.keys()}
+        return iter(self.keys())
 
 
 if __name__ == "__main__":
     propmap = QmlPropertyMap()
     propmap["a"] = 2
+    propmap.pop("a")
+    print(len(propmap))

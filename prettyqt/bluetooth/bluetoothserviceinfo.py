@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import MutableMapping
 from typing import Literal
 
 from prettyqt.qt import QtBluetooth
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, datatypes
 
 
 AttributeId = QtBluetooth.QBluetoothServiceInfo.AttributeId
@@ -40,18 +41,38 @@ PROTOCOL = bidict(
 ProtocolStr = Literal["unknown", "l2_cap", "rfcomm"]
 
 
-class BluetoothServiceInfo(QtBluetooth.QBluetoothServiceInfo):
-    def __getitem__(self, value: str):
-        attr = ATTRIBUTE_IDS.inverse[value]
-        return self.attribute(attr)
+class BluetoothServiceInfo(
+    QtBluetooth.QBluetoothServiceInfo, MutableMapping, metaclass=datatypes.QABCMeta
+):
+    def __getitem__(self, value: str | int | AttributeId):
+        match value:
+            case int():
+                flag = value
+            case str():
+                flag = ATTRIBUTE_IDS[value].value
+            case AttributeId():
+                flag = value.value
+        return self.attribute(flag)
 
-    def __delitem__(self, value: str):
-        attr = ATTRIBUTE_IDS.inverse[value]
-        return self.removeAttribute(attr)
+    def __delitem__(self, value: str | int | AttributeId):
+        match value:
+            case int():
+                flag = value
+            case str():
+                flag = ATTRIBUTE_IDS[value].value
+            case AttributeId():
+                flag = value.value
+        return self.removeAttribute(flag)
 
-    def __setitem__(self, index: str, value):
-        attr = ATTRIBUTE_IDS.inverse[index]
-        return self.setAttribute(attr, value)
+    def __setitem__(self, index: str | int | AttributeId, value):
+        match index:
+            case int():
+                flag = index
+            case str():
+                flag = ATTRIBUTE_IDS[index].value
+            case AttributeId():
+                flag = index.value
+        return self.setAttribute(flag, value)
 
     def __contains__(self, value: int) -> bool:
         attr = ATTRIBUTE_IDS.inverse[value]
@@ -60,6 +81,14 @@ class BluetoothServiceInfo(QtBluetooth.QBluetoothServiceInfo):
     def __iter__(self):
         return iter(self.attributes())
 
+    def __len__(self):
+        return len(self.attributes())
+
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
     address = BluetoothServiceInfo()
+    address["documentation_url"] = "test"
+    del address["documentation_url"]
