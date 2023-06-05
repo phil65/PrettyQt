@@ -5,6 +5,7 @@ from dataclasses import dataclass
 import datetime
 import enum
 import itertools
+import logging
 import os
 import pathlib
 from typing import TypedDict
@@ -14,6 +15,9 @@ import fsspec
 from prettyqt import constants, core, custom_models, widgets
 from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
+
+
+logger = logging.getLogger(__name__)
 
 
 class FsSpecCompleter(widgets.Completer):
@@ -234,8 +238,10 @@ class FSSpecTreeModel(
 
     def get_file_content(self, index_or_path: str | QtCore.QModelIndex):
         if isinstance(index_or_path, str):
-            index_or_path = self.index(index_or_path)
-        protocol_path = self.get_protocol_path(index_or_path)
+            index = self.index(index_or_path)
+        else:
+            index = index_or_path
+        protocol_path = self.get_protocol_path(index)
         # info = self.fs.info(protocol_path)
         with self.fs.open(protocol_path) as file:
             return file.read()
@@ -272,12 +278,12 @@ class FSSpecTreeModel(
         tree_item = index.internalPointer()
         return 0 if tree_item is None else tree_item.obj["size"]
 
-    def lastModified(self, index) -> int:
+    def lastModified(self, index) -> datetime.datetime | None:
         tree_item = index.internalPointer()
         return (
-            ""
+            None
             if tree_item is None
-            else str(datetime.datetime.fromtimestamp(tree_item.obj["mtime"]))
+            else datetime.datetime.fromtimestamp(tree_item.obj["mtime"])
         )
 
     def permissions(self, index) -> QtCore.QFileDevice.Permission:
@@ -306,7 +312,6 @@ class FSSpecTreeModel(
         path = os.fspath(path) if path else self.fs.root_marker
         item = self.fs.info(path)
         self.set_root_item(item)
-
         self.rootPathChanged.emit(path)
 
     def rootDirectory(self) -> core.Dir:
@@ -336,27 +341,23 @@ class FSSpecTreeModel(
 
     def mimeData(self, indexes):
         mime_data = core.MimeData()
-        paths = [i for idx in indexes if (i := idx.data(self.Roles.FilePathRole))]
-        urls = [core.Url(i) for i in paths]
+        role = self.Roles.FilePathRole
+        urls = [core.Url(i) for idx in indexes if (i := idx.data(role))]
         mime_data.setUrls(urls)
         return mime_data
 
     def supportedDropActions(self):
-        return (
-            QtCore.Qt.DropAction.MoveAction
-            | QtCore.Qt.DropAction.CopyAction
-            | QtCore.Qt.DropAction.LinkAction
-        )
+        DropAction = constants.DropAction
+        return DropAction.MoveAction | DropAction.CopyAction | DropAction.LinkAction
 
     def flags(self, index):
-        flags = super().flags(index)
-        return flags | constants.DROP_ENABLED | constants.DRAG_ENABLED
+        return super().flags(index) | constants.DROP_ENABLED | constants.DRAG_ENABLED
 
     # def dragEnterEvent(self, event):
     #     event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
-        parent = core.ModelIndex() if parent is None else parent
+    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
+        parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return False
         item = self.data_by_index(parent)
@@ -381,8 +382,7 @@ class FSSpecTreeModel(
         position: int | None = None,
         parent: QtCore.QModelIndex | None = None,
     ):
-        if position is None:
-            position = len(self.items)
+        position = len(self.items) if position is None else position
         items = list(items)
         # with self.insert_rows(position, position + len(items) - 1, parent):
         #     for i in range(len(items)):
@@ -398,7 +398,7 @@ class FSSpecTreeModel(
         row: int,
         column: int,
         parent_index: QtCore.QModelIndex,
-    ):
+    ) -> bool:
         return column == 0 and mime_data.hasFormat("text/uri-list")
 
     def dropMimeData(
@@ -415,15 +415,17 @@ class FSSpecTreeModel(
         urls = [core.Url(i) for i in mime_data.urls()]
         if not urls:
             return False
-        if action == QtCore.Qt.DropAction.MoveAction:
-            with self.change_layout():
-                for i in sorted(urls, reverse=True):
-                    # self.fs.mv(i, )
-                    print("move", i, "to", parent_index.data(self.Roles.FilePathRole))
-        elif action == QtCore.Qt.DropAction.CopyAction:
-            pass
-        elif action == QtCore.Qt.DropAction.LinkAction:
-            pass
+        match action:
+            case constants.DropAction.MoveAction:
+                with self.change_layout():
+                    for i in sorted(urls, reverse=True):
+                        logger.info(
+                            "move", i, "to", parent_index.data(self.Roles.FilePathRole)
+                        )
+            case constants.DropAction.CopyAction:
+                pass
+            case constants.DropAction.LinkAction:
+                pass
 
         column = min(column, 0)
         if row != -1:
