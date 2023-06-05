@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Generator
+import functools
 import importlib.util
 import logging
 from typing import Any, Literal, overload
@@ -666,6 +667,34 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             v = self.sizeHintForIndex(self.model().index(row, col))
             max_width = max(max_width, v.width())
         return max_width
+
+    def sync_with(
+        self,
+        table_to_sync: widgets.QAbstractItemView,
+        orientation: constants.OrientationStr,
+    ):
+        def _table_resized(col, _, new_size, table, orientation):
+            if orientation == "horizontal":
+                table.setColumnWidth(col, new_size)
+            else:
+                table.setRowHeight(col, new_size)
+
+        _table_1_resized = functools.partial(
+            _table_resized, table=self, orientation=orientation
+        )
+        _table_2_resized = functools.partial(
+            _table_resized, table=table_to_sync, orientation=orientation
+        )
+        if orientation == "vertical":
+            self.v_scrollbar.valueChanged.connect(table_to_sync.v_scrollbar.setValue)
+            table_to_sync.v_scrollbar.valueChanged.connect(self.v_scrollbar.setValue)
+            self.v_header.sectionResized.connect(_table_2_resized)
+            table_to_sync.v_header.sectionResized.connect(_table_1_resized)
+        else:
+            self.h_scrollbar.valueChanged.connect(table_to_sync.h_scrollbar.setValue)
+            table_to_sync.h_scrollbar.valueChanged.connect(self.h_scrollbar.setValue)
+            self.h_header.sectionResized.connect(_table_2_resized)
+            table_to_sync.h_header.sectionResized.connect(_table_1_resized)
 
 
 class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
