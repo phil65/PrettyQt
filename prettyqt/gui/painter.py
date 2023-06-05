@@ -100,7 +100,7 @@ class PainterMixin:
                 position = core.Point(*position)
             case (_, _, _, _):
                 position = core.RectF(*position)
-        self.drawText(position, text, constants.ALIGNMENTS[alignment])
+        self.drawText(position, constants.ALIGNMENTS[alignment].value, text)
 
     def draw_image(
         self,

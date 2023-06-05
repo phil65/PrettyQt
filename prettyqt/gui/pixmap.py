@@ -132,7 +132,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
             margin = 1 + size // 16
             text_margin = size // 20
             w = size - 2 * margin
-            rect = core.Rect(margin, margin, w, w)
+            rect = core.RectF(margin, margin, w, w)
             painter.draw_rounded_rect(rect, 30, 30, relative=True)
             painter.set_pen(color=color)
             with painter.edit_font() as font:  # type: QtGui.QFont
