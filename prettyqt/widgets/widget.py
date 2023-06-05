@@ -6,7 +6,7 @@ import os
 import html
 import pathlib
 import sys
-from typing import TYPE_CHECKING, Literal
+from typing import TYPE_CHECKING, Literal, overload
 
 import qstylizer.parser
 import qstylizer.style
@@ -18,6 +18,7 @@ from prettyqt.utils import InvalidParamError, colors, datatypes
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
+    from prettyqt import custom_widgets
 
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow", "border"]
@@ -35,8 +36,6 @@ PositionPossibilityType = (
 
 
 class WidgetMixin(core.ObjectMixin):
-    box: QtWidgets.QLayout
-
     def __init__(self, *args, margin: int | None = None, **kwargs):
         super().__init__(*args, **kwargs)
         if margin is not None:
@@ -599,6 +598,48 @@ class WidgetMixin(core.ObjectMixin):
     @box.setter
     def box(self, layout):
         self.set_layout(layout)
+
+    @overload
+    def set_layout(
+        self, layout: Literal["horizontal"], margin: int | None = None
+    ) -> widgets.HBoxLayout:
+        pass
+
+    @overload
+    def set_layout(
+        self, layout: Literal["vertical"], margin: int | None = None
+    ) -> widgets.VBoxLayout:
+        pass
+
+    @overload
+    def set_layout(
+        self, layout: Literal["grid"], margin: int | None = None
+    ) -> widgets.GridLayout:
+        pass
+
+    @overload
+    def set_layout(
+        self, layout: Literal["border"], margin: int | None = None
+    ) -> custom_widgets.BorderLayout:
+        pass
+
+    @overload
+    def set_layout(
+        self, layout: Literal["flow"], margin: int | None = None
+    ) -> custom_widgets.FlowLayout:
+        pass
+
+    @overload
+    def set_layout(
+        self, layout: Literal["form"], margin: int | None = None
+    ) -> widgets.FormLayout:
+        pass
+
+    @overload
+    def set_layout(
+        self, layout: Literal["stacked"], margin: int | None = None
+    ) -> widgets.StackedLayout:
+        pass
 
     def set_layout(
         self,
