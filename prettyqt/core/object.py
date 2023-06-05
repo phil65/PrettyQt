@@ -116,6 +116,8 @@ class ObjectMixin:
             case QtCore.QObject():
                 pass
             case str():
+                from prettyqt import eventfilters
+
                 Klass = helpers.get_class_for_id(eventfilters.BaseEventFilter, filter_)
                 filter_ = Klass(parent=self, **kwargs)
             case _:
