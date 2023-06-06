@@ -339,12 +339,18 @@ class AbstractItemModelMixin(core.ObjectMixin):
         value: Any,
         role=constants.DISPLAY_ROLE,
         root_index: core.ModelIndex | None = None,
-    ) -> core.ModelIndex:
-        """Search the tree for an index with a given value in given role."""
-        return next(
-            (idx for idx in self.iter_tree(root_index) if self.data(idx, role) == value),
-            None,
-        )
+        max_results=None,
+    ) -> list[core.ModelIndex]:
+        """Search the tree for indexes with a given value in given role."""
+        results = []
+        if type(value) != list:
+            value = [value]
+        for idx in self.iter_tree(root_index):
+            if self.data(idx, role) in value:
+                results.append(idx)
+                if len(results) == max_results:
+                    break
+        return results
 
 
 class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
