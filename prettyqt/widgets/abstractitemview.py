@@ -290,7 +290,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         match index:
             case None:
                 self.selectionModel().setCurrentIndex(
-                    index, core.ItemSelectionModel.SelectionFlag.Clear
+                    core.ModelIndex(), core.ItemSelectionModel.SelectionFlag.Clear
                 )
                 return
             case tuple():
