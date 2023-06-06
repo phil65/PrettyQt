@@ -109,6 +109,7 @@ class ObjectMixin:
         raise AttributeError(val)
 
     def installEventFilter(self, filter_: QtCore.QObject | str, **kwargs):
+        """Override to also allow setting eventfilters by name."""
         if filter_ in self._eventfilters:
             logger.warning("Trying to install same EventFilter multiple times.")
             return
@@ -215,6 +216,7 @@ class ObjectMixin:
         typ: type[T] = QtCore.QObject,
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
+        property_selector: dict | None = None,
     ) -> list[T]:
         """Find children with given type and name."""
         if recursive:
@@ -222,13 +224,21 @@ class ObjectMixin:
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
         if isinstance(typ, types.UnionType):
-            return [
+            objects = [
                 i
                 for t in get_args(typ)
                 for i in self.findChildren(t, name=name, options=flag)
             ]
         else:
-            return self.findChildren(typ, name=name, options=flag)
+            objects = self.findChildren(typ, name=name, options=flag)
+        if property_selector:
+            return [
+                o
+                for o in objects
+                for k, v in property_selector.items()
+                if o.property(k) == v
+            ]
+        return objects
 
     def find_child(
         self,
