@@ -80,6 +80,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         **kwargs,
     ) -> None:
         self._scroll_mode = "single"
+        self._expand_mode = "always"
         super().__init__(scrollarea, **kwargs)
         self._orientation = orientation
         self.scrollarea = scrollarea
@@ -90,6 +91,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.h_header.setStretchLastSection(True)
         self.setAlternatingRowColors(False)
         self.setRootIsDecorated(False)
+        self.setAnimated(False)
         self.setStyleSheet(
             """::item:hover {background: transparent; border-color:transparent}
             ::item:selected { border-color:transparent;
@@ -109,6 +111,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.set_model(model)
         self.selectionModel().currentChanged.connect(self._on_current_change)
         self.selectionModel().selectionChanged.connect(self._on_selection_change)
+        # if self._expand_mode == "always":
         self.expandAll()
 
     def _on_current_change(self, new, old):
@@ -134,6 +137,8 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
             return
         self.selectionModel().currentChanged.disconnect(self._on_current_change)
         self.select_index(None)
+        if self._expand_mode != "always":
+            self.collapseAll()
         match self._scroll_mode:
             case "multi":
                 if indexes := model.search_tree(children, constants.USER_ROLE):
@@ -147,6 +152,8 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
                             self.select_index(index, clear=False)
                         self.scroll_to(indexes[0])
                         self.scroll_to(indexes[-1])
+                        for idx in indexes:
+                            self.setExpanded(idx, True)
             case "headers_only":
                 if indexes := model.search_tree(
                     children, constants.USER_ROLE, max_results=1
@@ -188,7 +195,14 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
     def set_scroll_mode(self, mode: str):
         self._scroll_mode = mode
 
+    def get_expand_mode(self) -> str:
+        return self._expand_mode
+
+    def set_expand_mode(self, mode: str):
+        self._expand_mode = mode
+
     scrollMode = core.Property(str, get_scroll_mode, set_scroll_mode)
+    expandMode = core.Property(str, get_expand_mode, set_expand_mode)
 
 
 if __name__ == "__main__":
@@ -197,7 +211,9 @@ if __name__ == "__main__":
         window = widgets.Widget(object_name="window")
         layout = window.set_layout("horizontal")
         scrollarea = widgets.ScrollArea(object_name="scroll")
-        scrollbar_map = ScrollAreaTableOfContentsWidget(scrollarea)
+        scrollbar_map = ScrollAreaTableOfContentsWidget(
+            scrollarea, expand_mode="never", scroll_mode="multi"
+        )
         layout.add(scrollbar_map)
         widget = widgets.Widget(object_name="scrollarea_widget")
         scroll_layout = widget.set_layout("vertical")
