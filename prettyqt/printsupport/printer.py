@@ -23,6 +23,46 @@ DUPLEX_MODE = bidict(
 
 DuplexModeStr = Literal["none", "auto", "long_side", "short_side"]
 
+OUTPUT_FORMAT = bidict(
+    native=QtPrintSupport.QPrinter.OutputFormat.NativeFormat,
+    pdf=QtPrintSupport.QPrinter.OutputFormat.PdfFormat,
+)
+
+OutputFormatStr = Literal["native", "pdf"]
+
+PAGE_ORDER = bidict(
+    first_page_last=QtPrintSupport.QPrinter.PageOrder.FirstPageFirst,
+    last_page_first=QtPrintSupport.QPrinter.PageOrder.LastPageFirst,
+)
+
+PageOrderStr = Literal["first_page_last", "last_page_first"]
+
+PRINT_RANGE = bidict(
+    all_pages=QtPrintSupport.QPrinter.PrintRange.AllPages,
+    selection=QtPrintSupport.QPrinter.PrintRange.Selection,
+    page_range=QtPrintSupport.QPrinter.PrintRange.PageRange,
+    current_page=QtPrintSupport.QPrinter.PrintRange.CurrentPage,
+)
+
+PrintRangeStr = Literal["all_pages", "selection", "page_range", "current_page"]
+
+PRINTER_MODE = bidict(
+    screen_resolution=QtPrintSupport.QPrinter.PrinterMode.ScreenResolution,
+    printer_resolution=QtPrintSupport.QPrinter.PrinterMode.PrinterResolution,
+    high_resolution=QtPrintSupport.QPrinter.PrinterMode.HighResolution,
+)
+
+PrinterModeStr = Literal["screen_resolution", "printer_resolution", "high_resolution"]
+
+PRINTER_STATE = bidict(
+    idle=QtPrintSupport.QPrinter.PrinterState.Idle,
+    active=QtPrintSupport.QPrinter.PrinterState.Active,
+    aborted=QtPrintSupport.QPrinter.PrinterState.Aborted,
+    error=QtPrintSupport.QPrinter.PrinterState.Error,
+)
+
+PrinterStateStr = Literal["idle", "active", "aborted", "error"]
+
 
 class Printer(gui.PagedPaintDeviceMixin, QtPrintSupport.QPrinter):
     # def get_source(self) -> pathlib.Path:
