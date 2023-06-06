@@ -1,10 +1,15 @@
 from __future__ import annotations
 
-from prettyqt import widgets
+from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
 
 
 class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        viewport = widgets.Widget(self, object_name=f"{type(self).__name__}_viewport")
+        self.setViewport(viewport)
+
     def __enter__(self):
         return self
 
@@ -14,6 +19,25 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
     def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout | list):
         self.add(other)
         return self
+
+    def get_visible_widgets(
+        self,
+        typ: type[QtWidgets.QWidget] = QtWidgets.QWidget,
+        partial_allowed: bool = True,
+    ):
+        scroll_offset = -self.widget().y() - 10
+        scroll_bottom = self.viewport().rect().height() + scroll_offset + 10
+        if not partial_allowed:
+            return [
+                w
+                for w in self.find_children(typ)
+                if w.y() > scroll_offset and w.geometry().bottom() < scroll_bottom
+            ]
+        rect = core.QRect(
+            core.QPoint(0, scroll_offset),
+            core.QPoint(self.width(), scroll_bottom),
+        )
+        return [w for w in self.find_children(typ) if w.geometry().intersects(rect)]
 
     def get_children(self) -> list[QtWidgets.QWidget]:
         return self.widget().layout().get_children()
