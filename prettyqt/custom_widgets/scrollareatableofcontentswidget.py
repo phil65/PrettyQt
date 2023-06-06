@@ -60,7 +60,7 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
         return [treeitem.TreeItem(obj=i) for i in children]
 
     def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
-        parent = core.ModelIndex() if parent is None else parent
+        parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return False
         item = self.data_by_index(parent)

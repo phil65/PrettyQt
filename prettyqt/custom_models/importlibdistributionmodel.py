@@ -121,7 +121,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         return cls(distributions, parent)
 
     def hasChildren(self, parent: core.ModelIndex | None = None):
-        parent = core.ModelIndex() if parent is None else parent
+        parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return False
         item = self.data_by_index(parent)
