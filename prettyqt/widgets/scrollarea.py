@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import TypeVar
 
-from prettyqt import core, widgets
+from prettyqt import widgets
 from prettyqt.qt import QtWidgets
 
 T = TypeVar("T", bound=QtWidgets.QWidget)
@@ -32,25 +32,18 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
         recursive: bool = True,
     ) -> list[T]:
         widget = self.widget()
-        scroll_y_offset = -widget.y() - margin
-        scroll_x_offset = -widget.x() - margin
-        scroll_y_end = self.viewport().rect().height() + scroll_y_offset + margin
-        scroll_x_end = self.viewport().rect().width() + scroll_x_offset + margin
-        rect = core.QRect(
-            core.QPoint(scroll_x_offset, scroll_y_offset),
-            core.QPoint(scroll_x_end, scroll_y_end),
-        )
+        rect = self.viewport().rect().adjusted(-margin, -margin, margin, margin)
         return (
             [
                 w
                 for w in widget.find_children(typ, recursive=recursive)
-                if rect.intersects(w.geometry())
+                if rect.intersects(w.map_to(self.viewport(), w.rect()))
             ]
             if partial_allowed
             else [
                 w
                 for w in widget.find_children(typ, recursive=recursive)
-                if rect.contains(w.geometry())
+                if rect.contains(w.map_to(self.viewport(), w.rect()))
             ]
         )
 
