@@ -1,7 +1,11 @@
 from __future__ import annotations
 
+from typing import TypeVar
+
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
+
+T = TypeVar("T", bound=QtWidgets.QWidget)
 
 
 class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
@@ -22,22 +26,33 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
 
     def get_visible_widgets(
         self,
-        typ: type[QtWidgets.QWidget] = QtWidgets.QWidget,
+        typ: type[T] = QtWidgets.QWidget,
         partial_allowed: bool = True,
-    ):
-        scroll_offset = -self.widget().y() - 10
-        scroll_bottom = self.viewport().rect().height() + scroll_offset + 10
-        if not partial_allowed:
-            return [
-                w
-                for w in self.find_children(typ)
-                if w.y() > scroll_offset and w.geometry().bottom() < scroll_bottom
-            ]
+        margin: int = 10,
+        recursive: bool = True,
+    ) -> list[T]:
+        widget = self.widget()
+        scroll_y_offset = -widget.y() - margin
+        scroll_x_offset = -widget.x() - margin
+        scroll_y_end = self.viewport().rect().height() + scroll_y_offset + margin
+        scroll_x_end = self.viewport().rect().width() + scroll_x_offset + margin
         rect = core.QRect(
-            core.QPoint(0, scroll_offset),
-            core.QPoint(self.width(), scroll_bottom),
+            core.QPoint(scroll_x_offset, scroll_y_offset),
+            core.QPoint(scroll_x_end, scroll_y_end),
         )
-        return [w for w in self.find_children(typ) if w.geometry().intersects(rect)]
+        return (
+            [
+                w
+                for w in widget.find_children(typ, recursive=recursive)
+                if rect.intersects(w.geometry())
+            ]
+            if partial_allowed
+            else [
+                w
+                for w in widget.find_children(typ, recursive=recursive)
+                if rect.contains(w.geometry())
+            ]
+        )
 
     def get_children(self) -> list[QtWidgets.QWidget]:
         return self.widget().layout().get_children()
