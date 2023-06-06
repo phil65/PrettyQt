@@ -24,7 +24,7 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
         super().__init__(*args, **kwargs)
         self._current_indexes = []
 
-    def set_highlighted_indexes(self, indexes):
+    def set_highlighted_indexes(self, indexes: list[core.ModelIndex]):
         self._current_indexes = indexes
         self.update_all()
 
@@ -55,12 +55,9 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
                 return font
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        return [
-            treeitem.TreeItem(obj=i)
-            for i in item.obj.findChildren(
-                SectionWidget, None, QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-            )
-        ]
+        flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+        children = item.obj.findChildren(SectionWidget, None, flag)
+        return [treeitem.TreeItem(obj=i) for i in children]
 
     def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
         parent = core.ModelIndex() if parent is None else parent
@@ -69,11 +66,8 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
         item = self.data_by_index(parent)
         if item == self._root_item:
             return True
-        return bool(
-            item.obj.findChildren(
-                SectionWidget, None, QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-            )
-        )
+        flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+        return bool(item.obj.findChildren(SectionWidget, None, flag))
 
 
 class ScrollAreaTableOfContentsWidget(widgets.TreeView):
@@ -97,9 +91,9 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.setAlternatingRowColors(False)
         self.setRootIsDecorated(False)
         self.setStyleSheet(
-            "::item:hover {background: transparent; border-color:transparent}"
-            "::item:selected { border-color:transparent; "
-            "border-style:outset; border-width:2px; color:black; }"
+            """::item:hover {background: transparent; border-color:transparent}
+            ::item:selected { border-color:transparent;
+            border-style:outset; border-width:2px; color:black; }"""
         )
         # with self.edit_font() as font:
         #     font.setPointSize(font.pointSize() * 2)
@@ -108,7 +102,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         else:
             scrollarea.h_scrollbar.valueChanged.connect(self._on_scroll)
 
-    def set_widget(self, widget):
+    def set_widget(self, widget: widgets.QWidget):
         model = ScrollAreaTableOfContentsModel(
             widget, show_root=True, parent=self.scrollarea
         )
@@ -117,15 +111,10 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.selectionModel().selectionChanged.connect(self._on_selection_change)
         self.expandAll()
 
-    def get_sections(self):
-        return self.scrollarea.find_children(typ=SectionWidget)
-
     def _on_current_change(self, new, old):
-        scrollbar = (
-            self.scrollarea.v_scrollbar
-            if self._orientation == constants.VERTICAL
-            else self.scrollarea.h_scrollbar
-        )
+        is_vertical = self._orientation == constants.VERTICAL
+        area = self.scrollarea
+        scrollbar = area.v_scrollbar if is_vertical else area.h_scrollbar
         scrollbar.valueChanged.disconnect(self._on_scroll)
         widget = self.model().data(new, role=constants.USER_ROLE)
         self.scrollarea.scroll_to_bottom()
@@ -166,14 +155,12 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
                     self.scroll_to(indexes[0])
             case "single":
                 if indexes := model.search_tree(children, constants.USER_ROLE):
+                    viewport = self.scrollarea.viewport()
                     indexes = sorted(
                         indexes,
                         key=lambda x: abs(
                             x.data(constants.USER_ROLE)
-                            .map_to(
-                                self.scrollarea.viewport(),
-                                x.data(constants.USER_ROLE).rect(),
-                            )
+                            .map_to(viewport, x.data(constants.USER_ROLE).rect())
                             .top()
                         ),
                     )
@@ -187,10 +174,6 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
     def wheelEvent(self, e):
         self.scrollarea.wheelEvent(e)
 
-    def get_orientation(self) -> QtCore.Qt.Orientation:
-        """Get the orientation."""
-        return self._orientation
-
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
         # print(event)
         if source in {self.scrollarea, self.scrollarea.viewport()}:
@@ -198,9 +181,6 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
                 case core.Event.Type.ChildAdded | core.Event.Type.ChildRemoved:
                     self._on_scroll()
         return False
-
-    def update_tree(self):
-        pass
 
     def get_scroll_mode(self) -> str:
         return self._scroll_mode
