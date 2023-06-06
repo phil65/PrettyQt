@@ -226,6 +226,13 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         QtGui.QColor, get_current_line_color, set_current_line_color
     )
 
+    def get_visible_line_span(self) -> tuple[int, int]:
+        block = self.firstVisibleBlock()
+        start = block.blockNumber()
+        page_step = self.v_scrollbar.pageStep()
+        end = min(start + page_step, self.blockCount())
+        return (start, end)
+
     def get_pixel_height(self) -> int:
         """Returns the pixel height of the text area.
 
@@ -256,11 +263,13 @@ if __name__ == "__main__":
 
     val = custom_validators.RegexPatternValidator()
     app = widgets.app()
-    widget = PlainTextEdit()
+    widget = widgets.PlainTextEdit("\n".join(f"abc{i}" for i in range(1000)))
     widget.show_whitespace_and_tabs(True)
     # widget.set_validator(val)
     # with widget.current_cursor() as c:
     #     c.select_text(2, 4)
     widget.set_current_line_color(gui.Color(128, 128, 128, 30))
     widget.show()
+    app.sleep(2)
+    print(widget.get_visible_line_span())
     app.main_loop()
