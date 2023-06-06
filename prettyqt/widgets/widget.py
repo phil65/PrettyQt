@@ -35,9 +35,66 @@ PositionPossibilityType = (
 )
 
 
+class Animator:
+    def __init__(self, widget):
+        self._widget = widget
+
+    def set_graphics_effect(
+        self,
+        effect: QtWidgets.QGraphicsEffect
+        | Literal["drop_shadow", "blur", "opacity", "colorize"],
+        radius: int = 10,
+        opacity: float = 0.7,
+        strength: float = 0.5,
+        color: datatypes.ColorType = "blue",
+    ) -> QtWidgets.QGraphicsEffect:
+        match effect:
+            case "drop_shadow":
+                effect = widgets.GraphicsDropShadowEffect(self._widget)
+                effect.setBlurRadius(radius)
+                effect.setColor(colors.get_color(color))
+            case "blur":
+                effect = widgets.GraphicsBlurEffect(self._widget)
+                effect.setBlurRadius(radius)
+            case "opacity":
+                effect = widgets.GraphicsOpacityEffect(self._widget)
+                effect.setOpacity(opacity)
+            case "colorize":
+                effect = widgets.GraphicsColorizeEffect(self._widget)
+                effect.setColor(colors.get_color(color))
+                effect.setStrength(strength)
+        self._widget.setGraphicsEffect(effect)
+        return effect
+
+    def play_animation(self, animation_type: str, **kwargs) -> QtCore.QPropertyAnimation:
+        from prettyqt import custom_animations
+
+        match animation_type:
+            case "fade_in":
+                anim = custom_animations.FadeInAnimation(**kwargs, parent=self._widget)
+                anim.apply_to(self._widget)
+            case "bounce":
+                anim = custom_animations.BounceAnimation(**kwargs, parent=self._widget)
+                anim.apply_to(self._widget)
+            case "slide":
+                anim = custom_animations.SlideAnimation(**kwargs, parent=self._widget)
+                anim.apply_to(self._widget)
+            case "property":
+                anim = core.PropertyAnimation(parent=self._widget)
+                anim.setTargetObject(self._widget)
+                anim.set_property_name(kwargs.pop("name"))
+                anim.setStartValue(kwargs.pop("start_value"))
+                anim.setEndValue(kwargs.pop("end_value"))
+                anim.setDuration(kwargs.pop("duration", 1000))
+                anim.set_easing(kwargs.pop("easing", "linear"))
+        anim.start()
+        return anim
+
+
 class WidgetMixin(core.ObjectMixin):
     def __init__(self, *args, margin: int | None = None, **kwargs):
         super().__init__(*args, **kwargs)
+        self.fx = Animator(self)
         if margin is not None:
             self.set_margin(margin)
 
@@ -77,7 +134,7 @@ class WidgetMixin(core.ObjectMixin):
     def get_win_id(self) -> int:
         return int(self.winId())
 
-    def resize(self, *size) -> None:
+    def resize(self, *size):
         if isinstance(size[0], tuple):
             super().resize(*size[0])
         else:
@@ -138,92 +195,71 @@ class WidgetMixin(core.ObjectMixin):
             self.showMaximized()
             return True
 
-    def set_graphics_effect(
-        self,
-        effect: QtWidgets.QGraphicsEffect
-        | Literal["drop_shadow", "blur", "opacity", "colorize"],
-        radius: int = 10,
-        opacity: float = 0.7,
-        strength: float = 0.5,
-        color: datatypes.ColorType = "blue",
-    ) -> QtWidgets.QGraphicsEffect:
-        match effect:
-            case "drop_shadow":
-                effect = widgets.GraphicsDropShadowEffect(self)
-                effect.setBlurRadius(radius)
-                effect.setColor(colors.get_color(color))
-            case "blur":
-                effect = widgets.GraphicsBlurEffect(self)
-                effect.setBlurRadius(radius)
-            case "opacity":
-                effect = widgets.GraphicsOpacityEffect(self)
-                effect.setOpacity(opacity)
-            case "colorize":
-                effect = widgets.GraphicsColorizeEffect(self)
-                effect.setColor(colors.get_color(color))
-                effect.setStrength(strength)
-        self.setGraphicsEffect(effect)
-        return effect
-
-    def play_animation(self, animation_type: str, **kwargs) -> QtCore.QPropertyAnimation:
-        from prettyqt import custom_animations
-
-        match animation_type:
-            case "fade_in":
-                anim = custom_animations.FadeInAnimation(**kwargs, parent=self)
-                anim.apply_to(self)
-            case "bounce":
-                anim = custom_animations.BounceAnimation(**kwargs, parent=self)
-                anim.apply_to(self)
-            case "slide":
-                anim = custom_animations.SlideAnimation(**kwargs, parent=self)
-                anim.apply_to(self)
-            case "property":
-                anim = core.PropertyAnimation(parent=self)
-                anim.setTargetObject(self)
-                anim.set_property_name(kwargs.pop("name"))
-                anim.setStartValue(kwargs.pop("start_value"))
-                anim.setEndValue(kwargs.pop("end_value"))
-                anim.setDuration(kwargs.pop("duration", 1000))
-                anim.set_easing(kwargs.pop("easing", "linear"))
-        anim.start()
-        return anim
-
-    def map_to_global(self, pos_or_rect):
+    def map_to(
+        self, widget: QtWidgets.QWidget | Literal["global", "parent"], pos_or_rect
+    ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
         match pos_or_rect:
-            case QtCore.QRect() | QtCore.QRectF():
-                top_left = self.mapToGlobal(pos_or_rect.topLeft())
-                bottom_right = self.mapToGlobal(pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF():
-                return super().mapToGlobal(pos_or_rect)
             case int(), int():
-                return self.mapToGlobal(QtCore.QPoint(*pos_or_rect))
+                pos_or_rect = QtCore.QPoint(*pos_or_rect)
             case float(), float():
-                return self.mapToGlobal(QtCore.QPointF(*pos_or_rect))
+                pos_or_rect = QtCore.QPointF(*pos_or_rect)
             case int(), int(), int(), int():
-                return self.map_to_global(QtCore.QRect(*pos_or_rect))
+                pos_or_rect = QtCore.QRect(*pos_or_rect)
             case float(), float(), float(), float():
-                return self.map_to_global(QtCore.QRectF(*pos_or_rect))
+                pos_or_rect = QtCore.QRectF(*pos_or_rect)
+        match pos_or_rect, widget:
+            case QtCore.QRect() | QtCore.QRectF(), QtWidgets.QWidget():
+                top_left = super().mapTo(widget, pos_or_rect.topLeft())
+                bottom_right = super().mapTo(widget, pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), QtWidgets.QWidget():
+                return super().mapTo(widget, pos_or_rect)
+            case QtCore.QRect() | QtCore.QRectF(), "parent":
+                top_left = super().mapToParent(pos_or_rect.topLeft())
+                bottom_right = super().mapToParent(pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), "parent":
+                return super().mapToParent(pos_or_rect)
+            case QtCore.QRect() | QtCore.QRectF(), "global":
+                top_left = super().mapToGlobal(pos_or_rect.topLeft())
+                bottom_right = super().mapToGlobal(pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), "global":
+                return super().mapToGlobal(pos_or_rect)
             case _:
                 raise ValueError(pos_or_rect)
 
-    def map_to(self, widget: QtWidgets.QWidget, pos_or_rect):
+    def map_from(
+        self, widget: QtWidgets.QWidget | Literal["global", "parent"], pos_or_rect
+    ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
         match pos_or_rect:
-            case QtCore.QRect() | QtCore.QRectF():
-                top_left = self.mapTo(widget, pos_or_rect.topLeft())
-                bottom_right = self.mapTo(widget, pos_or_rect.bottomRight())
-                return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF():
-                return super().mapTo(widget, pos_or_rect)
             case int(), int():
-                return self.mapTo(widget, QtCore.QPoint(*pos_or_rect))
+                pos_or_rect = QtCore.QPoint(*pos_or_rect)
             case float(), float():
-                return self.mapTo(widget, QtCore.QPointF(*pos_or_rect))
+                pos_or_rect = QtCore.QPointF(*pos_or_rect)
             case int(), int(), int(), int():
-                return self.map_to(widget, QtCore.QRect(*pos_or_rect))
+                pos_or_rect = QtCore.QRect(*pos_or_rect)
             case float(), float(), float(), float():
-                return self.map_to(widget, QtCore.QRectF(*pos_or_rect))
+                pos_or_rect = QtCore.QRectF(*pos_or_rect)
+        match pos_or_rect, widget:
+            case QtCore.QRect() | QtCore.QRectF(), QtWidgets.QWidget():
+                top_left = super().mapFrom(widget, pos_or_rect.topLeft())
+                bottom_right = super().mapFrom(widget, pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), QtWidgets.QWidget():
+                return super().mapFrom(widget, pos_or_rect)
+            case QtCore.QRect() | QtCore.QRectF(), "parent":
+                top_left = super().mapFromParent(pos_or_rect.topLeft())
+                bottom_right = super().mapFromParent(pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), "parent":
+                return super().mapFromParent(pos_or_rect)
+            case QtCore.QRect() | QtCore.QRectF(), "global":
+                top_left = super().mapFromGlobal(pos_or_rect.topLeft())
+                bottom_right = super().mapFromGlobal(pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), "global":
+                return super().mapFromGlobal(pos_or_rect)
             case _:
                 raise ValueError(pos_or_rect)
 
@@ -238,7 +274,7 @@ class WidgetMixin(core.ObjectMixin):
         self.show()
         self.activateWindow()
 
-    def set_icon(self, icon: datatypes.IconType) -> None:
+    def set_icon(self, icon: datatypes.IconType):
         """Set the window icon.
 
         Args:
@@ -256,15 +292,14 @@ class WidgetMixin(core.ObjectMixin):
     def show_tooltip(self, duration: int | None = None):
         if duration is None:
             duration = -1  # automatic
-        widgets.ToolTip.showText(
-            self.map_to_global((0, 0)), self.toolTip(), msecShowTime=duration
-        )
+        pos = self.map_to("global", (0, 0))
+        widgets.ToolTip.showText(pos, self.toolTip(), msecShowTime=duration)
 
     @functools.singledispatchmethod
-    def set_min_size(self, size: QtCore.QSize | tuple[int | None, int | None]) -> None:
+    def set_min_size(self, size: QtCore.QSize | tuple[int | None, int | None]):
         if isinstance(size, tuple):
-            x = 0 if size[0] is None else size[0]
-            y = 0 if size[1] is None else size[1]
+            x = size[0] or 0
+            y = size[1] or 0
             super().setMinimumSize(x, y)
         else:
             super().setMinimumSize(size)
@@ -280,7 +315,7 @@ class WidgetMixin(core.ObjectMixin):
         self.set_min_size((x, y))
 
     @functools.singledispatchmethod
-    def set_max_size(self, size: QtCore.QSize | tuple[int | None, int | None]) -> None:
+    def set_max_size(self, size: QtCore.QSize | tuple[int | None, int | None]):
         if isinstance(size, tuple):
             x = QWIDGETSIZE_MAX if size[0] is None else size[0]
             y = QWIDGETSIZE_MAX if size[1] is None else size[1]
@@ -298,46 +333,40 @@ class WidgetMixin(core.ObjectMixin):
     def _(self, x: None, y: int | None):
         self.set_max_size((x, y))
 
-    def set_min_width(self, width: int | None) -> None:
+    def set_min_width(self, width: int | None):
         if width is None:
             width = 0
         super().setMinimumWidth(width)
 
     setMinimumWidth = set_min_width
 
-    def set_max_width(self, width: int | None) -> None:
+    def set_max_width(self, width: int | None):
         if width is None:
             width = QWIDGETSIZE_MAX
         super().setMaximumWidth(width)
 
     setMaximumWidth = set_max_width
 
-    def set_min_height(self, height: int | None) -> None:
+    def set_min_height(self, height: int | None):
         if height is None:
             height = 0
         super().setMinimumHeight(height)
 
     setMinimumHeight = set_min_height
 
-    def set_max_height(self, height: int | None) -> None:
+    def set_max_height(self, height: int | None):
         if height is None:
             height = QWIDGETSIZE_MAX
         super().setMaximumHeight(height)
 
     setMaximumHeight = set_max_height
 
-    def set_enabled(self, enabled: bool = True) -> None:
-        self.setEnabled(enabled)
-
-    def set_disabled(self) -> None:
-        self.setEnabled(False)
-
     def setWindowTitle(self, title: str):
         if not self.objectName() and widgets.app().is_debug():
             self.setObjectName(title)
         super().setWindowTitle(title)
 
-    def set_title(self, title: str) -> None:
+    def set_title(self, title: str):
         self.setWindowTitle(title)
 
     def get_title(self) -> str:
@@ -420,7 +449,7 @@ class WidgetMixin(core.ObjectMixin):
         tool: bool | None = None,
         customize: bool | None = None,
         window_title: bool | None = None,
-    ) -> None:
+    ):
         flags = {
             minimize: QtCore.Qt.WindowType.WindowMinimizeButtonHint,
             maximize: QtCore.Qt.WindowType.WindowMaximizeButtonHint,
@@ -438,20 +467,18 @@ class WidgetMixin(core.ObjectMixin):
             if k is not None:
                 self.setWindowFlag(v, k)
 
-    def set_attribute(
-        self, attribute: constants.WidgetAttributeStr, state: bool = True
-    ) -> None:
+    def set_attribute(self, attribute: constants.WidgetAttributeStr, state: bool = True):
         if attribute not in constants.WIDGET_ATTRIBUTE:
             raise InvalidParamError(attribute, constants.WIDGET_ATTRIBUTE)
         self.setAttribute(constants.WIDGET_ATTRIBUTE[attribute], state)
 
-    def set_attributes(self, **kwargs: bool) -> None:
+    def set_attributes(self, **kwargs: bool):
         for attr, state in kwargs.items():
             if attr not in constants.WIDGET_ATTRIBUTE:
                 raise InvalidParamError(attr, constants.WIDGET_ATTRIBUTE)
             self.setAttribute(constants.WIDGET_ATTRIBUTE[attr], state)  # type: ignore
 
-    def set_modality(self, modality: constants.WindowModalityStr) -> None:
+    def set_modality(self, modality: constants.WindowModalityStr):
         """Set modality for the dialog.
 
         Args:
@@ -476,7 +503,7 @@ class WidgetMixin(core.ObjectMixin):
         self,
         horizontal: widgets.sizepolicy.SizePolicyStr | None = None,
         vertical: widgets.sizepolicy.SizePolicyStr | None = None,
-    ) -> None:
+    ):
         """Set the sizes policy.
 
         Args:
@@ -499,7 +526,7 @@ class WidgetMixin(core.ObjectMixin):
     def get_palette(self) -> gui.Palette:
         return gui.Palette(self.palette())
 
-    def set_background_color(self, color: datatypes.ColorType) -> None:
+    def set_background_color(self, color: datatypes.ColorType):
         col_str = "" if color is None else colors.get_color(color).name()
         with self.edit_stylesheet() as ss:
             ss.backgroundColor.setValue(col_str)
@@ -564,7 +591,7 @@ class WidgetMixin(core.ObjectMixin):
         yield font
         self.setFont(font)
 
-    def set_context_menu_policy(self, policy: constants.ContextPolicyStr) -> None:
+    def set_context_menu_policy(self, policy: constants.ContextPolicyStr):
         """Set contextmenu policy for given item view.
 
         Args:
@@ -585,7 +612,7 @@ class WidgetMixin(core.ObjectMixin):
         """
         return constants.CONTEXT_POLICY.inverse[self.contextMenuPolicy()]
 
-    def set_window_state(self, policy: constants.WindowStateStr) -> None:
+    def set_window_state(self, policy: constants.WindowStateStr):
         """Set window state for given item view.
 
         Args:
@@ -606,7 +633,7 @@ class WidgetMixin(core.ObjectMixin):
         """
         return constants.WINDOW_STATES.inverse[self.windowState()]
 
-    def set_custom_menu(self, method: Callable) -> None:
+    def set_custom_menu(self, method: Callable):
         self.set_context_menu_policy("custom")
         self.customContextMenuRequested.connect(method)
 
@@ -800,7 +827,7 @@ class WidgetMixin(core.ObjectMixin):
         own_geo.moveCenter(new)
         self.move(own_geo.topLeft())
 
-    def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor) -> None:
+    def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor):
         if isinstance(cursor, QtGui.QCursor):
             curs = cursor
         elif cursor in constants.CURSOR_SHAPE:
@@ -809,7 +836,7 @@ class WidgetMixin(core.ObjectMixin):
             raise InvalidParamError(cursor, constants.CURSOR_SHAPE)
         self.setCursor(curs)
 
-    def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
+    def set_focus_policy(self, policy: constants.FocusPolicyStr):
         """Set the way the widget accepts keyboard focus.
 
         Args:
@@ -836,7 +863,7 @@ class WidgetMixin(core.ObjectMixin):
         else:
             self.setFocus(constants.FOCUS_REASONS[reason])
 
-    def set_font_size(self, size: int) -> None:
+    def set_font_size(self, size: int):
         font = self.font()
         font.setPointSize(size)
         self.setFont(font)
@@ -847,7 +874,7 @@ class WidgetMixin(core.ObjectMixin):
     def get_font_info(self) -> gui.FontInfo:
         return gui.FontInfo(self.fontInfo())
 
-    def set_margin(self, margin: int) -> None:
+    def set_margin(self, margin: int):
         self.setContentsMargins(margin, margin, margin, margin)
 
     def raise_dock(self) -> bool:
@@ -948,7 +975,7 @@ if __name__ == "__main__":
     # val = custom_animations.FadeInAnimation()
     # val.apply_to(widget)
     # val.start()
-    widget.set_graphics_effect("colorize")
+    widget.fx.set_graphics_effect("colorize")
     widget.show()
     widget2.show()
     mainwindow = widgets.MainWindow()
