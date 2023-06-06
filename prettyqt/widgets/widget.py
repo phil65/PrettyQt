@@ -208,6 +208,25 @@ class WidgetMixin(core.ObjectMixin):
             case _:
                 raise ValueError(pos_or_rect)
 
+    def map_to(self, widget: QtWidgets.QWidget, pos_or_rect):
+        match pos_or_rect:
+            case QtCore.QRect() | QtCore.QRectF():
+                top_left = self.mapTo(widget, pos_or_rect.topLeft())
+                bottom_right = self.mapTo(widget, pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF():
+                return super().mapTo(widget, pos_or_rect)
+            case int(), int():
+                return self.mapTo(widget, QtCore.QPoint(*pos_or_rect))
+            case float(), float():
+                return self.mapTo(widget, QtCore.QPointF(*pos_or_rect))
+            case int(), int(), int(), int():
+                return self.map_to(widget, QtCore.QRect(*pos_or_rect))
+            case float(), float(), float(), float():
+                return self.map_to(widget, QtCore.QRectF(*pos_or_rect))
+            case _:
+                raise ValueError(pos_or_rect)
+
     def raise_to_top(self):
         if sys.platform.startswith("win"):
             from prettyqt.utils.platforms.windows import misc
@@ -899,6 +918,15 @@ class WidgetMixin(core.ObjectMixin):
 
         widget = FocusWidget(self, widget)
         widget.show()
+
+    def child_at(self, *args, typ: type[widgets.QWidget] | None = None):
+        """Get child widget at position. If type is given, search parents recursively."""
+        child = super().childAt(*args)
+        if typ is None or isinstance(child, typ):
+            return child
+        while child := child.parent():
+            if isinstance(child, typ):
+                return child
 
 
 class Widget(WidgetMixin, QtWidgets.QWidget):
