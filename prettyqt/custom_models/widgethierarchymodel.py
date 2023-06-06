@@ -128,6 +128,8 @@ class WidgetHierarchyModel(custom_models.TreeModel):
                 return prop.read(widget)
             case self.Roles.WidgetRole, _:
                 return widget
+            case constants.SIZE_HINT_ROLE, _:
+                return QtCore.QSize(250, 35)
 
     def setData(self, index: core.ModelIndex, value, role=constants.DISPLAY_ROLE):
         prop = self.props[index.column()]
