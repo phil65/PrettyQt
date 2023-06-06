@@ -53,16 +53,21 @@ class DebugMode(eventfilters.BaseEventFilter):
                 elif "alt" in mods:
                     from prettyqt import ipython
 
+                    self.frame.hide()
                     console = ipython.InProcessIPythonWidget(self)
                     console.show()
                     pos = source.mapToGlobal(event.pos())
                     widgets.Application.sleep(1)
-                    console.push_vars(
-                        dict(
-                            widgets=widgets.Application.widgets_at(pos), app=widgets.app()
-                        )
-                    )
-                    console.execute("print(widgets)")
+                    variables = {}
+                    i = 0
+                    for w in widgets.Application.widgets_at(pos):
+                        if (name := w.objectName()) and name not in variables:
+                            variables[name] = w
+                        else:
+                            name = f"{type(w).__name__}_{i}".lower()
+                            variables[name] = w
+                            i += 1
+                    console.push_vars(dict(app=widgets.app(), **variables))
             # case QtCore.QEvent.Type.ToolTip if source.isWidgetType():
             #     metaobj = core.MetaObject(source.metaObject())
             #     lines = [
@@ -75,12 +80,13 @@ class DebugMode(eventfilters.BaseEventFilter):
         return False
 
     def _on_clicked(self, item):
-        from prettyqt.custom_widgets import widgeteditor
+        from prettyqt import debugging
 
         logger.debug(f"clicked on {item}")
         widget = item.get_data("user")
-        self.editor = widgeteditor.WidgetEditor(widget)
+        self.editor = debugging.QObjectDetailsDialog(widget)
         self.list.hide()
+        self.frame.hide()
         self.editor.show()
 
     def _on_entered(self, index):
