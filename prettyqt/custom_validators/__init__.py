@@ -20,6 +20,7 @@ from .jsonvalidator import JsonValidator
 from .colorvalidator import ColorValidator
 from .alphanumericvalidator import AlphaNumericValidator
 from .notstrictvalidator import NotStrictValidator
+from .monotoniclistvalidator import MonotonicListValidator
 
 __all__ = [
     "PathValidator",
@@ -40,4 +41,5 @@ __all__ = [
     "ColorValidator",
     "AlphaNumericValidator",
     "NotStrictValidator",
+    "MonotonicListValidator",
 ]
