@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import eventfilters
+from prettyqt import eventfilters, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 CC = QtWidgets.QStyle.ComplexControl
@@ -61,8 +61,6 @@ class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-
     app = widgets.app()
     widget = widgets.PlainTextEdit("gfdgdf\n" * 1000)
     eventfilter = SliderMoveToMouseClickEventFilter(widget.v_scrollbar)

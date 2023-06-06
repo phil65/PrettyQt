@@ -36,7 +36,7 @@ class TextEditSelecter:
         start = doc.findBlockByNumber(index.start)
         end = doc.findBlockByNumber(index.stop)
         blocks = [start]
-        while start != end:
+        while start != end and start.isValid():
             start = start.next()
             blocks.append(start)
         return blocks

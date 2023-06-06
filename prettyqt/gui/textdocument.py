@@ -130,9 +130,9 @@ class TextDocumentMixin(core.ObjectMixin):
         current = self.flags()
         for k, v in flags.items():
             if v:
-                current = current | gui.textoption.FLAG[k]
+                current |= gui.textoption.FLAG[k]
             else:
-                current = current & ~gui.textoption.FLAG[k]
+                current &= ~gui.textoption.FLAG[k]
         self.setFlags(current)
         # if show:
         #     self.setFlags(self.flags() | QtGui.QTextOption.ShowTabsAndSpaces)
