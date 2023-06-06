@@ -29,6 +29,18 @@ class TextEditSelecter:
         self.search_buffer: str | None = None
         self.search_flags = None
 
+    def __getitem__(self, index: int | slice):
+        doc = self._widget.document()
+        if isinstance(index, int):
+            return doc.findBlockByNumber(index)
+        start = doc.findBlockByNumber(index.start)
+        end = doc.findBlockByNumber(index.stop)
+        blocks = [start]
+        while start != end:
+            start = start.next()
+            blocks.append(start)
+        return blocks
+
     def goto_line(self, line_no: int, end_pos: Literal["top", "bottom"] | None = None):
         doc = self._widget.document()
         match end_pos:
@@ -251,5 +263,5 @@ if __name__ == "__main__":
     test.show()
     with app.debug_mode():
         app.sleep(2)
-        test.selecter.goto_line(50, end_pos="top")
+        print(test.selecter[20:50])
         app.main_loop()
