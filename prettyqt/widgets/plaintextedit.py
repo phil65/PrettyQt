@@ -226,6 +226,25 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         QtGui.QColor, get_current_line_color, set_current_line_color
     )
 
+    def get_pixel_height(self) -> int:
+        """Returns the pixel height of the text area.
+
+        ASSUMPTION: The document uses only the default font.
+        """
+        line_count = self.document().blockCount()
+        widget_margins = self.contentsMargins()
+        document_margin = self.document().documentMargin()
+        font_metrics = gui.FontMetrics(self.document().defaultFont())
+        # font_metrics.lineSpacing() is ignored because it seems
+        # to be already included in font_metrics.height()
+        return (
+            widget_margins.top()
+            + document_margin
+            + max(line_count, 1) * font_metrics.height()
+            + self.document().documentMargin()
+            + widget_margins.bottom()
+        )
+
 
 class PlainTextEdit(PlainTextEditMixin, QtWidgets.QPlainTextEdit):
     pass
