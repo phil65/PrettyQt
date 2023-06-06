@@ -4,6 +4,7 @@ from .stalker import Stalker
 from .tracebackdialog import TracebackDialog
 from .errormessagebox import ErrorMessageBox
 from .messagehandler import MessageHandler
+from .qobjectdetailsdialog import QObjectDetailsDialog
 
 from collections.abc import Callable
 import time
@@ -163,4 +164,10 @@ def example_widget():
     return widget
 
 
-__all__ = ["Stalker", "TracebackDialog", "ErrorMessageBox", "MessageHandler"]
+__all__ = [
+    "Stalker",
+    "TracebackDialog",
+    "ErrorMessageBox",
+    "MessageHandler",
+    "QObjectDetailsDialog",
+]
