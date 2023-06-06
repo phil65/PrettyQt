@@ -237,6 +237,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         font_metrics = gui.FontMetrics(self.document().defaultFont())
         # font_metrics.lineSpacing() is ignored because it seems
         # to be already included in font_metrics.height()
+        # need to compare with TextDocument.get_pixel_height, which is more exact.
         return (
             widget_margins.top()
             + document_margin

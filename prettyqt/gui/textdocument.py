@@ -257,7 +257,7 @@ class TextDocumentMixin(core.ObjectMixin):
             options.setFlags(options.flags() & ~flag)  # type: ignore
         self.setDefaultTextOption(options)
 
-    def get_pixel_height(self):
+    def get_pixel_height(self) -> int:
         layout = self.documentLayout()
         h = 0
         b = self.begin()

@@ -140,6 +140,12 @@ class WidgetMixin(core.ObjectMixin):
         else:
             super().resize(*size)
 
+    def set_enabled(self, enabled: bool = True) -> None:
+        self.setEnabled(enabled)
+
+    def set_disabled(self) -> None:
+        self.setEnabled(False)
+
     def insertAction(
         self, position_or_action: int | QtGui.QAction, action: QtGui.QAction
     ):
