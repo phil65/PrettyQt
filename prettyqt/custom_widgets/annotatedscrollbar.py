@@ -36,14 +36,13 @@ class AnnotatedScrollBar(widgets.ScrollBar):
             c.setAlphaF(0.3)
             p.setPen(gui.QPen(c, 2.0))
             yscale = 1.0 / self._document_height
-            p.drawRects(
-                [
-                    core.QRect(
-                        x, y + h * start * yscale - 0.5, w, h * (end - start) * yscale + 1
-                    )
-                    for start, end in self._annotations
-                ]
-            )
+            rects = [
+                core.QRect(
+                    x, y + h * start * yscale - 0.5, w, h * (end - start) * yscale + 1
+                )
+                for start, end in self._annotations
+            ]
+            p.drawRects(rects)
 
 
 if __name__ == "__main__":

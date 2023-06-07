@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -301,7 +301,7 @@ ControlElementStr = Literal[
     "shaped_frame",
 ]
 
-SIMPLE_CONTROLS = dict(
+SUB_CONTROL = dict(
     none=mod.SubControl.SC_None,
     scrollbar_add_line=mod.SubControl.SC_ScrollBarAddLine,
     scrollbar_sub_line=mod.SubControl.SC_ScrollBarSubLine,
@@ -641,7 +641,7 @@ class StyleMixin(core.ObjectMixin):
         control_1: widgets.sizepolicy.ControlTypeStr,
         control_2: widgets.sizepolicy.ControlTypeStr,
         orientation: constants.OrientationStr,
-        option_or_widget: QtCore.QWidgets.QStyleOption | QtWidgets.QWidget | None = None,
+        option_or_widget: QtWidgets.QStyleOption | QtWidgets.QWidget | None = None,
     ):
         c1 = widgets.sizepolicy.CONTROL_TYPE[control_1]
         c2 = widgets.sizepolicy.CONTROL_TYPE[control_2]
