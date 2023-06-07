@@ -33,7 +33,7 @@ def Slot(*args, auto: bool = False, **kwargs):
     return outer_decorator
 
 
-def is_optional(self, typ) -> bool:
+def is_optional(typ) -> bool:
     return typ in (Optional, type(Optional))
 
 

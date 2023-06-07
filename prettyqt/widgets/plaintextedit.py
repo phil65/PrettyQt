@@ -180,7 +180,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         if self.validator is not None:
             self._set_validation_color()
 
-    def _set_validation_color(self, state: bool = True):
+    def _set_validation_color(self):
         color = None if self.is_valid() else "orange"
         self.set_background_color(color)
 

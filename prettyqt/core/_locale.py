@@ -625,7 +625,7 @@ MEASUREMENT_SYSTEM = bidict(
     imperial_uk=QtCore.QLocale.MeasurementSystem.ImperialUKSystem,
 )
 
-DataSizeFormatStr = Literal["metric", "imperial_us", "imperial_uk"]
+DataSizeFormatStr = Literal["iec", "traditional", "si"]
 
 DATA_SIZE_FORMAT = bidict(
     iec=QtCore.QLocale.DataSizeFormat.DataSizeIecFormat,
@@ -685,7 +685,7 @@ class Locale(QtCore.QLocale):
         return constants.LAYOUT_DIRECTION.inverse[self.textDirection()]
 
     def get_weekdays(self) -> list[constants.DayOfWeekStr]:
-        return constants.DAY_OF_WEEK.get_list(self.weekdays())
+        return [constants.DAY_OF_WEEK.inverse[i] for i in self.weekdays()]
 
     def get_day_name(self, day: int, format_type: FormatTypeStr = "long") -> str:
         return self.dayName(day, FORMAT_TYPE[format_type])
@@ -707,17 +707,23 @@ class Locale(QtCore.QLocale):
     def get_datetime_format(self, format_type: FormatTypeStr = "long") -> str:
         return self.dateTimeFormat(FORMAT_TYPE[format_type])
 
-    def to_datetime(self, text: str, format_type: FormatTypeStr | str = "long") -> str:
+    def to_datetime(
+        self, text: str, format_type: FormatTypeStr | str = "long"
+    ) -> QtCore.QDateTime:
         if format_type in {"long", "short", "narrow"}:
             format_type = FORMAT_TYPE[format_type]
         return self.toDateTime(text, format_type)
 
-    def to_date(self, text: str, format_type: FormatTypeStr | str = "long") -> str:
+    def to_date(
+        self, text: str, format_type: FormatTypeStr | str = "long"
+    ) -> QtCore.QDate:
         if format_type in {"long", "short", "narrow"}:
             format_type = FORMAT_TYPE[format_type]
         return self.toDate(text, format_type)
 
-    def to_time(self, text: str, format_type: FormatTypeStr | str = "long") -> str:
+    def to_time(
+        self, text: str, format_type: FormatTypeStr | str = "long"
+    ) -> QtCore.QTime:
         if format_type in {"long", "short", "narrow"}:
             format_type = FORMAT_TYPE[format_type]
         return self.to_time(text, format_type)

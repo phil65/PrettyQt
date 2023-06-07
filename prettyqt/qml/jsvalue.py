@@ -69,12 +69,12 @@ class JSValue(QtQml.QJSValue):
                 return cls()
             case list() | tuple():
                 length = len(obj)
-                array = JSValue(jsengine.newArray(length))
+                array = cls(jsengine.newArray(length))
                 for i, v in enumerate(obj):
                     array.setProperty(i, cls.from_object(v, jsengine))
                 return array
             case dict():
-                array = JSValue(jsengine.newArray())
+                array = cls(jsengine.newArray())
                 for k, v in obj.items():
                     array.setProperty(k, cls.from_object(v, jsengine))
                 return array

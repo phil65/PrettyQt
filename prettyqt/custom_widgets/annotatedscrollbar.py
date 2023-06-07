@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 from prettyqt import constants, core, gui, widgets
 
 CC_ScrollBar = widgets.QStyle.ComplexControl.CC_ScrollBar
@@ -13,7 +15,7 @@ class AnnotatedScrollBar(widgets.ScrollBar):
         self._annotations = []
         self._document_height = 100
 
-    def set_annotations(self, annotations: list[tuple[int, int]]):
+    def set_annotations(self, annotations: Sequence[tuple[int, int]]):
         self._annotations = annotations
 
     def paintEvent(self, event):

@@ -6,7 +6,7 @@ from prettyqt.utils import datatypes
 
 
 class HelpSearchResultWidget(widgets.WidgetMixin):  # , QtHelp.QHelpSearchResultWidget):
-    def __init__(self, item: QtHelp.QHelpFilterData):
+    def __init__(self, item: QtHelp.QHelpSearchResultWidget):
         self.item = item
 
     def __getattr__(self, val):

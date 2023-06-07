@@ -185,7 +185,7 @@ def ansi2html(ansi_string: str, styles: dict[int, dict[str, str]] = ANSI_STYLES)
     """
     previous_end = 0
     in_span = False
-    ansi_codes = []
+    ansi_codes: list[int] = []
     ansi_finder = re.compile("\033\\[([\\d;]*)([a-zA-z])")
     parts = []
     for match in ansi_finder.finditer(ansi_string):

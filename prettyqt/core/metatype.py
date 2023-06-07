@@ -135,7 +135,7 @@ class MetaType(QtCore.QMetaType):
         return TYPE.inverse[QtCore.QMetaType.Type(self.id())]
 
     def is_enumeration(self) -> bool:
-        return self.flags() & QtCore.QMetaType.TypeFlag.IsEnumeration
+        return bool(self.flags() & QtCore.QMetaType.TypeFlag.IsEnumeration)
 
     # def get_meta_object(self) -> core.MetaObject:  # apparently doesnt exist in bindings
     #     return core.MetaObject(self.metaObject())

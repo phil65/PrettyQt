@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator, Sequence
+from collections.abc import Iterator, Sequence
 
 from typing_extensions import Self
 
@@ -13,20 +13,20 @@ class NestedItem:
         parent: Self | None = None,
         dynamic_name: str | None = None,
         count: int | None = None,
-        children: Iterable[Self] | None = None,
+        children: Sequence[Self] | None = None,
     ):
         self.parent = parent
         self.dynamic_name = dynamic_name or self.item_name
         self.count = count
         # self.timestamp = kwargs.pop("timestamp", time.time())
-        self.children: Iterable[Self] = []
+        self.children: Sequence[Self] = []
         if children:
             self.add_children(children)
 
     def __iter__(self) -> Iterator[Self]:
         return iter(self.children)
 
-    def add_children(self, children: Iterable[Self]):
+    def add_children(self, children: Sequence[Self]):
         for child in children:
             child.parent = self
         self.children.extend(children)

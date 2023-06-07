@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable, Iterator
+from collections.abc import MutableSequence, Iterator
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
@@ -12,7 +12,7 @@ class CompositeValidator(gui.Validator):
 
     def __init__(
         self,
-        validators: Iterable[gui.Validator] | None = None,
+        validators: MutableSequence[gui.Validator] | None = None,
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)

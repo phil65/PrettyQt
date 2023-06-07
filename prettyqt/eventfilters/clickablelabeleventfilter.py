@@ -27,7 +27,7 @@ class ClickableLabelEventFilter(eventfilters.BaseEventFilter):
 
     def setText(self, text: str):
         fm = gui.FontMetrics(self.parent().font())
-        width = fm.width(text)
+        width = fm.horizontalAdvance(text)
         self.parent().setFixedWidth(width + 18)
         super().setText(text)
 

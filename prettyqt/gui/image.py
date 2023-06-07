@@ -176,15 +176,15 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
             else QtGui.QImage.InvertMode.InvertRgb
         )
 
-    def convert_to_format(self, fmt: FormatStr):
+    def convert_to_format(self, fmt: FormatStr) -> Self:
         if fmt not in FORMAT:
             raise InvalidParamError(fmt, FORMAT)
-        self.convertToFormat(FORMAT[fmt])
+        return type(self)(self.convertToFormat(FORMAT[fmt]))
 
-    def as_bytes(self) -> bytes | None:
+    def as_bytes(self) -> bytes:
         bits = self.bits()
         if bits is None:
-            return None
+            return b""
         match API:
             case "pyqt6":
                 return bits.asstring(self.sizeInBytes())

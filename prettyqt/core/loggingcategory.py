@@ -13,7 +13,7 @@ MSG_TYPE = bidict(
     warning=QtCore.QtMsgType.QtWarningMsg,
 )
 
-MsgTypeStr = Literal["critical", "debug", "info", "warning"]
+MsgTypeStr = Literal["critical", "debug", "info", "warning", "fatal"]
 
 
 class LoggingCategory(QtCore.QLoggingCategory):
@@ -27,7 +27,7 @@ class LoggingCategory(QtCore.QLoggingCategory):
         elif self.isCriticalEnabled():
             return "critical"
         else:
-            return None
+            return "fatal"
 
     def set_enabled(
         self,

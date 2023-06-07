@@ -46,29 +46,43 @@ class LineF(QtCore.QLineF):
         yield self.get_p2()
 
     def __getitem__(self, index: Literal[0, 1]) -> core.PointF:
-        if index == 0:
-            return self.get_p1()
-        elif index == 1:
-            return self.get_p2()
-        else:
-            raise KeyError(index)
+        match index:
+            case 0:
+                return self.get_p1()
+            case 1:
+                return self.get_p2()
+            case _:
+                raise KeyError(index)
 
     def __setitem__(self, index: Literal[0, 1], value: datatypes.PointFType):
-        if index == 0:
-            self.set_p1(value)
-        elif index == 1:
-            self.set_p2(value)
-        else:
-            raise KeyError(index)
+        match index:
+            case 0:
+                self.set_p1(value)
+            case 1:
+                self.set_p2(value)
+            case _:
+                raise KeyError(index)
 
     def set_p1(self, point: datatypes.PointFType):
-        self.setP1(core.PointF(*point) if isinstance(point, tuple) else point)
+        match point:
+            case tuple():
+                self.setP1(core.Point(*point))
+            case QtCore.QPointF():
+                self.setP1(point)
+            case _:
+                raise ValueError(point)
 
     def get_p1(self) -> core.PointF:
         return core.PointF(self.p1())
 
     def set_p2(self, point: datatypes.PointFType):
-        self.setP2(core.PointF(*point) if isinstance(point, tuple) else point)
+        match point:
+            case tuple():
+                self.setP2(core.Point(*point))
+            case QtCore.QPointF():
+                self.setP2(point)
+            case _:
+                raise ValueError(point)
 
     def get_p2(self) -> core.PointF:
         return core.PointF(self.p2())

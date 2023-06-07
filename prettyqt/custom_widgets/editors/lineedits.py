@@ -13,7 +13,7 @@ class IntLineEdit(widgets.LineEdit):
 
     def _on_value_change(self):
         value = self.get_value()
-        self._set_validation_color(None)
+        self._set_validation_color()
         self.value_changed.emit(value)
 
     def get_value(self) -> int:
@@ -33,7 +33,7 @@ class FloatLineEdit(widgets.LineEdit):
 
     def _on_value_change(self):
         value = self.get_value()
-        self._set_validation_color(None)
+        self._set_validation_color()
         self.value_changed.emit(value)
 
     def get_value(self) -> float:
@@ -56,7 +56,7 @@ class UrlLineEdit(widgets.LineEdit):
 
     def _on_value_change(self):
         value = self.get_value()
-        self._set_validation_color(None)
+        self._set_validation_color()
         self.value_changed.emit(value)
 
     def get_value(self) -> QtCore.QUrl:

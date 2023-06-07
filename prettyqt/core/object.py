@@ -215,7 +215,7 @@ class ObjectMixin:
         typ: type[T] = QtCore.QObject,
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
-        property_selector: dict | None = None,
+        property_selector: dict[str, Any] | None = None,
     ) -> list[T]:
         """Find children with given type and name."""
         if recursive:

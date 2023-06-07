@@ -107,9 +107,9 @@ class Proxyfier:
         if parent is None:
             raise ValueError("needs parent!")
         Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
-        proxy = Klass(parent=parent, **kwargs)
-        proxy.setSourceModel(self._model)
-        return proxy
+        proxy_instance = Klass(parent=parent, **kwargs)
+        proxy_instance.setSourceModel(self._model)
+        return proxy_instance
 
 
 class AbstractItemModelMixin(core.ObjectMixin):

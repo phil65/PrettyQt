@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import enum
 from typing import Literal
 
@@ -56,7 +57,7 @@ class RoundProgressBar(widgets.Widget):
         self.number_format = "%p%"
         self.decimals = 1
         self._update_flags: ValueTypeStr = "percent"
-        self.gradient_data: list[QtGui.QColor] = []
+        self.gradient_data: Sequence[QtGui.QColor] = []
 
     def minimum(self):
         return self._min_value

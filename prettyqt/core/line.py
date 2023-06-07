@@ -48,36 +48,46 @@ class Line(QtCore.QLine):
         yield self.get_p2()
 
     def __getitem__(self, index: Literal[0, 1]) -> core.Point:
-        if index == 0:
-            return self.get_p1()
-        elif index == 1:
-            return self.get_p2()
-        else:
-            raise KeyError(index)
+        match index:
+            case 0:
+                return self.get_p1()
+            case 1:
+                return self.get_p2()
+            case _:
+                raise KeyError(index)
 
     def __setitem__(self, index: Literal[0, 1], value: datatypes.PointType):
-        if index == 0:
-            self.set_p1(value)
-        elif index == 1:
-            self.set_p2(value)
-        else:
-            raise KeyError(index)
+        match index:
+            case 0:
+                self.set_p1(value)
+            case 1:
+                self.set_p2(value)
+            case _:
+                raise KeyError(index)
 
     def get_p1(self) -> core.Point:
         return core.Point(self.p1())
 
     def set_p1(self, point: datatypes.PointType):
-        if isinstance(point, tuple):
-            point = core.Point(*point)
-        self.setP1(point)
+        match point:
+            case tuple():
+                self.setP1(core.Point(*point))
+            case QtCore.QPoint():
+                self.setP1(point)
+            case _:
+                raise ValueError(point)
 
     def get_p2(self) -> core.Point:
         return core.Point(self.p2())
 
     def set_p2(self, point: datatypes.PointType):
-        if isinstance(point, tuple):
-            point = core.Point(*point)
-        self.setP2(point)
+        match point:
+            case tuple():
+                self.setP2(core.Point(*point))
+            case QtCore.QPoint():
+                self.setP2(point)
+            case _:
+                raise ValueError(point)
 
     def get_center(self) -> core.Point:
         return core.Point(self.center())

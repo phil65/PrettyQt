@@ -24,13 +24,13 @@ class PageRanges(QtGui.QPageRanges):
         if isinstance(other, int):
             self.addPage(other)
         else:
-            self.addRange(other)
+            self.addRange(*other)
         return self
 
     def __len__(self):
         return self.lastPage() - self.firstPage()
 
-    def get_range_list(self):
+    def get_range_list(self) -> list[tuple[int, int]]:
         return [(i.from_, i.to) for i in self.toRangeList()]
 
 

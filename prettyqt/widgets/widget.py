@@ -8,6 +8,8 @@ import pathlib
 import sys
 from typing import TYPE_CHECKING, Literal, overload
 
+from collections.abc import Sequence
+
 import qstylizer.parser
 import qstylizer.style
 
@@ -178,7 +180,7 @@ class WidgetMixin(core.ObjectMixin):
         self.addAction(action)
         return action
 
-    def add_actions(self, actions: list[QtGui.QAction]):
+    def add_actions(self, actions: Sequence[QtGui.QAction]):
         for i in actions:
             i.setParent(self)
         self.addActions(actions)

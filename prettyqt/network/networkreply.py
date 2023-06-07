@@ -107,7 +107,3 @@ class NetworkReply:
             h.data().decode(): self.rawHeader(h).data().decode()
             for h in self.rawHeaderList()
         }
-
-
-if __name__ == "__main__":
-    reply = NetworkReply()

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtGui
 
 
 class PaletteEdit(widgets.Widget):
@@ -26,7 +25,7 @@ class PaletteEdit(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.app()
     widget = PaletteEdit(window_title="Test")
-    widget.set_value(QtGui.QRegion())
+    widget.set_value(gui.Palette())
     widget.value_changed.connect(print)
     widget.show()
     app.main_loop()

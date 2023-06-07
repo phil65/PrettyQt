@@ -33,7 +33,7 @@ class TaskBarItem:
     def __init__(self, hwnd: SupportsInt | None = None):
         self.state = "normal"
         self.progress = 0
-        self.tabs = []
+        self.tabs: list[int] = []
         if hwnd is None:
             hwnd = ctypes.windll.kernel32.GetConsoleWindow()
             taskbar.ActivateTab(hwnd)

@@ -124,8 +124,8 @@ class TextStream(QtCore.QTextStream):
         for item in flags:
             if item not in NUMBER_FLAGS:
                 raise InvalidParamError(item, NUMBER_FLAGS)
-        flags = NUMBER_FLAGS.merge_flags(flags)
-        self.setNumberFlags(flags)
+        flag = NUMBER_FLAGS.merge_flags(flags)
+        self.setNumberFlags(flag)
 
 
 if __name__ == "__main__":
