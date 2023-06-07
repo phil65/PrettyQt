@@ -60,7 +60,7 @@ jobs:
     - name: Create documentation
       # if: matrix.python-version == '3.10' && runner.os == 'Linux'
       run: |
-        poetry install -E pyside6
+        poetry install -E pyside6 -E addons
         poetry run mkdocs build
     # - name: Build and publish
     #   if: startsWith(github.ref, 'refs/tags/v') && matrix.python-version == '3.10' && runner.os == 'Linux'
