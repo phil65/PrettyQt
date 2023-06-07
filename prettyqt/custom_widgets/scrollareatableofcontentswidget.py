@@ -97,6 +97,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
     ) -> None:
         self._scroll_mode = "single"
         self._expand_mode = "always"
+        self._last_visible = None
         super().__init__(scrollarea, **kwargs)
         self._orientation = orientation
         self.scrollarea = scrollarea
@@ -147,8 +148,9 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         if model is None:
             return
         children = self.scrollarea.get_visible_widgets(typ=SectionWidget)
-        if not children:
+        if not children or children == self._last_visible:
             return
+        self._last_visible = children
         self.selectionModel().currentChanged.disconnect(self._on_current_change)
         self.select_index(None)
         if self._expand_mode != "always":
