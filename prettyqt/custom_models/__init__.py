@@ -14,7 +14,7 @@ from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
 from .jsonmodel import JsonModel
 from .mappingmodel import MappingModel
-from .subsequencesortfilterproxymodel import SubsequenceSortFilterProxyModel
+from .widgettableofcontentsmodel import WidgetTableOfContentsModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuetransformationproxymodel import ValueTransformationProxyModel
@@ -42,7 +42,7 @@ __all__ = [
     "NestedItem",
     "JsonModel",
     "MappingModel",
-    "SubsequenceSortFilterProxyModel",
+    "WidgetTableOfContentsModel",
     "FuzzyFilterProxyModel",
     "SubsetFilterProxyModel",
     "ValueTransformationProxyModel",
