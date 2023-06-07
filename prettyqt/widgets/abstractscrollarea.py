@@ -185,6 +185,12 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
     def set_viewport_margins(self, margins: int):
         self.setViewportMargins(margins, margins, margins, margins)
 
+    def add_scrollbar_widget(
+        self, widget: QtWidgets.QWidget, alignment: constants.AlignmentStr
+    ):
+        alignment = constants.ALIGNMENTS[alignment]
+        self.addScrollBarWidget(widget, alignment)
+
 
 class AbstractScrollArea(AbstractScrollAreaMixin, QtWidgets.QAbstractScrollArea):
     pass
