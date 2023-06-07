@@ -4,6 +4,7 @@ from collections.abc import Iterator, MutableMapping
 import contextlib
 import logging
 import os
+import sys
 from typing import Any, Literal
 
 from typing_extensions import Self
@@ -202,7 +203,11 @@ class Settings_(
         for ext in exts:
             s.setValue(f"{ext}/DefaultIcon/.", app_path)  # perhaps ,0 after app_path
             s.setValue(f"{ext}/.", app_name)
-        s.setValue(f"{app_name}/shell/open/command/.", f"{app_path} %1")
+        if getattr(sys, "frozen", False):
+            s.setValue(f"{app_name}/shell/open/command/.", f"{app_path} %1")
+        else:
+            command_value = rf'{sys.executable} -m {app_path} "%V"'
+            s.setValue(f"{app_name}/shell/open/command/.", f"{command_value} %1")
 
 
 class Settings(Settings_):
