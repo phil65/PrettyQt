@@ -235,7 +235,6 @@ class HierarchicalHeaderView(widgets.HeaderView):
         style_options: QtWidgets.QStyleOptionHeader,
         leaf_index: core.ModelIndex,
     ):
-        #            print(logical_leaf_index)
         old_bo = painter.brushOrigin()
         top = section_rect.y()
         indexes = get_parent_indexes(leaf_index)

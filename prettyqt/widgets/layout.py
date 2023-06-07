@@ -93,7 +93,6 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             case QtCore.QPoint():
                 for i in range(self.count()):
                     item = self.itemAt(i)
-                    print(item.geometry())
                     if item.geometry().contains(pos_or_index):
                         return item
             case _:

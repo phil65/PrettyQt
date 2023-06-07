@@ -11,10 +11,6 @@ class TreeModel(core.AbstractItemModel):
         self._show_root = show_root
         self.set_root_item(obj)
 
-    def root_index(self) -> core.ModelIndex:  # TODO: needed?
-        """Return the index that returns the root element (same as an invalid index)."""
-        return core.ModelIndex()
-
     @property
     def show_root(self) -> bool:
         """Return True if the inspected node is visible.
@@ -35,8 +31,6 @@ class TreeModel(core.AbstractItemModel):
             # The root itself will be invisible
             self._root_item = treeitem.TreeItem(obj=obj)
             self.inspected_item = self._root_item
-
-            # Fetch all items of the root so we can select the first row in the ctor.
             root_index = self.index(0, 0)
             self.fetchMore(root_index)
 

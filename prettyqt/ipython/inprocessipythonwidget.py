@@ -24,11 +24,6 @@ class InProcessIPythonWidget(ipython.BaseIPythonWidget):
         self.kernel_manager = QtInProcessKernelManager()
         self.kernel_manager.start_kernel(show_banner=False)
 
-        # def _abort_queues(kernel):
-        #     """override to prevent breaking when exception occurs"""
-        #     pass
-
-        # self.kernel_manager.kernel._abort_queues = _abort_queues
         self.kernel_manager.kernel.log.setLevel(logging.CRITICAL)
         self.kernel_manager.kernel.gui = "qt"
         if importlib.util.find_spec("matplotlib"):

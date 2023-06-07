@@ -42,11 +42,10 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         key = str((index.row(), index.column()))
         while (index := index.parent()).isValid():
             key += str((index.row(), index.column()))
-        if key not in self._editors:
-            self._editors[key] = editor
-            return editor
-        else:
+        if key in self._editors:
             return self._editors[key]
+        self._editors[key] = editor
+        return editor
 
     def createEditor(self, parent, option, index):
         editor = self._editor_for_index(index)

@@ -38,11 +38,6 @@ class ObjectBrowserTreeItem(treeitem.TreeItem):
         parent: ObjectBrowserTreeItem | None = None,
     ):
         super().__init__(obj, parent=parent)
-        # self.parent_item = parent
-        # self.obj = obj
-        # self.child_items: List[ObjectBrowserTreeItem] = []
-        # self.has_children = True
-        # self.children_fetched = False
         self.obj_name = name
         self.obj_path = str(obj_path)
         self.is_attribute = is_attribute
