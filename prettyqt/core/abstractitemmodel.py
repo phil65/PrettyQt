@@ -300,6 +300,11 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_role_names(self) -> dict[int, str]:
         return {i: v.data().decode() for i, v in self.roleNames().items()}
 
+    def prefetch_tree(self, root_index: core.ModelIndex | None):
+        for idx in self.iter_tree(root_index):
+            if self.canFetchMore(idx):
+                self.fetchMore(idx)
+
     def iter_tree(
         self, root_index: core.ModelIndex | None = None
     ) -> Iterator[core.ModelIndex]:
