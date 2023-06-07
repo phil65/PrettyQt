@@ -7,8 +7,7 @@ from prettyqt.qt import QtWidgets
 class PlainTextDocumentLayout(
     gui.AbstractTextDocumentLayoutMixin, QtWidgets.QPlainTextDocumentLayout
 ):
-    def serialize_fields(self):
-        return dict(cursor_width=self.cursorWidth())
+    pass
 
 
 if __name__ == "__main__":

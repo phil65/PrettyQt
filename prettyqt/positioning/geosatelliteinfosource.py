@@ -18,12 +18,6 @@ ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
 
 class GeoSatelliteInfoSource(core.ObjectMixin, QtPositioning.QGeoSatelliteInfoSource):
-    def serialize_fields(self):
-        return dict(
-            minimum_update_interval=self.minimumUpdateInterval(),
-            update_interval=self.updateInterval(),
-        )
-
     def __str__(self):
         return self.sourceName()
 

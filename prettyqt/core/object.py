@@ -157,9 +157,6 @@ class ObjectMixin:
         self.installEventFilter(eventfilter)
         return eventfilter
 
-    def serialize_fields(self):
-        return dict(object_name=self.objectName())
-
     def serialize(self) -> dict[str, Any]:
         return self.get_properties()
         # dct = {}

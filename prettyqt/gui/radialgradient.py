@@ -15,15 +15,6 @@ class RadialGradient(gui.GradientMixin, QtGui.QRadialGradient):
             self.focalRadius(),
         )
 
-    def serialize_fields(self):
-        return dict(
-            center_radius=self.centerRadius(),
-            radius=self.radius(),
-            focal_radius=self.focalRadius(),
-            center=self.center(),
-            focal_point=self.focalPoint(),
-        )
-
     def get_center(self) -> core.PointF:
         return core.PointF(self.center())
 

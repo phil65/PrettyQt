@@ -79,11 +79,3 @@ class Screen:
 
     def get_virtual_siblings(self) -> list[Screen]:
         return [Screen(i) for i in self.virtualSiblings()]
-
-    # def serialize_fields(self):
-    #     return dict(
-    #         speed=self.speed(),
-    #         cache_mode=self.get_cache_mode(),
-    #         scaled_size=self.scaledSize(),
-    #         background_color=self.backgroundColor(),
-    #     )

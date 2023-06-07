@@ -26,14 +26,6 @@ class Movie(core.ObjectMixin, QtGui.QMovie):
     def __repr__(self):
         return get_repr(self, self.fileName(), self.get_format())
 
-    def serialize_fields(self):
-        return dict(
-            speed=self.speed(),
-            cache_mode=self.get_cache_mode(),
-            scaled_size=self.scaledSize(),
-            background_color=self.backgroundColor(),
-        )
-
     def set_cache_mode(self, mode: CacheModeStr):
         """Set cache mode.
 

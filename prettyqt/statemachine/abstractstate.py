@@ -5,8 +5,7 @@ from prettyqt.qt import QtStateMachine
 
 
 class AbstractStateMixin(core.ObjectMixin):
-    def serialize_fields(self):
-        return dict(active=self.active())
+    pass
 
 
 class AbstractState(AbstractStateMixin, QtStateMachine.QAbstractState):

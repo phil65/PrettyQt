@@ -200,19 +200,6 @@ WEB_WINDOW_TYPES = bidict(
 class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
     """A web engine page holds the HTML document contents, link history + actions."""
 
-    def serialize_fields(self):
-        return dict(
-            audio_muted=self.isAudioMuted(),
-            background_color=self.backgroundColor(),
-            # has_selection=self.hasSelection(),
-            lifecycle_state=self.get_lifecycle_state(),
-            # scroll_position=self.scrollPosition(),
-            url=core.Url(self.url()),
-            visible=self.isVisible(),
-            history=core.DataStream.create_bytearray(self.history()),
-            zoom_factor=self.zoomFactor(),
-        )
-
     def get_icon(self) -> gui.Icon | None:
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)

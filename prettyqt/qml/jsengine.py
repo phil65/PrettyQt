@@ -14,9 +14,6 @@ EXTENSIONS = bidict(
 
 
 class JSEngineMixin(core.ObjectMixin):
-    def serialize_fields(self):
-        return dict(ui_language=self.uiLanguage())
-
     def install_extensions(self, extension: str, obj: QtQml.QJSValue | None = None):
         if obj is None:
             obj = QtQml.QJSValue()

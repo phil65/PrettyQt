@@ -33,14 +33,6 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
     def __repr__(self):
         return get_repr(self)
 
-    # def serialize_fields(self):
-    #     return dict(
-    #         speed=self.speed(),
-    #         visibility=self.get_visibility(),
-    #         scaled_size=self.scaledSize(),
-    #         background_color=self.backgroundColor(),
-    #     )
-
     def add_shortcut(
         self,
         keysequence: datatypes.KeyCombinationType,

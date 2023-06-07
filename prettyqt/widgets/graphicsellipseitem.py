@@ -11,13 +11,6 @@ class GraphicsEllipseItem(
     def __repr__(self):
         return get_repr(self, self.get_rect())
 
-    def serialize_fields(self):
-        return dict(
-            rect=self.get_rect(),
-            span_angle=self.spanAngle(),
-            start_angle=self.startAngle(),
-        )
-
     def get_rect(self) -> core.RectF:
         return core.RectF(self.rect())
 

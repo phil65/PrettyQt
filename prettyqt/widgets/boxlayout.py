@@ -28,9 +28,6 @@ class BoxLayoutMixin(widgets.LayoutMixin):
     #     if margin is not None:
     #         self.set_margin(margin)
 
-    # def serialize_fields(self):
-    #     return dict(items=self.get_children(), direction=self.get_direction())
-
     # def __setstate__(self, state):
     #     super().__setstate__(state)
     #     self.set_direction(state["direction"])

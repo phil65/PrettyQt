@@ -13,9 +13,6 @@ from prettyqt.utils import InvalidParamError, colors, datatypes
 class GuiApplicationMixin(core.CoreApplicationMixin):
     palette_changed = core.Signal(gui.Palette)
 
-    def serialize_fields(self):
-        return dict(icon=self.get_icon())
-
     def event(self, e):
         match e.type():
             case QtCore.QEvent.Type.ApplicationPaletteChange:

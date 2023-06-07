@@ -22,9 +22,6 @@ ElementTypeStr = Literal[
 
 
 class PainterPath(QtGui.QPainterPath):
-    def serialize_fields(self):
-        return dict(fill_rule=self.get_fill_rule(), elements=list(self))
-
     def __len__(self):
         return self.elementCount()
 

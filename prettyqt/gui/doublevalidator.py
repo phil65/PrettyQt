@@ -25,9 +25,6 @@ class DoubleValidator(gui.ValidatorMixin, QtGui.QDoubleValidator):
             else False
         )
 
-    def serialize_fields(self):
-        return dict(bottom=self.bottom(), top=self.top(), decimals=self.decimals())
-
     def set_range(self, start: float | None, end: float | None, decimals: int = 0):
         if start is None:
             start = -float("inf")

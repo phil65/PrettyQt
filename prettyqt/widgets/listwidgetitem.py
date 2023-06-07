@@ -17,16 +17,6 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
     def __getitem__(self, index: int | constants.ItemDataRoleStr):
         return self.get_data(index)
 
-    def serialize_fields(self):
-        return dict(
-            text=self.text(),
-            tool_tip=self.toolTip(),
-            status_tip=self.statusTip(),
-            checkstate=self.get_checkstate(),
-            icon=self.get_icon(),
-            data=self.data(constants.USER_ROLE),  # type: ignore
-        )
-
     def set_icon(self, icon: datatypes.IconType):
         """Set the icon for the action.
 

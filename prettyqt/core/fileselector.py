@@ -12,9 +12,6 @@ if TYPE_CHECKING:
 
 
 class FileSelector(core.ObjectMixin, QtCore.QFileSelector):
-    def serialize_fields(self):
-        return dict(extra_selectors=self.extraSelectors())
-
     def select_path(self, path: datatypes.PathType) -> str:
         return self.select(os.fspath(path))
 

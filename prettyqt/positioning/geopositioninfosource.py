@@ -29,13 +29,6 @@ ErrorStr = Literal["access_error", "closed_error", "none", "unknown_source"]
 
 
 class GeoPositionInfoSourceMixin(core.ObjectMixin):
-    def serialize_fields(self):
-        return dict(
-            minimum_update_interval=self.minimumUpdateInterval(),
-            source_name=self.sourceName(),
-            update_interval=self.updateInterval(),
-        )
-
     def __str__(self):
         return self.sourceName()
 

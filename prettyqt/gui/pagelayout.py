@@ -37,16 +37,6 @@ class PageLayout(QtGui.QPageLayout):
     def __repr__(self):
         return get_repr(self)
 
-    def serialize_fields(self):
-        return dict(
-            margins=self.margins(),
-            minimum_margins=self.minimumMargins(),
-            mode=self.get_mode(),
-            orientation=self.get_orientation(),
-            page_size=self.get_page_size(),
-            units=self.get_units(),
-        )
-
     def set_units(self, unit: UnitStr):
         """Set unit.
 

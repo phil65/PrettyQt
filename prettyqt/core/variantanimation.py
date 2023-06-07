@@ -17,13 +17,6 @@ class VariantAnimationMixin(core.AbstractAnimationMixin):
     def __iter__(self) -> Iterator[tuple[float, datatypes.Variant]]:
         return iter(self.keyValues())
 
-    def serialize_fields(self):
-        return dict(
-            duration=self.duration(),
-            easing_curve=self.get_easing(),
-            key_values=self.keyValues(),
-        )
-
     def set_easing(
         self, easing_type: core.easingcurve.TypeStr | Callable[[float], float]
     ):

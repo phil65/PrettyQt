@@ -19,19 +19,6 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
     def __delitem__(self, index: int):
         self.removeItem(index)
 
-    # def serialize_fields(self):
-    #     children = []
-    #     for i, widget in enumerate(self.get_children()):
-    #         dct = dict(
-    #             widget=widget,
-    #             icon=self.get_item_icon(i),
-    #             text=self.itemText(i),
-    #             enabled=self.isItemEnabled(i),
-    #             tool_tip=self.itemToolTip(i),
-    #         )
-    #         children.append(dct)
-    #     return dict(items=children, current_index=self.currentIndex())
-
     # def __setstate__(self, state):
     #     for i, item in enumerate(state["items"]):
     #         self.addItem(item["widget"], item["icon"], item["text"])

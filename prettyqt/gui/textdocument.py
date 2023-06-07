@@ -98,22 +98,6 @@ class TextDocumentMixin(core.ObjectMixin):
     def set_text(self, text: str):
         self.setPlainText(text)
 
-    def serialize_fields(self):
-        return dict(
-            base_url=self.get_base_url(),
-            default_font=self.get_default_font(),
-            default_stylesheet=self.defaultStyleSheet(),
-            default_text_option=self.get_default_text_option(),
-            document_margin=self.documentMargin(),
-            maximum_block_count=self.maximumBlockCount(),
-            is_modified=self.isModified(),
-            page_size=self.pageSize(),
-            text_width=self.textWidth(),
-            indent_width=self.indentWidth(),
-            undo_redo_enabled=self.isUndoRedoEnabled(),
-            use_design_metrics=self.useDesignMetrics(),
-        )
-
     def get_base_url(self) -> core.Url:
         return core.Url(self.baseUrl())
 

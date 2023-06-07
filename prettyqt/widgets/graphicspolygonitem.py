@@ -8,9 +8,6 @@ from prettyqt.utils import InvalidParamError
 class GraphicsPolygonItem(
     widgets.AbstractGraphicsShapeItemMixin, QtWidgets.QGraphicsPolygonItem
 ):
-    def serialize_fields(self):
-        return dict(polygon=self.get_polygon(), fill_rule=self.get_fill_rule())
-
     def get_polygon(self) -> gui.PolygonF:
         return gui.PolygonF(self.polygon())
 
