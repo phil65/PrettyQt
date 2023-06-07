@@ -1,3 +1,119 @@
+## v1.47.0 (2023-06-07)
+
+### Feat
+
+- **AbstractScrollArea**: add add_scrollbar_widget method
+- add AnnotatedScrollBar
+- **TextEditSelecter**: add __getitem__
+- **PlainTextEdit**: add get_visible_line_span
+- add MonotonicListValidator
+- add some pandas widgets
+- add PrintSupport classes
+- **PlainTextEdit**: add get_pixel_height method
+- quick shot for a PreviewScrollBar
+- Add ScrollAreaTableOfContentsWidget
+- **AbstractItemModel**: add max_results kwarg for search_tree
+- **Object**: property selector kwarg for find_children
+- **Widget**: add map_to and child_at methods
+- **ScrollArea**: always use Widget for viewport, add get_visible_widgets
+- return handles for AbstractItemView.sync_with
+- **AbstractItemView**: always use our subclassed ItemSelectionModel
+- make settings a proper MutableMapping
+- **Layout**: add item_at method
+- add SectionAutoSpanEventFilter
+- **AbstractItemView**: add sync_with method
+- add OrientedTableView
+- add AutoSizeColumnsEventFilter
+- allow setting eventfilters by name
+- **TextDocument**: add get_pixel_height method
+- **TableView**: add resize_visible_columns_to_contents method
+- getattr for core, gui, widgets modules
+- **AbstractProxyModel**: add get_source_model method
+- **TableView**: add get_visible_section_span
+- **Pixmap**: add save_to_file method
+- **VariantDelegate**: support numpy integers
+- add DataFrameEvalFilterProxyModel
+- **TableView**: add auto_span method
+- max colcount by default for resizeColumnsToContents
+- **DataFrameViewer**: use numpy for span detection
+- **MetaObject**: add forward_signals kwarg to copy
+- **MetaObject**: also allow copy for widgets which need orientation
+- bit NumPy support for VariantDelegate
+- add HighlightCurrentProxyModel
+- **GuiApplication**: add find_window method
+- add UrlLineEdit
+- allow str for RegularExpressionValidator ctor
+- **TreeView**: add show_root method
+- start with pandas stuff
+- **AbstractItemView**: add get_size_hint_for_column
+- **AbstractProxyModel**: add remove method
+- add ReadOnlyProxyModel
+- **MessageBox**: add get_button method
+- **LineEdit**: allow QRegularExpressions for set_validator
+- **Validator**: add strict mode
+- **AbstractItemModel**: add iter_tree / search_tree methods
+- **AbstractItemView**: add iter_tree method
+- **Stalker**: add some event signals
+- add TextLength/AlphaNumericValidator
+- add Hex/QssValidator
+- allow showing different content for show_tooltips
+- add Int/Float LineEdits
+- allow setting validator by str
+- **TextEditSelecter**: add highlight_matches method
+- MenuBar for QObjectDetailsDialog
+- **SidebarWidget**: allow Actions for add_action
+- prep some Actions for Mainwindow
+- **FilterContainer**: add set_filter_mode method
+- **Stalker**: make log_level a prop
+- add ColumnJoinerProxyModel
+- fuzzy filter support in "regular" SortFilterProxyModel
+- add AppearanceProxyModel class
+- add SpanTableView
+- add BackingStore
+- add RectFEdit
+- **AbstractItemView**: add get_proxies method
+- **TableView**: add is_cell_visible method
+- **HeaderView**: add is_in_visual_range method
+- show widget borders in debug mode
+- **KeyCombination**: add __add__ method
+- **AbstractItemModel**: add is_checkstate_column method
+- add some proxy models
+- ensure_visible kwarg for (Plain)TextEdit
+- **colors**: quick access to setting color roles
+- **TextEditSelecter**: end_pos kwarg for goto_line
+- add qobjectsdetailsdialog
+- **AbstractItemView**: extend set_model
+- **MetaObject**: add connect_signals method
+- **MetaObject**: add only_notifiers kwarg for get_signals
+- **TextBrowser**: add get_source_type method
+- **CommandPalette**: add for_path method
+- automatic registration for delegates
+- **Widget**: add "border" as set_layout option
+- move all proxy stuff to Proxifier delegate
+- **Widget**: allow setting margin in ctor
+- **AbstractItemView**: make role a kwarg for current_data/selected_data
+- add FlattenedTreeProxyModel
+- add StretchButtonToolBar
+- add CrossFadeWidget
+- add AdjustingBoxLayoutDockWidget
+
+### Fix
+
+- **Settings**: raise KeyError for non-existing keys
+- fix create_char
+- add missing import
+- typo
+- **DataFrameEvalFilterProxyModel**: always get the root sourcemodel
+- **ColorDialog**: fix replacing QColorShower stuff
+- **SidebarWidget**: correct signature for add_action
+- **WidgetHierarchyModel**: only return direct children
+- **HeaderView**: fix toggle-vis context menu
+- add workaround for missing parent() methods when using PyQt
+- QAbstractProxyModel is part of QtCore
+- dont mask QObject.parent()
+- **StackedWidget**: fix fade animation
+- **WidgetHierarchyModel**: missed to adjust columnCount for extra column
+
 ## v1.46.0 (2023-05-24)
 
 ### Feat
