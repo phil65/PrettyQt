@@ -487,7 +487,6 @@ def test_graphicsscene(qtbot):
     scene.add_text("test", font=gui.Font())
     scene.add_simple_text("test")
     widget = widgets.Widget()
-    qtbot.addWidget(widget)
     scene.add_widget(widget)
     item = widgets.GraphicsRectItem(0, 0, 10, 10)
     scene.add_item_group(item)
@@ -1532,7 +1531,6 @@ def test_treewidgetitemiterator(qtbot):
 
 def test_undoview(qtbot):
     view = widgets.UndoView()
-    qtbot.addWidget(view)
     stack = gui.UndoStack()
     cmd = stack.add_command("test", redo=lambda: print("a"), undo=lambda: print("b"))
     view.set_clean_icon("mdi.folder")
