@@ -52,6 +52,8 @@ class Settings_(
             self.endGroup()
 
     def __getitem__(self, index: str):
+        if index not in self.allKeys():
+            raise KeyError(index)
         return self.get_value(index)
 
     def __setitem__(self, name: str, value):
