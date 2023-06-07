@@ -106,8 +106,14 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         return constants.PEN_STYLE.inverse[self.gridStyle()]
 
     def get_visible_section_span(
-        self, orientation: constants.OrientationStr
+        self,
+        orientation: constants.OrientationStr,
+        margin: int = 0,
     ) -> tuple[int, int]:
+        """Get a tuple containing the visible start/end indexes.
+
+        if there are no items visible, return -1, -1
+        """
         rect = self.viewport().rect()
         if orientation == "horizontal":
             start = self.columnAt(rect.left())
@@ -119,7 +125,8 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
             end = self.rowAt(rect.bottom())
         if count == 0:
             return (-1, -1)
-        end = count if end == -1 else end + 1
+        start = max(0, start - margin)
+        end = count if end == -1 else min(end + margin, count) + 1
         return (start, end)
 
     def resizeColumnsToContents(self, max_columns: int | None = 500):
@@ -131,18 +138,19 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         for i in range(to_check):
             self.resizeColumnToContents(i)
 
-    def resize_visible_columns_to_contents(self):
+    def resize_visible_columns_to_contents(self, margin: int = 0):
         if not self.isVisible():
             logger.warning("trying resize_visible_columns_to_contents while not visible.")
         colcount = self.model().columnCount()
         autosized_cols = set()
-        col, end = self.get_visible_section_span("horizontal")
+        col, end = self.get_visible_section_span("horizontal", margin=margin)
         width = self.viewport().width()
         while col <= end:
             if col not in autosized_cols:
                 autosized_cols.add(col)
                 self.resizeColumnToContents(col)
             col += 1
+            #  end may change during resize
             end = self.columnAt(width)
             end = colcount if end == -1 else end
 
@@ -153,6 +161,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         start: tuple[int, int] = (0, 0),
         end: tuple[int, int] | None = None,
     ) -> list[tuple[int, int, int, int]]:
+        """Set spans in given direction based on same content in given role."""
         is_horizontal = orientation == constants.HORIZONTAL
         model = self.model()
         spans = []
