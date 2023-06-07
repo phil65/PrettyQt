@@ -17,7 +17,7 @@
         <link rel="next" href="positioning.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.14">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.15">
     
     
       
@@ -25,10 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.a6bdf11c.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ecc896b0.min.css">
       
       
 
@@ -940,7 +940,7 @@
 
   <div class="doc doc-contents ">
       <p class="doc doc-class-bases">
-        Bases: <code><a class="autorefs autorefs-internal" title="prettyqt.widgets" href="widgets.html#prettyqt.widgets">widgets</a>.<a class="autorefs autorefs-internal" title="prettyqt.widgets.AbstractScrollAreaMixin" href="widgets.html#prettyqt.widgets.AbstractScrollAreaMixin">AbstractScrollAreaMixin</a></code>, <code><span title="prettyqt.qt.QtPdfWidgets">QtPdfWidgets</span>.<a class="autorefs autorefs-external" title="prettyqt.qt.QtPdfWidgets.QPdfView" href="https://raw.githubusercontent.com/phil65/PrettyQt/master/docs/https://doc.qt.io/qtforpython/PySide6/QtPdfWidgets/QPdfView.html#PySide6.QtPdfWidgets.PySide6.QtPdfWidgets.QPdfView">QPdfView</a></code></p>
+        Bases: <code><a class="autorefs autorefs-internal" title="prettyqt.widgets" href="widgets.html#prettyqt.widgets">widgets</a>.<a class="autorefs autorefs-internal" title="prettyqt.widgets.AbstractScrollAreaMixin" href="widgets.html#prettyqt.widgets.AbstractScrollAreaMixin">AbstractScrollAreaMixin</a></code>, <code><span title="prettyqt.qt.QtPdfWidgets">QtPdfWidgets</span>.<a class="autorefs autorefs-external" title="prettyqt.qt.QtPdfWidgets.QPdfView" href="https://doc.qt.io/qtforpython/PySide6/QtPdfWidgets/QPdfView.html#PySide6.QtPdfWidgets.PySide6.QtPdfWidgets.QPdfView">QPdfView</a></code></p>
 
 
 
@@ -1000,8 +1000,8 @@
 <span class="normal"><a href="#__codelineno-0-85">85</a></span>
 <span class="normal"><a href="#__codelineno-0-86">86</a></span>
 <span class="normal"><a href="#__codelineno-0-87">87</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-34"><a id="__codelineno-0-34" name="__codelineno-0-34"></a><span class="k">class</span> <span class="nc">PdfView</span><span class="p">(</span><span class="n">widgets</span><span class="o">.</span><span class="n">AbstractScrollAreaMixin</span><span class="p">,</span> <span class="n">QtPdfWidgets</span><span class="o">.</span><span class="n">QPdfView</span><span class="p">):</span>
-</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+</span><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">setDocument</span><span class="p">(</span><span class="n">pdf</span><span class="o">.</span><span class="n">PdfDocument</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 </span><span id="__span-0-38"><a id="__codelineno-0-38" name="__codelineno-0-38"></a>
 </span><span id="__span-0-39"><a id="__codelineno-0-39" name="__codelineno-0-39"></a>    <span class="k">def</span> <span class="nf">get_document_margins</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">core</span><span class="o">.</span><span class="n">Margins</span><span class="p">:</span>
@@ -1073,7 +1073,7 @@
 
 
 <h3 id="prettyqt.pdfwidgets.pdfview.PdfView.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span></code>
 
 </h3>
 
@@ -1084,8 +1084,8 @@
         <summary>Source code in <code>prettyqt\pdfwidgets\pdfview.py</code></summary>
         <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-35">35</a></span>
 <span class="normal"><a href="#__codelineno-0-36">36</a></span>
-<span class="normal"><a href="#__codelineno-0-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-0-37">37</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-35"><a id="__codelineno-0-35" name="__codelineno-0-35"></a><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">:</span> <span class="n">QtWidgets</span><span class="o">.</span><span class="n">QWidget</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+</span><span id="__span-0-36"><a id="__codelineno-0-36" name="__codelineno-0-36"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 </span><span id="__span-0-37"><a id="__codelineno-0-37" name="__codelineno-0-37"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">setDocument</span><span class="p">(</span><span class="n">pdf</span><span class="o">.</span><span class="n">PdfDocument</span><span class="p">(</span><span class="bp">self</span><span class="p">))</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
@@ -1143,7 +1143,11 @@
           <td>
                 <code><span title="prettyqt.pdfwidgets.pdfview.PageModeStr">PageModeStr</span></code>
           </td>
-          <td><p>page mode</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>page mode</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1196,7 +1200,11 @@
           <td>
                 <code><span title="prettyqt.pdfwidgets.pdfview.ZoomModeStr">ZoomModeStr</span></code>
           </td>
-          <td><p>zoom mode</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>zoom mode</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1279,7 +1287,11 @@
           <td>
                 <code><span title="prettyqt.pdfwidgets.pdfview.PageModeStr">PageModeStr</span></code>
           </td>
-          <td><p>page mode</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>page mode</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1300,7 +1312,11 @@
           <td>
                 <code><span title="prettyqt.utils.InvalidParamError">InvalidParamError</span></code>
           </td>
-          <td><p>page mode does not exist</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>page mode does not exist</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1366,7 +1382,11 @@
           <td>
                 <code><span title="prettyqt.pdfwidgets.pdfview.ZoomModeStr">ZoomModeStr</span></code>
           </td>
-          <td><p>zoom mode</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>zoom mode</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1387,7 +1407,11 @@
           <td>
                 <code><span title="prettyqt.utils.InvalidParamError">InvalidParamError</span></code>
           </td>
-          <td><p>zoom mode does not exist</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>zoom mode does not exist</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
