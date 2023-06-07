@@ -203,6 +203,7 @@ from .itemeditorfactory import ItemEditorFactory
 
 
 # to register delegates
+from prettyqt import custom_validators
 from prettyqt import custom_delegates
 from prettyqt import custom_widgets
 from prettyqt import custom_models
@@ -219,6 +220,7 @@ __all__ = [
     "custom_delegates",
     "custom_widgets",
     "custom_models",
+    "custom_validators",
     "app",
     "Application",
     "AbstractSlider",
