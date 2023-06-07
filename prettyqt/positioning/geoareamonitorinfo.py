@@ -12,7 +12,7 @@ class GeoAreaMonitorInfo(QtPositioning.QGeoAreaMonitorInfo):
     def __repr__(self):
         return get_repr(self, self.name())
 
-    def get_area(self) -> positioning.GeoShape:
+    def get_area(self) -> QtPositioning.QGeoShape:
         area = self.area()
         match area:
             case QtPositioning.QGeoCircle():

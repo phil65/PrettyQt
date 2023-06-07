@@ -1,5 +1,6 @@
 """Provides Qt init stuff."""
 
+
 from typing import Literal
 
 import warnings
@@ -26,9 +27,7 @@ if API.lower() in {"pyqt5", "pyside2"}:
 
 initial_api = API
 if API not in API_NAMES:
-    raise ValueError(
-        f"Specified QT_API={repr(API)} is not in valid options: " f"{API_NAMES}"
-    )
+    raise ValueError(f"Specified QT_API={repr(API)} is not in valid options: {API_NAMES}")
 
 
 PYQT6 = False
@@ -62,8 +61,8 @@ if API == "pyside6":
 
         PYSIDE6 = True
 
-    except ImportError:
-        raise QtBindingsNotFoundError from None
+    except ImportError as e:
+        raise ImportError(API) from e
     # else:
     #     os.environ["QT_API"] = API
 
@@ -72,9 +71,8 @@ if API == "pyside6":
 # switches to another and informs through the warning
 if API != initial_api and binding_specified:
     warnings.warn(
-        f"Selected binding {initial_api!r} could not be found; "
-        f"falling back to {API!r}",
-        PythonQtWarning,
+        f"Selected binding {initial_api!r} not found. Falling back to {API!r}",
+        ImportWarning,
     )
 
 
