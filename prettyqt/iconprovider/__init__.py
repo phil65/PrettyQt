@@ -290,7 +290,7 @@ def get_icon(
 
 @overload
 def get_icon(
-    icon: datatypes.IconType, color: str | None = None, as_qicon: Literal[True] = False
+    icon: datatypes.IconType, color: str | None = None, as_qicon: Literal[True] = True
 ) -> QtGui.QIcon:
     ...
 
