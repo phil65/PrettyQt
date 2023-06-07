@@ -13,14 +13,77 @@
 ## Main Features
   - Large parts of the Qt API are available in a **PEP-8**-compliant way.
   - Pre-defined widgets for common use cases
-  - Large set of validators, syntax highlighters, models
+  - Large set of validators, syntax highlighters, models and much more.
+
+PrettyQt basically is a wrapper for the whole Qt API (either based on PySide6 or PyQt6).
+The library contains a tree of mixins, with one mixin for each Qt class.
+These mixins also inherit from each other and are applied to the Qt classes.
+That way each class gets all helper methods from all sub-mixins.
+Example: The class "TreeView" inherits from original Qt Class "QTreeView" and gets helper methods
+from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
+"FrameMixin", "WidgetMixin" and "ObjectMixin".
+
+Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
+and using it can be quite cumbersome for Python developers. (it´s statically typed,
+very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
+
+- adding more powerful methods to the classes, which accept more types and have more options (aka keyword arguments)
+- adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
+- adding replacements for all Qt Methods which work with enums. Strings are the preferred choice in PrettyQt.
 
 
-   [widgets]: https://phil65.github.io/PrettyQt/api/widgets.html
-   [validators]: https://phil65.github.io/PrettyQt/api/custom_validators.html
-   [syntaxhighlighters]: https://phil65.github.io/PrettyQt/api/syntaxhighlighters.html
-   [models]: https://phil65.github.io/PrettyQt/api/custom_models.html
+Apart from the 3D related modules (Qt3D, QtDataVizualization),
+almost every class from Qt is covered.
 
+### The covered modules are:
+
+QtBluetooth (-> prettyqt.bluetooth)
+QtCharts (-> prettyqt.charts)
+QtCore (-> prettyqt.core)
+QtDesigner (-> prettyqt.designer)
+QtGui (-> prettyqt.gui)
+QtLocation (-> prettyqt.location)
+QtMultimedia (-> prettyqt.multimedia)
+QtMultimediaWidgets (-> prettyqt.multimediawidgets)
+QtNetwork (-> prettyqt.network)
+QtOpenGLWidgets (-> prettyqt.openglwidgets)
+QtPdf (-> prettyqt.pdf)
+QtPdfWidgets (-> prettyqt.pdfwidgets)
+QtPositioning (-> prettyqt.positioning)
+QtPrintSupport (-> prettyqt.printsupport)
+QtQml (-> prettyqt.qml)
+QtHelp (-> prettyqt.qthelp) (prepended "qt" to avoid name clashing)
+QtQuick (-> prettyqt.quick)
+QtQuickWidgets (-> prettyqt.quickwidgets)
+QScintilla (-> prettyqt.scintilla)
+QtScXml (-> prettyqt.scxml)
+QtStateMachine (-> prettyqt.statemachine)
+QtSvg (-> prettyqt.svg)
+QtSvgWidgets (-> prettyqt.svgwidgets)
+QtTextToSpeech (-> prettyqt.texttospeech)
+QtWebChannel (-> prettyqt.webchannel)
+QtWebEngineCore (-> prettyqt.webenginecore)
+QtWebEngineWidgets (-> prettyqt.webenginewidgets)
+QtWidgets (-> prettyqt.widgets)
+
+
+All subclassed Qt classes in mentioned modules are called exactly like the
+Qt-Counterpart, except that the leading Q is missing.
+
+### Examples:
+
+QtWidgets.QWidget -> widgets.Widget
+QtCore.QObject -> core.Object
+
+Apart from the mentioned mixin tree and the corresponding classes, this library also
+contains a lot of custom widgets, delegates, eventfilters, validators,
+syntaxhighlighters, layouts, models, proxy models and much more.
+
+Converting to PrettyQt should be very straightforward since the original behaviour of the
+Qt classes didnt change for the largest parts and all methods from base Qt modules
+are still available. (There might be a few constructors with slightly different behaviour though.)
+
+Interested? Take a look at the documentation! (even though it totally sucks in its current state.)
 
 ## Where to get it
 The source code is currently hosted on GitHub at:
