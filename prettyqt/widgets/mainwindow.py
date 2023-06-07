@@ -223,7 +223,6 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         widget.set_id(f"{name}.widget")
         widget.set_layout(layout, margin=0)
         dock_widget.setWidget(widget)
-        dock_widget.box = widget.layout()  # should get rid of this shit
         self.add_dockwidget(dock_widget, position)
         return dock_widget
 
