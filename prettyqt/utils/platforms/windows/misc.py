@@ -2,8 +2,10 @@ from __future__ import annotations
 
 from ctypes import Structure, c_int, windll, byref, sizeof
 from ctypes.wintypes import DWORD, HWND, UINT, RECT, LPARAM
-import win32con
+import os
+import sys
 from typing import SupportsInt
+import win32con
 
 import win32api
 import win32gui
@@ -123,3 +125,35 @@ class Taskbar:
                 return position
 
         return cls.NO_POSITION
+
+
+def add_to_context_menu(
+    app_name: str, path: os.PathLike, icon_path: os.PathLike | None = None
+):
+    import winreg
+
+    key = winreg.HKEY_CURRENT_USER
+    handle = winreg.CreateKeyEx(
+        key,
+        f"Software\\Classes\\*\\shell\\Open with {app_name}\\command",
+        0,
+        winreg.KEY_SET_VALUE,
+    )
+    if getattr(sys, "frozen", False):
+        command_value = f"{path} %1"
+    else:
+        command_value = rf'{sys.executable} -m {path} "%V"'
+    winreg.SetValueEx(handle, "", 0, winreg.REG_SZ, command_value)
+    handle = winreg.CreateKeyEx(
+        key, f"Software\\Classes\\*\\shell\\Open with {app_name}", 0, winreg.KEY_SET_VALUE
+    )
+    if icon_path:
+        winreg.SetValueEx(handle, "icon", 0, winreg.REG_SZ, os.fspath(icon_path))
+
+
+def remove_from_context_menu(self, app_name: str):
+    import winreg
+
+    key = winreg.HKEY_CURRENT_USER
+    winreg.DeleteKey(key, f"Software\\Classes\\*\\shell\\Open with {app_name}\\command")
+    winreg.DeleteKey(key, f"Software\\Classes\\*\\shell\\Open with {app_name}")
