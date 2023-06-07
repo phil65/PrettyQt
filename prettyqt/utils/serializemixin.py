@@ -34,4 +34,5 @@ class SerializeMixin:
 
     def copy_data_to(self, dest: datatypes.QtSerializableType):
         ba = self.create_bytearray()
-        dest.write_bytearray(ba)
+        stream = QtCore.QDataStream(ba, QtCore.QIODeviceBase.OpenModeFlag.ReadOnly)
+        stream >> dest
