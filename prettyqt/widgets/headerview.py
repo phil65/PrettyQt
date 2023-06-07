@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterable
+from collections.abc import Iterable, Mapping, MutableMapping
 import hashlib
 import logging
 from typing import Literal
@@ -80,18 +80,15 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         columns_hash = hashlib.md5(column_names.encode()).hexdigest()
         return f"{type(self).__name__}_{columns_hash}.state"
 
-    def save_state(self, settings: core.Settings | None = None, key: str | None = None):
+    def save_state(self, settings: MutableMapping | None = None, key: str | None = None):
         settings = core.Settings() if settings is None else settings
         key = self.generate_header_id() if key is None else key
-        settings.set_value(key, self.saveState())
+        settings[key] = self.saveState()
 
-    def load_state(
-        self, settings: core.Settings | None = None, key: str | None = None
-    ) -> bool:
+    def load_state(self, settings: Mapping | None = None, key: str | None = None) -> bool:
         settings = core.Settings() if settings is None else settings
         key = self.generate_header_id() if key is None else key
-        state = settings.get(key, None)
-        if state is not None:
+        if (state := settings.get(key)) is not None:
             if isinstance(state, str):
                 state = state.encode()
             self.restoreState(state)
@@ -157,7 +154,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         end = self.visualIndexAt(length)
         if end == -1:
             end = count - 1
-        sections = [self.logicalIndex(i) for i in range(start, end)]
+        sections = (self.logicalIndex(i) for i in range(start, end))
         return section in sections
 
     def get_section_for_label(self, label) -> int:
