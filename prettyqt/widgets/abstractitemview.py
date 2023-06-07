@@ -693,6 +693,24 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             h4 = table_to_sync.h_header.sectionResized.connect(_table_1_resized)
         return [h1, h2, h3, h4]
 
+    def get_visible_section_span(
+        self, orientation: constants.OrientationStr
+    ) -> tuple[int, int]:
+        top_left = QtCore.QPoint(0, 0)
+        bottom_right = self.viewport().rect().bottomRight()
+        if orientation == "horizontal":
+            start = self.indexAt(top_left).column()
+            count = self.model().columnCount()
+            end = self.indexAt(bottom_right).column()
+        else:
+            start = self.indexAt(top_left).row()
+            count = self.model().rowCount()
+            end = self.indexAt(bottom_right).row()
+        if count == 0:
+            return (-1, -1)
+        end = count if end == -1 else end + 1
+        return (start, end)
+
 
 class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
     pass
