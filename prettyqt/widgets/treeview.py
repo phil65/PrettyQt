@@ -42,9 +42,8 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
         self.setHeader(header)
 
     def show_root(self, value: bool):
-        if value:
-            self.setRootIndex(QtCore.QModelIndex())
-        else:
+        self.setRootIndex(QtCore.QModelIndex())
+        if not value:
             self.setRootIndex(self.model().index(0, 0))
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
