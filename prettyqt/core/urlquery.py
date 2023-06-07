@@ -40,6 +40,8 @@ class UrlQuery(QtCore.QUrlQuery, MutableMapping, metaclass=datatypes.QABCMeta):
         return iter(i[0] for i in self.queryItems())
 
     def __getitem__(self, key: str):
+        if not self.hasQueryItem(key):
+            raise KeyError(key)
         return self.queryItemValue(key)
 
     def serialize(self) -> dict[str, Any]:

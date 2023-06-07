@@ -24,6 +24,8 @@ class QmlPropertyMap(
         self.insert(key, value)
 
     def __getitem__(self, key: str) -> datatypes.Variant:
+        if not self.contains(key):
+            raise KeyError(key)
         return self.value(key)
 
     def __delitem__(self, key: str):

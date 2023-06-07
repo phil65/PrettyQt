@@ -49,9 +49,13 @@ class BluetoothServiceInfo(
             case int():
                 flag = value
             case str():
+                if value not in ATTRIBUTE_IDS:
+                    raise KeyError(value)
                 flag = ATTRIBUTE_IDS[value].value
             case AttributeId():
                 flag = value.value
+            case _:
+                raise KeyError(value)
         return self.attribute(flag)
 
     def __delitem__(self, value: str | int | AttributeId):
