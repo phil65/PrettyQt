@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Sequence
+from collections.abc import Sequence
 import os
 import pathlib
 
@@ -43,15 +43,6 @@ class FileSystemModelMixin:
 
     def get_file_path(self, index: QtCore.QModelIndex) -> pathlib.Path:
         return pathlib.Path(self.filePath(index))
-
-    def yield_child_indexes(
-        self, index: QtCore.QModelIndex
-    ) -> Iterator[QtCore.QModelIndex]:
-        if not self.hasChildren(index):
-            return
-        path = self.get_file_path(index)
-        for it in path.iterdir():
-            yield self.index(str(path / it))
 
     def resolve_sym_links(self, resolve: bool):
         self.setResolveSymlinks(resolve)

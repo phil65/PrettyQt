@@ -41,9 +41,6 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
     def h_header(self, header):
         self.setHeader(header)
 
-    def expand_all(self):
-        self.expandAll()
-
     def show_root(self, value: bool):
         if value:
             self.setRootIndex(QtCore.QModelIndex())
@@ -51,6 +48,7 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
             self.setRootIndex(self.model().index(0, 0))
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
+        """Hack to avoid direct sort when setting sorting enabled."""
         model = self.model()
         if not do_sort and model is not None:
             backup = model.sort

@@ -21,7 +21,7 @@ class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
                 self._resize(source)
         return super().eventFilter(source, event)
 
-    def _resize(self, source):
+    def _resize(self, source: QtWidgets.QListView):
         width = source.width() - 30
         # The minus 30 above ensures we don't end up with an item width that
         # can't be drawn the expected number of times across the view without

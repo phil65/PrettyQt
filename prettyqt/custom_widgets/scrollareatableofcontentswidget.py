@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import enum
 import logging
 
 from prettyqt import constants, core, custom_models, gui, widgets
@@ -73,6 +74,21 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
 class ScrollAreaTableOfContentsWidget(widgets.TreeView):
     section_changed = core.Signal()
 
+    @core.Enum
+    class ScrollMode(enum.Enum):
+        """Scroll modes."""
+
+        Single = 1
+        Multi = 2
+        HeadersOnly = 4
+
+    @core.Enum
+    class ExpandMode(enum.Enum):
+        """Expand modes."""
+
+        Always = 1
+        OnFocus = 2
+
     def __init__(
         self,
         scrollarea: widgets.QScrollArea,
@@ -97,8 +113,6 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
             ::item:selected { border-color:transparent;
             border-style:outset; border-width:2px; color:black; }"""
         )
-        # with self.edit_font() as font:
-        #     font.setPointSize(font.pointSize() * 2)
         if orientation == constants.VERTICAL:
             scrollarea.v_scrollbar.valueChanged.connect(self._on_scroll)
         else:
@@ -148,6 +162,8 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
                         ]
                         # only select if all children selected.
                         # if all(c in indexes for c in children):
+
+                        # highlight when no children or when first child is visible.
                         if not children or children[0] in indexes:
                             self.select_index(index, clear=False)
                         self.scroll_to(indexes[0])
@@ -163,6 +179,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
             case "single":
                 if indexes := model.search_tree(children, constants.USER_ROLE):
                     viewport = self.scrollarea.viewport()
+                    # sort indexes by closest distance to top
                     indexes = sorted(
                         indexes,
                         key=lambda x: abs(

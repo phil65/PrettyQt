@@ -37,15 +37,14 @@ class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
             slider_length = sr.height()
             slider_min = gr.y()
             slider_max = gr.bottom() - slider_length + 1
-        scrollbar.setValue(
-            QtWidgets.QStyle.sliderValueFromPosition(
-                scrollbar.minimum(),
-                scrollbar.maximum(),
-                pos - slider_min - slider_length // 2,
-                slider_max - slider_min,
-                opt.upsideDown,
-            )
+        value = QtWidgets.QStyle.sliderValueFromPosition(
+            scrollbar.minimum(),
+            scrollbar.maximum(),
+            pos - slider_min - slider_length // 2,
+            slider_max - slider_min,
+            opt.upsideDown,
         )
+        scrollbar.setValue(value)
 
     def eventFilter(self, source, event):
         match event.type():

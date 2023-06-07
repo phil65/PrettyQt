@@ -38,7 +38,7 @@ class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
     def _on_location_change(self, area):
         self._area = constants.DOCK_WIDGET_AREAS.inverse[area]
 
-    def get_current_area(self):
+    def get_current_area(self) -> constants.DockWidgetAreasStr:
         return self._area
 
     def setup_title_bar(self):

@@ -44,7 +44,6 @@ def test_fsspecmodel(qtbot, qtmodeltester):
     idx = model.index(0, 0)
     model.get_paths([idx])
     model.data(idx, model.Roles.FilePathRole)
-    model.yield_child_indexes(idx)
     model.watch_for_changes(False)
     model.use_custom_icons(False)
     model.resolve_sym_links(False)

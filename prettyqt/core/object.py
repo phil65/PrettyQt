@@ -171,6 +171,7 @@ class ObjectMixin:
 
     @contextlib.contextmanager
     def block_signals(self):
+        """Context manager to temporarily block emitting signals."""
         blocked = self.blockSignals(True)
         yield None
         self.blockSignals(blocked)
@@ -183,6 +184,7 @@ class ObjectMixin:
         return dct
 
     def set_unique_id(self):
+        """Set unique objectName."""
         class_name = type(self).__name__
         count = next(counter_dict[class_name])
         self.set_id(f"{class_name}_{count}")
@@ -282,6 +284,7 @@ class ObjectMixin:
         single_shot: bool = False,
         timer_type: constants.TimerTypeStr = "coarse",
     ) -> core.Timer:
+        """Start timer and execute callback when timeout reached."""
         interval = helpers.parse_time(interval) if isinstance(interval, str) else interval
         timer = core.Timer(
             self,
@@ -296,6 +299,7 @@ class ObjectMixin:
     def get_properties(
         self, include_super: bool = True, cast: bool = True, only_writable: bool = False
     ) -> dict[str, Any]:
+        """Get a dictionary containing all properties and their values."""
         metaobj = self.get_metaobject()
         props = metaobj.get_properties(
             include_super=include_super, only_writable=only_writable
@@ -307,6 +311,7 @@ class ObjectMixin:
         }
 
     def set_properties(self, props: dict[str, Any], include_super: bool = True):
+        """Set properties from a dictionary."""
         metaobj = self.get_metaobject()
         metaprops = metaobj.get_properties(include_super=include_super)
         for metaprop in metaprops:
@@ -315,6 +320,7 @@ class ObjectMixin:
                 metaprop.write(self, value)
 
     def get_dynamic_properties(self) -> dict[str, Any]:
+        """Get a dictionary with all dynamic properties."""
         return {
             (k := i.data().decode()): self.property(k)
             for i in self.dynamicPropertyNames()

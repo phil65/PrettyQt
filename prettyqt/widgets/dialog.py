@@ -9,28 +9,11 @@ class DialogMixin(widgets.WidgetMixin):
         self,
         *args,
         delete_on_close: bool = False,
-        layout: None | str | QtWidgets.QLayout = None,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         if delete_on_close:
             self.delete_on_close()
-        if layout is not None:
-            self.set_layout(layout)
-
-    def __getitem__(self, index: str) -> QtWidgets.QWidget:
-        result = self.find_child(QtWidgets.QWidget, index)
-        if result is None:
-            raise KeyError("Widget not found")
-        return result
-
-    def serialize_fields(self):
-        return dict(
-            # modal=self.isModal(),
-            # layout=self.layout(),
-            size_grip_enabled=self.isSizeGripEnabled(),
-            size=(self.size().width(), self.size().height()),
-        )
 
     def keyPressEvent(self, e):
         match e.key():
@@ -45,10 +28,6 @@ class DialogMixin(widgets.WidgetMixin):
 
     def delete_on_close(self):
         self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose)
-
-    def add_widget(self, widget: QtWidgets.QWidget) -> QtWidgets.QWidget:
-        self.box += widget
-        return widget
 
     def add_buttonbox(self) -> widgets.DialogButtonBox:
         button_box = widgets.DialogButtonBox.create(ok=self.accept, cancel=self.reject)

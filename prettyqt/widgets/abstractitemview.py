@@ -170,7 +170,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         ...
 
     @overload
-    def set_model(self, model: None) -> None:
+    def set_model(self, model: None):
         ...
 
     def set_model(
@@ -224,6 +224,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return model
 
     def get_models(self, proxies_only: bool = False) -> list[QtCore.QAbstractProxyModel]:
+        """Get a list of all (proxy) models connected to this view."""
         model = self.model()
         models = []
         while isinstance(model, QtCore.QAbstractProxyModel):
@@ -323,9 +324,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                 raise ValueError(expand)
         self.selectionModel().select(index, flag)
 
-    def move_row_selection(self, dx: int) -> None:
+    def move_row_selection(self, dy: int):
         for row in self.selected_rows():
-            new_idx = self.model().index(row + dx, 0)
+            new_idx = self.model().index(row + dy, 0)
             if new_idx.isValid():
                 self.set_current_index(new_idx, current=True, expand="rows")
 
@@ -338,8 +339,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         persistent: bool = False,
         **kwargs,
     ):
-        # from prettyqt import custom_delegates
-
+        """Set a delegate. Delegates can also be set by Id."""
         match delegate:
             case QtWidgets.QAbstractItemDelegate():
                 pass
@@ -354,13 +354,6 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             case str():
                 Klass = helpers.get_class_for_id(widgets.StyledItemDelegate, delegate)
                 delegate = Klass(parent=self, **kwargs)
-            # case str():
-            #     if delegate in widgets.StyledItemDelegate._registry:
-            #         Klass = widgets.StyledItemDelegate._registry[delegate]
-            #         logger.debug(f"found delegate for id {delegate!r}")
-            #         delegate = Klass(parent=self, **kwargs)
-            #     else:
-            #         raise ValueError(f"no delegate with id {delegate!r} registered.")
             case _:
                 raise ValueError(delegate)
         match column, row:
@@ -655,19 +648,21 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setPalette(p)
 
     def set_icon_size(self, size: int | datatypes.SizeType):
-        if isinstance(size, tuple):
-            size = QtCore.QSize(*size)
-        elif isinstance(size, int):
-            size = QtCore.QSize(size, size)
+        match size:
+            case tuple():
+                size = QtCore.QSize(*size)
+            case int():
+                size = QtCore.QSize(size, size)
+            case _:
+                raise ValueError(size)
         self.setIconSize(size)
 
-    def get_size_hint_for_column(self, col: int, limit_ms: int | None = None):
-        to_check = min(25, self.model().rowCount())
-        max_width = 0
-        for row in range(to_check):
-            v = self.sizeHintForIndex(self.model().index(row, col))
-            max_width = max(max_width, v.width())
-        return max_width
+    def get_size_hint_for_column(self, col: int, row_limit: int = 25):
+        """Get a size hint for given column by finding widest cell."""
+        to_check = min(row_limit, self.model().rowCount())
+        return max(
+            self.sizeHintForIndex(self.model().index(row, col)) for row in range(to_check)
+        )
 
     def sync_with(
         self,
