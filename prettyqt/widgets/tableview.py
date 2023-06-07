@@ -52,11 +52,12 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         self.setVerticalHeader(header)
 
     def is_cell_visible(self, row: int, column: int) -> bool:
-        return self.h_header.is_in_visual_range(
-            column
-        ) and self.v_header.is_in_visual_range(row)
+        is_in_horizontal = self.h_header.is_in_visual_range(column)
+        is_in_vertical = self.v_header.is_in_visual_range(row)
+        return is_in_horizontal and is_in_vertical
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
+        """Hack to avoid direct sort when setting sorting enabled."""
         model = self.model()
         if not do_sort and model is not None:
             backup = model.sort

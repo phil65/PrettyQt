@@ -29,7 +29,15 @@ class WidgetPropertiesModel(core.AbstractTableModel):
     ]
 
     def __init__(self, widget: QtWidgets.QWidget, **kwargs):
+        self._widget = None
+        self._metaobj = None
+        self.event_catcher = None
         super().__init__(**kwargs)
+        self.set_widget(widget)
+
+    def set_widget(self, widget):
+        if self._widget:
+            self.unhook()
         self._widget = widget
         self._metaobj = core.MetaObject(self._widget.metaObject())
         self.event_catcher = eventfilters.EventCatcher(
@@ -41,6 +49,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         self._handles = self._metaobj.connect_signals(
             self._widget, self.force_layoutchange, only_notifiers=True
         )
+        self.update_all()
 
     def unhook(self):
         for handle in self._handles:

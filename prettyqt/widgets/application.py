@@ -169,17 +169,12 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         popup.exec()
 
     @classmethod
-    def get_mainwindow(cls) -> QtWidgets.QMainWindow | None:
-        inst = cls.instance()
-        if inst is None:
+    def get_mainwindow(cls) -> widgets.QMainWindow | None:
+        app = cls.instance()
+        if app is None:
             return None
-        widget_list = inst.topLevelWidgets()
         return next(
-            (
-                widget
-                for widget in widget_list
-                if isinstance(widget, QtWidgets.QMainWindow)
-            ),
+            (w for w in app.topLevelWidgets() if isinstance(w, widgets.QMainWindow)),
             None,
         )
 
