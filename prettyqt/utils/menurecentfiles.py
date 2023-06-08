@@ -172,7 +172,7 @@ class MenuRecentFiles(widgets.Menu):
         #: Recent files manager
         self.manager = recent_files_manager
         #: List of recent files actions
-        self.recent_files_actions = []
+        self.recent_files_actions: list[gui.Action] = []
         self.update_actions()
 
     def update_actions(self):

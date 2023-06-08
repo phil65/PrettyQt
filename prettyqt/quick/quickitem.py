@@ -117,7 +117,7 @@ class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
 
     def set_size(self, size: QtCore.QSize | QtCore.QSizeF | tuple[float, float]):
         match size:
-            case tuple():
+            case (float(), float()):
                 new_size = QtCore.QSizeF(*size)
             case QtCore.QSize():
                 new_size = size.toSizeF()

@@ -16,7 +16,7 @@ class SvgGenerator(gui.PaintDeviceMixin, QtSvg.QSvgGenerator):
 
     def set_size(self, size: QtCore.QSize | QtCore.QSizeF | tuple[int, int]):
         match size:
-            case tuple():
+            case (int(), int()):
                 new_size = QtCore.QSize(*size)
             case QtCore.QSizeF():
                 new_size = size.toSize()

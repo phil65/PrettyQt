@@ -36,7 +36,7 @@ class IconWidget(widgets.Label):
 
     def set_icon_size(self, size: int | datatypes.SizeType):
         match size:
-            case tuple():
+            case (int(), int()):
                 size = QtCore.QSize(*size)
             case int():
                 size = QtCore.QSize(size, size)

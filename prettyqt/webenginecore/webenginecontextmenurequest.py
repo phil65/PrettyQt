@@ -89,31 +89,31 @@ class WebEngineContextMenuRequest(QtWebEngineCore.QWebEngineContextMenuRequest):
         return EDIT_FLAGS.get_list(self.editFlags())
 
     def can_undo(self) -> bool:
-        return mod.EditFlag.CanUndo & self.editFlags()
+        return bool(mod.EditFlag.CanUndo & self.editFlags())
 
     def can_redo(self) -> bool:
-        return mod.EditFlag.CanRedo & self.editFlags()
+        return bool(mod.EditFlag.CanRedo & self.editFlags())
 
     def can_cut(self) -> bool:
-        return mod.EditFlag.CanCut & self.editFlags()
+        return bool(mod.EditFlag.CanCut & self.editFlags())
 
     def can_copy(self) -> bool:
-        return mod.EditFlag.CanCopy & self.editFlags()
+        return bool(mod.EditFlag.CanCopy & self.editFlags())
 
     def can_paste(self) -> bool:
-        return mod.EditFlag.CanPaste & self.editFlags()
+        return bool(mod.EditFlag.CanPaste & self.editFlags())
 
     def can_delete(self) -> bool:
-        return mod.EditFlag.CanDelete & self.editFlags()
+        return bool(mod.EditFlag.CanDelete & self.editFlags())
 
     def can_select_all(self) -> bool:
-        return mod.EditFlag.CanSelectAll & self.editFlags()
+        return bool(mod.EditFlag.CanSelectAll & self.editFlags())
 
     def can_translate(self) -> bool:
-        return mod.EditFlag.CanTranslate & self.editFlags()
+        return bool(mod.EditFlag.CanTranslate & self.editFlags())
 
     def can_edit_richly(self) -> bool:
-        return mod.EditFlag.CanEditRichly & self.editFlags()
+        return bool(mod.EditFlag.CanEditRichly & self.editFlags())
 
 
 if __name__ == "__main__":
@@ -122,4 +122,5 @@ if __name__ == "__main__":
     app = widgets.app()
     page = webenginecore.WebEnginePage()
     context_menu_data = page.get_context_menu_data()
+    print(context_menu_data.can_copy())
     app.main_loop()

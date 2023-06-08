@@ -14,7 +14,7 @@ class CheckableProxyModel(core.IdentityProxyModel):
     def __init__(self, column: int = 0, **kwargs):
         super().__init__(**kwargs)
         self._column = column
-        self._checked = set()
+        self._checked: set[int] = set()
 
     def flags(self, index):
         if not index.isValid():

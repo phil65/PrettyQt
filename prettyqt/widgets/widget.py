@@ -902,7 +902,7 @@ class WidgetMixin(core.ObjectMixin):
             case None:
                 self.clearMask()
                 return
-            case tuple():
+            case (int(), int(), int(), int()):
                 area = gui.Region(*area, gui.region.REGION_TYPE[typ])
             case QtCore.QRect():
                 area = gui.Region(area, gui.region.REGION_TYPE[typ])

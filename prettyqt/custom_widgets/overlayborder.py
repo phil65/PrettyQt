@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import colors
+from prettyqt.utils import colors, datatypes
 
 
 class BaseOverlayWidget(widgets.Widget):
@@ -20,10 +20,10 @@ class BaseOverlayWidget(widgets.Widget):
         self._fill_color = None
         parent.installEventFilter(self)
 
-    def set_fill_color(self, color: colors.ColorType):
+    def set_fill_color(self, color: datatypes.ColorType):
         self._fill_color = colors.get_color(color)
 
-    def set_border_color(self, color: colors.ColorType):
+    def set_border_color(self, color: datatypes.ColorType):
         self._border_color = colors.get_color(color)
 
     def get_fill_color(self) -> gui.Color:

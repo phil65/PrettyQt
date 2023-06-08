@@ -114,13 +114,16 @@ class SidebarWidget(widgets.MainWindow):
 
     def _get_widget(self, item: str | int | widgets.Widget):
         """Returns widget page specified by name, offset or content."""
-        if isinstance(item, int):
-            return self.area.box[item]
-        elif isinstance(item, str):
-            item = self.area.find_child(QtWidgets.QWidget, name=item, recursive=False)
-            if item not in self.area.box:
-                raise ValueError("Layout does not contain the chosen widget")
-        return item
+        match item:
+            case int():
+                return self.area.box[item]
+            case str():
+                w = self.area.find_child(QtWidgets.QWidget, name=item, recursive=False)
+                if w not in self.area.box:
+                    raise ValueError("Layout does not contain the chosen widget")
+                return w
+            case _:
+                raise TypeError(item)
 
     def _get_current_widget(self) -> QtWidgets.QWidget:
         """Returns the currently selected widget page."""
@@ -136,7 +139,7 @@ class SidebarWidget(widgets.MainWindow):
         self.area.box.setCurrentWidget(widget)
         self.button_map[widget].setChecked(True)
 
-    def add_spacer(self) -> widgets.Widget:
+    def add_spacer(self) -> gui.QAction:
         return self.sidebar.add_spacer()
 
     def add_separator(self, text: str | None = None, area: AreaStr = "top"):

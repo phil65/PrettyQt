@@ -41,10 +41,15 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         return self.value().data().decode()
 
     def set_expiration_date(self, date: datatypes.DateTimeType | None):
-        if date is None:
-            date = QtCore.QDateTime()
-        elif isinstance(date, str):
-            date = dateutil.parser.parse(date)
+        match date:
+            case None:
+                date = QtCore.QDateTime()
+            case str():
+                date = dateutil.parser.parse(date)
+            case datatypes.DateTimeType():
+                pass
+            case _:
+                raise TypeError(date)
         self.setExpirationDate(date)  # type: ignore
 
 

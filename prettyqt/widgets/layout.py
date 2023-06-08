@@ -206,7 +206,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
                 self.unsetContentsMargins()
             case int():
                 self.setContentsMargins(margin, margin, margin, margin)
-            case tuple():
+            case (int(), int(), int(), int()):
                 self.setContentsMargins(*margin)
             case _:
                 raise ValueError(margin)

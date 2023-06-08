@@ -17,8 +17,8 @@ logger = logging.getLogger(__name__)
 
 
 class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
-    _keybindings = defaultdict(list)
-    _keygrabs = defaultdict(int)  # Key grab key -> number of grabs
+    _keybindings: defaultdict[list] = defaultdict(list)
+    _keygrabs: defaultdict[int] = defaultdict(int)  # Key grab key -> number of grabs
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

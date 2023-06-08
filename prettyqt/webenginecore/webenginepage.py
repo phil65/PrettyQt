@@ -212,10 +212,17 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
         Args:
             url: URL to set
         """
-        if isinstance(url, os.PathLike):
-            url = core.Url.fromLocalFile(os.fspath(url))
-        elif isinstance(url, str):
-            url = core.Url(url)
+        match url:
+            case str():
+                url = core.Url(url)
+            case os.PathLike():
+                url = core.Url.fromLocalFile(os.fspath(url))
+            case None:
+                url = core.QUrl()
+            case core.QUrl():
+                pass
+            case _:
+                raise TypeError(url)
         self.setUrl(url)
 
     def get_url(self) -> core.Url:
@@ -244,10 +251,17 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
         Args:
             url: URL to load
         """
-        if isinstance(url, os.PathLike):
-            url = core.Url.fromLocalFile(os.fspath(url))
-        elif isinstance(url, str):
-            url = core.Url(url)
+        match url:
+            case str():
+                url = core.Url(url)
+            case os.PathLike():
+                url = core.Url.fromLocalFile(os.fspath(url))
+            case None:
+                url = core.QUrl()
+            case core.QUrl():
+                pass
+            case _:
+                raise TypeError(url)
         self.load(url)
 
     def set_zoom(self, zoom: float):

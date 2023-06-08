@@ -62,11 +62,11 @@ class Stalker(core.Object):
         super().__init__(**kwargs)
         self._obj = qobject
         self._meta = core.MetaObject(self._obj.metaObject())
-        self.counter = collections.defaultdict(int)
-        self.signal_counter = collections.defaultdict(int)
+        self.counter: collections.defaultdict[int] = collections.defaultdict(int)
+        self.signal_counter: collections.defaultdict[int] = collections.defaultdict(int)
         self.exclude = ["meta_call", "timer"] if exclude is None else exclude
         self.include = include
-        self._handles = []
+        self._handles: list[core.QMetaObject.Connection] = []
 
     def __enter__(self):
         self.hook()

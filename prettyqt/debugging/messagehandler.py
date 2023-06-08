@@ -15,6 +15,8 @@ LOG_MAP = {
     QtCore.QtMsgType.QtSystemMsg: logging.CRITICAL,
 }
 
+logger = logging.getLogger(__name__)
+
 # qFormatLogMessage(QtMsgType type, const QMessageLogContext context, const QString str)
 # qInstallMessageHandler(QtMessageHandler handler)
 # qSetMessagePattern(const QString &pattern)
@@ -63,6 +65,6 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    handler = MessageHandler()
+    handler = MessageHandler(logger)
     with app.debug_mode():
         app.main_loop()

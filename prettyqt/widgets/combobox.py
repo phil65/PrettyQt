@@ -148,10 +148,15 @@ class ComboBoxMixin(widgets.WidgetMixin):
 
     def set_icon_size(self, size: int | datatypes.SizeType):
         """Set size of the icons."""
-        if isinstance(size, int):
-            size = core.Size(size, size)
-        elif isinstance(size, tuple):
-            size = core.Size(*size)
+        match size:
+            case int():
+                size = core.Size(size, size)
+            case (int(), int()):
+                size = core.Size(*size)
+            case core.QSize():
+                pass
+            case _:
+                raise TypeError(size)
         self.setIconSize(size)
 
     def get_icon_size(self) -> core.Size:

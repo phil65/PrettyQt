@@ -52,10 +52,15 @@ class MediaPlayer(core.ObjectMixin, QtMultimedia.QMediaPlayer):
     def set_source_device(
         self, device: QtCore.QIODevice, url: datatypes.UrlType | None = None
     ):
-        if not isinstance(url, QtCore.QUrl):
-            url = QtCore.QUrl(url)
-        elif url is None:
-            url = QtCore.QUrl()
+        match url:
+            case str():
+                url = QtCore.QUrl(url)
+            case None:
+                url = QtCore.QUrl()
+            case QtCore.QUrl():
+                pass
+            case _:
+                raise TypeError(url)
         self.setSourceDevice(device, url)
 
     def set_source(self, url: datatypes.UrlType):

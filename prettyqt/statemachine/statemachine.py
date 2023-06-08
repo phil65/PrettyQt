@@ -33,7 +33,7 @@ PRIORITY = bidict(
 PriorityStr = Literal["normal", "high"]
 
 
-class StateMachine(statemachine.StateMixin, QtStateMachine.QStateMachine):
+class StateMachine(statemachine.state.StateMixin, QtStateMachine.QStateMachine):
     def __add__(self, other: QtStateMachine.QAbstractState) -> StateMachine:
         self.addState(other)
         return self

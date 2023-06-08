@@ -51,6 +51,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         for window in cls.topLevelWindows():
             if window and int(window.winId()) == int(h_wnd):
                 return window
+        return None
 
     def set_layout_direction(self, direction: constants.LayoutDirectionStr):
         """Set layout direction.

@@ -46,9 +46,6 @@ LocationStr = Literal[
 
 
 class LibraryInfo(QtCore.QLibraryInfo):
-    def __class_getitem__(cls, name: LocationStr) -> pathlib.Path:
-        return cls.get_location(name)
-
     @classmethod
     def get_location(cls, location: LocationStr) -> pathlib.Path:
         if location not in LOCATION:

@@ -42,10 +42,15 @@ class IconEngine(serializemixin.SerializeMixin, QtGui.QIconEngine):
             raise InvalidParamError(mode, gui.icon.MODE)
         if state not in gui.icon.STATE:
             raise InvalidParamError(state, gui.icon.STATE)
-        if isinstance(size, tuple):
-            size = core.Size(*size)
-        elif isinstance(size, int):
-            size = core.Size(size, size)
+        match size:
+            case (int(), int()):
+                size = core.Size(*size)
+            case int():
+                size = core.Size(size, size)
+            case core.QSize():
+                pass
+            case _:
+                raise TypeError(size)
         self.addFile(os.fspath(path), size, gui.icon.MODE[mode], gui.icon.STATE[state])
 
     def add_pixmap(
@@ -70,10 +75,15 @@ class IconEngine(serializemixin.SerializeMixin, QtGui.QIconEngine):
             raise InvalidParamError(mode, gui.icon.MODE)
         if state not in gui.icon.STATE:
             raise InvalidParamError(state, gui.icon.STATE)
-        if isinstance(size, tuple):
-            size = core.Size(*size)
-        elif isinstance(size, int):
-            size = core.Size(size, size)
+        match size:
+            case (int(), int()):
+                size = core.Size(*size)
+            case int():
+                size = core.Size(size, size)
+            case core.QSize():
+                pass
+            case _:
+                raise TypeError(size)
         return core.Size(
             self.actualSize(size, gui.icon.MODE[mode], gui.icon.STATE[state])
         )
@@ -101,10 +111,15 @@ class IconEngine(serializemixin.SerializeMixin, QtGui.QIconEngine):
             raise InvalidParamError(mode, gui.icon.MODE)
         if state not in gui.icon.STATE:
             raise InvalidParamError(state, gui.icon.STATE)
-        if isinstance(size, tuple):
-            size = core.Size(*size)
-        elif isinstance(size, int):
-            size = core.Size(size, size)
+        match size:
+            case (int(), int()):
+                size = core.Size(*size)
+            case int():
+                size = core.Size(size, size)
+            case core.QSize():
+                pass
+            case _:
+                raise TypeError(size)
         if scale is None:
             return gui.Pixmap(
                 self.pixmap(size, gui.icon.MODE[mode], gui.icon.STATE[state])

@@ -99,10 +99,15 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
             raise InvalidParamError(mode, MODE)
         if state not in STATE:
             raise InvalidParamError(state, STATE)
-        if isinstance(size, tuple):
-            size = core.Size(*size)
-        elif isinstance(size, int):
-            size = core.Size(size, size)
+        match size:
+            case (int(), int()):
+                size = core.Size(*size)
+            case int():
+                size = core.Size(size, size)
+            case core.QSize():
+                pass
+            case _:
+                raise TypeError(size)
         return self.pixmap(size, MODE[mode], STATE[state])
 
     def get_actual_size(
@@ -115,10 +120,15 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
             raise InvalidParamError(mode, MODE)
         if state not in STATE:
             raise InvalidParamError(state, STATE)
-        if isinstance(size, tuple):
-            size = core.Size(*size)
-        elif isinstance(size, int):
-            size = core.Size(size, size)
+        match size:
+            case (int(), int()):
+                size = core.Size(*size)
+            case int():
+                size = core.Size(size, size)
+            case core.QSize():
+                pass
+            case _:
+                raise TypeError(size)
         return core.Size(self.actualSize(size, MODE[mode], STATE[state]))
 
 

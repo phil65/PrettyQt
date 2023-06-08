@@ -65,7 +65,7 @@ class LineF(QtCore.QLineF):
 
     def set_p1(self, point: datatypes.PointFType):
         match point:
-            case tuple():
+            case (float(), float()):
                 self.setP1(core.Point(*point))
             case QtCore.QPointF():
                 self.setP1(point)
@@ -77,7 +77,7 @@ class LineF(QtCore.QLineF):
 
     def set_p2(self, point: datatypes.PointFType):
         match point:
-            case tuple():
+            case (float(), float()):
                 self.setP2(core.Point(*point))
             case QtCore.QPointF():
                 self.setP2(point)

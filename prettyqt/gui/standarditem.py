@@ -22,7 +22,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         match index:
             case int():
                 return self.child(index)
-            case tuple():
+            case (int(), int()):
                 return self.child(*index)
             case _:
                 raise KeyError(index)
@@ -121,14 +121,12 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         return None if icon.isNull() else gui.Icon(icon)
 
     def set_data(self, data: Any, role: constants.ItemDataRoleStr | int):
-        if isinstance(role, str):
-            role = constants.ITEM_DATA_ROLE[role]
-        super().setData(data, role)
+        item_role = constants.ITEM_DATA_ROLE[role] if isinstance(role, str) else role
+        super().setData(data, item_role)
 
     def get_data(self, role: constants.ItemDataRoleStr | int):
-        if isinstance(role, str):
-            role = constants.ITEM_DATA_ROLE[role]
-        return super().data(role)
+        item_role = constants.ITEM_DATA_ROLE[role] if isinstance(role, str) else role
+        return super().data(item_role)
 
     def set_tooltip(
         self,

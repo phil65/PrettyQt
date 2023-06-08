@@ -50,12 +50,6 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         self._debug = False
         self.runner = setup_runner()
 
-    def __class_getitem__(cls, name: str) -> QtWidgets.QWidget:
-        widget = cls.get_widget(name)
-        if widget is None:
-            raise ValueError(f"Widget {name!r} does not exist.")
-        return widget
-
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
         return iter(self.topLevelWidgets())
 
@@ -200,11 +194,16 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     def set_stylesheet(
         self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
     ):
-        if isinstance(ss, os.PathLike):
-            ss = pathlib.Path(ss).read_text()
-        elif ss is None:
-            ss = ""
-        self.setStyleSheet(str(ss))
+        match ss:
+            case str():
+                pass
+            case os.PathLike():
+                ss = pathlib.Path(ss).read_text()
+            case None:
+                ss = ""
+            case _:
+                raise TypeError(ss)
+        self.setStyleSheet(ss)
 
     def set_style(self, style: str):
         self.setStyle(QtWidgets.QStyleFactory.create(style))

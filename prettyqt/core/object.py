@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from collections.abc import Callable, Container, Generator
+from collections.abc import Callable, Generator, Sequence
 import contextlib
 
 # import inspect
@@ -136,8 +136,8 @@ class ObjectMixin:
     def add_callback_for_event(
         self,
         callback: Callable[[QtCore.QEvent], bool],
-        include: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
-        exclude: QtCore.QEvent.Type | Container[QtCore.QEvent.Type] | None = None,
+        include: QtCore.QEvent.Type | Sequence[QtCore.QEvent.Type] | None = None,
+        exclude: QtCore.QEvent.Type | Sequence[QtCore.QEvent.Type] | None = None,
     ) -> eventfilters.EventCatcher:
         """Connect widget events to a callback.
 

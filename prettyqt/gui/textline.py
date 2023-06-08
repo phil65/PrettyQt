@@ -36,9 +36,8 @@ class TextLine(QtGui.QTextLine):
         return core.PointF(self.position())
 
     def set_position(self, point: datatypes.PointType):
-        if isinstance(point, tuple):
-            point = core.Point(*point)
-        self.setPosition(point)
+        p = core.Point(*point) if isinstance(point, tuple) else point
+        self.setPosition(p)
 
     def cursor_to_x(self, cursor_pos: int, edge: EdgeStr = "leading") -> float:
         if edge not in EDGE:

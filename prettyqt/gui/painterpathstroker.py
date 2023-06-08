@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError
 
 
@@ -53,4 +53,4 @@ class PainterPathStroker(QtGui.QPainterPathStroker):
 
 
 if __name__ == "__main__":
-    p = PainterPathStroker(QtCore.QPoint(1, 1))
+    p = PainterPathStroker()

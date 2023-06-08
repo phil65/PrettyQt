@@ -59,8 +59,12 @@ class AbstractButtonMixin(widgets.WidgetMixin):
         match size:
             case int():
                 size = core.Size(size, size)
-            case tuple():
+            case (int(), int()):
                 size = core.Size(*size)
+            case core.QSize():
+                pass
+            case _:
+                raise TypeError(size)
         self.setIconSize(size)
 
     def get_icon_size(self) -> core.Size:

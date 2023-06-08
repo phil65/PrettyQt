@@ -53,9 +53,6 @@ StandardLocationStr = Literal[
 
 
 class StandardPaths(QtCore.QStandardPaths):
-    def __class_getitem__(cls, name: StandardLocationStr) -> list[pathlib.Path]:
-        return cls.get_standard_locations(name)
-
     @classmethod
     def get_display_name(cls, location: StandardLocationStr) -> str:
         return cls.displayName(STANDARD_LOCATION[location])

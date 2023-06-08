@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 import os
 
-from prettyqt import core, qml
+from prettyqt import qml
 from prettyqt.qt import QtCore, QtQml
 from prettyqt.utils import datatypes
 
@@ -21,10 +21,15 @@ class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
             data = data.encode()
         if isinstance(data, bytes):
             data = QtCore.QByteArray(data)
-        if isinstance(url, str):
-            url = core.Url.from_user_input(url)
-        elif url is None:
-            url = core.Url()
+        match url:
+            case str():
+                url = QtCore.QUrl(url)
+            case None:
+                url = QtCore.QUrl()
+            case QtCore.QUrl():
+                pass
+            case _:
+                raise TypeError(url)
         self.loadData(data, url)
 
     def load_file(self, file: datatypes.UrlType | datatypes.PathType):

@@ -42,7 +42,7 @@ def chunked_iter(src: Iterable, size: int):
 class AsyncRunner:
     """A runner which runs long-lasting functions using a thread pool."""
 
-    def __init__(self, max_threads: int | None = None) -> None:
+    def __init__(self, max_threads: int | None = None):
         super().__init__()
         self._max_threads = max_threads or os.cpu_count() or 1
         self._pool = ThreadPoolExecutor(max_workers=max_threads)
@@ -62,7 +62,7 @@ class AsyncRunner:
     def __enter__(self: T) -> T:
         return self
 
-    def __exit__(self, *exc_info: object) -> None:
+    def __exit__(self, *exc_info: object):
         self.close()
 
     def to_sync(
@@ -87,7 +87,7 @@ class AsyncRunner:
         """
 
         @functools.wraps(async_func)
-        def func(*args: object, **kwargs: object) -> None:
+        def func(*args: object, **kwargs: object):
             gen = async_func(*args, **kwargs)
             self.start_coroutine(gen)
 
@@ -101,7 +101,7 @@ class AsyncRunner:
     def is_idle(self) -> bool:
         return len(self._running_tasks) == 0
 
-    def close(self) -> None:
+    def close(self):
         self._pool.shutdown(wait=True, cancel_futures=True)
 
     async def run(
@@ -172,7 +172,7 @@ class AsyncRunner:
         future: Future,
         *,
         coroutine: Coroutine[Any, Any, Any],
-    ) -> None:
+    ):
         """Called when a ``Future`` that was submitted to the thread pool finishes.
 
         This function is called from a separate thread, so we emit the signal
@@ -185,7 +185,7 @@ class AsyncRunner:
         """
         self._signaller.future_done_signal.emit(future, coroutine)
 
-    def _on_task_future_done(self, future: Future, *, task: _AsyncTask) -> None:
+    def _on_task_future_done(self, future: Future, *, task: _AsyncTask):
         """Called when a ``Future`` belonging to a ``_AsyncTask`` has finished.
 
         Similar to ``_on_future_done``, this emits a signal so the coroutine is resumed
@@ -209,7 +209,7 @@ class AsyncRunner:
         self,
         future: Future,
         coroutine: Coroutine[Any, Any, Any],
-    ) -> None:
+    ):
         """Resume paused coroutine.
 
         Slots connected to our internal ``_signaller`` object,
@@ -222,7 +222,7 @@ class AsyncRunner:
         assert threading.current_thread() is threading.main_thread()
         self.start_coroutine(coroutine)
 
-    def start_coroutine(self, coroutine: Coroutine) -> None:
+    def start_coroutine(self, coroutine: Coroutine):
         """Start the coroutine, and returns immediately.
 
         Arguments:
@@ -255,7 +255,7 @@ class AsyncRunner:
         exception: Exception | None = None
         completed = False
 
-        async def wrapper() -> None:
+        async def wrapper():
             nonlocal result, exception, completed
             try:
                 result = await coroutine
@@ -312,7 +312,7 @@ class _AsyncTask(Awaitable[None]):
             self.coroutine = None
             return coroutine
 
-    def shutdown(self) -> None:
+    def shutdown(self):
         """Cancel any running futures and clears up its attributes."""
         msg = (
             "Should always be called from ``run_parallel``, "
@@ -343,7 +343,7 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     class Window(widgets.Widget):
-        def __init__(self, directory: Path) -> None:
+        def __init__(self, directory: Path):
             super().__init__()
 
             self.setWindowTitle("Cat Downloader")
@@ -366,7 +366,7 @@ if __name__ == "__main__":
             layout.addRow(self.download_button)
             layout.addRow(self.stop_button)
 
-        async def on_download_button_clicked(self, checked: bool = False) -> None:
+        async def on_download_button_clicked(self, checked: bool = False):
             self.progress_label.setText("Searching...")
             self.download_button.setEnabled(False)
             self.stop_button.setEnabled(True)
@@ -415,7 +415,7 @@ if __name__ == "__main__":
                 self.download_button.setEnabled(True)
                 self.stop_button.setEnabled(False)
 
-        def on_cancel_button_clicked(self) -> None:
+        def on_cancel_button_clicked(self):
             self._cancelled = True
 
     app = widgets.app()

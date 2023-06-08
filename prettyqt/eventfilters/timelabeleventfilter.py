@@ -9,7 +9,7 @@ class TextUpdateEventFilter(eventfilters.BaseEventFilter):
         parent.startTimer(interval)
         self._update_text()
 
-    def eventFilter(self, obj, event: core.Event) -> bool:
+    def eventFilter(self, obj, event: core.QEvent) -> bool:
         # if obj is not self.parent():
         #     return super().eventFilter(obj, event)
         match event.type():

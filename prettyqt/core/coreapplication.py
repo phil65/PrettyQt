@@ -56,12 +56,17 @@ class CoreApplicationMixin(core.ObjectMixin):
     ):
         if app_name is not None:
             self.setApplicationName(app_name)
-        if app_version is not None:
-            if isinstance(app_version, QtCore.QVersionNumber):
+        match app_version:
+            case None:
+                pass
+            case QtCore.QVersionNumber():
                 app_version = app_version.toString()
-            elif isinstance(app_version, tuple):
+                self.setApplicationVersion(app_version)
+            case tuple():
                 app_version = ".".join(str(i) for i in app_version)
-            self.setApplicationVersion(app_version)
+                self.setApplicationVersion(app_version)
+            case _:
+                raise TypeError(app_version)
         if org_name is not None:
             self.setOrganizationName(org_name)
         if org_domain is not None:

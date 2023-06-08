@@ -4,7 +4,7 @@ import functools
 import logging
 from typing import Literal
 
-from pygments import lexer, lexers, styles
+from pygments import lexer, lexers, style, styles
 from pygments.formatters import html
 
 from prettyqt import gui, paths
@@ -74,7 +74,7 @@ def _get_brush(color: str) -> gui.Brush:
     return gui.Brush(qcolor)
 
 
-def _get_format_from_style(token: str, style: styles.Style) -> gui.TextCharFormat:
+def _get_format_from_style(token: str, style: style.Style) -> gui.TextCharFormat:
     """Return a QTextCharFormat for token by reading a Pygments style."""
     result = gui.TextCharFormat()
     try:
@@ -192,7 +192,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self,
         parent: QtGui.QTextDocument,
         lexer: str,
-        style: None | StyleStr | styles.Style = None,
+        style: None | StyleStr | style.Style = None,
     ):
         super().__init__(parent)
         self._document = self.document()
@@ -234,13 +234,17 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     # "PygmentsHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def set_style(self, style: None | StyleStr | styles.Style):
-        if style is None:
-            self.adjust_style_to_palette()
-            return
-        elif isinstance(style, str):
-            style = styles.get_style_by_name(style)
-        self._style = style
+    def set_style(self, style: None | StyleStr | style.Style):
+        match style:
+            case None:
+                self.adjust_style_to_palette()
+                return
+            case str():
+                self._style = styles.get_style_by_name(style)
+            case style.Style:
+                self._style = style
+            case _:
+                raise TypeError(style)
         self._clear_caches()
 
     def adjust_style_to_palette(self):
@@ -283,7 +287,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self, token: str, document: QtGui.QTextDocument
     ) -> QtGui.QTextCharFormat:
         """Return a QTextCharFormat for token from document."""
-        code, html = next(self._formatter._format_lines([(token, "dummy")]))
+        _, html = next(self._formatter._format_lines([(token, "dummy")]))
         document.setHtml(html)
         return gui.TextCursor(document).charFormat()
 

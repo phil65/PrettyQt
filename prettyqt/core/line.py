@@ -70,7 +70,7 @@ class Line(QtCore.QLine):
 
     def set_p1(self, point: datatypes.PointType):
         match point:
-            case tuple():
+            case (int(), int()):
                 self.setP1(core.Point(*point))
             case QtCore.QPoint():
                 self.setP1(point)
@@ -82,7 +82,7 @@ class Line(QtCore.QLine):
 
     def set_p2(self, point: datatypes.PointType):
         match point:
-            case tuple():
+            case (int(), int()):
                 self.setP2(core.Point(*point))
             case QtCore.QPoint():
                 self.setP2(point)

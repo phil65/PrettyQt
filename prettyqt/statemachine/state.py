@@ -22,7 +22,7 @@ RESTORE_POLICY = bidict(
 RestorePolicyStr = Literal["dont_restore", "restore"]
 
 
-class State(statemachine.AbstractStateMixin, QtStateMachine.QState):
+class StateMixin(statemachine.AbstractStateMixin):
     def set_child_mode(self, mode: ChildModeStr):
         """Set child mode to use.
 
@@ -43,6 +43,10 @@ class State(statemachine.AbstractStateMixin, QtStateMachine.QState):
             child mode
         """
         return CHILD_MODE.inverse[self.childMode()]
+
+
+class State(StateMixin, QtStateMachine.QState):
+    pass
 
 
 if __name__ == "__main__":

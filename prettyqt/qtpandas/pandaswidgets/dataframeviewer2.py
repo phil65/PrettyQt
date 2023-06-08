@@ -80,7 +80,12 @@ class DataFrameHeaderModel(core.AbstractTableModel):
     def columnCount(self, index=None):
         return max(1, self._shape[1])
 
-    def headerData(self, section: int, orientation, role):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole,
+    ):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
                 return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
@@ -99,7 +104,7 @@ class DataFrameHeaderModel(core.AbstractTableModel):
                     else self._model.name("horizontal", section)
                 )
 
-    def data(self, index, role):
+    def data(self, index: core.ModelIndex, role: constants.ItemDataRole):
         if (
             not index.isValid()
             or index.row() >= self._shape[0]
@@ -142,7 +147,12 @@ class DataFrameLevelModel(core.AbstractTableModel):
     def columnCount(self, index=None):
         return max(1, self._model.header_shape[1])
 
-    def headerData(self, section: int, orientation, role):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole,
+    ):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
                 return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
@@ -151,7 +161,7 @@ class DataFrameLevelModel(core.AbstractTableModel):
             case constants.DISPLAY_ROLE, _:
                 return f"L{section}"
 
-    def data(self, index, role):
+    def data(self, index: core.ModelIndex, role: constants.ItemDataRole):
         if not index.isValid():
             return None
         a = self._model.header_shape[0] - 1
@@ -243,7 +253,7 @@ class DataFrameViewer(widgets.Widget):
         self.setFocusProxy(self.table_data)
 
         # autosize columns on-demand
-        self._autosized_cols = set()
+        self._autosized_cols: set[int] = set()
         self.hscroll.sliderMoved.connect(self._resize_visible_columns_to_contents)
         self.table_data.installEventFilter(self)
 

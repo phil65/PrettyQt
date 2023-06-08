@@ -363,7 +363,7 @@ class FSSpecTreeModel(
             return True
         return item.obj["type"] == "directory"
 
-    def removeRows(self, row: int, count: int, parent):
+    def removeRows(self, row: int, count: int, parent: core.Modelindex):
         # end_row = row + count - 1
         # with self.remove_rows(row, end_row, parent):
         #     for i in range(end_row, row - 1, -1):

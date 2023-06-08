@@ -199,12 +199,17 @@ class TextDocumentMixin(core.ObjectMixin):
         self.set_default_stylesheet(ss)
 
     def set_default_stylesheet(
-        self, ss: None | str | qstylizer.style.StyleSheet | datatypes.PathType
+        self, ss: None | qstylizer.style.StyleSheet | datatypes.PathType
     ):
-        if isinstance(ss, os.PathLike):
-            ss = pathlib.Path(ss).read_text()
-        elif ss is None:
-            ss = ""
+        match ss:
+            case os.PathLike():
+                ss = pathlib.Path(ss).read_text()
+            case None:
+                ss = ""
+            case qstylizer.style.StyleSheet():
+                pass
+            case _:
+                raise TypeError(ss)
         self.setDefaultStyleSheet(str(ss))
 
     def get_default_stylesheet(self) -> qstylizer.style.StyleSheet:

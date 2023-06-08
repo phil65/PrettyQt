@@ -16,7 +16,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         match index:
             case int():
                 item = self.item(index)
-            case tuple():
+            case (int(), int()):
                 item = self.item(*index)
             case _:
                 item = self.itemFromIndex(index)
@@ -28,7 +28,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         match index:
             case int():
                 item = self.takeRow(index)
-            case tuple():
+            case (int(), int()):
                 item = self.takeItem(*index)
         if item is None:
             raise KeyError(index)

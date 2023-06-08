@@ -69,14 +69,15 @@ class CustomBase(widgets.Widget):
         super().__init__()
         self.is_win11 = getwindowsversion().build >= 22000
         self.use_mica = use_mica if self.is_win11 else False
-        if theme == "auto":
-            self.dark_mode = self.get_palette().is_dark()
-        elif theme == "dark":
-            self.dark_mode = True
-        elif theme == "light":
-            self.dark_mode = False
-        else:
-            raise ValueError(theme)
+        match theme:
+            case "auto":
+                self.dark_mode = self.get_palette().is_dark()
+            case "dark":
+                self.dark_mode = True
+            case "light":
+                self.dark_mode = False
+            case _:
+                raise ValueError(theme)
         if len(color) != 8:
             raise ValueError("Wrong argument 'color': must be 8 hex symbols")
         self.acrylic_color = invert_color(color) if self.dark_mode else color
