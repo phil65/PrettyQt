@@ -61,8 +61,9 @@ if __name__ == "__main__":
     model = RegexMatchesModel(matches)
 
     view.set_model(model)
-    dlg = widgets.Dialog(layout="horizontal")
-    dlg.add_widget(view)
+    dlg = widgets.Dialog()
+    dlg.set_layout("horizontal")
+    dlg.box.add_widget(view)
     dlg.show_blocking()
     view.resize(500, 300)
     app.main_loop()

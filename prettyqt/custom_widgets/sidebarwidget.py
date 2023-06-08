@@ -101,7 +101,7 @@ class SidebarWidget(widgets.MainWindow):
     def set_marker(
         self, item: str | int | widgets.Widget, color: datatypes.ColorType = "red"
     ):
-        widget = self._get_widget(item)
+        widget = item if isinstance(item, widgets.QWidget) else self._get_widget(item)
         if widget == self._get_current_widget():
             return
         template = self.icon_map[widget]
@@ -132,8 +132,8 @@ class SidebarWidget(widgets.MainWindow):
                 return k
         raise RuntimeError("no page activated.")
 
-    def set_tab(self, item: str | int | widgets.Widget):
-        widget = self._get_widget(item)
+    def set_tab(self, item: str | int | widgets.QWidget):
+        widget = item if isinstance(item, widgets.QWidget) else self._get_widget(item)
         current = self.area.box.currentWidget()
         self.button_map[current].setChecked(False)
         self.area.box.setCurrentWidget(widget)

@@ -213,14 +213,15 @@ def test_datetimeedit(qtbot):
 
 # @pytest.mark.skipif(sys.platform == "linux", reason="X11 connection break")
 def test_dialog(qtbot, qttester):
-    dlg = widgets.Dialog(layout="horizontal")
+    dlg = widgets.Dialog()
+    dlg.set_layout("horizontal")
     qtbot.add_widget(dlg)
     dlg.show()
     qttester.send_keypress(dlg, QtCore.Qt.Key.Key_F11)
     dlg.delete_on_close()
     btn = widgets.RadioButton("test")
     qtbot.addWidget(btn)
-    dlg.add_widget(btn)
+    dlg.box.add_widget(btn)
     dlg.set_icon("mdi.timer")
     dlg.resize(200, 400)
     dlg.resize((150, 400))

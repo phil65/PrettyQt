@@ -201,6 +201,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
                 ss = pathlib.Path(ss).read_text()
             case None:
                 ss = ""
+            case qstylizer.style.StyleSheet():
+                ss = str(ss)
             case _:
                 raise TypeError(ss)
         self.setStyleSheet(ss)

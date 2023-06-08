@@ -65,6 +65,8 @@ class CoreApplicationMixin(core.ObjectMixin):
             case tuple():
                 app_version = ".".join(str(i) for i in app_version)
                 self.setApplicationVersion(app_version)
+            case str():
+                self.setApplicationVersion(app_version)
             case _:
                 raise TypeError(app_version)
         if org_name is not None:

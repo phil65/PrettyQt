@@ -575,6 +575,8 @@ class WidgetMixin(core.ObjectMixin):
         match ss:
             case None:
                 ss = ""
+            case str():
+                pass
             case os.PathLike():
                 ss = pathlib.Path(ss).read_text()
             case qstylizer.style.StyleSheet():

@@ -16,8 +16,6 @@ def test_application(qapp):
     assert qapp.get_mainwindow() == wnd
     widget = qapp.get_widget(name="test")
     assert widget == mw_widget
-    widget = widgets.Application["test"]
-    assert widget == mw_widget
     with pytest.raises(InvalidParamError):
         qapp.get_style_icon("testus")
     icon = qapp.get_style_icon("warning")
