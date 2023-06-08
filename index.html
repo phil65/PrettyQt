@@ -265,6 +265,26 @@
     Main Features
   </a>
   
+    <nav class="md-nav" aria-label="Main Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-covered-modules-are" class="md-nav__link">
+    The covered modules are:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -755,6 +775,26 @@
     Main Features
   </a>
   
+    <nav class="md-nav" aria-label="Main Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#the-covered-modules-are" class="md-nav__link">
+    The covered modules are:
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    Examples:
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -799,8 +839,66 @@
 <ul>
 <li>Large parts of the Qt API are available in a <strong>PEP-8</strong>-compliant way.</li>
 <li>Pre-defined widgets for common use cases</li>
-<li>Large set of validators, syntax highlighters, models</li>
+<li>Large set of validators, syntax highlighters, models and much more.</li>
 </ul>
+<p>PrettyQt basically is a wrapper for the whole Qt API (either based on PySide6 or PyQt6).
+The library contains a tree of mixins, with one mixin for each Qt class.
+These mixins also inherit from each other and are applied to the Qt classes.
+That way each class gets all helper methods from all sub-mixins.
+Example: The class "TreeView" inherits from original Qt Class "QTreeView" and gets helper methods
+from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
+"FrameMixin", "WidgetMixin" and "ObjectMixin".</p>
+<p>Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
+and using it can be quite cumbersome for Python developers. (it´s statically typed,
+very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:</p>
+<ul>
+<li>adding more powerful methods to the classes, which accept more types and have more options (aka keyword arguments)</li>
+<li>adding a lot of <strong>dunder</strong> methods to the classes to make them behave like good python citizens.</li>
+<li>adding replacements for all Qt Methods which work with enums. Strings are the preferred choice in PrettyQt.</li>
+</ul>
+<p>Apart from the 3D related modules (Qt3D, QtDataVizualization),
+almost every class from Qt is covered.</p>
+<h3 id="the-covered-modules-are">The covered modules are:</h3>
+<p>QtBluetooth (-&gt; prettyqt.bluetooth)
+QtCharts (-&gt; prettyqt.charts)
+QtCore (-&gt; prettyqt.core)
+QtDesigner (-&gt; prettyqt.designer)
+QtGui (-&gt; prettyqt.gui)
+QtLocation (-&gt; prettyqt.location)
+QtMultimedia (-&gt; prettyqt.multimedia)
+QtMultimediaWidgets (-&gt; prettyqt.multimediawidgets)
+QtNetwork (-&gt; prettyqt.network)
+QtOpenGLWidgets (-&gt; prettyqt.openglwidgets)
+QtPdf (-&gt; prettyqt.pdf)
+QtPdfWidgets (-&gt; prettyqt.pdfwidgets)
+QtPositioning (-&gt; prettyqt.positioning)
+QtPrintSupport (-&gt; prettyqt.printsupport)
+QtQml (-&gt; prettyqt.qml)
+QtHelp (-&gt; prettyqt.qthelp) (prepended "qt" to avoid name clashing)
+QtQuick (-&gt; prettyqt.quick)
+QtQuickWidgets (-&gt; prettyqt.quickwidgets)
+QScintilla (-&gt; prettyqt.scintilla)
+QtScXml (-&gt; prettyqt.scxml)
+QtStateMachine (-&gt; prettyqt.statemachine)
+QtSvg (-&gt; prettyqt.svg)
+QtSvgWidgets (-&gt; prettyqt.svgwidgets)
+QtTextToSpeech (-&gt; prettyqt.texttospeech)
+QtWebChannel (-&gt; prettyqt.webchannel)
+QtWebEngineCore (-&gt; prettyqt.webenginecore)
+QtWebEngineWidgets (-&gt; prettyqt.webenginewidgets)
+QtWidgets (-&gt; prettyqt.widgets)</p>
+<p>All subclassed Qt classes in mentioned modules are called exactly like the
+Qt-Counterpart, except that the leading Q is missing.</p>
+<h3 id="examples">Examples:</h3>
+<p>QtWidgets.QWidget -&gt; widgets.Widget
+QtCore.QObject -&gt; core.Object</p>
+<p>Apart from the mentioned mixin tree and the corresponding classes, this library also
+contains a lot of custom widgets, delegates, eventfilters, validators,
+syntaxhighlighters, layouts, models, proxy models and much more.</p>
+<p>Converting to PrettyQt should be very straightforward since the original behaviour of the
+Qt classes didnt change for the largest parts and all methods from base Qt modules
+are still available. (There might be a few constructors with slightly different behaviour though.)</p>
+<p>Interested? Take a look at the documentation! (even though it totally sucks in its current state.)</p>
 <h2 id="where-to-get-it">Where to get it</h2>
 <p>The source code is currently hosted on GitHub at:
 https://github.com/phil65/PrettyQt</p>

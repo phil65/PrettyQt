@@ -2314,7 +2314,11 @@
 <span class="normal"><a href="#__codelineno-0-285">285</a></span>
 <span class="normal"><a href="#__codelineno-0-286">286</a></span>
 <span class="normal"><a href="#__codelineno-0-287">287</a></span>
-<span class="normal"><a href="#__codelineno-0-288">288</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a><span class="k">class</span> <span class="nc">PygmentsHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
+<span class="normal"><a href="#__codelineno-0-288">288</a></span>
+<span class="normal"><a href="#__codelineno-0-289">289</a></span>
+<span class="normal"><a href="#__codelineno-0-290">290</a></span>
+<span class="normal"><a href="#__codelineno-0-291">291</a></span>
+<span class="normal"><a href="#__codelineno-0-292">292</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-184"><a id="__codelineno-0-184" name="__codelineno-0-184"></a><span class="k">class</span> <span class="nc">PygmentsHighlighter</span><span class="p">(</span><span class="n">gui</span><span class="o">.</span><span class="n">SyntaxHighlighter</span><span class="p">):</span>
 </span><span id="__span-0-185"><a id="__codelineno-0-185" name="__codelineno-0-185"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Syntax highlighter that uses Pygments for parsing.&quot;&quot;&quot;</span>
 </span><span id="__span-0-186"><a id="__codelineno-0-186" name="__codelineno-0-186"></a>
 </span><span id="__span-0-187"><a id="__codelineno-0-187" name="__codelineno-0-187"></a>    <span class="c1"># ---------------------------------------------------------------------------</span>
@@ -2325,7 +2329,7 @@
 </span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a>        <span class="bp">self</span><span class="p">,</span>
 </span><span id="__span-0-193"><a id="__codelineno-0-193" name="__codelineno-0-193"></a>        <span class="n">parent</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span><span class="p">,</span>
 </span><span id="__span-0-194"><a id="__codelineno-0-194" name="__codelineno-0-194"></a>        <span class="n">lexer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>        <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">styles</span><span class="o">.</span><span class="n">Style</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>        <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-196"><a id="__codelineno-0-196" name="__codelineno-0-196"></a>    <span class="p">):</span>
 </span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 </span><span id="__span-0-198"><a id="__codelineno-0-198" name="__codelineno-0-198"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_document</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="p">()</span>
@@ -2367,58 +2371,62 @@
 </span><span id="__span-0-234"><a id="__codelineno-0-234" name="__codelineno-0-234"></a>    <span class="c1"># &quot;PygmentsHighlighter&quot; interface</span>
 </span><span id="__span-0-235"><a id="__codelineno-0-235" name="__codelineno-0-235"></a>    <span class="c1"># ---------------------------------------------------------------------------</span>
 </span><span id="__span-0-236"><a id="__codelineno-0-236" name="__codelineno-0-236"></a>
-</span><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a>    <span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">styles</span><span class="o">.</span><span class="n">Style</span><span class="p">):</span>
-</span><span id="__span-0-238"><a id="__codelineno-0-238" name="__codelineno-0-238"></a>        <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-239"><a id="__codelineno-0-239" name="__codelineno-0-239"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">adjust_style_to_palette</span><span class="p">()</span>
-</span><span id="__span-0-240"><a id="__codelineno-0-240" name="__codelineno-0-240"></a>            <span class="k">return</span>
-</span><span id="__span-0-241"><a id="__codelineno-0-241" name="__codelineno-0-241"></a>        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="__span-0-242"><a id="__codelineno-0-242" name="__codelineno-0-242"></a>            <span class="n">style</span> <span class="o">=</span> <span class="n">styles</span><span class="o">.</span><span class="n">get_style_by_name</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
-</span><span id="__span-0-243"><a id="__codelineno-0-243" name="__codelineno-0-243"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
-</span><span id="__span-0-244"><a id="__codelineno-0-244" name="__codelineno-0-244"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
-</span><span id="__span-0-245"><a id="__codelineno-0-245" name="__codelineno-0-245"></a>
-</span><span id="__span-0-246"><a id="__codelineno-0-246" name="__codelineno-0-246"></a>    <span class="k">def</span> <span class="nf">adjust_style_to_palette</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-247"><a id="__codelineno-0-247" name="__codelineno-0-247"></a>        <span class="n">pal</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">GuiApplication</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span>
-</span><span id="__span-0-248"><a id="__codelineno-0-248" name="__codelineno-0-248"></a>        <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;monokai&quot;</span> <span class="k">if</span> <span class="n">pal</span><span class="o">.</span><span class="n">is_dark</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;default&quot;</span>
-</span><span id="__span-0-249"><a id="__codelineno-0-249" name="__codelineno-0-249"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
-</span><span id="__span-0-250"><a id="__codelineno-0-250" name="__codelineno-0-250"></a>
-</span><span id="__span-0-251"><a id="__codelineno-0-251" name="__codelineno-0-251"></a>    <span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="__span-0-252"><a id="__codelineno-0-252" name="__codelineno-0-252"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
-</span><span id="__span-0-253"><a id="__codelineno-0-253" name="__codelineno-0-253"></a>
-</span><span id="__span-0-254"><a id="__codelineno-0-254" name="__codelineno-0-254"></a><span class="sd">        The classes in the stylesheet should correspond to those generated by:</span>
-</span><span id="__span-0-255"><a id="__codelineno-0-255" name="__codelineno-0-255"></a>
-</span><span id="__span-0-256"><a id="__codelineno-0-256" name="__codelineno-0-256"></a><span class="sd">            pygmentize -S &lt;style&gt; -f html</span>
+</span><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a>    <span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span><span class="p">):</span>
+</span><span id="__span-0-238"><a id="__codelineno-0-238" name="__codelineno-0-238"></a>        <span class="k">match</span> <span class="n">style</span><span class="p">:</span>
+</span><span id="__span-0-239"><a id="__codelineno-0-239" name="__codelineno-0-239"></a>            <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-240"><a id="__codelineno-0-240" name="__codelineno-0-240"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">adjust_style_to_palette</span><span class="p">()</span>
+</span><span id="__span-0-241"><a id="__codelineno-0-241" name="__codelineno-0-241"></a>                <span class="k">return</span>
+</span><span id="__span-0-242"><a id="__codelineno-0-242" name="__codelineno-0-242"></a>            <span class="k">case</span> <span class="nb">str</span><span class="p">():</span>
+</span><span id="__span-0-243"><a id="__codelineno-0-243" name="__codelineno-0-243"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">styles</span><span class="o">.</span><span class="n">get_style_by_name</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</span><span id="__span-0-244"><a id="__codelineno-0-244" name="__codelineno-0-244"></a>            <span class="k">case</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span><span class="p">:</span>
+</span><span id="__span-0-245"><a id="__codelineno-0-245" name="__codelineno-0-245"></a>                <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
+</span><span id="__span-0-246"><a id="__codelineno-0-246" name="__codelineno-0-246"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+</span><span id="__span-0-247"><a id="__codelineno-0-247" name="__codelineno-0-247"></a>                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</span><span id="__span-0-248"><a id="__codelineno-0-248" name="__codelineno-0-248"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
+</span><span id="__span-0-249"><a id="__codelineno-0-249" name="__codelineno-0-249"></a>
+</span><span id="__span-0-250"><a id="__codelineno-0-250" name="__codelineno-0-250"></a>    <span class="k">def</span> <span class="nf">adjust_style_to_palette</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-251"><a id="__codelineno-0-251" name="__codelineno-0-251"></a>        <span class="n">pal</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">GuiApplication</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span>
+</span><span id="__span-0-252"><a id="__codelineno-0-252" name="__codelineno-0-252"></a>        <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;monokai&quot;</span> <span class="k">if</span> <span class="n">pal</span><span class="o">.</span><span class="n">is_dark</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;default&quot;</span>
+</span><span id="__span-0-253"><a id="__codelineno-0-253" name="__codelineno-0-253"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</span><span id="__span-0-254"><a id="__codelineno-0-254" name="__codelineno-0-254"></a>
+</span><span id="__span-0-255"><a id="__codelineno-0-255" name="__codelineno-0-255"></a>    <span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-0-256"><a id="__codelineno-0-256" name="__codelineno-0-256"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
 </span><span id="__span-0-257"><a id="__codelineno-0-257" name="__codelineno-0-257"></a>
-</span><span id="__span-0-258"><a id="__codelineno-0-258" name="__codelineno-0-258"></a><span class="sd">        Note that &quot;set_style&quot; and &quot;set_style_sheet&quot; completely override each</span>
-</span><span id="__span-0-259"><a id="__codelineno-0-259" name="__codelineno-0-259"></a><span class="sd">        other, i.e. they cannot be used in conjunction.</span>
-</span><span id="__span-0-260"><a id="__codelineno-0-260" name="__codelineno-0-260"></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="__span-0-261"><a id="__codelineno-0-261" name="__codelineno-0-261"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="o">.</span><span class="n">setDefaultStyleSheet</span><span class="p">(</span><span class="n">stylesheet</span><span class="p">)</span>
-</span><span id="__span-0-262"><a id="__codelineno-0-262" name="__codelineno-0-262"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-0-263"><a id="__codelineno-0-263" name="__codelineno-0-263"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
-</span><span id="__span-0-264"><a id="__codelineno-0-264" name="__codelineno-0-264"></a>
-</span><span id="__span-0-265"><a id="__codelineno-0-265" name="__codelineno-0-265"></a>    <span class="c1"># ---------------------------------------------------------------------------</span>
-</span><span id="__span-0-266"><a id="__codelineno-0-266" name="__codelineno-0-266"></a>    <span class="c1"># Protected interface</span>
-</span><span id="__span-0-267"><a id="__codelineno-0-267" name="__codelineno-0-267"></a>    <span class="c1"># ---------------------------------------------------------------------------</span>
+</span><span id="__span-0-258"><a id="__codelineno-0-258" name="__codelineno-0-258"></a><span class="sd">        The classes in the stylesheet should correspond to those generated by:</span>
+</span><span id="__span-0-259"><a id="__codelineno-0-259" name="__codelineno-0-259"></a>
+</span><span id="__span-0-260"><a id="__codelineno-0-260" name="__codelineno-0-260"></a><span class="sd">            pygmentize -S &lt;style&gt; -f html</span>
+</span><span id="__span-0-261"><a id="__codelineno-0-261" name="__codelineno-0-261"></a>
+</span><span id="__span-0-262"><a id="__codelineno-0-262" name="__codelineno-0-262"></a><span class="sd">        Note that &quot;set_style&quot; and &quot;set_style_sheet&quot; completely override each</span>
+</span><span id="__span-0-263"><a id="__codelineno-0-263" name="__codelineno-0-263"></a><span class="sd">        other, i.e. they cannot be used in conjunction.</span>
+</span><span id="__span-0-264"><a id="__codelineno-0-264" name="__codelineno-0-264"></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="__span-0-265"><a id="__codelineno-0-265" name="__codelineno-0-265"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="o">.</span><span class="n">setDefaultStyleSheet</span><span class="p">(</span><span class="n">stylesheet</span><span class="p">)</span>
+</span><span id="__span-0-266"><a id="__codelineno-0-266" name="__codelineno-0-266"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-267"><a id="__codelineno-0-267" name="__codelineno-0-267"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
 </span><span id="__span-0-268"><a id="__codelineno-0-268" name="__codelineno-0-268"></a>
-</span><span id="__span-0-269"><a id="__codelineno-0-269" name="__codelineno-0-269"></a>    <span class="k">def</span> <span class="nf">_clear_caches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-270"><a id="__codelineno-0-270" name="__codelineno-0-270"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear caches for brushes and formats.&quot;&quot;&quot;</span>
-</span><span id="__span-0-271"><a id="__codelineno-0-271" name="__codelineno-0-271"></a>        <span class="n">_get_brush</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
-</span><span id="__span-0-272"><a id="__codelineno-0-272" name="__codelineno-0-272"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_get_format</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
-</span><span id="__span-0-273"><a id="__codelineno-0-273" name="__codelineno-0-273"></a>
-</span><span id="__span-0-274"><a id="__codelineno-0-274" name="__codelineno-0-274"></a>    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>  <span class="c1"># noqa: B019</span>
-</span><span id="__span-0-275"><a id="__codelineno-0-275" name="__codelineno-0-275"></a>    <span class="k">def</span> <span class="nf">_get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
-</span><span id="__span-0-276"><a id="__codelineno-0-276" name="__codelineno-0-276"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a QTextCharFormat for token or None.&quot;&quot;&quot;</span>
-</span><span id="__span-0-277"><a id="__codelineno-0-277" name="__codelineno-0-277"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-278"><a id="__codelineno-0-278" name="__codelineno-0-278"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_format_from_document</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="p">)</span>
-</span><span id="__span-0-279"><a id="__codelineno-0-279" name="__codelineno-0-279"></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="__span-0-280"><a id="__codelineno-0-280" name="__codelineno-0-280"></a>            <span class="k">return</span> <span class="n">_get_format_from_style</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span><span class="p">)</span>
-</span><span id="__span-0-281"><a id="__codelineno-0-281" name="__codelineno-0-281"></a>
-</span><span id="__span-0-282"><a id="__codelineno-0-282" name="__codelineno-0-282"></a>    <span class="k">def</span> <span class="nf">_get_format_from_document</span><span class="p">(</span>
-</span><span id="__span-0-283"><a id="__codelineno-0-283" name="__codelineno-0-283"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span>
-</span><span id="__span-0-284"><a id="__codelineno-0-284" name="__codelineno-0-284"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
-</span><span id="__span-0-285"><a id="__codelineno-0-285" name="__codelineno-0-285"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token from document.&quot;&quot;&quot;</span>
-</span><span id="__span-0-286"><a id="__codelineno-0-286" name="__codelineno-0-286"></a>        <span class="n">code</span><span class="p">,</span> <span class="n">html</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_formatter</span><span class="o">.</span><span class="n">_format_lines</span><span class="p">([(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;dummy&quot;</span><span class="p">)]))</span>
-</span><span id="__span-0-287"><a id="__codelineno-0-287" name="__codelineno-0-287"></a>        <span class="n">document</span><span class="o">.</span><span class="n">setHtml</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
-</span><span id="__span-0-288"><a id="__codelineno-0-288" name="__codelineno-0-288"></a>        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="p">(</span><span class="n">document</span><span class="p">)</span><span class="o">.</span><span class="n">charFormat</span><span class="p">()</span>
+</span><span id="__span-0-269"><a id="__codelineno-0-269" name="__codelineno-0-269"></a>    <span class="c1"># ---------------------------------------------------------------------------</span>
+</span><span id="__span-0-270"><a id="__codelineno-0-270" name="__codelineno-0-270"></a>    <span class="c1"># Protected interface</span>
+</span><span id="__span-0-271"><a id="__codelineno-0-271" name="__codelineno-0-271"></a>    <span class="c1"># ---------------------------------------------------------------------------</span>
+</span><span id="__span-0-272"><a id="__codelineno-0-272" name="__codelineno-0-272"></a>
+</span><span id="__span-0-273"><a id="__codelineno-0-273" name="__codelineno-0-273"></a>    <span class="k">def</span> <span class="nf">_clear_caches</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-274"><a id="__codelineno-0-274" name="__codelineno-0-274"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear caches for brushes and formats.&quot;&quot;&quot;</span>
+</span><span id="__span-0-275"><a id="__codelineno-0-275" name="__codelineno-0-275"></a>        <span class="n">_get_brush</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+</span><span id="__span-0-276"><a id="__codelineno-0-276" name="__codelineno-0-276"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">_get_format</span><span class="o">.</span><span class="n">cache_clear</span><span class="p">()</span>
+</span><span id="__span-0-277"><a id="__codelineno-0-277" name="__codelineno-0-277"></a>
+</span><span id="__span-0-278"><a id="__codelineno-0-278" name="__codelineno-0-278"></a>    <span class="nd">@functools</span><span class="o">.</span><span class="n">cache</span>  <span class="c1"># noqa: B019</span>
+</span><span id="__span-0-279"><a id="__codelineno-0-279" name="__codelineno-0-279"></a>    <span class="k">def</span> <span class="nf">_get_format</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
+</span><span id="__span-0-280"><a id="__codelineno-0-280" name="__codelineno-0-280"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns a QTextCharFormat for token or None.&quot;&quot;&quot;</span>
+</span><span id="__span-0-281"><a id="__codelineno-0-281" name="__codelineno-0-281"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-282"><a id="__codelineno-0-282" name="__codelineno-0-282"></a>            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_format_from_document</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="p">)</span>
+</span><span id="__span-0-283"><a id="__codelineno-0-283" name="__codelineno-0-283"></a>        <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-0-284"><a id="__codelineno-0-284" name="__codelineno-0-284"></a>            <span class="k">return</span> <span class="n">_get_format_from_style</span><span class="p">(</span><span class="n">token</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_style</span><span class="p">)</span>
+</span><span id="__span-0-285"><a id="__codelineno-0-285" name="__codelineno-0-285"></a>
+</span><span id="__span-0-286"><a id="__codelineno-0-286" name="__codelineno-0-286"></a>    <span class="k">def</span> <span class="nf">_get_format_from_document</span><span class="p">(</span>
+</span><span id="__span-0-287"><a id="__codelineno-0-287" name="__codelineno-0-287"></a>        <span class="bp">self</span><span class="p">,</span> <span class="n">token</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">document</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span>
+</span><span id="__span-0-288"><a id="__codelineno-0-288" name="__codelineno-0-288"></a>    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextCharFormat</span><span class="p">:</span>
+</span><span id="__span-0-289"><a id="__codelineno-0-289" name="__codelineno-0-289"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Return a QTextCharFormat for token from document.&quot;&quot;&quot;</span>
+</span><span id="__span-0-290"><a id="__codelineno-0-290" name="__codelineno-0-290"></a>        <span class="n">_</span><span class="p">,</span> <span class="n">html</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_formatter</span><span class="o">.</span><span class="n">_format_lines</span><span class="p">([(</span><span class="n">token</span><span class="p">,</span> <span class="s2">&quot;dummy&quot;</span><span class="p">)]))</span>
+</span><span id="__span-0-291"><a id="__codelineno-0-291" name="__codelineno-0-291"></a>        <span class="n">document</span><span class="o">.</span><span class="n">setHtml</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+</span><span id="__span-0-292"><a id="__codelineno-0-292" name="__codelineno-0-292"></a>        <span class="k">return</span> <span class="n">gui</span><span class="o">.</span><span class="n">TextCursor</span><span class="p">(</span><span class="n">document</span><span class="p">)</span><span class="o">.</span><span class="n">charFormat</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
         </details>
 
@@ -2439,7 +2447,7 @@
 
 
 <h3 id="prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span><span class="p">,</span> <span class="n">lexer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">styles</span><span class="o">.</span><span class="n">Style</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span><span class="p">,</span> <span class="n">lexer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span></code>
 
 </h3>
 
@@ -2469,7 +2477,7 @@
 </span><span id="__span-0-192"><a id="__codelineno-0-192" name="__codelineno-0-192"></a>    <span class="bp">self</span><span class="p">,</span>
 </span><span id="__span-0-193"><a id="__codelineno-0-193" name="__codelineno-0-193"></a>    <span class="n">parent</span><span class="p">:</span> <span class="n">QtGui</span><span class="o">.</span><span class="n">QTextDocument</span><span class="p">,</span>
 </span><span id="__span-0-194"><a id="__codelineno-0-194" name="__codelineno-0-194"></a>    <span class="n">lexer</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
-</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>    <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">styles</span><span class="o">.</span><span class="n">Style</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="__span-0-195"><a id="__codelineno-0-195" name="__codelineno-0-195"></a>    <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 </span><span id="__span-0-196"><a id="__codelineno-0-196" name="__codelineno-0-196"></a><span class="p">):</span>
 </span><span id="__span-0-197"><a id="__codelineno-0-197" name="__codelineno-0-197"></a>    <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">)</span>
 </span><span id="__span-0-198"><a id="__codelineno-0-198" name="__codelineno-0-198"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_document</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">document</span><span class="p">()</span>
@@ -2526,13 +2534,13 @@
 
       <details class="quote">
         <summary>Source code in <code>prettyqt\syntaxhighlighters\pygmentshighlighter.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-246">246</a></span>
-<span class="normal"><a href="#__codelineno-0-247">247</a></span>
-<span class="normal"><a href="#__codelineno-0-248">248</a></span>
-<span class="normal"><a href="#__codelineno-0-249">249</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-246"><a id="__codelineno-0-246" name="__codelineno-0-246"></a><span class="k">def</span> <span class="nf">adjust_style_to_palette</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-</span><span id="__span-0-247"><a id="__codelineno-0-247" name="__codelineno-0-247"></a>    <span class="n">pal</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">GuiApplication</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span>
-</span><span id="__span-0-248"><a id="__codelineno-0-248" name="__codelineno-0-248"></a>    <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;monokai&quot;</span> <span class="k">if</span> <span class="n">pal</span><span class="o">.</span><span class="n">is_dark</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;default&quot;</span>
-</span><span id="__span-0-249"><a id="__codelineno-0-249" name="__codelineno-0-249"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-250">250</a></span>
+<span class="normal"><a href="#__codelineno-0-251">251</a></span>
+<span class="normal"><a href="#__codelineno-0-252">252</a></span>
+<span class="normal"><a href="#__codelineno-0-253">253</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-250"><a id="__codelineno-0-250" name="__codelineno-0-250"></a><span class="k">def</span> <span class="nf">adjust_style_to_palette</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+</span><span id="__span-0-251"><a id="__codelineno-0-251" name="__codelineno-0-251"></a>    <span class="n">pal</span> <span class="o">=</span> <span class="n">gui</span><span class="o">.</span><span class="n">GuiApplication</span><span class="o">.</span><span class="n">get_palette</span><span class="p">()</span>
+</span><span id="__span-0-252"><a id="__codelineno-0-252" name="__codelineno-0-252"></a>    <span class="n">style</span> <span class="o">=</span> <span class="s2">&quot;monokai&quot;</span> <span class="k">if</span> <span class="n">pal</span><span class="o">.</span><span class="n">is_dark</span><span class="p">()</span> <span class="k">else</span> <span class="s2">&quot;default&quot;</span>
+</span><span id="__span-0-253"><a id="__codelineno-0-253" name="__codelineno-0-253"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -2603,7 +2611,7 @@
 
 
 <h3 id="prettyqt.syntaxhighlighters.pygmentshighlighter.PygmentsHighlighter.set_style" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">styles</span><span class="o">.</span><span class="n">Style</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">set_style</span><span class="p">(</span><span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span><span class="p">)</span></code>
 
 </h3>
 
@@ -2619,14 +2627,22 @@
 <span class="normal"><a href="#__codelineno-0-241">241</a></span>
 <span class="normal"><a href="#__codelineno-0-242">242</a></span>
 <span class="normal"><a href="#__codelineno-0-243">243</a></span>
-<span class="normal"><a href="#__codelineno-0-244">244</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">styles</span><span class="o">.</span><span class="n">Style</span><span class="p">):</span>
-</span><span id="__span-0-238"><a id="__codelineno-0-238" name="__codelineno-0-238"></a>    <span class="k">if</span> <span class="n">style</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="__span-0-239"><a id="__codelineno-0-239" name="__codelineno-0-239"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">adjust_style_to_palette</span><span class="p">()</span>
-</span><span id="__span-0-240"><a id="__codelineno-0-240" name="__codelineno-0-240"></a>        <span class="k">return</span>
-</span><span id="__span-0-241"><a id="__codelineno-0-241" name="__codelineno-0-241"></a>    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">style</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="__span-0-242"><a id="__codelineno-0-242" name="__codelineno-0-242"></a>        <span class="n">style</span> <span class="o">=</span> <span class="n">styles</span><span class="o">.</span><span class="n">get_style_by_name</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
-</span><span id="__span-0-243"><a id="__codelineno-0-243" name="__codelineno-0-243"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
-</span><span id="__span-0-244"><a id="__codelineno-0-244" name="__codelineno-0-244"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
+<span class="normal"><a href="#__codelineno-0-244">244</a></span>
+<span class="normal"><a href="#__codelineno-0-245">245</a></span>
+<span class="normal"><a href="#__codelineno-0-246">246</a></span>
+<span class="normal"><a href="#__codelineno-0-247">247</a></span>
+<span class="normal"><a href="#__codelineno-0-248">248</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-237"><a id="__codelineno-0-237" name="__codelineno-0-237"></a><span class="k">def</span> <span class="nf">set_style</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">style</span><span class="p">:</span> <span class="kc">None</span> <span class="o">|</span> <span class="n">StyleStr</span> <span class="o">|</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span><span class="p">):</span>
+</span><span id="__span-0-238"><a id="__codelineno-0-238" name="__codelineno-0-238"></a>    <span class="k">match</span> <span class="n">style</span><span class="p">:</span>
+</span><span id="__span-0-239"><a id="__codelineno-0-239" name="__codelineno-0-239"></a>        <span class="n">case</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="__span-0-240"><a id="__codelineno-0-240" name="__codelineno-0-240"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">adjust_style_to_palette</span><span class="p">()</span>
+</span><span id="__span-0-241"><a id="__codelineno-0-241" name="__codelineno-0-241"></a>            <span class="k">return</span>
+</span><span id="__span-0-242"><a id="__codelineno-0-242" name="__codelineno-0-242"></a>        <span class="k">case</span> <span class="nb">str</span><span class="p">():</span>
+</span><span id="__span-0-243"><a id="__codelineno-0-243" name="__codelineno-0-243"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">styles</span><span class="o">.</span><span class="n">get_style_by_name</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</span><span id="__span-0-244"><a id="__codelineno-0-244" name="__codelineno-0-244"></a>        <span class="k">case</span> <span class="n">style</span><span class="o">.</span><span class="n">Style</span><span class="p">:</span>
+</span><span id="__span-0-245"><a id="__codelineno-0-245" name="__codelineno-0-245"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="n">style</span>
+</span><span id="__span-0-246"><a id="__codelineno-0-246" name="__codelineno-0-246"></a>        <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>
+</span><span id="__span-0-247"><a id="__codelineno-0-247" name="__codelineno-0-247"></a>            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="n">style</span><span class="p">)</span>
+</span><span id="__span-0-248"><a id="__codelineno-0-248" name="__codelineno-0-248"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -2655,11 +2671,7 @@ other, i.e. they cannot be used in conjunction.</p>
 
       <details class="quote">
         <summary>Source code in <code>prettyqt\syntaxhighlighters\pygmentshighlighter.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-251">251</a></span>
-<span class="normal"><a href="#__codelineno-0-252">252</a></span>
-<span class="normal"><a href="#__codelineno-0-253">253</a></span>
-<span class="normal"><a href="#__codelineno-0-254">254</a></span>
-<span class="normal"><a href="#__codelineno-0-255">255</a></span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-255">255</a></span>
 <span class="normal"><a href="#__codelineno-0-256">256</a></span>
 <span class="normal"><a href="#__codelineno-0-257">257</a></span>
 <span class="normal"><a href="#__codelineno-0-258">258</a></span>
@@ -2667,19 +2679,23 @@ other, i.e. they cannot be used in conjunction.</p>
 <span class="normal"><a href="#__codelineno-0-260">260</a></span>
 <span class="normal"><a href="#__codelineno-0-261">261</a></span>
 <span class="normal"><a href="#__codelineno-0-262">262</a></span>
-<span class="normal"><a href="#__codelineno-0-263">263</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-251"><a id="__codelineno-0-251" name="__codelineno-0-251"></a><span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="__span-0-252"><a id="__codelineno-0-252" name="__codelineno-0-252"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
-</span><span id="__span-0-253"><a id="__codelineno-0-253" name="__codelineno-0-253"></a>
-</span><span id="__span-0-254"><a id="__codelineno-0-254" name="__codelineno-0-254"></a><span class="sd">    The classes in the stylesheet should correspond to those generated by:</span>
-</span><span id="__span-0-255"><a id="__codelineno-0-255" name="__codelineno-0-255"></a>
-</span><span id="__span-0-256"><a id="__codelineno-0-256" name="__codelineno-0-256"></a><span class="sd">        pygmentize -S &lt;style&gt; -f html</span>
+<span class="normal"><a href="#__codelineno-0-263">263</a></span>
+<span class="normal"><a href="#__codelineno-0-264">264</a></span>
+<span class="normal"><a href="#__codelineno-0-265">265</a></span>
+<span class="normal"><a href="#__codelineno-0-266">266</a></span>
+<span class="normal"><a href="#__codelineno-0-267">267</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-0-255"><a id="__codelineno-0-255" name="__codelineno-0-255"></a><span class="k">def</span> <span class="nf">set_style_sheet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stylesheet</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span id="__span-0-256"><a id="__codelineno-0-256" name="__codelineno-0-256"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Sets a CSS stylesheet.</span>
 </span><span id="__span-0-257"><a id="__codelineno-0-257" name="__codelineno-0-257"></a>
-</span><span id="__span-0-258"><a id="__codelineno-0-258" name="__codelineno-0-258"></a><span class="sd">    Note that &quot;set_style&quot; and &quot;set_style_sheet&quot; completely override each</span>
-</span><span id="__span-0-259"><a id="__codelineno-0-259" name="__codelineno-0-259"></a><span class="sd">    other, i.e. they cannot be used in conjunction.</span>
-</span><span id="__span-0-260"><a id="__codelineno-0-260" name="__codelineno-0-260"></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="__span-0-261"><a id="__codelineno-0-261" name="__codelineno-0-261"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="o">.</span><span class="n">setDefaultStyleSheet</span><span class="p">(</span><span class="n">stylesheet</span><span class="p">)</span>
-</span><span id="__span-0-262"><a id="__codelineno-0-262" name="__codelineno-0-262"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="__span-0-263"><a id="__codelineno-0-263" name="__codelineno-0-263"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
+</span><span id="__span-0-258"><a id="__codelineno-0-258" name="__codelineno-0-258"></a><span class="sd">    The classes in the stylesheet should correspond to those generated by:</span>
+</span><span id="__span-0-259"><a id="__codelineno-0-259" name="__codelineno-0-259"></a>
+</span><span id="__span-0-260"><a id="__codelineno-0-260" name="__codelineno-0-260"></a><span class="sd">        pygmentize -S &lt;style&gt; -f html</span>
+</span><span id="__span-0-261"><a id="__codelineno-0-261" name="__codelineno-0-261"></a>
+</span><span id="__span-0-262"><a id="__codelineno-0-262" name="__codelineno-0-262"></a><span class="sd">    Note that &quot;set_style&quot; and &quot;set_style_sheet&quot; completely override each</span>
+</span><span id="__span-0-263"><a id="__codelineno-0-263" name="__codelineno-0-263"></a><span class="sd">    other, i.e. they cannot be used in conjunction.</span>
+</span><span id="__span-0-264"><a id="__codelineno-0-264" name="__codelineno-0-264"></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="__span-0-265"><a id="__codelineno-0-265" name="__codelineno-0-265"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_document</span><span class="o">.</span><span class="n">setDefaultStyleSheet</span><span class="p">(</span><span class="n">stylesheet</span><span class="p">)</span>
+</span><span id="__span-0-266"><a id="__codelineno-0-266" name="__codelineno-0-266"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_style</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="__span-0-267"><a id="__codelineno-0-267" name="__codelineno-0-267"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">_clear_caches</span><span class="p">()</span>
 </span></code></pre></div></td></tr></table></div>
       </details>
   </div>
