@@ -7,21 +7,23 @@ class PreviewScrollBar(widgets.ScrollBar):
     def __init__(self, *args, parent=None, **kwargs):
         super().__init__(*args, **kwargs)
         self._scrollarea = parent
-        self._size = 150
-        self._line_margin = 152
+        self._width = 150
+        # self._line_margin = 152
         self._scale = 0.3
-        self.installEventFilter("slider_move_to_mouse_click")
+        # self.installEventFilter("slider_move_to_mouse_click")
 
     def sizeHint(self):
         expand = (
-            core.QSize(self._size, 1) if self.is_vertical() else core.QSize(1, self._size)
+            core.QSize(self._width, 1)
+            if self.is_vertical()
+            else core.QSize(1, self._width)
         )
         return super().sizeHint().expandedTo(expand)
 
     def paintEvent(self, event):
         # viewport = self._scrollarea.viewport()
         doc = self._scrollarea.document()
-        # v_scroll = self._scrollarea.v_scrollbar
+        v_scroll = self._scrollarea.v_scrollbar
         super().paintEvent(event)
         with gui.Painter(self) as painter:
             # draw background
@@ -34,11 +36,10 @@ class PreviewScrollBar(widgets.ScrollBar):
             # figure out positions
             painter.save()
             first_vis_line, last_vis_line = self._scrollarea.get_visible_line_span()
-            start_line = max(0, first_vis_line - self._line_margin)
-            end_line = min(last_vis_line + self._line_margin, doc.blockCount())
-            start_block = doc.findBlockByLineNumber(start_line)
-            end_block = doc.findBlockByLineNumber(end_line)
-
+            # start_line = max(0, first_vis_line - self._line_margin)
+            # end_line = min(last_vis_line + self._line_margin, doc.blockCount())
+            # start_block = doc.findBlockByLineNumber(start_line)
+            # end_block = doc.findBlockByLineNumber(end_line)
             opt = widgets.QStyleOptionSlider()
             opt.initFrom(self)
             opt.subControls = widgets.QStyle.SubControl.SC_None
@@ -56,27 +57,89 @@ class PreviewScrollBar(widgets.ScrollBar):
                 widgets.QStyle.SubControl.SC_ScrollBarGroove,
                 self,
             )
-            handle_rect_height = (
-                (last_vis_line - first_vis_line) / doc.blockCount() * gr.height()
-            )
-            handle_rect_y_pos = (
-                first_vis_line / doc.blockCount() * gr.height()
-            ) + gr.top()
+            textarea_height = 0
+            b = doc.begin()
+            while b != doc.end():
+                r = self._scrollarea.blockBoundingRect(b)
+                textarea_height += r.height()
+                b = b.next()
+            minimap_height = textarea_height * self._scale
+            minimap_visible_height = min(minimap_height, v_scroll.height())
+            # minimap_fully_visible = minimap_visible_height == minimap_height
+            height_ratio = minimap_height / v_scroll.height()
+            map_scroll_distance = minimap_height - minimap_visible_height
+            scroll_per_value = map_scroll_distance / v_scroll.maximum()
+            # doc_x_margin = 1
+            # doc_height = min(gr.height(), textarea_height)
+            # yoffset = 1  # top instead of center-aligned (gr.height() - doc_height) / 2
+            # doc_rect = core.QRect(
+            #     core.QPoint(gr.left() + doc_x_margin, yoffset + gr.top()),
+            #     QSize(gr.width() - doc_x_margin, doc_height),
+            # )
+            # self.map_grove_rect = doc_rect
+
+            # max_ = max(self.maximum() + 1, 1)
+            # visible_start = (
+            #     self.value() * doc_height / (max_ + self.pageStep())
+            #     + doc_rect.top()
+            #     + 0.5
+            # )
+            # visible_end = (self.value() + self.pageStep()) * doc_height / (
+            #     max_ + self.pageStep()
+            # ) + doc_rect.top()
+            # visible_rect = core.QRect(doc_rect)
+            # visible_rect.moveTop(visible_start)
+            # visible_rect.setHeight(visible_end - visible_start)
+            # #  adjust the rectangles
+            # slider_rect = self.style().subControlRect(QStyle.CC_ScrollBar, opt,
+            # QStyle.SC_ScrollBarSlider, self)
+            # slider_rect.setX(doc_x_margin)
+            # slider_rect.setWidth(self.width() - doc_x_margin * 2)
+
+            # if ((doc_height + 2 * doc_x_margin >= gr.height()) and
+            # (slider_rect.height() > visible_rect.height() + 2))
+            #     visible_rect.adjust(2, 0, -3, 0)
+            #  else:
+            #     visible_rect.adjust(1, 0, -1, 2)
+            #     slider_rect.setTop(visible_rect.top() - 1)
+            #     slider_rect.setBottom(visible_rect.bottom() + 1)
+
             painter.scale(self._scale, self._scale)
-            offset = gr.top() + 30
+            offset = -(
+                v_scroll.value() * scroll_per_value * (1 / self._scale)
+            )  # height_ratio * (1/self._scale))
             # scale = self.height() / self._scrollarea.get_pixel_height()
-            while start_block != end_block:
-                r = self._scrollarea.blockBoundingRect(start_block)
-                if start_block.isVisible():
-                    layout = start_block.layout()
+            b = doc.begin()
+            while b != doc.end():
+                r = self._scrollarea.blockBoundingRect(b)
+                if b.isVisible():
+                    layout = b.layout()
                     layout.draw(painter, core.QPointF(0, offset))
                 offset += r.height()
-                start_block = start_block.next()
+                b = b.next()
             painter.restore()
             # pos = v_scroll.value() / v_scroll.maximum()
             painter.setBrush(gui.QColor(120, 120, 120, 120))
+            # slider_rect = self.style().subControlRect(
+            #     widgets.QStyle.ComplexControl.CC_ScrollBar,
+            #     opt,
+            #     widgets.QStyle.SubControl.SC_ScrollBarSlider,
+            #     self,
+            # )
+            handle_rect_height = max(
+                (last_vis_line - first_vis_line)
+                / doc.blockCount()
+                * gr.height()
+                * height_ratio,
+                100,
+            )
+            handle_rect_y_pos = first_vis_line / doc.blockCount() * gr.height()
+            handle_rect_y_pos *= v_scroll.height() / (
+                v_scroll.height() + handle_rect_height
+            )
+
             painter.drawRoundedRect(
-                0, int(handle_rect_y_pos), self._size, int(handle_rect_height), 5, 5
+                0, int(handle_rect_y_pos), self._width, int(handle_rect_height), 5, 5
             )
 
     def minimap_y_to_std_y(self, y: int) -> int:
