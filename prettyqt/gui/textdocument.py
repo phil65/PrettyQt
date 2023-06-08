@@ -241,20 +241,25 @@ class TextDocumentMixin(core.ObjectMixin):
         options = self.get_default_text_option()
         flag = QtGui.QTextOption.Flag.ShowTabsAndSpaces
         if show:
-            options.setFlags(options.flags() | flag)  # type: ignore
+            options.setFlags(options.flags() | flag)
         else:
-            options.setFlags(options.flags() & ~flag)  # type: ignore
+            options.setFlags(options.flags() & ~flag)
         self.setDefaultTextOption(options)
 
-    def get_pixel_height(self) -> int:
-        layout = self.documentLayout()
-        h = 0
-        b = self.begin()
-        while b != self.end():
-            h += layout.blockBoundingRect(b).height()
-            b = b.next()
-        h += self.documentMargin()
-        return h
+    def get_pixel_height(self, exact: bool = True) -> int:
+        if exact:  # sourcery skip: extract-method
+            layout = self.documentLayout()
+            h = 0
+            b = self.begin()
+            while b != self.end():
+                h += layout.blockBoundingRect(b).height()
+                b = b.next()
+            h += self.documentMargin()
+            return h
+        else:
+            line_count = self.document().blockCount()
+            font_metrics = gui.FontMetrics(self.defaultFont())
+            return (max(line_count, 1) * font_metrics.height()) + self.documentMargin()
 
 
 class TextDocument(TextDocumentMixin, QtGui.QTextDocument):
