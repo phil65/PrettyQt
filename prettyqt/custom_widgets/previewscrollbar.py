@@ -26,6 +26,8 @@ class PreviewScrollBar(widgets.ScrollBar):
         v_scroll = self._scrollarea.v_scrollbar
         super().paintEvent(event)
         with gui.Painter(self) as painter:
+            painter.setRenderHint(painter.RenderHint.TextAntialiasing, True)
+
             # draw background
             painter.save()
             bg_color = gui.Palette().get_color("window")
@@ -110,10 +112,13 @@ class PreviewScrollBar(widgets.ScrollBar):
             )  # height_ratio * (1/self._scale))
             # scale = self.height() / self._scrollarea.get_pixel_height()
             b = doc.begin()
+            top = v_scroll.height() * (1 / self._scale)
+            count = 0
             while b != doc.end():
                 r = self._scrollarea.blockBoundingRect(b)
-                if b.isVisible():
+                if b.isVisible() and top >= offset >= 0:
                     layout = b.layout()
+                    count += 1
                     layout.draw(painter, core.QPointF(0, offset))
                 offset += r.height()
                 b = b.next()
@@ -126,13 +131,13 @@ class PreviewScrollBar(widgets.ScrollBar):
             #     widgets.QStyle.SubControl.SC_ScrollBarSlider,
             #     self,
             # )
-            handle_rect_height = max(
+            handle_rect_height = (
                 (last_vis_line - first_vis_line)
                 / doc.blockCount()
                 * gr.height()
-                * height_ratio,
-                100,
+                * height_ratio
             )
+
             handle_rect_y_pos = first_vis_line / doc.blockCount() * gr.height()
             handle_rect_y_pos *= v_scroll.height() / (
                 v_scroll.height() + handle_rect_height
@@ -167,6 +172,7 @@ class PreviewScrollBar(widgets.ScrollBar):
 
 if __name__ == "__main__":
     app = widgets.app()
+    app.set_style("fusion")
     widget = widgets.PlainTextEdit("\n".join(f"abc{i}" for i in range(1000)))
     widget.set_syntaxhighlighter("python")
     scrollbar = PreviewScrollBar("vertical", parent=widget)
