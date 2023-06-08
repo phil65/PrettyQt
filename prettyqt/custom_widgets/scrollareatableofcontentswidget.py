@@ -53,6 +53,7 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
         children = item.obj.findChildren(self._Class, None, flag)
+        children = [i for i in children if i.windowTitle()]
         return [treeitem.TreeItem(obj=i) for i in children]
 
     def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
@@ -63,7 +64,9 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
         if item == self._root_item:
             return True
         flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        return bool(item.obj.findChildren(self._Class, None, flag))
+        children = item.obj.findChildren(self._Class, None, flag)
+        children = [i for i in children if i.windowTitle()]
+        return bool(children)
 
 
 class ScrollAreaTableOfContentsWidget(widgets.TreeView):
@@ -95,7 +98,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self._scroll_mode = "single"
         self._expand_mode = "always"
         self._last_visible = None
-        self.scrollarea = None
+        self.scrollarea = scrollarea
         super().__init__(scrollarea, **kwargs)
         self._orientation = orientation
         self.setFixedWidth(200)
@@ -141,8 +144,8 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         scrollbar = area.v_scrollbar if is_vertical else area.h_scrollbar
         scrollbar.valueChanged.disconnect(self._on_scroll)
         widget = self.model().data(new, role=constants.USER_ROLE)
-        self.scrollarea.scroll_to_bottom()
-        self.scrollarea.ensureWidgetVisible(widget, 10, 10)
+        area.scroll_to_bottom()
+        area.ensureWidgetVisible(widget, 10, 10)
         scrollbar.valueChanged.connect(self._on_scroll)
 
     def _on_selection_change(self, new, old):
