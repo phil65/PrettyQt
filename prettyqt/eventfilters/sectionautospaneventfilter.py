@@ -16,13 +16,19 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
         self._last_start = None
         self._last_end = None
         self.orientation = orientation
-        parent.h_scrollbar.valueChanged.connect(self._update_spans)
-        parent.model_changed.connect(self._on_model_change)
-        sel_model = parent.selectionModel()
-        if not sel_model:
-            return
+        if orientation == constants.HORIZONTAL:
+            parent.h_scrollbar.valueChanged.connect(self._update_spans)
+        else:
+            parent.v_scrollbar.valueChanged.connect(self._update_spans)
+        parent.model().headerDataChanged.connect(self._on_force_update)
+        parent.model_changed.connect(self._on_force_update)
+        parent.installEventFilter(self)
+        self._update_spans()
+        # sel_model = parent.selectionModel()
+        # if not sel_model:
+        #     return
 
-    def _on_model_change(self):
+    def _on_force_update(self):
         self._update_spans(True)
 
     def eventFilter(self, obj, event: core.Event) -> bool:
@@ -33,14 +39,15 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
         return super().eventFilter(obj, event)
 
     def _update_spans(self, force: bool = False):
-        cols = self._widget.get_visible_section_span("horizontal")
-        rows = self._widget.get_visible_section_span("vertical")
+        cols = self._widget.get_visible_section_span("horizontal", margin=1)
+        rows = self._widget.get_visible_section_span("vertical", margin=1)
         start = (rows[0], cols[0])
         end = (rows[1], cols[1])
         if start == self._last_start and end == self._last_end and not force:
             return
         self._last_start = start
         self._last_end = end
+        self._widget.clearSpans()
         self._widget.auto_span(orientation=self.orientation, start=start, end=end)
 
 
@@ -52,6 +59,5 @@ if __name__ == "__main__":
     widget.set_delegate("variant")
     with app.debug_mode():
         test = SectionAutoSpanEventFilter(widget)
-        widget.installEventFilter(test)
         widget.show()
         app.main_loop()

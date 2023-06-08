@@ -126,7 +126,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         if count == 0:
             return (-1, -1)
         start = max(0, start - margin)
-        end = count if end == -1 else min(end + margin, count) + 1
+        end = count if end == -1 else min(end + margin, count)
         return (start, end)
 
     def resizeColumnsToContents(self, max_columns: int | None = 500):
