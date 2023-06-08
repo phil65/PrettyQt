@@ -14,7 +14,6 @@ from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
 from .jsonmodel import JsonModel
 from .mappingmodel import MappingModel
-from .widgettableofcontentsmodel import WidgetTableOfContentsModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuetransformationproxymodel import ValueTransformationProxyModel
