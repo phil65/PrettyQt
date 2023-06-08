@@ -1,12 +1,21 @@
 from __future__ import annotations
 
 from collections.abc import Callable, Iterator
+import re
 from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
+MAP = bidict(
+    {
+        re.IGNORECASE: QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
+        re.MULTILINE: QtCore.QRegularExpression.PatternOption.MultilineOption,
+        re.DOTALL: QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption,
+        re.VERBOSE: QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
+    }
+)
 
 mod = QtCore.QRegularExpression
 
@@ -42,12 +51,19 @@ class RegularExpression(QtCore.QRegularExpression):
         pattern: str | QtCore.QRegularExpression = "",
         flags: QtCore.QRegularExpression.PatternOption = PATTERN_OPTIONS["none"],
     ):
-        if isinstance(pattern, QtCore.QRegularExpression):
-            super().__init__(pattern)
-        else:
-            if isinstance(flags, int):
-                flags = core.RegularExpression.PatternOption(flags)  # type: ignore
-            super().__init__(pattern, flags)  # type: ignore
+        match pattern:
+            case QtCore.QRegularExpression():
+                super().__init__(pattern)
+            case re.Pattern():
+                qflag = self.PatternOption(0)
+                for flag in re.RegexFlag(pattern.flags):
+                    if flag in MAP:
+                        qflag |= MAP[flag]
+                super().__init__(pattern.pattern, qflag)
+            case _:
+                if isinstance(flags, int):
+                    flags = core.RegularExpression.PatternOption(flags)  # type: ignore
+                super().__init__(pattern, flags)  # type: ignore
 
     def __repr__(self):
         return get_repr(self, self.pattern())
@@ -185,5 +201,5 @@ class RegularExpression(QtCore.QRegularExpression):
 
 
 if __name__ == "__main__":
-    reg = RegularExpression()
-    reg.setPattern("-{1,2}")
+    pattern = re.compile("test", flags=re.MULTILINE)
+    reg = RegularExpression(pattern)
