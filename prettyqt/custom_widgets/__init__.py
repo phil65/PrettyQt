@@ -7,6 +7,7 @@ from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .collapsibleframe import CollapsibleFrame
 from .expandableline import ExpandableLine
+from .clickablelabel import ClickableLabel
 from .orientedtableview import OrientedTableView
 from .hierarchicalheaderview import HierarchicalHeaderView
 from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit
@@ -49,6 +50,7 @@ from .codeeditor import CodeEditor
 from .roundprogressbar import RoundProgressBar
 from .subsequencecompleter import SubsequenceCompleter
 from .filetree import FileTree
+from .scrollareatableofcontentswidget import ScrollAreaTableOfContentsWidget
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
@@ -67,6 +69,7 @@ __all__ = [
     "CollapsibleFrame",
     "CompletionWidget",
     "ExpandableLine",
+    "ClickableLabel",
     "OrientedTableView",
     "HierarchicalHeaderView",
     "KeyCombinationEdit",
@@ -114,4 +117,5 @@ __all__ = [
     "StandardIconsWidget",
     "SubsequenceCompleter",
     "FileTree",
+    "ScrollAreaTableOfContentsWidget",
 ]
