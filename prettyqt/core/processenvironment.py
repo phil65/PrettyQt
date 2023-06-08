@@ -1,13 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Mapping
+from collections.abc import Iterator, MutableMapping
 
 from typing_extensions import Self
 
 from prettyqt.qt import QtCore
+from prettyqt.utils import datatypes
 
 
-class ProcessEnvironment(QtCore.QProcessEnvironment):
+class ProcessEnvironment(
+    QtCore.QProcessEnvironment, MutableMapping, metaclass=datatypes.QABCMeta
+):
     def __bool__(self):
         return not self.isEmpty()
 
@@ -25,28 +28,18 @@ class ProcessEnvironment(QtCore.QProcessEnvironment):
     def __setitem__(self, index: str, value: str):
         return self.insert(index, value)
 
-    def __iter__(self) -> Iterator[tuple[str, str]]:
-        return iter((k, self.value(k)) for k in self)
+    def __iter__(self) -> Iterator[str]:
+        return iter(self.keys())
 
-    def update(self, other: Mapping[str, str]):
-        for k, v in other.items():
-            self.insert(k, v)
-
-    def items(self) -> list[tuple[str, str]]:
-        return list(self)
+    def __len__(self):
+        return len(self.keys())
 
     @classmethod
     def get_system_environment(cls) -> Self:
         return cls(cls.systemEnvironment())
 
-    @classmethod
-    def from_dict(cls, dictionary: Mapping[str, str]) -> Self:
-        env = cls()
-        for k, v in dictionary.items():
-            env.insert(k, v)
-        return env
-
 
 if __name__ == "__main__":
     env = ProcessEnvironment.get_system_environment()
-    print(env.items())
+    env.update(dict(a="b"))
+    print(list(env.items()))
