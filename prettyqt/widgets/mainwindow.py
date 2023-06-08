@@ -42,7 +42,7 @@ class PopupMenuAction(gui.Action):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.triggered.connect(self._show_menu)
-        self._mainwindow = self.parent()
+        self._mainwindow: MainWindow = self.parent()  # type: ignore
 
     def _show_menu(self):
         menu = self._mainwindow.createPopupMenu()
@@ -136,14 +136,14 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
                 self.centralWidget().layout().add(widget, **kwargs)
 
     def get_corner(self, corner: constants.CornerStr) -> constants.DockWidgetAreaStr:
-        corner = constants.CORNER[corner]
-        area = self.corner(corner)
+        corner_flag = constants.CORNER[corner]
+        area = self.corner(corner_flag)
         return constants.DOCK_WIDGET_AREAS.inverse[area]
 
     def set_corner(self, corner: constants.CornerStr, area: constants.DockWidgetAreaStr):
-        corner = constants.CORNER[corner]
-        area = constants.DOCK_WIDGET_AREAS[area]
-        self.setCorner(corner, area)
+        corner_flag = constants.CORNER[corner]
+        area_flag = constants.DOCK_WIDGET_AREAS[area]
+        self.setCorner(corner_flag, area_flag)
 
     def add_toolbar(
         self,
@@ -228,7 +228,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def add_dockwidget(
         self,
-        widget: QtWidgets.QtWidgets.QWidget,
+        widget: QtWidgets.QWidget,
         position: constants.DockWidgetAreaStr | Literal["auto"] = "auto",
         **kwargs,
     ):
@@ -244,14 +244,13 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def remove(
         self,
-        widgets: Sequence[QtWidgets.QDockWidget | QtWidgets.QToolbar | QtGui.QAction]
+        widgets: Sequence[QtWidgets.QDockWidget | QtWidgets.QToolBar | QtGui.QAction]
         | QtWidgets.QDockWidget
-        | QtWidgets.QToolbar
+        | QtWidgets.QToolBar
         | QtGui.QAction,
     ):
-        if not isinstance(widgets, list):
-            widgets = [widgets]
-        for i in widgets:
+        widget_list = widgets if isinstance(widgets, list) else [widgets]
+        for i in widget_list:
             match i:
                 case QtWidgets.QDockWidget():
                     self.removeDockWidget(i)
@@ -324,8 +323,8 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         positions = ["bottom", "top", "right", "left"]
         positions.remove(preference)
         positions.append(preference)
-        counter = collections.Counter(positions + areas)
-        return counter.most_common()[-1][0]
+        counter = collections.Counter(positions + areas)  # type: ignore[operator]
+        return counter.most_common()[-1][0]  # type: ignore[return-value]
 
     def _get_preferred_toolbar_position(
         self,
@@ -336,8 +335,8 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         positions = ["right", "left", "bottom", "top"]
         positions.remove(preference)
         positions.append(preference)
-        counter = collections.Counter(positions + areas)
-        return counter.most_common()[-1][0]
+        counter = collections.Counter(positions + areas)  # type: ignore[operator]
+        return counter.most_common()[-1][0]  # type: ignore[return-value]
 
     def get_toolbars(
         self, position: constants.ToolbarAreaStr | None = None
