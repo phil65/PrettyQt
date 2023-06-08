@@ -29,8 +29,8 @@ class WidgetPropertiesModel(core.AbstractTableModel):
     ]
 
     def __init__(self, widget: QtWidgets.QWidget, **kwargs):
-        self._widget = None
-        self._metaobj = None
+        self._widget = widget
+        self._metaobj = core.MetaObject(self._widget.metaObject())
         self.event_catcher = None
         super().__init__(**kwargs)
         self.set_widget(widget)

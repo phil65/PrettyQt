@@ -14,7 +14,7 @@ import fsspec
 
 from prettyqt import constants, core, custom_models, widgets
 from prettyqt.qt import QtCore
-from prettyqt.utils import treeitem
+from prettyqt.utils import datatypes, treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -167,8 +167,6 @@ COLUMNS = [
 class FSSpecTreeModel(
     widgets.filesystemmodel.FileSystemModelMixin, custom_models.ColumnItemModel
 ):
-    """Model that provides an interface to an objectree that is build of tree items."""
-
     directoryLoaded = core.Signal(str)
     fileRenamed = core.Signal(str, str, str)
     rootPathChanged = core.Signal(str)
@@ -191,7 +189,7 @@ class FSSpecTreeModel(
     def __init__(
         self,
         protocol: str = "file",
-        root: os.PathLike = "",
+        root: datatypes.PathType = "",
         show_root: bool = False,
         parent: QtCore.QObject | None = None,
         **kwargs,
@@ -470,7 +468,10 @@ class FSSpecTreeModel(
         return self._iter_path(path_or_row, column, index)
 
     def _iter_path(
-        self, target: os.PathLike, column: int = 0, parent: core.ModelIndex | None = None
+        self,
+        target: datatypes.PathType,
+        column: int = 0,
+        parent: core.ModelIndex | None = None,
     ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         target = pathlib.Path(target)

@@ -48,7 +48,9 @@ class MimeDatabase(QtCore.QMimeDatabase):
         url = QtCore.QUrl(url) if isinstance(url, str) else url
         return core.MimeType(self.mimeTypeForUrl(url))
 
-    def get_mime_types_for_filename(self, filename: os.PathLike) -> list[core.MimeType]:
+    def get_mime_types_for_filename(
+        self, filename: datatypes.PathType
+    ) -> list[core.MimeType]:
         path = os.fspath(filename)
         return [core.MimeType(i) for i in self.mimeTypesForFileName(path)]
 

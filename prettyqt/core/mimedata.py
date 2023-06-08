@@ -54,7 +54,7 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
 
     def set_data_for_extension(self, extension: str, string: str):
         if mimetype := DB.get_mime_types_for_filename(f".{extension}"):
-            self.setData(mimetype, string.encode())
+            self.setData(mimetype[0].name(), string.encode())
         else:
             raise ValueError(extension)
 

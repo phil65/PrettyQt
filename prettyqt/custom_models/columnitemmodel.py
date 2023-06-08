@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable
+from collections.abc import Callable, Iterable, Sequence
 from dataclasses import dataclass
 import datetime
 import logging
@@ -212,7 +212,7 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
-    def set_columns(self, columns: Iterable[ColumnItem]):
+    def set_columns(self, columns: Sequence[ColumnItem]):
         self._attr_cols = columns
         for col in columns:
             col.model = self
@@ -287,7 +287,7 @@ class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
     def __init__(
         self,
         obj=None,
-        columns: Iterable[ColumnItem] = [],
+        columns: Sequence[ColumnItem] = [],
         mime_type: str | None = None,
         show_root: bool = True,
         **kwargs,
@@ -308,7 +308,7 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
     def __init__(
         self,
         items: list,
-        columns: Iterable[ColumnItem],
+        columns: Sequence[ColumnItem],
         mime_type: str | None = None,
         **kwargs,
     ):

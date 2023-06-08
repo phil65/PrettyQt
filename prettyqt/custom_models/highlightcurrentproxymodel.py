@@ -13,7 +13,7 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
         self._data_role = constants.DISPLAY_ROLE
         self._column = None
         super().__init__(*args, **kwargs)
-        parent = self.parent()
+        parent: widgets.AbstractItemView = self.parent()  # type: ignore
         parent.model_changed.connect(self._on_model_change)
         if sel_model := parent.selectionModel():
             sel_model.currentChanged.connect(self._on_current_change)
@@ -27,10 +27,12 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
             self._column = new.column()
 
     def data(self, index, role=constants.DISPLAY_ROLE):
-        if role == constants.BACKGROUND_ROLE:
-            if index.data(self._data_role) == self._current_value:
-                if index.column() == self._column or self._mode == "all":
-                    return QtGui.QColor("red")
+        if (
+            role == constants.BACKGROUND_ROLE
+            and index.data(self._data_role) == self._current_value
+            and (index.column() == self._column or self._mode == "all")
+        ):
+            return QtGui.QColor("red")
         return super().data(index, role)
 
 

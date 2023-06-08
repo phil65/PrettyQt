@@ -37,8 +37,6 @@ class JsonItem:
 
 
 class JsonModel(custom_models.ColumnItemModel):
-    """Model that provides an interface to an objectree that is build of tree items."""
-
     def __init__(
         self,
         obj: Any,

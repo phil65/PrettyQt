@@ -123,7 +123,7 @@ class MetaObject:
                 return prop
         raise KeyError(index)
 
-    def get_constructor(self, index: int | str) -> core.MetaProperty:
+    def get_constructor(self, index: int | str) -> core.MetaMethod:
         """Get ctor MetaMethod based on index or name."""
         if isinstance(index, int):
             method = core.MetaMethod(self.item.constructor(index))
@@ -191,7 +191,7 @@ class MetaObject:
     ) -> list[core.MetaMethod]:
         """Get all signal MetaMethods based on given criteria."""
         if only_notifiers:
-            return [
+            return [  # type: ignore
                 prop.get_notify_signal()
                 for prop in self.get_properties(include_super)
                 if prop.hasNotifySignal()

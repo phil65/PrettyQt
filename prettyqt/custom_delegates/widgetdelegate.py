@@ -63,9 +63,10 @@ class WidgetDelegate(widgets.StyledItemDelegate):
     def setModelData(self, editor, model, index):
         orig = self._editor_for_index(index)
         if isinstance(orig, QtWidgets.QWidget):
-            prop = core.MetaObject(orig.metaObject()).get_user_property()
-            value = prop.read(editor)
-            prop.write(orig, value)
+            metaobj = core.MetaObject(orig.metaObject())
+            if user_prop := metaobj.get_user_property():
+                value = user_prop.read(editor)
+                user_prop.write(orig, value)
 
     def sizeHint(self, option, index):
         editor = self._editor_for_index(index)

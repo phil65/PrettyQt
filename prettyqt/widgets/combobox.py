@@ -71,7 +71,9 @@ class ComboBoxMixin(widgets.WidgetMixin):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def add_items(self, items: Iterable | Mapping, default=...):
+    def add_items(
+        self, items: Iterable[str | tuple | list] | Mapping[Any, str], default=...
+    ):
         if isinstance(items, Mapping):
             for k, v in items.items():
                 self.addItem(v, userData=k)

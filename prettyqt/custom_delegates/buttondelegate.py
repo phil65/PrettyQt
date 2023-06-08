@@ -47,12 +47,13 @@ class ButtonDelegate(widgets.StyledItemDelegate):
 
     def cell_entered(self, index):
         # index = self.parent().indexFromItem(item)
-        if self.parent().isPersistentEditorOpen(index):
-            self.parent().closePersistentEditor(self.current_edited_index)
-        if self.parent().itemDelegateForIndex(index) is self:
+        parent: QtWidgets.QAbstractItemView = self.parent()  # type: ignore
+        if parent.isPersistentEditorOpen(index):
+            parent.closePersistentEditor(self.current_edited_index)
+        if parent.itemDelegateForIndex(index) is self:
             # if index.data(self.method_role) is not None:
-            self.parent().openPersistentEditor(index)
-            self.parent().setCurrentIndex(index)
+            parent.openPersistentEditor(index)
+            parent.setCurrentIndex(index)
         self.current_edited_index = index
 
     def paint(self, painter, option, index):

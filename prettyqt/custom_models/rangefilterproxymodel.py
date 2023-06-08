@@ -25,9 +25,7 @@ class RangeFilterProxyModel(core.SortFilterProxyModel):
         value = source_model.data(idx, role)
         if self._min_value is not None and value < self._min_value:
             return False
-        if self._max_value is not None and value > self._max_value:
-            return False
-        return True
+        return self._max_value is None or value <= self._max_value
 
     def set_min_value(self, value):
         self._min_value = value

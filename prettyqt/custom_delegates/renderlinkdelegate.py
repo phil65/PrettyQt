@@ -42,8 +42,8 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         )
         if (
             event.type() == QtCore.QEvent.Type.MouseButtonPress
-            and event.button() == QtCore.Qt.MouseButton.LeftButton
-            and event.position() in rect
+            and event.button() == QtCore.Qt.MouseButton.LeftButton  # type: ignore
+            and rect.contains(event.position())  # type: ignore
         ):
             text = index.data()
             gui.DesktopServices.open_url(text)

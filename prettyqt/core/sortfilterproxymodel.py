@@ -35,7 +35,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
     ID = "sort_filter"
 
     def __init__(self, *args, **kwargs):
-        self._filter_mode = "wildcard"
+        self._filter_mode: FilterModeStr = "wildcard"
         super().__init__(*args, **kwargs)
 
     #     self._filter_column = 0

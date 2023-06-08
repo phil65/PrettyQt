@@ -17,7 +17,7 @@ class StarRating:
         self.max_stars = max_stars
 
     def sizeHint(self):
-        return PAINTING_SCALE_FACTOR * core.Size(self.max_stars, 1)
+        return PAINTING_SCALE_FACTOR * core.Size(self.max_stars, 1)  # type: ignore
 
     def paint(
         self,
@@ -80,7 +80,7 @@ class StarEditor(widgets.Widget):
         """Once star rating was clicked, tell the delegate we're done editing."""
         self.editing_finished.emit()
 
-    def star_at_position(self, x: int) -> int:
+    def star_at_position(self, x: float) -> int:
         """Calculate which star the user's mouse cursor is currently hovering over."""
         val = x // (self.star_rating.sizeHint().width() // self.star_rating.max_stars) + 1
         return val if 0 < val <= self.star_rating.max_stars else -1
@@ -131,7 +131,7 @@ class StarDelegate(widgets.StyledItemDelegate):
         editor.editing_finished.connect(self.commitAndCloseEditor)
         return editor
 
-    def setEditorData(self, editor, index):
+    def setEditorData(self, editor: StarEditor, index):
         """Set the data to be displayed and edited by our custom editor."""
         editor.set_star_rating(index.data())
 

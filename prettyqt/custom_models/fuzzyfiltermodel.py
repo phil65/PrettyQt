@@ -32,7 +32,7 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, filter_mode="fuzzy", **kwargs)
         self._search_term = ""
-        self._match_color: str | None = gui.Color("blue")
+        self._match_color: QtGui.QColor = gui.Color("blue")
         self.setSortRole(self.Roles.SortRole)
         self.sort(0, constants.DESCENDING)
 
@@ -121,7 +121,7 @@ class FuzzyCompleter(widgets.Completer):
         super().setModel(self._filter_proxy)
         self._using_original_model = True
 
-    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, source: widgets.QLineEdit, event: QtCore.QEvent) -> bool:
         match event.type():
             case QtCore.QEvent.Type.FocusIn:
                 source.clearEditText()

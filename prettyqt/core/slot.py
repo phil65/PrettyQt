@@ -123,8 +123,7 @@ def _build_arguments(
             gap = True
         else:
             raise TypeError(
-                "Type annotations must be in a continuous row - an argument "
-                f'before "{arg}" is missing'
+                f"Annotations must be in a continuous row - arg before '{arg}' is missing"
             )
 
     return slot_args, slot_kwargs

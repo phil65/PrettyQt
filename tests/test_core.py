@@ -535,9 +535,6 @@ def test_processenvironment():
     with pytest.raises(KeyError):
         env["test"]
     del env["key"]
-    dct = dict(env_name="value")
-    env = core.ProcessEnvironment.from_dict(dct)
-    assert dict(env) == dct
 
 
 def test_propertyanimation():

@@ -34,12 +34,12 @@ class SizeF(QtCore.QSizeF):
     def shrunk_by(self, margins: datatypes.MarginsFType) -> Self:
         if isinstance(margins, tuple):
             margins = QtCore.QMarginsF(*margins)
-        return type(self)(self.marginsAdded(margins))
+        return type(self)(self.shrunkBy(margins))
 
     def grown_by(self, margins: datatypes.MarginsFType) -> Self:
         if isinstance(margins, tuple):
             margins = QtCore.QMarginsF(*margins)
-        return type(self)(self.marginsRemoved(margins))
+        return type(self)(self.grownBy(margins))
 
 
 if __name__ == "__main__":
