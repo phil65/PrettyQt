@@ -90,6 +90,16 @@ log_cli = true
 log_format = "%(asctime)s %(levelname)s %(message)s"
 log_date_format = "%Y-%m-%d %H:%M:%S"
 
+[tool.mypy]
+python_version = "3.10"
+disable_error_code = ["assignment", "misc", "attr-defined", "import"]
+
+# exclude = [
+#     "^one\\.py$",  # TOML's double-quoted strings require escaping backslashes
+#     'two\.pyi$',  # but TOML's single-quoted strings do not
+#     '^three\.',
+# ]
+
 [tool.isort]
 line_length = 90
 ensure_newline_before_comments = true
@@ -105,26 +115,6 @@ force_grid_wrap = 0
 # skip = "__init__.py"
 skip_glob = ["*/setup.py", "*/**/__init__.py"]
 # filter_files = true
-
-# known_first_party = "poetry"
-# known_third_party = [
-#     "cachecontrol",
-#     "cachy",
-#     "cleo",
-#     "clikit",
-#     "html5lib",
-#     "httpretty",
-#     "jsonschema",
-#     "keyring",
-#     "pexpect",
-#     "pkginfo",
-#     "pyparsing",
-#     "pytest",
-#     "requests",
-#     "requests_toolbelt",
-#     "shellingham",
-#     "tomlkit",
-# ]
 
 [tool.flit.metadata]
 module = "prettyqt"
