@@ -1,3 +1,19 @@
+## v1.48.0 (2023-06-08)
+
+### Feat
+
+- make ProcessEnvironment a MutableMapping
+- **TableView**: add margin kwarg to get_visible_section_span / resize_visible_columns_to_contents
+- **AbstractItemView**: add get_visible_section_span
+- **AbstractTableModel**: add to_dataframe method
+- **AbstractItemModel**: add prefetch_tree method
+- checks module
+- Windows contextmenu stuff
+
+### Fix
+
+- **show_root**: properly reset before hiding
+
 ## v1.47.0 (2023-06-07)
 
 ### Feat
