@@ -15,15 +15,18 @@ class SectionWidget(widgets.Widget):
         super().__init__(*args, **kwargs)
         self.set_layout("vertical", margin=0, spacing=0)
         self.set_margin(0)
-        header = widgets.Label("Test").set_bold()
+        header = widgets.Label(self.windowTitle()).set_bold()
         header.set_point_size(header.font().pointSize() * 2)
         self.box.add(header)
 
 
 class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
-    def __init__(self, *args, **kwargs):
+    def __init__(
+        self, *args, widget_class: type[widgets.QWidget] = widgets.QWidget, **kwargs
+    ):
+        self._Class = widget_class
+        self._current_indexes: list[core.ModelIndex] = []
         super().__init__(*args, **kwargs)
-        self._current_indexes = []
 
     def set_highlighted_indexes(self, indexes: list[core.ModelIndex]):
         self._current_indexes = indexes
@@ -31,14 +34,6 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
 
     def columnCount(self, parent=None):
         return 1
-
-    def headerData(
-        self,
-        section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole,
-    ) -> str | None:
-        pass
 
     def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
@@ -57,7 +52,7 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        children = item.obj.findChildren(SectionWidget, None, flag)
+        children = item.obj.findChildren(self._Class, None, flag)
         return [treeitem.TreeItem(obj=i) for i in children]
 
     def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
@@ -68,7 +63,7 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
         if item == self._root_item:
             return True
         flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        return bool(item.obj.findChildren(SectionWidget, None, flag))
+        return bool(item.obj.findChildren(self._Class, None, flag))
 
 
 class ScrollAreaTableOfContentsWidget(widgets.TreeView):
@@ -93,18 +88,18 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self,
         scrollarea: widgets.QScrollArea,
         orientation: QtCore.Qt.Orientation = constants.VERTICAL,
+        widget_class: type = widgets.QWidget,
         **kwargs,
     ) -> None:
+        self._WidgetClass = widget_class
         self._scroll_mode = "single"
         self._expand_mode = "always"
         self._last_visible = None
+        self.scrollarea = None
         super().__init__(scrollarea, **kwargs)
         self._orientation = orientation
-        self.scrollarea = scrollarea
         self.setFixedWidth(200)
         self.h_header.hide()
-        scrollarea.installEventFilter(self)
-        scrollarea.viewport().installEventFilter(self)
         self.h_header.setStretchLastSection(True)
         self.setAlternatingRowColors(False)
         self.setRootIsDecorated(False)
@@ -118,28 +113,41 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
             scrollarea.v_scrollbar.valueChanged.connect(self._on_scroll)
         else:
             scrollarea.h_scrollbar.valueChanged.connect(self._on_scroll)
+        self.set_widget(scrollarea)
 
-    def set_widget(self, widget: widgets.QWidget):
+    def set_widget(self, widget: widgets.QScrollArea):
+        if widget.widget() is None:
+            raise RuntimeError("No widget set on ScrollArea.")
+        self.scrollarea = widget
         model = ScrollAreaTableOfContentsModel(
-            widget, show_root=True, parent=self.scrollarea
+            widget.widget(),
+            show_root=True,
+            parent=self.scrollarea,
+            widget_class=self._WidgetClass,
         )
         self.set_model(model)
+        self.show_root(False)
+        widget.widget().installEventFilter(self)
         self.selectionModel().currentChanged.connect(self._on_current_change)
         self.selectionModel().selectionChanged.connect(self._on_selection_change)
         # if self._expand_mode == "always":
         self.expandAll()
 
     def _on_current_change(self, new, old):
+        if self.model() is None:
+            return
         is_vertical = self._orientation == constants.VERTICAL
         area = self.scrollarea
         scrollbar = area.v_scrollbar if is_vertical else area.h_scrollbar
         scrollbar.valueChanged.disconnect(self._on_scroll)
         widget = self.model().data(new, role=constants.USER_ROLE)
         self.scrollarea.scroll_to_bottom()
-        self.scrollarea.ensureWidgetVisible(widget, 200, 200)
+        self.scrollarea.ensureWidgetVisible(widget, 10, 10)
         scrollbar.valueChanged.connect(self._on_scroll)
 
     def _on_selection_change(self, new, old):
+        if self.model() is None:
+            return
         indexes = self.selected_indexes()
         self.model().set_highlighted_indexes(indexes)
 
@@ -147,7 +155,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         model: ScrollAreaTableOfContentsModel | None = self.model()
         if model is None:
             return
-        children = self.scrollarea.get_visible_widgets(typ=SectionWidget)
+        children = self.scrollarea.get_visible_widgets(typ=self._WidgetClass)
         if not children or children == self._last_visible:
             return
         self._last_visible = children
@@ -190,6 +198,8 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
                             .top()
                         ),
                     )
+                    self.collapseAll()
+                    self.model().fetchMore(indexes[0])
                     self.set_current_index(indexes[0])
                     self.scroll_to(indexes[0])
             case _:
@@ -201,11 +211,9 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.scrollarea.wheelEvent(e)
 
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
-        # print(event)
-        if source in {self.scrollarea, self.scrollarea.viewport()}:
-            match event.type():
-                case core.Event.Type.ChildAdded | core.Event.Type.ChildRemoved:
-                    self._on_scroll()
+        match event.type():
+            case core.Event.Type.ChildAdded:
+                self._on_scroll()
         return False
 
     def get_scroll_mode(self) -> str:
@@ -229,23 +237,23 @@ if __name__ == "__main__":
     with app.debug_mode():
         window = widgets.Widget(object_name="window")
         layout = window.set_layout("horizontal")
-        scrollarea = widgets.ScrollArea(object_name="scroll")
-        scrollbar_map = ScrollAreaTableOfContentsWidget(
-            scrollarea, expand_mode="never", scroll_mode="multi"
-        )
-        layout.add(scrollbar_map)
+        scrollarea = widgets.ScrollArea(object_name="scroll", parent=window)
         widget = widgets.Widget(object_name="scrollarea_widget")
+        scrollarea.setWidget(widget)
+        toc_widget = ScrollAreaTableOfContentsWidget(
+            scrollarea,
+            scroll_mode="single",
+            widget_class=SectionWidget,
+        )
+        layout.add(toc_widget)
         scroll_layout = widget.set_layout("vertical")
         layout.add(scrollarea)
-        scrollarea.setWidget(widget)
         for i in range(10):
             section = SectionWidget(window_title=f"test{i}")
-            section.box.add(SectionWidget(window_title="nested"))
-            section.box.add(SectionWidget(window_title="nested"))
+            section.box.add(SectionWidget(window_title=f"{i}nested"))
+            section.box.add(SectionWidget(window_title=f"{i*10}nested"))
             scroll_layout.add(section)
         scrollarea.ensureWidgetVisible(widget)
         scrollarea.setWidgetResizable(True)
-
-        scrollbar_map.set_widget(scrollarea.widget())
         window.show()
         app.main_loop()
