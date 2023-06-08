@@ -215,27 +215,46 @@ class ObjectMixin:
         typ: type[T] = QtCore.QObject,
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
-        property_selector: dict[str, Any] | None = None,
+        property_selector: dict[str, datatypes.VariantType | Callable] | None = None,
     ) -> list[T]:
-        """Find children with given type and name."""
+        """Find children with given type and name.
+
+        Children can be filtered by passing a property selector dictionary.
+        It must contain the property name for keys and either a value which must be set
+        or a predicate function which gets the property value as an argument
+        and must return True if the child should be included.
+
+        Arguments:
+            typ: Subclass of QObject (can also be a UnionType)
+            name: ObjectName filter. None includes all.
+            recursive: whether to search for children recursively.
+            property_selector: dict containing PropertyName -> Value/Predicate pairs.
+
+        Returns:
+            list of QObjects
+        """
         if recursive:
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        if isinstance(typ, types.UnionType):
-            objects = [
-                i
-                for t in get_args(typ)
-                for i in self.findChildren(t, name=name, options=flag)
-            ]
-        else:
-            objects = self.findChildren(typ, name=name, options=flag)
+        match typ:
+            case types.UnionType():
+                objects = [
+                    i
+                    for t in get_args(typ)
+                    for i in self.findChildren(t, name=name, options=flag)
+                ]
+            case type():
+                objects = self.findChildren(typ, name=name, options=flag)
+            case _:
+                raise TypeError(typ)
         if property_selector:
             return [
                 o
                 for o in objects
                 for k, v in property_selector.items()
-                if o.property(k) == v
+                if (callable(v) and v(o.property(k)))
+                or (not callable(v) and o.property(k) == v)
             ]
         return objects
 
