@@ -88,6 +88,7 @@ class CommandPalette(widgets.Widget):
         self.set_focus_policy("strong")
         self.setMinimumWidth(700)
         self._line = widgets.LineEdit()
+        self.setFocusProxy(self._line)
         self._table = CommandTable()
         # self._line.value_changed.connect(self._table.select_first_row)
         self._line.value_changed.connect(self._table._proxy.set_search_term)
