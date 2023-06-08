@@ -64,6 +64,7 @@ types-Deprecated = "^1.2"
 types-docutils = "^0"
 types-orjson = "^3.6"
 types-python-dateutil = "^2"
+types-requests = "^2.31.0.1"
 pylint = "^2.5"
 pytest-xvfb = {version = "^2", markers = "sys_platform == 'linux'"}
 coverage = "^7"
