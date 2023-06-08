@@ -8,7 +8,7 @@ from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
-MAP = bidict(
+RE_MAP = bidict(
     {
         re.IGNORECASE: QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
         re.MULTILINE: QtCore.QRegularExpression.PatternOption.MultilineOption,
@@ -48,7 +48,7 @@ MATCH_OPTIONS = bidict(
 class RegularExpression(QtCore.QRegularExpression):
     def __init__(
         self,
-        pattern: str | QtCore.QRegularExpression = "",
+        pattern: str | QtCore.QRegularExpression | re.Pattern = "",
         flags: QtCore.QRegularExpression.PatternOption = PATTERN_OPTIONS["none"],
     ):
         match pattern:
@@ -57,8 +57,8 @@ class RegularExpression(QtCore.QRegularExpression):
             case re.Pattern():
                 qflag = self.PatternOption(0)
                 for flag in re.RegexFlag(pattern.flags):
-                    if flag in MAP:
-                        qflag |= MAP[flag]
+                    if flag in RE_MAP:
+                        qflag |= RE_MAP[flag]
                 super().__init__(pattern.pattern, qflag)
             case _:
                 if isinstance(flags, int):

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import re
+
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import get_repr
@@ -9,15 +11,15 @@ class RegularExpressionValidator(gui.ValidatorMixin, QtGui.QRegularExpressionVal
     ID = "regular_expression"
 
     def __init__(self, *args, **kwargs):
+        # allow passing strings as well as re.Pattern to the ctor
         match args, kwargs:
-            case (str(), *rest), _:
-                super().__init__(QtCore.QRegularExpression(args[0]), *rest, **kwargs)
+            case (str() as pat, *rest), _:
+                super().__init__(QtCore.QRegularExpression(pat), *rest, **kwargs)
             case _, {"regular_expression": str() as reg_str, **rest}:
-                super().__init__(
-                    *args,
-                    regular_expression=QtCore.QRegularExpression(reg_str),
-                    **rest,
-                )
+                pat = QtCore.QRegularExpression(reg_str)
+                super().__init__(*args, regular_expression=pat, **rest)
+            case (re.Pattern() as pat,), _:
+                super().__init__(core.RegularExpression(pat))
             case _, _:
                 super().__init__(*args, **kwargs)
 
@@ -40,9 +42,16 @@ class RegularExpressionValidator(gui.ValidatorMixin, QtGui.QRegularExpressionVal
             else False
         )
 
-    def set_regex(self, regex: str | core.RegularExpression, flags=0):
-        if isinstance(regex, str):
-            regex = core.RegularExpression(regex, flags)
+    def set_regex(self, regex: str | core.QRegularExpression | re.Pattern, flags=0):
+        match regex:
+            case str():
+                regex = core.RegularExpression(regex, flags)
+            case core.QRegularExpression():
+                pass
+            case re.Pattern():
+                regex = core.RegularExpression(regex)
+            case _:
+                raise TypeError(regex)
         self.setRegularExpression(regex)
 
     def get_regex(self) -> str:
