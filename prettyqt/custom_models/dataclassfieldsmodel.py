@@ -9,7 +9,7 @@ from prettyqt.qt import QtCore, QtGui
 logger = logging.getLogger(__name__)
 
 
-class DataclassFieldsModel(core.AbstractTableModel):
+class DataClassFieldsModel(core.AbstractTableModel):
     HEADER = [
         "Field name",
         "Value",
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     with app.debug_mode():
-        model = DataclassFieldsModel(app_style)
+        model = DataClassFieldsModel(app_style)
         model.dataChanged.connect(view.repaint)
         view.set_model(model)
         view.set_selection_behavior("rows")
