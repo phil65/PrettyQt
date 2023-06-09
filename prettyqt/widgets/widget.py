@@ -206,6 +206,7 @@ class WidgetMixin(core.ObjectMixin):
     def map_to(
         self, widget: QtWidgets.QWidget | Literal["global", "parent"], pos_or_rect
     ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
+        """Map a point or rect to a widget, global position or parent."""
         match pos_or_rect:
             case int(), int():
                 pos_or_rect = QtCore.QPoint(*pos_or_rect)
@@ -240,6 +241,7 @@ class WidgetMixin(core.ObjectMixin):
     def map_from(
         self, widget: QtWidgets.QWidget | Literal["global", "parent"], pos_or_rect
     ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
+        """Map a point or rect from a widget, global position or parent."""
         match pos_or_rect:
             case int(), int():
                 pos_or_rect = QtCore.QPoint(*pos_or_rect)
@@ -272,6 +274,7 @@ class WidgetMixin(core.ObjectMixin):
                 raise ValueError(pos_or_rect)
 
     def raise_to_top(self):
+        """Brings a widget to top with all means available."""
         if sys.platform.startswith("win"):
             from prettyqt.utils.platforms.windows import misc
 

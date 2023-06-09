@@ -31,6 +31,12 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
         margin: int = 10,
         recursive: bool = True,
     ) -> list[T]:
+        """Return all widgets which are visible in the viewport.
+
+        Results can be filtered by type and whether widget is fully or partially visible.
+        A positive margin increases the area to search for widgets, a negative margin
+        decreases it.
+        """
         widget = self.widget()
         viewport = self.viewport()
         rect = viewport.rect().adjusted(-margin, -margin, margin, margin)
