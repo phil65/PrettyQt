@@ -13,6 +13,8 @@ from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
 from .jsonmodel import JsonModel
+from .dataclassmodel import DataClassModel
+from .dataclassfieldsmodel import DataClassFieldsModel
 from .mappingmodel import MappingModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
@@ -41,6 +43,8 @@ __all__ = [
     "NestedItem",
     "JsonModel",
     "MappingModel",
+    "DataClassModel",
+    "DataClassFieldsModel",
     "WidgetTableOfContentsModel",
     "FuzzyFilterProxyModel",
     "SubsetFilterProxyModel",
