@@ -172,16 +172,40 @@ class MetaObject:
         return [core.MetaMethod(self.item.constructor(i)) for i in range(count)]
 
     def get_properties(
-        self, include_super: bool = True, only_writable: bool = False
+        self,
+        include_super: bool = True,
+        only_writable: bool = False,
+        only_stored: bool = False,
+        only_bindable: bool = False,
+        only_designable: bool = False,
+        only_final: bool = False,
+        only_required: bool = False,
+        only_enum_type: bool = False,
+        only_flag_type: bool = False,
+        only_with_notifiers: bool = False,
+        only_with_type_name: str = "",
     ) -> list[core.MetaProperty]:
         """Get all MetaProperties based on given criteria."""
         start = 0 if include_super else self.item.propertyOffset() - 1
         count = self.item.propertyCount()
-        return [
-            core.MetaProperty(self.item.property(i))
-            for i in range(start, count)
-            if not only_writable or self.item.property(i).isWritable()
-        ]
+        prop_list = []
+        for i in range(start, count):
+            prop = self.item.property(i)
+            if (
+                (only_writable and not prop.isWritable())
+                or (only_stored and not prop.isStored())
+                or (only_bindable and not prop.isBindable())
+                or (only_designable and not prop.isDesignable())
+                or (only_final and not prop.isFinal())
+                or (only_required and not prop.isRequired())
+                or (only_enum_type and not prop.isEnumType())
+                or (only_flag_type and not prop.isFlagType())
+                or (only_with_notifiers and not prop.hasNotifier())
+                or (only_with_type_name and prop.typeName() != only_with_type_name)
+            ):
+                continue
+            prop_list.append(core.MetaProperty(prop))
+        return prop_list
 
     def get_property_values(
         self, qobject: core.QObject, cast_types: bool = False
