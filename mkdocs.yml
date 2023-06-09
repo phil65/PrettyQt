@@ -59,8 +59,17 @@ theme:
     - content.code.copy
     - content.code.select
     - content.code.annotate
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs # make top level tabs
+    - navigation.tabs.sticky
+    - toc.follow  # makes toc follow scrolling
+    - navigation.top  # adds back-to-top button
+    # - navigation.sections
 plugins:
     - search
+    # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
+    - tags
     - mkdocstrings:
         default_handler: python
         handlers:
@@ -79,7 +88,7 @@ plugins:
               # https://mkdocstrings.github.io/python/usage/
               show_source: true
               show_signature_annotations: true
-              show_if_no_docstring: true
+              # show_if_no_docstring: true
               inherited_members: false
               signature_crossrefs: true
     # - mkapi
