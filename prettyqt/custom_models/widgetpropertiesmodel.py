@@ -23,6 +23,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         "Final",
         "Required",
         "Valid",
+        "Stored",
         "Notifier",
         "User Type",
         # "Enumerator",
@@ -115,10 +116,12 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 return prop.isRequired()
             case constants.CHECKSTATE_ROLE, 12:
                 return prop.isValid()
-            case constants.DISPLAY_ROLE, 13:
+            case constants.CHECKSTATE_ROLE, 13:
+                return prop.isStored()
+            case constants.DISPLAY_ROLE, 14:
                 notifier = prop.get_notify_signal()
                 return "" if notifier is None else notifier.get_name()
-            case constants.DISPLAY_ROLE, 14:
+            case constants.DISPLAY_ROLE, 15:
                 return prop.userType()
             # case constants.DISPLAY_ROLE, 8:
             #     enumerator = prop.get_enumerator()
@@ -157,20 +160,20 @@ class WidgetPropertiesModel(core.AbstractTableModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import debugging, widgets
 
     app = widgets.app()
-    lineedit = widgets.LineEdit()
+    widget = debugging.example_widget()
     view = widgets.TableView()
     view.set_icon("mdi.folder")
     with app.debug_mode():
-        model = WidgetPropertiesModel(lineedit)
+        model = WidgetPropertiesModel(widget)
         model.dataChanged.connect(view.repaint)
         view.set_model(model)
         view.set_selection_behavior("rows")
         view.setEditTriggers(view.EditTrigger.AllEditTriggers)
         view.set_delegate("variant", column=1)
         view.show()
-        lineedit.show()
+        widget.show()
         view.resize(500, 300)
         app.main_loop()
