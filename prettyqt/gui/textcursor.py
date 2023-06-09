@@ -89,6 +89,8 @@ class TextCursor(QtGui.QTextCursor):
     def move_position(
         self, operation: MoveOperationStr, mode: MoveModeStr = "move", n: int = 1
     ) -> bool:
+        if n < 0:
+            raise ValueError(n)
         return self.movePosition(MOVE_OPERATION[operation], MOVE_MODE[mode], n)
 
     def set_position(self, pos: int | tuple[int, int], mode: MoveModeStr = "move"):
