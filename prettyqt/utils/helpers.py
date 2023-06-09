@@ -1,6 +1,8 @@
 from __future__ import annotations
 
+from collections import defaultdict
 from datetime import timedelta
+import inspect
 import logging
 import re
 import types
@@ -32,6 +34,25 @@ CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 #     if filepath.exists():
 #         klass.__doc__ =  filepath.read_text()
 #     return klass
+
+
+def find_common_ancestor(cls_list: list[type]) -> type:
+    # would be much nicer
+    mros = [list(inspect.getmro(cls)) for cls in cls_list]
+    track = defaultdict(int)
+    while mros:
+        for mro in mros:
+            cur = mro.pop(0)
+            track[cur] += 1
+            if (
+                track[cur] >= len(cls_list)
+                and not cur.__name__.endswith("Mixin")
+                and cur.__name__.startswith("Q")
+            ):
+                return cur
+            if len(mro) == 0:
+                mros.remove(mro)
+    raise TypeError("Couldnt find common base class")
 
 
 def dump_json(data: str):

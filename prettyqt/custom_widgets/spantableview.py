@@ -5,6 +5,7 @@ from __future__ import annotations
 from typing import Any
 import enum
 
+import itertools
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt import constants, core, widgets
 
@@ -77,11 +78,7 @@ class SpanHeaderModel(core.AbstractTableModel):
         if not self.hasIndex(row, column, parent):
             return QtCore.QModelIndex()
 
-        if not parent.isValid():
-            parent_item = self._root_item
-        else:
-            parent_item: _SpanHeaderItem = parent.internalPointer()
-
+        parent_item = parent.internalPointer() if parent.isValid() else self._root_item
         child_item = parent_item.child(row, column)
 
         if child_item is None:
@@ -96,12 +93,9 @@ class SpanHeaderModel(core.AbstractTableModel):
         return self._columns
 
     def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
-        if not index.isValid():
-            return QtCore.Qt.ItemFlag.NoItemFlags
+        return super().flags(index) if index.isValid() else QtCore.Qt.ItemFlag.NoItemFlags
 
-        return super().flags(index)
-
-    def data(self, index: QtCore.QModelIndex, role: int) -> Any:
+    def data(self, index: QtCore.QModelIndex, role: constants.ItemDataRole) -> Any:
         if not index.isValid():
             return None
 
@@ -123,35 +117,31 @@ class SpanHeaderModel(core.AbstractTableModel):
         value: Any,
         role: int = QtCore.Qt.ItemDataRole.EditRole,
     ) -> bool:
-        if index.isValid():
-            item: _SpanHeaderItem = index.internalPointer()
-
-            if role == SpanHeaderModel.HeaderRole.ColumnSpanRole:
-                col = index.column()
+        if not index.isValid():
+            return False
+        item: _SpanHeaderItem = index.internalPointer()
+        match role:
+            case SpanHeaderModel.HeaderRole.ColumnSpanRole:
                 span: int = value
-
                 if span > 0:
+                    col = index.column()
                     if col + span - 1 >= self._columns:
                         span = self._columns - col
 
                     item.setData(span, SpanHeaderModel.HeaderRole.ColumnSpanRole)
 
-            elif role == SpanHeaderModel.HeaderRole.RowSpanRole:
-                row = index.row()
+            case SpanHeaderModel.HeaderRole.RowSpanRole:
                 span: int = value
-
                 if span > 0:
+                    row = index.row()
                     if row + span - 1 > self._rows:
                         span = self._rows - row
 
                     item.setData(span, SpanHeaderModel.HeaderRole.RowSpanRole)
 
-            else:
+            case _:
                 item.setData(value, role)
-
-            return True
-
-        return False
+        return True
 
     def insertRows(
         self, row: int, count: int, parent: QtCore.QModelIndex | None = None
@@ -198,7 +188,7 @@ class SpanHeaderView(widgets.HeaderView):
         super().__init__(orientation, parent)
 
         base_section_size = QtCore.QSize()
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             base_section_size.setWidth(self.defaultSectionSize())
             base_section_size.setHeight(SECTION_HEIGHT // 2)
             rows = 1
@@ -212,20 +202,19 @@ class SpanHeaderView(widgets.HeaderView):
         model = SpanHeaderModel(rows, columns)
         self.setModel(model)
 
-        for row in range(rows):
-            for col in range(columns):
-                model.setData(
-                    model.index(row, col),
-                    base_section_size,
-                    QtCore.Qt.ItemDataRole.SizeHintRole,
-                )
+        for row, col in itertools.product(range(rows), range(columns)):
+            model.setData(
+                model.index(row, col),
+                base_section_size,
+                constants.SIZE_HINT_ROLE,
+            )
 
         self.sectionResized.connect(self.onSectionResized)
 
     def setSectionCount(self, sections: int) -> None:
         model = self.model()
 
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             current_sections = model.columnCount()
 
             if sections < current_sections:
@@ -237,7 +226,7 @@ class SpanHeaderView(widgets.HeaderView):
                     model.setData(
                         model.index(0, col),
                         QtCore.QSize(self.defaultSectionSize(), SECTION_HEIGHT),
-                        QtCore.Qt.ItemDataRole.SizeHintRole,
+                        constants.SIZE_HINT_ROLE,
                     )
         else:
             current_sections = model.rowCount()
@@ -251,32 +240,32 @@ class SpanHeaderView(widgets.HeaderView):
                     model.setData(
                         model.index(row, 0),
                         QtCore.QSize(SECTION_WIDTH, self.defaultSectionSize()),
-                        QtCore.Qt.ItemDataRole.SizeHintRole,
+                        constants.SIZE_HINT_ROLE,
                     )
 
     def setSectionLabel(self, section: int, label: str) -> None:
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             index = self.model().index(0, section)
         else:
             index = self.model().index(section, 0)
 
-        self.model().setData(index, label, QtCore.Qt.ItemDataRole.DisplayRole)
+        self.model().setData(index, label, constants.DISPLAY_ROLE)
 
     def setSectionBackgroundColor(self, section: int, color: QtGui.QColor) -> None:
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             index = self.model().index(0, section)
         else:
             index = self.model().index(section, 0)
 
-        self.model().setData(index, color, QtCore.Qt.ItemDataRole.BackgroundRole)
+        self.model().setData(index, color, constants.BACKGROUND_ROLE)
 
     def setSectionForegroundColor(self, section: int, color: QtGui.QColor) -> None:
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             index = self.model().index(0, section)
         else:
             index = self.model().index(section, 0)
 
-        self.model().setData(index, color, QtCore.Qt.ItemDataRole.ForegroundRole)
+        self.model().setData(index, color, constants.FOREGROUND_ROLE)
 
     def indexAt(self, pos: QtCore.QPoint) -> QtCore.QModelIndex:
         tbl_model = self.model()
@@ -288,13 +277,11 @@ class SpanHeaderView(widgets.HeaderView):
         logical_idx = self.logicalIndexAt(pos)
         delta = 0
 
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             cell_index = tbl_model.index(0, logical_idx)
 
             if cell_index.isValid():
-                cell_size: QtCore.QSize = cell_index.data(
-                    QtCore.Qt.ItemDataRole.SizeHintRole
-                )
+                cell_size = cell_index.data(constants.SIZE_HINT_ROLE)
                 delta += cell_size.height()
 
                 if pos.y() <= delta:
@@ -304,9 +291,7 @@ class SpanHeaderView(widgets.HeaderView):
             cell_index = tbl_model.index(logical_idx, 0)
 
             if cell_index.isValid():
-                cell_size: QtCore.QSize = cell_index.data(
-                    QtCore.Qt.ItemDataRole.SizeHintRole
-                )
+                cell_size = cell_index.data(constants.SIZE_HINT_ROLE)
                 delta += cell_size.width()
 
                 if pos.x() <= delta:
@@ -319,12 +304,12 @@ class SpanHeaderView(widgets.HeaderView):
     ) -> None:
         tbl_model: SpanHeaderModel = self.model()
 
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             cell_index = tbl_model.index(0, logical_index)
         else:
             cell_index = tbl_model.index(logical_index, 0)
 
-        cell_size: QtCore.QSize = cell_index.data(QtCore.Qt.ItemDataRole.SizeHintRole)
+        cell_size = cell_index.data(constants.SIZE_HINT_ROLE)
         section_rect = QtCore.QRect(rect)
 
         section_rect.setSize(cell_size)
@@ -340,7 +325,7 @@ class SpanHeaderView(widgets.HeaderView):
             )
             col_span = self.columnSpanSize(col_span_from, col_span_cnt)
 
-            if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+            if self.orientation() == constants.HORIZONTAL:
                 section_rect.setLeft(self.sectionViewportPosition(col_span_from))
             else:
                 section_rect.setLeft(self.columnSpanSize(0, col_span_from))
@@ -354,7 +339,7 @@ class SpanHeaderView(widgets.HeaderView):
             row_span_cnt: int = row_span_idx.data(SpanHeaderModel.HeaderRole.RowSpanRole)
             row_span = self.rowSpanSize(row_span_from, row_span_cnt)
 
-            if self.orientation() == QtCore.Qt.Orientation.Vertical:
+            if self.orientation() == constants.VERTICAL:
                 section_rect.setTop(self.sectionViewportPosition(row_span_from))
             else:
                 section_rect.setTop(self.rowSpanSize(0, row_span_from))
@@ -369,11 +354,11 @@ class SpanHeaderView(widgets.HeaderView):
         opt.textAlignment = QtCore.Qt.AlignmentFlag.AlignCenter
         opt.iconAlignment = QtCore.Qt.AlignmentFlag.AlignVCenter
         opt.section = logical_index
-        opt.text = cell_index.data(QtCore.Qt.ItemDataRole.DisplayRole)
+        opt.text = cell_index.data(constants.DISPLAY_ROLE)
         opt.rect = section_rect
 
-        bg = cell_index.data(QtCore.Qt.ItemDataRole.BackgroundRole)
-        fg = cell_index.data(QtCore.Qt.ItemDataRole.ForegroundRole)
+        bg = cell_index.data(constants.BACKGROUND_ROLE)
+        fg = cell_index.data(constants.FOREGROUND_ROLE)
         if bg is not None:
             opt.palette.setBrush(QtGui.QPalette.ColorRole.Button, QtGui.QBrush(bg))
             opt.palette.setBrush(QtGui.QPalette.ColorRole.Window, QtGui.QBrush(bg))
@@ -389,12 +374,12 @@ class SpanHeaderView(widgets.HeaderView):
     def sectionSizeFromContents(self, logical_index: int) -> QtCore.QSize:
         tbl_model: SpanHeaderModel = self.model()
 
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             cell_index = tbl_model.index(0, logical_index)
         else:
             cell_index = tbl_model.index(logical_index, 0)
 
-        size = cell_index.data(QtCore.Qt.ItemDataRole.SizeHintRole)
+        size = cell_index.data(constants.SIZE_HINT_ROLE)
 
         if size is None:
             size = super().sectionSizeFromContents(logical_index)
@@ -404,7 +389,7 @@ class SpanHeaderView(widgets.HeaderView):
     def setSpan(self, section: int, span_count: int) -> None:
         md: SpanHeaderModel = self.model()
 
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             idx = md.index(0, section)
             md.setData(idx, 1, SpanHeaderModel.HeaderRole.RowSpanRole)
             md.setData(idx, span_count, SpanHeaderModel.HeaderRole.ColumnSpanRole)
@@ -452,9 +437,7 @@ class SpanHeaderView(widgets.HeaderView):
         span = 0
 
         for col in range(from_col, from_col + span_count):
-            cell_size: QtCore.QSize = tbl_model.index(0, col).data(
-                QtCore.Qt.ItemDataRole.SizeHintRole
-            )
+            cell_size = tbl_model.index(0, col).data(constants.SIZE_HINT_ROLE)
             span += cell_size.width()
 
         return span
@@ -464,9 +447,7 @@ class SpanHeaderView(widgets.HeaderView):
         span = 0
 
         for row in range(from_row, from_row + span_count):
-            cell_size: QtCore.QSize = tbl_model.index(row, 0).data(
-                QtCore.Qt.ItemDataRole.SizeHintRole
-            )
+            cell_size = tbl_model.index(row, 0).data(constants.SIZE_HINT_ROLE)
             span += cell_size.height()
 
         return span
@@ -484,7 +465,7 @@ class SpanHeaderView(widgets.HeaderView):
             )
             col_span_to = col_span_from + col_span_cnt - 1
 
-            if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+            if self.orientation() == constants.HORIZONTAL:
                 begin_section = col_span_from
                 end_section = col_span_to
             else:
@@ -504,7 +485,7 @@ class SpanHeaderView(widgets.HeaderView):
             row_span_cnt: int = row_span_idx.data(SpanHeaderModel.HeaderRole.RowSpanRole)
             row_span_to = row_span_from + row_span_cnt - 1
 
-            if self.orientation() == QtCore.Qt.Orientation.Vertical:
+            if self.orientation() == constants.VERTICAL:
                 begin_section = row_span_from
                 end_section = row_span_to
             else:
@@ -528,7 +509,7 @@ class SpanHeaderView(widgets.HeaderView):
         index = self.indexAt(event.position().toPoint())
 
         if index.isValid():
-            if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+            if self.orientation() == constants.HORIZONTAL:
                 begin_section = index.column()
             else:
                 begin_section = index.row()
@@ -545,7 +526,7 @@ class SpanHeaderView(widgets.HeaderView):
 
         pos = self.sectionViewportPosition(logical_index)
 
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             xx, yy = pos, 0
             cell_index = tbl_model.index(0, logical_index)
         else:
@@ -553,14 +534,14 @@ class SpanHeaderView(widgets.HeaderView):
             cell_index = tbl_model.index(logical_index, 0)
 
         section_rect = QtCore.QRect(xx, yy, 0, 0)
-        cell_size: QtCore.QSize = cell_index.data(QtCore.Qt.ItemDataRole.SizeHintRole)
+        cell_size = cell_index.data(constants.SIZE_HINT_ROLE)
 
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.HORIZONTAL:
             cell_size.setWidth(new_size)
         else:
             cell_size.setHeight(new_size)
 
-        tbl_model.setData(cell_index, cell_size, QtCore.Qt.ItemDataRole.SizeHintRole)
+        tbl_model.setData(cell_index, cell_size, constants.SIZE_HINT_ROLE)
 
         col_span_idx = self.column_span_index(cell_index)
         row_span_idx = self.row_span_index(cell_index)
@@ -568,7 +549,7 @@ class SpanHeaderView(widgets.HeaderView):
         if col_span_idx.isValid():
             col_span_from = col_span_idx.column()
 
-            if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+            if self.orientation() == constants.HORIZONTAL:
                 section_rect.setLeft(self.sectionViewportPosition(col_span_from))
             else:
                 section_rect.setLeft(self.columnSpanSize(0, col_span_from))
@@ -576,7 +557,7 @@ class SpanHeaderView(widgets.HeaderView):
         if row_span_idx.isValid():
             row_span_from = row_span_idx.row()
 
-            if self.orientation() == QtCore.Qt.Orientation.Vertical:
+            if self.orientation() == constants.VERTICAL:
                 section_rect.setTop(self.sectionViewportPosition(row_span_from))
             else:
                 section_rect.setTop(self.rowSpanSize(0, row_span_from))
@@ -591,8 +572,8 @@ class SpanTableView(widgets.TableView):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
 
-        hheader = SpanHeaderView(QtCore.Qt.Orientation.Horizontal)
-        vheader = SpanHeaderView(QtCore.Qt.Orientation.Vertical)
+        hheader = SpanHeaderView(constants.HORIZONTAL)
+        vheader = SpanHeaderView(constants.VERTICAL)
 
         self.setHorizontalHeader(hheader)
         self.setVerticalHeader(vheader)
@@ -610,8 +591,8 @@ class SpanTableView(widgets.TableView):
             old_model.rowsInserted.disconnect(self.onModelRowsChanged)
             old_model.rowsRemoved.disconnect(self.onModelRowsChanged)
 
-        hheader = self.spanHeaderView(QtCore.Qt.Orientation.Horizontal)
-        vheader = self.spanHeaderView(QtCore.Qt.Orientation.Vertical)
+        hheader = self.spanHeaderView(constants.HORIZONTAL)
+        vheader = self.spanHeaderView(constants.VERTICAL)
 
         hheader_model = hheader.model()
         vheader_model = vheader.model()
@@ -633,7 +614,7 @@ class SpanTableView(widgets.TableView):
         model.rowsRemoved.connect(self.onModelRowsChanged)
 
     def spanHeaderView(self, orientation: QtCore.Qt.Orientation) -> SpanHeaderView:
-        if orientation == QtCore.Qt.Orientation.Horizontal:
+        if orientation == constants.HORIZONTAL:
             return self.horizontalHeader()
         else:
             return self.verticalHeader()
@@ -666,20 +647,20 @@ class SpanTableView(widgets.TableView):
 
     @core.Slot()
     def onModelReset(self) -> None:
-        hheader = self.spanHeaderView(QtCore.Qt.Orientation.Horizontal)
-        vheader = self.spanHeaderView(QtCore.Qt.Orientation.Vertical)
+        hheader = self.spanHeaderView(constants.HORIZONTAL)
+        vheader = self.spanHeaderView(constants.VERTICAL)
 
         hheader.setSectionCount(self.model().columnCount())
         vheader.setSectionCount(self.model().rowCount())
 
     @core.Slot()
     def onModelColumnsChanged(self) -> None:
-        hheader = self.spanHeaderView(QtCore.Qt.Orientation.Horizontal)
+        hheader = self.spanHeaderView(constants.HORIZONTAL)
         hheader.setSectionCount(self.model().columnCount())
 
     @core.Slot()
     def onModelRowsChanged(self) -> None:
-        vheader = self.spanHeaderView(QtCore.Qt.Orientation.Vertical)
+        vheader = self.spanHeaderView(constants.VERTICAL)
         vheader.setSectionCount(self.model().rowCount())
 
 
@@ -704,7 +685,7 @@ if __name__ == "__main__":
         model.appendRow(items)
 
     # Horizontal header settings.
-    hheader = view.spanHeaderView(QtCore.Qt.Orientation.Horizontal)
+    hheader = view.spanHeaderView(constants.HORIZONTAL)
 
     hheader.setSpan(0, 1)
     hheader.setSpan(1, 2)
@@ -720,7 +701,7 @@ if __name__ == "__main__":
     hheader.setSectionForegroundColor(0, QtGui.QColor(QtCore.Qt.GlobalColor.blue))
 
     # Vertical header settings.
-    vheader = view.spanHeaderView(QtCore.Qt.Orientation.Vertical)
+    vheader = view.spanHeaderView(constants.VERTICAL)
 
     vheader.setSpan(0, 4)
     vheader.setSpan(4, 3)

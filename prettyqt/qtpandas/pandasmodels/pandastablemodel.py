@@ -39,10 +39,7 @@ class DataTableModel(core.AbstractTableModel):
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 cell = self.df.iat[index.row(), index.column()]
                 # NaN case
-                if pd.isnull(cell):
-                    return ""
-                # print(type(cell))
-                return cell
+                return "" if pd.isnull(cell) else cell
             case constants.TOOLTIP_ROLE:
                 row = index.row()
                 col = index.column()

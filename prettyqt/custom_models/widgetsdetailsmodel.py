@@ -1,42 +1,25 @@
 from __future__ import annotations
 
-from collections import defaultdict
 from collections.abc import Sequence
-import inspect
 import logging
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.utils import helpers
 
 
 logger = logging.getLogger(__name__)
-
-
-def find_common_ancestor(cls_list):
-    mros = [list(inspect.getmro(cls)) for cls in cls_list]
-    track = defaultdict(int)
-    while mros:
-        for mro in mros:
-            cur = mro.pop(0)
-            track[cur] += 1
-            if (
-                track[cur] >= len(cls_list)
-                and not cur.__name__.endswith("Mixin")
-                and cur.__name__.startswith("Q")
-            ):
-                return cur
-            if len(mro) == 0:
-                mros.remove(mro)
-    raise TypeError("Couldnt find common base class")
 
 
 class WidgetsDetailsModel(core.AbstractTableModel):
     def __init__(self, items: Sequence[QtWidgets.QWidget], **kwargs):
         super().__init__(**kwargs)
         self.items = items
-        common_ancestor = find_common_ancestor([type(i) for i in self.items])
+        common_ancestor = helpers.find_common_ancestor([type(i) for i in self.items])
         logger.debug(f"{type(self).__name__}: found common ancester {common_ancestor}")
-        self.props = core.MetaObject(common_ancestor.staticMetaObject).get_properties()
+        self.props = core.MetaObject(common_ancestor.staticMetaObject).get_properties(
+            only_stored=True
+        )
         self.props.sort(key=lambda x: x.get_name())
 
     def columnCount(self, parent=None):
@@ -87,12 +70,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
     def flags(self, index):
         prop = self.props[index.column()]
         if prop.isWritable():
-            return (
-                super().flags(index)
-                | constants.IS_EDITABLE
-                | constants.IS_ENABLED
-                | constants.IS_SELECTABLE
-            )
+            return super().flags(index) | constants.IS_EDITABLE
         return super().flags(index)
 
 
