@@ -103,7 +103,7 @@ class SpanSlider(widgets.Slider):
         m = self.style().pixelMetric(
             widgets.Style.PixelMetric.PM_MaximumDragDistance, opt, self
         )
-        pixel_pos = self.pick(event.position()) - self.offset
+        pixel_pos = int(self.pick(event.position()) - self.offset)
         new_pos = float(self._pixel_pos_to_value(pixel_pos))
         if m >= 0:
             r = self.rect().adjusted(-m, -m, m, m)
@@ -162,10 +162,10 @@ class SpanSlider(widgets.Slider):
         painter.draw_complex_control("slider", opt)
 
         # handle rects
-        opt.sliderPosition = self.lower_pos
+        opt.sliderPosition = int(self.lower_pos)
         lr = self.style().subControlRect(SLIDER_STYLE, opt, HANDLE_STYLE, self)
         lrv = self.pick(lr.center())
-        opt.sliderPosition = self.upper_pos
+        opt.sliderPosition = int(self.upper_pos)
         ur = self.style().subControlRect(SLIDER_STYLE, opt, HANDLE_STYLE, self)
         urv = self.pick(ur.center())
 
@@ -423,11 +423,11 @@ class SpanSlider(widgets.Slider):
         option = widgets.StyleOptionSlider()
         self.initStyleOption(option)
         if handle == "lower":
-            option.sliderPosition = self.lower_pos
-            option.sliderValue = self.lower_val
+            option.sliderPosition = int(self.lower_pos)
+            option.sliderValue = int(self.lower_val)
         else:
-            option.sliderPosition = self.upper_pos
-            option.sliderValue = self.upper_val
+            option.sliderPosition = int(self.upper_pos)
+            option.sliderValue = int(self.upper_val)
         return option
 
     def _handle_mouse_press(
@@ -441,7 +441,7 @@ class SpanSlider(widgets.Slider):
         sr = self.style().subControlRect(SLIDER_STYLE, opt, HANDLE_STYLE, self)
         if control == HANDLE_STYLE:
             self.position = value
-            self.offset = self.pick(pos - sr.topLeft())
+            self.offset = self.pick(pos.toPoint() - sr.topLeft())
             self.last_pressed = handle
             self.setSliderDown(True)
             self.slider_pressed.emit(handle)
