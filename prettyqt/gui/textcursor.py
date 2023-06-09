@@ -91,14 +91,24 @@ class TextCursor(QtGui.QTextCursor):
     ) -> bool:
         return self.movePosition(MOVE_OPERATION[operation], MOVE_MODE[mode], n)
 
-    def set_position(self, pos: int, mode: MoveModeStr = "move"):
+    def set_position(self, pos: int | tuple[int, int], mode: MoveModeStr = "move"):
         """Set cursor to given position.
+
+        0-indexed.
 
         Args:
             pos: Cursor position
             mode: Move mode
         """
-        self.setPosition(pos, MOVE_MODE[mode])
+        match pos:
+            case int():
+                self.setPosition(pos, MOVE_MODE[mode])
+            case (int() as row, int() as col):
+                position = self.document().find_block_by_number(row).position()
+                position += col
+                self.set_position(position, mode=mode)
+            case _:
+                raise TypeError(pos)
 
     def select(self, selection: SelectionTypeStr | QtGui.QTextCursor.SelectionType):
         if isinstance(selection, QtGui.QTextCursor.SelectionType):
