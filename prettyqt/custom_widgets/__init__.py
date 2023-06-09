@@ -41,7 +41,7 @@ from .editors.colorchooserbutton import ColorChooserButton
 from .editors.filechooserbutton import FileChooserButton
 from .editors.fontchooserbutton import FontChooserButton
 from .editors.inputandslider import InputAndSlider
-from .editors.spanslider import SpanSlider
+from .editors.spanslider import SpanSlider, SpanSliderWidget
 from .labeledslider import LabeledSlider
 from .waitingspinner import WaitingSpinner
 from .popupinfo import PopupInfo
@@ -104,6 +104,7 @@ __all__ = [
     "FontChooserButton",
     "InputAndSlider",
     "SpanSlider",
+    "SpanSliderWidget",
     "LabeledSlider",
     "WaitingSpinner",
     "RoundProgressBar",
