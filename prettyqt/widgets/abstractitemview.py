@@ -657,11 +657,12 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                 raise ValueError(size)
         self.setIconSize(size)
 
-    def get_size_hint_for_column(self, col: int, row_limit: int = 25):
+    def get_size_hint_for_column(self, col: int, row_limit: int = 25) -> int:
         """Get a size hint for given column by finding widest cell."""
         to_check = min(row_limit, self.model().rowCount())
         return max(
-            self.sizeHintForIndex(self.model().index(row, col)) for row in range(to_check)
+            self.sizeHintForIndex(self.model().index(row, col)).width()
+            for row in range(to_check)
         )
 
     def sync_with(
