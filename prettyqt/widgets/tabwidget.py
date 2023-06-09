@@ -260,6 +260,14 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def set_tab(self, index: int, position: str, widget: QtWidgets.QWidget | None = None):
         self.tabBar().set_tab(index, position, widget)
 
+    def create_tab_preview(self, index: int, width: int = 200) -> widgets.Label:
+        widget = widgets.Label(self)
+        widget.setScaledContents(True)
+        px = self.widget(index).grab().scaledToWidth(width)
+        widget.setPixmap(px)
+        widget.resize(width, width)
+        return widget
+
 
 class DetachedTab(widgets.MainWindow):
     """Window containing a detached tab.
