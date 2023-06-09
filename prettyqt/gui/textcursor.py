@@ -136,8 +136,8 @@ class TextCursor(QtGui.QTextCursor):
 
     def select_text(
         self,
-        start_pos: int | MoveOperationStr,
-        end_pos: int | MoveOperationStr,
+        start_pos: int | tuple[int, int] | MoveOperationStr,
+        end_pos: int | tuple[int, int] | MoveOperationStr,
     ) -> str:
         """Select text from start position to end position.
 
@@ -147,14 +147,20 @@ class TextCursor(QtGui.QTextCursor):
             start_pos: Start position
             end_pos: End position
         """
-        if isinstance(start_pos, int):
-            self.set_position(start_pos)
-        else:
-            self.move_position(start_pos)
-        if isinstance(end_pos, int):
-            self.set_position(end_pos, mode="keep")
-        else:
-            self.move_position(end_pos, mode="keep")
+        match start_pos:
+            case int() | (int(), int()):
+                self.set_position(start_pos)
+            case str():
+                self.move_position(start_pos)
+            case _:
+                raise TypeError(start_pos)
+        match end_pos:
+            case int() | (int(), int()):
+                self.set_position(end_pos, mode="keep")
+            case str():
+                self.move_position(end_pos, mode="keep")
+            case _:
+                raise TypeError(end_pos)
         return self.selectedText()
 
     def replace_text(
