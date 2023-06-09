@@ -44,7 +44,7 @@ class DataClassModel(core.AbstractTableModel):
         instance = self.items[index.row()]
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
-                return getattr(instance, field.name)
+                return repr(getattr(instance, field.name))
             case constants.USER_ROLE:
                 return getattr(instance, field.name)
 
@@ -65,11 +65,12 @@ class DataClassModel(core.AbstractTableModel):
             return 0
         return 0 if parent.isValid() else len(self.items)
 
-    def flags(self, index):
+    def flags(self, parent=None):
+        parent = parent or core.ModelIndex()
         return (
-            super().flags(index)
-            if self.Class.__dataclass_params__.frozen
-            else (super().flags(index) | constants.IS_EDITABLE)
+            super().flags(parent)
+            if self.Class.__dataclass_params__.frozen or not parent.isValid()
+            else (super().flags(parent) | constants.IS_EDITABLE)
         )
 
 

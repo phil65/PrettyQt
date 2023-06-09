@@ -57,7 +57,7 @@ class JsonModel(custom_models.ColumnItemModel):
         item = self.data_by_index(parent)
         if self.show_root and item == self._root_item:
             return True
-        return isinstance(item.obj.value, dict | list | set)
+        return isinstance(item.obj.value, dict | list | set) and item.obj.value
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         """Fetch the children of a Python object.
