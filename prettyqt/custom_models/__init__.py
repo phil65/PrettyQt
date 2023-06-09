@@ -13,6 +13,7 @@ from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
 from .jsonmodel import JsonModel
+from .astmodel import AstModel
 from .dataclassmodel import DataClassModel
 from .dataclassfieldsmodel import DataClassFieldsModel
 from .mappingmodel import MappingModel
@@ -43,6 +44,7 @@ __all__ = [
     "NestedItem",
     "JsonModel",
     "MappingModel",
+    "AstModel",
     "DataClassModel",
     "DataClassFieldsModel",
     "WidgetTableOfContentsModel",
