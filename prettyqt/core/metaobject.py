@@ -76,6 +76,13 @@ class MetaObject:
         """Get SuperClass MetaObject."""
         return MetaObject(klass) if (klass := self.superClass()) is not None else None
 
+    def get_all_super_classes(self) -> list[MetaObject]:
+        """Get SuperClass MetaObject."""
+        klasses = []
+        while klass := self.superClass():
+            klasses.append(MetaObject(klass))
+        return klasses
+
     def get_name(self) -> str:
         """Get MetaObject class name."""
         return self.className()
