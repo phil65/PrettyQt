@@ -52,8 +52,6 @@ class FilterContainer(widgets.Widget):
                 widget.value_changed.connect(proxy.setFilterFixedString)
                 title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
                 widget.setPlaceholderText(f"Filter {title}...")
-            widget.setMinimumWidth(0)
-            widget.setMaximumWidth(99999)
             self._proxies.append(proxy)
             self._filter_layout.add(widget)
             model = proxy
@@ -79,7 +77,7 @@ class FilterContainer(widgets.Widget):
         self.box.add(self._topline_layout)
         self.box.add(parent)
 
-    def _on_section_resize(self, index, old_size, new_size):
+    def _on_section_resize(self, index, new_size, old_size):
         # perhaps check header.sectionPosition() and sectionSize() for correct pos?
         # logger.debug(f"resizing for index {index}")
         widget = self._filter_layout[index]
