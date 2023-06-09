@@ -1,13 +1,55 @@
 """Tests for `prettyqt` package."""
 
+import dataclasses
 from importlib import metadata
+import inspect
 
 import pytest
 import regex as re
 
-from prettyqt import custom_models
+from prettyqt import core, custom_models
 from prettyqt.custom_models import fsspecmodel
 from prettyqt.utils import InvalidParamError
+
+clsmembers = inspect.getmembers(custom_models, inspect.isclass)
+clsmembers = [tpl for tpl in clsmembers if core.QObject in tpl[1].mro()]
+
+
+models = [tpl for tpl in clsmembers if not issubclass(tpl[1], core.QAbstractItemModel)]
+proxies = [tpl for tpl in clsmembers if not issubclass(tpl[1], core.QAbstractProxyModel)]
+
+
+def test_xmlmodel(qtmodeltester):
+    xml = """<root>
+<element key='value'>text</element>
+<element><sub>text</sub></element>
+<empty-element xmlns="http://testns/" />
+</root>
+"""
+    model = custom_models.XmlModel(xml)
+    qtmodeltester.check(model, force_py=True)
+
+
+def test_dataclassmodel(qtmodeltester):
+    @dataclasses.dataclass
+    class Test:
+        a: int
+        b: str
+
+    test = Test(a=1, b="abc")
+    model = custom_models.DataClassModel([test])
+    qtmodeltester.check(model, force_py=True)
+
+
+def test_dataclassfieldsmodel(qtmodeltester):
+    @dataclasses.dataclass
+    class Test:
+        a: int
+        b: str
+
+    test = Test(a=1, b="abc")
+    model = custom_models.DataClassFieldsModel(test)
+    qtmodeltester.check(model, force_py=True)
 
 
 def test_regexmatchesmodel(qtmodeltester):
