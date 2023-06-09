@@ -11,18 +11,6 @@ from prettyqt.utils import treeitem
 logger = logging.getLogger(__name__)
 
 
-TO_FILTER = {
-    "minimumHeight",
-    "minimumWidth",
-    "maximumHeight",
-    "maximumWidth",
-    "x",
-    "y",
-    "width",
-    "height",
-}
-
-
 class FakeClassNameProp:
     def isWritable(self):
         return False
@@ -94,8 +82,9 @@ class WidgetHierarchyModel(custom_models.TreeModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.BaseClass = QtWidgets.QWidget
-        self.props = core.MetaObject(self.BaseClass.staticMetaObject).get_properties()
-        self.props = [i for i in self.props if i.get_name() not in TO_FILTER]
+        self.props = core.MetaObject(self.BaseClass.staticMetaObject).get_properties(
+            only_stored=True
+        )
         self.props.insert(0, FakeClassNameProp())
         self.props.insert(1, FakeLayoutProp())
         self.props.insert(1, FakeUserPropertyNameProp())
