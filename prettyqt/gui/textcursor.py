@@ -129,7 +129,7 @@ class TextCursor(QtGui.QTextCursor):
         the line number (0 based) and the column number (0 based).
         :return: tuple(line, column)
         """
-        return (self.blockNumber(), self.columnNumber())
+        return (self.blockNumber(), self.positionInBlock())
 
     def get_selection(self) -> gui.TextDocumentFragment:
         return gui.TextDocumentFragment(self.selection())
