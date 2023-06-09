@@ -313,18 +313,38 @@ class ObjectMixin:
         return timer
 
     def get_properties(
-        self, include_super: bool = True, cast: bool = True, only_writable: bool = False
+        self,
+        include_super: bool = True,
+        cast: bool = True,
+        only_writable: bool = False,
+        only_nonempty: bool = False,
     ) -> dict[str, Any]:
         """Get a dictionary containing all properties and their values."""
         metaobj = self.get_metaobject()
         props = metaobj.get_properties(
             include_super=include_super, only_writable=only_writable
         )
-        return {
-            i.name(): datatypes.make_serializable(i.read(self))
-            for i in props
-            if i.get_name() not in ["children", "frameShadow", "state"]
-        }
+        dct = {}
+        for i in props:
+            if i.get_name() in ["children", "frameShadow", "state"]:
+                continue
+            val = i.read(self)
+            if only_nonempty:
+                match val:
+                    case _ if hasattr(val, "isNull"):
+                        include = not val.isNull()
+                    case _ if hasattr(val, "isEmpty"):
+                        include = val.isEmpty()
+                    case _ if hasattr(val, "isValid"):
+                        include = val.isValid()
+                    case _:
+                        include = bool(val)
+            else:
+                include = True
+            if not include:
+                continue
+            dct[i.name()] = datatypes.make_serializable(val) if cast else val
+        return dct
 
     def set_properties(self, props: dict[str, Any], include_super: bool = True):
         """Set properties from a dictionary."""
