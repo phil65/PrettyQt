@@ -80,6 +80,7 @@ class TextDocumentMixin(core.ObjectMixin):
         return gui.TextBlock(self.lastBlock())
 
     def find_block_by_number(self, number: int) -> gui.TextBlock:
+        # starts with 0-index
         block = self.findBlockByNumber(number)
         if not block.isValid():
             raise ValueError(
@@ -88,6 +89,7 @@ class TextDocumentMixin(core.ObjectMixin):
         return gui.TextBlock(block)
 
     def find_block_by_line_number(self, line_number: int) -> gui.TextBlock:
+        # starts with 0-index
         block = self.findBlockByLineNumber(line_number)
         if not block.isValid():
             raise ValueError(
