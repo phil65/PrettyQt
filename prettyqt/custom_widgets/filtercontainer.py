@@ -14,7 +14,7 @@ class FilterContainer(widgets.Widget):
         object_name="filter_container",
         **kwargs,
     ):
-        super().__init__(**kwargs)
+        super().__init__(object_name=object_name, **kwargs)
         self.set_layout("vertical")
         self._proxies = []
         self.set_margin(0)
