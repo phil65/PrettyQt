@@ -16,6 +16,7 @@ from .jsonmodel import JsonModel
 from .astmodel import AstModel
 from .dataclassmodel import DataClassModel
 from .dataclassfieldsmodel import DataClassFieldsModel
+from .xmlmodel import XmlModel
 from .mappingmodel import MappingModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
@@ -47,7 +48,7 @@ __all__ = [
     "AstModel",
     "DataClassModel",
     "DataClassFieldsModel",
-    "WidgetTableOfContentsModel",
+    "XmlModel",
     "FuzzyFilterProxyModel",
     "SubsetFilterProxyModel",
     "ValueTransformationProxyModel",
