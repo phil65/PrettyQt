@@ -667,6 +667,10 @@ class Locale(QtCore.QLocale):
         return cls(cls.system())
 
     @classmethod
+    def get_c_locale(cls) -> Self:
+        return cls(cls.c())
+
+    @classmethod
     def get_system_language(cls) -> str:
         return cls.get_system_locale().uiLanguages()[0]
 
