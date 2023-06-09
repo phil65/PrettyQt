@@ -301,6 +301,15 @@ TypeStr = Literal[
     "z_order_change",
 ]
 
+MouseButtonTypeStr = Literal["press", "release", "double_click", "release"]
+
+MouseButtonType = bidict(
+    press=QtCore.QEvent.Type.MouseButtonPress,
+    release=QtCore.QEvent.Type.MouseButtonRelease,
+    double_click=QtCore.QEvent.Type.MouseButtonDblClick,
+    move=QtCore.QEvent.Type.MouseMove,
+)
+
 
 class Event(QtCore.QEvent):
     def __repr__(self):
