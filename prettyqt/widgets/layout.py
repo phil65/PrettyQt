@@ -87,16 +87,22 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         return item
 
     def __enter__(self):
-        if self._next_container is not None:
-            self._next_container.__enter__()
-            self._stack.append(self._next_container)
-            self._next_container = None
-        return self
+        def enter(item):
+            if item._next_container is not None:
+                enter(item._next_container)
+                item._stack.append(item._next_container)
+                item._next_container = None
+            return item
+
+        return enter(self)
 
     def __exit__(self, *_):
-        if self._stack:
-            item = self._stack.pop()
-            item.__exit__()
+        def exit(item):
+            if item._stack:
+                item = item._stack.pop()
+                exit(item)
+
+        exit(self)
 
     @property
     def _container(self):
