@@ -4,7 +4,7 @@ from abc import ABCMeta
 import datetime
 import os
 import pathlib
-from typing import TYPE_CHECKING, Any, Protocol
+from typing import TYPE_CHECKING, Any, ClassVar, Protocol
 from re import Pattern
 
 from prettyqt.qt import QtCore
@@ -239,6 +239,9 @@ if TYPE_CHECKING:
 
         def get_value(self, value):
             ...
+
+    class IsDataclass(Protocol):
+        __dataclass_fields__: ClassVar[dict]
 
     QtSerializableType = (
         QtCore.QByteArray
