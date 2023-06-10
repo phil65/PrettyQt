@@ -12,6 +12,9 @@ from prettyqt.utils import treeitem
 logger = logging.getLogger(__name__)
 
 
+# AstTokens library would be worth out checking for this model.
+
+
 class AstModel(custom_models.TreeModel):
     """Model to display the tree of an AST node."""
 
@@ -39,7 +42,7 @@ class AstModel(custom_models.TreeModel):
             try:
                 node = ast.parse(ast_tree)
             except SyntaxError as e:
-                logger.exception(e)
+                logger.debug(f"caught {e!r} when building AST")
                 return
         else:
             code = ast.unparse(ast_tree)
