@@ -19,22 +19,8 @@ class SplitterMixin(widgets.FrameMixin):
             ori = orientation
         else:
             ori = constants.ORIENTATION[orientation]
-        self._next_container = None
-        self._stack = []
         super().__init__(ori, **kwargs)
         self.setHandleWidth(10)
-
-    def __enter__(self):
-        if self._next_container is not None:
-            self._next_container.__enter__()
-            self._stack.append(self._next_container)
-            self._next_container = None
-        return self
-
-    def __exit__(self, *_):
-        if self._stack:
-            item = self._stack.pop()
-            item.__exit__()
 
     def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
         if isinstance(index, int):
@@ -78,50 +64,6 @@ class SplitterMixin(widgets.FrameMixin):
     #     self.setSizes(sizes)
     #     for i in range(len(sizes)):
     #         self.setStretchFactor(i, sizes[i])
-
-    @classmethod
-    def create(
-        cls,
-        parent: QtWidgets.QWidget | QtWidgets.QLayout,
-        orientation: constants.OrientationStr | None = None,
-        **kwargs,
-    ):
-        if orientation in constants.ORIENTATION:
-            orientation = constants.ORIENTATION[orientation]
-        match parent:
-            case QtWidgets.QWidget():
-                new = cls(parent=parent, orientation=orientation, **kwargs)
-                widgets.HBoxLayout.create(parent).add(new)  # .create ?
-            case QtWidgets.QLayout():
-                new = cls(orientation, **kwargs)
-                parent.add(new)
-        if orientation:
-            new.setOrientation(orientation)
-        new._stack = []
-        new._next_container = None
-        return new
-
-    def get_sub_layout(self, layout: str, *args, **kwargs):
-        from prettyqt import custom_widgets
-
-        layouts = dict(
-            horizontal=widgets.HBoxLayout,
-            vertical=widgets.VBoxLayout,
-            grid=widgets.GridLayout,
-            form=widgets.FormLayout,
-            stacked=widgets.StackedLayout,
-            flow=custom_widgets.FlowLayout,
-            splitter=widgets.Splitter,
-            scroll=widgets.ScrollArea,
-        )
-        if layout not in layouts:
-            raise ValueError(layout)
-        self._next_container = layouts[layout].create(self._layout, *args, **kwargs)
-        return self
-
-    @property
-    def _layout(self):
-        return self._stack[-1] if self._stack else self
 
     def get_children(self) -> list[QtWidgets.QWidget]:
         return [self.widget(i) for i in range(self.count())]

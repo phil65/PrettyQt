@@ -70,6 +70,26 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def __contains__(self, item: QtWidgets.QWidget | QtWidgets.QLayoutItem):
         return self.indexOf(item) >= 0
 
+    def __iadd__(self, item, *args, **kwargs):
+        self.add(item, *args, **kwargs)
+        return self
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"sizeConstraint": SIZE_CONSTRAINT}
+        return maps
+
+    def add(self, item, *args, **kwargs):
+        match item:
+            case QtWidgets.QWidget():
+                self._container.addWidget(item, *args, **kwargs)
+            case QtWidgets.QLayout():
+                self._container.addLayout(item, *args, **kwargs)
+            case list():
+                for i in item:
+                    self._container.add(i, *args, **kwargs)
+        return item
+
     def __enter__(self):
         if self._next_container is not None:
             self._next_container.__enter__()
@@ -82,8 +102,73 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             item = self._stack.pop()
             item.__exit__()
 
-    def __iadd__(self, item, *args, **kwargs):
-        self.add(item, *args, **kwargs)
+    @property
+    def _container(self):
+        return self._stack[-1] if self._stack else self
+
+    def get_sub_layout(
+        self,
+        layout: str,
+        orientation: constants.OrientationStr | None = None,
+        stretch: int | None = None,
+        **kwargs,
+    ) -> Self:
+        from prettyqt import custom_widgets
+
+        CONTEXT_LAYOUTS = dict(
+            horizontal=widgets.HBoxLayout,
+            vertical=widgets.VBoxLayout,
+            grid=widgets.GridLayout,
+            form=widgets.FormLayout,
+            stacked=widgets.StackedLayout,
+            flow=custom_widgets.FlowLayout,
+            splitter=widgets.Splitter,
+            scroll=widgets.ScrollArea,
+        )
+        Klass = CONTEXT_LAYOUTS[layout]
+        match self._container:
+            case QtWidgets.QWidget() if layout == "scroll":
+                scroller = Klass(parent=self._container)
+                scroller.setWidgetResizable(True)
+                widget = widgets.Widget()
+                scroller.set_widget(widget)
+                new = widget.set_layout(orientation, **kwargs)
+            case QtWidgets.QLayout() if layout == "scroll":
+                scroller = Klass(parent=self._container)
+                scroller.setWidgetResizable(True)
+                widget = widgets.Widget()
+                scroller.set_widget(widget)
+                new = widget.set_layout(orientation, **kwargs)
+                self._container.add(new)
+            case QtWidgets.QWidget() if layout == "splitter":
+                new = Klass(orientation=orientation, parent=self._container, **kwargs)
+            case QtWidgets.QLayout() if layout == "splitter":
+                new = Klass(orientation=orientation, **kwargs)
+                self._container.add(new)
+            case QtWidgets.QMainWindow():
+                widget = widgets.Widget(parent=self._container)
+                self._container.setCentralWidget(widget)
+                new = Klass(widget, **kwargs)
+            case QtWidgets.QScrollArea():
+                widget = widgets.Widget(parent=self._container)
+                self._container.setWidget(widget)
+                self._container.setWidgetResizable(True)
+                new = widget.set_layout("vertical", **kwargs)
+            case QtWidgets.QSplitter():
+                widget = widgets.Widget(parent=self._container)
+                self._container.addWidget(widget)
+                new = Klass(widget, **kwargs)
+            case None | QtWidgets.QWidget():
+                new = Klass(self._container, **kwargs)
+            case QtWidgets.QLayout():
+                new = Klass(**kwargs)
+                if stretch:
+                    self._container.add(new, stretch)
+                else:
+                    self._container.add(new)
+        new._stack = []
+        new._next_container = None
+        self._next_container = new
         return self
 
     def item_at(self, pos_or_index: int | core.Point) -> widgets.QLayoutItem:
@@ -97,95 +182,6 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
                         return item
             case _:
                 raise ValueError(pos_or_index)
-
-    # def __getattr__(self, name):
-    #     return getattr(self._layout, name)
-
-    # def __call__(self):
-    #     return self._layout
-
-    def _get_map(self):
-        maps = super()._get_map()
-        maps |= {"sizeConstraint": SIZE_CONSTRAINT}
-        return maps
-
-    def add(self, item, *args, **kwargs):
-        if isinstance(item, QtWidgets.QWidget):
-            self._layout.addWidget(item, *args, **kwargs)
-        elif isinstance(item, QtWidgets.QLayout):
-            self._layout.addLayout(item, *args, **kwargs)
-            # widget = Widgets.Widget()
-            # widget.set_layout(item)
-            # self._layout.addWidget(item, *args, **kwargs)
-        elif isinstance(item, list):
-            for i in item:
-                self._layout.add(i, *args, **kwargs)
-
-        return item
-
-    @property
-    def _layout(self):
-        return self._stack[-1] if self._stack else self
-
-    @classmethod
-    def create(
-        cls,
-        parent: QtWidgets.QWidget | QtWidgets.QLayout | None = None,
-        stretch: int | None = None,
-        margin: int | None = None,
-        align: constants.AlignmentStr | None = None,
-        **kwargs,
-    ) -> Self:
-        """Create a Layout attached to given parent. Insert widget if needed."""
-        match parent:
-            case QtWidgets.QMainWindow():
-                widget = widgets.Widget(parent=parent)
-                parent.setCentralWidget(widget)
-                new = cls(widget, **kwargs)
-            case QtWidgets.QScrollArea():
-                widget = widgets.Widget(parent=parent)
-                parent.setWidget(widget)
-                parent.setWidgetResizable(True)
-                new = widget.set_layout("vertical", **kwargs)
-            case QtWidgets.QSplitter():
-                widget = widgets.Widget(parent=parent)
-                parent.addWidget(widget)
-                new = cls(widget, **kwargs)
-            case None | QtWidgets.QWidget():
-                new = cls(parent, **kwargs)
-            case QtWidgets.QLayout():
-                new = cls(**kwargs)
-                if stretch:
-                    parent.addLayout(new, stretch)
-                else:
-                    parent.addLayout(new)
-
-        if margin is not None:
-            new.set_margin(margin)
-        if align is not None:
-            new.set_alignment(align)
-
-        new._stack = []
-        new._next_container = None
-        return new
-
-    def get_sub_layout(self, layout: str, *args, **kwargs) -> Self:
-        from prettyqt import custom_widgets
-
-        layouts = dict(
-            horizontal=widgets.HBoxLayout,
-            vertical=widgets.VBoxLayout,
-            grid=widgets.GridLayout,
-            form=widgets.FormLayout,
-            stacked=widgets.StackedLayout,
-            flow=custom_widgets.FlowLayout,
-            splitter=widgets.Splitter,
-            scroll=widgets.ScrollArea,
-        )
-        if layout not in layouts:
-            raise ValueError(layout)
-        self._next_container = layouts[layout].create(self._layout, *args, **kwargs)
-        return self
 
     def clear(self):
         for i in reversed(range(self.count())):

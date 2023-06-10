@@ -14,12 +14,6 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
         viewport = widgets.Widget(self, object_name=f"{type(self).__name__}_viewport")
         self.setViewport(viewport)
 
-    def __enter__(self):
-        return self
-
-    def __exit__(self, *args):
-        pass
-
     def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout | list):
         self.add(other)
         return self

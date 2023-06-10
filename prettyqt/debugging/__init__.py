@@ -144,21 +144,21 @@ def example_multiindex_df():
 def example_widget():
     from prettyqt import widgets
 
-    widget = widgets.Widget()
-    with widgets.VBoxLayout.create(widget) as layout:
-        with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
-            layout += widgets.PlainTextEdit("upper left")
-            layout += widgets.PlainTextEdit("upper middle")
-            with layout.get_sub_layout("splitter", orientation="vertical") as layout:
+    widget = widgets.ScrollArea()
+    layout = widget.set_layout("horizontal")
+    with layout.get_sub_layout("splitter", orientation="horizontal") as layout:
+        layout += widgets.PlainTextEdit("upper left")
+        layout += widgets.PlainTextEdit("upper middle")
+        with layout.get_sub_layout("splitter", orientation="vertical") as layout:
+            layout += widgets.PlainTextEdit("upper right")
+            layout += widgets.PlainTextEdit("middle right")
+            with layout.get_sub_layout("horizontal") as layout:
                 layout += widgets.PlainTextEdit("upper right")
                 layout += widgets.PlainTextEdit("middle right")
-                with layout.get_sub_layout("horizontal") as layout:
-                    layout += widgets.PlainTextEdit("upper right")
-                    layout += widgets.PlainTextEdit("middle right")
-                    button = layout.add(widgets.PushButton("test"))
-        with layout.get_sub_layout("horizontal") as layout:
-            layout += widgets.PlainTextEdit("lower left")
-            layout += widgets.PlainTextEdit("lower right")
+                button = layout.add(widgets.PushButton("test"))
+    with layout.get_sub_layout("horizontal") as layout:
+        layout += widgets.PlainTextEdit("lower left")
+        layout += widgets.PlainTextEdit("lower right")
 
     button.clicked.connect(lambda: widget.layout().addWidget(widgets.Label("test")))
     return widget

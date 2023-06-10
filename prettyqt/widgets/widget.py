@@ -99,6 +99,20 @@ class WidgetMixin(core.ObjectMixin):
         self.fx = Animator(self)
         if margin is not None:
             self.set_margin(margin)
+        self._next_container = None
+        self._stack = []
+
+    def __enter__(self):
+        if self._next_container is not None:
+            self._next_container.__enter__()
+            self._stack.append(self._next_container)
+            self._next_container = None
+        return self
+
+    def __exit__(self, *_):
+        if self._stack:
+            item = self._stack.pop()
+            item.__exit__()
 
     def _get_map(self):
         maps = super()._get_map()
