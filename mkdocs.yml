@@ -1,45 +1,13 @@
 site_name: PrettyQt
+site_description: "Python wrapper for PySide6 / PyQt6."
+repo_url: "https://github.com/phil65/prettyqt"
 site_url: https://phil65.github.io/PrettyQt/
-nav:
-    - Home: index.md
-    # - API: mkapi/api/prettyqt
-    - API:
-        - bluetooth: api/bluetooth.md
-        - charts: api/charts.md
-        - constants: api/constants.md
-        - core: api/core.md
-        - custom_delegates: api/custom_delegates.md
-        - custom_models: api/custom_models.md
-        - custom_validators: api/custom_validators.md
-        - custom_widgets: api/custom_widgets.md
-        - gui: api/gui.md
-        - location: api/location.md
-        - multimedia: api/multimedia.md
-        - multimediawidgets: api/multimediawidgets.md
-        - network: api/network.md
-        - objbrowser: api/objbrowser.md
-        - pdf: api/pdf.md
-        - pdfwidgets: api/pdfwidgets.md
-        - positioning: api/positioning.md
-        - qml: api/qml.md
-        - qthelp: api/qthelp.md
-        - quick: api/quick.md
-        - quickwidgets: api/quickwidgets.md
-        # - scintilla: api/scintilla.md
-        # - scxml: api/scxml.md
-        - svg: api/svg.md
-        - syntaxhighlighters: api/syntaxhighlighters.md
-        - texttospeech: api/texttospeech.md
-        # - utils: api/utils.md
-        - webenginecore: api/webenginecore.md
-        - webenginewidgets: api/webenginewidgets.md
-        - widgets: api/widgets.md
-        # - winextras: api/winextras.md
-    - Changelog: changelog.md
+watch: [mkdocs.yml, README.md, CHANGELOG.md, prettyqt/]
+copyright: Copyright &copy; 2023 Philipp Temminghoff
 
 theme:
     name: material
-    custom_dir: docs/theme_customizations/
+    # custom_dir: docs/theme_customizations/
     palette:
 
         # Palette toggle for light mode
@@ -59,17 +27,21 @@ theme:
     - content.code.copy
     - content.code.select
     - content.code.annotate
-    - navigation.instant
-    - navigation.tracking
+    - navigation.instant # make things faster
+    - navigation.tracking # update URL based on current item in TOC
+    - navigation.path  # shows breadcrumbs
     - navigation.tabs # make top level tabs
-    - navigation.tabs.sticky
+    # - navigation.tabs.sticky # and make them sticky
     - toc.follow  # makes toc follow scrolling
+    # - toc.integrate  # integrates toc into left menu
     - navigation.top  # adds back-to-top button
-    # - navigation.sections
+    - navigation.sections
 plugins:
     - search
     # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
     - tags
+    - literate-nav:
+        nav_file: SUMMARY.md
     - mkdocstrings:
         default_handler: python
         handlers:
@@ -104,6 +76,8 @@ markdown_extensions:
     - pymdownx.snippets
     - pymdownx.superfences
     - md_in_html
+    - toc:
+        toc_depth: 2
     # - pymdownx.betterem
     # - markdown.extensions.footnotes
     # - markdown.extensions.attr_list
@@ -112,3 +86,12 @@ markdown_extensions:
     # - markdown.extensions.abbr
     # - markdown.extensions.md_in_html
 use_directory_urls: false
+
+extra:
+  social:
+  - icon: fontawesome/brands/github
+    link: https://github.com/phil65
+  - icon: fontawesome/brands/gitter
+    link: https://matrix.to/#/#prettyqt:gitter.im
+  - icon: fontawesome/brands/python
+    link: https://pypi.org/project/prettyqt/
