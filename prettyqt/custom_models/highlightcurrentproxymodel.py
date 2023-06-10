@@ -4,6 +4,9 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
+from prettyqt.utils import colors, datatypes
+
+HighlightModeStr = Literal["column", "row", "all"]
 
 
 class HighlightCurrentProxyModel(core.IdentityProxyModel):
@@ -15,7 +18,8 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
         self,
         *args,
         role=constants.DISPLAY_ROLE,
-        mode: Literal["column", "row", "all"] = "column",
+        mode: HighlightModeStr = "column",
+        highlight_color: datatypes.ColorType = "red",
         **kwargs,
     ):
         self._mode = mode
@@ -23,6 +27,7 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
         self._data_role = role
         self._current_column = None
         self._current_row = None
+        self._highlight_color = colors.get_color(highlight_color).as_qt()
         super().__init__(*args, **kwargs)
         parent: widgets.AbstractItemView = self.parent()  # type: ignore
         parent.model_changed.connect(self._on_model_change)
@@ -38,6 +43,18 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
             self._current_column = new.column()
             self._current_row = new.row()
 
+    def set_highlight_color(self, color: datatypes.ColorType):
+        self._highlight_color = colors.get_color(color).as_qt()
+
+    def get_highlight_color(self) -> QtGui.QColor:
+        return self._highlight_color
+
+    def set_highlight_mode(self, mode: HighlightModeStr):
+        self._highlight_mode = mode
+
+    def get_highlight_mode(self) -> HighlightModeStr:
+        return self._highlight_mode
+
     def data(self, index, role=constants.DISPLAY_ROLE):
         if (
             role == constants.BACKGROUND_ROLE
@@ -51,8 +68,11 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
                 )
             )
         ):
-            return QtGui.QColor("red")
+            return self._highlight_color
         return super().data(index, role)
+
+    highlightMode = core.Property(str, get_highlight_mode, set_highlight_mode)
+    highlightColor = core.Property(QtGui.QColor, get_highlight_color, set_highlight_color)
 
 
 if __name__ == "__main__":
@@ -63,7 +83,7 @@ if __name__ == "__main__":
     table = widgets.TableView()
     table.set_model(["a", "b", "c", "d", "a"])
     table.model().setParent(table)
-    model = table.model().proxifier.get_proxy("highlight_current")
+    model = table.model().proxifier.get_proxy("highlight_current", mode="all")
     table.set_model(model)
     table.show()
     with app.debug_mode():
