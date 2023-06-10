@@ -359,7 +359,7 @@ ModePreferenceStr = Literal[
     "no_opaque_detection",
     "no_format_conversion",
 ]
-MODE_PREFERENCE: bidict[ImageConversionFlagStr, Qt.ImageConversionFlag] = bidict(
+MODE_PREFERENCE: bidict[ModePreferenceStr, Qt.ImageConversionFlag] = bidict(
     # Color matching versus dithering preference:
     prefer_dither=Qt.ImageConversionFlag.PreferDither,
     avoid_dither=Qt.ImageConversionFlag.AvoidDither,
