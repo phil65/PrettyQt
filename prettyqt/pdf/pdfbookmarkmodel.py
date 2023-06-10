@@ -31,6 +31,7 @@ class PdfBookmarkModel(core.AbstractItemModelMixin, QtPdf.QPdfBookmarkModel):
         self.setDocument(pdf.PdfDocument(self))
 
     def set_document(self, document: datatypes.PathType | QtPdf.QPdfDocument):
+        """Set document for model."""
         if not isinstance(document, QtPdf.QPdfDocument):
             path = os.fspath(document)
             document = pdf.PdfDocument(self)

@@ -94,9 +94,11 @@ class WebEngineDownloadRequest:
         return getattr(self.item, val)
 
     def get_interrupt_reason(self) -> DownloadInterruptReasonStr:
+        """Get reason for download interruption."""
         return DOWNLOAD_INTERRUPT_REASONS.inverse[self.item.interruptReason()]
 
     def get_state(self) -> DownloadStateStr:
+        """Get current state."""
         return DOWNLOAD_STATE.inverse[self.item.state()]
 
     def set_save_page_format(self, fmt: SavePageFormatStr):

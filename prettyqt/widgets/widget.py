@@ -301,6 +301,10 @@ class WidgetMixin(core.ObjectMixin):
         return None if icon.isNull() else gui.Icon(icon)
 
     def show_tooltip(self, duration: int | None = None):
+        """Show the tooltip of this widget for given time.
+
+        When no duration is given, it will get calculated based on length.
+        """
         if duration is None:
             duration = -1  # automatic
         pos = self.map_to("global", (0, 0))
@@ -389,6 +393,10 @@ class WidgetMixin(core.ObjectMixin):
         size: datatypes.SizeType | None = None,
         rich_text: bool = False,
     ):
+        """Set a tooltip for this widget.
+
+        In image can get displayed by passing a PathLike object.
+        """
         if isinstance(tooltip, os.PathLike):
             path = os.fspath(tooltip)
             if size is None:
@@ -409,6 +417,7 @@ class WidgetMixin(core.ObjectMixin):
         weight: int | None = None,
         italic: bool = False,
     ) -> gui.Font:
+        """Set the font for this widget."""
         if font_size is None:
             font_size = -1
         if weight is None:
@@ -423,17 +432,21 @@ class WidgetMixin(core.ObjectMixin):
         return gui.Font(self.font())
 
     def get_foreground_role(self) -> gui.palette.RoleStr:
+        """Set foreground role for this widget."""
         return gui.palette.ROLE.inverse[self.foregroundRole()]
 
     def set_foreground_role(self, role: gui.palette.RoleStr):
+        """Set foreground role for this widget."""
         if role not in gui.palette.ROLE:
             raise InvalidParamError(role, gui.palette.ROLE)
         self.setForegroundRole(gui.palette.ROLE[role])
 
     def get_background_role(self) -> gui.palette.RoleStr:
+        """Get background role for this widget."""
         return gui.palette.ROLE.inverse[self.backgroundRole()]
 
     def set_background_role(self, role: gui.palette.RoleStr):
+        """Get foreground role for this widget."""
         if role not in gui.palette.ROLE:
             raise InvalidParamError(role, gui.palette.ROLE)
         self.setBackgroundRole(gui.palette.ROLE[role])
@@ -487,7 +500,7 @@ class WidgetMixin(core.ObjectMixin):
         for attr, state in kwargs.items():
             if attr not in constants.WIDGET_ATTRIBUTE:
                 raise InvalidParamError(attr, constants.WIDGET_ATTRIBUTE)
-            self.setAttribute(constants.WIDGET_ATTRIBUTE[attr], state)  # type: ignore
+            self.setAttribute(constants.WIDGET_ATTRIBUTE[attr], state)
 
     def set_modality(self, modality: constants.WindowModalityStr):
         """Set modality for the dialog.
@@ -515,7 +528,7 @@ class WidgetMixin(core.ObjectMixin):
         horizontal: widgets.sizepolicy.SizePolicyStr | None = None,
         vertical: widgets.sizepolicy.SizePolicyStr | None = None,
     ):
-        """Set the sizes policy.
+        """Set the size policy.
 
         Args:
             horizontal: horizontal size policy
@@ -529,6 +542,7 @@ class WidgetMixin(core.ObjectMixin):
         self.setSizePolicy(sp)
 
     def get_size_policy(self) -> widgets.SizePolicy:
+        """Get size policy."""
         qpol = self.sizePolicy()
         if isinstance(qpol, widgets.SizePolicy):
             return qpol
@@ -546,6 +560,7 @@ class WidgetMixin(core.ObjectMixin):
     def grab_mouse_events(
         self, cursor_shape: constants.CursorShapeStr | None = None
     ) -> Iterator[None]:
+        """Context manager to grab mouse events."""
         if cursor_shape is not None:
             self.grabMouse(constants.CURSOR_SHAPE[cursor_shape])
         else:
@@ -555,6 +570,7 @@ class WidgetMixin(core.ObjectMixin):
 
     @contextlib.contextmanager
     def grab_keyboard_events(self) -> Iterator[None]:
+        """Context manager to grab keyboard events."""
         self.grabKeyboard()
         yield None
         self.releaseKeyboard()

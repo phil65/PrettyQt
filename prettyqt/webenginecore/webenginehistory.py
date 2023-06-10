@@ -26,6 +26,7 @@ class WebEngineHistory:
         return iter(items)
 
     def get_items(self) -> list[webenginecore.WebEngineHistoryItem]:
+        """Get history items."""
         return [webenginecore.WebEngineHistoryItem(i) for i in self.history.items()]
 
 

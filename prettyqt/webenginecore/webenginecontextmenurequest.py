@@ -80,39 +80,51 @@ class WebEngineContextMenuRequest(QtWebEngineCore.QWebEngineContextMenuRequest):
         return core.Url(self.linkUrl())
 
     def get_media_type(self) -> MediaTypeStr:
+        """Get media type."""
         return MEDIA_TYPES.inverse[self.mediaType()]
 
     def get_media_flags(self) -> list[MediaFlagStr]:
+        """Get media flags."""
         return MEDIA_FLAGS.get_list(self.mediaFlags())
 
     def get_edit_flags(self) -> list[MediaFlagStr]:
+        """Get edit flags."""
         return EDIT_FLAGS.get_list(self.editFlags())
 
     def can_undo(self) -> bool:
+        """Returns whether undo is possible."""
         return bool(mod.EditFlag.CanUndo & self.editFlags())
 
     def can_redo(self) -> bool:
+        """Returns whether redo is possible."""
         return bool(mod.EditFlag.CanRedo & self.editFlags())
 
     def can_cut(self) -> bool:
+        """Returns whether cut is possible."""
         return bool(mod.EditFlag.CanCut & self.editFlags())
 
     def can_copy(self) -> bool:
+        """Returns whether copy is possible."""
         return bool(mod.EditFlag.CanCopy & self.editFlags())
 
     def can_paste(self) -> bool:
+        """Returns whether paste is possible."""
         return bool(mod.EditFlag.CanPaste & self.editFlags())
 
     def can_delete(self) -> bool:
+        """Returns whether delete is possible."""
         return bool(mod.EditFlag.CanDelete & self.editFlags())
 
     def can_select_all(self) -> bool:
+        """Returns whether select_all is possible."""
         return bool(mod.EditFlag.CanSelectAll & self.editFlags())
 
     def can_translate(self) -> bool:
+        """Returns whether translate is possible."""
         return bool(mod.EditFlag.CanTranslate & self.editFlags())
 
     def can_edit_richly(self) -> bool:
+        """Returns whether edit_richly is possible."""
         return bool(mod.EditFlag.CanEditRichly & self.editFlags())
 
 
