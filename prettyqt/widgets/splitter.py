@@ -12,7 +12,7 @@ from prettyqt.utils import InvalidParamError
 class SplitterMixin(widgets.FrameMixin):
     def __init__(
         self,
-        orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",
+        orientation: constants.OrientationStr | QtCore.Qt.Orientation = "horizontal",
         **kwargs,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):

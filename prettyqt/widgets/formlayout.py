@@ -48,13 +48,13 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
     def __setitem__(
         self, index: int | tuple[int, RoleStr], value: str | QtWidgets.QWidget
     ):
-        if isinstance(index, tuple):
-            row = index[0]
-            role = index[1]
-        else:
-            row = index
-            role = "both"
-        self.set_widget(value, row, role)
+        match index:
+            case (int() as row, str() as role):
+                self.set_widget(value, row, role)
+            case int() as row:
+                self.set_widget(value, row, "both")
+            case _:
+                raise TypeError(index)
 
     def __delitem__(self, index: int):
         self.removeRow(index)
@@ -125,29 +125,28 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
     def set_widget(
         self, widget: str | QtWidgets.QWidget, row: int, role: RoleStr = "both"
     ):
-        if isinstance(widget, str):
-            widget = widgets.Label(widget)
+        widget = widgets.Label(widget) if isinstance(widget, str) else widget
         self.setWidget(row, ROLE[role], widget)
 
     def get_widget(
         self, row: int, role: RoleStr = "both"
     ) -> QtWidgets.QLayout | QtWidgets.QWidget:
         item = self.itemAt(row, ROLE[role])
-        widget = item.widget()
-        if widget is None:
-            widget = item.layout()
-        return widget
+        return item.widget() or item.layout()
 
     def get_item_position(self, index: int) -> tuple[int, RoleStr] | None:
-        pos = self.getItemPosition(index)  # type: ignore
-        return None if pos[0] == -1 else (pos[0], ROLE.inverse[pos[1]])
+        row, role = self.getItemPosition(index)  # type: ignore
+        return None if row == -1 else (row, ROLE.inverse[role])
 
     def add(self, *items):
         for i in items:
-            if isinstance(i, QtWidgets.QWidget | QtWidgets.QLayout):
-                self.addRow(i)
-            elif isinstance(i, tuple):
-                self.addRow(*i)
+            match i:
+                case QtWidgets.QWidget() | QtWidgets.QLayout():
+                    self.addRow(i)
+                case tuple():
+                    self.addRow(*i)
+                case _:
+                    raise TypeError(i)
 
     def set_row_wrap_policy(self, policy: RowWrapPolicyStr):
         """Set row wrap policy to use.

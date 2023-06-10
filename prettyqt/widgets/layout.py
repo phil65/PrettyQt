@@ -8,7 +8,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import InvalidParamError, bidict
 
 
 SIZE_CONSTRAINT = bidict(
@@ -39,7 +39,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         match index:
             case int():
                 item = self.itemAt(index)
-                return widget if (widget := item.widget()) is not None else item.layout()
+                return item.widget() or item.layout()
             case str():
                 if (item := self.find_child(typ=QtCore.QObject, name=index)) is not None:
                     return item
@@ -47,10 +47,9 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             case _:
                 raise IndexError(index)
 
-    # def __del__(self):
-    #     item = self.takeAt(0)
-    #     while item:
-    #         item = self.takeAt(0)
+    def __setitem__(self, key, value):
+        if self._container != self:
+            self._container.__setitem__(key, value)
 
     def __delitem__(self, item: int | QtWidgets.QLayoutItem):
         if isinstance(item, int):
@@ -60,9 +59,6 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
 
     def __len__(self) -> int:
         return self.count()
-
-    def __repr__(self):
-        return get_repr(self)
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout | None]:
         return iter(self[i] for i in range(self.count()))

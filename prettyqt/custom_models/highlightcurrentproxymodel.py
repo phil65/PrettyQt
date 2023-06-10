@@ -44,15 +44,19 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
             self._current_row = new.row()
 
     def set_highlight_color(self, color: datatypes.ColorType):
+        """Set color used for highlighting cells."""
         self._highlight_color = colors.get_color(color).as_qt()
 
     def get_highlight_color(self) -> QtGui.QColor:
+        """Get color used for higlighting cells."""
         return self._highlight_color
 
     def set_highlight_mode(self, mode: HighlightModeStr):
+        """Set highlight mode."""
         self._highlight_mode = mode
 
     def get_highlight_mode(self) -> HighlightModeStr:
+        """Get highlight mode."""
         return self._highlight_mode
 
     def data(self, index, role=constants.DISPLAY_ROLE):

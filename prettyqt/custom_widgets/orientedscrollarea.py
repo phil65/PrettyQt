@@ -9,7 +9,7 @@ class OrientedScrollArea(widgets.ScrollArea):
         self,
         orientation: QtCore.Qt.Orientation = QtCore.Qt.Orientation.Horizontal,
         **kwargs,
-    ) -> None:
+    ):
         super().__init__(**kwargs)
         self._orientation = orientation
         self.set_orientation(orientation)
@@ -18,7 +18,7 @@ class OrientedScrollArea(widgets.ScrollArea):
         """Get the orientation."""
         return self._orientation
 
-    def set_orientation(self, orientation: QtCore.Qt.Orientation) -> None:
+    def set_orientation(self, orientation: QtCore.Qt.Orientation):
         """Set the orientation."""
         self._orientation = orientation
         if orientation == QtCore.Qt.Orientation.Horizontal:

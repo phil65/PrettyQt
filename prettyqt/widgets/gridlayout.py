@@ -13,14 +13,16 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
     def __getitem__(
         self, idx: tuple[int, int] | int | str
     ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:
-        if isinstance(idx, tuple):
-            item = self.itemAtPosition(*idx)
-        elif isinstance(idx, int):
-            item = self.itemAt(idx)
-        else:
-            return self.find_child(QtCore.QObject, idx)
-        widget = item.widget()
-        return item.layout() if widget is None else widget
+        match idx:
+            case (int(), int()):
+                item = self.itemAtPosition(*idx)
+            case int():
+                item = self.itemAt(idx)
+            case str():
+                return self.find_child(QtCore.QObject, idx)
+            case _:
+                raise TypeError(idx)
+        return item.widget() or item.layout()
 
     def __setitem__(
         self,
@@ -71,16 +73,14 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
         colspan: int = 1,
         alignment: constants.AlignmentStr | None = None,
     ):
-        alignment = (
-            constants.ALIGN_NONE if alignment is None else constants.ALIGNMENTS[alignment]
-        )
+        flag = constants.ALIGNMENTS[alignment or "none"]
         match item:
             case QtWidgets.QWidget():
-                self.addWidget(item, rowstart, colstart, rowspan, colspan, alignment)
+                self.addWidget(item, rowstart, colstart, rowspan, colspan, flag)
             case QtWidgets.QLayout():
-                self.addLayout(item, rowstart, colstart, rowspan, colspan, alignment)
+                self.addLayout(item, rowstart, colstart, rowspan, colspan, flag)
             case QtWidgets.QLayoutItem():
-                self.addItem(item, rowstart, colstart, rowspan, colspan, alignment)
+                self.addItem(item, rowstart, colstart, rowspan, colspan, flag)
 
     def append(self, item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item

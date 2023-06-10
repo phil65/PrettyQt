@@ -3,7 +3,7 @@ from __future__ import annotations
 import dataclasses
 import sys
 
-from prettyqt import core, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -20,7 +20,7 @@ CT = QtWidgets.QStyle.ContentsType
 CC = QtWidgets.QStyle.ComplexControl
 
 
-class AcionGrid(widgets.ToolButton):
+class AcionGridButton(widgets.ToolButton):
     def __init__(self, parent=None, **kwargs):
         super().__init__(parent, **kwargs)
         self._elided_text = ""
@@ -36,12 +36,15 @@ class AcionGrid(widgets.ToolButton):
         super().resizeEvent(event)
         self._update_text()
 
+    def add(self, action):
+        self.addAction(action)
+
     def _update_text(self):
         fm = self.get_font_metrics()
         text = self.defaultAction().text()
         words = text.split()
 
-        option = widgets.StyleOptionToolButton()
+        option = widgets.QStyleOptionToolButton()
         option.initFrom(self)
 
         margin = self.style().pixelMetric(PM.PM_ButtonMargin, option, self)
@@ -66,12 +69,6 @@ class AcionGrid(widgets.ToolButton):
         lines = [fm.elided_text(line, "right", self.width() - margin) for line in lines]
         self._elided_text = "\n".join(lines).replace("&", "&&")  # Need escaped ampersand
 
-    # def paintEvent(self, event):
-    #     with widgets.StylePainter(self) as p:
-    #         opt = QtWidgets.QStyleOptionToolButton()
-    #         self.initStyleOption(opt)
-    #         p.drawComplexControl(CC.CC_ToolButton, opt)
-
     def initStyleOption(self, option):
         super().initStyleOption(option)
         if self._elided_text:
@@ -82,13 +79,12 @@ class AcionGrid(widgets.ToolButton):
         self.initStyleOption(opt)
         style = self.style()
         csize = opt.iconSize
-        fm = opt.fontMetrics
         margin = style.pixelMetric(PM.PM_ButtonMargin)
         # content size is:
         #   * vertical: icon + margin + 2 * font ascent
         #   * horizontal: icon * 3 / 2
 
-        csize.setHeight(csize.height() + margin + 2 * fm.lineSpacing())
+        csize.setHeight(csize.height() + margin + 2 * opt.fontMetrics.lineSpacing())
         csize.setWidth(csize.width() * 3 // 2)
         return style.sizeFromContents(CT.CT_ToolButton, opt, csize, self)
 
@@ -109,21 +105,15 @@ class ActionGrid(widgets.Frame):
     def __init__(
         self,
         columns: int = 4,
-        button_size=None,
-        icon_size=None,
+        button_size: core.QSize | None = None,
+        icon_size: core.QSize | None = None,
         tool_button_style=QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon,
         **kwargs,
     ):
         super().__init__(**kwargs)
-
-        if button_size is None:
-            button_size = QtCore.QSize()
-        if icon_size is None:
-            icon_size = QtCore.QSize()
-
         self._columns = columns
-        self._button_size = QtCore.QSize(button_size)
-        self._icon_size = QtCore.QSize(icon_size)
+        self._button_size = QtCore.QSize(button_size) if button_size else core.QSize()
+        self._icon_size = QtCore.QSize(icon_size) if icon_size else core.QSize()
         self._tool_button_style = tool_button_style
 
         self._grid_slots: list[ActionGridItem] = []
@@ -133,18 +123,18 @@ class ActionGrid(widgets.Frame):
         self.set_layout("grid", margin=0, spacing=0)
         self.set_size_policy("fixed", "minimum_expanding")
 
-    def setButtonSize(self, size):
+    def set_button_size(self, size: core.QSize):
         """Set the button size."""
         if self._button_size != size:
             self._button_size = QtCore.QSize(size)
             for slot in self._grid_slots:
                 slot.button.setFixedSize(size)
 
-    def button_size(self):
+    def button_size(self) -> core.QSize:
         """Return the button size."""
         return QtCore.QSize(self._button_size)
 
-    def setIconSize(self, size):
+    def setIconSize(self, size: core.QSize):
         """Set the button icon size (The default icon size is style-defined)."""
         if self._icon_size != size:
             self._icon_size = QtCore.QSize(size)
@@ -152,11 +142,11 @@ class ActionGrid(widgets.Frame):
             for slot in self._grid_slots:
                 slot.button.setIconSize(size)
 
-    def icon_size(self):
+    def icon_size(self) -> core.QSize:
         """Return icon size. If no size is set a style defined size is returned."""
         return self._get_effective_icon_size()
 
-    def _get_effective_icon_size(self):
+    def _get_effective_icon_size(self) -> core.QSize:
         if self._icon_size.isValid():
             return QtCore.QSize(self._icon_size)
         opt = QtWidgets.QStyleOptionToolButton()
@@ -171,14 +161,14 @@ class ActionGrid(widgets.Frame):
                 item.button.setIconSize(size)
         super().changeEvent(event)
 
-    def set_tool_button_style(self, style):
+    def set_tool_button_style(self, style: constants.ToolButtonStyle):
         """Set the tool button style."""
         if self._tool_button_style != style:
             self._tool_button_style = style
             for slot in self._grid_slots:
                 slot.button.setToolButtonStyle(style)
 
-    def get_tool_button_style(self):
+    def get_tool_button_style(self) -> constants.ToolButtonStyle:
         """Return the tool button style."""
         return self._tool_button_style
 
@@ -204,18 +194,6 @@ class ActionGrid(widgets.Frame):
         index = actions.index(action)
         return self._grid_slots[index].button
 
-    def create_button_for_action(self, action):
-        """Create and return a :class:`QToolButton` for action."""
-        button = AcionGrid(self)
-        button.setDefaultAction(action)
-
-        if self._button_size.isValid():
-            button.setFixedSize(self._button_size)
-        button.setIconSize(self._get_effective_icon_size())
-        button.setToolButtonStyle(self._tool_button_style)
-        button.setProperty("tool-grid-button", True)
-        return button
-
     def count(self) -> int:
         """Return the number of buttons/actions in the grid."""
         return len(self._grid_slots)
@@ -235,18 +213,21 @@ class ActionGrid(widgets.Frame):
     def _insert_action_button(self, index, action):
         """Create a button for the action and add it to the layout at index."""
         self._shift_grid(index, 1)
-        button = self.create_button_for_action(action)
+        button = AcionGridButton(
+            self,
+            tool_button_style=self._tool_button_style,
+            triggered=self._mapper.map,
+            icon_size=self._get_effective_icon_size(),
+        )
+        button.setDefaultAction(action)
 
+        if self._button_size.isValid():
+            button.setFixedSize(self._button_size)
         row = index // self._columns
         column = index % self._columns
-
-        layout = self.layout()
-        layout.addWidget(button, row, column)
-
+        self.layout().addWidget(button, row, column)
         self._grid_slots.insert(index, ActionGridItem(button, action, row, column))
-
         self._mapper.setMapping(button, action)
-        button.clicked.connect(self._mapper.map)
         button.installEventFilter(self)
 
     def _remove_action_button(self, action):
@@ -279,11 +260,7 @@ class ActionGrid(widgets.Frame):
             if item := layout.itemAtPosition(index // columns, index % columns):
                 button = item.widget()
                 new_index = index + count
-                layout.addWidget(
-                    button,
-                    new_index // columns,
-                    new_index % columns,
-                )
+                layout.addWidget(button, new_index // columns, new_index % columns)
 
     def _relayout(self):
         """Relayout the buttons."""
@@ -346,17 +323,26 @@ class ActionGrid(widgets.Frame):
 
 
 if __name__ == "__main__":
+    from prettyqt import gui
+
     app = widgets.app()
     toolbox = ActionGrid(columns=3)
+    w = widgets.Widget()
+    w.set_layout("horizontal")
+    w.box.add(toolbox)
     icon = app.style().standardIcon(QtWidgets.QStyle.StandardPixmap.SP_FileIcon)
     actions = [
-        QtGui.QAction("A", None, icon=icon),
-        QtGui.QAction("B", None, icon=icon),
-        QtGui.QAction("This one is longer.", icon=icon),
-        QtGui.QAction("Not done yet!", icon=icon),
-        QtGui.QAction("The quick brown fox ... does something I guess", icon=icon),
+        gui.QAction(text="A", icon=icon, parent=toolbox),
+        gui.QAction(text="B", icon=icon, parent=toolbox),
+        gui.QAction(text="This one is longer.", icon=icon, parent=toolbox),
+        gui.QAction(text="Not done yet!", icon=icon, parent=toolbox),
+        gui.QAction(
+            text="The quick brown fox ... does something I guess",
+            icon=icon,
+            parent=toolbox,
+        ),
     ]
 
     toolbox.addActions(actions)
-    toolbox.show()
+    w.show()
     app.exec()
