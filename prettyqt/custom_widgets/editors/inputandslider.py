@@ -16,9 +16,9 @@ class InputAndSlider(widgets.Widget):
         self.path = None
         self.spinbox = widgets.SpinBox()
         self.slider = widgets.Slider()
-        with widgets.HBoxLayout.create(self, margin=0) as layout:
-            layout.add(self.spinbox)
-            layout.add(self.slider)
+        layout = self.set_layout("horizontal", margin=0)
+        layout.add(self.spinbox)
+        layout.add(self.slider)
         if bounds:
             self.set_range(*bounds)
         self.spinbox.valueChanged.connect(self.slider.set_value)

@@ -6,7 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import InvalidParamError
 
 
 class SplitterMixin(widgets.FrameMixin):
@@ -83,7 +83,6 @@ class SplitterMixin(widgets.FrameMixin):
     def create(
         cls,
         parent: QtWidgets.QWidget | QtWidgets.QLayout,
-        margins: datatypes.MarginsType | None = None,
         orientation: constants.OrientationStr | None = None,
         **kwargs,
     ):
@@ -96,9 +95,6 @@ class SplitterMixin(widgets.FrameMixin):
             case QtWidgets.QLayout():
                 new = cls(orientation, **kwargs)
                 parent.add(new)
-        if margins:
-            new.setContentsMargins(*margins)
-
         if orientation:
             new.setOrientation(orientation)
         new._stack = []
@@ -106,43 +102,21 @@ class SplitterMixin(widgets.FrameMixin):
         return new
 
     def get_sub_layout(self, layout: str, *args, **kwargs):
-        match layout:
-            case "horizontal":
-                self._next_container = widgets.HBoxLayout.create(
-                    self._layout, *args, **kwargs
-                )
-            case "vertical":
-                self._next_container = widgets.VBoxLayout.create(
-                    self._layout, *args, **kwargs
-                )
-            case "grid":
-                self._next_container = widgets.GridLayout.create(
-                    self._layout, *args, **kwargs
-                )
-            case "form":
-                self._next_container = widgets.FormLayout.create(
-                    self._layout, *args, **kwargs
-                )
-            case "stacked":
-                self._next_container = widgets.StackedLayout.create(
-                    self._layout, *args, **kwargs
-                )
-            case "flow":
-                from prettyqt import custom_widgets
+        from prettyqt import custom_widgets
 
-                self._next_container = custom_widgets.FlowLayout.create(
-                    self._layout, *args, **kwargs
-                )
-            case "splitter":
-                self._next_container = widgets.Splitter.create(
-                    self._layout, *args, **kwargs
-                )
-            case "scroll":
-                self._next_container = widgets.ScrollArea.create(
-                    self._layout, *args, **kwargs
-                )
-            case _:
-                raise ValueError("Invalid Layout")
+        layouts = dict(
+            horizontal=widgets.HBoxLayout,
+            vertical=widgets.VBoxLayout,
+            grid=widgets.GridLayout,
+            form=widgets.FormLayout,
+            stacked=widgets.StackedLayout,
+            flow=custom_widgets.FlowLayout,
+            splitter=widgets.Splitter,
+            scroll=widgets.ScrollArea,
+        )
+        if layout not in layouts:
+            raise ValueError(layout)
+        self._next_container = layouts[layout].create(self._layout, *args, **kwargs)
         return self
 
     @property

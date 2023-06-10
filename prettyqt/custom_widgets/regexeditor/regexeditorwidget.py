@@ -62,16 +62,16 @@ class RegexEditorWidget(widgets.Widget):
             checked=True,
             state_changed=self.textedit_quickref.setVisible,
         )
-        with widgets.HBoxLayout.create(self) as layout:
-            with layout.get_sub_layout("vertical") as layout:
-                layout.add(groupbox)
-                layout.add(groupbox_teststring)
-                layout.add(groupbox_sub)
-                layout.add(self.cb_quickref)
-            with layout.get_sub_layout("vertical") as layout:
-                layout.add(self.label_num_matches)
-                layout.add(self.table_matches)
-            layout.add(self.textedit_quickref)
+        layout = self.set_layout("horizontal")
+        with layout.get_sub_layout("vertical") as layout:
+            layout.add(groupbox)
+            layout.add(groupbox_teststring)
+            layout.add(groupbox_sub)
+            layout.add(self.cb_quickref)
+        with layout.get_sub_layout("vertical") as layout:
+            layout.add(self.label_num_matches)
+            layout.add(self.table_matches)
+        layout.add(self.textedit_quickref)
         model = custom_models.RegexMatchesModel()
         self.table_matches.set_model(model)
         self.table_matches.setColumnWidth(0, 60)

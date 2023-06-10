@@ -62,16 +62,16 @@ class IconBrowser(widgets.MainWindow):
         self._combobox.addItems([ALL_COLLECTIONS, *sorted(font_maps.keys())])
 
         search_bar_frame = widgets.Frame(self)
-        with widgets.HBoxLayout.create(search_bar_frame, margin=0) as layout:
-            layout.add(self._combobox)
-            layout.add(self._lineedit)
+        layout = search_bar_frame.set_layout("horizontal", margin=0)
+        layout.add(self._combobox)
+        layout.add(self._lineedit)
 
         self._copy_button = widgets.PushButton("Copy Name", clicked=self._copy_icon_text)
         frame = widgets.Frame(self)
-        with widgets.VBoxLayout.create(frame) as layout:
-            layout.add(search_bar_frame)
-            layout.add(self._listview)
-            layout.add(self._copy_button)
+        layout = frame.set_layout("vertical")
+        layout.add(search_bar_frame)
+        layout.add(self._listview)
+        layout.add(self._copy_button)
         self.setCentralWidget(frame)
         self.add_shortcut("return", self._copy_icon_text)
         self._lineedit.setFocus()

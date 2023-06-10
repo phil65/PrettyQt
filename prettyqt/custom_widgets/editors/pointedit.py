@@ -12,11 +12,11 @@ class PointEdit(widgets.Widget):
         self.set_margin(0)
         self.spinbox_x = widgets.SpinBox(maximum=999999)
         self.spinbox_y = widgets.SpinBox(maximum=999999)
-        with widgets.HBoxLayout.create(self, margin=0) as layout:
-            layout.add(widgets.Label("x", alignment="center_right"))
-            layout.add(self.spinbox_x)
-            layout.add(widgets.Label("y", alignment="center_right"))
-            layout.add(self.spinbox_y)
+        layout = self.set_layout("horizontal", margin=0)
+        layout.add(widgets.Label("x", alignment="center_right"))
+        layout.add(self.spinbox_x)
+        layout.add(widgets.Label("y", alignment="center_right"))
+        layout.add(self.spinbox_y)
         self.spinbox_x.value_changed.connect(self._on_value_change)
         self.spinbox_y.value_changed.connect(self._on_value_change)
 

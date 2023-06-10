@@ -145,7 +145,8 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             case QtWidgets.QScrollArea():
                 widget = widgets.Widget(parent=parent)
                 parent.setWidget(widget)
-                new = cls(widget, **kwargs)
+                parent.setWidgetResizable(True)
+                new = widget.set_layout("vertical", **kwargs)
             case QtWidgets.QSplitter():
                 widget = widgets.Widget(parent=parent)
                 parent.addWidget(widget)
@@ -169,28 +170,21 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         return new
 
     def get_sub_layout(self, layout: str, *args, **kwargs) -> Self:
-        match layout:
-            case "horizontal":
-                Class = widgets.HBoxLayout
-            case "vertical":
-                Class = widgets.VBoxLayout
-            case "grid":
-                Class = widgets.GridLayout
-            case "form":
-                Class = widgets.FormLayout
-            case "stacked":
-                Class = widgets.StackedLayout
-            case "flow":
-                from prettyqt import custom_widgets
+        from prettyqt import custom_widgets
 
-                Class = custom_widgets.FlowLayout
-            case "splitter":
-                Class = widgets.Splitter
-            case "scroll":
-                Class = widgets.ScrollArea
-            case _:
-                raise ValueError("Invalid Layout")
-        self._next_container = Class.create(self._layout, *args, **kwargs)
+        layouts = dict(
+            horizontal=widgets.HBoxLayout,
+            vertical=widgets.VBoxLayout,
+            grid=widgets.GridLayout,
+            form=widgets.FormLayout,
+            stacked=widgets.StackedLayout,
+            flow=custom_widgets.FlowLayout,
+            splitter=widgets.Splitter,
+            scroll=widgets.ScrollArea,
+        )
+        if layout not in layouts:
+            raise ValueError(layout)
+        self._next_container = layouts[layout].create(self._layout, *args, **kwargs)
         return self
 
     def clear(self):
@@ -290,4 +284,5 @@ if __name__ == "__main__":
     widget = debugging.example_widget()
 
     widget.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()
