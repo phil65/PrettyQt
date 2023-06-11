@@ -62,6 +62,62 @@ def make_qtype(obj):
     return obj
 
 
+def to_point(point: PointFType | PointType | None):
+    match point:
+        case None:
+            return QtCore.QPoint(0, 0)
+        case (int(), int()):
+            return QtCore.QPoint(*point)
+        case QtCore.QPoint():
+            return point
+        case QtCore.QPointF():
+            return point.toPointF()
+        case _:
+            raise TypeError(point)
+
+
+def to_pointf(point: PointFType | PointType | None):
+    match point:
+        case None:
+            return QtCore.PointF(0, 0)
+        case (int(), int()):
+            return QtCore.PointF(*point)
+        case QtCore.PointF():
+            return point
+        case QtCore.Point():
+            return point.toPointF()
+        case _:
+            raise TypeError(point)
+
+
+def to_size(size: SizeFType | SizeType | None):
+    match size:
+        case None:
+            return QtCore.QSize(0, 0)
+        case (int(), int()):
+            return QtCore.QSize(*size)
+        case QtCore.QSize():
+            return size
+        case QtCore.QSizeF():
+            return size.toSize()
+        case _:
+            raise TypeError(size)
+
+
+def to_sizef(size: SizeFType | SizeType | None):
+    match size:
+        case None:
+            return QtCore.QSizeF(0, 0)
+        case (int(), int()):
+            return QtCore.QSizeF(*size)
+        case QtCore.QSizeF():
+            return size
+        case QtCore.QSize():
+            return size.toSizeF()
+        case _:
+            raise TypeError(size)
+
+
 def make_serializable(obj):
     #  possible to avoid importing by checking the metaobject instead of isinstance?
     from prettyqt import core
