@@ -32,23 +32,11 @@ class RegexEditorWidget(widgets.Widget):
         self.resize(1200, 800)
         self.prog: Pattern | None = None
         self.matches: list[Match] = []
-        groupbox = widgets.GroupBox(title="Regular expression")
-        grid = widgets.GridLayout(groupbox)
-        layout_toprow = widgets.HBoxLayout()
-        self.regexinput = custom_widgets.RegexInput(minimum_width=400)
-        layout_toprow.add(self.regexinput)
-        grid[1, 0] = layout_toprow
-        groupbox_teststring = widgets.GroupBox(title="Test strings")
-        groupbox_teststring.set_layout("grid")
         self.textedit_teststring = widgets.PlainTextEdit(teststring, minimum_width=400)
-        groupbox_teststring.box[0, 0] = self.textedit_teststring
+        self.regexinput = custom_widgets.RegexInput(minimum_width=400)
         self.label_num_matches = widgets.Label("No match", alignment="center")
-        groupbox_sub = widgets.GroupBox(title="Substitution", checkable=True)
-        layout_sub = widgets.GridLayout(groupbox_sub)
         self.lineedit_sub = widgets.LineEdit(text_changed=self.update_sub_textedit)
         self.textedit_sub = widgets.PlainTextEdit(read_only=True, minimum_width=400)
-        layout_sub[0, 0] = self.lineedit_sub
-        layout_sub[1, 0] = self.textedit_sub
         self.table_matches = widgets.TableView()
         self.table_matches.setup_list_style()
         self.textedit_quickref = widgets.TextEdit(
@@ -62,6 +50,30 @@ class RegexEditorWidget(widgets.Widget):
             checked=True,
             state_changed=self.textedit_quickref.setVisible,
         )
+        model = custom_models.RegexMatchesModel()
+        self.table_matches.set_model(model)
+        self.table_matches.setColumnWidth(0, 60)
+        self.table_matches.setColumnWidth(1, 60)
+        doc = self.textedit_teststring.document()
+        self._highlighter = RegexMatchHighlighter(doc)
+        self._highlighter.rehighlight()
+        self.regexinput.value_changed.connect(self._update_view)
+        self.textedit_teststring.textChanged.connect(self._update_view)
+        self.regexinput.pattern = regex
+        groupbox = widgets.GroupBox(title="Regular expression")
+        layout_toprow = widgets.HBoxLayout()
+        layout_toprow.add(self.regexinput)
+        grid = widgets.GridLayout(groupbox)
+        grid[1, 0] = layout_toprow
+        groupbox_teststring = widgets.GroupBox(title="Test strings")
+        groupbox_teststring.set_layout("grid")
+        groupbox_teststring.box[0, 0] = self.textedit_teststring
+        groupbox_sub = widgets.GroupBox(title="Substitution", checkable=True)
+        groupbox_sub.toggled.connect(self.lineedit_sub.setVisible)
+        groupbox_sub.toggled.connect(self.textedit_sub.setVisible)
+        layout_sub = widgets.GridLayout(groupbox_sub)
+        layout_sub[0, 0] = self.lineedit_sub
+        layout_sub[1, 0] = self.textedit_sub
         layout = self.set_layout("horizontal")
         with layout.get_sub_layout("vertical") as layout:
             layout.add(groupbox)
@@ -72,18 +84,6 @@ class RegexEditorWidget(widgets.Widget):
             layout.add(self.label_num_matches)
             layout.add(self.table_matches)
         layout.add(self.textedit_quickref)
-        model = custom_models.RegexMatchesModel()
-        self.table_matches.set_model(model)
-        self.table_matches.setColumnWidth(0, 60)
-        self.table_matches.setColumnWidth(1, 60)
-        groupbox_sub.toggled.connect(self.lineedit_sub.setVisible)
-        groupbox_sub.toggled.connect(self.textedit_sub.setVisible)
-        doc = self.textedit_teststring.document()
-        self._highlighter = RegexMatchHighlighter(doc)
-        self._highlighter.rehighlight()
-        self.regexinput.value_changed.connect(self._update_view)
-        self.textedit_teststring.textChanged.connect(self._update_view)
-        self.regexinput.pattern = regex
         self._update_view()
 
     def __getattr__(self, attr):

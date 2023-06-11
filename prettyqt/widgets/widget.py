@@ -92,6 +92,12 @@ class Animator:
         anim.start()
         return anim
 
+    def highlight_widget(self, widget):
+        from prettyqt.custom_widgets.overlayborder import FocusWidget
+
+        widget = FocusWidget(self, widget)
+        widget.show()
+
 
 class WidgetMixin(core.ObjectMixin):
     def __init__(self, *args, margin: int | None = None, **kwargs):
@@ -312,12 +318,13 @@ class WidgetMixin(core.ObjectMixin):
 
     @functools.singledispatchmethod
     def set_min_size(self, size: QtCore.QSize | tuple[int | None, int | None]):
-        if isinstance(size, tuple):
-            x = size[0] or 0
-            y = size[1] or 0
-            super().setMinimumSize(x, y)
-        else:
-            super().setMinimumSize(size)
+        match size:
+            case int() | None as x, int() | None as y:
+                super().setMinimumSize(x or 0, y or 0)
+            case QtCore.QSize():
+                super().setMinimumSize(size)
+            case _:
+                raise TypeError(size)
 
     setMinimumSize = set_min_size
 
@@ -349,9 +356,7 @@ class WidgetMixin(core.ObjectMixin):
         self.set_max_size((x, y))
 
     def set_min_width(self, width: int | None):
-        if width is None:
-            width = 0
-        super().setMinimumWidth(width)
+        super().setMinimumWidth(width or 0)
 
     setMinimumWidth = set_min_width
 
@@ -363,9 +368,7 @@ class WidgetMixin(core.ObjectMixin):
     setMaximumWidth = set_max_width
 
     def set_min_height(self, height: int | None):
-        if height is None:
-            height = 0
-        super().setMinimumHeight(height)
+        super().setMinimumHeight(height or 0)
 
     setMinimumHeight = set_min_height
 
@@ -969,12 +972,6 @@ class WidgetMixin(core.ObjectMixin):
             style = QtWidgets.QStyleFactory.create(style)
         self.setStyle(style)
 
-    def highlight_widget(self, widget):
-        from prettyqt.custom_widgets.overlayborder import FocusWidget
-
-        widget = FocusWidget(self, widget)
-        widget.show()
-
     def child_at(self, *args, typ: type[widgets.QWidget] | None = None):
         """Get child widget at position. If type is given, search parents recursively."""
         child = super().childAt(*args)
@@ -1014,7 +1011,6 @@ if __name__ == "__main__":
     container.box.add(widget2)
     mainwindow.setCentralWidget(container)
     mainwindow.show()
-    mainwindow.highlight_widget(widget)
     app.sleep(4)
     # widget.position_on("mouse", scale_ratio=0.5, how="top")
     # widget.set_min_size((400, 400))
