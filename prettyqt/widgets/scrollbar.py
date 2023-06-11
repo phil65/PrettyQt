@@ -37,6 +37,9 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
         """Scroll to the previous row."""
         self.setValue(self.value() - self.singleStep())
 
+    def can_scroll(self) -> bool:
+        return self.maximum() > 0
+
 
 class ScrollBar(ScrollBarMixin, QtWidgets.QScrollBar):
     pass
