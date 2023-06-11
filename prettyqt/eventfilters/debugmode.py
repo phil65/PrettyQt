@@ -14,23 +14,13 @@ class DebugMode(eventfilters.BaseEventFilter):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.list = widgets.ListWidget(
-            entered=self._on_entered, item_clicked=self._on_clicked, mouse_tracking=True
+        self.menu = widgets.Menu(
+            hovered=self._on_entered,
+            triggered=self._on_clicked,
+            about_to_hide=self._on_hide,
         )
-        self.frame = widgets.Frame(frame_shape="box", frame_shadow="plain")
-        # self.frame.setGeometry(0, 0, 1920, 1080)
+        self.frame = widgets.RubberBand("rectangle")
         self.frame.setObjectName("testframe")
-        self.frame.setStyleSheet("#testframe {border: 5px solid green;}")
-        self.frame.setWindowFlags(
-            QtCore.Qt.WindowType.FramelessWindowHint
-            | QtCore.Qt.WindowType.Tool
-            | QtCore.Qt.WindowType.WindowTransparentForInput
-            | QtCore.Qt.WindowType.WindowDoesNotAcceptFocus
-            | QtCore.Qt.WindowType.WindowStaysOnTopHint
-        )
-        # self.frame.setWindowOpacity(0.5)
-        # self.mask = widgets.Widget()
-        # self.mask.set_background_color("green")
 
     def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
         border_keys = [constants.Key.Key_Control, constants.Key.Key_Alt]
@@ -45,10 +35,10 @@ class DebugMode(eventfilters.BaseEventFilter):
                 if "ctrl" in mods:
                     pos = source.mapToGlobal(event.pos())
                     candidates = widgets.Application.widgets_at(pos)
-                    self.list.clear()
+                    self.menu.clear()
                     for candidate in candidates:
-                        self.list.add_item(f"{candidate!r}", data={"user": candidate})
-                    self.list.show()
+                        self.menu.add_action(text=repr(candidate), data=candidate)
+                    self.menu.exec(pos)
                     return True
                 elif "alt" in mods:
                     from prettyqt import ipython
@@ -79,50 +69,33 @@ class DebugMode(eventfilters.BaseEventFilter):
 
         return False
 
+    def _on_hide(self):
+        self.frame.hide()
+
     def _on_clicked(self, item):
         from prettyqt import debugging
 
         logger.debug(f"clicked on {item}")
-        widget = item.get_data("user")
+        widget = item.data()
         self.editor = debugging.QObjectDetailsDialog(widget)
-        self.list.hide()
-        self.frame.hide()
+        self.menu.close()
+        # self.frame.hide()
         self.editor.show()
 
     def _on_entered(self, index):
-        widget = index.data(constants.USER_ROLE)
+        widget = index.data()
         # logger.info(widget)
-        for item in self.list:
-            candidate = item.get_data("user")
+        for item in self.menu:
+            candidate = item.data()
             if candidate != widget:
                 pass
-                # effect = widgets.GraphicsOpacityEffect(candidate, opacity=0.5)
             else:
-                # effect = widgets.GraphicsOpacityEffect(candidate, opacity=0.7)
-                # self.mask.setParent(widget)
-                # self.mask.setGeometry(widget.geometry())
-                # self.mask.show()
-                # print("hfd")
-                # rect = widget.contentsRect()
-                # top_left = rect.topLeft()
-                # bottom_right = rect.bottomRight()
-                # top_left = widget.mapToGlobal(top_left)
-                # bottom_right = widget.mapToGlobal(bottom_right)
-
-                # rect = core.Rect(top_left, bottom_right)
-                # whole_frame_region = gui.Region(rect)
-                # inner_region = gui.Region(rect.marginsRemoved(core.Margins(5, 5, 5, 5)))
-                # inner_frame_region = whole_frame_region.subtracted(inner_region)
-                # self.frame.setMask(inner_frame_region)
                 self.frame.resize(widget.size())
-                self.frame.setParent(widget)
+                # self.frame.setParent(widget)
+                pos = widget.mapToGlobal(core.Point(0, 0))
+                self.frame.move(pos)
+                self.menu.raise_()
                 self.frame.show()
-
-        # with widget.edit_palette() as palette:
-        #     palette.setColor(
-        #         gui.Palette.ColorRole.Base,
-        #         widget.palette().color(gui.Palette.ColorRole.Highlight),
-        #     )
 
 
 if __name__ == "__main__":
