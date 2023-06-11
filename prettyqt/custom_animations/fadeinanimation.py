@@ -7,6 +7,8 @@ from prettyqt.qt import QtCore, QtWidgets
 
 
 class FadeInAnimation(core.PropertyAnimation):
+    ID = "fade_in"
+
     def __init__(
         self,
         duration: int = 1000,

@@ -8,6 +8,8 @@ from prettyqt.utils import datatypes
 
 
 class BounceAnimation(core.SequentialAnimationGroup):
+    ID = "bounce"
+
     def __init__(
         self,
         duration: int = 1000,
@@ -18,24 +20,23 @@ class BounceAnimation(core.SequentialAnimationGroup):
         self.anim1 = core.PropertyAnimation()
         self.anim2 = core.PropertyAnimation()
         self.set_easing(easing)
-        pos = parent.geometry().topLeft()
-        self.set_start_value(pos + core.Point(0, 0))
-        self.set_end_value(pos + core.Point(0, 100))
+        self.set_start_value(core.Point(0, 0))
+        self.set_end_value(core.Point(0, 100))
         self.addAnimation(self.anim1)
         self.addAnimation(self.anim2)
         self.set_duration(duration)
 
     def set_start_value(self, point: datatypes.PointType):
-        if isinstance(point, tuple):
-            point = core.Point(*point)
-        self.anim1.setStartValue(point)
-        self.anim2.setEndValue(point)
+        offset = datatypes.to_point(point)
+        pos = self.parent().geometry().topLeft()
+        self.anim1.setStartValue(pos + offset)
+        self.anim2.setEndValue(pos + offset)
 
     def set_end_value(self, point: datatypes.PointType):
-        if isinstance(point, tuple):
-            point = core.Point(*point)
-        self.anim2.setStartValue(point)
-        self.anim1.setEndValue(point)
+        offset = datatypes.to_point(point)
+        pos = self.parent().geometry().topLeft()
+        self.anim2.setStartValue(pos + offset)
+        self.anim1.setEndValue(pos + offset)
 
     def set_duration(self, duration: int):
         self.anim1.setDuration(duration // 2)

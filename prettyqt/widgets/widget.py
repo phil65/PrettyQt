@@ -15,7 +15,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, colors, datatypes
+from prettyqt.utils import InvalidParamError, colors, datatypes, fx
 
 
 if TYPE_CHECKING:
@@ -37,77 +37,10 @@ PositionPossibilityType = (
 )
 
 
-class Animator:
-    def __init__(self, widget):
-        self._widget = widget
-
-    def set_graphics_effect(
-        self,
-        effect: QtWidgets.QGraphicsEffect
-        | Literal["drop_shadow", "blur", "opacity", "colorize"],
-        radius: int = 10,
-        opacity: float = 0.7,
-        strength: float = 0.5,
-        color: datatypes.ColorType = "blue",
-    ) -> QtWidgets.QGraphicsEffect:
-        match effect:
-            case "drop_shadow":
-                effect = widgets.GraphicsDropShadowEffect(self._widget)
-                effect.setBlurRadius(radius)
-                effect.setColor(colors.get_color(color))
-            case "blur":
-                effect = widgets.GraphicsBlurEffect(self._widget)
-                effect.setBlurRadius(radius)
-            case "opacity":
-                effect = widgets.GraphicsOpacityEffect(self._widget)
-                effect.setOpacity(opacity)
-            case "colorize":
-                effect = widgets.GraphicsColorizeEffect(self._widget)
-                effect.setColor(colors.get_color(color))
-                effect.setStrength(strength)
-        self._widget.setGraphicsEffect(effect)
-        return effect
-
-    def play_animation(
-        self, animation_type: str, delay: int = 0, **kwargs
-    ) -> QtCore.QPropertyAnimation:
-        from prettyqt import custom_animations
-
-        match animation_type:
-            case "fade_in":
-                anim = custom_animations.FadeInAnimation(**kwargs, parent=self._widget)
-                anim.apply_to(self._widget)
-            case "bounce":
-                anim = custom_animations.BounceAnimation(**kwargs, parent=self._widget)
-                anim.apply_to(self._widget)
-            case "slide":
-                anim = custom_animations.SlideAnimation(**kwargs, parent=self._widget)
-                anim.apply_to(self._widget)
-            case "property":
-                anim = core.PropertyAnimation(parent=self._widget)
-                anim.setTargetObject(self._widget)
-                anim.set_property_name(kwargs.pop("name"))
-                anim.setStartValue(kwargs.pop("start_value"))
-                anim.setEndValue(kwargs.pop("end_value"))
-                anim.setDuration(kwargs.pop("duration", 1000))
-                anim.set_easing(kwargs.pop("easing", "linear"))
-        if delay:
-            self._widget.start_callback_timer(anim.start, delay, single_shot=True)
-        else:
-            anim.start()
-        return anim
-
-    def highlight_widget(self, widget):
-        from prettyqt.custom_widgets.overlayborder import FocusWidget
-
-        widget = FocusWidget(self, widget)
-        widget.show()
-
-
 class WidgetMixin(core.ObjectMixin):
     def __init__(self, *args, margin: int | None = None, **kwargs):
         super().__init__(*args, **kwargs)
-        self.fx = Animator(self)
+        self.fx = fx.Fx(self)
         if margin is not None:
             self.set_margin(margin)
 
