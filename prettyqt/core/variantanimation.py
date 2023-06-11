@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterator
 
+from typing_extensions import Self
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
@@ -36,6 +38,24 @@ class VariantAnimationMixin(core.AbstractAnimationMixin):
         self.setStartValue(start)
         self.setEndValue(end)
 
+    def reverse(self):
+        old_start = self.startValue()
+        old_end = self.endValue()
+        self.setStartValue(old_end)
+        self.setEndValue(old_start)
+
+    def reversed(self) -> Self:
+        new = self.get_metaobject().copy(self)
+        new.reverse()
+        return new
+
 
 class VariantAnimation(VariantAnimationMixin, QtCore.QVariantAnimation):
     pass
+
+
+if __name__ == "__main__":
+    anim = VariantAnimation()
+    anim.set_start_value(10)
+    anim = anim.reversed()
+    print(anim.endValue())
