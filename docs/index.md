@@ -15,10 +15,12 @@
   - Pre-defined widgets for common use cases
   - Large set of validators, syntax highlighters, models and much more.
 
-PrettyQt basically is a wrapper for the whole Qt API (either based on PySide6 or PyQt6).
+PrettyQt basically is a wrapper for the whole Qt API (either on top of PySide6 or PyQt6).
+
 The library contains a tree of mixins, with one mixin for each Qt class.
 These mixins also inherit from each other and are applied to the Qt classes.
 That way each class gets all helper methods from all sub-mixins.
+
 Example: The class "TreeView" inherits from original Qt Class "QTreeView" and gets helper methods
 from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
 "FrameMixin", "WidgetMixin" and "ObjectMixin".
@@ -35,36 +37,36 @@ very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to impro
 Apart from the 3D related modules (Qt3D, QtDataVizualization),
 almost every class from Qt is covered.
 
-### The covered modules are:
+## The covered modules are:
 
-QtBluetooth (-> prettyqt.bluetooth)
-QtCharts (-> prettyqt.charts)
-QtCore (-> prettyqt.core)
-QtDesigner (-> prettyqt.designer)
-QtGui (-> prettyqt.gui)
-QtLocation (-> prettyqt.location)
-QtMultimedia (-> prettyqt.multimedia)
-QtMultimediaWidgets (-> prettyqt.multimediawidgets)
-QtNetwork (-> prettyqt.network)
-QtOpenGLWidgets (-> prettyqt.openglwidgets)
-QtPdf (-> prettyqt.pdf)
-QtPdfWidgets (-> prettyqt.pdfwidgets)
-QtPositioning (-> prettyqt.positioning)
-QtPrintSupport (-> prettyqt.printsupport)
-QtQml (-> prettyqt.qml)
-QtHelp (-> prettyqt.qthelp) (prepended "qt" to avoid name clashing)
-QtQuick (-> prettyqt.quick)
-QtQuickWidgets (-> prettyqt.quickwidgets)
-QScintilla (-> prettyqt.scintilla)
-QtScXml (-> prettyqt.scxml)
-QtStateMachine (-> prettyqt.statemachine)
-QtSvg (-> prettyqt.svg)
-QtSvgWidgets (-> prettyqt.svgwidgets)
-QtTextToSpeech (-> prettyqt.texttospeech)
-QtWebChannel (-> prettyqt.webchannel)
-QtWebEngineCore (-> prettyqt.webenginecore)
-QtWebEngineWidgets (-> prettyqt.webenginewidgets)
-QtWidgets (-> prettyqt.widgets)
+- QtBluetooth (-> prettyqt.bluetooth)
+- QtCharts (-> prettyqt.charts)
+- QtCore (-> prettyqt.core)
+- QtDesigner (-> prettyqt.designer)
+- QtGui (-> prettyqt.gui)
+- QtLocation (-> prettyqt.location)
+- QtMultimedia (-> prettyqt.multimedia)
+- QtMultimediaWidgets (-> prettyqt.multimediawidgets)
+- QtNetwork (-> prettyqt.network)
+- QtOpenGLWidgets (-> prettyqt.openglwidgets)
+- QtPdf (-> prettyqt.pdf)
+- QtPdfWidgets (-> prettyqt.pdfwidgets)
+- QtPositioning (-> prettyqt.positioning)
+- QtPrintSupport (-> prettyqt.printsupport)
+- QtQml (-> prettyqt.qml)
+- QtHelp (-> prettyqt.qthelp) (prepended "qt" to avoid name clashing)
+- QtQuick (-> prettyqt.quick)
+- QtQuickWidgets (-> prettyqt.quickwidgets)
+- QScintilla (-> prettyqt.scintilla)
+- QtScXml (-> prettyqt.scxml)
+- QtStateMachine (-> prettyqt.statemachine)
+- QtSvg (-> prettyqt.svg)
+- QtSvgWidgets (-> prettyqt.svgwidgets)
+- QtTextToSpeech (-> prettyqt.texttospeech)
+- QtWebChannel (-> prettyqt.webchannel)
+- QtWebEngineCore (-> prettyqt.webenginecore)
+- QtWebEngineWidgets (-> prettyqt.webenginewidgets)
+- QtWidgets (-> prettyqt.widgets)
 
 
 All subclassed Qt classes in mentioned modules are called exactly like the
@@ -72,8 +74,8 @@ Qt-Counterpart, except that the leading Q is missing.
 
 ### Examples:
 
-QtWidgets.QWidget -> widgets.Widget
-QtCore.QObject -> core.Object
+- QtWidgets.QWidget -> widgets.Widget
+- QtCore.QObject -> core.Object
 
 Apart from the mentioned mixin tree and the corresponding classes, this library also
 contains a lot of custom widgets, delegates, eventfilters, validators,
