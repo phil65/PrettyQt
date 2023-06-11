@@ -14,6 +14,148 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 logger = logging.getLogger(__name__)
 
 
+def to_string(val, locale=None):
+    if locale is None:
+        locale = core.Locale()
+    match val:
+        case str():
+            return val
+        case bool():
+            return "✓" if val else "☐"
+        case enum.Flag():
+            return val.name
+        case enum.Enum():
+            return val.name
+        case int() | float() | QtCore.QByteArray():
+            return locale.toString(val)
+        case QtGui.QColor():
+            return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
+        case QtGui.QFont():
+            return val.family()
+        case QtGui.QRegion():
+            rect = val.boundingRect()
+            return f"({rect.x()},{rect.y()},{rect.width()},{rect.height()})"
+        case QtGui.QCursor():
+            return constants.CURSOR_SHAPE.inverse[val.shape()]
+        case QtGui.QKeySequence():
+            return val.toString()
+        case QtCore.QDate() | QtCore.QDateTime() | QtCore.QTime():
+            return val.toString(QtCore.Qt.DateFormat.ISODate)
+        case QtCore.QPoint():
+            return f"({val.x()},{val.y()})"
+        case QtCore.QRect():
+            return f"({val.x()},{val.y()},{val.width()},{val.height()})"
+        case QtCore.QSize():
+            return f"({val.width()},{val.height()})"
+        case QtCore.QLocale():
+            return val.bcp47Name()
+        case QtWidgets.QSizePolicy():
+            return (
+                f"({widgets.sizepolicy.SIZE_POLICY.inverse[val.horizontalPolicy()]}, "
+                f"{widgets.sizepolicy.SIZE_POLICY.inverse[val.verticalPolicy()]}, "
+                f"{widgets.sizepolicy.CONTROL_TYPE.inverse[val.controlType()]})"
+            )
+        case list():
+            return ",".join(map(repr, val))
+        case re.Pattern():
+            return val.pattern
+        case datetime.date():
+            return val.isoformat()
+        case datetime.datetime():
+            return val.isoformat(sep=" ")
+        case QtCore.QRegularExpression():
+            return val.pattern()
+        case QtCore.QUrl():
+            return val.toString()
+    try:
+        import numpy as np
+    except ImportError:
+        pass
+    else:
+        match val:
+            case np.integer():
+                return to_string(int(val), locale)
+            case np.floating():
+                return to_string(float(val), locale)
+            case np.str_():
+                return val.astype(str)
+            case np.bool_():
+                return bool(val.astype(bool))
+            case np.datetime64():
+                return to_string(val.astype(datetime.datetime), locale)
+    return repr(val)
+
+
+def get_widget_for_value(val):
+    from prettyqt import custom_widgets
+
+    match val:
+        case bool():
+            return widgets.CheckBox()
+        case enum.Flag():
+            widget = custom_widgets.EnumFlagWidget()
+            widget._set_enum_class(type(val))
+            return widget
+        case enum.Enum():
+            widget = custom_widgets.EnumComboBox()
+            widget._set_enum_class(type(val))
+            return widget
+        case int():
+            return widgets.SpinBox()
+        case float():
+            return widgets.DoubleSpinBox()
+        case pathlib.Path():
+            return custom_widgets.FileChooserButton()
+        case str():
+            widget = widgets.LineEdit()
+            widget.setFrame(False)
+            return widget
+        case QtCore.QRegularExpression() | re.Pattern():
+            return custom_widgets.RegexInput(show_error=False)
+        case QtCore.QTime():
+            return widgets.TimeEdit()
+        case QtCore.QDate():
+            return widgets.DateEdit()
+        case QtCore.QDateTime():
+            return widgets.DateTimeEdit()
+        case QtCore.QPoint():
+            return custom_widgets.PointEdit()
+        case QtCore.QSize():
+            return custom_widgets.SizeEdit()
+        case QtCore.QRect():
+            return custom_widgets.RectEdit()
+        case QtGui.QKeySequence():
+            return widgets.KeySequenceEdit()
+        case QtGui.QRegion():
+            return custom_widgets.RegionEdit()
+        case QtGui.QFont():
+            return widgets.FontComboBox()
+        case QtGui.QColor():
+            return custom_widgets.ColorComboBox()
+        case QtWidgets.QSizePolicy():
+            return custom_widgets.SizePolicyEdit()
+        case QtCore.QUrl():
+            return custom_widgets.UrlLineEdit()
+        # case QtCore.QRectF():  # todo
+        #     return custom_widgets.RectEdit(parent=parent)
+    try:
+        import numpy as np
+    except ImportError:
+        pass
+    else:
+        match val:
+            case np.floating():
+                return custom_widgets.FloatLineEdit()
+            case np.integer():
+                return custom_widgets.IntLineEdit()
+            case np.str_():
+                return widgets.LineEdit()
+            case np.datetime64():
+                return widgets.DateTimeEdit()
+            case np.bool_():
+                return widgets.CheckBox()
+
+
 class VariantDelegate(widgets.StyledItemDelegate):
     ID = "variant"
 
@@ -46,74 +188,9 @@ class VariantDelegate(widgets.StyledItemDelegate):
                 super().paint(painter, option, index)
 
     def createEditor(self, parent, option, index):
-        from prettyqt import custom_widgets
-
         val = self._data_for_index(index, self.data_role)
         logger.info(f"creating editor for {val!r}...")
-        widget = None
-        match val:
-            case bool():
-                widget = widgets.CheckBox()
-            case enum.Flag():
-                widget = custom_widgets.EnumFlagWidget()
-                widget._set_enum_class(type(val))
-            case enum.Enum():
-                widget = custom_widgets.EnumComboBox()
-                widget._set_enum_class(type(val))
-            case int():
-                widget = widgets.SpinBox()
-            case float():
-                widget = widgets.DoubleSpinBox()
-            case pathlib.Path():
-                widget = custom_widgets.FileChooserButton()
-            case str():
-                widget = widgets.LineEdit()
-                widget.setFrame(False)
-            case QtCore.QRegularExpression() | re.Pattern():
-                widget = custom_widgets.RegexInput(show_error=False)
-            case QtCore.QTime():
-                widget = widgets.TimeEdit()
-            case QtCore.QDate():
-                widget = widgets.DateEdit()
-            case QtCore.QDateTime():
-                widget = widgets.DateTimeEdit()
-            case QtCore.QPoint():
-                widget = custom_widgets.PointEdit()
-            case QtCore.QSize():
-                widget = custom_widgets.SizeEdit()
-            case QtCore.QRect():
-                widget = custom_widgets.RectEdit()
-            case QtGui.QKeySequence():
-                widget = widgets.KeySequenceEdit()
-            case QtGui.QRegion():
-                widget = custom_widgets.RegionEdit()
-            case QtGui.QFont():
-                widget = widgets.FontComboBox()
-            case QtGui.QColor():
-                widget = custom_widgets.ColorComboBox()
-            case QtWidgets.QSizePolicy():
-                widget = custom_widgets.SizePolicyEdit()
-            case QtCore.QUrl():
-                widget = custom_widgets.UrlLineEdit()
-            # case QtCore.QRectF():  # todo
-            #     widget = custom_widgets.RectEdit(parent=parent)
-        try:
-            import numpy as np
-        except ImportError:
-            pass
-        else:
-            match val:
-                case np.floating():
-                    widget = custom_widgets.FloatLineEdit()
-                case np.integer():
-                    widget = custom_widgets.IntLineEdit()
-                case np.str_():
-                    widget = widgets.LineEdit()
-                case np.datetime64():
-                    widget = widgets.DateTimeEdit()
-                case np.bool_():
-                    widget = widgets.CheckBox()
-
+        widget = get_widget_for_value(val)
         if widget is None:
             logger.warning(f"Could not find editor for {val!r} ({type(val)})")
             return None
@@ -122,8 +199,6 @@ class VariantDelegate(widgets.StyledItemDelegate):
         return widget
 
     def setEditorData(self, editor, index):
-        # if not editor:
-        #     return
         value = self._data_for_index(index, self.data_role)
         logger.info(f"setting data for {editor!r} to {value!r}")
         editor.set_value(value)
@@ -132,121 +207,18 @@ class VariantDelegate(widgets.StyledItemDelegate):
         if (value := editor.get_value()) is not None:
             logger.info(f"setting data for {model!r} to {value!r}")
             model.setData(index, value, self.data_role)
-            model.setData(index, self.display_text(value), constants.DISPLAY_ROLE)
+            model.setData(index, to_string(value), constants.DISPLAY_ROLE)
             self.commitData.emit(editor)
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
 
     def displayText(self, value, locale: QtCore.QLocale) -> str:
-        return self.display_text(value, locale)
-
-    @staticmethod
-    def is_supported_type(value):
-        return isinstance(
-            value,
-            bool
-            | enum.Flag
-            | enum.Enum
-            | int
-            | float
-            | str
-            | re.Pattern
-            | pathlib.Path
-            | QtCore.QRegularExpression
-            | QtCore.QDate
-            | QtCore.QDateTime
-            | QtCore.QTime
-            | QtCore.QRect
-            | QtCore.QPoint
-            | QtCore.QSize
-            | QtCore.QTime
-            | QtGui.QPalette
-            | QtGui.QIcon
-            | QtGui.QColor
-            | QtGui.QFont
-            | QtGui.QKeySequence
-            | QtWidgets.QSizePolicy,
-        )
-
-    @classmethod
-    def display_text(cls, val, locale=None):
-        if locale is None:
-            locale = core.Locale()
-        match val:
-            case str():
-                return val
-            case bool():
-                return "✓" if val else "☐"
-            case enum.Flag():
-                return val.name
-            case enum.Enum():
-                return val.name
-            case int() | float() | QtCore.QByteArray():
-                return locale.toString(val)
-            case QtGui.QColor():
-                return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
-            case QtGui.QFont():
-                return val.family()
-            case QtGui.QRegion():
-                rect = val.boundingRect()
-                return f"({rect.x()},{rect.y()},{rect.width()},{rect.height()})"
-            case QtGui.QCursor():
-                return constants.CURSOR_SHAPE.inverse[val.shape()]
-            case QtGui.QKeySequence():
-                return val.toString()
-            case QtCore.QDate() | QtCore.QDateTime() | QtCore.QTime():
-                return val.toString(QtCore.Qt.DateFormat.ISODate)
-            case QtCore.QPoint():
-                return f"({val.x()},{val.y()})"
-            case QtCore.QRect():
-                return f"({val.x()},{val.y()},{val.width()},{val.height()})"
-            case QtCore.QSize():
-                return f"({val.width()},{val.height()})"
-            case QtCore.QLocale():
-                return val.bcp47Name()
-            case QtWidgets.QSizePolicy():
-                return (
-                    f"({widgets.sizepolicy.SIZE_POLICY.inverse[val.horizontalPolicy()]}, "
-                    f"{widgets.sizepolicy.SIZE_POLICY.inverse[val.verticalPolicy()]}, "
-                    f"{widgets.sizepolicy.CONTROL_TYPE.inverse[val.controlType()]})"
-                )
-            case list():
-                return ",".join(map(repr, val))
-            case re.Pattern():
-                return val.pattern
-            case datetime.date():
-                return val.isoformat()
-            case datetime.datetime():
-                return val.isoformat(sep=" ")
-            case QtCore.QRegularExpression():
-                return val.pattern()
-            case QtCore.QUrl():
-                return val.toString()
-        try:
-            import numpy as np
-        except ImportError:
-            pass
-        else:
-            match val:
-                case np.integer():
-                    return cls.display_text(int(val), locale)
-                case np.floating():
-                    return cls.display_text(float(val), locale)
-                case np.str_():
-                    return val.astype(str)
-                case np.bool_():
-                    return bool(val.astype(bool))
-                case np.datetime64():
-                    return cls.display_text(val.astype(datetime.datetime), locale)
-        return repr(val)
+        return to_string(value, locale)
 
 
 if __name__ == "__main__":
     app = widgets.app()
     table_widget = widgets.TableWidget(15, 2)
-    # table_widget.set_delegate(StarDelegate(), column=1)
-    table_widget.setEditTriggers(
-        table_widget.EditTrigger.DoubleClicked | table_widget.EditTrigger.SelectedClicked
-    )
+    table_widget.set_edit_triggers("all")
     table_widget.set_selection_behavior("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Rating"])
     types = dict(
@@ -278,5 +250,6 @@ if __name__ == "__main__":
     table_widget.resize(500, 300)
     table_widget.show()
     with app.debug_mode():
-        table_widget.set_delegate("variant", column=1)
+        delegate = table_widget.set_delegate("variant", column=1)
+        delegate.closeEditor.connect(print)
         app.main_loop()

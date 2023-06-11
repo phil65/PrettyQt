@@ -62,38 +62,25 @@ class BorderLayout(widgets.Layout):
         west_width = 0
         north_height = 0
         south_height = 0
-
         super().setGeometry(rect)
-
         for wrapper in self.items:
             item = wrapper.item
             match wrapper.position:
                 case BorderLayout.Position.North:
-                    geom = core.Rect(
-                        rect.x(), north_height, rect.width(), item.sizeHint().height()
-                    )
+                    h = item.sizeHint().height()
+                    geom = core.Rect(rect.x(), north_height, rect.width(), h)
                     item.setGeometry(geom)
-
                     north_height += item.geometry().height() + self.spacing()
-
                 case BorderLayout.Position.South:
-                    geom = core.Rect(
-                        item.geometry().x(),
-                        item.geometry().y(),
-                        rect.width(),
-                        item.sizeHint().height(),
-                    )
+                    geo = item.geometry()
+                    h = item.sizeHint().height()
+                    geom = core.Rect(geo.x(), geo.y(), rect.width(), h)
                     item.setGeometry(geom)
-
                     south_height += item.geometry().height() + self.spacing()
-                    geom = core.Rect(
-                        rect.x(),
-                        rect.y() + rect.height() - south_height + self.spacing(),
-                        item.geometry().width(),
-                        item.geometry().height(),
-                    )
+                    y = rect.y() + rect.height() - south_height + self.spacing()
+                    geo = item.geometry()
+                    geom = core.Rect(rect.x(), y, geo.width(), geo.height())
                     item.setGeometry(geom)
-
                 case BorderLayout.Position.Center:
                     center = wrapper
 
@@ -103,42 +90,24 @@ class BorderLayout(widgets.Layout):
             item = wrapper.item
             match wrapper.position:
                 case BorderLayout.Position.West:
-                    geom = core.Rect(
-                        rect.x() + west_width,
-                        north_height,
-                        item.sizeHint().width(),
-                        center_height,
-                    )
+                    x = rect.x() + west_width
+                    w = item.sizeHint().width()
+                    geom = core.Rect(x, north_height, w, center_height)
                     item.setGeometry(geom)
-
                     west_width += item.geometry().width() + self.spacing()
-
                 case BorderLayout.Position.East:
-                    geom = core.Rect(
-                        item.geometry().x(),
-                        item.geometry().y(),
-                        item.sizeHint().width(),
-                        center_height,
-                    )
+                    geo = item.geometry()
+                    w = item.sizeHint().width()
+                    geom = core.Rect(geo.x(), geo.y(), w, center_height)
                     item.setGeometry(geom)
-
                     east_width += item.geometry().width() + self.spacing()
-
-                    geom = core.Rect(
-                        rect.x() + rect.width() - east_width + self.spacing(),
-                        north_height,
-                        item.geometry().width(),
-                        item.geometry().height(),
-                    )
+                    x = rect.x() + rect.width() - east_width + self.spacing()
+                    geom = core.Rect(x, north_height, geo.width(), geo.height())
                     item.setGeometry(geom)
 
         if center:
-            rect = core.Rect(
-                west_width,
-                north_height,
-                rect.width() - east_width - west_width,
-                center_height,
-            )
+            w = rect.width() - east_width - west_width
+            rect = core.Rect(west_width, north_height, w, center_height)
             center.item.setGeometry(rect)
 
     def sizeHint(self) -> core.Size:
@@ -156,27 +125,17 @@ class BorderLayout(widgets.Layout):
 
     def calculate_size(self, size_type: Literal["minimum", "size_hint"]) -> core.Size:
         total_size = core.Size()
-
+        Pos = BorderLayout.Position
         for wrapper in self.items:
             item_size = (
                 wrapper.item.minimumSize()
                 if size_type == "minimum"
                 else wrapper.item.sizeHint()
             )
-            if wrapper.position in (
-                BorderLayout.Position.North,
-                BorderLayout.Position.South,
-                BorderLayout.Position.Center,
-            ):
+            if wrapper.position in (Pos.North, Pos.South, Pos.Center):
                 total_size.setHeight(total_size.height() + item_size.height())
-
-            if wrapper.position in (
-                BorderLayout.Position.West,
-                BorderLayout.Position.East,
-                BorderLayout.Position.Center,
-            ):
+            if wrapper.position in (Pos.West, Pos.East, Pos.Center):
                 total_size.setWidth(total_size.width() + item_size.width())
-
         return total_size
 
 
@@ -198,21 +157,15 @@ if __name__ == "__main__":
             # garbage collected too soon.
             label_n = self.create_label("North")
             layout.addWidget(label_n, BorderLayout.Position.North)
-
             label_w = self.create_label("West")
             layout.addWidget(label_w, BorderLayout.Position.West)
-
             label_e1 = self.create_label("East 1")
             layout.addWidget(label_e1, BorderLayout.Position.East)
-
             label_e2 = self.create_label("East 2")
             layout.addWidget(label_e2, BorderLayout.Position.East)
-
             label_s = self.create_label("South")
             layout.addWidget(label_s, BorderLayout.Position.South)
-
             self.setLayout(layout)
-
             self.setWindowTitle("Border Layout")
 
         @staticmethod

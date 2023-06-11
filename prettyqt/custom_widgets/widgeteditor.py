@@ -11,16 +11,47 @@ from prettyqt.utils import bidict, datatypes, helpers
 logger = logging.getLogger(__name__)
 
 
+def widget_for_type(typ: type):
+    match typ:
+        case __builtins__.bool:
+            return widgets.CheckBox()
+        case __builtins__.int:
+            return widgets.SpinBox(maximum=999999)
+        case __builtins__.float:
+            return widgets.DoubleSpinBox(maximum=999999.0)
+        case __builtins__.str:
+            return widgets.LineEdit()
+        case QtCore.QPoint:
+            return custom_widgets.PointEdit()
+        case QtCore.QRect:
+            return custom_widgets.RectEdit()
+        case QtGui.QRegion:
+            return custom_widgets.RegionEdit()
+        case QtCore.QSize:
+            return custom_widgets.SizeEdit()
+        case QtWidgets.QSizePolicy:
+            return custom_widgets.SizePolicyEdit()
+        case QtGui.QPalette:
+            return custom_widgets.PaletteEdit()
+        case QtGui.QIcon:
+            return custom_widgets.IconEdit()
+        case QtGui.QCursor:
+            return custom_widgets.CursorEdit()
+        case QtCore.QLocale:
+            return custom_widgets.LocaleEdit()
+        case QtGui.QFont:
+            return widgets.FontComboBox()
+        case QtGui.QColor:
+            return custom_widgets.ColorComboBox()
+        case enum.Flag:
+            return custom_widgets.EnumFlagWidget()
+        case enum.Enum:
+            return custom_widgets.EnumComboBox()
+        case _:
+            raise ValueError(typ)
+
+
 class WidgetEditor(widgets.ScrollArea):
-    """Widget which automatically generates list of property editors for a given widget.
-
-    We need to be careful here because we cannot rely on having all our mixin methods
-    if we want this to work for all widgets.
-    Would be worth investigating if we can "monkey-patch" the instances
-    with self._widget.__class__ = type(cls.__name__,(OldClass, WidgetMixin),{})
-    or self._widget.__bases__=(OldClass, WidgetMixin,)
-    """
-
     value_changed = core.Signal(object)
 
     def __init__(self, widget: QtWidgets.QWidget, *args, **kwargs):
@@ -44,44 +75,7 @@ class WidgetEditor(widgets.ScrollArea):
             typ = prop.get_meta_type().get_type()
             name = prop.name()
             logger.info(f"setting {name} editor to {value}")
-            if typ == bool:
-                widget = widgets.CheckBox()
-            elif typ == int:
-                widget = widgets.SpinBox(maximum=999999)
-            elif typ == float:
-                widget = widgets.DoubleSpinBox(maximum=999999.0)
-            elif typ == str:
-                widget = widgets.LineEdit()
-            elif typ == QtCore.QPoint:
-                widget = custom_widgets.PointEdit()
-            elif typ == QtCore.QRect:
-                widget = custom_widgets.RectEdit()
-            elif typ == QtGui.QRegion:
-                widget = custom_widgets.RegionEdit()
-            elif typ == QtCore.QSize:
-                widget = custom_widgets.SizeEdit()
-            elif typ == QtWidgets.QSizePolicy:
-                widget = custom_widgets.SizePolicyEdit()
-            elif typ == QtGui.QPalette:
-                widget = custom_widgets.PaletteEdit()
-            elif typ == QtGui.QIcon:
-                widget = custom_widgets.IconEdit()
-            elif typ == QtGui.QCursor:
-                widget = custom_widgets.CursorEdit()
-            elif typ == QtCore.QLocale:
-                widget = custom_widgets.LocaleEdit()
-            elif typ == QtGui.QFont:
-                widget = widgets.FontComboBox()
-            elif typ == QtGui.QColor:
-                widget = custom_widgets.ColorComboBox()
-            elif typ == enum.Flag:
-                widget = custom_widgets.EnumFlagWidget()
-            elif typ == enum.Enum and prop.isFlagType():
-                widget = custom_widgets.EnumFlagWidget()
-            elif typ == enum.Enum:
-                widget = custom_widgets.EnumComboBox()
-            else:
-                raise ValueError(typ)
+            widget = widget_for_type(typ)
             widget.set_value(value)
             widget.value_changed.connect(self._on_value_change)
             widget.setEnabled(prop.isWritable())

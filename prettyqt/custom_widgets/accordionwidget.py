@@ -32,7 +32,7 @@ class AccordionItem(widgets.GroupBox):
             event.acceptProposedAction()
 
     def get_drag_drop_rect(self) -> core.Rect:
-        return core.Rect(25, 7, 10, 6)
+        return core.Rect(self.width() - 25, 7, 10, 6)
 
     def get_drag_drop_mode(self) -> AccordionWidget.RolloutStyle:
         return self._drag_drop_mode
@@ -53,7 +53,8 @@ class AccordionItem(widgets.GroupBox):
         widget = event.source()
         layout = self.parent().layout()
         layout.insertWidget(layout.indexOf(self), widget)
-        self._widget.itemsReordered.emit()
+        # print(self.parent(), self._widget)
+        # self.parent().itemsReordered.emit()
 
     def expand_collapsed_rect(self) -> core.Rect:
         return core.Rect(0, 0, self.width(), 20)
@@ -90,22 +91,18 @@ class AccordionItem(widgets.GroupBox):
         ):
             # create the pixmap
             pixmap = self.grab()
-
             # create the mimedata
             mime_data = core.MimeData()
             mime_data.setText(f"ItemTitle::{self.title()}")
-
             # create the drag
             drag = gui.Drag(self)
             drag.setMimeData(mime_data)
             drag.setPixmap(pixmap)
             drag.setHotSpot(event.position().toPoint())
-
             if not drag.exec():
-                self._widget.itemDragFailed.emit(self)
-
+                pass
+                # self._widget.itemDragFailed.emit(self)
             event.accept()
-
         elif (
             event.button() == QtCore.Qt.MouseButton.LeftButton
             and self.expand_collapsed_rect().contains(event.position().toPoint())
@@ -296,7 +293,7 @@ class AccordionItem(widgets.GroupBox):
                 self.setMaximumHeight(1000000)
                 self.widget().setVisible(True)
 
-            self._widget.itemCollapsed.emit(self)
+            # self._widget.itemCollapsed.emit(self)
 
     def setCollapsible(self, state: bool = True):
         self._collapsible = state
@@ -378,7 +375,7 @@ class AccordionWidget(widgets.ScrollArea):
         index: object = None,
     ) -> object:
         with self.updates_off():
-            item = self._ItemClass(widget, title=title)
+            item = self._ItemClass(widget, title=title, parent=self)
             item.set_rollout_style(self.get_rollout_style())
             item.set_drag_drop_mode(self.get_drag_drop_mode())
             layout = self.widget().layout()
@@ -535,7 +532,7 @@ if __name__ == "__main__":
     item = AccordionItem(widgets.LineEdit("test"), title="hallo")
     widget.addItem("tsektjk", AccordionItem(widgets.LineEdit("test"), title="hallo"))
     widget.addItem("tsektjk", AccordionItem(widgets.LineEdit("test"), title="hallo"))
-    widget.addItem("tsektjk", item)
+    widget.addItem("tsektjk", widgets.LineEdit("test"))
     widget.addItem("tsektjk", item)
     widget.show()
     app.main_loop()
