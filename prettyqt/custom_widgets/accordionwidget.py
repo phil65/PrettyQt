@@ -9,14 +9,11 @@ from prettyqt.qt import QtCore
 class AccordionItem(widgets.GroupBox):
     def __init__(self, widget, **kwargs):
         super().__init__(accept_drops=True, context_menu_policy="custom", **kwargs)
-
-        # create the layout
         layout = self.set_layout("vertical", spacing=0, margin=6)
         layout.addWidget(widget)
         self._rollout_style = 2
         self._drag_drop_mode = 0
         self.customContextMenuRequested.connect(self.show_menu)
-        # create custom properties
         self._widget = widget
         self._collapsed = False
         self._collapsible = True
@@ -56,7 +53,7 @@ class AccordionItem(widgets.GroupBox):
         widget = event.source()
         layout = self.parent().layout()
         layout.insertWidget(layout.indexOf(self), widget)
-        self._widget.emitItemsReordered()
+        self._widget.itemsReordered.emit()
 
     def expand_collapsed_rect(self) -> core.Rect:
         return core.Rect(0, 0, self.width(), 20)
@@ -105,7 +102,7 @@ class AccordionItem(widgets.GroupBox):
             drag.setHotSpot(event.position().toPoint())
 
             if not drag.exec():
-                self._widget.emitItemDragFailed(self)
+                self._widget.itemDragFailed.emit(self)
 
             event.accept()
 
@@ -129,7 +126,7 @@ class AccordionItem(widgets.GroupBox):
         brush = gui.Brush(
             gui.Color(255, 255, 255, 160), QtCore.Qt.BrushStyle.SolidPattern
         )
-        tl, tr, tp = (
+        points = (
             (
                 core.Point(x + 11, y + 6),
                 core.Point(x + 16, y + 11),
@@ -142,12 +139,11 @@ class AccordionItem(widgets.GroupBox):
                 core.Point(x + 14, y + 13),
             )
         )
-        points = [tl, tr, tp]
         triangle = gui.Polygon(points)
-        currentBrush = painter.brush()
+        painter.save()
         painter.setBrush(brush)
         painter.drawPolygon(triangle)
-        painter.setBrush(currentBrush)
+        painter.restore()
 
     def paintEvent(self, event):
         with gui.Painter(self) as painter:
@@ -155,11 +151,7 @@ class AccordionItem(widgets.GroupBox):
             font = painter.font()
             font.setBold(True)
             painter.setFont(font)
-
-            x = self.rect().x()
-            y = self.rect().y()
-            w = self.rect().width() - 1
-            h = self.rect().height() - 1
+            x, y, w, h = self.rect().adjusted(0, 0, -1, -1).getRect()
             light_color = self.palette().color(gui.Palette.ColorRole.Light)
             shadow_color = self.palette().color(gui.Palette.ColorRole.Shadow)
             # draw a rounded style
@@ -173,46 +165,34 @@ class AccordionItem(widgets.GroupBox):
                     constants.ALIGN_TOP_LEFT,
                     self.title(),
                 )
-
                 # draw the triangle
                 self._draw_triangle(painter, x, y)
                 # draw the borders
                 pen = gui.Pen(light_color)
                 pen.setWidthF(0.6)
                 painter.setPen(pen)
-
                 r = 8
                 painter.drawRoundedRect(x + 1, y + 1, w - 1, h - 1, r, r)
-
                 pen.setColor(shadow_color)
                 painter.setPen(pen)
-
                 painter.drawRoundedRect(x, y, w - 1, h - 1, r, r)
 
             # draw a square style
             if self._rollout_style == AccordionWidget.RolloutStyle.Square:
-                # draw the text
                 painter.drawText(
                     x + 33, y + 3, w, 16, constants.ALIGN_TOP_LEFT, self.title()
                 )
-
                 self._draw_triangle(painter, x, y)
-
                 # draw the borders
                 pen = gui.Pen(light_color)
                 pen.setWidthF(0.6)
                 painter.setPen(pen)
-
                 painter.drawRect(x + 1, y + 1, w - 1, h - 1)
-
                 pen.setColor(shadow_color)
                 painter.setPen(pen)
-
                 painter.drawRect(x, y, w - 1, h - 1)
 
-            # draw a Maya style
             if self._rollout_style == AccordionWidget.RolloutStyle.Maya:
-                # draw the text
                 painter.drawText(
                     x + 33,
                     y + 3,
@@ -223,45 +203,34 @@ class AccordionItem(widgets.GroupBox):
                 )
 
                 painter.setRenderHint(gui.Painter.RenderHint.Antialiasing, False)
-
                 self._draw_triangle(painter, x, y)
-
                 # draw the borders - top
                 header_height = 20
-
                 header_rect = core.Rect(x + 1, y + 1, w - 1, header_height)
                 header_rect_shadow = core.Rect(x - 1, y - 1, w + 1, header_height + 2)
-
                 # Highlight
                 pen = gui.Pen(light_color)
                 pen.setWidthF(0.4)
                 painter.setPen(pen)
-
                 painter.drawRect(header_rect)
                 painter.fillRect(header_rect, gui.Color(255, 255, 255, 18))
-
                 # Shadow
                 pen.setColor(self.palette().color(gui.Palette.ColorRole.Dark))
                 painter.setPen(pen)
                 painter.drawRect(header_rect_shadow)
-
                 if not self.isCollapsed():
                     # draw the lover border
                     pen = gui.Pen(self.palette().color(gui.Palette.ColorRole.Dark))
                     pen.setWidthF(0.8)
                     painter.setPen(pen)
-
                     offset = header_height + 3
                     body_rect = core.Rect(x, y + offset, w, h - offset)
                     body_rect_shadow = core.Rect(x + 1, y + offset, w + 1, h - offset + 1)
                     painter.drawRect(body_rect)
-
                     pen.setColor(light_color)
                     pen.setWidthF(0.4)
                     painter.setPen(pen)
-
                     painter.drawRect(body_rect_shadow)
-
             # draw a boxed style
             elif self._rollout_style == AccordionWidget.RolloutStyle.Boxed:
                 if self.isCollapsed():
@@ -272,23 +241,17 @@ class AccordionItem(widgets.GroupBox):
                     arect = core.Rect(x + 1, y + 9, w - 1, h - 9)
                     brect = core.Rect(x, y + 8, w - 1, h - 9)
                     text = "-"
-
                 # draw the borders
                 pen = gui.Pen(light_color)
                 pen.setWidthF(0.6)
                 painter.setPen(pen)
-
                 painter.drawRect(arect)
-
                 pen.setColor(shadow_color)
                 painter.setPen(pen)
-
                 painter.drawRect(brect)
-
                 painter.setRenderHint(painter.RenderHint.Antialiasing, False)
-                painter.setBrush(
-                    self.palette().color(gui.Palette.ColorRole.Window).darker(120)
-                )
+                color = self.palette().color(gui.Palette.ColorRole.Window).darker(120)
+                painter.setBrush(color)
                 painter.drawRect(x + 10, y + 1, w - 20, 16)
                 painter.drawText(
                     x + 16,
@@ -333,7 +296,7 @@ class AccordionItem(widgets.GroupBox):
                 self.setMaximumHeight(1000000)
                 self.widget().setVisible(True)
 
-            # self._widget.emitItemCollapsed(self)
+            self._widget.itemCollapsed.emit(self)
 
     def setCollapsible(self, state: bool = True):
         self._collapsible = state
@@ -349,7 +312,7 @@ class AccordionItem(widgets.GroupBox):
             self.mapFromGlobal(gui.Cursor.pos())
         ):
             pass
-            # self._widget.emitItemMenuRequested(self)
+            # self._widget.itemMenuRequested.emit(self)
 
     def get_rollout_style(self):
         return self._rollout_style
@@ -391,13 +354,10 @@ class AccordionWidget(widgets.ScrollArea):
             **kwargs,
         )
 
-        # self.verticalScrollBar().setMaximumWidth(10)
-
         widget = widgets.Widget(self)
-
         # define custom properties
         self._rollout_style = self.RolloutStyle.Rounded
-        self._drag_drop_mode = self.DragDropMode.NoDragDrop
+        self._drag_drop_mode = self.DragDropMode.InternalMove
         self._scrolling = False
         self._scroll_init_y = 0
         self._scroll_init_val = 0
@@ -426,7 +386,6 @@ class AccordionWidget(widgets.ScrollArea):
                 index = layout.count() - 1
             layout.insertWidget(index, item)
             layout.setStretchFactor(item, 0)
-
             if collapsed:
                 item.setCollapsed(collapsed)
             return item
@@ -436,12 +395,8 @@ class AccordionWidget(widgets.ScrollArea):
             layout = self.widget().layout()
             while layout.count() > 1:
                 item = layout.itemAt(0)
-
-                # remove the item from the layout
                 w = item.widget()
                 layout.removeItem(item)
-
-                # close the widget and delete it
                 w.close()
                 w.deleteLater()
 
@@ -449,19 +404,13 @@ class AccordionWidget(widgets.ScrollArea):
     #     if event.type() == QtCore.QEvent.Type.MouseButtonPress:
     #         self.mousePressEvent(event)
     #         return True
-
     #     elif event.type() == QtCore.QEvent.Type.MouseMove:
     #         self.mouseMoveEvent(event)
     #         return True
-
     #     elif event.type() == QtCore.QEvent.Type.MouseButtonRelease:
     #         self.mouseReleaseEvent(event)
     #         return True
-
     #     return False
-
-    def canScroll(self):
-        return self.verticalScrollBar().maximum() > 0
 
     def count(self):
         return self.widget().layout().count() - 1
@@ -495,55 +444,35 @@ class AccordionWidget(widgets.ScrollArea):
             return layout.itemAt(index).widget()
         return None
 
-    def emitItemCollapsed(self, item):
-        if not self.signalsBlocked():
-            self.itemCollapsed.emit(item)
-
-    def emitItemDragFailed(self, item):
-        if not self.signalsBlocked():
-            self.itemDragFailed.emit(item)
-
-    def emitItemMenuRequested(self, item):
-        if not self.signalsBlocked():
-            self.itemMenuRequested.emit(item)
-
-    def emitItemsReordered(self):
-        if not self.signalsBlocked():
-            self.itemsReordered.emit()
-
     def enterEvent(self, event):
-        if self.canScroll():
+        if self.v_scrollbar.can_scroll():
             widgets.Application.setOverrideCursor(QtCore.Qt.CursorShape.OpenHandCursor)
 
     def leaveEvent(self, event):
-        if self.canScroll():
+        if self.v_scrollbar.can_scroll():
             widgets.Application.restoreOverrideCursor()
 
     def mouseMoveEvent(self, event):
         if self._scrolling:
             sbar = self.verticalScrollBar()
             smax = sbar.maximum()
-
             # calculate the distance moved for the moust point
             dy = event.globalY() - self._scroll_init_y
-
             # calculate the percentage that is of the scroll bar
             dval = smax * (dy / float(sbar.height()))
-
             # calculate the new value
             sbar.setValue(self._scroll_init_val - dval)
-
         event.accept()
 
     def mousePressEvent(self, event):
-        # handle a scroll event
-        if event.button() == QtCore.Qt.MouseButton.LeftButton and self.canScroll():
+        if (
+            event.button() == QtCore.Qt.MouseButton.LeftButton
+            and self.v_scrollbar.can_scroll()
+        ):
             self._scrolling = True
             self._scroll_init_y = event.globalY()
             self._scroll_init_val = self.verticalScrollBar().value()
-
-            widgets.Application.setOverrideCursor(QtCore.Qt.CursorShape.ClosedHandCursor)
-
+            widgets.Application.set_override_cursor("closed_hand")
         event.accept()
 
     def mouseReleaseEvent(self, event):
@@ -589,7 +518,6 @@ class AccordionWidget(widgets.ScrollArea):
             if 0 <= index < layout.count() - 1:
                 item = layout.itemAt(index)
                 widget = item.widget()
-
                 layout.removeItem(item)
                 widget.close()
             return widget
