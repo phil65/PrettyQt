@@ -207,6 +207,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         if old_model is not None or model is not None:
             self.setModel(model)
             self.model_changed.emit(model)
+        if model is not None:
             self.setSelectionModel(core.ItemSelectionModel(model))
         # if old_model:
         #     old_model.deleteLater()
