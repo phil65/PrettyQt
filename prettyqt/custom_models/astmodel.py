@@ -6,7 +6,37 @@ import logging
 
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtCore
-from prettyqt.utils import treeitem
+from prettyqt.utils import bidict, treeitem
+
+NODE_MAP = bidict(
+    {
+        ast.Add: "+",
+        ast.Sub: "-",
+        ast.Mult: "*",
+        ast.Div: "/",
+        ast.Mod: "%",
+        ast.Eq: "==",
+        ast.In: "in",
+        ast.Pow: "**",
+        ast.MatMult: "@",
+        ast.FloorDiv: "//",
+        ast.BitAnd: "&",
+        ast.BitOr: "|",
+        ast.BitXor: "^",
+        ast.Gt: ">",
+        ast.GtE: ">=",
+        ast.Lt: "<",
+        ast.LtE: "<=",
+        ast.Is: "is",
+        ast.NotEq: "!=",
+        ast.IsNot: "is not",
+        ast.Not: "not ",
+        ast.NotIn: "not in",
+        ast.And: "and",
+        ast.Or: "or",
+        ast.Invert: "~",
+    }
+)
 
 
 logger = logging.getLogger(__name__)
@@ -79,6 +109,8 @@ class AstModel(custom_models.TreeModel):
                 return type(node).__name__
             case constants.DISPLAY_ROLE, 1:
                 match node:
+                    case _ if type(node) in NODE_MAP:
+                        return NODE_MAP[type(node)]
                     case ast.Name(id=name) | ast.arg(arg=name) | ast.Constant(value=name):
                         return name
                     case str():
