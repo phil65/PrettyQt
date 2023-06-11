@@ -11,15 +11,20 @@ class SlideAnimation(core.PropertyAnimation):
     def __init__(
         self,
         duration: int = 1000,
-        start_value: tuple[int, int] = (0, 0),
-        end_value: tuple[int, int] = (0, 0),
+        start_value: tuple[int, int] | core.Point = (0, 0),
+        end_value: tuple[int, int] | core.Point = (0, 0),
         easing: core.easingcurve.TypeStr = "in_out_sine",
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
+        start_value = (
+            core.Point(*start_value) if isinstance(start_value, tuple) else start_value
+        )
+        end_value = core.Point(*end_value) if isinstance(end_value, tuple) else end_value
         self.set_easing(easing)
-        self.set_start_value(core.Point(*start_value))
-        self.set_end_value(core.Point(*end_value))
+        pos = parent.geometry().topLeft()
+        self.set_start_value(pos + start_value)
+        self.set_end_value(pos + end_value)
         self.setDuration(duration)
 
     def set_start_value(self, point: datatypes.PointType):

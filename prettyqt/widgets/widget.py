@@ -68,7 +68,9 @@ class Animator:
         self._widget.setGraphicsEffect(effect)
         return effect
 
-    def play_animation(self, animation_type: str, **kwargs) -> QtCore.QPropertyAnimation:
+    def play_animation(
+        self, animation_type: str, delay: int = 0, **kwargs
+    ) -> QtCore.QPropertyAnimation:
         from prettyqt import custom_animations
 
         match animation_type:
@@ -89,7 +91,10 @@ class Animator:
                 anim.setEndValue(kwargs.pop("end_value"))
                 anim.setDuration(kwargs.pop("duration", 1000))
                 anim.set_easing(kwargs.pop("easing", "linear"))
-        anim.start()
+        if delay:
+            self._widget.start_callback_timer(anim.start, delay, single_shot=True)
+        else:
+            anim.start()
         return anim
 
     def highlight_widget(self, widget):
