@@ -159,11 +159,13 @@ class CycleWidget(widgets.ListWidget):
         elif index <= m - 1:
             self._current_index = N + index
             item = self.item(N + index + 1)
+        else:
+            return
         super().scrollToItem(item, self.ScrollHint.PositionAtCenter)
 
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = CycleWidget(["test"] * 20, QtCore.QSize(50, 50))
+    widget = CycleWidget([str(i) for i in range(30)], QtCore.QSize(50, 50))
     widget.show()
     app.main_loop()
