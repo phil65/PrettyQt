@@ -172,13 +172,18 @@ class WidgetMixin(core.ObjectMixin):
         super().insertAction(position_or_action, action)
 
     def add_action(
-        self, text: str | gui.Action, parent: QtWidgets.QWidget | None = None, **kwargs
+        self,
+        text: str | gui.Action,
+        parent: QtWidgets.QWidget | None = None,
+        data=None,
+        **kwargs,
     ) -> gui.Action:
         """Add an action to the menu.
 
         Args:
             text: Label for the action
             parent: parent
+            data: data for the Action
             kwargs: kwargs passed to action ctor
         Returns:
             Action added to menu
@@ -189,6 +194,7 @@ class WidgetMixin(core.ObjectMixin):
             action = text
             action.setParent(self)
         self.addAction(action)
+        action.setData(data)
         return action
 
     def add_actions(self, actions: Sequence[QtGui.QAction]):
