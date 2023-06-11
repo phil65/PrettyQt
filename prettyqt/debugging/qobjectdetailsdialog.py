@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+import functools
 import logging
 
-from prettyqt import debugging, ipython, widgets
+from prettyqt import constants, core, debugging, ipython, widgets
 from prettyqt.custom_models import (
     logrecordmodel,
     widgetpropertiesmodel,
@@ -15,11 +16,20 @@ logger = logging.getLogger(__name__)
 
 
 class HierarchyView(widgets.TreeView):
+    object_selected = core.Signal(QtCore.QObject)
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_indentation(10)
         self.h_header.resize_sections()
         self.setRootIsDecorated(True)
+        self.setWordWrap(True)
+
+    def select_object(self, qobject: QtCore.QObject):
+        index = self.model().search_tree(qobject, constants.USER_ROLE + 23324)
+        if index:
+            self.set_current_index(index[0], current=True)
+            self.scroll_to(index[0])
 
 
 class PropertyView(widgets.TableView):
@@ -89,12 +99,13 @@ class QObjectDetailsDialog(widgets.MainWindow):
         super().__init__(*args, object_name=object_name, **kwargs)
         self.qobject = qobject
         self.console = ipython.InProcessIPythonWidget(self)
-        tabwidget, self.propertyview = PropertyView.get_tabbed(qobject)
+        self.console.push_vars(dict(app=widgets.app(), qobject=qobject))
+        self.tabwidget, self.propertyview = PropertyView.get_tabbed(qobject)
         self.hierarchyview = HierarchyView()
         model = widgethierarchymodel.WidgetHierarchyModel(
             qobject, parent=self.hierarchyview
         )
-        model = model.proxifier[:, 0:3]
+        model = model.proxifier[:, 0:5]
         self.hierarchyview.set_model(model)
         hierarchycontainer = filtercontainer.FilterContainer(self.hierarchyview)
         self.hierarchyview.expandAll()
@@ -106,14 +117,30 @@ class QObjectDetailsDialog(widgets.MainWindow):
         w.set_layout("vertical")
         logtable.set_model(model)
         logtable.set_selection_behavior("rows")
-        self.stalker = debugging.Stalker(qobject, log_level=logging.DEBUG)
-        self.stalker.hook()
-        mdi_area = widgets.MdiArea()
-        mdi_area.add_subwindow(qobject)
-        self.set_central_widget(mdi_area)
+        self.stalkers = []
+        stalker = debugging.Stalker(qobject, log_level=logging.DEBUG)
+        stalker.hook()
+        self.stalkers.append(stalker)
+        for widget in qobject.find_children(QtWidgets.QWidget):
+            stalker = debugging.Stalker(widget, log_level=logging.DEBUG)
+            stalker.hook()
+            fn = functools.partial(self._on_widget_click, widget)
+            stalker.leftclick_detected.connect(fn)
+            self.stalkers.append(stalker)
+        # mdi_area = widgets.GraphicsView()
+        # subwindow = widgets.GraphicsProxyWidget ()
+        # # mdi_area.installEventFilter(self)
+        # # subwindow.installEventFilter(self)
+        # subwindow.set_widget(qobject)
+        # mdi_area.scene().add(subwindow)
+        widget = widgets.Widget()
+        layout = widget.set_layout("horizontal")
+        layout.add(qobject)
+        self.set_central_widget(widget)
+        # qobject.position_on(widget)
 
         self.add_dockwidget(hierarchycontainer, window_title="Hierarchy view")
-        self.add_dockwidget(tabwidget, window_title="Property view")
+        self.add_dockwidget(self.tabwidget, window_title="Property view")
         self.add_dockwidget(logtable, window_title="Log", visible=False)
         self.add_dockwidget(self.console, window_title="Console", visible=False)
         self.menubar = self.menuBar()
@@ -121,14 +148,26 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.menubar.add_action(action)
         self.position_on("screen", scale_ratio=0.8)
 
+    def eventFilter(self, source, event):
+        match event.type():
+            case QtCore.QEvent.Type.MouseButtonRelease:
+                raise ValueError()
+        return False
+
     def closeEvent(self, event):
-        self.stalker.unhook()
+        for stalker in self.stalkers:
+            stalker.unhook()
         super().closeEvent(event)
 
-    def _current_changed(self, *args):
+    def _current_changed(self, new, old):
+        # logger.info(f"{new=} {old=}")
         role = self.hierarchyview.get_model(skip_proxies=True).Roles.WidgetRole
         if (qobject := self.hierarchyview.current_data(role)) is not None:
             self.propertyview.set_qobject(qobject)
+
+    def _on_widget_click(self, widget):
+        logger.info(repr(widget))
+        self.hierarchyview.select_object(widget)
 
 
 if __name__ == "__main__":
@@ -136,8 +175,9 @@ if __name__ == "__main__":
     tree = widgets.TreeView()
     tree.set_model(dict(a=2))
     tree.model().proxifier.get_proxy("fuzzy")
-    widget = debugging.example_tree(flatten=True)
+    widget = debugging.example_widget()
     with app.debug_mode(log_level=logging.INFO):
         wnd = QObjectDetailsDialog(widget)
+        wnd.hierarchyview.select_object(None)
         wnd.show()
         app.main_loop()
