@@ -6,7 +6,7 @@ import logging
 import collections
 from typing import TypeVar
 
-from prettyqt import core, gui
+from prettyqt import core, gui, eventfilters
 from prettyqt.qt import QtCore
 
 
@@ -81,9 +81,10 @@ class Stalker(core.Object):
 
     def hook(self):
         # enable event logging by installing EventCatcher, which includes logging
-        self.eventcatcher = self._obj.add_callback_for_event(
-            self._on_event_detected, include=self.include, exclude=self.exclude
+        self.eventcatcher = eventfilters.EventCatcher(
+            self.include, self.exclude, self._on_event_detected, parent=self._obj
         )
+        self._obj.installEventFilter(self.eventcatcher)
         # enable logging of signals emitted by connecting all signals to our fn
         for signal in self._meta.get_signals(only_notifiers=False):
             signal_instance = self._obj.__getattribute__(signal.get_name())
