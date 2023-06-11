@@ -57,23 +57,19 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
         return gui.Font(self.font())
 
     def get_icon(self) -> gui.Icon | None:
-        icon = super().icon()
-        return None if icon.isNull() else gui.Icon(icon)
+        return None if (icon := super().icon()).isNull() else gui.Icon(icon)
 
     def set_data(self, role: constants.ItemDataRoleStr | int, data: Any):
-        if isinstance(role, str):
-            role = constants.ITEM_DATA_ROLE[role]
+        role = constants.ITEM_DATA_ROLE[role] if isinstance(role, str) else role
         super().setData(role, data)
 
     def get_data(self, role: constants.ItemDataRoleStr | int):
-        if isinstance(role, str):
-            role = constants.ITEM_DATA_ROLE[role]
+        role = constants.ITEM_DATA_ROLE[role] if isinstance(role, str) else role
         return super().data(role)
 
     def set_size_hint(self, hint: datatypes.SizeType):
-        if isinstance(hint, tuple):
-            hint = QtCore.QSize(*hint)
-        super().setSizeHint(hint)
+        size_hint = QtCore.QSize(*hint) if isinstance(hint, tuple) else hint
+        super().setSizeHint(size_hint)
 
     def set_text_alignment(
         self,

@@ -8,7 +8,7 @@ import sys
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -95,12 +95,13 @@ class CoreApplicationMixin(core.ObjectMixin):
         event: QtCore.QEvent,
         priority: int | constants.EventPriorityStr = "normal",
     ):
-        if isinstance(priority, int):
-            prio = priority
-        elif priority in constants.EVENT_PRIORITY:
-            prio = constants.EVENT_PRIORITY[priority]
-        else:
-            raise InvalidParamError(priority, constants.EVENT_PRIORITY)
+        match priority:
+            case int():
+                prio = priority
+            case str():
+                prio = constants.EVENT_PRIORITY[priority]
+            case _:
+                raise TypeError(priority)
         return self.postEvent(obj, event, prio)
 
     def in_main_thread(self) -> bool:
