@@ -8,17 +8,17 @@ class CursorMoveAnimation(core.VariantAnimation):
     def __init__(
         self,
         duration: int = 1000,
-        end_value: datatypes.PointType = (0, 0),
-        start_value: datatypes.PointType | None = None,
+        end: datatypes.PointType = (0, 0),
+        start: datatypes.PointType | None = None,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         **kwargs,
     ):
         super().__init__(**kwargs)
         self.set_easing(easing)
 
-        start = gui.Cursor.pos() if start_value is None else core.Point(*start_value)
+        start = gui.Cursor.pos() if start is None else core.Point(*start)
         self.set_start_value(start)
-        self.set_end_value(end_value)
+        self.set_end_value(end)
         self.setDuration(duration)
         self.valueChanged.connect(gui.Cursor.setPos)
 

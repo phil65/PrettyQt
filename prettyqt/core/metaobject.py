@@ -290,19 +290,19 @@ class MetaObject:
         logger.debug(f"connected {len(handles)} signals to {fn_or_qobject}.")
         return handles
 
-    def copy(self, widget: core.QObject, forward_signals: bool = True):
+    def copy(self, qobject: core.QObject, forward_signals: bool = True):
         """Create a copy of given QObject."""
         try:
-            new = type(widget)()
+            new = type(qobject)()
         except TypeError:
             # this should should cover most cases.
-            new = type(widget)(widget.orientation())
+            new = type(qobject)(qobject.orientation())
         for prop in self.get_properties(only_writable=True):
-            val = prop.read(widget)
+            val = prop.read(qobject)
             prop.write(new, val)
         if forward_signals:
-            self.connect_signals(new, widget)
-        logger.debug(f"copied {widget!r}")
+            self.connect_signals(new, qobject)
+        logger.debug(f"copied {qobject!r}")
         return new
 
     def get_property_class_affiliations(self) -> dict[str, list[core.MetaProperty]]:
