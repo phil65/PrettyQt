@@ -124,6 +124,8 @@ class DataFrameHeaderModel(core.AbstractTableModel):
             case constants.DISPLAY_ROLE:
                 val = self._model.header(self.axis, col, row)
                 return "" if pd.isnull(val) else str(val)
+            case constants.ALIGNMENT_ROLE:
+                return constants.ALIGN_CENTER
 
 
 class DataFrameLevelModel(core.AbstractTableModel):
@@ -330,7 +332,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_level.v_header.setFixedWidth(h_width)
         self.table_index.v_header.setFixedWidth(h_width)
 
-        last_row = self.model().rowCount() - 1
+        last_row = self._model.header_shape[0] - 1
         if last_row < 0:
             hdr_height = self.table_level.h_header.height()
         else:
@@ -342,7 +344,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_header.setFixedHeight(hdr_height)
         self.table_level.setFixedHeight(hdr_height)
 
-        last_col = self.model().columnCount() - 1
+        last_col = self._model.header_shape[1] - 1
         if last_col < 0:
             idx_width = self.table_level.v_header.width()
         else:
@@ -471,14 +473,16 @@ class DataFrameViewer(widgets.Widget):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging
+    from prettyqt import debugging, eventfilters
 
     df = debugging.example_multiindex_df()
     app = widgets.app()
     table = DataFrameViewer()
     table.set_df(df)
-    table.table_header.auto_span()
-    table.table_index.auto_span(orientation=constants.VERTICAL)
+    test = eventfilters.SectionAutoSpanEventFilter(table.table_header)
+    test = eventfilters.SectionAutoSpanEventFilter(
+        table.table_index, orientation=constants.VERTICAL
+    )
     table.resizeColumnsToContents()
     table.show()
     app.main_loop()
