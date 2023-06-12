@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Iterator
 from typing import Literal
 
-from deprecated import deprecated
 from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
@@ -39,7 +38,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         match index:
             case int():
                 item = self.itemAt(index)
-                return item if (item := item.widget()) is not None else item.layout()
+                return i if (i := item.widget()) is not None else item.layout()
             case str():
                 if (item := self.find_child(typ=QtCore.QObject, name=index)) is not None:
                     return item
@@ -218,10 +217,6 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def set_spacing(self, pixels: int):
         self.setSpacing(pixels)
 
-    @deprecated(reason="Use set_size_constraint instead")
-    def set_size_mode(self, mode: SizeConstraintStr):
-        self.set_size_constraint(mode)
-
     def set_size_constraint(self, mode: SizeConstraintStr):
         """Set the size mode of the layout.
 
@@ -234,10 +229,6 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         if mode not in SIZE_CONSTRAINT:
             raise InvalidParamError(mode, SIZE_CONSTRAINT)
         self.setSizeConstraint(SIZE_CONSTRAINT[mode])
-
-    @deprecated(reason="Use set_size_constraint instead")
-    def get_size_mode(self) -> SizeConstraintStr:
-        return self.get_size_constraint()
 
     def get_size_constraint(self) -> SizeConstraintStr:
         """Return current size mode.
