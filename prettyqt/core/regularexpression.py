@@ -161,9 +161,7 @@ class RegularExpression(QtCore.QRegularExpression):
         # matches = list(matches)
         # if 0 < maxsplit <= len(matches):
         #     remainder = string[matches[maxsplit - 1].end() :]
-        #     print(remainder)
         # else:
-        #     print(None)
         #     remainder = None
         # if maxsplit > 0:
         #     matches = matches[:maxsplit]
@@ -198,6 +196,13 @@ class RegularExpression(QtCore.QRegularExpression):
     @property
     def flags(self):
         return self.patternOptions()
+
+    def to_py_pattern(self) -> re.Pattern:
+        flag = re.RegexFlag(0)
+        for qflag in self.patternOptions():
+            if qflag in RE_MAP.inverse:
+                flag |= RE_MAP.inverse[qflag]
+        return re.compile(self.pattern(), flag)
 
 
 if __name__ == "__main__":
