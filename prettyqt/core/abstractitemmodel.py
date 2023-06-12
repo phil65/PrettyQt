@@ -250,6 +250,29 @@ class AbstractItemModelMixin(core.ObjectMixin):
                     break
         return results
 
+    def get_index_key(self, index: core.ModelIndex):
+        """Return a key for `index` from the source model into the _source_offset map.
+
+        The key is a tuple of row indices on
+        the path from the top if the model to the `index`.
+        """
+        key_path = []
+        parent = index
+        while parent.isValid():
+            key_path.append(parent.row())
+            parent = parent.parent()
+        return tuple(reversed(key_path))
+
+    def index_from_key(self, key_path: tuple[int, ...]):
+        """Return a source QModelIndex for the given key."""
+        model = self.sourceModel()
+        if model is None:
+            return core.ModelIndex()
+        index = model.index(key_path[0], 0)
+        for row in key_path[1:]:
+            index = model.index(row, 0, index)
+        return index
+
 
 class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
     pass

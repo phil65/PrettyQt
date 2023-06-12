@@ -68,7 +68,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         if not source_index.isValid():
             return source_index
-        key = self._get_index_key(source_index)
+        key = self.get_index_key(source_index)
         offset = self._source_offset[key]
         row = offset + source_index.row()
         return self.index(row, 0)
@@ -78,7 +78,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
             return index
         row = index.row()
         source_key_path = self._source_key[row]
-        return self._index_from_key(source_key_path)
+        return self.index_from_key(source_key_path)
 
     def index(
         self, row: int, column: int = 0, parent: core.ModelIndex | None = None
@@ -111,29 +111,6 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         if model is not None and model.rowCount(index) > 0 and enabled:
             flags ^= QtCore.Qt.ItemFlag.ItemIsEnabled
         return flags
-
-    def _get_index_key(self, index: core.ModelIndex):
-        """Return a key for `index` from the source model into the _source_offset map.
-
-        The key is a tuple of row indices on
-        the path from the top if the model to the `index`.
-        """
-        key_path = []
-        parent = index
-        while parent.isValid():
-            key_path.append(parent.row())
-            parent = parent.parent()
-        return tuple(reversed(key_path))
-
-    def _index_from_key(self, key_path: tuple[int, ...]):
-        """Return a source QModelIndex for the given key."""
-        model = self.sourceModel()
-        if model is None:
-            return core.ModelIndex()
-        index = model.index(key_path[0], 0)
-        for row in key_path[1:]:
-            index = model.index(row, 0, index)
-        return index
 
     def _update_row_mapping(self):
         source = self.sourceModel()
