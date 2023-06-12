@@ -6,7 +6,7 @@ from typing import Any
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, helpers
 
 logger = logging.getLogger(__name__)
 
@@ -102,7 +102,7 @@ class MetaObject:
                 raise KeyError(index)
             return method
         for method in self.get_methods():
-            if method.get_name() == index:
+            if method.get_name() in [index, helpers.to_lower_camel(index)]:
                 return method
         raise KeyError(index)
 
@@ -114,7 +114,7 @@ class MetaObject:
                 raise KeyError(index)
             return enum
         for enumerator in self.get_enums():
-            if enumerator.get_name() == index:
+            if enumerator.get_name() in [index, helpers.to_lower_camel(index)]:
                 return enumerator
         raise KeyError(index)
 
@@ -126,7 +126,7 @@ class MetaObject:
                 raise KeyError(index)
             return prop
         for prop in self.get_properties():
-            if prop.get_name() == index:
+            if prop.get_name() in [index, helpers.to_lower_camel(index)]:
                 return prop
         raise KeyError(index)
 
@@ -138,7 +138,7 @@ class MetaObject:
                 raise KeyError(index)
             return method
         for method in self.get_constructors():
-            if method.get_name() == index:
+            if method.get_name() in [index, helpers.to_lower_camel(index)]:
                 return method
         raise KeyError(index)
 
