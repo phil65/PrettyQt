@@ -3,14 +3,14 @@ from __future__ import annotations
 import dataclasses
 import logging
 
-from prettyqt import constants, core
+from prettyqt import constants, custom_models
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import datatypes
 
 logger = logging.getLogger(__name__)
 
 
-class DataClassFieldsModel(core.AbstractTableModel):
+class DataClassFieldsModel(custom_models.BaseFieldsModel):
     HEADER = [
         "Field name",
         "Value",
@@ -25,31 +25,10 @@ class DataClassFieldsModel(core.AbstractTableModel):
     ]
 
     def __init__(self, instance: datatypes.IsDataclass, **kwargs):
-        self._instance = instance
-        self._fields = dataclasses.fields(instance)
-        self.event_catcher = None
-        super().__init__(**kwargs)
-        self.set_instance(instance)
+        super().__init__(instance, **kwargs)
 
-    def set_instance(self, instance):
-        self._instance = instance
-        self._fields = dataclasses.fields(instance)
-        self.update_all()
-
-    def columnCount(self, parent=None) -> int:
-        return len(self.HEADER)
-
-    def headerData(
-        self,
-        section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole,
-    ) -> str | None:
-        match orientation, role:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
-                return self.HEADER[section]
-            case constants.VERTICAL, constants.DISPLAY_ROLE:
-                return str(section)
+    def get_fields(self, instance: datatypes.IsDataclass):
+        return dataclasses.fields(instance)
 
     def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
@@ -86,24 +65,6 @@ class DataClassFieldsModel(core.AbstractTableModel):
                 return field.kw_only
             case constants.USER_ROLE, _:
                 return getattr(self._instance, field.name)
-
-    def setData(self, index: QtCore.QModelIndex, value, role=constants.DISPLAY_ROLE):
-        if not index.isValid():
-            return None
-        field = self._fields[index.row()]
-        match role, index.column():
-            case constants.USER_ROLE, _:
-                setattr(self._instance, field.name, value)
-                self.update_row(index.row())
-                return True
-        return False
-
-    def rowCount(self, parent: QtCore.QModelIndex | None = None) -> int:
-        """Override for AbstractitemModel base method."""
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return 0
-        return 0 if parent.isValid() else len(self._fields)
 
     def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
         if index.column() == 1 and not self._instance.__dataclass_params__.frozen:
