@@ -81,6 +81,8 @@ class Settings_(
     def set_value(self, key: str, value):
         if not self.applicationName():
             raise RuntimeError("no app name defined")
+        if isinstance(value, Settings_):
+            value = dict(value)
         self.setValue(key, value)
 
     def set_values(self, dct: dict[str, Any]):
@@ -213,6 +215,8 @@ class Settings_(
 class Settings(Settings_):
     # settings class which wraps everything into a dict to preserve data types.
     def set_value(self, key: str, value):
+        if isinstance(value, Settings_):
+            value = dict(value)
         super().set_value(key, dict(value=value))
 
     def get_value(self, key: str, default=None):
