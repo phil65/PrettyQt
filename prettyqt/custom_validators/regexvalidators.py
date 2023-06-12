@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import regex as re
+import re
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
@@ -29,8 +29,8 @@ class BaseRegexValidator(gui.Validator):
     def __eq__(self, other: object):
         return self.regex == other.regex if isinstance(other, type(self)) else False
 
-    def set_regex(self, regex: datatypes.PatternType):
-        self.regex = re.compile(regex) if isinstance(regex, str) else regex
+    def set_regex(self, regex: datatypes.PatternAndStringType):
+        self.regex = datatypes.to_py_pattern(regex)
 
     def get_regex(self) -> str:
         if self.regex is None:
@@ -46,8 +46,8 @@ class BaseRegexValidator(gui.Validator):
             return self.State.Intermediate, text, pos
         match = self.regex.match(text, partial=True)  # type: ignore
         if match is None:
-            return self.State.Invalid, text, pos
-        elif match.partial:  # type: ignore
+            #     return self.State.Invalid, text, pos
+            # elif match.partial:  # type: ignore
             return self.State.Intermediate, text, pos
         else:
             return self.State.Acceptable, text, pos

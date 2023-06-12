@@ -4,8 +4,9 @@ from abc import ABCMeta
 import datetime
 import os
 import pathlib
+import re
 from typing import TYPE_CHECKING, Any, ClassVar, Protocol
-from re import Pattern
+
 
 from prettyqt.qt import QtCore
 
@@ -118,6 +119,18 @@ def to_sizef(size: SizeFType | SizeType | None):
             raise TypeError(size)
 
 
+def to_py_pattern(pattern: PatternAndStringType):
+    from prettyqt import core
+
+    match pattern():
+        case str():
+            return re.compile(pattern)
+        case re.Pattern():
+            return pattern
+        case QtCore.QRegularExpression():
+            return core.RegularExpression(pattern).to_py_pattern()
+
+
 def make_serializable(obj):
     #  possible to avoid importing by checking the metaobject instead of isinstance?
     from prettyqt import core
@@ -181,7 +194,8 @@ if TYPE_CHECKING:
 
     JSONType = str | int | float | bool | None | dict[str, Any] | list[Any]
     PathType = str | os.PathLike
-    PatternType = str | Pattern
+    PatternType = re.Pattern | QtCore.QRegularExpression
+    PatternAndStringType = str | PatternType
     UrlType = str | QtCore.QUrl
     PointType = tuple[int, int] | QtCore.QPoint
     PointFType = tuple[float, float] | QtCore.QPointF
