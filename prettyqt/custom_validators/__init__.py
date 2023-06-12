@@ -5,11 +5,10 @@ Contains custom validators
 
 
 from .compositevalidator import CompositeValidator
-from .notemptyvalidator import NotEmptyValidator
-from .notzerovalidator import NotZeroValidator
 from .pathvalidator import PathValidator
 from .integervalidator import IntegerValidator
-from .optionsvalidator import OptionsValidator
+from .whitelistvalidator import WhitelistValidator
+from .blacklistvalidator import BlacklistValidator, NotZeroValidator, NotEmptyValidator
 from .regexvalidators import FloatListValidator, IntListValidator
 from .regexpatternvalidator import RegexPatternValidator
 from .hexvalidator import HexValidator
@@ -35,7 +34,8 @@ __all__ = [
     "HexValidator",
     "QssValidator",
     "TextLengthValidator",
-    "OptionsValidator",
+    "WhitelistValidator",
+    "BlacklistValidator",
     "ScientificIntegerValidator",
     "ScientificFloatValidator",
     "PythonCodeValidator",
