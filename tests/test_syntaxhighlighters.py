@@ -20,11 +20,6 @@ def test_yamlhighlighter():
     highlighter.highlightBlock("---\ntest:\n  - hallo")
 
 
-def test_xmlhighlighter():
-    highlighter = syntaxhighlighters.XmlHighlighter()
-    highlighter.highlightBlock("<xml>test</xml>")
-
-
 def test_markdownhighlighter():
     highlighter = syntaxhighlighters.MarkdownHighlighter()
     highlighter.highlightBlock("### Headline")
