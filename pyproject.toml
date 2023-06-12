@@ -1,3 +1,158 @@
+[project]
+name = "PrettyQt"
+version = "1.48.0"
+description = "A pythonic layer on top of PyQt6 / PySide6"
+readme = 'docs/index.md'
+python-requires = ">=3.10"
+license = "MIT"
+authors = [
+  { name = "Philipp Temminghoff", email = "philipptemminghoff@gmail.com" },
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Programming Language :: Python"
+]
+keywords = [ "Qt", "PyQt6", "PySide6", "Framework"]
+dependencies = [
+    "bidict",
+    "regex",
+    "pywin32;platform_system == 'Windows'",
+    "comtypes;platform_system == 'Windows'",
+    "pygments",
+    "qstylizer",
+    "deprecated",
+    "typing-extensions"
+]
+
+[project.urls]
+Documentation = "https://phil65.github.io/PrettyQt/index.html"
+"Source code" = "https://github.com/phil65/prettyqt"
+
+[project.optional-dependencies]
+dev = [
+    "pip",
+    "pyreadline3",
+    "pylint",
+    "black",
+    "devtools",
+    "commitizen",
+]
+
+typing = [
+    "mypy",
+    "types-Deprecated",
+    "types-docutils",
+    "types-orjson",
+    "types-python-dateutil",
+    "types-requests",
+]
+
+test = [
+    "pytest",
+    "pytest-cov",
+    "pytest-qt",
+    "pytest-xvfb;platform_system == 'Linux'",
+    "coverage",
+]
+docs = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "pymdown-extensions",
+    "mkdocs-literate-nav",
+]
+
+addons = [
+    "docutils",
+    "orjson",
+    "fsspec",
+    "pillow",
+    "numpy",
+    "qtconsole",
+    "ipython",
+    "pandas",
+]
+
+pyqt6 = [
+    "PyQt6",
+    "PyQt6-Charts",
+    "PyQt6-WebEngine",
+    "PyQt6-QScintilla",
+]
+
+pyside6 = ["pyside6"]
+
+[project.gui-scripts]
+regexeditor = "prettyqt.custom_widgets.regexeditor.__main__:run"
+iconbrowser = "prettyqt.custom_widgets.iconbrowser:run"
+
+[project.entry-points.pyinstaller40]
+hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
+
+[tool.hatch.build.targets.wheel.hooks.mypyc]
+dependencies = ["hatch-mypyc"]
+# [build.targets.wheel.hooks.mypyc]
+# include = ["/src/pkg/server"]
+# mypy-args = [
+#   "--disallow-untyped-defs",
+# ]
+# [tool.hatch.version]
+# path = "src/foo/__about__.py"
+[tool.hatch.envs.docs]
+dependencies = [
+    "mkdocs",
+    "mkdocs-material",
+    "mkdocstrings[python]",
+    "mkdocs-literate-nav",
+    "pymdown-extensions",
+]
+
+[tool.hatch.envs.docs.scripts]
+build = "mkdocs build --clean --strict"
+serve = "mkdocs serve --dev-addr localhost:8000"
+
+[tool.hatch.build]
+sources = ["prettyqt"]
+include = [
+  "/prettyqt",
+  "/tests",
+]
+
+[tool.hatch.envs.default]
+features = [
+  "addons",
+  "typing",
+  "docs",
+  "test",
+  "pyside6",
+  "pyqt6",
+  "dev",
+]
+
+
+# [tool.hatch.envs.nightly]
+# features = [
+#   "addons",
+#   "pyside6",
+#   "pyqt6",
+#   "dev",
+# ]
+
+[tool.hatch.envs.test]
+dependencies = [
+  "coverage[toml]",
+  "pytest",
+  "pytest-cov",
+  "pytest-qt",
+]
+
+[envs.default.scripts]
+test = 'pytest --cov-report=term-missing --cov-config=pyproject.toml --cov=pkg --cov=tests'
+
+[[envs.default.matrix]]
+python = ["3.10", "3.11"]
+# version = ["42", "3.14"]
+
 [tool.poetry]
 name = "PrettyQt"
 version = "1.48.0"
@@ -35,7 +190,6 @@ PyQt6 = {version = "^6.5", optional=true}
 PyQt6-Charts = {version = "^6.5", optional=true}
 PyQt6-WebEngine = {version = "^6.5", optional=true}
 PyQt6-QScintilla = {version = "^2.0", optional=true}
-# PyQtAds = {version = "^3.8", optional=true}
 pyside6 = {version = "^6.5", python = "<3.12", optional=true}
 qtconsole = {version = "^5", optional=true}
 ipython = {version = "^8", optional=true}
@@ -58,7 +212,7 @@ pytest = "^7"
 pip = "^23"
 pyreadline3 = "^3"
 pytest-cov = "^4"
-pytest-qt = {version = "^4.1"}
+pytest-qt = "^4.1"
 mypy = "^1"
 types-Deprecated = "^1.2"
 types-docutils = "^0"
@@ -202,10 +356,7 @@ version_files = [
 ]
 
 [build-system]
-# requires = ["poetry>=0.12"]
-# build-backend = "poetry.masonry.api"
-# need to check this
 requires = ["poetry_core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
-# for pip install -e .
-# requires = ["setuptools>=42", "wheel", "setuptools_scm[toml]>=3.4", "pbr"]
+# requires = ["hatchling"]
+# build-backend = "hatchling.build"
