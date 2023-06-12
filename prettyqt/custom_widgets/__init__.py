@@ -48,6 +48,7 @@ from .waitingspinner import WaitingSpinner
 from .popupinfo import PopupInfo
 from .editors.selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
+from .astviewer import AstViewer
 from .roundprogressbar import RoundProgressBar
 from .subsequencecompleter import SubsequenceCompleter
 from .filetree import FileTree
@@ -116,6 +117,7 @@ __all__ = [
     "Timeline",
     # "StarEditor",
     # "StarRating",
+    "AstViewer",
     "VideoSample",
     "StandardIconsWidget",
     "SubsequenceCompleter",
