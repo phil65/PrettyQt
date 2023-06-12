@@ -4,8 +4,8 @@ from prettyqt import gui
 from prettyqt.qt import QtCore
 
 
-class OptionsValidator(gui.Validator):
-    ID = "options"
+class WhitelistValidator(gui.Validator):
+    ID = "whitelist"
 
     def __init__(
         self,
@@ -16,7 +16,7 @@ class OptionsValidator(gui.Validator):
         self._options = options
 
     def __eq__(self, other: object):
-        return isinstance(other, OptionsValidator) and self._options == other._options
+        return isinstance(other, WhitelistValidator) and self._options == other._options
 
     def validate(self, text: str, pos: int = 0):
         if any(option == text for option in self._options):
@@ -29,7 +29,7 @@ class OptionsValidator(gui.Validator):
 if __name__ == "__main__":
     from prettyqt import widgets
 
-    val = OptionsValidator(["a", "abc", "xyz"])
+    val = WhitelistValidator(["a", "abc", "xyz"])
     app = widgets.app()
     widget = widgets.LineEdit("Thisisatest")
     widget.setValidator(val)
