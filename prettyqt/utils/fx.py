@@ -8,7 +8,7 @@ from prettyqt.utils import colors, datatypes, helpers
 logger = logging.getLogger(__name__)
 
 
-class AnimWrapper:
+class AnimationWrapper:
     def __init__(self, animation, fx):
         self._animation = animation
         self.fx = fx
@@ -21,6 +21,7 @@ class AnimWrapper:
         self._animation.set_easing(easing)
         self._animation.set_duration(duration)
         self.fx.run(self._animation, delay)
+        return self._animation
 
     def animate_on_event(
         self,
@@ -42,6 +43,7 @@ class AnimWrapper:
 
         obj = self._animation.targetObject()
         obj.add_callback_for_event(on_event, include=event)
+        return self._animation
 
 
 class Fx:
@@ -54,7 +56,7 @@ class Fx:
         anim = core.PropertyAnimation()
         anim.apply_to(self._widget.__getattr__(value))
         # keep a reference
-        self._wrapper = AnimWrapper(anim, self)
+        self._wrapper = AnimationWrapper(anim, self)
         return self._wrapper
 
     def set_colorize_effect(
