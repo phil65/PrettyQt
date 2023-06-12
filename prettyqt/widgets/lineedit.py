@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+import re
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, get_repr, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
 
 
 ECHO_MODE = bidict(
@@ -27,14 +28,13 @@ ValidatorStr = Literal[
     "double",
     "color",
     "integer",
+    "options",
     "integer_classic",
     "path",
     "scientific_integer",
     "scientific_float",
     "python_code",
     "not_zero",
-    "not_empty",
-    "composite",
     "json",
     "regex",
     "regular_expression",
@@ -47,7 +47,6 @@ ValidatorStr = Literal[
     "text_length",
     "website",
     "email",
-    "not_strict",
 ]
 
 WEB_REGEX = (
@@ -56,6 +55,29 @@ WEB_REGEX = (
 )
 
 MAIL_REGEX = r"[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+"
+
+
+def get_validator(
+    validator: ValidatorStr | datatypes.PatternType,
+    **kwargs,
+) -> QtGui.QValidator:
+    match validator:
+        case "email":
+            return get_validator("regular_expression", regular_expression=MAIL_REGEX)
+        case "website":
+            return get_validator("regular_expression", regular_expression=WEB_REGEX)
+        case str():
+            ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
+            validator = ValidatorClass(**kwargs)
+            return validator
+        case QtCore.QRegularExpression():
+            return get_validator("regular_expression", regular_expression=validator)
+        case re.Pattern():
+            return get_validator(
+                "regular_expression", regular_expression=core.RegularExpression(validator)
+            )
+        case _:
+            raise ValueError(validator)
 
 
 class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
@@ -133,33 +155,28 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
 
     def set_validator(
         self,
-        validator: QtGui.QValidator | ValidatorStr | QtCore.QRegularExpression | None,
+        validator: QtGui.QValidator | ValidatorStr | datatypes.PatternType | None,
         strict: bool = True,
+        empty_allowed: bool = True,
         **kwargs,
     ) -> QtGui.QValidator:
+        from prettyqt import custom_validators
+
         match validator:
-            case "email":
-                return self.set_validator(
-                    "regular_expression", strict=strict, regular_expression=MAIL_REGEX
-                )
-            case "website":
-                return self.set_validator(
-                    "regular_expression", strict=strict, regular_expression=WEB_REGEX
-                )
-            case str():
-                ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
-                validator = ValidatorClass(**kwargs)
-            case QtCore.QRegularExpression():
-                return self.set_validator(
-                    "regular_expression", strict=strict, regular_expression=validator
-                )
+            case str() if "|" in validator:
+                validators = [get_validator(i, **kwargs) for i in validator.split("|")]
+                validator = custom_validators.CompositeValidator(validators)
+            case str() | datatypes.PatternType():
+                validator = get_validator(validator, **kwargs)
             case None | QtGui.QValidator():
                 pass
             case _:
                 raise ValueError(validator)
+        if not empty_allowed:
+            validator = custom_validators.CompositeValidator(
+                [validator, custom_validators.NotEmptyValidator()]
+            )
         if not strict:
-            from prettyqt import custom_validators
-
             validator = custom_validators.NotStrictValidator(validator)
         self.setValidator(validator)
         self._set_validation_color()
@@ -246,3 +263,4 @@ if __name__ == "__main__":
     widget.setFont(gui.Font("Consolas"))
     widget.show()
     app.main_loop()
+    print(widget.hasAcceptableInput())
