@@ -126,6 +126,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
             flow=custom_widgets.FlowLayout,
             splitter=widgets.Splitter,
             scroll=widgets.ScrollArea,
+            frame=widgets.GroupBox,
         )
         Klass = CONTEXT_LAYOUTS[layout]
         match self._container:
@@ -146,6 +147,17 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
                 new = Klass(orientation=orientation, parent=self._container, **kwargs)
             case QtWidgets.QLayout() if layout == "splitter":
                 new = Klass(orientation=orientation, **kwargs)
+                self._container.add(new)
+            case QtWidgets.QWidget() if layout == "frame":
+                frame = Klass(parent=self._container, **kwargs)
+                widget = widgets.Widget()
+                new = widget.set_layout(orientation or "horizontal")
+                frame.set_layout(new)
+            case QtWidgets.QLayout() if layout == "frame":
+                frame = Klass(**kwargs)
+                widget = widgets.Widget()
+                new = widget.set_layout(orientation or "horizontal")
+                frame.set_layout(new)
                 self._container.add(new)
             case QtWidgets.QMainWindow():
                 widget = widgets.Widget(parent=self._container)
