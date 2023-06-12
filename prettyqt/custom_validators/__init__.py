@@ -9,6 +9,7 @@ from .notemptyvalidator import NotEmptyValidator
 from .notzerovalidator import NotZeroValidator
 from .pathvalidator import PathValidator
 from .integervalidator import IntegerValidator
+from .optionsvalidator import OptionsValidator
 from .regexvalidators import FloatListValidator, IntListValidator
 from .regexpatternvalidator import RegexPatternValidator
 from .hexvalidator import HexValidator
@@ -34,6 +35,7 @@ __all__ = [
     "HexValidator",
     "QssValidator",
     "TextLengthValidator",
+    "OptionsValidator",
     "ScientificIntegerValidator",
     "ScientificFloatValidator",
     "PythonCodeValidator",
