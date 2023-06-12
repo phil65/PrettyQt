@@ -4,8 +4,8 @@ from prettyqt import custom_animations, widgets
 
 
 def test_bounceanimation(qtbot):
-    anim = custom_animations.BounceAnimation()
     widget = widgets.Widget()
+    anim = custom_animations.BounceAnimation(parent=widget)
     anim.set_start_value((20, 20))
     anim.set_end_value((20, 20))
     anim.set_duration(40)
@@ -13,13 +13,15 @@ def test_bounceanimation(qtbot):
 
 
 def test_fadeanimation(qtbot):
-    anim = custom_animations.FadeInAnimation()
+    widget = widgets.Widget()
+    anim = custom_animations.FadeInAnimation(parent=widget)
     widget = widgets.Widget()
     anim.apply_to(widget)
 
 
 def test_slideanimation(qtbot):
-    anim = custom_animations.SlideAnimation()
+    widget = widgets.Widget()
+    anim = custom_animations.SlideAnimation(parent=widget)
     anim.set_start_value((20, 20))
     anim.set_end_value((20, 20))
     widget = widgets.Widget()

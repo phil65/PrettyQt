@@ -22,7 +22,7 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
                 return self.find_child(QtCore.QObject, idx)
             case _:
                 raise TypeError(idx)
-        return item.widget() or item.layout()
+        return item.widget() if item.widget() is not None else item.layout()
 
     def __setitem__(
         self,

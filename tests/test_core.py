@@ -554,7 +554,7 @@ def test_propertyanimation():
     animation.setEndValue(core.Rect(20, 50, 70, 89))
     animation[0] = 1
     assert animation[0] == 1
-    with pytest.raises(InvalidParamError):
+    with pytest.raises(TypeError):
         animation.start_animation("test")
     animation.start_animation("keep")
 

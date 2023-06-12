@@ -39,7 +39,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         match index:
             case int():
                 item = self.itemAt(index)
-                return item.widget() or item.layout()
+                return item if (item := item.widget()) is not None else item.layout()
             case str():
                 if (item := self.find_child(typ=QtCore.QObject, name=index)) is not None:
                     return item

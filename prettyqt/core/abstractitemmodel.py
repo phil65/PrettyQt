@@ -8,7 +8,7 @@ from collections.abc import Iterator
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, proxifier
+from prettyqt.utils import bidict
 
 
 logger = logging.getLogger(__name__)
@@ -34,6 +34,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
+        from prettyqt.utils import proxifier
+
         self.proxifier = proxifier.Proxyfier(self)
 
     def __repr__(self):

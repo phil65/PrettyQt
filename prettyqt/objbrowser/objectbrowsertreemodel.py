@@ -1,13 +1,6 @@
-"""Module that defines the TreeModel.
-
-Based on: PySide examples/itemviews/simpletreemodel
-See: https://github.com/PySide/Examples/blob/master/examples/itemviews/simpletreemodel
-/simpletreemodel.py
-"""
-
 from __future__ import annotations
 
-from collections import OrderedDict
+from collections.abc import Mapping
 from difflib import SequenceMatcher
 import inspect
 import logging
@@ -17,13 +10,7 @@ from prettyqt import core, custom_models
 from prettyqt.utils import treeitem
 
 
-# TODO: a lot of methods (e.g. rowCount) test if parent.column() > 0. This should probably
-# be replaced with an assert.
-
-
 logger = logging.getLogger(__name__)
-
-MAX_OBJ_STR_LEN = 50
 
 
 class ObjectBrowserTreeItem(treeitem.TreeItem):
@@ -107,28 +94,8 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
             path_strings = [
                 f"{obj_path}[{i[0]}]" if obj_path else i[0] for i in obj_children
             ]
-        # elif isinstance(obj, (set, frozenset)):
-        #     obj_children = [("pop()", elem) for elem in obj]
-        #     path_strings = [
-        #         "{0}.pop()".format(obj_path) if obj_path else item[0]
-        #         for item in obj_children
-        #     ]
-        elif hasattr(obj, "items") and callable(obj.items):  # dicts etc.
-            try:
-                obj_children = list(obj.items())
-            except Exception as ex:
-                # Can happen if the items method expects an argument, for instance the
-                # types.DictType.items method expects a dictionary.
-                logger.warning("No items expanded. Objects items() call failed: %s", ex)
-                obj_children = []
-
-            # Sort keys, except when the object is an OrderedDict.
-            if not isinstance(obj, OrderedDict):
-                try:
-                    obj_children = sorted(obj.items())
-                except Exception as ex:
-                    logger.debug("Unable to sort dictionary keys: %s", ex)
-
+        elif isinstance(obj, Mapping):
+            obj_children = list(obj.items())
             path_strings = [
                 f"{obj_path}[{item[0]!r}]" if obj_path else item[0]
                 for item in obj_children
@@ -175,11 +142,6 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
         logger.debug("(reversed) opcodes: %s", list(reversed(opcodes)))
 
         for tag, i1, i2, j1, j2 in reversed(opcodes):
-            # logger.debug(
-            #     "  {:7s}, a[{}:{}] ({}), b[{}:{}] ({})".format(
-            #         tag, i1, i2, old_item_names[i1:i2], j1, j2, new_item_names[j1:j2]
-            #     )
-            # )
             match tag:
                 case "equal":
                     # when node names are equal is aux_refresh_tree called recursively.
