@@ -5,13 +5,14 @@ import dataclasses
 import logging
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore
+from prettyqt.utils import datatypes
 
 logger = logging.getLogger(__name__)
 
 
 class DataClassModel(core.AbstractTableModel):
-    def __init__(self, items: Sequence[QtWidgets.QWidget], **kwargs):
+    def __init__(self, items: Sequence[datatypes.IsDataclass], **kwargs):
         super().__init__(**kwargs)
         self.items = items
         klasses = [type(i) for i in items]

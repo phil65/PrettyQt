@@ -5,6 +5,7 @@ import logging
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtGui
+from prettyqt.utils import datatypes
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +24,7 @@ class DataClassFieldsModel(core.AbstractTableModel):
         "Keyword only",
     ]
 
-    def __init__(self, instance, **kwargs):
+    def __init__(self, instance: datatypes.IsDataclass, **kwargs):
         self._instance = instance
         self._fields = dataclasses.fields(instance)
         self.event_catcher = None
