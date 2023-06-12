@@ -313,6 +313,9 @@ if TYPE_CHECKING:
     class IsDataclass(Protocol):
         __dataclass_fields__: ClassVar[dict]
 
+    class IsAttrs(Protocol):
+        __attrs_attrs__: ClassVar[dict]
+
     QtSerializableType = (
         QtCore.QByteArray
         | QtCore.QUrl
