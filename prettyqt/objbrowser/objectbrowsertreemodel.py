@@ -202,11 +202,11 @@ class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
 
     def data_by_index(self, proxy_index: core.ModelIndex) -> ObjectBrowserTreeItem:
         index = self.mapToSource(proxy_index)
-        return self.sourceModel().data_by_index(index)
+        return self.get_source_model().data_by_index(index)
 
     def filterAcceptsRow(self, source_row: int, source_parent_index: core.ModelIndex):
         """Return true if the item should be included in the model."""
-        parent_item = self.sourceModel().data_by_index(source_parent_index)
+        parent_item = self.get_source_model().data_by_index(source_parent_index)
         tree_item = parent_item.child(source_row)
         is_callable_attr = tree_item.is_attribute and callable(tree_item.obj)
         return (self._show_special_attrs or not tree_item.is_special_attribute) and (

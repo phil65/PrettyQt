@@ -132,7 +132,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         self, row: int, role: RoleStr = "both"
     ) -> QtWidgets.QLayout | QtWidgets.QWidget:
         item = self.itemAt(row, ROLE[role])
-        return item if (item := item.widget()) is not None else item.layout()
+        return i if (i := item.widget()) is not None else item.layout()
 
     def get_item_position(self, index: int) -> tuple[int, RoleStr] | None:
         row, role = self.getItemPosition(index)  # type: ignore
