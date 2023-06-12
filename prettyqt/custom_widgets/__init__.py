@@ -37,6 +37,7 @@ from .borderlayout import BorderLayout
 from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
 from .editors.colorcombobox import ColorComboBox
+from .multicombobox import MultiComboBox
 from .editors.colorchooserbutton import ColorChooserButton
 from .editors.filechooserbutton import FileChooserButton
 from .editors.fontchooserbutton import FontChooserButton
@@ -99,6 +100,7 @@ __all__ = [
     "SidebarWidget",
     "EnumComboBox",
     "ColorComboBox",
+    "MultiComboBox",
     "ColorChooserButton",
     "FileChooserButton",
     "FontChooserButton",
