@@ -26,6 +26,9 @@ class MetaProperty:
     def get_meta_type(self) -> core.MetaType:
         return core.MetaType(self.userType())  # same as self.metaType().id()
 
+    def get_python_type(self) -> type:
+        return self.get_meta_type().get_type()
+
     def get_notify_signal(self) -> core.MetaMethod | None:
         if (signal := self.notifySignal()).isValid():
             return core.MetaMethod(signal)
