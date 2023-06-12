@@ -14,6 +14,7 @@ from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
 from .jsonmodel import JsonModel
 from .astmodel import AstModel
+from .classtreemodel import SubClassTreeModel, ParentClassTreeModel
 from .basefieldsmodel import BaseFieldsModel
 from .basedataclassmodel import BaseDataclassModel
 from .dataclassmodel import DataClassModel
@@ -48,6 +49,8 @@ __all__ = [
     "JsonModel",
     "MappingModel",
     "AstModel",
+    "SubClassTreeModel",
+    "ParentClassTreeModel",
     "BaseFieldsModel",
     "BaseDataclassModel",
     "DataClassModel",
