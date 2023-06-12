@@ -128,10 +128,6 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         return bool(item.obj.requires)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        """Fetch the children of a Python object.
-
-        Returns: list of treeitem.TreeItems
-        """
         return [
             treeitem.TreeItem(obj=dist, parent=item)
             for dist in list_package_requirements(item.obj.metadata["Name"])

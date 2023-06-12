@@ -150,12 +150,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
     def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
         prop = self._metaobj.get_property(index.row())
         if index.column() == 1 and prop.isWritable():
-            return (
-                super().flags(index)
-                | constants.IS_EDITABLE
-                | constants.IS_ENABLED
-                | constants.IS_SELECTABLE
-            )
+            return super().flags(index) | constants.IS_EDITABLE
         return super().flags(index)
 
 

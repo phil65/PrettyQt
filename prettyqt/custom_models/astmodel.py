@@ -5,7 +5,6 @@ import ast
 import logging
 
 from prettyqt import constants, core, custom_models
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, treeitem
 
 NODE_MAP = bidict(
@@ -92,8 +91,8 @@ class AstModel(custom_models.TreeModel):
     def headerData(
         self,
         section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole,
     ) -> str | None:
         match orientation, role, section:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:

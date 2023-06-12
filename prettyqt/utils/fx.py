@@ -229,8 +229,12 @@ class Fx:
 
 if __name__ == "__main__":
     app = widgets.app()
-
-    test = widgets.PlainTextEdit()
-    test.show()
+    toolbar = widgets.ToolBar("test")
+    radio = widgets.RadioButton("abc")
+    action = toolbar.addWidget(radio)
+    toolbar.show()
+    radio.fx["pos"].transition_from(core.Point(0, 100), relative=True)
+    toolbar.show_tooltips(content="shortcut")
+    app.main_loop()
     with app.debug_mode():
         app.main_loop()
