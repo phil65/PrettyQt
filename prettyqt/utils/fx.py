@@ -23,6 +23,38 @@ class AnimationWrapper:
         self.fx.run(self._animation, delay)
         return self._animation
 
+    def transition_to(
+        self,
+        end,
+        easing="in_out_sine",
+        duration: int = 1000,
+        delay: int = 0,
+        relative: bool = False,
+    ):
+        prop_name = self._animation.get_property_name()
+        obj = self._animation.targetObject()
+        prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
+        start = prop.read(obj)
+        if relative:
+            end = end + start
+        return self.animate(start, end, easing)
+
+    def transition_from(
+        self,
+        start,
+        easing="in_out_sine",
+        duration: int = 1000,
+        delay: int = 0,
+        relative: bool = False,
+    ):
+        prop_name = self._animation.get_property_name()
+        obj = self._animation.targetObject()
+        prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
+        end = prop.read(obj)
+        if relative:
+            start = end + start
+        return self.animate(start, end, easing)
+
     def animate_on_event(
         self,
         event: core.event.EventStr,
@@ -55,6 +87,8 @@ class Fx:
         value = helpers.to_lower_camel(value)
         anim = core.PropertyAnimation()
         anim.apply_to(self._widget.__getattr__(value))
+        # meta = core.MetaObject(self._widget.metaObject())
+        # pytype = meta.get_property(value).get_pyhon_type()
         # keep a reference
         self._wrapper = AnimationWrapper(anim, self)
         return self._wrapper
