@@ -46,7 +46,7 @@ class RegexMatchesModel(core.AbstractTableModel):
 
 
 if __name__ == "__main__":
-    import regex as re
+    import re
 
     from prettyqt import widgets
 

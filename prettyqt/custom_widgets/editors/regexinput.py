@@ -8,7 +8,7 @@ try:  # pragma: no cover
 except ImportError:  # Python < 3.11
     import sre_constants  # type: ignore
 
-import regex as re
+import re
 
 from prettyqt import core, custom_widgets, widgets
 

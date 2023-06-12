@@ -5,7 +5,7 @@ import enum
 import logging
 import pathlib
 
-import regex as re
+import re
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets

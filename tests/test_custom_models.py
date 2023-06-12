@@ -5,7 +5,7 @@ from importlib import metadata
 import inspect
 
 import pytest
-import regex as re
+import re
 
 from prettyqt import core, custom_models
 from prettyqt.custom_models import fsspecmodel

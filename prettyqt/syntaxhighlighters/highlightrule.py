@@ -5,7 +5,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 
-import regex as re
+import re
 
 from prettyqt import gui
 

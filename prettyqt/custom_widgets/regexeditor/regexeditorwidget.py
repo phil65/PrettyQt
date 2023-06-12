@@ -11,7 +11,7 @@ try:  # pragma: no cover
 except ImportError:  # Python < 3.11
     import sre_constants  # type: ignore
 
-import regex as re
+import re
 
 from prettyqt import constants, core, custom_models, custom_widgets, widgets
 from prettyqt.qt import QtWidgets
