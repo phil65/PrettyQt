@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import enum
+import inspect
 import logging
 
 from prettyqt import constants, core, custom_models
@@ -11,7 +13,13 @@ logger = logging.getLogger(__name__)
 class BaseClassTreeModel(custom_models.TreeModel):
     """Base Tree Model to display class tree structures."""
 
-    HEADER = ["Name", "Docstrings", "Module"]
+    HEADER = ["Name", "Docstrings", "Module", "Comments", "File", "Is Abstract"]
+
+    @core.Enum
+    class Roles(enum.IntEnum):
+        """Item roles."""
+
+        SourceRole = constants.USER_ROLE + 1
 
     def columnCount(self, parent=None):
         return len(self.HEADER)
@@ -35,11 +43,20 @@ class BaseClassTreeModel(custom_models.TreeModel):
             case constants.DISPLAY_ROLE, 0:
                 return klass.__name__
             case constants.DISPLAY_ROLE, 1:
-                return klass.__doc__
+                doc = inspect.getdoc(klass)
+                return inspect.cleandoc(doc)
             case constants.DISPLAY_ROLE, 2:
-                return klass.__module__
+                return inspect.getmodule(klass)
+            case constants.DISPLAY_ROLE, 3:
+                return inspect.getcomments(klass)
+            case constants.DISPLAY_ROLE, 4:
+                return inspect.getfile(klass)
+            case constants.CHECKSTATE_ROLE, 5:
+                return inspect.isabstract(klass)
             case constants.USER_ROLE, _:
                 return klass
+            case self.Roles.SourceRole, _:
+                return inspect.getsource(klass)
 
 
 class SubClassTreeModel(BaseClassTreeModel):
