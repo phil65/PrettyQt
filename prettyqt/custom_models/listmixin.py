@@ -116,9 +116,21 @@ class ListMixin:
     def __getitem__(self, row):
         return self.items[row]
 
-    def __setitem__(self, row, value):
-        index = self.index(row)
-        self.setData(index, value, role=constants.USER_ROLE)
+    def __setitem__(self, row: int | slice, value):
+        match row:
+            case slice():
+                rng = range(row.start or 0, row.stop or len(self.items), row.step or 1)
+                for count, i in enumerate(rng):
+                    if i < self.rowCount():
+                        index = self.index(i)
+                        self.setData(i, value[count], role=constants.USER_ROLE)
+                    else:
+                        self.items.append(value[count])
+            case int():
+                index = self.index(row)
+                self.setData(index, value, role=constants.USER_ROLE)
+            case _:
+                raise ValueError(row)
 
     def __len__(self):
         return len(self.items)
