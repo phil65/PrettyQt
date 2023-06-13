@@ -15,14 +15,14 @@ class AnimationWrapper:
 
     def animate(
         self,
-        start,
-        end,
+        start: datatypes.VariantType,
+        end: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
         reverse: bool = False,
         single_shot: bool = True,
-    ):
+    ) -> core.PropertyAnimation:
         self._animation.set_start_value(start)
         self._animation.set_end_value(end)
         self._animation.set_easing(easing)
@@ -34,14 +34,14 @@ class AnimationWrapper:
 
     def transition_to(
         self,
-        end,
+        end: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
         relative: bool = False,
         reverse: bool = False,
         single_shot: bool = True,
-    ):
+    ) -> core.PropertyAnimation:
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
@@ -75,14 +75,14 @@ class AnimationWrapper:
 
     def transition_from(
         self,
-        start,
+        start: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
         relative: bool = False,
         reverse: bool = False,
         single_shot: bool = True,
-    ):
+    ) -> core.PropertyAnimation:
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
@@ -117,12 +117,12 @@ class AnimationWrapper:
     def animate_on_event(
         self,
         event: core.event.EventStr,
-        start,
-        end,
+        start: datatypes.VariantType,
+        end: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
-    ):
+    ) -> core.PropertyAnimation:
         self._animation.setStartValue(start)
         self._animation.setEndValue(end)
         self._animation.setDuration(duration)
@@ -143,7 +143,7 @@ class Fx:
         self._wrapper = None
         # self._meta = core.MetaObject(self._widget.metaObject())
 
-    def __getitem__(self, value: str):
+    def __getitem__(self, value: str) -> AnimationWrapper:
         value = helpers.to_lower_camel(value)
         anim = core.PropertyAnimation()
         anim.apply_to(self._widget.__getattr__(value))
@@ -199,7 +199,7 @@ class Fx:
         duration: int = 1000,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
-    ):
+    ) -> core.PropertyAnimation:
         return self["windowOpacity"].transition_from(
             0.0,
             easing=easing,
@@ -212,7 +212,7 @@ class Fx:
         duration: int = 1000,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
-    ):
+    ) -> core.PropertyAnimation:
         return self["windowOpacity"].transition_to(
             0.0,
             easing=easing,
@@ -228,7 +228,7 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         anchor: str = "center",
         delay: int = 0,
-    ):
+    ) -> core.PropertyAnimation:
         from prettyqt import custom_animations
 
         anim = custom_animations.ZoomAnimation(parent=self._widget, anchor=anchor)
@@ -246,7 +246,7 @@ class Fx:
         end_value=None,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
-    ):
+    ) -> core.PropertyAnimation:
         anim = core.PropertyAnimation(parent=self._widget)
         anim.set_easing(easing)
         pos = self._widget.geometry().topLeft()
@@ -261,11 +261,11 @@ class Fx:
 
     def bounce(
         self,
-        end,
+        end: datatypes.PointType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
-    ):
+    ) -> core.PropertyAnimation:
         return self["pos"].transition_from(
             end,
             easing=easing,
