@@ -122,7 +122,7 @@ def to_sizef(size: SizeFType | SizeType | None):
 def to_py_pattern(pattern: PatternAndStringType):
     from prettyqt import core
 
-    match pattern():
+    match pattern:
         case str():
             return re.compile(pattern)
         case re.Pattern():
@@ -189,13 +189,40 @@ def make_serializable(obj):
             return obj
 
 
+PatternType = re.Pattern | QtCore.QRegularExpression
+PatternAndStringType = str | PatternType
+JSONType = str | int | float | bool | None | dict[str, Any] | list[Any]
+PathType = str | os.PathLike
+
+
+class Validatable(Protocol):
+    """An object with an isValid method (e.g. QUrl)."""
+
+    def isValid(self) -> bool:
+        ...
+
+
+class SupportsValue(Protocol):
+    """An object with a set_value and get_value method."""
+
+    def set_value(self, value):
+        ...
+
+    def get_value(self, value):
+        ...
+
+
+class IsDataclass(Protocol):
+    __dataclass_fields__: ClassVar[dict]
+
+
+class IsAttrs(Protocol):
+    __attrs_attrs__: ClassVar[dict]
+
+
 if TYPE_CHECKING:
     from prettyqt.qt import QtGui, QtWidgets
 
-    JSONType = str | int | float | bool | None | dict[str, Any] | list[Any]
-    PathType = str | os.PathLike
-    PatternType = re.Pattern | QtCore.QRegularExpression
-    PatternAndStringType = str | PatternType
     UrlType = str | QtCore.QUrl
     PointType = tuple[int, int] | QtCore.QPoint
     PointFType = tuple[float, float] | QtCore.QPointF
@@ -294,27 +321,6 @@ if TYPE_CHECKING:
     )
 
     Variant = VariantType | list[VariantType] | dict[str, VariantType]
-
-    class Validatable(Protocol):
-        """An object with an isValid method (e.g. QUrl)."""
-
-        def isValid(self) -> bool:
-            ...
-
-    class SupportsValue(Protocol):
-        """An object with a set_value and get_value method."""
-
-        def set_value(self, value):
-            ...
-
-        def get_value(self, value):
-            ...
-
-    class IsDataclass(Protocol):
-        __dataclass_fields__: ClassVar[dict]
-
-    class IsAttrs(Protocol):
-        __attrs_attrs__: ClassVar[dict]
 
     QtSerializableType = (
         QtCore.QByteArray
