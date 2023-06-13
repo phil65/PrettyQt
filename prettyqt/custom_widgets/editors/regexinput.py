@@ -60,7 +60,7 @@ class RegexInput(widgets.Widget):
     def _on_value_change(self):
         try:
             val = self.get_value()
-        except (sre_constants.error, re._regex_core.error):
+        except sre_constants.error:
             return
         else:
             self.value_changed.emit(val)

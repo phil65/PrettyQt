@@ -44,7 +44,7 @@ class BaseRegexValidator(gui.Validator):
             raise TypeError("Validator not initialized")
         if not text:
             return self.State.Intermediate, text, pos
-        match = self.regex.match(text, partial=True)  # type: ignore
+        match = self.regex.match(text)  # type: ignore
         if match is None:
             #     return self.State.Invalid, text, pos
             # elif match.partial:  # type: ignore

@@ -109,10 +109,6 @@ class RegexEditorWidget(widgets.Widget):
                 self._highlighter.set_spans(None)
                 self.table_matches.set_model(None)
                 self.label_num_matches.set_text("0 matches")
-            except re._regex_core.error:
-                self._highlighter.set_spans(None)
-                self.table_matches.set_model(None)
-                self.label_num_matches.set_text("0 matches")
             else:
                 text = self.textedit_teststring.text()
                 self.matches = list(self.prog.finditer(text))
