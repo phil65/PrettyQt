@@ -628,9 +628,9 @@ def test_settings(qapp):
     assert settings.get("test") == "value"
     with core.Settings(settings_id="test") as s:
         s.set_value("test2", "xx")
-    with settings.write_array("test"):
+    for _, __ in settings.write_array("test", list()):
         pass
-    with settings.read_array("test"):
+    for _ in settings.read_array("test"):
         pass
     with settings.edit_group("test"):
         pass

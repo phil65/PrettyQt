@@ -19,10 +19,12 @@ class DataClassModel(custom_models.BaseDataclassModel):
 
     def flags(self, parent=None):
         parent = parent or core.ModelIndex()
+        if not parent.isValid():
+            return super().flags(parent)
         return (
-            super().flags(parent)
-            if self.Class.__dataclass_params__.frozen or not parent.isValid()
-            else (super().flags(parent) | constants.IS_EDITABLE)
+            constants.IS_ENABLED | constants.IS_SELECTABLE
+            if self.Class.__dataclass_params__.frozen
+            else constants.IS_ENABLED | constants.IS_SELECTABLE | constants.IS_EDITABLE
         )
 
 

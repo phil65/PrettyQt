@@ -177,7 +177,7 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Set the default font
-        font = gui.Font("Consolas")
+        font = gui.Font(gui.Font.mono())
         self.setFont(font)
         self.setMarginsFont(font)
 

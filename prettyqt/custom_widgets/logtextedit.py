@@ -198,7 +198,7 @@ class LogTextEdit(widgets.PlainTextEdit):
         super().__init__(*args, **kwargs)
         self.rules = []
         self.allow_wheel_zoom()
-        self.set_font("Consolas")
+        self.set_font(gui.Font.mono(as_qt=True))
         self.append_text(f"Python version: {sys.version}")
         new_logger = logging.getLogger()
         # self.handler = signallogger.LineSignalLogger()

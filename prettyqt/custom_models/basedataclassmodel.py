@@ -85,6 +85,8 @@ class BaseDataclassModel(core.AbstractTableModel):
         BaseClass implementation just tries to set attribute with same value to test
         if field is writable.
         """
+        if not parent.isValid():
+            return super().flags(parent)
         parent = parent or core.ModelIndex()
         field = self.fields[parent.column()]
         instance = self.items[parent.row()]

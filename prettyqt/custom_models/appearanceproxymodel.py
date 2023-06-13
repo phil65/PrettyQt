@@ -139,7 +139,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui, widgets
 
     app = widgets.app()
     table = widgets.TableView()
@@ -147,7 +147,7 @@ if __name__ == "__main__":
     _source_model = core.StringListModel(["a", "b", "b", "b"])
     model = AppearanceProxyModel(parent=table)
     model.setSourceModel(_source_model)
-    model.set_font_default("Consolas")
+    model.set_font_default(gui.Font.mono().family())
     model.set_background_default("green")
     model = model.proxifier.get_proxy("sort_filter")
     index = model.index(0, 0)

@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import builtins
+
 from prettyqt import core, widgets
 from prettyqt.utils import helpers
 
@@ -17,9 +19,9 @@ class ListInput(widgets.LineEdit):
     ):
         super().__init__(object_name=object_name, **kwargs)
         match typ:
-            case __builtins__.int:
+            case builtins.int:
                 self.set_validator("int_list", allow_single=allow_single)
-            case __builtins__.float:
+            case builtins.float:
                 self.set_validator("float_list", allow_single=allow_single)
             case _:
                 raise ValueError(f"Invalid type {typ}")
@@ -36,6 +38,6 @@ class ListInput(widgets.LineEdit):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = ListInput()
+    widget = ListInput(typ=int)
     widget.show()
     app.main_loop()

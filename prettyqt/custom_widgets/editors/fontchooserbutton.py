@@ -60,6 +60,6 @@ class FontChooserButton(widgets.Widget):
 if __name__ == "__main__":
     app = widgets.app()
     btn = FontChooserButton()
-    btn.set_current_font("Consolas")
+    btn.set_current_font(gui.Font.mono())
     btn.show()
     app.main_loop()

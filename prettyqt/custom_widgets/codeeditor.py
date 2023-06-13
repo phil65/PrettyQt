@@ -10,7 +10,7 @@ class CodeEditor(widgets.PlainTextEdit):
         self.line_area = LineNumberArea(self)
         self.blockCountChanged.connect(self.update_line_area_width)
         self.updateRequest.connect(self.update_line_area)
-        self.set_font("Consolas")
+        self.set_font(gui.Font.mono(as_qt=True))
         self.update_line_area_width(0)
         self.set_current_line_color(gui.Color(128, 128, 128, 20))
         self.set_syntaxhighlighter(language)

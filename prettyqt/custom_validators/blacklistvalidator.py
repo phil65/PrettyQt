@@ -24,7 +24,7 @@ class BlacklistValidator(gui.Validator):
         return self.State.Acceptable, text, pos
 
 
-class NotZeroValidator(gui.Validator):
+class NotZeroValidator(BlacklistValidator):
     ID = "not_zero"
 
     def __init__(self, parent: QtCore.QObject | None = None):
@@ -32,7 +32,7 @@ class NotZeroValidator(gui.Validator):
         self._options = ["0"]
 
 
-class NotEmptyValidator(gui.Validator):
+class NotEmptyValidator(BlacklistValidator):
     ID = "not_empty"
 
     def __init__(self, parent: QtCore.QObject | None = None):

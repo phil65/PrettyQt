@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import builtins
 import enum
 import logging
 
@@ -13,13 +14,13 @@ logger = logging.getLogger(__name__)
 
 def widget_for_type(typ: type):
     match typ:
-        case __builtins__.bool:
+        case builtins.bool:
             return widgets.CheckBox()
-        case __builtins__.int:
+        case builtins.int:
             return widgets.SpinBox(maximum=999999)
-        case __builtins__.float:
+        case builtins.float:
             return widgets.DoubleSpinBox(maximum=999999.0)
-        case __builtins__.str:
+        case builtins.str:
             return widgets.LineEdit()
         case QtCore.QPoint:
             return custom_widgets.PointEdit()

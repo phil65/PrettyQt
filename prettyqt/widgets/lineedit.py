@@ -167,7 +167,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
             case str() if "|" in validator:
                 validators = [get_validator(i, **kwargs) for i in validator.split("|")]
                 validator = custom_validators.CompositeValidator(validators)
-            case str() | datatypes.PatternType():
+            case str() | re.Pattern() | QtCore.QRegularExpression():
                 validator = get_validator(validator, **kwargs)
             case None | QtGui.QValidator():
                 pass
@@ -261,7 +261,6 @@ if __name__ == "__main__":
     widget.setPlaceholderText("test")
     widget.setClearButtonEnabled(True)
     # widget.set_regex_validator("[0-9]+")
-    widget.setFont(gui.Font("Consolas"))
     widget.show()
     app.main_loop()
     print(widget.hasAcceptableInput())

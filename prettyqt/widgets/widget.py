@@ -359,12 +359,15 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_font(
         self,
-        font_name: str | None = None,
+        font_name: QtGui.QFont | str | None = None,
         font_size: int | None = None,
         weight: int | None = None,
         italic: bool = False,
-    ) -> gui.Font:
+    ) -> QtGui.QFont:
         """Set the font for this widget."""
+        if isinstance(font_name, QtGui.QFont):
+            super().setFont(font_name)
+            return font_name
         if font_size is None:
             font_size = -1
         if weight is None:
