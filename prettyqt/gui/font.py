@@ -188,7 +188,7 @@ class Font(QtGui.QFont):
         self.setPointSize(size)
 
     @classmethod
-    def mono(cls, size=8) -> Self:
+    def mono(cls, size=8, as_qt: bool = False) -> Self:
         match sys.platform:
             case "win32":
                 font = "Consolas"
@@ -196,7 +196,10 @@ class Font(QtGui.QFont):
                 font = "Menlo"
             case _:
                 font = "Monospace"
-        return cls(font, size)
+        if as_qt:
+            return QtGui.QFont(font)
+        else:
+            return cls(font, size)
         # font.setStyleHint()
 
     def scaled(self, factor: float) -> Self:
