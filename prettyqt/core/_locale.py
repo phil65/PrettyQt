@@ -674,6 +674,9 @@ class Locale(QtCore.QLocale):
     def get_system_language(cls) -> str:
         return cls.get_system_locale().uiLanguages()[0]
 
+    def get_country(self):
+        return COUNTRY.inverse[self.country()]
+
     def get_measurement_system(self) -> MeasurementSystemStr:
         return MEASUREMENT_SYSTEM.inverse[self.measurementSystem()]
 
