@@ -132,12 +132,14 @@ def get_color_percentage(
     return (x, y, z, a)
 
 
-def get_class_for_id(base_class: type, id_: str) -> type:
-    def get_subclasses(klass):
-        for i in klass.__subclasses__():
-            yield from get_subclasses(i)
+def get_subclasses(klass, include_abstract: bool = False):
+    for i in klass.__subclasses__():
+        yield from get_subclasses(i)
+        if include_abstract or not inspect.isabstract(i):
             yield i
 
+
+def get_class_for_id(base_class: type, id_: str) -> type:
     base_classes = (
         typing.get_args(base_class)
         if isinstance(base_class, types.UnionType)
