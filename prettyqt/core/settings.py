@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, Mapping, MutableMapping
+from collections.abc import Iterator, Mapping, MutableMapping, Sequence
 import contextlib
 import logging
 import os
 import sys
 from typing import Any, Literal
+
+from typing_extensions import Self
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -143,29 +145,32 @@ class Settings_(
         yield None
         self.endGroup()
 
-    @contextlib.contextmanager
-    def write_array(self, prefix: str, size: int | None = None):
+    def write_array(self, prefix: str, array: Sequence) -> Iterator[tuple[Self, Any]]:
         """Context manager for writing arrays.
 
         Args:
             prefix: prefix for settings array
-            size: size of settings array
+            array: array used to write settings
+
+        Returns:
+            Iterator yielding (setting, arrayitem) items
         """
-        if size is None:
-            size = -1
-        self.beginWriteArray(prefix, size)
-        yield None
+        self.beginWriteArray(prefix, len(array))
+        for i, _ in enumerate(array):
+            self.setArrayIndex(i)
+            yield (self, array[i])
         self.endArray()
 
-    @contextlib.contextmanager
-    def read_array(self, prefix: str):
+    def read_array(self, prefix: str) -> Iterator[Settings_]:
         """Context manager for reading arrays.
 
         Args:
             prefix: prefix for settings array
         """
-        self.beginReadArray(prefix)
-        yield None
+        size = self.beginReadArray(prefix)
+        for i in range(size):
+            self.setArrayIndex(i)
+            yield self
         self.endArray()
 
     # MutableMapping overrides
