@@ -19,6 +19,8 @@ MAX_OBJ_STR_LEN = 50
 class TreeItem:
     """Tree node class that can be used to build trees of objects."""
 
+    __slots__ = ("parent_item", "obj", "child_items", "has_children", "children_fetched")
+
     def __init__(self, obj, parent: Self | None = None):
         self.parent_item = parent
         self.obj = obj

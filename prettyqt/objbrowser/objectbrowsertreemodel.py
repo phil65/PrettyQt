@@ -16,6 +16,8 @@ logger = logging.getLogger(__name__)
 class ObjectBrowserTreeItem(treeitem.TreeItem):
     """Tree node class that can be used to build trees of objects."""
 
+    __slots__ = ("obj_name", "obj_path", "is_attribute")
+
     def __init__(
         self,
         obj,
