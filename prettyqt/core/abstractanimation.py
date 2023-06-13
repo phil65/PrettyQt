@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import functools
 from typing import Literal
 
 from prettyqt import core
@@ -80,18 +81,26 @@ class AbstractAnimationMixin(core.ObjectMixin):
         """
         return STATE.inverse[self.state()]
 
-    def start_animation(self, policy: DeletionPolicyStr = "keep"):
+    def start_animation(
+        self,
+        policy: DeletionPolicyStr | core.QAbstractAnimation.DeletionPolicy = "keep",
+        interval: int = 0,
+        single_shot: bool = True,
+    ):
         """Start the animation.
 
         Args:
             policy: animation policy
-
-        Raises:
-            InvalidParamError: animation policy does not exist
+            interval: time interval / delay for timer
+            single_shot: whether animation gets triggered once or in intervals
         """
-        if policy not in DELETION_POLICY:
-            raise InvalidParamError(policy, DELETION_POLICY)
-        self.start(DELETION_POLICY[policy])
+        if policy in DELETION_POLICY.keys():
+            policy = DELETION_POLICY[policy]
+        if interval:
+            fn = functools.partial(self.start, policy)
+            self.start_callback_timer(fn, interval, single_shot=single_shot)
+        else:
+            self.start(policy)
 
     def restart_animation(self, policy: DeletionPolicyStr = "keep"):
         """Restart the animation.
@@ -104,6 +113,9 @@ class AbstractAnimationMixin(core.ObjectMixin):
         """
         self.stop()
         self.start_animation(policy)
+
+    def run(self, delay: int = 0, single_shot: bool = True):
+        self.start_callback_timer(self.start, delay, single_shot=single_shot)
 
 
 class AbstractAnimation(AbstractAnimationMixin, QtCore.QAbstractAnimation):
