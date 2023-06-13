@@ -86,6 +86,12 @@ class TextCursor(QtGui.QTextCursor):
     def __str__(self):
         return self.selectedText().replace("\u2029", "\n")
 
+    def __contains__(self, other):
+        return (
+            self.selectionStart() <= other.selectionStart()
+            and self.selectionEnd() >= other.selectionEnd()
+        )
+
     def move_position(
         self, operation: MoveOperationStr, mode: MoveModeStr = "move", n: int = 1
     ) -> bool:
