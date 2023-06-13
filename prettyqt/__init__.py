@@ -24,8 +24,32 @@ def debug():
 
         debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
         objectbrowser.ObjectBrowser(frame.f_back.f_globals, stack)
+        objectbrowser.show()
+        debug.app.main_loop()
     finally:
         del frame
+
+
+def show(item):
+    from prettyqt import core, debugging, widgets, custom_models, qtpandas
+    from prettyqt.utils import helpers
+
+    from prettyqt import widgets
+
+    debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
+    for klass in helpers.get_subclasses(core.QAbstractItemModel):
+        if "supports" in klass.__dict__:
+            if klass.supports(item):
+                if issubclass(klass, core.QAbstractTableModel):
+                    viewer = widgets.TableView()
+                else:
+                    viewer = widgets.TreeView()
+                instance = klass(item)
+                viewer.set_model(instance)
+                viewer.show()
+                debug.app.main_loop()
+                break
+    debug.app.main_loop()
 
 
 __all__ = [
@@ -76,4 +100,8 @@ __all__ = [
 
 
 if __name__ == "__main__":
-    debug()
+    from importlib import metadata
+    import pandas as pd
+
+    dist = metadata.distribution("prettyqt")
+    show(["abc"])
