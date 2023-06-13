@@ -30,10 +30,7 @@ if __name__ == "__main__":
     # Create and populate the tableWidget
     table_widget = widgets.TableWidget(1, 2)
     table_widget.set_delegate(ProgressBarDelegate(), column=1)
-    table_widget.setEditTriggers(
-        widgets.AbstractItemView.EditTrigger.DoubleClicked  # type: ignore
-        | widgets.AbstractItemView.EditTrigger.SelectedClicked
-    )
+    table_widget.set_edit_triggers("all")
     table_widget.set_selection_behavior("rows")
     table_widget.setHorizontalHeaderLabels(["Title", "Progress"])
     item_1 = widgets.TableWidgetItem("Test1")

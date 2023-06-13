@@ -108,12 +108,7 @@ if __name__ == "__main__":
                     return pb
 
         def flags(self, index):
-            return (
-                super().flags(index)
-                | constants.IS_EDITABLE
-                | constants.IS_ENABLED
-                | constants.IS_SELECTABLE
-            )
+            return super().flags(index) | constants.IS_EDITABLE
 
     table_widget.set_delegate("widget")
     model = Model()

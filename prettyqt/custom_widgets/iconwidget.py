@@ -6,17 +6,6 @@ from prettyqt.utils import datatypes
 
 
 class IconWidget(widgets.Label):
-    """IconWidget gives the ability to display an icon as a widget.
-
-    if supports the same arguments as icon()
-    for example
-    music_icon = qta.IconWidget('fa5s.music',
-                                color='blue',
-                                color_active='orange')
-
-    it also have setIcon() and setIconSize() functions
-    """
-
     def __init__(self, *names, parent: QtWidgets.QWidget | None = None, **kwargs):
         super().__init__(parent=parent)
         self._icon: QtGui.QIcon | None = None
