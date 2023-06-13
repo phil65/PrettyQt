@@ -21,11 +21,8 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
             font.setUnderline(True)
             painter.setFont(font)
             painter.setPen(option.palette.link().color())
-        painter.drawText(
-            option.rect.toRectF(),
-            constants.ALIGN_CENTER_LEFT,
-            text,
-        )
+        rect = option.rect.toRectF()
+        painter.drawText(rect, constants.ALIGN_CENTER_LEFT, text)
         painter.restore()
 
     def editorEvent(self, event, model, option, index):
@@ -35,15 +32,12 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         if font is None:
             font = gui.GuiApplication.get_font()
         fm = gui.FontMetricsF(font)
-        rect = fm.get_bounding_rect(
-            core.RectF(option.rect),
-            constants.ALIGN_CENTER_LEFT,
-            text,
-        )
+        rect = core.RectF(option.rect)
+        b_rect = fm.get_bounding_rect(rect, constants.ALIGN_CENTER_LEFT, text)
         if (
             event.type() == QtCore.QEvent.Type.MouseButtonPress
             and event.button() == QtCore.Qt.MouseButton.LeftButton  # type: ignore
-            and rect.contains(event.position())  # type: ignore
+            and b_rect.contains(event.position())  # type: ignore
         ):
             text = index.data()
             gui.DesktopServices.open_url(text)
