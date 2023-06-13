@@ -120,6 +120,11 @@ TYPE_FLAG = bidict(
     is_const=QtCore.QMetaType.TypeFlag.IsConst,
 )
 
+TYPE_END_INDEX = 63
+
+ENUM_START_INDEX = 65537
+ENUM_END_INDEX = 66065
+
 
 class MetaType(QtCore.QMetaType):
     def __bool__(self):
@@ -127,6 +132,20 @@ class MetaType(QtCore.QMetaType):
 
     def __repr__(self):
         return get_repr(self, self.get_name())
+
+    @classmethod
+    def get_regular_types(cls):
+        return [
+            meta for i in range(TYPE_END_INDEX + 1) if (meta := MetaType(i)).isValid()
+        ]
+
+    @classmethod
+    def get_enum_types(cls):
+        return [
+            meta
+            for i in range(ENUM_START_INDEX, ENUM_END_INDEX + 1)
+            if (meta := MetaType(i)).isValid()
+        ]
 
     def get_name(self) -> str | None:
         return name.decode() if isinstance(name := self.name(), bytes) else name
