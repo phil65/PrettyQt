@@ -85,10 +85,15 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         factory = cls.defaultFactory()
         creator = get_creator_class(editor_cls, property_name)()
         cls.creators.append(creator)
-        if typ is None:
-            typ = editor_cls.staticMetaObject.userProperty().userType()
-        elif isinstance(typ, type):
-            typ = TYPES[typ].value
+        match typ:
+            case None:
+                typ = editor_cls.staticMetaObject.userProperty().userType()
+            case type() if typ in TYPES:
+                typ = TYPES[typ].value
+            case int():
+                pass
+            case _:
+                raise TypeError(typ)
         factory.registerEditor(typ, creator)
         cls.setDefaultFactory(factory)
 
@@ -100,10 +105,15 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
     ):
         creator = get_creator_class(editor_cls, property_name)()
         self.creators.append(creator)
-        if typ is None:
-            typ = editor_cls.staticMetaObject.userProperty().userType()
-        elif isinstance(typ, type) and typ in TYPES:
-            typ = TYPES[typ].value
+        match typ:
+            case None:
+                typ = editor_cls.staticMetaObject.userProperty().userType()
+            case type() if typ in TYPES:
+                typ = TYPES[typ].value
+            case int():
+                pass
+            case _:
+                raise TypeError(typ)
         self.registerEditor(typ, creator)
 
     @classmethod

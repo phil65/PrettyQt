@@ -20,8 +20,10 @@ def debug():
         raise RuntimeError()
     try:
         from prettyqt.objbrowser import objectbrowser
+        from prettyqt import widgets
 
-        objectbrowser.ObjectBrowser.browse(frame.f_back.f_globals, stack)
+        debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
+        objectbrowser.ObjectBrowser(frame.f_back.f_globals, stack)
     finally:
         del frame
 

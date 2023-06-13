@@ -16,12 +16,13 @@ class ListInput(widgets.LineEdit):
         **kwargs,
     ):
         super().__init__(object_name=object_name, **kwargs)
-        if typ is int:
-            self.set_validator("int_list", allow_single=allow_single)
-        elif typ is float:
-            self.set_validator("float_list", allow_single=allow_single)
-        else:
-            raise ValueError(f"Invalid type {typ}")
+        match typ:
+            case __builtins__.int:
+                self.set_validator("int_list", allow_single=allow_single)
+            case __builtins__.float:
+                self.set_validator("float_list", allow_single=allow_single)
+            case _:
+                raise ValueError(f"Invalid type {typ}")
         self.set_value(value)
 
     def get_value(self) -> list[float]:  # type: ignore[override]
