@@ -63,10 +63,8 @@ def make_qtype(obj):
     return obj
 
 
-def to_point(point: PointFType | PointType | None):
+def to_point(point: QtCore.QPointF | PointType):
     match point:
-        case None:
-            return QtCore.QPoint(0, 0)
         case (int(), int()):
             return QtCore.QPoint(*point)
         case QtCore.QPoint():
@@ -77,11 +75,9 @@ def to_point(point: PointFType | PointType | None):
             raise TypeError(point)
 
 
-def to_pointf(point: PointFType | PointType | None):
+def to_pointf(point: PointFType | QtCore.QPoint):
     match point:
-        case None:
-            return QtCore.PointF(0, 0)
-        case (int(), int()):
+        case (float(), float()):
             return QtCore.PointF(*point)
         case QtCore.PointF():
             return point
@@ -91,10 +87,8 @@ def to_pointf(point: PointFType | PointType | None):
             raise TypeError(point)
 
 
-def to_size(size: SizeFType | SizeType | None):
+def to_size(size: QtCore.QSizeF | SizeType):
     match size:
-        case None:
-            return QtCore.QSize(0, 0)
         case (int(), int()):
             return QtCore.QSize(*size)
         case QtCore.QSize():
@@ -105,11 +99,9 @@ def to_size(size: SizeFType | SizeType | None):
             raise TypeError(size)
 
 
-def to_sizef(size: SizeFType | SizeType | None):
+def to_sizef(size: SizeFType | QtCore.QSize):
     match size:
-        case None:
-            return QtCore.QSizeF(0, 0)
-        case (int(), int()):
+        case (float(), float()):
             return QtCore.QSizeF(*size)
         case QtCore.QSizeF():
             return size
@@ -117,6 +109,30 @@ def to_sizef(size: SizeFType | SizeType | None):
             return size.toSizeF()
         case _:
             raise TypeError(size)
+
+
+def to_rect(rect: QtCore.QRectF | RectType):
+    match rect:
+        case (int(), int(), int(), int()):
+            return QtCore.QRect(*rect)
+        case QtCore.QRect():
+            return rect
+        case QtCore.QRectF():
+            return rect.toRect()
+        case _:
+            raise TypeError(rect)
+
+
+def to_rectf(rect: RectFType | QtCore.QRect):
+    match rect:
+        case (float(), float(), float(), float()):
+            return QtCore.QRectF(*rect)
+        case QtCore.QRectF():
+            return rect
+        case QtCore.QRect():
+            return rect.toRectF()
+        case _:
+            raise TypeError(rect)
 
 
 def to_py_pattern(pattern: PatternAndStringType):

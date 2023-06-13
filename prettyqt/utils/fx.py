@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import core, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.utils import colors, datatypes, helpers
 
 logger = logging.getLogger(__name__)
@@ -35,9 +35,24 @@ class AnimationWrapper:
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         start = prop.read(obj)
-        if relative:
+        match start:
+            case core.QPoint():
+                end = datatypes.to_point(end)
+            case core.QPointF():
+                end = datatypes.to_pointf(end)
+            case core.QSize():
+                end = datatypes.to_size(end)
+            case core.QSizeF():
+                end = datatypes.to_sizef(end)
+            case core.QRect():
+                end = datatypes.to_rect(end)
+            case core.QRectF():
+                end = datatypes.to_rectf(end)
+            case gui.QColor():
+                end = colors.get_color(end)
+        if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
             end = end + start
-        return self.animate(start, end, easing)
+        return self.animate(start, end, easing, duration, delay)
 
     def transition_from(
         self,
@@ -51,9 +66,24 @@ class AnimationWrapper:
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         end = prop.read(obj)
-        if relative:
+        match end:
+            case core.QPoint():
+                start = datatypes.to_point(start)
+            case core.QPointF():
+                start = datatypes.to_pointf(start)
+            case core.QSize():
+                start = datatypes.to_size(start)
+            case core.QSizeF():
+                start = datatypes.to_sizef(start)
+            case core.QRect():
+                start = datatypes.to_rect(start)
+            case core.QRectF():
+                start = datatypes.to_rectf(start)
+            case gui.QColor():
+                start = colors.get_color(start)
+        if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
             start = end + start
-        return self.animate(start, end, easing)
+        return self.animate(start, end, easing, duration, delay)
 
     def animate_on_event(
         self,
@@ -233,7 +263,8 @@ if __name__ == "__main__":
     radio = widgets.RadioButton("abc")
     action = toolbar.addWidget(radio)
     toolbar.show()
-    radio.fx["pos"].transition_from(core.Point(0, 100), relative=True)
+    # radio.fx["pos"].transition_from((0, 100), relative=True)
+    toolbar.fx["size"].transition_from((1000, 1000), duration=2000, relative=True)
     toolbar.show_tooltips(content="shortcut")
     app.main_loop()
     with app.debug_mode():
