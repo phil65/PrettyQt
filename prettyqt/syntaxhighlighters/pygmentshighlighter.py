@@ -7,7 +7,7 @@ from typing import Literal
 from pygments import lexer, lexers, style, styles
 from pygments.formatters import html
 
-from prettyqt import gui, paths
+from prettyqt import core, gui, paths
 from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
@@ -192,11 +192,13 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self,
         parent: QtGui.QTextDocument,
         lexer: str,
-        style: None | StyleStr | style.Style = None,
+        style: None | StyleStr = None,
     ):
         super().__init__(parent)
         self._document = self.document()
         self._formatter = html.HtmlFormatter(nowrap=True)
+        self._style = None
+        self._stylename = ""
         if style is None:
             gui.GuiApplication.styleHints().colorSchemeChanged.connect(
                 self.adjust_style_to_palette
@@ -234,18 +236,20 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
     # "PygmentsHighlighter" interface
     # ---------------------------------------------------------------------------
 
-    def set_style(self, style: None | StyleStr | style.Style):
+    def set_style(self, style: None | StyleStr):
         match style:
             case None:
                 self.adjust_style_to_palette()
                 return
             case str():
                 self._style = styles.get_style_by_name(style)
-            case style.Style:
-                self._style = style
+                self._stylename = style
             case _:
                 raise TypeError(style)
         self._clear_caches()
+
+    def get_style(self) -> StyleStr:
+        return self._stylename
 
     def adjust_style_to_palette(self):
         pal = gui.GuiApplication.get_palette()
@@ -290,6 +294,8 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         _, html = next(self._formatter._format_lines([(token, "dummy")]))
         document.setHtml(html)
         return gui.TextCursor(document).charFormat()
+
+    style = core.Property(str, get_style, set_style)
 
 
 if __name__ == "__main__":
