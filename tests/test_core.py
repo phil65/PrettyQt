@@ -669,7 +669,6 @@ def test_settings(qapp):
         settings.set_path("error", "user", path)
     with pytest.raises(InvalidParamError):
         settings.set_path("native", "error", path)
-    s = core.Settings.build_from_dict(dict(a="b"))
 
 
 def test_signalmapper():

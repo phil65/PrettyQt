@@ -1,13 +1,11 @@
 from __future__ import annotations
 
-from collections.abc import Iterator, MutableMapping
+from collections.abc import Iterator, Mapping, MutableMapping
 import contextlib
 import logging
 import os
 import sys
 from typing import Any, Literal
-
-from typing_extensions import Self
 
 from prettyqt import core
 from prettyqt.qt import QtCore
@@ -71,12 +69,9 @@ class Settings_(
     def __len__(self) -> int:
         return len(self.allKeys())
 
-    @classmethod
-    def build_from_dict(cls, dct: dict[str, Any], **kwargs) -> Self:
-        settings = cls(**kwargs)
-        for k, v in dct.items():
-            settings.set_value(k, v)
-        return settings
+    def __ior__(self, other: Mapping):
+        self.update(other)
+        return self
 
     def set_value(self, key: str, value):
         if not self.applicationName():
@@ -84,10 +79,6 @@ class Settings_(
         if isinstance(value, Settings_):
             value = dict(value)
         self.setValue(key, value)
-
-    def set_values(self, dct: dict[str, Any]):
-        for k, v in dct.items():
-            self.set_value(k, v)
 
     def get_value(self, key: str, default=None):
         return self.value(key) if self.contains(key) else default
@@ -233,4 +224,4 @@ class Settings(Settings_):
 if __name__ == "__main__":
     settings = Settings("1", "2")
     settings["1"] = True
-    del settings["hallo"]
+    settings |= dict(abc="abc")
