@@ -5,7 +5,7 @@ import datetime
 import os
 import pathlib
 import re
-from typing import TYPE_CHECKING, Any, ClassVar, Protocol
+from typing import TYPE_CHECKING, Any, ClassVar, Protocol, runtime_checkable
 
 
 from prettyqt.qt import QtCore
@@ -212,10 +212,12 @@ class SupportsValue(Protocol):
         ...
 
 
+@runtime_checkable
 class IsDataclass(Protocol):
     __dataclass_fields__: ClassVar[dict]
 
 
+@runtime_checkable
 class IsAttrs(Protocol):
     __attrs_attrs__: ClassVar[dict]
 
