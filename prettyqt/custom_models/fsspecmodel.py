@@ -70,6 +70,17 @@ def get_filename(path):
 class FsSpecColumnItem(custom_models.ColumnItem):
     identifier: str = ""
 
+    def get_user_data(self, tree_item, role):
+        match role:
+            case FSSpecTreeModel.Roles.FilePathRole:
+                return tree_item.obj["name"]
+            case FSSpecTreeModel.Roles.FilePathRole:
+                return get_filename(treeitem.obj["name"])
+            case FSSpecTreeModel.Roles.FilePermissions:
+                return self.model.permissions(tree_item.obj["name"])
+            case FSSpecTreeModel.Roles.ProtocolPathRole:
+                return self.model.get_protocol_path(tree_item.obj["name"])
+
 
 loc = core.Locale()
 
@@ -81,10 +92,6 @@ ATTR_MODEL_NAME = FsSpecColumnItem(
     label=lambda x: get_filename(x.obj["name"]),
     set_edit=lambda x, value: x.set_name(value),
     decoration=lambda x: _icon_provider.get_icon(core.FileInfo(x.obj["name"])),
-    user_data={
-        constants.USER_ROLE + 1: lambda x: x.obj["name"],
-        constants.USER_ROLE + 2: lambda x: get_filename(x.obj["name"]),
-    },
 )
 
 
@@ -178,6 +185,7 @@ class FSSpecTreeModel(
         FilePathRole = constants.USER_ROLE + 1
         FileNameRole = constants.USER_ROLE + 2
         FilePermissions = constants.USER_ROLE + 3
+        ProtocolPathRole = constants.USER_ROLE + 4
 
     class Option(enum.IntEnum):
         """Role enum."""
@@ -229,7 +237,10 @@ class FSSpecTreeModel(
         self.directoryLoaded.emit(obj.obj["name"])
         return items
 
-    def get_protocol_path(self, index: QtCore.QModelIndex) -> str:
+    def get_protocol_path(self, index: QtCore.QModelIndex | str) -> str:
+        """Get protocol path for given index."""
+        if isinstance(index, str):
+            index = self.index(index)
         protocol = self.fs.protocol
         path = index.data(self.Roles.FilePathRole)
         return f"{protocol}://{path}"
@@ -244,39 +255,51 @@ class FSSpecTreeModel(
         with self.fs.open(protocol_path) as file:
             return file.read()
 
-    def fileIcon(self, index):
+    def fileIcon(self, index: core.QModelIndex | str):
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         if tree_item is None:
             return None
         return _icon_provider.get_icon(core.FileInfo(tree_item.obj["name"]))
 
-    def fileInfo(self, index):
+    def fileInfo(self, index: core.QModelIndex | str):
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         return None if tree_item is None else core.FileInfo(tree_item.obj["name"])
 
-    def fileName(self, index) -> str:
+    def fileName(self, index: core.QModelIndex) -> str:
         tree_item = index.internalPointer()
         return "" if tree_item is None else pathlib.Path(tree_item.obj["name"]).name
 
-    def filePath(self, index) -> str:
+    def filePath(self, index: core.QModelIndex) -> str:
         tree_item = index.internalPointer()
         return "" if tree_item is None else tree_item.obj["name"]
 
-    def isDir(self, index):
+    def isDir(self, index: core.QModelIndex | str):
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         return False if tree_item is None else tree_item.obj["type"] == "directory"
 
-    def mkdir(self, index, name: str):
+    def mkdir(self, index: core.QModelIndex | str, name: str):
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         path = tree_item.obj["name"]
         new_folder = pathlib.Path(path) / name
         self.fs.mkdir(str(new_folder))
 
-    def size(self, index) -> int:
+    def size(self, index: core.QModelIndex | str) -> int:
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         return 0 if tree_item is None else tree_item.obj["size"]
 
-    def lastModified(self, index) -> datetime.datetime | None:
+    def lastModified(self, index: core.QModelIndex | str) -> datetime.datetime | None:
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         return (
             None
@@ -284,7 +307,9 @@ class FSSpecTreeModel(
             else datetime.datetime.fromtimestamp(tree_item.obj["mtime"])
         )
 
-    def permissions(self, index) -> QtCore.QFileDevice.Permission:
+    def permissions(self, index: core.QModelIndex | str) -> QtCore.QFileDevice.Permission:
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         flag = QtCore.QFileDevice.Permission(0)
         if tree_item is None:
@@ -294,13 +319,17 @@ class FSSpecTreeModel(
             flag |= core.filedevice.PERMISSIONS[i]
         return flag
 
-    def remove(self, index) -> bool:
+    def remove(self, index: core.QModelIndex | str) -> bool:
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         path = tree_item.obj["name"]
         self.fs.rm_file(path)
         return self.fs.exists(path)
 
-    def rmdir(self, index) -> bool:
+    def rmdir(self, index: core.QModelIndex | str) -> bool:
+        if isinstance(index, str):
+            index = self.index(index)
         tree_item = index.internalPointer()
         path = tree_item.obj["name"]
         self.fs.rmdir(path)
