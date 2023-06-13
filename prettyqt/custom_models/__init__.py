@@ -21,6 +21,8 @@ from .dataclassmodel import DataClassModel
 from .dataclassfieldsmodel import DataClassFieldsModel
 from .xmlmodel import XmlModel
 from .mappingmodel import MappingModel
+from .storageinfomodel import StorageInfoModel
+from .shortcutsmodel import ShortcutsModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuetransformationproxymodel import ValueTransformationProxyModel
@@ -54,6 +56,8 @@ __all__ = [
     "BaseFieldsModel",
     "BaseDataclassModel",
     "DataClassModel",
+    "StorageInfoModel",
+    "ShortcutsModel",
     "DataClassFieldsModel",
     "XmlModel",
     "FuzzyFilterProxyModel",

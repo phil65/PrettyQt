@@ -14,6 +14,14 @@ class PydanticModel(custom_models.BaseDataclassModel):
     def __init__(self, items: Sequence[pydantic.BaseModel], **kwargs):
         super().__init__(items, **kwargs)
 
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (pydantic.BaseModel(), *_):
+                return True
+            case _:
+                return False
+
     def get_fields(self):
         return list(self.Class.__fields__.values())
 

@@ -51,6 +51,19 @@ COLUMNS = [
 ]
 
 
+class ActionsModel(custom_models.ColumnTableModel):
+    def __init__(self, actions, parent=None):
+        super().__init__(actions, COLUMNS, parent=parent)
+
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (gui.QAction(), *_):
+                return True
+            case _:
+                return False
+
+
 if __name__ == "__main__":
     from prettyqt import widgets
 
@@ -80,10 +93,11 @@ if __name__ == "__main__":
         ),
         gui.Action(text="a", shortcut="Ctrl+A", tool_tip="Tooltip", icon="mdi.folder"),
     ]
-    model = custom_models.ColumnTableModel(actions, COLUMNS, parent=view)
+    model = ActionsModel(actions, parent=view)
     view.setModel(model)
     view.resize(640, 480)
     view.set_selection_behavior("rows")
     view.adapt_sizes()
     view.show()
-    app.main_loop()
+    with app.debug_mode():
+        app.main_loop()

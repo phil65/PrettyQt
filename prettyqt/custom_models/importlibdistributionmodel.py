@@ -107,6 +107,10 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         super().__init__(obj=obj, columns=COLUMNS, parent=parent, show_root=show_root)
 
     @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, metadata.Distribution)
+
+    @classmethod
     def from_system(cls, parent: QtCore.QObject | None = None) -> Self:
         distributions = list_system_modules()
         return cls(distributions, parent)
@@ -144,6 +148,14 @@ class ImportlibDistributionModel(core.AbstractTableModel):
     ):
         super().__init__(parent)
         self.distributions = distributions
+
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (metadata.Distribution(), *_):
+                return True
+            case _:
+                return False
 
     def rowCount(self, parent=None):
         parent = parent or core.ModelIndex()

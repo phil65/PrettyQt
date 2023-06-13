@@ -85,6 +85,10 @@ class DataTableModel(core.AbstractTableModel):
 
 
 class DataTableWithHeaderModel(DataTableModel):
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, pd.DataFrame)
+
     def headerData(self, idx: int, orientation, role=constants.DISPLAY_ROLE):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:

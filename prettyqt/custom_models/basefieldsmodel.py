@@ -39,7 +39,8 @@ class BaseFieldsModel(core.AbstractTableModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[section]
             case constants.VERTICAL, constants.DISPLAY_ROLE:
-                return str(section)
+                field = self._fields[section]
+                return field.name
 
     def setData(self, index: QtCore.QModelIndex, value, role=constants.DISPLAY_ROLE):
         if not index.isValid():
@@ -61,7 +62,7 @@ class BaseFieldsModel(core.AbstractTableModel):
 
     def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
         field = self._fields[index.row()]
-        if index.column() == 1:
+        if index.column() == 0:
             val = getattr(self._instance, field.name)
             with contextlib.suppress(Exception):
                 setattr(self._instance, field.name, val)

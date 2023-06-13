@@ -118,6 +118,14 @@ class LogRecordModel(custom_models.ColumnTableModel):
         self.handler.setLevel(level)
         logger.addHandler(self.handler)
 
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (logging.LogRecord(), *_):
+                return True
+            case _:
+                return False
+
 
 if __name__ == "__main__":
     from prettyqt import constants, debugging

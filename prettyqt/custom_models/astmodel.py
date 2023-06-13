@@ -4,7 +4,7 @@ import ast
 
 import logging
 
-from prettyqt import constants, core, custom_models
+from prettyqt import constants, core, gui, custom_models
 from prettyqt.utils import bidict, treeitem
 
 NODE_MAP = bidict(
@@ -62,20 +62,27 @@ class AstModel(custom_models.TreeModel):
         self.code = ""
         self.set_ast(ast_tree)
 
+    @classmethod
+    def supports(self, typ):
+        return isinstance(typ.ast.AST)
+
     def columnCount(self, parent=None):
         return len(self.HEADER) if self.ast_tree is not None else 0
 
     def set_ast(self, ast_tree: ast.AST | str = ""):
-        if isinstance(ast_tree, str):
-            code = ast_tree
-            try:
-                node = ast.parse(ast_tree)
-            except SyntaxError as e:
-                logger.debug(f"caught {e!r} when building AST")
-                return
-        else:
-            code = ast.unparse(ast_tree)
-            node = ast.parse(code)  # makin a circle here to make sure line numbers match.
+        match ast_tree:
+            case str():
+                code = ast_tree
+                try:
+                    node = ast.parse(ast_tree)
+                except SyntaxError as e:
+                    logger.debug(f"caught {e!r} when building AST")
+                    return
+            case ast.AST():
+                code = ast.unparse(ast_tree)
+                node = ast.parse(code)  # makin a circle to make sure line numbers match.
+            case _:
+                raise TypeError(ast_tree)
         node = ast.fix_missing_locations(node)
         with self.reset_model():
             self.ast_tree = node
@@ -122,7 +129,8 @@ class AstModel(custom_models.TreeModel):
                     return f"{node.col_offset} - {node.end_col_offset}"
             case constants.DISPLAY_ROLE, 4:
                 return ast.get_source_segment(self.code, node)
-
+            case constants.FONT_ROLE, 4 | 5:
+                return gui.Font.mono(as_qt=True)
             case constants.DISPLAY_ROLE, 5:
                 try:
                     return ast.get_docstring(node)

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
-from typing import Any
+import io
+import xml.etree.ElementTree as ET
 
 from prettyqt import core, custom_models
-from prettyqt.utils import treeitem
-import xml.etree.ElementTree as ET
-import io
+from prettyqt.utils import datatypes, treeitem
 
 
 COL_TAG = custom_models.ColumnItem(
@@ -44,19 +43,30 @@ class XmlModel(custom_models.ColumnItemModel):
 
     def __init__(
         self,
-        obj: Any,
+        obj: str | datatypes.IsTreeIterator | ET.ElementTree,
         show_root: bool = True,
         **kwargs,
     ):
-        context = ET.iterparse(io.StringIO(obj), events=("start",))
-        _, root = next(context)
-
+        match obj:
+            case str():
+                context = ET.iterparse(io.StringIO(obj), events=("start",))
+                _, root = next(context)
+            case datatypes.IsTreeIterator():
+                _, root = next(obj)
+            case ET.ElementTree():
+                xml_str = ET.tostring(xml._root, encoding="unicode")
+                context = ET.iterparse(io.StringIO(xml_str), events=("start",))
+                _, root = next(context)
         super().__init__(
             obj=root,
             columns=COLUMNS,
             show_root=show_root,
             **kwargs,
         )
+
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, datatypes.IsTreeIterator | ET.ElementTree)
 
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = parent or core.ModelIndex()
@@ -70,7 +80,6 @@ class XmlModel(custom_models.ColumnItemModel):
 
         Returns: list of treeitem.TreeItems
         """
-        # items = []
         return [treeitem.TreeItem(obj=i) for i in item.obj]
 
 
@@ -84,6 +93,7 @@ if __name__ == "__main__":
 <empty-element xmlns="http://testns/" />
 </root>
 """
+    xml = ET.parse(io.StringIO(xml))
     table = widgets.TreeView()
     model = XmlModel(xml, parent=table)
     table.setRootIsDecorated(True)

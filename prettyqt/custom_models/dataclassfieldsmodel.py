@@ -27,6 +27,10 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
     def __init__(self, instance: datatypes.IsDataclass, **kwargs):
         super().__init__(instance, **kwargs)
 
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, datatypes.IsDataclass)
+
     def get_fields(self, instance: datatypes.IsDataclass):
         return dataclasses.fields(instance)
 
@@ -35,39 +39,37 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
             return None
         field = self._fields[index.row()]
         match role, index.column():
-            case constants.DISPLAY_ROLE, 0:
-                return field.name
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 1:
-                return getattr(self._instance, field.name)
-            case constants.DISPLAY_ROLE, 2:
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 0:
+                return repr(getattr(self._instance, field.name))
+            case constants.DISPLAY_ROLE, 1:
                 return field.type
-            case constants.FONT_ROLE, 2:
+            case constants.FONT_ROLE, 1:
                 font = QtGui.QFont()
                 font.setItalic(True)
                 return font
-            case constants.DISPLAY_ROLE, 3:
+            case constants.DISPLAY_ROLE, 2:
                 return field.default
-            case constants.CHECKSTATE_ROLE, 4:
+            case constants.CHECKSTATE_ROLE, 3:
                 return field.init
-            case constants.CHECKSTATE_ROLE, 5:
+            case constants.CHECKSTATE_ROLE, 4:
                 return field.repr
-            case constants.CHECKSTATE_ROLE, 6:
+            case constants.CHECKSTATE_ROLE, 5:
                 return field.compare
-            case constants.CHECKSTATE_ROLE, 7:
+            case constants.CHECKSTATE_ROLE, 6:
                 return field.hash
-            case constants.DISPLAY_ROLE, 8:
+            case constants.DISPLAY_ROLE, 7:
                 return str(field.metadata)
-            case constants.CHECKSTATE_ROLE, 9:
+            case constants.CHECKSTATE_ROLE, 8:
                 return field.kw_only
             case constants.USER_ROLE, _:
                 return getattr(self._instance, field.name)
 
     def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
-        if index.column() == 1 and not self._instance.__dataclass_params__.frozen:
+        if index.column() == 0 and not self._instance.__dataclass_params__.frozen:
             return super().flags(index) | constants.IS_EDITABLE
         return super().flags(index)
 
@@ -104,7 +106,7 @@ if __name__ == "__main__":
         view.set_model(model)
         view.set_selection_behavior("rows")
         view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-        view.set_delegate("variant", column=1)
+        view.set_delegate("variant", column=0)
         view.show()
         view.resize(500, 300)
         app.main_loop()

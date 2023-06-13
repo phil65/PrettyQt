@@ -91,6 +91,10 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         self.props.insert(1, FakeUserPropertyValueProp())
         # self.props.sort(key=lambda x: x.get_name())
 
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, QtWidgets.QWidget)
+
     def columnCount(self, parent=None):
         return len(self.props)
 

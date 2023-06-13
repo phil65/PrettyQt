@@ -37,6 +37,10 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.set_widget(widget)
 
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, QtWidgets.QWidget)
+
     def set_widget(self, widget):
         if self._widget:
             self.unhook()

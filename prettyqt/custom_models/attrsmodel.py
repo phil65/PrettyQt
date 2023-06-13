@@ -14,6 +14,14 @@ class AttrsModel(custom_models.BaseDataclassModel):
     def __init__(self, items: Sequence[datatypes.IsAttrs], **kwargs):
         super().__init__(items, **kwargs)
 
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (datatypes.IsAttrs(), *_):
+                return True
+            case _:
+                return False
+
     def get_fields(self):
         return list(attrs.fields(self.Class))
 

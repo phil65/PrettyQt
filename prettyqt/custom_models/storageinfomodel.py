@@ -82,13 +82,26 @@ COLUMNS = [
 ]
 
 
+class StorageInfoModel(custom_models.ColumnTableModel):
+    def __init__(self, volumes, parent=None):
+        super().__init__(volumes, COLUMNS, parent=parent)
+
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (core.QStorageInfo(), *_):
+                return True
+            case _:
+                return False
+
+
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
     view = widgets.TreeView()
     volumes = core.StorageInfo.get_mounted_volumes()
-    model = custom_models.ColumnTableModel(volumes, COLUMNS, parent=view)
+    model = StorageInfoModel(volumes, parent=view)
     view.setModel(model)
     view.resize(640, 480)
     view.set_selection_behavior("rows")

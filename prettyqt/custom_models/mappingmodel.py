@@ -34,6 +34,14 @@ class MappingModel(custom_models.ColumnItemModel):
             columns.append(col)
         self.set_columns(columns)
 
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (dict(), *_):
+                return True
+            case _:
+                return False
+
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = parent or core.ModelIndex()
         if parent.column() > 0:

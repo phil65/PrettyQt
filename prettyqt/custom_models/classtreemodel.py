@@ -4,7 +4,7 @@ import enum
 import inspect
 import logging
 
-from prettyqt import constants, core, custom_models
+from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import treeitem
 
 logger = logging.getLogger(__name__)
@@ -55,12 +55,18 @@ class BaseClassTreeModel(custom_models.TreeModel):
                 return inspect.isabstract(klass)
             case constants.USER_ROLE, _:
                 return klass
+            case constants.FONT_ROLE, 1 | 3:
+                return gui.Font.mono(as_qt=True)
             case self.Roles.SourceRole, _:
                 return inspect.getsource(klass)
 
 
 class SubClassTreeModel(BaseClassTreeModel):
     """Model to display the subclass tree of a python class."""
+
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, type)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         return [treeitem.TreeItem(obj=i) for i in item.obj.__subclasses__()]
@@ -79,6 +85,10 @@ class SubClassTreeModel(BaseClassTreeModel):
 
 class ParentClassTreeModel(BaseClassTreeModel):
     """Model to display the parentclass tree of a python class."""
+
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, type)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         return [treeitem.TreeItem(obj=i) for i in item.obj.__bases__]

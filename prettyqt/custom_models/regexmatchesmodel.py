@@ -11,6 +11,14 @@ class RegexMatchesModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.matches = matches or []
 
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (re.Match(), *_):
+                return True
+            case _:
+                return False
+
     def columnCount(self, parent=None):
         return len(self.HEADER)
 

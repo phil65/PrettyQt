@@ -16,11 +16,19 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.items = items
         common_ancestor = helpers.find_common_ancestor([type(i) for i in self.items])
-        logger.debug(f"{type(self).__name__}: found common ancester {common_ancestor}")
+        logger.debug(f"{type(self).__name__}: found common ancestor {common_ancestor}")
         self.props = core.MetaObject(common_ancestor.staticMetaObject).get_properties(
             only_stored=True
         )
         self.props.sort(key=lambda x: x.get_name())
+
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (QtWidgets.QWidget(), *_):
+                return True
+            case _:
+                return False
 
     def columnCount(self, parent=None):
         return len(self.props)

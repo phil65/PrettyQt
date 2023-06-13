@@ -54,6 +54,19 @@ COLUMNS = [
 ]
 
 
+class ShortcutsModel(custom_models.ColumnTableModel):
+    def __init__(self, shortcuts, parent=None):
+        super().__init__(shortcuts, COLUMNS, parent=parent)
+
+    @classmethod
+    def supports(cls, typ):
+        match typ:
+            case (gui.QShortcut(), *_):
+                return True
+            case _:
+                return False
+
+
 if __name__ == "__main__":
     from prettyqt import widgets
 
@@ -67,7 +80,7 @@ if __name__ == "__main__":
     ]
     for i in shortcuts:
         i.setWhatsThis("abc")
-    model = custom_models.ColumnTableModel(shortcuts, COLUMNS, parent=view)
+    model = ShortcutsModel(shortcuts, parent=view)
     model = model.proxifier.modify(lambda x: x * 2, column=0)
     view.setModel(model)
     view.resize(640, 480)

@@ -50,6 +50,10 @@ class JsonModel(custom_models.ColumnItemModel):
             **kwargs,
         )
 
+    @classmethod
+    def supports(cls, typ):
+        return isinstance(typ, Mapping)
+
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
