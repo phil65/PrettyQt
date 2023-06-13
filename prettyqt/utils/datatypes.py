@@ -238,6 +238,17 @@ class IsAttrs(Protocol):
     __attrs_attrs__: ClassVar[dict]
 
 
+@runtime_checkable
+class IsTreeIterator(Protocol):
+    @property
+    def root(self):
+        ...
+
+    @property
+    def _abc_impl(self):
+        ...
+
+
 if TYPE_CHECKING:
     from prettyqt.qt import QtGui, QtWidgets
 
