@@ -200,7 +200,7 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         anchor: str = "center",
         delay: int = 0,
-    ) -> core.PropertyAnimation:
+    ) -> core.ZoomAnimation:
         from prettyqt import custom_animations
 
         anim = custom_animations.ZoomAnimation(parent=self._widget, anchor=anchor)
@@ -249,7 +249,9 @@ class Fx:
     def run(
         self, animation: core.QPropertyAnimation, delay: int = 0, single_shot: bool = True
     ):
-        self._widget.start_callback_timer(animation.start, delay, single_shot=single_shot)
+        self._widget.start_callback_timer(
+            animation.start, interval=delay, single_shot=single_shot
+        )
 
     def highlight_widget(self, widget: widgets.QWidget):
         from prettyqt.custom_widgets.overlayborder import FocusWidget
