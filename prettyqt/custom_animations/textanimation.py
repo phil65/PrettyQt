@@ -4,6 +4,7 @@ import logging
 from typing import Literal
 
 from prettyqt import core
+from prettyqt.utils import datatypes
 
 logger = logging.getLogger(__name__)
 
@@ -16,8 +17,8 @@ class TextAnimation(core.PropertyAnimation):
 
     def __init__(
         self,
-        start,
-        end,
+        start: datatypes.VariantType | None = None,
+        end: datatypes.VariantType | None = None,
         duration: int = 1000,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         fmt: NameStr = "html",
@@ -25,25 +26,40 @@ class TextAnimation(core.PropertyAnimation):
         parent: core.QObject | None = None,
     ):
         self._fmt = fmt
+        self._mask = mask
         super().__init__(parent)
+        self._child_anim = core.VariantAnimation()
+        self._child_anim.valueChanged.connect(self.updateCurrentValue)
         self.set_easing(easing)
         self.set_duration(duration)
-        self._child_anim = core.VariantAnimation()
-        self._child_anim.set_easing(easing)
-        self._child_anim.set_start_value(start)
-        self._child_anim.set_end_value(end)
-        self._child_anim.set_duration(duration)
-        self._child_anim.valueChanged.connect(self.updateCurrentValue)
-        self._child_anim.start()
-        self._mask = mask
-        self.set_start_value("")
-        self.set_end_value("")
+        if start is not None:
+            self._child_anim.set_start_value(start)
+        if end is not None:
+            self._child_anim.set_end_value(end)
+        self.setStartValue("")
+        self.setStartValue("")
 
     def start(self, *args, **kwargs):
-        # self._child_anim.start(*args, **kwargs)
+        self._child_anim.start(*args, **kwargs)
         super().start(*args, **kwargs)
 
-    def updateCurrentValue(self, value):
+    # TODO: also do stop etc.
+
+    def set_start_value(self, value: datatypes.VariantType):
+        self._child_anim.set_start_value(value)
+
+    def set_end_value(self, value: datatypes.VariantType):
+        self._child_anim.set_end_value(value)
+
+    def set_easing(self, easing: core.easingcurve.TypeStr):
+        super().set_easing(easing)
+        self._child_anim.set_easing(easing)
+
+    def set_duration(self, duration: int):
+        super().setDuration(duration)
+        self._child_anim.set_duration(duration)
+
+    def updateCurrentValue(self, value: datatypes.VariantType):
         match value:
             case None:
                 return
