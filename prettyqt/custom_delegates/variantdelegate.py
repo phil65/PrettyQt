@@ -86,56 +86,56 @@ def to_string(val, locale=None):
     return repr(val)
 
 
-def get_widget_for_value(val):
+def get_widget_for_value(val, parent: widgets.QWidget | None = None):
     from prettyqt import custom_widgets
 
     match val:
         case bool():
-            return widgets.CheckBox()
+            return widgets.CheckBox(parent=parent)
         case enum.Flag():
-            widget = custom_widgets.EnumFlagWidget()
+            widget = custom_widgets.EnumFlagWidget(parent=parent)
             widget._set_enum_class(type(val))
             return widget
         case enum.Enum():
-            widget = custom_widgets.EnumComboBox()
+            widget = custom_widgets.EnumComboBox(parent=parent)
             widget._set_enum_class(type(val))
             return widget
         case int():
-            return widgets.SpinBox()
+            return widgets.SpinBox(parent=parent)
         case float():
-            return widgets.DoubleSpinBox()
+            return widgets.DoubleSpinBox(parent=parent)
         case pathlib.Path():
-            return custom_widgets.FileChooserButton()
+            return custom_widgets.FileChooserButton(parent=parent)
         case str():
-            widget = widgets.LineEdit()
+            widget = widgets.LineEdit(parent=parent)
             widget.setFrame(False)
             return widget
         case QtCore.QRegularExpression() | re.Pattern():
-            return custom_widgets.RegexInput(show_error=False)
+            return custom_widgets.RegexInput(show_error=False, parent=parent)
         case QtCore.QTime():
-            return widgets.TimeEdit()
+            return widgets.TimeEdit(parent=parent)
         case QtCore.QDate():
-            return widgets.DateEdit()
+            return widgets.DateEdit(parent=parent)
         case QtCore.QDateTime():
-            return widgets.DateTimeEdit()
+            return widgets.DateTimeEdit(parent=parent)
         case QtCore.QPoint():
-            return custom_widgets.PointEdit()
+            return custom_widgets.PointEdit(parent=parent)
         case QtCore.QSize():
-            return custom_widgets.SizeEdit()
+            return custom_widgets.SizeEdit(parent=parent)
         case QtCore.QRect():
-            return custom_widgets.RectEdit()
+            return custom_widgets.RectEdit(parent=parent)
         case QtGui.QKeySequence():
-            return widgets.KeySequenceEdit()
+            return widgets.KeySequenceEdit(parent=parent)
         case QtGui.QRegion():
-            return custom_widgets.RegionEdit()
+            return custom_widgets.RegionEdit(parent=parent)
         case QtGui.QFont():
-            return widgets.FontComboBox()
+            return widgets.FontComboBox(parent=parent)
         case QtGui.QColor():
-            return custom_widgets.ColorComboBox()
+            return custom_widgets.ColorComboBox(parent=parent)
         case QtWidgets.QSizePolicy():
-            return custom_widgets.SizePolicyEdit()
+            return custom_widgets.SizePolicyEdit(parent=parent)
         case QtCore.QUrl():
-            return custom_widgets.UrlLineEdit()
+            return custom_widgets.UrlLineEdit(parent=parent)
         # case QtCore.QRectF():  # todo
         #     return custom_widgets.RectEdit(parent=parent)
     try:
@@ -190,12 +190,12 @@ class VariantDelegate(widgets.StyledItemDelegate):
     def createEditor(self, parent, option, index):
         val = self._data_for_index(index, self.data_role)
         logger.info(f"creating editor for {val!r}...")
-        widget = get_widget_for_value(val)
+        widget = get_widget_for_value(val, parent)
         if widget is None:
             logger.warning(f"Could not find editor for {val!r} ({type(val)})")
             return None
-        widget.setParent(parent)
         widget.setAutoFillBackground(True)
+        widget.set_focus_policy("strong")
         return widget
 
     def setEditorData(self, editor, index):
@@ -208,8 +208,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
             logger.info(f"setting data for {model!r} to {value!r}")
             model.setData(index, value, self.data_role)
             model.setData(index, to_string(value), constants.DISPLAY_ROLE)
-            self.commitData.emit(editor)
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
+            self.commitData.emit(editor)
 
     def displayText(self, value, locale: QtCore.QLocale) -> str:
         return to_string(value, locale)

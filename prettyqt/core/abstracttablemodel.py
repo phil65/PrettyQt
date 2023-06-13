@@ -58,11 +58,8 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
             case None:
                 colrange = range(self.columnCount())
             case slice():
-                colrange = range(
-                    x_range.start or 0,
-                    x_range.stop or self.columnCount(),
-                    x_range.step or 1,
-                )
+                stop = x_range.stop or self.columnCount()
+                colrange = range(x_range.start or 0, stop, x_range.step or 1)
             case int():
                 colrange = range(x_range, x_range + 1)
 
@@ -70,11 +67,8 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
             case None:
                 rowrange = range(self.rowCount())
             case slice():
-                rowrange = range(
-                    y_range.start or 0,
-                    y_range.stop or self.rowCount(),
-                    y_range.step or 1,
-                )
+                stop = y_range.stop or self.rowCount()
+                rowrange = range(y_range.start or 0, stop, y_range.step or 1)
             case int():
                 rowrange = range(y_range, y_range + 1)
 
