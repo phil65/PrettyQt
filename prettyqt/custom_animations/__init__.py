@@ -1,9 +1,8 @@
 """Module containing custom animation classes."""
 
-from .bounceanimation import BounceAnimation
-from .fadeinanimation import FadeInAnimation
 from .slideanimation import SlideAnimation
 from .zoomanimation import ZoomAnimation
+from .textanimation import TextAnimation
 
 
-__all__ = ["BounceAnimation", "SlideAnimation", "FadeInAnimation", "ZoomAnimation"]
+__all__ = ["SlideAnimation", "ZoomAnimation", "TextAnimation"]
