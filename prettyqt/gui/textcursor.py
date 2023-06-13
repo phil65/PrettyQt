@@ -184,9 +184,9 @@ class TextCursor(QtGui.QTextCursor):
         self.select_text(start_pos, start_pos + len(to_replace))
 
     @contextlib.contextmanager
-    def edit_block(self):
+    def edit_block(self, join_previous: bool = False):
         """Context manager for edit blocks. Can be used for undo actions."""
-        self.beginEditBlock()
+        self.joinPreviousEditBlock() if join_previous else self.beginEditBlock()
         yield
         self.endEditBlock()
 
