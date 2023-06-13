@@ -1,30 +1,11 @@
 from __future__ import annotations
 
 import logging
-from typing import Any
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, widgets
 from prettyqt.utils import colors, datatypes, helpers
 
 logger = logging.getLogger(__name__)
-
-
-def align_types(source: datatypes.VariantType, target: Any):
-    match source:
-        case core.QPoint():
-            return datatypes.to_point(target)
-        case core.QPointF():
-            return datatypes.to_pointf(target)
-        case core.QSize():
-            return datatypes.to_size(target)
-        case core.QSizeF():
-            return datatypes.to_sizef(target)
-        case core.QRect():
-            return datatypes.to_rect(target)
-        case core.QRectF():
-            return datatypes.to_rectf(target)
-        case gui.QColor():
-            return colors.get_color(target)
 
 
 class AnimationWrapper:
@@ -65,7 +46,7 @@ class AnimationWrapper:
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         start = prop.read(obj)
-        end = align_types(start, end)
+        end = datatypes.align_types(start, end)
         if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
             end = end + start
         return self.animate(
@@ -92,7 +73,7 @@ class AnimationWrapper:
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         end = prop.read(obj)
-        start = align_types(end, start)
+        start = datatypes.align_types(end, start)
         if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
             start = end + start
         return self.animate(

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from abc import ABCMeta
 import datetime
+import enum
 import os
 import pathlib
 import re
@@ -13,6 +14,173 @@ from prettyqt.qt import QtCore
 
 class QABCMeta(type(QtCore.QObject), ABCMeta):
     pass
+
+
+def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
+    from prettyqt import constants, core, gui, widgets
+
+    if locale is None:
+        locale = core.Locale()
+    match val:
+        case str():
+            return val
+        case bool():
+            return "✓" if val else "☐"
+        case enum.Flag():
+            return val.name
+        case enum.Enum():
+            return val.name
+        case int() | float() | core.QByteArray():
+            return locale.toString(val)
+        case gui.QColor():
+            return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
+        case gui.QFont():
+            return val.family()
+        case gui.QRegion():
+            rect = val.boundingRect()
+            return f"({rect.x()},{rect.y()},{rect.width()},{rect.height()})"
+        case gui.QCursor():
+            return constants.CURSOR_SHAPE.inverse[val.shape()]
+        case gui.QKeySequence():
+            return val.toString()
+        case core.QDate() | core.QDateTime() | core.QTime():
+            return val.toString(constants.DateFormat.ISODate)
+        case core.QPoint():
+            return f"({val.x()},{val.y()})"
+        case core.QRect():
+            return f"({val.x()},{val.y()},{val.width()},{val.height()})"
+        case core.QSize():
+            return f"({val.width()},{val.height()})"
+        case core.QLocale():
+            return val.bcp47Name()
+        case widgets.QSizePolicy():
+            return (
+                f"({widgets.sizepolicy.SIZE_POLICY.inverse[val.horizontalPolicy()]}, "
+                f"{widgets.sizepolicy.SIZE_POLICY.inverse[val.verticalPolicy()]}, "
+                f"{widgets.sizepolicy.CONTROL_TYPE.inverse[val.controlType()]})"
+            )
+        case list():
+            return ",".join(map(repr, val))
+        case re.Pattern():
+            return val.pattern
+        case datetime.date():
+            return val.isoformat()
+        case datetime.datetime():
+            return val.isoformat(sep=" ")
+        case core.QRegularExpression():
+            return val.pattern()
+        case core.QUrl():
+            return val.toString()
+    try:
+        import numpy as np
+    except ImportError:
+        pass
+    else:
+        match val:
+            case np.integer():
+                return to_string(int(val), locale)
+            case np.floating():
+                return to_string(float(val), locale)
+            case np.str_():
+                return val.astype(str)
+            case np.bool_():
+                return bool(val.astype(bool))
+            case np.datetime64():
+                return to_string(val.astype(datetime.datetime), locale)
+    return repr(val)
+
+
+def get_widget_for_value(val, parent=None):
+    from prettyqt import core, gui, widgets, custom_widgets
+
+    match val:
+        case bool():
+            return widgets.CheckBox(parent=parent)
+        case enum.Flag():
+            widget = custom_widgets.EnumFlagWidget(parent=parent)
+            widget._set_enum_class(type(val))
+            return widget
+        case enum.Enum():
+            widget = custom_widgets.EnumComboBox(parent=parent)
+            widget._set_enum_class(type(val))
+            return widget
+        case int():
+            return widgets.SpinBox(parent=parent)
+        case float():
+            return widgets.DoubleSpinBox(parent=parent)
+        case pathlib.Path():
+            return custom_widgets.FileChooserButton(parent=parent)
+        case str():
+            widget = widgets.LineEdit(parent=parent)
+            widget.setFrame(False)
+            return widget
+        case core.QRegularExpression() | re.Pattern():
+            return custom_widgets.RegexInput(show_error=False, parent=parent)
+        case core.QTime():
+            return widgets.TimeEdit(parent=parent)
+        case core.QDate():
+            return widgets.DateEdit(parent=parent)
+        case core.QDateTime():
+            return widgets.DateTimeEdit(parent=parent)
+        case core.QPoint():
+            return custom_widgets.PointEdit(parent=parent)
+        case core.QSize():
+            return custom_widgets.SizeEdit(parent=parent)
+        case core.QRect():
+            return custom_widgets.RectEdit(parent=parent)
+        case gui.QKeySequence():
+            return widgets.KeySequenceEdit(parent=parent)
+        case gui.QRegion():
+            return custom_widgets.RegionEdit(parent=parent)
+        case gui.QFont():
+            return widgets.FontComboBox(parent=parent)
+        case gui.QColor():
+            return custom_widgets.ColorComboBox(parent=parent)
+        case widgets.QSizePolicy():
+            return custom_widgets.SizePolicyEdit(parent=parent)
+        case core.QUrl():
+            return custom_widgets.UrlLineEdit(parent=parent)
+        # case QtCore.QRectF():  # todo
+        #     return custom_widgets.RectEdit(parent=parent)
+    try:
+        import numpy as np
+    except ImportError:
+        pass
+    else:
+        match val:
+            case np.floating():
+                return custom_widgets.FloatLineEdit()
+            case np.integer():
+                return custom_widgets.IntLineEdit()
+            case np.str_():
+                return widgets.LineEdit()
+            case np.datetime64():
+                return widgets.DateTimeEdit()
+            case np.bool_():
+                return widgets.CheckBox()
+
+
+def align_types(source: VariantType, target: VariantType | tuple):
+    from prettyqt import core, gui
+    from prettyqt.utils import colors
+
+    match source:
+        case core.QPoint():
+            return to_point(target)
+        case core.QPointF():
+            return to_pointf(target)
+        case core.QSize():
+            return to_size(target)
+        case core.QSizeF():
+            return to_sizef(target)
+        case core.QRect():
+            return to_rect(target)
+        case core.QRectF():
+            return to_rectf(target)
+        case gui.QColor():
+            return colors.get_color(target)
+        case _:
+            return target
 
 
 def make_qtype(obj):
