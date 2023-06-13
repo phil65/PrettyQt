@@ -40,13 +40,10 @@ class DataTableView(widgets.TableView):
         rows = [ix.row() for ix in indexes]
         cols = [ix.column() for ix in indexes]
 
-        df = self.get_model(skip_proxies=True).df.iloc[
-            min(rows) : max(rows) + 1, min(cols) : max(cols) + 1
-        ]
-
-        threading.Thread(
-            target=df.to_clipboard, kwargs=dict(index=False, header=False)
-        ).start()
+        df = self.get_model(skip_proxies=True).df
+        df = df.iloc[min(rows) : max(rows) + 1, min(cols) : max(cols) + 1]
+        kwargs = dict(index=False, header=False)
+        threading.Thread(target=df.to_clipboard, kwargs=kwargs).start()
 
     def paste(self):
         app = widgets.app()
