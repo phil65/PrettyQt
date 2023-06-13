@@ -14,22 +14,33 @@ class AnimationWrapper:
         self.fx = fx
 
     def animate(
-        self, start, end, easing="in_out_sine", duration: int = 1000, delay: int = 0
+        self,
+        start,
+        end,
+        easing: core.easingcurve.TypeStr = "in_out_sine",
+        duration: int = 1000,
+        delay: int = 0,
+        reverse: bool = False,
+        single_shot: bool = True,
     ):
         self._animation.set_start_value(start)
         self._animation.set_end_value(end)
         self._animation.set_easing(easing)
         self._animation.set_duration(duration)
-        self.fx.run(self._animation, delay)
+        if reverse:
+            self._animation = self._animation.append_reversed()
+        self.fx.run(self._animation, delay=delay, single_shot=single_shot)
         return self._animation
 
     def transition_to(
         self,
         end,
-        easing="in_out_sine",
+        easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
         relative: bool = False,
+        reverse: bool = False,
+        single_shot: bool = True,
     ):
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
@@ -52,15 +63,25 @@ class AnimationWrapper:
                 end = colors.get_color(end)
         if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
             end = end + start
-        return self.animate(start, end, easing, duration, delay)
+        return self.animate(
+            start,
+            end,
+            easing=easing,
+            duration=duration,
+            delay=delay,
+            reverse=reverse,
+            single_shot=single_shot,
+        )
 
     def transition_from(
         self,
         start,
-        easing="in_out_sine",
+        easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
         relative: bool = False,
+        reverse: bool = False,
+        single_shot: bool = True,
     ):
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
@@ -83,14 +104,22 @@ class AnimationWrapper:
                 start = colors.get_color(start)
         if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
             start = end + start
-        return self.animate(start, end, easing, duration, delay)
+        return self.animate(
+            start,
+            end,
+            easing=easing,
+            duration=duration,
+            delay=delay,
+            reverse=reverse,
+            single_shot=single_shot,
+        )
 
     def animate_on_event(
         self,
         event: core.event.EventStr,
         start,
         end,
-        easing="in_out_sine",
+        easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
     ):
@@ -100,7 +129,7 @@ class AnimationWrapper:
         self._animation.set_easing(easing)
 
         def on_event(event):
-            self._animation.start()
+            self.fx.run(self._animation, delay=delay)
             return False
 
         obj = self._animation.targetObject()
@@ -109,7 +138,7 @@ class AnimationWrapper:
 
 
 class Fx:
-    def __init__(self, widget):
+    def __init__(self, widget: widgets.QWidget):
         self._widget = widget
         self._wrapper = None
         # self._meta = core.MetaObject(self._widget.metaObject())
@@ -133,8 +162,8 @@ class Fx:
 
     def set_colorize_effect(
         self,
-        strength: float = 0.5,
-        color: datatypes.ColorType = "blue",
+        color: datatypes.ColorType,
+        strength: float = 0.7,
     ) -> widgets.GraphicsColorizeEffect:
         effect = widgets.GraphicsColorizeEffect(self._widget)
         effect.setColor(colors.get_color(color))
@@ -142,13 +171,13 @@ class Fx:
         self._widget.setGraphicsEffect(effect)
         return effect
 
-    def set_opacity_effect(self, opacity: float = 0.7) -> widgets.GraphicsOpacityEffect:
+    def set_opacity_effect(self, opacity: float) -> widgets.GraphicsOpacityEffect:
         effect = widgets.GraphicsOpacityEffect(self._widget)
         effect.setOpacity(opacity)
         self._widget.setGraphicsEffect(effect)
         return effect
 
-    def set_blur_effect(self, radius: int = 10) -> widgets.GraphicsBlurEffect:
+    def set_blur_effect(self, radius: int) -> widgets.GraphicsBlurEffect:
         effect = widgets.GraphicsBlurEffect(self._widget)
         effect.setBlurRadius(radius)
         self._widget.setGraphicsEffect(effect)
@@ -171,14 +200,12 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
     ):
-        anim = core.PropertyAnimation(parent=self._widget)
-        anim.set_easing(easing)
-        anim.setStartValue(0.0)
-        anim.setEndValue(1.0)
-        anim.setDuration(duration)
-        anim.apply_to(self._widget.windowOpacity)
-        self.run(anim, delay)
-        return anim
+        return self["windowOpacity"].transition_from(
+            0.0,
+            easing=easing,
+            duration=duration,
+            delay=delay,
+        )
 
     def fade_out(
         self,
@@ -186,14 +213,12 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
     ):
-        anim = core.PropertyAnimation(parent=self._widget)
-        anim.set_easing(easing)
-        anim.setStartValue(1.0)
-        anim.setEndValue(0.0)
-        anim.setDuration(duration)
-        anim.apply_to(self._widget.windowOpacity)
-        self.run(anim, delay)
-        return anim
+        return self["windowOpacity"].transition_to(
+            0.0,
+            easing=easing,
+            duration=duration,
+            delay=delay,
+        )
 
     def zoom(
         self,
@@ -236,29 +261,25 @@ class Fx:
 
     def bounce(
         self,
-        duration: int = 1000,
-        start=None,
-        end=None,
+        end,
         easing: core.easingcurve.TypeStr = "in_out_sine",
+        duration: int = 1000,
         delay: int = 0,
     ):
-        from prettyqt import custom_animations
-
-        anim = custom_animations.BounceAnimation(parent=self._widget)
-        anim.set_easing(easing)
-        anim.set_start_value(start)
-        anim.set_end_value(start)
-        anim.setDuration(duration)
-        anim.apply_to(self._widget.windowOpacity)
-        self.run(anim, delay)
-        return anim
+        return self["pos"].transition_from(
+            end,
+            easing=easing,
+            duration=duration,
+            delay=delay,
+            reverse=True,
+        )
 
     def run(
         self, animation: core.QPropertyAnimation, delay: int = 0, single_shot: bool = True
     ):
         self._widget.start_callback_timer(animation.start, delay, single_shot=single_shot)
 
-    def highlight_widget(self, widget):
+    def highlight_widget(self, widget: widgets.QWidget):
         from prettyqt.custom_widgets.overlayborder import FocusWidget
 
         widget = FocusWidget(self, widget)
@@ -271,11 +292,14 @@ if __name__ == "__main__":
     radio = widgets.RadioButton("abc")
     action = toolbar.addWidget(radio)
     toolbar.show()
-    # radio.fx["pos"].transition_from((0, 100), relative=True)
-    toolbar.fx["size"].transition_from((1000, 1000), duration=2000, relative=True)
-    toolbar.fx["windowOpacity"].animate_on_event(
-        "hover_enter", start=0.0, end=1.0, duration=2000
+    # toolbar.fx["windowOpacity"].animate_on_event(
+    #     "hover_enter", start=0.0, end=1.0, duration=1000, delay=2000
+    # )
+    radio.fx["pos"].transition_from((0, 100), relative=True)
+    toolbar.fx["pos"].transition_from(
+        (0, -100), duration=2000, relative=True, reverse=True, single_shot=False
     )
+    toolbar.fx.fade_out(duration=5000)
 
     toolbar.show_tooltips(content="shortcut")
     app.main_loop()
