@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Sequence
 import collections
 import functools
-import pydantic
 import contextlib
 import logging
 from operator import and_
@@ -96,48 +95,3 @@ class BaseDataclassModel(core.AbstractTableModel):
             setattr(instance, field.name, val)
             return super().flags(parent) | constants.IS_EDITABLE
         return super().flags(parent)
-
-
-if __name__ == "__main__":
-    from prettyqt import widgets
-
-    class BaseSetting(pydantic.BaseModel):
-        name: str
-        label: str
-        description: str
-        requires_restart: bool = False
-        options: list[str] | None = None
-        minimum: float = 0.0
-        maximum: float = 0.0
-        pattern: str = ""
-        requires_restart: bool = False
-
-    class SelectionSetting(BaseSetting):
-        options: list[str] | None = None
-        minimum: float = 0.0
-        maximum: float = 0.0
-        pattern: str = ""
-        requires_restart: bool = False
-
-    app_style = BaseSetting(
-        name="app_style",
-        label="App style",
-        description="Some longer text",
-        options=[],
-        requires_restart=True,
-    )
-    app = widgets.app()
-    with app.debug_mode():
-        items = [
-            BaseSetting(name=f"test{i}", label="some label", description="jhaj")
-            for i in range(5)
-        ]
-        view = widgets.TableView()
-        view.set_icon("mdi.folder")
-        model = BaseDataclassModel(items, parent=view)
-        view.set_model(model)
-        view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-        view.set_delegate("variant")
-        view.resize(1000, 1000)
-        view.show()
-        app.main_loop()
