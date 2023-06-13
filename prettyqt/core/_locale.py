@@ -654,6 +654,8 @@ NUMBER_OPTION = bidict(
     reject_trailing_zeroes_after_dot=NO.RejectTrailingZeroesAfterDot,
 )
 
+OFFSET = ord("🇦") - ord("A")
+
 
 class Locale(QtCore.QLocale):
     def __repr__(self):
@@ -661,6 +663,11 @@ class Locale(QtCore.QLocale):
 
     def __reduce__(self):
         return type(self), (self.bcp47Name(),)
+
+    def get_flag_unicode(self):
+        name = self.name().split("_")[1]
+        name = [c for c in name.lower() if c.isalnum()]
+        return "".join([chr(ord(c.upper()) + OFFSET) for c in name])
 
     @classmethod
     def get_system_locale(cls) -> Self:
@@ -759,4 +766,12 @@ class Locale(QtCore.QLocale):
 
 
 if __name__ == "__main__":
-    locale = Locale.get_all_locales()
+    from prettyqt import gui, widgets
+
+    app = widgets.app()
+    locale = Locale.get_all_locales()[100].get_flag_unicode()
+    p = gui.Pixmap.create_char(locale, 64)
+    w = widgets.Label()
+    w.set_pixmap(p)
+    w.show()
+    app.main_loop()
