@@ -112,16 +112,24 @@ class Fx:
     def __init__(self, widget):
         self._widget = widget
         self._wrapper = None
+        # self._meta = core.MetaObject(self._widget.metaObject())
 
     def __getitem__(self, value: str):
         value = helpers.to_lower_camel(value)
         anim = core.PropertyAnimation()
         anim.apply_to(self._widget.__getattr__(value))
-        # meta = core.MetaObject(self._widget.metaObject())
         # pytype = meta.get_property(value).get_pyhon_type()
         # keep a reference
         self._wrapper = AnimationWrapper(anim, self)
         return self._wrapper
+
+    # def __getattr__(self, attr):
+    #     return self.__getitem__(attr)
+
+    # def __dir__(self):
+    #     props = self._meta.get_properties(only_writable=True)
+    #     prop_names = [p.get_name() for p in props]
+    #     return super().__dir__() + prop_names
 
     def set_colorize_effect(
         self,
@@ -265,6 +273,10 @@ if __name__ == "__main__":
     toolbar.show()
     # radio.fx["pos"].transition_from((0, 100), relative=True)
     toolbar.fx["size"].transition_from((1000, 1000), duration=2000, relative=True)
+    toolbar.fx["windowOpacity"].animate_on_event(
+        "hover_enter", start=0.0, end=1.0, duration=2000
+    )
+
     toolbar.show_tooltips(content="shortcut")
     app.main_loop()
     with app.debug_mode():
