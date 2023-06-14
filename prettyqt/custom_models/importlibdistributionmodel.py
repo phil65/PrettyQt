@@ -95,6 +95,75 @@ COLUMNS = [
 ]
 
 
+# class NameColumn(custom_models.ColumnItem):
+#     name="Name"
+#     doc="Package name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj.metadata["Name"]
+
+
+# class VersionColumn(custom_models.ColumnItem):
+#     name="Version"
+#     doc="Version number."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return x.obj.version
+
+
+# class ConstraintsColumn(custom_models.ColumnItem):
+#     name="Constraints"
+#     doc="Constraints."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return find_requires(item)
+
+
+# class SummaryColumn(custom_models.ColumnItem):
+#     name="Summary"
+#     doc="Module description."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj.metadata["Summary"]
+
+
+# class HomepageColumn(custom_models.ColumnItem):
+#     name="Homepage"
+#     doc="URL of the homepage."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj.metadata["Home-Page"]
+
+
+# class AuthorColumn(custom_models.ColumnItem):
+#     name="Author"
+#     doc="Author name."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj.metadata["Author"]
+
+# class LicenseColumn(custom_models.ColumnItem):
+#     name="License"
+#     doc="License name."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj.metadata["License"]
+
+
 class ImportlibTreeModel(custom_models.ColumnItemModel):
     def __init__(
         self,
