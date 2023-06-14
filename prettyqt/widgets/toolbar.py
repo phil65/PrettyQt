@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, get_repr
+from prettyqt.utils import InvalidParamError, datatypes, get_repr, listdelegators
 
 
 # from typing import Any
@@ -17,6 +17,25 @@ class ToolBarMixin(widgets.WidgetMixin):
         self._menu_buttons = []
         self._tooltip_labels = []
         self._tooltip_timer = core.Timer(timeout=self.hide_tooltips)
+
+    def __getitem__(
+        self, row: int | slice
+    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        match row:
+            case int():
+                action = self.actions()[row]
+                if action is None:
+                    raise KeyError(row)
+                return self.widgetForAction(action)
+            case slice():
+                actions = self.actions()
+                count = len(actions) if row.stop is None else row.stop
+                values = list(range(count)[row])
+                actions = [actions[i] for i in values]
+                ls = [self.widgetForAction(i) for i in actions]
+                return listdelegators.BaseListDelegator(ls)
+            case _:
+                raise TypeError(row)
 
     # def __setstate__(self, state: dict[str, Any]) -> None:
     #     super().__setstate__(state)
@@ -132,8 +151,9 @@ class ToolBarMixin(widgets.WidgetMixin):
     def get_allowed_areas(self) -> list[constants.ToolbarAreaStr]:
         return constants.TOOLBAR_AREA.get_list(self.allowedAreas())
 
-    def get_widgets(self) -> list[QtWidgets.QAction]:
-        return [self.widgetForAction(i) for i in self.actions()]
+    def get_widgets(self) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        widgets = [self.widgetForAction(i) for i in self.actions()]
+        return listdelegators.BaseListDelegator(widgets)
 
     def show_tooltips(
         self,
@@ -183,6 +203,7 @@ class ToolBar(ToolBarMixin, QtWidgets.QToolBar):
 if __name__ == "__main__":
     app = widgets.app()
     toolbar = ToolBar("test")
+    toolbar[0]
     toolbar.add_action(text="test", tool_tip="tesf dsfsdfdsfdsfsdfsdffst")
     toolbar.add_action(text="test2", tool_tip="test2")
     toolbar.add_action(text="test2", tool_tip="test2", shortcut="Ctrl+A")
