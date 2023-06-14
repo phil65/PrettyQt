@@ -44,7 +44,10 @@ class BaseClassTreeModel(custom_models.TreeModel):
                 return klass.__name__
             case constants.DISPLAY_ROLE, 1:
                 doc = inspect.getdoc(klass)
-                return inspect.cleandoc(doc)
+                try:
+                    return inspect.cleandoc(doc)
+                except AttributeError:
+                    pass
             case constants.DISPLAY_ROLE, 2:
                 return inspect.getmodule(klass)
             case constants.DISPLAY_ROLE, 3:
@@ -112,7 +115,7 @@ if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TreeView()
     view.setRootIsDecorated(True)
-    model = SubClassTreeModel(widgets.QWidget, show_root=True, parent=view)
+    model = SubClassTreeModel(widgets.WidgetMixin, show_root=True, parent=view)
     view.set_model(model)
     container = filtercontainer.FilterContainer(view)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
