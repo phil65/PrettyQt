@@ -214,16 +214,17 @@ class Fx:
     def slide(
         self,
         duration: int = 1000,
-        start_value=None,
-        end_value=None,
+        start=None,
+        end=None,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
     ) -> core.PropertyAnimation:
         anim = core.PropertyAnimation(parent=self._widget)
         anim.set_easing(easing)
+        # TODO: map to global
         pos = self._widget.geometry().topLeft()
-        start_offset = datatypes.to_point(start_value)
-        end_offset = datatypes.to_point(end_value)
+        start_offset = core.Point(0, 0) if start is None else datatypes.to_point(start)
+        end_offset = core.Point(0, 0) if end is None else datatypes.to_point(end)
         anim.set_start_value(pos + start_offset)
         anim.set_end_value(pos + end_offset)
         anim.setDuration(duration)
