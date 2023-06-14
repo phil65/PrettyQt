@@ -8,13 +8,24 @@ from prettyqt.utils import datatypes, listdelegators
 
 
 class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
-    def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
-        if isinstance(index, int):
-            return self.widget(index)
-        result = self.find_child(QtWidgets.QWidget, index)
-        if result is None:
-            raise KeyError("Widget not found")
-        return result
+    def __getitem__(
+        self, index: int | str
+    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        match index:
+            case int():
+                return self.widget(index)
+            case str():
+                result = self.find_child(QtWidgets.QWidget, index)
+                if result is None:
+                    raise KeyError("Widget not found")
+                return result
+            case slice():
+                stop = index.stop or self.count()
+                rng = range(index.start or 0, stop, index.step or 1)
+                widgets = [self.widget(i) for i in rng]
+                return listdelegators.BaseListDelegator(widgets)
+            case _:
+                raise TypeError(index)
 
     def __delitem__(self, index: int):
         self.removeItem(index)
