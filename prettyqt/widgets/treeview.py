@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prettyqt import constants, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from collections.abc import Iterable
+from prettyqt import constants, core, widgets
 
 
 class TreeViewMixin(widgets.AbstractItemViewMixin):
@@ -42,9 +42,20 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
         self.setHeader(header)
 
     def show_root(self, value: bool):
-        self.setRootIndex(QtCore.QModelIndex())
+        self.setRootIndex(core.QModelIndex())
         if not value:
             self.setRootIndex(self.model().index(0, 0))
+
+    def set_expanded(
+        self, index: core.ModelIndex | Iterable[core.ModelIndex], expanded: bool = True
+    ):
+        """Set expaned state of an index or an Iterable of indexes."""
+        match index:
+            case Iterable():
+                for idx in index:
+                    self.setExpanded(idx, expanded)
+            case _:
+                self.setExpanded(index, expanded)
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
         """Hack to avoid direct sort when setting sorting enabled."""
@@ -76,7 +87,7 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
         self.sortByColumn(column, order)
 
 
-class TreeView(TreeViewMixin, QtWidgets.QTreeView):
+class TreeView(TreeViewMixin, widgets.QTreeView):
     pass
 
 
