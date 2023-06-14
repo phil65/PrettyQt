@@ -168,10 +168,10 @@ class ObjectMixin:
         # return dct
 
     @contextlib.contextmanager
-    def block_signals(self):
+    def signals_blocked(self):
         """Context manager to temporarily block emitting signals."""
         blocked = self.blockSignals(True)
-        yield None
+        yield self
         self.blockSignals(blocked)
 
     def to_json(self):

@@ -97,7 +97,7 @@ class RegexEditorWidget(widgets.Widget):
     def _update_view(self) -> None:
         self.prog = None
         self.matches = []
-        with self.textedit_teststring.block_signals():
+        with self.textedit_teststring.signals_blocked():
             if not self.pattern:
                 self._highlighter.set_spans(None)
                 self.table_matches.set_model(None)

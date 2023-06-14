@@ -19,7 +19,7 @@ class SingleLineTextEdit(widgets.PlainTextEdit):
         with self.selecter.current_cursor() as c:
             pos = c.position()
             num_linebreaks = text.count("\n")
-            with self.block_signals():
+            with self.signals_blocked():
                 self.set_text(text.replace("\n", ""))
             c.setPosition(pos - num_linebreaks)
 

@@ -1579,7 +1579,7 @@ def test_widget(qtbot):
     widget.set_layout(layout)
     with pytest.raises(ValueError):
         widget.set_layout("test")
-    with widget.block_signals():
+    with widget.signals_blocked():
         pass
     with widget.edit_font():
         pass

@@ -52,7 +52,7 @@ class SelectionWidget(widgets.GroupBox):
         rb.toggled.connect(self.update_choice)
         self.buttons[rb] = data
         if len(self.buttons) == 1:
-            with rb.block_signals():
+            with rb.signals_blocked():
                 rb.set_value(True)
         self.box.add(rb)
 
