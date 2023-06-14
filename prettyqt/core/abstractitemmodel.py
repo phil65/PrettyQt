@@ -217,8 +217,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_role_names(self) -> dict[int, str]:
         return {i: v.data().decode() for i, v in self.roleNames().items()}
 
-    def prefetch_tree(self, root_index: core.ModelIndex | None):
-        for idx in self.iter_tree(root_index):
+    def prefetch_tree(self, root_index: core.ModelIndex | None, depth: int | None = None):
+        for idx in self.iter_tree(root_index, depth):
             if self.canFetchMore(idx):
                 self.fetchMore(idx)
 
@@ -232,10 +232,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
             root_index = self.index(0, 0)
         if root_index.isValid():
             yield root_index
-        if depth is not None:
-            depth -= 1
-            if depth < 0:
-                return
+        if depth is not None and (depth := depth - 1) < 0:
+            return
         for i in range(self.rowCount(root_index)):
             idx = self.index(i, 0, root_index)
             yield from self.iter_tree(idx, depth)
@@ -248,7 +246,15 @@ class AbstractItemModelMixin(core.ObjectMixin):
         max_results=None,
         depth: int | None = None,
     ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
-        """Search the tree for indexes with a given value in given role."""
+        """Search the tree for indexes with a given value in given role.
+
+        Arguments:
+            value: Item or list of items to search for.
+            role: Index role to search in.
+            root_index: start index for searching. If None, whole tree is searched.
+            max_results: stop searching after x amount of hits. 'None' means no limit.
+            depth: search depth. Search depth. 'None' means no limit.
+        """
         results = []
         # This makes it impossible to search for lists. I think thats fine.
         if not isinstance(value, list):
