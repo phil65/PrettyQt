@@ -43,7 +43,7 @@ class SplitterMixin(widgets.FrameMixin):
         self.replaceWidget(index, value)
 
     def __iter__(self) -> Iterator[QtWidgets.QWidget]:
-        return iter(self.get_children())
+        return iter(self.get_widgets())
 
     def __len__(self) -> int:
         return self.count()
@@ -74,8 +74,9 @@ class SplitterMixin(widgets.FrameMixin):
     #     for i in range(len(sizes)):
     #         self.setStretchFactor(i, sizes[i])
 
-    def get_children(self) -> list[QtWidgets.QWidget]:
-        return [self.widget(i) for i in range(self.count())]
+    def get_widgets(self) -> listdelegators.SplitterDelegator[QtWidgets.QWidget]:
+        widgets = [self.widget(i) for i in range(self.count())]
+        return listdelegators.SplitterDelegator(widgets, parent=self)
 
     def add_widget(
         self,

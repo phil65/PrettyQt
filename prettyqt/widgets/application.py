@@ -13,7 +13,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import InvalidParamError, datatypes, listdelegators
 
 
 logger = logging.getLogger(__name__)
@@ -121,7 +121,9 @@ class ApplicationMixin(gui.GuiApplicationMixin):
                 return widget
 
     @classmethod
-    def widgets_at(cls, pos: datatypes.PointType) -> list[QtWidgets.QWidget]:
+    def widgets_at(
+        cls, pos: datatypes.PointType
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
         """Return ALL widgets at `pos`.
 
         Arguments:

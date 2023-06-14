@@ -4,6 +4,7 @@ from typing import overload
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
+from prettyqt.utils import listdelegators
 
 
 class AbstractTableModelMixin(core.AbstractItemModelMixin):
@@ -21,27 +22,30 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
     @overload
     def __getitem__(
         self, index: tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
-    ) -> list[QtCore.QModelIndex]:
+    ) -> listdelegators.BaseListDelegator[QtCore.QModelIndex]:
         ...
 
     def __getitem__(
         self, index: tuple[int | slice, int | slice]
-    ) -> QtCore.QModelIndex | list[QtCore.QModelIndex]:
+    ) -> QtCore.QModelIndex | listdelegators.BaseListDelegator[QtCore.QModelIndex]:
         match index:
             case slice() as row, slice() as col:
                 rowcount = self.rowCount() if row.stop is None else row.stop
                 colcount = self.columnCount() if col.stop is None else col.stop
                 rowvalues = list(range(rowcount)[row])
                 colvalues = list(range(colcount)[col])
-                return [self.index(i, j) for i in rowvalues for j in colvalues]
+                ls = [self.index(i, j) for i in rowvalues for j in colvalues]
+                return listdelegators.BaseListDelegator(ls)
             case slice() as row, int() as col:
                 count = self.rowCount() if row.stop is None else row.stop
                 values = list(range(count)[row])
-                return [self.index(i, col) for i in values]
+                ls = [self.index(i, col) for i in values]
+                return listdelegators.BaseListDelegator(ls)
             case int() as row, slice() as col:
                 count = self.columnCount() if col.stop is None else col.stop
                 values = list(range(count)[col])
-                return [self.index(row, i) for i in values]
+                ls = [self.index(row, i) for i in values]
+                return listdelegators.BaseListDelegator(ls)
             case int() as row, int() as col:
                 return self.index(row, col)
             case _:

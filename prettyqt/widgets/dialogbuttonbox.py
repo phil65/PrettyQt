@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, listdelegators
 
 
 STANDARD_BUTTON = bidict(
@@ -145,7 +145,7 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
 
     def add_default_buttons(
         self, buttons: Sequence[StandardButtonStr]
-    ) -> list[QtWidgets.QPushButton]:
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QPushButton]:
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(

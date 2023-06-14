@@ -23,11 +23,13 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         return get_repr(self, self.get_icon(), self.text())
 
     def __getitem__(
-        self, index: int | tuple[int, int] | QtCore.QModelIndex
+        self, index: int | slice | tuple[int | slice, int | slice] | QtCore.QModelIndex
     ) -> QtGui.QStandardItem | listdelegators.BaseListDelegator[QtGui.QStandardItem]:
         match index:
             case int():
                 return self.child(index)
+            case slice():
+                return self.__getitem__(index, 0)
             case slice() as row, slice() as col:
                 rowcount = self.rowCount() if row.stop is None else row.stop
                 colcount = self.columnCount() if col.stop is None else col.stop

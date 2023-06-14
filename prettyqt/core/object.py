@@ -12,7 +12,7 @@ import types
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import datatypes, helpers
+from prettyqt.utils import datatypes, listdelegators, helpers
 
 
 if TYPE_CHECKING:
@@ -216,7 +216,7 @@ class ObjectMixin:
         name: str | QtCore.QRegularExpression | None = None,
         recursive: bool = True,
         property_selector: dict[str, datatypes.VariantType | Callable] | None = None,
-    ) -> list[T]:
+    ) -> listdelegators.BaseListDelegator[T]:
         """Find children with given type and name.
 
         Children can be filtered by passing a property selector dictionary.
@@ -256,7 +256,7 @@ class ObjectMixin:
                 if (callable(v) and v(o.property(k)))
                 or (not callable(v) and o.property(k) == v)
             ]
-        return objects
+        return listdelegators.BaseListDelegator(objects)
 
     def find_child(
         self,

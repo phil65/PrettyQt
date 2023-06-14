@@ -2,19 +2,19 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
-from typing_extensions import Self
-
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.utils import InvalidParamError, datatypes, listdelegators
 
 
 class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
     def __getitem__(
-        self, index: int | tuple[int, int] | core.QModelIndex
+        self, index: int | slice | tuple[int | slice, int | slice] | core.QModelIndex
     ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
         match index:
             case int():
                 return self.item(index)
+            case slice():
+                return self.__getitem__(index, 0)
             case slice() as row, slice() as col:
                 rowcount = self.rowCount() if row.stop is None else row.stop
                 colcount = self.columnCount() if col.stop is None else col.stop
@@ -63,19 +63,16 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         return type(self), (), self.__getstate__()
 
     def __add__(self, other: str | gui.QStandardItem) -> StandardItemModel:
-        if isinstance(other, gui.QStandardItem | str):
-            self.add(other)
-            return self
-        raise TypeError("wrong type for addition")
+        match other:
+            case gui.QStandardItem() | str():
+                self.add(other)
+                return self
+            case _:
+                raise TypeError("wrong type for addition")
 
-    @classmethod
-    def create_single_item_model(cls, *args, **kwargs) -> Self:
-        mdl = cls(1, 1)
-        mdl.add_item(*args, **kwargs)
-        return mdl
-
-    def get_children(self) -> list[gui.QStandardItem]:
-        return [self.item(index) for index in range(self.rowCount())]
+    def get_children(self) -> listdelegators.BaseListDelegator[gui.QStandardItem]:
+        items = [self.item(index) for index in range(self.rowCount())]
+        return listdelegators.BaseListDelegator(items)
 
     def add(self, *item: str | gui.QStandardItem):
         for i in item:
@@ -89,7 +86,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         mode: constants.MatchFlagStr = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> list[gui.QStandardItem]:
+    ) -> listdelegators.BaseListDelegator[gui.QStandardItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
         flag = constants.MATCH_FLAGS[mode]
@@ -97,7 +94,8 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= constants.MatchFlag.MatchCaseSensitive
-        return self.findItems(text, flag, column)  # type: ignore
+        items = self.findItems(text, flag, column)  # type: ignore
+        return listdelegators.BaseListDelegator(items)
 
     def add_item(
         self,

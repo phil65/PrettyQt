@@ -8,7 +8,7 @@ from typing import Any, Literal, overload
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers
+from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers, listdelegators
 
 DelegateStr = Literal[
     "widget",
@@ -224,7 +224,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                 model = model.sourceModel()
         return model
 
-    def get_models(self, proxies_only: bool = False) -> list[QtCore.QAbstractProxyModel]:
+    def get_models(
+        self, proxies_only: bool = False
+    ) -> listdelegators.BaseListDelegator[QtCore.QAbstractProxyModel]:
         """Get a list of all (proxy) models connected to this view."""
         model = self.model()
         models = []
@@ -233,7 +235,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             model = model.sourceModel()
         if (not proxies_only) and model is not None:
             models.append(model)
-        return models
+        return listdelegators.BaseListDelegator(models)
 
     def set_current_index(
         self,
@@ -412,10 +414,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         if (model := self.selectionModel()) is not None:
             return model.currentIndex().column()
 
-    def selected_indexes(self) -> list[QtCore.QModelIndex]:
+    def selected_indexes(self) -> listdelegators.BaseListDelegator[QtCore.QModelIndex]:
         """Return list of selected indexes in first row."""
         indexes = (x for x in self.selectedIndexes() if x.column() == 0)
-        return sorted(indexes, key=lambda x: x.row())
+        indexes = sorted(indexes, key=lambda x: x.row())
+        return listdelegators.BaseListDelegator(indexes)
 
     def selected_names(self) -> Generator[Any, None, None]:
         """Return generator yielding item names."""

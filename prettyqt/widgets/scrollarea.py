@@ -4,6 +4,7 @@ from typing import TypeVar
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import listdelegators
 
 T = TypeVar("T", bound=QtWidgets.QWidget)
 
@@ -24,7 +25,7 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
         partial_allowed: bool = True,
         margin: int = 10,
         recursive: bool = True,
-    ) -> list[T]:
+    ) -> listdelegators.BaseListDelegator[T]:
         """Return all widgets which are visible in the viewport.
 
         Results can be filtered by type and whether widget is fully or partially visible.
@@ -43,9 +44,9 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
                 found.append(w)
             elif not partial_allowed and rect.contains(mapped):
                 found.append(w)
-        return found
+        return listdelegators.BaseListDelegator(found)
 
-    def get_children(self) -> list[QtWidgets.QWidget]:
+    def get_children(self) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
         return self.widget().layout().get_children()
 
     def set_widget(self, widget: QtWidgets.QWidget):
