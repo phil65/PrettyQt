@@ -20,7 +20,7 @@ def find_root_index(index: core.ModelIndex) -> core.ModelIndex:
     return index
 
 
-def get_parent_indexes(index: core.ModelIndex) -> list:
+def get_parent_indexes(index: core.ModelIndex) -> list[core.ModelIndex]:
     indexes = []
     while index.isValid():
         indexes.insert(0, index)
