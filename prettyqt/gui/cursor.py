@@ -98,7 +98,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
         """Position cursor onto screen position / widget / window / screen.
 
         Arguments:
-            where: where to positin on
+            where: where to position on
             how: How to align
             x_offset: additional x offset for final position
             y_offset: additional y offset for final position
