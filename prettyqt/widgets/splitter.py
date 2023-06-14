@@ -6,7 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import listdelegators, InvalidParamError
 
 
 class SplitterMixin(widgets.FrameMixin):
@@ -22,13 +22,20 @@ class SplitterMixin(widgets.FrameMixin):
         super().__init__(ori, **kwargs)
         self.setHandleWidth(10)
 
-    def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
-        if isinstance(index, int):
-            return self.widget(index)
-        result = self.find_child(QtWidgets.QWidget, index)
-        if result is None:
-            raise KeyError("Widget not found")
-        return result
+    def __getitem__(self, index: int | str | slice) -> QtWidgets.QWidget:
+        match index:
+            case int():
+                return self.widget(index)
+            case str():
+                result = self.find_child(QtWidgets.QWidget, index)
+                if result is None:
+                    raise KeyError("Widget not found")
+                return result
+            case slice():
+                stop = index.stop or self.count()
+                rng = range(index.start or 0, stop, index.step or 1)
+                widgets = [self.widget(i) for i in rng]
+                return listdelegators.SplitterDelegator(widgets, parent=self)
 
     def __setitem__(self, index: int, value: QtWidgets.QWidget):
         self.replaceWidget(index, value)
