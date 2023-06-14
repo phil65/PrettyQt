@@ -3,6 +3,110 @@ from __future__ import annotations
 from prettyqt import custom_models, gui
 
 
+# class NameColumn(custom_models.ColumnItem):
+#     name="Name"
+#     doc="Action name"
+#     editable = True
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.text()
+
+#     def set_data(self, item, role, value):
+#         match role:
+#             case constants.USER_ROLE:
+#                 item.setText(value)
+#                 return True
+
+
+# class ToolTipColumn(custom_models.ColumnItem):
+#     name="ToolTip"
+#     doc="ToolTip"
+#     editable = True
+
+# def get_data(self, item, role):
+#     match role:
+#         case constants.DISPLAY_ROLE:
+#             return item.toolTip()
+
+#     def set_data(self, item, role, value):
+#         match role:
+#             case constants.USER_ROLE:
+#                 item.setToolTip(value)
+#                 return True
+
+
+# class ShortcutColumn(custom_models.ColumnItem):
+#     name = "Shortcut"
+#     editable = True
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.shortcut().toString()
+#             case constants.USER_ROLE:
+#                 return item.shortcut()
+
+#     def set_data(self, item, role, value):
+#         match role:
+#             case constants.USER_ROLE:
+#                 item.setShortcut(value)
+#                 return True
+
+
+# class PriorityColumn(custom_models.ColumnItem):
+#     name = "Priority"
+#     editable = True
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return gui.action.PRIORITIES.inverse[item.priority()]
+#             case constants.USER_ROLE:
+#                 return item.priority()
+
+#     def set_data(self, item, role, value):
+#         match role:
+#             case constants.USER_ROLE:
+#                 item.setPriority(value)
+#                 return True
+
+
+# class CheckStateColumn(custom_models.ColumnItem):
+#     name="CheckState"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.CHECKSTATE_ROLE:
+#                 return item.isChecked()
+
+#     def set_data(self, item, role, value):
+#         match role:
+#             case constants.CHECKSTATE_ROLE:
+#                 item.setChecked(value)
+#                 return True
+
+
+# class UsageCountColumn(custom_models.ColumnItem):
+#     name = "Usage count"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE if hasattr(item, "usage_count"):
+#                 return item.usage_count
+
+
+# COLUMNS = [
+#     NameColumn(),
+#     ToolTipColumn(),
+#     ShortcutColumn(),
+#     PriorityColumn(),
+#     CheckStateColumn(),
+#     UsageCountColumn(),
+# ]
+
+
 COL_NAME = custom_models.ColumnItem(
     name="Name",
     doc="Action name",
