@@ -12,11 +12,16 @@ class BaseListDelegator(list):
 
     def __getattr__(self, method_name: str):
         method_name = helpers.to_lower_camel(method_name)
+        if method_name == "fx":
+            return BaseListDelegator(
+                [instance.fx for instance in self], parent=self._parent
+            )
 
         def delegator(*args, **kwargs):
             results = []
             for instance in self:
                 result = getattr(instance, method_name)(*args, **kwargs)
+                print(type(result))
                 results.append(result)
             return results
 
@@ -54,10 +59,13 @@ if __name__ == "__main__":
     app = widgets.app()
     w1 = widgets.RadioButton("test")
     w2 = widgets.RadioButton("test")
+    w3 = widgets.RadioButton("test")
+    w4 = widgets.RadioButton("test")
     container = widgets.Splitter()
     container.add(w1)
     container.add(w2)
-    delegator = SplitterDelegator([w1, w2], parent=container)
+    container.add(w3)
+    container.add(w4)
+    container[2:].fx.zoom(end=1.3)
     container.show()
-    print(delegator.getRange())
     app.main_loop()
