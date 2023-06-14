@@ -94,6 +94,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         widget_class: type = widgets.QWidget,
         **kwargs,
     ) -> None:
+        # TODO: not sure if parent should always equal scrollarea..."""
         self._WidgetClass = widget_class
         self._scroll_mode = "single"
         self._expand_mode = "always"
@@ -119,6 +120,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.set_widget(scrollarea)
 
     def set_widget(self, widget: widgets.QScrollArea):
+        """Set the ScrollArea widget to follow."""
         if widget.widget() is None:
             raise RuntimeError("No widget set on ScrollArea.")
         self.scrollarea = widget
@@ -168,22 +170,23 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
                 self.collapseAll()
             match self._scroll_mode:
                 case "multi":
-                    if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
-                        for index in indexes:
-                            children = model.get_child_indexes(index)
-                            # only select if all children selected.
-                            # if all(c in indexes for c in children):
+                    indexes = model.search_tree(visible_widgets, constants.USER_ROLE)
+                    for index in indexes:
+                        children = model.get_child_indexes(index)
+                        # only select if all children selected.
+                        # if all(c in indexes for c in children):
 
-                            # highlight when no children or when first child is visible.
-                            if not children or children[0] in indexes:
-                                self.select_index(index, clear=False)
-                            self.scroll_to(indexes[0])
-                            self.scroll_to(indexes[-1])
-                            for idx in indexes:
-                                self.setExpanded(idx, True)
+                        # highlight when no children or when first child is visible.
+                        if not children or children[0] in indexes:
+                            self.select_index(index, clear=False)
+                        self.set_expanded(indexes)
+                        self.scroll_to(indexes[0])
+                        self.scroll_to(indexes[-1])
                 case "headers_only":
                     if indexes := model.search_tree(
-                        visible_widgets, role=constants.USER_ROLE, max_results=1
+                        visible_widgets,
+                        role=constants.USER_ROLE,
+                        max_results=1,
                     ):
                         self.set_current_index(indexes[0])
                         self.scroll_to(indexes[0])
@@ -241,7 +244,7 @@ if __name__ == "__main__":
         scrollarea.setWidget(widget)
         toc_widget = ScrollAreaTableOfContentsWidget(
             scrollarea,
-            scroll_mode="single",
+            scroll_mode="headers_only",
             widget_class=SectionWidget,
         )
         layout.add(toc_widget)
