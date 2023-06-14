@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import overload
+from typing import overload, TYPE_CHECKING
 
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import listdelegators
+
+if TYPE_CHECKING:
+    from prettyqt import widgets
 
 
 class AnimationGroupMixin(core.AbstractAnimationMixin):
@@ -53,6 +56,17 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
     def __add__(self, other: QtCore.QAbstractAnimation):
         self.addAnimation(other)
         return self
+
+    def targetObject(self) -> widgets.QWidget:
+        """Return shared targetObject if existing."""
+        targets = [
+            anim.targetObject()
+            for i in range(self.animationCount())
+            if isinstance((anim := self.animationAt(i)), core.QPropertyAnimation)
+        ]
+        if len(targets) != self.animationCount() or len(set(targets)) != 1:
+            raise RuntimeError("Could not find shared targetObject for all animations.")
+        return targets[0]
 
     def add_property_animation(self, obj: Callable) -> core.PropertyAnimation:
         anim = core.PropertyAnimation()
