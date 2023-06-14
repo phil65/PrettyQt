@@ -11,16 +11,22 @@ class BaseListDelegator(list):
         super().__init__(*args)
 
     def __getitem__(self, index):
-        # for fx["prop"]. Might be worth it to have a separate delegator for props.
-        if isinstance(index, str):
-            return BaseListDelegator(
-                [instance.__getitem__(index) for instance in self], parent=self._parent
-            )
-        else:
-            return super().__getitem__(index)
+        match index:
+            # for fx["prop"]. Might be worth it to have a separate delegator for props.
+            case str():
+                return BaseListDelegator(
+                    [instance.__getitem__(index) for instance in self],
+                    parent=self._parent,
+                )
+            case slice():
+                return type(self)(super().__getitem__(index), parent=self._parent)
+            case _:
+                return super().__getitem__(index)
 
     def __getattr__(self, method_name: str):
         # method_name = helpers.to_lower_camel(method_name)
+
+        # TODO: should implement a general way to deal with properties.
         if method_name == "fx":
             return BaseListDelegator(
                 [instance.fx for instance in self], parent=self._parent
@@ -30,7 +36,6 @@ class BaseListDelegator(list):
             results = []
             for instance in self:
                 result = getattr(instance, method_name)(*args, **kwargs)
-                print(type(result))
                 results.append(result)
             return results
 
@@ -66,16 +71,18 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    w1 = widgets.RadioButton("test")
-    w2 = widgets.RadioButton("test")
-    w3 = widgets.RadioButton("test")
-    w4 = widgets.RadioButton("test")
-    container = widgets.Splitter()
-    container.add(w1)
-    container.add(w2)
-    container.add(w3)
-    container.add(w4)
-    # container[2].fx["pos"].transition_from((0, -100), duration=2000)
-    container[:].fx.slide(duration=2000, end=(-100, 0))
-    container.show()
-    app.main_loop()
+    with app.debug_mode():
+        w1 = widgets.RadioButton("test")
+        w2 = widgets.RadioButton("test")
+        w3 = widgets.RadioButton("test")
+        w4 = widgets.RadioButton("test")
+        widget = widgets.Widget()
+        container = widget.set_layout("horizontal")
+        container.add(w1)
+        container.add(w2)
+        container.add(w3)
+        container.add(w4)
+        # container[2].fx["pos"].transition_from((0, -100), duration=2000)
+        widget.show()
+        container[::2].fx.slide(end=(0, 100), duration=3000, reverse=True)
+        app.main_loop()
