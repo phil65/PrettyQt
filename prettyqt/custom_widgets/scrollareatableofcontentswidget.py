@@ -142,11 +142,10 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         is_vertical = self._orientation == constants.VERTICAL
         area = self.scrollarea
         scrollbar = area.v_scrollbar if is_vertical else area.h_scrollbar
-        scrollbar.valueChanged.disconnect(self._on_scroll)
-        widget = self.model().data(new, role=constants.USER_ROLE)
-        area.scroll_to_bottom()
-        area.ensureWidgetVisible(widget, 10, 10)
-        scrollbar.valueChanged.connect(self._on_scroll)
+        with self.signal_blocked(scrollbar.valueChanged, self._on_scroll):
+            widget = self.model().data(new, role=constants.USER_ROLE)
+            area.scroll_to_bottom()
+            area.ensureWidgetVisible(widget, 10, 10)
 
     def _on_selection_change(self, new, old):
         if self.model() is None:
@@ -162,53 +161,50 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         if not visible_widgets or visible_widgets == self._last_visible:
             return
         self._last_visible = visible_widgets
-        self.selectionModel().currentChanged.disconnect(self._on_current_change)
-        self.select_index(None)
-        if self._expand_mode != "always":
-            self.collapseAll()
-        match self._scroll_mode:
-            case "multi":
-                if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
-                    for index in indexes:
-                        children = [
-                            model.index(i, 0, index) for i in range(model.rowCount(index))
-                        ]
-                        # only select if all children selected.
-                        # if all(c in indexes for c in children):
+        sig = self.selectionModel().currentChanged
+        with self.signal_blocked(sig, self._on_current_change):
+            self.select_index(None)
+            if self._expand_mode != "always":
+                self.collapseAll()
+            match self._scroll_mode:
+                case "multi":
+                    if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
+                        for index in indexes:
+                            children = model.get_child_indexes(index)
+                            # only select if all children selected.
+                            # if all(c in indexes for c in children):
 
-                        # highlight when no children or when first child is visible.
-                        if not children or children[0] in indexes:
-                            self.select_index(index, clear=False)
+                            # highlight when no children or when first child is visible.
+                            if not children or children[0] in indexes:
+                                self.select_index(index, clear=False)
+                            self.scroll_to(indexes[0])
+                            self.scroll_to(indexes[-1])
+                            for idx in indexes:
+                                self.setExpanded(idx, True)
+                case "headers_only":
+                    if indexes := model.search_tree(
+                        visible_widgets, role=constants.USER_ROLE, max_results=1
+                    ):
+                        self.set_current_index(indexes[0])
                         self.scroll_to(indexes[0])
-                        self.scroll_to(indexes[-1])
-                        for idx in indexes:
-                            self.setExpanded(idx, True)
-            case "headers_only":
-                if indexes := model.search_tree(
-                    visible_widgets, constants.USER_ROLE, max_results=1
-                ):
-                    self.set_current_index(indexes[0])
-                    self.scroll_to(indexes[0])
-            case "single":
-                if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
-                    viewport = self.scrollarea.viewport()
-                    # sort indexes by closest distance to top
-                    indexes = sorted(
-                        indexes,
-                        key=lambda x: abs(
-                            x.data(constants.USER_ROLE)
-                            .map_to(viewport, x.data(constants.USER_ROLE).rect())
-                            .top()
-                        ),
-                    )
-                    self.collapseAll()
-                    self.model().fetchMore(indexes[0])
-                    self.set_current_index(indexes[0])
-                    self.scroll_to(indexes[0])
-            case _:
-                raise ValueError(self._scroll_mode)
+                case "single":
+                    if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
+                        viewport = self.scrollarea.viewport()
+                        # sort indexes by closest distance to top
+                        indexes.sort(
+                            key=lambda x: abs(
+                                x.data(constants.USER_ROLE)
+                                .map_to(viewport, x.data(constants.USER_ROLE).rect())
+                                .top()
+                            ),
+                        )
+                        self.collapseAll()
+                        self.model().fetchMore(indexes[0])
+                        self.set_current_index(indexes[0])
+                        self.scroll_to(indexes[0])
+                case _:
+                    raise ValueError(self._scroll_mode)
         # model.set_highlighted_indexes(indexes)
-        self.selectionModel().currentChanged.connect(self._on_current_change)
 
     def wheelEvent(self, e):
         self.scrollarea.wheelEvent(e)
@@ -256,7 +252,6 @@ if __name__ == "__main__":
             section.box.add(SectionWidget(window_title=f"{i}nested"))
             section.box.add(SectionWidget(window_title=f"{i*10}nested"))
             scroll_layout.add(section)
-        scrollarea.ensureWidgetVisible(widget)
         scrollarea.setWidgetResizable(True)
         window.show()
         app.main_loop()
