@@ -278,3 +278,24 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
 class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
     pass
+
+    # @abc.abstractmethod
+    # def index(self, *args, **kwargs):
+    #     return NotImplemented
+
+    # # this one is only abstract for a specific signature.
+    # # @abc.abstractmethod
+    # # def parent(self, *args, **kwargs):
+    # #     return NotImplemented
+
+    # @abc.abstractmethod
+    # def rowCount(self, *args, **kwargs):
+    #     return NotImplemented
+
+    # @abc.abstractmethod
+    # def columnCount(self, *args, **kwargs):
+    #     return NotImplemented
+
+    # @abc.abstractmethod
+    # def data(self, *args, **kwargs):
+    #     return NotImp

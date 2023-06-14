@@ -15,6 +15,10 @@ DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
 USER_ROLE = Qt.ItemDataRole.UserRole
 SORT_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 100)
 NAME_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 101)
+# Role for data related to the row
+ROW_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 102)
+# Role for data related to the column
+COLUMN_ROLE = Qt.ItemDataRole(Qt.ItemDataRole.UserRole + 103)
 EDIT_ROLE = Qt.ItemDataRole.EditRole
 BACKGROUND_ROLE = Qt.ItemDataRole.BackgroundRole
 FOREGROUND_ROLE = Qt.ItemDataRole.ForegroundRole

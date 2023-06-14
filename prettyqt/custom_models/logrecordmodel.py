@@ -10,6 +10,142 @@ from prettyqt.utils import signallogger
 logger = logging.getLogger(__name__)
 
 
+# class LevelNameColumn(custom_models.ColumnItem):
+#     name = "Level"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.levelname
+
+
+# class FileNameColumn(custom_models.ColumnItem):
+#     name = "File name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.filename
+
+
+# class FunctionNameColumn(custom_models.ColumnItem):
+#     name = "Function name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.funcName
+
+
+# class FunctionNameColumn(custom_models.ColumnItem):
+#     name = "Function name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.funcName
+
+
+# class ModuleColumn(custom_models.ColumnItem):
+#     name = "Module"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.module
+
+
+# class CreatedColumn(custom_models.ColumnItem):
+#     name = "Created"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return str(core.DateTime.from_seconds(item.created))
+#             case constants.USER_ROLE:
+#                 return core.DateTime.from_seconds(item.created)
+
+
+# class ProcessColumn(custom_models.ColumnItem):
+#     name = "Process"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return str(item.process)
+#             case constants.USER_ROLE:
+#                 return item.process
+
+
+# class ThreadColumn(custom_models.ColumnItem):
+#     name = "Thread"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return str(x.thread)
+#             case constants.USER_ROLE:
+#                 return x.thread
+
+
+# class ProcessNameColumn(custom_models.ColumnItem):
+#     name = "Process name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.processName or ""
+
+
+# class ThreadNameColumn(custom_models.ColumnItem):
+#     name = "Thread name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.threadName or ""
+
+
+# class RelativeCreatedColumn(custom_models.ColumnItem):
+#     name = "Relative created"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return str(item.relativeCreated)
+
+
+# class NameColumn(custom_models.ColumnItem):
+#     name = "Name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.name
+
+
+# class PathNameColumn(custom_models.ColumnItem):
+#     name = "Path name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return x.pathname
+
+
+# class MessageColumn(custom_models.ColumnItem):
+#     name = "Message"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return (
+#                     traceback.format_exc()
+#                     if isinstance(item.msg, Exception)
+#                     else item.msg % item.args
+#                 )
+
+
 COL_LEVEL_NAME = custom_models.ColumnItem(
     name="Level.",
     doc="Level.",

@@ -17,6 +17,37 @@ def format_num(num: int) -> str:
     return format(num, ",")
 
 
+# class RowsColumn(custom_models.ColumnItem):
+#     name = "Rows"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return format_num(len(item.index))
+#             case constants.SORT_ROLE:
+#                 return len(item.index)
+
+
+# class ColumnsColumn(custom_models.ColumnItem):
+#     name = "Columns"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return format_num(len(item.columns))
+#             case constants.SORT_ROLE:
+#                 return len(item.columns)
+
+
+# class IndexDescriptionColumn(custom_models.ColumnItem):
+#     name = "Index"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return index_description(item.index)
+
+
 COL_ROWS = custom_models.ColumnItem(
     name="Rows",
     doc="Rows",

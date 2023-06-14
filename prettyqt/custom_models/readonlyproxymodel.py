@@ -6,12 +6,17 @@ from prettyqt import constants, core
 class ReadOnlyProxyModel(core.IdentityProxyModel):
     ID = "read_only"
 
+    def __init__(self, *args, columns: list[str] | None = None, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._columns = columns
+
     def setData(self, index, value, role=constants.EDIT_ROLE):
         pass
 
     def flags(self, index):
         flags = super().flags(index)
-        flags &= ~constants.IS_EDITABLE
+        if self._columns is None or index.column() in self._columns:
+            flags &= ~constants.IS_EDITABLE
         return flags
 
 
