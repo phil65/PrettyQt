@@ -5,7 +5,7 @@ from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import InvalidParamError, datatypes, listdelegators
 
 
 class NoData:
@@ -22,11 +22,25 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     def __repr__(self):
         return f"{type(self).__name__}: {self.count()} items"
 
-    def __getitem__(self, row: int) -> QtWidgets.QListWidgetItem:
-        item = self.item(row)
-        if item is None:
-            raise KeyError(row)
-        return item
+    def __getitem__(
+        self, row: int | slice
+    ) -> (
+        QtWidgets.QListWidgetItem
+        | listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]
+    ):
+        match row:
+            case int():
+                item = self.item(row)
+                if item is None:
+                    raise KeyError(row)
+                return item
+            case slice():
+                count = self.itemCount() if row.stop is None else row.stop
+                values = list(range(count)[row])
+                ls = [self.item(i) for i in values]
+                return listdelegators.BaseListDelegator(ls)
+            case _:
+                raise TypeError(row)
 
     def __delitem__(self, row: int):
         self.takeItem(row)
@@ -49,19 +63,23 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def get_children(self) -> list[QtWidgets.QListWidgetItem]:
-        return [self.item(row) for row in range(self.count())]
+    def get_children(self) -> listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]:
+        items = [self.item(row) for row in range(self.count())]
+        return listdelegators.BaseListDelegator(items)
 
     def add_items(self, items: Iterable | Mapping):
-        if isinstance(items, Mapping):
-            for k, v in items.items():
-                self.add(v, k)
-        else:
-            for i in items:
-                if isinstance(i, tuple | list):
-                    self.add(*i)
-                else:
-                    self.add(i)
+        match items:
+            case Mapping():
+                for k, v in items.items():
+                    self.add(v, k)
+            case Iterable():
+                for i in items:
+                    if isinstance(i, tuple | list):
+                        self.add(*i)
+                    else:
+                        self.add(i)
+            case _:
+                raise TypeError(items)
 
     def add_item(
         self,
@@ -145,7 +163,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         mode: constants.MatchFlagStr = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> list[QtWidgets.QListWidgetItem]:
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
         flag = constants.MATCH_FLAGS[mode]
@@ -153,7 +171,8 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
             flag |= QtCore.Qt.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
-        return self.findItems(text, flag, column)  # type: ignore
+        items = self.findItems(text, flag, column)  # type: ignore
+        return listdelegators.BaseListDelegator(items)
 
 
 if __name__ == "__main__":
