@@ -5,6 +5,7 @@ from typing import overload
 
 from prettyqt import core
 from prettyqt.qt import QtCore
+from prettyqt.utils import listdelegators
 
 
 class AnimationGroupMixin(core.AbstractAnimationMixin):
@@ -13,20 +14,27 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
         ...
 
     @overload
-    def __getitem__(self, index: slice) -> list[QtCore.QAbstractAnimation]:
+    def __getitem__(
+        self, index: slice
+    ) -> listdelegators.BaseListDelegator[QtCore.QAbstractAnimation]:
         ...
 
     def __getitem__(self, index: int | slice):
-        if isinstance(index, int):
-            if index < 0:
-                index = self.animationCount() + index
-            anim = self.animationAt(index)
-            if anim is None:
-                raise KeyError(index)
-            return anim
-        else:
-            anims = [self.animationAt(i) for i in range(len(self))]
-            return anims[index]
+        match index:
+            case int():
+                if index < 0:
+                    index = self.animationCount() + index
+                anim = self.animationAt(index)
+                if anim is None:
+                    raise KeyError(index)
+                return anim
+            case slice():
+                stop = index.stop or self.columnCount()
+                rng = range(index.start or 0, stop, index.step or 1)
+                anims = [self.animationAt(i) for i in rng]
+                return listdelegators.BaseListDelegator(anims)
+            case _:
+                raise TypeError(index)
 
     def __setitem__(self, index: int, value: QtCore.QAbstractAnimation):
         if not (0 <= index < self.animationCount()):
