@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import InvalidParamError, bidict, listdelegators
 
 
 SIZE_CONSTRAINT = bidict(
@@ -34,7 +34,13 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         if margin is not None:
             self.set_margin(margin)
 
-    def __getitem__(self, index: str | int) -> QtWidgets.QWidget | QtWidgets.QLayout:
+    def __getitem__(
+        self, index: str | int | slice
+    ) -> (
+        QtWidgets.QWidget
+        | QtWidgets.QLayout
+        | listdelegators.BaseListDelegator[QtWidgets.QWidget | QtWidgets.QLayout]
+    ):
         match index:
             case int():
                 item = self.itemAt(index)
@@ -43,6 +49,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
                 if (item := self.find_child(typ=QtCore.QObject, name=index)) is not None:
                     return item
                 raise IndexError(index)
+            case slice():
+                stop = index.stop or self.count()
+                rng = range(index.start or 0, stop, index.step or 1)
+                widgets = [self[i] for i in rng]
+                return listdelegators.BaseListDelegator(widgets, parent=self)
             case _:
                 raise IndexError(index)
 
