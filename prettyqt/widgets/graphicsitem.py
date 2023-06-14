@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, listdelegators
 
 
 PANEL_MODALITY = bidict(
@@ -44,10 +44,11 @@ class GraphicsItemMixin:
 
     def colliding_items(
         self, mode: constants.ItemSelectionModeStr = "intersects_shape"
-    ) -> list[QtWidgets.QGraphicsItem]:
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QGraphicsItem]:
         if mode not in constants.ITEM_SELECTION_MODE:
             raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
-        return self.collidingItems(constants.ITEM_SELECTION_MODE[mode])
+        items = self.collidingItems(constants.ITEM_SELECTION_MODE[mode])
+        return listdelegators.BaseListDelegator(items)
 
     def collides_with(
         self,

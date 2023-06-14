@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
+from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, listdelegators
 
 
 SCENE_LAYER = bidict(
@@ -202,10 +202,11 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         self,
         item: QtWidgets.QGraphicsItem,
         mode: constants.ItemSelectionModeStr = "intersects_shape",
-    ) -> list[QtWidgets.QGraphicsItem]:
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QGraphicsItem]:
         if mode not in constants.ITEM_SELECTION_MODE:
             raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
-        return self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])
+        items = self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])
+        return listdelegators.BaseListDelegator(items)
 
     def add_item_group(
         self, *items: QtWidgets.QGraphicsItem

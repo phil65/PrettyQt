@@ -86,7 +86,9 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def isChecked(self, col: int) -> bool:
         return self.checkState(col) == QtCore.Qt.CheckState.Checked
 
-    def get_children(self, recursive: bool = False) -> list[QtWidgets.QTreeWidgetItem]:
+    def get_children(
+        self, recursive: bool = False
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
         """Get children of this item.
 
         recursive option is written iteratively to also support original QTreeWidgetItems.
@@ -101,10 +103,13 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
                 results.append(node)
                 items.extend(node.child(i) for i in range(node.childCount()))
             nodes = items
-        return results[1:]
+        return listdelegators.BaseListDelegator(results[1:])
 
-    def get_top_level_items(self) -> list[QtWidgets.QTreeWidgetItem]:
-        return [self.topLevelItem(i) for i in range(self.topLevelItemCount())]
+    def get_top_level_items(
+        self,
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
+        items = [self.topLevelItem(i) for i in range(self.topLevelItemCount())]
+        return listdelegators.BaseListDelegator(items)
 
     def collapse(self, recursive: bool = False):
         if recursive:

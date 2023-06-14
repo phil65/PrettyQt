@@ -4,7 +4,7 @@ from collections.abc import Iterator
 
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import datatypes
+from prettyqt.utils import datatypes, listdelegators
 
 
 class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
@@ -35,8 +35,9 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
 
-    def get_children(self) -> list[QtWidgets.QWidget]:
-        return [self.widget(i) for i in range(self.count())]
+    def get_children(self) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        widgets = [self.widget(i) for i in range(self.count())]
+        return listdelegators.BaseListDelegator(widgets)
 
     def add_widget(
         self,
