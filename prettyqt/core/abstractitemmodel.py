@@ -243,7 +243,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ) -> list[core.ModelIndex]:
         """Search the tree for indexes with a given value in given role."""
         results = []
-        if type(value) != list:
+        # This makes it impossible to search for lists. I think thats fine.
+        if not isinstance(value, list):
             value = [value]
         for idx in self.iter_tree(root_index):
             if self.data(idx, role) in value:

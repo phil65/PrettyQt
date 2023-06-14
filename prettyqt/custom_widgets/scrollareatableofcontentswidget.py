@@ -158,17 +158,17 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         model: ScrollAreaTableOfContentsModel | None = self.model()
         if model is None:
             return
-        children = self.scrollarea.get_visible_widgets(typ=self._WidgetClass)
-        if not children or children == self._last_visible:
+        visible_widgets = self.scrollarea.get_visible_widgets(typ=self._WidgetClass)
+        if not visible_widgets or visible_widgets == self._last_visible:
             return
-        self._last_visible = children
+        self._last_visible = visible_widgets
         self.selectionModel().currentChanged.disconnect(self._on_current_change)
         self.select_index(None)
         if self._expand_mode != "always":
             self.collapseAll()
         match self._scroll_mode:
             case "multi":
-                if indexes := model.search_tree(children, constants.USER_ROLE):
+                if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
                     for index in indexes:
                         children = [
                             model.index(i, 0, index) for i in range(model.rowCount(index))
@@ -185,12 +185,12 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
                             self.setExpanded(idx, True)
             case "headers_only":
                 if indexes := model.search_tree(
-                    children, constants.USER_ROLE, max_results=1
+                    visible_widgets, constants.USER_ROLE, max_results=1
                 ):
                     self.set_current_index(indexes[0])
                     self.scroll_to(indexes[0])
             case "single":
-                if indexes := model.search_tree(children, constants.USER_ROLE):
+                if indexes := model.search_tree(visible_widgets, constants.USER_ROLE):
                     viewport = self.scrollarea.viewport()
                     # sort indexes by closest distance to top
                     indexes = sorted(
