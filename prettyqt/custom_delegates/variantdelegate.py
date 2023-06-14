@@ -11,16 +11,20 @@ logger = logging.getLogger(__name__)
 
 
 class VariantDelegate(widgets.StyledItemDelegate):
+    """Delegate which supports editing many data types."""
+
     ID = "variant"
 
     def __init__(
         self,
         *args,
         data_role: constants.ItemDataRole = constants.USER_ROLE,
+        set_edit_role: bool = True,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.data_role = data_role
+        self._set_edit_role = set_edit_role
 
     def paint(self, painter, option, index):
         # if not self.is_supported_type(value):
@@ -61,7 +65,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
         if (value := editor.get_value()) is not None:
             logger.info(f"setting data for {model!r} to {value!r}")
             model.setData(index, value, self.data_role)
-            model.setData(index, datatypes.to_string(value), constants.DISPLAY_ROLE)
+            if self._set_edit_role:
+                model.setData(index, datatypes.to_string(value), constants.DISPLAY_ROLE)
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
             self.commitData.emit(editor)
 
@@ -107,6 +112,6 @@ if __name__ == "__main__":
     table_widget.resize(500, 300)
     table_widget.show()
     with app.debug_mode():
-        delegate = table_widget.set_delegate("variant", column=1)
+        delegate = table_widget.set_delegate("variant", column=1, set_edit_role=True)
         delegate.closeEditor.connect(print)
         app.main_loop()
