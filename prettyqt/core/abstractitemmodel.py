@@ -8,7 +8,7 @@ from collections.abc import Iterator
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+from prettyqt.utils import bidict, listdelegators
 
 
 logger = logging.getLogger(__name__)
@@ -252,6 +252,13 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 if len(results) == max_results:
                     break
         return results
+
+    def get_child_indexes(
+        self, index: core.ModelIndex
+    ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
+        """Get all child indexes for given index (first column only)."""
+        indexes = [self.index(i, 0, index) for i in range(self.rowCount(index))]
+        return listdelegators.BaseListDelegator(indexes)
 
     def get_index_key(self, index: core.ModelIndex):
         """Return a key for `index` from the source model into the _source_offset map.
