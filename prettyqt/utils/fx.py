@@ -29,7 +29,7 @@ class AnimationWrapper:
         self._animation.set_duration(duration)
         logger.debug(f"Setting up animation: {start=}, {end=}, {easing=}, {duration=}")
         if reverse:
-            self._animation = self._animation.append_reversed()
+            self._animation.append_reversed()
         self.fx.run(self._animation, delay=delay, single_shot=single_shot)
         return self._animation
 
@@ -220,6 +220,8 @@ class Fx:
         end=None,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
+        reverse: bool = False,
+        single_shot: bool = True,
     ) -> core.PropertyAnimation:
         anim = core.PropertyAnimation(parent=self._widget)
         anim.set_easing(easing)
@@ -232,7 +234,9 @@ class Fx:
         anim.set_end_value(pos + end_offset)
         anim.setDuration(duration)
         anim.apply_to(self._widget.pos)
-        self.run(anim, delay)
+        if reverse:
+            anim.append_reversed()
+        self.run(anim, delay, single_shot=single_shot)
         return anim
 
     def bounce(
@@ -282,5 +286,7 @@ if __name__ == "__main__":
         container.add(w4)
         # container[2].fx["pos"].transition_from((0, -100), duration=2000)
         widget.show()
-        container[::2].fx.slide(start=(-100, 0), duration=3000)
+        container[::2].fx.slide(
+            start=(-100, 0), duration=3000, reverse=True, single_shot=False
+        )
         app.main_loop()
