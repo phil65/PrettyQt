@@ -174,6 +174,15 @@ class ObjectMixin:
         yield self
         self.blockSignals(blocked)
 
+    @contextlib.contextmanager
+    def signal_blocked(
+        self, signal: core.SignalInstance, receiver: Callable | core.SignalInstance
+    ):
+        """Context manager to temporarily disconnect specific signal."""
+        signal.disconnect(receiver)
+        yield self
+        signal.connect(receiver)
+
     def to_json(self):
         dct = self.__getstate__()
         for k, v in dct.items():
