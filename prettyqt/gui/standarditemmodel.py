@@ -5,24 +5,39 @@ from collections.abc import Iterator
 from typing_extensions import Self
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import InvalidParamError, datatypes, listdelegators
 
 
-class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
+class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
     def __getitem__(
-        self, index: int | tuple[int, int] | QtCore.QModelIndex
-    ) -> QtGui.QStandardItem:
+        self, index: int | tuple[int, int] | core.QModelIndex
+    ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
         match index:
             case int():
-                item = self.item(index)
-            case (int(), int()):
-                item = self.item(*index)
+                return self.item(index)
+            case slice() as row, slice() as col:
+                rowcount = self.rowCount() if row.stop is None else row.stop
+                colcount = self.columnCount() if col.stop is None else col.stop
+                rowvalues = list(range(rowcount)[row])
+                colvalues = list(range(colcount)[col])
+                ls = [self.item(i, j) for i in rowvalues for j in colvalues]
+                return listdelegators.BaseListDelegator(ls)
+            case slice() as row, int() as col:
+                count = self.rowCount() if row.stop is None else row.stop
+                values = list(range(count)[row])
+                ls = [self.item(i, col) for i in values]
+                return listdelegators.BaseListDelegator(ls)
+            case int() as row, slice() as col:
+                count = self.columnCount() if col.stop is None else col.stop
+                values = list(range(count)[col])
+                ls = [self.item(row, i) for i in values]
+                return listdelegators.BaseListDelegator(ls)
+            case int() as row, int() as col:
+                return self.item(row, col)
+            case core.QModelIndex():
+                return self.itemFromIndex(index)
             case _:
-                item = self.itemFromIndex(index)
-        if item is None:
-            raise KeyError(index)
-        return item
+                raise TypeError(index)
 
     def __delitem__(self, index: int | tuple[int, int]):
         match index:
@@ -34,7 +49,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
             raise KeyError(index)
         return item
 
-    def __iter__(self) -> Iterator[QtGui.QStandardItem]:
+    def __iter__(self) -> Iterator[gui.QStandardItem]:
         return iter(self.get_children())
 
     def __getstate__(self):
@@ -47,8 +62,8 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
     def __reduce__(self):
         return type(self), (), self.__getstate__()
 
-    def __add__(self, other: str | QtGui.QStandardItem) -> StandardItemModel:
-        if isinstance(other, QtGui.QStandardItem | str):
+    def __add__(self, other: str | gui.QStandardItem) -> StandardItemModel:
+        if isinstance(other, gui.QStandardItem | str):
             self.add(other)
             return self
         raise TypeError("wrong type for addition")
@@ -59,10 +74,10 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         mdl.add_item(*args, **kwargs)
         return mdl
 
-    def get_children(self) -> list[QtGui.QStandardItem]:
+    def get_children(self) -> list[gui.QStandardItem]:
         return [self.item(index) for index in range(self.rowCount())]
 
-    def add(self, *item: str | QtGui.QStandardItem):
+    def add(self, *item: str | gui.QStandardItem):
         for i in item:
             new_item = gui.StandardItem(i) if isinstance(i, str) else i
             self.appendRow([new_item])
@@ -74,14 +89,14 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         mode: constants.MatchFlagStr = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> list[QtGui.QStandardItem]:
+    ) -> list[gui.QStandardItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
         flag = constants.MATCH_FLAGS[mode]
         if recursive:
-            flag |= QtCore.Qt.MatchFlag.MatchRecursive
+            flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
-            flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
+            flag |= constants.MatchFlag.MatchCaseSensitive
         return self.findItems(text, flag, column)  # type: ignore
 
     def add_item(
@@ -89,9 +104,9 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         name: str = "",
         icon: datatypes.IconType = None,
         data: dict | None = None,
-        foreground: QtGui.QBrush | None = None,
-        background: QtGui.QBrush | None = None,
-        font: QtGui.QFont | None = None,
+        foreground: gui.QBrush | None = None,
+        background: gui.QBrush | None = None,
+        font: gui.QFont | None = None,
         selectable: bool = True,
         enabled: bool = True,
         editable: bool = False,
@@ -100,7 +115,7 @@ class StandardItemModel(core.AbstractItemModelMixin, QtGui.QStandardItemModel):
         whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
         checkstate: constants.StateStr | None = None,
-        flags: QtCore.Qt.ItemFlag | None = None,
+        flags: constants.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,
     ) -> gui.StandardItem:

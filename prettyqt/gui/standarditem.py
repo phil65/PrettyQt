@@ -9,7 +9,13 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixin
+from prettyqt.utils import (
+    InvalidParamError,
+    datatypes,
+    get_repr,
+    listdelegators,
+    serializemixin,
+)
 
 
 class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
@@ -18,14 +24,31 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
 
     def __getitem__(
         self, index: int | tuple[int, int] | QtCore.QModelIndex
-    ) -> QtGui.QStandardItem:
+    ) -> QtGui.QStandardItem | listdelegators.BaseListDelegator[QtGui.QStandardItem]:
         match index:
             case int():
                 return self.child(index)
-            case (int(), int()):
-                return self.child(*index)
+            case slice() as row, slice() as col:
+                rowcount = self.rowCount() if row.stop is None else row.stop
+                colcount = self.columnCount() if col.stop is None else col.stop
+                rowvalues = list(range(rowcount)[row])
+                colvalues = list(range(colcount)[col])
+                ls = [self.child(i, j) for i in rowvalues for j in colvalues]
+                return listdelegators.BaseListDelegator(ls)
+            case slice() as row, int() as col:
+                count = self.rowCount() if row.stop is None else row.stop
+                values = list(range(count)[row])
+                ls = [self.child(i, col) for i in values]
+                return listdelegators.BaseListDelegator(ls)
+            case int() as row, slice() as col:
+                count = self.columnCount() if col.stop is None else col.stop
+                values = list(range(count)[col])
+                ls = [self.child(row, i) for i in values]
+                return listdelegators.BaseListDelegator(ls)
+            case int() as row, int() as col:
+                return self.child(row, col)
             case _:
-                raise KeyError(index)
+                raise TypeError(index)
 
     def __delitem__(self, index: int | tuple[int, int]):
         item = self.takeRow(index) if isinstance(index, int) else self.takeChild(*index)
@@ -42,8 +65,9 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
             return self
         raise TypeError("wrong type for addition")
 
-    def get_children(self) -> list[QtGui.QStandardItem]:
-        return [self.child(index) for index in range(self.rowCount())]
+    def get_children(self) -> listdelegators.BaseListDelegator[QtGui.QStandardItem]:
+        items = [self.child(index) for index in range(self.rowCount())]
+        return listdelegators.BaseListDelegator(items)
 
     def add(self, *item: str | QtGui.QStandardItem):
         for i in item:

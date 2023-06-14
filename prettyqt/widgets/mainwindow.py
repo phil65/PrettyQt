@@ -7,7 +7,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import bidict, InvalidParamError
+from prettyqt.utils import bidict, listdelegators, InvalidParamError
 
 
 DOCK_OPTION = bidict(
@@ -305,7 +305,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def get_docks(
         self, position: constants.DockWidgetAreaStr | None = None
-    ) -> list[QtWidgets.QDockWidget]:
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QDockWidget]:
         docks = self.find_children(QtWidgets.QDockWidget, recursive=False)
         if position is None:
             return docks
@@ -340,7 +340,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def get_toolbars(
         self, position: constants.ToolbarAreaStr | None = None
-    ) -> list[QtWidgets.QToolBar]:
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QToolBar]:
         toolbars = self.find_children(QtWidgets.QToolBar, recursive=False)
         if position is None:
             return toolbars
