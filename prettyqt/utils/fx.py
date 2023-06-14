@@ -27,6 +27,7 @@ class AnimationWrapper:
         self._animation.set_end_value(end)
         self._animation.set_easing(easing)
         self._animation.set_duration(duration)
+        logger.debug(f"Setting up animation: {start=}, {end=}, {easing=}, {duration=}")
         if reverse:
             self._animation = self._animation.append_reversed()
         self.fx.run(self._animation, delay=delay, single_shot=single_shot)
@@ -117,6 +118,7 @@ class Fx:
 
     def __getitem__(self, value: str) -> AnimationWrapper:
         value = helpers.to_lower_camel(value)
+        logger.debug(f"Building {value!r} PropertyAnimation for {self._widget!r}")
         anim = core.PropertyAnimation()
         anim.apply_to(self._widget.__getattr__(value))
         # pytype = meta.get_property(value).get_pyhon_type()
@@ -222,6 +224,7 @@ class Fx:
         anim = core.PropertyAnimation(parent=self._widget)
         anim.set_easing(easing)
         # TODO: map to global
+        # pos = self._widget.map_to("global", self._widget.geometry().topLeft())
         pos = self._widget.geometry().topLeft()
         start_offset = core.Point(0, 0) if start is None else datatypes.to_point(start)
         end_offset = core.Point(0, 0) if end is None else datatypes.to_point(end)
@@ -250,6 +253,9 @@ class Fx:
     def run(
         self, animation: core.QPropertyAnimation, delay: int = 0, single_shot: bool = True
     ):
+        if not animation.targetObject().isVisible():
+            logger.info("Attention. Starting animation for invisible widget.")
+        logger.debug(f"starting {animation!r} with {delay=}. ({single_shot=})")
         self._widget.start_callback_timer(
             animation.start, interval=delay, single_shot=single_shot
         )
@@ -263,20 +269,18 @@ class Fx:
 
 if __name__ == "__main__":
     app = widgets.app()
-    toolbar = widgets.ToolBar("test")
-    radio = widgets.RadioButton("abc")
-    action = toolbar.addWidget(radio)
-    toolbar.show()
-    # toolbar.fx["windowOpacity"].animate_on_event(
-    #     "hover_enter", start=0.0, end=1.0, duration=1000, delay=2000
-    # )
-    radio.fx["pos"].transition_from((0, 100), relative=True)
-    toolbar.fx["pos"].transition_from(
-        (0, -100), duration=2000, relative=True, reverse=True, single_shot=False
-    )
-    toolbar.fx.fade_out(duration=5000)
-
-    toolbar.show_tooltips(content="shortcut")
-    app.main_loop()
     with app.debug_mode():
+        w1 = widgets.RadioButton("test")
+        w2 = widgets.RadioButton("test")
+        w3 = widgets.RadioButton("test")
+        w4 = widgets.RadioButton("test")
+        widget = widgets.Widget()
+        container = widget.set_layout("horizontal")
+        container.add(w1)
+        container.add(w2)
+        container.add(w3)
+        container.add(w4)
+        # container[2].fx["pos"].transition_from((0, -100), duration=2000)
+        widget.show()
+        container[::2].fx.slide(start=(-100, 0), duration=3000)
         app.main_loop()
