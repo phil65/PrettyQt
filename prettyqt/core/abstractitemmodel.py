@@ -61,11 +61,11 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ) -> bool:
         flag = QtCore.QAbstractItemModel.CheckIndexOption.NoOption
         if index_is_valid:
-            flag |= CHECK_INDEX_OPTIONS["index_is_valid"]
+            flag |= QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid
         if do_not_use_parent:
-            flag |= CHECK_INDEX_OPTIONS["do_not_use_parent"]
+            flag |= QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent
         if parent_is_invalid:
-            flag |= CHECK_INDEX_OPTIONS["parent_is_invalid"]
+            flag |= QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid
         check_flag = QtCore.QAbstractItemModel.CheckIndexOption(0) | flag
         return self.checkIndex(index, check_flag)
 

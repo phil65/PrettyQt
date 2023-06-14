@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 
 class AnimationWrapper:
-    def __init__(self, animation, fx):
+    def __init__(self, animation: core.PropertyAnimation, fx: Fx):
         self._animation = animation
         self.fx = fx
 
@@ -23,6 +23,7 @@ class AnimationWrapper:
         reverse: bool = False,
         single_shot: bool = True,
     ) -> core.PropertyAnimation:
+        """General animation with global coordinates."""
         self._animation.set_start_value(start)
         self._animation.set_end_value(end)
         self._animation.set_easing(easing)
@@ -43,12 +44,13 @@ class AnimationWrapper:
         reverse: bool = False,
         single_shot: bool = True,
     ) -> core.PropertyAnimation:
+        """Makes property transition from current value to given end value."""
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         start = prop.read(obj)
         end = datatypes.align_types(start, end)
-        if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
+        if relative and hasattr(end, "__add__"):
             end = end + start
         return self.animate(
             start,
@@ -70,12 +72,13 @@ class AnimationWrapper:
         reverse: bool = False,
         single_shot: bool = True,
     ) -> core.PropertyAnimation:
+        """Makes property transition from given start value to its current value."""
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         end = prop.read(obj)
         start = datatypes.align_types(end, start)
-        if relative and isinstance(start, int | float | core.QPoint | core.QPointF):
+        if relative and hasattr(start, "__add__"):
             start = end + start
         return self.animate(
             start,
@@ -96,6 +99,7 @@ class AnimationWrapper:
         duration: int = 1000,
         delay: int = 0,
     ) -> core.PropertyAnimation:
+        """Starts property transition from start to end when given event occurs."""
         self._animation.setStartValue(start)
         self._animation.setEndValue(end)
         self._animation.setDuration(duration)
@@ -174,6 +178,7 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
     ) -> core.PropertyAnimation:
+        """Trigger a fade-in animation."""
         return self["windowOpacity"].transition_from(
             0.0,
             easing=easing,
@@ -187,6 +192,7 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
     ) -> core.PropertyAnimation:
+        """Trigger a fade-out animation."""
         return self["windowOpacity"].transition_to(
             0.0,
             easing=easing,
@@ -203,6 +209,7 @@ class Fx:
         anchor: str = "center",
         delay: int = 0,
     ) -> core.ZoomAnimation:
+        """Trigger a zoom animation with given anchor."""
         from prettyqt import custom_animations
 
         anim = custom_animations.ZoomAnimation(parent=self._widget, anchor=anchor)
@@ -225,8 +232,6 @@ class Fx:
     ) -> core.PropertyAnimation:
         anim = core.PropertyAnimation(parent=self._widget)
         anim.set_easing(easing)
-        # TODO: map to global
-        # pos = self._widget.map_to("global", self._widget.geometry().topLeft())
         pos = self._widget.geometry().topLeft()
         start_offset = core.Point(0, 0) if start is None else datatypes.to_point(start)
         end_offset = core.Point(0, 0) if end is None else datatypes.to_point(end)
@@ -284,8 +289,10 @@ if __name__ == "__main__":
         container.add(w2)
         container.add(w3)
         container.add(w4)
-        # container[2].fx["pos"].transition_from((0, -100), duration=2000)
         widget.show()
+        container[:].fx["size"].transition_from(
+            (100, 100), duration=3000, reverse=True, single_shot=False
+        )
         container[::2].fx.slide(
             start=(-100, 0), duration=3000, reverse=True, single_shot=False
         )

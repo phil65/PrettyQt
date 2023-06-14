@@ -53,7 +53,7 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         return iter(self.get_children())
 
     def __getstate__(self):
-        return dict(items=self.get_children())
+        return dict(items=[self.item(index) for index in range(self.rowCount())])
 
     def __setstate__(self, state):
         for item in state["items"]:

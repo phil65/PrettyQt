@@ -62,10 +62,12 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         return iter(self.get_children())
 
     def __add__(self, other: str | QtGui.QStandardItem) -> StandardItem:
-        if isinstance(other, QtGui.QStandardItem | str):
-            self.add(other)
-            return self
-        raise TypeError("wrong type for addition")
+        match other:
+            case QtGui.QStandardItem() | str():
+                self.add(other)
+                return self
+            case _:
+                raise TypeError("wrong type for addition")
 
     def get_children(self) -> listdelegators.BaseListDelegator[QtGui.QStandardItem]:
         items = [self.child(index) for index in range(self.rowCount())]
