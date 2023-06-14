@@ -36,6 +36,8 @@ class SplitterMixin(widgets.FrameMixin):
                 rng = range(index.start or 0, stop, index.step or 1)
                 widgets = [self.widget(i) for i in rng]
                 return listdelegators.SplitterDelegator(widgets, parent=self)
+            case _:
+                raise TypeError(index)
 
     def __setitem__(self, index: int, value: QtWidgets.QWidget):
         self.replaceWidget(index, value)
