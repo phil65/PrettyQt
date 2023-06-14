@@ -5,7 +5,14 @@ from typing import Any, Literal
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, serializemixin
+from prettyqt.utils import (
+    InvalidParamError,
+    bidict,
+    datatypes,
+    get_repr,
+    serializemixin,
+    listdelegators,
+)
 
 
 mod = QtWidgets.QTreeWidgetItem
@@ -43,11 +50,25 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def __len__(self):
         return self.childCount()
 
-    def __getitem__(self, index: int) -> QtWidgets.QTreeWidgetItem:
-        item = self.child(index)
-        if item is None:
-            raise KeyError(index)
-        return item
+    def __getitem__(
+        self, index: int | slice
+    ) -> (
+        QtWidgets.QTreeWidgetItem
+        | listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]
+    ):
+        match index:
+            case int():
+                item = self.child(index)
+                if item is None:
+                    raise KeyError(index)
+                return item
+            case slice():
+                count = self.childCount() if index.stop is None else index.stop
+                values = list(range(count)[index])
+                ls = [self.child(i) for i in values]
+                return listdelegators.BaseListDelegator(ls)
+            case _:
+                raise TypeError(index)
 
     def __delitem__(self, index: int):
         self.takeChild(index)

@@ -2,12 +2,32 @@ from __future__ import annotations
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import listdelegators, InvalidParamError
 
 
 class TreeWidgetMixin(widgets.TreeViewMixin):
     def __contains__(self, other: QtWidgets.QTreeWidgetItem):
         return self.indexOfTopLevelItem(other) >= 0
+
+    def __getitem__(
+        self, index: int | slice
+    ) -> (
+        QtWidgets.QTreeWidgetItem
+        | listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]
+    ):
+        match index:
+            case int():
+                item = self.topLevelItem(index)
+                if item is None:
+                    raise KeyError(index)
+                return item
+            case slice():
+                count = self.topLevelItemCount() if index.stop is None else index.stop
+                values = list(range(count)[index])
+                ls = [self.topLevelItem(i) for i in values]
+                return listdelegators.BaseListDelegator(ls)
+            case _:
+                raise TypeError(index)
 
     def sort(self, column: int = 0, reverse: bool = False):
         order = constants.DESCENDING if reverse else constants.ASCENDING
@@ -20,7 +40,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
         mode: constants.MatchFlagStr = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> list[QtWidgets.QTreeWidgetItem]:
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
         if mode not in constants.MATCH_FLAGS:
             raise InvalidParamError(mode, constants.MATCH_FLAGS)
         flag = constants.MATCH_FLAGS[mode]
@@ -28,9 +48,12 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
             flag |= QtCore.Qt.MatchFlag.MatchRecursive
         if case_sensitive:
             flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
-        return self.findItems(text, flag, column)
+        items = self.findItems(text, flag, column)
+        return listdelegators.BaseListDelegator(items)
 
-    def get_items(self, recursive: bool = False) -> list[QtWidgets.QTreeWidgetItem]:
+    def get_items(
+        self, recursive: bool = False
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
         """Get TreeWidgetItems of this widget.
 
         Arguments:
@@ -49,7 +72,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
                 results.append(node)
                 items.extend(node.child(i) for i in range(node.childCount()))
             nodes = items
-        return results[1:]
+        return listdelegators.BaseListDelegator(results[1:])
 
     def scroll_to_item(
         self,
