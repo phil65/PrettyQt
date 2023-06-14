@@ -234,7 +234,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
             yield root_index
         if depth is not None:
             depth -= 1
-            if depth == -1:
+            if depth < 0:
                 return
         for i in range(self.rowCount(root_index)):
             idx = self.index(i, 0, root_index)
