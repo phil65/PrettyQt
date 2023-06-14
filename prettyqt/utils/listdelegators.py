@@ -10,8 +10,17 @@ class BaseListDelegator(list):
         self._parent = parent
         super().__init__(*args)
 
+    def __getitem__(self, index):
+        # for fx["prop"]. Might be worth it to have a separate delegator for props.
+        if isinstance(index, str):
+            return BaseListDelegator(
+                [instance.__getitem__(index) for instance in self], parent=self._parent
+            )
+        else:
+            return super().__getitem__(index)
+
     def __getattr__(self, method_name: str):
-        method_name = helpers.to_lower_camel(method_name)
+        # method_name = helpers.to_lower_camel(method_name)
         if method_name == "fx":
             return BaseListDelegator(
                 [instance.fx for instance in self], parent=self._parent
@@ -66,6 +75,7 @@ if __name__ == "__main__":
     container.add(w2)
     container.add(w3)
     container.add(w4)
-    container[2:].fx.zoom(end=1.3)
+    # container[2].fx["pos"].transition_from((0, -100), duration=2000)
+    container[:].fx.slide(duration=2000, end=(-100, 0))
     container.show()
     app.main_loop()
