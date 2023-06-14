@@ -7,6 +7,7 @@ import contextlib
 # import inspect
 import itertools
 import logging
+import re
 from typing import TYPE_CHECKING, Any, TypeVar, get_args
 import types
 
@@ -213,9 +214,10 @@ class ObjectMixin:
     def find_children(
         self,
         typ: type[T] = QtCore.QObject,
-        name: str | QtCore.QRegularExpression | None = None,
+        name: str | datatypes.PatternType | None = None,
         recursive: bool = True,
         property_selector: dict[str, datatypes.VariantType | Callable] | None = None,
+        only_prettyqt_classes: bool = False,
     ) -> listdelegators.BaseListDelegator[T]:
         """Find children with given type and name.
 
@@ -229,10 +231,13 @@ class ObjectMixin:
             name: ObjectName filter. None includes all.
             recursive: whether to search for children recursively.
             property_selector: dict containing PropertyName -> Value/Predicate pairs.
+            only_prettyqt_classes: only include objects with prettyqt superpowers.
 
         Returns:
             list of QObjects
         """
+        if isinstance(name, re.Pattern):
+            name = core.RegularExpression(name)
         if recursive:
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
@@ -249,13 +254,15 @@ class ObjectMixin:
             case _:
                 raise TypeError(typ)
         if property_selector:
-            return [
+            objects = [
                 o
                 for o in objects
                 for k, v in property_selector.items()
                 if (callable(v) and v(o.property(k)))
                 or (not callable(v) and o.property(k) == v)
             ]
+        if only_prettyqt_classes:
+            objects = [i for i in objects if i.__module__.startswith("prettyqt")]
         return listdelegators.BaseListDelegator(objects)
 
     def find_child(
