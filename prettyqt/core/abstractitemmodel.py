@@ -223,16 +223,22 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 self.fetchMore(idx)
 
     def iter_tree(
-        self, root_index: core.ModelIndex | None = None
+        self,
+        root_index: core.ModelIndex | None = None,
+        depth: int | None = None,
     ) -> Iterator[core.ModelIndex]:
         """Iter through all indexes of the model tree."""
         if root_index is None:
             root_index = self.index(0, 0)
         if root_index.isValid():
             yield root_index
+        if depth is not None:
+            depth -= 1
+            if depth == -1:
+                return
         for i in range(self.rowCount(root_index)):
             idx = self.index(i, 0, root_index)
-            yield from self.iter_tree(idx)
+            yield from self.iter_tree(idx, depth)
 
     def search_tree(
         self,
@@ -240,23 +246,27 @@ class AbstractItemModelMixin(core.ObjectMixin):
         role=constants.DISPLAY_ROLE,
         root_index: core.ModelIndex | None = None,
         max_results=None,
-    ) -> list[core.ModelIndex]:
+        depth: int | None = None,
+    ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
         """Search the tree for indexes with a given value in given role."""
         results = []
         # This makes it impossible to search for lists. I think thats fine.
         if not isinstance(value, list):
             value = [value]
-        for idx in self.iter_tree(root_index):
+        for idx in self.iter_tree(root_index, depth=depth):
             if self.data(idx, role) in value:
                 results.append(idx)
                 if len(results) == max_results:
                     break
-        return results
+        return listdelegators.BaseListDelegator(results)
 
     def get_child_indexes(
         self, index: core.ModelIndex
     ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
-        """Get all child indexes for given index (first column only)."""
+        """Get all child indexes for given index (first column only).
+
+        To get indexes recursively, use iter_tree.
+        """
         indexes = [self.index(i, 0, index) for i in range(self.rowCount(index))]
         return listdelegators.BaseListDelegator(indexes)
 
