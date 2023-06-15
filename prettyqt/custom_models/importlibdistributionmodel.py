@@ -27,31 +27,45 @@ def list_system_modules() -> list[metadata.Distribution]:
 def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     dist = metadata.distribution(package_name)
     modules = {i.split(" ")[0] for i in dist.requires} if dist.requires else set()
-    distributions = (load_dist_info(i) for i in modules)
-    return [i for i in distributions if i is not None]
+    return [dist for i in modules if (dist := load_dist_info(i)) is not None]
 
 
 def find_requires(treeitem):
     return next(
         (
             requirement
-            for requirement in treeitem.parent_item.obj.requires
-            if f"{treeitem.obj.metadata['name']} " in requirement
+            for requirement in treeitem.parent_item.requires
+            if f"{treeitem.metadata['name']} " in requirement
         ),
         "",
     )
 
 
+class DistTreeItem(treeitem.TreeItem):
+    __slots__ = ("requires", "metadata", "version")
+
+    def __init__(
+        self,
+        obj,
+        parent: DistTreeItem | None = None,
+    ):
+        super().__init__(obj, parent=parent)
+        # Cache the data to avoid excessive IO (obj.metadata reads file)
+        self.requires = None if obj is None else obj.requires
+        self.metadata = None if obj is None else obj.metadata
+        self.version = None if obj is None else obj.version
+
+
 COL_NAME = custom_models.ColumnItem(
     name="Name",
     doc="Package name",
-    label=lambda x: x.obj.metadata["Name"],
+    label=lambda x: x.metadata["Name"],
 )
 
 COL_VERSION = custom_models.ColumnItem(
     name="Version",
     doc="Version number.",
-    label=lambda x: x.obj.version,
+    label=lambda x: x.version,
 )
 
 COL_CONSTRAINTS = custom_models.ColumnItem(
@@ -63,25 +77,25 @@ COL_CONSTRAINTS = custom_models.ColumnItem(
 COL_SUMMARY = custom_models.ColumnItem(
     name="Summary",
     doc="Module description.",
-    label=lambda x: x.obj.metadata["Summary"],
+    label=lambda x: x.metadata["Summary"],
 )
 
 COL_HOMEPAGE = custom_models.ColumnItem(
     name="Homepage",
     doc="Homepage URL.",
-    label=lambda x: x.obj.metadata["Home-Page"],
+    label=lambda x: x.metadata["Home-Page"],
 )
 
 COL_AUTHOR = custom_models.ColumnItem(
     name="Author",
     doc="Author name.",
-    label=lambda x: x.obj.metadata["Author"],
+    label=lambda x: x.metadata["Author"],
 )
 
 COL_LICENSE = custom_models.ColumnItem(
     name="License",
     doc="License type.",
-    label=lambda x: x.obj.metadata["License"],
+    label=lambda x: x.metadata["License"],
 )
 
 COLUMNS = [
@@ -102,7 +116,7 @@ COLUMNS = [
 #     def get_data(self, item, role):
 #         match role:
 #             case constants.DISPLAY_ROLE:
-#                 return item.obj.metadata["Name"]
+#                 return item.metadata["Name"]
 
 
 # class VersionColumn(custom_models.ColumnItem):
@@ -112,7 +126,7 @@ COLUMNS = [
 #     def get_data(self, item, role):
 #         match role:
 #             case constants.DISPLAY_ROLE:
-#                 return x.obj.version
+#                 return x.version
 
 
 # class ConstraintsColumn(custom_models.ColumnItem):
@@ -132,7 +146,7 @@ COLUMNS = [
 #     def get_data(self, item, role):
 #         match role:
 #             case constants.DISPLAY_ROLE:
-#                 return item.obj.metadata["Summary"]
+#                 return item.metadata["Summary"]
 
 
 # class HomepageColumn(custom_models.ColumnItem):
@@ -142,7 +156,7 @@ COLUMNS = [
 #     def get_data(self, item, role):
 #         match role:
 #             case constants.DISPLAY_ROLE:
-#                 return item.obj.metadata["Home-Page"]
+#                 return item.metadata["Home-Page"]
 
 
 # class AuthorColumn(custom_models.ColumnItem):
@@ -152,7 +166,7 @@ COLUMNS = [
 #     def get_data(self, item, role):
 #         match role:
 #             case constants.DISPLAY_ROLE:
-#                 return item.obj.metadata["Author"]
+#                 return item.metadata["Author"]
 
 # class LicenseColumn(custom_models.ColumnItem):
 #     name="License"
@@ -161,10 +175,12 @@ COLUMNS = [
 #     def get_data(self, item, role):
 #         match role:
 #             case constants.DISPLAY_ROLE:
-#                 return item.obj.metadata["License"]
+#                 return item.metadata["License"]
 
 
 class ImportlibTreeModel(custom_models.ColumnItemModel):
+    TreeItem = DistTreeItem
+
     def __init__(
         self,
         obj: metadata.Distribution | str,
@@ -198,12 +214,12 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         item = self.data_by_index(parent)
         if self.show_root and item == self._root_item:
             return True
-        return bool(item.obj.requires)
+        return bool(item.requires)
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(self, item: DistTreeItem) -> list[DistTreeItem]:
         return [
-            treeitem.TreeItem(obj=dist, parent=item)
-            for dist in list_package_requirements(item.obj.metadata["Name"])
+            DistTreeItem(obj=dist, parent=item)
+            for dist in list_package_requirements(item.metadata["Name"])
         ]
 
 
@@ -285,9 +301,10 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    model = ImportlibDistributionModel.from_package("prettyqt")
-    table = widgets.TableView()
+    model = ImportlibTreeModel("prettyqt")
+    table = widgets.TreeView(word_wrap=False)
     # table.setSortingEnabled(True)
     table.set_model(model)
+    table.expand_all(depth=4)
     table.show()
     app.main_loop()
