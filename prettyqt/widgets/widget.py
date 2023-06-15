@@ -247,6 +247,7 @@ class WidgetMixin(core.ObjectMixin):
     setWindowIcon = set_icon
 
     def get_icon(self) -> gui.Icon | None:
+        """Get the window icon (returns None if not existing)."""
         icon = super().windowIcon()
         return None if icon.isNull() else gui.Icon(icon)
 
@@ -260,6 +261,8 @@ class WidgetMixin(core.ObjectMixin):
         pos = self.map_to("global", (0, 0))
         widgets.ToolTip.showText(pos, self.toolTip(), msecShowTime=duration)
 
+    # lets be gentle and allow all reasonable signatures for the size setters.
+    # tuples as well as passing two args is possible.
     @functools.singledispatchmethod
     def set_min_size(self, size: QtCore.QSize | tuple[int | None, int | None]):
         match size:
@@ -282,12 +285,13 @@ class WidgetMixin(core.ObjectMixin):
 
     @functools.singledispatchmethod
     def set_max_size(self, size: QtCore.QSize | tuple[int | None, int | None]):
-        if isinstance(size, tuple):
-            x = QWIDGETSIZE_MAX if size[0] is None else size[0]
-            y = QWIDGETSIZE_MAX if size[1] is None else size[1]
-            super().setMaximumSize(x, y)
-        else:
-            super().setMaximumSize(size)
+        match size:
+            case int() | None as x, int() | None as y:
+                x = QWIDGETSIZE_MAX if x is None else x
+                y = QWIDGETSIZE_MAX if y is None else y
+                super().setMaximumSize(x, y)
+            case _:
+                super().setMaximumSize(size)
 
     setMaximumSize = set_min_size
 
