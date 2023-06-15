@@ -112,7 +112,7 @@ class ObjectMixin:
     def installEventFilter(self, filter_: QtCore.QObject | str, **kwargs):
         """Override to also allow setting eventfilters by name."""
         if filter_ in self._eventfilters:
-            logger.warning("Trying to install same EventFilter multiple times.")
+            logger.warning(f"Installing same EventFilter multiple times to {self}.")
             return
         match filter_:
             case QtCore.QObject():
@@ -182,6 +182,15 @@ class ObjectMixin:
         signal.disconnect(receiver)
         yield self
         signal.connect(receiver)
+
+    @contextlib.contextmanager
+    def properties_set_to(self, **kwargs):
+        props = {k: self.property(k) for k in kwargs}
+        for k, v in kwargs.items():
+            self.setProperty(k, v)
+        yield self
+        for k, v in props.items():
+            self.setProperty(k, v)
 
     def to_json(self):
         dct = self.__getstate__()
