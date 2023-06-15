@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui, widgets
+from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore
 
 
@@ -11,11 +11,10 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         text = index.data()
         if not text:
             return
-
+        option = widgets.StyleOptionViewItem(option)
+        self.initStyleOption(option, index)
         painter.save()
 
-        # I only wanted it for mouse over, but you'll probably want to remove
-        # this condition
         if option.state and widgets.Style.StateFlag.State_MouseOver:
             font = option.font
             font.setUnderline(True)
@@ -27,12 +26,10 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
 
     def editorEvent(self, event, model, option, index):
         text = index.data()
-        font = index.data(constants.FONT_ROLE)
+        font = index.data(constants.FONT_ROLE) or gui.GuiApplication.font()
         # alignment = index.data(constants.ALIGNMENT_ROLE)
-        if font is None:
-            font = gui.GuiApplication.get_font()
         fm = gui.FontMetricsF(font)
-        rect = core.RectF(option.rect)
+        rect = option.rect.toRectF()
         b_rect = fm.get_bounding_rect(rect, constants.ALIGN_CENTER_LEFT, text)
         if (
             event.type() == QtCore.QEvent.Type.MouseButtonPress
