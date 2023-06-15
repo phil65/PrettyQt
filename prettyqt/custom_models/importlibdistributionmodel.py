@@ -1,9 +1,11 @@
 from __future__ import annotations
 
+import contextlib
 from collections.abc import Sequence
 from importlib import metadata
 import pkgutil
-
+from packaging.requirements import Requirement, InvalidRequirement
+from packaging.markers import Marker
 from typing_extensions import Self
 
 from prettyqt import constants, core, custom_models
@@ -26,23 +28,34 @@ def list_system_modules() -> list[metadata.Distribution]:
 
 def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     dist = metadata.distribution(package_name)
-    modules = {i.split(" ")[0] for i in dist.requires} if dist.requires else set()
+    modules = {Requirement(i).name for i in dist.requires} if dist.requires else set()
     return [dist for i in modules if (dist := load_dist_info(i)) is not None]
 
 
-def find_requires(treeitem):
+def find_requires(treeitem: DistTreeItem) -> str:
     return next(
         (
-            requirement
-            for requirement in treeitem.parent_item.requires
-            if f"{treeitem.metadata['name']} " in requirement
+            str(requirement.specifier)
+            for requirement in treeitem.parent_item.requires.values()
+            if treeitem.metadata["name"] == requirement.name
+        ),
+        "",
+    )
+
+
+def find_markers(treeitem: DistTreeItem) -> str:
+    return next(
+        (
+            str(marker)
+            for name, marker in treeitem.parent_item.markers.items()
+            if treeitem.metadata["name"] == name
         ),
         "",
     )
 
 
 class DistTreeItem(treeitem.TreeItem):
-    __slots__ = ("requires", "metadata", "version")
+    __slots__ = ("requires", "metadata", "version", "markers")
 
     def __init__(
         self,
@@ -50,8 +63,17 @@ class DistTreeItem(treeitem.TreeItem):
         parent: DistTreeItem | None = None,
     ):
         super().__init__(obj, parent=parent)
+        self.requires = {}
+        self.markers = {}
+        if obj is not None and obj.requires is not None:
+            for i in obj.requires:
+                with contextlib.suppress(InvalidRequirement):
+                    req = Requirement(i)
+                    self.requires[req.name] = req
+                    if ";" in i:
+                        extras_str = i.split(";", maxsplit=1)[-1]
+                        self.markers[req.name] = Marker(extras_str)
         # Cache the data to avoid excessive IO (obj.metadata reads file)
-        self.requires = None if obj is None else obj.requires
         self.metadata = None if obj is None else obj.metadata
         self.version = None if obj is None else obj.version
 
@@ -72,6 +94,12 @@ COL_CONSTRAINTS = custom_models.ColumnItem(
     name="Constraints",
     doc="Constraints.",
     label=lambda x: find_requires(x),
+)
+
+COL_EXTRA = custom_models.ColumnItem(
+    name="Marker",
+    doc="Marker.",
+    label=lambda x: find_markers(x),
 )
 
 COL_SUMMARY = custom_models.ColumnItem(
@@ -103,6 +131,7 @@ COLUMNS = [
     COL_VERSION,
     COL_CONSTRAINTS,
     COL_SUMMARY,
+    COL_EXTRA,
     COL_HOMEPAGE,
     COL_AUTHOR,
     COL_LICENSE,
@@ -138,6 +167,14 @@ COLUMNS = [
 #             case constants.DISPLAY_ROLE:
 #                 return find_requires(item)
 
+# class MarkerColumn(custom_models.ColumnItem):
+#     name="Extra"
+#     doc="Extra."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return find_markers(item)
 
 # class SummaryColumn(custom_models.ColumnItem):
 #     name="Summary"
@@ -305,6 +342,7 @@ if __name__ == "__main__":
     table = widgets.TreeView(word_wrap=False)
     # table.setSortingEnabled(True)
     table.set_model(model)
+    table.set_delegate("render_link", column=5)
     table.expand_all(depth=4)
     table.show()
     app.main_loop()
