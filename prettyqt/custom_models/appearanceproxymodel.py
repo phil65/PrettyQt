@@ -49,7 +49,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
     #     self._fonts = collections.defaultdict(lambda: None)
 
     def setData(self, index, value, role=constants.EDIT_ROLE):
-        key = self.get_index_key(index)
+        key = self.get_index_key(index, include_column=True)
         match role:
             case constants.FOREGROUND_ROLE:
                 self._foregrounds[key] = value
@@ -71,7 +71,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
                 return super().setData(index, value, role)
 
     def data(self, index, role=constants.DISPLAY_ROLE):
-        key = self.get_index_key(index)
+        key = self.get_index_key(index, include_column=True)
         match role:
             case constants.FOREGROUND_ROLE:
                 if val := self._foregrounds[key]:

@@ -292,7 +292,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         indexes = [self.index(i, 0, index) for i in range(self.rowCount(index))]
         return listdelegators.BaseListDelegator(indexes)
 
-    def get_index_key(self, index: core.ModelIndex):
+    def get_index_key(self, index: core.ModelIndex, include_column: bool = False):
         """Return a key for `index` from the source model into the _source_offset map.
 
         The key is a tuple of row indices on
@@ -301,7 +301,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
         key_path = []
         parent = index
         while parent.isValid():
-            key_path.append(parent.row())
+            key = (parent.row(), parent.column()) if include_column else parent.row()
+            key_path.append(key)
             parent = parent.parent()
         return tuple(reversed(key_path))
 
