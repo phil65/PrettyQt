@@ -217,6 +217,20 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_role_names(self) -> dict[int, str]:
         return {i: v.data().decode() for i, v in self.roleNames().items()}
 
+    def get_breadcrumbs_path(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ) -> list[str]:
+        """Get the path for the given index.
+
+        Returns a list containing data of all indexes up to the root for given role.
+        """
+        pieces = [index.data(role)]
+        while (index := index.parent()).isValid():
+            pieces.insert(0, index.data(role))
+        return pieces
+
     def prefetch_tree(self, root_index: core.ModelIndex | None, depth: int | None = None):
         for idx in self.iter_tree(root_index, depth):
             if self.canFetchMore(idx):
