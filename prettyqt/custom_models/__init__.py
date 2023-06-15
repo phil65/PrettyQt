@@ -37,6 +37,7 @@ from .appearanceproxymodel import AppearanceProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
 from .readonlyproxymodel import ReadOnlyProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
+from .colorvaluesproxymodel import ColorValuesProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -76,4 +77,5 @@ __all__ = [
     "ColumnJoinerProxyModel",
     "ReadOnlyProxyModel",
     "HighlightCurrentProxyModel",
+    "ColorValuesProxyModel",
 ]
