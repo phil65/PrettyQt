@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import collections
-
+from collections.abc import Callable
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtGui
 
@@ -21,10 +21,10 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         self._backgrounds = collections.defaultdict(lambda: None)
         self._alignments = collections.defaultdict(lambda: None)
         self._fonts = collections.defaultdict(lambda: None)
-        self._foreground_default = None
-        self._background_default = None
-        self._font_default = None
-        self._alignment_default = None
+        self._foreground_default = foreground_default
+        self._background_default = background_default
+        self._font_default = font_default
+        self._alignment_default = alignment_default
         super().__init__(**kwargs)
 
     # def setSourceModel(self, model):
@@ -49,39 +49,56 @@ class AppearanceProxyModel(core.IdentityProxyModel):
     #     self._fonts = collections.defaultdict(lambda: None)
 
     def setData(self, index, value, role=constants.EDIT_ROLE):
+        key = self.get_index_key(index)
         match role:
             case constants.FOREGROUND_ROLE:
-                self._foregrounds[(index.row(), index.column())] = value
+                self._foregrounds[key] = value
                 self.dataChanged.emit(index, index)
                 return True
             case constants.BACKGROUND_ROLE:
-                self._backgrounds[(index.row(), index.column())] = value
+                self._backgrounds[key] = value
                 self.dataChanged.emit(index, index)
                 return True
             case constants.FONT_ROLE:
-                self._fonts[(index.row(), index.column())] = value
+                self._fonts[key] = value
                 self.dataChanged.emit(index, index)
                 return True
             case constants.ALIGNMENT_ROLE:
-                self._alignments[(index.row(), index.column())] = value
+                self._alignments[key] = value
                 self.dataChanged.emit(index, index)
                 return True
             case _:
                 return super().setData(index, value, role)
 
     def data(self, index, role=constants.DISPLAY_ROLE):
+        key = self.get_index_key(index)
         match role:
             case constants.FOREGROUND_ROLE:
-                val = self._foregrounds[(index.row(), index.column())]
-                return val or self._foreground_default
+                if val := self._foregrounds[key]:
+                    return val
+                match self._foreground_default:
+                    case type() | Callable():
+                        return self._foreground_default()
+                    case _:
+                        return self._foreground_default
             case constants.BACKGROUND_ROLE:
-                val = self._backgrounds[(index.row(), index.column())]
-                return val or self._background_default
+                if val := self._backgrounds[key]:
+                    return val
+                match self._background_default:
+                    case type() | Callable():
+                        return self._background_default()
+                    case _:
+                        return self._background_default
             case constants.FONT_ROLE:
-                val = self._fonts[(index.row(), index.column())]
-                return val or self._font_default
+                if val := self._fonts[key]:
+                    return val
+                match self._font_default:
+                    case type() | Callable():
+                        return self._font_default()
+                    case _:
+                        return self._font_default
             case constants.ALIGNMENT_ROLE:
-                val = self._alignments[(index.row(), index.column())]
+                val = self._alignments[key]
                 return val or self._alignment_default
             case _:
                 return super().data(index, role)
@@ -156,4 +173,3 @@ if __name__ == "__main__":
     table.show()
     with app.debug_mode():
         app.main_loop()
-        print(model._backgrounds)
