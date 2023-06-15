@@ -12,8 +12,7 @@ from typing import TypedDict
 
 import fsspec
 
-from prettyqt import constants, core, custom_models, widgets
-from prettyqt.qt import QtCore
+from prettyqt import constants, core, gui, custom_models, widgets
 from prettyqt.utils import datatypes, treeitem
 
 
@@ -199,7 +198,7 @@ class FSSpecTreeModel(
         protocol: str = "file",
         root: datatypes.PathType = "",
         show_root: bool = False,
-        parent: QtCore.QObject | None = None,
+        parent: core.QObject | None = None,
         **kwargs,
     ):
         self.set_protocol(protocol, **kwargs)
@@ -237,7 +236,7 @@ class FSSpecTreeModel(
         self.directoryLoaded.emit(obj.obj["name"])
         return items
 
-    def get_protocol_path(self, index: QtCore.QModelIndex | str) -> str:
+    def get_protocol_path(self, index: core.QModelIndex | str) -> str:
         """Get protocol path for given index."""
         if isinstance(index, str):
             index = self.index(index)
@@ -245,7 +244,7 @@ class FSSpecTreeModel(
         path = index.data(self.Roles.FilePathRole)
         return f"{protocol}://{path}"
 
-    def get_file_content(self, index_or_path: str | QtCore.QModelIndex):
+    def get_file_content(self, index_or_path: str | core.QModelIndex):
         if isinstance(index_or_path, str):
             index = self.index(index_or_path)
         else:
@@ -255,7 +254,7 @@ class FSSpecTreeModel(
         with self.fs.open(protocol_path) as file:
             return file.read()
 
-    def fileIcon(self, index: core.QModelIndex | str):
+    def fileIcon(self, index: core.QModelIndex | str) -> gui.Icon:
         if isinstance(index, str):
             index = self.index(index)
         tree_item = index.internalPointer()
@@ -307,11 +306,11 @@ class FSSpecTreeModel(
             else datetime.datetime.fromtimestamp(tree_item.obj["mtime"])
         )
 
-    def permissions(self, index: core.QModelIndex | str) -> QtCore.QFileDevice.Permission:
+    def permissions(self, index: core.QModelIndex | str) -> core.QFileDevice.Permission:
         if isinstance(index, str):
             index = self.index(index)
         tree_item = index.internalPointer()
-        flag = QtCore.QFileDevice.Permission(0)
+        flag = core.QFileDevice.Permission(0)
         if tree_item is None:
             return flag
         val = oct(int(tree_item.obj["mode"]))[-4:]
@@ -407,7 +406,7 @@ class FSSpecTreeModel(
         self,
         items: Iterable,
         position: int | None = None,
-        parent: QtCore.QModelIndex | None = None,
+        parent: core.QModelIndex | None = None,
     ):
         position = len(self.items) if position is None else position
         items = list(items)
@@ -420,21 +419,21 @@ class FSSpecTreeModel(
 
     def canDropMimeData(
         self,
-        mime_data: QtCore.QMimeData,
-        action: QtCore.Qt.DropAction,
+        mime_data: core.QMimeData,
+        action: constants.DropAction,
         row: int,
         column: int,
-        parent_index: QtCore.QModelIndex,
+        parent_index: core.QModelIndex,
     ) -> bool:
         return column == 0 and mime_data.hasFormat("text/uri-list")
 
     def dropMimeData(
         self,
-        mime_data: QtCore.QMimeData,
-        action: QtCore.Qt.DropAction,
+        mime_data: core.QMimeData,
+        action: constants.DropAction,
         row: int,
         column: int,
-        parent_index: QtCore.QModelIndex,
+        parent_index: core.QModelIndex,
     ):
         if not self.canDropMimeData(mime_data, action, row, column, parent_index):
             return False
@@ -490,7 +489,7 @@ class FSSpecTreeModel(
         self,
         path_or_row: str | int,
         column: int = 0,
-        index: QtCore.QModelIndex | None = None,
+        index: core.QModelIndex | None = None,
     ) -> core.ModelIndex:
         if isinstance(path_or_row, int):
             return super().index(path_or_row, column, index)
@@ -517,17 +516,17 @@ class FSSpecTreeModel(
                 return self._iter_path(target, column, index)
         return core.ModelIndex()
 
-    def roleNames(self) -> dict[int, QtCore.QByteArray]:
+    def roleNames(self) -> dict[int, core.QByteArray]:
         return {
-            259: QtCore.QByteArray(b"filePermissions"),
-            1: QtCore.QByteArray(b"fileIcon"),
-            4: QtCore.QByteArray(b"statusTip"),
-            3: QtCore.QByteArray(b"toolTip"),
-            2: QtCore.QByteArray(b"edit"),
-            257: QtCore.QByteArray(b"filePath"),
-            0: QtCore.QByteArray(b"display"),
-            258: QtCore.QByteArray(b"fileName"),
-            5: QtCore.QByteArray(b"whatsThis"),
+            259: core.QByteArray(b"filePermissions"),
+            1: core.QByteArray(b"fileIcon"),
+            4: core.QByteArray(b"statusTip"),
+            3: core.QByteArray(b"toolTip"),
+            2: core.QByteArray(b"edit"),
+            257: core.QByteArray(b"filePath"),
+            0: core.QByteArray(b"display"),
+            258: core.QByteArray(b"fileName"),
+            5: core.QByteArray(b"whatsThis"),
         }
 
     def setReadOnly(self, val: bool):

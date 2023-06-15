@@ -702,8 +702,13 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return [h1, h2, h3, h4]
 
     def get_visible_section_span(
-        self, orientation: constants.OrientationStr
+        self, orientation: constants.OrientationStr | constants.Orientation
     ) -> tuple[int, int]:
+        match orientation:
+            case str():
+                pass
+            case _:
+                orientation = constants.ORIENTATION.inverse[orientation]
         top_left = QtCore.QPoint(0, 0)
         bottom_right = self.viewport().rect().bottomRight()
         if orientation == "horizontal":
