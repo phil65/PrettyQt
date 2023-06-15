@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.utils import InvalidParamError, datatypes, listdelegators
+from prettyqt.utils import InvalidParamError, datatypes, helpers, listdelegators
 
 
 class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
@@ -15,27 +15,18 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
                 return self.item(index)
             case slice():
                 return self.__getitem__(index, 0)
-            case slice() as row, slice() as col:
-                rowcount = self.rowCount() if row.stop is None else row.stop
-                colcount = self.columnCount() if col.stop is None else col.stop
-                rowvalues = list(range(rowcount)[row])
-                colvalues = list(range(colcount)[col])
-                ls = [self.item(i, j) for i in rowvalues for j in colvalues]
-                return listdelegators.BaseListDelegator(ls)
-            case slice() as row, int() as col:
-                count = self.rowCount() if row.stop is None else row.stop
-                values = list(range(count)[row])
-                ls = [self.item(i, col) for i in values]
-                return listdelegators.BaseListDelegator(ls)
-            case int() as row, slice() as col:
-                count = self.columnCount() if col.stop is None else col.stop
-                values = list(range(count)[col])
-                ls = [self.item(row, i) for i in values]
-                return listdelegators.BaseListDelegator(ls)
-            case int() as row, int() as col:
-                return self.item(row, col)
             case core.QModelIndex():
                 return self.itemFromIndex(index)
+            case int() as row, int() as col:
+                return self.item(row, col)
+            case (row, col):
+                items = [
+                    self.item(i, j)
+                    for i, j in helpers.yield_positions(
+                        row, col, self.rowCount(), self.columnCount()
+                    )
+                ]
+                return listdelegators.BaseListDelegator(items)
             case _:
                 raise TypeError(index)
 

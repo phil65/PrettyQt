@@ -4,7 +4,7 @@ from typing import overload
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import listdelegators
+from prettyqt.utils import helpers, listdelegators
 
 
 class AbstractTableModelMixin(core.AbstractItemModelMixin):
@@ -29,25 +29,30 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
         self, index: tuple[int | slice, int | slice]
     ) -> QtCore.QModelIndex | listdelegators.BaseListDelegator[QtCore.QModelIndex]:
         match index:
-            case slice() as row, slice() as col:
-                rowcount = self.rowCount() if row.stop is None else row.stop
-                colcount = self.columnCount() if col.stop is None else col.stop
-                rowvalues = list(range(rowcount)[row])
-                colvalues = list(range(colcount)[col])
-                ls = [self.index(i, j) for i in rowvalues for j in colvalues]
-                return listdelegators.BaseListDelegator(ls)
-            case slice() as row, int() as col:
-                count = self.rowCount() if row.stop is None else row.stop
-                values = list(range(count)[row])
-                ls = [self.index(i, col) for i in values]
-                return listdelegators.BaseListDelegator(ls)
-            case int() as row, slice() as col:
-                count = self.columnCount() if col.stop is None else col.stop
-                values = list(range(count)[col])
-                ls = [self.index(row, i) for i in values]
-                return listdelegators.BaseListDelegator(ls)
             case int() as row, int() as col:
                 return self.index(row, col)
+            case (row, col):
+                indexes = [
+                    self.index(i, j)
+                    for i, j in helpers.yield_positions(
+                        row, col, self.rowCount(), self.columnCount()
+                    )
+                ]
+                return listdelegators.BaseListDelegator(indexes)
+            case _:
+                raise TypeError(index)
+
+    def set_data(
+        self, index: tuple[int | slice, int | slice], value, role=constants.EDIT_ROLE
+    ):
+        match index:
+            case core.ModelIndex():
+                self.setData(index, value, role)
+            case (row, col):
+                for i, j in helpers.yield_positions(
+                    row, col, self.rowCount(), self.columnCount()
+                ):
+                    self.setData(self.index(i, j), value, role)
             case _:
                 raise TypeError(index)
 

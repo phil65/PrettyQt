@@ -13,6 +13,7 @@ from prettyqt.utils import (
     InvalidParamError,
     datatypes,
     get_repr,
+    helpers,
     listdelegators,
     serializemixin,
 )
@@ -30,25 +31,16 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
                 return self.child(index)
             case slice():
                 return self.__getitem__(index, 0)
-            case slice() as row, slice() as col:
-                rowcount = self.rowCount() if row.stop is None else row.stop
-                colcount = self.columnCount() if col.stop is None else col.stop
-                rowvalues = list(range(rowcount)[row])
-                colvalues = list(range(colcount)[col])
-                ls = [self.child(i, j) for i in rowvalues for j in colvalues]
-                return listdelegators.BaseListDelegator(ls)
-            case slice() as row, int() as col:
-                count = self.rowCount() if row.stop is None else row.stop
-                values = list(range(count)[row])
-                ls = [self.child(i, col) for i in values]
-                return listdelegators.BaseListDelegator(ls)
-            case int() as row, slice() as col:
-                count = self.columnCount() if col.stop is None else col.stop
-                values = list(range(count)[col])
-                ls = [self.child(row, i) for i in values]
-                return listdelegators.BaseListDelegator(ls)
             case int() as row, int() as col:
                 return self.child(row, col)
+            case (row, col):
+                children = [
+                    self.child(i, j)
+                    for i, j in helpers.yield_positions(
+                        row, col, self.rowCount(), self.columnCount()
+                    )
+                ]
+                return listdelegators.BaseListDelegator(children)
             case _:
                 raise TypeError(index)
 

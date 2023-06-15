@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from datetime import timedelta
 import inspect
+import itertools
 import logging
 import re
 import types
@@ -53,6 +54,28 @@ def find_common_ancestor(cls_list: list[type]) -> type:
             if len(mro) == 0:
                 mros.remove(mro)
     raise TypeError("Couldnt find common base class")
+
+
+def yield_positions(
+    rows, columns, num_rows: int, num_columns: int
+) -> typing.Iterator[tuple[int, int]]:
+    match (rows, columns):
+        case slice() as row, slice() as col:
+            rowcount = num_rows if row.stop is None else row.stop
+            colcount = num_columns if col.stop is None else col.stop
+            yield from itertools.product(range(rowcount)[row], range(colcount)[col])
+        case slice() as row, int() as col:
+            count = num_rows if row.stop is None else row.stop
+            for i in range(count)[row]:
+                yield (i, col)
+        case int() as row, slice() as col:
+            count = num_columns if col.stop is None else col.stop
+            for i in range(count)[col]:
+                yield (row, i)
+        case int() as row, int() as col:
+            yield (row, col)
+        case _:
+            raise TypeError((rows, columns))
 
 
 def dump_json(data: str):
