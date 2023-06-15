@@ -4,8 +4,8 @@ from collections.abc import Callable
 import logging
 from typing import Any, Literal, TYPE_CHECKING
 
-from prettyqt import constants, core, widgets
-from prettyqt.utils import helpers
+from prettyqt import constants, core, gui, widgets
+from prettyqt.utils import colors, helpers
 
 if TYPE_CHECKING:
     from prettyqt import custom_models
@@ -35,25 +35,54 @@ ProxyStr = Literal[
 ]
 
 
-class Proxyfier:
-    def __init__(self, model):
+class ProxyWrapper:
+    def __init__(self, index, model: core.QAbstractItemModel, proxifier: Proxyfier):
+        self._index = index
+        self.proxifier = proxifier
         self._model = model
 
-    def __getitem__(self, index):
-        parent = self._model.parent()
-        if parent is None:
-            raise ValueError("needs parent!")
-
+    def filter(self):
         from prettyqt import custom_models
 
-        match index:
+        parent = self._model.parent()
+        match self._index:
             case (arg_1, arg_2):
                 kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=parent)
             case _:
-                kwargs = dict(row_filter=index, column_filter=None, parent=parent)
-        proxy = proxy = custom_models.SubsetFilterProxyModel(**kwargs)
+                kwargs = dict(row_filter=self._index, column_filter=None, parent=parent)
+        proxy = custom_models.SubsetFilterProxyModel(**kwargs)
         proxy.setSourceModel(self._model)
         return proxy
+
+    def style(self, value="red", role=constants.BACKGROUND_ROLE, **kwargs):
+        from prettyqt import custom_models
+
+        match role:
+            case constants.BACKGROUND_ROLE | constants.FOREGROUND_ROLE:
+                value = colors.get_color(value).as_qt()
+            case constants.FONT_ROLE:
+                kwargs = {helpers.to_lower_camel(k): v for k, v in kwargs.items()}
+                value = gui.QFont(value, **kwargs)
+            case constants.ALIGNMENT_ROLE:
+                pass
+        parent = self._model.parent()
+        proxy = custom_models.AppearanceProxyModel(parent=parent)
+        proxy.setSourceModel(self._model)
+        proxy.set_data(self._index, value, role)
+        return proxy
+
+
+class Proxyfier:
+    def __init__(self, model):
+        self._model = model
+        self._wrapper = None
+
+    def __getitem__(self, value: slice) -> ProxyWrapper:
+        if self._model.parent() is None:
+            raise ValueError("needs parent!")
+        logger.debug(f"Building {value!r} ProxyModel for {self._model!r}")
+        self._wrapper = ProxyWrapper(value, self._model, self)
+        return self._wrapper
 
     def transpose(
         self, parent: widgets.QWidget | None = None

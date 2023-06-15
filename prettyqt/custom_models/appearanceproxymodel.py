@@ -2,6 +2,8 @@ from __future__ import annotations
 
 import collections
 from collections.abc import Callable
+from typing import Any
+
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtGui
 
@@ -48,7 +50,12 @@ class AppearanceProxyModel(core.IdentityProxyModel):
     #     self._alignments = collections.defaultdict(lambda: None)
     #     self._fonts = collections.defaultdict(lambda: None)
 
-    def setData(self, index, value, role=constants.EDIT_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         key = self.get_index_key(index, include_column=True)
         match role:
             case constants.FOREGROUND_ROLE:
@@ -79,6 +86,8 @@ class AppearanceProxyModel(core.IdentityProxyModel):
                 match self._foreground_default:
                     case type() | Callable():
                         return self._foreground_default()
+                    case None:
+                        return super().data(index, role)
                     case _:
                         return self._foreground_default
             case constants.BACKGROUND_ROLE:
@@ -87,6 +96,8 @@ class AppearanceProxyModel(core.IdentityProxyModel):
                 match self._background_default:
                     case type() | Callable():
                         return self._background_default()
+                    case None:
+                        return super().data(index, role)
                     case _:
                         return self._background_default
             case constants.FONT_ROLE:
@@ -95,6 +106,8 @@ class AppearanceProxyModel(core.IdentityProxyModel):
                 match self._font_default:
                     case type() | Callable():
                         return self._font_default()
+                    case None:
+                        return super().data(index, role)
                     case _:
                         return self._font_default
             case constants.ALIGNMENT_ROLE:

@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import contextlib
 import logging
-from typing import Any
+from typing import Any, overload
 
 from collections.abc import Iterator
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict, listdelegators
+from prettyqt.utils import bidict, listdelegators, helpers
 
 
 logger = logging.getLogger(__name__)
@@ -51,6 +51,48 @@ class AbstractItemModelMixin(core.ObjectMixin):
         proxy.addSourceModel(self)
         proxy.addSourceModel(other)
         return proxy
+
+    @overload
+    def __getitem__(self, index: tuple[int, int]) -> QtCore.QModelIndex:
+        ...
+
+    @overload
+    def __getitem__(
+        self, index: tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
+    ) -> listdelegators.BaseListDelegator[QtCore.QModelIndex]:
+        ...
+
+    def __getitem__(
+        self, index: tuple[int | slice, int | slice]
+    ) -> QtCore.QModelIndex | listdelegators.BaseListDelegator[QtCore.QModelIndex]:
+        # TODO: do proxies need mapToSource here?
+        match index:
+            case int() as row, int() as col:
+                return self.index(row, col)
+            case (row, col):
+                rowcount = self.rowCount()
+                colcount = self.columnCount()
+                indexes = [
+                    self.index(i, j)
+                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                ]
+                return listdelegators.BaseListDelegator(indexes)
+            case _:
+                raise TypeError(index)
+
+    def set_data(
+        self, index: tuple[int | slice, int | slice], value, role=constants.EDIT_ROLE
+    ):
+        match index:
+            case core.ModelIndex():
+                self.setData(index, value, role)
+            case (row, col):
+                rowcount = self.rowCount()
+                colcount = self.columnCount()
+                for i, j in helpers.yield_positions(row, col, rowcount, colcount):
+                    self.setData(self.index(i, j), value, role)
+            case _:
+                raise TypeError(index)
 
     def check_index(
         self,
@@ -245,7 +287,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ) -> Iterator[core.ModelIndex]:
         """Iter through all indexes of the model tree."""
         if root_index is None:
-            root_index = self.index(0, 0)
+            # TODO: does this always equal AbstractItemView.rootIndex()?
+            # root_index = self.index(0, 0)
+            root_index = core.ModelIndex()
         if root_index.isValid():
             yield root_index
         if depth is not None and (depth := depth - 1) < 0:
@@ -340,3 +384,9 @@ class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
     # @abc.abstractmethod
     # def data(self, *args, **kwargs):
     #     return NotImp
+
+
+if __name__ == "__main__":
+
+    class Test(AbstractItemModel):
+        pass

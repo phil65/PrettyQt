@@ -23,7 +23,7 @@ class ColorValuesProxyModel(core.IdentityProxyModel):
     ColorMode = ColorMode
     core.Enum(ColorMode)
 
-    def __init__(self, *args, mode: ColorModeStr = "visible", **kwargs):
+    def __init__(self, *args, mode: ColorMode = ColorMode.Visible, **kwargs):
         super().__init__(*args, **kwargs)
         self._mode = mode
         self._max = 0.0
@@ -31,12 +31,12 @@ class ColorValuesProxyModel(core.IdentityProxyModel):
 
     def data(self, index: core.ModelIndex, role=constants.EDIT_ROLE):
         match role, self._mode:
-            case constants.BACKGROUND_ROLE, "seen":
+            case constants.BACKGROUND_ROLE, self.ColorMode.Seen:
                 data = index.data(constants.USER_ROLE)
                 self._max = max(self._max, abs(data))
                 value = abs(data / self._max)
                 return gui.Color.from_cmyk(0, value, value, 0).as_qt()
-            case constants.BACKGROUND_ROLE, "visible":
+            case constants.BACKGROUND_ROLE, self.ColorMode.Visible:
                 widget = self.parent()
                 hor_span = widget.get_visible_section_span("horizontal")
                 ver_span = widget.get_visible_section_span("vertical")
@@ -85,8 +85,8 @@ if __name__ == "__main__":
         "two",
         "one",
         "two",
-    ]
-    df = pd.DataFrame(np.random.randn(8, 8), index=tuples, columns=tuples)
+    ] * 10
+    df = pd.DataFrame(np.random.randn(80, 80), index=tuples, columns=tuples)
     table = widgets.TableView()
     table.set_delegate("variant")
     table.set_model(df)

@@ -1,10 +1,7 @@
 from __future__ import annotations
 
-from typing import overload
-
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import helpers, listdelegators
 
 
 class AbstractTableModelMixin(core.AbstractItemModelMixin):
@@ -14,47 +11,6 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
         | constants.IS_SELECTABLE
         | constants.NO_CHILDREN
     )
-
-    @overload
-    def __getitem__(self, index: tuple[int, int]) -> QtCore.QModelIndex:
-        ...
-
-    @overload
-    def __getitem__(
-        self, index: tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
-    ) -> listdelegators.BaseListDelegator[QtCore.QModelIndex]:
-        ...
-
-    def __getitem__(
-        self, index: tuple[int | slice, int | slice]
-    ) -> QtCore.QModelIndex | listdelegators.BaseListDelegator[QtCore.QModelIndex]:
-        match index:
-            case int() as row, int() as col:
-                return self.index(row, col)
-            case (row, col):
-                indexes = [
-                    self.index(i, j)
-                    for i, j in helpers.yield_positions(
-                        row, col, self.rowCount(), self.columnCount()
-                    )
-                ]
-                return listdelegators.BaseListDelegator(indexes)
-            case _:
-                raise TypeError(index)
-
-    def set_data(
-        self, index: tuple[int | slice, int | slice], value, role=constants.EDIT_ROLE
-    ):
-        match index:
-            case core.ModelIndex():
-                self.setData(index, value, role)
-            case (row, col):
-                for i, j in helpers.yield_positions(
-                    row, col, self.rowCount(), self.columnCount()
-                ):
-                    self.setData(self.index(i, j), value, role)
-            case _:
-                raise TypeError(index)
 
     def to_dataframe(
         self,
