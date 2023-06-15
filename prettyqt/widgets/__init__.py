@@ -213,7 +213,9 @@ def app(args: list[str] | None = None, **kwargs) -> Application:
     if (instance := Application.instance()) is not None:
         return instance
     #  + ["--ignore-gpu-blacklist", "--enable-gpu-rasterization"]
-    return Application(sys.argv if args is None else args, **kwargs)
+    app = Application(sys.argv if args is None else args, **kwargs)
+    app.set_style("Fusion")
+    return app
 
 
 __all__ = [
