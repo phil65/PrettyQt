@@ -2,10 +2,14 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import logging
-from typing import Any, Literal
+from typing import Any, Literal, TYPE_CHECKING
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import helpers
+
+if TYPE_CHECKING:
+    from prettyqt import custom_models
+
 
 logger = logging.getLogger(__name__)
 
@@ -54,13 +58,12 @@ class Proxyfier:
     def transpose(
         self, parent: widgets.QWidget | None = None
     ) -> core.TransposeProxyModel:
-        # PySide6 needs widget parent here
-        parent = parent or self._model.parent()
-        if parent is None:
-            raise ValueError("needs parent!")
-        proxy = core.TransposeProxyModel(parent=parent)
-        proxy.setSourceModel(self._model)
-        return proxy
+        return self.get_proxy("transpose", parent)
+
+    def flatten(
+        self, parent: widgets.QWidget | None = None
+    ) -> custom_models.FlattenedTreeProxyModel:
+        return self.get_proxy("flatten_tree", parent)
 
     def modify(
         self,
@@ -84,6 +87,7 @@ class Proxyfier:
         return proxy
 
     def get_proxy(self, proxy: ProxyStr, parent: widgets.QWidget | None = None, **kwargs):
+        # PySide6 needs widget parent here
         parent = parent or self._model.parent()
         if parent is None:
             raise ValueError("needs parent!")
