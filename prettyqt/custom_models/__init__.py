@@ -8,6 +8,7 @@ from .listmixin import ListMixin
 from .treemodel import TreeModel
 from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
 from .regexmatchesmodel import RegexMatchesModel
+from .modelindexmodel import ModelIndexModel
 from .importlibdistributionmodel import ImportlibDistributionModel
 from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
@@ -41,6 +42,7 @@ __all__ = [
     "SelectionMixin",
     "TreeModel",
     "ImportlibDistributionModel",
+    "ModelIndexModel",
     "RegexMatchesModel",
     "ColumnItemModel",
     "ColumnTableModel",
