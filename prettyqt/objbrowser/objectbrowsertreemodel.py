@@ -1,12 +1,11 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 from difflib import SequenceMatcher
 import inspect
 import logging
-from typing import Any
 
-from prettyqt import core, custom_models
+from prettyqt import constants, core, custom_models
 from prettyqt.utils import treeitem
 
 
@@ -21,9 +20,9 @@ class ObjectBrowserTreeItem(treeitem.TreeItem):
     def __init__(
         self,
         obj,
-        name: str,
-        obj_path,
-        is_attribute: bool,
+        name: str = "",
+        obj_path="",
+        is_attribute: bool = False,
         parent: ObjectBrowserTreeItem | None = None,
     ):
         super().__init__(obj, parent=parent)
@@ -42,47 +41,39 @@ class ObjectBrowserTreeItem(treeitem.TreeItem):
 
 
 class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
-    def __init__(
-        self,
-        obj: Any,
-        obj_name: str = "",
-        attr_cols: list[custom_models.ColumnItem] | None = None,
-        show_root: bool = False,
-        **kwargs,
-    ):
-        super().__init__(None, columns=attr_cols, **kwargs)
-        # The root_item is always invisible. If the obj_name is the empty string, the
-        # inspectedItem will be the invisible root_item. If the obj_name is given,
-        # an invisible root item will be added and the inspectedItem will be its
-        # only child. In that case the inspected item will be visible.
-        self._show_root = show_root
-        obj_name = obj.__class__.__name__
-        if self._show_root:
-            self._root_item = ObjectBrowserTreeItem(
-                obj=None,
-                name="<invisible_root>",
-                obj_path="<invisible_root>",
-                is_attribute=None,
-            )
-            self._root_item.children_fetched = True
-            self.inspected_item = ObjectBrowserTreeItem(
-                obj=obj, name=obj_name, obj_path=obj_name, is_attribute=None
-            )
-            self._root_item.append_child(self.inspected_item)
-        else:
-            # The root itself will be invisible
-            self._root_item = ObjectBrowserTreeItem(
-                obj=obj, name=obj_name, obj_path=obj_name, is_attribute=None
-            )
-            self.inspected_item = self._root_item
-
-            # Fetch all items of the root so we can select the first row in the ctor.
-            root_index = self.index(0, 0)
-            self.fetchMore(root_index)
+    TreeItem = ObjectBrowserTreeItem
 
     @classmethod
     def supports(cls, typ):
-        return isinstance(typ, object())
+        return True
+
+    def get_path_for_index(self, index: core.ModelIndex) -> str:
+        """Get the path for the object referenced by index.
+
+        Example: An.example = {"a": [b, c, {"d": e}]}
+                 -> path of e: An.example["a"][2]["d"]
+        """
+        # TODO: not used yet, better rework ColumnItemModel first
+        treeitem = index.data(constants.USER_ROLE)
+        prev_data = treeitem.obj
+        pieces = []
+        while (index := index.parent()).isValid():
+            treeitem = index.data(constants.USER_ROLE)
+            data = treeitem.obj
+            match data:
+                case Mapping():
+                    for k, v in data.items():
+                        if v is prev_data:
+                            pieces.append(f"[{k!r}]")
+                            break
+                case Iterable():
+                    pieces.append(f"[{data.index(prev_data)}]")
+                case _:
+                    # or should this be treeitem.obj_name?
+                    pieces.append(f".{prev_data.__name__}")
+            prev_data = data
+        pieces.append(treeitem.obj_name)
+        return "".join(reversed(pieces))
 
     def _fetch_object_children(
         self, treeitem: treeitem.TreeItem
@@ -241,14 +232,16 @@ if __name__ == "__main__":
     from prettyqt.objbrowser.attribute_model import DEFAULT_ATTR_COLS
 
     app = widgets.app()
-    obj = dict(a=2, b="test")
-    model = ObjectBrowserTreeModel(obj, "", attr_cols=DEFAULT_ATTR_COLS)
-    obj_tree = widgets.TreeView()
-    obj_tree.setRootIsDecorated(True)
-    obj_tree.setAlternatingRowColors(True)
-    obj_tree.set_model(model)
-    obj_tree.set_selection_behavior("rows")
-    obj_tree.setUniformRowHeights(True)
-    obj_tree.setAnimated(True)
-    obj_tree.show()
-    app.main_loop()
+    with app.debug_mode():
+        obj = dict(a=[0, 1, 2, 3, dict(b=5)], b={"test": {"test2": 5}})
+        model = ObjectBrowserTreeModel(obj, columns=DEFAULT_ATTR_COLS, show_root=False)
+        obj_tree = widgets.TreeView()
+        obj_tree.setRootIsDecorated(True)
+        obj_tree.setAlternatingRowColors(True)
+        obj_tree.set_model(model)
+        obj_tree.selectionModel().currentChanged.connect(model.get_path_for_index)
+        obj_tree.set_selection_behavior("rows")
+        obj_tree.setUniformRowHeights(True)
+        obj_tree.setAnimated(True)
+        obj_tree.show()
+        app.main_loop()

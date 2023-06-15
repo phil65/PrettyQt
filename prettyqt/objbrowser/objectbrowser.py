@@ -57,7 +57,7 @@ class ObjectBrowser(widgets.MainWindow):
             show_callable_attrs = settings.get("show_callable_attrs", True)
             show_special_attrs = settings.get("show_special_attrs", True)
         self._tree_model = objectbrowsertreemodel.ObjectBrowserTreeModel(
-            obj, name, attr_cols=self._attr_cols
+            obj, columns=self._attr_cols, show_root=False
         )
         # proxy = self._tree_model.proxifier.modify(
         #     fn=lambda x: SPECIAL_ATTR_FONT,
