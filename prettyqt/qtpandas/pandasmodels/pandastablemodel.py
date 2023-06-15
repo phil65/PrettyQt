@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import enum
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -38,7 +39,6 @@ class DataTableModel(core.AbstractTableModel):
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 cell = self.df.iat[index.row(), index.column()]
-                # NaN case
                 return "" if pd.isnull(cell) else cell
             case constants.TOOLTIP_ROLE:
                 row = index.row()
@@ -60,7 +60,12 @@ class DataTableModel(core.AbstractTableModel):
 
     #     return cur_flags if self.is_read_only else cur_flags | constants.IS_EDITABLE
 
-    def setData(self, index, value, role=None):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         match role:
             case constants.USER_ROLE | constants.EDIT_ROLE:
                 row = index.row()
@@ -178,16 +183,21 @@ if __name__ == "__main__":
         ("baz", "two", "q"),
         ("foo", "one", "q"),
         ("foo", "two", "q"),
-        ("qux", "one", "q"),
-        ("qux", "two", "q"),
-    ]
+    ] * 10
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(6, 6), index=index[:6], columns=index[:6])
-    tableview = widgets.TableView()
-    model = DataTableWithHeaderModel(df, parent=tableview)
+    df = pd.DataFrame(np.random.randn(60, 60), index=index, columns=index)
+    table = widgets.TableView()
+    table.show()
+    model = DataTableWithHeaderModel(df, parent=table)
+    model = model.proxifier[6:7, ::2].style("red", role=constants.FOREGROUND_ROLE)
+    model = model.proxifier[1:4, ::2].style(
+        "Courier", role=constants.FONT_ROLE, point_size=30
+    )
+    # model = model.proxifier[1:4, ::2].filter()
+    table.set_model(model)
+    print(table.get_models())
+    # table.set_model(table.model().proxifier.get_proxy("color_values", parent=table))
     # model = model.proxifier.get_proxy("read_only")
-    tableview.set_delegate("variant")
-    tableview.set_model(model)
+    table.set_delegate("variant")
 
-    tableview.show()
     app.main_loop()

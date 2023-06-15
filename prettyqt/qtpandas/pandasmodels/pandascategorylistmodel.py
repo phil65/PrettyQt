@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -24,7 +25,12 @@ class PandasCategoryListModel(custom_models.ModelMixin, core.AbstractTableModel)
     def series(self):
         return self.df[self.col]
 
-    def setData(self, index, value, role):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if not index.isValid():
             return False
         if role == constants.EDIT_ROLE:

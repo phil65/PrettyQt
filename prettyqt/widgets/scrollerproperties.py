@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from typing import Any, Literal
 
+from collections.abc import Iterator
+
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
@@ -81,10 +83,10 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
     def __setitem__(self, metric: ScrollmetricStr, value: Any):
         self.set_scroll_metric(metric, value)
 
-    def keys(self):
+    def keys(self) -> ScrollmetricStr:
         return SCROLL_METRIC.keys()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[ScrollmetricStr]:
         return iter(SCROLL_METRIC.keys())
 
     def set_scroll_metric(self, metric: ScrollmetricStr, value: Any):
@@ -118,7 +120,7 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
             raise InvalidParamError(metric, SCROLL_METRIC)
         return self.scrollMetric(SCROLL_METRIC[metric])
 
-    def get_scroll_metrics(self) -> dict:
+    def get_scroll_metrics(self) -> dict[ScrollmetricStr, Any]:
         return {i: self.get_scroll_metric(i) for i in SCROLL_METRIC}
 
 

@@ -79,7 +79,11 @@ ScrollHintStr = Literal[
     "ensure_visible", "position_at_top", "position_at_bottom", "position_at_center"
 ]
 
-DRAG_DROP_MODE = bidict(
+DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal_move"]
+
+DRAG_DROP_MODE: bidict[
+    DragDropModeStr, QtWidgets.QAbstractItemView.DragDropMode
+] = bidict(
     none=QtWidgets.QAbstractItemView.DragDropMode.NoDragDrop,
     drag=QtWidgets.QAbstractItemView.DragDropMode.DragOnly,
     drop=QtWidgets.QAbstractItemView.DragDropMode.DropOnly,
@@ -87,27 +91,18 @@ DRAG_DROP_MODE = bidict(
     internal_move=QtWidgets.QAbstractItemView.DragDropMode.InternalMove,
 )
 
-DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal_move"]
 
+DropIndicatorPositionStr = Literal["on_item", "above_item", "below_item", "on_viewport"]
 
-DROP_INDICATOR_POSITION = bidict(
+DROP_INDICATOR_POSITION: bidict[
+    DropIndicatorPositionStr, QtWidgets.QAbstractItemView.DropIndicatorPosition
+] = bidict(
     on_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.OnItem,
     above_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.AboveItem,
     below_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.BelowItem,
     on_viewport=QtWidgets.QAbstractItemView.DropIndicatorPosition.OnViewport,
 )
 
-DropIndicatorPositionStr = Literal["on_item", "above_item", "below_item", "on_viewport"]
-
-STATE = bidict(
-    none=QtWidgets.QAbstractItemView.State.NoState,
-    dragging=QtWidgets.QAbstractItemView.State.DraggingState,
-    drag_selecting=QtWidgets.QAbstractItemView.State.DragSelectingState,
-    editing=QtWidgets.QAbstractItemView.State.EditingState,
-    expanding=QtWidgets.QAbstractItemView.State.ExpandingState,
-    collapsing=QtWidgets.QAbstractItemView.State.CollapsingState,
-    animating=QtWidgets.QAbstractItemView.State.AnimatingState,
-)
 
 StateStr = Literal[
     "none",
@@ -118,6 +113,16 @@ StateStr = Literal[
     "collapsing",
     "animating",
 ]
+
+STATE: bidict[StateStr, QtWidgets.QAbstractItemView.State] = bidict(
+    none=QtWidgets.QAbstractItemView.State.NoState,
+    dragging=QtWidgets.QAbstractItemView.State.DraggingState,
+    drag_selecting=QtWidgets.QAbstractItemView.State.DragSelectingState,
+    editing=QtWidgets.QAbstractItemView.State.EditingState,
+    expanding=QtWidgets.QAbstractItemView.State.ExpandingState,
+    collapsing=QtWidgets.QAbstractItemView.State.CollapsingState,
+    animating=QtWidgets.QAbstractItemView.State.AnimatingState,
+)
 
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):

@@ -20,11 +20,11 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
             case int() as row, int() as col:
                 return self.item(row, col)
             case (row, col):
+                rowcount = self.rowCount()
+                colcount = self.columnCount()
                 items = [
                     self.item(i, j)
-                    for i, j in helpers.yield_positions(
-                        row, col, self.rowCount(), self.columnCount()
-                    )
+                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                 ]
                 return listdelegators.BaseListDelegator(items)
             case _:

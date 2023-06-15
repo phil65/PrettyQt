@@ -1,6 +1,8 @@
 from __future__ import annotations
 
-from prettyqt import constants
+from typing import Any
+
+from prettyqt import constants, core
 
 
 class ModelMixin:
@@ -54,7 +56,12 @@ class ModelMixin:
             case _:
                 return None
 
-    def setData(self, index, value, role):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if role == constants.EDIT_ROLE:
             if not value:
                 return False

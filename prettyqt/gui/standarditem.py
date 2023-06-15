@@ -34,11 +34,11 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
             case int() as row, int() as col:
                 return self.child(row, col)
             case (row, col):
+                rowcount = self.rowCount()
+                colcount = self.columnCount()
                 children = [
                     self.child(i, j)
-                    for i, j in helpers.yield_positions(
-                        row, col, self.rowCount(), self.columnCount()
-                    )
+                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                 ]
                 return listdelegators.BaseListDelegator(children)
             case _:

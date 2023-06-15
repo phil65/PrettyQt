@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 from prettyqt import constants, core
 
@@ -29,7 +30,12 @@ class CheckableProxyModel(core.IdentityProxyModel):
 
         return super().data(index, role)
 
-    def setData(self, index, value, role=constants.EDIT_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if role == constants.CHECKSTATE_ROLE and index.column() == self._column:
             if index.row() in self._checked:
                 self._checked.remove(index.row())

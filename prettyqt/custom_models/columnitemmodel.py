@@ -253,7 +253,12 @@ class ColumnItemModelMixin:
                 if int(role) >= int(constants.USER_ROLE):
                     return col_item.get_user_data(tree_item, role)
 
-    def setData(self, index, value, role):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ):
         if not index.isValid():
             return False
         col = index.column()
@@ -268,14 +273,19 @@ class ColumnItemModelMixin:
                 self.dataChanged.emit(index, index)
                 return True
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         if not index.isValid():
             return super().flags(index)  # TODO: whats best here?
         col = index.column()
         tree_item = self.data_by_index(index)
         return self._attr_cols[col].get_flag(tree_item)
 
-    def headerData(self, section, orientation, role):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole,
+    ) -> str | None:
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self._attr_cols[section].name
@@ -329,7 +339,12 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
     def data_by_index(self, index: core.ModelIndex):
         return self.items[index.row()]
 
-    def setData(self, index, value, role):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ):
         if role == constants.USER_ROLE:
             self.items[index.row()] = value
             self.update_row(index.row())

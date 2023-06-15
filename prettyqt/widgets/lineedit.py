@@ -4,25 +4,24 @@ import re
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
 
 
-ECHO_MODE = bidict(
-    normal=QtWidgets.QLineEdit.EchoMode.Normal,
-    no_echo=QtWidgets.QLineEdit.EchoMode.NoEcho,
-    password=QtWidgets.QLineEdit.EchoMode.Password,
-    echo_on_edit=QtWidgets.QLineEdit.EchoMode.PasswordEchoOnEdit,
-)
-
 EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]
 
-ACTION_POSITION = bidict(
-    leading=QtWidgets.QLineEdit.ActionPosition.LeadingPosition,
-    trailing=QtWidgets.QLineEdit.ActionPosition.TrailingPosition,
+ECHO_MODE: bidict[EchoModeStr, widgets.QLineEdit.EchoMode] = bidict(
+    normal=widgets.QLineEdit.EchoMode.Normal,
+    no_echo=widgets.QLineEdit.EchoMode.NoEcho,
+    password=widgets.QLineEdit.EchoMode.Password,
+    echo_on_edit=widgets.QLineEdit.EchoMode.PasswordEchoOnEdit,
 )
 
 ActionPositionStr = Literal["leading", "trailing"]
+
+ACTION_POSITION: bidict[ActionPositionStr, widgets.QLineEdit.ActionPosition] = bidict(
+    leading=widgets.QLineEdit.ActionPosition.LeadingPosition,
+    trailing=widgets.QLineEdit.ActionPosition.TrailingPosition,
+)
 
 ValidatorStr = Literal[
     "double",
@@ -61,7 +60,7 @@ MAIL_REGEX = r"[a-zA-Z0-9_\.\+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-\.]+"
 def get_validator(
     validator: ValidatorStr | datatypes.PatternType,
     **kwargs,
-) -> QtGui.QValidator:
+) -> gui.QValidator:
     match validator:
         case "email":
             return get_validator("regular_expression", regular_expression=MAIL_REGEX)
@@ -71,7 +70,7 @@ def get_validator(
             ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
             return validator
-        case QtCore.QRegularExpression():
+        case core.QRegularExpression():
             return get_validator("regular_expression", regular_expression=validator)
         case re.Pattern():
             return get_validator(
@@ -81,7 +80,7 @@ def get_validator(
             raise ValueError(validator)
 
 
-class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
+class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
     value_changed = core.Signal(str)
     tab_pressed = core.Signal()
 
@@ -115,7 +114,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
 
     def keyPressEvent(self, event):
         super().keyPressEvent(event)
-        if event.key() == QtCore.Qt.Key.Key_Tab:
+        if event.key() == constants.Key.Key_Tab:
             self.tab_pressed.emit()
 
     def append_text(self, text: str):
@@ -124,9 +123,9 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
     def set_text(self, text: str):
         self.setText(text)
 
-    def set_completer(self, completer: QtWidgets.QCompleter | Literal["files"]):
+    def set_completer(self, completer: widgets.QCompleter | Literal["files"]):
         match completer:
-            case QtWidgets.QCompleter():
+            case widgets.QCompleter():
                 self.setCompleter(completer)
             case "files":
                 model = widgets.FileSystemModel()
@@ -143,7 +142,9 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         """
         self.setReadOnly(value)
 
-    def set_regex_validator(self, regex: str, flags=0) -> gui.RegularExpressionValidator:
+    def set_regex_validator(
+        self, regex: str, flags: int = 0
+    ) -> gui.RegularExpressionValidator:
         validator = gui.RegularExpressionValidator(self)
         validator.set_regex(regex, flags)
         self.set_validator(validator)
@@ -156,20 +157,20 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
 
     def set_validator(
         self,
-        validator: QtGui.QValidator | ValidatorStr | datatypes.PatternType | None,
+        validator: gui.QValidator | ValidatorStr | datatypes.PatternType | None,
         strict: bool = True,
         empty_allowed: bool = True,
         **kwargs,
-    ) -> QtGui.QValidator:
+    ) -> gui.QValidator:
         from prettyqt import custom_validators
 
         match validator:
             case str() if "|" in validator:
                 validators = [get_validator(i, **kwargs) for i in validator.split("|")]
                 validator = custom_validators.CompositeValidator(validators)
-            case str() | re.Pattern() | QtCore.QRegularExpression():
+            case str() | re.Pattern() | core.QRegularExpression():
                 validator = get_validator(validator, **kwargs)
-            case None | QtGui.QValidator():
+            case None | gui.QValidator():
                 pass
             case _:
                 raise ValueError(validator)
@@ -239,7 +240,7 @@ class LineEdit(widgets.WidgetMixin, QtWidgets.QLineEdit):
         """
         return constants.CURSOR_MOVE_STYLE.inverse[self.cursorMoveStyle()]
 
-    def add_action(self, action: QtGui.QAction, position: ActionPositionStr = "trailing"):
+    def add_action(self, action: gui.QAction, position: ActionPositionStr = "trailing"):
         self.addAction(action, ACTION_POSITION[position])
 
     def set_value(self, value: str):

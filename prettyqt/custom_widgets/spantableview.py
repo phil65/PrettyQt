@@ -6,7 +6,6 @@ from typing import Any
 import enum
 
 import itertools
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt import constants, core, widgets
 
 SECTION_HEIGHT = 40
@@ -44,13 +43,18 @@ class _SpanHeaderItem:
     def column(self) -> int:
         return self._column
 
-    def setData(self, data: Any, role: int) -> None:
-        self._data[role] = data
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
+        self._data[role] = value
 
     def data(self, role: int) -> Any:
         return self._data.get(role, None)
 
-    def clear(self) -> None:
+    def clear(self):
         for child in self._children.values():
             child.clear()
 
@@ -72,11 +76,11 @@ class SpanHeaderModel(core.AbstractTableModel):
         self._root_item = _SpanHeaderItem()
 
     def index(
-        self, row: int, column: int, parent: QtCore.QModelIndex | None = None
-    ) -> QtCore.QModelIndex:
-        parent = parent or QtCore.QModelIndex()
+        self, row: int, column: int, parent: core.QModelIndex | None = None
+    ) -> core.QModelIndex:
+        parent = parent or core.QModelIndex()
         if not self.hasIndex(row, column, parent):
-            return QtCore.QModelIndex()
+            return core.QModelIndex()
 
         parent_item = parent.internalPointer() if parent.isValid() else self._root_item
         child_item = parent_item.child(row, column)
@@ -86,16 +90,16 @@ class SpanHeaderModel(core.AbstractTableModel):
 
         return self.createIndex(row, column, child_item)
 
-    def rowCount(self, parent: QtCore.QModelIndex | None = None) -> int:
+    def rowCount(self, parent: core.QModelIndex | None = None) -> int:
         return self._rows
 
-    def columnCount(self, parent: QtCore.QModelIndex | None = None) -> int:
+    def columnCount(self, parent: core.QModelIndex | None = None) -> int:
         return self._columns
 
-    def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
-        return super().flags(index) if index.isValid() else QtCore.Qt.ItemFlag.NoItemFlags
+    def flags(self, index: core.QModelIndex) -> constants.ItemFlag:
+        return super().flags(index) if index.isValid() else constants.ItemFlag.NoItemFlags
 
-    def data(self, index: QtCore.QModelIndex, role: constants.ItemDataRole) -> Any:
+    def data(self, index: core.QModelIndex, role: constants.ItemDataRole) -> Any:
         if not index.isValid():
             return None
 
@@ -113,9 +117,9 @@ class SpanHeaderModel(core.AbstractTableModel):
 
     def setData(
         self,
-        index: QtCore.QModelIndex,
+        index: core.QModelIndex,
         value: Any,
-        role: int = QtCore.Qt.ItemDataRole.EditRole,
+        role: int = constants.ItemDataRole.EditRole,
     ) -> bool:
         if not index.isValid():
             return False
@@ -144,33 +148,33 @@ class SpanHeaderModel(core.AbstractTableModel):
         return True
 
     def insertRows(
-        self, row: int, count: int, parent: QtCore.QModelIndex | None = None
+        self, row: int, count: int, parent: core.QModelIndex | None = None
     ) -> bool:
-        parent = parent or QtCore.QModelIndex()
+        parent = parent or core.QModelIndex()
         with self.insert_rows(row, row + count - 1, parent):
             self._rows += count
         return True
 
     def removeRows(
-        self, row: int, count: int, parent: QtCore.QModelIndex | None = None
+        self, row: int, count: int, parent: core.QModelIndex | None = None
     ) -> bool:
-        parent = parent or QtCore.QModelIndex()
+        parent = parent or core.QModelIndex()
         with self.remove_rows(row, row + count - 1, parent):
             self._rows -= count
         return True
 
     def insertColumns(
-        self, column: int, count: int, parent: QtCore.QModelIndex | None = None
+        self, column: int, count: int, parent: core.QModelIndex | None = None
     ) -> bool:
-        parent = parent or QtCore.QModelIndex()
+        parent = parent or core.QModelIndex()
         with self.insert_columns(column, column + count - 1, parent):
             self._columns += count
         return True
 
     def removeColumns(
-        self, column: int, count: int, parent: QtCore.QModelIndex | None = None
+        self, column: int, count: int, parent: core.QModelIndex | None = None
     ) -> bool:
-        parent = parent or QtCore.QModelIndex()
+        parent = parent or core.QModelIndex()
         with self.remove_columns(column, column + count - 1, parent):
             self._columns -= count
         return True
@@ -181,13 +185,13 @@ class SpanHeaderView(widgets.HeaderView):
 
     def __init__(
         self,
-        orientation: QtCore.Qt.Orientation,
+        orientation: constants.Orientation,
         sections: int = 0,
-        parent: QtWidgets.QWidget | None = None,
-    ) -> None:
+        parent: widgets.QWidget | None = None,
+    ):
         super().__init__(orientation, parent)
 
-        base_section_size = QtCore.QSize()
+        base_section_size = core.QSize()
         if self.orientation() == constants.HORIZONTAL:
             base_section_size.setWidth(self.defaultSectionSize())
             base_section_size.setHeight(SECTION_HEIGHT // 2)
@@ -211,7 +215,7 @@ class SpanHeaderView(widgets.HeaderView):
 
         self.sectionResized.connect(self.onSectionResized)
 
-    def setSectionCount(self, sections: int) -> None:
+    def setSectionCount(self, sections: int):
         model = self.model()
 
         if self.orientation() == constants.HORIZONTAL:
@@ -225,7 +229,7 @@ class SpanHeaderView(widgets.HeaderView):
                 for col in range(current_sections, sections):
                     model.setData(
                         model.index(0, col),
-                        QtCore.QSize(self.defaultSectionSize(), SECTION_HEIGHT),
+                        core.QSize(self.defaultSectionSize(), SECTION_HEIGHT),
                         constants.SIZE_HINT_ROLE,
                     )
         else:
@@ -239,11 +243,11 @@ class SpanHeaderView(widgets.HeaderView):
                 for row in range(current_sections, sections):
                     model.setData(
                         model.index(row, 0),
-                        QtCore.QSize(SECTION_WIDTH, self.defaultSectionSize()),
+                        core.QSize(SECTION_WIDTH, self.defaultSectionSize()),
                         constants.SIZE_HINT_ROLE,
                     )
 
-    def setSectionLabel(self, section: int, label: str) -> None:
+    def setSectionLabel(self, section: int, label: str):
         if self.orientation() == constants.HORIZONTAL:
             index = self.model().index(0, section)
         else:
@@ -251,7 +255,7 @@ class SpanHeaderView(widgets.HeaderView):
 
         self.model().setData(index, label, constants.DISPLAY_ROLE)
 
-    def setSectionBackgroundColor(self, section: int, color: QtGui.QColor) -> None:
+    def setSectionBackgroundColor(self, section: int, color: gui.QColor):
         if self.orientation() == constants.HORIZONTAL:
             index = self.model().index(0, section)
         else:
@@ -259,7 +263,7 @@ class SpanHeaderView(widgets.HeaderView):
 
         self.model().setData(index, color, constants.BACKGROUND_ROLE)
 
-    def setSectionForegroundColor(self, section: int, color: QtGui.QColor) -> None:
+    def setSectionForegroundColor(self, section: int, color: gui.QColor):
         if self.orientation() == constants.HORIZONTAL:
             index = self.model().index(0, section)
         else:
@@ -267,12 +271,12 @@ class SpanHeaderView(widgets.HeaderView):
 
         self.model().setData(index, color, constants.FOREGROUND_ROLE)
 
-    def indexAt(self, pos: QtCore.QPoint) -> QtCore.QModelIndex:
+    def indexAt(self, pos: core.QPoint) -> core.QModelIndex:
         tbl_model = self.model()
         if tbl_model is None:
             return core.ModelIndex()
         if tbl_model.columnCount() == 0 or tbl_model.rowCount() == 0:
-            return QtCore.QModelIndex()
+            return core.QModelIndex()
 
         logical_idx = self.logicalIndexAt(pos)
         delta = 0
@@ -297,11 +301,9 @@ class SpanHeaderView(widgets.HeaderView):
                 if pos.x() <= delta:
                     return cell_index
 
-        return QtCore.QModelIndex()
+        return core.QModelIndex()
 
-    def paintSection(
-        self, painter: QtGui.QPainter, rect: QtCore.QRect, logical_index: int
-    ) -> None:
+    def paintSection(self, painter: gui.QPainter, rect: core.QRect, logical_index: int):
         tbl_model: SpanHeaderModel = self.model()
 
         if self.orientation() == constants.HORIZONTAL:
@@ -310,7 +312,7 @@ class SpanHeaderView(widgets.HeaderView):
             cell_index = tbl_model.index(logical_index, 0)
 
         cell_size = cell_index.data(constants.SIZE_HINT_ROLE)
-        section_rect = QtCore.QRect(rect)
+        section_rect = core.QRect(rect)
 
         section_rect.setSize(cell_size)
 
@@ -349,10 +351,10 @@ class SpanHeaderView(widgets.HeaderView):
             cell_index = row_span_idx
 
         # draw section with style
-        opt = QtWidgets.QStyleOptionHeader()
+        opt = widgets.QStyleOptionHeader()
         self.initStyleOption(opt)
-        opt.textAlignment = QtCore.Qt.AlignmentFlag.AlignCenter
-        opt.iconAlignment = QtCore.Qt.AlignmentFlag.AlignVCenter
+        opt.textAlignment = constants.AlignmentFlag.AlignCenter
+        opt.iconAlignment = constants.AlignmentFlag.AlignVCenter
         opt.section = logical_index
         opt.text = cell_index.data(constants.DISPLAY_ROLE)
         opt.rect = section_rect
@@ -360,18 +362,18 @@ class SpanHeaderView(widgets.HeaderView):
         bg = cell_index.data(constants.BACKGROUND_ROLE)
         fg = cell_index.data(constants.FOREGROUND_ROLE)
         if bg is not None:
-            opt.palette.setBrush(QtGui.QPalette.ColorRole.Button, QtGui.QBrush(bg))
-            opt.palette.setBrush(QtGui.QPalette.ColorRole.Window, QtGui.QBrush(bg))
+            opt.palette.setBrush(gui.QPalette.ColorRole.Button, gui.QBrush(bg))
+            opt.palette.setBrush(gui.QPalette.ColorRole.Window, gui.QBrush(bg))
         if fg is not None:
-            opt.palette.setBrush(QtGui.QPalette.ColorRole.ButtonText, QtGui.QBrush(fg))
+            opt.palette.setBrush(gui.QPalette.ColorRole.ButtonText, gui.QBrush(fg))
 
         painter.save()
         self.style().drawControl(
-            QtWidgets.QStyle.ControlElement.CE_Header, opt, painter, self
+            widgets.QStyle.ControlElement.CE_Header, opt, painter, self
         )
         painter.restore()
 
-    def sectionSizeFromContents(self, logical_index: int) -> QtCore.QSize:
+    def sectionSizeFromContents(self, logical_index: int) -> core.QSize:
         tbl_model: SpanHeaderModel = self.model()
 
         if self.orientation() == constants.HORIZONTAL:
@@ -386,7 +388,7 @@ class SpanHeaderView(widgets.HeaderView):
 
         return size
 
-    def setSpan(self, section: int, span_count: int) -> None:
+    def setSpan(self, section: int, span_count: int):
         md: SpanHeaderModel = self.model()
 
         if self.orientation() == constants.HORIZONTAL:
@@ -398,7 +400,7 @@ class SpanHeaderView(widgets.HeaderView):
             md.setData(idx, span_count, SpanHeaderModel.HeaderRole.RowSpanRole)
             md.setData(idx, 1, SpanHeaderModel.HeaderRole.ColumnSpanRole)
 
-    def column_span_index(self, index: QtCore.QModelIndex) -> QtCore.QModelIndex:
+    def column_span_index(self, index: core.QModelIndex) -> core.QModelIndex:
         tbl_model: SpanHeaderModel = self.model()
         cur_row = index.row()
         cur_col = index.column()
@@ -413,9 +415,9 @@ class SpanHeaderView(widgets.HeaderView):
 
             i -= 1
 
-        return QtCore.QModelIndex()
+        return core.QModelIndex()
 
-    def row_span_index(self, index: QtCore.QModelIndex) -> QtCore.QModelIndex:
+    def row_span_index(self, index: core.QModelIndex) -> core.QModelIndex:
         tbl_model: SpanHeaderModel = self.model()
         cur_row = index.row()
         cur_col = index.column()
@@ -430,7 +432,7 @@ class SpanHeaderView(widgets.HeaderView):
 
             i -= 1
 
-        return QtCore.QModelIndex()
+        return core.QModelIndex()
 
     def columnSpanSize(self, from_col: int, span_count: int) -> int:
         tbl_model: SpanHeaderModel = self.model()
@@ -453,7 +455,7 @@ class SpanHeaderView(widgets.HeaderView):
         return span
 
     def getSectionRange(
-        self, index: QtCore.QModelIndex, begin_section: int, end_section: int
+        self, index: core.QModelIndex, begin_section: int, end_section: int
     ) -> tuple[int, int]:
         col_span_idx = self.column_span_index(index)
         row_span_idx = self.row_span_index(index)
@@ -503,7 +505,7 @@ class SpanHeaderView(widgets.HeaderView):
 
         return begin_section, end_section
 
-    def mousePressEvent(self, event: QtGui.QMouseEvent) -> None:
+    def mousePressEvent(self, event: gui.QMouseEvent):
         super().mousePressEvent(event)
 
         index = self.indexAt(event.position().toPoint())
@@ -521,7 +523,7 @@ class SpanHeaderView(widgets.HeaderView):
             self.sectionPressed.emit(begin_section, end_section)
 
     @core.Slot(int, int, int)
-    def onSectionResized(self, logical_index: int, old_size: int, new_size: int) -> None:
+    def onSectionResized(self, logical_index: int, old_size: int, new_size: int):
         tbl_model: SpanHeaderModel = self.model()
 
         pos = self.sectionViewportPosition(logical_index)
@@ -533,7 +535,7 @@ class SpanHeaderView(widgets.HeaderView):
             xx, yy = 0, pos
             cell_index = tbl_model.index(logical_index, 0)
 
-        section_rect = QtCore.QRect(xx, yy, 0, 0)
+        section_rect = core.QRect(xx, yy, 0, 0)
         cell_size = cell_index.data(constants.SIZE_HINT_ROLE)
 
         if self.orientation() == constants.HORIZONTAL:
@@ -562,14 +564,14 @@ class SpanHeaderView(widgets.HeaderView):
             else:
                 section_rect.setTop(self.rowSpanSize(0, row_span_from))
 
-        rect_to_update = QtCore.QRect(section_rect)
+        rect_to_update = core.QRect(section_rect)
         rect_to_update.setWidth(self.viewport().width() - section_rect.left())
         rect_to_update.setHeight(self.viewport().height() - section_rect.top())
         self.viewport().update(rect_to_update.normalized())
 
 
 class SpanTableView(widgets.TableView):
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent=parent)
 
         hheader = SpanHeaderView(constants.HORIZONTAL)
@@ -581,7 +583,7 @@ class SpanTableView(widgets.TableView):
         hheader.sectionPressed.connect(self.onHorizontalHeaderSectionPressed)
         vheader.sectionPressed.connect(self.onVerticalHeaderSectionPressed)
 
-    def setModel(self, model: QtCore.QAbstractItemModel) -> None:
+    def setModel(self, model: core.QAbstractItemModel):
         old_model = self.model()
 
         if old_model is not None:
@@ -613,19 +615,17 @@ class SpanTableView(widgets.TableView):
         model.rowsInserted.connect(self.onModelRowsChanged)
         model.rowsRemoved.connect(self.onModelRowsChanged)
 
-    def spanHeaderView(self, orientation: QtCore.Qt.Orientation) -> SpanHeaderView:
+    def spanHeaderView(self, orientation: constants.Orientation) -> SpanHeaderView:
         if orientation == constants.HORIZONTAL:
             return self.horizontalHeader()
         else:
             return self.verticalHeader()
 
     @core.Slot(int, int)
-    def onHorizontalHeaderSectionPressed(
-        self, begin_section: int, end_section: int
-    ) -> None:
+    def onHorizontalHeaderSectionPressed(self, begin_section: int, end_section: int):
         self.clearSelection()
         old_selection_mode = self.selectionMode()
-        self.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
+        self.setSelectionMode(widgets.QAbstractItemView.SelectionMode.MultiSelection)
 
         for i in range(begin_section, end_section + 1):
             self.selectColumn(i)
@@ -633,12 +633,10 @@ class SpanTableView(widgets.TableView):
         self.setSelectionMode(old_selection_mode)
 
     @core.Slot(int, int)
-    def onVerticalHeaderSectionPressed(
-        self, begin_section: int, end_section: int
-    ) -> None:
+    def onVerticalHeaderSectionPressed(self, begin_section: int, end_section: int):
         self.clearSelection()
         old_selection_mode = self.selectionMode()
-        self.setSelectionMode(QtWidgets.QAbstractItemView.SelectionMode.MultiSelection)
+        self.setSelectionMode(widgets.QAbstractItemView.SelectionMode.MultiSelection)
 
         for i in range(begin_section, end_section + 1):
             self.selectRow(i)
@@ -646,7 +644,7 @@ class SpanTableView(widgets.TableView):
         self.setSelectionMode(old_selection_mode)
 
     @core.Slot()
-    def onModelReset(self) -> None:
+    def onModelReset(self):
         hheader = self.spanHeaderView(constants.HORIZONTAL)
         vheader = self.spanHeaderView(constants.VERTICAL)
 
@@ -654,12 +652,12 @@ class SpanTableView(widgets.TableView):
         vheader.setSectionCount(self.model().rowCount())
 
     @core.Slot()
-    def onModelColumnsChanged(self) -> None:
+    def onModelColumnsChanged(self):
         hheader = self.spanHeaderView(constants.HORIZONTAL)
         hheader.setSectionCount(self.model().columnCount())
 
     @core.Slot()
-    def onModelRowsChanged(self) -> None:
+    def onModelRowsChanged(self):
         vheader = self.spanHeaderView(constants.VERTICAL)
         vheader.setSectionCount(self.model().rowCount())
 
@@ -697,8 +695,8 @@ if __name__ == "__main__":
     hheader.setSectionLabel(3, "section3")
     hheader.setSectionLabel(6, "section4")
 
-    hheader.setSectionBackgroundColor(0, QtGui.QColor(QtCore.Qt.GlobalColor.cyan))
-    hheader.setSectionForegroundColor(0, QtGui.QColor(QtCore.Qt.GlobalColor.blue))
+    hheader.setSectionBackgroundColor(0, gui.QColor(constants.GlobalColor.cyan))
+    hheader.setSectionForegroundColor(0, gui.QColor(constants.GlobalColor.blue))
 
     # Vertical header settings.
     vheader = view.spanHeaderView(constants.VERTICAL)

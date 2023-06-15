@@ -8,11 +8,16 @@ class ListMixin:
     SORT_METHODS: dict[int, Callable]
     MIME_TYPE: str = ""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, items=None, **kwargs):
         super().__init__(*args, **kwargs)  # type: ignore
-        self.items = []
+        self.items = items or []
 
-    def setData(self, index, value, role):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ):
         if role == constants.USER_ROLE:
             self.items[index.row()] = value
             self.update_row(index.row())

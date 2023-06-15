@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 from prettyqt import constants, core, gui, custom_models
 from prettyqt.utils import bidict
@@ -91,7 +92,12 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
                 print(self.headers[column], role)
                 return idx.data(role)
 
-    def setData(self, index: core.ModelIndex, value, role=constants.DISPLAY_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         idx = self.items[index.row()]
         idx.model().setData(idx, value, role)
         self.update_row(index.row())

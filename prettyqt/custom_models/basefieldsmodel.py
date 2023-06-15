@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import logging
+from typing import Any
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -42,7 +43,12 @@ class BaseFieldsModel(core.AbstractTableModel):
                 field = self._fields[section]
                 return field.name
 
-    def setData(self, index: QtCore.QModelIndex, value, role=constants.DISPLAY_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if not index.isValid():
             return None
         field = self._fields[index.row()]

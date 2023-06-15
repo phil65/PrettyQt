@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import logging
+from typing import Any
 
 from prettyqt import constants, core
 
@@ -14,7 +15,12 @@ class ReadOnlyProxyModel(core.IdentityProxyModel):
         super().__init__(*args, **kwargs)
         self._columns = columns
 
-    def setData(self, index, value, role=constants.EDIT_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         logger.warning("Trying to set data on model with read-only proxy")
         return False
 

@@ -6,6 +6,7 @@ import functools
 import contextlib
 import logging
 from operator import and_
+from typing import Any
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
@@ -61,7 +62,12 @@ class BaseDataclassModel(core.AbstractTableModel):
             case constants.USER_ROLE:
                 return getattr(instance, field.name)
 
-    def setData(self, index: core.ModelIndex, value, role=constants.DISPLAY_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         field = self.fields[index.column()]
         instance = self.items[index.row()]
         match role:

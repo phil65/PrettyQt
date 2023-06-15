@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 import enum
+from typing import Any
 
 import numpy as np
 import pandas as pd
@@ -57,7 +58,12 @@ class PandasColumnListModel(custom_models.ModelMixin, core.AbstractTableModel):
     def mimeTypes(self):
         return [self.MIME_TYPE]
 
-    def setData(self, index, value, role):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if not index.isValid():
             return False
         match role:
@@ -190,7 +196,12 @@ class PandasIndexListModel(custom_models.ModelMixin, core.AbstractTableModel):
         super().__init__(**kwargs)
         self.df = ds
 
-    def setData(self, index, value, role):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value: Any,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if not index.isValid():
             return False
         match role:
