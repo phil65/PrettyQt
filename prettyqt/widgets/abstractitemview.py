@@ -345,7 +345,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """Set a delegate. Delegates can also be set by Id."""
         match delegate:
             case QtWidgets.QAbstractItemDelegate():
-                pass
+                dlg = delegate
             # case "variant":
             #     delegate = custom_delegates.VariantDelegate(parent=self, **kwargs)
             # case "widget":
@@ -356,33 +356,33 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             #     delegate = custom_delegates.ButtonDelegate(parent=self, **kwargs)
             case str():
                 Klass = helpers.get_class_for_id(widgets.StyledItemDelegate, delegate)
-                delegate = Klass(parent=self, **kwargs)
+                dlg = Klass(parent=self, **kwargs)
             case _:
                 raise ValueError(delegate)
         match column, row:
             case int(), int():
                 raise ValueError("Only set column or row, not both.")
             case int(), None:
-                self.setItemDelegateForColumn(column, delegate)
+                self.setItemDelegateForColumn(column, dlg)
                 if persistent:
                     model = self.model()
                     for i in range(model.rowCount()):
                         index = model.index(i, column)
                         self.openPersistentEditor(index)
             case None, int():
-                self.setItemDelegateForRow(row, delegate)
+                self.setItemDelegateForRow(row, dlg)
                 if persistent:
                     model = self.model()
                     for i in range(model.columnCount()):
                         self.openPersistentEditor(model.index(row, i))
             case None, None:
-                self.setItemDelegate(delegate)
+                self.setItemDelegate(dlg)
                 if persistent:
                     model = self.model()
                     for i in range(model.rowCount()):
                         for j in range(model.columnCount()):
                             self.openPersistentEditor(model.index(i, j))
-        return delegate
+        return dlg
 
     def toggle_select_all(self):
         """Select all items from list (deselect when all selected)."""
@@ -400,6 +400,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def current_index(self) -> QtCore.QModelIndex | None:
         if (model := self.selectionModel()) is not None:
             return model.currentIndex()
+        return None
 
     def current_data(self, role=constants.USER_ROLE):
         if (model := self.selectionModel()) is not None:
@@ -409,10 +410,12 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def current_row(self) -> int | None:
         if (model := self.selectionModel()) is not None:
             return model.currentIndex().row()
+        return None
 
     def current_column(self) -> int | None:
         if (model := self.selectionModel()) is not None:
             return model.currentIndex().column()
+        return None
 
     def selected_indexes(self) -> listdelegators.BaseListDelegator[QtCore.QModelIndex]:
         """Return list of selected indexes in first row."""

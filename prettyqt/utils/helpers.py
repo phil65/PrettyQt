@@ -139,7 +139,10 @@ def get_subclasses(klass, include_abstract: bool = False):
             yield i
 
 
-def get_class_for_id(base_class: type, id_: str) -> type:
+T = typing.TypeVar("T", bound=type)
+
+
+def get_class_for_id(base_class: T, id_: str) -> T:
     base_classes = (
         typing.get_args(base_class)
         if isinstance(base_class, types.UnionType)

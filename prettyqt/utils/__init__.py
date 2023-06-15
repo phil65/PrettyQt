@@ -5,15 +5,18 @@ import enum
 import functools
 import logging
 import operator
-from typing import Any
+from typing import Any, TypeVar
 
 import bidict as bdct
 
 
 logger = logging.getLogger(__name__)
 
+KT = TypeVar("KT")
+VT = TypeVar("VT")
 
-class bidict(bdct.bidict):
+
+class bidict(bdct.bidict[KT, VT]):
     def __init__(self, *args, **kwargs):
         match args:
             case (dict(),):
@@ -21,18 +24,18 @@ class bidict(bdct.bidict):
             case _:
                 super().__init__(kwargs)
 
-    def __getitem__(self, item):
+    def __getitem__(self, item) -> VT:
         try:
             return super().__getitem__(item)
         except KeyError as e:
             raise InvalidParamError(item, list(self.keys())) from e
 
-    def get_list(self, flag: int | enum.Enum) -> list[Any]:
+    def get_list(self, flag: int | enum.Enum) -> list[KT]:
         if isinstance(flag, enum.Enum):
             flag = flag.value
         return [k for k, v in self.items() if v.value & flag]
 
-    def get_dict(self, flag: int | enum.Enum) -> dict[str, Any]:
+    def get_dict(self, flag: int | enum.Enum) -> dict[KT, VT]:
         if isinstance(flag, enum.Enum):
             flag = flag.value
         return {k: v & flag for k, v in self.items()}
@@ -43,7 +46,7 @@ class bidict(bdct.bidict):
     #         flag = flag.value
     #     return {k: v & flag for k, v in self.items()}
 
-    def merge_flags(self, flags: Iterable[str]):
+    def merge_flags(self, flags: Iterable[KT]) -> VT:
         return functools.reduce(operator.ior, [self[t] for t in flags])
 
 
