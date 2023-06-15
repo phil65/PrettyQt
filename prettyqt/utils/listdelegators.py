@@ -1,18 +1,40 @@
 from __future__ import annotations
 
-from prettyqt.utils import helpers
+from typing import Any, SupportsIndex, TypeVar, Literal, overload
+
+from collections.abc import Callable
+
+from prettyqt.utils import fx, helpers
+
+T = TypeVar("T")
 
 
-class BaseListDelegator(list):
+class BaseListDelegator(list[T]):
     """Delegates method calls to all list members."""
 
     def __init__(self, *args, parent=None):
         self._parent = parent
         super().__init__(*args)
 
-    def __getitem__(self, index):
+    @overload
+    def __getitem__(self, index: str) -> BaseListDelegator[fx.AnimationWrapper]:
+        ...
+
+    @overload
+    def __getitem__(self, index: slice) -> BaseListDelegator[T]:
+        ...
+
+    @overload
+    def __getitem__(self, index: SupportsIndex) -> T:
+        ...
+
+    def __getitem__(
+        self, index: str | SupportsIndex | slice
+    ) -> BaseListDelegator[T] | T | BaseListDelegator[fx.AnimationWrapper]:
         match index:
-            # for fx["prop"]. Might be worth it to have a separate delegator for props.
+            # for fx["prop"].
+            # might be worth it to have delegators for the different classes
+            # i.e. WidgetDelegator.
             case str():
                 return BaseListDelegator(
                     [instance.__getitem__(index) for instance in self],
@@ -23,7 +45,15 @@ class BaseListDelegator(list):
             case _:
                 return super().__getitem__(index)
 
-    def __getattr__(self, method_name: str):
+    @overload
+    def __getattr__(self, method_name: Literal["fx"]) -> BaseListDelegator[fx.Fx]:
+        ...
+
+    @overload
+    def __getattr__(self, method_name: str) -> Callable:
+        ...
+
+    def __getattr__(self, method_name: str) -> BaseListDelegator[fx.Fx] | Callable:
         # method_name = helpers.to_lower_camel(method_name)
 
         # TODO: should implement a general way to deal with properties.
@@ -32,7 +62,7 @@ class BaseListDelegator(list):
                 [instance.fx for instance in self], parent=self._parent
             )
 
-        def delegator(*args, **kwargs):
+        def delegator(*args, **kwargs) -> list[Any]:
             results = []
             for instance in self:
                 result = getattr(instance, method_name)(*args, **kwargs)
@@ -40,6 +70,57 @@ class BaseListDelegator(list):
             return results
 
         return delegator
+
+
+# class WidgetDelegator(BaseListDelegator[T]):
+#     """Delegates method calls to all widgets of the list."""
+
+#     def __init__(self, *args, parent=None):
+#         self._parent = parent
+#         super().__init__(*args)
+
+#     @overload
+#     def __getitem__(self, index: str) -> BaseListDelegator[fx.AnimationWrapper]:
+#         ...
+
+#     def __getitem__(
+#         self, index: str | SupportsIndex | slice
+#     ) -> BaseListDelegator[T] | T | BaseListDelegator[fx.AnimationWrapper]:
+#         match index:
+#             # for fx["prop"].
+#             # might be worth it to have delegators for the different classes
+#             # i.e. WidgetDelegator.
+#             case str():
+#                 return BaseListDelegator(
+#                     [instance.__getitem__(index) for instance in self],
+#                     parent=self._parent,
+#                 )
+#             case slice():
+#                 return type(self)(super().__getitem__(index), parent=self._parent)
+#             case _:
+#                 return super().__getitem__(index)
+
+#     @overload
+#     def __getattr__(self, method_name: Literal["fx"]) -> BaseListDelegator[fx.Fx]:
+#         ...
+
+#     @overload
+#     def __getattr__(self, method_name: str) -> Callable:
+#         ...
+
+#     def __getattr__(self, method_name: str) -> BaseListDelegator[fx.Fx] | Callable:
+#         # method_name = helpers.to_lower_camel(method_name)
+
+#         # TODO: should implement a general way to deal with properties.
+#         if method_name == "fx":
+#             return BaseListDelegator(
+#                 [instance.fx for instance in self], parent=self._parent
+#             )
+
+#         return super().__getattr__(method_name)
+
+# class SplitterDelegator(WidgetDelegator[T]):
+#     ...
 
 
 class SplitterDelegator(BaseListDelegator):
