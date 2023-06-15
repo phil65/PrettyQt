@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes, get_repr
 
 
 class ColorComboBox(widgets.ComboBox):
-    value_changed = core.Signal(gui.Color)
+    value_changed = core.Signal(gui.QColor)
 
     def __init__(
         self,
@@ -15,7 +14,7 @@ class ColorComboBox(widgets.ComboBox):
         **kwargs,
     ):
         super().__init__(object_name=object_name, **kwargs)
-        self._current_color: gui.Color = gui.Color("white")
+        self._current_color: gui.QColor = gui.QColor("white")
         for i in gui.Color.colorNames():
             self.addItem(iconprovider.for_color(i), i)
         if color is not None:
@@ -26,13 +25,13 @@ class ColorComboBox(widgets.ComboBox):
         return get_repr(self, self._current_color)
 
     def clear(self):
-        self._current_color = gui.Color("white")
+        self._current_color = gui.QColor("white")
         super().clear()
         for i in gui.Color.colorNames():
             self.addItem(iconprovider.for_color(i), i)
 
     def set_current_color(self, color: datatypes.ColorType):
-        self._current_color = colors.get_color(color)
+        self._current_color = colors.get_color(color).as_qt()
         for color_name in gui.Color.colorNames():
             if gui.Color(color_name) == self._current_color:
                 self.setCurrentText(color_name)
@@ -41,13 +40,13 @@ class ColorComboBox(widgets.ComboBox):
     def is_valid(self) -> bool:
         return self._current_color.isValid()
 
-    def get_value(self) -> gui.Color:
+    def get_value(self) -> gui.QColor:
         return self._current_color
 
     def set_value(self, value: datatypes.ColorType):
         self.set_current_color(value)
 
-    current_color = core.Property(QtGui.QColor, get_value, set_value, user=True)
+    current_color = core.Property(gui.QColor, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":

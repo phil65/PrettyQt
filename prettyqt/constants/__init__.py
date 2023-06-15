@@ -141,7 +141,24 @@ ITEM_DATA_ROLE: bidict[ItemDataRoleStr, QtCore.Qt.ItemDataRole | int] = bidict(
     background=BACKGROUND_ROLE,
 )
 
-ALIGNMENTS = bidict(
+AlignmentStr = Literal[
+    "none",
+    "left",
+    "center_left",
+    "right",
+    "center_right",
+    "top_center",
+    "top",
+    "bottom",
+    "bottom_center",
+    "top_left",
+    "top_right",
+    "bottom_left",
+    "bottom_right",
+    "center",
+]
+
+ALIGNMENTS = bidict[AlignmentStr, Qt.AlignmentFlag](
     none=Qt.AlignmentFlag(0),
     left=ALIGN_LEFT,
     center_left=ALIGN_CENTER_LEFT,
@@ -157,19 +174,6 @@ ALIGNMENTS = bidict(
     bottom_right=ALIGN_BOTTOM_RIGHT,
     center=ALIGN_CENTER,
 )
-
-AlignmentStr = Literal[
-    "none",
-    "left",
-    "right",
-    "top",
-    "bottom",
-    "top_left",
-    "top_right",
-    "bottom_left",
-    "bottom_right",
-    "center",
-]
 
 SIDES = bidict(
     left=Qt.AlignmentFlag.AlignLeft,
@@ -202,13 +206,6 @@ EdgeStr = Literal[
     "bottom_right",
 ]
 
-H_ALIGNMENT = bidict(
-    left=Qt.AlignmentFlag.AlignLeft,
-    right=Qt.AlignmentFlag.AlignRight,
-    center=Qt.AlignmentFlag.AlignHCenter,
-    justify=Qt.AlignmentFlag.AlignJustify,
-)
-
 HorizontalAlignmentStr = Literal[
     "left",
     "right",
@@ -216,7 +213,14 @@ HorizontalAlignmentStr = Literal[
     "justify",
 ]
 
-V_ALIGNMENT = bidict(
+H_ALIGNMENT: bidict[HorizontalAlignmentStr, Qt.AlignmentFlag] = bidict(
+    left=Qt.AlignmentFlag.AlignLeft,
+    right=Qt.AlignmentFlag.AlignRight,
+    center=Qt.AlignmentFlag.AlignHCenter,
+    justify=Qt.AlignmentFlag.AlignJustify,
+)
+
+V_ALIGNMENT: bidict[HorizontalAlignmentStr, Qt.AlignmentFlag] = bidict(
     top=Qt.AlignmentFlag.AlignTop,
     bottom=Qt.AlignmentFlag.AlignBottom,
     center=Qt.AlignmentFlag.AlignVCenter,

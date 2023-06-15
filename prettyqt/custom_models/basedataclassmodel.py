@@ -50,7 +50,7 @@ class BaseDataclassModel(core.AbstractTableModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
                 return self.fields[section].name
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
         if not index.isValid():
             return None
         field = self.fields[index.column()]
@@ -61,7 +61,7 @@ class BaseDataclassModel(core.AbstractTableModel):
             case constants.USER_ROLE:
                 return getattr(instance, field.name)
 
-    def setData(self, index, value, role=constants.DISPLAY_ROLE):
+    def setData(self, index: core.ModelIndex, value, role=constants.DISPLAY_ROLE):
         field = self.fields[index.column()]
         instance = self.items[index.row()]
         match role:

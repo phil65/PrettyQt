@@ -47,6 +47,8 @@ list[QtCore.QStorageInfo]
 
 list[QtWidgets.QWidget]
 
+list[QtCore.QModelIndex]
+
 QtCore.QObject
 - Table model to display all available Properties of a QObject.
 - Works by inspecting the MetaObject of the QObjects.

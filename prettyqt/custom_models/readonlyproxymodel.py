@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import logging
+
 from prettyqt import constants, core
+
+logger = logging.getLogger(__name__)
 
 
 class ReadOnlyProxyModel(core.IdentityProxyModel):
@@ -11,7 +15,8 @@ class ReadOnlyProxyModel(core.IdentityProxyModel):
         self._columns = columns
 
     def setData(self, index, value, role=constants.EDIT_ROLE):
-        pass
+        logger.warning("Trying to set data on model with read-only proxy")
+        return False
 
     def flags(self, index):
         flags = super().flags(index)

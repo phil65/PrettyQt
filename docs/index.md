@@ -25,19 +25,48 @@ Example: The class "TreeView" inherits from original Qt Class "QTreeView" and ge
 from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
 "FrameMixin", "WidgetMixin" and "ObjectMixin".
 
+To illustrate this, we will use our included models:
+
+    from prettyqt import custom_models, widgets
+
+    app = widgets.app()
+    widget_1 = widgets.TreeView()
+    widget_2 = widgets.TreeView()
+    model_1 = custom_models.SubClassTreeModel(core.ObjectMixin)  # our base mixin.
+    model_2 = custom_models.SubClassTreeModel(core.QObject)  # this is QtCore.QObject
+    widget.set_model(model)
+    widget.show()
+
+You can see a comparison here between Our mixin tree and the original Qt Tree.
+As you can notice, every Qt class with Subclasses has a corresponding Mixin.
+
+To show what this leads to, we will look at another example:
+
+    from prettyqt import custom_models, widgets
+
+    app = widgets.app()
+    widget = widgets.TreeView()
+    model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
+    widget.set_model(model)
+    widget.show()
+
 Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
 and using it can be quite cumbersome for Python developers. (it´s statically typed,
 very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
 
-- adding more powerful methods to the classes, which accept more types and have more options (aka keyword arguments)
+- adding more powerful methods to the classes, which accept more types and have more options
+- points, sizes and rectangles can also be passed to all important methods as tuples.
+- all enum getters/setters also work with strings. Everything typed with Litarals for an excellent IDE experience.
+- python regex patterns (re.Pattern) also possible for lot of methods.
 - adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
-- adding replacements for all Qt Methods which work with enums. Strings are the preferred choice in PrettyQt.
+    match core.Point(a, 1)
 
 
-Apart from the 3D related modules (Qt3D, QtDataVizualization),
+
+Apart from the 3D related modules (Qt3D, QtDataVizualization), QtXml and QtSql,
 almost every class from Qt is covered.
 
-## The covered modules are:
+## The covered modules right now are:
 
 - QtBluetooth (-> prettyqt.bluetooth)
 - QtCharts (-> prettyqt.charts)

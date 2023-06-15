@@ -19,7 +19,7 @@ FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "propor
 
 
 class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
-    value_changed = core.Signal(gui.Font)
+    value_changed = core.Signal(gui.QFont)
 
     def _get_map(self):
         maps = super()._get_map()
@@ -57,8 +57,8 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
     def set_value(self, value: QtGui.QFont):
         self.setCurrentFont(value)
 
-    def get_value(self) -> gui.Font:
-        return self.get_current_font()
+    def get_value(self) -> gui.QFont:
+        return gui.QFont(self.get_current_font())
 
     def get_current_font(self) -> gui.Font:
         return gui.Font(self.currentFont())

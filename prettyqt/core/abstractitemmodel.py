@@ -214,8 +214,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.layoutAboutToBeChanged.emit()
         self.layoutChanged.emit()
 
-    def get_role_names(self) -> dict[int, str]:
-        return {i: v.data().decode() for i, v in self.roleNames().items()}
+    def get_role_names(self) -> bidict[int, str]:
+        return bidict({i: v.data().decode() for i, v in self.roleNames().items()})
 
     def get_breadcrumbs_path(
         self,
@@ -231,7 +231,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
             pieces.insert(0, index.data(role))
         return pieces
 
-    def prefetch_tree(self, root_index: core.ModelIndex | None, depth: int | None = None):
+    def prefetch_tree(
+        self, root_index: core.ModelIndex | None = None, depth: int | None = None
+    ):
         for idx in self.iter_tree(root_index, depth):
             if self.canFetchMore(idx):
                 self.fetchMore(idx)
