@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import contextlib
 import enum
 import inspect
 import logging
@@ -44,16 +45,15 @@ class BaseClassTreeModel(custom_models.TreeModel):
                 return klass.__name__
             case constants.DISPLAY_ROLE, 1:
                 doc = inspect.getdoc(klass)
-                try:
+                with contextlib.suppress(AttributeError):
                     return inspect.cleandoc(doc)
-                except AttributeError:
-                    pass
             case constants.DISPLAY_ROLE, 2:
                 return inspect.getmodule(klass)
             case constants.DISPLAY_ROLE, 3:
                 return inspect.getcomments(klass)
             case constants.DISPLAY_ROLE, 4:
-                return inspect.getfile(klass)
+                with contextlib.suppress(TypeError):
+                    return inspect.getfile(klass)
             case constants.CHECKSTATE_ROLE, 5:
                 return inspect.isabstract(klass)
             case constants.USER_ROLE, _:
@@ -115,7 +115,7 @@ if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TreeView()
     view.setRootIsDecorated(True)
-    model = SubClassTreeModel(widgets.WidgetMixin, show_root=True, parent=view)
+    model = ParentClassTreeModel(widgets.TreeWidget, show_root=True, parent=view)
     view.set_model(model)
     container = filtercontainer.FilterContainer(view)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
