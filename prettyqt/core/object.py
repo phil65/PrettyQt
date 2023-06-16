@@ -359,7 +359,7 @@ class ObjectMixin:
                     case _ if hasattr(val, "isNull"):
                         include = not val.isNull()
                     case _ if hasattr(val, "isEmpty"):
-                        include = val.isEmpty()
+                        include = not val.isEmpty()
                     case _ if hasattr(val, "isValid"):
                         include = val.isValid()
                     case _:
