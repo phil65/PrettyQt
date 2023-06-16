@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from typing import overload
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import animator
+from prettyqt.utils import animator, listdelegators
 
 
 class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
@@ -16,8 +17,27 @@ class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
         self.addWidget(other)
         return self
 
+    @overload
     def __getitem__(self, index: int) -> QtWidgets.QWidget:
-        return self.widget(index)
+        ...
+
+    @overload
+    def __getitem__(
+        self, index: slice
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        ...
+
+    def __getitem__(
+        self, index: int | slice
+    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        match index:
+            case int():
+                if index >= self.count():
+                    raise IndexError(index)
+                return self.widget(index)
+            case slice():
+                rng = range(index.start or 0, index.stop or self.count(), index.step or 1)
+                return listdelegators.BaseListDelegator(self.widget(i) for i in rng)
 
     def __delitem__(self, item: int | QtWidgets.QWidget):
         if isinstance(item, int):
