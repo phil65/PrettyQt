@@ -93,8 +93,9 @@ def example_tree(flatten: bool = False):
     table = widgets.TreeView()
     model = JsonModel(dist, parent=table)
     table.setRootIsDecorated(True)
-    model = model.proxifier.get_proxy("flatten_tree") if flatten else model
     table.set_model(model)
+    if flatten:
+        table.proxifier.flatten()
     return table
 
 
@@ -118,6 +119,7 @@ def example_table(flatten: bool = False):
     )
     data = pd.DataFrame(data)
     table = widgets.TableView()
+    table.set_delegate("variant")
     table.set_model(data)
     return table
 

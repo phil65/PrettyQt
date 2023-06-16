@@ -52,34 +52,11 @@ class CheckableProxyModel(core.IdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-    from prettyqt.custom_models import JsonModel
+    from prettyqt import debugging, widgets
 
     app = widgets.app()
-    dist = [
-        dict(
-            assss=2,
-            bffff={
-                "a": 4,
-                "b": [1, 2, 3],
-                "jkjkjk": "tekjk",
-                "sggg": "tekjk",
-                "fdfdf": "tekjk",
-                "xxxx": "xxx",
-            },
-        ),
-        6,
-        "jkjk",
-    ]
-
-    table = widgets.TreeView()
-    _source_model = JsonModel(dist, parent=table)
-    model = CheckableProxyModel(parent=table)
-    model = model.proxifier.get_proxy("fuzzy")
-    print(type(model))
-    model.setSourceModel(_source_model)
-    table.setRootIsDecorated(True)
-    table.set_model(model)
-    table.show()
+    tree = debugging.example_tree()
+    tree.proxifier.get_proxy("checkable")
+    tree.show()
     with app.debug_mode():
         app.main_loop()

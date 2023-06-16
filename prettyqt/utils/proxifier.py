@@ -37,6 +37,11 @@ ProxyStr = Literal[
 
 class ProxyWrapper:
     def __init__(self, index, widget: core.QAbstractItemModel, proxifier: Proxyfier):
+        if widget.model() is None:
+            raise RuntimeError("Need a model in order to proxify.")
+        # PySide6 shows empty tables when no parent is set.
+        if widget.model().parent() is None:
+            raise RuntimeError("Setting proxy without parent.")
         self._index = index
         self.proxifier = proxifier
         self._widget = widget
@@ -59,14 +64,15 @@ class ProxyWrapper:
     def set_read_only(self):
         from prettyqt import custom_models
 
-        match self._index:
-            case (arg_1, arg_2):
-                kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=self._widget)
-            case _:
-                kwargs = dict(
-                    row_filter=self._index, column_filter=None, parent=self._widget
-                )
-        proxy = custom_models.SubsetFilterProxyModel(**kwargs)
+        proxy = custom_models.ReadOnlyProxyModel(index=self._index, parent=self._widget)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
+    def set_checkable(self):
+        from prettyqt import custom_models
+
+        proxy = custom_models.ReadOnlyProxyModel(index=self._index, parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
@@ -120,6 +126,7 @@ class Proxyfier:
         proxy = custom_models.ValueTransformationProxyModel(parent=self._widget)
         proxy.add_transformer(fn, column, row, role, selector, selector_role)
         proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
         return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs):

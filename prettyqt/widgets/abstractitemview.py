@@ -195,9 +195,9 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             case dict():
                 model = custom_models.JsonModel(model, parent=self)
             case [dict(), *_]:
-                model = custom_models.MappingModel(model)
+                model = custom_models.MappingModel(model, parent=self)
             case [str(), *_]:
-                model = core.StringListModel(model)
+                model = core.StringListModel(model, parent=self)
             case QtCore.QAbstractItemModel() | None:
                 pass
             case _:
@@ -208,15 +208,15 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
                 if not isinstance(model, pd.DataFrame):
                     raise ValueError(model)
-                model = pandasmodels.DataTableWithHeaderModel(model)
+                model = pandasmodels.DataTableWithHeaderModel(model, parent=self)
         # Delete old selection model explicitely, seems to help with memory usage.
         old_model = self.model()
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
             self.setModel(model)
+            # if model is not None:
+            #     self.setSelectionModel(core.ItemSelectionModel(model))
             self.model_changed.emit(model)
-        if model is not None:
-            self.setSelectionModel(core.ItemSelectionModel(model))
         # if old_model:
         #     old_model.deleteLater()
         #     del old_model

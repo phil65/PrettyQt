@@ -83,12 +83,9 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-
     table = widgets.TableView()
     table.set_model(["a", "b", "c", "d", "a"])
-    table.model().setParent(table)
-    model = table.model().proxifier.get_proxy("highlight_current", mode="all")
-    table.set_model(model)
+    table.proxifier.get_proxy("highlight_current", mode="all")
     table.show()
     with app.debug_mode():
         app.main_loop()

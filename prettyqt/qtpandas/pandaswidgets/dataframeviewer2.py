@@ -42,8 +42,8 @@ class DataFrameModel:
 class DataFrameDataModel(core.AbstractTableModel):
     """Model for table data."""
 
-    def __init__(self, model):
-        super().__init__()
+    def __init__(self, model, parent=None):
+        super().__init__(parent=parent)
         self._model = model
 
     def rowCount(self, index=None):
@@ -59,13 +59,17 @@ class DataFrameDataModel(core.AbstractTableModel):
             case constants.DISPLAY_ROLE:
                 val = self._model.data(index.row(), index.column())
                 return "" if pd.isnull(val) else core.Locale().toString(val)
+            case constants.USER_ROLE:
+                return self._model.data(index.row(), index.column())
 
 
 class DataFrameHeaderModel(core.AbstractTableModel):
     """Model for the two index tables."""
 
-    def __init__(self, model, axis: constants.OrientationStr, palette: QtGui.QPalette):
-        super().__init__()
+    def __init__(
+        self, model, axis: constants.OrientationStr, palette: QtGui.QPalette, parent=None
+    ):
+        super().__init__(parent=parent)
         self._model = model
         self.axis = axis
         self._palette = palette
@@ -131,8 +135,8 @@ class DataFrameHeaderModel(core.AbstractTableModel):
 class DataFrameLevelModel(core.AbstractTableModel):
     """Top left corner."""
 
-    def __init__(self, model, palette: QtGui.QPalette, font: QtGui.QFont):
-        super().__init__()
+    def __init__(self, model, palette: QtGui.QPalette, font: QtGui.QFont, parent=None):
+        super().__init__(parent=parent)
         self._model = model
         self._background = palette.dark().color()
         if self._background.lightness() > 127:
@@ -359,7 +363,7 @@ class DataFrameViewer(widgets.Widget):
 
     def set_model(self, model, relayout: bool = True):
         self._model = model
-        data_model = DataFrameDataModel(model)
+        data_model = DataFrameDataModel(model, parent=self.table_data)
         self.table_data.set_model(data_model)
         sel_model = self.table_data.selectionModel()
         sel_model.selectionChanged.connect(
@@ -374,7 +378,9 @@ class DataFrameViewer(widgets.Widget):
         )
         sel_model.currentColumnChanged.connect(self._resize_current_column_to_content)
 
-        level_model = DataFrameLevelModel(model, self.palette(), self.font())
+        level_model = DataFrameLevelModel(
+            model, self.palette(), self.font(), parent=self.table_level
+        )
         self.table_level.set_model(level_model)
         sel_model = self.table_level.selectionModel()
         sel_model.selectionChanged.connect(
@@ -388,7 +394,9 @@ class DataFrameViewer(widgets.Widget):
             )
         )
 
-        header_model = DataFrameHeaderModel(model, "horizontal", self.palette())
+        header_model = DataFrameHeaderModel(
+            model, "horizontal", self.palette(), parent=self.table_header
+        )
         self.table_header.set_model(header_model)
         sel_model = self.table_header.selectionModel()
         sel_model.selectionChanged.connect(
@@ -483,6 +491,8 @@ if __name__ == "__main__":
     test = eventfilters.SectionAutoSpanEventFilter(
         table.table_index, orientation=constants.VERTICAL
     )
+    table.table_data.get_proxy("color_values")
+
     table.resizeColumnsToContents()
     table.show()
     app.main_loop()
