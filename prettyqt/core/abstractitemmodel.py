@@ -60,17 +60,23 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self, index: tuple[int | slice, int | slice]
     ) -> QtCore.QModelIndex | listdelegators.BaseListDelegator[QtCore.QModelIndex]:
         # TODO: do proxies need mapToSource here?
+        rowcount = self.rowCount()
+        colcount = self.columnCount()
         match index:
             case int() as row, int() as col:
+                if row > rowcount or col > rowcount:
+                    raise IndexError(index)
                 return self.index(row, col)
             case (row, col):
-                rowcount = self.rowCount()
-                colcount = self.columnCount()
                 indexes = [
                     self.index(i, j)
                     for i, j in helpers.yield_positions(row, col, rowcount, colcount)
                 ]
                 return listdelegators.BaseListDelegator(indexes)
+            case int() as row:
+                if row > rowcount:
+                    raise IndexError(index)
+                return self.index(row, 0)
             case _:
                 raise TypeError(index)
 
