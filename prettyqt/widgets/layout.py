@@ -53,19 +53,21 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     ):
         match index:
             case int():
+                if index >= self.count():
+                    raise IndexError(index)
                 item = self.itemAt(index)
                 return i if (i := item.widget()) is not None else item.layout()
             case str():
                 if (item := self.find_child(typ=QtCore.QObject, name=index)) is not None:
                     return item
-                raise IndexError(index)
+                raise KeyError(index)
             case slice():
                 stop = index.stop or self.count()
                 rng = range(index.start or 0, stop, index.step or 1)
                 widgets = [self[i] for i in rng]
                 return listdelegators.BaseListDelegator(widgets, parent=self)
             case _:
-                raise IndexError(index)
+                raise TypeError(index)
 
     def __setitem__(self, key, value):
         if self._container != self:
