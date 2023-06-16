@@ -83,10 +83,16 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
 if __name__ == "__main__":
     app = widgets.app()
     area = ScrollArea()
+    widget = widgets.Widget()
+    widget.set_layout("vertical")
+    area.set_widget(widget)
     for i in range(50):
         w = widgets.RadioButton(str(i))
         area.setWidgetResizable(True)
         area.add_widget(w)
         area.ensureWidgetVisible(w)
     area.show()
+    a = area.v_scrollbar.fx["value"].animate(0, 300, reverse=True, single_shot=False)
+    app.sleep(2)
+    a.stop()
     app.main_loop()

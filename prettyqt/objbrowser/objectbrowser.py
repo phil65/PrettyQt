@@ -3,7 +3,6 @@
 
 from __future__ import annotations
 
-import hashlib
 import logging
 import traceback
 
@@ -36,11 +35,6 @@ DEFAULT_ATTR_DETAILS = [
 logger = logging.getLogger(__name__)
 
 
-# It's not possible to use locals() as default for obj by taking take the locals
-# from one stack frame higher; you can't know if the ObjectBrowser.__init__ was
-# called directly, via the browse() wrapper or via a descendants' constructor.
-
-
 class ObjectBrowser(widgets.MainWindow):
     """Object browser main application window."""
 
@@ -51,11 +45,10 @@ class ObjectBrowser(widgets.MainWindow):
         self._attr_cols = DEFAULT_ATTR_COLS
         self._attr_details = DEFAULT_ATTR_DETAILS
 
-        with core.Settings(settings_id=self._settings_group_name("model")) as settings:
-            self._auto_refresh = settings.get("auto_refresh", False)
-            self._refresh_rate = settings.get("refresh_rate", 2)
-            show_callable_attrs = settings.get("show_callable_attrs", True)
-            show_special_attrs = settings.get("show_special_attrs", True)
+        self._auto_refresh = False
+        self._refresh_rate = 2
+        show_callable_attrs = True
+        show_special_attrs = True
         self._tree_model = objectbrowsertreemodel.ObjectBrowserTreeModel(
             obj, columns=self._attr_cols, show_root=False
         )
@@ -160,12 +153,7 @@ class ObjectBrowser(widgets.MainWindow):
         radio_widget.box.addStretch(1)
         group_box.box.addWidget(radio_widget)
 
-        # Editor widget
-        font = gui.Font("Courier")
-        font.setFixedPitch(True)
-        # font.setPointSize(14)
-
-        self.editor = widgets.PlainTextEdit(read_only=True, font=font)
+        self.editor = widgets.PlainTextEdit(read_only=True, font=gui.Font.mono())
         group_box.box.addWidget(self.editor)
 
         # Splitter parameters
@@ -216,32 +204,6 @@ class ObjectBrowser(widgets.MainWindow):
         if self._tree_model.show_root:
             self.obj_tree.expand(first_row_index)
 
-    def _settings_group_name(self, postfix: str) -> str:
-        """Construct a group name for the persistent settings.
-
-        Because the columns in the main table are extendible, we must store the settings
-        in a different group if a different combination of columns is used. Therefore the
-        settings group name contains a hash that is calculated from the used column names.
-        Furthermore the window number is included in the settings group name. Finally a
-        postfix string is appended.
-        """
-        column_names = ",".join([col.name for col in self._attr_cols])
-        columns_hash = hashlib.md5(column_names.encode()).hexdigest()
-        return f"{columns_hash}_win_{postfix}"
-
-    def _write_model_settings(self):
-        """Write the model settings to the persistent store."""
-        new = dict(
-            auto_refresh=self._auto_refresh,
-            refresh_rate=self._refresh_rate,
-            show_callable_attrs=self._proxy_tree_model.get_show_callables(),
-            show_special_attrs=self._proxy_tree_model.get_show_special_attrs(),
-        )
-        settings_id = self._settings_group_name("model")
-        logger.debug(f"New settings: {new}")
-        with core.Settings(settings_id=settings_id) as settings:
-            settings.update(new)
-
     @core.Slot(core.ModelIndex, core.ModelIndex)
     def _update_details(
         self, current_index: core.ModelIndex, _previous_index: core.ModelIndex
@@ -290,7 +252,6 @@ class ObjectBrowser(widgets.MainWindow):
     def closeEvent(self, event):
         """Called when the window is closed."""
         logger.debug("closeEvent")
-        self._write_model_settings()
         self._refresh_timer.stop()
         self._refresh_timer.timeout.disconnect(self._tree_model.refresh_tree)
         self.toggle_callable_action.toggled.disconnect(
@@ -310,7 +271,7 @@ class ObjectBrowser(widgets.MainWindow):
 
 if __name__ == "__main__":
     struct = dict(a={1, 2, frozenset([1, 2])})
-    app = widgets.app()  # keeping reference to prevent garbage collection.
+    app = widgets.app()
     with app.debug_mode():
         object_browser = ObjectBrowser(struct)
         object_browser.show()
