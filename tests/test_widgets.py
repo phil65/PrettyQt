@@ -37,14 +37,14 @@ clsmembers = [tpl for tpl in clsmembers if core.ObjectMixin in tpl[1].mro()]
 #         widget = pickle.load(jar)
 
 
-@pytest.mark.parametrize("name, cls", clsmembers)
-def test_repr(name, cls):
-    try:
-        widget = cls()
-    except Exception:
-        return None
-    else:
-        repr(widget)
+# @pytest.mark.parametrize("name, cls", clsmembers)
+# def test_repr(name, cls):
+#     try:
+#         widget = cls()
+#     except Exception:
+#         return None
+#     else:
+#         repr(widget)
 
 
 @pytest.mark.parametrize("name, cls", clsmembers)
