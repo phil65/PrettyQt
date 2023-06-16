@@ -8,6 +8,30 @@ from prettyqt.utils import colors, datatypes, helpers
 logger = logging.getLogger(__name__)
 
 
+class AnimationTimer(core.Timer):
+    """Timer with animation attached.
+
+    Is returned for animations in order to stop them afterwards.
+    """
+
+    def __init__(
+        self,
+        animation: core.PropertyAnimation,
+        interval: int,
+        single_shot: bool = True,
+        parent: core.QObject | None = None,
+    ):
+        # we could also take targetObject as parent?
+        # that would limit the usage to PropertyAnimations though.
+        self._animation = animation
+        super().__init__(
+            timeout=animation.start,
+            interval=interval,
+            single_shot=single_shot,
+            parent=parent,
+        )
+
+
 class AnimationWrapper:
     def __init__(self, animation: core.PropertyAnimation, fx: Fx):
         self._animation = animation
@@ -22,7 +46,7 @@ class AnimationWrapper:
         delay: int = 0,
         reverse: bool = False,
         single_shot: bool = True,
-    ) -> core.PropertyAnimation:
+    ) -> AnimationTimer:
         """General animation with global coordinates."""
         self._animation.set_start_value(start)
         self._animation.set_end_value(end)
@@ -31,24 +55,23 @@ class AnimationWrapper:
         logger.debug(f"Setting up animation: {start=}, {end=}, {easing=}, {duration=}")
         if reverse:
             self._animation.append_reversed()
-        self.fx.run(self._animation, delay=delay, single_shot=single_shot)
-        return self._animation
+        return self.fx.run(self._animation, delay=delay, single_shot=single_shot)
 
     def transition_to(
         self,
-        end: datatypes.VariantType,
+        end: datatypes.VariantType | tuple,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
         relative: bool = False,
         reverse: bool = False,
         single_shot: bool = True,
-    ) -> core.PropertyAnimation:
+    ) -> AnimationTimer:
         """Makes property transition from current value to given end value."""
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
-        start = prop.read(obj)
+        start: core.VariantType = prop.read(obj)
         end = datatypes.align_types(start, end)
         if relative and hasattr(end, "__add__"):
             end = end + start
@@ -71,7 +94,7 @@ class AnimationWrapper:
         relative: bool = False,
         reverse: bool = False,
         single_shot: bool = True,
-    ) -> core.PropertyAnimation:
+    ) -> AnimationTimer:
         """Makes property transition from given start value to its current value."""
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
@@ -261,13 +284,18 @@ class Fx:
 
     def run(
         self, animation: core.QPropertyAnimation, delay: int = 0, single_shot: bool = True
-    ):
+    ) -> AnimationTimer:
         if not animation.targetObject().isVisible():
             logger.info("Attention. Starting animation for invisible widget.")
         logger.debug(f"starting {animation!r} with {delay=}. ({single_shot=})")
-        self._widget.start_callback_timer(
-            animation.start, interval=delay, single_shot=single_shot
+        timer = AnimationTimer(
+            parent=self._widget,
+            single_shot=single_shot,
+            interval=helpers.parse_time(delay) if isinstance(delay, str) else delay,
+            animation=animation,
         )
+        timer.start()
+        return timer
 
     def highlight_widget(self, widget: widgets.QWidget):
         from prettyqt.custom_widgets.overlayborder import FocusWidget
