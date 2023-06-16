@@ -36,43 +36,62 @@ ProxyStr = Literal[
 
 
 class ProxyWrapper:
-    def __init__(self, index, widget: core.QAbstractItemModel, proxifier: Proxyfier):
+    def __init__(self, indexer, widget: core.QAbstractItemModel, proxifier: Proxyfier):
         if widget.model() is None:
             raise RuntimeError("Need a model in order to proxify.")
         # PySide6 shows empty tables when no parent is set.
         if widget.model().parent() is None:
             raise RuntimeError("Setting proxy without parent.")
-        self._index = index
+        self._indexer = indexer
         self.proxifier = proxifier
         self._widget = widget
 
-    def filter(self):
+    def filter(self) -> custom_models.SubsetFilterProxyModel:
         from prettyqt import custom_models
 
-        match self._index:
+        match self._indexer:
             case (arg_1, arg_2):
                 kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=self._widget)
             case _:
                 kwargs = dict(
-                    row_filter=self._index, column_filter=None, parent=self._widget
+                    row_filter=self._indexer, column_filter=None, parent=self._widget
                 )
         proxy = custom_models.SubsetFilterProxyModel(**kwargs)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
-    def set_read_only(self):
+    def modify(
+        self,
+        fn: Callable[[Any], Any],
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+        selector: Callable[[Any], bool] | None = None,
+        selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ) -> custom_models.ValueTransformationProxyModel:
         from prettyqt import custom_models
 
-        proxy = custom_models.ReadOnlyProxyModel(index=self._index, parent=self._widget)
+        proxy = custom_models.ValueTransformationProxyModel(
+            indexer=self._indexer, parent=self._widget
+        )
+        proxy.add_transformer(fn, role, selector, selector_role)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
-    def set_checkable(self):
+    def set_read_only(self) -> custom_models.ReadOnlyProxyModel:
         from prettyqt import custom_models
 
-        proxy = custom_models.ReadOnlyProxyModel(index=self._index, parent=self._widget)
+        proxy = custom_models.ReadOnlyProxyModel(index=self._indexer, parent=self._widget)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
+    def set_checkable(self) -> custom_models.CheckableProxyModel:
+        from prettyqt import custom_models
+
+        proxy = custom_models.CheckableProxyModel(
+            indexer=self._indexer, parent=self._widget
+        )
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
@@ -91,7 +110,7 @@ class ProxyWrapper:
         proxy = custom_models.AppearanceProxyModel(parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         # TODO: set_data is probably not the most efficient way to do this.
-        proxy.set_data(self._index, value, role)
+        proxy.set_data(self._indexer, value, role)
         self._widget.set_model(proxy)
         return proxy
 
@@ -103,7 +122,7 @@ class Proxyfier:
 
     def __getitem__(self, value: slice) -> ProxyWrapper:
         logger.debug(f"Building {value!r} ProxyModel for {self._widget!r}")
-        self._wrapper = ProxyWrapper(value, self._widget, self)
+        self._wrapper = ProxyWrapper(indexer=value, widget=self._widget, proxifier=self)
         return self._wrapper
 
     def transpose(self) -> core.TransposeProxyModel:
@@ -111,23 +130,6 @@ class Proxyfier:
 
     def flatten(self) -> custom_models.FlattenedTreeProxyModel:
         return self.get_proxy("flatten_tree")
-
-    def modify(
-        self,
-        fn: Callable[[Any], Any],
-        column: int | None = None,
-        row: int | None = None,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-        selector: Callable[[Any], bool] | None = None,
-        selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ):
-        from prettyqt import custom_models
-
-        proxy = custom_models.ValueTransformationProxyModel(parent=self._widget)
-        proxy.add_transformer(fn, column, row, role, selector, selector_role)
-        proxy.setSourceModel(self._widget.model())
-        self._widget.set_model(proxy)
-        return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs):
         Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)

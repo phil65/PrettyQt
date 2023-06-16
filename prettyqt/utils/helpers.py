@@ -37,11 +37,13 @@ CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 #     return klass
 
 
-def is_index_in_slice(a_slice: slice, idx: int):
-    if idx < a_slice.start or idx >= a_slice.stop:
+def is_in_slice(a_slice: slice | range, idx: int):
+    start = a_slice.start or 0
+    is_behind_range = a_slice.stop is not None and idx >= a_slice.stop
+    if idx < start or is_behind_range:
         return False
     step = a_slice.step or 1
-    return (idx - a_slice.start) % step == 0
+    return (idx - start) % step == 0
 
 
 def is_position_in_index(x: int, y: int, index) -> bool:
@@ -50,11 +52,11 @@ def is_position_in_index(x: int, y: int, index) -> bool:
         case None:
             return True
         case slice() as row, int() as col:
-            return is_index_in_slice(row, x) and y == col
+            return is_in_slice(row, x) and y == col
         case int() as row, slice() as col:
-            return is_index_in_slice(col, y) and x == row
+            return is_in_slice(col, y) and x == row
         case slice() as row, slice() as col:
-            return is_index_in_slice(col, y) and is_index_in_slice(row, x)
+            return is_in_slice(col, y) and is_in_slice(row, x)
         case int() as row, int() as col:
             return x == row and y == col
 

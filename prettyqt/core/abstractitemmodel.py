@@ -47,7 +47,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return proxy
 
     @overload
-    def __getitem__(self, index: tuple[int, int]) -> QtCore.QModelIndex:
+    def __getitem__(self, index: tuple[int, int] | int) -> QtCore.QModelIndex:
         ...
 
     @overload
@@ -82,7 +82,10 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 raise TypeError(index)
 
     def set_data(
-        self, index: tuple[int | slice, int | slice], value, role=constants.EDIT_ROLE
+        self,
+        index: tuple[int | slice, int | slice] | core.ModelIndex,
+        value: Any,
+        role=constants.EDIT_ROLE,
     ):
         match index:
             case core.ModelIndex():
@@ -148,6 +151,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         to_check = min(rows_to_check, self.rowCount())
         if to_check == 0:
             return None
+        # cant combine these or make them a generator, so we do two list comps.
         indexes = [self.index(row, column) for row in range(to_check)]
         values = [self.data(i, role=role) for i in indexes]
         if all(isinstance(i, bool) for i in values):
@@ -337,7 +341,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
         indexes = [self.index(i, 0, index) for i in range(self.rowCount(index))]
         return listdelegators.BaseListDelegator(indexes)
 
-    def get_index_key(self, index: core.ModelIndex, include_column: bool = False):
+    def get_index_key(
+        self, index: core.ModelIndex, include_column: bool = False
+    ) -> tuple[tuple[int, int] | int, ...]:
         """Return a key for `index` from the source model into the _source_offset map.
 
         The key is a tuple of row indices on
@@ -351,7 +357,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
             parent = parent.parent()
         return tuple(reversed(key_path))
 
-    def index_from_key(self, key_path: tuple[int, ...]):
+    def index_from_key(
+        self, key_path: tuple[int | tuple[int, int], ...]
+    ) -> core.ModelIndex:
         """Return a source QModelIndex for the given key."""
         model = self.sourceModel()
         if model is None:
