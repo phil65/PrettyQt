@@ -137,7 +137,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         return None if icon.isNull() else gui.Icon(icon)
 
     def set_detachable(self):
-        self.tab_bar.on_detach.connect(self.detach_tab)
+        self.tab_bar.tab_doubleclicked.connect(self.detach_tab)
         core.CoreApplication.call_on_exit(self.close_detached_tabs)
         self.setMovable(True)
 
