@@ -76,6 +76,9 @@ class SettingsWindow(widgets.Widget):
                 widget = widgets.CheckBox()
             case StrSetting():
                 widget = widgets.LineEdit()
+            case IntSetting():
+                widget = widgets.SpinBox()
+                widget.set_range(setting.minimum, setting.maximum)
 
         container = widgets.Widget()
         row_layout = container.set_layout("horizontal")
@@ -105,6 +108,14 @@ if __name__ == "__main__":
         description="This setting is a bool.",
         default=True,
     )
+    int_test = IntSetting(
+        identifier="int_setting",
+        label="Int setting",
+        description="This setting is an int.",
+        default=15,
+        minimum=10,
+        maximum=20,
+    )
 
     str_test = StrSetting(
         identifier="str_setting",
@@ -121,6 +132,7 @@ if __name__ == "__main__":
     widget.add_setting(bool_test)
     widget.add_setting(bool_test)
     widget.add_setting(str_test)
+    widget.add_setting(int_test)
     widget.add_setting(str_test)
     widget.add_setting(str_test)
     widget.add_setting(app_style)

@@ -204,6 +204,7 @@ def get_class_for_id(base_class: T, id_: str) -> T:
 
 
 def move_in_list(ls: list, indexes: list, target_row: int) -> list:
+    """Moves items with given indexes inside list ls to target row."""
     new = [ls[i] for i in indexes]
     in_range = target_row < len(ls) and target_row != -1
     pos = ls.index(ls[target_row]) if in_range else len(ls)

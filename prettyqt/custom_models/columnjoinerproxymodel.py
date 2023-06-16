@@ -31,7 +31,7 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
             else self.sourceModel().columnCount(parent) + len(self.mapping)
         )
 
-    def is_additional_column(self, column):
+    def is_additional_column(self, column: int):
         col_count = self.sourceModel().columnCount()
         return col_count <= column <= col_count + len(self.mapping)
 
@@ -42,7 +42,9 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
             return self.createIndex(row, column, pointer)
         return super().index(row, column, parent)
 
-    def parent(self, child):
+    def parent(self, child=None):
+        if child is None:
+            return super().parent()
         extra_col = self.sourceModel().columnCount() - child.column()
         if extra_col >= 0:
             proxy_sibling = self.createIndex(child.row(), 0, child.internalPointer())

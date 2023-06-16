@@ -54,7 +54,7 @@ class Line(QtCore.QLine):
             case 1:
                 return self.get_p2()
             case _:
-                raise KeyError(index)
+                raise IndexError(index)
 
     def __setitem__(self, index: Literal[0, 1], value: datatypes.PointType):
         match index:

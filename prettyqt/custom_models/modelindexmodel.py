@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from prettyqt import constants, core, gui, custom_models
+from prettyqt import constants, core, custom_models
 from prettyqt.utils import bidict
 
 logger = logging.getLogger(__name__)
@@ -88,8 +88,8 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
             case constants.DISPLAY_ROLE, _:
                 role = self.role_mapping[header]
                 return repr(idx.data(role))
-            case _ as role, _ as column:
-                print(self.headers[column], role)
+            case _ as role, _:
+                # print(self.headers[column], role)
                 return idx.data(role)
 
     def setData(
@@ -117,9 +117,6 @@ if __name__ == "__main__":
         view = widgets.TableView()
         test = custom_models.ParentClassTreeModel(widgets.PlainTextEdit, parent=view)
         test.prefetch_tree()
-        test = test.proxifier.get_proxy(
-            "appearance", foreground_default=gui.QColor, font_default=gui.QFont
-        )
         indexes = list(test.iter_tree())
         model = ModelIndexModel(indexes=indexes, parent=view)
         for i, v in enumerate(model.role_mapping.values(), start=len(model.FIXED_HEADER)):
