@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
-from typing import Literal
+from typing import Literal, overload
 
 from typing_extensions import Self
 
@@ -34,12 +34,22 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         if margin is not None:
             self.set_margin(margin)
 
+    @overload
+    def __getitem__(
+        self, index: slice
+    ) -> listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]:
+        ...
+
+    @overload
+    def __getitem__(self, index: int | str) -> widgets.QWidget | widgets.QLayout:
+        ...
+
     def __getitem__(
         self, index: str | int | slice
     ) -> (
-        QtWidgets.QWidget
-        | QtWidgets.QLayout
-        | listdelegators.BaseListDelegator[QtWidgets.QWidget | QtWidgets.QLayout]
+        widgets.QWidget
+        | widgets.QLayout
+        | listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]
     ):
         match index:
             case int():
@@ -211,8 +221,10 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         for i in reversed(range(self.count())):
             self.takeAt(i)
 
-    def get_children(self) -> list[QtWidgets.QWidget | QtWidgets.QLayout]:
-        return list(self)
+    def get_children(
+        self,
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget | QtWidgets.QLayout]:
+        return listdelegators.BaseListDelegator(self)
 
     def set_margin(self, margin: tuple[int, int, int, int] | int | None):
         match margin:

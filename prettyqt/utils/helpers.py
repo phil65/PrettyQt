@@ -79,7 +79,7 @@ def find_common_ancestor(cls_list: list[type]) -> type:
 
 
 def yield_positions(
-    rows, columns, num_rows: int, num_columns: int
+    rows: int | slice, columns: int | slice, num_rows: int, num_columns: int
 ) -> typing.Iterator[tuple[int, int]]:
     match (rows, columns):
         case slice() as row, slice() as col:
