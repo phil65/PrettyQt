@@ -32,12 +32,6 @@ class AbstractItemModelMixin(core.ObjectMixin):
         constants.DRAG_ENABLED | constants.IS_ENABLED | constants.IS_SELECTABLE
     )
 
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        from prettyqt.utils import proxifier
-
-        self.proxifier = proxifier.Proxyfier(self)
-
     def __repr__(self):
         return f"{type(self).__name__}: ({self.rowCount()}, {self.columnCount()})"
 

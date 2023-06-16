@@ -179,7 +179,6 @@ if __name__ == "__main__":
     model.setSourceModel(_source_model)
     model.set_font_default(gui.Font.mono().family())
     model.set_background_default("green")
-    model = model.proxifier.get_proxy("sort_filter")
     index = model.index(0, 0)
     model.setData(index, QtGui.QColor("red"), constants.BACKGROUND_ROLE)
     table.set_model(model)

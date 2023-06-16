@@ -90,7 +90,8 @@ if __name__ == "__main__":
     table = widgets.TableView()
     table.set_delegate("variant")
     table.set_model(df)
-    table.set_model(table.model().proxifier.get_proxy("color_values", parent=table))
+    table.proxifier[::2, 1::2].style("red")
+    table.proxifier[1::2, ::2].style("red")
     table.show()
     with app.debug_mode():
         app.main_loop()

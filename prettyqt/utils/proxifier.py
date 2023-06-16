@@ -36,22 +36,39 @@ ProxyStr = Literal[
 
 
 class ProxyWrapper:
-    def __init__(self, index, model: core.QAbstractItemModel, proxifier: Proxyfier):
+    def __init__(self, index, widget: core.QAbstractItemModel, proxifier: Proxyfier):
         self._index = index
         self.proxifier = proxifier
-        self._model = model
+        self._widget = widget
 
     def filter(self):
         from prettyqt import custom_models
 
-        parent = self._model.parent()
         match self._index:
             case (arg_1, arg_2):
-                kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=parent)
+                kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=self._widget)
             case _:
-                kwargs = dict(row_filter=self._index, column_filter=None, parent=parent)
+                kwargs = dict(
+                    row_filter=self._index, column_filter=None, parent=self._widget
+                )
         proxy = custom_models.SubsetFilterProxyModel(**kwargs)
-        proxy.setSourceModel(self._model)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
+    def set_read_only(self):
+        from prettyqt import custom_models
+
+        match self._index:
+            case (arg_1, arg_2):
+                kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=self._widget)
+            case _:
+                kwargs = dict(
+                    row_filter=self._index, column_filter=None, parent=self._widget
+                )
+        proxy = custom_models.SubsetFilterProxyModel(**kwargs)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
         return proxy
 
     def style(self, value="red", role=constants.BACKGROUND_ROLE, **kwargs):
@@ -65,34 +82,29 @@ class ProxyWrapper:
                 value = gui.QFont(value, **kwargs)
             case constants.ALIGNMENT_ROLE:
                 pass
-        parent = self._model.parent()
-        proxy = custom_models.AppearanceProxyModel(parent=parent)
-        proxy.setSourceModel(self._model)
+        proxy = custom_models.AppearanceProxyModel(parent=self._widget)
+        proxy.setSourceModel(self._widget.model())
+        # TODO: set_data is probably not the most efficient way to do this.
         proxy.set_data(self._index, value, role)
+        self._widget.set_model(proxy)
         return proxy
 
 
 class Proxyfier:
-    def __init__(self, model):
-        self._model = model
+    def __init__(self, widget):
+        self._widget = widget
         self._wrapper = None
 
     def __getitem__(self, value: slice) -> ProxyWrapper:
-        if self._model.parent() is None:
-            raise ValueError("needs parent!")
-        logger.debug(f"Building {value!r} ProxyModel for {self._model!r}")
-        self._wrapper = ProxyWrapper(value, self._model, self)
+        logger.debug(f"Building {value!r} ProxyModel for {self._widget!r}")
+        self._wrapper = ProxyWrapper(value, self._widget, self)
         return self._wrapper
 
-    def transpose(
-        self, parent: widgets.QWidget | None = None
-    ) -> core.TransposeProxyModel:
-        return self.get_proxy("transpose", parent)
+    def transpose(self) -> core.TransposeProxyModel:
+        return self.get_proxy("transpose")
 
-    def flatten(
-        self, parent: widgets.QWidget | None = None
-    ) -> custom_models.FlattenedTreeProxyModel:
-        return self.get_proxy("flatten_tree", parent)
+    def flatten(self) -> custom_models.FlattenedTreeProxyModel:
+        return self.get_proxy("flatten_tree")
 
     def modify(
         self,
@@ -102,27 +114,19 @@ class Proxyfier:
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         selector: Callable[[Any], bool] | None = None,
         selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-        parent: widgets.QWidget | None = None,
     ):
-        parent = parent or self._model.parent()
-        if parent is None:
-            raise ValueError("needs parent!")
-
         from prettyqt import custom_models
 
-        proxy = custom_models.ValueTransformationProxyModel(parent=parent)
+        proxy = custom_models.ValueTransformationProxyModel(parent=self._widget)
         proxy.add_transformer(fn, column, row, role, selector, selector_role)
-        proxy.setSourceModel(self._model)
+        proxy.setSourceModel(self._widget.model())
         return proxy
 
-    def get_proxy(self, proxy: ProxyStr, parent: widgets.QWidget | None = None, **kwargs):
-        # PySide6 needs widget parent here
-        parent = parent or self._model.parent()
-        if parent is None:
-            raise ValueError("needs parent!")
+    def get_proxy(self, proxy: ProxyStr, **kwargs):
         Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
-        proxy_instance = Klass(parent=parent, **kwargs)
-        proxy_instance.setSourceModel(self._model)
+        proxy_instance = Klass(parent=self._widget, **kwargs)
+        proxy_instance.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy_instance)
         return proxy_instance
 
 

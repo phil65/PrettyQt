@@ -77,8 +77,4 @@ if __name__ == "__main__":
     app = widgets.app()
     table = widgets.TableView()
     model = widgets.FileSystemModel(parent=table)
-    model = model.proxifier.get_proxy("read_only")
-    model = model2 = model.proxifier.get_proxy("appearance")
-    model = model.proxifier.get_proxy("identity")
     table.set_model(model)
-    model2.remove()
