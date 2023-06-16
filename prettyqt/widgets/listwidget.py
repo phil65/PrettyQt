@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Iterator, Mapping
+import functools
 from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
@@ -81,6 +82,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
             case _:
                 raise TypeError(items)
 
+    @functools.singledispatchmethod
     def add_item(
         self,
         name: str = "",
@@ -129,6 +131,10 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
             item.set_checkstate(checkstate)
         self.addItem(item)
         return item
+
+    @add_item.register
+    def _(self, listitem: QtWidgets.QListWidgetItem):
+        self.addItem(listitem)
 
     def add(self, label: str, data=NoData, icon: datatypes.IconType = None):
         if data is NoData:
