@@ -119,6 +119,10 @@ class ScrollAreaTocWidget(widgets.TreeView):
             scrollarea.h_scrollbar.valueChanged.connect(self._on_scroll)
         self.set_widget(scrollarea)
 
+    def showEvent(self, event):
+        super().showEvent(event)
+        self._on_scroll()
+
     def set_widget(self, widget: widgets.QScrollArea):
         """Set the ScrollArea widget to follow."""
         if widget.widget() is None:
