@@ -223,6 +223,14 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         for i in reversed(range(self.count())):
             self.takeAt(i)
 
+    # def takeAt(self, index: int):
+    #     if index < 0:
+    #         index = self.count() + index
+    #     return super().takeAt(index)
+
+    def get_items(self):
+        return [self.itemAt(i) for i in range(self.count())]
+
     def get_children(
         self,
     ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget | QtWidgets.QLayout]:
