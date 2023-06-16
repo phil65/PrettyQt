@@ -38,15 +38,15 @@ def test_elidedlabel(qtbot):
     label.show()
 
 
-def test_expandableline(qtbot):
-    layout = widgets.VBoxLayout()
-    textbrowser = widgets.TextBrowser()
-    # qtbot.addWidget(textbrowser)
-    layout.addWidget(textbrowser)
-    widget = custom_widgets.ExpandableLine("Test")
-    qtbot.addWidget(widget)
-    widget.set_layout(layout)
-    widget.show()
+# def test_expandableline(qtbot):
+#     layout = widgets.VBoxLayout()
+#     textbrowser = widgets.TextBrowser()
+#     # qtbot.addWidget(textbrowser)
+#     layout.addWidget(textbrowser)
+#     widget = custom_widgets.ExpandableLine("Test")
+#     qtbot.addWidget(widget)
+#     widget.set_layout(layout)
+#     widget.show()
 
 
 def test_colorchooserbutton(qtbot):
@@ -107,7 +107,9 @@ def test_hiearchicalheaderview(qtbot):
 
 def test_iconbrowser(qtbot):
     browser = custom_widgets.IconBrowser()
+    qtbot.addWidget(browser)
     browser.show()
+    browser.hide()
 
 
 def test_stringornumberwidget(qtbot):

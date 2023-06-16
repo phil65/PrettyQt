@@ -6,7 +6,6 @@ from .editors.listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .collapsibleframe import CollapsibleFrame
-from .expandableline import ExpandableLine
 from .clickablelabel import ClickableLabel
 from .orientedtableview import OrientedTableView
 from .hierarchicalheaderview import HierarchicalHeaderView
