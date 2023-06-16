@@ -9,9 +9,15 @@ from prettyqt.utils import InvalidParamError
 
 class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLayout):
     def __getitem__(
-        self, idx: tuple[int, int] | int
+        self, index: tuple[int, int] | int
     ) -> QtWidgets.QGraphicsLayoutItem | None:
-        return self.itemAt(*idx) if isinstance(idx, tuple) else self.itemAt(idx)
+        match index:
+            case (int() as row, int() as col):
+                return self.itemAt(row, col)
+            case int():
+                if index >= self.count():
+                    raise IndexError(index)
+                return self.itemAt(index)
 
     def __setitem__(
         self,

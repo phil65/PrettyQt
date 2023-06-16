@@ -13,6 +13,8 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
     ) -> widgets.QGraphicsItem | listdelegators.BaseListDelegator[widgets.QGraphicsItem]:
         match index:
             case int():
+                if index >= self.count():
+                    raise IndexError(index)
                 layoutitem = self.itemAt(index)
                 return layoutitem.graphicsItem()
             case slice():

@@ -64,7 +64,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         colcount = self.columnCount()
         match index:
             case int() as row, int() as col:
-                if row > rowcount or col > rowcount:
+                if row >= rowcount or col >= rowcount:
                     raise IndexError(index)
                 return self.index(row, col)
             case (row, col):
@@ -74,8 +74,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
                 ]
                 return listdelegators.BaseListDelegator(indexes)
             case int() as row:
-                if row > rowcount:
+                if row >= rowcount:
                     raise IndexError(index)
+                # this here breaks PySide6 IPython test...
                 return self.index(row, 0)
             case _:
                 raise TypeError(index)

@@ -27,12 +27,14 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
             case int():
                 if index < 0:
                     index = self.animationCount() + index
+                if index >= self.animationCount():
+                    raise IndexError(index)
                 anim = self.animationAt(index)
                 if anim is None:
                     raise KeyError(index)
                 return anim
             case slice():
-                stop = index.stop or self.columnCount()
+                stop = index.stop or self.animationCount()
                 rng = range(index.start or 0, stop, index.step or 1)
                 anims = [self.animationAt(i) for i in rng]
                 return listdelegators.BaseListDelegator(anims)

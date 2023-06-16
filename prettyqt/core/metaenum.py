@@ -15,11 +15,14 @@ class MetaEnum:
         return self.item.isValid()
 
     def __getitem__(self, index: str | tuple[str, str]) -> int:
-        if isinstance(index, str):
-            result = self.item.keyToValue(index)[0]  # type: ignore
-        else:
-            val = "|".join(index)
-            result = self.item.keysToValue(val)[0]  # type: ignore
+        match index:
+            case str():
+                result = self.item.keyToValue(index)[0]  # type: ignore
+            case (str(), str()):
+                val = "|".join(index)
+                result = self.item.keysToValue(val)[0]  # type: ignore
+            case _:
+                raise TypeError(index)
         if result == -1:
             raise KeyError(index)
         return result  # type: ignore

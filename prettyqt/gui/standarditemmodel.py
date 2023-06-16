@@ -12,6 +12,8 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
     ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
         match index:
             case int():
+                if index >= self.rowCount():
+                    raise IndexError(index)
                 return self.item(index)
             case slice():
                 return self.__getitem__(index, 0)

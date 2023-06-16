@@ -28,6 +28,8 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
     ) -> QtGui.QStandardItem | listdelegators.BaseListDelegator[QtGui.QStandardItem]:
         match index:
             case int():
+                if index >= self.childCount():
+                    raise IndexError(index)
                 return self.child(index)
             case slice():
                 return self.__getitem__(index, 0)
