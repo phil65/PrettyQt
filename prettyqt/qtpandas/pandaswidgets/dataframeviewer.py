@@ -31,7 +31,7 @@ class DataTableView(widgets.TableView):
         self.set_df(df)
 
     def set_df(self, df):
-        model = pandasmodels.DataTableModel(df)
+        model = pandasmodels.DataTableModel(df, parent=self)
         self.set_model(model)
 
     def copy(self):
@@ -132,9 +132,9 @@ class DataFrameViewer(widgets.Widget):
         if df is not None:
             self.set_df(df)
 
-    def set_df(self, df, read_only: bool = False, color_values: bool = False):
+    def set_df(self, df):
         self.df = df
-        model = pandasmodels.DataTableModel(df)
+        model = pandasmodels.DataTableModel(df, parent=self.table_data)
         self.table_data.set_model(model)
 
         self.table_data.selectionModel().selectionChanged.connect(

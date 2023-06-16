@@ -42,14 +42,14 @@ class DataFrameModel:
 class DataFrameDataModel(core.AbstractTableModel):
     """Model for table data."""
 
-    def __init__(self, model, parent=None):
+    def __init__(self, model, parent: widgets.QWidget | None = None):
         super().__init__(parent=parent)
         self._model = model
 
-    def rowCount(self, index=None):
+    def rowCount(self, index: core.ModelIndex | None = None):
         return max(1, self._model.shape[0])
 
-    def columnCount(self, index=None):
+    def columnCount(self, index: core.ModelIndex | None = None):
         return max(1, self._model.shape[1])
 
     def data(self, index, role):
@@ -67,7 +67,11 @@ class DataFrameHeaderModel(core.AbstractTableModel):
     """Model for the two index tables."""
 
     def __init__(
-        self, model, axis: constants.OrientationStr, palette: QtGui.QPalette, parent=None
+        self,
+        model,
+        axis: constants.OrientationStr,
+        palette: QtGui.QPalette,
+        parent: widgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         self._model = model
@@ -81,7 +85,7 @@ class DataFrameHeaderModel(core.AbstractTableModel):
     def rowCount(self, index: core.ModelIndex | None = None):
         return max(1, self._shape[0])
 
-    def columnCount(self, index=None):
+    def columnCount(self, index: core.ModelIndex | None = None):
         return max(1, self._shape[1])
 
     def headerData(
@@ -135,7 +139,13 @@ class DataFrameHeaderModel(core.AbstractTableModel):
 class DataFrameLevelModel(core.AbstractTableModel):
     """Top left corner."""
 
-    def __init__(self, model, palette: QtGui.QPalette, font: QtGui.QFont, parent=None):
+    def __init__(
+        self,
+        model,
+        palette: QtGui.QPalette,
+        font: QtGui.QFont,
+        parent: widgets.QWidget | None = None,
+    ):
         super().__init__(parent=parent)
         self._model = model
         self._background = palette.dark().color()
@@ -147,10 +157,10 @@ class DataFrameLevelModel(core.AbstractTableModel):
         font.setBold(True)
         self._font = font
 
-    def rowCount(self, index=None):
+    def rowCount(self, index: core.ModelIndex | None = None):
         return max(1, self._model.header_shape[0])
 
-    def columnCount(self, index=None):
+    def columnCount(self, index: core.ModelIndex | None = None):
         return max(1, self._model.header_shape[1])
 
     def headerData(
