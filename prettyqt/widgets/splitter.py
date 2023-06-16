@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterator
+from typing import overload
 
 from typing_extensions import Self
 
@@ -22,9 +23,23 @@ class SplitterMixin(widgets.FrameMixin):
         super().__init__(ori, **kwargs)
         self.setHandleWidth(10)
 
-    def __getitem__(self, index: int | str | slice) -> QtWidgets.QWidget:
+    @overload
+    def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
+        ...
+
+    @overload
+    def __getitem__(
+        self, index: slice
+    ) -> listdelegators.SplitterDelegator[QtWidgets.QWidget]:
+        ...
+
+    def __getitem__(
+        self, index: int | str | slice
+    ) -> QtWidgets.QWidget | listdelegators.SplitterDelegator[QtWidgets.QWidget]:
         match index:
             case int():
+                if index >= self.count():
+                    raise IndexError(index)
                 return self.widget(index)
             case str():
                 result = self.find_child(QtWidgets.QWidget, index)
