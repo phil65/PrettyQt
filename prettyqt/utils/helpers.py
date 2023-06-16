@@ -37,6 +37,28 @@ CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 #     return klass
 
 
+def is_index_in_slice(a_slice: slice, idx: int):
+    if idx < a_slice.start or idx >= a_slice.stop:
+        return False
+    step = a_slice.step or 1
+    return (idx - a_slice.start) % step == 0
+
+
+def is_position_in_index(x: int, y: int, index) -> bool:
+    """Index is a slice tuple."""
+    match index:
+        case None:
+            return True
+        case slice() as row, int() as col:
+            return is_index_in_slice(row, x) and y == col
+        case int() as row, slice() as col:
+            return is_index_in_slice(col, y) and x == row
+        case slice() as row, slice() as col:
+            return is_index_in_slice(col, y) and is_index_in_slice(row, x)
+        case int() as row, int() as col:
+            return x == row and y == col
+
+
 def find_common_ancestor(cls_list: list[type]) -> type:
     # would be much nicer
     mros = [list(inspect.getmro(cls)) for cls in cls_list]
