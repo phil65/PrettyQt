@@ -147,7 +147,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
             from prettyqt.custom_animations import cursormoveanimation
 
             cls._cursor_animation = cursormoveanimation.CursorMoveAnimation(
-                duration=duration, end_value=new_pos
+                duration=duration, end=new_pos
             )
             cls._cursor_animation.start()
         else:
