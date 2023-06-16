@@ -22,6 +22,49 @@ ModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
 logger = logging.getLogger(__name__)
 
 
+class HeaderWrapper:
+    def __init__(self, indexer, widget: widgets.QHeaderView):
+        self._widget = widget
+        self._range = (
+            range(
+                indexer.start or 0,
+                indexer.stop or self._widget.count(),
+                indexer.step or 1,
+            )
+            if isinstance(indexer, slice)
+            else range(indexer, indexer + 1)
+        )
+
+    def set_hidden(self, hide: bool = True):
+        for i in self._range:
+            self._widget.setSectionHidden(i, hide)
+
+    def resize(self, size: int | Iterable[int]):
+        match size:
+            case int():
+                for i in self._range:
+                    self._widget.resizeSection(i, size)
+            case Iterable():
+                for i, j in zip(self._range, size):
+                    self._widget.resizeSection(i, j)
+            case _:
+                raise TypeError(size)
+
+    def set_resize_mode(self, mode: ModeStr):
+        for i in self._range:
+            self._widget.setSectionResizeMode(i, MODES[mode])
+
+    def set_sort_indicator(self, ascending: bool = True):
+        sort_order = constants.ASCENDING if ascending else constants.DESCENDING
+        for i in self._range:
+            self._widget.setSortIndicator(i, sort_order)
+
+    def is_in_visual_range(self) -> bool:
+        return self._widget.is_in_visual_range(
+            self._range.start
+        ) and self._widget.is_in_visual_range(self._range.stop)
+
+
 class HeaderViewMixin(widgets.AbstractItemViewMixin):
     section_visiblity_changed = core.Signal(int, bool)
     section_resized_by_user = core.Signal(int, int, int)
@@ -46,6 +89,11 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self._handle_section_is_pressed = False
         self.setResizeContentsPrecision(100)
         self._widget_name = parent.objectName() if parent is not None else ""
+
+    def __getitem__(self, index):
+        if isinstance(index, int) and (index >= self.count() or index < 0):
+            raise IndexError(index)
+        return HeaderWrapper(index, self)
 
     def _get_map(self):
         maps = super()._get_map()
@@ -105,7 +153,6 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
     def set_resize_mode(
         self,
         mode: ModeStr,
-        col: int | None = None,
         precision: int | None = None,
         cascading: bool | None = None,
         stretch_last_section: bool | None = None,
@@ -113,9 +160,6 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         maximum_section_size: int | None = None,
         minimum_section_size: int | None = None,
     ):
-        if col is not None:
-            self.setSectionResizeMode(col, MODES[mode])
-            return
         if stretch_last_section is not None:
             self.stretchLastSection(stretch_last_section)
         if minimum_section_size is not None:
@@ -243,7 +287,8 @@ if __name__ == "__main__":
 
     app = widgets.app()
     table = debugging.example_tree()
-    header = table.h_header
+    table.h_header[1:].set_hidden(True)
     table.show()
+
     with app.debug_mode():
         app.main_loop()
