@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
+from prettyqt.utils import get_repr
 
 
 class PushButtonMixin(widgets.AbstractButtonMixin):
@@ -11,6 +12,9 @@ class PushButtonMixin(widgets.AbstractButtonMixin):
         super().__init__(*args, **kwargs)
         self.toggled.connect(self.value_changed)
         self._action = None
+
+    def __repr__(self):
+        return get_repr(self, self.text())
 
     def set_action(self, action: gui.QAction):
         if self._action == action:
