@@ -607,25 +607,11 @@ class TrackingSpacer(widgets.Frame):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import debugging, widgets
 
-    tuples = [
-        ("bar", "xxg", "q"),
-        ("bar", "two", "q"),
-        ("baz", "xx", "q"),
-        ("baz", "two", "q"),
-        ("foo", "xx", "q"),
-        ("foo", "two", "q"),
-        ("qux", "xff", "q"),
-        ("qux", "two", "q"),
-        ("qux", "two", "q"),
-        ("qux", "two", "q"),
-    ] * 10
-    index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(100, 100), index=index, columns=index)
     app = widgets.app()
-    app.set_style("fusion")
-    view2 = DataFrameViewer(df)
-    view2.show()
-
-    app.main_loop()
+    df = debugging.example_multiindex_df()
+    with app.debug_mode():
+        view2 = DataFrameViewer(df)
+        view2.show()
+        app.main_loop()
