@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 DIRECTION = bidict(
@@ -54,18 +54,15 @@ class BoxLayoutMixin(widgets.LayoutMixin):
     def add_spacing(self, size: int):
         self.addSpacing(size)
 
-    def set_direction(self, direction: DirectionStr):
+    def set_direction(self, direction: DirectionStr | BoxLayout.Direction):
         """Set the direction.
 
         Args:
             direction: direction
-
-        Raises:
-            InvalidParamError: direction does not exist
         """
-        if direction not in DIRECTION:
-            raise InvalidParamError(direction, DIRECTION)
-        self.setDirection(DIRECTION[direction])
+        if isinstance(direction, str):
+            direction = DIRECTION[direction]
+        self.setDirection(direction)
 
     def get_direction(self) -> DirectionStr:
         """Return current direction.
