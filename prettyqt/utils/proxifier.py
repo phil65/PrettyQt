@@ -47,6 +47,7 @@ class ProxyWrapper:
         self._widget = widget
 
     def filter(self) -> custom_models.SubsetFilterProxyModel:
+        """Filter subsetion to display."""
         from prettyqt import custom_models
 
         match self._indexer:
@@ -68,6 +69,7 @@ class ProxyWrapper:
         selector: Callable[[Any], bool] | None = None,
         selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> custom_models.ValueTransformationProxyModel:
+        """Conditionally apply modifications to given area."""
         from prettyqt import custom_models
 
         proxy = custom_models.ValueTransformationProxyModel(
@@ -79,6 +81,7 @@ class ProxyWrapper:
         return proxy
 
     def set_read_only(self) -> custom_models.ReadOnlyProxyModel:
+        """Make given area read-only."""
         from prettyqt import custom_models
 
         proxy = custom_models.ReadOnlyProxyModel(index=self._indexer, parent=self._widget)
@@ -87,6 +90,7 @@ class ProxyWrapper:
         return proxy
 
     def set_checkable(self) -> custom_models.CheckableProxyModel:
+        """Make given area checkable."""
         from prettyqt import custom_models
 
         proxy = custom_models.CheckableProxyModel(
@@ -97,6 +101,7 @@ class ProxyWrapper:
         return proxy
 
     def style(self, value="red", role=constants.BACKGROUND_ROLE, **kwargs):
+        """Apply styling to given area."""
         from prettyqt import custom_models
 
         match role:
@@ -126,10 +131,23 @@ class Proxyfier:
         return self._wrapper
 
     def transpose(self) -> core.TransposeProxyModel:
+        """Wraps model in a Proxy which transposes rows/columns."""
         return self.get_proxy("transpose")
 
     def flatten(self) -> custom_models.FlattenedTreeProxyModel:
+        """Wraps model in a Proxy which flattens tree structures."""
         return self.get_proxy("flatten_tree")
+
+    def add_column(self, header, formatter: str):
+        """Add a new column with given header to the table.
+
+        Column content can be defined by a formatter.
+        Example: "{2} - {4}" would result in
+        <displayRole of column 2> - <displayRole of column4>
+        """
+        proxy = self.get_proxy("column_join")
+        proxy.add_mapping(header, formatter)
+        return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs):
         Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
