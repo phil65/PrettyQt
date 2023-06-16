@@ -20,7 +20,7 @@ class SectionWidget(widgets.Widget):
         self.box.add(header)
 
 
-class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
+class ScrollAreaTocModel(custom_models.TreeModel):
     def __init__(
         self, *args, widget_class: type[widgets.QWidget] = widgets.QWidget, **kwargs
     ):
@@ -69,7 +69,7 @@ class ScrollAreaTableOfContentsModel(custom_models.TreeModel):
         return bool(children)
 
 
-class ScrollAreaTableOfContentsWidget(widgets.TreeView):
+class ScrollAreaTocWidget(widgets.TreeView):
     section_changed = core.Signal()
 
     @core.Enum
@@ -108,11 +108,11 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.setAlternatingRowColors(False)
         self.setRootIsDecorated(False)
         self.setAnimated(False)
-        self.setStyleSheet(
-            """::item:hover {background: transparent; border-color:transparent}
-            ::item:selected { border-color:transparent;
-            border-style:outset; border-width:2px; color:black; }"""
-        )
+        # self.setStyleSheet(
+        #     """::item:hover {background: transparent; border-color:transparent}
+        #     ::item:selected { border-color:transparent;
+        #     border-style:outset; border-width:2px; color:black; }"""
+        # )
         if orientation == constants.VERTICAL:
             scrollarea.v_scrollbar.valueChanged.connect(self._on_scroll)
         else:
@@ -124,7 +124,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         if widget.widget() is None:
             raise RuntimeError("No widget set on ScrollArea.")
         self.scrollarea = widget
-        model = ScrollAreaTableOfContentsModel(
+        model = ScrollAreaTocModel(
             widget.widget(),
             show_root=True,
             parent=self.scrollarea,
@@ -156,7 +156,7 @@ class ScrollAreaTableOfContentsWidget(widgets.TreeView):
         self.model().set_highlighted_indexes(indexes)
 
     def _on_scroll(self):
-        model: ScrollAreaTableOfContentsModel | None = self.model()
+        model: ScrollAreaTocModel | None = self.model()
         if model is None:
             return
         visible_widgets = self.scrollarea.get_visible_widgets(typ=self._WidgetClass)
@@ -242,7 +242,7 @@ if __name__ == "__main__":
         scrollarea = widgets.ScrollArea(object_name="scroll", parent=window)
         widget = widgets.Widget(object_name="scrollarea_widget")
         scrollarea.setWidget(widget)
-        toc_widget = ScrollAreaTableOfContentsWidget(
+        toc_widget = ScrollAreaTocWidget(
             scrollarea,
             scroll_mode="headers_only",
             widget_class=SectionWidget,

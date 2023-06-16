@@ -52,7 +52,7 @@ from .astviewer import AstViewer
 from .roundprogressbar import RoundProgressBar
 from .subsequencecompleter import SubsequenceCompleter
 from .filetree import FileTree
-from .scrollareatableofcontentswidget import ScrollAreaTableOfContentsWidget
+from .scrollareatocwidget import ScrollAreaTocWidget
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
@@ -122,5 +122,5 @@ __all__ = [
     "StandardIconsWidget",
     "SubsequenceCompleter",
     "FileTree",
-    "ScrollAreaTableOfContentsWidget",
+    "ScrollAreaTocWidget",
 ]
