@@ -4,6 +4,7 @@ import logging
 from typing import Any
 
 from prettyqt import constants, core
+from prettyqt.utils import helpers
 
 logger = logging.getLogger(__name__)
 
@@ -12,21 +13,25 @@ class CheckableProxyModel(core.IdentityProxyModel):
     ID = "checkable"
     checkstate_changed = core.Signal(core.ModelIndex, bool)  # row, state
 
-    def __init__(self, column: int = 0, **kwargs):
+    def __init__(self, indexer: int = 0, **kwargs):
+        if isinstance(indexer, int):
+            indexer = (indexer, 0)
         super().__init__(**kwargs)
-        self._column = column
-        self._checked: set[int] = set()
+        self._indexer = indexer
+        self._checked: set[tuple(int, int)] = set()
 
     def flags(self, index):
         if not index.isValid():
             return super().flags(index)
-        if index.column() == self._column:
+        if helpers.is_position_in_index(index.column(), index.row(), self._indexer):
             return super().flags(index) | constants.IS_CHECKABLE
         return super().flags(index)
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
-        if role == constants.CHECKSTATE_ROLE and index.column() == self._column:
-            return index.row() in self._checked
+    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+        key = self.get_index_key(index)
+        if role == constants.CHECKSTATE_ROLE:
+            if helpers.is_position_in_index(index.column(), index.row(), self._indexer):
+                return key in self._checked
 
         return super().data(index, role)
 
@@ -36,17 +41,17 @@ class CheckableProxyModel(core.IdentityProxyModel):
         value: Any,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
-        if role == constants.CHECKSTATE_ROLE and index.column() == self._column:
-            if index.row() in self._checked:
-                self._checked.remove(index.row())
-                self.update_row(index.row())
-                self.checkstate_changed.emit(index, False)
-                return True
-            elif index.row() not in self._checked:
-                self._checked.add(index.row())
-                self.update_row(index.row())
-                self.checkstate_changed.emit(index, True)
-                return True
+        key = self.get_index_key(index)
+        if role == constants.CHECKSTATE_ROLE and helpers.is_position_in_index(
+            index.column(), index.row(), self._indexer
+        ):
+            if is_checked := key in self._checked:
+                self._checked.remove(key)
+            else:
+                self._checked.add(key)
+            self.update_row(index.row())
+            self.checkstate_changed.emit(index, not is_checked)
+            return True
 
         return super().setData(index, role)
 
