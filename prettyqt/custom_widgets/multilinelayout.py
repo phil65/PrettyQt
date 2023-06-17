@@ -39,21 +39,21 @@ class MultiLineLayout(widgets.BoxLayout):
     def addWidget(self, widget: widgets.QWidget, **kwargs):
         if not self.layouts or self.layouts[-1].count() == self.row_nb:
             self._add_sub_layout()
-        self.layouts[-1].addWidget(widget, **kwargs)
+        self.layouts[-1].add(widget, **kwargs)
 
     def addLayout(self, layout: widgets.QLayout):
         if not self.layouts or self.layouts[-1].count() == self.row_nb:
             self._add_sub_layout()
-        self.layouts[-1].addLayout(layout)
+        self.layouts[-1].add(layout)
 
     def addItem(self, item):
         if not self.layouts or self.layouts[-1].count() == self.row_nb:
             self._add_sub_layout()
-        self.layouts[-1].addItem(item)
+        self.layouts[-1].add(item)
 
     def get_items(self) -> listdelegators.BaseListDelegator[widgets.QLayoutItem]:
         items = [i.get_items() for i in self.layouts]
-        return listdelegators.BaseListDelegator[itertools.chain(*items)]
+        return listdelegators.BaseListDelegator(itertools.chain(*items))
 
     def itemAt(self, idx: int) -> widgets.QLayoutItem | None:
         if len(self.layouts) == 0 or len(self.get_items()) == 0:
@@ -61,7 +61,7 @@ class MultiLineLayout(widgets.BoxLayout):
         # doesnt seem right?
         return None if idx == len(self.get_items()) else self.get_items()[idx]
 
-    def takeAt(self, idx: int) -> widgets.QLayoutItem:
+    def takeAt(self, idx: int) -> widgets.QLayoutItem | None: # or 0 according to docs?
         layout_idx, item_idx = divmod(idx, len(self.layouts))
         layout = self.layouts[layout_idx]
         item = layout.takeAt(item_idx)
