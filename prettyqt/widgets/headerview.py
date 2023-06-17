@@ -99,6 +99,8 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             case str():
                 index = self.get_section_for_label(index)
                 return HeaderWrapper(index, self)
+            case _:
+                raise TypeError(index)
 
     def _get_map(self):
         maps = super()._get_map()
