@@ -3,36 +3,30 @@ from __future__ import annotations
 import logging
 from typing import Any
 
-from prettyqt import constants, core
-from prettyqt.utils import helpers
+from prettyqt import constants, core, custom_models
 
 logger = logging.getLogger(__name__)
 
 
-class CheckableProxyModel(core.IdentityProxyModel):
+class CheckableProxyModel(custom_models.SliceIdentityProxyModel):
     ID = "checkable"
     checkstate_changed = core.Signal(core.ModelIndex, bool)  # row, state
 
-    def __init__(self, indexer: int = 0, **kwargs):
-        if isinstance(indexer, int):
-            indexer = (indexer, slice(None))
-        super().__init__(**kwargs)
-        self._indexer = indexer
-        self._checked: set[tuple(int, int)] = set()
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self._checked: set[tuple[int, int]] = set()
 
     def flags(self, index):
         if not index.isValid():
             return super().flags(index)
-        if helpers.is_position_in_index(index.column(), index.row(), self._indexer):
+        if self.indexer_contains(index):
             return super().flags(index) | constants.IS_CHECKABLE
         return super().flags(index)
 
     def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
         key = self.get_index_key(index, include_column=True)
-        if role == constants.CHECKSTATE_ROLE:
-            if helpers.is_position_in_index(index.column(), index.row(), self._indexer):
-                return key in self._checked
-
+        if role == constants.CHECKSTATE_ROLE and self.indexer_contains(index):
+            return key in self._checked
         return super().data(index, role)
 
     def setData(
@@ -42,9 +36,7 @@ class CheckableProxyModel(core.IdentityProxyModel):
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
         key = self.get_index_key(index, include_column=True)
-        if role == constants.CHECKSTATE_ROLE and helpers.is_position_in_index(
-            index.column(), index.row(), self._indexer
-        ):
+        if role == constants.CHECKSTATE_ROLE and self.indexer_contains(index):
             if is_checked := key in self._checked:
                 self._checked.remove(key)
             else:

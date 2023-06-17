@@ -84,7 +84,9 @@ class ProxyWrapper:
         """Make given area read-only."""
         from prettyqt import custom_models
 
-        proxy = custom_models.ReadOnlyProxyModel(index=self._indexer, parent=self._widget)
+        proxy = custom_models.ReadOnlyProxyModel(
+            indexer=self._indexer, parent=self._widget
+        )
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy

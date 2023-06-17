@@ -6,8 +6,7 @@ from typing import Any
 
 from collections.abc import Callable
 
-from prettyqt import constants, core
-from prettyqt.utils import helpers
+from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
@@ -21,7 +20,7 @@ class Transformer:
     selector_role: int | QtCore.Qt.ItemDataRole
 
 
-class ValueTransformationProxyModel(core.IdentityProxyModel):
+class ValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
     """A simple transformation proxy model with settable transformers.
 
     Example:
@@ -31,11 +30,8 @@ class ValueTransformationProxyModel(core.IdentityProxyModel):
 
     ID = "value_transformation"
 
-    def __init__(self, indexer=0, parent=None, **kwargs):
-        if isinstance(indexer, int):
-            indexer = (indexer, slice(None))
-        super().__init__(parent, **kwargs)
-        self._indexer = indexer
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self._transformers: list[Transformer] = []
 
     def clear(self):
@@ -59,10 +55,7 @@ class ValueTransformationProxyModel(core.IdentityProxyModel):
     def data(self, index: core.ModelIndex, role: constants.ItemDataRole):
         val = super().data(index, role)
         for t in self._transformers:
-            if (
-                helpers.is_position_in_index(index.column(), index.row(), self._indexer)
-                and t.role == role
-            ):
+            if self.indexer_contains(index) and t.role == role:
                 selector_val = super().data(index, t.selector_role)
                 if t.selector is None or t.selector(selector_val):
                     val = t.fn(selector_val)
@@ -82,6 +75,7 @@ if __name__ == "__main__":
         role=constants.BACKGROUND_ROLE,
         selector=lambda x: True,
     )
+    model.set_column_slice(slice(0, 2))
     view.show()
     with app.debug_mode():
         app.main_loop()
