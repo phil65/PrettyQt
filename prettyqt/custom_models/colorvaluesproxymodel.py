@@ -4,7 +4,7 @@ import enum
 import logging
 from typing import Literal
 
-from prettyqt import constants, core, gui
+from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import colors, helpers
 
 logger = logging.getLogger(__name__)
@@ -19,7 +19,7 @@ class ColorMode(enum.IntEnum):
     Range = 4
 
 
-class ColorValuesProxyModel(core.IdentityProxyModel):
+class ColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     ID = "color_values"
     ColorMode = ColorMode
     core.Enum(ColorMode)
@@ -33,6 +33,8 @@ class ColorValuesProxyModel(core.IdentityProxyModel):
         self._high_color = gui.QColor("red")
 
     def data(self, index: core.ModelIndex, role=constants.EDIT_ROLE):
+        if not self.indexer_contains(index):
+            return super().data(index, role)
         match role, self._mode:
             case constants.BACKGROUND_ROLE, self.ColorMode.Seen:
                 data = index.data(constants.USER_ROLE)
@@ -61,7 +63,8 @@ class ColorValuesProxyModel(core.IdentityProxyModel):
                     self._low_color.getRgb(), self._high_color.getRgb(), value * 100
                 )
                 return gui.Color(*col).as_qt()
-        return super().data(index, role)
+            case _, _:
+                return super().data(index, role)
 
     def setLowColor(self, color: gui.QColor):
         self._low_color = colors.get_color(color).as_qt()
@@ -87,12 +90,23 @@ class ColorValuesProxyModel(core.IdentityProxyModel):
         setColorMode,
     )
 
+    low_color = core.Property(
+        gui.QColor,
+        getLowColor,
+        setLowColor
+    )
+
+    color_mode = core.Property(
+        gui.QColor,
+        getHighColor,
+        setHighColor,
+    )
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
     import pandas as pd
     import numpy as np
-
     app = widgets.app()
     tuples = [
         "one",
@@ -108,7 +122,7 @@ if __name__ == "__main__":
     table = widgets.TableView()
     table.set_delegate("variant")
     table.set_model(df)
-    table.proxifier.color_values()
+    table.proxifier[:2, :].color_values()
     table.show()
     with app.debug_mode():
         app.main_loop()
