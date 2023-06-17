@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Iterator
 from typing import overload
 
 from prettyqt import widgets
@@ -38,21 +37,22 @@ class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
             case slice():
                 rng = range(index.start or 0, index.stop or self.count(), index.step or 1)
                 return listdelegators.BaseListDelegator(self.widget(i) for i in rng)
+            case _:
+                raise TypeError(index)
 
     def __delitem__(self, item: int | QtWidgets.QWidget):
         if isinstance(item, int):
             item = self.widget(item)
         self.removeWidget(item)
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget]:
-        return iter(self.widget(i) for i in range(self.count()))
-
     def __len__(self):
-        # needed for PySide2
+        # needed for PySide6
         return self.count()
 
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
+
+    # __iter__ not needed, we have __getitem__ and __len__
 
 
 if __name__ == "__main__":
@@ -64,11 +64,7 @@ if __name__ == "__main__":
     widget3 = widgets.PlainTextEdit("Test 243434")
     stackedwidget += widget2
     stackedwidget += widget3
+    for i in stackedwidget:
+        print(i)
     stackedwidget.show()
-    app.sleep(2)
-    stackedwidget.animator.slide_in_next()
-    app.sleep(2)
-    stackedwidget.animator.fade_in(0)
-    app.sleep(2)
-    stackedwidget.animator.fade_in(1)
     app.main_loop()
