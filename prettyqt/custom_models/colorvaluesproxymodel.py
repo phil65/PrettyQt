@@ -5,6 +5,7 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, gui
+from prettyqt.utils import colors, helpers
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +29,8 @@ class ColorValuesProxyModel(core.IdentityProxyModel):
         self._mode = mode
         self._max = 0.0
         self._last_span = ((-1, -1), (-1, -1))
+        self._low_color = gui.QColor("green")
+        self._high_color = gui.QColor("red")
 
     def data(self, index: core.ModelIndex, role=constants.EDIT_ROLE):
         match role, self._mode:
@@ -54,8 +57,23 @@ class ColorValuesProxyModel(core.IdentityProxyModel):
                 data = abs(index.data(constants.USER_ROLE))
                 max_ = abs(max(abs(max_), data))
                 value = data / max_
-                return gui.Color.from_cmyk(0, value, value, 0).as_qt()
+                col = helpers.get_color_percentage(
+                    self._low_color.getRgb(), self._high_color.getRgb(), value * 100
+                )
+                return gui.Color(*col).as_qt()
         return super().data(index, role)
+
+    def setLowColor(self, color: gui.QColor):
+        self._low_color = colors.get_color(color).as_qt()
+
+    def setHighColor(self, color: gui.QColor):
+        self._high_color = colors.get_color(color).as_qt()
+
+    def getLowColor(self) -> gui.QColor:
+        return self._low_color
+
+    def getHighColor(self) -> gui.QColor:
+        return self._high_color
 
     def setColorMode(self, mode: ColorValuesProxyModel.ColorMode):
         self._mode = mode
@@ -90,8 +108,7 @@ if __name__ == "__main__":
     table = widgets.TableView()
     table.set_delegate("variant")
     table.set_model(df)
-    table.proxifier[::2, 1::2].style("red")
-    table.proxifier[1::2, ::2].style("red")
+    table.proxifier.color_values()
     table.show()
     with app.debug_mode():
         app.main_loop()
