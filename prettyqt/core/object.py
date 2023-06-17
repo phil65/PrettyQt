@@ -25,20 +25,25 @@ counter_dict: defaultdict = defaultdict(itertools.count)
 
 logger = logging.getLogger(__name__)
 
+_properties = {}
+_signals = {}
+
+
+def get_properties(klass):
+    if klass not in _properties:
+        metaobj = core.MetaObject(klass.staticMetaObject)
+        _properties[klass] = [i.get_name() for i in metaobj.get_properties()]
+    return _properties[klass]
+
+
+def get_signals(klass):
+    if klass not in _signals:
+        metaobj = core.MetaObject(klass.staticMetaObject)
+        _signals[klass] = [i.get_name() for i in metaobj.get_signals()]
+    return _signals[klass]
+
 
 class ObjectMixin:
-    _properties: list = []
-    _signals: list = []
-
-    def __new__(cls, *args, **kwargs):
-        """Cache a list of properties and signals as class attribute."""
-        if issubclass(cls, QtCore.QObject) and not cls._properties:
-            metaobj = core.MetaObject(cls.staticMetaObject)
-            cls._properties = [i.get_name() for i in metaobj.get_properties()]
-            cls._signals = [i.get_name() for i in metaobj.get_signals()]
-            return super().__new__(cls, *args, **kwargs)
-        return super().__new__(cls)
-
     def __init__(self, *args, **kwargs):
         self._eventfilters = set()
         # klass = type(self)
@@ -49,6 +54,8 @@ class ObjectMixin:
         new = {}
         if kwargs:
             mapper = self._get_map()
+            props = get_properties(type(self))
+            signals = get_signals(type(self))
             for k, v in kwargs.items():
                 # this allows snake_case naming.
                 camel_k = helpers.to_lower_camel(k)
@@ -63,7 +70,7 @@ class ObjectMixin:
 
                     new[camel_k] = iconprovider.get_icon(v)
                 # kwargs which need camel-casing
-                elif camel_k in self._properties or camel_k in self._signals:
+                elif camel_k in props or camel_k in signals:
                     new[camel_k] = v
                 else:
                     new[k] = v
