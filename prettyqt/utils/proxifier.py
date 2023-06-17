@@ -5,7 +5,7 @@ import logging
 from typing import Any, Literal, TYPE_CHECKING
 
 from prettyqt import constants, core, widgets
-from prettyqt.utils import helpers
+from prettyqt.utils import datatypes, helpers
 
 if TYPE_CHECKING:
     from prettyqt import custom_models
@@ -116,6 +116,23 @@ class ProxyWrapper:
         self._widget.set_model(proxy)
         return proxy
 
+    def color_values(
+        self,
+        low_color: datatypes.ColorType = "green",
+        high_color: datatypes.ColorType = "red",
+    ) -> custom_models.ColorValuesProxyModel:
+        """Make given area read-only."""
+        from prettyqt import custom_models
+
+        proxy = custom_models.ColorValuesProxyModel(
+            indexer=self._indexer, parent=self._widget
+        )
+        proxy.set_low_color(low_color)
+        proxy.set_high_color(high_color)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
 
 class Proxyfier:
     def __init__(self, widget):
@@ -133,7 +150,24 @@ class Proxyfier:
 
     def flatten(self) -> custom_models.FlattenedTreeProxyModel:
         """Wraps model in a Proxy which flattens tree structures."""
+        # ss = """QTreeView::branch{border-image: url(none.png);}"""
+        # self._widget.set_stylesheet(ss)
         return self.get_proxy("flatten_tree")
+
+    def color_values(
+        self,
+        low_color: datatypes.ColorType = "green",
+        high_color: datatypes.ColorType = "red",
+    ) -> custom_models.ColorValuesProxyModel:
+        """Color cells based on value."""
+        from prettyqt import custom_models
+
+        proxy = custom_models.ColorValuesProxyModel(parent=self._widget)
+        proxy.set_low_color(low_color)
+        proxy.set_high_color(high_color)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
 
     def add_column(self, header, formatter: str):
         """Add a new column with given header to the table.
