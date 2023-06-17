@@ -4,8 +4,8 @@ from collections.abc import Callable
 import logging
 from typing import Any, Literal, TYPE_CHECKING
 
-from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import colors, helpers
+from prettyqt import constants, core, widgets
+from prettyqt.utils import helpers
 
 if TYPE_CHECKING:
     from prettyqt import custom_models
@@ -86,33 +86,33 @@ class ProxyWrapper:
         self._widget.set_model(proxy)
         return proxy
 
-    def set_checkable(self) -> custom_models.CheckableProxyModel:
+    def set_checkable(
+        self, callback: Callable | None = None
+    ) -> custom_models.CheckableProxyModel:
         """Make given area checkable."""
         from prettyqt import custom_models
 
         proxy = custom_models.CheckableProxyModel(
             indexer=self._indexer, parent=self._widget
         )
+        if callback:
+            proxy.checkstate_changed.connect(callback)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
-    def style(self, value="red", role=constants.BACKGROUND_ROLE, **kwargs):
+    def style(self, foreground=None, background=None, font=None, alignment=None):
         """Apply styling to given area."""
         from prettyqt import custom_models
 
-        match role:
-            case constants.BACKGROUND_ROLE | constants.FOREGROUND_ROLE:
-                value = colors.get_color(value).as_qt()
-            case constants.FONT_ROLE:
-                kwargs = {helpers.to_lower_camel(k): v for k, v in kwargs.items()}
-                value = gui.QFont(value, **kwargs)
-            case constants.ALIGNMENT_ROLE:
-                pass
-        proxy = custom_models.AppearanceProxyModel(parent=self._widget)
+        proxy = custom_models.SliceAppearanceProxyModel(
+            indexer=self._indexer, parent=self._widget
+        )
         proxy.setSourceModel(self._widget.model())
-        # TODO: set_data is probably not the most efficient way to do this.
-        proxy.set_data(self._indexer, value, role)
+        proxy.set_foreground(foreground)
+        proxy.set_background(background)
+        proxy.set_font(font)
+        proxy.set_alignment(alignment)
         self._widget.set_model(proxy)
         return proxy
 
