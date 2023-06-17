@@ -27,8 +27,12 @@ class ListInput(widgets.LineEdit):
                 raise ValueError(f"Invalid type {typ}")
         self.set_value(value)
 
-    def get_value(self) -> list[float]:  # type: ignore[override]
-        return helpers.string_to_num_array(self.text())
+    def get_value(self) -> list[float | int]:  # type: ignore[override]
+        # TODO: is this best place to deal with exception?
+        try:
+            return helpers.string_to_num_array(self.text())
+        except ValueError:
+            return []
 
     def set_value(self, value: list[float] | str):
         if isinstance(value, list):
