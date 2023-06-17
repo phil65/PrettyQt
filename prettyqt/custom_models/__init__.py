@@ -27,6 +27,7 @@ from .storageinfomodel import StorageInfoModel
 from .shortcutsmodel import ShortcutsModel
 
 from .sliceidentityproxymodel import SliceIdentityProxyModel
+from .slicefilterproxymodel import SliceFilterProxyModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuetransformationproxymodel import ValueTransformationProxyModel
@@ -69,6 +70,7 @@ __all__ = [
     "DataClassFieldsModel",
     "XmlModel",
     "SliceIdentityProxyModel",
+    "SliceFilterProxyModel",
     "FuzzyFilterProxyModel",
     "SubsetFilterProxyModel",
     "ValueTransformationProxyModel",
