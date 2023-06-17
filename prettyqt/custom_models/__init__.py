@@ -38,6 +38,7 @@ from .columnjoinerproxymodel import ColumnJoinerProxyModel
 from .readonlyproxymodel import ReadOnlyProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
 from .colorvaluesproxymodel import ColorValuesProxyModel
+from .highlightmouseproxymodel import HighlightMouseProxyModel
 
 __all__ = [
     "SelectionMixin",
@@ -78,4 +79,5 @@ __all__ = [
     "ReadOnlyProxyModel",
     "HighlightCurrentProxyModel",
     "ColorValuesProxyModel",
+    "HighlightMouseProxyModel",
 ]
