@@ -32,7 +32,6 @@ from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuetransformationproxymodel import ValueTransformationProxyModel
 from .valuefilterproxymodel import ValueFilterProxyModel
-from .sizelimiterproxymodel import SizeLimiterProxyModel
 from .rangefilterproxymodel import RangeFilterProxyModel
 from .checkableproxymodel import CheckableProxyModel
 from .flattenedtreeproxymodel import FlattenedTreeProxyModel
@@ -75,7 +74,6 @@ __all__ = [
     "SubsetFilterProxyModel",
     "ValueTransformationProxyModel",
     "ValueFilterProxyModel",
-    "SizeLimiterProxyModel",
     "RangeFilterProxyModel",
     "CheckableProxyModel",
     "FlattenedTreeProxyModel",
