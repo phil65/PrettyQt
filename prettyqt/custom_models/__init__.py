@@ -36,6 +36,7 @@ from .rangefilterproxymodel import RangeFilterProxyModel
 from .checkableproxymodel import CheckableProxyModel
 from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
+from .sliceappearanceproxymodel import SliceAppearanceProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
 from .readonlyproxymodel import ReadOnlyProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
@@ -77,6 +78,7 @@ __all__ = [
     "RangeFilterProxyModel",
     "CheckableProxyModel",
     "FlattenedTreeProxyModel",
+    "SliceAppearanceProxyModel",
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",
     "ReadOnlyProxyModel",
