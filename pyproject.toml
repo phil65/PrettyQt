@@ -15,12 +15,11 @@ classifiers = [
 keywords = [ "Qt", "PyQt6", "PySide6", "Framework"]
 dependencies = [
     "bidict",
-    "regex",
     "pywin32;platform_system == 'Windows'",
     "comtypes;platform_system == 'Windows'",
     "pygments",
     "qstylizer",
-    "typing-extensions"
+    "typing-extensions",
 ]
 
 [project.urls]
@@ -177,25 +176,28 @@ hook-dirs = "prettyqt.__pyinstaller:get_hook_dirs"
 [tool.poetry.dependencies]
 python = "^3.10"
 bidict = "^0"
+pygments = "^2.6"
+qstylizer = "^0.2"
+typing-extensions = "^4.5.0"
+
 docutils = {version = "^0.19", optional=true}
 orjson = {version = "^3", python = "<3.12", optional=true}
 fsspec = {version = "^2023.1.0", optional=true}
 pillow = {version = "^9.5.0", optional=true}
 numpy = {version = "^1", optional=true}
+qtconsole = {version = "^5", optional=true}
+ipython = {version = "^8", optional=true}
+pandas = {version = "^2.0.2", optional = true}
+
+pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
+comtypes = {version = "^1.1", markers = "sys_platform == 'win32'"}
 
 PyQt6 = {version = "^6.5", optional=true}
 PyQt6-Charts = {version = "^6.5", optional=true}
 PyQt6-WebEngine = {version = "^6.5", optional=true}
 PyQt6-QScintilla = {version = "^2.0", optional=true}
+
 pyside6 = {version = "^6.5", python = "<3.12", optional=true}
-qtconsole = {version = "^5", optional=true}
-ipython = {version = "^8", optional=true}
-pywin32 = {version = "*", markers = "sys_platform == 'win32'"}
-comtypes = {version = "^1.1", markers = "sys_platform == 'win32'"}
-pygments = "^2.6"
-qstylizer = "^0.2"
-typing-extensions = "^4.5.0"
-pandas = {version = "^2.0.2", optional = true}
 
 
 [tool.poetry.extras]
@@ -243,7 +245,7 @@ log_date_format = "%Y-%m-%d %H:%M:%S"
 
 [tool.mypy]
 python_version = "3.10"
-disable_error_code = ["assignment", "misc", "attr-defined", "import"]
+disable_error_code = ["assignment", "misc", "attr-defined", "import", "no-any-expr"]
 
 # exclude = [
 #     "^one\\.py$",  # TOML's double-quoted strings require escaping backslashes
