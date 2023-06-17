@@ -58,6 +58,9 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
                 self._indexer = (slice(col, col + 1), self.get_row_slice())
             case None:
                 self._indexer = (slice(None), self.get_row_slice())
+            # we also support Sequences to have a setter for the property. See below.
+            case (int() | None as start, int() | None as stop, int() | None as step):
+                self._indexer = ((start, stop, step), self.get_row_slice())
             case _:
                 raise TypeError(value)
 
@@ -69,6 +72,8 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
                 self._indexer = (self.get_column_slice(), slice(row, row + 1))
             case None:
                 self._indexer = (self.get_column_slice(), slice(None))
+            case (int() | None as start, int() | None as stop, int() | None as step):
+                self._indexer = ((start, stop, step), self.get_row_slice())
             case _:
                 raise TypeError(value)
 
@@ -90,8 +95,19 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         sl = self.get_row_slice()
         return (row - (sl.start or 0)) / (sl.step or 1)
 
-    column_slice = core.Property(slice, get_column_slice, set_column_slice)
-    row_slice = core.Property(slice, get_column_slice, set_column_slice)
+    # The Qt typesystems dont like slices (or ranges / tuples)
+    # we expose this as a list for now.
+
+    def get_column_list(self) -> list[int | None, int | None, int | None]:
+        sl = self.get_column_slice()
+        return (sl.start, sl.stop, sl.step)
+
+    def get_row_list(self) -> list[int | None, int | None, int | None]:
+        sl = self.get_row_slice()
+        return (sl.start, sl.stop, sl.step)
+
+    column_slice = core.Property(list, get_column_list, set_column_slice)
+    row_slice = core.Property(list, get_row_list, set_column_slice)
 
 
 if __name__ == "__main__":
