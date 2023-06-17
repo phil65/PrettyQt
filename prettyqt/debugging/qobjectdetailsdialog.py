@@ -105,7 +105,6 @@ class QObjectDetailsDialog(widgets.MainWindow):
         model = widgethierarchymodel.WidgetHierarchyModel(
             qobject, parent=self.hierarchyview
         )
-        model = model.proxifier[:, 0:5]
         self.hierarchyview.set_model(model)
         hierarchycontainer = filtercontainer.FilterContainer(self.hierarchyview)
         self.hierarchyview.expandAll()
@@ -174,7 +173,6 @@ if __name__ == "__main__":
     app = widgets.app()
     tree = widgets.TreeView()
     tree.set_model(dict(a=2))
-    tree.model().proxifier.get_proxy("fuzzy")
     widget = debugging.example_widget()
     with app.debug_mode(log_level=logging.INFO):
         wnd = QObjectDetailsDialog(widget)

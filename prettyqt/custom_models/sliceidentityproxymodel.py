@@ -16,6 +16,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         self.set_indexer(indexer)
 
     def indexer_contains(self, index: core.ModelIndex) -> bool:
+        """Check whether given ModelIndex is included in our Indexer."""
         col_slice = self.update_slice_boundaries(self.get_column_slice(), typ="column")
         row_slice = self.update_slice_boundaries(self.get_row_slice(), typ="row")
         # logger.info(f"{col_slice=} {row_slice=}")
@@ -29,9 +30,10 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         if sl.start is not None and sl.start < 0:
             count = source.rowCount() if typ == "row" else source.columnCount()
             start = count + sl.start
+            end = count + sl.stop
+            # end = start + (sl.stop - sl.start)
             if start < 0:
                 raise IndexError(sl.start)
-            end = start + (sl.stop - sl.start)
             sl = slice(start, end, sl.step)
         # if sl.stop is not None and sl.stop < 0:
         #     stop = source.columnCount() + sl.stop
@@ -93,7 +95,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
                 int() | None as stop,
                 int() | None as step,
             ):
-                row_slice = slice(start=start, stop=stop, step=step)
+                row_slice = slice(start, stop, step)
                 self._indexer = (row_slice, self.get_row_slice())
             case _:
                 raise TypeError(value)
@@ -110,7 +112,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
             case None:
                 self._indexer = (self.get_column_slice(), slice(None))
             case (int() | None as start, int() | None as stop, int() | None as step):
-                row_slice = slice(start=start, stop=stop, step=step)
+                row_slice = slice(start, stop, step)
                 self._indexer = (self.get_column_slice(), row_slice)
             case _:
                 raise TypeError(value)
@@ -138,20 +140,21 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         return (row - (sl.start or 0)) / (sl.step or 1)
 
     # The Qt typesystems dont like slices (or ranges / tuples)
-    # we expose them as a list for now.
+    # seems what works is to throw tuples at a QtProperty declared as list.
+    # otherwise change this to list getters/setters.
 
-    def get_column_list(self) -> list[int | None, int | None, int | None]:
-        """Get list representation of the column slice."""
+    def get_column_tuple(self) -> tuple[int | None, int | None, int | None]:
+        """Get tuple representation of the column slice."""
         sl = self.get_column_slice()
         return (sl.start, sl.stop, sl.step)
 
-    def get_row_list(self) -> list[int | None, int | None, int | None]:
-        """Get list representation of the row slice."""
+    def get_row_tuple(self) -> tuple[int | None, int | None, int | None]:
+        """Get tuple representation of the row slice."""
         sl = self.get_row_slice()
         return (sl.start, sl.stop, sl.step)
 
-    column_slice = core.Property(list, get_column_list, set_column_slice)
-    row_slice = core.Property(list, get_row_list, set_column_slice)
+    column_slice = core.Property(list, get_column_tuple, set_column_slice)
+    row_slice = core.Property(list, get_row_tuple, set_column_slice)
 
 
 if __name__ == "__main__":

@@ -38,6 +38,7 @@ CASE_PATTERN = re.compile(r"(?<!^)(?=[A-Z])")
 
 
 def is_in_slice(a_slice: slice | range, idx: int):
+    """Note: this always returns False for negative slice.stop."""
     start = a_slice.start or 0
     is_behind_range = a_slice.stop is not None and idx >= a_slice.stop
     if idx < start or is_behind_range:

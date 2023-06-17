@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 class CheckableProxyModel(custom_models.SliceIdentityProxyModel):
     ID = "checkable"
-    checkstate_changed = core.Signal(core.ModelIndex, bool)  # row, state
+    checkstate_changed = core.Signal(core.ModelIndex, bool)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
