@@ -373,6 +373,11 @@ def make_serializable(obj):
             return obj
 
 
+Indexer = tuple[slice | int, slice | int]
+IndexerOrInt = Indexer | int
+SingleResultIndexer = int | tuple[int, int]
+MultiResultIndexer = tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
+
 PatternType = re.Pattern | QtCore.QRegularExpression
 PatternAndStringType = str | PatternType
 JSONType = str | int | float | bool | None | dict[str, Any] | list[Any]
