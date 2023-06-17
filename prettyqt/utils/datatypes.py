@@ -71,6 +71,8 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
             return val.pattern()
         case core.QUrl():
             return val.toString()
+        case slice() | range():
+            return f"({val.start=}, {val.stop=}, {val.step=}"
     try:
         import numpy as np
     except ImportError:
@@ -108,6 +110,10 @@ def get_widget_for_value(val, parent=None):
             return widgets.SpinBox(parent=parent)
         case float():
             return widgets.DoubleSpinBox(parent=parent)
+        case (int(), *_):
+            return custom_widgets.ListInput(parent=parent, typ=int)
+        case (float(), *_):
+            return custom_widgets.ListInput(parent=parent, typ=float)
         case pathlib.Path():
             return custom_widgets.FileChooserButton(parent=parent)
         case str():
@@ -149,15 +155,15 @@ def get_widget_for_value(val, parent=None):
     else:
         match val:
             case np.floating():
-                return custom_widgets.FloatLineEdit()
+                return custom_widgets.FloatLineEdit(parent=parent)
             case np.integer():
-                return custom_widgets.IntLineEdit()
+                return custom_widgets.IntLineEdit(parent=parent)
             case np.str_():
-                return widgets.LineEdit()
+                return widgets.LineEdit(parent=parent)
             case np.datetime64():
-                return widgets.DateTimeEdit()
+                return widgets.DateTimeEdit(parent=parent)
             case np.bool_():
-                return widgets.CheckBox()
+                return widgets.CheckBox(parent=parent)
 
 
 def align_types(source: VariantType, target: VariantType | tuple):
