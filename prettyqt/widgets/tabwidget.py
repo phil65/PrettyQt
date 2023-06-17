@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import Literal
+from typing import Literal, overload
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, animator, bidict, datatypes
+from prettyqt.utils import InvalidParamError, animator, bidict, datatypes, listdelegators
 
 
 TAB_SHAPES = bidict(
@@ -48,13 +48,29 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def __len__(self) -> int:
         return self.count()
 
+    @overload
     def __getitem__(self, index: int) -> QtWidgets.QWidget:
-        if isinstance(index, int):
-            return self.widget(index)
-        result = self.findChild(QtWidgets.QWidget, index)
-        if result is None:
-            raise KeyError("Widget not found")
-        return result
+        ...
+
+    @overload
+    def __getitem__(
+        self, index: slice
+    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        ...
+
+    def __getitem__(
+        self, index: int | slice
+    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+        match index:
+            case int():
+                if index >= self.count():
+                    raise IndexError(index)
+                return self.widget(index)
+            case slice():
+                rng = range(index.start or 0, index.stop or self.count(), index.step or 1)
+                return listdelegators.BaseListDelegator(self.widget(i) for i in rng)
+            case _:
+                raise TypeError(index)
 
     def __contains__(self, item: QtWidgets.QWidget):
         return self.indexOf(item) >= 0
