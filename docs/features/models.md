@@ -86,6 +86,58 @@ Scikit-learn
 
 
 
+## Proxy Models
+
+Every Class with an AbstractItemViewMixin (widgets.TreeView, widgets.TableView, ...)
+has quick access to proxy superpowers hidden behind the "proxifier" attribute.
+A lot of proxy models can be selectively applied by using python slicing syntax.
+
+Example:
+
+    model = MyTableModel()
+    table = widgets.TableView()
+    table.set_model(model)
+
+    # lets change the appearance a bit.
+    # Set the font color of column 2 and 3 to red and font to Courier.
+
+    table.proxifier[2:4, :].style(foreground="red", font="Courier")
+
+    # Cut off last column and only show last 50 lines.
+    table.proxifier[:-1, :50].filter()
+
+    # Set first 20 lines of these 50 lines to read_only
+    table.proxifier[:, :20].set_read_only()
+
+    # Make first column checkable and trigger callback on checkstate change.
+    table.proxifier[0, :].make_checkable(callback=my_callback)
+
+
+Every call here basically adds another ProxyModel layer (all based on SliceIdentityProxyModel).
+The proxy models should all perform very well with large tables since they never need to loop over the whole range.
+
+
+Here is a short overview for the included models:
+
+
+FuzzyFilterProxyModel
+  - Model to make implementing CommandPalettes a la SubimeText or VS Code super easy.
+  - A FilterProxyModel which sorts the results based on a matching score.
+  - Exposes matching score via a custom UserRole.
+  - Can also color the found Substring when combined with our "HtmlItemDelegate".
+
+
+SliceFilterProxyModel
+  - ProxyModel which can filter columns and rows based on slices.
+  - Implemented as IdentityProxyModel instead of a FilterProxyModel
+    in order to perform well with large tables.
+
+
+SliceAppearanceProxyModel
+  - Applies styling to given slice by overriding font, color and alignment roles.
+
+
+
 
 
 ## Models for Qt Types
