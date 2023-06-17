@@ -91,9 +91,14 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         self._widget_name = parent.objectName() if parent is not None else ""
 
     def __getitem__(self, index):
-        if isinstance(index, int) and (index >= self.count() or index < 0):
-            raise IndexError(index)
-        return HeaderWrapper(index, self)
+        match index:
+            case int() if index >= self.count() or index < 0:
+                raise IndexError(index)
+            case int():
+                return HeaderWrapper(index, self)
+            case str():
+                index = self.get_section_for_label(index)
+                return HeaderWrapper(index, self)
 
     def _get_map(self):
         maps = super()._get_map()
