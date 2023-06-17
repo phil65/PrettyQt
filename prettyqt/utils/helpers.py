@@ -157,8 +157,8 @@ def string_to_num_array(array: str) -> list[float]:
 
 
 def get_color_percentage(
-    color_1: tuple[int, int, int, int], color_2: tuple[int, int, int, int], percent: float
-) -> tuple[int, int, int, int]:
+    color_1: tuple, color_2: tuple, percent: float
+) -> tuple:
     """Get a color which is percent% interpolated between start and end.
 
     Args:
@@ -173,11 +173,11 @@ def get_color_percentage(
     """
     if not 0 <= percent <= 100:
         raise ValueError("percent needs to be between 0 and 100!")
-    x = round(color_1[0] + (color_2[0] - color_1[0]) * percent / 100)
-    y = round(color_1[1] + (color_2[1] - color_1[1]) * percent / 100)
-    z = round(color_1[2] + (color_2[2] - color_1[2]) * percent / 100)
-    a = round(color_1[3] + (color_2[3] - color_1[3]) * percent / 100)
-    return (x, y, z, a)
+    ls = [
+        round(color_1[i] + (color_2[i] - color_1[i]) * percent / 100)
+        for i, _ in enumerate(color_1)
+    ]
+    return tuple(ls)
 
 
 def get_subclasses(klass, include_abstract: bool = False):
