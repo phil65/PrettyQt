@@ -46,18 +46,13 @@ class ProxyWrapper:
         self.proxifier = proxifier
         self._widget = widget
 
-    def filter(self) -> custom_models.SubsetFilterProxyModel:
-        """Filter subsetion to display."""
+    def filter(self) -> custom_models.SliceFilterProxyModel:
+        """Filter subsection to display."""
         from prettyqt import custom_models
 
-        match self._indexer:
-            case (arg_1, arg_2):
-                kwargs = dict(row_filter=arg_1, column_filter=arg_2, parent=self._widget)
-            case _:
-                kwargs = dict(
-                    row_filter=self._indexer, column_filter=None, parent=self._widget
-                )
-        proxy = custom_models.SubsetFilterProxyModel(**kwargs)
+        proxy = custom_models.SliceFilterProxyModel(
+            indexer=self._indexer, parent=self._widget
+        )
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
