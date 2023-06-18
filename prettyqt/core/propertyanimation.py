@@ -36,6 +36,13 @@ class PropertyAnimation(core.VariantAnimationMixin, QtCore.QPropertyAnimation):
     def get_property_name(self) -> str:
         return self.propertyName().data().decode()
 
+    def get_property_value(self):
+        """Return the value of the property which should get animated."""
+        prop_name = self.get_property_name()
+        obj = self.targetObject()
+        prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
+        return prop.read(obj)
+
 
 if __name__ == "__main__":
     anim = PropertyAnimation()
