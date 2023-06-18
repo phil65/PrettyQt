@@ -154,7 +154,9 @@ class WidgetMixin(core.ObjectMixin):
             return True
 
     def map_to(
-        self, widget: QtWidgets.QWidget | Literal["global", "parent"], pos_or_rect
+        self,
+        widget: QtWidgets.QWidget | Literal["global", "parent", "window"],
+        pos_or_rect,
     ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
         """Map a point or rect to a widget, global position or parent."""
         match pos_or_rect:
@@ -179,6 +181,12 @@ class WidgetMixin(core.ObjectMixin):
                 return type(pos_or_rect)(top_left, bottom_right)
             case QtCore.QPoint() | QtCore.QPointF(), "parent":
                 return super().mapToParent(pos_or_rect)
+            case QtCore.QRect() | QtCore.QRectF(), "window":
+                top_left = super().mapTo(widget.window(), pos_or_rect.topLeft())
+                bottom_right = super().mapTo(widget.window(), pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), "window":
+                return super().mapTo(widget.window(), pos_or_rect)
             case QtCore.QRect() | QtCore.QRectF(), "global":
                 top_left = super().mapToGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapToGlobal(pos_or_rect.bottomRight())
@@ -189,7 +197,9 @@ class WidgetMixin(core.ObjectMixin):
                 raise ValueError(pos_or_rect)
 
     def map_from(
-        self, widget: QtWidgets.QWidget | Literal["global", "parent"], pos_or_rect
+        self,
+        widget: QtWidgets.QWidget | Literal["global", "parent", "window"],
+        pos_or_rect,
     ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
         """Map a point or rect from a widget, global position or parent."""
         match pos_or_rect:
@@ -214,6 +224,12 @@ class WidgetMixin(core.ObjectMixin):
                 return type(pos_or_rect)(top_left, bottom_right)
             case QtCore.QPoint() | QtCore.QPointF(), "parent":
                 return super().mapFromParent(pos_or_rect)
+            case QtCore.QRect() | QtCore.QRectF(), "window":
+                top_left = super().mapFrom(widget.window(), pos_or_rect.topLeft())
+                bottom_right = super().mapFrom(widget.window(), pos_or_rect.bottomRight())
+                return type(pos_or_rect)(top_left, bottom_right)
+            case QtCore.QPoint() | QtCore.QPointF(), "window":
+                return super().mapFrom(widget.window(), pos_or_rect)
             case QtCore.QRect() | QtCore.QRectF(), "global":
                 top_left = super().mapFromGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapFromGlobal(pos_or_rect.bottomRight())
