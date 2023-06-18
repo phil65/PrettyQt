@@ -36,36 +36,50 @@ class ColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     def data(self, index: core.ModelIndex, role=constants.EDIT_ROLE):
         if not self.indexer_contains(index):
             return super().data(index, role)
-        match role, self._mode:
-            case constants.BACKGROUND_ROLE, self.ColorMode.Seen:
+        match role:
+            case constants.BACKGROUND_ROLE:
+                return self.get_color_for_index(index)
+            case _:
+                return super().data(index, role)
+
+    def get_color_for_index(self, index: core.ModelIndex) -> gui.QColor:
+        match self._mode:
+            case self.ColorMode.Seen:
                 data = index.data(self._role)
-                self._max = max(self._max, abs(data))
+                new_max = max(self._max, abs(data))
+                if new_max != self._max:
+                    self._max = new_max
+                    self.update_all()
                 value = data / self._max
                 return self.get_color_for_value(abs(value))
-            case constants.BACKGROUND_ROLE, self.ColorMode.Visible:
+            case self.ColorMode.Visible:
                 widget = self.parent()
                 h_span = widget.get_visible_section_span("horizontal")
                 v_span = widget.get_visible_section_span("vertical")
                 if (span := (h_span, v_span)) != self._last_span:
                     self._last_span = span
                     model = self.sourceModel()
+                    # TODO: we probably should clamp based on self._indexer.
                     delegator = model[v_span[0] : v_span[1], h_span[0] : h_span[1]]
                     data = delegator.data(self._role)
                     max_ = max(data) if data else 1.0
                     self._max = max_
+                    top_left = self.index(v_span[0], h_span[0])
+                    bottom_right = self.index(v_span[1], h_span[1])
+                    # or do we need to update_all()?
+                    self.dataChanged.emit(top_left, bottom_right)
                 else:
                     max_ = self._max
                 data = abs(index.data(self._role))
                 max_ = abs(max(abs(max_), data))
                 return self.get_color_for_value(data / max_)
-            case _, _:
-                return super().data(index, role)
 
-    def get_color_for_value(self, value: float):
+
+    def get_color_for_value(self, value: float) -> gui.QColor:
         col = helpers.get_color_percentage(
             self._low_color.getRgb(), self._high_color.getRgb(), value * 100
         )
-        return gui.Color(*col).as_qt()
+        return gui.QColor(*col)
 
     def setLowColor(self, color: gui.QColor):
         self._low_color = colors.get_color(color).as_qt()
@@ -105,25 +119,11 @@ class ColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-    import pandas as pd
-    import numpy as np
+    from prettyqt import debugging, widgets
     app = widgets.app()
-    tuples = [
-        "one",
-        "two",
-        "one",
-        "two",
-        "one",
-        "two",
-        "one",
-        "two",
-    ] * 10
-    df = pd.DataFrame(np.random.randn(80, 80), index=tuples, columns=tuples)
-    table = widgets.TableView()
-    table.set_delegate("variant")
-    table.set_model(df)
-    table.proxifier[:2, :].color_values()
+
+    table = debugging.example_table()
+    table.proxifier[1:4, :].color_values()
     table.show()
     with app.debug_mode():
         app.main_loop()
