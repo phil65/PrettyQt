@@ -573,7 +573,7 @@ def test_headerview(qtbot):
     header = widgets.HeaderView("horizontal", parent=table)
     table.setHorizontalHeader(header)
     header.set_resize_mode("interactive")
-    header.set_resize_mode("interactive", col=0)
+    header[0].set_resize_mode("interactive")
     with pytest.raises(InvalidParamError):
         header.set_resize_mode("test")
     header.resize_sections("interactive")
@@ -585,7 +585,6 @@ def test_headerview(qtbot):
         header.set_context_menu_policy("test")
     assert header.get_context_menu_policy() == "custom"
     header.set_custom_menu(test)
-    header.set_sizes([100])
     assert len(header.get_section_labels()) == 4
     header.save_state()
     header.load_state()
