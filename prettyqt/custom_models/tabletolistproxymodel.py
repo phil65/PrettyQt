@@ -1,15 +1,39 @@
 from __future__ import annotations
 
-from prettyqt import core
+from prettyqt import constants, core
 
 
 class TableToListProxyModel(core.IdentityProxyModel):
     """Model to flatten a table to a list."""
+
     ID = "table_to_list"
+
+    def __init__(self, *args, header_title: str = "", **kwargs):
+        super().__init__(*args, **kwargs)
+        self._header_title = header_title
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if self.sourceModel() is None else 1
+
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole,
+    ) -> str | None:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
+                return self._header_title or None
+            case constants.VERTICAL, constants.DISPLAY_ROLE:
+                col_section = section % super().columnCount()
+                row_section = section // super().rowCount()
+                pre = super().headerData(col_section, constants.HORIZONTAL, role)
+                post = super().headerData(row_section, constants.VERTICAL, role)
+                pre_str = col_section if pre is None else pre
+                post_str = row_section if post is None else post
+                return f"{pre_str} - {post_str}"
+        return None
 
     def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
@@ -43,9 +67,22 @@ class TableToListProxyModel(core.IdentityProxyModel):
         r = source_index.row() * source.columnCount() + source_index.column()
         return self.createIndex(r, 0, source_index.internalPointer())
 
+    def set_header_title(self, title: str):
+        self._header_title = title
+
+    def get_header_title(self) -> str:
+        return self._header_title
+
+    header_title = core.Property(str, get_header_title, set_header_title)
+
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import debugging, widgets
 
     app = widgets.app()
-    proxy = TableToListProxyModel()
+    table = debugging.example_table()
+    table.proxifier.transpose()
+    table.proxifier.get_proxy("table_to_list")
+    splitter = debugging.proxy_comparer(table.model())
+    splitter.show()
+    app.main_loop()
