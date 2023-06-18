@@ -4,6 +4,7 @@ from prettyqt import core
 
 
 class TableToListProxyModel(core.IdentityProxyModel):
+    """Model to flatten a table to a list."""
     ID = "table_to_list"
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:

@@ -186,17 +186,18 @@ if __name__ == "__main__":
     import pathlib
 
     app = widgets.app()
-    view = widgets.TreeView()
-    view.setRootIsDecorated(True)
-    code = pathlib.Path(__file__).read_text()
-    tree = ast.parse(code)
-
-    model = AstModel(tree, show_root=True, parent=view)
-    view.set_model(model)
-    container = filtercontainer.FilterContainer(view)
-    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate("variant")
-    view.resize(1000, 1000)
-    container.show()
     with app.debug_mode():
-        app.main_loop()
+        view = widgets.TreeView()
+        view.setRootIsDecorated(True)
+        code = pathlib.Path(__file__).read_text()
+        tree = ast.parse(code)
+
+        model = AstModel(tree, show_root=True, parent=view)
+        view.set_model(model)
+        container = filtercontainer.FilterContainer(view)
+        view.setEditTriggers(view.EditTrigger.AllEditTriggers)
+        view.set_delegate("variant")
+        view.resize(1000, 1000)
+        container.show()
+        with app.debug_mode():
+            app.main_loop()

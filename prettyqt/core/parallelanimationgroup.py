@@ -6,6 +6,10 @@ from prettyqt.qt import QtCore
 
 class ParallelAnimationGroup(core.AnimationGroupMixin, QtCore.QParallelAnimationGroup):
     def set_duration(self, duration: int):
-        anims = [self.animationAt(i) for i in range(len(self))]
-        for anim in anims:
-            anim.setDuration(duration)
+        for anim in self:
+            match anim:
+                # I dont think we need to support nested Animations here..
+                case core.QVariantAnimation():
+                    anim.setDuration(duration)
+                case _:
+                    raise TypeError("set_duration only works with QVariantAnimations.")

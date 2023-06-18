@@ -145,7 +145,8 @@ class FuzzyCompleter(widgets.Completer):
         self.updateModel()
         if self._filter_proxy.rowCount() == 0:
             self._using_original_model = False
-            self._filter_proxy.setSourceModel(core.StringListModel([path]))
+            model = core.StringListModel([path])
+            self._filter_proxy.setSourceModel(model)
             return [path]
 
         return []

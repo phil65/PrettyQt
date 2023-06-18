@@ -21,8 +21,6 @@ def lca_type(classes: list[type]) -> type:
 
 
 class BaseDataclassModel(core.AbstractTableModel):
-    # Apart from attrs.fields / dataclasses.fields, only difference to
-    # DataclassModel is flags method
     def __init__(self, items: Sequence, **kwargs):
         super().__init__(**kwargs)
         self.items = items
@@ -88,7 +86,7 @@ class BaseDataclassModel(core.AbstractTableModel):
         """Override.
 
         BaseClass implementation just tries to set attribute with same value to test
-        if field is writable.
+        if field is writable. If possible, subclasses should find a more efficient way.
         """
         if not parent.isValid():
             return super().flags(parent)

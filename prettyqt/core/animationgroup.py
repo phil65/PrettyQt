@@ -23,18 +23,19 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
         ...
 
     def __getitem__(self, index: int | slice):
+        count = self.animationCount()
         match index:
             case int():
                 if index < 0:
-                    index = self.animationCount() + index
-                if index >= self.animationCount():
+                    index = count + index
+                if index >= count:
                     raise IndexError(index)
                 anim = self.animationAt(index)
                 if anim is None:
                     raise KeyError(index)
                 return anim
             case slice():
-                stop = index.stop or self.animationCount()
+                stop = index.stop or count
                 rng = range(index.start or 0, stop, index.step or 1)
                 anims = [self.animationAt(i) for i in rng]
                 return listdelegators.BaseListDelegator(anims)
