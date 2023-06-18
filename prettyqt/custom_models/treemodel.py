@@ -115,7 +115,7 @@ class TreeModel(core.AbstractItemModel):
             parent_item.children_fetched = True
 
     def _fetch_object_children(self, treeitem) -> list[treeitem.TreeItem]:
-        return NotImplemented
+        return treeitem.child_items
 
     def _has_children(self, treeitem) -> bool:
         return treeitem.has_children

@@ -3,16 +3,21 @@
 Contains custom models
 """
 
+# BaseModels
+
 from .selectionmixin import SelectionMixin
 from .listmixin import ListMixin
 from .treemodel import TreeModel
 from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
-from .regexmatchesmodel import RegexMatchesModel
-from .modelindexmodel import ModelIndexModel
-from .importlibdistributionmodel import ImportlibDistributionModel
+# these are deprecated
 from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
 from .nestedmodel import NestedModel
+
+# Python type models
+
+from .regexmatchesmodel import RegexMatchesModel
+from .importlibdistributionmodel import ImportlibDistributionModel
 from .jsonmodel import JsonModel
 from .astmodel import AstModel
 from .classtreemodel import SubClassTreeModel, ParentClassTreeModel
@@ -23,8 +28,18 @@ from .dataclassmodel import DataClassModel
 from .dataclassfieldsmodel import DataClassFieldsModel
 from .xmlmodel import XmlModel
 from .mappingmodel import MappingModel
+
+# Qt type models
+
+from .actionsmodel import ActionsModel
+from .modelindexmodel import ModelIndexModel
 from .storageinfomodel import StorageInfoModel
 from .shortcutsmodel import ShortcutsModel
+from .widgetpropertiesmodel import WidgetPropertiesModel
+from .widgetsdetailsmodel import WidgetsDetailsModel
+from .widgethierarchymodel import WidgetHierarchyModel, LayoutHierarchyModel
+
+# Proxies
 
 from .sliceidentityproxymodel import SliceIdentityProxyModel
 from .slicefilterproxymodel import SliceFilterProxyModel
@@ -34,6 +49,7 @@ from .valuetransformationproxymodel import ValueTransformationProxyModel
 from .valuefilterproxymodel import ValueFilterProxyModel
 from .rangefilterproxymodel import RangeFilterProxyModel
 from .checkableproxymodel import CheckableProxyModel
+from .tabletolistproxymodel import TableToListProxyModel
 from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
 from .sliceappearanceproxymodel import SliceAppearanceProxyModel
@@ -57,6 +73,7 @@ __all__ = [
     "NestedModel",
     "NestedItem",
     "JsonModel",
+    "ActionsModel",
     "MappingModel",
     "AstModel",
     "SubClassTreeModel",
@@ -69,6 +86,10 @@ __all__ = [
     "ShortcutsModel",
     "DataClassFieldsModel",
     "XmlModel",
+    "WidgetPropertiesModel",
+    "WidgetHierarchyModel",
+    "LayoutHierarchyModel",
+    "WidgetsDetailsModel",
     "SliceIdentityProxyModel",
     "SliceFilterProxyModel",
     "FuzzyFilterProxyModel",
@@ -77,6 +98,7 @@ __all__ = [
     "ValueFilterProxyModel",
     "RangeFilterProxyModel",
     "CheckableProxyModel",
+    "TableToListProxyModel",
     "FlattenedTreeProxyModel",
     "SliceAppearanceProxyModel",
     "AppearanceProxyModel",

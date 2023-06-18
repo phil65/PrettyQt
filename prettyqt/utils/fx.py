@@ -70,8 +70,7 @@ class AnimationWrapper:
         """Makes property transition from current value to given end value."""
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
-        prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
-        start: core.VariantType = prop.read(obj)
+        start: core.VariantType = obj.property(prop_name)
         end = datatypes.align_types(start, end)
         if isinstance(end, core.QPoint | core.QRect | core.QPointF | core.QRectF):
             end = obj.map_to("parent", end)
@@ -100,8 +99,7 @@ class AnimationWrapper:
         """Makes property transition from given start value to its current value."""
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
-        prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
-        end = prop.read(obj)
+        end: core.VariantType = obj.property(prop_name)
         start = datatypes.align_types(end, start)
         if isinstance(start, core.QPoint | core.QRect | core.QPointF | core.QRectF):
             start = obj.map_to("parent", start)
@@ -317,11 +315,13 @@ if __name__ == "__main__":
         w2 = widgets.RadioButton("test")
         w3 = widgets.Splitter("horizontal")
         w4 = widgets.RadioButton("test")
+        w5 = widgets.PlainTextEdit("test")
         widget = widgets.Widget()
         container = widget.set_layout("horizontal")
         container.add(w1)
         container.add(w2)
         w3.add(w4)
+        w3.add(w5)
         container.add(w3)
         widget.show()
         # container[:].fx["size"].transition_from(
@@ -330,7 +330,7 @@ if __name__ == "__main__":
         # timer = container[::2].fx.slide(
         #     start=(-100, 0), duration=3000, reverse=True, single_shot=False
         # )
-        w4.fx.bounce((0, -100), duration=5000)
+        w5.fx.bounce((0, -100), duration=2000, delay=5000)
         # print(timer)
         # app.sleep(1)  #
         # timer[0].animation.toggle_direction()

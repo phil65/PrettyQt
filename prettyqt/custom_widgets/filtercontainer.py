@@ -37,7 +37,7 @@ class FilterContainer(widgets.Widget):
                 widget.add_items(
                     {None: "Show all", True: "Show True", False: "Show False"}
                 )
-                proxy = model.proxifier.get_proxy(
+                proxy = parent.proxifier.get_proxy(
                     "value_filter",
                     recursive_filtering_enabled=True,
                     filter_key_column=i,
@@ -46,7 +46,7 @@ class FilterContainer(widgets.Widget):
                 widget.value_changed.connect(proxy.set_filter_value)
             else:
                 widget = widgets.LineEdit(margin=0, object_name=f"filter_combo_{i}")
-                proxy = model.proxifier.get_proxy(
+                proxy = parent.proxifier.get_proxy(
                     "sort_filter", recursive_filtering_enabled=True, filter_key_column=i
                 )
                 widget.value_changed.connect(proxy.setFilterFixedString)
@@ -102,19 +102,20 @@ if __name__ == "__main__":
     from prettyqt.custom_models import widgetpropertiesmodel
 
     app = widgets.app()
-    view = widgets.TableView()
-
-    model = widgetpropertiesmodel.WidgetPropertiesModel(view.h_header, parent=view)
-    # model = model.proxifier[:, 0:3]
-    view.set_selection_behavior("rows")
-    view.setEditTriggers(view.EditTrigger.AllEditTriggers)
-    view.set_delegate("variant", column=1)
-
-    view.setModel(model)
-    view.resize(640, 480)
-    view.set_selection_behavior("rows")
-    view.adapt_sizes()
-    w = FilterContainer(view)
-    w.show()
     with app.debug_mode():
-        app.main_loop()
+        view = widgets.TableView()
+
+        model = widgetpropertiesmodel.WidgetPropertiesModel(view.h_header, parent=view)
+        # model = model.proxifier[:, 0:3]
+        view.set_selection_behavior("rows")
+        view.setEditTriggers(view.EditTrigger.AllEditTriggers)
+        view.set_delegate("variant", column=1)
+
+        view.setModel(model)
+        view.resize(640, 480)
+        view.set_selection_behavior("rows")
+        view.adapt_sizes()
+        w = FilterContainer(view)
+        w.show()
+        with app.debug_mode():
+            app.main_loop()
