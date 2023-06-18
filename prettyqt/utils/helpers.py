@@ -204,7 +204,12 @@ def get_class_for_id(base_class: T, id_: str) -> T:
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")
 
 
-def move_in_list(ls: list, indexes: list, target_row: int) -> list:
+def get_module_classes(module: types.ModuleType) -> list[type]:
+    clsmembers = inspect.getmembers(module, inspect.isclass)
+    return [tpl[1] for tpl in clsmembers]
+
+
+def move_in_list(ls: list, indexes: list[int], target_row: int) -> list:
     """Moves items with given indexes inside list ls to target row."""
     new = [ls[i] for i in indexes]
     in_range = target_row < len(ls) and target_row != -1
