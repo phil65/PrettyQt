@@ -52,6 +52,12 @@ class AbstractAnimationMixin(core.ObjectMixin):
         maps |= {"direction": DIRECTION, "state": STATE}
         return maps
 
+    def toggle_direction(self):
+        Direction = AbstractAnimation.Direction
+        is_forward = self.direction() == Direction.Forward
+        direction = Direction.Backward if is_forward else Direction.Forward
+        self.setDirection(direction)
+
     def set_direction(self, direction: DirectionStr):
         """Set animation direction.
 
