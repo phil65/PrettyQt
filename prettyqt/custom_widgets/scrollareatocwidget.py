@@ -4,7 +4,6 @@ import enum
 import logging
 
 from prettyqt import constants, core, custom_models, gui, widgets
-from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
 
 logger = logging.getLogger(__name__)
@@ -24,6 +23,8 @@ class ScrollAreaTocModel(custom_models.TreeModel):
     def __init__(
         self, *args, widget_class: type[widgets.QWidget] = widgets.QWidget, **kwargs
     ):
+        self._highlight_font = gui.QFont()
+        self._highlight_font.setBold(True)
         self._Class = widget_class
         self._current_indexes: list[core.ModelIndex] = []
         super().__init__(*args, **kwargs)
@@ -46,12 +47,10 @@ class ScrollAreaTocModel(custom_models.TreeModel):
                 return widget
             case constants.FONT_ROLE, _ if index in self._current_indexes:
                 # if not index.parent().isValid():
-                font = gui.QFont()
-                font.setBold(True)
-                return font
+                return self._highlight_font
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+        flag = constants.FindChildOption.FindDirectChildrenOnly
         children = item.obj.findChildren(self._Class, None, flag)
         children = [i for i in children if i.windowTitle()]
         return [treeitem.TreeItem(obj=i) for i in children]
@@ -61,6 +60,15 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         children = item.obj.findChildren(self._Class, None, flag)
         children = [i for i in children if i.windowTitle()]
         return bool(children)
+
+    def set_highlight_font(self, font: gui.QFont):
+        self._highlight_font = font
+
+    def get_highlight_font(self) -> gui.QFont:
+        return self._highlight_font
+
+    highlight_font = core.Property(gui.QFont, get_highlight_font, set_highlight_font)
+
 
 
 class ScrollAreaTocWidget(widgets.TreeView):
@@ -84,7 +92,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def __init__(
         self,
         scrollarea: widgets.QScrollArea,
-        orientation: QtCore.Qt.Orientation = constants.VERTICAL,
+        orientation: constants.Orientation = constants.VERTICAL,
         widget_class: type = widgets.QWidget,
         **kwargs,
     ) -> None:
@@ -210,7 +218,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def wheelEvent(self, e):
         self.scrollarea.wheelEvent(e)
 
-    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, source: core.QObject, event: core.QEvent) -> bool:
         match event.type():
             case core.Event.Type.ChildAdded:
                 self._on_scroll()
