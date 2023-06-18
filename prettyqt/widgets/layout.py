@@ -53,7 +53,9 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     ):
         match index:
             case int():
-                if index >= self.count():
+                if index < 0:
+                    index + self.count()
+                if index < 0 or index >= self.count():
                     raise IndexError(index)
                 item = self.itemAt(index)
                 return i if (i := item.widget()) is not None else item.layout()
