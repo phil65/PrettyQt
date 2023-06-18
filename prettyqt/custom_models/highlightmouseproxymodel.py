@@ -7,7 +7,7 @@ from prettyqt import constants, core
 from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
 
-HighlightModeStr = Literal["column", "row", "both"]
+HighlightModeStr = Literal["column", "row", "both", "single"]
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
 
     def __init__(
         self,
-        *args,
+        parent: widgets.QAbstractItemView,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         mode: HighlightModeStr = "both",
         highlight_color: datatypes.ColorType = "red",
@@ -31,8 +31,7 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
         self._current_column = None
         self._current_row = None
         self._highlight_color = colors.get_color(highlight_color).as_qt()
-        super().__init__(*args, **kwargs)
-        parent: widgets.AbstractItemView = self.parent()  # type: ignore
+        super().__init__(parent, **kwargs)
         parent.setMouseTracking(True)
         parent.entered.connect(self.cell_entered)
         parent.installEventFilter(self)
@@ -71,15 +70,21 @@ class HighlightMouseProxyModel(core.IdentityProxyModel):
         index: core.ModelIndex,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
+        if role != constants.BACKGROUND_ROLE:
+            return super().data(index, role)
         is_in_row = index.row() == self._current_row
         is_in_column = index.column() == self._current_column
-        if role == constants.BACKGROUND_ROLE and (
-            (self._mode == "column" and is_in_column)
-            or (self._mode == "row" and is_in_row)
-            or (self._mode == "both" and (is_in_row or is_in_column))
-        ):
-            return self._highlight_color
-        return super().data(index, role)
+        match self._mode:
+            case "column" if is_in_column:
+                return self._highlight_color
+            case "row" if is_in_row:
+                return self._highlight_color
+            case "both" if is_in_row or is_in_column:
+                return self._highlight_color
+            case "single" if is_in_row and is_in_column:
+                return self._highlight_color
+            case _:
+                return super().data(index, role)
 
     highlightMode = core.Property(str, get_highlight_mode, set_highlight_mode)
     highlightColor = core.Property(QtGui.QColor, get_highlight_color, set_highlight_color)

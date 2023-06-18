@@ -15,10 +15,12 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
         return min(colcount, self.get_column_slice().stop or colcount)
 
     def headerData(self, section, orientation, role=None):
-        if orientation == constants.HORIZONTAL:
-            rng = self.get_column_range()
-        else:
-            rng = self.get_row_range()
+        """Map header data to proxy by calculating position from slice values.
+
+        source pos = slice start + proxy pos * slice step)
+        """
+        is_horizontal = orientation == constants.HORIZONTAL
+        rng = self.get_column_range() if is_horizontal else self.get_row_range()
         pos = rng.start + section * rng.step
         return super().headerData(pos, orientation, role)
 
@@ -38,6 +40,10 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
         return self.mapFromSource(source_index)
 
     def mapToSource(self, proxy_idx: core.ModelIndex) -> core.Modelindex:
+        """Map index to source by calculating position from slice values.
+
+        source pos = slice start + proxy pos * slice step)
+        """
         source = self.sourceModel()
         if source is None or not proxy_idx.isValid():
             return core.ModelIndex()
@@ -48,16 +54,14 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
         return source.index(row_pos, col_pos)
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
-        source = self.sourceModel()
-        if (
-            source is None
-            or not source_index.isValid()
-            # or not self.indexer_contains(source_index)
-        ):
+        """Map index from source by calculating position based on slice values.
+
+        proxy pos = source pos - slice start / slice step
+        """
+        if self.sourceModel() is None or not source_index.isValid():
             return core.ModelIndex()
-        row, col = source_index.row(), source_index.column()
-        row_pos = self.position_in_row_slice(row)
-        col_pos = self.position_in_column_slice(col)
+        row_pos = self.position_in_row_slice(source_index.row())
+        col_pos = self.position_in_column_slice(source_index.column())
         return self.createIndex(row_pos, col_pos, source_index.internalPointer())
 
 
