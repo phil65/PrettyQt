@@ -81,7 +81,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
 
     def set_column_slice(
         self, value: slice | int | None | tuple[int | None, int | None, int | None]
-    ) -> slice:
+    ):
         """Throw anything at this method in order to set the column slice."""
         match value:
             case slice() as col_slice:
@@ -102,7 +102,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
 
     def set_row_slice(
         self, value: slice | int | None | tuple[int | None, int | None, int | None]
-    ) -> slice:
+    ):
         """Throw anything at this method in order to set the row slice."""
         match value:
             case slice() as row_slice:
@@ -132,12 +132,12 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
     def position_in_column_slice(self, col: int) -> int:
         """Can be interpreted as slice.index(col) if slice would be a list."""
         sl = self.get_column_slice()
-        return (col - (sl.start or 0)) / (sl.step or 1)
+        return int((col - (sl.start or 0)) / (sl.step or 1))
 
     def position_in_row_slice(self, row: int) -> int:
         """Can be interpreted as slice.index(row) if slice would be a list."""
         sl = self.get_row_slice()
-        return (row - (sl.start or 0)) / (sl.step or 1)
+        return int((row - (sl.start or 0)) / (sl.step or 1))
 
     # The Qt typesystems dont like slices (or ranges / tuples)
     # seems what works is to throw tuples at a QtProperty declared as list.
