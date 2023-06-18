@@ -59,6 +59,30 @@ class QtLogger(logging.Handler):
                 QtCore.qFatal(self.format(record))
 
 
+def proxy_comparer(proxy):
+    from prettyqt import core, widgets
+    w = widgets.Splitter("horizontal")
+    while isinstance(proxy, core.QAbstractProxyModel):
+        container = widgets.Widget()
+        layout = container.set_layout("vertical")
+        table = widgets.TableView()
+        table.set_model(proxy)
+        table.set_delegate("variant")
+        layout.add(widgets.Label(type(proxy).__name__))
+        layout.add(table)
+        w.add(container)
+        proxy = proxy.sourceModel()
+
+    container = widgets.Widget()
+    layout = container.set_layout("vertical")
+    table = widgets.TableView()
+    table.set_model(proxy)
+    table.set_delegate("variant")
+    layout.add(widgets.Label(type(proxy).__name__))
+    layout.add(table)
+    w.add(container)
+    return w
+
 def is_deleted(obj) -> bool:
     match qt.API:
         case "pyside6":
