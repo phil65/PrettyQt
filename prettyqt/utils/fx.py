@@ -23,7 +23,7 @@ class AnimationTimer(core.Timer):
     ):
         # we could also take targetObject as parent?
         # that would limit the usage to PropertyAnimations though.
-        self._animation = animation
+        self.animation = animation
         super().__init__(
             timeout=animation.start,
             interval=interval,
@@ -43,7 +43,7 @@ class AnimationWrapper:
         end: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
-        delay: int = 0,
+        delay: int | str = 0,
         reverse: bool = False,
         single_shot: bool = True,
     ) -> AnimationTimer:
@@ -62,7 +62,7 @@ class AnimationWrapper:
         end: datatypes.VariantType | tuple,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
-        delay: int = 0,
+        delay: int | str = 0,
         relative: bool = False,
         reverse: bool = False,
         single_shot: bool = True,
@@ -73,6 +73,8 @@ class AnimationWrapper:
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         start: core.VariantType = prop.read(obj)
         end = datatypes.align_types(start, end)
+        if isinstance(end, core.QPoint | core.QRect | core.QPointF | core.QRectF):
+            end = obj.map_to("parent", end)
         if relative and hasattr(end, "__add__"):
             end = end + start
         return self.animate(
@@ -90,7 +92,7 @@ class AnimationWrapper:
         start: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
-        delay: int = 0,
+        delay: int | str = 0,
         relative: bool = False,
         reverse: bool = False,
         single_shot: bool = True,
@@ -101,6 +103,8 @@ class AnimationWrapper:
         prop = core.MetaObject(obj.metaObject()).get_property(prop_name)
         end = prop.read(obj)
         start = datatypes.align_types(end, start)
+        if isinstance(start, core.QPoint | core.QRect | core.QPointF | core.QRectF):
+            start = obj.map_to("parent", start)
         if relative and hasattr(start, "__add__"):
             start = end + start
         return self.animate(
@@ -115,7 +119,7 @@ class AnimationWrapper:
 
     def animate_on_event(
         self,
-        event: core.event.EventStr,
+        event: core.event.TypeStr,
         start: datatypes.VariantType,
         end: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
@@ -200,7 +204,7 @@ class Fx:
         duration: int = 1000,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
-    ) -> core.PropertyAnimation:
+    ) -> AnimationTimer:
         """Trigger a fade-in animation."""
         return self["windowOpacity"].transition_from(
             0.0,
@@ -214,7 +218,7 @@ class Fx:
         duration: int = 1000,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         delay: int = 0,
-    ) -> core.PropertyAnimation:
+    ) -> AnimationTimer:
         """Trigger a fade-out animation."""
         return self["windowOpacity"].transition_to(
             0.0,
@@ -231,7 +235,7 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         anchor: str = "center",
         delay: int = 0,
-    ) -> core.ZoomAnimation:
+    ) -> AnimationTimer:
         """Trigger a zoom animation with given anchor."""
         from prettyqt import custom_animations
 
@@ -252,7 +256,7 @@ class Fx:
         delay: int = 0,
         reverse: bool = False,
         single_shot: bool = True,
-    ) -> core.PropertyAnimation:
+    ) -> AnimationTimer:
         anim = core.PropertyAnimation(parent=self._widget)
         anim.set_easing(easing)
         pos = self._widget.geometry().topLeft()
@@ -264,8 +268,7 @@ class Fx:
         anim.apply_to(self._widget.pos)
         if reverse:
             anim.append_reversed()
-        self.run(anim, delay, single_shot=single_shot)
-        return anim
+        return self.run(anim, delay, single_shot=single_shot)
 
     def bounce(
         self,
@@ -273,8 +276,8 @@ class Fx:
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
-    ) -> core.PropertyAnimation:
-        return self["pos"].transition_from(
+    ) -> AnimationTimer:
+        return self["pos"].transition_to(
             end,
             easing=easing,
             duration=duration,
@@ -283,7 +286,10 @@ class Fx:
         )
 
     def run(
-        self, animation: core.QPropertyAnimation, delay: int = 0, single_shot: bool = True
+        self,
+        animation: core.QPropertyAnimation,
+        delay: int | str = 0,
+        single_shot: bool = True,
     ) -> AnimationTimer:
         if not animation.targetObject().isVisible():
             logger.info("Attention. Starting animation for invisible widget.")
@@ -309,19 +315,23 @@ if __name__ == "__main__":
     with app.debug_mode():
         w1 = widgets.RadioButton("test")
         w2 = widgets.RadioButton("test")
-        w3 = widgets.RadioButton("test")
+        w3 = widgets.Splitter("horizontal")
         w4 = widgets.RadioButton("test")
         widget = widgets.Widget()
         container = widget.set_layout("horizontal")
         container.add(w1)
         container.add(w2)
+        w3.add(w4)
         container.add(w3)
-        container.add(w4)
         widget.show()
-        container[:].fx["size"].transition_from(
-            (100, 100), duration=3000, reverse=True, single_shot=False
-        )
-        container[::2].fx.slide(
-            start=(-100, 0), duration=3000, reverse=True, single_shot=False
-        )
+        # container[:].fx["size"].transition_from(
+        #     (100, 100), duration=3000, reverse=True, single_shot=False
+        # )
+        # timer = container[::2].fx.slide(
+        #     start=(-100, 0), duration=3000, reverse=True, single_shot=False
+        # )
+        w4.fx.bounce((0, -100), duration=5000)
+        # print(timer)
+        # app.sleep(1)  #
+        # timer[0].animation.toggle_direction()
         app.main_loop()
