@@ -182,7 +182,6 @@ class AstModel(custom_models.TreeModel):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    from prettyqt.custom_widgets import filtercontainer
     import pathlib
 
     app = widgets.app()
@@ -194,10 +193,9 @@ if __name__ == "__main__":
 
         model = AstModel(tree, show_root=True, parent=view)
         view.set_model(model)
-        container = filtercontainer.FilterContainer(view)
         view.setEditTriggers(view.EditTrigger.AllEditTriggers)
         view.set_delegate("variant")
         view.resize(1000, 1000)
-        container.show()
+        view.show()
         with app.debug_mode():
             app.main_loop()

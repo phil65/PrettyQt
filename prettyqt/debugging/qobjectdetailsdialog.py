@@ -9,7 +9,7 @@ from prettyqt.custom_models import (
     widgetpropertiesmodel,
     widgethierarchymodel,
 )
-from prettyqt.custom_widgets import filtercontainer
+from prettyqt.custom_widgets import filterheader
 from prettyqt.qt import QtCore, QtWidgets
 
 logger = logging.getLogger(__name__)
@@ -52,8 +52,8 @@ class PropertyView(widgets.TableView):
         tabwidget = widgets.TabWidget(parent=parent)
         propertyview = cls(object_name="property_view", parent=tabwidget)
         propertyview.set_qobject(qobject)
-        propertyviewcontainer = filtercontainer.FilterContainer(propertyview)
-        tabwidget.add_tab(propertyviewcontainer, "Main")
+        propertyview.h_header = filterheader.FilterHeader(propertyview)
+        tabwidget.add_tab(propertyview, "Main")
 
         if hasattr(qobject, "model") and (model := qobject.model()) is not None:
             while isinstance(model, QtCore.QAbstractProxyModel):
@@ -61,17 +61,17 @@ class PropertyView(widgets.TableView):
                     object_name=f"property_view({type(model).__name__})",
                     parent=tabwidget,
                 )
+                view.h_header = filterheader.FilterHeader(view)
                 view.set_qobject(model)
-                container = filtercontainer.FilterContainer(view)
-                tabwidget.add_tab(container, type(model).__name__)
+                tabwidget.add_tab(view, type(model).__name__)
                 model = model.sourceModel()
             view = cls(
                 object_name=f"property_view({type(model).__name__})",
                 parent=tabwidget,
             )
+            view.h_header = filterheader.FilterHeader(view)
             view.set_qobject(model)
-            container = filtercontainer.FilterContainer(view)
-            tabwidget.add_tab(container, type(model).__name__)
+            tabwidget.add_tab(view, type(model).__name__)
         # if (
         #     hasattr(qobject, "menuWidget")
         #     and (menu_widget := qobject.menuWidget()) is not None
@@ -81,8 +81,7 @@ class PropertyView(widgets.TableView):
         #         parent=tabwidget,
         #     )
         #     view.set_qobject(menu_widget)
-        #     container = filtercontainer.FilterContainer(view)
-        #     tabwidget.add_tab(container, type(model).__name__)
+        #     tabwidget.add_tab(view, type(model).__name__)
         return tabwidget, propertyview
 
 
@@ -106,7 +105,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
             qobject, parent=self.hierarchyview
         )
         self.hierarchyview.set_model(model)
-        hierarchycontainer = filtercontainer.FilterContainer(self.hierarchyview)
+        self.hierarchyview.h_header = filterheader.FilterHeader(self.hierarchyview)
         self.hierarchyview.expandAll()
         self.hierarchyview.selectionModel().currentChanged.connect(self._current_changed)
 
@@ -138,7 +137,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.set_central_widget(widget)
         # qobject.position_on(widget)
 
-        self.add_dockwidget(hierarchycontainer, window_title="Hierarchy view")
+        self.add_dockwidget(self.hierarchyview, window_title="Hierarchy view")
         self.add_dockwidget(self.tabwidget, window_title="Property view")
         self.add_dockwidget(logtable, window_title="Log", visible=False)
         self.add_dockwidget(self.console, window_title="Console", visible=False)
