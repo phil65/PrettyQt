@@ -20,6 +20,20 @@ from .qmlapplicationengine import QmlApplicationEngine
 from .qmlcomponent import QmlComponent
 from .qmlimageproviderbase import QmlImageProviderBase, QmlImageProviderBaseMixin
 
+
+def register_objects_from_module(module):
+    from prettyqt import core
+    from prettyqt.utils import helpers
+
+    for Klass in helpers.get_module_classes(module):
+        if core.ObjectMixin in Klass.mro():
+            register_class(Klass)
+
+
+def register_class(Klass):
+    register_qml_type(Klass, Klass.__module__, 1, 0, Klass.__name__)
+
+
 __all__ = [
     "register_qml_type",
     "clear_type_registrations",
