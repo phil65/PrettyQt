@@ -244,13 +244,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if self.show_root and item == self._root_item:
-            return True
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
         return bool(item.requires)
 
     def _fetch_object_children(self, item: DistTreeItem) -> list[DistTreeItem]:

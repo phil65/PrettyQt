@@ -154,13 +154,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             )
         ]
 
-    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if self._show_root and item == self._root_item:
-            return True
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
         return bool(
             item.obj.findChildren(
                 self.BaseClass, None, QtCore.Qt.FindChildOption.FindDirectChildrenOnly
@@ -185,13 +179,7 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
                 raise ValueError(item)
         return [treeitem.TreeItem(obj=i) for i in items]
 
-    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if self._show_root and item == self._root_item:
-            return True
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
         match item.obj:
             case QtWidgets.QSplitter():
                 return item.obj.count() > 0

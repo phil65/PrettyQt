@@ -222,18 +222,21 @@ class FSSpecTreeModel(
             case _:
                 return COLUMNS
 
-    def _fetch_object_children(self, obj: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
+        return item.obj["type"] == "directory"
+
+    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         """Fetch the children of a Python object.
 
         Returns: list of TreeItems
         """
-        glob = f"{obj.obj['name']}/*/" if obj.obj["name"] else "*"
+        glob = f"{item.obj['name']}/*/" if item.obj["name"] else "*"
         items = [
-            treeitem.TreeItem(obj=i, parent=obj)
+            treeitem.TreeItem(obj=i, parent=item)
             for i in self.fs.glob(glob, detail=True).values()
         ]
         # not sure if this should be emitted later?
-        self.directoryLoaded.emit(obj.obj["name"])
+        self.directoryLoaded.emit(item.obj["name"])
         return items
 
     def get_protocol_path(self, index: core.QModelIndex | str) -> str:
@@ -381,15 +384,6 @@ class FSSpecTreeModel(
 
     # def dragEnterEvent(self, event):
     #     event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
-
-    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if self._show_root and item == self._root_item:
-            return True
-        return item.obj["type"] == "directory"
 
     def removeRows(self, row: int, count: int, parent: core.Modelindex):
         # end_row = row + count - 1

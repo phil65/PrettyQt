@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 
-from prettyqt import core, custom_models
+from prettyqt import custom_models
 from prettyqt.utils import treeitem
 
 
@@ -42,13 +42,7 @@ class MappingModel(custom_models.ColumnItemModel):
             case _:
                 return False
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if item in [self._root_item, self.inspected_item]:
-            return True
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
         if self.nested_key is None:
             return False
         return isinstance(item.obj.get(self.nested_key), Mapping)

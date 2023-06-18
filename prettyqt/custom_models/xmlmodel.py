@@ -3,7 +3,7 @@ from __future__ import annotations
 import io
 import xml.etree.ElementTree as ET
 
-from prettyqt import core, custom_models
+from prettyqt import custom_models
 from prettyqt.utils import datatypes, treeitem
 
 
@@ -68,18 +68,10 @@ class XmlModel(custom_models.ColumnItemModel):
     def supports(cls, typ):
         return isinstance(typ, datatypes.IsTreeIterator | ET.ElementTree)
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        return True if self.show_root and item == self._root_item else bool(item.obj)
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
+        return bool(item.obj)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        """Fetch the children of a Python object.
-
-        Returns: list of treeitem.TreeItems
-        """
         return [treeitem.TreeItem(obj=i) for i in item.obj]
 
 

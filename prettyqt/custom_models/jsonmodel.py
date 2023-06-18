@@ -4,7 +4,7 @@ from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from typing import Any
 
-from prettyqt import core, custom_models
+from prettyqt import custom_models
 from prettyqt.utils import treeitem
 
 
@@ -54,13 +54,7 @@ class JsonModel(custom_models.ColumnItemModel):
     def supports(cls, typ):
         return isinstance(typ, Mapping)
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if self.show_root and item == self._root_item:
-            return True
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
         return isinstance(item.obj.value, dict | list | set) and bool(item.obj.value)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:

@@ -56,14 +56,8 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         children = [i for i in children if i.windowTitle()]
         return [treeitem.TreeItem(obj=i) for i in children]
 
-    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if item == self._root_item:
-            return True
-        flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
+        flag = constants.FindChildOption.FindDirectChildrenOnly
         children = item.obj.findChildren(self._Class, None, flag)
         children = [i for i in children if i.windowTitle()]
         return bool(children)

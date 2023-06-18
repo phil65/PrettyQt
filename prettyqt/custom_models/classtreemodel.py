@@ -74,13 +74,7 @@ class SubClassTreeModel(BaseClassTreeModel):
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         return [treeitem.TreeItem(obj=i) for i in item.obj.__subclasses__()]
 
-    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if self._show_root and item == self._root_item:
-            return True
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
         if item.obj is None:
             return False
         return len(item.obj.__subclasses__()) > 0
@@ -96,13 +90,7 @@ class ParentClassTreeModel(BaseClassTreeModel):
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         return [treeitem.TreeItem(obj=i) for i in item.obj.__bases__]
 
-    def hasChildren(self, parent: core.ModelIndex | None = None) -> bool:
-        parent = parent or core.ModelIndex()
-        if parent.column() > 0:
-            return False
-        item = self.data_by_index(parent)
-        if self._show_root and item == self._root_item:
-            return True
+    def _has_children(self, item: treeitem.TreeItem) -> bool:
         if item.obj is None:
             return False
         return len(item.obj.__bases__) > 0

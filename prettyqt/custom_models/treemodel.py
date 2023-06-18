@@ -80,7 +80,12 @@ class TreeModel(core.AbstractItemModel):
 
     def hasChildren(self, parent: core.ModelIndex | None = None):
         parent = parent or core.ModelIndex()
-        return 0 if parent.column() > 0 else self.data_by_index(parent).has_children
+        if parent.column() > 0:
+            return 0
+        treeitem = self.data_by_index(parent)
+        if self._show_root and treeitem == self._root_item:
+            return True
+        return self._has_children(treeitem)
 
     def canFetchMore(self, parent: core.ModelIndex | None = None):
         parent = parent or core.ModelIndex()
@@ -111,6 +116,9 @@ class TreeModel(core.AbstractItemModel):
 
     def _fetch_object_children(self, treeitem) -> list[treeitem.TreeItem]:
         return NotImplemented
+
+    def _has_children(self, treeitem) -> bool:
+        return treeitem.has_children
 
 
 if __name__ == "__main__":
