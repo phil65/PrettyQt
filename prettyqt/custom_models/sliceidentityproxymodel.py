@@ -25,7 +25,7 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
 
     def update_slice_boundaries(self, sl: slice, typ="row") -> slice:
         """Update slice boundaries by resolving negative indexes."""
-        # I dont know yet whats the best approach here and which cases I should support.
+        # Not sure yet whats the best approach here and which cases I should support...
         source = self.sourceModel()
         if sl.start is not None and sl.start < 0:
             count = source.rowCount() if typ == "row" else source.columnCount()
@@ -62,8 +62,6 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
             case None | (None, _):
                 return slice(None)
             case (slice() as col_slice, _):
-                # if (source := self.sourceModel()) is not None:
-                #     col_slice = self.update_slice_boundaries(col_slice, typ="column")
                 return col_slice
             case _:
                 raise TypeError(self._indexer)
@@ -73,8 +71,6 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
             case None | (_, None):
                 return slice(None)
             case (_, slice() as row_slice):
-                # if (source := self.sourceModel()) is not None:
-                #     row_slice = self.update_slice_boundaries(row_slice, typ="row")
                 return row_slice
             case _:
                 raise TypeError(self._indexer)
@@ -85,20 +81,20 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         """Throw anything at this method in order to set the column slice."""
         match value:
             case slice() as col_slice:
-                self._indexer = (col_slice, self.get_row_slice())
+                sl = col_slice
             case int() as col:
-                self._indexer = (slice(col, col + 1), self.get_row_slice())
+                sl = slice(col, col + 1)
             case None:
-                self._indexer = (slice(None), self.get_row_slice())
+                sl = slice(None)
             case (
                 int() | None as start,
                 int() | None as stop,
                 int() | None as step,
             ):
-                row_slice = slice(start, stop, step)
-                self._indexer = (row_slice, self.get_row_slice())
+                sl = slice(start, stop, step)
             case _:
                 raise TypeError(value)
+        self._indexer = (sl, self.get_row_slice())
 
     def set_row_slice(
         self, value: slice | int | None | tuple[int | None, int | None, int | None]
@@ -106,16 +102,20 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         """Throw anything at this method in order to set the row slice."""
         match value:
             case slice() as row_slice:
-                self._indexer = (self.get_column_slice(), row_slice)
+                sl = row_slice
             case int() as row:
-                self._indexer = (self.get_column_slice(), slice(row, row + 1))
+                sl = slice(row, row + 1)
             case None:
-                self._indexer = (self.get_column_slice(), slice(None))
-            case (int() | None as start, int() | None as stop, int() | None as step):
-                row_slice = slice(start, stop, step)
-                self._indexer = (self.get_column_slice(), row_slice)
+                sl = slice(None)
+            case (
+                int() | None as start,
+                int() | None as stop,
+                int() | None as step,
+            ):
+                sl = slice(start, stop, step)
             case _:
                 raise TypeError(value)
+        self._indexer = (self.get_row_slice(), sl)
 
     def get_row_range(self) -> range:
         """Return a range for the row slice with valid start / stop / step values."""
