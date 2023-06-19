@@ -66,7 +66,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
 
         handler = logging.StreamHandler(sys.stdout)
         f_format = logging.Formatter(
-            "%(filename)s:%(lineno)d - %(levelname)s - %(message)s"
+            "%(asctime)s: %(filename)s:%(lineno)d - %(levelname)s - %(message)s"
         )
         handler.setFormatter(f_format)
         handler.setLevel(log_level)
