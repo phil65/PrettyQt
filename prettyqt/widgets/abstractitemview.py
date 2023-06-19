@@ -214,8 +214,10 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         old_sel_model = self.selectionModel()
         if old_model is not None or model is not None:
             self.setModel(model)
-            # if model is not None:
-            #     self.setSelectionModel(core.ItemSelectionModel(model))
+            if model is not None:
+                # always set a parent. PySide6 needs one for proxying.
+                model.setParent(self)
+                self.setSelectionModel(core.ItemSelectionModel(model))
             self.model_changed.emit(model)
         # if old_model:
         #     old_model.deleteLater()
