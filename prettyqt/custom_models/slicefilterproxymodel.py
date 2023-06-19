@@ -8,13 +8,14 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
 
     Since slicing operations are bijective, we can do this without
     looping all rows / columns. Thus, this should perform much better than a
-    SortFilterProxyModel with a column filter.
+    SortFilterProxyModel with a column filter. (O(1) instead of O(n))
     """
 
     ID = "slice_filter"
 
     def rowCount(self, index=None):
         rowcount = super().rowCount()
+        # TODO: not sure if slice.stop = 0 is covered correctly?
         return min(rowcount, self.get_row_slice().stop or rowcount)
 
     def columnCount(self, index=None):
