@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import itertools
 
-from prettyqt import widgets
+from prettyqt import core, custom_widgets, widgets
 from prettyqt.utils import listdelegators
 
 
@@ -12,6 +12,7 @@ class MultiLineLayout(widgets.BoxLayout):
     def __init__(self, vertical: bool = True, row_number: int = 3, **kwargs):
         self.row_nb = row_number
         self.layouts = []
+        self._sub_layout_type = "box"
         direction = self.Direction.TopToBottom if vertical else self.Direction.LeftToRight
         super().__init__(direction, **kwargs)
 
@@ -21,7 +22,8 @@ class MultiLineLayout(widgets.BoxLayout):
         super().set_direction(direction)
         direction = self.get_sub_direction()
         for layout in self.layouts:
-            layout.set_direction(direction)
+            if isinstance(layout, widgets.QBoxLayout | MultiLineLayout):
+                layout.set_direction(direction)
 
     def get_sub_direction(self) -> widgets.BoxLayout.Direction:
         return (
@@ -31,8 +33,19 @@ class MultiLineLayout(widgets.BoxLayout):
         )
 
     def _add_sub_layout(self):
-        direction = self.get_sub_direction()
-        layout = widgets.BoxLayout(direction)
+        match self._sub_layout_type:
+            case "box":
+                direction = self.get_sub_direction()
+                layout = widgets.BoxLayout(direction)
+            case "grid":
+                layout = widget.GridLayout()
+            case "flow":
+                layout = custom_widgets.FlowLayout()
+            case "stacked":
+                layout = widgets.StackedLayout()
+            case "nested":
+                direction = self.get_sub_direction()
+                layout = MultiLineLayout(direction)
         super().addLayout(layout)
         self.layouts.append(layout)
 
@@ -77,6 +90,14 @@ class MultiLineLayout(widgets.BoxLayout):
 
     def indexOf(self, item: widgets.QLayoutItem) -> int:
         return self.get_items().index(item)
+
+    def set_sub_layout_type(self, layout_type: str):
+        self._sub_layout_type = layout_type
+
+    def get_sub_layout_type(self) -> str:
+        return self._sub_layout_type
+
+    sub_layout_type = core.Property(str, get_sub_layout_type, set_sub_layout_type)
 
 
 if __name__ == "__main__":
