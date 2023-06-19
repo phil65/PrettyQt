@@ -21,7 +21,12 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
         colcount = super().columnCount()
         return min(colcount, self.get_column_slice().stop or colcount)
 
-    def headerData(self, section, orientation, role=None):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         """Map header data to proxy by calculating position from slice values.
 
         source pos = slice start + proxy pos * slice step)
