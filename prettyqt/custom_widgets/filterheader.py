@@ -5,12 +5,14 @@ from prettyqt import constants, core, widgets
 
 logger = logging.getLogger(__name__)
 
+BOOL_ITEMS = {None: "Show all", True: "Show True", False: "Show False"}
+
 
 class FilterHeader(widgets.HeaderView):
     def __init__(self, parent: widgets.TableView):
         self._editors_visible = False
         self._editors = []
-        self._proxies = []
+        self._proxy = None
         self._padding = 6
         super().__init__(constants.HORIZONTAL, parent)
         self.setStretchLastSection(True)
@@ -46,38 +48,32 @@ class FilterHeader(widgets.HeaderView):
         # using parent model here bc we cant guarantee that we are already set to view.
         model = self.parent().model()
         with self.parent().signals_blocked():
-            for i in range(model.columnCount()):
-                if model.get_column_type(i) is bool:
-                    widget = widgets.ComboBox(
-                        margin=0, object_name=f"filter_combo_{i}", parent=self
-                    )
-                    widget.add_items(
-                        {None: "Show all", True: "Show True", False: "Show False"}
-                    )
-                    proxy = parent.proxifier.get_proxy(
-                        "value_filter",
-                        recursive_filtering_enabled=True,
-                        filter_key_column=i,
-                        filter_role=constants.CHECKSTATE_ROLE,
-                    )
-                    widget.value_changed.connect(proxy.set_filter_value)
-                else:
-                    widget = widgets.LineEdit(
-                        margin=0, object_name=f"filter_combo_{i}", parent=self
-                    )
-                    proxy = parent.proxifier.get_proxy(
-                        "sort_filter",
-                        recursive_filtering_enabled=True,
-                        filter_key_column=i,
-                    )
-                    widget.value_changed.connect(proxy.setFilterFixedString)
-                    title = model.headerData(
-                        i, constants.HORIZONTAL, constants.DISPLAY_ROLE
-                    )
-                    widget.setPlaceholderText(f"Filter {title}...")
-                widget.show()
-                self._proxies.append(proxy)
-                self._editors.append(widget)
+            self._proxy = parent.proxifier.get_proxy(
+                "multi_column_filter",
+                recursive_filtering_enabled=True,
+            )
+        for i in range(model.columnCount()):
+            if model.get_column_type(i) is bool:
+
+                def set_filter(val, i=i):
+                    self._proxy.set_filter_value(i, val, constants.CHECKSTATE_ROLE)
+
+                name = f"filter_combo_{i}"
+                widget = widgets.ComboBox(margin=0, object_name=name, parent=self)
+                widget.add_items(BOOL_ITEMS)
+                widget.value_changed.connect(set_filter)
+            else:
+
+                def set_filter(val, i=i):
+                    self._proxy.set_filter_value(i, val)
+
+                name = f"filter_combo_{i}"
+                widget = widgets.LineEdit(margin=0, object_name=name, parent=self)
+                widget.value_changed.connect(set_filter)
+                title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
+                widget.setPlaceholderText(f"Filter {title}...")
+            widget.show()
+            self._editors.append(widget)
 
     def sizeHint(self):
         size = super().sizeHint()
@@ -116,14 +112,8 @@ class FilterHeader(widgets.HeaderView):
             )
             editor.resize(self.sectionSize(index), height)
 
-    def set_filter_case_sensitivity(self, sensitivity):
-        for proxy in self._proxies:
-            proxy.setFilterCaseSensitivity(sensitivity)
-
-    def set_filter_mode(self, mode: core.sortfilterproxymodel.FilterModeStr):
-        for proxy in self._proxies:
-            if isinstance(proxy, core.SortFilterProxyModel):
-                proxy.set_filter_mode(mode)
+    def set_filter_case_sensitive(self, value: bool):
+        self._proxy.set_filter_case_sensitive(value)
 
     def clear_filters(self):
         for editor in self._editors:
@@ -155,4 +145,5 @@ if __name__ == "__main__":
         view.h_header.visible_editors = True
         view.show()
         with app.debug_mode():
-            app.main_loop()
+            app.sleep(5)
+            print(view.h_header._proxy._filters)
