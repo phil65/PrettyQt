@@ -60,18 +60,17 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
     #         return super().filterAcceptsRow(source_row, source_index)
 
     def filterAcceptsRow(self, source_row: int, source_index: core.ModelIndex) -> bool:
-        if self._filter_mode == "fuzzy":
-            column = self.filterKeyColumn()
-            source_model = self.sourceModel()
-            idx = source_model.index(source_row, column, source_index)
-            text = source_model.data(idx)
-            return fuzzy.fuzzy_match_simple(
-                self.filterRegularExpression().pattern(),
-                text,
-                case_sensitive=self.is_filter_case_sensitive(),
-            )
-        else:
+        if self._filter_mode != "fuzzy":
             return super().filterAcceptsRow(source_row, source_index)
+        column = self.filterKeyColumn()
+        source_model = self.sourceModel()
+        idx = source_model.index(source_row, column, source_index)
+        text = source_model.data(idx)
+        return fuzzy.fuzzy_match_simple(
+            self.filterRegularExpression().pattern(),
+            text,
+            case_sensitive=self.is_filter_case_sensitive(),
+        )
 
     def invalidate(self):
         super().invalidate()
@@ -167,11 +166,10 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
 
     def set_search_term(self, search_term: str | Iterable[str]):
         match self._filter_mode:
+            case "fixed_string" if isinstance(search_term, list):
+                self.setFixedFilterList(search_term)
             case "fixed_string":
-                if isinstance(search_term, list):
-                    self.setFixedFilterList(search_term)
-                else:
-                    self.setFilterFixedString(search_term)
+                self.setFilterFixedString(search_term)
             case "substring":
                 self.setFilterString(search_term)
             case "fuzzy":
