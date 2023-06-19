@@ -8,7 +8,6 @@ import numpy as np
 import pandas as pd
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -27,20 +26,20 @@ class DataTableModel(core.AbstractTableModel):
     def headerData(
         self,
         section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
-    ) -> str | None:
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         pass
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent: core.ModelIndex | None = None):
         if self.df is None:
             return 0
         return 1 if type(self.df) == pd.Series else len(self.df.columns)
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None):
         return len(self.df.index) if self.df is not None else 0
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 cell = self.df.iat[index.row(), index.column()]
@@ -60,7 +59,7 @@ class DataTableModel(core.AbstractTableModel):
             case self.Roles.ColumnNameRole:
                 return self.df.iloc[:, index.column()].name
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         return constants.IS_EDITABLE | constants.IS_ENABLED | constants.IS_SELECTABLE
 
     #     return cur_flags if self.is_read_only else cur_flags | constants.IS_EDITABLE
@@ -85,7 +84,7 @@ class DataTableModel(core.AbstractTableModel):
                     return True
         return False
 
-    def sort(self, ncol: int, order: QtCore.Qt.SortOrder):
+    def sort(self, ncol: int, order: constants.SortOrder):
         is_ascending = order == constants.ASCENDING
         with self.change_layout():
             self.df = self.df.sort_values(
@@ -124,13 +123,17 @@ class VerticalHeaderModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.df = df
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent: core.ModelIndex | None = None):
         return 0 if self.df is None else self.df.index.nlevels
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None):
         return 0 if self.df is None else self.df.index.shape[0]
 
-    def data(self, index, role=None):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role:
             case constants.DISPLAY_ROLE | constants.TOOLTIP_ROLE:
                 row = index.row()
@@ -145,7 +148,7 @@ class VerticalHeaderModel(core.AbstractTableModel):
         section: int,
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ):
+    ) -> str | None:
         match role, orientation:
             case constants.DISPLAY_ROLE | constants.TOOLTIP_ROLE, constants.HORIZONTAL:
                 if isinstance(self.df.index, pd.MultiIndex):
@@ -159,13 +162,17 @@ class HorizontalHeaderModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.df = df
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent: core.ModelIndex | None = None):
         return 0 if self.df is None else self.df.columns.shape[0]
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None):
         return 0 if self.df is None else self.df.columns.nlevels
 
-    def data(self, index, role=None):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role:
             case constants.DISPLAY_ROLE | constants.TOOLTIP_ROLE:
                 row = index.row()
