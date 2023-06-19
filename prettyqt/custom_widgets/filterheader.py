@@ -12,7 +12,10 @@ class FilterHeader(widgets.HeaderView):
     def __init__(self, parent: widgets.TableView):
         self._editors_visible = False
         self._editors = []
-        self._proxy = None
+        self._proxy = parent.proxifier.get_proxy(
+            "multi_column_filter",
+            recursive_filtering_enabled=True,
+        )
         self._padding = 6
         super().__init__(constants.HORIZONTAL, parent)
         self.setStretchLastSection(True)
@@ -41,17 +44,14 @@ class FilterHeader(widgets.HeaderView):
         while self._editors:
             editor = self._editors.pop()
             editor.deleteLater()
-        self.create_editors(self.parent())
+        self.create_editors()
         self.adjust_positions()
 
-    def create_editors(self, parent):
+    def create_editors(self):
         # using parent model here bc we cant guarantee that we are already set to view.
-        model = self.parent().model()
-        with self.parent().signals_blocked():
-            self._proxy = parent.proxifier.get_proxy(
-                "multi_column_filter",
-                recursive_filtering_enabled=True,
-            )
+        parent = self.parent()
+        model = parent.model()
+        self._proxy.clear_filters()
         for i in range(model.columnCount()):
             if model.get_column_type(i) is bool:
 
@@ -75,7 +75,7 @@ class FilterHeader(widgets.HeaderView):
             widget.show()
             self._editors.append(widget)
 
-    def sizeHint(self):
+    def sizeHint(self) -> core.QSize:
         size = super().sizeHint()
         if self._editors:
             height = self._editors[0].sizeHint().height()
@@ -145,5 +145,5 @@ if __name__ == "__main__":
         view.h_header.visible_editors = True
         view.show()
         with app.debug_mode():
-            app.sleep(5)
+            app.main_loop()
             print(view.h_header._proxy._filters)
