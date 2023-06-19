@@ -47,7 +47,7 @@ def test_helpsearchresultwidget():
 
 def test_helpsearchquerywidget():
     widget = qthelp.HelpSearchQueryWidget()
-    repr(widget)
+    assert widget is not None
 
 
 def test_helpfilterengine():
