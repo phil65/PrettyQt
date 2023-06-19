@@ -49,7 +49,10 @@ def test_qmlapplicationengine(qtlog):
         path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
         engine.load_data(path.read_text())
 
-
+@pytest.mark.skipif(
+    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
+    reason="Segmentation fault",
+)
 def test_qmlcomponent():
     comp = qml.QmlComponent()
     assert comp.get_status() == "null"
