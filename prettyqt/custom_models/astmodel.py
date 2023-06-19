@@ -117,7 +117,14 @@ class AstModel(custom_models.TreeModel):
                 match node:
                     case _ if type(node) in NODE_MAP:
                         return NODE_MAP[type(node)]
-                    case ast.Name(id=name) | ast.arg(arg=name) | ast.Constant(value=name):
+                    case (
+                        ast.Name(id=name)
+                        | ast.arg(arg=name)
+                        | ast.Constant(value=name)
+                        | ast.alias(name=name)
+                        | ast.ClassDef(name=name)
+                        | ast.FunctionDef(name=name)
+                    ):
                         return name
                     case str():
                         return node
