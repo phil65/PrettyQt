@@ -140,6 +140,7 @@ pip install prettyqt
 - [pyside6](https://pypi.org/project/pyside6)
 - [pyqt6](https://pypi.org/project/pyqt6)
 
+Note: Only Qt 6.5+ is supported.
 
 ## Optional dependencies
 - [orjson](https://pypi.org/project/orjson)

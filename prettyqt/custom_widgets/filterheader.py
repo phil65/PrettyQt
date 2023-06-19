@@ -22,14 +22,14 @@ class FilterHeader(widgets.HeaderView):
         # self.setResizeMode(QHeaderView.Stretch)
         self.setDefaultAlignment(constants.ALIGN_CENTER_LEFT)
         # self.setSortIndicatorShown(False)
-        self.sectionResized.connect(self.adjust_positions)
-        parent.h_scrollbar.valueChanged.connect(self.adjust_positions)
-        parent.model_changed.connect(self.update_filter_boxes)
-        self.sectionResized.connect(self.adjust_positions)
-        self.update_filter_boxes()
+        self.sectionResized.connect(self._adjust_positions)
+        parent.h_scrollbar.valueChanged.connect(self._adjust_positions)
+        parent.model_changed.connect(self._update_filter_boxes)
+        self.sectionResized.connect(self._adjust_positions)
+        self._update_filter_boxes()
         self.update_geometries()
 
-    def editors_visible(self):
+    def editors_visible(self) -> bool:
         return self._editors_visible
 
     def set_editors_visible(self, visible: bool):
@@ -38,14 +38,14 @@ class FilterHeader(widgets.HeaderView):
             editor.setVisible(visible)
         self.updateGeometries()
 
-    def update_filter_boxes(self):
+    def _update_filter_boxes(self):
         # TODO: deal with column changes by connecting to Model signals.
         # That way we wouldnt have to update all editors on change.
         while self._editors:
             editor = self._editors.pop()
             editor.deleteLater()
         self.create_editors()
-        self.adjust_positions()
+        self._adjust_positions()
 
     def create_editors(self):
         # using parent model here bc we cant guarantee that we are already set to view.
@@ -89,9 +89,9 @@ class FilterHeader(widgets.HeaderView):
         else:
             self.setViewportMargins(0, 0, 0, 0)
         super().updateGeometries()
-        self.adjust_positions()
+        self._adjust_positions()
 
-    def adjust_positions(self):
+    def _adjust_positions(self):
         for index, editor in enumerate(self._editors):
             height = editor.sizeHint().height()
             compensate_y = 0
@@ -141,7 +141,7 @@ if __name__ == "__main__":
         view.adapt_sizes()
         header = FilterHeader(parent=view)
         view.setHorizontalHeader(header)
-        # view.h_header.update_filter_boxes()
+        # view.h_header._update_filter_boxes()
         view.h_header.visible_editors = True
         view.show()
         with app.debug_mode():

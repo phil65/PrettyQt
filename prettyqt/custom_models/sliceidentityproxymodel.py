@@ -27,8 +27,12 @@ class SliceIdentityProxyModel(core.IdentityProxyModel):
         """Update slice boundaries by resolving negative indexes."""
         # Not sure yet whats the best approach here and which cases I should support...
         source = self.sourceModel()
+        count = source.rowCount() if typ == "row" else source.columnCount()
+        # if sl.end is larger than count, clip it (or perhaps throw exception?)
+        # if sl.stop is not None and sl.stop >= count:
+        #     sl = slice(sl.start, count, sl.step)
+        # resolve negative start value
         if sl.start is not None and sl.start < 0:
-            count = source.rowCount() if typ == "row" else source.columnCount()
             start = count + sl.start
             end = count + sl.stop
             # end = start + (sl.stop - sl.start)

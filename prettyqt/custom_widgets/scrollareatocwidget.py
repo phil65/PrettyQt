@@ -26,11 +26,11 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         self._highlight_font = gui.QFont()
         self._highlight_font.setBold(True)
         self._Class = widget_class
-        self._current_indexes: list[core.ModelIndex] = []
+        self._current_widgets: list[widgets.QWidget] = []
         super().__init__(*args, **kwargs)
 
-    def set_highlighted_indexes(self, indexes: list[core.ModelIndex]):
-        self._current_indexes = [core.PersistentModelIndex(i) for i in indexes]
+    def set_highlighted_widgets(self, widgets: list[widgets.QWidget]):
+        self._current_widgets = widgets
         self.update_all()
 
     def columnCount(self, parent=None):
@@ -40,15 +40,14 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         if not index.isValid():
             return None
         widget = self.data_by_index(index).obj
-        indexes = [i for i in self._current_indexes if i.isValid()]
         match role:
-            case constants.DISPLAY_ROLE if index in indexes:
+            case constants.DISPLAY_ROLE if widget in self._current_widgets:
                 return f"> {widget.windowTitle()}"
             case constants.DISPLAY_ROLE:
                 return widget.windowTitle()
             case constants.USER_ROLE:
                 return widget
-            case constants.FONT_ROLE if index in indexes:
+            case constants.FONT_ROLE if widget in self._current_widgets:
                 # if not index.parent().isValid():
                 return self._highlight_font
 
@@ -163,8 +162,8 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def _on_selection_change(self, new, old):
         if self.model() is None:
             return
-        indexes = [self.proxy.mapToSource(i) for i in self.selected_indexes()]
-        self.get_model(skip_proxies=True).set_highlighted_indexes(indexes)
+        widgets = [i.data(constants.USER_ROLE) for i in self.selected_indexes()]
+        self.get_model(skip_proxies=True).set_highlighted_widgets(widgets)
 
     def _on_scroll(self):
         model: ScrollAreaTocModel | None = self.model()
