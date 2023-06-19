@@ -101,12 +101,12 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
 
     def add(self, item, *args, **kwargs):
         match item:
-            case QtWidgets.QLayoutItem():
-                self._container.addItem(item, *args, **kwargs)
             case QtWidgets.QWidget():
                 self._container.addWidget(item, *args, **kwargs)
             case QtWidgets.QLayout():
                 self._container.addLayout(item, *args, **kwargs)
+            case QtWidgets.QLayoutItem():
+                self._container.addItem(item, *args, **kwargs)
             case list():
                 for i in item:
                     self._container.add(i, *args, **kwargs)
