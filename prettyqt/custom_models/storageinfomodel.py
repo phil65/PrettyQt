@@ -1,195 +1,116 @@
 from __future__ import annotations
 
-from prettyqt import core, custom_models
+from prettyqt import constants, core, custom_models
 
 
-# class RootPathColumn(custom_models.ColumnItem):
-#     name="Root path"
-#     doc="Root path"
+class RootPathColumn(custom_models.ColumnItem):
+    name="Root path"
+    doc="Root path"
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return str(item.get_root_path())
-
-
-# class VolumeNameColumn(custom_models.ColumnItem):
-#     name="Volume name"
-#     doc="Volume name"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.name()
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.rootPath()
 
 
-# class DeviceColumn(custom_models.ColumnItem):
-#     name="Device"
+class VolumeNameColumn(custom_models.ColumnItem):
+    name="Volume name"
+    doc="Volume name"
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.get_device()
-
-
-# class FileSystemColumn(custom_models.ColumnItem):
-#     name="File system"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.get_file_system_type()
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.name()
 
 
-# class TotalColumn(custom_models.ColumnItem):
-#     name = "Total"
+class DeviceColumn(custom_models.ColumnItem):
+    name="Device"
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return core.Locale().get_formatted_data_size(item.bytesTotal())
-
-
-# class FreeColumn(custom_models.ColumnItem):
-#     name = "Free"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return core.Locale().get_formatted_data_size(item.bytesFree())
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.device().data().decode()
 
 
-# class AvailableColumn(custom_models.ColumnItem):
-#     name = "Available"
+class FileSystemColumn(custom_models.ColumnItem):
+    name="File system"
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return core.Locale().get_formatted_data_size(item.bytesAvailable())
-
-
-# class ReadyColumn(custom_models.ColumnItem):
-#     name = "Is ready"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.CHECKSTATE_ROLE:
-#                 return item.isReady()
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.fileSystemType().data().decode()
 
 
-# class ReadOnlyColumn(custom_models.ColumnItem):
-#     name = "Read-only"
+class TotalColumn(custom_models.ColumnItem):
+    name = "Total"
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.CHECKSTATE_ROLE:
-#                 return item.isReadOnly()
-
-
-# class ValidColumn(custom_models.ColumnItem):
-#     name = "Valid"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.CHECKSTATE_ROLE:
-#                 return item.isValid()
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return core.Locale().get_formatted_data_size(item.bytesTotal())
 
 
-# COLUMNS = [
-#     RootPathColumn,
-#     VolumeNameColumn,
-#     DeviceColumn,
-#     FileSystemColumn,
-#     TotalColumn,
-#     FreeColumn,
-#     AvailableColumn,
-#     ReadyColumn,
-#     ReadOnlyColumn,
-#     ValidColumn,
-# ]
+class FreeColumn(custom_models.ColumnItem):
+    name = "Free"
+
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return core.Locale().get_formatted_data_size(item.bytesFree())
 
 
-loc = core.Locale()
+class AvailableColumn(custom_models.ColumnItem):
+    name = "Available"
 
-COL_ROOT_PATH = custom_models.ColumnItem(
-    name="Root path",
-    doc="Root path",
-    label=lambda volume: str(volume.get_root_path()),
-)
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return core.Locale().get_formatted_data_size(item.bytesAvailable())
 
-COL_VOLUME_NAME = custom_models.ColumnItem(
-    name="Volume name",
-    doc="Volume name",
-    label=lambda volume: volume.name(),
-)
 
-COL_DEVICE = custom_models.ColumnItem(
-    name="Device",
-    doc="Device",
-    label=lambda volume: volume.get_device(),
-)
+class ReadyColumn(custom_models.ColumnItem):
+    name = "Is ready"
 
-COL_FILE_SYSTEM = custom_models.ColumnItem(
-    name="File system",
-    doc="File system",
-    label=lambda volume: volume.get_file_system_type(),
-)
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.CHECKSTATE_ROLE:
+                return item.isReady()
 
-COL_TOTAL = custom_models.ColumnItem(
-    name="Total",
-    doc="Total",
-    label=lambda volume: loc.get_formatted_data_size(volume.bytesTotal()),
-)
 
-COL_FREE = custom_models.ColumnItem(
-    name="Free",
-    doc="Free",
-    label=lambda volume: loc.get_formatted_data_size(volume.bytesFree()),
-)
+class ReadOnlyColumn(custom_models.ColumnItem):
+    name = "Read-only"
 
-COL_AVAILABLE = custom_models.ColumnItem(
-    name="Available",
-    doc="Available",
-    label=lambda volume: loc.get_formatted_data_size(volume.bytesAvailable()),
-)
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.CHECKSTATE_ROLE:
+                return item.isReadOnly()
 
-COL_READY = custom_models.ColumnItem(
-    name="Available",
-    doc="Available",
-    label=None,
-    checkstate=lambda volume: volume.isReady(),
-)
 
-COL_READ_ONLY = custom_models.ColumnItem(
-    name="Read-only",
-    doc="Read-only",
-    label=None,
-    checkstate=lambda volume: volume.isReadOnly(),
-)
+class ValidColumn(custom_models.ColumnItem):
+    name = "Valid"
 
-COL_VALID = custom_models.ColumnItem(
-    name="Valid",
-    doc="Valid",
-    label=None,
-    checkstate=lambda volume: volume.isValid(),
-)
+    def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
+        match role:
+            case constants.CHECKSTATE_ROLE:
+                return item.isValid()
+
 
 COLUMNS = [
-    COL_ROOT_PATH,
-    COL_VOLUME_NAME,
-    COL_DEVICE,
-    COL_FILE_SYSTEM,
-    COL_TOTAL,
-    COL_FREE,
-    COL_AVAILABLE,
-    COL_READY,
-    COL_READ_ONLY,
-    COL_VALID,
+    RootPathColumn,
+    VolumeNameColumn,
+    DeviceColumn,
+    FileSystemColumn,
+    TotalColumn,
+    FreeColumn,
+    AvailableColumn,
+    ReadyColumn,
+    ReadOnlyColumn,
+    ValidColumn,
 ]
 
 
 class StorageInfoModel(custom_models.ColumnTableModel):
-    def __init__(self, volumes, parent=None):
+    def __init__(self, volumes: list[core.QStorageInfo], parent=None):
         super().__init__(volumes, COLUMNS, parent=parent)
 
     @classmethod

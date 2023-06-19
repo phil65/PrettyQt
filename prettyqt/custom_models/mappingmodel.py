@@ -1,39 +1,9 @@
 from __future__ import annotations
 
-from collections.abc import Mapping
-
-from prettyqt import custom_models
-from prettyqt.utils import treeitem
+from prettyqt import constants, core, custom_models
 
 
-class MappingModel(custom_models.ColumnItemModel):
-    def __init__(
-        self,
-        obj: list[dict],
-        nested_key=None,
-        **kwargs,
-    ):
-        super().__init__(
-            obj=obj,
-            columns=[],
-            show_root=False,
-            **kwargs,
-        )
-        self.nested_key = nested_key
-        columns = []
-        for k, v in obj[0].items():
-
-            def get_repr(x, k=k, v=v):
-                return repr(v) if isinstance(x.obj, Mapping) else repr(x.obj)
-
-            col = custom_models.ColumnItem(
-                name=k,
-                doc=k,
-                label=get_repr,
-            )
-            columns.append(col)
-        self.set_columns(columns)
-
+class MappingModel(custom_models.ListMixin, core.AbstractTableModel):
     @classmethod
     def supports(cls, instance) -> bool:
         match instance:
@@ -42,20 +12,26 @@ class MappingModel(custom_models.ColumnItemModel):
             case _:
                 return False
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
-        if self.nested_key is None:
-            return False
-        return isinstance(item.obj.get(self.nested_key), Mapping)
+    def columnCount(self, index: core.ModelIndex | None = None):
+        return len(self.items[0]) if self.items else 0
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        match item.obj:
-            # case Mapping():
-            #     return [
-            #         treeitem.TreeItem(obj=v)
-            #         for k, v in item.obj.items()
-            #     ]
-            case list():
-                return [treeitem.TreeItem(obj=item) for item in item.obj]
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ) -> str | None:
+        match orientation, role:
+            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
+                return list(self.items[0].keys())[section]
+
+
+    def data(self, index, role: constants.ItemDataRole):
+        item = self.data_by_index(index)
+        match role:
+            case constants.DISPLAY_ROLE:
+                key = self.headerData(index.column(), constants.HORIZONTAL)
+                return item[key]
 
 
 if __name__ == "__main__":
@@ -64,10 +40,8 @@ if __name__ == "__main__":
     app = widgets.app()
     dct = dict(a=2, b="hallo", c="hall")
     dct2 = dict(a=2, b="hallo2", c="hallo3")
-    model = MappingModel([dct, dct2])
-    table = widgets.TreeView()
-    table.setRootIsDecorated(True)
-    # table.setSortingEnabled(True)
+    model = MappingModel(items=[dct, dct2])
+    table = widgets.TableView()
     table.set_model(model)
     table.show()
     app.main_loop()

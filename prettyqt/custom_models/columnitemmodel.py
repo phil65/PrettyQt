@@ -1,13 +1,10 @@
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable, Sequence
-from dataclasses import dataclass
-import datetime
+from collections.abc import Iterable, Sequence
 import logging
 from typing import Any
 
 from prettyqt import constants, core, custom_models, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import treeitem
 
 
@@ -17,43 +14,29 @@ SMALL_COL_WIDTH = 120
 MEDIUM_COL_WIDTH = 200
 
 
-@dataclass  # (frozen=True)
 class ColumnItem:
     """Determines how an object attribute is shown."""
 
-    name: str
-    label: Callable[[treeitem.TreeItem], str] | None = None
-    checkstate: Callable[
-        [treeitem.TreeItem], constants.CheckStateStr | QtCore.Qt.CheckState | bool
-    ] | None = None
-    sort_value: Callable[[treeitem.TreeItem], str | float] | None = None
-    tooltip: Callable[[treeitem.TreeItem], str] | None = None
+    model: core.QAbstractItemModel
+    name: str = ""
     doc: str = "<no help available>"
     col_visible: bool = True
     width: int | str = SMALL_COL_WIDTH
-    alignment: Callable | int | constants.AlignmentStr | None = None
     line_wrap: gui.textoption.WordWrapModeStr = "none"
-    foreground_color: Callable | str | None = None
-    background_color: Callable | str | None = None
-    decoration: Callable | QtGui.QIcon | None = None
-    font: Callable | QtGui.QFont | str | None = None
     selectable: bool = True
     enabled: bool = True
     editable: bool = False
     checkable: bool = False
     tristate: bool = False
-    set_edit: Callable | None = None
-    set_checkstate: Callable | None = None
-    user_data: dict | Callable | None = None
 
-    def __post_init__(self):
-        super().__init__()
-        self.model = None
+    def __init__(self, model: core.QAbstractItemModel):
+        self.model = model
+
 
     def get_name(self) -> str:
         return self.name
 
-    def get_flag(self, tree_item):
+    def get_flags(self, tree_item):
         flag = constants.NO_FLAGS
         if self.selectable:
             flag |= constants.IS_SELECTABLE
@@ -67,137 +50,11 @@ class ColumnItem:
             flag |= constants.IS_USER_TRISTATE
         return flag
 
-    def get_label(self, tree_item) -> str:
-        match self.label:
-            case None:
-                return ""
-            case Callable():
-                return self.label(tree_item)
-            case _:
-                return self.label
+    def get_data(self, item, role):
+        return NotImplemented
 
-    def get_sort_value(self, tree_item) -> str | int:
-        match self.sort_value:
-            case None:
-                return self.get_label(tree_item)
-            case Callable():
-                return self.sort_value(tree_item)
-            case _:
-                return self.sort_value
-
-    def get_user_data(self, tree_item, role):
-        match self.user_data:
-            case None:
-                return ""
-            case Callable():
-                return self.user_data(tree_item, role)
-            case dict():
-                return self.user_data[role](tree_item)
-            case _:
-                raise ValueError(self.user_data)
-
-    def get_tooltip(self, tree_item) -> str:
-        match self.tooltip:
-            case None:
-                return ""
-            case Callable():
-                return self.tooltip(tree_item)
-            case str():
-                return self.tooltip
-            case _:
-                raise ValueError(self.tooltip)
-
-    def get_checkstate(self, tree_item) -> bool | QtCore.Qt.CheckState | None:
-        match self.checkstate:
-            case None | bool():
-                return self.checkstate
-            case Callable():
-                result = self.checkstate(tree_item)
-                if isinstance(result, str):
-                    result = constants.CHECK_STATE[result]
-                return result
-            case _:
-                raise ValueError(self.checkstate)
-
-    def set_checkstate_value(
-        self,
-        tree_item,
-        value: bool | QtCore.Qt.CheckState | constants.CheckStateStr | None,
-    ):
-        match value:
-            case str():
-                value = constants.CHECK_STATE[value]
-            case int():
-                value = QtCore.Qt.CheckState(value)
-        match self.set_checkstate:
-            case None:
-                return None
-            case Callable():
-                self.set_checkstate(tree_item, value)
-            case _:
-                raise ValueError(self.set_checkstate)
-
-    def set_edit_value(self, tree_item, value: str):
-        match self.set_edit:
-            case None:
-                return None
-            case Callable():
-                self.set_edit(tree_item, value)
-            case _:
-                raise ValueError(self.set_edit)
-
-    def get_font(self, tree_item) -> QtGui.QFont | None:
-        match self.font:
-            case None | QtGui.QFont():
-                return self.font
-            case Callable():
-                return self.font(tree_item)
-            case str():
-                return QtGui.QFont(self.font)
-            case _:
-                raise ValueError(self.font)
-
-    def get_foreground(self, tree_item) -> QtGui.QColor | None:
-        match self.foreground_color:
-            case None | QtGui.QColor() | QtGui.QBrush():
-                return self.foreground_color
-            case Callable():
-                return self.foreground_color(tree_item)
-            case _:
-                raise ValueError(self.foreground_color)
-
-    def get_background(self, tree_item) -> QtGui.QColor | None:
-        match self.background_color:
-            case None | QtGui.QColor() | QtGui.QBrush():
-                return self.background_color
-            case Callable():
-                return self.background_color(tree_item)
-            case _:
-                raise ValueError(self.foreground_color)
-
-    def get_decoration(
-        self, tree_item
-    ) -> QtGui.QColor | QtGui.QPixmap | QtGui.QIcon | None:
-        match self.decoration:
-            case None | QtGui.QIcon() | QtGui.QPixmap() | QtGui.QColor():
-                return self.decoration
-            case Callable():
-                return self.decoration(tree_item)
-            case _:
-                raise ValueError(self.decoration)
-
-    def get_alignment(self, tree_item) -> QtCore.Qt.AlignmentFlag:
-        match self.alignment:
-            case None:
-                return constants.ALIGN_CENTER_LEFT
-            case Callable():
-                return self.alignment(tree_item)
-            case str():
-                return constants.ALIGNMENTS[self.alignment]
-            case QtCore.Qt.AlignmentFlag():
-                return self.alignment
-            case _:
-                raise ValueError(self.alignment)
+    def set_data(self, item, value, role):
+        return NotImplemented
 
     def get_width(self) -> int:
         match self.width:
@@ -212,10 +69,9 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
-    def set_columns(self, columns: Sequence[ColumnItem]):
-        self._attr_cols = columns
-        for col in columns:
-            col.model = self
+    def set_columns(self, columns: Sequence[type[ColumnItem]]):
+        self._attr_cols = [Col(model=self) for Col in columns]
+
 
     def data(self, index, role=constants.DISPLAY_ROLE):
         """Return the tree item at the given index and role."""
@@ -225,33 +81,7 @@ class ColumnItemModelMixin:
         col = index.column()
         tree_item = self.data_by_index(index)
         col_item = self._attr_cols[col]
-        match role:
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
-                label = col_item.get_label(tree_item)
-                if isinstance(label, datetime.datetime):
-                    label = str(label)
-                return label
-            case constants.DECORATION_ROLE:
-                return col_item.get_decoration(tree_item)
-            case constants.CHECKSTATE_ROLE:
-                return col_item.get_checkstate(tree_item)
-            case constants.ALIGNMENT_ROLE:
-                return col_item.get_alignment(tree_item)
-            case constants.FOREGROUND_ROLE:
-                return col_item.get_foreground(tree_item)
-            case constants.BACKGROUND_ROLE:
-                return col_item.get_background(tree_item)
-            case constants.FONT_ROLE:
-                return col_item.get_font(tree_item)
-            case constants.SORT_ROLE:
-                return col_item.get_sort_value(tree_item)
-            case constants.TOOLTIP_ROLE:
-                return col_item.get_tooltip(tree_item)
-            case constants.USER_ROLE:
-                return tree_item
-            case _:
-                if int(role) >= int(constants.USER_ROLE):
-                    return col_item.get_user_data(tree_item, role)
+        return col_item.get_data(tree_item, role)
 
     def setData(
         self,
@@ -263,22 +93,17 @@ class ColumnItemModelMixin:
             return False
         col = index.column()
         tree_item = self.data_by_index(index)
-        match role:
-            case constants.EDIT_ROLE:
-                self._attr_cols[col].set_edit_value(tree_item, value)
-                self.dataChanged.emit(index, index)
-                return True
-            case constants.CHECKSTATE_ROLE:
-                self._attr_cols[col].set_checkstate_value(tree_item, value)
-                self.dataChanged.emit(index, index)
-                return True
+        col_item = self._attr_cols[col]
+        col_item.set_data(tree_item, value, role)
+        self.dataChanged.emit(index, index)
+        return True
 
     def flags(self, index: core.ModelIndex):
         if not index.isValid():
             return super().flags(index)  # TODO: whats best here?
         col = index.column()
         tree_item = self.data_by_index(index)
-        return self._attr_cols[col].get_flag(tree_item)
+        return self._attr_cols[col].get_flags(tree_item)
 
     def headerData(
         self,
@@ -288,7 +113,7 @@ class ColumnItemModelMixin:
     ) -> str | None:
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
-                return self._attr_cols[section].name
+                return self._attr_cols[section].get_name()
             case _, _:
                 return None
 
@@ -297,7 +122,7 @@ class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
     def __init__(
         self,
         obj=None,
-        columns: Sequence[ColumnItem] = [],
+        columns: Sequence[type[ColumnItem]] = [],
         mime_type: str | None = None,
         show_root: bool = True,
         **kwargs,
@@ -409,16 +234,26 @@ if __name__ == "__main__":
 
     app = widgets.app()
     test = {}
-    colitem = ColumnItem(
-        name="Test",
-        label=lambda volume: str(volume.get_root_path()),
-        checkable=True,
-        checkstate=lambda item: getattr(item, "test", False),
-        set_checkstate=lambda item, value: setattr(item, "test", value),
-        user_data={constants.USER_ROLE + 1: lambda volume: str(volume.get_root_path())},
-    )
+    class TestColumn(ColumnItem):
+        name = "test"
+        checkable = True
+
+        def get_data(self, item, role):
+            match role:
+                case constants.CHECKSTATE_ROLE:
+                    return getattr(item, "test", False)
+                case constants.DISPLAY_ROLE:
+                    return str(item.get_root_path())
+                case constants.USER_ROLE:
+                    return str(item.get_root_path())
+
+        def set_data(self, item, value, role):
+            match role:
+                case constants.CHECKSTATE_ROLE:
+                    item.test = value
+
     items = core.StorageInfo.get_mounted_volumes()
-    model = ColumnTableModel(items, [colitem])
+    model = ColumnTableModel(items, [TestColumn])
     table = widgets.TableView()
     table.setSortingEnabled(True)
     table.set_model(model)

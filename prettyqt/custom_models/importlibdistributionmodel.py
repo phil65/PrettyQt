@@ -32,28 +32,6 @@ def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     return [dist for i in modules if (dist := load_dist_info(i)) is not None]
 
 
-def find_requires(treeitem: DistTreeItem) -> str:
-    return next(
-        (
-            str(requirement.specifier)
-            for requirement in treeitem.parent_item.requires.values()
-            if treeitem.metadata["name"] == requirement.name
-        ),
-        "",
-    )
-
-
-def find_markers(treeitem: DistTreeItem) -> str:
-    return next(
-        (
-            str(marker)
-            for name, marker in treeitem.parent_item.markers.items()
-            if treeitem.metadata["name"] == name
-        ),
-        "",
-    )
-
-
 class DistTreeItem(treeitem.TreeItem):
     __slots__ = ("requires", "metadata", "version", "markers")
 
@@ -78,141 +56,109 @@ class DistTreeItem(treeitem.TreeItem):
         self.version = None if obj is None else obj.version
 
 
-COL_NAME = custom_models.ColumnItem(
-    name="Name",
-    doc="Package name",
-    label=lambda x: x.metadata["Name"],
-)
+class NameColumn(custom_models.ColumnItem):
+    name="Name"
+    doc="Package name"
 
-COL_VERSION = custom_models.ColumnItem(
-    name="Version",
-    doc="Version number.",
-    label=lambda x: x.version,
-)
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.metadata["Name"]
 
-COL_CONSTRAINTS = custom_models.ColumnItem(
-    name="Constraints",
-    doc="Constraints.",
-    label=lambda x: find_requires(x),
-)
 
-COL_EXTRA = custom_models.ColumnItem(
-    name="Marker",
-    doc="Marker.",
-    label=lambda x: find_markers(x),
-)
+class VersionColumn(custom_models.ColumnItem):
+    name="Version"
+    doc="Version number."
 
-COL_SUMMARY = custom_models.ColumnItem(
-    name="Summary",
-    doc="Module description.",
-    label=lambda x: x.metadata["Summary"],
-)
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.version
 
-COL_HOMEPAGE = custom_models.ColumnItem(
-    name="Homepage",
-    doc="Homepage URL.",
-    label=lambda x: x.metadata["Home-Page"],
-)
 
-COL_AUTHOR = custom_models.ColumnItem(
-    name="Author",
-    doc="Author name.",
-    label=lambda x: x.metadata["Author"],
-)
+class ConstraintsColumn(custom_models.ColumnItem):
+    name="Constraints"
+    doc="Constraints."
 
-COL_LICENSE = custom_models.ColumnItem(
-    name="License",
-    doc="License type.",
-    label=lambda x: x.metadata["License"],
-)
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return next(
+                    (
+                        str(requirement.specifier)
+                        for requirement in item.parent_item.requires.values()
+                        if item.metadata["name"] == requirement.name
+                    ),
+                    "",
+                )
+
+class MarkerColumn(custom_models.ColumnItem):
+    name="Extra"
+    doc="Extra."
+
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return next(
+                    (
+                        str(marker)
+                        for name, marker in item.parent_item.markers.items()
+                        if item.metadata["name"] == name
+                    ),
+                    "",
+                )
+
+
+class SummaryColumn(custom_models.ColumnItem):
+    name="Summary"
+    doc="Module description."
+
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.metadata["Summary"]
+
+
+class HomepageColumn(custom_models.ColumnItem):
+    name="Homepage"
+    doc="URL of the homepage."
+
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.metadata["Home-Page"]
+
+
+class AuthorColumn(custom_models.ColumnItem):
+    name="Author"
+    doc="Author name."
+
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.metadata["Author"]
+
+class LicenseColumn(custom_models.ColumnItem):
+    name="License"
+    doc="License name."
+
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.metadata["License"]
+
+
 
 COLUMNS = [
-    COL_NAME,
-    COL_VERSION,
-    COL_CONSTRAINTS,
-    COL_SUMMARY,
-    COL_EXTRA,
-    COL_HOMEPAGE,
-    COL_AUTHOR,
-    COL_LICENSE,
+    NameColumn,
+    VersionColumn,
+    ConstraintsColumn,
+    MarkerColumn,
+    SummaryColumn,
+    HomepageColumn,
+    AuthorColumn,
+    LicenseColumn,
 ]
-
-
-# class NameColumn(custom_models.ColumnItem):
-#     name="Name"
-#     doc="Package name"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.metadata["Name"]
-
-
-# class VersionColumn(custom_models.ColumnItem):
-#     name="Version"
-#     doc="Version number."
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return x.version
-
-
-# class ConstraintsColumn(custom_models.ColumnItem):
-#     name="Constraints"
-#     doc="Constraints."
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return find_requires(item)
-
-# class MarkerColumn(custom_models.ColumnItem):
-#     name="Extra"
-#     doc="Extra."
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return find_markers(item)
-
-# class SummaryColumn(custom_models.ColumnItem):
-#     name="Summary"
-#     doc="Module description."
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.metadata["Summary"]
-
-
-# class HomepageColumn(custom_models.ColumnItem):
-#     name="Homepage"
-#     doc="URL of the homepage."
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.metadata["Home-Page"]
-
-
-# class AuthorColumn(custom_models.ColumnItem):
-#     name="Author"
-#     doc="Author name."
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.metadata["Author"]
-
-# class LicenseColumn(custom_models.ColumnItem):
-#     name="License"
-#     doc="License name."
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return item.metadata["License"]
 
 
 class ImportlibTreeModel(custom_models.ColumnItemModel):

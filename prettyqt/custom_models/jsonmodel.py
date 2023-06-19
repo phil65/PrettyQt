@@ -4,59 +4,40 @@ from collections.abc import Iterable, Mapping
 from dataclasses import dataclass
 from typing import Any
 
-from prettyqt import custom_models
+from prettyqt import constants, custom_models
 from prettyqt.utils import treeitem
 
 
-COL_NAME = custom_models.ColumnItem(
-    name="Name",
-    doc="Name.",
-    label=lambda x: x.obj.key,
-)
+class NameColumn(custom_models.ColumnItem):
+    name="Name"
+    doc="Name"
 
-COL_VALUE = custom_models.ColumnItem(
-    name="Value",
-    doc="Value.",
-    label=lambda x: repr(x.obj.value),
-)
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.obj.key
 
-COL_TYPE = custom_models.ColumnItem(
-    name="Type",
-    doc="Type.",
-    label=lambda x: repr(x.obj.typ),
-)
+class ValueColumn(custom_models.ColumnItem):
+    name="Value"
+    doc="Value"
 
-
-# class NameColumn(custom_models.ColumnItem):
-#     name="Name"
-#     doc="Name"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return x.obj.key
-
-# class ValueColumn(custom_models.ColumnItem):
-#     name="Value"
-#     doc="Value"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return repr(x.obj.value)
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return repr(item.obj.value)
 
 
-# class TypeColumn(custom_models.ColumnItem):
-#     name="Type"
-#     doc="Type"
+class TypeColumn(custom_models.ColumnItem):
+    name="Type"
+    doc="Type"
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return repr(x.obj.typ)
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return repr(item.obj.typ)
 
 
-COLUMNS = [COL_NAME, COL_VALUE, COL_TYPE]
+COLUMNS = [NameColumn, ValueColumn, TypeColumn]
 
 
 @dataclass
@@ -125,8 +106,8 @@ if __name__ == "__main__":
     table = widgets.TreeView()
     model = JsonModel(dist, parent=table)
     table.set_model(model)
-    table.proxifier.modify(lambda x: x * 2, column=0)
-    table.proxifier.modify(lambda x: x * 4, column=1)
+    table.proxifier[0].modify(lambda x: x * 2)
+    table.proxifier[1].modify(lambda x: x * 4)
     table.setRootIsDecorated(True)
     # table.setSortingEnabled(True)
     table.show()

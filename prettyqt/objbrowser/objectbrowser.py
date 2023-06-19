@@ -4,32 +4,31 @@
 from __future__ import annotations
 
 import logging
-import traceback
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.objbrowser import objectbrowsertreemodel
 from prettyqt.objbrowser.attribute_model import (
-    ATTR_MODEL_GET_COMMENTS,
-    ATTR_MODEL_GET_DOC,
-    ATTR_MODEL_GET_FILE,
-    ATTR_MODEL_GET_SOURCE,
-    ATTR_MODEL_PATH,
-    ATTR_MODEL_PRETTY_PRINT,
-    ATTR_MODEL_REPR,
-    ATTR_MODEL_STR,
+    CommentsColumn,
+    DocStringColumn,
+    FileColumn,
+    SourceCodeColumn,
+    PathColumn,
+    PrettyPrintColumn,
+    ReprColumn,
+    StrColumn,
     DEFAULT_ATTR_COLS,
 )
 
 
 DEFAULT_ATTR_DETAILS = [
-    ATTR_MODEL_PATH,
-    ATTR_MODEL_STR,
-    ATTR_MODEL_REPR,
-    ATTR_MODEL_PRETTY_PRINT,
-    ATTR_MODEL_GET_DOC,
-    ATTR_MODEL_GET_COMMENTS,
-    ATTR_MODEL_GET_FILE,
-    ATTR_MODEL_GET_SOURCE,
+    PathColumn,
+    StrColumn,
+    ReprColumn,
+    PrettyPrintColumn,
+    DocStringColumn,
+    CommentsColumn,
+    FileColumn,
+    SourceCodeColumn,
 ]
 
 logger = logging.getLogger(__name__)
@@ -43,7 +42,6 @@ class ObjectBrowser(widgets.MainWindow):
         self.set_title("Object browser")
         self.set_icon("mdi.language-python")
         self._attr_cols = DEFAULT_ATTR_COLS
-        self._attr_details = DEFAULT_ATTR_DETAILS
 
         self._auto_refresh = False
         self._refresh_rate = 2
@@ -52,6 +50,9 @@ class ObjectBrowser(widgets.MainWindow):
         self._tree_model = objectbrowsertreemodel.ObjectBrowserTreeModel(
             obj, columns=self._attr_cols, show_root=False
         )
+        self._attr_details = [
+            Klass(model=self._tree_model) for Klass in DEFAULT_ATTR_DETAILS
+        ]
         # proxy = self._tree_model.proxifier.modify(
         #     fn=lambda x: SPECIAL_ATTR_FONT,
         #     role=constants.FONT_ROLE,
@@ -221,23 +222,11 @@ class ObjectBrowser(widgets.MainWindow):
 
     def _update_details_for_item(self, tree_item):
         """Show the object details in the editor given an tree_item."""
-        with self.editor.edit_stylesheet() as ss:
-            ss.color.setValue("black")
-        try:
-            # obj = tree_item.obj
-            button_id = self.button_group.checkedId()
-            assert button_id >= 0, "No radio button selected. Please report this bug."
-            attr_details = self._attr_details[button_id]
-            data = attr_details.get_label(tree_item)
-            self.editor.set_text(data)
-            self.editor.set_word_wrap_mode(attr_details.line_wrap)
-
-        except Exception as ex:
-            with self.editor.edit_stylesheet() as ss:
-                ss.color.setValue("red")
-            stack_trace = traceback.format_exc()
-            self.editor.set_text(f"{ex}\n\n{stack_trace}")
-            self.editor.set_wrap_mode("boundary_or_anywhere")
+        button_id = self.button_group.checkedId()
+        attr_details = self._attr_details[button_id]
+        data = attr_details.get_data(tree_item)
+        self.editor.set_text(data)
+        self.editor.set_word_wrap_mode(attr_details.line_wrap)
 
     def toggle_auto_refresh(self, checked):
         """Toggle auto-refresh on/off."""

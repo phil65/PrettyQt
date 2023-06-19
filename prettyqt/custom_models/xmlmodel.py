@@ -3,39 +3,50 @@ from __future__ import annotations
 import io
 import xml.etree.ElementTree as ET
 
-from prettyqt import custom_models
+from prettyqt import constants, custom_models
 from prettyqt.utils import datatypes, treeitem
 
 
-COL_TAG = custom_models.ColumnItem(
-    name="Tag",
-    doc="Tag.",
-    label=lambda x: x.obj.tag,
-)
+class TagColumn(custom_models.ColumnItem):
+    name = "Tag"
+    doc = "Tag"
+
+    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.obj.tag
 
 
-COL_TEXT = custom_models.ColumnItem(
-    name="Text",
-    doc="Text.",
-    label=lambda x: x.obj.text,
-)
+class TextColumn(custom_models.ColumnItem):
+    name = "Text"
+    doc = "Text"
+
+    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.obj.text
+
+class TailColumn(custom_models.ColumnItem):
+    name = "Tail"
+    doc = "Tail"
+
+    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.obj.tail
 
 
-COL_TAIL = custom_models.ColumnItem(
-    name="Tail",
-    doc="Tail.",
-    label=lambda x: x.obj.tail,
-)
+class AttributeColumn(custom_models.ColumnItem):
+    name = "Attribute"
+    doc = "Attribute"
+
+    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.obj.attrib
 
 
-COL_ATTRIB = custom_models.ColumnItem(
-    name="Attributes",
-    doc="Attributes.",
-    label=lambda x: repr(x.obj.attrib),
-)
-
-
-COLUMNS = [COL_TAG, COL_TEXT, COL_ATTRIB, COL_TAIL]
+COLUMNS = [TagColumn, TextColumn, TailColumn, AttributeColumn]
 
 
 class XmlModel(custom_models.ColumnItemModel):

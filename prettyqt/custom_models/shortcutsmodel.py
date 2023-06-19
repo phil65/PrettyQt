@@ -3,54 +3,86 @@ from __future__ import annotations
 from prettyqt import constants, custom_models, gui
 
 
-COL_NAME = custom_models.ColumnItem(
-    name="Name",
-    doc="WhatsThis",
-    label=lambda x: x.whatsThis(),
-    # decoration=lambda x: x.icon(),
-)
+class NameColumn(custom_models.ColumnItem):
+    name = "Name"
+    doc = "WhatsThis"
 
-COL_ENABLED = custom_models.ColumnItem(
-    name="Enabled",
-    doc="Enabled",
-    checkable=True,
-    checkstate=lambda x: x.isEnabled(),
-    set_checkstate=lambda item, value: item.setEnabled(not item.isEnabled()),
-)
+    def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.whatsThis()
 
-COL_SHORTCUT = custom_models.ColumnItem(
-    name="Shortcut",
-    doc="Shortcut",
-    label=lambda x: x.key().toString(),
-)
 
-COL_CONTEXT = custom_models.ColumnItem(
-    name="Context",
-    doc="Context",
-    label=lambda x: constants.SHORTCUT_CONTEXT.inverse[x.context()],
-)
+class EnabledColumn(custom_models.ColumnItem):
+    name = "Enabled"
+    doc = "Whether shortcut is enabled."
+    checkable = True
 
-COL_AUTOREPEAT = custom_models.ColumnItem(
-    name="AutoRepeat",
-    doc="AutoRepeat",
-    checkable=True,
-    checkstate=lambda item: item.autoRepeat(),
-    set_checkstate=lambda item, value: item.setAutoRepeat(not item.autoRepeat()),
-)
-COL_PARENT = custom_models.ColumnItem(
-    name="Parent widget",
-    doc="Parent widget",
-    label=lambda item: item.parent().windowTitle() or item.parent().__class__.__name__,
-)
+    def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
+        match role:
+            case constants.CHECKSTATE_ROLE:
+                return item.isEnabled()
+
+    def set_data(self, item, value, role):
+        match role:
+            case constants.CHECKSTATE_ROLE:
+                item.setEnabled(not item.isEnabled())
+
+
+class ShortcutColumn(custom_models.ColumnItem):
+    name = "Shortcut"
+    doc = "Keyboard shortcut."
+
+    def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.key().toString()
+
+
+class ContextColumn(custom_models.ColumnItem):
+    name = "Context"
+    doc = "Shortcut context."
+
+    def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return constants.SHORTCUT_CONTEXT.inverse[item.context()]
+
+
+class AutoRepeatColumn(custom_models.ColumnItem):
+    name = "Auto-repeat"
+    doc = "Auto-repeat."
+    checkable = True
+
+    def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
+        match role:
+            case constants.CHECKSTATE_ROLE:
+                return item.autoRepeat()
+
+    def set_data(self, item, value, role):
+        match role:
+            case constants.CHECKSTATE_ROLE:
+                item.setAutoRepeat(not item.autoRepeat())
+
+
+class ParentColumn(custom_models.ColumnItem):
+    name = "Parent widget"
+    doc = "Parent widget."
+    checkable = True
+
+    def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return item.parent().windowTitle() or item.parent().__class__.__name__
 
 
 COLUMNS = [
-    COL_NAME,
-    COL_ENABLED,
-    COL_SHORTCUT,
-    COL_CONTEXT,
-    COL_AUTOREPEAT,
-    COL_PARENT,
+    NameColumn,
+    EnabledColumn,
+    ShortcutColumn,
+    ContextColumn,
+    AutoRepeatColumn,
+    ParentColumn,
 ]
 
 
@@ -81,7 +113,6 @@ if __name__ == "__main__":
     for i in shortcuts:
         i.setWhatsThis("abc")
     model = ShortcutsModel(shortcuts, parent=view)
-    model = model.proxifier.modify(lambda x: x * 2, column=0)
     view.setModel(model)
     view.resize(640, 480)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
