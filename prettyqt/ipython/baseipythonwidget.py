@@ -38,6 +38,10 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         )
         self.adjust_style_to_palette()
 
+    @property
+    def texteditor(self) -> widgets.QPlainTextEdit:  # to shut up linters
+        return self._control
+
     def adjust_style_to_palette(self):
         """Adjust coloring of the terminal to current palette."""
         pal = widgets.Application.get_palette()
@@ -57,7 +61,7 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         self.input_buffer = ""
         if not isinstance(code, str):
             raise ValueError(f"Cannot set {type(code)}.")
-        cursor = self._control.textCursor()
+        cursor = self.texteditor.textCursor()
         lines = code.split("\n")
         for line in lines[:-1]:
             cursor.insertText(line + "\n")
@@ -66,28 +70,28 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         return None
 
     def insert_text(self, text: str) -> None:
-        cursor = self._control.textCursor()
+        cursor = self.texteditor.textCursor()
         cursor.insertText(text)
         return None
 
     def set_temp_text(self, text: str) -> None:
-        cursor = self._control.textCursor()
+        cursor = self.texteditor.textCursor()
         cursor.removeSelectedText()
         pos = cursor.position()
         cursor.insertText(text)
         cursor.setPosition(pos)
         cursor.setPosition(pos + len(text), gui.TextCursor.MoveMode.KeepAnchor)
-        self._control.setTextCursor(cursor)
+        self.texteditor.setTextCursor(cursor)
         return None
 
     def get_selected_text(self) -> str:
         """Return the selected text."""
-        cursor = self._control.textCursor()
+        cursor = self.texteditor.textCursor()
         return cursor.selection().toPlainText()
 
     def clear(self):
         """Clear the terminal."""
-        self._control.clear()
+        self.texteditor.clear()
 
     def print_text(self, text: str, before_prompt: bool = False):
         """Print some plain text to the console."""
