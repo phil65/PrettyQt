@@ -37,9 +37,6 @@ class TypeColumn(custom_models.ColumnItem):
                 return repr(item.obj.typ)
 
 
-COLUMNS = [NameColumn, ValueColumn, TypeColumn]
-
-
 @dataclass
 class JsonItem:
     key: str | int
@@ -48,6 +45,8 @@ class JsonItem:
 
 
 class JsonModel(custom_models.ColumnItemModel):
+    COLUMNS = [NameColumn, ValueColumn, TypeColumn]
+
     def __init__(
         self,
         obj: Any,
@@ -56,7 +55,7 @@ class JsonModel(custom_models.ColumnItemModel):
     ):
         super().__init__(
             obj=JsonItem(key="", value=obj, typ=type(obj)),
-            columns=COLUMNS,
+            columns=self.COLUMNS,
             show_root=show_root,
             **kwargs,
         )

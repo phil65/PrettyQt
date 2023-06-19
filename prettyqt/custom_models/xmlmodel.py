@@ -46,11 +46,9 @@ class AttributeColumn(custom_models.ColumnItem):
                 return item.obj.attrib
 
 
-COLUMNS = [TagColumn, TextColumn, TailColumn, AttributeColumn]
-
-
 class XmlModel(custom_models.ColumnItemModel):
     """Semi-lazy xml model. Fetches all direct child items when accessing index."""
+    COLUMNS = [TagColumn, TextColumn, TailColumn, AttributeColumn]
 
     def __init__(
         self,
@@ -70,7 +68,7 @@ class XmlModel(custom_models.ColumnItemModel):
                 _, root = next(context)
         super().__init__(
             obj=root,
-            columns=COLUMNS,
+            columns=self.COLUMNS,
             show_root=show_root,
             **kwargs,
         )

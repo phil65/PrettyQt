@@ -57,8 +57,8 @@ class DistTreeItem(treeitem.TreeItem):
 
 
 class NameColumn(custom_models.ColumnItem):
-    name="Name"
-    doc="Package name"
+    name = "Name"
+    doc = "Package name"
 
     def get_data(self, item, role):
         match role:
@@ -67,8 +67,8 @@ class NameColumn(custom_models.ColumnItem):
 
 
 class VersionColumn(custom_models.ColumnItem):
-    name="Version"
-    doc="Version number."
+    name = "Version"
+    doc = "Version number."
 
     def get_data(self, item, role):
         match role:
@@ -77,8 +77,8 @@ class VersionColumn(custom_models.ColumnItem):
 
 
 class ConstraintsColumn(custom_models.ColumnItem):
-    name="Constraints"
-    doc="Constraints."
+    name = "Constraints"
+    doc = "Constraints."
 
     def get_data(self, item, role):
         match role:
@@ -92,9 +92,10 @@ class ConstraintsColumn(custom_models.ColumnItem):
                     "",
                 )
 
+
 class MarkerColumn(custom_models.ColumnItem):
-    name="Extra"
-    doc="Extra."
+    name = "Extra"
+    doc = "Extra."
 
     def get_data(self, item, role):
         match role:
@@ -110,8 +111,8 @@ class MarkerColumn(custom_models.ColumnItem):
 
 
 class SummaryColumn(custom_models.ColumnItem):
-    name="Summary"
-    doc="Module description."
+    name = "Summary"
+    doc = "Module description."
 
     def get_data(self, item, role):
         match role:
@@ -120,8 +121,8 @@ class SummaryColumn(custom_models.ColumnItem):
 
 
 class HomepageColumn(custom_models.ColumnItem):
-    name="Homepage"
-    doc="URL of the homepage."
+    name = "Homepage"
+    doc = "URL of the homepage."
 
     def get_data(self, item, role):
         match role:
@@ -130,17 +131,18 @@ class HomepageColumn(custom_models.ColumnItem):
 
 
 class AuthorColumn(custom_models.ColumnItem):
-    name="Author"
-    doc="Author name."
+    name = "Author"
+    doc = "Author name."
 
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.metadata["Author"]
 
+
 class LicenseColumn(custom_models.ColumnItem):
-    name="License"
-    doc="License name."
+    name = "License"
+    doc = "License name."
 
     def get_data(self, item, role):
         match role:
@@ -148,21 +150,19 @@ class LicenseColumn(custom_models.ColumnItem):
                 return item.metadata["License"]
 
 
-
-COLUMNS = [
-    NameColumn,
-    VersionColumn,
-    ConstraintsColumn,
-    MarkerColumn,
-    SummaryColumn,
-    HomepageColumn,
-    AuthorColumn,
-    LicenseColumn,
-]
-
-
 class ImportlibTreeModel(custom_models.ColumnItemModel):
     TreeItem = DistTreeItem
+
+    COLUMNS = [
+        NameColumn,
+        VersionColumn,
+        ConstraintsColumn,
+        MarkerColumn,
+        SummaryColumn,
+        HomepageColumn,
+        AuthorColumn,
+        LicenseColumn,
+    ]
 
     def __init__(
         self,
@@ -172,7 +172,9 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
     ):
         if isinstance(obj, str):
             obj = metadata.distribution(obj)
-        super().__init__(obj=obj, columns=COLUMNS, parent=parent, show_root=show_root)
+        super().__init__(
+            obj=obj, columns=self.COLUMNS, parent=parent, show_root=show_root
+        )
 
     @classmethod
     def supports(cls, instance) -> bool:

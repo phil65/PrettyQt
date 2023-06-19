@@ -220,22 +220,22 @@ class ShaColumn(FsSpecColumnItem):
                 return super().get_data(item, role)
 
 
-COLUMNS = [
-    NameColumn,
-    PathColumn,
-    SizeColumn,
-    TypeColumn,
-    CreatedColumn,
-    ModifiedColumn,
-    PermissionsColumn,
-    IsLinkColumn,
-    ShaColumn,
-]
-
-
 class FSSpecTreeModel(
     widgets.filesystemmodel.FileSystemModelMixin, custom_models.ColumnItemModel
 ):
+
+    COLUMNS = [
+        NameColumn,
+        PathColumn,
+        SizeColumn,
+        TypeColumn,
+        CreatedColumn,
+        ModifiedColumn,
+        PermissionsColumn,
+        IsLinkColumn,
+        ShaColumn,
+    ]
+
     directoryLoaded = core.Signal(str)
     fileRenamed = core.Signal(str, str, str)
     rootPathChanged = core.Signal(str)
@@ -277,13 +277,13 @@ class FSSpecTreeModel(
             case "github":
                 return [
                     col
-                    for col in COLUMNS
+                    for col in self.COLUMNS
                     if col.identifier in {"name", "mode", "type", "size", "sha"}
                 ]
             case "file":
-                return [col for col in COLUMNS if col.identifier != "sha"]
+                return [col for col in self.COLUMNS if col.identifier != "sha"]
             case _:
-                return COLUMNS
+                return self.COLUMNS
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         return item.obj["type"] == "directory"

@@ -3,72 +3,48 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-from prettyqt import constants, custom_models, widgets
+from prettyqt import constants, core, custom_models, widgets
 from prettyqt.qtpandas import pandasmodels
 
 
-def index_description(index: pd.Index) -> str:
-    if isinstance(index, pd.MultiIndex):
-        return f"MultiIndex ({len(index.levels)})"
-    return str(index.name)
+class RowsColumn(custom_models.ColumnItem):
+    name = "Rows"
+
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return core.Locale().toString(len(item.index))
+            case constants.SORT_ROLE:
+                return len(item.index)
 
 
-def format_num(num: int) -> str:
-    return format(num, ",")
+class ColumnsColumn(custom_models.ColumnItem):
+    name = "Columns"
+
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                return core.Locale().toString(len(item.columns))
+            case constants.SORT_ROLE:
+                return len(item.columns)
 
 
-# class RowsColumn(custom_models.ColumnItem):
-#     name = "Rows"
+class IndexDescriptionColumn(custom_models.ColumnItem):
+    name = "Index"
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return format_num(len(item.index))
-#             case constants.SORT_ROLE:
-#                 return len(item.index)
-
-
-# class ColumnsColumn(custom_models.ColumnItem):
-#     name = "Columns"
-
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return format_num(len(item.columns))
-#             case constants.SORT_ROLE:
-#                 return len(item.columns)
+    def get_data(self, item, role):
+        match role:
+            case constants.DISPLAY_ROLE:
+                if isinstance(item.index, pd.MultiIndex):
+                    return f"MultiIndex ({len(item.index.levels)})"
+                return str(item.index.name)
 
 
-# class IndexDescriptionColumn(custom_models.ColumnItem):
-#     name = "Index"
+class DataFrameListModel(custom_models.ColumnTableModel):
+    COLUMNS = [RowsColumn, ColumnsColumn, IndexDescriptionColumn]
 
-#     def get_data(self, item, role):
-#         match role:
-#             case constants.DISPLAY_ROLE:
-#                 return index_description(item.index)
-
-
-COL_ROWS = custom_models.ColumnItem(
-    name="Rows",
-    doc="Rows",
-    label=lambda item: format_num(len(item.index)),
-    sort_value=lambda item: len(item.index),
-)
-
-COL_COLUMNS = custom_models.ColumnItem(
-    name="Columns",
-    doc="Columns",
-    label=lambda item: format_num(len(item.columns)),
-    sort_value=lambda item: len(item.columns),
-)
-
-COL_INDEX = custom_models.ColumnItem(
-    name="Index",
-    doc="Index",
-    label=lambda item: index_description(item.index),
-)
-
-COLUMNS = [COL_ROWS, COL_COLUMNS, COL_INDEX]
+    def __init__(self, dfs, parent=None):
+        super().__init__(dfs, self.COLUMNS, parent=parent)
 
 
 class DataFrameListWidget(widgets.TableView):
@@ -78,7 +54,7 @@ class DataFrameListWidget(widgets.TableView):
         **kwargs,
     ):
         super().__init__(object_name=object_name, **kwargs)
-        model = custom_models.ColumnTableModel([], COLUMNS)
+        model = DataFrameListModel([])
         self.set_model(model)
         self.set_selection_behavior("rows")
 
@@ -110,5 +86,6 @@ if __name__ == "__main__":
     df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
     df.attrs = {"test": "test"}
     widget = DataFrameListWidget()
+    widget.add_df(df)
     widget.show()
     app.main_loop()

@@ -76,19 +76,19 @@ class ParentColumn(custom_models.ColumnItem):
                 return item.parent().windowTitle() or item.parent().__class__.__name__
 
 
-COLUMNS = [
-    NameColumn,
-    EnabledColumn,
-    ShortcutColumn,
-    ContextColumn,
-    AutoRepeatColumn,
-    ParentColumn,
-]
-
-
 class ShortcutsModel(custom_models.ColumnTableModel):
+
+    COLUMNS = [
+        NameColumn,
+        EnabledColumn,
+        ShortcutColumn,
+        ContextColumn,
+        AutoRepeatColumn,
+        ParentColumn,
+    ]
+
     def __init__(self, shortcuts, parent=None):
-        super().__init__(shortcuts, COLUMNS, parent=parent)
+        super().__init__(shortcuts, self.COLUMNS, parent=parent)
 
     @classmethod
     def supports(cls, instance) -> bool:

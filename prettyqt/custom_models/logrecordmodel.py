@@ -146,27 +146,27 @@ class MessageColumn(custom_models.ColumnItem):
                 )
 
 
-COLUMNS = [
-    LevelNameColumn,
-    FileNameColumn,
-    FunctionNameColumn,
-    LineNoColumn,
-    ModuleColumn,
-    CreatedColumn,
-    ProcessColumn,
-    ThreadColumn,
-    ProcessNameColumn,
-    ThreadNameColumn,
-    RelativeCreatedColumn,
-    NameColumn,
-    PathNameColumn,
-    MessageColumn,
-]
-
-
 class LogRecordModel(custom_models.ColumnTableModel):
+
+    COLUMNS = [
+        LevelNameColumn,
+        FileNameColumn,
+        FunctionNameColumn,
+        LineNoColumn,
+        ModuleColumn,
+        CreatedColumn,
+        ProcessColumn,
+        ThreadColumn,
+        ProcessNameColumn,
+        ThreadNameColumn,
+        RelativeCreatedColumn,
+        NameColumn,
+        PathNameColumn,
+        MessageColumn,
+    ]
+
     def __init__(self, logger, level=logging.DEBUG, *args, **kwargs):
-        super().__init__(items=[], columns=COLUMNS, **kwargs)
+        super().__init__(items=[], columns=self.COLUMNS, **kwargs)
         self.handler = signallogger.SignalLogger()
         self.handler.signals.log_record.connect(self.add)
         core.CoreApplication.call_on_exit(lambda: logger.removeHandler(self.handler))

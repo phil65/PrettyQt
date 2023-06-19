@@ -97,19 +97,18 @@ class UsageCountColumn(custom_models.ColumnItem):
                 return item.usage_count
 
 
-COLUMNS = [
-    NameColumn,
-    ToolTipColumn,
-    ShortcutColumn,
-    PriorityColumn,
-    CheckStateColumn,
-    UsageCountColumn,
-]
-
-
 class ActionsModel(custom_models.ColumnTableModel):
+    COLUMNS = [
+        NameColumn,
+        ToolTipColumn,
+        ShortcutColumn,
+        PriorityColumn,
+        CheckStateColumn,
+        UsageCountColumn,
+    ]
+
     def __init__(self, actions, parent=None):
-        super().__init__(actions, COLUMNS, parent=parent)
+        super().__init__(actions, self.COLUMNS, parent=parent)
 
     @classmethod
     def supports(cls, instance) -> bool:

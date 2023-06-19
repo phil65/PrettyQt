@@ -95,23 +95,23 @@ class ValidColumn(custom_models.ColumnItem):
                 return item.isValid()
 
 
-COLUMNS = [
-    RootPathColumn,
-    VolumeNameColumn,
-    DeviceColumn,
-    FileSystemColumn,
-    TotalColumn,
-    FreeColumn,
-    AvailableColumn,
-    ReadyColumn,
-    ReadOnlyColumn,
-    ValidColumn,
-]
-
-
 class StorageInfoModel(custom_models.ColumnTableModel):
+
+    COLUMNS = [
+        RootPathColumn,
+        VolumeNameColumn,
+        DeviceColumn,
+        FileSystemColumn,
+        TotalColumn,
+        FreeColumn,
+        AvailableColumn,
+        ReadyColumn,
+        ReadOnlyColumn,
+        ValidColumn,
+    ]
+
     def __init__(self, volumes: list[core.QStorageInfo], parent=None):
-        super().__init__(volumes, COLUMNS, parent=parent)
+        super().__init__(volumes, self.COLUMNS, parent=parent)
 
     @classmethod
     def supports(cls, instance) -> bool:
