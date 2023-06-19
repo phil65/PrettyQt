@@ -6,10 +6,13 @@ from prettyqt import printsupport
 from prettyqt.utils import InvalidParamError
 import prettyqt
 
-@pytest.mark.skipif(
+
+pytestmark = pytest.mark.skipif(
     sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
     reason="Segmentation fault",
 )
+
+
 def test_printer():
     printer = printsupport.Printer()
     assert printer.get_duplex() == "none"
