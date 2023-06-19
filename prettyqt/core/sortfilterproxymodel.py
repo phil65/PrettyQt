@@ -7,7 +7,7 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, fuzzy
+from prettyqt.utils import InvalidParamError, bidict, datatypes, fuzzy
 
 
 class FilterMode(enum.IntEnum):
@@ -94,6 +94,11 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
         if column is None:
             column = -1
         super().sort(column, ascending)
+
+    def setFilterRegularExpression(self, pattern: datatypes.PatternType):
+        if isinstance(pattern, re.Pattern):
+            pattern = core.RegularExpression(pattern)
+        super().setFilterRegularExpression(pattern)
 
     def setFilterString(self, search_str: str):
         pat = ".*?".join(map(re.escape, search_str))
