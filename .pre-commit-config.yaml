@@ -28,7 +28,7 @@ repos:
     # - id: check-added-large-files
 # https://pre-commit.com/hooks.html
 - repo: https://github.com/commitizen-tools/commitizen
-  rev: 3.2.2
+  rev: 3.3.0
   hooks:
     - id: commitizen
       stages: [commit-msg]
@@ -65,7 +65,7 @@ repos:
 #   - id: pydocstyle
 
 - repo: https://github.com/asottile/pyupgrade
-  rev: v3.4.0
+  rev: v3.7.0
   hooks:
   - id: pyupgrade
     args: [--py310-plus]
