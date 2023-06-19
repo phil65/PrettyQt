@@ -145,7 +145,7 @@ class AstModel(custom_models.TreeModel):
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         if item.obj is None:
             return False
-        return len(item.obj._fields) > 0
+        return any(True for _ in ast.iter_child_nodes(item.obj))
 
     def rename_variable(
         self,
