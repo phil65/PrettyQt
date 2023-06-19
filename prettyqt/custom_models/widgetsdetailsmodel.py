@@ -37,7 +37,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         self,
         section: int,
         orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole,
+        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role, section:
             case constants.VERTICAL, constants.DISPLAY_ROLE, _:

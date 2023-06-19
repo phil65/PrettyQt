@@ -92,7 +92,7 @@ class DataFrameHeaderModel(core.AbstractTableModel):
         self,
         section: int,
         orientation: constants.Orientation,
-        role: constants.ItemDataRole,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
@@ -167,7 +167,7 @@ class DataFrameLevelModel(core.AbstractTableModel):
         self,
         section: int,
         orientation: constants.Orientation,
-        role: constants.ItemDataRole,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:

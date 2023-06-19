@@ -99,7 +99,7 @@ class AstModel(custom_models.TreeModel):
         self,
         section: int,
         orientation: constants.Orientation,
-        role: constants.ItemDataRole,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role, section:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:

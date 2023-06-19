@@ -280,7 +280,12 @@ class ImportlibDistributionModel(core.AbstractTableModel):
     def columnCount(self, parent=None):
         return 0 if parent is None else len(self.HEADER)
 
-    def headerData(self, offset: int, orientation, role):  # type: ignore
+    def headerData(
+        self,
+        offset: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[offset]

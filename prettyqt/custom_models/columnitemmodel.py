@@ -284,7 +284,7 @@ class ColumnItemModelMixin:
         self,
         section: int,
         orientation: constants.Orientation,
-        role: constants.ItemDataRole,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:

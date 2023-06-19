@@ -21,7 +21,7 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.mapping = list()
+        self.mapping = []
 
     def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
@@ -78,7 +78,12 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
             return None
         return super().data(index, role)
 
-    def headerData(self, section, orientation, role=None):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if orientation == constants.HORIZONTAL:
             if self.is_additional_column(section):
                 if role == constants.DISPLAY_ROLE:

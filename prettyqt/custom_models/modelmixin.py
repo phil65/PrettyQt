@@ -15,7 +15,12 @@ class ModelMixin:
     SET_DATA: dict = {}
     content_type = ""
 
-    def headerData(self, offset: int, orientation, role):
+    def headerData(
+        self,
+        offset: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[offset]

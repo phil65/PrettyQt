@@ -23,7 +23,10 @@ class RegexMatchesModel(core.AbstractTableModel):
         return len(self.HEADER)
 
     def headerData(  # type: ignore
-        self, section: int, orientation: QtCore.Qt.Orientation, role: int
+        self,
+        section: int,
+        orientation: QtCore.Qt.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:

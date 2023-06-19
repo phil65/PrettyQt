@@ -24,7 +24,12 @@ class DataTableModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.df = df
 
-    def headerData(self, section, orientation, role=None):
+    def headerData(
+        self,
+        section: int,
+        orientation: QtCore.Qt.Orientation,
+        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+    ) -> str | None:
         pass
 
     def columnCount(self, parent=None):
@@ -94,16 +99,21 @@ class DataTableWithHeaderModel(DataTableModel):
     def supports(cls, typ):
         return isinstance(typ, pd.DataFrame)
 
-    def headerData(self, idx: int, orientation, role=constants.DISPLAY_ROLE):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role, orientation:
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
                 return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
             case constants.DISPLAY_ROLE, constants.HORIZONTAL:
-                return str(self.df.columns[idx])
-                # label = helpers.format_name(self.df.columns[idx])
-                # return f"{label}\n{self.df.iloc[:, idx].dtype}"
+                return str(self.df.columns[section])
+                # label = helpers.format_name(self.df.columns[section])
+                # return f"{label}\n{self.df.iloc[:, section].dtype}"
             # case constants.DECORATION_ROLE, constants.HORIZONTAL if self.show_icons:
-            #     dtype = self.df.iloc[:, idx].dtype
+            #     dtype = self.df.iloc[:, section].dtype
             #     return icons.icon_for_dtype(dtype)
             case _, _:
                 return None
@@ -130,7 +140,12 @@ class VerticalHeaderModel(core.AbstractTableModel):
                 else:
                     return str(self.df.index.values[row])
 
-    def headerData(self, section, orientation, role=None):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role, orientation:
             case constants.DISPLAY_ROLE | constants.TOOLTIP_ROLE, constants.HORIZONTAL:
                 if isinstance(self.df.index, pd.MultiIndex):
@@ -162,7 +177,12 @@ class HorizontalHeaderModel(core.AbstractTableModel):
             case constants.ALIGNMENT_ROLE:
                 return constants.ALIGN_CENTER
 
-    def headerData(self, section: int, orientation, role=None):
+    def headerData(
+        self,
+        section: int,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role, orientation:
             case constants.DISPLAY_ROLE | constants.TOOLTIP_ROLE, constants.VERTICAL:
                 if isinstance(self.df.columns, pd.MultiIndex):
