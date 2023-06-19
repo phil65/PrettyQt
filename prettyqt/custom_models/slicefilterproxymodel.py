@@ -4,6 +4,13 @@ from prettyqt import constants, core, custom_models
 
 
 class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
+    """Proxy to filter a model based on slices.
+
+    Since slicing operations are bijective, we can do this without
+    looping all rows / columns. Thus, this should perform much better than a
+    SortFilterProxyModel with a column filter.
+    """
+
     ID = "slice_filter"
 
     def rowCount(self, index=None):

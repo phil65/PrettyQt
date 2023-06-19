@@ -5,6 +5,7 @@ from prettyqt.utils import get_repr
 
 
 class ValueFilterProxyModel(core.SortFilterProxyModel):
+    """Compared to QSortFilterProxyModel, this one also works with non-str values."""
     ID = "value_filter"
 
     def __init__(self, filter_value=None, **kwargs):
