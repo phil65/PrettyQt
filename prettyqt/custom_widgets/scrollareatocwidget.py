@@ -30,7 +30,7 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         super().__init__(*args, **kwargs)
 
     def set_highlighted_indexes(self, indexes: list[core.ModelIndex]):
-        self._current_indexes = indexes
+        self._current_indexes = [core.PersistentModelIndex(i) for i in indexes]
         self.update_all()
 
     def columnCount(self, parent=None):
@@ -40,12 +40,15 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         if not index.isValid():
             return None
         widget = self.data_by_index(index).obj
-        match role, index.column():
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, _:
+        indexes = [i for i in self._current_indexes if i.isValid()]
+        match role:
+            case constants.DISPLAY_ROLE if index in indexes:
+                return f"> {widget.windowTitle()}"
+            case constants.DISPLAY_ROLE:
                 return widget.windowTitle()
-            case constants.USER_ROLE, _:
+            case constants.USER_ROLE:
                 return widget
-            case constants.FONT_ROLE, _ if index in self._current_indexes:
+            case constants.FONT_ROLE if index in indexes:
                 # if not index.parent().isValid():
                 return self._highlight_font
 
@@ -68,7 +71,6 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         return self._highlight_font
 
     highlight_font = core.Property(gui.QFont, get_highlight_font, set_highlight_font)
-
 
 
 class ScrollAreaTocWidget(widgets.TreeView):
@@ -109,7 +111,6 @@ class ScrollAreaTocWidget(widgets.TreeView):
         self.h_header.setStretchLastSection(True)
         self.setAlternatingRowColors(False)
         self.setRootIsDecorated(False)
-        self.setAnimated(False)
         # self.setStyleSheet(
         #     """::item:hover {background: transparent; border-color:transparent}
         #     ::item:selected { border-color:transparent;
@@ -137,6 +138,10 @@ class ScrollAreaTocWidget(widgets.TreeView):
             widget_class=self._WidgetClass,
         )
         self.set_model(model)
+        self.proxy = self.proxifier.get_proxy(
+            "sort_filter", recursive_filtering_enabled=True
+        )
+        self.proxy.set_filter_case_sensitive(False)
         self.show_root(False)
         widget.widget().installEventFilter(self)
         self.selectionModel().currentChanged.connect(self._on_current_change)
@@ -158,8 +163,8 @@ class ScrollAreaTocWidget(widgets.TreeView):
     def _on_selection_change(self, new, old):
         if self.model() is None:
             return
-        indexes = self.selected_indexes()
-        self.model().set_highlighted_indexes(indexes)
+        indexes = [self.proxy.mapToSource(i) for i in self.selected_indexes()]
+        self.get_model(skip_proxies=True).set_highlighted_indexes(indexes)
 
     def _on_scroll(self):
         model: ScrollAreaTocModel | None = self.model()
@@ -245,7 +250,9 @@ if __name__ == "__main__":
     with app.debug_mode():
         window = widgets.Widget(object_name="window")
         layout = window.set_layout("horizontal")
-        scrollarea = widgets.ScrollArea(object_name="scroll", parent=window)
+        scrollarea = widgets.ScrollArea(
+            object_name="scroll", parent=window, widget_resizable=True
+        )
         widget = widgets.Widget(object_name="scrollarea_widget")
         scrollarea.setWidget(widget)
         toc_widget = ScrollAreaTocWidget(
@@ -261,6 +268,5 @@ if __name__ == "__main__":
             section.box.add(SectionWidget(window_title=f"{i}nested"))
             section.box.add(SectionWidget(window_title=f"{i*10}nested"))
             scroll_layout.add(section)
-        scrollarea.setWidgetResizable(True)
         window.show()
         app.main_loop()

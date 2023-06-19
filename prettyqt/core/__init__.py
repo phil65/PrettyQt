@@ -34,6 +34,7 @@ from .event import Event
 from .slot import Slot
 
 # from .property import Property
+from .persistentmodelindex import PersistentModelIndex
 from .loggingcategory import LoggingCategory
 from .timezone import TimeZone
 from .date import Date
@@ -186,6 +187,7 @@ __all__ = [
     "DynamicPropertyChangeEvent",
     "MetaEnum",
     "LoggingCategory",
+    "PersistentModelIndex",
     "MetaMethod",
     "MetaProperty",
     "MetaType",

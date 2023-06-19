@@ -51,11 +51,24 @@ class SettingsWindow(widgets.Widget):
         self.configwidget = widgets.Widget()
         self.configwidget.set_max_width(600)
         self.configwidget.set_layout("vertical")
-        self.scrollarea = widgets.ScrollArea()
+        self.scrollarea = widgets.ScrollArea(widget_resizable=True)
         self.scrollarea.set_widget(self.configwidget)
         self.toc = custom_widgets.ScrollAreaTocWidget(self.scrollarea)
+        right_layout = widgets.VBoxLayout()
+        self.search_lineedit = widgets.LineEdit()
+        self.search_lineedit.set_max_width(200)
+        self.search_lineedit.setPlaceholderText("Search setting...")
+        self.search_lineedit.value_changed.connect(self._on_search)
+        right_layout.add(self.search_lineedit)
+        right_layout.add(self.scrollarea)
         layout.add(self.toc)
-        layout.add(self.scrollarea)
+        layout.add(right_layout)
+
+    def _on_search(self, search_term: str):
+        for widget in self.scrollarea.find_children(widgets.GroupBox):
+            widget.setVisible(search_term.lower() in widget.windowTitle().lower())
+            # TODO: this doesnt work correctly yet.
+            # self.toc.proxy.set_search_term(search_term)
 
     def add_setting(self, setting: BaseSetting):
         row_widget = widgets.GroupBox(window_title=setting.label)
@@ -88,8 +101,6 @@ class SettingsWindow(widgets.Widget):
             widget.set_value(setting.default)
         layout.add(container)
         self.configwidget.box.add(row_widget)
-        self.scrollarea.ensureWidgetVisible(row_widget)
-        self.scrollarea.setWidgetResizable(True)
 
 
 if __name__ == "__main__":
