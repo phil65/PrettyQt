@@ -50,7 +50,8 @@ clsmembers = [tpl for tpl in clsmembers if core.ObjectMixin in tpl[1].mro()]
 @pytest.mark.parametrize("name, cls", clsmembers)
 def test_parent(name, cls):
     try:
-        widget = cls()
+        w = widgets.Widget()
+        widget = cls(w)
     except Exception:
         return None
     else:
