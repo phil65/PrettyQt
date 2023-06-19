@@ -28,6 +28,7 @@ from .dataclassmodel import DataClassModel
 from .dataclassfieldsmodel import DataClassFieldsModel
 from .xmlmodel import XmlModel
 from .mappingmodel import MappingModel
+from .pythonobjecttreemodel import PythonObjectTreeModel
 
 # Qt type models
 
@@ -76,6 +77,7 @@ __all__ = [
     "JsonModel",
     "ActionsModel",
     "MappingModel",
+    "PythonObjectTreeModel",
     "AstModel",
     "SubClassTreeModel",
     "ParentClassTreeModel",

@@ -34,6 +34,7 @@ from .iconbrowser import IconBrowser
 from .iconwidget import IconWidget
 from .flowlayout import FlowLayout
 from .borderlayout import BorderLayout
+from .objectbrowser import ObjectBrowser
 from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
 from .editors.colorcombobox import ColorComboBox
@@ -99,6 +100,7 @@ __all__ = [
     "SizePolicyEdit",
     "FlowLayout",
     "BorderLayout",
+    "ObjectBrowser",
     "SidebarWidget",
     "EnumComboBox",
     "ColorComboBox",

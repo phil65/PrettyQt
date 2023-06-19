@@ -142,7 +142,7 @@ class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
 class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
     def __init__(
         self,
-        items: list,
+        items: Sequence,
         columns: Sequence[ColumnItem],
         mime_type: str | None = None,
         **kwargs,

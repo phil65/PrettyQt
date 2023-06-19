@@ -38,7 +38,6 @@ class TreeModel(core.AbstractItemModel):
 
     @property
     def root_item(self) -> treeitem.TreeItem:
-        """Return the root ObjectBrowserTreeItem."""
         return self._root_item
 
     def data_by_index(self, index: core.ModelIndex) -> treeitem.TreeItem:

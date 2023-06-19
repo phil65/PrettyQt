@@ -5,9 +5,8 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, core, gui, widgets
-from prettyqt.objbrowser import objectbrowsertreemodel
-from prettyqt.objbrowser.attribute_model import (
+from prettyqt import constants, core, custom_models, gui, widgets
+from prettyqt.custom_models.pythonobjecttreemodel import (
     CommentsColumn,
     DocStringColumn,
     FileColumn,
@@ -16,7 +15,6 @@ from prettyqt.objbrowser.attribute_model import (
     PrettyPrintColumn,
     ReprColumn,
     StrColumn,
-    DEFAULT_ATTR_COLS,
 )
 
 
@@ -34,6 +32,48 @@ DEFAULT_ATTR_DETAILS = [
 logger = logging.getLogger(__name__)
 
 
+
+class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
+    """Proxy model that overrides the sorting and can filter out items."""
+
+    def __init__(
+        self, show_callable_attrs: bool = True, show_special_attrs: bool = True, **kwargs
+    ):
+        super().__init__(**kwargs)
+
+        self._show_callables = show_callable_attrs
+        self._show_special_attrs = show_special_attrs
+
+    def data_by_index(self, proxy_index: core.ModelIndex):
+        index = self.mapToSource(proxy_index)
+        return self.get_source_model().data_by_index(index)
+
+    def filterAcceptsRow(self, source_row: int, source_parent_index: core.ModelIndex):
+        """Return true if the item should be included in the model."""
+        parent_item = self.get_source_model().data_by_index(source_parent_index)
+        tree_item = parent_item.child(source_row)
+        is_callable_attr = tree_item.is_attribute and callable(tree_item.obj)
+        return (self._show_special_attrs or not tree_item.is_special_attribute) and (
+            self._show_callables or not is_callable_attr
+        )
+
+    def get_show_callables(self) -> bool:
+        return self._show_callables
+
+    def set_show_callables(self, show_callables: bool):
+        """Show/hide show_callables which have a __call__ attribute."""
+        self._show_callables = show_callables
+        self.invalidateRowsFilter()
+
+    def get_show_special_attrs(self) -> bool:
+        return self._show_special_attrs
+
+    def set_show_special_attrs(self, show_special_attrs: bool):
+        """Show/hide special attributes which begin with an underscore."""
+        self._show_special_attrs = show_special_attrs
+        self.invalidateRowsFilter()
+
+
 class ObjectBrowser(widgets.MainWindow):
     """Object browser main application window."""
 
@@ -41,15 +81,11 @@ class ObjectBrowser(widgets.MainWindow):
         super().__init__()
         self.set_title("Object browser")
         self.set_icon("mdi.language-python")
-        self._attr_cols = DEFAULT_ATTR_COLS
-
         self._auto_refresh = False
         self._refresh_rate = 2
         show_callable_attrs = True
         show_special_attrs = True
-        self._tree_model = objectbrowsertreemodel.ObjectBrowserTreeModel(
-            obj, columns=self._attr_cols, show_root=False
-        )
+        self._tree_model = custom_models.PythonObjectTreeModel(obj)
         self._attr_details = [
             Klass(model=self._tree_model) for Klass in DEFAULT_ATTR_DETAILS
         ]
@@ -60,7 +96,7 @@ class ObjectBrowser(widgets.MainWindow):
         #     selector_role=constants.DISPLAY_ROLE
         # )
 
-        self._proxy_tree_model = objectbrowsertreemodel.ObjectBrowserTreeProxyModel(
+        self._proxy_tree_model = ObjectBrowserTreeProxyModel(
             show_callable_attrs=show_callable_attrs,
             show_special_attrs=show_special_attrs,
             dynamic_sort_filter=True,
