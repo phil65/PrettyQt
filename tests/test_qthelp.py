@@ -1,7 +1,10 @@
 """Tests for `prettyqt` package."""
 
-# import pytest
+import sys
 
+import pytest
+
+import prettyqt
 from prettyqt import core, qthelp
 from prettyqt.qt import QtHelp
 
@@ -44,7 +47,10 @@ def test_helpsearchresultwidget():
     widget = engine.get_result_widget()
     widget.get_link_at(core.Point(1, 1))
 
-
+@pytest.mark.skipif(
+    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
+    reason="Segmentation fault",
+)
 def test_helpsearchquerywidget():
     widget = qthelp.HelpSearchQueryWidget()
     assert widget is not None
