@@ -3,7 +3,10 @@
 import logging
 import pickle
 import re
+import sys
+import pytest
 
+import prettyqt
 from prettyqt import core, custom_widgets, gui, widgets
 import prettyqt.custom_widgets.dataset as fo
 from prettyqt.qt import QtCore, QtGui
@@ -57,7 +60,10 @@ def test_colorchooserbutton(qtbot):
     btn.set_value("blue")
     assert btn.is_valid()
 
-
+@pytest.mark.skipif(
+    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
+    reason="Segmentation fault",
+)
 def test_regexeditor(qtbot):
     widget = custom_widgets.regexeditor.RegexEditorWidget()
     qtbot.addWidget(widget)
