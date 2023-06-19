@@ -255,8 +255,8 @@ class LogRecordModel(custom_models.ColumnTableModel):
         logger.addHandler(self.handler)
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (logging.LogRecord(), *_):
                 return True
             case _:

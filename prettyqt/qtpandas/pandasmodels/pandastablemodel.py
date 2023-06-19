@@ -95,8 +95,8 @@ class DataTableModel(core.AbstractTableModel):
 
 class DataTableWithHeaderModel(DataTableModel):
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, pd.DataFrame)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, pd.DataFrame)
 
     def headerData(
         self,

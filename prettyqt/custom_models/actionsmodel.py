@@ -98,12 +98,12 @@ from prettyqt import custom_models, gui
 
 
 # COLUMNS = [
-#     NameColumn(),
-#     ToolTipColumn(),
-#     ShortcutColumn(),
-#     PriorityColumn(),
-#     CheckStateColumn(),
-#     UsageCountColumn(),
+#     NameColumn,
+#     ToolTipColumn,
+#     ShortcutColumn,
+#     PriorityColumn,
+#     CheckStateColumn,
+#     UsageCountColumn,
 # ]
 
 
@@ -160,8 +160,8 @@ class ActionsModel(custom_models.ColumnTableModel):
         super().__init__(actions, COLUMNS, parent=parent)
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (gui.QAction(), *_):
                 return True
             case _:

@@ -11,8 +11,8 @@ class FrameInfoModel(custom_models.ListMixin, core.AbstractTableModel):
     HEADER = ["Filename", "Line number", "Function", "Code context", "Index", "Positions"]
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (inspect.FrameInfo(), *_) | (inspect.Traceback(), *_):
                 return True
             case _:

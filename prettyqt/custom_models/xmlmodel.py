@@ -65,8 +65,8 @@ class XmlModel(custom_models.ColumnItemModel):
         )
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, datatypes.IsTreeIterator | ET.ElementTree)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, datatypes.IsTreeIterator | ET.ElementTree)
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         return bool(item.obj)

@@ -59,8 +59,8 @@ class ShortcutsModel(custom_models.ColumnTableModel):
         super().__init__(shortcuts, COLUMNS, parent=parent)
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (gui.QShortcut(), *_):
                 return True
             case _:

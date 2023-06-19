@@ -68,8 +68,8 @@ class SubClassTreeModel(BaseClassTreeModel):
     """Model to display the subclass tree of a python class."""
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, type)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, type)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         return [treeitem.TreeItem(obj=i) for i in item.obj.__subclasses__()]
@@ -84,8 +84,8 @@ class ParentClassTreeModel(BaseClassTreeModel):
     """Model to display the parentclass tree of a python class."""
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, type)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, type)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         return [treeitem.TreeItem(obj=i) for i in item.obj.__bases__]

@@ -193,8 +193,8 @@ class StorageInfoModel(custom_models.ColumnTableModel):
         super().__init__(volumes, COLUMNS, parent=parent)
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (core.QStorageInfo(), *_):
                 return True
             case _:

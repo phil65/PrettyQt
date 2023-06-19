@@ -51,8 +51,8 @@ class JsonModel(custom_models.ColumnItemModel):
         )
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, Mapping)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, Mapping)
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         return isinstance(item.obj.value, dict | list | set) and bool(item.obj.value)

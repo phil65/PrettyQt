@@ -229,8 +229,8 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         super().__init__(obj=obj, columns=COLUMNS, parent=parent, show_root=show_root)
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, metadata.Distribution)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, metadata.Distribution)
 
     @classmethod
     def from_system(cls, parent: QtCore.QObject | None = None) -> Self:
@@ -266,8 +266,8 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         self.distributions = distributions
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (metadata.Distribution(), *_):
                 return True
             case _:

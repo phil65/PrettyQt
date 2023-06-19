@@ -35,8 +35,8 @@ class MappingModel(custom_models.ColumnItemModel):
         self.set_columns(columns)
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (dict(), *_):
                 return True
             case _:

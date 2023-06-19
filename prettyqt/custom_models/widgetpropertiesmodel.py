@@ -38,8 +38,8 @@ class WidgetPropertiesModel(core.AbstractTableModel):
         self.set_widget(widget)
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, QtWidgets.QWidget)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, QtWidgets.QWidget)
 
     def set_widget(self, widget):
         if self._widget:

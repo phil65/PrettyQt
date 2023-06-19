@@ -19,8 +19,8 @@ class StringListModel(StringListModelMixin, QtCore.QStringListModel):
         return 1
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (str(), *_):
                 return True
             case _:

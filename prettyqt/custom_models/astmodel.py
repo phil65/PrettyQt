@@ -63,8 +63,8 @@ class AstModel(custom_models.TreeModel):
         self.set_ast(ast_tree)
 
     @classmethod
-    def supports(self, typ):
-        return isinstance(typ, ast.AST)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, ast.AST)
 
     def columnCount(self, parent=None):
         return len(self.HEADER) if self.ast_tree is not None else 0

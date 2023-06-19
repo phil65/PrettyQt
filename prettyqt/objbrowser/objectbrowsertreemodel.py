@@ -44,7 +44,7 @@ class ObjectBrowserTreeModel(custom_models.ColumnItemModel):
     TreeItem = ObjectBrowserTreeItem
 
     @classmethod
-    def supports(cls, typ):
+    def supports(cls, instance) -> bool:
         return True
 
     def get_path_for_index(self, index: core.ModelIndex) -> str:

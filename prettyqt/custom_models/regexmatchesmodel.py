@@ -12,8 +12,8 @@ class RegexMatchesModel(core.AbstractTableModel):
         self.matches = matches or []
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (re.Match(), *_):
                 return True
             case _:

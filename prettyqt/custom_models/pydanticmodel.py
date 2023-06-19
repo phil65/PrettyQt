@@ -15,8 +15,8 @@ class PydanticModel(custom_models.BaseDataclassModel):
         super().__init__(items, **kwargs)
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (pydantic.BaseModel(), *_):
                 return True
             case _:

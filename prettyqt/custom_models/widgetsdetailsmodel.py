@@ -23,8 +23,8 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         self.props.sort(key=lambda x: x.get_name())
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (QtWidgets.QWidget(), *_):
                 return True
             case _:

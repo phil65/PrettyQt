@@ -28,8 +28,8 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
         super().__init__(instance, **kwargs)
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, datatypes.IsDataclass)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, datatypes.IsDataclass)
 
     def get_fields(self, instance: datatypes.IsDataclass):
         return dataclasses.fields(instance)

@@ -46,8 +46,8 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
         return self.FIXED_HEADER + self.role_headers
 
     @classmethod
-    def supports(cls, typ):
-        match typ:
+    def supports(cls, instance) -> bool:
+        match instance:
             case (core.ModelIndex(), *_):
                 return True
             case _:

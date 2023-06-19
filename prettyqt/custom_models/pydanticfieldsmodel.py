@@ -26,8 +26,8 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
         super().__init__(instance, **kwargs)
 
     @classmethod
-    def supports(cls, typ):
-        return isinstance(typ, pydantic.BaseModel)
+    def supports(cls, instance) -> bool:
+        return isinstance(instance, pydantic.BaseModel)
 
     def get_fields(self, instance: pydantic.BaseModel):
         return list(type(instance).__fields__.values())
