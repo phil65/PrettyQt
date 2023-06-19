@@ -12,6 +12,12 @@ class StringListModel(StringListModelMixin, QtCore.QStringListModel):
     def __repr__(self):
         return f"{type(self).__name__}: ({self.rowCount()})"
 
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
+        # columnCount is private for StringListModel, but we need it
+        # to avoid workarounds (for example in our Slice proxies).
+        # So lets just return 1.
+        return 1
+
     @classmethod
     def supports(cls, typ):
         match typ:
