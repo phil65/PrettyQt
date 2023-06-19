@@ -1,11 +1,9 @@
 """Tests for `prettyqt` package."""
 
 import pathlib
-import sys
 
 import pytest
 
-import prettyqt
 from prettyqt import core, qml
 from prettyqt.utils import InvalidParamError
 
@@ -37,10 +35,6 @@ def test_qmlengine():
     engine.get_import_paths()
 
 
-@pytest.mark.skipif(
-    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
-    reason="Segmentation fault",
-)
 def test_qmlapplicationengine(qtlog):
     with qtlog.disabled():
         engine = qml.QmlApplicationEngine()
@@ -49,10 +43,7 @@ def test_qmlapplicationengine(qtlog):
         path = pathlib.Path.cwd() / "tests" / "qmltest.qml"
         engine.load_data(path.read_text())
 
-@pytest.mark.skipif(
-    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
-    reason="Segmentation fault",
-)
+
 def test_qmlcomponent():
     comp = qml.QmlComponent()
     assert comp.get_status() == "null"

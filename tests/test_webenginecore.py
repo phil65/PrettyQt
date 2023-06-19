@@ -1,9 +1,7 @@
 """Tests for `prettyqt` package."""
 
 import pytest
-import sys
 
-import prettyqt
 from prettyqt import core, webenginecore
 from prettyqt.utils import InvalidParamError
 
@@ -67,10 +65,7 @@ def test_webenginescriptcollection():
         pass
     assert item["test"] == script
 
-@pytest.mark.skipif(
-    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
-    reason="Segmentation fault",
-)
+
 def test_webenginesettings(qapp):
     page = webenginecore.WebEnginePage()
     settings = page.get_settings()
@@ -90,10 +85,7 @@ def test_webenginesettings(qapp):
         settings.set_font_size("test", "test")
     assert settings.get_font_size("default_fixed") == 14
 
-@pytest.mark.skipif(
-    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
-    reason="Segmentation fault",
-)
+
 def test_webenginehistory():
     page = webenginecore.WebEnginePage()
     history = page.get_history()
