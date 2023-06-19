@@ -10,6 +10,47 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, listdelegators
 
 
+# @contxtlib.contextmanager
+# def get_sub_layout(
+#     self,
+#     sub_container: str,
+#     parent: widgets.Widget | QtWidgets.QLayout,
+#     orientation: constants.OrientationStr | None = None,
+#     stretch: int | None = None,
+#     **kwargs,
+# ):
+#     match sub_container:
+#         case "scroll":
+#             scroller = widgets.ScrollArea(parent=parent)
+#             scroller.setWidgetResizable(True)
+#             widget = widgets.Widget(scroller)
+#             scroller.set_widget(widget)
+#             return widget.set_layout(orientation, **kwargs)
+#         case "splitter":
+#             return widgets.Splitter(orientation=orientation, parent=parent, **kwargs)
+#         case "groupbox":
+#             frame = widgets.GroupBox(parent=parent, **kwargs)
+#             return frame.set_layout(orientation or "horizontal")
+#         case "mainwindow":
+#             return widgets.MainWindow(parent=parent)
+#         case _:
+#             from prettyqt import custom_widgets
+#             CONTEXT_LAYOUTS = dict(
+#                 horizontal=widgets.HBoxLayout,
+#                 vertical=widgets.VBoxLayout,
+#                 grid=widgets.GridLayout,
+#                 form=widgets.FormLayout,
+#                 stacked=widgets.StackedLayout,
+#                 flow=custom_widgets.FlowLayout,
+#                 border=custom_widgets.BorderLayout,
+#             )
+#             Klass = CONTEXT_LAYOUTS[sub_container]
+#             layout = Klass(**kwargs)
+#             widget = widgets.Widget(parent=parent)
+#             widget.set_layout(layout)
+#             return layout
+
+
 SIZE_CONSTRAINT = bidict(
     default=QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint,
     fixed=QtWidgets.QLayout.SizeConstraint.SetFixedSize,

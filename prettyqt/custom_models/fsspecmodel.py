@@ -157,6 +157,146 @@ ATTR_MODEL_SHA = FsSpecColumnItem(
     label=lambda x: x.obj.get("sha") or "",
 )
 
+
+# @dataclass  # (frozen=True)
+# class FsSpecColumnItem(custom_models.ColumnItem):
+#     identifier: str = ""
+
+#     def get_data(self, item, role):
+#         match role:
+#             case FSSpecTreeModel.Roles.FilePathRole:
+#                 return item.obj["name"]
+#             case FSSpecTreeModel.Roles.FilePathRole:
+#                 return get_filename(item.obj["name"])
+#             case FSSpecTreeModel.Roles.FilePermissions:
+#                 return self.model.permissions(item.obj["name"])
+#             case FSSpecTreeModel.Roles.ProtocolPathRole:
+#                 return self.model.get_protocol_path(item.obj["name"])
+
+
+# class NameColumn(FsSpecColumnItem):
+#     identifier = "name"
+#     name = "Name"
+#     doc = "File name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return pathlib.Path(path).name if (path := item.obj["name"]) else ""
+#             case constants.DECORATION_ROLE:
+#                 return _icon_provider.get_icon(core.FileInfo(item.obj["name"]))
+#             case _:
+#                 return super().get_data(item, role)
+
+#     def set_data(self, item, value, role):
+#         match role:
+#             case constants.EDIT_ROLE:
+#                 item.set_name(value)
+
+
+# class PathColumn(FsSpecColumnItem):
+#     identifier = "path"
+#     name = "Path"
+#     doc = "File path"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj["name"] or ""
+#             case _:
+#                 return super().get_data(item, role)
+
+
+# class SizeColumn(FsSpecColumnItem):
+#     identifier = "size"
+#     name = "Size"
+#     doc = "File size."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 if item.obj["size"] > 0:
+#                     return loc.get_formatted_data_size(item.obj["size"])
+#                 else:
+#                     return ""
+#             case constants.SORT_ROLE:
+#                 return item.obj["size"]
+
+
+# class TypeColumn(FsSpecColumnItem):
+#     identifier = "type"
+#     name = "Type"
+#     doc = "Type of given path."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj["type"] or ""
+
+
+# class CreatedColumn(FsSpecColumnItem):
+#     identifier = "created"
+#     name = "Created"
+#     doc = "Creation date of file."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 if item.obj.get("created"):
+#                     return datetime.datetime.fromtimestamp(item.obj["created"])
+#                 else:
+#                     return ""
+
+
+# class ModifiedColumn(FsSpecColumnItem):
+#     identifier = "mtime"
+#     name = "Modified"
+#     doc = "Modified"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 if item.obj.get("mtime"):
+#                     return datetime.datetime.fromtimestamp(item.obj["mtime"])
+#                 else:
+#                     return ""
+
+
+# class PermissionsColumn(FsSpecColumnItem):
+#     identifier = "mode"
+#     name = "Permissions"
+#     doc = "File Permissions"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 if item.obj.get("mode"):
+#                     return oct(int(x.obj["mode"]))[-4:]
+#                 else:
+#                     return ""
+
+# class IsLinkColumn(FsSpecColumnItem):
+#     identifier = "mode"
+#     name = "Is link"
+#     doc = "Whether file is a symbolic link."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.CHECKSTATE_ROLE:
+#                 return item.obj.get("islink") or False
+
+
+# class ShaColumn(FsSpecColumnItem):
+#     identifier = "sha"
+#     name = "SHA"
+#     doc = "Hash value."
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return item.obj.get("sha") or ""
+
+
 COLUMNS = [
     ATTR_MODEL_NAME,
     ATTR_MODEL_PATH,

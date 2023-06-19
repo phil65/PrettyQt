@@ -26,6 +26,36 @@ COL_TYPE = custom_models.ColumnItem(
     label=lambda x: repr(x.obj.typ),
 )
 
+
+# class NameColumn(custom_models.ColumnItem):
+#     name="Name"
+#     doc="Name"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return x.obj.key
+
+# class ValueColumn(custom_models.ColumnItem):
+#     name="Value"
+#     doc="Value"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return repr(x.obj.value)
+
+
+# class TypeColumn(custom_models.ColumnItem):
+#     name="Type"
+#     doc="Type"
+
+#     def get_data(self, item, role):
+#         match role:
+#             case constants.DISPLAY_ROLE:
+#                 return repr(x.obj.typ)
+
+
 COLUMNS = [COL_NAME, COL_VALUE, COL_TYPE]
 
 
