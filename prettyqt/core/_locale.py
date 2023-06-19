@@ -690,6 +690,8 @@ class Locale(QtCore.QLocale):
     def get_formatted_data_size(
         self, size: int, precision: int = 2, fmt: DataSizeFormatStr = "iec"
     ) -> str:
+        if size < 0:
+            return ""
         return self.formattedDataSize(size, precision, DATA_SIZE_FORMAT[fmt])
 
     def get_first_day_of_week(self) -> constants.DayOfWeekStr:
