@@ -11,7 +11,7 @@ from .pandastablemodel import (
     VerticalHeaderModel,
     HorizontalHeaderModel,
 )
-from .dataframeevalfilterproxymodel import DataFrameEvalFilterProxyModel
+from .pandasindexfilterproxymodel import PandasEvalFilterModel, PandasStringColumnFilterModel
 
 __all__ = [
     "PandasCategoryListModel",
@@ -21,5 +21,6 @@ __all__ = [
     "DataTableWithHeaderModel",
     "VerticalHeaderModel",
     "HorizontalHeaderModel",
-    "DataFrameEvalFilterProxyModel",
+    "PandasEvalFilterModel",
+    "PandasStringColumnFilterModel",
 ]
