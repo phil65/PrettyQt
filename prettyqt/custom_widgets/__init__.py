@@ -9,6 +9,7 @@ from .collapsibleframe import CollapsibleFrame
 from .clickablelabel import ClickableLabel
 from .orientedtableview import OrientedTableView
 from .hierarchicalheaderview import HierarchicalHeaderView
+from .commandpalette import CommandPalette
 from .filterheader import FilterHeader
 from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit
 from .editors.keycombinationedit import KeyCombinationEdit
@@ -72,6 +73,7 @@ __all__ = [
     "CollapsibleFrame",
     "CompletionWidget",
     "ExpandableLine",
+    "CommandPalette",
     "ClickableLabel",
     "OrientedTableView",
     "FilterHeader",

@@ -10,7 +10,7 @@ class ColumnView(widgets.AbstractItemViewMixin, QtWidgets.QColumnView):
 
 if __name__ == "__main__":
     app = widgets.app()
-    dlg = widgets.MainWindow()
-    status_bar = ColumnView()
-    dlg.show()
+    view = ColumnView()
+    view.parent()
+    view.show()
     app.main_loop()

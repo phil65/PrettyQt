@@ -104,24 +104,16 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     def __init__(
         self,
         icon: datatypes.IconType | IconStr = None,
-        title: str = "",
-        text: str = "",
-        informative_text: str = "",
-        details: str = "",
         buttons: list[StandardButtonStr] | None = None,
-        parent: QtWidgets.QWidget | None = None,
+        **kwargs
     ):
-        super().__init__(parent)
+        super().__init__(**kwargs)
         self.set_icon(icon)
-        self.setText(text)
-        self.setInformativeText(informative_text)
-        self.setWindowTitle(title)
         self.setWindowFlags(
             QtCore.Qt.WindowType.Dialog
             | QtCore.Qt.WindowType.WindowTitleHint
             | QtCore.Qt.WindowType.CustomizeWindowHint
         )
-        self.setDetailedText(details)
         if isinstance(buttons, list):
             for b in buttons:
                 self.add_button(b)

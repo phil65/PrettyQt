@@ -6,7 +6,7 @@ import os
 import html
 import pathlib
 import sys
-from typing import TYPE_CHECKING, Literal, overload
+from typing import TYPE_CHECKING, Any, Literal, overload
 
 from collections.abc import Sequence
 
@@ -108,7 +108,7 @@ class WidgetMixin(core.ObjectMixin):
         self,
         text: str | gui.Action,
         parent: QtWidgets.QWidget | None = None,
-        data=None,
+        data: Any = None,
         **kwargs,
     ) -> gui.Action:
         """Add an action to the menu.

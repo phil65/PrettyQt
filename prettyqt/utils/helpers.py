@@ -63,7 +63,6 @@ def is_position_in_index(x: int, y: int, index) -> bool:
 
 
 def find_common_ancestor(cls_list: list[type]) -> type:
-    # would be much nicer
     mros = [list(inspect.getmro(cls)) for cls in cls_list]
     track = defaultdict(int)
     while mros:
@@ -84,6 +83,10 @@ def find_common_ancestor(cls_list: list[type]) -> type:
 def yield_positions(
     rows: int | slice, columns: int | slice, num_rows: int, num_columns: int
 ) -> typing.Iterator[tuple[int, int]]:
+    """Yields all x-y pairs for given row/column indexers.
+
+    If indexer is slice without a defined stop, num_rows/num_columns is used for capping.
+    """
     match (rows, columns):
         case slice() as row, slice() as col:
             rowcount = num_rows if row.stop is None else row.stop

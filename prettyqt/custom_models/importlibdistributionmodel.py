@@ -151,6 +151,10 @@ class LicenseColumn(custom_models.ColumnItem):
 
 
 class ImportlibTreeModel(custom_models.ColumnItemModel):
+    """Model showing the dependency tree of a distribution.
+
+    Attention: Model can be recursive, so be careful with iterating whole tree.
+    """
     TreeItem = DistTreeItem
 
     COLUMNS = [
