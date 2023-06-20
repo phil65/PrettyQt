@@ -309,6 +309,32 @@ def to_rectf(rect: RectFType | QtCore.QRect):
             raise TypeError(rect)
 
 
+def to_url(url: UrlType | None) -> QtCore.QUrl:
+    match url:
+        case str():
+            return QtCore.QUrl(url)
+        case None:
+            return QtCore.QUrl()
+        case QtCore.QUrl():
+            return url
+        case _:
+            raise TypeError(url)
+
+
+def to_local_url(url: UrlType | os.PathLike | None) -> QtCore.QUrl:
+    match url:
+        case os.PathLike():
+            return QtCore.QUrl.fromLocalFile(str(url))
+        case str():
+            return QtCore.QUrl.fromLocalFile(url)
+        case None:
+            return QtCore.QUrl()
+        case QtCore.QUrl():
+            return url
+        case _:
+            raise TypeError(url)
+
+
 def to_py_pattern(pattern: PatternAndStringType):
     from prettyqt import core
 
