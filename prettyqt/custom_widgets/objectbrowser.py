@@ -153,14 +153,20 @@ class ObjectBrowser(widgets.MainWindow):
         self, current_index: core.ModelIndex, _previous_index: core.ModelIndex
     ):
         """Show the object details in the editor given an index."""
-        tree_item = current_index.data(constants.USER_ROLE)
+        if self.obj_tree.model() is None:
+            return
+        role = self.obj_tree.get_model(skip_proxies=True).TreeItemRole
+        tree_item = current_index.data(role)
         self._update_details_for_item(tree_item)
 
     def _change_details_field(self, _button_id=None):
         """Change the field that is displayed in the details pane."""
         # logger.debug("_change_details_field: {}".format(_button_id))
+        if self.obj_tree.get_model(skip_proxies=True) is None:
+            return
         current_index = self.obj_tree.selectionModel().currentIndex()
-        tree_item = current_index.data(constants.USER_ROLE)
+        role = self.obj_tree.get_model(skip_proxies=True).TreeItemRole
+        tree_item = current_index.data(role)
         self._update_details_for_item(tree_item)
 
     def _update_details_for_item(self, tree_item):

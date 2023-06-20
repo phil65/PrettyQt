@@ -69,6 +69,9 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
+    TreeItemRole = constants.USER_ROLE + 43435
+    ColumnItemRole = constants.USER_ROLE + 43436
+
     def set_columns(self, columns: Sequence[type[ColumnItem]]):
         self._attr_cols = [Col(model=self) for Col in columns]
 
@@ -81,7 +84,13 @@ class ColumnItemModelMixin:
         col = index.column()
         tree_item = self.data_by_index(index)
         col_item = self._attr_cols[col]
-        return col_item.get_data(tree_item, role)
+        match role:
+            case self.TreeItemRole:
+                return tree_item
+            case self.ColumnItemRole:
+                return col_item
+            case _:
+                return col_item.get_data(tree_item, role)
 
     def setData(
         self,
