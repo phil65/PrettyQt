@@ -155,7 +155,7 @@ class ObjectBrowser(widgets.MainWindow):
         """Show the object details in the editor given an index."""
         if self.obj_tree.model() is None or not current_index.isValid():
             return
-        role = self.obj_tree.get_model(skip_proxies=True).TreeItemRole
+        role = self.obj_tree.get_model(skip_proxies=True).Roles.TreeItemRole
         tree_item = current_index.data(role)
         self._update_details_for_item(tree_item)
 
@@ -167,7 +167,7 @@ class ObjectBrowser(widgets.MainWindow):
         current_index = self.obj_tree.selectionModel().currentIndex()
         if not current_index.isValid():
             return
-        role = self.obj_tree.get_model(skip_proxies=True).TreeItemRole
+        role = self.obj_tree.get_model(skip_proxies=True).Roles.TreeItemRole
         tree_item = current_index.data(role)
         self._update_details_for_item(tree_item)
 

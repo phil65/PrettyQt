@@ -57,7 +57,8 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
 
     def set_search_term(self, search_term: str):
         self._search_term = search_term
-        self.invalidate()
+        super().set_search_term(search_term)
+        # self.invalidateRowsFilter()
 
     def get_search_term(self):
         return self._search_term
@@ -153,49 +154,48 @@ class FuzzyCompleter(widgets.Completer):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-    from prettyqt.custom_models import JsonModel
+    from prettyqt import custom_widgets
+    import random
+    import string
 
     app = widgets.app()
-    dist = [
-        dict(
-            assss=2,
-            bffff={
-                "a": 4,
-                "b": [1, 2, 3],
-                "jkjkjk": "tekjk",
-                "sggg": "tekjk",
-                "fdfdf": "tekjk",
-                "xxxx": "xxx",
-            },
+    window = widgets.MainWindow()
+    pal = custom_widgets.CommandPalette()
+    actions = [
+        gui.Action(
+            text="super duper action",
+            shortcut="Ctrl+A",
+            tool_tip="some Tooltip text",
+            icon="mdi.folder",
+            triggered=lambda: print("test"),
         ),
-        6,
-        "jkjk",
+        gui.Action(
+            text="this is an action",
+            shortcut="Ctrl+B",
+            tool_tip="Tooltip",
+            icon="mdi.folder-outline",
+            checked=True,
+            checkable=True,
+        ),
+        gui.Action(
+            text="another one P",
+            shortcut="Ctrl+Alt+A",
+            tool_tip="Some longer tooltiPpp",
+            icon="mdi.folder",
+        ),
+        gui.Action(
+            text="another onpe P",
+            shortcut="Ctrl+Alt+A",
+            tool_tip="Some longer tooltiPpp",
+            icon="mdi.folder",
+        ),
+        gui.Action(text="a", shortcut="Ctrl+A", tool_tip="Tooltip", icon="mdi.folder"),
     ]
-
-    _source_model = JsonModel(dist)
-    model = FuzzyFilterProxyModel()
-    model.setFilterKeyColumn(1)
-    cb = widgets.ComboBox()
-    completer = FuzzyCompleter(cb)
-    cb.setCompleter(completer)  #
-    completer.set_strings(["Lola", "Lila", "Cola", "Lothian"])
-    # cb.setModel(model)
-    # cb.comp.setModel(model)
-    # model.set_search_term("tj")
-    model.setSourceModel(_source_model)
-    widget = widgets.Widget()
-    widget.set_layout("vertical")
-    lineedit = widgets.LineEdit()
-    lineedit.value_changed.connect(model.set_search_term)
-    table = widgets.TreeView()
-    table.set_delegate("html", column=1)
-    table.setRootIsDecorated(True)
-    # table.setSortingEnabled(True)
-    table.set_model(model)
-    widget.box.add(cb)
-    widget.box.add(lineedit)
-    widget.box.add(table)
-    widget.show()
+    pal.populate_from_widget(window)
+    pal.add_actions(actions)
+    for _ in range(500):
+        label = "".join(random.choices(string.ascii_uppercase, k=10))
+        pal.add_actions([gui.Action(text=label)])
+    pal.show()
     with app.debug_mode():
         app.main_loop()

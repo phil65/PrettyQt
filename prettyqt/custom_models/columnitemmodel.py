@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Iterable, Sequence
+import enum
 import logging
 from typing import Any
 
@@ -69,8 +70,10 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
-    TreeItemRole = constants.USER_ROLE + 43435
-    ColumnItemRole = constants.USER_ROLE + 43436
+    class Roles(enum.IntEnum):
+        """Addional roles."""
+        TreeItemRole = constants.USER_ROLE + 43435
+        ColumnItemRole = constants.USER_ROLE + 43436
 
     def set_columns(self, columns: Sequence[type[ColumnItem]]):
         self._attr_cols = [Col(model=self) for Col in columns]
@@ -85,9 +88,9 @@ class ColumnItemModelMixin:
         tree_item = self.data_by_index(index)
         col_item = self._attr_cols[col]
         match role:
-            case self.TreeItemRole:
+            case self.Roles.TreeItemRole:
                 return tree_item
-            case self.ColumnItemRole:
+            case self.Roles.ColumnItemRole:
                 return col_item
             case _:
                 return col_item.get_data(tree_item, role)
