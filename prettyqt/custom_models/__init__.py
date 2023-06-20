@@ -42,8 +42,9 @@ from .widgethierarchymodel import WidgetHierarchyModel, LayoutHierarchyModel
 
 # Proxies
 
-from .multicolumnfilterproxymodel import MultiColumnFilterProxyModel
 from .sliceidentityproxymodel import SliceIdentityProxyModel
+from .slicechangeiconsizeproxymodel import SliceChangeIconSizeProxyModel
+from .multicolumnfilterproxymodel import MultiColumnFilterProxyModel
 from .slicefilterproxymodel import SliceFilterProxyModel
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
@@ -93,6 +94,7 @@ __all__ = [
     "WidgetHierarchyModel",
     "LayoutHierarchyModel",
     "WidgetsDetailsModel",
+    "SliceChangeIconSizeProxyModel",
     "MultiColumnFilterProxyModel",
     "SliceIdentityProxyModel",
     "SliceFilterProxyModel",
