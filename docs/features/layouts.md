@@ -39,18 +39,43 @@ Layouts
 
 ### Setting a layout
 
-Layouts can be set by an identifier:
+Layouts can be also be set by an identifier:
 
     layout = widget.set_layout("horizontal")
+    # equals
+    layout = widgets.HBoxLayout()
+    widget.set_layout(layout)
 
 Available layouts:
-- "horizontal"
-- "vertical"
-- "grid"
-- "horizontal"
-- "horizontal"
-- "horizontal"
-- "horizontal"
-- "horizontal"
-- "horizontal"
+
+- Qt layouts:
+    - "horizontal"
+    - "vertical"
+    - "grid"
+    - "form"
+    - "stacked"
+
+
+- custom layouts:
+    - "multiline"
+    - "border"
+    - "flow"
+
+### Accessing widgets inside a layout
+
+All layouts support slicing, including the possibility to apply batch operations:
+
+    widgets = layout[:4]  # take the first 4 widgets
+    widgets = layout[::2] # take every second widget
+
+    widgets[2:8:2].set_visible(False)  # hide widgets with index 2, 4, 6, 8
+    sizes = widgets[5:].size()  # returns a list with the sizes of widget with index 5 and following.
+
+
+As shown, operations on slices are forwarded to each slice member. No need to loop over the whole layout.
+
+The same principles also apply to splitters, toolboxes and tabwidgets.
+
+    splitter[2:5].set_font("Consolas")
+
 

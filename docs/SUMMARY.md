@@ -29,6 +29,11 @@
     * [widgets](api/widgets.md)
 * Highlights
     * [models](features/models.md)
+    * [layouts](features/layouts.md)
+    * [models](features/models.md)
+    * [animating](features/animating.md)
+    * [widgets](features/widgets.md)
+    * [validators](features/validators.md)
 * [Changelog](changelog.md)
 <!--
         # - scintilla: api/scintilla.md
