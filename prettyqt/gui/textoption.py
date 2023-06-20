@@ -46,7 +46,19 @@ FlagStr = Literal[
 
 
 class TextOption(QtGui.QTextOption):
-    pass
+    def set_flags(self, **flags):
+        current = self.flags()
+        for k, v in flags.items():
+            if v:
+                current |= FLAG[k]
+            else:
+                current &= ~FLAG[k]
+        self.setFlags(current)
+        # if show:
+        #     self.setFlags(self.flags() | QtGui.QTextOption.ShowTabsAndSpaces)
+        # else:
+        #     self.setFlags(self.flags() & ~QtGui.QTextOption.ShowTabsAndSpaces)
+
 
 
 if __name__ == "__main__":

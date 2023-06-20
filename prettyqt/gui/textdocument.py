@@ -112,19 +112,6 @@ class TextDocumentMixin(core.ObjectMixin):
     def get_default_text_option(self) -> gui.TextOption:
         return gui.TextOption(self.defaultTextOption())
 
-    def set_flags(self, **flags):
-        current = self.flags()
-        for k, v in flags.items():
-            if v:
-                current |= gui.textoption.FLAG[k]
-            else:
-                current &= ~gui.textoption.FLAG[k]
-        self.setFlags(current)
-        # if show:
-        #     self.setFlags(self.flags() | QtGui.QTextOption.ShowTabsAndSpaces)
-        # else:
-        #     self.setFlags(self.flags() & ~QtGui.QTextOption.ShowTabsAndSpaces)
-
     def clear_stacks(self, stack: StackStr):
         """Clear undo / redo stack.
 
