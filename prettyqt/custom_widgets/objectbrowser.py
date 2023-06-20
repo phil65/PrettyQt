@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, core, custom_models, gui, widgets
+from prettyqt import constants, core, custom_models, custom_widgets,  gui, widgets
 from prettyqt.custom_models.pythonobjecttreemodel import (
     CommentsColumn,
     DocStringColumn,
@@ -32,48 +32,6 @@ DEFAULT_ATTR_DETAILS = [
 logger = logging.getLogger(__name__)
 
 
-
-class ObjectBrowserTreeProxyModel(core.SortFilterProxyModel):
-    """Proxy model that overrides the sorting and can filter out items."""
-
-    def __init__(
-        self, show_callable_attrs: bool = True, show_special_attrs: bool = True, **kwargs
-    ):
-        super().__init__(**kwargs)
-
-        self._show_callables = show_callable_attrs
-        self._show_special_attrs = show_special_attrs
-
-    def data_by_index(self, proxy_index: core.ModelIndex):
-        index = self.mapToSource(proxy_index)
-        return self.get_source_model().data_by_index(index)
-
-    def filterAcceptsRow(self, source_row: int, source_parent_index: core.ModelIndex):
-        """Return true if the item should be included in the model."""
-        parent_item = self.get_source_model().data_by_index(source_parent_index)
-        tree_item = parent_item.child(source_row)
-        is_callable_attr = tree_item.is_attribute and callable(tree_item.obj)
-        return (self._show_special_attrs or not tree_item.is_special_attribute) and (
-            self._show_callables or not is_callable_attr
-        )
-
-    def get_show_callables(self) -> bool:
-        return self._show_callables
-
-    def set_show_callables(self, show_callables: bool):
-        """Show/hide show_callables which have a __call__ attribute."""
-        self._show_callables = show_callables
-        self.invalidateRowsFilter()
-
-    def get_show_special_attrs(self) -> bool:
-        return self._show_special_attrs
-
-    def set_show_special_attrs(self, show_special_attrs: bool):
-        """Show/hide special attributes which begin with an underscore."""
-        self._show_special_attrs = show_special_attrs
-        self.invalidateRowsFilter()
-
-
 class ObjectBrowser(widgets.MainWindow):
     """Object browser main application window."""
 
@@ -83,51 +41,11 @@ class ObjectBrowser(widgets.MainWindow):
         self.set_icon("mdi.language-python")
         self._auto_refresh = False
         self._refresh_rate = 2
-        show_callable_attrs = True
-        show_special_attrs = True
         self._tree_model = custom_models.PythonObjectTreeModel(obj)
         self._attr_details = [
             Klass(model=self._tree_model) for Klass in DEFAULT_ATTR_DETAILS
         ]
-        # proxy = self._tree_model.proxifier.modify(
-        #     fn=lambda x: SPECIAL_ATTR_FONT,
-        #     role=constants.FONT_ROLE,
-        #     selector=lambda x: x.startswith("__") and x.endswith("__"),
-        #     selector_role=constants.DISPLAY_ROLE
-        # )
 
-        self._proxy_tree_model = ObjectBrowserTreeProxyModel(
-            show_callable_attrs=show_callable_attrs,
-            show_special_attrs=show_special_attrs,
-            dynamic_sort_filter=True,
-        )
-
-        self._proxy_tree_model.setSourceModel(self._tree_model)
-        # self._proxy_tree_model.setSortRole(constants.SORT_ROLE)
-        # self._proxy_tree_model.setSortCaseSensitivity(Qt.CaseInsensitive)
-
-        self.toggle_callable_action = gui.Action(
-            text="Show callable attributes",
-            parent=self,
-            checkable=True,
-            shortcut="Alt+C",
-            status_tip="Shows/hides callable attributes (functions, methods, etc.)",
-        )
-        self.toggle_callable_action.toggled.connect(
-            self._proxy_tree_model.set_show_callables
-        )
-
-        # Show/hide special attributes
-        self.toggle_special_attribute_action = gui.Action(
-            text="Show __special__ attributes",
-            parent=self,
-            checkable=True,
-            shortcut="Alt+S",
-            status_tip="Shows or hides __special__ attributes",
-        )
-        self.toggle_special_attribute_action.toggled.connect(
-            self._proxy_tree_model.set_show_special_attrs
-        )
 
         # Toggle auto-refresh on/off
         self.toggle_auto_refresh_action = gui.Action(
@@ -154,7 +72,8 @@ class ObjectBrowser(widgets.MainWindow):
         self.obj_tree = widgets.TreeView(
             root_is_decorated=True, selection_behavior="rows"
         )
-        self.obj_tree.set_model(self._proxy_tree_model)
+        self.obj_tree.set_model(self._tree_model)
+        self.obj_tree.h_header = custom_widgets.FilterHeader(self.obj_tree)
 
         # Stretch last column?
         # It doesn't play nice when columns are hidden and then shown again.
@@ -222,38 +141,26 @@ class ObjectBrowser(widgets.MainWindow):
         self.show_cols_submenu.setTitle("Table columns")
         view_menu.add_menu(self.show_cols_submenu)
         view_menu.addSeparator()
-        view_menu.addAction(self.toggle_callable_action)
-        view_menu.addAction(self.toggle_special_attribute_action)
 
         assert self._refresh_rate > 0
         self._refresh_timer = core.Timer(self)
         self._refresh_timer.setInterval(self._refresh_rate * 1000)
         self._refresh_timer.timeout.connect(self._tree_model.refresh_tree)
-
-        # Update views with model
-        self.toggle_special_attribute_action.setChecked(show_special_attrs)
-        self.toggle_callable_action.setChecked(show_callable_attrs)
         self.toggle_auto_refresh_action.setChecked(self._auto_refresh)
-
-        # Select first row so that a hidden root node will not be selected.
-        first_row_index = self._proxy_tree_model.first_item_index()
-        self.obj_tree.setCurrentIndex(first_row_index)
-        if self._tree_model.show_root:
-            self.obj_tree.expand(first_row_index)
 
     @core.Slot(core.ModelIndex, core.ModelIndex)
     def _update_details(
         self, current_index: core.ModelIndex, _previous_index: core.ModelIndex
     ):
         """Show the object details in the editor given an index."""
-        tree_item = self._proxy_tree_model.data_by_index(current_index)
+        tree_item = current_index.data(constants.USER_ROLE)
         self._update_details_for_item(tree_item)
 
     def _change_details_field(self, _button_id=None):
         """Change the field that is displayed in the details pane."""
         # logger.debug("_change_details_field: {}".format(_button_id))
         current_index = self.obj_tree.selectionModel().currentIndex()
-        tree_item = self._proxy_tree_model.data_by_index(current_index)
+        tree_item = current_index.data(constants.USER_ROLE)
         self._update_details_for_item(tree_item)
 
     def _update_details_for_item(self, tree_item):
@@ -279,12 +186,6 @@ class ObjectBrowser(widgets.MainWindow):
         logger.debug("closeEvent")
         self._refresh_timer.stop()
         self._refresh_timer.timeout.disconnect(self._tree_model.refresh_tree)
-        self.toggle_callable_action.toggled.disconnect(
-            self._proxy_tree_model.set_show_callables
-        )
-        self.toggle_special_attribute_action.toggled.disconnect(
-            self._proxy_tree_model.set_show_special_attrs
-        )
         self.toggle_auto_refresh_action.toggled.disconnect(self.toggle_auto_refresh)
         self.refresh_action_f5.triggered.disconnect(self._tree_model.refresh_tree)
         self.button_group.buttonClicked.disconnect(self._change_details_field)
