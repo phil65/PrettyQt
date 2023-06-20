@@ -165,7 +165,12 @@ class WidgetHierarchyModel(custom_models.TreeModel):
 class LayoutHierarchyModel(WidgetHierarchyModel):
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         match item.obj:
-            case QtWidgets.QSplitter():
+            case (
+                QtWidgets.QSplitter()
+                | QtWidgets.QToolBox()
+                | QtWidgets.QStackedWidget()
+                | QtWidgets.QTabWidget()
+            ):
                 items = [item.obj.widget(i) for i in range(item.obj.count())]
             case QtWidgets.QWidget():
                 layout = item.obj.layout()
