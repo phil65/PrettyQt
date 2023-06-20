@@ -19,6 +19,7 @@ eggs/
 lib/
 lib64/
 parts/
+.ruff_cache/
 sdist/
 junit/
 var/
