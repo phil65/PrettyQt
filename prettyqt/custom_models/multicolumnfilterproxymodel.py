@@ -29,6 +29,7 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
     def __init__(self, parent=None, **kwargs):
         super().__init__(parent, **kwargs)
         self._filters: dict[int, Filter] = {}
+        self.setRecursiveFilteringEnabled(True)
 
     def clear_filters(self):
         self._filters = {}
@@ -69,11 +70,12 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
                         )
                     ):
                         return False
-                    if self.is_filter_case_sensitive():
-                        search_val = search_val.lower()
-                        data = data.lower()
-                    if not search_val.startswith(data):
-                        return False
+                    else:
+                        if self.is_filter_case_sensitive():
+                            search_val = search_val.lower()
+                            data = data.lower()
+                        if not data.startswith(search_val):
+                            return False
                 case _:
                     if data != search_val:
                         return False
