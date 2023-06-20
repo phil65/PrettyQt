@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from typing import Literal
 import logging
 import os
 
@@ -7,6 +8,9 @@ from qtconsole.rich_jupyter_widget import RichJupyterWidget
 
 from prettyqt import core, gui, widgets
 
+CompletionmodeStr = Literal["droplist", "plain", "ncurses"]
+PagingStr = Literal["inside", "hsplit", "vsplit", "custom", "none"]
+KindStr = Literal["plain", "rich"]
 
 # disables 'Please pass -Xfrozen_modules=off' warning
 os.environ["PYDEVD_DISABLE_FILE_VALIDATION"] = "1"
@@ -37,6 +41,12 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
             self.adjust_style_to_palette
         )
         self.adjust_style_to_palette()
+
+    def set_completion_mode(self, mode: CompletionmodeStr):
+        self._set_completion_widget(mode)
+
+    def get_completion_mode(self) -> CompletionmodeStr:
+        return self.gui_completion
 
     @property
     def texteditor(self) -> widgets.QPlainTextEdit:  # to shut up linters
@@ -110,6 +120,7 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
         self.code_executed.emit(source)
         return None
 
+    completion_mode = core.Property(str, get_completion_mode, set_completion_mode)
 
 if __name__ == "__main__":
     from prettyqt.custom_widgets import commandpalette

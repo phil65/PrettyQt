@@ -66,6 +66,6 @@ if __name__ == "__main__":
     console_widget.print_text("hallo")
     console_widget.show()
     console_widget.evaluated.connect(print)
-    app.sleep(5)
-    console_widget.clear()
-    app.main_loop()
+    console_widget.completion_mode = "ncurses"
+    with app.debug_mode():
+        app.main_loop()
