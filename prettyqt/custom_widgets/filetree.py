@@ -94,7 +94,9 @@ class FileExplorer(widgets.Widget):
         self._file_tree = FileTree(self)
         self.tool_bar = BreadCrumbsToolBar(self)
 
-        self._file_tree.selectionModel().currentChanged.connect(self._on_current_changed)
+        self._file_tree.selectionModel().currentRowChanged.connect(
+            self._on_current_changed
+        )
         self.tool_bar.path_clicked.connect(self._on_breadcrumbs_clicked)
         self._file_edit.value_changed.connect(self._update_root)
 

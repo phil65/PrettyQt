@@ -107,7 +107,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
         self.hierarchyview.set_model(model)
         self.hierarchyview.h_header = filterheader.FilterHeader(self.hierarchyview)
         self.hierarchyview.expandAll()
-        self.hierarchyview.selectionModel().currentChanged.connect(self._current_changed)
+        self.hierarchyview.selectionModel().currentRowChanged.connect(self._current_changed)
 
         logtable = widgets.TableView()
         model = logrecordmodel.LogRecordModel(logging.getLogger(), parent=logtable)

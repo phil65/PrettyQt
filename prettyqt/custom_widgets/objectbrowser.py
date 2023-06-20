@@ -120,7 +120,7 @@ class ObjectBrowser(widgets.MainWindow):
         self.central_splitter.setStretchFactor(1, 0)
 
         selection_model = self.obj_tree.selectionModel()
-        selection_model.currentChanged.connect(self._update_details)
+        selection_model.currentRowChanged.connect(self._update_details)
         menubar = self.menuBar()
         file_menu = menubar.add_menu("&File")
         file_menu.add_action(text="C&lose", triggered=self.close, shortcut="Ctrl+W")
@@ -183,14 +183,13 @@ class ObjectBrowser(widgets.MainWindow):
 
     def closeEvent(self, event):
         """Called when the window is closed."""
-        logger.debug("closeEvent")
         self._refresh_timer.stop()
         self._refresh_timer.timeout.disconnect(self._tree_model.refresh_tree)
         self.toggle_auto_refresh_action.toggled.disconnect(self.toggle_auto_refresh)
         self.refresh_action_f5.triggered.disconnect(self._tree_model.refresh_tree)
         self.button_group.buttonClicked.disconnect(self._change_details_field)
         selection_model = self.obj_tree.selectionModel()
-        selection_model.currentChanged.disconnect(self._update_details)
+        selection_model.currentRowChanged.disconnect(self._update_details)
         self.close()
         event.accept()
 

@@ -143,7 +143,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
         self.proxy.set_filter_case_sensitive(False)
         self.show_root(False)
         widget.widget().installEventFilter(self)
-        self.selectionModel().currentChanged.connect(self._on_current_change)
+        self.selectionModel().currentRowChanged.connect(self._on_current_change)
         self.selectionModel().selectionChanged.connect(self._on_selection_change)
         # if self._expand_mode == "always":
         self.expandAll()
@@ -173,7 +173,7 @@ class ScrollAreaTocWidget(widgets.TreeView):
         if not visible_widgets or visible_widgets == self._last_visible:
             return
         self._last_visible = visible_widgets
-        sig = self.selectionModel().currentChanged
+        sig = self.selectionModel().currentRowChanged
         with self.signal_blocked(sig, self._on_current_change):
             self.select_index(None)
             if self._expand_mode != "always":

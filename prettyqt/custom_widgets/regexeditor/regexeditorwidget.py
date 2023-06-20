@@ -116,7 +116,7 @@ class RegexEditorWidget(widgets.Widget):
                 model = custom_models.RegexMatchesModel(self.matches)
                 self.table_matches.set_model(model)
                 sel_model = self.table_matches.selectionModel()
-                sel_model.currentChanged.connect(self.on_match_list_current_change)
+                sel_model.currentRowChanged.connect(self.on_match_list_current_change)
                 spans = [m.span() for m in self.matches]
                 self._highlighter.set_spans(spans)
         self.update_sub_textedit()

@@ -12,7 +12,7 @@ class DataFrameManagerWidget(widgets.Splitter):
         super().__init__(object_name=object_name, **kwargs)
         self.dataframe_list = pandaswidgets.DataFrameListWidget()
         self.dataframe_editor = pandaswidgets.DataFrameWidget()
-        self.dataframe_list.selectionModel().currentChanged.connect(
+        self.dataframe_list.selectionModel().currentRowChanged.connect(
             self._on_current_change
         )
         self.add(self.dataframe_list)
