@@ -239,4 +239,4 @@ if __name__ == "__main__":
     table.set_model(proxy)
     container.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

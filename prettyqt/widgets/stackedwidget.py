@@ -67,4 +67,4 @@ if __name__ == "__main__":
     for i in stackedwidget:
         print(i)
     stackedwidget.show()
-    app.main_loop()
+    app.exec()

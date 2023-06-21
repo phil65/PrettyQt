@@ -330,4 +330,4 @@ if __name__ == "__main__":
     widget.set_icon(icon)
     widget.set_icon_size(100)
     widget.show()
-    app.main_loop()
+    app.exec()

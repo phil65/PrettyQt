@@ -199,4 +199,4 @@ if __name__ == "__main__":
         pal.add_actions([gui.Action(text=label)])
     pal.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

@@ -360,4 +360,4 @@ if __name__ == "__main__":
     menu.add_action(action)
     form.menuBar().add_menu(menu)
     form.show()
-    app.main_loop()
+    app.exec()

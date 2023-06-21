@@ -37,4 +37,4 @@ if __name__ == "__main__":
     img = widgets.RadioButton("test")
     widget = OptionalWidget(img, "Test")
     widget.show()
-    app.main_loop()
+    app.exec()

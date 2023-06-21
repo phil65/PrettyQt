@@ -96,4 +96,4 @@ if __name__ == "__main__":
     slider.valueChanged.connect(lambda x: widget.set_blend_factor(x / 100))
     container.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

@@ -40,4 +40,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = KeySequenceEdit()
     widget.show()
-    app.main_loop()
+    app.exec()

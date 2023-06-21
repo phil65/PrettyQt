@@ -123,4 +123,4 @@ if __name__ == "__main__":
     view.resize(1000, 1000)
     view.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

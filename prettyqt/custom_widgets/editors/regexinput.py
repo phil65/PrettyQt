@@ -112,4 +112,4 @@ if __name__ == "__main__":
     widget = RegexInput(show_flags=True, show_error=True)
     widget.show()
     widget.value_changed.connect(print)
-    app.main_loop()
+    app.exec()

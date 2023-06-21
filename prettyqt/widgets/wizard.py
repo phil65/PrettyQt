@@ -329,4 +329,4 @@ if __name__ == "__main__":
     dlg.set_custom_button(2, "2", lambda: print("2"))
     dlg.set_custom_button(3, "3", lambda: print("3"))
     dlg.show()
-    app.main_loop()
+    app.exec()

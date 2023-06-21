@@ -85,4 +85,4 @@ if __name__ == "__main__":
     table.proxifier.get_proxy("table_to_list")
     splitter = debugging.proxy_comparer(table.model())
     splitter.show()
-    app.main_loop()
+    app.exec()

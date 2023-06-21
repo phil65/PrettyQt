@@ -60,4 +60,4 @@ if __name__ == "__main__":
     widget = widgets.Widget()
     widget.set_icon(icon)
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -111,4 +111,4 @@ if __name__ == "__main__":
     app = widgets.app()
     style = MaterialIconStyle()
     app.setStyle(style)
-    app.main_loop()
+    app.exec()

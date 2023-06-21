@@ -50,4 +50,4 @@ if __name__ == "__main__":
     btn.show()
     val.apply_to(btn)
     val.start()
-    app.main_loop()
+    app.exec()

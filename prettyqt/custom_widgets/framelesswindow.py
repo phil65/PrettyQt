@@ -424,4 +424,4 @@ if __name__ == "__main__":
     win = FramelessWindow()
     win.setWindowTitle("Thsi is  a tesxt")
     win.show()
-    app.main_loop()
+    app.exec()

@@ -36,7 +36,7 @@ class ColorChooserButton(widgets.Widget):
         if self._current_color:
             dlg.setCurrentColor(self._current_color)
 
-        if dlg.main_loop():
+        if dlg.exec():
             new_color = dlg.current_color()
             self.set_current_color(new_color)
             self.value_changed.emit(new_color)
@@ -63,4 +63,4 @@ if __name__ == "__main__":
     app = widgets.app()
     btn = ColorChooserButton(color=gui.Color("green"))
     btn.show()
-    app.main_loop()
+    app.exec()

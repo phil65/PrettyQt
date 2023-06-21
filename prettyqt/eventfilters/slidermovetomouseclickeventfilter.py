@@ -65,4 +65,4 @@ if __name__ == "__main__":
     eventfilter = SliderMoveToMouseClickEventFilter(widget.v_scrollbar)
     widget.v_scrollbar.installEventFilter(eventfilter)
     widget.show()
-    app.main_loop()
+    app.exec()

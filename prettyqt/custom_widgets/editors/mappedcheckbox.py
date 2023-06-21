@@ -29,5 +29,5 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = MappedCheckBox("Test")
     widget.show()
-    app.main_loop()
+    app.exec()
     print(widget.get_value())

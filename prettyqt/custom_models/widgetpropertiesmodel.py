@@ -179,4 +179,4 @@ if __name__ == "__main__":
         view.show()
         widget.show()
         view.resize(500, 300)
-        app.main_loop()
+        app.exec()

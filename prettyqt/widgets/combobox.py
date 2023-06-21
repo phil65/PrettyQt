@@ -204,4 +204,4 @@ if __name__ == "__main__":
     widget.add("test", data="aa", icon="mdi.timer")
     widget.add("test2", data="aa2", icon="mdi.timer")
     widget.show()
-    app.main_loop()
+    app.exec()

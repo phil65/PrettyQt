@@ -138,4 +138,4 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
 if __name__ == "__main__":
     app = widgets.app()
     result = InputDialog.get_int("a", "b", icon="mdi.timer")
-    app.main_loop()
+    app.exec()

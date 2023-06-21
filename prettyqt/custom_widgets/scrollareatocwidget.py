@@ -282,4 +282,4 @@ if __name__ == "__main__":
             section.box.add(SectionWidget(window_title=f"{i*10}nested"))
             scroll_layout.add(section)
         window.show()
-        app.main_loop()
+        app.exec()

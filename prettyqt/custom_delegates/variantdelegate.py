@@ -114,4 +114,4 @@ if __name__ == "__main__":
     with app.debug_mode():
         delegate = table_widget.set_delegate("variant", column=1, set_edit_role=True)
         delegate.closeEditor.connect(print)
-        app.main_loop()
+        app.exec()

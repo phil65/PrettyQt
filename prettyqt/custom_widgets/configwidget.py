@@ -151,4 +151,4 @@ if __name__ == "__main__":
     widget.add_setting(app_style)
     widget.add_setting(app_style)
     widget.show()
-    app.main_loop()
+    app.exec()

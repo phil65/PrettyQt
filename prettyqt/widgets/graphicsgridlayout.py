@@ -103,4 +103,4 @@ if __name__ == "__main__":
     scene.add(widget)
     view = widgets.GraphicsView(scene)
     view.show()
-    app.main_loop()
+    app.exec()

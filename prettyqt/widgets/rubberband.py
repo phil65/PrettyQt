@@ -53,4 +53,4 @@ if __name__ == "__main__":
     splitter.show()
     rb.track_widget(widget)
     rb.show()
-    app.main_loop()
+    app.exec()

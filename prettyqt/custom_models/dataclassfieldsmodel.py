@@ -113,4 +113,4 @@ if __name__ == "__main__":
         view.set_delegate("variant", column=0)
         view.show()
         view.resize(500, 300)
-        app.main_loop()
+        app.exec()

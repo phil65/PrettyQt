@@ -64,4 +64,4 @@ if __name__ == "__main__":
     btn.set_value(4)
     btn.show()
     btn.value_changed.connect(print)
-    app.main_loop()
+    app.exec()

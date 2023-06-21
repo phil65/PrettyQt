@@ -20,4 +20,4 @@ if __name__ == "__main__":
     engine = HelpSearchEngine(core_engine)
     widget = engine.get_result_widget()
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -92,4 +92,4 @@ if __name__ == "__main__":
     menu_bar.add(menu)
     win.setMenuBar(menu_bar)
     win.show()
-    app.main_loop()
+    app.exec()

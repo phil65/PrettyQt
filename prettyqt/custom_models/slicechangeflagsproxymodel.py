@@ -64,4 +64,4 @@ if __name__ == "__main__":
     proxy._flags_to_remove = constants.IS_EDITABLE
     table.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

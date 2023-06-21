@@ -48,4 +48,4 @@ if __name__ == "__main__":
     table = widgets.TableView()
     table.set_model(model)
     table.show()
-    app.main_loop()
+    app.exec()

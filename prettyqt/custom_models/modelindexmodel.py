@@ -131,4 +131,4 @@ if __name__ == "__main__":
         view.set_edit_triggers("all")
         view.show()
         view.resize(1000, 1000)
-        app.main_loop()
+        app.exec()

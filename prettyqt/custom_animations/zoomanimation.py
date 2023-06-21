@@ -94,4 +94,4 @@ if __name__ == "__main__":
     val.apply_to(w)
     val.start()
     w.show()
-    app.main_loop()
+    app.exec()

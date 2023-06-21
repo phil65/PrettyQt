@@ -128,4 +128,4 @@ class WebEngineDownloadRequest:
 
 # app = widgets.app()
 # item = WebEngineDownloadItem()
-# app.main_loop()
+# app.exec()

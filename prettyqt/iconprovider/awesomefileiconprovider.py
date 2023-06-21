@@ -63,4 +63,4 @@ if __name__ == "__main__":
     tree = custom_widgets.FileTree()
     tree.set_model(model)
     tree.show()
-    app.main_loop()
+    app.exec()

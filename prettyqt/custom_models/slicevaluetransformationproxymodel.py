@@ -82,4 +82,4 @@ if __name__ == "__main__":
     model.set_column_slice(slice(0, 2))
     view.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

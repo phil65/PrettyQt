@@ -106,4 +106,4 @@ if __name__ == "__main__":
     item.set_data("display", "test")
     widget.add(item)
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -69,4 +69,4 @@ if __name__ == "__main__":
     mainwindow.add_dockwidget(dockwidget)
     mainwindow.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

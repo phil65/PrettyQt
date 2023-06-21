@@ -130,4 +130,4 @@ if __name__ == "__main__":
     table.proxifier[1:4, :].color_values()
     table.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

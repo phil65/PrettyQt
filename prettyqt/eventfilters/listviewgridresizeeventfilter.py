@@ -41,4 +41,4 @@ if __name__ == "__main__":
     test = ListViewGridResizeEventFilter(parent=widget)
     widget.installEventFilter(test)
     widget.show()
-    app.main_loop()
+    app.exec()

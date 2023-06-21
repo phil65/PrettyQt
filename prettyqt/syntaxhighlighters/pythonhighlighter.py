@@ -207,4 +207,4 @@ if __name__ == "__main__":
     editor = widgets.PlainTextEdit()
     highlighter = PythonHighlighter(editor.document())
     editor.show()
-    app.main_loop()
+    app.exec()

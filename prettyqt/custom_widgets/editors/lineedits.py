@@ -72,4 +72,4 @@ if __name__ == "__main__":
     widget = FloatLineEdit(window_title="Test")
     widget.set_value("")
     widget.show()
-    app.main_loop()
+    app.exec()

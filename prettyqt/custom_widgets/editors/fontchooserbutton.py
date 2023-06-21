@@ -34,7 +34,7 @@ class FontChooserButton(widgets.Widget):
         if self._current_font:
             dlg.setCurrentFont(self._current_font)
 
-        if dlg.main_loop():
+        if dlg.exec():
             self.set_current_font(dlg.current_font())
             self.value_changed.emit(dlg.current_font())
 
@@ -62,4 +62,4 @@ if __name__ == "__main__":
     btn = FontChooserButton()
     btn.set_current_font(gui.Font.mono())
     btn.show()
-    app.main_loop()
+    app.exec()

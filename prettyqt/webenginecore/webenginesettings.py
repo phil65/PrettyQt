@@ -221,4 +221,4 @@ if __name__ == "__main__":
     page = webenginecore.WebEnginePage()
     settings = page.get_settings()
     print(settings)
-    # app.main_loop()
+    # app.exec()

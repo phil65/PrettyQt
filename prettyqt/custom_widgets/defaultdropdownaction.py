@@ -55,4 +55,4 @@ if __name__ == "__main__":
     widgetaction.addAction(action)
     toolbar.addAction(widgetaction)
     window.show()
-    app.main_loop()
+    app.exec()

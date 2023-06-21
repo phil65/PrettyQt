@@ -258,4 +258,4 @@ if __name__ == "__main__":
     widget.show()
     app.sleep(2)
     print(widget.get_visible_line_span())
-    app.main_loop()
+    app.exec()

@@ -483,4 +483,4 @@ if __name__ == "__main__":
         obj_tree.set_selection_behavior("rows")
         obj_tree.setUniformRowHeights(True)
         obj_tree.show()
-        app.main_loop()
+        app.exec()

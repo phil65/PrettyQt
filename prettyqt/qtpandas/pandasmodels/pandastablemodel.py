@@ -248,4 +248,4 @@ if __name__ == "__main__":
     # model = model.proxifier.get_proxy("read_only")
     table.set_delegate("variant")
 
-    app.main_loop()
+    app.exec()

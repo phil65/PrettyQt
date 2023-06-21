@@ -120,4 +120,4 @@ if __name__ == "__main__":
     view.adapt_sizes()
     view.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

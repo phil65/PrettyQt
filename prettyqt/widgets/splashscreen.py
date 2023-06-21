@@ -60,4 +60,4 @@ if __name__ == "__main__":
     splash = SplashScreen(gui.Pixmap())
     splash.show()
     splash.show_message("test")
-    app.main_loop()
+    app.exec()

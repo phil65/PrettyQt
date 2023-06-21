@@ -36,4 +36,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = DoubleSpinBox()
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -170,7 +170,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         return self.choose()
 
     def choose(self) -> list[pathlib.Path] | None:
-        result = self.main_loop()
+        result = self.exec()
         if result != self.DialogCode.Accepted:
             return None
         paths = self.selected_files()
@@ -224,4 +224,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = FileDialog()
     widget.show()
-    app.main_loop()
+    app.exec()

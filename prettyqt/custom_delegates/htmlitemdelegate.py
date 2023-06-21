@@ -71,4 +71,4 @@ if __name__ == "__main__":
     item.set_data(iconprovider.get_icon("mdi.folder"), "user")
     model += item
     w.show()
-    app.main_loop()
+    app.exec()

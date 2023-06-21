@@ -12,4 +12,4 @@ class FontDialog(widgets.DialogMixin, QtWidgets.QFontDialog):
 if __name__ == "__main__":
     app = widgets.app()
     widget = FontDialog.getFont()
-    app.main_loop()
+    app.exec()

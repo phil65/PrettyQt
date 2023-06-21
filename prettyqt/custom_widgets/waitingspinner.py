@@ -284,4 +284,4 @@ if __name__ == "__main__":
     spinner = WaitingSpinner(mainwindow)
     mainwindow.show()
     spinner.start()
-    app.main_loop()
+    app.exec()

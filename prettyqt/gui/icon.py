@@ -140,4 +140,4 @@ if __name__ == "__main__":
     window = widgets.MainWindow()
     window.set_icon(icon)
     window.show()
-    app.main_loop()
+    app.exec()

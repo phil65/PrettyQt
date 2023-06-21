@@ -89,4 +89,4 @@ if __name__ == "__main__":
     widget = LCDNumber()
     widget.set_value(5555)
     widget.show()
-    app.main_loop()
+    app.exec()

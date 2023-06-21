@@ -18,4 +18,4 @@ if __name__ == "__main__":
     layout.add(widget2)
     widget.set_layout(layout)
     widget.show()
-    app.main_loop()
+    app.exec()

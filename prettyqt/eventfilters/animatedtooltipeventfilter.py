@@ -72,4 +72,4 @@ if __name__ == "__main__":
     w.set_icon("mdi.timer")
     w.set_tooltip("testus")
     w.show()
-    app.main_loop()
+    app.exec()

@@ -124,4 +124,4 @@ if __name__ == "__main__":
     cs = dlg.get_qcolorshower()
     dlg.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

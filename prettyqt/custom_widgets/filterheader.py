@@ -145,5 +145,5 @@ if __name__ == "__main__":
         view.h_header.visible_editors = True
         view.show()
         with app.debug_mode():
-            app.main_loop()
+            app.exec()
             print(view.h_header._proxy._filters)

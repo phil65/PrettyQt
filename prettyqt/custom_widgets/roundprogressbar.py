@@ -304,4 +304,4 @@ if __name__ == "__main__":
     pb = RoundProgressBar()
     pb.set_bar_style("pie")
     pb.show()
-    app.main_loop()
+    app.exec()

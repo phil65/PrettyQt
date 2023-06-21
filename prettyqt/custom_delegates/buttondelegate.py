@@ -114,4 +114,4 @@ if __name__ == "__main__":
     table_widget.resize(500, 300)
     table_widget.show()
 
-    app.main_loop()
+    app.exec()

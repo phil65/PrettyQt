@@ -88,4 +88,4 @@ if __name__ == "__main__":
     widget = DataFrameListWidget()
     widget.add_df(df)
     widget.show()
-    app.main_loop()
+    app.exec()

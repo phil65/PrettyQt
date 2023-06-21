@@ -13,4 +13,4 @@ if __name__ == "__main__":
     w = widgets.Widget()
     widget = SizeGrip(w)
     widget.show()
-    app.main_loop()
+    app.exec()

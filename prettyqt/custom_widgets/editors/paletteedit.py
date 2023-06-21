@@ -28,4 +28,4 @@ if __name__ == "__main__":
     widget.set_value(gui.Palette())
     widget.value_changed.connect(print)
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -118,4 +118,4 @@ if __name__ == "__main__":
     widget = widgets.PlainTextEdit("gfdgdf\n" * 1000)
     widget.set_scrollbar_smooth(True)
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -87,4 +87,4 @@ if __name__ == "__main__":
     textedit = AutoResizePlainTextEdit()
     layout[0, 1] = textedit
     widget.show()
-    app.main_loop()
+    app.exec()

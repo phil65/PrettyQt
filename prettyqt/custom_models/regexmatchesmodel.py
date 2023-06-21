@@ -81,4 +81,4 @@ if __name__ == "__main__":
     dlg.box.add_widget(view)
     dlg.show_blocking()
     view.resize(500, 300)
-    app.main_loop()
+    app.exec()

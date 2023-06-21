@@ -263,5 +263,5 @@ if __name__ == "__main__":
     widget.setClearButtonEnabled(True)
     # widget.set_regex_validator("[0-9]+")
     widget.show()
-    app.main_loop()
+    app.exec()
     print(widget.hasAcceptableInput())

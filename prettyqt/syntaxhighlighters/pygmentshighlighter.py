@@ -307,4 +307,4 @@ if __name__ == "__main__":
     highlighter = PygmentsHighlighter(editor.document(), lexer="python")
     # highlighter.set_style("monokai")
     editor.show()
-    app.main_loop()
+    app.exec()

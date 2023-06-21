@@ -129,4 +129,4 @@ if __name__ == "__main__":
         parent=app,
     )
     checker.check_for_update()
-    app.main_loop()
+    app.exec()

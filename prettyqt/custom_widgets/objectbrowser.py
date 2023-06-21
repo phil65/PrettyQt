@@ -208,4 +208,4 @@ if __name__ == "__main__":
     with app.debug_mode():
         object_browser = ObjectBrowser(struct)
         object_browser.show()
-        app.main_loop()
+        app.exec()

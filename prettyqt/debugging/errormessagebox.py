@@ -218,4 +218,4 @@ if __name__ == "__main__":
     wnd = ErrorMessageBox("a", "b", w)
     wnd.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

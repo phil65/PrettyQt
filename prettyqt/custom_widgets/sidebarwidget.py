@@ -178,4 +178,4 @@ if __name__ == "__main__":
     ex.set_marker(page_3)
     a.populate_from_widget(ex)
     ex.show()
-    app.main_loop()
+    app.exec()

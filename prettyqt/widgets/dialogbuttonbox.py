@@ -206,4 +206,4 @@ if __name__ == "__main__":
     buttons = list(STANDARD_BUTTON.keys())
     widget.add_default_buttons(buttons)
     widget.show()
-    app.main_loop()
+    app.exec()

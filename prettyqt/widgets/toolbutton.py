@@ -120,4 +120,4 @@ if __name__ == "__main__":
     # icon.add_pixmap("mdi.folder", state="on")
     w.set_icon("mdi.timer", "mdi.folder")
     w.show()
-    app.main_loop()
+    app.exec()

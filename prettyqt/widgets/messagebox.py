@@ -152,7 +152,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
             self.setIconPixmap(ico.get_pixmap(size=64))
 
     def show_blocking(self) -> StandardButtonStr:
-        return STANDARD_BUTTON.inverse[self.main_loop()]
+        return STANDARD_BUTTON.inverse[self.exec()]
 
     def get_icon_pixmap(self) -> gui.Pixmap | None:
         pix = self.iconPixmap()
@@ -236,4 +236,4 @@ if __name__ == "__main__":
     ret.set_standard_buttons(["ok", "cancel"])
     ret.add_button("tt", "accept", callback=lambda: print("click"))
     ret.show()
-    app.main_loop()
+    app.exec()

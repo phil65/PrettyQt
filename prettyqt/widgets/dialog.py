@@ -36,7 +36,7 @@ class DialogMixin(widgets.WidgetMixin):
 
     def show_blocking(self) -> bool:
         self.show()
-        return bool(self.main_loop())
+        return bool(self.exec())
 
     def is_accepted(self) -> bool:
         return self.result() == QtWidgets.QDialog.DialogCode.Accepted

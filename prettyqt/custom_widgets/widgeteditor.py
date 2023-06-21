@@ -129,4 +129,4 @@ if __name__ == "__main__":
     editor = WidgetEditor(w)
     editor.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

@@ -97,4 +97,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Frame(frame_shape="panel", object_name="fff")
     widget.show()
-    app.main_loop()
+    app.exec()

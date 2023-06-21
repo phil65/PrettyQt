@@ -242,4 +242,4 @@ if __name__ == "__main__":
     widget.show()
     widget.resize(500, 500)
     widget.resize_visible_columns_to_contents()
-    app.main_loop()
+    app.exec()

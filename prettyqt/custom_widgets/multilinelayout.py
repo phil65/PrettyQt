@@ -117,4 +117,4 @@ if __name__ == "__main__":
     # print(layout.itemAt(5))
     widget.set_layout(layout)
     widget.show()
-    app.main_loop()
+    app.exec()

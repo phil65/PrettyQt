@@ -182,4 +182,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Splitter()
     widget.show()
-    app.main_loop()
+    app.exec()

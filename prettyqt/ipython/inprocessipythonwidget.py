@@ -68,4 +68,4 @@ if __name__ == "__main__":
     console_widget.evaluated.connect(print)
     console_widget.completion_mode = "ncurses"
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

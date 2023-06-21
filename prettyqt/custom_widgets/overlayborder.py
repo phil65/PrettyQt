@@ -105,4 +105,4 @@ if __name__ == "__main__":
     errorbox = FocusWidget(container, widget2)
     errorbox.show()
     container.show()
-    app.main_loop()
+    app.exec()

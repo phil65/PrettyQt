@@ -64,4 +64,4 @@ if __name__ == "__main__":
     app = widgets.app()
     reader = TextBrowser()
     reader.show()
-    app.main_loop()
+    app.exec()

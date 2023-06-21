@@ -84,4 +84,4 @@ if __name__ == "__main__":
     editor.set_syntaxhighlighter(highlighter)
     # highlighter = SelectedWordHighlighter(editor.document())
     editor.show()
-    app.main_loop()
+    app.exec()

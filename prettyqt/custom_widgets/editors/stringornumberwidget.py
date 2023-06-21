@@ -55,4 +55,4 @@ if __name__ == "__main__":
     widget = StringOrNumberWidget("Test")
     widget.value_changed.connect(print)
     widget.show()
-    app.main_loop()
+    app.exec()

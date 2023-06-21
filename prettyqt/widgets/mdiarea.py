@@ -138,4 +138,4 @@ if __name__ == "__main__":
     widget.add(le)
     widget.add(le2)
     widget.show()
-    app.main_loop()
+    app.exec()

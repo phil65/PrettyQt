@@ -90,4 +90,4 @@ if __name__ == "__main__":
     app = core.app()
     socket = BluetoothSocket("l2_cap")
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

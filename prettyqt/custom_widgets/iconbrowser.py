@@ -110,7 +110,7 @@ def run():
     app = widgets.app()
     browser = IconBrowser()
     browser.show()
-    sys.exit(app.main_loop())
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":

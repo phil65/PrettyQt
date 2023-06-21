@@ -360,4 +360,4 @@ if __name__ == "__main__":
         # print(timer)
         # app.sleep(1)  #
         # timer[0].animation.toggle_direction()
-        app.main_loop()
+        app.exec()

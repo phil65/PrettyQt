@@ -162,4 +162,4 @@ if __name__ == "__main__":
         model = pickle.load(reader)
     model += gui.StandardItem("Item2")
     w.show()
-    app.main_loop()
+    app.exec()

@@ -38,4 +38,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = CheckBox("test")
     widget.show()
-    app.main_loop()
+    app.exec()

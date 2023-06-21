@@ -187,4 +187,4 @@ if __name__ == "__main__":
     app.sleep(2)
     model.pop(0)
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

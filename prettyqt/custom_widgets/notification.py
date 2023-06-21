@@ -499,4 +499,4 @@ if __name__ == "__main__":
     noti = NotificationArea(p)
     p.clicked.connect(lambda: noti.display("test", "danger", timeout=2000))
     p.show()
-    app.main_loop()
+    app.exec()

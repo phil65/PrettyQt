@@ -73,4 +73,4 @@ if __name__ == "__main__":
     widget = FontComboBox()
     widget.set_value(gui.Font("Script"))
     widget.show()
-    app.main_loop()
+    app.exec()

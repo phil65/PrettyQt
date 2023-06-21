@@ -42,4 +42,4 @@ if __name__ == "__main__":
     btn = widgets.PushButton("ts")
     btn.show()
     animation.start()
-    app.main_loop()
+    app.exec()

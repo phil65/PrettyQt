@@ -171,4 +171,4 @@ if __name__ == "__main__":
     combo.addItems(items)
     combo.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

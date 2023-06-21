@@ -124,4 +124,4 @@ if __name__ == "__main__":
     app = widgets.app()
     w = FileExplorer()
     w.show()
-    app.main_loop()
+    app.exec()

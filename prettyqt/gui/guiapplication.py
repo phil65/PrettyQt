@@ -204,4 +204,4 @@ class GuiApplication(GuiApplicationMixin, QtGui.QGuiApplication):
 if __name__ == "__main__":
     app = gui.app()
     app.set_badge_number(5)
-    app.main_loop()
+    app.exec()

@@ -92,4 +92,4 @@ if __name__ == "__main__":
     table.proxifier.get_proxy("highlight_current", mode="all")
     table.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

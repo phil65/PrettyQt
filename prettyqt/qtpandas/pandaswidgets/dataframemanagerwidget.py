@@ -51,4 +51,4 @@ if __name__ == "__main__":
         widget.add_df(df)
         widget.add_df(df2)
         widget.show()
-        app.main_loop()
+        app.exec()

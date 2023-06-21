@@ -17,4 +17,4 @@ if __name__ == "__main__":
     widget = RadioButton("This is a test")
     widget.set_icon("mdi.timer")
     widget.show()
-    app.main_loop()
+    app.exec()

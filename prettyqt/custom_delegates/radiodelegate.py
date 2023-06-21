@@ -118,4 +118,4 @@ if __name__ == "__main__":
     widget.setItemDelegateForColumn(0, delegate)
     widget.openPersistentEditor(item)
     widget.show()
-    app.main_loop()
+    app.exec()

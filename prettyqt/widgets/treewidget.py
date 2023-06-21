@@ -124,4 +124,4 @@ if __name__ == "__main__":
     widget = TreeWidget()
     widget.openPersistentEditor(QtCore.QModelIndex(), 1)
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -58,4 +58,4 @@ if __name__ == "__main__":
     widget = SizePolicyEdit(window_title="Test")
     widget.set_value(widgets.SizePolicy())
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -337,4 +337,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = Label("http://www.test.fsdfsdfsfdsfsfdsfde\n" * 20, elide_mode="right")
     widget.show()
-    app.main_loop()
+    app.exec()

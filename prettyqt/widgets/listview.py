@@ -177,4 +177,4 @@ if __name__ == "__main__":
     app = widgets.app()
     dlg = ListView()
     dlg.show()
-    app.main_loop()
+    app.exec()

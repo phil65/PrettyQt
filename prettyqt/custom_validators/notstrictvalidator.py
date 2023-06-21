@@ -32,5 +32,5 @@ if __name__ == "__main__":
     widget.set_validator("alphanumeric", strict=False)
     widget.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()
     print(widget.hasAcceptableInput())

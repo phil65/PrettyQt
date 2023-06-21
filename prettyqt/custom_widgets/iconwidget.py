@@ -43,4 +43,4 @@ if __name__ == "__main__":
     widget = IconWidget()
     widget.show()
     bool(widget)
-    app.main_loop()
+    app.exec()

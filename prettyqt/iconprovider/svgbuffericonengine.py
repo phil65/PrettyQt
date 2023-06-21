@@ -67,4 +67,4 @@ if __name__ == "__main__":
     engine = SVGBufferIconEngine("")
     widget = widgets.TreeView()
     widget.show()
-    app.main_loop()
+    app.exec()

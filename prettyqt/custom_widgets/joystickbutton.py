@@ -73,4 +73,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = JoystickButton()
     widget.show()
-    app.main_loop()
+    app.exec()

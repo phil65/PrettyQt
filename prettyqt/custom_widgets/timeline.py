@@ -238,4 +238,4 @@ if __name__ == "__main__":
     sample = VideoSample(20, picture=px)
     tl += sample
     tl.show()
-    app.main_loop()
+    app.exec()

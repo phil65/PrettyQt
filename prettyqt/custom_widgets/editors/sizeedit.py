@@ -45,4 +45,4 @@ if __name__ == "__main__":
     widget = SizeEdit(window_title="Test")
     widget.value_changed.connect(print)
     widget.show()
-    app.main_loop()
+    app.exec()

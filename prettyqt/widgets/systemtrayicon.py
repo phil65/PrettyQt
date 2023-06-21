@@ -54,4 +54,4 @@ if __name__ == "__main__":
     icon = SystemTrayIcon()
     icon.set_icon("mdi.folder")
     icon.show_message("a", "b", "information")
-    app.main_loop()
+    app.exec()

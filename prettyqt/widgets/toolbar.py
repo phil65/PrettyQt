@@ -211,4 +211,4 @@ if __name__ == "__main__":
     action = toolbar.addWidget(radio)
     toolbar.show()
     toolbar.show_tooltips(content="shortcut")
-    app.main_loop()
+    app.exec()

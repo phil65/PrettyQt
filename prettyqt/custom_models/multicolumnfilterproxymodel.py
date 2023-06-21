@@ -93,4 +93,4 @@ if __name__ == "__main__":
     table.set_model(model)
     table.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

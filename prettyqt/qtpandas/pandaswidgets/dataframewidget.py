@@ -81,4 +81,4 @@ if __name__ == "__main__":
     df.attrs = {"test": "test"}
     widget = DataFrameWidget(df)
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -207,4 +207,4 @@ if __name__ == "__main__":
     slider = Slider()
     slider.setRange(0, 100)
     slider.show()
-    app.main_loop()
+    app.exec()

@@ -436,7 +436,7 @@ class DetachedTab(widgets.MainWindow):
 #     tb.set_iconic_thumbnail(img)
 #     tab_widget.add_tab(widget, "Test")
 #     tab_widget.add_tab(widget_2, "Test 2")
-#     app.main_loop()
+#     app.exec()
 
 if __name__ == "__main__":
     from prettyqt import widgets
@@ -454,4 +454,4 @@ if __name__ == "__main__":
     tabwidget.animator.fade_in(0)
     app.sleep(2)
     tabwidget.animator.fade_in(1)
-    app.main_loop()
+    app.exec()

@@ -126,4 +126,4 @@ if __name__ == "__main__":
     widget.show()
     # a.number.signal.emit("test")
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

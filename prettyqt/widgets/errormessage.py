@@ -13,4 +13,4 @@ if __name__ == "__main__":
     widget = ErrorMessage()
     widget.set_icon("mdi.timer")
     widget.show()
-    app.main_loop()
+    app.exec()

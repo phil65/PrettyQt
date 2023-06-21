@@ -13,4 +13,4 @@ if __name__ == "__main__":
     view = ColumnView()
     view.parent()
     view.show()
-    app.main_loop()
+    app.exec()

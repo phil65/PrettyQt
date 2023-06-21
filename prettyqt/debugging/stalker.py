@@ -177,4 +177,4 @@ if __name__ == "__main__":
         with Stalker(widget, log_level=logging.INFO) as stalker:
             stalker.eventsignals.MouseButtonPress.connect(print)
             app.sleep(5)
-        app.main_loop()
+        app.exec()

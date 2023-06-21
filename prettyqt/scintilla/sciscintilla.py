@@ -292,4 +292,4 @@ if __name__ == "__main__":
     widget.highlight_current_line()
     widget.set_wrap_mode("anywhere")
     widget.show()
-    app.main_loop()
+    app.exec()

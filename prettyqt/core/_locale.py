@@ -776,4 +776,4 @@ if __name__ == "__main__":
     w = widgets.Label()
     w.set_pixmap(p)
     w.show()
-    app.main_loop()
+    app.exec()

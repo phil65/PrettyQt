@@ -65,4 +65,4 @@ if __name__ == "__main__":
     app.sleep(2)
     btn.setGraphicsEffect(effect)
     effect.flash()
-    app.main_loop()
+    app.exec()

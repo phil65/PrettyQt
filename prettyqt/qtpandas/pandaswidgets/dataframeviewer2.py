@@ -517,4 +517,4 @@ if __name__ == "__main__":
 
     table.resizeColumnsToContents()
     table.show()
-    app.main_loop()
+    app.exec()

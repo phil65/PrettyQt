@@ -177,4 +177,4 @@ if __name__ == "__main__":
         wnd = QObjectDetailsDialog(widget)
         wnd.hierarchyview.select_object(None)
         wnd.show()
-        app.main_loop()
+        app.exec()

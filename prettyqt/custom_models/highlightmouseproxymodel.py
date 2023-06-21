@@ -98,4 +98,4 @@ if __name__ == "__main__":
     table.proxifier.get_proxy("highlight_mouse")
     table.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

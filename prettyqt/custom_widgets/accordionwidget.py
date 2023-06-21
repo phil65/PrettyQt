@@ -535,4 +535,4 @@ if __name__ == "__main__":
     widget.addItem("tsektjk", widgets.LineEdit("test"))
     widget.addItem("tsektjk", item)
     widget.show()
-    app.main_loop()
+    app.exec()

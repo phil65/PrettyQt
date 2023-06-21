@@ -55,4 +55,4 @@ if __name__ == "__main__":
     test = DateLabelEventFilter(widget)
     widget.installEventFilter(test)
     widget.show()
-    app.main_loop()
+    app.exec()

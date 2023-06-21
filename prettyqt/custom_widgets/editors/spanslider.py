@@ -504,4 +504,4 @@ if __name__ == "__main__":
     # slider.set_left_color(color)
     # slider.set_right_color(color)
     slider.show()
-    app.main_loop()
+    app.exec()

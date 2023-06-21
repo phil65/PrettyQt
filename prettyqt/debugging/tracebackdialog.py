@@ -26,4 +26,4 @@ if __name__ == "__main__":
     wnd = TracebackDialog()
     wnd.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

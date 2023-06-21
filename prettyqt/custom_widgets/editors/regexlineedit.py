@@ -36,4 +36,4 @@ if __name__ == "__main__":
     widget = RegexLineEdit()
     widget.show()
     widget.value_changed.connect(print)
-    app.main_loop()
+    app.exec()

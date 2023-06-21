@@ -19,4 +19,4 @@ if __name__ == "__main__":
     errorbox.setWidget(container)
     errorbox.show()
     container.show()
-    app.main_loop()
+    app.exec()

@@ -52,4 +52,4 @@ if __name__ == "__main__":
     ly += widgets.RadioButton("test")
     widget.set_layout(ly)
     widget.show()
-    app.main_loop()
+    app.exec()

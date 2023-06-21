@@ -44,4 +44,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = ListInput(typ=int)
     widget.show()
-    app.main_loop()
+    app.exec()

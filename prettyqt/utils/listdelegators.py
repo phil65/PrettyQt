@@ -169,4 +169,4 @@ if __name__ == "__main__":
         # container[2].fx["pos"].transition_from((0, -100), duration=2000)
         widget.show()
         container[::2].fx.slide(end=(0, 100), duration=3000, reverse=True)
-        app.main_loop()
+        app.exec()

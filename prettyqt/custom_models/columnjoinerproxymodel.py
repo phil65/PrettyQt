@@ -178,4 +178,4 @@ if __name__ == "__main__":
     table.show()
     table.resize(1000, 1000)
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

@@ -24,4 +24,4 @@ if __name__ == "__main__":
 
     app = widgets.app()
     ToolTip.show_text(text="test")
-    app.main_loop()
+    app.exec()

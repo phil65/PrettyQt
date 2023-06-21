@@ -79,4 +79,4 @@ if __name__ == "__main__":
     tb.add_widget(w, "title")
     tb.add_widget(w2)
     tb.show()
-    app.main_loop()
+    app.exec()

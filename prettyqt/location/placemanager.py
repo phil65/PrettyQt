@@ -60,4 +60,4 @@ if __name__ == "__main__":
     manager = provider.get_place_manager()
     reply = manager.search_place("Shop", coord=(51, 7))
     manager.on_finished.connect(lambda x: print(x.get_results()))
-    app.main_loop()
+    app.exec()

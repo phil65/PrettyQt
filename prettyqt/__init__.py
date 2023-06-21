@@ -24,7 +24,7 @@ def debug():
         debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
         objectbrowser = custom_widgets.ObjectBrowser(frame.f_back.f_globals, stack)
         objectbrowser.show()
-        debug.app.main_loop()
+        debug.app.exec()
     finally:
         del frame
 
@@ -46,9 +46,9 @@ def show(item):
                 instance = klass(item)
                 viewer.set_model(instance)
                 viewer.show()
-                debug.app.main_loop()
+                debug.app.exec()
                 break
-    debug.app.main_loop()
+    debug.app.exec()
 
 
 __all__ = [

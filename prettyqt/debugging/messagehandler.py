@@ -67,4 +67,4 @@ if __name__ == "__main__":
     app = widgets.app()
     handler = MessageHandler(logger)
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

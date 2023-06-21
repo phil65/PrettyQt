@@ -740,4 +740,4 @@ if __name__ == "__main__":
     table = widgets.TableView()
     table.set_model_for(df)
     table.show()
-    app.main_loop()
+    app.exec()

@@ -54,4 +54,4 @@ if __name__ == "__main__":
     btn = ColorComboBox(gui.Color("green"))
     btn.show()
     btn.value_changed.connect(print)
-    app.main_loop()
+    app.exec()

@@ -43,4 +43,4 @@ if __name__ == "__main__":
     val = TextToSpeech("sapi")
     print(val.get_available_voices())
     val.say("Test")
-    app.main_loop()
+    app.exec()

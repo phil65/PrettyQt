@@ -180,4 +180,4 @@ if __name__ == "__main__":
     layout.add(widgets.PushButton("Even longer button text"))
     widget.set_layout(layout)
     widget.show()
-    app.main_loop()
+    app.exec()

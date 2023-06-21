@@ -115,4 +115,4 @@ if __name__ == "__main__":
     tree = widgets.TreeView()
     tree.set_model(model)
     tree.show()
-    app.main_loop()
+    app.exec()

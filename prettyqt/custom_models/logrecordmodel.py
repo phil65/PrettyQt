@@ -226,4 +226,4 @@ if __name__ == "__main__":
         w.box += widget
         w.show()
         widget.show()
-        app.main_loop()
+        app.exec()

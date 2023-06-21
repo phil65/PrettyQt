@@ -218,4 +218,4 @@ if __name__ == "__main__":
     widget.box.add(table)
     table.set_model(model)
     widget.show()
-    app.main_loop()
+    app.exec()

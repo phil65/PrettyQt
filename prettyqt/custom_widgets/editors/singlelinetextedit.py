@@ -28,4 +28,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = SingleLineTextEdit()
     widget.show()
-    app.main_loop()
+    app.exec()

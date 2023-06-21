@@ -982,4 +982,4 @@ if __name__ == "__main__":
     # widget.position_on("mouse", scale_ratio=0.5, how="top")
     # widget.set_min_size((400, 400))
     # widget.set_max_size(None, 600)
-    app.main_loop()
+    app.exec()

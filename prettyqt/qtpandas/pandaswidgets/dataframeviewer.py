@@ -614,4 +614,4 @@ if __name__ == "__main__":
     with app.debug_mode():
         view2 = DataFrameViewer(df)
         view2.show()
-        app.main_loop()
+        app.exec()

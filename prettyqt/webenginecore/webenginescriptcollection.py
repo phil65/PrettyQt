@@ -48,4 +48,4 @@ if __name__ == "__main__":
     assert script in item
     assert len(item) == 1
     assert bool(item)
-    app.main_loop()
+    app.exec()

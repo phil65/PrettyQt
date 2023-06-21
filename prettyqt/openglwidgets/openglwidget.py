@@ -58,4 +58,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = OpenGLWidget()
     widget.show()
-    app.main_loop()
+    app.exec()

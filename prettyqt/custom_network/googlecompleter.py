@@ -78,4 +78,4 @@ if __name__ == "__main__":
     completer = GoogleCompleter(widget)
     widget.set_completer(completer)
     wnd.show()
-    app.main_loop()
+    app.exec()

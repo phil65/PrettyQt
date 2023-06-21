@@ -46,4 +46,4 @@ if __name__ == "__main__":
     worker.signals.download_finished.connect(print)
     worker.signals.download_finished.connect(app.quit)
     pool.start(worker)
-    app.main_loop()
+    app.exec()

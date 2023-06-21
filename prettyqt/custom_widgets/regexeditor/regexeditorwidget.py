@@ -138,4 +138,4 @@ if __name__ == "__main__":
     teststring = "aa356aa356aa356aa356aa356aa356aa356aa3a356aa356"
     widget = RegexEditorWidget(regex="aa[0-9]", teststring=teststring)
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -62,4 +62,4 @@ if __name__ == "__main__":
     action = ActionGroup()
     act = gui.Action()
     action.addAction(act)
-    app.main_loop()
+    app.exec()

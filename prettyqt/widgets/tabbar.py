@@ -175,4 +175,4 @@ if __name__ == "__main__":
     tabwidget.add_tab(widget3, label="test")
     tabbar = tabwidget.tabBar()
     tabwidget.show()
-    app.main_loop()
+    app.exec()

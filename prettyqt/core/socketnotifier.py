@@ -35,4 +35,4 @@ if __name__ == "__main__":
 
     read, write = os.pipe()
     notifier = SocketNotifier(read, QtCore.QSocketNotifier.Type.Read)
-    app.main_loop()
+    app.exec()

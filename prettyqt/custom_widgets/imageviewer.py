@@ -136,4 +136,4 @@ if __name__ == "__main__":
     widget.set_image(icon.pixmap(256))
     widget.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

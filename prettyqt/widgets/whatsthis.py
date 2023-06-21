@@ -25,4 +25,4 @@ if __name__ == "__main__":
 
     btn = widgets.PushButton(callback=test)
     btn.show()
-    app.main_loop()
+    app.exec()

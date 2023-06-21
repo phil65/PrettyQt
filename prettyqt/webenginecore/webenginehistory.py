@@ -40,4 +40,4 @@ if __name__ == "__main__":
     history = page.history()
     item = WebEngineHistory(history)
     print(len(item))
-    app.main_loop()
+    app.exec()

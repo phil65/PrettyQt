@@ -75,4 +75,4 @@ if __name__ == "__main__":
     w.set_value(flag.DoubleClicked)
     w.value_changed.connect(print)
     w.show()
-    app.main_loop()
+    app.exec()

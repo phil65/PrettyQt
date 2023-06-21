@@ -389,4 +389,4 @@ if __name__ == "__main__":
     scene.add_line(core.Line(0, 0, 10, 10))
     view = widgets.GraphicsView(scene)
     view.show()
-    app.main_loop()
+    app.exec()

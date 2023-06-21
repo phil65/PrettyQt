@@ -130,4 +130,4 @@ if __name__ == "__main__":
     w.value_changed.connect(print)
     ha.addWidget(w)
     frame.show()
-    app.main_loop()
+    app.exec()

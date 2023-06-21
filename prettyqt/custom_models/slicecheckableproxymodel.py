@@ -147,4 +147,4 @@ if __name__ == "__main__":
     tree.proxifier[0, :].set_checkable()
     tree.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

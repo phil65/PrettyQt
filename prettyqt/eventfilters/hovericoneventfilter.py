@@ -32,4 +32,4 @@ if __name__ == "__main__":
     test = HoverIconEventFilter("mdi.folder", "mdi.folder-outline", "mdi.timer", widget)
     widget.installEventFilter(test)
     widget.show()
-    app.main_loop()
+    app.exec()

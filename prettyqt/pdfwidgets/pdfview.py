@@ -91,4 +91,4 @@ if __name__ == "__main__":
     app = widgets.app()
     view = PdfView()
     view.show()
-    app.main_loop()
+    app.exec()

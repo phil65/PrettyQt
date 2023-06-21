@@ -150,4 +150,4 @@ if __name__ == "__main__":
 
     t = Test()
     t.show()
-    app.main_loop()
+    app.exec()

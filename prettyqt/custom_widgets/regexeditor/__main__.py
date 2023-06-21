@@ -10,11 +10,11 @@ def run():
     app = widgets.app()
     widget = regexeditor.RegexEditorWidget()
     widget.show()
-    app.main_loop()
+    app.exec()
 
 
 if __name__ == "__main__":
     app = widgets.app()
     widget = regexeditor.RegexEditorWidget()
     widget.show()
-    app.main_loop()
+    app.exec()

@@ -76,4 +76,4 @@ if __name__ == "__main__":
         view.set_delegate("variant")
         view.resize(1000, 1000)
         view.show()
-        app.main_loop()
+        app.exec()

@@ -60,4 +60,4 @@ if __name__ == "__main__":
     with app.debug_mode():
         test = SectionAutoSpanEventFilter(widget)
         widget.show()
-        app.main_loop()
+        app.exec()

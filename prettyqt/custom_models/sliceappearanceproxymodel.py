@@ -98,4 +98,4 @@ if __name__ == "__main__":
     table.proxifier[:, 0].style(foreground="red")
     table.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

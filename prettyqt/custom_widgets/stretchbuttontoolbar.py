@@ -113,4 +113,4 @@ if __name__ == "__main__":
     ]
     widget.addActions(actions)
     widget.show()
-    app.main_loop()
+    app.exec()

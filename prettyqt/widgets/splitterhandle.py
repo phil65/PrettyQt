@@ -51,4 +51,4 @@ if __name__ == "__main__":
     w = widgets.Splitter()
     handle = SplitterHandle("horizontal", w)
     handle.show()
-    app.main_loop()
+    app.exec()

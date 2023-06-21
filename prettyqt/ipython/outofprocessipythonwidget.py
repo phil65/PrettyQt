@@ -71,4 +71,4 @@ if __name__ == "__main__":
     console_widget.show()
     console_widget.add_shortcut("Ctrl+P", cp.show)
     cp.populate_from_widget(console_widget)
-    app.main_loop()
+    app.exec()

@@ -61,4 +61,4 @@ if __name__ == "__main__":
     dock_widget.setup_title_bar()
     win.add_dockwidget(dock_widget, "left")
     win.show()
-    app.main_loop()
+    app.exec()

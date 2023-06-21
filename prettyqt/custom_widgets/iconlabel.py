@@ -35,4 +35,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = IconLabel("test", tooltip="testus")
     widget.show()
-    app.main_loop()
+    app.exec()

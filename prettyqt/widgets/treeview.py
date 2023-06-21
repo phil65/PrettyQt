@@ -92,4 +92,4 @@ if __name__ == "__main__":
     dlg = widgets.MainWindow()
     status_bar = TreeView()
     dlg.show()
-    app.main_loop()
+    app.exec()

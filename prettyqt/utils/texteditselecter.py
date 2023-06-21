@@ -264,4 +264,4 @@ if __name__ == "__main__":
     with app.debug_mode():
         app.sleep(2)
         print(test.selecter[20:50])
-        app.main_loop()
+        app.exec()

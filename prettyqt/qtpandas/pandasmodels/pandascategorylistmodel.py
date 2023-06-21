@@ -143,4 +143,4 @@ if __name__ == "__main__":
     tableview.set_model(model)
 
     tableview.show()
-    app.main_loop()
+    app.exec()

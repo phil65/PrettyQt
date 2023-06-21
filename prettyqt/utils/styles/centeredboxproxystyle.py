@@ -86,4 +86,4 @@ if __name__ == "__main__":
     tv.set_model(model)
     tv.setStyle(style)
     tv.show()
-    app.main_loop()
+    app.exec()

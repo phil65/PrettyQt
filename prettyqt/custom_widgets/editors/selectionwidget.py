@@ -125,4 +125,4 @@ if __name__ == "__main__":
     widget.add_items(items)
     widget.add_custom(label="custom", typ="float")
     widget.show()
-    app.main_loop()
+    app.exec()

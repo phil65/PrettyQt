@@ -110,4 +110,4 @@ if __name__ == "__main__":
     table.setRootIsDecorated(True)
     # table.setSortingEnabled(True)
     table.show()
-    app.main_loop()
+    app.exec()

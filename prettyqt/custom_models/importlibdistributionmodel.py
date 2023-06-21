@@ -286,7 +286,7 @@ class ImportlibDistributionModel(core.AbstractTableModel):
 #     model = ImportlibDistributionModel.from_package("prettyqt")
 #     tableview.set_model(model)
 #     tableview.show()
-#     app.main_loop()
+#     app.exec()
 
 
 if __name__ == "__main__":
@@ -300,4 +300,4 @@ if __name__ == "__main__":
     table.set_delegate("render_link", column=5)
     table.expand_all(depth=4)
     table.show()
-    app.main_loop()
+    app.exec()

@@ -163,4 +163,4 @@ if __name__ == "__main__":
     widget.set_url(path)
     widget.find_text("test", backward=True, case_sensitive=True, callback=None)
     widget.show()
-    app.main_loop()
+    app.exec()

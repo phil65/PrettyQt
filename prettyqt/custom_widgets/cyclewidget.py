@@ -168,4 +168,4 @@ if __name__ == "__main__":
     app = widgets.app()
     widget = CycleWidget([str(i) for i in range(30)], QtCore.QSize(50, 50))
     widget.show()
-    app.main_loop()
+    app.exec()

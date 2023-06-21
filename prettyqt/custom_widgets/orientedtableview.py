@@ -73,4 +73,4 @@ if __name__ == "__main__":
         app.set_style("fusion")
         view = OrientedTableView()
         view.show()
-        app.main_loop()
+        app.exec()

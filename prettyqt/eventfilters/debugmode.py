@@ -109,4 +109,4 @@ if __name__ == "__main__":
     container.show()
     with app.debug_mode():
         app.sleep(1)
-        app.main_loop()
+        app.exec()

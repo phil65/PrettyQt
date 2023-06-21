@@ -105,4 +105,4 @@ if __name__ == "__main__":
     cb.set_value(QtCore.Qt.ItemDataRole.EditRole)
     cb.show()
     cb.value_changed.connect(print)
-    app.main_loop()
+    app.exec()

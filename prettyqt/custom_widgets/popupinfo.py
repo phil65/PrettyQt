@@ -78,4 +78,4 @@ if __name__ == "__main__":
     widget.popup("2fdsfsdfsdest")
     app.sleep(1)
     widget.popup("43424234234234324")
-    app.main_loop()
+    app.exec()

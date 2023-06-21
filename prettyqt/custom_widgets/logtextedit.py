@@ -267,4 +267,4 @@ if __name__ == "__main__":
     w.box.add(widgets.PushButton("Critical", clicked=lambda: logger.critical("Critical")))
     w.box.add(widget)
     w.show()
-    app.main_loop()
+    app.exec()

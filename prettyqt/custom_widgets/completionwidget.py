@@ -188,4 +188,4 @@ if __name__ == "__main__":
     completion_widget = CompletionWidget(textedit)
     textedit.show()
     completion_widget.show_items(textedit.textCursor(), ["a", "b"])
-    app.main_loop()
+    app.exec()

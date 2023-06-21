@@ -95,4 +95,4 @@ if __name__ == "__main__":
     a = area.v_scrollbar.fx["value"].animate(0, 300, reverse=True, single_shot=False)
     app.sleep(2)
     a.stop()
-    app.main_loop()
+    app.exec()

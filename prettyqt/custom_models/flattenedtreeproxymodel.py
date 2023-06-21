@@ -205,4 +205,4 @@ if __name__ == "__main__":
     app = widgets.app()
     table = debugging.example_tree(flatten=True)
     table.show()
-    app.main_loop()
+    app.exec()

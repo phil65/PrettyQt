@@ -618,4 +618,4 @@ if __name__ == "__main__":
     view.resizeColumnsToContents()
     view.resizeRowsToContents()
     # Set sorting enabled (after setting model)
-    app.main_loop()
+    app.exec()

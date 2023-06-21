@@ -109,4 +109,4 @@ if __name__ == "__main__":
     agent.finished.connect(app.quit)
     agent.start_discovery()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

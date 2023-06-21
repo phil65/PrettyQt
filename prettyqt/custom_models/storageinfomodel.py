@@ -134,4 +134,4 @@ if __name__ == "__main__":
     view.set_selection_behavior("rows")
     view.adapt_sizes()
     view.show()
-    app.main_loop()
+    app.exec()

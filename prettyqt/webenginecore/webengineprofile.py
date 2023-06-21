@@ -80,4 +80,4 @@ if __name__ == "__main__":
 
     app = widgets.app()
     item = WebEngineProfile()
-    app.main_loop()
+    app.exec()

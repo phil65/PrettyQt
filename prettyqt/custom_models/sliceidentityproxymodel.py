@@ -170,4 +170,4 @@ if __name__ == "__main__":
     table.proxifier.get_proxy("read_only", indexer=(0, 0))
     table.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

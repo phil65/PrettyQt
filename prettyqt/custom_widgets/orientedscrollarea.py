@@ -64,4 +64,4 @@ if __name__ == "__main__":
     #     w.box.addWidget(widgets.PlainTextEdit("test"))
     area.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

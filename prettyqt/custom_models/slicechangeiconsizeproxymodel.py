@@ -56,4 +56,4 @@ if __name__ == "__main__":
     )
     tree.show()
     with app.debug_mode():
-        app.main_loop()
+        app.exec()
