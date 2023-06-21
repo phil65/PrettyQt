@@ -9,6 +9,7 @@ from .selectionmixin import SelectionMixin
 from .listmixin import ListMixin
 from .treemodel import TreeModel
 from .columnitemmodel import ColumnItemModel, ColumnTableModel, ColumnItem
+
 # these are deprecated
 from .modelmixin import ModelMixin
 from .nesteditem import NestedItem
@@ -44,20 +45,24 @@ from .widgethierarchymodel import WidgetHierarchyModel, LayoutHierarchyModel
 
 from .sliceidentityproxymodel import SliceIdentityProxyModel
 from .slicechangeiconsizeproxymodel import SliceChangeIconSizeProxyModel
-from .multicolumnfilterproxymodel import MultiColumnFilterProxyModel
 from .slicefilterproxymodel import SliceFilterProxyModel
+from .slicecheckableproxymodel import (
+    SliceCheckableProxyModel,
+    SliceCheckableTreeProxyModel,
+)
+from .sliceappearanceproxymodel import SliceAppearanceProxyModel
+from .slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
+
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
+from .multicolumnfilterproxymodel import MultiColumnFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuetransformationproxymodel import ValueTransformationProxyModel
 from .valuefilterproxymodel import ValueFilterProxyModel
 from .rangefilterproxymodel import RangeFilterProxyModel
-from .checkableproxymodel import CheckableProxyModel
 from .tabletolistproxymodel import TableToListProxyModel
 from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
-from .sliceappearanceproxymodel import SliceAppearanceProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
-from .slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
 from .colorvaluesproxymodel import ColorValuesProxyModel
 from .highlightmouseproxymodel import HighlightMouseProxyModel
@@ -103,7 +108,8 @@ __all__ = [
     "ValueTransformationProxyModel",
     "ValueFilterProxyModel",
     "RangeFilterProxyModel",
-    "CheckableProxyModel",
+    "SliceCheckableProxyModel",
+    "SliceCheckableTreeProxyModel",
     "TableToListProxyModel",
     "FlattenedTreeProxyModel",
     "SliceAppearanceProxyModel",

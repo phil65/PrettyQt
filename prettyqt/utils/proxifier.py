@@ -89,11 +89,11 @@ class ProxyWrapper:
 
     def set_checkable(
         self, callback: Callable | None = None
-    ) -> custom_models.CheckableProxyModel:
+    ) -> custom_models.SliceCheckableProxyModel:
         """Make given area checkable."""
         from prettyqt import custom_models
 
-        proxy = custom_models.CheckableProxyModel(
+        proxy = custom_models.SliceCheckableProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         if callback:

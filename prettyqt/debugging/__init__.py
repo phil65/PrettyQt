@@ -144,7 +144,7 @@ def example_table(flatten: bool = False):
     data = pd.DataFrame(data)
     table = widgets.TableView()
     table.set_delegate("variant")
-    table.set_model(data)
+    table.set_model_for(data)
     return table
 
 
