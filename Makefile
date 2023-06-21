@@ -50,7 +50,7 @@ docs: ## builds the documentation
 
 serve: ## run html server watching file changes in realtime
 	$(BROWSER) site/index.html
-	poetry run mkdocs serve
+	poetry run mkdocs serve --dirtyreload
 
 # install: clean ## install the package to the active Python's site-packages
 # 	python setup.py install
