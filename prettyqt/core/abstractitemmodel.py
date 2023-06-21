@@ -306,9 +306,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def search_tree(
         self,
         value: Any,
-        role=constants.DISPLAY_ROLE,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         root_index: core.ModelIndex | None = None,
-        max_results=None,
+        max_results: int | None = None,
         depth: int | None = None,
     ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
         """Search the tree for indexes with a given value in given role.
