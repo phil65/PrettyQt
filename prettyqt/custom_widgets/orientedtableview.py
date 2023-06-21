@@ -11,11 +11,11 @@ logger = logging.getLogger(__name__)
 class OrientedTableView(widgets.TableView):
     """TableView class with some convenience methods for oriented tables."""
 
-    def __init__(self, orientation: constants.Orientation, parent=None, **kwargs):
-        super().__init__(parent, **kwargs)
+    def __init__(self, orientation: constants.Orientation, **kwargs):
+        super().__init__(**kwargs)
         self.orientation = orientation
 
-    def get_higher_levels(self, levels):
+    def get_higher_levels(self, levels: int):
         model = self.model()
         if self.is_horizontal():
             # Get the header's selected columns

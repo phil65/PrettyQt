@@ -30,7 +30,7 @@ class DataTableView(widgets.TableView):
         self.set_size_policy("expanding", "expanding")
         self.set_df(df)
 
-    def set_df(self, df):
+    def set_df(self, df: pd.DataFrame):
         model = pandasmodels.DataTableModel(df, parent=self)
         self.set_model(model)
 
@@ -71,8 +71,8 @@ class DataTableView(widgets.TableView):
 
 
 class DataFrameViewer(widgets.Widget):
-    def __init__(self, df=None, parent=None):
-        super().__init__(parent)
+    def __init__(self, df: pd.DataFrame | None = None, **kwargs):
+        super().__init__(**kwargs)
         # Indicates whether the widget has been shown yet. Set to True in
         self._loaded = False
         self.df = df
@@ -132,7 +132,7 @@ class DataFrameViewer(widgets.Widget):
         if df is not None:
             self.set_df(df)
 
-    def set_df(self, df):
+    def set_df(self, df: pd.DataFrame):
         self.df = df
         model = pandasmodels.DataTableModel(df, parent=self.table_data)
         self.table_data.set_model(model)
@@ -275,7 +275,7 @@ class DataFrameViewer(widgets.Widget):
                 selected, SelectionFlag.Rows | SelectionFlag.ClearAndSelect
             )
 
-    def auto_size_column(self, column_index):
+    def auto_size_column(self, column_index: int):
         """Set the size of column at column_index to fit its contents."""
         padding = 20
 
@@ -308,7 +308,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_data.updateGeometry()
         self.table_columns.updateGeometry()
 
-    def auto_size_row(self, row_index):
+    def auto_size_row(self, row_index: int):
         """Set the size of row at row_index to fix its contents."""
         padding = 20
 
@@ -345,7 +345,7 @@ class DataFrameViewer(widgets.Widget):
         self.table_data.updateGeometry()
         self.table_index.updateGeometry()
 
-    def keyPressEvent(self, event):
+    def keyPressEvent(self, event: core.QEvent):
         super().keyPressEvent(event)
 
         if event.matches(gui.KeySequence.StandardKey.Copy):
@@ -366,8 +366,8 @@ class DataFrameViewer(widgets.Widget):
 class HeaderView(custom_widgets.OrientedTableView):
     """Displays the DataFrame index or columns depending on orientation."""
 
-    def __init__(self, parent: DataFrameViewer, orientation):
-        super().__init__(orientation, parent)
+    def __init__(self, parent: DataFrameViewer, orientation: constants.Orientation):
+        super().__init__(orientation, parent=parent)
 
         self.table = parent.table_data
         # These are used during column resizing
@@ -406,7 +406,7 @@ class HeaderView(custom_widgets.OrientedTableView):
             self.set_df(df)
             self.resize(self.sizeHint())
 
-    def set_df(self, df, set_spans: bool = True):
+    def set_df(self, df: pd.DataFrame, set_spans: bool = True):
         if self.is_horizontal():
             model = pandasmodels.HorizontalHeaderModel(df)
         else:
