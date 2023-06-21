@@ -33,7 +33,6 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
         super().__init__(*args, filter_mode="fuzzy", **kwargs)
         self._search_term = ""
         self._match_color: QtGui.QColor = gui.Color("blue")
-        self.setSortRole(self.Roles.SortRole)
         self.sort(0, constants.DESCENDING)
 
     def set_match_color(self, color: datatypes.ColorType | None):
@@ -42,23 +41,21 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     def get_match_color(self) -> QtGui.QColor:
         return self._match_color
 
-    def lessThan(self, left, right):
-        role = super().sortRole()
-        left_data = left.data(role)
-        right_data = right.data(role)
-        if left_data is None or right_data is None:
+    def lessThan(self, left: core.ModelIndex, right: core.ModelIndex):
+        if not self._search_term:
+            return super().lessThan(left, right)
+        if left.data() is None or right.data() is None:
             return True
-        if self._search_term:
-            return fuzzy.fuzzy_match(
-                self._search_term, str(left_data)
-            ) < fuzzy.fuzzy_match(self._search_term, str(right_data))
-        else:
-            return left_data < right_data
+        # since fuzzy scores are cached, it should be fine to do this here.
+        left_data = fuzzy.fuzzy_match(self._search_term, str(left.data()))
+        right_data = fuzzy.fuzzy_match(self._search_term, str(right.data()))
+
+        return left_data < right_data
 
     def set_search_term(self, search_term: str):
         self._search_term = search_term
         super().set_search_term(search_term)
-        # self.invalidateRowsFilter()
+        self.invalidate()
 
     def get_search_term(self):
         return self._search_term
