@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import MutableSequence, Iterator
+from collections.abc import Sequence, Iterator
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui
@@ -12,7 +12,7 @@ class CompositeValidator(gui.Validator):
 
     def __init__(
         self,
-        validators: MutableSequence[gui.Validator] | None = None,
+        validators: Sequence[gui.Validator] | None = None,
         parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
@@ -52,6 +52,13 @@ class CompositeValidator(gui.Validator):
     def validate(  # type: ignore
         self, text: str, pos: int = 0
     ) -> tuple[QtGui.QValidator.State, str, int]:
+        return NotImplemented
+
+
+class AndValidator(CompositeValidator):
+    def validate(  # type: ignore
+        self, text: str, pos: int = 0
+    ) -> tuple[QtGui.QValidator.State, str, int]:
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         if self.State.Invalid in vals:
             return self.State.Invalid, text, pos
@@ -59,6 +66,19 @@ class CompositeValidator(gui.Validator):
             return self.State.Intermediate, text, pos
         else:
             return self.State.Acceptable, text, pos
+
+
+class OrValidator(CompositeValidator):
+    def validate(  # type: ignore
+        self, text: str, pos: int = 0
+    ) -> tuple[QtGui.QValidator.State, str, int]:
+        vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
+        if self.State.Acceptable in vals:
+            return self.State.Acceptable, text, pos
+        elif self.State.Intermediate in vals:
+            return self.State.Intermediate, text, pos
+        else:
+            return self.State.Invalid, text, pos
 
 
 if __name__ == "__main__":

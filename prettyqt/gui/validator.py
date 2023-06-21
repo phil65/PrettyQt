@@ -9,14 +9,15 @@ class ValidatorMixin(core.ObjectMixin):
     def __repr__(self):
         return get_repr(self)
 
-    def __add__(self, other: Validator):
+    def __and__(self, other: Validator):
         from prettyqt import custom_validators
 
-        return custom_validators.CompositeValidator([self, other])
+        return custom_validators.AndValidator([self, other])
 
-    def __radd__(self, other: QtGui.QValidator):
-        """Needed for sum()."""
-        return self.__add__(other)
+    def __or__(self, other: Validator):
+        from prettyqt import custom_validators
+
+        return custom_validators.OrValidator([self, other])
 
     def is_valid_value(self, value: str, pos: int = 0) -> bool:
         val = self.validate(value, pos)
@@ -28,4 +29,5 @@ class Validator(ValidatorMixin, QtGui.QValidator):
 
 
 if __name__ == "__main__":
-    val = Validator()
+    val = Validator() & Validator()
+    print(val)

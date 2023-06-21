@@ -4,7 +4,7 @@ Contains custom validators
 """
 
 
-from .compositevalidator import CompositeValidator
+from .compositevalidator import AndValidator, OrValidator
 from .pathvalidator import PathValidator
 from .integervalidator import IntegerValidator
 from .whitelistvalidator import WhitelistValidator
@@ -29,7 +29,8 @@ __all__ = [
     "IntListValidator",
     "FloatListValidator",
     "NotZeroValidator",
-    "CompositeValidator",
+    "AndValidator",
+    "OrValidator",
     "RegexPatternValidator",
     "HexValidator",
     "QssValidator",
