@@ -4,7 +4,7 @@ from collections.abc import Generator
 import functools
 import importlib.util
 import logging
-from typing import Any, Literal, overload
+from typing import Any, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
@@ -171,44 +171,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             return
         super().selectAll()
 
-    @overload
-    def set_model(
-        self, model: list | dict | QtCore.QAbstractItemModel
-    ) -> QtCore.QAbstractItemModel:
-        ...
-
-    @overload
-    def set_model(self, model: None):
-        ...
-
-    def set_model(
-        self, model: QtCore.QAbstractItemModel | list | dict | None
-    ) -> QtCore.QAbstractItemModel | None:
-        """Set the model of this View.
-
-        In addition to QAbstractItemModels, you can also pass some basic datastructures.
-        An appropriate model will be chosen automatically then.
-        """
-        from prettyqt import custom_models
-
-        match model:
-            case dict():
-                model = custom_models.JsonModel(model, parent=self)
-            case [dict(), *_]:
-                model = custom_models.MappingModel(model, parent=self)
-            case [str(), *_]:
-                model = core.StringListModel(model, parent=self)
-            case QtCore.QAbstractItemModel() | None:
-                pass
-            case _:
-                if importlib.util.find_spec("pandas") is None:
-                    raise ImportError("Install pandas for DataFrame support")
-                from prettyqt.qtpandas import pandasmodels
-                import pandas as pd
-
-                if not isinstance(model, pd.DataFrame):
-                    raise ValueError(model)
-                model = pandasmodels.DataTableWithHeaderModel(model, parent=self)
+    def set_model(self, model: QtCore.QAbstractItemModel | None):
+        """Set the model of this View."""
         # Delete old selection model explicitely, seems to help with memory usage.
         old_model = self.model()
         old_sel_model = self.selectionModel()
@@ -226,6 +190,36 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             old_sel_model.deleteLater()
             del old_sel_model
         return model
+
+    def set_model_for(self, data):
+        """Set model for given data type.
+
+        Pass any data structure and an appropriate model will be chosen automatically.
+
+        Args:
+            data: data to choose model for.
+        """
+        # we import to collect the models
+        from prettyqt import custom_models   # noqa: F401
+
+        # TODO: probably better to check models from external modules later
+        # so we dont have to import everything even if not needed.
+        if importlib.util.find_spec("pandas") is not None:
+            from prettyqt.qtpandas import pandasmodels   # noqa: F401
+
+        for Klass in helpers.get_subclasses(core.QAbstractItemModel):
+            if (
+                "supports" in Klass.__dict__
+                and callable(Klass.supports)
+                and Klass.supports(data)
+                and Klass.__name__ != "PythonObjectTreeModel"
+            ):
+                logger.debug(f"found model for data structure {data!r}")
+                break
+        else:
+            raise TypeError("No suiting model found.")
+        model = Klass(data, parent=self)
+        self.set_model(model)
 
     def get_model(self, skip_proxies: bool = False) -> QtCore.QAbstractItemModel:
         model = self.model()
@@ -737,3 +731,13 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
 class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
     pass
+
+
+if __name__ == "__main__":
+    import pandas as pd
+    df = pd.DataFrame(dict(a=[1]))
+    app = widgets.app()
+    table = widgets.TableView()
+    table.set_model_for(df)
+    table.show()
+    app.main_loop()
