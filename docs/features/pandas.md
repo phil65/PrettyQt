@@ -30,6 +30,7 @@ PrettyQt includes several proxy models which try to improve this.
 PandasStringColumnFilterModel can be used to filter a column based on a search string.
 Instead of looping over the cells, a filter index is built using NumPy operations.
 This makes filtering super fast, even with several thousands of rows.
+A quick benchmark showed an almost 100x (!!) performance increase compared to QSortFilterProxyModel.
 
 PandasEvalFilterModel works in a similar way, but filtering is done by a Python statement.
 (example: '"a" > 10' would show all rows where the value of column "a" is greater than 10.)
