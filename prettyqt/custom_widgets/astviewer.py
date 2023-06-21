@@ -8,14 +8,13 @@ from prettyqt import constants, custom_models, custom_widgets, widgets
 logger = logging.getLogger(__name__)
 
 
-class AstViewer(widgets.Widget):
+class AstViewer(widgets.Splitter):
     def __init__(
         self,
         object_name="ast_viewer",
         **kwargs,
     ):
-        super().__init__(object_name=object_name, **kwargs)
-        layout = self.set_layout("horizontal")
+        super().__init__(orientation="horizontal", object_name=object_name, **kwargs)
         self.tree = widgets.TreeView()
         self.ast_textedit = widgets.PlainTextEdit()
         self.tabwidget = widgets.TabWidget()
@@ -25,8 +24,8 @@ class AstViewer(widgets.Widget):
         self.textedit = custom_widgets.CodeEditor()
         self.textedit.set_syntaxhighlighter("python")
         self.textedit.textChanged.connect(self._on_text_change)
-        layout.add(self.tabwidget)
-        layout.add(self.textedit)
+        self.add(self.tabwidget)
+        self.add(self.textedit)
 
     def _on_text_change(self):
         self.set_ast(self.textedit.get_value())
