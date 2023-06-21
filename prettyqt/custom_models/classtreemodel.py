@@ -83,18 +83,32 @@ class SubClassTreeModel(BaseClassTreeModel):
 class ParentClassTreeModel(BaseClassTreeModel):
     """Model to display the parentclass tree of a python class."""
 
+    def __init__(self, *args, **kwargs):
+        self._show_mro = False
+        super().__init__(*args, **kwargs)
+
     @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, type)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        return [treeitem.TreeItem(obj=i) for i in item.obj.__bases__]
+        if self._show_mro:
+            return [treeitem.TreeItem(obj=i) for i in item.obj.mro()[1:]]
+        else:
+            return [treeitem.TreeItem(obj=i) for i in item.obj.__bases__]
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         if item.obj is None:
             return False
         return len(item.obj.__bases__) > 0
 
+    def set_show_mro(self, show: bool):
+        self._show_mro = show
+
+    def get_show_mro(self) -> bool:
+        return self._show_mro
+
+    show_mro = core.Property(bool, get_show_mro, set_show_mro)
 
 if __name__ == "__main__":
     from prettyqt import widgets
