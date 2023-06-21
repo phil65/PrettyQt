@@ -154,6 +154,10 @@ class Proxyfier:
         # self._widget.set_stylesheet(ss)
         return self.get_proxy("flatten_tree")
 
+    def to_list(self) -> custom_models.TableToListProxyModel:
+        """Wraps model in a Proxy converts table to a tree."""
+        return self.get_proxy("table_to_list")
+
     def color_values(
         self,
         low_color: datatypes.ColorType = "green",
