@@ -64,7 +64,7 @@ class CommandTable(widgets.TableView):
 
     def _on_clicked(self, index: core.ModelIndex) -> None:
         if index.isValid():
-            role = self._model.Roles.TreeItemRole
+            role = self._model.ExtraRoles.TreeItemRole
             data = index.data(role)
             data.trigger()
 

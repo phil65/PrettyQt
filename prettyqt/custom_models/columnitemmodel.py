@@ -70,7 +70,7 @@ class ColumnItem:
 
 
 class ColumnItemModelMixin:
-    class Roles(enum.IntEnum):
+    class ExtraRoles(enum.IntEnum):
         """Addional roles."""
         TreeItemRole = constants.USER_ROLE + 43435
         ColumnItemRole = constants.USER_ROLE + 43436
@@ -88,9 +88,9 @@ class ColumnItemModelMixin:
         tree_item = self.data_by_index(index)
         col_item = self._attr_cols[col]
         match role:
-            case self.Roles.TreeItemRole:
+            case self.ExtraRoles.TreeItemRole:
                 return tree_item
-            case self.Roles.ColumnItemRole:
+            case self.ExtraRoles.ColumnItemRole:
                 return col_item
             case _:
                 return col_item.get_data(tree_item, role)
