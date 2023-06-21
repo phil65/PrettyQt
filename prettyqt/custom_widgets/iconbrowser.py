@@ -92,7 +92,7 @@ class IconModel(core.StringListModel):
         super().__init__()
         self._icon_color = colors.get_color(icon_color).as_qt()
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         return constants.IS_ENABLED | constants.IS_SELECTABLE  # type: ignore
 
     def data(

@@ -28,7 +28,7 @@ class ModelMixin:
     def columnCount(self, parent=None):
         return len(self.HEADER)
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         """Override for AbstractitemModel base method.
 
         returns corresponding flags for cell of supplied index

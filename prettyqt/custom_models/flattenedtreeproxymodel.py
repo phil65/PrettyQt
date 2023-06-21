@@ -123,7 +123,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         parent = parent or core.ModelIndex()
         return 0 if parent.isValid() else 1
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         flags = super().flags(index)
         if self._flattening_mode != self.FlatteningMode.InternalNodesDisabled:
             return flags

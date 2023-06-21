@@ -51,7 +51,7 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
             return super().parent(proxy_sibling)
         return super().parent(child)
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         extra_col = self.sourceModel().columnCount() - index.column()
         if extra_col >= 0:
             return constants.IS_SELECTABLE | constants.IS_ENABLED
@@ -161,7 +161,7 @@ if __name__ == "__main__":
                 case constants.DISPLAY_ROLE | constants.USER_ROLE, _:
                     return "test"
 
-        def flags(self, index):
+        def flags(self, index: core.ModelIndex):
             return (
                 super().flags(index)
                 | constants.IS_EDITABLE

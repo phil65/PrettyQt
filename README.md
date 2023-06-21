@@ -39,7 +39,6 @@ pip install prettyqt
 ## Dependencies
 - [bidict](https://pypi.org/project/bidict)
 - [orjson](https://pypi.org/project/orjson)
-- [regex](https://pypi.org/project/regex)
 - [docutils](https://pypi.org/project/docutils)
 
 

@@ -79,7 +79,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
             return 0
         return 0 if parent.isValid() else len(self.items)
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         prop = self.props[index.column()]
         if prop.isWritable():
             return super().flags(index) | constants.IS_EDITABLE

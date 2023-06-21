@@ -442,7 +442,7 @@ class FSSpecTreeModel(
         DropAction = constants.DropAction
         return DropAction.MoveAction | DropAction.CopyAction | DropAction.LinkAction
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         return super().flags(index) | constants.DROP_ENABLED | constants.DRAG_ENABLED
 
     # def dragEnterEvent(self, event):

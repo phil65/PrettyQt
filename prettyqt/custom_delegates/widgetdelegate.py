@@ -111,7 +111,7 @@ if __name__ == "__main__":
                 case constants.DISPLAY_ROLE | constants.USER_ROLE, 1:
                     return pb
 
-        def flags(self, index):
+        def flags(self, index: core.ModelIndex):
             return super().flags(index) | constants.IS_EDITABLE
 
     table_widget.set_delegate("widget")

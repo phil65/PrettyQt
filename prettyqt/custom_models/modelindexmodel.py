@@ -107,7 +107,7 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
         self.update_row(index.row())
         return True
 
-    def flags(self, index):
+    def flags(self, index: core.ModelIndex):
         return super().flags(index) | constants.IS_EDITABLE
         # idx = self.items[index.row()]
         # return idx.flags()

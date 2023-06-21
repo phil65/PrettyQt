@@ -194,7 +194,7 @@ class RegularExpression(QtCore.QRegularExpression):
         return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
 
     @property
-    def flags(self):
+    def flags(self) -> QtCore.QRegularExpression.PatternOption:
         return self.patternOptions()
 
     def to_py_pattern(self) -> re.Pattern:
