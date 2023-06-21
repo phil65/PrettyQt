@@ -24,7 +24,7 @@ class ErrorMessageBox(widgets.MessageBox):
             exc = text_or_exception
         super().__init__(
             # icon=MBox.Icon.Critical,
-            title=title,
+            window_title=title,
             text=str(text)[:1000],
             buttons=["ok", "help", "close"],
             parent=parent,
@@ -70,8 +70,8 @@ class ErrorMessageBox(widgets.MessageBox):
     @classmethod
     def _excepthook(cls, exc_type: type[Exception], exc_value: Exception, exc_traceback):
         """Exception hook used during application execution."""
-        # tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
-        logger.exception(exc_value)
+        tb = "".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+        logger.error(tb)
         return ErrorMessageBox.raise_(exc_value, parent=None)
 
 
