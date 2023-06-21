@@ -209,21 +209,27 @@ class Settings_(
 
 
 class Settings(Settings_):
-    # settings class which wraps everything into a dict to preserve data types.
+    """Settings class which wraps everything into a dict to preserve data types."""
     def set_value(self, key: str, value):
-        if isinstance(value, Settings_):
-            value = dict(value)
-        super().set_value(key, dict(value=value))
+        match value:
+            case Settings_():
+                setting = dict(value=dict(value), typ="subsetting")
+            case _:
+                setting = dict(value=value, typ="regular")
+        super().set_value(key, setting)
 
     def get_value(self, key: str, default=None):
         if not self.contains(key):
             return default
         val = self.value(key)
-        # this is for migration
-        if not isinstance(val, dict) or "value" not in val:
-            self.set_value(key, val)
-            return val
-        return val["value"]
+        # TODO: convert settings dicts back?
+        match val:
+            case {"value": setting}:
+                return setting
+            case _:
+                # this is for migration
+                self.set_value(key, val)
+                return val
 
 
 if __name__ == "__main__":
