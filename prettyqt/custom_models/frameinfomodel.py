@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 import logging
 
 from prettyqt import constants, core, gui, custom_models
@@ -67,7 +68,6 @@ class FrameInfoModel(custom_models.ListMixin, core.AbstractTableModel):
 
 if __name__ == "__main__":
     from prettyqt import widgets
-    import inspect
 
     app = widgets.app()
     view = widgets.TableView()
