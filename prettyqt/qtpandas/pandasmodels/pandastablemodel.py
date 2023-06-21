@@ -130,7 +130,7 @@ class DataTableWithHeaderModel(DataTableModel):
     def get_multiindex_separator(self) -> str:
         return self._multiindex_separator
 
-    _multiindex_separator = core.Property(
+    multiindex_separator = core.Property(
         str, get_multiindex_separator, set_multiindex_separator
     )
 
