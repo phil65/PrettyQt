@@ -146,6 +146,10 @@ def get_widget_for_value(val, parent=None):
             return custom_widgets.SizePolicyEdit(parent=parent)
         case core.QUrl():
             return custom_widgets.UrlLineEdit(parent=parent)
+        case gui.QPalette():
+            return custom_widgets.PaletteEdit(parent=parent)
+        case gui.QCursor():
+            return custom_widgets.CursorEdit(parent=parent)
         # case QtCore.QRectF():  # todo
         #     return custom_widgets.RectEdit(parent=parent)
     try:
