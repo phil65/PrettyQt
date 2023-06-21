@@ -2,6 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import logging
+import functools
+import operator
 from typing import Any, Literal, TYPE_CHECKING
 
 from prettyqt import constants, core, widgets
@@ -75,27 +77,61 @@ class ProxyWrapper:
         self._widget.set_model(proxy)
         return proxy
 
-    def set_read_only(self) -> custom_models.ReadOnlyProxyModel:
-        """Make given area read-only."""
+    def change_flags(
+        self,
+        selectable: bool | None = None,
+        editable: bool | None = None,
+        drag_enabled: bool | None = None,
+        drop_enabled: bool | None = None,
+        user_checkable: bool | None = None,
+        enabled: bool | None = None,
+        auto_tristate: bool | None = None,
+        never_has_children: bool | None = None,
+        user_tristate: bool | None = None,
+    ) -> custom_models.SliceChangeFlagsProxyModel:
+        """Change Item flags for given slice."""
         from prettyqt import custom_models
 
         proxy = custom_models.SliceChangeFlagsProxyModel(
             indexer=self._indexer, parent=self._widget
         )
-        proxy.set_flags_to_remove(constants.IS_EDITABLE)
+        flags = dict(
+            selectable=selectable,
+            editable=editable,
+            drag_enabled=drag_enabled,
+            drop_enabled=drop_enabled,
+            user_checkable=user_checkable,
+            enabled=enabled,
+            auto_tristate=auto_tristate,
+            never_has_children=never_has_children,
+            user_tristate=user_tristate,
+        )
+        flags_to_add = [constants.ITEM_FLAG[k] for k, v in flags.items() if v is True]
+        flags_to_remove = [constants.ITEM_FLAG[k] for k, v in flags.items() if v is False]
+        if flags_to_add:
+            proxy.set_flags_to_add(functools.reduce(operator.ior, flags_to_add))
+        if flags_to_remove:
+            proxy.set_flags_to_remove(functools.reduce(operator.ior, flags_to_remove))
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy
 
     def set_checkable(
-        self, callback: Callable | None = None
+        self,
+        callback: Callable | None = None,
+        tree: bool = False,
     ) -> custom_models.SliceCheckableProxyModel:
         """Make given area checkable."""
         from prettyqt import custom_models
 
-        proxy = custom_models.SliceCheckableProxyModel(
-            indexer=self._indexer, parent=self._widget
-        )
+        if tree:
+            proxy = custom_models.SliceCheckableTreeProxyModel(
+                indexer=self._indexer, parent=self._widget
+            )
+        else:
+            proxy = custom_models.SliceCheckableProxyModel(
+                indexer=self._indexer, parent=self._widget
+            )
         if callback:
             proxy.checkstate_changed.connect(callback)
         proxy.setSourceModel(self._widget.model())
@@ -194,13 +230,11 @@ class Proxyfier:
 
 
 if __name__ == "__main__":
+    from prettyqt import debugging
     app = widgets.app()
 
-    test = widgets.PlainTextEdit()
-    for i in range(200):
-        test.append_text(str(i))
-    test.show()
+    table = debugging.example_table()
+    table.proxifier[0].change_flags(selectable=False, enabled=False)
+    table.show()
     with app.debug_mode():
-        app.sleep(2)
-        print(test.selecter[20:50])
         app.main_loop()
