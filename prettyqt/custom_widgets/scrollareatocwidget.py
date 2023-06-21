@@ -27,6 +27,7 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         self._highlight_font.setBold(True)
         self._Class = widget_class
         self._current_widgets: list[widgets.QWidget] = []
+        self._header_property = "windowTitle"
         super().__init__(*args, **kwargs)
 
     def set_highlighted_widgets(self, widgets: list[widgets.QWidget]):
@@ -42,9 +43,9 @@ class ScrollAreaTocModel(custom_models.TreeModel):
         widget = self.data_by_index(index).obj
         match role:
             case constants.DISPLAY_ROLE if widget in self._current_widgets:
-                return f"> {widget.windowTitle()}"
+                return f"> {widget.property(self.header_property)}"
             case constants.DISPLAY_ROLE:
-                return widget.windowTitle()
+                return widget.property(self.header_property)
             case constants.USER_ROLE:
                 return widget
             case constants.FONT_ROLE if widget in self._current_widgets:
@@ -54,13 +55,13 @@ class ScrollAreaTocModel(custom_models.TreeModel):
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
         flag = constants.FindChildOption.FindDirectChildrenOnly
         children = item.obj.findChildren(self._Class, None, flag)
-        children = [i for i in children if i.windowTitle()]
+        children = [i for i in children if i.property(self.header_property)]
         return [treeitem.TreeItem(obj=i) for i in children]
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         flag = constants.FindChildOption.FindDirectChildrenOnly
         children = item.obj.findChildren(self._Class, None, flag)
-        children = [i for i in children if i.windowTitle()]
+        children = [i for i in children if i.property(self.header_property)]
         return bool(children)
 
     def set_highlight_font(self, font: gui.QFont):
@@ -69,7 +70,14 @@ class ScrollAreaTocModel(custom_models.TreeModel):
     def get_highlight_font(self) -> gui.QFont:
         return self._highlight_font
 
+    def set_header_property(self, prop: str):
+        self._header_property = prop
+
+    def get_header_property(self) -> str:
+        return self._header_property
+
     highlight_font = core.Property(gui.QFont, get_highlight_font, set_highlight_font)
+    header_property = core.Property(str, get_header_property, set_header_property)
 
 
 class ScrollAreaTocWidget(widgets.TreeView):
