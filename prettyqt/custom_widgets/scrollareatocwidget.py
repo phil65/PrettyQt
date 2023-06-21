@@ -46,6 +46,8 @@ class ScrollAreaTocModel(custom_models.TreeModel):
                 return f"> {widget.property(self.header_property)}"
             case constants.DISPLAY_ROLE:
                 return widget.property(self.header_property)
+            case constants.DECORATION_ROLE:
+                return widget.windowIcon()
             case constants.USER_ROLE:
                 return widget
             case constants.FONT_ROLE if widget in self._current_widgets:
