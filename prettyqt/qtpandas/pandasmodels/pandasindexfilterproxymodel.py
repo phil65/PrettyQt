@@ -130,6 +130,9 @@ class PandasStringColumnFilterModel(BasePandasIndexFilterModel):
                     na=self._na_value,
                 )
         self._filter_index = self._filter_index.to_numpy()
+        # this is needed for new StringDtype, otherwise much slower.
+        if self._filter_index.dtype == object:
+            self._filter_index = self._filter_index.astype(bool)
 
     def set_filter_column(self, column: int):
         self._filter_column = column
@@ -216,8 +219,8 @@ if __name__ == "__main__":
     from prettyqt.qtpandas import pandasmodels
 
     app = widgets.app()
-    a = pd.Series(["a", "bc", "c", "d", "aa"] * 10000, dtype=pd.StringDtype())
-    b = pd.Series(["a", "b", "c", "fjkdsj", "fdf"] * 10000, dtype=pd.StringDtype())
+    a = pd.Series(["a", "bc", "c", "d", "aa"] * 100000, dtype=pd.StringDtype())
+    b = pd.Series(["a", "b", "c", "fjkdsj", "fdf"] * 100000, dtype=pd.StringDtype())
     df = pd.DataFrame(dict(a=a, b=b))
     model = pandasmodels.DataTableWithHeaderModel(df)
     table = widgets.TableView()
@@ -227,9 +230,12 @@ if __name__ == "__main__":
     layout.add(lineedit)
     layout.add(table)
     proxy = PandasStringColumnFilterModel(parent=table)
-    proxy.filter_mode = "startswith"
-    lineedit.value_changed.connect(proxy.set_search_term)
     proxy.setSourceModel(model)
+    proxy.set_search_term("a")
+    print(proxy._filter_index.dtype)
+    print(proxy._source_to_proxy.dtype)
+    print(proxy._proxy_to_source.dtype)
+    lineedit.value_changed.connect(proxy.set_search_term)
     table.set_model(proxy)
     container.show()
     with app.debug_mode():
