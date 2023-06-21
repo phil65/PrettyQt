@@ -1,3 +1,144 @@
+## v1.49.0 (2023-06-21)
+
+### Feat
+
+- **ParentClassTreeModel**: add mro mode
+- add SliceCheckableTreeProxyModel
+- **ScrollAreaTocWidget**: show windowIcon
+- **ScrollAreaTocWidget**: make header property user-settable
+- **Proxifier**: add to_list method
+- **PandasTableWithHeaderModel**: make multiindex_separator a property
+- new fast PandasProxyModels
+- **BaseIPythonWidget**: make completion_mode a property
+- add some multimedia classes
+- add SliceChangeIconSizeProxyModel
+- **SortFilterProxyModel**: allow re.Pattern for setFilterRegularExpression
+- search box for settings
+- **MultiColumnFilterProxyModel**: support fuzzy and normal (startswith) mode.
+- **MultilineLayout**: support different layout types
+- add MultiColumnFilterProxyModel
+- add FilterHeader (replaces FilterContainer)
+- **TableToListProxyModel**: map headerData and allow setting custom header
+- **debugging**: add proxy_comparer helper
+- allow negative indexes for Layout.__getitem__
+- **ScrollAreaTocWidget**: make highlight_font a property
+- **qml**: add a helper to quickly expose all widgets to qml
+- **PropertyAnimation**: add get_property_value method
+- **Widget**: add map_to/from("window")
+- **AbstractAnimation**: add toggle_direction method
+- **ColorValuesProxyModel**: allow setting low/high color
+- **helpers**: get_color_percentage works with arbitrary number of tuple elements now
+- **Layout**: allow LayoutItems for add()
+- add SliceFilterProxyModel
+- add HighlightMouseProxyModel
+- **TabWidget**: allow slicing
+- **HeaderView**: allow indexing by section name
+- slicing support for TabBar
+- **Layout**: add get_items method
+- **Proxifier**: add add_column method
+- Slicing support for StackedWidget
+- **HeaderView**: add HeaderWrapper
+- **PushButton**: add set_action method
+- add AutoresizingTextEdit
+- add ConfigWidget
+- Slice proxying
+- add include_column kwarg to get_index_key
+- add ColorValuesProxyModel
+- add ModelIndexModel
+- add DisplayMode setting to FlattenedTreeProxyModel
+- **Proxifier**: add flatten method
+- **Object**: add properties_set_to context manager
+- **AbstractItemModel**: add get_breadcrumbs_path
+- **ImportlibTreeModel**: show markers
+- **TreeModel**: support TreeItem subclasses
+- **AbstractItemModel**: depth kwarg for prefetch_tree
+- **Treeview**: add set_expanded method (which also takes Iterables)
+- **AbstractItemModel**: depth kwarg for search/iter_tree
+- **Object**: add signal_blocked method
+- **AbstractItemModel**: add get_child_indexes method
+- **VariantDelegate**: make setting EditRole optional
+- **ToolBox**: add slicing support
+- **GraphicsLayout**: add slicing support
+- **AnimationGroup**: add targetObject method
+- **ListWidget**: add slice support
+- **ToolBar**: add __getitem__ including slicing
+- **BaseListDelegator**: support slicing
+- support slicing for layouts
+- **Splitter**: allow slicing
+- add listdelegators module
+- **TextCursor**: add join_previous kwarg for edit_block
+- **TextCursor**: add __contains__ method
+- add FrameInfoModel class
+- add show method
+- add TextAnimation class
+- **PygmentsHighlighter**: make style a property
+- add EmojiIconEngine class
+- **Locale**: add get_flag_unicode method
+- **Locale**: add get_country method
+- **Fx**: infer type for transition methods
+- **Font**: add as_qt kwarg for mono()
+- **ListMixin**: support slices for __getitem__
+- add SubClassTreeModel / ParentClassTreeModel
+- add PydanticFieldsModel
+- add PydanticModel
+- **Settings**: allow nesting settings objects
+- add AstViewer
+- add two models for attrs
+- **fx**: add transition_to/from methods
+- add OptionsValidator
+- **RegularExpression**: add to_py_pattern method
+- **VariantAnimation**: add append_reversed method
+- add MultiComboBox
+- **AbstractItemModel**: add get_index_key / key_from_index methods
+- **Layout**: groupbox for ContextLayouts
+- **MetaObject**: also accept snake case for get_property etc
+- **MetaProperty**: add get_python_type method
+- **SequentialAnimationGroup**: add reverse / reversed / append_reversed methods
+- **Stalker**: work with non-prettyqt widgets
+- **QObjectDialog**: widget click sets focus on HierarchyView
+- add ZoomAnimation
+- **VariantAnimation**: add reverse/reversed methods
+- fx delegate for widgets
+- **Widget**: add data kwarg to add_action
+- add delay kwarg to play_animation
+- **ScrollBar**: add can_scroll method
+- add some ScXml classes
+- **HighlightCurrentProxyModel**: make highlight color configurable
+- **HighlightCurrentProxyModel**: add "row" as mode option
+- add XmlModel
+- **ScrollArea**: make get_visible_widgets work with base QWidgets
+- add AstModel class
+- **TextCursor**: allow tuples for select_text
+- **TextCursor**: allow tuples for set_position
+- **TabWidget**: add create_tab_preview method
+- add two models for displaying dataclasses
+- **WidgetPropertiesModel**: add Stored column
+- **Locale**: add get_c_locale method
+- **Object**: only_nonempty kwarg for get_properties
+- **MetaObject**: extended get_properties filter functionality
+- **MetaObject**: added get_all_super_classes method
+- **Object**: allow predicates for find_children property selector
+- **RegularExpression**: allow re.Pattern in ctor
+
+### Fix
+
+- **ColumnItemModel**: prevent namespace issues
+- **TextDocument**: method somehow landed in wrong class
+- **MultiColumnFilterProxyModel**: fix non-fuzzy str search
+- **AstModel**: correct has_children check
+- **Object**: fix check in get_properties
+- **ScrollbarTocWidget**: highlight rows when shown
+- **RenderLinkDelegate**: correctly clip text
+- **ClassTreeModel**: catch another exception
+- **KeySequenceEdit**: return correct type
+- **AnimationGroup**: fix slicing support
+- **DebugMode**: hide frame when menu closed
+- **CycleWidget**: fixed scroll issue
+- **FilterContainer**: editor width fix
+- **FilterContainer**: pass object_name to parent in __init__
+- **AbstractItemView**: fix incorrect type in size_hint_for_column
+- **Spanslider**: qt6 related stuff
+
 ## v1.48.0 (2023-06-08)
 
 ### Feat
