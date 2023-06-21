@@ -14,7 +14,6 @@ from prettyqt.utils import treeitem
 logger = logging.getLogger(__name__)
 
 
-
 _PRETTY_PRINTER = pprint.PrettyPrinter(indent=4)
 
 _ALL_PREDICATES = (
@@ -52,9 +51,14 @@ class NameColumn(custom_models.ColumnItem):
             case constants.FOREGROUND_ROLE:
                 return gui.QColor("green") if callable(item.obj) else None
             case constants.FONT_ROLE:
-                font = gui.QFont()
-                font.setItalic(True)
-                return font if item.is_special_attribute else None
+                if (
+                    item.is_attribute
+                    and item.obj_name.startswith("__")
+                    and item.obj_name.endswith("__")
+                ):
+                    font = gui.QFont()
+                    font.setItalic(True)
+                    return font
             case constants.USER_ROLE:
                 return item
 
@@ -291,15 +295,6 @@ class PythonObjectTreeItem(treeitem.TreeItem):
         self.obj_path = str(obj_path)
         self.is_attribute = is_attribute
 
-    @property
-    def is_special_attribute(self) -> bool:
-        """Return true if the item represents a dunder attribute."""
-        return (
-            self.is_attribute
-            and self.obj_name.startswith("__")
-            and self.obj_name.endswith("__")
-        )
-
 
 class PythonObjectTreeModel(custom_models.ColumnItemModel):
     TreeItem = PythonObjectTreeItem
@@ -324,10 +319,8 @@ class PythonObjectTreeModel(custom_models.ColumnItemModel):
         # SourceFileColumn,
     ]
 
-
     def __init__(self, obj, parent=None):
         super().__init__(obj, self.COLUMNS, show_root=False, parent=parent)
-
 
     @classmethod
     def supports(cls, instance) -> bool:
