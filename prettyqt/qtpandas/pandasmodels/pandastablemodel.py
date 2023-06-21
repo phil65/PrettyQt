@@ -94,6 +94,10 @@ class DataTableModel(core.AbstractTableModel):
 
 
 class DataTableWithHeaderModel(DataTableModel):
+    def __init__(self, *args, **kwargs):
+        self._multiindex_separator = " | "
+        super().__init__(*args, **kwargs)
+
     @classmethod
     def supports(cls, instance) -> bool:
         return isinstance(instance, pd.DataFrame)
@@ -108,7 +112,10 @@ class DataTableWithHeaderModel(DataTableModel):
             case constants.ALIGNMENT_ROLE, constants.HORIZONTAL:
                 return constants.ALIGN_CENTER | constants.ALIGN_BOTTOM
             case constants.DISPLAY_ROLE, constants.HORIZONTAL:
-                return str(self.df.columns[section])
+                header = self.df.columns[section]
+                if isinstance(header, tuple | list):
+                    return self._multiindex_separator.join(str(i) for i in header)
+                return str(header)
                 # label = helpers.format_name(self.df.columns[section])
                 # return f"{label}\n{self.df.iloc[:, section].dtype}"
             # case constants.DECORATION_ROLE, constants.HORIZONTAL if self.show_icons:
@@ -116,6 +123,16 @@ class DataTableWithHeaderModel(DataTableModel):
             #     return icons.icon_for_dtype(dtype)
             case _, _:
                 return None
+
+    def set_multiindex_separator(self, separator: str):
+        self._multiindex_separator = separator
+
+    def get_multiindex_separator(self) -> str:
+        return self._multiindex_separator
+
+    _multiindex_separator = core.Property(
+        str, get_multiindex_separator, set_multiindex_separator
+    )
 
 
 class VerticalHeaderModel(core.AbstractTableModel):
