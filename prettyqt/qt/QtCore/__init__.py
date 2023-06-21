@@ -76,8 +76,8 @@ elif PYSIDE6:
     from PySide6 import __version__ as BINDING_VERSION
 
 
-def __repr__(self):
-    return get_repr(self, self.objectName())
+# def __repr__(self):
+#     return get_repr(self, self.objectName())
 
 
-QObject.__repr__ = __repr__
+# QObject.__repr__ = __repr__
