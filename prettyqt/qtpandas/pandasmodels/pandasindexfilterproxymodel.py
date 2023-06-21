@@ -172,7 +172,7 @@ class PandasEvalFilterModel(BasePandasIndexFilterModel):
     ID = "pandas_eval_filter"
 
     def _build_filter_index(self):
-        df = self.sourceModel().df
+        df = self.get_source_model(skip_proxies=True).df
         try:
             self._filter_index = df.eval(self._search_term)
             self._filter_index = self._filter_index.to_numpy()
@@ -180,6 +180,35 @@ class PandasEvalFilterModel(BasePandasIndexFilterModel):
                 self._filter_index = np.full(len(df), False, dtype=bool)
         except Exception:
             self._filter_index = np.full(len(df), False, dtype=bool)
+
+
+class PandasMultiStringColumnFilterModel(BasePandasIndexFilterModel):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._filters: dict[str, str] = {}
+
+    def _build_filter_index(self):
+        df = self.get_source_model(skip_proxies=True).df
+        filters = [f"('{v}' <= `{k}` <= '{v}~')" for k, v in self._filters.items()]
+        expr = " & ".join(filters)
+        try:
+            self._filter_index = df.eval(expr)
+            self._filter_index = self._filter_index.to_numpy()
+            if self._filter_index.dtype != bool:
+                self._filter_index = self._filter_index.astype(bool)
+        except Exception:
+            self._filter_index = np.full(len(df), False, dtype=bool)
+        with self.reset_model():
+            self._source_to_proxy = np.cumsum(self._filter_index) - 1
+            self._proxy_to_source = np.where(self._filter_index == True)[0]  # noqa: E712
+
+    def set_filters(self, filters: dict[str, str]):
+        self._filters = filters
+        self._build_filter_index()
+
+
+    def get_filters(self) -> dict[str, str]:
+        return self._filters
 
 
 if __name__ == "__main__":
