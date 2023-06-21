@@ -6,7 +6,7 @@ import functools
 import operator
 from typing import Any, Literal, TYPE_CHECKING
 
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import datatypes, helpers
 
 if TYPE_CHECKING:
@@ -89,7 +89,12 @@ class ProxyWrapper:
         never_has_children: bool | None = None,
         user_tristate: bool | None = None,
     ) -> custom_models.SliceChangeFlagsProxyModel:
-        """Change Item flags for given slice."""
+        """Change Item flags for given slice.
+
+        For makin an area checkable, usually set_checkable should be preferred
+        since it keeps track of checked items and triggers a callback on checkstate
+        change.
+        """
         from prettyqt import custom_models
 
         proxy = custom_models.SliceChangeFlagsProxyModel(
@@ -118,10 +123,17 @@ class ProxyWrapper:
 
     def set_checkable(
         self,
-        callback: Callable | None = None,
+        callback: Callable[[core.ModelIndex], Any] | None = None,
         tree: bool = False,
-    ) -> custom_models.SliceCheckableProxyModel:
-        """Make given area checkable."""
+    ) -> (
+        custom_models.SliceCheckableProxyModel
+        | custom_models.SliceCheckableTreeProxyModel
+    ):
+        """Make given area checkable and trigger a callback on checkstate change.
+
+        For trees, set tree=True. That way checkboxes change to tristate and
+        propagate changes to parents and children.
+        """
         from prettyqt import custom_models
 
         if tree:
@@ -138,7 +150,13 @@ class ProxyWrapper:
         self._widget.set_model(proxy)
         return proxy
 
-    def style(self, foreground=None, background=None, font=None, alignment=None):
+    def style(
+        self,
+        foreground: gui.QColor | str | None = None,
+        background: gui.QColor | str | None = None,
+        font: str | gui.QFont | None = None,
+        alignment: constants.AlignmentFlag | constants.AlignmentStr | None = None,
+    ) -> custom_models.SliceAppearanceProxyModel:
         """Apply styling to given area."""
         from prettyqt import custom_models
 
@@ -172,7 +190,7 @@ class ProxyWrapper:
 
 
 class Proxyfier:
-    def __init__(self, widget):
+    def __init__(self, widget: widgets.QWidget):
         self._widget = widget
         self._wrapper = None
 
@@ -210,7 +228,7 @@ class Proxyfier:
         self._widget.set_model(proxy)
         return proxy
 
-    def add_column(self, header, formatter: str):
+    def add_column(self, header: str, formatter: str):
         """Add a new column with given header to the table.
 
         Column content can be defined by a formatter.
@@ -221,7 +239,7 @@ class Proxyfier:
         proxy.add_mapping(header, formatter)
         return proxy
 
-    def get_proxy(self, proxy: ProxyStr, **kwargs):
+    def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
         Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
         proxy_instance = Klass(parent=self._widget, **kwargs)
         proxy_instance.setSourceModel(self._widget.model())
@@ -231,6 +249,7 @@ class Proxyfier:
 
 if __name__ == "__main__":
     from prettyqt import debugging
+
     app = widgets.app()
 
     table = debugging.example_table()

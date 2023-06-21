@@ -122,7 +122,7 @@ Example:
     table.proxifier[:-1, :50].filter()
 
     # Set first 20 lines of these 50 lines to read_only
-    table.proxifier[:, :20].set_read_only()
+    table.proxifier[:, :20].change_flags(editable=False)
 
     # Make first column checkable and trigger callback on checkstate change.
     table.proxifier[0, :].make_checkable(callback=my_callback)

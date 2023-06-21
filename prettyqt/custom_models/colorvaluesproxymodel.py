@@ -5,7 +5,7 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, custom_models, gui
-from prettyqt.utils import colors, helpers
+from prettyqt.utils import colors, datatypes, helpers
 
 logger = logging.getLogger(__name__)
 
@@ -85,10 +85,10 @@ class ColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
         )
         return gui.QColor(*col)
 
-    def setLowColor(self, color: gui.QColor):
+    def setLowColor(self, color: datatypes.ColorType):
         self._low_color = colors.get_color(color).as_qt()
 
-    def setHighColor(self, color: gui.QColor):
+    def setHighColor(self, color: datatypes.ColorType):
         self._high_color = colors.get_color(color).as_qt()
 
     def getLowColor(self) -> gui.QColor:

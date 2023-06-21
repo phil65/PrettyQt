@@ -54,12 +54,12 @@ Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
 and using it can be quite cumbersome for Python developers. (it´s statically typed,
 very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
 
-- adding more powerful methods to the classes, which accept more types and have more options
-- points, sizes and rectangles can also be passed to all important methods as tuples.
-- all enum getters/setters also work with strings. Everything typed with Litarals for an excellent IDE experience.
+- adding more powerful methods to the classes, which accept more types and have more options (in form of keyword arguments)
+- points, sizes and rectangles can also be passed to most important methods as tuples.
+- raising Exceptions or returning None instead of returning -1 or invalid objects.
+- all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience.
 - python regex patterns (re.Pattern) also possible for lot of methods.
 - adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
-    match core.Point(a, 1)
 
 
 
@@ -130,8 +130,6 @@ pip install prettyqt
 
 ## Required dependencies
 - [bidict](https://pypi.org/project/bidict)
-- [regex](https://pypi.org/project/regex)
-- [docutils](https://pypi.org/project/docutils)
 - [pygments](https://pypi.org/project/pygments)
 - [qstylizer](https://pypi.org/project/qstylizer)
 - [typing_extensions](https://pypi.org/project/typing_extensions)
@@ -149,6 +147,7 @@ Note: Only Qt 6.5+ is supported.
 - [qtconsole](https://pypi.org/project/qtconsole)
 - [pillow](https://pypi.org/project/pillow)
 - [fsspec](https://pypi.org/project/fsspec)
+- [docutils](https://pypi.org/project/docutils)
 
 
 ## Installation from sources

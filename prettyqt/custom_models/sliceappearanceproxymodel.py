@@ -8,10 +8,10 @@ class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
 
     def __init__(
         self,
-        foreground=None,
-        background=None,
-        font=None,
-        alignment=None,
+        foreground: gui.QColor | gui.QBrush | str | None = None,
+        background: gui.QColor | gui.QBrush | str | None = None,
+        font: str | gui.QFont | None = None,
+        alignment: constants.AlignmentFlag | constants.AlignmentStr | None = None,
         override: bool = True,
         **kwargs,
     ):
@@ -49,33 +49,33 @@ class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
     def get_font(self) -> gui.QFont:
         return self._font
 
-    def set_foreground(self, foreground: gui.QColor | gui.QBrush | str):
+    def set_foreground(self, foreground: gui.QColor | gui.QBrush | str | None):
         if isinstance(foreground, str):
             foreground = gui.QColor(foreground)
         self._foreground = foreground
         self.update_all()
 
-    def get_foreground(self) -> gui.QColor:
+    def get_foreground(self) -> gui.QColor | gui.QBrush | None:
         return self._foreground
 
-    def set_background(self, background: gui.QColor | gui.QBrush | str):
+    def set_background(self, background: gui.QColor | gui.QBrush | str | None):
         if isinstance(background, str):
             background = gui.QColor(background)
         self._background = background
         self.update_all()
 
-    def get_background(self) -> gui.QFont:
+    def get_background(self) -> gui.QColor | gui.QBrush | None:
         return self._background
 
     def set_alignment(
-        self, alignment: constants.AlignmentFlag | constants.AlignmentStr
+        self, alignment: constants.AlignmentFlag | constants.AlignmentStr | None
     ):
         if isinstance(alignment, str):
             alignment = constants.ALIGNMENTS[alignment]
         self._alignment = alignment
         self.update_all()
 
-    def get_alignment(self) -> constants.AlignmentFlag:
+    def get_alignment(self) -> constants.AlignmentFlag | None:
         return self._alignment
 
     font_value = core.Property(gui.QFont, get_font, set_font)
