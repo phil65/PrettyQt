@@ -3,7 +3,7 @@
 contains QtMultimedia-based classes
 """
 
-from .mediametadata import MediaMetadata
+from .mediametadata import MediaMetaData
 from .audioformat import AudioFormat
 from .audiodevice import AudioDevice
 from .cameraformat import CameraFormat
@@ -23,5 +23,5 @@ __all__ = [
     "MediaPlayer",
     "MediaRecorder",
     "ScreenCapture",
-    "MediaMetadata",
+    "MediaMetaData",
 ]

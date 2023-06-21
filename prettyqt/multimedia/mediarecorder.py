@@ -23,11 +23,11 @@ ERROR = bidict(
     none=QtMultimedia.QMediaRecorder.Error.NoError,
     resource=QtMultimedia.QMediaRecorder.Error.ResourceError,
     format=QtMultimedia.QMediaRecorder.Error.FormatError,
-    network=QtMultimedia.QMediaRecorder.Error.NetworkError,
-    access_denied=QtMultimedia.QMediaRecorder.Error.AccessDeniedError,
+    out_of_space=QtMultimedia.QMediaRecorder.Error.OutOfSpaceError,
+    location_not_writable=QtMultimedia.QMediaRecorder.Error.LocationNotWritable,
 )
 
-ErrorStr = Literal["none", "resource", "format", "network", "access_denied"]
+ErrorStr = Literal["none", "resource", "format", "out_of_space", "location_not_writable"]
 
 QUALITY = bidict(
     very_low=QtMultimedia.QMediaRecorder.Quality.VeryLowQuality,
