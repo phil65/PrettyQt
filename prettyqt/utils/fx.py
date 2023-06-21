@@ -118,17 +118,29 @@ class AnimationWrapper:
     def animate_on_event(
         self,
         event: core.event.TypeStr,
-        start: datatypes.VariantType,
+        start: datatypes.VariantType | None,
         end: datatypes.VariantType,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         duration: int = 1000,
         delay: int = 0,
+        reverse: bool = False,
     ) -> core.PropertyAnimation:
         """Starts property transition from start to end when given event occurs."""
-        self._animation.setStartValue(start)
+        if start is None:
+            prop_name = self._animation.get_property_name()
+            obj = self._animation.targetObject()
+            start = obj.property(prop_name)
+            self._animation.setStartValue(start)
+            end = datatypes.align_types(start, end)
+            if isinstance(end, core.QPoint | core.QRect | core.QPointF | core.QRectF):
+                end = obj.map_to("parent", end)
+        else:
+            self._animation.setStartValue(start)
         self._animation.setEndValue(end)
         self._animation.setDuration(duration)
         self._animation.set_easing(easing)
+        if reverse:
+            self._animation.append_reversed()
 
         def on_event(event):
             self.fx.run(self._animation, delay=delay)
@@ -275,6 +287,7 @@ class Fx:
         duration: int = 1000,
         delay: int = 0,
     ) -> AnimationTimer:
+        """Trigger a move animation to given offset and return to original position."""
         return self["pos"].transition_to(
             end,
             easing=easing,
@@ -289,6 +302,16 @@ class Fx:
         delay: int | str = 0,
         single_shot: bool = True,
     ) -> AnimationTimer:
+        """Run an animation with given delay.
+
+        Arguments:
+            animation: Animation to run
+            delay: delay after which animation should start
+            single_shot: whethere the animation should trigger once or repeat
+
+        Returns:
+            AnimationTimer, a core.Timer subclass with the PropertyAnimation attached.
+        """
         if not animation.targetObject().isVisible():
             logger.info("Attention. Starting animation for invisible widget.")
         logger.debug(f"starting {animation!r} with {delay=}. ({single_shot=})")
@@ -330,6 +353,9 @@ if __name__ == "__main__":
         # timer = container[::2].fx.slide(
         #     start=(-100, 0), duration=3000, reverse=True, single_shot=False
         # )
+        container[:].fx["pos"].animate_on_event(
+            "hover_enter", end=(0, -100), duration=1000, start=None
+        )
         w5.fx.bounce((0, -100), duration=2000, delay=5000)
         # print(timer)
         # app.sleep(1)  #
