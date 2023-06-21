@@ -65,11 +65,11 @@ class ProxyWrapper:
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         selector: Callable[[Any], bool] | None = None,
         selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ) -> custom_models.ValueTransformationProxyModel:
+    ) -> custom_models.SliceValueTransformationProxyModel:
         """Conditionally apply modifications to given area."""
         from prettyqt import custom_models
 
-        proxy = custom_models.ValueTransformationProxyModel(
+        proxy = custom_models.SliceValueTransformationProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         proxy.add_transformer(fn, role, selector, selector_role)
@@ -175,11 +175,11 @@ class ProxyWrapper:
         self,
         low_color: datatypes.ColorType = "green",
         high_color: datatypes.ColorType = "red",
-    ) -> custom_models.ColorValuesProxyModel:
+    ) -> custom_models.SliceColorValuesProxyModel:
         """Make given area read-only."""
         from prettyqt import custom_models
 
-        proxy = custom_models.ColorValuesProxyModel(
+        proxy = custom_models.SliceColorValuesProxyModel(
             indexer=self._indexer, parent=self._widget
         )
         proxy.set_low_color(low_color)
@@ -217,11 +217,11 @@ class Proxyfier:
         self,
         low_color: datatypes.ColorType = "green",
         high_color: datatypes.ColorType = "red",
-    ) -> custom_models.ColorValuesProxyModel:
+    ) -> custom_models.SliceColorValuesProxyModel:
         """Color cells based on value."""
         from prettyqt import custom_models
 
-        proxy = custom_models.ColorValuesProxyModel(parent=self._widget)
+        proxy = custom_models.SliceColorValuesProxyModel(parent=self._widget)
         proxy.set_low_color(low_color)
         proxy.set_high_color(high_color)
         proxy.setSourceModel(self._widget.model())

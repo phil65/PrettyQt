@@ -52,11 +52,12 @@ from .slicecheckableproxymodel import (
 )
 from .sliceappearanceproxymodel import SliceAppearanceProxyModel
 from .slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
+from .slicecolorvaluesproxymodel import SliceColorValuesProxyModel
+from .slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
 
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .multicolumnfilterproxymodel import MultiColumnFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
-from .valuetransformationproxymodel import ValueTransformationProxyModel
 from .valuefilterproxymodel import ValueFilterProxyModel
 from .rangefilterproxymodel import RangeFilterProxyModel
 from .tabletolistproxymodel import TableToListProxyModel
@@ -64,7 +65,6 @@ from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
-from .colorvaluesproxymodel import ColorValuesProxyModel
 from .highlightmouseproxymodel import HighlightMouseProxyModel
 
 __all__ = [
@@ -105,7 +105,7 @@ __all__ = [
     "SliceFilterProxyModel",
     "FuzzyFilterProxyModel",
     "SubsetFilterProxyModel",
-    "ValueTransformationProxyModel",
+    "SliceValueTransformationProxyModel",
     "ValueFilterProxyModel",
     "RangeFilterProxyModel",
     "SliceCheckableProxyModel",
@@ -117,6 +117,6 @@ __all__ = [
     "ColumnJoinerProxyModel",
     "SliceChangeFlagsProxyModel",
     "HighlightCurrentProxyModel",
-    "ColorValuesProxyModel",
+    "SliceColorValuesProxyModel",
     "HighlightMouseProxyModel",
 ]

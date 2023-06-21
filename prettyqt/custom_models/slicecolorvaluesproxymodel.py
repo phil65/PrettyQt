@@ -19,7 +19,7 @@ class ColorMode(enum.IntEnum):
     Range = 4
 
 
-class ColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
+class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     ID = "color_values"
     ColorMode = ColorMode
     core.Enum(ColorMode)
@@ -97,10 +97,10 @@ class ColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
     def getHighColor(self) -> gui.QColor:
         return self._high_color
 
-    def setColorMode(self, mode: ColorValuesProxyModel.ColorMode):
+    def setColorMode(self, mode: SliceColorValuesProxyModel.ColorMode):
         self._mode = mode
 
-    def getColorMode(self) -> ColorValuesProxyModel.ColorMode:
+    def getColorMode(self) -> SliceColorValuesProxyModel.ColorMode:
         return self._mode
 
     color_mode = core.Property(

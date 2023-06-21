@@ -20,11 +20,11 @@ class Transformer:
     selector_role: int | QtCore.Qt.ItemDataRole
 
 
-class ValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
+class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
     """A simple transformation proxy model with settable transformers.
 
     Example:
-        >>> proxy = ValueTransformationProxyModel()
+        >>> proxy = SliceValueTransformationProxyModel()
         >>> proxy.add_transformer(lambda value: value < 1)
     """
 

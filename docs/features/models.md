@@ -200,7 +200,7 @@ Some of these proxies might partly overlap in functionality, but theres always a
 
 ## Other Proxies
 
-`ColorValuesProxyModel`
+`SliceColorValuesProxyModel`
 : Color cells based on their value (i.e. low numbers shown in green, high numbers shown in red.)
 : To color cells, this proxy needs a minimum and maximum value. Three modes are available:
 : Let the user choose a min max value.
