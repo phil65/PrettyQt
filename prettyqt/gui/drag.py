@@ -36,7 +36,7 @@ class Drag(core.ObjectMixin, QtGui.QDrag):
         for i in supported_actions:
             flag |= constants.DROP_ACTION[i]
         default_action = constants.DROP_ACTION[default_drop_action]
-        result = self.exec(flag, default_action)
+        result = super().exec(flag, default_action)
         return constants.DROP_ACTION.inverse[result]
 
 

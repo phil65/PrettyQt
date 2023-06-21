@@ -52,12 +52,12 @@ def test_notemptyvalidator():
     assert val == custom_validators.NotEmptyValidator()
 
 
-def test_compositevalidator():
+def test_andvalidator():
     val1 = custom_validators.NotEmptyValidator()
     val2 = custom_validators.NotZeroValidator()
-    composite = custom_validators.CompositeValidator([val1, val2])
+    composite = custom_validators.AndValidator([val1, val2])
     assert composite != custom_validators.PathValidator()
-    assert composite == custom_validators.CompositeValidator([val1, val2])
+    assert composite == custom_validators.AndValidator([val1, val2])
     with open("data.pkl", "wb") as jar:
         pickle.dump(composite, jar)
     with open("data.pkl", "rb") as jar:

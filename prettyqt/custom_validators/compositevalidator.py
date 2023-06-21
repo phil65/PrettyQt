@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     val1 = custom_validators.NotEmptyValidator()
     val2 = custom_validators.PathValidator()
-    val = CompositeValidator([val1, val2])
+    val = AndValidator([val1, val2])
     app = widgets.app()
     widget = widgets.LineEdit("This is a test")
     widget.setValidator(val)

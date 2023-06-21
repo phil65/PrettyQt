@@ -167,7 +167,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         match validator:
             case str() if "|" in validator:
                 validators = [get_validator(i, **kwargs) for i in validator.split("|")]
-                validator = custom_validators.CompositeValidator(validators)
+                validator = custom_validators.AndValidator(validators)
             case str() | re.Pattern() | core.QRegularExpression():
                 validator = get_validator(validator, **kwargs)
             case None | gui.QValidator():
@@ -175,7 +175,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
             case _:
                 raise ValueError(validator)
         if not empty_allowed:
-            validator = custom_validators.CompositeValidator(
+            validator = custom_validators.AndValidator(
                 [validator, custom_validators.NotEmptyValidator()]
             )
         if not strict:
