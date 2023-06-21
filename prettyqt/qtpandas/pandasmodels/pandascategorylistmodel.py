@@ -49,7 +49,11 @@ class PandasCategoryListModel(custom_models.ModelMixin, core.AbstractTableModel)
             return constants.DROP_ENABLED
         return self.DEFAULT_FLAGS | constants.IS_EDITABLE
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         # if role == constants.DECORATION_ROLE:

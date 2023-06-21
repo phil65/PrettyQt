@@ -39,7 +39,11 @@ class DataTableModel(core.AbstractTableModel):
     def rowCount(self, parent: core.ModelIndex | None = None):
         return len(self.df.index) if self.df is not None else 0
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role:
             case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 cell = self.df.iat[index.row(), index.column()]

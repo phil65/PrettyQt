@@ -26,7 +26,11 @@ class FileSystemModelMixin:
         super().__init__(*args, read_only=read_only, **kwargs)
         self.use_custom_icons(False)
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if role == constants.USER_ROLE:
             path = index.data(self.Roles.FilePathRole)
             return pathlib.Path(path)

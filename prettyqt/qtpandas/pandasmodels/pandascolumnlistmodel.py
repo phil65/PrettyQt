@@ -106,7 +106,11 @@ class PandasColumnListModel(custom_models.ModelMixin, core.AbstractTableModel):
         self.update_all()
         return True
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
 
@@ -248,7 +252,11 @@ class PandasIndexListModel(custom_models.ModelMixin, core.AbstractTableModel):
             case _, False:
                 return self.DEFAULT_FLAGS
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         match role, index.column():

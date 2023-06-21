@@ -52,7 +52,11 @@ class DataFrameDataModel(core.AbstractTableModel):
     def columnCount(self, index: core.ModelIndex | None = None):
         return max(1, self._model.shape[1])
 
-    def data(self, index, role):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if index.row() >= self._model.shape[0] or index.column() >= self._model.shape[1]:
             return None
         match role:
@@ -112,7 +116,11 @@ class DataFrameHeaderModel(core.AbstractTableModel):
                     else self._model.name("horizontal", section)
                 )
 
-    def data(self, index: core.ModelIndex, role: constants.ItemDataRole):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if (
             not index.isValid()
             or index.row() >= self._shape[0]
@@ -177,7 +185,11 @@ class DataFrameLevelModel(core.AbstractTableModel):
             case constants.DISPLAY_ROLE, _:
                 return f"L{section}"
 
-    def data(self, index: core.ModelIndex, role: constants.ItemDataRole):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         a = self._model.header_shape[0] - 1

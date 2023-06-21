@@ -59,7 +59,11 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
         """Get highlight mode."""
         return self._highlight_mode
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if (
             role == constants.BACKGROUND_ROLE
             and index.data(self._data_role) == self._current_value

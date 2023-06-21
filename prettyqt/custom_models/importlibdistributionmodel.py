@@ -242,7 +242,11 @@ class ImportlibDistributionModel(core.AbstractTableModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[offset]
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         dist = self.distributions[index.row()]
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:

@@ -39,7 +39,11 @@ class ModelMixin:
             return self.DEFAULT_FLAGS | constants.IS_EDITABLE
         return self.DEFAULT_FLAGS
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         item = self.data_by_index(index)

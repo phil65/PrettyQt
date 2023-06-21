@@ -22,7 +22,11 @@ class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
         self._override = override
         super().__init__(**kwargs)
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         data = super().data(index, role)
         if not self.indexer_contains(index):
             return data

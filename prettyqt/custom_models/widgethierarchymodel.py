@@ -108,7 +108,11 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
                 return self.props[section].get_name()
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         widget = self.data_by_index(index).obj

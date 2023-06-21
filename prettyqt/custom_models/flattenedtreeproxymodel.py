@@ -134,7 +134,11 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
             flags ^= QtCore.Qt.ItemFlag.ItemIsEnabled
         return flags
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if role == constants.DISPLAY_ROLE and self._display_mode == DisplayMode.Path:
             index = self.mapToSource(index)
             model = self.sourceModel()

@@ -34,7 +34,11 @@ class RegexMatchesModel(core.AbstractTableModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[section]
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         item = self.matches[index.row()]

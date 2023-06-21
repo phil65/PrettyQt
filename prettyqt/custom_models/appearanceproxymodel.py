@@ -77,7 +77,11 @@ class AppearanceProxyModel(core.IdentityProxyModel):
             case _:
                 return super().setData(index, value, role)
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         key = self.get_index_key(index, include_column=True)
         match role:
             case constants.FOREGROUND_ROLE:

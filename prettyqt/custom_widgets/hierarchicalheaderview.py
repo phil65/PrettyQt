@@ -552,7 +552,11 @@ if __name__ == "__main__":
                 sibl[-1].appendRow(children)
             return sibl
 
-        def data(self, index, role=constants.DISPLAY_ROLE):
+        def data(
+            self,
+            index: core.ModelIndex,
+            role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+        ):
             if role in (HORIZONTAL_HEADER_DATA_ROLE, VERTICAL_HEADER_DATA_ROLE):
                 hm = gui.StandardItemModel()
                 hm.appendRow(self.read_level(orient=role))

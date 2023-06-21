@@ -33,7 +33,11 @@ class ColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
         self._low_color = gui.QColor("green")
         self._high_color = gui.QColor("red")
 
-    def data(self, index: core.ModelIndex, role=constants.EDIT_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not self.indexer_contains(index):
             return super().data(index, role)
         match role:

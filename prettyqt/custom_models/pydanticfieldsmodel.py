@@ -3,8 +3,8 @@ from __future__ import annotations
 import pydantic
 import logging
 
-from prettyqt import constants, custom_models
-from prettyqt.qt import QtCore, QtGui
+from prettyqt import constants, core, custom_models
+from prettyqt.qt import QtGui
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +32,11 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
     def get_fields(self, instance: pydantic.BaseModel):
         return list(type(instance).__fields__.values())
 
-    def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         field = self._fields[index.row()]

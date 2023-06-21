@@ -26,7 +26,11 @@ class MappingModel(custom_models.ListMixin, core.AbstractTableModel):
                 return list(self.items[0].keys())[section]
 
 
-    def data(self, index, role: constants.ItemDataRole):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         item = self.data_by_index(index)
         match role:
             case constants.DISPLAY_ROLE:

@@ -16,7 +16,11 @@ class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
         self._size = datatypes.to_size(size)
         self._cache = dict()
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if role == constants.DECORATION_ROLE and self.indexer_contains(index):
             original = super().data(index, role)
             if original is not None:

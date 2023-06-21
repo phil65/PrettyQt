@@ -23,7 +23,11 @@ class SliceCheckableProxyModel(custom_models.SliceIdentityProxyModel):
             return super().flags(index) | constants.IS_CHECKABLE
         return super().flags(index)
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         key = self.get_index_key(index, include_column=True)
         if role == constants.CHECKSTATE_ROLE and self.indexer_contains(index):
             return key in self._checked
@@ -64,7 +68,11 @@ class SliceCheckableTreeProxyModel(custom_models.SliceIdentityProxyModel):
             return super().flags(index) | constants.IS_CHECKABLE
         return super().flags(index)
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if role == constants.CHECKSTATE_ROLE and self.indexer_contains(index):
             key = self.get_index_key(index, include_column=True)
             return self._checked.get(key, constants.CheckState.Unchecked)

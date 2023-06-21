@@ -79,7 +79,11 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 prop = self._metaobj.get_property(section)
                 return prop.propertyIndex()
 
-    def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         prop = self._metaobj.get_property(index.row())

@@ -37,7 +37,11 @@ class ScrollAreaTocModel(custom_models.TreeModel):
     def columnCount(self, parent=None):
         return 1
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         widget = self.data_by_index(index).obj

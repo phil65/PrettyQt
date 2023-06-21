@@ -34,7 +34,11 @@ class FrameInfoModel(custom_models.ListMixin, core.AbstractTableModel):
             case constants.VERTICAL, constants.DISPLAY_ROLE:
                 return str(section)
 
-    def data(self, index: core.QModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         field = self.items[index.row()]

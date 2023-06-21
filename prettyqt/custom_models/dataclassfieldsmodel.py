@@ -3,8 +3,8 @@ from __future__ import annotations
 import dataclasses
 import logging
 
-from prettyqt import constants, custom_models
-from prettyqt.qt import QtCore, QtGui
+from prettyqt import constants, core, custom_models
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
 logger = logging.getLogger(__name__)
@@ -34,7 +34,11 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
     def get_fields(self, instance: datatypes.IsDataclass):
         return dataclasses.fields(instance)
 
-    def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         field = self._fields[index.row()]
@@ -68,7 +72,7 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
             case constants.USER_ROLE, _:
                 return getattr(self._instance, field.name)
 
-    def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if index.column() == 0 and not self._instance.__dataclass_params__.frozen:
             return super().flags(index) | constants.IS_EDITABLE
         return super().flags(index)

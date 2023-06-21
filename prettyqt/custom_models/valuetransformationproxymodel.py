@@ -52,7 +52,11 @@ class ValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
         )
         self._transformers.append(tr)
 
-    def data(self, index: core.ModelIndex, role: constants.ItemDataRole):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         val = super().data(index, role)
         for t in self._transformers:
             if self.indexer_contains(index) and t.role == role:

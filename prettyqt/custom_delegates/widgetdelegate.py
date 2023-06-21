@@ -98,7 +98,11 @@ if __name__ == "__main__":
         def columnCount(self, index=None):
             return 5
 
-        def data(self, index, role=None):
+        def data(
+            self,
+            index: core.ModelIndex,
+            role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+        ):
             match role, index.column():
                 case constants.DISPLAY_ROLE | constants.USER_ROLE, 0:
                     # return pb

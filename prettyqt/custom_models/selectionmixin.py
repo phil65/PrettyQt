@@ -2,19 +2,18 @@ from __future__ import annotations
 
 from collections.abc import Callable
 
-from prettyqt import constants
-from prettyqt.qt import QtCore
+from prettyqt import constants, core
 
 
 class SelectionMixin:
     CHECKSTATE: dict[int, Callable] = {}  # column: identifier
-    dataChanged: QtCore.Signal
+    dataChanged: core.Signal
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.selected = {}
 
-    def setData(self, index: QtCore.QModelIndex, value, role) -> bool:
+    def setData(self, index: core.ModelIndex, value, role) -> bool:
         if not index.isValid():
             return False
         elif role == constants.CHECKSTATE_ROLE:
@@ -24,7 +23,11 @@ class SelectionMixin:
             return True
         return super().setData(index, value, role)
 
-    def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return False
         if role == constants.CHECKSTATE_ROLE and index.column() == 0:
@@ -35,13 +38,13 @@ class SelectionMixin:
             return selected
         return super().data(index, role)
 
-    def flags(self, index: QtCore.QModelIndex):
+    def flags(self, index: core.ModelIndex):
         flags = super().flags(index)
         if index.column() in self.CHECKSTATE:
             return flags | constants.IS_CHECKABLE
         return flags
 
-    def _get_selection_id(self, index: QtCore.QModelIndex):
+    def _get_selection_id(self, index: core.ModelIndex):
         item = index.data(constants.USER_ROLE)
         if id_fn := self.CHECKSTATE.get(index.column()):
             return id_fn(item)

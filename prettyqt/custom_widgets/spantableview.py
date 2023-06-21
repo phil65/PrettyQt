@@ -51,7 +51,11 @@ class _SpanHeaderItem:
     ) -> bool:
         self._data[role] = value
 
-    def data(self, role: int) -> Any:
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         return self._data.get(role, None)
 
     def clear(self):
@@ -76,11 +80,11 @@ class SpanHeaderModel(core.AbstractTableModel):
         self._root_item = _SpanHeaderItem()
 
     def index(
-        self, row: int, column: int, parent: core.QModelIndex | None = None
-    ) -> core.QModelIndex:
-        parent = parent or core.QModelIndex()
+        self, row: int, column: int, parent: core.ModelIndex | None = None
+    ) -> core.ModelIndex:
+        parent = parent or core.ModelIndex()
         if not self.hasIndex(row, column, parent):
-            return core.QModelIndex()
+            return core.ModelIndex()
 
         parent_item = parent.internalPointer() if parent.isValid() else self._root_item
         child_item = parent_item.child(row, column)
@@ -90,16 +94,20 @@ class SpanHeaderModel(core.AbstractTableModel):
 
         return self.createIndex(row, column, child_item)
 
-    def rowCount(self, parent: core.QModelIndex | None = None) -> int:
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         return self._rows
 
-    def columnCount(self, parent: core.QModelIndex | None = None) -> int:
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         return self._columns
 
-    def flags(self, index: core.QModelIndex) -> constants.ItemFlag:
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         return super().flags(index) if index.isValid() else constants.ItemFlag.NoItemFlags
 
-    def data(self, index: core.QModelIndex, role: constants.ItemDataRole) -> Any:
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
 
@@ -117,7 +125,7 @@ class SpanHeaderModel(core.AbstractTableModel):
 
     def setData(
         self,
-        index: core.QModelIndex,
+        index: core.ModelIndex,
         value: Any,
         role: int = constants.ItemDataRole.EditRole,
     ) -> bool:
@@ -148,33 +156,33 @@ class SpanHeaderModel(core.AbstractTableModel):
         return True
 
     def insertRows(
-        self, row: int, count: int, parent: core.QModelIndex | None = None
+        self, row: int, count: int, parent: core.ModelIndex | None = None
     ) -> bool:
-        parent = parent or core.QModelIndex()
+        parent = parent or core.ModelIndex()
         with self.insert_rows(row, row + count - 1, parent):
             self._rows += count
         return True
 
     def removeRows(
-        self, row: int, count: int, parent: core.QModelIndex | None = None
+        self, row: int, count: int, parent: core.ModelIndex | None = None
     ) -> bool:
-        parent = parent or core.QModelIndex()
+        parent = parent or core.ModelIndex()
         with self.remove_rows(row, row + count - 1, parent):
             self._rows -= count
         return True
 
     def insertColumns(
-        self, column: int, count: int, parent: core.QModelIndex | None = None
+        self, column: int, count: int, parent: core.ModelIndex | None = None
     ) -> bool:
-        parent = parent or core.QModelIndex()
+        parent = parent or core.ModelIndex()
         with self.insert_columns(column, column + count - 1, parent):
             self._columns += count
         return True
 
     def removeColumns(
-        self, column: int, count: int, parent: core.QModelIndex | None = None
+        self, column: int, count: int, parent: core.ModelIndex | None = None
     ) -> bool:
-        parent = parent or core.QModelIndex()
+        parent = parent or core.ModelIndex()
         with self.remove_columns(column, column + count - 1, parent):
             self._columns -= count
         return True
@@ -271,12 +279,12 @@ class SpanHeaderView(widgets.HeaderView):
 
         self.model().setData(index, color, constants.FOREGROUND_ROLE)
 
-    def indexAt(self, pos: core.QPoint) -> core.QModelIndex:
+    def indexAt(self, pos: core.QPoint) -> core.ModelIndex:
         tbl_model = self.model()
         if tbl_model is None:
             return core.ModelIndex()
         if tbl_model.columnCount() == 0 or tbl_model.rowCount() == 0:
-            return core.QModelIndex()
+            return core.ModelIndex()
 
         logical_idx = self.logicalIndexAt(pos)
         delta = 0
@@ -301,7 +309,7 @@ class SpanHeaderView(widgets.HeaderView):
                 if pos.x() <= delta:
                     return cell_index
 
-        return core.QModelIndex()
+        return core.ModelIndex()
 
     def paintSection(self, painter: gui.QPainter, rect: core.QRect, logical_index: int):
         tbl_model: SpanHeaderModel = self.model()
@@ -400,7 +408,7 @@ class SpanHeaderView(widgets.HeaderView):
             md.setData(idx, span_count, SpanHeaderModel.HeaderRole.RowSpanRole)
             md.setData(idx, 1, SpanHeaderModel.HeaderRole.ColumnSpanRole)
 
-    def column_span_index(self, index: core.QModelIndex) -> core.QModelIndex:
+    def column_span_index(self, index: core.ModelIndex) -> core.ModelIndex:
         tbl_model: SpanHeaderModel = self.model()
         cur_row = index.row()
         cur_col = index.column()
@@ -415,9 +423,9 @@ class SpanHeaderView(widgets.HeaderView):
 
             i -= 1
 
-        return core.QModelIndex()
+        return core.ModelIndex()
 
-    def row_span_index(self, index: core.QModelIndex) -> core.QModelIndex:
+    def row_span_index(self, index: core.ModelIndex) -> core.ModelIndex:
         tbl_model: SpanHeaderModel = self.model()
         cur_row = index.row()
         cur_col = index.column()
@@ -432,7 +440,7 @@ class SpanHeaderView(widgets.HeaderView):
 
             i -= 1
 
-        return core.QModelIndex()
+        return core.ModelIndex()
 
     def columnSpanSize(self, from_col: int, span_count: int) -> int:
         tbl_model: SpanHeaderModel = self.model()
@@ -455,7 +463,7 @@ class SpanHeaderView(widgets.HeaderView):
         return span
 
     def getSectionRange(
-        self, index: core.QModelIndex, begin_section: int, end_section: int
+        self, index: core.ModelIndex, begin_section: int, end_section: int
     ) -> tuple[int, int]:
         col_span_idx = self.column_span_index(index)
         row_span_idx = self.row_span_index(index)

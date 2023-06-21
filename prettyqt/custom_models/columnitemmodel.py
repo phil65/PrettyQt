@@ -79,7 +79,11 @@ class ColumnItemModelMixin:
         self._attr_cols = [Col(model=self) for Col in columns]
 
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         """Return the tree item at the given index and role."""
         if not index.isValid():
             return None

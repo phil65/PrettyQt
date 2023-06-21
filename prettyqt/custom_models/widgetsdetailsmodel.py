@@ -46,7 +46,11 @@ class WidgetsDetailsModel(core.AbstractTableModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
                 return self.props[section].get_name()
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         prop = self.props[index.column()]

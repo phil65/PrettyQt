@@ -57,7 +57,11 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
             return constants.IS_SELECTABLE | constants.IS_ENABLED
         return self.sourceModel().flags(self.mapToSource(index))
 
-    def data(self, index, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         col_count = self.sourceModel().columnCount()
         column = index.column()
         if self.is_additional_column(column):
