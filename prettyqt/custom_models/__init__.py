@@ -57,7 +57,7 @@ from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
 from .sliceappearanceproxymodel import SliceAppearanceProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
-from .readonlyproxymodel import ReadOnlyProxyModel
+from .slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
 from .colorvaluesproxymodel import ColorValuesProxyModel
 from .highlightmouseproxymodel import HighlightMouseProxyModel
@@ -109,7 +109,7 @@ __all__ = [
     "SliceAppearanceProxyModel",
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",
-    "ReadOnlyProxyModel",
+    "SliceChangeFlagsProxyModel",
     "HighlightCurrentProxyModel",
     "ColorValuesProxyModel",
     "HighlightMouseProxyModel",
