@@ -4,20 +4,39 @@ from collections.abc import Iterable, Iterator
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, helpers, listdelegators
 
 
 class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLayout):
     def __getitem__(
-        self, index: tuple[int, int] | int
+        self, index: tuple[int | slice, int | slice] | int
     ) -> QtWidgets.QGraphicsLayoutItem | None:
+        rowcount = self.rowCount()
+        colcount = self.columnCount()
         match index:
-            case (int() as row, int() as col):
-                return self.itemAt(row, col)
-            case int():
-                if index >= self.count():
+            case int() as row, int() as col:
+                if row >= rowcount or col >= rowcount:
                     raise IndexError(index)
-                return self.itemAt(index)
+                return self.itemAt(row, col)
+            case (row, col):
+                items = [
+                    item
+                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                    if (item := self.itemAt(i, j)) is not None
+                ]
+                return listdelegators.BaseListDelegator(list(set(items)))
+            case int() as row:
+                if row >= rowcount:
+                    raise IndexError(index)
+                return self.itemAt(row)
+            case slice() as rowslice:
+                count = rowcount if rowslice.stop is None else rowslice.stop
+                items = [self.itemAt(i) for i in range(count)[rowslice]]
+                return listdelegators.BaseListDelegator(list(set(item)))
+            case str():
+                return self.find_child(QtWidgets.QGraphicsWidget, index)
+            case _:
+                raise TypeError(index)
 
     def __setitem__(
         self,

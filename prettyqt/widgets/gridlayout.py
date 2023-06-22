@@ -3,31 +3,59 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError
+from prettyqt.utils import InvalidParamError, listdelegators, helpers
 
 
-class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
+class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
     ID = "grid"
 
     def __getitem__(
-        self, idx: tuple[int, int] | int | str
-    ) -> QtWidgets.QWidget | QtWidgets.QLayout | None:
-        match idx:
-            case (int(), int()):
-                item = self.itemAtPosition(*idx)
-            case int():
-                item = self.itemAt(idx)
+        self, index: tuple[int | slice, int | slice] | int | str
+    ) -> (
+        widgets.QWidget
+        | widgets.QLayout
+        | listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]
+        | None
+    ):
+        rowcount = self.rowCount()
+        colcount = self.columnCount()
+        match index:
+            case int() as row, int() as col:
+                if row >= rowcount or col >= rowcount:
+                    raise IndexError(index)
+                item = self.itemAtPosition(row, col)
+                return i if (i := item.widget()) is not None else item.layout()
+            case (row, col):
+                items = [
+                    item
+                    for i, j in helpers.yield_positions(row, col, rowcount, colcount)
+                    if (item := self.itemAtPosition(i, j)) is not None
+                ]
+                items = [
+                    w if (w := i.widget()) is not None else i.layout() for i in items
+                ]
+                return listdelegators.BaseListDelegator(list(set(items)))
+            case int() as row:
+                if row >= rowcount:
+                    raise IndexError(index)
+                item = self.itemAt(row)
+                return i if (i := item.widget()) is not None else item.layout()
+            case slice() as rowslice:
+                count = rowcount if rowslice.stop is None else rowslice.stop
+                items = [self.itemAt(i) for i in range(count)[rowslice]]
+                items = [
+                    w if (w := i.widget()) is not None else i.layout() for i in items
+                ]
+                return listdelegators.BaseListDelegator(list(set(items)))
             case str():
-                return self.find_child(QtCore.QObject, idx)
+                return self.find_child(widgets.QWidget | widgets.QLayout, index)
             case _:
-                raise TypeError(idx)
-        return i if (i := item.widget()) is not None else item.layout()
+                raise TypeError(index)
 
     def __setitem__(
         self,
         idx: tuple[int | slice, int | slice],
-        value: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem,
+        value: widgets.QWidget | widgets.QLayout | widgets.QLayoutItem,
     ):
         row, col = idx
         rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
@@ -44,13 +72,13 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout]:
+    def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout]:
         return iter(item for i in range(self.count()) if (item := self[i]) is not None)
 
     def __add__(
         self,
         other: (
-            tuple | list | QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem
+            tuple | list | widgets.QWidget | widgets.QLayout | widgets.QLayoutItem
         ),
     ):
         if isinstance(other, tuple | list):
@@ -66,7 +94,7 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
 
     def add(
         self,
-        item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem,
+        item: widgets.QWidget | widgets.QLayout | widgets.QLayoutItem,
         rowstart: int,
         colstart: int,
         rowspan: int = 1,
@@ -75,14 +103,14 @@ class GridLayout(widgets.LayoutMixin, QtWidgets.QGridLayout):
     ):
         flag = constants.ALIGNMENTS[alignment or "none"]
         match item:
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 self.addWidget(item, rowstart, colstart, rowspan, colspan, flag)
-            case QtWidgets.QLayout():
+            case widgets.QLayout():
                 self.addLayout(item, rowstart, colstart, rowspan, colspan, flag)
-            case QtWidgets.QLayoutItem():
+            case widgets.QLayoutItem():
                 self.addItem(item, rowstart, colstart, rowspan, colspan, flag)
 
-    def append(self, item: QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QLayoutItem):
+    def append(self, item: widgets.QWidget | widgets.QLayout | widgets.QLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
     def set_origin_corner(self, corner: constants.CornerStr):
