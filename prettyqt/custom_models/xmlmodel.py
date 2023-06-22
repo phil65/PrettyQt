@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import importlib
 import io
 import xml.etree.ElementTree as ET
 
@@ -26,6 +27,7 @@ class TextColumn(custom_models.ColumnItem):
             case constants.DISPLAY_ROLE:
                 return item.obj.text
 
+
 class TailColumn(custom_models.ColumnItem):
     name = "Tail"
     doc = "Tail"
@@ -48,6 +50,7 @@ class AttributeColumn(custom_models.ColumnItem):
 
 class XmlModel(custom_models.ColumnItemModel):
     """Semi-lazy xml model. Fetches all direct child items when accessing index."""
+
     COLUMNS = [TagColumn, TextColumn, TailColumn, AttributeColumn]
 
     def __init__(
@@ -66,6 +69,15 @@ class XmlModel(custom_models.ColumnItemModel):
                 xml_str = ET.tostring(xml._root, encoding="unicode")
                 context = ET.iterparse(io.StringIO(xml_str), events=("start",))
                 _, root = next(context)
+            case _ if importlib.util.find_spec("lxml"):
+                from lxml import etree
+
+                if isinstance(obj, etree._Element):
+                    root = obj
+                else:
+                    raise TypeError(obj)
+            case _:
+                raise TypeError(obj)
         super().__init__(
             obj=root,
             columns=self.COLUMNS,
@@ -75,7 +87,15 @@ class XmlModel(custom_models.ColumnItemModel):
 
     @classmethod
     def supports(cls, instance) -> bool:
-        return isinstance(instance, datatypes.IsTreeIterator | ET.ElementTree)
+        match instance:
+            case datatypes.IsTreeIterator() | ET.ElementTree():
+                return True
+            case _ if importlib.util.find_spec("lxml"):
+                from lxml import etree
+
+                return isinstance(instance, etree._Element)
+            case _:
+                return False
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         return bool(item.obj)
