@@ -25,7 +25,11 @@ class DoubleValidator(gui.ValidatorMixin, QtGui.QDoubleValidator):
             else False
         )
 
-    def set_range(self, start: float | None, end: float | None, decimals: int = 0):
+    def set_range(
+        self, start: float | None, end: float | None, decimals: int | None = None
+    ):
+        if decimals is None:
+            decimals = -1
         if start is None:
             start = -float("inf")
         if end is None:
@@ -34,5 +38,12 @@ class DoubleValidator(gui.ValidatorMixin, QtGui.QDoubleValidator):
 
 
 if __name__ == "__main__":
+    from prettyqt import widgets
+
+    app = widgets.app()
+    lineedit = widgets.LineEdit()
     val = DoubleValidator()
-    val.setRange(0, 9)
+    # val.setRange(0, 9)
+    lineedit.set_validator(val)
+    lineedit.show()
+    app.exec()
