@@ -9,46 +9,47 @@ from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 mod = QtWidgets.QGraphicsView
 
-DRAG_MODE = bidict(
+
+DragModeStr = Literal["none", "scroll_hand", "rubber_band"]
+
+DRAG_MODE: bidict[DragModeStr, mod.DragMode] = bidict(
     none=mod.DragMode.NoDrag,
     scroll_hand=mod.DragMode.ScrollHandDrag,
     rubber_band=mod.DragMode.RubberBandDrag,
 )
 
-DragModeStr = Literal["none", "scroll_hand", "rubber_band"]
+CacheModeStr = Literal["none", "background"]
 
-CACHE_MODES = bidict(
+CACHE_MODES: bidict[CacheModeStr, mod.CacheModeFlag] = bidict(
     none=mod.CacheModeFlag.CacheNone,
     background=mod.CacheModeFlag.CacheBackground,
 )
 
-CacheModeStr = Literal["none", "background"]
+OptimizationFlagStr = Literal["dont_save_painter_state", "dont_adjust_for_antialiasing"]
 
-OPTIMIZATION_FLAGS = bidict(
+OPTIMIZATION_FLAGS: bidict[OptimizationFlagStr, mod.OptimizationFlag] = bidict(
     # dont_clip_painter=mod.OptimizationFlag.DontClipPainter,
     dont_save_painter_state=mod.OptimizationFlag.DontSavePainterState,
     dont_adjust_for_antialiasing=mod.OptimizationFlag.DontAdjustForAntialiasing,
 )
 
-OptimizationFlagStr = Literal["dont_save_painter_state", "dont_adjust_for_antialiasing"]
+ViewportAnchorStr = Literal["none", "view_center", "under_mouse"]
 
-VIEWPORT_ANCHOR = bidict(
+VIEWPORT_ANCHOR: bidict[ViewportAnchorStr, mod.ViewportAnchor] = bidict(
     none=mod.ViewportAnchor.NoAnchor,
     view_center=mod.ViewportAnchor.AnchorViewCenter,
     under_mouse=mod.ViewportAnchor.AnchorUnderMouse,
 )
 
-ViewportAnchorStr = Literal["none", "view_center", "under_mouse"]
+ViewportUpdateModeStr = Literal["full", "minimal", "smart", "bounding_rect", "none"]
 
-VIEWPORT_UPDATE_MODE = bidict(
+VIEWPORT_UPDATE_MODE: bidict[ViewportUpdateModeStr, mod.ViewportUpdateMode] = bidict(
     full=mod.ViewportUpdateMode.FullViewportUpdate,
     minimal=mod.ViewportUpdateMode.MinimalViewportUpdate,
     smart=mod.ViewportUpdateMode.SmartViewportUpdate,
     bounding_rect=mod.ViewportUpdateMode.BoundingRectViewportUpdate,
     none=mod.ViewportUpdateMode.NoViewportUpdate,
 )
-
-ViewportUpdateModeStr = Literal["full", "minimal", "smart", "bounding_rect", "none"]
 
 
 class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):

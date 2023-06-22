@@ -7,21 +7,21 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, listdelegators
 
 
-PANEL_MODALITY = bidict(
+PanelModalityStr = Literal["none", "panel", "scene"]
+
+PANEL_MODALITY: bidict[PanelModalityStr, QtWidgets.QGraphicsItem.PanelModality] = bidict(
     none=QtWidgets.QGraphicsItem.PanelModality.NonModal,
     panel=QtWidgets.QGraphicsItem.PanelModality.PanelModal,
     scene=QtWidgets.QGraphicsItem.PanelModality.SceneModal,
 )
 
-PanelModalityStr = Literal["none", "panel", "scene"]
+CacheModeStr = Literal["none", "item_coordinate", "device_coordinate"]
 
-CACHE_MODE = bidict(
+CACHE_MODE: bidict[CacheModeStr, QtWidgets.QGraphicsItem.CacheMode] = bidict(
     none=QtWidgets.QGraphicsItem.CacheMode.NoCache,
     item_coordinate=QtWidgets.QGraphicsItem.CacheMode.ItemCoordinateCache,
     device_coordinate=QtWidgets.QGraphicsItem.CacheMode.DeviceCoordinateCache,
 )
-
-CacheModeStr = Literal["none", "item_coordinate", "device_coordinate"]
 
 
 class GraphicsItemMixin:

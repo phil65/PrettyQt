@@ -7,12 +7,14 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-GESTURE_CANCEL_POLICY = bidict(
+GestureCancelPolicyStr = Literal["none", "all_in_context"]
+
+GESTURE_CANCEL_POLICY: bidict[
+    GestureCancelPolicyStr, QtWidgets.QGesture.GestureCancelPolicy
+] = bidict(
     none=QtWidgets.QGesture.GestureCancelPolicy.CancelNone,
     all_in_context=QtWidgets.QGesture.GestureCancelPolicy.CancelAllInContext,
 )
-
-GestureCancelPolicyStr = Literal["none", "all_in_context"]
 
 
 class GestureMixin(core.ObjectMixin):

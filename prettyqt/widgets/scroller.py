@@ -9,33 +9,36 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
-INPUT = bidict(
+InputStr = Literal["press", "move", "release"]
+
+INPUT: bidict[InputStr, QtWidgets.QScroller.Input] = bidict(
     press=QtWidgets.QScroller.Input.InputPress,
     move=QtWidgets.QScroller.Input.InputMove,
     release=QtWidgets.QScroller.Input.InputRelease,
-)
-
-InputStr = Literal["press", "move", "release"]
-
-SCROLLER_GESTURE_TYPE = bidict(
-    touch=QtWidgets.QScroller.ScrollerGestureType.TouchGesture,
-    left_mouse_button=QtWidgets.QScroller.ScrollerGestureType.LeftMouseButtonGesture,
-    middle_mouse_button=QtWidgets.QScroller.ScrollerGestureType.MiddleMouseButtonGesture,
-    right_mouse_button=QtWidgets.QScroller.ScrollerGestureType.RightMouseButtonGesture,
 )
 
 ScrollGestureTypeStr = Literal[
     "touch", "left_mouse_button", "middle_mouse_button", "right_mouse_button"
 ]
 
-STATE = bidict(
+SCROLLER_GESTURE_TYPE: bidict[
+    ScrollGestureTypeStr, QtWidgets.QScroller.ScrollerGestureType
+] = bidict(
+    touch=QtWidgets.QScroller.ScrollerGestureType.TouchGesture,
+    left_mouse_button=QtWidgets.QScroller.ScrollerGestureType.LeftMouseButtonGesture,
+    middle_mouse_button=QtWidgets.QScroller.ScrollerGestureType.MiddleMouseButtonGesture,
+    right_mouse_button=QtWidgets.QScroller.ScrollerGestureType.RightMouseButtonGesture,
+)
+
+
+StateStr = Literal["inactive", "pressed", "dragging", "scrolling"]
+
+STATE: bidict[StateStr, QtWidgets.QScroller.State] = bidict(
     inactive=QtWidgets.QScroller.State.Inactive,
     pressed=QtWidgets.QScroller.State.Pressed,
     dragging=QtWidgets.QScroller.State.Dragging,
     scrolling=QtWidgets.QScroller.State.Scrolling,
 )
-
-StateStr = Literal["inactive", "pressed", "dragging", "scrolling"]
 
 
 class Scroller(core.ObjectMixin):

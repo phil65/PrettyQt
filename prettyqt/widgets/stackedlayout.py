@@ -7,12 +7,12 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-STACKING_MODE = bidict(
+StackingModeStr = Literal["one", "all"]
+
+STACKING_MODE: bidict[StackingModeStr, QtWidgets.QStackedLayout.StackingMode] = bidict(
     one=QtWidgets.QStackedLayout.StackingMode.StackOne,
     all=QtWidgets.QStackedLayout.StackingMode.StackAll,
 )
-
-StackingModeStr = Literal["one", "all"]
 
 
 class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):

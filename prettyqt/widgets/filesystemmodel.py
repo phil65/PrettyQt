@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import os
+from typing import Literal
 import pathlib
 
 from prettyqt import constants, core, qt
@@ -9,7 +10,9 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
-OPTIONS = bidict(
+OptionStr = Literal["dont_watch_changes", "dont_resolve_symlinks", "no_custom_icons"]
+
+OPTIONS: bidict[OptionStr, QtWidgets.QFileSystemModel.Option] = bidict(
     dont_watch_changes=QtWidgets.QFileSystemModel.Option.DontWatchForChanges,
     dont_resolve_symlinks=QtWidgets.QFileSystemModel.Option.DontResolveSymlinks,
     no_custom_icons=QtWidgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,

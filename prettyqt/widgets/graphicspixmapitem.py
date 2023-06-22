@@ -7,13 +7,13 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-SHAPE_MODE = bidict(
+ShapeModeStr = Literal["mask", "bounding_rect", "heuristic_mask"]
+
+SHAPE_MODE: bidict[ShapeModeStr, QtWidgets.QGraphicsPixmapItem.ShapeMode] = bidict(
     mask=QtWidgets.QGraphicsPixmapItem.ShapeMode.MaskShape,
     bounding_rect=QtWidgets.QGraphicsPixmapItem.ShapeMode.BoundingRectShape,
     heuristic_mask=QtWidgets.QGraphicsPixmapItem.ShapeMode.HeuristicMaskShape,
 )
-
-ShapeModeStr = Literal["mask", "bounding_rect", "heuristic_mask"]
 
 
 class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapItem):

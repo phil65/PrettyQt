@@ -8,16 +8,6 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
-SIZE_POLICY = bidict(
-    fixed=QtWidgets.QSizePolicy.Policy.Fixed,
-    minimum=QtWidgets.QSizePolicy.Policy.Minimum,
-    maximum=QtWidgets.QSizePolicy.Policy.Maximum,
-    preferred=QtWidgets.QSizePolicy.Policy.Preferred,
-    expanding=QtWidgets.QSizePolicy.Policy.Expanding,
-    minimum_expanding=QtWidgets.QSizePolicy.Policy.MinimumExpanding,
-    ignored=QtWidgets.QSizePolicy.Policy.Ignored,
-)
-
 SizePolicyStr = Literal[
     "fixed",
     "minimum",
@@ -28,22 +18,14 @@ SizePolicyStr = Literal[
     "ignored",
 ]
 
-CONTROL_TYPE = bidict(
-    default=QtWidgets.QSizePolicy.ControlType.DefaultType,
-    buttonbox=QtWidgets.QSizePolicy.ControlType.ButtonBox,
-    checkbox=QtWidgets.QSizePolicy.ControlType.CheckBox,
-    combobox=QtWidgets.QSizePolicy.ControlType.ComboBox,
-    frame=QtWidgets.QSizePolicy.ControlType.Frame,
-    groupbox=QtWidgets.QSizePolicy.ControlType.GroupBox,
-    label=QtWidgets.QSizePolicy.ControlType.Label,
-    line=QtWidgets.QSizePolicy.ControlType.Line,
-    lineedit=QtWidgets.QSizePolicy.ControlType.LineEdit,
-    pushbutton=QtWidgets.QSizePolicy.ControlType.PushButton,
-    radiobutton=QtWidgets.QSizePolicy.ControlType.RadioButton,
-    slider=QtWidgets.QSizePolicy.ControlType.Slider,
-    spinbox=QtWidgets.QSizePolicy.ControlType.SpinBox,
-    tabwidget=QtWidgets.QSizePolicy.ControlType.TabWidget,
-    toolbutton=QtWidgets.QSizePolicy.ControlType.ToolButton,
+SIZE_POLICY: bidict[SizePolicyStr, QtWidgets.QSizePolicy.Policy] = bidict(
+    fixed=QtWidgets.QSizePolicy.Policy.Fixed,
+    minimum=QtWidgets.QSizePolicy.Policy.Minimum,
+    maximum=QtWidgets.QSizePolicy.Policy.Maximum,
+    preferred=QtWidgets.QSizePolicy.Policy.Preferred,
+    expanding=QtWidgets.QSizePolicy.Policy.Expanding,
+    minimum_expanding=QtWidgets.QSizePolicy.Policy.MinimumExpanding,
+    ignored=QtWidgets.QSizePolicy.Policy.Ignored,
 )
 
 ControlTypeStr = Literal[
@@ -63,6 +45,24 @@ ControlTypeStr = Literal[
     "tabwidget",
     "toolbutton",
 ]
+
+CONTROL_TYPE: bidict[ControlTypeStr, QtWidgets.QSizePolicy.ControlType] = bidict(
+    default=QtWidgets.QSizePolicy.ControlType.DefaultType,
+    buttonbox=QtWidgets.QSizePolicy.ControlType.ButtonBox,
+    checkbox=QtWidgets.QSizePolicy.ControlType.CheckBox,
+    combobox=QtWidgets.QSizePolicy.ControlType.ComboBox,
+    frame=QtWidgets.QSizePolicy.ControlType.Frame,
+    groupbox=QtWidgets.QSizePolicy.ControlType.GroupBox,
+    label=QtWidgets.QSizePolicy.ControlType.Label,
+    line=QtWidgets.QSizePolicy.ControlType.Line,
+    lineedit=QtWidgets.QSizePolicy.ControlType.LineEdit,
+    pushbutton=QtWidgets.QSizePolicy.ControlType.PushButton,
+    radiobutton=QtWidgets.QSizePolicy.ControlType.RadioButton,
+    slider=QtWidgets.QSizePolicy.ControlType.Slider,
+    spinbox=QtWidgets.QSizePolicy.ControlType.SpinBox,
+    tabwidget=QtWidgets.QSizePolicy.ControlType.TabWidget,
+    toolbutton=QtWidgets.QSizePolicy.ControlType.ToolButton,
+)
 
 
 class SizePolicy(QtWidgets.QSizePolicy):

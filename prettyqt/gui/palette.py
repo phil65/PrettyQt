@@ -16,30 +16,6 @@ from prettyqt.utils import (
 )
 
 
-ROLE = bidict(
-    window=QtGui.QPalette.ColorRole.Window,  # same as Background
-    window_text=QtGui.QPalette.ColorRole.WindowText,  # same as Foreground
-    base=QtGui.QPalette.ColorRole.Base,
-    alternate_base=QtGui.QPalette.ColorRole.AlternateBase,
-    tool_tip_base=QtGui.QPalette.ColorRole.ToolTipBase,
-    tool_tip_text=QtGui.QPalette.ColorRole.ToolTipText,
-    placeholder_text=QtGui.QPalette.ColorRole.PlaceholderText,
-    text=QtGui.QPalette.ColorRole.Text,
-    button=QtGui.QPalette.ColorRole.Button,
-    button_text=QtGui.QPalette.ColorRole.ButtonText,
-    bright_text=QtGui.QPalette.ColorRole.BrightText,
-    light=QtGui.QPalette.ColorRole.Light,
-    midlight=QtGui.QPalette.ColorRole.Midlight,
-    dark=QtGui.QPalette.ColorRole.Dark,
-    mid=QtGui.QPalette.ColorRole.Mid,
-    shadow=QtGui.QPalette.ColorRole.Shadow,
-    highlight=QtGui.QPalette.ColorRole.Highlight,
-    highlighted_text=QtGui.QPalette.ColorRole.HighlightedText,
-    link=QtGui.QPalette.ColorRole.Link,
-    link_visited=QtGui.QPalette.ColorRole.LinkVisited,
-    none=QtGui.QPalette.ColorRole.NoRole,
-)
-
 RoleStr = Literal[
     "window",
     "window_text",
@@ -64,13 +40,38 @@ RoleStr = Literal[
     "none",
 ]
 
-GROUP = bidict(
+
+ROLE: bidict[RoleStr, QtGui.QPalette.ColorRole] = bidict(
+    window=QtGui.QPalette.ColorRole.Window,  # same as Background
+    window_text=QtGui.QPalette.ColorRole.WindowText,  # same as Foreground
+    base=QtGui.QPalette.ColorRole.Base,
+    alternate_base=QtGui.QPalette.ColorRole.AlternateBase,
+    tool_tip_base=QtGui.QPalette.ColorRole.ToolTipBase,
+    tool_tip_text=QtGui.QPalette.ColorRole.ToolTipText,
+    placeholder_text=QtGui.QPalette.ColorRole.PlaceholderText,
+    text=QtGui.QPalette.ColorRole.Text,
+    button=QtGui.QPalette.ColorRole.Button,
+    button_text=QtGui.QPalette.ColorRole.ButtonText,
+    bright_text=QtGui.QPalette.ColorRole.BrightText,
+    light=QtGui.QPalette.ColorRole.Light,
+    midlight=QtGui.QPalette.ColorRole.Midlight,
+    dark=QtGui.QPalette.ColorRole.Dark,
+    mid=QtGui.QPalette.ColorRole.Mid,
+    shadow=QtGui.QPalette.ColorRole.Shadow,
+    highlight=QtGui.QPalette.ColorRole.Highlight,
+    highlighted_text=QtGui.QPalette.ColorRole.HighlightedText,
+    link=QtGui.QPalette.ColorRole.Link,
+    link_visited=QtGui.QPalette.ColorRole.LinkVisited,
+    none=QtGui.QPalette.ColorRole.NoRole,
+)
+
+GroupStr = Literal["disabled", "active", "inactive"]
+
+GROUP: bidict[GroupStr, QtGui.QPalette.ColorGroup] = bidict(
     disabled=QtGui.QPalette.ColorGroup.Disabled,
     active=QtGui.QPalette.ColorGroup.Active,  # normal
     inactive=QtGui.QPalette.ColorGroup.Inactive,
 )
-
-GroupStr = Literal["disabled", "active", "inactive"]
 
 
 class Palette(serializemixin.SerializeMixin, QtGui.QPalette):

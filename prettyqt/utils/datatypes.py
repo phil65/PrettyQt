@@ -255,7 +255,7 @@ def to_point(point: QtCore.QPointF | PointType):
 
 def to_pointf(point: PointFType | QtCore.QPoint):
     match point:
-        case (Num(), Num()):
+        case (int() | float(), int() | float()):
             return QtCore.PointF(*point)
         case QtCore.PointF():
             return point
@@ -279,7 +279,7 @@ def to_size(size: QtCore.QSizeF | SizeType):
 
 def to_sizef(size: SizeFType | QtCore.QSize):
     match size:
-        case (Num(), Num()):
+        case (int() | float(), int() | float()):
             return QtCore.QSizeF(*size)
         case QtCore.QSizeF():
             return size
@@ -303,7 +303,7 @@ def to_rect(rect: QtCore.QRectF | RectType):
 
 def to_rectf(rect: RectFType | QtCore.QRect):
     match rect:
-        case (Num(), Num(), Num(), Num()):
+        case (int() | float(), int() | float(), int() | float(), int() | float()):
             return QtCore.QRectF(*rect)
         case QtCore.QRectF():
             return rect
@@ -371,15 +371,20 @@ def to_margins(margins: MarginsType | QtCore.QMarginsF | None) -> QtCore.QMargin
 
 def to_marginsf(margins: MarginsFType | QtCore.QMargins | None) -> QtCore.QMarginsF:
     match margins:
-        case (Num() as x, Num() as y):
+        case (int() | float() as x, int() | float() as y):
             return QtCore.QMarginsF(x, y, x, y)
-        case (Num() as left, Num() as top, Num() as right, Num() as bottom):
+        case (
+            int() | float() as left,
+            int() | float() as top,
+            int() | float() as right,
+            int() | float() as bottom,
+        ):
             return QtCore.QMarginsF(left, top, right, bottom)
         case QtCore.QMarginsF():
             return margins
         case QtCore.QMargins():
             return margins.toMarginsF()
-        case Num() as x:
+        case int() | float() as x:
             return QtCore.QMargins(x, x, x, x)
         case None:
             return QtCore.QMargins(0, 0, 0, 0)
@@ -457,8 +462,6 @@ def make_serializable(obj):
             return obj
 
 
-Num = int | float
-
 Indexer = tuple[slice | int, slice | int]
 IndexerOrInt = Indexer | int
 SingleResultIndexer = int | tuple[int, int]
@@ -513,13 +516,19 @@ if TYPE_CHECKING:
 
     UrlType = str | QtCore.QUrl
     PointType = tuple[int, int] | QtCore.QPoint
-    PointFType = tuple[Num, Num] | QtCore.QPointF
+    PointFType = tuple[int | float, int | float] | QtCore.QPointF
     SizeType = tuple[int, int] | QtCore.QSize
-    SizeFType = tuple[Num, Num] | QtCore.QSizeF
+    SizeFType = tuple[int | float, int | float] | QtCore.QSizeF
     MarginsType = tuple[int, int, int, int] | tuple[int, int] | int | QtCore.QMargins
-    MarginsFType = tuple[Num, Num, Num, Num] | tuple[Num, Num] | Num | QtCore.QMarginsF
+    MarginsFType = (
+        tuple[int | float, int | float, int | float, int | float]
+        | tuple[int | float, int | float]
+        | int
+        | float
+        | QtCore.QMarginsF
+    )
     RectType = tuple[int, int, int, int] | QtCore.QRect
-    RectFType = tuple[Num, Num, Num, Num] | QtCore.QRectF
+    RectFType = tuple[int | float, int | float, int | float, int | float] | QtCore.QRectF
     SemanticVersionType = str | QtCore.QVersionNumber | tuple[int, int, int]
     IconType = QtGui.QIcon | str | pathlib.Path | None
     ByteArrayType = str | bytes | QtCore.QByteArray

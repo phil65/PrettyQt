@@ -232,8 +232,8 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
 
 if __name__ == "__main__":
     app = widgets.app()
-    ret = MessageBox(icon="warning", title="header", text="text")
+    ret = MessageBox(icon="warning", window_title="header", text="text")
     ret.set_standard_buttons(["ok", "cancel"])
-    ret.add_button("tt", "accept", callback=lambda: print("click"))
+    ret.add_custom_button("tt", "accept", callback=lambda: print("click"))
     ret.show()
     app.exec()

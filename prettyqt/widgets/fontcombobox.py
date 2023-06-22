@@ -7,15 +7,15 @@ from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-FONT_FILTERS = bidict(
+FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "proportional"]
+
+FONT_FILTERS: bidict[FontFilterStr, QtWidgets.QFontComboBox.FontFilter] = bidict(
     all=QtWidgets.QFontComboBox.FontFilter.AllFonts,
     scalable=QtWidgets.QFontComboBox.FontFilter.ScalableFonts,
     non_scalable=QtWidgets.QFontComboBox.FontFilter.NonScalableFonts,
     monospaced=QtWidgets.QFontComboBox.FontFilter.MonospacedFonts,
     proportional=QtWidgets.QFontComboBox.FontFilter.ProportionalFonts,
 )
-
-FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "proportional"]
 
 
 class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):

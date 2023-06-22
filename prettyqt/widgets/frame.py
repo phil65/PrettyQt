@@ -7,15 +7,19 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
-SHADOW = bidict(
+ShadowStr = Literal["plain", "raised", "sunken"]
+
+SHADOW: bidict[ShadowStr, QtWidgets.QFrame.Shadow] = bidict(
     plain=QtWidgets.QFrame.Shadow.Plain,
     raised=QtWidgets.QFrame.Shadow.Raised,
     sunken=QtWidgets.QFrame.Shadow.Sunken,
 )
 
-ShadowStr = Literal["plain", "raised", "sunken"]
+FrameShapeStr = Literal[
+    "no_frame", "box", "panel", "styled_panel", "h_line", "v_line", "win_panel"
+]
 
-FRAME_SHAPE = bidict(
+FRAME_SHAPE: bidict[FrameShapeStr, QtWidgets.QFrame.Shape] = bidict(
     no_frame=QtWidgets.QFrame.Shape.NoFrame,
     box=QtWidgets.QFrame.Shape.Box,
     panel=QtWidgets.QFrame.Shape.Panel,
@@ -24,10 +28,6 @@ FRAME_SHAPE = bidict(
     v_line=QtWidgets.QFrame.Shape.VLine,
     win_panel=QtWidgets.QFrame.Shape.WinPanel,
 )
-
-FrameShapeStr = Literal[
-    "no_frame", "box", "panel", "styled_panel", "h_line", "v_line", "win_panel"
-]
 
 
 class FrameMixin(widgets.WidgetMixin):

@@ -7,13 +7,13 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-BLUR_HINTS = bidict(
+BlurHintStr = Literal["performance", "quality", "animation"]
+
+BLUR_HINTS: bidict[BlurHintStr, QtWidgets.QGraphicsBlurEffect.BlurHint] = bidict(
     performance=QtWidgets.QGraphicsBlurEffect.BlurHint.PerformanceHint,
     quality=QtWidgets.QGraphicsBlurEffect.BlurHint.QualityHint,
     animation=QtWidgets.QGraphicsBlurEffect.BlurHint.AnimationHint,
 )
-
-BlurHintStr = Literal["performance", "quality", "animation"]
 
 
 class GraphicsBlurEffect(widgets.GraphicsEffectMixin, QtWidgets.QGraphicsBlurEffect):

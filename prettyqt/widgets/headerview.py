@@ -10,14 +10,14 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-MODES = bidict(
+ResizeModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
+
+RESIZE_MODE: bidict[ResizeModeStr, QtWidgets.QHeaderView.ResizeMode] = bidict(
     interactive=QtWidgets.QHeaderView.ResizeMode.Interactive,
     fixed=QtWidgets.QHeaderView.ResizeMode.Fixed,
     stretch=QtWidgets.QHeaderView.ResizeMode.Stretch,
     resize_to_contents=QtWidgets.QHeaderView.ResizeMode.ResizeToContents,
 )
-
-ModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
 
 logger = logging.getLogger(__name__)
 
@@ -50,9 +50,9 @@ class HeaderWrapper:
             case _:
                 raise TypeError(size)
 
-    def set_resize_mode(self, mode: ModeStr):
+    def set_resize_mode(self, mode: ResizeModeStr):
         for i in self._range:
-            self._widget.setSectionResizeMode(i, MODES[mode])
+            self._widget.setSectionResizeMode(i, RESIZE_MODE[mode])
 
     def set_sort_indicator(self, ascending: bool = True):
         sort_order = constants.ASCENDING if ascending else constants.DESCENDING
@@ -150,16 +150,16 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             return True
         return False
 
-    def resize_sections(self, mode: ModeStr = "resize_to_contents"):
-        self.resizeSections(MODES[mode])
+    def resize_sections(self, mode: ResizeModeStr = "resize_to_contents"):
+        self.resizeSections(RESIZE_MODE[mode])
 
-    def get_resize_mode(self, col: int) -> ModeStr:
+    def get_resize_mode(self, col: int) -> ResizeModeStr:
         val = self.sectionResizeMode(col)
-        return MODES.inverse[val]
+        return RESIZE_MODE.inverse[val]
 
     def set_resize_mode(
         self,
-        mode: ModeStr,
+        mode: ResizeModeStr,
         precision: int | None = None,
         cascading: bool | None = None,
         stretch_last_section: bool | None = None,
@@ -179,9 +179,9 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             self.setResizeContentsPrecision(precision)
         if cascading is not None:
             self.setCascadingSectionResizes(cascading)
-        if mode not in MODES:
-            raise InvalidParamError(mode, MODES)
-        self.setSectionResizeMode(MODES[mode])
+        if mode not in RESIZE_MODE:
+            raise InvalidParamError(mode, RESIZE_MODE)
+        self.setSectionResizeMode(RESIZE_MODE[mode])
 
     def get_section_labels(self) -> list[str]:
         """Return all section labels as a list."""

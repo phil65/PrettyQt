@@ -8,21 +8,23 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, listdelegators
 
 
-SCENE_LAYER = bidict(
+SceneLayerStr = Literal["item", "background", "foreground", "all"]
+
+SCENE_LAYER: bidict[SceneLayerStr, QtWidgets.QGraphicsScene.SceneLayer] = bidict(
     item=QtWidgets.QGraphicsScene.SceneLayer.ItemLayer,
     background=QtWidgets.QGraphicsScene.SceneLayer.BackgroundLayer,
     foreground=QtWidgets.QGraphicsScene.SceneLayer.ForegroundLayer,
     all=QtWidgets.QGraphicsScene.SceneLayer.AllLayers,
 )
 
-SceneLayerStr = Literal["item", "background", "foreground", "all"]
+ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
-ITEM_INDEX_METHOD = bidict(
+ITEM_INDEX_METHOD: bidict[
+    ItemIndexMethodStr, QtWidgets.QGraphicsScene.ItemIndexMethod
+] = bidict(
     bsp_tree=QtWidgets.QGraphicsScene.ItemIndexMethod.BspTreeIndex,
     none=QtWidgets.QGraphicsScene.ItemIndexMethod.NoIndex,
 )
-
-ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
 
 class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):

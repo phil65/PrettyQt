@@ -10,31 +10,31 @@ from prettyqt.utils import InvalidParamError, bidict
 
 mod = QtWidgets.QFormLayout
 
-ROLE = bidict(
+ItemRoleStr = Literal["left", "right", "both"]
+
+ITEM_ROLE: bidict[ItemRoleStr, mod.ItemRole] = bidict(
     left=mod.ItemRole.LabelRole,
     right=mod.ItemRole.FieldRole,
     both=mod.ItemRole.SpanningRole,
 )
 
-RoleStr = Literal["left", "right", "both"]
+RowWrapPolicyStr = Literal["dont_wrap", "wrap_long", "wrap_all"]
 
-ROW_WRAP_POLICY = bidict(
+ROW_WRAP_POLICY: bidict[RowWrapPolicyStr, mod.RowWrapPolicy] = bidict(
     dont_wrap=mod.RowWrapPolicy.DontWrapRows,
     wrap_long=mod.RowWrapPolicy.WrapLongRows,
     wrap_all=mod.RowWrapPolicy.WrapAllRows,
 )
 
-RowWrapPolicyStr = Literal["dont_wrap", "wrap_long", "wrap_all"]
+FieldGrowthPolicyStr = Literal[
+    "fields_stay_at_size", "expanding_fields_grow", "all_non_fixed_fields_grow"
+]
 
-FIELD_GROWTH_POLICY = bidict(
+FIELD_GROWTH_POLICY: bidict[FieldGrowthPolicyStr, mod.FieldGrowthPolicy] = bidict(
     fields_stay_at_size=mod.FieldGrowthPolicy.FieldsStayAtSizeHint,
     expanding_fields_grow=mod.FieldGrowthPolicy.ExpandingFieldsGrow,
     all_non_fixed_fields_grow=mod.FieldGrowthPolicy.AllNonFixedFieldsGrow,
 )
-
-FieldGrowthPolicyStr = Literal[
-    "fields_stay_at_size", "expanding_fields_grow", "all_non_fixed_fields_grow"
-]
 
 
 class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
@@ -46,7 +46,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         self.setVerticalSpacing(8)
 
     def __setitem__(
-        self, index: int | tuple[int, RoleStr], value: str | QtWidgets.QWidget
+        self, index: int | tuple[int, ItemRoleStr], value: str | QtWidgets.QWidget
     ):
         match index:
             case (int() as row, str() as role):
@@ -123,20 +123,20 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         return constants.ALIGNMENTS.inverse[self.labelAlignment()]
 
     def set_widget(
-        self, widget: str | QtWidgets.QWidget, row: int, role: RoleStr = "both"
+        self, widget: str | QtWidgets.QWidget, row: int, role: ItemRoleStr = "both"
     ):
         widget = widgets.Label(widget) if isinstance(widget, str) else widget
-        self.setWidget(row, ROLE[role], widget)
+        self.setWidget(row, ITEM_ROLE[role], widget)
 
     def get_widget(
-        self, row: int, role: RoleStr = "both"
+        self, row: int, role: ItemRoleStr = "both"
     ) -> QtWidgets.QLayout | QtWidgets.QWidget:
-        item = self.itemAt(row, ROLE[role])
+        item = self.itemAt(row, ITEM_ROLE[role])
         return i if (i := item.widget()) is not None else item.layout()
 
-    def get_item_position(self, index: int) -> tuple[int, RoleStr] | None:
+    def get_item_position(self, index: int) -> tuple[int, ItemRoleStr] | None:
         row, role = self.getItemPosition(index)  # type: ignore
-        return None if row == -1 else (row, ROLE.inverse[role])
+        return None if row == -1 else (row, ITEM_ROLE.inverse[role])
 
     def add(self, *items):
         for i in items:

@@ -7,7 +7,9 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-TICK_POSITION = bidict(
+TickPositionStr = Literal["none", "both_sides", "above", "below"]
+
+TICK_POSITION: bidict[TickPositionStr, QtWidgets.QSlider.TickPosition] = bidict(
     none=QtWidgets.QSlider.TickPosition.NoTicks,
     both_sides=QtWidgets.QSlider.TickPosition.TicksBothSides,
     above=QtWidgets.QSlider.TickPosition.TicksAbove,
@@ -15,7 +17,6 @@ TICK_POSITION = bidict(
 )
 
 TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "right"]
-TickPositionStr = Literal["none", "both_sides", "above", "below"]
 
 
 class HollowHandleStyle(widgets.ProxyStyle):
