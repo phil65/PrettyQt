@@ -21,19 +21,21 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
     Very fast filter model compared to row-based SortFilterProxyModel approach.
     Doesnt need a copy of whole dataframe, only mapping indexes are built.
 
-    Note: Dataframe proxies cant be chained.
+    Note: Dataframe proxies cant be chained right now.
     """
 
     def __init__(self, **kwargs):
         self._filter_index = None
         self._source_to_proxy = None
         self._proxy_to_source = None
+        self._row_count = 0
         super().__init__(**kwargs)
 
     def setSourceModel(self, model):
         self._filter_index = np.full(model.rowCount(), True, dtype=bool)
         self._source_to_proxy = np.cumsum(self._filter_index)
         self._proxy_to_source = np.where(self._filter_index == True)[0]  # noqa: E712
+        self._row_count = self._filter_index.sum()
         super().setSourceModel(model)
 
     def _build_filter_index(self):
@@ -47,12 +49,13 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
             rowcount = self.sourceModel().rowCount()
             self._filter_index = np.full(rowcount, True, dtype=bool)
         with self.reset_model():
+            self._row_count = self._filter_index.sum()
             self._source_to_proxy = np.cumsum(self._filter_index) - 1
             self._proxy_to_source = np.where(self._filter_index == True)[0]  # noqa: E712
             self.update_all()
 
     def rowCount(self, index=None):
-        return self._filter_index.sum()
+        return self._row_count
 
     def headerData(
         self,
@@ -70,7 +73,7 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
     ) -> core.Modelindex:
         parent = parent or core.ModelIndex()
         source = self.sourceModel()
-        if row < 0 or column < 0 or source is None or row >= self.rowCount():
+        if row < 0 or column < 0 or source is None or row >= self._row_count:
             return core.ModelIndex()
         source_parent = self.mapToSource(parent)
         row_pos = int(self._proxy_to_source[row])
@@ -83,7 +86,7 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
         if (
             source is None
             or not proxy_idx.isValid()
-            or proxy_idx.row() >= self.rowCount()
+            or proxy_idx.row() >= self._row_count
         ):
             return core.ModelIndex()
         row_pos = int(self._proxy_to_source[proxy_idx.row()])
@@ -205,6 +208,7 @@ class PandasMultiStringColumnFilterModel(BasePandasIndexFilterModel):
         except Exception:
             self._filter_index = np.full(len(df), False, dtype=bool)
         with self.reset_model():
+            self._row_count = self._filter_index.sum()
             self._source_to_proxy = np.cumsum(self._filter_index) - 1
             self._proxy_to_source = np.where(self._filter_index == True)[0]  # noqa: E712
 
