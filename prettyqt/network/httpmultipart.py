@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtNetwork
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
@@ -36,10 +36,7 @@ class HttpMultiPart(core.ObjectMixin, QtNetwork.QHttpMultiPart):
         self.setContentType(CONTENT_TYPES[typ])
 
     def set_boundary(self, boundary: datatypes.ByteArrayType):
-        if isinstance(boundary, str):
-            boundary = boundary.encode()
-        if isinstance(boundary, bytes):
-            boundary = QtCore.QByteArray(boundary)
+        boundary = datatypes.to_bytearray(boundary)
         self.setBoundary(boundary)
 
     def get_boundary(self) -> str:

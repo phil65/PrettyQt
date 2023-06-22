@@ -60,10 +60,7 @@ class ImageReader(QtGui.QImageReader):
         return [i.data().decode() for i in self.supportedSubTypes()]
 
     def set_format(self, fmt: datatypes.ByteArrayType):
-        if isinstance(fmt, str):
-            fmt = fmt.encode()
-        if isinstance(fmt, bytes):
-            fmt = QtCore.QByteArray(fmt)
+        fmt = datatypes.to_bytearray(fmt)
         self.setFormat(fmt)
 
     def get_transformation(self) -> gui.imageiohandler.TransformationStr:
@@ -104,10 +101,7 @@ class ImageReader(QtGui.QImageReader):
 
     @staticmethod
     def get_image_formats_for_mime_type(typ: datatypes.ByteArrayType) -> list[str]:
-        if isinstance(typ, str):
-            typ = typ.encode()
-        if isinstance(typ, bytes):
-            typ = QtCore.QByteArray(typ)
+        typ = datatypes.to_bytearray(typ)
         return [i.data().decode() for i in ImageReader.imageFormatsForMimeType(typ)]
 
 

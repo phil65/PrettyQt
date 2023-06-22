@@ -21,20 +21,14 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         self.toRawForm(form)
 
     def set_name(self, name: datatypes.ByteArrayType):
-        if isinstance(name, str):
-            name = name.encode()
-        if isinstance(name, bytes):
-            name = QtCore.QByteArray(name)
+        name = datatypes.to_bytearray(name)
         self.setName(name)
 
     def get_name(self) -> str:
         return self.name().data().decode()
 
     def set_value(self, value: datatypes.ByteArrayType):
-        if isinstance(value, str):
-            value = value.encode()
-        if isinstance(value, bytes):
-            value = QtCore.QByteArray(value)
+        value = datatypes.to_bytearray(value)
         self.setValue(value)
 
     def get_value(self) -> str:

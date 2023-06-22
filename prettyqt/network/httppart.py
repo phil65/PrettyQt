@@ -7,10 +7,7 @@ from prettyqt.utils import datatypes
 
 class HttpPart(QtNetwork.QHttpPart):
     def set_body(self, body: datatypes.ByteArrayType):
-        if isinstance(body, str):
-            body = body.encode()
-        if isinstance(body, bytes):
-            body = QtCore.QByteArray(body)
+        body = datatypes.to_bytearray(body)
         self.setBody(body)
 
     def set_headers(self, headers: dict[str, str]):

@@ -17,10 +17,7 @@ class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
         data: datatypes.ByteArrayType,
         url: datatypes.UrlType | None = None,
     ):
-        if isinstance(data, str):
-            data = data.encode()
-        if isinstance(data, bytes):
-            data = QtCore.QByteArray(data)
+        data = datatypes.to_bytearray(data)
         match url:
             case str():
                 url = QtCore.QUrl(url)

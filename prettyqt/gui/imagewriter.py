@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
@@ -42,17 +42,11 @@ class ImageWriter(QtGui.QImageWriter):
         return [i.data().decode() for i in self.supportedSubTypes()]
 
     def set_subtype(self, subtype: datatypes.ByteArrayType):
-        if isinstance(subtype, str):
-            subtype = subtype.encode()
-        if isinstance(subtype, bytes):
-            subtype = QtCore.QByteArray(subtype)
+        subtype = datatypes.to_bytearray(subtype)
         self.setSubType(subtype)
 
     def set_format(self, fmt: datatypes.ByteArrayType):
-        if isinstance(fmt, str):
-            fmt = fmt.encode()
-        if isinstance(fmt, bytes):
-            fmt = QtCore.QByteArray(fmt)
+        fmt = datatypes.to_bytearray(fmt)
         self.setFormat(fmt)
 
     def set_transformation(self, origin: gui.imageiohandler.TransformationStr):

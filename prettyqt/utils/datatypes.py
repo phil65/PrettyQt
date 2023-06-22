@@ -339,6 +339,18 @@ def to_local_url(url: UrlType | os.PathLike | None) -> QtCore.QUrl:
             raise TypeError(url)
 
 
+def to_bytearray(self, arr: str | bytes | QtCore.QByteArray) -> QtCore.QByteArray:
+    match arr:
+        case str():
+            return QtCore.QByteArray(arr.encode())
+        case bytes():
+            return QtCore.QByteArray(arr)
+        case QtCore.QByteArray():
+            return arr
+        case _:
+            raise TypeError(arr)
+
+
 def to_py_pattern(pattern: PatternAndStringType):
     from prettyqt import core
 

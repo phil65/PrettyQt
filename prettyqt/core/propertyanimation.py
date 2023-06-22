@@ -28,10 +28,7 @@ class PropertyAnimation(core.VariantAnimationMixin, QtCore.QPropertyAnimation):
         self.set_property_name(method.__name__)
 
     def set_property_name(self, name: datatypes.ByteArrayType):
-        if isinstance(name, str):
-            name = name.encode()
-        if isinstance(name, bytes):
-            name = QtCore.QByteArray(name)
+        name = datatypes.to_bytearray(name)
         self.setPropertyName(name)
 
     def get_property_name(self) -> str:
