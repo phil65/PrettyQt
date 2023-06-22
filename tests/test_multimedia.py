@@ -2,7 +2,7 @@
 
 import pytest
 
-from prettyqt import core, multimedia
+from prettyqt import core, multimedia, qt
 from prettyqt.utils import InvalidParamError
 
 
@@ -36,7 +36,8 @@ def test_camera():
     assert cam.get_white_balance_mode() == "auto"
     with pytest.raises(InvalidParamError):
         cam.set_white_balance_mode("test")
-    cam.get_supported_features()
+    if qt.API == "pyside6":  # PyQt6 falsely returns enum.Enum intead of enum.Flag.
+        cam.get_supported_features()
     assert cam.get_error() in ["none", "camera"]
     cam.get_camera_format()
 

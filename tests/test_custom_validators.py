@@ -65,7 +65,7 @@ def test_andvalidator():
     assert composite.is_valid_value("1")
     assert not composite.is_valid_value("")
     assert not composite.is_valid_value("0")
-    val1 + val2
+    val1 & val2
     for _child in composite:
         pass
     assert val1 in composite
