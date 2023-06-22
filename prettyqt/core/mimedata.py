@@ -21,10 +21,7 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
     #     return self.get_data(index)
 
     # def __setitem__(self, index: str, value: datatypes.ByteArrayType):
-    #     if isinstance(value, str):
-    #         value = value.encode()
-    #     if not isinstance(value, QtCore.QByteArray):
-    #         value = QtCore.QByteArray(value)
+    #     value = datatypes.to_bytearray(value)
     #     self.setData(index, value)
 
     def __contains__(self, fmt: str):

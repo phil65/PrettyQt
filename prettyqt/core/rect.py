@@ -32,13 +32,11 @@ class Rect(QtCore.QRect):
         return type(self), (self.x(), self.y(), self.width(), self.height())
 
     def margins_added(self, margins: datatypes.MarginsType) -> Self:
-        if isinstance(margins, tuple):
-            margins = QtCore.QMargins(*margins)
+        margins = datatypes.to_margins(margins)
         return type(self)(self.marginsAdded(margins))
 
     def margins_removed(self, margins: datatypes.MarginsType) -> Self:
-        if isinstance(margins, tuple):
-            margins = QtCore.QMargins(*margins)
+        margins = datatypes.to_margins(margins)
         return type(self)(self.marginsRemoved(margins))
 
 

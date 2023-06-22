@@ -27,18 +27,15 @@ class Size(QtCore.QSize):
         return type(self), (self.width(), self.height())
 
     def expanded_to(self, size: datatypes.SizeType) -> Self:
-        if isinstance(size, tuple):
-            size = QtCore.QSize(*size)
+        size = datatypes.to_size(size)
         return type(self)(self.expandedTo(size))
 
     def shrunk_by(self, margins: datatypes.MarginsType) -> Self:
-        if isinstance(margins, tuple):
-            margins = QtCore.QMargins(*margins)
+        margins = datatypes.to_margins(margins)
         return type(self)(self.shrunkBy(margins))
 
     def grown_by(self, margins: datatypes.MarginsType) -> Self:
-        if isinstance(margins, tuple):
-            margins = QtCore.QMargins(*margins)
+        margins = datatypes.to_margins(margins)
         return type(self)(self.grownBy(margins))
 
 

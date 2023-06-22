@@ -255,7 +255,7 @@ def to_point(point: QtCore.QPointF | PointType):
 
 def to_pointf(point: PointFType | QtCore.QPoint):
     match point:
-        case (float(), float()):
+        case (Num(), Num()):
             return QtCore.PointF(*point)
         case QtCore.PointF():
             return point
@@ -279,7 +279,7 @@ def to_size(size: QtCore.QSizeF | SizeType):
 
 def to_sizef(size: SizeFType | QtCore.QSize):
     match size:
-        case (float(), float()):
+        case (Num(), Num()):
             return QtCore.QSizeF(*size)
         case QtCore.QSizeF():
             return size
@@ -303,7 +303,7 @@ def to_rect(rect: QtCore.QRectF | RectType):
 
 def to_rectf(rect: RectFType | QtCore.QRect):
     match rect:
-        case (float(), float(), float(), float()):
+        case (Num(), Num(), Num(), Num()):
             return QtCore.QRectF(*rect)
         case QtCore.QRectF():
             return rect
@@ -339,7 +339,7 @@ def to_local_url(url: UrlType | os.PathLike | None) -> QtCore.QUrl:
             raise TypeError(url)
 
 
-def to_bytearray(self, arr: str | bytes | QtCore.QByteArray) -> QtCore.QByteArray:
+def to_bytearray(arr: str | bytes | QtCore.QByteArray) -> QtCore.QByteArray:
     match arr:
         case str():
             return QtCore.QByteArray(arr.encode())
@@ -349,6 +349,42 @@ def to_bytearray(self, arr: str | bytes | QtCore.QByteArray) -> QtCore.QByteArra
             return arr
         case _:
             raise TypeError(arr)
+
+
+def to_margins(margins: MarginsType | QtCore.QMarginsF | None) -> QtCore.QMargins:
+    match margins:
+        case (int() as x, int() as y):
+            return QtCore.QMargins(x, y, x, y)
+        case (int() as left, int() as top, int() as right, int() as bottom):
+            return QtCore.QMargins(left, top, right, bottom)
+        case QtCore.QMargins():
+            return margins
+        case QtCore.QMarginsF():
+            return margins.toMargins()
+        case int() as x:
+            return QtCore.QMargins(x, x, x, x)
+        case None:
+            return QtCore.QMargins(0, 0, 0, 0)
+        case _:
+            raise TypeError(margins)
+
+
+def to_marginsf(margins: MarginsFType | QtCore.QMargins | None) -> QtCore.QMarginsF:
+    match margins:
+        case (Num() as x, Num() as y):
+            return QtCore.QMarginsF(x, y, x, y)
+        case (Num() as left, Num() as top, Num() as right, Num() as bottom):
+            return QtCore.QMarginsF(left, top, right, bottom)
+        case QtCore.QMarginsF():
+            return margins
+        case QtCore.QMargins():
+            return margins.toMarginsF()
+        case Num() as x:
+            return QtCore.QMargins(x, x, x, x)
+        case None:
+            return QtCore.QMargins(0, 0, 0, 0)
+        case _:
+            raise TypeError(margins)
 
 
 def to_py_pattern(pattern: PatternAndStringType):
@@ -421,6 +457,8 @@ def make_serializable(obj):
             return obj
 
 
+Num = int | float
+
 Indexer = tuple[slice | int, slice | int]
 IndexerOrInt = Indexer | int
 SingleResultIndexer = int | tuple[int, int]
@@ -475,13 +513,13 @@ if TYPE_CHECKING:
 
     UrlType = str | QtCore.QUrl
     PointType = tuple[int, int] | QtCore.QPoint
-    PointFType = tuple[float, float] | QtCore.QPointF
+    PointFType = tuple[Num, Num] | QtCore.QPointF
     SizeType = tuple[int, int] | QtCore.QSize
-    SizeFType = tuple[float, float] | QtCore.QSizeF
-    MarginsType = tuple[int, int, int, int] | QtCore.QMargins
-    MarginsFType = tuple[float, float, float, float] | QtCore.QMarginsF
+    SizeFType = tuple[Num, Num] | QtCore.QSizeF
+    MarginsType = tuple[int, int, int, int] | tuple[int, int] | int | QtCore.QMargins
+    MarginsFType = tuple[Num, Num, Num, Num] | tuple[Num, Num] | Num | QtCore.QMarginsF
     RectType = tuple[int, int, int, int] | QtCore.QRect
-    RectFType = tuple[float, float, float, float] | QtCore.QRectF
+    RectFType = tuple[Num, Num, Num, Num] | QtCore.QRectF
     SemanticVersionType = str | QtCore.QVersionNumber | tuple[int, int, int]
     IconType = QtGui.QIcon | str | pathlib.Path | None
     ByteArrayType = str | bytes | QtCore.QByteArray

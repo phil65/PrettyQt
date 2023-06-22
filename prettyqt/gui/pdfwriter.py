@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import InvalidParamError, datatypes
 
 
@@ -16,8 +16,7 @@ class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, QtGui.QPdfWriter):
         margins: datatypes.MarginsFType,
         unit: gui.pagelayout.UnitStr | None = None,
     ) -> bool:
-        if isinstance(margins, tuple):
-            margins = QtCore.QMarginsF(*margins)
+        margins = datatypes.to_marginsf(margins)
         if unit is None:
             return self.setPageMargins(margins)
         if unit not in gui.pagelayout.UNITS:

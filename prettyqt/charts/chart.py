@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import charts, constants, core, gui, widgets
-from prettyqt.qt import QtCharts, QtCore
+from prettyqt.qt import QtCharts
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
@@ -102,8 +102,7 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         self.setTheme(THEMES[theme_name])
 
     def set_margins(self, margins: datatypes.MarginsType):
-        if isinstance(margins, tuple):
-            margins = QtCore.QMargins(*margins)
+        margins = datatypes.to_margins(margins)
         self.setMargins(margins)
 
     def set_animation_options(self, option: AnimationOptionStr):
