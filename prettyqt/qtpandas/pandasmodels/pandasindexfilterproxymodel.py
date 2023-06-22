@@ -20,6 +20,8 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
 
     Very fast filter model compared to row-based SortFilterProxyModel approach.
     Doesnt need a copy of whole dataframe, only mapping indexes are built.
+
+    Note: Dataframe proxies cant be chained.
     """
 
     def __init__(self, **kwargs):
@@ -42,7 +44,8 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
         if self._search_term:
             self._build_filter_index()
         else:
-            self._filter_index = np.full(len(df), True, dtype=bool)
+            rowcount = self.sourceModel().rowCount()
+            self._filter_index = np.full(rowcount, True, dtype=bool)
         with self.reset_model():
             self._source_to_proxy = np.cumsum(self._filter_index) - 1
             self._proxy_to_source = np.where(self._filter_index == True)[0]  # noqa: E712
@@ -175,14 +178,14 @@ class PandasEvalFilterModel(BasePandasIndexFilterModel):
     ID = "pandas_eval_filter"
 
     def _build_filter_index(self):
-        df = self.get_source_model(skip_proxies=True).df
+        rowcount = self.sourcemodel().rowCount()
         try:
             self._filter_index = df.eval(self._search_term)
             self._filter_index = self._filter_index.to_numpy()
             if self._filter_index.dtype != bool:
-                self._filter_index = np.full(len(df), False, dtype=bool)
+                self._filter_index = np.full(rowcount, False, dtype=bool)
         except Exception:
-            self._filter_index = np.full(len(df), False, dtype=bool)
+            self._filter_index = np.full(rowcount, False, dtype=bool)
 
 
 class PandasMultiStringColumnFilterModel(BasePandasIndexFilterModel):
