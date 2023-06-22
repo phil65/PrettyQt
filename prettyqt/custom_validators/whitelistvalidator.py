@@ -26,6 +26,14 @@ class WhitelistValidator(gui.Validator):
         return self.State.Invalid, text, pos
 
 
+class EmptyValidator(WhitelistValidator):
+    ID = "empty"
+
+    def __init__(self, parent: QtCore.QObject | None = None):
+        super().__init__(parent)
+        self._options = [""]
+
+
 if __name__ == "__main__":
     from prettyqt import widgets
 

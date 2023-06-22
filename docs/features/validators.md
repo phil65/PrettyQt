@@ -49,6 +49,8 @@ The set_validator method also gained a "strict" keyword argument, which wraps th
 validator into a NotStrictValidator, effectively removing the "Invalid" state. That way
 there never is a situation where the user input is ignored, which might be preferred in a lot of situations.
 
+The acceptance of "" may also be overriden explicitely by setting the "allow_empty" keyword argument.
+
 Validators which inherit from gui.Validator also can be combined.
 
 Example:

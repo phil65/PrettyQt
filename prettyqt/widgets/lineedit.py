@@ -159,7 +159,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         self,
         validator: gui.QValidator | ValidatorStr | datatypes.PatternType | None,
         strict: bool = True,
-        empty_allowed: bool = True,
+        empty_allowed: bool | None = None,
         **kwargs,
     ) -> gui.QValidator:
         from prettyqt import custom_validators
@@ -174,9 +174,13 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
                 pass
             case _:
                 raise ValueError(validator)
-        if not empty_allowed:
+        if empty_allowed is False:
             validator = custom_validators.AndValidator(
                 [validator, custom_validators.NotEmptyValidator()]
+            )
+        elif empty_allowed is True:
+            validator = custom_validators.OrValidator(
+                [validator, custom_validators.EmptyValidator()]
             )
         if not strict:
             validator = custom_validators.NotStrictValidator(validator)
