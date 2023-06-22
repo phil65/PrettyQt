@@ -43,6 +43,7 @@ def colored(text: str, color: str) -> str:
 
 
 def color_text(input_text: str, text: str, color: str, case_sensitive: bool = False):
+    """Color first occurences of input_text chars in text with given color."""
     def converter(x):
         return x if case_sensitive else x.lower()
 

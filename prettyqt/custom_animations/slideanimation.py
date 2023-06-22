@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -12,11 +12,11 @@ class SlideAnimation(core.PropertyAnimation):
 
     def __init__(
         self,
+        parent: QtWidgets.QWidget,
         duration: int = 1000,
         start: tuple[int, int] | core.Point = (0, 0),
         end: tuple[int, int] | core.Point = (0, 0),
         easing: core.easingcurve.TypeStr = "in_out_sine",
-        parent: QtCore.QObject | None = None,
     ):
         super().__init__(parent)
         self.set_easing(easing)
@@ -44,10 +44,10 @@ if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
-    val = SlideAnimation()
-    val.set_end_value((100, 100))
     btn = widgets.PushButton("ts")
     btn.show()
+    val = SlideAnimation(parent=btn)
+    val.set_end_value((0, 100))
     val.apply_to(btn)
     val.start()
     app.exec()

@@ -67,7 +67,7 @@ class FilterHeader(widgets.HeaderView):
                 def set_filter(val, i=i):
                     self._proxy.set_filter_value(i, val)
 
-                name = f"filter_combo_{i}"
+                name = f"filter_lineedit_{i}"
                 widget = widgets.LineEdit(margin=0, object_name=name, parent=self)
                 widget.value_changed.connect(set_filter)
                 title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
