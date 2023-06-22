@@ -51,8 +51,8 @@ class FontChooserButton(widgets.Widget):
     def set_value(self, value: str | QtGui.QFont):
         self.set_current_font(value)
 
-    def get_value(self):
-        return self._current_font
+    def get_value(self) -> gui.QFont:
+        return gui.QFont(self._current_font)
 
     current_font = core.Property(QtGui.QFont, get_value, set_value, user=True)
 

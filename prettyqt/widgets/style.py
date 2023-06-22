@@ -347,7 +347,7 @@ SubControlStr = Literal[
     "all",
 ]
 
-SUB_CONTROL: bidict[SubControlStr, mod.SubControl] = bidict(
+SUB_CONTROL: dict[SubControlStr, mod.SubControl] = dict(
     none=mod.SubControl.SC_None,
     scrollbar_add_line=mod.SubControl.SC_ScrollBarAddLine,
     scrollbar_sub_line=mod.SubControl.SC_ScrollBarSubLine,

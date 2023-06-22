@@ -88,17 +88,19 @@ def yield_positions(
     If indexer is slice without a defined stop, num_rows/num_columns is used for capping.
     """
     match (rows, columns):
-        case slice() as row, slice() as col:
-            rowcount = num_rows if row.stop is None else row.stop
-            colcount = num_columns if col.stop is None else col.stop
-            yield from itertools.product(range(rowcount)[row], range(colcount)[col])
-        case slice() as row, int() as col:
-            count = num_rows if row.stop is None else row.stop
-            for i in range(count)[row]:
+        case slice() as rowslice, slice() as colslice:
+            rowcount = num_rows if rowslice.stop is None else rowslice.stop
+            colcount = num_columns if colslice.stop is None else colslice.stop
+            yield from itertools.product(
+                range(rowcount)[rowslice], range(colcount)[colslice]
+            )
+        case slice() as rowslice, int() as col:
+            count = num_rows if rowslice.stop is None else rowslice.stop
+            for i in range(count)[rowslice]:
                 yield (i, col)
-        case int() as row, slice() as col:
-            count = num_columns if col.stop is None else col.stop
-            for i in range(count)[col]:
+        case int() as row, slice() as colslice:
+            count = num_columns if colslice.stop is None else colslice.stop
+            for i in range(count)[colslice]:
                 yield (row, i)
         case int() as row, int() as col:
             yield (row, col)
@@ -159,9 +161,7 @@ def string_to_num_array(array: str) -> list[float]:
     return [int(i) if i.is_integer() else i for i in floats]
 
 
-def get_color_percentage(
-    color_1: tuple, color_2: tuple, percent: float
-) -> tuple:
+def get_color_percentage(color_1: tuple, color_2: tuple, percent: float) -> tuple:
     """Get a color which is percent% interpolated between start and end.
 
     Args:

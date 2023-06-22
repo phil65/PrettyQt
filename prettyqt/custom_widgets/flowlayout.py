@@ -81,8 +81,7 @@ class FlowLayout(widgets.Layout):
         return p.spacing()
 
     def _do_layout(self, rect: QtCore.QRect, apply_geometry: bool = False) -> int:
-        left, top, right, bottom = self.getContentsMargins()
-        erect = rect.adjusted(left, top, -right, -bottom)
+        erect = rect.marginsRemoved(self.contentsMargins())
         x, y = erect.x(), erect.y()
 
         line_height = 0
@@ -128,7 +127,7 @@ class FlowLayout(widgets.Layout):
                         wy += (line_height - item_height) // 2
                     item.setGeometry(core.Rect(core.Point(x, wy), isz))
 
-        return y + line_height - rect.y() + bottom
+        return y + line_height - rect.y() + self.contentsMargins().bottom()
 
 
 class Separator(widgets.Widget):
