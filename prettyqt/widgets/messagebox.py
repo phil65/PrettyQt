@@ -5,7 +5,7 @@ import sys
 import traceback
 from typing import Literal
 
-from prettyqt import gui, iconprovider, widgets
+from prettyqt import constants, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
@@ -89,15 +89,6 @@ ButtonRoleStr = Literal[
     "apply",
     "reset",
 ]
-
-TEXT_FORMAT = bidict(
-    rich=QtCore.Qt.TextFormat.RichText,
-    plain=QtCore.Qt.TextFormat.PlainText,
-    auto=QtCore.Qt.TextFormat.AutoText,
-    markdown=QtCore.Qt.TextFormat.MarkdownText,
-)
-
-TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
 class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
@@ -196,7 +187,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     #     error_text = str(exception[1])
     #     widgets.MessageBox.message(error_text, header, "mdi.exclamation")
 
-    def set_text_format(self, text_format: TextFormatStr):
+    def set_text_format(self, text_format: constants.TextFormatStr):
         """Set the text format.
 
         Args:
@@ -205,17 +196,17 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         Raises:
             InvalidParamError: text format does not exist
         """
-        if text_format not in TEXT_FORMAT:
-            raise InvalidParamError(text_format, TEXT_FORMAT)
-        self.setTextFormat(TEXT_FORMAT[text_format])
+        if text_format not in constants.TEXT_FORMAT:
+            raise InvalidParamError(text_format, constants.TEXT_FORMAT)
+        self.setTextFormat(constants.TEXT_FORMAT[text_format])
 
-    def get_text_format(self) -> TextFormatStr:
+    def get_text_format(self) -> constants.TextFormatStr:
         """Return current text format.
 
         Returns:
             text format
         """
-        return TEXT_FORMAT.inverse[self.textFormat()]
+        return constants.TEXT_FORMAT.inverse[self.textFormat()]
 
     def set_escape_button(self, button: StandardButtonStr | QtWidgets.QAbstractButton):
         if isinstance(button, QtWidgets.QAbstractButton):

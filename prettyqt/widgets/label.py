@@ -32,16 +32,6 @@ TextInteractionStr = Literal[
     "like_text_browser",
 ]
 
-TEXT_FORMAT = bidict(
-    rich=QtCore.Qt.TextFormat.RichText,
-    plain=QtCore.Qt.TextFormat.PlainText,
-    auto=QtCore.Qt.TextFormat.AutoText,
-    markdown=QtCore.Qt.TextFormat.MarkdownText,
-)
-
-
-TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
-
 
 class Label(widgets.FrameMixin, QtWidgets.QLabel):
     elision_changed = core.Signal(bool)
@@ -67,7 +57,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     def _get_map(self):
         maps = super()._get_map()
-        maps |= {"textFormat": TEXT_FORMAT, "alignment": constants.ALIGNMENTS}
+        maps |= {"textFormat": constants.TEXT_FORMAT, "alignment": constants.ALIGNMENTS}
         return maps
 
     def __repr__(self):
@@ -216,7 +206,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.setIndent(indent)
         return self
 
-    def set_text_format(self, text_format: TextFormatStr) -> Label:
+    def set_text_format(self, text_format: constants.TextFormatStr) -> Label:
         """Set the text format.
 
         Args:
@@ -225,18 +215,18 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         Raises:
             InvalidParamError: text format does not exist
         """
-        if text_format not in TEXT_FORMAT:
-            raise InvalidParamError(text_format, TEXT_FORMAT)
-        self.setTextFormat(TEXT_FORMAT[text_format])
+        if text_format not in constants.TEXT_FORMAT:
+            raise InvalidParamError(text_format, constants.TEXT_FORMAT)
+        self.setTextFormat(constants.TEXT_FORMAT[text_format])
         return self
 
-    def get_text_format(self) -> TextFormatStr:
+    def get_text_format(self) -> constants.TextFormatStr:
         """Return current text format.
 
         Returns:
             text format
         """
-        return TEXT_FORMAT.inverse[self.textFormat()]
+        return constants.TEXT_FORMAT.inverse[self.textFormat()]
 
     def set_text_interaction(self, *types: TextInteractionStr) -> Label:
         """Set the text interaction mode.

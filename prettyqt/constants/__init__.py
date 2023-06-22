@@ -192,6 +192,15 @@ ITEM_FLAG: bidict[ItemFlagStr, QtCore.Qt.ItemFlag | int] = bidict(
     user_tristate=Qt.ItemFlag.ItemIsUserTristate,
 )
 
+TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
+
+TEXT_FORMAT: bidict[TextFormatStr, QtCore.Qt.TextFormat] = bidict(
+    rich=QtCore.Qt.TextFormat.RichText,
+    plain=QtCore.Qt.TextFormat.PlainText,
+    auto=QtCore.Qt.TextFormat.AutoText,
+    markdown=QtCore.Qt.TextFormat.MarkdownText,
+)
+
 ItemDataRoleStr = Literal[
     "display",
     "user",

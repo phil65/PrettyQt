@@ -17,13 +17,16 @@ from prettyqt.utils import (
 
 mod = QtWidgets.QTreeWidgetItem
 
-CHILD_INDICATOR_POLICY = bidict(
+
+ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless"]
+
+CHILD_INDICATOR_POLICY: bidict[
+    ChildIndicatorPolicyStr, mod.ChildIndicatorPolicy
+] = bidict(
     show=mod.ChildIndicatorPolicy.ShowIndicator,
     dont_show=mod.ChildIndicatorPolicy.DontShowIndicator,
     dont_show_when_childless=mod.ChildIndicatorPolicy.DontShowIndicatorWhenChildless,
 )
-
-ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless"]
 
 
 class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):

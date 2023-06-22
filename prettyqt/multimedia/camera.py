@@ -57,6 +57,7 @@ ExposureModeStr = Literal[
 
 
 FEATURE = bidict(
+    none=QtMultimedia.QCamera.Feature(0),
     color_temperature=QtMultimedia.QCamera.Feature.ColorTemperature,
     exposure_compensation=QtMultimedia.QCamera.Feature.ExposureCompensation,
     iso_sensitivity=QtMultimedia.QCamera.Feature.IsoSensitivity,
@@ -233,3 +234,11 @@ class Camera(core.ObjectMixin, QtMultimedia.QCamera):
 
     def get_camera_format(self) -> multimedia.CameraFormat:
         return multimedia.CameraFormat(self.cameraFormat())
+
+
+if __name__ == "__main__":
+    from prettyqt import widgets
+    app = widgets.app()
+    cam = Camera()
+    cam.supportedFeatures() | cam.supportedFeatures()
+    print(type(cam.supportedFeatures()).mro())

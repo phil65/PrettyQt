@@ -3,8 +3,8 @@ from __future__ import annotations
 from collections.abc import Callable
 from typing import TYPE_CHECKING, Literal
 
-from prettyqt import core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt import constants, core, gui, widgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
@@ -13,18 +13,6 @@ if TYPE_CHECKING:
 
 
 mod = QtWidgets.QWizard
-
-WIZARD_BUTTON = bidict(
-    back=mod.WizardButton.BackButton,
-    next=mod.WizardButton.NextButton,
-    commit=mod.WizardButton.CommitButton,
-    finish=mod.WizardButton.FinishButton,
-    cancel=mod.WizardButton.CancelButton,
-    help=mod.WizardButton.HelpButton,
-    custom_1=mod.WizardButton.CustomButton1,
-    custom_2=mod.WizardButton.CustomButton2,
-    custom_3=mod.WizardButton.CustomButton3,
-)
 
 WizardButtonStr = Literal[
     "back",
@@ -38,24 +26,16 @@ WizardButtonStr = Literal[
     "custom_3",
 ]
 
-WIZARD_OPTIONS = bidict(
-    independent_pages=mod.WizardOption.IndependentPages,
-    ignore_subtitles=mod.WizardOption.IgnoreSubTitles,
-    extended_watermark_bitmap=mod.WizardOption.ExtendedWatermarkPixmap,
-    no_default_button=mod.WizardOption.NoDefaultButton,
-    no_back_button_on_start_page=mod.WizardOption.NoBackButtonOnStartPage,
-    no_back_button_on_last_page=mod.WizardOption.NoBackButtonOnLastPage,
-    disabled_back_button_on_last_page=mod.WizardOption.DisabledBackButtonOnLastPage,
-    next_button_on_last_page=mod.WizardOption.HaveNextButtonOnLastPage,
-    finish_button_on_early_pages=mod.WizardOption.HaveFinishButtonOnEarlyPages,
-    no_cancel_button=mod.WizardOption.NoCancelButton,
-    cancel_button_on_left=mod.WizardOption.CancelButtonOnLeft,
-    help_button=mod.WizardOption.HaveHelpButton,
-    help_button_on_right=mod.WizardOption.HelpButtonOnRight,
-    custom_button_1=mod.WizardOption.HaveCustomButton1,
-    custom_button_2=mod.WizardOption.HaveCustomButton2,
-    custom_button_3=mod.WizardOption.HaveCustomButton3,
-    no_cancel_button_on_last_page=mod.WizardOption.NoCancelButtonOnLastPage,
+WIZARD_BUTTON = bidict(
+    back=mod.WizardButton.BackButton,
+    next=mod.WizardButton.NextButton,
+    commit=mod.WizardButton.CommitButton,
+    finish=mod.WizardButton.FinishButton,
+    cancel=mod.WizardButton.CancelButton,
+    help=mod.WizardButton.HelpButton,
+    custom_1=mod.WizardButton.CustomButton1,
+    custom_2=mod.WizardButton.CustomButton2,
+    custom_3=mod.WizardButton.CustomButton3,
 )
 
 WizardOptionStr = Literal[
@@ -78,6 +58,28 @@ WizardOptionStr = Literal[
     "no_cancel_button_on_last_page",
 ]
 
+WIZARD_OPTIONS = bidict(
+    independent_pages=mod.WizardOption.IndependentPages,
+    ignore_subtitles=mod.WizardOption.IgnoreSubTitles,
+    extended_watermark_bitmap=mod.WizardOption.ExtendedWatermarkPixmap,
+    no_default_button=mod.WizardOption.NoDefaultButton,
+    no_back_button_on_start_page=mod.WizardOption.NoBackButtonOnStartPage,
+    no_back_button_on_last_page=mod.WizardOption.NoBackButtonOnLastPage,
+    disabled_back_button_on_last_page=mod.WizardOption.DisabledBackButtonOnLastPage,
+    next_button_on_last_page=mod.WizardOption.HaveNextButtonOnLastPage,
+    finish_button_on_early_pages=mod.WizardOption.HaveFinishButtonOnEarlyPages,
+    no_cancel_button=mod.WizardOption.NoCancelButton,
+    cancel_button_on_left=mod.WizardOption.CancelButtonOnLeft,
+    help_button=mod.WizardOption.HaveHelpButton,
+    help_button_on_right=mod.WizardOption.HelpButtonOnRight,
+    custom_button_1=mod.WizardOption.HaveCustomButton1,
+    custom_button_2=mod.WizardOption.HaveCustomButton2,
+    custom_button_3=mod.WizardOption.HaveCustomButton3,
+    no_cancel_button_on_last_page=mod.WizardOption.NoCancelButtonOnLastPage,
+)
+
+WizardPixmapStr = Literal["watermark", "logo", "banner", "background"]
+
 WIZARD_PIXMAP = bidict(
     watermark=mod.WizardPixmap.WatermarkPixmap,
     logo=mod.WizardPixmap.LogoPixmap,
@@ -85,7 +87,7 @@ WIZARD_PIXMAP = bidict(
     background=mod.WizardPixmap.BackgroundPixmap,
 )
 
-WizardPixmapStr = Literal["watermark", "logo", "banner", "background"]
+WizardStyleStr = Literal["classic", "modern", "mac", "aero"]
 
 WIZARD_STYLE = bidict(
     classic=mod.WizardStyle.ClassicStyle,
@@ -93,17 +95,6 @@ WIZARD_STYLE = bidict(
     mac=mod.WizardStyle.MacStyle,
     aero=mod.WizardStyle.AeroStyle,
 )
-
-WizardStyleStr = Literal["classic", "modern", "mac", "aero"]
-
-TEXT_FORMATS = bidict(
-    rich=QtCore.Qt.TextFormat.RichText,
-    plain=QtCore.Qt.TextFormat.PlainText,
-    auto=QtCore.Qt.TextFormat.AutoText,
-    markdown=QtCore.Qt.TextFormat.MarkdownText,
-)
-
-TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
 
 class WizardMixin(widgets.DialogMixin):
@@ -159,7 +150,7 @@ class WizardMixin(widgets.DialogMixin):
         layout = page.set_layout("vertical")
         layout += widget
 
-    def set_title_format(self, fmt: TextFormatStr):
+    def set_title_format(self, fmt: constants.TextFormatStr):
         """Set the title format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
@@ -170,11 +161,11 @@ class WizardMixin(widgets.DialogMixin):
         Raises:
             InvalidParamError: title format does not exist
         """
-        if fmt not in TEXT_FORMATS:
-            raise InvalidParamError(fmt, TEXT_FORMATS)
-        self.setTitleFormat(TEXT_FORMATS[fmt])
+        if fmt not in constants.TEXT_FORMAT:
+            raise InvalidParamError(fmt, constants.TEXT_FORMAT)
+        self.setTitleFormat(constants.TEXT_FORMAT[fmt])
 
-    def get_title_format(self) -> TextFormatStr:
+    def get_title_format(self) -> constants.TextFormatStr:
         """Return current title format.
 
         Possible values: "rich", "plain", "auto", "markdown"
@@ -182,9 +173,9 @@ class WizardMixin(widgets.DialogMixin):
         Returns:
             title format
         """
-        return TEXT_FORMATS.inverse[self.titleFormat()]
+        return constants.TEXT_FORMAT.inverse[self.titleFormat()]
 
-    def set_subtitle_format(self, fmt: TextFormatStr):
+    def set_subtitle_format(self, fmt: constants.TextFormatStr):
         """Set the subtitle format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
@@ -195,11 +186,11 @@ class WizardMixin(widgets.DialogMixin):
         Raises:
             InvalidParamError: subtitle format does not exist
         """
-        if fmt not in TEXT_FORMATS:
-            raise InvalidParamError(fmt, TEXT_FORMATS)
-        self.setSubTitleFormat(TEXT_FORMATS[fmt])
+        if fmt not in constants.TEXT_FORMAT:
+            raise InvalidParamError(fmt, constants.TEXT_FORMAT)
+        self.setSubTitleFormat(constants.TEXT_FORMAT[fmt])
 
-    def get_subtitle_format(self) -> TextFormatStr:
+    def get_subtitle_format(self) -> constants.TextFormatStr:
         """Return current subtitle format.
 
         Possible values: "rich", "plain", "auto", "markdown"
@@ -207,7 +198,7 @@ class WizardMixin(widgets.DialogMixin):
         Returns:
             subtitle format
         """
-        return TEXT_FORMATS.inverse[self.subTitleFormat()]
+        return constants.TEXT_FORMAT.inverse[self.subTitleFormat()]
 
     def get_button(self, button_type: WizardButtonStr) -> QtWidgets.QAbstractButton:
         if button_type not in WIZARD_BUTTON:
