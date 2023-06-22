@@ -44,7 +44,7 @@ class PandasCategoryListModel(custom_models.ModelMixin, core.AbstractTableModel)
                 return True
         return False
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():
             return constants.DROP_ENABLED
         return self.DEFAULT_FLAGS | constants.IS_EDITABLE

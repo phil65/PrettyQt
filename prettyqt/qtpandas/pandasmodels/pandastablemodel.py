@@ -63,7 +63,7 @@ class DataTableModel(core.AbstractTableModel):
             case self.Roles.ColumnNameRole:
                 return self.df.iloc[:, index.column()].name
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         return constants.IS_EDITABLE | constants.IS_ENABLED | constants.IS_SELECTABLE
 
     #     return cur_flags if self.is_read_only else cur_flags | constants.IS_EDITABLE

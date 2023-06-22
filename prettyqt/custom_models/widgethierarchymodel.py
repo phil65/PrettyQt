@@ -139,7 +139,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
                 return True
         return False
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         prop = self.props[index.column()]
         if prop.isWritable():
             return (

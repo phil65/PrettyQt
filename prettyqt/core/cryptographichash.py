@@ -6,24 +6,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-ALGORITHM = bidict(
-    md_4=QtCore.QCryptographicHash.Algorithm.Md4,
-    md_5=QtCore.QCryptographicHash.Algorithm.Md5,
-    sha_1=QtCore.QCryptographicHash.Algorithm.Sha1,
-    sha_224=QtCore.QCryptographicHash.Algorithm.Sha224,
-    sha_256=QtCore.QCryptographicHash.Algorithm.Sha256,
-    sha_384=QtCore.QCryptographicHash.Algorithm.Sha384,
-    sha_512=QtCore.QCryptographicHash.Algorithm.Sha512,
-    sha3_224=QtCore.QCryptographicHash.Algorithm.Sha3_224,
-    sha3_256=QtCore.QCryptographicHash.Algorithm.Sha3_256,
-    sha3_384=QtCore.QCryptographicHash.Algorithm.Sha3_384,
-    sha3_512=QtCore.QCryptographicHash.Algorithm.Sha3_512,
-    keccak_224=QtCore.QCryptographicHash.Algorithm.Keccak_224,
-    keccak_256=QtCore.QCryptographicHash.Algorithm.Keccak_256,
-    keccak_384=QtCore.QCryptographicHash.Algorithm.Keccak_384,
-    keccak_512=QtCore.QCryptographicHash.Algorithm.Keccak_512,
-)
-
 AlgorithmStr = Literal[
     "md_4",
     "md_5",
@@ -41,6 +23,25 @@ AlgorithmStr = Literal[
     "keccak_384",
     "keccak_512",
 ]
+
+
+ALGORITHM: bidict[AlgorithmStr, QtCore.QCryptographicHash.Algorithm] = bidict(
+    md_4=QtCore.QCryptographicHash.Algorithm.Md4,
+    md_5=QtCore.QCryptographicHash.Algorithm.Md5,
+    sha_1=QtCore.QCryptographicHash.Algorithm.Sha1,
+    sha_224=QtCore.QCryptographicHash.Algorithm.Sha224,
+    sha_256=QtCore.QCryptographicHash.Algorithm.Sha256,
+    sha_384=QtCore.QCryptographicHash.Algorithm.Sha384,
+    sha_512=QtCore.QCryptographicHash.Algorithm.Sha512,
+    sha3_224=QtCore.QCryptographicHash.Algorithm.Sha3_224,
+    sha3_256=QtCore.QCryptographicHash.Algorithm.Sha3_256,
+    sha3_384=QtCore.QCryptographicHash.Algorithm.Sha3_384,
+    sha3_512=QtCore.QCryptographicHash.Algorithm.Sha3_512,
+    keccak_224=QtCore.QCryptographicHash.Algorithm.Keccak_224,
+    keccak_256=QtCore.QCryptographicHash.Algorithm.Keccak_256,
+    keccak_384=QtCore.QCryptographicHash.Algorithm.Keccak_384,
+    keccak_512=QtCore.QCryptographicHash.Algorithm.Keccak_512,
+)
 
 
 class CryptographicHash(QtCore.QCryptographicHash):

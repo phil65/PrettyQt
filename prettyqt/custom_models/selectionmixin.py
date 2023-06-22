@@ -38,7 +38,7 @@ class SelectionMixin:
             return selected
         return super().data(index, role)
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         flags = super().flags(index)
         if index.column() in self.CHECKSTATE:
             return flags | constants.IS_CHECKABLE

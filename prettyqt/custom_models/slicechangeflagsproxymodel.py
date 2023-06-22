@@ -27,7 +27,7 @@ class SliceChangeFlagsProxyModel(custom_models.SliceIdentityProxyModel):
     #         return False
     #     return super().setData(index, value, role)
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         flags = super().flags(index)
         if self.indexer_contains(index):
             for flag in self._flags_to_remove:

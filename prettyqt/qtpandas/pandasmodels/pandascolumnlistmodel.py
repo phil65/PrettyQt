@@ -92,7 +92,7 @@ class PandasColumnListModel(custom_models.ModelMixin, core.AbstractTableModel):
 
         return False
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():
             return constants.DROP_ENABLED
         if index.column() in [0, 1]:
@@ -235,7 +235,7 @@ class PandasIndexListModel(custom_models.ModelMixin, core.AbstractTableModel):
             self.df = self.df.drop(labels=self.df.columns[row : row + count], axis=1)
         return True
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():
             return constants.DROP_ENABLED
         is_range = self.df.index.name is None and isinstance(self.df.index, pd.RangeIndex)
