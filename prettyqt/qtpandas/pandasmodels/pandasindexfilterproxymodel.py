@@ -13,13 +13,16 @@ logger = logging.getLogger(__name__)
 FilterModeStr = Literal["startswith", "containts", "match"]
 
 
-class BasePandasIndexFilterModel(core.IdentityProxyModel):
+class BasePandasIndexFilterProxyModel(core.IdentityProxyModel):
     """Base Proxy to filter a pandas dataframe based on an calculated index.
 
     Mappings in both directions are calculated then with numpy methods.
 
     Very fast filter model compared to row-based SortFilterProxyModel approach.
     Doesnt need a copy of whole dataframe, only mapping indexes are built.
+
+    There are lot of use cases though where the better option probably is to not
+    use any proxy model at all, but just work on a copy of the dataframe.
 
     Note: Dataframe proxies cant be chained right now.
     """
@@ -38,21 +41,15 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
         self._row_count = self._filter_index.sum()
         super().setSourceModel(model)
 
-    def _build_filter_index(self):
-        return NotImplemented
-
-    def set_search_term(self, search_term):
-        self._search_term = search_term
-        if self._search_term:
-            self._build_filter_index()
-        else:
-            rowcount = self.sourceModel().rowCount()
-            self._filter_index = np.full(rowcount, True, dtype=bool)
+    def _update_mapping(self):
         with self.reset_model():
             self._row_count = self._filter_index.sum()
             self._source_to_proxy = np.cumsum(self._filter_index) - 1
             self._proxy_to_source = np.where(self._filter_index == True)[0]  # noqa: E712
-            self.update_all()
+
+    def _reset_filter_index(self, init_value: bool):
+        rowcount = self.sourceModel().rowCount()
+        self._filter_index = np.full(rowcount, init_value, dtype=bool)
 
     def rowCount(self, index=None):
         return self._row_count
@@ -101,7 +98,7 @@ class BasePandasIndexFilterModel(core.IdentityProxyModel):
         )
 
 
-class PandasStringColumnFilterModel(BasePandasIndexFilterModel):
+class PandasStringColumnFilterModel(BasePandasIndexFilterProxyModel):
     """Basically filters a dataframe based on df.iloc[:, column].str.somemethod(term)."""
 
     ID = "pandas_str_filter"
@@ -114,7 +111,12 @@ class PandasStringColumnFilterModel(BasePandasIndexFilterModel):
         self._na_value = False
         super().__init__(**kwargs)
 
-    def _build_filter_index(self):
+    def set_search_term(self, search_term):
+        self._search_term = search_term
+        if not self._search_term:
+            self._reset_filter_index(init_value=True)
+            self._update_mapping()
+            return
         df = self.get_source_model(skip_proxies=True).df
         match self.filter_mode:
             case "startswith":
@@ -139,6 +141,7 @@ class PandasStringColumnFilterModel(BasePandasIndexFilterModel):
         # this is needed for new StringDtype, otherwise much slower.
         if self._filter_index.dtype == object:
             self._filter_index = self._filter_index.astype(bool)
+        self._update_mapping()
 
     def set_filter_column(self, column: int):
         self._filter_column = column
@@ -177,26 +180,32 @@ class PandasStringColumnFilterModel(BasePandasIndexFilterModel):
     na_value = core.Property(bool, get_na_value, set_na_value)
 
 
-class PandasEvalFilterModel(BasePandasIndexFilterModel):
+class PandasEvalFilterModel(BasePandasIndexFilterProxyModel):
     ID = "pandas_eval_filter"
 
-    def _build_filter_index(self):
-        rowcount = self.sourcemodel().rowCount()
+    def set_search_term(self, search_term):
+        self._search_term = search_term
+        if not self._search_term:
+            self._reset_filter_index(True)
+            self._update_mapping()
         try:
             self._filter_index = df.eval(self._search_term)
             self._filter_index = self._filter_index.to_numpy()
+            # df.eval doesnt neccessarily return a bool index. If not, show nothing.
             if self._filter_index.dtype != bool:
-                self._filter_index = np.full(rowcount, False, dtype=bool)
+                self._reset_filter_index(False)
         except Exception:
-            self._filter_index = np.full(rowcount, False, dtype=bool)
+            self._reset_filter_index(False)
+        self._update_mapping()
 
 
-class PandasMultiStringColumnFilterModel(BasePandasIndexFilterModel):
+class PandasMultiStringColumnFilterModel(BasePandasIndexFilterProxyModel):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._filters: dict[str, str] = {}
 
-    def _build_filter_index(self):
+    def set_filters(self, filters: dict[str, str]):
+        self._filters = filters
         df = self.get_source_model(skip_proxies=True).df
         filters = [f"('{v}' <= `{k}` <= '{v}~')" for k, v in self._filters.items()]
         expr = " & ".join(filters)
@@ -206,16 +215,8 @@ class PandasMultiStringColumnFilterModel(BasePandasIndexFilterModel):
             if self._filter_index.dtype != bool:
                 self._filter_index = self._filter_index.astype(bool)
         except Exception:
-            self._filter_index = np.full(len(df), False, dtype=bool)
-        with self.reset_model():
-            self._row_count = self._filter_index.sum()
-            self._source_to_proxy = np.cumsum(self._filter_index) - 1
-            self._proxy_to_source = np.where(self._filter_index == True)[0]  # noqa: E712
-
-    def set_filters(self, filters: dict[str, str]):
-        self._filters = filters
-        self._build_filter_index()
-
+            self._reset_filter_index(False)
+        self._update_mapping()
 
     def get_filters(self) -> dict[str, str]:
         return self._filters
@@ -236,9 +237,8 @@ if __name__ == "__main__":
     layout = container.set_layout("vertical")
     layout.add(lineedit)
     layout.add(table)
-    proxy = PandasStringColumnFilterModel(parent=table)
+    proxy = PandasEvalFilterModel(parent=table)
     proxy.setSourceModel(model)
-    proxy.set_search_term("a")
     print(proxy._filter_index.dtype)
     print(proxy._source_to_proxy.dtype)
     print(proxy._proxy_to_source.dtype)
