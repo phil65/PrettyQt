@@ -301,7 +301,15 @@ class ObjectMixin:
             flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
         else:
             flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
-        return self.findChild(typ, name, flag)  # type: ignore
+        match typ:
+            case types.UnionType():
+                return next(
+                    (item for item in self.find_children(typ, name, recursive=recursive)),
+                    None,
+                )
+
+            case _:
+                return self.findChild(typ, name, flag)  # type: ignore
 
     def find_parent(
         self, typ: type[T] = QtCore.QObject, name: str | None = None
