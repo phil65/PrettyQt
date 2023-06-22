@@ -23,24 +23,34 @@ The following validators are included:
 `NotStrictValidator`
 
 `PathValidator`
+- allows strings which represent an existing path. Can be set to either accept files, folders or both.
 
 `PythonCodeValidator`
+- allows a string which can be parsed by ast.parse
 
 `QssValidator`
+- allows a string which can be parsed as CSS.
 
 `RegexPatternValidator`
+- allows a string which can be parsed as a regular expression.
 
 `IntListValidator`
+- allows a comma separated list of integers
 
 `FloatListValidator`
+- allows a comma separated list of floats
 
 `ScientificIntegerValidator`
+ - for integers in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.
 
 `ScientificFloatValidator`
+ - for floats in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.
 
 `TextLengthValidator`
+- allows limiting textlength to a given minimum / maximim
 
 `WhitelistValidator`
+- whitelist specific strings
 
 
 Apart from LineEdits, PlainTextEdits also gained the ability to take a validator.
