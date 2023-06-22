@@ -7,14 +7,14 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-DIRECTION = bidict(
+DirectionStr = Literal["left_to_right", "right_to_left", "top_to_bottom", "bottom_to_top"]
+
+DIRECTION: bidict[DirectionStr, QtWidgets.QBoxLayout.Direction] = bidict(
     left_to_right=QtWidgets.QBoxLayout.Direction.LeftToRight,
     right_to_left=QtWidgets.QBoxLayout.Direction.RightToLeft,
     top_to_bottom=QtWidgets.QBoxLayout.Direction.TopToBottom,
     bottom_to_top=QtWidgets.QBoxLayout.Direction.BottomToTop,
 )
-
-DirectionStr = Literal["left_to_right", "right_to_left", "top_to_bottom", "bottom_to_top"]
 
 
 class BoxLayoutMixin(widgets.LayoutMixin):

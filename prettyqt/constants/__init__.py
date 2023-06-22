@@ -523,7 +523,7 @@ MOUSE_BUTTON: bidict[MouseButtonStr, Qt.MouseButton] = bidict(
     extra_24=Qt.MouseButton.ExtraButton24,
 )
 FilterModeStr = Literal["starts_with", "contains", "ends_with"]
-FILTER_MODES = bidict(
+FILTER_MODES: bidict[FilterModeStr, Qt.MatchFlag] = bidict(
     starts_with=Qt.MatchFlag.MatchStartsWith,
     contains=Qt.MatchFlag.MatchContains,
     ends_with=Qt.MatchFlag.MatchEndsWith,
@@ -1063,7 +1063,7 @@ WINDOW_TYPE: bidict[WindowTypeStr, Qt.WindowType] = bidict(
 )
 
 WindowStateStr = Literal["none", "minimized", "maximized", "fullscreen", "active"]
-WINDOW_STATES = bidict(
+WINDOW_STATES: bidict[WindowStateStr, Qt.WindowState] = bidict(
     none=Qt.WindowState.WindowNoState,
     minimized=Qt.WindowState.WindowMinimized,
     maximized=Qt.WindowState.WindowMaximized,

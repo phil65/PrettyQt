@@ -7,27 +7,27 @@ from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-CORRECTION_MODES = bidict(
+CorrectionModeStr = Literal["to_previous", "to_nearest"]
+
+CORRECTION_MODES: bidict[CorrectionModeStr, QtWidgets.QSpinBox.CorrectionMode] = bidict(
     to_previous=QtWidgets.QSpinBox.CorrectionMode.CorrectToPreviousValue,
     to_nearest=QtWidgets.QSpinBox.CorrectionMode.CorrectToNearestValue,
 )
 
-CorrectionModeStr = Literal["to_previous", "to_nearest"]
+SymbolStr = Literal["up_down", "plus_minus", "none"]
 
-SYMBOLS = bidict(
+SYMBOLS: bidict[SymbolStr, QtWidgets.QSpinBox.ButtonSymbols] = bidict(
     up_down=QtWidgets.QSpinBox.ButtonSymbols.UpDownArrows,
     plus_minus=QtWidgets.QSpinBox.ButtonSymbols.PlusMinus,
     none=QtWidgets.QSpinBox.ButtonSymbols.NoButtons,
 )
 
-SymbolStr = Literal["up_down", "plus_minus", "none"]
+StepTypeStr = Literal["default", "adaptive"]
 
-STEP_TYPES = bidict(
+STEP_TYPES: bidict[StepTypeStr, QtWidgets.QSpinBox.StepType] = bidict(
     default=QtWidgets.QSpinBox.StepType.DefaultStepType,
     adaptive=QtWidgets.QSpinBox.StepType.AdaptiveDecimalStepType,
 )
-
-StepTypeStr = Literal["default", "adaptive"]
 
 
 class AbstractSpinBoxMixin(widgets.WidgetMixin):

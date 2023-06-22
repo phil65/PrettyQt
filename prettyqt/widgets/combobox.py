@@ -10,16 +10,6 @@ from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 mod = QtWidgets.QComboBox
 
-INSERT_POLICY = bidict(
-    no_insert=mod.InsertPolicy.NoInsert,
-    top=mod.InsertPolicy.InsertAtTop,
-    current=mod.InsertPolicy.InsertAtCurrent,
-    bottom=mod.InsertPolicy.InsertAtBottom,
-    after_current=mod.InsertPolicy.InsertAfterCurrent,
-    before_current=mod.InsertPolicy.InsertBeforeCurrent,
-    alphabetically=mod.InsertPolicy.InsertAlphabetically,
-)
-
 InsertPolicyStr = Literal[
     "no_insert",
     "top",
@@ -30,11 +20,14 @@ InsertPolicyStr = Literal[
     "alphabetically",
 ]
 
-SIZE_ADJUST_POLICY = bidict(
-    content=mod.SizeAdjustPolicy.AdjustToContents,
-    first_show=mod.SizeAdjustPolicy.AdjustToContentsOnFirstShow,
-    # min_length=mod.SizeAdjustPolicy.AdjustToMinimumContentsLength,
-    min_length_with_icon=mod.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon,
+INSERT_POLICY: bidict[InsertPolicyStr, mod.InsertPolicy] = bidict(
+    no_insert=mod.InsertPolicy.NoInsert,
+    top=mod.InsertPolicy.InsertAtTop,
+    current=mod.InsertPolicy.InsertAtCurrent,
+    bottom=mod.InsertPolicy.InsertAtBottom,
+    after_current=mod.InsertPolicy.InsertAfterCurrent,
+    before_current=mod.InsertPolicy.InsertBeforeCurrent,
+    alphabetically=mod.InsertPolicy.InsertAlphabetically,
 )
 
 SizeAdjustPolicyStr = Literal[
@@ -43,6 +36,13 @@ SizeAdjustPolicyStr = Literal[
     # "min_length",
     "min_length_with_icon",
 ]
+
+SIZE_ADJUST_POLICY: bidict[SizeAdjustPolicyStr, mod.SizeAdjustPolicy] = bidict(
+    content=mod.SizeAdjustPolicy.AdjustToContents,
+    first_show=mod.SizeAdjustPolicy.AdjustToContentsOnFirstShow,
+    # min_length=mod.SizeAdjustPolicy.AdjustToMinimumContentsLength,
+    min_length_with_icon=mod.SizeAdjustPolicy.AdjustToMinimumContentsLengthWithIcon,
+)
 
 
 class ComboBoxMixin(widgets.WidgetMixin):

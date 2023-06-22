@@ -24,16 +24,6 @@ DelegateStr = Literal[
 
 logger = logging.getLogger(__name__)
 
-EDIT_TRIGGERS = bidict(
-    none=QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers,
-    current_changed=QtWidgets.QAbstractItemView.EditTrigger.CurrentChanged,
-    double_clicked=QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked,
-    selected_clicked=QtWidgets.QAbstractItemView.EditTrigger.SelectedClicked,
-    edit_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed,
-    any_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed,
-    all=QtWidgets.QAbstractItemView.EditTrigger.AllEditTriggers,
-)
-
 EditTriggerStr = Literal[
     "none",
     "current_changed",
@@ -44,40 +34,55 @@ EditTriggerStr = Literal[
     "all",
 ]
 
-SELECTION_BEHAVIOR = bidict(
+EDIT_TRIGGERS: bidict[EditTriggerStr, QtWidgets.QAbstractItemView.EditTrigger] = bidict(
+    none=QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers,
+    current_changed=QtWidgets.QAbstractItemView.EditTrigger.CurrentChanged,
+    double_clicked=QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked,
+    selected_clicked=QtWidgets.QAbstractItemView.EditTrigger.SelectedClicked,
+    edit_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed,
+    any_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed,
+    all=QtWidgets.QAbstractItemView.EditTrigger.AllEditTriggers,
+)
+
+SelectionBehaviourStr = Literal["rows", "columns", "items"]
+
+SELECTION_BEHAVIOR: bidict[
+    SelectionBehaviourStr, QtWidgets.QAbstractItemView.SelectionBehavior
+] = bidict(
     rows=QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows,
     columns=QtWidgets.QAbstractItemView.SelectionBehavior.SelectColumns,
     items=QtWidgets.QAbstractItemView.SelectionBehavior.SelectItems,
 )
 
-SelectionBehaviourStr = Literal["rows", "columns", "items"]
+SelectionModeStr = Literal["single", "extended", "multi", "none"]
 
-SELECTION_MODE = bidict(
+SELECTION_MODE: bidict[
+    SelectionModeStr, QtWidgets.QAbstractItemView.SelectionMode
+] = bidict(
     single=QtWidgets.QAbstractItemView.SelectionMode.SingleSelection,
     extended=QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection,
     multi=QtWidgets.QAbstractItemView.SelectionMode.MultiSelection,
     none=QtWidgets.QAbstractItemView.SelectionMode.NoSelection,
 )
 
-SelectionModeStr = Literal["single", "extended", "multi", "none"]
+ScrollModeStr = Literal["item", "pixel"]
 
-SCROLL_MODE = bidict(
+SCROLL_MODE: bidict[ScrollModeStr, QtWidgets.QAbstractItemView.ScrollMode] = bidict(
     item=QtWidgets.QAbstractItemView.ScrollMode.ScrollPerItem,
     pixel=QtWidgets.QAbstractItemView.ScrollMode.ScrollPerPixel,
 )
 
-ScrollModeStr = Literal["item", "pixel"]
 
-SCROLL_HINT = bidict(
+ScrollHintStr = Literal[
+    "ensure_visible", "position_at_top", "position_at_bottom", "position_at_center"
+]
+
+SCROLL_HINT: bidict[ScrollHintStr, QtWidgets.QAbstractItemView.ScrollHint] = bidict(
     ensure_visible=QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible,
     position_at_top=QtWidgets.QAbstractItemView.ScrollHint.PositionAtTop,
     position_at_bottom=QtWidgets.QAbstractItemView.ScrollHint.PositionAtBottom,
     position_at_center=QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter,
 )
-
-ScrollHintStr = Literal[
-    "ensure_visible", "position_at_top", "position_at_bottom", "position_at_center"
-]
 
 DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal_move"]
 
@@ -200,12 +205,12 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             data: data to choose model for.
         """
         # we import to collect the models
-        from prettyqt import custom_models   # noqa: F401
+        from prettyqt import custom_models  # noqa: F401
 
         # TODO: probably better to check models from external modules later
         # so we dont have to import everything even if not needed.
         if importlib.util.find_spec("pandas") is not None:
-            from prettyqt.qtpandas import pandasmodels   # noqa: F401
+            from prettyqt.qtpandas import pandasmodels  # noqa: F401
 
         for Klass in helpers.get_subclasses(core.QAbstractItemModel):
             if (
@@ -735,6 +740,7 @@ class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
 
 if __name__ == "__main__":
     import pandas as pd
+
     df = pd.DataFrame(dict(a=[1]))
     app = widgets.app()
     table = widgets.TableView()

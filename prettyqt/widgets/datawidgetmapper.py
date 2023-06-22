@@ -7,12 +7,12 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-SUBMIT_POLICY = bidict(
+SubmitPolicyStr = Literal["auto", "manual"]
+
+SUBMIT_POLICY: bidict[SubmitPolicyStr, QtWidgets.QDataWidgetMapper.SubmitPolicy] = bidict(
     auto=QtWidgets.QDataWidgetMapper.SubmitPolicy.AutoSubmit,
     manual=QtWidgets.QDataWidgetMapper.SubmitPolicy.ManualSubmit,
 )
-
-SubmitPolicyStr = Literal["auto", "manual"]
 
 
 class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):

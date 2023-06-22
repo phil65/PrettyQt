@@ -7,21 +7,22 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict
 
 
-COMPLETION_MODE = bidict(
+CompletionModeStr = Literal["popup", "inline", "unfiltered_popup"]
+
+COMPLETION_MODE: bidict[CompletionModeStr, QtWidgets.QCompleter.CompletionMode] = bidict(
     popup=QtWidgets.QCompleter.CompletionMode.PopupCompletion,
     inline=QtWidgets.QCompleter.CompletionMode.InlineCompletion,
     unfiltered_popup=QtWidgets.QCompleter.CompletionMode.UnfilteredPopupCompletion,
 )
 
-CompletionModeStr = Literal["popup", "inline", "unfiltered_popup"]
 
-SORT_MODE = bidict(
+SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]
+
+SORT_MODE: bidict[SortModeStr, QtWidgets.QCompleter.ModelSorting] = bidict(
     unsorted=QtWidgets.QCompleter.ModelSorting.UnsortedModel,
     case_sensitive=QtWidgets.QCompleter.ModelSorting.CaseSensitivelySortedModel,
     case_insensitive=QtWidgets.QCompleter.ModelSorting.CaseInsensitivelySortedModel,
 )
-
-SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]
 
 
 class Completer(core.ObjectMixin, QtWidgets.QCompleter):

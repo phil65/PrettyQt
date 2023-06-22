@@ -10,19 +10,7 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
-SECTIONS = bidict(
-    none=QtWidgets.QDateTimeEdit.Section.NoSection,
-    am_pm=QtWidgets.QDateTimeEdit.Section.AmPmSection,
-    msec=QtWidgets.QDateTimeEdit.Section.MSecSection,
-    second=QtWidgets.QDateTimeEdit.Section.SecondSection,
-    minute=QtWidgets.QDateTimeEdit.Section.MinuteSection,
-    hour=QtWidgets.QDateTimeEdit.Section.HourSection,
-    day=QtWidgets.QDateTimeEdit.Section.DaySection,
-    month=QtWidgets.QDateTimeEdit.Section.MonthSection,
-    year=QtWidgets.QDateTimeEdit.Section.YearSection,
-)
-
-SectionsStr = Literal[
+SectionStr = Literal[
     "none",
     "am_pm",
     "msec",
@@ -34,6 +22,17 @@ SectionsStr = Literal[
     "year",
 ]
 
+SECTIONS: bidict[SectionStr, QtWidgets.QDateTimeEdit.Section] = bidict(
+    none=QtWidgets.QDateTimeEdit.Section.NoSection,
+    am_pm=QtWidgets.QDateTimeEdit.Section.AmPmSection,
+    msec=QtWidgets.QDateTimeEdit.Section.MSecSection,
+    second=QtWidgets.QDateTimeEdit.Section.SecondSection,
+    minute=QtWidgets.QDateTimeEdit.Section.MinuteSection,
+    hour=QtWidgets.QDateTimeEdit.Section.HourSection,
+    day=QtWidgets.QDateTimeEdit.Section.DaySection,
+    month=QtWidgets.QDateTimeEdit.Section.MonthSection,
+    year=QtWidgets.QDateTimeEdit.Section.YearSection,
+)
 
 class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     value_changed = core.Signal(datetime.datetime)
@@ -58,20 +57,20 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     def set_to_today(self):
         self.setDateTime(core.DateTime.currentDateTime())
 
-    def get_section_text(self, section: SectionsStr) -> str:
+    def get_section_text(self, section: SectionStr) -> str:
         if section not in SECTIONS:
             raise InvalidParamError(section, SECTIONS)
         return self.sectionText(SECTIONS[section])
 
-    def get_current_section(self) -> SectionsStr:
+    def get_current_section(self) -> SectionStr:
         return SECTIONS.inverse[self.currentSection()]
 
-    def set_current_section(self, section: SectionsStr):
+    def set_current_section(self, section: SectionStr):
         if section not in SECTIONS:
             raise InvalidParamError(section, SECTIONS)
         self.setCurrentSection(SECTIONS[section])
 
-    def get_displayed_sections(self) -> list[SectionsStr]:
+    def get_displayed_sections(self) -> list[SectionStr]:
         return SECTIONS.get_list(self.displayedSections())
 
     def set_range(

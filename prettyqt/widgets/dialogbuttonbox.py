@@ -10,27 +10,6 @@ from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, listdelegators
 
 
-STANDARD_BUTTON = bidict(
-    cancel=QtWidgets.QDialogButtonBox.StandardButton.Cancel,
-    ok=QtWidgets.QDialogButtonBox.StandardButton.Ok,
-    save=QtWidgets.QDialogButtonBox.StandardButton.Save,
-    open=QtWidgets.QDialogButtonBox.StandardButton.Open,
-    close=QtWidgets.QDialogButtonBox.StandardButton.Close,
-    discard=QtWidgets.QDialogButtonBox.StandardButton.Discard,
-    apply=QtWidgets.QDialogButtonBox.StandardButton.Apply,
-    reset=QtWidgets.QDialogButtonBox.StandardButton.Reset,
-    restore_defaults=QtWidgets.QDialogButtonBox.StandardButton.RestoreDefaults,
-    help=QtWidgets.QDialogButtonBox.StandardButton.Help,
-    save_all=QtWidgets.QDialogButtonBox.StandardButton.SaveAll,
-    yes=QtWidgets.QDialogButtonBox.StandardButton.Yes,
-    yes_to_all=QtWidgets.QDialogButtonBox.StandardButton.YesToAll,
-    no=QtWidgets.QDialogButtonBox.StandardButton.No,
-    no_to_all=QtWidgets.QDialogButtonBox.StandardButton.NoToAll,
-    abort=QtWidgets.QDialogButtonBox.StandardButton.Abort,
-    retry=QtWidgets.QDialogButtonBox.StandardButton.Retry,
-    ignore=QtWidgets.QDialogButtonBox.StandardButton.Ignore,
-)
-
 StandardButtonStr = Literal[
     "cancel",
     "ok",
@@ -52,18 +31,29 @@ StandardButtonStr = Literal[
     "ignore",
 ]
 
-ROLES = bidict(
-    invalid=QtWidgets.QDialogButtonBox.ButtonRole.InvalidRole,
-    accept=QtWidgets.QDialogButtonBox.ButtonRole.AcceptRole,
-    reject=QtWidgets.QDialogButtonBox.ButtonRole.RejectRole,
-    destructive=QtWidgets.QDialogButtonBox.ButtonRole.DestructiveRole,
-    action=QtWidgets.QDialogButtonBox.ButtonRole.ActionRole,
-    help=QtWidgets.QDialogButtonBox.ButtonRole.HelpRole,
-    yes=QtWidgets.QDialogButtonBox.ButtonRole.YesRole,
-    no=QtWidgets.QDialogButtonBox.ButtonRole.NoRole,
-    apply=QtWidgets.QDialogButtonBox.ButtonRole.ApplyRole,
-    reset=QtWidgets.QDialogButtonBox.ButtonRole.ResetRole,
+STANDARD_BUTTON: bidict[
+    StandardButtonStr, QtWidgets.QDialogButtonBox.StandardButton
+] = bidict(
+    cancel=QtWidgets.QDialogButtonBox.StandardButton.Cancel,
+    ok=QtWidgets.QDialogButtonBox.StandardButton.Ok,
+    save=QtWidgets.QDialogButtonBox.StandardButton.Save,
+    open=QtWidgets.QDialogButtonBox.StandardButton.Open,
+    close=QtWidgets.QDialogButtonBox.StandardButton.Close,
+    discard=QtWidgets.QDialogButtonBox.StandardButton.Discard,
+    apply=QtWidgets.QDialogButtonBox.StandardButton.Apply,
+    reset=QtWidgets.QDialogButtonBox.StandardButton.Reset,
+    restore_defaults=QtWidgets.QDialogButtonBox.StandardButton.RestoreDefaults,
+    help=QtWidgets.QDialogButtonBox.StandardButton.Help,
+    save_all=QtWidgets.QDialogButtonBox.StandardButton.SaveAll,
+    yes=QtWidgets.QDialogButtonBox.StandardButton.Yes,
+    yes_to_all=QtWidgets.QDialogButtonBox.StandardButton.YesToAll,
+    no=QtWidgets.QDialogButtonBox.StandardButton.No,
+    no_to_all=QtWidgets.QDialogButtonBox.StandardButton.NoToAll,
+    abort=QtWidgets.QDialogButtonBox.StandardButton.Abort,
+    retry=QtWidgets.QDialogButtonBox.StandardButton.Retry,
+    ignore=QtWidgets.QDialogButtonBox.StandardButton.Ignore,
 )
+
 
 RoleStr = Literal[
     "invalid",
@@ -77,6 +67,19 @@ RoleStr = Literal[
     "apply",
     "reset",
 ]
+
+ROLES: bidict[RoleStr, QtWidgets.QDialogButtonBox.ButtonRole] = bidict(
+    invalid=QtWidgets.QDialogButtonBox.ButtonRole.InvalidRole,
+    accept=QtWidgets.QDialogButtonBox.ButtonRole.AcceptRole,
+    reject=QtWidgets.QDialogButtonBox.ButtonRole.RejectRole,
+    destructive=QtWidgets.QDialogButtonBox.ButtonRole.DestructiveRole,
+    action=QtWidgets.QDialogButtonBox.ButtonRole.ActionRole,
+    help=QtWidgets.QDialogButtonBox.ButtonRole.HelpRole,
+    yes=QtWidgets.QDialogButtonBox.ButtonRole.YesRole,
+    no=QtWidgets.QDialogButtonBox.ButtonRole.NoRole,
+    apply=QtWidgets.QDialogButtonBox.ButtonRole.ApplyRole,
+    reset=QtWidgets.QDialogButtonBox.ButtonRole.ResetRole,
+)
 
 
 class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):

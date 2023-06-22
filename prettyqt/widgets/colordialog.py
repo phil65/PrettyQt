@@ -4,16 +4,16 @@ from typing import Literal
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import colors, datatypes
+from prettyqt.utils import bidict, colors, datatypes
 
 
-OPTIONS = dict(
+OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
+
+OPTIONS: bidict[OptionStr, QtWidgets.QColorDialog.ColorDialogOption] = bidict(
     show_alpha=QtWidgets.QColorDialog.ColorDialogOption.ShowAlphaChannel,
     no_buttons=QtWidgets.QColorDialog.ColorDialogOption.NoButtons,
     no_native=QtWidgets.QColorDialog.ColorDialogOption.DontUseNativeDialog,
 )
-
-OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
 
 
 class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):

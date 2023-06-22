@@ -9,13 +9,13 @@ from prettyqt.utils import InvalidParamError, bidict
 
 area = QtWidgets.QAbstractScrollArea
 
-SIZE_ADJUST_POLICY = bidict(
+SizeAdjustPolicyStr = Literal["content", "first_show", "ignored"]
+
+SIZE_ADJUST_POLICY: bidict[SizeAdjustPolicyStr, area.SizeAdjustPolicy] = bidict(
     content=area.SizeAdjustPolicy.AdjustToContents,
     first_show=area.SizeAdjustPolicy.AdjustToContentsOnFirstShow,
     ignored=area.SizeAdjustPolicy.AdjustIgnored,
 )
-
-SizeAdjustPolicyStr = Literal["content", "first_show", "ignored"]
 
 
 class AbstractScrollAreaMixin(widgets.FrameMixin):
