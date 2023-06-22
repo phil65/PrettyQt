@@ -26,7 +26,7 @@ WizardButtonStr = Literal[
     "custom_3",
 ]
 
-WIZARD_BUTTON = bidict(
+WIZARD_BUTTON: bidict[WizardButtonStr, mod.WizardButton] = bidict(
     back=mod.WizardButton.BackButton,
     next=mod.WizardButton.NextButton,
     commit=mod.WizardButton.CommitButton,
@@ -58,7 +58,7 @@ WizardOptionStr = Literal[
     "no_cancel_button_on_last_page",
 ]
 
-WIZARD_OPTIONS = bidict(
+WIZARD_OPTIONS: bidict[WizardOptionStr, mod.WizardOption] = bidict(
     independent_pages=mod.WizardOption.IndependentPages,
     ignore_subtitles=mod.WizardOption.IgnoreSubTitles,
     extended_watermark_bitmap=mod.WizardOption.ExtendedWatermarkPixmap,
@@ -80,7 +80,7 @@ WIZARD_OPTIONS = bidict(
 
 WizardPixmapStr = Literal["watermark", "logo", "banner", "background"]
 
-WIZARD_PIXMAP = bidict(
+WIZARD_PIXMAP: bidict[WizardPixmapStr, mod.WizardPixmap] = bidict(
     watermark=mod.WizardPixmap.WatermarkPixmap,
     logo=mod.WizardPixmap.LogoPixmap,
     banner=mod.WizardPixmap.BannerPixmap,
@@ -89,7 +89,7 @@ WIZARD_PIXMAP = bidict(
 
 WizardStyleStr = Literal["classic", "modern", "mac", "aero"]
 
-WIZARD_STYLE = bidict(
+WIZARD_STYLE: bidict[WizardStyleStr, mod.WizardStyle] = bidict(
     classic=mod.WizardStyle.ClassicStyle,
     modern=mod.WizardStyle.ModernStyle,
     mac=mod.WizardStyle.MacStyle,

@@ -7,7 +7,11 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-SWIPE_DIRECTION = bidict(
+SwipeDirectionStr = Literal["none", "left", "right", "up", "down"]
+
+SWIPE_DIRECTION: bidict[
+    SwipeDirectionStr, QtWidgets.QSwipeGesture.SwipeDirection
+] = bidict(
     none=QtWidgets.QSwipeGesture.SwipeDirection.NoDirection,
     left=QtWidgets.QSwipeGesture.SwipeDirection.Left,
     right=QtWidgets.QSwipeGesture.SwipeDirection.Right,

@@ -6,23 +6,12 @@ from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
-REMOVE_BEHAVIOUR = bidict(
+RemoveBehaviourStr = Literal["left_tab", "right_tab", "previous_tab"]
+
+REMOVE_BEHAVIOUR: bidict[RemoveBehaviourStr, widgets.QTabBar.SelectionBehavior] = bidict(
     left_tab=widgets.QTabBar.SelectionBehavior.SelectLeftTab,
     right_tab=widgets.QTabBar.SelectionBehavior.SelectRightTab,
     previous_tab=widgets.QTabBar.SelectionBehavior.SelectPreviousTab,
-)
-
-RemoveBehaviourStr = Literal["left_tab", "right_tab", "previous_tab"]
-
-SHAPE = bidict(
-    rounded_north=widgets.QTabBar.Shape.RoundedNorth,
-    rounded_south=widgets.QTabBar.Shape.RoundedSouth,
-    rounded_west=widgets.QTabBar.Shape.RoundedWest,
-    rounded_east=widgets.QTabBar.Shape.RoundedEast,
-    triangular_north=widgets.QTabBar.Shape.TriangularNorth,
-    triangular_south=widgets.QTabBar.Shape.TriangularSouth,
-    triangular_west=widgets.QTabBar.Shape.TriangularWest,
-    triangular_east=widgets.QTabBar.Shape.TriangularEast,
 )
 
 ShapeStr = Literal[
@@ -36,12 +25,23 @@ ShapeStr = Literal[
     "triangular_east",
 ]
 
-POSITIONS = bidict(
-    left=widgets.QTabBar.ButtonPosition.LeftSide,
-    right=widgets.QTabBar.ButtonPosition.RightSide,
+SHAPE: bidict[ShapeStr, widgets.QTabBar.Shape] = bidict(
+    rounded_north=widgets.QTabBar.Shape.RoundedNorth,
+    rounded_south=widgets.QTabBar.Shape.RoundedSouth,
+    rounded_west=widgets.QTabBar.Shape.RoundedWest,
+    rounded_east=widgets.QTabBar.Shape.RoundedEast,
+    triangular_north=widgets.QTabBar.Shape.TriangularNorth,
+    triangular_south=widgets.QTabBar.Shape.TriangularSouth,
+    triangular_west=widgets.QTabBar.Shape.TriangularWest,
+    triangular_east=widgets.QTabBar.Shape.TriangularEast,
 )
 
 PositionStr = Literal["left", "right"]
+
+POSITIONS: bidict[PositionStr, widgets.QTabBar.ButtonPosition] = bidict(
+    left=widgets.QTabBar.ButtonPosition.LeftSide,
+    right=widgets.QTabBar.ButtonPosition.RightSide,
+)
 
 
 class TabBarWrapper:

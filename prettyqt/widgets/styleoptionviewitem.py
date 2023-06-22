@@ -7,22 +7,13 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-POSITION = bidict(
+PositionStr = Literal["left", "right", "top", "bottom"]
+
+POSITION: bidict[PositionStr, QtWidgets.QStyleOptionViewItem.Position] = bidict(
     left=QtWidgets.QStyleOptionViewItem.Position.Left,
     right=QtWidgets.QStyleOptionViewItem.Position.Right,
     top=QtWidgets.QStyleOptionViewItem.Position.Top,
     bottom=QtWidgets.QStyleOptionViewItem.Position.Bottom,
-)
-
-PositionStr = Literal["left", "right", "top", "bottom"]
-
-VIEW_ITEM_FEATURE = bidict(
-    none=QtWidgets.QStyleOptionViewItem.ViewItemFeature(0),  # type: ignore
-    wrap_text=QtWidgets.QStyleOptionViewItem.ViewItemFeature.WrapText,
-    alternate=QtWidgets.QStyleOptionViewItem.ViewItemFeature.Alternate,
-    has_check_indicator=QtWidgets.QStyleOptionViewItem.ViewItemFeature.HasCheckIndicator,
-    has_display=QtWidgets.QStyleOptionViewItem.ViewItemFeature.HasDisplay,
-    has_decoration=QtWidgets.QStyleOptionViewItem.ViewItemFeature.HasDecoration,
 )
 
 ViewItemFeatureStr = Literal[
@@ -34,15 +25,27 @@ ViewItemFeatureStr = Literal[
     "has_decoration",
 ]
 
-VIEW_ITEM_POSITION = bidict(
+VIEW_ITEM_FEATURE: bidict[ViewItemFeatureStr, QtWidgets.QStyleOptionViewItem] = bidict(
+    none=QtWidgets.QStyleOptionViewItem.ViewItemFeature(0),  # type: ignore
+    wrap_text=QtWidgets.QStyleOptionViewItem.ViewItemFeature.WrapText,
+    alternate=QtWidgets.QStyleOptionViewItem.ViewItemFeature.Alternate,
+    has_check_indicator=QtWidgets.QStyleOptionViewItem.ViewItemFeature.HasCheckIndicator,
+    has_display=QtWidgets.QStyleOptionViewItem.ViewItemFeature.HasDisplay,
+    has_decoration=QtWidgets.QStyleOptionViewItem.ViewItemFeature.HasDecoration,
+)
+
+
+ViewItemPositionStr = Literal["invalid", "beginning", "middle", "end", "only_one"]
+
+VIEW_ITEM_POSITION: bidict[
+    ViewItemPositionStr, QtWidgets.QStyleOptionViewItem.ViewItemPosition
+] = bidict(
     invalid=QtWidgets.QStyleOptionViewItem.ViewItemPosition.Invalid,
     beginning=QtWidgets.QStyleOptionViewItem.ViewItemPosition.Beginning,
     middle=QtWidgets.QStyleOptionViewItem.ViewItemPosition.Middle,
     end=QtWidgets.QStyleOptionViewItem.ViewItemPosition.End,
     only_one=QtWidgets.QStyleOptionViewItem.ViewItemPosition.OnlyOne,
 )
-
-ViewItemPositionStr = Literal["invalid", "beginning", "middle", "end", "only_one"]
 
 
 class StyleOptionViewItem(widgets.StyleOptionMixin, QtWidgets.QStyleOptionViewItem):

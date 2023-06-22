@@ -1,10 +1,35 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 mod = QtWidgets.QTreeWidgetItemIterator
+
+IteratorFlagStr = Literal[
+    "all",
+    "hidden",
+    "not_hidden",
+    "selected",
+    "unselected",
+    "selectable",
+    "not_selectable",
+    "drag_enabled",
+    "drag_disabled",
+    "drop_enabled",
+    "drop_disabled",
+    "has_children",
+    "no_children",
+    "checked",
+    "not_checked",
+    "enabled",
+    "disabled",
+    "editable",
+    "not_editable",
+    "user_flag",
+]
 
 ITERATOR_FLAGS = bidict(
     all=mod.IteratorFlag.All,

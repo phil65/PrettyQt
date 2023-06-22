@@ -1,11 +1,19 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import core, gui, iconprovider
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
-ACTIVATION_REASONS = bidict(
+ActivationReasonStr = Literal[
+    "unknown", "context", "double_click", "trigger", "middle_click"
+]
+
+ACTIVATION_REASONS: bidict[
+    ActivationReasonStr, QtWidgets.QSystemTrayIcon.ActivationReason
+] = bidict(
     unknown=QtWidgets.QSystemTrayIcon.ActivationReason.Unknown,
     context=QtWidgets.QSystemTrayIcon.ActivationReason.Context,
     double_click=QtWidgets.QSystemTrayIcon.ActivationReason.DoubleClick,
@@ -13,7 +21,9 @@ ACTIVATION_REASONS = bidict(
     middle_click=QtWidgets.QSystemTrayIcon.ActivationReason.MiddleClick,
 )
 
-MESSAGE_ICONS = bidict(
+MessageIconStr = Literal["none", "information", "warning", "critical"]
+
+MESSAGE_ICONS: bidict[MessageIconStr, QtWidgets.QSystemTrayIcon.MessageIcon] = bidict(
     none=QtWidgets.QSystemTrayIcon.MessageIcon.NoIcon,
     information=QtWidgets.QSystemTrayIcon.MessageIcon.Information,
     warning=QtWidgets.QSystemTrayIcon.MessageIcon.Warning,

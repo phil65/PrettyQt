@@ -9,22 +9,24 @@ from prettyqt.utils import bidict
 
 mod = QtWidgets.QStyleOptionToolBox
 
-SELECTED_POSITION = bidict(
+
+SelectedPositionStr = Literal["not_adjacent", "next_is_selected", "previous_is_selected"]
+
+SELECTED_POSITION: bidict[SelectedPositionStr, mod.SelectedPosition] = bidict(
     not_adjacent=mod.SelectedPosition.NotAdjacent,
     next_is_selected=mod.SelectedPosition.NextIsSelected,
     previous_is_selected=mod.SelectedPosition.PreviousIsSelected,
 )
 
-SelectedPositionStr = Literal["not_adjacent", "next_is_selected", "previous_is_selected"]
 
-TAB_POSITION = bidict(
+TabPositionStr = Literal["beginning", "middle", "end", "only_one_tab"]
+
+TAB_POSITION: bidict[TabPositionStr, mod.TabPosition] = bidict(
     beginning=mod.TabPosition.Beginning,
     middle=mod.TabPosition.Middle,
     end=mod.TabPosition.End,
     only_one_tab=mod.TabPosition.OnlyOneTab,
 )
-
-TabPositionStr = Literal["beginning", "middle", "end", "only_one_tab"]
 
 
 class StyleOptionToolBox(widgets.StyleOptionMixin, QtWidgets.QStyleOptionToolBox):

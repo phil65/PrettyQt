@@ -7,24 +7,26 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, texteditselecter
 
 
-AUTO_FORMATTING = bidict(
+AutoFormattingStr = Literal["none", "bullet_list", "all"]
+
+AUTO_FORMATTING: bidict[
+    AutoFormattingStr, QtWidgets.QTextEdit.AutoFormattingFlag
+] = bidict(
     none=QtWidgets.QTextEdit.AutoFormattingFlag.AutoNone,
     bullet_list=QtWidgets.QTextEdit.AutoFormattingFlag.AutoBulletList,
     all=QtWidgets.QTextEdit.AutoFormattingFlag.AutoAll,
 )
 
-AutoFormattingStr = Literal["none", "bullet_list", "all"]
+LineWrapModeStr = Literal[
+    "none", "widget_width", "fixed_pixel_width", "fixed_column_width"
+]
 
-LINE_WRAP_MODE = bidict(
+LINE_WRAP_MODE: bidict[LineWrapModeStr, QtWidgets.QTextEdit.LineWrapMode] = bidict(
     none=QtWidgets.QTextEdit.LineWrapMode.NoWrap,
     widget_width=QtWidgets.QTextEdit.LineWrapMode.WidgetWidth,
     fixed_pixel_width=QtWidgets.QTextEdit.LineWrapMode.FixedPixelWidth,
     fixed_column_width=QtWidgets.QTextEdit.LineWrapMode.FixedColumnWidth,
 )
-
-LineWrapModeStr = Literal[
-    "none", "widget_width", "fixed_pixel_width", "fixed_column_width"
-]
 
 
 class TextEditMixin(widgets.AbstractScrollAreaMixin):

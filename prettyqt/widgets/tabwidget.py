@@ -7,21 +7,21 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import InvalidParamError, animator, bidict, datatypes, listdelegators
 
 
-TAB_SHAPES = bidict(
+TabShapeStr = Literal["rounded", "triangular"]
+
+TAB_SHAPES: bidict[TabShapeStr, QtWidgets.QTabWidget.TabShape] = bidict(
     rounded=QtWidgets.QTabWidget.TabShape.Rounded,
     triangular=QtWidgets.QTabWidget.TabShape.Triangular,
 )
 
-TabShapeStr = Literal["rounded", "triangular"]
+TabPositionStr = Literal["north", "south", "west", "east"]
 
-TAB_POSITION = bidict(
+TAB_POSITION: bidict[TabPositionStr, QtWidgets.QTabWidget.TabPosition] = bidict(
     north=QtWidgets.QTabWidget.TabPosition.North,
     south=QtWidgets.QTabWidget.TabPosition.South,
     west=QtWidgets.QTabWidget.TabPosition.West,
     east=QtWidgets.QTabWidget.TabPosition.East,
 )
-
-TabPositionStr = Literal["north", "south", "west", "east"]
 
 
 class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
