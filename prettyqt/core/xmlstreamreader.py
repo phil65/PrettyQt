@@ -6,15 +6,7 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-ERROR = bidict(
-    none=QtCore.QXmlStreamReader.Error.NoError,
-    custom=QtCore.QXmlStreamReader.Error.CustomError,
-    not_well_formed=QtCore.QXmlStreamReader.Error.NotWellFormedError,
-    premature_end_of_document=QtCore.QXmlStreamReader.Error.PrematureEndOfDocumentError,
-    unexpected_element=QtCore.QXmlStreamReader.Error.UnexpectedElementError,
-)
-
-FileErrorStr = Literal[
+ErrorStr = Literal[
     "none",
     "custom",
     "not_well_formed",
@@ -22,18 +14,12 @@ FileErrorStr = Literal[
     "unexpected_element",
 ]
 
-TOKEN_TYPE = bidict(
-    none=QtCore.QXmlStreamReader.TokenType.NoToken,
-    invalid=QtCore.QXmlStreamReader.TokenType.Invalid,
-    start_document=QtCore.QXmlStreamReader.TokenType.StartDocument,
-    end_document=QtCore.QXmlStreamReader.TokenType.EndDocument,
-    start_element=QtCore.QXmlStreamReader.TokenType.StartElement,
-    end_element=QtCore.QXmlStreamReader.TokenType.EndElement,
-    characters=QtCore.QXmlStreamReader.TokenType.Characters,
-    comment=QtCore.QXmlStreamReader.TokenType.Comment,
-    dtd=QtCore.QXmlStreamReader.TokenType.DTD,
-    entity_reference=QtCore.QXmlStreamReader.TokenType.EntityReference,
-    processing_instruction=QtCore.QXmlStreamReader.TokenType.ProcessingInstruction,
+ERROR: bidict[ErrorStr, QtCore.QXmlStreamReader.Error] = bidict(
+    none=QtCore.QXmlStreamReader.Error.NoError,
+    custom=QtCore.QXmlStreamReader.Error.CustomError,
+    not_well_formed=QtCore.QXmlStreamReader.Error.NotWellFormedError,
+    premature_end_of_document=QtCore.QXmlStreamReader.Error.PrematureEndOfDocumentError,
+    unexpected_element=QtCore.QXmlStreamReader.Error.UnexpectedElementError,
 )
 
 TokenTypeStr = Literal[
@@ -50,6 +36,20 @@ TokenTypeStr = Literal[
     "processing_instruction",
 ]
 
+TOKEN_TYPE: bidict[TokenTypeStr, QtCore.QXmlStreamReader.TokenType] = bidict(
+    none=QtCore.QXmlStreamReader.TokenType.NoToken,
+    invalid=QtCore.QXmlStreamReader.TokenType.Invalid,
+    start_document=QtCore.QXmlStreamReader.TokenType.StartDocument,
+    end_document=QtCore.QXmlStreamReader.TokenType.EndDocument,
+    start_element=QtCore.QXmlStreamReader.TokenType.StartElement,
+    end_element=QtCore.QXmlStreamReader.TokenType.EndElement,
+    characters=QtCore.QXmlStreamReader.TokenType.Characters,
+    comment=QtCore.QXmlStreamReader.TokenType.Comment,
+    dtd=QtCore.QXmlStreamReader.TokenType.DTD,
+    entity_reference=QtCore.QXmlStreamReader.TokenType.EntityReference,
+    processing_instruction=QtCore.QXmlStreamReader.TokenType.ProcessingInstruction,
+)
+
 
 class XmlStreamReader(QtCore.QXmlStreamReader):
     def __iter__(self):
@@ -63,7 +63,7 @@ class XmlStreamReader(QtCore.QXmlStreamReader):
             return self
         raise StopIteration
 
-    def get_error(self) -> FileErrorStr:
+    def get_error(self) -> ErrorStr:
         """Return file error status.
 
         Returns:

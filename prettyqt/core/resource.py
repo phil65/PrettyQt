@@ -10,13 +10,13 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
-COMPRESSION = bidict(
+CompressionStr = Literal["none", "zlib", "zstd"]
+
+COMPRESSION: bidict[CompressionStr, QtCore.QResource.Compression] = bidict(
     none=QtCore.QResource.Compression.NoCompression,
     zlib=QtCore.QResource.Compression.ZlibCompression,
     zstd=QtCore.QResource.Compression.ZstdCompression,
 )
-
-CompressionStr = Literal["none", "zlib", "zstd"]
 
 
 class Resource(QtCore.QResource):

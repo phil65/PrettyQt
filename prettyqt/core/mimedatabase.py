@@ -8,13 +8,13 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
-MATCH_MODE = bidict(
+MatchModeStr = Literal["default", "extension", "content"]
+
+MATCH_MODE: bidict[MatchModeStr, QtCore.QMimeDatabase.MatchMode] = bidict(
     default=QtCore.QMimeDatabase.MatchMode.MatchDefault,
     extension=QtCore.QMimeDatabase.MatchMode.MatchExtension,
     content=QtCore.QMimeDatabase.MatchMode.MatchContent,
 )
-
-MatchModeStr = Literal["default", "extension", "content"]
 
 
 class MimeDatabase(QtCore.QMimeDatabase):

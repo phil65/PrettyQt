@@ -10,17 +10,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, get_repr, serializemixin
 
 
-COMPONENT_FORMATTING_OPTIONS = bidict(
-    pretty_decoded=QtCore.QUrl.ComponentFormattingOption.PrettyDecoded,
-    encode_spaces=QtCore.QUrl.ComponentFormattingOption.EncodeSpaces,
-    encode_unicode=QtCore.QUrl.ComponentFormattingOption.EncodeUnicode,
-    encode_delimiters=QtCore.QUrl.ComponentFormattingOption.EncodeDelimiters,
-    encode_reserved=QtCore.QUrl.ComponentFormattingOption.EncodeReserved,
-    decode_reserved=QtCore.QUrl.ComponentFormattingOption.DecodeReserved,
-    fully_encoded=QtCore.QUrl.ComponentFormattingOption.FullyEncoded,
-    fully_decoded=QtCore.QUrl.ComponentFormattingOption.FullyDecoded,
-)
-
 ComponentFormattingStr = Literal[
     "pretty_decoded",
     "encode_spaces",
@@ -32,29 +21,25 @@ ComponentFormattingStr = Literal[
     "fully_decoded",
 ]
 
-
-PARSING_MODES = bidict(
-    tolerant=QtCore.QUrl.ParsingMode.TolerantMode,
-    strict=QtCore.QUrl.ParsingMode.StrictMode,
-    decoded=QtCore.QUrl.ParsingMode.DecodedMode,
+COMPONENT_FORMATTING_OPTIONS: bidict[
+    ComponentFormattingStr, QtCore.QUrl.ComponentFormattingOption
+] = bidict(
+    pretty_decoded=QtCore.QUrl.ComponentFormattingOption.PrettyDecoded,
+    encode_spaces=QtCore.QUrl.ComponentFormattingOption.EncodeSpaces,
+    encode_unicode=QtCore.QUrl.ComponentFormattingOption.EncodeUnicode,
+    encode_delimiters=QtCore.QUrl.ComponentFormattingOption.EncodeDelimiters,
+    encode_reserved=QtCore.QUrl.ComponentFormattingOption.EncodeReserved,
+    decode_reserved=QtCore.QUrl.ComponentFormattingOption.DecodeReserved,
+    fully_encoded=QtCore.QUrl.ComponentFormattingOption.FullyEncoded,
+    fully_decoded=QtCore.QUrl.ComponentFormattingOption.FullyDecoded,
 )
 
 ParsingModeStr = Literal["tolerant", "strict", "decoded"]
 
-FORMATTING_OPTIONS = bidict(
-    none=0,  # QtCore.QUrl.UrlFormattingOption.None
-    remove_scheme=QtCore.QUrl.UrlFormattingOption.RemoveScheme,
-    remove_password=QtCore.QUrl.UrlFormattingOption.RemovePassword,
-    remove_user_info=QtCore.QUrl.UrlFormattingOption.RemoveUserInfo,
-    remove_port=QtCore.QUrl.UrlFormattingOption.RemovePort,
-    remove_authority=QtCore.QUrl.UrlFormattingOption.RemoveAuthority,
-    remove_path=QtCore.QUrl.UrlFormattingOption.RemovePath,
-    remove_query=QtCore.QUrl.UrlFormattingOption.RemoveQuery,
-    remove_fragment=QtCore.QUrl.UrlFormattingOption.RemoveFragment,
-    remove_filename=QtCore.QUrl.UrlFormattingOption.RemoveFilename,
-    prefer_local_file=QtCore.QUrl.UrlFormattingOption.PreferLocalFile,
-    strip_trailing_slash=QtCore.QUrl.UrlFormattingOption.StripTrailingSlash,
-    normalize_path_segments=QtCore.QUrl.UrlFormattingOption.NormalizePathSegments,
+PARSING_MODES: bidict[FormattingOptionStr, QtCore.QUrl.ParsingMode] = bidict(
+    tolerant=QtCore.QUrl.ParsingMode.TolerantMode,
+    strict=QtCore.QUrl.ParsingMode.StrictMode,
+    decoded=QtCore.QUrl.ParsingMode.DecodedMode,
 )
 
 FormattingOptionStr = Literal[
@@ -72,6 +57,22 @@ FormattingOptionStr = Literal[
     "strip_trailing_slash",
     "normalize_path_segments",
 ]
+
+FORMATTING_OPTIONS: bidict[FormattingOptionStr, QtCore.QUrl.UrlFormattingOption] = bidict(
+    none=0,  # QtCore.QUrl.UrlFormattingOption.None
+    remove_scheme=QtCore.QUrl.UrlFormattingOption.RemoveScheme,
+    remove_password=QtCore.QUrl.UrlFormattingOption.RemovePassword,
+    remove_user_info=QtCore.QUrl.UrlFormattingOption.RemoveUserInfo,
+    remove_port=QtCore.QUrl.UrlFormattingOption.RemovePort,
+    remove_authority=QtCore.QUrl.UrlFormattingOption.RemoveAuthority,
+    remove_path=QtCore.QUrl.UrlFormattingOption.RemovePath,
+    remove_query=QtCore.QUrl.UrlFormattingOption.RemoveQuery,
+    remove_fragment=QtCore.QUrl.UrlFormattingOption.RemoveFragment,
+    remove_filename=QtCore.QUrl.UrlFormattingOption.RemoveFilename,
+    prefer_local_file=QtCore.QUrl.UrlFormattingOption.PreferLocalFile,
+    strip_trailing_slash=QtCore.QUrl.UrlFormattingOption.StripTrailingSlash,
+    normalize_path_segments=QtCore.QUrl.UrlFormattingOption.NormalizePathSegments,
+)
 
 
 class Url(serializemixin.SerializeMixin, QtCore.QUrl):

@@ -10,19 +10,6 @@ from prettyqt.utils import InvalidParamError, bidict
 
 mod = QtCore.QIODeviceBase  # type: ignore
 
-OPEN_MODES = bidict(
-    not_open=mod.OpenModeFlag.NotOpen,
-    read_only=mod.OpenModeFlag.ReadOnly,
-    write_only=mod.OpenModeFlag.WriteOnly,
-    read_write=mod.OpenModeFlag.ReadWrite,
-    append=mod.OpenModeFlag.Append,
-    truncate=mod.OpenModeFlag.Truncate,
-    text=mod.OpenModeFlag.Text,
-    unbuffered=mod.OpenModeFlag.Unbuffered,
-    new_only=mod.OpenModeFlag.NewOnly,
-    existing_only=mod.OpenModeFlag.ExistingOnly,
-)
-
 OpenModeStr = Literal[
     "not_open",
     "read_only",
@@ -35,6 +22,19 @@ OpenModeStr = Literal[
     "new_only",
     "existing_only",
 ]
+
+OPEN_MODES: Literal[OpenModeStr, mod.OpenModeFlag] = bidict(
+    not_open=mod.OpenModeFlag.NotOpen,
+    read_only=mod.OpenModeFlag.ReadOnly,
+    write_only=mod.OpenModeFlag.WriteOnly,
+    read_write=mod.OpenModeFlag.ReadWrite,
+    append=mod.OpenModeFlag.Append,
+    truncate=mod.OpenModeFlag.Truncate,
+    text=mod.OpenModeFlag.Text,
+    unbuffered=mod.OpenModeFlag.Unbuffered,
+    new_only=mod.OpenModeFlag.NewOnly,
+    existing_only=mod.OpenModeFlag.ExistingOnly,
+)
 
 
 class IODeviceMixin(core.ObjectMixin):

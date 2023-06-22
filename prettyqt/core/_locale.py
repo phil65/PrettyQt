@@ -611,7 +611,7 @@ LANGUAGE = bidict(
 
 FormatTypeStr = Literal["long", "short", "narrow"]
 
-FORMAT_TYPE = bidict(
+FORMAT_TYPE: bidict[FormatTypeStr, QtCore.QLocale.FormatType] = bidict(
     long=QtCore.QLocale.FormatType.LongFormat,
     short=QtCore.QLocale.FormatType.ShortFormat,
     narrow=QtCore.QLocale.FormatType.NarrowFormat,
@@ -619,7 +619,9 @@ FORMAT_TYPE = bidict(
 
 MeasurementSystemStr = Literal["metric", "imperial_us", "imperial_uk"]
 
-MEASUREMENT_SYSTEM = bidict(
+MEASUREMENT_SYSTEM: bidict[
+    MeasurementSystemStr, QtCore.QLocale.MeasurementSystem
+] = bidict(
     metric=QtCore.QLocale.MeasurementSystem.MetricSystem,
     imperial_us=QtCore.QLocale.MeasurementSystem.ImperialUSSystem,
     imperial_uk=QtCore.QLocale.MeasurementSystem.ImperialUKSystem,
@@ -627,7 +629,7 @@ MEASUREMENT_SYSTEM = bidict(
 
 DataSizeFormatStr = Literal["iec", "traditional", "si"]
 
-DATA_SIZE_FORMAT = bidict(
+DATA_SIZE_FORMAT: bidict[DataSizeFormatStr, QtCore.QLocale.DataSizeIecFormat] = bidict(
     iec=QtCore.QLocale.DataSizeFormat.DataSizeIecFormat,
     traditional=QtCore.QLocale.DataSizeFormat.DataSizeTraditionalFormat,
     si=QtCore.QLocale.DataSizeFormat.DataSizeSIFormat,
@@ -644,7 +646,7 @@ NumberOptionStr = Literal[
 ]
 
 NO = QtCore.QLocale.NumberOption
-NUMBER_OPTION = bidict(
+NUMBER_OPTION: bidict[NumberOptionStr, NO] = bidict(
     default=NO.DefaultNumberOptions,
     omit_group_separator=NO.OmitGroupSeparator,
     reject_group_separator=NO.RejectGroupSeparator,

@@ -20,7 +20,7 @@ class FilterMode(enum.IntEnum):
 FilterModeStr = Literal["fixed_string", "fuzzy", "wildcard", "regex"]
 
 
-FILTER_MODE = bidict(
+FILTER_MODE: bidict[FilterModeStr, FilterMode] = bidict(
     fixed_string=FilterMode.fixed_string,
     fuzzy=FilterMode.fuzzy,
     wildcard=FilterMode.wildcard,

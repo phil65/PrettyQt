@@ -8,20 +8,21 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-DIRECTION = bidict(
+DirectionStr = Literal["forward", "backward"]
+
+DIRECTION: bidict[DirectionStr, QtCore.QTimeLine.Direction] = bidict(
     forward=QtCore.QTimeLine.Direction.Forward,
     backward=QtCore.QTimeLine.Direction.Backward,
 )
 
-DirectionStr = Literal["forward", "backward"]
 
-STATE = bidict(
+StateStr = Literal["not_running", "paused", "running"]
+
+STATE: bidict[StateStr, QtCore.QTimeLine.State] = bidict(
     not_running=QtCore.QTimeLine.State.NotRunning,
     paused=QtCore.QTimeLine.State.Paused,
     running=QtCore.QTimeLine.State.Running,
 )
-
-StateStr = Literal["not_running", "paused", "running"]
 
 
 class TimeLine(core.ObjectMixin, QtCore.QTimeLine):

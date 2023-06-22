@@ -8,28 +8,36 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-EXIT_STATUS = bidict(
+ExitStatusStr = Literal["normal", "crash"]
+
+EXIT_STATUS: bidict[ExitStatusStr, QtCore.QProcess.ExitStatus] = bidict(
     normal=QtCore.QProcess.ExitStatus.NormalExit,
     crash=QtCore.QProcess.ExitStatus.CrashExit,
 )
 
-ExitStatusStr = Literal["normal", "crash"]
+InputChannelModeStr = Literal["managed", "forwarded"]
 
-INPUT_CHANNEL_MODES = bidict(
+INPUT_CHANNEL_MODES: bidict[
+    InputChannelModeStr, QtCore.QProcess.InputChannelMode
+] = bidict(
     managed=QtCore.QProcess.InputChannelMode.ManagedInputChannel,
     forwarded=QtCore.QProcess.InputChannelMode.ForwardedInputChannel,
 )
 
-InputChannelModeStr = Literal["managed", "forwarded"]
+ProcessChannelStr = Literal["standard", "error"]
 
-PROCESS_CHANNELS = bidict(
+PROCESS_CHANNELS: bidict[ProcessChannelStr, QtCore.QProcess.ProcessChannel] = bidict(
     standard=QtCore.QProcess.ProcessChannel.StandardOutput,
     error=QtCore.QProcess.ProcessChannel.StandardError,
 )
 
-ProcessChannelStr = Literal["standard", "error"]
+ProcessChannelModeStr = Literal[
+    "separate", "merged", "forwarded", "forwarded_error", "forwarded_output"
+]
 
-PROCESS_CHANNEL_MODES = bidict(
+PROCESS_CHANNEL_MODES: bidict[
+    ProcessChannelModeStr, QtCore.QProcess.ProcessChannelMode
+] = bidict(
     separate=QtCore.QProcess.ProcessChannelMode.SeparateChannels,
     merged=QtCore.QProcess.ProcessChannelMode.MergedChannels,
     forwarded=QtCore.QProcess.ProcessChannelMode.ForwardedChannels,
@@ -37,11 +45,11 @@ PROCESS_CHANNEL_MODES = bidict(
     forwarded_output=QtCore.QProcess.ProcessChannelMode.ForwardedOutputChannel,
 )
 
-ProcessChannelModeStr = Literal[
-    "separate", "merged", "forwarded", "forwarded_error", "forwarded_output"
+ProcessErrorStr = Literal[
+    "failed_to_start", "crashed", "timed_out", "write", "read_error", "unknown_error"
 ]
 
-PROCESS_ERRORS = bidict(
+PROCESS_ERRORS: bidict[ProcessErrorStr, QtCore.QProcess.ProcessError] = bidict(
     failed_to_start=QtCore.QProcess.ProcessError.FailedToStart,
     crashed=QtCore.QProcess.ProcessError.Crashed,
     timed_out=QtCore.QProcess.ProcessError.Timedout,
@@ -50,17 +58,14 @@ PROCESS_ERRORS = bidict(
     unknown_error=QtCore.QProcess.ProcessError.UnknownError,
 )
 
-ProcessErrorStr = Literal[
-    "failed_to_start", "crashed", "timed_out", "write", "read_error", "unknown_error"
-]
 
-PROCESS_STATES = bidict(
+ProcessStateStr = Literal["not_running", "starting", "running"]
+
+PROCESS_STATES: bidict[ProcessStateStr, QtCore.QProcess.ProcessState] = bidict(
     not_running=QtCore.QProcess.ProcessState.NotRunning,
     starting=QtCore.QProcess.ProcessState.Starting,
     running=QtCore.QProcess.ProcessState.Running,
 )
-
-ProcessStateStr = Literal["not_running", "starting", "running"]
 
 
 class Process(core.IODeviceMixin, QtCore.QProcess):

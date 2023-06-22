@@ -1,11 +1,19 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-PROCESS_EVENT_FLAGS = bidict(
+ProcessEventFlagStr = Literal[
+    "all", "exclude_user_input", "exclude_socket_notifiers", "wait_for_more"
+]
+
+PROCESS_EVENT_FLAGS: bidict[
+    ProcessEventFlagStr, QtCore.QEventLoop.ProcessEventsFlag
+] = bidict(
     all=QtCore.QEventLoop.ProcessEventsFlag.AllEvents,
     exclude_user_input=QtCore.QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents,
     exclude_socket_notifiers=QtCore.QEventLoop.ProcessEventsFlag.ExcludeSocketNotifiers,

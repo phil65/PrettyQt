@@ -5,15 +5,6 @@ from typing import Literal
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
-
-CLOCK_TYPE = bidict(
-    system_time=QtCore.QElapsedTimer.ClockType.SystemTime,
-    monotonic_clock=QtCore.QElapsedTimer.ClockType.MonotonicClock,
-    tick_counter=QtCore.QElapsedTimer.ClockType.TickCounter,
-    mach_absolute_time=QtCore.QElapsedTimer.ClockType.MachAbsoluteTime,
-    performance_counter=QtCore.QElapsedTimer.ClockType.PerformanceCounter,
-)
-
 ClockTypeStr = Literal[
     "system_time",
     "monotonic_clock",
@@ -21,6 +12,15 @@ ClockTypeStr = Literal[
     "mach_absolute_time",
     "performance_counter",
 ]
+
+
+CLOCK_TYPE: bidict[ClockTypeStr, QtCore.QElapsedTimer.ClockType] = bidict(
+    system_time=QtCore.QElapsedTimer.ClockType.SystemTime,
+    monotonic_clock=QtCore.QElapsedTimer.ClockType.MonotonicClock,
+    tick_counter=QtCore.QElapsedTimer.ClockType.TickCounter,
+    mach_absolute_time=QtCore.QElapsedTimer.ClockType.MachAbsoluteTime,
+    performance_counter=QtCore.QElapsedTimer.ClockType.PerformanceCounter,
+)
 
 
 class ElapsedTimer(QtCore.QElapsedTimer):

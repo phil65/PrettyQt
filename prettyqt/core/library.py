@@ -10,14 +10,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
-LOAD_HINTS = bidict(
-    resolve_all_symbols=QtCore.QLibrary.LoadHint.ResolveAllSymbolsHint,
-    export_external_symbols=QtCore.QLibrary.LoadHint.ExportExternalSymbolsHint,
-    load_archive_member=QtCore.QLibrary.LoadHint.LoadArchiveMemberHint,
-    prevent_unload=QtCore.QLibrary.LoadHint.PreventUnloadHint,
-    deep_bind=QtCore.QLibrary.LoadHint.DeepBindHint,
-)
-
 LoadHintStr = Literal[
     "resolve_all_symbols",
     "export_external_symbols",
@@ -25,6 +17,14 @@ LoadHintStr = Literal[
     "prevent_unload",
     "deep_bind",
 ]
+
+LOAD_HINTS: bidict[LoadHintStr, QtCore.QLibrary.LoadHint] = bidict(
+    resolve_all_symbols=QtCore.QLibrary.LoadHint.ResolveAllSymbolsHint,
+    export_external_symbols=QtCore.QLibrary.LoadHint.ExportExternalSymbolsHint,
+    load_archive_member=QtCore.QLibrary.LoadHint.LoadArchiveMemberHint,
+    prevent_unload=QtCore.QLibrary.LoadHint.PreventUnloadHint,
+    deep_bind=QtCore.QLibrary.LoadHint.DeepBindHint,
+)
 
 
 class Library(core.ObjectMixin, QtCore.QLibrary):

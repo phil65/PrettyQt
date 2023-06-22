@@ -7,20 +7,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-SELECTION_FLAG = bidict(
-    none=QtCore.QItemSelectionModel.SelectionFlag.NoUpdate,
-    clear=QtCore.QItemSelectionModel.SelectionFlag.Clear,
-    select=QtCore.QItemSelectionModel.SelectionFlag.Select,
-    deselect=QtCore.QItemSelectionModel.SelectionFlag.Deselect,
-    toggle=QtCore.QItemSelectionModel.SelectionFlag.Toggle,
-    current=QtCore.QItemSelectionModel.SelectionFlag.Current,
-    rows=QtCore.QItemSelectionModel.SelectionFlag.Rows,
-    columns=QtCore.QItemSelectionModel.SelectionFlag.Columns,
-    select_current=QtCore.QItemSelectionModel.SelectionFlag.SelectCurrent,
-    toggle_current=QtCore.QItemSelectionModel.SelectionFlag.ToggleCurrent,
-    clear_and_select=QtCore.QItemSelectionModel.SelectionFlag.ClearAndSelect,
-)
-
 SelectionFlagStr = Literal[
     "none",
     "clear",
@@ -34,6 +20,22 @@ SelectionFlagStr = Literal[
     "toggle_current",
     "clear_and_select",
 ]
+
+SELECTION_FLAG: bidict[
+    SelectionFlagStr, QtCore.QItemSelectionModel.SelectionFlag
+] = bidict(
+    none=QtCore.QItemSelectionModel.SelectionFlag.NoUpdate,
+    clear=QtCore.QItemSelectionModel.SelectionFlag.Clear,
+    select=QtCore.QItemSelectionModel.SelectionFlag.Select,
+    deselect=QtCore.QItemSelectionModel.SelectionFlag.Deselect,
+    toggle=QtCore.QItemSelectionModel.SelectionFlag.Toggle,
+    current=QtCore.QItemSelectionModel.SelectionFlag.Current,
+    rows=QtCore.QItemSelectionModel.SelectionFlag.Rows,
+    columns=QtCore.QItemSelectionModel.SelectionFlag.Columns,
+    select_current=QtCore.QItemSelectionModel.SelectionFlag.SelectCurrent,
+    toggle_current=QtCore.QItemSelectionModel.SelectionFlag.ToggleCurrent,
+    clear_and_select=QtCore.QItemSelectionModel.SelectionFlag.ClearAndSelect,
+)
 
 
 class ItemSelectionModel(core.ObjectMixin, QtCore.QItemSelectionModel):

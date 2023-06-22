@@ -7,22 +7,22 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
-NAME_TYPE = bidict(
+NameTypeStr = Literal["default", "long", "short", "offset"]
+
+NAME_TYPE: bidict[NameTypeStr, QtCore.QTimeZone.NameType] = bidict(
     default=QtCore.QTimeZone.NameType.DefaultName,
     long=QtCore.QTimeZone.NameType.LongName,
     short=QtCore.QTimeZone.NameType.ShortName,
     offset=QtCore.QTimeZone.NameType.OffsetName,
 )
 
-NameTypeStr = Literal["default", "long", "short", "offset"]
+TimeTypeStr = Literal["standard", "daylight", "generic"]
 
-TIME_TYPE = bidict(
+TIME_TYPE: bidict[TimeTypeStr, QtCore.QTimeZone.TimeType] = bidict(
     standard=QtCore.QTimeZone.TimeType.StandardTime,
     daylight=QtCore.QTimeZone.TimeType.DaylightTime,
     generic=QtCore.QTimeZone.TimeType.GenericTime,
 )
-
-TimeTypeStr = Literal["standard", "daylight", "generic"]
 
 
 class TimeZone(QtCore.QTimeZone):

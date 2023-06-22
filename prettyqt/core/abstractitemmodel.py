@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import logging
-from typing import Any, overload
+from typing import Any, overload, Literal
 
 from collections.abc import Iterator
 
@@ -13,14 +13,24 @@ from prettyqt.utils import bidict, listdelegators, helpers
 
 logger = logging.getLogger(__name__)
 
-CHECK_INDEX_OPTIONS = bidict(
+CheckIndexOptionStr = Literal[
+    "none", "index_is_valid", "do_not_use_parent", "parent_is_invalid"
+]
+
+CHECK_INDEX_OPTIONS: bidict[
+    CheckIndexOptionStr, QtCore.QAbstractItemModel.CheckIndexOption
+] = bidict(
     none=QtCore.QAbstractItemModel.CheckIndexOption.NoOption,
     index_is_valid=QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid,
     do_not_use_parent=QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent,
     parent_is_invalid=QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid,
 )
 
-LAYOUT_CHANGE_HINT = bidict(
+LayoutChangeHintStr = Literal["none", "vertical_sort", "horizontal_sort"]
+
+LAYOUT_CHANGE_HINT: bidict[
+    LayoutChangeHintStr, QtCore.QAbstractItemModel.LayoutChangeHint
+] = bidict(
     none=QtCore.QAbstractItemModel.LayoutChangeHint.NoLayoutChangeHint,
     vertical_sort=QtCore.QAbstractItemModel.LayoutChangeHint.VerticalSortHint,
     horizontal_sort=QtCore.QAbstractItemModel.LayoutChangeHint.HorizontalSortHint,

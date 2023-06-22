@@ -19,7 +19,18 @@ RE_MAP = bidict(
 
 mod = QtCore.QRegularExpression
 
-PATTERN_OPTIONS = bidict(
+PatternOptionStr = Literal[
+    "none",
+    "ignorecase",
+    "dotall",
+    "multiline",
+    "verbose",
+    "inverted_greedyness",
+    "dont_capture",
+    "unicode",
+]
+
+PATTERN_OPTIONS: bidict[PatternOptionStr, mod.PatternOption] = bidict(
     none=mod.PatternOption.NoPatternOption,
     ignorecase=mod.PatternOption.CaseInsensitiveOption,
     dotall=mod.PatternOption.DotMatchesEverythingOption,
@@ -30,16 +41,18 @@ PATTERN_OPTIONS = bidict(
     unicode=mod.PatternOption.UseUnicodePropertiesOption,
 )
 
-MATCH_TYPE = bidict(
+MatchTypeStr = Literal["normal", "prefer_complete", "prefer_first", "no_match"]
+
+MATCH_TYPE: bidict[MatchTypeStr, mod.MatchType] = bidict(
     normal=mod.MatchType.NormalMatch,
     prefer_complete=mod.MatchType.PartialPreferCompleteMatch,
     prefer_first=mod.MatchType.PartialPreferFirstMatch,
     no_match=mod.MatchType.NoMatch,
 )
 
-MatchTypeStr = Literal["normal", "prefer_complete", "prefer_first", "no_match"]
+MatchOptionStr = Literal["none", "anchored"]
 
-MATCH_OPTIONS = bidict(
+MATCH_OPTIONS: bidict[MatchOptionStr] = bidict(
     none=mod.MatchOption.NoMatchOption,
     anchored=mod.MatchOption.AnchorAtOffsetMatchOption,  # type: ignore
 )

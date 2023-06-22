@@ -7,18 +7,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
-SHARED_MEMORY_ERROR = bidict(
-    none=QtCore.QSharedMemory.SharedMemoryError.NoError,
-    permission_denied=QtCore.QSharedMemory.SharedMemoryError.PermissionDenied,
-    invalid_size=QtCore.QSharedMemory.SharedMemoryError.InvalidSize,
-    key_error=QtCore.QSharedMemory.SharedMemoryError.KeyError,
-    already_exists=QtCore.QSharedMemory.SharedMemoryError.AlreadyExists,
-    not_found=QtCore.QSharedMemory.SharedMemoryError.NotFound,
-    lock_error=QtCore.QSharedMemory.SharedMemoryError.LockError,
-    out_of_resources=QtCore.QSharedMemory.SharedMemoryError.OutOfResources,
-    unknown=QtCore.QSharedMemory.SharedMemoryError.UnknownError,
-)
-
 SharedMemoryErrorStr = Literal[
     "none",
     "permission_denied",
@@ -30,6 +18,20 @@ SharedMemoryErrorStr = Literal[
     "out_of_resources",
     "unknown",
 ]
+
+SHARED_MEMORY_ERROR: bidict[
+    SharedMemoryErrorStr, QtCore.QSharedMemory.SharedMemoryError
+] = bidict(
+    none=QtCore.QSharedMemory.SharedMemoryError.NoError,
+    permission_denied=QtCore.QSharedMemory.SharedMemoryError.PermissionDenied,
+    invalid_size=QtCore.QSharedMemory.SharedMemoryError.InvalidSize,
+    key_error=QtCore.QSharedMemory.SharedMemoryError.KeyError,
+    already_exists=QtCore.QSharedMemory.SharedMemoryError.AlreadyExists,
+    not_found=QtCore.QSharedMemory.SharedMemoryError.NotFound,
+    lock_error=QtCore.QSharedMemory.SharedMemoryError.LockError,
+    out_of_resources=QtCore.QSharedMemory.SharedMemoryError.OutOfResources,
+    unknown=QtCore.QSharedMemory.SharedMemoryError.UnknownError,
+)
 
 
 class SharedMemory(core.ObjectMixin, QtCore.QSharedMemory):

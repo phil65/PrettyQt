@@ -6,15 +6,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
-BOUNDARY_REASONS = bidict(
-    not_at_boundary=QtCore.QTextBoundaryFinder.BoundaryReason.NotAtBoundary,
-    break_opportunity=QtCore.QTextBoundaryFinder.BoundaryReason.BreakOpportunity,
-    start_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.StartOfItem,
-    end_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.EndOfItem,
-    mandatory_break=QtCore.QTextBoundaryFinder.BoundaryReason.MandatoryBreak,
-    soft_hyphen=QtCore.QTextBoundaryFinder.BoundaryReason.SoftHyphen,
-)
-
 BoundaryReasonStr = Literal[
     "not_at_boundary",
     "break_opportunity",
@@ -24,11 +15,15 @@ BoundaryReasonStr = Literal[
     "soft_hyphen",
 ]
 
-BOUNDARY_TYPES = bidict(
-    grapheme=QtCore.QTextBoundaryFinder.BoundaryType.Grapheme,
-    word=QtCore.QTextBoundaryFinder.BoundaryType.Word,
-    line=QtCore.QTextBoundaryFinder.BoundaryType.Line,
-    sentence=QtCore.QTextBoundaryFinder.BoundaryType.Sentence,
+BOUNDARY_REASONS: bidict[
+    BoundaryReasonStr, QtCore.QTextBoundaryFinder.BoundaryReason
+] = bidict(
+    not_at_boundary=QtCore.QTextBoundaryFinder.BoundaryReason.NotAtBoundary,
+    break_opportunity=QtCore.QTextBoundaryFinder.BoundaryReason.BreakOpportunity,
+    start_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.StartOfItem,
+    end_of_item=QtCore.QTextBoundaryFinder.BoundaryReason.EndOfItem,
+    mandatory_break=QtCore.QTextBoundaryFinder.BoundaryReason.MandatoryBreak,
+    soft_hyphen=QtCore.QTextBoundaryFinder.BoundaryReason.SoftHyphen,
 )
 
 BoundaryTypeStr = Literal[
@@ -37,6 +32,13 @@ BoundaryTypeStr = Literal[
     "line",
     "sentence",
 ]
+
+BOUNDARY_TYPES: bidict[BoundaryTypeStr, QtCore.QTextBoundaryFinder.BoundaryType] = bidict(
+    grapheme=QtCore.QTextBoundaryFinder.BoundaryType.Grapheme,
+    word=QtCore.QTextBoundaryFinder.BoundaryType.Word,
+    line=QtCore.QTextBoundaryFinder.BoundaryType.Line,
+    sentence=QtCore.QTextBoundaryFinder.BoundaryType.Sentence,
+)
 
 
 class TextBoundaryFinder(QtCore.QTextBoundaryFinder):

@@ -10,24 +10,6 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
 
 
-FILE_ERROR = bidict(
-    none=QtCore.QFileDevice.FileError.NoError,
-    read=QtCore.QFileDevice.FileError.ReadError,
-    write=QtCore.QFileDevice.FileError.WriteError,
-    fatal=QtCore.QFileDevice.FileError.FatalError,
-    resource=QtCore.QFileDevice.FileError.ResourceError,
-    open=QtCore.QFileDevice.FileError.OpenError,
-    abort=QtCore.QFileDevice.FileError.AbortError,
-    time_out=QtCore.QFileDevice.FileError.TimeOutError,
-    unspecified=QtCore.QFileDevice.FileError.UnspecifiedError,
-    remove=QtCore.QFileDevice.FileError.RemoveError,
-    rename=QtCore.QFileDevice.FileError.RenameError,
-    position=QtCore.QFileDevice.FileError.PositionError,
-    resize=QtCore.QFileDevice.FileError.ResizeError,
-    permissions=QtCore.QFileDevice.FileError.PermissionsError,
-    copy=QtCore.QFileDevice.FileError.CopyError,
-)
-
 FileErrorStr = Literal[
     "none",
     "read",
@@ -46,28 +28,31 @@ FileErrorStr = Literal[
     "copy",
 ]
 
-FILE_TIME = bidict(
-    access=QtCore.QFileDevice.FileTime.FileAccessTime,
-    birth=QtCore.QFileDevice.FileTime.FileBirthTime,
-    metadata_change=QtCore.QFileDevice.FileTime.FileMetadataChangeTime,
-    modification=QtCore.QFileDevice.FileTime.FileModificationTime,
+FILE_ERROR: bidict[FileErrorStr, QtCore.QFileDevice.FileError] = bidict(
+    none=QtCore.QFileDevice.FileError.NoError,
+    read=QtCore.QFileDevice.FileError.ReadError,
+    write=QtCore.QFileDevice.FileError.WriteError,
+    fatal=QtCore.QFileDevice.FileError.FatalError,
+    resource=QtCore.QFileDevice.FileError.ResourceError,
+    open=QtCore.QFileDevice.FileError.OpenError,
+    abort=QtCore.QFileDevice.FileError.AbortError,
+    time_out=QtCore.QFileDevice.FileError.TimeOutError,
+    unspecified=QtCore.QFileDevice.FileError.UnspecifiedError,
+    remove=QtCore.QFileDevice.FileError.RemoveError,
+    rename=QtCore.QFileDevice.FileError.RenameError,
+    position=QtCore.QFileDevice.FileError.PositionError,
+    resize=QtCore.QFileDevice.FileError.ResizeError,
+    permissions=QtCore.QFileDevice.FileError.PermissionsError,
+    copy=QtCore.QFileDevice.FileError.CopyError,
 )
 
 FileTimeStr = Literal["access", "birth", "metadata_change", "modification"]
 
-PERMISSIONS = bidict(
-    read_owner=QtCore.QFileDevice.Permission.ReadOwner,
-    write_owner=QtCore.QFileDevice.Permission.WriteOwner,
-    exe_owner=QtCore.QFileDevice.Permission.ExeOwner,
-    read_user=QtCore.QFileDevice.Permission.ReadUser,
-    write_user=QtCore.QFileDevice.Permission.WriteUser,
-    exe_user=QtCore.QFileDevice.Permission.ExeUser,
-    read_group=QtCore.QFileDevice.Permission.ReadGroup,
-    write_group=QtCore.QFileDevice.Permission.WriteGroup,
-    exe_group=QtCore.QFileDevice.Permission.ExeGroup,
-    read_other=QtCore.QFileDevice.Permission.ReadOther,
-    write_other=QtCore.QFileDevice.Permission.WriteOther,
-    exe_other=QtCore.QFileDevice.Permission.ExeOther,
+FILE_TIME: bidict[FileTimeStr, QtCore.QFileDevice.FileTime] = bidict(
+    access=QtCore.QFileDevice.FileTime.FileAccessTime,
+    birth=QtCore.QFileDevice.FileTime.FileBirthTime,
+    metadata_change=QtCore.QFileDevice.FileTime.FileMetadataChangeTime,
+    modification=QtCore.QFileDevice.FileTime.FileModificationTime,
 )
 
 PermissionStr = Literal[
@@ -84,6 +69,21 @@ PermissionStr = Literal[
     "write_other",
     "exe_other",
 ]
+
+PERMISSIONS: bidict[PermissionStr, QtCore.QFileDevice.Permission] = bidict(
+    read_owner=QtCore.QFileDevice.Permission.ReadOwner,
+    write_owner=QtCore.QFileDevice.Permission.WriteOwner,
+    exe_owner=QtCore.QFileDevice.Permission.ExeOwner,
+    read_user=QtCore.QFileDevice.Permission.ReadUser,
+    write_user=QtCore.QFileDevice.Permission.WriteUser,
+    exe_user=QtCore.QFileDevice.Permission.ExeUser,
+    read_group=QtCore.QFileDevice.Permission.ReadGroup,
+    write_group=QtCore.QFileDevice.Permission.WriteGroup,
+    exe_group=QtCore.QFileDevice.Permission.ExeGroup,
+    read_other=QtCore.QFileDevice.Permission.ReadOther,
+    write_other=QtCore.QFileDevice.Permission.WriteOther,
+    exe_other=QtCore.QFileDevice.Permission.ExeOther,
+)
 
 
 class FileDeviceMixin(core.IODeviceMixin):

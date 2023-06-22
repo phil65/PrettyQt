@@ -10,19 +10,19 @@ from prettyqt.utils import InvalidParamError, bidict
 mod = QtCore.QCommandLineParser
 op = mod.OptionsAfterPositionalArgumentsMode
 
-OPTIONS_AFTER_POS_ARG = bidict(
+OptionsAfterPosArgStr = Literal["options", "positional_arguments"]
+
+OPTIONS_AFTER_POS_ARG: bidict[OptionsAfterPosArgStr, op] = bidict(
     options=op.ParseAsOptions,
     positional_arguments=op.ParseAsPositionalArguments,
 )
 
-OptionsAfterPosArgStr = Literal["options", "positional_arguments"]
+SingleDashWordStr = Literal["compacted_short", "long"]
 
-SINGLE_DASH_WORD = bidict(
+SINGLE_DASH_WORD: bidict[SingleDashWordStr, mod.SingleDashWordOptionMode] = bidict(
     compacted_short=mod.SingleDashWordOptionMode.ParseAsCompactedShortOptions,
     long=mod.SingleDashWordOptionMode.ParseAsLongOptions,
 )
-
-SingleDashWordStr = Literal["compacted_short", "long"]
 
 
 class CommandLineParser(QtCore.QCommandLineParser):

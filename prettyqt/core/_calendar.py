@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
+SystemStr = Literal["gregorian", "julian", "milankovic","jalali", "islamic_civil"]
 
-SYSTEM = bidict(
+SYSTEM: bidict[SystemStr, QtCore.QCalendar.System] = bidict(
     gregorian=QtCore.QCalendar.System.Gregorian,
     julian=QtCore.QCalendar.System.Julian,
     milankovic=QtCore.QCalendar.System.Milankovic,

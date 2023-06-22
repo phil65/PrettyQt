@@ -7,13 +7,13 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-TYPE = bidict(
+TypeStr = Literal["read", "write", "exception"]
+
+TYPE: bidict[TypeStr, QtCore.QSocketNotifier.Type] = bidict(
     read=QtCore.QSocketNotifier.Type.Read,
     write=QtCore.QSocketNotifier.Type.Write,
     exception=QtCore.QSocketNotifier.Type.Exception,
 )
-
-TypeStr = Literal["read", "write", "exception"]
 
 
 class SocketNotifier(core.ObjectMixin, QtCore.QSocketNotifier):

@@ -7,22 +7,22 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
-ACCESS = bidict(
+AccessStr = Literal["private", "protected", "public"]
+
+ACCESS: bidict[AccessStr, QtCore.QMetaMethod.Access] = bidict(
     private=QtCore.QMetaMethod.Access.Private,
     protected=QtCore.QMetaMethod.Access.Protected,
     public=QtCore.QMetaMethod.Access.Public,
 )
 
-AccessStr = Literal["private", "protected", "public"]
+MethodTypeStr = Literal["method", "signal", "slot", "constructor"]
 
-METHOD_TYPE = bidict(
+METHOD_TYPE: bidict[MethodTypeStr, QtCore.QMetaMethod.MethodType] = bidict(
     method=QtCore.QMetaMethod.MethodType.Method,
     signal=QtCore.QMetaMethod.MethodType.Signal,
     slot=QtCore.QMetaMethod.MethodType.Slot,
     constructor=QtCore.QMetaMethod.MethodType.Constructor,
 )
-
-MethodTypeStr = Literal["method", "signal", "slot", "constructor"]
 
 
 class MetaMethod:

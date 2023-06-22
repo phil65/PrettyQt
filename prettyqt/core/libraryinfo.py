@@ -10,23 +10,6 @@ from prettyqt.utils import InvalidParamError, bidict
 
 mod = QtCore.QLibraryInfo.LibraryPath
 
-LOCATION = bidict(
-    prefix=mod.PrefixPath,
-    documentation=mod.DocumentationPath,
-    headers=mod.HeadersPath,
-    libraries=mod.LibrariesPath,
-    library_executables=mod.LibraryExecutablesPath,
-    binaries=mod.BinariesPath,
-    plugins=mod.PluginsPath,
-    qml2_imports=mod.Qml2ImportsPath,
-    arch_data=mod.ArchDataPath,
-    data=mod.DataPath,
-    translations=mod.TranslationsPath,
-    examples=mod.ExamplesPath,
-    tests=mod.TestsPath,
-    settings=mod.SettingsPath,
-)
-
 LocationStr = Literal[
     "prefix",
     "documentation",
@@ -43,6 +26,23 @@ LocationStr = Literal[
     "tests",
     "settings",
 ]
+
+LOCATION: bidict[LocationStr, mod] = bidict(
+    prefix=mod.PrefixPath,
+    documentation=mod.DocumentationPath,
+    headers=mod.HeadersPath,
+    libraries=mod.LibrariesPath,
+    library_executables=mod.LibraryExecutablesPath,
+    binaries=mod.BinariesPath,
+    plugins=mod.PluginsPath,
+    qml2_imports=mod.Qml2ImportsPath,
+    arch_data=mod.ArchDataPath,
+    data=mod.DataPath,
+    translations=mod.TranslationsPath,
+    examples=mod.ExamplesPath,
+    tests=mod.TestsPath,
+    settings=mod.SettingsPath,
+)
 
 
 class LibraryInfo(QtCore.QLibraryInfo):

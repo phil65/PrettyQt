@@ -9,12 +9,13 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
-JSON_FORMAT = bidict(
+JsonFormatStr = Literal["indented", "compact"]
+
+
+JSON_FORMAT: bidict[JsonFormatStr, QtCore.QJsonDocument.JsonFormat] = bidict(
     indented=QtCore.QJsonDocument.JsonFormat.Indented,
     compact=QtCore.QJsonDocument.JsonFormat.Compact,
 )
-
-JsonFormatStr = Literal["indented", "compact"]
 
 
 class JsonDocument(QtCore.QJsonDocument):

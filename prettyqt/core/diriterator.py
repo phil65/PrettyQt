@@ -8,17 +8,17 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-ITERATOR_FLAG = bidict(
-    none=QtCore.QDirIterator.IteratorFlag.NoIteratorFlags,
-    subdirectories=QtCore.QDirIterator.IteratorFlag.Subdirectories,
-    follow_symlinks=QtCore.QDirIterator.IteratorFlag.FollowSymlinks,
-)
-
 IteratorFlagStr = Literal[
     "none",
     "subdirectories",
     "follow_symlinks",
 ]
+
+ITERATOR_FLAG: bidict[IteratorFlagStr, QtCore.QDirIterator.IteratorFlag] = bidict(
+    none=QtCore.QDirIterator.IteratorFlag.NoIteratorFlags,
+    subdirectories=QtCore.QDirIterator.IteratorFlag.Subdirectories,
+    follow_symlinks=QtCore.QDirIterator.IteratorFlag.FollowSymlinks,
+)
 
 
 class DirIterator(QtCore.QDirIterator):

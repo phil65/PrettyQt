@@ -8,27 +8,29 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict
 
 
-DELETION_POLICY = bidict(
+DeletionPolicyStr = Literal["keep", "delete"]
+
+DELETION_POLICY: bidict[
+    DeletionPolicyStr, QtCore.QAbstractAnimation.DeletionPolicy
+] = bidict(
     keep=QtCore.QAbstractAnimation.DeletionPolicy.KeepWhenStopped,
     delete=QtCore.QAbstractAnimation.DeletionPolicy.DeleteWhenStopped,
 )
 
-DeletionPolicyStr = Literal["keep", "delete"]
+DirectionStr = Literal["forward", "backward"]
 
-DIRECTION = bidict(
+DIRECTION: bidict[DirectionStr, QtCore.QAbstractAnimation.Direction] = bidict(
     forward=QtCore.QAbstractAnimation.Direction.Forward,
     backward=QtCore.QAbstractAnimation.Direction.Backward,
 )
 
-DirectionStr = Literal["forward", "backward"]
+StateStr = Literal["stopped", "paused", "running"]
 
-STATE = bidict(
+STATE: bidict[StateStr, QtCore.QAbstractAnimation.State] = bidict(
     stopped=QtCore.QAbstractAnimation.State.Stopped,
     paused=QtCore.QAbstractAnimation.State.Paused,
     running=QtCore.QAbstractAnimation.State.Running,
 )
-
-StateStr = Literal["stopped", "paused", "running"]
 
 
 class AbstractAnimationMixin(core.ObjectMixin):

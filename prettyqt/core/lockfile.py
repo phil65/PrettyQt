@@ -8,14 +8,14 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes
 
 
-LOCK_ERROR = bidict(
+LockErrorStr = Literal["none", "lock_failed", "permission", "unknown"]
+
+LOCK_ERROR: bidict[LockErrorStr, QtCore.QLockFile.LockError] = bidict(
     none=QtCore.QLockFile.LockError.NoError,
     lock_failed=QtCore.QLockFile.LockError.LockFailedError,
     permission=QtCore.QLockFile.LockError.PermissionError,
     unknown=QtCore.QLockFile.LockError.UnknownError,
 )
-
-LockErrorStr = Literal["none", "lock_failed", "permission", "unknown"]
 
 
 class LockFile(QtCore.QLockFile):

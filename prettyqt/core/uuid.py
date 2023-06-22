@@ -8,15 +8,17 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, get_repr
 
 
-STRING_FORMATS = bidict(
+StringFormatStr = Literal["with_braces", "without_braces", "id_128"]
+
+STRING_FORMATS: bidict[StringFormatStr, QtCore.QUuid.StringFormat] = bidict(
     with_braces=QtCore.QUuid.StringFormat.WithBraces,
     without_braces=QtCore.QUuid.StringFormat.WithoutBraces,
     id_128=QtCore.QUuid.StringFormat.Id128,
 )
 
-StringFormatStr = Literal["with_braces", "without_braces", "id_128"]
+VariantStr = Literal["unknown", "ncs", "dce", "microsoft", "reserved"]
 
-VARIANTS = bidict(
+VARIANTS: bidict[VariantStr, QtCore.QUuid.Variant] = bidict(
     unknown=QtCore.QUuid.Variant.VarUnknown,
     ncs=QtCore.QUuid.Variant.NCS,
     dce=QtCore.QUuid.Variant.DCE,
@@ -24,9 +26,9 @@ VARIANTS = bidict(
     reserved=QtCore.QUuid.Variant.Reserved,
 )
 
-VariantStr = Literal["unknown", "ncs", "dce", "microsoft", "reserved"]
+VersionStr = Literal["unknown", "time", "embedded_posix", "name", "random", "sha1"]
 
-VERSION = bidict(
+VERSION: bidict[VersionStr, QtCore.QUuid.Version] = bidict(
     unknown=QtCore.QUuid.Version.VerUnknown,
     time=QtCore.QUuid.Version.Time,
     embedded_posix=QtCore.QUuid.Version.EmbeddedPOSIX,
@@ -35,8 +37,6 @@ VERSION = bidict(
     random=QtCore.QUuid.Version.Random,
     sha1=QtCore.QUuid.Version.Sha1,
 )
-
-VersionStr = Literal["unknown", "time", "embedded_posix", "name", "random", "sha1"]
 
 
 class UuidMixin:

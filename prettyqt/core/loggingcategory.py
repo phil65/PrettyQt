@@ -6,14 +6,14 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-MSG_TYPE = bidict(
+MsgTypeStr = Literal["critical", "debug", "info", "warning", "fatal"]
+
+MSG_TYPE: bidict[MsgTypeStr, QtCore.QtMsgType] = bidict(
     critical=QtCore.QtMsgType.QtCriticalMsg,
     debug=QtCore.QtMsgType.QtDebugMsg,
     info=QtCore.QtMsgType.QtInfoMsg,
     warning=QtCore.QtMsgType.QtWarningMsg,
 )
-
-MsgTypeStr = Literal["critical", "debug", "info", "warning", "fatal"]
 
 
 class LoggingCategory(QtCore.QLoggingCategory):

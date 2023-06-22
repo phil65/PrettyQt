@@ -6,28 +6,30 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
-FLOATING_POINT_PRECISION = bidict(
+FloatingPointPrecisionStr = Literal["single", "double"]
+
+FLOATING_POINT_PRECISION: bidict[
+    FloatingPointPrecisionStr, QtCore.QDataStream.FloatingPointPrecision
+] = bidict(
     single=QtCore.QDataStream.FloatingPointPrecision.SinglePrecision,
     double=QtCore.QDataStream.FloatingPointPrecision.DoublePrecision,
 )
 
-FloatingPointPrecisionStr = Literal["single", "double"]
+ByteOrderStr = Literal["big_endian", "little_endian"]
 
-BYTE_ORDER = bidict(
+BYTE_ORDER: bidict[ByteOrderStr, QtCore.QDataStream.ByteOrder] = bidict(
     big_endian=QtCore.QDataStream.ByteOrder.BigEndian,
     little_endian=QtCore.QDataStream.ByteOrder.LittleEndian,
 )
 
-ByteOrderStr = Literal["big_endian", "little_endian"]
+StatusStr = Literal["ok", "read_past_end", "read_corrupt_data", "write_failed"]
 
-STATUS = bidict(
+STATUS: bidict[StatusStr, QtCore.QDataStream.Status] = bidict(
     ok=QtCore.QDataStream.Status.Ok,
     read_past_end=QtCore.QDataStream.Status.ReadPastEnd,
     read_corrupt_data=QtCore.QDataStream.Status.ReadCorruptData,
     write_failed=QtCore.QDataStream.Status.WriteFailed,
 )
-
-StatusStr = Literal["ok", "read_past_end", "read_corrupt_data", "write_failed"]
 
 
 class DataStream(QtCore.QDataStream):
