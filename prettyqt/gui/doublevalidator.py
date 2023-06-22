@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from prettyqt import gui
+from prettyqt import core, gui
 from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
 class DoubleValidator(gui.ValidatorMixin, QtGui.QDoubleValidator):
     ID = "double"
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setLocale(core.Locale("en-En"))
 
     def __repr__(self):
         return get_repr(self, self.bottom(), self.top(), self.decimals())
