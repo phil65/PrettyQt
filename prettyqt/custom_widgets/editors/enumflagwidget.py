@@ -60,19 +60,27 @@ class EnumFlagWidget(widgets.ToolButton):
                 "setValue(self, Enum): argument 1 has unexpected type "
                 f"{type(value).__name__!r}"
             )
-        for i in list(value):
+        # this filter shouldnt be needed, see https://bugreports.qt.io/browse/PYSIDE-2369
+        values = [i for i in value if i is not None]
+        for i in values:
             self._action_map[i].setChecked(True)
-        self.set_text(" | ".join(i.name for i in value))
+        self.set_text(" | ".join(i.name for i in values))
 
     value = core.Property(enum.Flag, get_value, set_value, user=True)
     # enumClass = core.Property(type(enum.Flag), get_enum_class, set_enum_class)
 
 
 if __name__ == "__main__":
+    from prettyqt import constants
+
     app = widgets.app()
-    flag = widgets.AbstractItemView.EditTrigger
+    flag = constants.FocusPolicy
     w = EnumFlagWidget()
-    w.set_value(flag.DoubleClicked)
+    # w.set_value(flag.NoFocus)
+    testwidget = widgets.TableView()
+    assert testwidget.focusPolicy().__class__ == constants.FocusPolicy.NoFocus.__class__
+    # print(type(testwidget.focusPolicy()))
+    w.set_value(testwidget.focusPolicy())
     w.value_changed.connect(print)
     w.show()
     app.exec()
