@@ -75,7 +75,6 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
     def clone(self) -> Self:
         item = type(self)()
         core.DataStream.copy_data(self, item)
-        assert type(item) == StandardItem
         return item
 
     def set_icon(self, icon: datatypes.IconType):

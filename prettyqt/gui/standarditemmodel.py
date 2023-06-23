@@ -7,6 +7,10 @@ from prettyqt.utils import InvalidParamError, datatypes, helpers, listdelegators
 
 
 class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.setItemPrototype(gui.StandardItem())
+
     def __getitem__(
         self, index: int | slice | tuple[int | slice, int | slice] | core.QModelIndex
     ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
