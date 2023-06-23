@@ -148,22 +148,6 @@ class ApplicationMixin(gui.GuiApplicationMixin):
 
         return widgets
 
-    def about_popup(self, title: str = "About"):
-        text = (
-            f"{self.applicationName()}\n\n"
-            f"{self.organizationName()}\n"
-            f"{self.applicationVersion()}\n"
-            f"{self.organizationDomain()}"
-        )
-        popup = widgets.MessageBox(
-            "none",
-            title,
-            text,
-            buttons=["ok"],
-        )
-        popup.set_icon("mdi.information-outline")
-        popup.exec()
-
     @classmethod
     def get_mainwindow(cls) -> widgets.QMainWindow | None:
         app = cls.instance()

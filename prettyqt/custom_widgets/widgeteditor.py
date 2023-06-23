@@ -1,55 +1,13 @@
 from __future__ import annotations
 
-import builtins
-import enum
 import logging
 
-from prettyqt import core, custom_widgets, eventfilters, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt import core, eventfilters, widgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
-
-
-def widget_for_type(typ: type):
-    match typ:
-        case builtins.bool:
-            return widgets.CheckBox()
-        case builtins.int:
-            return widgets.SpinBox(maximum=999999)
-        case builtins.float:
-            return widgets.DoubleSpinBox(maximum=999999.0)
-        case builtins.str:
-            return widgets.LineEdit()
-        case QtCore.QPoint:
-            return custom_widgets.PointEdit()
-        case QtCore.QRect:
-            return custom_widgets.RectEdit()
-        case QtGui.QRegion:
-            return custom_widgets.RegionEdit()
-        case QtCore.QSize:
-            return custom_widgets.SizeEdit()
-        case QtWidgets.QSizePolicy:
-            return custom_widgets.SizePolicyEdit()
-        case QtGui.QPalette:
-            return custom_widgets.PaletteEdit()
-        case QtGui.QIcon:
-            return custom_widgets.IconEdit()
-        case QtGui.QCursor:
-            return custom_widgets.CursorEdit()
-        case QtCore.QLocale:
-            return custom_widgets.LocaleEdit()
-        case QtGui.QFont:
-            return widgets.FontComboBox()
-        case QtGui.QColor:
-            return custom_widgets.ColorComboBox()
-        case enum.Flag:
-            return custom_widgets.EnumFlagWidget()
-        case enum.Enum:
-            return custom_widgets.EnumComboBox()
-        case _:
-            raise ValueError(typ)
 
 
 class WidgetEditor(widgets.ScrollArea):
@@ -73,10 +31,10 @@ class WidgetEditor(widgets.ScrollArea):
         self._metaobj = core.MetaObject(self._widget.metaObject())
         for i, prop in enumerate(self._metaobj.get_properties()):
             value = prop.read(self._widget)
-            typ = prop.get_meta_type().get_type()
+            # typ = prop.get_meta_type().get_type()
             name = prop.name()
             logger.info(f"setting {name} editor to {value}")
-            widget = widget_for_type(typ)
+            widget = datatypes.get_widget_for_value(value)
             widget.set_value(value)
             widget.value_changed.connect(self._on_value_change)
             widget.setEnabled(prop.isWritable())
@@ -119,13 +77,13 @@ class WidgetEditor(widgets.ScrollArea):
 
 if __name__ == "__main__":
     app = widgets.app()
-    container = widgets.Widget()
-    container.set_layout("horizontal")
-    w = widgets.PlainTextEdit(parent=container)
-    w2 = widgets.PlainTextEdit(parent=container)
-    container.box.add(w)
-    container.box.add(w2)
-    container.show()
+    # container = widgets.Widget()
+    # container.set_layout("horizontal")
+    w = widgets.PlainTextEdit()
+    # w2 = widgets.PlainTextEdit()
+    # container.box.add(w)
+    # container.box.add(w2)
+    w.show()
     editor = WidgetEditor(w)
     editor.show()
     with app.debug_mode():
