@@ -213,7 +213,6 @@ class PandasEvalFilterModel(BasePandasIndexFilterProxyModel):
 
 class PandasMultiStringColumnFilterModel(BasePandasIndexFilterProxyModel):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
         self._filters: dict[str, str] = {}
         super().__init__(**kwargs)
 
