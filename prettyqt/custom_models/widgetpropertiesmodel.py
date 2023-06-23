@@ -30,8 +30,8 @@ class WidgetPropertiesModel(core.AbstractTableModel):
     ]
 
     def __init__(self, widget: QtWidgets.QWidget, **kwargs):
-        self._widget = widget
-        self._metaobj = core.MetaObject(widget.metaObject())
+        self._widget = None
+        self._metaobj = None
         self.event_catcher = None
         self._handles: list[core.QMetaObject.Connection] = []
         super().__init__(**kwargs)
