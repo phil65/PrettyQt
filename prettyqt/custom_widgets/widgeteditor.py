@@ -15,26 +15,29 @@ class WidgetEditor(widgets.ScrollArea):
 
     def __init__(self, widget: QtWidgets.QWidget, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._widget = widget
+        self._qobject = widget
         self._initial_prop_values = {}
         self.event_catcher = eventfilters.EventCatcher(
-            exclude=QtCore.QEvent.Type.Paint, parent=self._widget
+            exclude=QtCore.QEvent.Type.Paint, parent=self._qobject
         )
         self.event_catcher.caught.connect(self._update_editors)
-        self._widget.installEventFilter(self.event_catcher)
+        self._qobject.installEventFilter(self.event_catcher)
         container = widgets.Widget()
         container.set_layout("form")
         self.setWidget(container)
         self.set_minimum_size(800, 1000)
         self._editors = bidict()
-        # self.add_widget(container)
-        self._metaobj = core.MetaObject(self._widget.metaObject())
+        # self.add_qobject(container)
+        self._metaobj = core.MetaObject(self._qobject.metaObject())
         for i, prop in enumerate(self._metaobj.get_properties()):
-            value = prop.read(self._widget)
+            value = prop.read(self._qobject)
             # typ = prop.get_meta_type().get_type()
             name = prop.name()
             logger.info(f"setting {name} editor to {value}")
             widget = datatypes.get_widget_for_value(value)
+            if widget is None:
+                logger.warning(f"No editor found for {value!r}")
+                continue
             widget.set_value(value)
             widget.value_changed.connect(self._on_value_change)
             widget.setEnabled(prop.isWritable())
@@ -46,7 +49,7 @@ class WidgetEditor(widgets.ScrollArea):
             if prop.hasNotifySignal():
                 notify_signal = prop.get_notify_signal()
                 signal_name = notify_signal.get_name()
-                signal = self._widget.__getattribute__(signal_name)
+                signal = self._qobject.__getattribute__(signal_name)
                 signal.connect(self._update_editors)
             self.ensureWidgetVisible(container)
         self.setWidgetResizable(True)
@@ -58,20 +61,21 @@ class WidgetEditor(widgets.ScrollArea):
         value = editor.get_value()
         value = datatypes.make_qtype(value)
         logger.info(f"setting {prop_name} to {value}")
-        prop.write(self._widget, value)
+        prop.write(self._qobject, value)
         # brute force
-        self._widget.updateGeometry()
-        self._widget.repaint()
-        if (parent := self._widget.parentWidget()) is not None:
-            parent.updateGeometry()
-            parent.repaint()
+        if isinstance(self._qobject, widgets.QWidget):
+            self._qobject.updateGeometry()
+            self._qobject.repaint()
+            if (parent := self._qobject.parentWidget()) is not None:
+                parent.updateGeometry()
+                parent.repaint()
 
     def _update_editors(self):
-        for i in range(self._widget.metaObject().propertyCount()):
-            prop = self._widget.metaObject().property(i)
+        for i in range(self._qobject.metaObject().propertyCount()):
+            prop = self._qobject.metaObject().property(i)
             prop_name = prop.name()
             editor = self._editors[prop_name]
-            value = prop.read(self._widget)
+            value = prop.read(self._qobject)
             editor.set_value(value)
 
 
