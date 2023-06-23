@@ -6,6 +6,7 @@ from .errormessagebox import ErrorMessageBox
 from .messagehandler import MessageHandler
 from .qobjectdetailsdialog import QObjectDetailsDialog
 
+import contextlib
 from collections.abc import Callable
 import time
 import functools
@@ -31,6 +32,13 @@ def timeit(func: Callable) -> Callable:
         return result
 
     return timeit_wrapper
+
+
+@contextlib.contextmanager
+def context_timer():
+    now = time.perf_counter()
+    yield
+    logger.info(time.perf_counter() - now)
 
 
 def for_all_methods(decorator: Callable) -> Callable:
@@ -59,8 +67,9 @@ class QtLogger(logging.Handler):
                 QtCore.qFatal(self.format(record))
 
 
-def proxy_comparer(proxy):
-    from prettyqt import core, widgets
+def proxy_comparer(proxy: QtCore.QAbstractProxyModel):
+    from prettyqt import core, custom_models, widgets
+
     w = widgets.Splitter("horizontal")
     while isinstance(proxy, core.QAbstractProxyModel):
         container = widgets.Widget()
@@ -68,8 +77,15 @@ def proxy_comparer(proxy):
         table = widgets.TableView()
         table.set_model(proxy)
         table.set_delegate("variant")
+        prop_table = widgets.TableView()
+        prop_table.set_delegate("variant")
+        model = custom_models.WidgetPropertiesModel(proxy)
+        prop_table.set_model(model)
         layout.add(widgets.Label(type(proxy).__name__))
-        layout.add(table)
+        col_splitter = widgets.Splitter("vertical")
+        col_splitter.add(prop_table)
+        col_splitter.add(table)
+        layout.add(col_splitter)
         w.add(container)
         proxy = proxy.sourceModel()
 
@@ -82,6 +98,7 @@ def proxy_comparer(proxy):
     layout.add(table)
     w.add(container)
     return w
+
 
 def is_deleted(obj) -> bool:
     match qt.API:
