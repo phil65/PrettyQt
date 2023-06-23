@@ -150,6 +150,10 @@ def get_widget_for_value(val, parent=None):
             return custom_widgets.PaletteEdit(parent=parent)
         case gui.QCursor():
             return custom_widgets.CursorEdit(parent=parent)
+        case gui.QIcon():
+            return custom_widgets.IconEdit(parent=parent)
+        case core.QLocale():
+            return custom_widgets.LocaleEdit(parent=parent)
         # case QtCore.QRectF():  # todo
         #     return custom_widgets.RectEdit(parent=parent)
     try:
