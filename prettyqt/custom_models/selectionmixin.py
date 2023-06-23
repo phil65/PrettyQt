@@ -13,7 +13,12 @@ class SelectionMixin:
         super().__init__(*args, **kwargs)
         self.selected = {}
 
-    def setData(self, index: core.ModelIndex, value, role) -> bool:
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if not index.isValid():
             return False
         elif role == constants.CHECKSTATE_ROLE:

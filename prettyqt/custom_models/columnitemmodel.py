@@ -104,7 +104,7 @@ class ColumnItemModelMixin:
         index: core.ModelIndex,
         value: Any,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
-    ):
+    ) -> bool:
         if not index.isValid():
             return False
         col = index.column()
@@ -114,7 +114,7 @@ class ColumnItemModelMixin:
         self.dataChanged.emit(index, index)
         return True
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():
             return super().flags(index)  # TODO: whats best here?
         col = index.column()

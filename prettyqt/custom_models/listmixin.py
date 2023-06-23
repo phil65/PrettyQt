@@ -17,7 +17,7 @@ class ListMixin:
         index: core.ModelIndex,
         value: Any,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
-    ):
+    ) -> bool:
         if role == constants.USER_ROLE:
             self.items[index.row()] = value
             self.update_row(index.row())

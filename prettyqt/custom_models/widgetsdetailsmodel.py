@@ -61,7 +61,12 @@ class WidgetsDetailsModel(core.AbstractTableModel):
             case constants.USER_ROLE:
                 return prop.read(widget)
 
-    def setData(self, index, value, role=constants.DISPLAY_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         prop = self.props[index.column()]
         widget = self.items[index.row()]
         match role:

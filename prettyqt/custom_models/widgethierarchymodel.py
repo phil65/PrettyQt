@@ -128,7 +128,12 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             case constants.SIZE_HINT_ROLE, _:
                 return QtCore.QSize(250, 35)
 
-    def setData(self, index: core.ModelIndex, value, role=constants.DISPLAY_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         prop = self.props[index.column()]
         widget = self.data_by_index(index).obj
         match role:

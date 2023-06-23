@@ -137,7 +137,12 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             case constants.USER_ROLE, _:
                 return prop.read(self._widget)
 
-    def setData(self, index: QtCore.QModelIndex, value, role=constants.DISPLAY_ROLE):
+    def setData(
+        self,
+        index: core.ModelIndex,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ) -> bool:
         if not index.isValid():
             return None
         prop = self._metaobj.get_property(index.row())
