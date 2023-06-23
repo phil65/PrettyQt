@@ -14,9 +14,10 @@ logger = logging.getLogger(__name__)
 class ColumnMapping:
     formatter: str | Callable
     header: str
+    flags: constants.ItemFlag = constants.IS_ENABLED | constants.IS_SELECTABLE
 
 
-class ColumnJoinerProxyModel(core.IdentityProxyModel):
+class ColumnJoinerProxyModel(core.AbstractProxyModel):
     ID = "column_join"
 
     def __init__(self, *args, **kwargs):
@@ -31,31 +32,28 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
             else self.sourceModel().columnCount(parent) + len(self.mapping)
         )
 
+    def rowCount(self, parent: core.ModelIndex | None = None):
+        return self.sourceModel().rowCount()
+
+    def flags(self, index: core.ModelIndex):
+        column = index.column()
+        if self.is_additional_column(column):
+            return self.mapping[column - self.columnCount()].flags
+        return self.sourceModel().flags(index)
+
     def is_additional_column(self, column: int):
         col_count = self.sourceModel().columnCount()
-        return col_count <= column <= col_count + len(self.mapping)
+        return column >= col_count
 
     def index(self, row, column, parent):
-        extra_col = self.sourceModel().columnCount(parent) - column
-        if extra_col >= 0:
-            pointer = super().index(row, 0, parent).internalPointer()
-            return self.createIndex(row, column, pointer)
-        return super().index(row, column, parent)
+        if self.is_additional_column(column):
+            return self.createIndex(row, column, core.ModelIndex())
+        return self.sourceModel().index(row, column, parent)
 
-    def parent(self, child=None):
-        if child is None:
-            return super().parent()
-        extra_col = self.sourceModel().columnCount() - child.column()
-        if extra_col >= 0:
-            proxy_sibling = self.createIndex(child.row(), 0, child.internalPointer())
-            return super().parent(proxy_sibling)
-        return super().parent(child)
-
-    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        extra_col = self.sourceModel().columnCount() - index.column()
-        if extra_col >= 0:
-            return constants.IS_SELECTABLE | constants.IS_ENABLED
-        return self.sourceModel().flags(self.mapToSource(index))
+    def parent(self, index=None):
+        if self.is_additional_column(index.column()):
+            return core.ModelIndex()
+        return self.sourceModel().parent(index)
 
     def data(
         self,
@@ -91,7 +89,7 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
         if orientation == constants.HORIZONTAL:
             if self.is_additional_column(section):
                 if role == constants.DISPLAY_ROLE:
-                    mapper = self.mapping[section - section]
+                    mapper = self.mapping[section - self.columnCount()]
                     return mapper.header
                 return None
         return super().headerData(section, orientation, role)
@@ -100,43 +98,16 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
         if not proxy_index.isValid():
             return core.ModelIndex()
         column = proxy_index.column()
-        if column >= self.sourceModel().columnCount():
+        if self.is_additional_column(column):
             return core.ModelIndex()
-        return super().mapToSource(proxy_index)
+        return self.sourceModel().index(
+            proxy_index.row(), proxy_index.column(), proxy_index.parent()
+        )
 
-    # def mapFromSource(self, index):
-    #     return self.index(index.row(), index.column(), index.parent())
-
-    def mapSelectionToSource(self, selection):
-        source_selection = core.ItemSelection()
-        if self.sourceModel() is None:
-            return source_selection
-        source_col_count = self.sourceModel().columnCount()
-        for item in selection:
-            top_left = item.topLeft()
-            bottom_right = item.bottomRight()
-            if bottom_right.column() >= source_col_count:
-                bottom_right = bottom_right.sibling(
-                    bottom_right.row(), source_col_count - 1
-                )
-            irange = core.ItemSelectionRange(
-                self.mapToSource(top_left), self.mapToSource(bottom_right)
-            )
-            iselection = core.ItemSelection()
-            iselection << irange
-            source_selection.merge(iselection, core.ItemSelection.SelectionFlag.Select)
-        return source_selection
-
-    def buddy(self, proxy_index):
-        column = proxy_index.column()
-        if column >= self.sourceModel().columnCount():
-            return proxy_index
-        return super().buddy(proxy_index)
-
-    def sibling(self, row, column, index):
-        if row == index.row() and column == index.column():
-            return index
-        return self.index(row, column, self.parent(index))
+    def mapFromSource(self, index):
+        if self.is_additional_column(index.column()):
+            return core.ModelIndex()
+        return self.sourceModel().index(index.row(), index.column(), index.parent())
 
     def add_mapping(self, column_name: str, formatter: str):
         """Form: for example "{0} ({1}), with numbers referencing the columns."""
@@ -144,36 +115,16 @@ class ColumnJoinerProxyModel(core.IdentityProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui, widgets
 
     app = widgets.app()
-
-    # tree = debugging.example_tree()
-    class Model(core.AbstractTableModel):
-        def rowCount(self, index=None):
-            return 50
-
-        def columnCount(self, index=None):
-            return 50
-
-        def data(self, index, role=None):
-            match role, index.column():
-                case constants.DISPLAY_ROLE | constants.USER_ROLE, _:
-                    return "test"
-
-        def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-            return (
-                super().flags(index)
-                | constants.IS_EDITABLE
-                | constants.IS_ENABLED
-                | constants.IS_SELECTABLE
-            )
-
-    model = Model()
+    dct = dict(a=[1, 2, 3], b=["d", "e", "f"], c=["te", "st", "test"], d=["x", "y", "z"])
+    model = gui.StandardItemModel.from_dict(dct)
     table = widgets.TableView()
     proxy = ColumnJoinerProxyModel()
     proxy.setSourceModel(model)
     proxy.add_mapping(column_name="header", formatter="{0} {1}")
+    proxy.add_mapping(column_name="header2", formatter="{2} {3}")
     table.set_model(proxy)
     table.show()
     table.resize(1000, 1000)
