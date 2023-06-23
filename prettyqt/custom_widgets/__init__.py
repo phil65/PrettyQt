@@ -5,6 +5,7 @@ from .elidedlabel import ElidedLabel
 from .editors.listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
+from .widgeteditor import WidgetEditor
 from .collapsibleframe import CollapsibleFrame
 from .clickablelabel import ClickableLabel
 from .orientedtableview import OrientedTableView
@@ -70,6 +71,7 @@ __all__ = [
     "ListInput",
     "BoolDictToolButton",
     "OptionalWidget",
+    "WidgetEditor",
     "CollapsibleFrame",
     "CompletionWidget",
     "ExpandableLine",
