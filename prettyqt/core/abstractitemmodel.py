@@ -323,6 +323,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
     ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
         """Search the tree for indexes with a given value in given role.
 
+        Compared to QAbstractItemModel.match, this method allows to set a maximum
+        search depth and passing several values to search for as a list.
+
         Arguments:
             value: Item or list of items to search for.
             role: Index role to search in.
