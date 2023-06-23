@@ -144,22 +144,23 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         self.appendRow([item])
         return item
 
+    @classmethod
+    def from_dict(cls, dct: dict):
+        model = cls()
+        model.setHorizontalHeaderLabels(list(dct.keys()))
+        for column, v in enumerate(dct.values()):
+            for row, item in enumerate(v):
+                item = gui.StandardItem(str(item))
+                model.setItem(row, column, item)
+        return model
+
 
 if __name__ == "__main__":
-    import pickle
-
     from prettyqt import widgets
 
-    model = StandardItemModel()
-    model.add("test")
+    model = StandardItemModel.from_dict(dict(a=[1, 2, 3], b=["d", "e", "f"]))
     app = widgets.app()
-    w = widgets.ListView()
+    w = widgets.TableView()
     w.set_model(model)
-    model += gui.StandardItem("Item")
-    with open("data.pkl", "wb") as writer:
-        pickle.dump(model, writer)
-    with open("data.pkl", "rb") as reader:
-        model = pickle.load(reader)
-    model += gui.StandardItem("Item2")
     w.show()
     app.exec()
