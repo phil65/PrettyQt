@@ -96,7 +96,7 @@ class BasePandasIndexFilterProxyModel(core.IdentityProxyModel):
         )
 
 
-class PandasStringColumnFilterModel(BasePandasIndexFilterProxyModel):
+class PandasStringColumnFilterProxyModel(BasePandasIndexFilterProxyModel):
     """Basically filters a dataframe based on df.iloc[:, column].str.somemethod(term)."""
 
     ID = "pandas_str_filter"
@@ -183,7 +183,7 @@ class PandasStringColumnFilterModel(BasePandasIndexFilterProxyModel):
     na_value = core.Property(bool, get_na_value, set_na_value)
 
 
-class PandasEvalFilterModel(BasePandasIndexFilterProxyModel):
+class PandasEvalFilterProxyModel(BasePandasIndexFilterProxyModel):
     ID = "pandas_eval_filter"
 
     def __init__(self, **kwargs):
@@ -238,7 +238,7 @@ class PandasMultiStringColumnFilterModel(BasePandasIndexFilterProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import debugging, widgets
     from prettyqt.qtpandas import pandasmodels
 
     app = widgets.app()
@@ -246,19 +246,10 @@ if __name__ == "__main__":
     b = pd.Series(["a", "b", "c", "fjkdsj", "fdf"] * 100000, dtype=pd.StringDtype())
     df = pd.DataFrame(dict(a=a, b=b))
     model = pandasmodels.DataTableWithHeaderModel(df)
-    table = widgets.TableView()
-    lineedit = widgets.LineEdit()
-    container = widgets.Widget()
-    layout = container.set_layout("vertical")
-    layout.add(lineedit)
-    layout.add(table)
-    proxy = PandasEvalFilterModel(parent=table)
+    proxy = PandasStringColumnFilterProxyModel(parent=model)
     proxy.setSourceModel(model)
-    print(proxy._filter_index.dtype)
-    print(proxy._source_to_proxy.dtype)
-    print(proxy._proxy_to_source.dtype)
-    lineedit.value_changed.connect(proxy.set_search_term)
-    table.set_model(proxy)
-    container.show()
+    w = debugging.proxy_comparer(proxy)
+    w.show()
     with app.debug_mode():
         app.exec()
+
