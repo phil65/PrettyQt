@@ -69,6 +69,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
 
     def set_header_title(self, title: str):
         self._header_title = title
+        self.headerDataChanged.emit(constants.HORIZONTAL, 0, 0)
 
     def get_header_title(self) -> str:
         return self._header_title
