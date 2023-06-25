@@ -33,9 +33,10 @@ class AnimationTimer(core.Timer):
 
 
 class AnimationWrapper:
-    def __init__(self, animation: core.PropertyAnimation, fx: Fx):
-        self._animation = animation
+    def __init__(self, prop_name: str, fx: Fx):
         self.fx = fx
+        self._widget = fx._widget
+        self._property_name = prop_name
 
     def animate(
         self,
@@ -48,6 +49,8 @@ class AnimationWrapper:
         single_shot: bool = True,
     ) -> AnimationTimer:
         """General animation with global coordinates."""
+        self._animation = core.PropertyAnimation()
+        self._animation.apply_to(self._widget.__getattr__(self._property_name))
         self._animation.set_start_value(start)
         self._animation.set_end_value(end)
         self._animation.set_easing(easing)
@@ -68,9 +71,11 @@ class AnimationWrapper:
         single_shot: bool = True,
     ) -> AnimationTimer:
         """Makes property transition from current value to given end value."""
+        self._animation = core.PropertyAnimation()
+        self._animation.apply_to(self._widget.__getattr__(self._property_name))
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
-        start: core.VariantType = obj.property(prop_name)
+        start: datatypes.VariantType = obj.property(prop_name)
         end = datatypes.align_types(start, end)
         if isinstance(end, core.QPoint | core.QRect | core.QPointF | core.QRectF):
             end = obj.map_to("parent", end)
@@ -97,6 +102,8 @@ class AnimationWrapper:
         single_shot: bool = True,
     ) -> AnimationTimer:
         """Makes property transition from given start value to its current value."""
+        self._animation = core.PropertyAnimation()
+        self._animation.apply_to(self._widget.__getattr__(self._property_name))
         prop_name = self._animation.get_property_name()
         obj = self._animation.targetObject()
         end: core.VariantType = obj.property(prop_name)
@@ -126,6 +133,8 @@ class AnimationWrapper:
         reverse: bool = False,
     ) -> core.PropertyAnimation:
         """Starts property transition from start to end when given event occurs."""
+        self._animation = core.PropertyAnimation()
+        self._animation.apply_to(self._widget.__getattr__(self._property_name))
         if start is None:
             prop_name = self._animation.get_property_name()
             obj = self._animation.targetObject()
@@ -160,20 +169,11 @@ class Fx:
     def __getitem__(self, value: str) -> AnimationWrapper:
         value = helpers.to_lower_camel(value)
         logger.debug(f"Building {value!r} PropertyAnimation for {self._widget!r}")
-        anim = core.PropertyAnimation()
-        anim.apply_to(self._widget.__getattr__(value))
-        # pytype = meta.get_property(value).get_pyhon_type()
-        # keep a reference
-        self._wrapper = AnimationWrapper(anim, self)
+        self._wrapper = AnimationWrapper(value, self)
         return self._wrapper
 
     # def __getattr__(self, attr):
     #     return self.__getitem__(attr)
-
-    # def __dir__(self):
-    #     props = self._meta.get_properties(only_writable=True)
-    #     prop_names = [p.get_name() for p in props]
-    #     return super().__dir__() + prop_names
 
     def set_colorize_effect(
         self,
