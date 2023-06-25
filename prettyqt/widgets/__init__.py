@@ -7,13 +7,7 @@ from __future__ import annotations
 
 import sys
 
-from prettyqt.qt import QtWidgets
-
-
-def __getattr__(name: str):
-    attr = getattr(QtWidgets, name, None)
-    return attr if attr is not None else getattr(QtWidgets, f"Q{name}")
-
+from prettyqt.qt.QtWidgets import *  # noqa: F403
 
 from .style import Style, StyleMixin
 from .commonstyle import CommonStyle, CommonStyleMixin
@@ -418,18 +412,18 @@ __all__ = [
     "UndoView",
     "DataWidgetMapper",
     "SizeGrip",
-    "KeyEventTransition",
-    "MouseEventTransition",
-    "GraphicsSceneHoverEvent",
-    "GraphicsSceneMouseEvent",
-    "GraphicsSceneWheelEvent",
-    "GraphicsSceneContextMenuEvent",
-    "GraphicsSceneDragDropEvent",
-    "GraphicsSceneHelpEvent",
-    "GraphicsSceneMoveEvent",
-    "GraphicsSceneResizeEvent",
-    "GraphicsSceneEvent",
-    "GestureEvent",
+    # "KeyEventTransition",
+    # "MouseEventTransition",
+    # "GraphicsSceneHoverEvent",
+    # "GraphicsSceneMouseEvent",
+    # "GraphicsSceneWheelEvent",
+    # "GraphicsSceneContextMenuEvent",
+    # "GraphicsSceneDragDropEvent",
+    # "GraphicsSceneHelpEvent",
+    # "GraphicsSceneMoveEvent",
+    # "GraphicsSceneResizeEvent",
+    # "GraphicsSceneEvent",
+    # "GestureEvent",
     "PlainTextDocumentLayout",
     "Gesture",
     "GestureMixin",

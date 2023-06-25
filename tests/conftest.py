@@ -37,7 +37,7 @@ def qapp_args():
 class QtTester:
     @staticmethod
     def send_keypress(widget: QtWidgets.QWidget, key):
-        event = gui.KeyEvent(
+        event = gui.QKeyEvent(
             QtCore.QEvent.Type.KeyPress,
             key,
             QtCore.Qt.KeyboardModifier(0),  # type: ignore
@@ -46,7 +46,7 @@ class QtTester:
 
     @staticmethod
     def send_mousepress(widget: QtWidgets.QWidget, key):
-        event = gui.MouseEvent(  # type: ignore
+        event = gui.QMouseEvent(  # type: ignore
             QtCore.QEvent.Type.MouseButtonRelease,
             QtCore.QPointF(0, 0),
             QtCore.QPointF(0, 0),
@@ -62,7 +62,7 @@ class QtTester:
     ):
         if target is None:
             target = QtCore.QPointF(0, 0)
-        event = gui.MouseEvent(  # type: ignore
+        event = gui.QMouseEvent(  # type: ignore
             QtCore.QEvent.Type.MouseButtonRelease,
             target,
             QtCore.QPointF(0, 0),

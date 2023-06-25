@@ -5,11 +5,9 @@ Contains QtGui-based classes
 from __future__ import annotations
 import sys
 
-from prettyqt.qt import QtGui
 
-def __getattr__(name: str):
-    attr = getattr(QtGui, name, None)
-    return attr if attr is not None else getattr(QtGui, f"Q{name}")
+from prettyqt.qt.QtGui import *  # noqa: F403
+
 
 
 from .backingstore import BackingStore
@@ -131,43 +129,8 @@ __all__ = [
     "BackingStore",
     "StyleHints",
     "PageRanges",
-    "KeyEvent",
-    "MouseEvent",
-    "WheelEvent",
-    "ActionEvent",
-    "ShowEvent",
-    "ContextMenuEvent",
-    "ResizeEvent",
-    "NativeGestureEvent",
-    "InputMethodQueryEvent",
-    "InputMethodEvent",
     "TextObjectInterface",
     "SessionManager",
-    "CloseEvent",
-    "DragLeaveEvent",
-    "MoveEvent",
-    "HelpEvent",
-    "HideEvent",
-    "HoverEvent",
-    "DragMoveEvent",
-    "TouchEvent",
-    "TabletEvent",
-    "WindowStateChangeEvent",
-    "FileOpenEvent",
-    "IconDragEvent",
-    "InputEvent",
-    "PaintEvent",
-    "ShortcutEvent",
-    "StatusTipEvent",
-    "EnterEvent",
-    "ExposeEvent",
-    "WhatsThisClickedEvent",
-    "ScrollEvent",
-    "ScrollPrepareEvent",
-    "PlatformSurfaceEvent",
-    "DropEvent",
-    "DragEnterEvent",
-    "FocusEvent",
     "Drag",
     "Screen",
     "Gradient",

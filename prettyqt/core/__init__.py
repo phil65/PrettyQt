@@ -11,10 +11,7 @@ import sys
 from prettyqt.qt import QtCore
 
 
-def __getattr__(name: str):
-    attr = getattr(QtCore, name, None)
-    return attr if attr is not None else getattr(QtCore, f"Q{name}")
-
+from prettyqt.qt.QtCore import *  # noqa: F403
 
 from prettyqt.qt.QtCore import (
     qInstallMessageHandler as install_message_handler,
@@ -22,19 +19,23 @@ from prettyqt.qt.QtCore import (
     Signal,
     Property,
     QEnum as Enum,
-    # QtCriticalMsg as CriticalMsg,
-    # QtDebugMsg as DebugMsg,
-    # QtFatalMsg as FatalMsg,
-    # QtInfoMsg as InfoMsg,
-    # QtSystemMsg as SystemMsg,
-    # QtWarningMsg as WarningMsg,
+    QPoint as Point,
+    QPointF as PointF,
+    QModelIndex as ModelIndex,
+    QRect as Rect,
+    QRectF as RectF,
+    QtCriticalMsg as CriticalMsg,
+    QtDebugMsg as DebugMsg,
+    QtFatalMsg as FatalMsg,
+    QtInfoMsg as InfoMsg,
+    QtSystemMsg as SystemMsg,
+    QtWarningMsg as WarningMsg,
 )
 
 from .event import Event
 from .slot import Slot
 
 # from .property import Property
-from .persistentmodelindex import PersistentModelIndex
 from .loggingcategory import LoggingCategory
 from .timezone import TimeZone
 from .date import Date
@@ -178,13 +179,13 @@ def app(args: list[str] | None = None, **kwargs) -> CoreApplication:
 __all__ = [
     "app",
     "Event",
-    "ChildEvent",
-    "TimerEvent",
+    # "ChildEvent",
+    # "TimerEvent",
     "Enum",
-    "ClassInfo",
-    "Q_ARG",
-    "Q_RETURN_ARG",
-    "DynamicPropertyChangeEvent",
+    # "ClassInfo",
+    # "Q_ARG",
+    # "Q_RETURN_ARG",
+    # "DynamicPropertyChangeEvent",
     "MetaEnum",
     "LoggingCategory",
     "PersistentModelIndex",
@@ -293,7 +294,7 @@ __all__ = [
     "ModelIndex",
     "ThreadPool",
     "Signal",
-    "SignalInstance",
+    # "SignalInstance",
     "AbstractItemModel",
     "AbstractItemModelMixin",
     "AbstractProxyModel",
@@ -310,14 +311,14 @@ __all__ = [
     "AbstractTableModelMixin",
     "StandardPaths",
     "XmlStreamReader",
-    "AbstractState",
-    "FinalState",
-    "HistoryState",
-    "State",
-    "StateMachine",
-    "AbstractTransition",
-    "SignalTransition",
-    "EventTransition",
+    # "AbstractState",
+    # "FinalState",
+    # "HistoryState",
+    # "State",
+    # "StateMachine",
+    # "AbstractTransition",
+    # "SignalTransition",
+    # "EventTransition",
     "CommandLineOption",
     "CommandLineParser",
     "install_message_handler",
