@@ -160,6 +160,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         validator: gui.QValidator | ValidatorStr | datatypes.PatternType | None,
         strict: bool = True,
         empty_allowed: bool | None = None,
+        append: bool = False,
         **kwargs,
     ) -> gui.QValidator:
         from prettyqt import custom_validators
@@ -167,7 +168,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         match validator:
             case str() if "|" in validator:
                 validators = [get_validator(i, **kwargs) for i in validator.split("|")]
-                validator = custom_validators.AndValidator(validators)
+                validator: widgets.QValidator = custom_validators.AndValidator(validators)
             case str() | re.Pattern() | core.QRegularExpression():
                 validator = get_validator(validator, **kwargs)
             case None | gui.QValidator():
@@ -184,6 +185,8 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
             )
         if not strict:
             validator = custom_validators.NotStrictValidator(validator)
+        if append and (prev := widget.validator()) is not None:
+            validator = custom_validators.AndValidator([prev, validator])
         self.setValidator(validator)
         self._set_validation_color()
         return validator
