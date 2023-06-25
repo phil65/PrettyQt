@@ -27,6 +27,8 @@ from .editors.sizepolicyedit import SizePolicyEdit
 from .editors.regexlineedit import RegexLineEdit
 from .editors.regexinput import RegexInput
 from .editors.mappedcheckbox import MappedCheckBox
+from .editors.sliceedit import SliceEdit
+from .editors.rangeedit import RangeEdit
 from .logtextedit import LogTextEdit
 from .editors.enumflagwidget import EnumFlagWidget
 from .editors.flagselectionwidget import FlagSelectionWidget
@@ -85,6 +87,8 @@ __all__ = [
     "RegexLineEdit",
     "RegexInput",
     "MappedCheckBox",
+    "SliceEdit",
+    "RangeEdit",
     "LogTextEdit",
     "EnumFlagWidget",
     "FlagSelectionWidget",
