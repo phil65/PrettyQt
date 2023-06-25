@@ -25,7 +25,7 @@ Example: The class "TreeView" inherits from original Qt Class "QTreeView" and ge
 from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
 "FrameMixin", "WidgetMixin" and "ObjectMixin".
 
-To illustrate this, we will use our included models:
+To illustrate this, we will use some of our included models:
 
     from prettyqt import custom_models, widgets
 
@@ -55,12 +55,14 @@ and using it can be quite cumbersome for Python developers. (it´s statically ty
 very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
 
 - adding more powerful methods to the classes, which accept more types and have more options (in form of keyword arguments)
-- points, sizes and rectangles can also be passed to most important methods as tuples.
+- doing conversions for method parameters to lessen the strictness for types. (Example: points, sizes and rectangles can also be passed to most important methods as tuples.)
 - raising Exceptions or returning None instead of returning -1 or invalid objects.
-- all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience.
-- python regex patterns (re.Pattern) also possible for lot of methods.
+- all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )
 - adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
 
+
+The minimum supported python version is 3.10. Since larger parts of the library are dealing with type conversions, the match-case statement is essential, therefore makin it impossible to use older Python versions.
+The minimum supported Qt version is 6.5, since it is the first Qt Version which is up-to-par featurewise with Qt5.
 
 
 Apart from the 3D related modules (Qt3D, QtDataVizualization), QtXml and QtSql,
