@@ -48,12 +48,18 @@ def color_text(input_text: str, text: str, color: str, case_sensitive: bool = Fa
         return x if case_sensitive else x.lower()
 
     output_text = ""
+    to_color = ""
     for char in text:
         if input_text and converter(char) == converter(input_text[0]):
-            output_text += bold(colored(char, color))
+            to_color += char
             input_text = input_text[1:]
         else:
+            if to_color:
+                output_text += bold(colored(to_color, color))
+                to_color = ""
             output_text += char
+    if to_color:
+        output_text += bold(colored(to_color, color))
     return output_text
 
 
