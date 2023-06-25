@@ -448,7 +448,7 @@ class FSSpecTreeModel(
     # def dragEnterEvent(self, event):
     #     event.accept() if event.mimeData().hasUrls() else super().dragEnterEvent(event)
 
-    def removeRows(self, row: int, count: int, parent: core.Modelindex):
+    def removeRows(self, row: int, count: int, parent: core.ModelIndex):
         # end_row = row + count - 1
         # with self.remove_rows(row, end_row, parent):
         #     for i in range(end_row, row - 1, -1):

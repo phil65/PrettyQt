@@ -65,7 +65,7 @@ class BasePandasIndexFilterProxyModel(core.IdentityProxyModel):
 
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
-    ) -> core.Modelindex:
+    ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         source = self.sourceModel()
         if row < 0 or column < 0 or source is None or row >= self._row_count:
@@ -75,7 +75,7 @@ class BasePandasIndexFilterProxyModel(core.IdentityProxyModel):
         source_index = source.index(row_pos, column, source_parent)
         return self.mapFromSource(source_index)
 
-    def mapToSource(self, proxy_idx: core.ModelIndex) -> core.Modelindex:
+    def mapToSource(self, proxy_idx: core.ModelIndex) -> core.ModelIndex:
         """Map index to source by using proxy-to-source map."""
         source = self.sourceModel()
         if (

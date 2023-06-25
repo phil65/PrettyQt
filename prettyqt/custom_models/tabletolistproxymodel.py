@@ -42,7 +42,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
 
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
-    ) -> core.Modelindex:
+    ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         source = self.sourceModel()
         if row < 0 or column < 0 or source is None:
@@ -52,7 +52,7 @@ class TableToListProxyModel(core.IdentityProxyModel):
         source_index = source.index(row // colcount, row % colcount, source_parent)
         return self.mapFromSource(source_index)
 
-    def mapToSource(self, proxy_idx: core.ModelIndex) -> core.Modelindex:
+    def mapToSource(self, proxy_idx: core.ModelIndex) -> core.ModelIndex:
         source = self.sourceModel()
         if source is None or not proxy_idx.isValid():
             return core.ModelIndex()

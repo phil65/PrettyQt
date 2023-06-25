@@ -39,7 +39,7 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
 
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
-    ) -> core.Modelindex:
+    ) -> core.ModelIndex:
         parent = parent or core.ModelIndex()
         source = self.sourceModel()
         if row < 0 or column < 0 or source is None:
@@ -52,7 +52,7 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
         source_index = source.index(row_pos, col_pos, source_parent)
         return self.mapFromSource(source_index)
 
-    def mapToSource(self, proxy_idx: core.ModelIndex) -> core.Modelindex:
+    def mapToSource(self, proxy_idx: core.ModelIndex) -> core.ModelIndex:
         """Map index to source by calculating position from slice values.
 
         source pos = slice start + proxy pos * slice step)
