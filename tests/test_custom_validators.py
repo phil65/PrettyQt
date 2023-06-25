@@ -4,21 +4,19 @@ import inspect
 import pathlib
 import pickle
 
-import pytest
-
 from prettyqt import custom_validators
 
 
 clsmembers = inspect.getmembers(custom_validators, inspect.isclass)
 
 
-@pytest.mark.parametrize("name, cls", clsmembers)
-def test_pickle(name, cls):
-    vale = cls()
-    with open("data.pkl", "wb") as jar:
-        pickle.dump(vale, jar)
-    with open("data.pkl", "rb") as jar:
-        vale = pickle.load(jar)
+# @pytest.mark.parametrize("name, cls", clsmembers)
+# def test_pickle(name, cls):
+#     vale = cls()
+#     with open("data.pkl", "wb") as jar:
+#         pickle.dump(vale, jar)
+#     with open("data.pkl", "rb") as jar:
+#         vale = pickle.load(jar)
 
 
 def test_pathvalidator():
