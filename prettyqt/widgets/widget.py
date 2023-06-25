@@ -405,26 +405,19 @@ class WidgetMixin(core.ObjectMixin):
         """Set foreground role for this widget."""
         return gui.palette.ROLE.inverse[self.foregroundRole()]
 
-    def set_foreground_role(self, role: gui.palette.RoleStr):
+    def set_foreground_role(self, role: gui.palette.RoleStr | gui.Palette.ColorRole):
         """Set foreground role for this widget."""
-        if role not in gui.palette.ROLE:
-            raise InvalidParamError(role, gui.palette.ROLE)
-        self.setForegroundRole(gui.palette.ROLE[role])
+        self.setForegroundRole(gui.palette.ROLE.get_enum_value(role))
 
     def get_background_role(self) -> gui.palette.RoleStr:
         """Get background role for this widget."""
         return gui.palette.ROLE.inverse[self.backgroundRole()]
 
-    def set_background_role(self, role: gui.palette.RoleStr):
+    def set_background_role(self, role: gui.palette.RoleStr | gui.Palette.ColorRole):
         """Get foreground role for this widget."""
-        if role not in gui.palette.ROLE:
-            raise InvalidParamError(role, gui.palette.ROLE)
-        self.setBackgroundRole(gui.palette.ROLE[role])
+        self.setBackgroundRole(gui.palette.ROLE.get_enum_value(role))
 
     def set_window_flags(self, *flags: constants.WindowTypeStr, append: bool = False):
-        for flag in flags:
-            if flag not in constants.WINDOW_TYPE:
-                raise InvalidParamError(flag, constants.WINDOW_TYPE)
         result = constants.WINDOW_TYPE.merge_flags(flags)
         if append:
             result = result | self.windowFlags()
@@ -472,18 +465,15 @@ class WidgetMixin(core.ObjectMixin):
                 raise InvalidParamError(attr, constants.WIDGET_ATTRIBUTE)
             self.setAttribute(constants.WIDGET_ATTRIBUTE[attr], state)
 
-    def set_modality(self, modality: constants.WindowModalityStr):
+    def set_modality(
+        self, modality: constants.WindowModalityStr | constants.WindowModality
+    ):
         """Set modality for the dialog.
 
         Args:
             modality: modality for the main window
-
-        Raises:
-            InvalidParamError: modality type does not exist
         """
-        if modality not in constants.WINDOW_MODALITY:
-            raise InvalidParamError(modality, constants.WINDOW_MODALITY)
-        self.setWindowModality(constants.WINDOW_MODALITY[modality])
+        self.setWindowModality(constants.WINDOW_MODALITY.get_enum_value(modality))
 
     def get_modality(self) -> constants.WindowModalityStr:
         """Get the current modality modes as a string.
@@ -590,18 +580,15 @@ class WidgetMixin(core.ObjectMixin):
         yield font
         self.setFont(font)
 
-    def set_context_menu_policy(self, policy: constants.ContextPolicyStr):
+    def set_context_menu_policy(
+        self, policy: constants.ContextPolicyStr | constants.ContextMenuPolicy
+    ):
         """Set contextmenu policy for given item view.
 
         Args:
             policy: contextmenu policy to use
-
-        Raises:
-            InvalidParamError: policy does not exist
         """
-        if policy not in constants.CONTEXT_POLICY:
-            raise InvalidParamError(policy, constants.CONTEXT_POLICY)
-        self.setContextMenuPolicy(constants.CONTEXT_POLICY[policy])
+        self.setContextMenuPolicy(constants.CONTEXT_POLICY.get_enum_value(policy))
 
     def get_context_menu_policy(self) -> constants.ContextPolicyStr:
         """Return current contextmenu policy.
@@ -611,18 +598,13 @@ class WidgetMixin(core.ObjectMixin):
         """
         return constants.CONTEXT_POLICY.inverse[self.contextMenuPolicy()]
 
-    def set_window_state(self, policy: constants.WindowStateStr):
+    def set_window_state(self, state: constants.WindowStateStr | constants.WindowState):
         """Set window state for given item view.
 
         Args:
-            policy: window state to use
-
-        Raises:
-            InvalidParamError: policy does not exist
+            state: window state to use
         """
-        if policy not in constants.WINDOW_STATES:
-            raise InvalidParamError(policy, constants.WINDOW_STATES)
-        self.setWindowState(constants.WINDOW_STATES[policy])
+        self.setWindowState(constants.WINDOW_STATES.get_enum_value(state))
 
     def get_window_state(self) -> constants.WindowStateStr:
         """Return current window state.
@@ -840,12 +822,7 @@ class WidgetMixin(core.ObjectMixin):
 
         Args:
             policy (str): Focus policy
-
-        Raises:
-            InvalidParamError: Description
         """
-        if policy not in constants.FOCUS_POLICY:
-            raise InvalidParamError(policy, constants.FOCUS_POLICY)
         self.setFocusPolicy(constants.FOCUS_POLICY[policy])
 
     def get_focus_policy(self) -> constants.FocusPolicyStr:
@@ -955,7 +932,10 @@ class Widget(WidgetMixin, QtWidgets.QWidget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = widgets.RadioButton("tsd")
+    widget = widgets.TableView()
+    meta = widget.get_metaobject()
+    prop = meta.get_property("editTriggers")
+    print(list(prop.read(widget)))
     widget2 = Widget(status_tip="trekk", whats_this="kfjk", minimum_width=None)
     # widget.play_animation(
     #     "property",

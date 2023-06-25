@@ -12,8 +12,8 @@ import bidict as bdct
 
 logger = logging.getLogger(__name__)
 
-KT = TypeVar("KT")
-VT = TypeVar("VT")
+KT = TypeVar("KT", bound=str)
+VT = TypeVar("VT", bound=enum.Enum)
 
 
 class bidict(bdct.bidict[KT, VT]):
@@ -30,14 +30,10 @@ class bidict(bdct.bidict[KT, VT]):
         except KeyError as e:
             raise InvalidParamError(item, list(self.keys())) from e
 
-    def get_list(self, flag: int | enum.Enum) -> list[KT]:
-        if isinstance(flag, enum.Enum):
-            flag = flag.value
-        return [k for k, v in self.items() if v.value & flag]
+    def get_list(self, flag: enum.Enum) -> list[KT]:
+        return [k for k, v in self.items() if v & flag]
 
-    def get_dict(self, flag: int | enum.Enum) -> dict[KT, VT]:
-        if isinstance(flag, enum.Enum):
-            flag = flag.value
+    def get_dict(self, flag: enum.Enum) -> dict[KT, VT]:
         return {k: v & flag for k, v in self.items()}
 
     # def get_flag(self, **kwargs) -> dict[str, Any]:
@@ -49,6 +45,8 @@ class bidict(bdct.bidict[KT, VT]):
     def merge_flags(self, flags: Iterable[KT]) -> VT:
         return functools.reduce(operator.ior, [self[t] for t in flags])
 
+    def get_enum_value(self, value: KT | VT) -> VT:
+        return self[value] if isinstance(value, str) else value
 
 class InvalidParamError(ValueError):
     """Exception raised for invalid params in method calls.
