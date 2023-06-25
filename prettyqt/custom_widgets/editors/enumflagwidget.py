@@ -17,8 +17,17 @@ class EnumFlagWidget(widgets.ToolButton):
         self.set_popup_mode("instant")
 
     def _on_menu_click(self):
-        self.set_text(" | ".join(i.name for i in self.get_value()))
-        self.value_changed.emit(self.get_value())
+        values = []
+        value = self.get_value()
+        for i in self._enum_class.__members__.values():
+            if i.value == 0:
+                continue
+            # self._action_map[i].setChecked(value & i == i)
+            if value & i == i:
+                values.append(i)
+        text = " | ".join(i.name for i in values) if values else self._enum_class(0).name
+        self.set_text(text)
+        self.value_changed.emit(value)
 
     def clear(self):
         self._action_map = {}
@@ -31,6 +40,8 @@ class EnumFlagWidget(widgets.ToolButton):
         self._enum_class = enum
         self.clear()
         for i in self._enum_class.__members__.values():
+            if i.value == 0:
+                continue
             action = gui.Action(text=i.name.replace("_", " "), checkable=True)
             action.setData(i)
             self._action_map[i] = action
@@ -61,10 +72,15 @@ class EnumFlagWidget(widgets.ToolButton):
                 f"{type(value).__name__!r}"
             )
         # this filter shouldnt be needed, see https://bugreports.qt.io/browse/PYSIDE-2369
-        values = [i for i in value if i is not None]
-        for i in values:
-            self._action_map[i].setChecked(True)
-        self.set_text(" | ".join(i.name for i in values))
+        values = []
+        for i in self._enum_class.__members__.values():
+            if i.value == 0:
+                continue
+            if value & i == i:
+                self._action_map[i].setChecked(True)
+                values.append(i)
+        text = " | ".join(i.name for i in values) if values else self._enum_class(0).name
+        self.set_text(text)
 
     value = core.Property(enum.Flag, get_value, set_value, user=True)
     # enumClass = core.Property(type(enum.Flag), get_enum_class, set_enum_class)
@@ -78,8 +94,9 @@ if __name__ == "__main__":
     w = EnumFlagWidget()
     # w.set_value(flag.NoFocus)
     testwidget = widgets.TableView()
-    assert testwidget.focusPolicy().__class__ == constants.FocusPolicy.NoFocus.__class__
+    print(type(testwidget.focusPolicy()))
     # print(type(testwidget.focusPolicy()))
+    # print(repr(testwidget.focusPolicy()))
     w.set_value(testwidget.focusPolicy())
     w.value_changed.connect(print)
     w.show()
