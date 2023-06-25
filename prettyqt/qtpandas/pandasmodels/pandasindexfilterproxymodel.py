@@ -49,7 +49,7 @@ class BasePandasIndexFilterProxyModel(core.IdentityProxyModel):
         rowcount = self.sourceModel().rowCount()
         self._filter_index = np.full(rowcount, init_value, dtype=bool)
 
-    def rowCount(self, index=None):
+    def rowCount(self, index: core.ModelIndex | None = None):
         return self._row_count
 
     def headerData(

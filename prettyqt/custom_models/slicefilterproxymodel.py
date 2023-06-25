@@ -13,12 +13,12 @@ class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
 
     ID = "slice_filter"
 
-    def rowCount(self, index=None):
+    def rowCount(self, index: core.ModelIndex | None = None):
         rowcount = super().rowCount()
         # TODO: not sure if slice.stop = 0 is covered correctly?
         return min(rowcount, self.get_row_slice().stop or rowcount)
 
-    def columnCount(self, index=None):
+    def columnCount(self, index: core.ModelIndex | None = None):
         colcount = super().columnCount()
         return min(colcount, self.get_column_slice().stop or colcount)
 

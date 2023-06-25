@@ -174,7 +174,7 @@ if __name__ == "__main__":
             if role == constants.DISPLAY_ROLE:
                 return self.items[index.row()]
 
-        def columnCount(self, index=None):
+        def columnCount(self, index: core.ModelIndex | None = None):
             return 1
 
     model = Test()
