@@ -182,11 +182,11 @@ class WidgetMixin(core.ObjectMixin):
             case QtCore.QPoint() | QtCore.QPointF(), "parent":
                 return super().mapToParent(pos_or_rect)
             case QtCore.QRect() | QtCore.QRectF(), "window":
-                top_left = super().mapTo(widget.window(), pos_or_rect.topLeft())
-                bottom_right = super().mapTo(widget.window(), pos_or_rect.bottomRight())
+                top_left = super().mapTo(self.window(), pos_or_rect.topLeft())
+                bottom_right = super().mapTo(self.window(), pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
             case QtCore.QPoint() | QtCore.QPointF(), "window":
-                return super().mapTo(widget.window(), pos_or_rect)
+                return super().mapTo(self.window(), pos_or_rect)
             case QtCore.QRect() | QtCore.QRectF(), "global":
                 top_left = super().mapToGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapToGlobal(pos_or_rect.bottomRight())
@@ -225,11 +225,11 @@ class WidgetMixin(core.ObjectMixin):
             case QtCore.QPoint() | QtCore.QPointF(), "parent":
                 return super().mapFromParent(pos_or_rect)
             case QtCore.QRect() | QtCore.QRectF(), "window":
-                top_left = super().mapFrom(widget.window(), pos_or_rect.topLeft())
-                bottom_right = super().mapFrom(widget.window(), pos_or_rect.bottomRight())
+                top_left = super().mapFrom(self.window(), pos_or_rect.topLeft())
+                bottom_right = super().mapFrom(self.window(), pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
             case QtCore.QPoint() | QtCore.QPointF(), "window":
-                return super().mapFrom(widget.window(), pos_or_rect)
+                return super().mapFrom(self.window(), pos_or_rect)
             case QtCore.QRect() | QtCore.QRectF(), "global":
                 top_left = super().mapFromGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapFromGlobal(pos_or_rect.bottomRight())
