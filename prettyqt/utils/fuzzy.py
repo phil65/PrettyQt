@@ -42,15 +42,18 @@ def colored(text: str, color: str) -> str:
     return f"<font color={color!r}>{text}</font>"
 
 
+@functools.cache
 def color_text(input_text: str, text: str, color: str, case_sensitive: bool = False):
     """Color first occurences of input_text chars in text with given color."""
+
     def converter(x):
         return x if case_sensitive else x.lower()
 
+    input_text = input_text if case_sensitive else input_text.lower()
     output_text = ""
     to_color = ""
     for char in text:
-        if input_text and converter(char) == converter(input_text[0]):
+        if input_text and converter(char) == input_text[0]:
             to_color += char
             input_text = input_text[1:]
         else:
@@ -246,10 +249,6 @@ def get_best_matches(search_string: str, candidates: list[str]) -> list[tuple[st
 
 
 if __name__ == "__main__":
-    import time
-
     pat = "aab"
     candidates = ["aaaaab", "aacb", "abc", "abbaab"] * 10000
-    a = time.time()
-    get_best_matches(pat, candidates)
-    print(time.time() - a)
+    print(color_text("ac", "abbbbc", "green"))
