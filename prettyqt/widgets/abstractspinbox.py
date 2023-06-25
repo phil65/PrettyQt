@@ -29,12 +29,21 @@ STEP_TYPES: bidict[StepTypeStr, QtWidgets.QSpinBox.StepType] = bidict(
     adaptive=QtWidgets.QSpinBox.StepType.AdaptiveDecimalStepType,
 )
 
+StepEnabledFlagStr = Literal["none", "up_enabled", "down_enabled"]
+
+STEP_ENABLED_FLAG: bidict[
+    StepEnabledFlagStr, QtWidgets.QSpinBox.StepEnabledFlag
+] = bidict(
+    none=QtWidgets.QSpinBox.StepEnabledFlag.StepNone,
+    up_enabled=QtWidgets.QSpinBox.StepEnabledFlag.StepUpEnabled,
+    down_enabled=QtWidgets.QSpinBox.StepEnabledFlag.StepDownEnabled,
+)
+
 
 class AbstractSpinBoxMixin(widgets.WidgetMixin):
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.setLineEdit(widgets.LineEdit())
-        self.setGroupSeparatorShown(True)
+    def __init__(self, *args, show_group_separator: bool = True, **kwargs):
+        super().__init__(*args, show_group_separator=show_group_separator, **kwargs)
+        self.setLineEdit(widgets.LineEdit(parent=self))
 
     def _get_map(self):
         maps = super()._get_map()
