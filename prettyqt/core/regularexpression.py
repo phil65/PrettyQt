@@ -7,8 +7,9 @@ from typing import Literal
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
+import bidict as bd
 
-RE_MAP = bidict(
+RE_MAP = bd.bidict(
     {
         re.IGNORECASE: QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
         re.MULTILINE: QtCore.QRegularExpression.PatternOption.MultilineOption,
@@ -52,7 +53,7 @@ MATCH_TYPE: bidict[MatchTypeStr, mod.MatchType] = bidict(
 
 MatchOptionStr = Literal["none", "anchored"]
 
-MATCH_OPTIONS: bidict[MatchOptionStr] = bidict(
+MATCH_OPTIONS: bidict[MatchOptionStr, mod.MatchOption] = bidict(
     none=mod.MatchOption.NoMatchOption,
     anchored=mod.MatchOption.AnchorAtOffsetMatchOption,  # type: ignore
 )

@@ -72,18 +72,10 @@ class DataFrameListWidget(widgets.TableView):
 if __name__ == "__main__":
     app = widgets.app()
     app.set_style("Fusion")
-    tuples = [
-        ("bar", "one", "q"),
-        ("bar", "two", "q"),
-        ("baz", "one", "q"),
-        ("baz", "two", "q"),
-        ("foo", "one", "q"),
-        ("foo", "two", "q"),
-        ("qux", "one", "q"),
-        ("qux", "two", "q"),
-    ]
+    i = 5
+    tuples = [("bar", "one", "q"), ("bar", "two", "q")] * i
     index = pd.MultiIndex.from_tuples(tuples, names=["first", "second", "third"])
-    df = pd.DataFrame(np.random.randn(8, 8), index=index, columns=index)
+    df = pd.DataFrame(np.random.randn(i * 2, i * 2), index=index, columns=index)
     df.attrs = {"test": "test"}
     widget = DataFrameListWidget()
     widget.add_df(df)

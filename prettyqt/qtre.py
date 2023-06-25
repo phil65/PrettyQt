@@ -6,7 +6,7 @@ from typing import Any
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import bidict
+import bidict
 
 
 # IGNORECASE = QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption
@@ -21,7 +21,7 @@ MULTILINE = re.MULTILINE
 DOTALL = re.DOTALL
 VERBOSE = re.VERBOSE
 
-MAP = bidict(
+MAP = bidict.bidict(
     {
         re.IGNORECASE: QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
         re.MULTILINE: QtCore.QRegularExpression.PatternOption.MultilineOption,
