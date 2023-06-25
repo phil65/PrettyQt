@@ -21,9 +21,11 @@ from .colorvalidator import ColorValidator
 from .alphanumericvalidator import AlphaNumericValidator
 from .notstrictvalidator import NotStrictValidator
 from .monotoniclistvalidator import MonotonicListValidator
+from .functionvalidator import FunctionValidator
 
 __all__ = [
     "PathValidator",
+    "FunctionValidator",
     "NotEmptyValidator",
     "IntegerValidator",
     "IntListValidator",

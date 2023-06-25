@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import re
 from typing import Literal
 
@@ -61,21 +62,23 @@ def get_validator(
     validator: ValidatorStr | datatypes.PatternType,
     **kwargs,
 ) -> gui.QValidator:
+    from prettyqt import custom_validators
+
     match validator:
         case "email":
-            return get_validator("regular_expression", regular_expression=MAIL_REGEX)
+            return gui.RegularExpressionValidator(MAIL_REGEX)
         case "website":
-            return get_validator("regular_expression", regular_expression=WEB_REGEX)
+            return gui.RegularExpressionValidator(WEB_REGEX)
         case str():
             ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
             return validator
         case core.QRegularExpression():
-            return get_validator("regular_expression", regular_expression=validator)
+            return gui.RegularExpressionValidator(validator)
         case re.Pattern():
-            return get_validator(
-                "regular_expression", regular_expression=core.RegularExpression(validator)
-            )
+            return gui.RegularExpressionValidator(core.RegularExpression(validator))
+        case Callable():
+            return custom_validators.FunctionValidator(validator)
         case _:
             raise ValueError(validator)
 
@@ -157,7 +160,11 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
 
     def set_validator(
         self,
-        validator: gui.QValidator | ValidatorStr | datatypes.PatternType | None,
+        validator: gui.QValidator
+        | ValidatorStr
+        | datatypes.PatternType
+        | Callable
+        | None,
         strict: bool = True,
         empty_allowed: bool | None = None,
         append: bool = False,
@@ -169,7 +176,7 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
             case str() if "|" in validator:
                 validators = [get_validator(i, **kwargs) for i in validator.split("|")]
                 validator: widgets.QValidator = custom_validators.AndValidator(validators)
-            case str() | re.Pattern() | core.QRegularExpression():
+            case str() | re.Pattern() | core.QRegularExpression() | Callable():
                 validator = get_validator(validator, **kwargs)
             case None | gui.QValidator():
                 pass

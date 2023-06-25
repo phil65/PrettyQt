@@ -52,6 +52,9 @@ The following validators are included:
 `WhitelistValidator`
 - whitelist specific strings
 
+`FunctionValidator`
+- validate string based on a Callable (Signature: Callable[[str], bool])
+
 
 Apart from LineEdits, PlainTextEdits also gained the ability to take a validator.
 
