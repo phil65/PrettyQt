@@ -7,14 +7,10 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 class IconDelegate(widgets.StyledItemDelegate):
     ID = "icon"
 
-    def __init__(
-        self,
-        icon_role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
-        parent: QtWidgets.QAbstractItemView | None = None,
-    ):
-        super().__init__(parent)
-        self.icon_role = icon_role
+    def __init__(self, role: QtCore.Qt.ItemDataRole = constants.USER_ROLE, **kwargs):
+        self._role = role
         self.margin = 10
+        super().__init__(**kwargs)
 
     def paint(
         self,
@@ -24,7 +20,7 @@ class IconDelegate(widgets.StyledItemDelegate):
     ):
         """Override to paint an icon based on given Pixmap / Color / Icon.
 
-        Pixmap / Color / Icon must be set to 'icon_role'
+        Pixmap / Color / Icon must be set to '_role'
 
         Args:
             painter (QtGui.QPainter): painter to paint the icon
@@ -32,7 +28,7 @@ class IconDelegate(widgets.StyledItemDelegate):
             index (QtCore.QModelIndex): index which gets decorated
         """
         super().paint(painter, option, index)
-        value = index.data(self.icon_role)
+        value = index.data(self._role)
         if not value:
             return
         mode = gui.Icon.Mode.Normal

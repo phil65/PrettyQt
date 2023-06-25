@@ -6,13 +6,9 @@ from prettyqt import constants, widgets
 class ProgressBarDelegate(widgets.StyledItemDelegate):
     ID = "progress_bar"
 
-    def __init__(
-        self,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-        parent: widgets.QAbstractItemView | None = None,
-    ):
+    def __init__(self, role: constants.ItemDataRole = constants.DISPLAY_ROLE, **kwargs):
         self._role = role
-        super().__init__(parent)
+        super().__init__(**kwargs)
 
     def paint(self, painter, option, index):
         progress = index.data(self._role)
