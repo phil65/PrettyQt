@@ -403,6 +403,17 @@ class ObjectMixin:
         }
 
 
+    def bind_property(cls, object_name: str, prop_name: str) -> property:
+
+        def getter(self):
+            return self.findChild(cls, object_name).property(prop_name)
+
+        def setter(self, value):
+            self.findChild(cls, object_name).setProperty(prop_name, value)
+
+        return property(getter, setter)
+
+
 class Object(ObjectMixin, QtCore.QObject):
     pass
 
