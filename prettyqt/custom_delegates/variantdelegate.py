@@ -20,11 +20,16 @@ class VariantDelegate(widgets.StyledItemDelegate):
         *args,
         data_role: constants.ItemDataRole = constants.USER_ROLE,
         set_edit_role: bool = True,
+        validator: gui.QValidator
+        | widgets.lineedit.ValidatorStr
+        | datatypes.PatternType
+        | None = None,
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self.data_role = data_role
         self._set_edit_role = set_edit_role
+        self._validator = validator
 
     def paint(self, painter, option, index):
         # if not self.is_supported_type(value):
@@ -52,6 +57,11 @@ class VariantDelegate(widgets.StyledItemDelegate):
         if widget is None:
             logger.warning(f"Could not find editor for {val!r} ({type(val)})")
             return None
+        if self._validator and isinstance(
+            widget, widgets.LineEdit | widgets.AbstractSpinBoxMixin
+        ):
+            widget.set_validator(self._validator, append=True)
+
         widget.setAutoFillBackground(True)
         widget.set_focus_policy("strong")
         return widget
