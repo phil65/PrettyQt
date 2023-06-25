@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
+
 from prettyqt import core, widgets
 from prettyqt.qt import QtCore
 
@@ -22,6 +24,8 @@ class IntLineEdit(widgets.LineEdit):
 
     def set_value(self, value: int | str):
         super().set_value(str(value))
+
+    value = core.Property(int, get_value, set_value)
 
 
 class FloatLineEdit(widgets.LineEdit):
@@ -46,6 +50,8 @@ class FloatLineEdit(widgets.LineEdit):
     def set_value(self, value: float | str):
         super().set_value(str(value))
 
+    value = core.Property(float, get_value, set_value)
+
 
 class UrlLineEdit(widgets.LineEdit):
     value_changed = core.Signal(QtCore.QUrl)
@@ -65,6 +71,28 @@ class UrlLineEdit(widgets.LineEdit):
 
     def set_value(self, value: QtCore.QUrl | str):
         super().set_value(value.toString() if isinstance(value, QtCore.QUrl) else value)
+
+    value = core.Property(QtCore.QUrl, get_value, set_value)
+
+
+class StringListEdit(widgets.LineEdit):
+    value_changed = core.Signal(list)
+
+    def __init__(self, *args, object_name: str = "str_list_lineedit", **kwargs):
+        super().__init__(*args, object_name=object_name, **kwargs)
+
+    def _on_value_change(self):
+        value = self.get_value()
+        self.value_changed.emit(value)
+
+    def get_value(self) -> list[str]:
+        val = super().get_value()
+        return val.split(",")
+
+    def set_value(self, value: Sequence[str]):
+        super().set_value(",".join(value))
+
+    value = core.Property(list, get_value, set_value)
 
 
 if __name__ == "__main__":

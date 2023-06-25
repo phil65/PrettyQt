@@ -12,7 +12,7 @@ from .orientedtableview import OrientedTableView
 from .hierarchicalheaderview import HierarchicalHeaderView
 from .commandpalette import CommandPalette
 from .filterheader import FilterHeader
-from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit
+from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit, StringListEdit
 from .editors.keycombinationedit import KeyCombinationEdit
 from .editors.singlelinetextedit import SingleLineTextEdit
 from .editors.rectedit import RectEdit, RectFEdit, RegionEdit
@@ -67,6 +67,7 @@ from .standardiconswidget import StandardIconsWidget
 __all__ = [
     "IntLineEdit",
     "FloatLineEdit",
+    "StringListEdit",
     "UrlLineEdit",
     "ImageViewer",
     "ElidedLabel",

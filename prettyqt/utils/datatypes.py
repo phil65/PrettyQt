@@ -294,6 +294,8 @@ def get_widget_for_value(val, parent=None):
             return custom_widgets.ListInput(parent=parent, typ=int)
         case (float(), *_):
             return custom_widgets.ListInput(parent=parent, typ=float)
+        case (str(), *_):
+            return custom_widgets.StringListEdit(parent=parent)
         case pathlib.Path():
             return custom_widgets.FileChooserButton(parent=parent)
         case str():
