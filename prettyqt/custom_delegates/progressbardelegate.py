@@ -1,13 +1,21 @@
 from __future__ import annotations
 
-from prettyqt import widgets
+from prettyqt import constants, widgets
 
 
 class ProgressBarDelegate(widgets.StyledItemDelegate):
     ID = "progress_bar"
 
+    def __init__(
+        self,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+        parent: widgets.QAbstractItemView | None = None,
+    ):
+        self._role = role
+        super().__init__(parent)
+
     def paint(self, painter, option, index):
-        progress = index.data()
+        progress = index.data(self._role)
         opt = widgets.StyleOptionProgressBar()
         opt.rect = option.rect
         opt.minimum = 0
