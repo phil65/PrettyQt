@@ -58,6 +58,8 @@ docs = [
     "mkdocstrings[python]",
     "pymdown-extensions",
     "mkdocs-literate-nav",
+    "mkdocs-autorefs",
+    "mkdocs-live-edit-plugin",
 ]
 
 addons = [
@@ -229,6 +231,8 @@ black = "^23"
 devtools = "^0"
 commitizen = "^3"
 mkdocs-literate-nav = "^0.6.0"
+mkdocs-autorefs = "^0.4.1"
+mkdocs-live-edit-plugin = "^0.1.2"
 
 [tool.pytest.ini_options]
 minversion = "6.0"
