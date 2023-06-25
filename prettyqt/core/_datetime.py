@@ -6,7 +6,6 @@ from typing_extensions import Self
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError
 
 
 class DateTime(QtCore.QDateTime):
@@ -49,17 +48,12 @@ class DateTime(QtCore.QDateTime):
         else:
             self.setTimeZone(zone)
 
-    def set_time_spec(self, spec: constants.TimeSpecStr):
+    def set_time_spec(self, spec: constants.TimeSpecStr | constants.TimeSpec):
         """Set the time specification.
 
         Args:
             spec: time specification to use
-
-        Raises:
-            InvalidParamError: time specification does not exist
         """
-        if spec not in constants.TIME_SPEC:
-            raise InvalidParamError(spec, constants.TIME_SPEC)
         self.setTimeSpec(constants.TIME_SPEC[spec])
 
     def get_time_spec(self) -> constants.TimeSpecStr:

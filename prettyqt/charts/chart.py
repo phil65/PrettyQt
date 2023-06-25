@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import charts, constants, core, gui, widgets
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 THEMES = bidict(
@@ -93,9 +93,9 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
     def get_legend(self) -> charts.Legend:
         return charts.Legend(self.legend())
 
-    def set_legend_alignment(self, alignment: constants.SideStr):
-        if alignment not in constants.SIDES:
-            raise InvalidParamError(alignment, constants.SIDES)
+    def set_legend_alignment(
+        self, alignment: constants.SideStr | constants.AlignmentFlag
+    ):
         self.legend().setAlignment(constants.SIDES[alignment])
 
     def set_theme(self, theme_name: ThemeStr):

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 LABEL_POSITION = bidict(
@@ -28,13 +28,8 @@ class PieSlice(core.ObjectMixin, QtCharts.QPieSlice):
 
         Args:
             position: label position
-
-        Raises:
-            InvalidParamError: label position does not exist
         """
-        if position not in LABEL_POSITION:
-            raise InvalidParamError(position, LABEL_POSITION)
-        self.setLabelPosition(LABEL_POSITION[position])
+        self.setLabelPosition(LABEL_POSITION.get_enum_value(position))
 
     def get_label_position(self) -> LabelPositionStr:
         """Return current label position.

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import charts
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 LABELS_POSITIONS = bidict(
@@ -28,17 +28,14 @@ class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
         barsets = self.barSets()
         return barsets[index]
 
-    def set_labels_position(self, position: LabelsPositionStr):
+    def set_labels_position(
+        self, position: LabelsPositionStr | QtCharts.QAbstractBarSeries.LabelsPosition
+    ):
         """Set the labels position.
 
         Args:
             position: labels position
-
-        Raises:
-            InvalidParamError: labels position does not exist
         """
-        if position not in LABELS_POSITIONS:
-            raise InvalidParamError(position, LABELS_POSITIONS)
         self.setLabelsPosition(LABELS_POSITIONS[position])
 
     def get_labels_position(self) -> LabelsPositionStr:

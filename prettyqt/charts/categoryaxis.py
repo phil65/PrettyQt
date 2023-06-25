@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import charts
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 LABELS_POSITIONS = bidict(
@@ -37,18 +37,15 @@ class CategoryAxis(charts.ValueAxisMixin, QtCharts.QCategoryAxis):
         # needed for PySide6
         return self.count()
 
-    def set_labels_position(self, position: LabelsPositionStr):
+    def set_labels_position(
+        self, position: LabelsPositionStr | QtCharts.QCategoryAxis.AxisLabelsPosition
+    ):
         """Set the labels position.
 
         Args:
             position: labels position
-
-        Raises:
-            InvalidParamError: labels position does not exist
         """
-        if position not in LABELS_POSITIONS:
-            raise InvalidParamError(position, LABELS_POSITIONS)
-        self.setLabelsPosition(LABELS_POSITIONS[position])
+        self.setLabelsPosition(LABELS_POSITIONS.get_enum_value(position))
 
     def get_labels_position(self) -> LabelsPositionStr:
         """Return current labels position.

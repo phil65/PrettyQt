@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import charts
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 TICK_TYPES = bidict(
@@ -16,18 +16,13 @@ TickTypeStr = Literal["dynamic", "fixed"]
 
 
 class ValueAxisMixin(charts.AbstractAxisMixin):
-    def set_tick_type(self, tick_type: TickTypeStr):
+    def set_tick_type(self, tick_type: TickTypeStr | QtCharts.QValueAxis.TickType):
         """Set the tick type of the legend.
 
         Args:
             tick_type: tick type for the legend
-
-        Raises:
-            InvalidParamError: tick type does not exist
         """
-        if tick_type not in TICK_TYPES:
-            raise InvalidParamError(tick_type, TICK_TYPES)
-        self.setTickType(TICK_TYPES[tick_type])
+        self.setTickType(TICK_TYPES.get_enum_value(tick_type))
 
     def get_tick_type(self) -> TickTypeStr:
         """Return current tick type.

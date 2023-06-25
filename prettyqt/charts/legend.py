@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 MARKER_SHAPES = bidict(
@@ -37,18 +37,13 @@ class Legend(widgets.GraphicsWidgetMixin):
             show_tooltips=self.showToolTips(),
         )
 
-    def set_alignment(self, alignment: constants.SideStr):
+    def set_alignment(self, alignment: constants.SideStr | QtCharts.QLegend.MarkerShape):
         """Set the alignment of the legend.
 
         Args:
             alignment: alignment for the legend
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.SIDES:
-            raise InvalidParamError(alignment, constants.SIDES)
-        self.setAlignment(constants.SIDES[alignment])
+        self.setAlignment(constants.SIDES.get_enum_value(alignment))
 
     def get_alignment(self) -> constants.SideStr:
         """Return current alignment.
@@ -63,13 +58,8 @@ class Legend(widgets.GraphicsWidgetMixin):
 
         Args:
             shape: marker shape
-
-        Raises:
-            InvalidParamError: marker shape does not exist
         """
-        if shape not in MARKER_SHAPES:
-            raise InvalidParamError(shape, MARKER_SHAPES)
-        self.setMarkerShape(MARKER_SHAPES[shape])
+        self.setMarkerShape(MARKER_SHAPES.get_enum_value(shape))
 
     def get_marker_shape(self) -> MarkerShapeStr:
         """Return current marker shape.

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import bluetooth, core
 from prettyqt.qt import QtBluetooth
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 HostMode = QtBluetooth.QBluetoothLocalDevice.HostMode
@@ -52,18 +52,13 @@ class BluetoothLocalDevice(core.ObjectMixin, QtBluetooth.QBluetoothLocalDevice):
     def get_error(self) -> ErrorStr:
         return ERROR.inverse[self.error()]
 
-    def set_host_mode(self, mode: HostModeStr):
+    def set_host_mode(self, mode: HostModeStr | HostMode):
         """Set host mode.
 
         Args:
             mode: host mode to use
-
-        Raises:
-            InvalidParamError: invalid host mode
         """
-        if mode not in HOST_MODE:
-            raise InvalidParamError(mode, HOST_MODE)
-        self.setGridStyle(HOST_MODE[mode])
+        self.setGridStyle(HOST_MODE.get_enum_value(mode))
 
     def get_host_mode(self) -> HostModeStr:
         """Return host mode.

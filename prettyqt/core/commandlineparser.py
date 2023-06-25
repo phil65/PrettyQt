@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 mod = QtCore.QCommandLineParser
@@ -31,26 +31,19 @@ class CommandLineParser(QtCore.QCommandLineParser):
 
         Args:
             mode: single dash word option mode
-
-        Raises:
-            InvalidParamError: single dash word option mode does not exist
         """
-        if mode not in SINGLE_DASH_WORD:
-            raise InvalidParamError(mode, SINGLE_DASH_WORD)
-        self.setSingleDashWordOptionMode(SINGLE_DASH_WORD[mode])
+        self.setSingleDashWordOptionMode(SINGLE_DASH_WORD.get_enum_value(mode))
 
-    def set_options_after_positional_arguments_mode(self, mode: SingleDashWordStr):
+    def set_options_after_positional_arguments_mode(
+        self, mode: SingleDashWordStr | mod.SingleDashWordOptionMode
+    ):
         """Set the options after positional arguments mode.
 
         Args:
             mode: options after positional arguments mode
-
-        Raises:
-            InvalidParamError: options after positional arguments mode does not exist
         """
-        if mode not in OPTIONS_AFTER_POS_ARG:
-            raise InvalidParamError(mode, OPTIONS_AFTER_POS_ARG)
-        self.setOptionsAfterPositionalArgumentsMode(OPTIONS_AFTER_POS_ARG[mode])
+        val = OPTIONS_AFTER_POS_ARG.get_enum_value(mode)
+        self.setOptionsAfterPositionalArgumentsMode(val)
 
     def add_option(
         self,

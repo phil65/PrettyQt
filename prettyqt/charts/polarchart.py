@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import charts
 from prettyqt.qt import QtCharts
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 POLAR_ORIENTATIONS = bidict(
@@ -16,7 +16,9 @@ PolarOrientationStr = Literal["radial", "angular"]
 
 
 class PolarChart(charts.ChartMixin, QtCharts.QPolarChart):
-    def add_axis(self, axis: QtCharts.QAbstractAxis, orientation: PolarOrientationStr):
-        if orientation not in POLAR_ORIENTATIONS:
-            raise InvalidParamError(orientation, POLAR_ORIENTATIONS)
+    def add_axis(
+        self,
+        axis: QtCharts.QAbstractAxis,
+        orientation: PolarOrientationStr | QtCharts.QPolarChart.PolarOrientation,
+    ):
         self.addAxis(axis, POLAR_ORIENTATIONS[orientation])

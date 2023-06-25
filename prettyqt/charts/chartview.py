@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import charts, core, gui, widgets
 from prettyqt.qt import QtCharts, QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 RUBBER_BAND = bidict(
@@ -106,18 +106,13 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
         image.save(str(filename[0]))
         self.chart().hide_legend()
 
-    def set_rubber_band(self, typ: RubberBandStr):
+    def set_rubber_band(self, typ: RubberBandStr | QtCharts.QChartView.RubberBand):
         """Set the rubber band type.
 
         Args:
             typ: rubber band type
-
-        Raises:
-            InvalidParamError: rubber band type does not exist
         """
-        if typ not in RUBBER_BAND:
-            raise InvalidParamError(typ, RUBBER_BAND)
-        self.setRubberBand(RUBBER_BAND[typ])
+        self.setRubberBand(RUBBER_BAND.get_enum_value(typ))
 
     def get_rubber_band(self) -> RubberBandStr:
         """Return current rubber band type.

@@ -63,13 +63,8 @@ class BluetoothDeviceDiscoveryAgent(
 
     #     Args:
     #         typ: inquiry type
-
-    #     Raises:
-    #         InvalidParamError: inquiry type does not exist
     #     """
-    #     if typ not in INQUIRY_TYPES:
-    #         raise InvalidParamError(typ, INQUIRY_TYPES)
-    #     self.setInquiryType(INQUIRY_TYPES[typ])
+    #     self.setInquiryType(INQUIRY_TYPES.get_enum_value(typ))
 
     # def get_inquiry_type(self) -> InquiryTypeStr:
     #     """Get the current inquiry type.

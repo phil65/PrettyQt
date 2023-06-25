@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 DeletionPolicyStr = Literal["keep", "delete"]
@@ -60,18 +60,15 @@ class AbstractAnimationMixin(core.ObjectMixin):
         direction = Direction.Backward if is_forward else Direction.Forward
         self.setDirection(direction)
 
-    def set_direction(self, direction: DirectionStr):
+    def set_direction(
+        self, direction: DirectionStr | QtCore.QAbstractAnimation.Direction
+    ):
         """Set animation direction.
 
         Args:
             direction: animation direction
-
-        Raises:
-            InvalidParamError: animation direction does not exist
         """
-        if direction not in DIRECTION:
-            raise InvalidParamError(direction, DIRECTION)
-        self.setDirection(DIRECTION[direction])
+        self.setDirection(DIRECTION.get_enum_value(direction))
 
     def get_direction(self) -> DirectionStr:
         """Get the current animation direction.
@@ -110,14 +107,14 @@ class AbstractAnimationMixin(core.ObjectMixin):
         else:
             self.start(policy)
 
-    def restart_animation(self, policy: DeletionPolicyStr = "keep"):
+    def restart_animation(
+        self,
+        policy: DeletionPolicyStr | QtCore.QAbstractAnimation.DeletionPolicy = "keep",
+    ):
         """Restart the animation.
 
         Args:
             policy: animation policy
-
-        Raises:
-            InvalidParamError: animation policy does not exist
         """
         self.stop()
         self.start_animation(policy)
