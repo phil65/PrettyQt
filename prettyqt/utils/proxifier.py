@@ -212,6 +212,14 @@ class Proxyfier:
         self._wrapper = ProxyWrapper(indexer=value, widget=self._widget, proxifier=self)
         return self._wrapper
 
+    def __getattr__(self, name: str):
+        indexer = (slice(None, None, None), slice(None, None, None))
+        self._wrapper = ProxyWrapper(indexer=indexer, widget=self._widget, proxifier=self)
+        if hasattr(self._wrapper, name):
+            return getattr(self._wrapper, name)
+        else:
+            raise AttributeError(name)
+
     def transpose(self) -> core.TransposeProxyModel:
         """Wraps model in a Proxy which transposes rows/columns."""
         return self.get_proxy("transpose")
@@ -226,22 +234,12 @@ class Proxyfier:
         """Wraps model in a Proxy converts table to a tree."""
         return self.get_proxy("table_to_list")
 
-    def color_values(
+    def add_column(
         self,
-        low_color: datatypes.ColorType = "green",
-        high_color: datatypes.ColorType = "red",
-    ) -> custom_models.SliceColorValuesProxyModel:
-        """Color cells based on value."""
-        from prettyqt import custom_models
-
-        proxy = custom_models.SliceColorValuesProxyModel(parent=self._widget)
-        proxy.set_low_color(low_color)
-        proxy.set_high_color(high_color)
-        proxy.setSourceModel(self._widget.model())
-        self._widget.set_model(proxy)
-        return proxy
-
-    def add_column(self, header: str, formatter: str):
+        header: str,
+        formatter: str,
+        flags: constants.ItemFlag = constants.IS_ENABLED | constants.IS_SELECTABLE,
+    ):
         """Add a new column with given header to the table.
 
         Column content can be defined by a formatter.
@@ -249,7 +247,7 @@ class Proxyfier:
         <displayRole of column 2> - <displayRole of column4>
         """
         proxy = self.get_proxy("column_join")
-        proxy.add_mapping(header, formatter)
+        proxy.add_mapping(header=header, formatter=formatter, flags=flags)
         return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
