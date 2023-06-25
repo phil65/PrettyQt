@@ -150,6 +150,19 @@ class ProxyWrapper:
         self._widget.set_model(proxy)
         return proxy
 
+    def change_icon_size(
+        self, size: datatypes.SizeType
+    ) -> custom_models.SliceChangeIconSizeProxyModel:
+        from prettyqt import custom_models
+
+        size = datatypes.to_size(size)
+        proxy = custom_models.SliceChangeIconSizeProxyModel(
+            indexer=self._indexer, size=size, parent=self._widget
+        )
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
     def style(
         self,
         foreground: gui.QColor | str | None = None,
