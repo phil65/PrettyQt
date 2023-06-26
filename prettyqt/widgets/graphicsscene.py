@@ -4,30 +4,29 @@ import enum
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, listdelegators
+from prettyqt.utils import bidict, colors, datatypes, listdelegators
 
 
 SceneLayerStr = Literal["item", "background", "foreground", "all"]
 
-SCENE_LAYER: bidict[SceneLayerStr, QtWidgets.QGraphicsScene.SceneLayer] = bidict(
-    item=QtWidgets.QGraphicsScene.SceneLayer.ItemLayer,
-    background=QtWidgets.QGraphicsScene.SceneLayer.BackgroundLayer,
-    foreground=QtWidgets.QGraphicsScene.SceneLayer.ForegroundLayer,
-    all=QtWidgets.QGraphicsScene.SceneLayer.AllLayers,
+SCENE_LAYER: bidict[SceneLayerStr, widgets.QGraphicsScene.SceneLayer] = bidict(
+    item=widgets.QGraphicsScene.SceneLayer.ItemLayer,
+    background=widgets.QGraphicsScene.SceneLayer.BackgroundLayer,
+    foreground=widgets.QGraphicsScene.SceneLayer.ForegroundLayer,
+    all=widgets.QGraphicsScene.SceneLayer.AllLayers,
 )
 
 ItemIndexMethodStr = Literal["bsp_tree", "none"]
 
 ITEM_INDEX_METHOD: bidict[
-    ItemIndexMethodStr, QtWidgets.QGraphicsScene.ItemIndexMethod
+    ItemIndexMethodStr, widgets.QGraphicsScene.ItemIndexMethod
 ] = bidict(
-    bsp_tree=QtWidgets.QGraphicsScene.ItemIndexMethod.BspTreeIndex,
-    none=QtWidgets.QGraphicsScene.ItemIndexMethod.NoIndex,
+    bsp_tree=widgets.QGraphicsScene.ItemIndexMethod.BspTreeIndex,
+    none=widgets.QGraphicsScene.ItemIndexMethod.NoIndex,
 )
 
 
-class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
+class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
     class GridType(enum.IntEnum):
         """Grid type for background."""
 
@@ -48,7 +47,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         cls_name = str(self.__class__.__name__)
         return f'<{cls_name}("{self.viewer()}") object at {hex(id(self))}>'
 
-    def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
+    def __getitem__(self, index: int) -> widgets.QGraphicsItem:
         return self.items()[index]
 
     def _get_map(self):
@@ -68,40 +67,40 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     def get_foreground_brush(self) -> gui.Brush:
         return gui.Brush(self.foregroundBrush())
 
-    def add(self, item) -> QtWidgets.QGraphicsItem:
+    def add(self, item) -> widgets.QGraphicsItem:
         match item:
-            case QtWidgets.QGraphicsItem():
+            case widgets.QGraphicsItem():
                 self.addItem(item)
                 return item
-            case QtGui.QPixmap():
+            case gui.QPixmap():
                 return self.add_pixmap(item)
-            case QtGui.QPainterPath():
+            case gui.QPainterPath():
                 return self.add_path(item)
-            case QtGui.QPolygonF():
+            case gui.QPolygonF():
                 return self.add_polygon(item)
-            case QtCore.QRectF():
+            case core.QRectF():
                 return self.add_rect(item)
-            case QtCore.QLine():
+            case core.QLine():
                 return self.add_line(item)
             case str():
                 return self.add_text(item)
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 return self.add_widget(item)
             case _:
                 raise TypeError(item)
 
-    def add_pixmap(self, pixmap: QtGui.QPixmap) -> widgets.GraphicsPixmapItem:
+    def add_pixmap(self, pixmap: gui.QPixmap) -> widgets.GraphicsPixmapItem:
         g_item = widgets.GraphicsPixmapItem(pixmap)
         self.addItem(g_item)
         return g_item
 
     def add_polygon(
         self,
-        polygon: QtGui.QPolygonF | QtGui.QPolygon,
-        pen: QtGui.QPen | None = None,
-        brush: QtGui.QBrush | None = None,
+        polygon: gui.QPolygonF | gui.QPolygon,
+        pen: gui.QPen | None = None,
+        brush: gui.QBrush | None = None,
     ) -> widgets.GraphicsPolygonItem:
-        if isinstance(polygon, QtGui.QPolygon):
+        if isinstance(polygon, gui.QPolygon):
             polygon = gui.PolygonF(polygon)
         g_item = widgets.GraphicsPolygonItem(polygon)
         if brush is not None:
@@ -113,9 +112,9 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
 
     def add_path(
         self,
-        path: QtGui.QPainterPath,
-        pen: QtGui.QPen | None = None,
-        brush: QtGui.QBrush | None = None,
+        path: gui.QPainterPath,
+        pen: gui.QPen | None = None,
+        brush: gui.QBrush | None = None,
     ) -> widgets.GraphicsPathItem:
         g_item = widgets.GraphicsPathItem(path)
         if brush is not None:
@@ -128,10 +127,10 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     def add_rect(
         self,
         rect: datatypes.RectType | datatypes.RectFType,
-        pen: QtGui.QPen | None = None,
-        brush: QtGui.QBrush | None = None,
+        pen: gui.QPen | None = None,
+        brush: gui.QBrush | None = None,
     ) -> widgets.GraphicsRectItem:
-        if isinstance(rect, QtCore.QRect):
+        if isinstance(rect, core.QRect):
             rect = core.RectF(rect)
         elif isinstance(rect, tuple):
             rect = core.RectF(*rect)
@@ -145,10 +144,10 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
 
     def add_line(
         self,
-        line: QtCore.QLineF | QtCore.QLine | tuple[float, float, float, float],
-        pen: QtGui.QPen | None = None,
+        line: core.QLineF | core.QLine | tuple[float, float, float, float],
+        pen: gui.QPen | None = None,
     ) -> widgets.GraphicsLineItem:
-        if isinstance(line, QtCore.QLine):
+        if isinstance(line, core.QLine):
             line = core.LineF(line)
         elif isinstance(line, tuple):
             line = core.LineF(*line)
@@ -161,10 +160,10 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     def add_ellipse(
         self,
         ellipse: datatypes.RectType | datatypes.RectFType,
-        pen: QtGui.QPen | None = None,
-        brush: QtGui.QBrush | None = None,
+        pen: gui.QPen | None = None,
+        brush: gui.QBrush | None = None,
     ) -> widgets.GraphicsEllipseItem:
-        if isinstance(ellipse, QtCore.QRect):
+        if isinstance(ellipse, core.QRect):
             ellipse = core.RectF(ellipse)
         elif isinstance(ellipse, tuple):
             ellipse = core.RectF(*ellipse)
@@ -177,7 +176,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         return g_item
 
     def add_text(
-        self, text: str, font: QtGui.QFont | None = None
+        self, text: str, font: gui.QFont | None = None
     ) -> widgets.GraphicsTextItem:
         g_item = widgets.GraphicsTextItem(text)
         if font is not None:
@@ -186,7 +185,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         return g_item
 
     def add_simple_text(
-        self, text: str, font: QtGui.QFont | None = None
+        self, text: str, font: gui.QFont | None = None
     ) -> widgets.GraphicsSimpleTextItem:
         g_item = widgets.GraphicsSimpleTextItem(text)
         if font is not None:
@@ -194,7 +193,7 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         self.addItem(g_item)
         return g_item
 
-    def add_widget(self, widget: QtWidgets.QWidget) -> widgets.GraphicsProxyWidget:
+    def add_widget(self, widget: widgets.QWidget) -> widgets.GraphicsProxyWidget:
         g_item = widgets.GraphicsProxyWidget()
         g_item.setWidget(widget)
         self.addItem(g_item)
@@ -202,16 +201,15 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
 
     def colliding_items(
         self,
-        item: QtWidgets.QGraphicsItem,
-        mode: constants.ItemSelectionModeStr = "intersects_shape",
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QGraphicsItem]:
-        if mode not in constants.ITEM_SELECTION_MODE:
-            raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
+        item: widgets.QGraphicsItem,
+        mode: constants.ItemSelectionModeStr
+        | constants.ItemSelectionMode = "intersects_shape",
+    ) -> listdelegators.BaseListDelegator[widgets.QGraphicsItem]:
         items = self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])
         return listdelegators.BaseListDelegator(items)
 
     def add_item_group(
-        self, *items: QtWidgets.QGraphicsItem
+        self, *items: widgets.QGraphicsItem
     ) -> widgets.GraphicsItemGroup:
         group = widgets.GraphicsItemGroup()
         for item in items:
@@ -220,9 +218,9 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
 
     def _draw_grid(
         self,
-        painter: QtGui.QPainter,
-        rect: QtCore.QRectF,
-        pen: QtGui.QPen,
+        painter: gui.QPainter,
+        rect: core.QRectF,
+        pen: gui.QPen,
         grid_size: int,
     ):
         left = int(rect.left())
@@ -234,11 +232,11 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         first_top = top - (top % grid_size)
 
         lines = [
-            QtCore.QLineF(x, top, x, bottom) for x in range(first_left, right, grid_size)
+            core.QLineF(x, top, x, bottom) for x in range(first_left, right, grid_size)
         ]
         lines.extend(
             [
-                QtCore.QLineF(left, y, right, y)
+                core.QLineF(left, y, right, y)
                 for y in range(first_top, bottom, grid_size)
             ]
         )
@@ -248,9 +246,9 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
 
     def _draw_dots(
         self,
-        painter: QtGui.QPainter,
-        rect: QtCore.QRectF,
-        pen: QtGui.QPen,
+        painter: gui.QPainter,
+        rect: core.QRectF,
+        pen: gui.QPen,
         grid_size: int,
     ):
         if (zoom := self._get_viewer_zoom()) < 0:
@@ -273,26 +271,26 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
             for y in range(first_top, bottom, grid_size)
         ]
 
-    def drawBackground(self, painter: QtGui.QPainter, rect: QtCore.QRect):
+    def drawBackground(self, painter: gui.QPainter, rect: core.QRect):
         super().drawBackground(painter, rect)
 
         painter.save()
-        painter.setRenderHint(QtGui.QPainter.RenderHint.Antialiasing, False)
+        painter.setRenderHint(gui.QPainter.RenderHint.Antialiasing, False)
         painter.setBrush(self.backgroundBrush())
 
         if self._grid_mode == self.GridType.DotGrid:
-            pen = QtGui.QPen(self.grid_color, self._pen_width)
+            pen = gui.QPen(self.grid_color, self._pen_width)
             self._draw_dots(painter, rect, pen, self._grid_size)
 
         elif self._grid_mode == self.GridType.LineGrid:
             zoom = self._get_viewer_zoom()
             if zoom > -0.5:
-                pen = QtGui.QPen(self.grid_color, self._pen_width)
+                pen = gui.QPen(self.grid_color, self._pen_width)
                 self._draw_grid(painter, rect, pen, self._grid_size)
             color = self._bg_color.darker(150)
             if zoom < -0.0:
                 color = color.darker(100 - int(zoom * 110))
-            pen = QtGui.QPen(color, self._pen_width)
+            pen = gui.QPen(color, self._pen_width)
             self._draw_grid(painter, rect, pen, self._grid_size * 8)
 
         painter.restore()
@@ -312,9 +310,9 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
     #     super().mousePressEvent(event)
     #     keep_selection = any(
     #         [
-    #             event.button() == QtCore.Qt.MiddleButton,
-    #             event.button() == QtCore.Qt.RightButton,
-    #             event.modifiers() == QtCore.Qt.AltModifier,
+    #             event.button() == core.Qt.MiddleButton,
+    #             event.button() == core.Qt.RightButton,
+    #             event.modifiers() == core.Qt.AltModifier,
     #         ]
     #     )
     #     if keep_selection:
@@ -359,18 +357,15 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         self._bg_color = colors.get_color(color)
         self.setBackgroundBrush(self._bg_color)
 
-    def set_item_index_method(self, method: ItemIndexMethodStr):
+    def set_item_index_method(
+        self, method: ItemIndexMethodStr | widgets.QGraphicsScene.ItemIndexMethod
+    ):
         """Set item index method.
 
         Args:
             method: item index method to use
-
-        Raises:
-            InvalidParamError: invalid item index method
         """
-        if method not in ITEM_INDEX_METHOD:
-            raise InvalidParamError(method, ITEM_INDEX_METHOD)
-        self.setItemIndexMethod(ITEM_INDEX_METHOD[method])
+        self.setItemIndexMethod(ITEM_INDEX_METHOD.get_enum_value(method))
 
     def get_item_index_method(self) -> ItemIndexMethodStr:
         """Return item index method.
@@ -380,8 +375,8 @@ class GraphicsScene(core.ObjectMixin, QtWidgets.QGraphicsScene):
         """
         return ITEM_INDEX_METHOD.inverse[self.itemIndexMethod()]
 
-    bg_color = core.Property(QtGui.QColor, get_background_color, set_background_color)
-    grid_color = core.Property(QtGui.QColor, get_grid_color, set_grid_color)
+    bg_color = core.Property(gui.QColor, get_background_color, set_background_color)
+    grid_color = core.Property(gui.QColor, get_grid_color, set_grid_color)
     grid_mode = core.Property(int, get_grid_mode, set_grid_mode)
 
 

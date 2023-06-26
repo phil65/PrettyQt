@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 ShapeModeStr = Literal["mask", "bounding_rect", "heuristic_mask"]
@@ -17,18 +17,15 @@ SHAPE_MODE: bidict[ShapeModeStr, QtWidgets.QGraphicsPixmapItem.ShapeMode] = bidi
 
 
 class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapItem):
-    def set_transformation_mode(self, mode: constants.TransformationModeStr):
+    def set_transformation_mode(
+        self, mode: constants.TransformationModeStr | constants.TransformationMode
+    ):
         """Set transformation mode.
 
         Args:
             mode: transformation mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in constants.TRANSFORMATION_MODE:
-            raise InvalidParamError(mode, constants.TRANSFORMATION_MODE)
-        self.setTransformationMode(constants.TRANSFORMATION_MODE[mode])
+        self.setTransformationMode(constants.TRANSFORMATION_MODE.get_enum_value(mode))
 
     def get_transformation_mode(self) -> constants.TransformationModeStr:
         """Return current transformation mode.
@@ -38,18 +35,15 @@ class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapIte
         """
         return constants.TRANSFORMATION_MODE.inverse[self.transformationMode()]
 
-    def set_shape_mode(self, mode: ShapeModeStr):
+    def set_shape_mode(
+        self, mode: ShapeModeStr | QtWidgets.QGraphicsPixmapItem.ShapeMode
+    ):
         """Set shape mode.
 
         Args:
             mode: shape mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in SHAPE_MODE:
-            raise InvalidParamError(mode, SHAPE_MODE)
-        self.setShapeMode(SHAPE_MODE[mode])
+        self.setShapeMode(SHAPE_MODE.get_enum_value(mode))
 
     def get_shape_mode(self) -> ShapeModeStr:
         """Return current shape mode.

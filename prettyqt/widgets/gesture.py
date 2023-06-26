@@ -3,17 +3,16 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 GestureCancelPolicyStr = Literal["none", "all_in_context"]
 
 GESTURE_CANCEL_POLICY: bidict[
-    GestureCancelPolicyStr, QtWidgets.QGesture.GestureCancelPolicy
+    GestureCancelPolicyStr, widgets.QGesture.GestureCancelPolicy
 ] = bidict(
-    none=QtWidgets.QGesture.GestureCancelPolicy.CancelNone,
-    all_in_context=QtWidgets.QGesture.GestureCancelPolicy.CancelAllInContext,
+    none=widgets.QGesture.GestureCancelPolicy.CancelNone,
+    all_in_context=widgets.QGesture.GestureCancelPolicy.CancelAllInContext,
 )
 
 
@@ -37,18 +36,15 @@ class GestureMixin(core.ObjectMixin):
     def get_hot_spot(self) -> core.PointF:
         return core.PointF(self.hotSpot())
 
-    def set_gesture_cancel_policy(self, policy: GestureCancelPolicyStr):
+    def set_gesture_cancel_policy(
+        self, policy: GestureCancelPolicyStr | widgets.QGesture.GestureCancelPolicy
+    ):
         """Set gesture cancel policy.
 
         Args:
             policy: gesture cancel policy to use
-
-        Raises:
-            InvalidParamError: gesture cancel policy does not exist
         """
-        if policy not in GESTURE_CANCEL_POLICY:
-            raise InvalidParamError(policy, GESTURE_CANCEL_POLICY)
-        self.setGestureCancelPolicy(GESTURE_CANCEL_POLICY[policy])
+        self.setGestureCancelPolicy(GESTURE_CANCEL_POLICY.get_enum_value(policy))
 
     def get_gesture_cancel_policy(self) -> GestureCancelPolicyStr:
         """Return current gesture cancel policy.
@@ -59,7 +55,7 @@ class GestureMixin(core.ObjectMixin):
         return GESTURE_CANCEL_POLICY.inverse[self.gestureCancelPolicy()]
 
 
-class Gesture(GestureMixin, QtWidgets.QGesture):
+class Gesture(GestureMixin, widgets.QGesture):
     pass
 
 

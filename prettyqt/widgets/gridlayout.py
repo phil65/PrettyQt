@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import constants, widgets
-from prettyqt.utils import InvalidParamError, listdelegators, helpers
+from prettyqt.utils import listdelegators, helpers
 
 
 class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
@@ -113,18 +113,13 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
     def append(self, item: widgets.QWidget | widgets.QLayout | widgets.QLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
-    def set_origin_corner(self, corner: constants.CornerStr):
+    def set_origin_corner(self, corner: constants.CornerStr | constants.Corner):
         """Set the origin corner.
 
         Args:
             corner: origin corner
-
-        Raises:
-            InvalidParamError: corner does not exist
         """
-        if corner not in constants.CORNER:
-            raise InvalidParamError(corner, constants.CORNER)
-        self.setOriginCorner(constants.CORNER[corner])
+        self.setOriginCorner(constants.CORNER.get_enum_value(corner))
 
     def get_origin_corner(self) -> constants.CornerStr:
         """Return current origin corner.

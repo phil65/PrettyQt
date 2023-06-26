@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "proportional"]
@@ -34,15 +34,9 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
 
         Args:
             filters: font filters to use
-
-        Raises:
-            InvalidParamError: invalid font filters
         """
         if not filters:
             filters = ("all",)
-        for item in filters:
-            if item not in FONT_FILTERS:
-                raise InvalidParamError(item, FONT_FILTERS)
         flags = FONT_FILTERS.merge_flags(filters)
         self.setFontFilters(flags)
 

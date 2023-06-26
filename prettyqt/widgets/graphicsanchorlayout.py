@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError
 
 
 class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAnchorLayout):
@@ -38,12 +37,10 @@ class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAncho
         self,
         first_item: QtWidgets.QGraphicsLayoutItem,
         second_item: QtWidgets.QGraphicsLayoutItem,
-        orientation: constants.OrientationStr,
+        orientation: constants.OrientationStr | constants.Orientation,
     ):
-        if orientation not in constants.ORIENTATION:
-            raise InvalidParamError(orientation, constants.ORIENTATION)
         self.addAnchors(
-            first_item, second_item, constants.ORIENTATION[orientation]  # type: ignore
+            first_item, second_item, constants.ORIENTATION.get_enum_value(orientation)
         )
 
     def add_corner_anchors(

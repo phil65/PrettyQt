@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError
 
 
 class LayoutItemMixin:
@@ -14,13 +13,8 @@ class LayoutItemMixin:
 
         Args:
             alignment: alignment for the layout
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setAlignment(constants.ALIGNMENTS[alignment])
+        self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     def get_alignment(self) -> constants.AlignmentStr:
         """Return current alignment.

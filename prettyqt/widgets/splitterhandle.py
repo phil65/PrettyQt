@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError
 
 
 class SplitterHandle(widgets.WidgetMixin, QtWidgets.QSplitterHandle):
@@ -24,18 +23,15 @@ class SplitterHandle(widgets.WidgetMixin, QtWidgets.QSplitterHandle):
     def mouseDoubleClickEvent(self, ev):
         self.double_clicked.emit(self)
 
-    def set_orientation(self, orientation: constants.OrientationStr):
+    def set_orientation(
+        self, orientation: constants.OrientationStr | constants.Orientation
+    ):
         """Set the orientation of the slider.
 
         Args:
             orientation: orientation for the slider
-
-        Raises:
-            InvalidParamError: orientation does not exist
         """
-        if orientation not in constants.ORIENTATION:
-            raise InvalidParamError(orientation, constants.ORIENTATION)
-        self.setOrientation(constants.ORIENTATION[orientation])
+        self.setOrientation(constants.ORIENTATION.get_enum_value(orientation))
 
     def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.

@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 SectionStr = Literal[
@@ -32,6 +32,7 @@ SECTIONS: bidict[SectionStr, QtWidgets.QDateTimeEdit.Section] = bidict(
     year=QtWidgets.QDateTimeEdit.Section.YearSection,
 )
 
+
 class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     value_changed = core.Signal(datetime.datetime)
 
@@ -55,18 +56,16 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
     def set_to_today(self):
         self.setDateTime(core.DateTime.currentDateTime())
 
-    def get_section_text(self, section: SectionStr) -> str:
-        if section not in SECTIONS:
-            raise InvalidParamError(section, SECTIONS)
-        return self.sectionText(SECTIONS[section])
+    def get_section_text(
+        self, section: SectionStr | QtWidgets.QDateTimeEdit.Section
+    ) -> str:
+        return self.sectionText(SECTIONS.get_enum_value(section))
 
     def get_current_section(self) -> SectionStr:
         return SECTIONS.inverse[self.currentSection()]
 
-    def set_current_section(self, section: SectionStr):
-        if section not in SECTIONS:
-            raise InvalidParamError(section, SECTIONS)
-        self.setCurrentSection(SECTIONS[section])
+    def set_current_section(self, section: SectionStr | QtWidgets.QDateTimeEdit.Section):
+        self.setCurrentSection(SECTIONS.get_enum_value(section))
 
     def get_displayed_sections(self) -> list[SectionStr]:
         return SECTIONS.get_list(self.displayedSections())

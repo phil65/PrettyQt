@@ -4,7 +4,6 @@ import logging
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError
 
 logger = logging.getLogger(__name__)
 
@@ -24,7 +23,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
             **kwargs,
         )
         class_name = type(self).__name__
-        self.set_id(class_name)
+        self.setObjectName(class_name)
         self.setHorizontalHeader(widgets.HeaderView("horizontal", parent=self))
         self.setVerticalHeader(widgets.HeaderView("vertical", parent=self))
         self.setAlternatingRowColors(True)
@@ -84,18 +83,13 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         order = constants.ASCENDING if ascending else constants.DESCENDING
         self.sortByColumn(column, order)
 
-    def set_grid_style(self, style: constants.PenStyleStr):
+    def set_grid_style(self, style: constants.PenStyleStr | constants.PenStyle):
         """Set grid style.
 
         Args:
             style: grid style to use
-
-        Raises:
-            InvalidParamError: invalid grid style
         """
-        if style not in constants.PEN_STYLE:
-            raise InvalidParamError(style, constants.PEN_STYLE)
-        self.setGridStyle(constants.PEN_STYLE[style])
+        self.setGridStyle(constants.PEN_STYLE.get_enum_value(style))
 
     def get_grid_style(self) -> constants.PenStyleStr:
         """Return grid style.
@@ -107,7 +101,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
 
     def get_visible_section_span(
         self,
-        orientation: constants.OrientationStr,
+        orientation: constants.OrientationStr | constants.Orientation,
         margin: int = 0,
     ) -> tuple[int, int]:
         """Get a tuple containing the visible start/end indexes.
@@ -115,7 +109,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         if there are no items visible, return -1, -1
         """
         rect = self.viewport().rect()
-        if orientation == "horizontal":
+        if orientation in ["horizontal", constants.HORIZONTAL]:
             start = self.columnAt(rect.left())
             count = self.model().columnCount()
             end = self.columnAt(rect.right())
@@ -156,13 +150,14 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
 
     def auto_span(
         self,
-        orientation=constants.HORIZONTAL,
+        orientation: constants.OrientationStr
+        | constants.Orientation = constants.HORIZONTAL,
         role=constants.DISPLAY_ROLE,
         start: tuple[int, int] = (0, 0),
         end: tuple[int, int] | None = None,
     ) -> list[tuple[int, int, int, int]]:
         """Set spans in given direction based on same content in given role."""
-        is_horizontal = orientation == constants.HORIZONTAL
+        is_horizontal = orientation in [constants.HORIZONTAL, "horizontal"]
         model = self.model()
         spans = []
         # figure out the ranges

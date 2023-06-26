@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 BlurHintStr = Literal["performance", "quality", "animation"]
@@ -18,9 +18,6 @@ BLUR_HINTS: bidict[BlurHintStr, QtWidgets.QGraphicsBlurEffect.BlurHint] = bidict
 
 class GraphicsBlurEffect(widgets.GraphicsEffectMixin, QtWidgets.QGraphicsBlurEffect):
     def set_blur_hints(self, *hints: BlurHintStr):
-        for item in hints:
-            if item not in BLUR_HINTS:
-                raise InvalidParamError(item, BLUR_HINTS)
         if hints:
             flags = BLUR_HINTS.merge_flags(hints)
         else:

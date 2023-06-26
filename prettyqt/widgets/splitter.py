@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import listdelegators, InvalidParamError
+from prettyqt.utils import listdelegators
 
 
 class SplitterMixin(widgets.FrameMixin):
@@ -16,11 +16,7 @@ class SplitterMixin(widgets.FrameMixin):
         orientation: constants.OrientationStr | QtCore.Qt.Orientation = "horizontal",
         **kwargs,
     ):
-        if isinstance(orientation, QtCore.Qt.Orientation):
-            ori = orientation
-        else:
-            ori = constants.ORIENTATION[orientation]
-        super().__init__(ori, **kwargs)
+        super().__init__(constants.ORIENTATION.get_enum_value(orientation), **kwargs)
         self.setHandleWidth(10)
 
     @overload
@@ -152,18 +148,16 @@ class SplitterMixin(widgets.FrameMixin):
             splitter += widget
         return splitter
 
-    def set_orientation(self, orientation: constants.OrientationStr):
+    def set_orientation(
+        self, orientation: constants.OrientationStr | constants.Orientation
+    ):
         """Set the orientation of the splitter.
 
         Args:
             orientation: orientation for the splitter
 
-        Raises:
-            InvalidParamError: orientation does not exist
         """
-        if orientation not in constants.ORIENTATION:
-            raise InvalidParamError(orientation, constants.ORIENTATION)
-        self.setOrientation(constants.ORIENTATION[orientation])
+        self.setOrientation(constants.ORIENTATION.get_enum_value(orientation))
 
     def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.
