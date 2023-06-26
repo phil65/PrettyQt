@@ -6,19 +6,19 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
-ELEMENT_TYPES = bidict(
+ElementTypeStr = Literal[
+    "move_to_element", "line_to_element", "curve_to_element", "curve_to_data_element"
+]
+
+ELEMENT_TYPES: bidict[ElementTypeStr, QtGui.QPainterPath.ElementType] = bidict(
     move_to_element=QtGui.QPainterPath.ElementType.MoveToElement,
     line_to_element=QtGui.QPainterPath.ElementType.LineToElement,
     curve_to_element=QtGui.QPainterPath.ElementType.CurveToElement,
     curve_to_data_element=QtGui.QPainterPath.ElementType.CurveToDataElement,
 )
-
-ElementTypeStr = Literal[
-    "move_to_element", "line_to_element", "curve_to_element", "curve_to_data_element"
-]
 
 
 class PainterPath(QtGui.QPainterPath):
@@ -79,12 +79,7 @@ class PainterPath(QtGui.QPainterPath):
 
         Args:
             rule: fill rule to use
-
-        Raises:
-            InvalidParamError: fill rule does not exist
         """
-        if rule not in constants.FILL_RULE:
-            raise InvalidParamError(rule, constants.FILL_RULE)
         self.setFillRule(constants.FILL_RULE[rule])
 
     def get_fill_rule(self) -> constants.FillRuleStr:

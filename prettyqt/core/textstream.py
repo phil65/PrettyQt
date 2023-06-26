@@ -4,7 +4,7 @@ from collections.abc import Iterator
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 FieldAlignmentStr = Literal["left", "right", "center", "accounting_style"]
@@ -49,18 +49,15 @@ STATUS: bidict[StatusStr, QtCore.QTextStream.Status] = bidict(
 
 
 class TextStream(QtCore.QTextStream):
-    def set_field_alignment(self, alignment: FieldAlignmentStr):
+    def set_field_alignment(
+        self, alignment: FieldAlignmentStr | QtCore.QTextStream.FieldAlignment
+    ):
         """Set the field alignment.
 
         Args:
             alignment: field alignment
-
-        Raises:
-            InvalidParamError: invalid field alignment
         """
-        if alignment not in FIELD_ALIGNMENT:
-            raise InvalidParamError(alignment, FIELD_ALIGNMENT)
-        self.setFieldAlignment(FIELD_ALIGNMENT[alignment])
+        self.setFieldAlignment(FIELD_ALIGNMENT.get_enum_value(alignment))
 
     def get_field_alignment(self) -> FieldAlignmentStr:
         """Get current field alignment.
@@ -70,18 +67,13 @@ class TextStream(QtCore.QTextStream):
         """
         return FIELD_ALIGNMENT.inverse[self.fieldAlignment()]
 
-    def set_status(self, status: StatusStr):
+    def set_status(self, status: StatusStr | QtCore.QTextStream.Status):
         """Set the status.
 
         Args:
             status: status
-
-        Raises:
-            InvalidParamError: invalid status
         """
-        if status not in STATUS:
-            raise InvalidParamError(status, STATUS)
-        self.setStatus(STATUS[status])
+        self.setStatus(STATUS.get_enum_value(status))
 
     def get_status(self) -> StatusStr:
         """Get current status.
@@ -91,18 +83,15 @@ class TextStream(QtCore.QTextStream):
         """
         return STATUS.inverse[self.status()]
 
-    def set_real_number_notation(self, notation: RealNumberNotationStr):
+    def set_real_number_notation(
+        self, notation: RealNumberNotationStr | QtCore.QTextStream.RealNumberNotation
+    ):
         """Set the real number notation.
 
         Args:
             notation: real number notation
-
-        Raises:
-            InvalidParamError: invalid real number notation
         """
-        if notation not in REAL_NUMBER_NOTATION:
-            raise InvalidParamError(notation, REAL_NUMBER_NOTATION)
-        self.setRealNumberNotation(REAL_NUMBER_NOTATION[notation])
+        self.setRealNumberNotation(REAL_NUMBER_NOTATION.get_enum_value(notation))
 
     def get_real_number_notation(self) -> RealNumberNotationStr:
         """Get current real number notation.
@@ -123,9 +112,6 @@ class TextStream(QtCore.QTextStream):
         return NUMBER_FLAGS.get_list(self.numberFlags())
 
     def set_number_flags(self, *flags: NumberFlagStr):
-        for item in flags:
-            if item not in NUMBER_FLAGS:
-                raise InvalidParamError(item, NUMBER_FLAGS)
         flag = NUMBER_FLAGS.merge_flags(flags)
         self.setNumberFlags(flag)
 

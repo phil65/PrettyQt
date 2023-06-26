@@ -6,7 +6,7 @@ import pathlib
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -130,9 +130,7 @@ class FontDatabase(QtGui.QFontDatabase):
         cls.removeApplicationFont(font_id)
 
     @classmethod
-    def get_system_font(cls, font_type: SystemFontStr):
-        if font_type not in SYSTEM_FONT:
-            raise InvalidParamError(font_type, SYSTEM_FONT)
+    def get_system_font(cls, font_type: SystemFontStr | QtGui.QFontDatabase.SystemFont):
         return cls.systemFont(SYSTEM_FONT[font_type])
 
 

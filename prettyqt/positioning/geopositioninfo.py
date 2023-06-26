@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, positioning
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import bidict, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 ATTRIBUTE = bidict(
@@ -50,3 +50,6 @@ class GeoPositionInfo(QtPositioning.QGeoPositionInfo):
 
     def get_timestamp(self) -> core.DateTime:
         return core.DateTime(self.timestamp())
+
+    def set_timestamp(self, timestamp: datatypes.DateTimeType):
+        self.setTimestamp(datatypes.to_datetime(timestamp))

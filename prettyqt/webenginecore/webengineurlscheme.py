@@ -4,22 +4,33 @@ from typing import Literal
 
 from typing_extensions import Self
 
-from prettyqt.qt import QtCore, QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.qt import QtWebEngineCore
+from prettyqt.utils import bidict, datatypes
 
 
 QWebEngineUrlScheme = QtWebEngineCore.QWebEngineUrlScheme
 
-SYNTAX = bidict(
+SyntaxStr = Literal["host_port_user_info", "host_port", "host", "path"]
+
+SYNTAX: bidict[SyntaxStr, QWebEngineUrlScheme.Syntax] = bidict(
     host_port_user_info=QWebEngineUrlScheme.Syntax.HostPortAndUserInformation,
     host_port=QWebEngineUrlScheme.Syntax.HostAndPort,
     host=QWebEngineUrlScheme.Syntax.Host,
     path=QWebEngineUrlScheme.Syntax.Path,
 )
 
-SyntaxStr = Literal["host_port_user_info", "host_port", "host", "path"]
+FlagStr = Literal[
+    "secure_scheme",
+    "local_scheme",
+    "local_access_allowed",
+    "no_access_allowed",
+    "service_workers_allowed",
+    "view_source_allowed",
+    "content_security_policy_ignored",
+    "cors_enabled",
+]
 
-FLAGS = bidict(
+FLAGS: bidict[FlagStr, QWebEngineUrlScheme.Flag] = bidict(
     secure_scheme=QWebEngineUrlScheme.Flag.SecureScheme,
     local_scheme=QWebEngineUrlScheme.Flag.LocalScheme,
     local_access_allowed=QWebEngineUrlScheme.Flag.LocalAccessAllowed,
@@ -36,25 +47,20 @@ class WebEngineUrlScheme(QtWebEngineCore.QWebEngineUrlScheme):
         return self.name().data().decode()
 
     @classmethod
-    def get_scheme_by_name(cls, name: str) -> Self:
-        scheme = cls.schemeByName(QtCore.QByteArray(name.encode()))
+    def get_scheme_by_name(cls, name: datatypes.ByteArrayType) -> Self:
+        scheme = cls.schemeByName(datatypes.to_bytearray(name))
         return cls(scheme)
 
-    def set_name(self, name: str):
-        self.setName(QtCore.QByteArray(name.encode()))
+    def set_name(self, name: datatypes.ByteArrayType):
+        self.setName(datatypes.to_bytearray(name))
 
-    def set_syntax(self, syntax: SyntaxStr):
+    def set_syntax(self, syntax: SyntaxStr | QWebEngineUrlScheme.Syntax):
         """Set syntax.
 
         Args:
             syntax: syntax to use
-
-        Raises:
-            InvalidParamError: syntax does not exist
         """
-        if syntax not in SYNTAX:
-            raise InvalidParamError(syntax, SYNTAX)
-        self.setSyntax(SYNTAX[syntax])
+        self.setSyntax(SYNTAX.get_enum_value(syntax))
 
     def get_syntax(self) -> SyntaxStr:
         """Return syntax.

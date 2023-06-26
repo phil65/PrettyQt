@@ -5,10 +5,12 @@ from typing import Any, Literal
 from typing_extensions import Self
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr, helpers
+from prettyqt.utils import bidict, get_repr, helpers
 
 
-SPEC = bidict(
+SpecStr = Literal["rgb", "hsv", "cmyk", "hsl", "extended_rgb", "invalid"]
+
+SPEC: bidict[SpecStr, QtGui.QColor.Spec] = bidict(
     rgb=QtGui.QColor.Spec.Rgb,
     hsv=QtGui.QColor.Spec.Hsv,
     cmyk=QtGui.QColor.Spec.Cmyk,
@@ -17,14 +19,12 @@ SPEC = bidict(
     invalid=QtGui.QColor.Spec.Invalid,
 )
 
-SpecStr = Literal["rgb", "hsv", "cmyk", "hsl", "extended_rgb", "invalid"]
-
-NAME_FORMAT = bidict(
-    hex_rgb=QtGui.QColor.NameFormat.HexRgb, hex_argb=QtGui.QColor.NameFormat.HexArgb
-)
-
 NameFormatStr = Literal["hex_rgb", "hex_argb"]
 NameStr = NameFormatStr | Literal["svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"]
+
+NAME_FORMAT: bidict[NameFormatStr, QtGui.QColor.NameFormat]  = bidict(
+    hex_rgb=QtGui.QColor.NameFormat.HexRgb, hex_argb=QtGui.QColor.NameFormat.HexArgb
+)
 
 
 def is_valid_color(text: str):
@@ -119,8 +119,6 @@ class Color(QtGui.QColor):
         """
         if colorspace is None:
             return cls(*end.getRgb()) if percent == 100 else cls(*start.getRgb())
-        if colorspace not in SPEC:
-            raise InvalidParamError(colorspace, SPEC)
         out = cls()
         match colorspace:
             case "rgb":

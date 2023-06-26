@@ -7,7 +7,7 @@ from typing import SupportsInt
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, colors, datatypes
+from prettyqt.utils import colors, datatypes
 
 
 class GuiApplicationMixin(core.CoreApplicationMixin):
@@ -53,18 +53,15 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
                 return window
         return None
 
-    def set_layout_direction(self, direction: constants.LayoutDirectionStr):
+    def set_layout_direction(
+        self, direction: constants.LayoutDirectionStr | constants.LayoutDirection
+    ):
         """Set layout direction.
 
         Args:
             direction: layout direction
-
-        Raises:
-            InvalidParamError: layout direction does not exist
         """
-        if direction not in constants.LAYOUT_DIRECTION:
-            raise InvalidParamError(direction, constants.LAYOUT_DIRECTION)
-        self.setLayoutDirection(constants.LAYOUT_DIRECTION[direction])
+        self.setLayoutDirection(constants.LAYOUT_DIRECTION.get_enum_value(direction))
 
     def get_layout_direction(self) -> constants.LayoutDirectionStr:
         """Get the current layout direction.
@@ -76,22 +73,17 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
 
     @classmethod
     def set_high_dpi_scale_factor_rounding_policy(
-        cls, policy: constants.HighDpiScaleFactorRoundingPolicyStr
+        cls,
+        policy: constants.HighDpiScaleFactorRoundingPolicyStr
+        | constants.HighDpiScaleFactorRoundingPolicy,
     ):
         """Set high dpi scale factor rounding policy.
 
         Args:
             policy: rounding policy
-
-        Raises:
-            InvalidParamError: rounding policy does not exist
         """
-        if policy not in constants.HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY:
-            raise InvalidParamError(
-                policy, constants.HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY
-            )
         cls.setHighDpiScaleFactorRoundingPolicy(
-            constants.HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY[policy]
+            constants.HIGH_DPI_SCALE_FACTOR_ROUNDING_POLICY.get_enum_value(policy)
         )
 
     @classmethod
@@ -124,9 +116,8 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         return gui.Screen(self.primaryScreen())
 
     def get_screen_at(self, point: datatypes.PointType) -> gui.Screen:
-        if isinstance(point, tuple):
-            point = QtCore.QPoint(*point)
-        return gui.Screen(self.screenAt(point))
+        p = datatypes.to_point(point)
+        return gui.Screen(self.screenAt(p))
 
     def get_screens(self) -> list[gui.Screen]:
         return [gui.Screen(i) for i in self.screens()]

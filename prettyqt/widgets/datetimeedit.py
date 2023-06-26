@@ -3,8 +3,6 @@ from __future__ import annotations
 import datetime
 from typing import Literal
 
-import dateutil.parser
-
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
@@ -78,10 +76,8 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         lower: datatypes.DateTimeType,
         upper: datatypes.DateTimeType,
     ):
-        if isinstance(lower, str):
-            lower = dateutil.parser.parse(lower)
-        if isinstance(upper, str):
-            upper = dateutil.parser.parse(upper)
+        lower = datatypes.to_datetime(lower)
+        upper = datatypes.to_datetime(upper)
         self.setToolTip(f"{lower} <= x <= {upper}")
         self.setDateTimeRange(lower, upper)
 

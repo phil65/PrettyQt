@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 NameTypeStr = Literal["default", "long", "short", "offset"]
@@ -27,10 +27,11 @@ TIME_TYPE: bidict[TimeTypeStr, QtCore.QTimeZone.TimeType] = bidict(
 
 class TimeZone(QtCore.QTimeZone):
     def __init__(self, *args):
-        if len(args) == 1 and isinstance(args[0], str):
-            super().__init__(QtCore.QByteArray(args[0].encode()))
-        else:
-            super().__init__(*args)
+        match args:
+            case (str() as string,):
+                super().__init__(QtCore.QByteArray(string.encode()))
+            case _:
+                super().__init__(*args)
 
     def __repr__(self):
         return get_repr(self, self.get_id())
@@ -46,19 +47,15 @@ class TimeZone(QtCore.QTimeZone):
 
     def get_display_name(
         self,
-        datetime: QtCore.QDateTime | TimeTypeStr,
-        name_type: NameTypeStr = "default",
+        date_time: QtCore.QDateTime | TimeTypeStr,
+        name_type: NameTypeStr | QtCore.QTimeZone.NameType = "default",
         locale: core.Locale | None = None,
     ) -> str:
-        if isinstance(datetime, str):
-            if datetime not in TIME_TYPE:
-                raise InvalidParamError(datetime, TIME_TYPE)
-            datetime = TIME_TYPE[datetime]
-        if name_type not in NAME_TYPE:
-            raise InvalidParamError(name_type, NAME_TYPE)
+        dt = TIME_TYPE.get_enum_value(date_time)
+        name_val = NAME_TYPE.get_enum_value(name_type)
         if locale is None:
             locale = core.Locale()
-        return self.displayName(datetime, NAME_TYPE[name_type], locale)
+        return self.displayName(dt, name_val, locale)
 
     def get_time_spec(self) -> constants.TimeSpecStr:
         return constants.TIME_SPEC.inverse[self.timeSpec()]

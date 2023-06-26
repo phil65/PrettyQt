@@ -15,18 +15,10 @@ class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
     def load_data(
         self,
         data: datatypes.ByteArrayType,
-        url: datatypes.UrlType | None = None,
+        url: datatypes.UrlType | os.PathLike | None = None,
     ):
         data = datatypes.to_bytearray(data)
-        match url:
-            case str():
-                url = QtCore.QUrl(url)
-            case None:
-                url = QtCore.QUrl()
-            case QtCore.QUrl():
-                pass
-            case _:
-                raise TypeError(url)
+        url = datatypes.to_local_url(url)
         self.loadData(data, url)
 
     def load_file(self, file: datatypes.UrlType | datatypes.PathType):

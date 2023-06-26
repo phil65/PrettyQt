@@ -1,12 +1,13 @@
 from __future__ import annotations
 
-import dateutil.parser
+from typing import Literal
 
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, datatypes, get_repr
 
+RawFormStr = Literal["name_and_value_only", "full"]
 
-RAW_FORMS = bidict(
+RAW_FORMS: bidict[RawFormStr, QtNetwork.QNetworkCookie.RawForm] = bidict(
     name_and_value_only=QtNetwork.QNetworkCookie.RawForm.NameAndValueOnly,
     full=QtNetwork.QNetworkCookie.RawForm.Full,
 )
@@ -35,15 +36,7 @@ class NetworkCookie(QtNetwork.QNetworkCookie):
         return self.value().data().decode()
 
     def set_expiration_date(self, date: datatypes.DateTimeType | None):
-        match date:
-            case None:
-                date = QtCore.QDateTime()
-            case str():
-                date = dateutil.parser.parse(date)
-            case datatypes.DateTimeType():
-                pass
-            case _:
-                raise TypeError(date)
+        date = datatypes.to_datetime(date)
         self.setExpirationDate(date)  # type: ignore
 
 

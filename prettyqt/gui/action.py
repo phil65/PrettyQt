@@ -10,30 +10,19 @@ from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
-ACTION_EVENT = bidict(
+ActionEventStr = Literal["trigger", "hover"]
+
+ACTION_EVENT: bidict[ActionEventStr, QtGui.QAction.ActionEvent] = bidict(
     trigger=QtGui.QAction.ActionEvent.Trigger,
     hover=QtGui.QAction.ActionEvent.Hover,
 )
 
-ActionEventStr = Literal["trigger", "hover"]
+PriorityStr = Literal["low", "normal", "high"]
 
-
-PRIORITIES = bidict(
+PRIORITIES: bidict[PriorityStr, QtGui.QAction.Priority] = bidict(
     low=QtGui.QAction.Priority.LowPriority,
     normal=QtGui.QAction.Priority.NormalPriority,
     high=QtGui.QAction.Priority.HighPriority,
-)
-
-PriorityStr = Literal["low", "normal", "high"]
-
-ROLES = bidict(
-    none=QtGui.QAction.MenuRole.NoRole,
-    text_heuristic=QtGui.QAction.MenuRole.TextHeuristicRole,
-    application_specific=QtGui.QAction.MenuRole.ApplicationSpecificRole,
-    about_qt=QtGui.QAction.MenuRole.AboutQtRole,
-    about=QtGui.QAction.MenuRole.AboutRole,
-    preferences=QtGui.QAction.MenuRole.PreferencesRole,
-    quit=QtGui.QAction.MenuRole.QuitRole,
 )
 
 RoleStr = Literal[
@@ -45,6 +34,16 @@ RoleStr = Literal[
     "preferences",
     "quit",
 ]
+
+ROLES: bidict[RoleStr, QtGui.QAction.MenuRole] = bidict(
+    none=QtGui.QAction.MenuRole.NoRole,
+    text_heuristic=QtGui.QAction.MenuRole.TextHeuristicRole,
+    application_specific=QtGui.QAction.MenuRole.ApplicationSpecificRole,
+    about_qt=QtGui.QAction.MenuRole.AboutQtRole,
+    about=QtGui.QAction.MenuRole.AboutRole,
+    preferences=QtGui.QAction.MenuRole.PreferencesRole,
+    quit=QtGui.QAction.MenuRole.QuitRole,
+)
 
 
 class ActionMixin(core.ObjectMixin):
@@ -171,13 +170,8 @@ class ActionMixin(core.ObjectMixin):
 
         Args:
             priority: priority for the action
-
-        Raises:
-            InvalidParamError: priority does not exist
         """
-        if isinstance(priority, str):
-            priority = PRIORITIES[priority]
-        super().setPriority(priority)
+        super().setPriority(PRIORITIES.get_enum_value(priority))
 
     setPriority = set_priority
 
@@ -196,13 +190,8 @@ class ActionMixin(core.ObjectMixin):
 
         Args:
             context: shortcut context
-
-        Raises:
-            InvalidParamError: shortcut context does not exist
         """
-        if isinstance(context, str):
-            context = constants.SHORTCUT_CONTEXT[context]
-        super().setShortcutContext(context)
+        super().setShortcutContext(constants.SHORTCUT_CONTEXT.get_enum_value(context))
 
     setShortcutContext = set_shortcut_context
 
@@ -214,18 +203,13 @@ class ActionMixin(core.ObjectMixin):
         """
         return constants.SHORTCUT_CONTEXT.inverse[super().shortcutContext()]
 
-    def set_menu_role(self, role: RoleStr):
+    def set_menu_role(self, role: RoleStr | QtGui.QAction.MenuRole):
         """Set menu role.
 
         Args:
             role: menu role
-
-        Raises:
-            InvalidParamError: menu role does not exist
         """
-        if isinstance(role, str):
-            role = ROLES[role]
-        super().setMenuRole(role)
+        super().setMenuRole(ROLES.get_enum_value(role))
 
     setMenuRole = set_menu_role
 

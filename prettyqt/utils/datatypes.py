@@ -71,7 +71,7 @@ if TYPE_CHECKING:
     UrlType = str | QtCore.QUrl
     PointType = tuple[int, int] | QtCore.QPoint
     PointFType = tuple[int | float, int | float] | QtCore.QPointF
-    SizeType = tuple[int, int] | QtCore.QSize
+    SizeType = tuple[int, int] | QtCore.QSize | int
     SizeFType = tuple[int | float, int | float] | QtCore.QSizeF
     MarginsType = tuple[int, int, int, int] | tuple[int, int] | int | QtCore.QMargins
     MarginsFType = (
@@ -462,6 +462,8 @@ def to_size(size: QtCore.QSizeF | SizeType):
     match size:
         case (int(), int()):
             return QtCore.QSize(*size)
+        case int():
+            return QtCore.QSize(size, size)
         case QtCore.QSize():
             return size
         case QtCore.QSizeF():

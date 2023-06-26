@@ -11,7 +11,7 @@ from typing_extensions import Self
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -86,18 +86,13 @@ class Settings_(
         return self.value(key) if self.contains(key) else default
 
     @classmethod
-    def set_default_format(cls, fmt: FormatStr):
+    def set_default_format(cls, fmt: FormatStr | QtCore.QSettings.Format):
         """Set the default format.
 
         Args:
             fmt: the default format to use
-
-        Raises:
-            InvalidParamError: invalid format
         """
-        if fmt not in FORMAT:
-            raise InvalidParamError(fmt, FORMAT)
-        cls.setDefaultFormat(FORMAT[fmt])
+        cls.setDefaultFormat(FORMAT.get_enum_value(fmt))
 
     @classmethod
     def get_default_format(cls) -> FormatStr:
@@ -117,22 +112,22 @@ class Settings_(
         return SCOPE.inverse[self.scope()]
 
     @classmethod
-    def set_path(cls, fmt: FormatStr, scope: ScopeStr, path: datatypes.PathType):
+    def set_path(
+        cls,
+        fmt: FormatStr | QtCore.QSettings.Format,
+        scope: ScopeStr | QtCore.QSettings.Scope,
+        path: datatypes.PathType,
+    ):
         """Set the path to the settings file.
 
         Args:
             fmt: the default format to use
             scope: the scope to use
             path: the path to set
-
-        Raises:
-            InvalidParamError: invalid format or scope
         """
-        if fmt not in FORMAT:
-            raise InvalidParamError(fmt, FORMAT)
-        if scope not in SCOPE:
-            raise InvalidParamError(scope, SCOPE)
-        cls.setPath(FORMAT[fmt], SCOPE[scope], os.fspath(path))
+        fmt_val = FORMAT.get_enum_value(fmt)
+        scope_val = SCOPE.get_enum_value(scope)
+        cls.setPath(fmt_val, scope_val, os.fspath(path))
 
     @contextlib.contextmanager
     def edit_group(self, prefix: str):
@@ -210,6 +205,7 @@ class Settings_(
 
 class Settings(Settings_):
     """Settings class which wraps everything into a dict to preserve data types."""
+
     def set_value(self, key: str, value):
         match value:
             case Settings_():

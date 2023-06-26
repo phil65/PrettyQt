@@ -3,8 +3,6 @@ from __future__ import annotations
 import datetime
 from typing import Literal
 
-import dateutil.parser
-
 from prettyqt import core
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, get_repr
@@ -107,8 +105,7 @@ class FileDeviceMixin(core.IODeviceMixin):
             file_time: file time to set
             typ: file time type
         """
-        if isinstance(file_time, str):
-            file_time = dateutil.parser.parse(file_time)
+        file_time = datatypes.to_datetime(file_time)
         return self.setFileTime(file_time, FILE_TIME.get_enum_value(typ))  # type: ignore
 
     def get_file_time(

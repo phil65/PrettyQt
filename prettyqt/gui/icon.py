@@ -6,7 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, serializemixin
+from prettyqt.utils import bidict, datatypes, get_repr, serializemixin
 
 
 MODE = bidict(
@@ -62,24 +62,20 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
         return cls(gui.Pixmap.fromImage(image))
 
     def get_available_sizes(
-        self, mode: ModeStr = "normal", state: StateStr = "off"
+        self,
+        mode: ModeStr | QtGui.QIcon.Mode = "normal",
+        state: StateStr | QtGui.QIcon.State = "off",
     ) -> list[core.Size]:
-        if mode not in MODE:
-            raise InvalidParamError(mode, MODE)
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
-        return [core.Size(i) for i in self.availableSizes(MODE[mode], STATE[state])]
+        m = MODE.get_enum_value(mode)
+        s = STATE.get_enum_value(state)
+        return [core.Size(i) for i in self.availableSizes(m, s)]
 
     def add_pixmap(
         self,
         data: QtCore.QByteArray | QtGui.QPixmap | bytes,
-        mode: ModeStr = "normal",
-        state: StateStr = "off",
+        mode: ModeStr | QtGui.QIcon.Mode = "normal",
+        state: StateStr | QtGui.QIcon.State = "off",
     ):
-        if mode not in MODE:
-            raise InvalidParamError(mode, MODE)
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
         if isinstance(data, bytes):
             data = QtCore.QByteArray(data)
         if isinstance(data, QtCore.QByteArray):
@@ -87,49 +83,28 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
             pixmap.loadFromData(data)
         else:
             pixmap = data
-        self.addPixmap(pixmap, MODE[mode], STATE[state])
+        self.addPixmap(pixmap, MODE.get_enum_value(mode), STATE.get_enum_value(state))
 
     def get_pixmap(
         self,
         size: datatypes.SizeType | int,
-        mode: ModeStr = "normal",
-        state: StateStr = "off",
+        mode: ModeStr | QtGui.QIcon.Mode = "normal",
+        state: StateStr | QtGui.QIcon.State = "off",
     ) -> QtGui.QPixmap:
-        if mode not in MODE:
-            raise InvalidParamError(mode, MODE)
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
-        match size:
-            case (int(), int()):
-                size = core.Size(*size)
-            case int():
-                size = core.Size(size, size)
-            case core.QSize():
-                pass
-            case _:
-                raise TypeError(size)
-        return self.pixmap(size, MODE[mode], STATE[state])
+        sz = datatypes.to_size(size)
+        return self.pixmap(sz, MODE.get_enum_value(mode), STATE.get_enum_value(state))
 
     def get_actual_size(
         self,
-        size: datatypes.SizeType | int,
-        mode: ModeStr = "normal",
-        state: StateStr = "off",
+        size: datatypes.SizeType,
+        mode: ModeStr | QtGui.QIcon.Mode = "normal",
+        state: StateStr | QtGui.QIcon.State = "off",
     ) -> core.Size:
-        if mode not in MODE:
-            raise InvalidParamError(mode, MODE)
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
-        match size:
-            case (int(), int()):
-                size = core.Size(*size)
-            case int():
-                size = core.Size(size, size)
-            case core.QSize():
-                pass
-            case _:
-                raise TypeError(size)
-        return core.Size(self.actualSize(size, MODE[mode], STATE[state]))
+        sz = datatypes.to_size(size)
+        m = MODE.get_enum_value(mode)
+        s = STATE.get_enum_value(state)
+        actual_size = self.actualSize(sz, m, s)
+        return core.Size(actual_size)
 
 
 if __name__ == "__main__":
