@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtPrintSupport
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 PRINT_RANGE = bidict(
@@ -39,18 +39,15 @@ class AbstractPrintDialogMixin(widgets.DialogMixin):
     def get_print_range(self) -> PrintRangeStr:
         return PRINT_RANGE.inverse[self.printRange()]
 
-    def set_print_range(self, print_range: PrintRangeStr):
+    def set_print_range(
+        self, print_range: PrintRangeStr | QtPrintSupport.QAbstractPrintDialog.PrintRange
+    ):
         """Set print range.
 
         Args:
             print_range: print range
-
-        Raises:
-            InvalidParamError: print range does not exist
         """
-        if print_range not in PRINT_RANGE:
-            raise InvalidParamError(print_range, PRINT_RANGE)
-        self.setPrintRange(PRINT_RANGE[print_range])
+        self.setPrintRange(PRINT_RANGE.get_enum_value(print_range))
 
 
 class AbstractPrintDialog(AbstractPrintDialogMixin, QtPrintSupport.QAbstractPrintDialog):

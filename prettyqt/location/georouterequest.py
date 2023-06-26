@@ -4,21 +4,8 @@ from typing import Literal
 
 from prettyqt import core, positioning
 from prettyqt.qt import QtLocation
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
-
-FEATURE_TYPES = bidict(
-    none=QtLocation.QGeoRouteRequest.FeatureType.NoFeature,
-    toll=QtLocation.QGeoRouteRequest.FeatureType.TollFeature,
-    highway=QtLocation.QGeoRouteRequest.FeatureType.HighwayFeature,
-    public_transit=QtLocation.QGeoRouteRequest.FeatureType.PublicTransitFeature,
-    ferry=QtLocation.QGeoRouteRequest.FeatureType.FerryFeature,
-    tunnel=QtLocation.QGeoRouteRequest.FeatureType.TunnelFeature,
-    dirt_road=QtLocation.QGeoRouteRequest.FeatureType.DirtRoadFeature,
-    parks=QtLocation.QGeoRouteRequest.FeatureType.ParksFeature,
-    motor_pool_lane=QtLocation.QGeoRouteRequest.FeatureType.MotorPoolLaneFeature,
-    traffic=QtLocation.QGeoRouteRequest.FeatureType.TrafficFeature,
-)
 
 FeatureTypeStr = Literal[
     "none",
@@ -33,7 +20,24 @@ FeatureTypeStr = Literal[
     "traffic",
 ]
 
-FEATURE_WEIGHTS = bidict(
+FEATURE_TYPES: bidict[FeatureTypeStr, QtLocation.QGeoRouteRequest.FeatureType] = bidict(
+    none=QtLocation.QGeoRouteRequest.FeatureType.NoFeature,
+    toll=QtLocation.QGeoRouteRequest.FeatureType.TollFeature,
+    highway=QtLocation.QGeoRouteRequest.FeatureType.HighwayFeature,
+    public_transit=QtLocation.QGeoRouteRequest.FeatureType.PublicTransitFeature,
+    ferry=QtLocation.QGeoRouteRequest.FeatureType.FerryFeature,
+    tunnel=QtLocation.QGeoRouteRequest.FeatureType.TunnelFeature,
+    dirt_road=QtLocation.QGeoRouteRequest.FeatureType.DirtRoadFeature,
+    parks=QtLocation.QGeoRouteRequest.FeatureType.ParksFeature,
+    motor_pool_lane=QtLocation.QGeoRouteRequest.FeatureType.MotorPoolLaneFeature,
+    traffic=QtLocation.QGeoRouteRequest.FeatureType.TrafficFeature,
+)
+
+FeatureWeightStr = Literal["neutral", "prefer", "require", "avoid", "disallow"]
+
+FEATURE_WEIGHTS: bidict[
+    FeatureWeightStr, QtLocation.QGeoRouteRequest.FeatureWeight
+] = bidict(
     neutral=QtLocation.QGeoRouteRequest.FeatureWeight.NeutralFeatureWeight,
     prefer=QtLocation.QGeoRouteRequest.FeatureWeight.PreferFeatureWeight,
     require=QtLocation.QGeoRouteRequest.FeatureWeight.RequireFeatureWeight,
@@ -41,40 +45,44 @@ FEATURE_WEIGHTS = bidict(
     disallow=QtLocation.QGeoRouteRequest.FeatureWeight.DisallowFeatureWeight,
 )
 
-FeatureWeightStr = Literal["neutral", "prefer", "require", "avoid", "disallow"]
+ManeuverDetailStr = Literal["none", "basic"]
 
-MANEUVER_DETAIL = bidict(
+MANEUVER_DETAIL: bidict[
+    ManeuverDetailStr, QtLocation.QGeoRouteRequest.ManeuverDetail
+] = bidict(
     none=QtLocation.QGeoRouteRequest.ManeuverDetail.NoManeuvers,
     basic=QtLocation.QGeoRouteRequest.ManeuverDetail.BasicManeuvers,
 )
 
-ManeuverDetailStr = Literal["none", "basic"]
+RouteOptimizationStr = Literal["shortest", "fastest", "most_economic", "most_scenic"]
 
-ROUTE_OPTIMIZATION = bidict(
+ROUTE_OPTIMIZATION: bidict[
+    RouteOptimizationStr, QtLocation.QGeoRouteRequest.RouteOptimization
+] = bidict(
     shortest=QtLocation.QGeoRouteRequest.RouteOptimization.ShortestRoute,
     fastest=QtLocation.QGeoRouteRequest.RouteOptimization.FastestRoute,
     most_economic=QtLocation.QGeoRouteRequest.RouteOptimization.MostEconomicRoute,
     most_scenic=QtLocation.QGeoRouteRequest.RouteOptimization.MostScenicRoute,
 )
 
-RouteOptimizationStr = Literal["shortest", "fastest", "most_economic", "most_scenic"]
+SegmentDetailStr = Literal["none", "basic"]
 
-SEGMENT_DETAIL = bidict(
+SEGMENT_DETAIL: bidict[
+    SegmentDetailStr, QtLocation.QGeoRouteRequest.SegmentDetail
+] = bidict(
     none=QtLocation.QGeoRouteRequest.SegmentDetail.NoSegmentData,
     basic=QtLocation.QGeoRouteRequest.SegmentDetail.BasicSegmentData,
 )
 
-SegmentDetailStr = Literal["none", "basic"]
+TravelModeStr = Literal["car", "pedestrian", "bicycle", "public_transit", "truck"]
 
-TRAVEL_MODE = bidict(
+TRAVEL_MODE: bidict[TravelModeStr, QtLocation.QGeoRouteRequest.TravelMode] = bidict(
     car=QtLocation.QGeoRouteRequest.TravelMode.CarTravel,
     pedestrian=QtLocation.QGeoRouteRequest.TravelMode.PedestrianTravel,
     bicycle=QtLocation.QGeoRouteRequest.TravelMode.BicycleTravel,
     public_transit=QtLocation.QGeoRouteRequest.TravelMode.PublicTransitTravel,
     truck=QtLocation.QGeoRouteRequest.TravelMode.TruckTravel,
 )
-
-TravelModeStr = Literal["car", "pedestrian", "bicycle", "public_transit", "truck"]
 
 
 class GeoRouteRequest(QtLocation.QGeoRouteRequest):
@@ -87,44 +95,44 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
     def get_departure_time(self) -> core.DateTime:
         return core.DateTime(self.departureTime())
 
-    def set_feature_weight(self, feature: FeatureTypeStr, weight: FeatureWeightStr):
+    def set_feature_weight(
+        self,
+        feature: FeatureTypeStr | QtLocation.QGeoRouteRequest.FeatureType,
+        weight: FeatureWeightStr | QtLocation.QGeoRouteRequest.FeatureWeight,
+    ):
         """Set the feature weight.
 
         Args:
             feature: Feature type
             weight: Feature weight
-
-        Raises:
-            InvalidParamError: feature weight / type does not exist
         """
-        if weight not in FEATURE_WEIGHTS:
-            raise InvalidParamError(weight, FEATURE_WEIGHTS)
-        if feature not in FEATURE_TYPES:
-            raise InvalidParamError(feature, FEATURE_TYPES)
-        self.setFeatureWeight(FEATURE_TYPES[feature], FEATURE_WEIGHTS[weight])
+        self.setFeatureWeight(
+            FEATURE_TYPES.get_enum_value(feature), FEATURE_WEIGHTS.get_enum_value(weight)
+        )
 
-    def get_feature_weight(self, feature: FeatureTypeStr) -> FeatureWeightStr:
+    def get_feature_weight(
+        self, feature: FeatureTypeStr | QtLocation.QGeoRouteRequest.FeatureType
+    ) -> FeatureWeightStr:
         """Return current feature weight.
 
         Returns:
             Feature weight
         """
-        if feature not in FEATURE_TYPES:
-            raise InvalidParamError(feature, FEATURE_TYPES)
-        return FEATURE_WEIGHTS.inverse[self.featureWeight(FEATURE_TYPES[feature])]
+        return FEATURE_WEIGHTS.inverse[
+            self.featureWeight(FEATURE_TYPES.get_enum_value(feature))
+        ]
 
-    def set_route_optimization(self, optimization: RouteOptimizationStr):
+    def set_route_optimization(
+        self,
+        optimization: RouteOptimizationStr
+        | QtLocation.QGeoRouteRequest.RouteOptimization,
+    ):
         """Set the route optimization.
 
         Args:
             optimization: Route optimization
-
-        Raises:
-            InvalidParamError: route optimization does not exist
         """
-        if optimization not in ROUTE_OPTIMIZATION:
-            raise InvalidParamError(optimization, ROUTE_OPTIMIZATION)
-        self.setRouteOptimization(ROUTE_OPTIMIZATION[optimization])
+        self.setRouteOptimization(ROUTE_OPTIMIZATION.get_enum_value(optimization))
 
     def get_route_optimization(self) -> RouteOptimizationStr:
         """Return current route optimization.
@@ -138,9 +146,6 @@ class GeoRouteRequest(QtLocation.QGeoRouteRequest):
         return TRAVEL_MODE.get_list(self.travelModes())
 
     def set_travel_modes(self, *mode: TravelModeStr):
-        for item in mode:
-            if item not in TRAVEL_MODE:
-                raise InvalidParamError(item, TRAVEL_MODE)
         flags = TRAVEL_MODE.merge_flags(mode)
         self.setTravelModes(flags)
 

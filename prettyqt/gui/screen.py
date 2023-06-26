@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError
 
 
 class Screen:
@@ -50,16 +49,12 @@ class Screen:
 
     def get_angle_between(
         self,
-        orientation_1: constants.ScreenOrientationStr,
-        orientation_2: constants.ScreenOrientationStr,
+        orientation_1: constants.ScreenOrientationStr | constants.ScreenOrientation,
+        orientation_2: constants.ScreenOrientationStr | constants.ScreenOrientation,
     ):
-        if orientation_1 not in constants.SCREEN_ORIENTATION:
-            raise InvalidParamError(orientation_1, constants.SCREEN_ORIENTATION)
-        if orientation_2 not in constants.SCREEN_ORIENTATION:
-            raise InvalidParamError(orientation_2, constants.SCREEN_ORIENTATION)
         self.angleBetween(
-            constants.SCREEN_ORIENTATION[orientation_1],
-            constants.SCREEN_ORIENTATION[orientation_2],
+            constants.SCREEN_ORIENTATION.get_enum_value(orientation_1),
+            constants.SCREEN_ORIENTATION.get_enum_value(orientation_2),
         )
 
     def grab_window(

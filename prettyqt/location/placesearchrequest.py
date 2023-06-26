@@ -4,16 +4,18 @@ from typing import Literal
 
 from prettyqt import location, positioning
 from prettyqt.qt import QtLocation, QtPositioning
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-RELEVANCE_HINT = bidict(
+RelevanceHintStr = Literal["unspecified", "distance", "lexical_place_name"]
+
+RELEVANCE_HINT: bidict[
+    RelevanceHintStr, QtLocation.QPlaceSearchRequest.RelevanceHint
+] = bidict(
     unspecified=QtLocation.QPlaceSearchRequest.RelevanceHint.UnspecifiedHint,
     distance=QtLocation.QPlaceSearchRequest.RelevanceHint.DistanceHint,
     lexical_place_name=QtLocation.QPlaceSearchRequest.RelevanceHint.LexicalPlaceNameHint,
 )
-
-RelevanceHintStr = Literal["unspecified", "distance", "lexical_place_name"]
 
 
 class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
@@ -42,18 +44,15 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
             case _:
                 return positioning.GeoShape(area)
 
-    def set_relevance_hint(self, hint: RelevanceHintStr):
+    def set_relevance_hint(
+        self, hint: RelevanceHintStr | QtLocation.QPlaceSearchRequest.RelevanceHint
+    ):
         """Set the relevance hint.
 
         Args:
             hint: Relevance hint
-
-        Raises:
-            InvalidParamError: relevance hint does not exist
         """
-        if hint not in RELEVANCE_HINT:
-            raise InvalidParamError(hint, RELEVANCE_HINT)
-        self.setRelevanceHint(RELEVANCE_HINT[hint])
+        self.setRelevanceHint(RELEVANCE_HINT.get_enum_value(hint))
 
     def get_relevance_hint(self) -> RelevanceHintStr:
         """Return current relevance hint.

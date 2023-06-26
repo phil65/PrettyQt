@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 SOCKET_OPTION = bidict(
@@ -23,9 +23,6 @@ class LocalServer(core.ObjectMixin, QtNetwork.QLocalServer):
         return network.abstractsocket.SOCKET_ERROR.inverse[self.serverError()]
 
     def set_socket_options(self, *name: SocketOptionStr):
-        for item in name:
-            if item not in SOCKET_OPTION:
-                raise InvalidParamError(item, SOCKET_OPTION)
         flags = SOCKET_OPTION.merge_flags(name)
         self.setSocketOptions(flags)
 

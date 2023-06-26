@@ -4,17 +4,19 @@ from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
-IMAGE_WRITER_ERROR = bidict(
+ImageWriterErrorStr = Literal["device", "unsupported_format", "invalid_image", "unknown"]
+
+IMAGE_WRITER_ERROR: bidict[
+    ImageWriterErrorStr, QtGui.QImageWriter.ImageWriterError
+] = bidict(
     device=QtGui.QImageWriter.ImageWriterError.DeviceError,
     unsupported_format=QtGui.QImageWriter.ImageWriterError.UnsupportedFormatError,
     invalid_image=QtGui.QImageWriter.ImageWriterError.InvalidImageError,
     unknown=QtGui.QImageWriter.ImageWriterError.UnknownError,
 )
-
-ImageWriterErrorStr = Literal["device", "unsupported_format", "invalid_image", "unknown"]
 
 
 class ImageWriter(QtGui.QImageWriter):
@@ -49,18 +51,16 @@ class ImageWriter(QtGui.QImageWriter):
         fmt = datatypes.to_bytearray(fmt)
         self.setFormat(fmt)
 
-    def set_transformation(self, origin: gui.imageiohandler.TransformationStr):
+    def set_transformation(
+        self,
+        origin: gui.imageiohandler.TransformationStr | gui.ImageIOHandler.Transformation,
+    ):
         """Set the image transformations metadata including orientation.
 
         Args:
             origin: transformation to use
-
-        Raises:
-            InvalidParamError: transformation does not exist
         """
-        if origin not in gui.imageiohandler.TRANSFORMATION:
-            raise InvalidParamError(origin, gui.imageiohandler.TRANSFORMATION)
-        self.setTransformation(gui.imageiohandler.TRANSFORMATION[origin])
+        self.setTransformation(gui.imageiohandler.TRANSFORMATION.get_enum_value(origin))
 
     def get_transformation(self) -> gui.imageiohandler.TransformationStr:
         """Return the transformation and orientation the image has been set to.

@@ -593,7 +593,7 @@ def to_datetime(date_time: DateTimeType):
             return QtCore.QDateTime()
         case str():
             return dateutil.parser.parse(date_time)
-        case QtCore.QDateTime | datetime.datetime():
+        case QtCore.QDateTime() | datetime.datetime():
             return date_time
         case _:
             raise TypeError(date_time)

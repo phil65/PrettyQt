@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError
 
 
 class CheckBox(widgets.AbstractButtonMixin, QtWidgets.QCheckBox):
@@ -12,18 +11,13 @@ class CheckBox(widgets.AbstractButtonMixin, QtWidgets.QCheckBox):
         super().__init__(*args, **kwargs)
         self.stateChanged.connect(self.value_changed)
 
-    def set_checkstate(self, state: constants.CheckStateStr):
+    def set_checkstate(self, state: constants.CheckStateStr | constants.CheckState):
         """Set checkstate of the checkbox.
 
         Args:
             state: checkstate to use
-
-        Raises:
-            InvalidParamError: invalid checkstate
         """
-        if state not in constants.CHECK_STATE:
-            raise InvalidParamError(state, constants.CHECK_STATE)
-        self.setCheckState(constants.CHECK_STATE[state])
+        self.setCheckState(constants.CHECK_STATE.get_enum_value(state))
 
     def get_checkstate(self) -> constants.CheckStateStr:
         """Return checkstate.
