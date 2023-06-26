@@ -4,40 +4,35 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
-
-CACHE_MODE = bidict(
-    none=QtGui.QMovie.CacheMode.CacheNone, all=QtGui.QMovie.CacheMode.CacheAll
-)
 
 CacheModeStr = Literal["none", "all"]
 
-MOVIE_STATE = bidict(
+CACHE_MODE: bidict[CacheModeStr, QtGui.QMovie.CacheMode] = bidict(
+    none=QtGui.QMovie.CacheMode.CacheNone, all=QtGui.QMovie.CacheMode.CacheAll
+)
+
+MovieStateStr = Literal["not_running", "paused", "running"]
+
+MOVIE_STATE: bidict[MovieStateStr, QtGui.QMovie.MovieState] = bidict(
     not_running=QtGui.QMovie.MovieState.NotRunning,
     paused=QtGui.QMovie.MovieState.Paused,
     running=QtGui.QMovie.MovieState.Running,
 )
-
-MovieStateStr = Literal["not_running", "paused", "running"]
 
 
 class Movie(core.ObjectMixin, QtGui.QMovie):
     def __repr__(self):
         return get_repr(self, self.fileName(), self.get_format())
 
-    def set_cache_mode(self, mode: CacheModeStr):
+    def set_cache_mode(self, mode: CacheModeStr | QtGui.QMovie.CacheMode):
         """Set cache mode.
 
         Args:
             mode: cache mode
-
-        Raises:
-            InvalidParamError: cache mode does not exist
         """
-        if mode not in CACHE_MODE:
-            raise InvalidParamError(mode, CACHE_MODE)
-        self.setCacheMode(CACHE_MODE[mode])
+        self.setCacheMode(CACHE_MODE.get_enum_value(mode))
 
     def get_cache_mode(self) -> CacheModeStr:
         """Get the current cache mode.

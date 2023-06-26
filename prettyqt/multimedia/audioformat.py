@@ -3,10 +3,12 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtMultimedia
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-SAMPLE_FORMAT = bidict(
+SampleFormatStr = Literal["unknown", "u_int8", "int16", "int32", "float"]
+
+SAMPLE_FORMAT: bidict[SampleFormatStr, QtMultimedia.QAudioFormat.SampleFormat] = bidict(
     unknown=QtMultimedia.QAudioFormat.SampleFormat.Unknown,
     u_int8=QtMultimedia.QAudioFormat.SampleFormat.UInt8,
     int16=QtMultimedia.QAudioFormat.SampleFormat.Int16,
@@ -14,9 +16,13 @@ SAMPLE_FORMAT = bidict(
     float=QtMultimedia.QAudioFormat.SampleFormat.Float,
 )
 
-SampleFormatStr = Literal["unknown", "u_int8", "int16", "int32", "float"]
+ChannelConfigStr = Literal[
+    "unknown", "mono", "stereo", "2_1", "3_0", "3_1", "5_0", "5_1", "7_0", "7_1"
+]
 
-CHANNEL_CONFIG = bidict(
+CHANNEL_CONFIG: bidict[
+    ChannelConfigStr, QtMultimedia.QAudioFormat.ChannelConfig
+] = bidict(
     **{
         "unknown": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigUnknown,
         "mono": QtMultimedia.QAudioFormat.ChannelConfig.ChannelConfigMono,
@@ -31,24 +37,20 @@ CHANNEL_CONFIG = bidict(
     }
 )
 
-ChannelConfigStr = Literal[
-    "unknown", "mono", "stereo", "2_1", "3_0", "3_1", "5_0", "5_1", "7_0", "7_1"
-]
-
 
 class AudioFormat(QtMultimedia.QAudioFormat):
-    def set_sample_format(self, mode: SampleFormatStr):
-        if mode not in SAMPLE_FORMAT:
-            raise InvalidParamError(mode, SAMPLE_FORMAT)
-        self.setSampleFormat(SAMPLE_FORMAT[mode])
+    def set_sample_format(
+        self, mode: SampleFormatStr | QtMultimedia.QAudioFormat.SampleFormat
+    ):
+        self.setSampleFormat(SAMPLE_FORMAT.get_enum_value(mode))
 
     def get_sample_format(self) -> SampleFormatStr:
         return SAMPLE_FORMAT.inverse[self.sampleFormat()]
 
-    def set_channel_config(self, config: ChannelConfigStr):
-        if config not in CHANNEL_CONFIG:
-            raise InvalidParamError(config, CHANNEL_CONFIG)
-        self.setChannelConfig(CHANNEL_CONFIG[config])
+    def set_channel_config(
+        self, config: ChannelConfigStr | QtMultimedia.QAudioFormat.ChannelConfig
+    ):
+        self.setChannelConfig(CHANNEL_CONFIG.get_enum_value(config))
 
     def get_channel_config(self) -> ChannelConfigStr:
         return CHANNEL_CONFIG.inverse[self.channelConfig()]

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 METRICS = bidict(
@@ -38,7 +38,7 @@ MetricStr = Literal[
 
 
 class PaintDeviceMixin:
-    def get_metric(self, metric: MetricStr) -> int:
+    def get_metric(self, metric: MetricStr | QtGui.QPaintDevice.PaintDeviceMetric) -> int:
         """Return metric information.
 
         Args:
@@ -47,9 +47,7 @@ class PaintDeviceMixin:
         Returns:
             metric information
         """
-        if metric not in METRICS:
-            raise InvalidParamError(metric, METRICS)
-        return self.metric(METRICS[metric])
+        return self.metric(METRICS.get_enum_value(metric))
 
 
 class PaintDevice(PaintDeviceMixin, QtGui.QPaintDevice):

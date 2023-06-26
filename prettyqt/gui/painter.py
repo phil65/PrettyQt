@@ -6,22 +6,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
-
-
-COMPOSITION_MODE = bidict(
-    source_over=QtGui.QPainter.CompositionMode.CompositionMode_SourceOver,
-    destination_over=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOver,
-    clear=QtGui.QPainter.CompositionMode.CompositionMode_Clear,
-    source=QtGui.QPainter.CompositionMode.CompositionMode_Source,
-    destination=QtGui.QPainter.CompositionMode.CompositionMode_Destination,
-    source_in=QtGui.QPainter.CompositionMode.CompositionMode_SourceIn,
-    destination_in=QtGui.QPainter.CompositionMode.CompositionMode_DestinationIn,
-    source_out=QtGui.QPainter.CompositionMode.CompositionMode_SourceOut,
-    destination_out=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOut,
-    source_atop=QtGui.QPainter.CompositionMode.CompositionMode_SourceAtop,
-    destination_atop=QtGui.QPainter.CompositionMode.CompositionMode_DestinationAtop,
-)
+from prettyqt.utils import bidict, colors, datatypes
 
 CompositionModeStr = Literal[
     "source_over",
@@ -37,11 +22,18 @@ CompositionModeStr = Literal[
     "destination_atop",
 ]
 
-RENDER_HINTS = bidict(
-    antialiasing=QtGui.QPainter.RenderHint.Antialiasing,
-    text_antialiasing=QtGui.QPainter.RenderHint.TextAntialiasing,
-    smooth_pixmap_transform=QtGui.QPainter.RenderHint.SmoothPixmapTransform,
-    lossless_image_rendering=QtGui.QPainter.RenderHint.LosslessImageRendering,
+COMPOSITION_MODE: bidict[CompositionModeStr, QtGui.QPainter.CompositionMode] = bidict(
+    source_over=QtGui.QPainter.CompositionMode.CompositionMode_SourceOver,
+    destination_over=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOver,
+    clear=QtGui.QPainter.CompositionMode.CompositionMode_Clear,
+    source=QtGui.QPainter.CompositionMode.CompositionMode_Source,
+    destination=QtGui.QPainter.CompositionMode.CompositionMode_Destination,
+    source_in=QtGui.QPainter.CompositionMode.CompositionMode_SourceIn,
+    destination_in=QtGui.QPainter.CompositionMode.CompositionMode_DestinationIn,
+    source_out=QtGui.QPainter.CompositionMode.CompositionMode_SourceOut,
+    destination_out=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOut,
+    source_atop=QtGui.QPainter.CompositionMode.CompositionMode_SourceAtop,
+    destination_atop=QtGui.QPainter.CompositionMode.CompositionMode_DestinationAtop,
 )
 
 RenderHintStr = Literal[
@@ -50,6 +42,13 @@ RenderHintStr = Literal[
     "smooth_pixmap_transform",
     "lossless_image_rendering",
 ]
+
+RENDER_HINTS: bidict[RenderHintStr, QtGui.QPainter.RenderHint] = bidict(
+    antialiasing=QtGui.QPainter.RenderHint.Antialiasing,
+    text_antialiasing=QtGui.QPainter.RenderHint.TextAntialiasing,
+    smooth_pixmap_transform=QtGui.QPainter.RenderHint.SmoothPixmapTransform,
+    lossless_image_rendering=QtGui.QPainter.RenderHint.LosslessImageRendering,
+)
 
 
 class PainterMixin:
@@ -115,11 +114,9 @@ class PainterMixin:
         points: (
             QtGui.QPolygon | QtGui.QPolygonF | list[QtCore.QPoint] | list[QtCore.QPointF]
         ),
-        fill_rule: constants.FillRuleStr = "odd_even",
+        fill_rule: constants.FillRuleStr | constants.FillRule = "odd_even",
     ):
-        if fill_rule not in constants.FILL_RULE:
-            raise InvalidParamError(fill_rule, constants.FILL_RULE)
-        self.drawPolygon(points, fillRule=constants.FILL_RULE[fill_rule])  # type: ignore
+        self.drawPolygon(points, fillRule=constants.FILL_RULE.get_enum_value(fill_rule))
 
     def draw_rounded_rect(
         self,
@@ -133,9 +130,7 @@ class PainterMixin:
             if relative
             else QtCore.Qt.SizeMode.AbsoluteSize
         )
-        if isinstance(rect, tuple):
-            rect = QtCore.QRectF(*rect)
-        self.drawRoundedRect(rect, x_radius, y_radius, flag)
+        self.drawRoundedRect(datatypes.to_rect(rect), x_radius, y_radius, flag)
 
     def draw_star(self, size: float = 1.0, fill_rule: constants.FillRuleStr = "winding"):
         star = gui.PolygonF.create_star(size)
@@ -154,16 +149,12 @@ class PainterMixin:
         self,
         rect: datatypes.RectType | datatypes.RectFType,
         color: datatypes.ColorType,
-        pattern: constants.BrushStyleStr = "solid",
+        pattern: constants.BrushStyleStr | constants.BrushStyle = "solid",
     ):
-        if pattern not in constants.BRUSH_STYLE:
-            raise InvalidParamError(pattern, constants.BRUSH_STYLE)
-        if isinstance(rect, tuple):
-            rect = core.RectF(*rect)
         color = colors.get_color(color)
         if pattern != "solid":
-            color = gui.Brush(color, constants.BRUSH_STYLE[pattern])
-        self.fillRect(rect, color)
+            color = gui.Brush(color, constants.BRUSH_STYLE.get_enum_value(pattern))
+        self.fillRect(datatypes.to_rect(rect), color)
 
     def set_pen(
         self,
@@ -226,15 +217,15 @@ class PainterMixin:
         )
         self.setBackgroundMode(mode)
 
-    def set_composition_mode(self, mode: CompositionModeStr):
+    def set_composition_mode(
+        self, mode: CompositionModeStr | QtGui.QPainter.CompositionMode
+    ):
         """Set the current composition mode.
 
-        Raises:
-            InvalidParamError: composition mode does not exist
+        Arguments:
+            mode: composition mode
         """
-        if mode not in COMPOSITION_MODE:
-            raise InvalidParamError(mode, COMPOSITION_MODE)
-        self.setCompositionMode(COMPOSITION_MODE[mode])
+        self.setCompositionMode(COMPOSITION_MODE.get_enum_value(mode))
 
     def get_composition_mode(self) -> CompositionModeStr:
         """Get the current composition mode.
@@ -245,19 +236,17 @@ class PainterMixin:
         return COMPOSITION_MODE.inverse[self.compositionMode()]
 
     def set_transform(self, transform: datatypes.TransformType, combine: bool = False):
-        if isinstance(transform, tuple):
-            transform = gui.Transform(*transform)
-        self.setTransform(transform, combine)
+        self.setTransform(datatypes.to_transform(transform), combine)
 
     def get_font_metrics(self) -> gui.FontMetrics:
         return gui.FontMetrics(self.fontMetrics())
 
     def set_clip_path(
-        self, path: QtGui.QPainterPath, operation: constants.ClipOperationStr = "replace"
+        self,
+        path: QtGui.QPainterPath,
+        operation: constants.ClipOperationStr | constants.ClipOperation = "replace",
     ):
-        if operation not in constants.CLIP_OPERATION:
-            raise InvalidParamError(operation, constants.CLIP_OPERATION)
-        self.setClipPath(path, constants.CLIP_OPERATION[operation])
+        self.setClipPath(path, constants.CLIP_OPERATION.get_enum_value(operation))
 
     def get_text_rect(self, text: str) -> core.Rect:
         return self.drawText(

@@ -4,22 +4,22 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
-CURSOR_POSITION = bidict(
+CursorPositionStr = Literal["cursor_between_characters", "cursor_on_character"]
+
+CURSOR_POSITION: bidict[CursorPositionStr, QtGui.QTextLine.CursorPosition] = bidict(
     cursor_between_characters=QtGui.QTextLine.CursorPosition.CursorBetweenCharacters,
     cursor_on_character=QtGui.QTextLine.CursorPosition.CursorOnCharacter,
 )
 
-CursorPositionStr = Literal["cursor_between_characters", "cursor_on_character"]
+EdgeStr = Literal["leading", "trailing"]
 
-EDGE = bidict(
+EDGE: bidict[EdgeStr, QtGui.QTextLine.Edge] = bidict(
     leading=QtGui.QTextLine.Edge.Leading,
     trailing=QtGui.QTextLine.Edge.Trailing,
 )
-
-EdgeStr = Literal["leading", "trailing"]
 
 
 class TextLine(QtGui.QTextLine):
@@ -39,17 +39,18 @@ class TextLine(QtGui.QTextLine):
         p = core.Point(*point) if isinstance(point, tuple) else point
         self.setPosition(p)
 
-    def cursor_to_x(self, cursor_pos: int, edge: EdgeStr = "leading") -> float:
-        if edge not in EDGE:
-            raise InvalidParamError(edge, EDGE)
-        return self.cursorToX(cursor_pos, EDGE[edge])  # type: ignore
+    def cursor_to_x(
+        self, cursor_pos: int, edge: EdgeStr | QtGui.QTextLine.Edge = "leading"
+    ) -> float:
+        return self.cursorToX(cursor_pos, EDGE.get_enum_value(edge))  # type: ignore
 
     def x_to_cursor(
-        self, x: float, cursor_pos: CursorPositionStr = "cursor_between_characters"
+        self,
+        x: float,
+        cursor_pos: CursorPositionStr
+        | QtGui.QTextLine.CursorPosition = "cursor_between_characters",
     ) -> int:
-        if cursor_pos not in CURSOR_POSITION:
-            raise InvalidParamError(cursor_pos, CURSOR_POSITION)
-        return self.xToCursor(x, CURSOR_POSITION[cursor_pos])
+        return self.xToCursor(x, CURSOR_POSITION.get_enum_value(cursor_pos))
 
 
 if __name__ == "__main__":

@@ -611,6 +611,16 @@ def to_py_pattern(pattern: PatternAndStringType):
             return core.RegularExpression(pattern).to_py_pattern()
 
 
+def to_transform(self, transform: TransformType):
+    match transform:
+        case tuple():
+            return QtGui.QTransform(*transform)
+        case QtGui.QTransform():
+            return transform
+        case _:
+            raise TypeError(transform)
+
+
 def make_serializable(obj):
     #  possible to avoid importing by checking the metaobject instead of isinstance?
     from prettyqt import core

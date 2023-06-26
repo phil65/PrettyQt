@@ -1,15 +1,47 @@
 from __future__ import annotations
 
+from collections.abc import Mapping
 from typing import Any, Literal, TypedDict
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtNetwork
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 Req = QtNetwork.QNetworkRequest
 CE = Req.Attribute.ConnectionCacheExpiryTimeoutSecondsAttribute
-ATTRIBUTE = bidict(
+
+AttributeStr = Literal[
+    "http_status_code",
+    "http_reason_phrase",
+    "redirection_target",
+    "connection_encrypted",
+    "cache_load_control",
+    "cache_save_control",
+    "source_is_from_cache",
+    "do_not_buffer_upload_data",
+    "http_pipelining_allowed",
+    "http_pipelining_was_used",
+    "custom_verb",
+    "cookie_load_control",
+    "cookie_save_control",
+    "authentication_reuse",
+    "background_request",
+    "http2_allowed",
+    "http2_was_used",
+    "emit_all_upload_progress_signals",
+    "original_content_length",
+    "redirect_policy",
+    "http2_direct",
+    "auto_delete_reply_on_finish",
+    "connection_cache_expiry_timeout_seconds",
+    "http2_cleartext_allowed",
+    "use_credentials",
+    "user",
+    "user_max",
+]
+
+ATTRIBUTE: bidict[AttributeStr, Req.Attribute] = bidict(
     http_status_code=Req.Attribute.HttpStatusCodeAttribute,
     http_reason_phrase=Req.Attribute.HttpReasonPhraseAttribute,
     redirection_target=Req.Attribute.RedirectionTargetAttribute,
@@ -67,52 +99,6 @@ class TypedAttribute(TypedDict):
     user_max: Any
 
 
-AttributeStr = Literal[
-    "http_status_code",
-    "http_reason_phrase",
-    "redirection_target",
-    "connection_encrypted",
-    "cache_load_control",
-    "cache_save_control",
-    "source_is_from_cache",
-    "do_not_buffer_upload_data",
-    "http_pipelining_allowed",
-    "http_pipelining_was_used",
-    "custom_verb",
-    "cookie_load_control",
-    "cookie_save_control",
-    "authentication_reuse",
-    "background_request",
-    "http2_allowed",
-    "http2_was_used",
-    "emit_all_upload_progress_signals",
-    "original_content_length",
-    "redirect_policy",
-    "http2_direct",
-    "auto_delete_reply_on_finish",
-    "connection_cache_expiry_timeout_seconds",
-    "http2_cleartext_allowed",
-    "use_credentials",
-    "user",
-    "user_max",
-]
-
-KNOWN_HEADER = bidict(
-    content_disposition=Req.KnownHeaders.ContentDispositionHeader,
-    content_type=Req.KnownHeaders.ContentTypeHeader,
-    content_length=Req.KnownHeaders.ContentLengthHeader,
-    location=Req.KnownHeaders.LocationHeader,
-    last_modified=Req.KnownHeaders.LastModifiedHeader,
-    if_modified_since=Req.KnownHeaders.IfModifiedSinceHeader,
-    etag=Req.KnownHeaders.ETagHeader,
-    if_match=Req.KnownHeaders.IfMatchHeader,
-    if_none_match=Req.KnownHeaders.IfNoneMatchHeader,
-    cookie=Req.KnownHeaders.CookieHeader,
-    set_cooke=Req.KnownHeaders.SetCookieHeader,
-    user_agent=Req.KnownHeaders.UserAgentHeader,
-    server=Req.KnownHeaders.ServerHeader,
-)
-
 KnownHeaderStr = Literal[
     "content_disposition",
     "content_type",
@@ -129,24 +115,44 @@ KnownHeaderStr = Literal[
     "server",
 ]
 
-PRIORITY = bidict(
+KNOWN_HEADER: bidict[KnownHeaderStr, Req.KnownHeaders] = bidict(
+    content_disposition=Req.KnownHeaders.ContentDispositionHeader,
+    content_type=Req.KnownHeaders.ContentTypeHeader,
+    content_length=Req.KnownHeaders.ContentLengthHeader,
+    location=Req.KnownHeaders.LocationHeader,
+    last_modified=Req.KnownHeaders.LastModifiedHeader,
+    if_modified_since=Req.KnownHeaders.IfModifiedSinceHeader,
+    etag=Req.KnownHeaders.ETagHeader,
+    if_match=Req.KnownHeaders.IfMatchHeader,
+    if_none_match=Req.KnownHeaders.IfNoneMatchHeader,
+    cookie=Req.KnownHeaders.CookieHeader,
+    set_cooke=Req.KnownHeaders.SetCookieHeader,
+    user_agent=Req.KnownHeaders.UserAgentHeader,
+    server=Req.KnownHeaders.ServerHeader,
+)
+
+PriorityStr = Literal["high", "normal", "low"]
+
+PRIORITY: bidict[PriorityStr, Req.Priority] = bidict(
     high=Req.Priority.HighPriority,
     normal=Req.Priority.NormalPriority,
     low=Req.Priority.LowPriority,
 )
 
-PriorityStr = Literal["high", "normal", "low"]
+RedirectPolicyStr = Literal["manual", "no_less_safe", "same_origin", "user_verified"]
 
-REDIRECT_POLICIES = bidict(
+REDIRECT_POLICIES: bidict[RedirectPolicyStr, Req.RedirectPolicy] = bidict(
     manual=Req.RedirectPolicy.ManualRedirectPolicy,
     no_less_safe=Req.RedirectPolicy.NoLessSafeRedirectPolicy,
     same_origin=Req.RedirectPolicy.SameOriginRedirectPolicy,
     user_verified=Req.RedirectPolicy.UserVerifiedRedirectPolicy,
 )
 
-RedirectPolicyStr = Literal["manual", "no_less_safe", "same_origin", "user_verified"]
+CacheLoadControlStr = Literal[
+    "always_network", "prefer_network", "prefer_cache", "always_cache"
+]
 
-CACHE_LOAD_CONTROL = bidict(
+CACHE_LOAD_CONTROL: bidict[CacheLoadControlStr, Req.CacheLoadControl] = bidict(
     always_network=Req.CacheLoadControl.AlwaysNetwork,
     prefer_network=Req.CacheLoadControl.PreferNetwork,
     prefer_cache=Req.CacheLoadControl.PreferCache,
@@ -159,9 +165,6 @@ CACHE_LOAD_CONTROL = bidict(
 #         prefer_cache=Req.CacheLoadControlPreferCache,
 #         always_cache=Req.CacheLoadControlAlwaysCache,
 # )
-CacheLoadControlStr = Literal[
-    "always_network", "prefer_network", "prefer_cache", "always_cache"
-]
 
 
 class NetworkRequest(QtNetwork.QNetworkRequest):
@@ -176,23 +179,19 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     def __repr__(self):
         return get_repr(self, self.get_url())
 
-    def set_header(self, name: KnownHeaderStr, value: str):
-        if name not in KNOWN_HEADER:
-            raise InvalidParamError(name, KNOWN_HEADER)
-        self.setHeader(KNOWN_HEADER[name], value)
+    def set_header(self, name: KnownHeaderStr | Req.KnownHeaders, value: str):
+        self.setHeader(KNOWN_HEADER.get_enum_value(name), value)
 
-    def get_header(self, name: KnownHeaderStr) -> str:
-        if name not in KNOWN_HEADER:
-            raise InvalidParamError(name, KNOWN_HEADER)
-        return self.header(KNOWN_HEADER[name])
+    def get_header(self, name: KnownHeaderStr | Req.KnownHeaders) -> str:
+        return self.header(KNOWN_HEADER.get_enum_value(name))
 
-    def set_headers(self, headers: dict[str, str]):
+    def set_headers(self, headers: Mapping[str, str]):
         for k, v in headers.items():
             self.setRawHeader(
                 QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())
             )
 
-    def get_headers(self) -> dict[str, str]:
+    def get_headers(self) -> Mapping[str, str]:
         return {
             h.data().decode(): self.rawHeader(h).data().decode()
             for h in self.rawHeaderList()
@@ -205,18 +204,13 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     def get_url(self) -> core.Url:
         return core.Url(self.url())
 
-    def set_priority(self, priority: PriorityStr):
+    def set_priority(self, priority: PriorityStr | Req.Priority):
         """Set priority.
 
         Args:
             priority: priority
-
-        Raises:
-            InvalidParamError: priority does not exist
         """
-        if priority not in PRIORITY:
-            raise InvalidParamError(priority, PRIORITY)
-        self.setPriority(PRIORITY[priority])
+        self.setPriority(PRIORITY.get_enum_value(priority))
 
     def get_priority(self) -> PriorityStr:
         """Get the current priority.
@@ -226,8 +220,10 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
         """
         return PRIORITY.inverse[self.priority()]
 
-    def set_attribute(self, attribute: AttributeStr, value: datatypes.Variant):
-        self.setAttribute(ATTRIBUTE[attribute], value)
+    def set_attribute(
+        self, attribute: AttributeStr | Req.Attribute, value: datatypes.Variant
+    ):
+        self.setAttribute(ATTRIBUTE.get_enum_value(attribute), value)
 
     def set_attributes(self, **kwargs):
         for k, v in kwargs.items():

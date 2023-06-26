@@ -9,14 +9,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, gui, iconprovider
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import (
-    InvalidParamError,
-    datatypes,
-    get_repr,
-    helpers,
-    listdelegators,
-    serializemixin,
-)
+from prettyqt.utils import datatypes, get_repr, helpers, listdelegators, serializemixin
 
 
 class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
@@ -86,18 +79,13 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: constants.CheckStateStr):
+    def set_checkstate(self, state: constants.CheckStateStr | constants.CheckState):
         """Set checkstate of the checkbox.
 
         Args:
             state: checkstate to use
-
-        Raises:
-            InvalidParamError: invalid checkstate
         """
-        if state not in constants.CHECK_STATE:
-            raise InvalidParamError(state, constants.CHECK_STATE)
-        self.setCheckState(constants.CHECK_STATE[state])
+        self.setCheckState(constants.CHECK_STATE.get_enum_value(state))
 
     def get_checkstate(self) -> constants.CheckStateStr:
         """Return checkstate.
@@ -107,18 +95,15 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         """
         return constants.CHECK_STATE.inverse[self.checkState()]
 
-    def set_text_alignment(self, alignment: constants.AlignmentStr):
+    def set_text_alignment(
+        self, alignment: constants.AlignmentStr | constants.AlignmentFlag
+    ):
         """Set the alignment of the text.
 
         Args:
             alignment: alignment for the format
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setTextAlignment(constants.ALIGNMENTS[alignment])
+        self.setTextAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     def get_text_alignment(self) -> constants.AlignmentStr:
         """Return current text alignment.

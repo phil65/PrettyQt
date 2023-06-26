@@ -4,17 +4,17 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
-CONTENT_TYPES = bidict(
+ContentTypeStr = Literal["mixed", "related", "form", "alternative"]
+
+CONTENT_TYPES: bidict[ContentTypeStr, QtNetwork.QHttpMultiPart.ContentType] = bidict(
     mixed=QtNetwork.QHttpMultiPart.ContentType.MixedType,
     related=QtNetwork.QHttpMultiPart.ContentType.RelatedType,
     form=QtNetwork.QHttpMultiPart.ContentType.FormDataType,
     alternative=QtNetwork.QHttpMultiPart.ContentType.AlternativeType,
 )
-
-ContentTypeStr = Literal["mixed", "related", "form", "alternative"]
 
 
 class HttpMultiPart(core.ObjectMixin, QtNetwork.QHttpMultiPart):
@@ -22,18 +22,15 @@ class HttpMultiPart(core.ObjectMixin, QtNetwork.QHttpMultiPart):
         self.append(other)
         return self
 
-    def set_content_type(self, typ: ContentTypeStr):
+    def set_content_type(
+        self, typ: ContentTypeStr | QtNetwork.QHttpMultiPart.ContentType
+    ):
         """Set content type.
 
         Args:
             typ: content type
-
-        Raises:
-            InvalidParamError: content type does not exist
         """
-        if typ not in CONTENT_TYPES:
-            raise InvalidParamError(typ, CONTENT_TYPES)
-        self.setContentType(CONTENT_TYPES[typ])
+        self.setContentType(CONTENT_TYPES.get_enum_value(typ))
 
     def set_boundary(self, boundary: datatypes.ByteArrayType):
         boundary = datatypes.to_bytearray(boundary)

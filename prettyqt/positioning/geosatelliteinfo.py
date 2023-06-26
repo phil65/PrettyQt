@@ -3,23 +3,25 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-SATELLITE_SYSTEMS = bidict(
+SatelliteSystemStr = Literal["undefined", "gps", "glonass"]
+
+SATELLITE_SYSTEMS: bidict[
+    SatelliteSystemStr, QtPositioning.QGeoSatelliteInfo.SatelliteSystem
+] = bidict(
     undefined=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.Undefined,
     gps=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GPS,
     glonass=QtPositioning.QGeoSatelliteInfo.SatelliteSystem.GLONASS,
 )
 
-SatelliteSystemStr = Literal["undefined", "gps", "glonass"]
+AttributeStr = Literal["elevation", "azimuth"]
 
-ATTRIBUTE = bidict(
+ATTRIBUTE: bidict[AttributeStr, QtPositioning.QGeoSatelliteInfo.Attribute] = bidict(
     elevation=QtPositioning.QGeoSatelliteInfo.Attribute.Elevation,
     azimuth=QtPositioning.QGeoSatelliteInfo.Attribute.Azimuth,
 )
-
-AttributeStr = Literal["elevation", "azimuth"]
 
 
 class GeoSatelliteInfo(QtPositioning.QGeoSatelliteInfo):
@@ -38,18 +40,15 @@ class GeoSatelliteInfo(QtPositioning.QGeoSatelliteInfo):
     def __int__(self):
         return self.satelliteIdentifier()
 
-    def set_satellite_system(self, system: SatelliteSystemStr):
+    def set_satellite_system(
+        self, system: SatelliteSystemStr | QtPositioning.QGeoSatelliteInfo.SatelliteSystem
+    ):
         """Set satellite system.
 
         Args:
             system: satellite system to use
-
-        Raises:
-            InvalidParamError: invalid system
         """
-        if system not in SATELLITE_SYSTEMS:
-            raise InvalidParamError(system, SATELLITE_SYSTEMS)
-        self.setSatelliteSystem(SATELLITE_SYSTEMS[system])
+        self.setSatelliteSystem(SATELLITE_SYSTEMS.get_enum_value(system))
 
     def get_satellite_system(self) -> SatelliteSystemStr:
         """Return satellite system.

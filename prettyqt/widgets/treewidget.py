@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import listdelegators, InvalidParamError
+from prettyqt.utils import listdelegators
 
 
 class TreeWidgetMixin(widgets.TreeViewMixin):
@@ -37,13 +37,11 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
         self,
         text: str,
         column: int = 0,
-        mode: constants.MatchFlagStr = "exact",
+        mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
     ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
-        if mode not in constants.MATCH_FLAGS:
-            raise InvalidParamError(mode, constants.MATCH_FLAGS)
-        flag = constants.MATCH_FLAGS[mode]
+        flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= QtCore.Qt.MatchFlag.MatchRecursive
         if case_sensitive:
@@ -77,7 +75,8 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
     def scroll_to_item(
         self,
         item: QtWidgets.QTreeWidgetItem,
-        scroll_hint: widgets.abstractitemview.ScrollHintStr = "ensure_visible",
+        scroll_hint: widgets.abstractitemview.ScrollHintStr
+        | widgets.QAbstractItemView.ScrollHint = "ensure_visible",
     ):
         self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT[scroll_hint])
 
@@ -92,24 +91,24 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
         self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem, column: int = 0
     ):
         if isinstance(index, QtCore.QModelIndex):
-            index = self.itemFromIndex(index)
             column = index.column()
+            index = self.itemFromIndex(index)
         super().openPersistentEditor(index, column)
 
     def closePersistentEditor(
         self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem, column: int = 0
     ):
         if isinstance(index, QtCore.QModelIndex):
-            index = self.itemFromIndex(index)
             column = index.column()
+            index = self.itemFromIndex(index)
         super().closePersistentEditor(index, column)
 
     def isPersistentEditorOpen(
         self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem, column: int = 0
     ) -> bool:
         if isinstance(index, QtCore.QModelIndex):
-            index = self.itemFromIndex(index)
             column = index.column()
+            index = self.itemFromIndex(index)
         return super().isPersistentEditorOpen(index, column)
 
 

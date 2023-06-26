@@ -6,31 +6,31 @@ from typing import Literal
 
 from prettyqt import core, qml
 from prettyqt.qt import QtCore, QtQml
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
-
-OBJECT_OWNERSHIP = bidict(
-    cpp=QtQml.QQmlEngine.ObjectOwnership.CppOwnership,
-    javascript=QtQml.QQmlEngine.ObjectOwnership.JavaScriptOwnership,
-)
 
 ObjectOwnershipStr = Literal["cpp", "javascript"]
 
 
+OBJECT_OWNERSHIP: bidict[ObjectOwnershipStr, QtQml.QQmlEngine.ObjectOwnership] = bidict(
+    cpp=QtQml.QQmlEngine.ObjectOwnership.CppOwnership,
+    javascript=QtQml.QQmlEngine.ObjectOwnership.JavaScriptOwnership,
+)
+
+
 class QmlEngineMixin(qml.JSEngineMixin):
-    def set_object_ownership(self, obj: QtCore.QObject, mode: ObjectOwnershipStr):
+    def set_object_ownership(
+        self,
+        obj: QtCore.QObject,
+        mode: ObjectOwnershipStr | QtQml.QQmlEngine.ObjectOwnership,
+    ):
         """Set the object ownership.
 
         Args:
             obj: object to set ownership for
             mode: object ownership to use
-
-        Raises:
-            InvalidParamError: invalid object ownership
         """
-        if mode not in OBJECT_OWNERSHIP:
-            raise InvalidParamError(mode, OBJECT_OWNERSHIP)
-        self.setObjectOwnership(obj, OBJECT_OWNERSHIP[mode])
+        self.setObjectOwnership(obj, OBJECT_OWNERSHIP.get_enum_value(mode))
 
     def get_object_ownership(self, obj: QtCore.QObject) -> ObjectOwnershipStr:
         """Return object ownership.

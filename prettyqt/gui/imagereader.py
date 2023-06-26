@@ -4,20 +4,22 @@ from typing import Literal
 
 from prettyqt import core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
-IMAGE_READER_ERROR = bidict(
+ImageReaderErrorStr = Literal[
+    "file_not_found", "device", "unsupported_format", "invalid_data", "unknown"
+]
+
+IMAGE_READER_ERROR: bidict[
+    ImageReaderErrorStr, QtGui.QImageReader.ImageReaderError
+] = bidict(
     file_not_found=QtGui.QImageReader.ImageReaderError.FileNotFoundError,
     device=QtGui.QImageReader.ImageReaderError.DeviceError,
     unsupported_format=QtGui.QImageReader.ImageReaderError.UnsupportedFormatError,
     invalid_data=QtGui.QImageReader.ImageReaderError.InvalidDataError,
     unknown=QtGui.QImageReader.ImageReaderError.UnknownError,
 )
-
-ImageReaderErrorStr = Literal[
-    "file_not_found", "device", "unsupported_format", "invalid_data", "unknown"
-]
 
 
 class ImageReader(QtGui.QImageReader):
@@ -74,7 +76,9 @@ class ImageReader(QtGui.QImageReader):
     def read_image(self) -> gui.Image:
         return gui.Image(self.read())
 
-    def supports_option(self, option: gui.imageiohandler.ImageOptionStr) -> bool:
+    def supports_option(
+        self, option: gui.imageiohandler.ImageOptionStr | gui.QImageIOHandler.ImageOption
+    ) -> bool:
         """Return whether the image handler supports given option.
 
         Args:
@@ -83,9 +87,7 @@ class ImageReader(QtGui.QImageReader):
         Returns:
             option
         """
-        if option not in gui.imageiohandler.IMAGE_OPTION:
-            raise InvalidParamError(option, gui.imageiohandler.IMAGE_OPTION)
-        return self.supportsOption(gui.imageiohandler.IMAGE_OPTION[option])
+        return self.supportsOption(gui.imageiohandler.IMAGE_OPTION.get_enum_value(option))
 
     @staticmethod
     def get_image_format(obj: str | QtCore.QIODevice) -> str:

@@ -4,17 +4,17 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-RESTART_HINT = bidict(
+RestartHintStr = Literal["if_running", "anyway", "immediately", "never"]
+
+RESTART_HINT: bidict[RestartHintStr, QtGui.QSessionManager.RestartHint] = bidict(
     if_running=QtGui.QSessionManager.RestartHint.RestartIfRunning,
     anyway=QtGui.QSessionManager.RestartHint.RestartAnyway,
     immediately=QtGui.QSessionManager.RestartHint.RestartImmediately,
     never=QtGui.QSessionManager.RestartHint.RestartNever,
 )
-
-RestartHintStr = Literal["if_running", "anyway", "immediately", "never"]
 
 
 class SessionManager(core.ObjectMixin):
@@ -24,18 +24,13 @@ class SessionManager(core.ObjectMixin):
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def set_restart_hint(self, style: RestartHintStr):
+    def set_restart_hint(self, style: RestartHintStr | QtGui.QSessionManager.RestartHint):
         """Set the restart hint.
 
         Args:
             style: restart hint
-
-        Raises:
-            InvalidParamError: restart hint does not exist
         """
-        if style not in RESTART_HINT:
-            raise InvalidParamError(style, RESTART_HINT)
-        self.setRestartHint(RESTART_HINT[style])
+        self.setRestartHint(RESTART_HINT.get_enum_value(style))
 
     def get_restart_hint(self) -> RestartHintStr:
         """Return current restart hint.

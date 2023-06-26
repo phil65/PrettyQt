@@ -2,38 +2,31 @@ from __future__ import annotations
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError
 
 
 class TextTableCellFormat(gui.TextCharFormatMixin, QtGui.QTextTableCellFormat):
     def get_bottom_border_brush(self) -> gui.Brush:
         return gui.Brush(self.bottomBorderBrush())
 
-    def set_border_style(self, style: gui.textframeformat.BorderStyleStr):
+    def set_border_style(
+        self, style: gui.textframeformat.BorderStyleStr | gui.QTextFrameFormat.BorderStyle
+    ):
         """Set border style.
 
         Args:
             style: border style
-
-        Raises:
-            InvalidParamError: border style does not exist
         """
-        if style not in gui.textframeformat.BORDER_STYLES:
-            raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
-        self.setBorderStyle(gui.textframeformat.BORDER_STYLES[style])
+        self.setBorderStyle(gui.textframeformat.BORDER_STYLES.get_enum_value(style))
 
-    def set_bottom_border_style(self, style: gui.textframeformat.BorderStyleStr):
+    def set_bottom_border_style(
+        self, style: gui.textframeformat.BorderStyleStr | gui.QTextFrameFormat.BorderStyle
+    ):
         """Set bottom border style.
 
         Args:
             style: bottom border style
-
-        Raises:
-            InvalidParamError: bottom border style does not exist
         """
-        if style not in gui.textframeformat.BORDER_STYLES:
-            raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
-        self.setBottomBorderStyle(gui.textframeformat.BORDER_STYLES[style])
+        self.setBottomBorderStyle(gui.textframeformat.BORDER_STYLES.get_enum_value(style))
 
     def get_bottom_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current bottom border style.
@@ -46,18 +39,15 @@ class TextTableCellFormat(gui.TextCharFormatMixin, QtGui.QTextTableCellFormat):
     def get_left_border_brush(self) -> gui.Brush:
         return gui.Brush(self.leftBorderBrush())
 
-    def set_left_border_style(self, style: gui.textframeformat.BorderStyleStr):
+    def set_left_border_style(
+        self, style: gui.textframeformat.BorderStyleStr | gui.QTextFrameFormat.BorderStyle
+    ):
         """Set left border style.
 
         Args:
             style: left border style
-
-        Raises:
-            InvalidParamError: left border style does not exist
         """
-        if style not in gui.textframeformat.BORDER_STYLES:
-            raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
-        self.setLeftBorderStyle(gui.textframeformat.BORDER_STYLES[style])
+        self.setLeftBorderStyle(gui.textframeformat.BORDER_STYLES.get_enum_value(style))
 
     def get_left_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current left border style.
@@ -70,18 +60,15 @@ class TextTableCellFormat(gui.TextCharFormatMixin, QtGui.QTextTableCellFormat):
     def get_right_border_brush(self) -> gui.Brush:
         return gui.Brush(self.rightBorderBrush())
 
-    def set_right_border_style(self, style: gui.textframeformat.BorderStyleStr):
+    def set_right_border_style(
+        self, style: gui.textframeformat.BorderStyleStr | gui.QTextFrameFormat.BorderStyle
+    ):
         """Set right border style.
 
         Args:
             style: right border style
-
-        Raises:
-            InvalidParamError: right border style does not exist
         """
-        if style not in gui.textframeformat.BORDER_STYLES:
-            raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
-        self.setRightBorderStyle(gui.textframeformat.BORDER_STYLES[style])
+        self.setRightBorderStyle(gui.textframeformat.BORDER_STYLES.get_enum_value(style))
 
     def get_right_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current right border style.
@@ -94,18 +81,15 @@ class TextTableCellFormat(gui.TextCharFormatMixin, QtGui.QTextTableCellFormat):
     def get_top_border_brush(self) -> gui.Brush:
         return gui.Brush(self.topBorderBrush())
 
-    def set_top_border_style(self, style: gui.textframeformat.BorderStyleStr):
+    def set_top_border_style(
+        self, style: gui.textframeformat.BorderStyleStr | gui.QTextFrameFormat.BorderStyle
+    ):
         """Set top border style.
 
         Args:
             style: top border style
-
-        Raises:
-            InvalidParamError: top border style does not exist
         """
-        if style not in gui.textframeformat.BORDER_STYLES:
-            raise InvalidParamError(style, gui.textframeformat.BORDER_STYLES)
-        self.setTopBorderStyle(gui.textframeformat.BORDER_STYLES[style])
+        self.setTopBorderStyle(gui.textframeformat.BORDER_STYLES.get_enum_value(style))
 
     def get_top_border_style(self) -> gui.textframeformat.BorderStyleStr:
         """Get the current top border style.

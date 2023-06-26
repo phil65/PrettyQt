@@ -4,15 +4,15 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
-PERFORMANCE_HINT = bidict(
+PerformanceHintStr = Literal["moderate", "aggressive"]
+
+PERFORMANCE_HINT: bidict[PerformanceHintStr, QtGui.QStaticText.PerformanceHint] = bidict(
     moderate=QtGui.QStaticText.PerformanceHint.ModerateCaching,
     aggressive=QtGui.QStaticText.PerformanceHint.AggressiveCaching,
 )
-
-PerformanceHintStr = Literal["moderate", "aggressive"]
 
 
 class StaticText(QtGui.QStaticText):
@@ -25,20 +25,17 @@ class StaticText(QtGui.QStaticText):
     def get_size(self) -> core.SizeF:
         return core.SizeF(self.size())
 
-    def set_text_format(self, text_format: constants.TextFormatStr):
+    def set_text_format(
+        self, text_format: constants.TextFormatStr | constants.TextFormat
+    ):
         """Set the text format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
 
         Args:
             text_format: text format to use
-
-        Raises:
-            InvalidParamError: text format does not exist
         """
-        if text_format not in constants.TEXT_FORMAT:
-            raise InvalidParamError(text_format, constants.TEXT_FORMAT)
-        self.setTextFormat(constants.TEXT_FORMAT[text_format])
+        self.setTextFormat(constants.TEXT_FORMAT.get_enum_value(text_format))
 
     def get_text_format(self) -> constants.TextFormatStr:
         """Return current text format.
@@ -50,18 +47,15 @@ class StaticText(QtGui.QStaticText):
         """
         return constants.TEXT_FORMAT.inverse[self.textFormat()]
 
-    def set_performance_hint(self, hint: PerformanceHintStr):
+    def set_performance_hint(
+        self, hint: PerformanceHintStr | QtGui.QStaticText.PerformanceHint
+    ):
         """Set the performance hint.
 
         Args:
             hint: performance hint to use
-
-        Raises:
-            InvalidParamError: performance hint does not exist
         """
-        if hint not in PERFORMANCE_HINT:
-            raise InvalidParamError(hint, PERFORMANCE_HINT)
-        self.setPerformanceHint(PERFORMANCE_HINT[hint])
+        self.setPerformanceHint(PERFORMANCE_HINT.get_enum_value(hint))
 
     def get_performance_hint(self) -> PerformanceHintStr:
         """Return current performance hint.

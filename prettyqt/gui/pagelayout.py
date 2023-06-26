@@ -4,24 +4,26 @@ from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
-MODES = bidict(
+ModeStr = Literal["standard", "full_page"]
+
+MODES: bidict[ModeStr, QtGui.QPageLayout.Mode] = bidict(
     standard=QtGui.QPageLayout.Mode.StandardMode,
     full_page=QtGui.QPageLayout.Mode.FullPageMode,
 )
 
-ModeStr = Literal["standard", "full_page"]
+OrientationStr = Literal["portrait", "landscape"]
 
-ORIENTATIONS = bidict(
+ORIENTATIONS: bidict[OrientationStr, QtGui.QPageLayout.Orientation] = bidict(
     portrait=QtGui.QPageLayout.Orientation.Portrait,
     landscape=QtGui.QPageLayout.Orientation.Landscape,
 )
 
-OrientationStr = Literal["portrait", "landscape"]
+UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
 
-UNITS = bidict(
+UNITS: bidict[UnitStr, QtGui.QPageLayout.Unit] = bidict(
     millimeter=QtGui.QPageLayout.Unit.Millimeter,
     point=QtGui.QPageLayout.Unit.Point,
     inch=QtGui.QPageLayout.Unit.Inch,
@@ -30,25 +32,18 @@ UNITS = bidict(
     cicero=QtGui.QPageLayout.Unit.Cicero,
 )
 
-UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
-
 
 class PageLayout(QtGui.QPageLayout):
     def __repr__(self):
         return get_repr(self)
 
-    def set_units(self, unit: UnitStr):
+    def set_units(self, unit: UnitStr | QtGui.QPageLayout.Unit):
         """Set unit.
 
         Args:
             unit: unit
-
-        Raises:
-            InvalidParamError: unit does not exist
         """
-        if unit not in UNITS:
-            raise InvalidParamError(unit, UNITS)
-        self.setUnits(UNITS[unit])
+        self.setUnits(UNITS.get_enum_value(unit))
 
     def get_units(self) -> UnitStr:
         """Get the current unit.
@@ -58,18 +53,13 @@ class PageLayout(QtGui.QPageLayout):
         """
         return UNITS.inverse[self.units()]
 
-    def set_mode(self, mode: ModeStr):
+    def set_mode(self, mode: ModeStr | QtGui.QPageLayout.Mode):
         """Set mode.
 
         Args:
             mode: mode
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in MODES:
-            raise InvalidParamError(mode, MODES)
-        self.setMode(MODES[mode])
+        self.setMode(MODES.get_enum_value(mode))
 
     def get_mode(self) -> ModeStr:
         """Get the current mode.
@@ -79,18 +69,15 @@ class PageLayout(QtGui.QPageLayout):
         """
         return MODES.inverse[self.mode()]
 
-    def set_orientation(self, orientation: OrientationStr):
+    def set_orientation(
+        self, orientation: OrientationStr | QtGui.QPageLayout.Orientation
+    ):
         """Set orientation.
 
         Args:
             orientation: orientation
-
-        Raises:
-            InvalidParamError: orientation does not exist
         """
-        if orientation not in ORIENTATIONS:
-            raise InvalidParamError(orientation, ORIENTATIONS)
-        self.setOrientation(ORIENTATIONS[orientation])
+        self.setOrientation(ORIENTATIONS.get_enum_value(orientation))
 
     def get_orientation(self) -> OrientationStr:
         """Get the current orientation.

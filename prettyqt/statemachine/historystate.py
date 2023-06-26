@@ -4,30 +4,27 @@ from typing import Literal
 
 from prettyqt import statemachine
 from prettyqt.qt import QtStateMachine
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-HISTORY_TYPE = bidict(
+HistoryTypeStr = Literal["shallow", "deep"]
+
+HISTORY_TYPE: bidict[HistoryTypeStr, QtStateMachine.QHistoryState.HistoryType] = bidict(
     shallow=QtStateMachine.QHistoryState.HistoryType.ShallowHistory,
     deep=QtStateMachine.QHistoryState.HistoryType.DeepHistory,
 )
 
-HistoryTypeStr = Literal["shallow", "deep"]
-
 
 class HistoryState(statemachine.AbstractStateMixin, QtStateMachine.QHistoryState):
-    def set_history_type(self, typ: HistoryTypeStr):
+    def set_history_type(
+        self, typ: HistoryTypeStr | QtStateMachine.QHistoryState.HistoryType
+    ):
         """Set history type to use.
 
         Args:
             typ: history type to use
-
-        Raises:
-            InvalidParamError: history type does not exist
         """
-        if typ not in HISTORY_TYPE:
-            raise InvalidParamError(typ, HISTORY_TYPE)
-        self.setHistoryType(HISTORY_TYPE[typ])
+        self.setHistoryType(HISTORY_TYPE.get_enum_value(typ))
 
     def get_history_type(self) -> HistoryTypeStr:
         """Return current history type.

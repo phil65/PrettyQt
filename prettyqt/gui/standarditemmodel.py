@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.utils import InvalidParamError, datatypes, helpers, listdelegators
+from prettyqt.utils import datatypes, helpers, listdelegators
 
 
 class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
@@ -80,13 +80,11 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         self,
         text: str,
         column: int = 0,
-        mode: constants.MatchFlagStr = "exact",
+        mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
     ) -> listdelegators.BaseListDelegator[gui.QStandardItem]:
-        if mode not in constants.MATCH_FLAGS:
-            raise InvalidParamError(mode, constants.MATCH_FLAGS)
-        flag = constants.MATCH_FLAGS[mode]
+        flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:

@@ -11,18 +11,22 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
-MARKDOWN_FEATURES = bidict(
+MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
+
+MARKDOWN_FEATURES: bidict[
+    MarkdownFeatureStr, QtGui.QTextDocument.MarkdownFeature
+] = bidict(
     no_html=QtGui.QTextDocument.MarkdownFeature.MarkdownNoHTML,
     commonmark=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectCommonMark,
     github=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectGitHub,
 )
 
-MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
+ResourceTypeStr = Literal["unknown", "html", "image", "stylesheet", "markdown", "user"]
 
-RESOURCE_TYPES = bidict(
+RESOURCE_TYPES: bidict[ResourceTypeStr, QtGui.QTextDocument.ResourceType] = bidict(
     unknown=QtGui.QTextDocument.ResourceType.UnknownResource,
     html=QtGui.QTextDocument.ResourceType.HtmlResource,
     image=QtGui.QTextDocument.ResourceType.ImageResource,
@@ -31,31 +35,31 @@ RESOURCE_TYPES = bidict(
     user=QtGui.QTextDocument.ResourceType.UserResource,
 )
 
-ResourceTypeStr = Literal["unknown", "html", "image", "stylesheet", "markdown", "user"]
+StackStr = Literal["undo", "redo", "undo_and_redo"]
 
-STACKS = bidict(
+STACKS: bidict[StackStr, QtGui.QTextDocument.Stacks] = bidict(
     undo=QtGui.QTextDocument.Stacks.UndoStack,
     redo=QtGui.QTextDocument.Stacks.RedoStack,
     undo_and_redo=QtGui.QTextDocument.Stacks.UndoAndRedoStacks,
 )
 
-StackStr = Literal["undo", "redo", "undo_and_redo"]
+FindFlagStr = Literal["backward", "case_sensitive", "whole_words"]
 
-FIND_FLAGS = bidict(
+FIND_FLAGS: bidict[FindFlagStr, QtGui.QTextDocument.FindFlag] = bidict(
     backward=QtGui.QTextDocument.FindFlag.FindBackward,
     case_sensitive=QtGui.QTextDocument.FindFlag.FindCaseSensitively,
     whole_words=QtGui.QTextDocument.FindFlag.FindWholeWords,
 )
 
-FindFlagStr = Literal["backward", "case_sensitive", "whole_words"]
+MetaInformationStr = Literal["document_title", "document_url", "css_media"]
 
-META_INFORMATION = bidict(
+META_INFORMATION: bidict[
+    MetaInformationStr, QtGui.QTextDocument.MetaInformation
+] = bidict(
     document_title=QtGui.QTextDocument.MetaInformation.DocumentTitle,
     document_url=QtGui.QTextDocument.MetaInformation.DocumentUrl,
     css_media=QtGui.QTextDocument.MetaInformation.CssMedia,
 )
-
-MetaInformationStr = Literal["document_title", "document_url", "css_media"]
 
 
 class TextDocumentMixin(core.ObjectMixin):
@@ -112,31 +116,23 @@ class TextDocumentMixin(core.ObjectMixin):
     def get_default_text_option(self) -> gui.TextOption:
         return gui.TextOption(self.defaultTextOption())
 
-    def clear_stacks(self, stack: StackStr):
+    def clear_stacks(self, stack: StackStr | QtGui.QTextDocument.Stacks):
         """Clear undo / redo stack.
 
         Args:
             stack: stack to clear
-
-        Raises:
-            InvalidParamError: stack type does not exist
         """
-        if stack not in STACKS:
-            raise InvalidParamError(stack, STACKS)
-        self.clearUndoRedoStacks(STACKS[stack])
+        self.clearUndoRedoStacks(STACKS.get_enum_value(stack))
 
-    def set_default_cursor_move_style(self, style: constants.CursorMoveStyleStr):
+    def set_default_cursor_move_style(
+        self, style: constants.CursorMoveStyleStr | constants.CursorMoveStyle
+    ):
         """Set the cursor move style.
 
         Args:
             style: cursor move style
-
-        Raises:
-            InvalidParamError: cursor move style does not exist
         """
-        if style not in constants.CURSOR_MOVE_STYLE:
-            raise InvalidParamError(style, constants.CURSOR_MOVE_STYLE)
-        self.setDefaultCursorMoveStyle(constants.CURSOR_MOVE_STYLE[style])
+        self.setDefaultCursorMoveStyle(constants.CURSOR_MOVE_STYLE.get_enum_value(style))
 
     def get_default_cursor_move_style(self) -> constants.CursorMoveStyleStr:
         """Return current cursor move style.
@@ -146,21 +142,20 @@ class TextDocumentMixin(core.ObjectMixin):
         """
         return constants.CURSOR_MOVE_STYLE.inverse[self.defaultCursorMoveStyle()]
 
-    def set_meta_information(self, info: MetaInformationStr, value: str):
+    def set_meta_information(
+        self, info: MetaInformationStr | QtGui.QTextDocument.MetaInformation, value: str
+    ):
         """Set meta information.
 
         Args:
             info: meta information type
             value: value to set
-
-        Raises:
-            InvalidParamError: meta information type does not exist
         """
-        if info not in META_INFORMATION:
-            raise InvalidParamError(info, META_INFORMATION)
-        self.setMetaInformation(META_INFORMATION[info], value)
+        self.setMetaInformation(META_INFORMATION.get_enum_value(info), value)
 
-    def get_meta_information(self, info: MetaInformationStr) -> str:
+    def get_meta_information(
+        self, info: MetaInformationStr | QtGui.QTextDocument.MetaInformation
+    ) -> str:
         """Return specififed meta information.
 
         Args:
@@ -169,17 +164,16 @@ class TextDocumentMixin(core.ObjectMixin):
         Returns:
             meta information
         """
-        if info not in META_INFORMATION:
-            raise InvalidParamError(info, META_INFORMATION)
-        return self.metaInformation(META_INFORMATION[info])
+        return self.metaInformation(META_INFORMATION.get_enum_value(info))
 
     def add_resource(
-        self, resource_type: ResourceTypeStr, name: datatypes.PathType, resource
+        self,
+        resource_type: ResourceTypeStr | QtGui.QTextDocument.ResourceType,
+        name: datatypes.PathType,
+        resource,
     ):
-        if resource_type not in RESOURCE_TYPES:
-            raise InvalidParamError(resource_type, RESOURCE_TYPES)
         url = core.Url(name)
-        self.addResource(RESOURCE_TYPES[resource_type], url, resource)
+        self.addResource(RESOURCE_TYPES.get_enum_value(resource_type), url, resource)
 
     @contextlib.contextmanager
     def edit_default_stylesheet(self) -> Iterator[qstylizer.style.StyleSheet]:

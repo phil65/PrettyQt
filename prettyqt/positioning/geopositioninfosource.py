@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtPositioning
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 QGeoPositionInfoSource = QtPositioning.QGeoPositionInfoSource
@@ -48,13 +48,7 @@ class GeoPositionInfoSourceMixin(core.ObjectMixin):
 
         Args:
             methods: positioning methods to use
-
-        Raises:
-            InvalidParamError: invalid positioning methods
         """
-        for item in methods:
-            if item not in POSITIONING_METHODS:
-                raise InvalidParamError(item, POSITIONING_METHODS)
         flags = POSITIONING_METHODS.merge_flags(methods)
         self.setPreferredPositioningMethods(flags)
 

@@ -6,14 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import (
-    InvalidParamError,
-    bidict,
-    colors,
-    datatypes,
-    get_repr,
-    serializemixin,
-)
+from prettyqt.utils import bidict, colors, datatypes, get_repr, serializemixin
 
 
 RoleStr = Literal[
@@ -75,10 +68,12 @@ GROUP: bidict[GroupStr, QtGui.QPalette.ColorGroup] = bidict(
 
 
 class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
-    def __getitem__(self, index: RoleStr) -> gui.Color:
+    def __getitem__(self, index: RoleStr | QtGui.QPalette.ColorRole) -> gui.Color:
         return self.get_color(index)
 
-    def __setitem__(self, index: RoleStr, value: datatypes.ColorType):
+    def __setitem__(
+        self, index: RoleStr | QtGui.QPalette.ColorRole, value: datatypes.ColorType
+    ):
         self.set_color(index, value)
 
     def __repr__(self):
@@ -93,46 +88,62 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
         self.setColor(self.ColorGroup.Inactive, self.ColorRole.Highlight, color)
 
     def set_color(
-        self, role: RoleStr, color: datatypes.ColorType, group: GroupStr = "active"
+        self,
+        role: RoleStr | QtGui.QPalette.ColorRole,
+        color: datatypes.ColorType,
+        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
     ):
         color = colors.get_color(color)
-        self.setColor(GROUP[group], ROLE[role], color)
+        self.setColor(GROUP.get_enum_value(group), ROLE.get_enum_value(role), color)
 
-    def get_colors(self, group: GroupStr = "active") -> dict[str, gui.Color]:
+    def get_colors(
+        self, group: GroupStr | QtGui.QPalette.ColorGroup = "active"
+    ) -> dict[str, gui.Color]:
         return {k: self.get_color(k, group) for k in ROLE}
 
-    def get_color(self, role: RoleStr, group: GroupStr = "active") -> gui.Color:
-        return gui.Color(self.color(GROUP[group], ROLE[role]))
+    def get_color(
+        self,
+        role: RoleStr | QtGui.QPalette.ColorRole,
+        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
+    ) -> gui.Color:
+        return gui.Color(
+            self.color(GROUP.get_enum_value(group), ROLE.get_enum_value(role))
+        )
 
     def set_brush(
         self,
-        role: RoleStr,
+        role: RoleStr | QtGui.QPalette.ColorRole,
         brush: datatypes.ColorAndBrushType,
-        group: GroupStr = "active",
+        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
     ):
         if not isinstance(brush, QtGui.QBrush):
             brush = gui.Brush(colors.get_color(brush))
-        self.setBrush(GROUP[group], ROLE[role], brush)
+        self.setBrush(GROUP.get_enum_value(group), ROLE.get_enum_value(role), brush)
 
-    def get_brushes(self, group: GroupStr = "active") -> dict[str, gui.Brush]:
+    def get_brushes(
+        self, group: GroupStr | QtGui.QPalette.ColorGroup = "active"
+    ) -> dict[str, gui.Brush]:
         return {k: self.get_brush(k, group) for k in ROLE}
 
-    def get_brush(self, role: RoleStr, group: GroupStr = "active") -> gui.Brush:
-        return gui.Brush(self.brush(GROUP[group], ROLE[role]))
+    def get_brush(
+        self,
+        role: RoleStr | QtGui.QPalette.ColorRole,
+        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
+    ) -> gui.Brush:
+        return gui.Brush(
+            self.brush(GROUP.get_enum_value(group), ROLE.get_enum_value(role))
+        )
 
-    def set_color_group(self, group: GroupStr, **kwargs: QtGui.QBrush):
+    def set_color_group(
+        self, group: GroupStr | QtGui.QPalette.ColorGroup, **kwargs: QtGui.QBrush
+    ):
         """Set the color group.
 
         Args:
             group: color group to use
             kwargs: keyword arguments passed to setColorGroup
-
-        Raises:
-            InvalidParamError: invalid color group
         """
-        if group not in GROUP:
-            raise InvalidParamError(group, GROUP)
-        self.setColorGroup(GROUP[group], **kwargs)
+        self.setColorGroup(GROUP.get_enum_value(group), **kwargs)
 
     def get_color_group(self) -> GroupStr:
         """Return color group.

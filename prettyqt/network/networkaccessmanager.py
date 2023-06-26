@@ -4,10 +4,12 @@ from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
-OPERATION = bidict(
+OperationStr = Literal["head", "get", "put", "post", "delete", "custom"]
+
+OPERATION: bidict[OperationStr, QtNetwork.QNetworkAccessManager.Operation] = bidict(
     head=QtNetwork.QNetworkAccessManager.Operation.HeadOperation,
     get=QtNetwork.QNetworkAccessManager.Operation.GetOperation,
     put=QtNetwork.QNetworkAccessManager.Operation.PutOperation,
@@ -15,8 +17,6 @@ OPERATION = bidict(
     delete=QtNetwork.QNetworkAccessManager.Operation.DeleteOperation,
     custom=QtNetwork.QNetworkAccessManager.Operation.CustomOperation,
 )
-
-OperationStr = Literal["head", "get", "put", "post", "delete", "custom"]
 
 
 class NetworkAccessManager(core.ObjectMixin, QtNetwork.QNetworkAccessManager):
@@ -53,18 +53,19 @@ class NetworkAccessManager(core.ObjectMixin, QtNetwork.QNetworkAccessManager):
     # def delete(self, url):
     #     pass
 
-    def set_redirect_policy(self, policy: network.networkrequest.RedirectPolicyStr):
+    def set_redirect_policy(
+        self,
+        policy: network.networkrequest.RedirectPolicyStr
+        | network.NetworkRequest.RedirectPolicy,
+    ):
         """Set redirect policy.
 
         Args:
             policy: redirect policy
-
-        Raises:
-            InvalidParamError: redirect policy does not exist
         """
-        if policy not in network.networkrequest.REDIRECT_POLICIES:
-            raise InvalidParamError(policy, network.networkrequest.REDIRECT_POLICIES)
-        self.setRedirectPolicy(network.networkrequest.REDIRECT_POLICIES[policy])
+        self.setRedirectPolicy(
+            network.networkrequest.REDIRECT_POLICIES.get_enum_value(policy)
+        )
 
     def get_redirect_policy(self) -> network.networkrequest.RedirectPolicyStr:
         """Get the current redirect policy.

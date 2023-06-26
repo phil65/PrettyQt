@@ -4,16 +4,18 @@ from typing import Literal
 
 from prettyqt import core, network
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-DNS_ELIGIBILITY_STATUS = bidict(
+DnsEligibilityStatusStr = Literal["unknown", "eligible", "ineligible"]
+
+DNS_ELIGIBILITY_STATUS: bidict[
+    DnsEligibilityStatusStr, QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus
+] = bidict(
     unknown=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligibilityUnknown,
     eligible=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligible,
     ineligible=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsIneligible,
 )
-
-DnsEligibilityStatusStr = Literal["unknown", "eligible", "ineligible"]
 
 
 class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
@@ -25,18 +27,17 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
         """
         return DNS_ELIGIBILITY_STATUS.inverse[self.dnsEligibility()]
 
-    def set_dns_eligibility(self, status: DnsEligibilityStatusStr):
+    def set_dns_eligibility(
+        self,
+        status: DnsEligibilityStatusStr
+        | QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus,
+    ):
         """Set the DNS eligibility flag for this address to status.
 
         Args:
             status: DNS eligibility status
-
-        Raises:
-            InvalidParamError: dns eligibility status does not exist
         """
-        if status not in DNS_ELIGIBILITY_STATUS:
-            raise InvalidParamError(status, DNS_ELIGIBILITY_STATUS)
-        self.setDnsEligibility(DNS_ELIGIBILITY_STATUS[status])
+        self.setDnsEligibility(DNS_ELIGIBILITY_STATUS.get_enum_value(status))
 
     def get_ip(self) -> network.HostAddress:
         return network.HostAddress(self.ip())

@@ -4,16 +4,8 @@ from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
-
-LINE_HEIGHT_TYPES = bidict(
-    single=QtGui.QTextBlockFormat.LineHeightTypes.SingleHeight,
-    proportional=QtGui.QTextBlockFormat.LineHeightTypes.ProportionalHeight,
-    fixed=QtGui.QTextBlockFormat.LineHeightTypes.FixedHeight,
-    minimum=QtGui.QTextBlockFormat.LineHeightTypes.MinimumHeight,
-    line_distance=QtGui.QTextBlockFormat.LineHeightTypes.LineDistanceHeight,
-)
 
 LineHeightTypeStr = Literal[
     "single",
@@ -23,10 +15,12 @@ LineHeightTypeStr = Literal[
     "line_distance",
 ]
 
-MARKER_TYPE = bidict(
-    none=QtGui.QTextBlockFormat.MarkerType.NoMarker,
-    unchecked=QtGui.QTextBlockFormat.MarkerType.Unchecked,
-    checked=QtGui.QTextBlockFormat.MarkerType.Checked,
+LINE_HEIGHT_TYPES: bidict[MarkerTypeStr, QtGui.QTextBlockFormat.LineHeightTypes] = bidict(
+    single=QtGui.QTextBlockFormat.LineHeightTypes.SingleHeight,
+    proportional=QtGui.QTextBlockFormat.LineHeightTypes.ProportionalHeight,
+    fixed=QtGui.QTextBlockFormat.LineHeightTypes.FixedHeight,
+    minimum=QtGui.QTextBlockFormat.LineHeightTypes.MinimumHeight,
+    line_distance=QtGui.QTextBlockFormat.LineHeightTypes.LineDistanceHeight,
 )
 
 MarkerTypeStr = Literal[
@@ -35,20 +29,21 @@ MarkerTypeStr = Literal[
     "checked",
 ]
 
+MARKER_TYPE: bidict[MarkerTypeStr, QtGui.QTextBlockFormat.MarkerType] = bidict(
+    none=QtGui.QTextBlockFormat.MarkerType.NoMarker,
+    unchecked=QtGui.QTextBlockFormat.MarkerType.Unchecked,
+    checked=QtGui.QTextBlockFormat.MarkerType.Checked,
+)
+
 
 class TextBlockFormat(gui.TextFormatMixin, QtGui.QTextBlockFormat):
-    def set_marker(self, marker: MarkerTypeStr):
+    def set_marker(self, marker: MarkerTypeStr | QtGui.QTextBlockFormat.MarkerType):
         """Set the marker.
 
         Args:
             marker: marker
-
-        Raises:
-            InvalidParamError: invalid marker
         """
-        if marker not in MARKER_TYPE:
-            raise InvalidParamError(marker, MARKER_TYPE)
-        self.setMarker(MARKER_TYPE[marker])
+        self.setMarker(MARKER_TYPE.get_enum_value(marker))
 
     def get_marker(self) -> MarkerTypeStr:
         """Get current marker.
@@ -58,18 +53,13 @@ class TextBlockFormat(gui.TextFormatMixin, QtGui.QTextBlockFormat):
         """
         return MARKER_TYPE.inverse[self.marker()]
 
-    def set_alignment(self, alignment: constants.AlignmentStr):
+    def set_alignment(self, alignment: constants.AlignmentStr | constants.AlignmentFlag):
         """Set the alignment of the format.
 
         Args:
             alignment: alignment for the format
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setAlignment(constants.ALIGNMENTS[alignment])
+        self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     def get_alignment(self) -> constants.AlignmentStr:
         """Return current alignment.
@@ -79,18 +69,15 @@ class TextBlockFormat(gui.TextFormatMixin, QtGui.QTextBlockFormat):
         """
         return constants.ALIGNMENTS.inverse[self.alignment()]
 
-    def set_page_break_policy(self, policy: gui.textformat.PageBreakFlagStr):
+    def set_page_break_policy(
+        self, policy: gui.textformat.PageBreakFlagStr | gui.QTextFormat.PageBreakFlag
+    ):
         """Set page break policy.
 
         Args:
             policy: page break policy
-
-        Raises:
-            InvalidParamError: page break policy does not exist
         """
-        if policy not in gui.textformat.PAGE_BREAK_FLAG:
-            raise InvalidParamError(policy, gui.textformat.PAGE_BREAK_FLAG)
-        self.setPageBreakPolicy(gui.textformat.PAGE_BREAK_FLAG[policy])
+        self.setPageBreakPolicy(gui.textformat.PAGE_BREAK_FLAG.get_enum_value(policy))
 
     def get_page_break_policy(self) -> gui.textformat.PageBreakFlagStr:
         """Get the current page break policy.

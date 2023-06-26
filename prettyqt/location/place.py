@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from prettyqt import core, location, positioning
 from prettyqt.qt import QtLocation
-from prettyqt.utils import InvalidParamError
 
 
 class Place(QtLocation.QPlace):
@@ -25,14 +24,10 @@ class Place(QtLocation.QPlace):
         return [location.PlaceContactDetail(i) for i in self.contactDetails(contact_type)]
 
     def set_content(self, typ: str, value: dict[int, QtLocation.QPlaceContent]):
-        if typ not in location.placecontent.TYPE:
-            raise InvalidParamError(typ, location.placecontent.TYPE)
-        self.setContent(location.placecontent.TYPE[typ], value)
+        self.setContent(location.placecontent.TYPE.get_enum_value(typ), value)
 
     def get_content(self, typ: str) -> dict[int, QtLocation.QPlaceContent]:
-        if typ not in location.placecontent.TYPE:
-            raise InvalidParamError(typ, location.placecontent.TYPE)
-        return self.content(location.placecontent.TYPE[typ])
+        return self.content(location.placecontent.TYPE.get_enum_value(typ))
 
     def get_icon(self) -> location.PlaceIcon | None:
         icon = self.icon()

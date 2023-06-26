@@ -4,24 +4,10 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtNetwork
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 mod = QtNetwork.QLocalSocket
-
-LOCAL_SOCKET_ERROR = bidict(
-    connection_refused=mod.LocalSocketError.ConnectionRefusedError,
-    peer_closed=mod.LocalSocketError.PeerClosedError,
-    server_not_found=mod.LocalSocketError.ServerNotFoundError,
-    socket_access=mod.LocalSocketError.SocketAccessError,
-    socket_resource=mod.LocalSocketError.SocketResourceError,
-    socket_timeout=mod.LocalSocketError.SocketTimeoutError,
-    datagram_too_large=mod.LocalSocketError.DatagramTooLargeError,
-    connection=mod.LocalSocketError.ConnectionError,
-    unsupported_socket_operation=mod.LocalSocketError.UnsupportedSocketOperationError,
-    operation=mod.LocalSocketError.OperationError,
-    unknown_socket=mod.LocalSocketError.UnknownSocketError,
-)
 
 LocalSocketErrorStr = Literal[
     "connection_refused",
@@ -37,11 +23,18 @@ LocalSocketErrorStr = Literal[
     "unknown_socket",
 ]
 
-LOCAL_SOCKET_STATE = bidict(
-    unconnected=mod.LocalSocketState.UnconnectedState,
-    connecting=mod.LocalSocketState.ConnectingState,
-    connected=mod.LocalSocketState.ConnectedState,
-    closing=mod.LocalSocketState.ClosingState,
+LOCAL_SOCKET_ERROR: bidict[LocalSocketErrorStr, mod.LocalSocketError] = bidict(
+    connection_refused=mod.LocalSocketError.ConnectionRefusedError,
+    peer_closed=mod.LocalSocketError.PeerClosedError,
+    server_not_found=mod.LocalSocketError.ServerNotFoundError,
+    socket_access=mod.LocalSocketError.SocketAccessError,
+    socket_resource=mod.LocalSocketError.SocketResourceError,
+    socket_timeout=mod.LocalSocketError.SocketTimeoutError,
+    datagram_too_large=mod.LocalSocketError.DatagramTooLargeError,
+    connection=mod.LocalSocketError.ConnectionError,
+    unsupported_socket_operation=mod.LocalSocketError.UnsupportedSocketOperationError,
+    operation=mod.LocalSocketError.OperationError,
+    unknown_socket=mod.LocalSocketError.UnknownSocketError,
 )
 
 LocalSocketStateStr = Literal[
@@ -50,6 +43,13 @@ LocalSocketStateStr = Literal[
     "connected",
     "closing",
 ]
+
+LOCAL_SOCKET_STATE: bidict[LocalSocketStateStr, mod.LocalSocketState] = bidict(
+    unconnected=mod.LocalSocketState.UnconnectedState,
+    connecting=mod.LocalSocketState.ConnectingState,
+    connected=mod.LocalSocketState.ConnectedState,
+    closing=mod.LocalSocketState.ClosingState,
+)
 
 
 class LocalSocket(core.IODeviceMixin, QtNetwork.QLocalSocket):
@@ -65,14 +65,13 @@ class LocalSocket(core.IODeviceMixin, QtNetwork.QLocalSocket):
     def connect_to_server(
         self,
         server_name: str | None = None,
-        mode: core.iodevice.OpenModeStr = "read_write",
+        mode: core.iodevice.OpenModeStr | core.QIODevice.OpenModeFlag = "read_write",
     ):
-        if mode not in core.iodevice.OPEN_MODES:
-            raise InvalidParamError(mode, core.iodevice.OPEN_MODES)
+        open_mode = core.iodevice.OPEN_MODES.get_enum_value(mode)
         if server_name is not None:
-            self.connectToServer(server_name, core.iodevice.OPEN_MODES[mode])
+            self.connectToServer(server_name, open_mode)
         else:
-            self.connectToServer(core.iodevice.OPEN_MODES[mode])
+            self.connectToServer(open_mode)
 
 
 if __name__ == "__main__":

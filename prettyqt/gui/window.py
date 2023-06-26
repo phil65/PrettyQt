@@ -7,15 +7,20 @@ from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
+AncestorModeStr = Literal["exclude_transients", "include_transients"]
 
-ANCESTER_MODES = bidict(
+ANCESTER_MODES: bidict[AncestorModeStr, QtGui.QWindow.AncestorMode] = bidict(
     exclude_transients=QtGui.QWindow.AncestorMode.ExcludeTransients,
     include_transients=QtGui.QWindow.AncestorMode.IncludeTransients,
 )
 
-VISIBILITY = bidict(
+VisibilityStr = Literal[
+    "windowed", "minimized", "maximized", "fullscreen", "automatic", "hidden"
+]
+
+VISIBILITY: bidict[VisibilityStr, QtGui.QWindow.Visibility] = bidict(
     windowed=QtGui.QWindow.Visibility.Windowed,
     minimized=QtGui.QWindow.Visibility.Minimized,
     maximized=QtGui.QWindow.Visibility.Maximized,
@@ -23,10 +28,6 @@ VISIBILITY = bidict(
     automatic=QtGui.QWindow.Visibility.AutomaticVisibility,
     hidden=QtGui.QWindow.Visibility.Hidden,
 )
-
-VisibilityStr = Literal[
-    "windowed", "minimized", "maximized", "fullscreen", "automatic", "hidden"
-]
 
 
 class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
@@ -37,25 +38,20 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
         self,
         keysequence: datatypes.KeyCombinationType,
         callback: Callable | None = None,
-        context: constants.ShortcutContextStr = "window",
+        context: constants.ShortcutContextStr | constants.ShortcutContext = "window",
     ) -> gui.Shortcut:
         if not isinstance(keysequence, QtGui.QKeySequence):
             keysequence = gui.KeySequence(keysequence)
-        context = constants.SHORTCUT_CONTEXT[context]
+        context = constants.SHORTCUT_CONTEXT.get_enum_value(context)
         return gui.Shortcut(keysequence, self, callback, context=context)
 
-    def set_visibility(self, visibility: VisibilityStr):
+    def set_visibility(self, visibility: VisibilityStr | QtGui.QWindow.Visibility):
         """Set window visibility.
 
         Args:
             visibility: window visibility
-
-        Raises:
-            InvalidParamError: window visibility does not exist
         """
-        if visibility not in VISIBILITY:
-            raise InvalidParamError(visibility, VISIBILITY)
-        self.setVisibility(VISIBILITY[visibility])
+        self.setVisibility(VISIBILITY.get_enum_value(visibility))
 
     def get_visibility(self) -> VisibilityStr:
         """Get the current window visibility.
@@ -65,18 +61,13 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
         """
         return VISIBILITY.inverse[self.visibility()]
 
-    def start_system_resize(self, edge: constants.EdgeStr) -> bool:
+    def start_system_resize(self, edge: constants.EdgeStr | constants.Edge) -> bool:
         """Start system resize.
 
         Args:
             edge: edge to resize
-
-        Raises:
-            InvalidParamError: edge does not exist
         """
-        if edge not in constants.EDGES:
-            raise InvalidParamError(edge, constants.EDGES)
-        return self.startSystemResize(constants.EDGES[edge])
+        return self.startSystemResize(constants.EDGES.get_enum_value(edge))
 
     def get_screen(self) -> gui.Screen:
         return gui.Screen(self.screen())
@@ -88,18 +79,15 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
 
-    def set_modality(self, modality: constants.WindowModalityStr) -> None:
+    def set_modality(
+        self, modality: constants.WindowModalityStr | constants.WindowModality
+    ) -> None:
         """Set modality for the window.
 
         Args:
             modality: modality for the window
-
-        Raises:
-            InvalidParamError: modality type does not exist
         """
-        if modality not in constants.WINDOW_MODALITY:
-            raise InvalidParamError(modality, constants.WINDOW_MODALITY)
-        self.setModality(constants.WINDOW_MODALITY[modality])
+        self.setModality(constants.WINDOW_MODALITY.get_enum_value(modality))
 
     def get_modality(self) -> constants.WindowModalityStr:
         return constants.WINDOW_MODALITY.inverse[self.modality()]

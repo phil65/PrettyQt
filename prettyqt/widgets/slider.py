@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 TickPositionStr = Literal["none", "both_sides", "above", "below"]
@@ -173,7 +173,9 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
         self.setValue(int(value))
         super().mousePressEvent(e)
 
-    def set_tick_position(self, position: TickPositionAllStr):
+    def set_tick_position(
+        self, position: TickPositionAllStr | QtWidgets.QSlider.TickPosition
+    ):
         """Set the tick position for the slider.
 
         For vertical orientation, "above" equals to "left" and "below" to "right".
@@ -185,9 +187,7 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
             position = "above"
         elif position == "right":
             position = "below"
-        elif position not in TICK_POSITION:
-            raise InvalidParamError(position, TICK_POSITION)
-        self.setTickPosition(TICK_POSITION[position])
+        self.setTickPosition(TICK_POSITION.get_enum_value(position))
 
     def get_tick_position(self) -> TickPositionStr:
         """Return tick position.

@@ -4,7 +4,7 @@ from collections.abc import Iterable
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import datatypes
 
 
 class Shortcut(core.ObjectMixin, QtGui.QShortcut):
@@ -17,18 +17,15 @@ class Shortcut(core.ObjectMixin, QtGui.QShortcut):
     def __str__(self):
         return self.key().toString()
 
-    def set_context(self, context: constants.ShortcutContextStr):
+    def set_context(
+        self, context: constants.ShortcutContextStr | constants.ShortcutContext
+    ):
         """Set shortcut context.
 
         Args:
             context: shortcut context
-
-        Raises:
-            InvalidParamError: shortcut context does not exist
         """
-        if context not in constants.SHORTCUT_CONTEXT:
-            raise InvalidParamError(context, constants.SHORTCUT_CONTEXT)
-        self.setContext(constants.SHORTCUT_CONTEXT[context])
+        self.setContext(constants.SHORTCUT_CONTEXT.get_enum_value(context))
 
     def get_context(self) -> constants.ShortcutContextStr:
         """Return shortcut context.
