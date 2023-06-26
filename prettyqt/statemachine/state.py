@@ -4,37 +4,32 @@ from typing import Literal
 
 from prettyqt import statemachine
 from prettyqt.qt import QtStateMachine
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-CHILD_MODE = bidict(
+ChildModeStr = Literal["exclusive", "parallel"]
+
+CHILD_MODE: bidict[ChildModeStr, QtStateMachine.QState.ChildMode] = bidict(
     exclusive=QtStateMachine.QState.ChildMode.ExclusiveStates,
     parallel=QtStateMachine.QState.ChildMode.ParallelStates,
 )
 
-ChildModeStr = Literal["exclusive", "parallel"]
+RestorePolicyStr = Literal["dont_restore", "restore"]
 
-RESTORE_POLICY = bidict(
+RESTORE_POLICY: bidict[RestorePolicyStr, QtStateMachine.QState.RestorePolicy] = bidict(
     dont_restore=QtStateMachine.QState.RestorePolicy.DontRestoreProperties,
     restore=QtStateMachine.QState.RestorePolicy.RestoreProperties,
 )
 
-RestorePolicyStr = Literal["dont_restore", "restore"]
-
 
 class StateMixin(statemachine.AbstractStateMixin):
-    def set_child_mode(self, mode: ChildModeStr):
+    def set_child_mode(self, mode: ChildModeStr | QtStateMachine.QState.ChildMode):
         """Set child mode to use.
 
         Args:
             mode: child mode to use
-
-        Raises:
-            InvalidParamError: child mode does not exist
         """
-        if mode not in CHILD_MODE:
-            raise InvalidParamError(mode, CHILD_MODE)
-        self.setChildMode(CHILD_MODE[mode])
+        self.setChildMode(CHILD_MODE.get_enum_value(mode))
 
     def get_child_mode(self) -> ChildModeStr:
         """Return current child mode.

@@ -5,16 +5,8 @@ from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtCore, QtGui, QtQuick
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
-
-CREATE_TEXTURE_OPTION = bidict(
-    has_alpha_channel=QtQuick.QQuickWindow.CreateTextureOption.TextureHasAlphaChannel,
-    has_mipmaps=QtQuick.QQuickWindow.CreateTextureOption.TextureHasMipmaps,
-    owns_gl_texture=QtQuick.QQuickWindow.CreateTextureOption.TextureOwnsGLTexture,
-    can_use_atlas=QtQuick.QQuickWindow.CreateTextureOption.TextureCanUseAtlas,
-    is_opaque=QtQuick.QQuickWindow.CreateTextureOption.TextureIsOpaque,
-)
 
 CreateTextureOptionStr = Literal[
     "has_alpha_channel",
@@ -24,13 +16,14 @@ CreateTextureOptionStr = Literal[
     "is_opaque",
 ]
 
-RENDER_STAGE = bidict(
-    before_synchronizing=QtQuick.QQuickWindow.RenderStage.BeforeSynchronizingStage,
-    after_synchronizing=QtQuick.QQuickWindow.RenderStage.AfterSynchronizingStage,
-    before_rendering=QtQuick.QQuickWindow.RenderStage.BeforeRenderingStage,
-    after_rendering=QtQuick.QQuickWindow.RenderStage.AfterRenderingStage,
-    after_swap=QtQuick.QQuickWindow.RenderStage.AfterSwapStage,
-    no_stage=QtQuick.QQuickWindow.RenderStage.NoStage,
+CREATE_TEXTURE_OPTION: bidict[
+    CreateTextureOptionStr, QtQuick.QQuickWindow.CreateTextureOption
+] = bidict(
+    has_alpha_channel=QtQuick.QQuickWindow.CreateTextureOption.TextureHasAlphaChannel,
+    has_mipmaps=QtQuick.QQuickWindow.CreateTextureOption.TextureHasMipmaps,
+    owns_gl_texture=QtQuick.QQuickWindow.CreateTextureOption.TextureOwnsGLTexture,
+    can_use_atlas=QtQuick.QQuickWindow.CreateTextureOption.TextureCanUseAtlas,
+    is_opaque=QtQuick.QQuickWindow.CreateTextureOption.TextureIsOpaque,
 )
 
 RenderStageStr = Literal[
@@ -42,12 +35,21 @@ RenderStageStr = Literal[
     "no_stage",
 ]
 
-TEXT_RENDER_TYPE = bidict(
-    qt_text=QtQuick.QQuickWindow.TextRenderType.QtTextRendering,
-    native_text=QtQuick.QQuickWindow.TextRenderType.NativeTextRendering,
+RENDER_STAGE: bidict[RenderStageStr, QtQuick.QQuickWindow.RenderStage] = bidict(
+    before_synchronizing=QtQuick.QQuickWindow.RenderStage.BeforeSynchronizingStage,
+    after_synchronizing=QtQuick.QQuickWindow.RenderStage.AfterSynchronizingStage,
+    before_rendering=QtQuick.QQuickWindow.RenderStage.BeforeRenderingStage,
+    after_rendering=QtQuick.QQuickWindow.RenderStage.AfterRenderingStage,
+    after_swap=QtQuick.QQuickWindow.RenderStage.AfterSwapStage,
+    no_stage=QtQuick.QQuickWindow.RenderStage.NoStage,
 )
 
 TextRenderTypeStr = Literal["qt_text", "native_text"]
+
+TEXT_RENDER_TYPE: bidict[TextRenderTypeStr, QtQuick.QQuickWindow.TextRenderType] = bidict(
+    qt_text=QtQuick.QQuickWindow.TextRenderType.QtTextRendering,
+    native_text=QtQuick.QQuickWindow.TextRenderType.NativeTextRendering,
+)
 
 
 class QuickWindowMixin(gui.WindowMixin):
@@ -65,8 +67,8 @@ class QuickWindowMixin(gui.WindowMixin):
     def get_color(self) -> gui.Color:
         return gui.Color(self.color())
 
-    @staticmethod
-    def set_text_render_type(typ: TextRenderTypeStr):
+    @classmethod
+    def set_text_render_type(cls, typ: TextRenderTypeStr):
         """Set the default render type of text-like elements in Qt Quick.
 
         Note: setting the render type will only affect elements created afterwards;
@@ -74,22 +76,17 @@ class QuickWindowMixin(gui.WindowMixin):
 
         Args:
             typ: text render type to use
-
-        Raises:
-            InvalidParamError: text render type does not exist
         """
-        if typ not in TEXT_RENDER_TYPE:
-            raise InvalidParamError(typ, TEXT_RENDER_TYPE)
-        QuickWindow.setTextRenderType(TEXT_RENDER_TYPE[typ])
+        cls.setTextRenderType(TEXT_RENDER_TYPE.get_enum_value(typ))
 
-    @staticmethod
-    def get_text_render_type() -> TextRenderTypeStr:
+    @classmethod
+    def get_text_render_type(cls) -> TextRenderTypeStr:
         """Return the render type of text-like elements in Qt Quick.
 
         Returns:
             text render type
         """
-        return TEXT_RENDER_TYPE.inverse[QuickWindow.textRenderType()]
+        return TEXT_RENDER_TYPE.inverse[cls.textRenderType()]
 
     @contextlib.contextmanager
     def external_commands(self):
@@ -97,10 +94,12 @@ class QuickWindowMixin(gui.WindowMixin):
         yield self
         self.endExternalCommands()
 
-    def schedule_render_job(self, job: QtCore.QRunnable, render_stage: RenderStageStr):
-        if render_stage not in RENDER_STAGE:
-            raise InvalidParamError(render_stage, RENDER_STAGE)
-        self.scheduleRenderJob(job, RENDER_STAGE[render_stage])
+    def schedule_render_job(
+        self,
+        job: QtCore.QRunnable,
+        render_stage: RenderStageStr | QtQuick.QQuickWindow.RenderStage,
+    ):
+        self.scheduleRenderJob(job, RENDER_STAGE.get_enum_value(render_stage))
 
 
 class QuickWindow(QuickWindowMixin, QtQuick.QQuickWindow):
@@ -110,5 +109,6 @@ class QuickWindow(QuickWindowMixin, QtQuick.QQuickWindow):
 if __name__ == "__main__":
     app = gui.app()
     wnd = QuickWindow()
+    wnd.set_text_render_type("qt_text")
     img = QtGui.QImage()
     texture = wnd.create_texture_from_image(img)

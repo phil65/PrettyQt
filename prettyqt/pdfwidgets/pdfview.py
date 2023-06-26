@@ -5,23 +5,17 @@ from typing import Literal
 
 from prettyqt import core, pdf, widgets
 from prettyqt.qt import QtWidgets, QtPdfWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
-
-PAGE_MODE = bidict(
-    single=QtPdfWidgets.QPdfView.PageMode.SinglePage,
-    multi=QtPdfWidgets.QPdfView.PageMode.MultiPage,
-)
 
 PageModeStr = Literal[
     "single",
     "multi",
 ]
 
-ZOOM_MODE = bidict(
-    custom=QtPdfWidgets.QPdfView.ZoomMode.Custom,
-    fit_to_width=QtPdfWidgets.QPdfView.ZoomMode.FitToWidth,
-    fit_in_view=QtPdfWidgets.QPdfView.ZoomMode.FitInView,
+PAGE_MODE: bidict[PageModeStr, QtPdfWidgets.QPdfView.PageMode] = bidict(
+    single=QtPdfWidgets.QPdfView.PageMode.SinglePage,
+    multi=QtPdfWidgets.QPdfView.PageMode.MultiPage,
 )
 
 ZoomModeStr = Literal[
@@ -29,6 +23,12 @@ ZoomModeStr = Literal[
     "fit_to_width",
     "fit_in_view",
 ]
+
+ZOOM_MODE: bidict[ZoomModeStr, QtPdfWidgets.QPdfView.ZoomMode] = bidict(
+    custom=QtPdfWidgets.QPdfView.ZoomMode.Custom,
+    fit_to_width=QtPdfWidgets.QPdfView.ZoomMode.FitToWidth,
+    fit_in_view=QtPdfWidgets.QPdfView.ZoomMode.FitInView,
+)
 
 
 class PdfView(widgets.AbstractScrollAreaMixin, QtPdfWidgets.QPdfView):
@@ -44,18 +44,13 @@ class PdfView(widgets.AbstractScrollAreaMixin, QtPdfWidgets.QPdfView):
         doc.load(os.fspath(path))
         self.setDocument(doc)
 
-    def set_page_mode(self, mode: PageModeStr):
+    def set_page_mode(self, mode: PageModeStr | QtPdfWidgets.QPdfView.PageMode):
         """Set the page mode.
 
         Args:
             mode: page mode
-
-        Raises:
-            InvalidParamError: page mode does not exist
         """
-        if mode not in PAGE_MODE:
-            raise InvalidParamError(mode, PAGE_MODE)
-        self.setPageMode(PAGE_MODE[mode])
+        self.setPageMode(PAGE_MODE.get_enum_value(mode))
 
     def get_page_mode(self) -> PageModeStr:
         """Return current page mode.
@@ -65,18 +60,13 @@ class PdfView(widgets.AbstractScrollAreaMixin, QtPdfWidgets.QPdfView):
         """
         return PAGE_MODE.inverse[self.pageMode()]
 
-    def set_zoom_mode(self, mode: ZoomModeStr):
+    def set_zoom_mode(self, mode: ZoomModeStr | QtPdfWidgets.QPdfView.ZoomMode):
         """Set the zoom mode.
 
         Args:
             mode: zoom mode
-
-        Raises:
-            InvalidParamError: zoom mode does not exist
         """
-        if mode not in ZOOM_MODE:
-            raise InvalidParamError(mode, ZOOM_MODE)
-        self.setZoomMode(ZOOM_MODE[mode])
+        self.setZoomMode(ZOOM_MODE.get_enum_value(mode))
 
     def get_zoom_mode(self) -> ZoomModeStr:
         """Return current zoom mode.

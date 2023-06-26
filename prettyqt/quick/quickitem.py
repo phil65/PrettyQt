@@ -4,16 +4,8 @@ from typing import Literal
 
 from prettyqt import core, gui, qml
 from prettyqt.qt import QtCore, QtQuick
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict, datatypes
 
-
-FLAGS = bidict(
-    clips_children_to_shape=QtQuick.QQuickItem.Flag.ItemClipsChildrenToShape,
-    accepts_input_method=QtQuick.QQuickItem.Flag.ItemAcceptsInputMethod,
-    is_focus_scope=QtQuick.QQuickItem.Flag.ItemIsFocusScope,
-    has_contents=QtQuick.QQuickItem.Flag.ItemHasContents,
-    accepts_drops=QtQuick.QQuickItem.Flag.ItemAcceptsDrops,
-)
 
 FlagStr = Literal[
     "clips_children_to_shape",
@@ -23,18 +15,12 @@ FlagStr = Literal[
     "accepts_drops",
 ]
 
-ITEM_CHANGE = bidict(
-    child_added_change=QtQuick.QQuickItem.ItemChange.ItemChildAddedChange,
-    child_removed_change=QtQuick.QQuickItem.ItemChange.ItemChildRemovedChange,
-    item_scene_change=QtQuick.QQuickItem.ItemChange.ItemSceneChange,
-    visible_has_changed=QtQuick.QQuickItem.ItemChange.ItemVisibleHasChanged,
-    parent_has_changed=QtQuick.QQuickItem.ItemChange.ItemParentHasChanged,
-    opacity_has_changed=QtQuick.QQuickItem.ItemChange.ItemOpacityHasChanged,
-    active_focus_has_changed=QtQuick.QQuickItem.ItemChange.ItemActiveFocusHasChanged,
-    rotation_has_changed=QtQuick.QQuickItem.ItemChange.ItemRotationHasChanged,
-    pixel_ratio_has_changed=QtQuick.QQuickItem.ItemChange.ItemDevicePixelRatioHasChanged,
-    anti_aliasing_has_changed=QtQuick.QQuickItem.ItemChange.ItemAntialiasingHasChanged,
-    enabled_has_changed=QtQuick.QQuickItem.ItemChange.ItemEnabledHasChanged,
+FLAGS: bidict[FlagStr, QtQuick.QQuickItem.Flag] = bidict(
+    clips_children_to_shape=QtQuick.QQuickItem.Flag.ItemClipsChildrenToShape,
+    accepts_input_method=QtQuick.QQuickItem.Flag.ItemAcceptsInputMethod,
+    is_focus_scope=QtQuick.QQuickItem.Flag.ItemIsFocusScope,
+    has_contents=QtQuick.QQuickItem.Flag.ItemHasContents,
+    accepts_drops=QtQuick.QQuickItem.Flag.ItemAcceptsDrops,
 )
 
 ItemChangeStr = Literal[
@@ -51,16 +37,18 @@ ItemChangeStr = Literal[
     "enabled_has_changed",
 ]
 
-TRANSFORM_ORIGIN = bidict(
-    top_left=QtQuick.QQuickItem.TransformOrigin.TopLeft,
-    top=QtQuick.QQuickItem.TransformOrigin.Top,
-    top_right=QtQuick.QQuickItem.TransformOrigin.TopRight,
-    left=QtQuick.QQuickItem.TransformOrigin.Left,
-    center=QtQuick.QQuickItem.TransformOrigin.Center,
-    right=QtQuick.QQuickItem.TransformOrigin.Right,
-    bottom_left=QtQuick.QQuickItem.TransformOrigin.BottomLeft,
-    bottom=QtQuick.QQuickItem.TransformOrigin.Bottom,
-    bottom_right=QtQuick.QQuickItem.TransformOrigin.BottomRight,
+ITEM_CHANGE: bidict[ItemChangeStr, QtQuick.QQuickItem.ItemChange] = bidict(
+    child_added_change=QtQuick.QQuickItem.ItemChange.ItemChildAddedChange,
+    child_removed_change=QtQuick.QQuickItem.ItemChange.ItemChildRemovedChange,
+    item_scene_change=QtQuick.QQuickItem.ItemChange.ItemSceneChange,
+    visible_has_changed=QtQuick.QQuickItem.ItemChange.ItemVisibleHasChanged,
+    parent_has_changed=QtQuick.QQuickItem.ItemChange.ItemParentHasChanged,
+    opacity_has_changed=QtQuick.QQuickItem.ItemChange.ItemOpacityHasChanged,
+    active_focus_has_changed=QtQuick.QQuickItem.ItemChange.ItemActiveFocusHasChanged,
+    rotation_has_changed=QtQuick.QQuickItem.ItemChange.ItemRotationHasChanged,
+    pixel_ratio_has_changed=QtQuick.QQuickItem.ItemChange.ItemDevicePixelRatioHasChanged,
+    anti_aliasing_has_changed=QtQuick.QQuickItem.ItemChange.ItemAntialiasingHasChanged,
+    enabled_has_changed=QtQuick.QQuickItem.ItemChange.ItemEnabledHasChanged,
 )
 
 TransformOriginStr = Literal[
@@ -74,6 +62,18 @@ TransformOriginStr = Literal[
     "bottom",
     "bottom_right",
 ]
+
+TRANSFORM_ORIGIN: bidict[TransformOriginStr, QtQuick.QQuickItem.TransformOrigin] = bidict(
+    top_left=QtQuick.QQuickItem.TransformOrigin.TopLeft,
+    top=QtQuick.QQuickItem.TransformOrigin.Top,
+    top_right=QtQuick.QQuickItem.TransformOrigin.TopRight,
+    left=QtQuick.QQuickItem.TransformOrigin.Left,
+    center=QtQuick.QQuickItem.TransformOrigin.Center,
+    right=QtQuick.QQuickItem.TransformOrigin.Right,
+    bottom_left=QtQuick.QQuickItem.TransformOrigin.BottomLeft,
+    bottom=QtQuick.QQuickItem.TransformOrigin.Bottom,
+    bottom_right=QtQuick.QQuickItem.TransformOrigin.BottomRight,
+)
 
 
 class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
@@ -92,20 +92,17 @@ class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
     def get_flags(self):
         pass
 
-    def set_transform_origin(self, origin: TransformOriginStr):
+    def set_transform_origin(
+        self, origin: TransformOriginStr | QtQuick.QQuickItem.TransformOrigin
+    ):
         """Set the origin point around which scale and rotation transform.
 
         The default is "center".
 
         Args:
             origin: transform origin to use
-
-        Raises:
-            InvalidParamError: transform origin does not exist
         """
-        if origin not in TRANSFORM_ORIGIN:
-            raise InvalidParamError(origin, TRANSFORM_ORIGIN)
-        self.setTransformOrigin(TRANSFORM_ORIGIN[origin])
+        self.setTransformOrigin(TRANSFORM_ORIGIN.get_enum_value(origin))
 
     def get_transform_origin(self) -> TransformOriginStr:
         """Return the render type of text-like elements in Qt Quick.
@@ -115,15 +112,8 @@ class QuickItemMixin(core.ObjectMixin, qml.QmlParserStatusMixin):
         """
         return TRANSFORM_ORIGIN.inverse[self.transformOrigin()]
 
-    def set_size(self, size: QtCore.QSize | QtCore.QSizeF | tuple[float, float]):
-        match size:
-            case (float(), float()):
-                new_size = QtCore.QSizeF(*size)
-            case QtCore.QSize():
-                new_size = size.toSizeF()
-            case QtCore.QSizeF():
-                new_size = size
-        self.setSize(new_size)
+    def set_size(self, size: QtCore.QSize | datatypes.SizeFType):
+        self.setSize(datatypes.to_sizef(size))
 
 
 class QuickItem(QuickItemMixin, QtQuick.QQuickItem):

@@ -4,30 +4,29 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtStateMachine
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-TRANSITION_TYPE = bidict(
+TransitionTypeStr = Literal["exclusive", "parallel"]
+
+TRANSITION_TYPE: bidict[
+    TransitionTypeStr, QtStateMachine.QAbstractTransition.TransitionType
+] = bidict(
     exclusive=QtStateMachine.QAbstractTransition.TransitionType.ExternalTransition,
     parallel=QtStateMachine.QAbstractTransition.TransitionType.InternalTransition,
 )
 
-TransitionTypeStr = Literal["exclusive", "parallel"]
-
 
 class AbstractTransitionMixin(core.ObjectMixin):
-    def set_transition_type(self, typ: TransitionTypeStr):
+    def set_transition_type(
+        self, typ: TransitionTypeStr | QtStateMachine.QAbstractTransition.TransitionType
+    ):
         """Set transition type.
 
         Args:
             typ: transition type to use
-
-        Raises:
-            InvalidParamError: transition type does not exist
         """
-        if typ not in TRANSITION_TYPE:
-            raise InvalidParamError(typ, TRANSITION_TYPE)
-        self.setTransitionType(TRANSITION_TYPE[typ])
+        self.setTransitionType(TRANSITION_TYPE.get_enum_value(typ))
 
     def get_transition_type(self) -> TransitionTypeStr:
         """Return current transition type.

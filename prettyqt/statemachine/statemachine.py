@@ -4,18 +4,10 @@ from typing import Literal
 
 from prettyqt import statemachine
 from prettyqt.qt import QtCore, QtStateMachine
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 sm = QtStateMachine.QStateMachine.Error
-
-ERROR = bidict(
-    none=sm.NoError,
-    no_initial_state=sm.NoInitialStateError,
-    no_default_state_in_history_state=sm.NoDefaultStateInHistoryStateError,
-    no_common_ancestor_for_transistion=sm.NoCommonAncestorForTransitionError,
-    state_machine_child_Mode_set_to_parallel=sm.StateMachineChildModeSetToParallelError,
-)
 
 ErrorStr = Literal[
     "none",
@@ -25,12 +17,20 @@ ErrorStr = Literal[
     "state_machine_child_Mode_set_to_parallel",
 ]
 
-PRIORITY = bidict(
-    normal=QtStateMachine.QStateMachine.EventPriority.NormalPriority,
-    high=QtStateMachine.QStateMachine.EventPriority.HighPriority,
+ERROR: bidict[ErrorStr, sm] = bidict(
+    none=sm.NoError,
+    no_initial_state=sm.NoInitialStateError,
+    no_default_state_in_history_state=sm.NoDefaultStateInHistoryStateError,
+    no_common_ancestor_for_transistion=sm.NoCommonAncestorForTransitionError,
+    state_machine_child_Mode_set_to_parallel=sm.StateMachineChildModeSetToParallelError,
 )
 
 PriorityStr = Literal["normal", "high"]
+
+PRIORITY: bidict[PriorityStr, QtStateMachine.QStateMachine.EventPriority] = bidict(
+    normal=QtStateMachine.QStateMachine.EventPriority.NormalPriority,
+    high=QtStateMachine.QStateMachine.EventPriority.HighPriority,
+)
 
 
 class StateMachine(statemachine.state.StateMixin, QtStateMachine.QStateMachine):
@@ -41,23 +41,25 @@ class StateMachine(statemachine.state.StateMixin, QtStateMachine.QStateMachine):
     def get_error(self) -> ErrorStr:
         return ERROR.inverse[self.error()]
 
-    def post_event(self, event: QtCore.QEvent, priority: PriorityStr = "normal"):
-        if priority not in PRIORITY:
-            raise InvalidParamError(priority, PRIORITY)
-        self.postEvent(event, PRIORITY[priority])
+    def post_event(
+        self,
+        event: QtCore.QEvent,
+        priority: PriorityStr | QtStateMachine.QStateMachine.EventPriority = "normal",
+    ):
+        self.postEvent(event, PRIORITY.get_enum_value(priority))
 
-    def set_global_restore_policy(self, policy: statemachine.state.RestorePolicyStr):
+    def set_global_restore_policy(
+        self,
+        policy: statemachine.state.RestorePolicyStr | statemachine.State.RestorePolicy,
+    ):
         """Set restore policy to use.
 
         Args:
             policy: restore policy to use
-
-        Raises:
-            InvalidParamError: restore policy does not exist
         """
-        if policy not in statemachine.state.RESTORE_POLICY:
-            raise InvalidParamError(policy, statemachine.state.RESTORE_POLICY)
-        self.setGlobalRestorePolicy(statemachine.state.RESTORE_POLICY[policy])
+        self.setGlobalRestorePolicy(
+            statemachine.state.RESTORE_POLICY.get_enum_value(policy)
+        )
 
     def get_global_restore_policy(self) -> statemachine.state.RestorePolicyStr:
         """Return current restore policy.
