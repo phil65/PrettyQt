@@ -2,16 +2,18 @@ from __future__ import annotations
 
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError
 
 
 class FontMetricsF(QtGui.QFontMetricsF):
     def elided_text(
-        self, text: str, mode: constants.ElideModeStr, width: float, flags=0
+        self,
+        text: str,
+        mode: constants.TextElideModeStr | constants.TextElideMode,
+        width: float,
+        flags=0,
     ) -> str:
-        if mode not in constants.ELIDE_MODE:
-            raise InvalidParamError(mode, constants.ELIDE_MODE)
-        return self.elidedText(text, constants.ELIDE_MODE[mode], width, flags)
+        val = constants.TEXT_ELIDE_MODE.get_enum_value(mode)
+        return self.elidedText(text, val, width, flags)
 
     def get_bounding_rect(self, *args) -> core.RectF:
         return core.RectF(self.boundingRect(*args))

@@ -138,7 +138,7 @@ class TabBarMixin(widgets.WidgetMixin):
         """
         return REMOVE_BEHAVIOUR.inverse[self.selectionBehaviorOnRemove()]
 
-    def set_elide_mode(self, mode: constants.ElideModeStr) -> None:
+    def set_elide_mode(self, mode: constants.TextElideModeStr) -> None:
         """Set elide mode.
 
         Args:
@@ -147,17 +147,17 @@ class TabBarMixin(widgets.WidgetMixin):
         Raises:
             InvalidParamError: invalid elide mode
         """
-        if mode not in constants.ELIDE_MODE:
-            raise InvalidParamError(mode, constants.ELIDE_MODE)
-        self.setElideMode(constants.ELIDE_MODE[mode])
+        if mode not in constants.TEXT_ELIDE_MODE:
+            raise InvalidParamError(mode, constants.TEXT_ELIDE_MODE)
+        self.setElideMode(constants.TEXT_ELIDE_MODE[mode])
 
-    def get_elide_mode(self) -> constants.ElideModeStr:
+    def get_elide_mode(self) -> constants.TextElideModeStr:
         """Return elide mode.
 
         Returns:
             elide mode
         """
-        return constants.ELIDE_MODE.inverse[self.elideMode()]
+        return constants.TEXT_ELIDE_MODE.inverse[self.elideMode()]
 
 
 class TabBar(TabBarMixin, widgets.QTabBar):

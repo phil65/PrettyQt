@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 AlgorithmStr = Literal[
@@ -62,7 +62,7 @@ class CryptographicHash(QtCore.QCryptographicHash):
         return bytes(self.result())
 
     @staticmethod
-    def get_hash_length(method: AlgorithmStr) -> int:
-        if method not in ALGORITHM:
-            raise InvalidParamError(method, ALGORITHM)
-        return CryptographicHash.hashLength(ALGORITHM[method])
+    def get_hash_length(
+        method: AlgorithmStr | QtCore.QCryptographicHash.Algorithm,
+    ) -> int:
+        return CryptographicHash.hashLength(ALGORITHM.get_enum_value(method))

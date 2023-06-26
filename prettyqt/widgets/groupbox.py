@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, get_repr
+from prettyqt.utils import get_repr
 
 
 class GroupBox(widgets.WidgetMixin, QtWidgets.QGroupBox):
@@ -19,18 +19,15 @@ class GroupBox(widgets.WidgetMixin, QtWidgets.QGroupBox):
     def set_title(self, title: str):
         self.setTitle(title)
 
-    def set_alignment(self, alignment: constants.HorizontalAlignmentStr):
+    def set_alignment(
+        self, alignment: constants.HorizontalAlignmentStr | constants.AlignmentFlag
+    ):
         """Set the title alignment of the groupbox.
 
         Args:
             alignment: title alignment for the groupbox
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.H_ALIGNMENT:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setAlignment(constants.H_ALIGNMENT[alignment])
+        self.setAlignment(constants.H_ALIGNMENT.get_enum_value(alignment))
 
     def get_alignment(self) -> constants.HorizontalAlignmentStr:
         """Return current title alignment.

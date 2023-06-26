@@ -9,7 +9,7 @@ from typing_extensions import Self
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 FilterStr = Literal[
@@ -116,9 +116,6 @@ class Dir(QtCore.QDir):
         return pathlib.Path(self.absolutePath())
 
     def set_filter(self, *filters: FilterStr):
-        for item in filters:
-            if item not in FILTERS:
-                raise InvalidParamError(item, FILTERS)
         flags = FILTERS.merge_flags(filters)
         self.setFilter(flags)
 

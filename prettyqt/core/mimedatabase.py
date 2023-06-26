@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 MatchModeStr = Literal["default", "extension", "content"]
@@ -21,13 +21,11 @@ class MimeDatabase(QtCore.QMimeDatabase):
     def get_mime_type_for_file(
         self,
         path: datatypes.PathType | QtCore.QFileInfo,
-        match_mode: MatchModeStr = "default",
+        match_mode: MatchModeStr | QtCore.QMimeDatabase.MatchMode = "default",
     ) -> core.MimeType:
-        if match_mode not in MATCH_MODE:
-            raise InvalidParamError(match_mode, MATCH_MODE)
         if isinstance(path, os.PathLike):
             path = os.fspath(path)
-        mime_type = self.mimeTypeForFile(path, MATCH_MODE[match_mode])
+        mime_type = self.mimeTypeForFile(path, MATCH_MODE.get_enum_value(match_mode))
         return core.MimeType(mime_type)
 
     def get_mime_type_for_data(

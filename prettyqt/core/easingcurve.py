@@ -4,7 +4,7 @@ from collections.abc import Callable
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, get_repr, serializemixin
+from prettyqt.utils import bidict, get_repr, serializemixin
 
 
 TypeStr = Literal[
@@ -125,18 +125,13 @@ class EasingCurve(serializemixin.SerializeMixin, QtCore.QEasingCurve):
     def get_custom_type(self) -> CurveMethod:
         return self.customType()  # type: ignore
 
-    def set_type(self, typ: TypeStr):
+    def set_type(self, typ: TypeStr | QtCore.QEasingCurve.Type):
         """Set easing curve type.
 
         Args:
             typ: easing curve type
-
-        Raises:
-            InvalidParamError: easing curve type does not exist
         """
-        if typ not in TYPE:
-            raise InvalidParamError(typ, TYPE)
-        self.setType(TYPE[typ])
+        self.setType(TYPE.get_enum_value(typ))
 
     def get_type(self) -> TypeStr:
         """Get the current easing curve type.

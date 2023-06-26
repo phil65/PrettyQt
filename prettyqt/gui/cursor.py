@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
-from prettyqt.utils import InvalidParamError, serializemixin
+from prettyqt.utils import serializemixin
 
 logger = logging.getLogger(__name__)
 
@@ -54,13 +54,8 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
 
         Args:
             shape: shape to use
-
-        Raises:
-            InvalidParamError: shape does not exist
         """
-        if shape not in constants.CURSOR_SHAPE:
-            raise InvalidParamError(shape, constants.CURSOR_SHAPE)
-        self.setShape(constants.CURSOR_SHAPE[shape])
+        self.setShape(constants.CURSOR_SHAPE.get_enum_value(shape))
 
     def get_shape(self) -> constants.CursorShapeStr:
         """Return current cursor shape.

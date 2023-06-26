@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 DirectionStr = Literal["forward", "backward"]
@@ -31,18 +31,13 @@ class TimeLine(core.ObjectMixin, QtCore.QTimeLine):
         maps |= {"direction": DIRECTION}
         return maps
 
-    def set_direction(self, direction: DirectionStr):
+    def set_direction(self, direction: DirectionStr | QtCore.QTimeLine.Direction):
         """Set the direction.
 
         Args:
             direction: direction
-
-        Raises:
-            InvalidParamError: direction does not exist
         """
-        if direction not in DIRECTION:
-            raise InvalidParamError(direction, DIRECTION)
-        self.setDirection(DIRECTION[direction])
+        self.setDirection(DIRECTION.get_enum_value(direction))
 
     def get_direction(self) -> DirectionStr:
         """Return current direction.

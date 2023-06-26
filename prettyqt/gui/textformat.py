@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 FORMAT_TYPE = bidict(
@@ -68,18 +68,15 @@ class TextFormatMixin:
     def get_pen_property(self, property_id: int) -> gui.Pen:
         return gui.Pen(self.penProperty(property_id))
 
-    def set_layout_direction(self, direction: constants.LayoutDirectionStr):
+    def set_layout_direction(
+        self, direction: constants.LayoutDirectionStr | constants.LayoutDirection
+    ):
         """Set layout direction.
 
         Args:
             direction: layout direction
-
-        Raises:
-            InvalidParamError: layout direction does not exist
         """
-        if direction not in constants.LAYOUT_DIRECTION:
-            raise InvalidParamError(direction, constants.LAYOUT_DIRECTION)
-        self.setLayoutDirection(constants.LAYOUT_DIRECTION[direction])
+        self.setLayoutDirection(constants.LAYOUT_DIRECTION.get_enum_value(direction))
 
     def get_layout_direction(self) -> constants.LayoutDirectionStr:
         """Get the current layout direction.

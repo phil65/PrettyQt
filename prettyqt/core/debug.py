@@ -1,6 +1,6 @@
 # from prettyqt.qt import QtCore
 
-# from prettyqt.utils import bidict, InvalidParamError
+# from prettyqt.utils import bidict
 
 from __future__ import annotations
 
@@ -19,13 +19,8 @@ from __future__ import annotations
 
 #         Args:
 #             verbosity: debug verbosity
-
-#         Raises:
-#             InvalidParamError: invalid debug verbosity
 #         """
-#         if verbosity not in VERBOSITY_LEVEL:
-#             raise InvalidParamError(verbosity, VERBOSITY_LEVEL)
-#         self.setVerbosity(VERBOSITY_LEVEL[verbosity])
+#         self.setVerbosity(VERBOSITY_LEVEL.get_enum_value(verbosity))
 
 #     def get_verbosity(self) -> str:
 #         """Get current debug verbosity.

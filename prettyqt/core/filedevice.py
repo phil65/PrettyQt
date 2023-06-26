@@ -7,7 +7,7 @@ import dateutil.parser
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 FileErrorStr = Literal[
@@ -96,32 +96,32 @@ class FileDeviceMixin(core.IODeviceMixin):
     def get_permissions(self) -> list[PermissionStr]:
         return PERMISSIONS.get_list(self.permissions())
 
-    def set_file_time(self, file_time: datatypes.DateTimeType, typ: FileTimeStr) -> bool:
+    def set_file_time(
+        self,
+        file_time: datatypes.DateTimeType,
+        typ: FileTimeStr | QtCore.QFileDevice.FileTime,
+    ) -> bool:
         """Set file time.
 
         Args:
             file_time: file time to set
             typ: file time type
-
-        Raises:
-            InvalidParamError: file time does not exist
         """
         if isinstance(file_time, str):
             file_time = dateutil.parser.parse(file_time)
-        if typ not in FILE_TIME:
-            raise InvalidParamError(typ, FILE_TIME)
-        return self.setFileTime(file_time, FILE_TIME[typ])  # type: ignore
+        return self.setFileTime(file_time, FILE_TIME.get_enum_value(typ))  # type: ignore
 
-    def get_file_time(self, typ: FileTimeStr) -> datetime.datetime | None:
+    def get_file_time(
+        self, typ: FileTimeStr | QtCore.QFileDevice.FileTime
+    ) -> datetime.datetime | None:
         """Return current file time.
 
         Returns:
             file time
         """
-        if typ not in FILE_TIME:
-            raise InvalidParamError(typ, FILE_TIME)
-        if date := self.fileTime(FILE_TIME[typ]):
+        if date := self.fileTime(FILE_TIME.get_enum_value(typ)):
             return date.toPython()  # type: ignore
+        return None
 
     def get_error(self) -> FileErrorStr:
         """Return file error status.

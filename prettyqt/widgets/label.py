@@ -48,12 +48,12 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
             self.clicked.emit()
         return super().mouseReleaseEvent(ev)
 
-    def set_elide_mode(self, mode: constants.ElideModeStr):
-        self._elide_mode = constants.ELIDE_MODE[mode]
+    def set_elide_mode(self, mode: constants.TextElideModeStr):
+        self._elide_mode = constants.TEXT_ELIDE_MODE[mode]
         self.update()
 
-    def get_elide_mode(self) -> constants.ElideModeStr:
-        return constants.ELIDE_MODE.inverse[self._elide_mode]
+    def get_elide_mode(self) -> constants.TextElideModeStr:
+        return constants.TEXT_ELIDE_MODE.inverse[self._elide_mode]
 
     def _get_map(self):
         maps = super()._get_map()

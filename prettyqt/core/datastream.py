@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 FloatingPointPrecisionStr = Literal["single", "double"]
@@ -33,18 +33,13 @@ STATUS: bidict[StatusStr, QtCore.QDataStream.Status] = bidict(
 
 
 class DataStream(QtCore.QDataStream):
-    def set_byte_order(self, order: ByteOrderStr):
+    def set_byte_order(self, order: ByteOrderStr | QtCore.QDataStream.ByteOrder):
         """Set byte order.
 
         Args:
             order: byte order to use
-
-        Raises:
-            InvalidParamError: invalid order
         """
-        if order not in BYTE_ORDER:
-            raise InvalidParamError(order, BYTE_ORDER)
-        self.setByteOrder(BYTE_ORDER[order])
+        self.setByteOrder(BYTE_ORDER.get_enum_value(order))
 
     def get_byte_order(self) -> ByteOrderStr:
         """Return byte order.
@@ -59,13 +54,8 @@ class DataStream(QtCore.QDataStream):
 
         Args:
             status: status to use
-
-        Raises:
-            InvalidParamError: invalid status
         """
-        if status not in STATUS:
-            raise InvalidParamError(status, STATUS)
-        self.setStatus(STATUS[status])
+        self.setStatus(STATUS.get_enum_value(status))
 
     def get_status(self) -> StatusStr:
         """Return status.
@@ -75,18 +65,16 @@ class DataStream(QtCore.QDataStream):
         """
         return STATUS.inverse[self.status()]
 
-    def set_floating_point_precision(self, precision: FloatingPointPrecisionStr):
+    def set_floating_point_precision(
+        self,
+        precision: FloatingPointPrecisionStr | QtCore.QDataStream.FloatingPointPrecision,
+    ):
         """Set floating point precision.
 
         Args:
             precision: floating point precision
-
-        Raises:
-            InvalidParamError: invalid precision
         """
-        if precision not in FLOATING_POINT_PRECISION:
-            raise InvalidParamError(precision, FLOATING_POINT_PRECISION)
-        self.setFloatingPointPrecision(FLOATING_POINT_PRECISION[precision])
+        self.setFloatingPointPrecision(FLOATING_POINT_PRECISION.get_enum_value(precision))
 
     def get_floating_point_precision(self) -> FloatingPointPrecisionStr:
         """Return floating point precision.

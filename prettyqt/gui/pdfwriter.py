@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import datatypes
 
 
 class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, QtGui.QPdfWriter):
@@ -14,30 +14,26 @@ class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, QtGui.QPdfWriter):
     def set_page_margins(
         self,
         margins: datatypes.MarginsFType,
-        unit: gui.pagelayout.UnitStr | None = None,
+        unit: gui.pagelayout.UnitStr | gui.PageLayout.Unit | None = None,
     ) -> bool:
         margins = datatypes.to_marginsf(margins)
         if unit is None:
             return self.setPageMargins(margins)
-        if unit not in gui.pagelayout.UNITS:
-            raise InvalidParamError(unit, gui.pagelayout.UNITS)
-        return self.setPageMargins(margins, gui.pagelayout.UNITS[unit])
+        return self.setPageMargins(margins, gui.pagelayout.UNITS.get_enum_value(unit))
 
     def get_pdf_version(self) -> gui.pagedpaintdevice.PdfVersionStr:
         return gui.pagedpaintdevice.PDF_VERSION.inverse[self.pdfVersion()]
 
-    def set_pdf_version(self, version: gui.pagedpaintdevice.PdfVersionStr):
+    def set_pdf_version(
+        self,
+        version: gui.pagedpaintdevice.PdfVersionStr | gui.PagedPaintDevice.PdfVersion,
+    ):
         """Set pdf version.
 
         Args:
             version: pdf version
-
-        Raises:
-            InvalidParamError: pdf version does not exist
         """
-        if version not in gui.pagedpaintdevice.PDF_VERSION:
-            raise InvalidParamError(version, gui.pagedpaintdevice.PDF_VERSION)
-        self.setPdfVersion(gui.pagedpaintdevice.PDF_VERSION[version])
+        self.setPdfVersion(gui.pagedpaintdevice.PDF_VERSION.get_enum_value(version))
 
 
 if __name__ == "__main__":

@@ -7,7 +7,7 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes, fuzzy
+from prettyqt.utils import bidict, datatypes, fuzzy
 
 
 class FilterMode(enum.IntEnum):
@@ -109,18 +109,16 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
         pat = "|".join(filter_list)
         super().setFilterRegularExpression(pat)
 
-    def set_filter_case_sensitivity(self, sensitivity: constants.CaseSensitivityStr):
+    def set_filter_case_sensitivity(
+        self, sensitivity: constants.CaseSensitivityStr | constants.CaseSensitivity
+    ):
         """Set the filter case sensitivity.
 
         Args:
             sensitivity: filter case sensitivity
-
-        Raises:
-            InvalidParamError: filter case sensitivity does not exist
         """
-        if sensitivity not in constants.CASE_SENSITIVITY:
-            raise InvalidParamError(sensitivity, constants.CASE_SENSITIVITY)
-        super().setFilterCaseSensitivity(constants.CASE_SENSITIVITY[sensitivity])
+        value = constants.CASE_SENSITIVITY.get_enum_value(sensitivity)
+        super().setFilterCaseSensitivity(value)
 
     def get_filter_case_sensitivity(self) -> constants.CaseSensitivityStr:
         """Return current filter case sensitivity.

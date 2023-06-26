@@ -5,7 +5,7 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 StringFormatStr = Literal["with_braces", "without_braces", "id_128"]
@@ -66,20 +66,17 @@ class UuidMixin:
         # workaround for PySide2, not able to clone in ctor
         return cls(cls.createUuid().toString())
 
-    def to_string(self, fmt: StringFormatStr = "with_braces") -> str:
+    def to_string(
+        self, fmt: StringFormatStr | QtCore.QUuid.StringFormat = "with_braces"
+    ) -> str:
         """Return string representation of the Uuid.
 
         Allowed values are "with_braces", "without_braces", "id_128"
 
         Args:
             fmt: Uuid format to use
-
-        Raises:
-            InvalidParamError: Uuid format does not exist
         """
-        if fmt not in STRING_FORMATS:
-            raise InvalidParamError(fmt, STRING_FORMATS)
-        return self.toString(STRING_FORMATS[fmt])
+        return self.toString(STRING_FORMATS.get_enum_value(fmt))
 
 
 class Uuid(UuidMixin, QtCore.QUuid):

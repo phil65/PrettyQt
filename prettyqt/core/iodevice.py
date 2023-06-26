@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 mod = QtCore.QIODeviceBase  # type: ignore
@@ -42,10 +42,8 @@ class IODeviceMixin(core.ObjectMixin):
         return self.size()
 
     @contextlib.contextmanager
-    def open_file(self, mode: OpenModeStr):
-        if mode not in OPEN_MODES:
-            raise InvalidParamError(mode, OPEN_MODES)
-        self.open(OPEN_MODES[mode])
+    def open_file(self, mode: OpenModeStr | mod.OpenModeFlag):
+        self.open(OPEN_MODES.get_enum_value(mode))
         yield self
         self.close()
 

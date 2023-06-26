@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtOpenGLWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 TARGET_BUFFER = bidict(
@@ -24,18 +24,15 @@ UpdateBehaviorStr = Literal["no_partial", "partial"]
 
 
 class OpenGLWidget(widgets.WidgetMixin, QtOpenGLWidgets.QOpenGLWidget):
-    def set_update_behavior(self, behavior: UpdateBehaviorStr):
+    def set_update_behavior(
+        self, behavior: UpdateBehaviorStr | QtOpenGLWidgets.QOpenGLWidget.UpdateBehavior
+    ):
         """Set update behavior.
 
         Args:
             behavior: update behavior to use
-
-        Raises:
-            InvalidParamError: behavior does not exist
         """
-        if behavior not in UPDATE_BEHAVIOR:
-            raise InvalidParamError(behavior, UPDATE_BEHAVIOR)
-        self.setUpdateBehavior(UPDATE_BEHAVIOR[behavior])
+        self.setUpdateBehavior(UPDATE_BEHAVIOR.get_enum_value(behavior))
 
     def get_update_behavior(self) -> UpdateBehaviorStr | None:
         """Return current update behavior.

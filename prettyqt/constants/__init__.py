@@ -90,6 +90,7 @@ WhiteSpaceMode = Qt.WhiteSpaceMode
 WidgetAttribute = Qt.WidgetAttribute
 WindowFrameSection = Qt.WindowFrameSection
 WindowModality = Qt.WindowModality
+WindowState = Qt.WindowState
 
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
@@ -874,8 +875,8 @@ FOCUS_REASONS: bidict[FocusReasonStr, Qt.FocusReason] = bidict(
     other=Qt.FocusReason.OtherFocusReason,
 )
 
-ElideModeStr = Literal["left", "right", "middle", "none"]
-ELIDE_MODE: bidict[ElideModeStr, Qt.TextElideMode] = bidict(
+TextElideModeStr = Literal["left", "right", "middle", "none"]
+TEXT_ELIDE_MODE: bidict[TextElideModeStr, Qt.TextElideMode] = bidict(
     left=Qt.TextElideMode.ElideLeft,
     right=Qt.TextElideMode.ElideRight,
     middle=Qt.TextElideMode.ElideMiddle,

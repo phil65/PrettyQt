@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 mod = QtCore.QLibraryInfo.LibraryPath
@@ -48,9 +48,7 @@ LOCATION: bidict[LocationStr, mod] = bidict(
 class LibraryInfo(QtCore.QLibraryInfo):
     @classmethod
     def get_location(cls, location: LocationStr) -> pathlib.Path:
-        if location not in LOCATION:
-            raise InvalidParamError(location, LOCATION)
-        path = cls.path(LOCATION[location])
+        path = cls.path(LOCATION.get_enum_value(location))
         return pathlib.Path(path)
 
     @classmethod

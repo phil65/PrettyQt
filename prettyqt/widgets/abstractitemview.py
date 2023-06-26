@@ -162,7 +162,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             "selectionMode": SELECTION_MODE,
             "selectionBehavior": SELECTION_BEHAVIOR,
             "defaultDropAction": constants.DROP_ACTION,
-            "textElideMode": constants.ELIDE_MODE,
+            "textElideMode": constants.TEXT_ELIDE_MODE,
             "editTriggers": EDIT_TRIGGERS,
         }
         return maps
