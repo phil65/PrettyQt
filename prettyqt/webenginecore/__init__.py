@@ -8,6 +8,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 try:
+    from prettyqt.qt.QtWebEngineCore import *  # noqa: F403
+
     from .webenginehistoryitem import WebEngineHistoryItem
     from .webenginehistory import WebEngineHistory
     from .webenginehttprequest import WebEngineHttpRequest

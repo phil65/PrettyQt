@@ -7,39 +7,17 @@ from typing import Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
-ICONS = bidict(
+IconStr = Literal["none", "information", "warning", "critical", "question"]
+
+ICONS: bidict[IconStr, QtWidgets.QMessageBox.Icon] = bidict(
     none=QtWidgets.QMessageBox.Icon.NoIcon,
     information=QtWidgets.QMessageBox.Icon.Information,
     warning=QtWidgets.QMessageBox.Icon.Warning,
     critical=QtWidgets.QMessageBox.Icon.Critical,
     question=QtWidgets.QMessageBox.Icon.Question,
-)
-
-IconStr = Literal["none", "information", "warning", "critical", "question"]
-
-STANDARD_BUTTON = bidict(
-    none=QtWidgets.QMessageBox.StandardButton.NoButton,
-    cancel=QtWidgets.QMessageBox.StandardButton.Cancel,
-    ok=QtWidgets.QMessageBox.StandardButton.Ok,
-    save=QtWidgets.QMessageBox.StandardButton.Save,
-    open=QtWidgets.QMessageBox.StandardButton.Open,
-    close=QtWidgets.QMessageBox.StandardButton.Close,
-    discard=QtWidgets.QMessageBox.StandardButton.Discard,
-    apply=QtWidgets.QMessageBox.StandardButton.Apply,
-    reset=QtWidgets.QMessageBox.StandardButton.Reset,
-    restore_defaults=QtWidgets.QMessageBox.StandardButton.RestoreDefaults,
-    help=QtWidgets.QMessageBox.StandardButton.Help,
-    save_all=QtWidgets.QMessageBox.StandardButton.SaveAll,
-    yes=QtWidgets.QMessageBox.StandardButton.Yes,
-    yes_to_all=QtWidgets.QMessageBox.StandardButton.YesToAll,
-    no=QtWidgets.QMessageBox.StandardButton.No,
-    no_to_all=QtWidgets.QMessageBox.StandardButton.NoToAll,
-    abort=QtWidgets.QMessageBox.StandardButton.Abort,
-    retry=QtWidgets.QMessageBox.StandardButton.Retry,
-    ignore=QtWidgets.QMessageBox.StandardButton.Ignore,
 )
 
 StandardButtonStr = Literal[
@@ -64,17 +42,26 @@ StandardButtonStr = Literal[
     "ignore",
 ]
 
-BUTTON_ROLE = bidict(
-    invalid=QtWidgets.QMessageBox.ButtonRole.InvalidRole,
-    accept=QtWidgets.QMessageBox.ButtonRole.AcceptRole,
-    reject=QtWidgets.QMessageBox.ButtonRole.RejectRole,
-    destructive=QtWidgets.QMessageBox.ButtonRole.DestructiveRole,
-    action=QtWidgets.QMessageBox.ButtonRole.ActionRole,
-    help=QtWidgets.QMessageBox.ButtonRole.HelpRole,
-    yes=QtWidgets.QMessageBox.ButtonRole.YesRole,
-    no=QtWidgets.QMessageBox.ButtonRole.NoRole,
-    apply=QtWidgets.QMessageBox.ButtonRole.ApplyRole,
-    reset=QtWidgets.QMessageBox.ButtonRole.ResetRole,
+STANDARD_BUTTON: bidict[StandardButtonStr, QtWidgets.QMessageBox.StandardButton] = bidict(
+    none=QtWidgets.QMessageBox.StandardButton.NoButton,
+    cancel=QtWidgets.QMessageBox.StandardButton.Cancel,
+    ok=QtWidgets.QMessageBox.StandardButton.Ok,
+    save=QtWidgets.QMessageBox.StandardButton.Save,
+    open=QtWidgets.QMessageBox.StandardButton.Open,
+    close=QtWidgets.QMessageBox.StandardButton.Close,
+    discard=QtWidgets.QMessageBox.StandardButton.Discard,
+    apply=QtWidgets.QMessageBox.StandardButton.Apply,
+    reset=QtWidgets.QMessageBox.StandardButton.Reset,
+    restore_defaults=QtWidgets.QMessageBox.StandardButton.RestoreDefaults,
+    help=QtWidgets.QMessageBox.StandardButton.Help,
+    save_all=QtWidgets.QMessageBox.StandardButton.SaveAll,
+    yes=QtWidgets.QMessageBox.StandardButton.Yes,
+    yes_to_all=QtWidgets.QMessageBox.StandardButton.YesToAll,
+    no=QtWidgets.QMessageBox.StandardButton.No,
+    no_to_all=QtWidgets.QMessageBox.StandardButton.NoToAll,
+    abort=QtWidgets.QMessageBox.StandardButton.Abort,
+    retry=QtWidgets.QMessageBox.StandardButton.Retry,
+    ignore=QtWidgets.QMessageBox.StandardButton.Ignore,
 )
 
 ButtonRoleStr = Literal[
@@ -90,13 +77,27 @@ ButtonRoleStr = Literal[
     "reset",
 ]
 
+BUTTON_ROLE: bidict[ButtonRoleStr, QtWidgets.QMessageBox.ButtonRole] = bidict(
+    invalid=QtWidgets.QMessageBox.ButtonRole.InvalidRole,
+    accept=QtWidgets.QMessageBox.ButtonRole.AcceptRole,
+    reject=QtWidgets.QMessageBox.ButtonRole.RejectRole,
+    destructive=QtWidgets.QMessageBox.ButtonRole.DestructiveRole,
+    action=QtWidgets.QMessageBox.ButtonRole.ActionRole,
+    help=QtWidgets.QMessageBox.ButtonRole.HelpRole,
+    yes=QtWidgets.QMessageBox.ButtonRole.YesRole,
+    no=QtWidgets.QMessageBox.ButtonRole.NoRole,
+    apply=QtWidgets.QMessageBox.ButtonRole.ApplyRole,
+    reset=QtWidgets.QMessageBox.ButtonRole.ResetRole,
+)
+
 
 class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     def __init__(
         self,
         icon: datatypes.IconType | IconStr = None,
-        buttons: list[StandardButtonStr] | None = None,
-        **kwargs
+        buttons: list[StandardButtonStr | QtWidgets.QMessageBox.StandardButton]
+        | None = None,
+        **kwargs,
     ):
         super().__init__(**kwargs)
         self.set_icon(icon)
@@ -110,9 +111,9 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
                 self.add_button(b)
 
     def get_button(
-        self, button: QtWidgets.QMessageBox.StandardButton
+        self, button: QtWidgets.QMessageBox.StandardButton | StandardButtonStr
     ) -> QtWidgets.QAbstractButton:
-        return self.button(STANDARD_BUTTON[button])
+        return self.button(STANDARD_BUTTON.get_enum_value(button))
 
     @classmethod
     def message(
@@ -149,16 +150,20 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         pix = self.iconPixmap()
         return None if pix.isNull() else gui.Pixmap(pix)
 
-    def set_standard_buttons(self, buttons: list[StandardButtonStr]):
+    def set_standard_buttons(
+        self, buttons: list[StandardButtonStr | QtWidgets.QMessageBox.StandardButton]
+    ):
         flag = self.StandardButton.NoButton
         for val in buttons:
-            flag |= STANDARD_BUTTON[val]
+            flag |= STANDARD_BUTTON.get_enum_value(val)
         self.setStandardButtons(flag)
 
     def get_standard_buttons(self) -> list[StandardButtonStr]:
         return STANDARD_BUTTON.get_list(self.standardButtons())
 
-    def add_button(self, button: StandardButtonStr) -> QtWidgets.QPushButton:
+    def add_button(
+        self, button: StandardButtonStr | QtWidgets.QMessageBox.StandardButton
+    ) -> QtWidgets.QPushButton:
         """Add a default button.
 
         Args:
@@ -166,18 +171,16 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
 
         Returns:
             created button
-
-        Raises:
-            InvalidParamError: Button type not available
         """
-        if button not in STANDARD_BUTTON:
-            raise InvalidParamError(button, STANDARD_BUTTON)
-        return self.addButton(STANDARD_BUTTON[button])
+        return self.addButton(STANDARD_BUTTON.get_enum_value(button))
 
     def add_custom_button(
-        self, button: str, role: ButtonRoleStr, callback: Callable | None = None
+        self,
+        button: str,
+        role: ButtonRoleStr | QtWidgets.QMessageBox.ButtonRole,
+        callback: Callable | None = None,
     ) -> QtWidgets.QPushButton:
-        btn = self.addButton(button, BUTTON_ROLE[role])
+        btn = self.addButton(button, BUTTON_ROLE.get_enum_value(role))
         if callback:
             btn.clicked.connect(callback)
 
@@ -187,18 +190,15 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     #     error_text = str(exception[1])
     #     widgets.MessageBox.message(error_text, header, "mdi.exclamation")
 
-    def set_text_format(self, text_format: constants.TextFormatStr):
+    def set_text_format(
+        self, text_format: constants.TextFormatStr | constants.TextFormat
+    ):
         """Set the text format.
 
         Args:
             text_format: text format to use
-
-        Raises:
-            InvalidParamError: text format does not exist
         """
-        if text_format not in constants.TEXT_FORMAT:
-            raise InvalidParamError(text_format, constants.TEXT_FORMAT)
-        self.setTextFormat(constants.TEXT_FORMAT[text_format])
+        self.setTextFormat(constants.TEXT_FORMAT.get_enum_value(text_format))
 
     def get_text_format(self) -> constants.TextFormatStr:
         """Return current text format.
@@ -212,13 +212,13 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         if isinstance(button, QtWidgets.QAbstractButton):
             self.setEscapeButton(button)
         else:
-            self.setEscapeButton(STANDARD_BUTTON[button])
+            self.setEscapeButton(STANDARD_BUTTON.get_enum_value(button))
 
     def set_default_button(self, button: StandardButtonStr | QtWidgets.QPushButton):
         if isinstance(button, QtWidgets.QPushButton):
             self.setDefaultButton(button)
         else:
-            self.setDefaultButton(STANDARD_BUTTON[button])
+            self.setDefaultButton(STANDARD_BUTTON.get_enum_value(button))
 
 
 if __name__ == "__main__":

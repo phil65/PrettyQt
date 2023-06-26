@@ -8,24 +8,13 @@ import webbrowser
 
 from prettyqt import core, gui, webenginecore
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 mod = QtWebEngineCore.QWebEnginePage
 
 logger = logging.getLogger(__name__)
 
-
-FEATURE = bidict(
-    notifications=mod.Feature.Notifications,
-    geolocation=mod.Feature.Geolocation,
-    media_audio_capture=mod.Feature.MediaAudioCapture,
-    media_video_capture=mod.Feature.MediaVideoCapture,
-    media_audiovideo_capture=mod.Feature.MediaAudioVideoCapture,
-    mouse_lock=mod.Feature.MouseLock,
-    desktop_video_capture=mod.Feature.DesktopVideoCapture,
-    desktop_audiovideo_capture=mod.Feature.DesktopAudioVideoCapture,
-)
 
 FeatureStr = Literal[
     "notifications",
@@ -38,33 +27,48 @@ FeatureStr = Literal[
     "desktop_audiovideo_capture",
 ]
 
-FILE_SELECTION_MODE = bidict(
-    open=mod.FileSelectionMode.FileSelectOpen,
-    open_multiple=mod.FileSelectionMode.FileSelectOpenMultiple,
+FEATURE: bidict[FeatureStr, mod.Feature] = bidict(
+    notifications=mod.Feature.Notifications,
+    geolocation=mod.Feature.Geolocation,
+    media_audio_capture=mod.Feature.MediaAudioCapture,
+    media_video_capture=mod.Feature.MediaVideoCapture,
+    media_audiovideo_capture=mod.Feature.MediaAudioVideoCapture,
+    mouse_lock=mod.Feature.MouseLock,
+    desktop_video_capture=mod.Feature.DesktopVideoCapture,
+    desktop_audiovideo_capture=mod.Feature.DesktopAudioVideoCapture,
 )
 
 FileSelectionModeStr = Literal["open", "open_multiple"]
 
-FIND_FLAGS = bidict(
-    backward=mod.FindFlag.FindBackward,
-    case_sensitive=mod.FindFlag.FindCaseSensitively,
+FILE_SELECTION_MODE: bidict[FileSelectionModeStr, mod.FileSelectionMode] = bidict(
+    open=mod.FileSelectionMode.FileSelectOpen,
+    open_multiple=mod.FileSelectionMode.FileSelectOpenMultiple,
 )
 
 FindFlagStr = Literal["backward", "case_sensitive"]
 
-JS_CONSOLE_MESSAGE_LEVEL = bidict(
+FIND_FLAGS: bidict[FindFlagStr, mod.FindFlag] = bidict(
+    backward=mod.FindFlag.FindBackward,
+    case_sensitive=mod.FindFlag.FindCaseSensitively,
+)
+
+JavaScriptConsoleMessageLevelStr = Literal["info", "warning", "error"]
+
+JS_CONSOLE_MESSAGE_LEVEL: bidict[
+    JavaScriptConsoleMessageLevelStr, mod.JavaScriptConsoleMessageLevel
+] = bidict(
     info=mod.JavaScriptConsoleMessageLevel.InfoMessageLevel,
     warning=mod.JavaScriptConsoleMessageLevel.WarningMessageLevel,
     error=mod.JavaScriptConsoleMessageLevel.ErrorMessageLevel,
 )
 
-LIFECYCLE_STATE = bidict(
+LifecycleStateStr = Literal["active", "frozen", "discarded"]
+
+LIFECYCLE_STATE: bidict[LifecycleStateStr, mod.LifecycleState] = bidict(
     active=mod.LifecycleState.Active,
     frozen=mod.LifecycleState.Frozen,
     discarded=mod.LifecycleState.Discarded,
 )
-
-LifecycleStateStr = Literal["active", "frozen", "discarded"]
 
 NAVIGATION_TYPES = bidict(
     link_clicked=mod.NavigationType.NavigationTypeLinkClicked,
@@ -76,68 +80,19 @@ NAVIGATION_TYPES = bidict(
     other=mod.NavigationType.NavigationTypeOther,
 )
 
-PERMISSION_POLICY = bidict(
+PermissionPolicyStr = Literal["unknown", "granted_by_user", "denied_by_user"]
+
+PERMISSION_POLICY: bidict[PermissionPolicyStr, mod.PermissionPolicy] = bidict(
     unknown=mod.PermissionPolicy.PermissionUnknown,
     granted_by_user=mod.PermissionPolicy.PermissionGrantedByUser,
     denied_by_user=mod.PermissionPolicy.PermissionDeniedByUser,
 )
-
-PermissionPolicyStr = Literal["unknown", "granted_by_user", "denied_by_user"]
 
 RENDER_PROCESS_TERMINATION_STATUS = bidict(
     normal=mod.RenderProcessTerminationStatus.NormalTerminationStatus,
     abnormal=mod.RenderProcessTerminationStatus.AbnormalTerminationStatus,
     crashed=mod.RenderProcessTerminationStatus.CrashedTerminationStatus,
     killed=mod.RenderProcessTerminationStatus.KilledTerminationStatus,
-)
-
-WEB_ACTION = bidict(
-    none=mod.WebAction.NoWebAction,
-    back=mod.WebAction.Back,
-    forward=mod.WebAction.Forward,
-    stop=mod.WebAction.Stop,
-    reload=mod.WebAction.Reload,
-    reload_and_bypass_cache=mod.WebAction.ReloadAndBypassCache,
-    cut=mod.WebAction.Cut,
-    copy=mod.WebAction.Copy,
-    paste=mod.WebAction.Paste,
-    undo=mod.WebAction.Undo,
-    redo=mod.WebAction.Redo,
-    select_all=mod.WebAction.SelectAll,
-    paste_and_match_style=mod.WebAction.PasteAndMatchStyle,
-    open_link_in_this_window=mod.WebAction.OpenLinkInThisWindow,
-    open_link_in_new_window=mod.WebAction.OpenLinkInNewWindow,
-    open_link_in_new_tab=mod.WebAction.OpenLinkInNewTab,
-    open_link_in_new_bg_tab=mod.WebAction.OpenLinkInNewBackgroundTab,
-    copy_link_to_clipboard=mod.WebAction.CopyLinkToClipboard,
-    copy_image_to_clipboard=mod.WebAction.CopyImageToClipboard,
-    copy_image_url_to_clipboard=mod.WebAction.CopyImageUrlToClipboard,
-    copy_media_url_to_clipboard=mod.WebAction.CopyMediaUrlToClipboard,
-    toggle_media_controls=mod.WebAction.ToggleMediaControls,
-    toggle_media_loop=mod.WebAction.ToggleMediaLoop,
-    toggle_media_play_pause=mod.WebAction.ToggleMediaPlayPause,
-    toggle_media_mute=mod.WebAction.ToggleMediaMute,
-    download_link_to_disk=mod.WebAction.DownloadLinkToDisk,
-    download_image_to_disk=mod.WebAction.DownloadImageToDisk,
-    download_media_to_disk=mod.WebAction.DownloadMediaToDisk,
-    inspect_element=mod.WebAction.InspectElement,
-    exit_fullscreen=mod.WebAction.ExitFullScreen,
-    request_close=mod.WebAction.RequestClose,
-    unselect=mod.WebAction.Unselect,
-    save_page=mod.WebAction.SavePage,
-    view_source=mod.WebAction.ViewSource,
-    toggle_bold=mod.WebAction.ToggleBold,
-    toggle_italic=mod.WebAction.ToggleItalic,
-    toggle_underline=mod.WebAction.ToggleUnderline,
-    toggle_strikethrough=mod.WebAction.ToggleStrikethrough,
-    align_left=mod.WebAction.AlignLeft,
-    align_center=mod.WebAction.AlignCenter,
-    align_right=mod.WebAction.AlignRight,
-    align_justified=mod.WebAction.AlignJustified,
-    indent=mod.WebAction.Indent,
-    outdent=mod.WebAction.Outdent,
-    insert_ordered_list=mod.WebAction.InsertOrderedList,
-    insert_unordered_list=mod.WebAction.InsertUnorderedList,
 )
 
 WebActionStr = Literal[
@@ -188,6 +143,55 @@ WebActionStr = Literal[
     "insert_ordered_list",
     "insert_unordered_list",
 ]
+
+WEB_ACTION: bidict[WebActionStr, mod.WebAction] = bidict(
+    none=mod.WebAction.NoWebAction,
+    back=mod.WebAction.Back,
+    forward=mod.WebAction.Forward,
+    stop=mod.WebAction.Stop,
+    reload=mod.WebAction.Reload,
+    reload_and_bypass_cache=mod.WebAction.ReloadAndBypassCache,
+    cut=mod.WebAction.Cut,
+    copy=mod.WebAction.Copy,
+    paste=mod.WebAction.Paste,
+    undo=mod.WebAction.Undo,
+    redo=mod.WebAction.Redo,
+    select_all=mod.WebAction.SelectAll,
+    paste_and_match_style=mod.WebAction.PasteAndMatchStyle,
+    open_link_in_this_window=mod.WebAction.OpenLinkInThisWindow,
+    open_link_in_new_window=mod.WebAction.OpenLinkInNewWindow,
+    open_link_in_new_tab=mod.WebAction.OpenLinkInNewTab,
+    open_link_in_new_bg_tab=mod.WebAction.OpenLinkInNewBackgroundTab,
+    copy_link_to_clipboard=mod.WebAction.CopyLinkToClipboard,
+    copy_image_to_clipboard=mod.WebAction.CopyImageToClipboard,
+    copy_image_url_to_clipboard=mod.WebAction.CopyImageUrlToClipboard,
+    copy_media_url_to_clipboard=mod.WebAction.CopyMediaUrlToClipboard,
+    toggle_media_controls=mod.WebAction.ToggleMediaControls,
+    toggle_media_loop=mod.WebAction.ToggleMediaLoop,
+    toggle_media_play_pause=mod.WebAction.ToggleMediaPlayPause,
+    toggle_media_mute=mod.WebAction.ToggleMediaMute,
+    download_link_to_disk=mod.WebAction.DownloadLinkToDisk,
+    download_image_to_disk=mod.WebAction.DownloadImageToDisk,
+    download_media_to_disk=mod.WebAction.DownloadMediaToDisk,
+    inspect_element=mod.WebAction.InspectElement,
+    exit_fullscreen=mod.WebAction.ExitFullScreen,
+    request_close=mod.WebAction.RequestClose,
+    unselect=mod.WebAction.Unselect,
+    save_page=mod.WebAction.SavePage,
+    view_source=mod.WebAction.ViewSource,
+    toggle_bold=mod.WebAction.ToggleBold,
+    toggle_italic=mod.WebAction.ToggleItalic,
+    toggle_underline=mod.WebAction.ToggleUnderline,
+    toggle_strikethrough=mod.WebAction.ToggleStrikethrough,
+    align_left=mod.WebAction.AlignLeft,
+    align_center=mod.WebAction.AlignCenter,
+    align_right=mod.WebAction.AlignRight,
+    align_justified=mod.WebAction.AlignJustified,
+    indent=mod.WebAction.Indent,
+    outdent=mod.WebAction.Outdent,
+    insert_ordered_list=mod.WebAction.InsertOrderedList,
+    insert_unordered_list=mod.WebAction.InsertUnorderedList,
+)
 
 WEB_WINDOW_TYPES = bidict(
     browser_window=mod.WebWindowType.WebBrowserWindow,
@@ -316,18 +320,13 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
             flag |= self.FindFlag.FindBackward
         self.findText(string, flag, callback)
 
-    def set_lifecycle_state(self, state: LifecycleStateStr):
+    def set_lifecycle_state(self, state: LifecycleStateStr | mod.LifecycleState):
         """Set lifecycle state.
 
         Args:
             state: lifecycle state
-
-        Raises:
-            InvalidParamError: lifecycle state does not exist
         """
-        if state not in LIFECYCLE_STATE:
-            raise InvalidParamError(state, LIFECYCLE_STATE)
-        self.setLifecycleState(LIFECYCLE_STATE[state])
+        self.setLifecycleState(LIFECYCLE_STATE.get_enum_value(state))
 
     def get_lifecycle_state(self) -> LifecycleStateStr:
         """Get the current lifecycle state.
@@ -337,17 +336,19 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
         """
         return LIFECYCLE_STATE.inverse[self.lifecycleState()]
 
-    def trigger_action(self, action: WebActionStr, checked: bool = False):
-        self.triggerAction(WEB_ACTION[action], checked)
+    def trigger_action(self, action: WebActionStr | mod.WebAction, checked: bool = False):
+        self.triggerAction(WEB_ACTION.get_enum_value(action), checked)
 
     def set_feature_permission(
         self,
         url: datatypes.UrlType,
-        feature: FeatureStr,
-        policy: PermissionPolicyStr,
+        feature: FeatureStr | mod.Feature,
+        policy: PermissionPolicyStr | mod.PermissionPolicy,
     ):
         url = core.Url(url)
-        self.setFeaturePermission(url, FEATURE[feature], PERMISSION_POLICY[policy])
+        self.setFeaturePermission(
+            url, FEATURE.get_enum_value(feature), PERMISSION_POLICY.get_enum_value(policy)
+        )
 
     def get_history(self) -> webenginecore.WebEngineHistory:
         hist = self.history()
@@ -365,7 +366,8 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
         self.get_settings()[setting_name] = value
 
     def get_setting(
-        self, setting_name: webenginecore.webenginesettings.WebAttributeStr
+        self,
+        setting_name: webenginecore.webenginesettings.WebAttributeStr,
     ) -> bool:
         return self.get_settings()[setting_name]
 
@@ -384,8 +386,6 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
     #     old_files: List[str],
     #     mimetypes: List[str],
     # ) -> List[str]:
-    #     if mode not in FILE_SELECTION_MODE:
-    #         raise InvalidParamError(mode, FILE_SELECTION_MODE)
     #     return self.chooseFiles(FILE_SELECTION_MODE[mode], old_files, mimetypes)
 
     def mousedown(self, selector: str, btn: int = 0):

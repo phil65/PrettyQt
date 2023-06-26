@@ -6,7 +6,7 @@ from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, listdelegators
+from prettyqt.utils import datatypes, listdelegators
 
 
 class NoData:
@@ -96,7 +96,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         tool_tip: str = "",
         whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
-        checkstate: constants.StateStr | None = None,
+        checkstate: constants.StateStr | constants.CheckState | None = None,
         flags: QtCore.Qt.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,
@@ -156,23 +156,20 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     def scroll_to_item(
         self,
         item: QtWidgets.QListWidgetItem,
-        mode: widgets.abstractitemview.ScrollHintStr = "ensure_visible",
+        mode: widgets.abstractitemview.ScrollHintStr
+        | widgets.QAbstractItemView.ScrollHint = "ensure_visible",
     ):
-        if mode not in widgets.abstractitemview.SCROLL_HINT:
-            raise InvalidParamError(mode, widgets.abstractitemview.SCROLL_HINT)
-        self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT[mode])
+        self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT.get_enum_value(mode))
 
     def find_items(
         self,
         text: str,
         column: int = 0,
-        mode: constants.MatchFlagStr = "exact",
+        mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
     ) -> listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]:
-        if mode not in constants.MATCH_FLAGS:
-            raise InvalidParamError(mode, constants.MATCH_FLAGS)
-        flag = constants.MATCH_FLAGS[mode]
+        flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= QtCore.Qt.MatchFlag.MatchRecursive
         if case_sensitive:

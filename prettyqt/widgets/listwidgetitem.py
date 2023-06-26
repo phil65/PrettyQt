@@ -4,7 +4,7 @@ from typing import Any
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, get_repr, serializemixin
+from prettyqt.utils import datatypes, get_repr, serializemixin
 
 
 class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
@@ -26,18 +26,13 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: constants.CheckStateStr):
+    def set_checkstate(self, state: constants.CheckStateStr | constants.CheckState):
         """Set checkstate of the checkbox.
 
         Args:
             state: checkstate to use
-
-        Raises:
-            InvalidParamError: invalid checkstate
         """
-        if state not in constants.CHECK_STATE:
-            raise InvalidParamError(state, constants.CHECK_STATE)
-        self.setCheckState(constants.CHECK_STATE[state])
+        self.setCheckState(constants.CHECK_STATE.get_enum_value(state))
 
     def get_checkstate(self) -> constants.CheckStateStr:
         """Return checkstate.

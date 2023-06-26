@@ -364,7 +364,7 @@ CHECK_STATE: bidict[CheckStateStr, Qt.CheckState] = bidict(
     checked=Qt.CheckState.Checked,
 )
 
-MATCH_FLAGS = dict(
+MATCH_FLAGS = bidict(
     exact=Qt.MatchFlag.MatchExactly,
     fixed_string=Qt.MatchFlag.MatchFixedString,
     contains=Qt.MatchFlag.MatchContains,
