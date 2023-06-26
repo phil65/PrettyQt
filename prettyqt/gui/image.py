@@ -8,48 +8,9 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import core, gui
-from prettyqt.qt import API, QtGui
-from prettyqt.utils import InvalidParamError, bidict, serializemixin
+from prettyqt.qt import API
+from prettyqt.utils import bidict, serializemixin
 
-
-FORMAT = bidict(
-    invalid=QtGui.QImage.Format.Format_Invalid,
-    mono=QtGui.QImage.Format.Format_Mono,
-    monolsb=QtGui.QImage.Format.Format_MonoLSB,
-    indexed8=QtGui.QImage.Format.Format_Indexed8,
-    rgb32=QtGui.QImage.Format.Format_RGB32,
-    argb32=QtGui.QImage.Format.Format_ARGB32,
-    argb32_premultiplied=QtGui.QImage.Format.Format_ARGB32_Premultiplied,
-    rgb16=QtGui.QImage.Format.Format_RGB16,
-    argb8565_premultiplied=QtGui.QImage.Format.Format_ARGB8565_Premultiplied,
-    rgb666=QtGui.QImage.Format.Format_RGB666,
-    argb6666_premultiplied=QtGui.QImage.Format.Format_ARGB6666_Premultiplied,
-    rgb555=QtGui.QImage.Format.Format_RGB555,
-    argb8555_premultiplied=QtGui.QImage.Format.Format_ARGB8555_Premultiplied,
-    rgb888=QtGui.QImage.Format.Format_RGB888,
-    rgb444=QtGui.QImage.Format.Format_RGB444,
-    argb4444_premultiplied=QtGui.QImage.Format.Format_ARGB4444_Premultiplied,
-    rgbx8888=QtGui.QImage.Format.Format_RGBX8888,
-    rgba8888=QtGui.QImage.Format.Format_RGBA8888,
-    rgba8888_premultiplied=QtGui.QImage.Format.Format_RGBA8888_Premultiplied,
-    bgr30=QtGui.QImage.Format.Format_BGR30,
-    a2bgr30_premultiplied=QtGui.QImage.Format.Format_A2BGR30_Premultiplied,
-    rgb30=QtGui.QImage.Format.Format_RGB30,
-    a2rgb30_premultiplied=QtGui.QImage.Format.Format_A2RGB30_Premultiplied,
-    alpha8=QtGui.QImage.Format.Format_Alpha8,
-    grayscale8=QtGui.QImage.Format.Format_Grayscale8,
-    grayscale16=QtGui.QImage.Format.Format_Grayscale16,
-    rgbx64=QtGui.QImage.Format.Format_RGBX64,
-    rgba64=QtGui.QImage.Format.Format_RGBA64,
-    rgba64_premultiplied=QtGui.QImage.Format.Format_RGBA64_Premultiplied,
-    bgr888=QtGui.QImage.Format.Format_BGR888,
-    rgbx16fpx4=QtGui.QImage.Format.Format_RGBX16FPx4,
-    rgba16fpx4=QtGui.QImage.Format.Format_RGBA16FPx4,
-    rgba16fpx4_premultiplied=QtGui.QImage.Format.Format_RGBA16FPx4_Premultiplied,
-    rgbx32fpx4=QtGui.QImage.Format.Format_RGBX32FPx4,
-    rgba32fpx4=QtGui.QImage.Format.Format_RGBA32FPx4,
-    rgba32fpx4_premultiplied=QtGui.QImage.Format.Format_RGBA32FPx4_Premultiplied,
-)
 
 FormatStr = Literal[
     "invalid",
@@ -90,8 +51,47 @@ FormatStr = Literal[
     "rgba32fpx4_premultiplied",
 ]
 
+FORMAT: bidict[FormatStr, gui.QImage.Format] = bidict(
+    invalid=gui.QImage.Format.Format_Invalid,
+    mono=gui.QImage.Format.Format_Mono,
+    monolsb=gui.QImage.Format.Format_MonoLSB,
+    indexed8=gui.QImage.Format.Format_Indexed8,
+    rgb32=gui.QImage.Format.Format_RGB32,
+    argb32=gui.QImage.Format.Format_ARGB32,
+    argb32_premultiplied=gui.QImage.Format.Format_ARGB32_Premultiplied,
+    rgb16=gui.QImage.Format.Format_RGB16,
+    argb8565_premultiplied=gui.QImage.Format.Format_ARGB8565_Premultiplied,
+    rgb666=gui.QImage.Format.Format_RGB666,
+    argb6666_premultiplied=gui.QImage.Format.Format_ARGB6666_Premultiplied,
+    rgb555=gui.QImage.Format.Format_RGB555,
+    argb8555_premultiplied=gui.QImage.Format.Format_ARGB8555_Premultiplied,
+    rgb888=gui.QImage.Format.Format_RGB888,
+    rgb444=gui.QImage.Format.Format_RGB444,
+    argb4444_premultiplied=gui.QImage.Format.Format_ARGB4444_Premultiplied,
+    rgbx8888=gui.QImage.Format.Format_RGBX8888,
+    rgba8888=gui.QImage.Format.Format_RGBA8888,
+    rgba8888_premultiplied=gui.QImage.Format.Format_RGBA8888_Premultiplied,
+    bgr30=gui.QImage.Format.Format_BGR30,
+    a2bgr30_premultiplied=gui.QImage.Format.Format_A2BGR30_Premultiplied,
+    rgb30=gui.QImage.Format.Format_RGB30,
+    a2rgb30_premultiplied=gui.QImage.Format.Format_A2RGB30_Premultiplied,
+    alpha8=gui.QImage.Format.Format_Alpha8,
+    grayscale8=gui.QImage.Format.Format_Grayscale8,
+    grayscale16=gui.QImage.Format.Format_Grayscale16,
+    rgbx64=gui.QImage.Format.Format_RGBX64,
+    rgba64=gui.QImage.Format.Format_RGBA64,
+    rgba64_premultiplied=gui.QImage.Format.Format_RGBA64_Premultiplied,
+    bgr888=gui.QImage.Format.Format_BGR888,
+    rgbx16fpx4=gui.QImage.Format.Format_RGBX16FPx4,
+    rgba16fpx4=gui.QImage.Format.Format_RGBA16FPx4,
+    rgba16fpx4_premultiplied=gui.QImage.Format.Format_RGBA16FPx4_Premultiplied,
+    rgbx32fpx4=gui.QImage.Format.Format_RGBX32FPx4,
+    rgba32fpx4=gui.QImage.Format.Format_RGBA32FPx4,
+    rgba32fpx4_premultiplied=gui.QImage.Format.Format_RGBA32FPx4_Premultiplied,
+)
 
-class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
+
+class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, gui.QImage):
     def __setitem__(self, index: tuple[int, int], value):
         self.setPixel(index[0], index[1], value)
 
@@ -111,7 +111,7 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
             width,
             height,
             bytes_per_component * width,
-            QtGui.QImage.Format.Format_RGB888,
+            gui.QImage.Format.Format_RGB888,
         )
 
     def to_ndarray(self, fmt: FormatStr = "rgb888", channels: int = 3):
@@ -171,15 +171,13 @@ class Image(serializemixin.SerializeMixin, gui.PaintDeviceMixin, QtGui.QImage):
 
     def invert_pixels(self, invert_alpha: bool = False):
         self.invertPixels(
-            QtGui.QImage.InvertMode.InvertRgba
+            gui.QImage.InvertMode.InvertRgba
             if invert_alpha
-            else QtGui.QImage.InvertMode.InvertRgb
+            else gui.QImage.InvertMode.InvertRgb
         )
 
-    def convert_to_format(self, fmt: FormatStr) -> Self:
-        if fmt not in FORMAT:
-            raise InvalidParamError(fmt, FORMAT)
-        return type(self)(self.convertToFormat(FORMAT[fmt]))
+    def convert_to_format(self, fmt: FormatStr | gui.QImage.Format) -> Self:
+        return type(self)(self.convertToFormat(FORMAT.get_enum_value(fmt)))
 
     def as_bytes(self) -> bytes:
         bits = self.bits()

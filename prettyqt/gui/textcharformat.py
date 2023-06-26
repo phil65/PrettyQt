@@ -4,25 +4,18 @@ from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
+from prettyqt.utils import bidict, colors, datatypes
 
 
 mod = QtGui.QTextCharFormat
 
-FONT_PROPERTY_INHERITANCE_BEHAVIOUR = bidict(
+FontPropertiesInheritanceBehaviorStr = Literal["none", "single"]
+
+FONT_PROPERTY_INHERITANCE_BEHAVIOUR: bidict[
+    FontPropertiesInheritanceBehaviorStr, mod.FontPropertiesInheritanceBehavior
+] = bidict(
     none=mod.FontPropertiesInheritanceBehavior.FontPropertiesSpecifiedOnly,
     single=mod.FontPropertiesInheritanceBehavior.FontPropertiesAll,
-)
-
-UNDERLINE_STYLE = bidict(
-    none=mod.UnderlineStyle.NoUnderline,
-    single=mod.UnderlineStyle.SingleUnderline,
-    dash=mod.UnderlineStyle.DashUnderline,
-    dot=mod.UnderlineStyle.DotLine,
-    dashdot=mod.UnderlineStyle.DashDotLine,
-    dashdotline=mod.UnderlineStyle.DashDotDotLine,
-    wave=mod.UnderlineStyle.WaveUnderline,
-    spellcheck=mod.UnderlineStyle.SpellCheckUnderline,
 )
 
 UnderlineStyleStr = Literal[
@@ -36,14 +29,15 @@ UnderlineStyleStr = Literal[
     "spellcheck",
 ]
 
-VERTICAL_ALIGNMENT = bidict(
-    normal=QtGui.QTextCharFormat.VerticalAlignment.AlignNormal,
-    super_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSuperScript,
-    sub_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSubScript,
-    middle=QtGui.QTextCharFormat.VerticalAlignment.AlignMiddle,
-    bottom=QtGui.QTextCharFormat.VerticalAlignment.AlignBottom,
-    top=QtGui.QTextCharFormat.VerticalAlignment.AlignTop,
-    baseline=QtGui.QTextCharFormat.VerticalAlignment.AlignBaseline,
+UNDERLINE_STYLE: bidict[UnderlineStyleStr, mod.UnderlineStyle] = bidict(
+    none=mod.UnderlineStyle.NoUnderline,
+    single=mod.UnderlineStyle.SingleUnderline,
+    dash=mod.UnderlineStyle.DashUnderline,
+    dot=mod.UnderlineStyle.DotLine,
+    dashdot=mod.UnderlineStyle.DashDotLine,
+    dashdotline=mod.UnderlineStyle.DashDotDotLine,
+    wave=mod.UnderlineStyle.WaveUnderline,
+    spellcheck=mod.UnderlineStyle.SpellCheckUnderline,
 )
 
 VerticalAlignmentStr = Literal[
@@ -55,6 +49,18 @@ VerticalAlignmentStr = Literal[
     "top",
     "baseline",
 ]
+
+VERTICAL_ALIGNMENT: bidict[
+    VerticalAlignmentStr, QtGui.QTextCharFormat.VerticalAlignment
+] = bidict(
+    normal=QtGui.QTextCharFormat.VerticalAlignment.AlignNormal,
+    super_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSuperScript,
+    sub_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSubScript,
+    middle=QtGui.QTextCharFormat.VerticalAlignment.AlignMiddle,
+    bottom=QtGui.QTextCharFormat.VerticalAlignment.AlignBottom,
+    top=QtGui.QTextCharFormat.VerticalAlignment.AlignTop,
+    baseline=QtGui.QTextCharFormat.VerticalAlignment.AlignBaseline,
+)
 
 
 class TextCharFormatMixin(gui.TextFormatMixin):
@@ -81,18 +87,13 @@ class TextCharFormatMixin(gui.TextFormatMixin):
             color = colors.get_color(color)
         self.setBackground(color)
 
-    def set_font_weight(self, weight: gui.font.WeightStr):
+    def set_font_weight(self, weight: gui.font.WeightStr | gui.Font.Weight):
         """Set the font weight.
 
         Args:
             weight: font weight
-
-        Raises:
-            InvalidParamError: invalid font weight
         """
-        if weight not in gui.font.WEIGHT:
-            raise InvalidParamError(weight, gui.font.WEIGHT)
-        self.setFontWeight(gui.font.WEIGHT[weight])
+        self.setFontWeight(gui.font.WEIGHT.get_enum_value(weight))
 
     def get_font_weight(self) -> gui.font.WeightStr:
         """Get current font weight.
@@ -102,18 +103,13 @@ class TextCharFormatMixin(gui.TextFormatMixin):
         """
         return gui.font.WEIGHT.inverse[self.fontWeight()]
 
-    def set_underline_style(self, style: UnderlineStyleStr):
+    def set_underline_style(self, style: UnderlineStyleStr | mod.UnderlineStyle):
         """Set the underline style.
 
         Args:
             style: underline style
-
-        Raises:
-            InvalidParamError: invalid underline style
         """
-        if style not in UNDERLINE_STYLE:
-            raise InvalidParamError(style, UNDERLINE_STYLE)
-        self.setUnderlineStyle(UNDERLINE_STYLE[style])
+        self.setUnderlineStyle(UNDERLINE_STYLE.get_enum_value(style))
 
     def get_underline_style(self) -> UnderlineStyleStr:
         """Get current underline style.
@@ -123,18 +119,15 @@ class TextCharFormatMixin(gui.TextFormatMixin):
         """
         return UNDERLINE_STYLE.inverse[self.underlineStyle()]
 
-    def set_vertical_alignment(self, alignment: VerticalAlignmentStr):
+    def set_vertical_alignment(
+        self, alignment: VerticalAlignmentStr | QtGui.QTextCharFormat.VerticalAlignment
+    ):
         """Set the vertical alignment.
 
         Args:
             alignment: vertical alignment
-
-        Raises:
-            InvalidParamError: invalid vertical alignment
         """
-        if alignment not in VERTICAL_ALIGNMENT:
-            raise InvalidParamError(alignment, VERTICAL_ALIGNMENT)
-        self.setVerticalAlignment(VERTICAL_ALIGNMENT[alignment])
+        self.setVerticalAlignment(VERTICAL_ALIGNMENT.get_enum_value(alignment))
 
     def get_vertical_alignment(self) -> VerticalAlignmentStr:
         """Get current vertical alignment.
@@ -144,18 +137,13 @@ class TextCharFormatMixin(gui.TextFormatMixin):
         """
         return VERTICAL_ALIGNMENT.inverse[self.verticalAlignment()]
 
-    def set_font_style_hint(self, hint: gui.font.StyleHintStr):
+    def set_font_style_hint(self, hint: gui.font.StyleHintStr | gui.Font.StyleHint):
         """Set the font style hint.
 
         Args:
             hint: font style hint
-
-        Raises:
-            InvalidParamError: invalid font style hint
         """
-        if hint not in gui.font.STYLE_HINTS:
-            raise InvalidParamError(hint, gui.font.STYLE_HINTS)
-        self.setFontStyleHint(gui.font.STYLE_HINTS[hint])
+        self.setFontStyleHint(gui.font.STYLE_HINTS.get_enum_value(hint))
 
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())

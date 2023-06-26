@@ -4,23 +4,8 @@ from typing import Literal
 
 from prettyqt import positioning
 from prettyqt.qt import QtLocation
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
-
-INSTRUCTION_DIRECTION = bidict(
-    none=QtLocation.QGeoManeuver.InstructionDirection.NoDirection,
-    forward=QtLocation.QGeoManeuver.InstructionDirection.DirectionForward,
-    bear_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionBearRight,
-    light_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionLightRight,
-    right=QtLocation.QGeoManeuver.InstructionDirection.DirectionRight,
-    hard_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionHardRight,
-    u_turn_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionUTurnRight,
-    u_turn_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionUTurnLeft,
-    hard_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionHardLeft,
-    left=QtLocation.QGeoManeuver.InstructionDirection.DirectionLeft,
-    light_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionLightLeft,
-    bear_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionBearLeft,
-)
 
 InstructionDirectionStr = Literal[
     "none",
@@ -36,6 +21,23 @@ InstructionDirectionStr = Literal[
     "light_left",
     "bear_left",
 ]
+
+INSTRUCTION_DIRECTION: bidict[
+    InstructionDirectionStr, QtLocation.QGeoManeuver.InstructionDirection
+] = bidict(
+    none=QtLocation.QGeoManeuver.InstructionDirection.NoDirection,
+    forward=QtLocation.QGeoManeuver.InstructionDirection.DirectionForward,
+    bear_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionBearRight,
+    light_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionLightRight,
+    right=QtLocation.QGeoManeuver.InstructionDirection.DirectionRight,
+    hard_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionHardRight,
+    u_turn_right=QtLocation.QGeoManeuver.InstructionDirection.DirectionUTurnRight,
+    u_turn_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionUTurnLeft,
+    hard_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionHardLeft,
+    left=QtLocation.QGeoManeuver.InstructionDirection.DirectionLeft,
+    light_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionLightLeft,
+    bear_left=QtLocation.QGeoManeuver.InstructionDirection.DirectionBearLeft,
+)
 
 
 class GeoManeuver(QtLocation.QGeoManeuver):
@@ -63,18 +65,16 @@ class GeoManeuver(QtLocation.QGeoManeuver):
         wp = self.waypoint()
         return positioning.GeoCoordinate(wp) if wp.isValid() else None
 
-    def set_direction(self, direction: InstructionDirectionStr):
+    def set_direction(
+        self,
+        direction: InstructionDirectionStr | QtLocation.QGeoManeuver.InstructionDirection,
+    ):
         """Set the direction.
 
         Args:
             direction: Direction
-
-        Raises:
-            InvalidParamError: direction does not exist
         """
-        if direction not in INSTRUCTION_DIRECTION:
-            raise InvalidParamError(direction, INSTRUCTION_DIRECTION)
-        self.setDirection(INSTRUCTION_DIRECTION[direction])
+        self.setDirection(INSTRUCTION_DIRECTION.get_enum_value(direction))
 
     def get_direction(self) -> InstructionDirectionStr:
         """Return current direction.

@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 CAPITALIZATION = bidict(
@@ -210,31 +210,21 @@ class Font(QtGui.QFont):
             scaled.setPixelSize(int(self.pixelSize() * factor))
         return scaled
 
-    def set_style_hint(self, hint: StyleHintStr):
+    def set_style_hint(self, hint: StyleHintStr | QtGui.QFont.StyleHint):
         """Set the style hint.
 
         Args:
             hint: style hint
-
-        Raises:
-            InvalidParamError: invalid style hint
         """
-        if hint not in STYLE_HINTS:
-            raise InvalidParamError(hint, STYLE_HINTS)
-        self.setStyleHint(STYLE_HINTS[hint])
+        self.setStyleHint(STYLE_HINTS.get_enum_value(hint))
 
-    def set_weight(self, weight: WeightStr):
+    def set_weight(self, weight: WeightStr | QtGui.QFont.Weight):
         """Set the font weight.
 
         Args:
             weight: font weight
-
-        Raises:
-            InvalidParamError: invalid font weight
         """
-        if weight not in WEIGHT:
-            raise InvalidParamError(weight, WEIGHT)
-        self.setWeight(WEIGHT[weight])
+        self.setWeight(WEIGHT.get_enum_value(weight))
 
     def get_weight(self) -> WeightStr:
         """Get current font weight.
@@ -244,18 +234,15 @@ class Font(QtGui.QFont):
         """
         return WEIGHT.inverse[self.weight()]
 
-    def set_capitalization(self, capitalization: CapitalizationStr):
+    def set_capitalization(
+        self, capitalization: CapitalizationStr | gui.Font.Capitalization
+    ):
         """Set the font capitalization.
 
         Args:
             capitalization: font capitalization
-
-        Raises:
-            InvalidParamError: invalid font capitalization
         """
-        if capitalization not in CAPITALIZATION:
-            raise InvalidParamError(capitalization, CAPITALIZATION)
-        self.setCapitalization(CAPITALIZATION[capitalization])
+        self.setCapitalization(CAPITALIZATION.get_enum_value(capitalization))
 
     def get_capitalization(self) -> CapitalizationStr:
         """Get current font capitalization.
@@ -265,18 +252,15 @@ class Font(QtGui.QFont):
         """
         return CAPITALIZATION.inverse[self.capitalization()]
 
-    def set_hinting_preference(self, preference: HintingPreferenceStr):
+    def set_hinting_preference(
+        self, preference: HintingPreferenceStr | gui.Font.HintingPreference
+    ):
         """Set the hinting preference.
 
         Args:
             preference: hinting preference
-
-        Raises:
-            InvalidParamError: invalid hinting preference
         """
-        if preference not in HINTING_PREFERENCE:
-            raise InvalidParamError(preference, HINTING_PREFERENCE)
-        self.setHintingPreference(HINTING_PREFERENCE[preference])
+        self.setHintingPreference(HINTING_PREFERENCE.get_enum_value(preference))
 
     def get_hinting_preference(self) -> HintingPreferenceStr:
         """Get current hinting preference.
@@ -286,19 +270,16 @@ class Font(QtGui.QFont):
         """
         return HINTING_PREFERENCE.inverse[self.hintingPreference()]
 
-    def set_letter_spacing(self, typ: SpacingTypeStr, spacing: float):
+    def set_letter_spacing(
+        self, typ: SpacingTypeStr | gui.Font.SpacingType, spacing: float
+    ):
         """Set the letter spacing.
 
         Args:
             typ: letter spacing type
             spacing: spacing
-
-        Raises:
-            InvalidParamError: invalid letter spacing type
         """
-        if typ not in SPACING_TYPE:
-            raise InvalidParamError(typ, SPACING_TYPE)
-        self.setLetterSpacing(SPACING_TYPE[typ], spacing)
+        self.setLetterSpacing(SPACING_TYPE.get_enum_value(typ), spacing)
 
     def get_letter_spacing_type(self) -> SpacingTypeStr:
         """Get current letter spacing type.
@@ -308,18 +289,13 @@ class Font(QtGui.QFont):
         """
         return SPACING_TYPE.inverse[self.letterSpacingType()]
 
-    def set_style(self, style: StyleStr):
+    def set_style(self, style: StyleStr | gui.Font.Style):
         """Set the font style.
 
         Args:
             style: font style
-
-        Raises:
-            InvalidParamError: invalid font style
         """
-        if style not in STYLE:
-            raise InvalidParamError(style, STYLE)
-        self.setStyle(STYLE[style])
+        self.setStyle(STYLE.get_enum_value(style))
 
     def get_style(self) -> StyleStr:
         """Get current font style.

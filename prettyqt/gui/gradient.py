@@ -4,37 +4,82 @@ from typing import Any, Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtGui
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
-COORDINATE_MODE = bidict(
+CoordinateModeStr = Literal["logical", "object", "stretch_to_device", "object_bounding"]
+
+COORDINATE_MODE: bidict[CoordinateModeStr, QtGui.QGradient.CoordinateMode] = bidict(
     logical=QtGui.QGradient.CoordinateMode.LogicalMode,
     object=QtGui.QGradient.CoordinateMode.ObjectMode,
     stretch_to_device=QtGui.QGradient.CoordinateMode.StretchToDeviceMode,
     object_bounding=QtGui.QGradient.CoordinateMode.ObjectBoundingMode,
 )
 
-CoordinateModeStr = Literal["logical", "object", "stretch_to_device", "object_bounding"]
+SpreadStr = Literal["pad", "repeat", "reflect"]
 
-SPREAD = bidict(
+SPREAD: bidict[SpreadStr, QtGui.QGradient.Spread] = bidict(
     pad=QtGui.QGradient.Spread.PadSpread,
     repeat=QtGui.QGradient.Spread.RepeatSpread,
     reflect=QtGui.QGradient.Spread.ReflectSpread,
 )
 
-SpreadStr = Literal["pad", "repeat", "reflect"]
+TypeStr = Literal["linear", "radial", "conical", "none"]
 
-TYPE = bidict(
+TYPE: bidict[TypeStr, QtGui.QGradient.Type] = bidict(
     linear=QtGui.QGradient.Type.LinearGradient,
     radial=QtGui.QGradient.Type.RadialGradient,
     conical=QtGui.QGradient.Type.ConicalGradient,
     none=QtGui.QGradient.Type.NoGradient,
 )
 
-TypeStr = Literal["linear", "radial", "conical", "none"]
+PresetStr = Literal[
+    "warm_flame",
+    "night_fade",
+    "spring_warmth",
+    "juicy_peach",
+    "young_passion",
+    "lady_lips",
+    "sunny_morning",
+    "rainy_ashville",
+    "frozen_dreams",
+    "winter_neva",
+    "dusty_grass",
+    "tempting_azure",
+    "heavy_rain",
+    "amy_crisp",
+    "mean_fruit",
+    "deep_blue",
+    "ripe_malinka",
+    "cloudy_knoxville",
+    "malibu_beach",
+    "new_life",
+    "true_sunset",
+    "morpheus_den",
+    "rare_wind",
+    "near_moon",
+    "wild_apple",
+    "saint_petersburg",
+    "plum_plate",
+    "everlasting_sky",
+    "happy_fisher",
+    "blessing",
+    "sharpeye_eagle",
+    "ladoga_bottom",
+    "lemon_gate",
+    "itmeo_branding",
+    "zeus_miracle",
+    "old_hat",
+    "star_wine",
+    "happy_acid",
+    "awesome_pine",
+    "new_york",
+    "shy_rainbow",
+    "mixed_hopes",
+    "fly_high",
+]
 
-
-PRESET = bidict(
+PRESET: bidict[PresetStr, QtGui.QGradient.Preset] = bidict(
     warm_flame=QtGui.QGradient.Preset.WarmFlame,
     night_fade=QtGui.QGradient.Preset.NightFade,
     spring_warmth=QtGui.QGradient.Preset.SpringWarmth,
@@ -93,18 +138,15 @@ class GradientMixin:
             stops=self.get_stops(),
         )
 
-    def set_coordinate_mode(self, mode: CoordinateModeStr):
+    def set_coordinate_mode(
+        self, mode: CoordinateModeStr | QtGui.QGradient.CoordinateMode
+    ):
         """Set the coordinate mode.
 
         Args:
             mode: coordinate mode
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in COORDINATE_MODE:
-            raise InvalidParamError(mode, COORDINATE_MODE)
-        self.setCoordinateMode(COORDINATE_MODE[mode])
+        self.setCoordinateMode(COORDINATE_MODE.get_enum_value(mode))
 
     def get_coordinate_mode(self) -> CoordinateModeStr:
         """Return current coordinate mode.
@@ -114,18 +156,13 @@ class GradientMixin:
         """
         return COORDINATE_MODE.inverse[self.coordinateMode()]
 
-    def set_spread(self, method: SpreadStr):
+    def set_spread(self, method: SpreadStr | QtGui.QGradient.Spread):
         """Set the spread method.
 
         Args:
             method: spread method
-
-        Raises:
-            InvalidParamError: method does not exist
         """
-        if method not in SPREAD:
-            raise InvalidParamError(method, SPREAD)
-        self.setSpread(SPREAD[method])
+        self.setSpread(SPREAD.get_enum_value(method))
 
     def get_spread(self) -> SpreadStr:
         """Return current spread method.

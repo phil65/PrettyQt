@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import gui
 from prettyqt.qt import QtPrintSupport
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 COLOR_MODE = bidict(
@@ -74,15 +74,13 @@ class Printer(gui.PagedPaintDeviceMixin, QtPrintSupport.QPrinter):
     def get_pdf_version(self) -> gui.pagedpaintdevice.PdfVersionStr:
         return gui.pagedpaintdevice.PDF_VERSION.inverse[self.pdfVersion()]
 
-    def set_pdf_version(self, version: gui.pagedpaintdevice.PdfVersionStr):
+    def set_pdf_version(
+        self,
+        version: gui.pagedpaintdevice.PdfVersionStr | gui.PagedPaintDevice.PdfVersion,
+    ):
         """Set pdf version.
 
         Args:
             version: pdf version
-
-        Raises:
-            InvalidParamError: pdf version does not exist
         """
-        if version not in gui.pagedpaintdevice.PDF_VERSION:
-            raise InvalidParamError(version, gui.pagedpaintdevice.PDF_VERSION)
-        self.setPdfVersion(gui.pagedpaintdevice.PDF_VERSION[version])
+        self.setPdfVersion(gui.pagedpaintdevice.PDF_VERSION.get_enum_value(version))
