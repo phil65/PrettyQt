@@ -10,7 +10,7 @@ from prettyqt import constants, core
 logger = logging.getLogger(__name__)
 
 
-FilterModeStr = Literal["startswith", "containts", "match"]
+FilterModeStr = Literal["startswith", "endswith", "containts", "match"]
 
 
 class BasePandasIndexFilterProxyModel(core.IdentityProxyModel):
@@ -120,6 +120,10 @@ class PandasStringColumnFilterProxyModel(BasePandasIndexFilterProxyModel):
         match self.filter_mode:
             case "startswith":
                 self._filter_index = df.iloc[:, self._filter_column].str.startswith(
+                    self._search_term, na=self._na_value
+                )
+            case "endswith":
+                self._filter_index = df.iloc[:, self._filter_column].str.endswith(
                     self._search_term, na=self._na_value
                 )
             case "contains":
