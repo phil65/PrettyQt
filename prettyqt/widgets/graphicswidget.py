@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import datatypes
 
 
 LayoutStr = Literal["grid", "horizontal", "vertical", "anchor"]
@@ -36,18 +36,15 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
         self.setLayout(layout)
         return layout
 
-    def set_focus_policy(self, policy: constants.FocusPolicyStr) -> None:
+    def set_focus_policy(
+        self, policy: constants.FocusPolicyStr | constants.FocusPolicy
+    ):
         """Set the way the widget accepts keyboard focus.
 
         Args:
             policy: Focus policy
-
-        Raises:
-            InvalidParamError: Description
         """
-        if policy not in constants.FOCUS_POLICY:
-            raise InvalidParamError(policy, constants.FOCUS_POLICY)
-        self.setFocusPolicy(constants.FOCUS_POLICY[policy])
+        self.setFocusPolicy(constants.FOCUS_POLICY.get_enum_value(policy))
 
     def get_focus_policy(self) -> constants.FocusPolicyStr:
         """Return way the widget accepts keyboard focus.

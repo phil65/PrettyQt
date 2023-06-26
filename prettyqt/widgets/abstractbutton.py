@@ -25,7 +25,7 @@ class AbstractButtonMixin(widgets.WidgetMixin):
     def set_style_icon(
         self,
         icon: widgets.style.StandardPixmapStr | widgets.QStyle.StandardPixmap,
-        size: datatypes.SizeType,
+        size: datatypes.SizeType = 15,
     ):
         """Set theme icon for the button.
 

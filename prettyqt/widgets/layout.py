@@ -7,7 +7,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, listdelegators
+from prettyqt.utils import bidict, listdelegators
 
 
 # @contxtlib.contextmanager
@@ -295,18 +295,15 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def set_spacing(self, pixels: int):
         self.setSpacing(pixels)
 
-    def set_size_constraint(self, mode: SizeConstraintStr):
+    def set_size_constraint(
+        self, mode: SizeConstraintStr | QtWidgets.QLayout.SizeConstraint
+    ):
         """Set the size mode of the layout.
 
         Args:
             mode: size mode for the layout
-
-        Raises:
-            InvalidParamError: size mode does not exist
         """
-        if mode not in SIZE_CONSTRAINT:
-            raise InvalidParamError(mode, SIZE_CONSTRAINT)
-        self.setSizeConstraint(SIZE_CONSTRAINT[mode])
+        self.setSizeConstraint(SIZE_CONSTRAINT.get_enum_value(mode))
 
     def get_size_constraint(self) -> SizeConstraintStr:
         """Return current size mode.
@@ -318,7 +315,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
 
     def set_alignment(
         self,
-        alignment: constants.AlignmentStr,
+        alignment: constants.AlignmentStr | constants.AlignmentFlag,
         item: QtWidgets.QWidget | QtWidgets.QLayout | None = None,
     ) -> bool:
         """Set the alignment for widget / layout to alignment.
@@ -328,16 +325,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         Args:
             alignment: alignment for the layout
             item: set alignment for specific child only
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
         if item is not None:
-            return self.setAlignment(item, constants.ALIGNMENTS[alignment])
+            return self.setAlignment(item, constants.ALIGNMENTS.get_enum_value(alignment))
         else:
-            return self.setAlignment(constants.ALIGNMENTS[alignment])
+            return self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     # def add(self, *items: QtWidgets.QWidget | QtWidgets.QLayout):
     #     for i in items:

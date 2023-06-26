@@ -5,7 +5,7 @@ from typing import Any, Literal
 from typing_extensions import Self
 
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 SizePolicyStr = Literal[
@@ -97,7 +97,7 @@ class SizePolicy(QtWidgets.QSizePolicy):
             control_type=self.get_control_type(),
         )
 
-    def __setstate__(self, state: dict[str, Any]) -> None:
+    def __setstate__(self, state: dict[str, Any]):
         self.setHeightForWidth(state["has_height_for_width"])
         self.setWidthForHeight(state["has_width_for_height"])
         self.setHorizontalStretch(state["horizontal_stretch"])
@@ -131,16 +131,13 @@ class SizePolicy(QtWidgets.QSizePolicy):
         """
         return SIZE_POLICY.inverse[self.horizontalPolicy()]
 
-    def set_horizontal_policy(self, policy: SizePolicyStr) -> None:
+    def set_horizontal_policy(self, policy: SizePolicyStr | QtWidgets.QSizePolicy.Policy):
         """Set the horizontal policy.
 
         Args:
             policy: policy to set
-
-        Raises:
-            InvalidParamError: policy does not exist
         """
-        self.setHorizontalPolicy(SIZE_POLICY[policy])
+        self.setHorizontalPolicy(SIZE_POLICY.get_enum_value(policy))
 
     def get_vertical_policy(self) -> SizePolicyStr:
         """Return size policy.
@@ -151,16 +148,13 @@ class SizePolicy(QtWidgets.QSizePolicy):
         """
         return SIZE_POLICY.inverse[self.verticalPolicy()]
 
-    def set_vertical_policy(self, policy: SizePolicyStr) -> None:
+    def set_vertical_policy(self, policy: SizePolicyStr | QtWidgets.QSizePolicy.Policy):
         """Set the horizontal policy.
 
         Args:
             policy: policy to set
-
-        Raises:
-            InvalidParamError: policy does not exist
         """
-        self.setVerticalPolicy(SIZE_POLICY[policy])
+        self.setVerticalPolicy(SIZE_POLICY.get_enum_value(policy))
 
     def get_control_type(self) -> ControlTypeStr:
         """Return control type.
@@ -170,18 +164,13 @@ class SizePolicy(QtWidgets.QSizePolicy):
         """
         return CONTROL_TYPE.inverse[self.controlType()]
 
-    def set_control_type(self, typ: ControlTypeStr) -> None:
+    def set_control_type(self, typ: ControlTypeStr | QtWidgets.QSizePolicy.ControlType):
         """Set the control type.
 
         Args:
             typ: control type to set
-
-        Raises:
-            InvalidParamError: control type does not exist
         """
-        if typ not in CONTROL_TYPE:
-            raise InvalidParamError(typ, CONTROL_TYPE)
-        self.setControlType(CONTROL_TYPE[typ])
+        self.setControlType(CONTROL_TYPE.get_enum_value(typ))
 
     def get_transposed(self) -> Self:
         transposed = self.transposed()

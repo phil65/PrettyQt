@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 SubmitPolicyStr = Literal["auto", "manual"]
@@ -35,18 +35,15 @@ class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
         maps |= {"submitPolicy": SUBMIT_POLICY, "orientation": constants.ORIENTATION}
         return maps
 
-    def set_orientation(self, orientation: constants.OrientationStr):
+    def set_orientation(
+        self, orientation: constants.OrientationStr | constants.Orientation
+    ):
         """Set the orientation of the data widget mapper.
 
         Args:
             orientation: orientation for the data widget mapper
-
-        Raises:
-            InvalidParamError: orientation does not exist
         """
-        if orientation not in constants.ORIENTATION:
-            raise InvalidParamError(orientation, constants.ORIENTATION)
-        self.setOrientation(constants.ORIENTATION[orientation])
+        self.setOrientation(constants.ORIENTATION.get_enum_value(orientation))
 
     def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.
@@ -56,18 +53,15 @@ class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
         """
         return constants.ORIENTATION.inverse[self.orientation()]
 
-    def set_submit_policy(self, policy: SubmitPolicyStr):
+    def set_submit_policy(
+        self, policy: SubmitPolicyStr | QtWidgets.QDataWidgetMapper.SubmitPolicy
+    ):
         """Set the submit policy of the mapper.
 
         Args:
             policy: submit_policy for the data widget mapper
-
-        Raises:
-            InvalidParamError: submit_policy does not exist
         """
-        if policy not in SUBMIT_POLICY:
-            raise InvalidParamError(policy, SUBMIT_POLICY)
-        self.setSubmitPolicy(SUBMIT_POLICY[policy])
+        self.setSubmitPolicy(SUBMIT_POLICY.get_enum_value(policy))
 
     def get_submit_policy(self) -> SubmitPolicyStr:
         """Return current submit policy.

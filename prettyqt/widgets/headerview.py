@@ -6,8 +6,8 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import bidict
 
 
 ResizeModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
@@ -71,11 +71,11 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
 
     def __init__(
         self,
-        orientation: constants.OrientationStr | QtCore.Qt.Orientation,
+        orientation: constants.OrientationStr | constants.Orientation,
         parent: QtWidgets.QWidget | None = None,
         **kwargs,
     ):
-        if isinstance(orientation, QtCore.Qt.Orientation):
+        if isinstance(orientation, constants.Orientation):
             ori = orientation
         else:
             ori = constants.ORIENTATION[orientation]
@@ -159,7 +159,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
 
     def set_resize_mode(
         self,
-        mode: ResizeModeStr,
+        mode: ResizeModeStr | QtWidgets.QHeaderView.ResizeMode,
         precision: int | None = None,
         cascading: bool | None = None,
         stretch_last_section: bool | None = None,
@@ -179,9 +179,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
             self.setResizeContentsPrecision(precision)
         if cascading is not None:
             self.setCascadingSectionResizes(cascading)
-        if mode not in RESIZE_MODE:
-            raise InvalidParamError(mode, RESIZE_MODE)
-        self.setSectionResizeMode(RESIZE_MODE[mode])
+        self.setSectionResizeMode(RESIZE_MODE.get_enum_value(mode))
 
     def get_section_labels(self) -> list[str]:
         """Return all section labels as a list."""

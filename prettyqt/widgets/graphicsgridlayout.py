@@ -4,7 +4,7 @@ from collections.abc import Iterable, Iterator
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, helpers, listdelegators
+from prettyqt.utils import helpers, listdelegators
 
 
 class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLayout):
@@ -96,15 +96,15 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
     def append(self, item: QtWidgets.QGraphicsLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
-    def set_column_alignment(self, column: int, alignment: constants.AlignmentStr):
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setColumnAlignment(column, constants.ALIGNMENTS[alignment])
+    def set_column_alignment(
+        self, column: int, alignment: constants.AlignmentStr | constants.AlignmentFlag
+    ):
+        self.setColumnAlignment(column, constants.ALIGNMENTS.get_enum_value(alignment))
 
-    def set_row_alignment(self, row: int, alignment: constants.AlignmentStr):
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setRowAlignment(row, constants.ALIGNMENTS[alignment])
+    def set_row_alignment(
+        self, row: int, alignment: constants.AlignmentStr | constants.AlignmentFlag
+    ):
+        self.setRowAlignment(row, constants.ALIGNMENTS.get_enum_value(alignment))
 
 
 if __name__ == "__main__":
