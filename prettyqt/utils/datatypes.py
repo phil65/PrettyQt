@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from abc import ABCMeta
 import datetime
+import dateutil.parser
 import enum
 import os
 import pathlib
@@ -582,6 +583,18 @@ def to_marginsf(margins: MarginsFType | QtCore.QMargins | None) -> QtCore.QMargi
             return QtCore.QMarginsF(0, 0, 0, 0)
         case _:
             raise TypeError(margins)
+
+
+def to_datetime(date_time: DateTimeType):
+    match date_time:
+        case None:
+            return QtCore.QDateTime()
+        case str():
+            return dateutil.parser.parse(date_time)
+        case QtCore.QDateTime | datetime.datetime():
+            return date_time
+        case _:
+            raise TypeError(date_time)
 
 
 def to_py_pattern(pattern: PatternAndStringType):
