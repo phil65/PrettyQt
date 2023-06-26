@@ -3,8 +3,8 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import bidict, datatypes
 
 
 ShadowStr = Literal["plain", "raised", "sunken"]
@@ -36,20 +36,13 @@ class FrameMixin(widgets.WidgetMixin):
         maps |= {"frameShape": FRAME_SHAPE, "frameShadow": SHADOW}
         return maps
 
-    def set_frame_shadow(self, style: ShadowStr):
+    def set_frame_shadow(self, style: ShadowStr | QtWidgets.QFrame.Shadow):
         """Set frame shadow.
 
         Args:
             style: frame style to use
-
-        Raises:
-            InvalidParamError: style does not exist
         """
-        if style is None:
-            return
-        if style not in SHADOW:
-            raise InvalidParamError(style, SHADOW)
-        self.setFrameShadow(SHADOW[style])
+        self.setFrameShadow(SHADOW.get_enum_value(style))
 
     def get_frame_shadow(self) -> ShadowStr | None:
         """Return current frame shadow.
@@ -61,18 +54,13 @@ class FrameMixin(widgets.WidgetMixin):
             return None
         return SHADOW.inverse[frame_shadow]
 
-    def set_frame_shape(self, shape: FrameShapeStr):
+    def set_frame_shape(self, shape: FrameShapeStr | QtWidgets.QFrame.Shape):
         """Set frame shape.
 
         Args:
             shape: frame shape to use
-
-        Raises:
-            InvalidParamError: shape does not exist
         """
-        if shape not in FRAME_SHAPE:
-            raise InvalidParamError(shape, FRAME_SHAPE)
-        self.setFrameShape(FRAME_SHAPE[shape])
+        self.setFrameShape(FRAME_SHAPE.get_enum_value(shape))
 
     def get_frame_shape(self) -> FrameShapeStr:
         """Return current frame shape.
@@ -82,11 +70,8 @@ class FrameMixin(widgets.WidgetMixin):
         """
         return FRAME_SHAPE.inverse[self.frameShape()]
 
-    def set_frame_rect(self, rect: datatypes.RectType | None):
-        if isinstance(rect, tuple):
-            rect = QtCore.QRect(*rect)
-        elif rect is None:
-            rect = QtCore.QRect(0, 0, 0, 0)
+    def set_frame_rect(self, rect: datatypes.RectType):
+        self.setFrameRect(datatypes.to_rect(rect))
 
 
 class Frame(FrameMixin, QtWidgets.QFrame):

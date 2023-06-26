@@ -5,7 +5,7 @@ from typing import Any, Literal
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 mod = QtWidgets.QComboBox
@@ -52,6 +52,9 @@ class ComboBoxMixin(widgets.WidgetMixin):
         super().__init__(*args, **kwargs)
         self.currentIndexChanged.connect(self._index_changed)
 
+    def __len__(self) -> int:
+        return self.count()
+
     def _get_map(self):
         maps = super()._get_map()
         maps |= {
@@ -62,9 +65,6 @@ class ComboBoxMixin(widgets.WidgetMixin):
 
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
-
-    def __len__(self) -> int:
-        return self.count()
 
     def _index_changed(self, index: int):
         # data = self.itemData(index)
@@ -104,18 +104,13 @@ class ComboBoxMixin(widgets.WidgetMixin):
         if self.completer() is None and editable:
             self.setCompleter(widgets.Completer(self))
 
-    def set_insert_policy(self, policy: InsertPolicyStr):
+    def set_insert_policy(self, policy: InsertPolicyStr | mod.InsertPolicy):
         """Set insert policy.
 
         Args:
             policy: insert policy to use
-
-        Raises:
-            InvalidParamError: invalid insert policy
         """
-        if policy not in INSERT_POLICY:
-            raise InvalidParamError(policy, INSERT_POLICY)
-        self.setInsertPolicy(INSERT_POLICY[policy])
+        self.setInsertPolicy(INSERT_POLICY.get_enum_value(policy))
 
     def get_insert_policy(self) -> InsertPolicyStr:
         """Return insert policy.
@@ -125,18 +120,13 @@ class ComboBoxMixin(widgets.WidgetMixin):
         """
         return INSERT_POLICY.inverse[self.insertPolicy()]
 
-    def set_size_adjust_policy(self, policy: SizeAdjustPolicyStr):
+    def set_size_adjust_policy(self, policy: SizeAdjustPolicyStr | mod.SizeAdjustPolicy):
         """Set size adjust policy.
 
         Args:
             policy: size adjust policy to use
-
-        Raises:
-            InvalidParamError: invalid size adjust policy
         """
-        if policy not in SIZE_ADJUST_POLICY:
-            raise InvalidParamError(policy, SIZE_ADJUST_POLICY)
-        self.setSizeAdjustPolicy(SIZE_ADJUST_POLICY[policy])
+        self.setSizeAdjustPolicy(SIZE_ADJUST_POLICY.get_enum_value(policy))
 
     def get_size_adjust_policy(self) -> SizeAdjustPolicyStr:
         """Return size adjust policy.
@@ -146,18 +136,9 @@ class ComboBoxMixin(widgets.WidgetMixin):
         """
         return SIZE_ADJUST_POLICY.inverse[self.sizeAdjustPolicy()]
 
-    def set_icon_size(self, size: int | datatypes.SizeType):
+    def set_icon_size(self, size: datatypes.SizeType):
         """Set size of the icons."""
-        match size:
-            case int():
-                size = core.Size(size, size)
-            case (int(), int()):
-                size = core.Size(*size)
-            case core.QSize():
-                pass
-            case _:
-                raise TypeError(size)
-        self.setIconSize(size)
+        self.setIconSize(datatypes.to_size(size))
 
     def get_icon_size(self) -> core.Size:
         return core.Size(self.iconSize())

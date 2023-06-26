@@ -6,41 +6,40 @@ from typing import Literal
 
 from prettyqt import core, webenginecore
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 mod = QtWebEngineCore.QWebEngineProfile
 
-HTTP_CACHE_TYPE = bidict(
+HttpCacheTypeStr = Literal["none", "disk", "memory"]
+
+HTTP_CACHE_TYPE: bidict[HttpCacheTypeStr, mod.HttpCacheType] = bidict(
     none=mod.HttpCacheType.NoCache,
     disk=mod.HttpCacheType.DiskHttpCache,
     memory=mod.HttpCacheType.MemoryHttpCache,
 )
 
-HttpCacheTypeStr = Literal["none", "disk", "memory"]
+PersistentCookiePolicyStr = Literal["none", "allow", "force"]
 
-PERSISTENT_COOKIE_POLICY = bidict(
+PERSISTENT_COOKIE_POLICY: bidict[
+    PersistentCookiePolicyStr, mod.PersistentCookiesPolicy
+] = bidict(
     none=mod.PersistentCookiesPolicy.NoPersistentCookies,
     allow=mod.PersistentCookiesPolicy.AllowPersistentCookies,
     force=mod.PersistentCookiesPolicy.ForcePersistentCookies,
 )
 
-PersistentCookiePolicyStr = Literal["none", "allow", "force"]
-
 
 class WebEngineProfile(core.ObjectMixin, QtWebEngineCore.QWebEngineProfile):
-    def set_persistent_cookie_policy(self, policy: PersistentCookiePolicyStr):
+    def set_persistent_cookie_policy(
+        self, policy: PersistentCookiePolicyStr | mod.PersistentCookiesPolicy
+    ):
         """Set the persistent cookie policy.
 
         Args:
             policy: persistent cookie policy
-
-        Raises:
-            InvalidParamError: Policy does not exist
         """
-        if policy not in PERSISTENT_COOKIE_POLICY:
-            raise InvalidParamError(policy, PERSISTENT_COOKIE_POLICY)
-        self.setPersistentCookiesPolicy(PERSISTENT_COOKIE_POLICY[policy])
+        self.setPersistentCookiesPolicy(PERSISTENT_COOKIE_POLICY.get_enum_value(policy))
 
     def get_persistent_cookie_policy(self) -> PersistentCookiePolicyStr:
         """Return current persistent cookie policy.
@@ -50,18 +49,13 @@ class WebEngineProfile(core.ObjectMixin, QtWebEngineCore.QWebEngineProfile):
         """
         return PERSISTENT_COOKIE_POLICY.inverse[self.persistentCookiesPolicy()]
 
-    def set_http_cache_type(self, typ: HttpCacheTypeStr):
+    def set_http_cache_type(self, typ: HttpCacheTypeStr | mod.PersistentCookiesPolicy):
         """Set the http cache type.
 
         Args:
             typ: http cache type
-
-        Raises:
-            InvalidParamError: Cache type does not exist
         """
-        if typ not in HTTP_CACHE_TYPE:
-            raise InvalidParamError(typ, HTTP_CACHE_TYPE)
-        self.setHttpCacheType(HTTP_CACHE_TYPE[typ])
+        self.setHttpCacheType(HTTP_CACHE_TYPE.get_enum_value(typ))
 
     def get_http_cache_type(self) -> HttpCacheTypeStr:
         """Return current http cache type.

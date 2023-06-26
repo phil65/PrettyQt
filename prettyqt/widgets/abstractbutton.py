@@ -1,8 +1,8 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import datatypes
 
 
 class AbstractButtonMixin(widgets.WidgetMixin):
@@ -22,27 +22,25 @@ class AbstractButtonMixin(widgets.WidgetMixin):
         icon = self.icon()
         return None if icon.isNull() else gui.Icon(icon)
 
-    def set_style_icon(self, icon: widgets.style.StandardPixmapStr, size: int = 15):
+    def set_style_icon(
+        self,
+        icon: widgets.style.StandardPixmapStr | widgets.QStyle.StandardPixmap,
+        size: datatypes.SizeType,
+    ):
         """Set theme icon for the button.
 
         Args:
             icon: icon to use
             size: icon size
         """
-        if icon not in widgets.style.STANDARD_PIXMAP:
-            raise InvalidParamError(icon, widgets.style.STANDARD_PIXMAP)
-        qicon = self.style().standardIcon(widgets.style.STANDARD_PIXMAP[icon], None, self)
+        qicon = self.style().standardIcon(
+            widgets.style.STANDARD_PIXMAP.get_enum_value(icon), None, self
+        )
         self.set_icon(qicon)
-        self.setIconSize(core.Size(size, size))
+        self.setIconSize(datatypes.to_size(size))
 
-    def set_shortcut(self, shortcut: None | QtGui.QKeySequence | str):
-        if shortcut is None:
-            shortcut = ""
-        if isinstance(shortcut, str):
-            shortcut = gui.KeySequence(
-                shortcut, gui.KeySequence.SequenceFormat.PortableText
-            )
-        self.setShortcut(shortcut)
+    def set_shortcut(self, shortcut: datatypes.KeySequenceType):
+        self.setShortcut(datatypes.to_keysequence(shortcut))
 
     def get_shortcut(self) -> gui.KeySequence:
         return gui.KeySequence(
@@ -54,18 +52,9 @@ class AbstractButtonMixin(widgets.WidgetMixin):
             self.setObjectName(text)
         super().setText(text)
 
-    def set_icon_size(self, size: int | datatypes.SizeType):
+    def set_icon_size(self, size: datatypes.SizeType):
         """Set size of the icon."""
-        match size:
-            case int():
-                size = core.Size(size, size)
-            case (int(), int()):
-                size = core.Size(*size)
-            case core.QSize():
-                pass
-            case _:
-                raise TypeError(size)
-        self.setIconSize(size)
+        self.setIconSize(datatypes.to_size(size))
 
     def get_icon_size(self) -> core.Size:
         return core.Size(self.iconSize())

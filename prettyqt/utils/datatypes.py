@@ -89,6 +89,7 @@ if TYPE_CHECKING:
     TimeType = QtCore.QTime | datetime.time | str
     DateType = QtCore.QDate | datetime.date | str
     DateTimeType = QtCore.QDateTime | datetime.datetime | str
+    KeySequenceType = QtGui.QKeySequence | QtCore.QKeyCombination | str | None
     # ContainerType = Union[widgets.Layout, widgets.Splitter]
     TransformType = (
         QtGui.QTransform
@@ -599,6 +600,18 @@ def to_datetime(date_time: DateTimeType):
             raise TypeError(date_time)
 
 
+def to_date(date: DateType):
+    match date:
+        case None:
+            return QtCore.QDate()
+        case str():
+            return QtCore.QDate.fromString(date)
+        case QtCore.QDate() | datetime.date():
+            return date
+        case _:
+            raise TypeError(date)
+
+
 def to_py_pattern(pattern: PatternAndStringType):
     from prettyqt import core
 
@@ -619,6 +632,22 @@ def to_transform(self, transform: TransformType):
             return transform
         case _:
             raise TypeError(transform)
+
+
+def to_keysequence(sequence):
+    from prettyqt import gui
+
+    match sequence:
+        case None:
+            return gui.KeySequence("")
+        case QtCore.QKeyCombination():
+            return gui.KeySequence(sequence)
+        case str():
+            return gui.KeySequence(
+                sequence, gui.KeySequence.SequenceFormat.PortableText
+            )
+        case _:
+            raise TypeError(sequence)
 
 
 def make_serializable(obj):

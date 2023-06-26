@@ -7,7 +7,7 @@ import pathlib
 
 from prettyqt import constants, core, qt
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 OptionStr = Literal["dont_watch_changes", "dont_resolve_symlinks", "no_custom_icons"]
@@ -78,10 +78,8 @@ class FileSystemModelMixin:
         self.setNameFilters(filters)
         self.setNameFilterDisables(not hide)
 
-    def set_filter(self, filter_mode: core.dir.FilterStr):
-        if filter_mode not in core.dir.FILTERS:
-            raise InvalidParamError(filter_mode, core.dir.FILTERS)
-        self.setFilter(core.dir.FILTERS[filter_mode])
+    def set_filter(self, filter_mode: core.dir.FilterStr | core.QDir.Filter):
+        self.setFilter(core.dir.FILTERS.get_enum_value(filter_mode))
 
     def get_paths(self, indexes: Sequence[QtCore.QModelIndex]) -> list[pathlib.Path]:
         paths = [i.data(self.Roles.FilePathRole) for i in indexes]

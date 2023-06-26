@@ -4,8 +4,8 @@ import datetime
 from typing import Literal
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.qt import QtWidgets
+from prettyqt.utils import bidict, datatypes
 
 
 SelectionModeStr = Literal["none", "single"]
@@ -56,36 +56,27 @@ class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
         return self.get_date()
 
     def set_value(self, value: datatypes.DateType):
-        if isinstance(value, str):
-            value = QtCore.QDate.fromString(value)
-        self.setSelectedDate(value)
+        self.setSelectedDate(datatypes.to_date(value))
 
     def set_range(
         self,
         lower: datatypes.DateType,
         upper: datatypes.DateType,
     ):
-        if isinstance(lower, str):
-            lower = QtCore.QDate.fromString(lower)
-        if isinstance(upper, str):
-            upper = QtCore.QDate.fromString(upper)
-        self.setMinimumDate(lower)
-        self.setMaximumDate(upper)
+        self.setMinimumDate(datatypes.to_date(lower))
+        self.setMaximumDate(datatypes.to_date(upper))
 
-    def set_selection_mode(self, mode: SelectionModeStr | None):
+    def set_selection_mode(
+        self, mode: SelectionModeStr | QtWidgets.QCalendarWidget.SelectionMode | None
+    ):
         """Set selection mode for given calendar widget.
 
         Args:
             mode: selection mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
         if mode is None:
             mode = "none"
-        if mode not in SELECTION_MODE:
-            raise InvalidParamError(mode, SELECTION_MODE)
-        self.setSelectionMode(SELECTION_MODE[mode])
+        self.setSelectionMode(SELECTION_MODE.get_enum_value(mode))
 
     def get_selection_mode(self) -> SelectionModeStr:
         """Return current selection mode.

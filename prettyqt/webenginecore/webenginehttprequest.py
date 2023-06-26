@@ -4,15 +4,15 @@ from typing import Literal
 
 from prettyqt import core
 from prettyqt.qt import QtCore, QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
-METHODS = bidict(
+MethodStr = Literal["get", "post"]
+
+METHODS: bidict[MethodStr, QtWebEngineCore.QWebEngineHttpRequest.Method] = bidict(
     get=QtWebEngineCore.QWebEngineHttpRequest.Method.Get,
     post=QtWebEngineCore.QWebEngineHttpRequest.Method.Post,
 )
-
-MethodStr = Literal["get", "post"]
 
 
 class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
@@ -36,18 +36,15 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
     def get_post_data(self) -> str:
         return self.postData().data().decode()
 
-    def set_method(self, method: MethodStr):
+    def set_method(
+        self, method: MethodStr | QtWebEngineCore.QWebEngineHttpRequest.Method
+    ):
         """Set method this WebEngine request is using.
 
         Args:
             method: method
-
-        Raises:
-            InvalidParamError: method does not exist
         """
-        if method not in METHODS:
-            raise InvalidParamError(method, METHODS)
-        self.setMethod(METHODS[method])
+        self.setMethod(METHODS.get_enum_value(method))
 
     def get_method(self) -> MethodStr:
         """Get the method this WebEngine request is using.
