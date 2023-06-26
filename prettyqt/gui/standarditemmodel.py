@@ -147,8 +147,8 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         return item
 
     @classmethod
-    def from_dict(cls, dct: dict):
-        model = cls()
+    def from_dict(cls, dct: dict, **kwargs):
+        model = cls(**kwargs)
         model.setHorizontalHeaderLabels(list(dct.keys()))
         for column, v in enumerate(dct.values()):
             for row, item in enumerate(v):
