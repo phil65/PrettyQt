@@ -83,6 +83,8 @@ if TYPE_CHECKING:
     )
     RectType = tuple[int, int, int, int] | QtCore.QRect
     RectFType = tuple[int | float, int | float, int | float, int | float] | QtCore.QRectF
+    LineType = tuple[int, int] | QtCore.QLine
+    LineFType = tuple[float, float] | QtCore.QLineF | QtCore.QLine
     SemanticVersionType = str | QtCore.QVersionNumber | tuple[int, int, int]
     IconType = QtGui.QIcon | str | pathlib.Path | None
     ByteArrayType = str | bytes | QtCore.QByteArray
@@ -450,10 +452,10 @@ def to_point(point: QtCore.QPointF | PointType):
 def to_pointf(point: PointFType | QtCore.QPoint):
     match point:
         case (int() | float(), int() | float()):
-            return QtCore.PointF(*point)
-        case QtCore.PointF():
+            return QtCore.QPointF(*point)
+        case QtCore.QPointF():
             return point
-        case QtCore.Point():
+        case QtCore.QPoint():
             return point.toPointF()
         case _:
             raise TypeError(point)
@@ -612,6 +614,17 @@ def to_date(date: DateType):
             raise TypeError(date)
 
 
+def to_linef(line: LineFType):
+    match line:
+        case QtCore.QLine():
+            return QtCore.QLineF(line)
+        case tuple():
+            return QtCore.QLineF(*line)
+        case QtCore.QLineF():
+            return line
+        case _:
+            raise TypeError(line)
+
 def to_py_pattern(pattern: PatternAndStringType):
     from prettyqt import core
 
@@ -624,7 +637,7 @@ def to_py_pattern(pattern: PatternAndStringType):
             return core.RegularExpression(pattern).to_py_pattern()
 
 
-def to_transform(self, transform: TransformType):
+def to_transform(transform: TransformType):
     match transform:
         case tuple():
             return QtGui.QTransform(*transform)
@@ -634,7 +647,7 @@ def to_transform(self, transform: TransformType):
             raise TypeError(transform)
 
 
-def to_keysequence(sequence):
+def to_keysequence(sequence: KeySequenceType):
     from prettyqt import gui
 
     match sequence:
@@ -642,6 +655,8 @@ def to_keysequence(sequence):
             return gui.KeySequence("")
         case QtCore.QKeyCombination():
             return gui.KeySequence(sequence)
+        case gui.QKeySequence():
+            return sequence
         case str():
             return gui.KeySequence(
                 sequence, gui.KeySequence.SequenceFormat.PortableText

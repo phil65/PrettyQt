@@ -153,9 +153,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         super().setToolTip(tooltip)
 
     def set_size_hint(self, hint: datatypes.SizeType):
-        if isinstance(hint, tuple):
-            hint = QtCore.QSize(*hint)
-        self.setSizeHint(hint)
+        self.setSizeHint(datatypes.to_size(hint))
 
     def add_item(
         self,

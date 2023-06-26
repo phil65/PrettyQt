@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -12,11 +12,10 @@ class ToolTip(QtWidgets.QToolTip):
         text: str = "",
         linebreak_px: int = 400,
     ):
-        if position is None:
-            position = QtGui.QCursor.pos()
-        elif isinstance(position, tuple):
-            position = QtCore.QPoint(*position)
-        cls.showText(position, f'<div style="max-width: {linebreak_px}px">{text}</div>')
+        cls.showText(
+            QtGui.QCursor.pos() if position is None else datatypes.to_point(position),
+            f'<div style="max-width: {linebreak_px}px">{text}</div>',
+        )
 
 
 if __name__ == "__main__":

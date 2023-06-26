@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -62,9 +62,8 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
         Returns:
             str: Window frame section
         """
-        if isinstance(point, tuple):
-            point = QtCore.QPoint(*point)
-        return constants.WINDOW_FRAME_SECTION.inverse[self.windowFrameSectionAt(point)]
+        section = self.windowFrameSectionAt(datatypes.to_point(point))
+        return constants.WINDOW_FRAME_SECTION.inverse[section]
 
     def get_font(self) -> gui.Font:
         return gui.Font(self.font())

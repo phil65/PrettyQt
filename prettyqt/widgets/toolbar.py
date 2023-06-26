@@ -95,8 +95,8 @@ class ToolBarMixin(widgets.WidgetMixin):
         label.set_alignment(horizontal="center")
         return self.insertWidget(before, label) if before else self.addWidget(label)
 
-    def set_style(self, style: constants.ToolButtonStyleStr):
-        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])
+    def set_style(self, style: constants.ToolButtonStyleStr | constants.ToolButtonStyle):
+        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE.get_enum_value(style))
         for btn in self._menu_buttons:
             btn.set_style(style)
 
@@ -113,13 +113,9 @@ class ToolBarMixin(widgets.WidgetMixin):
         spacer.set_size_policy("expanding", "expanding")
         return self.addWidget(spacer)
 
-    def set_icon_size(self, size: int | datatypes.SizeType):
+    def set_icon_size(self, size: datatypes.SizeType):
         """Set size of the icons."""
-        if isinstance(size, int):
-            size = core.Size(size, size)
-        elif isinstance(size, tuple):
-            size = core.Size(*size)
-        self.setIconSize(size)
+        self.setIconSize(datatypes.to_size(size))
 
     def get_icon_size(self) -> core.Size:
         return core.Size(self.iconSize())

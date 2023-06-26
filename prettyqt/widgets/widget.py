@@ -72,10 +72,12 @@ class WidgetMixin(core.ObjectMixin):
         Returns:
             shortcut object
         """
-        if not isinstance(keysequence, QtGui.QKeySequence):
-            keysequence = gui.KeySequence(keysequence)
-        context = constants.SHORTCUT_CONTEXT[context]
-        return gui.Shortcut(keysequence, self, callback, context=context)
+        return gui.Shortcut(
+            datatypes.to_keysequence(keysequence),
+            self,
+            callback,
+            context=constants.SHORTCUT_CONTEXT.get_enum_value(context),
+        )
 
     def get_win_id(self) -> int:
         return int(self.winId())

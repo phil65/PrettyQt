@@ -133,10 +133,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
             list of widgets at given position
 
         """
-        if isinstance(pos, tuple):
-            pos = core.Point(*pos)
         widgets = []
-        while widget_at := cls.widgetAt(pos):
+        while widget_at := cls.widgetAt(datatypes.to_point(pos)):
             widgets.append(widget_at)
             # Make widget invisible to further enquiries
             widget_at.setAttribute(QtCore.Qt.WidgetAttribute.WA_TransparentForMouseEvents)

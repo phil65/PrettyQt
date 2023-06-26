@@ -64,25 +64,13 @@ class LineF(QtCore.QLineF):
                 raise KeyError(index)
 
     def set_p1(self, point: datatypes.PointFType):
-        match point:
-            case (float(), float()):
-                self.setP1(core.Point(*point))
-            case QtCore.QPointF():
-                self.setP1(point)
-            case _:
-                raise ValueError(point)
+        self.setP1(datatypes.to_pointf(point))
 
     def get_p1(self) -> core.PointF:
         return core.PointF(self.p1())
 
     def set_p2(self, point: datatypes.PointFType):
-        match point:
-            case (float(), float()):
-                self.setP2(core.Point(*point))
-            case QtCore.QPointF():
-                self.setP2(point)
-            case _:
-                raise ValueError(point)
+        self.setP2(datatypes.to_pointf(point))
 
     def get_p2(self) -> core.PointF:
         return core.PointF(self.p2())

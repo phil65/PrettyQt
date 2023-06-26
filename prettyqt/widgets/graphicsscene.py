@@ -130,11 +130,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         pen: gui.QPen | None = None,
         brush: gui.QBrush | None = None,
     ) -> widgets.GraphicsRectItem:
-        if isinstance(rect, core.QRect):
-            rect = core.RectF(rect)
-        elif isinstance(rect, tuple):
-            rect = core.RectF(*rect)
-        g_item = widgets.GraphicsRectItem(rect)
+        g_item = widgets.GraphicsRectItem(datatypes.to_rectf(rect))
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:
@@ -147,11 +143,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         line: core.QLineF | core.QLine | tuple[float, float, float, float],
         pen: gui.QPen | None = None,
     ) -> widgets.GraphicsLineItem:
-        if isinstance(line, core.QLine):
-            line = core.LineF(line)
-        elif isinstance(line, tuple):
-            line = core.LineF(*line)
-        g_item = widgets.GraphicsLineItem(line)
+        g_item = widgets.GraphicsLineItem(datatypes.to_linef(line))
         if pen is not None:
             g_item.setPen(pen)
         self.addItem(g_item)
@@ -163,11 +155,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         pen: gui.QPen | None = None,
         brush: gui.QBrush | None = None,
     ) -> widgets.GraphicsEllipseItem:
-        if isinstance(ellipse, core.QRect):
-            ellipse = core.RectF(ellipse)
-        elif isinstance(ellipse, tuple):
-            ellipse = core.RectF(*ellipse)
-        g_item = widgets.GraphicsEllipseItem(ellipse)
+        g_item = widgets.GraphicsEllipseItem(datatypes.to_rectf(ellipse))
         if brush is not None:
             g_item.setBrush(brush)
         if pen is not None:

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Any
 
 from prettyqt import constants, gui, iconprovider
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes, get_repr, serializemixin
 
 
@@ -63,13 +63,14 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
         return super().data(role)
 
     def set_size_hint(self, hint: datatypes.SizeType):
-        size_hint = QtCore.QSize(*hint) if isinstance(hint, tuple) else hint
-        super().setSizeHint(size_hint)
+        super().setSizeHint(datatypes.to_size(hint))
 
     def set_text_alignment(
         self,
-        horizontal: constants.HorizontalAlignmentStr | None = None,
-        vertical: constants.VerticalAlignmentStr | None = None,
+        horizontal: constants.HorizontalAlignmentStr
+        | constants.AlignmentFlag
+        | None = None,
+        vertical: constants.VerticalAlignmentStr | constants.AlignmentFlag | None = None,
     ):
         """Set text alignment of the checkbox.
 
@@ -77,18 +78,18 @@ class ListWidgetItem(serializemixin.SerializeMixin, QtWidgets.QListWidgetItem):
             horizontal: horizontal text alignment to use
             vertical: vertical text alignment to use
 
-        Raises:
-            InvalidParamError: invalid text alignment
         """
         match horizontal, vertical:
             case None, None:
                 return
             case None, _:
-                flag = constants.V_ALIGNMENT[vertical]
+                flag = constants.V_ALIGNMENT.get_enum_value(vertical)
             case _, None:
-                flag = constants.H_ALIGNMENT[horizontal]
+                flag = constants.H_ALIGNMENT.get_enum_value(horizontal)
             case _, _:
-                flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
+                flag = constants.V_ALIGNMENT.get_enum_value(
+                    vertical
+                ) | constants.H_ALIGNMENT.get_enum_value(horizontal)
         self.setTextAlignment(flag)
 
 

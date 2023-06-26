@@ -69,25 +69,13 @@ class Line(QtCore.QLine):
         return core.Point(self.p1())
 
     def set_p1(self, point: datatypes.PointType):
-        match point:
-            case (int(), int()):
-                self.setP1(core.Point(*point))
-            case QtCore.QPoint():
-                self.setP1(point)
-            case _:
-                raise ValueError(point)
+        self.setP1(datatypes.to_point(point))
 
     def get_p2(self) -> core.Point:
         return core.Point(self.p2())
 
     def set_p2(self, point: datatypes.PointType):
-        match point:
-            case (int(), int()):
-                self.setP2(core.Point(*point))
-            case QtCore.QPoint():
-                self.setP2(point)
-            case _:
-                raise ValueError(point)
+        self.setP2(datatypes.to_point(point))
 
     def get_center(self) -> core.Point:
         return core.Point(self.center())

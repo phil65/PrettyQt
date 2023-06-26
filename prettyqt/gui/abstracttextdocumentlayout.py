@@ -19,14 +19,12 @@ class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
         return core.RectF(self.frameBoundingRect(frame))
 
     def hit_test(self, point: datatypes.PointFType, fuzzy: bool = False) -> int | None:
-        if isinstance(point, tuple):
-            point = core.PointF(*point)
         accuracy = (
             QtCore.Qt.HitTestAccuracy.FuzzyHit
             if fuzzy
             else QtCore.Qt.HitTestAccuracy.ExactHit
         )
-        result = self.hitTest(point, accuracy)
+        result = self.hitTest(datatypes.to_pointf(point), accuracy)
         return None if result == -1 else result
 
 

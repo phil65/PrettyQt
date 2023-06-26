@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import InvalidParamError, bidict, datatypes
 
 
@@ -161,9 +161,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         return FLOW.inverse[self.flow()]
 
     def set_grid_size(self, size: datatypes.SizeType):
-        if isinstance(size, tuple):
-            size = QtCore.QSize(*size)
-        self.setGridSize(size)
+        self.setGridSize(datatypes.to_size(size))
 
     def get_grid_size(self) -> core.Size:
         return core.Size(self.gridSize())

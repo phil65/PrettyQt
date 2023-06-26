@@ -663,15 +663,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         p.highlight_inactive()
         self.setPalette(p)
 
-    def set_icon_size(self, size: int | datatypes.SizeType):
-        match size:
-            case (int(), int()):
-                size = QtCore.QSize(*size)
-            case int():
-                size = QtCore.QSize(size, size)
-            case _:
-                raise ValueError(size)
-        self.setIconSize(size)
+    def set_icon_size(self, size: datatypes.SizeType):
+        self.setIconSize(datatypes.to_size(size))
 
     def get_size_hint_for_column(self, col: int, row_limit: int = 25) -> int:
         """Get a size hint for given column by finding widest cell."""

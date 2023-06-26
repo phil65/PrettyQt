@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, iconprovider, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -23,13 +23,8 @@ class IconWidget(widgets.Label):
         self._icon = iconprovider.get_icon(_icon)
         self.setPixmap(self._icon.pixmap(self._size))
 
-    def set_icon_size(self, size: int | datatypes.SizeType):
-        match size:
-            case (int(), int()):
-                size = QtCore.QSize(*size)
-            case int():
-                size = QtCore.QSize(size, size)
-        self._size = size
+    def set_icon_size(self, size: datatypes.SizeType):
+        self._size = datatypes.to_size(size)
         self.update()
 
     def update(self, *args, **kwargs):

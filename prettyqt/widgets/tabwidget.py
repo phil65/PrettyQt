@@ -83,13 +83,9 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         """
         self.tabBar().setVisible(self.count() > 1)
 
-    def set_icon_size(self, size: int | datatypes.SizeType):
+    def set_icon_size(self, size: datatypes.SizeType):
         """Set size of the icons."""
-        if isinstance(size, int):
-            size = core.Size(size, size)
-        elif isinstance(size, tuple):
-            size = core.Size(*size)
-        self.setIconSize(size)
+        self.setIconSize(datatypes.to_size(size))
 
     def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)
@@ -170,8 +166,6 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
 
         """
         # Get the tab content
-        if isinstance(point, tuple):
-            point = QtCore.QPoint(*point)
         name = self.tabText(index)
         icon = self.tab_icon(index) or self.window().windowIcon()
         widget = self.widget(index)
@@ -187,7 +181,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         detached_tab.set_icon(icon)
         detached_tab.setGeometry(widget_rect)
         detached_tab.on_close.connect(self.attach_tab)
-        detached_tab.move(point)
+        detached_tab.move(datatypes.to_point(point))
         detached_tab.show()
 
         # Create a reference to maintain access to the detached tab

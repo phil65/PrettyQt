@@ -31,9 +31,7 @@ class PointEdit(widgets.Widget):
         )
 
     def set_value(self, value: datatypes.PointType):
-        if isinstance(value, tuple):
-            value = core.Point(*value)
-        self._value = value
+        self._value = datatypes.to_point(value)
         self.spinbox_x.set_value(value.x())
         self.spinbox_y.set_value(value.y())
 

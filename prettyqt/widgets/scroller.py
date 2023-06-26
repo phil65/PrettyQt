@@ -66,13 +66,16 @@ class Scroller(core.ObjectMixin):
         return core.PointF(self.finalPosition())
 
     def handle_input(
-        self, input_type: InputStr, position: datatypes.PointFType, timestamp: int = 0
+        self,
+        input_type: InputStr | QtWidgets.QScroller.Input,
+        position: datatypes.PointFType,
+        timestamp: int = 0,
     ) -> bool:
-        if isinstance(position, tuple):
-            position = core.PointF(*position)
         if input_type not in INPUT:
             raise InvalidParamError(input_type, INPUT)
-        return self.handleInput(INPUT[input_type], position, timestamp)
+        return self.handleInput(
+            INPUT.get_enum_value(input_type), datatypes.to_pointf(position), timestamp
+        )
 
     def get_scroller_properties(self) -> widgets.ScrollerProperties:
         return widgets.ScrollerProperties(self.scrollerProperties())
@@ -83,12 +86,12 @@ class Scroller(core.ObjectMixin):
 
     @staticmethod
     def grab_gesture(
-        target: QtCore.QObject, gesture_type: ScrollGestureTypeStr = "touch"
+        target: QtCore.QObject,
+        gesture_type: ScrollGestureTypeStr
+        | QtWidgets.QScroller.ScrollerGestureType = "touch",
     ) -> constants.GestureTypeStr:
-        if gesture_type not in SCROLLER_GESTURE_TYPE:
-            raise InvalidParamError(gesture_type, SCROLLER_GESTURE_TYPE)
         gesture = QtWidgets.QScroller.grabGesture(
-            target, SCROLLER_GESTURE_TYPE[gesture_type]
+            target, SCROLLER_GESTURE_TYPE.get_enum_value(gesture_type)
         )
         if gesture >= 256:
             gesture -= 256

@@ -5,18 +5,10 @@ from typing import Any, Literal
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import (
-    InvalidParamError,
-    bidict,
-    datatypes,
-    get_repr,
-    serializemixin,
-    listdelegators,
-)
+from prettyqt.utils import bidict, datatypes, get_repr, serializemixin, listdelegators
 
 
 mod = QtWidgets.QTreeWidgetItem
-
 
 ChildIndicatorPolicyStr = Literal["show", "dont_show", "dont_show_when_childless"]
 
@@ -127,22 +119,24 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
                 self.child(i).expand(True)
 
     def set_size_hint(self, hint: datatypes.SizeType, column: int = 0):
-        if isinstance(hint, tuple):
-            hint = QtCore.QSize(*hint)
-        self.setSizeHint(column, hint)
+        self.setSizeHint(column, datatypes.to_size(hint))
 
     def sort_children(self, column: int, descending: bool = False):
         order = constants.DESCENDING if descending else constants.ASCENDING
         self.sortChildren(column, order)
 
-    def set_data(self, data: Any, role: constants.ItemDataRoleStr | int):
-        if isinstance(role, str):
-            role = constants.ITEM_DATA_ROLE[role]
+    def set_data(
+        self, data: Any, role: constants.ItemDataRoleStr | constants.ItemDataRole | int
+    ):
+        if not isinstance(role, int):
+            role = constants.ITEM_DATA_ROLE.get_enum_value(role)
         super().setData(data, role)
 
-    def get_data(self, role: constants.ItemDataRoleStr | int) -> Any:
-        if isinstance(role, str):
-            role = constants.ITEM_DATA_ROLE[role]
+    def get_data(
+        self, role: constants.ItemDataRoleStr | constants.ItemDataRole | int
+    ) -> Any:
+        if not isinstance(role, int):
+            role = constants.ITEM_DATA_ROLE.get_enum_value(role)
         return super().data(role)
 
     def set_icon(self, icon: datatypes.IconType, column: int = 0):
@@ -167,19 +161,16 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def get_icon(self, column: int = 0) -> gui.Icon | None:
         return None if (icon := self.icon(column)).isNull() else gui.Icon(icon)
 
-    def set_checkstate(self, state: constants.CheckStateStr, column: int = 0):
+    def set_checkstate(
+        self, state: constants.CheckStateStr | constants.CheckState, column: int = 0
+    ):
         """Set checkstate of the checkbox.
 
         Args:
             state: checkstate to use
             column: column
-
-        Raises:
-            InvalidParamError: invalid checkstate
         """
-        if state not in constants.CHECK_STATE:
-            raise InvalidParamError(state, constants.CHECK_STATE)
-        self.setCheckState(column, constants.CHECK_STATE[state])
+        self.setCheckState(column, constants.CHECK_STATE.get_enum_value(state))
 
     def get_checkstate(self, column: int = 0) -> constants.CheckStateStr:
         """Return checkstate.
@@ -192,18 +183,15 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
         """
         return constants.CHECK_STATE.inverse[self.checkState(column)]
 
-    def set_child_indicator_policy(self, policy: ChildIndicatorPolicyStr):
+    def set_child_indicator_policy(
+        self, policy: ChildIndicatorPolicyStr | mod.ChildIndicatorPolicy
+    ):
         """Set the child indicator policy.
 
         Args:
             policy: child indicator policy
-
-        Raises:
-            InvalidParamError: policy does not exist
         """
-        if policy not in CHILD_INDICATOR_POLICY:
-            raise InvalidParamError(policy, CHILD_INDICATOR_POLICY)
-        self.setChildIndicatorPolicy(CHILD_INDICATOR_POLICY[policy])
+        self.setChildIndicatorPolicy(CHILD_INDICATOR_POLICY.get_enum_value(policy))
 
     def get_child_indicator_policy(self) -> ChildIndicatorPolicyStr:
         """Return current child indicator policy.

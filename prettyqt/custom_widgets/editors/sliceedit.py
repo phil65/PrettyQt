@@ -46,7 +46,6 @@ class SliceEdit(widgets.Widget):
     def set_value(self, value: slice | tuple[int | None, int | None, int | None]):
         if isinstance(value, tuple):
             value = slice(*value)
-        print(value)
         self.checkbox_start.set_value(value.start is not None)
         self.checkbox_stop.set_value(value.stop is not None)
         self.checkbox_step.set_value(value.step is not None)

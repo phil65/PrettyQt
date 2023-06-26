@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 RemoveBehaviourStr = Literal["left_tab", "right_tab", "previous_tab"]
@@ -91,8 +91,10 @@ class TabBarMixin(widgets.WidgetMixin):
     def __setitem__(self, index: tuple[int, PositionStr], value: widgets.QWidget | None):
         self.set_tab(index[0], index[1], value)
 
-    def get_tab_button(self, index: int, position: PositionStr) -> widgets.QWidget:
-        return self.tabButton(index[0], POSITIONS[index[1]])
+    def get_tab_button(
+        self, index: int, position: PositionStr | widgets.QTabBar.ButtonPosition
+    ) -> widgets.QWidget:
+        return self.tabButton(index[0], POSITIONS.get_enum_value(index[1]))
 
     #  Send the tab_doubleclicked when a tab is double clicked
     def mouseDoubleClickEvent(self, event):
@@ -101,23 +103,24 @@ class TabBarMixin(widgets.WidgetMixin):
         pos = gui.QCursor.pos()
         self.tab_doubleclicked.emit(tab, pos)
 
-    def set_icon_size(self, size: int | datatypes.SizeType):
+    def set_icon_size(self, size: datatypes.SizeType):
         """Set size of the icons."""
-        if isinstance(size, int):
-            size = core.Size(size, size)
-        elif isinstance(size, tuple):
-            size = core.Size(*size)
-        self.setIconSize(size)
+        self.setIconSize(datatypes.to_size(size))
 
     def get_icon_size(self) -> core.Size:
         return core.Size(self.iconSize())
 
     def set_tab(
-        self, index: int, position: PositionStr, widget: widgets.QWidget | None
+        self,
+        index: int,
+        position: PositionStr | widgets.QTabBar.ButtonPosition,
+        widget: widgets.QWidget | None,
     ) -> None:
-        self.setTabButton(index, POSITIONS[position], widget)  # type: ignore
+        self.setTabButton(index, POSITIONS.get_enum_value(position), widget)
 
-    def set_selection_behavior_on_remove(self, mode: RemoveBehaviourStr) -> None:
+    def set_selection_behavior_on_remove(
+        self, mode: RemoveBehaviourStr | widgets.QTabBar.SelectionBehavior
+    ) -> None:
         """Set the remove hehaviour.
 
         What tab should be set as current when removeTab is called
@@ -126,9 +129,7 @@ class TabBarMixin(widgets.WidgetMixin):
         Args:
             mode: new remove behaviour
         """
-        if mode not in REMOVE_BEHAVIOUR:
-            raise InvalidParamError(mode, REMOVE_BEHAVIOUR)
-        self.setSelectionBehaviorOnRemove(REMOVE_BEHAVIOUR[mode])
+        self.setSelectionBehaviorOnRemove(REMOVE_BEHAVIOUR.get_enum_value(mode))
 
     def get_remove_behaviour(self) -> RemoveBehaviourStr:
         """Return remove behaviour.
@@ -138,7 +139,9 @@ class TabBarMixin(widgets.WidgetMixin):
         """
         return REMOVE_BEHAVIOUR.inverse[self.selectionBehaviorOnRemove()]
 
-    def set_elide_mode(self, mode: constants.TextElideModeStr) -> None:
+    def set_elide_mode(
+        self, mode: constants.TextElideModeStr | constants.TextElideMode
+    ) -> None:
         """Set elide mode.
 
         Args:
@@ -147,9 +150,7 @@ class TabBarMixin(widgets.WidgetMixin):
         Raises:
             InvalidParamError: invalid elide mode
         """
-        if mode not in constants.TEXT_ELIDE_MODE:
-            raise InvalidParamError(mode, constants.TEXT_ELIDE_MODE)
-        self.setElideMode(constants.TEXT_ELIDE_MODE[mode])
+        self.setElideMode(constants.TEXT_ELIDE_MODE.get_enum_value(mode))
 
     def get_elide_mode(self) -> constants.TextElideModeStr:
         """Return elide mode.

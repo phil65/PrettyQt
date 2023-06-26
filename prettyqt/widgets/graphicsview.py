@@ -160,9 +160,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         Raises:
             InvalidParamError: mode does not exist
         """
-        if mode not in VIEWPORT_ANCHOR:
-            raise InvalidParamError(mode, VIEWPORT_ANCHOR)
-        self.setTransformationAnchor(VIEWPORT_ANCHOR[mode])
+        self.setTransformationAnchor(VIEWPORT_ANCHOR.get_enum_value(mode))
 
     def get_transformation_anchor(self) -> ViewportAnchorStr:
         """Return current transformation anchor.
@@ -173,9 +171,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         return VIEWPORT_ANCHOR.inverse[self.transformationAnchor()]
 
     def set_transform(self, transform: datatypes.TransformType, combine: bool = False):
-        if isinstance(transform, tuple):
-            transform = gui.Transform(*transform)
-        self.setTransform(transform, combine)
+        self.setTransform(datatypes.to_transform(transform), combine)
 
     def set_resize_anchor(self, mode: ViewportAnchorStr):
         """Set how the view should position the scene during resizes.
