@@ -53,6 +53,13 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
             case _:
                 self.setExpanded(index, expanded)
 
+    def expand_all(self, depth: int | None = None):
+        if depth is None:
+            super().expandAll()
+        else:
+            for idx in self.model().iter_tree(root_index=self.rootIndex(), depth=depth):
+                self.setExpanded(idx, True)
+
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
         """Hack to avoid direct sort when setting sorting enabled."""
         model = self.model()
