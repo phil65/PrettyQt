@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, get_repr, listdelegators
+from prettyqt.utils import datatypes, get_repr, listdelegators
 
 
 # from typing import Any
@@ -124,23 +124,17 @@ class ToolBarMixin(widgets.WidgetMixin):
         with self.edit_font() as font:
             font.set_size(size)
 
-    def is_area_allowed(self, area: constants.ToolbarAreaStr) -> bool:
+    def is_area_allowed(
+        self, area: constants.ToolbarAreaStr | constants.ToolBarArea
+    ) -> bool:
         """Check if toolbar is allowed at specified area.
 
         Args:
             area: area of the toolbar
-
-        Raises:
-            InvalidParamError: area does not exist
         """
-        if area not in constants.TOOLBAR_AREA:
-            raise InvalidParamError(area, constants.TOOLBAR_AREA)
-        return self.isAreaAllowed(constants.TOOLBAR_AREA[area])
+        return self.isAreaAllowed(constants.TOOLBAR_AREA.get_enum_value(area))
 
     def set_allowed_areas(self, *areas: constants.ToolbarAreaStr):
-        for area in areas:
-            if area not in constants.TOOLBAR_AREA:
-                raise InvalidParamError(area, constants.TOOLBAR_AREA)
         flag = constants.TOOLBAR_AREA.merge_flags(areas)
         self.setAllowedAreas(flag)
 

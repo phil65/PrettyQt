@@ -4,32 +4,32 @@ from typing import Literal
 
 from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
+from prettyqt.utils import bidict, colors, datatypes
 
 
-VIEW_MODE = bidict(
+ViewModeStr = Literal["default", "tabbed"]
+
+VIEW_MODE: bidict[ViewModeStr, QtWidgets.QMdiArea.ViewMode] = bidict(
     default=QtWidgets.QMdiArea.ViewMode.SubWindowView,
     tabbed=QtWidgets.QMdiArea.ViewMode.TabbedView,
 )
 
-ViewModeStr = Literal["default", "tabbed"]
+WindowOrderStr = Literal["creation", "stacking", "activation_history"]
 
-WINDOW_ORDER = bidict(
+WINDOW_ORDER: bidict[WindowOrderStr, QtWidgets.QMdiArea.WindowOrder] = bidict(
     creation=QtWidgets.QMdiArea.WindowOrder.CreationOrder,
     stacking=QtWidgets.QMdiArea.WindowOrder.StackingOrder,
     activation_history=QtWidgets.QMdiArea.WindowOrder.ActivationHistoryOrder,
 )
 
-WindowOrderStr = Literal["creation", "stacking", "activation_history"]
+TabPositionStr = Literal["north", "south", "west", "east"]
 
-TAB_POSITION = bidict(
+TAB_POSITION: bidict[TabPositionStr, QtWidgets.QTabWidget.TabPosition] = bidict(
     north=QtWidgets.QTabWidget.TabPosition.North,
     south=QtWidgets.QTabWidget.TabPosition.South,
     west=QtWidgets.QTabWidget.TabPosition.West,
     east=QtWidgets.QTabWidget.TabPosition.East,
 )
-
-TabPositionStr = Literal["north", "south", "west", "east"]
 
 
 class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
@@ -37,18 +37,13 @@ class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
         self.add(other)
         return self
 
-    def set_view_mode(self, mode: ViewModeStr):
+    def set_view_mode(self, mode: ViewModeStr | QtWidgets.QMdiArea.ViewMode):
         """Set view mode for the MDI area.
 
         Args:
             mode: view mode to use
-
-        Raises:
-            InvalidParamError: view mode does not exist
         """
-        if mode not in VIEW_MODE:
-            raise InvalidParamError(mode, VIEW_MODE)
-        self.setViewMode(VIEW_MODE[mode])
+        self.setViewMode(VIEW_MODE.get_enum_value(mode))
 
     def get_view_mode(self) -> ViewModeStr:
         """Return current view mode.
@@ -58,18 +53,13 @@ class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
         """
         return VIEW_MODE.inverse[self.viewMode()]
 
-    def set_window_order(self, mode: WindowOrderStr):
+    def set_window_order(self, mode: WindowOrderStr | QtWidgets.QMdiArea.WindowOrder):
         """Set the window order behaviour for the MDI area.
 
         Args:
             mode: window order behaviour to use
-
-        Raises:
-            InvalidParamError: window order mode not existing.
         """
-        if mode not in WINDOW_ORDER:
-            raise InvalidParamError(mode, WINDOW_ORDER)
-        self.setActivationOrder(WINDOW_ORDER[mode])
+        self.setActivationOrder(WINDOW_ORDER.get_enum_value(mode))
 
     def get_window_order(self) -> WindowOrderStr:
         """Return current window order.
@@ -79,18 +69,15 @@ class MdiArea(widgets.AbstractScrollAreaMixin, QtWidgets.QMdiArea):
         """
         return WINDOW_ORDER.inverse[self.activationOrder()]
 
-    def set_tab_position(self, position: TabPositionStr):
+    def set_tab_position(
+        self, position: TabPositionStr | QtWidgets.QTabWidget.TabPosition
+    ):
         """Set tab position for the MDI area.
 
         Args:
             position: tabs position to use
-
-        Raises:
-            InvalidParamError: tab position does not exist
         """
-        if position not in TAB_POSITION:
-            raise InvalidParamError(position, TAB_POSITION)
-        self.setTabPosition(TAB_POSITION[position])
+        self.setTabPosition(TAB_POSITION.get_enum_value(position))
 
     def get_tab_position(self) -> TabPositionStr:
         """Return current tab position.

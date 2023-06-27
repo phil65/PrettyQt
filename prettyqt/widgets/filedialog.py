@@ -6,7 +6,7 @@ from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 FileModeStr = Literal["existing_file", "existing_files", "any_file", "directory"]
@@ -40,7 +40,6 @@ ViewModeStr = Literal["detail", "list"]
 VIEW_MODE: bidict[ViewModeStr, QtWidgets.QFileDialog.ViewMode] = bidict(
     detail=QtWidgets.QFileDialog.ViewMode.Detail, list=QtWidgets.QFileDialog.ViewMode.List
 )
-
 
 
 class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
@@ -78,18 +77,13 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         }
         return maps
 
-    def set_accept_mode(self, mode: AcceptModeStr):
+    def set_accept_mode(self, mode: AcceptModeStr | QtWidgets.QFileDialog.AcceptMode):
         """Set accept mode.
 
         Args:
             mode: accept mode to use
-
-        Raises:
-            InvalidParamError: invalid accept mode
         """
-        if mode not in ACCEPT_MODE:
-            raise InvalidParamError(mode, ACCEPT_MODE)
-        self.setAcceptMode(ACCEPT_MODE[mode])
+        self.setAcceptMode(ACCEPT_MODE.get_enum_value(mode))
 
     def get_accept_mode(self) -> AcceptModeStr:
         """Return accept mode.
@@ -99,18 +93,13 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         """
         return ACCEPT_MODE.inverse[self.acceptMode()]
 
-    def set_view_mode(self, mode: ViewModeStr):
+    def set_view_mode(self, mode: ViewModeStr | QtWidgets.QFileDialog.ViewMode):
         """Set view mode.
 
         Args:
             mode: view mode to use
-
-        Raises:
-            InvalidParamError: invalid view mode
         """
-        if mode not in VIEW_MODE:
-            raise InvalidParamError(mode, VIEW_MODE)
-        self.setViewMode(VIEW_MODE[mode])
+        self.setViewMode(VIEW_MODE.get_enum_value(mode))
 
     def get_view_mode(self) -> ViewModeStr:
         """Return view mode.
@@ -120,24 +109,24 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         """
         return VIEW_MODE.inverse[self.viewMode()]
 
-    def set_label_text(self, label: LabelStr, text: str):
+    def set_label_text(
+        self, label: LabelStr | QtWidgets.QFileDialog.DialogLabel, text: str
+    ):
         """Set the label text for button label.
 
         Args:
             label: button to set text for
             text: text to use
         """
-        if label not in LABEL:
-            raise InvalidParamError(label, LABEL)
-        self.setLabelText(LABEL[label], text)
+        self.setLabelText(LABEL.get_enum_value(label), text)
 
-    def get_label_text(self, label: LabelStr) -> str:
+    def get_label_text(self, label: LabelStr | QtWidgets.QFileDialog.DialogLabel) -> str:
         """Return label text.
 
         Returns:
             label text
         """
-        return self.labelText(LABEL[label])
+        return self.labelText(LABEL.get_enum_value(label))
 
     def get_file_mode(self) -> FileModeStr:
         """Return file mode.
@@ -147,13 +136,13 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         """
         return FILE_MODE.inverse[self.fileMode()]
 
-    def set_file_mode(self, mode: FileModeStr):
+    def set_file_mode(self, mode: FileModeStr | QtWidgets.QFileDialog.FileMode):
         """Set the file mode of the dialog.
 
         Args:
             mode: mode to use
         """
-        self.setFileMode(FILE_MODE[mode])
+        self.setFileMode(FILE_MODE.get_enum_value(mode))
 
     def selected_files(self) -> list[pathlib.Path]:
         return [pathlib.Path(p) for p in self.selectedFiles()]
@@ -211,9 +200,6 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         self.setDirectory(path)
 
     def set_filter(self, *filters: core.dir.FilterStr):
-        for item in filters:
-            if item not in core.dir.FILTERS:
-                raise InvalidParamError(item, core.dir.FILTERS)
         flags = core.dir.FILTERS.merge_flags(filters)
         self.setFilter(flags)
 

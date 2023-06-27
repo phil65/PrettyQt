@@ -7,7 +7,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import bidict, listdelegators, InvalidParamError
+from prettyqt.utils import bidict, listdelegators
 
 
 DOCK_OPTION = bidict(
@@ -135,20 +135,26 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
             case QtWidgets.QWidget():
                 self.centralWidget().layout().add(widget, **kwargs)
 
-    def get_corner(self, corner: constants.CornerStr) -> constants.DockWidgetAreaStr:
-        corner_flag = constants.CORNER[corner]
+    def get_corner(
+        self, corner: constants.CornerStr | constants.Corner
+    ) -> constants.DockWidgetAreaStr:
+        corner_flag = constants.CORNER.get_enum_value(corner)
         area = self.corner(corner_flag)
         return constants.DOCK_WIDGET_AREAS.inverse[area]
 
-    def set_corner(self, corner: constants.CornerStr, area: constants.DockWidgetAreaStr):
-        corner_flag = constants.CORNER[corner]
-        area_flag = constants.DOCK_WIDGET_AREAS[area]
+    def set_corner(
+        self,
+        corner: constants.CornerStr | constants.Corner,
+        area: constants.DockWidgetAreaStr | constants.DockWidgetArea,
+    ):
+        corner_flag = constants.CORNER.get_enum_value(corner)
+        area_flag = constants.DOCK_WIDGET_AREAS.get_enum_value(area)
         self.setCorner(corner_flag, area_flag)
 
     def add_toolbar(
         self,
         toolbar: QtWidgets.QToolBar,
-        area: constants.ToolbarAreaStr | Literal["auto"] = "auto",
+        area: constants.ToolbarAreaStr | constants.ToolBarArea | Literal["auto"] = "auto",
     ):
         """Adds a toolbar to the mainmenu at specified area.
 
@@ -158,20 +164,17 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         """
         if area == "auto":
             area = self._get_preferred_toolbar_position()
-        self.addToolBar(constants.TOOLBAR_AREA[area], toolbar)
+        self.addToolBar(constants.TOOLBAR_AREA.get_enum_value(area), toolbar)
 
-    def add_toolbar_break(self, position: constants.ToolbarAreaStr = "top"):
+    def add_toolbar_break(
+        self, position: constants.ToolbarAreaStr | constants.ToolBarArea = "top"
+    ):
         """Adds a toolbar break to the given area behind the last item.
 
         Args:
             position: position of the toolbar
-
-        Raises:
-            InvalidParamError: position does not exist
         """
-        if position not in constants.TOOLBAR_AREA:
-            raise InvalidParamError(position, constants.TOOLBAR_AREA)
-        self.addToolBarBreak(constants.TOOLBAR_AREA[position])
+        self.addToolBarBreak(constants.TOOLBAR_AREA.get_enum_value(position))
 
     def load_window_state(self, recursive: bool = False) -> bool:
         settings = core.Settings()
@@ -215,8 +218,8 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         self,
         name: str,
         title: str,
-        layout: widgets.layout.LayoutTypeStr = "horizontal",
-        position: constants.DockWidgetAreaStr = "left",
+        layout: widgets.layout.LayoutTypeStr | widgets.QLayout = "horizontal",
+        position: constants.DockWidgetAreaStr | constants.DockWidgetArea = "left",
     ) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, object_name=name, window_title=title)
         widget = widgets.Widget()
@@ -229,7 +232,9 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     def add_dockwidget(
         self,
         widget: QtWidgets.QWidget,
-        position: constants.DockWidgetAreaStr | Literal["auto"] = "auto",
+        position: constants.DockWidgetAreaStr
+        | constants.DockWidgetArea
+        | Literal["auto"] = "auto",
         **kwargs,
     ):
         if position == "auto":
@@ -237,10 +242,14 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         if not isinstance(widget, QtWidgets.QDockWidget):
             dock_widget = widgets.DockWidget(self, **kwargs)
             dock_widget.set_widget(widget)
-            self.addDockWidget(constants.DOCK_WIDGET_AREA[position], dock_widget)
+            self.addDockWidget(
+                constants.DOCK_WIDGET_AREA.get_enum_value(position), dock_widget
+            )
             return dock_widget
         else:
-            self.addDockWidget(constants.DOCK_WIDGET_AREA[position], widget)
+            self.addDockWidget(
+                constants.DOCK_WIDGET_AREA.get_enum_value(position), widget
+            )
 
     def remove(
         self,
@@ -271,8 +280,10 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         area = self.toolBarArea(widget)
         return constants.TOOLBAR_AREA.inverse[area]
 
-    def set_tool_button_style(self, style: constants.ToolButtonStyleStr):
-        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])
+    def set_tool_button_style(
+        self, style: constants.ToolButtonStyleStr | constants.ToolButtonStyle
+    ):
+        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE.get_enum_value(style))
 
     def get_tool_button_style(self) -> constants.ToolButtonStyleStr:
         """Return current tool button style.
@@ -282,18 +293,15 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         """
         return constants.TOOLBUTTON_STYLE.inverse[self.toolButtonStyle()]
 
-    def set_tab_shape(self, shape: widgets.tabwidget.TabShapeStr):
+    def set_tab_shape(
+        self, shape: widgets.tabwidget.TabShapeStr | widgets.QTabWidget.TabShape
+    ):
         """Set tab shape for the tabwidget.
 
         Args:
             shape: tab shape to use
-
-        Raises:
-            InvalidParamError: tab shape does not exist
         """
-        if shape not in widgets.tabwidget.TAB_SHAPES:
-            raise InvalidParamError(shape, widgets.tabwidget.TAB_SHAPES)
-        self.setTabShape(widgets.tabwidget.TAB_SHAPES[shape])
+        self.setTabShape(widgets.tabwidget.TAB_SHAPES.get_enum_value(shape))
 
     def get_tab_shape(self) -> widgets.tabwidget.TabShapeStr:
         """Return tab shape.

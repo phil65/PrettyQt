@@ -13,7 +13,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes, listdelegators
+from prettyqt.utils import datatypes, listdelegators
 
 
 logger = logging.getLogger(__name__)
@@ -233,27 +233,24 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         super().post_event(obj, event, priority)
 
     @classmethod
-    def get_style_icon(cls, icon: widgets.style.StandardPixmapStr) -> gui.Icon:
+    def get_style_icon(
+        cls, icon: widgets.style.StandardPixmapStr | widgets.QStyle.StandardPixmap
+    ) -> gui.Icon:
         style = cls.style()
         # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
-        if icon not in widgets.style.STANDARD_PIXMAP:
-            raise InvalidParamError(icon, widgets.style.STANDARD_PIXMAP)
-        icon = style.standardIcon(widgets.style.STANDARD_PIXMAP[icon])
+        icon = style.standardIcon(widgets.style.STANDARD_PIXMAP.get_enum_value(icon))
         return gui.Icon(icon)
 
-    def set_effect_enabled(self, effect: constants.UiEffectStr, enabled: bool = True):
+    def set_effect_enabled(
+        self, effect: constants.UiEffectStr | constants.UIEffect, enabled: bool = True
+    ):
         """Set the enabled state of a desktop effect.
 
         Args:
             effect: desktop effect to set
             enabled: new state
-
-        Raises:
-            InvalidParamError: invalid desktop effect
         """
-        if effect not in constants.UI_EFFECTS:
-            raise InvalidParamError(effect, constants.UI_EFFECTS)
-        self.setEffectEnabled(constants.UI_EFFECTS[effect])
+        self.setEffectEnabled(constants.UI_EFFECTS.get_enum_value(effect))
 
     def is_effect_enabled(self, effect: constants.UiEffectStr) -> bool:
         """Return desktop effect state.
@@ -263,18 +260,15 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         """
         return self.isEffectEnabled(constants.UI_EFFECTS[effect])
 
-    def set_navigation_mode(self, mode: constants.NavigationModeStr):
+    def set_navigation_mode(
+        self, mode: constants.NavigationModeStr | constants.NavigationMode
+    ):
         """Set the navigation mode.
 
         Args:
             mode: navigation mode to use
-
-        Raises:
-            InvalidParamError: invalid navigation mode
         """
-        if mode not in constants.NAVIGATION_MODES:
-            raise InvalidParamError(mode, constants.NAVIGATION_MODES)
-        self.setNavigationMode(constants.NAVIGATION_MODES[mode])
+        self.setNavigationMode(constants.NAVIGATION_MODES.get_enum_value(mode))
 
     def get_navigation_mode(self) -> constants.NavigationModeStr:
         """Return navigation mode.

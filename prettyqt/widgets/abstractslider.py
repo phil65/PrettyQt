@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 SliderActionStr = Literal[
@@ -67,18 +67,15 @@ class AbstractSliderMixin(widgets.WidgetMixin):
         """Set slider orientation to vertical."""
         self.setOrientation(constants.VERTICAL)
 
-    def set_orientation(self, orientation: constants.OrientationStr):
+    def set_orientation(
+        self, orientation: constants.OrientationStr | constants.Orientation
+    ):
         """Set the orientation of the slider.
 
         Args:
             orientation: orientation for the slider
-
-        Raises:
-            InvalidParamError: orientation does not exist
         """
-        if orientation not in constants.ORIENTATION:
-            raise InvalidParamError(orientation, constants.ORIENTATION)
-        self.setOrientation(constants.ORIENTATION[orientation])
+        self.setOrientation(constants.ORIENTATION.get_enum_value(orientation))
 
     def get_orientation(self) -> constants.OrientationStr:
         """Return current orientation.
@@ -103,7 +100,10 @@ class AbstractSliderMixin(widgets.WidgetMixin):
         self.setSingleStep(step_size)
 
     def set_repeat_action(
-        self, action: SliderActionStr, threshold: int = 500, repeat_time: int = 50
+        self,
+        action: SliderActionStr | QtWidgets.QAbstractSlider.SliderAction,
+        threshold: int = 500,
+        repeat_time: int = 50,
     ):
         """Set the repeat action.
 
@@ -111,13 +111,8 @@ class AbstractSliderMixin(widgets.WidgetMixin):
             action: repeat action
             threshold: initial delay in ms
             repeat_time: repeat time in ms
-
-        Raises:
-            InvalidParamError: invalid repeat action
         """
-        if action not in SLIDER_ACTION:
-            raise InvalidParamError(action, SLIDER_ACTION)
-        self.setRepeatAction(SLIDER_ACTION[action], threshold, repeat_time)
+        self.setRepeatAction(SLIDER_ACTION.get_enum_value(action), threshold, repeat_time)
 
     def get_repeat_action(self) -> SliderActionStr:
         """Get current repeat action.
@@ -127,19 +122,19 @@ class AbstractSliderMixin(widgets.WidgetMixin):
         """
         return SLIDER_ACTION.inverse[self.repeatAction()]
 
-    def trigger_action(self, action: SliderActionStr):
+    def trigger_action(
+        self, action: SliderActionStr | QtWidgets.QAbstractSlider.SliderAction
+    ):
         """Trigger slider action."""
-        if action not in SLIDER_ACTION:
-            raise InvalidParamError(action, SLIDER_ACTION)
-        self.triggerAction(SLIDER_ACTION[action])
+        self.triggerAction(SLIDER_ACTION.get_enum_value(action))
 
-    def get_value(self):
+    def get_value(self) -> int:
         return self.value()
 
     def set_value(self, value: int):
         self.setValue(value)
 
-    def on_scrollbar_range_changed(self, minval, maxval):
+    def on_scrollbar_range_changed(self, minval: int, maxval: int):
         if self.value() >= self.maximum() - 1:
             self.setValue(maxval)
 

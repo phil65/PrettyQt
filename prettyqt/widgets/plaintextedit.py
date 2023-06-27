@@ -4,14 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import (
-    InvalidParamError,
-    bidict,
-    colors,
-    datatypes,
-    helpers,
-    texteditselecter,
-)
+from prettyqt.utils import bidict, colors, datatypes, helpers, texteditselecter
 
 
 LINE_WRAP_MODE = bidict(
@@ -133,18 +126,15 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
                 painter.drawRect(r)
         super().paintEvent(event)
 
-    def set_word_wrap_mode(self, mode: gui.textoption.WordWrapModeStr):
+    def set_word_wrap_mode(
+        self, mode: gui.textoption.WordWrapModeStr | gui.QTextOption.WrapMode
+    ):
         """Set word wrap mode.
 
         Args:
             mode: word wrap mode to use
-
-        Raises:
-            InvalidParamError: wrap mode does not exist
         """
-        if mode not in gui.textoption.WORD_WRAP_MODE:
-            raise InvalidParamError(mode, gui.textoption.WORD_WRAP_MODE)
-        self.setWordWrapMode(gui.textoption.WORD_WRAP_MODE[mode])
+        self.setWordWrapMode(gui.textoption.WORD_WRAP_MODE.get_enum_value(mode))
 
     def get_word_wrap_mode(self) -> gui.textoption.WordWrapModeStr:
         """Get the current word wrap mode.
@@ -154,18 +144,15 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         """
         return gui.textoption.WORD_WRAP_MODE.inverse[self.wordWrapMode()]
 
-    def set_line_wrap_mode(self, mode: LineWrapModeStr):
+    def set_line_wrap_mode(
+        self, mode: LineWrapModeStr | QtWidgets.QPlainTextEdit.LineWrapMode
+    ):
         """Set line wrap mode.
 
         Args:
             mode: line wrap mode to use
-
-        Raises:
-            InvalidParamError: line wrap mode does not exist
         """
-        if mode not in LINE_WRAP_MODE:
-            raise InvalidParamError(mode, LINE_WRAP_MODE)
-        self.setLineWrapMode(LINE_WRAP_MODE[mode])
+        self.setLineWrapMode(LINE_WRAP_MODE.get_enum_value(mode))
 
     def get_line_wrap_mode(self) -> LineWrapModeStr:
         """Get the current wrap mode.

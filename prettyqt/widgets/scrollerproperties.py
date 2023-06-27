@@ -5,7 +5,7 @@ from typing import Any, Literal
 from collections.abc import Iterator
 
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 mod = QtWidgets.QScrollerProperties
@@ -77,10 +77,10 @@ SCROLL_METRIC: bidict[ScrollmetricStr, mod.ScrollMetric] = bidict(
 
 
 class ScrollerProperties(QtWidgets.QScrollerProperties):
-    def __getitem__(self, metric: ScrollmetricStr):
+    def __getitem__(self, metric: ScrollmetricStr | mod.ScrollMetric):
         return self.get_scroll_metric(metric)
 
-    def __setitem__(self, metric: ScrollmetricStr, value: Any):
+    def __setitem__(self, metric: ScrollmetricStr | mod.ScrollMetric, value: Any):
         self.set_scroll_metric(metric, value)
 
     def keys(self) -> ScrollmetricStr:
@@ -89,36 +89,25 @@ class ScrollerProperties(QtWidgets.QScrollerProperties):
     def __iter__(self) -> Iterator[ScrollmetricStr]:
         return iter(SCROLL_METRIC.keys())
 
-    def set_scroll_metric(self, metric: ScrollmetricStr, value: Any):
+    def set_scroll_metric(self, metric: ScrollmetricStr | mod.ScrollMetric, value: Any):
         """Set scroll metric.
 
         Args:
             metric: Scroll metric to set
             value: Value to set
-
-        Raises:
-            InvalidParamError: metric does not exist
-
         """
-        if metric not in SCROLL_METRIC:
-            raise InvalidParamError(metric, SCROLL_METRIC)
-        self.setScrollMetric(SCROLL_METRIC[metric], value)
+        self.setScrollMetric(SCROLL_METRIC.get_enum_value(metric), value)
 
-    def get_scroll_metric(self, metric: ScrollmetricStr) -> Any:
+    def get_scroll_metric(self, metric: ScrollmetricStr | mod.ScrollMetric) -> Any:
         """Return scroll metric.
 
         Args:
             metric: Scroll metric to get
 
-        Raises:
-            InvalidParamError: metric does not exist
-
         Returns:
             state
         """
-        if metric not in SCROLL_METRIC:
-            raise InvalidParamError(metric, SCROLL_METRIC)
-        return self.scrollMetric(SCROLL_METRIC[metric])
+        return self.scrollMetric(SCROLL_METRIC.get_enum_value(metric))
 
     def get_scroll_metrics(self) -> dict[ScrollmetricStr, Any]:
         return {i: self.get_scroll_metric(i) for i in SCROLL_METRIC}
