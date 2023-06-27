@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtNetwork
 from prettyqt.utils import datatypes, get_repr
 
 
@@ -25,7 +25,7 @@ class NetworkCookieJar(core.ObjectMixin, QtNetwork.QNetworkCookieJar):
     def set_cookies_from_url(
         self, cookies: list[QtNetwork.QNetworkCookie], url: datatypes.UrlType
     ) -> bool:
-        return self.setCookiesFromUrl(cookies, QtCore.QUrl(url))
+        return self.setCookiesFromUrl(cookies, core.QUrl(url))
 
 
 if __name__ == "__main__":

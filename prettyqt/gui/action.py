@@ -6,23 +6,22 @@ import os
 from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
 ActionEventStr = Literal["trigger", "hover"]
 
-ACTION_EVENT: bidict[ActionEventStr, QtGui.QAction.ActionEvent] = bidict(
-    trigger=QtGui.QAction.ActionEvent.Trigger,
-    hover=QtGui.QAction.ActionEvent.Hover,
+ACTION_EVENT: bidict[ActionEventStr, gui.QAction.ActionEvent] = bidict(
+    trigger=gui.QAction.ActionEvent.Trigger,
+    hover=gui.QAction.ActionEvent.Hover,
 )
 
 PriorityStr = Literal["low", "normal", "high"]
 
-PRIORITIES: bidict[PriorityStr, QtGui.QAction.Priority] = bidict(
-    low=QtGui.QAction.Priority.LowPriority,
-    normal=QtGui.QAction.Priority.NormalPriority,
-    high=QtGui.QAction.Priority.HighPriority,
+PRIORITIES: bidict[PriorityStr, gui.QAction.Priority] = bidict(
+    low=gui.QAction.Priority.LowPriority,
+    normal=gui.QAction.Priority.NormalPriority,
+    high=gui.QAction.Priority.HighPriority,
 )
 
 RoleStr = Literal[
@@ -35,14 +34,14 @@ RoleStr = Literal[
     "quit",
 ]
 
-ROLES: bidict[RoleStr, QtGui.QAction.MenuRole] = bidict(
-    none=QtGui.QAction.MenuRole.NoRole,
-    text_heuristic=QtGui.QAction.MenuRole.TextHeuristicRole,
-    application_specific=QtGui.QAction.MenuRole.ApplicationSpecificRole,
-    about_qt=QtGui.QAction.MenuRole.AboutQtRole,
-    about=QtGui.QAction.MenuRole.AboutRole,
-    preferences=QtGui.QAction.MenuRole.PreferencesRole,
-    quit=QtGui.QAction.MenuRole.QuitRole,
+ROLES: bidict[RoleStr, gui.QAction.MenuRole] = bidict(
+    none=gui.QAction.MenuRole.NoRole,
+    text_heuristic=gui.QAction.MenuRole.TextHeuristicRole,
+    application_specific=gui.QAction.MenuRole.ApplicationSpecificRole,
+    about_qt=gui.QAction.MenuRole.AboutQtRole,
+    about=gui.QAction.MenuRole.AboutRole,
+    preferences=gui.QAction.MenuRole.PreferencesRole,
+    quit=gui.QAction.MenuRole.QuitRole,
 )
 
 
@@ -110,7 +109,7 @@ class ActionMixin(core.ObjectMixin):
             if size is None:
                 tooltip = f"<img src={path!r}>"
             else:
-                if isinstance(size, QtCore.QSize):
+                if isinstance(size, core.QSize):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         tooltip = tooltip.replace("\n", "<br/>")
@@ -131,7 +130,7 @@ class ActionMixin(core.ObjectMixin):
 
     setIcon = set_icon
 
-    def set_shortcut(self, shortcut: None | QtGui.QKeySequence | str):
+    def set_shortcut(self, shortcut: None | gui.QKeySequence | str):
         if shortcut is None:
             shortcut = ""
         if isinstance(shortcut, str):
@@ -165,7 +164,7 @@ class ActionMixin(core.ObjectMixin):
     def set_menu(self, menu):
         self.setMenu(menu)
 
-    def set_priority(self, priority: PriorityStr | QtGui.QAction.Priority):
+    def set_priority(self, priority: PriorityStr | gui.QAction.Priority):
         """Set priority of the action.
 
         Args:
@@ -203,7 +202,7 @@ class ActionMixin(core.ObjectMixin):
         """
         return constants.SHORTCUT_CONTEXT.inverse[super().shortcutContext()]
 
-    def set_menu_role(self, role: RoleStr | QtGui.QAction.MenuRole):
+    def set_menu_role(self, role: RoleStr | gui.QAction.MenuRole):
         """Set menu role.
 
         Args:
@@ -227,7 +226,7 @@ class ActionMixin(core.ObjectMixin):
     usage_count = core.Property(int, get_usage_count)
 
 
-class Action(ActionMixin, QtGui.QAction):
+class Action(ActionMixin, gui.QAction):
     pass
 
 

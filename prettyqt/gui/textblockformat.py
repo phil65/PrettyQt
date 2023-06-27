@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
@@ -15,12 +14,12 @@ LineHeightTypeStr = Literal[
     "line_distance",
 ]
 
-LINE_HEIGHT_TYPES: bidict[MarkerTypeStr, QtGui.QTextBlockFormat.LineHeightTypes] = bidict(
-    single=QtGui.QTextBlockFormat.LineHeightTypes.SingleHeight,
-    proportional=QtGui.QTextBlockFormat.LineHeightTypes.ProportionalHeight,
-    fixed=QtGui.QTextBlockFormat.LineHeightTypes.FixedHeight,
-    minimum=QtGui.QTextBlockFormat.LineHeightTypes.MinimumHeight,
-    line_distance=QtGui.QTextBlockFormat.LineHeightTypes.LineDistanceHeight,
+LINE_HEIGHT_TYPES: bidict[MarkerTypeStr, gui.QTextBlockFormat.LineHeightTypes] = bidict(
+    single=gui.QTextBlockFormat.LineHeightTypes.SingleHeight,
+    proportional=gui.QTextBlockFormat.LineHeightTypes.ProportionalHeight,
+    fixed=gui.QTextBlockFormat.LineHeightTypes.FixedHeight,
+    minimum=gui.QTextBlockFormat.LineHeightTypes.MinimumHeight,
+    line_distance=gui.QTextBlockFormat.LineHeightTypes.LineDistanceHeight,
 )
 
 MarkerTypeStr = Literal[
@@ -29,15 +28,15 @@ MarkerTypeStr = Literal[
     "checked",
 ]
 
-MARKER_TYPE: bidict[MarkerTypeStr, QtGui.QTextBlockFormat.MarkerType] = bidict(
-    none=QtGui.QTextBlockFormat.MarkerType.NoMarker,
-    unchecked=QtGui.QTextBlockFormat.MarkerType.Unchecked,
-    checked=QtGui.QTextBlockFormat.MarkerType.Checked,
+MARKER_TYPE: bidict[MarkerTypeStr, gui.QTextBlockFormat.MarkerType] = bidict(
+    none=gui.QTextBlockFormat.MarkerType.NoMarker,
+    unchecked=gui.QTextBlockFormat.MarkerType.Unchecked,
+    checked=gui.QTextBlockFormat.MarkerType.Checked,
 )
 
 
-class TextBlockFormat(gui.TextFormatMixin, QtGui.QTextBlockFormat):
-    def set_marker(self, marker: MarkerTypeStr | QtGui.QTextBlockFormat.MarkerType):
+class TextBlockFormat(gui.TextFormatMixin, gui.QTextBlockFormat):
+    def set_marker(self, marker: MarkerTypeStr | gui.QTextBlockFormat.MarkerType):
         """Set the marker.
 
         Args:

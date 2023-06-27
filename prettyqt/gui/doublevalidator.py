@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
-class DoubleValidator(gui.ValidatorMixin, QtGui.QDoubleValidator):
+class DoubleValidator(gui.ValidatorMixin, gui.QDoubleValidator):
     ID = "double"
 
     def __init__(self, *args, **kwargs):

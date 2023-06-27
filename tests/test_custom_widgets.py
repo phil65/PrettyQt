@@ -8,7 +8,6 @@ import pytest
 import prettyqt
 from prettyqt import constants, core, custom_widgets, gui, widgets
 import prettyqt.custom_widgets.dataset as fo
-from prettyqt.qt import QtGui
 
 
 def test_booldicttoolbutton(qtbot):
@@ -232,7 +231,7 @@ def test_codeeditor(qtbot):
     assert editor.text() == ""
     editor.line_area_width()
     editor.set_syntaxhighlighter("python")
-    event = QtGui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))
+    event = gui.QResizeEvent(core.Size(10, 10), core.Size(20, 20))
     editor.resizeEvent(event)
     editor.repaint()
 

@@ -3,7 +3,6 @@ from __future__ import annotations
 import ast
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
 class PythonCodeValidator(gui.Validator):
@@ -14,7 +13,7 @@ class PythonCodeValidator(gui.Validator):
 
     def validate(
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         try:
             ast.parse(text)
             return self.State.Acceptable, text, pos

@@ -4,13 +4,12 @@ from collections.abc import Iterator
 from re import Pattern
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui
 
 
 class SyntaxHighlighterMixin(core.ObjectMixin):
     RULES: list = []
 
-    def __init__(self, parent: QtCore.QObject | None = None):
+    def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)  # type: ignore
 
     def get_current_block(self) -> gui.TextBlock:
@@ -37,5 +36,5 @@ class SyntaxHighlighterMixin(core.ObjectMixin):
                 self.setFormat(span[0], span[1] - span[0], fmt)
 
 
-class SyntaxHighlighter(SyntaxHighlighterMixin, QtGui.QSyntaxHighlighter):
+class SyntaxHighlighter(SyntaxHighlighterMixin, gui.QSyntaxHighlighter):
     pass

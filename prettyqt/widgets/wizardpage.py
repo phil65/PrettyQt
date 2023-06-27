@@ -1,17 +1,16 @@
 from __future__ import annotations
 
 from prettyqt import gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 
 
 class WizardPageMixin(widgets.WidgetMixin):
     def set_pixmap(
         self,
         typ: widgets.wizard.WizardPixmapStr | widgets.QWizard.WizardPixmap,
-        pixmap: QtGui.QPixmap | None,
+        pixmap: gui.QPixmap | None,
     ):
         if pixmap is None:
-            pixmap = QtGui.QPixmap()
+            pixmap = gui.QPixmap()
         self.setPixmap(widgets.wizard.WIZARD_PIXMAP.get_enum_value(typ), pixmap)
 
     def get_pixmap(
@@ -50,5 +49,5 @@ class WizardPageMixin(widgets.WidgetMixin):
         return self.buttonText(widgets.wizard.WIZARD_BUTTON.get_enum_value(button_type))
 
 
-class WizardPage(WizardPageMixin, QtWidgets.QWizardPage):
+class WizardPage(WizardPageMixin, widgets.QWizardPage):
     pass

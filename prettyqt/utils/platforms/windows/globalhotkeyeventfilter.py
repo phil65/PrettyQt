@@ -9,7 +9,6 @@ import logging
 from typing import SupportsInt
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils.platforms.windows import keytables
 
 
@@ -50,7 +49,7 @@ class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
 
     def register_hotkey(
         self,
-        keycombo: QtCore.QKeyCombination,
+        keycombo: core.QKeyCombination,
         callback: Callable,
         wid: SupportsInt | None = None,
     ):
@@ -74,7 +73,7 @@ class GlobalHotKeyEventFilter(core.AbstractNativeEventFilter):
         return True
 
     def unregister_hotkey(
-        self, keycombo: QtCore.QKeyCombination, wid: SupportsInt | None = None
+        self, keycombo: core.QKeyCombination, wid: SupportsInt | None = None
     ):
         wid = 0x0 if wid is None else int(wid)
         mods = keytables.qt_mod_to_virtual(keycombo.keyboardModifiers())

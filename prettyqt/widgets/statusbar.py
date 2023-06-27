@@ -1,16 +1,16 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 
 
-class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
-    def __add__(self, other: QtGui.QAction | QtWidgets.QWidget) -> StatusBar:
+class StatusBar(widgets.WidgetMixin, widgets.QStatusBar):
+    def __add__(self, other: QtGui.QAction | widgets.QWidget) -> StatusBar:
         match other:
             case QtGui.QAction():
                 self.addAction(other)
                 return self
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 self.addWidget(other)
                 return self
             case _:
@@ -33,7 +33,7 @@ class StatusBar(widgets.WidgetMixin, QtWidgets.QStatusBar):
         self.addPermanentWidget(status_label)
         self.addPermanentWidget(progress_bar)
 
-    def add_widget(self, widget: QtWidgets.QWidget, permanent: bool = False) -> None:
+    def add_widget(self, widget: widgets.QWidget, permanent: bool = False) -> None:
         if permanent:
             self.addPermanentWidget(widget)
         else:

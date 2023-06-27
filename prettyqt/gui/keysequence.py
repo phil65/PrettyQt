@@ -6,7 +6,7 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr
 
 
@@ -147,7 +147,7 @@ class KeySequence(QtGui.QKeySequence):
 
     @to_shortcut_str.register
     @classmethod
-    def _(cls, key: QtCore.QKeyCombination) -> str:
+    def _(cls, key: core.QKeyCombination) -> str:
         return cls(key).toString()
 
     @classmethod

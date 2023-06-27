@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
@@ -13,7 +12,7 @@ class TextObjectMixin(core.ObjectMixin):
         return gui.TextFormat(self.format())
 
 
-class TextObject(TextObjectMixin, QtGui.QTextObject):
+class TextObject(TextObjectMixin, gui.QTextObject):
     pass
 
 

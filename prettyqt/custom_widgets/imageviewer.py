@@ -5,7 +5,6 @@ import math
 import os
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui
 
 
 def fit_image(
@@ -57,7 +56,7 @@ def draw_size(p: gui.Painter, rect: core.Rect, w: int, h: int):
 class ImageViewer(widgets.Widget):
     def __init__(
         self,
-        image: QtGui.QPixmap | os.PathLike | None = None,
+        image: gui.QPixmap | os.PathLike | None = None,
         show_border: bool = True,
         show_size: bool = False,
         border_width: int = 1,
@@ -71,9 +70,9 @@ class ImageViewer(widgets.Widget):
         self.draw_border = show_border
         self.show_size = show_size
 
-    def set_image(self, pixmap: QtGui.QPixmap | os.PathLike | None):
+    def set_image(self, pixmap: gui.QPixmap | os.PathLike | None):
         match pixmap:
-            case QtGui.QPixmap():
+            case gui.QPixmap():
                 self._pixmap = pixmap
             case os.PathLike():
                 self._pixmap = gui.Pixmap.from_file(pixmap)
@@ -89,7 +88,7 @@ class ImageViewer(widgets.Widget):
     def pixmap(self):
         return self._pixmap
 
-    def sizeHint(self) -> QtCore.QSize:
+    def sizeHint(self) -> core.QSize:
         return self.minimumSize() if self._pixmap.isNull() else self._pixmap.size()
 
     def paintEvent(self, event):

@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore
 
 
 if TYPE_CHECKING:
@@ -31,7 +30,7 @@ class Spin:
         self.info[self.parent_widget] = timer, angle, step
         self.parent_widget.update()
 
-    def setup(self, painter: gui.Painter, rect: QtCore.QRect):
+    def setup(self, painter: gui.Painter, rect: core.QRect):
         if self.parent_widget not in self.info:
             timer = core.Timer(self.parent_widget, timeout=self._update)
             self.info[self.parent_widget] = timer, 0, self.step

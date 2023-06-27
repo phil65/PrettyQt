@@ -3,28 +3,27 @@ from __future__ import annotations
 from typing import Literal, overload
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import animator, bidict, datatypes, listdelegators
 
 
 TabShapeStr = Literal["rounded", "triangular"]
 
-TAB_SHAPES: bidict[TabShapeStr, QtWidgets.QTabWidget.TabShape] = bidict(
-    rounded=QtWidgets.QTabWidget.TabShape.Rounded,
-    triangular=QtWidgets.QTabWidget.TabShape.Triangular,
+TAB_SHAPES: bidict[TabShapeStr, widgets.QTabWidget.TabShape] = bidict(
+    rounded=widgets.QTabWidget.TabShape.Rounded,
+    triangular=widgets.QTabWidget.TabShape.Triangular,
 )
 
 TabPositionStr = Literal["north", "south", "west", "east"]
 
-TAB_POSITION: bidict[TabPositionStr, QtWidgets.QTabWidget.TabPosition] = bidict(
-    north=QtWidgets.QTabWidget.TabPosition.North,
-    south=QtWidgets.QTabWidget.TabPosition.South,
-    west=QtWidgets.QTabWidget.TabPosition.West,
-    east=QtWidgets.QTabWidget.TabPosition.East,
+TAB_POSITION: bidict[TabPositionStr, widgets.QTabWidget.TabPosition] = bidict(
+    north=widgets.QTabWidget.TabPosition.North,
+    south=widgets.QTabWidget.TabPosition.South,
+    west=widgets.QTabWidget.TabPosition.West,
+    east=widgets.QTabWidget.TabPosition.East,
 )
 
 
-class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
+class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
     """Widget for managing the tabs section."""
 
     def __init__(
@@ -49,18 +48,18 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         return self.count()
 
     @overload
-    def __getitem__(self, index: int) -> QtWidgets.QWidget:
+    def __getitem__(self, index: int) -> widgets.QWidget:
         ...
 
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    ) -> listdelegators.BaseListDelegator[widgets.QWidget]:
         ...
 
     def __getitem__(
         self, index: int | slice
-    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget]:
         match index:
             case int():
                 if index >= self.count():
@@ -72,7 +71,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
             case _:
                 raise TypeError(index)
 
-    def __contains__(self, item: QtWidgets.QWidget):
+    def __contains__(self, item: widgets.QWidget):
         return self.indexOf(item) >= 0
 
     def update_tab_bar_visibility(self):
@@ -90,7 +89,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)
 
-    def set_tab_shape(self, shape: TabShapeStr | QtWidgets.QTabWidget.TabShape):
+    def set_tab_shape(self, shape: TabShapeStr | widgets.QTabWidget.TabShape):
         """Set tab shape for the tabwidget.
 
         Args:
@@ -107,7 +106,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         return TAB_SHAPES.inverse[self.tabShape()]
 
     def set_tab_position(
-        self, position: TabPositionStr | QtWidgets.QTabWidget.TabPosition
+        self, position: TabPositionStr | widgets.QTabWidget.TabPosition
     ):
         """Set tab position for the tabwidget.
 
@@ -148,13 +147,13 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def set_closable(self, closable: bool = True):
         self.setTabsClosable(closable)
 
-    @core.Slot(int, QtCore.QPoint)
+    @core.Slot(int, core.QPoint)
     def detach_tab(self, index: int, point: datatypes.PointType):
         """Detach tab by removing its contents and placing them in a DetachedTab window.
 
         Args:
             index (int): index location of the tab to be detached
-            point (QtCore.QPoint): screen pos for creating the new DetachedTab window
+            point (core.QPoint): screen pos for creating the new DetachedTab window
 
         """
         # Get the tab content
@@ -181,13 +180,13 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
 
     def add_tab(
         self,
-        item: QtWidgets.QWidget | QtWidgets.QLayout,
+        item: widgets.QWidget | widgets.QLayout,
         label: str,
         icon: datatypes.IconType = None,
         position: int | None = None,
         show: bool = False,
     ) -> int:
-        if isinstance(item, QtWidgets.QLayout):
+        if isinstance(item, widgets.QLayout):
             widget = widgets.Widget()
             widget.set_layout(item)
         else:
@@ -205,7 +204,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
 
     def attach_tab(
         self,
-        widget: QtWidgets.QWidget | QtWidgets.QLayout,
+        widget: widgets.QWidget | widgets.QLayout,
         name: str,
         icon: datatypes.IconType = None,
         insert_at: int | None = None,
@@ -216,7 +215,7 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         closing it, and placing the content back into the DetachableTabWidget.
 
         Args:
-            widget (Union[QtWidgets.QWidget, QtWidgets.QLayout]): the content widget
+            widget (Union[widgets.QWidget, widgets.QLayout]): the content widget
                 from the DetachedTab window
             name (str): the name of the detached tab
             icon (datatypes.IconType, optional): the window icon for the detached tab
@@ -239,10 +238,10 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
             tab.close()
 
     @core.Slot(int)
-    def remove_tab(self, index_or_widget: int | QtWidgets.QWidget):
+    def remove_tab(self, index_or_widget: int | widgets.QWidget):
         index = (
             self.indexOf(index_or_widget)
-            if isinstance(index_or_widget, QtWidgets.QWidget)
+            if isinstance(index_or_widget, widgets.QWidget)
             else index_or_widget
         )
         widget = (
@@ -254,12 +253,12 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         if widget is not None:
             widget.deleteLater()
 
-    @core.Slot(QtWidgets.QWidget, str)
-    def open_widget(self, widget: QtWidgets.QWidget, title: str = "Unnamed"):
+    @core.Slot(widgets.QWidget, str)
+    def open_widget(self, widget: widgets.QWidget, title: str = "Unnamed"):
         """Create a tab containing delivered widget."""
         self.add_tab(widget, title, icon="mdi.widgets", show=True)
 
-    def set_tab(self, index: int, position: str, widget: QtWidgets.QWidget | None = None):
+    def set_tab(self, index: int, position: str, widget: widgets.QWidget | None = None):
         self.tabBar().set_tab(index, position, widget)
 
     def create_tab_preview(self, index: int, width: int = 200) -> widgets.Label:
@@ -281,9 +280,9 @@ class DetachedTab(widgets.MainWindow):
         on_close: signal, emitted when window is closed (widget, title, icon)
     """
 
-    on_close = core.Signal(QtWidgets.QWidget, str, QtGui.QIcon)
+    on_close = core.Signal(widgets.QWidget, str, gui.QIcon)
 
-    def __init__(self, name: str, widget: QtWidgets.QWidget, **kwargs):
+    def __init__(self, name: str, widget: widgets.QWidget, **kwargs):
         super().__init__(**kwargs)
 
         self.set_id(name)
@@ -312,7 +311,7 @@ class DetachedTab(widgets.MainWindow):
 
 #     def __init__(
 #         self,
-#         parent: QtWidgets.QWidget | None = None,
+#         parent: widgets.QWidget | None = None,
 #         closable: bool = False,
 #         detachable: bool = False,
 #     ) -> None:

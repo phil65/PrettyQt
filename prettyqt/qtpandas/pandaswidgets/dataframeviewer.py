@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 
 from prettyqt import constants, custom_widgets, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.qtpandas import pandasmodels
 
 logger = logging.getLogger(__name__)
@@ -197,11 +196,11 @@ class DataFrameViewer(widgets.Widget):
     #     )
     #     self.table_index._on_selection_changed(selected, deselected)
 
-    def on_clicked(self, ix: QtCore.QModelIndex):
+    def on_clicked(self, ix: core.QModelIndex):
         self.df = self.df.sort_values(self.df.columns[ix.column()])
         self.data_changed()
 
-    def showEvent(self, event: QtGui.QShowEvent):
+    def showEvent(self, event: gui.QShowEvent):
         """Initialize column and row sizes on the first time the widget is shown."""
         if not self._loaded and self.df is not None:
             # Set column widths
@@ -508,14 +507,14 @@ class HeaderView(custom_widgets.OrientedTableView):
             #         self.set_section_span(level, match_start, span_size)
             #         match_start = None
 
-    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent):
-        if not isinstance(event, QtGui.QMouseEvent):
+    def eventFilter(self, source: core.QObject, event: core.QEvent):
+        if not isinstance(event, gui.QMouseEvent):
             return False
         mouse_pos = event.position().x() if self.is_horizontal() else event.position().y()
         mouse_pos = int(mouse_pos)
         # If mouse is on an edge, start the drag resize process
         match event.type():
-            case QtCore.QEvent.Type.MouseButtonPress:
+            case core.QEvent.Type.MouseButtonPress:
                 if self.over_header_edge(mouse_pos) is not None:
                     self._header_is_resizing = self.over_header_edge(mouse_pos)
                     self.resize_start_pos = mouse_pos
@@ -524,19 +523,19 @@ class HeaderView(custom_widgets.OrientedTableView):
                 else:
                     self._header_is_resizing = None
             # End the drag process
-            case QtCore.QEvent.Type.MouseButtonRelease:
+            case core.QEvent.Type.MouseButtonRelease:
                 self._header_is_resizing = None
 
-            case QtCore.QEvent.Type.MouseButtonDblClick if self.is_horizontal():
+            case core.QEvent.Type.MouseButtonDblClick if self.is_horizontal():
                 if (header_index := self.over_header_edge(mouse_pos)) is not None:
                     self.parent().auto_size_column(header_index)
                     return True
 
-            case QtCore.QEvent.Type.MouseButtonDblClick:
+            case core.QEvent.Type.MouseButtonDblClick:
                 if (header_index := self.over_header_edge(mouse_pos)) is not None:
                     self.parent().auto_size_row(header_index)
                     return True
-            case QtCore.QEvent.Type.MouseMove:
+            case core.QEvent.Type.MouseMove:
                 # If this is None, there is no drag resize happening
                 if self._header_is_resizing is not None:
                     size = self.initial_header_size + mouse_pos - self.resize_start_pos

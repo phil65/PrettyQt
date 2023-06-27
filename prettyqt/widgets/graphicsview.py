@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
-mod = QtWidgets.QGraphicsView
+mod = widgets.QGraphicsView
 
 
 DragModeStr = Literal["none", "scroll_hand", "rubber_band"]
@@ -55,7 +54,7 @@ VIEWPORT_UPDATE_MODE: bidict[ViewportUpdateModeStr, mod.ViewportUpdateMode] = bi
 class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        if not args or not isinstance(args[0], QtWidgets.QGraphicsScene):
+        if not args or not isinstance(args[0], widgets.QGraphicsScene):
             self.setScene(widgets.GraphicsScene())
 
     def _get_map(self):
@@ -79,7 +78,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         else:
             self.viewport().removeEventFilter(self)
 
-    def __getitem__(self, index: int) -> QtWidgets.QGraphicsItem:
+    def __getitem__(self, index: int) -> widgets.QGraphicsItem:
         return self.items()[index]
 
     def eventFilter(self, source, event) -> bool:
@@ -124,9 +123,9 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
     def remove_item(self, *args):
         return self.scene().removeItem(*args)
 
-    def get_view_rect(self) -> QtCore.QRect:
+    def get_view_rect(self) -> core.QRect:
         """Return the boundaries of the view in scene coordinates."""
-        r = QtCore.QRectF(self.rect())
+        r = core.QRectF(self.rect())
         return self.viewportTransform().inverted()[0].mapRect(r)
 
     def get_pixel_size(self):
@@ -146,7 +145,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
 
     def invalidate_scene(
         self,
-        rect: QtCore.QRectF,
+        rect: core.QRectF,
         layer: widgets.graphicsscene.SceneLayerStr
         | widgets.QGraphicsScene.SceneLayer = "all",
     ):
@@ -267,7 +266,7 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         return OPTIMIZATION_FLAGS.get_list(self.optimizationFlags())
 
 
-class GraphicsView(GraphicsViewMixin, QtWidgets.QGraphicsView):
+class GraphicsView(GraphicsViewMixin, widgets.QGraphicsView):
     pass
 
 

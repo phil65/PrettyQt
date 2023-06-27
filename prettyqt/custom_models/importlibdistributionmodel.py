@@ -9,7 +9,6 @@ from packaging.markers import Marker
 from typing_extensions import Self
 
 from prettyqt import constants, core, custom_models
-from prettyqt.qt import QtCore
 from prettyqt.utils import treeitem
 
 
@@ -172,7 +171,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         self,
         obj: metadata.Distribution | str,
         show_root: bool = False,
-        parent: QtCore.QObject | None = None,
+        parent: core.QObject | None = None,
     ):
         if isinstance(obj, str):
             obj = metadata.distribution(obj)
@@ -185,13 +184,13 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         return isinstance(instance, metadata.Distribution)
 
     @classmethod
-    def from_system(cls, parent: QtCore.QObject | None = None) -> Self:
+    def from_system(cls, parent: core.QObject | None = None) -> Self:
         distributions = list_system_modules()
         return cls(distributions, parent)
 
     @classmethod
     def from_package(
-        cls, package_name: str, parent: QtCore.QObject | None = None
+        cls, package_name: str, parent: core.QObject | None = None
     ) -> Self:
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)
@@ -212,7 +211,7 @@ class ImportlibDistributionModel(core.AbstractTableModel):
     def __init__(
         self,
         distributions: Sequence[metadata.Distribution],
-        parent: QtCore.QObject | None = None,
+        parent: core.QObject | None = None,
     ):
         super().__init__(parent)
         self.distributions = distributions
@@ -265,13 +264,13 @@ class ImportlibDistributionModel(core.AbstractTableModel):
                 return dist
 
     @classmethod
-    def from_system(cls, parent: QtCore.QObject | None = None) -> Self:
+    def from_system(cls, parent: core.QObject | None = None) -> Self:
         distributions = list_system_modules()
         return cls(distributions, parent)
 
     @classmethod
     def from_package(
-        cls, package_name: str, parent: QtCore.QObject | None = None
+        cls, package_name: str, parent: core.QObject | None = None
     ) -> Self:
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)

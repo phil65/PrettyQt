@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtWidgets
 
 
 class Animator(core.Object):
@@ -41,7 +40,7 @@ class Animator(core.Object):
         if self.wrap or now < (self._widget.count() - 1):
             self.slide_in(now + 1)
 
-    def slide_in(self, idx: int | QtWidgets.QWidget):
+    def slide_in(self, idx: int | widgets.QWidget):
         if self.active:
             return
         if isinstance(idx, int):
@@ -114,7 +113,7 @@ class Animator(core.Object):
         self._widget.widget(self.now).move(self.pnow)
         self.active = False
 
-    def fade_in(self, widget: int | QtWidgets.QWidget):
+    def fade_in(self, widget: int | widgets.QWidget):
         widget = self._widget.widget(widget) if isinstance(widget, int) else widget
         self._widget.fader_widget = FaderWidget(
             self._widget.currentWidget(), widget, self.speed
@@ -127,8 +126,8 @@ class FaderWidget(widgets.Widget):
 
     def __init__(
         self,
-        old_widget: QtWidgets.QWidget,
-        new_widget: QtWidgets.QWidget,
+        old_widget: widgets.QWidget,
+        new_widget: widgets.QWidget,
         duration: int = 300,
     ):
         super().__init__(new_widget)

@@ -5,7 +5,6 @@ import contextlib
 from typing import Literal
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, colors, datatypes
 
 CompositionModeStr = Literal[
@@ -22,18 +21,18 @@ CompositionModeStr = Literal[
     "destination_atop",
 ]
 
-COMPOSITION_MODE: bidict[CompositionModeStr, QtGui.QPainter.CompositionMode] = bidict(
-    source_over=QtGui.QPainter.CompositionMode.CompositionMode_SourceOver,
-    destination_over=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOver,
-    clear=QtGui.QPainter.CompositionMode.CompositionMode_Clear,
-    source=QtGui.QPainter.CompositionMode.CompositionMode_Source,
-    destination=QtGui.QPainter.CompositionMode.CompositionMode_Destination,
-    source_in=QtGui.QPainter.CompositionMode.CompositionMode_SourceIn,
-    destination_in=QtGui.QPainter.CompositionMode.CompositionMode_DestinationIn,
-    source_out=QtGui.QPainter.CompositionMode.CompositionMode_SourceOut,
-    destination_out=QtGui.QPainter.CompositionMode.CompositionMode_DestinationOut,
-    source_atop=QtGui.QPainter.CompositionMode.CompositionMode_SourceAtop,
-    destination_atop=QtGui.QPainter.CompositionMode.CompositionMode_DestinationAtop,
+COMPOSITION_MODE: bidict[CompositionModeStr, gui.QPainter.CompositionMode] = bidict(
+    source_over=gui.QPainter.CompositionMode.CompositionMode_SourceOver,
+    destination_over=gui.QPainter.CompositionMode.CompositionMode_DestinationOver,
+    clear=gui.QPainter.CompositionMode.CompositionMode_Clear,
+    source=gui.QPainter.CompositionMode.CompositionMode_Source,
+    destination=gui.QPainter.CompositionMode.CompositionMode_Destination,
+    source_in=gui.QPainter.CompositionMode.CompositionMode_SourceIn,
+    destination_in=gui.QPainter.CompositionMode.CompositionMode_DestinationIn,
+    source_out=gui.QPainter.CompositionMode.CompositionMode_SourceOut,
+    destination_out=gui.QPainter.CompositionMode.CompositionMode_DestinationOut,
+    source_atop=gui.QPainter.CompositionMode.CompositionMode_SourceAtop,
+    destination_atop=gui.QPainter.CompositionMode.CompositionMode_DestinationAtop,
 )
 
 RenderHintStr = Literal[
@@ -43,11 +42,11 @@ RenderHintStr = Literal[
     "lossless_image_rendering",
 ]
 
-RENDER_HINTS: bidict[RenderHintStr, QtGui.QPainter.RenderHint] = bidict(
-    antialiasing=QtGui.QPainter.RenderHint.Antialiasing,
-    text_antialiasing=QtGui.QPainter.RenderHint.TextAntialiasing,
-    smooth_pixmap_transform=QtGui.QPainter.RenderHint.SmoothPixmapTransform,
-    lossless_image_rendering=QtGui.QPainter.RenderHint.LosslessImageRendering,
+RENDER_HINTS: bidict[RenderHintStr, gui.QPainter.RenderHint] = bidict(
+    antialiasing=gui.QPainter.RenderHint.Antialiasing,
+    text_antialiasing=gui.QPainter.RenderHint.TextAntialiasing,
+    smooth_pixmap_transform=gui.QPainter.RenderHint.SmoothPixmapTransform,
+    lossless_image_rendering=gui.QPainter.RenderHint.LosslessImageRendering,
 )
 
 
@@ -103,8 +102,8 @@ class PainterMixin:
 
     def draw_image(
         self,
-        target: QtCore.QPoint | QtCore.QPointF | QtCore.QRect | QtCore.QRectF,
-        frame_buffer: QtGui.QImage,
+        target: core.QPoint | core.QPointF | core.QRect | core.QRectF,
+        frame_buffer: gui.QImage,
     ):
         self.set_composition_mode("source_atop")
         self.drawImage(target, frame_buffer)
@@ -112,7 +111,7 @@ class PainterMixin:
     def draw_polygon(
         self,
         points: (
-            QtGui.QPolygon | QtGui.QPolygonF | list[QtCore.QPoint] | list[QtCore.QPointF]
+            gui.QPolygon | gui.QPolygonF | list[core.QPoint] | list[core.QPointF]
         ),
         fill_rule: constants.FillRuleStr | constants.FillRule = "odd_even",
     ):
@@ -161,7 +160,7 @@ class PainterMixin:
         style: constants.PenStyleStr | None = "solid",
         width: float = 1.0,
         color: datatypes.ColorType = "black",
-        brush: QtGui.QBrush | None = None,
+        brush: gui.QBrush | None = None,
         miter_limit: float = 2.0,
         join_style: constants.JoinStyleStr = "bevel",
         cap_style: constants.CapStyleStr = "square",
@@ -204,8 +203,8 @@ class PainterMixin:
         color = colors.get_color(color)
         self.setPen(color)
 
-    def set_brush(self, brush: QtGui.QBrush | datatypes.ColorType):
-        if not isinstance(brush, QtGui.QBrush):
+    def set_brush(self, brush: gui.QBrush | datatypes.ColorType):
+        if not isinstance(brush, gui.QBrush):
             brush = colors.get_color(brush)
         self.setBrush(brush)
 
@@ -218,7 +217,7 @@ class PainterMixin:
         self.setBackgroundMode(mode)
 
     def set_composition_mode(
-        self, mode: CompositionModeStr | QtGui.QPainter.CompositionMode
+        self, mode: CompositionModeStr | gui.QPainter.CompositionMode
     ):
         """Set the current composition mode.
 
@@ -243,7 +242,7 @@ class PainterMixin:
 
     def set_clip_path(
         self,
-        path: QtGui.QPainterPath,
+        path: gui.QPainterPath,
         operation: constants.ClipOperationStr | constants.ClipOperation = "replace",
     ):
         self.setClipPath(path, constants.CLIP_OPERATION.get_enum_value(operation))
@@ -274,7 +273,7 @@ class PainterMixin:
         self.translate(-x, -y)
 
 
-class Painter(PainterMixin, QtGui.QPainter):
+class Painter(PainterMixin, gui.QPainter):
     pass
 
 

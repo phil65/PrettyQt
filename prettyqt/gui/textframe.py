@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
@@ -16,7 +15,7 @@ class TextFrameMixin(gui.TextObjectMixin):
         return gui.TextCursor(self.lastCursorPosition())
 
 
-class TextFrame(TextFrameMixin, QtGui.QTextFrame):
+class TextFrame(TextFrameMixin, gui.QTextFrame):
     pass
 
 

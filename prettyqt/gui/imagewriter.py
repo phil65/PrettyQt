@@ -3,23 +3,22 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, datatypes
 
 
 ImageWriterErrorStr = Literal["device", "unsupported_format", "invalid_image", "unknown"]
 
 IMAGE_WRITER_ERROR: bidict[
-    ImageWriterErrorStr, QtGui.QImageWriter.ImageWriterError
+    ImageWriterErrorStr, gui.QImageWriter.ImageWriterError
 ] = bidict(
-    device=QtGui.QImageWriter.ImageWriterError.DeviceError,
-    unsupported_format=QtGui.QImageWriter.ImageWriterError.UnsupportedFormatError,
-    invalid_image=QtGui.QImageWriter.ImageWriterError.InvalidImageError,
-    unknown=QtGui.QImageWriter.ImageWriterError.UnknownError,
+    device=gui.QImageWriter.ImageWriterError.DeviceError,
+    unsupported_format=gui.QImageWriter.ImageWriterError.UnsupportedFormatError,
+    invalid_image=gui.QImageWriter.ImageWriterError.InvalidImageError,
+    unknown=gui.QImageWriter.ImageWriterError.UnknownError,
 )
 
 
-class ImageWriter(QtGui.QImageWriter):
+class ImageWriter(gui.QImageWriter):
     def __setitem__(self, key: str, val: str):
         self.setText(key, val)
 

@@ -4,7 +4,7 @@ from collections.abc import Mapping
 from typing import Any, Literal, TypedDict
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
@@ -75,7 +75,7 @@ ATTRIBUTE: bidict[AttributeStr, Req.Attribute] = bidict(
 class TypedAttribute(TypedDict):
     http_status_code: int
     http_reason_phrase: bytes
-    redirection_target: QtCore.QUrl
+    redirection_target: core.QUrl
     connection_encrypted: bool
     cache_load_control: int
     cache_save_control: bool
@@ -188,7 +188,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
     def set_headers(self, headers: Mapping[str, str]):
         for k, v in headers.items():
             self.setRawHeader(
-                QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())
+                core.QByteArray(k.encode()), core.QByteArray(v.encode())
             )
 
     def get_headers(self) -> Mapping[str, str]:
@@ -197,7 +197,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
             for h in self.rawHeaderList()
         }
 
-    def set_url(self, url: str | QtCore.QUrl):
+    def set_url(self, url: str | core.QUrl):
         url = core.Url(url)
         self.setUrl(url)
 

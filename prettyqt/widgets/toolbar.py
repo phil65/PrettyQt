@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, get_repr, listdelegators
 
 
@@ -20,7 +20,7 @@ class ToolBarMixin(widgets.WidgetMixin):
 
     def __getitem__(
         self, row: int | slice
-    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget]:
         match row:
             case int():
                 action = self.actions()[row]
@@ -58,14 +58,14 @@ class ToolBarMixin(widgets.WidgetMixin):
         }
         return maps
 
-    def add(self, item: QtGui.QAction | QtWidgets.QWidget):
+    def add(self, item: QtGui.QAction | widgets.QWidget):
         if isinstance(item, QtGui.QAction):
             self.addAction(item)
         else:
             self.addWidget(item)
 
     def add_menu_button(
-        self, label: str, icon: datatypes.IconType, menu: QtWidgets.QMenu
+        self, label: str, icon: datatypes.IconType, menu: widgets.QMenu
     ) -> widgets.ToolButton:
         btn = widgets.ToolButton.for_menu(menu, icon=icon)
         btn.setText(label)
@@ -141,7 +141,7 @@ class ToolBarMixin(widgets.WidgetMixin):
     def get_allowed_areas(self) -> list[constants.ToolbarAreaStr]:
         return constants.TOOLBAR_AREA.get_list(self.allowedAreas())
 
-    def get_widgets(self) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    def get_widgets(self) -> listdelegators.BaseListDelegator[widgets.QWidget]:
         widgets = [self.widgetForAction(i) for i in self.actions()]
         return listdelegators.BaseListDelegator(widgets)
 
@@ -186,7 +186,7 @@ class ToolBarMixin(widgets.WidgetMixin):
         self._tooltip_labels = []
 
 
-class ToolBar(ToolBarMixin, QtWidgets.QToolBar):
+class ToolBar(ToolBarMixin, widgets.QToolBar):
     pass
 
 

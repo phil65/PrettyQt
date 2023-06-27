@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
-class TextTableCell(QtGui.QTextTableCell):
+class TextTableCell(gui.QTextTableCell):
     def get_format(self) -> gui.TextCharFormat:
         #  .format() seems to crash both bindings?
         return gui.TextCharFormat(self.format())

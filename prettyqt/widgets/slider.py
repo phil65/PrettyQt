@@ -3,17 +3,16 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import bidict
 
 
 TickPositionStr = Literal["none", "both_sides", "above", "below"]
 
-TICK_POSITION: bidict[TickPositionStr, QtWidgets.QSlider.TickPosition] = bidict(
-    none=QtWidgets.QSlider.TickPosition.NoTicks,
-    both_sides=QtWidgets.QSlider.TickPosition.TicksBothSides,
-    above=QtWidgets.QSlider.TickPosition.TicksAbove,
-    below=QtWidgets.QSlider.TickPosition.TicksBelow,
+TICK_POSITION: bidict[TickPositionStr, widgets.QSlider.TickPosition] = bidict(
+    none=widgets.QSlider.TickPosition.NoTicks,
+    both_sides=widgets.QSlider.TickPosition.TicksBothSides,
+    above=widgets.QSlider.TickPosition.TicksAbove,
+    below=widgets.QSlider.TickPosition.TicksBelow,
 )
 
 TickPositionAllStr = Literal["none", "both_sides", "above", "below", "left", "right"]
@@ -40,14 +39,14 @@ class HollowHandleStyle(widgets.ProxyStyle):
             + self.config["handle.ring-width"]
             + self.config["handle.hollow-radius"]
         )
-        self.config["handle.size"] = QtCore.QSize(2 * w, 2 * w)
+        self.config["handle.size"] = core.QSize(2 * w, 2 * w)
 
     def subControlRect(
         self,
-        cc: QtWidgets.QStyle.ComplexControl,
-        opt: QtWidgets.QStyleOptionSlider,
-        sc: QtWidgets.QStyle.SubControl,
-        widget: QtWidgets.QWidget,
+        cc: widgets.QStyle.ComplexControl,
+        opt: widgets.QStyleOptionSlider,
+        sc: widgets.QStyle.SubControl,
+        widget: widgets.QWidget,
     ):
         """Get the rectangular area occupied by the sub control."""
         if (
@@ -61,7 +60,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
 
         if sc == self.SubControl.SC_SliderGroove:
             h = self.config["groove.height"]
-            groove_rect = QtCore.QRectF(0, (rect.height() - h) // 2, rect.width(), h)
+            groove_rect = core.QRectF(0, (rect.height() - h) // 2, rect.width(), h)
             return groove_rect.toRect()
 
         elif sc == self.SubControl.SC_SliderHandle:
@@ -72,15 +71,15 @@ class HollowHandleStyle(widgets.ProxyStyle):
 
             # solve the situation that the handle runs out of slider
             x *= (rect.width() - size.width()) / rect.width()
-            slider_rect = QtCore.QRectF(x, 0, size.width(), size.height())
+            slider_rect = core.QRectF(x, 0, size.width(), size.height())
             return slider_rect.toRect()
 
     def drawComplexControl(
         self,
-        cc: QtWidgets.QStyle.ComplexControl,
-        opt: QtWidgets.QStyleOptionSlider,
-        painter: QtGui.QPainter,
-        widget: QtWidgets.QWidget,
+        cc: widgets.QStyle.ComplexControl,
+        opt: widgets.QStyleOptionSlider,
+        painter: gui.QPainter,
+        widget: widgets.QWidget,
     ):
         """Draw sub control."""
         if (
@@ -121,7 +120,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
 
         path = gui.PainterPath()
         path.moveTo(0, 0)
-        center = handle_rect.center().toPointF() + QtCore.QPointF(1, 1)
+        center = handle_rect.center().toPointF() + core.QPointF(1, 1)
         path.addEllipse(center, radius, radius)
         path.addEllipse(center, hollow_radius, hollow_radius)
 
@@ -139,7 +138,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
             painter.drawEllipse(handle_rect)
 
 
-class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
+class Slider(widgets.AbstractSliderMixin, widgets.QSlider):
     value_changed = core.Signal(int)
     clicked = core.Signal(int)
 
@@ -153,9 +152,9 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
         # style = HollowHandleStyle(
         #     {
         #         "groove.height": 4,
-        #         "sub-page.color": QtGui.QColor(72, 210, 242),
-        #         "add-page.color": QtGui.QColor(255, 255, 255, 50),
-        #         "handle.color": QtGui.QColor(72, 210, 242),
+        #         "sub-page.color": gui.QColor(72, 210, 242),
+        #         "add-page.color": gui.QColor(255, 255, 255, 50),
+        #         "handle.color": gui.QColor(72, 210, 242),
         #         "handle.ring-width": 2,
         #         "handle.hollow-radius": 10,
         #         "handle.margin": 0,
@@ -163,7 +162,7 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
         # )
         # self.setStyle(style)
 
-    def mousePressEvent(self, e: QtGui.QMouseEvent):
+    def mousePressEvent(self, e: gui.QMouseEvent):
         self.clicked.emit(self.value())
         if self.orientation() == constants.Orientation.Horizontal:
             value = e.pos().x() / self.width() * self.maximum()
@@ -174,7 +173,7 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
         super().mousePressEvent(e)
 
     def set_tick_position(
-        self, position: TickPositionAllStr | QtWidgets.QSlider.TickPosition
+        self, position: TickPositionAllStr | widgets.QSlider.TickPosition
     ):
         """Set the tick position for the slider.
 

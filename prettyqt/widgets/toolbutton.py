@@ -5,25 +5,25 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, datatypes
 
 
 PopupModeStr = Literal["delayed", "menu_button", "instant"]
 
-POPUP_MODE: bidict[PopupModeStr, QtWidgets.QToolButton.ToolButtonPopupMode] = bidict(
-    delayed=QtWidgets.QToolButton.ToolButtonPopupMode.DelayedPopup,
-    menu_button=QtWidgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup,
-    instant=QtWidgets.QToolButton.ToolButtonPopupMode.InstantPopup,
+POPUP_MODE: bidict[PopupModeStr, widgets.QToolButton.ToolButtonPopupMode] = bidict(
+    delayed=widgets.QToolButton.ToolButtonPopupMode.DelayedPopup,
+    menu_button=widgets.QToolButton.ToolButtonPopupMode.MenuButtonPopup,
+    instant=widgets.QToolButton.ToolButtonPopupMode.InstantPopup,
 )
 
 
-class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
+class ToolButton(widgets.AbstractButtonMixin, widgets.QToolButton):
     def __getitem__(self, item: str) -> QtGui.QAction:
         menu = self.menu()
         return menu[item]
 
-    # def set_menu(self, menu: QtWidgets.QMenu):
+    # def set_menu(self, menu: widgets.QMenu):
     #     menu.setParent(self)
     #     self.setMenu(menu)
 
@@ -37,7 +37,7 @@ class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
         return maps
 
     @classmethod
-    def for_menu(cls, menu: QtWidgets.QMenu, icon: datatypes.IconType = None) -> Self:
+    def for_menu(cls, menu: widgets.QMenu, icon: datatypes.IconType = None) -> Self:
         btn = cls()
         btn.setMenu(menu)
         # btn.set_title(menu.title())
@@ -49,7 +49,7 @@ class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
         self.setDefaultAction(action)
 
     def set_popup_mode(
-        self, mode: PopupModeStr | QtWidgets.QToolButton.ToolButtonPopupMode
+        self, mode: PopupModeStr | widgets.QToolButton.ToolButtonPopupMode
     ):
         """Set the popup mode of the toolbutton.
 

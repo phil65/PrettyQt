@@ -5,7 +5,7 @@ import functools
 import weakref
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 
 
 class FlashEffect(widgets.GraphicsColorizeEffect):
@@ -16,7 +16,7 @@ class FlashEffect(widgets.GraphicsColorizeEffect):
         self._flash_animation.setEndValue(QtGui.QColor(0, 0, 0, 0))
         self._flash_animation.setLoopCount(1)
 
-        def remove_flash_animation(widget_ref: weakref.ref[QtWidgets.QWidget]):
+        def remove_flash_animation(widget_ref: weakref.ref[widgets.QWidget]):
             """Remove flash animation from widget.
 
             Parameters

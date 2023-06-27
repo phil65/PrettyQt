@@ -4,21 +4,20 @@ import os
 from typing import Literal
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, datatypes, get_repr, serializemixin
 
 
 IconEngineHookStr = Literal["available_sizes", "icon_name", "is_null", "scaled_pixmap"]
 
-ICON_ENGINE_HOOK: bidict[IconEngineHookStr, QtGui.QIconEngine.IconEngineHook] = bidict(
-    # available_sizes=QtGui.QIconEngine.AvailableSizesHook,
-    # icon_name=QtGui.QIconEngine.IconNameHook,
-    is_null=QtGui.QIconEngine.IconEngineHook.IsNullHook,
-    scaled_pixmap=QtGui.QIconEngine.IconEngineHook.ScaledPixmapHook,
+ICON_ENGINE_HOOK: bidict[IconEngineHookStr, gui.QIconEngine.IconEngineHook] = bidict(
+    # available_sizes=gui.QIconEngine.AvailableSizesHook,
+    # icon_name=gui.QIconEngine.IconNameHook,
+    is_null=gui.QIconEngine.IconEngineHook.IsNullHook,
+    scaled_pixmap=gui.QIconEngine.IconEngineHook.ScaledPixmapHook,
 )
 
 
-class IconEngine(serializemixin.SerializeMixin, QtGui.QIconEngine):
+class IconEngine(serializemixin.SerializeMixin, gui.QIconEngine):
     def __repr__(self):
         return get_repr(self)
 
@@ -41,7 +40,7 @@ class IconEngine(serializemixin.SerializeMixin, QtGui.QIconEngine):
 
     def add_pixmap(
         self,
-        pixmap: QtGui.QPixmap,
+        pixmap: gui.QPixmap,
         mode: gui.icon.ModeStr | gui.QIcon.Mode,
         state: gui.icon.StateStr | gui.QIcon.State,
     ):

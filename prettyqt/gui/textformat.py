@@ -3,35 +3,34 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr
 
 
 FORMAT_TYPE = bidict(
-    invalid=QtGui.QTextFormat.FormatType.InvalidFormat,
-    block=QtGui.QTextFormat.FormatType.BlockFormat,
-    char=QtGui.QTextFormat.FormatType.CharFormat,
-    list=QtGui.QTextFormat.FormatType.ListFormat,
-    frame=QtGui.QTextFormat.FormatType.FrameFormat,
-    user=QtGui.QTextFormat.FormatType.UserFormat,
+    invalid=gui.QTextFormat.FormatType.InvalidFormat,
+    block=gui.QTextFormat.FormatType.BlockFormat,
+    char=gui.QTextFormat.FormatType.CharFormat,
+    list=gui.QTextFormat.FormatType.ListFormat,
+    frame=gui.QTextFormat.FormatType.FrameFormat,
+    user=gui.QTextFormat.FormatType.UserFormat,
 )
 
 FormatTypeStr = Literal["invalid", "block", "char", "list", "frame", "user"]
 
 OBJECT_TYPE = bidict(
-    none=QtGui.QTextFormat.ObjectTypes.NoObject,
-    image=QtGui.QTextFormat.ObjectTypes.ImageObject,
-    table=QtGui.QTextFormat.ObjectTypes.TableObject,
-    table_cell=QtGui.QTextFormat.ObjectTypes.TableCellObject,
-    user=QtGui.QTextFormat.ObjectTypes.UserObject,
+    none=gui.QTextFormat.ObjectTypes.NoObject,
+    image=gui.QTextFormat.ObjectTypes.ImageObject,
+    table=gui.QTextFormat.ObjectTypes.TableObject,
+    table_cell=gui.QTextFormat.ObjectTypes.TableCellObject,
+    user=gui.QTextFormat.ObjectTypes.UserObject,
 )
 
 ObjectTypeStr = Literal["none", "image", "table", "table_cell", "user"]
 
 PAGE_BREAK_FLAG = bidict(
-    auto=QtGui.QTextFormat.PageBreakFlag.PageBreak_Auto,
-    always_before=QtGui.QTextFormat.PageBreakFlag.PageBreak_AlwaysBefore,
-    always_after=QtGui.QTextFormat.PageBreakFlag.PageBreak_AlwaysAfter,
+    auto=gui.QTextFormat.PageBreakFlag.PageBreak_Auto,
+    always_before=gui.QTextFormat.PageBreakFlag.PageBreak_AlwaysBefore,
+    always_after=gui.QTextFormat.PageBreakFlag.PageBreak_AlwaysAfter,
 )
 
 PageBreakFlagStr = Literal["auto", "always_before", "always_after"]
@@ -87,11 +86,11 @@ class TextFormatMixin:
         return constants.LAYOUT_DIRECTION.inverse[self.layoutDirection()]
 
     def select_full_width(self, value: bool = True):
-        prop = QtGui.QTextFormat.Property.FullWidthSelection
+        prop = gui.QTextFormat.Property.FullWidthSelection
         self.setProperty(prop, value)  # type: ignore
 
 
-class TextFormat(TextFormatMixin, QtGui.QTextFormat):
+class TextFormat(TextFormatMixin, gui.QTextFormat):
     pass
 
 

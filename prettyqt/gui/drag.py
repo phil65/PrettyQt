@@ -3,10 +3,9 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
 
 
-class Drag(core.ObjectMixin, QtGui.QDrag):
+class Drag(core.ObjectMixin, gui.QDrag):
     def get_pixmap(self) -> gui.Pixmap:
         return gui.Pixmap(self.pixmap())
 
@@ -21,7 +20,7 @@ class Drag(core.ObjectMixin, QtGui.QDrag):
 
     def set_drag_cursor(
         self,
-        cursor: QtGui.QPixmap,
+        cursor: gui.QPixmap,
         action: constants.DropActionStr | constants.DropAction,
     ):
         self.setDragCursor(cursor, constants.DROP_ACTION.get_enum_value(action))

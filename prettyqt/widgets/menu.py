@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -11,23 +10,23 @@ class MenuMixin(widgets.WidgetMixin):
     def __init__(self, *args, tool_tips_visible=True, **kwargs):
         super().__init__(*args, tool_tips_visible=tool_tips_visible, **kwargs)
 
-    def __iter__(self) -> Iterator[QtGui.QAction]:
+    def __iter__(self) -> Iterator[gui.QAction]:
         return iter(self.actions())
 
     def __len__(self) -> int:
         return len(self.actions())
 
-    def __add__(self, other: QtGui.QAction):
+    def __add__(self, other: gui.QAction):
         self.add(other)
         return self
 
-    def __getitem__(self, item: str) -> QtGui.QAction:
+    def __getitem__(self, item: str) -> gui.QAction:
         for action in self.actions():
             if action.objectName() == item:
                 return action
         raise KeyError(f"Action {item} not in menu")
 
-    def add(self, *item: QtGui.QAction):
+    def add(self, *item: gui.QAction):
         for i in item:
             i.setParent(self)
             self.addAction(i)
@@ -68,14 +67,14 @@ class MenuMixin(widgets.WidgetMixin):
         self.add(separator)
         return separator
 
-    def add_menu(self, menu: QtWidgets.QMenu) -> gui.Action:
+    def add_menu(self, menu: widgets.QMenu) -> gui.Action:
         action = gui.Action(text=menu.title(), icon=menu.icon())
         action.setMenu(menu)
         super().addAction(action)
         return action
 
 
-class Menu(MenuMixin, QtWidgets.QMenu):
+class Menu(MenuMixin, widgets.QMenu):
     pass
 
 

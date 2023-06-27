@@ -4,7 +4,6 @@ from typing import Literal
 import re
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 
 ModeStr = Literal["word", "all"]
 
@@ -12,13 +11,13 @@ PAT = re.compile("\\s+")
 
 
 class SelectedWordHighlighter(gui.SyntaxHighlighter):
-    def __init__(self, parent: QtGui.QTextDocument | None = None):
+    def __init__(self, parent: gui.QTextDocument | None = None):
         super().__init__(parent)
         self._selection_term = ""
         self._mode = "word"
         self._highlight_format = gui.TextCharFormat()
         self._highlight_format.setBackground(gui.Color(255, 210, 120))
-        self._highlight_format.setFontWeight(QtGui.QFont.Weight.Bold)
+        self._highlight_format.setFontWeight(gui.QFont.Weight.Bold)
         self._highlight_pattern = None
         self._widget = parent.parent()
         self._widget.selectionChanged.connect(self._filter_selection_for_single_word)

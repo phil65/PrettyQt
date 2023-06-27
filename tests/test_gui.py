@@ -11,7 +11,6 @@ import sys
 import pytest
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 
@@ -86,7 +85,7 @@ def test_brush():
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Somehow fails on OSX")
 def test_clipboard(qapp):
-    mimedata = QtCore.QMimeData()
+    mimedata = core.QMimeData()
     pixmap = gui.Pixmap(100, 100)
     image = pixmap.toImage()
     cb = qapp.get_clipboard()
@@ -663,7 +662,7 @@ def test_painterpath():
     assert bool(path)
     assert core.PointF(0.5, 0.5) in path
     path[1] = (0.5, 0.5)
-    path.add_rect(QtCore.QRect(0, 0, 1, 1))
+    path.add_rect(core.QRect(0, 0, 1, 1))
 
 
 def test_painterpathstroker():

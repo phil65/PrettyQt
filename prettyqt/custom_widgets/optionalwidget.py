@@ -1,15 +1,14 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
 class OptionalWidget(widgets.GroupBox):
     def __init__(
         self,
-        widget: QtWidgets.QWidget,
+        widget: widgets.QWidget,
         title: str = "",
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
     ):
         super().__init__(checkable=True, title=title)
         self.set_layout("vertical")

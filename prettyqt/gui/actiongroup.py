@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
@@ -17,7 +17,7 @@ EXCLUSION_POLICY: bidict[ExclusionPolicyStr, QtGui.QActionGroup.ExclusionPolicy]
 
 
 class ActionGroup(core.ObjectMixin, QtGui.QActionGroup):
-    def __init__(self, parent: QtCore.QObject | None = None, **kwargs):
+    def __init__(self, parent: core.QObject | None = None, **kwargs):
         super().__init__(parent, **kwargs)
 
     def _get_map(self):

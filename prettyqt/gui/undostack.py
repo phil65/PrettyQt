@@ -4,14 +4,13 @@ from collections.abc import Callable
 import contextlib
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 
 
 class UndoStackMixin(core.ObjectMixin):
     def __len__(self) -> int:
         return self.count()
 
-    def __getitem__(self, index: int) -> QtGui.QUndoCommand:
+    def __getitem__(self, index: int) -> gui.QUndoCommand:
         cmd = self.command(index)
         if cmd is None:
             raise KeyError(index)
@@ -36,5 +35,5 @@ class UndoStackMixin(core.ObjectMixin):
         return cmd
 
 
-class UndoStack(UndoStackMixin, QtGui.QUndoStack):
+class UndoStack(UndoStackMixin, gui.QUndoStack):
     pass

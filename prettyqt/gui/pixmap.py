@@ -7,7 +7,6 @@ import pathlib
 from typing_extensions import Self
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes, serializemixin
 
 
@@ -28,13 +27,13 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
             data = f.read()
         # Create widget
         pixmap = cls()
-        pixmap.loadFromData(QtCore.QByteArray(data))
+        pixmap.loadFromData(core.QByteArray(data))
         return pixmap
 
     @classmethod
     def from_image(
         cls,
-        img: QtGui.QImage,
+        img: gui.QImage,
         color_preference: constants.ColorPreferenceStr = "auto",
         dithering: constants.DitherPreferenceStr = "diffuse",
         alpha_dithering: constants.AlphaDitherPreferenceStr = "threshold",
@@ -135,13 +134,13 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
             rect = core.RectF(margin, margin, w, w)
             painter.draw_rounded_rect(rect, 30, 30, relative=True)
             painter.set_pen(color=color)
-            with painter.edit_font() as font:  # type: QtGui.QFont
+            with painter.edit_font() as font:  # type: gui.QFont
                 font.setPixelSize(size - 2 * margin - 2 * text_margin)
             painter.draw_text(rect, char, alignment="center")
         return pixmap
 
 
-class Pixmap(PixmapMixin, QtGui.QPixmap):
+class Pixmap(PixmapMixin, gui.QPixmap):
     pass
 
 

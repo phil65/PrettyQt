@@ -6,7 +6,6 @@ import sys
 from typing import SupportsInt
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes
 
 
@@ -15,7 +14,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
 
     def event(self, e):
         match e.type():
-            case QtCore.QEvent.Type.ApplicationPaletteChange:
+            case core.QEvent.Type.ApplicationPaletteChange:
                 self.palette_changed.emit(gui.Palette(self.palette()))
         return super().event(e)
 
@@ -47,7 +46,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         cls.setPalette(palette)
 
     @classmethod
-    def find_window(cls, h_wnd: SupportsInt) -> QtGui.QWindow:
+    def find_window(cls, h_wnd: SupportsInt) -> gui.QWindow:
         for window in cls.topLevelWindows():
             if window and int(window.winId()) == int(h_wnd):
                 return window
@@ -151,7 +150,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
         return None if icon.isNull() else gui.Icon(self.windowIcon())
 
     @classmethod
-    def set_palette(cls, palette: constants.ThemeStr | QtGui.QPalette):
+    def set_palette(cls, palette: constants.ThemeStr | gui.QPalette):
         match palette:
             case "default":
                 pal = gui.Palette()
@@ -188,7 +187,7 @@ class GuiApplicationMixin(core.CoreApplicationMixin):
             tb.set_progress_value(value, total)
 
 
-class GuiApplication(GuiApplicationMixin, QtGui.QGuiApplication):
+class GuiApplication(GuiApplicationMixin, gui.QGuiApplication):
     pass
 
 

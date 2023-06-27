@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, datatypes, get_repr, listdelegators
 
 
@@ -52,11 +52,11 @@ class GraphicsItemMixin:
 
     def collides_with(
         self,
-        item: QtGui.QPainterPath | QtWidgets.QGraphicsItem,
+        item: gui.QPainterPath | QtWidgets.QGraphicsItem,
         mode: constants.ItemSelectionModeStr
         | constants.ItemSelectionMode = "intersects_shape",
     ) -> bool:
-        if isinstance(item, QtGui.QPainterPath):
+        if isinstance(item, gui.QPainterPath):
             return self.collidesWithPath(
                 item, constants.ITEM_SELECTION_MODE.get_enum_value(mode)
             )

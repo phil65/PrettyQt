@@ -3,14 +3,13 @@ from __future__ import annotations
 import os
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 
 
 class CrossFadeWidget(widgets.Widget):
     def __init__(
         self,
-        pixmap_1: QtGui.QPixmap | os.PathLike | None = None,
-        pixmap_2: QtGui.QPixmap | os.PathLike | None = None,
+        pixmap_1: gui.QPixmap | os.PathLike | None = None,
+        pixmap_2: gui.QPixmap | os.PathLike | None = None,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -29,27 +28,27 @@ class CrossFadeWidget(widgets.Widget):
         # self.show()
 
     def set_pixmap_1(
-        self, pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None
+        self, pixmap: gui.QPixmap | os.PathLike | widgets.QWidget | None
     ):
         self.pixmap_1 = self._get_pixmap(pixmap)
         self.updateGeometry()
         self.repaint()
 
     def set_pixmap_2(
-        self, pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None
+        self, pixmap: gui.QPixmap | os.PathLike | widgets.QWidget | None
     ):
         self.pixmap_2 = self._get_pixmap(pixmap)
         self.updateGeometry()
         self.repaint()
 
     @staticmethod
-    def _get_pixmap(pixmap: QtGui.QPixmap | os.PathLike | QtWidgets.QWidget | None):
+    def _get_pixmap(pixmap: gui.QPixmap | os.PathLike | widgets.QWidget | None):
         match pixmap:
-            case QtGui.QPixmap():
+            case gui.QPixmap():
                 return pixmap
             case os.PathLike():
                 return gui.Pixmap(pixmap)
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 return pixmap.grab()
             case None:
                 return gui.Pixmap()

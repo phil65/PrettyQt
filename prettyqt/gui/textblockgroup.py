@@ -3,11 +3,10 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
-class TextBlockGroup(gui.TextObjectMixin, QtGui.QTextBlockGroup):
+class TextBlockGroup(gui.TextObjectMixin, gui.QTextBlockGroup):
     def __repr__(self):
         return get_repr(self)
 

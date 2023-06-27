@@ -4,7 +4,6 @@ from collections.abc import Callable
 from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import bidict
 
 
@@ -12,7 +11,7 @@ if TYPE_CHECKING:
     from collections.abc import Iterator
 
 
-mod = QtWidgets.QWizard
+mod = widgets.QWizard
 
 WizardButtonStr = Literal[
     "back",
@@ -106,13 +105,13 @@ class WizardMixin(widgets.DialogMixin):
         super().__init__(*args, **kwargs)
         self.customButtonClicked.connect(self._on_custom_button_clicked)
 
-    def __getitem__(self, key: int) -> QtWidgets.QWizardPage:
+    def __getitem__(self, key: int) -> widgets.QWizardPage:
         p = self.page(key)
         if p is None:
             raise KeyError(key)
         return p
 
-    def __setitem__(self, key: int, value: QtWidgets.QWizardPage):
+    def __setitem__(self, key: int, value: widgets.QWizardPage):
         return self.setPage(key, value)
 
     def __delitem__(self, key: int):
@@ -120,10 +119,10 @@ class WizardMixin(widgets.DialogMixin):
             raise KeyError(key)
         return self.removePage(key)
 
-    def __iter__(self) -> Iterator[QtWidgets.QWizardPage]:
+    def __iter__(self) -> Iterator[widgets.QWizardPage]:
         return iter(self.page(i) for i in self.pageIds())
 
-    def __add__(self, other: QtWidgets.QWizardPage) -> Wizard:
+    def __add__(self, other: widgets.QWizardPage) -> Wizard:
         self.addPage(other)
         return self
 
@@ -136,7 +135,7 @@ class WizardMixin(widgets.DialogMixin):
             case 8:
                 self.custom_button_3_clicked.emit()
 
-    def add_widget_as_page(self, widget: QtWidgets.QWidget) -> None:
+    def add_widget_as_page(self, widget: widgets.QWidget) -> None:
         page = widgets.WizardPage(self)
         layout = page.set_layout("vertical")
         layout += widget
@@ -183,7 +182,7 @@ class WizardMixin(widgets.DialogMixin):
 
     def get_button(
         self, button_type: WizardButtonStr | mod.WizardButton
-    ) -> QtWidgets.QAbstractButton:
+    ) -> widgets.QAbstractButton:
         return self.button(WIZARD_BUTTON.get_enum_value(button_type))
 
     def set_button_text(
@@ -210,10 +209,10 @@ class WizardMixin(widgets.DialogMixin):
         return self.buttonText(WIZARD_BUTTON.get_enum_value(button_type))
 
     def set_pixmap(
-        self, typ: WizardPixmapStr | mod.WizardPixmap, pixmap: QtGui.QPixmap | None
+        self, typ: WizardPixmapStr | mod.WizardPixmap, pixmap: gui.QPixmap | None
     ):
         if pixmap is None:
-            pixmap = QtGui.QPixmap()
+            pixmap = gui.QPixmap()
         self.setPixmap(WIZARD_PIXMAP.get_enum_value(typ), pixmap)
 
     def get_pixmap(self, typ: WizardPixmapStr | mod.WizardPixmap) -> gui.Pixmap | None:
@@ -273,7 +272,7 @@ class WizardMixin(widgets.DialogMixin):
                     self.custom_button_3_clicked.connect(callback)
 
 
-class Wizard(WizardMixin, QtWidgets.QWizard):
+class Wizard(WizardMixin, widgets.QWizard):
     pass
 
 

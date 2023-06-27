@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes, get_repr
 
 
@@ -11,7 +10,7 @@ class IconLabel(widgets.Widget):
         text: str | None = None,
         tooltip: str = "",
         icon: datatypes.IconType = "mdi.help-circle-outline",
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         self.set_layout("horizontal", spacing=0)

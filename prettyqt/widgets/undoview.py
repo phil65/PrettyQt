@@ -3,15 +3,14 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 from prettyqt import gui, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
 
 
 if TYPE_CHECKING:
     from prettyqt.utils import datatypes
 
 
-class UndoView(widgets.ListViewMixin, QtWidgets.QUndoView):
-    def __getitem__(self, index: int) -> QtGui.QUndoCommand:
+class UndoView(widgets.ListViewMixin, widgets.QUndoView):
+    def __getitem__(self, index: int) -> gui.QUndoCommand:
         return self.stack().command(index)
 
     def set_clean_icon(self, icon: datatypes.IconType):
@@ -23,8 +22,8 @@ class UndoView(widgets.ListViewMixin, QtWidgets.QUndoView):
         icon = iconprovider.get_icon(icon)
         self.setCleanIcon(icon)
 
-    def set_value(self, value: QtGui.QUndoGroup | QtGui.QUndoStack):
-        if isinstance(value, QtGui.QUndoGroup):
+    def set_value(self, value: gui.QUndoGroup | gui.QUndoStack):
+        if isinstance(value, gui.QUndoGroup):
             self.setGroup(value)
         else:
             self.setStack(value)

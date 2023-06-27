@@ -5,20 +5,19 @@ import re
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 import bidict as bd
 
 RE_MAP = bd.bidict(
     {
-        re.IGNORECASE: QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
-        re.MULTILINE: QtCore.QRegularExpression.PatternOption.MultilineOption,
-        re.DOTALL: QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption,
-        re.VERBOSE: QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
+        re.IGNORECASE: core.QRegularExpression.PatternOption.CaseInsensitiveOption,
+        re.MULTILINE: core.QRegularExpression.PatternOption.MultilineOption,
+        re.DOTALL: core.QRegularExpression.PatternOption.DotMatchesEverythingOption,
+        re.VERBOSE: core.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
     }
 )
 
-mod = QtCore.QRegularExpression
+mod = core.QRegularExpression
 
 PatternOptionStr = Literal[
     "none",
@@ -59,14 +58,14 @@ MATCH_OPTIONS: bidict[MatchOptionStr, mod.MatchOption] = bidict(
 )
 
 
-class RegularExpression(QtCore.QRegularExpression):
+class RegularExpression(core.QRegularExpression):
     def __init__(
         self,
-        pattern: str | QtCore.QRegularExpression | re.Pattern = "",
-        flags: QtCore.QRegularExpression.PatternOption = PATTERN_OPTIONS["none"],
+        pattern: str | core.QRegularExpression | re.Pattern = "",
+        flags: core.QRegularExpression.PatternOption = PATTERN_OPTIONS["none"],
     ):
         match pattern:
-            case QtCore.QRegularExpression():
+            case core.QRegularExpression():
                 super().__init__(pattern)
             case re.Pattern():
                 qflag = self.PatternOption(0)
@@ -109,7 +108,7 @@ class RegularExpression(QtCore.QRegularExpression):
         self,
         text: str,
         offset: int = 0,
-        match_type: MatchTypeStr | QtCore.QRegularExpression.MatchType = "normal",
+        match_type: MatchTypeStr | core.QRegularExpression.MatchType = "normal",
         anchored: bool = False,
     ) -> core.RegularExpressionMatch:
         typ = MATCH_TYPE[match_type] if isinstance(match_type, str) else match_type
@@ -208,7 +207,7 @@ class RegularExpression(QtCore.QRegularExpression):
         return {k: i for i, k in enumerate(self.namedCaptureGroups()[1:], start=1)}
 
     @property
-    def flags(self) -> QtCore.QRegularExpression.PatternOption:
+    def flags(self) -> core.QRegularExpression.PatternOption:
         return self.patternOptions()
 
     def to_py_pattern(self) -> re.Pattern:

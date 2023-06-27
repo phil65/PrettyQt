@@ -6,14 +6,13 @@ from typing import Any
 from typing_extensions import Self
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
 
 
 DB = core.MimeDatabase()
 
 
-class MimeData(core.ObjectMixin, QtCore.QMimeData):
+class MimeData(core.ObjectMixin, core.QMimeData):
     def __len__(self):
         return len(self.formats())
 
@@ -31,10 +30,10 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
         self.removeFormat(index)
 
     def set_data(self, mime_type: str, data: str):
-        self.setData(mime_type, QtCore.QByteArray(data.encode()))
+        self.setData(mime_type, core.QByteArray(data.encode()))
 
     def set_json_data(self, mime_type: str, data: datatypes.JSONType):
-        self.setData(mime_type, QtCore.QByteArray(helpers.dump_json(data)))
+        self.setData(mime_type, core.QByteArray(helpers.dump_json(data)))
 
     def get_data(self, mime_type: str) -> str:
         return bytes(self.data(mime_type)).decode()
@@ -69,7 +68,7 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
     @classmethod
     def for_file(
         cls,
-        path: datatypes.PathType | QtCore.QFileInfo,
+        path: datatypes.PathType | core.QFileInfo,
         match_mode: core.mimedatabase.MatchModeStr = "default",
     ) -> MimeData:
         db = core.MimeDatabase()
@@ -80,7 +79,7 @@ class MimeData(core.ObjectMixin, QtCore.QMimeData):
         return {i: self.data(i).data() for i in self.formats()}
 
     @classmethod
-    def clone(cls, other: QtCore.QMimeData) -> Self:
+    def clone(cls, other: core.QMimeData) -> Self:
         mime = cls()
         for fmt in other.formats():
             mime.setData(fmt, other.data(fmt))

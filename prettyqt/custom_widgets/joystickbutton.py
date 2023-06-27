@@ -3,13 +3,13 @@ from __future__ import annotations
 from math import hypot
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 
 
 class JoystickButton(widgets.PushButton):
     state_changed = core.Signal(object)
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent)
         self.radius = 200
         self.setCheckable(True)

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
 class HexValidator(gui.Validator):
@@ -16,7 +15,7 @@ class HexValidator(gui.Validator):
 
     def validate(
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         try:
             val = int(text, 0)
         except ValueError:

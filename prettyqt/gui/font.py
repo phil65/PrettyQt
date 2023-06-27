@@ -6,16 +6,15 @@ from typing import Any, Literal
 from typing_extensions import Self
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr
 
 
 CAPITALIZATION = bidict(
-    mixed_case=QtGui.QFont.Capitalization.MixedCase,
-    all_uppercase=QtGui.QFont.Capitalization.AllUppercase,
-    all_lowercase=QtGui.QFont.Capitalization.AllLowercase,
-    small_caps=QtGui.QFont.Capitalization.SmallCaps,
-    capitalize=QtGui.QFont.Capitalization.Capitalize,
+    mixed_case=gui.QFont.Capitalization.MixedCase,
+    all_uppercase=gui.QFont.Capitalization.AllUppercase,
+    all_lowercase=gui.QFont.Capitalization.AllLowercase,
+    small_caps=gui.QFont.Capitalization.SmallCaps,
+    capitalize=gui.QFont.Capitalization.Capitalize,
 )
 
 CapitalizationStr = Literal[
@@ -23,32 +22,32 @@ CapitalizationStr = Literal[
 ]
 
 HINTING_PREFERENCE = bidict(
-    default=QtGui.QFont.HintingPreference.PreferDefaultHinting,
-    none=QtGui.QFont.HintingPreference.PreferNoHinting,
-    vertical=QtGui.QFont.HintingPreference.PreferVerticalHinting,
-    full=QtGui.QFont.HintingPreference.PreferFullHinting,
+    default=gui.QFont.HintingPreference.PreferDefaultHinting,
+    none=gui.QFont.HintingPreference.PreferNoHinting,
+    vertical=gui.QFont.HintingPreference.PreferVerticalHinting,
+    full=gui.QFont.HintingPreference.PreferFullHinting,
 )
 
 HintingPreferenceStr = Literal["default", "none", "vertical", "full"]
 
 SPACING_TYPE = bidict(
-    percentage=QtGui.QFont.SpacingType.PercentageSpacing,
-    absolute=QtGui.QFont.SpacingType.AbsoluteSpacing,
+    percentage=gui.QFont.SpacingType.PercentageSpacing,
+    absolute=gui.QFont.SpacingType.AbsoluteSpacing,
 )
 
 SpacingTypeStr = Literal["percentage", "absolute"]
 
 STRETCH = bidict(
-    any=QtGui.QFont.Stretch.AnyStretch,
-    ultra_condensed=QtGui.QFont.Stretch.UltraCondensed,
-    extra_condensed=QtGui.QFont.Stretch.ExtraCondensed,
-    condensed=QtGui.QFont.Stretch.Condensed,
-    semi_condensed=QtGui.QFont.Stretch.SemiCondensed,
-    unstretched=QtGui.QFont.Stretch.Unstretched,
-    semi_expanded=QtGui.QFont.Stretch.SemiExpanded,
-    expanded=QtGui.QFont.Stretch.Expanded,
-    extra_expanded=QtGui.QFont.Stretch.ExtraExpanded,
-    ultra_expanded=QtGui.QFont.Stretch.UltraExpanded,
+    any=gui.QFont.Stretch.AnyStretch,
+    ultra_condensed=gui.QFont.Stretch.UltraCondensed,
+    extra_condensed=gui.QFont.Stretch.ExtraCondensed,
+    condensed=gui.QFont.Stretch.Condensed,
+    semi_condensed=gui.QFont.Stretch.SemiCondensed,
+    unstretched=gui.QFont.Stretch.Unstretched,
+    semi_expanded=gui.QFont.Stretch.SemiExpanded,
+    expanded=gui.QFont.Stretch.Expanded,
+    extra_expanded=gui.QFont.Stretch.ExtraExpanded,
+    ultra_expanded=gui.QFont.Stretch.UltraExpanded,
 )
 
 StretchStr = Literal[
@@ -65,24 +64,24 @@ StretchStr = Literal[
 ]
 
 STYLE = bidict(
-    normal=QtGui.QFont.Style.StyleNormal,
-    italic=QtGui.QFont.Style.StyleItalic,
-    oblique=QtGui.QFont.Style.StyleOblique,
+    normal=gui.QFont.Style.StyleNormal,
+    italic=gui.QFont.Style.StyleItalic,
+    oblique=gui.QFont.Style.StyleOblique,
 )
 
 StyleStr = Literal["normal", "italic", "oblique"]
 
 STYLE_STRATEGY = bidict(
-    prefer_default=QtGui.QFont.StyleStrategy.PreferDefault,
-    prefer_bitmap=QtGui.QFont.StyleStrategy.PreferBitmap,
-    prefer_device=QtGui.QFont.StyleStrategy.PreferDevice,
-    prefer_outline=QtGui.QFont.StyleStrategy.PreferOutline,
-    force_outline=QtGui.QFont.StyleStrategy.ForceOutline,
-    no_antialias=QtGui.QFont.StyleStrategy.NoAntialias,
-    so_subpixel_antialias=QtGui.QFont.StyleStrategy.NoSubpixelAntialias,
-    prefer_antialias=QtGui.QFont.StyleStrategy.PreferAntialias,
-    no_font_merging=QtGui.QFont.StyleStrategy.NoFontMerging,
-    prefer_no_shaping=QtGui.QFont.StyleStrategy.PreferNoShaping,
+    prefer_default=gui.QFont.StyleStrategy.PreferDefault,
+    prefer_bitmap=gui.QFont.StyleStrategy.PreferBitmap,
+    prefer_device=gui.QFont.StyleStrategy.PreferDevice,
+    prefer_outline=gui.QFont.StyleStrategy.PreferOutline,
+    force_outline=gui.QFont.StyleStrategy.ForceOutline,
+    no_antialias=gui.QFont.StyleStrategy.NoAntialias,
+    so_subpixel_antialias=gui.QFont.StyleStrategy.NoSubpixelAntialias,
+    prefer_antialias=gui.QFont.StyleStrategy.PreferAntialias,
+    no_font_merging=gui.QFont.StyleStrategy.NoFontMerging,
+    prefer_no_shaping=gui.QFont.StyleStrategy.PreferNoShaping,
 )  # ORed with PreferMatch, PreferQuality, ForceIntegerMetrics
 
 StyleStrategyStr = Literal[
@@ -99,15 +98,15 @@ StyleStrategyStr = Literal[
 ]
 
 STYLE_HINTS = bidict(
-    any=QtGui.QFont.StyleHint.AnyStyle,
-    sans_serif=QtGui.QFont.StyleHint.SansSerif,
-    serif=QtGui.QFont.StyleHint.Serif,
-    typewriter=QtGui.QFont.StyleHint.TypeWriter,
-    decorative=QtGui.QFont.StyleHint.Decorative,
-    monospace=QtGui.QFont.StyleHint.Monospace,
-    fantasy=QtGui.QFont.StyleHint.Fantasy,
-    cursive=QtGui.QFont.StyleHint.Cursive,
-    system=QtGui.QFont.StyleHint.System,
+    any=gui.QFont.StyleHint.AnyStyle,
+    sans_serif=gui.QFont.StyleHint.SansSerif,
+    serif=gui.QFont.StyleHint.Serif,
+    typewriter=gui.QFont.StyleHint.TypeWriter,
+    decorative=gui.QFont.StyleHint.Decorative,
+    monospace=gui.QFont.StyleHint.Monospace,
+    fantasy=gui.QFont.StyleHint.Fantasy,
+    cursive=gui.QFont.StyleHint.Cursive,
+    system=gui.QFont.StyleHint.System,
 )
 
 StyleHintStr = Literal[
@@ -123,15 +122,15 @@ StyleHintStr = Literal[
 ]
 
 WEIGHT = bidict(
-    thin=QtGui.QFont.Weight.Thin,
-    extra_light=QtGui.QFont.Weight.ExtraLight,
-    light=QtGui.QFont.Weight.Light,
-    normal=QtGui.QFont.Weight.Normal,
-    medium=QtGui.QFont.Weight.Medium,
-    demi_bold=QtGui.QFont.Weight.DemiBold,
-    bold=QtGui.QFont.Weight.Bold,
-    extra_bold=QtGui.QFont.Weight.ExtraBold,
-    black=QtGui.QFont.Weight.Black,
+    thin=gui.QFont.Weight.Thin,
+    extra_light=gui.QFont.Weight.ExtraLight,
+    light=gui.QFont.Weight.Light,
+    normal=gui.QFont.Weight.Normal,
+    medium=gui.QFont.Weight.Medium,
+    demi_bold=gui.QFont.Weight.DemiBold,
+    bold=gui.QFont.Weight.Bold,
+    extra_bold=gui.QFont.Weight.ExtraBold,
+    black=gui.QFont.Weight.Black,
 )
 
 WeightStr = Literal[
@@ -147,7 +146,7 @@ WeightStr = Literal[
 ]
 
 
-class Font(QtGui.QFont):
+class Font(gui.QFont):
     def __repr__(self):
         return get_repr(
             self, self.family(), self.pointSize(), self.weight(), self.italic()
@@ -197,7 +196,7 @@ class Font(QtGui.QFont):
             case _:
                 font = "Monospace"
         if as_qt:
-            return QtGui.QFont(font)
+            return gui.QFont(font)
         else:
             return cls(font, size)
         # font.setStyleHint()
@@ -210,7 +209,7 @@ class Font(QtGui.QFont):
             scaled.setPixelSize(int(self.pixelSize() * factor))
         return scaled
 
-    def set_style_hint(self, hint: StyleHintStr | QtGui.QFont.StyleHint):
+    def set_style_hint(self, hint: StyleHintStr | gui.QFont.StyleHint):
         """Set the style hint.
 
         Args:
@@ -218,7 +217,7 @@ class Font(QtGui.QFont):
         """
         self.setStyleHint(STYLE_HINTS.get_enum_value(hint))
 
-    def set_weight(self, weight: WeightStr | QtGui.QFont.Weight):
+    def set_weight(self, weight: WeightStr | gui.QFont.Weight):
         """Set the font weight.
 
         Args:

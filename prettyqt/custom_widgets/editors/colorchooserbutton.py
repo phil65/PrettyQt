@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes, get_repr
 
 
@@ -56,7 +55,7 @@ class ColorChooserButton(widgets.Widget):
     def set_value(self, value: datatypes.ColorType):
         self.set_current_color(value)
 
-    current_color = core.Property(QtGui.QColor, get_value, set_value, user=True)
+    current_color = core.Property(gui.QColor, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":

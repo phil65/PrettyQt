@@ -30,14 +30,13 @@ from __future__ import annotations
 import math
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import colors, datatypes
 
 
 class BaseWaitingSpinner(widgets.Widget):
     def __init__(
         self,
-        parent: QtWidgets.QWidget | None,
+        parent: widgets.QWidget | None,
         modality: constants.ModalityStr = "none",
     ):
         super().__init__(parent=parent)
@@ -238,7 +237,7 @@ class BaseWaitingSpinner(widgets.Widget):
 class WaitingSpinner(BaseWaitingSpinner):
     def __init__(
         self,
-        parent: QtWidgets.QWidget | None,
+        parent: widgets.QWidget | None,
         center_on_parent: bool = True,
         disable_parent: bool = True,
         modality: constants.ModalityStr = "none",

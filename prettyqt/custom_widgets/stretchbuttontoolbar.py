@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore
 
 
 class StretchButtonToolBar(widgets.ToolBar):
@@ -37,7 +36,7 @@ class StretchButtonToolBar(widgets.ToolBar):
             width = int(height * 1.618) * count + space_spacing + dw + dx
         else:
             height = int(width * 1.618) * count + space_spacing + dh + dy
-        return QtCore.QSize(width, height)
+        return core.QSize(width, height)
 
     def _do_layout(self, size):
         """Layout the buttons to fit inside size."""

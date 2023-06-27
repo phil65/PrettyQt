@@ -12,7 +12,6 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, paths, widgets
-from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import datatypes, listdelegators
 
 
@@ -20,9 +19,9 @@ logger = logging.getLogger(__name__)
 
 
 SAVE_STATES = dict(
-    splitters=QtWidgets.QSplitter,
-    mainwindows=QtWidgets.QMainWindow,
-    headerviews=QtWidgets.QHeaderView,
+    splitters=widgets.QSplitter,
+    mainwindows=widgets.QMainWindow,
+    headerviews=widgets.QHeaderView,
 )
 
 
@@ -50,7 +49,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         self._debug = False
         self.runner = setup_runner()
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget]:
+    def __iter__(self) -> Iterator[widgets.QWidget]:
         return iter(self.topLevelWidgets())
 
     def run_parallel(self, fns: Iterable[Callable]):
@@ -113,7 +112,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     @classmethod
     def widget_at(
         cls, pos: datatypes.PointType, typ: type | None = None
-    ) -> QtWidgets.QWidget:
+    ) -> widgets.QWidget:
         if typ is None:
             return super().widgetAt(pos)
         for widget in cls.widgets_at(pos):
@@ -123,7 +122,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     @classmethod
     def widgets_at(
         cls, pos: datatypes.PointType
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    ) -> listdelegators.BaseListDelegator[widgets.QWidget]:
         """Return ALL widgets at `pos`.
 
         Arguments:
@@ -157,15 +156,15 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         )
 
     @classmethod
-    def get_widget(cls, name: str) -> QtWidgets.QWidget | None:
+    def get_widget(cls, name: str) -> widgets.QWidget | None:
         mw = cls.get_mainwindow()
         if mw is None:
             logger.warning("Trying to get widget from nonexistent mainwindow")
             return None
-        return mw.findChild(QtWidgets.QWidget, name)  # type: ignore
+        return mw.findChild(widgets.QWidget, name)  # type: ignore
         # widget_list = cls.instance().allWidgets()
         # for widget in widget_list:
-        #     if isinstance(widget, QtWidgets.QWidget) and widget.objectName() == name:
+        #     if isinstance(widget, widgets.QWidget) and widget.objectName() == name:
         #         return widget
         # return None
 
@@ -192,7 +191,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         self.setStyleSheet(ss)
 
     def set_style(self, style: str):
-        self.setStyle(QtWidgets.QStyleFactory.create(style))
+        self.setStyle(widgets.QStyleFactory.create(style))
         icon_color = self.get_palette().get_color("highlighted_text")
         iconprovider.set_defaults(color=icon_color)
 
@@ -215,7 +214,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
     def get_available_themes(cls) -> dict[constants.ThemeStr, str]:
         return dict(default="Default", dark="Dark")
 
-    def send_event(self, obj_or_str: str | QtCore.QObject, event: QtCore.QEvent) -> bool:
+    def send_event(self, obj_or_str: str | core.QObject, event: core.QEvent) -> bool:
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
         if obj is None:
             raise ValueError(obj)
@@ -223,8 +222,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
 
     def post_event(
         self,
-        obj_or_str: str | QtCore.QObject,
-        event: QtCore.QEvent,
+        obj_or_str: str | core.QObject,
+        event: core.QEvent,
         priority: int | constants.EventPriorityStr = "normal",
     ):
         obj = self.get_widget(obj_or_str) if isinstance(obj_or_str, str) else obj_or_str
@@ -237,7 +236,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         cls, icon: widgets.style.StandardPixmapStr | widgets.QStyle.StandardPixmap
     ) -> gui.Icon:
         style = cls.style()
-        # icon_size = style.pixelMetric(QtWidgets.QStyle.PM_MessageBoxIconSize)
+        # icon_size = style.pixelMetric(widgets.QStyle.PM_MessageBoxIconSize)
         icon = style.standardIcon(widgets.style.STANDARD_PIXMAP.get_enum_value(icon))
         return gui.Icon(icon)
 
@@ -307,7 +306,7 @@ class ApplicationMixin(gui.GuiApplicationMixin):
         cls.processEvents(flag, msecs)
 
 
-class Application(ApplicationMixin, QtWidgets.QApplication):
+class Application(ApplicationMixin, widgets.QApplication):
     pass
     # def __init__(self, *args, **kwargs):
     #     super().__init__()

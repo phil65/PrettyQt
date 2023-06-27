@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
@@ -90,7 +90,7 @@ StandardPixmapStr = Literal[
     "tab_close",
 ]
 
-mod = QtWidgets.QStyle
+mod = widgets.QStyle
 
 STANDARD_PIXMAP: bidict[StandardPixmapStr, mod.StandardPixmap] = bidict(
     titlebar_min_button=mod.StandardPixmap.SP_TitleBarMinButton,
@@ -757,9 +757,9 @@ class StyleMixin(core.ObjectMixin):
     def draw_primitive(
         self,
         element: SubControlStr | mod.SubControl,
-        option: QtWidgets.QStyleOption,
+        option: widgets.QStyleOption,
         painter: QtGui.QPainter,
-        widget: QtWidgets.QWidget | None = None,
+        widget: widgets.QWidget | None = None,
     ):
         self.drawPrimitive(
             PRIMITIVE_ELEMENT.get_enum_value(element), option, painter, widget
@@ -768,9 +768,9 @@ class StyleMixin(core.ObjectMixin):
     def draw_control(
         self,
         control: ControlElementStr | mod.ControlElement,
-        option: QtWidgets.QStyleOption,
+        option: widgets.QStyleOption,
         painter: QtGui.QPainter,
-        widget: QtWidgets.QWidget | None = None,
+        widget: widgets.QWidget | None = None,
     ):
         self.drawPrimitive(
             CONTROL_ELEMENT.get_enum_value(control), option, painter, widget
@@ -781,19 +781,19 @@ class StyleMixin(core.ObjectMixin):
         control_1: widgets.sizepolicy.ControlTypeStr | widgets.QSizePolicy.ControlType,
         control_2: widgets.sizepolicy.ControlTypeStr | widgets.QSizePolicy.ControlType,
         orientation: constants.OrientationStr | constants.Orientation,
-        option_or_widget: QtWidgets.QStyleOption | QtWidgets.QWidget | None = None,
+        option_or_widget: widgets.QStyleOption | widgets.QWidget | None = None,
     ):
         c1 = widgets.sizepolicy.CONTROL_TYPE.get_enum_value(control_1)
         c2 = widgets.sizepolicy.CONTROL_TYPE.get_enum_value(control_2)
         o = constants.ORIENTATION.get_enum_value(orientation)
         match option_or_widget:
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 return self.layoutSpacing(c1, c2, o, None, option_or_widget)
-            case QtWidgets.QStyleOption() | None:
+            case widgets.QStyleOption() | None:
                 return self.layoutSpacing(c1, c2, o, option_or_widget)
             case _:
                 raise ValueError(option_or_widget)
 
 
-class Style(StyleMixin, QtWidgets.QStyle):
+class Style(StyleMixin, widgets.QStyle):
     pass

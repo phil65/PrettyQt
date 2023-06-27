@@ -7,7 +7,6 @@ import re
 from typing import Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
 
 logger = logging.getLogger(__name__)
@@ -70,7 +69,7 @@ class TextEditSelecter:
         if not self._widget.isReadOnly():
             selection = widgets.TextEdit.ExtraSelection()
             selection.format.setBackground(color)
-            prop = QtGui.QTextFormat.Property.FullWidthSelection
+            prop = gui.QTextFormat.Property.FullWidthSelection
             selection.format.setProperty(prop, True)
             selection.cursor = self._widget.textCursor()
             selection.cursor.clearSelection()
@@ -132,17 +131,17 @@ class TextEditSelecter:
         """
 
         def generate_flags(flagstr: str):
-            self.search_flags = QtGui.QTextDocument.FindFlag(0)
+            self.search_flags = gui.QTextDocument.FindFlag(0)
             if "b" in flagstr:
-                self.search_flags |= QtGui.QTextDocument.FindFlag.FindBackward
+                self.search_flags |= gui.QTextDocument.FindFlag.FindBackward
             if "i" not in flagstr:
-                self.search_flags |= QtGui.QTextDocument.FindFlag.FindCaseSensitively
+                self.search_flags |= gui.QTextDocument.FindFlag.FindCaseSensitively
             if "w" in flagstr:
-                self.search_flags |= QtGui.QTextDocument.FindFlag.FindWholeWords
+                self.search_flags |= gui.QTextDocument.FindFlag.FindWholeWords
 
         if search_match := SEARCH_REGEX.match(arg):
             self.search_buffer = search_match[0]
-            self.search_flags = QtGui.QTextDocument.FindFlag.FindCaseSensitively
+            self.search_flags = gui.QTextDocument.FindFlag.FindCaseSensitively
             self.search_next()
         elif search_flags_match := SEARCH_FLAGS_REGEX.match(arg):
             self.search_buffer, flags = search_flags_match[0].rsplit("/", 1)
@@ -159,7 +158,7 @@ class TextEditSelecter:
             logger.error("Malformed search/replace expression")
 
     def _searching_backwards(self) -> bool:
-        return bool(QtGui.QTextDocument.FindFlag.FindBackward & self.search_flags)
+        return bool(gui.QTextDocument.FindFlag.FindBackward & self.search_flags)
 
     def search_next(self):
         """Go to the next string found.
@@ -206,7 +205,7 @@ class TextEditSelecter:
             t.insertText(replace_buffer)
             length = len(replace_buffer)
             t.setPosition(t.position() - length)
-            t.setPosition(t.position() + length, QtGui.QTextCursor.MoveMode.KeepAnchor)
+            t.setPosition(t.position() + length, gui.QTextCursor.MoveMode.KeepAnchor)
             self._widget.setTextCursor(t)
             logger.info(f"Replaced on line {t.blockNumber()}, pos {t.positionInBlock()}")
         else:
@@ -237,8 +236,8 @@ class TextEditSelecter:
     ):
         color = colors.get_color(highlight_color)
         cursor = self._widget.get_text_cursor()
-        fmt = QtGui.QTextCharFormat()
-        fmt.setBackground(QtGui.QBrush(color))
+        fmt = gui.QTextCharFormat()
+        fmt.setBackground(gui.QBrush(color))
         re = core.RegularExpression(pattern)
         for match in re.global_match(self._widget.toPlainText()):
             cursor.set_position(match.capturedStart(), "move")
@@ -247,7 +246,7 @@ class TextEditSelecter:
 
     def replace_block_at_cursor(self, new_text: str):
         cursor = self._widget.textCursor()
-        cursor.select(QtGui.QTextCursor.MoveOperation.BlockUnderCursor)
+        cursor.select(gui.QTextCursor.MoveOperation.BlockUnderCursor)
         if cursor.selectionStart() != 0:
             new_text = "\n" + new_text
         cursor.removeSelectedText()

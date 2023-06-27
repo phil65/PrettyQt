@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -86,7 +85,7 @@ class AbstractButtonMixin(widgets.WidgetMixin):
     #     self.setPalette(palette)
 
 
-class AbstractButton(AbstractButtonMixin, QtWidgets.QAbstractButton):
+class AbstractButton(AbstractButtonMixin, widgets.QAbstractButton):
     pass
 
 

@@ -3,34 +3,33 @@ from __future__ import annotations
 from typing import Any, Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
 CoordinateModeStr = Literal["logical", "object", "stretch_to_device", "object_bounding"]
 
-COORDINATE_MODE: bidict[CoordinateModeStr, QtGui.QGradient.CoordinateMode] = bidict(
-    logical=QtGui.QGradient.CoordinateMode.LogicalMode,
-    object=QtGui.QGradient.CoordinateMode.ObjectMode,
-    stretch_to_device=QtGui.QGradient.CoordinateMode.StretchToDeviceMode,
-    object_bounding=QtGui.QGradient.CoordinateMode.ObjectBoundingMode,
+COORDINATE_MODE: bidict[CoordinateModeStr, gui.QGradient.CoordinateMode] = bidict(
+    logical=gui.QGradient.CoordinateMode.LogicalMode,
+    object=gui.QGradient.CoordinateMode.ObjectMode,
+    stretch_to_device=gui.QGradient.CoordinateMode.StretchToDeviceMode,
+    object_bounding=gui.QGradient.CoordinateMode.ObjectBoundingMode,
 )
 
 SpreadStr = Literal["pad", "repeat", "reflect"]
 
-SPREAD: bidict[SpreadStr, QtGui.QGradient.Spread] = bidict(
-    pad=QtGui.QGradient.Spread.PadSpread,
-    repeat=QtGui.QGradient.Spread.RepeatSpread,
-    reflect=QtGui.QGradient.Spread.ReflectSpread,
+SPREAD: bidict[SpreadStr, gui.QGradient.Spread] = bidict(
+    pad=gui.QGradient.Spread.PadSpread,
+    repeat=gui.QGradient.Spread.RepeatSpread,
+    reflect=gui.QGradient.Spread.ReflectSpread,
 )
 
 TypeStr = Literal["linear", "radial", "conical", "none"]
 
-TYPE: bidict[TypeStr, QtGui.QGradient.Type] = bidict(
-    linear=QtGui.QGradient.Type.LinearGradient,
-    radial=QtGui.QGradient.Type.RadialGradient,
-    conical=QtGui.QGradient.Type.ConicalGradient,
-    none=QtGui.QGradient.Type.NoGradient,
+TYPE: bidict[TypeStr, gui.QGradient.Type] = bidict(
+    linear=gui.QGradient.Type.LinearGradient,
+    radial=gui.QGradient.Type.RadialGradient,
+    conical=gui.QGradient.Type.ConicalGradient,
+    none=gui.QGradient.Type.NoGradient,
 )
 
 PresetStr = Literal[
@@ -79,50 +78,50 @@ PresetStr = Literal[
     "fly_high",
 ]
 
-PRESET: bidict[PresetStr, QtGui.QGradient.Preset] = bidict(
-    warm_flame=QtGui.QGradient.Preset.WarmFlame,
-    night_fade=QtGui.QGradient.Preset.NightFade,
-    spring_warmth=QtGui.QGradient.Preset.SpringWarmth,
-    juicy_peach=QtGui.QGradient.Preset.JuicyPeach,
-    young_passion=QtGui.QGradient.Preset.YoungPassion,
-    lady_lips=QtGui.QGradient.Preset.LadyLips,
-    sunny_morning=QtGui.QGradient.Preset.SunnyMorning,
-    rainy_ashville=QtGui.QGradient.Preset.RainyAshville,
-    frozen_dreams=QtGui.QGradient.Preset.FrozenDreams,
-    winter_neva=QtGui.QGradient.Preset.WinterNeva,
-    dusty_grass=QtGui.QGradient.Preset.DustyGrass,
-    tempting_azure=QtGui.QGradient.Preset.TemptingAzure,
-    heavy_rain=QtGui.QGradient.Preset.HeavyRain,
-    amy_crisp=QtGui.QGradient.Preset.AmyCrisp,
-    mean_fruit=QtGui.QGradient.Preset.MeanFruit,
-    deep_blue=QtGui.QGradient.Preset.DeepBlue,
-    ripe_malinka=QtGui.QGradient.Preset.RipeMalinka,
-    cloudy_knoxville=QtGui.QGradient.Preset.CloudyKnoxville,
-    malibu_beach=QtGui.QGradient.Preset.MalibuBeach,
-    new_life=QtGui.QGradient.Preset.NewLife,
-    true_sunset=QtGui.QGradient.Preset.TrueSunset,
-    morpheus_den=QtGui.QGradient.Preset.MorpheusDen,
-    rare_wind=QtGui.QGradient.Preset.RareWind,
-    near_moon=QtGui.QGradient.Preset.NearMoon,
-    wild_apple=QtGui.QGradient.Preset.WildApple,
-    saint_petersburg=QtGui.QGradient.Preset.SaintPetersburg,
-    plum_plate=QtGui.QGradient.Preset.PlumPlate,
-    everlasting_sky=QtGui.QGradient.Preset.EverlastingSky,
-    happy_fisher=QtGui.QGradient.Preset.HappyFisher,
-    blessing=QtGui.QGradient.Preset.Blessing,
-    sharpeye_eagle=QtGui.QGradient.Preset.SharpeyeEagle,
-    ladoga_bottom=QtGui.QGradient.Preset.LadogaBottom,
-    lemon_gate=QtGui.QGradient.Preset.LemonGate,
-    itmeo_branding=QtGui.QGradient.Preset.ItmeoBranding,
-    zeus_miracle=QtGui.QGradient.Preset.ZeusMiracle,
-    old_hat=QtGui.QGradient.Preset.OldHat,
-    star_wine=QtGui.QGradient.Preset.StarWine,
-    happy_acid=QtGui.QGradient.Preset.HappyAcid,
-    awesome_pine=QtGui.QGradient.Preset.AwesomePine,
-    new_york=QtGui.QGradient.Preset.NewYork,
-    shy_rainbow=QtGui.QGradient.Preset.ShyRainbow,
-    mixed_hopes=QtGui.QGradient.Preset.MixedHopes,
-    fly_high=QtGui.QGradient.Preset.FlyHigh,
+PRESET: bidict[PresetStr, gui.QGradient.Preset] = bidict(
+    warm_flame=gui.QGradient.Preset.WarmFlame,
+    night_fade=gui.QGradient.Preset.NightFade,
+    spring_warmth=gui.QGradient.Preset.SpringWarmth,
+    juicy_peach=gui.QGradient.Preset.JuicyPeach,
+    young_passion=gui.QGradient.Preset.YoungPassion,
+    lady_lips=gui.QGradient.Preset.LadyLips,
+    sunny_morning=gui.QGradient.Preset.SunnyMorning,
+    rainy_ashville=gui.QGradient.Preset.RainyAshville,
+    frozen_dreams=gui.QGradient.Preset.FrozenDreams,
+    winter_neva=gui.QGradient.Preset.WinterNeva,
+    dusty_grass=gui.QGradient.Preset.DustyGrass,
+    tempting_azure=gui.QGradient.Preset.TemptingAzure,
+    heavy_rain=gui.QGradient.Preset.HeavyRain,
+    amy_crisp=gui.QGradient.Preset.AmyCrisp,
+    mean_fruit=gui.QGradient.Preset.MeanFruit,
+    deep_blue=gui.QGradient.Preset.DeepBlue,
+    ripe_malinka=gui.QGradient.Preset.RipeMalinka,
+    cloudy_knoxville=gui.QGradient.Preset.CloudyKnoxville,
+    malibu_beach=gui.QGradient.Preset.MalibuBeach,
+    new_life=gui.QGradient.Preset.NewLife,
+    true_sunset=gui.QGradient.Preset.TrueSunset,
+    morpheus_den=gui.QGradient.Preset.MorpheusDen,
+    rare_wind=gui.QGradient.Preset.RareWind,
+    near_moon=gui.QGradient.Preset.NearMoon,
+    wild_apple=gui.QGradient.Preset.WildApple,
+    saint_petersburg=gui.QGradient.Preset.SaintPetersburg,
+    plum_plate=gui.QGradient.Preset.PlumPlate,
+    everlasting_sky=gui.QGradient.Preset.EverlastingSky,
+    happy_fisher=gui.QGradient.Preset.HappyFisher,
+    blessing=gui.QGradient.Preset.Blessing,
+    sharpeye_eagle=gui.QGradient.Preset.SharpeyeEagle,
+    ladoga_bottom=gui.QGradient.Preset.LadogaBottom,
+    lemon_gate=gui.QGradient.Preset.LemonGate,
+    itmeo_branding=gui.QGradient.Preset.ItmeoBranding,
+    zeus_miracle=gui.QGradient.Preset.ZeusMiracle,
+    old_hat=gui.QGradient.Preset.OldHat,
+    star_wine=gui.QGradient.Preset.StarWine,
+    happy_acid=gui.QGradient.Preset.HappyAcid,
+    awesome_pine=gui.QGradient.Preset.AwesomePine,
+    new_york=gui.QGradient.Preset.NewYork,
+    shy_rainbow=gui.QGradient.Preset.ShyRainbow,
+    mixed_hopes=gui.QGradient.Preset.MixedHopes,
+    fly_high=gui.QGradient.Preset.FlyHigh,
     # ...
 )
 
@@ -139,7 +138,7 @@ class GradientMixin:
         )
 
     def set_coordinate_mode(
-        self, mode: CoordinateModeStr | QtGui.QGradient.CoordinateMode
+        self, mode: CoordinateModeStr | gui.QGradient.CoordinateMode
     ):
         """Set the coordinate mode.
 
@@ -156,7 +155,7 @@ class GradientMixin:
         """
         return COORDINATE_MODE.inverse[self.coordinateMode()]
 
-    def set_spread(self, method: SpreadStr | QtGui.QGradient.Spread):
+    def set_spread(self, method: SpreadStr | gui.QGradient.Spread):
         """Set the spread method.
 
         Args:
@@ -202,7 +201,7 @@ class GradientMixin:
                 self.setColorAt(pos, color.darker(-factor))
 
 
-class Gradient(GradientMixin, QtGui.QGradient):
+class Gradient(GradientMixin, gui.QGradient):
     pass
 
 

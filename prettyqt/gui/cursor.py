@@ -4,13 +4,12 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import serializemixin
 
 logger = logging.getLogger(__name__)
 
 
-class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
+class Cursor(serializemixin.SerializeMixin, gui.QCursor):
     @classmethod
     def fake_mouse_move(cls):
         cls.setPos(cls.pos() + core.Point(0, 1))
@@ -29,7 +28,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
         local = pos - widget.mapToGlobal(core.PointF(0, 0))
         logger.info(f"sending MouseClick events to {widget} at {local}")
         event = gui.QMouseEvent(
-            QtCore.QEvent.Type.MouseButtonPress,
+            core.QEvent.Type.MouseButtonPress,
             local,
             pos,
             key,
@@ -39,7 +38,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
 
         core.CoreApplication.sendEvent(widget, event)
         event = gui.QMouseEvent(
-            QtCore.QEvent.Type.MouseButtonRelease,
+            core.QEvent.Type.MouseButtonRelease,
             local,
             pos,
             key,
@@ -72,9 +71,9 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
     @classmethod
     def set_pos(
         cls,
-        where: Literal["screen", "current"] | QtGui.QScreen
+        where: Literal["screen", "current"] | gui.QScreen
         # | QtWidgets.QWidget
-        | QtCore.QRect | QtCore.QPoint | tuple[int, int] | tuple[int, int, int, int],
+        | core.QRect | core.QPoint | tuple[int, int] | tuple[int, int, int, int],
         how: Literal[
             "center",
             "top",
@@ -103,18 +102,18 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
             case "current":
                 p = cls.pos()
                 geom = core.Rect(p, p)
-            case QtCore.QPoint():
+            case core.QPoint():
                 geom = core.Rect(where, where)
             case (int(), int()):
                 p = core.Point(*where)
                 geom = core.Rect(p, p)
             case (int(), int(), int(), int()):
                 geom = core.Rect(*where)
-            case QtCore.QRect():
+            case core.QRect():
                 geom = where
             case "screen":
                 geom = gui.GuiApplication.primaryScreen().geometry()
-            case QtGui.QScreen():
+            case gui.QScreen():
                 geom = where.geometry()
             case _:  # not wanting to import QtWidgets here... perhaps create a protocol.
                 geom = where.frameGeometry()

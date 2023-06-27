@@ -5,14 +5,13 @@ import re
 from typing import Any
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 import bidict
 
 
-# IGNORECASE = QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption
-# MULTILINE = QtCore.QRegularExpression.PatternOption.MultilineOption
-# DOTALL = QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption
-# VERBOSE = QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption
+# IGNORECASE = core.QRegularExpression.PatternOption.CaseInsensitiveOption
+# MULTILINE = core.QRegularExpression.PatternOption.MultilineOption
+# DOTALL = core.QRegularExpression.PatternOption.DotMatchesEverythingOption
+# VERBOSE = core.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption
 
 DONT_ESCAPE = {"!", '"', "%", "'", ",", "/", ":", ";", "<", "=", ">", "@", "`"}
 
@@ -23,10 +22,10 @@ VERBOSE = re.VERBOSE
 
 MAP = bidict.bidict(
     {
-        re.IGNORECASE: QtCore.QRegularExpression.PatternOption.CaseInsensitiveOption,
-        re.MULTILINE: QtCore.QRegularExpression.PatternOption.MultilineOption,
-        re.DOTALL: QtCore.QRegularExpression.PatternOption.DotMatchesEverythingOption,
-        re.VERBOSE: QtCore.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
+        re.IGNORECASE: core.QRegularExpression.PatternOption.CaseInsensitiveOption,
+        re.MULTILINE: core.QRegularExpression.PatternOption.MultilineOption,
+        re.DOTALL: core.QRegularExpression.PatternOption.DotMatchesEverythingOption,
+        re.VERBOSE: core.QRegularExpression.PatternOption.ExtendedPatternSyntaxOption,
     }
 )
 
@@ -92,7 +91,7 @@ class Match(core.RegularExpressionMatch):
         return self.re.namedCaptureGroups()[self.lastCapturedIndex()]
 
     @property
-    def re(self) -> QtCore.QRegularExpression:
+    def re(self) -> core.QRegularExpression:
         return self.regularExpression()
 
     @property
@@ -102,7 +101,7 @@ class Match(core.RegularExpressionMatch):
 
 class Pattern(core.RegularExpression):
     def __init__(self, pattern: str = "", flags: int = 0):
-        flag = QtCore.QRegularExpression.PatternOption.NoPatternOption
+        flag = core.QRegularExpression.PatternOption.NoPatternOption
         for k, v in MAP.items():
             if k & flags:
                 flag |= v

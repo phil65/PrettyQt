@@ -3,22 +3,21 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import bidict
 
 
 FontFilterStr = Literal["all", "scalable", "non_scalable", "monospaced", "proportional"]
 
-FONT_FILTERS: bidict[FontFilterStr, QtWidgets.QFontComboBox.FontFilter] = bidict(
-    all=QtWidgets.QFontComboBox.FontFilter.AllFonts,
-    scalable=QtWidgets.QFontComboBox.FontFilter.ScalableFonts,
-    non_scalable=QtWidgets.QFontComboBox.FontFilter.NonScalableFonts,
-    monospaced=QtWidgets.QFontComboBox.FontFilter.MonospacedFonts,
-    proportional=QtWidgets.QFontComboBox.FontFilter.ProportionalFonts,
+FONT_FILTERS: bidict[FontFilterStr, widgets.QFontComboBox.FontFilter] = bidict(
+    all=widgets.QFontComboBox.FontFilter.AllFonts,
+    scalable=widgets.QFontComboBox.FontFilter.ScalableFonts,
+    non_scalable=widgets.QFontComboBox.FontFilter.NonScalableFonts,
+    monospaced=widgets.QFontComboBox.FontFilter.MonospacedFonts,
+    proportional=widgets.QFontComboBox.FontFilter.ProportionalFonts,
 )
 
 
-class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
+class FontComboBox(widgets.ComboBoxMixin, widgets.QFontComboBox):
     value_changed = core.Signal(gui.QFont)
 
     def _get_map(self):
@@ -48,7 +47,7 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
         """
         return FONT_FILTERS.get_list(self.fontFilters())
 
-    def set_value(self, value: QtGui.QFont):
+    def set_value(self, value: gui.QFont):
         self.setCurrentFont(value)
 
     def get_value(self) -> gui.QFont:
@@ -59,7 +58,7 @@ class FontComboBox(widgets.ComboBoxMixin, QtWidgets.QFontComboBox):
 
     # without this, the user property would be currentText, which is not what we want.
     # PyQt6 doesnt like gui.Font here.
-    value = core.Property(QtGui.QFont, get_value, set_value, user=True)
+    value = core.Property(gui.QFont, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":

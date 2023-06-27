@@ -4,42 +4,41 @@ import contextlib
 from typing import Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
 MOVE_MODE = bidict(
-    move=QtGui.QTextCursor.MoveMode.MoveAnchor, keep=QtGui.QTextCursor.MoveMode.KeepAnchor
+    move=gui.QTextCursor.MoveMode.MoveAnchor, keep=gui.QTextCursor.MoveMode.KeepAnchor
 )
 
 MoveModeStr = Literal["move", "keep"]
 
 MOVE_OPERATION = bidict(
-    no_move=QtGui.QTextCursor.MoveOperation.NoMove,
-    start=QtGui.QTextCursor.MoveOperation.Start,
-    start_of_line=QtGui.QTextCursor.MoveOperation.StartOfLine,
-    start_of_block=QtGui.QTextCursor.MoveOperation.StartOfBlock,
-    start_of_word=QtGui.QTextCursor.MoveOperation.StartOfWord,
-    previous_block=QtGui.QTextCursor.MoveOperation.PreviousBlock,
-    previous_char=QtGui.QTextCursor.MoveOperation.PreviousCharacter,
-    previous_word=QtGui.QTextCursor.MoveOperation.PreviousWord,
-    up=QtGui.QTextCursor.MoveOperation.Up,
-    left=QtGui.QTextCursor.MoveOperation.Left,
-    word_left=QtGui.QTextCursor.MoveOperation.WordLeft,
-    end=QtGui.QTextCursor.MoveOperation.End,
-    end_of_line=QtGui.QTextCursor.MoveOperation.EndOfLine,
-    end_of_word=QtGui.QTextCursor.MoveOperation.EndOfWord,
-    end_of_block=QtGui.QTextCursor.MoveOperation.EndOfBlock,
-    next_block=QtGui.QTextCursor.MoveOperation.NextBlock,
-    next_char=QtGui.QTextCursor.MoveOperation.NextCharacter,
-    next_word=QtGui.QTextCursor.MoveOperation.NextWord,
-    down=QtGui.QTextCursor.MoveOperation.Down,
-    right=QtGui.QTextCursor.MoveOperation.Right,
-    word_right=QtGui.QTextCursor.MoveOperation.WordRight,
-    next_cell=QtGui.QTextCursor.MoveOperation.NextCell,
-    previous_cell=QtGui.QTextCursor.MoveOperation.PreviousCell,
-    next_row=QtGui.QTextCursor.MoveOperation.NextRow,
-    previous_row=QtGui.QTextCursor.MoveOperation.PreviousRow,
+    no_move=gui.QTextCursor.MoveOperation.NoMove,
+    start=gui.QTextCursor.MoveOperation.Start,
+    start_of_line=gui.QTextCursor.MoveOperation.StartOfLine,
+    start_of_block=gui.QTextCursor.MoveOperation.StartOfBlock,
+    start_of_word=gui.QTextCursor.MoveOperation.StartOfWord,
+    previous_block=gui.QTextCursor.MoveOperation.PreviousBlock,
+    previous_char=gui.QTextCursor.MoveOperation.PreviousCharacter,
+    previous_word=gui.QTextCursor.MoveOperation.PreviousWord,
+    up=gui.QTextCursor.MoveOperation.Up,
+    left=gui.QTextCursor.MoveOperation.Left,
+    word_left=gui.QTextCursor.MoveOperation.WordLeft,
+    end=gui.QTextCursor.MoveOperation.End,
+    end_of_line=gui.QTextCursor.MoveOperation.EndOfLine,
+    end_of_word=gui.QTextCursor.MoveOperation.EndOfWord,
+    end_of_block=gui.QTextCursor.MoveOperation.EndOfBlock,
+    next_block=gui.QTextCursor.MoveOperation.NextBlock,
+    next_char=gui.QTextCursor.MoveOperation.NextCharacter,
+    next_word=gui.QTextCursor.MoveOperation.NextWord,
+    down=gui.QTextCursor.MoveOperation.Down,
+    right=gui.QTextCursor.MoveOperation.Right,
+    word_right=gui.QTextCursor.MoveOperation.WordRight,
+    next_cell=gui.QTextCursor.MoveOperation.NextCell,
+    previous_cell=gui.QTextCursor.MoveOperation.PreviousCell,
+    next_row=gui.QTextCursor.MoveOperation.NextRow,
+    previous_row=gui.QTextCursor.MoveOperation.PreviousRow,
 )
 
 MoveOperationStr = Literal[
@@ -71,10 +70,10 @@ MoveOperationStr = Literal[
 ]
 
 SELECTION_TYPE = bidict(
-    document=QtGui.QTextCursor.SelectionType.Document,
-    block_under_cursor=QtGui.QTextCursor.SelectionType.BlockUnderCursor,
-    line_under_cursor=QtGui.QTextCursor.SelectionType.LineUnderCursor,
-    word_under_cursor=QtGui.QTextCursor.SelectionType.WordUnderCursor,
+    document=gui.QTextCursor.SelectionType.Document,
+    block_under_cursor=gui.QTextCursor.SelectionType.BlockUnderCursor,
+    line_under_cursor=gui.QTextCursor.SelectionType.LineUnderCursor,
+    word_under_cursor=gui.QTextCursor.SelectionType.WordUnderCursor,
 )
 
 SelectionTypeStr = Literal[
@@ -82,7 +81,7 @@ SelectionTypeStr = Literal[
 ]
 
 
-class TextCursor(QtGui.QTextCursor):
+class TextCursor(gui.QTextCursor):
     def __str__(self):
         return self.selectedText().replace("\u2029", "\n")
 
@@ -118,8 +117,8 @@ class TextCursor(QtGui.QTextCursor):
             case _:
                 raise TypeError(pos)
 
-    def select(self, selection: SelectionTypeStr | QtGui.QTextCursor.SelectionType):
-        if isinstance(selection, QtGui.QTextCursor.SelectionType):
+    def select(self, selection: SelectionTypeStr | gui.QTextCursor.SelectionType):
+        if isinstance(selection, gui.QTextCursor.SelectionType):
             sel = selection
         else:
             sel = SELECTION_TYPE[selection]

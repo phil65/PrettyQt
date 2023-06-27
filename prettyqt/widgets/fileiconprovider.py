@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -11,10 +11,10 @@ class FileIconProvider(gui.AbstractFileIconProviderMixin, QtWidgets.QFileIconPro
     def get_icon(
         self,
         typ: gui.abstractfileiconprovider.IconTypeStr
-        | QtCore.QFileInfo
+        | core.QFileInfo
         | datatypes.PathType,
-    ) -> QtGui.QIcon:
-        if isinstance(typ, os.PathLike | QtCore.QFileInfo):
+    ) -> gui.QIcon:
+        if isinstance(typ, os.PathLike | core.QFileInfo):
             param = core.FileInfo(typ)
         else:
             param = gui.abstractfileiconprovider.ICON_TYPE[typ]

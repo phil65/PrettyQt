@@ -4,7 +4,7 @@ import os
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, get_repr
 
 
@@ -18,7 +18,7 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
     def get_format(self) -> FormatStr:
         return self.format().data().decode()  # type: ignore
 
-    def set_format(self, fmt: FormatStr | bytes | QtCore.QByteArray):
+    def set_format(self, fmt: FormatStr | bytes | core.QByteArray):
         new = fmt.encode() if isinstance(fmt, str) else fmt
         self.setFormat(new)
 
@@ -34,7 +34,7 @@ class TextDocumentWriter(QtGui.QTextDocumentWriter):
     def serialize_document(
         cls,
         document: QtGui.QTextDocument,
-        fmt: FormatStr | bytes | QtCore.QByteArray = "ODF",
+        fmt: FormatStr | bytes | core.QByteArray = "ODF",
     ) -> bytes:
         buffer = core.Buffer()
         writer = cls()

@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Any
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
 
 
-class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
+class RegularExpressionMatch(core.QRegularExpressionMatch):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.string = None
@@ -77,7 +76,7 @@ class RegularExpressionMatch(QtCore.QRegularExpressionMatch):
         return self.re.namedCaptureGroups()[self.lastCapturedIndex()]
 
     @property
-    def re(self) -> QtCore.QRegularExpression:
+    def re(self) -> core.QRegularExpression:
         return self.regularExpression()
 
     @property

@@ -3,13 +3,12 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, gui, syntaxhighlighters, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import bidict, colors, datatypes, helpers, texteditselecter
 
 
 LINE_WRAP_MODE = bidict(
-    none=QtWidgets.QPlainTextEdit.LineWrapMode.NoWrap,
-    widget_width=QtWidgets.QPlainTextEdit.LineWrapMode.WidgetWidth,
+    none=widgets.QPlainTextEdit.LineWrapMode.NoWrap,
+    widget_width=widgets.QPlainTextEdit.LineWrapMode.WidgetWidth,
 )
 
 LineWrapModeStr = Literal["none", "widget_width"]
@@ -24,7 +23,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self._hl = None
         self._current_line_color = gui.Color(0, 0, 0, 0)
         self.selecter = texteditselecter.TextEditSelecter(self)
-        self.validator: QtGui.QValidator | None = None
+        self.validator: gui.QValidator | None = None
         self.textChanged.connect(self._on_value_change)
         doc = gui.TextDocument(self)
         layout = widgets.PlainTextDocumentLayout(doc)
@@ -85,9 +84,9 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self.setPlainText(text)
 
     def set_syntaxhighlighter(
-        self, syntax: str | QtGui.QSyntaxHighlighter, style: str | None = None
+        self, syntax: str | gui.QSyntaxHighlighter, style: str | None = None
     ):
-        if isinstance(syntax, QtGui.QSyntaxHighlighter):
+        if isinstance(syntax, gui.QSyntaxHighlighter):
             self._hl = syntax
         else:
             self._hl = syntaxhighlighters.PygmentsHighlighter(
@@ -109,18 +108,18 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         """Set show white spaces flag."""
         doc = self.document()
         options = doc.defaultTextOption()
-        flag = QtGui.QTextOption.Flag.ShowTabsAndSpaces
+        flag = gui.QTextOption.Flag.ShowTabsAndSpaces
         if show:
             options.setFlags(options.flags() | flag)  # type: ignore
         else:
             options.setFlags(options.flags() & ~flag)  # type: ignore
         doc.setDefaultTextOption(options)
 
-    def paintEvent(self, event: QtGui.QPaintEvent):
+    def paintEvent(self, event: gui.QPaintEvent):
         if self._current_line_color:
             with gui.Painter(self.viewport()) as painter:
                 cursor_rect = self.cursorRect()
-                r = QtCore.QRect(0, cursor_rect.top(), self.width(), cursor_rect.height())
+                r = core.QRect(0, cursor_rect.top(), self.width(), cursor_rect.height())
                 painter.set_pen(None)
                 painter.setBrush(gui.Color(self._current_line_color))
                 painter.drawRect(r)
@@ -145,7 +144,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         return gui.textoption.WORD_WRAP_MODE.inverse[self.wordWrapMode()]
 
     def set_line_wrap_mode(
-        self, mode: LineWrapModeStr | QtWidgets.QPlainTextEdit.LineWrapMode
+        self, mode: LineWrapModeStr | widgets.QPlainTextEdit.LineWrapMode
     ):
         """Set line wrap mode.
 
@@ -172,8 +171,8 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         self.set_background_color(color)
 
     def set_validator(
-        self, validator: QtGui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
-    ) -> QtGui.QValidator:
+        self, validator: gui.QValidator | widgets.lineedit.ValidatorStr | None, **kwargs
+    ) -> gui.QValidator:
         if isinstance(validator, str):
             ValidatorClass = helpers.get_class_for_id(gui.ValidatorMixin, validator)
             validator = ValidatorClass(**kwargs)
@@ -210,7 +209,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         return self._current_line_color
 
     current_line_color = core.Property(
-        QtGui.QColor, get_current_line_color, set_current_line_color
+        gui.QColor, get_current_line_color, set_current_line_color
     )
 
     def get_visible_line_span(self) -> tuple[int, int]:
@@ -227,7 +226,7 @@ class PlainTextEditMixin(widgets.AbstractScrollAreaMixin):
         return widget_margins.top() + doc_height + widget_margins.bottom()
 
 
-class PlainTextEdit(PlainTextEditMixin, QtWidgets.QPlainTextEdit):
+class PlainTextEdit(PlainTextEditMixin, widgets.QPlainTextEdit):
     pass
 
 

@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
-SortIndicator = QtWidgets.QStyleOptionHeader.SortIndicator
-StateFlag = QtWidgets.QStyle.StateFlag
-CE = QtWidgets.QStyle.ControlElement
-SelectedPosition = QtWidgets.QStyleOptionHeader.SelectedPosition
-SectionPosition = QtWidgets.QStyleOptionHeader.SectionPosition
+SortIndicator = widgets.QStyleOptionHeader.SortIndicator
+StateFlag = widgets.QStyle.StateFlag
+CE = widgets.QStyle.ControlElement
+SelectedPosition = widgets.QStyleOptionHeader.SelectedPosition
+SectionPosition = widgets.QStyleOptionHeader.SectionPosition
 
 HORIZONTAL_HEADER_DATA_ROLE = constants.ItemDataRole.UserRole + 150
 VERTICAL_HEADER_DATA_ROLE = constants.ItemDataRole.UserRole + 151
@@ -40,7 +39,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
     def __init__(
         self,
         orientation: constants.Orientation | constants.OrientationStr,
-        parent: QtWidgets.QWidget,
+        parent: widgets.QWidget,
     ):
         super().__init__(orientation, parent, highlight_sections=True)
         self.setSectionsClickable(True)
@@ -53,7 +52,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         self.sectionMoved.connect(self._on_section_moved)
 
     def init_from_new_model(
-        self, orientation: constants.Orientation, model: QtCore.QAbstractItemModel
+        self, orientation: constants.Orientation, model: core.QAbstractItemModel
     ):
         is_hor = orientation == constants.HORIZONTAL
         role = HORIZONTAL_HEADER_DATA_ROLE if is_hor else VERTICAL_HEADER_DATA_ROLE
@@ -112,40 +111,40 @@ class HierarchicalHeaderView(widgets.HeaderView):
         return leafs
 
     def set_foreground_brush(
-        self, opt: QtWidgets.QStyleOptionHeader, index: core.ModelIndex
+        self, opt: widgets.QStyleOptionHeader, index: core.ModelIndex
     ):
         if foreground_brush := index.data(constants.FOREGROUND_ROLE):
-            brush = QtGui.QBrush(foreground_brush)
-            opt.palette.setBrush(QtGui.QPalette.ColorRole.ButtonText, brush)
+            brush = gui.QBrush(foreground_brush)
+            opt.palette.setBrush(gui.QPalette.ColorRole.ButtonText, brush)
 
     def set_background_brush(
-        self, opt: QtWidgets.QStyleOptionHeader, index: core.ModelIndex
+        self, opt: widgets.QStyleOptionHeader, index: core.ModelIndex
     ):
         if background_brush := index.data(constants.BACKGROUND_ROLE):
-            brush = QtGui.QBrush(background_brush)
-            opt.palette.setBrush(QtGui.QPalette.ColorRole.Button, brush)
-            opt.palette.setBrush(QtGui.QPalette.ColorRole.Window, brush)
+            brush = gui.QBrush(background_brush)
+            opt.palette.setBrush(gui.QPalette.ColorRole.Button, brush)
+            opt.palette.setBrush(gui.QPalette.ColorRole.Window, brush)
 
     def get_cell_size(
         self,
         leaf_index: core.ModelIndex,
-        hv: QtWidgets.QHeaderView,
-        style_options: QtWidgets.QStyleOptionHeader,
-    ) -> QtCore.QSize:
-        res = QtCore.QSize()
+        hv: widgets.QHeaderView,
+        style_options: widgets.QStyleOptionHeader,
+    ) -> core.QSize:
+        res = core.QSize()
         if variant := leaf_index.data(constants.SIZE_HINT_ROLE):
             res = variant
         fnt = var if (var := leaf_index.data(constants.FONT_ROLE)) else hv.font()
         fnt.setBold(True)
-        fm = QtGui.QFontMetrics(fnt)
+        fm = gui.QFontMetrics(fnt)
         text_size = fm.size(0, leaf_index.data(constants.DISPLAY_ROLE))
-        size = text_size + QtCore.QSize(4, 0)
+        size = text_size + core.QSize(4, 0)
         if leaf_index.data(constants.USER_ROLE):
             size.transpose()
         decoration_size = hv.style().sizeFromContents(
-            QtWidgets.QStyle.ContentsType.CT_HeaderSection,
+            widgets.QStyle.ContentsType.CT_HeaderSection,
             style_options,
-            QtCore.QSize(),
+            core.QSize(),
             hv,
         )
         empty_text_size = fm.size(0, "")
@@ -156,7 +155,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         searched_index: core.ModelIndex,
         leaf_index: core.ModelIndex,
         section_index: int,
-        hv: QtWidgets.QHeaderView,
+        hv: widgets.QHeaderView,
     ) -> int:
         leafs_list = self.leafs(searched_index)
         if not leafs_list:
@@ -173,7 +172,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         leaf_index: core.ModelIndex,
         section_index: int,
         left: int,
-        hv: QtWidgets.QHeaderView,
+        hv: widgets.QHeaderView,
     ) -> int:
         if leafs_list := self.leafs(searched_index):
             n = leafs_list.index(leaf_index) if leaf_index in leafs_list else -1
@@ -184,16 +183,16 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     def paint_horizontal_cell(
         self,
-        painter: QtGui.QPainter,
-        hv: QtWidgets.QHeaderView,
+        painter: gui.QPainter,
+        hv: widgets.QHeaderView,
         cell_index: core.ModelIndex,
         leaf_index: core.ModelIndex,
         logical_leaf_index: int,
-        style_options: QtWidgets.QStyleOptionHeader,
-        section_rect: QtCore.QRect,
+        style_options: widgets.QStyleOptionHeader,
+        section_rect: core.QRect,
         top: int,
     ) -> int:
-        uniopt = QtWidgets.QStyleOptionHeader(style_options)
+        uniopt = widgets.QStyleOptionHeader(style_options)
         self.set_foreground_brush(uniopt, cell_index)
         self.set_background_brush(uniopt, cell_index)
         height = (
@@ -207,18 +206,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
         width = self.get_current_cell_width(
             cell_index, leaf_index, logical_leaf_index, hv
         )
-        r = QtCore.QRect(left, top, width, height)
+        r = core.QRect(left, top, width, height)
         uniopt.text = cell_index.data(constants.DISPLAY_ROLE)
         painter.save()
         uniopt.rect = r
         style = hv.style()
         if cell_index.data(constants.USER_ROLE):
             style.drawControl(CE.CE_HeaderSection, uniopt, painter, hv)
-            m = QtGui.QTransform()
+            m = gui.QTransform()
             m.rotate(-90)
             painter.setWorldTransform(m, True)
-            new_r = QtCore.QRect(0, 0, r.height(), r.width())
-            new_r.moveCenter(QtCore.QPoint(-r.center().y(), r.center().x()))
+            new_r = core.QRect(0, 0, r.height(), r.width())
+            new_r.moveCenter(core.QPoint(-r.center().y(), r.center().x()))
             uniopt.rect = new_r
             style.drawControl(CE.CE_HeaderLabel, uniopt, painter, hv)
         else:
@@ -228,18 +227,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     def paint_horizontal_section(
         self,
-        painter: QtGui.QPainter,
-        section_rect: QtCore.QRect,
+        painter: gui.QPainter,
+        section_rect: core.QRect,
         logical_leaf_index: int,
-        hv: QtWidgets.QHeaderView,
-        style_options: QtWidgets.QStyleOptionHeader,
+        hv: widgets.QHeaderView,
+        style_options: widgets.QStyleOptionHeader,
         leaf_index: core.ModelIndex,
     ):
         old_bo = painter.brushOrigin()
         top = section_rect.y()
         indexes = get_parent_indexes(leaf_index)
         for i, idx in enumerate(indexes):
-            real_style_options = QtWidgets.QStyleOptionHeader(style_options)
+            real_style_options = widgets.QStyleOptionHeader(style_options)
             if i < len(indexes) - 1 and (
                 real_style_options.state & StateFlag.State_Sunken
                 or real_style_options.state & StateFlag.State_On
@@ -265,16 +264,16 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     def paint_vertical_cell(
         self,
-        painter: QtGui.QPainter,
-        hv: QtWidgets.QHeaderView,
+        painter: gui.QPainter,
+        hv: widgets.QHeaderView,
         cell_index: core.ModelIndex,
         leaf_index: core.ModelIndex,
         logical_leaf_index: int,
-        style_options: QtWidgets.QStyleOptionHeader,
-        section_rect: QtCore.QRect,
+        style_options: widgets.QStyleOptionHeader,
+        section_rect: core.QRect,
         left: int,
     ) -> int:
-        uniopt = QtWidgets.QStyleOptionHeader(style_options)
+        uniopt = widgets.QStyleOptionHeader(style_options)
         self.set_foreground_brush(uniopt, cell_index)
         self.set_background_brush(uniopt, cell_index)
         width = (
@@ -288,18 +287,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
         height = self.get_current_cell_width(
             cell_index, leaf_index, logical_leaf_index, hv
         )
-        r = QtCore.QRect(left, top, width, height)
+        r = core.QRect(left, top, width, height)
         uniopt.text = cell_index.data(constants.DISPLAY_ROLE)
         painter.save()
         uniopt.rect = r
         style = hv.style()
         if cell_index.data(constants.USER_ROLE):
             style.drawControl(CE.CE_HeaderSection, uniopt, painter, hv)
-            m = QtGui.QTransform()
+            m = gui.QTransform()
             m.rotate(-90)
             painter.setWorldTransform(m, True)
-            new_r = QtCore.QRect(0, 0, r.height(), r.width())
-            new_r.moveCenter(QtCore.QPoint(-r.center().y(), r.center().x()))
+            new_r = core.QRect(0, 0, r.height(), r.width())
+            new_r.moveCenter(core.QPoint(-r.center().y(), r.center().x()))
             uniopt.rect = new_r
             style.drawControl(CE.CE_HeaderLabel, uniopt, painter, hv)
         else:
@@ -309,18 +308,18 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     def paint_vertical_section(
         self,
-        painter: QtGui.QPainter,
-        section_rect: QtCore.QRect,
+        painter: gui.QPainter,
+        section_rect: core.QRect,
         logical_leaf_index: int,
-        hv: QtWidgets.QHeaderView,
-        style_options: QtWidgets.QStyleOptionHeader,
+        hv: widgets.QHeaderView,
+        style_options: widgets.QStyleOptionHeader,
         leaf_index: core.ModelIndex,
     ):
         old_bo = painter.brushOrigin()
         left = section_rect.x()
         indexes = get_parent_indexes(leaf_index)
         for i, idx in enumerate(indexes):
-            real_style_options = QtWidgets.QStyleOptionHeader(style_options)
+            real_style_options = widgets.QStyleOptionHeader(style_options)
             if i < len(indexes) - 1 and (
                 real_style_options.state & StateFlag.State_Sunken
                 or real_style_options.state & StateFlag.State_On
@@ -381,8 +380,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     def get_style_option_for_cell(
         self, logical_index: int
-    ) -> QtWidgets.QStyleOptionHeader:
-        opt = QtWidgets.QStyleOptionHeader()
+    ) -> widgets.QStyleOptionHeader:
+        opt = widgets.QStyleOptionHeader()
         self.initStyleOption(opt)
         if self.isSortIndicatorShown() and self.sortIndicatorSection() == logical_index:
             asc = self.sortIndicatorOrder() == constants.ASCENDING
@@ -434,13 +433,13 @@ class HierarchicalHeaderView(widgets.HeaderView):
             opt.selectedPosition = SelectedPosition.NotAdjacent
         return opt
 
-    def sectionSizeFromContents(self, logical_index: int) -> QtCore.QSize:
+    def sectionSizeFromContents(self, logical_index: int) -> core.QSize:
         if not self.header_model:
             return super().sectionSizeFromContents(logical_index)
         cur_leaf_index = self.leaf_index(logical_index)
         if not cur_leaf_index.isValid():
             return super().sectionSizeFromContents(logical_index)
-        styleOption = QtWidgets.QStyleOptionHeader(
+        styleOption = widgets.QStyleOptionHeader(
             self.get_style_option_for_cell(logical_index)
         )
         s = self.get_cell_size(cur_leaf_index, self, styleOption)
@@ -455,7 +454,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         return s
 
     def paintSection(
-        self, painter: QtGui.QPainter, rect: QtCore.QRect, logical_index: int
+        self, painter: gui.QPainter, rect: core.QRect, logical_index: int
     ):
         if not rect.isValid():
             super().paintSection(painter, rect, logical_index)
@@ -497,7 +496,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 w = self.viewport().width()
                 h = self.viewport().height()
                 pos = self.sectionViewportPosition(logical_index)
-                r = QtCore.QRect(pos, 0, w - pos, h)
+                r = core.QRect(pos, 0, w - pos, h)
                 if is_horizontal:
                     if self.isRightToLeft():
                         r.setRect(0, 0, pos + self.sectionSize(logical_index), h)
@@ -505,7 +504,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                     r.setRect(0, pos, w, h - pos)
                 self.viewport().update(r.normalized())
 
-    def setModel(self, model: QtCore.QAbstractItemModel):
+    def setModel(self, model: core.QAbstractItemModel):
         super().setModel(model)
         model.layoutChanged.connect(self._on_layout_change)
         self._on_layout_change()

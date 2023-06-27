@@ -7,11 +7,11 @@ import contextlib
 import os
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtCore
 
 
 class CompletionWidget(widgets.ListWidget):
-    def __init__(self, textedit: QtWidgets.QTextEdit | QtWidgets.QPlainTextEdit):
+    def __init__(self, textedit: widgets.QTextEdit | widgets.QPlainTextEdit):
         super().__init__(parent=textedit)
 
         self._text_edit = textedit
@@ -41,7 +41,7 @@ class CompletionWidget(widgets.ListWidget):
         """Handle mouse input and to auto-hide when losing focus."""
         if obj is self and event.type() == QtCore.QEvent.Type.MouseButtonPress:
             pos = self.mapToGlobal(event.pos())
-            target = QtWidgets.QApplication.widgetAt(pos)
+            target = widgets.QApplication.widgetAt(pos)
             if target and self.isAncestorOf(target) or target is self:
                 return False
             else:
@@ -67,7 +67,7 @@ class CompletionWidget(widgets.ListWidget):
             ):
                 return super().keyPressEvent(event)
             case _:
-                QtWidgets.QApplication.sendEvent(self._text_edit, event)
+                widgets.QApplication.sendEvent(self._text_edit, event)
 
     # 'QWidget' interface
 
@@ -127,7 +127,7 @@ class CompletionWidget(widgets.ListWidget):
 
         # Move cursor to start of the prefix to replace it
         # when a item is selected
-        cursor.movePosition(QtGui.QTextCursor.MoveOperation.Left, n=prefix_length)
+        cursor.movePosition(gui.QTextCursor.MoveOperation.Left, n=prefix_length)
         self._start_position = cursor.position()
         self.setCurrentRow(0)
         self.raise_()
@@ -135,7 +135,7 @@ class CompletionWidget(widgets.ListWidget):
 
     # Protected interface
 
-    def _get_top_left_position(self, cursor: QtGui.QTextCursor) -> QtCore.QPoint:
+    def _get_top_left_position(self, cursor: gui.QTextCursor) -> QtCore.QPoint:
         """Get top left position for this widget."""
         point = self._text_edit.cursorRect(cursor).center()
         point_size = self._text_edit.font().pointSize()
@@ -152,7 +152,7 @@ class CompletionWidget(widgets.ListWidget):
         self._current_text_cursor().insertText(text)
         self.hide()
 
-    def _current_text_cursor(self) -> QtGui.QTextCursor:
+    def _current_text_cursor(self) -> gui.QTextCursor:
         """Return a cursor with text between the start  and currentposition selected."""
         cursor = self._text_edit.textCursor()
         if cursor.position() >= self._start_position:

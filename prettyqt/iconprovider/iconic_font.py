@@ -1,6 +1,6 @@
 """A lightweight module handling iconic fonts.
 
-It is designed to provide a simple way for creating QtGui.QIcons from glyphs.
+It is designed to provide a simple way for creating gui.QIcons from glyphs.
 
 From a user's viewpoint, the main entry point is the ``IconicFont`` class which
 contains methods for loading new iconic fonts with their character map and
@@ -17,7 +17,7 @@ from typing import Any
 
 from prettyqt import constants, gui
 from prettyqt.iconprovider import chariconengine
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtCore
 
 
 _default_options = {
@@ -75,17 +75,17 @@ VALID_OPTIONS = [
 ]
 
 COLOR_OPTIONS = {
-    QtGui.QIcon.State.On: {
-        QtGui.QIcon.Mode.Normal: ("color_on", "on"),
-        QtGui.QIcon.Mode.Disabled: ("color_on_disabled", "on_disabled"),
-        QtGui.QIcon.Mode.Active: ("color_on_active", "on_active"),
-        QtGui.QIcon.Mode.Selected: ("color_on_selected", "on_selected"),
+    gui.QIcon.State.On: {
+        gui.QIcon.Mode.Normal: ("color_on", "on"),
+        gui.QIcon.Mode.Disabled: ("color_on_disabled", "on_disabled"),
+        gui.QIcon.Mode.Active: ("color_on_active", "on_active"),
+        gui.QIcon.Mode.Selected: ("color_on_selected", "on_selected"),
     },
-    QtGui.QIcon.State.Off: {
-        QtGui.QIcon.Mode.Normal: ("color_off", "off"),
-        QtGui.QIcon.Mode.Disabled: ("color_off_disabled", "off_disabled"),
-        QtGui.QIcon.Mode.Active: ("color_off_active", "off_active"),
-        QtGui.QIcon.Mode.Selected: ("color_off_selected", "off_selected"),
+    gui.QIcon.State.Off: {
+        gui.QIcon.Mode.Normal: ("color_off", "off"),
+        gui.QIcon.Mode.Disabled: ("color_off_disabled", "off_disabled"),
+        gui.QIcon.Mode.Active: ("color_off_active", "off_active"),
+        gui.QIcon.Mode.Selected: ("color_off_selected", "off_selected"),
     },
 }
 
@@ -114,8 +114,8 @@ class IconicFont:
         self,
         painter: gui.Painter,
         rect: QtCore.QRect,
-        mode: QtGui.QIcon.Mode,
-        state: QtGui.QIcon.State,
+        mode: gui.QIcon.Mode,
+        state: gui.QIcon.State,
         options: Iterable[dict[str, Any]],
     ):
         color_str, char = COLOR_OPTIONS[state][mode]
@@ -167,8 +167,8 @@ class IconicFont:
         # Check stored font ids are still available
         return all(font.is_valid() for font in self.fonts.values())
 
-    def icon(self, *names, **kwargs) -> QtGui.QIcon:
-        """Returns a QtGui.QIcon object corresponding to the provided icon name."""
+    def icon(self, *names, **kwargs) -> gui.QIcon:
+        """Returns a gui.QIcon object corresponding to the provided icon name."""
         cache_key = f"{names}{kwargs}"
         if cache_key in self.icon_cache:
             return self.icon_cache[cache_key]
@@ -177,7 +177,7 @@ class IconicFont:
             raise TypeError(f'"options" must be a list of size {len(names)}')
         parsed_options = [self._parse_options(o, kwargs, n) for o, n in zip(opts, names)]
         engine = chariconengine.CharIconEngine(self, parsed_options)
-        icon = QtGui.QIcon(engine)
+        icon = gui.QIcon(engine)
         self.icon_cache[cache_key] = icon
         return icon
 

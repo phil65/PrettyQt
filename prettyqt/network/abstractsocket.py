@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, network
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, get_repr
 
 
@@ -192,7 +192,7 @@ class AbstractSocketMixin(core.IODeviceMixin):
         self,
         hostname: str,
         port: int,
-        open_mode: QtCore.QIODevice.OpenModeFlag
+        open_mode: core.QIODevice.OpenModeFlag
         | core.iodevice.OpenModeStr = "read_write",
         protocol: (
             QtNetwork.QAbstractSocket.NetworkLayerProtocol | NetworkLayerProtocolStr

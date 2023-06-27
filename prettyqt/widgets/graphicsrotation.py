@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
 
-class GraphicsRotation(widgets.GraphicsTransformMixin, QtWidgets.QGraphicsRotation):
+class GraphicsRotation(widgets.GraphicsTransformMixin, widgets.QGraphicsRotation):
     def set_axis(self, axis: constants.AxisStr | constants.Axis):
         self.setAxis(constants.AXIS.get_enum_value(axis))
 

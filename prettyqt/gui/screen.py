@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
 
 
 class Screen:
-    def __init__(self, item: QtGui.QScreen):
+    def __init__(self, item: gui.QScreen):
         self.item = item
 
     def __getattr__(self, val):

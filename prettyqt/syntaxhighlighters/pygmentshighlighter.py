@@ -8,7 +8,6 @@ from pygments import lexer, lexers, style, styles
 from pygments.formatters import html
 
 from prettyqt import core, gui, paths
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
@@ -190,7 +189,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
 
     def __init__(
         self,
-        parent: QtGui.QTextDocument,
+        parent: gui.QTextDocument,
         lexer: str,
         style: None | StyleStr = None,
     ):
@@ -280,7 +279,7 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
         self._get_format.cache_clear()
 
     @functools.cache  # noqa: B019
-    def _get_format(self, token: str) -> QtGui.QTextCharFormat:
+    def _get_format(self, token: str) -> gui.QTextCharFormat:
         """Returns a QTextCharFormat for token or None."""
         if self._style is None:
             return self._get_format_from_document(token, self._document)
@@ -288,8 +287,8 @@ class PygmentsHighlighter(gui.SyntaxHighlighter):
             return _get_format_from_style(token, self._style)
 
     def _get_format_from_document(
-        self, token: str, document: QtGui.QTextDocument
-    ) -> QtGui.QTextCharFormat:
+        self, token: str, document: gui.QTextDocument
+    ) -> gui.QTextCharFormat:
         """Return a QTextCharFormat for token from document."""
         _, html = next(self._formatter._format_lines([(token, "dummy")]))
         document.setHtml(html)

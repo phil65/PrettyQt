@@ -5,25 +5,24 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, datatypes, get_repr, serializemixin
 
 
 MODE = bidict(
-    normal=QtGui.QIcon.Mode.Normal,
-    disabled=QtGui.QIcon.Mode.Disabled,
-    active=QtGui.QIcon.Mode.Active,
-    selected=QtGui.QIcon.Mode.Selected,
+    normal=gui.QIcon.Mode.Normal,
+    disabled=gui.QIcon.Mode.Disabled,
+    active=gui.QIcon.Mode.Active,
+    selected=gui.QIcon.Mode.Selected,
 )
 
 ModeStr = Literal["normal", "disabled", "active", "selected"]
 
-STATE = bidict(off=QtGui.QIcon.State.Off, on=QtGui.QIcon.State.On)
+STATE = bidict(off=gui.QIcon.State.Off, on=gui.QIcon.State.On)
 
 StateStr = Literal["off", "on"]
 
 
-class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
+class Icon(serializemixin.SerializeMixin, gui.QIcon):
     def __repr__(self):
         return get_repr(self)
 
@@ -58,13 +57,13 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
         return icon
 
     @classmethod
-    def from_image(cls, image: QtGui.QImage) -> Self:
+    def from_image(cls, image: gui.QImage) -> Self:
         return cls(gui.Pixmap.fromImage(image))
 
     def get_available_sizes(
         self,
-        mode: ModeStr | QtGui.QIcon.Mode = "normal",
-        state: StateStr | QtGui.QIcon.State = "off",
+        mode: ModeStr | gui.QIcon.Mode = "normal",
+        state: StateStr | gui.QIcon.State = "off",
     ) -> list[core.Size]:
         m = MODE.get_enum_value(mode)
         s = STATE.get_enum_value(state)
@@ -72,14 +71,14 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
 
     def add_pixmap(
         self,
-        data: QtCore.QByteArray | QtGui.QPixmap | bytes,
-        mode: ModeStr | QtGui.QIcon.Mode = "normal",
-        state: StateStr | QtGui.QIcon.State = "off",
+        data: core.QByteArray | gui.QPixmap | bytes,
+        mode: ModeStr | gui.QIcon.Mode = "normal",
+        state: StateStr | gui.QIcon.State = "off",
     ):
         if isinstance(data, bytes):
-            data = QtCore.QByteArray(data)
-        if isinstance(data, QtCore.QByteArray):
-            pixmap = QtGui.QPixmap()
+            data = core.QByteArray(data)
+        if isinstance(data, core.QByteArray):
+            pixmap = gui.QPixmap()
             pixmap.loadFromData(data)
         else:
             pixmap = data
@@ -88,17 +87,17 @@ class Icon(serializemixin.SerializeMixin, QtGui.QIcon):
     def get_pixmap(
         self,
         size: datatypes.SizeType | int,
-        mode: ModeStr | QtGui.QIcon.Mode = "normal",
-        state: StateStr | QtGui.QIcon.State = "off",
-    ) -> QtGui.QPixmap:
+        mode: ModeStr | gui.QIcon.Mode = "normal",
+        state: StateStr | gui.QIcon.State = "off",
+    ) -> gui.QPixmap:
         sz = datatypes.to_size(size)
         return self.pixmap(sz, MODE.get_enum_value(mode), STATE.get_enum_value(state))
 
     def get_actual_size(
         self,
         size: datatypes.SizeType,
-        mode: ModeStr | QtGui.QIcon.Mode = "normal",
-        state: StateStr | QtGui.QIcon.State = "off",
+        mode: ModeStr | gui.QIcon.Mode = "normal",
+        state: StateStr | gui.QIcon.State = "off",
     ) -> core.Size:
         sz = datatypes.to_size(size)
         m = MODE.get_enum_value(mode)

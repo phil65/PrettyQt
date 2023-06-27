@@ -9,7 +9,6 @@ except ImportError:  # Python < 3.11
 import re
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
@@ -26,7 +25,7 @@ class RegexPatternValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         # if text == "":
         #     self.compiled = None
         #     return (self.Intermediate, text, pos)

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
 
 
 class FlowLayout(widgets.Layout):
@@ -11,8 +10,8 @@ class FlowLayout(widgets.Layout):
         super().__init__(*args, **kwargs)
         self._items = []
 
-    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout) -> FlowLayout:
-        if not isinstance(other, QtWidgets.QWidget | QtWidgets.QLayout):
+    def __add__(self, other: widgets.QWidget | widgets.QLayout) -> FlowLayout:
+        if not isinstance(other, widgets.QWidget | widgets.QLayout):
             raise TypeError()
         self.add(other)
         return self
@@ -22,7 +21,7 @@ class FlowLayout(widgets.Layout):
         while item:
             item = self.takeAt(0)
 
-    def addLayout(self, layout: QtWidgets.QLayout):
+    def addLayout(self, layout: widgets.QLayout):
         widget = widgets.Widget()
         widget.setLayout(layout)
         self.addWidget(widget)
@@ -80,7 +79,7 @@ class FlowLayout(widgets.Layout):
             return p.style().pixelMetric(which, None, p)
         return p.spacing()
 
-    def _do_layout(self, rect: QtCore.QRect, apply_geometry: bool = False) -> int:
+    def _do_layout(self, rect: core.QRect, apply_geometry: bool = False) -> int:
         erect = rect.marginsRemoved(self.contentsMargins())
         x, y = erect.x(), erect.y()
 
@@ -134,7 +133,7 @@ class Separator(widgets.Widget):
     """Vertical separator lines usable in FlowLayout."""
 
     def __init__(
-        self, *args, widget_for_height: QtWidgets.QWidget | None = None, **kwargs
+        self, *args, widget_for_height: widgets.QWidget | None = None, **kwargs
     ):
         """You must provide a widget in the layout either here or with setBuddy.
 
@@ -150,12 +149,12 @@ class Separator(widgets.Widget):
         self.brush = gui.Brush(self.bcol)
         self.update()
 
-    def setBuddy(self, widget_for_height: QtWidgets.QWidget):
+    def setBuddy(self, widget_for_height: widgets.QWidget):
         """See __init__. This is repurposed to support Qt Designer .ui files."""
         self.widget_for_height = widget_for_height
 
     def sizeHint(self):
-        return QtCore.QSize(
+        return core.QSize(
             1, 1 if self.widget_for_height is None else self.widget_for_height.height()
         )
 

@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -17,14 +16,14 @@ class SidebarWidget(widgets.MainWindow):
         self,
         *args,
         show_settings: bool = False,
-        main_layout: widgets.widget.LayoutStr | QtWidgets.QLayout = "vertical",
+        main_layout: widgets.widget.LayoutStr | widgets.QLayout = "vertical",
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
         self._button_width = 100
         self._style: constants.ToolButtonStyleStr = "text_below_icon"
-        self.button_map: dict[QtWidgets.QWidget, QtWidgets.QToolButton] = {}
-        self.icon_map: dict[QtWidgets.QWidget, gui.Icon] = {}
+        self.button_map: dict[widgets.QWidget, widgets.QToolButton] = {}
+        self.icon_map: dict[widgets.QWidget, gui.Icon] = {}
         self.sidebar = widgets.ToolBar(
             context_menu_policy="prevent",
             floatable=True,
@@ -66,7 +65,7 @@ class SidebarWidget(widgets.MainWindow):
 
     def add_tab(
         self,
-        item: QtWidgets.QWidget,
+        item: widgets.QWidget,
         title: str,
         icon: datatypes.IconType | None = None,
         show: bool = False,
@@ -118,14 +117,14 @@ class SidebarWidget(widgets.MainWindow):
             case int():
                 return self.area.box[item]
             case str():
-                w = self.area.find_child(QtWidgets.QWidget, name=item, recursive=False)
+                w = self.area.find_child(widgets.QWidget, name=item, recursive=False)
                 if w not in self.area.box:
                     raise ValueError("Layout does not contain the chosen widget")
                 return w
             case _:
                 raise TypeError(item)
 
-    def _get_current_widget(self) -> QtWidgets.QWidget:
+    def _get_current_widget(self) -> widgets.QWidget:
         """Returns the currently selected widget page."""
         for k, v in self.button_map.items():
             if v.isChecked():

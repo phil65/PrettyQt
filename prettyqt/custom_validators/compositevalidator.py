@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Sequence, Iterator
 
 from prettyqt import gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
 
 
@@ -51,14 +51,14 @@ class CompositeValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         return NotImplemented
 
 
 class AndValidator(CompositeValidator):
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         if self.State.Invalid in vals:
             return self.State.Invalid, text, pos
@@ -71,7 +71,7 @@ class AndValidator(CompositeValidator):
 class OrValidator(CompositeValidator):
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         vals = [v.validate(text, pos)[0] for v in self.validators]  # type: ignore
         if self.State.Acceptable in vals:
             return self.State.Acceptable, text, pos

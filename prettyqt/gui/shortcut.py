@@ -3,11 +3,10 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
 
-class Shortcut(core.ObjectMixin, QtGui.QShortcut):
+class Shortcut(core.ObjectMixin, gui.QShortcut):
     def __init__(self, *args, **kwargs):
         match args:
             case (str(), *rest):

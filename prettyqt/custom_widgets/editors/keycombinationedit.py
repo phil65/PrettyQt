@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import datatypes, get_repr
 
 
-class KeyCombinationEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
-    value_changed = core.Signal(QtCore.QKeyCombination)
+class KeyCombinationEdit(widgets.WidgetMixin, widgets.QKeySequenceEdit):
+    value_changed = core.Signal(core.QKeyCombination)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -19,7 +18,7 @@ class KeyCombinationEdit(widgets.WidgetMixin, QtWidgets.QKeySequenceEdit):
         self.value_changed.emit(val[0])
 
     def set_value(self, value: datatypes.KeyCombinationType):
-        if not isinstance(value, QtGui.QKeySequence):
+        if not isinstance(value, gui.QKeySequence):
             value = gui.KeySequence(value)
         if len(value) == 0:
             self.clear()

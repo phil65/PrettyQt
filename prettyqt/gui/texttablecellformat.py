@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
-class TextTableCellFormat(gui.TextCharFormatMixin, QtGui.QTextTableCellFormat):
+class TextTableCellFormat(gui.TextCharFormatMixin, gui.QTextTableCellFormat):
     def get_bottom_border_brush(self) -> gui.Brush:
         return gui.Brush(self.bottomBorderBrush())
 

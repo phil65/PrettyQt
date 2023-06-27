@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
 class PaintDeviceWindowMixin(gui.WindowMixin, gui.PaintDeviceMixin):
     pass
 
 
-class PaintDeviceWindow(PaintDeviceWindowMixin, QtGui.QPaintDeviceWindow):
+class PaintDeviceWindow(PaintDeviceWindowMixin, gui.QPaintDeviceWindow):
     pass
 
 

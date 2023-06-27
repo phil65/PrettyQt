@@ -7,27 +7,26 @@ import collections
 from typing import TypeVar
 
 from prettyqt import core, constants, gui, eventfilters
-from prettyqt.qt import QtCore
 
 
 logger = logging.getLogger(__name__)
 
-T = TypeVar("T", bound=QtCore.QObject)
+T = TypeVar("T", bound=core.QObject)
 
 
 class EventSignaller(core.Object):
-    signal = core.Signal(QtCore.QEvent)
+    signal = core.Signal(core.QEvent)
 
-    def __init__(self, obj: QtCore.QObject, **kwargs):
+    def __init__(self, obj: core.QObject, **kwargs):
         super().__init__(**kwargs)
         self._obj = obj
 
     def __getattr__(self, name):
-        typ = getattr(QtCore.QEvent.Type, name)
+        typ = getattr(core.QEvent.Type, name)
         self.ec = self._obj.add_callback_for_event(self._on_event_detected, include=typ)
         return self.signal
 
-    def _on_event_detected(self, event: QtCore.QEvent):
+    def _on_event_detected(self, event: core.QEvent):
         self.signal.emit(event)
         return False
 
@@ -44,16 +43,16 @@ class Stalker(core.Object):
     #     ERROR = logging.ERROR
 
     keypress_detected = core.Signal(str)
-    leftclick_detected = core.Signal(QtCore.QPointF)
-    rightclick_detected = core.Signal(QtCore.QPointF)
-    event_detected = core.Signal(QtCore.QEvent)
+    leftclick_detected = core.Signal(core.QPointF)
+    rightclick_detected = core.Signal(core.QPointF)
+    event_detected = core.Signal(core.QEvent)
     signal_emitted = core.Signal(core.MetaMethod, object)  # signal, args
     signal_connected = core.Signal(core.MetaMethod)
     signal_disconnected = core.Signal(core.MetaMethod)
 
     def __init__(
         self,
-        qobject: QtCore.QObject,
+        qobject: core.QObject,
         include=None,
         exclude=None,
         **kwargs,
@@ -118,12 +117,12 @@ class Stalker(core.Object):
             except RuntimeError:
                 logger.error("Object probably already deleted.")
 
-    def _on_signal_connected(self, signal: QtCore.QMetaMethod):
+    def _on_signal_connected(self, signal: core.QMetaMethod):
         signal = core.MetaMethod(signal)
         self.log(f"Connected signal {signal.get_name()}")
         self.signal_connected.emit(signal)
 
-    def _on_signal_disconnected(self, signal: QtCore.QMetaMethod):
+    def _on_signal_disconnected(self, signal: core.QMetaMethod):
         signal = core.MetaMethod(signal)
         self.log(f"Disconnected signal {signal.get_name()}")
         self.signal_disconnected.emit(signal)
@@ -159,7 +158,7 @@ class Stalker(core.Object):
         return self._log_level
 
     def count_children(
-        self, type_filter: type[T] = QtCore.QObject
+        self, type_filter: type[T] = core.QObject
     ) -> collections.Counter:
         objects = self.findChildren(type_filter)
         return collections.Counter([type(o) for o in objects])

@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
-class TextImageFormat(gui.TextCharFormatMixin, QtGui.QTextImageFormat):
+class TextImageFormat(gui.TextCharFormatMixin, gui.QTextImageFormat):
     def __bool__(self):
         return self.isValid()
 

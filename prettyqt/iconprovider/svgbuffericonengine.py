@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, svg
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes
 
 
@@ -24,14 +23,14 @@ class SVGBufferIconEngine(gui.IconEngine):
 
     def paint(
         self,
-        painter: QtGui.QPainter,
-        rect: QtCore.QRect,
-        mode: QtGui.QIcon.Mode,
-        state: QtGui.QIcon.State,
+        painter: gui.QPainter,
+        rect: core.QRect,
+        mode: gui.QIcon.Mode,
+        state: gui.QIcon.State,
     ):
         """Paint the icon int ``rect`` using ``painter``."""
         color = self._color
-        if mode == QtGui.QIcon.Mode.Disabled:
+        if mode == gui.QIcon.Mode.Disabled:
             color = self._color.transparent(0.3)
 
         xml = self._xml.replace('fill="currentColor"', color.get_name("svg_argb"))
@@ -44,16 +43,16 @@ class SVGBufferIconEngine(gui.IconEngine):
         return SVGBufferIconEngine(self._xml, self._color)
 
     def pixmap(
-        self, size: QtCore.QSize, mode: QtGui.QIcon.Mode, state: QtGui.QIcon.State
-    ) -> QtGui.QPixmap:
+        self, size: core.QSize, mode: gui.QIcon.Mode, state: gui.QIcon.State
+    ) -> gui.QPixmap:
         """Return the icon as a pixmap with requested size, mode, and state."""
-        img = gui.Image(size, QtGui.QImage.Format.Format_ARGB32)
+        img = gui.Image(size, gui.QImage.Format.Format_ARGB32)
         img.fill(constants.GlobalColor.transparent)
-        pixmap = QtGui.QPixmap.fromImage(
+        pixmap = gui.QPixmap.fromImage(
             img, constants.ImageConversionFlag.NoFormatConversion
         )
-        rect = QtCore.QRect(QtCore.QPoint(0, 0), size)
-        self.paint(QtGui.QPainter(pixmap), rect, mode, state)
+        rect = core.QRect(core.QPoint(0, 0), size)
+        self.paint(gui.QPainter(pixmap), rect, mode, state)
         return pixmap
 
     def change_color(self, color: datatypes.ColorType) -> None:

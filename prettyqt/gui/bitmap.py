@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
-class Bitmap(gui.PixmapMixin, QtGui.QBitmap):
+class Bitmap(gui.PixmapMixin, gui.QBitmap):
     pass
 
 

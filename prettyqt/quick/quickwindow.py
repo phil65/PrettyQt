@@ -4,7 +4,7 @@ import contextlib
 from typing import Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtCore, QtGui, QtQuick
+from prettyqt.qt import QtCore, QtQuick
 from prettyqt.utils import bidict
 
 
@@ -53,7 +53,7 @@ TEXT_RENDER_TYPE: bidict[TextRenderTypeStr, QtQuick.QQuickWindow.TextRenderType]
 
 
 class QuickWindowMixin(gui.WindowMixin):
-    def create_texture_from_image(self, image: QtGui.QImage, **kwargs):
+    def create_texture_from_image(self, image: gui.QImage, **kwargs):
         flag = self.CreateTextureOption(0)
         for key, val in kwargs.items():
             if val is True:
@@ -110,5 +110,5 @@ if __name__ == "__main__":
     app = gui.app()
     wnd = QuickWindow()
     wnd.set_text_render_type("qt_text")
-    img = QtGui.QImage()
+    img = gui.QImage()
     texture = wnd.create_texture_from_image(img)

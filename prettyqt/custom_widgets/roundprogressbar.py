@@ -5,7 +5,6 @@ import enum
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 
 
 BarStyleStr = Literal["donut", "pie", "line", "expand"]
@@ -44,7 +43,7 @@ class RoundProgressBar(widgets.Widget):
         percent = 2
         maximum = 3
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent)
         self._min_value = 0.0
         self._max_value = 100.0
@@ -57,7 +56,7 @@ class RoundProgressBar(widgets.Widget):
         self.number_format = "%p%"
         self.decimals = 1
         self._update_flags: ValueTypeStr = "percent"
-        self.gradient_data: Sequence[QtGui.QColor] = []
+        self.gradient_data: Sequence[gui.QColor] = []
 
     def minimum(self):
         return self._min_value
@@ -100,7 +99,7 @@ class RoundProgressBar(widgets.Widget):
             self.data_pen_width = width
             self.update()
 
-    def set_data_colors(self, stop_points: list[QtGui.QColor]):
+    def set_data_colors(self, stop_points: list[gui.QColor]):
         if stop_points != self.gradient_data:
             self.gradient_data = stop_points
             self._rebuild_brush = True

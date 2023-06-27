@@ -6,7 +6,6 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, listdelegators
 
 
@@ -32,26 +31,26 @@ StandardButtonStr = Literal[
 ]
 
 STANDARD_BUTTON: bidict[
-    StandardButtonStr, QtWidgets.QDialogButtonBox.StandardButton
+    StandardButtonStr, widgets.QDialogButtonBox.StandardButton
 ] = bidict(
-    cancel=QtWidgets.QDialogButtonBox.StandardButton.Cancel,
-    ok=QtWidgets.QDialogButtonBox.StandardButton.Ok,
-    save=QtWidgets.QDialogButtonBox.StandardButton.Save,
-    open=QtWidgets.QDialogButtonBox.StandardButton.Open,
-    close=QtWidgets.QDialogButtonBox.StandardButton.Close,
-    discard=QtWidgets.QDialogButtonBox.StandardButton.Discard,
-    apply=QtWidgets.QDialogButtonBox.StandardButton.Apply,
-    reset=QtWidgets.QDialogButtonBox.StandardButton.Reset,
-    restore_defaults=QtWidgets.QDialogButtonBox.StandardButton.RestoreDefaults,
-    help=QtWidgets.QDialogButtonBox.StandardButton.Help,
-    save_all=QtWidgets.QDialogButtonBox.StandardButton.SaveAll,
-    yes=QtWidgets.QDialogButtonBox.StandardButton.Yes,
-    yes_to_all=QtWidgets.QDialogButtonBox.StandardButton.YesToAll,
-    no=QtWidgets.QDialogButtonBox.StandardButton.No,
-    no_to_all=QtWidgets.QDialogButtonBox.StandardButton.NoToAll,
-    abort=QtWidgets.QDialogButtonBox.StandardButton.Abort,
-    retry=QtWidgets.QDialogButtonBox.StandardButton.Retry,
-    ignore=QtWidgets.QDialogButtonBox.StandardButton.Ignore,
+    cancel=widgets.QDialogButtonBox.StandardButton.Cancel,
+    ok=widgets.QDialogButtonBox.StandardButton.Ok,
+    save=widgets.QDialogButtonBox.StandardButton.Save,
+    open=widgets.QDialogButtonBox.StandardButton.Open,
+    close=widgets.QDialogButtonBox.StandardButton.Close,
+    discard=widgets.QDialogButtonBox.StandardButton.Discard,
+    apply=widgets.QDialogButtonBox.StandardButton.Apply,
+    reset=widgets.QDialogButtonBox.StandardButton.Reset,
+    restore_defaults=widgets.QDialogButtonBox.StandardButton.RestoreDefaults,
+    help=widgets.QDialogButtonBox.StandardButton.Help,
+    save_all=widgets.QDialogButtonBox.StandardButton.SaveAll,
+    yes=widgets.QDialogButtonBox.StandardButton.Yes,
+    yes_to_all=widgets.QDialogButtonBox.StandardButton.YesToAll,
+    no=widgets.QDialogButtonBox.StandardButton.No,
+    no_to_all=widgets.QDialogButtonBox.StandardButton.NoToAll,
+    abort=widgets.QDialogButtonBox.StandardButton.Abort,
+    retry=widgets.QDialogButtonBox.StandardButton.Retry,
+    ignore=widgets.QDialogButtonBox.StandardButton.Ignore,
 )
 
 
@@ -68,21 +67,21 @@ RoleStr = Literal[
     "reset",
 ]
 
-ROLES: bidict[RoleStr, QtWidgets.QDialogButtonBox.ButtonRole] = bidict(
-    invalid=QtWidgets.QDialogButtonBox.ButtonRole.InvalidRole,
-    accept=QtWidgets.QDialogButtonBox.ButtonRole.AcceptRole,
-    reject=QtWidgets.QDialogButtonBox.ButtonRole.RejectRole,
-    destructive=QtWidgets.QDialogButtonBox.ButtonRole.DestructiveRole,
-    action=QtWidgets.QDialogButtonBox.ButtonRole.ActionRole,
-    help=QtWidgets.QDialogButtonBox.ButtonRole.HelpRole,
-    yes=QtWidgets.QDialogButtonBox.ButtonRole.YesRole,
-    no=QtWidgets.QDialogButtonBox.ButtonRole.NoRole,
-    apply=QtWidgets.QDialogButtonBox.ButtonRole.ApplyRole,
-    reset=QtWidgets.QDialogButtonBox.ButtonRole.ResetRole,
+ROLES: bidict[RoleStr, widgets.QDialogButtonBox.ButtonRole] = bidict(
+    invalid=widgets.QDialogButtonBox.ButtonRole.InvalidRole,
+    accept=widgets.QDialogButtonBox.ButtonRole.AcceptRole,
+    reject=widgets.QDialogButtonBox.ButtonRole.RejectRole,
+    destructive=widgets.QDialogButtonBox.ButtonRole.DestructiveRole,
+    action=widgets.QDialogButtonBox.ButtonRole.ActionRole,
+    help=widgets.QDialogButtonBox.ButtonRole.HelpRole,
+    yes=widgets.QDialogButtonBox.ButtonRole.YesRole,
+    no=widgets.QDialogButtonBox.ButtonRole.NoRole,
+    apply=widgets.QDialogButtonBox.ButtonRole.ApplyRole,
+    reset=widgets.QDialogButtonBox.ButtonRole.ResetRole,
 )
 
 
-class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
+class DialogButtonBox(widgets.WidgetMixin, widgets.QDialogButtonBox):
     button_clicked = core.Signal(str)
 
     def __init__(self, *args, **kwargs):
@@ -92,10 +91,10 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
     def __len__(self) -> int:
         return len(self.buttons())
 
-    def __getitem__(self, index: StandardButtonStr) -> QtWidgets.QPushButton:
+    def __getitem__(self, index: StandardButtonStr) -> widgets.QPushButton:
         return self.button(STANDARD_BUTTON[index])
 
-    def __iter__(self) -> Iterator[QtWidgets.QAbstractButton]:
+    def __iter__(self) -> Iterator[widgets.QAbstractButton]:
         return iter(self.buttons())
 
     def __contains__(self, index: StandardButtonStr):
@@ -116,7 +115,7 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
             box.add_default_button(k, callback=v)  # type: ignore
         return box
 
-    def on_click(self, button: QtCore.QObject):
+    def on_click(self, button: core.QObject):
         self.button_clicked.emit(button.objectName())
 
     def set_horizontal(self):
@@ -145,14 +144,14 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
 
     def add_default_buttons(
         self, buttons: Sequence[StandardButtonStr]
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QPushButton]:
+    ) -> listdelegators.BaseListDelegator[widgets.QPushButton]:
         return [self.add_default_button(btn) for btn in buttons]
 
     def add_default_button(
         self,
-        button: StandardButtonStr | QtWidgets.QDialogButtonBox.StandardButton,
+        button: StandardButtonStr | widgets.QDialogButtonBox.StandardButton,
         callback: Callable | None = None,
-    ) -> QtWidgets.QPushButton:
+    ) -> widgets.QPushButton:
         """Add a default button.
 
         Args:
@@ -170,8 +169,8 @@ class DialogButtonBox(widgets.WidgetMixin, QtWidgets.QDialogButtonBox):
 
     def add_button(
         self,
-        button: QtWidgets.QPushButton | str,
-        role: RoleStr | QtWidgets.QDialogButtonBox.ButtonRole = "accept",
+        button: widgets.QPushButton | str,
+        role: RoleStr | widgets.QDialogButtonBox.ButtonRole = "accept",
         callback: Callable | None = None,
     ) -> widgets.QPushButton:
         """Add a button.

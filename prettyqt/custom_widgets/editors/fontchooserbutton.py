@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
@@ -10,7 +9,7 @@ class FontChooserButton(widgets.Widget):
 
     def __init__(
         self,
-        font: QtGui.QFont | str | None = None,
+        font: gui.QFont | str | None = None,
         object_name: str = "font_chooser_button",
         **kwargs,
     ):
@@ -38,7 +37,7 @@ class FontChooserButton(widgets.Widget):
             self.set_current_font(dlg.current_font())
             self.value_changed.emit(dlg.current_font())
 
-    def set_current_font(self, font: str | QtGui.QFont | None):
+    def set_current_font(self, font: str | gui.QFont | None):
         match font:
             case str():
                 self._current_font = gui.Font(font)
@@ -48,13 +47,13 @@ class FontChooserButton(widgets.Widget):
                 self._current_font = font
         self.lineedit.setText(self._current_font.family())
 
-    def set_value(self, value: str | QtGui.QFont):
+    def set_value(self, value: str | gui.QFont):
         self.set_current_font(value)
 
     def get_value(self) -> gui.QFont:
         return gui.QFont(self._current_font)
 
-    current_font = core.Property(QtGui.QFont, get_value, set_value, user=True)
+    current_font = core.Property(gui.QFont, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":

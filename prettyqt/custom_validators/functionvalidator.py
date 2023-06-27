@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Callable
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
 class FunctionValidator(gui.Validator):
@@ -18,7 +17,7 @@ class FunctionValidator(gui.Validator):
 
     def validate(
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         if self._fn(text):
             return self.State.Acceptable, text, pos
         return self.State.Invalid, text, pos

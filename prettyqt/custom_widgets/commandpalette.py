@@ -6,7 +6,6 @@ import logging
 import pathlib
 
 from prettyqt import constants, core, custom_models, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import colors, datatypes
 
 
@@ -51,15 +50,15 @@ class CommandTable(widgets.TableView):
         self.h_header.set_resize_mode("stretch")
         self.pressed.connect(self._on_clicked)
         self.set_delegate("html", column=0)
-        self._match_color = QtGui.QColor("#468cc6")
+        self._match_color = gui.QColor("#468cc6")
         self.setShowGrid(False)
 
-    @core.Property(QtGui.QColor)
-    def matchColor(self) -> QtGui.QColor:
+    @core.Property(gui.QColor)
+    def matchColor(self) -> gui.QColor:
         return self._match_color
 
     @matchColor.setter
-    def matchColor(self, color: QtGui.QColor):
+    def matchColor(self, color: gui.QColor):
         self._match_color = color
 
     def _on_clicked(self, index: core.ModelIndex) -> None:
@@ -76,7 +75,7 @@ class CommandTable(widgets.TableView):
 class CommandPalette(widgets.Widget):
     """A Qt command palette widget."""
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent=parent)
         self.setWindowFlags(
             constants.WindowType.WindowStaysOnTopHint
@@ -100,8 +99,8 @@ class CommandPalette(widgets.Widget):
         # self._table.action_clicked.connect(self._on_action_clicked)
         # self._line.editingFinished.connect(self.hide)
 
-    def eventFilter(self, source: QtCore.QObject, e: QtCore.QEvent) -> bool:
-        if source != self._line or e.type() != QtCore.QEvent.Type.KeyPress:
+    def eventFilter(self, source: core.QObject, e: core.QEvent) -> bool:
+        if source != self._line or e.type() != core.QEvent.Type.KeyPress:
             return super().eventFilter(source, e)
         if e.modifiers() in (
             constants.KeyboardModifier.NoModifier,
@@ -123,7 +122,7 @@ class CommandPalette(widgets.Widget):
                     return True
         return super().eventFilter(source, e)
 
-    def populate_from_widget(self, widget: QtWidgets.QWidget):
+    def populate_from_widget(self, widget: widgets.QWidget):
         self.add_actions(widget.actions())
         if not callable(widget.parent):
             return
@@ -147,11 +146,11 @@ class CommandPalette(widgets.Widget):
         self.setParent(parent, constants.WindowType.SubWindow)
         self.hide()
 
-    # def focusOutEvent(self, a0: QtGui.QFocusEvent) -> None:
+    # def focusOutEvent(self, a0: gui.QFocusEvent) -> None:
     #     self.hide()
     #     return super().focusOutEvent(a0)
 
-    def add_actions(self, actions: Sequence[QtGui.QAction]):
+    def add_actions(self, actions: Sequence[gui.QAction]):
         self._table._model.add_items(actions)
 
     def show(self):

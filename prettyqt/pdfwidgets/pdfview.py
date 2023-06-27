@@ -4,7 +4,7 @@ import os
 from typing import Literal
 
 from prettyqt import core, pdf, widgets
-from prettyqt.qt import QtWidgets, QtPdfWidgets
+from prettyqt.qt import QtPdfWidgets
 from prettyqt.utils import bidict, datatypes
 
 
@@ -32,7 +32,7 @@ ZOOM_MODE: bidict[ZoomModeStr, QtPdfWidgets.QPdfView.ZoomMode] = bidict(
 
 
 class PdfView(widgets.AbstractScrollAreaMixin, QtPdfWidgets.QPdfView):
-    def __init__(self, parent: QtWidgets.QWidget | None = None, **kwargs):
+    def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
         super().__init__(parent, **kwargs)
         self.setDocument(pdf.PdfDocument(self))
 

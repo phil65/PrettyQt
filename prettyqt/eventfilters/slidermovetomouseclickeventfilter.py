@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import constants, eventfilters, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore
 
-CC = QtWidgets.QStyle.ComplexControl
-SC = QtWidgets.QStyle.SubControl
+CC = widgets.QStyle.ComplexControl
+SC = widgets.QStyle.SubControl
 
 
 class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
@@ -37,7 +37,7 @@ class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
             slider_length = sr.height()
             slider_min = gr.y()
             slider_max = gr.bottom() - slider_length + 1
-        value = QtWidgets.QStyle.sliderValueFromPosition(
+        value = widgets.QStyle.sliderValueFromPosition(
             scrollbar.minimum(),
             scrollbar.maximum(),
             pos - slider_min - slider_length // 2,

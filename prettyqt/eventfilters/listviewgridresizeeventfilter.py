@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, eventfilters
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 
 
 class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
@@ -28,8 +28,8 @@ class ListViewGridResizeEventFilter(eventfilters.BaseEventFilter):
         # being wrapped. Without this, the view can flicker during resize
         tile_width = int(width / self._view_columns)
         icon_width = int(tile_width * 0.8)
-        source.setGridSize(QtCore.QSize(tile_width, tile_width))
-        source.setIconSize(QtCore.QSize(icon_width, icon_width))
+        source.setGridSize(core.QSize(tile_width, tile_width))
+        source.setIconSize(core.QSize(icon_width, icon_width))
 
 
 if __name__ == "__main__":

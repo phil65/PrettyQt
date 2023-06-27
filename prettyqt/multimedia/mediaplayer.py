@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtMultimedia
+from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict, datatypes
 
 
@@ -50,7 +50,7 @@ MediaStatusStr = Literal[
 
 class MediaPlayer(core.ObjectMixin, QtMultimedia.QMediaPlayer):
     def set_source_device(
-        self, device: QtCore.QIODevice, url: datatypes.UrlType | None = None
+        self, device: core.QIODevice, url: datatypes.UrlType | None = None
     ):
         url = datatypes.to_local_url(url)
         self.setSourceDevice(device, url)

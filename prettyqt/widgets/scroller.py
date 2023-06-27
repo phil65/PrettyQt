@@ -5,16 +5,15 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
 InputStr = Literal["press", "move", "release"]
 
-INPUT: bidict[InputStr, QtWidgets.QScroller.Input] = bidict(
-    press=QtWidgets.QScroller.Input.InputPress,
-    move=QtWidgets.QScroller.Input.InputMove,
-    release=QtWidgets.QScroller.Input.InputRelease,
+INPUT: bidict[InputStr, widgets.QScroller.Input] = bidict(
+    press=widgets.QScroller.Input.InputPress,
+    move=widgets.QScroller.Input.InputMove,
+    release=widgets.QScroller.Input.InputRelease,
 )
 
 ScrollGestureTypeStr = Literal[
@@ -22,27 +21,27 @@ ScrollGestureTypeStr = Literal[
 ]
 
 SCROLLER_GESTURE_TYPE: bidict[
-    ScrollGestureTypeStr, QtWidgets.QScroller.ScrollerGestureType
+    ScrollGestureTypeStr, widgets.QScroller.ScrollerGestureType
 ] = bidict(
-    touch=QtWidgets.QScroller.ScrollerGestureType.TouchGesture,
-    left_mouse_button=QtWidgets.QScroller.ScrollerGestureType.LeftMouseButtonGesture,
-    middle_mouse_button=QtWidgets.QScroller.ScrollerGestureType.MiddleMouseButtonGesture,
-    right_mouse_button=QtWidgets.QScroller.ScrollerGestureType.RightMouseButtonGesture,
+    touch=widgets.QScroller.ScrollerGestureType.TouchGesture,
+    left_mouse_button=widgets.QScroller.ScrollerGestureType.LeftMouseButtonGesture,
+    middle_mouse_button=widgets.QScroller.ScrollerGestureType.MiddleMouseButtonGesture,
+    right_mouse_button=widgets.QScroller.ScrollerGestureType.RightMouseButtonGesture,
 )
 
 
 StateStr = Literal["inactive", "pressed", "dragging", "scrolling"]
 
-STATE: bidict[StateStr, QtWidgets.QScroller.State] = bidict(
-    inactive=QtWidgets.QScroller.State.Inactive,
-    pressed=QtWidgets.QScroller.State.Pressed,
-    dragging=QtWidgets.QScroller.State.Dragging,
-    scrolling=QtWidgets.QScroller.State.Scrolling,
+STATE: bidict[StateStr, widgets.QScroller.State] = bidict(
+    inactive=widgets.QScroller.State.Inactive,
+    pressed=widgets.QScroller.State.Pressed,
+    dragging=widgets.QScroller.State.Dragging,
+    scrolling=widgets.QScroller.State.Scrolling,
 )
 
 
 class Scroller(core.ObjectMixin):
-    def __init__(self, item: QtWidgets.QScroller):
+    def __init__(self, item: widgets.QScroller):
         self.item = item
 
     def __getattr__(self, val):
@@ -67,7 +66,7 @@ class Scroller(core.ObjectMixin):
 
     def handle_input(
         self,
-        input_type: InputStr | QtWidgets.QScroller.Input,
+        input_type: InputStr | widgets.QScroller.Input,
         position: datatypes.PointFType,
         timestamp: int = 0,
     ) -> bool:
@@ -79,16 +78,16 @@ class Scroller(core.ObjectMixin):
         return widgets.ScrollerProperties(self.scrollerProperties())
 
     @classmethod
-    def get_scroller(cls, obj: QtCore.QObject) -> Self:
-        return cls(QtWidgets.QScroller.scroller(obj))
+    def get_scroller(cls, obj: core.QObject) -> Self:
+        return cls(widgets.QScroller.scroller(obj))
 
     @staticmethod
     def grab_gesture(
-        target: QtCore.QObject,
+        target: core.QObject,
         gesture_type: ScrollGestureTypeStr
-        | QtWidgets.QScroller.ScrollerGestureType = "touch",
+        | widgets.QScroller.ScrollerGestureType = "touch",
     ) -> constants.GestureTypeStr:
-        gesture = QtWidgets.QScroller.grabGesture(
+        gesture = widgets.QScroller.grabGesture(
             target, SCROLLER_GESTURE_TYPE.get_enum_value(gesture_type)
         )
         if gesture >= 256:
@@ -96,11 +95,11 @@ class Scroller(core.ObjectMixin):
         return constants.GESTURE_TYPE.inverse[gesture]
 
     @staticmethod
-    def grabbed_gesture(target: QtCore.QObject) -> constants.GestureTypeStr:
-        return constants.GESTURE_TYPE.inverse[QtWidgets.QScroller.grabbedGesture(target)]
+    def grabbed_gesture(target: core.QObject) -> constants.GestureTypeStr:
+        return constants.GESTURE_TYPE.inverse[widgets.QScroller.grabbedGesture(target)]
 
 
 if __name__ == "__main__":
     app = widgets.app()
-    w = QtWidgets.QPlainTextEdit()
+    w = widgets.QPlainTextEdit()
     scroller = Scroller.get_scroller(w)

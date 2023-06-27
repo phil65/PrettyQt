@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing_extensions import Self
 
 from prettyqt import gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
 
-class TextDocumentFragment(QtGui.QTextDocumentFragment):
+class TextDocumentFragment(gui.QTextDocumentFragment):
     def __repr__(self):
         return get_repr(self, gui.TextDocument(self.toPlainText()))
 

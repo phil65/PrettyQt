@@ -4,7 +4,7 @@ import os
 from typing import Literal
 
 from prettyqt import core, pdf
-from prettyqt.qt import QtCore, QtPdf
+from prettyqt.qt import QtPdf
 from prettyqt.utils import bidict, datatypes
 
 
@@ -26,7 +26,7 @@ RoleStr = Literal[
 
 
 class PdfBookmarkModel(core.AbstractItemModelMixin, QtPdf.QPdfBookmarkModel):
-    def __init__(self, parent: QtCore.QObject | None = None):
+    def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)
         self.setDocument(pdf.PdfDocument(self))
 

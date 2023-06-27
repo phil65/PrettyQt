@@ -8,17 +8,16 @@ from typing import Any
 from typing_extensions import Self
 
 from prettyqt import constants, core, gui, iconprovider
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import datatypes, get_repr, helpers, listdelegators, serializemixin
 
 
-class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
+class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
     def __repr__(self):
         return get_repr(self, self.get_icon(), self.text())
 
     def __getitem__(
-        self, index: int | slice | tuple[int | slice, int | slice] | QtCore.QModelIndex
-    ) -> QtGui.QStandardItem | listdelegators.BaseListDelegator[QtGui.QStandardItem]:
+        self, index: int | slice | tuple[int | slice, int | slice] | core.QModelIndex
+    ) -> gui.QStandardItem | listdelegators.BaseListDelegator[gui.QStandardItem]:
         match index:
             case int():
                 if index >= self.childCount():
@@ -45,22 +44,22 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
             raise KeyError(index)
         return item
 
-    def __iter__(self) -> Iterator[QtGui.QStandardItem]:
+    def __iter__(self) -> Iterator[gui.QStandardItem]:
         return iter(self.get_children())
 
-    def __add__(self, other: str | QtGui.QStandardItem) -> StandardItem:
+    def __add__(self, other: str | gui.QStandardItem) -> StandardItem:
         match other:
-            case QtGui.QStandardItem() | str():
+            case gui.QStandardItem() | str():
                 self.add(other)
                 return self
             case _:
                 raise TypeError("wrong type for addition")
 
-    def get_children(self) -> listdelegators.BaseListDelegator[QtGui.QStandardItem]:
+    def get_children(self) -> listdelegators.BaseListDelegator[gui.QStandardItem]:
         items = [self.child(index) for index in range(self.rowCount())]
         return listdelegators.BaseListDelegator(items)
 
-    def add(self, *item: str | QtGui.QStandardItem):
+    def add(self, *item: str | gui.QStandardItem):
         for i in item:
             new_item = type(self)(i) if isinstance(i, str) else i
             self.appendRow([new_item])
@@ -145,7 +144,7 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
             if size is None:
                 tooltip = f"<img src={path!r}>"
             else:
-                if isinstance(size, QtCore.QSize):
+                if isinstance(size, core.QSize):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         if rich_text:
@@ -160,9 +159,9 @@ class StandardItem(serializemixin.SerializeMixin, QtGui.QStandardItem):
         name: str = "",
         icon: datatypes.IconType = None,
         data: dict | None = None,
-        foreground: QtGui.QBrush | None = None,
-        background: QtGui.QBrush | None = None,
-        font: QtGui.QFont | None = None,
+        foreground: gui.QBrush | None = None,
+        background: gui.QBrush | None = None,
+        font: gui.QFont | None = None,
         selectable: bool = True,
         enabled: bool = True,
         editable: bool = False,

@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, colors, datatypes
 
 
-mod = QtGui.QTextCharFormat
+mod = gui.QTextCharFormat
 
 FontPropertiesInheritanceBehaviorStr = Literal["none", "single"]
 
@@ -51,22 +50,22 @@ VerticalAlignmentStr = Literal[
 ]
 
 VERTICAL_ALIGNMENT: bidict[
-    VerticalAlignmentStr, QtGui.QTextCharFormat.VerticalAlignment
+    VerticalAlignmentStr, gui.QTextCharFormat.VerticalAlignment
 ] = bidict(
-    normal=QtGui.QTextCharFormat.VerticalAlignment.AlignNormal,
-    super_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSuperScript,
-    sub_script=QtGui.QTextCharFormat.VerticalAlignment.AlignSubScript,
-    middle=QtGui.QTextCharFormat.VerticalAlignment.AlignMiddle,
-    bottom=QtGui.QTextCharFormat.VerticalAlignment.AlignBottom,
-    top=QtGui.QTextCharFormat.VerticalAlignment.AlignTop,
-    baseline=QtGui.QTextCharFormat.VerticalAlignment.AlignBaseline,
+    normal=gui.QTextCharFormat.VerticalAlignment.AlignNormal,
+    super_script=gui.QTextCharFormat.VerticalAlignment.AlignSuperScript,
+    sub_script=gui.QTextCharFormat.VerticalAlignment.AlignSubScript,
+    middle=gui.QTextCharFormat.VerticalAlignment.AlignMiddle,
+    bottom=gui.QTextCharFormat.VerticalAlignment.AlignBottom,
+    top=gui.QTextCharFormat.VerticalAlignment.AlignTop,
+    baseline=gui.QTextCharFormat.VerticalAlignment.AlignBaseline,
 )
 
 
 class TextCharFormatMixin(gui.TextFormatMixin):
     def __init__(
         self,
-        text_color: datatypes.ColorType | QtGui.QBrush = None,
+        text_color: datatypes.ColorType | gui.QBrush = None,
         bold: bool = False,
         italic: bool = False,
     ):
@@ -77,13 +76,13 @@ class TextCharFormatMixin(gui.TextFormatMixin):
             self.set_font_weight("bold")
         self.setFontItalic(italic)
 
-    def set_foreground_color(self, color: datatypes.ColorType | QtGui.QBrush):
-        if not isinstance(color, QtGui.QBrush):
+    def set_foreground_color(self, color: datatypes.ColorType | gui.QBrush):
+        if not isinstance(color, gui.QBrush):
             color = colors.get_color(color)
         self.setForeground(color)
 
-    def set_background_color(self, color: datatypes.ColorType | QtGui.QBrush):
-        if not isinstance(color, QtGui.QBrush):
+    def set_background_color(self, color: datatypes.ColorType | gui.QBrush):
+        if not isinstance(color, gui.QBrush):
             color = colors.get_color(color)
         self.setBackground(color)
 
@@ -120,7 +119,7 @@ class TextCharFormatMixin(gui.TextFormatMixin):
         return UNDERLINE_STYLE.inverse[self.underlineStyle()]
 
     def set_vertical_alignment(
-        self, alignment: VerticalAlignmentStr | QtGui.QTextCharFormat.VerticalAlignment
+        self, alignment: VerticalAlignmentStr | gui.QTextCharFormat.VerticalAlignment
     ):
         """Set the vertical alignment.
 
@@ -149,7 +148,7 @@ class TextCharFormatMixin(gui.TextFormatMixin):
         return gui.Font(self.font())
 
 
-class TextCharFormat(TextCharFormatMixin, QtGui.QTextCharFormat):
+class TextCharFormat(TextCharFormatMixin, gui.QTextCharFormat):
     pass
 
 

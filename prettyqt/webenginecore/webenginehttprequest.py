@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtWebEngineCore
+from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import bidict, datatypes
 
 
@@ -21,7 +21,7 @@ class WebEngineHttpRequest(QtWebEngineCore.QWebEngineHttpRequest):
 
     def set_headers(self, headers: dict[str, str]):
         for k, v in headers.items():
-            self.setHeader(QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode()))
+            self.setHeader(core.QByteArray(k.encode()), core.QByteArray(v.encode()))
 
     def get_headers(self) -> dict[str, str]:
         return {h.data().decode(): self.header(h).data().decode() for h in self.headers()}

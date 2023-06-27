@@ -5,7 +5,7 @@ import math
 from typing import Literal
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, datatypes
 
 
@@ -37,21 +37,21 @@ class PainterPath(QtGui.QPainterPath):
     def __iadd__(self, other):
         if not isinstance(
             other,
-            QtCore.QPoint | QtCore.QRect | QtGui.QPainterPath | QtGui.QRegion,
+            core.QPoint | core.QRect | QtGui.QPainterPath | QtGui.QRegion,
         ):
             raise ValueError(other)
         self.add(other)
         return self
 
     def add(
-        self, other: QtCore.QPoint | QtCore.QRect | QtGui.QPainterPath | QtGui.QRegion
+        self, other: core.QPoint | core.QRect | QtGui.QPainterPath | QtGui.QRegion
     ):
         match other:
             case QtGui.QPolygonF():
                 self.addPolygon(other)
             case QtGui.QPainterPath():
                 self.addPath(other)
-            case QtCore.QRect():
+            case core.QRect():
                 self.addRect(other)
             case QtGui.QRegion():
                 self.addRegion(other)
@@ -59,7 +59,7 @@ class PainterPath(QtGui.QPainterPath):
     def __bool__(self):
         return not self.isEmpty()
 
-    def __contains__(self, item: QtCore.QPointF | QtCore.QRectF | QtGui.QPainterPath):
+    def __contains__(self, item: core.QPointF | core.QRectF | QtGui.QPainterPath):
         return self.contains(item)
 
     def add_rect(self, rect: datatypes.RectType | datatypes.RectFType):
@@ -132,7 +132,7 @@ if __name__ == "__main__":
                 painter.drawPath(gui.PainterPath.create_star(400, 200))
 
     p = PainterPath.create_star(400, 200)
-    p += QtCore.QPoint(1, 1)
+    p += core.QPoint(1, 1)
 
     t = Test()
     t.show()

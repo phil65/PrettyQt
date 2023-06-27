@@ -4,11 +4,10 @@ import functools
 from typing import Literal, overload
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 
 
-class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
-    def __add__(self, other: QtGui.QAction | QtWidgets.QMenu):
+class MenuBar(widgets.WidgetMixin, widgets.QMenuBar):
+    def __add__(self, other: gui.QAction | widgets.QMenu):
         self.add(other)
         return self
 
@@ -23,7 +22,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
         ...
 
     @overload
-    def add_menu(self, menu_or_str: QtWidgets.QMenu) -> gui.Action:
+    def add_menu(self, menu_or_str: widgets.QMenu) -> gui.Action:
         ...
 
     @functools.singledispatchmethod
@@ -35,7 +34,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
         return menu
 
     @add_menu.register
-    def _(self, menu: QtWidgets.QMenu) -> gui.Action:
+    def _(self, menu: widgets.QMenu) -> gui.Action:
         action = gui.Action(parent=self, text=menu.title())
         action.set_menu(menu)
         self.addAction(action)
@@ -44,9 +43,9 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     def add_separator(self):
         self.addSeparator()
 
-    def add(self, *items: QtWidgets.QMenu | QtGui.QAction):
+    def add(self, *items: widgets.QMenu | gui.QAction):
         for i in items:
-            if isinstance(i, QtWidgets.QMenu):
+            if isinstance(i, widgets.QMenu):
                 action = gui.Action(self)
                 action.set_text(i.title())
                 action.set_menu(i)
@@ -56,7 +55,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
 
     def set_corner_widget(
         self,
-        widget: QtWidgets.QWidget,
+        widget: widgets.QWidget,
         corner: Literal["top_right", "top_left"] = "top_right",
     ):
         match corner:
@@ -70,7 +69,7 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     def get_corner_widget(
         self,
         corner: Literal["top_right", "top_left"] = "top_right",
-    ) -> QtWidgets.QWidget:
+    ) -> widgets.QWidget:
         match corner:
             case "top_left":
                 return self.cornerWidget(constants.Corner.TopLeftCorner)

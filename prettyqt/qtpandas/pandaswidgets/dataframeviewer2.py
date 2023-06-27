@@ -3,7 +3,6 @@ from __future__ import annotations
 import pandas as pd
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 MAX_AUTOSIZE_MS = 150  # Milliseconds given (at most) to perform column auto-sizing
 MIN_TRUNC_CHARS = 8  # Minimum size (in characters) given to columns
@@ -74,7 +73,7 @@ class DataFrameHeaderModel(core.AbstractTableModel):
         self,
         model,
         axis: constants.OrientationStr,
-        palette: QtGui.QPalette,
+        palette: gui.QPalette,
         parent: widgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
@@ -150,8 +149,8 @@ class DataFrameLevelModel(core.AbstractTableModel):
     def __init__(
         self,
         model,
-        palette: QtGui.QPalette,
-        font: QtGui.QFont,
+        palette: gui.QPalette,
+        font: gui.QFont,
         parent: widgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
@@ -214,7 +213,7 @@ class DataFrameLevelModel(core.AbstractTableModel):
 
 class DataFrameViewer(widgets.Widget):
     def __init__(
-        self, df: pd.DataFrame | None = None, parent: QtWidgets.QWidget | None = None
+        self, df: pd.DataFrame | None = None, parent: widgets.QWidget | None = None
     ):
         super().__init__(parent=parent)
         if df is None:
@@ -468,7 +467,7 @@ class DataFrameViewer(widgets.Widget):
             width = min(self.max_width, hdr_width)
         header.setColumnWidth(col, width)
 
-    def eventFilter(self, obj: widgets.TableView, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, obj: widgets.TableView, event: core.QEvent) -> bool:
         if obj == self.table_data and event.type() == core.Event.Type.Resize:
             self._resize_visible_columns_to_contents()
         return False

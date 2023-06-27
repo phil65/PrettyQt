@@ -6,17 +6,16 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import bidict, listdelegators
 
 
 DOCK_OPTION = bidict(
-    animated_docks=QtWidgets.QMainWindow.DockOption.AnimatedDocks,
-    allow_nested_docks=QtWidgets.QMainWindow.DockOption.AllowNestedDocks,
-    allow_tabbed_docks=QtWidgets.QMainWindow.DockOption.AllowTabbedDocks,
-    force_tabbed_docks=QtWidgets.QMainWindow.DockOption.ForceTabbedDocks,
-    vertical_tabs=QtWidgets.QMainWindow.DockOption.VerticalTabs,
-    grouped_dragging=QtWidgets.QMainWindow.DockOption.GroupedDragging,
+    animated_docks=widgets.QMainWindow.DockOption.AnimatedDocks,
+    allow_nested_docks=widgets.QMainWindow.DockOption.AllowNestedDocks,
+    allow_tabbed_docks=widgets.QMainWindow.DockOption.AllowTabbedDocks,
+    force_tabbed_docks=widgets.QMainWindow.DockOption.ForceTabbedDocks,
+    vertical_tabs=widgets.QMainWindow.DockOption.VerticalTabs,
+    grouped_dragging=widgets.QMainWindow.DockOption.GroupedDragging,
 )
 
 DockOptionStr = Literal[
@@ -29,10 +28,10 @@ DockOptionStr = Literal[
 ]
 
 DEFAULT_OPTS = (
-    QtWidgets.QMainWindow.DockOption.AllowTabbedDocks
-    | QtWidgets.QMainWindow.DockOption.AllowNestedDocks
-    | QtWidgets.QMainWindow.DockOption.GroupedDragging
-    | QtWidgets.QMainWindow.DockOption.AnimatedDocks
+    widgets.QMainWindow.DockOption.AllowTabbedDocks
+    | widgets.QMainWindow.DockOption.AllowNestedDocks
+    | widgets.QMainWindow.DockOption.GroupedDragging
+    | widgets.QMainWindow.DockOption.AnimatedDocks
 )
 
 logger = logging.getLogger(__name__)
@@ -75,13 +74,13 @@ class FullScreenAction(gui.Action):
         return False
 
 
-class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
+class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, dock_options=DEFAULT_OPTS, **kwargs)
         self.setMenuBar(widgets.MenuBar())
 
-    def __getitem__(self, index: str) -> QtWidgets.QWidget:
-        result = self.find_child(QtWidgets.QWidget, index)
+    def __getitem__(self, index: str) -> widgets.QWidget:
+        result = self.find_child(widgets.QWidget, index)
         if result is None:
             raise KeyError("Widget not found")
         return result
@@ -94,7 +93,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
         }
         return maps
 
-    def set_widget(self, widget: QtWidgets.QWidget | None) -> QtWidgets.QWidget | None:
+    def set_widget(self, widget: widgets.QWidget | None) -> widgets.QWidget | None:
         """Set widget and return previous one if existing."""
         previous = self.takeCentralWidget()
         if widget:
@@ -126,13 +125,13 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
             menu.add(action)
         return menu
 
-    def add(self, widget: QtWidgets.QWidget, **kwargs):
+    def add(self, widget: widgets.QWidget, **kwargs):
         match widget:
-            case QtWidgets.QToolBar():
+            case widgets.QToolBar():
                 self.add_toolbar(widget, **kwargs)
-            case QtWidgets.QDockWidget():
+            case widgets.QDockWidget():
                 self.add_dockwidget(widget, **kwargs)
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 self.centralWidget().layout().add(widget, **kwargs)
 
     def get_corner(
@@ -153,7 +152,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def add_toolbar(
         self,
-        toolbar: QtWidgets.QToolBar,
+        toolbar: widgets.QToolBar,
         area: constants.ToolbarAreaStr | constants.ToolBarArea | Literal["auto"] = "auto",
     ):
         """Adds a toolbar to the mainmenu at specified area.
@@ -231,7 +230,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def add_dockwidget(
         self,
-        widget: QtWidgets.QWidget,
+        widget: widgets.QWidget,
         position: constants.DockWidgetAreaStr
         | constants.DockWidgetArea
         | Literal["auto"] = "auto",
@@ -239,7 +238,7 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
     ):
         if position == "auto":
             position = self._get_preferred_dock_position()
-        if not isinstance(widget, QtWidgets.QDockWidget):
+        if not isinstance(widget, widgets.QDockWidget):
             dock_widget = widgets.DockWidget(self, **kwargs)
             dock_widget.set_widget(widget)
             self.addDockWidget(
@@ -253,30 +252,30 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def remove(
         self,
-        widgets: Sequence[QtWidgets.QDockWidget | QtWidgets.QToolBar | QtGui.QAction]
-        | QtWidgets.QDockWidget
-        | QtWidgets.QToolBar
-        | QtGui.QAction,
+        widgets: Sequence[widgets.QDockWidget | widgets.QToolBar | gui.QAction]
+        | widgets.QDockWidget
+        | widgets.QToolBar
+        | gui.QAction,
     ):
         widget_list = widgets if isinstance(widgets, list) else [widgets]
         for i in widget_list:
             match i:
-                case QtWidgets.QDockWidget():
+                case widgets.QDockWidget():
                     self.removeDockWidget(i)
-                case QtWidgets.QToolBar():
+                case widgets.QToolBar():
                     self.removeToolBar(i)
-                case QtGui.QAction():
+                case gui.QAction():
                     self.removeAction(i)
 
     def show_blocking(self):
         self.set_modality("application")
         self.show()
 
-    def get_dock_area(self, widget: QtWidgets.QDockWidget) -> constants.DockWidgetAreaStr:
+    def get_dock_area(self, widget: widgets.QDockWidget) -> constants.DockWidgetAreaStr:
         area = self.dockWidgetArea(widget)
         return constants.DOCK_WIDGET_AREAS.inverse[area]
 
-    def get_toolbar_area(self, widget: QtWidgets.QToolBar) -> constants.ToolbarAreaStr:
+    def get_toolbar_area(self, widget: widgets.QToolBar) -> constants.ToolbarAreaStr:
         area = self.toolBarArea(widget)
         return constants.TOOLBAR_AREA.inverse[area]
 
@@ -313,8 +312,8 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def get_docks(
         self, position: constants.DockWidgetAreaStr | None = None
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QDockWidget]:
-        docks = self.find_children(QtWidgets.QDockWidget, recursive=False)
+    ) -> listdelegators.BaseListDelegator[widgets.QDockWidget]:
+        docks = self.find_children(widgets.QDockWidget, recursive=False)
         if position is None:
             return docks
         else:
@@ -348,8 +347,8 @@ class MainWindow(widgets.WidgetMixin, QtWidgets.QMainWindow):
 
     def get_toolbars(
         self, position: constants.ToolbarAreaStr | None = None
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QToolBar]:
-        toolbars = self.find_children(QtWidgets.QToolBar, recursive=False)
+    ) -> listdelegators.BaseListDelegator[widgets.QToolBar]:
+        toolbars = self.find_children(widgets.QToolBar, recursive=False)
         if position is None:
             return toolbars
         else:

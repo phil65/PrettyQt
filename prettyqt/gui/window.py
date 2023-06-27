@@ -6,27 +6,26 @@ import pathlib
 from typing import Literal
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, datatypes, get_repr
 
 AncestorModeStr = Literal["exclude_transients", "include_transients"]
 
-ANCESTER_MODES: bidict[AncestorModeStr, QtGui.QWindow.AncestorMode] = bidict(
-    exclude_transients=QtGui.QWindow.AncestorMode.ExcludeTransients,
-    include_transients=QtGui.QWindow.AncestorMode.IncludeTransients,
+ANCESTER_MODES: bidict[AncestorModeStr, gui.QWindow.AncestorMode] = bidict(
+    exclude_transients=gui.QWindow.AncestorMode.ExcludeTransients,
+    include_transients=gui.QWindow.AncestorMode.IncludeTransients,
 )
 
 VisibilityStr = Literal[
     "windowed", "minimized", "maximized", "fullscreen", "automatic", "hidden"
 ]
 
-VISIBILITY: bidict[VisibilityStr, QtGui.QWindow.Visibility] = bidict(
-    windowed=QtGui.QWindow.Visibility.Windowed,
-    minimized=QtGui.QWindow.Visibility.Minimized,
-    maximized=QtGui.QWindow.Visibility.Maximized,
-    fullscreen=QtGui.QWindow.Visibility.FullScreen,
-    automatic=QtGui.QWindow.Visibility.AutomaticVisibility,
-    hidden=QtGui.QWindow.Visibility.Hidden,
+VISIBILITY: bidict[VisibilityStr, gui.QWindow.Visibility] = bidict(
+    windowed=gui.QWindow.Visibility.Windowed,
+    minimized=gui.QWindow.Visibility.Minimized,
+    maximized=gui.QWindow.Visibility.Maximized,
+    fullscreen=gui.QWindow.Visibility.FullScreen,
+    automatic=gui.QWindow.Visibility.AutomaticVisibility,
+    hidden=gui.QWindow.Visibility.Hidden,
 )
 
 
@@ -40,12 +39,12 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
         callback: Callable | None = None,
         context: constants.ShortcutContextStr | constants.ShortcutContext = "window",
     ) -> gui.Shortcut:
-        if not isinstance(keysequence, QtGui.QKeySequence):
+        if not isinstance(keysequence, gui.QKeySequence):
             keysequence = gui.KeySequence(keysequence)
         context = constants.SHORTCUT_CONTEXT.get_enum_value(context)
         return gui.Shortcut(keysequence, self, callback, context=context)
 
-    def set_visibility(self, visibility: VisibilityStr | QtGui.QWindow.Visibility):
+    def set_visibility(self, visibility: VisibilityStr | gui.QWindow.Visibility):
         """Set window visibility.
 
         Args:
@@ -109,7 +108,7 @@ class WindowMixin(core.ObjectMixin, gui.SurfaceMixin):
         return constants.WINDOW_STATES.get_list(self.windowStates())
 
 
-class Window(WindowMixin, QtGui.QWindow):
+class Window(WindowMixin, gui.QWindow):
     pass
 
 

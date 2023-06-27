@@ -5,7 +5,7 @@ import functools
 from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, listdelegators
 
 
@@ -13,7 +13,7 @@ class NoData:
     pass
 
 
-class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
+class ListWidget(widgets.ListViewMixin, widgets.QListWidget):
     value_changed = core.Signal(object)
 
     def __init__(self, *args, selection_mode: str = "single", **kwargs):
@@ -26,8 +26,8 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     def __getitem__(
         self, row: int | slice
     ) -> (
-        QtWidgets.QListWidgetItem
-        | listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]
+        widgets.QListWidgetItem
+        | listdelegators.BaseListDelegator[widgets.QListWidgetItem]
     ):
         match row:
             case int():
@@ -46,11 +46,11 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     def __delitem__(self, row: int):
         self.takeItem(row)
 
-    def __add__(self, other: QtWidgets.QListWidgetItem):
+    def __add__(self, other: widgets.QListWidgetItem):
         self.addItem(other)
         return self
 
-    def __iter__(self) -> Iterator[QtWidgets.QListWidgetItem]:
+    def __iter__(self) -> Iterator[widgets.QListWidgetItem]:
         return iter(self.get_children())
 
     def __len__(self) -> int:
@@ -64,7 +64,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         data = self.get_value()
         self.value_changed.emit(data)
 
-    def get_children(self) -> listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]:
+    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QListWidgetItem]:
         items = [self.item(row) for row in range(self.count())]
         return listdelegators.BaseListDelegator(items)
 
@@ -133,7 +133,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         return item
 
     @add_item.register
-    def _(self, listitem: QtWidgets.QListWidgetItem):
+    def _(self, listitem: widgets.QListWidgetItem):
         self.addItem(listitem)
 
     def add(self, label: str, data=NoData, icon: datatypes.IconType = None):
@@ -155,7 +155,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
 
     def scroll_to_item(
         self,
-        item: QtWidgets.QListWidgetItem,
+        item: widgets.QListWidgetItem,
         mode: widgets.abstractitemview.ScrollHintStr
         | widgets.QAbstractItemView.ScrollHint = "ensure_visible",
     ):
@@ -168,7 +168,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]:
+    ) -> listdelegators.BaseListDelegator[widgets.QListWidgetItem]:
         flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= constants.MatchFlag.MatchRecursive

@@ -14,7 +14,6 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import colors, datatypes, fx
 
 
@@ -25,13 +24,13 @@ if TYPE_CHECKING:
 
 LayoutStr = Literal["horizontal", "vertical", "grid", "form", "stacked", "flow", "border"]
 
-QWIDGETSIZE_MAX = 16777215  # QtWidgets.QWIDGETSIZE_MAX
+QWIDGETSIZE_MAX = 16777215  # widgets.QWIDGETSIZE_MAX
 
 PositionPossibilityType = (
     Literal["parent", "window", "screen", "mouse"]
-    | QtWidgets.QWidget
-    | QtCore.QRect
-    | QtCore.QPoint
+    | widgets.QWidget
+    | core.QRect
+    | core.QPoint
     | tuple[int, int]
     | tuple[int, int, int, int]
 )
@@ -95,7 +94,7 @@ class WidgetMixin(core.ObjectMixin):
         self.setEnabled(False)
 
     def insertAction(
-        self, position_or_action: int | QtGui.QAction, action: QtGui.QAction
+        self, position_or_action: int | gui.QAction, action: gui.QAction
     ):
         """Extend insertAction to also allow int index."""
         if isinstance(position_or_action, int):
@@ -109,7 +108,7 @@ class WidgetMixin(core.ObjectMixin):
     def add_action(
         self,
         text: str | gui.Action,
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
         data: Any = None,
         **kwargs,
     ) -> gui.Action:
@@ -132,7 +131,7 @@ class WidgetMixin(core.ObjectMixin):
         action.setData(data)
         return action
 
-    def add_actions(self, actions: Sequence[QtGui.QAction]):
+    def add_actions(self, actions: Sequence[gui.QAction]):
         for i in actions:
             i.setParent(self)
         self.addActions(actions)
@@ -157,86 +156,86 @@ class WidgetMixin(core.ObjectMixin):
 
     def map_to(
         self,
-        widget: QtWidgets.QWidget | Literal["global", "parent", "window"],
+        widget: widgets.QWidget | Literal["global", "parent", "window"],
         pos_or_rect,
-    ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
+    ) -> core.QRect | core.QRectF | core.QPoint | core.QPointF:
         """Map a point or rect to a widget, global position or parent."""
         match pos_or_rect:
             case int(), int():
-                pos_or_rect = QtCore.QPoint(*pos_or_rect)
+                pos_or_rect = core.QPoint(*pos_or_rect)
             case float(), float():
-                pos_or_rect = QtCore.QPointF(*pos_or_rect)
+                pos_or_rect = core.QPointF(*pos_or_rect)
             case int(), int(), int(), int():
-                pos_or_rect = QtCore.QRect(*pos_or_rect)
+                pos_or_rect = core.QRect(*pos_or_rect)
             case float(), float(), float(), float():
-                pos_or_rect = QtCore.QRectF(*pos_or_rect)
+                pos_or_rect = core.QRectF(*pos_or_rect)
         match pos_or_rect, widget:
-            case QtCore.QRect() | QtCore.QRectF(), QtWidgets.QWidget():
+            case core.QRect() | core.QRectF(), widgets.QWidget():
                 top_left = super().mapTo(widget, pos_or_rect.topLeft())
                 bottom_right = super().mapTo(widget, pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), QtWidgets.QWidget():
+            case core.QPoint() | core.QPointF(), widgets.QWidget():
                 return super().mapTo(widget, pos_or_rect)
-            case QtCore.QRect() | QtCore.QRectF(), "parent":
+            case core.QRect() | core.QRectF(), "parent":
                 top_left = super().mapToParent(pos_or_rect.topLeft())
                 bottom_right = super().mapToParent(pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), "parent":
+            case core.QPoint() | core.QPointF(), "parent":
                 return super().mapToParent(pos_or_rect)
-            case QtCore.QRect() | QtCore.QRectF(), "window":
+            case core.QRect() | core.QRectF(), "window":
                 top_left = super().mapTo(self.window(), pos_or_rect.topLeft())
                 bottom_right = super().mapTo(self.window(), pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), "window":
+            case core.QPoint() | core.QPointF(), "window":
                 return super().mapTo(self.window(), pos_or_rect)
-            case QtCore.QRect() | QtCore.QRectF(), "global":
+            case core.QRect() | core.QRectF(), "global":
                 top_left = super().mapToGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapToGlobal(pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), "global":
+            case core.QPoint() | core.QPointF(), "global":
                 return super().mapToGlobal(pos_or_rect)
             case _:
                 raise ValueError(pos_or_rect)
 
     def map_from(
         self,
-        widget: QtWidgets.QWidget | Literal["global", "parent", "window"],
+        widget: widgets.QWidget | Literal["global", "parent", "window"],
         pos_or_rect,
-    ) -> QtCore.QRect | QtCore.QRectF | QtCore.QPoint | QtCore.QPointF:
+    ) -> core.QRect | core.QRectF | core.QPoint | core.QPointF:
         """Map a point or rect from a widget, global position or parent."""
         match pos_or_rect:
             case int(), int():
-                pos_or_rect = QtCore.QPoint(*pos_or_rect)
+                pos_or_rect = core.QPoint(*pos_or_rect)
             case float(), float():
-                pos_or_rect = QtCore.QPointF(*pos_or_rect)
+                pos_or_rect = core.QPointF(*pos_or_rect)
             case int(), int(), int(), int():
-                pos_or_rect = QtCore.QRect(*pos_or_rect)
+                pos_or_rect = core.QRect(*pos_or_rect)
             case float(), float(), float(), float():
-                pos_or_rect = QtCore.QRectF(*pos_or_rect)
+                pos_or_rect = core.QRectF(*pos_or_rect)
         match pos_or_rect, widget:
-            case QtCore.QRect() | QtCore.QRectF(), QtWidgets.QWidget():
+            case core.QRect() | core.QRectF(), widgets.QWidget():
                 top_left = super().mapFrom(widget, pos_or_rect.topLeft())
                 bottom_right = super().mapFrom(widget, pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), QtWidgets.QWidget():
+            case core.QPoint() | core.QPointF(), widgets.QWidget():
                 return super().mapFrom(widget, pos_or_rect)
-            case QtCore.QRect() | QtCore.QRectF(), "parent":
+            case core.QRect() | core.QRectF(), "parent":
                 top_left = super().mapFromParent(pos_or_rect.topLeft())
                 bottom_right = super().mapFromParent(pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), "parent":
+            case core.QPoint() | core.QPointF(), "parent":
                 return super().mapFromParent(pos_or_rect)
-            case QtCore.QRect() | QtCore.QRectF(), "window":
+            case core.QRect() | core.QRectF(), "window":
                 top_left = super().mapFrom(self.window(), pos_or_rect.topLeft())
                 bottom_right = super().mapFrom(self.window(), pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), "window":
+            case core.QPoint() | core.QPointF(), "window":
                 return super().mapFrom(self.window(), pos_or_rect)
-            case QtCore.QRect() | QtCore.QRectF(), "global":
+            case core.QRect() | core.QRectF(), "global":
                 top_left = super().mapFromGlobal(pos_or_rect.topLeft())
                 bottom_right = super().mapFromGlobal(pos_or_rect.bottomRight())
                 return type(pos_or_rect)(top_left, bottom_right)
-            case QtCore.QPoint() | QtCore.QPointF(), "global":
+            case core.QPoint() | core.QPointF(), "global":
                 return super().mapFromGlobal(pos_or_rect)
             case _:
                 raise ValueError(pos_or_rect)
@@ -282,11 +281,11 @@ class WidgetMixin(core.ObjectMixin):
     # lets be gentle and allow all reasonable signatures for the size setters.
     # tuples as well as passing two args is possible.
     @functools.singledispatchmethod
-    def set_min_size(self, size: QtCore.QSize | tuple[int | None, int | None]):
+    def set_min_size(self, size: core.QSize | tuple[int | None, int | None]):
         match size:
             case int() | None as x, int() | None as y:
                 super().setMinimumSize(x or 0, y or 0)
-            case QtCore.QSize():
+            case core.QSize():
                 super().setMinimumSize(size)
             case _:
                 raise TypeError(size)
@@ -302,7 +301,7 @@ class WidgetMixin(core.ObjectMixin):
         self.set_min_size((x, y))
 
     @functools.singledispatchmethod
-    def set_max_size(self, size: QtCore.QSize | tuple[int | None, int | None]):
+    def set_max_size(self, size: core.QSize | tuple[int | None, int | None]):
         match size:
             case int() | None as x, int() | None as y:
                 x = QWIDGETSIZE_MAX if x is None else x
@@ -371,7 +370,7 @@ class WidgetMixin(core.ObjectMixin):
             if size is None:
                 tooltip = f"<img src={path!r}>"
             else:
-                if isinstance(size, QtCore.QSize):
+                if isinstance(size, core.QSize):
                     size = (size.width(), size.height())
                 tooltip = f'<img src={path!r} width="{size[0]}" height="{size[1]}">'
         tooltip = tooltip.replace("\n", "<br/>")
@@ -381,13 +380,13 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_font(
         self,
-        font_name: QtGui.QFont | str | None = None,
+        font_name: gui.QFont | str | None = None,
         font_size: int | None = None,
         weight: int | None = None,
         italic: bool = False,
-    ) -> QtGui.QFont:
+    ) -> gui.QFont:
         """Set the font for this widget."""
-        if isinstance(font_name, QtGui.QFont):
+        if isinstance(font_name, gui.QFont):
             super().setFont(font_name)
             return font_name
         if font_size is None:
@@ -676,10 +675,10 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_layout(
         self,
-        layout: LayoutStr | QtWidgets.QLayout,
+        layout: LayoutStr | widgets.QLayout,
         margin: int | None = None,
         **kwargs,
-    ) -> QtWidgets.QLayout:
+    ) -> widgets.QLayout:
         """Quick way to set a layout.
 
         Sets layout to given layout, also allows setting margin and spacing.
@@ -709,7 +708,7 @@ class WidgetMixin(core.ObjectMixin):
                 layout = custom_widgets.FlowLayout(**kwargs)
             case "border":
                 layout = custom_widgets.BorderLayout(**kwargs)
-            case QtWidgets.QLayout():
+            case widgets.QLayout():
                 layout = layout
             case _:
                 raise ValueError(f"Invalid Layout {layout}")
@@ -750,7 +749,7 @@ class WidgetMixin(core.ObjectMixin):
             case "mouse":
                 geom = core.Rect(gui.Cursor.pos(), gui.Cursor.pos())
                 do_scale = False
-            case QtCore.QPoint():
+            case core.QPoint():
                 geom = core.Rect(where, where)
                 do_scale = False
             case (int(), int()):
@@ -763,9 +762,9 @@ class WidgetMixin(core.ObjectMixin):
                 geom = self.parent().frameGeometry()
             case "window":
                 geom = self.window().frameGeometry()
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 geom = where.frameGeometry()
-            case QtCore.QRect():
+            case core.QRect():
                 geom = where
             case "screen":
                 geom = gui.GuiApplication.primaryScreen().geometry()
@@ -815,9 +814,9 @@ class WidgetMixin(core.ObjectMixin):
         self.move(own_geo.topLeft())
 
     def set_cursor(
-        self, cursor: constants.CursorShapeStr | constants.CursorShape | QtGui.QCursor
+        self, cursor: constants.CursorShapeStr | constants.CursorShape | gui.QCursor
     ):
-        if isinstance(cursor, QtGui.QCursor):
+        if isinstance(cursor, gui.QCursor):
             curs = cursor
         else:
             curs = gui.Cursor(constants.CURSOR_SHAPE.get_enum_value(cursor))
@@ -860,7 +859,7 @@ class WidgetMixin(core.ObjectMixin):
         self.setContentsMargins(margin, margin, margin, margin)
 
     def raise_dock(self) -> bool:
-        w = self.find_parent(QtWidgets.QDockWidget)
+        w = self.find_parent(widgets.QDockWidget)
         if w is None:
             return False
         w.setVisible(True)
@@ -869,7 +868,7 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_mask(
         self,
-        area: datatypes.RectType | QtGui.QRegion | QtGui.QBitmap | None,
+        area: datatypes.RectType | gui.QRegion | gui.QBitmap | None,
         typ: gui.region.RegionTypeStr = "rectangle",
     ):
         match area:
@@ -878,7 +877,7 @@ class WidgetMixin(core.ObjectMixin):
                 return
             case (int(), int(), int(), int()):
                 area = gui.Region(*area, gui.region.REGION_TYPE[typ])
-            case QtCore.QRect():
+            case core.QRect():
                 area = gui.Region(area, gui.region.REGION_TYPE[typ])
         self.setMask(area)
 
@@ -889,7 +888,7 @@ class WidgetMixin(core.ObjectMixin):
         path = self.windowFilePath()
         return pathlib.Path(path) if path else None
 
-    def get_image(self) -> QtGui.QPixmap:
+    def get_image(self) -> gui.QPixmap:
         from prettyqt.qt import QtOpenGLWidgets
 
         image = self.grab()
@@ -917,9 +916,9 @@ class WidgetMixin(core.ObjectMixin):
     def get_cursor(self) -> gui.Cursor:
         return gui.Cursor(self.cursor())
 
-    def set_style(self, style: str | QtWidgets.QStyle):
+    def set_style(self, style: str | widgets.QStyle):
         if isinstance(style, str):
-            style = QtWidgets.QStyleFactory.create(style)
+            style = widgets.QStyleFactory.create(style)
         self.setStyle(style)
 
     def child_at(self, *args, typ: type[widgets.QWidget] | None = None):
@@ -932,7 +931,7 @@ class WidgetMixin(core.ObjectMixin):
                 return child
 
 
-class Widget(WidgetMixin, QtWidgets.QWidget):
+class Widget(WidgetMixin, widgets.QWidget):
     pass
 
 

@@ -5,7 +5,6 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, colors, datatypes, get_repr, serializemixin
 
 
@@ -34,45 +33,45 @@ RoleStr = Literal[
 ]
 
 
-ROLE: bidict[RoleStr, QtGui.QPalette.ColorRole] = bidict(
-    window=QtGui.QPalette.ColorRole.Window,  # same as Background
-    window_text=QtGui.QPalette.ColorRole.WindowText,  # same as Foreground
-    base=QtGui.QPalette.ColorRole.Base,
-    alternate_base=QtGui.QPalette.ColorRole.AlternateBase,
-    tool_tip_base=QtGui.QPalette.ColorRole.ToolTipBase,
-    tool_tip_text=QtGui.QPalette.ColorRole.ToolTipText,
-    placeholder_text=QtGui.QPalette.ColorRole.PlaceholderText,
-    text=QtGui.QPalette.ColorRole.Text,
-    button=QtGui.QPalette.ColorRole.Button,
-    button_text=QtGui.QPalette.ColorRole.ButtonText,
-    bright_text=QtGui.QPalette.ColorRole.BrightText,
-    light=QtGui.QPalette.ColorRole.Light,
-    midlight=QtGui.QPalette.ColorRole.Midlight,
-    dark=QtGui.QPalette.ColorRole.Dark,
-    mid=QtGui.QPalette.ColorRole.Mid,
-    shadow=QtGui.QPalette.ColorRole.Shadow,
-    highlight=QtGui.QPalette.ColorRole.Highlight,
-    highlighted_text=QtGui.QPalette.ColorRole.HighlightedText,
-    link=QtGui.QPalette.ColorRole.Link,
-    link_visited=QtGui.QPalette.ColorRole.LinkVisited,
-    none=QtGui.QPalette.ColorRole.NoRole,
+ROLE: bidict[RoleStr, gui.QPalette.ColorRole] = bidict(
+    window=gui.QPalette.ColorRole.Window,  # same as Background
+    window_text=gui.QPalette.ColorRole.WindowText,  # same as Foreground
+    base=gui.QPalette.ColorRole.Base,
+    alternate_base=gui.QPalette.ColorRole.AlternateBase,
+    tool_tip_base=gui.QPalette.ColorRole.ToolTipBase,
+    tool_tip_text=gui.QPalette.ColorRole.ToolTipText,
+    placeholder_text=gui.QPalette.ColorRole.PlaceholderText,
+    text=gui.QPalette.ColorRole.Text,
+    button=gui.QPalette.ColorRole.Button,
+    button_text=gui.QPalette.ColorRole.ButtonText,
+    bright_text=gui.QPalette.ColorRole.BrightText,
+    light=gui.QPalette.ColorRole.Light,
+    midlight=gui.QPalette.ColorRole.Midlight,
+    dark=gui.QPalette.ColorRole.Dark,
+    mid=gui.QPalette.ColorRole.Mid,
+    shadow=gui.QPalette.ColorRole.Shadow,
+    highlight=gui.QPalette.ColorRole.Highlight,
+    highlighted_text=gui.QPalette.ColorRole.HighlightedText,
+    link=gui.QPalette.ColorRole.Link,
+    link_visited=gui.QPalette.ColorRole.LinkVisited,
+    none=gui.QPalette.ColorRole.NoRole,
 )
 
 GroupStr = Literal["disabled", "active", "inactive"]
 
-GROUP: bidict[GroupStr, QtGui.QPalette.ColorGroup] = bidict(
-    disabled=QtGui.QPalette.ColorGroup.Disabled,
-    active=QtGui.QPalette.ColorGroup.Active,  # normal
-    inactive=QtGui.QPalette.ColorGroup.Inactive,
+GROUP: bidict[GroupStr, gui.QPalette.ColorGroup] = bidict(
+    disabled=gui.QPalette.ColorGroup.Disabled,
+    active=gui.QPalette.ColorGroup.Active,  # normal
+    inactive=gui.QPalette.ColorGroup.Inactive,
 )
 
 
-class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
-    def __getitem__(self, index: RoleStr | QtGui.QPalette.ColorRole) -> gui.Color:
+class Palette(serializemixin.SerializeMixin, gui.QPalette):
+    def __getitem__(self, index: RoleStr | gui.QPalette.ColorRole) -> gui.Color:
         return self.get_color(index)
 
     def __setitem__(
-        self, index: RoleStr | QtGui.QPalette.ColorRole, value: datatypes.ColorType
+        self, index: RoleStr | gui.QPalette.ColorRole, value: datatypes.ColorType
     ):
         self.set_color(index, value)
 
@@ -89,22 +88,22 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
 
     def set_color(
         self,
-        role: RoleStr | QtGui.QPalette.ColorRole,
+        role: RoleStr | gui.QPalette.ColorRole,
         color: datatypes.ColorType,
-        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
+        group: GroupStr | gui.QPalette.ColorGroup = "active",
     ):
         color = colors.get_color(color)
         self.setColor(GROUP.get_enum_value(group), ROLE.get_enum_value(role), color)
 
     def get_colors(
-        self, group: GroupStr | QtGui.QPalette.ColorGroup = "active"
+        self, group: GroupStr | gui.QPalette.ColorGroup = "active"
     ) -> dict[str, gui.Color]:
         return {k: self.get_color(k, group) for k in ROLE}
 
     def get_color(
         self,
-        role: RoleStr | QtGui.QPalette.ColorRole,
-        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
+        role: RoleStr | gui.QPalette.ColorRole,
+        group: GroupStr | gui.QPalette.ColorGroup = "active",
     ) -> gui.Color:
         return gui.Color(
             self.color(GROUP.get_enum_value(group), ROLE.get_enum_value(role))
@@ -112,30 +111,30 @@ class Palette(serializemixin.SerializeMixin, QtGui.QPalette):
 
     def set_brush(
         self,
-        role: RoleStr | QtGui.QPalette.ColorRole,
+        role: RoleStr | gui.QPalette.ColorRole,
         brush: datatypes.ColorAndBrushType,
-        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
+        group: GroupStr | gui.QPalette.ColorGroup = "active",
     ):
-        if not isinstance(brush, QtGui.QBrush):
+        if not isinstance(brush, gui.QBrush):
             brush = gui.Brush(colors.get_color(brush))
         self.setBrush(GROUP.get_enum_value(group), ROLE.get_enum_value(role), brush)
 
     def get_brushes(
-        self, group: GroupStr | QtGui.QPalette.ColorGroup = "active"
+        self, group: GroupStr | gui.QPalette.ColorGroup = "active"
     ) -> dict[str, gui.Brush]:
         return {k: self.get_brush(k, group) for k in ROLE}
 
     def get_brush(
         self,
-        role: RoleStr | QtGui.QPalette.ColorRole,
-        group: GroupStr | QtGui.QPalette.ColorGroup = "active",
+        role: RoleStr | gui.QPalette.ColorRole,
+        group: GroupStr | gui.QPalette.ColorGroup = "active",
     ) -> gui.Brush:
         return gui.Brush(
             self.brush(GROUP.get_enum_value(group), ROLE.get_enum_value(role))
         )
 
     def set_color_group(
-        self, group: GroupStr | QtGui.QPalette.ColorGroup, **kwargs: QtGui.QBrush
+        self, group: GroupStr | gui.QPalette.ColorGroup, **kwargs: gui.QBrush
     ):
         """Set the color group.
 

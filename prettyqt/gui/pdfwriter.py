@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
 
-class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, QtGui.QPdfWriter):
+class PdfWriter(core.ObjectMixin, gui.PagedPaintDeviceMixin, gui.QPdfWriter):
     def set_desktop_resolution(self):
         primary = gui.app().primaryScreen()
         dpi = primary.logicalDotsPerInch()

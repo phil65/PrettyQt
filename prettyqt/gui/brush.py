@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, get_repr, serializemixin
 
 
-class Brush(serializemixin.SerializeMixin, QtGui.QBrush):
+class Brush(serializemixin.SerializeMixin, gui.QBrush):
     def __repr__(self):
         return get_repr(self, self.get_color(), self.get_style())
 

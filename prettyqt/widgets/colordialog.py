@@ -3,26 +3,26 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, colors, datatypes
 
 
 OptionStr = Literal["show_alpha", "no_buttons", "no_native"]
 
-OPTIONS: bidict[OptionStr, QtWidgets.QColorDialog.ColorDialogOption] = bidict(
-    show_alpha=QtWidgets.QColorDialog.ColorDialogOption.ShowAlphaChannel,
-    no_buttons=QtWidgets.QColorDialog.ColorDialogOption.NoButtons,
-    no_native=QtWidgets.QColorDialog.ColorDialogOption.DontUseNativeDialog,
+OPTIONS: bidict[OptionStr, widgets.QColorDialog.ColorDialogOption] = bidict(
+    show_alpha=widgets.QColorDialog.ColorDialogOption.ShowAlphaChannel,
+    no_buttons=widgets.QColorDialog.ColorDialogOption.NoButtons,
+    no_native=widgets.QColorDialog.ColorDialogOption.DontUseNativeDialog,
 )
 
 
-class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
+class ColorDialog(widgets.DialogMixin, widgets.QColorDialog):
     @classmethod
     def get_color(
         cls,
         preset: datatypes.ColorType = None,
         allow_alpha: bool = False,
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
     ) -> gui.Color:
         preset = colors.get_color(preset)
         kwargs = (
@@ -34,7 +34,7 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
     def current_color(self) -> gui.Color:
         return gui.Color(self.currentColor())
 
-    def get_qcolorshower(self) -> QtWidgets.QWidget:
+    def get_qcolorshower(self) -> widgets.QWidget:
         return [
             a
             for a in self.children()
@@ -42,7 +42,7 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
             and a.metaObject().className() == "QtPrivate::QColorShower"
         ][0]
 
-    def get_qcolorshowlabel(self) -> QtWidgets.QFrame:
+    def get_qcolorshowlabel(self) -> widgets.QFrame:
         qcs = self.get_qcolorshower()
         return [
             b
@@ -51,7 +51,7 @@ class ColorDialog(widgets.DialogMixin, QtWidgets.QColorDialog):
             and b.metaObject().className() == "QtPrivate::QColorShowLabel"
         ][0]
 
-    def replace_qcolorshowlabel(self, widget: QtWidgets.QWidget):
+    def replace_qcolorshowlabel(self, widget: widgets.QWidget):
         # Find the dialog widget used to display the current
         # color, so we can replace it with our implementation
         qcs = self.get_qcolorshower()
@@ -101,7 +101,7 @@ class CPAlphaShowLabel(widgets.Label):
             self.checkerboard_size, "#aaa", "#ccc"
         )
 
-    def update_color(self, color: QtGui.QColor):
+    def update_color(self, color: gui.QColor):
         self.color = color
         self.repaint()
 

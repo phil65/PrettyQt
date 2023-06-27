@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtGui
 
 
-class TextTableFormat(gui.textframeformat.TextFrameFormatMixin, QtGui.QTextTableFormat):
+class TextTableFormat(gui.textframeformat.TextFrameFormatMixin, gui.QTextTableFormat):
     def __bool__(self):
         return self.isValid()
 

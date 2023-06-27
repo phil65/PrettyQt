@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
-class RadialGradient(gui.GradientMixin, QtGui.QRadialGradient):
+class RadialGradient(gui.GradientMixin, gui.QRadialGradient):
     def __repr__(self):
         return get_repr(
             self,

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
 class ColorValidator(gui.Validator):
@@ -12,7 +11,7 @@ class ColorValidator(gui.Validator):
 
     def validate(
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         color = gui.Color(text)
         if color.isValid():
             return self.State.Acceptable, text, pos

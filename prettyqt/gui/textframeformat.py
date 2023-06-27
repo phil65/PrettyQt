@@ -3,16 +3,15 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict
 
 
 PositionStr = Literal["in_flow", "flow_right", "flow_left"]
 
-POSITIONS: bidict[PositionStr, QtGui.QTextFrameFormat.Position] = bidict(
-    in_flow=QtGui.QTextFrameFormat.Position.InFlow,
-    flow_left=QtGui.QTextFrameFormat.Position.FloatLeft,
-    flow_right=QtGui.QTextFrameFormat.Position.FloatRight,
+POSITIONS: bidict[PositionStr, gui.QTextFrameFormat.Position] = bidict(
+    in_flow=gui.QTextFrameFormat.Position.InFlow,
+    flow_left=gui.QTextFrameFormat.Position.FloatLeft,
+    flow_right=gui.QTextFrameFormat.Position.FloatRight,
 )
 
 BorderStyleStr = Literal[
@@ -29,18 +28,18 @@ BorderStyleStr = Literal[
     "outset",
 ]
 
-BORDER_STYLES: bidict[BorderStyleStr, QtGui.QTextFrameFormat.BorderStyle] = bidict(
-    none=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_None,
-    dotted=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Dotted,
-    dashed=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Dashed,
-    solid=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Solid,
-    double=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Double,
-    dot_dash=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_DotDash,
-    dot_dot_dash=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_DotDotDash,
-    groove=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Groove,
-    ridge=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Ridge,
-    inset=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Inset,
-    outset=QtGui.QTextFrameFormat.BorderStyle.BorderStyle_Outset,
+BORDER_STYLES: bidict[BorderStyleStr, gui.QTextFrameFormat.BorderStyle] = bidict(
+    none=gui.QTextFrameFormat.BorderStyle.BorderStyle_None,
+    dotted=gui.QTextFrameFormat.BorderStyle.BorderStyle_Dotted,
+    dashed=gui.QTextFrameFormat.BorderStyle.BorderStyle_Dashed,
+    solid=gui.QTextFrameFormat.BorderStyle.BorderStyle_Solid,
+    double=gui.QTextFrameFormat.BorderStyle.BorderStyle_Double,
+    dot_dash=gui.QTextFrameFormat.BorderStyle.BorderStyle_DotDash,
+    dot_dot_dash=gui.QTextFrameFormat.BorderStyle.BorderStyle_DotDotDash,
+    groove=gui.QTextFrameFormat.BorderStyle.BorderStyle_Groove,
+    ridge=gui.QTextFrameFormat.BorderStyle.BorderStyle_Ridge,
+    inset=gui.QTextFrameFormat.BorderStyle.BorderStyle_Inset,
+    outset=gui.QTextFrameFormat.BorderStyle.BorderStyle_Outset,
 )
 
 
@@ -107,5 +106,5 @@ class TextFrameFormatMixin(gui.TextFormatMixin):
         return POSITIONS.inverse[self.position()]
 
 
-class TextFrameFormat(TextFrameFormatMixin, QtGui.QTextFrameFormat):
+class TextFrameFormat(TextFrameFormatMixin, gui.QTextFrameFormat):
     pass

@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 from prettyqt import constants, core, eventfilters, widgets
-from prettyqt.qt import QtCore
 
 
 logger = logging.getLogger(__name__)
@@ -22,7 +21,7 @@ class DebugMode(eventfilters.BaseEventFilter):
         self.frame = widgets.RubberBand("rectangle")
         self.frame.setObjectName("testframe")
 
-    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, source: core.QObject, event: core.QEvent) -> bool:
         border_keys = [constants.Key.Key_Control, constants.Key.Key_Alt]
         match event.type():
             case core.Event.Type.KeyPress if event.key() in border_keys:
@@ -58,7 +57,7 @@ class DebugMode(eventfilters.BaseEventFilter):
                             variables[name] = w
                             i += 1
                     console.push_vars(dict(app=widgets.app(), **variables))
-            # case QtCore.QEvent.Type.ToolTip if source.isWidgetType():
+            # case core.QEvent.Type.ToolTip if source.isWidgetType():
             #     metaobj = core.MetaObject(source.metaObject())
             #     lines = [
             #         f"{k}: {v!r}"

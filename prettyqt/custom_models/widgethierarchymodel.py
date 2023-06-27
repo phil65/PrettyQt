@@ -4,7 +4,7 @@ import enum
 import logging
 
 from prettyqt import constants, core, custom_models
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import treeitem
 
 
@@ -126,7 +126,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             case self.Roles.WidgetRole, _:
                 return widget
             case constants.SIZE_HINT_ROLE, _:
-                return QtCore.QSize(250, 35)
+                return core.QSize(250, 35)
 
     def setData(
         self,

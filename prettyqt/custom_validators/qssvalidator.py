@@ -4,7 +4,6 @@ import contextlib
 from qstylizer import parser
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
 class QssValidator(gui.Validator):
@@ -15,7 +14,7 @@ class QssValidator(gui.Validator):
 
     def validate(
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         with contextlib.suppress(ValueError):
             if not text or parser.parse(text):
                 return self.State.Acceptable, text, pos

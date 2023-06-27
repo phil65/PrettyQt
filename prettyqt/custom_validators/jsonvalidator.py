@@ -3,7 +3,6 @@ from __future__ import annotations
 import json
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
 class JsonValidator(gui.Validator):
@@ -14,7 +13,7 @@ class JsonValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         try:
             json.loads(text)
             return self.State.Acceptable, text, pos

@@ -3,41 +3,40 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import bidict, get_repr
 
 
 ModeStr = Literal["standard", "full_page"]
 
-MODES: bidict[ModeStr, QtGui.QPageLayout.Mode] = bidict(
-    standard=QtGui.QPageLayout.Mode.StandardMode,
-    full_page=QtGui.QPageLayout.Mode.FullPageMode,
+MODES: bidict[ModeStr, gui.QPageLayout.Mode] = bidict(
+    standard=gui.QPageLayout.Mode.StandardMode,
+    full_page=gui.QPageLayout.Mode.FullPageMode,
 )
 
 OrientationStr = Literal["portrait", "landscape"]
 
-ORIENTATIONS: bidict[OrientationStr, QtGui.QPageLayout.Orientation] = bidict(
-    portrait=QtGui.QPageLayout.Orientation.Portrait,
-    landscape=QtGui.QPageLayout.Orientation.Landscape,
+ORIENTATIONS: bidict[OrientationStr, gui.QPageLayout.Orientation] = bidict(
+    portrait=gui.QPageLayout.Orientation.Portrait,
+    landscape=gui.QPageLayout.Orientation.Landscape,
 )
 
 UnitStr = Literal["millimeter", "point", "inch", "pica", "didot", "cicero"]
 
-UNITS: bidict[UnitStr, QtGui.QPageLayout.Unit] = bidict(
-    millimeter=QtGui.QPageLayout.Unit.Millimeter,
-    point=QtGui.QPageLayout.Unit.Point,
-    inch=QtGui.QPageLayout.Unit.Inch,
-    pica=QtGui.QPageLayout.Unit.Pica,
-    didot=QtGui.QPageLayout.Unit.Didot,
-    cicero=QtGui.QPageLayout.Unit.Cicero,
+UNITS: bidict[UnitStr, gui.QPageLayout.Unit] = bidict(
+    millimeter=gui.QPageLayout.Unit.Millimeter,
+    point=gui.QPageLayout.Unit.Point,
+    inch=gui.QPageLayout.Unit.Inch,
+    pica=gui.QPageLayout.Unit.Pica,
+    didot=gui.QPageLayout.Unit.Didot,
+    cicero=gui.QPageLayout.Unit.Cicero,
 )
 
 
-class PageLayout(QtGui.QPageLayout):
+class PageLayout(gui.QPageLayout):
     def __repr__(self):
         return get_repr(self)
 
-    def set_units(self, unit: UnitStr | QtGui.QPageLayout.Unit):
+    def set_units(self, unit: UnitStr | gui.QPageLayout.Unit):
         """Set unit.
 
         Args:
@@ -53,7 +52,7 @@ class PageLayout(QtGui.QPageLayout):
         """
         return UNITS.inverse[self.units()]
 
-    def set_mode(self, mode: ModeStr | QtGui.QPageLayout.Mode):
+    def set_mode(self, mode: ModeStr | gui.QPageLayout.Mode):
         """Set mode.
 
         Args:
@@ -70,7 +69,7 @@ class PageLayout(QtGui.QPageLayout):
         return MODES.inverse[self.mode()]
 
     def set_orientation(
-        self, orientation: OrientationStr | QtGui.QPageLayout.Orientation
+        self, orientation: OrientationStr | gui.QPageLayout.Orientation
     ):
         """Set orientation.
 

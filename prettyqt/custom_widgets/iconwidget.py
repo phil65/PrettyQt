@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import core, iconprovider, widgets
-from prettyqt.qt import QtGui, QtWidgets
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
 
 class IconWidget(widgets.Label):
-    def __init__(self, *names, parent: QtWidgets.QWidget | None = None, **kwargs):
+    def __init__(self, *names, parent: widgets.QWidget | None = None, **kwargs):
         super().__init__(parent=parent)
         self._icon: QtGui.QIcon | None = None
         self._size = core.Size(16, 16)

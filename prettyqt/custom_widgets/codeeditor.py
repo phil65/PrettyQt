@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore
 
 
 class CodeEditor(widgets.PlainTextEdit):
@@ -119,7 +118,7 @@ class CodeEditor(widgets.PlainTextEdit):
     def update_line_area_width(self, _):
         self.setViewportMargins(self.line_area_width(), 0, 0, 0)
 
-    def update_line_area(self, rect: QtCore.QRect, dy: int):
+    def update_line_area(self, rect: core.QRect, dy: int):
         if dy:
             self.line_area.scroll(0, dy)
         else:

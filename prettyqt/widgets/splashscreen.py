@@ -3,7 +3,6 @@ from __future__ import annotations
 import os
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -24,7 +23,7 @@ class SplashScreenMixin(widgets.WidgetMixin):
     def __exit__(self, typ, value, traceback):
         self.hide()
 
-    def setPixmap(self, pixmap: os.PathLike | QtGui.QPixmap | None):
+    def setPixmap(self, pixmap: os.PathLike | gui.QPixmap | None):
         match pixmap:
             case os.PathLike():
                 pixmap = gui.Pixmap(os.fspath(pixmap))
@@ -51,7 +50,7 @@ class SplashScreenMixin(widgets.WidgetMixin):
         )
 
 
-class SplashScreen(SplashScreenMixin, QtWidgets.QSplashScreen):
+class SplashScreen(SplashScreenMixin, widgets.QSplashScreen):
     pass
 
 

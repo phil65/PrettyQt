@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 
 
-class TextTable(gui.textframe.TextFrameMixin, QtGui.QTextTable):
+class TextTable(gui.textframe.TextFrameMixin, gui.QTextTable):
     def __getitem__(self, index: int | tuple[int, int]) -> gui.TextTableCell:
         if isinstance(index, int):
             cell = gui.TextTableCell(self.cellAt(index))

@@ -10,55 +10,54 @@ import qstylizer.parser
 import qstylizer.style
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
 MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
 
 MARKDOWN_FEATURES: bidict[
-    MarkdownFeatureStr, QtGui.QTextDocument.MarkdownFeature
+    MarkdownFeatureStr, gui.QTextDocument.MarkdownFeature
 ] = bidict(
-    no_html=QtGui.QTextDocument.MarkdownFeature.MarkdownNoHTML,
-    commonmark=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectCommonMark,
-    github=QtGui.QTextDocument.MarkdownFeature.MarkdownDialectGitHub,
+    no_html=gui.QTextDocument.MarkdownFeature.MarkdownNoHTML,
+    commonmark=gui.QTextDocument.MarkdownFeature.MarkdownDialectCommonMark,
+    github=gui.QTextDocument.MarkdownFeature.MarkdownDialectGitHub,
 )
 
 ResourceTypeStr = Literal["unknown", "html", "image", "stylesheet", "markdown", "user"]
 
-RESOURCE_TYPES: bidict[ResourceTypeStr, QtGui.QTextDocument.ResourceType] = bidict(
-    unknown=QtGui.QTextDocument.ResourceType.UnknownResource,
-    html=QtGui.QTextDocument.ResourceType.HtmlResource,
-    image=QtGui.QTextDocument.ResourceType.ImageResource,
-    stylesheet=QtGui.QTextDocument.ResourceType.StyleSheetResource,
-    markdown=QtGui.QTextDocument.ResourceType.MarkdownResource,
-    user=QtGui.QTextDocument.ResourceType.UserResource,
+RESOURCE_TYPES: bidict[ResourceTypeStr, gui.QTextDocument.ResourceType] = bidict(
+    unknown=gui.QTextDocument.ResourceType.UnknownResource,
+    html=gui.QTextDocument.ResourceType.HtmlResource,
+    image=gui.QTextDocument.ResourceType.ImageResource,
+    stylesheet=gui.QTextDocument.ResourceType.StyleSheetResource,
+    markdown=gui.QTextDocument.ResourceType.MarkdownResource,
+    user=gui.QTextDocument.ResourceType.UserResource,
 )
 
 StackStr = Literal["undo", "redo", "undo_and_redo"]
 
-STACKS: bidict[StackStr, QtGui.QTextDocument.Stacks] = bidict(
-    undo=QtGui.QTextDocument.Stacks.UndoStack,
-    redo=QtGui.QTextDocument.Stacks.RedoStack,
-    undo_and_redo=QtGui.QTextDocument.Stacks.UndoAndRedoStacks,
+STACKS: bidict[StackStr, gui.QTextDocument.Stacks] = bidict(
+    undo=gui.QTextDocument.Stacks.UndoStack,
+    redo=gui.QTextDocument.Stacks.RedoStack,
+    undo_and_redo=gui.QTextDocument.Stacks.UndoAndRedoStacks,
 )
 
 FindFlagStr = Literal["backward", "case_sensitive", "whole_words"]
 
-FIND_FLAGS: bidict[FindFlagStr, QtGui.QTextDocument.FindFlag] = bidict(
-    backward=QtGui.QTextDocument.FindFlag.FindBackward,
-    case_sensitive=QtGui.QTextDocument.FindFlag.FindCaseSensitively,
-    whole_words=QtGui.QTextDocument.FindFlag.FindWholeWords,
+FIND_FLAGS: bidict[FindFlagStr, gui.QTextDocument.FindFlag] = bidict(
+    backward=gui.QTextDocument.FindFlag.FindBackward,
+    case_sensitive=gui.QTextDocument.FindFlag.FindCaseSensitively,
+    whole_words=gui.QTextDocument.FindFlag.FindWholeWords,
 )
 
 MetaInformationStr = Literal["document_title", "document_url", "css_media"]
 
 META_INFORMATION: bidict[
-    MetaInformationStr, QtGui.QTextDocument.MetaInformation
+    MetaInformationStr, gui.QTextDocument.MetaInformation
 ] = bidict(
-    document_title=QtGui.QTextDocument.MetaInformation.DocumentTitle,
-    document_url=QtGui.QTextDocument.MetaInformation.DocumentUrl,
-    css_media=QtGui.QTextDocument.MetaInformation.CssMedia,
+    document_title=gui.QTextDocument.MetaInformation.DocumentTitle,
+    document_url=gui.QTextDocument.MetaInformation.DocumentUrl,
+    css_media=gui.QTextDocument.MetaInformation.CssMedia,
 )
 
 
@@ -110,13 +109,13 @@ class TextDocumentMixin(core.ObjectMixin):
     def get_default_font(self) -> gui.Font:
         return gui.Font(self.defaultFont())
 
-    def set_default_text_option(self, opt: QtGui.QTextOption):
+    def set_default_text_option(self, opt: gui.QTextOption):
         self.setDefaultTextOption(gui.TextOption(opt))
 
     def get_default_text_option(self) -> gui.TextOption:
         return gui.TextOption(self.defaultTextOption())
 
-    def clear_stacks(self, stack: StackStr | QtGui.QTextDocument.Stacks):
+    def clear_stacks(self, stack: StackStr | gui.QTextDocument.Stacks):
         """Clear undo / redo stack.
 
         Args:
@@ -143,7 +142,7 @@ class TextDocumentMixin(core.ObjectMixin):
         return constants.CURSOR_MOVE_STYLE.inverse[self.defaultCursorMoveStyle()]
 
     def set_meta_information(
-        self, info: MetaInformationStr | QtGui.QTextDocument.MetaInformation, value: str
+        self, info: MetaInformationStr | gui.QTextDocument.MetaInformation, value: str
     ):
         """Set meta information.
 
@@ -154,7 +153,7 @@ class TextDocumentMixin(core.ObjectMixin):
         self.setMetaInformation(META_INFORMATION.get_enum_value(info), value)
 
     def get_meta_information(
-        self, info: MetaInformationStr | QtGui.QTextDocument.MetaInformation
+        self, info: MetaInformationStr | gui.QTextDocument.MetaInformation
     ) -> str:
         """Return specififed meta information.
 
@@ -168,7 +167,7 @@ class TextDocumentMixin(core.ObjectMixin):
 
     def add_resource(
         self,
-        resource_type: ResourceTypeStr | QtGui.QTextDocument.ResourceType,
+        resource_type: ResourceTypeStr | gui.QTextDocument.ResourceType,
         name: datatypes.PathType,
         resource,
     ):
@@ -207,7 +206,7 @@ class TextDocumentMixin(core.ObjectMixin):
     def write_to_file(
         self,
         path: datatypes.PathType,
-        fmt: gui.textdocumentwriter.FormatStr | bytes | QtCore.QByteArray = "plaintext",
+        fmt: gui.textdocumentwriter.FormatStr | bytes | core.QByteArray = "plaintext",
     ) -> bool:
         writer = gui.TextDocumentWriter()
         writer.set_format(fmt)
@@ -222,7 +221,7 @@ class TextDocumentMixin(core.ObjectMixin):
     def show_whitespace_and_tabs(self, show: bool):
         """Set show white spaces flag."""
         options = self.get_default_text_option()
-        flag = QtGui.QTextOption.Flag.ShowTabsAndSpaces
+        flag = gui.QTextOption.Flag.ShowTabsAndSpaces
         if show:
             options.setFlags(options.flags() | flag)
         else:
@@ -245,12 +244,12 @@ class TextDocumentMixin(core.ObjectMixin):
             return (max(line_count, 1) * font_metrics.height()) + self.documentMargin()
 
 
-class TextDocument(TextDocumentMixin, QtGui.QTextDocument):
+class TextDocument(TextDocumentMixin, gui.QTextDocument):
     pass
 
 
 if __name__ == "__main__":
     doc = TextDocument("This is a test\nHello")
-    doc.set_default_text_option(QtGui.QTextOption())
+    doc.set_default_text_option(gui.QTextOption())
     a = doc.get_bytes()
     print(a)

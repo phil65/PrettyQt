@@ -6,7 +6,6 @@ from queue import Empty, Queue
 from typing import Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtWidgets
 
 
 CURSOR_MARGIN_TOP = 10
@@ -269,7 +268,7 @@ class NotificationArea(widgets.Widget):
 
     def __init__(
         self,
-        target_widget: QtWidgets.QWidget,
+        target_widget: widgets.QWidget,
         use_global_css: bool = False,
         use_queue: bool = True,
         max_messages: int = 4,
@@ -277,7 +276,7 @@ class NotificationArea(widgets.Widget):
         """Constructor.
 
         Arguments:
-            target_widget : QtWidgets.QWidget
+            target_widget : widgets.QWidget
                 The widget to project the notifications on
             use_global_css : bool (default: False)
                 Flag which indicates whether global style sheets should be used
@@ -294,7 +293,7 @@ class NotificationArea(widgets.Widget):
         Raises:
             TypeError : target_widget is not an object that inherits QWidget
         """
-        if not isinstance(target_widget, QtWidgets.QWidget):
+        if not isinstance(target_widget, widgets.QWidget):
             raise TypeError("target_widget is not a QWidget (or child of it")
 
         # Pop some variables from kwargs.

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
-class ConicalGradient(gui.GradientMixin, QtGui.QConicalGradient):
+class ConicalGradient(gui.GradientMixin, gui.QConicalGradient):
     def __repr__(self):
         return get_repr(self, self.get_center(), self.angle())
 

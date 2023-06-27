@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -10,7 +9,7 @@ class PopupInfo(widgets.Dialog):
 
     _singleton: PopupInfo | None = None
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None, text: str | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None, text: str | None = None):
         super().__init__(parent=parent)
         self.timer = core.Timer(single_shot=True, timeout=self.close)
         self.label = widgets.Label(alignment="center")

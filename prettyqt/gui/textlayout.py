@@ -3,11 +3,10 @@ from __future__ import annotations
 import contextlib
 
 from prettyqt import gui
-from prettyqt.qt import QtGui
 from prettyqt.utils import get_repr
 
 
-class TextLayout(QtGui.QTextLayout):
+class TextLayout(gui.QTextLayout):
     def __repr__(self):
         return get_repr(self, self.text())
 

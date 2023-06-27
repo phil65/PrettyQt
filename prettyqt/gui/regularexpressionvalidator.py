@@ -3,20 +3,19 @@ from __future__ import annotations
 import re
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import get_repr
 
 
-class RegularExpressionValidator(gui.ValidatorMixin, QtGui.QRegularExpressionValidator):
+class RegularExpressionValidator(gui.ValidatorMixin, gui.QRegularExpressionValidator):
     ID = "regular_expression"
 
     def __init__(self, *args, **kwargs):
         # allow passing strings as well as re.Pattern to the ctor
         match args, kwargs:
             case (str() as pat, *rest), _:
-                super().__init__(QtCore.QRegularExpression(pat), *rest, **kwargs)
+                super().__init__(core.QRegularExpression(pat), *rest, **kwargs)
             case _, {"regular_expression": str() as reg_str, **rest}:
-                pat = QtCore.QRegularExpression(reg_str)
+                pat = core.QRegularExpression(reg_str)
                 super().__init__(*args, regular_expression=pat, **rest)
             case (re.Pattern() as pat,), _:
                 super().__init__(core.RegularExpression(pat))

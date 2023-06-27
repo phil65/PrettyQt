@@ -14,7 +14,6 @@ except ImportError:  # Python < 3.11
 import re
 
 from prettyqt import constants, core, custom_models, custom_widgets, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.syntaxhighlighters import RegexMatchHighlighter
 
 
@@ -26,7 +25,7 @@ class RegexEditorWidget(widgets.Widget):
         title: str = "Regex Editor",
         regex: str = "",
         teststring: str = "",
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
     ):
         super().__init__(window_icon="mdi.regex", window_title=title, parent=parent)
         self.resize(1200, 800)

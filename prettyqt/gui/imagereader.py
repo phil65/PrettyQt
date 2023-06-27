@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, gui
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, datatypes
 
 
@@ -12,17 +11,17 @@ ImageReaderErrorStr = Literal[
 ]
 
 IMAGE_READER_ERROR: bidict[
-    ImageReaderErrorStr, QtGui.QImageReader.ImageReaderError
+    ImageReaderErrorStr, gui.QImageReader.ImageReaderError
 ] = bidict(
-    file_not_found=QtGui.QImageReader.ImageReaderError.FileNotFoundError,
-    device=QtGui.QImageReader.ImageReaderError.DeviceError,
-    unsupported_format=QtGui.QImageReader.ImageReaderError.UnsupportedFormatError,
-    invalid_data=QtGui.QImageReader.ImageReaderError.InvalidDataError,
-    unknown=QtGui.QImageReader.ImageReaderError.UnknownError,
+    file_not_found=gui.QImageReader.ImageReaderError.FileNotFoundError,
+    device=gui.QImageReader.ImageReaderError.DeviceError,
+    unsupported_format=gui.QImageReader.ImageReaderError.UnsupportedFormatError,
+    invalid_data=gui.QImageReader.ImageReaderError.InvalidDataError,
+    unknown=gui.QImageReader.ImageReaderError.UnknownError,
 )
 
 
-class ImageReader(QtGui.QImageReader):
+class ImageReader(gui.QImageReader):
     def __getitem__(self, key: str) -> str:
         return self.text(key)
 
@@ -90,7 +89,7 @@ class ImageReader(QtGui.QImageReader):
         return self.supportsOption(gui.imageiohandler.IMAGE_OPTION.get_enum_value(option))
 
     @staticmethod
-    def get_image_format(obj: str | QtCore.QIODevice) -> str:
+    def get_image_format(obj: str | core.QIODevice) -> str:
         return ImageReader.imageFormat(obj).data().decode()
 
     @staticmethod

@@ -3,7 +3,7 @@ from __future__ import annotations
 import logging
 
 from prettyqt import constants, core, eventfilters
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 
 logger = logging.getLogger(__name__)
 
@@ -153,14 +153,14 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 return True
         return False
 
-    def rowCount(self, parent: QtCore.QModelIndex | None = None) -> int:
+    def rowCount(self, parent: core.QModelIndex | None = None) -> int:
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
         return 0 if parent.isValid() else self._metaobj.propertyCount()
 
-    def flags(self, index: QtCore.QModelIndex) -> constants.ItemFlag:
+    def flags(self, index: core.QModelIndex) -> constants.ItemFlag:
         prop = self._metaobj.get_property(index.row())
         if index.column() == 1 and prop.isWritable():
             return super().flags(index) | constants.IS_EDITABLE
