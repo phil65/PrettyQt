@@ -26,8 +26,8 @@ class ProxyMapper(core.Object):
     """
     def __init__(
         self,
-        proxy_1: core.AbstractProxyModelMixin,
-        proxy_2: core.AbstractProxyModelMixin,
+        proxy_1: core.QAbstractItemModel,
+        proxy_2: core.QAbstractItemModel,
         **kwargs,
     ):
         super().__init__(**kwargs)

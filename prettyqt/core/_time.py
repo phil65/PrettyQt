@@ -47,6 +47,13 @@ class Time(QtCore.QTime):
     def get_current_time(cls) -> Self:
         return cls(cls.currentTime())
 
+    @classmethod
+    def from_string(cls, *args, **kwargs) -> Self:
+        return cls(cls.fromString(*args, **kwargs))
+
 
 if __name__ == "__main__":
-    time = Time(22, 1)
+    import datetime
+
+    time = Time(datetime.time(10, 10, 10))
+    print(time)

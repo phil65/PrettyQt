@@ -2,7 +2,6 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import logging
-import os
 from typing import Literal
 import webbrowser
 
@@ -216,18 +215,7 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
         Args:
             url: URL to set
         """
-        match url:
-            case str():
-                url = core.Url(url)
-            case os.PathLike():
-                url = core.Url.fromLocalFile(os.fspath(url))
-            case None:
-                url = core.QUrl()
-            case core.QUrl():
-                pass
-            case _:
-                raise TypeError(url)
-        self.setUrl(url)
+        self.setUrl(datatypes.to_url(url))
 
     def get_url(self) -> core.Url:
         return core.Url(self.url())
@@ -255,18 +243,7 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
         Args:
             url: URL to load
         """
-        match url:
-            case str():
-                url = core.Url(url)
-            case os.PathLike():
-                url = core.Url.fromLocalFile(os.fspath(url))
-            case None:
-                url = core.QUrl()
-            case core.QUrl():
-                pass
-            case _:
-                raise TypeError(url)
-        self.load(url)
+        self.load(datatypes.to_url(url))
 
     def set_zoom(self, zoom: float):
         """Set the zoom factor for the Page.

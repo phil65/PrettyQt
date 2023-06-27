@@ -8,7 +8,7 @@ import os
 import pathlib
 import re
 from typing import TYPE_CHECKING, Any, ClassVar, Protocol, runtime_checkable, TypeVar
-
+from urllib import parse
 
 from prettyqt.qt import QtCore
 
@@ -513,20 +513,26 @@ def to_rectf(rect: RectFType | QtCore.QRect):
 
 def to_url(url: UrlType | None) -> QtCore.QUrl:
     match url:
+        case os.PathLike():
+            return QtCore.QUrl.fromLocalFile(os.fspath(url))
         case str():
             return QtCore.QUrl(url)
         case None:
             return QtCore.QUrl()
         case QtCore.QUrl():
             return url
+        case parse.ParseResult():
+            return QtCore.QUrl(url.geturl())
         case _:
             raise TypeError(url)
 
 
 def to_local_url(url: UrlType | os.PathLike | None) -> QtCore.QUrl:
+    # TODO: need to check whether we should merge to_local_url and to_url
+    # core.Url.from_user_input() perhaps a good option, too?
     match url:
         case os.PathLike():
-            return QtCore.QUrl.fromLocalFile(str(url))
+            return QtCore.QUrl.fromLocalFile(os.fspath(url))
         case str():
             return QtCore.QUrl.fromLocalFile(url)
         case None:
@@ -602,16 +608,37 @@ def to_datetime(date_time: DateTimeType):
             raise TypeError(date_time)
 
 
-def to_date(date: DateType):
-    match date:
+def to_date(value: DateType):
+    match value:
         case None:
             return QtCore.QDate()
         case str():
-            return QtCore.QDate.fromString(date)
+            return QtCore.QDate.fromString(value)
         case QtCore.QDate() | datetime.date():
-            return date
+            return value
         case _:
-            raise TypeError(date)
+            raise TypeError(value)
+
+
+def to_time(value: TimeType):
+    from prettyqt import core
+
+    match value:
+        case str():
+            val = core.Time.from_string(value)
+            if not val.isValid():
+                raise ValueError(value)
+            return val
+        case core.QTime():
+            return core.Time(value)
+        case core.QDateTime():
+            return core.DateTime(value).get_time()
+        case datetime.time():
+            return core.Time(value)
+        case datetime.datetime():
+            return core.DateTime(value).get_time()
+        case _:
+            raise TypeError(value)
 
 
 def to_linef(line: LineFType):
