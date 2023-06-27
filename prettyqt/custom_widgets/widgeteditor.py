@@ -3,31 +3,28 @@ from __future__ import annotations
 import logging
 
 from prettyqt import core, eventfilters, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, helpers
 
 
 logger = logging.getLogger(__name__)
 
 
-class WidgetEditor(widgets.ScrollArea):
+class WidgetEditor(widgets.Widget):
     value_changed = core.Signal(object)
 
-    def __init__(self, widget: QtWidgets.QWidget, *args, **kwargs):
+    def __init__(self, qobject: QtCore.QObject, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._qobject = widget
+        self.set_layout("form")
+        self._qobject = qobject
         self._initial_prop_values = {}
         self.event_catcher = eventfilters.EventCatcher(
             exclude=QtCore.QEvent.Type.Paint, parent=self._qobject
         )
         self.event_catcher.caught.connect(self._update_editors)
         self._qobject.installEventFilter(self.event_catcher)
-        container = widgets.Widget()
-        container.set_layout("form")
-        self.setWidget(container)
         self.set_minimum_size(800, 1000)
         self._editors = bidict()
-        # self.add_qobject(container)
         self._metaobj = core.MetaObject(self._qobject.metaObject())
         for i, prop in enumerate(self._metaobj.get_properties()):
             value = prop.read(self._qobject)
@@ -42,8 +39,8 @@ class WidgetEditor(widgets.ScrollArea):
             widget.value_changed.connect(self._on_value_change)
             widget.setEnabled(prop.isWritable())
             label = helpers.to_snake(prop.name()).replace("_", " ")
-            container.box[i, "left"] = widgets.Label(label)
-            container.box[i, "right"] = widget
+            self.box[i, "left"] = widgets.Label(label)
+            self.box[i, "right"] = widget
             self._initial_prop_values[name] = value
             self._editors[name] = widget
             if prop.hasNotifySignal():
@@ -51,8 +48,6 @@ class WidgetEditor(widgets.ScrollArea):
                 signal_name = notify_signal.get_name()
                 signal = self._qobject.__getattribute__(signal_name)
                 signal.connect(self._update_editors)
-            self.ensureWidgetVisible(container)
-        self.setWidgetResizable(True)
 
     def _on_value_change(self):
         editor = self.sender()
@@ -60,7 +55,7 @@ class WidgetEditor(widgets.ScrollArea):
         prop = self._metaobj.get_property(prop_name)
         value = editor.get_value()
         value = datatypes.make_qtype(value)
-        logger.info(f"setting {prop_name} to {value}")
+        # logger.debug(f"setting {prop_name} to {value}")
         prop.write(self._qobject, value)
         # brute force
         if isinstance(self._qobject, widgets.QWidget):
@@ -71,22 +66,14 @@ class WidgetEditor(widgets.ScrollArea):
                 parent.repaint()
 
     def _update_editors(self):
-        for i in range(self._qobject.metaObject().propertyCount()):
-            prop = self._qobject.metaObject().property(i)
-            prop_name = prop.name()
-            editor = self._editors[prop_name]
-            value = prop.read(self._qobject)
+        for prop_name, editor in self._editors.items():
+            value = self._qobject.property(prop_name)
             editor.set_value(value)
 
 
 if __name__ == "__main__":
     app = widgets.app()
-    # container = widgets.Widget()
-    # container.set_layout("horizontal")
     w = widgets.PlainTextEdit()
-    # w2 = widgets.PlainTextEdit()
-    # container.box.add(w)
-    # container.box.add(w2)
     w.show()
     editor = WidgetEditor(w)
     editor.show()
