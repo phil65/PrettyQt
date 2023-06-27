@@ -5,7 +5,7 @@ import re
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, get_repr, helpers
+from prettyqt.utils import bidict, datatypes, get_repr, helpers
 
 
 EchoModeStr = Literal["normal", "no_echo", "password", "echo_on_edit"]
@@ -212,18 +212,13 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         color = None if self.hasAcceptableInput() else "orange"
         self.set_background_color(color)
 
-    def set_echo_mode(self, mode: EchoModeStr):
+    def set_echo_mode(self, mode: EchoModeStr | widgets.QLineEdit.EchoMode):
         """Set echo mode.
 
         Args:
             mode: echo mode to use
-
-        Raises:
-            InvalidParamError: invalid echo mode
         """
-        if mode not in ECHO_MODE:
-            raise InvalidParamError(mode, ECHO_MODE)
-        self.setEchoMode(ECHO_MODE[mode])
+        self.setEchoMode(ECHO_MODE.get_enum_value(mode))
 
     def get_echo_mode(self) -> EchoModeStr:
         """Return echo mode.
@@ -233,18 +228,15 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         """
         return ECHO_MODE.inverse[self.echoMode()]
 
-    def set_cursor_move_style(self, style: constants.CursorMoveStyleStr):
+    def set_cursor_move_style(
+        self, style: constants.CursorMoveStyleStr | constants.CursorMoveStyle
+    ):
         """Set cursor move style.
 
         Args:
             style: cursor move style to use
-
-        Raises:
-            InvalidParamError: invalid cursor move style
         """
-        if style not in constants.CURSOR_MOVE_STYLE:
-            raise InvalidParamError(style, constants.CURSOR_MOVE_STYLE)
-        self.setCursorMoveStyle(constants.CURSOR_MOVE_STYLE[style])
+        self.setCursorMoveStyle(constants.CURSOR_MOVE_STYLE.get_enum_value(style))
 
     def get_cursor_move_style(self) -> constants.CursorMoveStyleStr:
         """Return cursor move style.
@@ -254,8 +246,12 @@ class LineEdit(widgets.WidgetMixin, widgets.QLineEdit):
         """
         return constants.CURSOR_MOVE_STYLE.inverse[self.cursorMoveStyle()]
 
-    def add_action(self, action: gui.QAction, position: ActionPositionStr = "trailing"):
-        self.addAction(action, ACTION_POSITION[position])
+    def add_action(
+        self,
+        action: gui.QAction,
+        position: ActionPositionStr | widgets.QLineEdit.ActionPosition = "trailing",
+    ):
+        self.addAction(action, ACTION_POSITION.get_enum_value(position))
 
     def set_value(self, value: str):
         self.setText(value)

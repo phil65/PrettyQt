@@ -15,7 +15,7 @@ import qstylizer.style
 
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, colors, datatypes, fx
+from prettyqt.utils import colors, datatypes, fx
 
 
 if TYPE_CHECKING:
@@ -456,16 +456,16 @@ class WidgetMixin(core.ObjectMixin):
             if k is not None:
                 self.setWindowFlag(v, k)
 
-    def set_attribute(self, attribute: constants.WidgetAttributeStr, state: bool = True):
-        if attribute not in constants.WIDGET_ATTRIBUTE:
-            raise InvalidParamError(attribute, constants.WIDGET_ATTRIBUTE)
-        self.setAttribute(constants.WIDGET_ATTRIBUTE[attribute], state)
+    def set_attribute(
+        self,
+        attribute: constants.WidgetAttributeStr | constants.WidgetAttribute,
+        state: bool = True,
+    ):
+        self.setAttribute(constants.WIDGET_ATTRIBUTE.get_enum_value(attribute), state)
 
     def set_attributes(self, **kwargs: bool):
         for attr, state in kwargs.items():
-            if attr not in constants.WIDGET_ATTRIBUTE:
-                raise InvalidParamError(attr, constants.WIDGET_ATTRIBUTE)
-            self.setAttribute(constants.WIDGET_ATTRIBUTE[attr], state)
+            self.setAttribute(constants.WIDGET_ATTRIBUTE.get_enum_value(attr), state)
 
     def set_modality(
         self, modality: constants.WindowModalityStr | constants.WindowModality
@@ -487,8 +487,12 @@ class WidgetMixin(core.ObjectMixin):
 
     def set_size_policy(
         self,
-        horizontal: widgets.sizepolicy.SizePolicyStr | None = None,
-        vertical: widgets.sizepolicy.SizePolicyStr | None = None,
+        horizontal: widgets.sizepolicy.SizePolicyStr
+        | widgets.QSizePolicy.Policy
+        | None = None,
+        vertical: widgets.sizepolicy.SizePolicyStr
+        | widgets.QSizePolicy.Policy
+        | None = None,
     ):
         """Set the size policy.
 
@@ -810,22 +814,22 @@ class WidgetMixin(core.ObjectMixin):
         own_geo.moveCenter(new)
         self.move(own_geo.topLeft())
 
-    def set_cursor(self, cursor: constants.CursorShapeStr | QtGui.QCursor):
+    def set_cursor(
+        self, cursor: constants.CursorShapeStr | constants.CursorShape | QtGui.QCursor
+    ):
         if isinstance(cursor, QtGui.QCursor):
             curs = cursor
-        elif cursor in constants.CURSOR_SHAPE:
-            curs = gui.Cursor(constants.CURSOR_SHAPE[cursor])
         else:
-            raise InvalidParamError(cursor, constants.CURSOR_SHAPE)
+            curs = gui.Cursor(constants.CURSOR_SHAPE.get_enum_value(cursor))
         self.setCursor(curs)
 
-    def set_focus_policy(self, policy: constants.FocusPolicyStr):
+    def set_focus_policy(self, policy: constants.FocusPolicyStr | constants.FocusPolicy):
         """Set the way the widget accepts keyboard focus.
 
         Args:
             policy (str): Focus policy
         """
-        self.setFocusPolicy(constants.FOCUS_POLICY[policy])
+        self.setFocusPolicy(constants.FOCUS_POLICY.get_enum_value(policy))
 
     def get_focus_policy(self) -> constants.FocusPolicyStr:
         """Return waay the widget accepts keyboard focus.

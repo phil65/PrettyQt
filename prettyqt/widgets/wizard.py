@@ -5,7 +5,7 @@ from typing import TYPE_CHECKING, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 if TYPE_CHECKING:
@@ -136,34 +136,20 @@ class WizardMixin(widgets.DialogMixin):
             case 8:
                 self.custom_button_3_clicked.emit()
 
-    def serialize_fields(self):
-        return dict(
-            current_id=self.currentId(),
-            start_id=self.startId(),
-            sub_title_format=self.get_subtitle_format(),
-            title_format=self.get_title_format(),
-            wizard_style=self.get_wizard_style(),
-        )
-
     def add_widget_as_page(self, widget: QtWidgets.QWidget) -> None:
         page = widgets.WizardPage(self)
         layout = page.set_layout("vertical")
         layout += widget
 
-    def set_title_format(self, fmt: constants.TextFormatStr):
+    def set_title_format(self, fmt: constants.TextFormatStr | constants.TextFormat):
         """Set the title format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
 
         Args:
             fmt: title format to use
-
-        Raises:
-            InvalidParamError: title format does not exist
         """
-        if fmt not in constants.TEXT_FORMAT:
-            raise InvalidParamError(fmt, constants.TEXT_FORMAT)
-        self.setTitleFormat(constants.TEXT_FORMAT[fmt])
+        self.setTitleFormat(constants.TEXT_FORMAT.get_enum_value(fmt))
 
     def get_title_format(self) -> constants.TextFormatStr:
         """Return current title format.
@@ -175,20 +161,15 @@ class WizardMixin(widgets.DialogMixin):
         """
         return constants.TEXT_FORMAT.inverse[self.titleFormat()]
 
-    def set_subtitle_format(self, fmt: constants.TextFormatStr):
+    def set_subtitle_format(self, fmt: constants.TextFormatStr | constants.TextFormat):
         """Set the subtitle format.
 
         Allowed values are "rich", "plain", "auto", "markdown"
 
         Args:
             fmt: subtitle format to use
-
-        Raises:
-            InvalidParamError: subtitle format does not exist
         """
-        if fmt not in constants.TEXT_FORMAT:
-            raise InvalidParamError(fmt, constants.TEXT_FORMAT)
-        self.setSubTitleFormat(constants.TEXT_FORMAT[fmt])
+        self.setSubTitleFormat(constants.TEXT_FORMAT.get_enum_value(fmt))
 
     def get_subtitle_format(self) -> constants.TextFormatStr:
         """Return current subtitle format.
@@ -200,12 +181,14 @@ class WizardMixin(widgets.DialogMixin):
         """
         return constants.TEXT_FORMAT.inverse[self.subTitleFormat()]
 
-    def get_button(self, button_type: WizardButtonStr) -> QtWidgets.QAbstractButton:
-        if button_type not in WIZARD_BUTTON:
-            raise InvalidParamError(button_type, WIZARD_BUTTON)
-        return self.button(WIZARD_BUTTON[button_type])
+    def get_button(
+        self, button_type: WizardButtonStr | mod.WizardButton
+    ) -> QtWidgets.QAbstractButton:
+        return self.button(WIZARD_BUTTON.get_enum_value(button_type))
 
-    def set_button_text(self, button_type: WizardButtonStr, value: str):
+    def set_button_text(
+        self, button_type: WizardButtonStr | mod.WizardButton, value: str
+    ):
         """Set text for given button type.
 
         Args:
@@ -213,11 +196,9 @@ class WizardMixin(widgets.DialogMixin):
             value: text to set
 
         """
-        if button_type not in WIZARD_BUTTON:
-            raise InvalidParamError(button_type, WIZARD_BUTTON)
-        self.setButtonText(WIZARD_BUTTON[button_type], value)
+        self.setButtonText(WIZARD_BUTTON.get_enum_value(button_type), value)
 
-    def get_button_text(self, button_type: WizardButtonStr) -> str:
+    def get_button_text(self, button_type: WizardButtonStr | mod.WizardButton) -> str:
         """Return text for given button type.
 
         Args:
@@ -226,35 +207,26 @@ class WizardMixin(widgets.DialogMixin):
         Returns:
             Button text
         """
-        if button_type not in WIZARD_BUTTON:
-            raise InvalidParamError(button_type, WIZARD_BUTTON)
-        return self.buttonText(WIZARD_BUTTON[button_type])
+        return self.buttonText(WIZARD_BUTTON.get_enum_value(button_type))
 
-    def set_pixmap(self, typ: WizardPixmapStr, pixmap: QtGui.QPixmap | None):
-        if typ not in WIZARD_PIXMAP:
-            raise InvalidParamError(typ, WIZARD_PIXMAP)
+    def set_pixmap(
+        self, typ: WizardPixmapStr | mod.WizardPixmap, pixmap: QtGui.QPixmap | None
+    ):
         if pixmap is None:
             pixmap = QtGui.QPixmap()
-        self.setPixmap(WIZARD_PIXMAP[typ], pixmap)
+        self.setPixmap(WIZARD_PIXMAP.get_enum_value(typ), pixmap)
 
-    def get_pixmap(self, typ: WizardPixmapStr) -> gui.Pixmap | None:
-        if typ not in WIZARD_PIXMAP:
-            raise InvalidParamError(typ, WIZARD_PIXMAP)
-        pix = gui.Pixmap(self.pixmap(WIZARD_PIXMAP[typ]))
+    def get_pixmap(self, typ: WizardPixmapStr | mod.WizardPixmap) -> gui.Pixmap | None:
+        pix = gui.Pixmap(self.pixmap(WIZARD_PIXMAP.get_enum_value(typ)))
         return None if pix.isNull() else pix
 
-    def set_wizard_style(self, style: WizardStyleStr):
+    def set_wizard_style(self, style: WizardStyleStr | mod.WizardStyle):
         """Set the wizard style.
 
         Args:
             style: wizard style
-
-        Raises:
-            InvalidParamError: wizard style does not exist
         """
-        if style not in WIZARD_STYLE:
-            raise InvalidParamError(style, WIZARD_STYLE)
-        self.setWizardStyle(WIZARD_STYLE[style])
+        self.setWizardStyle(WIZARD_STYLE.get_enum_value(style))
 
     def get_wizard_style(self) -> WizardStyleStr:
         """Return current wizard style.
@@ -264,21 +236,16 @@ class WizardMixin(widgets.DialogMixin):
         """
         return WIZARD_STYLE.inverse[self.wizardStyle()]
 
-    def set_option(self, option: WizardOptionStr, value: bool):
+    def set_option(self, option: WizardOptionStr | mod.WizardOption, value: bool):
         """Set option to given value.
 
         Args:
             option: option to use
             value: value to set
-
-        Raises:
-            InvalidParamError: option does not exist
         """
-        if option not in WIZARD_OPTIONS:
-            raise InvalidParamError(option, WIZARD_OPTIONS)
-        self.setOption(WIZARD_OPTIONS[option], value)
+        self.setOption(WIZARD_OPTIONS.get_enum_value(option), value)
 
-    def get_option(self, option: WizardOptionStr) -> bool:
+    def get_option(self, option: WizardOptionStr | mod.WizardOption) -> bool:
         """Return the value assigned to option.
 
         Args:
@@ -287,9 +254,7 @@ class WizardMixin(widgets.DialogMixin):
         Returns:
             option
         """
-        if option not in WIZARD_OPTIONS:
-            raise InvalidParamError(option, WIZARD_OPTIONS)
-        return self.testOption(WIZARD_OPTIONS[option])
+        return self.testOption(WIZARD_OPTIONS.get_enum_value(option))
 
     def set_custom_button(
         self, button: Literal[1, 2, 3], text: str | None, callback: Callable | None = None

@@ -4,43 +4,43 @@ from typing import Literal
 
 from prettyqt import core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
-
-VIEW_MODE = bidict(
-    list=QtWidgets.QListView.ViewMode.ListMode, icon=QtWidgets.QListView.ViewMode.IconMode
-)
 
 ViewModeStr = Literal["list", "icon"]
 
-MOVEMENT = bidict(
+VIEW_MODE: bidict[ViewModeStr, QtWidgets.QListView.ViewMode] = bidict(
+    list=QtWidgets.QListView.ViewMode.ListMode, icon=QtWidgets.QListView.ViewMode.IconMode
+)
+
+MovementStr = Literal["static", "free", "snap"]
+
+MOVEMENT: bidict[MovementStr, QtWidgets.QListView.Movement] = bidict(
     static=QtWidgets.QListView.Movement.Static,
     free=QtWidgets.QListView.Movement.Free,
     snap=QtWidgets.QListView.Movement.Snap,
 )
 
-MovementStr = Literal["static", "free", "snap"]
+FlowStr = Literal["left_to_right", "top_to_bottom"]
 
-FLOW = bidict(
+FLOW: bidict[FlowStr, QtWidgets.QListView.Flow] = bidict(
     left_to_right=QtWidgets.QListView.Flow.LeftToRight,
     top_to_bottom=QtWidgets.QListView.Flow.TopToBottom,
 )
 
-FlowStr = Literal["left_to_right", "top_to_bottom"]
+LayoutModeStr = Literal["single_pass", "batched"]
 
-LAYOUT_MODE = bidict(
+LAYOUT_MODE: bidict[LayoutModeStr, QtWidgets.QListView.LayoutMode] = bidict(
     single_pass=QtWidgets.QListView.LayoutMode.SinglePass,
     batched=QtWidgets.QListView.LayoutMode.Batched,
 )
 
-LayoutModeStr = Literal["single_pass", "batched"]
+ResizeModeStr = Literal["fixed", "adjust"]
 
-RESIZE_MODE = bidict(
+RESIZE_MODE: bidict[ResizeModeStr, QtWidgets.QListView.ResizeMode] = bidict(
     fixed=QtWidgets.QListView.ResizeMode.Fixed,
     adjust=QtWidgets.QListView.ResizeMode.Adjust,
 )
-
-ResizeModeStr = Literal["fixed", "adjust"]
 
 
 class ListViewMixin(widgets.AbstractItemViewMixin):
@@ -55,18 +55,13 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         }
         return maps
 
-    def set_view_mode(self, mode: ViewModeStr):
+    def set_view_mode(self, mode: ViewModeStr | QtWidgets.QListView.ViewMode):
         """Set view mode.
 
         Args:
             mode: view mode to use
-
-        Raises:
-            InvalidParamError: invalid view mode
         """
-        if mode not in VIEW_MODE:
-            raise InvalidParamError(mode, VIEW_MODE)
-        self.setViewMode(VIEW_MODE[mode])
+        self.setViewMode(VIEW_MODE.get_enum_value(mode))
 
     def get_view_mode(self) -> ViewModeStr:
         """Return view mode.
@@ -76,18 +71,13 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return VIEW_MODE.inverse[self.viewMode()]
 
-    def set_resize_mode(self, mode: ResizeModeStr):
+    def set_resize_mode(self, mode: ResizeModeStr | QtWidgets.QListView.ResizeMode):
         """Set resize mode.
 
         Args:
             mode: resize mode to use
-
-        Raises:
-            InvalidParamError: invalid resize mode
         """
-        if mode not in RESIZE_MODE:
-            raise InvalidParamError(mode, RESIZE_MODE)
-        self.setResizeMode(RESIZE_MODE[mode])
+        self.setResizeMode(RESIZE_MODE.get_enum_value(mode))
 
     def get_resize_mode(self) -> ResizeModeStr:
         """Return resize mode.
@@ -97,18 +87,13 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return RESIZE_MODE.inverse[self.resizeMode()]
 
-    def set_layout_mode(self, mode: LayoutModeStr):
+    def set_layout_mode(self, mode: LayoutModeStr | QtWidgets.QListView.LayoutMode):
         """Set layout mode.
 
         Args:
             mode: layout mode to use
-
-        Raises:
-            InvalidParamError: invalid layout mode
         """
-        if mode not in LAYOUT_MODE:
-            raise InvalidParamError(mode, LAYOUT_MODE)
-        self.setLayoutMode(LAYOUT_MODE[mode])
+        self.setLayoutMode(LAYOUT_MODE.get_enum_value(mode))
 
     def get_layout_mode(self) -> LayoutModeStr:
         """Return layout mode.
@@ -118,18 +103,13 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return LAYOUT_MODE.inverse[self.layoutMode()]
 
-    def set_movement(self, mode: MovementStr):
+    def set_movement(self, mode: MovementStr | QtWidgets.QListView.Movement):
         """Set movement mode.
 
         Args:
             mode: movement mode to use
-
-        Raises:
-            InvalidParamError: invalid movement mode
         """
-        if mode not in MOVEMENT:
-            raise InvalidParamError(mode, MOVEMENT)
-        self.setMovement(MOVEMENT[mode])
+        self.setMovement(MOVEMENT.get_enum_value(mode))
 
     def get_movement(self) -> MovementStr:
         """Return movement mode.
@@ -139,18 +119,13 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return MOVEMENT.inverse[self.movement()]
 
-    def set_flow(self, mode: FlowStr):
+    def set_flow(self, mode: FlowStr | QtWidgets.QListView.Flow):
         """Set flow mode.
 
         Args:
             mode: flow mode to use
-
-        Raises:
-            InvalidParamError: invalid flow mode
         """
-        if mode not in FLOW:
-            raise InvalidParamError(mode, FLOW)
-        self.setFlow(FLOW[mode])
+        self.setFlow(FLOW.get_enum_value(mode))
 
     def get_flow(self) -> FlowStr:
         """Return flow mode.

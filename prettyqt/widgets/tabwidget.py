@@ -4,7 +4,7 @@ from typing import Literal, overload
 
 from prettyqt import core, gui, iconprovider, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, animator, bidict, datatypes, listdelegators
+from prettyqt.utils import animator, bidict, datatypes, listdelegators
 
 
 TabShapeStr = Literal["rounded", "triangular"]
@@ -90,18 +90,13 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
     def set_document_mode(self, state: bool = True) -> None:
         self.setDocumentMode(state)
 
-    def set_tab_shape(self, shape: TabShapeStr):
+    def set_tab_shape(self, shape: TabShapeStr | QtWidgets.QTabWidget.TabShape):
         """Set tab shape for the tabwidget.
 
         Args:
             shape: tab shape to use
-
-        Raises:
-            InvalidParamError: tab shape does not exist
         """
-        if shape not in TAB_SHAPES:
-            raise InvalidParamError(shape, TAB_SHAPES)
-        self.setTabShape(TAB_SHAPES[shape])
+        self.setTabShape(TAB_SHAPES.get_enum_value(shape))
 
     def get_tab_shape(self) -> TabShapeStr:
         """Return tab shape.
@@ -111,18 +106,15 @@ class TabWidget(widgets.WidgetMixin, QtWidgets.QTabWidget):
         """
         return TAB_SHAPES.inverse[self.tabShape()]
 
-    def set_tab_position(self, position: TabPositionStr):
+    def set_tab_position(
+        self, position: TabPositionStr | QtWidgets.QTabWidget.TabPosition
+    ):
         """Set tab position for the tabwidget.
 
         Args:
             position: tab position to use
-
-        Raises:
-            InvalidParamError: tab position does not exist
         """
-        if position not in TAB_POSITION:
-            raise InvalidParamError(position, TAB_POSITION)
-        self.setTabPosition(TAB_POSITION[position])
+        self.setTabPosition(TAB_POSITION.get_enum_value(position))
 
     def get_tab_position(self) -> TabPositionStr:
         """Return tab position.

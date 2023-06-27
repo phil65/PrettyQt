@@ -6,7 +6,7 @@ from typing import Any
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, datatypes
+from prettyqt.utils import datatypes
 
 
 class TableWidgetItem(QtWidgets.QTableWidgetItem):
@@ -16,9 +16,11 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
     def __getitem__(self, index: int | constants.ItemDataRoleStr):
         return self.get_data(index)
 
-    def set_flag(self, flag_name: str, value: bool):
+    def set_flag(
+        self, flag_name: constants.ItemFlagStr | constants.ItemFlag, value: bool
+    ):
         """Set a flag based on str name."""
-        flag = constants.ITEM_FLAG[flag_name]
+        flag = constants.ITEM_FLAG.get_enum_value(flag_name)
         if value:
             self.setFlags(self.flags() | flag)
         else:
@@ -37,18 +39,13 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: constants.CheckStateStr):
+    def set_checkstate(self, state: constants.CheckStateStr | constants.CheckState):
         """Set checkstate of the checkbox.
 
         Args:
             state: checkstate to use
-
-        Raises:
-            InvalidParamError: invalid checkstate
         """
-        if state not in constants.CHECK_STATE:
-            raise InvalidParamError(state, constants.CHECK_STATE)
-        self.setCheckState(constants.CHECK_STATE[state])
+        self.setCheckState(constants.CHECK_STATE.get_enum_value(state))
 
     def get_checkstate(self) -> constants.CheckStateStr:
         """Return checkstate.
@@ -60,27 +57,28 @@ class TableWidgetItem(QtWidgets.QTableWidgetItem):
 
     def set_text_alignment(
         self,
-        horizontal: constants.HorizontalAlignmentStr | None = None,
-        vertical: constants.VerticalAlignmentStr | None = None,
+        horizontal: constants.HorizontalAlignmentStr
+        | constants.AlignmentFlag
+        | None = None,
+        vertical: constants.VerticalAlignmentStr | constants.AlignmentFlag | None = None,
     ):
         """Set text alignment of the checkbox.
 
         Args:
             horizontal: horizontal text alignment to use
             vertical: vertical text alignment to use
-
-        Raises:
-            InvalidParamError: invalid text alignment
         """
         match horizontal, vertical:
             case None, None:
                 return
             case None, _:
-                flag = constants.V_ALIGNMENT[vertical]
+                flag = constants.V_ALIGNMENT.get_enum_value(vertical)
             case _, None:
-                flag = constants.H_ALIGNMENT[horizontal]
+                flag = constants.H_ALIGNMENT.get_enum_value(horizontal)
             case _, _:
-                flag = constants.V_ALIGNMENT[vertical] | constants.H_ALIGNMENT[horizontal]
+                flag = constants.V_ALIGNMENT.get_enum_value(
+                    vertical
+                ) | constants.H_ALIGNMENT.get_enum_value(horizontal)
         self.setTextAlignment(flag)
 
     def get_background(self) -> gui.Brush:

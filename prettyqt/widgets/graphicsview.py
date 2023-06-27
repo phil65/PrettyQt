@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 mod = QtWidgets.QGraphicsView
@@ -145,20 +145,20 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         return gui.Brush(self.foregroundBrush())
 
     def invalidate_scene(
-        self, rect: QtCore.QRectF, layer: widgets.graphicsscene.SceneLayerStr = "all"
+        self,
+        rect: QtCore.QRectF,
+        layer: widgets.graphicsscene.SceneLayerStr
+        | widgets.QGraphicsScene.SceneLayer = "all",
     ):
-        if layer not in widgets.graphicsscene.SCENE_LAYER:
-            raise InvalidParamError(layer, widgets.graphicsscene.SCENE_LAYER)
-        self.invalidateScene(rect, widgets.graphicsscene.SCENE_LAYER[layer])
+        self.invalidateScene(
+            rect, widgets.graphicsscene.SCENE_LAYER.get_enum_value(layer)
+        )
 
-    def set_transformation_anchor(self, mode: ViewportAnchorStr):
+    def set_transformation_anchor(self, mode: ViewportAnchorStr | mod.ViewportAnchor):
         """Set how the view should position the scene during transformations.
 
         Args:
             mode: transformation anchor to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
         self.setTransformationAnchor(VIEWPORT_ANCHOR.get_enum_value(mode))
 
@@ -173,18 +173,13 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
     def set_transform(self, transform: datatypes.TransformType, combine: bool = False):
         self.setTransform(datatypes.to_transform(transform), combine)
 
-    def set_resize_anchor(self, mode: ViewportAnchorStr):
+    def set_resize_anchor(self, mode: ViewportAnchorStr | mod.ViewportAnchor):
         """Set how the view should position the scene during resizes.
 
         Args:
             mode: resize anchor to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in VIEWPORT_ANCHOR:
-            raise InvalidParamError(mode, VIEWPORT_ANCHOR)
-        self.setResizeAnchor(VIEWPORT_ANCHOR[mode])
+        self.setResizeAnchor(VIEWPORT_ANCHOR.get_enum_value(mode))
 
     def get_resize_anchor(self) -> ViewportAnchorStr:
         """Return current resize anchor.
@@ -194,18 +189,15 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return VIEWPORT_ANCHOR.inverse[self.resizeAnchor()]
 
-    def set_viewport_update_mode(self, mode: ViewportUpdateModeStr):
+    def set_viewport_update_mode(
+        self, mode: ViewportUpdateModeStr | mod.ViewportUpdateMode
+    ):
         """Set how the viewport should update its contents.
 
         Args:
             mode: viewport update mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in VIEWPORT_UPDATE_MODE:
-            raise InvalidParamError(mode, VIEWPORT_UPDATE_MODE)
-        self.setViewportUpdateMode(VIEWPORT_UPDATE_MODE[mode])
+        self.setViewportUpdateMode(VIEWPORT_UPDATE_MODE.get_enum_value(mode))
 
     def get_viewport_update_mode(self) -> ViewportUpdateModeStr:
         """Return current viewport update mode.
@@ -215,18 +207,13 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return VIEWPORT_UPDATE_MODE.inverse[self.viewportUpdateMode()]
 
-    def set_drag_mode(self, mode: DragModeStr):
+    def set_drag_mode(self, mode: DragModeStr | mod.DragMode):
         """Set the behavior for dragging the mouse while the left mouse button is pressed.
 
         Args:
             mode: drag mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in DRAG_MODE:
-            raise InvalidParamError(mode, DRAG_MODE)
-        self.setDragMode(DRAG_MODE[mode])
+        self.setDragMode(DRAG_MODE.get_enum_value(mode))
 
     def get_drag_mode(self) -> DragModeStr:
         """Return current drag mode.
@@ -236,18 +223,17 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return DRAG_MODE.inverse[self.dragMode()]
 
-    def set_rubberband_selection_mode(self, mode: constants.ItemSelectionModeStr):
+    def set_rubberband_selection_mode(
+        self, mode: constants.ItemSelectionModeStr | constants.ItemSelectionMode
+    ):
         """Set the behavior for selecting items with a rubber band selection rectangle.
 
         Args:
             mode: rubberband selection mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in constants.ITEM_SELECTION_MODE:
-            raise InvalidParamError(mode, constants.ITEM_SELECTION_MODE)
-        self.setRubberBandSelectionMode(constants.ITEM_SELECTION_MODE[mode])
+        self.setRubberBandSelectionMode(
+            constants.ITEM_SELECTION_MODE.get_enum_value(mode)
+        )
 
     def get_rubberband_selection_mode(self) -> constants.ItemSelectionModeStr:
         """Return current rubberband selection mode.
@@ -257,18 +243,13 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return constants.ITEM_SELECTION_MODE.inverse[self.rubberBandSelectionMode()]
 
-    def set_cache_mode(self, mode: CacheModeStr):
+    def set_cache_mode(self, mode: CacheModeStr | mod.CacheModeFlag):
         """Set the cache mode.
 
         Args:
             mode: cache mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in CACHE_MODES:
-            raise InvalidParamError(mode, CACHE_MODES)
-        self.setCacheMode(CACHE_MODES[mode])
+        self.setCacheMode(CACHE_MODES.get_enum_value(mode))
 
     def get_cache_mode(self) -> CacheModeStr:
         """Return current cache mode.
@@ -279,9 +260,6 @@ class GraphicsViewMixin(widgets.AbstractScrollAreaMixin):
         return CACHE_MODES.inverse[self.cacheMode()]
 
     def set_optimization_flags(self, *items: OptimizationFlagStr):
-        for item in items:
-            if item not in OPTIMIZATION_FLAGS:
-                raise InvalidParamError(item, OPTIMIZATION_FLAGS)
         flags = OPTIMIZATION_FLAGS.merge_flags(items)
         self.setOptimizationFlags(flags)
 

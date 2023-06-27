@@ -206,9 +206,6 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
         Args:
             types: text interaction mode to use
-
-        Raises:
-            InvalidParamError: text interaction mode does not exist
         """
         flags = constants.TEXT_INTERACTION.merge_flags(types)
         self.setTextInteractionFlags(flags)

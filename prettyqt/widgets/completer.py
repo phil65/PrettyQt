@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 CompletionModeStr = Literal["popup", "inline", "unfiltered_popup"]
@@ -59,20 +59,15 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         model = core.StringListModel(strings)
         self.setModel(model)
 
-    def set_sort_mode(self, mode: SortModeStr | None):
+    def set_sort_mode(self, mode: SortModeStr | QtWidgets.QCompleter.ModelSorting | None):
         """Set sort mode to use.
 
         Args:
             mode: sort mode to use
-
-        Raises:
-            InvalidParamError: sort mode does not exist
         """
         if mode is None:
             mode = "unsorted"
-        if mode not in SORT_MODE:
-            raise InvalidParamError(mode, SORT_MODE)
-        self.setModelSorting(SORT_MODE[mode])
+        self.setModelSorting(SORT_MODE.get_enum_value(mode))
 
     def get_sort_mode(self) -> SortModeStr:
         """Return current sort mode.
@@ -82,18 +77,15 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         """
         return SORT_MODE.inverse[self.modelSorting()]
 
-    def set_completion_mode(self, mode: CompletionModeStr):
+    def set_completion_mode(
+        self, mode: CompletionModeStr | QtWidgets.QCompleter.CompletionMode
+    ):
         """Set completion mode to use.
 
         Args:
             mode: completion mode to use
-
-        Raises:
-            InvalidParamError: completion mode does not exist
         """
-        if mode not in COMPLETION_MODE:
-            raise InvalidParamError(mode, COMPLETION_MODE)
-        self.setCompletionMode(COMPLETION_MODE[mode])
+        self.setCompletionMode(COMPLETION_MODE.get_enum_value(mode))
 
     def get_completion_mode(self) -> CompletionModeStr:
         """Return current completion mode.
@@ -103,18 +95,13 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         """
         return COMPLETION_MODE.inverse[self.completionMode()]
 
-    def set_filter_mode(self, mode: constants.FilterModeStr):
+    def set_filter_mode(self, mode: constants.FilterModeStr | constants.MatchFlag):
         """Set filter mode to use.
 
         Args:
             mode: filter mode to use
-
-        Raises:
-            InvalidParamError: filter mode does not exist
         """
-        if mode not in constants.FILTER_MODES:
-            raise InvalidParamError(mode, constants.FILTER_MODES)
-        self.setFilterMode(constants.FILTER_MODES[mode])
+        self.setFilterMode(constants.FILTER_MODES.get_enum_value(mode))
 
     def get_filter_mode(self) -> constants.FilterModeStr:
         """Return current filter mode.
@@ -146,7 +133,9 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         """
         return self.caseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
 
-    def set_completion_role(self, role: constants.ItemDataRoleStr | int):
+    def set_completion_role(
+        self, role: constants.ItemDataRoleStr | constants.ItemDataRole | int
+    ):
         role = constants.ITEM_DATA_ROLE[role] if isinstance(role, str) else role
         self.setCompletionRole(role)
 

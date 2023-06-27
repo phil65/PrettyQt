@@ -8,7 +8,7 @@ from typing import Any, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes, helpers, listdelegators
+from prettyqt.utils import bidict, datatypes, helpers, listdelegators
 
 DelegateStr = Literal[
     "widget",
@@ -453,27 +453,22 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_edit_triggers(self, *triggers: EditTriggerStr | None):
         items = ["none" if t is None else t for t in triggers]
-        for item in items:
-            if item not in EDIT_TRIGGERS:
-                raise InvalidParamError(item, EDIT_TRIGGERS)
         flags = EDIT_TRIGGERS.merge_flags(items)
         self.setEditTriggers(flags)
 
     def get_edit_triggers(self) -> list[EditTriggerStr]:
         return EDIT_TRIGGERS.get_list(self.editTriggers())
 
-    def set_selection_behavior(self, behaviour: SelectionBehaviourStr):
+    def set_selection_behavior(
+        self,
+        behaviour: SelectionBehaviourStr | QtWidgets.QAbstractItemView.SelectionBehavior,
+    ):
         """Set selection behaviour for given item view.
 
         Args:
             behaviour: selection behaviour to use
-
-        Raises:
-            InvalidParamError: behaviour does not exist
         """
-        if behaviour not in SELECTION_BEHAVIOR:
-            raise InvalidParamError(behaviour, SELECTION_BEHAVIOR)
-        self.setSelectionBehavior(SELECTION_BEHAVIOR[behaviour])
+        self.setSelectionBehavior(SELECTION_BEHAVIOR.get_enum_value(behaviour))
 
     def get_selection_behavior(self) -> SelectionBehaviourStr:
         """Return current selection behaviour.
@@ -491,18 +486,15 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return DROP_INDICATOR_POSITION.inverse[self.dropIndicatorPosition()]
 
-    def set_drag_drop_mode(self, mode: DragDropModeStr):
+    def set_drag_drop_mode(
+        self, mode: DragDropModeStr | QtWidgets.QAbstractItemView.DragDropMode
+    ):
         """Set drag-drop mode for given item view.
 
         Args:
             mode: drag-drop mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
-        if mode not in DRAG_DROP_MODE:
-            raise InvalidParamError(mode, DRAG_DROP_MODE)
-        self.setDragDropMode(DRAG_DROP_MODE[mode])
+        self.setDragDropMode(DRAG_DROP_MODE.get_enum_value(mode))
 
     def get_drag_drop_mode(self) -> DragDropModeStr:
         """Return current drag-drop mode.
@@ -512,18 +504,13 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return DRAG_DROP_MODE.inverse[self.dragDropMode()]
 
-    def set_state(self, state: StateStr):
+    def set_state(self, state: StateStr | QtWidgets.QAbstractItemView.State):
         """Set state for given item view.
 
         Args:
             state: state to use
-
-        Raises:
-            InvalidParamError: state does not exist
         """
-        if state not in STATE:
-            raise InvalidParamError(state, STATE)
-        self.setState(STATE[state])
+        self.setState(STATE.get_enum_value(state))
 
     def get_state(self) -> StateStr:
         """Return current state.
@@ -533,20 +520,17 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return STATE.inverse[self.state()]
 
-    def set_selection_mode(self, mode: SelectionModeStr | None):
+    def set_selection_mode(
+        self, mode: SelectionModeStr | QtWidgets.QAbstractItemView.SelectionMode | None
+    ):
         """Set selection mode for given item view.
 
         Args:
             mode: selection mode to use
-
-        Raises:
-            InvalidParamError: mode does not exist
         """
         if mode is None:
             mode = "none"
-        if mode not in SELECTION_MODE:
-            raise InvalidParamError(mode, SELECTION_MODE)
-        self.setSelectionMode(SELECTION_MODE[mode])
+        self.setSelectionMode(SELECTION_MODE.get_enum_value(mode))
 
     def get_selection_mode(self) -> SelectionModeStr:
         """Return current selection mode.
@@ -556,32 +540,26 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return SELECTION_MODE.inverse[self.selectionMode()]
 
-    def set_scroll_mode(self, mode: ScrollModeStr):
+    def set_scroll_mode(
+        self, mode: ScrollModeStr | QtWidgets.QAbstractItemView.ScrollMode
+    ):
         """Set the scroll mode for both directions.
 
         Args:
             mode: mode to set
-
-        Raises:
-            InvalidParamError: invalid scroll mode
         """
-        if mode not in SCROLL_MODE:
-            raise InvalidParamError(mode, SCROLL_MODE)
-        self.setHorizontalScrollMode(SCROLL_MODE[mode])
-        self.setVerticalScrollMode(SCROLL_MODE[mode])
+        self.setHorizontalScrollMode(SCROLL_MODE.get_enum_value(mode))
+        self.setVerticalScrollMode(SCROLL_MODE.get_enum_value(mode))
 
-    def set_horizontal_scroll_mode(self, mode: ScrollModeStr):
+    def set_horizontal_scroll_mode(
+        self, mode: ScrollModeStr | QtWidgets.QAbstractItemView.ScrollMode
+    ):
         """Set the horizontal scroll mode.
 
         Args:
             mode: mode to set
-
-        Raises:
-            InvalidParamError: invalid scroll mode
         """
-        if mode not in SCROLL_MODE:
-            raise InvalidParamError(mode, SCROLL_MODE)
-        self.setHorizontalScrollMode(SCROLL_MODE[mode])
+        self.setHorizontalScrollMode(SCROLL_MODE.get_enum_value(mode))
 
     def get_horizontal_scroll_mode(self) -> ScrollModeStr:
         """Return current horizontal scroll mode.
@@ -591,18 +569,15 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return SCROLL_MODE.inverse[self.horizontalScrollMode()]
 
-    def set_vertical_scroll_mode(self, mode: ScrollModeStr):
+    def set_vertical_scroll_mode(
+        self, mode: ScrollModeStr | QtWidgets.QAbstractItemView.ScrollMode
+    ):
         """Set the vertical scroll mode.
 
         Args:
             mode: mode to set
-
-        Raises:
-            InvalidParamError: invalid scroll mode
         """
-        if mode not in SCROLL_MODE:
-            raise InvalidParamError(mode, SCROLL_MODE)
-        self.setVerticalScrollMode(SCROLL_MODE[mode])
+        self.setVerticalScrollMode(SCROLL_MODE.get_enum_value(mode))
 
     def get_vertical_scroll_mode(self) -> ScrollModeStr:
         """Return current vertical scroll mode.
@@ -651,11 +626,11 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.set_current_index(idx, current=True, expand="rows")
 
     def scroll_to(
-        self, index: QtCore.QModelIndex, mode: ScrollHintStr = "ensure_visible"
+        self,
+        index: QtCore.QModelIndex,
+        mode: ScrollHintStr | QtWidgets.QAbstractItemView.ScrollHint = "ensure_visible",
     ):
-        if mode not in SCROLL_HINT:
-            raise InvalidParamError(mode, SCROLL_HINT)
-        self.scrollTo(index, SCROLL_HINT[mode])
+        self.scrollTo(index, SCROLL_HINT.get_enum_value(mode))
 
     def highlight_when_inactive(self):
         """Highlight items when widget does not have focus."""
@@ -677,10 +652,13 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def sync_with(
         self,
         table_to_sync: widgets.QAbstractItemView,
-        orientation: constants.OrientationStr,
+        orientation: constants.OrientationStr | constants.Orientation,
     ) -> list[core.QMetaObject.Connection]:
+
+        orientation = constants.ORIENTATION.get_enum_value(orientation)
+
         def _table_resized(col, _, new_size, table, orientation):
-            if orientation == "horizontal":
+            if orientation == constants.HORIZONTAL:
                 table.setColumnWidth(col, new_size)
             else:
                 table.setRowHeight(col, new_size)
@@ -691,7 +669,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         _table_2_resized = functools.partial(
             _table_resized, table=table_to_sync, orientation=orientation
         )
-        if orientation == "vertical":
+        if orientation == constants.VERTICAL:
             h1 = self.v_scrollbar.valueChanged.connect(table_to_sync.v_scrollbar.setValue)
             h2 = table_to_sync.v_scrollbar.valueChanged.connect(self.v_scrollbar.setValue)
             h3 = self.v_header.sectionResized.connect(_table_2_resized)
@@ -706,14 +684,10 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     def get_visible_section_span(
         self, orientation: constants.OrientationStr | constants.Orientation
     ) -> tuple[int, int]:
-        match orientation:
-            case str():
-                pass
-            case _:
-                orientation = constants.ORIENTATION.inverse[orientation]
+        orientation = constants.ORIENTATION.get_enum_value(orientation)
         top_left = QtCore.QPoint(0, 0)
         bottom_right = self.viewport().rect().bottomRight()
-        if orientation == "horizontal":
+        if orientation == constants.HORIZONTAL:
             start = self.indexAt(top_left).column()
             count = self.model().columnCount()
             end = self.indexAt(bottom_right).column()

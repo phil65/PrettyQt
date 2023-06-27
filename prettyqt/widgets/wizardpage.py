@@ -2,29 +2,29 @@ from __future__ import annotations
 
 from prettyqt import gui, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError
 
 
 class WizardPageMixin(widgets.WidgetMixin):
-    def serialize_fields(self):
-        return dict(title=self.title(), sub_title=self.subTitle())
-
     def set_pixmap(
-        self, typ: widgets.wizard.WizardPixmapStr, pixmap: QtGui.QPixmap | None
+        self,
+        typ: widgets.wizard.WizardPixmapStr | widgets.QWizard.WizardPixmap,
+        pixmap: QtGui.QPixmap | None,
     ):
-        if typ not in widgets.wizard.WIZARD_PIXMAP:
-            raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
         if pixmap is None:
             pixmap = QtGui.QPixmap()
-        self.setPixmap(widgets.wizard.WIZARD_PIXMAP[typ], pixmap)
+        self.setPixmap(widgets.wizard.WIZARD_PIXMAP.get_enum_value(typ), pixmap)
 
-    def get_pixmap(self, typ: widgets.wizard.WizardPixmapStr) -> gui.Pixmap | None:
-        if typ not in widgets.wizard.WIZARD_PIXMAP:
-            raise InvalidParamError(typ, widgets.wizard.WIZARD_PIXMAP)
-        pix = gui.Pixmap(self.pixmap(widgets.wizard.WIZARD_PIXMAP[typ]))
+    def get_pixmap(
+        self, typ: widgets.wizard.WizardPixmapStr | widgets.QWizard.WizardPixmap
+    ) -> gui.Pixmap | None:
+        pix = gui.Pixmap(self.pixmap(widgets.wizard.WIZARD_PIXMAP.get_enum_value(typ)))
         return None if pix.isNull() else pix
 
-    def set_button_text(self, button_type: widgets.wizard.WizardButtonStr, value: str):
+    def set_button_text(
+        self,
+        button_type: widgets.wizard.WizardButtonStr | widgets.QWizard.WizardPixmap,
+        value: str,
+    ):
         """Set text for given button type.
 
         Args:
@@ -32,11 +32,13 @@ class WizardPageMixin(widgets.WidgetMixin):
             value: text to set
 
         """
-        if button_type not in widgets.wizard.WIZARD_BUTTON:
-            raise InvalidParamError(button_type, widgets.wizard.WIZARD_BUTTON)
-        self.setButtonText(widgets.wizard.WIZARD_BUTTON[button_type], value)
+        self.setButtonText(
+            widgets.wizard.WIZARD_BUTTON.get_enum_value(button_type), value
+        )
 
-    def get_button_text(self, button_type: widgets.wizard.WizardButtonStr) -> str:
+    def get_button_text(
+        self, button_type: widgets.wizard.WizardButtonStr | widgets.QWizard.WizardButton
+    ) -> str:
         """Return text for given button type.
 
         Args:
@@ -45,9 +47,7 @@ class WizardPageMixin(widgets.WidgetMixin):
         Returns:
             Button text
         """
-        if button_type not in widgets.wizard.WIZARD_BUTTON:
-            raise InvalidParamError(button_type, widgets.wizard.WIZARD_BUTTON)
-        return self.buttonText(widgets.wizard.WIZARD_BUTTON[button_type])
+        return self.buttonText(widgets.wizard.WIZARD_BUTTON.get_enum_value(button_type))
 
 
 class WizardPage(WizardPageMixin, QtWidgets.QWizardPage):

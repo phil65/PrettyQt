@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, texteditselecter
+from prettyqt.utils import bidict, colors, datatypes, texteditselecter
 
 
 AutoFormattingStr = Literal["none", "bullet_list", "all"]
@@ -90,18 +90,15 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         color = colors.get_color(color)
         self.setTextColor(color)
 
-    def set_line_wrap_mode(self, mode: LineWrapModeStr):
+    def set_line_wrap_mode(
+        self, mode: LineWrapModeStr | QtWidgets.QTextEdit.LineWrapMode
+    ):
         """Set line wrap mode.
 
         Args:
             mode: line wrap mode to use
-
-        Raises:
-            InvalidParamError: line wrap mode does not exist
         """
-        if mode not in LINE_WRAP_MODE:
-            raise InvalidParamError(mode, LINE_WRAP_MODE)
-        self.setLineWrapMode(LINE_WRAP_MODE[mode])
+        self.setLineWrapMode(LINE_WRAP_MODE.get_enum_value(mode))
 
     def get_line_wrap_mode(self) -> LineWrapModeStr:
         """Get the current wrap mode.
@@ -111,18 +108,15 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         """
         return LINE_WRAP_MODE.inverse[self.lineWrapMode()]
 
-    def set_auto_formatting(self, mode: AutoFormattingStr):
+    def set_auto_formatting(
+        self, mode: AutoFormattingStr | QtWidgets.QTextEdit.AutoFormattingFlag
+    ):
         """Set auto formatting mode.
 
         Args:
             mode: auto formatting mode to use
-
-        Raises:
-            InvalidParamError: auto formatting mode does not exist
         """
-        if mode not in AUTO_FORMATTING:
-            raise InvalidParamError(mode, AUTO_FORMATTING)
-        self.setAutoFormatting(AUTO_FORMATTING[mode])
+        self.setAutoFormatting(AUTO_FORMATTING.get_enum_value(mode))
 
     def get_auto_formatting(self) -> AutoFormattingStr:
         """Get the current auto formatting mode.
@@ -132,18 +126,15 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         """
         return AUTO_FORMATTING.inverse[self.autoFormatting()]
 
-    def set_word_wrap_mode(self, mode: gui.textoption.WordWrapModeStr):
+    def set_word_wrap_mode(
+        self, mode: gui.textoption.WordWrapModeStr | gui.QTextOption.WrapMode
+    ):
         """Set word wrap mode.
 
         Args:
             mode: word wrap mode to use
-
-        Raises:
-            InvalidParamError: wrap mode does not exist
         """
-        if mode not in gui.textoption.WORD_WRAP_MODE:
-            raise InvalidParamError(mode, gui.textoption.WORD_WRAP_MODE)
-        self.setWordWrapMode(gui.textoption.WORD_WRAP_MODE[mode])
+        self.setWordWrapMode(gui.textoption.WORD_WRAP_MODE.get_enum_value(mode))
 
     def get_word_wrap_mode(self) -> gui.textoption.WordWrapModeStr:
         """Get the current word wrap mode.

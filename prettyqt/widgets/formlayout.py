@@ -5,7 +5,7 @@ from typing import Literal
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 mod = QtWidgets.QFormLayout
@@ -80,18 +80,15 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         }
         return maps
 
-    def set_form_alignment(self, alignment: constants.AlignmentStr):
+    def set_form_alignment(
+        self, alignment: constants.AlignmentStr | constants.AlignmentFlag
+    ):
         """Set the alignment of the form.
 
         Args:
             alignment: alignment for the form
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setFormAlignment(constants.ALIGNMENTS[alignment])
+        self.setFormAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     def get_form_alignment(self) -> constants.AlignmentStr:
         """Return current form alignment.
@@ -101,18 +98,15 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         """
         return constants.ALIGNMENTS.inverse[self.formAlignment()]
 
-    def set_label_alignment(self, alignment: constants.AlignmentStr):
+    def set_label_alignment(
+        self, alignment: constants.AlignmentStr | constants.AlignmentFlag
+    ):
         """Set the alignment of the label.
 
         Args:
             alignment: alignment for the label
-
-        Raises:
-            InvalidParamError: alignment does not exist
         """
-        if alignment not in constants.ALIGNMENTS:
-            raise InvalidParamError(alignment, constants.ALIGNMENTS)
-        self.setFormAlignment(constants.ALIGNMENTS[alignment])
+        self.setFormAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
     def get_label_alignment(self) -> constants.AlignmentStr:
         """Return current label alignment.
@@ -123,15 +117,18 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         return constants.ALIGNMENTS.inverse[self.labelAlignment()]
 
     def set_widget(
-        self, widget: str | QtWidgets.QWidget, row: int, role: ItemRoleStr = "both"
+        self,
+        widget: str | QtWidgets.QWidget,
+        row: int,
+        role: ItemRoleStr | mod.ItemRole = "both",
     ):
         widget = widgets.Label(widget) if isinstance(widget, str) else widget
-        self.setWidget(row, ITEM_ROLE[role], widget)
+        self.setWidget(row, ITEM_ROLE.get_enum_value(role), widget)
 
     def get_widget(
-        self, row: int, role: ItemRoleStr = "both"
+        self, row: int, role: ItemRoleStr | mod.ItemRole = "both"
     ) -> QtWidgets.QLayout | QtWidgets.QWidget:
-        item = self.itemAt(row, ITEM_ROLE[role])
+        item = self.itemAt(row, ITEM_ROLE.get_enum_value(role))
         return i if (i := item.widget()) is not None else item.layout()
 
     def get_item_position(self, index: int) -> tuple[int, ItemRoleStr] | None:
@@ -148,18 +145,13 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
                 case _:
                     raise TypeError(i)
 
-    def set_row_wrap_policy(self, policy: RowWrapPolicyStr):
+    def set_row_wrap_policy(self, policy: RowWrapPolicyStr | mod.RowWrapPolicy):
         """Set row wrap policy to use.
 
         Args:
             policy: row wrap policy to use
-
-        Raises:
-            InvalidParamError: row wrap policy does not exist
         """
-        if policy not in ROW_WRAP_POLICY:
-            raise InvalidParamError(policy, ROW_WRAP_POLICY)
-        self.setRowWrapPolicy(ROW_WRAP_POLICY[policy])
+        self.setRowWrapPolicy(ROW_WRAP_POLICY.get_enum_value(policy))
 
     def get_row_wrap_policy(self) -> RowWrapPolicyStr:
         """Return current row wrap policy.
@@ -169,18 +161,15 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         """
         return ROW_WRAP_POLICY.inverse[self.rowWrapPolicy()]
 
-    def set_field_growth_policy(self, policy: FieldGrowthPolicyStr):
+    def set_field_growth_policy(
+        self, policy: FieldGrowthPolicyStr | mod.FieldGrowthPolicy
+    ):
         """Set field growth policy to use.
 
         Args:
             policy: field growth policy to use
-
-        Raises:
-            InvalidParamError: field growth policy does not exist
         """
-        if policy not in FIELD_GROWTH_POLICY:
-            raise InvalidParamError(policy, FIELD_GROWTH_POLICY)
-        self.setFieldGrowthPolicy(FIELD_GROWTH_POLICY[policy])
+        self.setFieldGrowthPolicy(FIELD_GROWTH_POLICY.get_enum_value(policy))
 
     def get_field_growth_policy(self) -> FieldGrowthPolicyStr:
         """Return current field growth policy.

@@ -4,28 +4,28 @@ from typing import Literal
 
 from prettyqt import widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 mod = QtWidgets.QInputDialog
-
-INPUT_DIALOG_OPTION = bidict(
-    no_buttons=mod.InputDialogOption.NoButtons,
-    use_listview_for_combobox_items=mod.InputDialogOption.UseListViewForComboBoxItems,
-    use_plaintextedit_for_text_input=mod.InputDialogOption.UsePlainTextEditForTextInput,
-)
 
 InputDialogOptionStr = Literal[
     "no_buttons", "use_listview_for_combobox_items", "use_plaintextedit_for_text_input"
 ]
 
-INPUT_MODE = bidict(
+INPUT_DIALOG_OPTION: bidict[InputDialogOptionStr, mod.InputDialogOption] = bidict(
+    no_buttons=mod.InputDialogOption.NoButtons,
+    use_listview_for_combobox_items=mod.InputDialogOption.UseListViewForComboBoxItems,
+    use_plaintextedit_for_text_input=mod.InputDialogOption.UsePlainTextEditForTextInput,
+)
+
+InputModeStr = Literal["text", "int", "double"]
+
+INPUT_MODE: bidict[InputModeStr, mod.InputMode] = bidict(
     text=mod.InputMode.TextInput,
     int=mod.InputMode.IntInput,
     double=mod.InputMode.DoubleInput,
 )
-
-InputModeStr = Literal["text", "int", "double"]
 
 
 class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
@@ -69,13 +69,13 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         label: str = "",
         icon: datatypes.IconType = None,
         value: str = "",
-        echo_mode: widgets.lineedit.EchoModeStr = "normal",
+        echo_mode: widgets.lineedit.EchoModeStr | widgets.QLineEdit.EchoMode = "normal",
     ) -> str | None:
         par = widgets.Dialog()
         par.set_icon(icon)
-        if echo_mode not in widgets.lineedit.ECHO_MODE:
-            raise InvalidParamError(echo_mode, widgets.lineedit.ECHO_MODE)
-        v = cls.getText(par, title, label, widgets.lineedit.ECHO_MODE[echo_mode], value)
+        v = cls.getText(
+            par, title, label, widgets.lineedit.ECHO_MODE.get_enum_value(echo_mode), value
+        )
         return v[0] if v[1] else None
 
     @classmethod
@@ -92,18 +92,15 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         v = cls.getItem(par, title, label, items, editable=editable, current=0)
         return v[0] if v[1] else None
 
-    def set_text_echo_mode(self, mode: widgets.lineedit.EchoModeStr):
+    def set_text_echo_mode(
+        self, mode: widgets.lineedit.EchoModeStr | widgets.QLineEdit.EchoMode
+    ):
         """Set text echo mode.
 
         Args:
             mode: echo mode to use
-
-        Raises:
-            InvalidParamError: invalid echo mode
         """
-        if mode not in widgets.lineedit.ECHO_MODE:
-            raise InvalidParamError(mode, widgets.lineedit.ECHO_MODE)
-        self.setTextEchoMode(widgets.lineedit.ECHO_MODE[mode])
+        self.setTextEchoMode(widgets.lineedit.ECHO_MODE.get_enum_value(mode))
 
     def get_text_echo_mode(self) -> widgets.lineedit.EchoModeStr:
         """Return text echo mode.
@@ -113,18 +110,13 @@ class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
         """
         return widgets.lineedit.ECHO_MODE.inverse[self.textEchoMode()]
 
-    def set_input_mode(self, mode: InputModeStr):
+    def set_input_mode(self, mode: InputModeStr | mod.InputMode):
         """Set input mode.
 
         Args:
             mode: input mode to use
-
-        Raises:
-            InvalidParamError: invalid input mode
         """
-        if mode not in INPUT_MODE:
-            raise InvalidParamError(mode, INPUT_MODE)
-        self.setInputMode(INPUT_MODE[mode])
+        self.setInputMode(INPUT_MODE.get_enum_value(mode))
 
     def get_input_mode(self) -> InputModeStr:
         """Return input mode.
