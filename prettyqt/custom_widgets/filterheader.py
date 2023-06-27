@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import logging
-from prettyqt import constants, core, widgets
+from prettyqt import constants, core, custom_widgets, widgets
 
 logger = logging.getLogger(__name__)
 
@@ -53,7 +53,8 @@ class FilterHeader(widgets.HeaderView):
         model = parent.model()
         self._proxy.clear_filters()
         for i in range(model.columnCount()):
-            if model.get_column_type(i) is bool:
+            typ = model.get_column_type(i)
+            if typ is bool:
 
                 def set_filter(val, i=i):
                     self._proxy.set_filter_value(i, val, constants.CHECKSTATE_ROLE)
@@ -62,7 +63,7 @@ class FilterHeader(widgets.HeaderView):
                 widget = widgets.ComboBox(margin=0, object_name=name, parent=self)
                 widget.add_items(BOOL_ITEMS)
                 widget.value_changed.connect(set_filter)
-            else:
+            elif typ is str:
 
                 def set_filter(val, i=i):
                     self._proxy.set_filter_value(i, val)
@@ -72,6 +73,18 @@ class FilterHeader(widgets.HeaderView):
                 widget.value_changed.connect(set_filter)
                 title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
                 widget.setPlaceholderText(f"Filter {title}...")
+            elif typ in [int, float]:
+
+                def set_filter(val, i=i):
+                    self._proxy.set_filter_value(i, val)
+
+                name = f"filter_numwidget_{i}"
+                widget = custom_widgets.NumFilterWidget(
+                    margin=0, object_name=name, parent=self
+                )
+                widget.filter_changed.connect(set_filter)
+                title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
+                widget.lineedit.setPlaceholderText(f"Filter {title}...")
             widget.show()
             self._editors.append(widget)
 
