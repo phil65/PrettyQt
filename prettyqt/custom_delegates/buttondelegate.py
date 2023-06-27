@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
 
 
 class ButtonDelegate(widgets.StyledItemDelegate):
@@ -9,7 +8,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
 
     def __init__(
         self,
-        parent: QtWidgets.QAbstractItemView,
+        parent: widgets.QAbstractItemView,
         role: constants.ItemDataRole = constants.USER_ROLE,
     ):
         super().__init__(parent)
@@ -17,7 +16,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
         self.btn = widgets.PushButton(parent=parent)
         self.method_role = role
         self.btn.hide()
-        self.current_edited_index = QtCore.QModelIndex()
+        self.current_edited_index = core.ModelIndex()
         parent.entered.connect(self.cell_entered)
 
     #     parent.viewport().installEventFilter(self)
@@ -62,7 +61,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
 
     def cell_entered(self, index: core.ModelIndex):
         # index = self.parent().indexFromItem(item)
-        parent: QtWidgets.QAbstractItemView = self.parent()  # type: ignore
+        parent: widgets.QAbstractItemView = self.parent()  # type: ignore
         if parent.isPersistentEditorOpen(index):
             parent.closePersistentEditor(self.current_edited_index)
         if parent.itemDelegateForIndex(index) is self:
@@ -95,10 +94,10 @@ class ButtonDelegate(widgets.StyledItemDelegate):
     #     painter.fillRect(option.rect, gui.Brush(gui.Color("yellow")))
 
     # def editorEvent(self, event, model, option, index):
-    #     if event.type() == QtCore.QEvent.Type.MouseButtonRelease:
+    #     if event.type() == core.QEvent.Type.MouseButtonRelease:
     #         logger.info("Clicked on Item", index.row())
     #         return True
-    #     elif event.type() == QtCore.QEvent.Type.MouseButtonDblClick:
+    #     elif event.type() == core.QEvent.Type.MouseButtonDblClick:
     #         logger.info("Double-Clicked on Item", index.row())
     #         return True
     #     else:

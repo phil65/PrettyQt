@@ -3,30 +3,29 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
 AccessStr = Literal["private", "protected", "public"]
 
-ACCESS: bidict[AccessStr, QtCore.QMetaMethod.Access] = bidict(
-    private=QtCore.QMetaMethod.Access.Private,
-    protected=QtCore.QMetaMethod.Access.Protected,
-    public=QtCore.QMetaMethod.Access.Public,
+ACCESS: bidict[AccessStr, core.QMetaMethod.Access] = bidict(
+    private=core.QMetaMethod.Access.Private,
+    protected=core.QMetaMethod.Access.Protected,
+    public=core.QMetaMethod.Access.Public,
 )
 
 MethodTypeStr = Literal["method", "signal", "slot", "constructor"]
 
-METHOD_TYPE: bidict[MethodTypeStr, QtCore.QMetaMethod.MethodType] = bidict(
-    method=QtCore.QMetaMethod.MethodType.Method,
-    signal=QtCore.QMetaMethod.MethodType.Signal,
-    slot=QtCore.QMetaMethod.MethodType.Slot,
-    constructor=QtCore.QMetaMethod.MethodType.Constructor,
+METHOD_TYPE: bidict[MethodTypeStr, core.QMetaMethod.MethodType] = bidict(
+    method=core.QMetaMethod.MethodType.Method,
+    signal=core.QMetaMethod.MethodType.Signal,
+    slot=core.QMetaMethod.MethodType.Slot,
+    constructor=core.QMetaMethod.MethodType.Constructor,
 )
 
 
 class MetaMethod:
-    def __init__(self, metamethod: QtCore.QMetaMethod):
+    def __init__(self, metamethod: core.QMetaMethod):
         self.item = metamethod
 
     def __getattr__(self, val):
@@ -50,7 +49,7 @@ class MetaMethod:
     def get_normalized_method_signature(self) -> str:
         """Returns something like 'objectNameChanged(QString)'."""
         sig = self.item.methodSignature()
-        normalized = QtCore.QMetaObject.normalizedSignature(sig.data().decode())
+        normalized = core.QMetaObject.normalizedSignature(sig.data().decode())
         return normalized.data().decode()
 
     def get_name(self) -> str:

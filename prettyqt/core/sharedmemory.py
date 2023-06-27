@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
@@ -20,21 +19,21 @@ SharedMemoryErrorStr = Literal[
 ]
 
 SHARED_MEMORY_ERROR: bidict[
-    SharedMemoryErrorStr, QtCore.QSharedMemory.SharedMemoryError
+    SharedMemoryErrorStr, core.QSharedMemory.SharedMemoryError
 ] = bidict(
-    none=QtCore.QSharedMemory.SharedMemoryError.NoError,
-    permission_denied=QtCore.QSharedMemory.SharedMemoryError.PermissionDenied,
-    invalid_size=QtCore.QSharedMemory.SharedMemoryError.InvalidSize,
-    key_error=QtCore.QSharedMemory.SharedMemoryError.KeyError,
-    already_exists=QtCore.QSharedMemory.SharedMemoryError.AlreadyExists,
-    not_found=QtCore.QSharedMemory.SharedMemoryError.NotFound,
-    lock_error=QtCore.QSharedMemory.SharedMemoryError.LockError,
-    out_of_resources=QtCore.QSharedMemory.SharedMemoryError.OutOfResources,
-    unknown=QtCore.QSharedMemory.SharedMemoryError.UnknownError,
+    none=core.QSharedMemory.SharedMemoryError.NoError,
+    permission_denied=core.QSharedMemory.SharedMemoryError.PermissionDenied,
+    invalid_size=core.QSharedMemory.SharedMemoryError.InvalidSize,
+    key_error=core.QSharedMemory.SharedMemoryError.KeyError,
+    already_exists=core.QSharedMemory.SharedMemoryError.AlreadyExists,
+    not_found=core.QSharedMemory.SharedMemoryError.NotFound,
+    lock_error=core.QSharedMemory.SharedMemoryError.LockError,
+    out_of_resources=core.QSharedMemory.SharedMemoryError.OutOfResources,
+    unknown=core.QSharedMemory.SharedMemoryError.UnknownError,
 )
 
 
-class SharedMemory(core.ObjectMixin, QtCore.QSharedMemory):
+class SharedMemory(core.ObjectMixin, core.QSharedMemory):
     def __repr__(self):
         return get_repr(self, self.key())
 

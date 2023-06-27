@@ -5,11 +5,10 @@ import pathlib
 from typing import Any
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
 
 
-class FileInfo(QtCore.QFileInfo):
+class FileInfo(core.QFileInfo):
     def __init__(self, *args, **kwargs):
         if len(args) == 1 and isinstance(args[0], os.PathLike):
             super().__init__(os.fspath(args[0]))

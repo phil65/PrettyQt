@@ -3,27 +3,26 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
 OsTypeStr = Literal["android", "ios", "mac_os", "tv_os", "watch_os", "windows", "unknown"]
 
-OS_TYPE: bidict[OsTypeStr, QtCore.QOperatingSystemVersion.OSType] = bidict(
-    android=QtCore.QOperatingSystemVersion.OSType.Android,
-    ios=QtCore.QOperatingSystemVersion.OSType.IOS,
-    mac_os=QtCore.QOperatingSystemVersion.OSType.MacOS,
-    tv_os=QtCore.QOperatingSystemVersion.OSType.TvOS,
-    watch_os=QtCore.QOperatingSystemVersion.OSType.WatchOS,
-    windows=QtCore.QOperatingSystemVersion.OSType.Windows,
-    unknown=QtCore.QOperatingSystemVersion.OSType.Unknown,
+OS_TYPE: bidict[OsTypeStr, core.QOperatingSystemVersion.OSType] = bidict(
+    android=core.QOperatingSystemVersion.OSType.Android,
+    ios=core.QOperatingSystemVersion.OSType.IOS,
+    mac_os=core.QOperatingSystemVersion.OSType.MacOS,
+    tv_os=core.QOperatingSystemVersion.OSType.TvOS,
+    watch_os=core.QOperatingSystemVersion.OSType.WatchOS,
+    windows=core.QOperatingSystemVersion.OSType.Windows,
+    unknown=core.QOperatingSystemVersion.OSType.Unknown,
 )
 
 
-class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
+class OperatingSystemVersion(core.QOperatingSystemVersion):
     def __init__(
         self,
-        typ: QtCore.QOperatingSystemVersion.OSType | str,
+        typ: core.QOperatingSystemVersion.OSType | str,
         major: int,
         minor: int | None = None,
         micro: int | None = None,
@@ -81,7 +80,7 @@ class OperatingSystemVersion(QtCore.QOperatingSystemVersion):
                 and self.minorVersion() == other.minorVersion()
                 and self.microVersion() == other.microVersion()
             )
-            if isinstance(other, QtCore.QOperatingSystemVersion)
+            if isinstance(other, core.QOperatingSystemVersion)
             else False
         )
 

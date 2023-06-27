@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import core, widgets
 
 
 AnchorStr = Literal["center", "top", "left", "right", "bottom"]
@@ -19,7 +18,7 @@ class ZoomAnimation(core.ParallelAnimationGroup):
         end: float = 1.0,
         easing: core.easingcurve.TypeStr = "in_out_sine",
         anchor: AnchorStr = "center",
-        parent: QtCore.QObject | None = None,
+        parent: core.QObject | None = None,
     ):
         self._start = start
         self._end = end
@@ -74,7 +73,7 @@ class ZoomAnimation(core.ParallelAnimationGroup):
         self.anim1.set_easing(easing)
         self.anim2.set_easing(easing)
 
-    def apply_to(self, obj: QtWidgets.QWidget):
+    def apply_to(self, obj: widgets.QWidget):
         self.anim1.apply_to(obj.size)
         self.anim2.apply_to(obj.pos)
 
@@ -86,8 +85,6 @@ class ZoomAnimation(core.ParallelAnimationGroup):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-
     app = widgets.app()
     val = ZoomAnimation()
     w = widgets.RadioButton()

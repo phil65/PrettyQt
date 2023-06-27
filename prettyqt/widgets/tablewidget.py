@@ -1,17 +1,16 @@
 from __future__ import annotations
 
-from prettyqt import constants, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, core, widgets
 
 
 class TableWidgetMixin(widgets.TableViewMixin):
-    def __getitem__(self, index: tuple[int, int]) -> QtWidgets.QTableWidgetItem:
+    def __getitem__(self, index: tuple[int, int]) -> widgets.QTableWidgetItem:
         item = self.item(*index)
         if item is None:
             raise KeyError(index)
         return item
 
-    def __setitem__(self, index: tuple[int, int], value: QtWidgets.QTableWidgetItem):
+    def __setitem__(self, index: tuple[int, int], value: widgets.QTableWidgetItem):
         self.setItem(index[0], index[1], value)
 
     def __delitem__(self, index: tuple[int, int]):
@@ -22,35 +21,35 @@ class TableWidgetMixin(widgets.TableViewMixin):
         self.sortItems(column, order)
 
     def openPersistentEditor(
-        self, index: QtCore.QModelIndex | QtWidgets.QTableWidgetItem
+        self, index: core.ModelIndex | widgets.QTableWidgetItem
     ):
-        if isinstance(index, QtCore.QModelIndex):
+        if isinstance(index, core.ModelIndex):
             index = self.itemFromIndex(index)
         super().openPersistentEditor(index)
 
     def closePersistentEditor(
-        self, index: QtCore.QModelIndex | QtWidgets.QTableWidgetItem
+        self, index: core.ModelIndex | widgets.QTableWidgetItem
     ):
-        if isinstance(index, QtCore.QModelIndex):
+        if isinstance(index, core.ModelIndex):
             index = self.itemFromIndex(index)
         super().closePersistentEditor(index)
 
     def isPersistentEditorOpen(
-        self, index: QtCore.QModelIndex | QtWidgets.QTableWidgetItem
+        self, index: core.ModelIndex | widgets.QTableWidgetItem
     ) -> bool:
-        if isinstance(index, QtCore.QModelIndex):
+        if isinstance(index, core.ModelIndex):
             index = self.itemFromIndex(index)
         return super().isPersistentEditorOpen(index)
 
     def scroll_to_item(
         self,
-        item: QtWidgets.QTableWidgetItem,
+        item: widgets.QTableWidgetItem,
         scroll_hint: widgets.abstractitemview.ScrollHintStr = "ensure_visible",
     ):
         self.scrollToItem(item, widgets.abstractitemview.SCROLL_HINT[scroll_hint])
 
 
-class TableWidget(TableWidgetMixin, QtWidgets.QTableWidget):
+class TableWidget(TableWidgetMixin, widgets.QTableWidget):
     pass
 
 

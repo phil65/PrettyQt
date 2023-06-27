@@ -10,7 +10,6 @@ from typing import Any, Literal
 from typing_extensions import Self
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes
 
 
@@ -18,19 +17,19 @@ logger = logging.getLogger(__name__)
 
 FormatStr = Literal["user", "system"]
 
-FORMAT: bidict[FormatStr, QtCore.QSettings.Format] = bidict(
-    native=QtCore.QSettings.Format.NativeFormat, ini=QtCore.QSettings.Format.IniFormat
+FORMAT: bidict[FormatStr, core.QSettings.Format] = bidict(
+    native=core.QSettings.Format.NativeFormat, ini=core.QSettings.Format.IniFormat
 )
 
 ScopeStr = Literal["user", "system"]
 
-SCOPE: bidict[ScopeStr, QtCore.QSettings.Scope] = bidict(
-    user=QtCore.QSettings.Scope.UserScope, system=QtCore.QSettings.Scope.SystemScope
+SCOPE: bidict[ScopeStr, core.QSettings.Scope] = bidict(
+    user=core.QSettings.Scope.UserScope, system=core.QSettings.Scope.SystemScope
 )
 
 
 class Settings_(
-    core.ObjectMixin, QtCore.QSettings, MutableMapping, metaclass=datatypes.QABCMeta
+    core.ObjectMixin, core.QSettings, MutableMapping, metaclass=datatypes.QABCMeta
 ):
     # Setting class with original behavior, compatible with original QSettings
     def __init__(self, *args, settings_id: str | None = None):
@@ -86,7 +85,7 @@ class Settings_(
         return self.value(key) if self.contains(key) else default
 
     @classmethod
-    def set_default_format(cls, fmt: FormatStr | QtCore.QSettings.Format):
+    def set_default_format(cls, fmt: FormatStr | core.QSettings.Format):
         """Set the default format.
 
         Args:
@@ -114,8 +113,8 @@ class Settings_(
     @classmethod
     def set_path(
         cls,
-        fmt: FormatStr | QtCore.QSettings.Format,
-        scope: ScopeStr | QtCore.QSettings.Scope,
+        fmt: FormatStr | core.QSettings.Format,
+        scope: ScopeStr | core.QSettings.Scope,
         path: datatypes.PathType,
     ):
         """Set the path to the settings file.

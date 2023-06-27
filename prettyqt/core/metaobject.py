@@ -5,7 +5,6 @@ from collections.abc import Callable
 from typing import Any
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, helpers
 
 logger = logging.getLogger(__name__)
@@ -268,7 +267,7 @@ class MetaObject:
     def connect_signals(
         self,
         source_qobject: core.QObject,
-        fn_or_qobject: Callable | QtCore.QObject,
+        fn_or_qobject: Callable | core.QObject,
         only_notifiers: bool = False,
     ) -> list[core.QMetaObject.Connection]:
         """Connect all signals of a given qobject.
@@ -282,7 +281,7 @@ class MetaObject:
             signal_instance = source_qobject.__getattribute__(signal_name)
             slot = (
                 fn_or_qobject.__getattribute__(signal_name)
-                if isinstance(fn_or_qobject, QtCore.QObject)
+                if isinstance(fn_or_qobject, core.QObject)
                 else fn_or_qobject
             )
             handle = signal_instance.connect(slot)

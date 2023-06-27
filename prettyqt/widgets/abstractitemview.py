@@ -7,7 +7,6 @@ import logging
 from typing import Any, Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, datatypes, helpers, listdelegators
 
 DelegateStr = Literal[
@@ -34,42 +33,42 @@ EditTriggerStr = Literal[
     "all",
 ]
 
-EDIT_TRIGGERS: bidict[EditTriggerStr, QtWidgets.QAbstractItemView.EditTrigger] = bidict(
-    none=QtWidgets.QAbstractItemView.EditTrigger.NoEditTriggers,
-    current_changed=QtWidgets.QAbstractItemView.EditTrigger.CurrentChanged,
-    double_clicked=QtWidgets.QAbstractItemView.EditTrigger.DoubleClicked,
-    selected_clicked=QtWidgets.QAbstractItemView.EditTrigger.SelectedClicked,
-    edit_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.EditKeyPressed,
-    any_key_pressed=QtWidgets.QAbstractItemView.EditTrigger.AnyKeyPressed,
-    all=QtWidgets.QAbstractItemView.EditTrigger.AllEditTriggers,
+EDIT_TRIGGERS: bidict[EditTriggerStr, widgets.QAbstractItemView.EditTrigger] = bidict(
+    none=widgets.QAbstractItemView.EditTrigger.NoEditTriggers,
+    current_changed=widgets.QAbstractItemView.EditTrigger.CurrentChanged,
+    double_clicked=widgets.QAbstractItemView.EditTrigger.DoubleClicked,
+    selected_clicked=widgets.QAbstractItemView.EditTrigger.SelectedClicked,
+    edit_key_pressed=widgets.QAbstractItemView.EditTrigger.EditKeyPressed,
+    any_key_pressed=widgets.QAbstractItemView.EditTrigger.AnyKeyPressed,
+    all=widgets.QAbstractItemView.EditTrigger.AllEditTriggers,
 )
 
 SelectionBehaviourStr = Literal["rows", "columns", "items"]
 
 SELECTION_BEHAVIOR: bidict[
-    SelectionBehaviourStr, QtWidgets.QAbstractItemView.SelectionBehavior
+    SelectionBehaviourStr, widgets.QAbstractItemView.SelectionBehavior
 ] = bidict(
-    rows=QtWidgets.QAbstractItemView.SelectionBehavior.SelectRows,
-    columns=QtWidgets.QAbstractItemView.SelectionBehavior.SelectColumns,
-    items=QtWidgets.QAbstractItemView.SelectionBehavior.SelectItems,
+    rows=widgets.QAbstractItemView.SelectionBehavior.SelectRows,
+    columns=widgets.QAbstractItemView.SelectionBehavior.SelectColumns,
+    items=widgets.QAbstractItemView.SelectionBehavior.SelectItems,
 )
 
 SelectionModeStr = Literal["single", "extended", "multi", "none"]
 
 SELECTION_MODE: bidict[
-    SelectionModeStr, QtWidgets.QAbstractItemView.SelectionMode
+    SelectionModeStr, widgets.QAbstractItemView.SelectionMode
 ] = bidict(
-    single=QtWidgets.QAbstractItemView.SelectionMode.SingleSelection,
-    extended=QtWidgets.QAbstractItemView.SelectionMode.ExtendedSelection,
-    multi=QtWidgets.QAbstractItemView.SelectionMode.MultiSelection,
-    none=QtWidgets.QAbstractItemView.SelectionMode.NoSelection,
+    single=widgets.QAbstractItemView.SelectionMode.SingleSelection,
+    extended=widgets.QAbstractItemView.SelectionMode.ExtendedSelection,
+    multi=widgets.QAbstractItemView.SelectionMode.MultiSelection,
+    none=widgets.QAbstractItemView.SelectionMode.NoSelection,
 )
 
 ScrollModeStr = Literal["item", "pixel"]
 
-SCROLL_MODE: bidict[ScrollModeStr, QtWidgets.QAbstractItemView.ScrollMode] = bidict(
-    item=QtWidgets.QAbstractItemView.ScrollMode.ScrollPerItem,
-    pixel=QtWidgets.QAbstractItemView.ScrollMode.ScrollPerPixel,
+SCROLL_MODE: bidict[ScrollModeStr, widgets.QAbstractItemView.ScrollMode] = bidict(
+    item=widgets.QAbstractItemView.ScrollMode.ScrollPerItem,
+    pixel=widgets.QAbstractItemView.ScrollMode.ScrollPerPixel,
 )
 
 
@@ -77,35 +76,35 @@ ScrollHintStr = Literal[
     "ensure_visible", "position_at_top", "position_at_bottom", "position_at_center"
 ]
 
-SCROLL_HINT: bidict[ScrollHintStr, QtWidgets.QAbstractItemView.ScrollHint] = bidict(
-    ensure_visible=QtWidgets.QAbstractItemView.ScrollHint.EnsureVisible,
-    position_at_top=QtWidgets.QAbstractItemView.ScrollHint.PositionAtTop,
-    position_at_bottom=QtWidgets.QAbstractItemView.ScrollHint.PositionAtBottom,
-    position_at_center=QtWidgets.QAbstractItemView.ScrollHint.PositionAtCenter,
+SCROLL_HINT: bidict[ScrollHintStr, widgets.QAbstractItemView.ScrollHint] = bidict(
+    ensure_visible=widgets.QAbstractItemView.ScrollHint.EnsureVisible,
+    position_at_top=widgets.QAbstractItemView.ScrollHint.PositionAtTop,
+    position_at_bottom=widgets.QAbstractItemView.ScrollHint.PositionAtBottom,
+    position_at_center=widgets.QAbstractItemView.ScrollHint.PositionAtCenter,
 )
 
 DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal_move"]
 
 DRAG_DROP_MODE: bidict[
-    DragDropModeStr, QtWidgets.QAbstractItemView.DragDropMode
+    DragDropModeStr, widgets.QAbstractItemView.DragDropMode
 ] = bidict(
-    none=QtWidgets.QAbstractItemView.DragDropMode.NoDragDrop,
-    drag=QtWidgets.QAbstractItemView.DragDropMode.DragOnly,
-    drop=QtWidgets.QAbstractItemView.DragDropMode.DropOnly,
-    drag_drop=QtWidgets.QAbstractItemView.DragDropMode.DragDrop,
-    internal_move=QtWidgets.QAbstractItemView.DragDropMode.InternalMove,
+    none=widgets.QAbstractItemView.DragDropMode.NoDragDrop,
+    drag=widgets.QAbstractItemView.DragDropMode.DragOnly,
+    drop=widgets.QAbstractItemView.DragDropMode.DropOnly,
+    drag_drop=widgets.QAbstractItemView.DragDropMode.DragDrop,
+    internal_move=widgets.QAbstractItemView.DragDropMode.InternalMove,
 )
 
 
 DropIndicatorPositionStr = Literal["on_item", "above_item", "below_item", "on_viewport"]
 
 DROP_INDICATOR_POSITION: bidict[
-    DropIndicatorPositionStr, QtWidgets.QAbstractItemView.DropIndicatorPosition
+    DropIndicatorPositionStr, widgets.QAbstractItemView.DropIndicatorPosition
 ] = bidict(
-    on_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.OnItem,
-    above_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.AboveItem,
-    below_item=QtWidgets.QAbstractItemView.DropIndicatorPosition.BelowItem,
-    on_viewport=QtWidgets.QAbstractItemView.DropIndicatorPosition.OnViewport,
+    on_item=widgets.QAbstractItemView.DropIndicatorPosition.OnItem,
+    above_item=widgets.QAbstractItemView.DropIndicatorPosition.AboveItem,
+    below_item=widgets.QAbstractItemView.DropIndicatorPosition.BelowItem,
+    on_viewport=widgets.QAbstractItemView.DropIndicatorPosition.OnViewport,
 )
 
 
@@ -119,19 +118,19 @@ StateStr = Literal[
     "animating",
 ]
 
-STATE: bidict[StateStr, QtWidgets.QAbstractItemView.State] = bidict(
-    none=QtWidgets.QAbstractItemView.State.NoState,
-    dragging=QtWidgets.QAbstractItemView.State.DraggingState,
-    drag_selecting=QtWidgets.QAbstractItemView.State.DragSelectingState,
-    editing=QtWidgets.QAbstractItemView.State.EditingState,
-    expanding=QtWidgets.QAbstractItemView.State.ExpandingState,
-    collapsing=QtWidgets.QAbstractItemView.State.CollapsingState,
-    animating=QtWidgets.QAbstractItemView.State.AnimatingState,
+STATE: bidict[StateStr, widgets.QAbstractItemView.State] = bidict(
+    none=widgets.QAbstractItemView.State.NoState,
+    dragging=widgets.QAbstractItemView.State.DraggingState,
+    drag_selecting=widgets.QAbstractItemView.State.DragSelectingState,
+    editing=widgets.QAbstractItemView.State.EditingState,
+    expanding=widgets.QAbstractItemView.State.ExpandingState,
+    collapsing=widgets.QAbstractItemView.State.CollapsingState,
+    animating=widgets.QAbstractItemView.State.AnimatingState,
 )
 
 
 class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
-    model_changed = core.Signal(QtCore.QAbstractItemModel)
+    model_changed = core.Signal(core.QAbstractItemModel)
 
     def __init__(
         self,
@@ -176,7 +175,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             return
         super().selectAll()
 
-    def set_model(self, model: QtCore.QAbstractItemModel | None):
+    def set_model(self, model: core.QAbstractItemModel | None):
         """Set the model of this View."""
         # Delete old selection model explicitely, seems to help with memory usage.
         old_model = self.model()
@@ -226,20 +225,20 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         model = Klass(data, parent=self)
         self.set_model(model)
 
-    def get_model(self, skip_proxies: bool = False) -> QtCore.QAbstractItemModel:
+    def get_model(self, skip_proxies: bool = False) -> core.QAbstractItemModel:
         model = self.model()
         if skip_proxies:
-            while isinstance(model, QtCore.QAbstractProxyModel):
+            while isinstance(model, core.QAbstractProxyModel):
                 model = model.sourceModel()
         return model
 
     def get_models(
         self, proxies_only: bool = False
-    ) -> listdelegators.BaseListDelegator[QtCore.QAbstractProxyModel]:
+    ) -> listdelegators.BaseListDelegator[core.QAbstractProxyModel]:
         """Get a list of all (proxy) models connected to this view."""
         model = self.model()
         models = []
-        while isinstance(model, QtCore.QAbstractProxyModel):
+        while isinstance(model, core.QAbstractProxyModel):
             models.append(model)
             model = model.sourceModel()
         if (not proxies_only) and model is not None:
@@ -248,7 +247,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_current_index(
         self,
-        index: QtCore.QModelIndex | tuple | None,
+        index: core.QModelIndex | tuple | None,
         operation: Literal["select", "deselect", "toggle"] = "select",
         clear: bool = True,
         current: bool = False,
@@ -263,7 +262,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                 return
             case tuple():
                 index = self.model().index(*index)
-            case QtCore.QModelIndex():
+            case core.QModelIndex():
                 pass
             case _:
                 raise ValueError(index)
@@ -293,7 +292,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def select_index(
         self,
-        index: QtCore.QModelIndex | tuple | None,
+        index: core.QModelIndex | tuple | None,
         operation: Literal["select", "deselect", "toggle"] = "select",
         clear: bool = True,
         current: bool = False,
@@ -308,7 +307,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
                 return
             case tuple():
                 index = self.model().index(*index)
-            case QtCore.QModelIndex():
+            case core.QModelIndex():
                 pass
             case _:
                 raise ValueError(index)
@@ -344,7 +343,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_delegate(
         self,
-        delegate: QtWidgets.QAbstractItemDelegate | DelegateStr,
+        delegate: widgets.QAbstractItemDelegate | DelegateStr,
         *,
         column: int | None = None,
         row: int | None = None,
@@ -353,7 +352,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
     ):
         """Set a delegate. Delegates can also be set by Id."""
         match delegate:
-            case QtWidgets.QAbstractItemDelegate():
+            case widgets.QAbstractItemDelegate():
                 dlg = delegate
             # case "variant":
             #     delegate = custom_delegates.VariantDelegate(parent=self, **kwargs)
@@ -406,7 +405,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         with self.edit_stylesheet() as ss:
             ss.QHeaderView.section.backgroundColor.setValue(color)
 
-    def current_index(self) -> QtCore.QModelIndex | None:
+    def current_index(self) -> core.QModelIndex | None:
         if (model := self.selectionModel()) is not None:
             return model.currentIndex()
         return None
@@ -426,7 +425,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             return model.currentIndex().column()
         return None
 
-    def selected_indexes(self) -> listdelegators.BaseListDelegator[QtCore.QModelIndex]:
+    def selected_indexes(self) -> listdelegators.BaseListDelegator[core.QModelIndex]:
         """Return list of selected indexes in first row."""
         indexes = (x for x in self.selectedIndexes() if x.column() == 0)
         indexes = sorted(indexes, key=lambda x: x.row())
@@ -461,7 +460,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def set_selection_behavior(
         self,
-        behaviour: SelectionBehaviourStr | QtWidgets.QAbstractItemView.SelectionBehavior,
+        behaviour: SelectionBehaviourStr | widgets.QAbstractItemView.SelectionBehavior,
     ):
         """Set selection behaviour for given item view.
 
@@ -487,7 +486,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return DROP_INDICATOR_POSITION.inverse[self.dropIndicatorPosition()]
 
     def set_drag_drop_mode(
-        self, mode: DragDropModeStr | QtWidgets.QAbstractItemView.DragDropMode
+        self, mode: DragDropModeStr | widgets.QAbstractItemView.DragDropMode
     ):
         """Set drag-drop mode for given item view.
 
@@ -504,7 +503,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return DRAG_DROP_MODE.inverse[self.dragDropMode()]
 
-    def set_state(self, state: StateStr | QtWidgets.QAbstractItemView.State):
+    def set_state(self, state: StateStr | widgets.QAbstractItemView.State):
         """Set state for given item view.
 
         Args:
@@ -521,7 +520,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return STATE.inverse[self.state()]
 
     def set_selection_mode(
-        self, mode: SelectionModeStr | QtWidgets.QAbstractItemView.SelectionMode | None
+        self, mode: SelectionModeStr | widgets.QAbstractItemView.SelectionMode | None
     ):
         """Set selection mode for given item view.
 
@@ -541,7 +540,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return SELECTION_MODE.inverse[self.selectionMode()]
 
     def set_scroll_mode(
-        self, mode: ScrollModeStr | QtWidgets.QAbstractItemView.ScrollMode
+        self, mode: ScrollModeStr | widgets.QAbstractItemView.ScrollMode
     ):
         """Set the scroll mode for both directions.
 
@@ -552,7 +551,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self.setVerticalScrollMode(SCROLL_MODE.get_enum_value(mode))
 
     def set_horizontal_scroll_mode(
-        self, mode: ScrollModeStr | QtWidgets.QAbstractItemView.ScrollMode
+        self, mode: ScrollModeStr | widgets.QAbstractItemView.ScrollMode
     ):
         """Set the horizontal scroll mode.
 
@@ -570,7 +569,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return SCROLL_MODE.inverse[self.horizontalScrollMode()]
 
     def set_vertical_scroll_mode(
-        self, mode: ScrollModeStr | QtWidgets.QAbstractItemView.ScrollMode
+        self, mode: ScrollModeStr | widgets.QAbstractItemView.ScrollMode
     ):
         """Set the vertical scroll mode.
 
@@ -627,8 +626,8 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
 
     def scroll_to(
         self,
-        index: QtCore.QModelIndex,
-        mode: ScrollHintStr | QtWidgets.QAbstractItemView.ScrollHint = "ensure_visible",
+        index: core.QModelIndex,
+        mode: ScrollHintStr | widgets.QAbstractItemView.ScrollHint = "ensure_visible",
     ):
         self.scrollTo(index, SCROLL_HINT.get_enum_value(mode))
 
@@ -685,7 +684,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         self, orientation: constants.OrientationStr | constants.Orientation
     ) -> tuple[int, int]:
         orientation = constants.ORIENTATION.get_enum_value(orientation)
-        top_left = QtCore.QPoint(0, 0)
+        top_left = core.QPoint(0, 0)
         bottom_right = self.viewport().rect().bottomRight()
         if orientation == constants.HORIZONTAL:
             start = self.indexAt(top_left).column()
@@ -701,7 +700,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         return (start, end)
 
 
-class AbstractItemView(AbstractItemViewMixin, QtWidgets.QAbstractItemView):
+class AbstractItemView(AbstractItemViewMixin, widgets.QAbstractItemView):
     pass
 
 

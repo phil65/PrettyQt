@@ -5,17 +5,16 @@ import os
 from typing import Literal
 import pathlib
 
-from prettyqt import constants, core, qt
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, core, qt, widgets
 from prettyqt.utils import bidict, datatypes
 
 
 OptionStr = Literal["dont_watch_changes", "dont_resolve_symlinks", "no_custom_icons"]
 
-OPTIONS: bidict[OptionStr, QtWidgets.QFileSystemModel.Option] = bidict(
-    dont_watch_changes=QtWidgets.QFileSystemModel.Option.DontWatchForChanges,
-    dont_resolve_symlinks=QtWidgets.QFileSystemModel.Option.DontResolveSymlinks,
-    no_custom_icons=QtWidgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
+OPTIONS: bidict[OptionStr, widgets.QFileSystemModel.Option] = bidict(
+    dont_watch_changes=widgets.QFileSystemModel.Option.DontWatchForChanges,
+    dont_resolve_symlinks=widgets.QFileSystemModel.Option.DontResolveSymlinks,
+    no_custom_icons=widgets.QFileSystemModel.Option.DontUseCustomDirectoryIcons,
 )
 
 
@@ -42,13 +41,13 @@ class FileSystemModelMixin:
     def parent(self, *args):
         # workaround: PyQt6 QFileSystemModel.parent() missing
         if not args and qt.API == "pyqt6":
-            return QtCore.QAbstractItemModel.parent(self)
+            return core.QAbstractItemModel.parent(self)
         return super().parent(*args)
 
-    def get_file_info(self, index: QtCore.QModelIndex) -> core.FileInfo:
+    def get_file_info(self, index: core.ModelIndex) -> core.FileInfo:
         return core.FileInfo(self.fileInfo(index))
 
-    def get_file_path(self, index: QtCore.QModelIndex) -> pathlib.Path:
+    def get_file_path(self, index: core.ModelIndex) -> pathlib.Path:
         return pathlib.Path(self.filePath(index))
 
     def resolve_sym_links(self, resolve: bool):
@@ -60,7 +59,7 @@ class FileSystemModelMixin:
     def use_custom_icons(self, use: bool):
         self.setOption(OPTIONS["no_custom_icons"], not use)
 
-    def set_root_path(self, path: datatypes.PathType) -> QtCore.QModelIndex:
+    def set_root_path(self, path: datatypes.PathType) -> core.ModelIndex:
         match path:
             case "root":
                 path = core.Dir.rootPath()
@@ -81,7 +80,7 @@ class FileSystemModelMixin:
     def set_filter(self, filter_mode: core.dir.FilterStr | core.QDir.Filter):
         self.setFilter(core.dir.FILTERS.get_enum_value(filter_mode))
 
-    def get_paths(self, indexes: Sequence[QtCore.QModelIndex]) -> list[pathlib.Path]:
+    def get_paths(self, indexes: Sequence[core.ModelIndex]) -> list[pathlib.Path]:
         paths = [i.data(self.Roles.FilePathRole) for i in indexes]
         if not paths:
             return []
@@ -101,7 +100,7 @@ class FileSystemModelMixin:
 
 
 class FileSystemModel(
-    FileSystemModelMixin, core.AbstractItemModelMixin, QtWidgets.QFileSystemModel
+    FileSystemModelMixin, core.AbstractItemModelMixin, widgets.QFileSystemModel
 ):
     pass
 

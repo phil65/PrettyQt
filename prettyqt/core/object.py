@@ -12,14 +12,13 @@ from typing import TYPE_CHECKING, Any, TypeVar, get_args
 import types
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, listdelegators, helpers
 
 
 if TYPE_CHECKING:
     from prettyqt import eventfilters
 
-T = TypeVar("T", bound=QtCore.QObject)
+T = TypeVar("T", bound=core.QObject)
 
 counter_dict: defaultdict = defaultdict(itertools.count)
 
@@ -47,7 +46,7 @@ class ObjectMixin:
     def __init__(self, *args, **kwargs):
         self._eventfilters = set()
         # klass = type(self)
-        # if issubclass(klass, QtCore.QObject) and klass not in _properties:
+        # if issubclass(klass, core.QObject) and klass not in _properties:
         #     metaobj = core.MetaObject(klass.staticMetaObject)
         #     _properties[klass] = [i.get_name() for i in metaobj.get_properties()]
         #     _signals[klass] = [i.get_name() for i in metaobj.get_signals()]
@@ -116,13 +115,13 @@ class ObjectMixin:
             return getattr(self, cameled)
         raise AttributeError(val)
 
-    def installEventFilter(self, filter_: QtCore.QObject | str, **kwargs):
+    def installEventFilter(self, filter_: core.QObject | str, **kwargs):
         """Override to also allow setting eventfilters by name."""
         if filter_ in self._eventfilters:
             logger.warning(f"Installing same EventFilter multiple times to {self}.")
             return
         match filter_:
-            case QtCore.QObject():
+            case core.QObject():
                 pass
             case str():
                 from prettyqt import eventfilters
@@ -134,7 +133,7 @@ class ObjectMixin:
         self._eventfilters.add(filter_)
         super().installEventFilter(filter_)
 
-    def removeEventFilter(self, eventfilter: QtCore.QObject):
+    def removeEventFilter(self, eventfilter: core.QObject):
         if eventfilter not in self._eventfilters:
             logger.warning("Trying to remove non-installed EventFilter.")
             return
@@ -143,9 +142,9 @@ class ObjectMixin:
 
     def add_callback_for_event(
         self,
-        callback: Callable[[QtCore.QEvent], bool],
-        include: QtCore.QEvent.Type | Sequence[QtCore.QEvent.Type] | None = None,
-        exclude: QtCore.QEvent.Type | Sequence[QtCore.QEvent.Type] | None = None,
+        callback: Callable[[core.QEvent], bool],
+        include: core.QEvent.Type | Sequence[core.QEvent.Type] | None = None,
+        exclude: core.QEvent.Type | Sequence[core.QEvent.Type] | None = None,
     ) -> eventfilters.EventCatcher:
         """Connect widget events to a callback.
 
@@ -238,7 +237,7 @@ class ObjectMixin:
 
     def find_children(
         self,
-        typ: type[T] = QtCore.QObject,
+        typ: type[T] = core.QObject,
         name: str | datatypes.PatternType | None = None,
         recursive: bool = True,
         property_selector: dict[str, datatypes.VariantType | Callable] | None = None,
@@ -292,8 +291,8 @@ class ObjectMixin:
 
     def find_child(
         self,
-        typ: type[T] = QtCore.QObject,
-        name: str | QtCore.QRegularExpression | None = None,
+        typ: type[T] = core.QObject,
+        name: str | core.QRegularExpression | None = None,
         recursive: bool = True,
     ) -> T | None:
         """Find a child with given type and name."""
@@ -312,7 +311,7 @@ class ObjectMixin:
                 return self.findChild(typ, name, flag)  # type: ignore
 
     def find_parent(
-        self, typ: type[T] = QtCore.QObject, name: str | None = None
+        self, typ: type[T] = core.QObject, name: str | None = None
     ) -> T | None:
         """Find parent with given type or name."""
         node = self
@@ -414,7 +413,7 @@ class ObjectMixin:
         return property(getter, setter)
 
 
-class Object(ObjectMixin, QtCore.QObject):
+class Object(ObjectMixin, core.QObject):
     pass
 
 

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
 
 
-class Collator(QtCore.QCollator):
+class Collator(core.QCollator):
     def __repr__(self):
         return get_repr(self, self.get_locale())
 
