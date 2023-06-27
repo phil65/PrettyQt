@@ -230,8 +230,17 @@ class Proxyfier:
         # self._widget.set_stylesheet(ss)
         return self.get_proxy("flatten_tree")
 
+    def melt(
+        self, id_columns: list[int], var_name: str = "Variable", value_name: str = "Value"
+    ) -> custom_models.MeltProxyModel:
+        """Wraps model in a Proxy which unpivots the table to a long format."""
+        proxy = self.get_proxy(
+            "melt", id_columns=id_columns, var_name=var_name, value_name=value_name
+        )
+        return proxy
+
     def to_list(self) -> custom_models.TableToListProxyModel:
-        """Wraps model in a Proxy converts table to a tree."""
+        """Wraps model in a Proxy which converts table to a tree."""
         return self.get_proxy("table_to_list")
 
     def add_column(

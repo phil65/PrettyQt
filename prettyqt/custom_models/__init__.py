@@ -41,7 +41,7 @@ from .widgetpropertiesmodel import WidgetPropertiesModel
 from .widgetsdetailsmodel import WidgetsDetailsModel
 from .widgethierarchymodel import WidgetHierarchyModel, LayoutHierarchyModel
 
-# Proxies
+# Slice Proxies
 
 from .sliceidentityproxymodel import SliceIdentityProxyModel
 from .slicechangeiconsizeproxymodel import SliceChangeIconSizeProxyModel
@@ -55,13 +55,18 @@ from .slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
 from .slicecolorvaluesproxymodel import SliceColorValuesProxyModel
 from .slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
 
+# Reshape proxies
+
+from .tabletolistproxymodel import TableToListProxyModel
+from .flattenedtreeproxymodel import FlattenedTreeProxyModel
+from .meltproxymodel import MeltProxyModel
+
+# Other proxies
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
 from .multicolumnfilterproxymodel import MultiColumnFilterProxyModel
 from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuefilterproxymodel import ValueFilterProxyModel
 from .rangefilterproxymodel import RangeFilterProxyModel
-from .tabletolistproxymodel import TableToListProxyModel
-from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
@@ -115,6 +120,7 @@ __all__ = [
     "SliceCheckableTreeProxyModel",
     "TableToListProxyModel",
     "FlattenedTreeProxyModel",
+    "MeltProxyModel",
     "SliceAppearanceProxyModel",
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",
