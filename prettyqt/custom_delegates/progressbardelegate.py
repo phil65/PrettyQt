@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, widgets
+from prettyqt import constants, core, gui, widgets
 
 
 class ProgressBarDelegate(widgets.StyledItemDelegate):
@@ -10,7 +10,12 @@ class ProgressBarDelegate(widgets.StyledItemDelegate):
         self._role = role
         super().__init__(**kwargs)
 
-    def paint(self, painter, option, index):
+    def paint(
+        self,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         progress = index.data(self._role)
         opt = widgets.StyleOptionProgressBar()
         opt.rect = option.rect

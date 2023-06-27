@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import gui, widgets
+from prettyqt import core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
@@ -20,7 +20,12 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
         self.doc.setDefaultTextOption(self.text_option)
         self.doc.setDocumentMargin(0)
 
-    def paint(self, painter, option, index):
+    def paint(
+        self,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         painter.save()
         option = widgets.StyleOptionViewItem(option)
         self.initStyleOption(option, index)
@@ -40,7 +45,7 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
 
         painter.restore()
 
-    def sizeHint(self, option, index):
+    def sizeHint(self, option: widgets.QStyleOptionViewItem, index: core.ModelIndex):
         option = widgets.StyleOptionViewItem(option)
         self.initStyleOption(option, index)
         self.prepare_doc(option)

@@ -1,13 +1,18 @@
 from __future__ import annotations
 
-from prettyqt import constants, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore
 
 
 class RenderLinkDelegate(widgets.StyledItemDelegate):
     ID = "render_link"
 
-    def paint(self, painter, option, index):
+    def paint(
+        self,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         text = index.data()
         if not text:
             return
@@ -24,7 +29,13 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         painter.drawText(rect, constants.ALIGN_CENTER_LEFT, text)
         painter.restore()
 
-    def editorEvent(self, event, model, option, index):
+    def editorEvent(
+        self,
+        event,
+        model: core.QAbstractItemModel,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         text = index.data()
         font = index.data(constants.FONT_ROLE) or gui.GuiApplication.font()
         # alignment = index.data(constants.ALIGNMENT_ROLE)

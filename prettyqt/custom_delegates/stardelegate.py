@@ -59,7 +59,7 @@ class StarEditor(widgets.Widget):
         self.setAutoFillBackground(True)
         self.star_rating = StarRating()
 
-    def sizeHint(self):
+    def sizeHint(self) -> core.QSize:
         """Tell the caller how big we are."""
         return self.star_rating.sizeHint()
 
@@ -94,7 +94,12 @@ class StarDelegate(widgets.StyledItemDelegate):
 
     ID = "star"
 
-    def paint(self, painter, option, index):
+    def paint(
+        self,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         star_rating = StarRating(index.data())
 
         # If the row is currently selected, we need to make sure we
@@ -116,7 +121,7 @@ class StarDelegate(widgets.StyledItemDelegate):
         # to paint the stars.
         star_rating.paint(painter, option.rect, option.palette)
 
-    def sizeHint(self, option, index):
+    def sizeHint(self, option: widgets.QStyleOptionViewItem, index: core.ModelIndex):
         """Return the size needed to display the item in a QSize object."""
         star_rating = StarRating(index.data())
         return star_rating.sizeHint()
@@ -125,17 +130,27 @@ class StarDelegate(widgets.StyledItemDelegate):
     # If this were just a display delegate, paint() and sizeHint() would
     # be all we needed.
 
-    def createEditor(self, parent, option, index):
+    def createEditor(
+        self,
+        parent: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         """Create and return the StarEditor object we'll use to edit the StarRating."""
         editor = StarEditor(parent)
         editor.editing_finished.connect(self.commitAndCloseEditor)
         return editor
 
-    def setEditorData(self, editor: StarEditor, index):
+    def setEditorData(self, editor: StarEditor, index: core.ModelIndex):
         """Set the data to be displayed and edited by our custom editor."""
         editor.set_star_rating(index.data())
 
-    def setModelData(self, editor, model, index):
+    def setModelData(
+        self,
+        editor: widgets.QWidget,
+        model: core.QAbstractItemModel,
+        index: core.ModelIndex,
+    ):
         """Get the data from our custom editor and stuffs it into the model."""
         model.setData(index, editor.star_rating.star_count)
 

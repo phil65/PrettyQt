@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, core, gui, widgets
 
 
 class WidgetDelegate(widgets.StyledItemDelegate):
@@ -10,16 +9,21 @@ class WidgetDelegate(widgets.StyledItemDelegate):
     def __init__(
         self,
         role: constants.ItemDataRole = constants.USER_ROLE,
-        parent: QtWidgets.QAbstractItemView | None = None,
+        parent: widgets.QAbstractItemView | None = None,
     ):
         super().__init__(parent)
         self._widget_role = role
         self._editors = {}
         self._cache_editors = True
 
-    def paint(self, painter, option, index):
+    def paint(
+        self,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         value = self._editor_for_index(index)
-        if not isinstance(value, QtWidgets.QWidget):
+        if not isinstance(value, widgets.QWidget):
             super().paint(painter, option, index)
             return
         value.setGeometry(option.rect)
@@ -31,7 +35,7 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         painter.drawPixmap(option.rect, pixmap)
         # super().paint(painter, option, index)
 
-    def _editor_for_index(self, index):
+    def _editor_for_index(self, index: core.ModelIndex) -> widgets.QWidget:
         # using index.data() does not work with PyQt6, it casts widgets to QObjects
         model = index.model()
         editor = model.data(index, self._widget_role)
@@ -47,9 +51,14 @@ class WidgetDelegate(widgets.StyledItemDelegate):
         self._editors[key] = editor
         return editor
 
-    def createEditor(self, parent, option, index):
+    def createEditor(
+        self,
+        parent: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         editor = self._editor_for_index(index)
-        if isinstance(editor, QtWidgets.QWidget):
+        if isinstance(editor, widgets.QWidget):
             metaobj = core.MetaObject(editor.metaObject())
             editor = metaobj.copy(editor)
             editor.setParent(parent)
@@ -57,29 +66,34 @@ class WidgetDelegate(widgets.StyledItemDelegate):
             return editor
         return super().createEditor(parent, option, index)
 
-    def setEditorData(self, editor, index):
+    def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         pass
 
-    def setModelData(self, editor, model, index):
+    def setModelData(
+        self,
+        editor: widgets.QWidget,
+        model: core.QAbstractItemModel,
+        index: core.ModelIndex,
+    ):
         orig = self._editor_for_index(index)
-        if isinstance(orig, QtWidgets.QWidget):
+        if isinstance(orig, widgets.QWidget):
             metaobj = core.MetaObject(orig.metaObject())
             if user_prop := metaobj.get_user_property():
                 value = user_prop.read(editor)
                 user_prop.write(orig, value)
 
-    def sizeHint(self, option, index):
+    def sizeHint(self, option: widgets.QStyleOptionViewItem, index: core.ModelIndex):
         editor = self._editor_for_index(index)
-        if isinstance(editor, QtWidgets.QWidget):
+        if isinstance(editor, widgets.QWidget):
             return editor.sizeHint()
         else:
             return super().sizeHint(option, index)
 
     def updateEditorGeometry(
         self,
-        editor: QtWidgets.QWidget,
-        option: QtWidgets.QStyleOptionViewItem,
-        index: QtCore.QModelIndex,
+        editor: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
     ):
         pass
 

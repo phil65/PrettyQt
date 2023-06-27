@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
@@ -27,25 +27,40 @@ class ButtonDelegate(widgets.StyledItemDelegate):
     #         return True
     #     return super().eventFilter(source, event)
 
-    def updateEditorGeometry(self, editor, option, index):
+    def updateEditorGeometry(
+        self,
+        editor: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         editor.setGeometry(option.rect)
 
-    def createEditor(self, parent, option, index):
+    def createEditor(
+        self,
+        parent: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         btn_callback = index.data(self.method_role)
         if btn_callback is None:
             return
         return widgets.PushButton(parent=parent, text=index.data(), clicked=btn_callback)
 
-    def setEditorData(self, editor, index):
+    def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         pass
         # editor.setProperty("test", "aa")
         # editor.setText(index.data())
 
-    def setModelData(self, editor, model, index):
+    def setModelData(
+        self,
+        editor: widgets.QWidget,
+        model: core.QAbstractItemModel,
+        index: core.ModelIndex,
+    ):
         pass
         # model.setData(index, editor.property("test"))
 
-    def cell_entered(self, index):
+    def cell_entered(self, index: core.ModelIndex):
         # index = self.parent().indexFromItem(item)
         parent: QtWidgets.QAbstractItemView = self.parent()  # type: ignore
         if parent.isPersistentEditorOpen(index):
@@ -56,7 +71,12 @@ class ButtonDelegate(widgets.StyledItemDelegate):
             parent.setCurrentIndex(index)
         self.current_edited_index = index
 
-    def paint(self, painter, option, index):
+    def paint(
+        self,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         if index.data(self.method_role) is None:
             super().paint(painter, option, index)
             return
