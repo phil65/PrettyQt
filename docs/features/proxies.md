@@ -35,7 +35,8 @@ Example:
 ```
 
 Every call here basically adds another ProxyModel layer (all based on SliceIdentityProxyModel).
-The proxy models should all perform very well with large tables since they never need to loop over the whole range.
+The proxy models should all perform very well with large tables since they never need to loop over the whole column / row range.
+
 The proxifier attribute basically gives quick access to set up these proxies.
 
 ``` py
@@ -96,7 +97,7 @@ The last two modes have the advantage that nothing needs to be computed in advan
 
 In addition to the mentioned SliceFilterProxyModel, PrettyQt also contains
 several proxies based on QSortFilterProxyModel. These can be more powerful
-than our SliceFilterProxyModel, but scale with O(1) in respect to row / column count. (meaning that things might get slower for very large tables or when several proxies are layered on top of each other.)
+than the mentioned SliceFilterProxyModel, but scale with O(1) in respect to row / column count. (meaning that things might get slower for very large tables or when several proxies are layered on top of each other.)
 Some of these proxies might partly overlap in functionality, but theres always a best one one for each use case to pick.
 
 
@@ -126,13 +127,29 @@ Some of these proxies might partly overlap in functionality, but theres always a
 
 
 `RangeFilterProxyModel`
-: can filter numerical columns based on a min / max value.
+: can filter a table based on min/max values of a numerical column.
 : The properties filterKeyColumn and filterRole of the base proxy model are taken into account.
 
 
 `MulticolumnFilterProxyModel`:
 : can take a seperate search term / value for each column, thus avoiding to layer proxy models in case you want to filter based on several columns. That way it is less demanding since filtering for all columns is done in one go.
-: used by our FilterHeader widget.
+: Used by FilterHeader widget.
+
+
+## Reshape proxies
+
+`TableToListProxyModel`:
+: Stack all columns into one single column
+: To stack row-wise, use a TransposeProxyModel first.
+
+`FlattenedTreeProxyModel`:
+: Moves all rows up to the root level.
+: Label can be changed to show the complete path.
+
+`MeltProxyModel`:
+: Unpivot a Table from wide to long format.
+: same as pandas.melt, just without pandas.
+
 
 
 
