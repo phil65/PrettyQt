@@ -67,6 +67,9 @@ from .columnjoinerproxymodel import ColumnJoinerProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
 from .highlightmouseproxymodel import HighlightMouseProxyModel
 
+# Proxy tooling
+from .proxymapper import ProxyMapper
+
 __all__ = [
     "SelectionMixin",
     "TreeModel",
@@ -119,4 +122,5 @@ __all__ = [
     "HighlightCurrentProxyModel",
     "SliceColorValuesProxyModel",
     "HighlightMouseProxyModel",
+    "ProxyMapper",
 ]
