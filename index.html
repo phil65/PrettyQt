@@ -17,7 +17,7 @@
         <link rel="next" href="api/bluetooth.html">
       
       <link rel="icon" href="assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
@@ -879,6 +879,20 @@
   
   
     <li class="md-nav__item">
+      <a href="features/proxies.html" class="md-nav__link">
+        proxies
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="features/animating.html" class="md-nav__link">
         animating
       </a>
@@ -1040,7 +1054,7 @@ That way each class gets all helper methods from all sub-mixins.</p>
 <p>Example: The class "TreeView" inherits from original Qt Class "QTreeView" and gets helper methods
 from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
 "FrameMixin", "WidgetMixin" and "ObjectMixin".</p>
-<p>To illustrate this, we will use our included models:</p>
+<p>To illustrate this, we will use some of our included models:</p>
 <div class="codehilite"><pre><span></span><code><span class="kn">from</span> <span class="nn">prettyqt</span> <span class="kn">import</span> <span class="n">custom_models</span><span class="p">,</span> <span class="n">widgets</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">app</span><span class="p">()</span>
@@ -1068,13 +1082,14 @@ As you can notice, every Qt class with Subclasses has a corresponding Mixin.</p>
 and using it can be quite cumbersome for Python developers. (it´s statically typed,
 very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:</p>
 <ul>
-<li>adding more powerful methods to the classes, which accept more types and have more options</li>
-<li>points, sizes and rectangles can also be passed to all important methods as tuples.</li>
-<li>all enum getters/setters also work with strings. Everything typed with Litarals for an excellent IDE experience.</li>
-<li>python regex patterns (re.Pattern) also possible for lot of methods.</li>
-<li>adding a lot of <strong>dunder</strong> methods to the classes to make them behave like good python citizens.
-    match core.Point(a, 1)</li>
+<li>adding more powerful methods to the classes, which accept more types and have more options (in form of keyword arguments)</li>
+<li>doing conversions for method parameters to lessen the strictness for types. (Example: points, sizes and rectangles can also be passed to most important methods as tuples.)</li>
+<li>raising Exceptions or returning None instead of returning -1 or invalid objects.</li>
+<li>all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )</li>
+<li>adding a lot of <strong>dunder</strong> methods to the classes to make them behave like good python citizens.</li>
 </ul>
+<p>The minimum supported python version is 3.10. Since larger parts of the library are dealing with type conversions, the match-case statement is essential, therefore makin it impossible to use older Python versions.
+The minimum supported Qt version is 6.5, since it is the first Qt Version which is up-to-par featurewise with Qt5.</p>
 <p>Apart from the 3D related modules (Qt3D, QtDataVizualization), QtXml and QtSql,
 almost every class from Qt is covered.</p>
 <h2 id="the-covered-modules-right-now-are">The covered modules right now are:</h2>
@@ -1133,8 +1148,6 @@ package index</a>.</p>
 <h2 id="required-dependencies">Required dependencies</h2>
 <ul>
 <li><a href="https://pypi.org/project/bidict">bidict</a></li>
-<li><a href="https://pypi.org/project/regex">regex</a></li>
-<li><a href="https://pypi.org/project/docutils">docutils</a></li>
 <li><a href="https://pypi.org/project/pygments">pygments</a></li>
 <li><a href="https://pypi.org/project/qstylizer">qstylizer</a></li>
 <li><a href="https://pypi.org/project/typing_extensions">typing_extensions</a></li>
@@ -1153,6 +1166,7 @@ package index</a>.</p>
 <li><a href="https://pypi.org/project/qtconsole">qtconsole</a></li>
 <li><a href="https://pypi.org/project/pillow">pillow</a></li>
 <li><a href="https://pypi.org/project/fsspec">fsspec</a></li>
+<li><a href="https://pypi.org/project/docutils">docutils</a></li>
 </ul>
 <h2 id="installation-from-sources">Installation from sources</h2>
 <p>This project uses poetry for dependency management and packaging. Install this first.
@@ -1253,7 +1267,7 @@ cloning the git repo), execute:</p>
     <script id="__config" type="application/json">{"base": ".", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "navigation.instant", "navigation.tracking", "navigation.path", "navigation.tabs", "toc.follow", "navigation.top", "navigation.sections"], "search": "assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="assets/javascripts/bundle.b425cdc4.min.js"></script>
       
     
   </body>

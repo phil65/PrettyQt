@@ -19,7 +19,7 @@
         <link rel="next" href="../changelog.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
@@ -814,6 +814,20 @@
   
   
     <li class="md-nav__item">
+      <a href="proxies.html" class="md-nav__link">
+        proxies
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="animating.html" class="md-nav__link">
         animating
       </a>
@@ -851,54 +865,9 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          validators
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="validators.html" class="md-nav__link md-nav__link--active">
         validators
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#models-for-python-types" class="md-nav__link">
-    Models for Python types
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#models-for-qt-types" class="md-nav__link">
-    Models for Qt Types
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proxies" class="md-nav__link">
-    Proxies
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
       
     </li>
   
@@ -946,35 +915,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#models-for-python-types" class="md-nav__link">
-    Models for Python types
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#models-for-qt-types" class="md-nav__link">
-    Models for Qt Types
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#proxies" class="md-nav__link">
-    Proxies
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -995,14 +935,51 @@
 
 
 <h1 id="validators">Validators</h1>
-<p>PrettyQt includes a range of models for Qt-based types, Python built-in types as well as
-some models for data structures of external libraries.</p>
-<h2 id="models-for-python-types">Models for Python types</h2>
-<h3 id="dataclassmodel">DataclassModel</h3>
-<p>...</p>
-<h2 id="models-for-qt-types">Models for Qt Types</h2>
-<h2 id="proxies">Proxies</h2>
-<p>Every Model has a "proxifier" attribute which gives quick access to proxy models.</p>
+<p>PrettyQt includes a range of pre-defined validators.</p>
+<p>The following validators are included:</p>
+<p><code>AlphanumericValidator</code></p>
+<p><code>BlacklistValidator</code></p>
+<p><code>ColorValidator</code></p>
+<p><code>CompositeValidator</code></p>
+<p><code>HexValidator</code></p>
+<p><code>IntegerValidator</code></p>
+<p><code>JsonValidator</code></p>
+<p><code>MonotonicListValidator</code></p>
+<p><code>NotStrictValidator</code></p>
+<p><code>PathValidator</code>
+- allows strings which represent an existing path. Can be set to either accept files, folders or both.</p>
+<p><code>PythonCodeValidator</code>
+- allows a string which can be parsed by ast.parse</p>
+<p><code>QssValidator</code>
+- allows a string which can be parsed as CSS.</p>
+<p><code>RegexPatternValidator</code>
+- allows a string which can be parsed as a regular expression.</p>
+<p><code>IntListValidator</code>
+- allows a comma separated list of integers</p>
+<p><code>FloatListValidator</code>
+- allows a comma separated list of floats</p>
+<p><code>ScientificIntegerValidator</code>
+ - for integers in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.</p>
+<p><code>ScientificFloatValidator</code>
+ - for floats in scientific annotation. also allows SI unit prefix like 'M', 'n' etc.</p>
+<p><code>TextLengthValidator</code>
+- allows limiting textlength to a given minimum / maximim</p>
+<p><code>WhitelistValidator</code>
+- whitelist specific strings</p>
+<p><code>FunctionValidator</code>
+- validate string based on a Callable (Signature: Callable[[str], bool])</p>
+<p>Apart from LineEdits, PlainTextEdits also gained the ability to take a validator.</p>
+<p>The set_validator method also gained a "strict" keyword argument, which wraps the passed
+validator into a NotStrictValidator, effectively removing the "Invalid" state. That way
+there never is a situation where the user input is ignored, which might be preferred in a lot of situations.</p>
+<p>The acceptance of "" may also be overriden explicitely by setting the "allow_empty" keyword argument.</p>
+<p>Validators which inherit from gui.Validator also can be combined.</p>
+<p>Example:
+    and_val = BlackListValidator(["Blacklisted word"]) &amp; AlphanumericValidator()  # returns an AndValidator
+    or_val = AlphanumericValidator() | RegularExpressionValidator("some_regex") # returns an OrValidator</p>
+<p>Validators can also be set by an id. Since everything is typed with Literals, the possible ids should be shown by your IDE.</p>
+<div class="codehilite"><pre><span></span><code>lineedit.set_validator(&quot;float&quot;)
+</code></pre></div>
 
 
 
@@ -1089,7 +1066,7 @@ some models for data structures of external libraries.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "navigation.instant", "navigation.tracking", "navigation.path", "navigation.tabs", "toc.follow", "navigation.top", "navigation.sections"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.b425cdc4.min.js"></script>
       
     
   </body>

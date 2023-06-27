@@ -2,177 +2,227 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://phil65.github.io/PrettyQt/index.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/api_guidelines.html</loc>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/changelog.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/bluetooth.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/charts.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/constants.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/core.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_delegates.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_models.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_validators.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/custom_widgets.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/gui.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/location.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/multimedia.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/multimediawidgets.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/network.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/objbrowser.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/pdf.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/pdfwidgets.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/positioning.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/qml.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/qthelp.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/quick.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/quickwidgets.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/svg.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/syntaxhighlighters.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/texttospeech.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/webenginecore.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/webenginewidgets.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/api/widgets.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/animating.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/delegates.html</loc>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/layouts.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/models.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/pandas.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/proxies.html</loc>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/validators.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://phil65.github.io/PrettyQt/features/widgets.html</loc>
-         <lastmod>2023-06-21</lastmod>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/astviewer.html</loc>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/commandpalette.html</loc>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/configwidget.html</loc>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/editors.html</loc>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/filterheader.html</loc>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/regexeditor.html</loc>
+         <lastmod>2023-06-27</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://phil65.github.io/PrettyQt/features/widgets/scrollareatocwidget.html</loc>
+         <lastmod>2023-06-27</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>

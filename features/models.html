@@ -16,10 +16,10 @@
         <link rel="prev" href="layouts.html">
       
       
-        <link rel="next" href="animating.html">
+        <link rel="next" href="proxies.html">
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
@@ -824,20 +824,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#proxy-models" class="md-nav__link">
-    Proxy Models
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#other-proxies" class="md-nav__link">
-    Other Proxies
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -921,24 +907,24 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#proxy-models" class="md-nav__link">
-    Proxy Models
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#other-proxies" class="md-nav__link">
-    Other Proxies
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="proxies.html" class="md-nav__link">
+        proxies
+      </a>
     </li>
   
 
@@ -1054,20 +1040,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#proxy-models" class="md-nav__link">
-    Proxy Models
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#other-proxies" class="md-nav__link">
-    Other Proxies
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -1157,92 +1129,6 @@ Works by inspecting the MetaObject of the QObjects.</dd>
 <dd>Model for a detailed ColumnView</dd>
 </dl>
 <p>Scikit-learn</p>
-<h2 id="proxy-models">Proxy Models</h2>
-<p>Every Class containing the AbstractItemViewMixin (widgets.TreeView, widgets.TableView, ...)
-has quick access to proxy superpowers hidden behind the "proxifier" attribute.</p>
-<p>Proxy models can be categorized</p>
-<h3 id="slice-proxies">Slice proxies</h3>
-<p>A lot of proxy models can be selectively applied by using python slicing syntax.
-Each slice proxy can take an indexer and can be quickly set up via our proxifier.</p>
-<p>Example:</p>
-<div class="language-py highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">MyTableModel</span><span class="p">()</span>
-</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">table</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">TableView</span><span class="p">()</span>
-</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="n">table</span><span class="o">.</span><span class="n">set_model</span><span class="p">(</span><span class="n">model</span><span class="p">)</span>
-</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="c1"># lets change the appearance a bit.</span>
-</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="c1"># Set the font color of column 2 and 3 to red and font to Courier.</span>
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="n">table</span><span class="o">.</span><span class="n">proxifier</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">4</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">style</span><span class="p">(</span><span class="n">foreground</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="s2">&quot;Courier&quot;</span><span class="p">)</span>
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="c1"># Cut off last column and only show last 50 lines.</span>
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">table</span><span class="o">.</span><span class="n">proxifier</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="p">:</span><span class="mi">50</span><span class="p">]</span><span class="o">.</span><span class="n">filter</span><span class="p">()</span>
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="c1"># Set first 20 lines of these 50 lines to read_only</span>
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="n">table</span><span class="o">.</span><span class="n">proxifier</span><span class="p">[:,</span> <span class="p">:</span><span class="mi">20</span><span class="p">]</span><span class="o">.</span><span class="n">set_read_only</span><span class="p">()</span>
-</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
-</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>    <span class="c1"># Make first column checkable and trigger callback on checkstate change.</span>
-</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>    <span class="n">table</span><span class="o">.</span><span class="n">proxifier</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="p">:]</span><span class="o">.</span><span class="n">make_checkable</span><span class="p">(</span><span class="n">callback</span><span class="o">=</span><span class="n">my_callback</span><span class="p">)</span>
-</span></code></pre></div>
-<p>Every call here basically adds another ProxyModel layer (all based on SliceIdentityProxyModel).
-The proxy models should all perform very well with large tables since they never need to loop over the whole range.</p>
-<p>Here is a short overview of the included slice proxies:</p>
-<dl>
-<dt><code>SliceFilterProxyModel</code></dt>
-<dd>ProxyModel which can filter columns and rows based on slices.</dd>
-<dd>Implemented as IdentityProxyModel instead of a FilterProxyModel
-in order to perform well with large tables.</dd>
-<dt><code>SliceAppearanceProxyModel</code></dt>
-<dd>Applies styling to given slice by overriding font, color and alignment roles.</dd>
-<dt><code>CheckableProxyModel</code></dt>
-<dd>Puts a checkbox into each cell and emits a signal containing the relevant index when any checkbox changes state.</dd>
-<dt><code>ChangeIconSizeProxymodel</code></dt>
-<dd>Allows to change the size of the Icon / Pixmap shown for DecorationRole.
-Changed icons / pixmaps are cached for performance reasons.</dd>
-</dl>
-<h3 id="sortfilter-proxies">Sort/Filter proxies.</h3>
-<p>In addition to the mentioned SliceFilterProxyModel, PrettyQt also contains
-several proxies based on QSortFilterProxyModel. These can be more powerful
-than our SliceFilterProxyModel, but scale with O(1) in respect to row / column count. (meaning that things might get slower for very large tables or when several proxies are layered on top of each other.)
-Some of these proxies might partly overlap in functionality, but theres always a best one one for each use case to pick.</p>
-<dl>
-<dt><code>FuzzyFilterProxyModel</code></dt>
-<dd>Model to make implementing CommandPalettes a la SubimeText or VS Code super easy.</dd>
-<dd>A FilterProxyModel which sorts the results based on a matching score. Best matches are shown at the top.</dd>
-<dd>Exposes matching score via a custom UserRole if desired.</dd>
-<dd>Can also color the found Substring by converting the display role to an HTML representation when combined with our "HtmlItemDelegate", which allows to display HTML in ItemView cells.</dd>
-<dt><code>ValueFilterProxymodel</code></dt>
-<dd>like the original QSortFilterProxyModel, but also works with non-str values.</dd>
-<dd>can be used for example to filter by checkstate role, or by any custom data behind any UserRole.</dd>
-<dd>The properties filterKeyColumn and filterRole of the base proxy model are taken into account.</dd>
-<dt><code>SubsetFilterProxyModel</code></dt>
-<dd>Can filter rows / columns based on slices, index, a filter function, a list of indexes (like columns [0, 3, 7])</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you only need filtering based on slices or a single column / row,
-the SliceFilterProxymodel should be preferred for performance reasons.</p>
-</div>
-<dl>
-<dt><code>PredicateFilterProxyModel</code></dt>
-<dd>The properties filterKeyColumn and filterRole of the base proxy model are taken into account.</dd>
-<dt><code>RangeFilterProxyModel</code></dt>
-<dd>can filter numerical columns based on a min / max value.</dd>
-<dd>The properties filterKeyColumn and filterRole of the base proxy model are taken into account.</dd>
-<dt><code>MulticolumnFilterProxyModel</code>:</dt>
-<dd>can take a seperate search term / value for each column, thus avoiding to layer proxy models in case you want to filter based on several columns. That way it is less demanding since filtering for all columns is done in one go.</dd>
-<dd>used by our FilterHeader widget.</dd>
-</dl>
-<h2 id="other-proxies">Other Proxies</h2>
-<dl>
-<dt><code>ColorValuesProxyModel</code></dt>
-<dd>Color cells based on their value (i.e. low numbers shown in green, high numbers shown in red.)</dd>
-<dd>To color cells, this proxy needs a minimum and maximum value. Three modes are available:</dd>
-<dd>Let the user choose a min max value.</dd>
-<dd>Use min max value from currently visible table section.</dd>
-<dd>use min max value from "seen" table content. (meaning that the model adapts min max values based.)</dd>
-</dl>
-<p>The last two modes have the advantage that nothing needs to be computed in advance, min/max values are calculated on-the fly.</p>
-<p><code>HighlightMouseProxymodel</code></p>
 
 
 
@@ -1329,7 +1215,7 @@ the SliceFilterProxymodel should be preferred for performance reasons.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "navigation.instant", "navigation.tracking", "navigation.path", "navigation.tabs", "toc.follow", "navigation.top", "navigation.sections"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.b425cdc4.min.js"></script>
       
     
   </body>

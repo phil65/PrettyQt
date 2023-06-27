@@ -15,7 +15,7 @@
       
       
       <link rel="icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.17">
     
     
       
@@ -806,6 +806,20 @@
   
   
     <li class="md-nav__item">
+      <a href="proxies.html" class="md-nav__link">
+        proxies
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="animating.html" class="md-nav__link">
         animating
       </a>
@@ -954,11 +968,11 @@ a pandas category column.</p>
 <p>Since working with pandas often means working with tables containing several hundred thousands of rows,
 the default QSortFilterProxyModel does not work that well.</p>
 <p>PrettyQt includes several proxy models which try to improve this.</p>
-<p>PandasStringColumnFilterModel can be used to filter a column based on a search string.
+<p>PandasStringColumnFilterProxyModel can be used to filter a column based on a search string.
 Instead of looping over the cells, a filter index is built using NumPy operations.
 This makes filtering super fast, even with several thousands of rows.
 A quick benchmark showed an almost 100x (!!) performance increase compared to QSortFilterProxyModel.</p>
-<p>PandasEvalFilterModel works in a similar way, but filtering is done by a Python statement.
+<p>PandasEvalFilterProxyModel works in a similar way, but filtering is done by a Python statement.
 (example: '"a" &gt; 10' would show all rows where the value of column "a" is greater than 10.)</p>
 <p>To display heatmaps, PrettyQt also includes a proxy model to color the cells according to their values.
 That proxy model includes several modes, also including modes which dont need to pre-compute min-max values,</p>
@@ -1053,7 +1067,7 @@ on-the-fly.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["content.code.copy", "content.code.select", "content.code.annotate", "navigation.instant", "navigation.tracking", "navigation.path", "navigation.tabs", "toc.follow", "navigation.top", "navigation.sections"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.b425cdc4.min.js"></script>
       
     
   </body>
