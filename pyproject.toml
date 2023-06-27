@@ -249,7 +249,7 @@ log_date_format = "%Y-%m-%d %H:%M:%S"
 
 [tool.mypy]
 python_version = "3.10"
-disable_error_code = ["assignment", "misc", "attr-defined", "import", "no-any-expr"]
+disable_error_code = ["assignment", "misc", "attr-defined", "import", "no-any-expr", "misc", "attr-defined"]
 
 # exclude = [
 #     "^one\\.py$",  # TOML's double-quoted strings require escaping backslashes

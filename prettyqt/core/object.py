@@ -65,7 +65,7 @@ class ObjectMixin:
                 if camel_k in mapper and isinstance(v, str):
                     new[camel_k] = mapper[camel_k][v]
                 # allow str values for common icon kwargs
-                elif k in {"window_icon", "icon"} and isinstance(v, str):
+                elif camel_k in {"windowIcon", "icon"} and isinstance(v, str):
                     from prettyqt import iconprovider
 
                     new[camel_k] = iconprovider.get_icon(v)
