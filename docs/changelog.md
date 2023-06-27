@@ -1,3 +1,43 @@
+## v1.50.0 (2023-06-27)
+
+### Feat
+
+- **TreeView**: add expand_all method
+- **FilterHeader**: use NumFilterWidget for numerical columns
+- **MultiColumnFilterProxyModel**: add support for callables
+- add NumFilterWidget
+- add ColumnOrderProxyModel
+- **Proxifier**: add melt method
+- add ProxyMapper
+- add MeltProxyModel
+- **PandasIndexFilterProxyModel**: add endswith filter mode
+- **DateTimeAxis**: add some datetime-related methods
+- **Object**: add bind_property classmethod
+- add FunctionValidator
+- **VariantDelegate**: add validator kwarg
+- add StringListLineEdit
+- **LineEdit**: add append kwarg
+- **ProgressBarDelegate**: support choosing a custom role
+- add RangeEdit and SliceEdit
+- **Proxifier**: add change_icon_size
+- **StandardItemModel**: set ItemPrototype to our own subclass
+- **StandardItemModel**: add from_dict method
+- **XmlModel**: also support lxml.etree
+- slicing support for Grid/GraphicsGridlayout
+- **Object**: types.UnionType support for Object.find_child
+- **PathValidator**: add mode setting (any, file, folder)
+- **LineEdit**: allow explicitely overriding empty handling for validators
+- **Proxifier**: change set_read_only to a more general change_flags method
+
+### Fix
+
+- **Widget**: fix map_to/from("window", ...)
+- **EnumFlagWidget**: fix behaviour for non-power-of-2 flags
+- **EventLoop**: typo in execute()
+- **TableToListProxyModel**: emit headerDataChanged signal on header change
+- **EnumFlagWidget**: filter None to workaround Qt flag bug
+- **DoubleValidator**: correct default for set_range decimals kwarg
+
 ## v1.49.0 (2023-06-21)
 
 ### Feat
