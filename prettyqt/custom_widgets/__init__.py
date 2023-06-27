@@ -50,6 +50,7 @@ from .editors.inputandslider import InputAndSlider
 from .editors.spanslider import SpanSlider, SpanSliderWidget
 from .labeledslider import LabeledSlider
 from .waitingspinner import WaitingSpinner
+from numfilterwidget import NumFilterWidget
 from .popupinfo import PopupInfo
 from .editors.selectionwidget import SelectionWidget
 from .codeeditor import CodeEditor
@@ -119,6 +120,7 @@ __all__ = [
     "FontChooserButton",
     "InputAndSlider",
     "SpanSlider",
+    "NumFilterWidget",
     "SpanSliderWidget",
     "LabeledSlider",
     "WaitingSpinner",
