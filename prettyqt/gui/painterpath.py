@@ -63,16 +63,7 @@ class PainterPath(QtGui.QPainterPath):
         return self.contains(item)
 
     def add_rect(self, rect: datatypes.RectType | datatypes.RectFType):
-        match rect:
-            case QtCore.QRect():
-                rect = rect.toRectF()
-            case (float(), float(), float(), float()):
-                rect = QtCore.QRectF(*rect)
-            case QtCore.QRect() | QtCore.QRectF():
-                pass
-            case _:
-                raise TypeError(rect)
-        self.addRect(rect)
+        self.addRect(datatypes.to_rectf(rect))
 
     def set_fill_rule(self, rule: constants.FillRuleStr):
         """Set fill rule.

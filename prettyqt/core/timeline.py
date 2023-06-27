@@ -56,13 +56,16 @@ class TimeLine(core.ObjectMixin, QtCore.QTimeLine):
         return STATE.inverse[self.state()]
 
     def set_easing(
-        self, easing_type: core.easingcurve.TypeStr | Callable[[float], float]
+        self,
+        easing_type: core.easingcurve.TypeStr
+        | core.QEasingCurve.Type
+        | Callable[[float], float],
     ) -> core.EasingCurve:
         curve = core.EasingCurve()
-        if isinstance(easing_type, str):
-            curve.set_type(easing_type)
-        else:
+        if callable(easing_type):
             curve.set_custom_type(easing_type)
+        else:
+            curve.set_type(easing_type)
         self.setEasingCurve(curve)
         return curve
 

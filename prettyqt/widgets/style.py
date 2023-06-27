@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 StandardPixmapStr = Literal[
@@ -756,36 +756,36 @@ State: bidict[StateStr, st] = bidict(
 class StyleMixin(core.ObjectMixin):
     def draw_primitive(
         self,
-        element: SubControlStr,
+        element: SubControlStr | mod.SubControl,
         option: QtWidgets.QStyleOption,
         painter: QtGui.QPainter,
         widget: QtWidgets.QWidget | None = None,
     ):
-        if element not in PRIMITIVE_ELEMENT:
-            raise InvalidParamError(element, PRIMITIVE_ELEMENT)
-        self.drawPrimitive(PRIMITIVE_ELEMENT[element], option, painter, widget)
+        self.drawPrimitive(
+            PRIMITIVE_ELEMENT.get_enum_value(element), option, painter, widget
+        )
 
     def draw_control(
         self,
-        control: ControlElementStr,
+        control: ControlElementStr | mod.ControlElement,
         option: QtWidgets.QStyleOption,
         painter: QtGui.QPainter,
         widget: QtWidgets.QWidget | None = None,
     ):
-        if control not in CONTROL_ELEMENT:
-            raise InvalidParamError(control, CONTROL_ELEMENT)
-        self.drawPrimitive(CONTROL_ELEMENT[control], option, painter, widget)
+        self.drawPrimitive(
+            CONTROL_ELEMENT.get_enum_value(control), option, painter, widget
+        )
 
     def get_layout_spacing(
         self,
-        control_1: widgets.sizepolicy.ControlTypeStr,
-        control_2: widgets.sizepolicy.ControlTypeStr,
-        orientation: constants.OrientationStr,
+        control_1: widgets.sizepolicy.ControlTypeStr | widgets.QSizePolicy.ControlType,
+        control_2: widgets.sizepolicy.ControlTypeStr | widgets.QSizePolicy.ControlType,
+        orientation: constants.OrientationStr | constants.Orientation,
         option_or_widget: QtWidgets.QStyleOption | QtWidgets.QWidget | None = None,
     ):
-        c1 = widgets.sizepolicy.CONTROL_TYPE[control_1]
-        c2 = widgets.sizepolicy.CONTROL_TYPE[control_2]
-        o = constants.ORIENTATION[orientation]
+        c1 = widgets.sizepolicy.CONTROL_TYPE.get_enum_value(control_1)
+        c2 = widgets.sizepolicy.CONTROL_TYPE.get_enum_value(control_2)
+        o = constants.ORIENTATION.get_enum_value(orientation)
         match option_or_widget:
             case QtWidgets.QWidget():
                 return self.layoutSpacing(c1, c2, o, None, option_or_widget)

@@ -146,9 +146,6 @@ class TabBarMixin(widgets.WidgetMixin):
 
         Args:
             mode: elide mode to use
-
-        Raises:
-            InvalidParamError: invalid elide mode
         """
         self.setElideMode(constants.TEXT_ELIDE_MODE.get_enum_value(mode))
 

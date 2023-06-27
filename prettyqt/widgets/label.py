@@ -1,36 +1,12 @@
 from __future__ import annotations
 
 import os
-from typing import Literal
 
 from typing_extensions import Self
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes, get_repr
-
-
-TEXT_INTERACTION = bidict(
-    none=QtCore.Qt.TextInteractionFlag.NoTextInteraction,
-    by_mouse=QtCore.Qt.TextInteractionFlag.TextSelectableByMouse,
-    by_keyboard=QtCore.Qt.TextInteractionFlag.TextSelectableByKeyboard,
-    accessible_by_mouse=QtCore.Qt.TextInteractionFlag.LinksAccessibleByMouse,
-    accessible_by_keyboard=QtCore.Qt.TextInteractionFlag.LinksAccessibleByKeyboard,
-    text_editable=QtCore.Qt.TextInteractionFlag.TextEditable,
-    like_text_editor=QtCore.Qt.TextInteractionFlag.TextEditorInteraction,
-    like_text_browser=QtCore.Qt.TextInteractionFlag.TextBrowserInteraction,
-)
-
-TextInteractionStr = Literal[
-    "none",
-    "by_mouse",
-    "by_keyboard",
-    "accessible_by_mouse",
-    "accessible_by_keyboard",
-    "text_editable",
-    "like_text_editor",
-    "like_text_browser",
-]
+from prettyqt.utils import colors, datatypes, get_repr
 
 
 class Label(widgets.FrameMixin, QtWidgets.QLabel):
@@ -206,18 +182,15 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.setIndent(indent)
         return self
 
-    def set_text_format(self, text_format: constants.TextFormatStr) -> Label:
+    def set_text_format(
+        self, text_format: constants.TextFormatStr | constants.TextFormat
+    ) -> Label:
         """Set the text format.
 
         Args:
             text_format: text format to use
-
-        Raises:
-            InvalidParamError: text format does not exist
         """
-        if text_format not in constants.TEXT_FORMAT:
-            raise InvalidParamError(text_format, constants.TEXT_FORMAT)
-        self.setTextFormat(constants.TEXT_FORMAT[text_format])
+        self.setTextFormat(constants.TEXT_FORMAT.get_enum_value(text_format))
         return self
 
     def get_text_format(self) -> constants.TextFormatStr:
@@ -228,7 +201,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         """
         return constants.TEXT_FORMAT.inverse[self.textFormat()]
 
-    def set_text_interaction(self, *types: TextInteractionStr) -> Label:
+    def set_text_interaction(self, *types: constants.TextInteractionStr) -> Label:
         """Set the text interaction mode.
 
         Args:
@@ -237,20 +210,17 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         Raises:
             InvalidParamError: text interaction mode does not exist
         """
-        for item in types:
-            if item not in TEXT_INTERACTION:
-                raise InvalidParamError(item, TEXT_INTERACTION)
-        flags = TEXT_INTERACTION.merge_flags(types)
+        flags = constants.TEXT_INTERACTION.merge_flags(types)
         self.setTextInteractionFlags(flags)
         return self
 
-    def get_text_interaction(self) -> list[TextInteractionStr]:
+    def get_text_interaction(self) -> list[constants.TextInteractionStr]:
         """Return current text interaction mode.
 
         Returns:
             list of text interaction modes
         """
-        return TEXT_INTERACTION.get_list(self.textInteractionFlags())
+        return constants.TEXT_INTERACTION.get_list(self.textInteractionFlags())
 
     def set_text(self, text: str) -> Label:
         """Set the label's text."""
@@ -275,19 +245,14 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.setFont(font)
         return self
 
-    def set_weight(self, weight: gui.font.WeightStr) -> Label:
+    def set_weight(self, weight: gui.font.WeightStr | gui.QFont.Weight) -> Label:
         """Set the font weight.
 
         Args:
             weight: font weight
-
-        Raises:
-            InvalidParamError: invalid font weight
         """
-        if weight not in gui.font.WEIGHT:
-            raise InvalidParamError(weight, gui.font.WEIGHT)
         font = self.font()
-        font.setWeight(gui.font.WEIGHT[weight])
+        font.setWeight(gui.font.WEIGHT.get_enum_value(weight))
         self.setFont(font)
         return self
 

@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 CorrectionModeStr = Literal["to_previous", "to_nearest"]
@@ -70,31 +70,23 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin):
         """
         return SYMBOLS.inverse[self.buttonSymbols()]
 
-    def set_button_symbols(self, mode: SymbolStr):
+    def set_button_symbols(self, mode: SymbolStr | QtWidgets.QSpinBox.ButtonSymbols):
         """Set button symbol type.
 
         Args:
             mode: button symbol type to use
-
-        Raises:
-            InvalidParamError: invalid button symbol type
         """
-        if mode not in SYMBOLS:
-            raise InvalidParamError(mode, SYMBOLS)
-        self.setButtonSymbols(SYMBOLS[mode])
+        self.setButtonSymbols(SYMBOLS.get_enum_value(mode))
 
-    def set_correction_mode(self, mode: CorrectionModeStr):
+    def set_correction_mode(
+        self, mode: CorrectionModeStr | QtWidgets.QSpinBox.CorrectionMode
+    ):
         """Set correction mode.
 
         Args:
             mode: correction mode to use
-
-        Raises:
-            InvalidParamError: invalid correction mode
         """
-        if mode not in CORRECTION_MODES:
-            raise InvalidParamError(mode, CORRECTION_MODES)
-        self.setCorrectionMode(CORRECTION_MODES[mode])
+        self.setCorrectionMode(CORRECTION_MODES.get_enum_value(mode))
 
     def get_correction_mode(self) -> CorrectionModeStr:
         """Return correction mode.
@@ -104,18 +96,13 @@ class AbstractSpinBoxMixin(widgets.WidgetMixin):
         """
         return CORRECTION_MODES.inverse[self.correctionMode()]
 
-    def set_step_type(self, mode: StepTypeStr):
+    def set_step_type(self, mode: StepTypeStr | QtWidgets.QSpinBox.StepType):
         """Set step type.
 
         Args:
             mode: step type to use
-
-        Raises:
-            InvalidParamError: invalid step type
         """
-        if mode not in STEP_TYPES:
-            raise InvalidParamError(mode, STEP_TYPES)
-        self.setStepType(STEP_TYPES[mode])
+        self.setStepType(STEP_TYPES.get_enum_value(mode))
 
     def get_step_type(self) -> StepTypeStr:
         """Return step type.

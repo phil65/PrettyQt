@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import gui, widgets
 from prettyqt.qt import Qsci, QtGui  # type: ignore
-from prettyqt.utils import InvalidParamError, bidict, colors, datatypes
+from prettyqt.utils import bidict, colors, datatypes
 
 
 ARROW_MARKER_NUM = 8
@@ -220,17 +220,17 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
             color = colors.get_color(color)
         self.setCaretLineBackgroundColor(color)
 
-    def set_brace_matching(self, match_type: MatchTypeStr | None):
+    def set_brace_matching(
+        self, match_type: MatchTypeStr | Qsci.QsciScintilla.BraceMatch | None
+    ):
         if match_type is None:
             match_type = "none"
-        if match_type not in MATCH_TYPE:
-            raise InvalidParamError(match_type, MATCH_TYPE)
-        self.setBraceMatching(MATCH_TYPE[match_type])
+        self.setBraceMatching(MATCH_TYPE.get_enum_value(match_type))
 
-    def define_marker(self, marker: MarkerStr, num: int):
-        if marker not in MARKER:
-            raise InvalidParamError(marker, MARKER)
-        self.markerDefine(MARKER[marker], num)
+    def define_marker(
+        self, marker: MarkerStr | Qsci.QsciScintilla.MarkerSymbol, num: int
+    ):
+        self.markerDefine(MARKER.get_enum_value(marker), num)
 
     def set_text(self, text: str):
         self.setText(text)
@@ -271,12 +271,10 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
         else:
             self.markerAdd(nline, marker_num)
 
-    def set_wrap_mode(self, mode: WrapModeStr | None):
+    def set_wrap_mode(self, mode: WrapModeStr | Qsci.QsciScintilla.WrapMode | None):
         if mode is None:
             mode = "none"
-        if mode not in WRAP_MODE:
-            raise InvalidParamError(mode, WRAP_MODE)
-        self.setWrapMode(WRAP_MODE[mode])
+        self.setWrapMode(WRAP_MODE.get_enum_value(mode))
 
     def get_value(self) -> str:
         return self.text()

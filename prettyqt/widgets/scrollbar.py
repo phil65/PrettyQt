@@ -53,7 +53,7 @@ class SmoothScrollBar(ScrollBar):
         orientation: QtCore.Qt.Orientation | constants.OrientationStr = "horizontal",
         parent: QtWidgets.QAbstractScrollArea | None = None,
         animation_duration: int = 500,
-        easing: core.easingcurve.TypeStr = "out_cubic",
+        easing: core.easingcurve.TypeStr | core.QEasingCurve.Type = "out_cubic",
         trigger: bool = False,
     ):
         super().__init__(orientation, parent)

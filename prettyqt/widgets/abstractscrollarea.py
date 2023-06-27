@@ -4,7 +4,7 @@ from typing import Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import InvalidParamError, bidict
+from prettyqt.utils import bidict
 
 
 area = QtWidgets.QAbstractScrollArea
@@ -57,18 +57,13 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         self.h_scrollbar.setValue(x_val)
         self.v_scrollbar.setValue(y_val)
 
-    def set_size_adjust_policy(self, policy: SizeAdjustPolicyStr):
+    def set_size_adjust_policy(self, policy: SizeAdjustPolicyStr | area.SizeAdjustPolicy):
         """Set size adjust policy.
 
         Args:
             policy: size adjust policy to use
-
-        Raises:
-            InvalidParamError: invalid size adjust policy
         """
-        if policy not in SIZE_ADJUST_POLICY:
-            raise InvalidParamError(policy, SIZE_ADJUST_POLICY)
-        self.setSizeAdjustPolicy(SIZE_ADJUST_POLICY[policy])
+        self.setSizeAdjustPolicy(SIZE_ADJUST_POLICY.get_enum_value(policy))
 
     def get_size_adjust_policy(self) -> SizeAdjustPolicyStr:
         """Return size adjust policy.
@@ -82,7 +77,7 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         self,
         value: bool = True,
         animation_duration: int = 500,
-        easing: core.easingcurve.TypeStr = "out_cubic",
+        easing: core.easingcurve.TypeStr | core.QEasingCurve.Type = "out_cubic",
     ):
         if value:
             self.h_scrollbar = widgets.SmoothScrollBar(
@@ -101,48 +96,39 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
             self.h_scrollbar = widgets.ScrollBar(parent=self)
             self.v_scrollbar = widgets.ScrollBar(parent=self)
 
-    def set_scrollbar_policy(self, mode: constants.ScrollBarPolicyStr):
+    def set_scrollbar_policy(
+        self, mode: constants.ScrollBarPolicyStr | constants.ScrollBarPolicy
+    ):
         """Set the policy for both scrollbars.
 
         Args:
             mode: visibilty to set
-
-        Raises:
-            InvalidParamError: invalid scrollbar policy
         """
-        if mode not in constants.SCROLLBAR_POLICY:
-            raise InvalidParamError(mode, constants.SCROLLBAR_POLICY)
-        self.setHorizontalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
-        self.setVerticalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
+        self.setHorizontalScrollBarPolicy(constants.SCROLLBAR_POLICY.get_enum_value(mode))
+        self.setVerticalScrollBarPolicy(constants.SCROLLBAR_POLICY.get_enum_value(mode))
 
-    def set_horizontal_scrollbar_policy(self, mode: constants.ScrollBarPolicyStr):
+    def set_horizontal_scrollbar_policy(
+        self, mode: constants.ScrollBarPolicyStr | constants.ScrollBarPolicy
+    ):
         """Set the horizontal scrollbar visibility.
 
         Args:
             mode: visibilty to set
-
-        Raises:
-            InvalidParamError: invalid scrollbar policy
         """
-        if mode not in constants.SCROLLBAR_POLICY:
-            raise InvalidParamError(mode, constants.SCROLLBAR_POLICY)
         self.setHorizontalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
 
     def get_horizontal_scrollbar_policy(self) -> constants.ScrollBarPolicyStr:
         return constants.SCROLLBAR_POLICY.inverse[self.horizontalScrollBarPolicy()]
 
-    def set_vertical_scrollbar_policy(self, mode: constants.ScrollBarPolicyStr):
+    def set_vertical_scrollbar_policy(
+        self, mode: constants.ScrollBarPolicyStr | constants.ScrollBarPolicy
+    ):
         """Set the vertical scrollbar visibility.
 
         Args:
             mode: visibilty to set
-
-        Raises:
-            InvalidParamError: invalid scrollbar policy
         """
-        if mode not in constants.SCROLLBAR_POLICY:
-            raise InvalidParamError(mode, constants.SCROLLBAR_POLICY)
-        self.setVerticalScrollBarPolicy(constants.SCROLLBAR_POLICY[mode])
+        self.setVerticalScrollBarPolicy(constants.SCROLLBAR_POLICY.get_enum_value(mode))
 
     def get_vertical_scrollbar_policy(self) -> constants.ScrollBarPolicyStr:
         return constants.SCROLLBAR_POLICY.inverse[self.verticalScrollBarPolicy()]
@@ -186,9 +172,11 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         self.setViewportMargins(margins, margins, margins, margins)
 
     def add_scrollbar_widget(
-        self, widget: QtWidgets.QWidget, alignment: constants.AlignmentStr
+        self,
+        widget: QtWidgets.QWidget,
+        alignment: constants.AlignmentStr | constants.AlignmentFlag,
     ):
-        alignment = constants.ALIGNMENTS[alignment]
+        alignment = constants.ALIGNMENTS.get_enum_value(alignment)
         self.addScrollBarWidget(widget, alignment)
 
 

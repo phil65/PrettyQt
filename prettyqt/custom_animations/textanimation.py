@@ -51,7 +51,7 @@ class TextAnimation(core.PropertyAnimation):
     def set_end_value(self, value: datatypes.VariantType):
         self._child_anim.set_end_value(value)
 
-    def set_easing(self, easing: core.easingcurve.TypeStr):
+    def set_easing(self, easing: core.easingcurve.TypeStr | core.QEasingCurve.Type):
         super().set_easing(easing)
         self._child_anim.set_easing(easing)
 

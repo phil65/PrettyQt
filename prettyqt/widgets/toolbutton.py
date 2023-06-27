@@ -6,8 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, widgets
 from prettyqt.qt import QtGui, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
-
+from prettyqt.utils import bidict, datatypes
 
 
 PopupModeStr = Literal["delayed", "menu_button", "instant"]
@@ -49,18 +48,15 @@ class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
     def set_default_action(self, action: QtGui.QAction):
         self.setDefaultAction(action)
 
-    def set_popup_mode(self, mode: PopupModeStr):
+    def set_popup_mode(
+        self, mode: PopupModeStr | QtWidgets.QToolButton.ToolButtonPopupMode
+    ):
         """Set the popup mode of the toolbutton.
 
         Args:
             mode: popup mode to use
-
-        Raises:
-            InvalidParamError: invalid popup mode
         """
-        if mode not in POPUP_MODE:
-            raise InvalidParamError(mode, POPUP_MODE)
-        self.setPopupMode(POPUP_MODE[mode])
+        self.setPopupMode(POPUP_MODE.get_enum_value(mode))
 
     def get_popup_mode(self) -> PopupModeStr:
         """Return popup mode.
@@ -70,18 +66,13 @@ class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
         """
         return POPUP_MODE.inverse[self.popupMode()]
 
-    def set_arrow_type(self, mode: constants.ArrowTypeStr):
+    def set_arrow_type(self, mode: constants.ArrowTypeStr | constants.ArrowType):
         """Set the arrow type of the toolbutton.
 
         Args:
             mode: arrow type to use
-
-        Raises:
-            InvalidParamError: invalid arrow type
         """
-        if mode not in constants.ARROW_TYPE:
-            raise InvalidParamError(mode, constants.ARROW_TYPE)
-        self.setArrowType(constants.ARROW_TYPE[mode])
+        self.setArrowType(constants.ARROW_TYPE.get_enum_value(mode))
 
     def get_arrow_type(self) -> constants.ArrowTypeStr:
         """Return arrow type.
@@ -91,18 +82,13 @@ class ToolButton(widgets.AbstractButtonMixin, QtWidgets.QToolButton):
         """
         return constants.ARROW_TYPE.inverse[self.arrowType()]
 
-    def set_style(self, style: constants.ToolButtonStyleStr):
+    def set_style(self, style: constants.ToolButtonStyleStr | constants.ToolButtonStyle):
         """Set the toolbutton style.
 
         Args:
             style: style to use
-
-        Raises:
-            InvalidParamError: invalid style
         """
-        if style not in constants.TOOLBUTTON_STYLE:
-            raise InvalidParamError(style, constants.TOOLBUTTON_STYLE)
-        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE[style])
+        self.setToolButtonStyle(constants.TOOLBUTTON_STYLE.get_enum_value(style))
 
     def get_style(self) -> constants.ToolButtonStyleStr:
         """Return toolbutton style.

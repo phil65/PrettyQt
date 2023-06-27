@@ -861,6 +861,28 @@ ITEM_SELECTION_MODE: bidict[ItemSelectionModeStr, Qt.ItemSelectionMode] = bidict
     intersects_bounding_rect=Qt.ItemSelectionMode.IntersectsItemBoundingRect,
 )
 
+TextInteractionStr = Literal[
+    "none",
+    "by_mouse",
+    "by_keyboard",
+    "accessible_by_mouse",
+    "accessible_by_keyboard",
+    "text_editable",
+    "like_text_editor",
+    "like_text_browser",
+]
+
+TEXT_INTERACTION: bidict[TextInteractionStr, QtCore.Qt.TextInteractionFlag] = bidict(
+    none=Qt.TextInteractionFlag.NoTextInteraction,
+    by_mouse=Qt.TextInteractionFlag.TextSelectableByMouse,
+    by_keyboard=Qt.TextInteractionFlag.TextSelectableByKeyboard,
+    accessible_by_mouse=Qt.TextInteractionFlag.LinksAccessibleByMouse,
+    accessible_by_keyboard=Qt.TextInteractionFlag.LinksAccessibleByKeyboard,
+    text_editable=Qt.TextInteractionFlag.TextEditable,
+    like_text_editor=Qt.TextInteractionFlag.TextEditorInteraction,
+    like_text_browser=Qt.TextInteractionFlag.TextBrowserInteraction,
+)
+
 FocusReasonStr = Literal[
     "mouse", "tab", "backtab", "active_window", "popup", "shortcut", "menu_bar", "other"
 ]

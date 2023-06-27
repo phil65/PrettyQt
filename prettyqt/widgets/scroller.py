@@ -6,7 +6,7 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
-from prettyqt.utils import InvalidParamError, bidict, datatypes
+from prettyqt.utils import bidict, datatypes
 
 
 InputStr = Literal["press", "move", "release"]
@@ -71,8 +71,6 @@ class Scroller(core.ObjectMixin):
         position: datatypes.PointFType,
         timestamp: int = 0,
     ) -> bool:
-        if input_type not in INPUT:
-            raise InvalidParamError(input_type, INPUT)
         return self.handleInput(
             INPUT.get_enum_value(input_type), datatypes.to_pointf(position), timestamp
         )

@@ -70,7 +70,7 @@ class ZoomAnimation(core.ParallelAnimationGroup):
         self.anim1.setDuration(duration)
         self.anim2.setDuration(duration)
 
-    def set_easing(self, easing: core.easingcurve.TypeStr):
+    def set_easing(self, easing: core.easingcurve.TypeStr | core.QEasingCurve.Type):
         self.anim1.set_easing(easing)
         self.anim2.set_easing(easing)
 

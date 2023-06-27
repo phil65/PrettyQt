@@ -5,7 +5,7 @@ from collections.abc import MutableMapping
 from typing import Literal
 
 from prettyqt.qt import QtWebEngineCore
-from prettyqt.utils import InvalidParamError, bidict, get_repr
+from prettyqt.utils import bidict, get_repr
 
 
 FONT_FAMILY = bidict(
@@ -142,18 +142,15 @@ class WebEngineSettings(MutableMapping):
     def __len__(self):
         return len(WEB_ATTRIBUTES)
 
-    def set_unknown_url_scheme_policy(self, policy: UnknownUrlSchemePolicyStr):
+    def set_unknown_url_scheme_policy(self, policy: UnknownUrlSchemePolicyStr | pol):
         """Set the unknown url scheme policy.
 
         Args:
             policy: unknown url scheme policy
-
-        Raises:
-            InvalidParamError: Policy does not exist
         """
-        if policy not in UNKNOWN_URL_SCHEME_POLICY:
-            raise InvalidParamError(policy, UNKNOWN_URL_SCHEME_POLICY)
-        self.item.setUnknownUrlSchemePolicy(UNKNOWN_URL_SCHEME_POLICY[policy])
+        self.item.setUnknownUrlSchemePolicy(
+            UNKNOWN_URL_SCHEME_POLICY.get_enum_value(policy)
+        )
 
     def get_unknown_url_scheme_policy(self) -> UnknownUrlSchemePolicyStr:
         """Return current unknown url scheme policy.
@@ -163,19 +160,18 @@ class WebEngineSettings(MutableMapping):
         """
         return UNKNOWN_URL_SCHEME_POLICY.inverse[self.item.unknownUrlSchemePolicy()]
 
-    def set_font_family(self, which: FontFamilyStr, family: str):
+    def set_font_family(
+        self,
+        which: FontFamilyStr | QtWebEngineCore.QWebEngineSettings.FontFamily,
+        family: str,
+    ):
         """Set the actual font family to family for the specified generic family, which.
 
         Args:
             which: family to set
             family: generic family
-
-        Raises:
-            InvalidParamError: Font family does not exist
         """
-        if which not in FONT_FAMILY:
-            raise InvalidParamError(which, FONT_FAMILY)
-        self.item.setFontFamily(FONT_FAMILY[which], family)
+        self.item.setFontFamily(FONT_FAMILY.get_enum_value(which), family)
 
     def get_font_family(self, family: FontFamilyStr) -> str:
         """Return the actual font family for the specified generic font family.
@@ -188,19 +184,16 @@ class WebEngineSettings(MutableMapping):
         """
         return self.item.fontFamily(FONT_FAMILY[family])
 
-    def set_font_size(self, typ: FontSizeStr, size: int):
+    def set_font_size(
+        self, typ: FontSizeStr | QtWebEngineCore.QWebEngineSettings.FontSize, size: int
+    ):
         """Set the font size for type to size in pixels.
 
         Args:
             typ: font size type
             size: size in pixels
-
-        Raises:
-            InvalidParamError: Font size does not exist
         """
-        if typ not in FONT_SIZE:
-            raise InvalidParamError(typ, FONT_SIZE)
-        self.item.setFontSize(FONT_SIZE[typ], size)
+        self.item.setFontSize(FONT_SIZE.get_enum_value(typ), size)
 
     def get_font_size(self, typ: FontSizeStr) -> int:
         """Return the default font size for type in pixels.
