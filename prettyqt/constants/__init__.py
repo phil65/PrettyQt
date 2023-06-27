@@ -91,6 +91,7 @@ WidgetAttribute = Qt.WidgetAttribute
 WindowFrameSection = Qt.WindowFrameSection
 WindowModality = Qt.WindowModality
 WindowState = Qt.WindowState
+WindowType = Qt.WindowType
 
 
 DISPLAY_ROLE = Qt.ItemDataRole.DisplayRole
@@ -180,7 +181,7 @@ ItemFlagStr = Literal[
     "user_tristate",
 ]
 
-ITEM_FLAG: bidict[ItemFlagStr, QtCore.Qt.ItemFlag | int] = bidict(
+ITEM_FLAG: bidict[ItemFlagStr, Qt.ItemFlag] = bidict(
     none=Qt.ItemFlag.NoItemFlags,
     selectable=Qt.ItemFlag.ItemIsSelectable,
     editable=Qt.ItemFlag.ItemIsEditable,
@@ -195,11 +196,11 @@ ITEM_FLAG: bidict[ItemFlagStr, QtCore.Qt.ItemFlag | int] = bidict(
 
 TextFormatStr = Literal["rich", "plain", "auto", "markdown"]
 
-TEXT_FORMAT: bidict[TextFormatStr, QtCore.Qt.TextFormat] = bidict(
-    rich=QtCore.Qt.TextFormat.RichText,
-    plain=QtCore.Qt.TextFormat.PlainText,
-    auto=QtCore.Qt.TextFormat.AutoText,
-    markdown=QtCore.Qt.TextFormat.MarkdownText,
+TEXT_FORMAT: bidict[TextFormatStr, Qt.TextFormat] = bidict(
+    rich=Qt.TextFormat.RichText,
+    plain=Qt.TextFormat.PlainText,
+    auto=Qt.TextFormat.AutoText,
+    markdown=Qt.TextFormat.MarkdownText,
 )
 
 ItemDataRoleStr = Literal[
@@ -217,7 +218,7 @@ ItemDataRoleStr = Literal[
     "background",
 ]
 
-ITEM_DATA_ROLE: bidict[ItemDataRoleStr, QtCore.Qt.ItemDataRole | int] = bidict(
+ITEM_DATA_ROLE: bidict[ItemDataRoleStr, Qt.ItemDataRole | int] = bidict(
     display=DISPLAY_ROLE,
     user=USER_ROLE,
     sort=SORT_ROLE,
@@ -266,24 +267,13 @@ ALIGNMENTS = bidict[AlignmentStr, Qt.AlignmentFlag](
     center=ALIGN_CENTER,
 )
 
-SIDES = bidict(
+SideStr = Literal["left", "right", "top", "bottom"]
+
+SIDES: bidict[SideStr, Qt.AlignmentFlag] = bidict(
     left=Qt.AlignmentFlag.AlignLeft,
     right=Qt.AlignmentFlag.AlignRight,
     top=Qt.AlignmentFlag.AlignTop,
     bottom=Qt.AlignmentFlag.AlignBottom,
-)
-
-SideStr = Literal["left", "right", "top", "bottom"]
-
-EDGES = bidict(
-    top=Qt.Edge.TopEdge,
-    left=Qt.Edge.LeftEdge,
-    right=Qt.Edge.RightEdge,
-    bottom=Qt.Edge.BottomEdge,
-    top_left=Qt.Edge.TopEdge | Qt.Edge.LeftEdge,
-    top_right=Qt.Edge.TopEdge | Qt.Edge.RightEdge,
-    bottom_left=Qt.Edge.BottomEdge | Qt.Edge.LeftEdge,
-    bottom_right=Qt.Edge.BottomEdge | Qt.Edge.RightEdge,
 )
 
 EdgeStr = Literal[
@@ -296,6 +286,17 @@ EdgeStr = Literal[
     "bottom_left",
     "bottom_right",
 ]
+
+EDGES: bidict[EdgeStr, Qt.Edge] = bidict(
+    top=Qt.Edge.TopEdge,
+    left=Qt.Edge.LeftEdge,
+    right=Qt.Edge.RightEdge,
+    bottom=Qt.Edge.BottomEdge,
+    top_left=Qt.Edge.TopEdge | Qt.Edge.LeftEdge,
+    top_right=Qt.Edge.TopEdge | Qt.Edge.RightEdge,
+    bottom_left=Qt.Edge.BottomEdge | Qt.Edge.LeftEdge,
+    bottom_right=Qt.Edge.BottomEdge | Qt.Edge.RightEdge,
+)
 
 HorizontalAlignmentStr = Literal[
     "left",
@@ -326,10 +327,10 @@ VerticalAlignmentStr = Literal[
 ]
 
 MODIFIER_TO_KEY = {
-    QtCore.Qt.KeyboardModifier.ShiftModifier: QtCore.Qt.Modifier.SHIFT,
-    QtCore.Qt.KeyboardModifier.ControlModifier: QtCore.Qt.Modifier.CTRL,
-    QtCore.Qt.KeyboardModifier.AltModifier: QtCore.Qt.Modifier.ALT,
-    QtCore.Qt.KeyboardModifier.MetaModifier: QtCore.Qt.Modifier.META,
+    Qt.KeyboardModifier.ShiftModifier: Qt.Modifier.SHIFT,
+    Qt.KeyboardModifier.ControlModifier: Qt.Modifier.CTRL,
+    Qt.KeyboardModifier.AltModifier: Qt.Modifier.ALT,
+    Qt.KeyboardModifier.MetaModifier: Qt.Modifier.META,
 }
 
 KeyboardModifierStr = Literal[
@@ -872,7 +873,7 @@ TextInteractionStr = Literal[
     "like_text_browser",
 ]
 
-TEXT_INTERACTION: bidict[TextInteractionStr, QtCore.Qt.TextInteractionFlag] = bidict(
+TEXT_INTERACTION: bidict[TextInteractionStr, Qt.TextInteractionFlag] = bidict(
     none=Qt.TextInteractionFlag.NoTextInteraction,
     by_mouse=Qt.TextInteractionFlag.TextSelectableByMouse,
     by_keyboard=Qt.TextInteractionFlag.TextSelectableByKeyboard,
@@ -1046,12 +1047,12 @@ AnchorPointStr = Literal[
     "left", "horizontal_center", "right", "top", "vertical_center", "bottom"
 ]
 ANCHOR_POINT = bidict[AnchorPointStr, Qt.AnchorPoint](
-    left=QtCore.Qt.AnchorPoint.AnchorLeft,
-    horizontal_center=QtCore.Qt.AnchorPoint.AnchorHorizontalCenter,
-    right=QtCore.Qt.AnchorPoint.AnchorRight,
-    top=QtCore.Qt.AnchorPoint.AnchorTop,
-    vertical_center=QtCore.Qt.AnchorPoint.AnchorVerticalCenter,
-    bottom=QtCore.Qt.AnchorPoint.AnchorBottom,
+    left=Qt.AnchorPoint.AnchorLeft,
+    horizontal_center=Qt.AnchorPoint.AnchorHorizontalCenter,
+    right=Qt.AnchorPoint.AnchorRight,
+    top=Qt.AnchorPoint.AnchorTop,
+    vertical_center=Qt.AnchorPoint.AnchorVerticalCenter,
+    bottom=Qt.AnchorPoint.AnchorBottom,
 )
 
 

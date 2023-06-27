@@ -7,12 +7,12 @@ from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-TEXT_DIRECTIONS = bidict(
+TextDirectionStr = Literal["top_to_bottom", "bottom_to_top"]
+
+TEXT_DIRECTIONS: bidict[TextDirectionStr, QtWidgets.QProgressBar.Direction] = bidict(
     top_to_bottom=QtWidgets.QProgressBar.Direction.TopToBottom,
     bottom_to_top=QtWidgets.QProgressBar.Direction.BottomToTop,
 )
-
-TextDirectionStr = Literal["top_to_bottom", "bottom_to_top"]
 
 
 class ProgressBar(widgets.WidgetMixin, QtWidgets.QProgressBar):

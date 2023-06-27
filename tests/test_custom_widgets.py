@@ -3,13 +3,12 @@
 import logging
 import pickle
 import re
-import sys
 import pytest
 
 import prettyqt
-from prettyqt import core, custom_widgets, gui, widgets
+from prettyqt import constants, core, custom_widgets, gui, widgets
 import prettyqt.custom_widgets.dataset as fo
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 
 
 def test_booldicttoolbutton(qtbot):
@@ -60,10 +59,7 @@ def test_colorchooserbutton(qtbot):
     btn.set_value("blue")
     assert btn.is_valid()
 
-@pytest.mark.skipif(
-    sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
-    reason="Segmentation fault",
-)
+@pytest.mark.skipif(prettyqt.qt.API == "pyside6", reason="Segmentation fault")
 def test_regexeditor(qtbot):
     widget = custom_widgets.regexeditor.RegexEditorWidget()
     qtbot.addWidget(widget)
@@ -226,7 +222,10 @@ def test_inputandslider(qtbot):
     w.set_step_size(2)
     assert w.is_valid()
 
-
+# something related to syntaxhighlighting...
+@pytest.mark.skipif(
+    prettyqt.qt.API == "pyside6", reason="Windows fatal exception: access violation"
+)
 def test_codeeditor(qtbot):
     editor = custom_widgets.CodeEditor()
     qtbot.addWidget(editor)
@@ -270,7 +269,7 @@ def test_labeledslider(qtbot, qttester):
     qtbot.addWidget(slider_2)
     slider.show()
     qtbot.add_widget(slider)
-    qttester.send_mousepress(slider.sl, QtCore.Qt.MouseButton.LeftButton)
+    qttester.send_mousepress(slider.sl, constants.MouseButton.LeftButton)
     qttester.send_mousemove(slider.sl, core.PointF(20, 20))
     slider.repaint()
     slider.hide()
@@ -373,7 +372,7 @@ def test_spanslider(qtbot, qttester):
     slider.repaint()
     slider._pixel_pos_to_value(100)
     slider._move_pressed_handle()
-    qttester.send_mousepress(slider, QtCore.Qt.MouseButton.LeftButton)
+    qttester.send_mousepress(slider, constants.MouseButton.LeftButton)
     qttester.send_mousemove(slider, core.PointF(20, 20))
     qttester.send_mousemove(slider, core.PointF(0, 0), delay=10)
     assert slider.get_movement_mode() == "no_crossing"
