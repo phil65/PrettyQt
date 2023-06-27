@@ -31,6 +31,7 @@
     * [models](features/models.md)
     * [layouts](features/layouts.md)
     * [models](features/models.md)
+    * [proxies](features/proxies.md)
     * [animating](features/animating.md)
     * [widgets](features/widgets.md)
     * [validators](features/validators.md)
