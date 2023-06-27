@@ -69,8 +69,8 @@ class WidgetPropertiesModel(core.AbstractTableModel):
     def headerData(
         self,
         section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
@@ -160,7 +160,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             return 0
         return 0 if parent.isValid() else self._metaobj.propertyCount()
 
-    def flags(self, index: QtCore.QModelIndex) -> QtCore.Qt.ItemFlag:
+    def flags(self, index: QtCore.QModelIndex) -> constants.ItemFlag:
         prop = self._metaobj.get_property(index.row())
         if index.column() == 1 and prop.isWritable():
             return super().flags(index) | constants.IS_EDITABLE

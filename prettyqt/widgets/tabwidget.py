@@ -347,7 +347,7 @@ class DetachedTab(widgets.MainWindow):
 #                 if msg.message == WM_DWMSENDICONICTHUMBNAIL:
 #                     print("WM_DWMSENDICONICTHUMBNAIL", msg.hWnd)
 #                     pix = self.grab()
-#                     pix = pix.scaled(QtCore.Qt.AspectRatioMode.KeepAspectRatio)
+#                     pix = pix.scaled(constants.AspectRatioMode.KeepAspectRatio)
 
 #                     pix.toImage().toHBITMAP()
 
@@ -360,7 +360,7 @@ class DetachedTab(widgets.MainWindow):
 #                     widget = self.window()
 #                     SIZE = 50
 #                     pix = widget.grab().scaled(
-#                         SIZE, QtCore.Qt.AspectRatioMode.KeepAspectRatio
+#                         SIZE, constants.AspectRatioMode.KeepAspectRatio
 #                     )
 #                     pix.toImage().toHBITMAP()
 

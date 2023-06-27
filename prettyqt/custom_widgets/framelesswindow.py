@@ -9,7 +9,7 @@ import win32con
 from ctypes import Structure, c_int, POINTER
 from ctypes.wintypes import HWND, UINT, RECT
 
-from prettyqt import core, gui, widgets
+from prettyqt import core, constants, gui, widgets
 from prettyqt.qt import QtCore, QtGui
 
 from prettyqt.utils.platforms.windows import misc, windoweffects
@@ -84,7 +84,7 @@ class CustomBase(widgets.Widget):
         self.effect_enabled = False
         self.win_effects = windoweffects.WindowsEffects()
         self.win_effects.add_window_animation(self.winId())
-        self.setWindowFlags(QtCore.Qt.WindowType.FramelessWindowHint)
+        self.setWindowFlags(constants.WindowType.FramelessWindowHint)
         self.win_effects.add_window_animation(self.winId())
         self.set_effect()
         if self.is_win11:
@@ -123,9 +123,9 @@ class CustomBase(widgets.Widget):
         with gui.Painter(self) as painter:
             painter.setOpacity(0.8)
             if self.dark_mode:
-                painter.setBrush(QtCore.Qt.GlobalColor.black)
+                painter.setBrush(constants.GlobalColor.black)
             else:
-                painter.setBrush(QtCore.Qt.GlobalColor.white)
+                painter.setBrush(constants.GlobalColor.white)
             painter.drawRect(self.rect())
 
     def nativeEvent(self, event_type, message):
@@ -178,10 +178,10 @@ class TitleBarButton(widgets.ToolButton):
         super().__init__(parent)
         if dark_mode:
             color = "FFFFFF"
-            self._icon_color = QtCore.Qt.GlobalColor.white
+            self._icon_color = constants.GlobalColor.white
         else:
             color = "000000"
-            self._icon_color = QtCore.Qt.GlobalColor.black
+            self._icon_color = constants.GlobalColor.black
         self.colors = "transparent", f"#20{color}", f"#40{color}"
         self._style = """
         border: none;
@@ -209,7 +209,7 @@ class TitleBarButton(widgets.ToolButton):
         super().leaveEvent(e)
 
     def mousePressEvent(self, e):
-        if e.button() == QtCore.Qt.MouseButton.LeftButton:
+        if e.button() == constants.MouseButton.LeftButton:
             self.set_state(TitleBarButtonState.PRESSED)
         super().mousePressEvent(e)
 
@@ -318,7 +318,7 @@ class TitleBar(widgets.Widget):
             self.window().showMaximized()
 
     def mouseDoubleClickEvent(self, event):
-        if event.button() == QtCore.Qt.MouseButton.LeftButton:
+        if event.button() == constants.MouseButton.LeftButton:
             self.__toggle_max_state()
 
     def mouseMoveEvent(self, event):
@@ -356,7 +356,7 @@ class FramelessWindow(CustomBase):
 
     def setWindowIcon(self, icon):
         self.title_bar.icon.setFixedWidth(32)
-        self.title_bar.icon.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.title_bar.icon.setAlignment(constants.AlignmentFlag.AlignHCenter)
         self.title_bar.icon.setPixmap(icon.pixmap(16, 16))
         super().setWindowIcon(icon)
 

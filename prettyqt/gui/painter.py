@@ -126,9 +126,9 @@ class PainterMixin:
         relative: bool = False,
     ):
         flag = (
-            QtCore.Qt.SizeMode.RelativeSize
+            constants.SizeMode.RelativeSize
             if relative
-            else QtCore.Qt.SizeMode.AbsoluteSize
+            else constants.SizeMode.AbsoluteSize
         )
         self.drawRoundedRect(datatypes.to_rect(rect), x_radius, y_radius, flag)
 
@@ -211,9 +211,9 @@ class PainterMixin:
 
     def set_transparent_background(self, transparent: bool = True):
         mode = (
-            QtCore.Qt.BGMode.TransparentMode
+            constants.BGMode.TransparentMode
             if transparent
-            else QtCore.Qt.BGMode.OpaqueMode
+            else constants.BGMode.OpaqueMode
         )
         self.setBackgroundMode(mode)
 
@@ -250,7 +250,7 @@ class PainterMixin:
 
     def get_text_rect(self, text: str) -> core.Rect:
         return self.drawText(
-            core.Rect(), QtCore.Qt.TextFlag.TextDontPrint, text
+            core.Rect(), constants.TextFlag.TextDontPrint, text
         )  # type: ignore
 
     @contextlib.contextmanager

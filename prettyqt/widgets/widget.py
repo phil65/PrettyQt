@@ -440,17 +440,17 @@ class WidgetMixin(core.ObjectMixin):
         window_title: bool | None = None,
     ):
         flags = {
-            minimize: QtCore.Qt.WindowType.WindowMinimizeButtonHint,
-            maximize: QtCore.Qt.WindowType.WindowMaximizeButtonHint,
-            close: QtCore.Qt.WindowType.WindowCloseButtonHint,
-            stay_on_top: QtCore.Qt.WindowType.WindowStaysOnTopHint,
-            frameless: QtCore.Qt.WindowType.FramelessWindowHint,
-            window: QtCore.Qt.WindowType.Window,
-            dialog: QtCore.Qt.WindowType.Dialog,
-            tooltip: QtCore.Qt.WindowType.ToolTip,
-            tool: QtCore.Qt.WindowType.Tool,
-            customize: QtCore.Qt.WindowType.CustomizeWindowHint,
-            window_title: QtCore.Qt.WindowType.WindowTitleHint,
+            minimize: constants.WindowType.WindowMinimizeButtonHint,
+            maximize: constants.WindowType.WindowMaximizeButtonHint,
+            close: constants.WindowType.WindowCloseButtonHint,
+            stay_on_top: constants.WindowType.WindowStaysOnTopHint,
+            frameless: constants.WindowType.FramelessWindowHint,
+            window: constants.WindowType.Window,
+            dialog: constants.WindowType.Dialog,
+            tooltip: constants.WindowType.ToolTip,
+            tool: constants.WindowType.Tool,
+            customize: constants.WindowType.CustomizeWindowHint,
+            window_title: constants.WindowType.WindowTitleHint,
         }
         for k, v in flags.items():
             if k is not None:

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prettyqt import widgets
-from prettyqt.qt import QtCore, QtMultimediaWidgets
+from prettyqt import constants, widgets
+from prettyqt.qt import QtMultimediaWidgets
 
 
 # QtMultimediaWidgets.QVideoWidget.__bases__ = (
@@ -20,7 +20,7 @@ class VideoWidget(widgets.WidgetMixin, QtMultimediaWidgets.QVideoWidget):
 
     def mouseDoubleClickEvent(self, event):
         if (
-            event.button() == QtCore.Qt.MouseButton.LeftButton
+            event.button() == constants.MouseButton.LeftButton
             and self.doubleclick_for_fullscreen
         ):
             self.setFullScreen(not self.isFullScreen())

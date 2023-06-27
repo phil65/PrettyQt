@@ -40,7 +40,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         alpha_dithering: constants.AlphaDitherPreferenceStr = "threshold",
         mode_preference: constants.ModePreferenceStr = "auto",
     ) -> Self:
-        flag = QtCore.Qt.ImageConversionFlag(0)
+        flag = constants.ImageConversionFlag(0)
         flag |= constants.COLOR_PREFERENCE.inverse[color_preference]
         flag |= constants.DITHER_PREFERENCE.inverse[dithering]
         flag |= constants.ALPHA_DITHER_PREFERENCE.inverse[alpha_dithering]
@@ -84,7 +84,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
     def create_dot(cls, color: datatypes.ColorType = "black", size: int = 16) -> Self:
         col = colors.get_color(color)
         px = cls(size, size)
-        px.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
+        px.fill(constants.GlobalColor.transparent)  # type: ignore
         px_size = px.rect().adjusted(1, 1, -1, -1)
         with gui.Painter(px) as painter:
             painter.use_antialiasing()
@@ -104,7 +104,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         bg0 = colors.get_color(color_1)
         bg1 = colors.get_color(color_2)
         with gui.Painter(pat) as p:
-            p.setPen(QtCore.Qt.PenStyle.NoPen)
+            p.setPen(constants.PenStyle.NoPen)
             # Paint a checkerboard pattern for the color to be overlaid on
             p.fillRect(pat.rect(), bg0)
             p.fillRect(0, 0, n, n, bg1)
@@ -120,7 +120,7 @@ class PixmapMixin(serializemixin.SerializeMixin, gui.PaintDeviceMixin):
         color: datatypes.ColorType = "white",
     ) -> Self:
         pixmap = cls(size, size)
-        pixmap.fill(QtCore.Qt.GlobalColor.transparent)
+        pixmap.fill(constants.GlobalColor.transparent)
         with gui.Painter(pixmap) as painter:
             painter.setRenderHints(
                 painter.RenderHint.Antialiasing

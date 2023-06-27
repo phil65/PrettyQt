@@ -4,7 +4,7 @@ from collections.abc import Iterator
 from typing import Any, Literal
 
 from prettyqt import constants, gui, iconprovider
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes, get_repr, serializemixin, listdelegators
 
 
@@ -75,11 +75,11 @@ class TreeWidgetItem(serializemixin.SerializeMixin, QtWidgets.QTreeWidgetItem):
     def setChecked(self, column: int, checked: bool):
         self.setCheckState(
             column,
-            QtCore.Qt.CheckState.Checked if checked else QtCore.Qt.CheckState.Unchecked,
+            constants.CheckState.Checked if checked else constants.CheckState.Unchecked,
         )
 
     def isChecked(self, col: int) -> bool:
-        return self.checkState(col) == QtCore.Qt.CheckState.Checked
+        return self.checkState(col) == constants.CheckState.Checked
 
     def get_children(
         self, recursive: bool = False

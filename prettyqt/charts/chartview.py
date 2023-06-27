@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import charts, core, gui, widgets
-from prettyqt.qt import QtCharts, QtCore, QtGui
+from prettyqt import charts, constants, core, gui, widgets
+from prettyqt.qt import QtCharts, QtGui
 from prettyqt.utils import bidict
 
 
@@ -34,21 +34,21 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
     def keyPressEvent(self, event: QtGui.QKeyEvent):
         """Handle keypress events to allow navigation via keyboard."""
         match event.key():
-            case QtCore.Qt.Key.Key_Escape:
+            case constants.Key.Key_Escape:
                 self.chart().zoomReset()
-            case QtCore.Qt.Key.Key_Plus:
+            case constants.Key.Key_Plus:
                 self.chart().zoom_by_factor(ZOOM_IN_FACTOR)
-            case QtCore.Qt.Key.Key_Minus:
+            case constants.Key.Key_Minus:
                 self.chart().zoom_by_factor(ZOOM_OUT_FACTOR)
-            case QtCore.Qt.Key.Key_Left:
+            case constants.Key.Key_Left:
                 self.chart().scroll(-SCROLL_STEP_SIZE, 0)
-            case QtCore.Qt.Key.Key_Right:
+            case constants.Key.Key_Right:
                 self.chart().scroll(SCROLL_STEP_SIZE, 0)
-            case QtCore.Qt.Key.Key_Up:
+            case constants.Key.Key_Up:
                 self.chart().scroll(0, SCROLL_STEP_SIZE)
-            case QtCore.Qt.Key.Key_Down:
+            case constants.Key.Key_Down:
                 self.chart().scroll(0, -SCROLL_STEP_SIZE)
-            case QtCore.Qt.Key.Key_0:
+            case constants.Key.Key_0:
                 self.chart().apply_nice_numbers()
             case _:
                 super().keyPressEvent(event)
@@ -63,7 +63,7 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
 
     def mouseReleaseEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
-        if event.button() == QtCore.Qt.MouseButton.RightButton:
+        if event.button() == constants.MouseButton.RightButton:
             widgets.Application.restoreOverrideCursor()
             event.accept()
             return
@@ -71,7 +71,7 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
 
     def mousePressEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
-        if event.button() == QtCore.Qt.MouseButton.RightButton:
+        if event.button() == constants.MouseButton.RightButton:
             widgets.Application.set_override_cursor("size_all")
             self.last_mouse_pos = event.position()
             event.accept()
@@ -81,7 +81,7 @@ class ChartView(widgets.GraphicsViewMixin, QtCharts.QChartView):
     def mouseMoveEvent(self, event: QtGui.QMouseEvent):
         """Override to allow dragging the chart."""
         # pan the chart with a middle mouse drag
-        if event.buttons() & QtCore.Qt.MouseButton.RightButton:  # type: ignore
+        if event.buttons() & constants.MouseButton.RightButton:  # type: ignore
             if not self.last_mouse_pos:
                 return
             pos_diff = event.position() - self.last_mouse_pos

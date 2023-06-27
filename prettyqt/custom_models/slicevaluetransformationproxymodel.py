@@ -7,7 +7,6 @@ from typing import Any
 from collections.abc import Callable
 
 from prettyqt import constants, core, custom_models
-from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -15,9 +14,9 @@ logger = logging.getLogger(__name__)
 @dataclasses.dataclass
 class Transformer:
     fn: Callable[[Any], Any]
-    role: int | QtCore.Qt.ItemDataRole
+    role: int | constants.ItemDataRole
     selector: Callable[[Any], bool]
-    selector_role: int | QtCore.Qt.ItemDataRole
+    selector_role: int | constants.ItemDataRole
 
 
 class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
@@ -40,9 +39,9 @@ class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
     def add_transformer(
         self,
         fn: Callable[[Any], Any],
-        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
         selector: Callable[[Any], bool] | None = None,
-        selector_role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         tr = Transformer(
             fn=fn,

@@ -3,8 +3,8 @@ from __future__ import annotations
 import functools
 from typing import Literal, overload
 
-from prettyqt import gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt import constants, gui, widgets
+from prettyqt.qt import QtGui, QtWidgets
 
 
 class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
@@ -61,9 +61,9 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     ):
         match corner:
             case "top_left":
-                self.setCornerWidget(widget, QtCore.Qt.Corner.TopLeftCorner)
+                self.setCornerWidget(widget, constants.Corner.TopLeftCorner)
             case "top_right":
-                self.setCornerWidget(widget, QtCore.Qt.Corner.TopRightCorner)
+                self.setCornerWidget(widget, constants.Corner.TopRightCorner)
             case _:
                 raise ValueError(corner)
 
@@ -73,9 +73,9 @@ class MenuBar(widgets.WidgetMixin, QtWidgets.QMenuBar):
     ) -> QtWidgets.QWidget:
         match corner:
             case "top_left":
-                return self.cornerWidget(QtCore.Qt.Corner.TopLeftCorner)
+                return self.cornerWidget(constants.Corner.TopLeftCorner)
             case "top_right":
-                return self.cornerWidget(QtCore.Qt.Corner.TopRightCorner)
+                return self.cornerWidget(constants.Corner.TopRightCorner)
             case _:
                 raise ValueError(corner)
 

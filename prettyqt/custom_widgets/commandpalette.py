@@ -5,7 +5,7 @@ from collections.abc import Sequence
 import logging
 import pathlib
 
-from prettyqt import core, custom_models, gui, widgets
+from prettyqt import constants, core, custom_models, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import colors, datatypes
 
@@ -79,9 +79,9 @@ class CommandPalette(widgets.Widget):
     def __init__(self, parent: QtWidgets.QWidget | None = None):
         super().__init__(parent=parent)
         self.setWindowFlags(
-            QtCore.Qt.WindowType.WindowStaysOnTopHint
-            | QtCore.Qt.WindowType.FramelessWindowHint
-            # | QtCore.Qt.WindowType.ToolTip
+            constants.WindowType.WindowStaysOnTopHint
+            | constants.WindowType.FramelessWindowHint
+            # | constants.WindowType.ToolTip
         )
         self.set_focus_policy("strong")
         self.setMinimumWidth(700)
@@ -104,21 +104,21 @@ class CommandPalette(widgets.Widget):
         if source != self._line or e.type() != QtCore.QEvent.Type.KeyPress:
             return super().eventFilter(source, e)
         if e.modifiers() in (
-            QtCore.Qt.KeyboardModifier.NoModifier,
-            QtCore.Qt.KeyboardModifier.KeypadModifier,
+            constants.KeyboardModifier.NoModifier,
+            constants.KeyboardModifier.KeypadModifier,
         ):
             match e.key():
-                case QtCore.Qt.Key.Key_Escape:
+                case constants.Key.Key_Escape:
                     self.hide()
                     return True
-                case QtCore.Qt.Key.Key_Return:
+                case constants.Key.Key_Return:
                     self.hide()
                     self._table.execute_focused()
                     return True
-                case QtCore.Qt.Key.Key_Up:
+                case constants.Key.Key_Up:
                     self._table.move_row_selection(-1)
                     return True
-                case QtCore.Qt.Key.Key_Down:
+                case constants.Key.Key_Down:
                     self._table.move_row_selection(1)
                     return True
         return super().eventFilter(source, e)
@@ -144,7 +144,7 @@ class CommandPalette(widgets.Widget):
         self._table.match_color = colors.get_color(color).name()
 
     def install_to(self, parent: widgets.Widget):
-        self.setParent(parent, QtCore.Qt.WindowType.SubWindow)
+        self.setParent(parent, constants.WindowType.SubWindow)
         self.hide()
 
     # def focusOutEvent(self, a0: QtGui.QFocusEvent) -> None:

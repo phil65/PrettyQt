@@ -1,27 +1,27 @@
 from __future__ import annotations
 
-from prettyqt import widgets
+from prettyqt import constants, widgets
 from prettyqt.qt import QtCore
 
 
 class OrientedScrollArea(widgets.ScrollArea):
     def __init__(
         self,
-        orientation: QtCore.Qt.Orientation = QtCore.Qt.Orientation.Horizontal,
+        orientation: constants.Orientation = constants.Orientation.Horizontal,
         **kwargs,
     ):
         super().__init__(**kwargs)
         self._orientation = orientation
         self.set_orientation(orientation)
 
-    def orientation(self) -> QtCore.Qt.Orientation:
+    def orientation(self) -> constants.Orientation:
         """Get the orientation."""
         return self._orientation
 
-    def set_orientation(self, orientation: QtCore.Qt.Orientation):
+    def set_orientation(self, orientation: constants.Orientation):
         """Set the orientation."""
         self._orientation = orientation
-        if orientation == QtCore.Qt.Orientation.Horizontal:
+        if orientation == constants.Orientation.Horizontal:
             self.set_horizontal_scrollbar_policy("always_on")
             self.set_vertical_scrollbar_policy("always_off")
             self.set_size_policy("minimum_expanding", "fixed")
@@ -48,7 +48,7 @@ class OrientedScrollArea(widgets.ScrollArea):
         margins_height = margins.top() + margins.bottom()
         w = widget_size.width() + margins_width
         h = widget_size.height() + margins_height
-        if self._orientation == QtCore.Qt.Orientation.Horizontal:
+        if self._orientation == constants.Orientation.Horizontal:
             return QtCore.QSize(w, h + self.horizontalScrollBar().sizeHint().height())
         else:  # self._orientation == Qt.Vertical:
             return QtCore.QSize(w + self.verticalScrollBar().sizeHint().width(), h)

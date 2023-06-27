@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import eventfilters, widgets
+from prettyqt import constants, eventfilters, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 CC = QtWidgets.QStyle.ComplexControl
@@ -25,12 +25,12 @@ class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
         sr = scrollbar.style().subControlRect(
             CC.CC_ScrollBar, opt, SC.SC_ScrollBarSlider, scrollbar
         )
-        if scrollbar.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if scrollbar.orientation() == constants.Orientation.Horizontal:
             pos = point.x()
             slider_length = sr.width()
             slider_min = gr.x()
             slider_max = gr.right() - slider_length + 1
-            if scrollbar.layoutDirection() == QtCore.Qt.LayoutDirection.RightToLeft:
+            if scrollbar.layoutDirection() == constants.LayoutDirection.RightToLeft:
                 opt.upsideDown = not opt.upsideDown
         else:
             pos = point.y()
@@ -49,11 +49,11 @@ class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
     def eventFilter(self, source, event):
         match event.type():
             case QtCore.QEvent.Type.MouseMove:
-                if event.buttons() & QtCore.Qt.MouseButton.LeftButton:
+                if event.buttons() & constants.MouseButton.LeftButton:
                     point = event.position().toPoint()
                     self._move_to_mouse_position(source, point)
             case QtCore.QEvent.Type.MouseButtonPress:
-                if event.button() == QtCore.Qt.MouseButton.LeftButton:
+                if event.button() == constants.MouseButton.LeftButton:
                     point = event.position().toPoint()
                     self._move_to_mouse_position(source, point)
         return False

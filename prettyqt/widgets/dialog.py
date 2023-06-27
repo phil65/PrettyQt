@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prettyqt import widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, widgets
+from prettyqt.qt import QtWidgets
 
 
 class DialogMixin(widgets.WidgetMixin):
@@ -17,17 +17,17 @@ class DialogMixin(widgets.WidgetMixin):
 
     def keyPressEvent(self, e):
         match e.key():
-            case QtCore.Qt.Key.Key_Escape:
+            case constants.Key.Key_Escape:
                 self.close()
-            case QtCore.Qt.Key.Key_F11 if self.isMaximized():
+            case constants.Key.Key_F11 if self.isMaximized():
                 self.showNormal()
-            case QtCore.Qt.Key.Key_F11:
+            case constants.Key.Key_F11:
                 self.showMaximized()
             case _:
                 super().keyPressEvent(e)
 
     def delete_on_close(self):
-        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_DeleteOnClose)
+        self.setAttribute(constants.WidgetAttribute.WA_DeleteOnClose)
 
     def add_buttonbox(self) -> widgets.DialogButtonBox:
         button_box = widgets.DialogButtonBox.create(ok=self.accept, cancel=self.reject)

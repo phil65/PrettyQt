@@ -7,7 +7,7 @@ from prettyqt.qt import QtCore, QtWidgets
 class GraphicsLinearLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsLinearLayout):
     def __init__(
         self,
-        orientation: (constants.OrientationStr | QtCore.Qt.Orientation) = "horizontal",
+        orientation: constants.OrientationStr | constants.Orientation = "horizontal",
         parent: QtWidgets.QGraphicsLayoutItem | None = None,
     ):
         if isinstance(orientation, QtCore.Qt.Orientation):

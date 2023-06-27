@@ -10,8 +10,8 @@ CE = QtWidgets.QStyle.ControlElement
 SelectedPosition = QtWidgets.QStyleOptionHeader.SelectedPosition
 SectionPosition = QtWidgets.QStyleOptionHeader.SectionPosition
 
-HORIZONTAL_HEADER_DATA_ROLE = QtCore.Qt.ItemDataRole.UserRole + 150
-VERTICAL_HEADER_DATA_ROLE = QtCore.Qt.ItemDataRole.UserRole + 151
+HORIZONTAL_HEADER_DATA_ROLE = constants.ItemDataRole.UserRole + 150
+VERTICAL_HEADER_DATA_ROLE = constants.ItemDataRole.UserRole + 151
 
 
 def find_root_index(index: core.ModelIndex) -> core.ModelIndex:
@@ -39,7 +39,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
 
     def __init__(
         self,
-        orientation: QtCore.Qt.Orientation | constants.OrientationStr,
+        orientation: constants.Orientation | constants.OrientationStr,
         parent: QtWidgets.QWidget,
     ):
         super().__init__(orientation, parent, highlight_sections=True)
@@ -53,7 +53,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
         self.sectionMoved.connect(self._on_section_moved)
 
     def init_from_new_model(
-        self, orientation: QtCore.Qt.Orientation, model: QtCore.QAbstractItemModel
+        self, orientation: constants.Orientation, model: QtCore.QAbstractItemModel
     ):
         is_hor = orientation == constants.HORIZONTAL
         role = HORIZONTAL_HEADER_DATA_ROLE if is_hor else VERTICAL_HEADER_DATA_ROLE
@@ -389,8 +389,8 @@ class HierarchicalHeaderView(widgets.HeaderView):
             opt.sortIndicator = SortIndicator.SortDown if asc else SortIndicator.SortUp
         if self.window().isActiveWindow():
             opt.state = opt.state | StateFlag.State_Active
-        opt.textAlignment = QtCore.Qt.AlignmentFlag.AlignCenter
-        opt.iconAlignment = QtCore.Qt.AlignmentFlag.AlignVCenter
+        opt.textAlignment = constants.AlignmentFlag.AlignCenter
+        opt.iconAlignment = constants.AlignmentFlag.AlignVCenter
         opt.section = logical_index
         visual = self.visualIndex(logical_index)
         if self.count() == 1:

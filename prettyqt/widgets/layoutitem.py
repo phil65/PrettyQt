@@ -45,7 +45,6 @@ class LayoutItem(LayoutItemMixin, QtWidgets.QLayoutItem):
 
 
 if __name__ == "__main__":
-    from prettyqt.qt import QtCore
 
-    item = LayoutItem(QtCore.Qt.AlignmentFlag.AlignLeft)
+    item = LayoutItem(constants.AlignmentFlag.AlignLeft)
     types = item.get_control_types()

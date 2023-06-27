@@ -101,8 +101,8 @@ class WidgetHierarchyModel(custom_models.TreeModel):
     def headerData(
         self,
         section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role, section:
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
@@ -159,14 +159,14 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         return [
             treeitem.TreeItem(obj=i)
             for i in item.obj.findChildren(
-                self.BaseClass, None, QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+                self.BaseClass, None, constants.FindChildOption.FindDirectChildrenOnly
             )
         ]
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         return bool(
             item.obj.findChildren(
-                self.BaseClass, None, QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+                self.BaseClass, None, constants.FindChildOption.FindDirectChildrenOnly
             )
         )
 

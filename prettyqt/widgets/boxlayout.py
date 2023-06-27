@@ -60,9 +60,7 @@ class BoxLayoutMixin(widgets.LayoutMixin):
         Args:
             direction: direction
         """
-        if isinstance(direction, str):
-            direction = DIRECTION[direction]
-        self.setDirection(direction)
+        self.setDirection(DIRECTION.get_enum_value(direction))
 
     def get_direction(self) -> DirectionStr:
         """Return current direction.

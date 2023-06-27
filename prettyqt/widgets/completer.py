@@ -2,30 +2,29 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict
 
 
 CompletionModeStr = Literal["popup", "inline", "unfiltered_popup"]
 
-COMPLETION_MODE: bidict[CompletionModeStr, QtWidgets.QCompleter.CompletionMode] = bidict(
-    popup=QtWidgets.QCompleter.CompletionMode.PopupCompletion,
-    inline=QtWidgets.QCompleter.CompletionMode.InlineCompletion,
-    unfiltered_popup=QtWidgets.QCompleter.CompletionMode.UnfilteredPopupCompletion,
+COMPLETION_MODE: bidict[CompletionModeStr, widgets.QCompleter.CompletionMode] = bidict(
+    popup=widgets.QCompleter.CompletionMode.PopupCompletion,
+    inline=widgets.QCompleter.CompletionMode.InlineCompletion,
+    unfiltered_popup=widgets.QCompleter.CompletionMode.UnfilteredPopupCompletion,
 )
 
 
 SortModeStr = Literal["unsorted", "case_sensitive", "case_insensitive"]
 
-SORT_MODE: bidict[SortModeStr, QtWidgets.QCompleter.ModelSorting] = bidict(
-    unsorted=QtWidgets.QCompleter.ModelSorting.UnsortedModel,
-    case_sensitive=QtWidgets.QCompleter.ModelSorting.CaseSensitivelySortedModel,
-    case_insensitive=QtWidgets.QCompleter.ModelSorting.CaseInsensitivelySortedModel,
+SORT_MODE: bidict[SortModeStr, widgets.QCompleter.ModelSorting] = bidict(
+    unsorted=widgets.QCompleter.ModelSorting.UnsortedModel,
+    case_sensitive=widgets.QCompleter.ModelSorting.CaseSensitivelySortedModel,
+    case_insensitive=widgets.QCompleter.ModelSorting.CaseInsensitivelySortedModel,
 )
 
 
-class Completer(core.ObjectMixin, QtWidgets.QCompleter):
+class Completer(core.ObjectMixin, widgets.QCompleter):
     path_updated = core.Signal(str)
 
     def _get_map(self):
@@ -59,7 +58,7 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         model = core.StringListModel(strings)
         self.setModel(model)
 
-    def set_sort_mode(self, mode: SortModeStr | QtWidgets.QCompleter.ModelSorting | None):
+    def set_sort_mode(self, mode: SortModeStr | widgets.QCompleter.ModelSorting | None):
         """Set sort mode to use.
 
         Args:
@@ -78,7 +77,7 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         return SORT_MODE.inverse[self.modelSorting()]
 
     def set_completion_mode(
-        self, mode: CompletionModeStr | QtWidgets.QCompleter.CompletionMode
+        self, mode: CompletionModeStr | widgets.QCompleter.CompletionMode
     ):
         """Set completion mode to use.
 
@@ -119,9 +118,9 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
 
         """
         sensitivity = (
-            QtCore.Qt.CaseSensitivity.CaseSensitive
+            constants.CaseSensitivity.CaseSensitive
             if state
-            else QtCore.Qt.CaseSensitivity.CaseInsensitive
+            else constants.CaseSensitivity.CaseInsensitive
         )
         self.setCaseSensitivity(sensitivity)
 
@@ -131,7 +130,7 @@ class Completer(core.ObjectMixin, QtWidgets.QCompleter):
         Returns:
             case sensitivity
         """
-        return self.caseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
+        return self.caseSensitivity() == constants.CaseSensitivity.CaseSensitive
 
     def set_completion_role(
         self, role: constants.ItemDataRoleStr | constants.ItemDataRole | int

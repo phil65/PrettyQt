@@ -52,7 +52,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
         """Get the rectangular area occupied by the sub control."""
         if (
             cc != self.ComplexControl.CC_Slider
-            or opt.orientation != QtCore.Qt.Orientation.Horizontal
+            or opt.orientation != constants.Orientation.Horizontal
             or sc == self.SubControl.SC_SliderTickmarks
         ):
             return super().subControlRect(cc, opt, sc, widget)
@@ -85,7 +85,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
         """Draw sub control."""
         if (
             cc != self.ComplexControl.CC_Slider
-            or opt.orientation != QtCore.Qt.Orientation.Horizontal
+            or opt.orientation != constants.Orientation.Horizontal
         ):
             return super().drawComplexControl(cc, opt, painter, widget)
 
@@ -96,7 +96,7 @@ class HollowHandleStyle(widgets.ProxyStyle):
             cc, opt, self.SubControl.SC_SliderHandle, widget
         )
         painter.setRenderHints(gui.Painter.RenderHint.Antialiasing)
-        painter.setPen(QtCore.Qt.PenStyle.NoPen)
+        painter.setPen(constants.PenStyle.NoPen)
 
         # paint groove
         painter.save()
@@ -165,7 +165,7 @@ class Slider(widgets.AbstractSliderMixin, QtWidgets.QSlider):
 
     def mousePressEvent(self, e: QtGui.QMouseEvent):
         self.clicked.emit(self.value())
-        if self.orientation() == QtCore.Qt.Orientation.Horizontal:
+        if self.orientation() == constants.Orientation.Horizontal:
             value = e.pos().x() / self.width() * self.maximum()
         else:
             value = (self.height() - e.pos().y()) / self.height() * self.maximum()

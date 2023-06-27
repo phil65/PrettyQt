@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 
 
 class SplitterHandle(widgets.WidgetMixin, QtWidgets.QSplitterHandle):
@@ -9,7 +9,7 @@ class SplitterHandle(widgets.WidgetMixin, QtWidgets.QSplitterHandle):
 
     def __init__(
         self,
-        orientation: constants.OrientationStr | QtCore.Qt.Orientation,
+        orientation: constants.OrientationStr | constants.Orientation,
         parent: QtWidgets.QSplitter,
         **kwargs,
     ):

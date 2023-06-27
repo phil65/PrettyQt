@@ -4,7 +4,7 @@ from collections.abc import Sequence
 import logging
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import helpers
 
 
@@ -36,8 +36,8 @@ class WidgetsDetailsModel(core.AbstractTableModel):
     def headerData(
         self,
         section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role, section:
             case constants.VERTICAL, constants.DISPLAY_ROLE, _:

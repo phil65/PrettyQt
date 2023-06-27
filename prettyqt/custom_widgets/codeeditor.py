@@ -22,7 +22,7 @@ class CodeEditor(widgets.PlainTextEdit):
 
     # def keyPressEvent(self, event):
     #     match event.key():
-    #         case QtCore.Qt.Key.Key_Backtab if self.textCursor().hasSelection():
+    #         case constants.Key.Key_Backtab if self.textCursor().hasSelection():
     #             start_cursor = self.get_textCursor()
     #             with start_cursor.edit_block():
     #                 start_pos = start_cursor.selectionStart()
@@ -46,7 +46,7 @@ class CodeEditor(widgets.PlainTextEdit):
     #                 )
     #                 if start_cursor.selectedText() == self.delimiter:
     #                     start_cursor.removeSelectedText()
-    #         case QtCore.Qt.Key.Key_Tab if self.textCursor().hasSelection():
+    #         case constants.Key.Key_Tab if self.textCursor().hasSelection():
     #             start_cursor = self.get_text_cursor()
     #             with start_cursor.edit_block():
     #                 start_pos = start_cursor.selectionStart()
@@ -60,13 +60,13 @@ class CodeEditor(widgets.PlainTextEdit):
     #                     start_cursor.insertText(self.delimiter)
     #                     start_cursor.move_position("next_block")
     #                 start_cursor.insertText(self.delimiter)
-    #         case QtCore.Qt.Key.Key_Escape if self.completion_state > 0:
+    #         case constants.Key.Key_Escape if self.completion_state > 0:
     #             self.completion_state = 0
     #             cursor = self.get_text_cursor()
     #             with cursor.edit_block():
     #                 self.selecter.replace_block_at_cursor(self._orig_text)
     #             self._orig_text == None
-    #         case QtCore.Qt.Key.Key_Tab:
+    #         case constants.Key.Key_Tab:
     #             if self.is_start():
     #                 self.textCursor().insertText(self.delimiter)
     #             else:

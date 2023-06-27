@@ -2,27 +2,26 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict
 
 
 SubmitPolicyStr = Literal["auto", "manual"]
 
-SUBMIT_POLICY: bidict[SubmitPolicyStr, QtWidgets.QDataWidgetMapper.SubmitPolicy] = bidict(
-    auto=QtWidgets.QDataWidgetMapper.SubmitPolicy.AutoSubmit,
-    manual=QtWidgets.QDataWidgetMapper.SubmitPolicy.ManualSubmit,
+SUBMIT_POLICY: bidict[SubmitPolicyStr, widgets.QDataWidgetMapper.SubmitPolicy] = bidict(
+    auto=widgets.QDataWidgetMapper.SubmitPolicy.AutoSubmit,
+    manual=widgets.QDataWidgetMapper.SubmitPolicy.ManualSubmit,
 )
 
 
-class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
-    def __setitem__(self, key: int, value: QtWidgets.QWidget):
+class DataWidgetMapper(core.ObjectMixin, widgets.QDataWidgetMapper):
+    def __setitem__(self, key: int, value: widgets.QWidget):
         self.addMapping(value, key)
 
-    def __getitem__(self, key: int) -> QtWidgets.QWidget:
+    def __getitem__(self, key: int) -> widgets.QWidget:
         return self.mappedWidgetAt(key)
 
-    def __delitem__(self, key_or_widget: int | QtWidgets.QWidget):
+    def __delitem__(self, key_or_widget: int | widgets.QWidget):
         widget = (
             self.mappedWidgetAt(key_or_widget)
             if isinstance(key_or_widget, int)
@@ -54,7 +53,7 @@ class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
         return constants.ORIENTATION.inverse[self.orientation()]
 
     def set_submit_policy(
-        self, policy: SubmitPolicyStr | QtWidgets.QDataWidgetMapper.SubmitPolicy
+        self, policy: SubmitPolicyStr | widgets.QDataWidgetMapper.SubmitPolicy
     ):
         """Set the submit policy of the mapper.
 
@@ -72,15 +71,15 @@ class DataWidgetMapper(core.ObjectMixin, QtWidgets.QDataWidgetMapper):
         return SUBMIT_POLICY.inverse[self.submitPolicy()]
 
     def add_mapping(
-        self, widget: QtWidgets.QWidget, section: int, property_name: str | None = None
+        self, widget: widgets.QWidget, section: int, property_name: str | None = None
     ):
         if property_name is None:
             self.addMapping(widget, section)
         else:
-            ba = QtCore.QByteArray(property_name.encode())
+            ba = core.QByteArray(property_name.encode())
             self.addMapping(widget, section, ba)
 
-    def get_mapped_property_name(self, widget: QtWidgets.QWidget) -> str:
+    def get_mapped_property_name(self, widget: widgets.QWidget) -> str:
         return self.mappedPropertyName(widget).data().decode()
 
 

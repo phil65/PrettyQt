@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable
 
-from prettyqt import core, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
@@ -13,7 +13,7 @@ class CycleWidget(widgets.ListWidget):
         self,
         items: Iterable,
         item_size: QtCore.QSize,
-        align=QtCore.Qt.AlignmentFlag.AlignCenter,
+        align=constants.AlignmentFlag.AlignCenter,
         parent=None,
     ):
         super().__init__(parent=parent)
@@ -68,9 +68,9 @@ class CycleWidget(widgets.ListWidget):
         for i in items:
             item = widgets.ListWidgetItem(str(i), self)
             item.setSizeHint(self.item_size)
-            item.setTextAlignment(self.align | QtCore.Qt.AlignmentFlag.AlignVCenter)
+            item.setTextAlignment(self.align | constants.AlignmentFlag.AlignVCenter)
             if disabled:
-                item.setFlags(QtCore.Qt.ItemFlag.NoItemFlags)
+                item.setFlags(constants.ItemFlag.NoItemFlags)
 
             self.addItem(item)
 
@@ -79,7 +79,7 @@ class CycleWidget(widgets.ListWidget):
         self.scrollToItem(self.currentItem())
 
     def setSelectedItem(self, text: str):
-        items = self.findItems(text, QtCore.Qt.MatchFlag.MatchExactly)
+        items = self.findItems(text, constants.MatchFlag.MatchExactly)
         if not items:
             return
 
@@ -131,9 +131,9 @@ class CycleWidget(widgets.ListWidget):
 
     def keyPressEvent(self, e):
         match e.key():
-            case QtCore.Qt.Key.Key_Down:
+            case constants.Key.Key_Down:
                 self.scroll_down()
-            case QtCore.Qt.Key.Key_Up:
+            case constants.Key.Key_Up:
                 self.scroll_up()
             case _:
                 super().keyPressEvent(e)

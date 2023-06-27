@@ -5,7 +5,7 @@ import enum
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 
 
 BarStyleStr = Literal["donut", "pie", "line", "expand"]
@@ -171,7 +171,7 @@ class RoundProgressBar(widgets.Widget):
             case self.BarStyle.Line:
                 base_color = self.palette().base().color()
                 painter.set_pen(color=base_color, width=self.outline_pen_width)
-                painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
+                painter.setBrush(constants.BrushStyle.NoBrush)
                 width = self.outline_pen_width / 2
                 adjusted = rect.adjusted(width, width, -width, -width)
                 painter.drawEllipse(adjusted)
@@ -197,7 +197,7 @@ class RoundProgressBar(widgets.Widget):
             case self.BarStyle.Line:
                 color = self.palette().highlight().color()
                 painter.set_pen(color=color, width=self.data_pen_width)
-                painter.setBrush(QtCore.Qt.BrushStyle.NoBrush)
+                painter.setBrush(constants.BrushStyle.NoBrush)
                 pen_width = self.outline_pen_width / 2
                 adjusted = rect.adjusted(pen_width, pen_width, -pen_width, -pen_width)
                 if value == self._max_value:

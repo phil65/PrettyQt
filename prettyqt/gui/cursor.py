@@ -18,7 +18,7 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
         cls.setPos(cls.pos() - core.Point(0, 1))
 
     @classmethod
-    def click(cls, key=QtCore.Qt.MouseButton.LeftButton):
+    def click(cls, key=constants.MouseButton.LeftButton):
         from prettyqt import widgets
 
         app = widgets.app()
@@ -33,8 +33,8 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
             local,
             pos,
             key,
-            QtCore.Qt.MouseButton.NoButton,
-            QtCore.Qt.KeyboardModifier(0),
+            constants.MouseButton.NoButton,
+            constants.KeyboardModifier(0),
         )
 
         core.CoreApplication.sendEvent(widget, event)
@@ -43,8 +43,8 @@ class Cursor(serializemixin.SerializeMixin, QtGui.QCursor):
             local,
             pos,
             key,
-            QtCore.Qt.MouseButton.NoButton,
-            QtCore.Qt.KeyboardModifier(0),
+            constants.MouseButton.NoButton,
+            constants.KeyboardModifier(0),
         )
 
         core.CoreApplication.sendEvent(widget, event)

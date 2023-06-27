@@ -5,7 +5,7 @@ import functools
 from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import datatypes, listdelegators
 
 
@@ -97,7 +97,7 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
         whats_this: str | None = None,
         # text_alignment: Optional[str] = None,
         checkstate: constants.StateStr | constants.CheckState | None = None,
-        flags: QtCore.Qt.ItemFlag | None = None,
+        flags: constants.ItemFlag | None = None,
         size_hint: datatypes.SizeType | None = None,
         is_user_type: bool = False,
     ) -> widgets.ListWidgetItem:
@@ -171,9 +171,9 @@ class ListWidget(widgets.ListViewMixin, QtWidgets.QListWidget):
     ) -> listdelegators.BaseListDelegator[QtWidgets.QListWidgetItem]:
         flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
-            flag |= QtCore.Qt.MatchFlag.MatchRecursive
+            flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
-            flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
+            flag |= constants.MatchFlag.MatchCaseSensitive
         items = self.findItems(text, flag, column)  # type: ignore
         return listdelegators.BaseListDelegator(items)
 

@@ -43,9 +43,9 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
     ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
         flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
-            flag |= QtCore.Qt.MatchFlag.MatchRecursive
+            flag |= constants.MatchFlag.MatchRecursive
         if case_sensitive:
-            flag |= QtCore.Qt.MatchFlag.MatchCaseSensitive
+            flag |= constants.MatchFlag.MatchCaseSensitive
         items = self.findItems(text, flag, column)
         return listdelegators.BaseListDelegator(items)
 

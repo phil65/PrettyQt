@@ -6,7 +6,7 @@ import traceback
 from typing import Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
@@ -102,9 +102,9 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         super().__init__(**kwargs)
         self.set_icon(icon)
         self.setWindowFlags(
-            QtCore.Qt.WindowType.Dialog
-            | QtCore.Qt.WindowType.WindowTitleHint
-            | QtCore.Qt.WindowType.CustomizeWindowHint
+            constants.WindowType.Dialog
+            | constants.WindowType.WindowTitleHint
+            | constants.WindowType.CustomizeWindowHint
         )
         if isinstance(buttons, list):
             for b in buttons:

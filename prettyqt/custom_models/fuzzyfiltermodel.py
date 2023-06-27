@@ -129,7 +129,7 @@ class FuzzyCompleter(widgets.Completer):
                 source.clearEditText()
             case QtCore.QEvent.Type.KeyPress:
                 key = event.key()
-                if key == QtCore.Qt.Key.Key_Enter:
+                if key == constants.Key.Key_Enter:
                     text = source.currentText()
                     source.setCompleter(None)
                     source.setEditText(text)

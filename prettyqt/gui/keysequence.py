@@ -5,7 +5,7 @@ from typing import Literal
 
 from typing_extensions import Self
 
-from prettyqt import core
+from prettyqt import constants, core
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import bidict, get_repr
 
@@ -142,7 +142,7 @@ class KeySequence(QtGui.QKeySequence):
 
     @functools.singledispatchmethod
     @classmethod
-    def to_shortcut_str(cls, key: QtCore.Qt.Key, mod: int = 0) -> str:
+    def to_shortcut_str(cls, key: constants.Key, mod: int = 0) -> str:
         return cls(mod | key).toString()
 
     @to_shortcut_str.register

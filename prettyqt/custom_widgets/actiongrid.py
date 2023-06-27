@@ -107,7 +107,7 @@ class ActionGrid(widgets.Frame):
         columns: int = 4,
         button_size: core.QSize | None = None,
         icon_size: core.QSize | None = None,
-        tool_button_style=QtCore.Qt.ToolButtonStyle.ToolButtonTextUnderIcon,
+        tool_button_style=constants.ToolButtonStyle.ToolButtonTextUnderIcon,
         **kwargs,
     ):
         super().__init__(**kwargs)
@@ -298,25 +298,25 @@ class ActionGrid(widgets.Frame):
                 self._on_button_enter(obj)
         return super().eventFilter(obj, event)
 
-    def _focus_move(self, focus: QtWidgets.QWidget, key: QtCore.Qt.Key) -> bool:
+    def _focus_move(self, focus: QtWidgets.QWidget, key: constants.Key) -> bool:
         assert focus is self.focusWidget()
         try:
             index = self._index_of(focus)
         except IndexError:
             return False
         match key:
-            case QtCore.Qt.Key.Key_Down:
+            case constants.Key.Key_Down:
                 index += self._columns
-            case QtCore.Qt.Key.Key_Up:
+            case constants.Key.Key_Up:
                 index -= self._columns
-            case QtCore.Qt.Key.Key_Left:
+            case constants.Key.Key_Left:
                 index -= 1
-            case QtCore.Qt.Key.Key_Right:
+            case constants.Key.Key_Right:
                 index += 1
 
         if 0 <= index < self.count():
             button = self._grid_slots[index].button
-            button.setFocus(QtCore.Qt.FocusReason.TabFocusReason)
+            button.setFocus(constants.FocusReason.TabFocusReason)
             return True
         else:
             return False

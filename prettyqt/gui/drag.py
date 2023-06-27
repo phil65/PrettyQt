@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 
 
 class Drag(core.ObjectMixin, QtGui.QDrag):
@@ -36,7 +36,7 @@ class Drag(core.ObjectMixin, QtGui.QDrag):
         default_drop_action: constants.DropActionStr | constants.DropAction | None = None,
     ) -> constants.DropActionStr:
         supported_actions = supported_actions or [constants.DROP_ACTION["move"]]
-        flag = QtCore.Qt.DropAction(0)
+        flag = constants.DropAction(0)
         for i in supported_actions:
             flag |= constants.DROP_ACTION.get_enum_value(i)
         default_action = constants.DROP_ACTION.get_enum_value(default_drop_action)

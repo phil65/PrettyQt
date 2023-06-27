@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider, widgets
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
 
 
@@ -183,7 +183,7 @@ class Timeline(widgets.Widget):
         self.update()
 
     def mousePressEvent(self, e):
-        if e.button() == QtCore.Qt.MouseButton.LeftButton:
+        if e.button() == constants.MouseButton.LeftButton:
             x = e.position().x()
             self.position_changed.emit(x)
             self.pointer_time_pos = x * self.get_scale()
@@ -194,7 +194,7 @@ class Timeline(widgets.Widget):
             self._clicking = True  # Set clicking check to true
 
     def mouseReleaseEvent(self, e):
-        if e.button() == QtCore.Qt.MouseButton.LeftButton:
+        if e.button() == constants.MouseButton.LeftButton:
             self._clicking = False  # Set clicking check to false
 
     def enterEvent(self, e):

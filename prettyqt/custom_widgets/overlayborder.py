@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes
 
@@ -10,9 +10,9 @@ class BaseOverlayWidget(widgets.Widget):
 
     def __init__(self, parent, **kwargs):
         super().__init__(parent, **kwargs)
-        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_TransparentForMouseEvents)
-        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_NoSystemBackground)
-        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_NoChildEventsForParent)
+        self.setAttribute(constants.WidgetAttribute.WA_TransparentForMouseEvents)
+        self.setAttribute(constants.WidgetAttribute.WA_NoSystemBackground)
+        self.setAttribute(constants.WidgetAttribute.WA_NoChildEventsForParent)
         # self.set_flags(tool=True)
         self._do_resize()
         self._border_width = 4

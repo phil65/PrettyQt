@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from prettyqt import core
-from prettyqt.qt import QtCore, QtGui
+from prettyqt import constants, core
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes, get_repr
 
 
@@ -20,9 +20,9 @@ class AbstractTextDocumentLayoutMixin(core.ObjectMixin):
 
     def hit_test(self, point: datatypes.PointFType, fuzzy: bool = False) -> int | None:
         accuracy = (
-            QtCore.Qt.HitTestAccuracy.FuzzyHit
+            constants.HitTestAccuracy.FuzzyHit
             if fuzzy
-            else QtCore.Qt.HitTestAccuracy.ExactHit
+            else constants.HitTestAccuracy.ExactHit
         )
         result = self.hitTest(datatypes.to_pointf(point), accuracy)
         return None if result == -1 else result

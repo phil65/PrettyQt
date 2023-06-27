@@ -5,8 +5,8 @@ import ctypes
 
 from typing_extensions import Self
 
-from prettyqt import core
-from prettyqt.qt import API, QtCore, QtGui
+from prettyqt import core, constants
+from prettyqt.qt import API, QtGui
 from prettyqt.utils import datatypes, serializemixin
 
 
@@ -26,7 +26,7 @@ class Polygon(serializemixin.SerializeMixin, QtGui.QPolygon):
     def __contains__(self, point: datatypes.PointType) -> bool:
         if isinstance(point, tuple):
             point = core.Point(*point)
-        return self.containsPoint(point, QtCore.Qt.FillRule.OddEvenFill)
+        return self.containsPoint(point, constants.FillRule.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.Point:
         if index >= self.size():

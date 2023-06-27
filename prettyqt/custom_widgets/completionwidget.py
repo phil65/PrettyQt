@@ -6,7 +6,7 @@ from collections.abc import Iterable
 import contextlib
 import os
 
-from prettyqt import gui, widgets
+from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -21,9 +21,9 @@ class CompletionWidget(widgets.ListWidget):
 
         # We need Popup style to ensure correct mouse interaction
         # (dialog would dissappear on mouse click with ToolTip style)
-        self.setWindowFlags(QtCore.Qt.WindowType.Popup)
+        self.setWindowFlags(constants.WindowType.Popup)
 
-        self.setAttribute(QtCore.Qt.WidgetAttribute.WA_StaticContents)
+        self.setAttribute(constants.WidgetAttribute.WA_StaticContents)
         original_policy = self._text_edit.focusPolicy()
 
         self.set_focus_policy("none")
@@ -52,18 +52,18 @@ class CompletionWidget(widgets.ListWidget):
     def keyPressEvent(self, event):
         match event.key():
             case (
-                QtCore.Qt.Key.Key_Return | QtCore.Qt.Key.Key_Enter | QtCore.Qt.Key.Key_Tab
+                constants.Key.Key_Return | constants.Key.Key_Enter | constants.Key.Key_Tab
             ):
                 self._complete_current()
-            case QtCore.Qt.Key.Key_Escape:
+            case constants.Key.Key_Escape:
                 self.hide()
             case (
-                QtCore.Qt.Key.Key_Up
-                | QtCore.Qt.Key.Key_Down
-                | QtCore.Qt.Key.Key_PageUp
-                | QtCore.Qt.Key.Key_PageDown
-                | QtCore.Qt.Key.Key_Home
-                | QtCore.Qt.Key.Key_End
+                constants.Key.Key_Up
+                | constants.Key.Key_Down
+                | constants.Key.Key_PageUp
+                | constants.Key.Key_PageDown
+                | constants.Key.Key_Home
+                | constants.Key.Key_End
             ):
                 return super().keyPressEvent(event)
             case _:
@@ -100,7 +100,7 @@ class CompletionWidget(widgets.ListWidget):
                 path_items.append(item.replace('"', ""))
             else:
                 list_item = widgets.ListWidgetItem()
-                list_item.setData(QtCore.Qt.ItemDataRole.UserRole, item)  # type: ignore
+                list_item.setData(constants.ItemDataRole.UserRole, item)  # type: ignore
                 # Need to split to only show last element of a dot completion
                 list_item.setText(item.split(".")[-1])
                 self.addItem(list_item)
@@ -108,7 +108,7 @@ class CompletionWidget(widgets.ListWidget):
         common_prefix = os.path.dirname(os.path.commonprefix(path_items))
         for path_item in path_items:
             list_item = widgets.ListWidgetItem()
-            list_item.setData(QtCore.Qt.ItemDataRole.UserRole, path_item)  # type: ignore
+            list_item.setData(constants.ItemDataRole.UserRole, path_item)  # type: ignore
             text = path_item.split(common_prefix)[-1] if common_prefix else path_item
             list_item.setText(text)
             self.addItem(list_item)
@@ -148,7 +148,7 @@ class CompletionWidget(widgets.ListWidget):
 
     def _complete_current(self):
         """Perform the completion with the currently selected item."""
-        text = self.currentItem().data(QtCore.Qt.ItemDataRole.UserRole)  # type: ignore
+        text = self.currentItem().data(constants.ItemDataRole.UserRole)  # type: ignore
         self._current_text_cursor().insertText(text)
         self.hide()
 
@@ -168,8 +168,8 @@ class CompletionWidget(widgets.ListWidget):
 
         if prefix := self._current_text_cursor().selection().toPlainText():
             flags = (
-                QtCore.Qt.MatchFlag.MatchStartsWith  # type: ignore
-                | QtCore.Qt.MatchFlag.MatchCaseSensitive
+                constants.MatchFlag.MatchStartsWith  # type: ignore
+                | constants.MatchFlag.MatchCaseSensitive
             )
             if items := self.findItems(prefix, flags):
                 self.setCurrentItem(items[0])

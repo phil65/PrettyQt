@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, svg
+from prettyqt import constants, core, gui, svg
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes
 
@@ -48,9 +48,9 @@ class SVGBufferIconEngine(gui.IconEngine):
     ) -> QtGui.QPixmap:
         """Return the icon as a pixmap with requested size, mode, and state."""
         img = gui.Image(size, QtGui.QImage.Format.Format_ARGB32)
-        img.fill(QtCore.Qt.GlobalColor.transparent)
+        img.fill(constants.GlobalColor.transparent)
         pixmap = QtGui.QPixmap.fromImage(
-            img, QtCore.Qt.ImageConversionFlag.NoFormatConversion
+            img, constants.ImageConversionFlag.NoFormatConversion
         )
         rect = QtCore.QRect(QtCore.QPoint(0, 0), size)
         self.paint(QtGui.QPainter(pixmap), rect, mode, state)

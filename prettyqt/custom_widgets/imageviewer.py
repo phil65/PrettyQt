@@ -4,7 +4,7 @@ from __future__ import annotations
 import math
 import os
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui
 
 
@@ -44,9 +44,9 @@ def draw_size(p: gui.Painter, rect: core.Rect, w: int, h: int):
     p.setFont(f)
     sz = "\u00a0%d x %d\u00a0" % (w, h)
     flags = (
-        QtCore.Qt.AlignmentFlag.AlignBottom
-        | QtCore.Qt.AlignmentFlag.AlignRight
-        | QtCore.Qt.TextFlag.TextSingleLine
+        constants.AlignmentFlag.AlignBottom
+        | constants.AlignmentFlag.AlignRight
+        | constants.TextFlag.TextSingleLine
     )
     szrect = p.boundingRect(rect, flags, sz)
     p.fillRect(szrect.adjusted(0, 0, 0, 4), gui.Color(0, 0, 0, 200))
@@ -103,8 +103,8 @@ class ImageViewer(widgets.Widget):
             pmap = pmap.scaled(
                 int(nw * pmap.devicePixelRatio()),
                 int(nh * pmap.devicePixelRatio()),
-                QtCore.Qt.AspectRatioMode.IgnoreAspectRatio,
-                QtCore.Qt.TransformationMode.SmoothTransformation,
+                constants.AspectRatioMode.IgnoreAspectRatio,
+                constants.TransformationMode.SmoothTransformation,
             )
         w = pmap.width() // pmap.devicePixelRatio()
         h = pmap.height() // pmap.devicePixelRatio()

@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -60,9 +59,9 @@ class OrientedTableView(widgets.TableView):
 
     def get_split_cursor(self):
         if self.is_horizontal():
-            return gui.Cursor(QtCore.Qt.CursorShape.SplitHCursor)
+            return gui.Cursor(constants.CursorShape.SplitHCursor)
         else:
-            return gui.Cursor(QtCore.Qt.CursorShape.SplitVCursor)
+            return gui.Cursor(constants.CursorShape.SplitVCursor)
 
 
 if __name__ == "__main__":

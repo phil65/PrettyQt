@@ -3,7 +3,6 @@ from __future__ import annotations
 import enum
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore
 
 
 class AccordionItem(widgets.GroupBox):
@@ -86,7 +85,7 @@ class AccordionItem(widgets.GroupBox):
 
         # start a drag event
         if (
-            event.button() == QtCore.Qt.MouseButton.LeftButton
+            event.button() == constants.MouseButton.LeftButton
             and self.get_drag_drop_rect().contains(event.position().toPoint())
         ):
             # create the pixmap
@@ -104,7 +103,7 @@ class AccordionItem(widgets.GroupBox):
                 # self._widget.itemDragFailed.emit(self)
             event.accept()
         elif (
-            event.button() == QtCore.Qt.MouseButton.LeftButton
+            event.button() == constants.MouseButton.LeftButton
             and self.expand_collapsed_rect().contains(event.position().toPoint())
         ):
             self._clicked = True
@@ -121,7 +120,7 @@ class AccordionItem(widgets.GroupBox):
 
     def _draw_triangle(self, painter, x, y):
         brush = gui.Brush(
-            gui.Color(255, 255, 255, 160), QtCore.Qt.BrushStyle.SolidPattern
+            gui.Color(255, 255, 255, 160), constants.BrushStyle.SolidPattern
         )
         points = (
             (
@@ -263,7 +262,7 @@ class AccordionItem(widgets.GroupBox):
                     y + 1,
                     w - 20,
                     16,
-                    QtCore.Qt.AlignmentFlag.AlignCenter,
+                    constants.AlignmentFlag.AlignCenter,
                     self.title(),
                 )
 
@@ -443,7 +442,7 @@ class AccordionWidget(widgets.ScrollArea):
 
     def enterEvent(self, event):
         if self.v_scrollbar.can_scroll():
-            widgets.Application.setOverrideCursor(QtCore.Qt.CursorShape.OpenHandCursor)
+            widgets.Application.setOverrideCursor(constants.CursorShape.OpenHandCursor)
 
     def leaveEvent(self, event):
         if self.v_scrollbar.can_scroll():
@@ -463,7 +462,7 @@ class AccordionWidget(widgets.ScrollArea):
 
     def mousePressEvent(self, event):
         if (
-            event.button() == QtCore.Qt.MouseButton.LeftButton
+            event.button() == constants.MouseButton.LeftButton
             and self.v_scrollbar.can_scroll()
         ):
             self._scrolling = True

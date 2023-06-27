@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, custom_widgets
-from prettyqt.qt import QtCore
+from prettyqt import constants, core, gui, custom_widgets
 
 
 class CursorEdit(custom_widgets.EnumComboBox):
@@ -9,7 +8,7 @@ class CursorEdit(custom_widgets.EnumComboBox):
 
     def __init__(self, *args, object_name: str = "cursor_edit", **kwargs):
         super().__init__(*args, object_name=object_name, **kwargs)
-        self._set_enum_class(QtCore.Qt.CursorShape)
+        self._set_enum_class(constants.CursorShape)
         self.currentIndexChanged.connect(self._on_value_change)
 
     def _on_value_change(self):

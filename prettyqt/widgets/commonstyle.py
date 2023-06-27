@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
 class CommonStyleMixin(widgets.StyleMixin):
     pass
 
 
-class CommonStyle(CommonStyleMixin, QtWidgets.QCommonStyle):
+class CommonStyle(CommonStyleMixin, widgets.QCommonStyle):
     pass
 
 

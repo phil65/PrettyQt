@@ -14,13 +14,13 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     clicked = core.Signal()
 
     def __init__(self, *args, **kwargs):
-        self._elide_mode = QtCore.Qt.TextElideMode.ElideNone
+        self._elide_mode = constants.TextElideMode.ElideNone
         super().__init__(*args, **kwargs)
         self.openExternalLinks()
         self._is_elided = False
 
     def mouseReleaseEvent(self, ev: QtGui.QMouseEvent):
-        if ev.button() == QtCore.Qt.MouseButton.LeftButton:
+        if ev.button() == constants.MouseButton.LeftButton:
             self.clicked.emit()
         return super().mouseReleaseEvent(ev)
 
@@ -41,7 +41,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     # # adapted from https://forum.qt.io/topic/24530/solved-shortening-a-label/3
     # def minimumSizeHint(self):
-    #     if self._elide_mode != QtCore.Qt.TextElideMode.ElideNone:
+    #     if self._elide_mode != constants.TextElideMode.ElideNone:
     #         # TODO: tweak sizeHint
     #         # -> text should expand if user increases window size,
     #         #    but don't automatically adapt window size to label width on UI update!
@@ -79,7 +79,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     #         )
 
     def paintEvent(self, event):
-        if self._elide_mode == QtCore.Qt.TextElideMode.ElideNone:
+        if self._elide_mode == constants.TextElideMode.ElideNone:
             super().paintEvent(event)
             return
         did_elide = False
@@ -132,8 +132,8 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     def allow_links(self) -> Label:
         # self.setText("<a href=\"http://example.com/\">Click Here!</a>")
-        self.setTextFormat(QtCore.Qt.TextFormat.RichText)
-        self.setTextInteractionFlags(QtCore.Qt.TextInteractionFlag.TextBrowserInteraction)
+        self.setTextFormat(constants.TextFormat.RichText)
+        self.setTextInteractionFlags(constants.TextInteractionFlag.TextBrowserInteraction)
         self.setOpenExternalLinks(True)
         return self
 

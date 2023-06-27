@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, gui
+from prettyqt import constants, core, gui
 from prettyqt.qt import QtCore, QtGui
 
 
@@ -20,7 +20,7 @@ class CharIconEngine(gui.IconEngine):
 
     def pixmap(self, size, mode, state) -> QtGui.QPixmap:
         pm = QtGui.QPixmap(size)
-        pm.fill(QtCore.Qt.GlobalColor.transparent)  # type: ignore
+        pm.fill(constants.GlobalColor.transparent)  # type: ignore
         rect = core.Rect(ZERO_COORD, size)
         with gui.Painter(pm) as painter:
             self.paint(painter, rect, mode, state)
