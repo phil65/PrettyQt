@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from typing import Any
 import dataclasses
 import logging
@@ -70,12 +71,13 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
                         )
                     ):
                         return False
-                    else:
-                        if self.is_filter_case_sensitive():
-                            search_val = search_val.lower()
-                            data = data.lower()
-                        if not data.startswith(search_val):
-                            return False
+                    if not self.is_filter_case_sensitive():
+                        search_val = search_val.lower()
+                        data = data.lower()
+                    if not data.startswith(search_val):
+                        return False
+                case Callable():
+                    return search_val(data)
                 case _:
                     if data != search_val:
                         return False
