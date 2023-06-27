@@ -3,23 +3,22 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 SystemStr = Literal["gregorian", "julian", "milankovic","jalali", "islamic_civil"]
 
-SYSTEM: bidict[SystemStr, QtCore.QCalendar.System] = bidict(
-    gregorian=QtCore.QCalendar.System.Gregorian,
-    julian=QtCore.QCalendar.System.Julian,
-    milankovic=QtCore.QCalendar.System.Milankovic,
-    jalali=QtCore.QCalendar.System.Jalali,
-    islamic_civil=QtCore.QCalendar.System.IslamicCivil,
+SYSTEM: bidict[SystemStr, core.QCalendar.System] = bidict(
+    gregorian=core.QCalendar.System.Gregorian,
+    julian=core.QCalendar.System.Julian,
+    milankovic=core.QCalendar.System.Milankovic,
+    jalali=core.QCalendar.System.Jalali,
+    islamic_civil=core.QCalendar.System.IslamicCivil,
 )
 
 
-class Calendar(QtCore.QCalendar):
-    def __init__(self, system: str | QtCore.QCalendar.System = "gregorian"):
-        typ = system if isinstance(system, QtCore.QCalendar.System) else SYSTEM[system]
+class Calendar(core.QCalendar):
+    def __init__(self, system: str | core.QCalendar.System = "gregorian"):
+        typ = system if isinstance(system, core.QCalendar.System) else SYSTEM[system]
         super().__init__(typ)
 
     def __repr__(self):

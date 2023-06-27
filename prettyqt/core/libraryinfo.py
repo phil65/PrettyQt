@@ -4,11 +4,10 @@ import pathlib
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-mod = QtCore.QLibraryInfo.LibraryPath
+mod = core.QLibraryInfo.LibraryPath
 
 LocationStr = Literal[
     "prefix",
@@ -45,7 +44,7 @@ LOCATION: bidict[LocationStr, mod] = bidict(
 )
 
 
-class LibraryInfo(QtCore.QLibraryInfo):
+class LibraryInfo(core.QLibraryInfo):
     @classmethod
     def get_location(cls, location: LocationStr) -> pathlib.Path:
         path = cls.path(LOCATION.get_enum_value(location))

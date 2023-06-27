@@ -4,11 +4,10 @@ import contextlib
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-mod = QtCore.QIODeviceBase  # type: ignore
+mod = core.QIODeviceBase  # type: ignore
 
 OpenModeStr = Literal[
     "not_open",
@@ -51,5 +50,5 @@ class IODeviceMixin(core.ObjectMixin):
         return OPEN_MODES.inverse[self.openMode()]
 
 
-class IODevice(IODeviceMixin, QtCore.QIODevice):
+class IODevice(IODeviceMixin, core.QIODevice):
     pass

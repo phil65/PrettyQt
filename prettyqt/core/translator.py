@@ -5,7 +5,6 @@ import pathlib
 from typing_extensions import Self
 
 from prettyqt import core, paths
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
 
 
@@ -49,7 +48,7 @@ class TranslatorMixin(core.ObjectMixin):
         return translator
 
 
-class Translator(TranslatorMixin, QtCore.QTranslator):
+class Translator(TranslatorMixin, core.QTranslator):
     pass
 
 

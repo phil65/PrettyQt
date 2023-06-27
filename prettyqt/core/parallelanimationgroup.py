@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 
 
-class ParallelAnimationGroup(core.AnimationGroupMixin, QtCore.QParallelAnimationGroup):
+class ParallelAnimationGroup(core.AnimationGroupMixin, core.QParallelAnimationGroup):
     def set_duration(self, duration: int):
         for anim in self:
             match anim:

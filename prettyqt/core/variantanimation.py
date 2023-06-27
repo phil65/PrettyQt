@@ -5,7 +5,6 @@ from collections.abc import Callable, Iterator
 from typing_extensions import Self
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
 
 
@@ -61,7 +60,7 @@ class VariantAnimationMixin(core.AbstractAnimationMixin):
         return self
 
 
-class VariantAnimation(VariantAnimationMixin, QtCore.QVariantAnimation):
+class VariantAnimation(VariantAnimationMixin, core.QVariantAnimation):
     pass
 
 

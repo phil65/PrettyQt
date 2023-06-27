@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
 
 
 class HtmlItemDelegate(widgets.StyledItemDelegate):
@@ -33,14 +32,14 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
         # draw everything without text
         option.text = ""
         option.widget.style().drawControl(
-            QtWidgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
+            widgets.QStyle.ControlElement.CE_ItemViewItem, option, painter
         )
 
         # now we find position of our label and display our TextDocument there.
         icon_size = option.icon.actualSize(option.decorationSize)
         margin = icon_size.width()
         painter.translate(option.rect.left() + margin, option.rect.top())
-        clip = QtCore.QRectF(0, 0, option.rect.width() + margin, option.rect.height())
+        clip = core.QRectF(0, 0, option.rect.width() + margin, option.rect.height())
         self.doc.drawContents(painter, clip)
 
         painter.restore()
@@ -49,14 +48,14 @@ class HtmlItemDelegate(widgets.StyledItemDelegate):
         option = widgets.StyleOptionViewItem(option)
         self.initStyleOption(option, index)
         self.prepare_doc(option)
-        return QtCore.QSize(int(self.doc.idealWidth()), int(self.doc.size().height()))
+        return core.QSize(int(self.doc.idealWidth()), int(self.doc.size().height()))
 
-    def prepare_doc(self, option: QtWidgets.QStyleOptionViewItem):
+    def prepare_doc(self, option: widgets.QStyleOptionViewItem):
         self.text_option.setAlignment(option.displayAlignment)
         self.doc.setDefaultFont(option.font)
         self.doc.setHtml(option.text)
         # self.doc.setTextWidth(option.rect.width())
-        self.doc.setPageSize(QtCore.QSizeF(option.rect.width(), option.rect.height()))
+        self.doc.setPageSize(core.QSizeF(option.rect.width(), option.rect.height()))
 
 
 if __name__ == "__main__":

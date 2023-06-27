@@ -1,17 +1,16 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 
 
-class SignalMapper(core.ObjectMixin, QtCore.QSignalMapper):
-    def __getitem__(self, index: int | str | QtCore.QObject) -> QtCore.QObject:
+class SignalMapper(core.ObjectMixin, core.QSignalMapper):
+    def __getitem__(self, index: int | str | core.QObject) -> core.QObject:
         return self.mapping(index)
 
-    def __delitem__(self, index: QtCore.QObject):
+    def __delitem__(self, index: core.QObject):
         return self.removeMappings(index)
 
-    def __setitem__(self, index: QtCore.QObject, value: int | str | QtCore.QObject):
+    def __setitem__(self, index: core.QObject, value: int | str | core.QObject):
         self.setMapping(index, value)
 
 

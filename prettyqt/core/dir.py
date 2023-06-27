@@ -8,7 +8,6 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
@@ -32,24 +31,24 @@ FilterStr = Literal[
     "case_sensitive",
 ]
 
-FILTERS: bidict[FilterStr, QtCore.QDir.Filter] = bidict(
-    none=QtCore.QDir.Filter.NoFilter,
-    dirs=QtCore.QDir.Filter.Dirs,
-    all_dirs=QtCore.QDir.Filter.AllDirs,
-    files=QtCore.QDir.Filter.Files,
-    drives=QtCore.QDir.Filter.Drives,
-    no_sym_links=QtCore.QDir.Filter.NoSymLinks,
-    no_dot_and_dotdot=QtCore.QDir.Filter.NoDotAndDotDot,
-    no_dot=QtCore.QDir.Filter.NoDot,
-    no_dotdot=QtCore.QDir.Filter.NoDotDot,
-    all_entries=QtCore.QDir.Filter.AllEntries,
-    readable=QtCore.QDir.Filter.Readable,
-    writable=QtCore.QDir.Filter.Writable,
-    executable=QtCore.QDir.Filter.Executable,
-    modified=QtCore.QDir.Filter.Modified,
-    hidden=QtCore.QDir.Filter.Hidden,
-    system=QtCore.QDir.Filter.System,
-    case_sensitive=QtCore.QDir.Filter.CaseSensitive,
+FILTERS: bidict[FilterStr, core.QDir.Filter] = bidict(
+    none=core.QDir.Filter.NoFilter,
+    dirs=core.QDir.Filter.Dirs,
+    all_dirs=core.QDir.Filter.AllDirs,
+    files=core.QDir.Filter.Files,
+    drives=core.QDir.Filter.Drives,
+    no_sym_links=core.QDir.Filter.NoSymLinks,
+    no_dot_and_dotdot=core.QDir.Filter.NoDotAndDotDot,
+    no_dot=core.QDir.Filter.NoDot,
+    no_dotdot=core.QDir.Filter.NoDotDot,
+    all_entries=core.QDir.Filter.AllEntries,
+    readable=core.QDir.Filter.Readable,
+    writable=core.QDir.Filter.Writable,
+    executable=core.QDir.Filter.Executable,
+    modified=core.QDir.Filter.Modified,
+    hidden=core.QDir.Filter.Hidden,
+    system=core.QDir.Filter.System,
+    case_sensitive=core.QDir.Filter.CaseSensitive,
 )
 
 SortFlagStr = Literal[
@@ -66,22 +65,22 @@ SortFlagStr = Literal[
     "locale_aware",
 ]
 
-SORT_FLAG: bidict[SortFlagStr, QtCore.QDir.SortFlag] = bidict(
-    name=QtCore.QDir.SortFlag.Name,
-    time=QtCore.QDir.SortFlag.Time,
-    size=QtCore.QDir.SortFlag.Size,
-    type=QtCore.QDir.SortFlag.Type,
-    unsorted=QtCore.QDir.SortFlag.Unsorted,
-    no_sort=QtCore.QDir.SortFlag.NoSort,
-    dirs_first=QtCore.QDir.SortFlag.DirsFirst,
-    dirs_last=QtCore.QDir.SortFlag.DirsLast,
-    reversed=QtCore.QDir.SortFlag.Reversed,
-    ignore_case=QtCore.QDir.SortFlag.IgnoreCase,
-    locale_aware=QtCore.QDir.SortFlag.LocaleAware,
+SORT_FLAG: bidict[SortFlagStr, core.QDir.SortFlag] = bidict(
+    name=core.QDir.SortFlag.Name,
+    time=core.QDir.SortFlag.Time,
+    size=core.QDir.SortFlag.Size,
+    type=core.QDir.SortFlag.Type,
+    unsorted=core.QDir.SortFlag.Unsorted,
+    no_sort=core.QDir.SortFlag.NoSort,
+    dirs_first=core.QDir.SortFlag.DirsFirst,
+    dirs_last=core.QDir.SortFlag.DirsLast,
+    reversed=core.QDir.SortFlag.Reversed,
+    ignore_case=core.QDir.SortFlag.IgnoreCase,
+    locale_aware=core.QDir.SortFlag.LocaleAware,
 )
 
 
-class Dir(QtCore.QDir):
+class Dir(core.QDir):
     def __getattr__(self, attr: str):
         return getattr(self.to_path(), attr)
 

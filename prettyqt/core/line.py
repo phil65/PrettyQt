@@ -7,11 +7,10 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
 
-class Line(QtCore.QLine):
+class Line(core.QLine):
     def __repr__(self):
         return get_repr(self, self.get_p1(), self.get_p2())
 

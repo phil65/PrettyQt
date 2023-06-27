@@ -8,7 +8,6 @@ import inspect
 from typing_extensions import Self
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 
 
 logger = logging.getLogger(__name__)
@@ -91,7 +90,7 @@ def run_async(
     return inner
 
 
-class ThreadPool(core.ObjectMixin, QtCore.QThreadPool):
+class ThreadPool(core.ObjectMixin, core.QThreadPool):
     """Note: signals only work correctly when exclusively using start_worker method."""
 
     __instance: Self | None = None  # a global instance
@@ -100,7 +99,7 @@ class ThreadPool(core.ObjectMixin, QtCore.QThreadPool):
     error_occured = core.Signal(Exception)
     busy_state_changed = core.Signal(bool)
 
-    def __contains__(self, other: QtCore.QThread):
+    def __contains__(self, other: core.QThread):
         return self.contains(other)
 
     def get_thread_priority(self) -> core.thread.PriorityStr:

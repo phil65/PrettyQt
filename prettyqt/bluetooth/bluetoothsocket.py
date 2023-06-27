@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import bluetooth, core
-from prettyqt.qt import QtBluetooth, QtCore
+from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
 
@@ -62,7 +62,7 @@ class BluetoothSocket(core.IODeviceMixin, QtBluetooth.QBluetoothSocket):
         self,
         protocol: bluetooth.bluetoothserviceinfo.ProtocolStr
         | QtBluetooth.QBluetoothServiceInfo.Protocol,
-        parent: QtCore.QObject | None = None,
+        parent: core.QObject | None = None,
     ):
         if isinstance(protocol, str):
             protocol = bluetooth.bluetoothserviceinfo.PROTOCOL[protocol]

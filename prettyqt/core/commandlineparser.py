@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-mod = QtCore.QCommandLineParser
+mod = core.QCommandLineParser
 op = mod.OptionsAfterPositionalArgumentsMode
 
 OptionsAfterPosArgStr = Literal["options", "positional_arguments"]
@@ -25,7 +24,7 @@ SINGLE_DASH_WORD: bidict[SingleDashWordStr, mod.SingleDashWordOptionMode] = bidi
 )
 
 
-class CommandLineParser(QtCore.QCommandLineParser):
+class CommandLineParser(core.QCommandLineParser):
     def set_single_dash_word_option_mode(self, mode: SingleDashWordStr):
         """Set the single dash word option mode.
 

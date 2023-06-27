@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore
 
 
 class RenderLinkDelegate(widgets.StyledItemDelegate):
@@ -43,7 +42,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         rect = option.rect.toRectF()
         b_rect = fm.get_bounding_rect(rect, constants.ALIGN_CENTER_LEFT, text)
         if (
-            event.type() == QtCore.QEvent.Type.MouseButtonPress
+            event.type() == core.QEvent.Type.MouseButtonPress
             and event.button() == constants.MouseButton.LeftButton  # type: ignore
             and b_rect.contains(event.position())  # type: ignore
         ):

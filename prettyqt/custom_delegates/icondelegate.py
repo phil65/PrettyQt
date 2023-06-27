@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 class IconDelegate(widgets.StyledItemDelegate):
@@ -14,18 +13,18 @@ class IconDelegate(widgets.StyledItemDelegate):
 
     def paint(
         self,
-        painter: QtGui.QPainter,
-        option: QtWidgets.QStyleOptionViewItem,
-        index: QtCore.QModelIndex,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
     ):
         """Override to paint an icon based on given Pixmap / Color / Icon.
 
         Pixmap / Color / Icon must be set to '_role'
 
         Args:
-            painter (QtGui.QPainter): painter to paint the icon
-            option (QtWidgets.QStyleOptionViewItem): state of the item to be displayed
-            index (QtCore.QModelIndex): index which gets decorated
+            painter (gui.QPainter): painter to paint the icon
+            option (widgets.QStyleOptionViewItem): state of the item to be displayed
+            index (core.ModelIndex): index which gets decorated
         """
         super().paint(painter, option, index)
         value = index.data(self._role)
@@ -38,20 +37,20 @@ class IconDelegate(widgets.StyledItemDelegate):
         elif option.state & widgets.Style.StateFlag.State_Selected:
             mode = gui.Icon.Mode.Selected
         match value:
-            case QtGui.QPixmap():
-                icon = QtGui.QIcon(value)
+            case gui.QPixmap():
+                icon = gui.QIcon(value)
                 option.decorationSize = int(value.size() / value.devicePixelRatio())
 
-            case QtGui.QColor():
-                pixmap = QtGui.QPixmap(option.decorationSize)
+            case gui.QColor():
+                pixmap = gui.QPixmap(option.decorationSize)
                 pixmap.fill(value)
-                icon = QtGui.QIcon(pixmap)
+                icon = gui.QIcon(pixmap)
 
-            case QtGui.QImage():
-                icon = QtGui.QIcon(QtGui.QPixmap.fromImage(value))
+            case gui.QImage():
+                icon = gui.QIcon(gui.QPixmap.fromImage(value))
                 option.decorationSize = int(value.size() / value.devicePixelRatio())
 
-            case QtGui.QIcon():
+            case gui.QIcon():
                 icon = value
                 is_on = option.state & widgets.Style.StateFlag.State_Open
                 state = gui.Icon.State.On if is_on else gui.Icon.State.Off

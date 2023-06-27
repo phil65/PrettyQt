@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
 PAINTING_SCALE_FACTOR = 20.0
@@ -21,9 +20,9 @@ class StarRating:
 
     def paint(
         self,
-        painter: QtGui.QPainter,
-        rect: QtCore.QRect,
-        palette: QtGui.QPalette,
+        painter: gui.QPainter,
+        rect: core.QRect,
+        palette: gui.QPalette,
         is_editable: bool = False,
     ):
         """Paint the stars (and/or diamonds if we're in editing mode)."""
@@ -51,7 +50,7 @@ class StarEditor(widgets.Widget):
     # A signal to tell the delegate when we've finished editing.
     editing_finished = core.Signal()
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None):
         """Initialize the editor object, making sure we can watch mouse events."""
         super().__init__(parent)
 

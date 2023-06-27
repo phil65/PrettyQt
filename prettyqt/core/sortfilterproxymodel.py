@@ -6,7 +6,6 @@ import re
 from typing import Literal
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, fuzzy
 
 
@@ -28,7 +27,7 @@ FILTER_MODE: bidict[FilterModeStr, FilterMode] = bidict(
 )
 
 
-class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxyModel):
+class SortFilterProxyModel(core.AbstractProxyModelMixin, core.QSortFilterProxyModel):
     FilterMode = core.Enum(FilterMode)
     invalidated = core.Signal()
     filter_mode_changed = core.Signal(str)

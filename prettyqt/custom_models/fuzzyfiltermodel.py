@@ -5,7 +5,6 @@ import logging
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import colors, datatypes, fuzzy
-from prettyqt.qt import QtCore, QtGui
 
 logger = logging.getLogger(__name__)
 
@@ -32,13 +31,13 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, filter_mode="fuzzy", **kwargs)
         self._search_term = ""
-        self._match_color: QtGui.QColor = gui.Color("blue")
+        self._match_color: gui.QColor = gui.Color("blue")
         self.sort(0, constants.DESCENDING)
 
     def set_match_color(self, color: datatypes.ColorType | None):
-        self._match_color = colors.get_color(color) if color else QtGui.QColor()
+        self._match_color = colors.get_color(color) if color else gui.QColor()
 
-    def get_match_color(self) -> QtGui.QColor:
+    def get_match_color(self) -> gui.QColor:
         return self._match_color
 
     def lessThan(self, left: core.ModelIndex, right: core.ModelIndex):
@@ -99,7 +98,7 @@ class FuzzyFilterProxyModel(core.SortFilterProxyModel):
                 return super().data(index, role)
 
     search_term = core.Property(str, get_search_term, set_search_term)
-    match_color = core.Property(QtGui.QColor, get_match_color, set_match_color)
+    match_color = core.Property(gui.QColor, get_match_color, set_match_color)
 
 
 class FuzzyCompleter(widgets.Completer):
@@ -123,11 +122,11 @@ class FuzzyCompleter(widgets.Completer):
         super().setModel(self._filter_proxy)
         self._using_original_model = True
 
-    def eventFilter(self, source: widgets.QLineEdit, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, source: widgets.QLineEdit, event: core.QEvent) -> bool:
         match event.type():
-            case QtCore.QEvent.Type.FocusIn:
+            case core.QEvent.Type.FocusIn:
                 source.clearEditText()
-            case QtCore.QEvent.Type.KeyPress:
+            case core.QEvent.Type.KeyPress:
                 key = event.key()
                 if key == constants.Key.Key_Enter:
                     text = source.currentText()
