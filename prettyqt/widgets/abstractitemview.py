@@ -196,7 +196,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
             del old_sel_model
         return model
 
-    def set_model_for(self, data):
+    def set_model_for(self, data: Any):
         """Set model for given data type.
 
         Pass any data structure and an appropriate model will be chosen automatically.
