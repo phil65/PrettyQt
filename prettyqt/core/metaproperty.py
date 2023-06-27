@@ -3,12 +3,11 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
 
 
 class MetaProperty:
-    def __init__(self, metaproperty: QtCore.QMetaProperty):
+    def __init__(self, metaproperty: core.QMetaProperty):
         self.item = metaproperty
 
     def __bool__(self):

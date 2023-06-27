@@ -5,11 +5,10 @@ import os
 import pathlib
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
 
-class FileSystemWatcher(core.ObjectMixin, QtCore.QFileSystemWatcher):
+class FileSystemWatcher(core.ObjectMixin, core.QFileSystemWatcher):
     def __repr__(self):
         return get_repr(self, self.directories() + self.files())
 

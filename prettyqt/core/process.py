@@ -4,31 +4,30 @@ import contextlib
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
 ExitStatusStr = Literal["normal", "crash"]
 
-EXIT_STATUS: bidict[ExitStatusStr, QtCore.QProcess.ExitStatus] = bidict(
-    normal=QtCore.QProcess.ExitStatus.NormalExit,
-    crash=QtCore.QProcess.ExitStatus.CrashExit,
+EXIT_STATUS: bidict[ExitStatusStr, core.QProcess.ExitStatus] = bidict(
+    normal=core.QProcess.ExitStatus.NormalExit,
+    crash=core.QProcess.ExitStatus.CrashExit,
 )
 
 InputChannelModeStr = Literal["managed", "forwarded"]
 
 INPUT_CHANNEL_MODES: bidict[
-    InputChannelModeStr, QtCore.QProcess.InputChannelMode
+    InputChannelModeStr, core.QProcess.InputChannelMode
 ] = bidict(
-    managed=QtCore.QProcess.InputChannelMode.ManagedInputChannel,
-    forwarded=QtCore.QProcess.InputChannelMode.ForwardedInputChannel,
+    managed=core.QProcess.InputChannelMode.ManagedInputChannel,
+    forwarded=core.QProcess.InputChannelMode.ForwardedInputChannel,
 )
 
 ProcessChannelStr = Literal["standard", "error"]
 
-PROCESS_CHANNELS: bidict[ProcessChannelStr, QtCore.QProcess.ProcessChannel] = bidict(
-    standard=QtCore.QProcess.ProcessChannel.StandardOutput,
-    error=QtCore.QProcess.ProcessChannel.StandardError,
+PROCESS_CHANNELS: bidict[ProcessChannelStr, core.QProcess.ProcessChannel] = bidict(
+    standard=core.QProcess.ProcessChannel.StandardOutput,
+    error=core.QProcess.ProcessChannel.StandardError,
 )
 
 ProcessChannelModeStr = Literal[
@@ -36,41 +35,41 @@ ProcessChannelModeStr = Literal[
 ]
 
 PROCESS_CHANNEL_MODES: bidict[
-    ProcessChannelModeStr, QtCore.QProcess.ProcessChannelMode
+    ProcessChannelModeStr, core.QProcess.ProcessChannelMode
 ] = bidict(
-    separate=QtCore.QProcess.ProcessChannelMode.SeparateChannels,
-    merged=QtCore.QProcess.ProcessChannelMode.MergedChannels,
-    forwarded=QtCore.QProcess.ProcessChannelMode.ForwardedChannels,
-    forwarded_error=QtCore.QProcess.ProcessChannelMode.ForwardedErrorChannel,
-    forwarded_output=QtCore.QProcess.ProcessChannelMode.ForwardedOutputChannel,
+    separate=core.QProcess.ProcessChannelMode.SeparateChannels,
+    merged=core.QProcess.ProcessChannelMode.MergedChannels,
+    forwarded=core.QProcess.ProcessChannelMode.ForwardedChannels,
+    forwarded_error=core.QProcess.ProcessChannelMode.ForwardedErrorChannel,
+    forwarded_output=core.QProcess.ProcessChannelMode.ForwardedOutputChannel,
 )
 
 ProcessErrorStr = Literal[
     "failed_to_start", "crashed", "timed_out", "write", "read_error", "unknown_error"
 ]
 
-PROCESS_ERRORS: bidict[ProcessErrorStr, QtCore.QProcess.ProcessError] = bidict(
-    failed_to_start=QtCore.QProcess.ProcessError.FailedToStart,
-    crashed=QtCore.QProcess.ProcessError.Crashed,
-    timed_out=QtCore.QProcess.ProcessError.Timedout,
-    write=QtCore.QProcess.ProcessError.WriteError,
-    read_error=QtCore.QProcess.ProcessError.ReadError,
-    unknown_error=QtCore.QProcess.ProcessError.UnknownError,
+PROCESS_ERRORS: bidict[ProcessErrorStr, core.QProcess.ProcessError] = bidict(
+    failed_to_start=core.QProcess.ProcessError.FailedToStart,
+    crashed=core.QProcess.ProcessError.Crashed,
+    timed_out=core.QProcess.ProcessError.Timedout,
+    write=core.QProcess.ProcessError.WriteError,
+    read_error=core.QProcess.ProcessError.ReadError,
+    unknown_error=core.QProcess.ProcessError.UnknownError,
 )
 
 
 ProcessStateStr = Literal["not_running", "starting", "running"]
 
-PROCESS_STATES: bidict[ProcessStateStr, QtCore.QProcess.ProcessState] = bidict(
-    not_running=QtCore.QProcess.ProcessState.NotRunning,
-    starting=QtCore.QProcess.ProcessState.Starting,
-    running=QtCore.QProcess.ProcessState.Running,
+PROCESS_STATES: bidict[ProcessStateStr, core.QProcess.ProcessState] = bidict(
+    not_running=core.QProcess.ProcessState.NotRunning,
+    starting=core.QProcess.ProcessState.Starting,
+    running=core.QProcess.ProcessState.Running,
 )
 
 
-class Process(core.IODeviceMixin, QtCore.QProcess):
+class Process(core.IODeviceMixin, core.QProcess):
     def set_read_channel(
-        self, channel: ProcessChannelStr | QtCore.QProcess.ProcessChannelMode
+        self, channel: ProcessChannelStr | core.QProcess.ProcessChannelMode
     ):
         """Set the input channel channel.
 
@@ -86,7 +85,7 @@ class Process(core.IODeviceMixin, QtCore.QProcess):
         self.closeReadChannel(PROCESS_CHANNELS[channel])
 
     def set_input_channel_mode(
-        self, mode: InputChannelModeStr | QtCore.QProcess.InputChannelMode
+        self, mode: InputChannelModeStr | core.QProcess.InputChannelMode
     ):
         """Set the input channel mode.
 
@@ -99,7 +98,7 @@ class Process(core.IODeviceMixin, QtCore.QProcess):
         return INPUT_CHANNEL_MODES.inverse[self.inputChannelMode()]
 
     def set_process_channel_mode(
-        self, mode: ProcessChannelModeStr | QtCore.QProcess.ProcessChannelMode
+        self, mode: ProcessChannelModeStr | core.QProcess.ProcessChannelMode
     ):
         """Set the process channel mode.
 
@@ -111,7 +110,7 @@ class Process(core.IODeviceMixin, QtCore.QProcess):
     def get_process_channel_mode(self) -> ProcessChannelModeStr:
         return PROCESS_CHANNEL_MODES.inverse[self.processChannelMode()]
 
-    def set_state(self, state: ProcessStateStr | QtCore.QProcess.ProcessState):
+    def set_state(self, state: ProcessStateStr | core.QProcess.ProcessState):
         """Set the process state.
 
         Args:

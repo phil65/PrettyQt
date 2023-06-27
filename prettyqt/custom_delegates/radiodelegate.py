@@ -6,22 +6,21 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
 
 
 class RadioDelegate(widgets.StyledItemDelegate):
     ID = "radio"
 
-    def __init__(self, parent: QtWidgets.QWidget, items: Iterable[str]):
+    def __init__(self, parent: widgets.QWidget, items: Iterable[str]):
         super().__init__(parent)
         self.items = items
         self.choices: list[int | None] = [None for _ in self.items]
 
     def createEditor(
         self,
-        parent: QtWidgets.QWidget,
-        option: QtWidgets.QStyleOptionViewItem,
-        index: QtCore.QModelIndex,
+        parent: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
     ) -> widgets.Widget:
         editor = widgets.Widget(parent=parent, margin=0, auto_fill_background=True)
         # create a button group to keep track of the checked radio
@@ -44,10 +43,10 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.installEventFilter(self)
         return editor
 
-    def eventFilter(self, source: QtCore.QObject, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, source: core.QObject, event: core.QEvent) -> bool:
         match event.type():
             case core.Event.Type.MouseButtonPress:
-                if isinstance(source, QtWidgets.QRadioButton):
+                if isinstance(source, widgets.QRadioButton):
                     if not source.parent().hasFocus():
                         # the parent has no focus, set it and ignore the click
                         source.parent().setFocus()
@@ -69,9 +68,9 @@ class RadioDelegate(widgets.StyledItemDelegate):
 
     def updateEditorGeometry(
         self,
-        editor: QtWidgets.QWidget,
-        option: QtWidgets.QStyleOptionViewItem,
-        index: QtCore.QModelIndex,
+        editor: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
     ):
         rect = core.Rect(option.rect)
         min_width = editor.minimumSizeHint().width()
@@ -83,16 +82,16 @@ class RadioDelegate(widgets.StyledItemDelegate):
         editor.setProperty("offMask", mask)  # type: ignore
         editor.setMask(mask)
 
-    def setEditorData(self, editor: QtWidgets.QWidget, index: QtCore.QModelIndex):
+    def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         value = index.data(constants.DISPLAY_ROLE)  # type: ignore
         if value in self.items:
             editor.button_group.button(self.items.index(value)).setChecked(True)
 
     def setModelData(
         self,
-        editor: QtWidgets.QWidget,
-        model: QtCore.QAbstractItemModel,
-        index: QtCore.QModelIndex,
+        editor: widgets.QWidget,
+        model: core.QAbstractItemModel,
+        index: core.ModelIndex,
     ):
         button = editor.button_group.checkedId()
         if button >= 0:

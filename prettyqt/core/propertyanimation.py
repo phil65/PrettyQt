@@ -4,16 +4,15 @@ from collections.abc import Callable
 from typing import Any
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
 
 
-class PropertyAnimation(core.VariantAnimationMixin, QtCore.QPropertyAnimation):
+class PropertyAnimation(core.VariantAnimationMixin, core.QPropertyAnimation):
     ID = "property"
 
     def __init__(self, *args, **kwargs):
         match args:
-            case (QtCore.QObject(), str(), *rest):
+            case (core.QObject(), str(), *rest):
                 super().__init__(args[0], bytes(args[1]), *rest, **kwargs)
             case _:
                 super().__init__(*args, **kwargs)

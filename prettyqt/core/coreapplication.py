@@ -7,7 +7,6 @@ import pathlib
 import sys
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
 
 
@@ -59,7 +58,7 @@ class CoreApplicationMixin(core.ObjectMixin):
         match app_version:
             case None:
                 pass
-            case QtCore.QVersionNumber():
+            case core.QVersionNumber():
                 app_version = app_version.toString()
                 self.setApplicationVersion(app_version)
             case tuple():
@@ -91,8 +90,8 @@ class CoreApplicationMixin(core.ObjectMixin):
 
     def post_event(
         self,
-        obj: QtCore.QObject,
-        event: QtCore.QEvent,
+        obj: core.QObject,
+        event: core.QEvent,
         priority: int | constants.EventPriorityStr = "normal",
     ):
         match priority:
@@ -128,5 +127,5 @@ class CoreApplicationMixin(core.ObjectMixin):
         # self.close(quit_app=True)
 
 
-class CoreApplication(CoreApplicationMixin, QtCore.QCoreApplication):
+class CoreApplication(CoreApplicationMixin, core.QCoreApplication):
     pass

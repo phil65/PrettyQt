@@ -6,7 +6,6 @@ from typing import Any
 from collections.abc import Callable, Generator
 
 from prettyqt import core, qt
-from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -36,7 +35,7 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
     def parent(self, *args):
         # workaround: PyQt6 QIdentityproxymodel.parent() missing
         if not args and qt.API == "pyqt6":
-            return QtCore.QAbstractProxyModel.parent(self)
+            return core.QAbstractProxyModel.parent(self)
         return super().parent(*args)
 
     def first_item_index(self) -> core.ModelIndex:
@@ -49,7 +48,7 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
     def get_source_model(self, skip_proxies: bool = True):
         model = self.sourceModel()
         if skip_proxies:
-            while isinstance(model, QtCore.QAbstractProxyModel):
+            while isinstance(model, core.QAbstractProxyModel):
                 model = model.sourceModel()
         return model
 
@@ -67,7 +66,7 @@ class AbstractProxyModelMixin(core.AbstractItemModelMixin):
             self.setSourceModel(None)
 
 
-class AbstractProxyModel(AbstractProxyModelMixin, QtCore.QAbstractProxyModel):
+class AbstractProxyModel(AbstractProxyModelMixin, core.QAbstractProxyModel):
     pass
 
 

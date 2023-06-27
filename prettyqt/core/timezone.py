@@ -3,33 +3,32 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
 NameTypeStr = Literal["default", "long", "short", "offset"]
 
-NAME_TYPE: bidict[NameTypeStr, QtCore.QTimeZone.NameType] = bidict(
-    default=QtCore.QTimeZone.NameType.DefaultName,
-    long=QtCore.QTimeZone.NameType.LongName,
-    short=QtCore.QTimeZone.NameType.ShortName,
-    offset=QtCore.QTimeZone.NameType.OffsetName,
+NAME_TYPE: bidict[NameTypeStr, core.QTimeZone.NameType] = bidict(
+    default=core.QTimeZone.NameType.DefaultName,
+    long=core.QTimeZone.NameType.LongName,
+    short=core.QTimeZone.NameType.ShortName,
+    offset=core.QTimeZone.NameType.OffsetName,
 )
 
 TimeTypeStr = Literal["standard", "daylight", "generic"]
 
-TIME_TYPE: bidict[TimeTypeStr, QtCore.QTimeZone.TimeType] = bidict(
-    standard=QtCore.QTimeZone.TimeType.StandardTime,
-    daylight=QtCore.QTimeZone.TimeType.DaylightTime,
-    generic=QtCore.QTimeZone.TimeType.GenericTime,
+TIME_TYPE: bidict[TimeTypeStr, core.QTimeZone.TimeType] = bidict(
+    standard=core.QTimeZone.TimeType.StandardTime,
+    daylight=core.QTimeZone.TimeType.DaylightTime,
+    generic=core.QTimeZone.TimeType.GenericTime,
 )
 
 
-class TimeZone(QtCore.QTimeZone):
+class TimeZone(core.QTimeZone):
     def __init__(self, *args):
         match args:
             case (str() as string,):
-                super().__init__(QtCore.QByteArray(string.encode()))
+                super().__init__(core.QByteArray(string.encode()))
             case _:
                 super().__init__(*args)
 
@@ -47,8 +46,8 @@ class TimeZone(QtCore.QTimeZone):
 
     def get_display_name(
         self,
-        date_time: QtCore.QDateTime | TimeTypeStr,
-        name_type: NameTypeStr | QtCore.QTimeZone.NameType = "default",
+        date_time: core.QDateTime | TimeTypeStr,
+        name_type: NameTypeStr | core.QTimeZone.NameType = "default",
         locale: core.Locale | None = None,
     ) -> str:
         dt = TIME_TYPE.get_enum_value(date_time)

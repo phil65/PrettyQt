@@ -22,7 +22,7 @@ def test_helpcontentitem():
     engine = qthelp.HelpEngine("")
     model = engine.get_content_model()
     repr(model)
-    # item = model.get_content_item_at(QtCore.QModelIndex())
+    # item = model.get_content_item_at(core.QModelIndex())
     # item.get_url()
     # assert len(item) == 0
 
@@ -31,7 +31,7 @@ def test_helpcontentmodel():
     engine = qthelp.HelpEngine("")
     model = engine.get_content_model()
     repr(model)
-    # model.get_content_item_at(QtCore.QModelIndex())
+    # model.get_content_item_at(core.QModelIndex())
 
 
 def test_helpfilterdata():

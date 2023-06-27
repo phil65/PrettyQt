@@ -7,7 +7,6 @@ from typing import Any, overload, Literal
 from collections.abc import Iterator
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, listdelegators, helpers
 
 
@@ -18,22 +17,22 @@ CheckIndexOptionStr = Literal[
 ]
 
 CHECK_INDEX_OPTIONS: bidict[
-    CheckIndexOptionStr, QtCore.QAbstractItemModel.CheckIndexOption
+    CheckIndexOptionStr, core.QAbstractItemModel.CheckIndexOption
 ] = bidict(
-    none=QtCore.QAbstractItemModel.CheckIndexOption.NoOption,
-    index_is_valid=QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid,
-    do_not_use_parent=QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent,
-    parent_is_invalid=QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid,
+    none=core.QAbstractItemModel.CheckIndexOption.NoOption,
+    index_is_valid=core.QAbstractItemModel.CheckIndexOption.IndexIsValid,
+    do_not_use_parent=core.QAbstractItemModel.CheckIndexOption.DoNotUseParent,
+    parent_is_invalid=core.QAbstractItemModel.CheckIndexOption.ParentIsInvalid,
 )
 
 LayoutChangeHintStr = Literal["none", "vertical_sort", "horizontal_sort"]
 
 LAYOUT_CHANGE_HINT: bidict[
-    LayoutChangeHintStr, QtCore.QAbstractItemModel.LayoutChangeHint
+    LayoutChangeHintStr, core.QAbstractItemModel.LayoutChangeHint
 ] = bidict(
-    none=QtCore.QAbstractItemModel.LayoutChangeHint.NoLayoutChangeHint,
-    vertical_sort=QtCore.QAbstractItemModel.LayoutChangeHint.VerticalSortHint,
-    horizontal_sort=QtCore.QAbstractItemModel.LayoutChangeHint.HorizontalSortHint,
+    none=core.QAbstractItemModel.LayoutChangeHint.NoLayoutChangeHint,
+    vertical_sort=core.QAbstractItemModel.LayoutChangeHint.VerticalSortHint,
+    horizontal_sort=core.QAbstractItemModel.LayoutChangeHint.HorizontalSortHint,
 )
 
 
@@ -49,7 +48,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return self.rowCount()
 
     def __add__(
-        self, other: QtCore.QAbstractItemModel
+        self, other: core.QAbstractItemModel
     ) -> core.ConcatenateTablesProxyModel:
         proxy = core.ConcatenateTablesProxyModel()
         proxy.addSourceModel(self)
@@ -57,18 +56,18 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return proxy
 
     @overload
-    def __getitem__(self, index: tuple[int, int] | int) -> QtCore.QModelIndex:
+    def __getitem__(self, index: tuple[int, int] | int) -> core.ModelIndex:
         ...
 
     @overload
     def __getitem__(
         self, index: tuple[slice, int] | tuple[int, slice] | tuple[slice, slice]
-    ) -> listdelegators.BaseListDelegator[QtCore.QModelIndex]:
+    ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
         ...
 
     def __getitem__(
         self, index: tuple[int | slice, int | slice]
-    ) -> QtCore.QModelIndex | listdelegators.BaseListDelegator[QtCore.QModelIndex]:
+    ) -> core.ModelIndex | listdelegators.BaseListDelegator[core.ModelIndex]:
         # TODO: do proxies need mapToSource here?
         rowcount = self.rowCount()
         colcount = self.columnCount()
@@ -110,19 +109,19 @@ class AbstractItemModelMixin(core.ObjectMixin):
 
     def check_index(
         self,
-        index: QtCore.QModelIndex,
+        index: core.ModelIndex,
         index_is_valid: bool = False,
         do_not_use_parent: bool = False,
         parent_is_invalid: bool = False,
     ) -> bool:
-        flag = QtCore.QAbstractItemModel.CheckIndexOption.NoOption
+        flag = core.QAbstractItemModel.CheckIndexOption.NoOption
         if index_is_valid:
-            flag |= QtCore.QAbstractItemModel.CheckIndexOption.IndexIsValid
+            flag |= core.QAbstractItemModel.CheckIndexOption.IndexIsValid
         if do_not_use_parent:
-            flag |= QtCore.QAbstractItemModel.CheckIndexOption.DoNotUseParent
+            flag |= core.QAbstractItemModel.CheckIndexOption.DoNotUseParent
         if parent_is_invalid:
-            flag |= QtCore.QAbstractItemModel.CheckIndexOption.ParentIsInvalid
-        check_flag = QtCore.QAbstractItemModel.CheckIndexOption(0) | flag
+            flag |= core.QAbstractItemModel.CheckIndexOption.ParentIsInvalid
+        check_flag = core.QAbstractItemModel.CheckIndexOption(0) | flag
         return self.checkIndex(index, check_flag)
 
     @contextlib.contextmanager
@@ -186,8 +185,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.dataChanged.emit(top_left, bottom_right)
 
     @contextlib.contextmanager
-    def remove_row(self, row: int, parent: QtCore.QModelIndex | None = None):
-        parent = QtCore.QModelIndex() if parent is None else parent
+    def remove_row(self, row: int, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
         self.beginRemoveRows(parent, row, row)
         yield None
         self.endRemoveRows()
@@ -197,9 +196,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self,
         first: int | None = None,
         last: int | None = None,
-        parent: QtCore.QModelIndex | None = None,
+        parent: core.ModelIndex | None = None,
     ):
-        parent = QtCore.QModelIndex() if parent is None else parent
+        parent = core.ModelIndex() if parent is None else parent
         first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginRemoveRows(parent, first, last)
@@ -211,9 +210,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self,
         first: int | None = None,
         last: int | None = None,
-        parent: QtCore.QModelIndex | None = None,
+        parent: core.ModelIndex | None = None,
     ):
-        parent = QtCore.QModelIndex() if parent is None else parent
+        parent = core.ModelIndex() if parent is None else parent
         first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginRemoveColumns(parent, first, last)
@@ -221,8 +220,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.endRemoveColumns()
 
     @contextlib.contextmanager
-    def insert_row(self, row: int, parent: QtCore.QModelIndex | None = None):
-        parent = QtCore.QModelIndex() if parent is None else parent
+    def insert_row(self, row: int, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
         self.beginInsertRows(parent, row, row)
         yield None
         self.endInsertRows()
@@ -232,9 +231,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self,
         first: int | None = None,
         last: int | None = None,
-        parent: QtCore.QModelIndex | None = None,
+        parent: core.ModelIndex | None = None,
     ):
-        parent = QtCore.QModelIndex() if parent is None else parent
+        parent = core.ModelIndex() if parent is None else parent
         first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginInsertRows(parent, first, last)
@@ -242,8 +241,8 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self.endInsertRows()
 
     @contextlib.contextmanager
-    def append_rows(self, num_rows: int, parent: QtCore.QModelIndex | None = None):
-        parent = QtCore.QModelIndex() if parent is None else parent
+    def append_rows(self, num_rows: int, parent: core.ModelIndex | None = None):
+        parent = core.ModelIndex() if parent is None else parent
         row_count = self.rowCount()
         self.beginInsertRows(parent, row_count, row_count + num_rows - 1)
         yield None
@@ -254,9 +253,9 @@ class AbstractItemModelMixin(core.ObjectMixin):
         self,
         first: int | None = None,
         last: int | None = None,
-        parent: QtCore.QModelIndex | None = None,
+        parent: core.ModelIndex | None = None,
     ):
-        parent = QtCore.QModelIndex() if parent is None else parent
+        parent = core.ModelIndex() if parent is None else parent
         first = first or 0
         last = last if last is not None else self.rowCount()
         self.beginInsertColumns(parent, first, last)
@@ -383,7 +382,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         return index
 
 
-class AbstractItemModel(AbstractItemModelMixin, QtCore.QAbstractItemModel):
+class AbstractItemModel(AbstractItemModelMixin, core.QAbstractItemModel):
     pass
 
     # @abc.abstractmethod

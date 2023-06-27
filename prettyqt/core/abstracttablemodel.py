@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 
 
 class AbstractTableModelMixin(core.AbstractItemModelMixin):
@@ -49,5 +48,5 @@ class AbstractTableModelMixin(core.AbstractItemModelMixin):
         return pd.DataFrame(data=data, columns=h_header, index=v_header)
 
 
-class AbstractTableModel(AbstractTableModelMixin, QtCore.QAbstractTableModel):
+class AbstractTableModel(AbstractTableModelMixin, core.QAbstractTableModel):
     pass

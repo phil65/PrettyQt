@@ -4,34 +4,33 @@ from collections.abc import Callable
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
 DirectionStr = Literal["forward", "backward"]
 
-DIRECTION: bidict[DirectionStr, QtCore.QTimeLine.Direction] = bidict(
-    forward=QtCore.QTimeLine.Direction.Forward,
-    backward=QtCore.QTimeLine.Direction.Backward,
+DIRECTION: bidict[DirectionStr, core.QTimeLine.Direction] = bidict(
+    forward=core.QTimeLine.Direction.Forward,
+    backward=core.QTimeLine.Direction.Backward,
 )
 
 
 StateStr = Literal["not_running", "paused", "running"]
 
-STATE: bidict[StateStr, QtCore.QTimeLine.State] = bidict(
-    not_running=QtCore.QTimeLine.State.NotRunning,
-    paused=QtCore.QTimeLine.State.Paused,
-    running=QtCore.QTimeLine.State.Running,
+STATE: bidict[StateStr, core.QTimeLine.State] = bidict(
+    not_running=core.QTimeLine.State.NotRunning,
+    paused=core.QTimeLine.State.Paused,
+    running=core.QTimeLine.State.Running,
 )
 
 
-class TimeLine(core.ObjectMixin, QtCore.QTimeLine):
+class TimeLine(core.ObjectMixin, core.QTimeLine):
     def _get_map(self):
         maps = super()._get_map()
         maps |= {"direction": DIRECTION}
         return maps
 
-    def set_direction(self, direction: DirectionStr | QtCore.QTimeLine.Direction):
+    def set_direction(self, direction: DirectionStr | core.QTimeLine.Direction):
         """Set the direction.
 
         Args:

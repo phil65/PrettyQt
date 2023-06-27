@@ -4,32 +4,31 @@ import functools
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
 DeletionPolicyStr = Literal["keep", "delete"]
 
 DELETION_POLICY: bidict[
-    DeletionPolicyStr, QtCore.QAbstractAnimation.DeletionPolicy
+    DeletionPolicyStr, core.QAbstractAnimation.DeletionPolicy
 ] = bidict(
-    keep=QtCore.QAbstractAnimation.DeletionPolicy.KeepWhenStopped,
-    delete=QtCore.QAbstractAnimation.DeletionPolicy.DeleteWhenStopped,
+    keep=core.QAbstractAnimation.DeletionPolicy.KeepWhenStopped,
+    delete=core.QAbstractAnimation.DeletionPolicy.DeleteWhenStopped,
 )
 
 DirectionStr = Literal["forward", "backward"]
 
-DIRECTION: bidict[DirectionStr, QtCore.QAbstractAnimation.Direction] = bidict(
-    forward=QtCore.QAbstractAnimation.Direction.Forward,
-    backward=QtCore.QAbstractAnimation.Direction.Backward,
+DIRECTION: bidict[DirectionStr, core.QAbstractAnimation.Direction] = bidict(
+    forward=core.QAbstractAnimation.Direction.Forward,
+    backward=core.QAbstractAnimation.Direction.Backward,
 )
 
 StateStr = Literal["stopped", "paused", "running"]
 
-STATE: bidict[StateStr, QtCore.QAbstractAnimation.State] = bidict(
-    stopped=QtCore.QAbstractAnimation.State.Stopped,
-    paused=QtCore.QAbstractAnimation.State.Paused,
-    running=QtCore.QAbstractAnimation.State.Running,
+STATE: bidict[StateStr, core.QAbstractAnimation.State] = bidict(
+    stopped=core.QAbstractAnimation.State.Stopped,
+    paused=core.QAbstractAnimation.State.Paused,
+    running=core.QAbstractAnimation.State.Running,
 )
 
 
@@ -37,13 +36,13 @@ class AbstractAnimationMixin(core.ObjectMixin):
     def __len__(self):
         return self.duration()
 
-    def __and__(self, other: QtCore.QAbstractAnimation) -> core.SequentialAnimationGroup:
+    def __and__(self, other: core.QAbstractAnimation) -> core.SequentialAnimationGroup:
         group = core.SequentialAnimationGroup()
         group.addAnimation(self)
         group.addAnimation(other)
         return group
 
-    def __or__(self, other: QtCore.QAbstractAnimation) -> core.ParallelAnimationGroup:
+    def __or__(self, other: core.QAbstractAnimation) -> core.ParallelAnimationGroup:
         group = core.ParallelAnimationGroup()
         group.addAnimation(self)
         group.addAnimation(other)
@@ -61,7 +60,7 @@ class AbstractAnimationMixin(core.ObjectMixin):
         self.setDirection(direction)
 
     def set_direction(
-        self, direction: DirectionStr | QtCore.QAbstractAnimation.Direction
+        self, direction: DirectionStr | core.QAbstractAnimation.Direction
     ):
         """Set animation direction.
 
@@ -109,7 +108,7 @@ class AbstractAnimationMixin(core.ObjectMixin):
 
     def restart_animation(
         self,
-        policy: DeletionPolicyStr | QtCore.QAbstractAnimation.DeletionPolicy = "keep",
+        policy: DeletionPolicyStr | core.QAbstractAnimation.DeletionPolicy = "keep",
     ):
         """Restart the animation.
 
@@ -123,7 +122,7 @@ class AbstractAnimationMixin(core.ObjectMixin):
         self.start_callback_timer(self.start, delay, single_shot=single_shot)
 
 
-class AbstractAnimation(AbstractAnimationMixin, QtCore.QAbstractAnimation):
+class AbstractAnimation(AbstractAnimationMixin, core.QAbstractAnimation):
     pass
 
 

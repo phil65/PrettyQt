@@ -5,20 +5,19 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr
 
 
 JsonFormatStr = Literal["indented", "compact"]
 
 
-JSON_FORMAT: bidict[JsonFormatStr, QtCore.QJsonDocument.JsonFormat] = bidict(
-    indented=QtCore.QJsonDocument.JsonFormat.Indented,
-    compact=QtCore.QJsonDocument.JsonFormat.Compact,
+JSON_FORMAT: bidict[JsonFormatStr, core.QJsonDocument.JsonFormat] = bidict(
+    indented=core.QJsonDocument.JsonFormat.Indented,
+    compact=core.QJsonDocument.JsonFormat.Compact,
 )
 
 
-class JsonDocument(QtCore.QJsonDocument):
+class JsonDocument(core.QJsonDocument):
     def __str__(self):
         return str(self.toVariant())
 

@@ -4,7 +4,6 @@ from collections.abc import Callable
 from typing import overload, TYPE_CHECKING
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import listdelegators
 
 if TYPE_CHECKING:
@@ -13,13 +12,13 @@ if TYPE_CHECKING:
 
 class AnimationGroupMixin(core.AbstractAnimationMixin):
     @overload
-    def __getitem__(self, index: int) -> QtCore.QAbstractAnimation:
+    def __getitem__(self, index: int) -> core.QAbstractAnimation:
         ...
 
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.BaseListDelegator[QtCore.QAbstractAnimation]:
+    ) -> listdelegators.BaseListDelegator[core.QAbstractAnimation]:
         ...
 
     def __getitem__(self, index: int | slice):
@@ -42,7 +41,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
             case _:
                 raise TypeError(index)
 
-    def __setitem__(self, index: int, value: QtCore.QAbstractAnimation):
+    def __setitem__(self, index: int, value: core.QAbstractAnimation):
         if not (0 <= index < self.animationCount()):
             raise KeyError(index)
         self.takeAnimation(index)
@@ -56,7 +55,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
             raise KeyError(index)
         self.takeAnimation(index)
 
-    def __add__(self, other: QtCore.QAbstractAnimation):
+    def __add__(self, other: core.QAbstractAnimation):
         self.addAnimation(other)
         return self
 
@@ -78,7 +77,7 @@ class AnimationGroupMixin(core.AbstractAnimationMixin):
         return anim
 
 
-class AnimationGroup(AnimationGroupMixin, QtCore.QAnimationGroup):
+class AnimationGroup(AnimationGroupMixin, core.QAnimationGroup):
     pass
 
 

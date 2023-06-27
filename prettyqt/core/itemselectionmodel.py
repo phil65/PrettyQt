@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
@@ -22,22 +21,22 @@ SelectionFlagStr = Literal[
 ]
 
 SELECTION_FLAG: bidict[
-    SelectionFlagStr, QtCore.QItemSelectionModel.SelectionFlag
+    SelectionFlagStr, core.QItemSelectionModel.SelectionFlag
 ] = bidict(
-    none=QtCore.QItemSelectionModel.SelectionFlag.NoUpdate,
-    clear=QtCore.QItemSelectionModel.SelectionFlag.Clear,
-    select=QtCore.QItemSelectionModel.SelectionFlag.Select,
-    deselect=QtCore.QItemSelectionModel.SelectionFlag.Deselect,
-    toggle=QtCore.QItemSelectionModel.SelectionFlag.Toggle,
-    current=QtCore.QItemSelectionModel.SelectionFlag.Current,
-    rows=QtCore.QItemSelectionModel.SelectionFlag.Rows,
-    columns=QtCore.QItemSelectionModel.SelectionFlag.Columns,
-    select_current=QtCore.QItemSelectionModel.SelectionFlag.SelectCurrent,
-    toggle_current=QtCore.QItemSelectionModel.SelectionFlag.ToggleCurrent,
-    clear_and_select=QtCore.QItemSelectionModel.SelectionFlag.ClearAndSelect,
+    none=core.QItemSelectionModel.SelectionFlag.NoUpdate,
+    clear=core.QItemSelectionModel.SelectionFlag.Clear,
+    select=core.QItemSelectionModel.SelectionFlag.Select,
+    deselect=core.QItemSelectionModel.SelectionFlag.Deselect,
+    toggle=core.QItemSelectionModel.SelectionFlag.Toggle,
+    current=core.QItemSelectionModel.SelectionFlag.Current,
+    rows=core.QItemSelectionModel.SelectionFlag.Rows,
+    columns=core.QItemSelectionModel.SelectionFlag.Columns,
+    select_current=core.QItemSelectionModel.SelectionFlag.SelectCurrent,
+    toggle_current=core.QItemSelectionModel.SelectionFlag.ToggleCurrent,
+    clear_and_select=core.QItemSelectionModel.SelectionFlag.ClearAndSelect,
 )
 
 
-class ItemSelectionModel(core.ObjectMixin, QtCore.QItemSelectionModel):
+class ItemSelectionModel(core.ObjectMixin, core.QItemSelectionModel):
     def set_current_index(self, index, flag: SelectionFlagStr):
         self.setCurrentIndex(index, SELECTION_FLAG[flag])

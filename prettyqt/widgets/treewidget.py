@@ -1,19 +1,18 @@
 from __future__ import annotations
 
-from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
+from prettyqt import constants, core, widgets
 from prettyqt.utils import listdelegators
 
 
 class TreeWidgetMixin(widgets.TreeViewMixin):
-    def __contains__(self, other: QtWidgets.QTreeWidgetItem):
+    def __contains__(self, other: widgets.QTreeWidgetItem):
         return self.indexOfTopLevelItem(other) >= 0
 
     def __getitem__(
         self, index: int | slice
     ) -> (
-        QtWidgets.QTreeWidgetItem
-        | listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]
+        widgets.QTreeWidgetItem
+        | listdelegators.BaseListDelegator[widgets.QTreeWidgetItem]
     ):
         match index:
             case int():
@@ -40,7 +39,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
         mode: constants.MatchFlagStr | constants.MatchFlag = "exact",
         recursive: bool = False,
         case_sensitive: bool = False,
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
+    ) -> listdelegators.BaseListDelegator[widgets.QTreeWidgetItem]:
         flag = constants.MATCH_FLAGS.get_enum_value(mode)
         if recursive:
             flag |= constants.MatchFlag.MatchRecursive
@@ -51,7 +50,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
 
     def get_items(
         self, recursive: bool = False
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QTreeWidgetItem]:
+    ) -> listdelegators.BaseListDelegator[widgets.QTreeWidgetItem]:
         """Get TreeWidgetItems of this widget.
 
         Arguments:
@@ -74,7 +73,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
 
     def scroll_to_item(
         self,
-        item: QtWidgets.QTreeWidgetItem,
+        item: widgets.QTreeWidgetItem,
         scroll_hint: widgets.abstractitemview.ScrollHintStr
         | widgets.QAbstractItemView.ScrollHint = "ensure_visible",
     ):
@@ -88,39 +87,37 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
         raise IndexError(f"Item '{str(item)}' not in top-level items.")
 
     def openPersistentEditor(
-        self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem, column: int = 0
+        self, index: core.ModelIndex | widgets.QTreeWidgetItem, column: int = 0
     ):
-        if isinstance(index, QtCore.QModelIndex):
+        if isinstance(index, core.ModelIndex):
             column = index.column()
             index = self.itemFromIndex(index)
         super().openPersistentEditor(index, column)
 
     def closePersistentEditor(
-        self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem, column: int = 0
+        self, index: core.ModelIndex | widgets.QTreeWidgetItem, column: int = 0
     ):
-        if isinstance(index, QtCore.QModelIndex):
+        if isinstance(index, core.ModelIndex):
             column = index.column()
             index = self.itemFromIndex(index)
         super().closePersistentEditor(index, column)
 
     def isPersistentEditorOpen(
-        self, index: QtCore.QModelIndex | QtWidgets.QTreeWidgetItem, column: int = 0
+        self, index: core.ModelIndex | widgets.QTreeWidgetItem, column: int = 0
     ) -> bool:
-        if isinstance(index, QtCore.QModelIndex):
+        if isinstance(index, core.ModelIndex):
             column = index.column()
             index = self.itemFromIndex(index)
         return super().isPersistentEditorOpen(index, column)
 
 
-class TreeWidget(TreeWidgetMixin, QtWidgets.QTreeWidget):
+class TreeWidget(TreeWidgetMixin, widgets.QTreeWidget):
     pass
 
 
 if __name__ == "__main__":
-    from prettyqt.qt import QtCore
-
     app = widgets.app()
     widget = TreeWidget()
-    widget.openPersistentEditor(QtCore.QModelIndex(), 1)
+    widget.openPersistentEditor(core.ModelIndex(), 1)
     widget.show()
     app.exec()

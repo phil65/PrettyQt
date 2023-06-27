@@ -4,7 +4,6 @@ import pathlib
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
@@ -14,14 +13,14 @@ IteratorFlagStr = Literal[
     "follow_symlinks",
 ]
 
-ITERATOR_FLAG: bidict[IteratorFlagStr, QtCore.QDirIterator.IteratorFlag] = bidict(
-    none=QtCore.QDirIterator.IteratorFlag.NoIteratorFlags,
-    subdirectories=QtCore.QDirIterator.IteratorFlag.Subdirectories,
-    follow_symlinks=QtCore.QDirIterator.IteratorFlag.FollowSymlinks,
+ITERATOR_FLAG: bidict[IteratorFlagStr, core.QDirIterator.IteratorFlag] = bidict(
+    none=core.QDirIterator.IteratorFlag.NoIteratorFlags,
+    subdirectories=core.QDirIterator.IteratorFlag.Subdirectories,
+    follow_symlinks=core.QDirIterator.IteratorFlag.FollowSymlinks,
 )
 
 
-class DirIterator(QtCore.QDirIterator):
+class DirIterator(core.QDirIterator):
     def __iter__(self):
         return self
 

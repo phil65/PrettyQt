@@ -6,20 +6,19 @@ import pathlib
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
 CompressionStr = Literal["none", "zlib", "zstd"]
 
-COMPRESSION: bidict[CompressionStr, QtCore.QResource.Compression] = bidict(
-    none=QtCore.QResource.Compression.NoCompression,
-    zlib=QtCore.QResource.Compression.ZlibCompression,
-    zstd=QtCore.QResource.Compression.ZstdCompression,
+COMPRESSION: bidict[CompressionStr, core.QResource.Compression] = bidict(
+    none=core.QResource.Compression.NoCompression,
+    zlib=core.QResource.Compression.ZlibCompression,
+    zstd=core.QResource.Compression.ZstdCompression,
 )
 
 
-class Resource(QtCore.QResource):
+class Resource(core.QResource):
     def __repr__(self):
         return get_repr(self, self.absoluteFilePath(), self.get_locale())
 

@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
@@ -12,16 +11,16 @@ ProcessEventFlagStr = Literal[
 ]
 
 PROCESS_EVENT_FLAGS: bidict[
-    ProcessEventFlagStr, QtCore.QEventLoop.ProcessEventsFlag
+    ProcessEventFlagStr, core.QEventLoop.ProcessEventsFlag
 ] = bidict(
-    all=QtCore.QEventLoop.ProcessEventsFlag.AllEvents,
-    exclude_user_input=QtCore.QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents,
-    exclude_socket_notifiers=QtCore.QEventLoop.ProcessEventsFlag.ExcludeSocketNotifiers,
-    wait_for_more=QtCore.QEventLoop.ProcessEventsFlag.WaitForMoreEvents,
+    all=core.QEventLoop.ProcessEventsFlag.AllEvents,
+    exclude_user_input=core.QEventLoop.ProcessEventsFlag.ExcludeUserInputEvents,
+    exclude_socket_notifiers=core.QEventLoop.ProcessEventsFlag.ExcludeSocketNotifiers,
+    wait_for_more=core.QEventLoop.ProcessEventsFlag.WaitForMoreEvents,
 )
 
 
-class EventLoop(core.ObjectMixin, QtCore.QEventLoop):
+class EventLoop(core.ObjectMixin, core.QEventLoop):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
         self._executing = False
@@ -35,7 +34,7 @@ class EventLoop(core.ObjectMixin, QtCore.QEventLoop):
         if self._executing:
             raise AssertionError("Eventloop is already running!")
         self._executing = True
-        flag = QtCore.QEventLoop.ProcessEventsFlag(0)
+        flag = core.QEventLoop.ProcessEventsFlag(0)
         if not user_input:
             flag |= 1
         if not socket_notifiers:

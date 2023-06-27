@@ -3,20 +3,19 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
 TypeStr = Literal["read", "write", "exception"]
 
-TYPE: bidict[TypeStr, QtCore.QSocketNotifier.Type] = bidict(
-    read=QtCore.QSocketNotifier.Type.Read,
-    write=QtCore.QSocketNotifier.Type.Write,
-    exception=QtCore.QSocketNotifier.Type.Exception,
+TYPE: bidict[TypeStr, core.QSocketNotifier.Type] = bidict(
+    read=core.QSocketNotifier.Type.Read,
+    write=core.QSocketNotifier.Type.Write,
+    exception=core.QSocketNotifier.Type.Exception,
 )
 
 
-class SocketNotifier(core.ObjectMixin, QtCore.QSocketNotifier):
+class SocketNotifier(core.ObjectMixin, core.QSocketNotifier):
     # def __repr__(self):
     #     return f"{type(self).__name__}({self.socket()}, {self.type()})"
 
@@ -34,5 +33,5 @@ if __name__ == "__main__":
     import os
 
     read, write = os.pipe()
-    notifier = SocketNotifier(read, QtCore.QSocketNotifier.Type.Read)
+    notifier = SocketNotifier(read, core.QSocketNotifier.Type.Read)
     app.exec()

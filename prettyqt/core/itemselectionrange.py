@@ -2,23 +2,23 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 
-from prettyqt.qt import QtCore
+from prettyqt import core
 
 
-class ItemSelectionRange(QtCore.QItemSelectionRange):
-    def __contains__(self, other: QtCore.QModelIndex):
+class ItemSelectionRange(core.QItemSelectionRange):
+    def __contains__(self, other: core.ModelIndex):
         return self.contains(other)
 
     def __bool__(self):
         return not self.isEmpty()
 
-    def __iter__(self) -> Iterator[QtCore.QModelIndex]:
+    def __iter__(self) -> Iterator[core.ModelIndex]:
         return iter(self.indexes())  # type: ignore
 
     def __len__(self):
         return len(self.indexes())
 
-    def __and__(self, other: QtCore.QItemSelectionRange):
+    def __and__(self, other: core.QItemSelectionRange):
         return self.intersected(other)
 
 
