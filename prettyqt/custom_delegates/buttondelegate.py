@@ -10,7 +10,7 @@ class ButtonDelegate(widgets.StyledItemDelegate):
     def __init__(
         self,
         parent: QtWidgets.QAbstractItemView,
-        role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
+        role: constants.ItemDataRole = constants.USER_ROLE,
     ):
         super().__init__(parent)
         parent.setMouseTracking(True)

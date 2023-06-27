@@ -8,8 +8,8 @@ from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, get_repr, serializemixin
 
 
-Mod = QtCore.Qt.KeyboardModifier
-Key = QtCore.Qt.Key
+Mod = constants.KeyboardModifier
+Key = constants.Key
 
 MODIFIERS = bidict(
     {

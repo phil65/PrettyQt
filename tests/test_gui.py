@@ -10,7 +10,7 @@ import sys
 
 import pytest
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
@@ -357,12 +357,12 @@ def test_intvalidator():
 def test_keysequence():
     assert (
         gui.KeySequence.to_shortcut_str(
-            QtCore.Qt.Key.Key_A, QtCore.Qt.KeyboardModifier.ShiftModifier
+            constants.Key.Key_A, constants.KeyboardModifier.ShiftModifier
         )
         == "Shift+A"
     )
     comb = core.KeyCombination(
-        QtCore.Qt.KeyboardModifier.ShiftModifier, QtCore.Qt.Key.Key_A
+        constants.KeyboardModifier.ShiftModifier, constants.Key.Key_A
     )
     assert gui.KeySequence.to_shortcut_str(comb) == "Shift+A"
     seq = gui.KeySequence("Ctrl+C")

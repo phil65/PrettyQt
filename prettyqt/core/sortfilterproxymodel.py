@@ -87,7 +87,7 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
     def sort(
         self,
         column: int | None,
-        ascending: bool | QtCore.Qt.SortOrder = constants.ASCENDING,
+        ascending: bool | constants.SortOrder = constants.ASCENDING,
     ):
         if isinstance(ascending, bool):
             ascending = constants.ASCENDING if ascending else constants.DESCENDING
@@ -130,23 +130,23 @@ class SortFilterProxyModel(core.AbstractProxyModelMixin, QtCore.QSortFilterProxy
 
     def set_filter_case_sensitive(self, state: bool):
         if state:
-            sensitivity = QtCore.Qt.CaseSensitivity.CaseSensitive
+            sensitivity = constants.CaseSensitivity.CaseSensitive
         else:
-            sensitivity = QtCore.Qt.CaseSensitivity.CaseInsensitive
+            sensitivity = constants.CaseSensitivity.CaseInsensitive
         super().setFilterCaseSensitivity(sensitivity)
 
     def is_filter_case_sensitive(self) -> bool:
-        return super().filterCaseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
+        return super().filterCaseSensitivity() == constants.CaseSensitivity.CaseSensitive
 
     def set_sort_case_sensitive(self, state: bool):
         if state:
-            sensitivity = QtCore.Qt.CaseSensitivity.CaseSensitive
+            sensitivity = constants.CaseSensitivity.CaseSensitive
         else:
-            sensitivity = QtCore.Qt.CaseSensitivity.CaseInsensitive
+            sensitivity = constants.CaseSensitivity.CaseInsensitive
         super().setSortCaseSensitivity(sensitivity)
 
     def is_sort_case_sensitive(self) -> bool:
-        return super().sortCaseSensitivity() == QtCore.Qt.CaseSensitivity.CaseSensitive
+        return super().sortCaseSensitivity() == constants.CaseSensitivity.CaseSensitive
 
     def get_filter_regular_expression(self) -> core.RegularExpression:
         return core.RegularExpression(self.filterRegularExpression())

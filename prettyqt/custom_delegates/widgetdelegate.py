@@ -9,7 +9,7 @@ class WidgetDelegate(widgets.StyledItemDelegate):
 
     def __init__(
         self,
-        role: QtCore.Qt.ItemDataRole = constants.USER_ROLE,
+        role: constants.ItemDataRole = constants.USER_ROLE,
         parent: QtWidgets.QAbstractItemView | None = None,
     ):
         super().__init__(parent)

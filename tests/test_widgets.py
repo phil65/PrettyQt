@@ -15,7 +15,6 @@ import pytest
 
 # import prettyqt
 from prettyqt import constants, core, gui, iconprovider, widgets
-from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
 
@@ -221,7 +220,7 @@ def test_dialog(qtbot, qttester):
     dlg.set_layout("horizontal")
     qtbot.add_widget(dlg)
     dlg.show()
-    qttester.send_keypress(dlg, QtCore.Qt.Key.Key_F11)
+    qttester.send_keypress(dlg, constants.Key.Key_F11)
     dlg.delete_on_close()
     btn = widgets.RadioButton("test")
     qtbot.addWidget(btn)

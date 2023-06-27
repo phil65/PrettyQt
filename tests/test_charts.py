@@ -2,6 +2,7 @@
 
 import pytest
 
+from prettyqt import constants
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
@@ -77,14 +78,14 @@ def test_chartview(qtbot, qttester):
     widget.show()
     widget.get_image()
     qtbot.add_widget(widget)
-    qttester.send_keypress(widget, QtCore.Qt.Key.Key_F11)
-    # qttester.send_keypress(widget, QtCore.Qt.Key.Key_Minus)
-    # qttester.send_keypress(widget, QtCore.Qt.Key.Key_Plus)
-    qttester.send_keypress(widget, QtCore.Qt.Key.Key_Left)
-    qttester.send_keypress(widget, QtCore.Qt.Key.Key_Right)
-    qttester.send_keypress(widget, QtCore.Qt.Key.Key_Up)
-    qttester.send_keypress(widget, QtCore.Qt.Key.Key_Down)
-    qttester.send_mousepress(widget, QtCore.Qt.MouseButton.RightButton)
+    qttester.send_keypress(widget, constants.Key.Key_F11)
+    # qttester.send_keypress(widget, constants.Key.Key_Minus)
+    # qttester.send_keypress(widget, constants.Key.Key_Plus)
+    qttester.send_keypress(widget, constants.Key.Key_Left)
+    qttester.send_keypress(widget, constants.Key.Key_Right)
+    qttester.send_keypress(widget, constants.Key.Key_Up)
+    qttester.send_keypress(widget, constants.Key.Key_Down)
+    qttester.send_mousepress(widget, constants.MouseButton.RightButton)
     qttester.send_mousemove(widget, delay=100)
 
 

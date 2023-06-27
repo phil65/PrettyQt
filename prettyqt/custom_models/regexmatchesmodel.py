@@ -3,7 +3,6 @@ from __future__ import annotations
 import re
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 
 
 class RegexMatchesModel(core.AbstractTableModel):
@@ -27,7 +26,7 @@ class RegexMatchesModel(core.AbstractTableModel):
     def headerData(  # type: ignore
         self,
         section: int,
-        orientation: QtCore.Qt.Orientation,
+        orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role:

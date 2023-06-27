@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 
 
 class GraphicsLinearLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsLinearLayout):
@@ -10,10 +10,7 @@ class GraphicsLinearLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsLinea
         orientation: constants.OrientationStr | constants.Orientation = "horizontal",
         parent: QtWidgets.QGraphicsLayoutItem | None = None,
     ):
-        if isinstance(orientation, QtCore.Qt.Orientation):
-            ori = orientation
-        else:
-            ori = constants.ORIENTATION[orientation]
+        ori = constants.ORIENTATION.get_enum_value(orientation)
         super().__init__(ori, parent)
 
     def __add__(self, other):

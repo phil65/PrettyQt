@@ -6,8 +6,8 @@ import math
 
 from typing_extensions import Self
 
-from prettyqt import core, gui
-from prettyqt.qt import API, QtCore, QtGui
+from prettyqt import constants, core, gui
+from prettyqt.qt import API, QtGui
 from prettyqt.utils import datatypes, serializemixin
 
 
@@ -27,7 +27,7 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
     def __contains__(self, point: datatypes.PointFType) -> bool:
         if isinstance(point, tuple):
             point = core.PointF(*point)
-        return self.containsPoint(point, QtCore.Qt.FillRule.OddEvenFill)
+        return self.containsPoint(point, constants.FillRule.OddEvenFill)
 
     def __getitem__(self, index: int) -> core.PointF:
         if index >= self.size():

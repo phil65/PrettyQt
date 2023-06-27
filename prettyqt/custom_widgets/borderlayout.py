@@ -41,7 +41,7 @@ class BorderLayout(widgets.Layout):
         position = BorderLayout.Position.West if position is None else position
         self.add_widgetitem(widgets.WidgetItem(widget), position)
 
-    def expandingDirections(self) -> QtCore.Qt.Orientation:
+    def expandingDirections(self) -> constants.Orientation:
         return constants.HORIZONTAL | constants.VERTICAL
 
     def hasHeightForWidth(self) -> bool:

@@ -56,14 +56,14 @@ class FlowLayout(widgets.Layout):
         self._do_layout(rect, apply_geometry=True)
 
     def expandingDirections(self):
-        return QtCore.Qt.Orientation(0)
+        return constants.Orientation(0)
 
     def minimumSize(self):
-        size = core.Size()
+        size = core.QSize()
         for item in self._items:
             size = size.expandedTo(item.minimumSize())
         left, top, right, bottom = self.getContentsMargins()
-        return size + core.Size(left + right, top + bottom)
+        return size + core.QSize(left + right, top + bottom)
 
     sizeHint = minimumSize
 

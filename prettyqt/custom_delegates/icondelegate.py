@@ -7,7 +7,7 @@ from prettyqt.qt import QtCore, QtGui, QtWidgets
 class IconDelegate(widgets.StyledItemDelegate):
     ID = "icon"
 
-    def __init__(self, role: QtCore.Qt.ItemDataRole = constants.USER_ROLE, **kwargs):
+    def __init__(self, role: constants.ItemDataRole = constants.USER_ROLE, **kwargs):
         self._role = role
         self.margin = 10
         super().__init__(**kwargs)

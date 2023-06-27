@@ -6,14 +6,14 @@ from typing import overload
 from typing_extensions import Self
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt.qt import QtWidgets
 from prettyqt.utils import listdelegators
 
 
 class SplitterMixin(widgets.FrameMixin):
     def __init__(
         self,
-        orientation: constants.OrientationStr | QtCore.Qt.Orientation = "horizontal",
+        orientation: constants.OrientationStr | constants.Orientation = "horizontal",
         **kwargs,
     ):
         super().__init__(constants.ORIENTATION.get_enum_value(orientation), **kwargs)

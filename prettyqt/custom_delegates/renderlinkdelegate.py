@@ -33,7 +33,7 @@ class RenderLinkDelegate(widgets.StyledItemDelegate):
         b_rect = fm.get_bounding_rect(rect, constants.ALIGN_CENTER_LEFT, text)
         if (
             event.type() == QtCore.QEvent.Type.MouseButtonPress
-            and event.button() == QtCore.Qt.MouseButton.LeftButton  # type: ignore
+            and event.button() == constants.MouseButton.LeftButton  # type: ignore
             and b_rect.contains(event.position())  # type: ignore
         ):
             text = index.data()

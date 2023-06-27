@@ -60,7 +60,7 @@ class BaseWaitingSpinner(widgets.Widget):
         # END initialize()
 
         self.set_modality(modality)
-        # self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
+        # self.setAttribute(constants.WA_TranslucentBackground)
 
     def paintEvent(self, event):
         with gui.Painter(self) as painter:

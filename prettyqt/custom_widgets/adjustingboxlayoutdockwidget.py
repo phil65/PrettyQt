@@ -1,9 +1,9 @@
 from __future__ import annotations
 
-from prettyqt import widgets
-from prettyqt.qt import QtCore, QtWidgets
+from prettyqt import constants, widgets
+from prettyqt.qt import QtWidgets
 
-DockWidgetArea = QtCore.Qt.DockWidgetArea
+DockWidgetArea = constants.DockWidgetArea
 
 
 class AdjustingBoxLayoutDockWidget(widgets.DockWidget):

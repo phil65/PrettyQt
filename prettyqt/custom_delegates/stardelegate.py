@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import core, gui, widgets
+from prettyqt import constants, core, gui, widgets
 from prettyqt.qt import QtCore, QtGui, QtWidgets
 
 
@@ -29,16 +29,16 @@ class StarRating:
         """Paint the stars (and/or diamonds if we're in editing mode)."""
         painter.save()
         painter.setRenderHint(painter.RenderHint.Antialiasing, True)
-        painter.setPen(QtCore.Qt.PenStyle.NoPen)
+        painter.setPen(constants.PenStyle.NoPen)
         painter.setBrush(palette.highlight() if is_editable else palette.windowText())
         y_offset = (rect.height() - PAINTING_SCALE_FACTOR) / 2
         painter.translate(rect.x() + 10, rect.y() + 10 + y_offset)
         painter.scale(PAINTING_SCALE_FACTOR, PAINTING_SCALE_FACTOR)
         for i in range(self.max_stars):
             if i < self.star_count:
-                painter.drawPolygon(STAR_POLYGON, QtCore.Qt.FillRule.WindingFill)
+                painter.drawPolygon(STAR_POLYGON, constants.FillRule.WindingFill)
             elif is_editable:
-                painter.drawPolygon(DIAMOND_POLYGON, QtCore.Qt.FillRule.WindingFill)
+                painter.drawPolygon(DIAMOND_POLYGON, constants.FillRule.WindingFill)
             else:
                 break
             painter.translate(1.0, 0.0)
@@ -149,8 +149,6 @@ class StarDelegate(widgets.StyledItemDelegate):
 
 
 if __name__ == "__main__":
-    from prettyqt import constants
-
     app = widgets.app()
     table_widget = widgets.TableWidget(1, 2)
     table_widget.set_delegate(StarDelegate(), column=1)

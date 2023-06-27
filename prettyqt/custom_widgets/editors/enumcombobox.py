@@ -98,11 +98,11 @@ class EnumComboBox(widgets.ComboBox):
 
 
 if __name__ == "__main__":
-    from prettyqt.qt import QtCore
+    from prettyqt import constants
 
     app = widgets.app()
     cb = EnumComboBox(allow_none=False)
-    cb.set_value(QtCore.Qt.ItemDataRole.EditRole)
+    cb.set_value(constants.ItemDataRole.EditRole)
     cb.show()
     cb.value_changed.connect(print)
     app.exec()

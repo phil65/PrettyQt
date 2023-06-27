@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui, QtWidgets
 from prettyqt.utils import datatypes, get_repr, listdelegators
 
 
@@ -168,7 +168,7 @@ class ToolBarMixin(widgets.WidgetMixin):
             if not val:
                 continue
             label = widgets.Label(
-                val, self, QtCore.Qt.WindowType.ToolTip, alignment="center"
+                val, self, constants.WindowType.ToolTip, alignment="center"
             )
             label.setStyleSheet("border: 1px solid gray;")
             label.hide()

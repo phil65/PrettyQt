@@ -5,7 +5,7 @@ import sys
 
 import pytest
 
-from prettyqt import gui, widgets
+from prettyqt import constants, gui, widgets
 from prettyqt.qt import QtCore, QtWidgets
 
 
@@ -40,7 +40,7 @@ class QtTester:
         event = gui.QKeyEvent(
             QtCore.QEvent.Type.KeyPress,
             key,
-            QtCore.Qt.KeyboardModifier(0),  # type: ignore
+            constants.KeyboardModifier(0),  # type: ignore
         )
         widgets.Application.sendEvent(widget, event)
 
@@ -51,8 +51,8 @@ class QtTester:
             QtCore.QPointF(0, 0),
             QtCore.QPointF(0, 0),
             key,
-            QtCore.Qt.MouseButton.NoButton,
-            QtCore.Qt.KeyboardModifier(0),  # type: ignore
+            constants.MouseButton.NoButton,
+            constants.KeyboardModifier(0),  # type: ignore
         )
         widgets.Application.sendEvent(widget, event)
 
@@ -66,9 +66,9 @@ class QtTester:
             QtCore.QEvent.Type.MouseButtonRelease,
             target,
             QtCore.QPointF(0, 0),
-            QtCore.Qt.MouseButton.NoButton,
-            QtCore.Qt.MouseButton.NoButton,
-            QtCore.Qt.KeyboardModifier(0),  # type: ignore
+            constants.MouseButton.NoButton,
+            constants.MouseButton.NoButton,
+            constants.KeyboardModifier(0),  # type: ignore
         )
         widgets.Application.sendEvent(widget, event)
 

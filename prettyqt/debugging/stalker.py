@@ -6,7 +6,7 @@ import logging
 import collections
 from typing import TypeVar
 
-from prettyqt import core, gui, eventfilters
+from prettyqt import core, constants, gui, eventfilters
 from prettyqt.qt import QtCore
 
 
@@ -136,9 +136,9 @@ class Stalker(core.Object):
                 combo = gui.KeySequence(event.keyCombination()).toString()
                 self.keypress_detected.emit(combo)
             case core.Event.Type.MouseButtonRelease:
-                if event.button() == QtCore.Qt.MouseButton.LeftButton:
+                if event.button() == constants.MouseButton.LeftButton:
                     self.leftclick_detected.emit(event.position())
-                if event.button() == QtCore.Qt.MouseButton.RightButton:
+                if event.button() == constants.MouseButton.RightButton:
                     self.rightclick_detected.emit(event.position())
         self.log(f"Received event {event.type()!r}")
         self.counter[event.type()] += 1

@@ -264,9 +264,9 @@ class ObjectMixin:
         if isinstance(name, re.Pattern):
             name = core.RegularExpression(name)
         if recursive:
-            flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
+            flag = constants.FindChildOption.FindChildrenRecursively
         else:
-            flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+            flag = constants.FindChildOption.FindDirectChildrenOnly
         match typ:
             case types.UnionType():
                 objects = [
@@ -298,9 +298,9 @@ class ObjectMixin:
     ) -> T | None:
         """Find a child with given type and name."""
         if recursive:
-            flag = QtCore.Qt.FindChildOption.FindChildrenRecursively
+            flag = constants.FindChildOption.FindChildrenRecursively
         else:
-            flag = QtCore.Qt.FindChildOption.FindDirectChildrenOnly
+            flag = constants.FindChildOption.FindDirectChildrenOnly
         match typ:
             case types.UnionType():
                 return next(

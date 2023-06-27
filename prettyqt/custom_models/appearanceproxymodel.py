@@ -5,7 +5,7 @@ from collections.abc import Callable
 from typing import Any
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtGui
 
 
 class AppearanceProxyModel(core.IdentityProxyModel):
@@ -149,7 +149,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         return self._background_default
 
     def set_alignment_default(
-        self, alignment: QtCore.Qt.AlignmentFlag | constants.AlignmentStr
+        self, alignment: constants.AlignmentFlag | constants.AlignmentStr
     ):
         if isinstance(alignment, str):
             alignment = constants.ALIGNMENTS[alignment]
@@ -157,7 +157,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         self._alignments = collections.defaultdict(lambda: None)
         self.update_all()
 
-    def get_alignment_default(self) -> QtCore.Qt.AlignmentFlag:
+    def get_alignment_default(self) -> constants.AlignmentFlag:
         return self._alignment_default
 
     font_default = core.Property(QtGui.QFont, get_font_default, set_font_default)
@@ -168,7 +168,7 @@ class AppearanceProxyModel(core.IdentityProxyModel):
         object, get_background_default, set_background_default
     )
     alignment_default = core.Property(
-        QtCore.Qt.AlignmentFlag, get_alignment_default, set_alignment_default
+        constants.AlignmentFlag, get_alignment_default, set_alignment_default
     )
 
 

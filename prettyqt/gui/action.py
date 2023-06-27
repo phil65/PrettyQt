@@ -184,7 +184,7 @@ class ActionMixin(core.ObjectMixin):
         return PRIORITIES.inverse[self.priority()]
 
     def set_shortcut_context(
-        self, context: constants.ShortcutContextStr | QtCore.Qt.ShortcutContext
+        self, context: constants.ShortcutContextStr | constants.ShortcutContext
     ):
         """Set shortcut context.
 

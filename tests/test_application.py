@@ -2,7 +2,7 @@
 
 import pytest
 
-from prettyqt import core, widgets
+from prettyqt import constants, core, widgets
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import InvalidParamError
 
@@ -35,7 +35,7 @@ def test_application(qapp):
     qapp.store_widget_states(settings)
     qapp.restore_widget_states(settings)
     event = QtGui.QKeyEvent(
-        QtCore.QEvent.Type.KeyPress, QtCore.Qt.Key.Key_Down, QtCore.Qt.KeyboardModifier(0)
+        QtCore.QEvent.Type.KeyPress, constants.Key.Key_Down, constants.KeyboardModifier(0)
     )
     assert qapp.send_event("test", event) is True
     qapp.post_event("test", event)

@@ -3,7 +3,6 @@ from __future__ import annotations
 import enum
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 
 
 class FlatteningMode(enum.IntEnum):
@@ -129,9 +128,9 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
             return flags
         index = self.mapToSource(index)
         model = self.sourceModel()
-        enabled = flags & QtCore.Qt.ItemFlag.ItemIsEnabled
+        enabled = flags & constants.ItemFlag.ItemIsEnabled
         if model is not None and model.rowCount(index) > 0 and enabled:
-            flags ^= QtCore.Qt.ItemFlag.ItemIsEnabled
+            flags ^= constants.ItemFlag.ItemIsEnabled
         return flags
 
     def data(

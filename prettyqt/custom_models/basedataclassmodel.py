@@ -9,7 +9,6 @@ from operator import and_
 from typing import Any
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -39,8 +38,8 @@ class BaseDataclassModel(core.AbstractTableModel):
     def headerData(
         self,
         section: int,
-        orientation: QtCore.Qt.Orientation,
-        role: QtCore.Qt.ItemDataRole = constants.DISPLAY_ROLE,
+        orientation: constants.Orientation,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> str | None:
         match orientation, role, section:
             case constants.VERTICAL, constants.DISPLAY_ROLE, _:

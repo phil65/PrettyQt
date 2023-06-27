@@ -331,7 +331,7 @@ class DataFrameViewer(widgets.Widget):
             text = str(text)  # TODO: remove this?
             h = (
                 self.table_data.fontMetrics()
-                .boundingRect(constrained_rect, QtCore.Qt.TextFlag.TextWordWrap, text)
+                .boundingRect(constrained_rect, constants.TextFlag.TextWordWrap, text)
                 .height()
             )
 
@@ -555,7 +555,7 @@ class HeaderView(custom_widgets.OrientedTableView):
                 if self.over_header_edge(mouse_pos) is not None:
                     self.viewport().setCursor(self.get_split_cursor())
                 else:
-                    cursor = gui.Cursor(QtCore.Qt.CursorShape.ArrowCursor)
+                    cursor = gui.Cursor(constants.CursorShape.ArrowCursor)
                     self.viewport().setCursor(cursor)
         return False
 
