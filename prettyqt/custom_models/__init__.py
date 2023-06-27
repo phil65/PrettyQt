@@ -60,6 +60,7 @@ from .slicevaluetransformationproxymodel import SliceValueTransformationProxyMod
 from .tabletolistproxymodel import TableToListProxyModel
 from .flattenedtreeproxymodel import FlattenedTreeProxyModel
 from .meltproxymodel import MeltProxyModel
+from .columnorderproxymodel import ColumnOrderProxyModel
 
 # Other proxies
 from .fuzzyfiltermodel import FuzzyFilterProxyModel
@@ -121,6 +122,7 @@ __all__ = [
     "TableToListProxyModel",
     "FlattenedTreeProxyModel",
     "MeltProxyModel",
+    "ColumnOrderProxyModel",
     "SliceAppearanceProxyModel",
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",

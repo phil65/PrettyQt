@@ -239,6 +239,9 @@ class Proxyfier:
         )
         return proxy
 
+    def reorder_columns(self, order: list[int]):
+        return self.get_proxy("column_order", order=order)
+
     def to_list(self) -> custom_models.TableToListProxyModel:
         """Wraps model in a Proxy which converts table to a tree."""
         return self.get_proxy("table_to_list")

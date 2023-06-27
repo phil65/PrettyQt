@@ -150,7 +150,8 @@ Some of these proxies might partly overlap in functionality, but theres always a
 : Unpivot a Table from wide to long format.
 : same as pandas.melt, just without pandas.
 
-
+`ColumnOrderProxyModel`:
+: Reorder columns based on a given list containing the column positions.
 
 
 ## Other Proxies
