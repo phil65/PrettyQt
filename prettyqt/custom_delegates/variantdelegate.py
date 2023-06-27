@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from typing import Any
 import enum
 import logging
 
@@ -31,7 +32,12 @@ class VariantDelegate(widgets.StyledItemDelegate):
         self._set_edit_role = set_edit_role
         self._validator = validator
 
-    def paint(self, painter, option, index):
+    def paint(
+        self,
+        painter: gui.QPainter,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         # if not self.is_supported_type(value):
         #     option = widgets.StyleOptionViewItem(option)
         #     option.state &= ~widgets.QStyle.StateFlag.State_Enabled
@@ -50,7 +56,12 @@ class VariantDelegate(widgets.StyledItemDelegate):
             case _:
                 super().paint(painter, option, index)
 
-    def createEditor(self, parent, option, index):
+    def createEditor(
+        self,
+        parent: widgets.QWidget,
+        option: widgets.QStyleOptionViewItem,
+        index: core.ModelIndex,
+    ):
         val = self._data_for_index(index, self.data_role)
         logger.info(f"creating editor for {val!r}...")
         widget = datatypes.get_widget_for_value(val, parent)
@@ -66,12 +77,17 @@ class VariantDelegate(widgets.StyledItemDelegate):
         widget.set_focus_policy("strong")
         return widget
 
-    def setEditorData(self, editor, index):
+    def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
         value = self._data_for_index(index, self.data_role)
         logger.info(f"setting data for {editor!r} to {value!r}")
         editor.set_value(value)
 
-    def setModelData(self, editor, model, index):
+    def setModelData(
+        self,
+        editor: widgets.QWidget,
+        model: core.QAbstractItemModel,
+        index: core.ModelIndex,
+    ):
         if (value := editor.get_value()) is not None:
             logger.info(f"setting data for {model!r} to {value!r}")
             model.setData(index, value, self.data_role)
@@ -80,7 +96,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
             self.commitData.emit(editor)
 
-    def displayText(self, value, locale: core.QLocale) -> str:
+    def displayText(self, value: Any, locale: core.QLocale) -> str:
         return datatypes.to_string(value, locale)
 
 
