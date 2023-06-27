@@ -4,7 +4,7 @@ import dataclasses
 import sys
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtGui
 
 
 @dataclasses.dataclass
@@ -15,9 +15,9 @@ class ActionGridItem:
     column: int
 
 
-PM = QtWidgets.QStyle.PixelMetric
-CT = QtWidgets.QStyle.ContentsType
-CC = QtWidgets.QStyle.ComplexControl
+PM = widgets.QStyle.PixelMetric
+CT = widgets.QStyle.ContentsType
+CC = widgets.QStyle.ComplexControl
 
 
 class AcionGridButton(widgets.ToolButton):
@@ -29,7 +29,7 @@ class AcionGridButton(widgets.ToolButton):
     def actionEvent(self, event):
         super().actionEvent(event)
         match event.type():
-            case QtCore.QEvent.Type.ActionChanged | QtCore.QEvent.Type.ActionAdded:
+            case core.QEvent.Type.ActionChanged | core.QEvent.Type.ActionAdded:
                 self._update_text()
 
     def resizeEvent(self, event):
@@ -75,7 +75,7 @@ class AcionGridButton(widgets.ToolButton):
             option.text = self._elided_text
 
     def sizeHint(self):
-        opt = QtWidgets.QStyleOptionToolButton()
+        opt = widgets.QStyleOptionToolButton()
         self.initStyleOption(opt)
         style = self.style()
         csize = opt.iconSize
@@ -112,8 +112,8 @@ class ActionGrid(widgets.Frame):
     ):
         super().__init__(**kwargs)
         self._columns = columns
-        self._button_size = QtCore.QSize(button_size) if button_size else core.QSize()
-        self._icon_size = QtCore.QSize(icon_size) if icon_size else core.QSize()
+        self._button_size = core.QSize(button_size) if button_size else core.QSize()
+        self._icon_size = core.QSize(icon_size) if icon_size else core.QSize()
         self._tool_button_style = tool_button_style
 
         self._grid_slots: list[ActionGridItem] = []
@@ -126,18 +126,18 @@ class ActionGrid(widgets.Frame):
     def set_button_size(self, size: core.QSize):
         """Set the button size."""
         if self._button_size != size:
-            self._button_size = QtCore.QSize(size)
+            self._button_size = core.QSize(size)
             for slot in self._grid_slots:
                 slot.button.setFixedSize(size)
 
     def button_size(self) -> core.QSize:
         """Return the button size."""
-        return QtCore.QSize(self._button_size)
+        return core.QSize(self._button_size)
 
     def setIconSize(self, size: core.QSize):
         """Set the button icon size (The default icon size is style-defined)."""
         if self._icon_size != size:
-            self._icon_size = QtCore.QSize(size)
+            self._icon_size = core.QSize(size)
             size = self._get_effective_icon_size()
             for slot in self._grid_slots:
                 slot.button.setIconSize(size)
@@ -148,14 +148,14 @@ class ActionGrid(widgets.Frame):
 
     def _get_effective_icon_size(self) -> core.QSize:
         if self._icon_size.isValid():
-            return QtCore.QSize(self._icon_size)
-        opt = QtWidgets.QStyleOptionToolButton()
+            return core.QSize(self._icon_size)
+        opt = widgets.QStyleOptionToolButton()
         opt.initFrom(self)
         s = self.style().pixelMetric(PM.PM_LargeIconSize, opt, None)
-        return QtCore.QSize(s, s)
+        return core.QSize(s, s)
 
     def changeEvent(self, event):
-        if event.type() == QtCore.QEvent.Type.StyleChange:
+        if event.type() == core.QEvent.Type.StyleChange:
             size = self._get_effective_icon_size()
             for item in self._grid_slots:
                 item.button.setIconSize(size)
@@ -201,13 +201,13 @@ class ActionGrid(widgets.Frame):
     def actionEvent(self, event):
         super().actionEvent(event)
         match event.type():
-            case QtCore.QEvent.Type.ActionAdded:
+            case core.QEvent.Type.ActionAdded:
                 # Note: the action is already in the self.actions() list.
                 actions = list(self.actions())
                 index = actions.index(event.action())
                 self._insert_action_button(index, event.action())
 
-            case QtCore.QEvent.Type.ActionRemoved:
+            case core.QEvent.Type.ActionRemoved:
                 self._remove_action_button(event.action())
 
     def _insert_action_button(self, index, action):
@@ -283,22 +283,22 @@ class ActionGrid(widgets.Frame):
         action = button.defaultAction()
         self.actionHovered.emit(action)
 
-    @core.Slot(QtCore.QObject)
+    @core.Slot(core.QObject)
     def _on_clicked(self, action):
         self.actionTriggered.emit(action)
 
     def eventFilter(self, obj, event) -> bool:
         match event.type():
-            case QtCore.QEvent.Type.KeyPress if obj.hasFocus():
+            case core.QEvent.Type.KeyPress if obj.hasFocus():
                 combo = core.KeyCombination(event.keyCombination())
                 if combo.is_moving() and self._focus_move(obj, combo.key()):
                     event.accept()
                     return True
-            case QtCore.QEvent.Type.HoverEnter if obj.parent() is self:
+            case core.QEvent.Type.HoverEnter if obj.parent() is self:
                 self._on_button_enter(obj)
         return super().eventFilter(obj, event)
 
-    def _focus_move(self, focus: QtWidgets.QWidget, key: constants.Key) -> bool:
+    def _focus_move(self, focus: widgets.QWidget, key: constants.Key) -> bool:
         assert focus is self.focusWidget()
         try:
             index = self._index_of(focus)
@@ -330,7 +330,7 @@ if __name__ == "__main__":
     w = widgets.Widget()
     w.set_layout("horizontal")
     w.box.add(toolbox)
-    icon = app.style().standardIcon(QtWidgets.QStyle.StandardPixmap.SP_FileIcon)
+    icon = app.style().standardIcon(widgets.QStyle.StandardPixmap.SP_FileIcon)
     actions = [
         gui.QAction(text="A", icon=icon, parent=toolbox),
         gui.QAction(text="B", icon=icon, parent=toolbox),

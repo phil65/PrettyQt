@@ -5,7 +5,6 @@ import logging
 import requests
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 
 
 logger = logging.getLogger(__name__)
@@ -14,18 +13,18 @@ logger = logging.getLogger(__name__)
 class WorkerSignals(core.Object):
     """TrayMenus' communication bus."""
 
-    download_finished = QtCore.Signal(bytes, str)  # response, url
-    download_failed = QtCore.Signal(str, str)  # msg, url
+    download_finished = core.Signal(bytes, str)  # response, url
+    download_failed = core.Signal(str, str)  # msg, url
 
 
-class DownloadWorker(QtCore.QRunnable):
+class DownloadWorker(core.QRunnable):
     def __init__(self, url: str, timeout: int = 30) -> None:
         super().__init__()
         self.url = url
         self.timeout = timeout
         self.signals = WorkerSignals()
 
-    @QtCore.Slot()
+    @core.Slot()
     def run(self) -> None:
         try:
             req = requests.get(self.url, verify=True, timeout=self.timeout)

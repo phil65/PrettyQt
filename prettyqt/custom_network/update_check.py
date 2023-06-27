@@ -6,7 +6,6 @@ import webbrowser
 
 from prettyqt import core, widgets
 from prettyqt.custom_network import downloadworker
-from prettyqt.qt import QtCore
 
 
 logger = logging.getLogger(__name__)
@@ -25,8 +24,8 @@ PYPI_MESSAGE = (
 class UpdateChecker(core.Object):
     """Check for a new prettyqt version."""
 
-    version_checked = QtCore.Signal(str)  # newest available version
-    update_button_clicked = QtCore.Signal(str)  # url to new version
+    version_checked = core.Signal(str)  # newest available version
+    update_button_clicked = core.Signal(str)  # url to new version
     download_finished = core.Signal(bytes, str)  # response, url
     download_failed = core.Signal(str, str)  # m
 
@@ -70,7 +69,7 @@ class UpdateChecker(core.Object):
         worker.signals.download_failed.connect(self.download_failed)
         self.threadpool.start(worker)
 
-    @QtCore.Slot(bytes, str)
+    @core.Slot(bytes, str)
     def _on_download_finished(self, data: bytes, url: str) -> None:
         """Parse the tag version from the response and emit version retrieved signal."""
         newest_v = None

@@ -3,16 +3,15 @@ from __future__ import annotations
 from collections.abc import Iterable
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
 
 
 class CycleWidget(widgets.ListWidget):
-    current_item_changed = core.Signal(QtWidgets.QListWidgetItem)
+    current_item_changed = core.Signal(widgets.QListWidgetItem)
 
     def __init__(
         self,
         items: Iterable,
-        item_size: QtCore.QSize,
+        item_size: core.QSize,
         align=constants.AlignmentFlag.AlignCenter,
         parent=None,
     ):
@@ -89,7 +88,7 @@ class CycleWidget(widgets.ListWidget):
 
     def scrollToItem(
         self,
-        item: QtWidgets.QListWidgetItem,
+        item: widgets.QListWidgetItem,
         hint=widgets.ListWidget.ScrollHint.PositionAtCenter,
     ):
         index = self.row(item)
@@ -166,6 +165,6 @@ class CycleWidget(widgets.ListWidget):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = CycleWidget([str(i) for i in range(30)], QtCore.QSize(50, 50))
+    widget = CycleWidget([str(i) for i in range(30)], core.QSize(50, 50))
     widget.show()
     app.exec()

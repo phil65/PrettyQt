@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, network, widgets
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtNetwork
 
 
 class BaseScrapeModel(gui.StandardItemModel):
@@ -9,7 +9,7 @@ class BaseScrapeModel(gui.StandardItemModel):
     error = core.Signal(str)
     search_url: str
 
-    def __init__(self, parent: QtCore.QObject | None = None):
+    def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)
         self._manager = network.NetworkAccessManager(self)
         self._reply = None

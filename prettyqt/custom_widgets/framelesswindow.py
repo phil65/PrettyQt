@@ -10,7 +10,6 @@ from ctypes import Structure, c_int, POINTER
 from ctypes.wintypes import HWND, UINT, RECT
 
 from prettyqt import core, constants, gui, widgets
-from prettyqt.qt import QtCore, QtGui
 
 from prettyqt.utils.platforms.windows import misc, windoweffects
 
@@ -222,7 +221,7 @@ class MinimizeButton(TitleBarButton):
     def paintEvent(self, event):
         super().paintEvent(event)
         with gui.Painter(self) as painter:
-            pen = QtGui.QPen(self._icon_color)
+            pen = gui.QPen(self._icon_color)
             pen.setCosmetic(True)
             painter.setPen(pen)
             painter.drawLine(18, 16, 28, 16)
@@ -236,7 +235,7 @@ class MaximizeButton(TitleBarButton):
     def paintEvent(self, event):
         super().paintEvent(event)
         with gui.Painter(self) as painter:
-            pen = QtGui.QPen(self._icon_color)
+            pen = gui.QPen(self._icon_color)
             pen.setCosmetic(True)
             painter.setPen(pen)
 
@@ -250,7 +249,7 @@ class MaximizeButton(TitleBarButton):
                 x0 = r_18 + int(2 * r)
                 y0 = 13 * r
                 dw = int(2 * r)
-                path = gui.PainterPath(QtCore.QPointF(x0, y0))
+                path = gui.PainterPath(core.QPointF(x0, y0))
                 path.lineTo(x0, y0 - dw)
                 path.lineTo(x0 + 8 * r, y0 - dw)
                 path.lineTo(x0 + 8 * r, y0 - dw + 8 * r)
@@ -270,7 +269,7 @@ class CloseButton(TitleBarButton):
         else:
             self._black_icon = gui.Icon(r"prettyqt\resources\close_black.svg")
             self.setIcon(self._black_icon)
-        self.setIconSize(QtCore.QSize(46, 32))
+        self.setIconSize(core.QSize(46, 32))
 
     def enterEvent(self, event):
         if not self._dark_mode:

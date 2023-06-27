@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import colors, datatypes
 
 
@@ -33,7 +32,7 @@ class BaseOverlayWidget(widgets.Widget):
         return self._border_color
 
     # def event(self, event):
-    #     if event.type() != QtCore.QEvent.Type.LayoutRequest:
+    #     if event.type() != core.QEvent.Type.LayoutRequest:
     #         return super().event(event)
     #     self._do_resize()
     #     return True
@@ -45,13 +44,13 @@ class BaseOverlayWidget(widgets.Widget):
 
     def eventFilter(self, source, event):
         match event.type():
-            case QtCore.QEvent.Type.Resize | QtCore.QEvent.Type.Move:
+            case core.QEvent.Type.Resize | core.QEvent.Type.Move:
                 self._do_resize()
-            # case QtCore.QEvent.Type.ChildAdded:
+            # case core.QEvent.Type.ChildAdded:
             #     self._do_resize()
-            # case QtCore.QEvent.Type.Show:
+            # case core.QEvent.Type.Show:
             #     self.show()
-            # case QtCore.QEvent.Type.Hide:
+            # case core.QEvent.Type.Hide:
             #     self.hide()
         return False
 
@@ -59,8 +58,8 @@ class BaseOverlayWidget(widgets.Widget):
         parent = self.parent()
         self.setGeometry(0, 0, parent.width(), parent.height())
 
-    border_color = core.Property(QtGui.QColor, get_border_color, set_border_color)
-    fill_color = core.Property(QtGui.QColor, get_fill_color, set_border_color)
+    border_color = core.Property(gui.QColor, get_border_color, set_border_color)
+    fill_color = core.Property(gui.QColor, get_fill_color, set_border_color)
 
 
 class OverlayBorder(BaseOverlayWidget):

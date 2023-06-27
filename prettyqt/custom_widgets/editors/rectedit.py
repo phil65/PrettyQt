@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import datatypes
 
 
 class BaseRectEdit(widgets.Widget):
     Typ: type
-    Widget: type[QtWidgets.QWidget]
+    Widget: type[widgets.QWidget]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -54,9 +53,9 @@ class BaseRectEdit(widgets.Widget):
 
 
 class RectEdit(BaseRectEdit):
-    Typ = QtCore.QRect
+    Typ = core.QRect
     Widget = widgets.SpinBox
-    value_changed = core.Signal(QtCore.QRect)
+    value_changed = core.Signal(core.QRect)
 
     def set_value(self, value: datatypes.RectType):
         super().set_value(value)
@@ -64,13 +63,13 @@ class RectEdit(BaseRectEdit):
     def get_value(self) -> core.Rect:
         return super().get_value()
 
-    value = core.Property(QtCore.QRect, get_value, set_value, user=True)
+    value = core.Property(core.QRect, get_value, set_value, user=True)
 
 
 class RectFEdit(BaseRectEdit):
-    Typ = QtCore.QRectF
+    Typ = core.QRectF
     Widget = widgets.DoubleSpinBox
-    value_changed = core.Signal(QtCore.QRectF)
+    value_changed = core.Signal(core.QRectF)
 
     def set_value(self, value: datatypes.RectFType):
         super().set_value(value)
@@ -78,13 +77,13 @@ class RectFEdit(BaseRectEdit):
     def get_value(self) -> core.RectF:
         return super().get_value()
 
-    value = core.Property(QtCore.QRectF, get_value, set_value, user=True)
+    value = core.Property(core.QRectF, get_value, set_value, user=True)
 
 
 class RegionEdit(BaseRectEdit):
     Widget = widgets.SpinBox
-    value_changed = core.Signal(QtGui.QRegion)
-    Typ = QtGui.QRegion
+    value_changed = core.Signal(gui.QRegion)
+    Typ = gui.QRegion
 
     def get_value(self) -> gui.Region:
         return gui.Region(
@@ -94,7 +93,7 @@ class RegionEdit(BaseRectEdit):
             self.spinbox_height.get_value(),
         )
 
-    def set_value(self, value: QtGui.QRegion):
+    def set_value(self, value: gui.QRegion):
         if isinstance(value, tuple):
             value = gui.Region(*value)
         self._value = value
@@ -110,7 +109,7 @@ class RegionEdit(BaseRectEdit):
 if __name__ == "__main__":
     app = widgets.app()
     widget = RectFEdit(window_title="Test")
-    widget.set_value(QtCore.QRectF())
+    widget.set_value(core.QRectF())
     widget.value_changed.connect(print)
     widget.show()
     app.exec()

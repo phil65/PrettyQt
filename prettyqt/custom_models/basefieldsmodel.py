@@ -5,7 +5,6 @@ import logging
 from typing import Any
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 
 logger = logging.getLogger(__name__)
 
@@ -59,14 +58,14 @@ class BaseFieldsModel(core.AbstractTableModel):
                 return True
         return False
 
-    def rowCount(self, parent: QtCore.QModelIndex | None = None) -> int:
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
         return 0 if parent.isValid() else len(self._fields)
 
-    def flags(self, index: QtCore.QModelIndex) -> constants.ItemFlag:
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         field = self._fields[index.row()]
         if index.column() == 0:
             val = getattr(self._instance, field.name)

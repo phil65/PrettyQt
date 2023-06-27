@@ -5,12 +5,11 @@ import enum
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
 
 
 @dataclass
 class ItemWrapper:
-    item: QtWidgets.QWidgetItem
+    item: widgets.QWidgetItem
     position: BorderLayout.Position
 
 
@@ -30,12 +29,12 @@ class BorderLayout(widgets.Layout):
         super().__init__(*args, **kwargs)
         self.items: list[ItemWrapper] = []
 
-    def addItem(self, item: QtWidgets.QWidgetItem):
+    def addItem(self, item: widgets.QWidgetItem):
         self.add_widgetitem(item, BorderLayout.Position.West)
 
     def addWidget(
         self,
-        widget: QtWidgets.QWidget,
+        widget: widgets.QWidget,
         position: Position | None = None,
     ):
         position = BorderLayout.Position.West if position is None else position
@@ -50,13 +49,13 @@ class BorderLayout(widgets.Layout):
     def count(self) -> int:
         return len(self.items)
 
-    def itemAt(self, index: int) -> QtWidgets.QWidgetItem | None:
+    def itemAt(self, index: int) -> widgets.QWidgetItem | None:
         return self.items[index].item if index < len(self.items) else None
 
     def minimumSize(self):
         return self.calculate_size("minimum")
 
-    def setGeometry(self, rect: QtCore.QRect):
+    def setGeometry(self, rect: core.QRect):
         center = None
         east_width = 0
         west_width = 0
@@ -113,14 +112,14 @@ class BorderLayout(widgets.Layout):
     def sizeHint(self) -> core.Size:
         return self.calculate_size("size_hint")
 
-    def takeAt(self, index: int) -> QtWidgets.QWidgetItem | None:
+    def takeAt(self, index: int) -> widgets.QWidgetItem | None:
         if 0 <= index < len(self.items):
             layout_struct = self.items.pop(index)
             return layout_struct.item
 
         return None
 
-    def add_widgetitem(self, item: QtWidgets.QWidgetItem, position: Position):
+    def add_widgetitem(self, item: widgets.QWidgetItem, position: Position):
         self.items.append(ItemWrapper(item, position))
 
     def calculate_size(self, size_type: Literal["minimum", "size_hint"]) -> core.Size:

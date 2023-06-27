@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import gui, widgets
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtCore
 
 
 class ClickableLabel(widgets.Label):
@@ -9,7 +9,7 @@ class ClickableLabel(widgets.Label):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs, alignment="left")
-        self.setFont(QtGui.QFont("Arial"))
+        self.setFont(gui.QFont("Arial"))
         self.setFixedHeight(24)
         self.set_size_policy("minimum", "expanding")
 

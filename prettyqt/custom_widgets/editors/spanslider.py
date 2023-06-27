@@ -7,7 +7,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import colors, datatypes
 
 
@@ -431,7 +430,7 @@ class SpanSlider(widgets.Slider):
         return option
 
     def _handle_mouse_press(
-        self, pos: QtCore.QPointF, control, value: float, handle: HandleStr
+        self, pos: core.QPointF, control, value: float, handle: HandleStr
     ):
         opt = self.get_style_option(handle)
         old_control = control
@@ -473,7 +472,7 @@ class SpanSlider(widgets.Slider):
 
 
 class SpanSliderWidget(widgets.Widget):
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent=parent)
         self.set_layout("grid")
         self.slider = SpanSlider()

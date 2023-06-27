@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 from prettyqt import gui
-from prettyqt.qt import QtCore, QtGui
+from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes, get_repr
 
 
@@ -39,7 +39,7 @@ class BaseRegexValidator(gui.Validator):
 
     def validate(  # type: ignore
         self, text: str, pos: int = 0
-    ) -> tuple[QtGui.QValidator.State, str, int]:
+    ) -> tuple[gui.QValidator.State, str, int]:
         if self.regex is None:
             raise TypeError("Validator not initialized")
         if not text:

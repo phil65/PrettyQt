@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 from prettyqt import core, eventfilters, widgets
-from prettyqt.qt import QtCore
 from prettyqt.utils import bidict, datatypes, helpers
 
 
@@ -13,13 +12,13 @@ logger = logging.getLogger(__name__)
 class WidgetEditor(widgets.Widget):
     value_changed = core.Signal(object)
 
-    def __init__(self, qobject: QtCore.QObject, *args, **kwargs):
+    def __init__(self, qobject: core.QObject, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.set_layout("form")
         self._qobject = qobject
         self._initial_prop_values = {}
         self.event_catcher = eventfilters.EventCatcher(
-            exclude=QtCore.QEvent.Type.Paint, parent=self._qobject
+            exclude=core.QEvent.Type.Paint, parent=self._qobject
         )
         self.event_catcher.caught.connect(self._update_editors)
         self._qobject.installEventFilter(self.event_catcher)

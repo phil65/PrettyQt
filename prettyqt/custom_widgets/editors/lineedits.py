@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Sequence
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtCore
 
 
 class IntLineEdit(widgets.LineEdit):
@@ -54,7 +53,7 @@ class FloatLineEdit(widgets.LineEdit):
 
 
 class UrlLineEdit(widgets.LineEdit):
-    value_changed = core.Signal(QtCore.QUrl)
+    value_changed = core.Signal(core.QUrl)
 
     def __init__(self, *args, object_name: str = "float_lineedit", **kwargs):
         super().__init__(*args, object_name=object_name, **kwargs)
@@ -65,14 +64,14 @@ class UrlLineEdit(widgets.LineEdit):
         self._set_validation_color()
         self.value_changed.emit(value)
 
-    def get_value(self) -> QtCore.QUrl:
+    def get_value(self) -> core.QUrl:
         val = super().get_value()
-        return QtCore.QUrl.fromUserInput(val)
+        return core.QUrl.fromUserInput(val)
 
-    def set_value(self, value: QtCore.QUrl | str):
-        super().set_value(value.toString() if isinstance(value, QtCore.QUrl) else value)
+    def set_value(self, value: core.QUrl | str):
+        super().set_value(value.toString() if isinstance(value, core.QUrl) else value)
 
-    value = core.Property(QtCore.QUrl, get_value, set_value)
+    value = core.Property(core.QUrl, get_value, set_value)
 
 
 class StringListEdit(widgets.LineEdit):

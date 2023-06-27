@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtCore
 from prettyqt.utils import get_repr
 
 
@@ -10,7 +9,7 @@ class LocaleEdit(widgets.ComboBox):
 
     def __init__(
         self,
-        locale: QtCore.QLocale | None = None,
+        locale: core.QLocale | None = None,
         object_name: str = "locale_edit",
         **kwargs,
     ):
@@ -35,20 +34,20 @@ class LocaleEdit(widgets.ComboBox):
     #     self._value = self.get_value()
     #     self.value_changed.emit(self._value)
 
-    def set_current_locale(self, locale: QtCore.QLocale | str):
+    def set_current_locale(self, locale: core.QLocale | str):
         self._current_locale = core.Locale(locale)
         self.set_current_text(self._current_locale.bcp47Name())
 
     def is_valid(self) -> bool:
         return self._current_locale.isValid()
 
-    def get_value(self) -> QtCore.QLocale:
+    def get_value(self) -> core.QLocale:
         return self._current_locale
 
-    def set_value(self, value: QtCore.QLocale | str):
+    def set_value(self, value: core.QLocale | str):
         self.set_current_locale(value)
 
-    value = core.Property(QtCore.QLocale, get_value, set_value, user=True)
+    value = core.Property(core.QLocale, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":
