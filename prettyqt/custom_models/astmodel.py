@@ -49,6 +49,7 @@ logger = logging.getLogger(__name__)
 
 class AstModel(custom_models.TreeModel):
     """Model to display the tree of an AST node."""
+
     @core.Enum
     class Roles(enum.IntEnum):
         NodeRole = constants.USER_ROLE
@@ -136,10 +137,18 @@ class AstModel(custom_models.TreeModel):
                         return node
             case constants.DISPLAY_ROLE, 2:
                 if hasattr(node, "lineno"):
-                    return f"{node.lineno} - {node.end_lineno}"
+                    return (
+                        f"{node.lineno} - {node.end_lineno}"
+                        if node.lineno != node.end_lineno
+                        else str(node.lineno)
+                    )
             case constants.DISPLAY_ROLE, 3:
                 if hasattr(node, "col_offset"):
-                    return f"{node.col_offset} - {node.end_col_offset}"
+                    return (
+                        f"{node.col_offset} - {node.end_col_offset}"
+                        if node.col_offset != node.end_col_offset
+                        else str(node.col_offset)
+                    )
             case constants.DISPLAY_ROLE, 4:
                 return ast.get_source_segment(self.code, node)
             case constants.FONT_ROLE, 4 | 5:
