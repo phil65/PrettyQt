@@ -74,7 +74,7 @@ class ReadyColumn(custom_models.ColumnItem):
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.isReady()
+                return self.to_checkstate(item.isReady())
 
 
 class ReadOnlyColumn(custom_models.ColumnItem):
@@ -83,7 +83,7 @@ class ReadOnlyColumn(custom_models.ColumnItem):
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.isReadOnly()
+                return self.to_checkstate(item.isReadOnly())
 
 
 class ValidColumn(custom_models.ColumnItem):
@@ -92,7 +92,7 @@ class ValidColumn(custom_models.ColumnItem):
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.isValid()
+                return self.to_checkstate(item.isValid())
 
 
 class StorageInfoModel(custom_models.ColumnTableModel):

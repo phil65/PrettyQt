@@ -158,7 +158,7 @@ class AttributeColumn(custom_models.ColumnItem):
     def get_data(self, item, role: constants.ItemDataRole = constants.DISPLAY_ROLE):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return bool(item.is_attribute)
+                return self.to_checkstate(bool(item.is_attribute))
 
 
 class IsCallableColumn(custom_models.ColumnItem):
@@ -168,7 +168,7 @@ class IsCallableColumn(custom_models.ColumnItem):
     def get_data(self, item, role: constants.ItemDataRole = constants.DISPLAY_ROLE):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return callable(item)
+                return self.to_checkstate(callable(item))
 
 
 class IsRoutineColumn(custom_models.ColumnItem):
@@ -178,7 +178,7 @@ class IsRoutineColumn(custom_models.ColumnItem):
     def get_data(self, item, role: constants.ItemDataRole = constants.DISPLAY_ROLE):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return inspect.isroutine(item)
+                return self.to_checkstate(inspect.isroutine(item))
 
 
 class IsBuiltinColumn(custom_models.ColumnItem):
@@ -188,7 +188,7 @@ class IsBuiltinColumn(custom_models.ColumnItem):
     def get_data(self, item, role: constants.ItemDataRole = constants.DISPLAY_ROLE):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return inspect.isbuiltin(item)
+                return self.to_checkstate(inspect.isbuiltin(item))
 
 
 class PredicateColumn(custom_models.ColumnItem):

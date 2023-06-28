@@ -201,7 +201,7 @@ class IsLinkColumn(FsSpecColumnItem):
     def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.obj.get("islink") or False
+                return self.to_checkstate(item.obj.get("islink"))
             case _:
                 return super().get_data(item, role)
 

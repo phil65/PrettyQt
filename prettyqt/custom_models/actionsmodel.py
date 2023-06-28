@@ -125,7 +125,9 @@ class CheckStateColumn(custom_models.ColumnItem):
     ):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.isChecked() if item.isCheckable() else None
+                return (
+                    self.to_checkstate(item.isChecked()) if item.isCheckable() else None
+                )
         return None
 
     def set_data(

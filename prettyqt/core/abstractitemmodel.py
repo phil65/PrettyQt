@@ -381,6 +381,10 @@ class AbstractItemModelMixin(core.ObjectMixin):
             index = model.index(row, 0, index)
         return index
 
+    @staticmethod
+    def to_checkstate(value: bool):
+        return constants.CheckState.Checked if value else constants.CheckState.Unchecked
+
 
 class AbstractItemModel(AbstractItemModelMixin, core.QAbstractItemModel):
     pass

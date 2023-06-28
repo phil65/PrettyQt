@@ -58,15 +58,15 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
             case constants.DISPLAY_ROLE, 2:
                 return field.default
             case constants.CHECKSTATE_ROLE, 3:
-                return field.allow_none
+                return self.to_checkstate(field.allow_none)
             case constants.DISPLAY_ROLE, 4:
                 return field.alias
             case constants.DISPLAY_ROLE, 5:
                 return repr(field.annotation)
             case constants.CHECKSTATE_ROLE, 6:
-                return field.is_complex
+                return self.to_checkstate(field.is_complex)
             case constants.CHECKSTATE_ROLE, 7:
-                return field.required
+                return self.to_checkstate(field.required)
             case constants.DISPLAY_ROLE, 8:
                 return field.shape
             case constants.USER_ROLE, _:

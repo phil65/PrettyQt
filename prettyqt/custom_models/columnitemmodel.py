@@ -68,6 +68,10 @@ class ColumnItem:
             case _:
                 raise ValueError(self.width)
 
+    @staticmethod
+    def to_checkstate(value: bool):
+        return constants.CheckState.Checked if value else constants.CheckState.Unchecked
+
 
 class ColumnItemModelMixin:
     class ExtraRoles(enum.IntEnum):

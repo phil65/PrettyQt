@@ -84,7 +84,7 @@ class BaseClassTreeModel(custom_models.TreeModel):
             case constants.DISPLAY_ROLE, 4:
                 return get_file(klass)
             case constants.CHECKSTATE_ROLE, 5:
-                return inspect.isabstract(klass)
+                return self.to_checkstate(inspect.isabstract(klass))
             case constants.USER_ROLE, _:
                 return klass
             case constants.FONT_ROLE, 1 | 3:

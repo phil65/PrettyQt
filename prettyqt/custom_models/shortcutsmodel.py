@@ -27,7 +27,7 @@ class EnabledColumn(custom_models.ColumnItem):
     def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.isEnabled()
+                return self.to_checkstate(item.isEnabled())
 
     def set_data(self, item, value, role):
         match role:
@@ -85,7 +85,7 @@ class AutoRepeatColumn(custom_models.ColumnItem):
     def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.autoRepeat()
+                return self.to_checkstate(item.autoRepeat())
 
     def set_data(self, item, value, role):
         match role:

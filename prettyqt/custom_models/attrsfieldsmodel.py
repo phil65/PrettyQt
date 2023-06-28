@@ -57,21 +57,21 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
             case constants.DISPLAY_ROLE, 2:
                 return field.default
             case constants.CHECKSTATE_ROLE, 3:
-                return field.init
+                return self.to_checkstate(field.init)
             case constants.CHECKSTATE_ROLE, 4:
-                return field.repr
+                return self.to_checkstate(field.repr)
             case constants.CHECKSTATE_ROLE, 5:
-                return field.eq
+                return self.to_checkstate(field.eq)
             case constants.CHECKSTATE_ROLE, 6:
-                return field.hash
+                return self.to_checkstate(field.hash)
             case constants.DISPLAY_ROLE, 7:
                 return str(field.metadata)
             case constants.CHECKSTATE_ROLE, 8:
-                return field.kw_only
+                return self.to_checkstate(field.kw_only)
             case constants.CHECKSTATE_ROLE, 9:
-                return field.inherited
+                return self.to_checkstate(field.inherited)
             case constants.CHECKSTATE_ROLE, 10:
-                return field.validator is not None
+                return self.to_checkstate(field.validator is not None)
             case constants.USER_ROLE, _:
                 return getattr(self._instance, field.name)
 

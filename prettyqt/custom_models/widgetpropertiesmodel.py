@@ -105,27 +105,27 @@ class WidgetPropertiesModel(core.AbstractTableModel):
                 font.setItalic(True)
                 return font
             case constants.CHECKSTATE_ROLE, 3:
-                return prop.isUser()
+                return self.to_checkstate(prop.isUser())
             case constants.CHECKSTATE_ROLE, 4:
-                return prop.isReadable()
+                return self.to_checkstate(prop.isReadable())
             case constants.CHECKSTATE_ROLE, 5:
-                return prop.isWritable()
+                return self.to_checkstate(prop.isWritable())
             case constants.CHECKSTATE_ROLE, 6:
-                return prop.isResettable()
+                return self.to_checkstate(prop.isResettable())
             case constants.CHECKSTATE_ROLE, 7:
-                return prop.isBindable()
+                return self.to_checkstate(prop.isBindable())
             case constants.CHECKSTATE_ROLE, 8:
-                return prop.isDesignable()
+                return self.to_checkstate(prop.isDesignable())
             case constants.CHECKSTATE_ROLE, 9:
-                return prop.isConstant()
+                return self.to_checkstate(prop.isConstant())
             case constants.CHECKSTATE_ROLE, 10:
-                return prop.isFinal()
+                return self.to_checkstate(prop.isFinal())
             case constants.CHECKSTATE_ROLE, 11:
-                return prop.isRequired()
+                return self.to_checkstate(prop.isRequired())
             case constants.CHECKSTATE_ROLE, 12:
-                return prop.isValid()
+                return self.to_checkstate(prop.isValid())
             case constants.CHECKSTATE_ROLE, 13:
-                return prop.isStored()
+                return self.to_checkstate(prop.isStored())
             case constants.DISPLAY_ROLE, 14:
                 notifier = prop.get_notify_signal()
                 return "" if notifier is None else notifier.get_name()
