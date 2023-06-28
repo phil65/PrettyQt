@@ -165,8 +165,8 @@ class ProxyWrapper:
 
     def style(
         self,
-        foreground: gui.QColor | str | None = None,
-        background: gui.QColor | str | None = None,
+        foreground: datatypes.ColorType | gui.QBrush | None = None,
+        background: datatypes.ColorType | gui.QBrush | None = None,
         font: str | gui.QFont | None = None,
         alignment: constants.AlignmentFlag | constants.AlignmentStr | None = None,
     ) -> custom_models.SliceAppearanceProxyModel:

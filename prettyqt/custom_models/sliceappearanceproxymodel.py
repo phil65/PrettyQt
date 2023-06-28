@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, custom_models
+from prettyqt.utils import colors, datatypes
 
 
 class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
@@ -49,18 +50,24 @@ class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
     def get_font(self) -> gui.QFont:
         return self._font
 
-    def set_foreground(self, foreground: gui.QColor | gui.QBrush | str | None):
-        if isinstance(foreground, str):
-            foreground = gui.QColor(foreground)
+    def set_foreground(self, foreground: datatypes.ColorType | gui.QBrush | None):
+        match foreground:
+            case None | gui.QBrush():
+                pass
+            case _:
+                foreground = colors.get_color(foreground).as_qt()
         self._foreground = foreground
         self.update_all()
 
     def get_foreground(self) -> gui.QColor | gui.QBrush | None:
         return self._foreground
 
-    def set_background(self, background: gui.QColor | gui.QBrush | str | None):
-        if isinstance(background, str):
-            background = gui.QColor(background)
+    def set_background(self, background: datatypes.ColorType | gui.QBrush | None):
+        match background:
+            case None | gui.QBrush():
+                pass
+            case _:
+                background = colors.get_color(background).as_qt()
         self._background = background
         self.update_all()
 
