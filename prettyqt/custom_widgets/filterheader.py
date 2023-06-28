@@ -67,16 +67,6 @@ class FilterHeader(widgets.HeaderView):
                 widget = widgets.ComboBox(margin=0, object_name=name, parent=self)
                 widget.add_items(BOOL_ITEMS)
                 widget.value_changed.connect(set_filter)
-            elif typ is str:
-
-                def set_filter(val, i=i):
-                    self._proxy.set_filter_value(i, val)
-
-                name = f"filter_lineedit_{i}"
-                widget = widgets.LineEdit(margin=0, object_name=name, parent=self)
-                widget.value_changed.connect(set_filter)
-                title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
-                widget.setPlaceholderText(f"Filter {title}...")
             elif typ in [int, float]:
 
                 def set_filter(val, i=i):
@@ -89,6 +79,18 @@ class FilterHeader(widgets.HeaderView):
                 widget.filter_changed.connect(set_filter)
                 title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
                 widget.lineedit.setPlaceholderText(f"Filter {title}...")
+            elif typ is str:
+
+                def set_filter(val, i=i):
+                    self._proxy.set_filter_value(i, val)
+
+                name = f"filter_lineedit_{i}"
+                widget = widgets.LineEdit(margin=0, object_name=name, parent=self)
+                widget.value_changed.connect(set_filter)
+                title = model.headerData(i, constants.HORIZONTAL, constants.DISPLAY_ROLE)
+                widget.setPlaceholderText(f"Filter {title}...")
+            else:
+                widget = widgets.Widget()
             widget.show()
             self._editors.append(widget)
 

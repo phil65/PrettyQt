@@ -153,7 +153,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def get_column_type(
         self,
         column: int,
-        rows_to_check: int = 5,
+        rows_to_check: int = 10,
         role=constants.DISPLAY_ROLE,
     ) -> type | None:
         """Guess column data type by checking values of first rows with given role."""

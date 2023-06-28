@@ -62,6 +62,8 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
             search_val = v.value
             match search_val:
                 case str():
+                    search_val = str(search_val)
+                    data = str(data)
                     if (
                         self.filterMode == "fuzzy"
                         and not fuzzy.fuzzy_match_simple(
