@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, qthelp
-from prettyqt.qt import QtHelp
 
 
 class HelpFilterEngine(core.ObjectMixin):
-    def __init__(self, item: QtHelp.QHelpFilterEngine):
+    def __init__(self, item: qthelp.QHelpFilterEngine):
         self.item = item
 
     def __getattr__(self, val):

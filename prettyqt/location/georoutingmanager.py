@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, location
-from prettyqt.qt import QtLocation
 
 
 class GeoRoutingManager(core.ObjectMixin):
-    def __init__(self, item: QtLocation.QGeoRoutingManager):
+    def __init__(self, item: location.QGeoRoutingManager):
         self.item = item
 
     def __getattr__(self, val):

@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import network
-from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, get_repr
 
 
-mod = QtNetwork.QHostAddress
+mod = network.QHostAddress
 
 CONVERSION_MODE = bidict(
     strict=mod.ConversionModeFlag.StrictConversion,
@@ -35,7 +34,7 @@ SpecialAddressStr = Literal[
 NetworkLayerProtocolStr = Literal["ipv4", "ipv6", "any_ip", "unknown"]
 
 
-class HostAddress(QtNetwork.QHostAddress):
+class HostAddress(network.QHostAddress):
     def __repr__(self):
         return get_repr(self, self.toString())
 

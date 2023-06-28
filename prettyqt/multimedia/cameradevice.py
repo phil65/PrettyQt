@@ -3,20 +3,19 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import multimedia
-from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict
 
 
 POSITION = bidict(
-    unspecified=QtMultimedia.QCameraDevice.Position.UnspecifiedPosition,
-    back=QtMultimedia.QCameraDevice.Position.BackFace,
-    front=QtMultimedia.QCameraDevice.Position.FrontFace,
+    unspecified=multimedia.QCameraDevice.Position.UnspecifiedPosition,
+    back=multimedia.QCameraDevice.Position.BackFace,
+    front=multimedia.QCameraDevice.Position.FrontFace,
 )
 
 PositionStr = Literal["unspecified", "back", "front"]
 
 
-class CameraDevice(QtMultimedia.QCameraDevice):
+class CameraDevice(multimedia.QCameraDevice):
     def get_position(self) -> PositionStr:
         return POSITION.inverse[self.position()]
 

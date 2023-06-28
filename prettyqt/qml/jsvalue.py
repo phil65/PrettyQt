@@ -6,7 +6,6 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import qml
-from prettyqt.qt import QtQml
 from prettyqt.utils import bidict, get_repr
 
 
@@ -15,17 +14,17 @@ logger = logging.getLogger()
 ErrorTypeStr = Literal["none", "generic", "range", "reference", "syntax", "type", "uri"]
 
 ERROR_TYPES = bidict(
-    none=QtQml.QJSValue.ErrorType(0),
-    generic=QtQml.QJSValue.ErrorType.GenericError,
-    range=QtQml.QJSValue.ErrorType.RangeError,
-    reference=QtQml.QJSValue.ErrorType.ReferenceError,
-    syntax=QtQml.QJSValue.ErrorType.SyntaxError,
-    type=QtQml.QJSValue.ErrorType.TypeError,
-    uri=QtQml.QJSValue.ErrorType.URIError,
+    none=qml.QJSValue.ErrorType(0),
+    generic=qml.QJSValue.ErrorType.GenericError,
+    range=qml.QJSValue.ErrorType.RangeError,
+    reference=qml.QJSValue.ErrorType.ReferenceError,
+    syntax=qml.QJSValue.ErrorType.SyntaxError,
+    type=qml.QJSValue.ErrorType.TypeError,
+    uri=qml.QJSValue.ErrorType.URIError,
 )
 
 
-class JSValue(QtQml.QJSValue):
+class JSValue(qml.QJSValue):
     def __repr__(self):
         return get_repr(self, self.toVariant())
 
@@ -56,13 +55,13 @@ class JSValue(QtQml.QJSValue):
         return self.toVariant()
 
     def get_error_type(self) -> ErrorTypeStr | None:
-        if (error_type := self.errorType()) == QtQml.QJSValue.ErrorType(0):
+        if (error_type := self.errorType()) == qml.QJSValue.ErrorType(0):
             return None
         else:
             return ERROR_TYPES.inverse[error_type]
 
     @classmethod
-    def from_object(cls, obj, jsengine: QtQml.QJSEngine) -> Self:
+    def from_object(cls, obj, jsengine: qml.QJSEngine) -> Self:
         """Convert any python object into a QJSValue (must happen in GUI thread)."""
         match obj:
             case None:

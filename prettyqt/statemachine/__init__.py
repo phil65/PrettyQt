@@ -7,6 +7,7 @@ Contains QtCore-based classes
 
 from __future__ import annotations
 
+from prettyqt.qt.QtStateMachine import *  # noqa: F403
 
 from .abstracttransition import AbstractTransition, AbstractTransitionMixin
 from .signaltransition import SignalTransition

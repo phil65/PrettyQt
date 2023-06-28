@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, qthelp
-from prettyqt.qt import QtHelp
 
 
 class HelpContentModel(core.AbstractItemModelMixin):
-    def __init__(self, item: QtHelp.QHelpContentModel):
+    def __init__(self, item: qthelp.QHelpContentModel):
         self.item = item
 
     def __getattr__(self, val):

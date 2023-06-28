@@ -3,22 +3,21 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, network
-from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict
 
 
 SOCKET_OPTION = bidict(
-    none=QtNetwork.QLocalServer.SocketOption(0),
-    user=QtNetwork.QLocalServer.SocketOption.UserAccessOption,
-    group=QtNetwork.QLocalServer.SocketOption.GroupAccessOption,
-    other=QtNetwork.QLocalServer.SocketOption.OtherAccessOption,
-    world=QtNetwork.QLocalServer.SocketOption.WorldAccessOption,
+    none=network.QLocalServer.SocketOption(0),
+    user=network.QLocalServer.SocketOption.UserAccessOption,
+    group=network.QLocalServer.SocketOption.GroupAccessOption,
+    other=network.QLocalServer.SocketOption.OtherAccessOption,
+    world=network.QLocalServer.SocketOption.WorldAccessOption,
 )
 
 SocketOptionStr = Literal["none", "user", "group", "other", "world"]
 
 
-class LocalServer(core.ObjectMixin, QtNetwork.QLocalServer):
+class LocalServer(core.ObjectMixin, network.QLocalServer):
     def get_server_error(self) -> network.abstractsocket.SocketErrorStr:
         return network.abstractsocket.SOCKET_ERROR.inverse[self.serverError()]
 

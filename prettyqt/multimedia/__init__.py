@@ -3,6 +3,8 @@
 contains QtMultimedia-based classes
 """
 
+from prettyqt.qt.QtMultimedia import *  # noqa: F403
+
 from .mediametadata import MediaMetaData
 from .audioformat import AudioFormat
 from .audiodevice import AudioDevice

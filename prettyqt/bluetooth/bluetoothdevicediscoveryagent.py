@@ -3,21 +3,20 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import bluetooth, core
-from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
 
 DiscoveryMethodStr = Literal["none", "classic", "low_energy"]
 
 DISCOVERY_METHODS: bidict[
-    DiscoveryMethodStr, QtBluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod
+    DiscoveryMethodStr, bluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod
 ] = bidict(
-    none=QtBluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.NoMethod,
-    classic=QtBluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.ClassicMethod,
-    low_energy=QtBluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.LowEnergyMethod,
+    none=bluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.NoMethod,
+    classic=bluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.ClassicMethod,
+    low_energy=bluetooth.QBluetoothDeviceDiscoveryAgent.DiscoveryMethod.LowEnergyMethod,
 )
 
-Error = QtBluetooth.QBluetoothDeviceDiscoveryAgent.Error
+Error = bluetooth.QBluetoothDeviceDiscoveryAgent.Error
 
 ErrorStr = Literal[
     "none",
@@ -40,15 +39,15 @@ ERROR: bidict[ErrorStr, Error] = bidict(
 )
 
 # INQUIRY_TYPES = bidict(
-#     unlimited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.GeneralUnlimitedInquiry,
-#     limited=QtBluetooth.QBluetoothDeviceDiscoveryAgent.LimitedInquiry,
+#     unlimited=bluetooth.QBluetoothDeviceDiscoveryAgent.GeneralUnlimitedInquiry,
+#     limited=bluetooth.QBluetoothDeviceDiscoveryAgent.LimitedInquiry,
 # )
 
 # InquiryTypeStr = Literal["unlimited", "limited"]
 
 
 class BluetoothDeviceDiscoveryAgent(
-    core.ObjectMixin, QtBluetooth.QBluetoothDeviceDiscoveryAgent
+    core.ObjectMixin, bluetooth.QBluetoothDeviceDiscoveryAgent
 ):
     device_discovered = core.Signal(object)  # bluetooth.BluetoothDeviceInfo casts signal.
 
@@ -78,11 +77,11 @@ class BluetoothDeviceDiscoveryAgent(
 
     def start_discovery(self, classic: bool = True, low_energy: bool = True):
         """Start discovery of bluetooth devices."""
-        flag = QtBluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod
+        flag = bluetooth.QBluetoothDeviceDiscoveryAgent.NoMethod
         if classic:
-            flag |= QtBluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod
+            flag |= bluetooth.QBluetoothDeviceDiscoveryAgent.ClassicMethod
         if low_energy:
-            flag |= QtBluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod
+            flag |= bluetooth.QBluetoothDeviceDiscoveryAgent.LowEnergyMethod
         self.start(flag)
 
     def get_error(self) -> ErrorStr:

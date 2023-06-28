@@ -4,6 +4,8 @@ contains QtDesigner-based classes
 """
 from prettyqt import qt
 
+from prettyqt.qt.QtDesigner import *  # noqa: F403
+
 if qt.API == "pyqt6":
     from .pydesignercustomwidgetcollectionplugin import (
         PyDesignerCustomWidgetCollectionPlugin,

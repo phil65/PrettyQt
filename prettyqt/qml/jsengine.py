@@ -1,22 +1,21 @@
 from __future__ import annotations
 
 from prettyqt import core, qml
-from prettyqt.qt import QtQml
 from prettyqt.utils import bidict
 
 
 EXTENSIONS = bidict(
-    translation=QtQml.QJSEngine.Extension.TranslationExtension,
-    console=QtQml.QJSEngine.Extension.ConsoleExtension,
-    garbage_collection=QtQml.QJSEngine.Extension.GarbageCollectionExtension,
-    all=QtQml.QJSEngine.Extension.AllExtensions,
+    translation=qml.QJSEngine.Extension.TranslationExtension,
+    console=qml.QJSEngine.Extension.ConsoleExtension,
+    garbage_collection=qml.QJSEngine.Extension.GarbageCollectionExtension,
+    all=qml.QJSEngine.Extension.AllExtensions,
 )
 
 
 class JSEngineMixin(core.ObjectMixin):
-    def install_extensions(self, extension: str, obj: QtQml.QJSValue | None = None):
+    def install_extensions(self, extension: str, obj: qml.QJSValue | None = None):
         if obj is None:
-            obj = QtQml.QJSValue()
+            obj = qml.QJSValue()
         self.installExtensions(EXTENSIONS[extension], obj)
 
     def new_array(self, length: int = 0) -> qml.JSValue:
@@ -27,7 +26,7 @@ class JSEngineMixin(core.ObjectMixin):
         return qml.JSValue(result)  # type: ignore
 
 
-class JSEngine(JSEngineMixin, QtQml.QJSEngine):
+class JSEngine(JSEngineMixin, qml.QJSEngine):
     pass
 
 

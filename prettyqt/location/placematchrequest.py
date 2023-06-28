@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 from prettyqt.utils import datatypes
 
 
-class PlaceMatchRequest(QtLocation.QPlaceMatchRequest):
+class PlaceMatchRequest(location.QPlaceMatchRequest):
     def __setitem__(self, index: str, val: datatypes.Variant):
         attrs = self.parameters()
         attrs[index] = val

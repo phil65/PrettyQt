@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import core, qthelp, widgets
-from prettyqt.qt import QtHelp
 from prettyqt.utils import datatypes
 
 
-class HelpSearchResultWidget(widgets.WidgetMixin):  # , QtHelp.QHelpSearchResultWidget):
-    def __init__(self, item: QtHelp.QHelpSearchResultWidget):
+class HelpSearchResultWidget(widgets.WidgetMixin):  # , qthelp.QHelpSearchResultWidget):
+    def __init__(self, item: qthelp.QHelpSearchResultWidget):
         self.item = item
 
     def __getattr__(self, val):

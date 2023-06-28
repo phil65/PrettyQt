@@ -3,23 +3,22 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, network
-from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, datatypes
 
 
 OperationStr = Literal["head", "get", "put", "post", "delete", "custom"]
 
-OPERATION: bidict[OperationStr, QtNetwork.QNetworkAccessManager.Operation] = bidict(
-    head=QtNetwork.QNetworkAccessManager.Operation.HeadOperation,
-    get=QtNetwork.QNetworkAccessManager.Operation.GetOperation,
-    put=QtNetwork.QNetworkAccessManager.Operation.PutOperation,
-    post=QtNetwork.QNetworkAccessManager.Operation.PostOperation,
-    delete=QtNetwork.QNetworkAccessManager.Operation.DeleteOperation,
-    custom=QtNetwork.QNetworkAccessManager.Operation.CustomOperation,
+OPERATION: bidict[OperationStr, network.QNetworkAccessManager.Operation] = bidict(
+    head=network.QNetworkAccessManager.Operation.HeadOperation,
+    get=network.QNetworkAccessManager.Operation.GetOperation,
+    put=network.QNetworkAccessManager.Operation.PutOperation,
+    post=network.QNetworkAccessManager.Operation.PostOperation,
+    delete=network.QNetworkAccessManager.Operation.DeleteOperation,
+    custom=network.QNetworkAccessManager.Operation.CustomOperation,
 )
 
 
-class NetworkAccessManager(core.ObjectMixin, QtNetwork.QNetworkAccessManager):
+class NetworkAccessManager(core.ObjectMixin, network.QNetworkAccessManager):
     # def request(
     #     self,
     #     method,
@@ -35,7 +34,7 @@ class NetworkAccessManager(core.ObjectMixin, QtNetwork.QNetworkAccessManager):
     #     if allow_redirects:
     #         pass
 
-    def get(self, request: datatypes.UrlType | QtNetwork.QNetworkRequest):
+    def get(self, request: datatypes.UrlType | network.QNetworkRequest):
         if isinstance(request, str):
             request = core.Url(request)
         request = network.NetworkRequest(request)

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import network
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
 
 
-class HttpPart(QtNetwork.QHttpPart):
+class HttpPart(network.QHttpPart):
     def set_body(self, body: datatypes.ByteArrayType):
         body = datatypes.to_bytearray(body)
         self.setBody(body)

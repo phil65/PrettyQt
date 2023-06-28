@@ -3,11 +3,11 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import statemachine
-from prettyqt.qt import QtCore, QtStateMachine
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
-sm = QtStateMachine.QStateMachine.Error
+sm = statemachine.QStateMachine.Error
 
 ErrorStr = Literal[
     "none",
@@ -27,14 +27,14 @@ ERROR: bidict[ErrorStr, sm] = bidict(
 
 PriorityStr = Literal["normal", "high"]
 
-PRIORITY: bidict[PriorityStr, QtStateMachine.QStateMachine.EventPriority] = bidict(
-    normal=QtStateMachine.QStateMachine.EventPriority.NormalPriority,
-    high=QtStateMachine.QStateMachine.EventPriority.HighPriority,
+PRIORITY: bidict[PriorityStr, statemachine.QStateMachine.EventPriority] = bidict(
+    normal=statemachine.QStateMachine.EventPriority.NormalPriority,
+    high=statemachine.QStateMachine.EventPriority.HighPriority,
 )
 
 
-class StateMachine(statemachine.state.StateMixin, QtStateMachine.QStateMachine):
-    def __add__(self, other: QtStateMachine.QAbstractState) -> StateMachine:
+class StateMachine(statemachine.state.StateMixin, statemachine.QStateMachine):
+    def __add__(self, other: statemachine.QAbstractState) -> StateMachine:
         self.addState(other)
         return self
 
@@ -44,7 +44,7 @@ class StateMachine(statemachine.state.StateMixin, QtStateMachine.QStateMachine):
     def post_event(
         self,
         event: QtCore.QEvent,
-        priority: PriorityStr | QtStateMachine.QStateMachine.EventPriority = "normal",
+        priority: PriorityStr | statemachine.QStateMachine.EventPriority = "normal",
     ):
         self.postEvent(event, PRIORITY.get_enum_value(priority))
 

@@ -3,6 +3,8 @@
 Contains QtQml-based classes
 """
 
+from prettyqt.qt.QtQml import *  # noqa: F403
+
 from prettyqt.qt.QtQml import (
     qmlRegisterType as register_qml_type,
     qmlClearTypeRegistrations as clear_type_registrations,

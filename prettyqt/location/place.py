@@ -1,14 +1,13 @@
 from __future__ import annotations
 
 from prettyqt import core, location, positioning
-from prettyqt.qt import QtLocation
 
 
-class Place(QtLocation.QPlace):
+class Place(location.QPlace):
     def __bool__(self):
         return not self.isEmpty()
 
-    def __setitem__(self, index: str, val: QtLocation.QPlaceAttribute | None):
+    def __setitem__(self, index: str, val: location.QPlaceAttribute | None):
         if val is None:
             val = location.PlaceAttribute()
         self.setExtendedAttribute(index, val)
@@ -23,10 +22,10 @@ class Place(QtLocation.QPlace):
     def get_contact_details(self, contact_type: str) -> list[location.PlaceContactDetail]:
         return [location.PlaceContactDetail(i) for i in self.contactDetails(contact_type)]
 
-    def set_content(self, typ: str, value: dict[int, QtLocation.QPlaceContent]):
+    def set_content(self, typ: str, value: dict[int, location.QPlaceContent]):
         self.setContent(location.placecontent.TYPE.get_enum_value(typ), value)
 
-    def get_content(self, typ: str) -> dict[int, QtLocation.QPlaceContent]:
+    def get_content(self, typ: str) -> dict[int, location.QPlaceContent]:
         return self.content(location.placecontent.TYPE.get_enum_value(typ))
 
     def get_icon(self) -> location.PlaceIcon | None:

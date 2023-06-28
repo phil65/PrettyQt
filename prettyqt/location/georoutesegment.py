@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import location, positioning
-from prettyqt.qt import QtLocation
 
 
-class GeoRouteSegment(QtLocation.QGeoRouteSegment):
+class GeoRouteSegment(location.QGeoRouteSegment):
     def __bool__(self):
         return self.isValid()
 

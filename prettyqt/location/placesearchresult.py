@@ -3,14 +3,13 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 from prettyqt.utils import bidict
 
 
 TYPE = bidict(
-    unknown=QtLocation.QPlaceSearchResult.SearchResultType.UnknownSearchResult,
-    place=QtLocation.QPlaceSearchResult.SearchResultType.PlaceResult,
-    proposed_search=QtLocation.QPlaceSearchResult.SearchResultType.ProposedSearchResult,
+    unknown=location.QPlaceSearchResult.SearchResultType.UnknownSearchResult,
+    place=location.QPlaceSearchResult.SearchResultType.PlaceResult,
+    proposed_search=location.QPlaceSearchResult.SearchResultType.ProposedSearchResult,
 )
 
 TypeStr = Literal["unknown", "place", "proposed_search"]
@@ -30,5 +29,5 @@ class PlaceSearchResultMixin:
         return TYPE.inverse[self.type()]
 
 
-class PlaceSearchResult(PlaceSearchResultMixin, QtLocation.QPlaceSearchResult):
+class PlaceSearchResult(PlaceSearchResultMixin, location.QPlaceSearchResult):
     pass

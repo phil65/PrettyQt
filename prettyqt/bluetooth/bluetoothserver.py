@@ -3,21 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import bluetooth, core
-from prettyqt.qt import QtBluetooth, QtCore
 from prettyqt.utils import bidict
 
 
-Error = QtBluetooth.QBluetoothServer.Error
-
-ERROR = bidict(
-    none=Error.NoError,
-    unknown=Error.UnknownError,
-    powered_off=Error.PoweredOffError,
-    input_output=Error.InputOutputError,
-    service_already_registered=Error.ServiceAlreadyRegisteredError,
-    unsupported_protocol=Error.UnsupportedProtocolError,
-    missing_permissions=Error.MissingPermissionsError,
-)
+Error = bluetooth.QBluetoothServer.Error
 
 ErrorStr = Literal[
     "none",
@@ -29,13 +18,24 @@ ErrorStr = Literal[
     "missing_permissions",
 ]
 
+ERROR: bidict[ErrorStr, Error] = bidict(
+    none=Error.NoError,
+    unknown=Error.UnknownError,
+    powered_off=Error.PoweredOffError,
+    input_output=Error.InputOutputError,
+    service_already_registered=Error.ServiceAlreadyRegisteredError,
+    unsupported_protocol=Error.UnsupportedProtocolError,
+    missing_permissions=Error.MissingPermissionsError,
+)
 
-class BluetoothServer(core.ObjectMixin, QtBluetooth.QBluetoothServer):
+
+
+class BluetoothServer(core.ObjectMixin, bluetooth.QBluetoothServer):
     def __init__(
         self,
         protocol: bluetooth.bluetoothserviceinfo.ProtocolStr
-        | QtBluetooth.QBluetoothServiceInfo.Protocol,
-        parent: QtCore.QObject | None = None,
+        | bluetooth.QBluetoothServiceInfo.Protocol,
+        parent: core.QObject | None = None,
     ):
         if isinstance(protocol, str):
             protocol = bluetooth.bluetoothserviceinfo.PROTOCOL[protocol]

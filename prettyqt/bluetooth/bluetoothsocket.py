@@ -3,23 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import bluetooth, core
-from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
 
-SocketError = QtBluetooth.QBluetoothSocket.SocketError
-
-SOCKET_ERROR = bidict(
-    unknown_socket=SocketError.UnknownSocketError,
-    no_socket=SocketError.NoSocketError,
-    host_not_found=SocketError.HostNotFoundError,
-    service_not_found=SocketError.ServiceNotFoundError,
-    network=SocketError.NetworkError,
-    unsupported_protocol=SocketError.UnsupportedProtocolError,
-    operation=SocketError.OperationError,
-    remote_host_closed=SocketError.RemoteHostClosedError,
-    missing_permissions=SocketError.MissingPermissionsError,
-)
+SocketError = bluetooth.QBluetoothSocket.SocketError
 
 SocketErrorStr = Literal[
     "unknown_socket",
@@ -33,19 +20,20 @@ SocketErrorStr = Literal[
     "missing_permissions",
 ]
 
-
-SocketState = QtBluetooth.QBluetoothSocket.SocketState
-
-SOCKET_STATE = bidict(
-    unconnected=SocketState.UnconnectedState,
-    service_lookup=SocketState.ServiceLookupState,
-    connecting=SocketState.ConnectingState,
-    connected=SocketState.ConnectedState,
-    bound=SocketState.BoundState,
-    closing=SocketState.ClosingState,
-    listening=SocketState.ListeningState,
+SOCKET_ERROR: bidict[SocketErrorStr, SocketError] = bidict(
+    unknown_socket=SocketError.UnknownSocketError,
+    no_socket=SocketError.NoSocketError,
+    host_not_found=SocketError.HostNotFoundError,
+    service_not_found=SocketError.ServiceNotFoundError,
+    network=SocketError.NetworkError,
+    unsupported_protocol=SocketError.UnsupportedProtocolError,
+    operation=SocketError.OperationError,
+    remote_host_closed=SocketError.RemoteHostClosedError,
+    missing_permissions=SocketError.MissingPermissionsError,
 )
 
+
+SocketState = bluetooth.QBluetoothSocket.SocketState
 SocketStateStr = Literal[
     "unconnected",
     "service_lookup",
@@ -56,12 +44,22 @@ SocketStateStr = Literal[
     "listening",
 ]
 
+SOCKET_STATE: bidict[SocketStateStr, SocketState] = bidict(
+    unconnected=SocketState.UnconnectedState,
+    service_lookup=SocketState.ServiceLookupState,
+    connecting=SocketState.ConnectingState,
+    connected=SocketState.ConnectedState,
+    bound=SocketState.BoundState,
+    closing=SocketState.ClosingState,
+    listening=SocketState.ListeningState,
+)
 
-class BluetoothSocket(core.IODeviceMixin, QtBluetooth.QBluetoothSocket):
+
+class BluetoothSocket(core.IODeviceMixin, bluetooth.QBluetoothSocket):
     def __init__(
         self,
         protocol: bluetooth.bluetoothserviceinfo.ProtocolStr
-        | QtBluetooth.QBluetoothServiceInfo.Protocol,
+        | bluetooth.QBluetoothServiceInfo.Protocol,
         parent: core.QObject | None = None,
     ):
         if isinstance(protocol, str):

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import location, positioning
-from prettyqt.qt import QtLocation
 from prettyqt.utils import datatypes
 
 
@@ -30,5 +29,5 @@ class GeoRouteMixin:
         return [positioning.GeoCoordinate(i) for i in self.path()]
 
 
-class GeoRoute(GeoRouteMixin, QtLocation.QGeoRoute):
+class GeoRoute(GeoRouteMixin, location.QGeoRoute):
     pass

@@ -3,6 +3,8 @@
 Contains QtPositioning-based classes
 """
 
+from prettyqt.qt.QtPositioning import *  # noqa: F403
+
 from .geoaddress import GeoAddress
 from .geocoordinate import GeoCoordinate
 from .geopositioninfo import GeoPositionInfo

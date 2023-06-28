@@ -7,9 +7,30 @@ from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict, datatypes
 
 
+AttributeIdStr = Literal[
+    "service_record_handle",
+    "service_class_ids",
+    "service_record_state",
+    "service_id",
+    "protocol_descriptor_list",
+    "browse_group_list",
+    "language_base_attribute_id_list",
+    "service_info_time_to_live",
+    "service_availablity",
+    "bluetooth_profile_descriptor_list",
+    "documentation_url",
+    "client_executable_url",
+    "icon_url",
+    "additional_protocol_descriptor_list",
+    "primary_language_base",
+    "service_name",
+    "service_description",
+    "service_provider",
+]
+
 AttributeId = QtBluetooth.QBluetoothServiceInfo.AttributeId
 
-ATTRIBUTE_IDS = bidict(
+ATTRIBUTE_IDS: bidict[AttributeIdStr, AttributeId] = bidict(
     service_record_handle=AttributeId.ServiceRecordHandle,
     service_class_ids=AttributeId.ServiceClassIds,
     service_record_state=AttributeId.ServiceRecordState,
@@ -32,13 +53,13 @@ ATTRIBUTE_IDS = bidict(
 
 Protocol = QtBluetooth.QBluetoothServiceInfo.Protocol
 
-PROTOCOL = bidict(
+ProtocolStr = Literal["unknown", "l2_cap", "rfcomm"]
+
+PROTOCOL: bidict[ProtocolStr, Protocol] = bidict(
     unknown=Protocol.UnknownProtocol,
     l2_cap=Protocol.L2capProtocol,
     rfcomm=Protocol.RfcommProtocol,
 )
-
-ProtocolStr = Literal["unknown", "l2_cap", "rfcomm"]
 
 
 class BluetoothServiceInfo(

@@ -5,10 +5,9 @@ from collections.abc import Iterator
 from typing_extensions import Self
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 
 
-class PlaceMatchReply(location.PlaceReplyMixin, QtLocation.QPlaceMatchReply):
+class PlaceMatchReply(location.PlaceReplyMixin, location.QPlaceMatchReply):
     def __iter__(self) -> Iterator[location.Place]:
         return iter(self.get_places())
 
@@ -19,7 +18,7 @@ class PlaceMatchReply(location.PlaceReplyMixin, QtLocation.QPlaceMatchReply):
         return len(self.get_places())
 
     @classmethod
-    def clone_from(cls, obj: QtLocation.QPlaceMatchReply) -> Self:
+    def clone_from(cls, obj: location.QPlaceMatchReply) -> Self:
         reply = cls(obj.parent())
         reply.setPlaces([location.Place(i) for i in obj.places()])
         request = location.PlaceMatchRequest(obj.request())

@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, gui, quick
-from prettyqt.qt import QtQuick
 from prettyqt.utils import bidict
 
 
-mod = QtQuick.QQuickPaintedItem
+mod = quick.QQuickPaintedItem
 
 PerformanceHintStr = Literal["fast_fbo_resizing"]
 
@@ -24,7 +23,7 @@ RENDER_TARGET: bidict[RenderTargetStr, mod.RenderTarget] = bidict(
 )
 
 
-class QuickPaintedItem(quick.QuickItemMixin, QtQuick.QQuickPaintedItem):
+class QuickPaintedItem(quick.QuickItemMixin, quick.QQuickPaintedItem):
     def get_fill_color(self) -> gui.Color:
         return gui.Color(self.fillColor())
 

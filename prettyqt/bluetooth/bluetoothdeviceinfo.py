@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import bluetooth, core
-from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict, get_repr
 
 
-mod = QtBluetooth.QBluetoothDeviceInfo
+mod = bluetooth.QBluetoothDeviceInfo
 
 
 CoreConfigurationStr = Literal[
@@ -293,7 +292,7 @@ SERVICE_CLASS: bidict[ServiceClassStr, mod.ServiceClass] = bidict(
     all=mod.ServiceClass.AllServices,
 )
 
-class BluetoothDeviceInfo(QtBluetooth.QBluetoothDeviceInfo):
+class BluetoothDeviceInfo(bluetooth.QBluetoothDeviceInfo):
     def __repr__(self):
         return get_repr(self, self.get_address(), self.name())
 

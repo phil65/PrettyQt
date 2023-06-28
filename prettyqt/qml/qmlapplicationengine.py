@@ -4,11 +4,11 @@ from collections.abc import Iterator
 import os
 
 from prettyqt import qml
-from prettyqt.qt import QtCore, QtQml
+from prettyqt.qt import QtCore
 from prettyqt.utils import datatypes
 
 
-class QmlApplicationEngine(qml.QmlEngineMixin, QtQml.QQmlApplicationEngine):
+class QmlApplicationEngine(qml.QmlEngineMixin, qml.QQmlApplicationEngine):
     def __iter__(self) -> Iterator[QtCore.QObject]:
         return iter(self.rootObjects())
 

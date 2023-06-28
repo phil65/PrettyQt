@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 
 
-class PlaceContentRequest(QtLocation.QPlaceContentRequest):
+class PlaceContentRequest(location.QPlaceContentRequest):
     def set_content_type(
         self, typ: location.placecontent.TypeStr | location.PlaceContent.Type
     ):

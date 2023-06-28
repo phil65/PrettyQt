@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import printsupport
-from prettyqt.qt import QtPrintSupport
 from prettyqt.utils import bidict
 
 
-PrintEnginePropertyKey = QtPrintSupport.QPrintEngine.PrintEnginePropertyKey
+PrintEnginePropertyKey = printsupport.QPrintEngine.PrintEnginePropertyKey
 
 PRINT_ENGINE_PROPERTY_KEY = bidict(
     collate_copies=PrintEnginePropertyKey.PPK_CollateCopies,
@@ -48,6 +47,6 @@ PRINT_ENGINE_PROPERTY_KEY = bidict(
 PrintEnginePropertyKeyStr = Literal["none", "auto", "long_side", "short_side"]
 
 
-class PrintEngine(QtPrintSupport.QPrintEngine):
+class PrintEngine(printsupport.QPrintEngine):
     def get_printer_state(self) -> PrintEnginePropertyKeyStr:
         return printsupport.printer.PRINTER_STATE.inverse[self.printerState()]

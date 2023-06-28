@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, network
-from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, get_repr
 
 
-mod = QtNetwork.QAbstractSocket
+mod = network.QAbstractSocket
 
 BindModeStr = Literal[
     "share_address",
@@ -177,14 +176,14 @@ class AbstractSocketMixin(core.IODeviceMixin):
 
     def bind_to(
         self,
-        address: str | QtNetwork.QHostAddress,
+        address: str | network.QHostAddress,
         port: int = 0,
         bind_mode: (
-            QtNetwork.QAbstractSocket.BindFlag | BindModeStr
+            network.QAbstractSocket.BindFlag | BindModeStr
         ) = "default_for_platform",
     ) -> bool:
         if isinstance(address, str):
-            address = QtNetwork.QHostAddress(address)
+            address = network.QHostAddress(address)
         mode = BIND_MODE.get_enum_value(bind_mode)
         return self.bind(address, port, mode)
 
@@ -195,7 +194,7 @@ class AbstractSocketMixin(core.IODeviceMixin):
         open_mode: core.QIODevice.OpenModeFlag
         | core.iodevice.OpenModeStr = "read_write",
         protocol: (
-            QtNetwork.QAbstractSocket.NetworkLayerProtocol | NetworkLayerProtocolStr
+            network.QAbstractSocket.NetworkLayerProtocol | NetworkLayerProtocolStr
         ) = "any_ip",
     ):
         mode = core.iodevice.OPEN_MODES.get_enum_value(open_mode)
@@ -242,5 +241,5 @@ class AbstractSocketMixin(core.IODeviceMixin):
         return network.HostAddress(self.localAddress())
 
 
-class AbstractSocket(AbstractSocketMixin, QtNetwork.QAbstractSocket):
+class AbstractSocket(AbstractSocketMixin, network.QAbstractSocket):
     pass

@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import network
-from prettyqt.qt import QtNetwork
 
 
-class UdpSocket(network.AbstractSocketMixin, QtNetwork.QUdpSocket):
+class UdpSocket(network.AbstractSocketMixin, network.QUdpSocket):
     def get_multicast_interface(self) -> network.NetworkInterface:
         return network.NetworkInterface(self.multicastInterface())
 

@@ -3,20 +3,19 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import multimedia
-from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict
 
 
 MODE = bidict(
-    null=QtMultimedia.QAudioDevice.Mode.Null,
-    input=QtMultimedia.QAudioDevice.Mode.Input,
-    output=QtMultimedia.QAudioDevice.Mode.Output,
+    null=multimedia.QAudioDevice.Mode.Null,
+    input=multimedia.QAudioDevice.Mode.Input,
+    output=multimedia.QAudioDevice.Mode.Output,
 )
 
 ModeStr = Literal["null", "input", "output"]
 
 
-class AudioDevice(QtMultimedia.QAudioDevice):
+class AudioDevice(multimedia.QAudioDevice):
     def get_mode(self) -> ModeStr:
         return MODE.inverse[self.mode()]
 

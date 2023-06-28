@@ -5,15 +5,14 @@ from typing import Literal
 from typing_extensions import Self
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 from prettyqt.utils import bidict, get_repr
 
 
 OPERATION_TYPES = bidict(
-    save_place=QtLocation.QPlaceIdReply.OperationType.SavePlace,
-    remove_place=QtLocation.QPlaceIdReply.OperationType.RemovePlace,
-    save_category=QtLocation.QPlaceIdReply.OperationType.SaveCategory,
-    remove_category=QtLocation.QPlaceIdReply.OperationType.RemoveCategory,
+    save_place=location.QPlaceIdReply.OperationType.SavePlace,
+    remove_place=location.QPlaceIdReply.OperationType.RemovePlace,
+    save_category=location.QPlaceIdReply.OperationType.SaveCategory,
+    remove_category=location.QPlaceIdReply.OperationType.RemoveCategory,
 )
 
 OperationTypeStr = Literal[
@@ -21,12 +20,12 @@ OperationTypeStr = Literal[
 ]
 
 
-class PlaceIdReply(location.PlaceReplyMixin, QtLocation.QPlaceIdReply):
+class PlaceIdReply(location.PlaceReplyMixin, location.QPlaceIdReply):
     def __repr__(self):
         return get_repr(self, self.operationType())
 
     @classmethod
-    def clone_from(cls, obj: QtLocation.QPlaceIdReply) -> Self:
+    def clone_from(cls, obj: location.QPlaceIdReply) -> Self:
         reply = cls(obj.operationType(), obj.parent())
         reply.setId(obj.id())
         return reply
@@ -41,4 +40,4 @@ class PlaceIdReply(location.PlaceReplyMixin, QtLocation.QPlaceIdReply):
 
 
 if __name__ == "__main__":
-    reply = PlaceIdReply(QtLocation.QPlaceIdReply.OperationType.SavePlace)
+    reply = PlaceIdReply(location.QPlaceIdReply.OperationType.SavePlace)

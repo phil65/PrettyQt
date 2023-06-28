@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, location
-from prettyqt.qt import QtLocation
 from prettyqt.utils import datatypes
 
 
-class PlaceSupplier(QtLocation.QPlaceSupplier):
+class PlaceSupplier(location.QPlaceSupplier):
     def __bool__(self):
         return not self.isEmpty()
 

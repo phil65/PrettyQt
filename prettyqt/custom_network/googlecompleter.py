@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, network, widgets
-from prettyqt.qt import QtNetwork
 
 
 class BaseScrapeModel(gui.StandardItemModel):
@@ -29,7 +28,7 @@ class BaseScrapeModel(gui.StandardItemModel):
 
     @core.Slot()
     def on_finished(self):
-        if self._reply.error() == QtNetwork.QNetworkReply.NetworkError.NoError:
+        if self._reply.error() == network.QNetworkReply.NetworkError.NoError:
             response = self._reply.readAll().data().decode()
             for s in self.process_reply(response):
                 self.appendRow(gui.StandardItem(s))

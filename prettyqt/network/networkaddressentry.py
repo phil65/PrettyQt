@@ -3,22 +3,21 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, network
-from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict
 
 
 DnsEligibilityStatusStr = Literal["unknown", "eligible", "ineligible"]
 
 DNS_ELIGIBILITY_STATUS: bidict[
-    DnsEligibilityStatusStr, QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus
+    DnsEligibilityStatusStr, network.QNetworkAddressEntry.DnsEligibilityStatus
 ] = bidict(
-    unknown=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligibilityUnknown,
-    eligible=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligible,
-    ineligible=QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus.DnsIneligible,
+    unknown=network.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligibilityUnknown,
+    eligible=network.QNetworkAddressEntry.DnsEligibilityStatus.DnsEligible,
+    ineligible=network.QNetworkAddressEntry.DnsEligibilityStatus.DnsIneligible,
 )
 
 
-class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
+class NetworkAddressEntry(network.QNetworkAddressEntry):
     def get_dns_eligibility(self) -> DnsEligibilityStatusStr:
         """Return whether this address is eligible for publication in the DNS.
 
@@ -30,7 +29,7 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
     def set_dns_eligibility(
         self,
         status: DnsEligibilityStatusStr
-        | QtNetwork.QNetworkAddressEntry.DnsEligibilityStatus,
+        | network.QNetworkAddressEntry.DnsEligibilityStatus,
     ):
         """Set the DNS eligibility flag for this address to status.
 
@@ -42,13 +41,13 @@ class NetworkAddressEntry(QtNetwork.QNetworkAddressEntry):
     def get_ip(self) -> network.HostAddress:
         return network.HostAddress(self.ip())
 
-    def set_ip(self, ip: QtNetwork.QHostAddress | str):
+    def set_ip(self, ip: network.QHostAddress | str):
         self.setIp(network.HostAddress(ip))
 
     def get_netmask(self) -> network.HostAddress:
         return network.HostAddress(self.netmask())
 
-    def set_netmask(self, netmask: QtNetwork.QHostAddress | str):
+    def set_netmask(self, netmask: network.QHostAddress | str):
         self.setNetmask(network.HostAddress(netmask))
 
     def get_preferred_lifetime(self) -> core.DeadlineTimer:

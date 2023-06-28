@@ -3,15 +3,14 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, multimedia
-from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict
 
 
 ErrorStr = Literal["none", "camera"]
 
-ERROR: bidict[ErrorStr, QtMultimedia.QCamera.Error] = bidict(
-    none=QtMultimedia.QCamera.Error.NoError,
-    camera=QtMultimedia.QCamera.Error.CameraError,
+ERROR: bidict[ErrorStr, multimedia.QCamera.Error] = bidict(
+    none=multimedia.QCamera.Error.NoError,
+    camera=multimedia.QCamera.Error.CameraError,
 )
 
 ExposureModeStr = Literal[
@@ -34,24 +33,24 @@ ExposureModeStr = Literal[
     "barcode",
 ]
 
-EXPOSURE_MODE: bidict[ExposureModeStr, QtMultimedia.QCamera.ExposureMode] = bidict(
-    auto=QtMultimedia.QCamera.ExposureMode.ExposureAuto,
-    manual=QtMultimedia.QCamera.ExposureMode.ExposureManual,
-    portrait=QtMultimedia.QCamera.ExposureMode.ExposurePortrait,
-    night=QtMultimedia.QCamera.ExposureMode.ExposureNight,
-    sports=QtMultimedia.QCamera.ExposureMode.ExposureSports,
-    snow=QtMultimedia.QCamera.ExposureMode.ExposureSnow,
-    beach=QtMultimedia.QCamera.ExposureMode.ExposureBeach,
-    action=QtMultimedia.QCamera.ExposureMode.ExposureAction,
-    landscape=QtMultimedia.QCamera.ExposureMode.ExposureLandscape,
-    night_portrait=QtMultimedia.QCamera.ExposureMode.ExposureNightPortrait,
-    threatre=QtMultimedia.QCamera.ExposureMode.ExposureTheatre,
-    sunset=QtMultimedia.QCamera.ExposureMode.ExposureSunset,
-    steady_photo=QtMultimedia.QCamera.ExposureMode.ExposureSteadyPhoto,
-    fireworks=QtMultimedia.QCamera.ExposureMode.ExposureFireworks,
-    party=QtMultimedia.QCamera.ExposureMode.ExposureParty,
-    candle_light=QtMultimedia.QCamera.ExposureMode.ExposureCandlelight,
-    barcode=QtMultimedia.QCamera.ExposureMode.ExposureBarcode,
+EXPOSURE_MODE: bidict[ExposureModeStr, multimedia.QCamera.ExposureMode] = bidict(
+    auto=multimedia.QCamera.ExposureMode.ExposureAuto,
+    manual=multimedia.QCamera.ExposureMode.ExposureManual,
+    portrait=multimedia.QCamera.ExposureMode.ExposurePortrait,
+    night=multimedia.QCamera.ExposureMode.ExposureNight,
+    sports=multimedia.QCamera.ExposureMode.ExposureSports,
+    snow=multimedia.QCamera.ExposureMode.ExposureSnow,
+    beach=multimedia.QCamera.ExposureMode.ExposureBeach,
+    action=multimedia.QCamera.ExposureMode.ExposureAction,
+    landscape=multimedia.QCamera.ExposureMode.ExposureLandscape,
+    night_portrait=multimedia.QCamera.ExposureMode.ExposureNightPortrait,
+    threatre=multimedia.QCamera.ExposureMode.ExposureTheatre,
+    sunset=multimedia.QCamera.ExposureMode.ExposureSunset,
+    steady_photo=multimedia.QCamera.ExposureMode.ExposureSteadyPhoto,
+    fireworks=multimedia.QCamera.ExposureMode.ExposureFireworks,
+    party=multimedia.QCamera.ExposureMode.ExposureParty,
+    candle_light=multimedia.QCamera.ExposureMode.ExposureCandlelight,
+    barcode=multimedia.QCamera.ExposureMode.ExposureBarcode,
 )
 
 FeatureStr = Literal[
@@ -63,22 +62,22 @@ FeatureStr = Literal[
     "focus_distance",
 ]
 
-FEATURE: bidict[FeatureStr, QtMultimedia.QCamera.Feature] = bidict(
-    none=QtMultimedia.QCamera.Feature(0),
-    color_temperature=QtMultimedia.QCamera.Feature.ColorTemperature,
-    exposure_compensation=QtMultimedia.QCamera.Feature.ExposureCompensation,
-    iso_sensitivity=QtMultimedia.QCamera.Feature.IsoSensitivity,
-    manual_exposure_time=QtMultimedia.QCamera.Feature.ManualExposureTime,
-    custom_focus_point=QtMultimedia.QCamera.Feature.CustomFocusPoint,
-    focus_distance=QtMultimedia.QCamera.Feature.FocusDistance,
+FEATURE: bidict[FeatureStr, multimedia.QCamera.Feature] = bidict(
+    none=multimedia.QCamera.Feature(0),
+    color_temperature=multimedia.QCamera.Feature.ColorTemperature,
+    exposure_compensation=multimedia.QCamera.Feature.ExposureCompensation,
+    iso_sensitivity=multimedia.QCamera.Feature.IsoSensitivity,
+    manual_exposure_time=multimedia.QCamera.Feature.ManualExposureTime,
+    custom_focus_point=multimedia.QCamera.Feature.CustomFocusPoint,
+    focus_distance=multimedia.QCamera.Feature.FocusDistance,
 )
 
 FlashModeStr = Literal["off", "on", "auto"]
 
-FLASH_MODE: bidict[FlashModeStr, QtMultimedia.QCamera.FlashMode] = bidict(
-    off=QtMultimedia.QCamera.FlashMode.FlashOff,
-    on=QtMultimedia.QCamera.FlashMode.FlashOn,
-    auto=QtMultimedia.QCamera.FlashMode.FlashAuto,
+FLASH_MODE: bidict[FlashModeStr, multimedia.QCamera.FlashMode] = bidict(
+    off=multimedia.QCamera.FlashMode.FlashOff,
+    on=multimedia.QCamera.FlashMode.FlashOn,
+    auto=multimedia.QCamera.FlashMode.FlashAuto,
 )
 
 FocusModeStr = Literal[
@@ -90,21 +89,21 @@ FocusModeStr = Literal[
     "manual",
 ]
 
-FOCUS_MODE: bidict[FocusModeStr, QtMultimedia.QCamera.FocusMode] = bidict(
-    auto=QtMultimedia.QCamera.FocusMode.FocusModeAuto,
-    auto_near=QtMultimedia.QCamera.FocusMode.FocusModeAutoNear,
-    auto_far=QtMultimedia.QCamera.FocusMode.FocusModeAutoFar,
-    focal=QtMultimedia.QCamera.FocusMode.FocusModeHyperfocal,
-    infinity=QtMultimedia.QCamera.FocusMode.FocusModeInfinity,
-    manual=QtMultimedia.QCamera.FocusMode.FocusModeManual,
+FOCUS_MODE: bidict[FocusModeStr, multimedia.QCamera.FocusMode] = bidict(
+    auto=multimedia.QCamera.FocusMode.FocusModeAuto,
+    auto_near=multimedia.QCamera.FocusMode.FocusModeAutoNear,
+    auto_far=multimedia.QCamera.FocusMode.FocusModeAutoFar,
+    focal=multimedia.QCamera.FocusMode.FocusModeHyperfocal,
+    infinity=multimedia.QCamera.FocusMode.FocusModeInfinity,
+    manual=multimedia.QCamera.FocusMode.FocusModeManual,
 )
 
 TorchModeStr = Literal["off", "on", "auto"]
 
-TORCH_MODE: bidict[TorchModeStr, QtMultimedia.QCamera.TorchMode] = bidict(
-    off=QtMultimedia.QCamera.TorchMode.TorchOff,
-    on=QtMultimedia.QCamera.TorchMode.TorchOn,
-    auto=QtMultimedia.QCamera.TorchMode.TorchAuto,
+TORCH_MODE: bidict[TorchModeStr, multimedia.QCamera.TorchMode] = bidict(
+    off=multimedia.QCamera.TorchMode.TorchOff,
+    on=multimedia.QCamera.TorchMode.TorchOn,
+    auto=multimedia.QCamera.TorchMode.TorchAuto,
 )
 
 WhiteBalanceModeStr = Literal[
@@ -120,23 +119,23 @@ WhiteBalanceModeStr = Literal[
 ]
 
 WHITE_BALANCE: bidict[
-    WhiteBalanceModeStr, QtMultimedia.QCamera.WhiteBalanceMode
+    WhiteBalanceModeStr, multimedia.QCamera.WhiteBalanceMode
 ] = bidict(
-    auto=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceAuto,
-    manual=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceManual,
-    sunlight=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceSunlight,
-    cloudy=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceCloudy,
-    shade=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceShade,
-    tungsten=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceTungsten,
-    fluorescent=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceFluorescent,
-    flash=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceFlash,
-    sunset=QtMultimedia.QCamera.WhiteBalanceMode.WhiteBalanceSunset,
+    auto=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceAuto,
+    manual=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceManual,
+    sunlight=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceSunlight,
+    cloudy=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceCloudy,
+    shade=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceShade,
+    tungsten=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceTungsten,
+    fluorescent=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceFluorescent,
+    flash=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceFlash,
+    sunset=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceSunset,
 )
 
 
-class Camera(core.ObjectMixin, QtMultimedia.QCamera):
+class Camera(core.ObjectMixin, multimedia.QCamera):
     def set_exposure_mode(
-        self, mode: ExposureModeStr | QtMultimedia.QCamera.ExposureMode
+        self, mode: ExposureModeStr | multimedia.QCamera.ExposureMode
     ):
         """Set the exposure mode.
 
@@ -153,7 +152,7 @@ class Camera(core.ObjectMixin, QtMultimedia.QCamera):
         """
         return EXPOSURE_MODE.inverse[self.exposureMode()]
 
-    def set_torch_mode(self, mode: TorchModeStr | QtMultimedia.QCamera.TorchMode):
+    def set_torch_mode(self, mode: TorchModeStr | multimedia.QCamera.TorchMode):
         """Set the torch mode.
 
         Args:
@@ -169,7 +168,7 @@ class Camera(core.ObjectMixin, QtMultimedia.QCamera):
         """
         return TORCH_MODE.inverse[self.torchMode()]
 
-    def set_flash_mode(self, mode: FlashModeStr | QtMultimedia.QCamera.FlashMode):
+    def set_flash_mode(self, mode: FlashModeStr | multimedia.QCamera.FlashMode):
         """Set the flash mode.
 
         Args:
@@ -186,7 +185,7 @@ class Camera(core.ObjectMixin, QtMultimedia.QCamera):
         return FLASH_MODE.inverse[self.flashMode()]
 
     def set_white_balance_mode(
-        self, mode: WhiteBalanceModeStr | QtMultimedia.QCamera.WhiteBalanceMode
+        self, mode: WhiteBalanceModeStr | multimedia.QCamera.WhiteBalanceMode
     ):
         """Set the white balance mode.
 

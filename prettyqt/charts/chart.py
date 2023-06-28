@@ -3,20 +3,19 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import charts, constants, core, gui, widgets
-from prettyqt.qt import QtCharts
 from prettyqt.utils import bidict, datatypes
 
 
 THEMES = bidict(
     {
-        "Light": QtCharts.QChart.ChartTheme.ChartThemeLight,
-        "Blue Cerulean": QtCharts.QChart.ChartTheme.ChartThemeBlueCerulean,
-        "Dark": QtCharts.QChart.ChartTheme.ChartThemeDark,
-        "Brown Sand": QtCharts.QChart.ChartTheme.ChartThemeBrownSand,
-        "Blue NCS": QtCharts.QChart.ChartTheme.ChartThemeBlueNcs,
-        "High Contrast": QtCharts.QChart.ChartTheme.ChartThemeHighContrast,
-        "Blue Icy": QtCharts.QChart.ChartTheme.ChartThemeBlueIcy,
-        "Qt": QtCharts.QChart.ChartTheme.ChartThemeQt,
+        "Light": charts.QChart.ChartTheme.ChartThemeLight,
+        "Blue Cerulean": charts.QChart.ChartTheme.ChartThemeBlueCerulean,
+        "Dark": charts.QChart.ChartTheme.ChartThemeDark,
+        "Brown Sand": charts.QChart.ChartTheme.ChartThemeBrownSand,
+        "Blue NCS": charts.QChart.ChartTheme.ChartThemeBlueNcs,
+        "High Contrast": charts.QChart.ChartTheme.ChartThemeHighContrast,
+        "Blue Icy": charts.QChart.ChartTheme.ChartThemeBlueIcy,
+        "Qt": charts.QChart.ChartTheme.ChartThemeQt,
     }
 )
 
@@ -32,18 +31,18 @@ ThemeStr = Literal[
 ]
 
 ANIMATION_OPTIONS = bidict(
-    none=QtCharts.QChart.AnimationOption.NoAnimation,
-    grid_axis=QtCharts.QChart.AnimationOption.GridAxisAnimations,
-    series=QtCharts.QChart.AnimationOption.SeriesAnimations,
-    all=QtCharts.QChart.AnimationOption.AllAnimations,
+    none=charts.QChart.AnimationOption.NoAnimation,
+    grid_axis=charts.QChart.AnimationOption.GridAxisAnimations,
+    series=charts.QChart.AnimationOption.SeriesAnimations,
+    all=charts.QChart.AnimationOption.AllAnimations,
 )
 
 AnimationOptionStr = Literal["none", "grid_axis", "series", "all"]
 
 CHART_TYPES = bidict(
-    undefined=QtCharts.QChart.ChartType.ChartTypeUndefined,
-    cartesian=QtCharts.QChart.ChartType.ChartTypeCartesian,
-    polar=QtCharts.QChart.ChartType.ChartTypePolar,
+    undefined=charts.QChart.ChartType.ChartTypeUndefined,
+    cartesian=charts.QChart.ChartType.ChartTypeCartesian,
+    polar=charts.QChart.ChartType.ChartTypePolar,
 )
 
 ChartTypeStr = Literal["undefined", "cartesian", "polar"]
@@ -69,8 +68,8 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
     def get_axes(
         self,
         orientation: constants.OrientationStr | None = None,
-        series: QtCharts.QAbstractBarSeries | None = None,
-    ) -> list[QtCharts.QAbstractAxis]:
+        series: charts.QAbstractBarSeries | None = None,
+    ) -> list[charts.QAbstractAxis]:
         if orientation is None:
             orientation = constants.HORIZONTAL | constants.VERTICAL
         return self.axes(constants.ORIENTATION[orientation], series)
@@ -154,7 +153,7 @@ class ChartMixin(widgets.GraphicsWidgetMixin):
         return core.EasingCurve(self.animationEasingCurve())
 
 
-class Chart(ChartMixin, QtCharts.QChart):
+class Chart(ChartMixin, charts.QChart):
     pass
 
 

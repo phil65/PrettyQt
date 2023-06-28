@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import charts
-from prettyqt.qt import QtCharts
 
 
-class BarCategoryAxis(charts.AbstractAxisMixin, QtCharts.QBarCategoryAxis):
+class BarCategoryAxis(charts.AbstractAxisMixin, charts.QBarCategoryAxis):
     def __delitem__(self, index: str):
         self.remove(index)
 

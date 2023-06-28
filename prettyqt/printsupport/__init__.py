@@ -3,6 +3,8 @@
 contains QtPrintSupport-based classes
 """
 
+from prettyqt.qt.QtPrintSupport import *  # noqa: F403
+
 from .printer import Printer
 from .abstractprintdialog import AbstractPrintDialog, AbstractPrintDialogMixin
 from .printdialog import PrintDialog

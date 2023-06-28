@@ -3,6 +3,8 @@
 contains QtHelp-based classes
 """
 
+from prettyqt.qt.QtHelp import *  # noqa: F403
+
 from .helplink import HelpLink
 from .helpindexmodel import HelpIndexModel
 from .helpfilterdata import HelpFilterData

@@ -1,41 +1,47 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import bluetooth, core
-from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
 
+module = bluetooth.QBluetoothServiceDiscoveryAgent
 
-DISCOVERY_MODES = bidict(
-    minimal=QtBluetooth.QBluetoothServiceDiscoveryAgent.MinimalDiscovery,
-    full=QtBluetooth.QBluetoothServiceDiscoveryAgent.FullDiscovery,
+DiscoveryModeStr = Literal["minimal", "full"]
+
+DISCOVERY_MODES: bidict[DiscoveryModeStr, module.DiscoveryMode] = bidict(
+    minimal=module.DiscoveryMode.MinimalDiscovery,
+    full=module.DiscoveryMode.FullDiscovery,
 )
 
-module = QtBluetooth.QBluetoothServiceDiscoveryAgent
+ErrorStr = Literal[
+    "none", "powered_off", "input_output", "invalid_bluetooth_adapter", "unknown"
+]
 
-ERRORS = bidict(
-    none=module.NoError,
-    powered_off=module.PoweredOffError,
-    input_output=module.InputOutputError,
-    invalid_bluetooth_adapter=module.InvalidBluetoothAdapterError,
-    unknown=module.UnknownError,
+ERRORS: bidict[ErrorStr, module.Error] = bidict(
+    none=module.Error.NoError,
+    powered_off=module.Error.PoweredOffError,
+    input_output=module.Error.InputOutputError,
+    invalid_bluetooth_adapter=module.Error.InvalidBluetoothAdapterError,
+    unknown=module.Error.UnknownError,
 )
 
 
 class BluetoothServiceDiscoveryAgent(
-    core.ObjectMixin, QtBluetooth.QBluetoothServiceDiscoveryAgent
+    core.ObjectMixin, bluetooth.QBluetoothServiceDiscoveryAgent
 ):
     def start_discovery(self, full: bool = False):
         if full:
-            flag = QtBluetooth.QBluetoothServiceDiscoveryAgent.FullDiscovery
+            flag = bluetooth.QBluetoothServiceDiscoveryAgent.FullDiscovery
         else:
-            flag = QtBluetooth.QBluetoothServiceDiscoveryAgent.MinimalDiscovery
+            flag = bluetooth.QBluetoothServiceDiscoveryAgent.MinimalDiscovery
         self.start(flag)
 
     def get_error(self) -> str:
         return ERRORS.inverse[self.error()]
 
     def set_remote_address(
-        self, address: str | int | QtBluetooth.QBluetoothAddress
+        self, address: str | int | bluetooth.QBluetoothAddress
     ) -> bool:
         address = bluetooth.BluetoothAddress(address)
         return self.setRemoteAddress(address)

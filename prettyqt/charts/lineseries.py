@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import charts
-from prettyqt.qt import QtCharts, QtCore
+from prettyqt.qt import QtCore
 
 
-class LineSeries(charts.XYSeriesMixin, QtCharts.QLineSeries):
+class LineSeries(charts.XYSeriesMixin, charts.QLineSeries):
     """QLineSeries with some custom properties."""
     pass
 

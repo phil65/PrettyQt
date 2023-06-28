@@ -3,11 +3,10 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import webenginecore
-from prettyqt.qt import QtWebEngineCore
 
 
 class WebEngineHistory:
-    def __init__(self, history: QtWebEngineCore.QWebEngineHistory):
+    def __init__(self, history: webenginecore.QWebEngineHistory):
         self.history = history
 
     def __getattr__(self, val):

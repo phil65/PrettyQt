@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 
 
-class PlaceCategory(QtLocation.QPlaceCategory):
+class PlaceCategory(location.QPlaceCategory):
     def __str__(self):
         return self.name()
 

@@ -1,5 +1,7 @@
 """Location module."""
 
+from prettyqt.qt.QtLocation import *  # noqa: F403
+
 from .qlocation import VISIBILITY, VisibilityStr
 from .georouterequest import GeoRouteRequest
 from .placeattribute import PlaceAttribute
@@ -51,9 +53,9 @@ __all__ = [
     "PlaceIcon",
     "PlaceContent",
     "PlaceContentMixin",
-    "PlaceImage",
-    "PlaceReview",
-    "PlaceEditorial",
+    # "PlaceImage",
+    # "PlaceReview",
+    # "PlaceEditorial",
     "GeoCodingManager",
     "GeoRoutingManager",
     "GeoManeuver",

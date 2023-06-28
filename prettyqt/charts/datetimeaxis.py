@@ -3,11 +3,10 @@ from __future__ import annotations
 import datetime
 
 from prettyqt import charts
-from prettyqt.qt import QtCharts
 from prettyqt.utils import datatypes
 
 
-class DateTimeAxis(charts.AbstractAxisMixin, QtCharts.QDateTimeAxis):
+class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):
 
     def set_min(self, minimum: datatypes.DateTimeType):
         minimum = datatypes.to_datetime(minimum)

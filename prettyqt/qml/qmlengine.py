@@ -5,16 +5,15 @@ import pathlib
 from typing import Literal
 
 from prettyqt import core, qml
-from prettyqt.qt import QtQml
 from prettyqt.utils import bidict, datatypes
 
 
 ObjectOwnershipStr = Literal["cpp", "javascript"]
 
 
-OBJECT_OWNERSHIP: bidict[ObjectOwnershipStr, QtQml.QQmlEngine.ObjectOwnership] = bidict(
-    cpp=QtQml.QQmlEngine.ObjectOwnership.CppOwnership,
-    javascript=QtQml.QQmlEngine.ObjectOwnership.JavaScriptOwnership,
+OBJECT_OWNERSHIP: bidict[ObjectOwnershipStr, qml.QQmlEngine.ObjectOwnership] = bidict(
+    cpp=qml.QQmlEngine.ObjectOwnership.CppOwnership,
+    javascript=qml.QQmlEngine.ObjectOwnership.JavaScriptOwnership,
 )
 
 
@@ -22,7 +21,7 @@ class QmlEngineMixin(qml.JSEngineMixin):
     def set_object_ownership(
         self,
         obj: core.QObject,
-        mode: ObjectOwnershipStr | QtQml.QQmlEngine.ObjectOwnership,
+        mode: ObjectOwnershipStr | qml.QQmlEngine.ObjectOwnership,
     ):
         """Set the object ownership.
 
@@ -64,5 +63,5 @@ class QmlEngineMixin(qml.JSEngineMixin):
         self.setOfflineStoragePath(os.fspath(path))
 
 
-class QmlEngine(QmlEngineMixin, QtQml.QQmlEngine):
+class QmlEngine(QmlEngineMixin, qml.QQmlEngine):
     pass

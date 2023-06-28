@@ -3,46 +3,46 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import bluetooth, core
-from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict, get_repr
 
 
-HostMode = QtBluetooth.QBluetoothLocalDevice.HostMode
-HOST_MODE = bidict(
+HostModeStr = Literal[
+    "powered_off", "connectable", "discoverable", "discoverable_limited_inquiry"
+]
+
+HostMode = bluetooth.QBluetoothLocalDevice.HostMode
+HOST_MODE: bidict[HostModeStr, HostMode] = bidict(
     powered_off=HostMode.HostPoweredOff,
     connectable=HostMode.HostConnectable,
     discoverable=HostMode.HostDiscoverable,
     discoverable_limited_inquiry=HostMode.HostDiscoverableLimitedInquiry,
 )
 
-HostModeStr = Literal[
-    "powered_off", "connectable", "discoverable", "discoverable_limited_inquiry"
-]
 
-Error = QtBluetooth.QBluetoothLocalDevice.Error
+Error = bluetooth.QBluetoothLocalDevice.Error
 
-ERROR = bidict(
+ErrorStr = Literal["none", "pairing", "missing_permissions", "unknown"]
+
+ERROR: bidict[ErrorStr, Error] = bidict(
     none=Error.NoError,
     pairing=Error.PairingError,
     missing_permissions=Error.MissingPermissionsError,
     unknown=Error.UnknownError,
 )
 
-ErrorStr = Literal["none", "pairing", "missing_permissions", "unknown"]
 
+Pairing = bluetooth.QBluetoothLocalDevice.Pairing
 
-Pairing = QtBluetooth.QBluetoothLocalDevice.Pairing
+PairingStr = Literal["unpaired", "paired", "authorized_paired"]
 
-PAIRING = bidict(
+PAIRING: bidict[PairingStr, Pairing] = bidict(
     unpaired=Pairing.Unpaired,
     paired=Pairing.Paired,
     authorized_paired=Pairing.AuthorizedPaired,
 )
 
-PairingStr = Literal["unpaired", "paired", "authorized_paired"]
 
-
-class BluetoothLocalDevice(core.ObjectMixin, QtBluetooth.QBluetoothLocalDevice):
+class BluetoothLocalDevice(core.ObjectMixin, bluetooth.QBluetoothLocalDevice):
     def __bool__(self):
         return self.isValid()
 
@@ -69,7 +69,7 @@ class BluetoothLocalDevice(core.ObjectMixin, QtBluetooth.QBluetoothLocalDevice):
         return HOST_MODE.inverse[self.gridStyle()]
 
     def get_pairing_status(
-        self, address: QtBluetooth.QBluetoothAddress | int | str
+        self, address: bluetooth.QBluetoothAddress | int | str
     ) -> PairingStr:
         """Return pairing status.
 
@@ -80,14 +80,14 @@ class BluetoothLocalDevice(core.ObjectMixin, QtBluetooth.QBluetoothLocalDevice):
             pairing status
         """
         if isinstance(address, int | str):
-            address = QtBluetooth.QBluetoothAddress(address)
+            address = bluetooth.QBluetoothAddress(address)
         return PAIRING.inverse[self.pairingStatus(address)]
 
     def request_pairing(
-        self, address: QtBluetooth.QBluetoothAddress | int | str, pairing: PairingStr
+        self, address: bluetooth.QBluetoothAddress | int | str, pairing: PairingStr
     ):
         if isinstance(address, int | str):
-            address = QtBluetooth.QBluetoothAddress(address)
+            address = bluetooth.QBluetoothAddress(address)
         self.requestPairing(address, PAIRING[pairing])
 
     def get_connected_devices(self) -> list[bluetooth.BluetoothAddress]:

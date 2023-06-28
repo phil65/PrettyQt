@@ -252,12 +252,12 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
 
     def remove(
         self,
-        widgets: Sequence[widgets.QDockWidget | widgets.QToolBar | gui.QAction]
+        items: Sequence[widgets.QDockWidget | widgets.QToolBar | gui.QAction]
         | widgets.QDockWidget
         | widgets.QToolBar
         | gui.QAction,
     ):
-        widget_list = widgets if isinstance(widgets, list) else [widgets]
+        widget_list = items if isinstance(items, list) else [items]
         for i in widget_list:
             match i:
                 case widgets.QDockWidget():

@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import core, location, positioning
-from prettyqt.qt import QtLocation, QtPositioning
 
 
 class PlaceManager(core.Object):
     on_finished = core.Signal(location.PlaceSearchReply)
 
-    def __init__(self, item: QtLocation.QPlaceManager):
+    def __init__(self, item: location.QPlaceManager):
         super().__init__()
         self.item = item
         self.finished.connect(self._on_finished)
@@ -15,7 +14,7 @@ class PlaceManager(core.Object):
     def __getattr__(self, val):
         return getattr(self.item, val)
 
-    def _on_finished(self, reply: QtLocation.QPlaceSearchReply):
+    def _on_finished(self, reply: location.QPlaceSearchReply):
         reply = location.PlaceSearchReply.clone_from(reply)
         self.on_finished.emit(reply)
 
@@ -31,7 +30,7 @@ class PlaceManager(core.Object):
     def search_place(
         self,
         search_term: str,
-        coord: tuple[float, float] | QtPositioning.QGeoCoordinate,
+        coord: tuple[float, float] | positioning.QGeoCoordinate,
         radius: float | None = None,
         limit: int | None = None,
         relevance: location.placesearchrequest.RelevanceHintStr | None = None,

@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import bluetooth
-from prettyqt.qt import QtBluetooth
 
 
-class BluetoothHostInfo(QtBluetooth.QBluetoothHostInfo):
-    def set_address(self, address: QtBluetooth.QBluetoothAddress | int | str):
+class BluetoothHostInfo(bluetooth.QBluetoothHostInfo):
+    def set_address(self, address: bluetooth.QBluetoothAddress | int | str):
         if isinstance(address, int | str):
-            address = QtBluetooth.QBluetoothAddress(address)
+            address = bluetooth.QBluetoothAddress(address)
         self.setAddress(address)
 
     def get_address(self) -> bluetooth.BluetoothAddress:

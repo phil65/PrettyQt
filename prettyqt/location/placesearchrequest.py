@@ -3,22 +3,21 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import location, positioning
-from prettyqt.qt import QtLocation, QtPositioning
 from prettyqt.utils import bidict
 
 
 RelevanceHintStr = Literal["unspecified", "distance", "lexical_place_name"]
 
 RELEVANCE_HINT: bidict[
-    RelevanceHintStr, QtLocation.QPlaceSearchRequest.RelevanceHint
+    RelevanceHintStr, location.QPlaceSearchRequest.RelevanceHint
 ] = bidict(
-    unspecified=QtLocation.QPlaceSearchRequest.RelevanceHint.UnspecifiedHint,
-    distance=QtLocation.QPlaceSearchRequest.RelevanceHint.DistanceHint,
-    lexical_place_name=QtLocation.QPlaceSearchRequest.RelevanceHint.LexicalPlaceNameHint,
+    unspecified=location.QPlaceSearchRequest.RelevanceHint.UnspecifiedHint,
+    distance=location.QPlaceSearchRequest.RelevanceHint.DistanceHint,
+    lexical_place_name=location.QPlaceSearchRequest.RelevanceHint.LexicalPlaceNameHint,
 )
 
 
-class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
+class PlaceSearchRequest(location.QPlaceSearchRequest):
     def get_visibility_scope(self) -> location.VisibilityStr:
         """Return the scope of the visibility.
 
@@ -33,19 +32,19 @@ class PlaceSearchRequest(QtLocation.QPlaceSearchRequest):
     def get_search_area(self) -> positioning.GeoShape:
         area = self.searchArea()
         match area:
-            case QtPositioning.QGeoCircle():
+            case positioning.QGeoCircle():
                 return positioning.GeoCircle(area)
-            case QtPositioning.QGeoPath():
+            case positioning.QGeoPath():
                 return positioning.GeoPath(area)
-            case QtPositioning.QGeoPolygon():
+            case positioning.QGeoPolygon():
                 return positioning.GeoPolygon(area)
-            case QtPositioning.QGeoRectangle():
+            case positioning.QGeoRectangle():
                 return positioning.GeoRectangle(area)
             case _:
                 return positioning.GeoShape(area)
 
     def set_relevance_hint(
-        self, hint: RelevanceHintStr | QtLocation.QPlaceSearchRequest.RelevanceHint
+        self, hint: RelevanceHintStr | location.QPlaceSearchRequest.RelevanceHint
     ):
         """Set the relevance hint.
 

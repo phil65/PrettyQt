@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, qthelp
-from prettyqt.qt import QtHelp
 from prettyqt.utils import datatypes
 
 
@@ -30,7 +29,7 @@ class HelpEngineCoreMixin(core.ObjectMixin):
         return qthelp.HelpFilterEngine(self.filterEngine())
 
 
-class HelpEngineCore(HelpEngineCoreMixin, QtHelp.QHelpEngineCore):
+class HelpEngineCore(HelpEngineCoreMixin, qthelp.QHelpEngineCore):
     pass
 
 

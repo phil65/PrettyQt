@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import network
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtCore
 
 
-class NetworkDatagram(QtNetwork.QNetworkDatagram):
+class NetworkDatagram(network.QNetworkDatagram):
     def get_destination_address(self) -> network.HostAddress:
         return network.HostAddress(self.destinationAddress())
 

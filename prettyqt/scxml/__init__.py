@@ -3,6 +3,7 @@
 contains QtScXml-based classes
 """
 
+from prettyqt.qt.QtScxml import *  # noqa: F403
 
 from .scxmlcompiler import ScxmlCompiler
 from scxmlstatemachine import ScxmlStateMachine

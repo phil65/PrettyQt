@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import qthelp
-from prettyqt.qt import QtHelp
 
 
-class HelpEngine(qthelp.HelpEngineCoreMixin, QtHelp.QHelpEngine):
+class HelpEngine(qthelp.HelpEngineCoreMixin, qthelp.QHelpEngine):
     def get_content_model(self) -> qthelp.HelpContentModel:
         return qthelp.HelpContentModel(self.contentModel())
 

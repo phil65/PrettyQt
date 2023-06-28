@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, location
-from prettyqt.qt import QtLocation
 from prettyqt.utils import bidict
 
 
-QGeoServiceProvider = QtLocation.QGeoServiceProvider
+QGeoServiceProvider = location.QGeoServiceProvider
 
 ErrorStr = Literal[
     "none",
@@ -125,11 +124,11 @@ ROUTING_FEATURES: bidict[RoutingFeatureStr, QGeoServiceProvider.RoutingFeature] 
     route_updates=QGeoServiceProvider.RoutingFeature.RouteUpdatesFeature,
     alternative_routes=QGeoServiceProvider.RoutingFeature.AlternativeRoutesFeature,
     exclude_areas=QGeoServiceProvider.RoutingFeature.ExcludeAreasRoutingFeature,
-    # any=QtLocation.QGeoServiceProvider.RoutingFeature.AnyRoutingFeatures,
+    # any=location.QGeoServiceProvider.RoutingFeature.AnyRoutingFeatures,
 )
 
 
-class GeoServiceProvider(core.ObjectMixin, QtLocation.QGeoServiceProvider):
+class GeoServiceProvider(core.ObjectMixin, location.QGeoServiceProvider):
     def get_error(self) -> ErrorStr:
         return ERROR.inverse[self.error()]
 

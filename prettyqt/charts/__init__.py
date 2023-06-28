@@ -1,5 +1,7 @@
 """Charts module."""
 
+from prettyqt.qt.QtCharts import *  # noqa: F403
+
 from .barset import BarSet
 from .boxset import BoxSet
 from .candlestickset import CandlestickSet

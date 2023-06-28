@@ -3,6 +3,8 @@
 contains QtBluetooth-based classes
 """
 
+from prettyqt.qt.QtBluetooth import *  # noqa: F403
+
 from .bluetoothdeviceinfo import BluetoothDeviceInfo
 from .bluetoothuuid import BluetoothUuid
 from .bluetoothaddress import BluetoothAddress

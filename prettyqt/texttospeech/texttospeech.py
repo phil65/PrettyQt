@@ -4,23 +4,22 @@ import logging
 from typing import Literal
 
 from prettyqt import core, texttospeech
-from prettyqt.qt import QtTextToSpeech
 from prettyqt.utils import bidict
 
 
 logger = logging.getLogger()
 
 STATE = bidict(
-    ready=QtTextToSpeech.QTextToSpeech.State.Ready,
-    speaking=QtTextToSpeech.QTextToSpeech.State.Speaking,
-    paused=QtTextToSpeech.QTextToSpeech.State.Paused,
-    error=QtTextToSpeech.QTextToSpeech.State.Error,
+    ready=texttospeech.QTextToSpeech.State.Ready,
+    speaking=texttospeech.QTextToSpeech.State.Speaking,
+    paused=texttospeech.QTextToSpeech.State.Paused,
+    error=texttospeech.QTextToSpeech.State.Error,
 )
 
 StateStr = Literal["ready", "speaking", "paused", "error"]
 
 
-class TextToSpeech(core.ObjectMixin, QtTextToSpeech.QTextToSpeech):
+class TextToSpeech(core.ObjectMixin, texttospeech.QTextToSpeech):
     def get_state(self) -> StateStr:
         return STATE.inverse[self.state()]
 

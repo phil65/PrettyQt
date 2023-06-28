@@ -3,6 +3,8 @@
 Contains QtNetWork-based classes
 """
 
+from prettyqt.qt.QtNetwork import *  # noqa: F403
+
 from .networkcookie import NetworkCookie
 from .networkcookiejar import NetworkCookieJar
 from .networkreply import NetworkReply

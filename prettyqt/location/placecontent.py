@@ -3,16 +3,15 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 from prettyqt.utils import bidict
 
 
 TYPE = bidict(
-    none=QtLocation.QPlaceContent.Type.NoType,
-    image=QtLocation.QPlaceContent.Type.ImageType,
-    review=QtLocation.QPlaceContent.Type.ReviewType,
-    editorial=QtLocation.QPlaceContent.Type.EditorialType,
-    custom=QtLocation.QPlaceContent.Type.CustomType,
+    none=location.QPlaceContent.Type.NoType,
+    image=location.QPlaceContent.Type.ImageType,
+    review=location.QPlaceContent.Type.ReviewType,
+    editorial=location.QPlaceContent.Type.EditorialType,
+    custom=location.QPlaceContent.Type.CustomType,
 )
 
 TypeStr = Literal["none", "image", "review", "editorial", "custom"]
@@ -34,7 +33,7 @@ class PlaceContentMixin:
         return location.PlaceSupplier(self.supplier())
 
 
-class PlaceContent(PlaceContentMixin, QtLocation.QPlaceContent):
+class PlaceContent(PlaceContentMixin, location.QPlaceContent):
     pass
 
 

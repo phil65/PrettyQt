@@ -1,15 +1,12 @@
-# from prettyqt.qt import QtWebEngineCore
-
 from __future__ import annotations
 
 from typing import Literal
 
 from prettyqt import core, webenginecore
-from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import bidict
 
 
-mod = QtWebEngineCore.QWebEngineProfile
+mod = webenginecore.QWebEngineProfile
 
 HttpCacheTypeStr = Literal["none", "disk", "memory"]
 
@@ -30,7 +27,7 @@ PERSISTENT_COOKIE_POLICY: bidict[
 )
 
 
-class WebEngineProfile(core.ObjectMixin, QtWebEngineCore.QWebEngineProfile):
+class WebEngineProfile(core.ObjectMixin, webenginecore.QWebEngineProfile):
     def set_persistent_cookie_policy(
         self, policy: PersistentCookiePolicyStr | mod.PersistentCookiesPolicy
     ):

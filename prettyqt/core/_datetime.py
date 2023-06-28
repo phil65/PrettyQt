@@ -5,10 +5,9 @@ import datetime
 from typing_extensions import Self
 
 from prettyqt import constants, core
-from prettyqt.qt import QtCore
 
 
-class DateTime(QtCore.QDateTime):
+class DateTime(core.QDateTime):
     def __repr__(self):
         template = super().__repr__().split("(")[1]
         return f"{type(self).__name__}({template}"
@@ -42,7 +41,7 @@ class DateTime(QtCore.QDateTime):
     def get_timezone(self) -> core.TimeZone:
         return core.TimeZone(self.timeZone())
 
-    def set_timezone(self, zone: str | QtCore.QTimeZone):
+    def set_timezone(self, zone: str | core.QTimeZone):
         if isinstance(zone, str):
             self.setTimeZone(core.TimeZone(zone))
         else:

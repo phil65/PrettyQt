@@ -3,6 +3,8 @@
 contains QtQuick-based classes
 """
 
+from prettyqt.qt.QtQuick import *  # noqa: F403
+
 from .quicktextdocument import QuickTextDocument
 from .quickrendercontrol import QuickRenderControl
 from .quickimageresponse import QuickImageResponse

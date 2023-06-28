@@ -1,4 +1,3 @@
-# from prettyqt.qt import QtWebEngineCore
 from __future__ import annotations
 
 from collections.abc import MutableMapping

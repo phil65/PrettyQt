@@ -3,21 +3,20 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import statemachine
-from prettyqt.qt import QtStateMachine
 from prettyqt.utils import bidict
 
 
 HistoryTypeStr = Literal["shallow", "deep"]
 
-HISTORY_TYPE: bidict[HistoryTypeStr, QtStateMachine.QHistoryState.HistoryType] = bidict(
-    shallow=QtStateMachine.QHistoryState.HistoryType.ShallowHistory,
-    deep=QtStateMachine.QHistoryState.HistoryType.DeepHistory,
+HISTORY_TYPE: bidict[HistoryTypeStr, statemachine.QHistoryState.HistoryType] = bidict(
+    shallow=statemachine.QHistoryState.HistoryType.ShallowHistory,
+    deep=statemachine.QHistoryState.HistoryType.DeepHistory,
 )
 
 
-class HistoryState(statemachine.AbstractStateMixin, QtStateMachine.QHistoryState):
+class HistoryState(statemachine.AbstractStateMixin, statemachine.QHistoryState):
     def set_history_type(
-        self, typ: HistoryTypeStr | QtStateMachine.QHistoryState.HistoryType
+        self, typ: HistoryTypeStr | statemachine.QHistoryState.HistoryType
     ):
         """Set history type to use.
 

@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import core, network
-from prettyqt.qt import QtNetwork
 
 
-class TcpServer(core.ObjectMixin, QtNetwork.QTcpServer):
+class TcpServer(core.ObjectMixin, network.QTcpServer):
     def listen(  # type: ignore
-        self, address: str | QtNetwork.QHostAddress, port: int = 0
+        self, address: str | network.QHostAddress, port: int = 0
     ) -> bool:
         if isinstance(address, str):
             address = network.HostAddress(address)

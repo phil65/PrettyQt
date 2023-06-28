@@ -6,11 +6,10 @@ from typing import Literal
 import webbrowser
 
 from prettyqt import core, gui, webenginecore
-from prettyqt.qt import QtWebEngineCore
 from prettyqt.utils import bidict, datatypes
 
 
-mod = QtWebEngineCore.QWebEnginePage
+mod = webenginecore.QWebEnginePage
 
 logger = logging.getLogger(__name__)
 
@@ -200,7 +199,7 @@ WEB_WINDOW_TYPES = bidict(
 )
 
 
-class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
+class WebEnginePage(core.ObjectMixin, webenginecore.QWebEnginePage):
     """A web engine page holds the HTML document contents, link history + actions."""
 
     def get_icon(self) -> gui.Icon | None:
@@ -290,7 +289,7 @@ class WebEnginePage(core.ObjectMixin, QtWebEngineCore.QWebEnginePage):
                 pass
 
             callback = do_nothing
-        flag = QtWebEngineCore.QWebEnginePage.FindFlag(0)
+        flag = webenginecore.QWebEnginePage.FindFlag(0)
         if case_sensitive:
             flag |= self.FindFlag.FindCaseSensitively
         if backward:

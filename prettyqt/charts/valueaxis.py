@@ -3,20 +3,19 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import charts
-from prettyqt.qt import QtCharts
 from prettyqt.utils import bidict
 
 
 TICK_TYPES = bidict(
-    dynamic=QtCharts.QValueAxis.TickType.TicksDynamic,
-    fixed=QtCharts.QValueAxis.TickType.TicksFixed,
+    dynamic=charts.QValueAxis.TickType.TicksDynamic,
+    fixed=charts.QValueAxis.TickType.TicksFixed,
 )
 
 TickTypeStr = Literal["dynamic", "fixed"]
 
 
 class ValueAxisMixin(charts.AbstractAxisMixin):
-    def set_tick_type(self, tick_type: TickTypeStr | QtCharts.QValueAxis.TickType):
+    def set_tick_type(self, tick_type: TickTypeStr | charts.QValueAxis.TickType):
         """Set the tick type of the legend.
 
         Args:
@@ -33,5 +32,5 @@ class ValueAxisMixin(charts.AbstractAxisMixin):
         return TICK_TYPES.inverse[self.tickType()]
 
 
-class ValueAxis(ValueAxisMixin, QtCharts.QValueAxis):
+class ValueAxis(ValueAxisMixin, charts.QValueAxis):
     pass

@@ -4,16 +4,15 @@ import os
 from typing import Literal
 
 from prettyqt import core, pdf
-from prettyqt.qt import QtPdf
 from prettyqt.utils import bidict, datatypes
 
 
 ROLE = bidict(
-    title=QtPdf.QPdfBookmarkModel.Role.Title,
-    level=QtPdf.QPdfBookmarkModel.Role.Level,
-    page=QtPdf.QPdfBookmarkModel.Role.Page,
-    location=QtPdf.QPdfBookmarkModel.Role.Location,
-    zoom=QtPdf.QPdfBookmarkModel.Role.Zoom,
+    title=pdf.QPdfBookmarkModel.Role.Title,
+    level=pdf.QPdfBookmarkModel.Role.Level,
+    page=pdf.QPdfBookmarkModel.Role.Page,
+    location=pdf.QPdfBookmarkModel.Role.Location,
+    zoom=pdf.QPdfBookmarkModel.Role.Zoom,
 )
 
 RoleStr = Literal[
@@ -25,14 +24,14 @@ RoleStr = Literal[
 ]
 
 
-class PdfBookmarkModel(core.AbstractItemModelMixin, QtPdf.QPdfBookmarkModel):
+class PdfBookmarkModel(core.AbstractItemModelMixin, pdf.QPdfBookmarkModel):
     def __init__(self, parent: core.QObject | None = None):
         super().__init__(parent)
         self.setDocument(pdf.PdfDocument(self))
 
-    def set_document(self, document: datatypes.PathType | QtPdf.QPdfDocument):
+    def set_document(self, document: datatypes.PathType | pdf.QPdfDocument):
         """Set document for model."""
-        if not isinstance(document, QtPdf.QPdfDocument):
+        if not isinstance(document, pdf.QPdfDocument):
             path = os.fspath(document)
             document = pdf.PdfDocument(self)
             document.load(path)

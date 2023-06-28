@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import prettyqt
 from prettyqt import charts, gui
-from prettyqt.qt import QtCharts, QtCore
+from prettyqt.qt import QtCore
 
 
 class XYSeriesMixin(charts.AbstractSeriesMixin):
@@ -43,5 +43,5 @@ class XYSeriesMixin(charts.AbstractSeriesMixin):
         return gui.Brush(self.brush())
 
 
-class XYSeries(XYSeriesMixin, QtCharts.QXYSeries):
+class XYSeries(XYSeriesMixin, charts.QXYSeries):
     pass

@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import network
-from prettyqt.qt import QtCore, QtNetwork
+from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
 
@@ -17,14 +17,14 @@ CapabilityStr = Literal[
     "sctp_listening",
 ]
 
-CAPABILITIES: bidict[CapabilityStr, QtNetwork.QNetworkProxy.Capability] = bidict(
-    tunneling=QtNetwork.QNetworkProxy.Capability.TunnelingCapability,
-    listening=QtNetwork.QNetworkProxy.Capability.ListeningCapability,
-    udp_tunneling=QtNetwork.QNetworkProxy.Capability.UdpTunnelingCapability,
-    caching=QtNetwork.QNetworkProxy.Capability.CachingCapability,
-    host_name_lookup=QtNetwork.QNetworkProxy.Capability.HostNameLookupCapability,
-    sctp_tunneling=QtNetwork.QNetworkProxy.Capability.SctpTunnelingCapability,
-    sctp_listening=QtNetwork.QNetworkProxy.Capability.SctpListeningCapability,
+CAPABILITIES: bidict[CapabilityStr, network.QNetworkProxy.Capability] = bidict(
+    tunneling=network.QNetworkProxy.Capability.TunnelingCapability,
+    listening=network.QNetworkProxy.Capability.ListeningCapability,
+    udp_tunneling=network.QNetworkProxy.Capability.UdpTunnelingCapability,
+    caching=network.QNetworkProxy.Capability.CachingCapability,
+    host_name_lookup=network.QNetworkProxy.Capability.HostNameLookupCapability,
+    sctp_tunneling=network.QNetworkProxy.Capability.SctpTunnelingCapability,
+    sctp_listening=network.QNetworkProxy.Capability.SctpListeningCapability,
 )
 
 ProxyTypeStr = Literal[
@@ -36,17 +36,17 @@ ProxyTypeStr = Literal[
     "ftp_caching",
 ]
 
-PROXY_TYPES: bidict[ProxyTypeStr, QtNetwork.QNetworkProxy.ProxyType] = bidict(
-    none=QtNetwork.QNetworkProxy.ProxyType.NoProxy,
-    default=QtNetwork.QNetworkProxy.ProxyType.DefaultProxy,
-    socks5=QtNetwork.QNetworkProxy.ProxyType.Socks5Proxy,
-    http=QtNetwork.QNetworkProxy.ProxyType.HttpProxy,
-    http_caching=QtNetwork.QNetworkProxy.ProxyType.HttpCachingProxy,
-    ftp_caching=QtNetwork.QNetworkProxy.ProxyType.FtpCachingProxy,
+PROXY_TYPES: bidict[ProxyTypeStr, network.QNetworkProxy.ProxyType] = bidict(
+    none=network.QNetworkProxy.ProxyType.NoProxy,
+    default=network.QNetworkProxy.ProxyType.DefaultProxy,
+    socks5=network.QNetworkProxy.ProxyType.Socks5Proxy,
+    http=network.QNetworkProxy.ProxyType.HttpProxy,
+    http_caching=network.QNetworkProxy.ProxyType.HttpCachingProxy,
+    ftp_caching=network.QNetworkProxy.ProxyType.FtpCachingProxy,
 )
 
 
-class NetworkProxy(QtNetwork.QNetworkProxy):
+class NetworkProxy(network.QNetworkProxy):
     def get_capabilities(self) -> list[CapabilityStr]:
         return CAPABILITIES.get_list(self.capabilities())
 
@@ -79,7 +79,7 @@ class NetworkProxy(QtNetwork.QNetworkProxy):
                 QtCore.QByteArray(k.encode()), QtCore.QByteArray(v.encode())
             )
 
-    def set_type(self, typ: ProxyTypeStr | QtNetwork.QNetworkProxy.ProxyType):
+    def set_type(self, typ: ProxyTypeStr | network.QNetworkProxy.ProxyType):
         """Set proxy type.
 
         Args:

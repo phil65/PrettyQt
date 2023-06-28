@@ -4,19 +4,18 @@ from collections.abc import Iterator
 from typing import Literal
 
 from prettyqt import charts
-from prettyqt.qt import QtCharts
 from prettyqt.utils import bidict
 
 
 LABELS_POSITIONS = bidict(
-    center=QtCharts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionCenter,
-    on_value=QtCharts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionOnValue,
+    center=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionCenter,
+    on_value=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionOnValue,
 )
 
 LabelsPositionStr = Literal["center", "on_value"]
 
 
-class CategoryAxis(charts.ValueAxisMixin, QtCharts.QCategoryAxis):
+class CategoryAxis(charts.ValueAxisMixin, charts.QCategoryAxis):
     def __delitem__(self, index: str):
         self.remove(index)
 
@@ -38,7 +37,7 @@ class CategoryAxis(charts.ValueAxisMixin, QtCharts.QCategoryAxis):
         return self.count()
 
     def set_labels_position(
-        self, position: LabelsPositionStr | QtCharts.QCategoryAxis.AxisLabelsPosition
+        self, position: LabelsPositionStr | charts.QCategoryAxis.AxisLabelsPosition
     ):
         """Set the labels position.
 

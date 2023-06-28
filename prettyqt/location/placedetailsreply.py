@@ -3,12 +3,11 @@ from __future__ import annotations
 from typing_extensions import Self
 
 from prettyqt import location
-from prettyqt.qt import QtLocation
 
 
-class PlaceDetailsReply(location.PlaceReplyMixin, QtLocation.QPlaceDetailsReply):
+class PlaceDetailsReply(location.PlaceReplyMixin, location.QPlaceDetailsReply):
     @classmethod
-    def clone_from(cls, obj: QtLocation.QPlaceDetailsReply) -> Self:
+    def clone_from(cls, obj: location.QPlaceDetailsReply) -> Self:
         reply = cls(obj.parent())
         reply.setPlace(location.Place(obj.place()))
         return reply
