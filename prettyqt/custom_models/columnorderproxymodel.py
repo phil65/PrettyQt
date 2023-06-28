@@ -72,10 +72,12 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
             return core.ModelIndex()
         return self.createIndex(row, column, source_index.internalPointer())
 
-    def columnCount(self, index: core.ModelIndex) -> int:
+    def columnCount(self, index: core.ModelIndex | None = None) -> int:
+        index = index or core.ModelIndex()
         return len(self._column_order)
 
-    def rowCount(self, index: core.ModelIndex) -> int:
+    def rowCount(self, index: core.ModelIndex | None = None) -> int:
+        index = index or core.ModelIndex()
         if self.sourceModel() is None or index.column() > 0:
             return 0
         source_parent = self.mapToSource(index).sibling(index.row(), 0)
