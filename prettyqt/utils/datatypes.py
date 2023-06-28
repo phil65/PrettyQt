@@ -11,10 +11,12 @@ from typing import TYPE_CHECKING, Any, ClassVar, Protocol, runtime_checkable, Ty
 from urllib import parse
 
 from prettyqt.qt import QtCore
+from prettyqt import core
 
 
 class QABCMeta(type(QtCore.QObject), ABCMeta):
     pass
+
 
 Indexer = tuple[slice | int, slice | int]
 IndexerOrInt = Indexer | int
@@ -200,6 +202,7 @@ if TYPE_CHECKING:
     # QtGui.QColorSpace |
     # QtWebEngineCore.QWebEngineHistory
 
+
 def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
     from prettyqt import constants, core, gui, widgets
 
@@ -365,6 +368,7 @@ def get_widget_for_value(val, parent=None):
 
 
 T = TypeVar("T")
+
 
 def align_types(source: T, target: VariantType | tuple) -> T:
     from prettyqt import core, gui
@@ -652,6 +656,7 @@ def to_linef(line: LineFType):
         case _:
             raise TypeError(line)
 
+
 def to_py_pattern(pattern: PatternAndStringType):
     from prettyqt import core
 
@@ -662,6 +667,30 @@ def to_py_pattern(pattern: PatternAndStringType):
             return pattern
         case QtCore.QRegularExpression():
             return core.RegularExpression(pattern).to_py_pattern()
+        case _:
+            raise TypeError(pattern)
+
+
+def to_regular_expression(
+    pattern: PatternAndStringType,
+    flag: core.regularexpression.PatternOptionStr
+    | core.RegularExpression.PatternOption | None = None,
+):
+    from prettyqt import core
+
+    if flag is None:
+        flag = core.RegularExpression.PatternOption.NoPatternOption
+    else:
+        flag = core.regularexpression.PATTERN_OPTIONS.get_enum_value(flag)
+    match pattern:
+        case str():
+            return core.RegularExpression(pattern, flag)
+        case re.Pattern():
+            return core.RegularExpression(pattern)
+        case QtCore.QRegularExpression():
+            return core.RegularExpression(pattern)
+        case _:
+            raise TypeError(pattern)
 
 
 def to_transform(transform: TransformType):
@@ -685,9 +714,7 @@ def to_keysequence(sequence: KeySequenceType):
         case gui.QKeySequence():
             return sequence
         case str():
-            return gui.KeySequence(
-                sequence, gui.KeySequence.SequenceFormat.PortableText
-            )
+            return gui.KeySequence(sequence, gui.KeySequence.SequenceFormat.PortableText)
         case _:
             raise TypeError(sequence)
 
@@ -748,4 +775,3 @@ def make_serializable(obj):
             return widgets.SizePolicy.clone(obj)
         case _:
             return obj
-

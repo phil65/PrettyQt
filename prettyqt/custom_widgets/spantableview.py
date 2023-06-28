@@ -193,10 +193,11 @@ class SpanHeaderView(widgets.HeaderView):
 
     def __init__(
         self,
-        orientation: constants.Orientation,
+        orientation: constants.Orientation | constants.OrientationStr,
         sections: int = 0,
         parent: widgets.QWidget | None = None,
     ):
+        orientation = constants.ORIENTATION.get_enum_value(orientation)
         super().__init__(orientation, parent)
 
         base_section_size = core.QSize()

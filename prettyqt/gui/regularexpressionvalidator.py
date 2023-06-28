@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 from prettyqt import core, gui
-from prettyqt.utils import get_repr
+from prettyqt.utils import datatypes, get_repr
 
 
 class RegularExpressionValidator(gui.ValidatorMixin, gui.QRegularExpressionValidator):
@@ -41,17 +41,12 @@ class RegularExpressionValidator(gui.ValidatorMixin, gui.QRegularExpressionValid
             else False
         )
 
-    def set_regex(self, regex: str | core.QRegularExpression | re.Pattern, flags=0):
-        match regex:
-            case str():
-                regex = core.RegularExpression(regex, flags)
-            case core.QRegularExpression():
-                pass
-            case re.Pattern():
-                regex = core.RegularExpression(regex)
-            case _:
-                raise TypeError(regex)
-        self.setRegularExpression(regex)
+    def set_regex(
+        self,
+        regex: datatypes.PatternAndStringType,
+        flags=None,
+    ):
+        self.setRegularExpression(datatypes.to_regular_expression(regex))
 
     def get_regex(self) -> str:
         val = self.regularExpression()
