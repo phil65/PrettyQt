@@ -74,10 +74,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         parent: widgets.QWidget | None = None,
         **kwargs,
     ):
-        if isinstance(orientation, constants.Orientation):
-            ori = orientation
-        else:
-            ori = constants.ORIENTATION[orientation]
+        ori = constants.ORIENTATION.get_enum_value(orientation)
         super().__init__(ori, parent=parent, **kwargs)
         if ori == constants.HORIZONTAL:
             self.installEventFilter(self)

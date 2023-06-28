@@ -11,10 +11,7 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
         orientation: constants.Orientation | constants.OrientationStr = "horizontal",
         parent: widgets.QWidget | None = None,
     ):
-        if isinstance(orientation, constants.Orientation):
-            ori = orientation
-        else:
-            ori = constants.ORIENTATION[orientation]
+        ori = constants.ORIENTATION.get_enum_value(orientation)
         super().__init__(ori, parent)
         self.valueChanged.connect(self.on_value_change)
 
