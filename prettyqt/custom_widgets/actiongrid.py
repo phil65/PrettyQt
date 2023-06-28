@@ -3,14 +3,13 @@ from __future__ import annotations
 import dataclasses
 import sys
 
-from prettyqt import constants, core, widgets
-from prettyqt.qt import QtGui
+from prettyqt import constants, core, gui, widgets
 
 
 @dataclasses.dataclass
 class ActionGridItem:
     button: widgets.ToolButton
-    action: QtGui.QAction
+    action: gui.QAction
     row: int
     column: int
 
@@ -99,8 +98,8 @@ class ActionGrid(widgets.Frame):
         tool_button_style : Tool button style.
     """
 
-    actionTriggered = core.Signal(QtGui.QAction)
-    actionHovered = core.Signal(QtGui.QAction)
+    actionTriggered = core.Signal(gui.QAction)
+    actionHovered = core.Signal(gui.QAction)
 
     def __init__(
         self,

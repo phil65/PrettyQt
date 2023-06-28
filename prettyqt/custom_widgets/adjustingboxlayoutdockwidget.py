@@ -12,13 +12,13 @@ class AdjustingBoxLayoutDockWidget(widgets.DockWidget):
     The child widget MUST use a QBoxLayout.
     """
 
-    def __init__(self, parent=None, **kwargs):
+    def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
         super().__init__(parent, **kwargs)
         self._current_area = DockWidgetArea.NoDockWidgetArea
         self.dockLocationChanged.connect(self._dock_location_changed)
         self.topLevelChanged.connect(self._top_level_changed)
 
-    def setWidget(self, widget):
+    def setWidget(self, widget: widgets.QWidget):
         """Set the widget of this QDockWidget."""
         super().setWidget(widget)
         self._dock_location_changed(self._current_area)
@@ -38,7 +38,7 @@ class AdjustingBoxLayoutDockWidget(widgets.DockWidget):
                 self.resize(widget.minimumSize())
                 self.adjustSize()
 
-    def _top_level_changed(self, top_level):
+    def _top_level_changed(self, top_level: bool):
         if (widget := self.widget()) is not None and top_level:
             if isinstance(layout := widget.layout(), widgets.QBoxLayout):
                 layout.setDirection(widgets.BoxLayout.Direction.LeftToRight)

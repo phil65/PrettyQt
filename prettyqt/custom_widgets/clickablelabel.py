@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import gui, widgets
-from prettyqt.qt import QtCore
+from prettyqt import core, gui, widgets
 
 
 class ClickableLabel(widgets.Label):
@@ -19,14 +18,14 @@ class ClickableLabel(widgets.Label):
         self.setFixedWidth(width + 18)
         super().setText(text)
 
-    def enterEvent(self, event: QtCore.QEvent):
+    def enterEvent(self, event: core.QEvent):
         with self.edit_font() as font:
             font.setUnderline(True)
         self.set_cursor("pointing_hand")
         self.update()
         return super().enterEvent(event)
 
-    def leaveEvent(self, event: QtCore.QEvent):
+    def leaveEvent(self, event: core.QEvent):
         with self.edit_font() as font:
             font.setUnderline(False)
         self.unsetCursor()

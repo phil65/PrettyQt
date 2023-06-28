@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import widgets
-from prettyqt.qt import QtGui
+from prettyqt import gui, widgets
 
 
 class DefaultDropDownAction(widgets.WidgetAction):
@@ -28,7 +27,7 @@ class DefaultDropDownAction(widgets.WidgetAction):
             self._button.setMenu(menu)
         return menu
 
-    def addAction(self, action: QtGui.QAction):
+    def addAction(self, action: gui.QAction):
         """Add a new action to the list."""
         menu = self.get_menu()
         menu.addAction(action)
@@ -44,8 +43,6 @@ class DefaultDropDownAction(widgets.WidgetAction):
 
 
 if __name__ == "__main__":
-    from prettyqt import gui
-
     app = widgets.app()
     window = widgets.MainWindow()
     toolbar = widgets.ToolBar()

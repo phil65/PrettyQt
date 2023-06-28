@@ -6,8 +6,7 @@ from collections.abc import Iterable
 import contextlib
 import os
 
-from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtCore
+from prettyqt import constants, core, gui, widgets
 
 
 class CompletionWidget(widgets.ListWidget):
@@ -39,7 +38,7 @@ class CompletionWidget(widgets.ListWidget):
 
     def eventFilter(self, obj, event):
         """Handle mouse input and to auto-hide when losing focus."""
-        if obj is self and event.type() == QtCore.QEvent.Type.MouseButtonPress:
+        if obj is self and event.type() == core.QEvent.Type.MouseButtonPress:
             pos = self.mapToGlobal(event.pos())
             target = widgets.QApplication.widgetAt(pos)
             if target and self.isAncestorOf(target) or target is self:
@@ -135,7 +134,7 @@ class CompletionWidget(widgets.ListWidget):
 
     # Protected interface
 
-    def _get_top_left_position(self, cursor: gui.QTextCursor) -> QtCore.QPoint:
+    def _get_top_left_position(self, cursor: gui.QTextCursor) -> core.QPoint:
         """Get top left position for this widget."""
         point = self._text_edit.cursorRect(cursor).center()
         point_size = self._text_edit.font().pointSize()

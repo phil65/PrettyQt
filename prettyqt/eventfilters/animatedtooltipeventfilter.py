@@ -1,12 +1,6 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 from prettyqt import core, custom_animations, eventfilters, widgets
-
-
-if TYPE_CHECKING:
-    from prettyqt.qt import QtWidgets
 
 
 class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
@@ -28,7 +22,7 @@ class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
         self.fade_anim.apply_to(self.tool_tip)
         self.animation = self.slide_anim | self.fade_anim
 
-    def eventFilter(self, obj: QtWidgets.QWidget, event: core.QEvent) -> bool:
+    def eventFilter(self, obj: widgets.QWidget, event: core.QEvent) -> bool:
         match event.type():
             case core.QEvent.Type.Enter:
                 # self.tool_tip.adjustSize()

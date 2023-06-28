@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, custom_models, widgets
-from prettyqt.qt import QtCore
+from prettyqt import constants, core, custom_models, widgets
 
 
 class SubsequenceCompleter(widgets.Completer):
@@ -19,7 +18,7 @@ class SubsequenceCompleter(widgets.Completer):
         self.path_updated.connect(self._on_path_updated)
         self.setCompletionRole(constants.DISPLAY_ROLE)
 
-    def setModel(self, model: QtCore.QAbstractItemModel):
+    def setModel(self, model: core.QAbstractItemModel):
         self.source_model = model
         self.proxy_model = custom_models.SubsequenceSortFilterProxyModel(parent=self)
         self.proxy_model.setFilterCaseSensitivity(self.caseSensitivity())

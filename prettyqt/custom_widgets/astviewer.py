@@ -3,7 +3,7 @@ from __future__ import annotations
 import ast
 
 import logging
-from prettyqt import constants, custom_models, custom_widgets, widgets
+from prettyqt import constants, core, custom_models, custom_widgets, widgets
 
 logger = logging.getLogger(__name__)
 
@@ -30,7 +30,7 @@ class AstViewer(widgets.Splitter):
     def _on_text_change(self):
         self.set_ast(self.textedit.get_value())
 
-    def _on_current_change(self, new_index, _):
+    def _on_current_change(self, new_index: core.ModelIndex, _):
         node = new_index.data(constants.USER_ROLE)
         if not hasattr(node, "lineno"):
             return

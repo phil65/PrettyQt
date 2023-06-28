@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, widgets
-from prettyqt.qt import QtCore
+from prettyqt import constants, core, widgets
 
 
 class OrientedScrollArea(widgets.ScrollArea):
@@ -31,13 +30,13 @@ class OrientedScrollArea(widgets.ScrollArea):
             self.set_size_policy("fixed", "minimum_expanding")
         self.update()
 
-    def eventFilter(self, obj: QtCore.QObject, event: QtCore.QEvent) -> bool:
+    def eventFilter(self, obj: core.QObject, event: core.QEvent) -> bool:
         """Filter events in order to get informed when the content widget resizes."""
-        if obj == self.widget() and event.type() == QtCore.QEvent.Type.Resize:
+        if obj == self.widget() and event.type() == core.QEvent.Type.Resize:
             self.updateGeometry()
         return super().eventFilter(obj, event)
 
-    def sizeHint(self) -> QtCore.QSize:
+    def sizeHint(self) -> core.QSize:
         """Determines the exact size along the axis orthogonal to the orientation."""
         widget = self.widget()
         if widget is None:
@@ -49,9 +48,9 @@ class OrientedScrollArea(widgets.ScrollArea):
         w = widget_size.width() + margins_width
         h = widget_size.height() + margins_height
         if self._orientation == constants.Orientation.Horizontal:
-            return QtCore.QSize(w, h + self.horizontalScrollBar().sizeHint().height())
+            return core.QSize(w, h + self.horizontalScrollBar().sizeHint().height())
         else:  # self._orientation == Qt.Vertical:
-            return QtCore.QSize(w + self.verticalScrollBar().sizeHint().width(), h)
+            return core.QSize(w + self.verticalScrollBar().sizeHint().width(), h)
 
 
 if __name__ == "__main__":

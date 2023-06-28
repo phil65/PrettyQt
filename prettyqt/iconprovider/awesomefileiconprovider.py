@@ -1,13 +1,7 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
 from prettyqt import gui, iconprovider, widgets
 from prettyqt.qt import QtCore
-
-
-if TYPE_CHECKING:
-    from prettyqt.qt import QtWidgets
 
 
 class AwesomeFileIconProvider(widgets.FileIconProvider):
@@ -23,7 +17,7 @@ class AwesomeFileIconProvider(widgets.FileIconProvider):
         self.network_icon = iconprovider.get_icon("mdi.folder-network")
 
     def icon(
-        self, icon: QtWidgets.QFileIconProvider.IconType | QtCore.QFileInfo
+        self, icon: widgets.QFileIconProvider.IconType | QtCore.QFileInfo
     ) -> gui.Icon:
         match icon:
             case widgets.FileIconProvider.IconType.Folder:

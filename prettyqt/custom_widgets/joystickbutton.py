@@ -2,8 +2,7 @@ from __future__ import annotations
 
 from math import hypot
 
-from prettyqt import core, widgets
-from prettyqt.qt import QtGui
+from prettyqt import core, gui, widgets
 
 
 class JoystickButton(widgets.PushButton):
@@ -60,8 +59,8 @@ class JoystickButton(widgets.PushButton):
 
     def paintEvent(self, ev):
         super().paintEvent(ev)
-        p = QtGui.QPainter(self)
-        p.setBrush(QtGui.QBrush(QtGui.QColor(0, 0, 0)))
+        p = gui.QPainter(self)
+        p.setBrush(gui.QBrush(gui.QColor(0, 0, 0)))
         p.drawEllipse(self.spot_pos.x() - 3, self.spot_pos.y() - 3, 6, 6)
 
     def resizeEvent(self, ev):
