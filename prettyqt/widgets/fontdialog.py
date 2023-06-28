@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import gui, widgets
-from prettyqt.qt import QtWidgets
 
 
-class FontDialog(widgets.DialogMixin, QtWidgets.QFontDialog):
+class FontDialog(widgets.DialogMixin, widgets.QFontDialog):
     def get_current_font(self) -> gui.Font:
         return gui.Font(self.currentFont())
 

@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import colors, datatypes
 
 
 class GraphicsColorizeEffect(
-    widgets.GraphicsEffectMixin, QtWidgets.QGraphicsColorizeEffect
+    widgets.GraphicsEffectMixin, widgets.QGraphicsColorizeEffect
 ):
     def set_color(self, color: datatypes.ColorType):
         color = colors.get_color(color)

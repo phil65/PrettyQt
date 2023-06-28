@@ -5,44 +5,43 @@ import pathlib
 from typing import Literal
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
 FileModeStr = Literal["existing_file", "existing_files", "any_file", "directory"]
 
-FILE_MODE: bidict[FileModeStr, QtWidgets.QFileDialog.FileMode] = bidict(
-    existing_file=QtWidgets.QFileDialog.FileMode.ExistingFile,
-    existing_files=QtWidgets.QFileDialog.FileMode.ExistingFiles,
-    any_file=QtWidgets.QFileDialog.FileMode.AnyFile,
-    directory=QtWidgets.QFileDialog.FileMode.Directory,
+FILE_MODE: bidict[FileModeStr, widgets.QFileDialog.FileMode] = bidict(
+    existing_file=widgets.QFileDialog.FileMode.ExistingFile,
+    existing_files=widgets.QFileDialog.FileMode.ExistingFiles,
+    any_file=widgets.QFileDialog.FileMode.AnyFile,
+    directory=widgets.QFileDialog.FileMode.Directory,
 )
 
 LabelStr = Literal["look_in", "filename", "filetype", "accept"]
 
-LABEL: bidict[LabelStr, QtWidgets.QFileDialog.DialogLabel] = bidict(
-    look_in=QtWidgets.QFileDialog.DialogLabel.LookIn,
-    filename=QtWidgets.QFileDialog.DialogLabel.FileName,
-    filetype=QtWidgets.QFileDialog.DialogLabel.FileType,
-    accept=QtWidgets.QFileDialog.DialogLabel.Accept,
-    reject=QtWidgets.QFileDialog.DialogLabel.Reject,
+LABEL: bidict[LabelStr, widgets.QFileDialog.DialogLabel] = bidict(
+    look_in=widgets.QFileDialog.DialogLabel.LookIn,
+    filename=widgets.QFileDialog.DialogLabel.FileName,
+    filetype=widgets.QFileDialog.DialogLabel.FileType,
+    accept=widgets.QFileDialog.DialogLabel.Accept,
+    reject=widgets.QFileDialog.DialogLabel.Reject,
 )
 
 AcceptModeStr = Literal["save", "open"]
 
-ACCEPT_MODE: bidict[AcceptModeStr, QtWidgets.QFileDialog.AcceptMode] = bidict(
-    save=QtWidgets.QFileDialog.AcceptMode.AcceptSave,
-    open=QtWidgets.QFileDialog.AcceptMode.AcceptOpen,
+ACCEPT_MODE: bidict[AcceptModeStr, widgets.QFileDialog.AcceptMode] = bidict(
+    save=widgets.QFileDialog.AcceptMode.AcceptSave,
+    open=widgets.QFileDialog.AcceptMode.AcceptOpen,
 )
 
 ViewModeStr = Literal["detail", "list"]
 
-VIEW_MODE: bidict[ViewModeStr, QtWidgets.QFileDialog.ViewMode] = bidict(
-    detail=QtWidgets.QFileDialog.ViewMode.Detail, list=QtWidgets.QFileDialog.ViewMode.List
+VIEW_MODE: bidict[ViewModeStr, widgets.QFileDialog.ViewMode] = bidict(
+    detail=widgets.QFileDialog.ViewMode.Detail, list=widgets.QFileDialog.ViewMode.List
 )
 
 
-class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
+class FileDialog(widgets.DialogMixin, widgets.QFileDialog):
     """Simple dialog used to display some widget."""
 
     def __init__(
@@ -77,7 +76,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         }
         return maps
 
-    def set_accept_mode(self, mode: AcceptModeStr | QtWidgets.QFileDialog.AcceptMode):
+    def set_accept_mode(self, mode: AcceptModeStr | widgets.QFileDialog.AcceptMode):
         """Set accept mode.
 
         Args:
@@ -93,7 +92,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         """
         return ACCEPT_MODE.inverse[self.acceptMode()]
 
-    def set_view_mode(self, mode: ViewModeStr | QtWidgets.QFileDialog.ViewMode):
+    def set_view_mode(self, mode: ViewModeStr | widgets.QFileDialog.ViewMode):
         """Set view mode.
 
         Args:
@@ -110,7 +109,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         return VIEW_MODE.inverse[self.viewMode()]
 
     def set_label_text(
-        self, label: LabelStr | QtWidgets.QFileDialog.DialogLabel, text: str
+        self, label: LabelStr | widgets.QFileDialog.DialogLabel, text: str
     ):
         """Set the label text for button label.
 
@@ -120,7 +119,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         """
         self.setLabelText(LABEL.get_enum_value(label), text)
 
-    def get_label_text(self, label: LabelStr | QtWidgets.QFileDialog.DialogLabel) -> str:
+    def get_label_text(self, label: LabelStr | widgets.QFileDialog.DialogLabel) -> str:
         """Return label text.
 
         Returns:
@@ -136,7 +135,7 @@ class FileDialog(widgets.DialogMixin, QtWidgets.QFileDialog):
         """
         return FILE_MODE.inverse[self.fileMode()]
 
-    def set_file_mode(self, mode: FileModeStr | QtWidgets.QFileDialog.FileMode):
+    def set_file_mode(self, mode: FileModeStr | widgets.QFileDialog.FileMode):
         """Set the file mode of the dialog.
 
         Args:

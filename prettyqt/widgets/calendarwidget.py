@@ -4,41 +4,40 @@ import datetime
 from typing import Literal
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
 SelectionModeStr = Literal["none", "single"]
 
 SELECTION_MODE: bidict[
-    SelectionModeStr, QtWidgets.QCalendarWidget.SelectionMode
+    SelectionModeStr, widgets.QCalendarWidget.SelectionMode
 ] = bidict(
-    none=QtWidgets.QCalendarWidget.SelectionMode.NoSelection,
-    single=QtWidgets.QCalendarWidget.SelectionMode.SingleSelection,
+    none=widgets.QCalendarWidget.SelectionMode.NoSelection,
+    single=widgets.QCalendarWidget.SelectionMode.SingleSelection,
 )
 
 VerticalHeaderFormatStr = Literal["none", "week_numbers"]
 
 VERTICAL_HEADER_FORMAT: bidict[
-    VerticalHeaderFormatStr, QtWidgets.QCalendarWidget.VerticalHeaderFormat
+    VerticalHeaderFormatStr, widgets.QCalendarWidget.VerticalHeaderFormat
 ] = bidict(
-    none=QtWidgets.QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader,
-    week_numbers=QtWidgets.QCalendarWidget.VerticalHeaderFormat.ISOWeekNumbers,
+    none=widgets.QCalendarWidget.VerticalHeaderFormat.NoVerticalHeader,
+    week_numbers=widgets.QCalendarWidget.VerticalHeaderFormat.ISOWeekNumbers,
 )
 
 HorizontalHeaderFormatStr = Literal["single_letter", "short", "long", "none"]
 
 HORIZONTAL_HEADER_FORMAT: bidict[
-    HorizontalHeaderFormatStr, QtWidgets.QCalendarWidget.HorizontalHeaderFormat
+    HorizontalHeaderFormatStr, widgets.QCalendarWidget.HorizontalHeaderFormat
 ] = bidict(
-    single_letter=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.SingleLetterDayNames,
-    short=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.ShortDayNames,
-    long=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.LongDayNames,
-    none=QtWidgets.QCalendarWidget.HorizontalHeaderFormat.NoHorizontalHeader,
+    single_letter=widgets.QCalendarWidget.HorizontalHeaderFormat.SingleLetterDayNames,
+    short=widgets.QCalendarWidget.HorizontalHeaderFormat.ShortDayNames,
+    long=widgets.QCalendarWidget.HorizontalHeaderFormat.LongDayNames,
+    none=widgets.QCalendarWidget.HorizontalHeaderFormat.NoHorizontalHeader,
 )
 
 
-class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
+class CalendarWidget(widgets.WidgetMixin, widgets.QCalendarWidget):
     def _get_map(self):
         maps = super()._get_map()
         maps |= {
@@ -67,7 +66,7 @@ class CalendarWidget(widgets.WidgetMixin, QtWidgets.QCalendarWidget):
         self.setMaximumDate(datatypes.to_date(upper))
 
     def set_selection_mode(
-        self, mode: SelectionModeStr | QtWidgets.QCalendarWidget.SelectionMode | None
+        self, mode: SelectionModeStr | widgets.QCalendarWidget.SelectionMode | None
     ):
         """Set selection mode for given calendar widget.
 

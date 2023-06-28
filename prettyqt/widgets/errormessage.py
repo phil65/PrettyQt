@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
-class ErrorMessage(widgets.DialogMixin, QtWidgets.QErrorMessage):
+class ErrorMessage(widgets.DialogMixin, widgets.QErrorMessage):
     pass
 
 

@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
@@ -20,10 +19,10 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
         self.set_layout(layout)
 
     def set_layout(
-        self, layout: LayoutStr | QtWidgets.QGraphicsLayout
-    ) -> QtWidgets.QGraphicsLayout:
+        self, layout: LayoutStr | widgets.QGraphicsLayout
+    ) -> widgets.QGraphicsLayout:
         match layout:
-            case QtWidgets.QGraphicsLayout():
+            case widgets.QGraphicsLayout():
                 layout = layout
             case "grid":
                 layout = widgets.GraphicsGridLayout()
@@ -72,7 +71,7 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
         return gui.Palette(self.palette())
 
 
-class GraphicsWidget(GraphicsWidgetMixin, QtWidgets.QGraphicsWidget):
+class GraphicsWidget(GraphicsWidgetMixin, widgets.QGraphicsWidget):
     pass
 
 

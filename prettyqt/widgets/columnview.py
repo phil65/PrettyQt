@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
-class ColumnView(widgets.AbstractItemViewMixin, QtWidgets.QColumnView):
+class ColumnView(widgets.AbstractItemViewMixin, widgets.QColumnView):
     pass
 
 

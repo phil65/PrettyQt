@@ -3,30 +3,29 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
 ShadowStr = Literal["plain", "raised", "sunken"]
 
-SHADOW: bidict[ShadowStr, QtWidgets.QFrame.Shadow] = bidict(
-    plain=QtWidgets.QFrame.Shadow.Plain,
-    raised=QtWidgets.QFrame.Shadow.Raised,
-    sunken=QtWidgets.QFrame.Shadow.Sunken,
+SHADOW: bidict[ShadowStr, widgets.QFrame.Shadow] = bidict(
+    plain=widgets.QFrame.Shadow.Plain,
+    raised=widgets.QFrame.Shadow.Raised,
+    sunken=widgets.QFrame.Shadow.Sunken,
 )
 
 FrameShapeStr = Literal[
     "no_frame", "box", "panel", "styled_panel", "h_line", "v_line", "win_panel"
 ]
 
-FRAME_SHAPE: bidict[FrameShapeStr, QtWidgets.QFrame.Shape] = bidict(
-    no_frame=QtWidgets.QFrame.Shape.NoFrame,
-    box=QtWidgets.QFrame.Shape.Box,
-    panel=QtWidgets.QFrame.Shape.Panel,
-    styled_panel=QtWidgets.QFrame.Shape.StyledPanel,
-    h_line=QtWidgets.QFrame.Shape.HLine,
-    v_line=QtWidgets.QFrame.Shape.VLine,
-    win_panel=QtWidgets.QFrame.Shape.WinPanel,
+FRAME_SHAPE: bidict[FrameShapeStr, widgets.QFrame.Shape] = bidict(
+    no_frame=widgets.QFrame.Shape.NoFrame,
+    box=widgets.QFrame.Shape.Box,
+    panel=widgets.QFrame.Shape.Panel,
+    styled_panel=widgets.QFrame.Shape.StyledPanel,
+    h_line=widgets.QFrame.Shape.HLine,
+    v_line=widgets.QFrame.Shape.VLine,
+    win_panel=widgets.QFrame.Shape.WinPanel,
 )
 
 
@@ -36,7 +35,7 @@ class FrameMixin(widgets.WidgetMixin):
         maps |= {"frameShape": FRAME_SHAPE, "frameShadow": SHADOW}
         return maps
 
-    def set_frame_shadow(self, style: ShadowStr | QtWidgets.QFrame.Shadow):
+    def set_frame_shadow(self, style: ShadowStr | widgets.QFrame.Shadow):
         """Set frame shadow.
 
         Args:
@@ -54,7 +53,7 @@ class FrameMixin(widgets.WidgetMixin):
             return None
         return SHADOW.inverse[frame_shadow]
 
-    def set_frame_shape(self, shape: FrameShapeStr | QtWidgets.QFrame.Shape):
+    def set_frame_shape(self, shape: FrameShapeStr | widgets.QFrame.Shape):
         """Set frame shape.
 
         Args:
@@ -74,7 +73,7 @@ class FrameMixin(widgets.WidgetMixin):
         self.setFrameRect(datatypes.to_rect(rect))
 
 
-class Frame(FrameMixin, QtWidgets.QFrame):
+class Frame(FrameMixin, widgets.QFrame):
     pass
 
 

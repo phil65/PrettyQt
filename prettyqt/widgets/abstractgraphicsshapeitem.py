@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
 class AbstractGraphicsShapeItemMixin(widgets.GraphicsItemMixin):
@@ -9,6 +8,6 @@ class AbstractGraphicsShapeItemMixin(widgets.GraphicsItemMixin):
 
 
 class AbstractGraphicsShapeItem(
-    AbstractGraphicsShapeItemMixin, QtWidgets.QAbstractGraphicsShapeItem
+    AbstractGraphicsShapeItemMixin, widgets.QAbstractGraphicsShapeItem
 ):
     pass

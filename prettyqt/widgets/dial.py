@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
-class Dial(widgets.AbstractSliderMixin, QtWidgets.QDial):
+class Dial(widgets.AbstractSliderMixin, widgets.QDial):
     value_changed = core.Signal(int)
 
     def __init__(self, *args, **kwargs):

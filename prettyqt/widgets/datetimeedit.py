@@ -4,7 +4,6 @@ import datetime
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
@@ -20,16 +19,16 @@ SectionStr = Literal[
     "year",
 ]
 
-SECTIONS: bidict[SectionStr, QtWidgets.QDateTimeEdit.Section] = bidict(
-    none=QtWidgets.QDateTimeEdit.Section.NoSection,
-    am_pm=QtWidgets.QDateTimeEdit.Section.AmPmSection,
-    msec=QtWidgets.QDateTimeEdit.Section.MSecSection,
-    second=QtWidgets.QDateTimeEdit.Section.SecondSection,
-    minute=QtWidgets.QDateTimeEdit.Section.MinuteSection,
-    hour=QtWidgets.QDateTimeEdit.Section.HourSection,
-    day=QtWidgets.QDateTimeEdit.Section.DaySection,
-    month=QtWidgets.QDateTimeEdit.Section.MonthSection,
-    year=QtWidgets.QDateTimeEdit.Section.YearSection,
+SECTIONS: bidict[SectionStr, widgets.QDateTimeEdit.Section] = bidict(
+    none=widgets.QDateTimeEdit.Section.NoSection,
+    am_pm=widgets.QDateTimeEdit.Section.AmPmSection,
+    msec=widgets.QDateTimeEdit.Section.MSecSection,
+    second=widgets.QDateTimeEdit.Section.SecondSection,
+    minute=widgets.QDateTimeEdit.Section.MinuteSection,
+    hour=widgets.QDateTimeEdit.Section.HourSection,
+    day=widgets.QDateTimeEdit.Section.DaySection,
+    month=widgets.QDateTimeEdit.Section.MonthSection,
+    year=widgets.QDateTimeEdit.Section.YearSection,
 )
 
 
@@ -57,14 +56,14 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         self.setDateTime(core.DateTime.currentDateTime())
 
     def get_section_text(
-        self, section: SectionStr | QtWidgets.QDateTimeEdit.Section
+        self, section: SectionStr | widgets.QDateTimeEdit.Section
     ) -> str:
         return self.sectionText(SECTIONS.get_enum_value(section))
 
     def get_current_section(self) -> SectionStr:
         return SECTIONS.inverse[self.currentSection()]
 
-    def set_current_section(self, section: SectionStr | QtWidgets.QDateTimeEdit.Section):
+    def set_current_section(self, section: SectionStr | widgets.QDateTimeEdit.Section):
         self.setCurrentSection(SECTIONS.get_enum_value(section))
 
     def get_displayed_sections(self) -> list[SectionStr]:
@@ -117,7 +116,7 @@ class DateTimeEditMixin(widgets.AbstractSpinBoxMixin):
         return self.time().toPython()  # type: ignore
 
 
-class DateTimeEdit(DateTimeEditMixin, QtWidgets.QDateTimeEdit):
+class DateTimeEdit(DateTimeEditMixin, widgets.QDateTimeEdit):
     pass
 
 

@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import get_repr
 
 
 class GraphicsRectItem(
-    widgets.AbstractGraphicsShapeItemMixin, QtWidgets.QGraphicsRectItem
+    widgets.AbstractGraphicsShapeItemMixin, widgets.QGraphicsRectItem
 ):
     def __repr__(self):
         return get_repr(self, self.get_rect())

@@ -4,11 +4,10 @@ from collections.abc import Iterable, Mapping
 from typing import Any, Literal
 
 from prettyqt import core, gui, iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
-mod = QtWidgets.QComboBox
+mod = widgets.QComboBox
 
 InsertPolicyStr = Literal[
     "no_insert",
@@ -174,7 +173,7 @@ class ComboBoxMixin(widgets.WidgetMixin):
         self.setCompleter(completer)
 
 
-class ComboBox(ComboBoxMixin, QtWidgets.QComboBox):
+class ComboBox(ComboBoxMixin, widgets.QComboBox):
     pass
 
 

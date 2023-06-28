@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 
 DockWidgetArea = constants.DockWidgetArea
 
@@ -27,7 +26,7 @@ class AdjustingBoxLayoutDockWidget(widgets.DockWidget):
     def _dock_location_changed(self, area: DockWidgetArea):
         self._current_area = area
         if (widget := self.widget()) is not None:
-            if isinstance(layout := widget.layout(), QtWidgets.QBoxLayout):
+            if isinstance(layout := widget.layout(), widgets.QBoxLayout):
                 if area in (
                     DockWidgetArea.LeftDockWidgetArea,
                     DockWidgetArea.RightDockWidgetArea,
@@ -41,7 +40,7 @@ class AdjustingBoxLayoutDockWidget(widgets.DockWidget):
 
     def _top_level_changed(self, top_level):
         if (widget := self.widget()) is not None and top_level:
-            if isinstance(layout := widget.layout(), QtWidgets.QBoxLayout):
+            if isinstance(layout := widget.layout(), widgets.QBoxLayout):
                 layout.setDirection(widgets.BoxLayout.Direction.LeftToRight)
                 self.resize(widget.minimumSize())
                 self.adjustSize()

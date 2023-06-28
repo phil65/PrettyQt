@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtWidgets
 
 
-class CheckBox(widgets.AbstractButtonMixin, QtWidgets.QCheckBox):
+class CheckBox(widgets.AbstractButtonMixin, widgets.QCheckBox):
     value_changed = core.Signal(int)
 
     def __init__(self, *args, **kwargs):

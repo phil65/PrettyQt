@@ -4,11 +4,10 @@ from collections.abc import Iterator
 from typing import Literal
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-mod = QtWidgets.QFormLayout
+mod = widgets.QFormLayout
 
 ItemRoleStr = Literal["left", "right", "both"]
 
@@ -37,7 +36,7 @@ FIELD_GROWTH_POLICY: bidict[FieldGrowthPolicyStr, mod.FieldGrowthPolicy] = bidic
 )
 
 
-class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
+class FormLayout(widgets.LayoutMixin, widgets.QFormLayout):
     ID = "form"
 
     def __init__(self, *args, **kwargs):
@@ -46,7 +45,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
         self.setVerticalSpacing(8)
 
     def __setitem__(
-        self, index: int | tuple[int, ItemRoleStr], value: str | QtWidgets.QWidget
+        self, index: int | tuple[int, ItemRoleStr], value: str | widgets.QWidget
     ):
         match index:
             case (int() as row, str() as role):
@@ -59,14 +58,14 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
     def __delitem__(self, index: int):
         self.removeRow(index)
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout]:
+    def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout]:
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __len__(self) -> int:
         """Needed for PySide2."""
         return self.rowCount()
 
-    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout | tuple):
+    def __add__(self, other: widgets.QWidget | widgets.QLayout | tuple):
         self.add(other)
         return self
 
@@ -118,7 +117,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
 
     def set_widget(
         self,
-        widget: str | QtWidgets.QWidget,
+        widget: str | widgets.QWidget,
         row: int,
         role: ItemRoleStr | mod.ItemRole = "both",
     ):
@@ -127,7 +126,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
 
     def get_widget(
         self, row: int, role: ItemRoleStr | mod.ItemRole = "both"
-    ) -> QtWidgets.QLayout | QtWidgets.QWidget:
+    ) -> widgets.QLayout | widgets.QWidget:
         item = self.itemAt(row, ITEM_ROLE.get_enum_value(role))
         return i if (i := item.widget()) is not None else item.layout()
 
@@ -138,7 +137,7 @@ class FormLayout(widgets.LayoutMixin, QtWidgets.QFormLayout):
     def add(self, *items):
         for i in items:
             match i:
-                case QtWidgets.QWidget() | QtWidgets.QLayout():
+                case widgets.QWidget() | widgets.QLayout():
                     self.addRow(i)
                 case tuple():
                     self.addRow(*i)

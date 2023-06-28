@@ -3,7 +3,6 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import listdelegators
 
 
@@ -25,14 +24,14 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
             case _:
                 raise TypeError(index)
 
-    def __setitem__(self, index: int, value: QtWidgets.QGraphicsItem):
+    def __setitem__(self, index: int, value: widgets.QGraphicsItem):
         layoutitem = self.itemAt(index)
         layoutitem.setGraphicsItem(value)
 
     def __delitem__(self, index: int):
         self.removeAt(index)
 
-    def __iter__(self) -> Iterator[QtWidgets.QGraphicsItem]:
+    def __iter__(self) -> Iterator[widgets.QGraphicsItem]:
         return iter(self[i] for i in range(self.count()))
 
     def __contains__(self, item):
@@ -42,7 +41,7 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
         # for PySide2
         return self.count()
 
-    def get_children(self) -> listdelegators.BaseListDelegator[QtWidgets.QGraphicsItem]:
+    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QGraphicsItem]:
         items = [self.itemAt(i).graphicsItem() for i in range(self.count())]
         return listdelegators.BaseListDelegator(items)
 
@@ -50,7 +49,7 @@ class GraphicsLayoutMixin(widgets.GraphicsLayoutItemMixin):
         self.setContentsMargins(margin, margin, margin, margin)
 
 
-class GraphicsLayout(GraphicsLayoutMixin, QtWidgets.QGraphicsLayout):
+class GraphicsLayout(GraphicsLayoutMixin, widgets.QGraphicsLayout):
     pass
 
 

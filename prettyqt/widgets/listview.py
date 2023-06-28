@@ -3,43 +3,42 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
 ViewModeStr = Literal["list", "icon"]
 
-VIEW_MODE: bidict[ViewModeStr, QtWidgets.QListView.ViewMode] = bidict(
-    list=QtWidgets.QListView.ViewMode.ListMode, icon=QtWidgets.QListView.ViewMode.IconMode
+VIEW_MODE: bidict[ViewModeStr, widgets.QListView.ViewMode] = bidict(
+    list=widgets.QListView.ViewMode.ListMode, icon=widgets.QListView.ViewMode.IconMode
 )
 
 MovementStr = Literal["static", "free", "snap"]
 
-MOVEMENT: bidict[MovementStr, QtWidgets.QListView.Movement] = bidict(
-    static=QtWidgets.QListView.Movement.Static,
-    free=QtWidgets.QListView.Movement.Free,
-    snap=QtWidgets.QListView.Movement.Snap,
+MOVEMENT: bidict[MovementStr, widgets.QListView.Movement] = bidict(
+    static=widgets.QListView.Movement.Static,
+    free=widgets.QListView.Movement.Free,
+    snap=widgets.QListView.Movement.Snap,
 )
 
 FlowStr = Literal["left_to_right", "top_to_bottom"]
 
-FLOW: bidict[FlowStr, QtWidgets.QListView.Flow] = bidict(
-    left_to_right=QtWidgets.QListView.Flow.LeftToRight,
-    top_to_bottom=QtWidgets.QListView.Flow.TopToBottom,
+FLOW: bidict[FlowStr, widgets.QListView.Flow] = bidict(
+    left_to_right=widgets.QListView.Flow.LeftToRight,
+    top_to_bottom=widgets.QListView.Flow.TopToBottom,
 )
 
 LayoutModeStr = Literal["single_pass", "batched"]
 
-LAYOUT_MODE: bidict[LayoutModeStr, QtWidgets.QListView.LayoutMode] = bidict(
-    single_pass=QtWidgets.QListView.LayoutMode.SinglePass,
-    batched=QtWidgets.QListView.LayoutMode.Batched,
+LAYOUT_MODE: bidict[LayoutModeStr, widgets.QListView.LayoutMode] = bidict(
+    single_pass=widgets.QListView.LayoutMode.SinglePass,
+    batched=widgets.QListView.LayoutMode.Batched,
 )
 
 ResizeModeStr = Literal["fixed", "adjust"]
 
-RESIZE_MODE: bidict[ResizeModeStr, QtWidgets.QListView.ResizeMode] = bidict(
-    fixed=QtWidgets.QListView.ResizeMode.Fixed,
-    adjust=QtWidgets.QListView.ResizeMode.Adjust,
+RESIZE_MODE: bidict[ResizeModeStr, widgets.QListView.ResizeMode] = bidict(
+    fixed=widgets.QListView.ResizeMode.Fixed,
+    adjust=widgets.QListView.ResizeMode.Adjust,
 )
 
 
@@ -55,7 +54,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         }
         return maps
 
-    def set_view_mode(self, mode: ViewModeStr | QtWidgets.QListView.ViewMode):
+    def set_view_mode(self, mode: ViewModeStr | widgets.QListView.ViewMode):
         """Set view mode.
 
         Args:
@@ -71,7 +70,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return VIEW_MODE.inverse[self.viewMode()]
 
-    def set_resize_mode(self, mode: ResizeModeStr | QtWidgets.QListView.ResizeMode):
+    def set_resize_mode(self, mode: ResizeModeStr | widgets.QListView.ResizeMode):
         """Set resize mode.
 
         Args:
@@ -87,7 +86,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return RESIZE_MODE.inverse[self.resizeMode()]
 
-    def set_layout_mode(self, mode: LayoutModeStr | QtWidgets.QListView.LayoutMode):
+    def set_layout_mode(self, mode: LayoutModeStr | widgets.QListView.LayoutMode):
         """Set layout mode.
 
         Args:
@@ -103,7 +102,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return LAYOUT_MODE.inverse[self.layoutMode()]
 
-    def set_movement(self, mode: MovementStr | QtWidgets.QListView.Movement):
+    def set_movement(self, mode: MovementStr | widgets.QListView.Movement):
         """Set movement mode.
 
         Args:
@@ -119,7 +118,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         """
         return MOVEMENT.inverse[self.movement()]
 
-    def set_flow(self, mode: FlowStr | QtWidgets.QListView.Flow):
+    def set_flow(self, mode: FlowStr | widgets.QListView.Flow):
         """Set flow mode.
 
         Args:
@@ -142,7 +141,7 @@ class ListViewMixin(widgets.AbstractItemViewMixin):
         return core.Size(self.gridSize())
 
 
-class ListView(ListViewMixin, QtWidgets.QListView):
+class ListView(ListViewMixin, widgets.QListView):
     pass
 
 

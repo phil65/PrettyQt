@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 
 
 class DialogMixin(widgets.WidgetMixin):
@@ -39,13 +38,13 @@ class DialogMixin(widgets.WidgetMixin):
         return bool(self.exec())
 
     def is_accepted(self) -> bool:
-        return self.result() == QtWidgets.QDialog.DialogCode.Accepted
+        return self.result() == widgets.QDialog.DialogCode.Accepted
 
     def main_loop(self) -> int:
         return self.exec()
 
 
-class Dialog(DialogMixin, QtWidgets.QDialog):
+class Dialog(DialogMixin, widgets.QDialog):
     pass
 
 

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import get_repr
 
 
@@ -11,7 +10,7 @@ class ElidedLabel(widgets.Frame):
     def __init__(
         self,
         text: str = "",
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
         self.elided = False

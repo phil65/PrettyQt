@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
-class CommandLinkButton(widgets.PushButtonMixin, QtWidgets.QCommandLinkButton):
+class CommandLinkButton(widgets.PushButtonMixin, widgets.QCommandLinkButton):
     value_changed = core.Signal(bool)
 
 

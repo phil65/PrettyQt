@@ -1,17 +1,16 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 
 
-class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAnchorLayout):
+class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsAnchorLayout):
     def add_anchor(
         self,
-        first_item: QtWidgets.QGraphicsLayoutItem,
+        first_item: widgets.QGraphicsLayoutItem,
         first_edge: constants.AnchorPointStr,
-        second_item: QtWidgets.QGraphicsLayoutItem,
+        second_item: widgets.QGraphicsLayoutItem,
         second_edge: constants.AnchorPointStr,
-    ) -> QtWidgets.QGraphicsAnchor:
+    ) -> widgets.QGraphicsAnchor:
         return self.addAnchor(
             first_item,
             constants.ANCHOR_POINT[first_edge],
@@ -21,11 +20,11 @@ class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAncho
 
     def get_anchor(
         self,
-        first_item: QtWidgets.QGraphicsLayoutItem,
+        first_item: widgets.QGraphicsLayoutItem,
         first_edge: constants.AnchorPointStr,
-        second_item: QtWidgets.QGraphicsLayoutItem,
+        second_item: widgets.QGraphicsLayoutItem,
         second_edge: constants.AnchorPointStr,
-    ) -> QtWidgets.QGraphicsAnchor:
+    ) -> widgets.QGraphicsAnchor:
         return self.anchor(
             first_item,
             constants.ANCHOR_POINT[first_edge],
@@ -35,8 +34,8 @@ class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAncho
 
     def add_anchors(
         self,
-        first_item: QtWidgets.QGraphicsLayoutItem,
-        second_item: QtWidgets.QGraphicsLayoutItem,
+        first_item: widgets.QGraphicsLayoutItem,
+        second_item: widgets.QGraphicsLayoutItem,
         orientation: constants.OrientationStr | constants.Orientation,
     ):
         self.addAnchors(
@@ -45,9 +44,9 @@ class GraphicsAnchorLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsAncho
 
     def add_corner_anchors(
         self,
-        first_item: QtWidgets.QGraphicsLayoutItem,
+        first_item: widgets.QGraphicsLayoutItem,
         first_corner: constants.CornerStr,
-        second_item: QtWidgets.QGraphicsLayoutItem,
+        second_item: widgets.QGraphicsLayoutItem,
         second_corner: constants.CornerStr,
     ):
         self.addCornerAnchors(

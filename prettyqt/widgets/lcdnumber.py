@@ -3,29 +3,28 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 ModeStr = Literal["hex", "decimal", "octal", "binary"]
 
-MODE: bidict[ModeStr, QtWidgets.QLCDNumber.Mode] = bidict(
-    hex=QtWidgets.QLCDNumber.Mode.Hex,
-    decimal=QtWidgets.QLCDNumber.Mode.Dec,
-    octal=QtWidgets.QLCDNumber.Mode.Oct,
-    binary=QtWidgets.QLCDNumber.Mode.Bin,
+MODE: bidict[ModeStr, widgets.QLCDNumber.Mode] = bidict(
+    hex=widgets.QLCDNumber.Mode.Hex,
+    decimal=widgets.QLCDNumber.Mode.Dec,
+    octal=widgets.QLCDNumber.Mode.Oct,
+    binary=widgets.QLCDNumber.Mode.Bin,
 )
 
 SegmentStyleStr = Literal["outline", "filled", "flat"]
 
-SEGMENT_STYLE: bidict[SegmentStyleStr, QtWidgets.QLCDNumber.SegmentStyle] = bidict(
-    outline=QtWidgets.QLCDNumber.SegmentStyle.Outline,
-    filled=QtWidgets.QLCDNumber.SegmentStyle.Filled,
-    flat=QtWidgets.QLCDNumber.SegmentStyle.Flat,
+SEGMENT_STYLE: bidict[SegmentStyleStr, widgets.QLCDNumber.SegmentStyle] = bidict(
+    outline=widgets.QLCDNumber.SegmentStyle.Outline,
+    filled=widgets.QLCDNumber.SegmentStyle.Filled,
+    flat=widgets.QLCDNumber.SegmentStyle.Flat,
 )
 
 
-class LCDNumber(widgets.FrameMixin, QtWidgets.QLCDNumber):
+class LCDNumber(widgets.FrameMixin, widgets.QLCDNumber):
     value_changed = core.Signal(float)
 
     def _get_map(self):
@@ -33,7 +32,7 @@ class LCDNumber(widgets.FrameMixin, QtWidgets.QLCDNumber):
         maps |= {"segmentStyle": SEGMENT_STYLE, "mode": MODE}
         return maps
 
-    def set_mode(self, mode: ModeStr | QtWidgets.QLCDNumber.Mode):
+    def set_mode(self, mode: ModeStr | widgets.QLCDNumber.Mode):
         """Set the lcd mode.
 
         Args:
@@ -50,7 +49,7 @@ class LCDNumber(widgets.FrameMixin, QtWidgets.QLCDNumber):
         return MODE.inverse[self.mode()]
 
     def set_segment_style(
-        self, style: SegmentStyleStr | QtWidgets.QLCDNumber.SegmentStyle
+        self, style: SegmentStyleStr | widgets.QLCDNumber.SegmentStyle
     ):
         """Set the segment style.
 

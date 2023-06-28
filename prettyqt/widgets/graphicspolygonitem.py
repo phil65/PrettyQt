@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtWidgets
 
 
 class GraphicsPolygonItem(
-    widgets.AbstractGraphicsShapeItemMixin, QtWidgets.QGraphicsPolygonItem
+    widgets.AbstractGraphicsShapeItemMixin, widgets.QGraphicsPolygonItem
 ):
     def get_polygon(self) -> gui.PolygonF:
         return gui.PolygonF(self.polygon())

@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import get_repr
 
 
-class GroupBox(widgets.WidgetMixin, QtWidgets.QGroupBox):
+class GroupBox(widgets.WidgetMixin, widgets.QGroupBox):
     """GroupBox widget.
 
     A group box provides a frame, a title on top, a keyboard shortcut,

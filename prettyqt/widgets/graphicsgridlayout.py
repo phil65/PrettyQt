@@ -3,14 +3,13 @@ from __future__ import annotations
 from collections.abc import Iterable, Iterator
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import helpers, listdelegators
 
 
-class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLayout):
+class GraphicsGridLayout(widgets.GraphicsLayoutMixin, widgets.QGraphicsGridLayout):
     def __getitem__(
         self, index: tuple[int | slice, int | slice] | int
-    ) -> QtWidgets.QGraphicsLayoutItem | None:
+    ) -> widgets.QGraphicsLayoutItem | None:
         rowcount = self.rowCount()
         colcount = self.columnCount()
         match index:
@@ -34,14 +33,14 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
                 items = [self.itemAt(i) for i in range(count)[rowslice]]
                 return listdelegators.BaseListDelegator(list(set(item)))
             case str():
-                return self.find_child(QtWidgets.QGraphicsWidget, index)
+                return self.find_child(widgets.QGraphicsWidget, index)
             case _:
                 raise TypeError(index)
 
     def __setitem__(
         self,
         idx: tuple[int | slice, int | slice],
-        value: QtWidgets.QGraphicsLayoutItem,
+        value: widgets.QGraphicsLayoutItem,
     ):
         row, col = idx
         rowspan = row.stop - row.start + 1 if isinstance(row, slice) else 1
@@ -69,12 +68,12 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
             x, y, w, h = pos
             self[x : x + w - 1, y : y + h - 1] = item
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout]:
+    def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout]:
         return iter(self[i] for i in range(self.count()) if self[i] is not None)
 
     def __add__(
         self,
-        other: (Iterable[QtWidgets.QGraphicsLayoutItem] | QtWidgets.QGraphicsLayoutItem),
+        other: (Iterable[widgets.QGraphicsLayoutItem] | widgets.QGraphicsLayoutItem),
     ):
         if isinstance(other, Iterable):
             for i, control in enumerate(other):
@@ -85,7 +84,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
 
     def add(
         self,
-        item: QtWidgets.QGraphicsLayoutItem,
+        item: widgets.QGraphicsLayoutItem,
         rowstart: int,
         colstart: int,
         rowspan: int = 1,
@@ -93,7 +92,7 @@ class GraphicsGridLayout(widgets.GraphicsLayoutMixin, QtWidgets.QGraphicsGridLay
     ):
         self.addItem(item, rowstart, colstart, rowspan, colspan)
 
-    def append(self, item: QtWidgets.QGraphicsLayoutItem):
+    def append(self, item: widgets.QGraphicsLayoutItem):
         self[self.rowCount(), 0 : self.columnCount() - 1] = item
 
     def set_column_alignment(

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 
 
 class CustomTitleBar(widgets.Widget):
@@ -18,7 +17,7 @@ class CustomTitleBar(widgets.Widget):
         layout.add(close_button)
 
 
-class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
+class DockWidget(widgets.WidgetMixin, widgets.QDockWidget):
     def __init__(self, *args, allowed_areas="all", **kwargs):
         super().__init__(*args, allowed_areas=allowed_areas, **kwargs)
         self._area: constants.DockWidgetAreasStr = "none"
@@ -29,7 +28,7 @@ class DockWidget(widgets.WidgetMixin, QtWidgets.QDockWidget):
         maps |= {"allowedAreas": constants.DOCK_WIDGET_AREAS}
         return maps
 
-    def set_widget(self, widget: QtWidgets.QWidget):
+    def set_widget(self, widget: widgets.QWidget):
         self.setWidget(widget)
 
     def set_allowed_areas(self, area: constants.DockWidgetAreasStr):

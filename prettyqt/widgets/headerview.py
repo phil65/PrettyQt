@@ -6,17 +6,16 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 ResizeModeStr = Literal["interactive", "fixed", "stretch", "resize_to_contents"]
 
-RESIZE_MODE: bidict[ResizeModeStr, QtWidgets.QHeaderView.ResizeMode] = bidict(
-    interactive=QtWidgets.QHeaderView.ResizeMode.Interactive,
-    fixed=QtWidgets.QHeaderView.ResizeMode.Fixed,
-    stretch=QtWidgets.QHeaderView.ResizeMode.Stretch,
-    resize_to_contents=QtWidgets.QHeaderView.ResizeMode.ResizeToContents,
+RESIZE_MODE: bidict[ResizeModeStr, widgets.QHeaderView.ResizeMode] = bidict(
+    interactive=widgets.QHeaderView.ResizeMode.Interactive,
+    fixed=widgets.QHeaderView.ResizeMode.Fixed,
+    stretch=widgets.QHeaderView.ResizeMode.Stretch,
+    resize_to_contents=widgets.QHeaderView.ResizeMode.ResizeToContents,
 )
 
 logger = logging.getLogger(__name__)
@@ -72,7 +71,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
     def __init__(
         self,
         orientation: constants.OrientationStr | constants.Orientation,
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
         **kwargs,
     ):
         if isinstance(orientation, constants.Orientation):
@@ -159,7 +158,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
 
     def set_resize_mode(
         self,
-        mode: ResizeModeStr | QtWidgets.QHeaderView.ResizeMode,
+        mode: ResizeModeStr | widgets.QHeaderView.ResizeMode,
         precision: int | None = None,
         cascading: bool | None = None,
         stretch_last_section: bool | None = None,
@@ -283,7 +282,7 @@ class HeaderViewMixin(widgets.AbstractItemViewMixin):
         return constants.ORIENTATION.inverse[self.orientation()]
 
 
-class HeaderView(HeaderViewMixin, QtWidgets.QHeaderView):
+class HeaderView(HeaderViewMixin, widgets.QHeaderView):
     pass
 
 

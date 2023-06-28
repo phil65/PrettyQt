@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 
 
 class LayoutItemMixin:
@@ -26,7 +25,7 @@ class LayoutItemMixin:
 
     def get_item(
         self,
-    ) -> QtWidgets.QWidget | QtWidgets.QLayout | QtWidgets.QSpacerItem | None:
+    ) -> widgets.QWidget | widgets.QLayout | widgets.QSpacerItem | None:
         if content := self.widget():
             return content
         if content := self.layout():
@@ -40,7 +39,7 @@ class LayoutItemMixin:
         return constants.ORIENTATION.get_list(self.expandingDirections())
 
 
-class LayoutItem(LayoutItemMixin, QtWidgets.QLayoutItem):
+class LayoutItem(LayoutItemMixin, widgets.QLayoutItem):
     pass
 
 

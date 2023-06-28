@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-area = QtWidgets.QAbstractScrollArea
+area = widgets.QAbstractScrollArea
 
 SizeAdjustPolicyStr = Literal["content", "first_show", "ignored"]
 
@@ -173,14 +172,14 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
 
     def add_scrollbar_widget(
         self,
-        widget: QtWidgets.QWidget,
+        widget: widgets.QWidget,
         alignment: constants.AlignmentStr | constants.AlignmentFlag,
     ):
         alignment = constants.ALIGNMENTS.get_enum_value(alignment)
         self.addScrollBarWidget(widget, alignment)
 
 
-class AbstractScrollArea(AbstractScrollAreaMixin, QtWidgets.QAbstractScrollArea):
+class AbstractScrollArea(AbstractScrollAreaMixin, widgets.QAbstractScrollArea):
     pass
 
 
