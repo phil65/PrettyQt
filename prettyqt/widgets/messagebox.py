@@ -6,18 +6,17 @@ import traceback
 from typing import Literal
 
 from prettyqt import constants, gui, iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
 IconStr = Literal["none", "information", "warning", "critical", "question"]
 
-ICONS: bidict[IconStr, QtWidgets.QMessageBox.Icon] = bidict(
-    none=QtWidgets.QMessageBox.Icon.NoIcon,
-    information=QtWidgets.QMessageBox.Icon.Information,
-    warning=QtWidgets.QMessageBox.Icon.Warning,
-    critical=QtWidgets.QMessageBox.Icon.Critical,
-    question=QtWidgets.QMessageBox.Icon.Question,
+ICONS: bidict[IconStr, widgets.QMessageBox.Icon] = bidict(
+    none=widgets.QMessageBox.Icon.NoIcon,
+    information=widgets.QMessageBox.Icon.Information,
+    warning=widgets.QMessageBox.Icon.Warning,
+    critical=widgets.QMessageBox.Icon.Critical,
+    question=widgets.QMessageBox.Icon.Question,
 )
 
 StandardButtonStr = Literal[
@@ -42,26 +41,26 @@ StandardButtonStr = Literal[
     "ignore",
 ]
 
-STANDARD_BUTTON: bidict[StandardButtonStr, QtWidgets.QMessageBox.StandardButton] = bidict(
-    none=QtWidgets.QMessageBox.StandardButton.NoButton,
-    cancel=QtWidgets.QMessageBox.StandardButton.Cancel,
-    ok=QtWidgets.QMessageBox.StandardButton.Ok,
-    save=QtWidgets.QMessageBox.StandardButton.Save,
-    open=QtWidgets.QMessageBox.StandardButton.Open,
-    close=QtWidgets.QMessageBox.StandardButton.Close,
-    discard=QtWidgets.QMessageBox.StandardButton.Discard,
-    apply=QtWidgets.QMessageBox.StandardButton.Apply,
-    reset=QtWidgets.QMessageBox.StandardButton.Reset,
-    restore_defaults=QtWidgets.QMessageBox.StandardButton.RestoreDefaults,
-    help=QtWidgets.QMessageBox.StandardButton.Help,
-    save_all=QtWidgets.QMessageBox.StandardButton.SaveAll,
-    yes=QtWidgets.QMessageBox.StandardButton.Yes,
-    yes_to_all=QtWidgets.QMessageBox.StandardButton.YesToAll,
-    no=QtWidgets.QMessageBox.StandardButton.No,
-    no_to_all=QtWidgets.QMessageBox.StandardButton.NoToAll,
-    abort=QtWidgets.QMessageBox.StandardButton.Abort,
-    retry=QtWidgets.QMessageBox.StandardButton.Retry,
-    ignore=QtWidgets.QMessageBox.StandardButton.Ignore,
+STANDARD_BUTTON: bidict[StandardButtonStr, widgets.QMessageBox.StandardButton] = bidict(
+    none=widgets.QMessageBox.StandardButton.NoButton,
+    cancel=widgets.QMessageBox.StandardButton.Cancel,
+    ok=widgets.QMessageBox.StandardButton.Ok,
+    save=widgets.QMessageBox.StandardButton.Save,
+    open=widgets.QMessageBox.StandardButton.Open,
+    close=widgets.QMessageBox.StandardButton.Close,
+    discard=widgets.QMessageBox.StandardButton.Discard,
+    apply=widgets.QMessageBox.StandardButton.Apply,
+    reset=widgets.QMessageBox.StandardButton.Reset,
+    restore_defaults=widgets.QMessageBox.StandardButton.RestoreDefaults,
+    help=widgets.QMessageBox.StandardButton.Help,
+    save_all=widgets.QMessageBox.StandardButton.SaveAll,
+    yes=widgets.QMessageBox.StandardButton.Yes,
+    yes_to_all=widgets.QMessageBox.StandardButton.YesToAll,
+    no=widgets.QMessageBox.StandardButton.No,
+    no_to_all=widgets.QMessageBox.StandardButton.NoToAll,
+    abort=widgets.QMessageBox.StandardButton.Abort,
+    retry=widgets.QMessageBox.StandardButton.Retry,
+    ignore=widgets.QMessageBox.StandardButton.Ignore,
 )
 
 ButtonRoleStr = Literal[
@@ -77,25 +76,25 @@ ButtonRoleStr = Literal[
     "reset",
 ]
 
-BUTTON_ROLE: bidict[ButtonRoleStr, QtWidgets.QMessageBox.ButtonRole] = bidict(
-    invalid=QtWidgets.QMessageBox.ButtonRole.InvalidRole,
-    accept=QtWidgets.QMessageBox.ButtonRole.AcceptRole,
-    reject=QtWidgets.QMessageBox.ButtonRole.RejectRole,
-    destructive=QtWidgets.QMessageBox.ButtonRole.DestructiveRole,
-    action=QtWidgets.QMessageBox.ButtonRole.ActionRole,
-    help=QtWidgets.QMessageBox.ButtonRole.HelpRole,
-    yes=QtWidgets.QMessageBox.ButtonRole.YesRole,
-    no=QtWidgets.QMessageBox.ButtonRole.NoRole,
-    apply=QtWidgets.QMessageBox.ButtonRole.ApplyRole,
-    reset=QtWidgets.QMessageBox.ButtonRole.ResetRole,
+BUTTON_ROLE: bidict[ButtonRoleStr, widgets.QMessageBox.ButtonRole] = bidict(
+    invalid=widgets.QMessageBox.ButtonRole.InvalidRole,
+    accept=widgets.QMessageBox.ButtonRole.AcceptRole,
+    reject=widgets.QMessageBox.ButtonRole.RejectRole,
+    destructive=widgets.QMessageBox.ButtonRole.DestructiveRole,
+    action=widgets.QMessageBox.ButtonRole.ActionRole,
+    help=widgets.QMessageBox.ButtonRole.HelpRole,
+    yes=widgets.QMessageBox.ButtonRole.YesRole,
+    no=widgets.QMessageBox.ButtonRole.NoRole,
+    apply=widgets.QMessageBox.ButtonRole.ApplyRole,
+    reset=widgets.QMessageBox.ButtonRole.ResetRole,
 )
 
 
-class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
+class MessageBox(widgets.DialogMixin, widgets.QMessageBox):
     def __init__(
         self,
         icon: datatypes.IconType | IconStr = None,
-        buttons: list[StandardButtonStr | QtWidgets.QMessageBox.StandardButton]
+        buttons: list[StandardButtonStr | widgets.QMessageBox.StandardButton]
         | None = None,
         **kwargs,
     ):
@@ -111,8 +110,8 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
                 self.add_button(b)
 
     def get_button(
-        self, button: QtWidgets.QMessageBox.StandardButton | StandardButtonStr
-    ) -> QtWidgets.QAbstractButton:
+        self, button: widgets.QMessageBox.StandardButton | StandardButtonStr
+    ) -> widgets.QAbstractButton:
         return self.button(STANDARD_BUTTON.get_enum_value(button))
 
     @classmethod
@@ -151,7 +150,7 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         return None if pix.isNull() else gui.Pixmap(pix)
 
     def set_standard_buttons(
-        self, buttons: list[StandardButtonStr | QtWidgets.QMessageBox.StandardButton]
+        self, buttons: list[StandardButtonStr | widgets.QMessageBox.StandardButton]
     ):
         flag = self.StandardButton.NoButton
         for val in buttons:
@@ -162,8 +161,8 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         return STANDARD_BUTTON.get_list(self.standardButtons())
 
     def add_button(
-        self, button: StandardButtonStr | QtWidgets.QMessageBox.StandardButton
-    ) -> QtWidgets.QPushButton:
+        self, button: StandardButtonStr | widgets.QMessageBox.StandardButton
+    ) -> widgets.QPushButton:
         """Add a default button.
 
         Args:
@@ -177,9 +176,9 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
     def add_custom_button(
         self,
         button: str,
-        role: ButtonRoleStr | QtWidgets.QMessageBox.ButtonRole,
+        role: ButtonRoleStr | widgets.QMessageBox.ButtonRole,
         callback: Callable | None = None,
-    ) -> QtWidgets.QPushButton:
+    ) -> widgets.QPushButton:
         btn = self.addButton(button, BUTTON_ROLE.get_enum_value(role))
         if callback:
             btn.clicked.connect(callback)
@@ -208,14 +207,14 @@ class MessageBox(widgets.DialogMixin, QtWidgets.QMessageBox):
         """
         return constants.TEXT_FORMAT.inverse[self.textFormat()]
 
-    def set_escape_button(self, button: StandardButtonStr | QtWidgets.QAbstractButton):
-        if isinstance(button, QtWidgets.QAbstractButton):
+    def set_escape_button(self, button: StandardButtonStr | widgets.QAbstractButton):
+        if isinstance(button, widgets.QAbstractButton):
             self.setEscapeButton(button)
         else:
             self.setEscapeButton(STANDARD_BUTTON.get_enum_value(button))
 
-    def set_default_button(self, button: StandardButtonStr | QtWidgets.QPushButton):
-        if isinstance(button, QtWidgets.QPushButton):
+    def set_default_button(self, button: StandardButtonStr | widgets.QPushButton):
+        if isinstance(button, widgets.QPushButton):
             self.setDefaultButton(button)
         else:
             self.setDefaultButton(STANDARD_BUTTON.get_enum_value(button))

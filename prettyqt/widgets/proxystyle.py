@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
-class ProxyStyle(widgets.CommonStyleMixin, QtWidgets.QProxyStyle):
+class ProxyStyle(widgets.CommonStyleMixin, widgets.QProxyStyle):
     pass
 
 

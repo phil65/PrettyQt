@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import gui, widgets
-from prettyqt.qt import QtWidgets
 
 
-class StylePainter(gui.PainterMixin, QtWidgets.QStylePainter):
+class StylePainter(gui.PainterMixin, widgets.QStylePainter):
     def draw_complex_control(
         self,
         control: widgets.style.ComplexControlStr,
-        option: QtWidgets.QStyleOptionComplex,
+        option: widgets.QStyleOptionComplex,
     ):
         self.drawComplexControl(widgets.style.COMPLEX_CONTROL[control], option)

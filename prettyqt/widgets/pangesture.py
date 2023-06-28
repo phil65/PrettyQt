@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
-class PanGesture(widgets.GestureMixin, QtWidgets.QPanGesture):
+class PanGesture(widgets.GestureMixin, widgets.QPanGesture):
     def get_delta(self) -> core.PointF:
         return core.PointF(self.delta())
 

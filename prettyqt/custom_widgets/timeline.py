@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, iconprovider, widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
 
 
@@ -16,7 +15,7 @@ class VideoSample:
         self,
         duration: float,
         color: datatypes.ColorType = "yellow",
-        picture: QtGui.QPixmap | None = None,
+        picture: gui.QPixmap | None = None,
     ):
         self.duration = duration
         self.color = colors.get_color(color)  # Floating color
@@ -74,7 +73,7 @@ class Timeline(widgets.Widget):
         self,
         duration: int,
         color: datatypes.ColorType = "yellow",
-        picture: QtGui.QPixmap | None = None,
+        picture: gui.QPixmap | None = None,
     ) -> VideoSample:
         sample = VideoSample(duration, color, picture)
         self.add(sample)
@@ -226,7 +225,7 @@ class Timeline(widgets.Widget):
         color = colors.get_color(color)
         self.text_color = color
 
-    def set_text_font(self, font: QtGui.QFont):
+    def set_text_font(self, font: gui.QFont):
         self.text_font = font
 
 

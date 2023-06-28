@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-mod = QtWidgets.QStyleOptionHeader
+mod = widgets.QStyleOptionHeader
 
 SECTION_POSITION = bidict(
     beginning=mod.SectionPosition.Beginning,
@@ -28,5 +27,5 @@ SORT_INDICATOR = bidict(
 )
 
 
-class StyleOptionHeader(widgets.StyleOptionMixin, QtWidgets.QStyleOptionHeader):
+class StyleOptionHeader(widgets.StyleOptionMixin, widgets.QStyleOptionHeader):
     pass

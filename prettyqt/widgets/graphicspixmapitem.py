@@ -3,20 +3,19 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 ShapeModeStr = Literal["mask", "bounding_rect", "heuristic_mask"]
 
-SHAPE_MODE: bidict[ShapeModeStr, QtWidgets.QGraphicsPixmapItem.ShapeMode] = bidict(
-    mask=QtWidgets.QGraphicsPixmapItem.ShapeMode.MaskShape,
-    bounding_rect=QtWidgets.QGraphicsPixmapItem.ShapeMode.BoundingRectShape,
-    heuristic_mask=QtWidgets.QGraphicsPixmapItem.ShapeMode.HeuristicMaskShape,
+SHAPE_MODE: bidict[ShapeModeStr, widgets.QGraphicsPixmapItem.ShapeMode] = bidict(
+    mask=widgets.QGraphicsPixmapItem.ShapeMode.MaskShape,
+    bounding_rect=widgets.QGraphicsPixmapItem.ShapeMode.BoundingRectShape,
+    heuristic_mask=widgets.QGraphicsPixmapItem.ShapeMode.HeuristicMaskShape,
 )
 
 
-class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapItem):
+class GraphicsPixmapItem(widgets.GraphicsItemMixin, widgets.QGraphicsPixmapItem):
     def set_transformation_mode(
         self, mode: constants.TransformationModeStr | constants.TransformationMode
     ):
@@ -36,7 +35,7 @@ class GraphicsPixmapItem(widgets.GraphicsItemMixin, QtWidgets.QGraphicsPixmapIte
         return constants.TRANSFORMATION_MODE.inverse[self.transformationMode()]
 
     def set_shape_mode(
-        self, mode: ShapeModeStr | QtWidgets.QGraphicsPixmapItem.ShapeMode
+        self, mode: ShapeModeStr | widgets.QGraphicsPixmapItem.ShapeMode
     ):
         """Set shape mode.
 

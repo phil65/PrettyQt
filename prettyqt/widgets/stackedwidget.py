@@ -3,32 +3,31 @@ from __future__ import annotations
 from typing import overload
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import animator, listdelegators
 
 
-class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
+class StackedWidget(widgets.FrameMixin, widgets.QStackedWidget):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.animator = animator.Animator(self)
 
-    def __add__(self, other: QtWidgets.QWidget) -> StackedWidget:
+    def __add__(self, other: widgets.QWidget) -> StackedWidget:
         self.addWidget(other)
         return self
 
     @overload
-    def __getitem__(self, index: int) -> QtWidgets.QWidget:
+    def __getitem__(self, index: int) -> widgets.QWidget:
         ...
 
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    ) -> listdelegators.BaseListDelegator[widgets.QWidget]:
         ...
 
     def __getitem__(
         self, index: int | slice
-    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget]:
         match index:
             case int():
                 if index >= self.count():
@@ -40,7 +39,7 @@ class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
             case _:
                 raise TypeError(index)
 
-    def __delitem__(self, item: int | QtWidgets.QWidget):
+    def __delitem__(self, item: int | widgets.QWidget):
         if isinstance(item, int):
             item = self.widget(item)
         self.removeWidget(item)
@@ -49,7 +48,7 @@ class StackedWidget(widgets.FrameMixin, QtWidgets.QStackedWidget):
         # needed for PySide6
         return self.count()
 
-    def __contains__(self, item: QtWidgets.QWidget):
+    def __contains__(self, item: widgets.QWidget):
         return self.indexOf(item) >= 0
 
     # __iter__ not needed, we have __getitem__ and __len__

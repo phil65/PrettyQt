@@ -3,19 +3,18 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 TextDirectionStr = Literal["top_to_bottom", "bottom_to_top"]
 
-TEXT_DIRECTIONS: bidict[TextDirectionStr, QtWidgets.QProgressBar.Direction] = bidict(
-    top_to_bottom=QtWidgets.QProgressBar.Direction.TopToBottom,
-    bottom_to_top=QtWidgets.QProgressBar.Direction.BottomToTop,
+TEXT_DIRECTIONS: bidict[TextDirectionStr, widgets.QProgressBar.Direction] = bidict(
+    top_to_bottom=widgets.QProgressBar.Direction.TopToBottom,
+    bottom_to_top=widgets.QProgressBar.Direction.BottomToTop,
 )
 
 
-class ProgressBar(widgets.WidgetMixin, QtWidgets.QProgressBar):
+class ProgressBar(widgets.WidgetMixin, widgets.QProgressBar):
     def __init__(self, *args, text_visible: bool = True, **kwargs):
         super().__init__(*args, text_visible=text_visible, **kwargs)
 
@@ -36,7 +35,7 @@ class ProgressBar(widgets.WidgetMixin, QtWidgets.QProgressBar):
         return constants.ALIGNMENTS.inverse[self.alignment()]
 
     def set_text_direction(
-        self, text_direction: TextDirectionStr | QtWidgets.QProgressBar.Direction
+        self, text_direction: TextDirectionStr | widgets.QProgressBar.Direction
     ):
         """Set the text direction of the layout.
 

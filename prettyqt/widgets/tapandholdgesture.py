@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
-class TapAndHoldGesture(widgets.GestureMixin, QtWidgets.QTapAndHoldGesture):
+class TapAndHoldGesture(widgets.GestureMixin, widgets.QTapAndHoldGesture):
     def get_position(self) -> core.PointF:
         return core.PointF(self.position())
 

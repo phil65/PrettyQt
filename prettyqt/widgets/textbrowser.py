@@ -5,11 +5,10 @@ import os
 import pathlib
 
 from prettyqt import gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
-class TextBrowser(widgets.TextEditMixin, QtWidgets.QTextBrowser):
+class TextBrowser(widgets.TextEditMixin, widgets.QTextBrowser):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.setOpenExternalLinks(True)

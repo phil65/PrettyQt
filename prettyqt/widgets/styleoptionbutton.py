@@ -1,19 +1,18 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 BUTTON_FEATURES = bidict(
-    none=QtWidgets.QStyleOptionButton.ButtonFeature.None_,
-    flat=QtWidgets.QStyleOptionButton.ButtonFeature.Flat,
-    has_menu=QtWidgets.QStyleOptionButton.ButtonFeature.HasMenu,
-    default_button=QtWidgets.QStyleOptionButton.ButtonFeature.DefaultButton,
-    auto_default_button=QtWidgets.QStyleOptionButton.ButtonFeature.AutoDefaultButton,
-    command_link_button=QtWidgets.QStyleOptionButton.ButtonFeature.CommandLinkButton,
+    none=widgets.QStyleOptionButton.ButtonFeature.None_,
+    flat=widgets.QStyleOptionButton.ButtonFeature.Flat,
+    has_menu=widgets.QStyleOptionButton.ButtonFeature.HasMenu,
+    default_button=widgets.QStyleOptionButton.ButtonFeature.DefaultButton,
+    auto_default_button=widgets.QStyleOptionButton.ButtonFeature.AutoDefaultButton,
+    command_link_button=widgets.QStyleOptionButton.ButtonFeature.CommandLinkButton,
 )
 
 
-class StyleOptionButton(widgets.StyleOptionMixin, QtWidgets.QStyleOptionButton):
+class StyleOptionButton(widgets.StyleOptionMixin, widgets.QStyleOptionButton):
     pass

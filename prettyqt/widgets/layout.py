@@ -6,7 +6,6 @@ from typing import Literal, overload
 from typing_extensions import Self
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtCore, QtWidgets
 from prettyqt.utils import bidict, listdelegators
 
 
@@ -14,7 +13,7 @@ from prettyqt.utils import bidict, listdelegators
 # def get_sub_layout(
 #     self,
 #     sub_container: str,
-#     parent: widgets.Widget | QtWidgets.QLayout,
+#     parent: widgets.Widget | widgets.QLayout,
 #     orientation: constants.OrientationStr | None = None,
 #     stretch: int | None = None,
 #     **kwargs,
@@ -52,12 +51,12 @@ from prettyqt.utils import bidict, listdelegators
 
 
 SIZE_CONSTRAINT = bidict(
-    default=QtWidgets.QLayout.SizeConstraint.SetDefaultConstraint,
-    fixed=QtWidgets.QLayout.SizeConstraint.SetFixedSize,
-    minimum=QtWidgets.QLayout.SizeConstraint.SetMinimumSize,
-    maximum=QtWidgets.QLayout.SizeConstraint.SetMaximumSize,
-    min_and_max=QtWidgets.QLayout.SizeConstraint.SetMinAndMaxSize,
-    none=QtWidgets.QLayout.SizeConstraint.SetNoConstraint,
+    default=widgets.QLayout.SizeConstraint.SetDefaultConstraint,
+    fixed=widgets.QLayout.SizeConstraint.SetFixedSize,
+    minimum=widgets.QLayout.SizeConstraint.SetMinimumSize,
+    maximum=widgets.QLayout.SizeConstraint.SetMaximumSize,
+    min_and_max=widgets.QLayout.SizeConstraint.SetMinAndMaxSize,
+    none=widgets.QLayout.SizeConstraint.SetNoConstraint,
 )
 
 SizeConstraintStr = Literal[
@@ -101,7 +100,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
                 item = self.itemAt(index)
                 return i if (i := item.widget()) is not None else item.layout()
             case str():
-                if (item := self.find_child(typ=QtCore.QObject, name=index)) is not None:
+                if (item := self.find_child(typ=core.QObject, name=index)) is not None:
                     return item
                 raise KeyError(index)
             case slice():
@@ -116,7 +115,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         if self._container != self:
             self._container.__setitem__(key, value)
 
-    def __delitem__(self, item: int | QtWidgets.QLayoutItem):
+    def __delitem__(self, item: int | widgets.QLayoutItem):
         if isinstance(item, int):
             item = self.itemAt(item)
         self.removeItem(item)
@@ -125,10 +124,10 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def __len__(self) -> int:
         return self.count()
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget | QtWidgets.QLayout | None]:
+    def __iter__(self) -> Iterator[widgets.QWidget | widgets.QLayout | None]:
         return iter(self[i] for i in range(self.count()))
 
-    def __contains__(self, item: QtWidgets.QWidget | QtWidgets.QLayoutItem):
+    def __contains__(self, item: widgets.QWidget | widgets.QLayoutItem):
         return self.indexOf(item) >= 0
 
     def __iadd__(self, item, *args, **kwargs):
@@ -142,11 +141,11 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
 
     def add(self, item, *args, **kwargs):
         match item:
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 self._container.addWidget(item, *args, **kwargs)
-            case QtWidgets.QLayout():
+            case widgets.QLayout():
                 self._container.addLayout(item, *args, **kwargs)
-            case QtWidgets.QLayoutItem():
+            case widgets.QLayoutItem():
                 self._container.addItem(item, *args, **kwargs)
             case list():
                 for i in item:
@@ -197,51 +196,51 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         )
         Klass = CONTEXT_LAYOUTS[layout]
         match self._container:
-            case QtWidgets.QWidget() if layout == "scroll":
+            case widgets.QWidget() if layout == "scroll":
                 scroller = Klass(parent=self._container)
                 scroller.setWidgetResizable(True)
                 widget = widgets.Widget()
                 scroller.set_widget(widget)
                 new = widget.set_layout(orientation, **kwargs)
-            case QtWidgets.QLayout() if layout == "scroll":
+            case widgets.QLayout() if layout == "scroll":
                 scroller = Klass(parent=self._container)
                 scroller.setWidgetResizable(True)
                 widget = widgets.Widget()
                 scroller.set_widget(widget)
                 new = widget.set_layout(orientation, **kwargs)
                 self._container.add(new)
-            case QtWidgets.QWidget() if layout == "splitter":
+            case widgets.QWidget() if layout == "splitter":
                 new = Klass(orientation=orientation, parent=self._container, **kwargs)
-            case QtWidgets.QLayout() if layout == "splitter":
+            case widgets.QLayout() if layout == "splitter":
                 new = Klass(orientation=orientation, **kwargs)
                 self._container.add(new)
-            case QtWidgets.QWidget() if layout == "frame":
+            case widgets.QWidget() if layout == "frame":
                 frame = Klass(parent=self._container, **kwargs)
                 widget = widgets.Widget()
                 new = widget.set_layout(orientation or "horizontal")
                 frame.set_layout(new)
-            case QtWidgets.QLayout() if layout == "frame":
+            case widgets.QLayout() if layout == "frame":
                 frame = Klass(**kwargs)
                 widget = widgets.Widget()
                 new = widget.set_layout(orientation or "horizontal")
                 frame.set_layout(new)
                 self._container.add(new)
-            case QtWidgets.QMainWindow():
+            case widgets.QMainWindow():
                 widget = widgets.Widget(parent=self._container)
                 self._container.setCentralWidget(widget)
                 new = Klass(widget, **kwargs)
-            case QtWidgets.QScrollArea():
+            case widgets.QScrollArea():
                 widget = widgets.Widget(parent=self._container)
                 self._container.setWidget(widget)
                 self._container.setWidgetResizable(True)
                 new = widget.set_layout("vertical", **kwargs)
-            case QtWidgets.QSplitter():
+            case widgets.QSplitter():
                 widget = widgets.Widget(parent=self._container)
                 self._container.addWidget(widget)
                 new = Klass(widget, **kwargs)
-            case None | QtWidgets.QWidget():
+            case None | widgets.QWidget():
                 new = Klass(self._container, **kwargs)
-            case QtWidgets.QLayout():
+            case widgets.QLayout():
                 new = Klass(**kwargs)
                 if stretch:
                     self._container.add(new, stretch)
@@ -256,7 +255,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         match pos_or_index:
             case int():
                 return super().itemAt(pos_or_index)
-            case QtCore.QPoint():
+            case core.QPoint():
                 for i in range(self.count()):
                     item = self.itemAt(i)
                     if item.geometry().contains(pos_or_index):
@@ -278,7 +277,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
 
     def get_children(
         self,
-    ) -> listdelegators.BaseListDelegator[QtWidgets.QWidget | QtWidgets.QLayout]:
+    ) -> listdelegators.BaseListDelegator[widgets.QWidget | widgets.QLayout]:
         return listdelegators.BaseListDelegator(self)
 
     def set_margin(self, margin: tuple[int, int, int, int] | int | None):
@@ -296,7 +295,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         self.setSpacing(pixels)
 
     def set_size_constraint(
-        self, mode: SizeConstraintStr | QtWidgets.QLayout.SizeConstraint
+        self, mode: SizeConstraintStr | widgets.QLayout.SizeConstraint
     ):
         """Set the size mode of the layout.
 
@@ -316,7 +315,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     def set_alignment(
         self,
         alignment: constants.AlignmentStr | constants.AlignmentFlag,
-        item: QtWidgets.QWidget | QtWidgets.QLayout | None = None,
+        item: widgets.QWidget | widgets.QLayout | None = None,
     ) -> bool:
         """Set the alignment for widget / layout to alignment.
 
@@ -331,12 +330,12 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
         else:
             return self.setAlignment(constants.ALIGNMENTS.get_enum_value(alignment))
 
-    # def add(self, *items: QtWidgets.QWidget | QtWidgets.QLayout):
+    # def add(self, *items: widgets.QWidget | widgets.QLayout):
     #     for i in items:
     #         match i:
-    #             case QtWidgets.QWidget():
+    #             case widgets.QWidget():
     #                 self.addWidget(i)
-    #             case QtWidgets.QLayout():
+    #             case widgets.QLayout():
     #                 w = widgets.Widget()
     #                 w.set_layout(i)
     #                 self.addWidget(w)
@@ -344,7 +343,7 @@ class LayoutMixin(core.ObjectMixin, widgets.LayoutItemMixin):
     #                 raise TypeError("add_item only supports widgets and layouts")
 
 
-class Layout(LayoutMixin, QtWidgets.QLayout):
+class Layout(LayoutMixin, widgets.QLayout):
     pass
 
 

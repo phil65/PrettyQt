@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from prettyqt import core
-from prettyqt.qt import QtCore, QtHelp
+from prettyqt.qt import QtHelp
 
 
 class HelpFilterDataMixin:
     def get_versions(self) -> list[core.VersionNumber]:
         return [core.VersionNumber(i) for i in self.versions()]
 
-    def set_versions(self, versions: list[QtCore.QVersionNumber]):
+    def set_versions(self, versions: list[core.QVersionNumber]):
         self.setVersions(versions)
 
 

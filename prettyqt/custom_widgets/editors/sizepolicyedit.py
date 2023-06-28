@@ -1,11 +1,10 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
 class SizePolicyEdit(widgets.Widget):
-    value_changed = core.Signal(QtWidgets.QSizePolicy)
+    value_changed = core.Signal(widgets.QSizePolicy)
 
     def __init__(self, *args, object_name: str = "sizepolicy_edit", **kwargs):
         super().__init__(*args, object_name=object_name, **kwargs)
@@ -38,7 +37,7 @@ class SizePolicyEdit(widgets.Widget):
         policy.set_control_type(self.cb_control_type.get_value())
         return policy
 
-    def set_value(self, value: QtWidgets.QSizePolicy):
+    def set_value(self, value: widgets.QSizePolicy):
         self._value = value
         self.cb_horizontal.set_value(
             widgets.sizepolicy.SIZE_POLICY.inverse[value.horizontalPolicy()]
@@ -50,7 +49,7 @@ class SizePolicyEdit(widgets.Widget):
             widgets.sizepolicy.CONTROL_TYPE.inverse[value.controlType()]
         )
 
-    value = core.Property(QtWidgets.QSizePolicy, get_value, set_value, user=True)
+    value = core.Property(widgets.QSizePolicy, get_value, set_value, user=True)
 
 
 if __name__ == "__main__":

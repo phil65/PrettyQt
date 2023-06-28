@@ -1,13 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
-class WidgetItem(widgets.LayoutItemMixin, QtWidgets.QWidgetItem):
+class WidgetItem(widgets.LayoutItemMixin, widgets.QWidgetItem):
     pass
 
 
 if __name__ == "__main__":
     app = widgets.app()
-    item = WidgetItem(QtWidgets.QWidget())
+    item = WidgetItem(widgets.QWidget())

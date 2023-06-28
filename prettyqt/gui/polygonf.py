@@ -7,11 +7,11 @@ import math
 from typing_extensions import Self
 
 from prettyqt import constants, core, gui
-from prettyqt.qt import API, QtGui
+from prettyqt.qt import API
 from prettyqt.utils import datatypes, serializemixin
 
 
-class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
+class PolygonF(serializemixin.SerializeMixin, gui.QPolygonF):
     def __repr__(self):
         return f"{type(self).__name__}(<{len(self)} points>)"
 
@@ -40,18 +40,18 @@ class PolygonF(serializemixin.SerializeMixin, QtGui.QPolygonF):
     #     else:
     #         self.setPoint(index, value)
 
-    def __sub__(self, other: QtGui.QPolygonF) -> Self:
+    def __sub__(self, other: gui.QPolygonF) -> Self:
         return type(self)(self.subtracted(other))
 
-    def __and__(self, other: QtGui.QPolygonF) -> Self:  # &
+    def __and__(self, other: gui.QPolygonF) -> Self:  # &
         return type(self)(self.intersected(other))
 
-    def __xor__(self, other: QtGui.QPolygonF) -> Self:  # ^
+    def __xor__(self, other: gui.QPolygonF) -> Self:  # ^
         union = self | other
         intersect = self & other
         return union - intersect
 
-    def __or__(self, other: QtGui.QPolygonF) -> Self:  # |
+    def __or__(self, other: gui.QPolygonF) -> Self:  # |
         return type(self)(self.united(other))
 
     def __eq__(self, other: object) -> bool:

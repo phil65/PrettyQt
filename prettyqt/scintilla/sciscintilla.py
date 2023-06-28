@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import gui, widgets
-from prettyqt.qt import Qsci, QtGui  # type: ignore
+from prettyqt.qt import Qsci  # type: ignore
 from prettyqt.utils import bidict, colors, datatypes
 
 
@@ -249,7 +249,7 @@ class SciScintilla(widgets.AbstractScrollAreaMixin, Qsci.QsciScintilla):
     def append_text(self, text: str, newline: bool = True):
         self.append(f"\n{text}" if newline else text)
 
-    def set_font(self, font: QtGui.QFont):
+    def set_font(self, font: gui.QFont):
         self.setFont(font)
         self.setMarginsFont(font)
         lexer = self._lexer

@@ -1,24 +1,23 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
-class SpacerItem(widgets.LayoutItemMixin, QtWidgets.QSpacerItem):
+class SpacerItem(widgets.LayoutItemMixin, widgets.QSpacerItem):
     def __init__(
         self,
         w: int,
         h: int,
-        h_policy: QtWidgets.QSizePolicy.Policy
+        h_policy: widgets.QSizePolicy.Policy
         | widgets.sizepolicy.SizePolicyStr = "minimum",
-        v_policy: QtWidgets.QSizePolicy.Policy
+        v_policy: widgets.QSizePolicy.Policy
         | widgets.sizepolicy.SizePolicyStr = "minimum",
     ):
-        if isinstance(h_policy, QtWidgets.QSizePolicy.Policy):
+        if isinstance(h_policy, widgets.QSizePolicy.Policy):
             h_pol = h_policy
         else:
             h_pol = widgets.sizepolicy.SIZE_POLICY[h_policy]
-        if isinstance(v_policy, QtWidgets.QSizePolicy.Policy):
+        if isinstance(v_policy, widgets.QSizePolicy.Policy):
             v_pol = v_policy
         else:
             v_pol = widgets.sizepolicy.SIZE_POLICY[v_policy]

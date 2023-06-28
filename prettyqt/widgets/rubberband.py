@@ -3,12 +3,11 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 SHAPE = bidict(
-    line=QtWidgets.QRubberBand.Shape.Line, rectangle=QtWidgets.QRubberBand.Shape.Rectangle
+    line=widgets.QRubberBand.Shape.Line, rectangle=widgets.QRubberBand.Shape.Rectangle
 )
 
 ShapeStr = Literal["line", "rectangle"]
@@ -17,8 +16,8 @@ ShapeStr = Literal["line", "rectangle"]
 class RubberBandMixin(widgets.WidgetMixin):
     def __init__(
         self,
-        shape: ShapeStr | QtWidgets.QRubberBand.Shape,
-        parent: QtWidgets.QWidget | None = None,
+        shape: ShapeStr | widgets.QRubberBand.Shape,
+        parent: widgets.QWidget | None = None,
         **kwargs,
     ):
         shape = SHAPE[shape] if isinstance(shape, str) else shape
@@ -27,7 +26,7 @@ class RubberBandMixin(widgets.WidgetMixin):
     def get_shape(self) -> ShapeStr:
         return SHAPE.inverse[self.shape()]
 
-    def track_widget(self, widget: QtWidgets.QWidget):
+    def track_widget(self, widget: widgets.QWidget):
         from prettyqt import eventfilters
 
         event_catcher = eventfilters.EventCatcher(exclude="paint", parent=widget)
@@ -38,7 +37,7 @@ class RubberBandMixin(widgets.WidgetMixin):
         self.setGeometry(self.parent().rect())
 
 
-class RubberBand(RubberBandMixin, QtWidgets.QRubberBand):
+class RubberBand(RubberBandMixin, widgets.QRubberBand):
     pass
 
 

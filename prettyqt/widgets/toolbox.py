@@ -3,27 +3,26 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import gui, iconprovider, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes, listdelegators
 
 
-class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
+class ToolBox(widgets.FrameMixin, widgets.QToolBox):
     def __getitem__(
         self, index: int | str
-    ) -> QtWidgets.QWidget | listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.BaseListDelegator[widgets.QWidget]:
         match index:
             case int():
                 return self.widget(index)
             case str():
-                result = self.find_child(QtWidgets.QWidget, index)
+                result = self.find_child(widgets.QWidget, index)
                 if result is None:
                     raise KeyError("Widget not found")
                 return result
             case slice():
                 stop = index.stop or self.count()
                 rng = range(index.start or 0, stop, index.step or 1)
-                widgets = [self.widget(i) for i in rng]
-                return listdelegators.BaseListDelegator(widgets)
+                wdgs = [self.widget(i) for i in rng]
+                return listdelegators.BaseListDelegator(wdgs)
             case _:
                 raise TypeError(index)
 
@@ -40,19 +39,19 @@ class ToolBox(widgets.FrameMixin, QtWidgets.QToolBox):
     # def __reduce__(self):
     #     return type(self), (), self.__getstate__()
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget]:
+    def __iter__(self) -> Iterator[widgets.QWidget]:
         return iter(self.get_children())
 
-    def __contains__(self, item: QtWidgets.QWidget):
+    def __contains__(self, item: widgets.QWidget):
         return self.indexOf(item) >= 0
 
-    def get_children(self) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QWidget]:
         widgets = [self.widget(i) for i in range(self.count())]
         return listdelegators.BaseListDelegator(widgets)
 
     def add_widget(
         self,
-        widget: QtWidgets.QWidget,
+        widget: widgets.QWidget,
         title: str | None = None,
         icon: datatypes.IconType = None,
         tooltip: str = "",

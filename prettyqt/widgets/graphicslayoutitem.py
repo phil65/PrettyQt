@@ -3,7 +3,6 @@ from __future__ import annotations
 import functools
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import get_repr
 
 
@@ -34,7 +33,7 @@ class GraphicsLayoutItemMixin:
         self.setSizePolicy(h_policy, v_policy, c)
 
     @set_size_policy.register
-    def _(self, policy: QtWidgets.QSizePolicy):
+    def _(self, policy: widgets.QSizePolicy):
         self.setSizePolicy(policy)
 
     def get_size_policy(self) -> widgets.SizePolicy:
@@ -42,7 +41,7 @@ class GraphicsLayoutItemMixin:
         return widgets.SizePolicy.clone(qpol)
 
 
-class GraphicsLayoutItem(GraphicsLayoutItemMixin, QtWidgets.QGraphicsLayoutItem):
+class GraphicsLayoutItem(GraphicsLayoutItemMixin, widgets.QGraphicsLayoutItem):
     pass
 
 

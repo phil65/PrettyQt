@@ -3,7 +3,6 @@ from __future__ import annotations
 import logging
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 
 logger = logging.getLogger(__name__)
 
@@ -222,7 +221,7 @@ class TableViewMixin(widgets.AbstractItemViewMixin):
         return spans
 
 
-class TableView(TableViewMixin, QtWidgets.QTableView):
+class TableView(TableViewMixin, widgets.QTableView):
     pass
 
 

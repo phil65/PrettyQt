@@ -3,10 +3,9 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 
 
-class StyleOptionSlider(widgets.StyleOptionComplexMixin, QtWidgets.QStyleOptionSlider):
+class StyleOptionSlider(widgets.StyleOptionComplexMixin, widgets.QStyleOptionSlider):
     def is_horizontal(self) -> bool:
         """Check if silder is horizontal.
 

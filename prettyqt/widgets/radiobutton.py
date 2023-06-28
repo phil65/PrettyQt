@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 
-class RadioButton(widgets.AbstractButtonMixin, QtWidgets.QRadioButton):
+class RadioButton(widgets.AbstractButtonMixin, widgets.QRadioButton):
     value_changed = core.Signal(bool)
 
     def __init__(self, *args, **kwargs):

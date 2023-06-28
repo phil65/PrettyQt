@@ -3,11 +3,10 @@ from __future__ import annotations
 import datetime
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import datatypes
 
 
-class TimeEdit(widgets.DateTimeEditMixin, QtWidgets.QTimeEdit):
+class TimeEdit(widgets.DateTimeEditMixin, widgets.QTimeEdit):
     value_changed = core.Signal(datetime.datetime)
 
     def set_range(self, lower: datatypes.TimeType, upper: datatypes.TimeType):

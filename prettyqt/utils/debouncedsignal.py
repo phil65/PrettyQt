@@ -3,7 +3,6 @@ from __future__ import annotations
 import time
 
 from prettyqt import core
-from prettyqt.qt import QtCore
 
 
 class DebouncedSignal:
@@ -18,7 +17,7 @@ class DebouncedSignal:
         self.kwargs = kwargs
 
 
-class SignalMeta(type(QtCore.QObject)):
+class SignalMeta(type(core.QObject)):
     def __new__(cls, name, bases, attrs, **kwargs):
         to_replace = {
             k: (v.args, v.kwargs)

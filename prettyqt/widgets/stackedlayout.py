@@ -3,19 +3,18 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 StackingModeStr = Literal["one", "all"]
 
-STACKING_MODE: bidict[StackingModeStr, QtWidgets.QStackedLayout.StackingMode] = bidict(
-    one=QtWidgets.QStackedLayout.StackingMode.StackOne,
-    all=QtWidgets.QStackedLayout.StackingMode.StackAll,
+STACKING_MODE: bidict[StackingModeStr, widgets.QStackedLayout.StackingMode] = bidict(
+    one=widgets.QStackedLayout.StackingMode.StackOne,
+    all=widgets.QStackedLayout.StackingMode.StackAll,
 )
 
 
-class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):
+class StackedLayout(widgets.LayoutMixin, widgets.QStackedLayout):
     ID = "stacked"
 
     def _get_map(self):
@@ -29,11 +28,11 @@ class StackedLayout(widgets.LayoutMixin, QtWidgets.QStackedLayout):
     def get_stacking_mode(self) -> StackingModeStr:
         return STACKING_MODE.inverse[self.stackingMode()]
 
-    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
+    def __add__(self, other: widgets.QWidget | widgets.QLayout):
         self.add(other)
         return self
 
-    def set_current_widget(self, widget: QtWidgets.QWidget):
+    def set_current_widget(self, widget: widgets.QWidget):
         self.setCurrentWidget(widget)
 
 

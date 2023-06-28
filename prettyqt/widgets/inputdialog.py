@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, datatypes
 
 
-mod = QtWidgets.QInputDialog
+mod = widgets.QInputDialog
 
 InputDialogOptionStr = Literal[
     "no_buttons", "use_listview_for_combobox_items", "use_plaintextedit_for_text_input"
@@ -28,7 +27,7 @@ INPUT_MODE: bidict[InputModeStr, mod.InputMode] = bidict(
 )
 
 
-class InputDialog(widgets.DialogMixin, QtWidgets.QInputDialog):
+class InputDialog(widgets.DialogMixin, widgets.QInputDialog):
     def _get_map(self):
         maps = super()._get_map()
         maps |= {

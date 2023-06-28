@@ -3,20 +3,19 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
 SwipeDirectionStr = Literal["none", "left", "right", "up", "down"]
 
 SWIPE_DIRECTION: bidict[
-    SwipeDirectionStr, QtWidgets.QSwipeGesture.SwipeDirection
+    SwipeDirectionStr, widgets.QSwipeGesture.SwipeDirection
 ] = bidict(
-    none=QtWidgets.QSwipeGesture.SwipeDirection.NoDirection,
-    left=QtWidgets.QSwipeGesture.SwipeDirection.Left,
-    right=QtWidgets.QSwipeGesture.SwipeDirection.Right,
-    up=QtWidgets.QSwipeGesture.SwipeDirection.Up,
-    down=QtWidgets.QSwipeGesture.SwipeDirection.Down,
+    none=widgets.QSwipeGesture.SwipeDirection.NoDirection,
+    left=widgets.QSwipeGesture.SwipeDirection.Left,
+    right=widgets.QSwipeGesture.SwipeDirection.Right,
+    up=widgets.QSwipeGesture.SwipeDirection.Up,
+    down=widgets.QSwipeGesture.SwipeDirection.Down,
 )
 
 HorizontalDirectionStr = Literal["none", "left", "right"]
@@ -41,7 +40,7 @@ class SwipeGestureMixin(widgets.GestureMixin):
         return SWIPE_DIRECTION.inverse[self.verticalDirection()]
 
 
-class SwipeGesture(SwipeGestureMixin, QtWidgets.QSwipeGesture):
+class SwipeGesture(SwipeGestureMixin, widgets.QSwipeGesture):
     pass
 
 

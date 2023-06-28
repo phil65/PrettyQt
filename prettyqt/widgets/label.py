@@ -5,11 +5,10 @@ import os
 from typing_extensions import Self
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
 from prettyqt.utils import colors, datatypes, get_repr
 
 
-class Label(widgets.FrameMixin, QtWidgets.QLabel):
+class Label(widgets.FrameMixin, widgets.QLabel):
     elision_changed = core.Signal(bool)
     clicked = core.Signal()
 
@@ -19,7 +18,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
         self.openExternalLinks()
         self._is_elided = False
 
-    def mouseReleaseEvent(self, ev: QtGui.QMouseEvent):
+    def mouseReleaseEvent(self, ev: gui.QMouseEvent):
         if ev.button() == constants.MouseButton.LeftButton:
             self.clicked.emit()
         return super().mouseReleaseEvent(ev)
@@ -47,11 +46,11 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     #         #    but don't automatically adapt window size to label width on UI update!
     #         #    (somehow calculate minimumSizeHint + sizeHint with font metrics???)
     #         fm = self.fontMetrics()
-    #         size = QtCore.QSize(fm.width("..."), fm.height())
+    #         size = core.QSize(fm.width("..."), fm.height())
     #         return size
     #     else:
     #         size = self.minimumSizeHint()
-    #         return QtCore.QSize(size.width() + 13, size.height())
+    #         return core.QSize(size.width() + 13, size.height())
 
     # # adapted from https://www.mimec.org/blog/status-bar-and-elided-label
     # def paintEvent(self, event):
@@ -65,7 +64,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
     #             self.text(), self._elide_mode, rect.width()
     #         )
 
-    #         style_option = QtWidgets.QStyleOption()
+    #         style_option = widgets.QStyleOption()
     #         style_option.initFrom(self)
 
     #         self.style().drawItemText(
@@ -113,14 +112,14 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
                             line, self._elide_mode, self.width()
                         )
                         painter.drawText(
-                            QtCore.QRect(0, current_y, self.width(), self.height()),
+                            core.QRect(0, current_y, self.width(), self.height()),
                             int(self.alignment()),
                             elided_line,
                         )
                         did_elide = True
                     else:
                         painter.drawText(
-                            QtCore.QRect(0, current_y, self.width(), self.height()),
+                            core.QRect(0, current_y, self.width(), self.height()),
                             int(self.alignment()),
                             line,
                         )
@@ -274,7 +273,7 @@ class Label(widgets.FrameMixin, QtWidgets.QLabel):
 
     @classmethod
     def image_from_path(
-        cls, path: datatypes.PathType, parent: QtWidgets.QWidget | None = None
+        cls, path: datatypes.PathType, parent: widgets.QWidget | None = None
     ) -> Self:
         pixmap = gui.Pixmap.from_file(path)
         label = cls(parent=parent)

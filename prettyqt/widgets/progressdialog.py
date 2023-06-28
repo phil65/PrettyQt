@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
-class ProgressDialog(widgets.DialogMixin, QtWidgets.QProgressDialog):
+class ProgressDialog(widgets.DialogMixin, widgets.QProgressDialog):
     """Progress dialog.
 
-    Wrapper for QtWidgets.QProgressDialog
+    Wrapper for widgets.QProgressDialog
     """
 
-    def __init__(self, parent: QtWidgets.QWidget | None = None):
+    def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent=parent)
 
         progress_bar = widgets.ProgressBar()

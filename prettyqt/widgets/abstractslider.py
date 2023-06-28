@@ -3,7 +3,6 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
@@ -18,15 +17,15 @@ SliderActionStr = Literal[
     "move",
 ]
 
-SLIDER_ACTION: bidict[SliderActionStr, QtWidgets.QAbstractSlider.SliderAction] = bidict(
-    none=QtWidgets.QAbstractSlider.SliderAction.SliderNoAction,
-    single_step_add=QtWidgets.QAbstractSlider.SliderAction.SliderSingleStepAdd,
-    single_step_sub=QtWidgets.QAbstractSlider.SliderAction.SliderSingleStepSub,
-    page_step_add=QtWidgets.QAbstractSlider.SliderAction.SliderPageStepAdd,
-    page_step_sub=QtWidgets.QAbstractSlider.SliderAction.SliderPageStepSub,
-    to_minimum=QtWidgets.QAbstractSlider.SliderAction.SliderToMinimum,
-    to_maximum=QtWidgets.QAbstractSlider.SliderAction.SliderToMaximum,
-    move=QtWidgets.QAbstractSlider.SliderAction.SliderMove,
+SLIDER_ACTION: bidict[SliderActionStr, widgets.QAbstractSlider.SliderAction] = bidict(
+    none=widgets.QAbstractSlider.SliderAction.SliderNoAction,
+    single_step_add=widgets.QAbstractSlider.SliderAction.SliderSingleStepAdd,
+    single_step_sub=widgets.QAbstractSlider.SliderAction.SliderSingleStepSub,
+    page_step_add=widgets.QAbstractSlider.SliderAction.SliderPageStepAdd,
+    page_step_sub=widgets.QAbstractSlider.SliderAction.SliderPageStepSub,
+    to_minimum=widgets.QAbstractSlider.SliderAction.SliderToMinimum,
+    to_maximum=widgets.QAbstractSlider.SliderAction.SliderToMaximum,
+    move=widgets.QAbstractSlider.SliderAction.SliderMove,
 )
 
 
@@ -101,7 +100,7 @@ class AbstractSliderMixin(widgets.WidgetMixin):
 
     def set_repeat_action(
         self,
-        action: SliderActionStr | QtWidgets.QAbstractSlider.SliderAction,
+        action: SliderActionStr | widgets.QAbstractSlider.SliderAction,
         threshold: int = 500,
         repeat_time: int = 50,
     ):
@@ -123,7 +122,7 @@ class AbstractSliderMixin(widgets.WidgetMixin):
         return SLIDER_ACTION.inverse[self.repeatAction()]
 
     def trigger_action(
-        self, action: SliderActionStr | QtWidgets.QAbstractSlider.SliderAction
+        self, action: SliderActionStr | widgets.QAbstractSlider.SliderAction
     ):
         """Trigger slider action."""
         self.triggerAction(SLIDER_ACTION.get_enum_value(action))
@@ -146,7 +145,7 @@ class AbstractSliderMixin(widgets.WidgetMixin):
             self.rangeChanged.disconnect(self.on_scrollbar_range_changed)
 
 
-class AbstractSlider(AbstractSliderMixin, QtWidgets.QAbstractSlider):
+class AbstractSlider(AbstractSliderMixin, widgets.QAbstractSlider):
     pass
 
 

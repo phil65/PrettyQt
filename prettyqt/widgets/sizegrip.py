@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 
 
-class SizeGrip(widgets.WidgetMixin, QtWidgets.QSizeGrip):
+class SizeGrip(widgets.WidgetMixin, widgets.QSizeGrip):
     pass
 
 

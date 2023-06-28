@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing_extensions import Self
 
 from prettyqt import widgets
-from prettyqt.qt import QtCore, QtGui, QtWidgets
+from prettyqt.qt import QtCore, QtGui
 
 
 TYPES = {
@@ -41,7 +41,7 @@ TYPES = {
     QtGui.QRegion: QtCore.QMetaType.Type.QRegion,
     QtGui.QImage: QtCore.QMetaType.Type.QImage,
     QtGui.QKeySequence: QtCore.QMetaType.Type.QKeySequence,
-    QtWidgets.QSizePolicy: QtCore.QMetaType.Type.QSizePolicy,
+    widgets.QSizePolicy: QtCore.QMetaType.Type.QSizePolicy,
     QtGui.QPixmap: QtCore.QMetaType.Type.QPixmap,
     QtCore.QLocale: QtCore.QMetaType.Type.QLocale,
     QtGui.QBitmap: QtCore.QMetaType.Type.QBitmap,
@@ -61,9 +61,9 @@ TYPES = {
 }
 
 
-def get_creator_class(editor_cls: type[QtWidgets.QWidget], property_name: str = ""):
+def get_creator_class(editor_cls: type[widgets.QWidget], property_name: str = ""):
     class EditorCreator(widgets.ItemEditorCreatorBase):
-        def createWidget(self, parent: QtWidgets.QWidget) -> QtWidgets.QWidget:
+        def createWidget(self, parent: widgets.QWidget) -> widgets.QWidget:
             return editor_cls(parent=parent)
 
         def valuePropertyName(self) -> QtCore.QByteArray:
@@ -72,13 +72,13 @@ def get_creator_class(editor_cls: type[QtWidgets.QWidget], property_name: str = 
     return EditorCreator
 
 
-class ItemEditorFactory(QtWidgets.QItemEditorFactory):
+class ItemEditorFactory(widgets.QItemEditorFactory):
     creators = []
 
     @classmethod
     def register_default_editor(
         cls,
-        editor_cls: type[QtWidgets.QWidget],
+        editor_cls: type[widgets.QWidget],
         typ: int | None | type = None,
         property_name: str = "",
     ):
@@ -99,7 +99,7 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
 
     def register_editor(
         self,
-        editor_cls: type[QtWidgets.QWidget],
+        editor_cls: type[widgets.QWidget],
         typ: int | None | type = None,
         property_name: str = "",
     ):
@@ -133,7 +133,7 @@ class ItemEditorFactory(QtWidgets.QItemEditorFactory):
         # factory.register_editor(custom_widgets.EnumComboBox, 20001, "value")
         factory.register_editor(custom_widgets.RegionEdit, QtGui.QRegion, "value")
         factory.register_editor(
-            custom_widgets.SizePolicyEdit, QtWidgets.QSizePolicy, "value"
+            custom_widgets.SizePolicyEdit, widgets.QSizePolicy, "value"
         )
         factory.register_editor(
             widgets.KeySequenceEdit, QtGui.QKeySequence, "keySequence"

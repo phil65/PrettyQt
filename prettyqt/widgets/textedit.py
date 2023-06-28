@@ -3,29 +3,28 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict, colors, datatypes, texteditselecter
 
 
 AutoFormattingStr = Literal["none", "bullet_list", "all"]
 
 AUTO_FORMATTING: bidict[
-    AutoFormattingStr, QtWidgets.QTextEdit.AutoFormattingFlag
+    AutoFormattingStr, widgets.QTextEdit.AutoFormattingFlag
 ] = bidict(
-    none=QtWidgets.QTextEdit.AutoFormattingFlag.AutoNone,
-    bullet_list=QtWidgets.QTextEdit.AutoFormattingFlag.AutoBulletList,
-    all=QtWidgets.QTextEdit.AutoFormattingFlag.AutoAll,
+    none=widgets.QTextEdit.AutoFormattingFlag.AutoNone,
+    bullet_list=widgets.QTextEdit.AutoFormattingFlag.AutoBulletList,
+    all=widgets.QTextEdit.AutoFormattingFlag.AutoAll,
 )
 
 LineWrapModeStr = Literal[
     "none", "widget_width", "fixed_pixel_width", "fixed_column_width"
 ]
 
-LINE_WRAP_MODE: bidict[LineWrapModeStr, QtWidgets.QTextEdit.LineWrapMode] = bidict(
-    none=QtWidgets.QTextEdit.LineWrapMode.NoWrap,
-    widget_width=QtWidgets.QTextEdit.LineWrapMode.WidgetWidth,
-    fixed_pixel_width=QtWidgets.QTextEdit.LineWrapMode.FixedPixelWidth,
-    fixed_column_width=QtWidgets.QTextEdit.LineWrapMode.FixedColumnWidth,
+LINE_WRAP_MODE: bidict[LineWrapModeStr, widgets.QTextEdit.LineWrapMode] = bidict(
+    none=widgets.QTextEdit.LineWrapMode.NoWrap,
+    widget_width=widgets.QTextEdit.LineWrapMode.WidgetWidth,
+    fixed_pixel_width=widgets.QTextEdit.LineWrapMode.FixedPixelWidth,
+    fixed_column_width=widgets.QTextEdit.LineWrapMode.FixedColumnWidth,
 )
 
 
@@ -91,7 +90,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         self.setTextColor(color)
 
     def set_line_wrap_mode(
-        self, mode: LineWrapModeStr | QtWidgets.QTextEdit.LineWrapMode
+        self, mode: LineWrapModeStr | widgets.QTextEdit.LineWrapMode
     ):
         """Set line wrap mode.
 
@@ -109,7 +108,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         return LINE_WRAP_MODE.inverse[self.lineWrapMode()]
 
     def set_auto_formatting(
-        self, mode: AutoFormattingStr | QtWidgets.QTextEdit.AutoFormattingFlag
+        self, mode: AutoFormattingStr | widgets.QTextEdit.AutoFormattingFlag
     ):
         """Set auto formatting mode.
 
@@ -145,7 +144,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         return gui.textoption.WORD_WRAP_MODE.inverse[self.wordWrapMode()]
 
 
-class TextEdit(TextEditMixin, QtWidgets.QTextEdit):
+class TextEdit(TextEditMixin, widgets.QTextEdit):
     pass
 
 

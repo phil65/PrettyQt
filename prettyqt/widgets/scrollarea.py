@@ -3,25 +3,24 @@ from __future__ import annotations
 from typing import TypeVar
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import listdelegators
 
-T = TypeVar("T", bound=QtWidgets.QWidget)
+T = TypeVar("T", bound=widgets.QWidget)
 
 
-class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
+class ScrollArea(widgets.AbstractScrollAreaMixin, widgets.QScrollArea):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         viewport = widgets.Widget(self, object_name=f"{type(self).__name__}_viewport")
         self.setViewport(viewport)
 
-    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout | list):
+    def __add__(self, other: widgets.QWidget | widgets.QLayout | list):
         self.add(other)
         return self
 
     def get_visible_widgets(
         self,
-        typ: type[T] = QtWidgets.QWidget,
+        typ: type[T] = widgets.QWidget,
         partial_allowed: bool = True,
         margin: int = 10,
         recursive: bool = True,
@@ -46,10 +45,10 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
                 found.append(w)
         return listdelegators.BaseListDelegator(found)
 
-    def get_children(self) -> listdelegators.BaseListDelegator[QtWidgets.QWidget]:
+    def get_children(self) -> listdelegators.BaseListDelegator[widgets.QWidget]:
         return self.widget().layout().get_children()
 
-    def set_widget(self, widget: QtWidgets.QWidget):
+    def set_widget(self, widget: widgets.QWidget):
         self.setWidget(widget)
 
     def add_widget(self, *args, **kwargs):
@@ -60,15 +59,15 @@ class ScrollArea(widgets.AbstractScrollAreaMixin, QtWidgets.QScrollArea):
 
     def add(
         self,
-        item: QtWidgets.QWidget | QtWidgets.QLayout | list,
+        item: widgets.QWidget | widgets.QLayout | list,
         stretch: float | None = None,
     ):
         match item:
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 self.add_widget(item)
                 if stretch:
                     self.widget().layout().setStretchFactor(self.count() - 1, stretch)
-            case QtWidgets.QLayout():
+            case widgets.QLayout():
                 widget = widgets.Widget(self)
                 widget.set_layout(item)
                 self.add_widget(widget)

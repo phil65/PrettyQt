@@ -3,11 +3,10 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict
 
 
-mod = QtWidgets.QStyleOptionToolBox
+mod = widgets.QStyleOptionToolBox
 
 
 SelectedPositionStr = Literal["not_adjacent", "next_is_selected", "previous_is_selected"]
@@ -29,7 +28,7 @@ TAB_POSITION: bidict[TabPositionStr, mod.TabPosition] = bidict(
 )
 
 
-class StyleOptionToolBox(widgets.StyleOptionMixin, QtWidgets.QStyleOptionToolBox):
+class StyleOptionToolBox(widgets.StyleOptionMixin, widgets.QStyleOptionToolBox):
     def set_selected_position(self, position: SelectedPositionStr):
         self.selectedPosition = SELECTED_POSITION[position]
 

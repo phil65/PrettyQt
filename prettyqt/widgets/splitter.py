@@ -6,7 +6,6 @@ from typing import overload
 from typing_extensions import Self
 
 from prettyqt import constants, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import listdelegators
 
 
@@ -20,49 +19,49 @@ class SplitterMixin(widgets.FrameMixin):
         self.setHandleWidth(10)
 
     @overload
-    def __getitem__(self, index: int | str) -> QtWidgets.QWidget:
+    def __getitem__(self, index: int | str) -> widgets.QWidget:
         ...
 
     @overload
     def __getitem__(
         self, index: slice
-    ) -> listdelegators.SplitterDelegator[QtWidgets.QWidget]:
+    ) -> listdelegators.SplitterDelegator[widgets.QWidget]:
         ...
 
     def __getitem__(
         self, index: int | str | slice
-    ) -> QtWidgets.QWidget | listdelegators.SplitterDelegator[QtWidgets.QWidget]:
+    ) -> widgets.QWidget | listdelegators.SplitterDelegator[widgets.QWidget]:
         match index:
             case int():
                 if index >= self.count():
                     raise IndexError(index)
                 return self.widget(index)
             case str():
-                result = self.find_child(QtWidgets.QWidget, index)
+                result = self.find_child(widgets.QWidget, index)
                 if result is None:
                     raise KeyError("Widget not found")
                 return result
             case slice():
                 stop = index.stop or self.count()
                 rng = range(index.start or 0, stop, index.step or 1)
-                widgets = [self.widget(i) for i in rng]
-                return listdelegators.SplitterDelegator(widgets, parent=self)
+                wdgs = [self.widget(i) for i in rng]
+                return listdelegators.SplitterDelegator(wdgs, parent=self)
             case _:
                 raise TypeError(index)
 
-    def __setitem__(self, index: int, value: QtWidgets.QWidget):
+    def __setitem__(self, index: int, value: widgets.QWidget):
         self.replaceWidget(index, value)
 
-    def __iter__(self) -> Iterator[QtWidgets.QWidget]:
+    def __iter__(self) -> Iterator[widgets.QWidget]:
         return iter(self.get_widgets())
 
     def __len__(self) -> int:
         return self.count()
 
-    def __contains__(self, item: QtWidgets.QWidget):
+    def __contains__(self, item: widgets.QWidget):
         return self.indexOf(item) >= 0
 
-    def __add__(self, other: QtWidgets.QWidget | QtWidgets.QLayout):
+    def __add__(self, other: widgets.QWidget | widgets.QLayout):
         self.add(other)
         return self
 
@@ -85,17 +84,17 @@ class SplitterMixin(widgets.FrameMixin):
     #     for i in range(len(sizes)):
     #         self.setStretchFactor(i, sizes[i])
 
-    def get_widgets(self) -> listdelegators.SplitterDelegator[QtWidgets.QWidget]:
+    def get_widgets(self) -> listdelegators.SplitterDelegator[widgets.QWidget]:
         widgets = [self.widget(i) for i in range(self.count())]
         return listdelegators.SplitterDelegator(widgets, parent=self)
 
     def add_widget(
         self,
-        widget: QtWidgets.QWidget,
+        widget: widgets.QWidget,
         stretch: int | None = None,
         collapsible: bool = True,
         position: int | None = None,
-    ) -> QtWidgets.QWidget:
+    ) -> widgets.QWidget:
         if position is None:
             self.addWidget(widget)
         else:
@@ -108,7 +107,7 @@ class SplitterMixin(widgets.FrameMixin):
 
     def add_layout(
         self,
-        layout: QtWidgets.QLayout,
+        layout: widgets.QLayout,
         stretch: int | None = None,
         collapsible: bool = True,
         position: int | None = None,
@@ -121,15 +120,15 @@ class SplitterMixin(widgets.FrameMixin):
 
     def add(
         self,
-        item: QtWidgets.QWidget
-        | QtWidgets.QLayout
-        | list[QtWidgets.QWidget | QtWidgets.QLayout],
+        item: widgets.QWidget
+        | widgets.QLayout
+        | list[widgets.QWidget | widgets.QLayout],
         stretch: int | None = None,
     ):
         match item:
-            case QtWidgets.QWidget():
+            case widgets.QWidget():
                 self.add_widget(item, stretch=stretch)
-            case QtWidgets.QLayout():
+            case widgets.QLayout():
                 self.add_layout(item)
             case list():
                 for i in item:
@@ -139,9 +138,9 @@ class SplitterMixin(widgets.FrameMixin):
     @classmethod
     def from_widgets(
         cls,
-        *widgets: QtWidgets.QWidget,
+        *widgets: widgets.QWidget,
         horizontal: bool = False,
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
     ) -> Self:
         splitter = cls("horizontal" if horizontal else "vertical", parent=parent)
         for widget in widgets:
@@ -168,7 +167,7 @@ class SplitterMixin(widgets.FrameMixin):
         return constants.ORIENTATION.inverse[self.orientation()]
 
 
-class Splitter(SplitterMixin, QtWidgets.QSplitter):
+class Splitter(SplitterMixin, widgets.QSplitter):
     pass
 
 

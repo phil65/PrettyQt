@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, gui, widgets
-from prettyqt.qt import QtWidgets
 
 
 class ScrollBarMixin(widgets.AbstractSliderMixin):
@@ -10,7 +9,7 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
     def __init__(
         self,
         orientation: constants.Orientation | constants.OrientationStr = "horizontal",
-        parent: QtWidgets.QWidget | None = None,
+        parent: widgets.QWidget | None = None,
     ):
         if isinstance(orientation, constants.Orientation):
             ori = orientation
@@ -41,7 +40,7 @@ class ScrollBarMixin(widgets.AbstractSliderMixin):
         return self.maximum() > 0
 
 
-class ScrollBar(ScrollBarMixin, QtWidgets.QScrollBar):
+class ScrollBar(ScrollBarMixin, widgets.QScrollBar):
     pass
 
 
@@ -51,7 +50,7 @@ class SmoothScrollBar(ScrollBar):
     def __init__(
         self,
         orientation: constants.Orientation | constants.OrientationStr = "horizontal",
-        parent: QtWidgets.QAbstractScrollArea | None = None,
+        parent: widgets.QAbstractScrollArea | None = None,
         animation_duration: int = 500,
         easing: core.easingcurve.TypeStr | core.QEasingCurve.Type = "out_cubic",
         trigger: bool = False,

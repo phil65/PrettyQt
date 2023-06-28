@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from prettyqt import constants, gui
-from prettyqt.qt import QtGui
 
 
-class PainterPathStroker(QtGui.QPainterPathStroker):
+class PainterPathStroker(gui.QPainterPathStroker):
     def set_cap_style(self, style: constants.CapStyleStr | constants.PenCapStyle):
         """Set cap style to use.
 
@@ -37,7 +36,7 @@ class PainterPathStroker(QtGui.QPainterPathStroker):
         """
         return constants.JOIN_STYLE.inverse[self.joinStyle()]
 
-    def create_stroke(self, path: QtGui.QPainterPath) -> gui.PainterPath:
+    def create_stroke(self, path: gui.QPainterPath) -> gui.PainterPath:
         return gui.PainterPath(self.createStroke(path))
 
 

@@ -1,12 +1,11 @@
 from __future__ import annotations
 
 from prettyqt import core, widgets
-from prettyqt.qt import QtWidgets
 
 MAX_VAL = 2147483647
 
 
-class SpinBox(widgets.AbstractSpinBoxMixin, QtWidgets.QSpinBox):
+class SpinBox(widgets.AbstractSpinBoxMixin, widgets.QSpinBox):
     value_changed = core.Signal(int)
 
     def __init__(self, *args, maximum: int = MAX_VAL, **kwargs):

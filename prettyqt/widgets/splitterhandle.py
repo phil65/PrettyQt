@@ -1,16 +1,15 @@
 from __future__ import annotations
 
 from prettyqt import constants, core, widgets
-from prettyqt.qt import QtWidgets
 
 
-class SplitterHandle(widgets.WidgetMixin, QtWidgets.QSplitterHandle):
+class SplitterHandle(widgets.WidgetMixin, widgets.QSplitterHandle):
     double_clicked = core.Signal(object)
 
     def __init__(
         self,
         orientation: constants.OrientationStr | constants.Orientation,
-        parent: QtWidgets.QSplitter,
+        parent: widgets.QSplitter,
         **kwargs,
     ):
         ori = (

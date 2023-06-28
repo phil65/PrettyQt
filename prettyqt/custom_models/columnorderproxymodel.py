@@ -34,7 +34,7 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
             source_index.row(), proxy_column, source_index.internalPointer()
         )
 
-    def sibling(self, row: int, column: int, index: core.ModelIndex):
+    def sibling(self, row: int, column: int, index: core.ModelIndex) -> core.ModelIndex:
         if column >= len(self._column_order):
             return core.ModelIndex()
         return self.index(row, column, index.parent())
@@ -46,11 +46,10 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
         role: constants.ItemDataRole,
     ):
         if orientation == constants.HORIZONTAL:
-            source_col = self._column_order[section]
-            return self.sourceModel().headerData(source_col, orientation, role)
+            section = self._column_order[section]
         return self.sourceModel().headerData(section, orientation, role)
 
-    def hasChildren(self, parent_index: core.ModelIndex):
+    def hasChildren(self, parent_index: core.ModelIndex) -> bool:
         if self.sourceModel() is None or parent_index.column() > 0:
             return False
         source_parent = self.mapToSource(parent_index).sibling(parent_index.row(), 0)
@@ -73,10 +72,10 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
             return core.ModelIndex()
         return self.createIndex(row, column, source_index.internalPointer())
 
-    def columnCount(self, index: core.ModelIndex):
+    def columnCount(self, index: core.ModelIndex) -> int:
         return len(self._column_order)
 
-    def rowCount(self, index: core.ModelIndex):
+    def rowCount(self, index: core.ModelIndex) -> int:
         if self.sourceModel() is None or index.column() > 0:
             return 0
         source_parent = self.mapToSource(index).sibling(index.row(), 0)

@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import core, gui, widgets
-from prettyqt.qt import QtWidgets
 from prettyqt.utils import get_repr
 
 
@@ -38,7 +37,7 @@ class PushButtonMixin(widgets.AbstractButtonMixin):
         self.setChecked(self._action.isChecked())
 
 
-class PushButton(PushButtonMixin, QtWidgets.QPushButton):
+class PushButton(PushButtonMixin, widgets.QPushButton):
     pass
 
 
