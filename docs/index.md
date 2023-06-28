@@ -16,6 +16,7 @@
   - Large set of validators, syntax highlighters, models and much more.
 
 PrettyQt basically is a wrapper for the whole Qt API (either on top of PySide6 or PyQt6).
+Perhaps it can be seen as a small python equivalent of KDE.
 
 The library contains a tree of mixins, with one mixin for each Qt class.
 These mixins also inherit from each other and are applied to the Qt classes.
@@ -93,6 +94,7 @@ almost every class from Qt is covered.
 - QtStateMachine (-> prettyqt.statemachine)
 - QtSvg (-> prettyqt.svg)
 - QtSvgWidgets (-> prettyqt.svgwidgets)
+- QtTest (-> prettyqt.test)
 - QtTextToSpeech (-> prettyqt.texttospeech)
 - QtWebChannel (-> prettyqt.webchannel)
 - QtWebEngineCore (-> prettyqt.webenginecore)
