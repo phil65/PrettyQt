@@ -5,7 +5,11 @@ from prettyqt import constants, core, custom_widgets, widgets
 
 logger = logging.getLogger(__name__)
 
-BOOL_ITEMS = {None: "Show all", True: "Show True", False: "Show False"}
+BOOL_ITEMS = {
+    None: "Show all",
+    constants.CheckState.Checked: "Show True",
+    constants.CheckState.Unchecked: "Show False",
+}
 
 
 class FilterHeader(widgets.HeaderView):
