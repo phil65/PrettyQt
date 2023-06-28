@@ -151,8 +151,8 @@ class StandardItemModel(core.AbstractItemModelMixin, gui.QStandardItemModel):
         model = cls(**kwargs)
         model.setHorizontalHeaderLabels(list(dct.keys()))
         for column, v in enumerate(dct.values()):
-            for row, item in enumerate(v):
-                item = gui.StandardItem(str(item))
+            for row, label in enumerate(v):
+                item = gui.StandardItem(str(label))
                 model.setItem(row, column, item)
         return model
 
