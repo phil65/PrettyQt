@@ -69,6 +69,7 @@ from .subsetfilterproxymodel import SubsetFilterProxyModel
 from .valuefilterproxymodel import ValueFilterProxyModel
 from .rangefilterproxymodel import RangeFilterProxyModel
 from .appearanceproxymodel import AppearanceProxyModel
+from .changeheadersproxymodel import ChangeHeadersProxyModel
 from .columnjoinerproxymodel import ColumnJoinerProxyModel
 from .highlightcurrentproxymodel import HighlightCurrentProxyModel
 from .highlightmouseproxymodel import HighlightMouseProxyModel
@@ -124,6 +125,7 @@ __all__ = [
     "MeltProxyModel",
     "ColumnOrderProxyModel",
     "SliceAppearanceProxyModel",
+    "ChangeHeadersProxyModel",
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",
     "SliceChangeFlagsProxyModel",

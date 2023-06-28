@@ -262,6 +262,17 @@ class Proxyfier:
         proxy.add_mapping(header=header, formatter=formatter, flags=flags)
         return proxy
 
+    def change_headers(
+        self,
+        headers: list[Any] | dict[int, Any],
+        orientation: constants.Orientation
+        | constants.OrientationStr = constants.HORIZONTAL,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
+        return self.get_proxy(
+            "change_headers", headers=headers, role=role, orientation=orientation
+        )
+
     def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
         Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
         proxy_instance = Klass(parent=self._widget, **kwargs)
