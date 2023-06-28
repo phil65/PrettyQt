@@ -41,8 +41,10 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
             return None
         field = self._fields[index.row()]
         match role, index.column():
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 0:
+            case constants.DISPLAY_ROLE, 0:
                 return repr(getattr(self._instance, field.name))
+            case constants.EDIT_ROLE, 0:
+                return getattr(self._instance, field.name)
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)

@@ -137,7 +137,7 @@ class WidgetHierarchyModel(custom_models.TreeModel):
         prop = self.props[index.column()]
         widget = self.data_by_index(index).obj
         match role:
-            case constants.USER_ROLE:
+            case constants.EDIT_ROLE | constants.USER_ROLE:
                 with self.change_layout():
                     prop.write(widget, value)
                 # self.update_row(index.row())

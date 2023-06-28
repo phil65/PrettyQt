@@ -1,6 +1,10 @@
 from __future__ import annotations
 
+import logging
+
 from prettyqt import constants, custom_models, gui
+
+logger = logging.getLogger(__name__)
 
 
 class NameColumn(custom_models.ColumnItem):
@@ -8,14 +12,25 @@ class NameColumn(custom_models.ColumnItem):
     doc = "Action name"
     editable = True
 
-    def get_data(self, item: gui.QAction, role: constants.ItemDataRole):
+    def get_data(
+        self,
+        item: gui.QAction,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role:
-            case constants.DISPLAY_ROLE:
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 return item.text()
+            case constants.DECORATION_ROLE:
+                return item.icon()
 
-    def set_data(self, item: gui.QAction, value, role: constants.ItemDataRole):
+    def set_data(
+        self,
+        item: gui.QAction,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ):
         match role:
-            case constants.USER_ROLE | constants.EDIT_ROLE:
+            case constants.EDIT_ROLE:
                 item.setText(value)
                 return True
 
@@ -25,14 +40,23 @@ class ToolTipColumn(custom_models.ColumnItem):
     doc = "ToolTip"
     editable = True
 
-    def get_data(self, item: gui.QAction, role: constants.ItemDataRole):
+    def get_data(
+        self,
+        item: gui.QAction,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role:
-            case constants.DISPLAY_ROLE:
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 return item.toolTip()
 
-    def set_data(self, item: gui.QAction, value, role: constants.ItemDataRole):
+    def set_data(
+        self,
+        item: gui.QAction,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ):
         match role:
-            case constants.USER_ROLE | constants.EDIT_ROLE:
+            case constants.EDIT_ROLE:
                 item.setToolTip(value)
                 return True
 
@@ -41,16 +65,25 @@ class ShortcutColumn(custom_models.ColumnItem):
     name = "Shortcut"
     editable = True
 
-    def get_data(self, item: gui.QAction, role: constants.ItemDataRole):
+    def get_data(
+        self,
+        item: gui.QAction,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.shortcut().toString()
-            case constants.USER_ROLE | constants.EDIT_ROLE:
+            case constants.EDIT_ROLE:
                 return item.shortcut()
 
-    def set_data(self, item: gui.QAction, value, role: constants.ItemDataRole):
+    def set_data(
+        self,
+        item: gui.QAction,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ):
         match role:
-            case constants.USER_ROLE | constants.EDIT_ROLE:
+            case constants.EDIT_ROLE:
                 item.setShortcut(value)
                 return True
 
@@ -59,16 +92,25 @@ class PriorityColumn(custom_models.ColumnItem):
     name = "Priority"
     editable = True
 
-    def get_data(self, item: gui.QAction, role: constants.ItemDataRole):
+    def get_data(
+        self,
+        item: gui.QAction,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         match role:
             case constants.DISPLAY_ROLE:
                 return gui.action.PRIORITIES.inverse[item.priority()]
-            case constants.USER_ROLE:
+            case constants.EDIT_ROLE:
                 return item.priority()
 
-    def set_data(self, item: gui.QAction, value, role: constants.ItemDataRole):
+    def set_data(
+        self,
+        item: gui.QAction,
+        value,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
+    ):
         match role:
-            case constants.USER_ROLE:
+            case constants.EDIT_ROLE:
                 item.setPriority(value)
                 return True
 
@@ -76,22 +118,39 @@ class PriorityColumn(custom_models.ColumnItem):
 class CheckStateColumn(custom_models.ColumnItem):
     name = "CheckState"
 
-    def get_data(self, item: gui.QAction, role: constants.ItemDataRole):
+    def get_data(
+        self,
+        item: gui.QAction,
+        role: constants.ItemDataRole = constants.CHECKSTATE_ROLE,
+    ):
         match role:
             case constants.CHECKSTATE_ROLE:
-                return item.isChecked()
+                return item.isChecked() if item.isCheckable() else None
+        return None
 
-    def set_data(self, item: gui.QAction, value, role: constants.ItemDataRole):
+    def set_data(
+        self,
+        item: gui.QAction,
+        value,
+        role: constants.ItemDataRole = constants.CHECKSTATE_ROLE,
+    ):
         match role:
             case constants.CHECKSTATE_ROLE:
-                item.setChecked(value)
+                item.setChecked(not item.isChecked())
                 return True
+        return False
+
+    def get_flags(self, item):
+        DEFAULT = constants.IS_SELECTABLE | constants.IS_ENABLED
+        return DEFAULT | constants.IS_CHECKABLE if item.isCheckable() else DEFAULT
 
 
 class UsageCountColumn(custom_models.ColumnItem):
     name = "Usage count"
 
-    def get_data(self, item: gui.QAction, role: constants.ItemDataRole):
+    def get_data(
+        self, item: gui.QAction, role: constants.ItemDataRole = constants.DISPLAY_ROLE
+    ):
         match role:
             case constants.DISPLAY_ROLE if hasattr(item, "usage_count"):
                 return item.usage_count
@@ -102,8 +161,8 @@ class ActionsModel(custom_models.ColumnTableModel):
         NameColumn,
         ToolTipColumn,
         ShortcutColumn,
-        PriorityColumn,
         CheckStateColumn,
+        PriorityColumn,
         UsageCountColumn,
     ]
 
@@ -126,31 +185,42 @@ if __name__ == "__main__":
     view = widgets.TreeView()
     actions = [
         gui.Action(
-            text="super duper action",
+            text="Some nice Qt Action",
             shortcut="Ctrl+A",
-            tool_tip="some Tooltip text",
+            tool_tip="wonderful tooltip.",
             icon="mdi.folder",
             triggered=lambda: print("test"),
         ),
         gui.Action(
-            text="this is an action",
+            text="Another Qt action",
             shortcut="Ctrl+B",
-            tool_tip="Tooltip",
+            tool_tip="wonderful tooltip.",
             icon="mdi.folder-outline",
-            checked=True,
+        ),
+        gui.Action(
+            text="...and another one",
+            shortcut="Ctrl+Alt+A",
+            tool_tip="wonderful tooltip.",
+            icon="mdi.information",
             checkable=True,
         ),
         gui.Action(
-            text="another one",
-            shortcut="Ctrl+Alt+A",
-            tool_tip="Some longer tool_tippp",
-            icon="mdi.folder",
+            text="....even more!",
+            shortcut="Ctrl+Alt+C",
+            tool_tip="wonderful tooltip.",
+            icon="mdi.download",
+            checkable=True,
+            checked=True,
         ),
-        gui.Action(text="a", shortcut="Ctrl+A", tool_tip="Tooltip", icon="mdi.folder"),
     ]
+    # actions[0].trigger()
+    # actions[0].trigger()
+    # actions[0].trigger()
+    # actions[1].trigger()
     model = ActionsModel(actions, parent=view)
     view.setModel(model)
     view.resize(640, 480)
+    view.set_delegate("variant")
     view.set_selection_behavior("rows")
     view.adapt_sizes()
     view.show()

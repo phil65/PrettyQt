@@ -47,8 +47,10 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE, 0:
+            case constants.DISPLAY_ROLE, 0:
                 return repr(getattr(self._instance, field.name))
+            case constants.EDIT_ROLE, 0:
+                return getattr(self._instance, field.name)
             case constants.DISPLAY_ROLE, 1:
                 return field.type
             case constants.FONT_ROLE, 1:

@@ -3,14 +3,20 @@ from __future__ import annotations
 from prettyqt import constants, custom_models, gui
 
 
-class NameColumn(custom_models.ColumnItem):
-    name = "Name"
-    doc = "WhatsThis"
+class WhatsThisColumn(custom_models.ColumnItem):
+    name = "Whats this"
+    doc = "Whats This"
+    editable = True
 
     def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
         match role:
-            case constants.DISPLAY_ROLE:
+            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
                 return item.whatsThis()
+
+    def set_data(self, item, value, role):
+        match role:
+            case constants.EDIT_ROLE:
+                return item.setWhatsThis(value)
 
 
 class EnabledColumn(custom_models.ColumnItem):
@@ -27,26 +33,48 @@ class EnabledColumn(custom_models.ColumnItem):
         match role:
             case constants.CHECKSTATE_ROLE:
                 item.setEnabled(not item.isEnabled())
+                return True
+        return False
 
 
 class ShortcutColumn(custom_models.ColumnItem):
     name = "Shortcut"
     doc = "Keyboard shortcut."
+    editable = True
 
     def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.key().toString()
+            case constants.EDIT_ROLE:
+                return item.key()
+
+    def set_data(self, item, value, role):
+        match role:
+            case constants.EDIT_ROLE:
+                item.setKey(value)
+                return True
+        return False
 
 
 class ContextColumn(custom_models.ColumnItem):
     name = "Context"
     doc = "Shortcut context."
+    editable = True
 
     def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return constants.SHORTCUT_CONTEXT.inverse[item.context()]
+            case constants.EDIT_ROLE:
+                return item.context()
+
+    def set_data(self, item, value, role):
+        match role:
+            case constants.EDIT_ROLE:
+                item.setContext(value)
+                return True
+        return False
 
 
 class AutoRepeatColumn(custom_models.ColumnItem):
@@ -68,7 +96,6 @@ class AutoRepeatColumn(custom_models.ColumnItem):
 class ParentColumn(custom_models.ColumnItem):
     name = "Parent widget"
     doc = "Parent widget."
-    checkable = True
 
     def get_data(self, item: gui.QShortcut, role: constants.ItemDataRole):
         match role:
@@ -77,13 +104,12 @@ class ParentColumn(custom_models.ColumnItem):
 
 
 class ShortcutsModel(custom_models.ColumnTableModel):
-
     COLUMNS = [
-        NameColumn,
+        WhatsThisColumn,
         EnabledColumn,
         ShortcutColumn,
-        ContextColumn,
         AutoRepeatColumn,
+        ContextColumn,
         ParentColumn,
     ]
 
@@ -114,6 +140,7 @@ if __name__ == "__main__":
         i.setWhatsThis("abc")
     model = ShortcutsModel(shortcuts, parent=view)
     view.setModel(model)
+    view.set_delegate("variant")
     view.resize(640, 480)
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_selection_behavior("rows")

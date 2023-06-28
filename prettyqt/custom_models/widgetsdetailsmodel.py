@@ -70,7 +70,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
         prop = self.props[index.column()]
         widget = self.items[index.row()]
         match role:
-            case constants.USER_ROLE:
+            case constants.USER_ROLE | constants.EDIT_ROLE:
                 with self.reset_model():
                     prop.write(widget, value)
                 # self.update_row(index.row())

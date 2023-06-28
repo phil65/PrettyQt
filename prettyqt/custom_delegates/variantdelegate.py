@@ -19,8 +19,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
     def __init__(
         self,
         *args,
-        data_role: constants.ItemDataRole = constants.USER_ROLE,
-        set_edit_role: bool = True,
+        role: constants.ItemDataRole = constants.EDIT_ROLE,
         validator: gui.QValidator
         | widgets.lineedit.ValidatorStr
         | datatypes.PatternType
@@ -28,8 +27,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
         **kwargs,
     ):
         super().__init__(*args, **kwargs)
-        self.data_role = data_role
-        self._set_edit_role = set_edit_role
+        self._role = role
         self._validator = validator
 
     def paint(
@@ -43,7 +41,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
         #     option.state &= ~widgets.QStyle.StateFlag.State_Enabled
         from prettyqt import custom_delegates
 
-        match value := self._data_for_index(index, self.data_role):
+        match value := self._data_for_index(index, self._role):
             case gui.QIcon():
                 icon_delegate = custom_delegates.IconDelegate()
                 icon_delegate.paint(painter, option, index)
@@ -62,7 +60,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
         option: widgets.QStyleOptionViewItem,
         index: core.ModelIndex,
     ):
-        val = self._data_for_index(index, self.data_role)
+        val = self._data_for_index(index, self._role)
         logger.info(f"creating editor for {val!r}...")
         widget = datatypes.get_widget_for_value(val, parent)
         if widget is None:
@@ -78,7 +76,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
         return widget
 
     def setEditorData(self, editor: widgets.QWidget, index: core.ModelIndex):
-        value = self._data_for_index(index, self.data_role)
+        value = self._data_for_index(index, self._role)
         logger.info(f"setting data for {editor!r} to {value!r}")
         editor.set_value(value)
 
@@ -90,9 +88,7 @@ class VariantDelegate(widgets.StyledItemDelegate):
     ):
         if (value := editor.get_value()) is not None:
             logger.info(f"setting data for {model!r} to {value!r}")
-            model.setData(index, value, self.data_role)
-            if self._set_edit_role:
-                model.setData(index, datatypes.to_string(value), constants.DISPLAY_ROLE)
+            model.setData(index, value, self._role)
             # self.closeEditor.emit(editor, self.EndEditHint.NoHint)
             self.commitData.emit(editor)
 

@@ -22,10 +22,10 @@ class PydanticModel(custom_models.BaseDataclassModel):
             case _:
                 return False
 
-    def get_fields(self):
+    def get_fields(self) -> list:
         return list(self.Class.__fields__.values())
 
-    def flags(self, parent=None):
+    def flags(self, parent: core.ModelIndex | None = None):
         parent = parent or core.ModelIndex()
         return (
             super().flags(parent)

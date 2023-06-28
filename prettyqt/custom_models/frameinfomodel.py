@@ -7,6 +7,8 @@ from prettyqt import constants, core, gui, custom_models
 
 logger = logging.getLogger(__name__)
 
+SOURCE_FONT = gui.Font.mono(as_qt=True)
+
 
 class FrameInfoModel(custom_models.ListMixin, core.AbstractTableModel):
     HEADER = ["Filename", "Line number", "Function", "Code context", "Index", "Positions"]
@@ -60,7 +62,7 @@ class FrameInfoModel(custom_models.ListMixin, core.AbstractTableModel):
                     lines.append(pretty)
                 return "\n".join(lines)
             case constants.FONT_ROLE, 3:
-                return gui.Font.mono(as_qt=True)
+                return SOURCE_FONT
             case constants.DISPLAY_ROLE, 4:
                 return field.index
             case constants.DISPLAY_ROLE, 5:

@@ -147,7 +147,7 @@ class WidgetPropertiesModel(core.AbstractTableModel):
             return None
         prop = self._metaobj.get_property(index.row())
         match role, index.column():
-            case constants.USER_ROLE, _:
+            case constants.USER_ROLE | constants.EDIT_ROLE, _:
                 prop.write(self._widget, value)
                 self.update_row(index.row())
                 return True

@@ -9,27 +9,37 @@ from prettyqt.utils import treeitem
 
 
 class NameColumn(custom_models.ColumnItem):
-    name="Name"
-    doc="Name"
+    name = "Name"
+    doc = "Name"
 
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.key
 
+
 class ValueColumn(custom_models.ColumnItem):
-    name="Value"
-    doc="Value"
+    name = "Value"
+    doc = "Value"
+    editable = True
 
     def get_data(self, item, role):
         match role:
             case constants.DISPLAY_ROLE:
                 return repr(item.obj.value)
+            case constants.EDIT_ROLE:
+                return item.obj.value
 
+    def set_data(self, item, value, role):
+        match role:
+            case constants.EDIT_ROLE:
+                item.obj.value = value
+                return True
+        return False
 
 class TypeColumn(custom_models.ColumnItem):
-    name="Type"
-    doc="Type"
+    name = "Type"
+    doc = "Type"
 
     def get_data(self, item, role):
         match role:

@@ -52,7 +52,7 @@ class BaseFieldsModel(core.AbstractTableModel):
             return None
         field = self._fields[index.row()]
         match role, index.column():
-            case constants.USER_ROLE, _:
+            case constants.USER_ROLE | constants.EDIT_ROLE, _:
                 setattr(self._instance, field.name, value)
                 self.update_row(index.row())
                 return True

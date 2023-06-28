@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import ast
+import enum
 
 import logging
 
 from prettyqt import constants, core, gui, custom_models
 from prettyqt.utils import bidict, treeitem
+
+SOURCE_FONT = gui.Font.mono(as_qt=True)
 
 NODE_MAP = bidict(
     {
@@ -46,6 +49,9 @@ logger = logging.getLogger(__name__)
 
 class AstModel(custom_models.TreeModel):
     """Model to display the tree of an AST node."""
+    @core.Enum
+    class Roles(enum.IntEnum):
+        NodeRole = constants.USER_ROLE
 
     HEADER = [
         "Node type",
@@ -137,13 +143,13 @@ class AstModel(custom_models.TreeModel):
             case constants.DISPLAY_ROLE, 4:
                 return ast.get_source_segment(self.code, node)
             case constants.FONT_ROLE, 4 | 5:
-                return gui.Font.mono(as_qt=True)
+                return SOURCE_FONT
             case constants.DISPLAY_ROLE, 5:
                 try:
                     return ast.get_docstring(node)
                 except TypeError:
                     return None
-            case constants.USER_ROLE, _:
+            case self.Roles.NodeRole, _:
                 return node
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:

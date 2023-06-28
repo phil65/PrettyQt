@@ -54,9 +54,9 @@ class BaseDataclassModel(core.AbstractTableModel):
         field = self.fields[index.column()]
         instance = self.items[index.row()]
         match role:
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
+            case constants.DISPLAY_ROLE:
                 return repr(getattr(instance, field.name))
-            case constants.USER_ROLE:
+            case constants.USER_ROLE | constants.EDIT_ROLE:
                 return getattr(instance, field.name)
 
     def setData(
