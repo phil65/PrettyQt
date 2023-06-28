@@ -91,7 +91,6 @@ class SliceCheckableTreeProxyModel(custom_models.SliceIdentityProxyModel):
     def set_checkstate(self, index: core.ModelIndex, recursive=False):
             key = self.get_index_key(index, include_column=True)
             current = self._checked.get(key)
-            logger.info(current)
             match current:
                 case constants.CheckState.Checked:
                     val = constants.CheckState.Unchecked
@@ -123,7 +122,7 @@ class SliceCheckableTreeProxyModel(custom_models.SliceIdentityProxyModel):
             else:
                 val = constants.CheckState.PartiallyChecked
             key = self.get_index_key(idx, include_column=True)
-            logger.info(f"Setting {key} to {val}")
+            logger.debug(f"Setting {key} to {val}")
             self._checked[key] = val
             self.dataChanged.emit(idx, idx)
             self.checkstate_changed.emit(idx, val)
