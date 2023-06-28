@@ -9,14 +9,15 @@ class SectionAutoSpanEventFilter(eventfilters.BaseEventFilter):
     def __init__(
         self,
         parent: widgets.TableView | widgets.TreeView,
-        orientation=constants.HORIZONTAL,
+        orientation: constants.Orientation
+        | constants.OrientationStr = constants.HORIZONTAL,
     ):
         super().__init__(parent)
         self._widget = parent
         self._last_start = None
         self._last_end = None
-        self.orientation = orientation
-        if orientation == constants.HORIZONTAL:
+        self.orientation = constants.ORIENTATION.get_enum_value(orientation)
+        if self.orientation == constants.HORIZONTAL:
             parent.h_scrollbar.valueChanged.connect(self._update_spans)
         else:
             parent.v_scrollbar.valueChanged.connect(self._update_spans)

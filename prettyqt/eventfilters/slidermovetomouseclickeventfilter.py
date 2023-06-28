@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, eventfilters, widgets
-from prettyqt.qt import QtCore
+from prettyqt import constants, core, eventfilters, widgets
 
 CC = widgets.QStyle.ComplexControl
 SC = widgets.QStyle.SubControl
@@ -10,7 +9,9 @@ SC = widgets.QStyle.SubControl
 class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
     ID = "slider_move_to_mouse_click"
 
-    def _move_to_mouse_position(self, scrollbar, point: QtCore.QPoint):
+    def _move_to_mouse_position(
+        self, scrollbar: widgets.QScrollBar, point: core.QPoint
+    ):
         opt = widgets.StyleOptionSlider()
         scrollbar.initStyleOption(opt)
         control = scrollbar.style().hitTestComplexControl(
@@ -46,13 +47,13 @@ class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
         )
         scrollbar.setValue(value)
 
-    def eventFilter(self, source, event):
+    def eventFilter(self, source: widgets.QScrollBar, event: core.QEvent):
         match event.type():
-            case QtCore.QEvent.Type.MouseMove:
+            case core.QEvent.Type.MouseMove:
                 if event.buttons() & constants.MouseButton.LeftButton:
                     point = event.position().toPoint()
                     self._move_to_mouse_position(source, point)
-            case QtCore.QEvent.Type.MouseButtonPress:
+            case core.QEvent.Type.MouseButtonPress:
                 if event.button() == constants.MouseButton.LeftButton:
                     point = event.position().toPoint()
                     self._move_to_mouse_position(source, point)

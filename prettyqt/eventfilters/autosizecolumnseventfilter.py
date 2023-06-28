@@ -7,16 +7,19 @@ class AutoSizeColumnsEventFilter(eventfilters.BaseEventFilter):
     ID = "autosize_columns"
 
     def __init__(
-        self, parent: widgets.TableView | widgets.TreeView, orientation=constants.VERTICAL
+        self,
+        parent: widgets.TableView | widgets.TreeView,
+        orientation: constants.Orientation
+        | constants.OrientationStr = constants.VERTICAL,
     ):
         super().__init__(parent)
         self._widget = parent
-        self.orientation = orientation
+        self.orientation = constants.ORIENTATION.get_enum_value(orientation)
         parent.model_changed.connect(self._on_model_change)
         self._autosized_sections = set()
         self.last_span: tuple[int, int] | None = None
 
-        if orientation == constants.VERTICAL:
+        if self.orientation == constants.VERTICAL:
             parent.h_scrollbar.valueChanged.connect(self._on_scroll)
         else:
             parent.v_scrollbar.valueChanged.connect(self._on_scroll)

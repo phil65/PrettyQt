@@ -16,7 +16,7 @@ class AnimatedToolTipEventFilter(eventfilters.BaseEventFilter):
             translucent_background=True,
         )
         self.tool_tip.hide()
-        self.slide_anim = custom_animations.SlideAnimation(duration=1000)
+        self.slide_anim = custom_animations.SlideAnimation(self.tool_tip, duration=1000)
         self.slide_anim.apply_to(self.tool_tip)
         self.fade_anim = custom_animations.FadeInAnimation(duration=1000)
         self.fade_anim.apply_to(self.tool_tip)
