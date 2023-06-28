@@ -49,7 +49,6 @@ docs: ## builds the documentation
 	poetry run mkdocs build
 
 serve: ## run html server watching file changes in realtime
-	$(BROWSER) site/index.html
 	poetry run mkdocs serve --dirtyreload
 
 # install: clean ## install the package to the active Python's site-packages
