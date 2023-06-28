@@ -59,6 +59,7 @@ docs = [
     "pymdown-extensions",
     "mkdocs-literate-nav",
     "mkdocs-autorefs",
+    "mkdocs-glightbox",
 ]
 
 addons = [
@@ -104,6 +105,7 @@ dependencies = [
     "mkdocstrings[python]",
     "mkdocs-literate-nav",
     "pymdown-extensions",
+    "mkdocs-glightbox",
 ]
 
 [tool.hatch.envs.docs.scripts]
@@ -224,6 +226,7 @@ coverage = "^7"
 mkdocs = "^1"
 mkdocs-material = "^9"
 mkdocstrings = {version = "^0", extras = ["python"]}
+mkdocs-glightbox = "*"
 
 pymdown-extensions = "^10"
 black = "^23"
