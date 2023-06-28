@@ -24,6 +24,7 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
             selection_mode=selection_mode,
             **kwargs,
         )
+        self.setStyleSheet("QTreeView::item { padding: 5px }")
         class_name = type(self).__name__
         self.set_id(class_name)
         # misc
