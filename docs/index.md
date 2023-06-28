@@ -28,21 +28,27 @@ from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
 
 To illustrate this, we will use some of our included models:
 
+```py
     from prettyqt import custom_models, widgets
 
     app = widgets.app()
-    widget_1 = widgets.TreeView()
-    widget_2 = widgets.TreeView()
-    model_1 = custom_models.SubClassTreeModel(core.ObjectMixin)  # our base mixin.
-    model_2 = custom_models.SubClassTreeModel(core.QObject)  # this is QtCore.QObject
+    widget = widgets.TreeView()
+    model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
     widget.set_model(model)
     widget.show()
+```
+
+<figure markdown>
+  ![Image title](images/abstractitemmodelmixin_subclasses.png)
+  <figcaption>AbstractitemModelMixin subclasses</figcaption>
+</figure>
 
 You can see a comparison here between Our mixin tree and the original Qt Tree.
 As you can notice, every Qt class with Subclasses has a corresponding Mixin.
 
 To show what this leads to, we will look at another example:
 
+```py
     from prettyqt import custom_models, widgets
 
     app = widgets.app()
@@ -50,6 +56,19 @@ To show what this leads to, we will look at another example:
     model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
     widget.set_model(model)
     widget.show()
+```
+
+<figure markdown>
+  ![Image title](images/treewidget_parentclasses.png)
+  <figcaption>TreeWidget parent classes</figcaption>
+</figure>
+
+when passing `show_mro=True` to ParentclassTreeModel, we can also take a loot at the method resolution order:
+
+<figure markdown>
+  ![Image title](images/treewidget_mro.png)
+  <figcaption>TreeWidget MRO</figcaption>
+</figure>
 
 Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
 and using it can be quite cumbersome for Python developers. (it´s statically typed,

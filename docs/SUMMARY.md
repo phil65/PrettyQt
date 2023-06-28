@@ -13,7 +13,6 @@
     * [multimedia](api/multimedia.md)
     * [multimediawidgets](api/multimediawidgets.md)
     * [network](api/network.md)
-    * [objbrowser](api/objbrowser.md)
     * [pdf](api/pdf.md)
     * [pdfwidgets](api/pdfwidgets.md)
     * [positioning](api/positioning.md)

@@ -70,6 +70,8 @@ markdown_extensions:
     - codehilite
     - admonition
     - def_list
+    - attr_list
+    - md_in_html
     - pymdownx.tasklist:
         custom_checkbox: true
     - pymdownx.highlight:
@@ -88,11 +90,8 @@ markdown_extensions:
         toc_depth: 2
     # - pymdownx.betterem
     # - markdown.extensions.footnotes
-    # - markdown.extensions.attr_list
-    # - markdown.extensions.def_list
     # - markdown.extensions.tables
     # - markdown.extensions.abbr
-    # - markdown.extensions.md_in_html
 use_directory_urls: false
 
 extra:

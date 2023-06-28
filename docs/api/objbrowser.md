@@ -1,4 +1,0 @@
-objbrowser module
-=================
-
-::: prettyqt.objbrowser

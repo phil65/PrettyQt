@@ -1,1 +1,0 @@
-"""Objbrowser package."""
