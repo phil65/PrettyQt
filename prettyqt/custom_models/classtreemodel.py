@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import contextlib
 import enum
+import functools
 import inspect
 import logging
 
@@ -9,6 +10,37 @@ from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import treeitem
 
 logger = logging.getLogger(__name__)
+
+
+@functools.cache
+def get_comments(klass: type) -> str | None:
+    return inspect.getcomments(klass)
+
+
+@functools.cache
+def get_doc(klass: type) -> str | None:
+    doc = inspect.getdoc(klass)
+    with contextlib.suppress(AttributeError):
+        return inspect.cleandoc(doc)
+
+
+@functools.cache
+def get_file(klass: type) -> str | None:
+    with contextlib.suppress(TypeError):
+        return inspect.getfile(klass)
+
+
+@functools.cache
+def get_source(klass: type) -> str:
+    return inspect.getsource(klass)
+
+
+@functools.cache
+def get_module(klass: type):
+    return inspect.getmodule(klass).__name__
+
+
+SOURCE_FONT = gui.Font.mono(as_qt=True)
 
 
 class BaseClassTreeModel(custom_models.TreeModel):
@@ -44,24 +76,21 @@ class BaseClassTreeModel(custom_models.TreeModel):
             case constants.DISPLAY_ROLE, 0:
                 return klass.__name__
             case constants.DISPLAY_ROLE, 1:
-                doc = inspect.getdoc(klass)
-                with contextlib.suppress(AttributeError):
-                    return inspect.cleandoc(doc)
+                return get_doc(klass)
             case constants.DISPLAY_ROLE, 2:
-                return inspect.getmodule(klass)
+                return get_module(klass)
             case constants.DISPLAY_ROLE, 3:
-                return inspect.getcomments(klass)
+                return get_comments(klass)
             case constants.DISPLAY_ROLE, 4:
-                with contextlib.suppress(TypeError):
-                    return inspect.getfile(klass)
+                return get_file(klass)
             case constants.CHECKSTATE_ROLE, 5:
                 return inspect.isabstract(klass)
             case constants.USER_ROLE, _:
                 return klass
             case constants.FONT_ROLE, 1 | 3:
-                return gui.Font.mono(as_qt=True)
+                return SOURCE_FONT
             case self.Roles.SourceRole, _:
-                return inspect.getsource(klass)
+                return get_source(klass)
 
 
 class SubClassTreeModel(BaseClassTreeModel):
@@ -110,14 +139,21 @@ class ParentClassTreeModel(BaseClassTreeModel):
 
     show_mro = core.Property(bool, get_show_mro, set_show_mro)
 
+
 if __name__ == "__main__":
     from prettyqt import widgets
 
     app = widgets.app()
     view = widgets.TreeView()
     view.setRootIsDecorated(True)
-    model = ParentClassTreeModel(widgets.TreeWidget, show_root=True, parent=view)
+    model = SubClassTreeModel(core.ObjectMixin, show_root=True, parent=view)
     view.set_model(model)
+    view.proxifier[0].modify(
+        lambda x: gui.QColor("blue"),
+        role=constants.BACKGROUND_ROLE,
+        selector=lambda x: issubclass(x, core.QObject),
+        selector_role=constants.USER_ROLE,
+    )
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate("variant")
     view.resize(1000, 1000)
