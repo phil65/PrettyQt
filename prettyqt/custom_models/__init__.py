@@ -63,7 +63,7 @@ from .proxies.meltproxymodel import MeltProxyModel
 from .proxies.columnorderproxymodel import ColumnOrderProxyModel
 
 # Other proxies
-from .proxies.fuzzyfiltermodel import FuzzyFilterProxyModel
+from .proxies.fuzzyfilterproxymodel import FuzzyFilterProxyModel
 from .proxies.multicolumnfilterproxymodel import MultiColumnFilterProxyModel
 from .proxies.subsetfilterproxymodel import SubsetFilterProxyModel
 from .proxies.valuefilterproxymodel import ValueFilterProxyModel

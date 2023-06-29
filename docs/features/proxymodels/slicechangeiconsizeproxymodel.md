@@ -1,0 +1,54 @@
+## HighlightCurrentProxyModel
+
+Changed icons / pixmaps are cached for performance reasons.
+
+
+!!! note
+    This is a slice proxy and can be selectively applied to a model.
+
+### Example
+
+```py
+    model = MyModel()
+    table = widgets.TableView()
+    table.set_model(model)
+    table[:, :3].proxify.highlight_current(mode="all")
+    table.show()
+```
+
+or
+
+```py
+    indexer = (slice(None), slice(None, 3))
+    proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+```
+
+<figure markdown>
+  ![Image title](../../images/highlightcurrentproxymodel_all.png)
+  <figcaption>Mode: all</figcaption>
+</figure>
+
+<figure markdown>
+  ![Image title](../../images/highlightcurrentproxymodel_column.png)
+  <figcaption>Mode: column</figcaption>
+</figure>
+
+<figure markdown>
+  ![Image title](../../images/highlightcurrentproxymodel_row.png)
+  <figcaption>Mode: row</figcaption>
+</figure>
+
+### API
+
+::: prettyqt.custom_models.SliceChangeIconSizeProxyModel
+
+### Qt Properties
+
+| Qt Property         | Type                     | Description                        |
+| --------------------|--------------------------| -----------------------------------|
+| **highlight_mode**: | `str`                    | Highlighting mode                  |
+| **highlight_color** | `gui.QColor`             | Color to use for highlighted cells |
+| **highlight_role**  | `constants.ItemDataRole` | Role to use for comparing          |
