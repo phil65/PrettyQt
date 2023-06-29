@@ -35,15 +35,14 @@ class PandasCategoryListModel(custom_models.ModelMixin, core.AbstractTableModel)
     ) -> bool:
         if not index.isValid():
             return False
-        if role == constants.EDIT_ROLE:
-            if index.column() == 0:
-                if value in self.series.cat.categories:
-                    logger.error("Error: Category names must be unique.")
-                    return False
-                rename_dct = {index.data(constants.NAME_ROLE): value}
-                with self.change_layout():
-                    self.series = self.series.rename_categories(new_categories=rename_dct)
-                return True
+        if role == constants.EDIT_ROLE and index.column() == 0:
+            if value in self.series.cat.categories:
+                logger.error("Error: Category names must be unique.")
+                return False
+            rename_dct = {index.data(constants.NAME_ROLE): value}
+            with self.change_layout():
+                self.series = self.series.rename_categories(new_categories=rename_dct)
+            return True
         return False
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:

@@ -87,12 +87,11 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
         orientation: constants.Orientation,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
-        if orientation == constants.HORIZONTAL:
-            if self.is_additional_column(section):
-                if role == constants.DISPLAY_ROLE:
-                    mapper = self.mapping[section - self.columnCount()]
-                    return mapper.header
-                return None
+        if orientation == constants.HORIZONTAL and self.is_additional_column(section):
+            if role == constants.DISPLAY_ROLE:
+                mapper = self.mapping[section - self.columnCount()]
+                return mapper.header
+            return None
         return super().headerData(section, orientation, role)
 
     def mapToSource(self, proxy_index):

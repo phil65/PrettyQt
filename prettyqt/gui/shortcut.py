@@ -54,7 +54,7 @@ class Shortcut(core.ObjectMixin, gui.QShortcut):
         return gui.KeySequence(self.key())
 
     def get_keys(self) -> list[gui.KeySequence]:
-        return [gui.KeySequence(i) for i in self.keys()]
+        return [gui.KeySequence(i) for i in self]
 
 
 if __name__ == "__main__":

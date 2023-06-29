@@ -97,7 +97,7 @@ class AbstractAnimationMixin(core.ObjectMixin):
             interval: time interval / delay for timer
             single_shot: whether animation gets triggered once or in intervals
         """
-        if policy in DELETION_POLICY.keys():
+        if policy in DELETION_POLICY:
             policy = DELETION_POLICY[policy]
         if interval:
             fn = functools.partial(self.start, policy)

@@ -35,17 +35,16 @@ def show(item):
 
     debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
     for klass in helpers.get_subclasses(core.QAbstractItemModel):
-        if "supports" in klass.__dict__:
-            if klass.supports(item):
-                if issubclass(klass, core.QAbstractTableModel):
-                    viewer = widgets.TableView()
-                else:
-                    viewer = widgets.TreeView()
-                instance = klass(item)
-                viewer.set_model(instance)
-                viewer.show()
-                debug.app.exec()
-                break
+        if "supports" in klass.__dict__ and klass.supports(item):
+            if issubclass(klass, core.QAbstractTableModel):
+                viewer = widgets.TableView()
+            else:
+                viewer = widgets.TreeView()
+            instance = klass(item)
+            viewer.set_model(instance)
+            viewer.show()
+            debug.app.exec()
+            break
     debug.app.exec()
 
 

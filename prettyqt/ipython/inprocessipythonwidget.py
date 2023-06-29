@@ -44,7 +44,7 @@ class InProcessIPythonWidget(ipython.BaseIPythonWidget):
         to the IPython console widget.
         """
         self.kernel_manager.kernel.shell.push(var_dict)
-        for key in var_dict.keys():
+        for key in var_dict:
             self._append_plain_text(f'\nadded "{key}" object to namespace\n', True)
 
     def eval(self, obj_name):

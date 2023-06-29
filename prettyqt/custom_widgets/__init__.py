@@ -44,7 +44,6 @@ from .editors.flagselectionwidget import FlagSelectionWidget
 from .editors.stringornumberwidget import StringOrNumberWidget
 from .iconbrowser import IconBrowser
 from .objectbrowser import ObjectBrowser
-from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
 from .editors.colorcombobox import ColorComboBox
 from .multicombobox import MultiComboBox
@@ -90,7 +89,6 @@ __all__ = [
     "MultiLineLayout",
     "WidgetEditor",
     "CollapsibleFrame",
-    "CompletionWidget",
     "CommandPalette",
     "ClickableLabel",
     "OrientedTableView",

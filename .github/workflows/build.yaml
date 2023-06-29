@@ -28,8 +28,6 @@ jobs:
     #   run: |
     #     sudo apt-get install speech-dispatcher espeak
     #     speech-dispatcher -d
-    # - name: Python Poetry Action
-    #   uses: abatilo/actions-poetry@v2.1.0
     - name: Install dependencies
       run: |
         pip install --upgrade pip

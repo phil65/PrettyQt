@@ -202,7 +202,7 @@ def get_class_for_id(base_class: T, id_: str) -> T:
     )
     for base_class in base_classes:
         for Klass in get_subclasses(base_class):
-            if "ID" in Klass.__dict__ and Klass.ID == id_:
+            if "ID" in Klass.__dict__ and id_ == Klass.ID:
                 logger.debug(f"found class for id {Klass.ID!r}")
                 return Klass
     raise ValueError(f"Couldnt find class with id {id_!r} for base class {base_class}")

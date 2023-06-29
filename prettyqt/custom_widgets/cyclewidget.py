@@ -45,7 +45,7 @@ class CycleWidget(widgets.ListWidget):
 
     def _create_items(self, items: list[str]):
         N = len(items)
-        self.is_cycle = N > self.visible_number
+        self.is_cycle = self.visible_number < N
 
         if self.is_cycle:
             for _ in range(2):
