@@ -8,14 +8,17 @@ from .layouts.flowlayout import FlowLayout
 from .layouts.borderlayout import BorderLayout
 from .layouts.multilinelayout import MultiLineLayout
 
+from .labels.elidedlabel import ElidedLabel
+from .labels.clickablelabel import ClickableLabel
+from .labels.iconlabel import IconLabel
+from .labels.iconwidget import IconWidget
+
 from .imageviewer import ImageViewer
-from .elidedlabel import ElidedLabel
 from .editors.listinput import ListInput
 from .booldicttoolbutton import BoolDictToolButton
 from .optionalwidget import OptionalWidget
 from .widgeteditor import WidgetEditor
 from .collapsibleframe import CollapsibleFrame
-from .clickablelabel import ClickableLabel
 from .orientedtableview import OrientedTableView
 from .commandpalette import CommandPalette
 from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit, StringListEdit
@@ -39,9 +42,7 @@ from .logtextedit import LogTextEdit
 from .editors.enumflagwidget import EnumFlagWidget
 from .editors.flagselectionwidget import FlagSelectionWidget
 from .editors.stringornumberwidget import StringOrNumberWidget
-from .iconlabel import IconLabel
 from .iconbrowser import IconBrowser
-from .iconwidget import IconWidget
 from .objectbrowser import ObjectBrowser
 from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
@@ -61,13 +62,13 @@ from .codeeditor import CodeEditor
 from .astviewer import AstViewer
 from .roundprogressbar import RoundProgressBar
 from .subsequencecompleter import SubsequenceCompleter
-from .filetree import FileTree
 from .scrollareatocwidget import ScrollAreaTocWidget
 
 # from .stareditor import StarEditor, StarRating
 from .timeline import Timeline, VideoSample
 from .standardiconswidget import StandardIconsWidget
 
+from .itemviews.filetree import FileTree
 from .itemviews.hierarchicalheaderview import HierarchicalHeaderView
 from .itemviews.spantableview import SpanTableView
 from .itemviews.filterheader import FilterHeader
