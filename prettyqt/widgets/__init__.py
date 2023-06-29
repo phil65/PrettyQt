@@ -203,12 +203,12 @@ from prettyqt import custom_widgets
 from prettyqt import custom_models
 
 
-def app(args: list[str] | None = None, **kwargs) -> Application:
+def app(args: list[str] | None = None, style: str = "Fusion", **kwargs) -> Application:
     if (instance := Application.instance()) is not None:
         return instance
     #  + ["--ignore-gpu-blacklist", "--enable-gpu-rasterization"]
     app = Application(sys.argv if args is None else args, **kwargs)
-    app.set_style("Fusion")
+    app.set_style(style)
     return app
 
 

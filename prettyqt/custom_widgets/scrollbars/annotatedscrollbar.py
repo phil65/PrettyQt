@@ -88,10 +88,8 @@ class AnnotatedScrollBar(widgets.ScrollBar):
 if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
-    widget.set_line_wrap_mode("none")
-    scrollbar = AnnotatedScrollBar("vertical", parent=widget)
-    scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
-    widget.setVerticalScrollBar(scrollbar)
+    widget.v_scrollbar = AnnotatedScrollBar(constants.VERTICAL)
+    widget.v_scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
     widget.show()
     with app.debug_mode():
         app.exec()
