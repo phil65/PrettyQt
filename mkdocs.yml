@@ -70,8 +70,11 @@ markdown_extensions:
 - md_in_html
 - tables
 - footnotes
-# - pymdownx.keys
-# - pymdownx.smartsymbols
+- pymdownx.critic
+- pymdownx.caret
+- pymdownx.keys
+- pymdownx.mark
+- pymdownx.tilde
 - pymdownx.tasklist:
     custom_checkbox: true
 - pymdownx.highlight:  # syntax highlighting

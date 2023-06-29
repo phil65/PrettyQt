@@ -1,8 +1,13 @@
 ## SliceFilterProxyModel
 
-Proxy model to filter an item view based on slices.
+Proxy model to filter an item view based on python slicing syntax.
+Since slicing operations are bijective, this model can filter without
+looping through rows or columns. Thus, this should perform much better than a
+SortFilterProxyModel with a column filter. (O(1) instead of O(n))
 
 ### Example
+
+To filter out every second row, and cut off the the first two columns:
 
 ```py
     model = MyModel()

@@ -3,89 +3,49 @@ Models
 
 PrettyQt includes a range of models for Qt-based types, Python built-in types as well as
 some models for data structures of external libraries.
+All models are proper views on datastructures, not populated StandardItemModels.
 
-## Models for following Python types are included:
-
-
-`list[dict]`
-
-`type`:
-: Subclass tree, ParentClass tree)
-
-`importlib.metadata.distribution`:
-: Tree model showing a dependency tree of given package
-
-`inspect.Traceback / inspect.FrameInfo`:
-: Stack table
-
-`DataClass | Sequence[DataClass]`:
-: 2 models: Sequence[dataclass] and dataclass)
-
-`ast.AST`:
-: Tree model to show an abstract syntax tree
-
-`list[logging.LogRecord]`
-: Table containing log information
-
-`list[re.Match]`
-: Table do display list of regex matches
-
-`object`
-: Tree model showing all attributes of an object.
-
-`xml.etree.ElementTree -> custom_models.XmlModel`
-: Tree view for an xml ElementTree
-
-## Models for following Qt types are included:
+### Builtin-Type models
 
 
-`list[QtGui.QAction] -> custom_models.ActionsModel`
-: Table displaying all available info for a QAction. Supports editing QAction properties.
+| Type | Model | Description |
+|------|-------|-------------|
+| `list[dict]` | MappingModel | xyz
+| `type` | SubClassModel | Tree showing all subclasses
+| `type` | ParentClassModel | Tree showing all Parent classes
+| `importlib.metadata.distribution`| ImportLibTreeModel | Tree model showing a dependency tree of given package
+| `inspect.Traceback` | FrameInfoModel | Table model showing Traceback
+| `inspect.FrameInfo` | FrameInfoModel | ""
+| `DataClass` | DataclassFieldsModel | Table showing all fields + metadata of a dataclass
+| `Sequence[DataClass]` | DataclassModel | Table showing a list of dataclasses and their field values
+| `ast.AST` | AstModel | Tree model to show an abstract syntax tree
+| `list[logging.LogRecord]` | LogRecordModel | Table showing a list of LogRecords
+| `list[re.Match]` | RegexMatchesModel | Table do display list of regex matches
+| `object`| xyz | Tree model showing all attributes of an object.
+| `xml.etree.ElementTree` | XmlModel | Tree view for an xml ElementTree
 
-`list[QtGui.QShortcut] -> custom_models.ShortcutsModel`
-: Table displaying a list of shortcuts. Supports editing Shortcut properties.
+### Qt-Type models
 
-`list[QtCore.QStorageInfo] -> custom_models.StorageInfoModel`
-: Read-only list of available drives
+| Type | Model | Description |
+|------|-------|-------------|
+| `list[QtGui.QAction] | ActionsModel`| Table displaying all available info for a QAction. Supports editing QAction properties.
+| `list[QtGui.QShortcut] | ShortcutsModel` | Table displaying a list of shortcuts. Supports editing Shortcut properties.
+| `list[QtCore.QStorageInfo]` |StorageInfoModel | Read-only list of available drives
+| `list[QtWidgets.QWidget]` | xyz | Table displaying a list of QWidgets and their properties
+| `list[QtCore.QModelIndex]` | ModelIndexModel | Model displaying all roles of a list of ModelIndexes.
+| `QtCore.QObject` | xyz | Table model to display all available Properties of a QObject.
 
-`list[QtWidgets.QWidget]`
-: Table displaying a list of QWidgets and their properties
+### External type models
 
-`list[QtCore.QModelIndex] -> custom_models.ModelIndexModel`
+| Type | Model | Description |
+|------|-------|-------------|
+| `AttrsDataclass` | AttrsFieldsModel | Detail table containing all relevant information for each Attrs dataclass.
+| `list[AttrsDataclass]`| AttrsModel | comparison view for a list of Pydantic models.
+|`pydantic.BaseModel`| PydanticFieldsModel | Detail table containing all relevant information for each BaseModel field.
+| `list[pydantic.BaseModel]` | PydanticModel | comparison view for a list of Pydantic models.
+| `fsspec.FileSystem` | FsSpecModel | Model with same interface as QFileSystemModel
+| `pandas.DataFrame` | PandasTableModel | Model to show a pandas DataFrame
+| `pandas.Index` | PandasIndexModel | Model to show a pandas (Multi)Index
+| `polars.DataFrame` | PolarsTableModel | Model to display a polars DataFrame
 
-`QtCore.QObject -> `
-: Table model to display all available Properties of a QObject.
-Works by inspecting the MetaObject of the QObjects.
-
-## Models for following external libraries are included:
-
-`AttrsDataclass`
-: Detail table containing all relevant information for each Attrs dataclass.
-: If not frozen, values can be edited.
-
-`list[AttrsDataclass]`
-: comparison view for a list of Pydantic models.
-: Columns get automatically inferred based on most recent ancestor.
-: If not frozen, values can be edited.
-
-`pydantic.BaseModel`
-: Detail table containing all relevant information for each BaseModel field.
-: If not frozen, values can be edited.
-
-`list[pydantic.BaseModel]`
-: comparison view for a list of Pydantic models.
-: Columns get automatically inferred based on most recent ancestor.
-: If not frozen, values can be edited.
-
-`fsspec.FileSystem`
-: Model with same interface as QFileSystemModel
-: Can basically act as drop:in replacement
-: Easy access to dropbox and all supported fsspec filesystems.
-
-`pd.DataFrame`
-: Model to show complete table
-: Model to show column categories
-: Model for a detailed ColumnView
-
-Scikit-learn
 

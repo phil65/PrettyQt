@@ -1,18 +1,22 @@
 Delegates
-======
+=========
 
 Several additional delegates are supplied by PrettyQt.
-- HtmlItemDelegate (supports HTML for text)
-- IconDelegate
-- NoFocusDelegate (hides focus frame)
-- ProgressBarDelegate (displays a percentage value as a progress bar)
-- RadioDelegate
-- RenderLinkDelegate (renders a string as link and makes it clickable)
-- StarDelegate ()
-- VariantDelegate (regular delegate supporting many data types)
-- WidgetDelegate (experimental)
 
-The main one is "VariantDelegate", which basically works
+| Delegate                   | Description                                     |
+|----------------------------|-------------------------------------------------|
+| **VariantDelegate**        | regular delegate supporting many data types     |
+| **HtmlItemDelegate**       | supports HTML for text                          |
+| **IconDelegate**           |                                                 |
+| **NoFocusDelegate**        | hides focus frame                               |
+| **ProgressBarDelegate**    | displays a percentage value as a progress bar   |
+| **RadioDelegate**          |                                                 |
+| **RenderLinkDelegate**     | renders a string as link and makes it clickable |
+| **StarDelegate**           |                                                 |
+| **WidgetDelegate**         |                                                 |
+
+
+The most important one is the "VariantDelegate", which basically works
 like the default delegate, but supports editing a larger amount
 of datatypes.
 
