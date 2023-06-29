@@ -23,7 +23,7 @@ from .abstractbutton import AbstractButton, AbstractButtonMixin
 from .lineedit import LineEdit
 from .abstractspinbox import AbstractSpinBox, AbstractSpinBoxMixin
 from .abstractitemview import AbstractItemView, AbstractItemViewMixin
-from .scrollbar import ScrollBar, SmoothScrollBar
+from .scrollbar import ScrollBar
 from .scrollarea import ScrollArea
 from .rubberband import RubberBand
 from .graphicstransform import GraphicsTransform, GraphicsTransformMixin
@@ -231,7 +231,6 @@ __all__ = [
     "AbstractItemViewMixin",
     "MdiSubWindow",
     "MdiArea",
-    "SmoothScrollBar",
     "ScrollBar",
     "ScrollArea",
     "Widget",

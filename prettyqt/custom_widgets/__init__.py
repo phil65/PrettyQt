@@ -1,5 +1,8 @@
 """Module containing custom widget classes."""
 
+from .scrollbars.annotatedscrollbar import AnnotatedScrollBar
+from .scrollbars.previewscrollbar import PreviewScrollBar
+from .scrollbars.smoothscrollbar import SmoothScrollBar
 from .imageviewer import ImageViewer
 from .elidedlabel import ElidedLabel
 from .editors.listinput import ListInput
@@ -66,6 +69,9 @@ from .standardiconswidget import StandardIconsWidget
 
 
 __all__ = [
+    "AnnotatedScrollBar",
+    "PreviewScrollBar",
+    "SmoothScrollBar",
     "IntLineEdit",
     "FloatLineEdit",
     "StringListEdit",
@@ -78,7 +84,6 @@ __all__ = [
     "WidgetEditor",
     "CollapsibleFrame",
     "CompletionWidget",
-    "ExpandableLine",
     "CommandPalette",
     "ClickableLabel",
     "OrientedTableView",

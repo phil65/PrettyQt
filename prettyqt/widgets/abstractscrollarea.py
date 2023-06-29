@@ -78,14 +78,16 @@ class AbstractScrollAreaMixin(widgets.FrameMixin):
         animation_duration: int = 500,
         easing: core.easingcurve.TypeStr | core.QEasingCurve.Type = "out_cubic",
     ):
+        from prettyqt import custom_widgets
+
         if value:
-            self.h_scrollbar = widgets.SmoothScrollBar(
+            self.h_scrollbar = custom_widgets.SmoothScrollBar(
                 "horizontal",
                 parent=self,
                 animation_duration=animation_duration,
                 easing=easing,
             )
-            self.v_scrollbar = widgets.SmoothScrollBar(
+            self.v_scrollbar = custom_widgets.SmoothScrollBar(
                 "vertical",
                 parent=self,
                 animation_duration=animation_duration,
