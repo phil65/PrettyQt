@@ -47,7 +47,7 @@ or
 
 ### API
 
-::: prettyqt.custom_models.HighlightCurrentProxyModel
+::: prettyqt.custom_models.SliceHighlightCurrentProxyModel
 
 ### Qt Properties
 

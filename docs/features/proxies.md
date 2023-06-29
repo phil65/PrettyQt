@@ -93,15 +93,15 @@ Some of these proxies might partly overlap in functionality, but theres always a
 
 ## Reshape proxies
 
-| Proxy                           | Description                                              |
-| --------------------------------|----------------------------------------------------------|
-|TableToListProxyModel            | Stack all columns into one single column|
+| Proxy                                             | Description                              |
+| --------------------------------------------------|------------------------------------------|
+|[TableToListProxyModel][tabletolistproxymodel]     | Stack all columns into one single column |
 <!-- : To stack row-wise, use a TransposeProxyModel first. -->
-|FlattenedTreeProxyModel          |Moves all rows up to the root level.|
+|[FlattenedTreeProxyModel][flattenedtreeproxymodel] | Moves all rows up to the root level.     |
 <!-- : Label can be changed to show the complete path. -->
-|[MeltProxyModel][meltproxymodel] |Unpivot a Table from wide to long format.|
+|[MeltProxyModel][meltproxymodel]                   |Unpivot a Table from wide to long format. |
 <!-- : same as pandas.melt, just without pandas. -->
-|ColumnOrderProxyModel            |Reorder columns based on a given list containing the column positions|
+|[ColumnOrderProxyModel][columnorderproxymodel]     |Reorder columns and hide columns.         |
 
 
 ## Other Proxies

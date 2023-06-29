@@ -63,11 +63,11 @@ class ProxyWrapper:
 
     def highlight_current(
         self, mode="column"
-    ) -> custom_models.HighlightCurrentProxyModel:
+    ) -> custom_models.SliceHighlightCurrentProxyModel:
         """Filter subsection to display."""
         from prettyqt import custom_models
 
-        proxy = custom_models.HighlightCurrentProxyModel(
+        proxy = custom_models.SliceHighlightCurrentProxyModel(
             indexer=self._indexer, parent=self._widget, mode=mode
         )
         proxy.setSourceModel(self._widget.model())

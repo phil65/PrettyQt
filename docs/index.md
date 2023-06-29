@@ -95,35 +95,37 @@ almost every class from Qt is covered.
 
 ## Covered Qt modules
 
-- QtBluetooth (-> prettyqt.bluetooth)
-- QtCharts (-> prettyqt.charts)
-- QtCore (-> prettyqt.core)
-- QtDesigner (-> prettyqt.designer)
-- QtGui (-> prettyqt.gui)
-- QtLocation (-> prettyqt.location)
-- QtMultimedia (-> prettyqt.multimedia)
-- QtMultimediaWidgets (-> prettyqt.multimediawidgets)
-- QtNetwork (-> prettyqt.network)
-- QtOpenGLWidgets (-> prettyqt.openglwidgets)
-- QtPdf (-> prettyqt.pdf)
-- QtPdfWidgets (-> prettyqt.pdfwidgets)
-- QtPositioning (-> prettyqt.positioning)
-- QtPrintSupport (-> prettyqt.printsupport)
-- QtQml (-> prettyqt.qml)
-- QtHelp (-> prettyqt.qthelp) (prepended "qt" to avoid name clashing)
-- QtQuick (-> prettyqt.quick)
-- QtQuickWidgets (-> prettyqt.quickwidgets)
-- QScintilla (-> prettyqt.scintilla)
-- QtScXml (-> prettyqt.scxml)
-- QtStateMachine (-> prettyqt.statemachine)
-- QtSvg (-> prettyqt.svg)
-- QtSvgWidgets (-> prettyqt.svgwidgets)
-- QtTest (-> prettyqt.test)
-- QtTextToSpeech (-> prettyqt.texttospeech)
-- QtWebChannel (-> prettyqt.webchannel)
-- QtWebEngineCore (-> prettyqt.webenginecore)
-- QtWebEngineWidgets (-> prettyqt.webenginewidgets)
-- QtWidgets (-> prettyqt.widgets)
+| Qt Module           | PrettyQt module            |
+|---------------------|----------------------------|
+| QtBluetooth         | prettyqt.bluetooth         |
+| QtCharts            | prettyqt.charts            |
+| QtCore              | prettyqt.core              |
+| QtDesigner          | prettyqt.designer          |
+| QtGui               | prettyqt.gui               |
+| QtLocation          | prettyqt.location          |
+| QtMultimedia        | prettyqt.multimedia        |
+| QtMultimediaWidgets | prettyqt.multimediawidgets |
+| QtNetwork           | prettyqt.network           |
+| QtOpenGLWidgets     | prettyqt.openglwidgets     |
+| QtPdf               | prettyqt.pdf               |
+| QtPdfWidgets        | prettyqt.pdfwidgets        |
+| QtPositioning       | prettyqt.positioning       |
+| QtPrintSupport      | prettyqt.printsupport      |
+| QtQml               | prettyqt.qml               |
+| QtHelp              | prettyqt.qthelp            |
+| QtQuick             | prettyqt.quick             |
+| QtQuickWidgets      | prettyqt.quickwidgets      |
+| QScintilla          | prettyqt.scintilla         |
+| QtScXml             | prettyqt.scxml             |
+| QtStateMachine      | prettyqt.statemachine      |
+| QtSvg               | prettyqt.svg               |
+| QtSvgWidgets        | prettyqt.svgwidgets        |
+| QtTest              | prettyqt.test              |
+| QtTextToSpeech      | prettyqt.texttospeech      |
+| QtWebChannel        | prettyqt.webchannel        |
+| QtWebEngineCore     | prettyqt.webenginecore     |
+| QtWebEngineWidgets  | prettyqt.webenginewidgets  |
+| QtWidgets           | prettyqt.widgets           |
 
 
 All subclassed Qt classes in mentioned modules are called exactly like the

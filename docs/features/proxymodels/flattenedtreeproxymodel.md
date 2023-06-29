@@ -1,18 +1,13 @@
 ## FlattenedTreeProxyModel
 
-Proxy model to unpivot a table from wide to long format, as known from pandas.
+Proxy model to flatten a tree to appear like a table.
 
 ### Example
 
+Original model:
+
 ```py
-    app = widgets.app()
-    data = dict(
-        first=["John", "Mary"],
-        last=["Doe", "Bo"],
-        height=[5.5, 6.0],
-        weight=[130, 150],
-    )
-    model = gui.StandardItemModel.from_dict(data)
+    model = MyTreeModel()
     table = widgets.TableView()
     table.set_model(model)
     table.show()
@@ -24,6 +19,7 @@ Proxy model to unpivot a table from wide to long format, as known from pandas.
 </figure>
 
 
+Flattened:
 
 ```py
     table.proxifier.flatten()
@@ -47,8 +43,7 @@ or
 
 ### Qt Properties
 
-| Qt Property     | Type        | Description                             |
-| ----------------|-------------| --------------------------------------- |
-| **id_columns**: | `list[int]` | Columns to use as identifier variables  |
-| **var_name**    | `str`       | Header for variable column              |
-| **value_name**  | `str`       | Header for value column                 |
+| Qt Property         | Type    | Description                                 |
+| --------------------|---------|---------------------------------------------|
+| **flattening_mode** | `Enum`  | How to flatten the model                    |
+| **display_mode**    | `Enum`  | How the label of the model should look like |

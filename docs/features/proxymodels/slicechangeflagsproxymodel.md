@@ -1,6 +1,6 @@
 ## SliceChangeFlagsProxyModel
 
-Selectively change the result of the model.flags method. (Example: make model read-only)
+This proxy can selectively change the ItemFlags of the source model. (Example: change cells to read-only)
 
 Supports changing all ItemRoles by passing keyword arguments.
 

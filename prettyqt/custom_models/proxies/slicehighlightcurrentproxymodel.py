@@ -10,7 +10,7 @@ from prettyqt.utils import colors, datatypes
 HighlightModeStr = Literal["column", "row", "all"]
 
 
-class HighlightCurrentProxyModel(custom_models.SliceIdentityProxyModel):
+class SliceHighlightCurrentProxyModel(custom_models.SliceIdentityProxyModel):
     """Highlights all cells which have same data as current index in given role."""
 
     ID = "highlight_current"
@@ -100,16 +100,24 @@ if __name__ == "__main__":
 
     app = widgets.app(style="Vista")
     dct = dict(
-        a=["a", "b", "a", "b"],
-        b=["a", "b", "a", "b"],
-        c=["a", "b", "a", "b"],
-        d=["b", "a", "b", "a"],
-        e=["a", "b", "a", "b"],
+        a=["a", "a", "a", "a"],
+        b=["a", "a", "a", "a"],
+        c=["a", "a", "a", "a"],
+        d=["a", "a", "a", "a"],
+        e=["a", "a", "a", "a"],
     )
+
+    # dct = dict(
+    #     a=["a", "b", "a", "b"],
+    #     b=["a", "b", "a", "b"],
+    #     c=["a", "b", "a", "b"],
+    #     d=["b", "a", "b", "a"],
+    #     e=["a", "b", "a", "b"],
+    # )
     model = gui.StandardItemModel.from_dict(dct)
     table = widgets.TableView()
     table.set_model(model)
-    table.proxifier[:, :3].highlight_current(mode="all")
+    table.proxifier[:, ::2].highlight_current(mode="all")
     table.show()
     with app.debug_mode():
         app.exec()

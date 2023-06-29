@@ -54,6 +54,7 @@ from .proxies.sliceappearanceproxymodel import SliceAppearanceProxyModel
 from .proxies.slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
 from .proxies.slicecolorvaluesproxymodel import SliceColorValuesProxyModel
 from .proxies.slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
+from .proxies.slicehighlightcurrentproxymodel import SliceHighlightCurrentProxyModel
 
 # Reshape proxies
 
@@ -71,7 +72,6 @@ from .proxies.rangefilterproxymodel import RangeFilterProxyModel
 from .proxies.appearanceproxymodel import AppearanceProxyModel
 from .proxies.changeheadersproxymodel import ChangeHeadersProxyModel
 from .proxies.columnjoinerproxymodel import ColumnJoinerProxyModel
-from .proxies.highlightcurrentproxymodel import HighlightCurrentProxyModel
 from .proxies.highlightmouseproxymodel import HighlightMouseProxyModel
 
 # Proxy tooling
@@ -129,7 +129,7 @@ __all__ = [
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",
     "SliceChangeFlagsProxyModel",
-    "HighlightCurrentProxyModel",
+    "SliceHighlightCurrentProxyModel",
     "SliceColorValuesProxyModel",
     "HighlightMouseProxyModel",
     "ProxyMapper",

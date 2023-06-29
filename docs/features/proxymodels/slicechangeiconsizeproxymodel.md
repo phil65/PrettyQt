@@ -1,6 +1,13 @@
-## HighlightCurrentProxyModel
+## SliceHighlightCurrentProxyModel
 
-Changed icons / pixmaps are cached for performance reasons.
+This proxy can be used to highlight all cells which contain the same content as the currently focused cell.
+Three modes are possible:
+
+| Mode    | Description                                                |
+|---------|------------------------------------------------------------|
+| all     | Highlights all cells with same content.                    |
+| column  | Highlights all cells of the same column with same content. |
+| row     | Highlights all cells of the same row with same content.    |
 
 
 !!! note
@@ -43,7 +50,7 @@ or
 
 ### API
 
-::: prettyqt.custom_models.SliceChangeIconSizeProxyModel
+::: prettyqt.custom_models.SliceHighlightCurrentProxyModel
 
 ### Qt Properties
 

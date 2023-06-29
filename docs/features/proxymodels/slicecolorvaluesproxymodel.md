@@ -1,4 +1,4 @@
-## HighlightCurrentProxyModel
+## SliceColorValuesProxyModel
 
 (Example: high numbers red, low numbers green).
 : To color cells, this proxy needs a minimum and maximum value. Three modes are available:
@@ -53,7 +53,7 @@ or
 
 ### API
 
-::: prettyqt.custom_models.HighlightCurrentProxyModel
+::: prettyqt.custom_models.SliceColorValuesProxyModel
 
 ### Qt Properties
 
