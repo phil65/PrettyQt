@@ -22,16 +22,16 @@ Example:
     # lets change the appearance a bit.
     # Set the font color of column 2 and 3 to red and font to Courier.
 
-    table.proxifier[2:4, :].style(foreground="red", font="Courier")
+    table.proxifier[:, 2:4].style(foreground="red", font="Courier")
 
     # Cut off last column and only show last 50 lines.
-    table.proxifier[:-1, :50].filter()
+    table.proxifier[:50, :-1].filter()
 
     # Set first 20 lines of these 50 lines to read_only
-    table.proxifier[:, :20].change_flags(editable=False)
+    table.proxifier[:20, :].change_flags(editable=False)
 
     # Make first column checkable and trigger callback on checkstate change.
-    table.proxifier[0, :].make_checkable(callback=my_callback)
+    table.proxifier[0].make_checkable(callback=my_callback)
 ```
 
 Every call here basically adds another ProxyModel layer (all based on SliceIdentityProxyModel).
