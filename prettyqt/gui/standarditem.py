@@ -78,13 +78,28 @@ class StandardItem(serializemixin.SerializeMixin, gui.QStandardItem):
         icon = iconprovider.get_icon(icon)
         self.setIcon(icon)
 
-    def set_checkstate(self, state: constants.CheckStateStr | constants.CheckState):
+    def set_checkstate(
+        self, state: constants.CheckStateStr | constants.CheckState | bool
+    ):
         """Set checkstate of the checkbox.
 
         Args:
             state: checkstate to use
         """
+        if isinstance(state, bool):
+            state = (
+                constants.CheckState.Checked if state else constants.CheckState.Unchecked
+            )
         self.setCheckState(constants.CHECK_STATE.get_enum_value(state))
+
+    def is_checked(self):
+        return self.checkState() == constants.CheckState.Checked
+
+    def toggle_checkstate(self):
+        if self.checkState() == constants.CheckState.Checked:
+            self.setCheckState(constants.CheckState.Unchecked)
+        else:
+            self.setCheckState(constants.CheckState.Checked)
 
     def get_checkstate(self) -> constants.CheckStateStr:
         """Return checkstate.
