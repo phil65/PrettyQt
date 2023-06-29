@@ -222,44 +222,63 @@ class Proxyfier:
 
     def transpose(self) -> core.TransposeProxyModel:
         """Wraps model in a Proxy which transposes rows/columns."""
-        return self.get_proxy("transpose")
+        proxy = core.TransposeProxyModel(parent=self._widget)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
 
     def flatten(self) -> custom_models.FlattenedTreeProxyModel:
         """Wraps model in a Proxy which flattens tree structures."""
         # ss = """QTreeView::branch{border-image: url(none.png);}"""
         # self._widget.set_stylesheet(ss)
-        return self.get_proxy("flatten_tree")
+        proxy = custom_models.FlattenedTreeProxyModel(parent=self._widget)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
 
     def melt(
         self, id_columns: list[int], var_name: str = "Variable", value_name: str = "Value"
     ) -> custom_models.MeltProxyModel:
         """Wraps model in a Proxy which unpivots the table to a long format."""
-        proxy = self.get_proxy(
-            "melt", id_columns=id_columns, var_name=var_name, value_name=value_name
+        proxy = custom_models.MeltProxyModel(
+            id_columns=id_columns,
+            var_name=var_name,
+            value_name=value_name,
+            parent=self._widget,
         )
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
         return proxy
 
-    def reorder_columns(self, order: list[int]):
-        return self.get_proxy("column_order", order=order)
+    def reorder_columns(self, order: list[int]) -> custom_models.ColumnOrderProxyModel:
+        proxy = custom_models.ColumnOrderProxyModel(order=order, parent=self._widget)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
 
     def to_list(self) -> custom_models.TableToListProxyModel:
         """Wraps model in a Proxy which converts table to a tree."""
-        return self.get_proxy("table_to_list")
+        proxy = custom_models.TableToListProxyModel(parent=self._widget)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
 
     def add_column(
         self,
         header: str,
         formatter: str,
         flags: constants.ItemFlag = constants.IS_ENABLED | constants.IS_SELECTABLE,
-    ):
+    ) -> custom_models.ColumnJoinerProxyModel:
         """Add a new column with given header to the table.
 
         Column content can be defined by a formatter.
         Example: "{2} - {4}" would result in
         <displayRole of column 2> - <displayRole of column4>
         """
-        proxy = self.get_proxy("column_join")
+        proxy = custom_models.ColumnJoinerProxyModel(parent=self._widget)
         proxy.add_mapping(header=header, formatter=formatter, flags=flags)
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
         return proxy
 
     def change_headers(
@@ -268,10 +287,13 @@ class Proxyfier:
         orientation: constants.Orientation
         | constants.OrientationStr = constants.HORIZONTAL,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ):
-        return self.get_proxy(
-            "change_headers", headers=headers, role=role, orientation=orientation
+    ) -> custom_models.ChangeHeadersProxyModel:
+        proxy = custom_models.ChangeHeadersProxyModel(
+            headers=headers, role=role, orientation=orientation, parent=self._widget
         )
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
 
     def get_proxy(self, proxy: ProxyStr, **kwargs) -> core.QAbstractProxyModel:
         Klass = helpers.get_class_for_id(core.AbstractProxyModelMixin, proxy)
