@@ -14,7 +14,7 @@ class AnnotatedScrollBar(widgets.ScrollBar):
         super().__init__(*args, **kwargs)
         self._annotation_color = gui.QColor("gold")
         self._annotations = []
-        self._document_height = 100
+        self._document_length = 100
 
     def set_annotations(self, annotations: list[tuple[int, int]]):
         self._annotations = annotations
@@ -44,7 +44,7 @@ class AnnotatedScrollBar(widgets.ScrollBar):
             p.setBrush(c)
             c.setAlphaF(0.3)
             p.setPen(gui.QPen(c, 2.0))
-            scale = 1.0 / self._document_height
+            scale = 1.0 / self._document_length
             if self.orientation() == constants.VERTICAL:
                 rects = [
                     core.QRect(
@@ -73,19 +73,25 @@ class AnnotatedScrollBar(widgets.ScrollBar):
     def get_annotation_color(self) -> gui.QColor:
         return self._annotation_color
 
+    def set_document_length(self, length: int):
+        self._document_length = length
+
+    def get_document_length(self) -> int:
+        return self._document_length
+
     annotation_color = core.Property(
         gui.QColor, get_annotation_color, set_annotation_color
     )
     annotations = core.Property(list, get_annotations, set_annotations)
-
+    document_length = core.Property(int, get_document_length, set_document_length)
 
 if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
     widget.set_line_wrap_mode("none")
-    scrollbar = AnnotatedScrollBar("horizontal", parent=widget)
+    scrollbar = AnnotatedScrollBar("vertical", parent=widget)
     scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
-    widget.setHorizontalScrollBar(scrollbar)
+    widget.setVerticalScrollBar(scrollbar)
     widget.show()
     with app.debug_mode():
         app.exec()
