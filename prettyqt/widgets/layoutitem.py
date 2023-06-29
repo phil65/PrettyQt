@@ -44,6 +44,5 @@ class LayoutItem(LayoutItemMixin, widgets.QLayoutItem):
 
 
 if __name__ == "__main__":
-
     item = LayoutItem(constants.AlignmentFlag.AlignLeft)
     types = item.get_control_types()

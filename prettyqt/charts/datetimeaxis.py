@@ -7,7 +7,6 @@ from prettyqt.utils import datatypes
 
 
 class DateTimeAxis(charts.AbstractAxisMixin, charts.QDateTimeAxis):
-
     def set_min(self, minimum: datatypes.DateTimeType):
         minimum = datatypes.to_datetime(minimum)
         self.setMin(minimum)

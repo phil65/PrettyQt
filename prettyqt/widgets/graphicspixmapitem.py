@@ -34,9 +34,7 @@ class GraphicsPixmapItem(widgets.GraphicsItemMixin, widgets.QGraphicsPixmapItem)
         """
         return constants.TRANSFORMATION_MODE.inverse[self.transformationMode()]
 
-    def set_shape_mode(
-        self, mode: ShapeModeStr | widgets.QGraphicsPixmapItem.ShapeMode
-    ):
+    def set_shape_mode(self, mode: ShapeModeStr | widgets.QGraphicsPixmapItem.ShapeMode):
         """Set shape mode.
 
         Args:

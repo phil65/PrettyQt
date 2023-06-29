@@ -8,9 +8,7 @@ from prettyqt.utils import bidict, colors, datatypes, texteditselecter
 
 AutoFormattingStr = Literal["none", "bullet_list", "all"]
 
-AUTO_FORMATTING: bidict[
-    AutoFormattingStr, widgets.QTextEdit.AutoFormattingFlag
-] = bidict(
+AUTO_FORMATTING: bidict[AutoFormattingStr, widgets.QTextEdit.AutoFormattingFlag] = bidict(
     none=widgets.QTextEdit.AutoFormattingFlag.AutoNone,
     bullet_list=widgets.QTextEdit.AutoFormattingFlag.AutoBulletList,
     all=widgets.QTextEdit.AutoFormattingFlag.AutoAll,
@@ -89,9 +87,7 @@ class TextEditMixin(widgets.AbstractScrollAreaMixin):
         color = colors.get_color(color)
         self.setTextColor(color)
 
-    def set_line_wrap_mode(
-        self, mode: LineWrapModeStr | widgets.QTextEdit.LineWrapMode
-    ):
+    def set_line_wrap_mode(self, mode: LineWrapModeStr | widgets.QTextEdit.LineWrapMode):
         """Set line wrap mode.
 
         Args:

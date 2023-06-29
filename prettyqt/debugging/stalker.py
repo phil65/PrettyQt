@@ -157,9 +157,7 @@ class Stalker(core.Object):
     def get_log_level(self) -> int:
         return self._log_level
 
-    def count_children(
-        self, type_filter: type[T] = core.QObject
-    ) -> collections.Counter:
+    def count_children(self, type_filter: type[T] = core.QObject) -> collections.Counter:
         objects = self.findChildren(type_filter)
         return collections.Counter([type(o) for o in objects])
 

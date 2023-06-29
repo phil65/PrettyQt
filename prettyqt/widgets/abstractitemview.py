@@ -85,9 +85,7 @@ SCROLL_HINT: bidict[ScrollHintStr, widgets.QAbstractItemView.ScrollHint] = bidic
 
 DragDropModeStr = Literal["none", "drag", "drop", "drag_drop", "internal_move"]
 
-DRAG_DROP_MODE: bidict[
-    DragDropModeStr, widgets.QAbstractItemView.DragDropMode
-] = bidict(
+DRAG_DROP_MODE: bidict[DragDropModeStr, widgets.QAbstractItemView.DragDropMode] = bidict(
     none=widgets.QAbstractItemView.DragDropMode.NoDragDrop,
     drag=widgets.QAbstractItemView.DragDropMode.DragOnly,
     drop=widgets.QAbstractItemView.DragDropMode.DropOnly,
@@ -539,9 +537,7 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         """
         return SELECTION_MODE.inverse[self.selectionMode()]
 
-    def set_scroll_mode(
-        self, mode: ScrollModeStr | widgets.QAbstractItemView.ScrollMode
-    ):
+    def set_scroll_mode(self, mode: ScrollModeStr | widgets.QAbstractItemView.ScrollMode):
         """Set the scroll mode for both directions.
 
         Args:
@@ -653,7 +649,6 @@ class AbstractItemViewMixin(widgets.AbstractScrollAreaMixin):
         table_to_sync: widgets.QAbstractItemView,
         orientation: constants.OrientationStr | constants.Orientation,
     ) -> list[core.QMetaObject.Connection]:
-
         orientation = constants.ORIENTATION.get_enum_value(orientation)
 
         def _table_resized(col, _, new_size, table, orientation):

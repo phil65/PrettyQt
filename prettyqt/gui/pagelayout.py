@@ -68,9 +68,7 @@ class PageLayout(gui.QPageLayout):
         """
         return MODES.inverse[self.mode()]
 
-    def set_orientation(
-        self, orientation: OrientationStr | gui.QPageLayout.Orientation
-    ):
+    def set_orientation(self, orientation: OrientationStr | gui.QPageLayout.Orientation):
         """Set orientation.
 
         Args:

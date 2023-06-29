@@ -196,9 +196,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
         items = self.collidingItems(item, constants.ITEM_SELECTION_MODE[mode])
         return listdelegators.BaseListDelegator(items)
 
-    def add_item_group(
-        self, *items: widgets.QGraphicsItem
-    ) -> widgets.GraphicsItemGroup:
+    def add_item_group(self, *items: widgets.QGraphicsItem) -> widgets.GraphicsItemGroup:
         group = widgets.GraphicsItemGroup()
         for item in items:
             group.addToGroup(item)
@@ -223,10 +221,7 @@ class GraphicsScene(core.ObjectMixin, widgets.QGraphicsScene):
             core.QLineF(x, top, x, bottom) for x in range(first_left, right, grid_size)
         ]
         lines.extend(
-            [
-                core.QLineF(left, y, right, y)
-                for y in range(first_top, bottom, grid_size)
-            ]
+            [core.QLineF(left, y, right, y) for y in range(first_top, bottom, grid_size)]
         )
 
         painter.setPen(pen)

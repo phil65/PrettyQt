@@ -47,9 +47,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
     def __len__(self) -> int:
         return self.rowCount()
 
-    def __add__(
-        self, other: core.QAbstractItemModel
-    ) -> core.ConcatenateTablesProxyModel:
+    def __add__(self, other: core.QAbstractItemModel) -> core.ConcatenateTablesProxyModel:
         proxy = core.ConcatenateTablesProxyModel()
         proxy.addSourceModel(self)
         proxy.addSourceModel(other)

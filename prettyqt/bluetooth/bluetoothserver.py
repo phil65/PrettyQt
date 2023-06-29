@@ -29,7 +29,6 @@ ERROR: bidict[ErrorStr, Error] = bidict(
 )
 
 
-
 class BluetoothServer(core.ObjectMixin, bluetooth.QBluetoothServer):
     def __init__(
         self,

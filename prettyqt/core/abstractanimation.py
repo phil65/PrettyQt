@@ -59,9 +59,7 @@ class AbstractAnimationMixin(core.ObjectMixin):
         direction = Direction.Backward if is_forward else Direction.Forward
         self.setDirection(direction)
 
-    def set_direction(
-        self, direction: DirectionStr | core.QAbstractAnimation.Direction
-    ):
+    def set_direction(self, direction: DirectionStr | core.QAbstractAnimation.Direction):
         """Set animation direction.
 
         Args:

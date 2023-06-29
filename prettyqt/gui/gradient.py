@@ -137,9 +137,7 @@ class GradientMixin:
             stops=self.get_stops(),
         )
 
-    def set_coordinate_mode(
-        self, mode: CoordinateModeStr | gui.QGradient.CoordinateMode
-    ):
+    def set_coordinate_mode(self, mode: CoordinateModeStr | gui.QGradient.CoordinateMode):
         """Set the coordinate mode.
 
         Args:

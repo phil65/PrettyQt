@@ -6,6 +6,7 @@ from prettyqt import core, gui
 
 class TextLengthValidator(gui.Validator):
     """Validator which checks whether given text has a specific length."""
+
     ID = "text_length"
 
     def __init__(

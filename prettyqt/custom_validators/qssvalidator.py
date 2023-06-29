@@ -14,9 +14,7 @@ class QssValidator(gui.Validator):
     def __eq__(self, other: object):
         return isinstance(other, QssValidator)
 
-    def validate(
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         with contextlib.suppress(ValueError):
             if not text or parser.parse(text):
                 return self.State.Acceptable, text, pos

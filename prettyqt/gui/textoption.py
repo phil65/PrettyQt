@@ -60,6 +60,5 @@ class TextOption(QtGui.QTextOption):
         #     self.setFlags(self.flags() & ~QtGui.QTextOption.ShowTabsAndSpaces)
 
 
-
 if __name__ == "__main__":
     doc = TextOption()

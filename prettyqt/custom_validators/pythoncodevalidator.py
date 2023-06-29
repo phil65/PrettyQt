@@ -13,9 +13,7 @@ class PythonCodeValidator(gui.Validator):
     def __eq__(self, other: object):
         return isinstance(other, PythonCodeValidator)
 
-    def validate(
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         try:
             ast.parse(text)
             return self.State.Acceptable, text, pos

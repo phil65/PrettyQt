@@ -187,11 +187,10 @@ class PermissionsColumn(FsSpecColumnItem):
     def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
-                return (
-                    oct(int(item.obj["mode"]))[-4:] if item.obj.get("mode") else ""
-                )
+                return oct(int(item.obj["mode"]))[-4:] if item.obj.get("mode") else ""
             case _:
                 return super().get_data(item, role)
+
 
 class IsLinkColumn(FsSpecColumnItem):
     identifier = "mode"
@@ -222,7 +221,6 @@ class ShaColumn(FsSpecColumnItem):
 class FSSpecTreeModel(
     widgets.filesystemmodel.FileSystemModelMixin, custom_models.ColumnItemModel
 ):
-
     COLUMNS = [
         NameColumn,
         PathColumn,

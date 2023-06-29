@@ -6,7 +6,9 @@ from prettyqt.qt import QtCore
 
 class LineSeries(charts.XYSeriesMixin, charts.QLineSeries):
     """QLineSeries with some custom properties."""
+
     pass
+
 
 if __name__ == "__main__":
     line = LineSeries()

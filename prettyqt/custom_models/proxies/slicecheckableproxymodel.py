@@ -89,20 +89,20 @@ class SliceCheckableTreeProxyModel(custom_models.SliceIdentityProxyModel):
         return super().setData(index, role)
 
     def set_checkstate(self, index: core.ModelIndex, recursive=False):
-            key = self.get_index_key(index, include_column=True)
-            current = self._checked.get(key)
-            match current:
-                case constants.CheckState.Checked:
-                    val = constants.CheckState.Unchecked
-                case _:
-                    val = constants.CheckState.Checked
-            self._checked[key] = val
-            if recursive:
-                self.set_child_states(index, val)
-                self.set_parent_states(index)
-            self.dataChanged.emit(index, index)
-            self.checkstate_changed.emit(index, val)
-            return True
+        key = self.get_index_key(index, include_column=True)
+        current = self._checked.get(key)
+        match current:
+            case constants.CheckState.Checked:
+                val = constants.CheckState.Unchecked
+            case _:
+                val = constants.CheckState.Checked
+        self._checked[key] = val
+        if recursive:
+            self.set_child_states(index, val)
+            self.set_parent_states(index)
+        self.dataChanged.emit(index, index)
+        self.checkstate_changed.emit(index, val)
+        return True
 
     def set_parent_states(self, index: core.ModelIndex):
         indexes = []
@@ -129,13 +129,12 @@ class SliceCheckableTreeProxyModel(custom_models.SliceIdentityProxyModel):
 
     def set_child_states(self, index, state):
         iterator = self.iter_tree(index)
-        next(iterator) # first one is ourself, throw it away
+        next(iterator)  # first one is ourself, throw it away
         for child_index in iterator:
             key = self.get_index_key(child_index, include_column=True)
             self._checked[key] = state
             self.dataChanged.emit(child_index, child_index)
             self.checkstate_changed.emit(child_index, state)
-
 
 
 if __name__ == "__main__":

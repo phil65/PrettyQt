@@ -77,9 +77,7 @@ class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):
 
     def __add__(
         self,
-        other: (
-            tuple | list | widgets.QWidget | widgets.QLayout | widgets.QLayoutItem
-        ),
+        other: (tuple | list | widgets.QWidget | widgets.QLayout | widgets.QLayoutItem),
     ):
         if isinstance(other, tuple | list):
             for i, _control in enumerate(other):

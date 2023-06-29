@@ -118,9 +118,7 @@ WhiteBalanceModeStr = Literal[
     "sunset",
 ]
 
-WHITE_BALANCE: bidict[
-    WhiteBalanceModeStr, multimedia.QCamera.WhiteBalanceMode
-] = bidict(
+WHITE_BALANCE: bidict[WhiteBalanceModeStr, multimedia.QCamera.WhiteBalanceMode] = bidict(
     auto=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceAuto,
     manual=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceManual,
     sunlight=multimedia.QCamera.WhiteBalanceMode.WhiteBalanceSunlight,
@@ -134,9 +132,7 @@ WHITE_BALANCE: bidict[
 
 
 class Camera(core.ObjectMixin, multimedia.QCamera):
-    def set_exposure_mode(
-        self, mode: ExposureModeStr | multimedia.QCamera.ExposureMode
-    ):
+    def set_exposure_mode(self, mode: ExposureModeStr | multimedia.QCamera.ExposureMode):
         """Set the exposure mode.
 
         Args:

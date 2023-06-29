@@ -37,6 +37,7 @@ class ValueColumn(custom_models.ColumnItem):
                 return True
         return False
 
+
 class TypeColumn(custom_models.ColumnItem):
     name = "Type"
     doc = "Type"

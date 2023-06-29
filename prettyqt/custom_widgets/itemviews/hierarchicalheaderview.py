@@ -378,9 +378,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
                 self.setSortIndicator(sort_ind_index + rng[0], self.sortIndicatorOrder())
         model.layoutChanged.emit()  # update view
 
-    def get_style_option_for_cell(
-        self, logical_index: int
-    ) -> widgets.QStyleOptionHeader:
+    def get_style_option_for_cell(self, logical_index: int) -> widgets.QStyleOptionHeader:
         opt = widgets.QStyleOptionHeader()
         self.initStyleOption(opt)
         if self.isSortIndicatorShown() and self.sortIndicatorSection() == logical_index:
@@ -453,9 +451,7 @@ class HierarchicalHeaderView(widgets.HeaderView):
             cur_leaf_index = cur_leaf_index.parent()
         return s
 
-    def paintSection(
-        self, painter: gui.QPainter, rect: core.QRect, logical_index: int
-    ):
+    def paintSection(self, painter: gui.QPainter, rect: core.QRect, logical_index: int):
         if not rect.isValid():
             super().paintSection(painter, rect, logical_index)
             return

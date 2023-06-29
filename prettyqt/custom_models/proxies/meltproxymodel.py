@@ -5,6 +5,7 @@ from prettyqt import constants, core
 
 class MeltProxyModel(core.AbstractProxyModel):
     """Proxy model to unpivot a table from wide format to long format."""
+
     ID = "melt"
 
     def __init__(

@@ -105,9 +105,7 @@ class TabWidget(widgets.WidgetMixin, widgets.QTabWidget):
         """
         return TAB_SHAPES.inverse[self.tabShape()]
 
-    def set_tab_position(
-        self, position: TabPositionStr | widgets.QTabWidget.TabPosition
-    ):
+    def set_tab_position(self, position: TabPositionStr | widgets.QTabWidget.TabPosition):
         """Set tab position for the tabwidget.
 
         Args:

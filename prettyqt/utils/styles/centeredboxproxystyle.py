@@ -9,6 +9,7 @@ SE = widgets.QStyle.SubElement
 class CenteredBoxProxyStyle(widgets.QProxyStyle):
     class Roles(enum.IntEnum):
         """Proxy roles."""
+
         CheckAlignmentRole = constants.USER_ROLE + 3321
         DecorationAlignmentRole = constants.USER_ROLE + 1322
 

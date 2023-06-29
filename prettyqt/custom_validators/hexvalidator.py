@@ -15,9 +15,7 @@ class HexValidator(gui.Validator):
     def __eq__(self, other: object):
         return isinstance(other, HexValidator) and other._maximum == self._maximum
 
-    def validate(
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         try:
             val = int(text, 0)
         except ValueError:

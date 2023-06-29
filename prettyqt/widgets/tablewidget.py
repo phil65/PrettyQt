@@ -20,16 +20,12 @@ class TableWidgetMixin(widgets.TableViewMixin):
         order = constants.DESCENDING if reverse else constants.ASCENDING
         self.sortItems(column, order)
 
-    def openPersistentEditor(
-        self, index: core.ModelIndex | widgets.QTableWidgetItem
-    ):
+    def openPersistentEditor(self, index: core.ModelIndex | widgets.QTableWidgetItem):
         if isinstance(index, core.ModelIndex):
             index = self.itemFromIndex(index)
         super().openPersistentEditor(index)
 
-    def closePersistentEditor(
-        self, index: core.ModelIndex | widgets.QTableWidgetItem
-    ):
+    def closePersistentEditor(self, index: core.ModelIndex | widgets.QTableWidgetItem):
         if isinstance(index, core.ModelIndex):
             index = self.itemFromIndex(index)
         super().closePersistentEditor(index)

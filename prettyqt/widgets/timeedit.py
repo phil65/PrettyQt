@@ -22,6 +22,7 @@ class TimeEdit(widgets.DateTimeEditMixin, widgets.QTimeEdit):
     def set_time(self, value: datatypes.TimeType):
         super().setTime(datatypes.to_time(value))
 
+
 if __name__ == "__main__":
     from prettyqt import widgets
 

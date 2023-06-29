@@ -93,9 +93,7 @@ class WidgetMixin(core.ObjectMixin):
     def set_disabled(self) -> None:
         self.setEnabled(False)
 
-    def insertAction(
-        self, position_or_action: int | gui.QAction, action: gui.QAction
-    ):
+    def insertAction(self, position_or_action: int | gui.QAction, action: gui.QAction):
         """Extend insertAction to also allow int index."""
         if isinstance(position_or_action, int):
             actions = self.actions()

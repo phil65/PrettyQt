@@ -25,7 +25,6 @@ class MappingModel(custom_models.ListMixin, core.AbstractTableModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return list(self.items[0].keys())[section]
 
-
     def data(
         self,
         index: core.ModelIndex,

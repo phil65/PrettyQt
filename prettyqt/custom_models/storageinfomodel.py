@@ -4,8 +4,8 @@ from prettyqt import constants, core, custom_models
 
 
 class RootPathColumn(custom_models.ColumnItem):
-    name="Root path"
-    doc="Root path"
+    name = "Root path"
+    doc = "Root path"
 
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
@@ -14,8 +14,8 @@ class RootPathColumn(custom_models.ColumnItem):
 
 
 class VolumeNameColumn(custom_models.ColumnItem):
-    name="Volume name"
-    doc="Volume name"
+    name = "Volume name"
+    doc = "Volume name"
 
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
@@ -24,7 +24,7 @@ class VolumeNameColumn(custom_models.ColumnItem):
 
 
 class DeviceColumn(custom_models.ColumnItem):
-    name="Device"
+    name = "Device"
 
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
@@ -33,7 +33,7 @@ class DeviceColumn(custom_models.ColumnItem):
 
 
 class FileSystemColumn(custom_models.ColumnItem):
-    name="File system"
+    name = "File system"
 
     def get_data(self, item: core.QStorageInfo, role: constants.ItemDataRole):
         match role:
@@ -96,7 +96,6 @@ class ValidColumn(custom_models.ColumnItem):
 
 
 class StorageInfoModel(custom_models.ColumnTableModel):
-
     COLUMNS = [
         RootPathColumn,
         VolumeNameColumn,

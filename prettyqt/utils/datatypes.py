@@ -674,7 +674,8 @@ def to_py_pattern(pattern: PatternAndStringType):
 def to_regular_expression(
     pattern: PatternAndStringType,
     flag: core.regularexpression.PatternOptionStr
-    | core.RegularExpression.PatternOption | None = None,
+    | core.RegularExpression.PatternOption
+    | None = None,
 ):
     from prettyqt import core
 

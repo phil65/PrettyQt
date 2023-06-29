@@ -104,6 +104,7 @@ class MediaMetaData(
 
 if __name__ == "__main__":
     from prettyqt import core
+
     metadata = MediaMetaData()
     metadata["resolution"] = core.QSize(10, 10)
     print(metadata)

@@ -74,7 +74,7 @@ class MultiLineLayout(widgets.BoxLayout):
         # doesnt seem right?
         return None if idx == len(self.get_items()) else self.get_items()[idx]
 
-    def takeAt(self, idx: int) -> widgets.QLayoutItem | None: # or 0 according to docs?
+    def takeAt(self, idx: int) -> widgets.QLayoutItem | None:  # or 0 according to docs?
         layout_idx, item_idx = divmod(idx, len(self.layouts))
         layout = self.layouts[layout_idx]
         item = layout.takeAt(item_idx)

@@ -85,6 +85,7 @@ class AnnotatedScrollBar(widgets.ScrollBar):
     annotations = core.Property(list, get_annotations, set_annotations)
     document_length = core.Property(int, get_document_length, set_document_length)
 
+
 if __name__ == "__main__":
     app = widgets.app()
     widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))

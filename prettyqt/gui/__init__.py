@@ -9,7 +9,6 @@ import sys
 from prettyqt.qt.QtGui import *  # noqa: F403
 
 
-
 from .backingstore import BackingStore
 from .stylehints import StyleHints
 from .pageranges import PageRanges
@@ -117,6 +116,7 @@ from .action import Action, ActionMixin
 from .actiongroup import ActionGroup
 
 # might_be_rich_text = Qt.mightBeRichText
+
 
 def app(args: list[str] | None = None, **kwargs) -> GuiApplication:
     if (instance := GuiApplication.instance()) is not None:

@@ -78,7 +78,6 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
                 max_ = abs(max(abs(max_), data))
                 return self.get_color_for_value(data / max_)
 
-
     def get_color_for_value(self, value: float) -> gui.QColor:
         col = helpers.get_color_percentage(
             self._low_color.getRgb(), self._high_color.getRgb(), value * 100
@@ -109,11 +108,7 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
         setColorMode,
     )
 
-    low_color = core.Property(
-        gui.QColor,
-        getLowColor,
-        setLowColor
-    )
+    low_color = core.Property(gui.QColor, getLowColor, setLowColor)
 
     color_mode = core.Property(
         gui.QColor,
@@ -124,6 +119,7 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
 
 if __name__ == "__main__":
     from prettyqt import debugging, widgets
+
     app = widgets.app()
 
     table = debugging.example_table()

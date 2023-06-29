@@ -17,9 +17,7 @@ class NotStrictValidator(gui.Validator):
             isinstance(other, NotStrictValidator) and other._validator == self._validator
         )
 
-    def validate(
-        self, text: str, pos: int = 0
-    ) -> tuple[gui.QValidator.State, str, int]:
+    def validate(self, text: str, pos: int = 0) -> tuple[gui.QValidator.State, str, int]:
         state, text, pos = self._validator.validate(text, pos)
         is_invalid = state == self.State.Invalid
         return self.State.Intermediate if is_invalid else state, text, pos

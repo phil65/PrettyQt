@@ -68,9 +68,7 @@ class MdiArea(widgets.AbstractScrollAreaMixin, widgets.QMdiArea):
         """
         return WINDOW_ORDER.inverse[self.activationOrder()]
 
-    def set_tab_position(
-        self, position: TabPositionStr | widgets.QTabWidget.TabPosition
-    ):
+    def set_tab_position(self, position: TabPositionStr | widgets.QTabWidget.TabPosition):
         """Set tab position for the MDI area.
 
         Args:

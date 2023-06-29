@@ -110,9 +110,7 @@ class PainterMixin:
 
     def draw_polygon(
         self,
-        points: (
-            gui.QPolygon | gui.QPolygonF | list[core.QPoint] | list[core.QPointF]
-        ),
+        points: (gui.QPolygon | gui.QPolygonF | list[core.QPoint] | list[core.QPointF]),
         fill_rule: constants.FillRuleStr | constants.FillRule = "odd_even",
     ):
         self.drawPolygon(points, fillRule=constants.FILL_RULE.get_enum_value(fill_rule))

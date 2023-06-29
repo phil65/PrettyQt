@@ -64,13 +64,10 @@ class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
                 case str():
                     search_val = str(search_val)
                     data = str(data)
-                    if (
-                        self.filterMode == "fuzzy"
-                        and not fuzzy.fuzzy_match_simple(
-                            search_val,
-                            data,
-                            case_sensitive=self.is_filter_case_sensitive(),
-                        )
+                    if self.filterMode == "fuzzy" and not fuzzy.fuzzy_match_simple(
+                        search_val,
+                        data,
+                        case_sensitive=self.is_filter_case_sensitive(),
                     ):
                         return False
                     if not self.is_filter_case_sensitive():

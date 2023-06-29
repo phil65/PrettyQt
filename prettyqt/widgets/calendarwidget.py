@@ -9,9 +9,7 @@ from prettyqt.utils import bidict, datatypes
 
 SelectionModeStr = Literal["none", "single"]
 
-SELECTION_MODE: bidict[
-    SelectionModeStr, widgets.QCalendarWidget.SelectionMode
-] = bidict(
+SELECTION_MODE: bidict[SelectionModeStr, widgets.QCalendarWidget.SelectionMode] = bidict(
     none=widgets.QCalendarWidget.SelectionMode.NoSelection,
     single=widgets.QCalendarWidget.SelectionMode.SingleSelection,
 )

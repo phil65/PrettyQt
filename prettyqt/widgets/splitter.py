@@ -120,9 +120,7 @@ class SplitterMixin(widgets.FrameMixin):
 
     def add(
         self,
-        item: widgets.QWidget
-        | widgets.QLayout
-        | list[widgets.QWidget | widgets.QLayout],
+        item: widgets.QWidget | widgets.QLayout | list[widgets.QWidget | widgets.QLayout],
         stretch: int | None = None,
     ):
         match item:

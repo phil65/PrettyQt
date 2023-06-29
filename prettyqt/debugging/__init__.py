@@ -234,6 +234,7 @@ def get_all_qt_classes():
         if isinstance(i[1], type)
     ]
 
+
 def get_all_qt_enums():
     import inspect
     import enum

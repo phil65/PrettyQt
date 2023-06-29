@@ -121,6 +121,7 @@ class CustomLexer(RegexLexer):
 
 if __name__ == "__main__":
     from prettyqt import widgets, custom_widgets
+
     app = widgets.app()
     widget = custom_widgets.RegexLineEdit()
     widget.show()

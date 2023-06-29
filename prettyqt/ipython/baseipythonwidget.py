@@ -122,6 +122,7 @@ class BaseIPythonWidget(RichJupyterWidget, widgets.WidgetMixin):
 
     completion_mode = core.Property(str, get_completion_mode, set_completion_mode)
 
+
 if __name__ == "__main__":
     from prettyqt.custom_widgets import commandpalette
 

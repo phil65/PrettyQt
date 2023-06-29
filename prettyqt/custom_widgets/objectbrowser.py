@@ -5,7 +5,7 @@ from __future__ import annotations
 
 import logging
 
-from prettyqt import constants, core, custom_models, custom_widgets,  gui, widgets
+from prettyqt import constants, core, custom_models, custom_widgets, gui, widgets
 from prettyqt.custom_models.pythonobjecttreemodel import (
     CommentsColumn,
     DocStringColumn,
@@ -45,7 +45,6 @@ class ObjectBrowser(widgets.MainWindow):
         self._attr_details = [
             Klass(model=self._tree_model) for Klass in DEFAULT_ATTR_DETAILS
         ]
-
 
         # Toggle auto-refresh on/off
         self.toggle_auto_refresh_action = gui.Action(

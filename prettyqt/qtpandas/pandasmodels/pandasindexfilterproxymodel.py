@@ -256,4 +256,3 @@ if __name__ == "__main__":
     w.show()
     with app.debug_mode():
         app.exec()
-

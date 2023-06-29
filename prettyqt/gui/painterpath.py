@@ -43,9 +43,7 @@ class PainterPath(QtGui.QPainterPath):
         self.add(other)
         return self
 
-    def add(
-        self, other: core.QPoint | core.QRect | QtGui.QPainterPath | QtGui.QRegion
-    ):
+    def add(self, other: core.QPoint | core.QRect | QtGui.QPainterPath | QtGui.QRegion):
         match other:
             case QtGui.QPolygonF():
                 self.addPolygon(other)

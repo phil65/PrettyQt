@@ -9,6 +9,7 @@ from prettyqt.utils import get_repr
 
 class CompositeValidator(gui.Validator):
     """BaseClass for combined validators."""
+
     ID = "composite"
 
     def __init__(

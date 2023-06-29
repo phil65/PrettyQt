@@ -24,6 +24,7 @@ class ProxyMapper(core.Object):
     use mapToSource / mapSelectionFromSource until it gets there,
     and then mapFromSource / mapSelectionFromSource to get down to 2_2.
     """
+
     def __init__(
         self,
         proxy_1: core.QAbstractItemModel,

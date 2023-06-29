@@ -16,9 +16,7 @@ EXIT_STATUS: bidict[ExitStatusStr, core.QProcess.ExitStatus] = bidict(
 
 InputChannelModeStr = Literal["managed", "forwarded"]
 
-INPUT_CHANNEL_MODES: bidict[
-    InputChannelModeStr, core.QProcess.InputChannelMode
-] = bidict(
+INPUT_CHANNEL_MODES: bidict[InputChannelModeStr, core.QProcess.InputChannelMode] = bidict(
     managed=core.QProcess.InputChannelMode.ManagedInputChannel,
     forwarded=core.QProcess.InputChannelMode.ForwardedInputChannel,
 )

@@ -187,9 +187,7 @@ class NetworkRequest(QtNetwork.QNetworkRequest):
 
     def set_headers(self, headers: Mapping[str, str]):
         for k, v in headers.items():
-            self.setRawHeader(
-                core.QByteArray(k.encode()), core.QByteArray(v.encode())
-            )
+            self.setRawHeader(core.QByteArray(k.encode()), core.QByteArray(v.encode()))
 
     def get_headers(self) -> Mapping[str, str]:
         return {

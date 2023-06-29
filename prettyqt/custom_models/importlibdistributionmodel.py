@@ -154,6 +154,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
 
     Attention: Model can be recursive, so be careful with iterating whole tree.
     """
+
     TreeItem = DistTreeItem
 
     COLUMNS = [
@@ -189,9 +190,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         return cls(distributions, parent)
 
     @classmethod
-    def from_package(
-        cls, package_name: str, parent: core.QObject | None = None
-    ) -> Self:
+    def from_package(cls, package_name: str, parent: core.QObject | None = None) -> Self:
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)
 
@@ -269,9 +268,7 @@ class ImportlibDistributionModel(core.AbstractTableModel):
         return cls(distributions, parent)
 
     @classmethod
-    def from_package(
-        cls, package_name: str, parent: core.QObject | None = None
-    ) -> Self:
+    def from_package(cls, package_name: str, parent: core.QObject | None = None) -> Self:
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)
 

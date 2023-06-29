@@ -147,7 +147,6 @@ class MessageColumn(custom_models.ColumnItem):
 
 
 class LogRecordModel(custom_models.ColumnTableModel):
-
     COLUMNS = [
         LevelNameColumn,
         FileNameColumn,

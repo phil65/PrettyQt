@@ -86,15 +86,9 @@ class SliceAppearanceProxyModel(custom_models.SliceIdentityProxyModel):
         return self._alignment
 
     font_value = core.Property(gui.QFont, get_font, set_font)
-    foreground_value = core.Property(
-        object, get_foreground, set_foreground
-    )
-    background_value = core.Property(
-        object, get_background, set_background
-    )
-    alignment_value = core.Property(
-        constants.AlignmentFlag, get_alignment, set_alignment
-    )
+    foreground_value = core.Property(object, get_foreground, set_foreground)
+    background_value = core.Property(object, get_background, set_background)
+    alignment_value = core.Property(constants.AlignmentFlag, get_alignment, set_alignment)
 
 
 if __name__ == "__main__":

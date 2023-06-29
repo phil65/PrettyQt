@@ -22,7 +22,7 @@ SPEC: bidict[SpecStr, QtGui.QColor.Spec] = bidict(
 NameFormatStr = Literal["hex_rgb", "hex_argb"]
 NameStr = NameFormatStr | Literal["svg_rgb", "svg_argb", "qcss_rgb", "qcss_argb"]
 
-NAME_FORMAT: bidict[NameFormatStr, QtGui.QColor.NameFormat]  = bidict(
+NAME_FORMAT: bidict[NameFormatStr, QtGui.QColor.NameFormat] = bidict(
     hex_rgb=QtGui.QColor.NameFormat.HexRgb, hex_argb=QtGui.QColor.NameFormat.HexArgb
 )
 

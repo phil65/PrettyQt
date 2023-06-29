@@ -15,9 +15,7 @@ from prettyqt.utils import bidict, datatypes, get_repr
 
 MarkdownFeatureStr = Literal["no_html", "commonmark", "github"]
 
-MARKDOWN_FEATURES: bidict[
-    MarkdownFeatureStr, gui.QTextDocument.MarkdownFeature
-] = bidict(
+MARKDOWN_FEATURES: bidict[MarkdownFeatureStr, gui.QTextDocument.MarkdownFeature] = bidict(
     no_html=gui.QTextDocument.MarkdownFeature.MarkdownNoHTML,
     commonmark=gui.QTextDocument.MarkdownFeature.MarkdownDialectCommonMark,
     github=gui.QTextDocument.MarkdownFeature.MarkdownDialectGitHub,
@@ -52,9 +50,7 @@ FIND_FLAGS: bidict[FindFlagStr, gui.QTextDocument.FindFlag] = bidict(
 
 MetaInformationStr = Literal["document_title", "document_url", "css_media"]
 
-META_INFORMATION: bidict[
-    MetaInformationStr, gui.QTextDocument.MetaInformation
-] = bidict(
+META_INFORMATION: bidict[MetaInformationStr, gui.QTextDocument.MetaInformation] = bidict(
     document_title=gui.QTextDocument.MetaInformation.DocumentTitle,
     document_url=gui.QTextDocument.MetaInformation.DocumentUrl,
     css_media=gui.QTextDocument.MetaInformation.CssMedia,

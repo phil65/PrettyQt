@@ -20,9 +20,7 @@ SelectionFlagStr = Literal[
     "clear_and_select",
 ]
 
-SELECTION_FLAG: bidict[
-    SelectionFlagStr, core.QItemSelectionModel.SelectionFlag
-] = bidict(
+SELECTION_FLAG: bidict[SelectionFlagStr, core.QItemSelectionModel.SelectionFlag] = bidict(
     none=core.QItemSelectionModel.SelectionFlag.NoUpdate,
     clear=core.QItemSelectionModel.SelectionFlag.Clear,
     select=core.QItemSelectionModel.SelectionFlag.Select,

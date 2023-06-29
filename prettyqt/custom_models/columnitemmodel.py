@@ -33,7 +33,6 @@ class ColumnItem:
     def __init__(self, model: core.QAbstractItemModel):
         self.model = model
 
-
     def get_name(self) -> str:
         return self.name
 
@@ -76,12 +75,12 @@ class ColumnItem:
 class ColumnItemModelMixin:
     class ExtraRoles(enum.IntEnum):
         """Addional roles."""
+
         TreeItemRole = constants.USER_ROLE + 43435
         ColumnItemRole = constants.USER_ROLE + 43436
 
     def set_columns(self, columns: Sequence[type[ColumnItem]]):
         self._attr_cols = [Col(model=self) for Col in columns]
-
 
     def data(
         self,
@@ -254,6 +253,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
     test = {}
+
     class TestColumn(ColumnItem):
         name = "test"
         checkable = True

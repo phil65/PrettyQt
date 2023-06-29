@@ -9,9 +9,7 @@ SC = widgets.QStyle.SubControl
 class SliderMoveToMouseClickEventFilter(eventfilters.BaseEventFilter):
     ID = "slider_move_to_mouse_click"
 
-    def _move_to_mouse_position(
-        self, scrollbar: widgets.QScrollBar, point: core.QPoint
-    ):
+    def _move_to_mouse_position(self, scrollbar: widgets.QScrollBar, point: core.QPoint):
         opt = widgets.StyleOptionSlider()
         scrollbar.initStyleOption(opt)
         control = scrollbar.style().hitTestComplexControl(

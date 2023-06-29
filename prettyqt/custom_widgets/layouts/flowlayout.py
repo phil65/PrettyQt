@@ -132,9 +132,7 @@ class FlowLayout(widgets.Layout):
 class Separator(widgets.Widget):
     """Vertical separator lines usable in FlowLayout."""
 
-    def __init__(
-        self, *args, widget_for_height: widgets.QWidget | None = None, **kwargs
-    ):
+    def __init__(self, *args, widget_for_height: widgets.QWidget | None = None, **kwargs):
         """You must provide a widget in the layout either here or with setBuddy.
 
         The height of the separator is computed using this widget,

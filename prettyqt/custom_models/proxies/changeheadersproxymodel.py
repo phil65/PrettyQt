@@ -30,7 +30,6 @@ class ChangeHeadersProxyModel(core.IdentityProxyModel):
             raise ValueError("list needs to be same list as header")
         super().setSourceModel(model)
 
-
     def get_header(self) -> list[int]:
         return self._header
 

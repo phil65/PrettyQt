@@ -35,9 +35,7 @@ class GraphicsWidgetMixin(widgets.GraphicsObjectMixin, widgets.GraphicsLayoutIte
         self.setLayout(layout)
         return layout
 
-    def set_focus_policy(
-        self, policy: constants.FocusPolicyStr | constants.FocusPolicy
-    ):
+    def set_focus_policy(self, policy: constants.FocusPolicyStr | constants.FocusPolicy):
         """Set the way the widget accepts keyboard focus.
 
         Args:

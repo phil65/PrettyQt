@@ -59,6 +59,7 @@ class SliceEdit(widgets.Widget):
         if value.step is None:
             self.spinbox_step.set_value(value.step)
 
+
 if __name__ == "__main__":
     app = widgets.app()
     widget = SliceEdit(window_title="Test")

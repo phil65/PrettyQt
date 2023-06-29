@@ -191,8 +191,7 @@ class AbstractSocketMixin(core.IODeviceMixin):
         self,
         hostname: str,
         port: int,
-        open_mode: core.QIODevice.OpenModeFlag
-        | core.iodevice.OpenModeStr = "read_write",
+        open_mode: core.QIODevice.OpenModeFlag | core.iodevice.OpenModeStr = "read_write",
         protocol: (
             network.QAbstractSocket.NetworkLayerProtocol | NetworkLayerProtocolStr
         ) = "any_ip",

@@ -3,9 +3,7 @@ from __future__ import annotations
 from prettyqt import core
 
 
-class SequentialAnimationGroup(
-    core.AnimationGroupMixin, core.QSequentialAnimationGroup
-):
+class SequentialAnimationGroup(core.AnimationGroupMixin, core.QSequentialAnimationGroup):
     def reverse(self):
         for anim in reversed(list(self)):
             old_start = anim.startValue()

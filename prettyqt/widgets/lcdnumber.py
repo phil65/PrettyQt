@@ -48,9 +48,7 @@ class LCDNumber(widgets.FrameMixin, widgets.QLCDNumber):
         """
         return MODE.inverse[self.mode()]
 
-    def set_segment_style(
-        self, style: SegmentStyleStr | widgets.QLCDNumber.SegmentStyle
-    ):
+    def set_segment_style(self, style: SegmentStyleStr | widgets.QLCDNumber.SegmentStyle):
         """Set the segment style.
 
         Args:

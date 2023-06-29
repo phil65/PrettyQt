@@ -401,9 +401,7 @@ class ObjectMixin:
             for i in self.dynamicPropertyNames()
         }
 
-
     def bind_property(cls, object_name: str, prop_name: str) -> property:
-
         def getter(self):
             return self.findChild(cls, object_name).property(prop_name)
 
