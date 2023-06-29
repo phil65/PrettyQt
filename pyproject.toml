@@ -289,18 +289,18 @@ select = [
     # "PD",   # pandas-vet
     # "PERF", # perflint
     # "PGH",  # pygrep-hooks
-    # "PIE",  # flake8-pie
+    "PIE",  # flake8-pie
     # "PL",   # PyLint  (PLC, PLE, PLR, PLW)
     # "PT",   # flake8-pytest-style
-    # "PTH",  # flake8-use-pathlib
-    # "PYI",  # flake8-pyi
+    "PTH",  # flake8-use-pathlib
+    "PYI",  # flake8-pyi
     # "Q",    # flake8-quotes
     # "RET",  # flake8-return
     # "RSE",  # flake8-raise
     # "RUF",  # ruff-specific rules
     # "S",    # flake8-bandit
     # "SIM",  # flake8-simplify
-    # "SLF",  # flake8-self
+    "SLF",  # flake8-self
     # "SLOT",  # flake8-slots
     # "T",
     # "TD",   # flake8-todos
@@ -337,6 +337,7 @@ ignore = [
     "D408",  # Section underline should be in the line following the section's name ("{name}")
     "D409",  # Section underline should match the length of its name ("{name}")
     "D413",  # Missing blank line after last section ("{name}")
+    "SLF001",# Private member accessed
 ]
 extend-exclude = [
     'docs',

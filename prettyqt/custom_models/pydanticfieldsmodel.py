@@ -87,7 +87,6 @@ if __name__ == "__main__":
         minimum: float = 0.0
         maximum: float = 0.0
         pattern: str = ""
-        requires_restart: bool = False
 
     class SelectionSetting(BaseSetting):
         options: list[str] | None = None

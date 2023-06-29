@@ -112,7 +112,7 @@ class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
 
     low_color = core.Property(gui.QColor, getLowColor, setLowColor)
 
-    color_mode = core.Property(
+    high_color = core.Property(
         gui.QColor,
         getHighColor,
         setHighColor,

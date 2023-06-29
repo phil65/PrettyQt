@@ -94,7 +94,6 @@ if __name__ == "__main__":
         minimum: float = 0.0
         maximum: float = 0.0
         pattern: str = ""
-        requires_restart: bool = False
 
     app_style = SelectionSetting(
         name="app_style",
