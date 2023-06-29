@@ -3,6 +3,11 @@
 from .scrollbars.annotatedscrollbar import AnnotatedScrollBar
 from .scrollbars.previewscrollbar import PreviewScrollBar
 from .scrollbars.smoothscrollbar import SmoothScrollBar
+
+from .layouts.flowlayout import FlowLayout
+from .layouts.borderlayout import BorderLayout
+from .layouts.multilinelayout import MultiLineLayout
+
 from .imageviewer import ImageViewer
 from .elidedlabel import ElidedLabel
 from .editors.listinput import ListInput
@@ -39,8 +44,6 @@ from .editors.stringornumberwidget import StringOrNumberWidget
 from .iconlabel import IconLabel
 from .iconbrowser import IconBrowser
 from .iconwidget import IconWidget
-from .flowlayout import FlowLayout
-from .borderlayout import BorderLayout
 from .objectbrowser import ObjectBrowser
 from .completionwidget import CompletionWidget
 from .sidebarwidget import SidebarWidget
@@ -81,6 +84,7 @@ __all__ = [
     "ListInput",
     "BoolDictToolButton",
     "OptionalWidget",
+    "MultiLineLayout",
     "WidgetEditor",
     "CollapsibleFrame",
     "CompletionWidget",
