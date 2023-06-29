@@ -6,6 +6,8 @@ from prettyqt import gui
 
 
 class JsonValidator(gui.Validator):
+    """Validator which checks for strings which can be parsed as JSON."""
+
     ID = "json"
 
     def __eq__(self, other: object):

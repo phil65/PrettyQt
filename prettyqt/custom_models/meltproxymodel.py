@@ -4,6 +4,7 @@ from prettyqt import constants, core
 
 
 class MeltProxyModel(core.AbstractProxyModel):
+    """Proxy model to unpivot a table from wide format to long format."""
     ID = "melt"
 
     def __init__(
@@ -69,12 +70,11 @@ class MeltProxyModel(core.AbstractProxyModel):
             return self.sourceModel().headerData(section, orientation, role)
 
     def index(self, row: int, column: int, parent: core.ModelIndex):
-        if column in self._id_columns:
-            col_pos = self.get_source_column_for_proxy_column(column)
-            row_pos = row % self.sourceModel().rowCount()
-            return self.sourceModel().index(row_pos, col_pos, parent)
-        else:
+        if column not in self._id_columns:
             return self.createIndex(row, column, core.ModelIndex())
+        col_pos = self.get_source_column_for_proxy_column(column)
+        row_pos = row % self.sourceModel().rowCount()
+        return self.sourceModel().index(row_pos, col_pos, parent)
 
     def parent(self, index: core.ModelIndex):
         if not self.is_source_column(index.column()):
@@ -115,21 +115,27 @@ class MeltProxyModel(core.AbstractProxyModel):
             return core.ModelIndex()
 
     def get_id_columns(self) -> list[int]:
+        """Get list of identifier columns."""
         return self._id_columns
 
     def set_id_columns(self, columns: list[int]):
+        """Set identifier variable columns."""
         self._id_columns = columns
 
     def get_var_name(self) -> str:
+        """Get variable column header."""
         return self._var_name
 
     def set_var_name(self, name: str):
+        """Set header for variable column."""
         self._var_name = name
 
     def get_value_name(self) -> str:
+        """Get value column header."""
         return self._value_name
 
     def set_value_name(self, name: str):
+        """Set header for value column."""
         self._value_name = name
 
     id_columns = core.Property(list, get_id_columns, set_id_columns)
@@ -138,13 +144,19 @@ class MeltProxyModel(core.AbstractProxyModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import debugging, widgets
+    from prettyqt import gui, widgets
 
     app = widgets.app()
-    table = debugging.example_table()
-    model = MeltProxyModel(parent=table, id_columns=[0, 1])
-    model.setSourceModel(table.model())
+    data = dict(
+        first=["John", "Mary"],
+        last=["Doe", "Bo"],
+        height=[5.5, 6.0],
+        weight=[130, 150],
+    )
+    model = gui.StandardItemModel.from_dict(data)
+    table = widgets.TableView()
     table.set_model(model)
     table.show()
+    table.proxifier.melt(id_columns=[0, 1])
     with app.debug_mode():
-        app.main_loop()
+        app.exec()

@@ -4,6 +4,8 @@ from prettyqt import gui
 
 
 class HexValidator(gui.Validator):
+    """Validator which checks for hexadecimal values."""
+
     ID = "hex"
 
     def __init__(self, maximum: int | None = None, parent=None):

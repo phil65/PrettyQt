@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore
 
 
 class WhitelistValidator(gui.Validator):
+    """Validator which allows a fixed list of strings."""
+
     ID = "whitelist"
 
     def __init__(

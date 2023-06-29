@@ -5,6 +5,8 @@ from prettyqt.qt import QtCore
 
 
 class BlacklistValidator(gui.Validator):
+    """Validator which excludes a fixed list of strings."""
+
     ID = "blacklist"
 
     def __init__(

@@ -54,6 +54,8 @@ class BaseRegexValidator(gui.Validator):
 
 
 class IntListValidator(BaseRegexValidator):
+    """Validator which checks whether given string is a comma-separated list of ints."""
+
     ID = "int_list"
 
     def __init__(self, allow_single: bool = True, parent: QtCore.QObject | None = None):
@@ -72,6 +74,8 @@ class IntListValidator(BaseRegexValidator):
 
 
 class FloatListValidator(BaseRegexValidator):
+    """Validator which checks whether given string is a comma-separated list of floats."""
+
     ID = "float_list"
 
     def __init__(self, allow_single: bool = True, parent: QtCore.QObject | None = None):

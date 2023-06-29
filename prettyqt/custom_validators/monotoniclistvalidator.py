@@ -8,6 +8,8 @@ re_custom_sep = re.compile(r"\s*,\s*")
 
 
 class MonotonicListValidator(gui.Validator):
+    """Validator which checks whether given string contains a monotonic list."""
+
     ID = "monotonic"
 
     def __init__(self, kind: str = "increasing", parent=None):

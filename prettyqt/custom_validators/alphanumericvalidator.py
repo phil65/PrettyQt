@@ -4,6 +4,8 @@ from prettyqt import gui
 
 
 class AlphaNumericValidator(gui.Validator):
+    """Validator which checks whether only alphanumeric characters are included."""
+
     ID = "alphanumeric"
 
     def __eq__(self, other: object):

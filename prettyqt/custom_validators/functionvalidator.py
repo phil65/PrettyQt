@@ -6,6 +6,11 @@ from prettyqt import gui
 
 
 class FunctionValidator(gui.Validator):
+    """Validator which checks based on a given Callable.
+
+    Allows for quickly creating a validator without subclassing.
+    """
+
     ID = "function"
 
     def __init__(self, fn: Callable[[str], bool], parent=None):

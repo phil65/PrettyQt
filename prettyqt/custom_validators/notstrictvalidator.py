@@ -4,6 +4,8 @@ from prettyqt import gui
 
 
 class NotStrictValidator(gui.Validator):
+    """Validator which turns Invalid state into Intermediate state."""
+
     ID = "not_strict"
 
     def __init__(self, validator: gui.QValidator | None = None, **kwargs):

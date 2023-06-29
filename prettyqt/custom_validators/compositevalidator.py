@@ -8,6 +8,7 @@ from prettyqt.utils import get_repr
 
 
 class CompositeValidator(gui.Validator):
+    """BaseClass for combined validators."""
     ID = "composite"
 
     def __init__(
@@ -56,6 +57,8 @@ class CompositeValidator(gui.Validator):
 
 
 class AndValidator(CompositeValidator):
+    """Validator to AND-combine other validators."""
+
     def validate(  # type: ignore
         self, text: str, pos: int = 0
     ) -> tuple[gui.QValidator.State, str, int]:
@@ -69,6 +72,8 @@ class AndValidator(CompositeValidator):
 
 
 class OrValidator(CompositeValidator):
+    """Validator to OR-combine other validators."""
+
     def validate(  # type: ignore
         self, text: str, pos: int = 0
     ) -> tuple[gui.QValidator.State, str, int]:

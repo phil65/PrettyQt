@@ -7,6 +7,8 @@ from prettyqt import gui
 
 
 class QssValidator(gui.Validator):
+    """Validator which checks whether given string is a parseable css string."""
+
     ID = "qss"
 
     def __eq__(self, other: object):

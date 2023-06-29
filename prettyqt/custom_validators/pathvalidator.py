@@ -9,6 +9,8 @@ ModeStr = Literal["any", "file", "folder"]
 
 
 class PathValidator(gui.Validator):
+    """Validator which checks whether given string is a valid path."""
+
     ID = "path"
 
     def __init__(self, *args, **kwargs):

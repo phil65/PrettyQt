@@ -4,6 +4,8 @@ from prettyqt import gui
 
 
 class ColorValidator(gui.Validator):
+    """Validator which checks for strings representing a color."""
+
     ID = "color"
 
     def __eq__(self, other: object):

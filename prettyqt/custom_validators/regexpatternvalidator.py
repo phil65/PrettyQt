@@ -13,6 +13,8 @@ from prettyqt.utils import get_repr
 
 
 class RegexPatternValidator(gui.Validator):
+    """Validator which checks whether given string is a parseable regex pattern."""
+
     ID = "regex_pattern"
     error_occured = core.Signal(str)
     pattern_updated = core.Signal(object)

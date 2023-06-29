@@ -6,6 +6,8 @@ from prettyqt import gui
 
 
 class PythonCodeValidator(gui.Validator):
+    """Validator which checks whether given string is valid Python code."""
+
     ID = "python_code"
 
     def __eq__(self, other: object):
