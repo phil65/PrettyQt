@@ -29,7 +29,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
     DisplayMode = DisplayMode
     core.Enum(DisplayMode)
 
-    def __init__(self, parent=None, **kwargs):
+    def __init__(self, parent: widgets.QWidget | None = None, **kwargs):
         super().__init__(parent, **kwargs)
         self._source_column = 0
         self._flattening_mode = FlatteningMode.Default
@@ -38,42 +38,42 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         self._source_key: list[tuple[int, ...]] = []
         self._source_offset: dict[tuple[int, ...], int] = {}
 
-    def setSourceModel(self, model):
+    def setSourceModel(self, model: core.QAbstractItemModel):
         if (curr_model := self.sourceModel()) is not None:
             curr_model.dataChanged.disconnect(self._source_data_changed)
-            curr_model.rowsInserted.disconnect(self._source_rows_inserted)
-            curr_model.rowsRemoved.disconnect(self._source_rows_removed)
+            curr_model.rowsInserted.disconnect(self._on_reset)
+            curr_model.rowsRemoved.disconnect(self._on_reset)
             curr_model.rowsMoved.disconnect(self._source_rows_moved)
         with self.reset_model():
             super().setSourceModel(model)
-            self._update_row_mapping()
+            self._update_mapping()
 
         model.dataChanged.connect(self._source_data_changed)
-        model.rowsInserted.connect(self._source_rows_inserted)
-        model.rowsRemoved.connect(self._source_rows_removed)
+        model.rowsInserted.connect(self._on_reset)
+        model.rowsRemoved.connect(self._on_reset)
         model.rowsMoved.connect(self._source_rows_moved)
 
-    def setSourceColumn(self, column: int):
+    def set_source_column(self, column: int):
         with self.reset_model():
             self._source_column = column
-            self._update_row_mapping()
+            self._update_mapping()
 
-    def sourceColumn(self) -> int:
+    def get_source_column(self) -> int:
         return self._source_column
 
-    def setSourceRootIndex(self, root_index: core.ModelIndex):
+    def set_root_index(self, root_index: core.ModelIndex):
         with self.reset_model():
             self._source_root_index = root_index
-            self._update_row_mapping()
+            self._update_mapping()
 
-    def sourceRootIndex(self) -> core.ModelIndex:
+    def get_root_index(self) -> core.ModelIndex:
         return self._source_root_index
 
     def set_flattening_mode(self, mode: FlattenedTreeProxyModel.FlatteningMode):
         if mode != self._flattening_mode:
             with self.reset_model():
                 self._flattening_mode = mode
-                self._update_row_mapping()
+                self._update_mapping()
 
     def get_flattening_mode(self) -> FlattenedTreeProxyModel.FlatteningMode:
         return self._flattening_mode
@@ -145,7 +145,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
             return " / ".join(str(i) for i in path)
         return super().data(index, role)
 
-    def _update_row_mapping(self):
+    def _update_mapping(self):
         source = self.sourceModel()
 
         self._source_key = []
@@ -166,24 +166,20 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
             for i in range(source.rowCount()):
                 create_mapping(source, source.index(i, 0), (i,))
 
-    def _source_data_changed(self, top, bottom):
+    def _source_data_changed(self, top: core.ModelIndex, bottom: core.ModelIndex):
         changed_indexes = [top.sibling(i, 0) for i in range(top.row(), bottom.row() + 1)]
         for ind in changed_indexes:
             self.dataChanged.emit(ind, ind)
 
-    def _source_rows_inserted(self, parent: core.ModelIndex, start: int, end: int):
+    def _on_reset(self, parent: core.ModelIndex, start: int, end: int):
         with self.reset_model():
-            self._update_row_mapping()
-
-    def _source_rows_removed(self, parent: core.ModelIndex, start: int, end: int):
-        with self.reset_model():
-            self._update_row_mapping()
+            self._update_mapping()
 
     def _source_rows_moved(
         self, source_parent, source_start, source_end, dest_parent, dest_row
     ):
         with self.reset_model():
-            self._update_row_mapping()
+            self._update_mapping()
 
     flatteningMode = core.Property(
         FlatteningMode,

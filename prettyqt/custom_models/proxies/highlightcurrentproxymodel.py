@@ -2,9 +2,10 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import constants, custom_models, core
+from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
+
 
 HighlightModeStr = Literal["column", "row", "all"]
 
@@ -96,8 +97,8 @@ class HighlightCurrentProxyModel(custom_models.SliceIdentityProxyModel):
 
 if __name__ == "__main__":
     from prettyqt import gui, widgets
-    app = widgets.app(style="Vista")
 
+    app = widgets.app(style="Vista")
     dct = dict(
         a=["a", "b", "a", "b"],
         b=["a", "b", "a", "b"],

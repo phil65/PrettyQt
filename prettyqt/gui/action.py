@@ -25,7 +25,7 @@ PRIORITIES: bidict[PriorityStr, gui.QAction.Priority] = bidict(
     high=gui.QAction.Priority.HighPriority,
 )
 
-RoleStr = Literal[
+MenuRoleStr = Literal[
     "none",
     "text_heuristic",
     "application_specific",
@@ -35,7 +35,7 @@ RoleStr = Literal[
     "quit",
 ]
 
-ROLES: bidict[RoleStr, gui.QAction.MenuRole] = bidict(
+MENU_ROLE: bidict[MenuRoleStr, gui.QAction.MenuRole] = bidict(
     none=gui.QAction.MenuRole.NoRole,
     text_heuristic=gui.QAction.MenuRole.TextHeuristicRole,
     application_specific=gui.QAction.MenuRole.ApplicationSpecificRole,
@@ -73,7 +73,7 @@ class ActionMixin(core.ObjectMixin):
         maps |= {
             "priority": PRIORITIES,
             "shortcutContext": constants.SHORTCUT_CONTEXT,
-            "menuRole": ROLES,
+            "menuRole": MENU_ROLE,
         }
         return maps
 
@@ -203,23 +203,23 @@ class ActionMixin(core.ObjectMixin):
         """
         return constants.SHORTCUT_CONTEXT.inverse[super().shortcutContext()]
 
-    def set_menu_role(self, role: RoleStr | gui.QAction.MenuRole):
+    def set_menu_role(self, role: MenuRoleStr | gui.QAction.MenuRole):
         """Set menu role.
 
         Args:
             role: menu role
         """
-        super().setMenuRole(ROLES.get_enum_value(role))
+        super().setMenuRole(MENU_ROLE.get_enum_value(role))
 
     setMenuRole = set_menu_role
 
-    def get_menu_role(self) -> RoleStr:
+    def get_menu_role(self) -> MenuRoleStr:
         """Return menu role.
 
         Returns:
             menu role
         """
-        return ROLES.inverse[super().menuRole()]
+        return MENU_ROLE.inverse[super().menuRole()]
 
     def show_shortcut_in_contextmenu(self, state: bool = True):
         self.setShortcutVisibleInContextMenu(state)
