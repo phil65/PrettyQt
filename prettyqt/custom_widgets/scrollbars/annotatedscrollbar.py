@@ -44,16 +44,27 @@ class AnnotatedScrollBar(widgets.ScrollBar):
             p.setBrush(c)
             c.setAlphaF(0.3)
             p.setPen(gui.QPen(c, 2.0))
-            yscale = 1.0 / self._document_height
-            rects = [
-                core.QRect(
-                    x + 1,
-                    y + h * start * yscale - 0.5,
-                    w - 2,
-                    h * (end - start) * yscale + 1,
-                )
-                for start, end in self._annotations
-            ]
+            scale = 1.0 / self._document_height
+            if self.orientation() == constants.VERTICAL:
+                rects = [
+                    core.QRect(
+                        x + 1,
+                        y + h * start * scale - 0.5,
+                        w - 2,
+                        h * (end - start) * scale + 1,
+                    )
+                    for start, end in self._annotations
+                ]
+            else:
+                rects = [
+                    core.QRect(
+                        x + w * start * scale - 0.5,
+                        y + 1,
+                        w * (end - start) * scale + 1,
+                        h - 2,
+                    )
+                    for start, end in self._annotations
+                ]
             p.drawRects(rects)
 
     def set_annotation_color(self, color: datatypes.ColorType):
@@ -70,10 +81,11 @@ class AnnotatedScrollBar(widgets.ScrollBar):
 
 if __name__ == "__main__":
     app = widgets.app()
-    widget = widgets.PlainTextEdit("\n".join(f"abc{i}" for i in range(1000)))
-    scrollbar = AnnotatedScrollBar("vertical", parent=widget)
-    scrollbar.set_annotations([(10, 20), (50, 51), (82, 85)])
-    widget.setVerticalScrollBar(scrollbar)
+    widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
+    widget.set_line_wrap_mode("none")
+    scrollbar = AnnotatedScrollBar("horizontal", parent=widget)
+    scrollbar.set_annotations([(10, 20), (50, 60), (82, 85)])
+    widget.setHorizontalScrollBar(scrollbar)
     widget.show()
     with app.debug_mode():
         app.exec()
