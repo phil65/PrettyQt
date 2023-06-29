@@ -86,7 +86,8 @@ Changed icons / pixmaps are cached for performance reasons.
 : use min max value from "seen" table content. (meaning that the model adapts min max values based.)
 
 The last two modes have the advantage that nothing needs to be computed in advance, min/max values are calculated on-the fly.
-`SliceFilterProxyModel`
+
+[SliceFilterProxyModel][slicefilterproxymodel]:
 : Show only selected slice of given source model.
 
 `SliceValueTransformationProxyModel`
@@ -146,7 +147,7 @@ Some of these proxies might partly overlap in functionality, but theres always a
 : Moves all rows up to the root level.
 : Label can be changed to show the complete path.
 
-`MeltProxyModel`:
+[MeltProxyModel][meltproxymodel]:
 : Unpivot a Table from wide to long format.
 : same as pandas.melt, just without pandas.
 

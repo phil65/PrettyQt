@@ -1,4 +1,5 @@
 * [Home](index.md)
+* [API Guidelines](api_guidelines.md)
 * API Reference
     * [bluetooth](api/bluetooth.md)
     * [charts](api/charts.md)
@@ -34,6 +35,19 @@
     * [animating](features/animating.md)
     * [widgets](features/widgets.md)
     * [validators](features/validators.md)
+* Proxy models
+    * [SliceFilterProxyModel](features/proxymodels/slicefilterproxymodel.md)
+    * [MeltProxyModel](features/proxymodels/meltproxymodel.md)
+* Widgets
+    * [AstViewer](features/widgets/astviewer.md)
+    * [CommandPalette](features/widgets/commandpalette.md)
+    * [ConfigWidget](features/widgets/configwidget.md)
+    * [FilterHeader](features/widgets/filterheader.md)
+    * [RegexEditor](features/widgets/regexeditor.md)
+    * [ScrollAreaTocWidget](features/widgets/scrollareatocwidget.md)
+* [Delegates](features/delegates.md)
+    * [Editors](features/widgets/editors.md)
+* [Pandas](features/pandas.md)
 * [Changelog](changelog.md)
 <!--
         # - scintilla: api/scintilla.md

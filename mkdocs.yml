@@ -6,92 +6,89 @@ watch: [mkdocs.yml, README.md, CHANGELOG.md, prettyqt/]
 copyright: Copyright &copy; 2023 Philipp Temminghoff
 
 theme:
-    name: material
-    # custom_dir: docs/theme_customizations/
-    palette:
+  name: material
+  palette:
+  # Palette toggle for light mode
+  - media: "(prefers-color-scheme: light)"
+    scheme: default
+    toggle:
+      icon: material/brightness-7
+      name: Switch to dark mode
 
-        # Palette toggle for light mode
-    - media: "(prefers-color-scheme: light)"
-      scheme: default
-      toggle:
-        icon: material/brightness-7
-        name: Switch to dark mode
-
-    # Palette toggle for dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      toggle:
-        icon: material/brightness-4
-        name: Switch to light mode
-    features:
-    - content.code.copy
-    - content.code.select
-    - content.code.annotate
-    - navigation.instant # make things faster
-    - navigation.tracking # update URL based on current item in TOC
-    - navigation.path  # shows breadcrumbs
-    - navigation.tabs # make top level tabs
-    # - navigation.tabs.sticky # and make them sticky
-    - toc.follow  # makes toc follow scrolling
-    # - toc.integrate  # integrates toc into left menu
-    - navigation.top  # adds back-to-top button
-    - navigation.sections
+  # Palette toggle for dark mode
+  - media: "(prefers-color-scheme: dark)"
+    scheme: slate
+    toggle:
+      icon: material/brightness-4
+      name: Switch to light mode
+  features:
+  - content.code.copy
+  - content.code.select
+  - content.code.annotate
+  - navigation.instant # make things faster
+  - navigation.tracking # update URL based on current item in TOC
+  - navigation.path  # shows breadcrumbs
+  - navigation.tabs # make top level tabs
+  - navigation.footer # next/previous page buttons in footer
+  # - navigation.tabs.sticky # and make them sticky
+  - toc.follow  # makes toc follow scrolling
+  # - toc.integrate  # integrates toc into left menu
+  - navigation.top  # adds back-to-top button
+  - navigation.sections
 plugins:
-    - search
-    # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
-    - tags
-    - literate-nav:
-        nav_file: SUMMARY.md
-    - autorefs
-    - mkdocstrings:
-        default_handler: python
-        handlers:
-          python:
-            import:
-              - url: https://docs.python.org/3/objects.inv
-                domains: [std, py]
-              # - url: https://doc.qt.io/qtforpython/objects.inv
-              # - PySide6-aliases.inv
-              - url: https://raw.githubusercontent.com/phil65/PrettyQt/master/docs/qt6.inv
-                base_url: https://doc.qt.io/qtforpython/
-                domains: [std, py]
-              - url: https://docs.python-requests.org/en/master/objects.inv
-                domains: [std, py]
-            options:
-              # https://mkdocstrings.github.io/python/usage/
-              show_source: true
-              show_signature_annotations: true
-              # show_if_no_docstring: true
-              inherited_members: false
-              signature_crossrefs: true
-    # - mkapi
+- search
+# - social  # this one has dependency which is not on pypi for windows. (cairocffi)
+- tags
+- glightbox
+- literate-nav:
+    nav_file: SUMMARY.md
+- autorefs
+- mkdocstrings:
+    default_handler: python
+    handlers:
+      python:
+        import:
+        - url: https://docs.python.org/3/objects.inv
+          domains: [std, py]
+        - url: https://raw.githubusercontent.com/phil65/PrettyQt/master/docs/qt6.inv
+          base_url: https://doc.qt.io/qtforpython/
+          domains: [std, py]
+        - url: https://docs.python-requests.org/en/master/objects.inv
+          domains: [std, py]
+        options:
+          # https://mkdocstrings.github.io/python/usage/
+          show_source: true
+          show_signature_annotations: true
+          # show_if_no_docstring: true
+          inherited_members: false
+          signature_crossrefs: true
 markdown_extensions:
-    # - smarty
-    - codehilite
-    - admonition
-    - def_list
-    - attr_list
-    - md_in_html
-    - pymdownx.tasklist:
-        custom_checkbox: true
-    - pymdownx.highlight:
-        anchor_linenums: true
-        line_spans: __span
-        pygments_lang_class: true
-    - pymdownx.inlinehilite
-    - pymdownx.snippets
-    - pymdownx.superfences:
-        custom_fences:
-          - name: mermaid
-            class: mermaid
-            format: !!python/name:pymdownx.superfences.fence_code_format
-    - md_in_html
-    - toc:
-        toc_depth: 2
-    # - pymdownx.betterem
-    # - markdown.extensions.footnotes
-    # - markdown.extensions.tables
-    # - markdown.extensions.abbr
+- codehilite
+- admonition
+- def_list
+- attr_list
+- md_in_html
+- tables
+- footnotes
+# - pymdownx.keys
+# - pymdownx.smartsymbols
+- pymdownx.tasklist:
+    custom_checkbox: true
+- pymdownx.highlight:  # syntax highlighting
+    anchor_linenums: true
+    line_spans: __span
+    pygments_lang_class: true
+    # linenums: true
+- pymdownx.inlinehilite  # syntax highlighting
+- pymdownx.snippets  # syntax highlighting
+- pymdownx.superfences:  # syntax highlighting
+    custom_fences:
+    - name: mermaid
+      class: mermaid
+      format: !!python/name:pymdownx.superfences.fence_code_format
+- md_in_html
+- toc:
+    toc_depth: 2
 use_directory_urls: false
 
 extra:
@@ -102,3 +99,6 @@ extra:
     link: https://matrix.to/#/#prettyqt:gitter.im
   - icon: fontawesome/brands/python
     link: https://pypi.org/project/prettyqt/
+  # generator: false disable "made with Material"
+  # version:  # multiple doc versions
+  #   provider: mike

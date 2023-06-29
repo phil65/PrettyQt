@@ -110,7 +110,7 @@ class WidgetMixin(core.ObjectMixin):
         text: str | gui.Action,
         parent: widgets.QWidget | None = None,
         data: Any = None,
-        **kwargs,
+        **kwargs: datatypes.VariantType,
     ) -> gui.Action:
         """Add an action to the menu.
 
@@ -677,7 +677,7 @@ class WidgetMixin(core.ObjectMixin):
         self,
         layout: LayoutStr | widgets.QLayout,
         margin: int | None = None,
-        **kwargs,
+        **kwargs: datatypes.VariantType,
     ) -> widgets.QLayout:
         """Quick way to set a layout.
 
