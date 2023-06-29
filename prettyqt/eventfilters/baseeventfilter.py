@@ -1,8 +1,8 @@
 from __future__ import annotations
 
-from prettyqt import core
-
 import contextlib
+
+from prettyqt import core
 
 
 class BaseEventFilter(core.Object):

@@ -4,6 +4,7 @@ import re
 
 from prettyqt import gui
 
+
 re_custom_sep = re.compile(r"\s*,\s*")
 
 

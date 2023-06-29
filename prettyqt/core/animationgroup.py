@@ -1,10 +1,11 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import overload, TYPE_CHECKING
+from typing import TYPE_CHECKING, overload
 
 from prettyqt import core
 from prettyqt.utils import listdelegators
+
 
 if TYPE_CHECKING:
     from prettyqt import widgets

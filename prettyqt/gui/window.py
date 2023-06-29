@@ -3,10 +3,12 @@ from __future__ import annotations
 from collections.abc import Callable
 import os
 import pathlib
+
 from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.utils import bidict, datatypes, get_repr
+
 
 AncestorModeStr = Literal["exclude_transients", "include_transients"]
 

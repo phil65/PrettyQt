@@ -5,6 +5,7 @@ from typing import Literal
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
+
 ClockTypeStr = Literal[
     "system_time",
     "monotonic_clock",

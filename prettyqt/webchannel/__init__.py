@@ -5,6 +5,7 @@ contains QtWebEngineCore-based classes
 
 import logging
 
+
 logger = logging.getLogger(__name__)
 
 try:

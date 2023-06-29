@@ -5,6 +5,7 @@ from typing import Literal
 from prettyqt import core
 from prettyqt.utils import bidict
 
+
 FlagStr = Literal["hidden_from_help", "short_option_style"]
 
 FLAGS: bidict[FlagStr, core.QCommandLineOption.Flag] = bidict(

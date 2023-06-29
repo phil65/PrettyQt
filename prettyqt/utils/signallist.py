@@ -30,6 +30,7 @@ from typing import Any, TypeVar, cast
 
 from prettyqt import core
 
+
 _T = TypeVar("_T")
 
 
@@ -269,6 +270,7 @@ class SignalList(MutableSequence[_T]):
 
 if __name__ == "__main__":
     import logging
+
     from prettyqt import debugging, widgets
 
     app = widgets.app()

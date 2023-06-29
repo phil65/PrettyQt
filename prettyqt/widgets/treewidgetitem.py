@@ -5,7 +5,7 @@ from typing import Any, Literal
 
 from prettyqt import constants, gui, iconprovider
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import bidict, datatypes, get_repr, serializemixin, listdelegators
+from prettyqt.utils import bidict, datatypes, get_repr, listdelegators, serializemixin
 
 
 mod = QtWidgets.QTreeWidgetItem

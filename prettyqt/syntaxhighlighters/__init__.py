@@ -4,13 +4,13 @@ contains some custom syntax highlighers
 """
 
 from .highlightrule import HighlightRule
-from .selectedwordhighlighter import SelectedWordHighlighter
 from .jsonhighlighter import JsonHighlighter
-from .pythonhighlighter import PythonHighlighter
-from .yamlhighlighter import YamlHighlighter
-from .regexmatchhighlighter import RegexMatchHighlighter
 from .markdownhighlighter import MarkdownHighlighter
 from .pygmentshighlighter import PygmentsHighlighter
+from .pythonhighlighter import PythonHighlighter
+from .regexmatchhighlighter import RegexMatchHighlighter
+from .selectedwordhighlighter import SelectedWordHighlighter
+from .yamlhighlighter import YamlHighlighter
 
 
 __all__ = [

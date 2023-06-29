@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import functools
+
 from typing import Literal
 
 from typing_extensions import Self

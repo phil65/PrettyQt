@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING, Any, SupportsIndex, TypeVar, Literal, overload
-
 from collections.abc import Callable
+from typing import TYPE_CHECKING, Any, Literal, SupportsIndex, TypeVar, overload
 
 from prettyqt.utils import helpers
+
 
 if TYPE_CHECKING:
     from prettyqt.utils import fx

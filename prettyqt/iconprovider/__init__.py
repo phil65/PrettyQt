@@ -8,13 +8,13 @@ from dataclasses import dataclass
 import json
 import os
 import pathlib
-from typing import Literal, overload
 
-from prettyqt.qt import QtGui
+from typing import Literal, overload
 
 # Third party imports
 from prettyqt import gui, paths
 from prettyqt.iconprovider.iconic_font import FontError, IconicFont, set_global_defaults
+from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
 

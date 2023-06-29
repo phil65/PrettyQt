@@ -1,13 +1,13 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 import contextlib
 import logging
-from typing import Any, overload, Literal
 
-from collections.abc import Iterator
+from typing import Any, Literal, overload
 
 from prettyqt import constants, core
-from prettyqt.utils import bidict, listdelegators, helpers
+from prettyqt.utils import bidict, helpers, listdelegators
 
 
 logger = logging.getLogger(__name__)

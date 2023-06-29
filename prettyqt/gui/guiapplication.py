@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 import contextlib
 import sys
+
 from typing import SupportsInt
 
 from prettyqt import constants, core, gui, iconprovider

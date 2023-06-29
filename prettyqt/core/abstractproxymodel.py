@@ -1,11 +1,12 @@
 from __future__ import annotations
 
+from collections.abc import Callable, Generator
 import logging
+
 from typing import Any
 
-from collections.abc import Callable, Generator
-
 from prettyqt import core, qt
+
 
 logger = logging.getLogger(__name__)
 

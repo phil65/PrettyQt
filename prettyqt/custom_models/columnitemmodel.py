@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterable, Sequence
 import enum
 import logging
+
 from typing import Any
 
 from prettyqt import constants, core, custom_models, gui

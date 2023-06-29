@@ -4,10 +4,12 @@ from collections.abc import Generator
 import functools
 import importlib.util
 import logging
+
 from typing import Any, Literal
 
 from prettyqt import constants, core, widgets
 from prettyqt.utils import bidict, datatypes, helpers, listdelegators
+
 
 DelegateStr = Literal[
     "widget",

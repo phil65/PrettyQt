@@ -4,6 +4,7 @@ import emoji
 
 from prettyqt import constants, core, gui
 
+
 ZERO_COORD = core.Point(0, 0)
 
 

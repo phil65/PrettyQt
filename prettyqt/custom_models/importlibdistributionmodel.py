@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-import contextlib
 from collections.abc import Sequence
+import contextlib
+
 from importlib import metadata
 import pkgutil
-from packaging.requirements import Requirement, InvalidRequirement
+
 from packaging.markers import Marker
+from packaging.requirements import InvalidRequirement, Requirement
 from typing_extensions import Self
 
 from prettyqt import constants, core, custom_models

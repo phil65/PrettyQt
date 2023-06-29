@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import enum
+
 from typing import Literal
 
 from prettyqt import constants, core, gui, widgets

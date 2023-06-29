@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import collections
+
 from collections.abc import Sequence
 import logging
 from typing import Literal

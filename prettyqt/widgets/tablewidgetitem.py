@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import html
 import os
+
 from typing import Any
 
 from prettyqt import constants, gui, iconprovider

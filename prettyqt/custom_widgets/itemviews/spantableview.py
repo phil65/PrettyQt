@@ -2,11 +2,13 @@
 
 from __future__ import annotations
 
-from typing import Any
 import enum
-
 import itertools
+
+from typing import Any
+
 from prettyqt import constants, core, widgets
+
 
 SECTION_HEIGHT = 40
 SECTION_WIDTH = 50

@@ -27,6 +27,7 @@ SAVE_STATES = dict(
 
 def setup_runner():
     import inspect
+
     from prettyqt.qt.QtCore import SignalInstance
     from prettyqt.utils import asyncrunner
 
@@ -60,8 +61,8 @@ class ApplicationMixin(gui.GuiApplicationMixin):
 
     @contextlib.contextmanager
     def debug_mode(self, log_level: int = logging.DEBUG):
-        from prettyqt.eventfilters import debugmode
         from prettyqt.debugging import ErrorMessageBox, MessageHandler
+        from prettyqt.eventfilters import debugmode
 
         handler = logging.StreamHandler(sys.stdout)
         f_format = logging.Formatter(

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, widgets
 
+
 PM = widgets.QStyle.PixelMetric
 SH = widgets.QStyle.StyleHint
 

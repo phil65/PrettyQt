@@ -5,6 +5,7 @@ import enum
 import functools
 import logging
 import operator
+
 from typing import Any, TypeVar
 
 import bidict as bdct

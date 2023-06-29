@@ -1,10 +1,12 @@
 from __future__ import annotations
 
 import logging
+
 from typing import Literal
 
 from prettyqt import core
 from prettyqt.utils import datatypes
+
 
 logger = logging.getLogger(__name__)
 

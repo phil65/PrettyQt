@@ -2,11 +2,14 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterator
 import re
+
 from typing import Literal
+
+import bidict as bd
 
 from prettyqt import core
 from prettyqt.utils import bidict, get_repr
-import bidict as bd
+
 
 RE_MAP = bd.bidict(
     {

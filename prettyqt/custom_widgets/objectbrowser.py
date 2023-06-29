@@ -10,10 +10,10 @@ from prettyqt.custom_models.pythonobjecttreemodel import (
     CommentsColumn,
     DocStringColumn,
     FileColumn,
-    SourceCodeColumn,
     PathColumn,
     PrettyPrintColumn,
     ReprColumn,
+    SourceCodeColumn,
     StrColumn,
 )
 

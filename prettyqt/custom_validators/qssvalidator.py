@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import contextlib
+
 from qstylizer import parser
 
 from prettyqt import gui

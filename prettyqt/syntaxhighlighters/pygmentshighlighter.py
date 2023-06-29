@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import functools
 import logging
+
 from typing import Literal
 
 from pygments import lexer, lexers, style, styles

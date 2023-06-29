@@ -1,14 +1,14 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 import contextlib
 import functools
-import os
 import html
+import os
 import pathlib
 import sys
-from typing import TYPE_CHECKING, Any, Literal, overload
 
-from collections.abc import Sequence
+from typing import TYPE_CHECKING, Any, Literal, overload
 
 import qstylizer.parser
 import qstylizer.style
@@ -19,6 +19,7 @@ from prettyqt.utils import colors, datatypes, fx
 
 if TYPE_CHECKING:
     from collections.abc import Callable, Iterator
+
     from prettyqt import custom_widgets
 
 

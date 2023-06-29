@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from ctypes import Structure, POINTER, c_int, sizeof, pointer, cdll, c_bool, byref
-from ctypes.wintypes import DWORD, ULONG, BOOL, HRGN, LPCVOID, LONG
+from ctypes import POINTER, Structure, byref, c_bool, c_int, cdll, pointer, sizeof
+from ctypes.wintypes import BOOL, DWORD, HRGN, LONG, LPCVOID, ULONG
 import enum
 import sys
+
 from typing import SupportsInt
 
 import win32con

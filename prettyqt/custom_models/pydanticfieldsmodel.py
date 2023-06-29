@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-import pydantic
 import logging
+
+import pydantic
 
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtGui
+
 
 logger = logging.getLogger(__name__)
 

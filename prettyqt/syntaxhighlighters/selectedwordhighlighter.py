@@ -1,9 +1,11 @@
 from __future__ import annotations
 
-from typing import Literal
 import re
 
+from typing import Literal
+
 from prettyqt import core, gui
+
 
 ModeStr = Literal["word", "all"]
 

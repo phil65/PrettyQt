@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
 import os
 import pathlib
+
+from typing import Any
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import datatypes

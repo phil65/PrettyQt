@@ -2,16 +2,18 @@ from __future__ import annotations
 
 from abc import ABCMeta
 import datetime
-import dateutil.parser
 import enum
 import os
 import pathlib
 import re
-from typing import TYPE_CHECKING, Any, ClassVar, Protocol, runtime_checkable, TypeVar
+
+from typing import TYPE_CHECKING, Any, ClassVar, Protocol, TypeVar, runtime_checkable
 from urllib import parse
 
-from prettyqt.qt import QtCore
+import dateutil.parser
+
 from prettyqt import core
+from prettyqt.qt import QtCore
 
 
 class QABCMeta(type(QtCore.QObject), ABCMeta):
@@ -280,7 +282,7 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
 
 
 def get_widget_for_value(val, parent=None):
-    from prettyqt import core, gui, widgets, custom_widgets
+    from prettyqt import core, custom_widgets, gui, widgets
 
     match val:
         case bool():

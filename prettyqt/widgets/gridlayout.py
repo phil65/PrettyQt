@@ -3,7 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 
 from prettyqt import constants, widgets
-from prettyqt.utils import listdelegators, helpers
+from prettyqt.utils import helpers, listdelegators
 
 
 class GridLayout(widgets.LayoutMixin, widgets.QGridLayout):

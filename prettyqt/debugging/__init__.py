@@ -1,18 +1,19 @@
 """debugging pachakge."""
 
-from .stalker import Stalker
-from .tracebackdialog import TracebackDialog
+from collections.abc import Callable
+import contextlib
+import functools
+import logging
+import time
+
+from prettyqt import qt
+from prettyqt.qt import QtCore
+
 from .errormessagebox import ErrorMessageBox
 from .messagehandler import MessageHandler
 from .qobjectdetailsdialog import QObjectDetailsDialog
-
-import contextlib
-from collections.abc import Callable
-import time
-import functools
-import logging
-from prettyqt import qt
-from prettyqt.qt import QtCore
+from .stalker import Stalker
+from .tracebackdialog import TracebackDialog
 
 
 logger = logging.getLogger(__name__)
@@ -141,8 +142,9 @@ def example_tree(flatten: bool = False):
 
 
 def example_table(flatten: bool = False):
-    from prettyqt import widgets
     import pandas as pd
+
+    from prettyqt import widgets
 
     data = dict(
         a=["abcdedf", "abcdedf", "abcdedf", "abcdedf", "abcdedf", "abcdedfaa"],
@@ -166,8 +168,8 @@ def example_table(flatten: bool = False):
 
 
 def example_multiindex_df():
-    import pandas as pd
     import numpy as np
+    import pandas as pd
 
     tuples = [
         ("bar", "one", "q"),
@@ -225,6 +227,7 @@ def example_widget():
 def get_all_qt_classes():
     import importlib
     import inspect
+
     import PySide6
 
     return [
@@ -236,8 +239,8 @@ def get_all_qt_classes():
 
 
 def get_all_qt_enums():
-    import inspect
     import enum
+    import inspect
 
     all_qt_enums = [
         i[1]

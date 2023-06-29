@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import logging
+
 from prettyqt import constants, core, custom_widgets, widgets
+
 
 logger = logging.getLogger(__name__)
 

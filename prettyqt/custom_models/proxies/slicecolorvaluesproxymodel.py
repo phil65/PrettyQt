@@ -2,10 +2,12 @@ from __future__ import annotations
 
 import enum
 import logging
+
 from typing import Literal
 
 from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import colors, datatypes, helpers
+
 
 logger = logging.getLogger(__name__)
 

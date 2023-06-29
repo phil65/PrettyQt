@@ -1,13 +1,15 @@
 from __future__ import annotations
 
-import contextlib
 from collections.abc import Iterator
+import contextlib
 import logging
 import re
+
 from typing import Literal
 
 from prettyqt import core, gui, widgets
 from prettyqt.utils import colors, datatypes
+
 
 logger = logging.getLogger(__name__)
 

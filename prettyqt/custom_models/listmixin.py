@@ -166,8 +166,7 @@ class ListMixin:
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
-    from prettyqt import debugging
+    from prettyqt import debugging, widgets
 
     class Test(ListMixin, core.AbstractTableModel):
         def data(self, index, role):

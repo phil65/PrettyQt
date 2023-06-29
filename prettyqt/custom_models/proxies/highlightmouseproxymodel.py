@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 import logging
+
 from typing import Literal
 
 from prettyqt import constants, core
 from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
+
 
 HighlightModeStr = Literal["column", "row", "both", "single"]
 

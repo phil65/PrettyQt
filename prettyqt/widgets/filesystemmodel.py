@@ -2,8 +2,9 @@ from __future__ import annotations
 
 from collections.abc import Sequence
 import os
-from typing import Literal
 import pathlib
+
+from typing import Literal
 
 from prettyqt import constants, core, qt, widgets
 from prettyqt.utils import bidict, datatypes

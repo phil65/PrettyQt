@@ -2,11 +2,11 @@ from __future__ import annotations
 
 import ast
 import enum
-
 import logging
 
-from prettyqt import constants, core, gui, custom_models
+from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import bidict, treeitem
+
 
 SOURCE_FONT = gui.Font.mono(as_qt=True)
 
@@ -203,8 +203,9 @@ class AstModel(custom_models.TreeModel):
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
     import pathlib
+
+    from prettyqt import widgets
 
     app = widgets.app()
     with app.debug_mode():

@@ -3,11 +3,12 @@ from __future__ import annotations
 import logging
 import threading
 
-import pandas as pd
 import numpy as np
+import pandas as pd
 
-from prettyqt import constants, custom_widgets, core, gui, widgets
+from prettyqt import constants, core, custom_widgets, gui, widgets
 from prettyqt.qtpandas import pandasmodels
+
 
 logger = logging.getLogger(__name__)
 

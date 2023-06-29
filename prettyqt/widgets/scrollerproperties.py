@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-from typing import Any, Literal
-
 from collections.abc import Iterator
+from typing import Any, Literal
 
 from prettyqt.qt import QtWidgets
 from prettyqt.utils import bidict

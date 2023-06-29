@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from collections.abc import Iterable, Iterator, Mapping
 import functools
+
 from typing import Any
 
 from prettyqt import constants, core, iconprovider, widgets

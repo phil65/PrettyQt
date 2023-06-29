@@ -8,11 +8,12 @@ import contextlib
 import itertools
 import logging
 import re
-from typing import TYPE_CHECKING, Any, TypeVar, get_args
 import types
 
+from typing import TYPE_CHECKING, Any, TypeVar, get_args
+
 from prettyqt import constants, core
-from prettyqt.utils import datatypes, listdelegators, helpers
+from prettyqt.utils import datatypes, helpers, listdelegators
 
 
 if TYPE_CHECKING:

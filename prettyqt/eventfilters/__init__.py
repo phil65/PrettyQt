@@ -3,15 +3,16 @@
 Contains custom EventFilter classes
 """
 
-from .baseeventfilter import BaseEventFilter
-from .hovericoneventfilter import HoverIconEventFilter
 from .animatedtooltipeventfilter import AnimatedToolTipEventFilter
-from .eventcatcher import EventCatcher
 from .autosizecolumnseventfilter import AutoSizeColumnsEventFilter
-from .sectionautospaneventfilter import SectionAutoSpanEventFilter
+from .baseeventfilter import BaseEventFilter
+from .eventcatcher import EventCatcher
+from .hovericoneventfilter import HoverIconEventFilter
 from .listviewgridresizeeventfilter import ListViewGridResizeEventFilter
+from .sectionautospaneventfilter import SectionAutoSpanEventFilter
 from .slidermovetomouseclickeventfilter import SliderMoveToMouseClickEventFilter
 from .timelabeleventfilter import DateLabelEventFilter, TimeLabelEventFilter
+
 
 __all__ = [
     "BaseEventFilter",

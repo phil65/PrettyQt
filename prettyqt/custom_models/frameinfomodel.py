@@ -3,7 +3,8 @@ from __future__ import annotations
 import inspect
 import logging
 
-from prettyqt import constants, core, gui, custom_models
+from prettyqt import constants, core, custom_models, gui
+
 
 logger = logging.getLogger(__name__)
 

@@ -1,15 +1,17 @@
 from __future__ import annotations
 
-from ctypes import Structure, c_int, windll, byref, sizeof
-from ctypes.wintypes import DWORD, HWND, UINT, RECT, LPARAM
+from ctypes import Structure, byref, c_int, sizeof, windll
+from ctypes.wintypes import DWORD, HWND, LPARAM, RECT, UINT
 import os
 import sys
+
 from typing import SupportsInt
-import win32con
 
 import win32api
-import win32gui
+
 from win32comext.shell import shellcon
+import win32con
+import win32gui
 
 
 class APPBARDATA(Structure):

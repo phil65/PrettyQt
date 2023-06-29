@@ -2,8 +2,8 @@ from __future__ import annotations
 
 from collections.abc import Callable
 import functools
-import logging
 import inspect
+import logging
 
 from typing_extensions import Self
 

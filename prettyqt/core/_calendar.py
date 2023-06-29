@@ -5,6 +5,7 @@ from typing import Literal
 from prettyqt import core
 from prettyqt.utils import bidict, get_repr
 
+
 SystemStr = Literal["gregorian", "julian", "milankovic", "jalali", "islamic_civil"]
 
 SYSTEM: bidict[SystemStr, core.QCalendar.System] = bidict(

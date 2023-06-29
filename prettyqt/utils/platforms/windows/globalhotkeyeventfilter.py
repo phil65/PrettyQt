@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from collections.abc import Callable
 import ctypes
+
 from ctypes import WINFUNCTYPE, FormatError, c_bool, c_int
 from ctypes.wintypes import UINT
 import logging

@@ -5,6 +5,7 @@ from typing import Literal
 from prettyqt import bluetooth, core
 from prettyqt.utils import bidict
 
+
 module = bluetooth.QBluetoothServiceDiscoveryAgent
 
 DiscoveryModeStr = Literal["minimal", "full"]

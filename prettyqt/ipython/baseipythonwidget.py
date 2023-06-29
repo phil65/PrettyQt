@@ -1,12 +1,14 @@
 from __future__ import annotations
 
-from typing import Literal
 import logging
 import os
+
+from typing import Literal
 
 from qtconsole.rich_jupyter_widget import RichJupyterWidget
 
 from prettyqt import core, gui, widgets
+
 
 CompletionmodeStr = Literal["droplist", "plain", "ncurses"]
 PagingStr = Literal["inside", "hsplit", "vsplit", "custom", "none"]

@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from collections.abc import Callable, Iterator
 import re
+
 from typing import Any
 
-from prettyqt import core
 import bidict
+
+from prettyqt import core
 
 
 # IGNORECASE = core.QRegularExpression.PatternOption.CaseInsensitiveOption

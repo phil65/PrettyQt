@@ -5,6 +5,7 @@ from typing import TypeVar
 from prettyqt import core, widgets
 from prettyqt.utils import listdelegators
 
+
 T = TypeVar("T", bound=widgets.QWidget)
 
 

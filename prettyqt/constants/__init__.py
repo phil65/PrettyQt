@@ -4,6 +4,7 @@ from typing import Literal
 from prettyqt.qt import QtCore
 from prettyqt.utils import bidict
 
+
 Qt = QtCore.Qt
 
 AlignmentFlag = Qt.AlignmentFlag

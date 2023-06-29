@@ -5,7 +5,7 @@ import ctypes
 
 from typing_extensions import Self
 
-from prettyqt import core, constants
+from prettyqt import constants, core
 from prettyqt.qt import API, QtGui
 from prettyqt.utils import datatypes, serializemixin
 

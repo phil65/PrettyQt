@@ -1,14 +1,16 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
 import collections
-import functools
+
+from collections.abc import Sequence
 import contextlib
+import functools
 import logging
 from operator import and_
 from typing import Any
 
 from prettyqt import constants, core
+
 
 logger = logging.getLogger(__name__)
 

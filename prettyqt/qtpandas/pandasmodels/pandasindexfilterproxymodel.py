@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import logging
+
 from typing import Literal
 
-import pandas as pd
 import numpy as np
+import pandas as pd
+
 from prettyqt import constants, core
+
 
 logger = logging.getLogger(__name__)
 

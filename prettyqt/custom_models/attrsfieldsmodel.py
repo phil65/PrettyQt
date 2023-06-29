@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-import attrs
 import logging
+
+import attrs
 
 from prettyqt import constants, custom_models
 from prettyqt.qt import QtCore, QtGui
 from prettyqt.utils import datatypes
+
 
 logger = logging.getLogger(__name__)
 

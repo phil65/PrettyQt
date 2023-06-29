@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import enum
+
 from typing import TypeVar
 
 from prettyqt import core, widgets

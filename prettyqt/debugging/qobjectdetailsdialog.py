@@ -3,13 +3,14 @@ from __future__ import annotations
 import functools
 import logging
 
-from prettyqt import constants, custom_widgets, core, debugging, ipython, widgets
+from prettyqt import constants, core, custom_widgets, debugging, ipython, widgets
 from prettyqt.custom_models import (
     logrecordmodel,
-    widgetpropertiesmodel,
     widgethierarchymodel,
+    widgetpropertiesmodel,
 )
 from prettyqt.qt import QtCore, QtWidgets
+
 
 logger = logging.getLogger(__name__)
 

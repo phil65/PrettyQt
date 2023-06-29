@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from prettyqt import constants, core, widgets
-from prettyqt.qtpandas import pandaswidgets, pandasmodels
+from prettyqt.qtpandas import pandasmodels, pandaswidgets
 
 
 class DataFrameWidget(widgets.MainWindow):

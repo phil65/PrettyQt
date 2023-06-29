@@ -1,8 +1,9 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-import pydantic
 import logging
+
+import pydantic
 
 from prettyqt import constants, core, custom_models
 

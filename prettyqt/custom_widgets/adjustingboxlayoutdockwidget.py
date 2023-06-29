@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, widgets
 
+
 DockWidgetArea = constants.DockWidgetArea
 
 

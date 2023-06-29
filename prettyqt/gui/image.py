@@ -3,6 +3,7 @@ from __future__ import annotations
 import io
 import mimetypes
 import os
+
 from typing import Literal
 
 from typing_extensions import Self

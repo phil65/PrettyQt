@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import constants, core, eventfilters, widgets
 
+
 CC = widgets.QStyle.ComplexControl
 SC = widgets.QStyle.SubControl
 

@@ -2,8 +2,8 @@
 
 from prettyqt.qt.QtPdf import *  # noqa: F403
 
-from .pdfdocument import PdfDocument
 from .pdfbookmarkmodel import PdfBookmarkModel
+from .pdfdocument import PdfDocument
 from .pdfsearchmodel import PdfSearchModel
 
 

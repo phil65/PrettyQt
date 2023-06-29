@@ -5,6 +5,7 @@ import logging
 from prettyqt import core, widgets
 from prettyqt.utils import colors, datatypes, helpers
 
+
 logger = logging.getLogger(__name__)
 
 

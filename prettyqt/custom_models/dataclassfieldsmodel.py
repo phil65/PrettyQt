@@ -7,6 +7,7 @@ from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
+
 logger = logging.getLogger(__name__)
 
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Callable
 import html
 import os
+
 from typing import Literal
 
 from prettyqt import constants, core, gui, iconprovider

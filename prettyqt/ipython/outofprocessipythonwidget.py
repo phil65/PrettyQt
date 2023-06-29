@@ -6,6 +6,7 @@ import os
 import sys
 
 import IPython
+
 from qtconsole.client import QtKernelClient
 
 from prettyqt import core, ipython, widgets

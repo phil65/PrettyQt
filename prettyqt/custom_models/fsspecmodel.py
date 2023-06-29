@@ -7,11 +7,12 @@ import itertools
 import logging
 import os
 import pathlib
+
 from typing import TypedDict
 
 import fsspec
 
-from prettyqt import constants, core, gui, custom_models, widgets
+from prettyqt import constants, core, custom_models, gui, widgets
 from prettyqt.utils import datatypes, treeitem
 
 

@@ -2,10 +2,12 @@ from __future__ import annotations
 
 from collections.abc import Iterator
 import contextlib
+
 from typing import Literal
 
 from prettyqt import constants, core, gui
 from prettyqt.utils import bidict, colors, datatypes
+
 
 CompositionModeStr = Literal[
     "source_over",

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-import os
 import base64
+import os
 import pathlib
 
 from typing_extensions import Self

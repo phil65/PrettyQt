@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import enum
+
 from prettyqt import constants, widgets
+
 
 SE = widgets.QStyle.SubElement
 

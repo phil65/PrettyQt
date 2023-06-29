@@ -1,8 +1,9 @@
 from __future__ import annotations
 
-from typing import Any
 import enum
 import logging
+
+from typing import Any
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import datatypes
@@ -97,8 +98,8 @@ class VariantDelegate(widgets.StyledItemDelegate):
 
 
 if __name__ == "__main__":
-    import re
     import pathlib
+    import re
 
     app = widgets.app()
     table_widget = widgets.TableWidget(15, 2)

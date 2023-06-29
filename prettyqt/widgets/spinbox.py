@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from prettyqt import core, widgets
 
+
 MAX_VAL = 2147483647
 
 

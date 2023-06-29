@@ -1,11 +1,11 @@
 """Provides Qt init stuff."""
 
 
-from typing import Literal
-
-import warnings
 import os
 import sys
+
+from typing import Literal
+import warnings
 
 
 class PythonQtError(ImportError):
@@ -44,8 +44,10 @@ elif "PySide6" in sys.modules:
 
 if API == "pyqt6":
     try:
-        from PyQt6.QtCore import PYQT_VERSION_STR as API_VERSION  # analysis:ignore
-        from PyQt6.QtCore import QT_VERSION_STR as QT_VERSION  # analysis:ignore
+        from PyQt6.QtCore import (
+            PYQT_VERSION_STR as API_VERSION,  # analysis:ignore
+            QT_VERSION_STR as QT_VERSION,  # analysis:ignore
+        )
 
         PYQT6 = True
 

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui, custom_models
+from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import colors, datatypes
 
 

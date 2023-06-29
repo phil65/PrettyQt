@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import constants, core, gui, custom_widgets
+from prettyqt import constants, core, custom_widgets, gui
 
 
 class CursorEdit(custom_widgets.EnumComboBox):

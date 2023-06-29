@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections.abc import Iterator
 import html
 import os
+
 from typing import Any
 
 from typing_extensions import Self

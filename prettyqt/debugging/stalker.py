@@ -1,12 +1,13 @@
 from __future__ import annotations
 
+import collections
+
 # import enum
 import logging
 
-import collections
 from typing import TypeVar
 
-from prettyqt import core, constants, gui, eventfilters
+from prettyqt import constants, core, eventfilters, gui
 
 
 logger = logging.getLogger(__name__)

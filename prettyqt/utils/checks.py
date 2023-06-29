@@ -1,10 +1,11 @@
 """Module containing functions and decorators for validity checking."""
 
+from collections.abc import Callable
 import functools
 import logging
-from collections.abc import Callable
 
 from prettyqt import core, widgets
+
 
 logger = logging.getLogger(__name__)
 

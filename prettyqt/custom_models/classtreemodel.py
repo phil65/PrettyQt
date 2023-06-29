@@ -9,6 +9,7 @@ import logging
 from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import treeitem
 
+
 logger = logging.getLogger(__name__)
 
 

@@ -5,6 +5,7 @@ from typing import Literal
 from prettyqt.qt import QtNetwork
 from prettyqt.utils import bidict, datatypes, get_repr
 
+
 RawFormStr = Literal["name_and_value_only", "full"]
 
 RAW_FORMS: bidict[RawFormStr, QtNetwork.QNetworkCookie.RawForm] = bidict(

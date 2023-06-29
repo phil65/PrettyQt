@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import logging
 import enum
+import logging
+
 from typing import Any
 
 import numpy as np
@@ -9,6 +10,7 @@ import pandas as pd
 
 from prettyqt import constants, core, custom_models
 from prettyqt.utils import helpers
+
 
 logger = logging.getLogger(__name__)
 

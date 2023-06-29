@@ -3,8 +3,8 @@
 contains QtTest-based classes
 """
 
-from .signalspy import SignalSpy
 from .abstractitemmodeltester import AbstractItemModelTester
+from .signalspy import SignalSpy
 
 
 __all__ = ["SignalSpy", "AbstractItemModelTester"]

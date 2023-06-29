@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from collections.abc import Sequence, Iterator
+from collections.abc import Iterator, Sequence
 
 from prettyqt import gui
 from prettyqt.qt import QtCore

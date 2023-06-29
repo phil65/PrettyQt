@@ -1,13 +1,14 @@
 from __future__ import annotations
 
-import sys
+from collections.abc import Callable, Generator
 import logging
 import re
+import sys
 import traceback
-from collections.abc import Callable, Generator
 
 from prettyqt import debugging, gui, widgets
 from prettyqt.utils import helpers
+
 
 logger = logging.getLogger(__name__)
 

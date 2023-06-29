@@ -6,6 +6,7 @@ import logging
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import colors, datatypes, fuzzy
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -154,9 +155,10 @@ class FuzzyCompleter(widgets.Completer):
 
 
 if __name__ == "__main__":
-    from prettyqt import custom_widgets
     import random
     import string
+
+    from prettyqt import custom_widgets
 
     app = widgets.app()
     window = widgets.MainWindow()

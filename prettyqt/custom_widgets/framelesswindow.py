@@ -1,16 +1,13 @@
 from __future__ import annotations
 
-from ctypes import cast
-from ctypes.wintypes import MSG, LPRECT
+from ctypes import POINTER, Structure, c_int, cast
+from ctypes.wintypes import HWND, LPRECT, MSG, RECT, UINT
 from enum import Enum
 from sys import getwindowsversion
 
 import win32con
-from ctypes import Structure, c_int, POINTER
-from ctypes.wintypes import HWND, UINT, RECT
 
-from prettyqt import core, constants, gui, widgets
-
+from prettyqt import constants, core, gui, widgets
 from prettyqt.utils.platforms.windows import misc, windoweffects
 
 

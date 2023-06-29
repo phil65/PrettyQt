@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-from typing import Any
 import dataclasses
 import logging
 
+from typing import Any
+
 from prettyqt import constants, core
 from prettyqt.utils import fuzzy
+
 
 logger = logging.getLogger(__name__)
 

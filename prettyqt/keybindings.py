@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-import dataclasses
 from collections.abc import Callable, Iterable
+import dataclasses
+
 from prettyqt import constants
 
 

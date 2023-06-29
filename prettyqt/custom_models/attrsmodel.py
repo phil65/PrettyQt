@@ -1,11 +1,13 @@
 from __future__ import annotations
 
 from collections.abc import Sequence
-import attrs
 import logging
+
+import attrs
 
 from prettyqt import custom_models
 from prettyqt.utils import datatypes
+
 
 logger = logging.getLogger(__name__)
 

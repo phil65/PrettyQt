@@ -3,6 +3,7 @@ from __future__ import annotations
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import colors, datatypes
 
+
 CC_ScrollBar = widgets.QStyle.ComplexControl.CC_ScrollBar
 SubControl = widgets.QStyle.SubControl
 

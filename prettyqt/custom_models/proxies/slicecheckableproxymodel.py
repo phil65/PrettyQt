@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import logging
+
 from typing import Any
 
 from prettyqt import constants, core, custom_models
+
 
 logger = logging.getLogger(__name__)
 
