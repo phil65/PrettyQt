@@ -17,9 +17,7 @@ from .widgeteditor import WidgetEditor
 from .collapsibleframe import CollapsibleFrame
 from .clickablelabel import ClickableLabel
 from .orientedtableview import OrientedTableView
-from .hierarchicalheaderview import HierarchicalHeaderView
 from .commandpalette import CommandPalette
-from .filterheader import FilterHeader
 from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit, StringListEdit
 from .editors.keycombinationedit import KeyCombinationEdit
 from .editors.singlelinetextedit import SingleLineTextEdit
@@ -70,6 +68,10 @@ from .scrollareatocwidget import ScrollAreaTocWidget
 from .timeline import Timeline, VideoSample
 from .standardiconswidget import StandardIconsWidget
 
+from .itemviews.hierarchicalheaderview import HierarchicalHeaderView
+from .itemviews.spantableview import SpanTableView
+from .itemviews.filterheader import FilterHeader
+
 
 __all__ = [
     "AnnotatedScrollBar",
@@ -93,6 +95,7 @@ __all__ = [
     "OrientedTableView",
     "FilterHeader",
     "HierarchicalHeaderView",
+    "SpanTableView",
     "KeyCombinationEdit",
     "SingleLineTextEdit",
     "RegexLineEdit",

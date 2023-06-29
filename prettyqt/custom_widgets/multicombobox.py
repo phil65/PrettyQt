@@ -66,10 +66,7 @@ class MultiComboBox(widgets.ComboBox):
             if event.type() == core.QEvent.Type.MouseButtonRelease:
                 index = self.view().indexAt(event.pos())
                 item = self.model().itemFromIndex(index)
-                if item.checkState() == constants.CheckState.Checked:
-                    item.setCheckState(constants.CheckState.Unchecked)
-                else:
-                    item.setCheckState(constants.CheckState.Checked)
+                item.toggle_checkstate()
                 return True
         return False
 
@@ -91,27 +88,19 @@ class MultiComboBox(widgets.ComboBox):
         self._close_on_lineedit_click = False
 
     def _update_text(self):
-        texts = [
-            item.text()
-            for item in self.get_model_items()
-            if item.checkState() == constants.CheckState.Checked
-        ]
+        texts = [item.text() for item in self.get_model_items() if item.is_checked()]
         text = ", ".join(texts)
         # Compute elided text (with "...")
         metrics = gui.FontMetrics(self.lineEdit().font())
-        text = metrics.elidedText(
-            text, constants.TextElideMode.ElideRight, self.lineEdit().width()
-        )
+        text = metrics.elided_text(text, "right", self.lineEdit().width())
         self.lineEdit().setText(text)
 
     def addItem(self, text: str, data: Any = None, checked: bool = False, **kwargs):
-        item = gui.QStandardItem()
+        item = gui.StandardItem()
         item.setText(text)
         item.setData(text if data is None else data, constants.USER_ROLE)
         item.setFlags(constants.IS_ENABLED | constants.IS_CHECKABLE)
-        item.setCheckState(
-            constants.CheckState.Checked if checked else constants.CheckState.Unchecked
-        )
+        item.set_checkstate(checked)
         self.model().appendRow(item)
 
     def addItems(
@@ -126,17 +115,13 @@ class MultiComboBox(widgets.ComboBox):
     def currentData(
         self, role: constants.ItemDataRole = constants.USER_ROLE
     ) -> list[Any]:
-        return [
-            item.data(role)
-            for item in self.get_model_items()
-            if item.checkState() == constants.CheckState.Checked
-        ]
+        return [item.data(role) for item in self.get_model_items() if item.is_checked()]
 
     def get_current_options(self) -> list[tuple[str, Any]]:
         return [
             (item.text(), item.data(constants.USER_ROLE))
             for item in self.get_model_items()
-            if item.checkState() == constants.CheckState.Checked
+            if item.is_checked()
         ]
 
     def get_model_items(self) -> Generator[gui.QStandardItem, None, None]:

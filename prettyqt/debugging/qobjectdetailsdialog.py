@@ -3,13 +3,12 @@ from __future__ import annotations
 import functools
 import logging
 
-from prettyqt import constants, core, debugging, ipython, widgets
+from prettyqt import constants, custom_widgets, core, debugging, ipython, widgets
 from prettyqt.custom_models import (
     logrecordmodel,
     widgetpropertiesmodel,
     widgethierarchymodel,
 )
-from prettyqt.custom_widgets import filterheader
 from prettyqt.qt import QtCore, QtWidgets
 
 logger = logging.getLogger(__name__)
@@ -52,7 +51,7 @@ class PropertyView(widgets.TableView):
         tabwidget = widgets.TabWidget(parent=parent)
         propertyview = cls(object_name="property_view", parent=tabwidget)
         propertyview.set_qobject(qobject)
-        propertyview.h_header = filterheader.FilterHeader(propertyview)
+        propertyview.h_header = custom_widgets.FilterHeader(propertyview)
         tabwidget.add_tab(propertyview, "Main")
 
         if hasattr(qobject, "model") and (model := qobject.model()) is not None:
@@ -61,7 +60,7 @@ class PropertyView(widgets.TableView):
                     object_name=f"property_view({type(model).__name__})",
                     parent=tabwidget,
                 )
-                view.h_header = filterheader.FilterHeader(view)
+                view.h_header = custom_widgets.FilterHeader(view)
                 view.set_qobject(model)
                 tabwidget.add_tab(view, type(model).__name__)
                 model = model.sourceModel()
@@ -69,7 +68,7 @@ class PropertyView(widgets.TableView):
                 object_name=f"property_view({type(model).__name__})",
                 parent=tabwidget,
             )
-            view.h_header = filterheader.FilterHeader(view)
+            view.h_header = custom_widgets.FilterHeader(view)
             view.set_qobject(model)
             tabwidget.add_tab(view, type(model).__name__)
         # if (
@@ -105,7 +104,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
             qobject, parent=self.hierarchyview
         )
         self.hierarchyview.set_model(model)
-        self.hierarchyview.h_header = filterheader.FilterHeader(self.hierarchyview)
+        self.hierarchyview.h_header = custom_widgets.FilterHeader(self.hierarchyview)
         self.hierarchyview.expandAll()
         self.hierarchyview.selectionModel().currentRowChanged.connect(self._current_changed)
 

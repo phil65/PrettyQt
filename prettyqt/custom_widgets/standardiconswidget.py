@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from prettyqt import widgets
-from prettyqt.custom_widgets import multilinelayout
+from prettyqt import custom_widgets, widgets
 
 
 class StandardIconsWidget(widgets.Widget):
@@ -9,7 +8,7 @@ class StandardIconsWidget(widgets.Widget):
 
     def __init__(self, parent: widgets.QWidget | None = None):
         super().__init__(parent)
-        layout = multilinelayout.MultiLineLayout(parent=self)
+        layout = custom_widgets.MultiLineLayout(parent=self)
         for k in widgets.style.STANDARD_PIXMAP:
             icon_layout = widgets.HBoxLayout()
             icon = widgets.Application.get_style_icon(k)
