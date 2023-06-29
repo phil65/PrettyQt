@@ -1,10 +1,11 @@
 from __future__ import annotations
 
+from typing import Literal
 import enum
 import logging
 
 from prettyqt import constants, core, custom_models, gui, widgets
-from prettyqt.utils import treeitem
+from prettyqt.utils import bidict, treeitem
 
 logger = logging.getLogger(__name__)
 
@@ -17,6 +18,9 @@ class SectionWidget(widgets.Widget):
         header = widgets.Label(self.windowTitle()).set_bold()
         header.set_point_size(header.font().pointSize() * 2)
         self.box.add(header)
+        for i in range(5):
+            subitem = widgets.CheckBox(f"sub item {i}")
+            self.box.add(subitem)
 
 
 class ScrollAreaTocModel(custom_models.TreeModel):
@@ -86,39 +90,53 @@ class ScrollAreaTocModel(custom_models.TreeModel):
     header_property = core.Property(str, get_header_property, set_header_property)
 
 
+class ScrollMode(enum.Enum):
+    Single = 1
+    Multi = 2
+    HeadersOnly = 4
+
+
+class ExpandMode(enum.Enum):
+    Always = 1
+    OnFocus = 2
+
+
+ScrollModeStr = Literal["single", "multi", "headers_only"]
+ExpandModeStr = Literal["always", "on_focus"]
+
+SCROLL_MODE: bidict[ScrollModeStr, ScrollMode] = bidict(
+    single=ScrollMode.Single, multi=ScrollMode.Multi, headers_only=ScrollMode.HeadersOnly
+)
+EXPAND_MODE: bidict[ExpandModeStr, ExpandMode] = bidict(
+    always=ExpandMode.Always, on_focus=ExpandMode.OnFocus
+)
+
+
 class ScrollAreaTocWidget(widgets.TreeView):
     section_changed = core.Signal()
 
-    @core.Enum
-    class ScrollMode(enum.Enum):
-        """Scroll modes."""
+    ScrollMode = ScrollMode
+    core.Enum(ScrollMode)
 
-        Single = 1
-        Multi = 2
-        HeadersOnly = 4
-
-    @core.Enum
-    class ExpandMode(enum.Enum):
-        """Expand modes."""
-
-        Always = 1
-        OnFocus = 2
+    ExpandMode = ExpandMode
+    core.Enum(ExpandMode)
 
     def __init__(
         self,
         scrollarea: widgets.QScrollArea,
-        orientation: constants.Orientation = constants.VERTICAL,
+        orientation: constants.Orientation
+        | constants.OrientationStr = constants.VERTICAL,
         widget_class: type = widgets.QWidget,
         **kwargs,
     ) -> None:
         # TODO: not sure if parent should always equal scrollarea..."""
         self._WidgetClass = widget_class
-        self._scroll_mode = "single"
-        self._expand_mode = "always"
+        self._scroll_mode = ScrollMode.Single
+        self._expand_mode = ExpandMode.Always
         self._last_visible = None
         self.scrollarea = scrollarea
         super().__init__(scrollarea, **kwargs)
-        self._orientation = orientation
+        self._orientation = constants.ORIENTATION.get_enum_value(orientation)
         self.setFixedWidth(200)
         self.h_header.hide()
         self.h_header.setStretchLastSection(True)
@@ -129,11 +147,16 @@ class ScrollAreaTocWidget(widgets.TreeView):
         #     ::item:selected { border-color:transparent;
         #     border-style:outset; border-width:2px; color:black; }"""
         # )
-        if orientation == constants.VERTICAL:
+        if self._orientation == constants.VERTICAL:
             scrollarea.v_scrollbar.valueChanged.connect(self._on_scroll)
         else:
             scrollarea.h_scrollbar.valueChanged.connect(self._on_scroll)
         self.set_widget(scrollarea)
+
+    def _get_map(self):
+        maps = super()._get_map()
+        maps |= {"expandMode": EXPAND_MODE, "scrollMode": SCROLL_MODE}
+        return maps
 
     def showEvent(self, event):
         super().showEvent(event)
@@ -190,9 +213,9 @@ class ScrollAreaTocWidget(widgets.TreeView):
         sig = self.selectionModel().currentRowChanged
         with self.signal_blocked(sig, self._on_current_change):
             self.select_index(None)
-            if self._expand_mode != "always":
+            if self.get_expand_mode() != "always":
                 self.collapseAll()
-            match self._scroll_mode:
+            match self.get_scroll_mode():
                 case "multi":
                     indexes = model.search_tree(visible_widgets, constants.USER_ROLE)
                     for index in indexes:
@@ -242,20 +265,26 @@ class ScrollAreaTocWidget(widgets.TreeView):
                 self._on_scroll()
         return False
 
-    def get_scroll_mode(self) -> str:
+    def _scrollMode(self) -> ScrollMode:
         return self._scroll_mode
 
-    def set_scroll_mode(self, mode: str):
-        self._scroll_mode = mode
+    def get_scroll_mode(self) -> ScrollModeStr:
+        return SCROLL_MODE.inverse[self._scrollMode()]
 
-    def get_expand_mode(self) -> str:
+    def set_scroll_mode(self, mode: ScrollMode | ScrollModeStr):
+        self._scroll_mode = SCROLL_MODE.get_enum_value(mode)
+
+    def _expandMode(self):
         return self._expand_mode
 
-    def set_expand_mode(self, mode: str):
-        self._expand_mode = mode
+    def get_expand_mode(self) -> ExpandModeStr:
+        return EXPAND_MODE.inverse[self._expandMode()]
 
-    scrollMode = core.Property(str, get_scroll_mode, set_scroll_mode)
-    expandMode = core.Property(str, get_expand_mode, set_expand_mode)
+    def set_expand_mode(self, mode: ExpandModeStr | ExpandMode):
+        self._expand_mode = EXPAND_MODE.get_enum_value(mode)
+
+    scrollMode = core.Property(enum.Enum, _scrollMode, set_scroll_mode)
+    expandMode = core.Property(enum.Enum, _expandMode, set_expand_mode)
 
 
 if __name__ == "__main__":
