@@ -11,12 +11,16 @@
 **PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt6 / PySide6.
 
 ## Main Features
-  - Large parts of the Qt API are available in a **PEP-8**-compliant way.
-  - Pre-defined widgets for common use cases
-  - Large set of validators, syntax highlighters, models and much more.
+  - Subclasses for almost all Qt classes, enriched with helper and __dunder__ methods to give a feel of a native GUI library.
+  - more than 80 pre-defined widgets and layouts for common use cases
+  - more than 30 ItemModels for different data types
+  - more than 25 general-purpose proxy models
+  - 10 ItemDelegates for different purposes
+  - 20 different Validators
+  - much, much more.
 
 PrettyQt basically is a wrapper for the whole Qt API (either on top of PySide6 or PyQt6).
-Perhaps it can be seen as a small python equivalent of KDE.
+Perhaps it can be seen as a small Python equivalent of KDE.
 
 The library contains a tree of mixins, with one mixin for each Qt class.
 These mixins also inherit from each other and are applied to the Qt classes.
@@ -71,24 +75,25 @@ when passing `show_mro=True` to ParentclassTreeModel, we can also take a loot at
 </figure>
 
 Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
-and using it can be quite cumbersome for Python developers. (it´s statically typed,
+and using it can be quite cumbersome for Python developers. (very restrictive when it comes to types,
 very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
 
 - adding more powerful methods to the classes, which accept more types and have more options (in form of keyword arguments)
-- doing conversions for method parameters to lessen the strictness for types. (Example: points, sizes and rectangles can also be passed to most important methods as tuples.)
+- doing conversions for method parameters to lessen the strictness for types. (Example: points, sizes and rectangles can also be passed to Qt methods as tuples.)
 - raising Exceptions or returning None instead of returning -1 or invalid objects.
 - all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )
 - adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
 
 
-The minimum supported python version is 3.10. Since larger parts of the library are dealing with type conversions, the match-case statement is essential, therefore makin it impossible to use older Python versions.
+The minimum supported python version is 3.10. Since large parts of the library are dealing with type conversions, the match-case statement is essential, therefore makin it impossible to use older Python versions.
 The minimum supported Qt version is 6.5, since it is the first Qt Version which is up-to-par featurewise with Qt5.
 
+The aim is to support the last two released Python versions as well as keeping support for the last Qt LTS release.
 
 Apart from the 3D related modules (Qt3D, QtDataVizualization), QtXml and QtSql,
 almost every class from Qt is covered.
 
-## The covered modules right now are:
+## Covered Qt modules
 
 - QtBluetooth (-> prettyqt.bluetooth)
 - QtCharts (-> prettyqt.charts)

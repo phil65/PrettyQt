@@ -56,7 +56,7 @@ The following validators are included:
 - validate string based on a Callable (Signature: Callable[[str], bool])
 
 
-Apart from LineEdits, PlainTextEdits also gained the ability to take a validator.
+Apart from LineEdits, ComboBoxes and SpinBoxes, PlainTextEdits also gained the ability to take a validator.
 
 The set_validator method also gained a "strict" keyword argument, which wraps the passed
 validator into a NotStrictValidator, effectively removing the "Invalid" state. That way
