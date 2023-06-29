@@ -84,7 +84,7 @@ class TreeWidgetMixin(widgets.TreeViewMixin):
             if self.topLevelItem(i) is item:
                 self.takeTopLevelItem(i)
                 return
-        raise IndexError(f"Item '{str(item)}' not in top-level items.")
+        raise IndexError(f"Item {item!r} not in top-level items.")
 
     def openPersistentEditor(
         self, index: core.ModelIndex | widgets.QTreeWidgetItem, column: int = 0

@@ -171,7 +171,7 @@ class RegularExpression(core.QRegularExpression):
         return match if match.hasMatch() else None
 
     def split(self, string: str, maxsplit: int = 0):
-        raise NotImplementedError()
+        raise NotImplementedError
         # result = []
         # matches = self.global_match(string)
         # matches = list(matches)

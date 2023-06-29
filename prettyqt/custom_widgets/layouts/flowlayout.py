@@ -12,7 +12,7 @@ class FlowLayout(widgets.Layout):
 
     def __add__(self, other: widgets.QWidget | widgets.QLayout) -> FlowLayout:
         if not isinstance(other, widgets.QWidget | widgets.QLayout):
-            raise TypeError()
+            raise TypeError
         self.add(other)
         return self
 

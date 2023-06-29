@@ -44,7 +44,7 @@ class Highlighter:
         return self.format
 
     def format_string(self, record: logging.LogRecord):
-        raise NotImplementedError()
+        raise NotImplementedError
 
 
 class AscTime(Highlighter):

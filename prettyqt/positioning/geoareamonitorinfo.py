@@ -26,7 +26,7 @@ class GeoAreaMonitorInfo(QtPositioning.QGeoAreaMonitorInfo):
             case QtPositioning.QGeoShape():
                 return positioning.GeoShape(area)
             case _:
-                raise RuntimeError()
+                raise RuntimeError
 
     def get_expiration(self) -> core.DateTime:
         return core.DateTime(self.expiration())

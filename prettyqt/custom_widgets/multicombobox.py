@@ -61,12 +61,14 @@ class MultiComboBox(widgets.ComboBox):
                 return True
             return False
 
-        if source == self.view().viewport():
-            if event.type() == core.QEvent.Type.MouseButtonRelease:
-                index = self.view().indexAt(event.pos())
-                item = self.model().itemFromIndex(index)
-                item.toggle_checkstate()
-                return True
+        if (
+            source == self.view().viewport()
+            and event.type() == core.QEvent.Type.MouseButtonRelease
+        ):
+            index = self.view().indexAt(event.pos())
+            item = self.model().itemFromIndex(index)
+            item.toggle_checkstate()
+            return True
         return False
 
     def showPopup(self):

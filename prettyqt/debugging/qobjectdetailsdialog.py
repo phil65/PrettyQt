@@ -151,7 +151,7 @@ class QObjectDetailsDialog(widgets.MainWindow):
     def eventFilter(self, source, event):
         match event.type():
             case QtCore.QEvent.Type.MouseButtonRelease:
-                raise ValueError()
+                raise ValueError
         return False
 
     def closeEvent(self, event):

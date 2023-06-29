@@ -62,7 +62,7 @@ class SingleApplicationMixin:
 
     def _on_ready_read(self):
         if self._in_stream is None:
-            raise RuntimeError()
+            raise RuntimeError
         for msg in self._in_stream.read_lines():
             self.message_received.emit(msg)
 

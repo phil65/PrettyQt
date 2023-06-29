@@ -17,7 +17,7 @@ def debug():
     stack = inspect.stack()
     if frame is None or frame.f_back is None:
         del frame
-        raise RuntimeError()
+        raise RuntimeError
     try:
         from prettyqt import custom_widgets, widgets
 

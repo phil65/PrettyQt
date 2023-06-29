@@ -36,13 +36,13 @@ class JsonDocument(core.QJsonDocument):
     def __setitem__(self, index: int | str, value):
         if self.isArray():
             if not isinstance(index, int):
-                raise TypeError()
+                raise TypeError
             array = self.array()
             array[index] = value
             self.setArray(array)
         elif self.isObject():
             if not isinstance(index, str):
-                raise TypeError()
+                raise TypeError
             obj = self.object()
             obj[index] = value
             self.setObject(obj)

@@ -263,21 +263,21 @@ select = [
     "B",    # flake8-bugbear
     # "BLE",  # Flake8-blind-except
     "C",
-    # "C4",   # flake8-comprehensions
+    "C4",   # flake8-comprehensions
     # "C90",  # MCCable
     # "COM",  #  Flake8-commas
-    # "CPY",  #  Copyright-related rules
+    "CPY",  #  Copyright-related rules
     "D",    # PyDocStyle
     # "DTZ",  # Flake8- Datetimez
     "E",    # PyCodeStyle Error
     # "EM",   # flake8-errmsg
     # "ERA",  #  Eradicate
-    # "EXE",  # flake8-executable
+    "EXE",  # flake8-executable
     "F",    # PyFlakes
-    # "FA",  # flake8-future-annotations
+    "FA",  # flake8-future-annotations
     # "FBT",  # flake8-boolean-trap
     # "FIX",  # flake8-fixme
-    # "FLY",  # flynt
+    "FLY",  # flynt
     # "G",    #  flake8-logging-format
     "I",    # ISort
     "ICN",  # Flake8-import-conventions
@@ -287,7 +287,7 @@ select = [
     # "N",    # pep8-naming
     # "NPY",  # numpy-specific rules
     # "PD",   # pandas-vet
-    # "PERF", # perflint
+    "PERF", # perflint
     # "PGH",  # pygrep-hooks
     "PIE",  # flake8-pie
     # "PL",   # PyLint  (PLC, PLE, PLR, PLW)
@@ -296,22 +296,22 @@ select = [
     "PYI",  # flake8-pyi
     # "Q",    # flake8-quotes
     # "RET",  # flake8-return
-    # "RSE",  # flake8-raise
+    "RSE",  # flake8-raise
     # "RUF",  # ruff-specific rules
     # "S",    # flake8-bandit
     # "SIM",  # flake8-simplify
     "SLF",  # flake8-self
-    # "SLOT",  # flake8-slots
+    "SLOT",  # flake8-slots
     # "T",
     # "TD",   # flake8-todos
-    # "T10",  # flake8-debugger
+    "T10",  # flake8-debugger
     # "T20",  # flake8-print
     # "TCH",  # flake8-type-checking
-    # "TID",  # flake8-tidy-imports
+    "TID",  # flake8-tidy-imports
     # "TRY",  # tryceratops
     "UP",   # PyUpgrade
     "W",    # PyCodeStyle warning
-    # "YTT",  # flake8-2020
+    "YTT",  # flake8-2020
 ]
 ignore = [
     "C408",  # Unnecessary {obj_type} call (rewrite as a literal)

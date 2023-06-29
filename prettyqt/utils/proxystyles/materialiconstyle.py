@@ -91,7 +91,7 @@ MAPPING = {
 
 
 class MaterialIconStyle(QtWidgets.QProxyStyle):
-    def standardIcon(  # noqa: N802
+    def standardIcon(
         self,
         standard_icon: QtWidgets.QStyle.StandardPixmap,
         option: QtWidgets.QStyleOption | None = None,
