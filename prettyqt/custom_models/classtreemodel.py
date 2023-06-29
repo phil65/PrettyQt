@@ -5,6 +5,9 @@ import enum
 import functools
 import inspect
 import logging
+import types
+
+from typing import get_args
 
 from prettyqt import constants, core, custom_models, gui
 from prettyqt.utils import treeitem
@@ -75,7 +78,7 @@ class BaseClassTreeModel(custom_models.TreeModel):
         klass = self.data_by_index(index).obj
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
-                return klass.__name__
+                return "Union" if isinstance(klass, types.UnionType) else klass.__name__
             case constants.DISPLAY_ROLE, 1:
                 return get_doc(klass)
             case constants.DISPLAY_ROLE, 2:
@@ -99,14 +102,18 @@ class SubClassTreeModel(BaseClassTreeModel):
 
     @classmethod
     def supports(cls, instance) -> bool:
-        return isinstance(instance, type)
+        return isinstance(instance, type | types.UnionType)
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+        if isinstance(item.obj, types.UnionType):
+            return [treeitem.TreeItem(obj=i) for i in get_args(item.obj)]
         return [treeitem.TreeItem(obj=i) for i in item.obj.__subclasses__()]
 
     def _has_children(self, item: treeitem.TreeItem) -> bool:
         if item.obj is None:
             return False
+        if isinstance(item.obj, types.UnionType):
+            return True
         return len(item.obj.__subclasses__()) > 0
 
 
@@ -147,14 +154,14 @@ if __name__ == "__main__":
     app = widgets.app()
     view = widgets.TreeView()
     view.setRootIsDecorated(True)
-    model = SubClassTreeModel(core.ObjectMixin, show_root=True, parent=view)
+    model = SubClassTreeModel(core.ObjectMixin | core.Object, show_root=True, parent=view)
     view.set_model(model)
-    view.proxifier[0].modify(
-        lambda x: gui.QColor("blue"),
-        role=constants.BACKGROUND_ROLE,
-        selector=lambda x: issubclass(x, core.QObject),
-        selector_role=constants.USER_ROLE,
-    )
+    # view.proxifier[0].modify(
+    #     lambda x: gui.QColor("blue"),
+    #     role=constants.BACKGROUND_ROLE,
+    #     selector=lambda x: issubclass(x, core.QObject),
+    #     selector_role=constants.USER_ROLE,
+    # )
     view.setEditTriggers(view.EditTrigger.AllEditTriggers)
     view.set_delegate("variant")
     view.resize(1000, 1000)
