@@ -283,33 +283,87 @@ home-page = "https://github.com/phil65/prettyqt"
 
 [tool.ruff]
 line-length = 90
-# ["A", "ANN", "ARG", "B", "BLE", "C", "COM", "D", "DTZ", "E", "EM", "ERA", "EXE", "F", "FBT", "G", "I", "ICN", "INP", "ISC", "N", "PD", "PGH", "PIE", "PL", "PT", "PTH", "Q", "RET", "RUF", "S", "SIM", "T", "TCH", "TID", "TRY", "UP", "W", "YTT"]
-select = ["B", "C", "E", "F", "W", "ICN", "ISC", "UP"] # "I"
-# Never enforce `E501`.
-ignore = ["C408", "B905"]
-extend-select = ["D"]
-extend-ignore = [
-    "C901",
-    "D100",
-    "D101",
-    "D102",
-    "D103",
-    "D104",
-    "D105",
-    "D106",
-    "D107",
-    "D203",
-    "D204",
-    "D213",
-    "D215",
-    "D400",
-    "D401",
-    "D404",
-    "D406",
-    "D407",
-    "D408",
-    "D409",
-    "D413",
+select = [
+    # "A",    # Flake8-builtins
+    # "ANN",  # Flake8-Annotations
+    # "ASYNC",  # Flake8-Async
+    # "ARG",  # # Flake8-Unused-Arguments
+    "B",    # flake8-bugbear
+    # "BLE",  # Flake8-blind-except
+    "C",
+    # "C4",   # flake8-comprehensions
+    # "C90",  # MCCable
+    # "COM",  #  Flake8-commas
+    # "CPY",  #  Copyright-related rules
+    "D",    # PyDocStyle
+    # "DTZ",  # Flake8- Datetimez
+    "E",    # PyCodeStyle Error
+    # "EM",   # flake8-errmsg
+    # "ERA",  #  Eradicate
+    # "EXE",  # flake8-executable
+    "F",    # PyFlakes
+    # "FA",  # flake8-future-annotations
+    # "FBT",  # flake8-boolean-trap
+    # "FIX",  # flake8-fixme
+    # "FLY",  # flynt
+    # "G",    #  flake8-logging-format
+    "I",    # ISort
+    "ICN",  # Flake8-import-conventions
+    # "INP",  # flake8-no-pep420
+    # "INT",  # flake8-gettext
+    "ISC",  # flake8-implicit-str-concat
+    # "N",    # pep8-naming
+    # "NPY",  # numpy-specific rules
+    # "PD",   # pandas-vet
+    # "PGH",  # pygrep-hooks
+    # "PIE",  # flake8-pie
+    # "PL",   # PyLint  (PLC, PLE, PLR, PLW)
+    # "PT",   # flake8-pytest-style
+    # "PTH",  # flake8-use-pathlib
+    # "PYI",  # flake8-pyi
+    # "Q",    # flake8-quotes
+    # "RET",  # flake8-return
+    # "RSE",  # flake8-raise
+    # "RUF",  # ruff-specific rules
+    # "S",    # flake8-bandit
+    # "SIM",  # flake8-simplify
+    # "SLF",  # flake8-self
+    # "SLOT",  # flake8-slots
+    # "T",
+    # "TD",   # flake8-todos
+    # "T10",  # flake8-debugger
+    # "T20",  # flake8-print
+    # "TCH",  # flake8-type-checking
+    # "TID",  # flake8-tidy-imports
+    # "TRY",  # tryceratops
+    "UP",   # PyUpgrade
+    "W",    # PyCodeStyle warning
+    # "YTT",  # flake8-2020
+]
+ignore = [
+    "C408",  # Unnecessary {obj_type} call (rewrite as a literal)
+    "B905",  # zip() without an explicit strict= parameter
+    "C901",  # {name} is too complex ({complexity} > {max_complexity})
+    "D100",  # Missing docstring in public module
+    "D101",  # Missing docstring in public class
+    "D102",  # Missing docstring in public method
+    "D103",  # Missing docstring in public function
+    "D104",  # Missing docstring in public package
+    "D105",  # Missing docstring in magic method
+    "D106",  # Missing docstring in public nested class
+    "D107",  # Missing docstring in __init__
+    "D203",  # 1 blank line required before class docstring
+    "D204",  # 1 blank line required after class docstring
+    "D213",  # Multi-line docstring summary should start at the second line
+    "D215",  # Section underline is over-indented ("{name}")
+    "D400",  # First line should end with a period
+    "D401",  # First line of docstring should be in imperative mood: "{first_line}"
+    "D404",  # First word of the docstring should not be "This"
+    "D406",  # Section name should end with a newline ("{name}")
+    "D407",  # Missing dashed underline after section ("{name}")
+    "D408",  # Section underline should be in the line following the section's name ("{name}")
+    "D409",  # Section underline should match the length of its name ("{name}")
+    "D413",  # Missing blank line after last section ("{name}")
 ]
 exclude = [
     'docs',
