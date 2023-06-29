@@ -237,7 +237,7 @@ mkdocs-literate-nav = "^0.6.0"
 mkdocs-autorefs = "^0.4.1"
 
 [tool.pytest.ini_options]
-minversion = "6.0"
+minversion = "7.0"
 testpaths = [
     "tests",
 ]
@@ -252,34 +252,6 @@ log_date_format = "%Y-%m-%d %H:%M:%S"
 [tool.mypy]
 python_version = "3.10"
 disable_error_code = ["assignment", "misc", "attr-defined", "import", "no-any-expr", "misc", "attr-defined"]
-
-# exclude = [
-#     "^one\\.py$",  # TOML's double-quoted strings require escaping backslashes
-#     'two\.pyi$',  # but TOML's single-quoted strings do not
-#     '^three\.',
-# ]
-
-[tool.isort]
-line_length = 90
-ensure_newline_before_comments = true
-include_trailing_comma = true
-lines_after_imports = 2
-lines_between_types = 1
-# atomic = true
-multi_line_output = 3
-force_sort_within_sections = true
-combine_as_imports = true
-use_parentheses = true
-force_grid_wrap = 0
-# skip = "__init__.py"
-skip_glob = ["*/setup.py", "*/**/__init__.py"]
-# filter_files = true
-
-[tool.flit.metadata]
-module = "prettyqt"
-author = "Philipp Temminghoff"
-author-email = "philipptemminghoff@googlemail.com"
-home-page = "https://github.com/phil65/prettyqt"
 
 [tool.ruff]
 line-length = 90
@@ -315,6 +287,7 @@ select = [
     # "N",    # pep8-naming
     # "NPY",  # numpy-specific rules
     # "PD",   # pandas-vet
+    # "PERF", # perflint
     # "PGH",  # pygrep-hooks
     # "PIE",  # flake8-pie
     # "PL",   # PyLint  (PLC, PLE, PLR, PLW)
@@ -365,13 +338,11 @@ ignore = [
     "D409",  # Section underline should match the length of its name ("{name}")
     "D413",  # Missing blank line after last section ("{name}")
 ]
-exclude = [
-    'docs',
-    '.eggs/*.py',
-]
 extend-exclude = [
+    'docs',
+    '__init__.py',
     "prettyqt/qt/",
-    ]
+]
 target-version = "py310"
 
 [tool.ruff.flake8-quotes]
