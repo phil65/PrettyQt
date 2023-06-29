@@ -1,13 +1,15 @@
 from __future__ import annotations
 
 from collections.abc import Callable
-import logging
 import functools
+import logging
 import operator
-from typing import Any, Literal, TYPE_CHECKING
+
+from typing import TYPE_CHECKING, Any, Literal
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import datatypes, helpers
+
 
 if TYPE_CHECKING:
     from prettyqt import custom_models
@@ -54,6 +56,19 @@ class ProxyWrapper:
 
         proxy = custom_models.SliceFilterProxyModel(
             indexer=self._indexer, parent=self._widget
+        )
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
+    def highlight_current(
+        self, mode="column"
+    ) -> custom_models.HighlightCurrentProxyModel:
+        """Filter subsection to display."""
+        from prettyqt import custom_models
+
+        proxy = custom_models.HighlightCurrentProxyModel(
+            indexer=self._indexer, parent=self._widget, mode=mode
         )
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
