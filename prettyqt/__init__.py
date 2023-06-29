@@ -30,10 +30,8 @@ def debug():
 
 
 def show(item):
-    from prettyqt import core, debugging, widgets, custom_models, qtpandas
+    from prettyqt import core, debugging, widgets, custom_models, qtpandas  # noqa
     from prettyqt.utils import helpers
-
-    from prettyqt import widgets
 
     debug.app = widgets.app(organization_name="phil65", application_name="Prettyqt")
     for klass in helpers.get_subclasses(core.QAbstractItemModel):
@@ -100,7 +98,6 @@ __all__ = [
 
 if __name__ == "__main__":
     from importlib import metadata
-    import pandas as pd
 
     dist = metadata.distribution("prettyqt")
     show(["abc"])

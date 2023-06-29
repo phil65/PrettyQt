@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import contextlib
 import os
+import pathlib
 import sys
 
 from prettyqt import core, gui, iconprovider, widgets
@@ -99,7 +100,7 @@ class RecentFilesManager(core.Object):
         files = self.get_value("list", [])
         # filter files, remove files that do not exist anymore
         for file in files:
-            if file is not None and os.path.exists(file):
+            if file is not None and pathlib.Path(file).exists():
                 if (
                     os.path.ismount(file)
                     and sys.platform == "win32"

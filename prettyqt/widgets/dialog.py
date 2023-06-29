@@ -49,12 +49,14 @@ class Dialog(DialogMixin, widgets.QDialog):
 
 
 if __name__ == "__main__":
-    app = widgets.app()
-    w = Dialog()
+    import pathlib
     import pickle
 
-    with open("data.pkl", "wb") as writer:
+    app = widgets.app()
+    w = Dialog()
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as writer:
         pickle.dump(w, writer)
-    with open("data.pkl", "rb") as reader:
+    with path.open("rb") as reader:
         w = pickle.load(reader)
     w.show_blocking()

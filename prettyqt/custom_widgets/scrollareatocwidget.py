@@ -1,11 +1,13 @@
 from __future__ import annotations
 
-from typing import Literal
 import enum
 import logging
 
+from typing import Literal
+
 from prettyqt import constants, core, custom_models, gui, widgets
 from prettyqt.utils import bidict, treeitem
+
 
 logger = logging.getLogger(__name__)
 
