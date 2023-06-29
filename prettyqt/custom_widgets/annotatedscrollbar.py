@@ -1,22 +1,29 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
-
 from prettyqt import constants, core, gui, widgets
+from prettyqt.utils import colors, datatypes
 
 CC_ScrollBar = widgets.QStyle.ComplexControl.CC_ScrollBar
 SubControl = widgets.QStyle.SubControl
 
 
 class AnnotatedScrollBar(widgets.ScrollBar):
+    """ScrollBar which can highlight user-defined ranges."""
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._annotation_color = "gold"
+        self._annotation_color = gui.QColor("gold")
         self._annotations = []
         self._document_height = 100
 
-    def set_annotations(self, annotations: Sequence[tuple[int, int]]):
+    def set_annotations(self, annotations: list[tuple[int, int]]):
         self._annotations = annotations
+
+    def get_annotations(self) -> list[tuple[int, int]]:
+        return self._annotations
+
+    def add_annotation(self, annotation: tuple[int, int]):
+        self._annotations.append(annotation)
 
     def paintEvent(self, event):
         super().paintEvent(event)
@@ -40,11 +47,25 @@ class AnnotatedScrollBar(widgets.ScrollBar):
             yscale = 1.0 / self._document_height
             rects = [
                 core.QRect(
-                    x, y + h * start * yscale - 0.5, w, h * (end - start) * yscale + 1
+                    x + 1,
+                    y + h * start * yscale - 0.5,
+                    w - 2,
+                    h * (end - start) * yscale + 1,
                 )
                 for start, end in self._annotations
             ]
             p.drawRects(rects)
+
+    def set_annotation_color(self, color: datatypes.ColorType):
+        self._annotation_color = colors.get_color(color).as_qt()
+
+    def get_annotation_color(self) -> gui.QColor:
+        return self._annotation_color
+
+    annotation_color = core.Property(
+        gui.QColor, get_annotation_color, set_annotation_color
+    )
+    annotations = core.Property(list, get_annotations, set_annotations)
 
 
 if __name__ == "__main__":
