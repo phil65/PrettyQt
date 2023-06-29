@@ -3,9 +3,9 @@
 Contains custom EventFilter classes
 """
 
+from .baseeventfilter import BaseEventFilter
 from .animatedtooltipeventfilter import AnimatedToolTipEventFilter
 from .autosizecolumnseventfilter import AutoSizeColumnsEventFilter
-from .baseeventfilter import BaseEventFilter
 from .eventcatcher import EventCatcher
 from .hovericoneventfilter import HoverIconEventFilter
 from .listviewgridresizeeventfilter import ListViewGridResizeEventFilter
