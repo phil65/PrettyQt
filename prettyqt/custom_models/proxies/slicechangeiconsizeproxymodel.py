@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
     ID = "change_icon_size"
 
-    def __init__(self, size: core.QSize, **kwargs):
+    def __init__(self, size: datatypes.SizeType, **kwargs):
         super().__init__(**kwargs)
         self._size = datatypes.to_size(size)
         self._cache = dict()

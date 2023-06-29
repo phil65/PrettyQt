@@ -43,39 +43,39 @@ from .widgethierarchymodel import WidgetHierarchyModel, LayoutHierarchyModel
 
 # Slice Proxies
 
-from .sliceidentityproxymodel import SliceIdentityProxyModel
-from .slicechangeiconsizeproxymodel import SliceChangeIconSizeProxyModel
-from .slicefilterproxymodel import SliceFilterProxyModel
-from .slicecheckableproxymodel import (
+from .proxies.sliceidentityproxymodel import SliceIdentityProxyModel
+from .proxies.slicechangeiconsizeproxymodel import SliceChangeIconSizeProxyModel
+from .proxies.slicefilterproxymodel import SliceFilterProxyModel
+from .proxies.slicecheckableproxymodel import (
     SliceCheckableProxyModel,
     SliceCheckableTreeProxyModel,
 )
-from .sliceappearanceproxymodel import SliceAppearanceProxyModel
-from .slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
-from .slicecolorvaluesproxymodel import SliceColorValuesProxyModel
-from .slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
+from .proxies.sliceappearanceproxymodel import SliceAppearanceProxyModel
+from .proxies.slicechangeflagsproxymodel import SliceChangeFlagsProxyModel
+from .proxies.slicecolorvaluesproxymodel import SliceColorValuesProxyModel
+from .proxies.slicevaluetransformationproxymodel import SliceValueTransformationProxyModel
 
 # Reshape proxies
 
-from .tabletolistproxymodel import TableToListProxyModel
-from .flattenedtreeproxymodel import FlattenedTreeProxyModel
-from .meltproxymodel import MeltProxyModel
-from .columnorderproxymodel import ColumnOrderProxyModel
+from .proxies.tabletolistproxymodel import TableToListProxyModel
+from .proxies.flattenedtreeproxymodel import FlattenedTreeProxyModel
+from .proxies.meltproxymodel import MeltProxyModel
+from .proxies.columnorderproxymodel import ColumnOrderProxyModel
 
 # Other proxies
-from .fuzzyfiltermodel import FuzzyFilterProxyModel
-from .multicolumnfilterproxymodel import MultiColumnFilterProxyModel
-from .subsetfilterproxymodel import SubsetFilterProxyModel
-from .valuefilterproxymodel import ValueFilterProxyModel
-from .rangefilterproxymodel import RangeFilterProxyModel
-from .appearanceproxymodel import AppearanceProxyModel
-from .changeheadersproxymodel import ChangeHeadersProxyModel
-from .columnjoinerproxymodel import ColumnJoinerProxyModel
-from .highlightcurrentproxymodel import HighlightCurrentProxyModel
-from .highlightmouseproxymodel import HighlightMouseProxyModel
+from .proxies.fuzzyfiltermodel import FuzzyFilterProxyModel
+from .proxies.multicolumnfilterproxymodel import MultiColumnFilterProxyModel
+from .proxies.subsetfilterproxymodel import SubsetFilterProxyModel
+from .proxies.valuefilterproxymodel import ValueFilterProxyModel
+from .proxies.rangefilterproxymodel import RangeFilterProxyModel
+from .proxies.appearanceproxymodel import AppearanceProxyModel
+from .proxies.changeheadersproxymodel import ChangeHeadersProxyModel
+from .proxies.columnjoinerproxymodel import ColumnJoinerProxyModel
+from .proxies.highlightcurrentproxymodel import HighlightCurrentProxyModel
+from .proxies.highlightmouseproxymodel import HighlightMouseProxyModel
 
 # Proxy tooling
-from .proxymapper import ProxyMapper
+from .proxies.proxymapper import ProxyMapper
 
 __all__ = [
     "SelectionMixin",

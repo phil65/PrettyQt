@@ -2,21 +2,20 @@ from __future__ import annotations
 
 from typing import Literal
 
-from prettyqt import constants, core
+from prettyqt import constants, custom_models, core
 from prettyqt.qt import QtGui
 from prettyqt.utils import colors, datatypes
 
 HighlightModeStr = Literal["column", "row", "all"]
 
 
-class HighlightCurrentProxyModel(core.IdentityProxyModel):
+class HighlightCurrentProxyModel(custom_models.SliceIdentityProxyModel):
     """Highlights all cells which have same data as current index in given role."""
 
     ID = "highlight_current"
 
     def __init__(
         self,
-        *args,
         role=constants.DISPLAY_ROLE,
         mode: HighlightModeStr = "column",
         highlight_color: datatypes.ColorType = "red",
@@ -28,7 +27,7 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
         self._current_column = None
         self._current_row = None
         self._highlight_color = colors.get_color(highlight_color).as_qt()
-        super().__init__(*args, **kwargs)
+        super().__init__(**kwargs)
         parent: widgets.AbstractItemView = self.parent()  # type: ignore
         parent.model_changed.connect(self._on_model_change)
         if sel_model := parent.selectionModel():
@@ -59,6 +58,14 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
         """Get highlight mode."""
         return self._highlight_mode
 
+    def set_highlight_role(self, mode: constants.ItemDataRole):
+        """Set highlight mode."""
+        self._data_role = mode
+
+    def get_highlight_role(self) -> constants.ItemDataRole:
+        """Get highlight mode."""
+        return self._data_role
+
     def data(
         self,
         index: core.ModelIndex,
@@ -67,6 +74,7 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
         if (
             role == constants.BACKGROUND_ROLE
             and index.data(self._data_role) == self._current_value
+            and self.indexer_contains(index)
             and (
                 (self._mode == "column" and index.column() == self._current_column)
                 or (
@@ -81,15 +89,26 @@ class HighlightCurrentProxyModel(core.IdentityProxyModel):
 
     highlightMode = core.Property(str, get_highlight_mode, set_highlight_mode)
     highlightColor = core.Property(QtGui.QColor, get_highlight_color, set_highlight_color)
+    highlightRole = core.Property(
+        constants.ItemDataRole, get_highlight_role, set_highlight_role
+    )
 
 
 if __name__ == "__main__":
-    from prettyqt import widgets
+    from prettyqt import gui, widgets
+    app = widgets.app(style="Vista")
 
-    app = widgets.app()
+    dct = dict(
+        a=["a", "b", "a", "b"],
+        b=["a", "b", "a", "b"],
+        c=["a", "b", "a", "b"],
+        d=["b", "a", "b", "a"],
+        e=["a", "b", "a", "b"],
+    )
+    model = gui.StandardItemModel.from_dict(dct)
     table = widgets.TableView()
-    table.set_model(["a", "b", "c", "d", "a"])
-    table.proxifier.get_proxy("highlight_current", mode="all")
+    table.set_model(model)
+    table.proxifier[:, :3].highlight_current(mode="all")
     table.show()
     with app.debug_mode():
         app.exec()
