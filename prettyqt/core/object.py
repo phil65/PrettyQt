@@ -192,6 +192,7 @@ class ObjectMixin:
 
     @contextlib.contextmanager
     def properties_set_to(self, **kwargs):
+        """Context manager to temporarily set properties to different values."""
         props = {k: self.property(k) for k in kwargs}
         for k, v in kwargs.items():
             self.setProperty(k, v)
@@ -210,16 +211,7 @@ class ObjectMixin:
         """Set unique objectName."""
         class_name = type(self).__name__
         count = next(counter_dict[class_name])
-        self.set_id(f"{class_name}_{count}")
-
-    def set_id(self, name: str):
-        self.setObjectName(name)
-
-    def get_id(self) -> str:
-        return self.objectName()
-
-    def has_id(self) -> bool:
-        return self.objectName() != ""
+        self.setObjectName(f"{class_name}_{count}")
 
     @classmethod
     def get_static_metaobject(cls) -> core.MetaObject:
@@ -227,14 +219,6 @@ class ObjectMixin:
 
     def get_metaobject(self) -> core.MetaObject:
         return core.MetaObject(self.metaObject())
-
-    # @property
-    # def id(self) -> str:
-    #     return self.objectName()
-
-    # @id.setter
-    # def id(self, name: str):
-    #     self.setObjectName(name)
 
     def find_children(
         self,

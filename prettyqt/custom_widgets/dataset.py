@@ -394,17 +394,21 @@ class DataSet(metaclass=DataSetMeta):
         dialog = self.create_dialog()
         if preset:
             for item in dialog.layout():
-                item_id = item.get_id()
+                item_id = item.objectName()
                 if item_id in preset and preset[item_id] is not None:
                     item.set_value(preset[item_id])
 
         if not dialog.show_blocking():
             return False
         new_values = {
-            item.get_id(): item.get_value() for item in dialog.layout() if item.has_id()
+            item.objectName(): item.get_value()
+            for item in dialog.layout()
+            if item.objectName()
         }
         enabled = {
-            item.get_id(): item.isEnabled() for item in dialog.layout() if item.has_id()
+            item.objectName(): item.isEnabled()
+            for item in dialog.layout()
+            if item.objectName()
         }
         # new_values = {a: (str(b) if isinstance(b, pathlib.Path) else b)
         #               for a, b in dct.items()}

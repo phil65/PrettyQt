@@ -10,6 +10,7 @@ import pytest
 
 from prettyqt import constants, core, gui, widgets
 import prettyqt.qt
+
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
 
@@ -169,18 +170,20 @@ def test_datastream():
 
 def test_date():
     date = core.Date(1, 1, 2000)
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(date, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         new = pickle.load(jar)
     assert date == new
 
 
 def test_datetime():
     dt = core.DateTime(2000, 11, 11, 0, 0, 0)
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(dt, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         new = pickle.load(jar)
     assert dt == new
     dt.set_timezone("Europe/Berlin")
@@ -460,21 +463,16 @@ def test_modelindex():
 
 def test_object(qapp):
     obj = core.Object()
-    obj.set_id("test")
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(obj, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         obj = pickle.load(jar)
-    assert obj.get_id() == "test"
     w = widgets.Splitter("horizontal")
-    w1 = widgets.PushButton()
-    w1.set_id("w1")
-    w2 = widgets.PlainTextEdit()
-    w2.set_id("w2")
-    w3 = widgets.MainWindow()
-    w3.set_id("w3")
-    w4 = widgets.TableView()
-    w4.set_id("w4")
+    w1 = widgets.PushButton(object_name="w1")
+    w2 = widgets.PlainTextEdit(object_name="w2")
+    w3 = widgets.MainWindow(object_name="w3")
+    w4 = widgets.TableView(object_name="w4")
     w.add([w1, w2, w3, w4])
     assert w.find_children(widgets.PushButton, recursive=False) == [w1]
     assert w.find_children(name="w2", recursive=False) == [w2]
@@ -590,9 +588,10 @@ def test_regularexpressionmatchiterator():
 
 def test_regularexpression():
     regex = core.RegularExpression("[0-9]")
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(regex, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         regex = pickle.load(jar)
     match = regex.match("123")
     assert match.span() == (0, 1)
@@ -804,9 +803,10 @@ def test_timezone():
     assert tz.get_id() == "UTC-12:00"
     assert str(tz) == "UTC-12:00"
     assert repr(tz) == "TimeZone('UTC-12:00')"
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(tz, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         tz = pickle.load(jar)
     assert tz.get_display_name("standard") == "UTC-12:00"
 

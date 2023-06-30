@@ -178,7 +178,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
 
     def load_window_state(self, recursive: bool = False) -> bool:
         settings = core.Settings()
-        name = self.get_id()
+        name = self.objectName()
         geom = settings.get(f"{name}.geometry")
         state = settings.get(f"{name}.state")
         restored = False
@@ -194,7 +194,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
                 logger.error("Wrong type for window state. Probably Qt binding switch?")
         if recursive:
             for window in self.find_children(MainWindow, recursive=True):
-                if window.get_id():
+                if window.objectName():
                     window.load_window_state()
         return restored
 
@@ -205,13 +205,13 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
             recursive (bool, optional): Description
         """
         settings = core.Settings()
-        name = self.get_id()
+        name = self.objectName()
         logger.debug(f"Saving window state for {self.windowTitle()!r}...")
         settings[f"{name}.geometry"] = self.saveGeometry()
         settings[f"{name}.state"] = self.saveState()
         if recursive:
             for window in self.find_children(MainWindow, recursive=True):
-                if window.get_id():
+                if window.objectName():
                     window.save_window_state()
 
     def add_widget_as_dock(
