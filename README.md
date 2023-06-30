@@ -26,54 +26,6 @@ The library contains a tree of mixins, with one mixin for each Qt class.
 These mixins also inherit from each other and are applied to the Qt classes.
 That way each class gets all helper methods from all sub-mixins.
 
-Example: The class "TreeView" inherits from original Qt Class "QTreeView" and gets helper methods
-from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
-"FrameMixin", "WidgetMixin" and "ObjectMixin".
-
-To illustrate this, we will use some of our included models:
-
-```py
-    from prettyqt import custom_models, widgets
-
-    app = widgets.app()
-    widget = widgets.TreeView()
-    model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
-    widget.set_model(model)
-    widget.show()
-```
-
-<figure markdown>
-  ![Image title](images/abstractitemmodelmixin_subclasses.png)
-  <figcaption>AbstractitemModelMixin subclasses</figcaption>
-</figure>
-
-You can see a comparison here between Our mixin tree and the original Qt Tree.
-As you can notice, every Qt class with Subclasses has a corresponding Mixin.
-
-To show what this leads to, we will look at another example:
-
-```py
-    from prettyqt import custom_models, widgets
-
-    app = widgets.app()
-    widget = widgets.TreeView()
-    model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
-    widget.set_model(model)
-    widget.show()
-```
-
-<figure markdown>
-  ![Image title](images/treewidget_parentclasses.png)
-  <figcaption>TreeWidget parent classes</figcaption>
-</figure>
-
-when passing `show_mro=True` to ParentclassTreeModel, we can also take a loot at the method resolution order:
-
-<figure markdown>
-  ![Image title](images/treewidget_mro.png)
-  <figcaption>TreeWidget MRO</figcaption>
-</figure>
-
 Main objective is to make Qt feel "pythonic". Qt is originally a C++ Framework,
 and using it can be quite cumbersome for Python developers. (very restrictive when it comes to types,
 very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to improve this by:
@@ -84,11 +36,6 @@ very OOP-centric, lot of enum use, snakeCase naming etc.) PrettyQt aims to impro
 - all enum getters/setters also work with strings. Everything typed with Literals for an excellent IDE experience. (Example: )
 - adding a lot of __dunder__ methods to the classes to make them behave like good python citizens.
 
-
-The minimum supported python version is 3.10. Since large parts of the library are dealing with type conversions, the match-case statement is essential, therefore makin it impossible to use older Python versions.
-The minimum supported Qt version is 6.5, since it is the first Qt Version which is up-to-par featurewise with Qt5.
-
-The aim is to support the last two released Python versions as well as keeping support for the last Qt LTS release.
 
 Apart from the 3D related modules (Qt3D, QtDataVizualization), QtXml and QtSql,
 almost every class from Qt is covered.

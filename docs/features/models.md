@@ -11,7 +11,7 @@ All models are proper views on datastructures, not populated StandardItemModels.
 | Type | Model | Description |
 |------|-------|-------------|
 | `list[dict]` | MappingModel | xyz
-| `type` | SubClassModel | Tree showing all subclasses
+| `type, types.UnionType`  | SubClassModel | Tree showing all subclasses
 | `type` | ParentClassModel | Tree showing all Parent classes
 | `importlib.metadata.distribution`| ImportLibTreeModel | Tree model showing a dependency tree of given package
 | `inspect.Traceback` | FrameInfoModel | Table model showing Traceback
