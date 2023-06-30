@@ -36,7 +36,7 @@ class DataFrameModel:
 
     def name(self, axis: constants.OrientationStr, level):
         ax = self._data.columns if axis == "horizontal" else self._data.index
-        return name if (name := ax.names[level]) is not None else f"L{str(level)}"
+        return name if (name := ax.names[level]) is not None else f"L{level}"
 
 
 class DataFrameDataModel(core.AbstractTableModel):

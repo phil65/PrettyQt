@@ -501,7 +501,7 @@ class FSSpecTreeModel(
                 with self.change_layout():
                     for i in sorted(urls, reverse=True):
                         logger.info(
-                            "move", i, "to", parent_index.data(self.Roles.FilePathRole)
+                            "move %s to %s", i, parent_index.data(self.Roles.FilePathRole)
                         )
             case constants.DropAction.CopyAction:
                 pass

@@ -151,7 +151,7 @@ def to_lower_camel(snake_str: str) -> str:
 
 
 def to_snake(camel_string: str) -> str:
-    #  don´t snake-case snakes.
+    #  don't snake-case snakes.
     if "_" in camel_string:
         return camel_string
     return CASE_PATTERN.sub("_", camel_string).lower()

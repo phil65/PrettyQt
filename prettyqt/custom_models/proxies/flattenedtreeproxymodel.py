@@ -157,7 +157,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
                     self._source_offset[key_path] = len(self._source_offset)
                     self._source_key.append(key_path)
                 for i in range(rowcount):
-                    create_mapping(model, model.index(i, 0, index), key_path + (i,))
+                    create_mapping(model, model.index(i, 0, index), (*key_path, i))
             else:
                 self._source_offset[key_path] = len(self._source_offset)
                 self._source_key.append(key_path)

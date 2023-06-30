@@ -73,7 +73,7 @@ if __name__ == "__main__":
     app = widgets.app()
     view = debugging.example_table()
     model = view.proxifier.get_proxy("value_transformation")
-    model.add_transformer(lambda x: f"{str(x)}test")
+    model.add_transformer(lambda x: f"{x}test")
     model.add_transformer(
         lambda x: QtGui.QColor("red"),
         role=constants.BACKGROUND_ROLE,

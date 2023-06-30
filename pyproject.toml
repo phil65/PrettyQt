@@ -284,7 +284,7 @@ select = [
     # "BLE",  # Flake8-blind-except
     "C",
     "C4",   # flake8-comprehensions
-    # "C90",  # MCCable
+    # "C90",  # MCCabe
     # "COM",  #  Flake8-commas
     "CPY",  #  Copyright-related rules
     "D",    # PyDocStyle
@@ -310,14 +310,17 @@ select = [
     "PERF", # perflint
     # "PGH",  # pygrep-hooks
     "PIE",  # flake8-pie
-    # "PL",   # PyLint  (PLC, PLE, PLR, PLW)
+    "PLE",  # PyLint Error
+    "PLC",  # PyLint convention
+    # "PLW",  # PyLint Warning
+    # "PLR",  # PyLint refactor
     # "PT",   # flake8-pytest-style
     "PTH",  # flake8-use-pathlib
     "PYI",  # flake8-pyi
     # "Q",    # flake8-quotes
     # "RET",  # flake8-return
     "RSE",  # flake8-raise
-    # "RUF",  # ruff-specific rules
+    "RUF",  # ruff-specific rules
     # "S",    # flake8-bandit
     # "SIM",  # flake8-simplify
     "SLF",  # flake8-self
@@ -358,6 +361,8 @@ ignore = [
     "D409",  # Section underline should match the length of its name ("{name}")
     "D413",  # Missing blank line after last section ("{name}")
     "SLF001",# Private member accessed
+    "RUF012", # Mutable class attributes should be annotated
+    "RUF013", # PEP 484 prohibits implicit `Optional`
 ]
 extend-exclude = [
     'docs',

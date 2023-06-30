@@ -72,10 +72,10 @@ class Keys:
     No = Key(-1)
     Any = Key(-2)
 
-    ALPHA = Key(913)  # α
+    ALPHA = Key(913)  # α  # noqa: RUF003
     OMEGA = Key(937)  # ω
 
-    CYR_A = Key(1040)  # а
+    CYR_A = Key(1040)  # а  # noqa: RUF003
     CYR_YA = Key(1071)  # я
 
 
