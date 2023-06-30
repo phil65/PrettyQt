@@ -1,10 +1,13 @@
 """Tests for `prettyqt` package."""
 
-import pytest
 import sys
+
+import pytest
+
+import prettyqt
+
 from prettyqt import printsupport
 from prettyqt.utils import InvalidParamError
-import prettyqt
 
 
 pytestmark = pytest.mark.skipif(

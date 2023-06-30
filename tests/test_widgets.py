@@ -1,8 +1,6 @@
 """Tests for `prettyqt` package."""
 
 import datetime
-import inspect
-import os
 import pathlib
 
 # import pickle
@@ -16,48 +14,6 @@ import pytest
 # import prettyqt
 from prettyqt import constants, core, gui, iconprovider, widgets
 from prettyqt.utils import InvalidParamError
-
-
-clsmembers = inspect.getmembers(widgets, inspect.isclass)
-clsmembers = [tpl for tpl in clsmembers if not tpl[0].startswith("Abstract")]
-clsmembers = [tpl for tpl in clsmembers if core.ObjectMixin in tpl[1].mro()]
-
-# logger = logging.getLogger(__name__)
-
-
-# @pytest.mark.parametrize("name, cls", clsmembers)
-# def test_pickle(name, cls):
-#     try:
-#         widget = cls()
-#     except Exception:
-#         return None
-#     with open("data.pkl", "wb") as jar:
-#         pickle.dump(widget, jar)
-#     with open("data.pkl", "rb") as jar:
-#         widget = pickle.load(jar)
-
-
-# @pytest.mark.parametrize("name, cls", clsmembers)
-# def test_repr(name, cls):
-#     try:
-#         widget = cls()
-#     except Exception:
-#         return None
-#     else:
-#         repr(widget)
-
-
-# # fails on linux
-# @pytest.mark.parametrize("name, cls", clsmembers)
-# def test_parent(name, cls):
-#     try:
-#         w = widgets.Widget()
-#         widget = cls(w)
-#     except Exception:
-#         return None
-#     else:
-#         if isinstance(widget, QtCore.QObject):
-#             widget.parent()
 
 
 def test_boxlayout(qtbot):
@@ -757,14 +713,14 @@ def test_mainwindow(qtbot):
     window = widgets.MainWindow()
     qtbot.addWidget(window)
     window.set_icon("mdi.timer")
-    window.set_id("mainwindow")
+    window.setObjectName("mainwindow")
     dockwidget = widgets.DockWidget()
     qtbot.addWidget(dockwidget)
-    dockwidget.set_id("dockwidget")
+    dockwidget.setObjectName("dockwidget")
     window.add_dockwidget(dockwidget, "left")
     widget = widgets.MainWindow()
     qtbot.addWidget(widget)
-    widget.set_id("test")
+    widget.setObjectName("test")
     window.set_widget(widget)
     assert window["test"] == widget
     window.show()
@@ -823,7 +779,7 @@ def test_menu(qtbot):
     menu = widgets.Menu("1", icon="mdi.timer")
     menu.add(gui.Action(text="TestAction"))
     act = gui.Action(text="TestAction")
-    act.set_id("test")
+    act.setObjectName("test")
     menu += act
     assert menu["test"] == act
     with pytest.raises(KeyError):
@@ -1221,7 +1177,7 @@ def test_textbrowser(qtbot):
     widget.set_markdown_file(str(path))
     # widget.set_rst("test")
     # widget.set_rst_file(str(path))
-    os.unlink(str(path))
+    path.unlink()
 
 
 def test_textedit(qtbot):
@@ -1306,7 +1262,7 @@ def test_toolbutton(qtbot):
     assert widget.get_arrow_type() == "left"
     menu = widgets.Menu()
     act = gui.Action()
-    act.set_id("test")
+    act.setObjectName("test")
     menu.add(act)
     widget.setMenu(menu)
     assert widget["test"] == act
@@ -1421,7 +1377,7 @@ def test_toolbox(qtbot):
     w2 = widgets.RadioButton("test2")
     qtbot.addWidget(w)
     qtbot.addWidget(w2)
-    w2.set_id("test_name")
+    w2.setObjectName("test_name")
     widget = widgets.ToolBox()
     qtbot.addWidget(widget)
     widget.add_widget(w, "title", "mdi.timer")
@@ -1563,7 +1519,7 @@ def test_widget(qtbot):
     widget.set_font_size(20)
     widget.get_font_metrics()
     widget.get_font_info()
-    widget.set_id("test")
+    widget.setObjectName("test")
     widget.set_unique_id()
     widget.get_palette()
     widget.set_attribute("native_window")

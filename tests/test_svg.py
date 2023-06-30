@@ -5,6 +5,7 @@ import sys
 import pytest
 
 import prettyqt
+
 from prettyqt.utils import InvalidParamError
 
 

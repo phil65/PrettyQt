@@ -223,7 +223,7 @@ class MainWindow(widgets.WidgetMixin, widgets.QMainWindow):
     ) -> widgets.DockWidget:
         dock_widget = widgets.DockWidget(self, object_name=name, window_title=title)
         widget = widgets.Widget()
-        widget.set_id(f"{name}.widget")
+        widget.setObjectName(f"{name}.widget")
         widget.set_layout(layout, margin=0)
         dock_widget.setWidget(widget)
         self.add_dockwidget(dock_widget, position)

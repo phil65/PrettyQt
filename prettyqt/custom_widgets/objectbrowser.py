@@ -76,7 +76,7 @@ class ObjectBrowser(widgets.MainWindow):
 
         # Stretch last column?
         # It doesn't play nice when columns are hidden and then shown again.
-        self.obj_tree.h_header.set_id("table_header")
+        self.obj_tree.h_header.setObjectName("table_header")
         self.obj_tree.h_header.setSectionsMovable(True)
         self.obj_tree.h_header.setStretchLastSection(False)
         self.central_splitter.addWidget(self.obj_tree)

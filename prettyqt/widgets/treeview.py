@@ -26,9 +26,6 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
             **kwargs,
         )
         self.setStyleSheet("QTreeView::item { padding: 5px }")
-        class_name = type(self).__name__
-        self.set_id(class_name)
-        # misc
         self.h_header = widgets.HeaderView("horizontal", parent=self)
 
     @property

@@ -374,7 +374,7 @@ class DataSet(metaclass=DataSetMeta):
             dialog.box[i, item.label_col] = widgets.Label(item.label)
             dialog.box[i, item.label_col + 1 : item.label_col + 3] = widget_dict[k]
             widget = widget_dict[k]
-            widget.set_id(k)
+            widget.setObjectName(k)
             widget.value_changed.connect(on_update)
             for active in item.enabled_on:
                 widget.setEnabled(widget_dict[active].get_value())

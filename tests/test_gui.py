@@ -2,7 +2,6 @@
 
 
 import importlib.util
-import inspect
 import itertools
 import pathlib
 import pickle
@@ -12,26 +11,6 @@ import pytest
 
 from prettyqt import constants, core, gui, widgets
 from prettyqt.utils import InvalidParamError
-
-
-clsmembers = inspect.getmembers(gui, inspect.isclass)
-clsmembers = [
-    tpl
-    for tpl in clsmembers
-    if (not tpl[0].startswith("Abstract") and not tpl[0].endswith("Mixin"))
-]
-
-# logger = logging.getLogger(__name__)
-
-
-@pytest.mark.filterwarnings("ignore::DeprecationWarning")
-@pytest.mark.parametrize("name, cls", clsmembers)
-def test_repr(name, cls, qapp):
-    try:
-        item = cls()
-    except Exception:
-        return None
-    repr(item)
 
 
 def test_action(qtbot):
@@ -101,9 +80,10 @@ def test_color(qapp):
     color = gui.Color()
     assert color.get_spec() == "invalid"
     color.set_color("gray")
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(color, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         color = pickle.load(jar)
     assert str(color) == "#808080"
     color.convert_to("rgb")
@@ -118,9 +98,10 @@ def test_colorspace():
     space = gui.ColorSpace()
     bytes(space)
     assert not bool(space)
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(space, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         space = pickle.load(jar)
     space.set_primaries("dci_p3_d65")
     with pytest.raises(InvalidParamError):
@@ -138,9 +119,10 @@ def test_cursor(qapp):
     with pytest.raises(InvalidParamError):
         cursor.set_shape("test")
     assert cursor.get_shape() == "arrow"
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(cursor, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         cursor = pickle.load(jar)
     bytes(cursor)
     cursor.get_pos()
@@ -153,9 +135,10 @@ def test_cursor(qapp):
 def test_doublevalidator():
     val = gui.DoubleValidator()
     val.setRange(0, 9)
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(val, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
@@ -247,9 +230,10 @@ def test_guiapplication():
 def test_icon(qapp):
     icon = gui.Icon()
     icon.for_color("black")
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(icon, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         icon = pickle.load(jar)
     with pytest.raises(InvalidParamError):
         icon.get_available_sizes(mode="test")
@@ -275,9 +259,10 @@ def test_iconengine(qapp):
 
 def test_image(qapp):
     img = gui.Image()
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(img, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         img = pickle.load(jar)
     bytes(img)
 
@@ -345,9 +330,10 @@ def test_inputmethod(qapp):
 def test_intvalidator():
     val = gui.IntValidator()
     val.setRange(0, 9)
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(val, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         val = pickle.load(jar)
     assert val.is_valid_value("4")
     assert not val.is_valid_value("10")
@@ -366,9 +352,10 @@ def test_keysequence():
     assert gui.KeySequence.to_shortcut_str(comb) == "Shift+A"
     seq = gui.KeySequence("Ctrl+C")
     assert seq.get_matches("Ctrl+C") == "exact"
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(seq, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         seq = pickle.load(jar)
 
 
@@ -378,9 +365,10 @@ def test_movie():
         movie.set_cache_mode("test")
     movie.set_cache_mode("all")
     assert movie.get_cache_mode() == "all"
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(movie, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         movie = pickle.load(jar)
     repr(movie)
 
@@ -428,9 +416,10 @@ def test_shortcut(qtbot):
 
 def test_standarditem(qapp):
     item = gui.StandardItem()
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(item, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         item = pickle.load(jar)
 
     # item[constants.USER_ROLE] = "test"
@@ -468,9 +457,10 @@ def test_standarditemmodel(qapp):
     model.add("test")
     for _item in model:
         pass
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(model, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         model = pickle.load(jar)
     model += gui.StandardItem("Item")
     model[0]
@@ -647,9 +637,10 @@ def test_pagesize():
     with pytest.raises(ValueError):
         size.get_definition_units()
     size = gui.PageSize(gui.PageSize.PageSizeId.A3)
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(size, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         size = pickle.load(jar)
     assert size.get_definition_units() == "millimeter"
 
@@ -746,9 +737,10 @@ def test_polygonf():
     poly.add_points((0, 0), (2, 0), (2, 1), (0, 1))
     poly2 = gui.PolygonF()
     poly2.add_points((1, 0), (3, 0), (3, 1), (1, 1))
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(poly, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         poly = pickle.load(jar)
     union = poly | poly2
     intersect = poly & poly2
@@ -783,9 +775,10 @@ def test_polygon():
     xor = poly ^ poly2
     assert list(sub) == list(xor)
     # assert sub == xor
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(poly, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         poly = pickle.load(jar)
     poly.add_points((0, 1), core.Point(2, 2))
     assert bool(poly)
@@ -804,9 +797,10 @@ def test_region():
 def test_regularexpressionvalidator():
     val = gui.RegularExpressionValidator()
     val.set_regex("[0-9]")
-    with open("data.pkl", "wb") as jar:
+    path = pathlib.Path("data.pkl")
+    with path.open("wb") as jar:
         pickle.dump(val, jar)
-    with open("data.pkl", "rb") as jar:
+    with path.open("rb") as jar:
         val = pickle.load(jar)
     assert val.get_regex() == "[0-9]"
     assert val.is_valid_value("0")

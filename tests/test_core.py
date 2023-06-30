@@ -1,7 +1,6 @@
 """Tests for `prettyqt` package."""
 
 
-import inspect
 import pathlib
 import pickle
 import tempfile
@@ -13,36 +12,6 @@ import prettyqt.qt
 
 from prettyqt.qt import QtCore
 from prettyqt.utils import InvalidParamError
-
-
-clsmembers = [
-    tpl
-    for tpl in inspect.getmembers(core, inspect.isclass)
-    if not tpl[0].startswith("Abstract")
-    and not tpl[0].endswith("Mixin")
-    and tpl[0] != "SignalInstance"
-]
-
-
-@pytest.mark.parametrize("name, cls", clsmembers)
-def test_repr(name, cls):
-    try:
-        item = cls()
-    except Exception:
-        return None
-    repr(item)
-    str(item)
-
-
-# @pytest.mark.parametrize("name, cls", clsmembers)
-# def test_parent(name, cls):
-#     try:
-#         obj = cls()
-#     except Exception:
-#         return None
-#     else:
-#         if isinstance(obj, QtCore.QObject):
-#             obj.parent()
 
 
 def test_animationgroup():

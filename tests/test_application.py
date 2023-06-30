@@ -11,7 +11,7 @@ def test_application(qapp):
     assert qapp.get_mainwindow() is None
     wnd = widgets.MainWindow()
     mw_widget = widgets.Widget()
-    mw_widget.set_id("test")
+    mw_widget.setObjectName("test")
     wnd.setCentralWidget(mw_widget)
     assert qapp.get_mainwindow() == wnd
     widget = qapp.get_widget(name="test")

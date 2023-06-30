@@ -1,15 +1,17 @@
 """Tests for `prettyqt` package."""
 
 import dataclasses
+
 from importlib import metadata
 import inspect
+import re
 
 import pytest
-import re
 
 from prettyqt import core, custom_models
 from prettyqt.custom_models import fsspecmodel
 from prettyqt.utils import InvalidParamError
+
 
 clsmembers = inspect.getmembers(custom_models, inspect.isclass)
 clsmembers = [tpl for tpl in clsmembers if core.QObject in tpl[1].mro()]

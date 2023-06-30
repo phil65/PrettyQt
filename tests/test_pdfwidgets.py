@@ -1,10 +1,13 @@
 """Tests for `prettyqt` package."""
 
 import sys
+
 import pytest
 
-from prettyqt import pdfwidgets
 import prettyqt
+
+from prettyqt import pdfwidgets
+
 
 @pytest.mark.skipif(
     sys.platform == "linux" and prettyqt.qt.API.startswith("pyside"),
