@@ -20,21 +20,21 @@ Possible keyword arguments:
 ### Example
 
 ```py
-    model = MyModel()
-    table = widgets.TableView()
-    table.set_model(model)
-    table.proxifier[::2, 2:].change_flags(readable=False)
-    table.show()
+model = MyModel()
+table = widgets.TableView()
+table.set_model(model)
+table.proxifier[::2, 2:].change_flags(readable=False)
+table.show()
 ```
 
 or
 
 ```py
-    indexer = (slice(None, None, 2), slice(2, None))
-    proxy = custom_models.SliceChangeFlagsProxyModel(indexer=indexer, readable=False)
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+indexer = (slice(None, None, 2), slice(2, None))
+proxy = custom_models.SliceChangeFlagsProxyModel(indexer=indexer, readable=False)
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 
 Read more about [slices](https://docs.python.org/3/library/functions.html#slice).

@@ -13,21 +13,21 @@ Possible modes are:
 ### Example
 
 ```py
-    model = MyModel()
-    table = widgets.TableView()
-    table.set_model(model)
-    table[:, :3].proxify.highlight_current(mode="all")
-    table.show()
+model = MyModel()
+table = widgets.TableView()
+table.set_model(model)
+table[:, :3].proxify.highlight_current(mode="all")
+table.show()
 ```
 
 or
 
 ```py
-    indexer = (slice(None), slice(None, 3))
-    proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+indexer = (slice(None), slice(None, 3))
+proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 
 <figure markdown>

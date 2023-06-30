@@ -6,10 +6,10 @@ This model is used by the [FilterHeader][filterheader] widget.
 ### Example
 
 ```py
-    proxy = custom_models.MultiColumnFilterProxyModel()
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+proxy = custom_models.MultiColumnFilterProxyModel()
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 
 ### API

@@ -7,10 +7,10 @@ The proxy can also color the found Substring by converting the display role to a
 ### Example
 
 ```py
-    proxy = custom_models.FuzzyFilterProxyModel()
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+proxy = custom_models.FuzzyFilterProxyModel()
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 
 ### API

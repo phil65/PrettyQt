@@ -10,21 +10,21 @@ SortFilterProxyModel with a column filter. (O(1) instead of O(n))
 To filter out every second row, and cut off the the first two columns:
 
 ```py
-    model = MyModel()
-    table = widgets.TableView()
-    table.set_model(model)
-    table.proxifier[::2, 2:].filter()
-    table.show()
+model = MyModel()
+table = widgets.TableView()
+table.set_model(model)
+table.proxifier[::2, 2:].filter()
+table.show()
 ```
 
 or
 
 ```py
-    indexer = (slice(None, None, 2), slice(2, None))
-    proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+indexer = (slice(None, None, 2), slice(2, None))
+proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 
 Read more about [slices](https://docs.python.org/3/library/functions.html#slice).

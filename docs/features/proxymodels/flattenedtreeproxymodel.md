@@ -7,10 +7,10 @@ Proxy model to flatten a tree to appear like a table.
 Original model:
 
 ```py
-    model = MyTreeModel()
-    table = widgets.TableView()
-    table.set_model(model)
-    table.show()
+model = MyTreeModel()
+table = widgets.TableView()
+table.set_model(model)
+table.show()
 ```
 
 <figure markdown>
@@ -22,15 +22,15 @@ Original model:
 Flattened:
 
 ```py
-    table.proxifier.flatten()
-    table.show()
+table.proxifier.flatten()
+table.show()
 ```
 or
 ```py
-    proxy = custom_models.FlattenedTreeProxyModel()
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+proxy = custom_models.FlattenedTreeProxyModel()
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 <figure markdown>
   ![Image title](../../images/flattenedtreeproxymodel.png)

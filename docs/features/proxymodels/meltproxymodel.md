@@ -5,17 +5,17 @@ Proxy model to unpivot a table from wide to long format, as known from [pandas][
 ### Example
 
 ```py
-    app = widgets.app()
-    data = dict(
-        first=["John", "Mary"],
-        last=["Doe", "Bo"],
-        height=[5.5, 6.0],
-        weight=[130, 150],
-    )
-    model = gui.StandardItemModel.from_dict(data)
-    table = widgets.TableView()
-    table.set_model(model)
-    table.show()
+app = widgets.app()
+data = dict(
+    first=["John", "Mary"],
+    last=["Doe", "Bo"],
+    height=[5.5, 6.0],
+    weight=[130, 150],
+)
+model = gui.StandardItemModel.from_dict(data)
+table = widgets.TableView()
+table.set_model(model)
+table.show()
 ```
 
 <figure markdown>
@@ -26,15 +26,15 @@ Proxy model to unpivot a table from wide to long format, as known from [pandas][
 
 
 ```py
-    table.proxifier.melt(id_columns=[0, 1])
-    table.show()
+table.proxifier.melt(id_columns=[0, 1])
+table.show()
 ```
 or
 ```py
-    proxy = custom_models.MeltProxyModel(id_columns=[0, 1])
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+proxy = custom_models.MeltProxyModel(id_columns=[0, 1])
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 <figure markdown>
   ![Image title](../../images/meltproxymodel_after.png)

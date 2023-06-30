@@ -2,6 +2,7 @@
 
 ScrollBar which can highlight user-chosen segments.
 
+
 ``` py
     widget = widgets.PlainTextEdit("\n".join(str(i) for i in range(1000)))
     widget.v_scrollbar = AnnotatedScrollBar(constants.VERTICAL)

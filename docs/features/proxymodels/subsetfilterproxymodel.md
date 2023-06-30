@@ -8,10 +8,10 @@
 ### Example
 
 ```py
-    proxy = custom_models.SubsetFilterProxyModel()
-    proxy.set_source_model(model)
-    table.set_model(proxy)
-    table.show()
+proxy = custom_models.SubsetFilterProxyModel()
+proxy.set_source_model(model)
+table.set_model(proxy)
+table.show()
 ```
 
 ### API
