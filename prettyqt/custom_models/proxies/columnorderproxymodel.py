@@ -6,10 +6,6 @@ from prettyqt import constants, core
 class ColumnOrderProxyModel(core.IdentityProxyModel):
     ID = "column_order"
 
-    def __init__(self, order: list[int], **kwargs):
-        self._column_order = order
-        super().__init__(**kwargs)
-
     def get_column_order(self) -> list[int]:
         return self._column_order
 
@@ -83,7 +79,7 @@ class ColumnOrderProxyModel(core.IdentityProxyModel):
         source_parent = self.mapToSource(index).sibling(index.row(), 0)
         return self.sourceModel().rowCount(source_parent)
 
-    column_order = core.Property(list, get_column_order, set_column_order)
+    order = core.Property(list, get_column_order, set_column_order)
 
 
 if __name__ == "__main__":
@@ -99,7 +95,7 @@ if __name__ == "__main__":
     source_model = gui.StandardItemModel.from_dict(data)
     app = widgets.app()
     table = widgets.TableView()
-    model = ColumnOrderProxyModel([1, 2], parent=table)
+    model = ColumnOrderProxyModel(order=[1, 2], parent=table)
     model.setSourceModel(source_model)
     table.set_model(model)
     table.show()
