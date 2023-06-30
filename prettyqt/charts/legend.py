@@ -7,14 +7,14 @@ from prettyqt.qt import QtCharts
 from prettyqt.utils import bidict
 
 
-MARKER_SHAPES = bidict(
+MarkerShapeStr = Literal["default", "rectangle", "circle", "from_series"]
+
+MARKER_SHAPES: bidict[MarkerShapeStr, QtCharts.QLegend.MarkerShape] = bidict(
     default=QtCharts.QLegend.MarkerShape.MarkerShapeDefault,
     rectangle=QtCharts.QLegend.MarkerShape.MarkerShapeRectangle,
     circle=QtCharts.QLegend.MarkerShape.MarkerShapeCircle,
     from_series=QtCharts.QLegend.MarkerShape.MarkerShapeFromSeries,
 )
-
-MarkerShapeStr = Literal["default", "rectangle", "circle", "from_series"]
 
 
 class Legend(widgets.GraphicsWidgetMixin):
@@ -23,19 +23,6 @@ class Legend(widgets.GraphicsWidgetMixin):
 
     def __getattr__(self, val):
         return getattr(self.item, val)
-
-    def serialize_fields(self):
-        return dict(
-            alignment=self.get_alignment(),
-            background_visible=self.isBackgroundVisible(),
-            border_color=self.get_border_color(),
-            color=self.get_color(),
-            font=self.get_font(),
-            label_color=self.get_label_color(),
-            marker_shape=self.get_marker_shape(),
-            reverse_markers=self.reverseMarkers(),
-            show_tooltips=self.showToolTips(),
-        )
 
     def set_alignment(self, alignment: constants.SideStr | QtCharts.QLegend.MarkerShape):
         """Set the alignment of the legend.

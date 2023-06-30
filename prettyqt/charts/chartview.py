@@ -6,15 +6,14 @@ from prettyqt import charts, constants, core, gui, widgets
 from prettyqt.utils import bidict
 
 
-RUBBER_BAND = bidict(
+RubberBandStr = Literal["none", "vertical", "horizontal", "rectangle"]
+
+RUBBER_BAND: bidict[RubberBandStr, charts.QChartView.RubberBand] = bidict(
     none=charts.QChartView.RubberBand.NoRubberBand,
     vertical=charts.QChartView.RubberBand.VerticalRubberBand,
     horizontal=charts.QChartView.RubberBand.HorizontalRubberBand,
     rectangle=charts.QChartView.RubberBand.RectangleRubberBand,
 )
-
-RubberBandStr = Literal["none", "vertical", "horizontal", "rectangle"]
-
 
 ZOOM_IN_FACTOR = 1.1
 ZOOM_OUT_FACTOR = 1.0 / ZOOM_IN_FACTOR

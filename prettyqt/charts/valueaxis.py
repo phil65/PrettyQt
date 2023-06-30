@@ -6,12 +6,12 @@ from prettyqt import charts
 from prettyqt.utils import bidict
 
 
-TICK_TYPES = bidict(
+TickTypeStr = Literal["dynamic", "fixed"]
+
+TICK_TYPES: bidict[TickTypeStr, charts.QValueAxis.TickType] = bidict(
     dynamic=charts.QValueAxis.TickType.TicksDynamic,
     fixed=charts.QValueAxis.TickType.TicksFixed,
 )
-
-TickTypeStr = Literal["dynamic", "fixed"]
 
 
 class ValueAxisMixin(charts.AbstractAxisMixin):

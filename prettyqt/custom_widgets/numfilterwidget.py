@@ -4,7 +4,7 @@ from collections.abc import Callable
 import functools
 import operator
 
-from prettyqt import core, widgets
+from prettyqt import core, gui, widgets
 
 
 class NumFilterWidget(widgets.Widget):
@@ -30,7 +30,7 @@ class NumFilterWidget(widgets.Widget):
     def _on_filter_change(self):
         self.filter_changed.emit(self.get_filter_fn())
 
-    def _on_menu_click(self, action):
+    def _on_menu_click(self, action: gui.QAction):
         self.op_button.setText(action.text())
         self._on_filter_change()
 

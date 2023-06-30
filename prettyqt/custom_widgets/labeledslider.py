@@ -13,7 +13,7 @@ class LabeledSlider(widgets.Widget):
     def __init__(
         self,
         labels: Sequence[str],
-        orientation: constants.OrientationStr = "horizontal",
+        orientation: constants.OrientationStr | constants.Orientation = "horizontal",
         parent: widgets.QWidget | None = None,
     ):
         super().__init__(parent=parent)
@@ -21,7 +21,8 @@ class LabeledSlider(widgets.Widget):
         if not isinstance(labels, Sequence):
             raise ValueError("<labels> must be a sequence.")
         self.levels = labels
-        self.set_layout(orientation, margin=10)
+        orientation = constants.ORIENTATION.get_enum_value(orientation)
+        self.set_layout(constants.ORIENTATION.inverse[orientation], margin=10)
 
         # gives some space to print labels
         self.left_margin = 10
@@ -38,7 +39,7 @@ class LabeledSlider(widgets.Widget):
             value=0,
         )
         self.sl.value_changed.connect(self._on_value_change)
-        if orientation == "horizontal":
+        if orientation == constants.HORIZONTAL:
             self.sl.set_tick_position("below")
             self.sl.setMinimumWidth(300)
         else:

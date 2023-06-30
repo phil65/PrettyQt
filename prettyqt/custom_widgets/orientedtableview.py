@@ -15,7 +15,7 @@ class OrientedTableView(widgets.TableView):
         super().__init__(**kwargs)
         self.orientation = orientation
 
-    def get_higher_levels(self, levels: int):
+    def get_higher_levels(self, levels: int) -> core.ItemSelection:
         model = self.model()
         if self.is_horizontal():
             # Get the header's selected columns
@@ -29,7 +29,7 @@ class OrientedTableView(widgets.TableView):
                 model.index(0, 0), model.index(model.rowCount() - 1, levels - 2)
             )
 
-    def set_section_span(self, row, column, count):
+    def set_section_span(self, row: int, column: int, count: int):
         if self.is_horizontal():
             self.setSpan(row, column, 1, count)
         else:
@@ -38,7 +38,7 @@ class OrientedTableView(widgets.TableView):
     def sectionAt(self, val: int):
         return self.columnAt(val) if self.is_horizontal() else self.rowAt(val)
 
-    def over_header_edge(self, position: int, margin: int = 3):
+    def over_header_edge(self, position: int, margin: int = 3) -> int:
         # Return the index of the column this x position is on the right edge of
         left = self.sectionAt(position - margin)
         right = self.sectionAt(position + margin)
@@ -52,13 +52,13 @@ class OrientedTableView(widgets.TableView):
     def sectionWidth(self, val: int):
         return self.columnWidth(val) if self.is_horizontal() else self.rowHeight(val)
 
-    def setSectionWidth(self, val: int, val2):
+    def setSectionWidth(self, section: int, width: int):
         if self.is_horizontal():
-            self.setColumnWidth(val, val2)
+            self.setColumnWidth(section, width)
         else:
-            self.setRowHeight(val, val2)
+            self.setRowHeight(section, width)
 
-    def get_split_cursor(self):
+    def get_split_cursor(self) -> gui.Cursor:
         if self.is_horizontal():
             return gui.Cursor(constants.CursorShape.SplitHCursor)
         else:

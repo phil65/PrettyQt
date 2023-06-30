@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from prettyqt import charts
-from prettyqt.qt import QtCore
 
 
 class LineSeries(charts.XYSeriesMixin, charts.QLineSeries):
@@ -9,5 +8,7 @@ class LineSeries(charts.XYSeriesMixin, charts.QLineSeries):
 
 
 if __name__ == "__main__":
+    from prettyqt.qt import QtCore
+
     line = LineSeries()
     line += QtCore.QPointF(1, 1)

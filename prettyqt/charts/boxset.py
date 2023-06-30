@@ -33,16 +33,18 @@ class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
         )
 
     def __getitem__(self, index: int | ValuePositionStr) -> float:
-        val = VALUE_POSITION[index] if isinstance(index, str) else index
-        if not (0 <= val.value <= 4):
-            raise KeyError(val)
-        return self.at(val.value)
+        if type(index) is not int:
+            index = VALUE_POSITION.get_enum_value(index).value
+        if not (0 <= index <= 4):
+            raise KeyError(index)
+        return self.at(index)
 
     def __setitem__(self, index: int | ValuePositionStr, value: int):
-        val = VALUE_POSITION[index] if isinstance(index, str) else index
-        if not (0 <= val.value <= 4):
-            raise KeyError(val)
-        self.setValue(val.value, value)
+        if type(index) is not int:
+            index = VALUE_POSITION.get_enum_value(index).value
+        if not (0 <= index <= 4):
+            raise KeyError(index)
+        self.setValue(index, value)
 
     def get_pen(self) -> gui.Pen:
         return gui.Pen(self.pen())
@@ -53,3 +55,4 @@ class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):
 
 if __name__ == "__main__":
     boxset = BoxSet()
+    boxset[0]
