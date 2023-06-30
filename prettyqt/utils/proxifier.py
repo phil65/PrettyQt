@@ -246,6 +246,8 @@ class Proxyfier:
         """Wraps model in a Proxy which flattens tree structures."""
         # ss = """QTreeView::branch{border-image: url(none.png);}"""
         # self._widget.set_stylesheet(ss)
+        from prettyqt import custom_models
+
         proxy = custom_models.FlattenedTreeProxyModel(parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
@@ -255,6 +257,8 @@ class Proxyfier:
         self, id_columns: list[int], var_name: str = "Variable", value_name: str = "Value"
     ) -> custom_models.MeltProxyModel:
         """Wraps model in a Proxy which unpivots the table to a long format."""
+        from prettyqt import custom_models
+
         proxy = custom_models.MeltProxyModel(
             id_columns=id_columns,
             var_name=var_name,
@@ -266,6 +270,8 @@ class Proxyfier:
         return proxy
 
     def reorder_columns(self, order: list[int]) -> custom_models.ColumnOrderProxyModel:
+        from prettyqt import custom_models
+
         proxy = custom_models.ColumnOrderProxyModel(order=order, parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
@@ -273,6 +279,8 @@ class Proxyfier:
 
     def to_list(self) -> custom_models.TableToListProxyModel:
         """Wraps model in a Proxy which converts table to a tree."""
+        from prettyqt import custom_models
+
         proxy = custom_models.TableToListProxyModel(parent=self._widget)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
@@ -290,6 +298,8 @@ class Proxyfier:
         Example: "{2} - {4}" would result in
         <displayRole of column 2> - <displayRole of column4>
         """
+        from prettyqt import custom_models
+
         proxy = custom_models.ColumnJoinerProxyModel(parent=self._widget)
         proxy.add_mapping(header=header, formatter=formatter, flags=flags)
         proxy.setSourceModel(self._widget.model())
@@ -306,6 +316,12 @@ class Proxyfier:
         proxy = custom_models.ChangeHeadersProxyModel(
             headers=headers, role=role, orientation=orientation, parent=self._widget
         )
+        proxy.setSourceModel(self._widget.model())
+        self._widget.set_model(proxy)
+        return proxy
+
+    def set_sort_filter_proxy(self, **kwargs) -> core.SortFilterProxyModel:
+        proxy = core.SortFilterProxyModel(parent=self._widget, **kwargs)
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)
         return proxy

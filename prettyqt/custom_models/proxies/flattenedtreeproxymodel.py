@@ -6,16 +6,12 @@ from prettyqt import constants, core
 
 
 class FlatteningMode(enum.IntEnum):
-    """Flattening modes."""
-
     Default = 1
     InternalNodesDisabled = 2
     LeavesOnly = 4
 
 
 class DisplayMode(enum.IntEnum):
-    """Display modes."""
-
     Path = 1
     Title = 2
 
@@ -39,11 +35,11 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         self._source_offset: dict[tuple[int, ...], int] = {}
 
     def setSourceModel(self, model: core.QAbstractItemModel):
-        if (curr_model := self.sourceModel()) is not None:
-            curr_model.dataChanged.disconnect(self._source_data_changed)
-            curr_model.rowsInserted.disconnect(self._on_reset)
-            curr_model.rowsRemoved.disconnect(self._on_reset)
-            curr_model.rowsMoved.disconnect(self._source_rows_moved)
+        if (old_model := self.sourceModel()) is not None:
+            old_model.dataChanged.disconnect(self._source_data_changed)
+            old_model.rowsInserted.disconnect(self._on_reset)
+            old_model.rowsRemoved.disconnect(self._on_reset)
+            old_model.rowsMoved.disconnect(self._on_row_move)
         with self.reset_model():
             super().setSourceModel(model)
             self._update_mapping()
@@ -51,7 +47,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         model.dataChanged.connect(self._source_data_changed)
         model.rowsInserted.connect(self._on_reset)
         model.rowsRemoved.connect(self._on_reset)
-        model.rowsMoved.connect(self._source_rows_moved)
+        model.rowsMoved.connect(self._on_row_move)
 
     def set_source_column(self, column: int):
         with self.reset_model():
@@ -175,7 +171,7 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
         with self.reset_model():
             self._update_mapping()
 
-    def _source_rows_moved(
+    def _on_row_move(
         self, source_parent, source_start, source_end, dest_parent, dest_row
     ):
         with self.reset_model():
@@ -198,6 +194,7 @@ if __name__ == "__main__":
     from prettyqt import debugging, widgets
 
     app = widgets.app()
-    table = debugging.example_tree(flatten=True)
+    table = debugging.example_tree()
+    table.proxifier.flatten()
     table.show()
     app.exec()
