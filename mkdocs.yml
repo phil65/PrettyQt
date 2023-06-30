@@ -25,16 +25,19 @@ theme:
   - content.code.copy
   - content.code.select
   - content.code.annotate
+  # - content.tooltips  # for insiders..
   - navigation.instant # make things faster
   - navigation.tracking # update URL based on current item in TOC
   - navigation.path  # shows breadcrumbs
   - navigation.tabs # make top level tabs
+  # - navigation.expand # expand all subsections in left sidebar by defuault
+  - navigation.indexes # documents can be directly attached to sections (overview pages)
   - navigation.footer # next/previous page buttons in footer
   # - navigation.tabs.sticky # and make them sticky
   - toc.follow  # makes toc follow scrolling
   # - toc.integrate  # integrates toc into left menu
   - navigation.top  # adds back-to-top button
-  - navigation.sections
+  # - navigation.sections # top-level sections are rendered as groups
 plugins:
 - search
 # - social  # this one has dependency which is not on pypi for windows. (cairocffi)
@@ -67,6 +70,7 @@ markdown_extensions:
 - admonition
 - def_list
 - attr_list
+- abbr
 - md_in_html
 - tables
 - footnotes
