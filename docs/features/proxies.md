@@ -96,18 +96,18 @@ Some of these proxies might partly overlap in functionality, but theres always a
 | Proxy                                             | Description                              |
 | --------------------------------------------------|------------------------------------------|
 |[TableToListProxyModel][tabletolistproxymodel]     | Stack all columns into one single column |
-<!-- : To stack row-wise, use a TransposeProxyModel first. -->
 |[FlattenedTreeProxyModel][flattenedtreeproxymodel] | Moves all rows up to the root level.     |
-<!-- : Label can be changed to show the complete path. -->
 |[MeltProxyModel][meltproxymodel]                   |Unpivot a Table from wide to long format. |
-<!-- : same as pandas.melt, just without pandas. -->
 |[ColumnOrderProxyModel][columnorderproxymodel]     |Reorder columns and hide columns.         |
 
 
 ## Other Proxies
 
+| Proxy                                               | Description                                          |
+| ----------------------------------------------------|------------------------------------------------------|
+|[ChangeHeadersProxyModel][changeheadersproxymodel]   | Change horizontal / vertical headers.                |
+|[HighlightMouseProxymodel][highlightmouseproxymodel] | Highlight regions the mouse cursor is hovering over. |
 
-`HighlightMouseProxymodel`
 
 
 ## Tools
