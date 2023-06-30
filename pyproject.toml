@@ -10,9 +10,27 @@ authors = [
 ]
 classifiers = [
     "Development Status :: 4 - Beta",
-    "Programming Language :: Python"
+    "Environment :: X11 Applications :: Qt",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Desktop Environment",
+    "Topic :: Software Development :: User Interfaces",
+    "Topic :: Software Development :: Widget Sets",
 ]
-keywords = [ "Qt", "PyQt6", "PySide6", "Framework"]
+keywords = [
+    "qt",
+    "pyqt",
+    "pyside",
+    "widgets",
+    "components",
+    "framework",
+    "gui",
+]
 dependencies = [
     "bidict",
     "pywin32;platform_system == 'Windows'",
@@ -24,7 +42,9 @@ dependencies = [
 
 [project.urls]
 Documentation = "https://phil65.github.io/PrettyQt/index.html"
-"Source code" = "https://github.com/phil65/prettyqt"
+Source = "https://github.com/phil65/prettyqt"
+Tracker = "https://github.com/phil65/prettyqt/issues"
+Changelog = "https://github.com/phil65/prettyqt/blob/main/CHANGELOG.md"
 
 [project.optional-dependencies]
 dev = [
