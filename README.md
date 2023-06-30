@@ -64,6 +64,7 @@ almost every class from Qt is covered.
 | QtQuickWidgets      | prettyqt.quickwidgets      |
 | QScintilla          | prettyqt.scintilla         |
 | QtScXml             | prettyqt.scxml             |
+| QtSpatialAudio      | prettyqt.spatialaudio      |
 | QtStateMachine      | prettyqt.statemachine      |
 | QtSvg               | prettyqt.svg               |
 | QtSvgWidgets        | prettyqt.svgwidgets        |

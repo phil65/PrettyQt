@@ -87,28 +87,30 @@ if TYPE_CHECKING:
     )
     RectType = tuple[int, int, int, int] | QtCore.QRect
     RectFType = tuple[int | float, int | float, int | float, int | float] | QtCore.QRectF
+    Vector3DType = (
+        tuple[int | float, int | float, int | float]
+        | QtCore.QPoint
+        | QtCore.QPointF
+        | QtGui.QVector2D
+        | QtGui.QVector3D
+        | QtGui.QVector4D
+    )
     LineType = tuple[int, int] | QtCore.QLine
     LineFType = tuple[float, float] | QtCore.QLineF | QtCore.QLine
     SemanticVersionType = str | QtCore.QVersionNumber | tuple[int, int, int]
     IconType = QtGui.QIcon | str | pathlib.Path | None
     ByteArrayType = str | bytes | QtCore.QByteArray
-    TimeType = QtCore.QTime | datetime.time | str
-    DateType = QtCore.QDate | datetime.date | str
-    DateTimeType = QtCore.QDateTime | datetime.datetime | str
+    TimeType = QtCore.QTime | datetime.time | str | tuple[int, int, int]
+    DateType = QtCore.QDate | datetime.date | str | tuple[int, int, int]
+    DateTimeType = (
+        QtCore.QDateTime | datetime.datetime | str | tuple[int, int, int, int, int, int]
+    )
     KeySequenceType = QtGui.QKeySequence | QtCore.QKeyCombination | str | None
     # ContainerType = Union[widgets.Layout, widgets.Splitter]
     TransformType = (
         QtGui.QTransform
         | tuple[float, float, float, float, float, float, float, float, float]
         | tuple[float, float, float, float, float, float]
-    )
-    VectorType = (
-        QtGui.QVector3D
-        | QtGui.QVector2D
-        | QtGui.QVector4D
-        | QtCore.QPoint
-        | QtCore.QPointF
-        | tuple[float, float, float]
     )
     ColorType = (
         str
@@ -517,6 +519,20 @@ def to_rectf(rect: RectFType | QtCore.QRect):
             raise TypeError(rect)
 
 
+def to_vector3d(vector: Vector3DType):
+    from prettyqt import gui
+
+    match vector:
+        case (int() | float(), int() | float(), int() | float()):
+            return gui.QVector3D(*vector)
+        case gui.QVector3D():
+            return vector
+        case gui.QVector2D() | gui.QVector4D() | core.QPoint() | core.QPointF():
+            return gui.QVector3D(vector)
+        case _:
+            raise TypeError(vector)
+
+
 def to_url(url: UrlType | None) -> QtCore.QUrl:
     match url:
         case os.PathLike():
@@ -606,6 +622,10 @@ def to_datetime(date_time: DateTimeType):
     match date_time:
         case None:
             return QtCore.QDateTime()
+        case (int(), int(), int(), int(), int(), int()):
+            date_ = QtCore.QDate(*date_time[:3])
+            time_ = QtCore.QTime(*date_time[3:])
+            return QtCore.QDateTime(date_, time_)
         case str():
             return dateutil.parser.parse(date_time)
         case QtCore.QDateTime() | datetime.datetime():
@@ -618,6 +638,8 @@ def to_date(value: DateType):
     match value:
         case None:
             return QtCore.QDate()
+        case (int(), int(), int()):
+            return QtCore.QDate(*value)
         case str():
             return QtCore.QDate.fromString(value)
         case QtCore.QDate() | datetime.date():
@@ -635,6 +657,8 @@ def to_time(value: TimeType):
             if not val.isValid():
                 raise ValueError(value)
             return val
+        case (int(), int(), int()):
+            return QtCore.QTime(*value)
         case core.QTime():
             return core.Time(value)
         case core.QDateTime():

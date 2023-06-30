@@ -1,15 +1,12 @@
 from __future__ import annotations
 
 from prettyqt import widgets
-from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
 
 
 class GraphicsScale(widgets.GraphicsTransformMixin, widgets.QGraphicsScale):
-    def set_origin(self, origin: datatypes.VectorType):
-        if not isinstance(origin, QtGui.QVector3D):
-            origin = QtGui.QVector3D(*origin)
-        self.setOrigin(origin)
+    def set_origin(self, origin: datatypes.Vector3DType):
+        self.setOrigin(datatypes.to_vector3d(origin))
 
 
 if __name__ == "__main__":
