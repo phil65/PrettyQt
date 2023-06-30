@@ -7,37 +7,6 @@ from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict, datatypes, get_repr
 
 
-KEY = bidict(
-    title=QtMultimedia.QMediaMetaData.Key.Title,
-    author=QtMultimedia.QMediaMetaData.Key.Author,
-    comment=QtMultimedia.QMediaMetaData.Key.Comment,
-    description=QtMultimedia.QMediaMetaData.Key.Description,
-    genre=QtMultimedia.QMediaMetaData.Key.Genre,
-    date=QtMultimedia.QMediaMetaData.Key.Date,
-    language=QtMultimedia.QMediaMetaData.Key.Language,
-    publisher=QtMultimedia.QMediaMetaData.Key.Publisher,
-    copyright=QtMultimedia.QMediaMetaData.Key.Copyright,
-    url=QtMultimedia.QMediaMetaData.Key.Url,
-    duration=QtMultimedia.QMediaMetaData.Key.Duration,
-    media_type=QtMultimedia.QMediaMetaData.Key.MediaType,
-    file_format=QtMultimedia.QMediaMetaData.Key.FileFormat,
-    audio_bit_rate=QtMultimedia.QMediaMetaData.Key.AudioBitRate,
-    audio_codec=QtMultimedia.QMediaMetaData.Key.AudioCodec,
-    video_bitrate=QtMultimedia.QMediaMetaData.Key.VideoBitRate,
-    video_codec=QtMultimedia.QMediaMetaData.Key.VideoCodec,
-    video_frame_rate=QtMultimedia.QMediaMetaData.Key.VideoFrameRate,
-    album_title=QtMultimedia.QMediaMetaData.Key.AlbumTitle,
-    album_artist=QtMultimedia.QMediaMetaData.Key.AlbumArtist,
-    contributing_artist=QtMultimedia.QMediaMetaData.Key.ContributingArtist,
-    track_number=QtMultimedia.QMediaMetaData.Key.TrackNumber,
-    composer=QtMultimedia.QMediaMetaData.Key.Composer,
-    lead_performer=QtMultimedia.QMediaMetaData.Key.LeadPerformer,
-    thumbnail_image=QtMultimedia.QMediaMetaData.Key.ThumbnailImage,
-    cover_art_image=QtMultimedia.QMediaMetaData.Key.CoverArtImage,
-    orientation=QtMultimedia.QMediaMetaData.Key.Orientation,
-    resolution=QtMultimedia.QMediaMetaData.Key.Resolution,
-)
-
 KeyStr = Literal[
     "title",
     "author",
@@ -68,6 +37,37 @@ KeyStr = Literal[
     "orientation",
     "resolution",
 ]
+
+KEY: bidict[KeyStr, QtMultimedia.QMediaMetaData.Key] = bidict(
+    title=QtMultimedia.QMediaMetaData.Key.Title,
+    author=QtMultimedia.QMediaMetaData.Key.Author,
+    comment=QtMultimedia.QMediaMetaData.Key.Comment,
+    description=QtMultimedia.QMediaMetaData.Key.Description,
+    genre=QtMultimedia.QMediaMetaData.Key.Genre,
+    date=QtMultimedia.QMediaMetaData.Key.Date,
+    language=QtMultimedia.QMediaMetaData.Key.Language,
+    publisher=QtMultimedia.QMediaMetaData.Key.Publisher,
+    copyright=QtMultimedia.QMediaMetaData.Key.Copyright,
+    url=QtMultimedia.QMediaMetaData.Key.Url,
+    duration=QtMultimedia.QMediaMetaData.Key.Duration,
+    media_type=QtMultimedia.QMediaMetaData.Key.MediaType,
+    file_format=QtMultimedia.QMediaMetaData.Key.FileFormat,
+    audio_bit_rate=QtMultimedia.QMediaMetaData.Key.AudioBitRate,
+    audio_codec=QtMultimedia.QMediaMetaData.Key.AudioCodec,
+    video_bitrate=QtMultimedia.QMediaMetaData.Key.VideoBitRate,
+    video_codec=QtMultimedia.QMediaMetaData.Key.VideoCodec,
+    video_frame_rate=QtMultimedia.QMediaMetaData.Key.VideoFrameRate,
+    album_title=QtMultimedia.QMediaMetaData.Key.AlbumTitle,
+    album_artist=QtMultimedia.QMediaMetaData.Key.AlbumArtist,
+    contributing_artist=QtMultimedia.QMediaMetaData.Key.ContributingArtist,
+    track_number=QtMultimedia.QMediaMetaData.Key.TrackNumber,
+    composer=QtMultimedia.QMediaMetaData.Key.Composer,
+    lead_performer=QtMultimedia.QMediaMetaData.Key.LeadPerformer,
+    thumbnail_image=QtMultimedia.QMediaMetaData.Key.ThumbnailImage,
+    cover_art_image=QtMultimedia.QMediaMetaData.Key.CoverArtImage,
+    orientation=QtMultimedia.QMediaMetaData.Key.Orientation,
+    resolution=QtMultimedia.QMediaMetaData.Key.Resolution,
+)
 
 
 class MediaMetaData(

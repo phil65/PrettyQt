@@ -6,13 +6,13 @@ from prettyqt import multimedia
 from prettyqt.utils import bidict
 
 
-POSITION = bidict(
+PositionStr = Literal["unspecified", "back", "front"]
+
+POSITION: bidict[PositionStr, multimedia.QCameraDevice.Position] = bidict(
     unspecified=multimedia.QCameraDevice.Position.UnspecifiedPosition,
     back=multimedia.QCameraDevice.Position.BackFace,
     front=multimedia.QCameraDevice.Position.FrontFace,
 )
-
-PositionStr = Literal["unspecified", "back", "front"]
 
 
 class CameraDevice(multimedia.QCameraDevice):

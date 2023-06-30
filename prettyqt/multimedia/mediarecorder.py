@@ -9,33 +9,25 @@ from prettyqt.qt import QtMultimedia
 from prettyqt.utils import bidict, datatypes
 
 
-ENCODING_MODE = bidict(
+EncodingModeStr = Literal[
+    "constant_quality", "constant_bit_rate", "average_bit_rate", "two_pass"
+]
+
+ENCODING_MODE: bidict[EncodingModeStr, QtMultimedia.QMediaRecorder.EncodingMode] = bidict(
     constant_quality=QtMultimedia.QMediaRecorder.EncodingMode.ConstantQualityEncoding,
     constant_bit_rate=QtMultimedia.QMediaRecorder.EncodingMode.ConstantBitRateEncoding,
     average_bit_rate=QtMultimedia.QMediaRecorder.EncodingMode.AverageBitRateEncoding,
     two_pass=QtMultimedia.QMediaRecorder.EncodingMode.TwoPassEncoding,
 )
 
-EncodingModeStr = Literal[
-    "constant_quality", "constant_bit_rate", "average_bit_rate", "two_pass"
-]
+ErrorStr = Literal["none", "resource", "format", "out_of_space", "location_not_writable"]
 
-ERROR = bidict(
+ERROR: bidict[ErrorStr, QtMultimedia.QMediaRecorder.Error] = bidict(
     none=QtMultimedia.QMediaRecorder.Error.NoError,
     resource=QtMultimedia.QMediaRecorder.Error.ResourceError,
     format=QtMultimedia.QMediaRecorder.Error.FormatError,
     out_of_space=QtMultimedia.QMediaRecorder.Error.OutOfSpaceError,
     location_not_writable=QtMultimedia.QMediaRecorder.Error.LocationNotWritable,
-)
-
-ErrorStr = Literal["none", "resource", "format", "out_of_space", "location_not_writable"]
-
-QUALITY = bidict(
-    very_low=QtMultimedia.QMediaRecorder.Quality.VeryLowQuality,
-    low=QtMultimedia.QMediaRecorder.Quality.LowQuality,
-    normal=QtMultimedia.QMediaRecorder.Quality.NormalQuality,
-    high=QtMultimedia.QMediaRecorder.Quality.HighQuality,
-    very_high=QtMultimedia.QMediaRecorder.Quality.VeryHighQuality,
 )
 
 QualityStr = Literal[
@@ -46,13 +38,23 @@ QualityStr = Literal[
     "very_high",
 ]
 
-RECORDER_STATE = bidict(
+QUALITY: bidict[QualityStr, QtMultimedia.QMediaRecorder.Quality] = bidict(
+    very_low=QtMultimedia.QMediaRecorder.Quality.VeryLowQuality,
+    low=QtMultimedia.QMediaRecorder.Quality.LowQuality,
+    normal=QtMultimedia.QMediaRecorder.Quality.NormalQuality,
+    high=QtMultimedia.QMediaRecorder.Quality.HighQuality,
+    very_high=QtMultimedia.QMediaRecorder.Quality.VeryHighQuality,
+)
+
+RecorderStateStr = Literal["stopped", "recording", "paused"]
+
+RECORDER_STATE: bidict[
+    RecorderStateStr, QtMultimedia.QMediaRecorder.RecorderState
+] = bidict(
     stopped=QtMultimedia.QMediaRecorder.RecorderState.StoppedState,
     recording=QtMultimedia.QMediaRecorder.RecorderState.RecordingState,
     paused=QtMultimedia.QMediaRecorder.RecorderState.PausedState,
 )
-
-RecorderStateStr = Literal["stopped", "recording", "paused"]
 
 
 class MediaRecorder(core.ObjectMixin, QtMultimedia.QMediaRecorder):

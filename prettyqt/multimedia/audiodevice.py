@@ -6,13 +6,13 @@ from prettyqt import multimedia
 from prettyqt.utils import bidict
 
 
-MODE = bidict(
+ModeStr = Literal["null", "input", "output"]
+
+MODE: bidict[ModeStr, multimedia.QAudioDevice.Mode] = bidict(
     null=multimedia.QAudioDevice.Mode.Null,
     input=multimedia.QAudioDevice.Mode.Input,
     output=multimedia.QAudioDevice.Mode.Output,
 )
-
-ModeStr = Literal["null", "input", "output"]
 
 
 class AudioDevice(multimedia.QAudioDevice):
