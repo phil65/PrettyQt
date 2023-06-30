@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from collections.abc import Sequence
+# from collections.abc import Sequence
 import contextlib
+import enum
 
 from importlib import metadata
 import pkgutil
@@ -57,7 +58,14 @@ class DistTreeItem(treeitem.TreeItem):
         self.version = None if obj is None else obj.version
 
 
-class NameColumn(custom_models.ColumnItem):
+class DistributionColumn(custom_models.ColumnItem):
+    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+        match role:
+            case ImportlibTreeModel.Roles.DistributionRole:
+                return item.obj
+
+
+class NameColumn(DistributionColumn):
     name = "Name"
     doc = "Package name"
 
@@ -65,9 +73,11 @@ class NameColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.metadata["Name"]
+            case _:
+                return super().get_data(item, role)
 
 
-class VersionColumn(custom_models.ColumnItem):
+class VersionColumn(DistributionColumn):
     name = "Version"
     doc = "Version number."
 
@@ -75,9 +85,11 @@ class VersionColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.version
+            case _:
+                return super().get_data(item, role)
 
 
-class ConstraintsColumn(custom_models.ColumnItem):
+class ConstraintsColumn(DistributionColumn):
     name = "Constraints"
     doc = "Constraints."
 
@@ -92,9 +104,11 @@ class ConstraintsColumn(custom_models.ColumnItem):
                     ),
                     "",
                 )
+            case _:
+                return super().get_data(item, role)
 
 
-class MarkerColumn(custom_models.ColumnItem):
+class MarkerColumn(DistributionColumn):
     name = "Extra"
     doc = "Extra."
 
@@ -109,9 +123,11 @@ class MarkerColumn(custom_models.ColumnItem):
                     ),
                     "",
                 )
+            case _:
+                return super().get_data(item, role)
 
 
-class SummaryColumn(custom_models.ColumnItem):
+class SummaryColumn(DistributionColumn):
     name = "Summary"
     doc = "Module description."
 
@@ -119,9 +135,11 @@ class SummaryColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.metadata["Summary"]
+            case _:
+                return super().get_data(item, role)
 
 
-class HomepageColumn(custom_models.ColumnItem):
+class HomepageColumn(DistributionColumn):
     name = "Homepage"
     doc = "URL of the homepage."
 
@@ -129,9 +147,11 @@ class HomepageColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.metadata["Home-Page"]
+            case _:
+                return super().get_data(item, role)
 
 
-class AuthorColumn(custom_models.ColumnItem):
+class AuthorColumn(DistributionColumn):
     name = "Author"
     doc = "Author name."
 
@@ -139,9 +159,11 @@ class AuthorColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.metadata["Author"]
+            case _:
+                return super().get_data(item, role)
 
 
-class LicenseColumn(custom_models.ColumnItem):
+class LicenseColumn(DistributionColumn):
     name = "License"
     doc = "License name."
 
@@ -149,6 +171,8 @@ class LicenseColumn(custom_models.ColumnItem):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.metadata["License"]
+            case _:
+                return super().get_data(item, role)
 
 
 class ImportlibTreeModel(custom_models.ColumnItemModel):
@@ -156,6 +180,10 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
 
     Attention: Model can be recursive, so be careful with iterating whole tree.
     """
+
+    @core.Enum
+    class Roles(enum.IntEnum):
+        DistributionRole = constants.USER_ROLE + 43255
 
     TreeItem = DistTreeItem
 
@@ -206,73 +234,77 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         ]
 
 
-class ImportlibDistributionModel(core.AbstractTableModel):
-    HEADER = ["Name", "Version", "Summary", "Homepage", "Author", "License"]
+# class ImportlibDistributionModel(core.AbstractTableModel):
+#     HEADER = ["Name", "Version", "Summary", "Homepage", "Author", "License"]
 
-    def __init__(
-        self,
-        distributions: Sequence[metadata.Distribution],
-        parent: core.QObject | None = None,
-    ):
-        super().__init__(parent)
-        self.distributions = distributions
+#     def __init__(
+#         self,
+#         distributions: Sequence[metadata.Distribution],
+#         parent: core.QObject | None = None,
+#     ):
+#         super().__init__(parent)
+#         self.distributions = distributions
 
-    @classmethod
-    def supports(cls, instance) -> bool:
-        match instance:
-            case (metadata.Distribution(), *_):
-                return True
-            case _:
-                return False
+#     @classmethod
+#     def supports(cls, instance) -> bool:
+#         match instance:
+#             case (metadata.Distribution(), *_):
+#                 return True
+#             case _:
+#                 return False
 
-    def rowCount(self, parent=None):
-        parent = parent or core.ModelIndex()
-        return 0 if parent.column() > 0 or parent.isValid() else len(self.distributions)
+#     def rowCount(self, parent=None):
+#         parent = parent or core.ModelIndex()
+#         return 0 if parent.column() > 0 or parent.isValid() else len(self.distributions)
 
-    def columnCount(self, parent=None):
-        return 0 if parent is None else len(self.HEADER)
+#     def columnCount(self, parent=None):
+#         return 0 if parent is None else len(self.HEADER)
 
-    def headerData(
-        self,
-        offset: int,
-        orientation: constants.Orientation,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ):
-        match orientation, role:
-            case constants.HORIZONTAL, constants.DISPLAY_ROLE:
-                return self.HEADER[offset]
+#     def headerData(
+#         self,
+#         offset: int,
+#         orientation: constants.Orientation,
+#         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+#     ):
+#         match orientation, role:
+#             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
+#                 return self.HEADER[offset]
 
-    def data(
-        self,
-        index: core.ModelIndex,
-        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-    ):
-        dist = self.distributions[index.row()]
-        match role, index.column():
-            case constants.DISPLAY_ROLE, 0:
-                return dist.metadata["Name"]
-            case constants.DISPLAY_ROLE, 1:
-                return dist.version
-            case constants.DISPLAY_ROLE, 2:
-                return dist.metadata["Summary"]
-            case constants.DISPLAY_ROLE, 3:
-                return dist.metadata["Home-Page"]
-            case constants.DISPLAY_ROLE, 4:
-                return dist.metadata["Author"]
-            case constants.DISPLAY_ROLE, 5:
-                return dist.metadata["License"]
-            case constants.USER_ROLE, _:
-                return dist
+#     def data(
+#         self,
+#         index: core.ModelIndex,
+#         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+#     ):
+#         dist = self.distributions[index.row()]
+#         match role, index.column():
+#             case constants.DISPLAY_ROLE, 0:
+#                 return dist.metadata["Name"]
+#             case constants.DISPLAY_ROLE, 1:
+#                 return dist.version
+#             case constants.DISPLAY_ROLE, 2:
+#                 return dist.metadata["Summary"]
+#             case constants.DISPLAY_ROLE, 3:
+#                 return dist.metadata["Home-Page"]
+#             case constants.DISPLAY_ROLE, 4:
+#                 return dist.metadata["Author"]
+#             case constants.DISPLAY_ROLE, 5:
+#                 return dist.metadata["License"]
+#             case constants.USER_ROLE, _:
+#                 return dist
 
-    @classmethod
-    def from_system(cls, parent: core.QObject | None = None) -> Self:
-        distributions = list_system_modules()
-        return cls(distributions, parent)
+#     @classmethod
+#     def from_system(cls, parent: core.QObject | None = None) -> Self:
+#         distributions = list_system_modules()
+#         return cls(distributions, parent)
 
-    @classmethod
-    def from_package(cls, package_name: str, parent: core.QObject | None = None) -> Self:
-        distributions = list_package_requirements(package_name)
-        return cls(distributions, parent)
+#     @classmethod
+#     def from_package(
+#         cls,
+#         package_name: str,
+#         parent: core.QObject | None = None,
+#     ) -> Self:
+#         distributions = list_package_requirements(package_name)
+#         return cls(distributions, parent)
 
 
 # if __name__ == "__main__":
