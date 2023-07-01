@@ -1,4 +1,4 @@
-::: prettyqt.custom_models.SliceCheckableProxyModel
+::: prettyqt.custom_models.SliceCheckableTreeProxyModel
 
 Read more about [slices](https://docs.python.org/3/library/functions.html#slice).
 

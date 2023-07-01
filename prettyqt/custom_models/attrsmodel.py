@@ -13,6 +13,8 @@ logger = logging.getLogger(__name__)
 
 
 class AttrsModel(custom_models.BaseDataclassModel):
+    """Table model to display a list of [attrs](https://www.attrs.org/) dataclasses."""
+
     def __init__(self, items: Sequence[datatypes.IsAttrs], **kwargs):
         super().__init__(items, **kwargs)
 

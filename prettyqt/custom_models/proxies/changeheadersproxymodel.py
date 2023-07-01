@@ -6,6 +6,33 @@ from prettyqt import constants, core
 
 
 class ChangeHeadersProxyModel(core.IdentityProxyModel):
+    """Proxy model for changing the header data (either horizontal or vertical).
+
+    Header data can either be changed by passing a list with same length as source length
+    or by passing a dictionary with index as key and new value as value
+    (Example: {1: "abc", 3: "def"} changes section 1 to "abc" and section 3 to "def")
+    Apart from the regular use case of changing the text, the other roles can be changed,
+    too.
+
+    ### Example
+
+    ```py
+    table.proxifier.change_headers(header=["x", "y", "z"],
+        orientation=constants.HORIZONTAL,
+        role=constants.DISPLAY_ROLE
+    )
+    table.show()
+    # or
+    model = MyModel()
+    proxy = ChangeHeadersProxyModel(
+        header=["x", "y", "z"], orientation=constants.VERTICAL
+    )
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
+
     ID = "change_headers"
 
     def __init__(

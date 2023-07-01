@@ -81,10 +81,12 @@ class AsyncRunner:
         Returns:
             new sync function
 
-        Example:
-            dl_btn.clicked.connect(self.runner.to_sync(self._on_dl_btn_clicked)
-            ...
-            search_response = await self.runner.run(requests.get, api_url)
+        ### Example:
+        ```py
+        dl_btn.clicked.connect(self.runner.to_sync(self._on_dl_btn_clicked)
+        ...
+        search_response = await self.runner.run(requests.get, api_url)
+        ```
         """
 
         @functools.wraps(async_func)

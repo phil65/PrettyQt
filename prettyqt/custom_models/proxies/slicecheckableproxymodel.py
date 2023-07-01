@@ -11,6 +11,25 @@ logger = logging.getLogger(__name__)
 
 
 class SliceCheckableProxyModel(custom_models.SliceIdentityProxyModel):
+    """Proxy model to make a model checkable.
+
+    ### Example
+
+    ```py
+    model = MyModel()
+    table = widgets.TableView()
+    table.set_model(model)
+    table.proxifier[::2, 2:].modify(xyz)
+    table.show()
+    # or
+    indexer = (slice(None, None, 2), slice(2, None))
+    proxy = custom_models.SliceCheckableProxyModel(indexer=indexer)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
+
     ID = "checkable"
     checkstate_changed = core.Signal(core.ModelIndex, bool)
 

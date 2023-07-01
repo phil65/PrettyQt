@@ -10,6 +10,14 @@ logger = logging.getLogger(__name__)
 
 
 class SliceIdentityProxyModel(core.IdentityProxyModel):
+    """Base model for slice proxy models.
+
+    By itself, this proxy does nothing.
+    It just provides all needed helper functions to deal with slices.
+    `indexer_contains` should be just by subclasses in order to check whether the proxy
+    should be applied.
+    """
+
     def __init__(self, indexer=None, **kwargs):
         super().__init__(**kwargs)
         self._indexer = (slice(None), slice(None))

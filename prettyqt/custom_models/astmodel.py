@@ -48,7 +48,22 @@ logger = logging.getLogger(__name__)
 
 
 class AstModel(custom_models.TreeModel):
-    """Model to display the tree of an AST node."""
+    """Tree model to display an Abstract syntax tree.
+
+    The model shows a tree of all nodes from an
+    [abstract syntax tree](https://docs.python.org/3/library/ast.html#node-classes)
+    They are part of the builtin `ast` module.
+
+    ### Example:
+    ```py
+    import ast
+    view = TreeView()
+    code = pathlib.Path(__file__).read_text()
+    tree = ast.parse(code)
+    model = AstModel(tree)
+    view.set_model(model)
+    ```
+    """
 
     @core.Enum
     class Roles(enum.IntEnum):
@@ -210,11 +225,9 @@ if __name__ == "__main__":
     app = widgets.app()
     with app.debug_mode():
         view = widgets.TreeView()
-        view.setRootIsDecorated(True)
         code = pathlib.Path(__file__).read_text()
         tree = ast.parse(code)
-
-        model = AstModel(tree, show_root=True, parent=view)
+        model = AstModel(tree)
         view.set_model(model)
         view.setEditTriggers(view.EditTrigger.AllEditTriggers)
         view.set_delegate("variant")

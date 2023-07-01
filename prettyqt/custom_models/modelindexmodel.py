@@ -12,6 +12,18 @@ logger = logging.getLogger(__name__)
 
 
 class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
+    """Table model for displaying a the data of a list of ModelIndexes.
+
+    ### Example:
+    ```py
+    # get indexes from some random model
+    model_for_indexes = ParentClassTreeModel(widgets.QWidget, show_mro=True)
+    model_for_indexes.prefetch_tree()
+    indexes = list(test.iter_tree())
+    model = ModelIndexModel(indexes=indexes)
+    ```
+    """
+
     ID = "modelindex"
     FIXED_HEADER = ["Path", "Row", "Column", "Flags"]
 

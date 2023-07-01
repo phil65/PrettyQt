@@ -160,6 +160,8 @@ class UsageCountColumn(custom_models.ColumnItem):
 
 
 class ActionsModel(custom_models.ColumnTableModel):
+    """Table model to display a list of QActions."""
+
     COLUMNS = [
         NameColumn,
         ToolTipColumn,
@@ -169,7 +171,7 @@ class ActionsModel(custom_models.ColumnTableModel):
         UsageCountColumn,
     ]
 
-    def __init__(self, actions, parent=None):
+    def __init__(self, actions: list[gui.QAction], parent: widgets.QWidget | None = None):
         super().__init__(actions, self.COLUMNS, parent=parent)
 
     @classmethod

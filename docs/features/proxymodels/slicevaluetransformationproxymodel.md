@@ -1,8 +1,6 @@
-Read more about [slices](https://docs.python.org/3/library/functions.html#slice).
-
-### API
-
 ::: prettyqt.custom_models.SliceValueTransformationProxyModel
+
+Read more about [slices](https://docs.python.org/3/library/functions.html#slice).
 
 ### Qt Properties
 

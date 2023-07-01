@@ -1,7 +1,3 @@
-Tree model to display all parent classes of given class.
-
-### API
-
 ::: prettyqt.custom_models.ParentClassTreeModel
 
 ## Supports

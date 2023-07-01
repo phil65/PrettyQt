@@ -19,6 +19,31 @@ class ColumnMapping:
 
 
 class ColumnJoinerProxyModel(core.AbstractProxyModel):
+    """Proxy model which joins the contents of several columns.
+
+    The columns are joined based on a formatter and appended to the end of the model
+    as a new column.
+
+    The formatter must look like "{0} - {1}: {4}".
+    The format codes are then populated with the content of given columns,
+    in this case it would be {Text of column 0} - {Text of Column 1}: {Text of Column 4}
+
+    ### Example
+
+    ```py
+    table.proxifier.join_columns(formatter="{0} - {2}", header="New column")
+    table.show()
+    # or
+    model = MyModel()
+    proxy = ColumnJoinerProxyModel()
+    proxy.set_source_model(model)
+    proxy.add_column(formatter="{0} - {2}", header="New column")
+    proxy.add_column(formatter="{4}: {5}", header="Another column")
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
+
     ID = "column_join"
 
     def __init__(self, *args, **kwargs):

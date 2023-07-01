@@ -13,6 +13,11 @@ logger = logging.getLogger(__name__)
 
 
 class AttrsFieldsModel(custom_models.BaseFieldsModel):
+    """Table model to display the fields and their metadata of an dataclass.
+
+    More information about attrs can be found [here][https://www.attrs.org/].
+    """
+
     HEADER = [
         "Value",
         "Type",

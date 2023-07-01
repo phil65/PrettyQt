@@ -22,6 +22,38 @@ class ColorMode(enum.IntEnum):
 
 
 class SliceColorValuesProxyModel(custom_models.SliceIdentityProxyModel):
+    """Model to color cells of a numerical table based on their value.
+
+    By default, "high" numbers are colored red, "low" are colored green.
+
+    Possible modes are:
+    * All: Highlight all cells within given slice
+    * Column: Highlight all cells of same column as current if cell is within given slice.
+    * Row: Highlight all cells of same row as current if cell is within given slice.
+
+    The last two modes have the advantage that nothing needs to be computed in advance,
+    min/max values are calculated on-the fly.
+
+    !!! note
+        This is a slice proxy and can be selectively applied to a model.
+
+    ### Example
+
+    ```py
+    model = MyModel()
+    table = widgets.TableView()
+    table.set_model(model)
+    table[:, :3].proxify.highlight_current(mode="all")
+    table.show()
+    # or
+    indexer = (slice(None), slice(None, 3))
+    proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
+
     ID = "color_values"
     ColorMode = ColorMode
     core.Enum(ColorMode)

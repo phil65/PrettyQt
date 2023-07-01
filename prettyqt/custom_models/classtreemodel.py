@@ -98,7 +98,10 @@ class BaseClassTreeModel(custom_models.TreeModel):
 
 
 class SubClassTreeModel(BaseClassTreeModel):
-    """Model to display the subclass tree of a python class."""
+    """Model to display the subclass tree of a python class.
+
+    Also supports `types.UnionType`.
+    """
 
     @classmethod
     def supports(cls, instance) -> bool:
@@ -118,7 +121,7 @@ class SubClassTreeModel(BaseClassTreeModel):
 
 
 class ParentClassTreeModel(BaseClassTreeModel):
-    """Model to display the parentclass tree of a python class."""
+    """Tree model to display the parent class tree of a python class."""
 
     def __init__(self, *args, **kwargs):
         self._show_mro = False

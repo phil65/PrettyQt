@@ -23,8 +23,19 @@ class Filter:
 class MultiColumnFilterProxyModel(core.SortFilterProxyModel):
     """A SortFilterProxyModel which filters based on multiple columns in one go.
 
-    Especially useful for our FilterHeader widget, which otherwise would nest
-    a lot of SortFilterProxyModels, where each one would have to loop the whole table.
+    This proxy uses seperate search term / values for each column in order to filter
+    the source model, thus avoiding to layer proxy models in case you want to filter
+    based on several columns. That way it is less demanding since filtering
+    for all columns is done in one go.
+
+    ### Example
+
+    ```py
+    proxy = custom_models.MultiColumnFilterProxyModel()
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
     """
 
     ID = "multi_column_filter"

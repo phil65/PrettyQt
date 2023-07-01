@@ -10,6 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
+    """Proxy model to highlight cells with same content as the currently focused cell."""
+
     ID = "change_icon_size"
 
     def __init__(self, size: datatypes.SizeType, **kwargs):

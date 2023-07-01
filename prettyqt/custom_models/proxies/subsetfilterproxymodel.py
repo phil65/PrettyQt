@@ -7,6 +7,18 @@ from prettyqt.utils import get_repr, helpers
 
 
 class SubsetFilterProxyModel(core.SortFilterProxyModel):
+    """A FilterProxyModel to filter based on slices, ranges, indexes or Callables.
+
+    ### Example
+
+    ```py
+    proxy = custom_models.SubsetFilterProxyModel()
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
+
     ID = "subset"
 
     def __init__(

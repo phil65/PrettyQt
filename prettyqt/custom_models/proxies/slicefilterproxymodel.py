@@ -4,11 +4,29 @@ from prettyqt import constants, core, custom_models
 
 
 class SliceFilterProxyModel(custom_models.SliceIdentityProxyModel):
-    """Proxy to filter a model based on slices.
+    """Proxy model to filter an item view based on python slicing syntax.
 
-    Since slicing operations are bijective, we can do this without
-    looping all rows / columns. Thus, this should perform much better than a
+    Since slicing operations are bijective, this model can filter without
+    looping through rows or columns. Thus, this should perform much better than a
     SortFilterProxyModel with a column filter. (O(1) instead of O(n))
+
+    ### Example
+
+    To filter out every second row, and cut off the the first two columns:
+
+    ```py
+    model = MyModel()
+    table = widgets.TableView()
+    table.set_model(model)
+    table.proxifier[::2, 2:].filter()
+    table.show()
+    # or
+    indexer = (slice(None, None, 2), slice(2, None))
+    proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
     """
 
     ID = "slice_filter"

@@ -1,7 +1,3 @@
-Tree model to display all derived classes of given type.
-
-### API
-
 ::: prettyqt.custom_models.SubClassTreeModel
 
 ## Supports

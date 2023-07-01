@@ -23,7 +23,7 @@ class Transformer:
 class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
     """A proxy model which transforms cell contents based on a Callable.
 
-    Example:
+    ### Example:
     ```py
     model = MyModel()
     table = widgets.TableView()

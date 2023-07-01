@@ -1,4 +1,5 @@
-This proxy can be used to highlight all cells which contain the same content as the currently focused cell.
+::: prettyqt.custom_models.SliceHighlightCurrentProxyModel
+
 Three modes are possible:
 
 | Mode    | Description                                                |
@@ -46,9 +47,6 @@ table.show()
   <figcaption>Mode: row</figcaption>
 </figure>
 
-### API
-
-::: prettyqt.custom_models.SliceHighlightCurrentProxyModel
 
 ### Qt Properties
 

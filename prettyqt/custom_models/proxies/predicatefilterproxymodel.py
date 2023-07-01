@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 class PredicateFilterProxyModel(core.SortFilterProxyModel):
     """A simple filter proxy model with settable filter predicates.
 
-    Example:
+    ### Example:
     ```py
     proxy = PredicateFilterProxyModel()
     proxy.add_filter(lambda value: value < 1)

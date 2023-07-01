@@ -11,14 +11,28 @@ logger = logging.getLogger(__name__)
 
 
 class FuzzyFilterProxyModel(core.SortFilterProxyModel):
-    """Proxy model with fuzzyfilter functionality.
+    """A FilterProxyModel which sorts the results based on a matching score.
 
-    this proxymodel replaces the text from the display role in the given filter column
+    The matching score evaluates metrics like upper/lower casing, distance of
+    filter character to match character and some more.
+    Best matches are shown at the top.
+
+    The matching score is exposed as a custom UserRole
+    (FuzzyFilterProxyModel.Roles.SortRole)
+    The proxymodel replaces the text from the display role in the given filter column
     with HTML code in order to color the letter matches. A backup from the original text
     is made available in the BackupRole. Based on the original text, the proxy calculates
     a score for the match and makes it available via the SortRole.
     To display the html code properly, a HtmlItemDelegate is needed.
 
+    ### Example
+
+    ```py
+    proxy = custom_models.FuzzyFilterProxyModel()
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
     """
 
     ID = "fuzzy"

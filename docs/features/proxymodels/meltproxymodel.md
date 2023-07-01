@@ -1,4 +1,4 @@
-Proxy model to unpivot a table from wide to long format, as known from [pandas][https://pandas.pydata.org/docs/user_guide/reshaping.html#reshaping-melt].
+::: prettyqt.custom_models.MeltProxyModel
 
 ### Example
 
@@ -38,10 +38,6 @@ table.show()
   ![Image title](../../images/meltproxymodel_after.png)
   <figcaption>Proxied table</figcaption>
 </figure>
-
-### API
-
-::: prettyqt.custom_models.MeltProxyModel
 
 ### Qt Properties
 
