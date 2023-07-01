@@ -303,8 +303,8 @@ select = [
     # "G",    #  flake8-logging-format
     "I",    # ISort
     "ICN",  # Flake8-import-conventions
-    # "INP",  # flake8-no-pep420
-    # "INT",  # flake8-gettext
+    "INP",  # flake8-no-pep420
+    "INT",  # flake8-gettext
     "ISC",  # flake8-implicit-str-concat
     # "N",    # pep8-naming
     # "NPY",  # numpy-specific rules
