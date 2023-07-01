@@ -1,5 +1,3 @@
-## FlattenedTreeProxyModel
-
 Proxy model to flatten a tree to appear like a table.
 
 ### Example

@@ -1,5 +1,3 @@
-## AttrsModel
-
 Table model to display a list of [attrs][https://www.attrs.org/] dataclasses.
 
 ### API

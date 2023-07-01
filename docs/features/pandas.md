@@ -1,6 +1,3 @@
-Pandas
-======
-
 Pandas is a very popular python library for working with tabular data.
 
 PrettyQt contains a range of tools to work with pandas data structures.

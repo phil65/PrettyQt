@@ -1,5 +1,3 @@
-## ChangeHeadersProxyModel
-
 Proxy model for changing the header data (either horizontal or vertical).
 
 Header data can either be changed by passing a list with same length as source length or by passing a dictionary with index as key and new value as value (Example: {1: "abc", 3: "def"} changes section 1 to "abc" and section 3 to "def")

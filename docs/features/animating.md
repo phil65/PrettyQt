@@ -1,6 +1,3 @@
-Animating
-======
-
 PrettyQt makes it easy to animate your widgets.
 All animation-related methods are available via the Widget.fx attribute.
 Easy one-liners to bring

@@ -1,5 +1,3 @@
-## AnnotatedScrollBar
-
 ScrollBar which can highlight user-chosen segments.
 
 

@@ -1,5 +1,3 @@
-## MeltProxyModel
-
 Proxy model to unpivot a table from wide to long format, as known from [pandas][https://pandas.pydata.org/docs/user_guide/reshaping.html#reshaping-melt].
 
 ### Example

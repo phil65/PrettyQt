@@ -1,6 +1,3 @@
-Delegates
-=========
-
 Several additional delegates are supplied by PrettyQt.
 
 | Delegate                   | Description                                     |

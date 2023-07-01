@@ -1,5 +1,3 @@
-## ScrollAreaTocWidget
-
 A TreeView subclass which can show a Table-of-contents list based on a given ScrollArea.
 
 With default settings, it will scan the widgets contained in the scrollArea for a windowTitle.
@@ -34,7 +32,7 @@ There are also two different expand modes to choose from:
 1) ExpandAll: All subsections are always expanded.
 2) on_focus: Only the section containing the focused item is expanded.
 
-This widget is used by [ConfigWidget][configwidget].
+This widget is used by [ConfigWidget](configwidget.md).
 
 ### Qt Properties
 

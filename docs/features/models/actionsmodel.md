@@ -1,5 +1,3 @@
-## ActionsModel
-
 Table model to display a list of QActions.
 
 ### API

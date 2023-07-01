@@ -1,5 +1,3 @@
-## SliceFilterProxyModel
-
 Proxy model to filter an item view based on python slicing syntax.
 Since slicing operations are bijective, this model can filter without
 looping through rows or columns. Thus, this should perform much better than a

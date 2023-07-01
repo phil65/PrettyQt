@@ -1,5 +1,3 @@
-## SliceCheckableProxyModel
-
 Proxy model which transforms cell contents based on a Callable.
 
 ### Example

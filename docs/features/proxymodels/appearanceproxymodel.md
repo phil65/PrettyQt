@@ -1,8 +1,6 @@
-## AppearanceProxyModel
-
 Proxy model for changing the "style roles" of the source model.
 
-In contrast to [SliceAppearanceProxyModel][sliceappearanceproxymodel], this one works in a more "static" way, meaning that you can change the color / font / alignment of indexes via model.setData even when the source model is not item-based (like a StandardItemModel).
+In contrast to [SliceAppearanceProxyModel](sliceappearanceproxymodel.md), this one works in a more "static" way, meaning that you can change the color / font / alignment of indexes via model.setData even when the source model is not item-based (like a StandardItemModel).
 
 
 ### Example

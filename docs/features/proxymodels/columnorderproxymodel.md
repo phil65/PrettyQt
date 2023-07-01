@@ -1,5 +1,3 @@
-## ColumnOrderProxyModel
-
 Proxy model which reorders the columns the source model by passing a list containing the new order. If not all indexes are part of the list, then the
 missing sections will be hidden.
 

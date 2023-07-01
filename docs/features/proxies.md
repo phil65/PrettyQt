@@ -1,5 +1,3 @@
-## Proxy Models
-
 Every class containing the AbstractItemViewMixin (widgets.TreeView, widgets.TableView, ...)
 has quick access to proxy superpowers hidden behind the "proxifier" attribute.
 The following section will give an overview about the included proxies and how to apply them.
@@ -60,14 +58,14 @@ Here is a short overview of the included slice proxies:
 
 | Proxy                                                                  | Description                                              |
 | -----------------------------------------------------------------------|----------------------------------------------------------|
-|[SliceAppearanceProxyModel][sliceappearanceproxymodel]                  | Applies styling to given slice by overriding font, color and alignment roles.|
-|[SliceChangeFlagsProxyModel][slicechangeflagsproxymodel]                | Selectively change the ItemFlags of the model|
-|[SliceChangeIconSizeProxymodel][slicechangeiconsizeproxymodel]          | Allows to change the size of the Icon / Pixmap shown for DecorationRole.|
-|[SliceCheckableProxyModel][slicecheckableproxymodel]                    | Makes an area of the table checkable and triggers a callback on checkstate change.|
-|[SliceCheckableTreeProxyModel][slicecheckabletreeproxymodel]            | Makes an area of a tree checkable and triggers a callback on checkstate change.|
-|[SliceColorValuesProxyModel][slicecolorvaluesproxymodel]                | Color an area with numerical values based on their value.|
-|[SliceFilterProxyModel][slicefilterproxymodel]                          | Show only selected slice of given source model.|
-|[SliceValueTransformationProxyModel][slicevaluetransformationproxymodel]| Changes the values of any data role of given slice area based on a callback.|
+|[SliceAppearanceProxyModel](sliceappearanceproxymodel.md)                  | Applies styling to given slice by overriding font, color and alignment roles.|
+|[SliceChangeFlagsProxyModel](slicechangeflagsproxymodel.md)                | Selectively change the ItemFlags of the model|
+|[SliceChangeIconSizeProxymodel](slicechangeiconsizeproxymodel.md)          | Allows to change the size of the Icon / Pixmap shown for DecorationRole.|
+|[SliceCheckableProxyModel](slicecheckableproxymodel.md)                    | Makes an area of the table checkable and triggers a callback on checkstate change.|
+|[SliceCheckableTreeProxyModel](slicecheckabletreeproxymodel.md)            | Makes an area of a tree checkable and triggers a callback on checkstate change.|
+|[SliceColorValuesProxyModel](slicecolorvaluesproxymodel.md)                | Color an area with numerical values based on their value.|
+|[SliceFilterProxyModel](slicefilterproxymodel.md)                          | Show only selected slice of given source model.|
+|[SliceValueTransformationProxyModel](slicevaluetransformationproxymodel.md)| Changes the values of any data role of given slice area based on a callback.|
 
 
 ### Sort/Filter proxies.
@@ -95,18 +93,18 @@ Some of these proxies might partly overlap in functionality, but theres always a
 
 | Proxy                                             | Description                              |
 | --------------------------------------------------|------------------------------------------|
-|[TableToListProxyModel][tabletolistproxymodel]     | Stack all columns into one single column |
-|[FlattenedTreeProxyModel][flattenedtreeproxymodel] | Moves all rows up to the root level.     |
-|[MeltProxyModel][meltproxymodel]                   |Unpivot a Table from wide to long format. |
-|[ColumnOrderProxyModel][columnorderproxymodel]     |Reorder columns and hide columns.         |
+|[TableToListProxyModel](tabletolistproxymodel.md)     | Stack all columns into one single column |
+|[FlattenedTreeProxyModel](flattenedtreeproxymodel.md) | Moves all rows up to the root level.     |
+|[MeltProxyModel](meltproxymodel.md)                   |Unpivot a Table from wide to long format. |
+|[ColumnOrderProxyModel](columnorderproxymodel.md)     |Reorder columns and hide columns.         |
 
 
 ## Other Proxies
 
 | Proxy                                               | Description                                          |
 | ----------------------------------------------------|------------------------------------------------------|
-|[ChangeHeadersProxyModel][changeheadersproxymodel]   | Change horizontal / vertical headers.                |
-|[HighlightMouseProxymodel][highlightmouseproxymodel] | Highlight regions the mouse cursor is hovering over. |
+|[ChangeHeadersProxyModel](changeheadersproxymodel.md)   | Change horizontal / vertical headers.                |
+|[HighlightMouseProxymodel](highlightmouseproxymodel.md) | Highlight regions the mouse cursor is hovering over. |
 
 
 

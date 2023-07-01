@@ -1,5 +1,3 @@
-## SliceColorValuesProxyModel
-
 (Example: high numbers red, low numbers green).
 : To color cells, this proxy needs a minimum and maximum value. Three modes are available:
 : Let the user choose a min max value.

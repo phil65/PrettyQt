@@ -78,7 +78,8 @@ docs = [
     "mkdocstrings[python]",
     "pymdown-extensions",
     "mkdocs-literate-nav",
-    "mkdocs-autorefs",
+    "mkdocs-autolinks-plugin",
+    # "mkdocs-autorefs",
     "mkdocs-glightbox",
 ]
 
@@ -126,7 +127,8 @@ dependencies = [
     "mkdocs-literate-nav",
     "pymdown-extensions",
     "mkdocs-glightbox",
-    "mkdocs-autorefs",
+    # "mkdocs-autorefs",
+    "mkdocs-autolinks-plugin",
 ]
 
 [tool.hatch.envs.docs.scripts]
@@ -254,7 +256,7 @@ black = "^23"
 devtools = "^0"
 commitizen = "^3"
 mkdocs-literate-nav = "^0.6.0"
-mkdocs-autorefs = "^0.4.1"
+mkdocs-autolinks-plugin = "^0.7.0"
 
 [tool.pytest.ini_options]
 minversion = "7.0"

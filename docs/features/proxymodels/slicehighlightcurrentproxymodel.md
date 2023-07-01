@@ -1,5 +1,3 @@
-## HighlightCurrentProxyModel
-
 Proxy model which makes all cells with same content as currently focused cell appear with a user-specified color.
 
 Possible modes are:

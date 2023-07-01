@@ -1,5 +1,3 @@
-## AstModel
-
 Tree model to display an [abstract syntax tree][https://docs.python.org/3/library/ast.html#node-classes] from the builtin ast module.
 
 ### API

@@ -1,6 +1,3 @@
-Widgets
-======
-
 Since this library is huge, I will try to give an overview about some modules and mention some of the included "highlights".
 
 

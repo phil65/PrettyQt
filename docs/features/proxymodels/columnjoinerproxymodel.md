@@ -1,5 +1,3 @@
-## ColumnJoinerProxyModel
-
 Proxy model which joins the contents of several columns based on a formatter and appends it as a new column.
 
 Example: When using a formatter "{0} - {1}: {4}", then the resulting column will show {Text of column 0} - {Text of Column 1}: {Text of Column 4}

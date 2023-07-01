@@ -1,5 +1,3 @@
-## SubClassTreeModel
-
 Tree model to display all derived classes of given type.
 
 ### API

@@ -1,5 +1,3 @@
-## SliceChangeIconSizeProxyModel
-
 This proxy can be used to highlight all cells which contain the same content as the currently focused cell.
 Three modes are possible:
 

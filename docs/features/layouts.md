@@ -1,10 +1,3 @@
-Layouts
-======
-
-
-
-## Models for Python types
-
 ### Context manager to build layouts
 
 ```py

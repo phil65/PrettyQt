@@ -45,7 +45,8 @@ plugins:
 - glightbox
 - literate-nav:
     nav_file: SUMMARY.md
-- autorefs
+# - autorefs  # allows linking to any header
+- autolinks  # allows linking to any markdown page (alternative: https://github.com/Jackiexiao/mkdocs-roamlinks-plugin)
 - mkdocstrings:
     default_handler: python
     handlers:

@@ -1,5 +1,3 @@
-## ParentClassTreeModel
-
 Tree model to display all parent classes of given class.
 
 ### API

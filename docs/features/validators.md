@@ -1,5 +1,3 @@
-# Validators
-
 PrettyQt includes a range of pre-defined validators.
 
 The following validators are included:

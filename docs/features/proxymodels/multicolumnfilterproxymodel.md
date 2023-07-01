@@ -1,7 +1,5 @@
-## MultiColumnFilterProxyModel
-
 This proxy uses seperate search term / values for each column in order to filter the source model, thus avoiding to layer proxy models in case you want to filter based on several columns. That way it is less demanding since filtering for all columns is done in one go.
-This model is used by the [FilterHeader][filterheader] widget.
+This model is used by the [FilterHeader](filterheader.md) widget.
 
 ### Example
 

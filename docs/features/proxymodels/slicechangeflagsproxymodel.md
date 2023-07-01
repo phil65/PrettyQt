@@ -1,19 +1,18 @@
-## SliceChangeFlagsProxyModel
-
 This proxy can selectively change the ItemFlags of the source model. (Example: change cells to read-only)
 
 Supports changing all ItemRoles by passing keyword arguments.
 
 Possible keyword arguments:
-- `selectable`: ItemFlag.ItemIsSelectable,
-- `editable`: ItemFlag.ItemIsEditable,
-- `drag_enabled`: ItemFlag.ItemIsDragEnabled,
-- `drop_enabled`: ItemFlag.ItemIsDropEnabled,
-- `user_checkable`: ItemFlag.ItemIsUserCheckable,
-- `enabled`: ItemFlag.ItemIsEnabled,
-- `auto_tristate`: ItemFlag.ItemIsAutoTristate,
-- `never_has_children`: ItemFlag.ItemNeverHasChildren,
-- `user_tristate`: ItemFlag.ItemIsUserTristate,
+
+* `selectable`: ItemFlag.ItemIsSelectable,
+* `editable`: ItemFlag.ItemIsEditable,
+* `drag_enabled`: ItemFlag.ItemIsDragEnabled,
+* `drop_enabled`: ItemFlag.ItemIsDropEnabled,
+* `user_checkable`: ItemFlag.ItemIsUserCheckable,
+* `enabled`: ItemFlag.ItemIsEnabled,
+* `auto_tristate`: ItemFlag.ItemIsAutoTristate,
+* `never_has_children`: ItemFlag.ItemNeverHasChildren,
+* `user_tristate`: ItemFlag.ItemIsUserTristate,
 
 
 

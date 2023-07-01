@@ -1,6 +1,3 @@
-Models
-======
-
 PrettyQt includes a range of models for Qt-based types, Python built-in types as well as
 some models for data structures of external libraries.
 All models are proper views on datastructures, not populated StandardItemModels.
