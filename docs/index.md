@@ -14,12 +14,12 @@ hide:
 **PrettyQt** is a Python package that provides a pythonic layer on top of the GUI frameworks PyQt6 / PySide6.
 
 ## Main Features
-  - Subclasses for a large part of the Qt classes, enriched with helper and __dunder__ methods to give a feel of a native GUI library.
+  - Subclasses for a large part of the Qt classes, enriched with helper and \__dunder__ methods to give a feel of a native GUI library.
   - more than 80 pre-defined widgets and layouts for common use cases
-  - more than 30 ItemModels for different data types
-  - more than 25 general-purpose [proxy models](proxies.md)
-  - 10 ItemDelegates for different purposes
-  - 20 different [validators](validators.md)
+  - [more than 30 ItemModels for different data types](models.md)
+  - [more than 25 general-purpose proxy models](proxies.md)
+  - [10 ItemDelegates for different purposes](delegates.md)
+  - [20 different validators](validators.md)
   - much, much more.
 
 PrettyQt basically is a wrapper for the whole Qt API (either on top of PySide6 or PyQt6).
