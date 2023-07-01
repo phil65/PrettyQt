@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Literal
+
 from prettyqt import core
 from prettyqt.qt import QtBluetooth
 from prettyqt.utils import bidict
@@ -8,7 +10,147 @@ from prettyqt.utils import bidict
 md = QtBluetooth.QBluetoothUuid.CharacteristicType
 
 
-CHARACTERISTIC_TYPES = bidict(
+CharacteristicTypeStr = Literal[
+    "aerobic_heart_rate_lower",
+    "aerobic_heart_rate_upper",
+    "aerobic_threshold",
+    "age",
+    "anaerobic_heart_rate_lower",
+    "anaerobic_heart_rate_upper",
+    "anaerobic_threshold",
+    "alert_category_id",
+    "alert_category_id_bitmask",
+    "alert_level",
+    "alert_notification_control_point",
+    "alert_status",
+    "apparent_wind_direction",
+    "apparent_wind_speed",
+    "appearance",
+    "barometric_pressure_trend",
+    "battery_level",
+    "blood_pressure_feature",
+    "blood_pressure_measurement",
+    "body_composition_feature",
+    "body_composition_measurement",
+    "body_sensor_location",
+    "boot_keyboard_input_report",
+    "boot_keyboard_output_report",
+    "boot_mouse_input_report",
+    "csc_feature",
+    "csc_measurement",
+    "current_time",
+    "cycling_power_control_point",
+    "cycling_power_feature",
+    "cycling_power_measurement",
+    "cycling_power_vector",
+    "database_change_increment",
+    "date_of_birth",
+    "date_of_threshold_assessment",
+    "date_time",
+    "day_date_time",
+    "day_of_week",
+    "descriptor_value_changed",
+    "device_name",
+    "dew_point",
+    "dst_offset",
+    "elevation",
+    "email_address",
+    "exact_time_256",
+    "fat_burn_heart_rate_lower_limit",
+    "fat_burn_heart_rate_upper_limit",
+    "firmware_revision_string",
+    "first_name",
+    "five_zone_heart_rate_limits",
+    "gender",
+    "glucose_feature",
+    "glucose_measurement",
+    "glucose_measurement_context",
+    "gust_factor",
+    "hardware_revision_string",
+    "max_recommended_heart_rate",
+    "heart_rate_control_point",
+    "heart_rate_max",
+    "heart_rate_measurement",
+    "heat_index",
+    "height",
+    "hid_control_point",
+    "hid_information",
+    "hip_circum_reference",
+    "humidity",
+    "regulatory_certification_list",
+    "intermediate_cuff_pressure",
+    "intermediate_temperature",
+    "irradiance",
+    "language",
+    "last_name",
+    "ln_control_point",
+    "ln_feature",
+    "local_time_information",
+    "location_and_speed",
+    "magnetic_declination",
+    "magnetic_flux_density_2d",
+    "magnetic_magnetic_flux_density_3d",
+    "manufacturer_name_string",
+    "measurement_interval",
+    "model_number_string",
+    "navigation",
+    "new_alert",
+    "peripheral_preferred_connection_parameters",
+    "peripheral_privacy_flag",
+    "pn_pid",
+    "pollen_concentration",
+    "position_quality",
+    "pressure",
+    "protocol_mode",
+    "rainfall",
+    "reconnection_address",
+    "record_access_control_point",
+    "reference_time_information",
+    "report",
+    "report_map",
+    "resting_heart_rate",
+    "ringer_control_point",
+    "ringer_setting",
+    "rsc_feature",
+    "rsc_measurement",
+    "sc_control_point",
+    "scan_interval_window",
+    "scan_refresh",
+    "sensor_location",
+    "serial_number_string",
+    "service_changed",
+    "software_revision_string",
+    "sport_type_for_aerobic_anaerobic_thresholds",
+    "supported_new_alert_category",
+    "supported_unread_alert_category",
+    "system_id",
+    "temperature",
+    "temperature_measurement",
+    "temperature_type",
+    "three_zone_heart_rate_limits",
+    "time_accuracy",
+    "time_source",
+    "time_update_control_point",
+    "time_update_state",
+    "time_with_dst",
+    "time_zone",
+    "true_wind_direction",
+    "true_wind_speed",
+    "two_zone_hear_rate_limits",
+    "tx_power_level",
+    "unread_alert_status",
+    "user_control_point",
+    "user_index",
+    "uv_index",
+    "vo_2_max",
+    "waist_circumference",
+    "weight",
+    "weight_measurement",
+    "weight_scale_feature",
+    "wind_chill",
+]
+
+CHARACTERISTIC_TYPES: bidict[CharacteristicTypeStr, md] = bidict(
     aerobic_heart_rate_lower=md.AerobicHeartRateLowerLimit,
     aerobic_heart_rate_upper=md.AerobicHeartRateUpperLimit,
     aerobic_threshold=md.AerobicThreshold,
@@ -54,8 +196,8 @@ CHARACTERISTIC_TYPES = bidict(
     elevation=md.Elevation,
     email_address=md.EmailAddress,
     exact_time_256=md.ExactTime256,
-    fat_burn_hear_rate_lower_limit=md.FatBurnHeartRateLowerLimit,
-    fat_burn_hear_rate_upper_limit=md.FatBurnHeartRateUpperLimit,
+    fat_burn_heart_rate_lower_limit=md.FatBurnHeartRateLowerLimit,
+    fat_burn_heart_rate_upper_limit=md.FatBurnHeartRateUpperLimit,
     firmware_revision_string=md.FirmwareRevisionString,
     first_name=md.FirstName,
     five_zone_heart_rate_limits=md.FiveZoneHeartRateLimits,
@@ -150,7 +292,23 @@ CHARACTERISTIC_TYPES = bidict(
 
 dt = QtBluetooth.QBluetoothUuid.DescriptorType
 
-DESCRIPTOR_TYPE = bidict(
+DescriptorTypeStr = Literal[
+    "characteristic_extended_properties",
+    "characteristic_user_description",
+    "client_characteristic_configuration",
+    "server_characteristic_configuration",
+    "characteristic_presentation_format",
+    "characteristic_aggregate_format",
+    "valid_range",
+    "external_report_reference",
+    "report_reference",
+    "environmental_sensing_configuration",
+    "environmental_sensing_measurement",
+    "environmental_sensing_trigger_setting",
+    "unknown_descriptor_type",
+]
+
+DESCRIPTOR_TYPE: bidict[DescriptorTypeStr, dt] = bidict(
     characteristic_extended_properties=dt.CharacteristicExtendedProperties,
     characteristic_user_description=dt.CharacteristicUserDescription,
     client_characteristic_configuration=dt.ClientCharacteristicConfiguration,
@@ -168,7 +326,35 @@ DESCRIPTOR_TYPE = bidict(
 
 pu = QtBluetooth.QBluetoothUuid.ProtocolUuid
 
-PROTOCOL_UUID = bidict(
+ProtocolUuidstr = Literal[
+    "sdp",
+    "udp",
+    "rfcomm",
+    "tcp",
+    "tcs_bin",
+    "tcs_at",
+    "att",
+    "obex",
+    "ip",
+    "ftp",
+    "http",
+    "wsp",
+    "bnep",
+    "upnp",
+    "hidp",
+    "hardcopy_control_channel",
+    "hardcopy_data_channel",
+    "hardcopy_notification",
+    "avctp",
+    "avdtp",
+    "cmtp",
+    "udi_c_plain",
+    "mcap_control_channel",
+    "mcap_data_channel",
+    "l2_cap",
+]
+
+PROTOCOL_UUID: bidict[ProtocolUuidstr, pu] = bidict(
     sdp=pu.Sdp,
     udp=pu.Udp,
     rfcomm=pu.Rfcomm,
@@ -198,7 +384,101 @@ PROTOCOL_UUID = bidict(
 
 su = QtBluetooth.QBluetoothUuid.ServiceClassUuid
 
-SERVICE_CLASS_UUID = bidict(
+ServiceClassUuidStr = Literal[
+    "service_discovery_server",
+    "browser_group_descriptor",
+    "public_browse_group",
+    "serial_port",
+    "lan_access_using_ppp",
+    "dial_up_networking",
+    "ir_mc_sync",
+    "obex_object_push",
+    "obex_file_transfer",
+    "ir_mc_sync_command",
+    "headset",
+    "audio_source",
+    "audio_sink",
+    "av_remove_control_target",
+    "advanced_audio_distribution",
+    "av_remote_control",
+    "av_remote_control_controller",
+    "headset_ag",
+    "panu",
+    "nap",
+    "gn",
+    "direct_printing",
+    "reference_printing",
+    "basic_image",
+    "imaging_responder",
+    "imaging_automatic_archive",
+    "imaging_reference_objects",
+    "hands_free",
+    "hands_free_audio_gateway",
+    "direct_printing_reference_objects_service",
+    "reflected_ui",
+    "basic_printing",
+    "printing_status",
+    "human_interface_device_service",
+    "hardcopy_cable_replacement",
+    "hcr_print",
+    "hcr_scan",
+    "sim_access",
+    "phonebook_access_pce",
+    "phonebook_access_pse",
+    "phonebook_access",
+    "headset_hs",
+    "message_access_server",
+    "message_notification_server",
+    "message_access_profile",
+    "gnss",
+    "gnss_server",
+    "display_3d",
+    "glasses_3d",
+    "synchronization_3d",
+    "mps_profile",
+    "mps_service",
+    "pnp_information",
+    "generic_networking",
+    "generic_file_transfer",
+    "generic_audio",
+    "generic_telephony",
+    "video_source",
+    "video_sink",
+    "video_distribution",
+    "hdp",
+    "hdp_source",
+    "hdp_sink",
+    "generic_access",
+    "generic_attribute",
+    "immediate_alert",
+    "link_loss",
+    "tx_power",
+    "current_time_service",
+    "reference_time_update_service",
+    "next_dst_change_service",
+    "glucose",
+    "health_thermometer",
+    "device_information",
+    "heart_rate",
+    "phone_alert_status_service",
+    "battery_service",
+    "blood_pressure",
+    "alert_notification_service",
+    "human_interface_device",
+    "scan_parameters",
+    "running_speed_and_cadence",
+    "cycling_speed_and_cadence",
+    "cycling_power",
+    "location_and_navigation",
+    "environmental_sensing",
+    "body_composition",
+    "user_data",
+    "weight_scale",
+    "bond_management",
+    "continuous_glucose_monitoring",
+]
+
+SERVICE_CLASS_UUID: bidict[ServiceClassUuidStr, su] = bidict(
     service_discovery_server=su.ServiceDiscoveryServer,
     browser_group_descriptor=su.BrowseGroupDescriptor,
     public_browse_group=su.PublicBrowseGroup,
@@ -294,8 +574,25 @@ SERVICE_CLASS_UUID = bidict(
 
 
 class BluetoothUuid(core.UuidMixin, QtBluetooth.QBluetoothUuid):
-    pass
+    @classmethod
+    def characteristic_to_string(cls, characteristic: CharacteristicTypeStr | md) -> str:
+        return cls.characteristicToString(
+            CHARACTERISTIC_TYPES.get_enum_value(characteristic)
+        )
+
+    @classmethod
+    def descriptor_to_string(cls, descriptor: DescriptorTypeStr | dt) -> str:
+        return cls.descriptorToString(DESCRIPTOR_TYPE.get_enum_value(descriptor))
+
+    @classmethod
+    def protocol_to_string(cls, protocol: ProtocolUuidstr | pu) -> str:
+        return cls.protocolToString(PROTOCOL_UUID.get_enum_value(protocol))
+
+    @classmethod
+    def service_class_to_string(cls, service_class: DescriptorTypeStr | su) -> str:
+        return cls.serviceClassToString(SERVICE_CLASS_UUID.get_enum_value(service_class))
 
 
 if __name__ == "__main__":
     address = BluetoothUuid()
+    BluetoothUuid.service_class_to_string("bond_management")

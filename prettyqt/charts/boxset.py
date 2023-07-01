@@ -7,17 +7,17 @@ from prettyqt.qt import QtCharts
 from prettyqt.utils import bidict, get_repr
 
 
-VALUE_POSITION = bidict(
+ValuePositionStr = Literal[
+    "lower_extreme", "lower_quartile", "median", "upper_quartile", "upper_extreme"
+]
+
+VALUE_POSITION: bidict[ValuePositionStr, QtCharts.QBoxSet.ValuePositions] = bidict(
     lower_extreme=QtCharts.QBoxSet.ValuePositions.LowerExtreme,
     lower_quartile=QtCharts.QBoxSet.ValuePositions.LowerQuartile,
     median=QtCharts.QBoxSet.ValuePositions.Median,
     upper_quartile=QtCharts.QBoxSet.ValuePositions.UpperQuartile,
     upper_extreme=QtCharts.QBoxSet.ValuePositions.UpperExtreme,
 )
-
-ValuePositionStr = Literal[
-    "lower_extreme", "lower_quartile", "median", "upper_quartile", "upper_extreme"
-]
 
 
 class BoxSet(core.ObjectMixin, QtCharts.QBoxSet):

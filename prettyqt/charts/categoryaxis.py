@@ -7,12 +7,14 @@ from prettyqt import charts
 from prettyqt.utils import bidict
 
 
-LABELS_POSITIONS = bidict(
+LabelsPositionStr = Literal["center", "on_value"]
+
+LABELS_POSITIONS: bidict[
+    LabelsPositionStr, charts.QCategoryAxis.AxisLabelsPosition
+] = bidict(
     center=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionCenter,
     on_value=charts.QCategoryAxis.AxisLabelsPosition.AxisLabelsPositionOnValue,
 )
-
-LabelsPositionStr = Literal["center", "on_value"]
 
 
 class CategoryAxis(charts.ValueAxisMixin, charts.QCategoryAxis):

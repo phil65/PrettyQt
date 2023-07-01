@@ -7,16 +7,17 @@ from prettyqt.qt import QtCharts
 from prettyqt.utils import bidict, get_repr
 
 
-LABEL_POSITION = bidict(
+LabelPositionStr = Literal[
+    "outside", "inside_horizontal", "inside_tangential", "inside_normal"
+]
+
+
+LABEL_POSITION: bidict[LabelPositionStr, QtCharts.QPieSlice.LabelPosition] = bidict(
     outside=QtCharts.QPieSlice.LabelPosition.LabelOutside,
     inside_horizontal=QtCharts.QPieSlice.LabelPosition.LabelInsideHorizontal,
     inside_tangential=QtCharts.QPieSlice.LabelPosition.LabelInsideTangential,
     inside_normal=QtCharts.QPieSlice.LabelPosition.LabelInsideNormal,
 )
-
-LabelPositionStr = Literal[
-    "outside", "inside_horizontal", "inside_tangential", "inside_normal"
-]
 
 
 class PieSlice(core.ObjectMixin, QtCharts.QPieSlice):

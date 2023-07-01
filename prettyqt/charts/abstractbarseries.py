@@ -6,14 +6,16 @@ from prettyqt import charts
 from prettyqt.utils import bidict
 
 
-LABELS_POSITIONS = bidict(
+LabelsPositionStr = Literal["center", "inside_end", "inside_base", "outside_end"]
+
+LABELS_POSITIONS: bidict[
+    LabelsPositionStr, charts.QAbstractBarSeries.LabelsPosition
+] = bidict(
     center=charts.QAbstractBarSeries.LabelsPosition.LabelsCenter,
     inside_end=charts.QAbstractBarSeries.LabelsPosition.LabelsInsideEnd,
     inside_base=charts.QAbstractBarSeries.LabelsPosition.LabelsInsideBase,
     outside_end=charts.QAbstractBarSeries.LabelsPosition.LabelsOutsideEnd,
 )
-
-LabelsPositionStr = Literal["center", "inside_end", "inside_base", "outside_end"]
 
 
 class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
@@ -35,7 +37,7 @@ class AbstractBarSeriesMixin(charts.AbstractSeriesMixin):
         Args:
             position: labels position
         """
-        self.setLabelsPosition(LABELS_POSITIONS[position])
+        self.setLabelsPosition(LABELS_POSITIONS.get_enum_value(position))
 
     def get_labels_position(self) -> LabelsPositionStr:
         """Return current labels position.

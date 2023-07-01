@@ -30,22 +30,22 @@ ThemeStr = Literal[
     "Qt",
 ]
 
-ANIMATION_OPTIONS = bidict(
+AnimationOptionStr = Literal["none", "grid_axis", "series", "all"]
+
+ANIMATION_OPTIONS: bidict[AnimationOptionStr, charts.QChart.AnimationOption] = bidict(
     none=charts.QChart.AnimationOption.NoAnimation,
     grid_axis=charts.QChart.AnimationOption.GridAxisAnimations,
     series=charts.QChart.AnimationOption.SeriesAnimations,
     all=charts.QChart.AnimationOption.AllAnimations,
 )
 
-AnimationOptionStr = Literal["none", "grid_axis", "series", "all"]
+ChartTypeStr = Literal["undefined", "cartesian", "polar"]
 
-CHART_TYPES = bidict(
+CHART_TYPES: bidict[ChartTypeStr, charts.QChart.ChartType] = bidict(
     undefined=charts.QChart.ChartType.ChartTypeUndefined,
     cartesian=charts.QChart.ChartType.ChartTypeCartesian,
     polar=charts.QChart.ChartType.ChartTypePolar,
 )
-
-ChartTypeStr = Literal["undefined", "cartesian", "polar"]
 
 
 class ChartMixin(widgets.GraphicsWidgetMixin):
