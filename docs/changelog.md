@@ -1,3 +1,26 @@
+## v1.51.0 (2023-07-01)
+
+### Feat
+
+- **WidgetsDetailsModel**: use checkstate role for bool values
+- add PolarsTableModel
+- add GitPythonTreeModel
+- **ImportLibTreeModel**: add DistributionRole
+- add spatialaudio module
+- **SubClassTreeModel**: support UnionTypes
+- **proxifier**: add highlight_current method
+- **AnnotatedScrollBar**: support horizontal
+- **StandardItem**: add is_checked / toggle_checkstate methods
+- Properties for IntegerValidator / TextLengthValidator
+- **ClassTreeModel**: add caching
+- add ChangeHeadersProxyModel
+
+### Fix
+
+- **MetaObject**: fix offsets for MetaProps etc
+- **SliceIdentityProxyModel**: row, column indexing instead of column, row
+- use checkstate enum instead of True/False
+
 ## v1.50.0 (2023-06-27)
 
 ### Feat
