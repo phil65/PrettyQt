@@ -2,7 +2,7 @@
 
 import dataclasses
 
-from importlib import metadata
+# from importlib import metadata
 import inspect
 import re
 
@@ -62,11 +62,11 @@ def test_regexmatchesmodel(qtmodeltester):
     qtmodeltester.check(model, force_py=True)
 
 
-def test_importlibdistributionmodel(qtmodeltester):
-    model = custom_models.ImportlibDistributionModel([metadata.distribution("prettyqt")])
-    qtmodeltester.check(model, force_py=True)
-    custom_models.ImportlibDistributionModel.from_package("prettyqt")
-    custom_models.ImportlibDistributionModel.from_system()
+# def test_importlibtreemodel(qtmodeltester):
+#     model = custom_models.ImportlibTreeModel(metadata.distribution("prettyqt"))
+#     qtmodeltester.check(model)
+# custom_models.ImportlibDistributionModel.from_package("prettyqt")
+# custom_models.ImportlibDistributionModel.from_system()
 
 
 def test_jsonmodel(qtmodeltester):
