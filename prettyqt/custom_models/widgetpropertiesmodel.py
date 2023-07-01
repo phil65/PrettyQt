@@ -5,6 +5,7 @@ import logging
 from prettyqt import constants, core, eventfilters
 from prettyqt.qt import QtGui, QtWidgets
 
+
 logger = logging.getLogger(__name__)
 
 

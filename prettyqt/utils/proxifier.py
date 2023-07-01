@@ -313,8 +313,10 @@ class Proxyfier:
         | constants.OrientationStr = constants.HORIZONTAL,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ) -> custom_models.ChangeHeadersProxyModel:
+        from prettyqt import custom_models
+
         proxy = custom_models.ChangeHeadersProxyModel(
-            headers=headers, role=role, orientation=orientation, parent=self._widget
+            header=headers, role=role, orientation=orientation, parent=self._widget
         )
         proxy.setSourceModel(self._widget.model())
         self._widget.set_model(proxy)

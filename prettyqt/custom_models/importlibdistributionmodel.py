@@ -5,6 +5,7 @@ import contextlib
 import enum
 
 from importlib import metadata
+import logging
 import pkgutil
 
 from packaging.markers import Marker
@@ -13,6 +14,9 @@ from typing_extensions import Self
 
 from prettyqt import constants, core, custom_models
 from prettyqt.utils import treeitem
+
+
+logger = logging.getLogger(__name__)
 
 
 def load_dist_info(name: str) -> metadata.Distribution | None:
@@ -30,7 +34,11 @@ def list_system_modules() -> list[metadata.Distribution]:
 
 def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     dist = metadata.distribution(package_name)
-    modules = {Requirement(i).name for i in dist.requires} if dist.requires else set()
+    try:
+        modules = {Requirement(i).name for i in dist.requires} if dist.requires else set()
+    except ValueError as e:
+        logger.error(f"{e} for {dist.name}")
+        return []
     return [dist for i in modules if (dist := load_dist_info(i)) is not None]
 
 

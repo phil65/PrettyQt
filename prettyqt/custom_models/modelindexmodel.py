@@ -13,17 +13,16 @@ logger = logging.getLogger(__name__)
 
 class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
     ID = "modelindex"
-    FIXED_HEADER = ["Path", "Column", "Row", "Flags"]
+    FIXED_HEADER = ["Path", "Row", "Column", "Flags"]
 
     def __init__(
         self,
         indexes: list[core.ModelIndex],
-        use_model_roles: bool = False,
         **kwargs,
     ):
+        self._use_model_roles = False
         super().__init__(**kwargs)
         self.items = indexes
-        self._use_model_roles = use_model_roles
         self._update_columns()
 
     def _update_columns(self):
@@ -82,12 +81,12 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
                 #  pieces = self.get_breadcrumbs_path()
-                pieces = self.get_index_key(idx)
+                pieces = self.get_index_key(idx, include_column=True)
                 return " / ".join(str(i) for i in pieces)
             case constants.DISPLAY_ROLE, 1:
-                return idx.column()
-            case constants.DISPLAY_ROLE, 2:
                 return idx.row()
+            case constants.DISPLAY_ROLE, 2:
+                return idx.column()
             case constants.DISPLAY_ROLE, 3:
                 roles = constants.ITEM_FLAG.get_list(idx.flags())
                 return " / ".join(roles)
@@ -114,6 +113,14 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
         # idx = self.items[index.row()]
         # return idx.flags()
 
+    def set_use_model_roles(self, value: bool):
+        self._use_model_roles = value
+
+    def is_using_model_roles(self) -> bool:
+        return self._use_model_roles
+
+    use_model_roles = core.Property(bool, is_using_model_roles, set_use_model_roles)
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
@@ -121,12 +128,12 @@ if __name__ == "__main__":
     app = widgets.app()
     with app.debug_mode():
         view = widgets.TableView()
-        test = custom_models.ParentClassTreeModel(widgets.PlainTextEdit, parent=view)
+        test = custom_models.ParentClassTreeModel(widgets.QWidget, show_mro=True)
         test.prefetch_tree()
         indexes = list(test.iter_tree())
         model = ModelIndexModel(indexes=indexes, parent=view)
         for i, v in enumerate(model.role_mapping.values(), start=len(model.FIXED_HEADER)):
-            view.set_delegate("variant", column=i, data_role=v)
+            view.set_delegate("variant", column=i, role=v)
         # view.set_delegate("variant")
         view.set_model(model)
         view.set_selection_behavior("rows")
