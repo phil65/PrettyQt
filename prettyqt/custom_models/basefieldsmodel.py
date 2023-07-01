@@ -17,15 +17,17 @@ class BaseFieldsModel(core.AbstractTableModel):
     def __init__(self, instance, **kwargs):
         self._instance = instance
         self._fields = self.get_fields(instance)
+        self._field_names = list(self._fields.keys())
         super().__init__(**kwargs)
         self.set_instance(instance)
 
-    def get_fields(self, instance):
+    def get_fields(self, instance) -> dict[str, Any]:
         return NotImplemented
 
     def set_instance(self, instance):
         self._instance = instance
         self._fields = self.get_fields(instance)
+        self._field_names = list(self._fields.keys())
         self.update_all()
 
     def columnCount(self, parent=None) -> int:
@@ -41,8 +43,7 @@ class BaseFieldsModel(core.AbstractTableModel):
             case constants.HORIZONTAL, constants.DISPLAY_ROLE:
                 return self.HEADER[section]
             case constants.VERTICAL, constants.DISPLAY_ROLE:
-                field = self._fields[section]
-                return field.name
+                return self._field_names[section]
 
     def setData(
         self,
@@ -52,10 +53,10 @@ class BaseFieldsModel(core.AbstractTableModel):
     ) -> bool:
         if not index.isValid():
             return None
-        field = self._fields[index.row()]
         match role, index.column():
             case constants.USER_ROLE | constants.EDIT_ROLE, _:
-                setattr(self._instance, field.name, value)
+                field_name = self._field_names[index.row()]
+                setattr(self._instance, field_name, value)
                 self.update_row(index.row())
                 return True
         return False
@@ -65,13 +66,22 @@ class BaseFieldsModel(core.AbstractTableModel):
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
-        return 0 if parent.isValid() else len(self._fields)
+        return 0 if parent.isValid() else len(self._field_names)
+
+    def _is_writable(self, field_name: str) -> bool:
+        """Dumb check, set same value and check if it works.
+
+        Should be overridden by subclasses if possible.
+        """
+        val = getattr(self._instance, field_name)
+        with contextlib.suppress(Exception):
+            setattr(self._instance, field_name, val)
+            return True
+        return False
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        field = self._fields[index.row()]
+        field_name = self._field_names[index.row()]
         if index.column() == 0:
-            val = getattr(self._instance, field.name)
-            with contextlib.suppress(Exception):
-                setattr(self._instance, field.name, val)
+            if self._is_writable(field_name):
                 return super().flags(index) | constants.IS_EDITABLE
         return super().flags(index)

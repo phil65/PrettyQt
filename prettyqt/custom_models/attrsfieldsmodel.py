@@ -40,7 +40,8 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
         return isinstance(instance, datatypes.IsAttrs)
 
     def get_fields(self, instance: datatypes.IsAttrs):
-        return attrs.fields(type(instance))
+        fields = attrs.fields(type(instance))
+        return {field.name: field for field in fields}
 
     def data(
         self,
@@ -49,16 +50,17 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
     ):
         if not index.isValid():
             return None
-        field = self._fields[index.row()]
+        field_name = self._field_names[index.row()]
+        field = self._fields[field_name]
         match role, index.column():
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
             case constants.DISPLAY_ROLE, 0:
-                return repr(getattr(self._instance, field.name))
+                return repr(getattr(self._instance, field_name))
             case constants.EDIT_ROLE, 0:
-                return getattr(self._instance, field.name)
+                return getattr(self._instance, field_name)
             case constants.DISPLAY_ROLE, 1:
                 return field.type
             case constants.FONT_ROLE, 1:
@@ -84,7 +86,7 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
             case constants.CHECKSTATE_ROLE, 10:
                 return self.to_checkstate(field.validator is not None)
             case constants.USER_ROLE, _:
-                return getattr(self._instance, field.name)
+                return getattr(self._instance, field_name)
 
 
 if __name__ == "__main__":

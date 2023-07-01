@@ -3,6 +3,8 @@ from __future__ import annotations
 import dataclasses
 import logging
 
+from typing import Any
+
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtGui
 from prettyqt.utils import datatypes
@@ -32,8 +34,9 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
     def supports(cls, instance) -> bool:
         return isinstance(instance, datatypes.IsDataclass)
 
-    def get_fields(self, instance: datatypes.IsDataclass):
-        return dataclasses.fields(instance)
+    def get_fields(self, instance: datatypes.IsDataclass) -> dict[str, Any]:
+        fields = dataclasses.fields(instance)
+        return {field.name: field for field in fields}
 
     def data(
         self,
@@ -42,16 +45,17 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
     ):
         if not index.isValid():
             return None
-        field = self._fields[index.row()]
+        field_name = self._field_names[index.row()]
+        field = self._fields[field_name]
         match role, index.column():
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
             case constants.DISPLAY_ROLE, 0:
-                return repr(getattr(self._instance, field.name))
+                return repr(getattr(self._instance, field_name))
             case constants.EDIT_ROLE, 0:
-                return getattr(self._instance, field.name)
+                return getattr(self._instance, field_name)
             case constants.DISPLAY_ROLE, 1:
                 return field.type
             case constants.FONT_ROLE, 1:
@@ -73,12 +77,10 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
             case constants.CHECKSTATE_ROLE, 8:
                 return self.to_checkstate(field.kw_only)
             case constants.USER_ROLE, _:
-                return getattr(self._instance, field.name)
+                return getattr(self._instance, field_name)
 
-    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
-        if index.column() == 0 and not self._instance.__dataclass_params__.frozen:
-            return super().flags(index) | constants.IS_EDITABLE
-        return super().flags(index)
+    def _is_writable(self, field_name: str) -> bool:
+        return not self._instance.__dataclass_params__.frozen
 
 
 if __name__ == "__main__":

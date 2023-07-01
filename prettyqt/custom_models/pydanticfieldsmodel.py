@@ -16,12 +16,9 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
         "Value",
         "Type",
         "Default",
-        "Allow none",
+        "Frozen",
         "Alias",
-        "Annotation",
-        "Is complex",
-        "Required",
-        "Shape",
+        "in repr",
     ]
 
     def __init__(self, instance: pydantic.BaseModel, **kwargs):
@@ -32,7 +29,7 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
         return isinstance(instance, pydantic.BaseModel)
 
     def get_fields(self, instance: pydantic.BaseModel):
-        return list(type(instance).__fields__.values())
+        return instance.model_fields
 
     def data(
         self,
@@ -41,18 +38,19 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
     ):
         if not index.isValid():
             return None
-        field = self._fields[index.row()]
+        field_name = self._field_names[index.row()]
+        field = self._fields[field_name]
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
-                return repr(getattr(self._instance, field.name))
+                return repr(getattr(self._instance, field_name))
             case constants.EDIT_ROLE, 0:
-                return getattr(self._instance, field.name)
+                return getattr(self._instance, field_name)
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
             case constants.DISPLAY_ROLE, 1:
-                return field.type_
+                return repr(field.annotation)
             case constants.FONT_ROLE, 1:
                 font = QtGui.QFont()
                 font.setItalic(True)
@@ -60,19 +58,13 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
             case constants.DISPLAY_ROLE, 2:
                 return field.default
             case constants.CHECKSTATE_ROLE, 3:
-                return self.to_checkstate(field.allow_none)
+                return self.to_checkstate(bool(field.frozen))
             case constants.DISPLAY_ROLE, 4:
                 return field.alias
-            case constants.DISPLAY_ROLE, 5:
-                return repr(field.annotation)
-            case constants.CHECKSTATE_ROLE, 6:
-                return self.to_checkstate(field.is_complex)
-            case constants.CHECKSTATE_ROLE, 7:
-                return self.to_checkstate(field.required)
-            case constants.DISPLAY_ROLE, 8:
-                return field.shape
+            case constants.CHECKSTATE_ROLE, 5:
+                return self.to_checkstate(field.repr)
             case constants.USER_ROLE, _:
-                return getattr(self._instance, field.name)
+                return getattr(self._instance, field_name)
 
 
 if __name__ == "__main__":
