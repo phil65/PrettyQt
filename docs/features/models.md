@@ -44,7 +44,7 @@ All models are proper views on datastructures, not populated StandardItemModels.
 | `pandas.DataFrame` | fsspec | PandasTableModel | Model to show a pandas DataFrame
 | `pandas.Index` | pandas | PandasIndexModel | Model to show a pandas (Multi)Index
 | `polars.DataFrame` | polars | [PolarsTableModel](polarstablemodel.md) | Model to display a polars DataFrame
-| `git.Repo`| gitpython | [GitPythonTreeModel](gitpythontreemodel.md) | Model to display a polars DataFrame
-| `lxml.etree._Element` | lxml | Tree view for an xml ElementTree
+| `git.Repo, git.Tree`| gitpython | [GitPythonTreeModel](gitpythontreemodel.md) | Model to display a polars DataFrame
+| `lxml.etree._Element` | lxml | [XmlModel](xmlmodel.md) | Tree view for an xml ElementTree
 
 

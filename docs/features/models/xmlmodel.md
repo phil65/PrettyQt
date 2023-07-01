@@ -1,10 +1,8 @@
-::: prettyqt.custom_models.ImportlibTreeModel
-
-Tree model to display a python [distribution](https://docs.python.org/3/library/importlib.metadata.html#distributions) and its dependencies.
+::: prettyqt.custom_models.XmlModel
 
 ## Supports
 
-`importlib.metadata.distribution`
+`ET.ElementTree | lxml.etree._Element`
 
 ### Additional roles
 
