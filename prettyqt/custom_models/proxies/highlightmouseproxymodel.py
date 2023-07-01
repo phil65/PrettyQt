@@ -15,7 +15,15 @@ logger = logging.getLogger(__name__)
 
 
 class HighlightMouseProxyModel(core.IdentityProxyModel):
-    """Highlights all cells with same row / column as mouse position."""
+    """Proxy model which highlights all cells with same row / column as mouse position.
+
+    The proxy can work in four different modes.
+
+    * column: The column the mouse is currently hovering over is highlighted.
+    * row: The row the mouse is currently hovering over is highlighted.
+    * both: Combination of column and row mode.
+    * single: only the hovered cell is highlighted.
+    """
 
     ID = "highlight_mouse"
 

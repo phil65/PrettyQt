@@ -160,7 +160,10 @@ class UsageCountColumn(custom_models.ColumnItem):
 
 
 class ActionsModel(custom_models.ColumnTableModel):
-    """Table model to display a list of QActions."""
+    """Table model to display a list of QActions.
+
+    All properties of the Action can be edited.
+    """
 
     COLUMNS = [
         NameColumn,

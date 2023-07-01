@@ -74,12 +74,34 @@ class SliceCheckableProxyModel(custom_models.SliceIdentityProxyModel):
 
 
 class SliceCheckableTreeProxyModel(custom_models.SliceIdentityProxyModel):
+    """Proxy model to make a tree model checkable.
+
+    In contrast to SliceCheckableProxyModel, any checkstate change is propagated to
+    parent and child indexes. (child indexes will also get the new checkstate, parent
+    indexes will become partially checked if needed.)
+
+    ### Example
+
+    ```py
+    model = MyModel()
+    table = widgets.TreeView()
+    table.set_model(model)
+    table.proxifier[:, 0].set_checkable(tree=True)
+    table.show()
+    # or
+    proxy = custom_models.SliceCheckableTreeProxyModel(indexer=0)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
+
     ID = "checkable_tree"
     checkstate_changed = core.Signal(core.ModelIndex, constants.CheckState)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self._checked: dict[tuple[int, int], constants.CheckState] = dict()
+        self._checked: dict[tuple[int, int], constants.CheckState] = {}
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():

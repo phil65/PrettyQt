@@ -11,7 +11,36 @@ HighlightModeStr = Literal["column", "row", "all"]
 
 
 class SliceHighlightCurrentProxyModel(custom_models.SliceIdentityProxyModel):
-    """Highlights all cells which have same data as current index in given role."""
+    """Proxy model which highlights all cells with same data as current index.
+
+    Highlights all cells with same content in given role as currently focused cell
+    with a user-specified color.
+
+    Possible modes are:
+
+    * All: Highlight all cells within given slice
+    * Column: Highlight all cells of same column as current if cell is within given slice.
+    * Row: Highlight all cells of same row as current if cell is within given slice.
+
+    !!! note
+        This is a slice proxy and can be selectively applied to a model.
+
+    ### Example
+
+    ```py
+    model = MyModel()
+    table = widgets.TableView()
+    table.set_model(model)
+    table[:, :3].proxify.highlight_current(mode="all")
+    table.show()
+    # or
+    indexer = (slice(None), slice(None, 3))
+    proxy = custom_models.SliceFilterProxyModel(indexer=indexer)
+    proxy.set_source_model(model)
+    table.set_model(proxy)
+    table.show()
+    ```
+    """
 
     ID = "highlight_current"
 

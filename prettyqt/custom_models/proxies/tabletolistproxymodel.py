@@ -4,7 +4,11 @@ from prettyqt import constants, core
 
 
 class TableToListProxyModel(core.IdentityProxyModel):
-    """Model to flatten a table to a list."""
+    """Proxy model to flatten a table to a list.
+
+    Reshapes a table by concatenating all columns into one large column,
+    so that the new rowCount equals to sourceModel rowCount * sourceModel columnCount.
+    """
 
     ID = "table_to_list"
 
