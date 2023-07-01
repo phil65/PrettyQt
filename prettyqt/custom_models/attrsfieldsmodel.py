@@ -37,7 +37,11 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
     def get_fields(self, instance: datatypes.IsAttrs):
         return attrs.fields(type(instance))
 
-    def data(self, index: QtCore.QModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: QtCore.QModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
         field = self._fields[index.row()]

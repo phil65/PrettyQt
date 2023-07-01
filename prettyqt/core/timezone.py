@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Literal
 
 from prettyqt import constants, core
-from prettyqt.utils import bidict, get_repr
+from prettyqt.utils import bidict, datatypes, get_repr
 
 
 NameTypeStr = Literal["default", "long", "short", "offset"]
@@ -27,8 +27,8 @@ TIME_TYPE: bidict[TimeTypeStr, core.QTimeZone.TimeType] = bidict(
 class TimeZone(core.QTimeZone):
     def __init__(self, *args):
         match args:
-            case (str() as string,):
-                super().__init__(core.QByteArray(string.encode()))
+            case (str() as string, *rest):
+                super().__init__(core.QByteArray(string.encode()), *rest)
             case _:
                 super().__init__(*args)
 
@@ -46,15 +46,19 @@ class TimeZone(core.QTimeZone):
 
     def get_display_name(
         self,
-        date_time: core.QDateTime | TimeTypeStr,
+        date_time: datatypes.DateTimeType | TimeTypeStr,
         name_type: NameTypeStr | core.QTimeZone.NameType = "default",
-        locale: core.Locale | None = None,
+        locale: core.QLocale | None = None,
     ) -> str:
-        dt = TIME_TYPE.get_enum_value(date_time)
-        name_val = NAME_TYPE.get_enum_value(name_type)
-        if locale is None:
-            locale = core.Locale()
-        return self.displayName(dt, name_val, locale)
+        if date_time in list(TIME_TYPE) + list(TIME_TYPE.inverse):  # needs rework
+            dt = TIME_TYPE.get_enum_value(date_time)
+        else:
+            dt = datatypes.to_datetime(date_time)
+        return self.displayName(
+            dt,
+            NAME_TYPE.get_enum_value(name_type),
+            locale or core.QLocale(),
+        )
 
     def get_time_spec(self) -> constants.TimeSpecStr:
         return constants.TIME_SPEC.inverse[self.timeSpec()]
@@ -67,5 +71,6 @@ class TimeZone(core.QTimeZone):
 
 
 if __name__ == "__main__":
-    date = core.TimeZone(2000, 11, 11)
+    date = core.TimeZone(2000)
     dt = TimeZone(date)
+    print(dt.get_display_name("standard", "short"))

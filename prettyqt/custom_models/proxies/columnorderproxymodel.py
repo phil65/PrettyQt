@@ -6,6 +6,10 @@ from prettyqt import constants, core
 class ColumnOrderProxyModel(core.IdentityProxyModel):
     ID = "column_order"
 
+    def __init__(self, order: list[int], **kwargs):
+        self._column_order = order
+        super().__init__(**kwargs)
+
     def get_column_order(self) -> list[int]:
         return self._column_order
 

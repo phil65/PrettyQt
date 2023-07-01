@@ -24,7 +24,7 @@ class AttrsModel(custom_models.BaseDataclassModel):
             case _:
                 return False
 
-    def get_fields(self):
+    def get_fields(self) -> list:
         return list(attrs.fields(self.Class))
 
 

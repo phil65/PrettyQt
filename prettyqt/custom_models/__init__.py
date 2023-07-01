@@ -18,7 +18,7 @@ from .nestedmodel import NestedModel
 # Python type models
 
 from .regexmatchesmodel import RegexMatchesModel
-from .importlibdistributionmodel import ImportlibDistributionModel
+from .importlibdistributionmodel import ImportlibTreeModel
 from .jsonmodel import JsonModel
 from .astmodel import AstModel
 from .classtreemodel import SubClassTreeModel, ParentClassTreeModel
@@ -80,7 +80,7 @@ from .proxies.proxymapper import ProxyMapper
 __all__ = [
     "SelectionMixin",
     "TreeModel",
-    "ImportlibDistributionModel",
+    "ImportlibTreeModel",
     "ModelIndexModel",
     "RegexMatchesModel",
     "ColumnItemModel",
