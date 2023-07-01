@@ -37,15 +37,17 @@ All models are proper views on datastructures, not populated StandardItemModels.
 
 ### External type models
 
-| Type | Model | Description |
-|------|-------|-------------|
-| `AttrsDataclass` | AttrsFieldsModel | Detail table containing all relevant information for each Attrs dataclass.
-| `list[AttrsDataclass]`| AttrsModel | comparison view for a list of Pydantic models.
-|`pydantic.BaseModel`| PydanticFieldsModel | Detail table containing all relevant information for each BaseModel field.
-| `list[pydantic.BaseModel]` | PydanticModel | comparison view for a list of Pydantic models.
-| `fsspec.FileSystem` | FsSpecModel | Model with same interface as QFileSystemModel
-| `pandas.DataFrame` | PandasTableModel | Model to show a pandas DataFrame
-| `pandas.Index` | PandasIndexModel | Model to show a pandas (Multi)Index
-| `polars.DataFrame` | PolarsTableModel | Model to display a polars DataFrame
+| Type | Package | Model | Description |
+|------|---------|-------|-------------|
+| `AttrsDataclass` | attrs | AttrsFieldsModel | Detail table containing all relevant information for each Attrs dataclass.
+| `list[AttrsDataclass]`| attrs | AttrsModel | comparison view for a list of Pydantic models.
+|`pydantic.BaseModel`| pydantic | PydanticFieldsModel | Detail table containing all relevant information for each BaseModel field.
+| `list[pydantic.BaseModel]` | pydantic | PydanticModel | comparison view for a list of Pydantic models.
+| `fsspec.FileSystem` | fsspec | FsSpecModel | Model with same interface as QFileSystemModel
+| `pandas.DataFrame` | fsspec | PandasTableModel | Model to show a pandas DataFrame
+| `pandas.Index` | pandas | PandasIndexModel | Model to show a pandas (Multi)Index
+| `polars.DataFrame` | polars | PolarsTableModel | Model to display a polars DataFrame
+| `git.Repo`| gitpython | [GitPythonTreeModel][gitpythontreemodel] | Model to display a polars DataFrame
+| `lxml.etree._Element` | lxml | Tree view for an xml ElementTree
 
 

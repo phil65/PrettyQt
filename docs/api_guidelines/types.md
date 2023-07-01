@@ -70,6 +70,12 @@ page.set_url("http://www.github.com/phil65/prettyqt")
 * `str`
 * `bytes`
 
+Example:
+```py
+animation = core.PropertyAnimation()
+animation.set_property_animation("pos")
+```
+
 **QtCore.QMargins**
 
 * `tuple[int, int, int, int]` (left, top, right, bottom)
@@ -78,10 +84,25 @@ page.set_url("http://www.github.com/phil65/prettyqt")
 * `None` (same as 0)
 * `QtCore.QMarginsF`
 
+Example:
+```py
+chart = charts.Chart()
+chart.set_margins((4, 2, 0, 0))
+chart.set_margins((1, 2))
+chart.set_margins(5)
+chart.set_margins(None)
+```
+
 **QtCore.QPoint**
 
 * `tuple[int, int]`
 * `QtCore.QPointF`
+
+Example:
+```py
+point = core.Line()
+point.set_p1((4, 2))
+```
 
 **QtCore.QPointF**
 
