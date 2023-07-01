@@ -19,6 +19,7 @@
         * [GitPythonTreeModel](features/models/gitpythontreemodel.md)
         * [ShortcutsModel](features/models/shortcutsmodel.md)
         * [StorageInfoModel](features/models/storageinfomodel.md)
+        * [XmlModel](features/models/xmlmodel.md)
     * [Proxy models](features/proxies.md)
         * [SliceFilterProxyModel](features/proxymodels/slicefilterproxymodel.md)
         * [SliceChangeFlagsProxyModel](features/proxymodels/slicechangeflagsproxymodel.md)

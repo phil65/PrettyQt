@@ -73,6 +73,16 @@ from .proxies.highlightmouseproxymodel import HighlightMouseProxyModel
 # Proxy tooling
 from .proxies.proxymapper import ProxyMapper
 
+# Models for "external types"
+# import importlib.util
+
+# if importlib.util.find_spec("attrs") is not None:
+#     from .attrsmodel import AttrsModel
+#     from .attrsfieldsmodel import AttrsFieldsModel
+# if importlib.util.find_spec("pydantic") is not None:
+#     from .pydanticmodel import PydanticModel
+#     from .pydanticfieldsmodel import PydanticFieldsModel
+
 __all__ = [
     "SelectionMixin",
     "TreeModel",
@@ -130,4 +140,9 @@ __all__ = [
     "SliceColorValuesProxyModel",
     "HighlightMouseProxyModel",
     "ProxyMapper",
+    # external
+    # "AttrsModel",
+    # "AttrsFieldsModel",
+    # "PydanticModel",
+    # "PydanticFieldsModel",
 ]

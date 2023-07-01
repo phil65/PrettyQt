@@ -1,5 +1,5 @@
-::: prettyqt.custom_models.AttrsFieldsModel
+::: prettyqt.custom_models.pydanticfieldsmodel.PydanticFieldsModel
 
 ## Supports
 
-`attrs dataclass`
+`pydantic.BaseModel`
