@@ -87,8 +87,10 @@ class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
         val = super().data(index, role)
+        if not self.indexer_contains(index):
+            return val
         for t in self._transformers:
-            if self.indexer_contains(index) and t.role == role:
+            if t.role == role:
                 selector_val = super().data(index, t.selector_role)
                 if t.selector is None or t.selector(selector_val):
                     val = t.fn(selector_val)
