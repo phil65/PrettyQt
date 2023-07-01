@@ -28,14 +28,14 @@ class BaseDataclassModel(core.AbstractTableModel):
         klasses = [type(i) for i in items]
         self.Class = lca_type(klasses)
         logger.debug(f"{type(self).__name__}: found common ancestor {self.Class}")
-        self.fields = self.get_fields()
-        self.fields.sort(key=lambda x: x.name)
+        self._fields = self.get_fields()
+        self._field_names = list(self._fields.keys())
 
     def get_fields(self):
         return NotImplemented
 
     def columnCount(self, parent=None):
-        return len(self.fields)
+        return len(self._fields)
 
     def headerData(
         self,
@@ -48,18 +48,22 @@ class BaseDataclassModel(core.AbstractTableModel):
                 instance = self.items[section]
                 return type(instance).__name__
             case constants.HORIZONTAL, constants.DISPLAY_ROLE, _:
-                return self.fields[section].name
+                return self._field_names[section]
 
-    def data(self, index: core.ModelIndex, role=constants.DISPLAY_ROLE):
+    def data(
+        self,
+        index: core.ModelIndex,
+        role: constants.ItemDataRole = constants.DISPLAY_ROLE,
+    ):
         if not index.isValid():
             return None
-        field = self.fields[index.column()]
+        field_name = self._field_names[index.column()]
         instance = self.items[index.row()]
         match role:
             case constants.DISPLAY_ROLE:
-                return repr(getattr(instance, field.name))
+                return repr(getattr(instance, field_name))
             case constants.USER_ROLE | constants.EDIT_ROLE:
-                return getattr(instance, field.name)
+                return getattr(instance, field_name)
 
     def setData(
         self,
@@ -67,12 +71,12 @@ class BaseDataclassModel(core.AbstractTableModel):
         value: Any,
         role: constants.ItemDataRole = constants.EDIT_ROLE,
     ) -> bool:
-        field = self.fields[index.column()]
+        field_name = self._field_names[index.column()]
         instance = self.items[index.row()]
         match role:
             case constants.USER_ROLE:
                 with self.reset_model():
-                    setattr(instance, field.name, value)
+                    setattr(instance, field_name, value)
                 return True
         return False
 
@@ -92,11 +96,11 @@ class BaseDataclassModel(core.AbstractTableModel):
         if not parent.isValid():
             return super().flags(parent)
         parent = parent or core.ModelIndex()
-        field = self.fields[parent.column()]
+        field_name = self._field_names[parent.column()]
         instance = self.items[parent.row()]
         # need to cover not parent.isValid()?
-        val = getattr(instance, field.name)
+        val = getattr(instance, field_name)
         with contextlib.suppress(Exception):
-            setattr(instance, field.name, val)
+            setattr(instance, field_name, val)
             return super().flags(parent) | constants.IS_EDITABLE
         return super().flags(parent)

@@ -24,12 +24,12 @@ class PydanticModel(custom_models.BaseDataclassModel):
                 return False
 
     def get_fields(self) -> list:
-        return list(self.Class.__fields__.values())
+        return self.Class.model_fields
 
     def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
         return (
             super().flags(parent)
-            if not self.Class.Config.allow_mutation or not parent.isValid()
+            if self.Class.model_config.get("frozen") or not parent.isValid()
             else (super().flags(parent) | constants.IS_EDITABLE)
         )
 

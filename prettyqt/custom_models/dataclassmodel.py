@@ -4,6 +4,8 @@ from collections.abc import Sequence
 import dataclasses
 import logging
 
+from typing import Any
+
 from prettyqt import constants, core, custom_models
 from prettyqt.utils import datatypes
 
@@ -23,8 +25,9 @@ class DataClassModel(custom_models.BaseDataclassModel):
             case _:
                 return False
 
-    def get_fields(self):
-        return list(dataclasses.fields(self.Class))
+    def get_fields(self) -> dict[str, Any]:
+        fields = dataclasses.fields(self.Class)
+        return {field.name: field for field in fields}
 
     def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
         if not parent.isValid():

@@ -26,8 +26,9 @@ class AttrsModel(custom_models.BaseDataclassModel):
             case _:
                 return False
 
-    def get_fields(self) -> list:
-        return list(attrs.fields(self.Class))
+    def get_fields(self):
+        fields = attrs.fields(self.Class)
+        return {field.name: field for field in fields}
 
 
 if __name__ == "__main__":
