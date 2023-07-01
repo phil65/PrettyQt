@@ -76,14 +76,14 @@ class BaseDataclassModel(core.AbstractTableModel):
                 return True
         return False
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
         return 0 if parent.isValid() else len(self.items)
 
-    def flags(self, parent=None):
+    def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
         """Override.
 
         BaseClass implementation just tries to set attribute with same value to test

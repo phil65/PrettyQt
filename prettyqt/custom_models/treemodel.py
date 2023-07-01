@@ -73,11 +73,11 @@ class TreeModel(core.AbstractItemModel):
 
         return self.createIndex(parent_item.row(), 0, parent_item)
 
-    def rowCount(self, parent: core.ModelIndex | None = None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if parent.column() > 0 else self.data_by_index(parent).child_count()
 
-    def hasChildren(self, parent: core.ModelIndex | None = None):
+    def hasChildren(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0

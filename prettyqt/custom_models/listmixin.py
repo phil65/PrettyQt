@@ -40,7 +40,7 @@ class ListMixin:
     #             self.items.insert(i,)
     #     return True
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Required override for AbstractitemModels."""
         parent = parent or core.ModelIndex()
         return 0 if parent.column() > 0 or parent.isValid() else len(self.items)

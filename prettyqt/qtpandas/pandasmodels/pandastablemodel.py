@@ -33,12 +33,12 @@ class DataTableModel(core.AbstractTableModel):
     ):
         pass
 
-    def columnCount(self, parent: core.ModelIndex | None = None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         if self.df is None:
             return 0
         return 1 if type(self.df) == pd.Series else len(self.df.columns)
 
-    def rowCount(self, parent: core.ModelIndex | None = None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         return len(self.df.index) if self.df is not None else 0
 
     def data(
@@ -146,10 +146,10 @@ class VerticalHeaderModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.df = df
 
-    def columnCount(self, parent: core.ModelIndex | None = None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         return 0 if self.df is None else self.df.index.nlevels
 
-    def rowCount(self, parent: core.ModelIndex | None = None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         return 0 if self.df is None else self.df.index.shape[0]
 
     def data(
@@ -185,10 +185,10 @@ class HorizontalHeaderModel(core.AbstractTableModel):
         super().__init__(**kwargs)
         self.df = df
 
-    def columnCount(self, parent: core.ModelIndex | None = None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         return 0 if self.df is None else self.df.columns.shape[0]
 
-    def rowCount(self, parent: core.ModelIndex | None = None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         return 0 if self.df is None else self.df.columns.nlevels
 
     def data(

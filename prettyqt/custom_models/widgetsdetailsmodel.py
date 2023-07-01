@@ -85,7 +85,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
                 return True
         return False
 
-    def rowCount(self, parent: core.ModelIndex | None = None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
         if parent.column() > 0:

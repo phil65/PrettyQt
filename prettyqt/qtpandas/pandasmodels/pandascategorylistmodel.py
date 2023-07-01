@@ -77,7 +77,7 @@ class PandasCategoryListModel(custom_models.ModelMixin, core.AbstractTableModel)
                 self.df = self.df[self.series == cat_name]
                 return self.df
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         if not self.col or not hasattr(self.series, "cat"):
             return 0
         return len(self.series.cat.categories)

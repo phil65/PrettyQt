@@ -26,8 +26,7 @@ class PydanticModel(custom_models.BaseDataclassModel):
     def get_fields(self) -> list:
         return list(self.Class.__fields__.values())
 
-    def flags(self, parent: core.ModelIndex | None = None):
-        parent = parent or core.ModelIndex()
+    def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
         return (
             super().flags(parent)
             if not self.Class.Config.allow_mutation or not parent.isValid()

@@ -26,8 +26,7 @@ class DataClassModel(custom_models.BaseDataclassModel):
     def get_fields(self):
         return list(dataclasses.fields(self.Class))
 
-    def flags(self, parent=None):
-        parent = parent or core.ModelIndex()
+    def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
         if not parent.isValid():
             return super().flags(parent)
         return (

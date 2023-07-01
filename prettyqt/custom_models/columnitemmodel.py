@@ -173,11 +173,11 @@ class ColumnTableModel(ColumnItemModelMixin, core.AbstractTableModel):
         self._attr_cols = []
         self.set_columns(columns)
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if parent.isValid() else len(self.items)
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if parent.isValid() else len(self._attr_cols)
 

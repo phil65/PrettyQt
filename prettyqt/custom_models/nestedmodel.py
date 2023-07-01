@@ -23,15 +23,14 @@ class NestedModel(  # type: ignore
         self.root = Root()
         self.items = self.root.children
 
-    def flags(self, index=None):
-        index = index or core.ModelIndex()
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         if not index.isValid():
             return constants.NO_FLAGS
         if index.column() in self.SET_DATA:
             return self.DEFAULT_FLAGS | constants.IS_EDITABLE
         return self.DEFAULT_FLAGS
 
-    def rowCount(self, parent=None) -> int:
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
             return 0
@@ -41,7 +40,7 @@ class NestedModel(  # type: ignore
             else len(self.items)
         )
 
-    def index(self, row, column, parent=None):
+    def index(self, row: int, column: int, parent: core.ModelIndex | None = None):
         parent = parent or core.ModelIndex()
         if not self.hasIndex(row, column, parent):
             return core.ModelIndex()

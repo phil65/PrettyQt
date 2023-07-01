@@ -106,10 +106,10 @@ if __name__ == "__main__":
     pb = widgets.PushButton("test", clicked=lambda: logging.info("x"))
 
     class Model(core.AbstractTableModel):
-        def rowCount(self, index: core.ModelIndex | None = None):
+        def rowCount(self, index: core.ModelIndex | None = None) -> int:
             return 5
 
-        def columnCount(self, index: core.ModelIndex | None = None):
+        def columnCount(self, index: core.ModelIndex | None = None) -> int:
             return 5
 
         def data(

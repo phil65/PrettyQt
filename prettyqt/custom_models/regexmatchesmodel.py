@@ -53,7 +53,7 @@ class RegexMatchesModel(core.AbstractTableModel):
             case constants.USER_ROLE, _:
                 return item.span()
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
         if parent.column() > 0:

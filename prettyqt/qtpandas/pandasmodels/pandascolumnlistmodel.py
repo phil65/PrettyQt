@@ -142,7 +142,7 @@ class PandasColumnListModel(custom_models.ModelMixin, core.AbstractTableModel):
             case self.Roles.ColumnNameRole:
                 return self.data_by_index(index).name
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         return len(self.df.columns) if self.df is not None else 0
 
     def sort(self, ncol, order):

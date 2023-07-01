@@ -110,11 +110,11 @@ class FlattenedTreeProxyModel(core.AbstractProxyModel):
     def parent(self, child=None) -> core.ModelIndex:
         return super().parent() if child is None else core.ModelIndex()
 
-    def rowCount(self, parent=None) -> int:
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if parent.isValid() else len(self._source_key)
 
-    def columnCount(self, parent=None) -> int:
+    def columnCount(self, parent: core.ModelIndex | None = None) -> int:
         parent = parent or core.ModelIndex()
         return 0 if parent.isValid() else 1
 

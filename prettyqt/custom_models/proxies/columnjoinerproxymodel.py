@@ -58,10 +58,10 @@ class ColumnJoinerProxyModel(core.AbstractProxyModel):
             else self.sourceModel().columnCount(parent) + len(self.mapping)
         )
 
-    def rowCount(self, parent: core.ModelIndex | None = None):
+    def rowCount(self, parent: core.ModelIndex | None = None) -> int:
         return self.sourceModel().rowCount()
 
-    def flags(self, index: core.ModelIndex):
+    def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         column = index.column()
         if self.is_additional_column(column):
             return self.mapping[column - self.columnCount()].flags
