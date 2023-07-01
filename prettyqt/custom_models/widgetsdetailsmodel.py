@@ -30,7 +30,7 @@ class WidgetsDetailsModel(core.AbstractTableModel):
             case _:
                 return False
 
-    def columnCount(self, parent=None):
+    def columnCount(self, parent: core.ModelIndex | None = None):
         return len(self.props)
 
     def headerData(
@@ -55,11 +55,14 @@ class WidgetsDetailsModel(core.AbstractTableModel):
             return None
         prop = self.props[index.column()]
         widget = self.items[index.row()]
+        value = prop.read(widget)
+        if isinstance(value, bool) and role == constants.CHECKSTATE_ROLE:
+            return self.to_checkstate(value)
         match role:
-            case constants.DISPLAY_ROLE | constants.EDIT_ROLE:
-                return prop.read(widget)
-            case constants.USER_ROLE:
-                return prop.read(widget)
+            case (
+                constants.DISPLAY_ROLE | constants.EDIT_ROLE | constants.USER_ROLE
+            ) if not isinstance(value, bool):
+                return value
 
     def setData(
         self,
@@ -75,9 +78,14 @@ class WidgetsDetailsModel(core.AbstractTableModel):
                     prop.write(widget, value)
                 # self.update_row(index.row())
                 return True
+            case constants.CHECKSTATE_ROLE:
+                with self.reset_model():
+                    prop.write(widget, bool(value))
+                # self.update_row(index.row())
+                return True
         return False
 
-    def rowCount(self, parent=None):
+    def rowCount(self, parent: core.ModelIndex | None = None):
         """Override for AbstractitemModel base method."""
         parent = parent or core.ModelIndex()
         if parent.column() > 0:
@@ -86,9 +94,11 @@ class WidgetsDetailsModel(core.AbstractTableModel):
 
     def flags(self, index: core.ModelIndex) -> constants.ItemFlag:
         prop = self.props[index.column()]
+        if prop.isWritable() and prop.get_python_type() is bool:
+            return super().flags(index) | constants.IS_CHECKABLE
         if prop.isWritable():
             return super().flags(index) | constants.IS_EDITABLE
-        return super().flags(index)
+        return constants.IS_SELECTABLE
 
 
 if __name__ == "__main__":
