@@ -90,7 +90,7 @@ class MetaObject:
 
     def get_class_info(self, include_super: bool = True) -> dict[str, str]:
         """Get MetaObject class info."""
-        start = 0 if include_super else self.item.classInfoOffset() - 1
+        start = 0 if include_super else self.item.classInfoOffset()
         count = self.item.classInfoCount()
         classinfos = [self.item.classInfo(i) for i in range(start, count)]
         return {i.name(): i.value() for i in classinfos}
@@ -150,7 +150,7 @@ class MetaObject:
         filter_shit: bool = True,
     ) -> list[core.MetaMethod]:
         """Get all MetaMethods based on given criteria."""
-        start = 0 if include_super else self.item.methodOffset() - 1
+        start = 0 if include_super else self.item.methodOffset()
         methods = [
             method
             for i in range(start, self.item.methodCount())
@@ -164,7 +164,7 @@ class MetaObject:
 
     def get_enums(self, include_super: bool = True) -> list[core.MetaEnum]:
         """Get all MetaEnums based on given criteria."""
-        start = 0 if include_super else self.item.enumeratorOffset() - 1
+        start = 0 if include_super else self.item.enumeratorOffset()
         return [self.get_enum(i) for i in range(start, self.item.enumeratorCount())]
 
     def get_constructors(self) -> list[core.MetaMethod]:
@@ -187,7 +187,7 @@ class MetaObject:
         only_with_type_name: str = "",
     ) -> list[core.MetaProperty]:
         """Get all MetaProperties based on given criteria."""
-        start = 0 if include_super else self.item.propertyOffset() - 1
+        start = 0 if include_super else self.item.propertyOffset()
         count = self.item.propertyCount()
         prop_list = []
         for i in range(start, count):
