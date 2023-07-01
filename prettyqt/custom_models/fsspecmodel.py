@@ -3,13 +3,11 @@ from __future__ import annotations
 from collections.abc import Iterable
 import datetime
 import enum
-import itertools
 import logging
 import os
 import pathlib
 
-from typing import TypedDict
-
+# from typing import TypedDict
 import fsspec
 
 from prettyqt import constants, core, custom_models, gui, widgets
@@ -27,42 +25,24 @@ class FsSpecCompleter(widgets.Completer):
         return path.split(self.model().fs.sep)
 
 
-class FolderInfo(TypedDict):
-    name: str
-    size: int
-    type: str
-    created: float
-    islink: bool  # symbolic link
-    mode: int  # Inode protection mode.
-    uid: int  # user id of owner
-    gid: int  # group id of owner
-    mtime: float
-    ino: int  # Inode number.
-    nlink: int  # Number of links to the inode.
+# class FolderInfo(TypedDict):
+#     name: str
+#     size: int
+#     type: str
+#     created: float
+#     islink: bool  # symbolic link
+#     mode: int  # Inode protection mode.
+#     uid: int  # user id of owner
+#     gid: int  # group id of owner
+#     mtime: float
+#     ino: int  # Inode number.
+#     nlink: int  # Number of links to the inode.
 
 
 _icon_provider = widgets.FileIconProvider()
 
 
 VALUE_LETTERS = [(4, "r"), (2, "w"), (1, "x")]
-
-
-def octal_to_string(octal: int) -> str:
-    result = ""
-    # Iterate over each of the digits in octal
-    for digit, (value, letter) in itertools.product(
-        [int(n) for n in str(octal)], VALUE_LETTERS
-    ):
-        if digit >= value:
-            result += letter
-            digit -= value
-        else:
-            result += "-"
-    return result
-
-
-def get_filename(path):
-    return pathlib.Path(path).name if path else ""
 
 
 class FsSpecColumnItem(custom_models.ColumnItem):
@@ -73,7 +53,8 @@ class FsSpecColumnItem(custom_models.ColumnItem):
             case FSSpecTreeModel.Roles.FilePathRole:
                 return item.obj["name"]
             case FSSpecTreeModel.Roles.FilePathRole:
-                return get_filename(item.obj["name"])
+                path = item.obj["name"]
+                return pathlib.Path(path).name if path else ""
             case FSSpecTreeModel.Roles.FilePermissions:
                 return self.model.permissions(item.obj["name"])
             case FSSpecTreeModel.Roles.ProtocolPathRole:
@@ -222,6 +203,13 @@ class ShaColumn(FsSpecColumnItem):
 class FSSpecTreeModel(
     widgets.filesystemmodel.FileSystemModelMixin, custom_models.ColumnItemModel
 ):
+    """Tree model to display filesystems supported by fsspec.
+
+    The model offers the same API as QFileSystemModel so that it can work
+    easily as a drop-in replacement, only difference being that on
+    windows, FsSpec does not support a "real" root folder (aka a listing of drives.)
+    """
+
     COLUMNS = [
         NameColumn,
         PathColumn,
@@ -631,7 +619,7 @@ if __name__ == "__main__":
 
     app = widgets.app()
 
-    model = FSSpecTreeModel("file", org="phil65", repo="prettyqt", path="/")
+    model = FSSpecTreeModel("github", org="phil65", repo="prettyqt", path="/")
     # model.set_root_path("/")
     tree = widgets.TreeView()
     tree.setRootIsDecorated(True)
