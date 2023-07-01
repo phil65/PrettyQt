@@ -224,37 +224,6 @@ def example_widget():
     return widget
 
 
-def get_all_qt_classes():
-    import importlib
-    import inspect
-
-    import PySide6
-
-    return [
-        i[1]
-        for namespace in PySide6._find_all_qt_modules()
-        for i in inspect.getmembers(importlib.import_module(f"PySide6.{namespace}"))
-        if isinstance(i[1], type)
-    ]
-
-
-def get_all_qt_enums():
-    import enum
-    import inspect
-
-    all_qt_enums = [
-        i[1]
-        for Klass in get_all_qt_classes()
-        for i in inspect.getmembers(Klass)
-        if isinstance(i[1], enum.EnumType)
-    ]
-
-    all_qt_enums.extend(
-        [i[1] for i in inspect.getmembers(QtCore.Qt) if isinstance(i[1], enum.EnumType)]
-    )
-    return all_qt_enums
-
-
 __all__ = [
     "Stalker",
     "TracebackDialog",
