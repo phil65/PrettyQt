@@ -1,7 +1,4 @@
-"""Network module.
-
-Contains QtNetWork-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtNetwork import *  # noqa: F403
 

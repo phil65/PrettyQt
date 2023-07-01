@@ -1,7 +1,3 @@
-"""Core module.
-
-based on qtawesome
-"""
 from __future__ import annotations
 
 from dataclasses import dataclass

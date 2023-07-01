@@ -1,4 +1,4 @@
-"""Module containing QSciScintilla-related classes."""
+from __future__ import annotations
 
 from .sciscintilla import SciScintilla
 

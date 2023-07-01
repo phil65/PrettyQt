@@ -1,4 +1,4 @@
-"""Charts module."""
+from __future__ import annotations
 
 from prettyqt.qt.QtCharts import *  # noqa: F403
 

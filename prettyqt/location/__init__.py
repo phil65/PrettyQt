@@ -1,4 +1,4 @@
-"""Location module."""
+from __future__ import annotations
 
 from prettyqt.qt.QtLocation import *  # noqa: F403
 

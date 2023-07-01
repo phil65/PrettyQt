@@ -1,7 +1,4 @@
-"""scxml module.
-
-contains QtScXml-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtScxml import *  # noqa: F403
 

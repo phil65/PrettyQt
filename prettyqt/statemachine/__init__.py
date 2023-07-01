@@ -1,10 +1,3 @@
-"""Core module.
-
-Contains QtCore-based classes
-"""
-
-# from prettyqt.qt.QtCore import Signal
-
 from __future__ import annotations
 
 from prettyqt.qt.QtStateMachine import *  # noqa: F403

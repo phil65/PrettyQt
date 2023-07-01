@@ -1,7 +1,4 @@
-"""multimedia module.
-
-contains QtMultimedia-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtMultimedia import *  # noqa: F403
 

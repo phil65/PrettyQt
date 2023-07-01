@@ -1,8 +1,3 @@
-"""Custom_models module.
-
-Contains custom models
-"""
-
 # BaseModels
 
 from .selectionmixin import SelectionMixin

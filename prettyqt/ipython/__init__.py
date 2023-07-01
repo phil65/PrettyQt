@@ -1,7 +1,4 @@
-"""ipython module.
-
-contains IPython-based classes
-"""
+from __future__ import annotations
 
 from .baseipythonwidget import BaseIPythonWidget
 from .inprocessipythonwidget import InProcessIPythonWidget

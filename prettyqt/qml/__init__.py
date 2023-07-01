@@ -1,7 +1,4 @@
-"""Qml module.
-
-Contains QtQml-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtQml import *  # noqa: F403
 

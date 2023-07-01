@@ -1,11 +1,5 @@
-"""Core module.
-
-Contains QtCore-based classes
-"""
-
-# from prettyqt.qt.QtCore import Signal
-
 from __future__ import annotations
+
 import contextlib
 import sys
 from prettyqt.qt import QtCore

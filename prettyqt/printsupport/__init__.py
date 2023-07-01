@@ -1,7 +1,4 @@
-"""printsupport module.
-
-contains QtPrintSupport-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtPrintSupport import *  # noqa: F403
 

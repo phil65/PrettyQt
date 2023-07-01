@@ -1,4 +1,4 @@
-"""Pdfwidgets module."""
+from __future__ import annotations
 
 from prettyqt.qt.QtPdfWidgets import *  # noqa: F403
 

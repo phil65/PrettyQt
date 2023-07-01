@@ -1,13 +1,8 @@
-"""Gui module.
-
-Contains QtGui-based classes
-"""
 from __future__ import annotations
+
 import sys
 
-
 from prettyqt.qt.QtGui import *  # noqa: F403
-
 
 from .backingstore import BackingStore
 from .stylehints import StyleHints

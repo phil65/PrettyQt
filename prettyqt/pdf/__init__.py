@@ -1,4 +1,4 @@
-"""Pdf module."""
+from __future__ import annotations
 
 from prettyqt.qt.QtPdf import *  # noqa: F403
 

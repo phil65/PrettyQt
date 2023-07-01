@@ -1,7 +1,4 @@
-"""quick module.
-
-contains QtQuick-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtQuick import *  # noqa: F403
 

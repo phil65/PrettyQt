@@ -1,4 +1,4 @@
-"""Module containing custom widget classes."""
+from __future__ import annotations
 
 from .scrollbars.annotatedscrollbar import AnnotatedScrollBar
 from .scrollbars.previewscrollbar import PreviewScrollBar

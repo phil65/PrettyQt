@@ -1,7 +1,4 @@
-"""spatialaudio module.
-
-contains QtSpatialAudio-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtSpatialAudio import *  # noqa: F403
 

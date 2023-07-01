@@ -1,7 +1,4 @@
-"""bluetooth module.
-
-contains QtBluetooth-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtBluetooth import *  # noqa: F403
 

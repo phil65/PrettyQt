@@ -1,7 +1,4 @@
-"""qthelp module.
-
-contains QtHelp-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtHelp import *  # noqa: F403
 

@@ -1,4 +1,4 @@
-"""Multimediawidgets module."""
+from __future__ import annotations
 
 from prettyqt.qt.QtMultimediaWidgets import *  # noqa: F403
 

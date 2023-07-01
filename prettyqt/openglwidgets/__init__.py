@@ -1,7 +1,4 @@
-"""openglwidgets module.
-
-contains QtOpenGLWidgets-based classes
-"""
+from __future__ import annotations
 
 from prettyqt.qt.QtOpenGLWidgets import *  # noqa: F403
 

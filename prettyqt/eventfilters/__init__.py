@@ -1,7 +1,4 @@
-"""eventfilters module.
-
-Contains custom EventFilter classes
-"""
+from __future__ import annotations
 
 from .baseeventfilter import BaseEventFilter
 from .animatedtooltipeventfilter import AnimatedToolTipEventFilter

@@ -1,8 +1,4 @@
-"""designer module.
-
-contains QtDesigner-based classes
-"""
-from prettyqt import qt
+from __future__ import annotations
 
 from prettyqt.qt.QtDesigner import *  # noqa: F403
 
