@@ -75,24 +75,20 @@ several proxies based on QSortFilterProxyModel. These can be more powerful
 than the mentioned SliceFilterProxyModel, but scale with O(1) in respect to row / column count. (meaning that things might get slower for very large tables or when several proxies are layered on top of each other.)
 Some of these proxies might partly overlap in functionality, but theres always a best one one for each use case to pick.
 
-| Proxy                        | Description                                              |
-| -----------------------------|----------------------------------------------------------|
-|FuzzyFilterProxyModel         |Model for implementing a CommandPalette a la SubimeText.  |
+| Proxy                                            | Description                                              |
+| -------------------------------------------------|----------------------------------------------------------|
+|[FuzzyFilterProxyModel](fuzzyfilterproxymodel.md) |Model for implementing a CommandPalette a la SubimeText.  |
 |ValueFilterProxymodel         |Similar to QSortFilterProxyModel, but also works with non-str values.|
-<!-- : can be used for example to filter by checkstate role, or by any custom data behind any UserRole.
-: The properties filterKeyColumn and filterRole of the base proxy model are taken into account. -->
 |SubsetFilterProxyModel        |Filter based on slices, index, a filter function, a list of indexes (like columns [0, 3, 7])
 |PredicateFilterProxyModel     |Filter based on predicates.|
-<!-- The properties filterKeyColumn and filterRole of the base proxy model are taken into account. -->
 |RangeFilterProxyModel         |Filter based on min/max values of a numerical column.|
-<!-- : The properties filterKeyColumn and filterRole of the base proxy model are taken into account. -->
 |MulticolumnFilterProxyModel   | can take a seperate search term / value for each column.|
 
 
 ## Reshape proxies
 
-| Proxy                                             | Description                              |
-| --------------------------------------------------|------------------------------------------|
+| Proxy                                                | Description                              |
+| -----------------------------------------------------|------------------------------------------|
 |[TableToListProxyModel](tabletolistproxymodel.md)     | Stack all columns into one single column |
 |[FlattenedTreeProxyModel](flattenedtreeproxymodel.md) | Moves all rows up to the root level.     |
 |[MeltProxyModel](meltproxymodel.md)                   |Unpivot a Table from wide to long format. |
@@ -101,8 +97,8 @@ Some of these proxies might partly overlap in functionality, but theres always a
 
 ## Other Proxies
 
-| Proxy                                               | Description                                          |
-| ----------------------------------------------------|------------------------------------------------------|
+| Proxy                                                  | Description                                          |
+| -------------------------------------------------------|------------------------------------------------------|
 |[ChangeHeadersProxyModel](changeheadersproxymodel.md)   | Change horizontal / vertical headers.                |
 |[HighlightMouseProxymodel](highlightmouseproxymodel.md) | Highlight regions the mouse cursor is hovering over. |
 

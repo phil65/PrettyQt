@@ -21,11 +21,27 @@ class Transformer:
 
 
 class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
-    """A simple transformation proxy model with settable transformers.
+    """A proxy model which transforms cell contents based on a Callable.
 
     Example:
-        >>> proxy = SliceValueTransformationProxyModel()
-        >>> proxy.add_transformer(lambda value: value < 1)
+    ```py
+    model = MyModel()
+    table = widgets.TableView()
+    table.set_model(model)
+    table.proxifier[::2, 2:].modify(xyz)
+    table.show()
+    ```
+
+    or
+
+    ```py
+    indexer = (slice(None, None, 2), slice(2, None))
+    proxy = custom_models.SliceValueTransformationProxyModel(indexer=indexer)
+    proxy.set_source_model(model)
+    proxy.add_transformer(lambda x: x + "something", selector=lambda x: "abc" in x)
+    table.set_model(proxy)
+    table.show()
+    ```
     """
 
     ID = "value_transformation"
@@ -35,6 +51,7 @@ class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
         self._transformers: list[Transformer] = []
 
     def clear(self):
+        """Clear all transformers."""
         self._transformers = []
 
     def add_transformer(
@@ -44,6 +61,18 @@ class SliceValueTransformationProxyModel(custom_models.SliceIdentityProxyModel):
         selector: Callable[[Any], bool] | None = None,
         selector_role: constants.ItemDataRole = constants.DISPLAY_ROLE,
     ):
+        """Add a transformer for given role.
+
+        If a selector callable is given, the transformer will only be applied if the
+        selector returns True.
+        The selector receives the content of given data role as an argument.
+
+        Arguments:
+            fn: Callable to transform data of given role
+            role: Data role to transform
+            selector: Callable to filter the indexes which should be transformed
+            selector_role: Role to use for the selector callable
+        """
         tr = Transformer(
             fn=fn,
             role=role,

@@ -15,8 +15,10 @@ class PredicateFilterProxyModel(core.SortFilterProxyModel):
     """A simple filter proxy model with settable filter predicates.
 
     Example:
-        >>> proxy = PredicateFilterProxyModel()
-        >>> proxy.add_filter(lambda value: value < 1)
+    ```py
+    proxy = PredicateFilterProxyModel()
+    proxy.add_filter(lambda value: value < 1)
+    ```
     """
 
     ID = "predicate_filter"

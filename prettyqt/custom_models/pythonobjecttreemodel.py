@@ -330,8 +330,10 @@ class PythonObjectTreeModel(custom_models.ColumnItemModel):
     def get_path_for_index(self, index: core.ModelIndex) -> str:
         """Get the path for the object referenced by index.
 
-        Example: An.example = {"a": [b, c, {"d": e}]}
-                 -> path of e: An.example["a"][2]["d"]
+        Example:
+        ```
+        An.example = {"a": [b, c, {"d": e}]} -> path of e: An.example["a"][2]["d"]
+        ```
         """
         # TODO: not used yet, better rework ColumnItemModel first
         treeitem = index.data(constants.USER_ROLE)

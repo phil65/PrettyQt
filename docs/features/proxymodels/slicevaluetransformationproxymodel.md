@@ -1,25 +1,3 @@
-Proxy model which transforms cell contents based on a Callable.
-
-### Example
-
-```py
-model = MyModel()
-table = widgets.TableView()
-table.set_model(model)
-table.proxifier[::2, 2:].modify(xyz)
-table.show()
-```
-
-or
-
-```py
-indexer = (slice(None, None, 2), slice(2, None))
-proxy = custom_models.SliceValueTransformationProxyModel(indexer=indexer)
-proxy.set_source_model(model)
-table.set_model(proxy)
-table.show()
-```
-
 Read more about [slices](https://docs.python.org/3/library/functions.html#slice).
 
 ### API

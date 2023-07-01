@@ -1,8 +1,4 @@
-"""Custom_validators module.
-
-Contains custom validators
-"""
-
+from __future__ import annotations
 
 from .alphanumericvalidator import AlphaNumericValidator
 from .blacklistvalidator import BlacklistValidator, NotEmptyValidator, NotZeroValidator
