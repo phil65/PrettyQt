@@ -275,10 +275,6 @@ class FSSpecTreeModel(
         return item.obj["type"] == "directory"
 
     def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        """Fetch the children of a Python object.
-
-        Returns: list of TreeItems
-        """
         glob = f"{item.obj['name']}/*/" if item.obj["name"] else "*"
         items = [
             treeitem.TreeItem(obj=i, parent=item)
