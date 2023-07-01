@@ -227,8 +227,6 @@ class FSSpecTreeModel(
     rootPathChanged = core.Signal(str)
 
     class Roles(enum.IntEnum):
-        """Role enum."""
-
         FileIconRole = constants.DECORATION_ROLE
         FilePathRole = constants.USER_ROLE + 1
         FileNameRole = constants.USER_ROLE + 2
@@ -236,8 +234,6 @@ class FSSpecTreeModel(
         ProtocolPathRole = constants.USER_ROLE + 4
 
     class Option(enum.IntEnum):
-        """Role enum."""
-
         DontWatchForChanges = 1
         DontResolveSymlinks = 2
         DontUseCustomDirectoryIcons = 4
