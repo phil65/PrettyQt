@@ -67,6 +67,7 @@ from .proxies.rangefilterproxymodel import RangeFilterProxyModel
 from .proxies.appearanceproxymodel import AppearanceProxyModel
 from .proxies.changeheadersproxymodel import ChangeHeadersProxyModel
 from .proxies.columnjoinerproxymodel import ColumnJoinerProxyModel
+from .proxies.predicatefilterproxymodel import PredicateFilterProxyModel
 from .proxies.highlightmouseproxymodel import HighlightMouseProxyModel
 
 # Proxy tooling
@@ -123,6 +124,7 @@ __all__ = [
     "ChangeHeadersProxyModel",
     "AppearanceProxyModel",
     "ColumnJoinerProxyModel",
+    "PredicateFilterProxyModel",
     "SliceChangeFlagsProxyModel",
     "SliceHighlightCurrentProxyModel",
     "SliceColorValuesProxyModel",
