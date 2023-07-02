@@ -7,7 +7,6 @@ import pathlib
 import git
 
 from prettyqt import constants, core, custom_models
-from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -115,10 +114,12 @@ class GitPythonTreeModel(custom_models.TreeModel):
     def supports(cls, instance) -> bool:
         return isinstance(instance, git.Tree | git.Repo)
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        return [treeitem.TreeItem(obj=i) for i in item.obj.trees + item.obj.blobs]
+    def _fetch_object_children(
+        self, item: GitPythonTreeModel.TreeItem
+    ) -> list[GitPythonTreeModel.TreeItem]:
+        return [self.TreeItem(obj=i) for i in item.obj.trees + item.obj.blobs]
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: GitPythonTreeModel.TreeItem) -> bool:
         return False if isinstance(item.obj, git.Blob) else len(item.obj.trees) > 0
 
 

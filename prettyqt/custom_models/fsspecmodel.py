@@ -11,7 +11,7 @@ import pathlib
 import fsspec
 
 from prettyqt import constants, core, custom_models, gui, widgets
-from prettyqt.utils import datatypes, treeitem
+from prettyqt.utils import datatypes
 
 
 logger = logging.getLogger(__name__)
@@ -48,7 +48,7 @@ VALUE_LETTERS = [(4, "r"), (2, "w"), (1, "x")]
 class FsSpecColumnItem(custom_models.ColumnItem):
     identifier: str = ""
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case FSSpecTreeModel.Roles.FilePathRole:
                 return item.obj["name"]
@@ -66,7 +66,7 @@ class NameColumn(FsSpecColumnItem):
     name = "Name"
     doc = "File name"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return pathlib.Path(path).name if (path := item.obj["name"]) else ""
@@ -86,7 +86,7 @@ class PathColumn(FsSpecColumnItem):
     name = "Path"
     doc = "File path"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj["name"] or ""
@@ -99,7 +99,7 @@ class SizeColumn(FsSpecColumnItem):
     name = "Size"
     doc = "File size."
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 if item.obj["size"] > 0:
@@ -117,7 +117,7 @@ class TypeColumn(FsSpecColumnItem):
     name = "Type"
     doc = "Type of given path."
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj["type"] or ""
@@ -130,7 +130,7 @@ class CreatedColumn(FsSpecColumnItem):
     name = "Created"
     doc = "Creation date of file."
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         if not item.obj.get("created"):
             return None
         created = datetime.datetime.fromtimestamp(item.obj["created"])
@@ -148,7 +148,7 @@ class ModifiedColumn(FsSpecColumnItem):
     name = "Modified"
     doc = "Modified"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         if not item.obj.get("mtime"):
             return None
         mtime = datetime.datetime.fromtimestamp(item.obj["mtime"])
@@ -166,7 +166,7 @@ class PermissionsColumn(FsSpecColumnItem):
     name = "Permissions"
     doc = "File Permissions"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return oct(int(item.obj["mode"]))[-4:] if item.obj.get("mode") else ""
@@ -179,7 +179,7 @@ class IsLinkColumn(FsSpecColumnItem):
     name = "Is link"
     doc = "Whether file is a symbolic link."
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.CHECKSTATE_ROLE:
                 return self.to_checkstate(item.obj.get("islink"))
@@ -192,7 +192,7 @@ class ShaColumn(FsSpecColumnItem):
     name = "SHA"
     doc = "Hash value."
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: FSSpecTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.get("sha") or ""
@@ -267,13 +267,15 @@ class FSSpecTreeModel(
             case _:
                 return self.COLUMNS
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: FSSpecTreeModel.TreeItem) -> bool:
         return item.obj["type"] == "directory"
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(
+        self, item: FSSpecTreeModel.TreeItem
+    ) -> list[FSSpecTreeModel.TreeItem]:
         glob = f"{item.obj['name']}/*/" if item.obj["name"] else "*"
         items = [
-            treeitem.TreeItem(obj=i, parent=item)
+            FSSpecTreeModel.TreeItem(obj=i, parent=item)
             for i in self.fs.glob(glob, detail=True).values()
         ]
         # not sure if this should be emitted later?

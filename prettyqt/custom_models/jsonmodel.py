@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from typing import Any
 
 from prettyqt import constants, custom_models
-from prettyqt.utils import treeitem
 
 
 class NameColumn(custom_models.ColumnItem):
@@ -75,10 +74,12 @@ class JsonModel(custom_models.ColumnItemModel):
     def supports(cls, instance) -> bool:
         return isinstance(instance, Mapping)
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: JsonModel.TreeItem) -> bool:
         return isinstance(item.obj.value, dict | list | set) and bool(item.obj.value)
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(
+        self, item: JsonModel.TreeItem
+    ) -> list[JsonModel.TreeItem]:
         """Fetch the children of a Python object.
 
         Returns: list of treeitem.TreeItems
@@ -87,18 +88,18 @@ class JsonModel(custom_models.ColumnItemModel):
         match item.obj.value:
             case Mapping():
                 return [
-                    treeitem.TreeItem(obj=JsonItem(key=k, value=v, typ=type(v)))
+                    self.TreeItem(obj=JsonItem(key=k, value=v, typ=type(v)))
                     for k, v in item.obj.value.items()
                 ]
 
             case Iterable() if not isinstance(item.obj.value, str):
                 return [
-                    treeitem.TreeItem(obj=JsonItem(key=k, value=v, typ=type(v)))
+                    self.TreeItem(obj=JsonItem(key=k, value=v, typ=type(v)))
                     for k, v in enumerate(item.obj.value)
                 ]
             case _:
                 return [
-                    treeitem.TreeItem(
+                    self.TreeItem(
                         obj=JsonItem(
                             key="key",
                             value=repr(item.obj.value),

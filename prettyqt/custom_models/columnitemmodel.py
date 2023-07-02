@@ -7,7 +7,6 @@ import logging
 from typing import Any
 
 from prettyqt import constants, core, custom_models, gui
-from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -148,7 +147,7 @@ class ColumnItemModel(ColumnItemModelMixin, custom_models.TreeModel):
         **kwargs,
     ):
         super().__init__(**kwargs)
-        self._root_item = treeitem.TreeItem(obj=obj)
+        self._root_item = self.TreeItem(obj=obj)
         self._show_root = show_root
         self.mime_type = mime_type
         self._attr_cols = []

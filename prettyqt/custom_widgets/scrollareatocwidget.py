@@ -6,7 +6,7 @@ import logging
 from typing import Literal
 
 from prettyqt import constants, core, custom_models, gui, widgets
-from prettyqt.utils import bidict, treeitem
+from prettyqt.utils import bidict
 
 
 logger = logging.getLogger(__name__)
@@ -64,13 +64,15 @@ class ScrollAreaTocModel(custom_models.TreeModel):
                 # if not index.parent().isValid():
                 return self._highlight_font
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(
+        self, item: ScrollAreaTocModel.TreeItem
+    ) -> list[ScrollAreaTocModel.TreeItem]:
         flag = constants.FindChildOption.FindDirectChildrenOnly
         children = item.obj.findChildren(self._Class, None, flag)
         children = [i for i in children if i.property(self.header_property)]
-        return [treeitem.TreeItem(obj=i) for i in children]
+        return [self.TreeItem(obj=i) for i in children]
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: ScrollAreaTocModel.TreeItem) -> bool:
         flag = constants.FindChildOption.FindDirectChildrenOnly
         children = item.obj.findChildren(self._Class, None, flag)
         children = [i for i in children if i.property(self.header_property)]
@@ -176,8 +178,8 @@ class ScrollAreaTocWidget(widgets.TreeView):
             widget_class=self._WidgetClass,
         )
         self.set_model(model)
-        self.proxy = self.proxifier.get_proxy(
-            "sort_filter", recursive_filtering_enabled=True
+        self.proxy = self.proxifier.set_sort_filter_proxy(
+            recursive_filtering_enabled=True
         )
         self.proxy.set_filter_case_sensitive(False)
         self.show_root(False)

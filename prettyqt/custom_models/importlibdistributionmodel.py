@@ -13,7 +13,6 @@ from packaging.requirements import InvalidRequirement, Requirement
 from typing_extensions import Self
 
 from prettyqt import constants, core, custom_models
-from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -42,7 +41,7 @@ def list_package_requirements(package_name: str) -> list[metadata.Distribution]:
     return [dist for i in modules if (dist := load_dist_info(i)) is not None]
 
 
-class DistTreeItem(treeitem.TreeItem):
+class DistTreeItem(custom_models.ColumnItemModel.TreeItem):
     __slots__ = ("requires", "metadata", "version", "markers")
 
     def __init__(
@@ -67,7 +66,7 @@ class DistTreeItem(treeitem.TreeItem):
 
 
 class DistributionColumn(custom_models.ColumnItem):
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: ImportlibTreeModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case ImportlibTreeModel.Roles.DistributionRole:
                 return item.obj
@@ -232,7 +231,7 @@ class ImportlibTreeModel(custom_models.ColumnItemModel):
         distributions = list_package_requirements(package_name)
         return cls(distributions, parent)
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: ImportlibTreeModel.TreeItem) -> bool:
         return bool(item.requires)
 
     def _fetch_object_children(self, item: DistTreeItem) -> list[DistTreeItem]:

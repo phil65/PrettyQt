@@ -1,15 +1,69 @@
 from __future__ import annotations
 
+from collections.abc import Iterator, Sequence
+import logging
+
+from typing_extensions import Self
+
 from prettyqt import core
-from prettyqt.utils import treeitem
+from prettyqt.utils import get_repr
+
+
+logger = logging.getLogger(__name__)
+
+
+class TreeItem:
+    """Tree node class that can be used to build trees of objects."""
+
+    __slots__ = ("parent_item", "obj", "child_items", "has_children", "children_fetched")
+
+    def __init__(self, obj, parent: Self | None = None):
+        self.parent_item = parent
+        self.obj = obj
+        self.child_items: list[Self] = []
+        self.has_children = True
+        self.children_fetched = False
+
+    def __repr__(self):
+        return get_repr(self, self.obj)
+
+    def __iter__(self) -> Iterator[Self]:
+        return iter(self.child_items)
+
+    def append_child(self, item: Self):
+        item.parent_item = self
+        self.child_items.append(item)
+
+    def insert_children(self, idx: int, items: Sequence[Self]):
+        self.child_items[idx:idx] = items
+        for item in items:
+            item.parent_item = self
+
+    def child(self, row: int) -> Self:
+        return self.child_items[row]
+
+    def child_count(self) -> int:
+        return len(self.child_items)
+
+    def parent(self) -> Self | None:
+        return self.parent_item
+
+    def row(self) -> int:
+        return self.parent_item.child_items.index(self) if self.parent_item else 0
+
+    def pretty_print(self, indent: int = 0):
+        text = indent * "    " + str(self)
+        logger.debug(text)
+        for child_item in self.child_items:
+            child_item.pretty_print(indent + 1)
 
 
 class TreeModel(core.AbstractItemModel):
-    TreeItem = treeitem.TreeItem
+    TreeItem = TreeItem
 
     def __init__(self, obj=None, show_root: bool = True, **kwargs):
         super().__init__(**kwargs)
-        self._root_item = treeitem.TreeItem(obj=obj)
+        self._root_item = self.TreeItem(obj=obj)
         self._show_root = show_root
         self.set_root_item(obj)
 
@@ -37,10 +91,10 @@ class TreeModel(core.AbstractItemModel):
             self.fetchMore(root_index)
 
     @property
-    def root_item(self) -> treeitem.TreeItem:
+    def root_item(self) -> TreeModel.TreeItem:
         return self._root_item
 
-    def data_by_index(self, index: core.ModelIndex) -> treeitem.TreeItem:
+    def data_by_index(self, index: core.ModelIndex) -> TreeModel.TreeItem:
         return index.internalPointer() if index.isValid() else self.root_item
 
     def index(
@@ -60,8 +114,7 @@ class TreeModel(core.AbstractItemModel):
         # hacky way to let the case without any arguments get through.
         # not really nice, a proper dispatch library would be better.
         # functools.singledispatchmethod doesnt work here.
-        if index is None:
-            return super().parent()
+        index = index or core.ModelIndex()
         if not index.isValid():
             return core.ModelIndex()
 
@@ -113,7 +166,7 @@ class TreeModel(core.AbstractItemModel):
                 parent_item.append_child(tree_item)
             parent_item.children_fetched = True
 
-    def _fetch_object_children(self, treeitem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(self, treeitem) -> list[TreeModel.TreeItem]:
         return treeitem.child_items
 
     def _has_children(self, treeitem) -> bool:

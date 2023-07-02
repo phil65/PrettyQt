@@ -10,7 +10,6 @@ import types
 from typing import get_args
 
 from prettyqt import constants, core, custom_models, gui
-from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -107,12 +106,14 @@ class SubClassTreeModel(BaseClassTreeModel):
     def supports(cls, instance) -> bool:
         return isinstance(instance, type | types.UnionType)
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(
+        self, item: SubClassTreeModel.TreeItem
+    ) -> list[SubClassTreeModel.TreeItem]:
         if isinstance(item.obj, types.UnionType):
-            return [treeitem.TreeItem(obj=i) for i in get_args(item.obj)]
-        return [treeitem.TreeItem(obj=i) for i in item.obj.__subclasses__()]
+            return [self.TreeItem(obj=i) for i in get_args(item.obj)]
+        return [self.TreeItem(obj=i) for i in item.obj.__subclasses__()]
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: SubClassTreeModel.TreeItem) -> bool:
         if item.obj is None:
             return False
         if isinstance(item.obj, types.UnionType):
@@ -131,13 +132,15 @@ class ParentClassTreeModel(BaseClassTreeModel):
     def supports(cls, instance) -> bool:
         return isinstance(instance, type)
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(
+        self, item: ParentClassTreeModel.TreeItem
+    ) -> list[ParentClassTreeModel.TreeItem]:
         if self._show_mro:
-            return [treeitem.TreeItem(obj=i) for i in item.obj.mro()[1:]]
+            return [self.TreeItem(obj=i) for i in item.obj.mro()[1:]]
         else:
-            return [treeitem.TreeItem(obj=i) for i in item.obj.__bases__]
+            return [self.TreeItem(obj=i) for i in item.obj.__bases__]
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: ParentClassTreeModel.TreeItem) -> bool:
         if item.obj is None:
             return False
         return len(item.obj.__bases__) > 0

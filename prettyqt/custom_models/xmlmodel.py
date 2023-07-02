@@ -5,14 +5,14 @@ import io
 import xml.etree.ElementTree as ET
 
 from prettyqt import constants, custom_models
-from prettyqt.utils import datatypes, treeitem
+from prettyqt.utils import datatypes
 
 
 class TagColumn(custom_models.ColumnItem):
     name = "Tag"
     doc = "Tag"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: XmlModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.tag
@@ -22,7 +22,7 @@ class TextColumn(custom_models.ColumnItem):
     name = "Text"
     doc = "Text"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: XmlModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.text
@@ -32,7 +32,7 @@ class TailColumn(custom_models.ColumnItem):
     name = "Tail"
     doc = "Tail"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: XmlModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.tail
@@ -42,7 +42,7 @@ class AttributeColumn(custom_models.ColumnItem):
     name = "Attribute"
     doc = "Attribute"
 
-    def get_data(self, item: treeitem.TreeItem, role: constants.ItemDataRole):
+    def get_data(self, item: XmlModel.TreeItem, role: constants.ItemDataRole):
         match role:
             case constants.DISPLAY_ROLE:
                 return item.obj.attrib
@@ -97,11 +97,11 @@ class XmlModel(custom_models.ColumnItemModel):
             case _:
                 return False
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: XmlModel.TreeItem) -> bool:
         return bool(item.obj)
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        return [treeitem.TreeItem(obj=i) for i in item.obj]
+    def _fetch_object_children(self, item: XmlModel.TreeItem) -> list[XmlModel.TreeItem]:
+        return [self.TreeItem(obj=i) for i in item.obj]
 
 
 if __name__ == "__main__":

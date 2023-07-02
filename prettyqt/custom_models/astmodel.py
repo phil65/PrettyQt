@@ -5,7 +5,7 @@ import enum
 import logging
 
 from prettyqt import constants, core, custom_models, gui
-from prettyqt.utils import bidict, treeitem
+from prettyqt.utils import bidict
 
 
 SOURCE_FONT = gui.Font.mono(as_qt=True)
@@ -176,10 +176,10 @@ class AstModel(custom_models.TreeModel):
             case self.Roles.NodeRole, _:
                 return node
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
-        return [treeitem.TreeItem(obj=i) for i in ast.iter_child_nodes(item.obj)]
+    def _fetch_object_children(self, item: AstModel.TreeItem) -> list[AstModel.TreeItem]:
+        return [self.TreeItem(obj=i) for i in ast.iter_child_nodes(item.obj)]
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: AstModel.TreeItem) -> bool:
         if item.obj is None:
             return False
         return any(True for _ in ast.iter_child_nodes(item.obj))

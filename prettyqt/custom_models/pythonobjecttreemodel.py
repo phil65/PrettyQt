@@ -9,7 +9,6 @@ import logging
 import pprint
 
 from prettyqt import constants, core, custom_models, gui
-from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -278,7 +277,7 @@ class SourceCodeColumn(custom_models.ColumnItem):
                     return inspect.getsource(item)
 
 
-class PythonObjectTreeItem(treeitem.TreeItem):
+class PythonObjectTreeItem(custom_models.ColumnItemModel.TreeItem):
     """Tree node class that can be used to build trees of objects."""
 
     __slots__ = ("obj_name", "obj_path", "is_attribute")
@@ -361,7 +360,7 @@ class PythonObjectTreeModel(custom_models.ColumnItemModel):
         return "".join(reversed(pieces))
 
     def _fetch_object_children(
-        self, treeitem: treeitem.TreeItem
+        self, treeitem: PythonObjectTreeItem
     ) -> list[PythonObjectTreeItem]:
         """Fetch the children of a Python object.
 

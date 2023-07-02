@@ -5,7 +5,6 @@ import logging
 
 from prettyqt import constants, core, custom_models
 from prettyqt.qt import QtWidgets
-from prettyqt.utils import treeitem
 
 
 logger = logging.getLogger(__name__)
@@ -155,15 +154,17 @@ class WidgetHierarchyModel(custom_models.TreeModel):
             )
         return super().flags(index)
 
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(
+        self, item: WidgetHierarchyModel.TreeItem
+    ) -> list[WidgetHierarchyModel.TreeItem]:
         return [
-            treeitem.TreeItem(obj=i)
+            self.TreeItem(obj=i)
             for i in item.obj.findChildren(
                 self.BaseClass, None, constants.FindChildOption.FindDirectChildrenOnly
             )
         ]
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: WidgetHierarchyModel.TreeItem) -> bool:
         return bool(
             item.obj.findChildren(
                 self.BaseClass, None, constants.FindChildOption.FindDirectChildrenOnly
@@ -172,7 +173,9 @@ class WidgetHierarchyModel(custom_models.TreeModel):
 
 
 class LayoutHierarchyModel(WidgetHierarchyModel):
-    def _fetch_object_children(self, item: treeitem.TreeItem) -> list[treeitem.TreeItem]:
+    def _fetch_object_children(
+        self, item: LayoutHierarchyModel.TreeItem
+    ) -> list[LayoutHierarchyModel.TreeItem]:
         match item.obj:
             case (
                 QtWidgets.QSplitter()
@@ -191,9 +194,9 @@ class LayoutHierarchyModel(WidgetHierarchyModel):
                 items = [w if (w := i.widget()) else i.layout() for i in items]
             case _:
                 raise ValueError(item)
-        return [treeitem.TreeItem(obj=i) for i in items]
+        return [self.TreeItem(obj=i) for i in items]
 
-    def _has_children(self, item: treeitem.TreeItem) -> bool:
+    def _has_children(self, item: LayoutHierarchyModel.TreeItem) -> bool:
         match item.obj:
             case QtWidgets.QSplitter():
                 return item.obj.count() > 0
