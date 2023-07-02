@@ -22,6 +22,7 @@ from .basefieldsmodel import BaseFieldsModel
 from .basedataclassmodel import BaseDataclassModel
 from .dataclassmodel import DataClassModel
 from .dataclassfieldsmodel import DataClassFieldsModel
+from .logrecordmodel import LogRecordModel
 from .xmlmodel import XmlModel
 from .mappingmodel import MappingModel
 from .pythonobjecttreemodel import PythonObjectTreeModel
@@ -110,6 +111,7 @@ __all__ = [
     "StorageInfoModel",
     "ShortcutsModel",
     "DataClassFieldsModel",
+    "LogRecordModel",
     "XmlModel",
     "WidgetPropertiesModel",
     "WidgetHierarchyModel",

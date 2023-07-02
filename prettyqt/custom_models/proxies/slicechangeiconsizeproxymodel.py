@@ -10,7 +10,7 @@ logger = logging.getLogger(__name__)
 
 
 class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
-    """Proxy model to highlight cells with same content as the currently focused cell."""
+    """Proxy model which changes the icon size of the Decoration role."""
 
     ID = "change_icon_size"
 
@@ -30,10 +30,9 @@ class SliceChangeIconSizeProxyModel(custom_models.SliceIdentityProxyModel):
                 hashed = hash(original)
                 if hashed in self._cache:
                     return self._cache[hashed]
-                else:
-                    p = original.pixmap(self._size)
-                    self._cache[hashed] = p
-                    return p
+                p = original.pixmap(self._size)
+                self._cache[hashed] = p
+                return p
         return super().data(index, role)
 
     def set_icon_size(self, size: core.QSize):

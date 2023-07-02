@@ -94,18 +94,18 @@ class MeltProxyModel(core.AbstractProxyModel):
     def mapToSource(self, proxy_index: core.ModelIndex) -> core.ModelIndex:
         if not proxy_index.isValid():
             return core.ModelIndex()
-        column = proxy_index.column()
+        row, column = proxy_index.row(), proxy_index.column()
         row_count = self.sourceModel().rowCount()
         if self.is_variable_column(column):
             return core.ModelIndex()
         elif self.is_value_column(column):
-            col = self.value_columns[proxy_index.row() // row_count]
-            row = proxy_index.row() % row_count
-            return self.sourceModel().index(row, col, core.ModelIndex())
+            source_col = self.value_columns[row // row_count]
+            source_row = row % row_count
+            return self.sourceModel().index(source_row, source_col, core.ModelIndex())
         else:
-            col = self.get_source_column_for_proxy_column(column)
-            row = proxy_index.row() % row_count
-            return self.sourceModel().index(row, col)
+            source_col = self.get_source_column_for_proxy_column(column)
+            source_row = row % row_count
+            return self.sourceModel().index(source_row, source_col)
 
     def mapFromSource(self, source_index: core.ModelIndex) -> core.ModelIndex:
         # TODO: this is still broken.
