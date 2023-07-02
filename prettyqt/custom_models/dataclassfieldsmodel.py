@@ -47,15 +47,16 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
             return None
         field_name = self._field_names[index.row()]
         field = self._fields[field_name]
+        value = getattr(self._instance, field_name)
         match role, index.column():
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
             case constants.DISPLAY_ROLE, 0:
-                return repr(getattr(self._instance, field_name))
+                return repr(value)
             case constants.EDIT_ROLE, 0:
-                return getattr(self._instance, field_name)
+                return value
             case constants.DISPLAY_ROLE, 1:
                 return field.type
             case constants.FONT_ROLE, 1:
@@ -77,7 +78,7 @@ class DataClassFieldsModel(custom_models.BaseFieldsModel):
             case constants.CHECKSTATE_ROLE, 8:
                 return self.to_checkstate(field.kw_only)
             case constants.USER_ROLE, _:
-                return getattr(self._instance, field_name)
+                return value
 
     def _is_writable(self, field_name: str) -> bool:
         return not self._instance.__dataclass_params__.frozen

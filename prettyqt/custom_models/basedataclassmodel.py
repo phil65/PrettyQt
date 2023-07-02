@@ -59,11 +59,14 @@ class BaseDataclassModel(core.AbstractTableModel):
             return None
         field_name = self._field_names[index.column()]
         instance = self.items[index.row()]
+        value = getattr(instance, field_name)
         match role:
-            case constants.DISPLAY_ROLE:
-                return repr(getattr(instance, field_name))
+            case constants.DISPLAY_ROLE if not isinstance(value, bool):
+                return repr(value)
+            case constants.CHECKSTATE_ROLE if isinstance(value, bool):
+                return self.to_checkstate(value)
             case constants.USER_ROLE | constants.EDIT_ROLE:
-                return getattr(instance, field_name)
+                return value
 
     def setData(
         self,
@@ -74,9 +77,13 @@ class BaseDataclassModel(core.AbstractTableModel):
         field_name = self._field_names[index.column()]
         instance = self.items[index.row()]
         match role:
-            case constants.USER_ROLE:
+            case constants.EDIT_ROLE | constants.USER_ROLE:
                 with self.reset_model():
                     setattr(instance, field_name, value)
+                return True
+            case constants.CHECKSTATE_ROLE:
+                with self.reset_model():
+                    setattr(instance, field_name, bool(value))
                 return True
         return False
 
@@ -95,12 +102,14 @@ class BaseDataclassModel(core.AbstractTableModel):
         """
         if not parent.isValid():
             return super().flags(parent)
-        parent = parent or core.ModelIndex()
         field_name = self._field_names[parent.column()]
         instance = self.items[parent.row()]
         # need to cover not parent.isValid()?
         val = getattr(instance, field_name)
         with contextlib.suppress(Exception):
             setattr(instance, field_name, val)
-            return super().flags(parent) | constants.IS_EDITABLE
+            if isinstance(val, bool):
+                return super().flags(parent) | constants.IS_CHECKABLE
+            else:
+                return super().flags(parent) | constants.IS_EDITABLE
         return super().flags(parent)

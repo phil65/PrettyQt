@@ -17,6 +17,8 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
     """Table model to display the fields and their metadata of an dataclass.
 
     More information about attrs can be found [here][https://www.attrs.org/].
+
+    Frozen dataclasses are read-only.
     """
 
     HEADER = [
@@ -53,15 +55,16 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
             return None
         field_name = self._field_names[index.row()]
         field = self._fields[field_name]
+        value = getattr(self._instance, field_name)
         match role, index.column():
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)
                 return font
             case constants.DISPLAY_ROLE, 0:
-                return repr(getattr(self._instance, field_name))
+                return repr(value)
             case constants.EDIT_ROLE, 0:
-                return getattr(self._instance, field_name)
+                return value
             case constants.DISPLAY_ROLE, 1:
                 return field.type
             case constants.FONT_ROLE, 1:
@@ -87,7 +90,7 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
             case constants.CHECKSTATE_ROLE, 10:
                 return self.to_checkstate(field.validator is not None)
             case constants.USER_ROLE, _:
-                return getattr(self._instance, field_name)
+                return value
 
     def _is_writable(self, field_name: str) -> bool:
         # return all(

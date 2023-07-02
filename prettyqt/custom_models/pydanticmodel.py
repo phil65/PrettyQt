@@ -27,11 +27,18 @@ class PydanticModel(custom_models.BaseDataclassModel):
         return self.Class.model_fields
 
     def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
-        return (
+        if not parent.isValid():
+            return super().flags(parent)
+        if self.Class.model_config.get("frozen"):
             super().flags(parent)
-            if self.Class.model_config.get("frozen") or not parent.isValid()
-            else (super().flags(parent) | constants.IS_EDITABLE)
-        )
+        field_name = self._field_names[parent.column()]
+        instance = self.items[parent.row()]
+        # need to cover not parent.isValid()?
+        val = getattr(instance, field_name)
+        if isinstance(val, bool):
+            return super().flags(parent) | constants.IS_CHECKABLE
+        else:
+            return super().flags(parent) | constants.IS_EDITABLE
 
 
 if __name__ == "__main__":

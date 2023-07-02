@@ -32,11 +32,16 @@ class DataClassModel(custom_models.BaseDataclassModel):
     def flags(self, parent: core.ModelIndex) -> constants.ItemFlag:
         if not parent.isValid():
             return super().flags(parent)
-        return (
-            constants.IS_ENABLED | constants.IS_SELECTABLE
-            if self.Class.__dataclass_params__.frozen
-            else constants.IS_ENABLED | constants.IS_SELECTABLE | constants.IS_EDITABLE
-        )
+        if self.Class.__dataclass_params__.frozen:
+            super().flags(parent)
+        field_name = self._field_names[parent.column()]
+        instance = self.items[parent.row()]
+        # need to cover not parent.isValid()?
+        val = getattr(instance, field_name)
+        if isinstance(val, bool):
+            return super().flags(parent) | constants.IS_CHECKABLE
+        else:
+            return super().flags(parent) | constants.IS_EDITABLE
 
 
 if __name__ == "__main__":

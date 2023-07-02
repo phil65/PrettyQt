@@ -12,6 +12,13 @@ logger = logging.getLogger(__name__)
 
 
 class PydanticFieldsModel(custom_models.BaseFieldsModel):
+    """Table model to display the fields and their metadata of a pydantic model.
+
+    More information about pydantic can be found [here][https://www.pydantic.dev/].
+
+    Frozen BaseModels / frozen fields read-only.
+    """
+
     HEADER = [
         "Value",
         "Type",
@@ -40,11 +47,12 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
             return None
         field_name = self._field_names[index.row()]
         field = self._fields[field_name]
+        value = getattr(self._instance, field_name)
         match role, index.column():
             case constants.DISPLAY_ROLE, 0:
-                return repr(getattr(self._instance, field_name))
+                return repr(value)
             case constants.EDIT_ROLE, 0:
-                return getattr(self._instance, field_name)
+                return value
             case constants.FONT_ROLE, 0:
                 font = QtGui.QFont()
                 font.setBold(True)
@@ -64,14 +72,20 @@ class PydanticFieldsModel(custom_models.BaseFieldsModel):
             case constants.CHECKSTATE_ROLE, 5:
                 return self.to_checkstate(field.repr)
             case constants.USER_ROLE, _:
-                return getattr(self._instance, field_name)
+                return value
+
+    def _is_writable(self, field_name: str):
+        model_frozen = self._instance.model_config.get("frozen")
+        field_frozen = self._instance.model_fields[field_name].frozen
+        frozen = model_frozen or field_frozen
+        return not frozen
 
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
     class BaseSetting(pydantic.BaseModel):
-        name: str
+        name: str = pydantic.Field("test", frozen=True)
         label: str
         description: str
         requires_restart: bool = False
@@ -94,7 +108,6 @@ if __name__ == "__main__":
         options=[],
         requires_restart=True,
     )
-
     app = widgets.app()
     view = widgets.TableView()
     view.set_icon("mdi.folder")
