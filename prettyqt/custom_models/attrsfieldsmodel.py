@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 
+import attr
 import attrs
 
 from prettyqt import constants, custom_models
@@ -88,11 +89,18 @@ class AttrsFieldsModel(custom_models.BaseFieldsModel):
             case constants.USER_ROLE, _:
                 return getattr(self._instance, field_name)
 
+    def _is_writable(self, field_name: str) -> bool:
+        # return all(
+        #     base_cls.__setattr__ is not attr._make._frozen_setattrs
+        #     for base_cls in type(self._instance).__bases__
+        # )
+        return not attr._make._has_frozen_base_class(type(self._instance))
+
 
 if __name__ == "__main__":
     from prettyqt import widgets
 
-    @attrs.define()
+    @attrs.define
     class SelectionSetting:
         name: str
         label: str
@@ -110,7 +118,6 @@ if __name__ == "__main__":
         options=[],
         requires_restart=True,
     )
-
     app = widgets.app()
     view = widgets.TableView()
     view.set_icon("mdi.folder")
