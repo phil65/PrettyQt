@@ -1,4 +1,4 @@
-Every class containing the AbstractItemViewMixin (widgets.TreeView, widgets.TableView, ...)
+Every class containing the AbstractItemViewMixin (`widgets.TreeView`, `widgets.TableView`, ...)
 has quick access to proxy superpowers hidden behind the "proxifier" attribute.
 The following section will give an overview about the included proxies and how to apply them.
 
@@ -78,11 +78,11 @@ Some of these proxies might partly overlap in functionality, but theres always a
 | Proxy                                            | Description                                              |
 | -------------------------------------------------|----------------------------------------------------------|
 |[FuzzyFilterProxyModel](fuzzyfilterproxymodel.md) |Model for implementing a CommandPalette a la SubimeText.  |
-|ValueFilterProxymodel         |Similar to QSortFilterProxyModel, but also works with non-str values.|
-|SubsetFilterProxyModel        |Filter based on slices, index, a filter function, a list of indexes (like columns [0, 3, 7])
-|PredicateFilterProxyModel     |Filter based on predicates.|
-|RangeFilterProxyModel         |Filter based on min/max values of a numerical column.|
-|MulticolumnFilterProxyModel   | can take a seperate search term / value for each column.|
+|[ValueFilterProxymodel](valuefilterproxymodel.md)         |Similar to QSortFilterProxyModel, but also works with non-str values.|
+|[SubsetFilterProxyModel](subsetfilterproxymodel.md)        |Filter based on slices, index, a filter function, a list of indexes (like columns [0, 3, 7])
+|[PredicateFilterProxyModel](predicatefilterproxymodel.md)     |Filter based on predicates.|
+|[RangeFilterProxyModel](rangefilterproxymodel.md)         |Filter based on min/max values of a numerical column.|
+|[MulticolumnFilterProxyModel](multicolumnfilterproxymodel.md)   | can take a seperate search term / value for each column.|
 
 
 ## Reshape proxies

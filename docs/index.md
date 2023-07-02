@@ -2,7 +2,7 @@
 hide:
   - navigation
 ---
-# prettyqt: Pythonic layer on top of PyQt6 / PySide6
+# PrettyQt: Pythonic layer on top of PyQt6 / PySide6
 [![PyPI Latest Release](https://img.shields.io/pypi/v/prettyqt.svg)](https://pypi.org/project/prettyqt/)
 [![Package Status](https://img.shields.io/pypi/status/prettyqt.svg)](https://pypi.org/project/prettyqt/)
 [![CodeCov](https://codecov.io/gh/phil65/PrettyQt/branch/master/graph/badge.svg)](https://codecov.io/gh/phil65/PrettyQt)
@@ -36,13 +36,13 @@ from "TreeViewMxin", "AbstractItemViewMixin", "AbstractScrollAreaMixin",
 To illustrate this, we will use some of our included models:
 
 ```py
-    from prettyqt import custom_models, widgets
+from prettyqt import custom_models, widgets
 
-    app = widgets.app()
-    widget = widgets.TreeView()
-    model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
-    widget.set_model(model)
-    widget.show()
+app = widgets.app()
+widget = widgets.TreeView()
+model = custom_models.SubClassTreeModel(core.AbstractItemModelMixin)
+widget.set_model(model)
+widget.show()
 ```
 
 <figure markdown>
@@ -56,13 +56,13 @@ As you can notice, every Qt class with Subclasses has a corresponding Mixin.
 To show what this leads to, we will look at another example:
 
 ```py
-    from prettyqt import custom_models, widgets
+from prettyqt import custom_models, widgets
 
-    app = widgets.app()
-    widget = widgets.TreeView()
-    model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
-    widget.set_model(model)
-    widget.show()
+app = widgets.app()
+widget = widgets.TreeView()
+model = custom_models.ParentClassTreeModel(widgets.TreeWidget)
+widget.set_model(model)
+widget.show()
 ```
 
 <figure markdown>
@@ -196,9 +196,6 @@ poetry install
 
 ## License
 [MIT](LICENSE)
-
-## Documentation
-The official documentation is hosted on Github Pages: https://phil65.github.io/PrettyQt/
 
 ## Contributing to prettyqt [![Open Source Helpers](https://www.codetriage.com/phil65/prettyqt/badges/users.svg)](https://www.codetriage.com/phil65/prettyqt)
 
