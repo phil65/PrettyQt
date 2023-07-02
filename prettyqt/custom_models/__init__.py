@@ -73,6 +73,7 @@ from .proxies.highlightmouseproxymodel import HighlightMouseProxyModel
 
 # Proxy tooling
 from .proxies.proxymapper import ProxyMapper
+from .proxies.linkedselectionmodel import LinkedSelectionModel
 
 # Models for "external types"
 # import importlib.util
@@ -142,6 +143,7 @@ __all__ = [
     "SliceColorValuesProxyModel",
     "HighlightMouseProxyModel",
     "ProxyMapper",
+    "LinkedSelectionModel",
     # external
     # "AttrsModel",
     # "AttrsFieldsModel",
