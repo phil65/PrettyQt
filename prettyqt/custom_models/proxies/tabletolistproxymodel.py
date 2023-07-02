@@ -88,6 +88,6 @@ if __name__ == "__main__":
     table = debugging.example_table()
     table.proxifier.transpose()
     table.proxifier.get_proxy("table_to_list")
-    splitter = debugging.proxy_comparer(table.model())
+    splitter = debugging.ProxyComparerWidget(table.model())
     splitter.show()
     app.exec()

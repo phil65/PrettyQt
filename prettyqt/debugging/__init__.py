@@ -14,6 +14,7 @@ from .messagehandler import MessageHandler
 from .qobjectdetailsdialog import QObjectDetailsDialog
 from .stalker import Stalker
 from .tracebackdialog import TracebackDialog
+from .proxycomparerwidget import ProxyComparerWidget
 
 
 logger = logging.getLogger(__name__)
@@ -68,39 +69,6 @@ class QtLogger(logging.Handler):
                 QtCore.qFatal(self.format(record))
 
 
-def proxy_comparer(proxy: QtCore.QAbstractProxyModel):
-    from prettyqt import core, custom_models, widgets
-
-    w = widgets.Splitter("horizontal")
-    while isinstance(proxy, core.QAbstractProxyModel):
-        container = widgets.Widget()
-        layout = container.set_layout("vertical")
-        table = widgets.TableView()
-        table.set_model(proxy)
-        table.set_delegate("variant")
-        prop_table = widgets.TableView()
-        prop_table.set_delegate("variant")
-        model = custom_models.WidgetPropertiesModel(proxy)
-        prop_table.set_model(model)
-        layout.add(widgets.Label(type(proxy).__name__))
-        col_splitter = widgets.Splitter("vertical")
-        col_splitter.add(prop_table)
-        col_splitter.add(table)
-        layout.add(col_splitter)
-        w.add(container)
-        proxy = proxy.sourceModel()
-
-    container = widgets.Widget()
-    layout = container.set_layout("vertical")
-    table = widgets.TableView()
-    table.set_model(proxy)
-    table.set_delegate("variant")
-    layout.add(widgets.Label(type(proxy).__name__))
-    layout.add(table)
-    w.add(container)
-    return w
-
-
 def is_deleted(obj) -> bool:
     match qt.API:
         case "pyside6":
@@ -144,7 +112,7 @@ def example_tree(flatten: bool = False):
 def example_table(flatten: bool = False):
     import pandas as pd
 
-    from prettyqt import widgets
+    from prettyqt import gui, widgets
 
     data = dict(
         a=["abcdedf", "abcdedf", "abcdedf", "abcdedf", "abcdedf", "abcdedfaa"],
@@ -160,10 +128,9 @@ def example_table(flatten: bool = False):
         k=[1, 2, 3, 4, 5, 6],
         jkfsj=[10, 20, 30, 40, 50, 60],
     )
-    data = pd.DataFrame(data)
+    model = gui.StandardItemModel.from_dict(data)
     table = widgets.TableView()
-    table.set_delegate("variant")
-    table.set_model_for(data)
+    table.set_model(model)
     return table
 
 
@@ -230,4 +197,5 @@ __all__ = [
     "ErrorMessageBox",
     "MessageHandler",
     "QObjectDetailsDialog",
+    "ProxyComparerWidget",
 ]
