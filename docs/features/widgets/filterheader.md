@@ -5,13 +5,16 @@ The correct filter widget is automatically inferred from the content of the colu
 So basically everything that needs to be done is the following:
 
 ```py
-    model = MyModel()
-    widget = widgets.TableView()
-    widget.set_model(model)
-    widget.h_header = custom_widgets.FilterHeader() # same as setHorizontalHeader()
+model = MyModel()
+widget = widgets.TableView()
+widget.set_model(model)
+widget.h_header = custom_widgets.FilterHeader() # same as setHorizontalHeader()
 ```
 
 and you will get filter capabilities for your table.
+
+!!! note
+    Since the FilterHeader will infer the column content type based on the first few rows, it will only work correctly for tables with homogenous data.
 
 <figure markdown>
   ![Image title](../../images/filterheader.png)
