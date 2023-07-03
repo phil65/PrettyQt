@@ -36,6 +36,7 @@
         * [SliceHighlightCurrentProxyModel](features/proxymodels/slicehighlightcurrentproxymodel.md)
         * [SliceValueTransformationProxyModel](features/proxymodels/slicevaluetransformationproxymodel.md)
         * [SliceAppearanceProxyModel](features/proxymodels/sliceappearanceproxymodel.md)
+        * [SliceDisplayTextProxyModel](features/proxymodels/slicedisplaytextproxymodel.md)
         * [MeltProxyModel](features/proxymodels/meltproxymodel.md)
         * [FuzzyFilterProxyModel](features/proxymodels/fuzzyfilterproxymodel.md)
         * [SubsetFilterProxyModel](features/proxymodels/subsetfilterproxymodel.md)
