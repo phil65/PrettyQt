@@ -623,11 +623,11 @@ class WidgetMixin(core.ObjectMixin):
         self.customContextMenuRequested.connect(method)
 
     @property
-    def box(self):
+    def box(self) -> widgets.Layout:
         return self.layout()
 
     @box.setter
-    def box(self, layout):
+    def box(self, layout: widgets.Layout):
         self.set_layout(layout)
 
     @overload
