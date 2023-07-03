@@ -17,9 +17,8 @@ class ModelIndexModel(custom_models.ListMixin, core.AbstractTableModel):
     ### Example:
     ```py
     # get indexes from some random model
-    model_for_indexes = ParentClassTreeModel(widgets.QWidget, show_mro=True)
-    model_for_indexes.prefetch_tree()
-    indexes = list(test.iter_tree())
+    my_model = ParentClassTreeModel(widgets.QWidget, show_mro=True)
+    indexes = list(my_model.iter_tree(fetch_more=True))
     model = ModelIndexModel(indexes=indexes)
     ```
     """
@@ -140,9 +139,8 @@ if __name__ == "__main__":
     app = widgets.app()
     with app.debug_mode():
         view = widgets.TableView()
-        test = custom_models.ParentClassTreeModel(widgets.QWidget, show_mro=True)
-        test.prefetch_tree()
-        indexes = list(test.iter_tree())
+        my_model = custom_models.ParentClassTreeModel(widgets.QWidget, show_mro=True)
+        indexes = list(my_model.iter_tree(fetch_more=True))
         model = ModelIndexModel(indexes=indexes, parent=view)
         for i, v in enumerate(model.role_mapping.values(), start=len(model.FIXED_HEADER)):
             view.set_delegate("variant", column=i, role=v)

@@ -285,36 +285,39 @@ class AbstractItemModelMixin(core.ObjectMixin):
             pieces.insert(0, index.data(role))
         return pieces
 
-    def prefetch_tree(
-        self, root_index: core.ModelIndex | None = None, depth: int | None = None
-    ):
-        for idx in self.iter_tree(root_index, depth):
-            if self.canFetchMore(idx):
-                self.fetchMore(idx)
-
     def iter_tree(
         self,
-        root_index: core.ModelIndex | None = None,
+        parent_index: core.ModelIndex | None = None,
         depth: int | None = None,
+        fetch_more: bool = False,
     ) -> Iterator[core.ModelIndex]:
-        """Iter through all indexes of the model tree."""
-        if root_index is None:
+        """Iter through all indexes of the model tree.
+
+        Arguments:
+            parent_index: parent index
+            depth: maximum iteration depth
+            fetch_more: call fetchMore for all indexes until canFetchMore returns False
+        """
+        if parent_index is None:
             # TODO: does this always equal AbstractItemView.rootIndex()?
-            # root_index = self.index(0, 0)
-            root_index = core.ModelIndex()
-        if root_index.isValid():
-            yield root_index
+            # parent_index = self.index(0, 0)
+            parent_index = core.ModelIndex()
+        if parent_index.isValid():
+            yield parent_index
+            if fetch_more:
+                while self.canFetchMore(parent_index):
+                    self.fetchMore(parent_index)
         if depth is not None and (depth := depth - 1) < 0:
             return
-        for i in range(self.rowCount(root_index)):
-            idx = self.index(i, 0, root_index)
-            yield from self.iter_tree(idx, depth)
+        for i in range(self.rowCount(parent_index)):
+            child_index = self.index(i, 0, parent_index)
+            yield from self.iter_tree(child_index, depth)
 
     def search_tree(
         self,
         value: Any,
         role: constants.ItemDataRole = constants.DISPLAY_ROLE,
-        root_index: core.ModelIndex | None = None,
+        parent_index: core.ModelIndex | None = None,
         max_results: int | None = None,
         depth: int | None = None,
     ) -> listdelegators.BaseListDelegator[core.ModelIndex]:
@@ -326,7 +329,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         Arguments:
             value: Item or list of items to search for.
             role: Index role to search in.
-            root_index: start index for searching. If None, whole tree is searched.
+            parent_index: start index for searching. If None, whole tree is searched.
             max_results: stop searching after x amount of hits. 'None' means no limit.
             depth: search depth. Search depth. 'None' means no limit.
         """
@@ -334,7 +337,7 @@ class AbstractItemModelMixin(core.ObjectMixin):
         # This makes it impossible to search for lists. I think thats fine.
         if not isinstance(value, list):
             value = [value]
-        for idx in self.iter_tree(root_index, depth=depth):
+        for idx in self.iter_tree(parent_index, depth=depth):
             if self.data(idx, role) in value:
                 results.append(idx)
                 if len(results) == max_results:

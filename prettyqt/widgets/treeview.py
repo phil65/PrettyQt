@@ -56,7 +56,7 @@ class TreeViewMixin(widgets.AbstractItemViewMixin):
         if depth is None:
             super().expandAll()
         else:
-            for idx in self.model().iter_tree(root_index=self.rootIndex(), depth=depth):
+            for idx in self.model().iter_tree(parent_index=self.rootIndex(), depth=depth):
                 self.setExpanded(idx, True)
 
     def set_sorting_enabled(self, enabled: bool, do_sort: bool = False):
