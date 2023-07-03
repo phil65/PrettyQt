@@ -225,6 +225,10 @@ def to_string(val: Any, locale: QtCore.QLocale | None = None) -> str:
             return locale.toString(val)
         case gui.QColor():
             return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
+        case gui.QBrush():
+            # TODO: can also be gradient
+            val = val.color()
+            return f"({val.red()},{val.green()},{val.blue()},{val.alpha()})"
         case gui.QFont():
             return val.family()
         case gui.QRegion():
@@ -335,6 +339,8 @@ def get_widget_for_value(val, parent=None):
             return widgets.FontComboBox(parent=parent)
         case gui.QColor():
             return custom_widgets.ColorComboBox(parent=parent)
+        case gui.QBrush():
+            return custom_widgets.BrushEdit(parent=parent)
         case widgets.QSizePolicy():
             return custom_widgets.SizePolicyEdit(parent=parent)
         case core.QUrl():

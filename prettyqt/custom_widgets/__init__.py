@@ -24,6 +24,7 @@ from .commandpalette import CommandPalette
 from .editors.lineedits import IntLineEdit, FloatLineEdit, UrlLineEdit, StringListEdit
 from .editors.keycombinationedit import KeyCombinationEdit
 from .editors.singlelinetextedit import SingleLineTextEdit
+from .editors.brushedit import BrushEdit
 from .editors.rectedit import RectEdit, RectFEdit, RegionEdit
 from .editors.enumcombobox import EnumComboBox
 from .editors.paletteedit import PaletteEdit
@@ -109,6 +110,7 @@ __all__ = [
     "IconLabel",
     "IconBrowser",
     "IconWidget",
+    "BrushEdit",
     "RectEdit",
     "RectFEdit",
     "PaletteEdit",
