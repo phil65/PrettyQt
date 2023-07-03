@@ -191,6 +191,17 @@ class TreeModel(core.AbstractItemModel):
     def data_by_index(self, index: core.ModelIndex) -> TreeModel.TreeItem:
         return index.internalPointer() if index.isValid() else self.root_item
 
+    def index_for_item(
+        self, item: TreeModel.TreeItem, column: int = 0
+    ) -> core.ModelIndex:
+        if item == self.root_item:
+            return core.ModelIndex()
+        parent = item.parent_item or self.root_item
+        if (not parent) or (len(parent.children) == 0):
+            return None
+        row = parent.children.index(item)
+        return self.createIndex(row, column, item)
+
     def index(
         self, row: int, column: int, parent: core.ModelIndex | None = None
     ) -> core.ModelIndex:
